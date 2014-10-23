@@ -7,6 +7,10 @@ README.md
 Rakefile
 gcloud.gemspec
 lib/gcloud.rb
+lib/gcloud/datastore.rb
+lib/gcloud/proto/datastore_v1.pb.rb
 lib/gcloud/version.rb
+proto/datastore_v1.proto
+rakelib/proto.rake
 rakelib/rubocop.rake
 test/gcloud/test_version.rb

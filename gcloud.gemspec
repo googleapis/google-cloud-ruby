@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
-# stub: gcloud 0.0.1.20141103160709 ruby lib
+# stub: gcloud 0.0.1.20141103160840 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "gcloud"
-  s.version = "0.0.1.20141103160709"
+  s.version = "0.0.1.20141103160840"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.description = "Gcloud is the official library for interacting with Google Cloud."
   s.email = ["silvano@google.com", "mike@blowmage.com"]
   s.extra_rdoc_files = ["CHANGELOG.md", "CONTRIBUTING.md", "Manifest.txt", "README.md"]
-  s.files = [".gemtest", ".rubocop.yml", "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE", "Manifest.txt", "README.md", "Rakefile", "gcloud.gemspec", "lib/gcloud.rb", "lib/gcloud/version.rb", "rakelib/rubocop.rake", "test/gcloud/test_version.rb"]
+  s.files = [".gemtest", ".rubocop.yml", "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE", "Manifest.txt", "README.md", "Rakefile", "gcloud.gemspec", "lib/gcloud.rb", "lib/gcloud/datastore.rb", "lib/gcloud/proto/datastore_v1.pb.rb", "lib/gcloud/version.rb", "proto/datastore_v1.proto", "rakelib/proto.rake", "rakelib/rubocop.rake", "test/gcloud/test_version.rb"]
   s.homepage = "http://googlecloudplatform.github.io/gcloud-ruby/"
   s.licenses = ["Apache-2.0"]
   s.rdoc_options = ["--main", "README.md"]
@@ -24,17 +24,20 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<beefcake>, ["~> 1.0"])
       s.add_development_dependency(%q<minitest>, ["~> 5.4"])
       s.add_development_dependency(%q<rdoc>, ["~> 4.0"])
       s.add_development_dependency(%q<rubocop>, ["~> 0.27"])
       s.add_development_dependency(%q<hoe>, ["~> 3.13"])
     else
+      s.add_dependency(%q<beefcake>, ["~> 1.0"])
       s.add_dependency(%q<minitest>, ["~> 5.4"])
       s.add_dependency(%q<rdoc>, ["~> 4.0"])
       s.add_dependency(%q<rubocop>, ["~> 0.27"])
       s.add_dependency(%q<hoe>, ["~> 3.13"])
     end
   else
+    s.add_dependency(%q<beefcake>, ["~> 1.0"])
     s.add_dependency(%q<minitest>, ["~> 5.4"])
     s.add_dependency(%q<rdoc>, ["~> 4.0"])
     s.add_dependency(%q<rubocop>, ["~> 0.27"])
