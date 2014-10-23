@@ -1,0 +1,10 @@
+CHANGELOG.md
+CONTRIBUTING.md
+LICENSE
+Manifest.txt
+README.md
+Rakefile
+gcloud.gemspec
+lib/gcloud.rb
+lib/gcloud/version.rb
+test/gcloud/test_version.rb
