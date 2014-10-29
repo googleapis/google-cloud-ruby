@@ -8,6 +8,7 @@ Rakefile
 gcloud.gemspec
 lib/gcloud.rb
 lib/gcloud/datastore.rb
+lib/gcloud/datastore/connection.rb
 lib/gcloud/datastore/entity.rb
 lib/gcloud/datastore/key.rb
 lib/gcloud/datastore/property.rb
@@ -16,6 +17,9 @@ lib/gcloud/version.rb
 proto/datastore_v1.proto
 rakelib/proto.rake
 rakelib/rubocop.rake
+rakelib/test.rake
+regression/datastore/test_crud.rb
+regression/datastore_helper.rb
 test/gcloud/datastore/test_entity.rb
 test/gcloud/datastore/test_key.rb
 test/gcloud/datastore/test_property.rb

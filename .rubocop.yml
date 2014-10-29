@@ -13,3 +13,6 @@ Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
 Style/NumericLiterals:
   Enabled: false
+Style/ClassVars:
+  Exclude:
+    - "lib/gcloud/datastore.rb"

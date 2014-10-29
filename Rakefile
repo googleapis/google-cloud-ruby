@@ -20,5 +20,6 @@ Hoe.spec "gcloud" do
   license "Apache-2.0"
 
   dependency "beefcake", "~> 1.0"
+  dependency "google-api-client", "~> 0.7"
   dependency "rubocop", "~> 0.27", :dev
 end
