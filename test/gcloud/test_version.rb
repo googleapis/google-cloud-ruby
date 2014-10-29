@@ -1,5 +1,4 @@
-gem "minitest"
-require "minitest/autorun"
+require "helper"
 require "gcloud"
 
 describe Gcloud do
