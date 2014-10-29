@@ -18,6 +18,7 @@ require "faraday"
 require "signet/oauth_2/client"
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
+require "gcloud/datastore/query"
 
 module Gcloud
   module Datastore
@@ -83,11 +84,15 @@ module Gcloud
       end
       # rubocop:enable all
 
-      def find kind, id_or_name
-        lookup(Key.new(kind, id_or_name)).first
+      def find key_or_kind, id_or_name = nil
+        key = key_or_kind
+        unless key_or_kind.is_a?(Gcloud::Datastore::Key)
+          key = Gcloud::Datastore::Key.new key_or_kind, id_or_name
+        end
+        find_all(key).first
       end
 
-      def lookup *keys
+      def find_all *keys
         lookup = Proto::LookupRequest.new
         lookup.key = keys.map(&:to_proto)
 
@@ -96,6 +101,7 @@ module Gcloud
           Gcloud::Datastore::Entity.from_proto found.entity
         end
       end
+      alias_method :lookup, :find_all
 
       def delete *entities
         commit = Proto::CommitRequest.new
@@ -106,6 +112,15 @@ module Gcloud
         Proto::CommitResponse.decode rpc("commit", commit)
 
         true
+      end
+
+      def run query
+        run_query = Proto::RunQueryRequest.new
+        run_query.query = query.to_proto
+        response = Proto::RunQueryResponse.decode rpc("runQuery", run_query)
+        Array(response.batch.entity_result).map do |result|
+          Gcloud::Datastore::Entity.from_proto result.entity
+        end
       end
 
       protected
