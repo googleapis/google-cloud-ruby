@@ -1,3 +1,4 @@
+.rubocop.yml
 CHANGELOG.md
 CONTRIBUTING.md
 LICENSE
@@ -7,4 +8,5 @@ Rakefile
 gcloud.gemspec
 lib/gcloud.rb
 lib/gcloud/version.rb
+rakelib/rubocop.rake
 test/gcloud/test_version.rb

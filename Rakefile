@@ -18,4 +18,6 @@ Hoe.spec "gcloud" do
   self.testlib      = :minitest
 
   license "Apache-2.0"
+
+  dependency "rubocop", "~> 0.27", :dev
 end

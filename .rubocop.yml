@@ -1,0 +1,15 @@
+AllCops:
+  Exclude:
+    - "gcloud.gemspec"
+    - "Rakefile"
+    - "lib/gcloud/proto/**/*"
+    - "rakelib/**/*"
+    - "regression/**/*"
+    - "test/**/*"
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/MethodDefParentheses:
+  EnforcedStyle: require_no_parentheses
+Style/NumericLiterals:
+  Enabled: false
