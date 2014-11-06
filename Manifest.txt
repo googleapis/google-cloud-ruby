@@ -20,6 +20,7 @@ rakelib/proto.rake
 rakelib/rubocop.rake
 rakelib/test.rake
 regression/datastore/test_crud.rb
+regression/datastore/test_datastore.rb
 regression/datastore/test_query.rb
 regression/datastore_helper.rb
 test/gcloud/datastore/test_entity.rb
