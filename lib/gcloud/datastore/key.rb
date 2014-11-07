@@ -65,6 +65,20 @@ module Gcloud
       end
 
       ##
+      # Determines if the key is complete.
+      # A complete key has either an id or a name.
+      def complete?
+        !incomplete?
+      end
+
+      ##
+      # Determines if the key is incomplete.
+      # An incomplete key has neither an id nor a name.
+      def incomplete?
+        id.nil? && (name.nil? || name.empty?)
+      end
+
+      ##
       # Return an new protocol buffer object populated with
       # the data contained in the Key.
       def to_proto #:nodoc:

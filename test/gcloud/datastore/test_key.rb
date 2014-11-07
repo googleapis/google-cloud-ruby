@@ -74,6 +74,26 @@ describe Gcloud::Datastore::Key do
     end
   end
 
+  it "knows if it is complete or not" do
+    key = Gcloud::Datastore::Key.new "Task"
+    key.id.must_be :nil?
+    key.name.must_be :nil?
+    key.wont_be :complete?
+    key.must_be :incomplete?
+
+    key.id = 123455
+    key.id.wont_be :nil?
+    key.name.must_be :nil?
+    key.must_be :complete?
+    key.wont_be :incomplete?
+
+    key.name = "description"
+    key.id.must_be :nil?
+    key.name.wont_be :nil?
+    key.must_be :complete?
+    key.wont_be :incomplete?
+  end
+
   it "returns a correct protocol buffer object" do
     key = Gcloud::Datastore::Key.new "ThisThing", 1234
     proto = key.to_proto
