@@ -51,6 +51,27 @@ module Gcloud
         init_client! options
       end
 
+      ##
+      # Generate IDs for a Key before creating an entity.
+      #
+      #   conn = Gcloud::Datastore.connection
+      #   empty_key = Gcloud::Datastore::Key.new "Task"
+      #   task_keys = conn.allocate_ids empty_key, 5
+      def allocate_ids incomplete_key, count = 1
+        if incomplete_key.complete?
+          fail "An incomplete key must be provided."
+        end
+
+        allocate_ids = Proto::AllocateIdsRequest.new
+        allocate_ids.key = count.times.map { incomplete_key.to_proto }
+
+        rpc_response = rpc("allocateIds", allocate_ids)
+        response = Proto::AllocateIdsResponse.decode rpc_response
+        Array(response.key).map do |key|
+          Gcloud::Datastore::Key.from_proto key
+        end
+      end
+
       # rubocop:disable all
       def save *entities
         # Disable rules because the complexity here is neccessary.
