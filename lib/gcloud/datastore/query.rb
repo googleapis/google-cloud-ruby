@@ -75,6 +75,20 @@ module Gcloud
       alias_method :filter, :where
 
       ##
+      # Add a filter for entities that inherit from a key.
+      #
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     ancestor(parent.key)
+      #
+      #   completed_tasks = Gcloud::Datastore.connection.run query
+      def ancestor parent
+        # Use key if given an entity
+        parent = parent.key if parent.respond_to? :key
+        where "__key__", "~", parent
+      end
+
+      ##
       # Sort the results by a property name.
       # By default, an ascending sort order will be used.
       # To sort in descending order, provide a second argument

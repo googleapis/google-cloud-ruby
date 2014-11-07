@@ -64,6 +64,38 @@ describe "Datastore Query", :datastore do
     connection.delete entity
   end
 
+  it "can filter on ancestor" do
+    kind = "ANCESTOR REGRESSION TEST (#{Time.now.to_s})"
+
+    parent = Gcloud::Datastore::Entity.new
+    parent.key = Gcloud::Datastore::Key.new "Parent #{kind}", "parent"
+    parent["name"] = "Parent"
+
+    child = Gcloud::Datastore::Entity.new
+    child.key = Gcloud::Datastore::Key.new "Child #{kind}", "child"
+    child.key.parent = parent.key
+    child["name"] = "Child"
+
+    orphan = Gcloud::Datastore::Entity.new
+    orphan.key = Gcloud::Datastore::Key.new "Child #{kind}", "child"
+    orphan["name"] = "Orphan"
+
+    connection.save parent, child, orphan
+
+    count_query = Gcloud::Datastore::Query.new
+    count_query.kind "Child #{kind}"
+
+    connection.run(count_query).count.must_equal 2
+
+    ancestor_query = Gcloud::Datastore::Query.new
+    ancestor_query.kind "Child #{kind}"
+    ancestor_query.ancestor parent
+
+    connection.run(ancestor_query).count.must_equal 1
+
+    connection.delete parent, child, orphan
+  end
+
   it "can sort results" do
     kind = "Task ORDER REGRESSION TEST (#{Time.now.to_s})"
 

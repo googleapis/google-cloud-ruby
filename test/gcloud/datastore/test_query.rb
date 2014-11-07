@@ -171,6 +171,46 @@ describe Gcloud::Datastore::Query do
     proto.group_by.first.name.must_equal "completed"
   end
 
+  it "can query ancestor" do
+    ancestor_key = Gcloud::Datastore::Key.new("User", "username")
+    query = Gcloud::Datastore::Query.new
+    query.kind "Task"
+    query.ancestor ancestor_key
+
+    proto = query.to_proto
+
+    assert_equal 1, proto.filter.composite_filter.filter.count
+
+    ancestor_filter = proto.filter.composite_filter.filter.first
+    assert_equal "__key__", ancestor_filter.property_filter.property.name
+    assert_equal Gcloud::Datastore::Proto::PropertyFilter::Operator::HAS_ANCESTOR,
+                 ancestor_filter.property_filter.operator
+    key = Gcloud::Datastore::Property.decode(ancestor_filter.property_filter.value)
+    key.kind.must_equal ancestor_key.kind
+    key.id.must_equal   ancestor_key.id
+    key.name.must_equal ancestor_key.name
+  end
+
+  it "can manually filter on ancestor" do
+    ancestor_key = Gcloud::Datastore::Key.new("User", "username")
+    query = Gcloud::Datastore::Query.new
+    query.kind "Task"
+    query.filter "__key__", "~", ancestor_key
+
+    proto = query.to_proto
+
+    assert_equal 1, proto.filter.composite_filter.filter.count
+
+    ancestor_filter = proto.filter.composite_filter.filter.first
+    assert_equal "__key__", ancestor_filter.property_filter.property.name
+    assert_equal Gcloud::Datastore::Proto::PropertyFilter::Operator::HAS_ANCESTOR,
+                 ancestor_filter.property_filter.operator
+    key = Gcloud::Datastore::Property.decode(ancestor_filter.property_filter.value)
+    key.kind.must_equal ancestor_key.kind
+    key.id.must_equal   ancestor_key.id
+    key.name.must_equal ancestor_key.name
+  end
+
   it "can chain query methods" do
     query = Gcloud::Datastore::Query.new
     q2 = query.kind("Task").select("due", "completed").
