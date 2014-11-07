@@ -13,8 +13,6 @@
 # limitations under the License.
 
 require "gcloud/datastore/connection"
-require "gcloud/datastore/entity"
-require "gcloud/datastore/key"
 
 module Gcloud
   ##

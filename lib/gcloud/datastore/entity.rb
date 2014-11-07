@@ -59,8 +59,7 @@ module Gcloud
       end
 
       def self.from_proto proto #:nodoc:
-        key    = Key.new
-        key.instance_variable_set :@_key, proto.key
+        key    = Key.from_proto proto.key
         entity = Entity.new
         entity.instance_variable_set :@_entity, proto
         entity.instance_variable_set :@key, key

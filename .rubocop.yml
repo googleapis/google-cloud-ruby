@@ -14,5 +14,6 @@ Style/MethodDefParentheses:
 Style/NumericLiterals:
   Enabled: false
 Style/ClassVars:
-  Exclude:
-    - "lib/gcloud/datastore.rb"
+  Enabled: false
+Style/ClassLength:
+  Enabled: false
