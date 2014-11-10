@@ -74,30 +74,16 @@ module Gcloud
 
       # rubocop:disable all
       def save *entities
-        # Disable rules because the complexity here is neccessary.
-        commit = Proto::CommitRequest.new
-        commit.mode = Proto::CommitRequest::Mode::NON_TRANSACTIONAL
+        mut = mutation
 
-        commit.mutation = Proto::Mutation.new.tap do |mutation|
-          entities.each do |entity|
-            if entity.key.id.nil? && entity.key.name.nil?
-              mutation.insert_auto_id ||= []
-              mutation.insert_auto_id << entity.to_proto
-              auto_id_register entity
-            else
-              mutation.upsert ||= []
-              mutation.upsert << entity.to_proto
-            end
-          end
-        end
+        save_entities_to_mutation entities, mut
 
-        response = Proto::CommitResponse.decode rpc("commit", commit)
+        response = commit_rpc mut
 
         auto_id_assign_ids response.mutation_result.insert_auto_id_key
 
         entities
       end
-      # rubocop:enable all
 
       def find key_or_kind, id_or_name = nil
         key = key_or_kind
@@ -119,12 +105,11 @@ module Gcloud
       alias_method :lookup, :find_all
 
       def delete *entities
-        commit = Proto::CommitRequest.new
-        commit.mode = Proto::CommitRequest::Mode::NON_TRANSACTIONAL
-        commit.mutation = Proto::Mutation.new
-        commit.mutation.delete = entities.map { |entity| entity.key.to_proto }
+        mut = mutation do |m|
+          m.delete = entities.map { |entity| entity.key.to_proto }
+        end
 
-        Proto::CommitResponse.decode rpc("commit", commit)
+        commit_rpc mut
 
         true
       end
@@ -176,6 +161,37 @@ module Gcloud
           entity.key = Key.from_proto key
         end
         @_auto_id_entities = []
+      end
+
+      def mutation
+        # Always return a new mutation object
+        mut = Proto::Mutation.new.tap do |m|
+          m.upsert = []
+          m.update = []
+          m.insert = []
+          m.insert_auto_id = []
+          m.delete = []
+        end
+        yield mut if block_given?
+        mut
+      end
+
+      def save_entities_to_mutation entities, mut
+        entities.each do |entity|
+          if entity.key.id.nil? && entity.key.name.nil?
+            mut.insert_auto_id << entity.to_proto
+            auto_id_register entity
+          else
+            mut.upsert << entity.to_proto
+          end
+        end
+      end
+
+      def commit_rpc proto_mutation #:nodoc:
+        commit = Proto::CommitRequest.new
+        commit.mode = Proto::CommitRequest::Mode::NON_TRANSACTIONAL
+        commit.mutation = proto_mutation
+        Proto::CommitResponse.decode rpc("commit", commit)
       end
 
       def http_headers
