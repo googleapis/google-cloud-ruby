@@ -78,14 +78,12 @@ module Gcloud
         commit = Proto::CommitRequest.new
         commit.mode = Proto::CommitRequest::Mode::NON_TRANSACTIONAL
 
-        auto_ids = [] # store entities that are getting new ids
-
         commit.mutation = Proto::Mutation.new.tap do |mutation|
           entities.each do |entity|
             if entity.key.id.nil? && entity.key.name.nil?
               mutation.insert_auto_id ||= []
               mutation.insert_auto_id << entity.to_proto
-              auto_ids << entity
+              auto_id_register entity
             else
               mutation.upsert ||= []
               mutation.upsert << entity.to_proto
@@ -95,12 +93,8 @@ module Gcloud
 
         response = Proto::CommitResponse.decode rpc("commit", commit)
 
-        # Assign the newly created id to the entity
-        new_auto_ids = Array(response.mutation_result.insert_auto_id_key)
-        new_auto_ids.each_with_index do |key, index|
-          entity = auto_ids[index]
-          entity.key = Key.from_proto key
-        end
+        auto_id_assign_ids response.mutation_result.insert_auto_id_key
+
         entities
       end
       # rubocop:enable all
@@ -168,6 +162,20 @@ module Gcloud
 
         @client = Signet::OAuth2::Client.new client_opts
         @client.fetch_access_token!
+      end
+
+      def auto_id_register entity
+        @_auto_id_entities ||= []
+        @_auto_id_entities << entity
+      end
+
+      def auto_id_assign_ids auto_ids
+        @_auto_id_entities ||= []
+        Array(auto_ids).each_with_index do |key, index|
+          entity = @_auto_id_entities[index]
+          entity.key = Key.from_proto key
+        end
+        @_auto_id_entities = []
       end
 
       def http_headers
