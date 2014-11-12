@@ -360,23 +360,35 @@ describe "Datastore", :datastore do
     end
 
     it "should resume from a start cursor" do
-      skip "cursor is not yet implemented"
-
       query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book).
-        limit(2).offset(2).order("appearances")
+        limit(3).order("appearances")
       entities = connection.run query
-      # get cursor
-      cursor = entities.cursor
-      # set cursor
+      entities.count.must_equal 3
+      entities[0]["name"].must_equal rickard["name"]
+      entities[2]["name"].must_equal robb["name"]
+
+      next_cursor = entities.cursor
+      next_cursor.wont_be :nil?
       next_query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book).
-        order("appearances").start(cursor)
-      # run query
+        limit(3).order("appearances").
+        cursor(next_cursor)
       next_entities = connection.run next_query
-      # assert correct
-      entities[0]["name"].must_equal catelyn.name
-      entities[2]["name"].must_equal arya.name
+      next_entities.count.must_equal 3
+      next_entities[0]["name"].must_equal bran["name"]
+      next_entities[2]["name"].must_equal sansa["name"]
+
+      last_cursor = next_entities.cursor
+      last_cursor.wont_be :nil?
+      last_query = Gcloud::Datastore::Query.new.
+        kind("Character").ancestor(book).
+        limit(3).order("appearances").
+        cursor(last_cursor)
+      last_entities = connection.run last_query
+      last_entities.count.must_equal 2
+      last_entities[0]["name"].must_equal jonsnow["name"]
+      last_entities[1]["name"].must_equal arya["name"]
     end
 
     it "should group queries" do
