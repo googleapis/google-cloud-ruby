@@ -19,9 +19,7 @@ require "datastore_helper"
 describe "Datastore", :datastore do
 
   it "should allocate IDs" do
-    skip "allocate_ids is not yet implemented"
-
-    incomplete_key = Key.new "Kind"
+    incomplete_key = Gcloud::Datastore::Key.new "Kind"
     incomplete_key.wont_be :complete?
 
     keys = connection.allocate_ids incomplete_key, 10
