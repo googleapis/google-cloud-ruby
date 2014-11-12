@@ -75,7 +75,7 @@ module Gcloud
       # Determines if the key is incomplete.
       # An incomplete key has neither an id nor a name.
       def incomplete?
-        id.nil? && (name.nil? || name.empty?)
+        kind.nil? || (id.nil? && (name.nil? || name.empty?))
       end
 
       ##

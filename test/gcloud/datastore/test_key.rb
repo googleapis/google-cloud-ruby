@@ -94,6 +94,30 @@ describe Gcloud::Datastore::Key do
     key.wont_be :incomplete?
   end
 
+  it "isn't complete is missing kind" do
+    key = Gcloud::Datastore::Key.new "Task"
+    key.kind = nil
+    key.kind.must_be :nil?
+    key.id.must_be :nil?
+    key.name.must_be :nil?
+    key.wont_be :complete?
+    key.must_be :incomplete?
+
+    key.id = 123455
+    key.kind.must_be :nil?
+    key.id.wont_be :nil?
+    key.name.must_be :nil?
+    key.wont_be :complete?
+    key.must_be :incomplete?
+
+    key.name = "description"
+    key.kind.must_be :nil?
+    key.id.must_be :nil?
+    key.name.wont_be :nil?
+    key.wont_be :complete?
+    key.must_be :incomplete?
+  end
+
   it "returns a correct protocol buffer object" do
     key = Gcloud::Datastore::Key.new "ThisThing", 1234
     proto = key.to_proto
