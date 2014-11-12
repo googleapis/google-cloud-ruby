@@ -125,6 +125,22 @@ describe Gcloud::Datastore::Query do
     proto.offset.must_equal 20
   end
 
+  it "can specify a cursor" do
+    raw_cursor = "\x13\xE0\x01\x00\xEB".force_encoding Encoding::ASCII_8BIT
+    encoded_cursor = "E+ABAOs="
+
+    query = Gcloud::Datastore::Query.new
+    query.kind "Task"
+
+    proto = query.to_proto
+    proto.start_cursor.must_be :nil?
+
+    query.cursor encoded_cursor
+
+    proto = query.to_proto
+    proto.start_cursor.must_equal raw_cursor
+  end
+
   it "can select the properties to return" do
     query = Gcloud::Datastore::Query.new
     query.kind "Task"

@@ -115,15 +115,26 @@ module Gcloud
       end
 
       def run query
-        run_query = Proto::RunQueryRequest.new
-        run_query.query = query.to_proto
+        run_query = new_run_query_request query.to_proto
         response = Proto::RunQueryResponse.decode rpc("runQuery", run_query)
-        Array(response.batch.entity_result).map do |result|
+        results = Array(response.batch.entity_result).map do |result|
           Gcloud::Datastore::Entity.from_proto result.entity
         end
+        Gcloud::Datastore::List.new results,
+                                    encode_cursor(response.batch.end_cursor)
       end
 
       protected
+
+      def new_run_query_request query_proto
+        Proto::RunQueryRequest.new.tap do |rq|
+          rq.query = query_proto
+        end
+      end
+
+      def encode_cursor cursor
+        Array(cursor).pack("m").chomp
+      end
 
       def init_client! options
         client_opts = {
@@ -180,6 +191,20 @@ module Gcloud
         @dataset_id = dataset_id
         @conn = Faraday.new url: "http://#{host}:#{port}"
         @client = nil
+      end
+    end
+
+    ##
+    # List is a special case Array with cursor.
+    #
+    #   entities = Gcloud::Datastore::List.new [entity1, entity2, entity3]
+    #   entities.cursor = "c3VwZXJhd2Vzb21lIQ"
+    class List < DelegateClass(::Array)
+      attr_accessor :cursor
+
+      def initialize arr = [], cursor = nil
+        super arr
+        @cursor = cursor
       end
     end
   end

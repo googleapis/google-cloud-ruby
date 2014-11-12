@@ -130,13 +130,28 @@ module Gcloud
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
       #     limit(10).
-      #     offset(20).
+      #     offset(20)
       #
       #   paginated_tasks = Gcloud::Datastore.connection.run query
       def offset num
         @_query.offset = num
         self
       end
+
+      ##
+      # Set the cursor to start the results at.
+      #
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     limit(10).
+      #     cursor(task_cursor)
+      #
+      #   paginated_tasks = Gcloud::Datastore.connection.run query
+      def start cursor
+        @_query.start_cursor = decode_cursor cursor
+        self
+      end
+      alias_method :cursor, :start
 
       ##
       # Retrieve only select properties from the matched entities.
@@ -213,6 +228,12 @@ module Gcloud
         Proto::PropertyReference.new.tap do |pr|
           pr.name = name
         end
+      end
+
+      def decode_cursor cursor
+        dc = cursor.to_s.unpack("m").first.force_encoding Encoding::ASCII_8BIT
+        dc = nil if dc.empty?
+        dc
       end
 
       #:nodoc:
