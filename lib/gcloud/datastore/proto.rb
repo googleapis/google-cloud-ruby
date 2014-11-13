@@ -118,6 +118,76 @@ module Gcloud
         dc = nil if dc.empty?
         dc
       end
+
+      ##
+      # Convenience methods to create protocol buffer objects
+
+      def self.new_filter
+        Filter.new
+      end
+
+      def self.new_composite_filter
+        CompositeFilter.new.tap do |cf|
+          cf.operator = Proto::CompositeFilter::Operator::AND
+          cf.filter = []
+        end
+      end
+
+      def self.new_property_filter name, operator, value
+        PropertyFilter.new.tap do |pf|
+          pf.property = new_property_reference name
+          pf.operator = Proto.to_prop_filter_op operator
+          pf.value = Proto.to_proto_value value
+        end
+      end
+
+      def self.new_property_expressions *names
+        names.map do |name|
+          new_property_expression name
+        end
+      end
+
+      def self.new_property_expression name
+        PropertyExpression.new.tap do |pe|
+          pe.property = new_property_reference name
+        end
+      end
+
+      def self.new_property_references *names
+        names.map do |name|
+          new_property_reference name
+        end
+      end
+
+      def self.new_property_reference name
+        PropertyReference.new.tap do |pr|
+          pr.name = name
+        end
+      end
+
+      def self.new_path_element new_kind, new_id_or_name
+        Key::PathElement.new.tap do |pe|
+          pe.kind = new_kind
+          if new_id_or_name.is_a? Integer
+            pe.id = new_id_or_name
+          else
+            pe.name = new_id_or_name
+          end
+        end
+      end
+
+      def self.new_partition_id new_dataset_id, new_namespace
+        PartitionId.new.tap do |pi|
+          pi.dataset_id = new_dataset_id
+          pi.namespace  = new_namespace
+        end
+      end
+
+      def self.new_run_query_request query_proto
+        RunQueryRequest.new.tap do |rq|
+          rq.query = query_proto
+        end
+      end
     end
     # rubocop:enable all
   end

@@ -61,12 +61,12 @@ module Gcloud
       #   completed_tasks = Gcloud::Datastore.connection.run query
       def where name, operator, value
         # Initialize filter
-        @_query.filter ||= Proto::Filter.new.tap do |f|
-          f.composite_filter = new_composite_filter
+        @_query.filter ||= Proto.new_filter.tap do |f|
+          f.composite_filter = Proto.new_composite_filter
         end
         # Create new property filter
-        filter = Proto::Filter.new.tap do |f|
-          f.property_filter = new_property_filter name, operator, value
+        filter = Proto.new_filter.tap do |f|
+          f.property_filter = Proto.new_property_filter name, operator, value
         end
         # Add new property filter to the list
         @_query.filter.composite_filter.filter << filter
@@ -161,7 +161,7 @@ module Gcloud
       #   partial_tasks = Gcloud::Datastore.connection.run query
       def select *names
         @_query.projection ||= []
-        @_query.projection += new_property_expressions(*names)
+        @_query.projection += Proto.new_property_expressions(*names)
         self
       end
       alias_method :projection, :select
@@ -176,7 +176,7 @@ module Gcloud
       #   grouped_tasks = Gcloud::Datastore.connection.run query
       def group_by *names
         @_query.group_by ||= []
-        @_query.group_by += new_property_references(*names)
+        @_query.group_by += Proto.new_property_references(*names)
         self
       end
 
@@ -186,47 +186,6 @@ module Gcloud
         @_query
       end
       # rubocop:enable Style/TrivialAccessors
-
-      protected
-
-      def new_composite_filter
-        Proto::CompositeFilter.new.tap do |cf|
-          cf.operator = Proto::CompositeFilter::Operator::AND
-          cf.filter = []
-        end
-      end
-
-      def new_property_filter name, operator, value
-        Proto::PropertyFilter.new.tap do |pf|
-          pf.property = new_property_reference name
-          pf.operator = Proto.to_prop_filter_op operator
-          pf.value = Proto.to_proto_value value
-        end
-      end
-
-      def new_property_expressions *names
-        names.map do |name|
-          new_property_expression name
-        end
-      end
-
-      def new_property_expression name
-        Proto::PropertyExpression.new.tap do |pe|
-          pe.property = new_property_reference name
-        end
-      end
-
-      def new_property_references *names
-        names.map do |name|
-          new_property_reference name
-        end
-      end
-
-      def new_property_reference name
-        Proto::PropertyReference.new.tap do |pr|
-          pr.name = name
-        end
-      end
     end
   end
 end

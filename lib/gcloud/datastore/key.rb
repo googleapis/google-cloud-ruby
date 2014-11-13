@@ -84,9 +84,9 @@ module Gcloud
       def to_proto #:nodoc:
         Proto::Key.new.tap do |k|
           k.path_element = path.map do |pe_kind, pe_id_or_name|
-            new_path_element pe_kind, pe_id_or_name
+            Proto.new_path_element pe_kind, pe_id_or_name
           end
-          k.partition_id = new_partition_id dataset_id, namespace
+          k.partition_id = Proto.new_partition_id dataset_id, namespace
         end
       end
 
@@ -113,26 +113,6 @@ module Gcloud
         key
       end
       # rubocop:enable all
-
-      protected
-
-      def new_path_element new_kind, new_id_or_name
-        Proto::Key::PathElement.new.tap do |pe|
-          pe.kind = new_kind
-          if new_id_or_name.is_a? Integer
-            pe.id = new_id_or_name
-          else
-            pe.name = new_id_or_name
-          end
-        end
-      end
-
-      def new_partition_id new_dataset_id, new_namespace
-        Proto::PartitionId.new.tap do |pi|
-          pi.dataset_id = new_dataset_id
-          pi.namespace  = new_namespace
-        end
-      end
     end
   end
 end
