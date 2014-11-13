@@ -25,6 +25,7 @@ namespace :test do
     if project.nil? || keyfile.nil?
       fail "You must provide a project and keyfile. e.g. rake test:regression[test123, /path/to/keyfile.json] or DATASTORE_PROJECT=test123 DATASTORE_KEYFILE=/path/to/keyfile.json rake test:regression"
     end
+    ENV["DEVSERVER_PROJECT"] = nil # clear in case it is also set
     ENV["DATASTORE_PROJECT"] = project # always overwrite from command line
     ENV["DATASTORE_KEYFILE"] = keyfile # always overwrite from command line
 
