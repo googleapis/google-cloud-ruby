@@ -70,7 +70,6 @@ module Gcloud
         end
       end
 
-      # rubocop:disable all
       def save *entities
         mut = mutation
 
