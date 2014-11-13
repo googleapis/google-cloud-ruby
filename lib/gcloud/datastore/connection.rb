@@ -25,7 +25,7 @@ module Gcloud
     ##
     # Datastore Entity
     #
-    # See Gcloud::Datastore.new
+    # See Gcloud::Datastore.dataset
     class Connection
       API_VERSION = "v1beta2"
       TOKEN_CREDENTIAL_URI = "https://accounts.google.com/o/oauth2/token"
@@ -37,7 +37,7 @@ module Gcloud
 
       ##
       # Creates a new Connection instance.
-      # See Gcloud::Datastore.new
+      # See Gcloud::Datastore.dataset
       def initialize dataset_id, keyfile #:nodoc:
         @dataset_id = dataset_id
 
@@ -54,9 +54,9 @@ module Gcloud
       ##
       # Generate IDs for a Key before creating an entity.
       #
-      #   conn = Gcloud::Datastore.connection
+      #   dataset = Gcloud::Datastore.dataset
       #   empty_key = Gcloud::Datastore::Key.new "Task"
-      #   task_keys = conn.allocate_ids empty_key, 5
+      #   task_keys = dataset.allocate_ids empty_key, 5
       def allocate_ids incomplete_key, count = 1
         fail "An incomplete key must be provided." if incomplete_key.complete?
 

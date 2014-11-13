@@ -18,24 +18,13 @@ module Gcloud
   ##
   # Google Cloud Datastore
   #
-  #   conn = Gcloud::Datastore.new "my-todo-project", "/path/to/keyfile.json"
+  #   dataset = Gcloud::Datastore.dataset "my-todo-project",
+  #                                       "/path/to/keyfile.json"
   #   entity = prod.find "Task", "start"
   #   entity["completed"] = true
-  #   conn.save entity
+  #   dataset.save entity
   #
   module Datastore
-    ##
-    # Returns the default connection.
-    def self.connection
-      @@connection ||= new
-    end
-
-    ##
-    # Sets the default connection.
-    def self.connection= new_connection
-      @@connection = new_connection
-    end
-
     ##
     # Create a new Connection
     #
@@ -44,8 +33,9 @@ module Gcloud
     #   entity["description"] = "Get started with Google Cloud"
     #   entity["completed"] = false
     #
-    #   conn = Gcloud::Datastore.new "my-todo-project", "/path/to/keyfile.json"
-    #   conn.save entity
+    #   dataset = Gcloud::Datastore.dataset "my-todo-project",
+    #                                       "/path/to/keyfile.json"
+    #   dataset.save entity
     #
     # @param dataset_id [String] the dataset identifier for the Datastore
     # you are connecting to.
@@ -53,30 +43,25 @@ module Gcloud
     # Google Cloud. The file must readable.
     # @return [Gcloud::Datastore::Connection] new connection
     #
-    def self.new dataset_id = ENV["DATASTORE_PROJECT"],
-                 keyfile    = ENV["DATASTORE_KEYFILE"]
-      conn = Gcloud::Datastore::Connection.new dataset_id, keyfile
-      # Store in connection if empty
-      @@connection ||= conn
-      conn
+    def self.dataset project = ENV["DATASTORE_PROJECT"],
+                     keyfile = ENV["DATASTORE_KEYFILE"]
+      Gcloud::Datastore::Connection.new project, keyfile
     end
 
     ##
     # Special connection for Local Development Server
     #
-    #   prod = Gcloud::Datastore.new "my-todo-project", "/path/to/keyfile.json"
-    #   entity = prod.find "Task", "start"
+    #   dataset = Gcloud::Datastore.dataset "my-todo-project",
+    #                                       "/path/to/keyfile.json"
+    #   entity = dataset.find "Task", "start"
     #
-    #   local = Gcloud::Datastore.devserver "my-todo-project"
-    #   local.save entity
+    #   devserver = Gcloud::Datastore.devserver "my-todo-project"
+    #   devserver.save entity
     #
     # See https://cloud.google.com/datastore/docs/tools/devserver
-    def self.devserver dataset_id = ENV["DEVSERVER_PROJECT"],
+    def self.devserver project = ENV["DEVSERVER_PROJECT"],
                        host = "localhost", port = 8080
-      conn = Gcloud::Datastore::Devserver.new dataset_id, host, port
-      # Store in connection if empty
-      @@connection ||= conn
-      conn
+      Gcloud::Datastore::Devserver.new project, host, port
     end
   end
 end

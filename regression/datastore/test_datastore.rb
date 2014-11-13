@@ -22,7 +22,7 @@ describe "Datastore", :datastore do
     incomplete_key = Gcloud::Datastore::Key.new "Kind"
     incomplete_key.wont_be :complete?
 
-    keys = connection.allocate_ids incomplete_key, 10
+    keys = dataset.allocate_ids incomplete_key, 10
 
     keys.count.must_equal 10
     keys.each { |key| key.must_be :complete? }
@@ -56,31 +56,31 @@ describe "Datastore", :datastore do
 
     it "should save/find/delete with a key name" do
       post.key = Gcloud::Datastore::Key.new "Post", "post1"
-      connection.save post
+      dataset.save post
 
-      refresh = connection.find post.key
+      refresh = dataset.find post.key
       refresh.key.kind.must_equal post.key.kind
       refresh.key.id.must_equal   post.key.id
       refresh.key.name.must_equal post.key.name
       refresh.properties.must_equal post.properties
 
-      connection.delete post
-      refresh = connection.find post.key
+      dataset.delete post
+      refresh = dataset.find post.key
       refresh.must_be :nil?
     end
 
     it "should save/find/delete with a numeric key id" do
       post.key = Gcloud::Datastore::Key.new "Post", 123456789
-      connection.save post
+      dataset.save post
 
-      refresh = connection.find post.key
+      refresh = dataset.find post.key
       refresh.key.kind.must_equal post.key.kind
       refresh.key.id.must_equal   post.key.id
       refresh.key.name.must_equal post.key.name
       refresh.properties.must_equal post.properties
 
-      connection.delete post
-      refresh = connection.find post.key
+      dataset.delete post
+      refresh = dataset.find post.key
       refresh.must_be :nil?
     end
 
@@ -89,18 +89,18 @@ describe "Datastore", :datastore do
 
       post.key.id.must_be :nil?
 
-      connection.save post
+      dataset.save post
 
       post.key.id.wont_be :nil?
 
-      refresh = connection.find "Post", post.key.id
+      refresh = dataset.find "Post", post.key.id
       refresh.key.kind.must_equal post.key.kind
       refresh.key.id.must_equal   post.key.id
       refresh.key.name.must_equal post.key.name
       refresh.properties.must_equal post.properties
 
-      connection.delete post
-      refresh = connection.find post.key
+      dataset.delete post
+      refresh = dataset.find post.key
       refresh.must_be :nil?
     end
 
@@ -111,17 +111,17 @@ describe "Datastore", :datastore do
       post.key.id.must_be :nil?
       post2.key.id.must_be :nil?
 
-      connection.save post, post2
+      dataset.save post, post2
 
       post.key.id.wont_be :nil?
       post2.key.id.wont_be :nil?
 
-      entities = connection.find_all post.key, post2.key
+      entities = dataset.find_all post.key, post2.key
       entities.count.must_equal 2
 
-      connection.delete post, post2
+      dataset.delete post, post2
 
-      entities = connection.find_all post.key, post2.key
+      entities = dataset.find_all post.key, post2.key
       entities.count.must_equal 0
     end
 
@@ -132,12 +132,12 @@ describe "Datastore", :datastore do
     person.key = Gcloud::Datastore::Key.new "Person", "name"
     person["fullName"] = "Full name"
     person["linkedTo"] = person.key # itself
-    connection.save person
+    dataset.save person
 
     query = Gcloud::Datastore::Query.new.kind("Person").
       where("linkedTo", "=", person.key)
 
-    entities = connection.run query
+    entities = dataset.run query
     entities.count.must_equal 1
 
     entity = entities.first
@@ -258,24 +258,24 @@ describe "Datastore", :datastore do
     end
 
     before do
-      connection.save *characters
+      dataset.save *characters
     end
 
     it "should limit queries" do
       # first page
       query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book).limit(5)
-      entities = connection.run query
+      entities = dataset.run query
       entities.count.must_equal 5
 
       # second page
       query.offset 5
-      entities = connection.run query
+      entities = dataset.run query
       entities.count.must_equal 3
 
       # third page
       query.offset 10
-      entities = connection.run query
+      entities = dataset.run query
       entities.count.must_equal 0
     end
 
@@ -283,7 +283,7 @@ describe "Datastore", :datastore do
       query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         where("appearances", ">=", 20)
-      entities = connection.run query
+      entities = dataset.run query
       entities.count.must_equal 6
     end
 
@@ -292,21 +292,21 @@ describe "Datastore", :datastore do
         kind("Character").ancestor(book).
         where("family", "=", "Stark").
         where("appearances", ">=", 20)
-      entities = connection.run query
+      entities = dataset.run query
       entities.count.must_equal 6
     end
 
     it "should filter by ancestor key" do
       query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book.key)
-      entities = connection.run query
+      entities = dataset.run query
       entities.count.must_equal 8
     end
 
     it "should filter by ancestor entity" do
       query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book)
-      entities = connection.run query
+      entities = dataset.run query
       entities.count.must_equal 8
     end
 
@@ -314,7 +314,7 @@ describe "Datastore", :datastore do
       query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         where("__key__", "=", rickard.key)
-      entities = connection.run query
+      entities = dataset.run query
       entities.count.must_equal 1
     end
 
@@ -322,7 +322,7 @@ describe "Datastore", :datastore do
       query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         order("appearances")
-      entities = connection.run query
+      entities = dataset.run query
       entities.count.must_equal      characters.count
       entities[0]["name"].must_equal rickard["name"]
       entities[7]["name"].must_equal arya["name"]
@@ -332,7 +332,7 @@ describe "Datastore", :datastore do
       query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         select("name", "family")
-      entities = connection.run query
+      entities = dataset.run query
       entities.each do |entity|
         entity.properties.count.must_equal 2
         entity.properties.assoc("name").wont_be :nil?
@@ -344,14 +344,14 @@ describe "Datastore", :datastore do
       query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         limit(3).offset(2).order("appearances")
-      entities = connection.run query
+      entities = dataset.run query
       entities.count.must_equal 3
       entities[0]["name"].must_equal robb["name"]
       entities[2]["name"].must_equal catelyn["name"]
 
       # next page
       query.offset(5)
-      entities = connection.run query
+      entities = dataset.run query
       entities.count.must_equal 3
       entities[0]["name"].must_equal sansa["name"]
       entities[2]["name"].must_equal arya["name"]
@@ -361,7 +361,7 @@ describe "Datastore", :datastore do
       query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         limit(3).order("appearances")
-      entities = connection.run query
+      entities = dataset.run query
       entities.count.must_equal 3
       entities[0]["name"].must_equal rickard["name"]
       entities[2]["name"].must_equal robb["name"]
@@ -372,7 +372,7 @@ describe "Datastore", :datastore do
         kind("Character").ancestor(book).
         limit(3).order("appearances").
         cursor(next_cursor)
-      next_entities = connection.run next_query
+      next_entities = dataset.run next_query
       next_entities.count.must_equal 3
       next_entities[0]["name"].must_equal bran["name"]
       next_entities[2]["name"].must_equal sansa["name"]
@@ -383,7 +383,7 @@ describe "Datastore", :datastore do
         kind("Character").ancestor(book).
         limit(3).order("appearances").
         cursor(last_cursor)
-      last_entities = connection.run last_query
+      last_entities = dataset.run last_query
       last_entities.count.must_equal 2
       last_entities[0]["name"].must_equal jonsnow["name"]
       last_entities[1]["name"].must_equal arya["name"]
@@ -393,12 +393,12 @@ describe "Datastore", :datastore do
       query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         group_by("alive")
-      entities = connection.run query
+      entities = dataset.run query
       entities.count.must_equal 2
     end
 
     after do
-      connection.delete *characters
+      dataset.delete *characters
     end
   end
 
@@ -409,14 +409,14 @@ describe "Datastore", :datastore do
       obj.key = Gcloud::Datastore::Key.new "Company", "Google"
       obj["url"] = "www.google.com"
 
-      connection.transaction do |tx|
-        tx.id.wont_be :nil?
-        if tx.find(obj.key).nil?
-          tx.save obj
+      dataset.transaction do |t|
+        entity = t.find obj.key
+        if entity.nil?
+          t.save obj
         end
       end
 
-      entity = connection.find obj.key
+      entity = dataset.find obj.key
       entity.wont_be :nil?
       entity.key.kind.must_equal   obj.key.kind
       entity.key.id.must_equal     obj.key.id
@@ -430,7 +430,7 @@ describe "Datastore", :datastore do
       obj.key = Gcloud::Datastore::Key.new "Company", "Google"
       obj["url"] = "www.google.com"
 
-      tx = connection.transaction
+      tx = dataset.transaction
       tx.id.wont_be :nil?
 
       if tx.find(obj.key).nil?
@@ -439,7 +439,7 @@ describe "Datastore", :datastore do
       # Don't handle errors and rollback, let test fail
       tx.commit
 
-      entity = connection.find obj.key
+      entity = dataset.find obj.key
       entity.wont_be :nil?
       entity.key.kind.must_equal   obj.key.kind
       entity.key.id.must_equal     obj.key.id

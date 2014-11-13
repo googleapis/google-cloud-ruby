@@ -27,7 +27,7 @@ module Gcloud
     #   query.kind("Task").
     #     where("completed", "=", true)
     #
-    #   entities = Gcloud::Datastore.connection.run query
+    #   entities = dataset.run query
     class Query
       ##
       # Returns a new query object.
@@ -43,7 +43,7 @@ module Gcloud
       #   query = Gcloud::Datastore::Query.new
       #   query.kind "Task"
       #
-      #   all_tasks = Gcloud::Datastore.connection.run query
+      #   all_tasks = dataset.run query
       def kind *kinds
         @_query.kind ||= Proto::KindExpression.new
         @_query.kind.name ||= []
@@ -58,7 +58,7 @@ module Gcloud
       #   query.kind("Task").
       #     where("completed", "=", true)
       #
-      #   completed_tasks = Gcloud::Datastore.connection.run query
+      #   completed_tasks = dataset.run query
       def where name, operator, value
         # Initialize filter
         @_query.filter ||= Proto.new_filter.tap do |f|
@@ -81,7 +81,7 @@ module Gcloud
       #   query.kind("Task").
       #     ancestor(parent.key)
       #
-      #   completed_tasks = Gcloud::Datastore.connection.run query
+      #   completed_tasks = dataset.run query
       def ancestor parent
         # Use key if given an entity
         parent = parent.key if parent.respond_to? :key
@@ -98,7 +98,7 @@ module Gcloud
       #   query.kind("Task").
       #     order("due", :desc)
       #
-      #   sorted_tasks = Gcloud::Datastore.connection.run query
+      #   sorted_tasks = dataset.run query
       def order name, direction = :asc
         @_query.order ||= []
         po = Proto::PropertyOrder.new
@@ -116,7 +116,7 @@ module Gcloud
       #   query.kind("Task").
       #     limit(10)
       #
-      #   paginated_tasks = Gcloud::Datastore.connection.run query
+      #   paginated_tasks = dataset.run query
       def limit num
         @_query.limit = num
         self
@@ -130,7 +130,7 @@ module Gcloud
       #     limit(10).
       #     offset(20)
       #
-      #   paginated_tasks = Gcloud::Datastore.connection.run query
+      #   paginated_tasks = dataset.run query
       def offset num
         @_query.offset = num
         self
@@ -144,7 +144,7 @@ module Gcloud
       #     limit(10).
       #     cursor(task_cursor)
       #
-      #   paginated_tasks = Gcloud::Datastore.connection.run query
+      #   paginated_tasks = dataset.run query
       def start cursor
         @_query.start_cursor = Proto.decode_cursor cursor
         self
@@ -158,7 +158,7 @@ module Gcloud
       #   query.kind("Task").
       #     select("completed", "due")
       #
-      #   partial_tasks = Gcloud::Datastore.connection.run query
+      #   partial_tasks = dataset.run query
       def select *names
         @_query.projection ||= []
         @_query.projection += Proto.new_property_expressions(*names)
@@ -173,7 +173,7 @@ module Gcloud
       #   query.kind("Task").
       #     group_by("completed")
       #
-      #   grouped_tasks = Gcloud::Datastore.connection.run query
+      #   grouped_tasks = dataset.run query
       def group_by *names
         @_query.group_by ||= []
         @_query.group_by += Proto.new_property_references(*names)
