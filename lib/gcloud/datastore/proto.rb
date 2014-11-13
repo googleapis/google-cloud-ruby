@@ -13,26 +13,25 @@
 # limitations under the License.
 
 require "gcloud/proto/datastore_v1.pb"
-require "gcloud/datastore/key"
 
 module Gcloud
   module Datastore
     ##
-    # Property is a helper for converting primitive types
-    # to the Protocol Buffer Value objects, and vice versa.
+    # Proto is the module that contains all Protocol Buffer objects.
     #
     # This module is an implementation detail and as such
     # should not be relied on. It is not part of the public
     # API that gcloud intends to expose. The implementation,
     # and the module's existance, may change without warning.
-    module Property #:nodoc:
+    module Proto #:nodoc:
+
       # rubocop:disable all
-      def self.decode proto_value
+      def self.from_proto_value proto_value
         if !proto_value.timestamp_microseconds_value.nil?
           microseconds = proto_value.timestamp_microseconds_value
           self.time_from_microseconds microseconds
         elsif !proto_value.key_value.nil?
-          Key.from_proto(proto_value.key_value)
+          Gcloud::Datastore::Key.from_proto(proto_value.key_value)
         elsif !proto_value.boolean_value.nil?
           proto_value.boolean_value
         elsif !proto_value.double_value.nil?
@@ -46,11 +45,11 @@ module Gcloud
         end # TODO: blob? Entity?
       end
 
-      def self.encode value
-        v = Proto::Value.new
+      def self.to_proto_value value
+        v = Gcloud::Datastore::Proto::Value.new
         if Time === value
           v.timestamp_microseconds_value = self.microseconds_from_time value
-        elsif Key === value
+        elsif Gcloud::Datastore::Key === value
           v.key_value = value.to_proto
         elsif TrueClass === value
           v.boolean_value = true
