@@ -146,7 +146,7 @@ module Gcloud
       #
       #   paginated_tasks = Gcloud::Datastore.connection.run query
       def start cursor
-        @_query.start_cursor = decode_cursor cursor
+        @_query.start_cursor = Proto.decode_cursor cursor
         self
       end
       alias_method :cursor, :start
@@ -226,12 +226,6 @@ module Gcloud
         Proto::PropertyReference.new.tap do |pr|
           pr.name = name
         end
-      end
-
-      def decode_cursor cursor
-        dc = cursor.to_s.unpack("m").first.force_encoding Encoding::ASCII_8BIT
-        dc = nil if dc.empty?
-        dc
       end
     end
   end
