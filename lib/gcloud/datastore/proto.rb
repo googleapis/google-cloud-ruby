@@ -109,6 +109,15 @@ module Gcloud
         end
       end
 
+      def self.encode_cursor cursor
+        Array(cursor.to_s).pack("m").chomp
+      end
+
+      def self.decode_cursor cursor
+        dc = cursor.to_s.unpack("m").first.force_encoding Encoding::ASCII_8BIT
+        dc = nil if dc.empty?
+        dc
+      end
     end
     # rubocop:enable all
   end
