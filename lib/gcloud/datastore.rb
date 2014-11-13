@@ -12,7 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "gcloud/datastore/connection"
+require "gcloud"
+require "gcloud/datastore/dataset"
+require "gcloud/datastore/transaction"
+require "gcloud/datastore/credentials"
 
 module Gcloud
   ##
@@ -20,13 +23,13 @@ module Gcloud
   #
   #   dataset = Gcloud::Datastore.dataset "my-todo-project",
   #                                       "/path/to/keyfile.json"
-  #   entity = prod.find "Task", "start"
+  #   entity = dataset.find "Task", "start"
   #   entity["completed"] = true
   #   dataset.save entity
   #
   module Datastore
     ##
-    # Create a new Connection
+    # Create a new Dataset
     #
     #   entity = Gcloud::Datastore::Entity.new
     #   entity.key = Gcloud::Datastore::Key.new "Task"
@@ -45,11 +48,12 @@ module Gcloud
     #
     def self.dataset project = ENV["DATASTORE_PROJECT"],
                      keyfile = ENV["DATASTORE_KEYFILE"]
-      Gcloud::Datastore::Connection.new project, keyfile
+      credentials = Gcloud::Datastore::Credentials.new keyfile
+      Gcloud::Datastore::Dataset.new project, credentials
     end
 
     ##
-    # Special connection for Local Development Server
+    # Special dataset for connecting to a Local Development Server.
     #
     #   dataset = Gcloud::Datastore.dataset "my-todo-project",
     #                                       "/path/to/keyfile.json"
@@ -61,7 +65,10 @@ module Gcloud
     # See https://cloud.google.com/datastore/docs/tools/devserver
     def self.devserver project = ENV["DEVSERVER_PROJECT"],
                        host = "localhost", port = 8080
-      Gcloud::Datastore::Devserver.new project, host, port
+      credentials = Gcloud::Datastore::Credentials::Empty.new
+      devserver = Gcloud::Datastore::Dataset.new project, credentials
+      devserver.connection.http = Faraday.new url: "http://#{host}:#{port}"
+      devserver
     end
   end
 end

@@ -422,7 +422,7 @@ describe "Datastore", :datastore do
       entity.key.id.must_equal     obj.key.id
       entity.key.name.must_equal   obj.key.name
       entity.properties.must_equal obj.properties
-      connection.delete entity
+      dataset.delete entity
     end
 
     it "should run in an explicit transaction" do
@@ -445,7 +445,7 @@ describe "Datastore", :datastore do
       entity.key.id.must_equal     obj.key.id
       entity.key.name.must_equal   obj.key.name
       entity.properties.must_equal obj.properties
-      connection.delete entity
+      dataset.delete entity
     end
   end
 end
