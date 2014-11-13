@@ -74,36 +74,16 @@ module Gcloud
 
       # rubocop:disable all
       def save *entities
-        # Disable rules because the complexity here is neccessary.
-        commit = Proto::CommitRequest.new
-        commit.mode = Proto::CommitRequest::Mode::NON_TRANSACTIONAL
+        mut = mutation
 
-        auto_ids = [] # store entities that are getting new ids
+        save_entities_to_mutation entities, mut
 
-        commit.mutation = Proto::Mutation.new.tap do |mutation|
-          entities.each do |entity|
-            if entity.key.id.nil? && entity.key.name.nil?
-              mutation.insert_auto_id ||= []
-              mutation.insert_auto_id << entity.to_proto
-              auto_ids << entity
-            else
-              mutation.upsert ||= []
-              mutation.upsert << entity.to_proto
-            end
-          end
-        end
+        response = commit_rpc mut
 
-        response = Proto::CommitResponse.decode rpc("commit", commit)
+        auto_id_assign_ids response.mutation_result.insert_auto_id_key
 
-        # Assign the newly created id to the entity
-        new_auto_ids = Array(response.mutation_result.insert_auto_id_key)
-        new_auto_ids.each_with_index do |key, index|
-          entity = auto_ids[index]
-          entity.key = Key.from_proto key
-        end
         entities
       end
-      # rubocop:enable all
 
       def find key_or_kind, id_or_name = nil
         key = key_or_kind
@@ -125,12 +105,11 @@ module Gcloud
       alias_method :lookup, :find_all
 
       def delete *entities
-        commit = Proto::CommitRequest.new
-        commit.mode = Proto::CommitRequest::Mode::NON_TRANSACTIONAL
-        commit.mutation = Proto::Mutation.new
-        commit.mutation.delete = entities.map { |entity| entity.key.to_proto }
+        mut = mutation do |m|
+          m.delete = entities.map { |entity| entity.key.to_proto }
+        end
 
-        Proto::CommitResponse.decode rpc("commit", commit)
+        commit_rpc mut
 
         true
       end
@@ -143,6 +122,53 @@ module Gcloud
         end
         Gcloud::Datastore::List.new results,
                                     encode_cursor(response.batch.end_cursor)
+      end
+
+      ##
+      # Runs the given block in a database transaction.
+      # If no block is given the transaction object is returned.
+      #
+      #   user = Gcloud::Datastore::Entity.new
+      #   user.key = Gcloud::Datastore::Key.new "User", "username"
+      #   user["name"] = "Test"
+      #   user["email"] = "test@example.net"
+      #
+      #   Gcloud::Datastore.connection.transaction do |tx|
+      #     if tx.find(user.key).nil?
+      #       tx.save user
+      #     end
+      #   end
+      #
+      # Alternatively, you can manually commit or rollback by
+      # using the returned transaction object.
+      #
+      #   user = Gcloud::Datastore::Entity.new
+      #   user.key = Gcloud::Datastore::Key.new "User", "username"
+      #   user["name"] = "Test"
+      #   user["email"] = "test@example.net"
+      #
+      #   tx = Gcloud::Datastore.connection.transaction
+      #   begin
+      #     if tx.find(user.key).nil?
+      #       tx.save user
+      #     end
+      #     tx.commit
+      #   rescue
+      #     tx.rollback
+      #   end
+      def transaction
+        tx = Transaction.new self
+
+        if block_given?
+          begin
+            yield tx
+            tx.commit
+          rescue
+            tx.rollback
+            fail "Transaction failed to commit."
+          end
+        end
+        tx
       end
 
       protected
@@ -168,6 +194,51 @@ module Gcloud
 
         @client = Signet::OAuth2::Client.new client_opts
         @client.fetch_access_token!
+      end
+
+      def auto_id_register entity
+        @_auto_id_entities ||= []
+        @_auto_id_entities << entity
+      end
+
+      def auto_id_assign_ids auto_ids
+        @_auto_id_entities ||= []
+        Array(auto_ids).each_with_index do |key, index|
+          entity = @_auto_id_entities[index]
+          entity.key = Key.from_proto key
+        end
+        @_auto_id_entities = []
+      end
+
+      def mutation
+        # Always return a new mutation object
+        mut = Proto::Mutation.new.tap do |m|
+          m.upsert = []
+          m.update = []
+          m.insert = []
+          m.insert_auto_id = []
+          m.delete = []
+        end
+        yield mut if block_given?
+        mut
+      end
+
+      def save_entities_to_mutation entities, mut
+        entities.each do |entity|
+          if entity.key.id.nil? && entity.key.name.nil?
+            mut.insert_auto_id << entity.to_proto
+            auto_id_register entity
+          else
+            mut.upsert << entity.to_proto
+          end
+        end
+      end
+
+      def commit_rpc proto_mutation #:nodoc:
+        commit = Proto::CommitRequest.new
+        commit.mode = Proto::CommitRequest::Mode::NON_TRANSACTIONAL
+        commit.mutation = proto_mutation
+        Proto::CommitResponse.decode rpc("commit", commit)
       end
 
       def http_headers
@@ -226,6 +297,82 @@ module Gcloud
       def initialize arr = [], cursor = nil
         super arr
         @cursor = cursor
+      end
+    end
+
+    ##
+    # Special Connection instance for running transactions.
+    #
+    # See Gcloud::Datastore::Connection.transaction
+    class Transaction < Connection
+      attr_reader :id
+
+      def initialize connection #:nodoc:
+        @dataset_id = connection.dataset_id
+        @conn       = connection.conn
+        @client     = connection.instance_variable_get :@client
+        clear
+        start
+      end
+
+      def save *entities
+        save_entities_to_mutation entities, mutation
+        # Do not save or assign auto_ids yet
+        entities
+      end
+
+      def delete *entities
+        mutation do |m|
+          m.delete = entities.map { |entity| entity.key.to_proto }
+        end
+        # Do not delete yet
+        true
+      end
+
+      def clear
+        @mut = nil
+        @id  = nil
+        @_auto_id_entities = []
+      end
+
+      def start
+        fail "Transaction already opened" unless @id.nil?
+        tx_request = Proto::BeginTransactionRequest.new
+        response_rpc = rpc "beginTransaction", tx_request
+        response = Proto::BeginTransactionResponse.decode response_rpc
+        @id = response.transaction
+      end
+
+      def commit
+        fail "Cannot commit when not in a transaction" if @id.nil?
+        response = commit_rpc mutation
+        auto_id_assign_ids response.mutation_result.insert_auto_id_key
+        true
+      end
+
+      def rollback
+        fail "Cannot rollback when not in a transaction" if @id.nil?
+        rollback = Proto::RollbackRequest.new
+        rollback.transaction = @id
+        Proto::RollbackResponse.decode rpc("rollback", rollback)
+        true
+      end
+
+      protected
+
+      def commit_rpc proto_mutation #:nodoc:
+        commit = Proto::CommitRequest.new
+        commit.transaction = @id
+        commit.mode = Proto::CommitRequest::Mode::TRANSACTIONAL
+        commit.mutation = proto_mutation
+        Proto::CommitResponse.decode rpc("commit", commit)
+      end
+
+      def mutation
+        # Always return the same new mutation object
+        @mut ||= super() # Use parens so the block isn't passed
+        yield @mut if block_given?
+        @mut
       end
     end
   end

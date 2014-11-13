@@ -405,50 +405,47 @@ describe "Datastore", :datastore do
   describe "transactions" do
 
     it "should run in a transaction block" do
-      skip "transaction is not yet implemented"
-
       obj = Gcloud::Datastore::Entity.new
       obj.key = Gcloud::Datastore::Key.new "Company", "Google"
       obj["url"] = "www.google.com"
 
-      connection.transaction do |t|
-        entity = t.find obj.key
-        if entity.nil?
-          t.save obj
+      connection.transaction do |tx|
+        tx.id.wont_be :nil?
+        if tx.find(obj.key).nil?
+          tx.save obj
         end
       end
 
       entity = connection.find obj.key
+      entity.wont_be :nil?
       entity.key.kind.must_equal   obj.key.kind
       entity.key.id.must_equal     obj.key.id
       entity.key.name.must_equal   obj.key.name
       entity.properties.must_equal obj.properties
+      connection.delete entity
     end
 
     it "should run in an explicit transaction" do
-      skip "transaction is not yet implemented"
-
       obj = Gcloud::Datastore::Entity.new
       obj.key = Gcloud::Datastore::Key.new "Company", "Google"
       obj["url"] = "www.google.com"
 
-      connection.start_transaction
+      tx = connection.transaction
+      tx.id.wont_be :nil?
 
-      begin
-        entity = connection.find obj.key
-        if entity.nil?
-          connection.save obj
-        end
-        connection.commit_transaction
-      rescue Gcloud::Datastore::TransactionError
-        connection.rollback_transaction
+      if tx.find(obj.key).nil?
+        tx.save obj
       end
+      # Don't handle errors and rollback, let test fail
+      tx.commit
 
       entity = connection.find obj.key
+      entity.wont_be :nil?
       entity.key.kind.must_equal   obj.key.kind
       entity.key.id.must_equal     obj.key.id
       entity.key.name.must_equal   obj.key.name
       entity.properties.must_equal obj.properties
+      connection.delete entity
     end
   end
 end
