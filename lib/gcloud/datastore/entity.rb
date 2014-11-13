@@ -49,7 +49,9 @@ module Gcloud
       end
 
       def properties
-        Array(@_entity.property).map { |p| [p.name, Proto.from_proto_value(p.value)] }
+        Array(@_entity.property).map do |p|
+          [p.name, Proto.from_proto_value(p.value)]
+        end
       end
 
       def to_proto #:nodoc:
