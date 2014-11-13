@@ -104,9 +104,7 @@ module Gcloud
         po = Proto::PropertyOrder.new
         po.property = Proto::PropertyReference.new
         po.property.name = name
-        if direction.to_s.downcase.start_with? "d"
-          po.direction = Proto::PropertyOrder::Direction::DESCENDING
-        end
+        po.direction = Proto.to_prop_order_direction direction
         @_query.order << po
         self
       end

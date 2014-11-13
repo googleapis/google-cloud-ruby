@@ -100,6 +100,15 @@ module Gcloud
         PROP_FILTER_OPS[str.to_s.downcase] ||
         PropertyFilter::Operator::EQUAL
       end
+
+      def self.to_prop_order_direction direction
+        if direction.to_s.downcase.start_with? "d"
+          PropertyOrder::Direction::DESCENDING
+        else
+          PropertyOrder::Direction::ASCENDING
+        end
+      end
+
     end
     # rubocop:enable all
   end
