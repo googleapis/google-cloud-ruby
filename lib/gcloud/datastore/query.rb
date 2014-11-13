@@ -201,7 +201,7 @@ module Gcloud
       def new_property_filter name, operator, value
         Proto::PropertyFilter.new.tap do |pf|
           pf.property = new_property_reference name
-          pf.operator = to_proto_operator operator
+          pf.operator = Proto.to_prop_filter_op operator
           pf.value = Proto.to_proto_value value
         end
       end
@@ -234,29 +234,6 @@ module Gcloud
         dc = cursor.to_s.unpack("m").first.force_encoding Encoding::ASCII_8BIT
         dc = nil if dc.empty?
         dc
-      end
-
-      #:nodoc:
-      OPERATORS = {
-        "<"   => Proto::PropertyFilter::Operator::LESS_THAN,
-        "lt"  => Proto::PropertyFilter::Operator::LESS_THAN,
-        "<="  => Proto::PropertyFilter::Operator::LESS_THAN_OR_EQUAL,
-        "lte" => Proto::PropertyFilter::Operator::LESS_THAN_OR_EQUAL,
-        ">"   => Proto::PropertyFilter::Operator::GREATER_THAN,
-        "gt"  => Proto::PropertyFilter::Operator::GREATER_THAN,
-        ">="  => Proto::PropertyFilter::Operator::GREATER_THAN_OR_EQUAL,
-        "gte" => Proto::PropertyFilter::Operator::GREATER_THAN_OR_EQUAL,
-        "="   => Proto::PropertyFilter::Operator::EQUAL,
-        "eq"  => Proto::PropertyFilter::Operator::EQUAL,
-        "eql" => Proto::PropertyFilter::Operator::EQUAL,
-        "~"            => Proto::PropertyFilter::Operator::HAS_ANCESTOR,
-        "~>"           => Proto::PropertyFilter::Operator::HAS_ANCESTOR,
-        "ancestor"     => Proto::PropertyFilter::Operator::HAS_ANCESTOR,
-        "has_ancestor" => Proto::PropertyFilter::Operator::HAS_ANCESTOR,
-        "has ancestor" => Proto::PropertyFilter::Operator::HAS_ANCESTOR }
-
-      def to_proto_operator str #:nodoc:
-        OPERATORS[str.to_s.downcase] || Proto::PropertyFilter::Operator::EQUAL
       end
     end
   end
