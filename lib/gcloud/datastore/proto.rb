@@ -16,6 +16,8 @@ require "gcloud/proto/datastore_v1.pb"
 
 module Gcloud
   module Datastore
+    # rubocop:disable all
+
     ##
     # Proto is the module that contains all Protocol Buffer objects.
     #
@@ -66,7 +68,6 @@ module Gcloud
         end # TODO: entity, blob_value, blob_key_value, list_value
         v
       end
-      # rubocop:enable all
 
       def self.microseconds_from_time time
         (time.utc.to_f * 1000000).to_i
@@ -75,6 +76,31 @@ module Gcloud
       def self.time_from_microseconds microseconds
         Time.at(microseconds / 1000000, microseconds % 1000000).utc
       end
+
+      #:nodoc:
+      PROP_FILTER_OPS = {
+        "<"   => PropertyFilter::Operator::LESS_THAN,
+        "lt"  => PropertyFilter::Operator::LESS_THAN,
+        "<="  => PropertyFilter::Operator::LESS_THAN_OR_EQUAL,
+        "lte" => PropertyFilter::Operator::LESS_THAN_OR_EQUAL,
+        ">"   => PropertyFilter::Operator::GREATER_THAN,
+        "gt"  => PropertyFilter::Operator::GREATER_THAN,
+        ">="  => PropertyFilter::Operator::GREATER_THAN_OR_EQUAL,
+        "gte" => PropertyFilter::Operator::GREATER_THAN_OR_EQUAL,
+        "="   => PropertyFilter::Operator::EQUAL,
+        "eq"  => PropertyFilter::Operator::EQUAL,
+        "eql" => PropertyFilter::Operator::EQUAL,
+        "~"            => PropertyFilter::Operator::HAS_ANCESTOR,
+        "~>"           => PropertyFilter::Operator::HAS_ANCESTOR,
+        "ancestor"     => PropertyFilter::Operator::HAS_ANCESTOR,
+        "has_ancestor" => PropertyFilter::Operator::HAS_ANCESTOR,
+        "has ancestor" => PropertyFilter::Operator::HAS_ANCESTOR }
+
+      def self.to_prop_filter_op str
+        PROP_FILTER_OPS[str.to_s.downcase] ||
+        PropertyFilter::Operator::EQUAL
+      end
     end
+    # rubocop:enable all
   end
 end
