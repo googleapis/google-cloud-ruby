@@ -263,7 +263,7 @@ describe Gcloud::Datastore::Query do
   end
 
   def order_as_arrays proto
-    order = proto.order.map do |o|
+    proto.order.map do |o|
       [o.property.name,
       (o.direction == Gcloud::Datastore::Proto::PropertyOrder::Direction::DESCENDING) ? :desc : :asc]
     end

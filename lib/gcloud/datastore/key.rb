@@ -26,7 +26,7 @@ module Gcloud
     #
     #   key = Gcloud::Datastore::Key.new "User", "username"
     class Key
-      attr_accessor :kind, :id, :name, :dataset_id, :namespace, :parent
+      attr_accessor :kind, :dataset_id, :namespace
       def initialize kind = nil, id_or_name = nil
         @kind = kind
         if id_or_name.is_a? Integer
@@ -40,17 +40,20 @@ module Gcloud
         @name = nil if new_id
         @id = new_id
       end
+      attr_reader :id
 
       def name= new_name #:nodoc:
         @id = nil if new_name
         @name = new_name
       end
+      attr_reader :name
 
       def parent= new_parent #:nodoc:
         # store key if given an entity
         new_parent = new_parent.key if new_parent.respond_to? :key
         @parent = new_parent
       end
+      attr_reader :parent
 
       ##
       # A representation of the Key's path as an array of arrays.
