@@ -24,8 +24,8 @@ module Gcloud
     # API that gcloud intends to expose. The implementation,
     # and the module's existance, may change without warning.
     module Proto #:nodoc:
-
       # rubocop:disable all
+
       def self.from_proto_value proto_value
         if !proto_value.timestamp_microseconds_value.nil?
           microseconds = proto_value.timestamp_microseconds_value
