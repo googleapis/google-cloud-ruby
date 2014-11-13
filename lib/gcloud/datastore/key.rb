@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "gcloud/proto/datastore_v1.pb"
+require "gcloud/datastore/proto"
 
 module Gcloud
   module Datastore

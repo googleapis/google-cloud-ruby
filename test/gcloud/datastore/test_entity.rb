@@ -56,9 +56,9 @@ describe Gcloud::Datastore::Entity do
     proto.property = [Gcloud::Datastore::Proto::Property.new,
                       Gcloud::Datastore::Proto::Property.new]
     proto.property.first.name = "name"
-    proto.property.first.value = Gcloud::Datastore::Property.encode "User McNumber"
+    proto.property.first.value = Gcloud::Datastore::Proto.to_proto_value "User McNumber"
     proto.property.last.name = "email"
-    proto.property.last.value = Gcloud::Datastore::Property.encode "number@example.net"
+    proto.property.last.value = Gcloud::Datastore::Proto.to_proto_value "number@example.net"
 
     entity_from_proto = Gcloud::Datastore::Entity.from_proto proto
 
