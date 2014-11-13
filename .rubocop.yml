@@ -15,5 +15,5 @@ Style/NumericLiterals:
   Enabled: false
 Style/ClassVars:
   Enabled: false
-Style/ClassLength:
+Metrics/ClassLength:
   Enabled: false
