@@ -58,9 +58,7 @@ module Gcloud
       #   empty_key = Gcloud::Datastore::Key.new "Task"
       #   task_keys = conn.allocate_ids empty_key, 5
       def allocate_ids incomplete_key, count = 1
-        if incomplete_key.complete?
-          fail "An incomplete key must be provided."
-        end
+        fail "An incomplete key must be provided." if incomplete_key.complete?
 
         allocate_ids = Proto::AllocateIdsRequest.new
         allocate_ids.key = count.times.map { incomplete_key.to_proto }
@@ -158,17 +156,15 @@ module Gcloud
       #   end
       def transaction
         tx = Transaction.new self
+        return tx unless block_given?
 
-        if block_given?
-          begin
-            yield tx
-            tx.commit
-          rescue
-            tx.rollback
-            fail "Transaction failed to commit."
-          end
+        begin
+          yield tx
+          tx.commit
+        rescue
+          tx.rollback
+          raise "Transaction failed to commit."
         end
-        tx
       end
 
       protected
