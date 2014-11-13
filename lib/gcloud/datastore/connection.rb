@@ -119,7 +119,7 @@ module Gcloud
           Gcloud::Datastore::Entity.from_proto result.entity
         end
         Gcloud::Datastore::List.new results,
-                                    encode_cursor(response.batch.end_cursor)
+          Proto.encode_cursor(response.batch.end_cursor)
       end
 
       ##
@@ -173,10 +173,6 @@ module Gcloud
         Proto::RunQueryRequest.new.tap do |rq|
           rq.query = query_proto
         end
-      end
-
-      def encode_cursor cursor
-        Array(cursor).pack("m").chomp
       end
 
       def init_client! options
