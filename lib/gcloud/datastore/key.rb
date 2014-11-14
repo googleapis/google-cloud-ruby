@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "gcloud/proto/datastore_v1.pb"
+require "gcloud/datastore/proto"
 
 module Gcloud
   module Datastore
@@ -26,7 +26,7 @@ module Gcloud
     #
     #   key = Gcloud::Datastore::Key.new "User", "username"
     class Key
-      attr_accessor :kind, :id, :name, :dataset_id, :namespace, :parent
+      attr_accessor :kind, :dataset_id, :namespace
       def initialize kind = nil, id_or_name = nil
         @kind = kind
         if id_or_name.is_a? Integer
@@ -40,17 +40,20 @@ module Gcloud
         @name = nil if new_id
         @id = new_id
       end
+      attr_reader :id
 
       def name= new_name #:nodoc:
         @id = nil if new_name
         @name = new_name
       end
+      attr_reader :name
 
       def parent= new_parent #:nodoc:
         # store key if given an entity
         new_parent = new_parent.key if new_parent.respond_to? :key
         @parent = new_parent
       end
+      attr_reader :parent
 
       ##
       # A representation of the Key's path as an array of arrays.
@@ -84,9 +87,9 @@ module Gcloud
       def to_proto #:nodoc:
         Proto::Key.new.tap do |k|
           k.path_element = path.map do |pe_kind, pe_id_or_name|
-            new_path_element pe_kind, pe_id_or_name
+            Proto.new_path_element pe_kind, pe_id_or_name
           end
-          k.partition_id = new_partition_id dataset_id, namespace
+          k.partition_id = Proto.new_partition_id dataset_id, namespace
         end
       end
 
@@ -113,26 +116,6 @@ module Gcloud
         key
       end
       # rubocop:enable all
-
-      protected
-
-      def new_path_element new_kind, new_id_or_name
-        Proto::Key::PathElement.new.tap do |pe|
-          pe.kind = new_kind
-          if new_id_or_name.is_a? Integer
-            pe.id = new_id_or_name
-          else
-            pe.name = new_id_or_name
-          end
-        end
-      end
-
-      def new_partition_id new_dataset_id, new_namespace
-        Proto::PartitionId.new.tap do |pi|
-          pi.dataset_id = new_dataset_id
-          pi.namespace  = new_namespace
-        end
-      end
     end
   end
 end

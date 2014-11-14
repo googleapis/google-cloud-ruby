@@ -49,7 +49,7 @@ describe Gcloud::Datastore::Query do
     assert_equal "completed", new_filter.property_filter.property.name
     assert_equal Gcloud::Datastore::Proto::PropertyFilter::Operator::EQUAL,
                  new_filter.property_filter.operator
-    assert_equal true, Gcloud::Datastore::Property.decode(new_filter.property_filter.value)
+    assert_equal true, Gcloud::Datastore::Proto.from_proto_value(new_filter.property_filter.value)
 
     # Add a second filter and generate new protobuf
     # Use the filter alias to add the second filter
@@ -63,7 +63,7 @@ describe Gcloud::Datastore::Query do
     assert_equal "completed", first_filter.property_filter.property.name
     assert_equal Gcloud::Datastore::Proto::PropertyFilter::Operator::EQUAL,
                  first_filter.property_filter.operator
-    assert_equal true, Gcloud::Datastore::Property.decode(first_filter.property_filter.value)
+    assert_equal true, Gcloud::Datastore::Proto.from_proto_value(first_filter.property_filter.value)
 
     second_filter = proto.filter.composite_filter.filter.last
     refute_nil second_filter.property_filter
@@ -72,7 +72,7 @@ describe Gcloud::Datastore::Query do
     assert_equal Gcloud::Datastore::Proto::PropertyFilter::Operator::GREATER_THAN,
                  second_filter.property_filter.operator
     assert_equal Time.new(2014, 1, 1, 0, 0, 0, 0),
-                 Gcloud::Datastore::Property.decode(second_filter.property_filter.value)
+                 Gcloud::Datastore::Proto.from_proto_value(second_filter.property_filter.value)
   end
 
   it "can order results" do
@@ -201,7 +201,7 @@ describe Gcloud::Datastore::Query do
     assert_equal "__key__", ancestor_filter.property_filter.property.name
     assert_equal Gcloud::Datastore::Proto::PropertyFilter::Operator::HAS_ANCESTOR,
                  ancestor_filter.property_filter.operator
-    key = Gcloud::Datastore::Property.decode(ancestor_filter.property_filter.value)
+    key = Gcloud::Datastore::Proto.from_proto_value(ancestor_filter.property_filter.value)
     key.kind.must_equal ancestor_key.kind
     key.id.must_equal   ancestor_key.id
     key.name.must_equal ancestor_key.name
@@ -221,7 +221,7 @@ describe Gcloud::Datastore::Query do
     assert_equal "__key__", ancestor_filter.property_filter.property.name
     assert_equal Gcloud::Datastore::Proto::PropertyFilter::Operator::HAS_ANCESTOR,
                  ancestor_filter.property_filter.operator
-    key = Gcloud::Datastore::Property.decode(ancestor_filter.property_filter.value)
+    key = Gcloud::Datastore::Proto.from_proto_value(ancestor_filter.property_filter.value)
     key.kind.must_equal ancestor_key.kind
     key.id.must_equal   ancestor_key.id
     key.name.must_equal ancestor_key.name
@@ -248,7 +248,7 @@ describe Gcloud::Datastore::Query do
     filter = proto.filter.composite_filter.filter.first
     filter.property_filter.property.name.must_equal "completed"
     filter.property_filter.operator.must_equal Gcloud::Datastore::Proto::PropertyFilter::Operator::EQUAL
-    Gcloud::Datastore::Property.decode(filter.property_filter.value).must_equal true
+    Gcloud::Datastore::Proto.from_proto_value(filter.property_filter.value).must_equal true
 
     proto.group_by.wont_be :nil?
     proto.group_by.count.must_equal 1
@@ -263,7 +263,7 @@ describe Gcloud::Datastore::Query do
   end
 
   def order_as_arrays proto
-    order = proto.order.map do |o|
+    proto.order.map do |o|
       [o.property.name,
       (o.direction == Gcloud::Datastore::Proto::PropertyOrder::Direction::DESCENDING) ? :desc : :asc]
     end

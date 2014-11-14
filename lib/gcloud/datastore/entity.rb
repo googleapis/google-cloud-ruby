@@ -13,8 +13,7 @@
 # limitations under the License.
 
 require "gcloud/datastore/key"
-require "gcloud/datastore/property"
-require "gcloud/proto/datastore_v1.pb"
+require "gcloud/datastore/proto"
 
 module Gcloud
   module Datastore
@@ -34,7 +33,7 @@ module Gcloud
 
       def [] prop_name
         prop = Array(@_entity.property).find { |p| p.name == prop_name }
-        Property.decode prop.value
+        Proto.from_proto_value prop.value
       rescue
         nil
       end
@@ -45,12 +44,14 @@ module Gcloud
           p.name = prop_name
           @_entity.property << p
         end
-        prop.value = Property.encode prop_value
+        prop.value = Proto.to_proto_value prop_value
         prop_value
       end
 
       def properties
-        Array(@_entity.property).map { |p| [p.name, Property.decode(p.value)] }
+        Array(@_entity.property).map do |p|
+          [p.name, Proto.from_proto_value(p.value)]
+        end
       end
 
       def to_proto #:nodoc:

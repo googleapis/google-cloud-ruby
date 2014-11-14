@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "gcloud/proto/datastore_v1.pb"
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
+require "gcloud/datastore/proto"
 
 module Gcloud
   module Datastore
@@ -61,12 +61,12 @@ module Gcloud
       #   completed_tasks = Gcloud::Datastore.connection.run query
       def where name, operator, value
         # Initialize filter
-        @_query.filter ||= Proto::Filter.new.tap do |f|
-          f.composite_filter = new_composite_filter
+        @_query.filter ||= Proto.new_filter.tap do |f|
+          f.composite_filter = Proto.new_composite_filter
         end
         # Create new property filter
-        filter = Proto::Filter.new.tap do |f|
-          f.property_filter = new_property_filter name, operator, value
+        filter = Proto.new_filter.tap do |f|
+          f.property_filter = Proto.new_property_filter name, operator, value
         end
         # Add new property filter to the list
         @_query.filter.composite_filter.filter << filter
@@ -104,9 +104,7 @@ module Gcloud
         po = Proto::PropertyOrder.new
         po.property = Proto::PropertyReference.new
         po.property.name = name
-        if direction.to_s.downcase.start_with? "d"
-          po.direction = Proto::PropertyOrder::Direction::DESCENDING
-        end
+        po.direction = Proto.to_prop_order_direction direction
         @_query.order << po
         self
       end
@@ -148,7 +146,7 @@ module Gcloud
       #
       #   paginated_tasks = Gcloud::Datastore.connection.run query
       def start cursor
-        @_query.start_cursor = decode_cursor cursor
+        @_query.start_cursor = Proto.decode_cursor cursor
         self
       end
       alias_method :cursor, :start
@@ -163,7 +161,7 @@ module Gcloud
       #   partial_tasks = Gcloud::Datastore.connection.run query
       def select *names
         @_query.projection ||= []
-        @_query.projection += new_property_expressions(*names)
+        @_query.projection += Proto.new_property_expressions(*names)
         self
       end
       alias_method :projection, :select
@@ -178,7 +176,7 @@ module Gcloud
       #   grouped_tasks = Gcloud::Datastore.connection.run query
       def group_by *names
         @_query.group_by ||= []
-        @_query.group_by += new_property_references(*names)
+        @_query.group_by += Proto.new_property_references(*names)
         self
       end
 
@@ -188,76 +186,6 @@ module Gcloud
         @_query
       end
       # rubocop:enable Style/TrivialAccessors
-
-      protected
-
-      def new_composite_filter
-        Proto::CompositeFilter.new.tap do |cf|
-          cf.operator = Proto::CompositeFilter::Operator::AND
-          cf.filter = []
-        end
-      end
-
-      def new_property_filter name, operator, value
-        Proto::PropertyFilter.new.tap do |pf|
-          pf.property = new_property_reference name
-          pf.operator = to_proto_operator operator
-          pf.value = Property.encode value
-        end
-      end
-
-      def new_property_expressions *names
-        names.map do |name|
-          new_property_expression name
-        end
-      end
-
-      def new_property_expression name
-        Proto::PropertyExpression.new.tap do |pe|
-          pe.property = new_property_reference name
-        end
-      end
-
-      def new_property_references *names
-        names.map do |name|
-          new_property_reference name
-        end
-      end
-
-      def new_property_reference name
-        Proto::PropertyReference.new.tap do |pr|
-          pr.name = name
-        end
-      end
-
-      def decode_cursor cursor
-        dc = cursor.to_s.unpack("m").first.force_encoding Encoding::ASCII_8BIT
-        dc = nil if dc.empty?
-        dc
-      end
-
-      #:nodoc:
-      OPERATORS = {
-        "<"   => Proto::PropertyFilter::Operator::LESS_THAN,
-        "lt"  => Proto::PropertyFilter::Operator::LESS_THAN,
-        "<="  => Proto::PropertyFilter::Operator::LESS_THAN_OR_EQUAL,
-        "lte" => Proto::PropertyFilter::Operator::LESS_THAN_OR_EQUAL,
-        ">"   => Proto::PropertyFilter::Operator::GREATER_THAN,
-        "gt"  => Proto::PropertyFilter::Operator::GREATER_THAN,
-        ">="  => Proto::PropertyFilter::Operator::GREATER_THAN_OR_EQUAL,
-        "gte" => Proto::PropertyFilter::Operator::GREATER_THAN_OR_EQUAL,
-        "="   => Proto::PropertyFilter::Operator::EQUAL,
-        "eq"  => Proto::PropertyFilter::Operator::EQUAL,
-        "eql" => Proto::PropertyFilter::Operator::EQUAL,
-        "~"            => Proto::PropertyFilter::Operator::HAS_ANCESTOR,
-        "~>"           => Proto::PropertyFilter::Operator::HAS_ANCESTOR,
-        "ancestor"     => Proto::PropertyFilter::Operator::HAS_ANCESTOR,
-        "has_ancestor" => Proto::PropertyFilter::Operator::HAS_ANCESTOR,
-        "has ancestor" => Proto::PropertyFilter::Operator::HAS_ANCESTOR }
-
-      def to_proto_operator str #:nodoc:
-        OPERATORS[str.to_s.downcase] || Proto::PropertyFilter::Operator::EQUAL
-      end
     end
   end
 end

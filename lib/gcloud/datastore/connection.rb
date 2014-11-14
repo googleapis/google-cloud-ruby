@@ -58,9 +58,7 @@ module Gcloud
       #   empty_key = Gcloud::Datastore::Key.new "Task"
       #   task_keys = conn.allocate_ids empty_key, 5
       def allocate_ids incomplete_key, count = 1
-        if incomplete_key.complete?
-          fail "An incomplete key must be provided."
-        end
+        fail "An incomplete key must be provided." if incomplete_key.complete?
 
         allocate_ids = Proto::AllocateIdsRequest.new
         allocate_ids.key = count.times.map { incomplete_key.to_proto }
@@ -72,7 +70,6 @@ module Gcloud
         end
       end
 
-      # rubocop:disable all
       def save *entities
         mut = mutation
 
@@ -115,13 +112,13 @@ module Gcloud
       end
 
       def run query
-        run_query = new_run_query_request query.to_proto
+        run_query = Proto.new_run_query_request query.to_proto
         response = Proto::RunQueryResponse.decode rpc("runQuery", run_query)
         results = Array(response.batch.entity_result).map do |result|
           Gcloud::Datastore::Entity.from_proto result.entity
         end
-        Gcloud::Datastore::List.new results,
-                                    encode_cursor(response.batch.end_cursor)
+        cursor = Proto.encode_cursor response.batch.end_cursor
+        Gcloud::Datastore::List.new results, cursor
       end
 
       ##
@@ -158,30 +155,18 @@ module Gcloud
       #   end
       def transaction
         tx = Transaction.new self
+        return tx unless block_given?
 
-        if block_given?
-          begin
-            yield tx
-            tx.commit
-          rescue
-            tx.rollback
-            fail "Transaction failed to commit."
-          end
+        begin
+          yield tx
+          tx.commit
+        rescue
+          tx.rollback
+          raise "Transaction failed to commit."
         end
-        tx
       end
 
       protected
-
-      def new_run_query_request query_proto
-        Proto::RunQueryRequest.new.tap do |rq|
-          rq.query = query_proto
-        end
-      end
-
-      def encode_cursor cursor
-        Array(cursor).pack("m").chomp
-      end
 
       def init_client! options
         client_opts = {
