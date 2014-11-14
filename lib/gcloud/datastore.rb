@@ -62,12 +62,15 @@ module Gcloud
     #   devserver = Gcloud::Datastore.devserver "my-todo-project"
     #   devserver.save entity
     #
+    # The URL of the devserver should be set in the DATASTORE_HOST
+    # environment variable.
+    #
     # See https://cloud.google.com/datastore/docs/tools/devserver
     def self.devserver project = ENV["DEVSERVER_PROJECT"],
-                       host = "localhost", port = 8080
+                       host    = ENV["DEVSERVER_HOST"]
       credentials = Gcloud::Datastore::Credentials::Empty.new
       devserver = Gcloud::Datastore::Dataset.new project, credentials
-      devserver.connection.http = Faraday.new url: "http://#{host}:#{port}"
+      devserver.connection.http_host = (host || "http://localhost:8080")
       devserver
     end
   end

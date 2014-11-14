@@ -94,9 +94,18 @@ module Gcloud
       attr_writer :default_http_headers # :nodoc:
 
       def http # :nodoc:
-        @http ||= Faraday.new url: API_URL
+        @http ||= Faraday.new url: http_host
       end
       attr_writer :http # :nodoc:
+
+      def http_host
+        @http_host || ENV["DATASTORE_HOST"] || API_URL
+      end
+
+      def http_host= new_http_host
+        @http = nil # Reset the HTTP connection when host is set
+        @http_host = new_http_host
+      end
 
       protected
 
