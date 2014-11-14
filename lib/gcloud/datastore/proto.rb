@@ -19,15 +19,16 @@ module Gcloud
     # rubocop:disable all
 
     ##
-    # Proto is the module that contains all Protocol Buffer objects.
+    # Proto is the namespace that contains all Protocol Buffer objects.
     #
-    # This module is an implementation detail and as such
-    # should not be relied on. It is not part of the public
-    # API that gcloud intends to expose. The implementation,
-    # and the module's existance, may change without warning.
+    # The methods in this module are for convenience in using the
+    # Protocol Buffer objects and as such can change in the future.
+    # Neither the convenience methods nor the Protocol Buffer objects
+    # are not part of the gcloud public API. These methods, and even
+    # this module's existance, may change in the future.
+    #
+    # You have been warned.
     module Proto #:nodoc:
-      # rubocop:disable all
-
       def self.from_proto_value proto_value
         if !proto_value.timestamp_microseconds_value.nil?
           microseconds = proto_value.timestamp_microseconds_value
@@ -44,7 +45,7 @@ module Gcloud
           return proto_value.string_value
         else
           nil
-        end # TODO: blob? Entity?
+        end # TODO: Entity, Array
       end
 
       def self.to_proto_value value
@@ -65,7 +66,7 @@ module Gcloud
           v.integer_value = value
         elsif String === value
           v.string_value = value
-        end # TODO: entity, blob_value, blob_key_value, list_value
+        end # TODO: entity, list_value
         v
       end
 
