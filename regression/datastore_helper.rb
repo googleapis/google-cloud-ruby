@@ -15,23 +15,18 @@ require "gcloud/datastore"
 #     end
 #   end
 class DatastoreTest < Minitest::Test
-  attr_accessor :connection, :dataset_id
+  attr_accessor :dataset
 
   ##
-  # Setup connection based on available ENV variables
+  # Setup project based on available ENV variables
   def setup
-    Gcloud::Datastore.connection = nil
-    if @dataset_id = ENV["DEVSERVER_PROJECT"]
-      @connection = Gcloud::Datastore.devserver
+    if ENV["DEVSERVER_PROJECT"]
+      @dataset = Gcloud::Datastore.devserver
     else
-      @dataset_id = ENV["DATASTORE_PROJECT"]
-      @connection = Gcloud::Datastore.new
+      @dataset = Gcloud::Datastore.dataset
     end
 
-    refute_nil @dataset_id
-    refute_nil @connection
-    assert_equal @dataset_id, @connection.dataset_id
-    assert_equal @connection, Gcloud::Datastore.connection
+    refute_nil @dataset, "You do not have an active dataset to run the tests."
 
     super
   end

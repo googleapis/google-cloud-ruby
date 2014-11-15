@@ -134,6 +134,16 @@ module Gcloud
         end
       end
 
+      def self.new_mutation
+        Mutation.new.tap do |m|
+          m.upsert = []
+          m.update = []
+          m.insert = []
+          m.insert_auto_id = []
+          m.delete = []
+        end
+      end
+
       def self.new_property_filter name, operator, value
         PropertyFilter.new.tap do |pf|
           pf.property = new_property_reference name
@@ -190,6 +200,5 @@ module Gcloud
         end
       end
     end
-    # rubocop:enable all
   end
 end

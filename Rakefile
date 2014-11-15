@@ -17,6 +17,8 @@ Hoe.spec "gcloud" do
   self.readme_file  = "README.md"
   self.testlib      = :minitest
 
+  self.spec_extras[:rdoc_options] = ["--main", "README.md", "--exclude", "lib/gcloud/proto/"]
+
   license "Apache-2.0"
 
   dependency "beefcake", "~> 1.0"

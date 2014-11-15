@@ -34,13 +34,17 @@ namespace :test do
   end
 
   desc "Runs the regression tests against a locally runnning devserver."
-  task :devserver, :project do |t, args|
+  task :devserver, :project, :host do |t, args|
     project = args[:project]
     project ||= ENV["DEVSERVER_PROJECT"]
+    host = args[:host]
+    host ||= ENV["DEVSERVER_HOST"]
+    host ||= "http://localhost:8080"
     if project.nil?
       fail "You must provide a project. e.g. rake test:devserver[test123] or DEVSERVER_PROJECT=test123 rake test:devserver"
     end
     ENV["DEVSERVER_PROJECT"] = project # always overwrite from command line
+    ENV["DEVSERVER_HOST"]    = host    # always overwrite from command line
 
     $LOAD_PATH.unshift "lib", "test", "regression"
     Dir.glob("regression/**/test*.rb").each { |file| require_relative "../#{file}"}
