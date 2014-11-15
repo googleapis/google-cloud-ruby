@@ -1,0 +1,16 @@
+Tue, 18 Nov 2014 10:35:57 -0700
+lib/gcloud/datastore/connection.rb	Tue, 18 Nov 2014 10:35:46 -0700
+lib/gcloud/datastore/credentials.rb	Tue, 18 Nov 2014 10:35:46 -0700
+lib/gcloud/datastore/dataset.rb	Tue, 18 Nov 2014 10:35:46 -0700
+lib/gcloud/datastore/entity.rb	Tue, 18 Nov 2014 10:35:46 -0700
+lib/gcloud/datastore/key.rb	Tue, 18 Nov 2014 10:35:46 -0700
+lib/gcloud/datastore/list.rb	Tue, 18 Nov 2014 10:35:46 -0700
+lib/gcloud/datastore/proto.rb	Tue, 18 Nov 2014 10:35:46 -0700
+lib/gcloud/datastore/query.rb	Tue, 18 Nov 2014 10:35:46 -0700
+lib/gcloud/datastore/transaction.rb	Tue, 18 Nov 2014 10:35:46 -0700
+lib/gcloud/datastore.rb	Tue, 18 Nov 2014 10:35:46 -0700
+lib/gcloud/version.rb	Tue, 18 Nov 2014 10:35:46 -0700
+lib/gcloud.rb	Tue, 18 Nov 2014 10:35:46 -0700
+CHANGELOG.md	Tue, 18 Nov 2014 10:35:46 -0700
+CONTRIBUTING.md	Tue, 18 Nov 2014 10:35:46 -0700
+README.md	Tue, 18 Nov 2014 10:35:46 -0700

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  {% include head.html %}
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <header class="page-header" role="banner">
+      <h1 class="logo"><img src="{{ "/img/logo-full.svg" | prepend: site.baseurl }}" alt="Google Cloud Platform" /></h1>
+
+      {% include main_nav.html %}
+
+    </header><!-- end of .page-header -->
+
+    <article class="main" role="main">
+
+      {{ content }}
+
+    </article><!-- end of .main -->
+
+    {% include footer.html %}
+
+  </body>
+</html>
