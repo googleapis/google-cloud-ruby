@@ -36,6 +36,7 @@ describe "Proto Value methods" do
     value.boolean_value.must_be :nil?
     value.double_value.must_be :nil?
     value.integer_value.must_be :nil?
+    value.list_value.must_be :nil?
   end
 
   it "decodes a string" do
@@ -55,6 +56,7 @@ describe "Proto Value methods" do
     value.double_value.must_be :nil?
     value.integer_value.must_be :nil?
     value.string_value.must_be :nil?
+    value.list_value.must_be :nil?
   end
 
   it "decodes true" do
@@ -73,6 +75,7 @@ describe "Proto Value methods" do
     value.double_value.must_be :nil?
     value.integer_value.must_be :nil?
     value.string_value.must_be :nil?
+    value.list_value.must_be :nil?
   end
 
   it "decodes false" do
@@ -91,6 +94,7 @@ describe "Proto Value methods" do
     value.double_value.must_be :nil?
     value.integer_value.must_be :nil?
     value.string_value.must_be :nil?
+    value.list_value.must_be :nil?
   end
 
   it "decodes timestamp" do
@@ -110,6 +114,7 @@ describe "Proto Value methods" do
     value.boolean_value.must_be :nil?
     value.double_value.must_be :nil?
     value.string_value.must_be :nil?
+    value.list_value.must_be :nil?
   end
 
   it "decodes integer" do
@@ -130,6 +135,7 @@ describe "Proto Value methods" do
     value.boolean_value.must_be :nil?
     value.integer_value.must_be :nil?
     value.string_value.must_be :nil?
+    value.list_value.must_be :nil?
   end
 
   it "decodes float" do
@@ -150,6 +156,7 @@ describe "Proto Value methods" do
     value.double_value.must_be :nil?
     value.integer_value.must_be :nil?
     value.string_value.must_be :nil?
+    value.list_value.must_be :nil?
   end
 
   it "decodes Key" do
@@ -177,6 +184,7 @@ describe "Proto Value methods" do
     value.double_value.must_be :nil?
     value.integer_value.must_be :nil?
     value.string_value.must_be :nil?
+    value.list_value.must_be :nil?
   end
 
   it "decodes Entity" do
@@ -192,5 +200,33 @@ describe "Proto Value methods" do
     # so let's make sure the proto values are equal.
     # (they are actually the same object, so this works...)
     raw.to_proto.must_equal entity.to_proto
+  end
+
+  it "encodes Array" do
+    array = ["string", 123, true]
+    value = Gcloud::Datastore::Proto.to_proto_value array
+    value.list_value.wont_be :nil?
+    value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
+    value.timestamp_microseconds_value.must_be :nil?
+    value.boolean_value.must_be :nil?
+    value.double_value.must_be :nil?
+    value.integer_value.must_be :nil?
+    value.string_value.must_be :nil?
+  end
+
+  it "decodes List" do
+    value = Gcloud::Datastore::Proto::Value.new
+    value.list_value = [
+      Gcloud::Datastore::Proto::Value.new.tap { |v| v.string_value = "string" },
+      Gcloud::Datastore::Proto::Value.new.tap { |v| v.integer_value = 123 },
+      Gcloud::Datastore::Proto::Value.new.tap { |v| v.boolean_value = true },
+    ]
+    raw = Gcloud::Datastore::Proto.from_proto_value value
+    assert_kind_of Array, raw
+    raw.count.must_equal 3
+    raw[0].must_equal "string"
+    raw[1].must_equal 123
+    raw[2].must_equal true
   end
 end

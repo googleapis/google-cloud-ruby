@@ -45,9 +45,13 @@ module Gcloud
           proto_value.integer_value
         elsif !proto_value.string_value.nil?
           return proto_value.string_value
+        elsif !proto_value.list_value.nil?
+          return Array(proto_value.list_value).map do |item|
+            from_proto_value item
+          end
         else
           nil
-        end # TODO: Entity, Array
+        end
       end
 
       def self.to_proto_value value
@@ -70,7 +74,9 @@ module Gcloud
           v.integer_value = value
         elsif String === value
           v.string_value = value
-        end # TODO: entity, list_value
+        elsif Array === value
+          v.list_value = value.map { |item| to_proto_value item }
+        end
         v
       end
 
