@@ -68,4 +68,33 @@ describe Gcloud::Datastore::Entity do
     entity_from_proto.properties.must_include ["name", "User McNumber"]
     entity_from_proto.properties.must_include ["email", "number@example.net"]
   end
+
+  it "can store other entities as properties" do
+    task1 = Gcloud::Datastore::Entity.new.tap do |t|
+      t.key = Gcloud::Datastore::Key.new "Task", 1111
+      t["description"] = "can persist entities"
+      t["completed"] = true
+    end
+    task2 = Gcloud::Datastore::Entity.new.tap do |t|
+      t.key = Gcloud::Datastore::Key.new "Task", 2222
+      t["description"] = "can persist lists"
+      t["completed"] = true
+    end
+    entity["tasks"] = [task1, task2]
+
+    proto = entity.to_proto
+
+    task_property = proto.property.last
+    task_property.name.must_equal "tasks"
+    task_property.value.list_value.wont_be :nil?
+    task_property.value.list_value.count.must_equal 2
+    proto_task_1 = task_property.value.list_value.first
+    proto_task_2 = task_property.value.list_value.last
+    proto_task_1.wont_be :nil?
+    proto_task_2.wont_be :nil?
+    proto_task_1.entity_value.wont_be :nil?
+    proto_task_2.entity_value.wont_be :nil?
+    proto_task_1.entity_value.property.find { |p| p.name == "description" }.value.string_value.must_equal "can persist entities"
+    proto_task_2.entity_value.property.find { |p| p.name == "description" }.value.string_value.must_equal "can persist lists"
+  end
 end
