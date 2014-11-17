@@ -35,6 +35,8 @@ module Gcloud
           self.time_from_microseconds microseconds
         elsif !proto_value.key_value.nil?
           Gcloud::Datastore::Key.from_proto(proto_value.key_value)
+        elsif !proto_value.entity_value.nil?
+          Gcloud::Datastore::Entity.from_proto(proto_value.entity_value)
         elsif !proto_value.boolean_value.nil?
           proto_value.boolean_value
         elsif !proto_value.double_value.nil?
@@ -54,6 +56,8 @@ module Gcloud
           v.timestamp_microseconds_value = self.microseconds_from_time value
         elsif Gcloud::Datastore::Key === value
           v.key_value = value.to_proto
+        elsif Gcloud::Datastore::Entity === value
+          v.entity_value = value.to_proto
         elsif TrueClass === value
           v.boolean_value = true
         elsif FalseClass === value

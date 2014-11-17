@@ -32,6 +32,7 @@ describe "Proto Value methods" do
     value.string_value.must_equal raw
     value.timestamp_microseconds_value.must_be :nil?
     value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
     value.boolean_value.must_be :nil?
     value.double_value.must_be :nil?
     value.integer_value.must_be :nil?
@@ -50,6 +51,7 @@ describe "Proto Value methods" do
     value.boolean_value.must_equal true
     value.timestamp_microseconds_value.must_be :nil?
     value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
     value.double_value.must_be :nil?
     value.integer_value.must_be :nil?
     value.string_value.must_be :nil?
@@ -67,6 +69,7 @@ describe "Proto Value methods" do
     value.boolean_value.must_equal false
     value.timestamp_microseconds_value.must_be :nil?
     value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
     value.double_value.must_be :nil?
     value.integer_value.must_be :nil?
     value.string_value.must_be :nil?
@@ -83,6 +86,7 @@ describe "Proto Value methods" do
     value = Gcloud::Datastore::Proto.to_proto_value time_obj
     value.timestamp_microseconds_value.must_equal time_num
     value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
     value.boolean_value.must_be :nil?
     value.double_value.must_be :nil?
     value.integer_value.must_be :nil?
@@ -102,6 +106,7 @@ describe "Proto Value methods" do
     value.integer_value.must_equal raw
     value.timestamp_microseconds_value.must_be :nil?
     value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
     value.boolean_value.must_be :nil?
     value.double_value.must_be :nil?
     value.string_value.must_be :nil?
@@ -121,6 +126,7 @@ describe "Proto Value methods" do
     value.double_value.must_equal raw
     value.timestamp_microseconds_value.must_be :nil?
     value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
     value.boolean_value.must_be :nil?
     value.integer_value.must_be :nil?
     value.string_value.must_be :nil?
@@ -139,6 +145,7 @@ describe "Proto Value methods" do
     value = Gcloud::Datastore::Proto.to_proto_value key
     value.key_value.must_equal key.to_proto
     value.timestamp_microseconds_value.must_be :nil?
+    value.entity_value.must_be :nil?
     value.boolean_value.must_be :nil?
     value.double_value.must_be :nil?
     value.integer_value.must_be :nil?
@@ -156,5 +163,34 @@ describe "Proto Value methods" do
     # so let's make sure the proto values are equal.
     # (they are actually the same object, so this works...)
     raw.to_proto.must_equal key.to_proto
+  end
+
+  it "encodes Entity" do
+    entity = Gcloud::Datastore::Entity.new
+    entity.key = Gcloud::Datastore::Key.new "Thing", 123
+    entity["name"] = "Thing 1"
+    value = Gcloud::Datastore::Proto.to_proto_value entity
+    value.key_value.must_be :nil?
+    value.entity_value.must_equal entity.to_proto
+    value.timestamp_microseconds_value.must_be :nil?
+    value.boolean_value.must_be :nil?
+    value.double_value.must_be :nil?
+    value.integer_value.must_be :nil?
+    value.string_value.must_be :nil?
+  end
+
+  it "decodes Entity" do
+    entity = Gcloud::Datastore::Entity.new
+    entity.key = Gcloud::Datastore::Key.new "Thing", 123
+    entity["name"] = "Thing 1"
+    value = Gcloud::Datastore::Proto::Value.new
+    value.entity_value = entity.to_proto
+    raw = Gcloud::Datastore::Proto.from_proto_value value
+    assert_kind_of Gcloud::Datastore::Entity, raw
+    refute_kind_of Gcloud::Datastore::Proto::Entity, raw
+    # We don't have equality on entity yet,
+    # so let's make sure the proto values are equal.
+    # (they are actually the same object, so this works...)
+    raw.to_proto.must_equal entity.to_proto
   end
 end
