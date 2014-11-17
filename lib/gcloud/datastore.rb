@@ -29,7 +29,7 @@ module Gcloud
   #
   module Datastore
     ##
-    # Create a new Dataset
+    # Create a new Dataset.
     #
     #   entity = Gcloud::Datastore::Entity.new
     #   entity.key = Gcloud::Datastore::Key.new "Task"

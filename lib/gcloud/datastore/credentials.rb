@@ -18,15 +18,23 @@ require "signet/oauth_2/client"
 module Gcloud
   module Datastore
     ##
-    # Represents the Oauth2 signing logic.
-    class Credentials # :nodoc:
+    # Authentication credentials to Google Cloud.
+    # The most common way to create this object is to provide the path
+    # to the JSON keyfile downloaded from Google Cloud.
+    #
+    # https://developers.google.com/accounts/docs/application-default-credentials
+    class Credentials #:nodoc:
       TOKEN_CREDENTIAL_URI = "https://accounts.google.com/o/oauth2/token"
       AUDIENCE = "https://accounts.google.com/o/oauth2/token"
       SCOPE = ["https://www.googleapis.com/auth/datastore",
                "https://www.googleapis.com/auth/userinfo.email"]
 
-      attr_accessor :client
+      ##
+      # The Signet client used to sign HTTP Requests.
+      attr_accessor :client #:nodoc:
 
+      # Create a new Credential object.
+      # This will raise if the JSON keyfile is incorrect.
       def initialize keyfile
         if keyfile.nil?
           fail "You must provide a keyfile to connect with."
@@ -38,7 +46,9 @@ module Gcloud
         init_signet_client! options
       end
 
-      def sign_http_request request
+      ##
+      # Sign Oauth2 API calls.
+      def sign_http_request request #:nodoc:
         if @client
           @client.fetch_access_token! if @client.expired?
           @client.generate_authenticated_request request: request
@@ -49,7 +59,8 @@ module Gcloud
       protected
 
       ##
-      # Initializes the Signet client.
+      # Initialize the Signet client.
+      # Will raise if cannot acquire an access token.
       def init_signet_client! options
         client_opts = {
           token_credential_uri: TOKEN_CREDENTIAL_URI,
@@ -66,9 +77,9 @@ module Gcloud
 
     class Credentials
       ##
-      # Represents the empty credentials, useful for connecting
-      # to a local devserver
-      class Empty # :nodoc:
+      # Represent the empty credentials, useful for connecting
+      # to a local devserver.
+      class Empty #:nodoc:
         def sign_http_request request
           request
         end

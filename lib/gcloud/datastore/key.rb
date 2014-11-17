@@ -26,7 +26,18 @@ module Gcloud
     #
     #   key = Gcloud::Datastore::Key.new "User", "username"
     class Key
-      attr_accessor :kind, :dataset_id, :namespace
+      ##
+      # The kind of the Key.
+      attr_accessor :kind
+
+      ##
+      # The dataset_id of the Key.
+      attr_accessor :dataset_id
+
+      ##
+      # The namespace of the Key.
+      attr_accessor :namespace
+
       def initialize kind = nil, id_or_name = nil
         @kind = kind
         if id_or_name.is_a? Integer
@@ -36,29 +47,45 @@ module Gcloud
         end
       end
 
+      ##
+      # Set the id of the Key.
+      # If a name is already present it will be removed.
       def id= new_id #:nodoc:
         @name = nil if new_id
         @id = new_id
       end
+
+      ##
+      # The id of the Key.
       attr_reader :id
 
+      ##
+      # Set the name of the Key.
+      # If an id is already present it will be removed.
       def name= new_name #:nodoc:
         @id = nil if new_name
         @name = new_name
       end
+
+      ##
+      # The name of the Key.
       attr_reader :name
 
+      ##
+      # Set the parent of the Key.
       def parent= new_parent #:nodoc:
         # store key if given an entity
         new_parent = new_parent.key if new_parent.respond_to? :key
         @parent = new_parent
       end
+
+      ##
+      # The parent of the Key.
       attr_reader :parent
 
       ##
-      # A representation of the Key's path as an array of arrays.
-      # Each inner array contains two values, the kind and the id
-      # (if there is a numeric id) or name (if there is a name).
+      # Represent the Key's path (including parent) as an array of arrays.
+      # Each inner array contains two values, the kind and the id or name.
       # If neither an id or name exist then nil will be returned.
       #
       #   puts key.path #=> [["Person", "username"], ["Task", 123456]]
@@ -68,22 +95,22 @@ module Gcloud
       end
 
       ##
-      # Determines if the key is complete.
+      # Determine if the key is complete.
       # A complete key has either an id or a name.
       def complete?
         !incomplete?
       end
 
       ##
-      # Determines if the key is incomplete.
+      # Determine if the key is incomplete.
       # An incomplete key has neither an id nor a name.
       def incomplete?
         kind.nil? || (id.nil? && (name.nil? || name.empty?))
       end
 
       ##
-      # Return an new protocol buffer object populated with
-      # the data contained in the Key.
+      # Convert the Key to a protocol buffer object.
+      # This is not part of the public API.
       def to_proto #:nodoc:
         Proto::Key.new.tap do |k|
           k.path_element = path.map do |pe_kind, pe_id_or_name|
@@ -96,8 +123,8 @@ module Gcloud
       # rubocop:disable all
 
       ##
-      # Return an new Key populated with the data contained
-      # in the protocol buffer object.
+      # Create a new Key from a protocol buffer object.
+      # This is not part of the public API.
       def self.from_proto proto #:nodoc:
         # Disable rules because the complexity here is neccessary.
         key = Key.new

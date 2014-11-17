@@ -17,24 +17,36 @@ require "faraday"
 module Gcloud
   module Datastore
     ##
-    # Represents the HTTP connection to the Datastore,
+    # Represent the HTTP connection to the Datastore,
     # as well as the Datastore API calls.
-    class Connection # :nodoc:
+    #
+    # This class only deals with Protocol Buffer objects,
+    # and is not part of the public API.
+    class Connection #:nodoc:
       API_VERSION = "v1beta2"
       API_URL = "https://www.googleapis.com"
 
+      ##
+      # The project/dataset_id connected to.
       attr_accessor :dataset_id
-      attr_accessor :credentials # :nodoc:
 
       ##
-      # Creates a new Connection instance.
+      # The Credentials object for signing HTTP requests.
+      attr_accessor :credentials #:nodoc:
+
+      ##
+      # Create a new Connection instance.
+      #
+      #   conn = Gcloud::Datastore.Connection.new "my-todo-project",
+      #     Gcloud::Datastore::Credentials.new("/path/to/keyfile.json")
       def initialize dataset_id, credentials
         @dataset_id = dataset_id
         @credentials = credentials
       end
 
       ##
-      # Generate IDs for an incomplete Key.
+      # Allocate IDs for incomplete keys.
+      # (This is useful for referencing an entity before it is inserted.)
       def allocate_ids *incomplete_keys
         allocate_ids = Proto::AllocateIdsRequest.new.tap do |ai|
           ai.key = incomplete_keys
@@ -44,6 +56,8 @@ module Gcloud
         Proto::AllocateIdsResponse.decode rpc_response
       end
 
+      ##
+      # Look up entities by keys.
       def lookup *keys
         lookup = Proto::LookupRequest.new
         lookup.key = keys
@@ -51,6 +65,7 @@ module Gcloud
         Proto::LookupResponse.decode rpc("lookup", lookup)
       end
 
+      # Query for entities.
       def run_query query
         run_query = Proto::RunQueryRequest.new.tap do |rq|
           rq.query = query
@@ -59,6 +74,8 @@ module Gcloud
         Proto::RunQueryResponse.decode rpc("runQuery", run_query)
       end
 
+      ##
+      # Begin a new transaction.
       def begin_transaction
         tx_request = Proto::BeginTransactionRequest.new
 
@@ -66,6 +83,9 @@ module Gcloud
         Proto::BeginTransactionResponse.decode response_rpc
       end
 
+      ##
+      # Commit a transaction, optionally creating, deleting or modifying
+      # some entities.
       def commit mutation, transaction = nil
         mode = transaction ? Proto::CommitRequest::Mode::TRANSACTIONAL :
                              Proto::CommitRequest::Mode::NON_TRANSACTIONAL
@@ -78,6 +98,8 @@ module Gcloud
         Proto::CommitResponse.decode rpc("commit", commit)
       end
 
+      ##
+      # Roll back a transaction.
       def rollback transaction
         rollback = Proto::RollbackRequest.new.tap do |r|
           r.transaction = transaction
@@ -86,22 +108,35 @@ module Gcloud
         Proto::RollbackResponse.decode rpc("rollback", rollback)
       end
 
-      def default_http_headers # :nodoc:
+      ##
+      # The default HTTP headers to be sent on all API calls.
+      def default_http_headers #:nodoc:
         @default_http_headers ||= {
           "User-Agent"   => "gcloud-node/#{Gcloud::VERSION}",
           "Content-Type" => "application/x-protobuf" }
       end
-      attr_writer :default_http_headers # :nodoc:
+      ##
+      # Update the default HTTP headers.
+      attr_writer :default_http_headers #:nodoc:
 
-      def http # :nodoc:
+      ##
+      # The HTTP object that makes calls to Datastore.
+      # This must be a Faraday object.
+      def http #:nodoc:
         @http ||= Faraday.new url: http_host
       end
-      attr_writer :http # :nodoc:
+      ##
+      # Update the HTTP object.
+      attr_writer :http #:nodoc:
 
+      ##
+      # The Datastore API URL.
       def http_host
         @http_host || ENV["DATASTORE_HOST"] || API_URL
       end
 
+      ##
+      # Update the Datastore API URL.
       def http_host= new_http_host
         @http = nil # Reset the HTTP connection when host is set
         @http_host = new_http_host
@@ -109,6 +144,9 @@ module Gcloud
 
       protected
 
+      ##
+      # Convenience method for making an API call to Datastore.
+      # Requests will be signed with the credentials object.
       def rpc proto_method, proto_request
         response = http.post(rpc_path proto_method) do |req|
           req.headers.merge! default_http_headers
@@ -122,10 +160,13 @@ module Gcloud
         response.body
       end
 
+      ## Generates the HTTP Path value for the API call.
       def rpc_path proto_method
         "/datastore/#{API_VERSION}/datasets/#{dataset_id}/#{proto_method}"
       end
 
+      ##
+      # Convenience method for encoding a Beefcake object to a string.
       def get_proto_request_body proto_request
         proto_request_body = ""
         proto_request.encode proto_request_body

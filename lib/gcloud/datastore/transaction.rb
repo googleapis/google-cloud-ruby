@@ -30,12 +30,28 @@ module Gcloud
         start
       end
 
+      ##
+      # Persist entities in a transaction.
+      #
+      #   dataset.transaction do |tx|
+      #     if tx.find(user.key).nil?
+      #       tx.save task1, task2
+      #     end
+      #   end
       def save *entities
         save_entities_to_mutation entities, shared_mutation
         # Do not save or assign auto_ids yet
         entities
       end
 
+      ##
+      # Remove entities in a transaction.
+      #
+      #   dataset.transaction do |tx|
+      #     if tx.find(user.key).nil?
+      #       tx.delete task1, task2
+      #     end
+      #   end
       def delete *entities
         shared_mutation.tap do |m|
           m.delete = entities.map { |entity| entity.key.to_proto }
@@ -44,13 +60,19 @@ module Gcloud
         true
       end
 
+      ##
+      # Begins a transaction.
+      # This method is run when a new Transaction is created.
       def start
         fail "Transaction already opened" unless @id.nil?
 
         response = connection.begin_transaction
         @id = response.transaction
       end
+      alias_method :begin_transaction, :start
 
+      ##
+      # Commits a transaction.
       def commit
         fail "Cannot commit when not in a transaction" if @id.nil?
 
@@ -59,6 +81,8 @@ module Gcloud
         true
       end
 
+      ##
+      # Rolls a transaction back.
       def rollback
         fail "Cannot rollback when not in a transaction" if @id.nil?
 
@@ -77,8 +101,10 @@ module Gcloud
 
       protected
 
+      ##
+      # Mutation to be shared across save, delete, and commit calls.
+      # This enables updates to happen when commit is called.
       def shared_mutation #:nodoc:
-        # Work on a shared mutation object
         @shared_mutation ||= Proto.new_mutation
       end
     end
