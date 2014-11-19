@@ -86,7 +86,7 @@ describe Gcloud::Datastore::Dataset do
   it "allocate_ids raises when not given an incomplete key" do
     complete_key = Gcloud::Datastore::Key.new "ds-test", 789
     complete_key.must_be :complete?
-    assert_raises RuntimeError do
+    assert_raises Gcloud::Datastore::Error do
       dataset.allocate_ids complete_key
     end
   end
@@ -207,5 +207,22 @@ describe Gcloud::Datastore::Dataset do
     dataset.transaction do |tx|
       tx.save entity
     end
+  end
+
+  it "transaction will wrap errors in TransactionError" do
+    dataset.connection.expect :begin_transaction,
+                              begin_transaction_response
+    dataset.connection.expect :rollback, nil, [String]
+
+    error = assert_raises Gcloud::Datastore::TransactionError do
+      dataset.transaction do |tx|
+        fail "This error should be wrapped by TransactionError."
+      end
+    end
+
+    error.wont_be :nil?
+    error.message.must_equal "Transaction failed to commit."
+    error.inner.wont_be :nil?
+    error.inner.message.must_equal "This error should be wrapped by TransactionError."
   end
 end

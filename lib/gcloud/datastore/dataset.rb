@@ -46,7 +46,9 @@ module Gcloud
       #   empty_key = Gcloud::Datastore::Key.new "Task"
       #   task_keys = conn.allocate_ids empty_key, 5
       def allocate_ids incomplete_key, count = 1
-        fail "An incomplete key must be provided." if incomplete_key.complete?
+        if incomplete_key.complete?
+          fail Gcloud::Datastore::Error, "An incomplete key must be provided."
+        end
 
         incomplete_keys = count.times.map { incomplete_key.to_proto }
         response = connection.allocate_ids(*incomplete_keys)
@@ -134,9 +136,9 @@ module Gcloud
         begin
           yield tx
           tx.commit
-        rescue
+        rescue => e
           tx.rollback
-          raise "Transaction failed to commit."
+          raise TransactionError.new("Transaction failed to commit.", e)
         end
       end
 

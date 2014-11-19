@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require "helper"
-require "gcloud/datastore/entity"
+require "gcloud/datastore"
 
 describe Gcloud::Datastore::Entity do
 

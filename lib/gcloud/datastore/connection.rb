@@ -117,8 +117,8 @@ module Gcloud
           @credentials.sign_http_request req
         end
 
-        # TODO: Raise a proper error if the response is not 2xx (success)
-        fail response.inspect unless response.success?
+        fail ConnectionError, proto_method, response unless response.success?
+
         response.body
       end
 

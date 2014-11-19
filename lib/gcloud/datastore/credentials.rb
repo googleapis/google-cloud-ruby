@@ -29,9 +29,9 @@ module Gcloud
 
       def initialize keyfile
         if keyfile.nil?
-          fail "You must provide a keyfile to connect with."
+          fail KeyfileError, "You must provide a keyfile to connect with."
         elsif !File.exist?(keyfile)
-          fail "The keyfile '#{keyfile}' is not a valid file."
+          fail KeyfileError, "The keyfile '#{keyfile}' is not a valid file."
         end
 
         options = JSON.parse(File.read(keyfile))

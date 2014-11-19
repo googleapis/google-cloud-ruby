@@ -12,6 +12,7 @@ lib/gcloud/datastore/connection.rb
 lib/gcloud/datastore/credentials.rb
 lib/gcloud/datastore/dataset.rb
 lib/gcloud/datastore/entity.rb
+lib/gcloud/datastore/errors.rb
 lib/gcloud/datastore/key.rb
 lib/gcloud/datastore/list.rb
 lib/gcloud/datastore/proto.rb
