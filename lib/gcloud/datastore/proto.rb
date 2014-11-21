@@ -35,6 +35,8 @@ module Gcloud
           self.time_from_microseconds microseconds
         elsif !proto_value.key_value.nil?
           Gcloud::Datastore::Key.from_proto(proto_value.key_value)
+        elsif !proto_value.entity_value.nil?
+          Gcloud::Datastore::Entity.from_proto(proto_value.entity_value)
         elsif !proto_value.boolean_value.nil?
           proto_value.boolean_value
         elsif !proto_value.double_value.nil?
@@ -43,9 +45,13 @@ module Gcloud
           proto_value.integer_value
         elsif !proto_value.string_value.nil?
           return proto_value.string_value
+        elsif !proto_value.list_value.nil?
+          return Array(proto_value.list_value).map do |item|
+            from_proto_value item
+          end
         else
           nil
-        end # TODO: Entity, Array
+        end
       end
 
       def self.to_proto_value value
@@ -54,6 +60,8 @@ module Gcloud
           v.timestamp_microseconds_value = self.microseconds_from_time value
         elsif Gcloud::Datastore::Key === value
           v.key_value = value.to_proto
+        elsif Gcloud::Datastore::Entity === value
+          v.entity_value = value.to_proto
         elsif TrueClass === value
           v.boolean_value = true
         elsif FalseClass === value
@@ -66,7 +74,11 @@ module Gcloud
           v.integer_value = value
         elsif String === value
           v.string_value = value
-        end # TODO: entity, list_value
+        elsif Array === value
+          v.list_value = value.map { |item| to_proto_value item }
+        else
+          fail PropertyError, "A property of type #{value.class} is not supported."
+        end
         v
       end
 

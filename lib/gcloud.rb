@@ -2,7 +2,7 @@ require "gcloud/version"
 
 module Gcloud
   ##
-  # Standard Gcloud exception class.
+  # Base Gcloud exception class.
   class Error < StandardError
   end
 end
