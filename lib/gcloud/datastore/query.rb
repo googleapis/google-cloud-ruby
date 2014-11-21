@@ -19,9 +19,7 @@ require "gcloud/datastore/proto"
 module Gcloud
   module Datastore
     ##
-    # Datastore Query
-    #
-    # Represents a query to be made against the datastore.
+    # Query represents a query to be made to the Datastore.
     #
     #   query = Gcloud::Datastore::Query.new
     #   query.kind("Task").

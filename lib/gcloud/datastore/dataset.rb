@@ -22,29 +22,46 @@ require "gcloud/datastore/list"
 module Gcloud
   module Datastore
     ##
-    # Datastore Entity
+    # Dataset is the data saved in a project's Datastore.
+    # Dataset is analogous to a database in relational database world.
+    #
+    # Gcloud::Datastore::Dataset is the main object for interacting with
+    # Google Datastore. Gcloud::Datastore::Entity objects are created,
+    # read, updated, and deleted by Gcloud::Datastore::Dataset.
+    #
+    #   dataset = Gcloud::Datastore.dataset "my-todo-project",
+    #                                       "/path/to/keyfile.json"
+    #
+    #   query = Gcloud::Datastore::Query.new.kind("Task").
+    #     where("completed", "=", true)
+    #
+    #   tasks = dataset.run query
     #
     # See Gcloud::Datastore.dataset
     class Dataset
-      attr_accessor :connection # :nodoc:
+      attr_accessor :connection #:nodoc:
 
       ##
       # Creates a new Dataset instance.
+      #
       # See Gcloud::Datastore.dataset
       def initialize project, credentials #:nodoc:
         @connection = Connection.new project, credentials
       end
 
-      def dataset_id
+      ##
+      # The project/dataset_id connected to.
+      def project
         connection.dataset_id
       end
+      alias_method :dataset_id, :project
 
       ##
       # Generate IDs for a Key before creating an entity.
       #
-      #   conn = Gcloud::Datastore.connection
+      #   dataset = Gcloud::Datastore.dataset
       #   empty_key = Gcloud::Datastore::Key.new "Task"
-      #   task_keys = conn.allocate_ids empty_key, 5
+      #   task_keys = dataset.allocate_ids empty_key, 5
       def allocate_ids incomplete_key, count = 1
         fail "An incomplete key must be provided." if incomplete_key.complete?
 
@@ -55,6 +72,11 @@ module Gcloud
         end
       end
 
+      ##
+      # Persist entities to the Datastore.
+      #
+      #   dataset = Gcloud::Datastore.dataset
+      #   dataset.save task1, task2
       def save *entities
         mutation = Proto.new_mutation
         save_entities_to_mutation entities, mutation
@@ -63,12 +85,29 @@ module Gcloud
         entities
       end
 
+      ##
+      # Retrieve an entity by providing key information.
+      # Either a Key object or kind and id/name can be provided.
+      #
+      #   dataset = Gcloud::Datastore.dataset
+      #   key = Gcloud::Datastore::Key.new "Task", 123456
+      #   task = dataset.find key
+      #
+      #   dataset = Gcloud::Datastore.dataset
+      #   task = dataset.find "Task", 123456
       def find key_or_kind, id_or_name = nil
         key = key_or_kind
         key = Key.new key_or_kind, id_or_name unless key_or_kind.is_a? Key
         find_all(key).first
       end
 
+      ##
+      # Retrieve the entities for the provided keys.
+      #
+      #   dataset = Gcloud::Datastore.dataset
+      #   key1 = Gcloud::Datastore::Key.new "Task", 123456
+      #   key2 = Gcloud::Datastore::Key.new "Task", 987654
+      #   tasks = dataset.find_all key1, key2
       def find_all *keys
         response = connection.lookup(*keys.map(&:to_proto))
         Array(response.found).map do |found|
@@ -77,6 +116,11 @@ module Gcloud
       end
       alias_method :lookup, :find_all
 
+      ##
+      # Remove entities from the Datastore.
+      #
+      #   dataset = Gcloud::Datastore.dataset
+      #   dataset.delete task1, task2
       def delete *entities
         mutation = Proto.new_mutation.tap do |m|
           m.delete = entities.map { |entity| entity.key.to_proto }
@@ -85,6 +129,12 @@ module Gcloud
         true
       end
 
+      ##
+      # Retrieve entities specified by a Query.
+      #
+      #   query = Gcloud::Datastore::Query.new.kind("Task").
+      #     where("completed", "=", true)
+      #   tasks = dataset.run query
       def run query
         response = connection.run_query query.to_proto
         results = Array(response.batch.entity_result).map do |result|
@@ -142,11 +192,15 @@ module Gcloud
 
       protected
 
+      ##
+      # Save a key to be given an ID when comitted.
       def auto_id_register entity #:nodoc:
         @_auto_id_entities ||= []
         @_auto_id_entities << entity
       end
 
+      ##
+      # Update saved keys with new IDs post-commit.
       def auto_id_assign_ids auto_ids #:nodoc:
         @_auto_id_entities ||= []
         Array(auto_ids).each_with_index do |key, index|
@@ -156,6 +210,9 @@ module Gcloud
         @_auto_id_entities = []
       end
 
+      ##
+      # Add entities to a Mutation, and register they key to be
+      # updated with an auto ID if needed.
       def save_entities_to_mutation entities, mutation #:nodoc:
         entities.each do |entity|
           if entity.key.id.nil? && entity.key.name.nil?

@@ -20,8 +20,12 @@ module Gcloud
     #   entities = Gcloud::Datastore::List.new [entity1, entity2, entity3]
     #   entities.cursor = "c3VwZXJhd2Vzb21lIQ"
     class List < DelegateClass(::Array)
+      ##
+      # The cursor of the List.
       attr_accessor :cursor
 
+      ##
+      # Create a new list with an array of values and a cursor (optional).
       def initialize arr = [], cursor = nil
         super arr
         @cursor = cursor
