@@ -76,6 +76,8 @@ module Gcloud
           v.string_value = value
         elsif Array === value
           v.list_value = value.map { |item| to_proto_value item }
+        else
+          fail PropertyError, "A property of type #{value.class} is not supported."
         end
         v
       end

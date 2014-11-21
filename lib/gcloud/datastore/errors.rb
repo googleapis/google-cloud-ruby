@@ -17,7 +17,7 @@ require "gcloud"
 module Gcloud
   module Datastore
     ##
-    # Standard Datastore exception class.
+    # Base Datastore exception class.
     class Error < Gcloud::Error
     end
 
@@ -37,6 +37,11 @@ module Gcloud
         super "API call to #{method} was not successful"
         @response = response
       end
+    end
+
+    ##
+    # Raised when a property is not correct.
+    class PropertyError < Gcloud::Datastore::Error
     end
 
     ##

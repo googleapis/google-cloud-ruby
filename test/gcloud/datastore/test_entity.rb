@@ -97,4 +97,11 @@ describe Gcloud::Datastore::Entity do
     proto_task_1.entity_value.property.find { |p| p.name == "description" }.value.string_value.must_equal "can persist entities"
     proto_task_2.entity_value.property.find { |p| p.name == "description" }.value.string_value.must_equal "can persist lists"
   end
+
+  it "raises when setting an unsupported property type" do
+    error = assert_raises Gcloud::Datastore::PropertyError do
+      entity["thing"] = Gcloud::Datastore::Credentials::Empty.new
+    end
+    error.message.must_equal "A property of type Gcloud::Datastore::Credentials::Empty is not supported."
+  end
 end
