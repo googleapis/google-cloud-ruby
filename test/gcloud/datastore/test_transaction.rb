@@ -81,4 +81,41 @@ describe Gcloud::Datastore::Transaction do
     transaction.save entity
     transaction.rollback
   end
+
+  describe "error handling" do
+    it "start will raise if transaction is already open" do
+      transaction.id.wont_be :nil?
+      error = assert_raises Gcloud::Datastore::TransactionError do
+        transaction.start
+      end
+      error.wont_be :nil?
+      error.message.must_equal "Transaction already opened."
+    end
+
+    it "commit will raise if transaction is not open" do
+      transaction.connection.expect :begin_transaction, begin_transaction_response
+
+      transaction.id.wont_be :nil?
+      transaction.reset!
+      transaction.id.must_be :nil?
+      error = assert_raises Gcloud::Datastore::TransactionError do
+        transaction.commit
+      end
+      error.wont_be :nil?
+      error.message.must_equal "Cannot commit when not in a transaction."
+    end
+
+    it "transaction will raise if transaction is not open" do
+      transaction.connection.expect :begin_transaction, begin_transaction_response
+
+      transaction.id.wont_be :nil?
+      transaction.reset!
+      transaction.id.must_be :nil?
+      error = assert_raises Gcloud::Datastore::TransactionError do
+        transaction.rollback
+      end
+      error.wont_be :nil?
+      error.message.must_equal "Cannot rollback when not in a transaction."
+    end
+  end
 end

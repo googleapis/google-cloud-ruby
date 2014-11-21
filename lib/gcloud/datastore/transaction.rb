@@ -64,7 +64,7 @@ module Gcloud
       # Begins a transaction.
       # This method is run when a new Transaction is created.
       def start
-        fail "Transaction already opened" unless @id.nil?
+        fail TransactionError, "Transaction already opened." unless @id.nil?
 
         response = connection.begin_transaction
         @id = response.transaction
@@ -74,7 +74,9 @@ module Gcloud
       ##
       # Commits a transaction.
       def commit
-        fail "Cannot commit when not in a transaction" if @id.nil?
+        if @id.nil?
+          fail TransactionError, "Cannot commit when not in a transaction."
+        end
 
         response = connection.commit shared_mutation, @id
         auto_id_assign_ids response.mutation_result.insert_auto_id_key
@@ -84,7 +86,9 @@ module Gcloud
       ##
       # Rolls a transaction back.
       def rollback
-        fail "Cannot rollback when not in a transaction" if @id.nil?
+        if @id.nil?
+          fail TransactionError, "Cannot rollback when not in a transaction."
+        end
 
         connection.rollback @id
         true

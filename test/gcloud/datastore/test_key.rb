@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require "helper"
-require "gcloud/datastore/key"
+require "gcloud/datastore"
 
 describe Gcloud::Datastore::Key do
 

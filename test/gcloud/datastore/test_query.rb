@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require "helper"
-require "gcloud/datastore/query"
+require "gcloud/datastore"
 
 describe Gcloud::Datastore::Query do
   it "can query on kind" do

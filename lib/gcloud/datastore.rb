@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "gcloud"
+require "gcloud/datastore/errors"
 require "gcloud/datastore/dataset"
 require "gcloud/datastore/transaction"
 require "gcloud/datastore/credentials"
