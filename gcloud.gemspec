@@ -1,21 +1,21 @@
 # -*- encoding: utf-8 -*-
-# stub: gcloud 0.0.1.20141119145908 ruby lib
+# stub: gcloud 0.0.1.20141215114716 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "gcloud"
-  s.version = "0.0.1.20141119145908"
+  s.version = "0.0.1.20141215114716"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Silvano Luciani", "Mike Moore"]
-  s.date = "2014-11-19"
+  s.date = "2014-12-15"
   s.description = "Gcloud is the official library for interacting with Google Cloud."
   s.email = ["silvano@google.com", "mike@blowmage.com"]
   s.extra_rdoc_files = ["CHANGELOG.md", "CONTRIBUTING.md", "Manifest.txt", "README.md"]
-  s.files = [".gemtest", ".rubocop.yml", "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE", "Manifest.txt", "README.md", "Rakefile", "gcloud.gemspec", "lib/gcloud.rb", "lib/gcloud/datastore.rb", "lib/gcloud/datastore/connection.rb", "lib/gcloud/datastore/credentials.rb", "lib/gcloud/datastore/dataset.rb", "lib/gcloud/datastore/entity.rb", "lib/gcloud/datastore/errors.rb", "lib/gcloud/datastore/key.rb", "lib/gcloud/datastore/list.rb", "lib/gcloud/datastore/proto.rb", "lib/gcloud/datastore/query.rb", "lib/gcloud/datastore/transaction.rb", "lib/gcloud/proto/datastore_v1.pb.rb", "lib/gcloud/version.rb", "rakelib/console.rake", "rakelib/proto.rake", "rakelib/rubocop.rake", "rakelib/test.rake", "regression/data/index.yaml", "regression/datastore/test_datastore.rb", "regression/datastore_helper.rb", "test/gcloud/datastore/proto/test_cursor.rb", "test/gcloud/datastore/proto/test_direction.rb", "test/gcloud/datastore/proto/test_operator.rb", "test/gcloud/datastore/proto/test_value.rb", "test/gcloud/datastore/test_connection.rb", "test/gcloud/datastore/test_credentials.rb", "test/gcloud/datastore/test_dataset.rb", "test/gcloud/datastore/test_entity.rb", "test/gcloud/datastore/test_key.rb", "test/gcloud/datastore/test_query.rb", "test/gcloud/datastore/test_transaction.rb", "test/gcloud/test_version.rb", "test/helper.rb"]
+  s.files = [".gemtest", ".rubocop.yml", "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE", "Manifest.txt", "README.md", "Rakefile", "gcloud.gemspec", "lib/gcloud.rb", "lib/gcloud/datastore.rb", "lib/gcloud/datastore/connection.rb", "lib/gcloud/datastore/credentials.rb", "lib/gcloud/datastore/dataset.rb", "lib/gcloud/datastore/entity.rb", "lib/gcloud/datastore/errors.rb", "lib/gcloud/datastore/key.rb", "lib/gcloud/datastore/list.rb", "lib/gcloud/datastore/proto.rb", "lib/gcloud/datastore/query.rb", "lib/gcloud/datastore/transaction.rb", "lib/gcloud/proto/datastore_v1.pb.rb", "lib/gcloud/version.rb", "rakelib/console.rake", "rakelib/manifest.rake", "rakelib/proto.rake", "rakelib/rubocop.rake", "rakelib/test.rake", "test/gcloud/datastore/proto/test_cursor.rb", "test/gcloud/datastore/proto/test_direction.rb", "test/gcloud/datastore/proto/test_operator.rb", "test/gcloud/datastore/proto/test_value.rb", "test/gcloud/datastore/test_connection.rb", "test/gcloud/datastore/test_credentials.rb", "test/gcloud/datastore/test_dataset.rb", "test/gcloud/datastore/test_entity.rb", "test/gcloud/datastore/test_key.rb", "test/gcloud/datastore/test_query.rb", "test/gcloud/datastore/test_transaction.rb", "test/gcloud/test_version.rb", "test/helper.rb"]
   s.homepage = "http://googlecloudplatform.github.io/gcloud-ruby/"
   s.licenses = ["Apache-2.0"]
-  s.rdoc_options = ["--main", "README.md", "--exclude", "lib/gcloud/proto/"]
+  s.rdoc_options = ["--main", "README.md", "--exclude", "lib/gcloud/proto/", "--exclude", "Manifest.txt"]
   s.rubygems_version = "2.2.2"
   s.summary = "API Client library for Google Cloud"
   s.test_files = ["test/gcloud/datastore/proto/test_cursor.rb", "test/gcloud/datastore/proto/test_direction.rb", "test/gcloud/datastore/proto/test_operator.rb", "test/gcloud/datastore/proto/test_value.rb", "test/gcloud/datastore/test_connection.rb", "test/gcloud/datastore/test_credentials.rb", "test/gcloud/datastore/test_dataset.rb", "test/gcloud/datastore/test_entity.rb", "test/gcloud/datastore/test_key.rb", "test/gcloud/datastore/test_query.rb", "test/gcloud/datastore/test_transaction.rb", "test/gcloud/test_version.rb"]

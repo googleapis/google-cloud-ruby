@@ -21,12 +21,10 @@ lib/gcloud/datastore/transaction.rb
 lib/gcloud/proto/datastore_v1.pb.rb
 lib/gcloud/version.rb
 rakelib/console.rake
+rakelib/manifest.rake
 rakelib/proto.rake
 rakelib/rubocop.rake
 rakelib/test.rake
-regression/data/index.yaml
-regression/datastore/test_datastore.rb
-regression/datastore_helper.rb
 test/gcloud/datastore/proto/test_cursor.rb
 test/gcloud/datastore/proto/test_direction.rb
 test/gcloud/datastore/proto/test_operator.rb

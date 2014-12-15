@@ -53,11 +53,21 @@ As soon as the indexes are prepared you can run the regression tests:
 $ rake test:regression[PROJECT_ID,KEYFILE_PATH]
 ```
 
-Or, if you prefer you can store the values in the `DATASTORE_PROJECT` and `DATASTORE_KEYFILE` environment variables:
+Or, if you prefer you can store the values in the `GCLOUD_PROJECT` and `GCLOUD_KEYFILE` environment variables:
+
+``` sh
+$ export GCLOUD_PROJECT=my-project-id
+$ export GCLOUD_KEYFILE=/path/to/keyfile.json
+$ rake test:regression
+```
+
+If you want to use different values for Datastore vs. Storage regression tests, you can use the `DATASTORE_` and `STORAGE_` environment variables:
 
 ``` sh
 $ export DATASTORE_PROJECT=my-project-id
 $ export DATASTORE_KEYFILE=/path/to/keyfile.json
+$ export STORAGE_PROJECT=my-other-project-id
+$ export STORAGE_KEYFILE=/path/to/other/keyfile.json
 $ rake test:regression
 ```
 
