@@ -14,3 +14,34 @@
 
 gem "minitest"
 require "minitest/autorun"
+require "ostruct"
+require "gcloud/storage"
+
+class TestStorage < Minitest::Spec
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new }
+  let(:storage) { Gcloud::Storage::Project.new project, credentials }
+
+  def setup
+    @connection = Faraday::Adapter::Test::Stubs.new
+    connection = storage.instance_variable_get "@connection"
+    client = connection.instance_variable_get "@client"
+    client.connection = Faraday.new do |builder|
+      # builder.options.params_encoder = Faraday::FlatParamsEncoder
+      builder.adapter :test, @connection
+    end
+  end
+
+  def teardown
+    @connection.verify_stubbed_calls
+  end
+
+  def mock_connection
+    @connection
+  end
+
+  # Register this spec type for when :storage is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_storage
+  end
+end
