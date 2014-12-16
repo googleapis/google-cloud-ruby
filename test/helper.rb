@@ -55,8 +55,33 @@ class TestStorage < Minitest::Spec
         "etag"=>"CAE="}
   end
 
+  def random_file_hash bucket=random_bucket_name, name=random_file_path
+    {"kind"=>"storage#object",
+     "id"=>"#{bucket}/#{name}/1234567890",
+     "selfLink"=>"https://www.googleapis.com/storage/v1/b/#{bucket}/o/#{name}",
+     "name"=>"#{name}",
+     "bucket"=>"#{bucket}",
+     "generation"=>"1234567890",
+     "metageneration"=>"1",
+     "contentType"=>"text/plain",
+     "updated"=>Time.now,
+     "storageClass"=>"STANDARD",
+     "size"=>rand(10_000),
+     "md5Hash"=>"HXB937GQDFxDFqUGi//weQ==",
+     "mediaLink"=>"https://www.googleapis.com/download/storage/v1/b/#{bucket}/o/#{name}?generation=1234567890&alt=media",
+     "owner"=>{"entity"=>"user-1234567890", "entityId"=>"abc123"},
+     "crc32c"=>"Lm1F3g==",
+     "etag"=>"CKih16GjycICEAE="}
+  end
+
   def random_bucket_name
     (0...50).map { ("a".."z").to_a[rand(26)] }.join
+  end
+
+  def random_file_path
+    [(0...10).map { ("a".."z").to_a[rand(26)] }.join,
+     (0...10).map { ("a".."z").to_a[rand(26)] }.join,
+     (0...10).map { ("a".."z").to_a[rand(26)] }.join + ".txt"].join "/"
   end
 
   # Register this spec type for when :storage is used.

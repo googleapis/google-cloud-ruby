@@ -14,6 +14,7 @@
 
 require "gcloud/version"
 require "google/api_client"
+require "mime/types"
 
 module Gcloud
   module Storage
@@ -73,6 +74,91 @@ module Gcloud
           api_method: @storage.buckets.delete,
           parameters: { bucket: bucket_name }
         )
+      end
+
+      ##
+      # Retrieves a list of files matching the criteria.
+      def list_files bucket_name
+        @client.execute(
+          api_method: @storage.objects.list,
+          parameters: { bucket: bucket_name }
+        )
+      end
+
+      # rubocop:disable Metrics/MethodLength
+      # Disabled rubocop because the API we need to use
+      # is verbose. No getting around it.
+
+      ##
+      # Stores a new object and metadata.
+      # Uses a multipart form post.
+      def insert_file_multipart bucket_name, file, path = nil
+        local_path = Pathname(file).to_path
+        upload_path = Pathname(path || local_path).to_path
+        mime_type = mime_type_for local_path
+
+        media = Google::APIClient::UploadIO.new local_path, mime_type
+
+        @client.execute(
+          api_method: @storage.objects.insert,
+          media: media,
+          parameters: {
+            uploadType: "multipart",
+            bucket: bucket_name,
+            name: upload_path
+          },
+          body_object: { contentType: mime_type }
+        )
+      end
+
+      ##
+      # Stores a new object and metadata.
+      # Uses a resumable upload.
+      def insert_file_resumable bucket_name, file, path = nil, chunk_size = nil
+        local_path = Pathname(file).to_path
+        upload_path = Pathname(path || local_path).to_path
+        # mime_type = options[:mime_type] || mime_type_for local_path
+        mime_type = mime_type_for local_path
+
+        # This comes from Faraday, which gets it from multipart-post
+        # The signature is:
+        # filename_or_io, content_type, filename = nil, opts = {}
+
+        media = Google::APIClient::UploadIO.new local_path, mime_type
+        media.chunk_size = chunk_size
+
+        result = @client.execute(
+          api_method: @storage.objects.insert,
+          media: media,
+          parameters: {
+            uploadType: "resumable",
+            bucket: bucket_name,
+            name: upload_path
+          },
+          body_object: { contentType: mime_type }
+        )
+        upload = result.resumable_upload
+        @client.execute upload while upload.resumable?
+        upload # TODO: return the Gcloud File object...
+      end
+
+      # rubocop:enable Metrics/MethodLength
+
+      ##
+      # Retrieves an object or its metadata.
+      def get_file bucket_name, file_path
+        @client.execute(
+          api_method: @storage.objects.get,
+          parameters: { bucket: bucket_name,
+                        object: file_path }
+        )
+      end
+
+      ##
+      # Retrieves the mime-type for a file path.
+      # An empty string is returned if no mime-type can be found.
+      def mime_type_for path
+        MIME::Types.of(path).first.to_s
       end
     end
   end

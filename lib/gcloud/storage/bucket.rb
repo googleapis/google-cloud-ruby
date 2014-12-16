@@ -84,6 +84,48 @@ module Gcloud
       end
 
       ##
+      # Retrieves a list of files matching the criteria.
+      def files
+        ensure_connection!
+        resp = connection.list_files name
+        if resp.success?
+          resp.data["items"].map do |gapi_object|
+            File.from_gapi gapi_object, connection
+          end
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Retrieves a file matching the path.
+      def find_file path
+        ensure_connection!
+        resp = connection.get_file name, path
+        if resp.success?
+          File.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Create a new Gcloud::Storeage::File object by providing a
+      # File object to upload and the path to store it with.
+      def create_file file, path = nil, chunk_size = nil
+        ensure_connection!
+        # TODO: Raise if file doesn't exist
+        # ensure_file_exists!
+        fail unless ::File.exist? file
+
+        if resumable_upload? file
+          upload_resumable file, path, chunk_size
+        else
+          upload_multipart file, path
+        end
+      end
+
+      ##
       # New Bucket from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
@@ -98,6 +140,43 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      ##
+      # Determines if a resumable upload should be used.
+      def resumable_upload? file #:nodoc:
+        ::File.size?(file).to_i > Storage.resumable_threshold
+      end
+
+      def upload_multipart file, path
+        resp = @connection.insert_file_multipart name, file, path
+
+        if resp.success?
+          File.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      def upload_resumable file, path, chunk_size
+        # TODO: raise if chunk_size isn't a valid value
+        # ensure_chunk_size!
+        fail unless chunk_size && valid_chunk_size?(chunk_size)
+
+        resp = @connection.insert_file_resumable name, file, path, chunk_size
+
+        if resp.success?
+          File.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Determines if a chunk_size is valid.
+      def valid_chunk_size? chunk_size
+        chunk_size.nil?
+        true # TODO: implement valid_chunk_size?
       end
     end
   end

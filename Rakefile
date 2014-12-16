@@ -25,5 +25,6 @@ Hoe.spec "gcloud" do
 
   dependency "beefcake", "~> 1.0"
   dependency "google-api-client", "~> 0.7"
+  dependency "mime-types", "~> 2.4"
   dependency "rubocop", "~> 0.27", :dev
 end

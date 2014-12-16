@@ -14,6 +14,7 @@
 
 require "helper"
 require "json"
+require "uri"
 
 describe Gcloud::Storage::Bucket, :mock_storage do
   # Create a bucket object with the project's mocked connection object
@@ -27,5 +28,55 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     end
 
     bucket.delete
+  end
+
+  it "creates a file" do
+    new_file_name = random_file_path
+
+    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       create_file_json(bucket.name, new_file_name)]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      bucket.create_file tmpfile, new_file_name
+    end
+  end
+
+  it "lists files" do
+    num_files = 3
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       list_files_json(num_files)]
+    end
+
+    files = bucket.files
+    files.size.must_equal num_files
+  end
+
+  it "finds a file" do
+    file_name = "file.ext"
+
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       create_file_json(bucket.name, file_name)]
+    end
+
+    file = bucket.find_file file_name
+    file.name.must_equal file_name
+  end
+
+  def create_file_json bucket=nil, name = nil
+    random_file_hash(bucket, name).to_json
+  end
+
+  def find_file_json bucket=nil, name = nil
+    random_file_hash(bucket, name).to_json
+  end
+
+  def list_files_json count = 2
+    files = count.times.map { random_file_hash }
+    {"kind"=>"storage#objects",
+     "items"=>files}.to_json
   end
 end

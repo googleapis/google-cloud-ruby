@@ -19,6 +19,13 @@ lib/gcloud/datastore/proto.rb
 lib/gcloud/datastore/query.rb
 lib/gcloud/datastore/transaction.rb
 lib/gcloud/proto/datastore_v1.pb.rb
+lib/gcloud/storage.rb
+lib/gcloud/storage/bucket.rb
+lib/gcloud/storage/connection.rb
+lib/gcloud/storage/credentials.rb
+lib/gcloud/storage/errors.rb
+lib/gcloud/storage/file.rb
+lib/gcloud/storage/project.rb
 lib/gcloud/version.rb
 rakelib/console.rake
 rakelib/manifest.rake
@@ -36,5 +43,8 @@ test/gcloud/datastore/test_entity.rb
 test/gcloud/datastore/test_key.rb
 test/gcloud/datastore/test_query.rb
 test/gcloud/datastore/test_transaction.rb
+test/gcloud/storage/test_bucket.rb
+test/gcloud/storage/test_project.rb
+test/gcloud/storage/test_storage.rb
 test/gcloud/test_version.rb
 test/helper.rb
