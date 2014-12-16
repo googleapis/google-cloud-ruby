@@ -154,6 +154,40 @@ module Gcloud
         )
       end
 
+      ## Copy a file from source bucket/object to a
+      # destination bucket/object.
+      def copy_file source_bucket_name, source_file_path,
+                    destination_bucket_name, destination_file_path
+        @client.execute(
+          api_method: @storage.objects.copy,
+          parameters: { sourceBucket: source_bucket_name,
+                        sourceObject: source_file_path,
+                        destinationBucket: destination_bucket_name,
+                        destinationObject: destination_file_path }
+        )
+      end
+
+      ##
+      # Download contents of a file.
+      def download_file bucket_name, file_path
+        @client.execute(
+          api_method: @storage.objects.get,
+          parameters: { bucket: bucket_name,
+                        object: file_path,
+                        alt: :media }
+        )
+      end
+
+      ##
+      # Permenently deletes a file.
+      def delete_file bucket_name, file_path
+        @client.execute(
+          api_method: @storage.objects.delete,
+          parameters: { bucket: bucket_name,
+                        object: file_path }
+        )
+      end
+
       ##
       # Retrieves the mime-type for a file path.
       # An empty string is returned if no mime-type can be found.

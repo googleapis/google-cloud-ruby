@@ -111,12 +111,80 @@ module Gcloud
       end
 
       ##
+      # Download the file's contents to a local file.
+      # The path provided must be writable.
+      def download path
+        ensure_connection!
+        resp = connection.download_file bucket, name
+        if resp.success?
+          ::File.open path, "w+" do |f|
+            f.write resp.body
+          end
+          ::File.new path
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Copy the file to a new location.
+      #
+      #   file.copy "path/to/destination/file.ext"
+      #
+      # The file can also be copied to a different bucket:
+      #
+      #   file.copy "new-destination-bucket",
+      #             "path/to/destination/file.ext"
+      def copy dest_bucket_or_path, dest_path = nil
+        ensure_connection!
+        dest_bucket, dest_path = fix_copy_args dest_bucket_or_path, dest_path
+
+        resp = connection.copy_file bucket, name, dest_bucket, dest_path
+        if resp.success?
+          File.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Permenently deletes the file.
+      def delete
+        ensure_connection!
+        resp = connection.delete_file bucket, name
+        if resp.success?
+          true
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New File from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
           f.gapi = gapi
           f.connection = conn
         end
+      end
+
+      protected
+
+      ##
+      # Raise an error unless an active connection is available.
+      def ensure_connection!
+        fail "Must have active connection" unless connection
+      end
+
+      def fix_copy_args dest_bucket_or_path, dest_path
+        if dest_path.nil?
+          dest_path = dest_bucket_or_path
+          dest_bucket_or_path = bucket
+        end
+        if dest_bucket_or_path.respond_to? :name
+          dest_bucket_or_path = dest_bucket_or_path.name
+        end
+        [dest_bucket_or_path, dest_path]
       end
     end
   end
