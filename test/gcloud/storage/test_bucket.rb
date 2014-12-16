@@ -43,6 +43,33 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     end
   end
 
+  it "creates with resumable" do
+    # Mock the upload
+    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+      [200, {"Content-Type"=>"application/json", Location: "/upload/resumable-uri"},
+       create_file_json(bucket.name, "resumable.ext")]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      tmpfile.write "The quick brown fox jumps over the lazy dog."
+      Gcloud::Storage.stub :resumable_threshold, tmpfile.size/2 do
+        bucket.create_file tmpfile, "resumable.ext"
+      end
+    end
+  end
+
+  it "does not allow an invalid chunk_size" do
+    invalid_chunk_size = 333
+    assert_raises Gcloud::Storage::ChunkSizeError do
+      Tempfile.open "gcloud-ruby" do |tmpfile|
+        tmpfile.write "The quick brown fox jumps over the lazy dog."
+        Gcloud::Storage.stub :resumable_threshold, tmpfile.size/2 do
+          bucket.create_file tmpfile, "resumable.ext", chunk_size: invalid_chunk_size
+        end
+      end
+    end
+  end
+
   it "lists files" do
     num_files = 3
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|

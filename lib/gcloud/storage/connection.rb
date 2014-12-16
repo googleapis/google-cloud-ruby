@@ -138,8 +138,8 @@ module Gcloud
           body_object: { contentType: mime_type }
         )
         upload = result.resumable_upload
-        @client.execute upload while upload.resumable?
-        upload # TODO: return the Gcloud File object...
+        result = @client.execute upload while upload.resumable?
+        result
       end
 
       # rubocop:enable Metrics/MethodLength

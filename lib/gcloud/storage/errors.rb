@@ -43,6 +43,14 @@ module Gcloud
     end
 
     ##
+    # Raised when chunk_size is an invalid value.
+    class ChunkSizeError < Error
+      def initialize msg = "The chunk_size value is invalid."
+        super
+      end
+    end
+
+    ##
     # Raised when a File download fails the verification.
     class FileVerificationError < Error
       ##

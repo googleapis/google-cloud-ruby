@@ -112,14 +112,23 @@ module Gcloud
       ##
       # Create a new Gcloud::Storeage::File object by providing a
       # File object to upload and the path to store it with.
-      def create_file file, path = nil, chunk_size = nil
+      #
+      # A chunk_size value can be provided in the options to be used
+      # in resumable uploads. This value is the number of bytes per
+      # chunk and must be divisible by 256KB or a ChunkSizeError will
+      # be raised.
+      #
+      #   bucket.create_file "path/to/local.file.ext",
+      #                      "destination/path/file.ext",
+      #                      chunk_size: 1024*1024 # 1 MB chunk
+      def create_file file, path = nil, options = {}
         ensure_connection!
         # TODO: Raise if file doesn't exist
         # ensure_file_exists!
         fail unless ::File.exist? file
 
         if resumable_upload? file
-          upload_resumable file, path, chunk_size
+          upload_resumable file, path, options[:chunk_size]
         else
           upload_multipart file, path
         end
@@ -159,9 +168,7 @@ module Gcloud
       end
 
       def upload_resumable file, path, chunk_size
-        # TODO: raise if chunk_size isn't a valid value
-        # ensure_chunk_size!
-        fail unless chunk_size && valid_chunk_size?(chunk_size)
+        verify_chunk_size! chunk_size
 
         resp = @connection.insert_file_resumable name, file, path, chunk_size
 
@@ -174,9 +181,10 @@ module Gcloud
 
       ##
       # Determines if a chunk_size is valid.
-      def valid_chunk_size? chunk_size
-        chunk_size.nil?
-        true # TODO: implement valid_chunk_size?
+      def verify_chunk_size! chunk_size
+        return if chunk_size.nil?
+        chunk_mod = 256 * 1024 # 256KB
+        fail ChunkSizeError if (chunk_size.to_i % chunk_mod) != 0
       end
     end
   end
