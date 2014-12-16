@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/storage/verifier"
+
 module Gcloud
   module Storage
     class File
@@ -113,14 +115,31 @@ module Gcloud
       ##
       # Download the file's contents to a local file.
       # The path provided must be writable.
-      def download path
+      #
+      #   file.download "path/to/downloaded/file.ext"
+      #
+      # The download is verified by calculating the MD5 digest.
+      # The CRC32c digest can be used by passing :crc32c.
+      #
+      #   file.download "path/to/downloaded/file.ext", verify: :crc32c
+      #
+      # Both the MD5 and CRC32c digest can be used by passing :all.
+      #
+      #   file.download "path/to/downloaded/file.ext", verify: :all
+      #
+      # The download verification can be disabled by passing :none
+      #
+      #   file.download "path/to/downloaded/file.ext", verify: :none
+      #
+      # If the verification fails FileVerificationError is raised.
+      def download path, options = {}
         ensure_connection!
         resp = connection.download_file bucket, name
         if resp.success?
           ::File.open path, "w+" do |f|
             f.write resp.body
           end
-          ::File.new path
+          verify_file! ::File.new(path), options
         else
           fail ApiError.from_response(resp)
         end
@@ -185,6 +204,15 @@ module Gcloud
           dest_bucket_or_path = dest_bucket_or_path.name
         end
         [dest_bucket_or_path, dest_path]
+      end
+
+      def verify_file! file, options = {}
+        verify = options[:verify] || :md5
+        verify_md5    = verify == :md5    || verify == :all
+        verify_crc32c = verify == :crc32c || verify == :all
+        Verifier.verify_md5! self, file    if verify_md5
+        Verifier.verify_crc32c! self, file if verify_crc32c
+        file
       end
     end
   end

@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require "uri"
 
-describe Gcloud::Storage::Bucket, :mock_storage do
+describe Gcloud::Storage::File, :mock_storage do
   # Create a bucket object with the project's mocked connection object
   let(:bucket) { Gcloud::Storage::Bucket.from_gapi random_bucket_hash("bucket"),
                                                    storage.connection }
@@ -34,6 +34,10 @@ describe Gcloud::Storage::Bucket, :mock_storage do
   end
 
   it "can download itself" do
+    # Stub the md5 to match.
+    def file.md5
+      "X7A8HRvZUCT5gbq0KNDL8Q=="
+    end
     mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file.name}?alt=media" do |env|
       [200, {"Content-Type"=>"text/plain"},
        "yay!"]
@@ -42,6 +46,118 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     Tempfile.open "gcloud-ruby" do |tmpfile|
       file.download tmpfile
       File.read(tmpfile).must_equal "yay!"
+    end
+  end
+
+  describe "verified downloads" do
+    before do
+      # Stub these values
+      def file.md5; "md5="; end
+      def file.crc32c; "crc32c="; end
+      # Mock the download
+      mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file.name}?alt=media" do |env|
+        [200, {"Content-Type"=>"text/plain"},
+         "The quick brown fox jumps over the lazy dog."]
+      end
+    end
+
+    it "verifies m5d by default" do
+      mocked_md5 = Minitest::Mock.new
+      mocked_md5.expect :md5_mock, file.md5
+      stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
+      stubbed_crc32c = lambda { |_| fail "Should not be called!" }
+
+      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+          Tempfile.open "gcloud-ruby" do |tmpfile|
+            file.download tmpfile
+          end
+        end
+      end
+      mocked_md5.verify
+    end
+
+    it "verifies m5d when specified" do
+      mocked_md5 = Minitest::Mock.new
+      mocked_md5.expect :md5_mock, file.md5
+      stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
+      stubbed_crc32c = lambda { |_| fail "Should not be called!" }
+
+      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+          Tempfile.open "gcloud-ruby" do |tmpfile|
+            file.download tmpfile, verify: :md5
+          end
+        end
+      end
+      mocked_md5.verify
+    end
+
+    it "verifies crc32c when specified" do
+      stubbed_md5 = lambda { |_| fail "Should not be called!" }
+      mocked_crc32c = Minitest::Mock.new
+      mocked_crc32c.expect :crc32c_mock, file.crc32c
+      stubbed_crc32c = lambda { |_| mocked_crc32c.crc32c_mock }
+
+      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+          Tempfile.open "gcloud-ruby" do |tmpfile|
+            file.download tmpfile, verify: :crc32c
+          end
+        end
+      end
+      mocked_crc32c.verify
+    end
+
+    it "verifies m5d and crc32c when specified" do
+      mocked_md5 = Minitest::Mock.new
+      mocked_md5.expect :md5_mock, file.md5
+      stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
+
+      mocked_crc32c = Minitest::Mock.new
+      mocked_crc32c.expect :crc32c_mock, file.crc32c
+      stubbed_crc32c = lambda { |_| mocked_crc32c.crc32c_mock }
+
+      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+          Tempfile.open "gcloud-ruby" do |tmpfile|
+            file.download tmpfile, verify: :all
+          end
+        end
+      end
+      mocked_md5.verify
+      mocked_crc32c.verify
+    end
+
+    it "doesn't verify at all when specified" do
+      stubbed_md5 = lambda { |_| fail "Should not be called!" }
+      stubbed_crc32c = lambda { |_| fail "Should not be called!" }
+
+      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+          Tempfile.open "gcloud-ruby" do |tmpfile|
+            file.download tmpfile, verify: :none
+          end
+        end
+      end
+    end
+
+    it "raises when verification fails" do
+      mocked_md5 = Minitest::Mock.new
+      mocked_md5.expect :md5_mock, "NOPE="
+      stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
+      stubbed_crc32c = lambda { |_| fail "Should not be called!" }
+
+      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+          Tempfile.open "gcloud-ruby" do |tmpfile|
+            assert_raises Gcloud::Storage::FileVerificationError do
+              file.download tmpfile
+            end
+          end
+        end
+      end
+      mocked_md5.verify
     end
   end
 

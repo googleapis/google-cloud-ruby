@@ -26,6 +26,7 @@ lib/gcloud/storage/credentials.rb
 lib/gcloud/storage/errors.rb
 lib/gcloud/storage/file.rb
 lib/gcloud/storage/project.rb
+lib/gcloud/storage/verifier.rb
 lib/gcloud/version.rb
 rakelib/console.rake
 rakelib/manifest.rake
@@ -47,5 +48,6 @@ test/gcloud/storage/test_bucket.rb
 test/gcloud/storage/test_file.rb
 test/gcloud/storage/test_project.rb
 test/gcloud/storage/test_storage.rb
+test/gcloud/storage/test_verifier.rb
 test/gcloud/test_version.rb
 test/helper.rb

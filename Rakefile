@@ -27,6 +27,7 @@ Hoe.spec "gcloud" do
   dependency "google-api-client", "~> 0.7"
   dependency "retriable", "~> 1.4"
   dependency "mime-types", "~> 2.4"
+  dependency "digest-crc", "~> 0.4"
   dependency "rubocop", "~> 0.27", :dev
   dependency "httpclient", "~> 2.5", :dev
 end

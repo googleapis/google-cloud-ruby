@@ -41,5 +41,38 @@ module Gcloud
             resp.data["error"]["errors"]
       end
     end
+
+    ##
+    # Raised when a File download fails the verification.
+    class FileVerificationError < Error
+      ##
+      # The type of digest that failed verification,
+      # :md5 or :crc32c.
+      attr_accessor :type
+
+      ##
+      # The value of the digest on the Gcloud file.
+      attr_accessor :gcloud_digest
+
+      ##
+      # The value of the digest on the downloaded file.
+      attr_accessor :local_digest
+
+      def self.for_md5 gcloud_digest, local_digest #:nodoc:
+        new("The downloaded file failed MD5 verification.").tap do |e|
+          e.type = :md5
+          e.gcloud_digest = gcloud_digest
+          e.local_digest = local_digest
+        end
+      end
+
+      def self.for_crc32c gcloud_digest, local_digest #:nodoc:
+        new("The downloaded file failed CRC32c verification.").tap do |e|
+          e.type = :crc32c
+          e.gcloud_digest = gcloud_digest
+          e.local_digest = local_digest
+        end
+      end
+    end
   end
 end
