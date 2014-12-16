@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
-# stub: gcloud 0.0.1.20141216152904 ruby lib
+# stub: gcloud 0.0.1.20141216152953 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "gcloud"
-  s.version = "0.0.1.20141216152904"
+  s.version = "0.0.1.20141216152953"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<minitest>, ["~> 5.4"])
       s.add_development_dependency(%q<rdoc>, ["~> 4.0"])
       s.add_development_dependency(%q<rubocop>, ["~> 0.27"])
+      s.add_development_dependency(%q<httpclient>, ["~> 2.5"])
       s.add_development_dependency(%q<hoe>, ["~> 3.13"])
     else
       s.add_dependency(%q<beefcake>, ["~> 1.0"])
@@ -40,6 +41,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<minitest>, ["~> 5.4"])
       s.add_dependency(%q<rdoc>, ["~> 4.0"])
       s.add_dependency(%q<rubocop>, ["~> 0.27"])
+      s.add_dependency(%q<httpclient>, ["~> 2.5"])
       s.add_dependency(%q<hoe>, ["~> 3.13"])
     end
   else
@@ -50,6 +52,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<minitest>, ["~> 5.4"])
     s.add_dependency(%q<rdoc>, ["~> 4.0"])
     s.add_dependency(%q<rubocop>, ["~> 0.27"])
+    s.add_dependency(%q<httpclient>, ["~> 2.5"])
     s.add_dependency(%q<hoe>, ["~> 3.13"])
   end
 end
