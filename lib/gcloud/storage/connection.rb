@@ -65,6 +65,15 @@ module Gcloud
           body_object: { name: bucket_name }
         )
       end
+
+      ##
+      # Permenently deletes an empty bucket.
+      def delete_bucket bucket_name
+        @client.execute(
+          api_method: @storage.buckets.delete,
+          parameters: { bucket: bucket_name }
+        )
+      end
     end
   end
 end

@@ -40,6 +40,25 @@ class TestStorage < Minitest::Spec
     @connection
   end
 
+
+  def random_bucket_hash name=random_bucket_name
+    {"kind"=>"storage#bucket",
+        "id"=>name,
+        "selfLink"=>"https://www.googleapis.com/storage/v1/b/#{name}",
+        "projectNumber"=>"1234567890",
+        "name"=>name,
+        "timeCreated"=>Time.now,
+        "metageneration"=>"1",
+        "owner"=>{"entity"=>"project-owners-1234567890"},
+        "location"=>"US",
+        "storageClass"=>"STANDARD",
+        "etag"=>"CAE="}
+  end
+
+  def random_bucket_name
+    (0...50).map { ("a".."z").to_a[rand(26)] }.join
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_storage
