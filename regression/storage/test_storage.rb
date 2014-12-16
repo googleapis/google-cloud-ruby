@@ -32,7 +32,17 @@ describe "Storage", :storage do
   end
 
   before do
-    bucket # always create the bucket
+     # always create the bucket
+     # use incremental back off
+     max_tries = 3
+     tries = 0
+    begin
+      sleep tries
+      bucket
+    rescue Gcloud::Storage::ApiError
+      tries += 1
+      retry if tries <= max_tries
+    end
   end
 
   after do
