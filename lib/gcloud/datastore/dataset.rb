@@ -102,6 +102,7 @@ module Gcloud
         key = Key.new key_or_kind, id_or_name unless key_or_kind.is_a? Key
         find_all(key).first
       end
+      alias_method :get, :find
 
       ##
       # Retrieve the entities for the provided keys.

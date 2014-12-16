@@ -131,6 +131,15 @@ describe Gcloud::Datastore::Dataset do
     entity.must_be_kind_of Gcloud::Datastore::Entity
   end
 
+  it "find is aliased to get" do
+    dataset.connection.expect :lookup,
+                              lookup_response,
+                              [Gcloud::Datastore::Proto::Key]
+
+    entity = dataset.get "ds-test", 123
+    entity.must_be_kind_of Gcloud::Datastore::Entity
+  end
+
   it "find_all takes several keys" do
     dataset.connection.expect :lookup,
                               lookup_response,
@@ -139,6 +148,20 @@ describe Gcloud::Datastore::Dataset do
 
     key = Gcloud::Datastore::Key.new "ds-test", "thingie"
     entities = dataset.find_all key, key
+    entities.count.must_equal 2
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+  end
+
+  it "find_all is aliased to lookup" do
+    dataset.connection.expect :lookup,
+                              lookup_response,
+                              [Gcloud::Datastore::Proto::Key,
+                               Gcloud::Datastore::Proto::Key]
+
+    key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+    entities = dataset.lookup key, key
     entities.count.must_equal 2
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
