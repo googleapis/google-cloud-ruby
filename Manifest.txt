@@ -44,6 +44,7 @@ test/gcloud/datastore/test_key.rb
 test/gcloud/datastore/test_query.rb
 test/gcloud/datastore/test_transaction.rb
 test/gcloud/storage/test_bucket.rb
+test/gcloud/storage/test_file.rb
 test/gcloud/storage/test_project.rb
 test/gcloud/storage/test_storage.rb
 test/gcloud/test_version.rb
