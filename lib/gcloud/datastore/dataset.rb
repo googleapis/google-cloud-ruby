@@ -17,6 +17,7 @@ require "gcloud/datastore/credentials"
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
 require "gcloud/datastore/query"
+require "gcloud/datastore/dataset/lookup_results"
 require "gcloud/datastore/dataset/query_results"
 
 module Gcloud
@@ -111,11 +112,15 @@ module Gcloud
       #   key1 = Gcloud::Datastore::Key.new "Task", 123456
       #   key2 = Gcloud::Datastore::Key.new "Task", 987654
       #   tasks = dataset.find_all key1, key2
+      #
+      # The entities returned from the lookup are returned in a
+      # Dataset::LookupResults object.
       def find_all *keys
         response = connection.lookup(*keys.map(&:to_proto))
-        Array(response.found).map do |found|
-          Entity.from_proto found.entity
-        end
+        entities = to_gcloud_entities response.found
+        deferred = to_gcloud_keys deferred
+        missing  = to_gcloud_entities response.missing
+        LookupResults.new entities, deferred, missing
       end
       alias_method :lookup, :find_all
 
