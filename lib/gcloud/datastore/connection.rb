@@ -155,7 +155,7 @@ module Gcloud
           @credentials.sign_http_request req
         end
 
-        fail ConnectionError, proto_method, response unless response.success?
+        fail ApiError.new(proto_method, response) unless response.success?
 
         response.body
       end
