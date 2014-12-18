@@ -126,12 +126,16 @@ module Gcloud
 
       ##
       # Remove entities from the Datastore.
+      # Accepts Entity and Key objects.
       #
       #   dataset = Gcloud::Datastore.dataset
       #   dataset.delete task1, task2
-      def delete *entities
+      def delete *entities_or_keys
+        keys = entities_or_keys.map do |e_or_k|
+          e_or_k.respond_to?(:key) ? e_or_k.key.to_proto : e_or_k.to_proto
+        end
         mutation = Proto.new_mutation.tap do |m|
-          m.delete = entities.map { |entity| entity.key.to_proto }
+          m.delete = keys
         end
         connection.commit mutation
         true
