@@ -184,5 +184,6 @@ describe Gcloud::Datastore::Key do
     key.name.must_be :nil?
     key.dataset_id.must_equal "custom-ds"
     key.namespace.must_equal "custom-ns"
+    key.must_be :frozen?
   end
 end

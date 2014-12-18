@@ -104,4 +104,31 @@ describe Gcloud::Datastore::Entity do
     end
     error.message.must_equal "A property of type Gcloud::Datastore::Credentials::Empty is not supported."
   end
+
+  it "raises when setting a key when persisted" do
+    proto = Gcloud::Datastore::Proto::Entity.new
+    proto.key = Gcloud::Datastore::Proto::Key.new
+    proto.key.path_element = [Gcloud::Datastore::Proto::Key::PathElement.new]
+    proto.key.path_element.first.kind = "User"
+    proto.key.path_element.first.id = 123456
+    proto.property = [Gcloud::Datastore::Proto::Property.new,
+                      Gcloud::Datastore::Proto::Property.new]
+    proto.property.first.name = "name"
+    proto.property.first.value = Gcloud::Datastore::Proto.to_proto_value "User McNumber"
+    proto.property.last.name = "email"
+    proto.property.last.value = Gcloud::Datastore::Proto.to_proto_value "number@example.net"
+
+    entity_from_proto = Gcloud::Datastore::Entity.from_proto proto
+
+    entity_from_proto.must_be :persisted?
+    entity_from_proto.key.must_be :frozen?
+
+    assert_raises RuntimeError do
+      entity_from_proto.key = Gcloud::Datastore::Key.new "User", 456789
+    end
+
+    assert_raises RuntimeError do
+      entity_from_proto.key.id = 456789
+    end
+  end
 end

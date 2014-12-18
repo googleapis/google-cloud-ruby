@@ -140,6 +140,8 @@ module Gcloud
         if Array(proto.path_element).count > 0
           key.parent = Key.from_proto(proto)
         end
+        # Freeze the key to make it immutable.
+        key.freeze
         key
       end
       # rubocop:enable all
