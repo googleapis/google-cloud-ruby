@@ -17,7 +17,7 @@ require "gcloud/datastore/credentials"
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
 require "gcloud/datastore/query"
-require "gcloud/datastore/list"
+require "gcloud/datastore/dataset/query_results"
 
 module Gcloud
   module Datastore
@@ -138,13 +138,14 @@ module Gcloud
       #   query = Gcloud::Datastore::Query.new.kind("Task").
       #     where("completed", "=", true)
       #   tasks = dataset.run query
+      #
+      # The entities returned from the query are returned in a
+      # Dataset::QueryResults object.
       def run query
         response = connection.run_query query.to_proto
-        results = Array(response.batch.entity_result).map do |result|
-          Entity.from_proto result.entity
-        end
-        cursor = Proto.encode_cursor(response.batch.end_cursor)
-        List.new results, cursor
+        entities = to_gcloud_entities response.batch.entity_result
+        cursor = Proto.encode_cursor response.batch.end_cursor
+        QueryResults.new entities, cursor
       end
       alias_method :run_query, :run
 
@@ -194,6 +195,24 @@ module Gcloud
       end
 
       protected
+
+      ##
+      # Convenince method to convert proto entities to Gcloud entities.
+      def to_gcloud_entities proto_results
+        # Entities are nested in an object.
+        Array(proto_results).map do |result|
+          Entity.from_proto result.entity
+        end
+      end
+
+      ##
+      # Convenince method to convert proto keys to Gcloud keys.
+      def to_gcloud_keys proto_results
+        # Keys are not nested in an object like entities are.
+        Array(proto_results).map do |key|
+          Key.from_proto key
+        end
+      end
 
       ##
       # Save a key to be given an ID when comitted.
