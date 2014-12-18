@@ -132,6 +132,18 @@ module Gcloud
         dc
       end
 
+      def self.to_more_results_string more_results
+        if QueryResultBatch::MoreResultsType::NOT_FINISHED == more_results
+          "NOT_FINISHED"
+        elsif QueryResultBatch::MoreResultsType::MORE_RESULTS_AFTER_LIMIT == more_results
+          "MORE_RESULTS_AFTER_LIMIT"
+        elsif QueryResultBatch::MoreResultsType::NO_MORE_RESULTS == more_results
+          "NO_MORE_RESULTS"
+        else
+          nil
+        end
+      end
+
       ##
       # Convenience methods to create protocol buffer objects
 

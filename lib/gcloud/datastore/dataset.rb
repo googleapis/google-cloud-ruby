@@ -145,7 +145,8 @@ module Gcloud
         response = connection.run_query query.to_proto
         entities = to_gcloud_entities response.batch.entity_result
         cursor = Proto.encode_cursor response.batch.end_cursor
-        QueryResults.new entities, cursor
+        more_results = Proto.to_more_results_string response.batch.more_results
+        QueryResults.new entities, cursor, more_results
       end
       alias_method :run_query, :run
 

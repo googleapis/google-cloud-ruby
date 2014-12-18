@@ -41,10 +41,45 @@ module Gcloud
         attr_reader :cursor
 
         ##
+        # The state of the query after the current batch.
+        #
+        # Expected values are:
+        #
+        # "MORE_RESULTS_AFTER_LIMIT":
+        # "NOT_FINISHED":
+        # "NO_MORE_RESULTS":
+        attr_reader :more_results
+
+        ##
+        # Convenience method for determining id the more_results value
+        # is "NOT_FINISHED"
+        def not_finished?
+          more_results == Proto.to_more_results_string(
+            Proto::QueryResultBatch::MoreResultsType::NOT_FINISHED)
+        end
+
+        ##
+        # Convenience method for determining id the more_results value
+        # is "MORE_RESULTS_AFTER_LIMIT"
+        def more_after_limit?
+          more_results == Proto.to_more_results_string(
+            Proto::QueryResultBatch::MoreResultsType::MORE_RESULTS_AFTER_LIMIT)
+        end
+
+        ##
+        # Convenience method for determining id the more_results value
+        # is "NO_MORE_RESULTS"
+        def no_more?
+          more_results == Proto.to_more_results_string(
+            Proto::QueryResultBatch::MoreResultsType::NO_MORE_RESULTS)
+        end
+
+        ##
         # Create a new QueryResults with an array of values.
-        def initialize arr = [], cursor = nil
+        def initialize arr = [], cursor = nil, more_results = nil
           super arr
           @cursor = cursor
+          @more_results = more_results
         end
       end
     end
