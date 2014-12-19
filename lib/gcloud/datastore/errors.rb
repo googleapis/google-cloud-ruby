@@ -30,11 +30,16 @@ module Gcloud
     # Raised when an API call is not successful.
     class ApiError < Gcloud::Datastore::Error
       ##
+      # The API method of the failed HTTP request.
+      attr_reader :response
+
+      ##
       # The response object of the failed HTTP request.
       attr_reader :response
 
       def initialize method, response = nil
-        super "API call to #{method} was not successful"
+        super("API call to #{method} was not successful")
+        @method = method
         @response = response
       end
     end
@@ -52,7 +57,7 @@ module Gcloud
       attr_reader :inner
 
       def initialize message, inner = nil
-        super message
+        super(message)
         @inner = inner
       end
     end

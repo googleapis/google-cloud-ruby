@@ -53,6 +53,7 @@ describe Gcloud::Datastore::Dataset do
             end.to_proto
           end
         end
+        batch.end_cursor = Gcloud::Datastore::Proto.decode_cursor query_cursor
       end
     end
   end
@@ -61,6 +62,7 @@ describe Gcloud::Datastore::Dataset do
       response.transaction = "giterdone"
     end
   end
+  let(:query_cursor) { "c3VwZXJhd2Vzb21lIQ==" }
 
   before do
     dataset.connection = Minitest::Mock.new
@@ -149,6 +151,8 @@ describe Gcloud::Datastore::Dataset do
     key = Gcloud::Datastore::Key.new "ds-test", "thingie"
     entities = dataset.find_all key, key
     entities.count.must_equal 2
+    entities.deferred.count.must_equal 0
+    entities.missing.count.must_equal 0
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
@@ -163,8 +167,72 @@ describe Gcloud::Datastore::Dataset do
     key = Gcloud::Datastore::Key.new "ds-test", "thingie"
     entities = dataset.lookup key, key
     entities.count.must_equal 2
+    entities.deferred.count.must_equal 0
+    entities.missing.count.must_equal 0
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+  end
+
+  describe "find_all result object" do
+    let(:lookup_response_deferred) do
+      lookup_response.tap do |response|
+        response.deferred = 2.times.map do
+          Gcloud::Datastore::Key.new("ds-test", "thingie").to_proto
+        end
+      end
+    end
+
+    let(:lookup_response_missing) do
+      lookup_response.tap do |response|
+        response.missing = 2.times.map do
+          Gcloud::Datastore::Proto::EntityResult.new.tap do |er|
+            er.entity = Gcloud::Datastore::Entity.new.tap do |e|
+              e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+              e["name"] = "thingamajig"
+            end.to_proto
+          end
+        end
+      end
+    end
+
+    it "contains deferred entities" do
+      dataset.connection.expect :lookup,
+                                lookup_response_deferred,
+                                [Gcloud::Datastore::Proto::Key,
+                                 Gcloud::Datastore::Proto::Key]
+
+      key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      entities = dataset.find_all key, key
+      entities.count.must_equal 2
+      entities.deferred.count.must_equal 2
+      entities.missing.count.must_equal 0
+      entities.each do |entity|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+      end
+      entities.deferred.each do |key|
+        key.must_be_kind_of Gcloud::Datastore::Key
+      end
+    end
+
+
+    it "contains missing entities" do
+      dataset.connection.expect :lookup,
+                                lookup_response_missing,
+                                [Gcloud::Datastore::Proto::Key,
+                                 Gcloud::Datastore::Proto::Key]
+
+      key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      entities = dataset.find_all key, key
+      entities.count.must_equal 2
+      entities.deferred.count.must_equal 0
+      entities.missing.count.must_equal 2
+      entities.each do |entity|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+      end
+      entities.missing.each do |entity|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+      end
     end
   end
 
@@ -191,6 +259,11 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor.must_equal query_cursor
+    entities.more_results.must_be :nil?
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.no_more?
   end
 
   it "run_query will fulfill a query" do
@@ -204,7 +277,88 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor.must_equal query_cursor
+    entities.more_results.must_be :nil?
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.no_more?
   end
+
+  describe "query result object" do
+    let(:run_query_response_not_finished) do
+      run_query_response.tap do |response|
+        response.batch.more_results =
+          Gcloud::Datastore::Proto::QueryResultBatch::MoreResultsType::NOT_FINISHED
+      end
+    end
+    let(:run_query_response_more_after_limit) do
+      run_query_response.tap do |response|
+        response.batch.more_results =
+          Gcloud::Datastore::Proto::QueryResultBatch::MoreResultsType::MORE_RESULTS_AFTER_LIMIT
+      end
+    end
+    let(:run_query_response_no_more) do
+      run_query_response.tap do |response|
+        response.batch.more_results =
+          Gcloud::Datastore::Proto::QueryResultBatch::MoreResultsType::NO_MORE_RESULTS
+      end
+    end
+
+    it "has more_results not_finished" do
+      dataset.connection.expect :run_query,
+                                run_query_response_not_finished,
+                                [Gcloud::Datastore::Proto::Query]
+
+      query = Gcloud::Datastore::Query.new.kind("User")
+      entities = dataset.run query
+      entities.count.must_equal 2
+      entities.each do |entity|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+      end
+      entities.cursor.must_equal query_cursor
+      entities.more_results.must_equal "NOT_FINISHED"
+      assert entities.not_finished?
+      refute entities.more_after_limit?
+      refute entities.no_more?
+    end
+
+    it "has more_results more_after_limit" do
+      dataset.connection.expect :run_query,
+                                run_query_response_more_after_limit,
+                                [Gcloud::Datastore::Proto::Query]
+
+      query = Gcloud::Datastore::Query.new.kind("User")
+      entities = dataset.run query
+      entities.count.must_equal 2
+      entities.each do |entity|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+      end
+      entities.cursor.must_equal query_cursor
+      entities.more_results.must_equal "MORE_RESULTS_AFTER_LIMIT"
+      refute entities.not_finished?
+      assert entities.more_after_limit?
+      refute entities.no_more?
+    end
+
+    it "has more_results no_more" do
+      dataset.connection.expect :run_query,
+                                run_query_response_no_more,
+                                [Gcloud::Datastore::Proto::Query]
+
+      query = Gcloud::Datastore::Query.new.kind("User")
+      entities = dataset.run query
+      entities.count.must_equal 2
+      entities.each do |entity|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+      end
+      entities.cursor.must_equal query_cursor
+      entities.more_results.must_equal "NO_MORE_RESULTS"
+      refute entities.not_finished?
+      refute entities.more_after_limit?
+      assert entities.no_more?
+    end
+  end
+
 
   it "transaction will return a Transaction" do
     dataset.connection.expect :begin_transaction,
