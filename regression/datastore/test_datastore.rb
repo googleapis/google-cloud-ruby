@@ -125,6 +125,25 @@ describe "Datastore", :datastore do
       entities.count.must_equal 0
     end
 
+    it "entities retrieved from datastore have immutable keys" do
+      post.key = Gcloud::Datastore::Key.new "Post", "post1"
+      dataset.save post
+
+      refresh = dataset.find post.key
+      refresh.must_be :persisted?
+      refresh.key.must_be :frozen?
+
+      assert_raises RuntimeError do
+        refresh.key = Gcloud::Datastore::Key.new "User", 456789
+      end
+
+      assert_raises RuntimeError do
+        refresh.key.id = 456789
+      end
+
+      dataset.delete post
+    end
+
   end
 
   it "should be able to save keys as a part of entity and query by key" do
