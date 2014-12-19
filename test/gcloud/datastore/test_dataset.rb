@@ -236,7 +236,7 @@ describe Gcloud::Datastore::Dataset do
     end
   end
 
-  it "delete will call commit" do
+  it "delete with entity will call commit" do
     dataset.connection.expect :commit,
                               commit_response,
                               [Gcloud::Datastore::Proto::Mutation]
@@ -246,6 +246,15 @@ describe Gcloud::Datastore::Dataset do
       e["name"] = "thingamajig"
     end
     dataset.delete entity
+  end
+
+  it "delete with key will call commit" do
+    dataset.connection.expect :commit,
+                              commit_response,
+                              [Gcloud::Datastore::Proto::Mutation]
+
+    key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+    dataset.delete key
   end
 
   it "run will fulfill a query" do

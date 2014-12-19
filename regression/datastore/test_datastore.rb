@@ -69,6 +69,21 @@ describe "Datastore", :datastore do
       refresh.must_be :nil?
     end
 
+    it "should save/find with a key name and delete with a key" do
+      post.key = Gcloud::Datastore::Key.new "Post", "post1"
+      dataset.save post
+
+      refresh = dataset.find post.key
+      refresh.key.kind.must_equal post.key.kind
+      refresh.key.id.must_equal   post.key.id
+      refresh.key.name.must_equal post.key.name
+      refresh.properties.must_equal post.properties
+
+      dataset.delete post.key
+      refresh = dataset.find post.key
+      refresh.must_be :nil?
+    end
+
     it "should save/find/delete with a numeric key id" do
       post.key = Gcloud::Datastore::Key.new "Post", 123456789
       dataset.save post
