@@ -28,15 +28,14 @@ module Gcloud
     class Entity
       ##
       # The Key that identifies the entity.
-      attr_accessor :key
+      attr_reader :key
 
       ##
       # Create a new Entity object.
       def initialize
         @_entity = Proto::Entity.new
-        @_entity.key = Proto::Key.new
         @_entity.property = []
-        @key = Key.from_proto @_entity.key
+        @key = Key.new
       end
 
       ##
@@ -80,6 +79,32 @@ module Gcloud
         Array(@_entity.property).map do |p|
           [p.name, Proto.from_proto_value(p.value)]
         end
+      end
+
+      ##
+      # Sets the Key that identifies the entity.
+      # This can only be set before the entity is saved.
+      # Once the entity is saved, the key is frozen and immutable.
+      #
+      # Trying to set a key when immutable will raise a RuntimeError.
+      #
+      #   task = dataset.find "Task", 123456
+      #   task.persisted? #=> true
+      #   task.key = Gcloud::Datastore::Key.new "Task", 456789 #=> RuntimeError
+      #   task.key.frozen? #=> true
+      #   task.key.id = 456789 #=> RuntimeError
+      def key= new_key
+        if persisted?
+          fail "This entity's key is immutable."
+        end
+        @key = new_key
+      end
+
+      ##
+      # Returns true if the record is persisted to the datastore.
+      # Otherwise returns false.
+      def persisted?
+        @key && @key.frozen?
       end
 
       ##
