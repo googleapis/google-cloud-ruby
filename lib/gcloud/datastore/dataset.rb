@@ -118,7 +118,7 @@ module Gcloud
       def find_all *keys
         response = connection.lookup(*keys.map(&:to_proto))
         entities = to_gcloud_entities response.found
-        deferred = to_gcloud_keys deferred
+        deferred = to_gcloud_keys response.deferred
         missing  = to_gcloud_entities response.missing
         LookupResults.new entities, deferred, missing
       end

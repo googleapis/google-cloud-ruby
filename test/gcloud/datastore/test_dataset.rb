@@ -149,6 +149,8 @@ describe Gcloud::Datastore::Dataset do
     key = Gcloud::Datastore::Key.new "ds-test", "thingie"
     entities = dataset.find_all key, key
     entities.count.must_equal 2
+    entities.deferred.count.must_equal 0
+    entities.missing.count.must_equal 0
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
@@ -163,8 +165,72 @@ describe Gcloud::Datastore::Dataset do
     key = Gcloud::Datastore::Key.new "ds-test", "thingie"
     entities = dataset.lookup key, key
     entities.count.must_equal 2
+    entities.deferred.count.must_equal 0
+    entities.missing.count.must_equal 0
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+  end
+
+  describe "find_all result object" do
+    let(:lookup_response_deferred) do
+      lookup_response.tap do |response|
+        response.deferred = 2.times.map do
+          Gcloud::Datastore::Key.new("ds-test", "thingie").to_proto
+        end
+      end
+    end
+
+    let(:lookup_response_missing) do
+      lookup_response.tap do |response|
+        response.missing = 2.times.map do
+          Gcloud::Datastore::Proto::EntityResult.new.tap do |er|
+            er.entity = Gcloud::Datastore::Entity.new.tap do |e|
+              e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+              e["name"] = "thingamajig"
+            end.to_proto
+          end
+        end
+      end
+    end
+
+    it "contains deferred entities" do
+      dataset.connection.expect :lookup,
+                                lookup_response_deferred,
+                                [Gcloud::Datastore::Proto::Key,
+                                 Gcloud::Datastore::Proto::Key]
+
+      key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      entities = dataset.find_all key, key
+      entities.count.must_equal 2
+      entities.deferred.count.must_equal 2
+      entities.missing.count.must_equal 0
+      entities.each do |entity|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+      end
+      entities.deferred.each do |key|
+        key.must_be_kind_of Gcloud::Datastore::Key
+      end
+    end
+
+
+    it "contains missing entities" do
+      dataset.connection.expect :lookup,
+                                lookup_response_missing,
+                                [Gcloud::Datastore::Proto::Key,
+                                 Gcloud::Datastore::Proto::Key]
+
+      key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      entities = dataset.find_all key, key
+      entities.count.must_equal 2
+      entities.deferred.count.must_equal 0
+      entities.missing.count.must_equal 2
+      entities.each do |entity|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+      end
+      entities.missing.each do |entity|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+      end
     end
   end
 
