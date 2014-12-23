@@ -115,8 +115,9 @@ module Gcloud
       #
       # A chunk_size value can be provided in the options to be used
       # in resumable uploads. This value is the number of bytes per
-      # chunk and must be divisible by 256KB or a ChunkSizeError will
-      # be raised.
+      # chunk and must be divisible by 256KB. If it is not divisible
+      # by 265KB then it will be lowered to the nearest acceptible
+      # value.
       #
       #   bucket.create_file "path/to/local.file.ext",
       #                      "destination/path/file.ext",
@@ -168,7 +169,7 @@ module Gcloud
       end
 
       def upload_resumable file, path, chunk_size
-        verify_chunk_size! chunk_size
+        chunk_size = verify_chunk_size! chunk_size
 
         resp = @connection.insert_file_resumable name, file, path, chunk_size
 
@@ -182,9 +183,13 @@ module Gcloud
       ##
       # Determines if a chunk_size is valid.
       def verify_chunk_size! chunk_size
-        return if chunk_size.nil?
+        chunk_size = chunk_size.to_i
         chunk_mod = 256 * 1024 # 256KB
-        fail ChunkSizeError if (chunk_size.to_i % chunk_mod) != 0
+        if (chunk_size.to_i % chunk_mod) != 0
+          chunk_size = (chunk_size / chunk_mod) * chunk_mod
+        end
+        return if chunk_size.zero?
+        chunk_size
       end
     end
   end
