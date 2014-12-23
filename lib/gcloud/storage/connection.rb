@@ -23,7 +23,6 @@ module Gcloud
     # as well as expose the API calls.
     class Connection #:nodoc:
       API_VERSION = "v1"
-      API_URL = "https://www.googleapis.com"
 
       attr_accessor :project
       attr_accessor :credentials #:nodoc:
@@ -36,7 +35,7 @@ module Gcloud
         @client = Google::APIClient.new application_name:    "gcloud-ruby",
                                         application_version: Gcloud::VERSION
         @client.authorization = @credentials.client
-        @storage = @client.discovered_api "storage", "v1"
+        @storage = @client.discovered_api "storage", API_VERSION
       end
 
       ##
