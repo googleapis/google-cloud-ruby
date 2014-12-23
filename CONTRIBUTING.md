@@ -53,11 +53,11 @@ As soon as the indexes are prepared you can run the regression tests:
 $ rake test:regression[PROJECT_ID,KEYFILE_PATH]
 ```
 
-Or, if you prefer you can store the values in the `GCLOUD_PROJECT` and `GCLOUD_KEYFILE` environment variables:
+Or, if you prefer you can store the values in the `GCLOUD_TEST_PROJECT` and `GCLOUD_TEST_KEYFILE` environment variables:
 
 ``` sh
-$ export GCLOUD_PROJECT=my-project-id
-$ export GCLOUD_KEYFILE=/path/to/keyfile.json
+$ export GCLOUD_TEST_PROJECT=my-project-id
+$ export GCLOUD_TEST_KEYFILE=/path/to/keyfile.json
 $ rake test:regression
 ```
 

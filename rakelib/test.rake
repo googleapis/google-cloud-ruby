@@ -19,11 +19,11 @@ namespace :test do
   desc "Runs the regression tests."
   task :regression, :project, :keyfile do |t, args|
     project = args[:project]
-    project ||= ENV["GCLOUD_PROJECT"] || ENV["DATASTORE_PROJECT"]
+    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DATASTORE_PROJECT"]
     keyfile = args[:keyfile]
-    keyfile ||= ENV["GCLOUD_KEYFILE"] || ENV["DATASTORE_KEYFILE"]
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_KEYFILE"]
     if project.nil? || keyfile.nil?
-      fail "You must provide a project and keyfile. e.g. rake test:regression[test123, /path/to/keyfile.json] or GCLOUD_PROJECT=test123 GCLOUD_KEYFILE=/path/to/keyfile.json rake test:regression"
+      fail "You must provide a project and keyfile. e.g. rake test:regression[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake test:regression"
     end
     ENV["DEVSERVER_PROJECT"] = nil # clear in case it is also set
     ENV["DATASTORE_PROJECT"] = project # always overwrite from command line
@@ -40,9 +40,9 @@ namespace :test do
     desc "Runs the datastore regression tests."
     task :datastore, :project, :keyfile do |t, args|
       project = args[:project]
-      project ||= ENV["GCLOUD_PROJECT"] || ENV["DATASTORE_PROJECT"]
+      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DATASTORE_PROJECT"]
       keyfile = args[:keyfile]
-      keyfile ||= ENV["GCLOUD_KEYFILE"] || ENV["DATASTORE_KEYFILE"]
+      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_KEYFILE"]
       if project.nil? || keyfile.nil?
         fail "You must provide a project and keyfile. e.g. rake test:regression:datastore[test123, /path/to/keyfile.json] or DATASTORE_PROJECT=test123 DATASTORE_KEYFILE=/path/to/keyfile.json rake test:regression:datastore"
       end
@@ -74,9 +74,9 @@ namespace :test do
     desc "Runs the storage regression tests."
     task :storage, :project, :keyfile do |t, args|
       project = args[:project]
-      project ||= ENV["GCLOUD_PROJECT"] || ENV["STORAGE_PROJECT"]
+      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["STORAGE_PROJECT"]
       keyfile = args[:keyfile]
-      keyfile ||= ENV["GCLOUD_KEYFILE"] || ENV["STORAGE_KEYFILE"]
+      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["STORAGE_KEYFILE"]
       if project.nil? || keyfile.nil?
         fail "You must provide a project and keyfile. e.g. rake test:regression:storage[test123, /path/to/keyfile.json] or STORAGE_PROJECT=test123 STORAGE_KEYFILE=/path/to/keyfile.json rake test:regression:storage"
       end
