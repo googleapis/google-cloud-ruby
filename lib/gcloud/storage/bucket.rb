@@ -60,6 +60,8 @@ module Gcloud
       # Object data for objects in the bucket resides in physical
       # storage within this region. Defaults to US.
       # See the developer's guide for the authoritative list.
+      #
+      # https://cloud.google.com/storage/docs/concepts-techniques
       def location
         @gapi["location"]
       end
