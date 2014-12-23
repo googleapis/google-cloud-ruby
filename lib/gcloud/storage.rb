@@ -47,6 +47,8 @@ module Gcloud
     # Retrieve resumable threshold.
     # If uploads are larger in size than this value then
     # resumable uploads are used.
+    #
+    # The default value is 5 MiB (5,000,000 bytes).
     def self.resumable_threshold
       @@resumable_threshold
     end
@@ -60,7 +62,7 @@ module Gcloud
       # rubocop:enable Style/ClassVars
     end
 
-    # Set the default threshold
+    # Set the default threshold to 5 MiB.
     self.resumable_threshold = 5_000_000
   end
 end
