@@ -15,8 +15,6 @@
 require "digest/md5"
 require "digest/crc32c"
 
-# I don't love this name/location, this may change
-
 module Gcloud
   module Storage
     module Verifier #:nodoc:
