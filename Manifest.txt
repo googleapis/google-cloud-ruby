@@ -7,6 +7,7 @@ README.md
 Rakefile
 gcloud.gemspec
 lib/gcloud.rb
+lib/gcloud/credentials.rb
 lib/gcloud/datastore.rb
 lib/gcloud/datastore/connection.rb
 lib/gcloud/datastore/credentials.rb
