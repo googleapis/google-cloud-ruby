@@ -19,17 +19,18 @@ namespace :test do
   desc "Runs the regression tests."
   task :regression, :project, :keyfile do |t, args|
     project = args[:project]
-    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DATASTORE_PROJECT"]
+    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DATASTORE_TEST_PROJECT"]
     keyfile = args[:keyfile]
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_KEYFILE"]
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_TEST_KEYFILE"]
     if project.nil? || keyfile.nil?
       fail "You must provide a project and keyfile. e.g. rake test:regression[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake test:regression"
     end
     ENV["DEVSERVER_PROJECT"] = nil # clear in case it is also set
-    ENV["DATASTORE_PROJECT"] = project # always overwrite from command line
-    ENV["DATASTORE_KEYFILE"] = keyfile # always overwrite from command line
-    ENV["STORAGE_PROJECT"] = project # always overwrite from command line
-    ENV["STORAGE_KEYFILE"] = keyfile # always overwrite from command line
+    # always overwrite when running tests
+    ENV["DATASTORE_PROJECT"] = project
+    ENV["DATASTORE_KEYFILE"] = keyfile
+    ENV["STORAGE_PROJECT"] = project
+    ENV["STORAGE_KEYFILE"] = keyfile
 
     $LOAD_PATH.unshift "lib", "test", "regression"
     Dir.glob("regression/**/test*.rb").each { |file| require_relative "../#{file}"}
@@ -40,15 +41,16 @@ namespace :test do
     desc "Runs the datastore regression tests."
     task :datastore, :project, :keyfile do |t, args|
       project = args[:project]
-      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DATASTORE_PROJECT"]
+      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DATASTORE_TEST_PROJECT"]
       keyfile = args[:keyfile]
-      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_KEYFILE"]
+      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_TEST_KEYFILE"]
       if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:regression:datastore[test123, /path/to/keyfile.json] or DATASTORE_PROJECT=test123 DATASTORE_KEYFILE=/path/to/keyfile.json rake test:regression:datastore"
+        fail "You must provide a project and keyfile. e.g. rake test:regression:datastore[test123, /path/to/keyfile.json] or DATASTORE_TEST_PROJECT=test123 DATASTORE_TEST_KEYFILE=/path/to/keyfile.json rake test:regression:datastore"
       end
       ENV["DEVSERVER_PROJECT"] = nil # clear in case it is also set
-      ENV["DATASTORE_PROJECT"] = project # always overwrite from command line
-      ENV["DATASTORE_KEYFILE"] = keyfile # always overwrite from command line
+      # always overwrite when running tests
+      ENV["DATASTORE_PROJECT"] = project
+      ENV["DATASTORE_KEYFILE"] = keyfile
 
       $LOAD_PATH.unshift "lib", "test", "regression"
       Dir.glob("regression/datastore/**/test*.rb").each { |file| require_relative "../#{file}"}
@@ -64,8 +66,8 @@ namespace :test do
       if project.nil?
         fail "You must provide a project. e.g. rake test:regression:devserver[test123] or DEVSERVER_PROJECT=test123 rake test:regression:devserver"
       end
-      ENV["DEVSERVER_PROJECT"] = project # always overwrite from command line
-      ENV["DEVSERVER_HOST"]    = host    # always overwrite from command line
+      ENV["DEVSERVER_PROJECT"] = project
+      ENV["DEVSERVER_HOST"]    = host
 
       $LOAD_PATH.unshift "lib", "test", "regression"
       Dir.glob("regression/datastore/**/test*.rb").each { |file| require_relative "../#{file}"}
@@ -74,14 +76,15 @@ namespace :test do
     desc "Runs the storage regression tests."
     task :storage, :project, :keyfile do |t, args|
       project = args[:project]
-      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["STORAGE_PROJECT"]
+      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["STORAGE_TEST_PROJECT"]
       keyfile = args[:keyfile]
-      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["STORAGE_KEYFILE"]
+      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["STORAGE_TEST_KEYFILE"]
       if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:regression:storage[test123, /path/to/keyfile.json] or STORAGE_PROJECT=test123 STORAGE_KEYFILE=/path/to/keyfile.json rake test:regression:storage"
+        fail "You must provide a project and keyfile. e.g. rake test:regression:storage[test123, /path/to/keyfile.json] or STORAGE_TEST_PROJECT=test123 STORAGE_TEST_KEYFILE=/path/to/keyfile.json rake test:regression:storage"
       end
-      ENV["STORAGE_PROJECT"] = project # always overwrite from command line
-      ENV["STORAGE_KEYFILE"] = keyfile # always overwrite from command line
+      # always overwrite when running tests
+      ENV["STORAGE_PROJECT"] = project
+      ENV["STORAGE_KEYFILE"] = keyfile
 
       $LOAD_PATH.unshift "lib", "test", "regression"
       Dir.glob("regression/storage/**/test*.rb").each { |file| require_relative "../#{file}"}
