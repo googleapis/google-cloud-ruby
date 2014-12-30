@@ -32,17 +32,8 @@ describe "Storage", :storage do
   end
 
   before do
-     # always create the bucket
-     # use incremental back off
-     max_tries = 3
-     tries = 0
-    begin
-      sleep tries
-      bucket
-    rescue Gcloud::Storage::ApiError
-      tries += 1
-      retry if tries <= max_tries
-    end
+    # always create the bucket
+    bucket
   end
 
   after do
@@ -117,18 +108,18 @@ describe "Storage", :storage do
       end
     end
 
-    # it "should write metadata" do
-    #   skip
+    it "should write metadata" do
+      skip
 
-    #   meta = { content_type: "x-image/x-png",
-    #            title: "Logo Image" }
-    #   uploaded = bucket.create_file files[:logo][:path],
-    #                                 "CloudLogo",
-    #                                 meta
+      meta = { content_type: "x-image/x-png",
+               title: "Logo Image" }
+      uploaded = bucket.create_file files[:logo][:path],
+                                    "CloudLogo",
+                                    meta
 
-    #   uploaded.content_type.must_equal meta[:content_type]
-    #   uploaded.meta["title"].must_equal meta[:title]
-    # end
+      uploaded.content_type.must_equal meta[:content_type]
+      uploaded.meta["title"].must_equal meta[:title]
+    end
 
     it "should copy an existing file" do
       uploaded = bucket.create_file files[:logo][:path], "CloudLogo"
@@ -160,16 +151,16 @@ describe "Storage", :storage do
       assert_equal filenames.size, files.size
     end
 
-    # it "should paginate the list" do
-    #   skip
+    it "should paginate the list" do
+      skip
 
-    #   limit = filenames.size - 1
-    #   files = bucket.files limit: limit
-    #   files.size.must_equal limit
+      limit = filenames.size - 1
+      files = bucket.files limit: limit
+      files.size.must_equal limit
 
-    #   files = bucket.files limit: limit, offset: limit
-    #   files.size.must_equal 1
-    # end
+      files = bucket.files limit: limit, offset: limit
+      files.size.must_equal 1
+    end
   end
 
   describe "sign urls" do
@@ -180,27 +171,27 @@ describe "Storage", :storage do
       end
     end
 
-    # it "should create a signed read url" do
-    #   skip
+    it "should create a signed read url" do
+      skip
 
-    #   five_min_from_now = Time.now + 5 * 60
-    #   url = file.signed_url action: "read",
-    #                         expires: five_min_from_now
+      five_min_from_now = Time.now + 5 * 60
+      url = file.signed_url action: "read",
+                            expires: five_min_from_now
 
-    #   read_contents = Net::HTTP.get URI(url)
-    #   assert_equal local_file.read, read_contents
-    # end
+      read_contents = Net::HTTP.get URI(url)
+      assert_equal local_file.read, read_contents
+    end
 
-    # it "should create a signed delete url" do
-    #   skip
+    it "should create a signed delete url" do
+      skip
 
-    #   url = file.signed_url action: "delete",
-    #                         expires: five_min_from_now
+      url = file.signed_url action: "delete",
+                            expires: five_min_from_now
 
-    #   http = Net::HTTP.new URI(url)
-    #   resp = http.delete uri.path
+      http = Net::HTTP.new URI(url)
+      resp = http.delete uri.path
 
-    #   assert_equal 404, resp.code
-    # end
+      assert_equal 404, resp.code
+    end
   end
 end
