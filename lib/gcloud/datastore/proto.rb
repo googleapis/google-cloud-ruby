@@ -223,6 +223,14 @@ module Gcloud
           rq.query = query_proto
         end
       end
+
+      class Key
+        def dup
+          proto_request_body = ""
+          self.encode proto_request_body
+          Key.decode proto_request_body
+        end
+      end
     end
   end
 end

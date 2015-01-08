@@ -98,6 +98,33 @@ describe Gcloud::Datastore::Entity do
     proto_task_2.entity_value.property.find { |p| p.name == "description" }.value.string_value.must_equal "can persist lists"
   end
 
+  it "can store keys as properties" do
+    list = Gcloud::Datastore::Entity.new.tap do |t|
+      t.key = Gcloud::Datastore::Key.new "List", 1111
+      t["description"] = "can persist keys"
+    end
+    key1 = Gcloud::Datastore::Key.new "Task", 1111
+
+    list["head"] = key1
+
+    # Do this multiple times to make sure the call to Key.from_proto
+    # isn't modifying the original key stored in the entity's property.
+    5.times do
+      assert_equal key1.path, list["head"].path
+    end
+
+    proto = list.to_proto
+
+    key_property = proto.property.last
+    key_property.name.must_equal "head"
+
+    key_value = key_property.value.key_value
+    key_value.wont_be :nil?
+    key_value.path_element.first.kind.must_equal key1.kind
+    key_value.path_element.first.name.must_equal key1.name
+    key_value.path_element.first.id.must_equal   key1.id
+  end
+
   it "raises when setting an unsupported property type" do
     error = assert_raises Gcloud::Datastore::PropertyError do
       entity["thing"] = Gcloud::Datastore::Credentials::Empty.new
