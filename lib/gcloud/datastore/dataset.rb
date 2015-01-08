@@ -51,11 +51,10 @@ module Gcloud
       end
 
       ##
-      # The project/dataset_id connected to.
+      # The project connected to.
       def project
         connection.dataset_id
       end
-      alias_method :dataset_id, :project
 
       ##
       # Generate IDs for a Key before creating an entity.
