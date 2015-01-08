@@ -24,15 +24,12 @@ describe "Gcloud Storage Backoff", :mock_storage do
   it "creates a bucket even when rate limited" do
     new_bucket_name = "new-bucket-#{Time.now.to_i}"
 
-    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
-      JSON.parse(env.body)["name"].must_equal new_bucket_name
-      [429, {"Content-Type"=>"application/json"},
-       rate_limit_exceeded_json]
-    end
-    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
-      JSON.parse(env.body)["name"].must_equal new_bucket_name
-      [429, {"Content-Type"=>"application/json"},
-       rate_limit_exceeded_json]
+    2.times do
+      mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+        JSON.parse(env.body)["name"].must_equal new_bucket_name
+        [429, {"Content-Type"=>"application/json"},
+         rate_limit_exceeded_json]
+      end
     end
     mock_connection.post "/storage/v1/b?project=#{project}" do |env|
       JSON.parse(env.body)["name"].must_equal new_bucket_name
@@ -46,14 +43,35 @@ describe "Gcloud Storage Backoff", :mock_storage do
     end
   end
 
-  it "deletes a bucket even when rate limited" do
-    mock_connection.delete "/storage/v1/b/#{bucket.name}" do |env|
-      [429, {"Content-Type"=>"application/json"},
-       rate_limit_exceeded_json]
+
+  it "creates a bucket with backoff settings" do
+    new_bucket_name = "new-bucket-#{Time.now.to_i}"
+
+    5.times do
+      mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+        JSON.parse(env.body)["name"].must_equal new_bucket_name
+        [429, {"Content-Type"=>"application/json"},
+         rate_limit_exceeded_json]
+      end
     end
-    mock_connection.delete "/storage/v1/b/#{bucket.name}" do |env|
-      [429, {"Content-Type"=>"application/json"},
-       rate_limit_exceeded_json]
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      JSON.parse(env.body)["name"].must_equal new_bucket_name
+      [200, {"Content-Type"=>"application/json"},
+       create_bucket_json]
+    end
+
+    # Should be delayed ~15 seconds
+    assert_execution_time 15 do
+      storage.create_bucket new_bucket_name, retries: 5
+    end
+  end
+
+  it "deletes a bucket even when rate limited" do
+    2.times do
+      mock_connection.delete "/storage/v1/b/#{bucket.name}" do |env|
+        [429, {"Content-Type"=>"application/json"},
+         rate_limit_exceeded_json]
+      end
     end
     mock_connection.delete "/storage/v1/b/#{bucket.name}" do |env|
       [200, {"Content-Type"=>"application/json"}, ""]
@@ -62,6 +80,23 @@ describe "Gcloud Storage Backoff", :mock_storage do
     # Should be delayed ~3 seconds
     assert_execution_time 3 do
       bucket.delete
+    end
+  end
+
+  it "deletes a bucket with backoff settings" do
+    5.times do
+      mock_connection.delete "/storage/v1/b/#{bucket.name}" do |env|
+        [429, {"Content-Type"=>"application/json"},
+         rate_limit_exceeded_json]
+      end
+    end
+    mock_connection.delete "/storage/v1/b/#{bucket.name}" do |env|
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    # Should be delayed ~15 seconds
+    assert_execution_time 15 do
+      bucket.delete retries: 5
     end
   end
 

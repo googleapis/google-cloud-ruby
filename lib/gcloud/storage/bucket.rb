@@ -75,9 +75,17 @@ module Gcloud
       ##
       # Permenently deletes the bucket.
       # The bucket must be empty.
-      def delete
+      #
+      #   bucket.delete
+      #
+      # The API call to delete the bucket may be retried under certain
+      # conditions. See Gcloud::Backoff to control this behavior, or
+      # specify the wanted behavior in the call:
+      #
+      #   bucket.delete retries: 5
+      def delete options = {}
         ensure_connection!
-        resp = connection.delete_bucket name
+        resp = connection.delete_bucket name, options
         if resp.success?
           true
         else

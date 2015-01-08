@@ -66,8 +66,16 @@ module Gcloud
 
       ##
       # Creates a new bucket.
-      def create_bucket bucket_name
-        resp = connection.insert_bucket bucket_name
+      #
+      #   bucket = project.create_bucket "my-bucket"
+      #
+      # The API call to create the bucket may be retried under certain
+      # conditions. See Gcloud::Backoff to control this behavior, or
+      # specify the wanted behavior in the call:
+      #
+      #   bucket = project.create_bucket "my-bucket", retries: 5
+      def create_bucket bucket_name, options = {}
+        resp = connection.insert_bucket bucket_name, options
         if resp.success?
           Bucket.from_gapi resp.data, connection
         else
