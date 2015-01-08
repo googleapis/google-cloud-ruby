@@ -233,8 +233,9 @@ module Gcloud
         Array(@_entity.property).each do |property|
           excluded = exclude_from_indexes? property.name
           if excluded.is_a? Array
-            # Lists are never indexed
-            property.value.indexed = false
+            # Lists must not set indexed, or this error will happen:
+            # "A Value containing a list_value cannot specify indexed."
+            property.value.indexed = nil
             property.value.list_value.each_with_index do |value, index|
               value.indexed = !excluded[index]
             end
