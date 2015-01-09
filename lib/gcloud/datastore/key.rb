@@ -127,18 +127,19 @@ module Gcloud
       # This is not part of the public API.
       def self.from_proto proto #:nodoc:
         # Disable rules because the complexity here is neccessary.
+        key_proto = proto.dup
         key = Key.new
-        proto_path_element = Array(proto.path_element).pop
+        proto_path_element = Array(key_proto.path_element).pop
         if proto_path_element
           key = Key.new proto_path_element.kind,
                         proto_path_element.id || proto_path_element.name
         end
-        if proto.partition_id
-          key.dataset_id = proto.partition_id.dataset_id
-          key.namespace  = proto.partition_id.namespace
+        if key_proto.partition_id
+          key.dataset_id = key_proto.partition_id.dataset_id
+          key.namespace  = key_proto.partition_id.namespace
         end
-        if Array(proto.path_element).count > 0
-          key.parent = Key.from_proto(proto)
+        if Array(key_proto.path_element).count > 0
+          key.parent = Key.from_proto(key_proto)
         end
         # Freeze the key to make it immutable.
         key.freeze

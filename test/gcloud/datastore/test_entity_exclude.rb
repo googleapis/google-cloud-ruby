@@ -101,7 +101,7 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
       proto = entity.to_proto
 
       tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_equal false # list values must always be false
+      tag_proto.indexed.must_be :nil? # list values must always be unset
       tag_proto.list_value.map { |value| value.indexed }.must_equal [true, true]
     end
 
@@ -114,7 +114,7 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
       proto = entity.to_proto
 
       tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_equal false # list values must always be false
+      tag_proto.indexed.must_be :nil? # list values must always be unset
       tag_proto.list_value.map { |value| value.indexed }.must_equal [false, false]
     end
 
@@ -129,7 +129,7 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
       proto = entity.to_proto
 
       tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_equal false # list values must always be false
+      tag_proto.indexed.must_be :nil? # list values must always be unset
       tag_proto.list_value.map { |value| value.indexed }.must_equal [false, true]
 
       # And now the inverse, the Proc evaluates to false
@@ -144,7 +144,7 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
       proto = entity.to_proto
 
       tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_equal false # list values must always be false
+      tag_proto.indexed.must_be :nil? # list values must always be unset
       tag_proto.list_value.map { |value| value.indexed }.must_equal [true, false]
     end
 
@@ -157,7 +157,7 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
       proto = entity.to_proto
 
       tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_equal false # list values must always be false
+      tag_proto.indexed.must_be :nil? # list values must always be unset
       tag_proto.list_value.map { |value| value.indexed }.must_equal [false, true]
     end
 
@@ -171,7 +171,7 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
       proto = entity.to_proto
 
       tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_equal false # list values must always be false
+      tag_proto.indexed.must_be :nil? # list values must always be unset
       tag_proto.list_value.map { |value| value.indexed }.must_equal [false, true, true, true]
     end
 
@@ -184,7 +184,7 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
       proto = entity.to_proto
 
       tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_equal false # list values must always be false
+      tag_proto.indexed.must_be :nil? # list values must always be unset
       tag_proto.list_value.map { |value| value.indexed }.must_equal [false, true]
 
       # Now add to the entity and get the previously stored exclude values
@@ -196,7 +196,7 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
       proto = entity.to_proto
 
       tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_equal false # list values must always be false
+      tag_proto.indexed.must_be :nil? # list values must always be unset
       tag_proto.list_value.map { |value| value.indexed }.must_equal [false, true, false, true]
     end
   end

@@ -56,9 +56,10 @@ module Gcloud
       #
       #   entity["name"] = "User McUser"
       def []= prop_name, prop_value
-        prop = @_entity.property.find { |p| p.name == prop_name }
+        prop = Array(@_entity.property).find { |p| p.name == prop_name }
         prop ||= Proto::Property.new.tap do |p|
           p.name = prop_name
+          @_entity.property ||= []
           @_entity.property << p
         end
         prop.value = Proto.to_proto_value prop_value
@@ -217,7 +218,7 @@ module Gcloud
       # Update the exclude data after a new object is created.
       def update_exclude_indexes! #:nodoc:
         @_exclude_indexes = {}
-        @_entity.property.each do |property|
+        Array(@_entity.property).each do |property|
           @_exclude_indexes[property.name] = property.value.indexed
           unless property.value.list_value.nil?
             exclude = Array(property.value.list_value).map(&:indexed)
@@ -229,11 +230,12 @@ module Gcloud
       ##
       # Update the indexed values before the object is saved.
       def update_properties_indexed! #:nodoc:
-        @_entity.property.each do |property|
+        Array(@_entity.property).each do |property|
           excluded = exclude_from_indexes? property.name
           if excluded.is_a? Array
-            # Lists are never indexed
-            property.value.indexed = false
+            # Lists must not set indexed, or this error will happen:
+            # "A Value containing a list_value cannot specify indexed."
+            property.value.indexed = nil
             property.value.list_value.each_with_index do |value, index|
               value.indexed = !excluded[index]
             end
