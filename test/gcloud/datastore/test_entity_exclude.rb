@@ -18,10 +18,10 @@ require "gcloud/datastore"
 describe Gcloud::Datastore::Entity, :exclude_from_indexes do
 
   let(:entity) do
-    Gcloud::Datastore::Entity.new.tap do |entity|
-      entity.key = Gcloud::Datastore::Key.new "User", "username"
-      entity["name"] = "User McUser"
-      entity["email"] = "user@example.net"
+    Gcloud::Datastore::Entity.new.tap do |ent|
+      ent.key = Gcloud::Datastore::Key.new "User", "username"
+      ent["name"] = "User McUser"
+      ent["email"] = "user@example.net"
     end
   end
 
