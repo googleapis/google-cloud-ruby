@@ -14,6 +14,8 @@
 
 module Gcloud
   module Storage
+    ##
+    # Represents a Bucket. Belongs to a Project and has many Files.
     class Bucket
       ##
       # The Connection object.

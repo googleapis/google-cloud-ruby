@@ -17,6 +17,9 @@ require "digest/crc32c"
 
 module Gcloud
   module Storage
+    ##
+    # Verifies downloaded files by creating an MD5 or CRC32c hash digest
+    # and comparing the value to the one from the Storage API.
     module Verifier #:nodoc:
       def self.verify_md5! gcloud_file, local_file
         gcloud_digest = gcloud_file.md5
