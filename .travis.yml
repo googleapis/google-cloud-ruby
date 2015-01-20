@@ -1,9 +1,13 @@
 language: ruby
 rvm:
-  - 2.2
-  - 2.0
-  - 2.1
-  - 1.9
+- 2.2
+- 2.1
+- 2.0
+- 1.9
 script:
-  - rake rubocop
-  - rake test
+- rake rubocop
+- rake test
+- rake test:regression
+before_install:
+- openssl aes-256-cbc -K $encrypted_629ec55f39b2_key -iv $encrypted_629ec55f39b2_iv
+  -in keyfile.json.enc -out keyfile.json -d
