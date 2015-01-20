@@ -21,6 +21,11 @@ require "gcloud/storage"
 # and https://github.com/google/google-api-ruby-client/issues/106
 Faraday.default_adapter = :httpclient
 
+# Increase the number of retries because we run so many tests in parallel
+require "gcloud/backoff"
+
+Gcloud::Backoff.retries = 10
+
 ##
 # Test class for running against a Storage instance.
 # Ensures that there is an active connection for the tests to use.
