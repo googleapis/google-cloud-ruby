@@ -31,7 +31,7 @@ module Gcloud
     class ApiError < Gcloud::Datastore::Error
       ##
       # The API method of the failed HTTP request.
-      attr_reader :response
+      attr_reader :method
 
       ##
       # The response object of the failed HTTP request.
