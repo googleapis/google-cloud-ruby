@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "gcloud/version"
+require "gcloud/backoff"
 require "google/api_client"
 require "mime/types"
 
@@ -58,21 +59,25 @@ module Gcloud
 
       ##
       # Creates a new bucket.
-      def insert_bucket bucket_name
-        @client.execute(
-          api_method: @storage.buckets.insert,
-          parameters: { project: @project },
-          body_object: { name: bucket_name }
-        )
+      def insert_bucket bucket_name, opts = {}
+        incremental_backoff opts do
+          @client.execute(
+            api_method: @storage.buckets.insert,
+            parameters: { project: @project },
+            body_object: { name: bucket_name }
+          )
+        end
       end
 
       ##
       # Permenently deletes an empty bucket.
-      def delete_bucket bucket_name
-        @client.execute(
-          api_method: @storage.buckets.delete,
-          parameters: { bucket: bucket_name }
-        )
+      def delete_bucket bucket_name, opts = {}
+        incremental_backoff opts do
+          @client.execute(
+            api_method: @storage.buckets.delete,
+            parameters: { bucket: bucket_name }
+          )
+        end
       end
 
       ##
@@ -192,6 +197,14 @@ module Gcloud
       # An empty string is returned if no mime-type can be found.
       def mime_type_for path
         MIME::Types.of(path).first.to_s
+      end
+
+      protected
+
+      def incremental_backoff options = {}
+        Gcloud::Backoff.new(options).execute do
+          yield
+        end
       end
     end
   end
