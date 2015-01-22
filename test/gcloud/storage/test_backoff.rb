@@ -38,7 +38,7 @@ describe "Gcloud Storage Backoff", :mock_storage do
     end
 
     # Should be delayed ~3 seconds
-    assert_execution_time 3 do
+    assert_backoff_sleep 1, 2 do
       storage.create_bucket new_bucket_name
     end
   end
@@ -61,7 +61,7 @@ describe "Gcloud Storage Backoff", :mock_storage do
     end
 
     # Should be delayed ~15 seconds
-    assert_execution_time 15 do
+    assert_backoff_sleep 1, 2, 3, 4, 5 do
       storage.create_bucket new_bucket_name, retries: 5
     end
   end
@@ -78,7 +78,7 @@ describe "Gcloud Storage Backoff", :mock_storage do
     end
 
     # Should be delayed ~3 seconds
-    assert_execution_time 3 do
+    assert_backoff_sleep 1, 2 do
       bucket.delete
     end
   end
@@ -95,16 +95,27 @@ describe "Gcloud Storage Backoff", :mock_storage do
     end
 
     # Should be delayed ~15 seconds
-    assert_execution_time 15 do
+    assert_backoff_sleep 1, 2, 3, 4, 5 do
       bucket.delete retries: 5
     end
   end
 
-  def assert_execution_time seconds, delta = 0.1
-    begin_time = Time.now
-    yield
-    finish_time = Time.now
-    assert_in_delta seconds, (finish_time - begin_time), delta
+  def assert_backoff_sleep *args
+    mock = Minitest::Mock.new
+    args.each { |intv| mock.expect :sleep, nil, [intv] }
+    backoff = Gcloud::Backoff.new retries: 5
+    backoff.instance_variable_set :@sleep_mock, mock
+    def backoff.sleep num
+      if num > 0
+        @sleep_mock.sleep num
+      end
+    end
+
+    Gcloud::Backoff.stub :new, backoff do
+      yield
+    end
+
+    mock.verify
   end
 
   def create_bucket_json
