@@ -17,7 +17,7 @@ task :manifest do
   `rake git:manifest`
   new_manifest = []
   File.open("Manifest.txt").each do |line|
-    new_manifest << line unless line =~ /^regression*|\.travis\.yml|Gemfile*/
+    new_manifest << line unless line =~ /^regression*|\.travis\.yml|Gemfile*|keyfile.json*/
   end
   File.write "Manifest.txt", new_manifest.join
 end
