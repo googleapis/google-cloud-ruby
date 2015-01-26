@@ -16,6 +16,8 @@ require "gcloud/storage/verifier"
 
 module Gcloud
   module Storage
+    ##
+    # Represents the File/Object that belong to a Bucket.
     class File
       ##
       # The Connection object.

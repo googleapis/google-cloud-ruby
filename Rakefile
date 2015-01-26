@@ -32,4 +32,6 @@ Hoe.spec "gcloud" do
   dependency "rubocop", "~> 0.27", :dev
   # TODO: Remove httpclient if/when the default faraday provider can upload without broken pipe errors
   dependency "httpclient", "~> 2.5", :dev
+  dependency "simplecov", "~> 0.9", :dev
+  dependency "coveralls", "~> 0.7", :dev
 end

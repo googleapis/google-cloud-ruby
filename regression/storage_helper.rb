@@ -26,36 +26,38 @@ require "gcloud/backoff"
 
 Gcloud::Backoff.retries = 10
 
-##
-# Test class for running against a Storage instance.
-# Ensures that there is an active connection for the tests to use.
-#
-# This class can be used with the spec DSL.
-# To do so, add :storage to describe:
-#
-#   describe "My Storage Test", :storage do
-#     it "does a thing" do
-#       your.code.must_be :thing?
-#     end
-#   end
-class StorageTest < Minitest::Test
-  attr_accessor :storage
-
+module Regression
   ##
-  # Setup project based on available ENV variables
-  def setup
-    @storage = Gcloud::Storage.project
+  # Test class for running against a Storage instance.
+  # Ensures that there is an active connection for the tests to use.
+  #
+  # This class can be used with the spec DSL.
+  # To do so, add :storage to describe:
+  #
+  #   describe "My Storage Test", :storage do
+  #     it "does a thing" do
+  #       your.code.must_be :thing?
+  #     end
+  #   end
+  class StorageTest < Minitest::Test
+    attr_accessor :storage
 
-    refute_nil @storage, "You do not have an active storage to run the tests."
+    ##
+    # Setup project based on available ENV variables
+    def setup
+      @storage = Gcloud::Storage.project
 
-    super
-  end
+      refute_nil @storage, "You do not have an active storage to run the tests."
 
-  # Add spec DSL
-  extend Minitest::Spec::DSL
+      super
+    end
 
-  # Register this spec type for when :storage is used.
-  register_spec_type(self) do |desc, *addl|
-    addl.include? :storage
+    # Add spec DSL
+    extend Minitest::Spec::DSL
+
+    # Register this spec type for when :storage is used.
+    register_spec_type(self) do |desc, *addl|
+      addl.include? :storage
+    end
   end
 end

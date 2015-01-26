@@ -16,6 +16,55 @@ require "rake/testtask"
 
 namespace :test do
 
+  desc "Runs tests with coverage."
+  task :coverage, :project, :keyfile do |t, args|
+    project = args[:project]
+    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DATASTORE_TEST_PROJECT"]
+    keyfile = args[:keyfile]
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_TEST_KEYFILE"]
+    if project.nil? || keyfile.nil?
+      fail "You must provide a project and keyfile. e.g. rake test:regression[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake test:regression"
+    end
+    ENV["DEVSERVER_PROJECT"] = nil # clear in case it is also set
+    # always overwrite when running tests
+    ENV["DATASTORE_PROJECT"] = project
+    ENV["DATASTORE_KEYFILE"] = keyfile
+    ENV["STORAGE_PROJECT"] = project
+    ENV["STORAGE_KEYFILE"] = keyfile
+
+    require "simplecov"
+    SimpleCov.start("test_frameworks") { command_name "Minitest" }
+
+    # Rake::Task["test"].execute
+    $LOAD_PATH.unshift "lib", "test", "regression"
+    Dir.glob("{test,regression}/**/test*.rb").each { |file| require_relative "../#{file}"}
+  end
+
+  desc "Runs tests with coveralls."
+  task :coveralls, :project, :keyfile do |t, args|
+    project = args[:project]
+    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DATASTORE_TEST_PROJECT"]
+    keyfile = args[:keyfile]
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_TEST_KEYFILE"]
+    if project.nil? || keyfile.nil?
+      fail "You must provide a project and keyfile. e.g. rake test:regression[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake test:regression"
+    end
+    ENV["DEVSERVER_PROJECT"] = nil # clear in case it is also set
+    # always overwrite when running tests
+    ENV["DATASTORE_PROJECT"] = project
+    ENV["DATASTORE_KEYFILE"] = keyfile
+    ENV["STORAGE_PROJECT"] = project
+    ENV["STORAGE_KEYFILE"] = keyfile
+
+    require "simplecov"
+    require "coveralls"
+    SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+    SimpleCov.start("test_frameworks") { command_name "Minitest" }
+
+    $LOAD_PATH.unshift "lib", "test", "regression"
+    Dir.glob("{test,regression}/**/test*.rb").each { |file| require_relative "../#{file}"}
+  end
+
   desc "Runs the regression tests."
   task :regression, :project, :keyfile do |t, args|
     project = args[:project]

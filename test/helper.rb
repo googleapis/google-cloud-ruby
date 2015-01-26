@@ -17,7 +17,7 @@ require "minitest/autorun"
 require "ostruct"
 require "gcloud/storage"
 
-class TestStorage < Minitest::Spec
+class MockStorage < Minitest::Spec
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new }
   let(:storage) { Gcloud::Storage::Project.new project, credentials }

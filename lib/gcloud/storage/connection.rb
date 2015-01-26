@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "pathname"
 require "gcloud/version"
 require "gcloud/backoff"
 require "google/api_client"

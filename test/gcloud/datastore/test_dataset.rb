@@ -210,11 +210,10 @@ describe Gcloud::Datastore::Dataset do
       entities.each do |entity|
         entity.must_be_kind_of Gcloud::Datastore::Entity
       end
-      entities.deferred.each do |key|
-        key.must_be_kind_of Gcloud::Datastore::Key
+      entities.deferred.each do |deferred_key|
+        deferred_key.must_be_kind_of Gcloud::Datastore::Key
       end
     end
-
 
     it "contains missing entities" do
       dataset.connection.expect :lookup,

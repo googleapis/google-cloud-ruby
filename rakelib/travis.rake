@@ -12,12 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-desc "Update the Manifest file."
-task :manifest do
-  `rake git:manifest`
-  new_manifest = []
-  File.open("Manifest.txt").each do |line|
-    new_manifest << line unless line =~ /^regression*|\.travis\.yml|Gemfile*|keyfile.json*/
+desc "Run the build for travis-ci."
+task :travis do
+  Rake::Task["rubocop"].invoke
+
+  if ENV["TRAVIS_BRANCH"] == "master" &&
+     ENV["TRAVIS_PULL_REQUEST"] == "false"
+    puts ""
+    puts "Preparing to run regression tests."
+    puts ""
+    # Decrypt the keyfile
+    `openssl aes-256-cbc -K $encrypted_629ec55f39b2_key -iv $encrypted_629ec55f39b2_iv -in keyfile.json.enc -out keyfile.json -d`
+
+    Rake::Task["test:coveralls"].invoke
+  else
+    puts ""
+    puts "Skipping regression tests."
+    puts ""
+
+    Rake::Task["test"].invoke
   end
-  File.write "Manifest.txt", new_manifest.join
 end
