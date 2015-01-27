@@ -21,6 +21,11 @@ namespace :pages do
       exit
     end
 
+    unless `git status --porcelain`.chomp.empty?
+      puts "The master branch is not clean. Unable to update gh-pages."
+      exit
+    end
+
     commit_hash = `git rev-parse --short HEAD`.chomp
 
     puts `git checkout gh-pages`
