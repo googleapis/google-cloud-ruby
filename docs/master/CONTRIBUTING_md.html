@@ -158,11 +158,21 @@ $ gcloud preview datastore create-indexes regression/data/</pre>
 <pre>$ rake test:regression[PROJECT_ID,KEYFILE_PATH]</pre>
 
 <p>Or, if you prefer you can store the values in the
-<code>DATASTORE_PROJECT</code> and <code>DATASTORE_KEYFILE</code>
+<code>GCLOUD_TEST_PROJECT</code> and <code>GCLOUD_TEST_KEYFILE</code>
 environment variables:</p>
 
-<pre>$ export DATASTORE_PROJECT=my-project-id
-$ export DATASTORE_KEYFILE=/path/to/keyfile.json
+<pre>$ export GCLOUD_TEST_PROJECT=my-project-id
+$ export GCLOUD_TEST_KEYFILE=/path/to/keyfile.json
+$ rake test:regression</pre>
+
+<p>If you want to use different values for Datastore vs. Storage regression
+tests, you can use the <code>DATASTORE_TEST_</code> and
+<code>STORAGE_TEST_</code> environment variables:</p>
+
+<pre>$ export DATASTORE_TEST_PROJECT=my-project-id
+$ export DATASTORE_TEST_KEYFILE=/path/to/keyfile.json
+$ export STORAGE_TEST_PROJECT=my-other-project-id
+$ export STORAGE_TEST_KEYFILE=/path/to/other/keyfile.json
 $ rake test:regression</pre>
 
 <h2 id="label-Coding+Style">Coding Style<span><a href="#label-Coding+Style">&para;</a> <a href="#documentation">&uarr;</a></span></h2>

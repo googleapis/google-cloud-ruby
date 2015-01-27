@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Gcloud::Datastore::List - gcloud-0.0.1 Documentation</title>
+<title>class Gcloud::Storage::ApiError - gcloud-0.0.1 Documentation</title>
 
 <link href="../../fonts.css" rel="stylesheet">
 <link href="../../rdoc.css" rel="stylesheet">
@@ -61,7 +61,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link">DelegateClass(::Array)
+  <p class="link"><a href="Error.html">Gcloud::Storage::Error</a>
   
 </div>
 
@@ -81,17 +81,14 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Gcloud::Datastore::List">
-  <h1 id="class-Gcloud::Datastore::List" class="class">
-    class Gcloud::Datastore::List
+<main role="main" aria-labelledby="class-Gcloud::Storage::ApiError">
+  <h1 id="class-Gcloud::Storage::ApiError" class="class">
+    class Gcloud::Storage::ApiError
   </h1>
 
   <section class="description">
     
-<p><a href="List.html">List</a> is a special case Array with cursor.</p>
-
-<pre>entities = Gcloud::Datastore::List.new [entity1, entity2, entity3]
-entities.cursor = &quot;c3VwZXJhd2Vzb21lIQ&quot;</pre>
+<p>Raised when an API call is not successful.</p>
 
   </section>
 
@@ -112,15 +109,28 @@ entities.cursor = &quot;c3VwZXJhd2Vzb21lIQ&quot;</pre>
       </header>
 
       
-      <div id="attribute-i-cursor" class="method-detail">
+      <div id="attribute-i-code" class="method-detail">
         <div class="method-heading attribute-method-heading">
-          <span class="method-name">cursor</span><span
-            class="attribute-access-type">[RW]</span>
+          <span class="method-name">code</span><span
+            class="attribute-access-type">[R]</span>
         </div>
 
         <div class="method-description">
         
+        <p>The code of the error.</p>
         
+        </div>
+      </div>
+      
+      <div id="attribute-i-errors" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">errors</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>The errors encountered.</p>
         
         </div>
       </div>
@@ -139,7 +149,7 @@ entities.cursor = &quot;c3VwZXJhd2Vzb21lIQ&quot;</pre>
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(arr = [], cursor = nil)</span>
+            class="method-args">(message, code, errors)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -159,10 +169,10 @@ entities.cursor = &quot;c3VwZXJhd2Vzb21lIQ&quot;</pre>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/list.rb, line 25</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">arr</span> = [], <span class="ruby-identifier">cursor</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">super</span> <span class="ruby-identifier">arr</span>
-  <span class="ruby-ivar">@cursor</span> = <span class="ruby-identifier">cursor</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/errors.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">message</span>, <span class="ruby-identifier">code</span>, <span class="ruby-identifier">errors</span>
+  <span class="ruby-keyword">super</span> <span class="ruby-identifier">message</span>
+  <span class="ruby-ivar">@code</span>, <span class="ruby-ivar">@errors</span> = <span class="ruby-identifier">code</span>, <span class="ruby-identifier">errors</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

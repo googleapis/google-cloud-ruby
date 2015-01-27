@@ -131,7 +131,8 @@ href="../Datastore.html">Datastore</a>.</p>
 
         <div class="method-description">
         
-        
+        <p>The <a href="Key.html#attribute-i-dataset_id">#dataset_id</a> of the <a
+href="Key.html">Key</a>.</p>
         
         </div>
       </div>
@@ -144,7 +145,7 @@ href="../Datastore.html">Datastore</a>.</p>
 
         <div class="method-description">
         
-        
+        <p>The id of the <a href="Key.html">Key</a>.</p>
         
         </div>
       </div>
@@ -157,7 +158,7 @@ href="../Datastore.html">Datastore</a>.</p>
 
         <div class="method-description">
         
-        
+        <p>The kind of the <a href="Key.html">Key</a>.</p>
         
         </div>
       </div>
@@ -170,7 +171,7 @@ href="../Datastore.html">Datastore</a>.</p>
 
         <div class="method-description">
         
-        
+        <p>The name of the <a href="Key.html">Key</a>.</p>
         
         </div>
       </div>
@@ -183,7 +184,7 @@ href="../Datastore.html">Datastore</a>.</p>
 
         <div class="method-description">
         
-        
+        <p>The namespace of the <a href="Key.html">Key</a>.</p>
         
         </div>
       </div>
@@ -196,7 +197,7 @@ href="../Datastore.html">Datastore</a>.</p>
 
         <div class="method-description">
         
-        
+        <p>The parent of the <a href="Key.html">Key</a>.</p>
         
         </div>
       </div>
@@ -230,7 +231,7 @@ href="../Datastore.html">Datastore</a>.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 30</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">kind</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">id_or_name</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@kind</span> = <span class="ruby-identifier">kind</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">id_or_name</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Integer</span>
@@ -270,14 +271,14 @@ href="../Datastore.html">Datastore</a>.</p>
 
         <div class="method-description">
           
-          <p>Determines if the key is complete. A complete key has either an id or a
+          <p>Determine if the key is complete. A complete key has either an id or a
 name.</p>
           
           
 
           
           <div class="method-source-code" id="complete-3F-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 73</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">complete?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">incomplete?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -304,14 +305,14 @@ name.</p>
 
         <div class="method-description">
           
-          <p>Determines if the key is incomplete. An incomplete key has neither an id
-nor a name.</p>
+          <p>Determine if the key is incomplete. An incomplete key has neither an id nor
+a name.</p>
           
           
 
           
           <div class="method-source-code" id="incomplete-3F-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 80</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">incomplete?</span>
   <span class="ruby-identifier">kind</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">id</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">empty?</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -338,10 +339,9 @@ nor a name.</p>
 
         <div class="method-description">
           
-          <p>A representation of the Key&#39;s path as an array of arrays. Each inner
-array contains two values, the kind and the id (if there is a numeric id)
-or name (if there is a name). If neither an id or name exist then nil will
-be returned.</p>
+          <p>Represent the Key&#39;s path (including parent) as an array of arrays. Each
+inner array contains two values, the kind and the id or name. If neither an
+id or name exist then nil will be returned.</p>
 
 <pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">path</span> <span class="ruby-comment">#=&gt; [[&quot;Person&quot;, &quot;username&quot;], [&quot;Task&quot;, 123456]]</span>
 </pre>
@@ -350,7 +350,7 @@ be returned.</p>
 
           
           <div class="method-source-code" id="path-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 65</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">path</span>
   <span class="ruby-identifier">new_path</span> = <span class="ruby-identifier">parent</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">path</span> <span class="ruby-operator">:</span> []
   <span class="ruby-identifier">new_path</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">kind</span>, (<span class="ruby-identifier">id</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">name</span>)]

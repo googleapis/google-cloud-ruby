@@ -125,7 +125,7 @@ dataset.save entity</pre>
 
         <div class="method-description">
           
-          <p>Create a new <a href="Datastore/Dataset.html">Dataset</a></p>
+          <p>Create a new <a href="Datastore/Dataset.html">Dataset</a>.</p>
 
 <pre>entity = Gcloud::Datastore::Entity.new
 entity.key = Gcloud::Datastore::Key.new &quot;Task&quot;
@@ -145,7 +145,7 @@ must readable. @return [Gcloud::Datastore::Connection] new connection</p>
 
           
           <div class="method-source-code" id="dataset-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore.rb, line 49</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-identifier">project</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;DATASTORE_PROJECT&quot;</span>],
                  <span class="ruby-identifier">keyfile</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;DATASTORE_KEYFILE&quot;</span>]
   <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>
@@ -193,7 +193,7 @@ href="https://cloud.google.com/datastore/docs/tools/devserver">cloud.google.com/
 
           
           <div class="method-source-code" id="devserver-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore.rb, line 69</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">devserver</span> <span class="ruby-identifier">project</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;DEVSERVER_PROJECT&quot;</span>],
                    <span class="ruby-identifier">host</span>    = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;DEVSERVER_HOST&quot;</span>]
   <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span><span class="ruby-operator">::</span><span class="ruby-constant">Empty</span>.<span class="ruby-identifier">new</span>

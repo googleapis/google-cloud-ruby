@@ -112,9 +112,8 @@
 
   <section class="description">
     
-<p><a href="../Datastore.html">Datastore</a> <a href="Query.html">Query</a></p>
-
-<p>Represents a query to be made against the datastore.</p>
+<p><a href="Query.html">Query</a> represents a query to be made to the <a
+href="../Datastore.html">Datastore</a>.</p>
 
 <pre>query = Gcloud::Datastore::Query.new
 query.kind(&quot;Task&quot;).
@@ -164,7 +163,7 @@ entities = dataset.run query</pre>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 36</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-ivar">@_query</span> = <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -211,7 +210,7 @@ completed_tasks = dataset.run query</pre>
 
           
           <div class="method-source-code" id="ancestor-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 85</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ancestor</span> <span class="ruby-identifier">parent</span>
   <span class="ruby-comment"># Use key if given an entity</span>
   <span class="ruby-identifier">parent</span> = <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">key</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:key</span>
@@ -308,7 +307,7 @@ grouped_tasks = dataset.run query</pre>
 
           
           <div class="method-source-code" id="group_by-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 177</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 175</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">group_by</span> <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">group_by</span> <span class="ruby-operator">||=</span> []
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">group_by</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">new_property_references</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
@@ -348,7 +347,7 @@ all_tasks = dataset.run query</pre>
 
           
           <div class="method-source-code" id="kind-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 47</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">kind</span> <span class="ruby-operator">*</span><span class="ruby-identifier">kinds</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">kind</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">KindExpression</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">kind</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> []
@@ -390,7 +389,7 @@ paginated_tasks = dataset.run query</pre>
 
           
           <div class="method-source-code" id="limit-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 120</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">limit</span> <span class="ruby-identifier">num</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">limit</span> = <span class="ruby-identifier">num</span>
   <span class="ruby-keyword">self</span>
@@ -431,7 +430,7 @@ paginated_tasks = dataset.run query</pre>
 
           
           <div class="method-source-code" id="offset-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 134</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">offset</span> <span class="ruby-identifier">num</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">offset</span> = <span class="ruby-identifier">num</span>
   <span class="ruby-keyword">self</span>
@@ -473,7 +472,7 @@ sorted_tasks = dataset.run query</pre>
 
           
           <div class="method-source-code" id="order-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 102</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">order</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">direction</span> = <span class="ruby-value">:asc</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">order</span> <span class="ruby-operator">||=</span> []
   <span class="ruby-identifier">po</span> = <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">PropertyOrder</span>.<span class="ruby-identifier">new</span>
@@ -546,7 +545,7 @@ partial_tasks = dataset.run query</pre>
 
           
           <div class="method-source-code" id="select-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 162</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">select</span> <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">projection</span> <span class="ruby-operator">||=</span> []
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">projection</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">new_property_expressions</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
@@ -592,7 +591,7 @@ paginated_tasks = dataset.run query</pre>
 
           
           <div class="method-source-code" id="start-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 148</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 146</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span> <span class="ruby-identifier">cursor</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">start_cursor</span> = <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">decode_cursor</span> <span class="ruby-identifier">cursor</span>
   <span class="ruby-keyword">self</span>
@@ -636,7 +635,7 @@ completed_tasks = dataset.run query</pre>
 
           
           <div class="method-source-code" id="where-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 62</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">where</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">operator</span>, <span class="ruby-identifier">value</span>
   <span class="ruby-comment"># Initialize filter</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">filter</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">new_filter</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
