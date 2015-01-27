@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "gcloud/datastore/key"
+require "gcloud/datastore/properties"
 require "gcloud/datastore/proto"
 
 module Gcloud
@@ -33,8 +34,7 @@ module Gcloud
       ##
       # Create a new Entity object.
       def initialize
-        @_entity = Proto::Entity.new
-        @_entity.property = []
+        @properties = Properties.new
         @key = Key.new
         @_exclude_indexes = {}
       end
@@ -43,12 +43,10 @@ module Gcloud
       # Retrieve a property value.
       #
       #   puts entity["name"]
+      #
+      # If a property doesn't exist then nil will be returned.
       def [] prop_name
-        prop_name = prop_name.to_s
-        prop = Array(@_entity.property).find { |p| p.name == prop_name }
-        Proto.from_proto_value prop.value
-      rescue
-        nil
+        @properties[prop_name]
       end
 
       ##
@@ -56,33 +54,37 @@ module Gcloud
       #
       #   entity["name"] = "User McUser"
       def []= prop_name, prop_value
-        prop = Array(@_entity.property).find { |p| p.name == prop_name }
-        prop ||= Proto::Property.new.tap do |p|
-          p.name = prop_name
-          @_entity.property ||= []
-          @_entity.property << p
-        end
-        prop.value = Proto.to_proto_value prop_value
-        prop_value
+        @properties[prop_name] = prop_value
       end
 
       ##
-      # Retrieve all properties as an array of arrays.
-      # The inner arrays hold the property name and value.
+      # Retrieve properties in a hash-like structure.
+      # Properties can be accessed or set by string or symbol.
+      #
+      #   entity.properties[:name] = "User McUser"
+      #   entity.properties["name"] #=> "User McUser"
       #
       #   entity.properties.each do |name, value|
-      #     puts "#{name} has a value of #{value}"
+      #     puts "property #{name} has a value of #{value}"
       #   end
       #
-      # The properties can easilly be converted to a hash:
+      # A property's existance can be determined by calling exist?
       #
-      #   prop_hash = Hash[entity.properties]
+      #   entity.properties.exist? :name #=> true
+      #   entity.properties.exist? "name" #=> true
+      #   entity.properties.exist? :expiration #=> false
+      #
+      # A property can be removed from the entity.
+      #
+      #   entity.properties.delete :name
+      #   entity.save
+      #
+      # The properties can be converted to a hash:
+      #
       #   prop_hash = entity.properties.to_h
-      def properties
-        Array(@_entity.property).map do |p|
-          [p.name, Proto.from_proto_value(p.value)]
-        end
-      end
+      #
+      # See Gcloud::Datastore::Properties for more.
+      attr_reader :properties
 
       ##
       # Sets the Key that identifies the entity.
@@ -167,20 +169,24 @@ module Gcloud
       # Convert the Entity to a protocol buffer object.
       # This is not part of the public API.
       def to_proto #:nodoc:
-        update_properties_indexed!
-        @_entity.key = @key.to_proto
-        @_entity
+        entity = Proto::Entity.new.tap do |e|
+          e.key = @key.to_proto
+          e.property = Proto.to_proto_properties @properties.to_h
+        end
+        update_properties_indexed! entity
+        entity
       end
 
       ##
       # Create a new Entity from a protocol buffer object.
       # This is not part of the public API.
       def self.from_proto proto #:nodoc:
-        key    = Key.from_proto proto.key
         entity = Entity.new
-        entity.instance_variable_set :@_entity, proto
-        entity.instance_variable_set :@key, key
-        entity.send :update_exclude_indexes!
+        entity.key = Key.from_proto proto.key
+        Array(proto.property).each do |p|
+          entity[p.name] = Proto.from_proto_value p.value
+        end
+        entity.send :update_exclude_indexes!, proto
         entity
       end
 
@@ -216,9 +222,9 @@ module Gcloud
 
       ##
       # Update the exclude data after a new object is created.
-      def update_exclude_indexes! #:nodoc:
+      def update_exclude_indexes! entity #:nodoc:
         @_exclude_indexes = {}
-        Array(@_entity.property).each do |property|
+        Array(entity.property).each do |property|
           @_exclude_indexes[property.name] = property.value.indexed
           unless property.value.list_value.nil?
             exclude = Array(property.value.list_value).map(&:indexed)
@@ -229,8 +235,8 @@ module Gcloud
 
       ##
       # Update the indexed values before the object is saved.
-      def update_properties_indexed! #:nodoc:
-        Array(@_entity.property).each do |property|
+      def update_properties_indexed! entity #:nodoc:
+        Array(entity.property).each do |property|
           excluded = exclude_from_indexes? property.name
           if excluded.is_a? Array
             # Lists must not set indexed, or this error will happen:

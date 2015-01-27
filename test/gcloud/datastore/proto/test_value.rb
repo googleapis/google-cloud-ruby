@@ -166,9 +166,6 @@ describe "Proto Value methods" do
     raw = Gcloud::Datastore::Proto.from_proto_value value
     assert_kind_of Gcloud::Datastore::Key, raw
     refute_kind_of Gcloud::Datastore::Proto::Key, raw
-    # We don't have equality on key yet,
-    # so let's make sure the proto values are equal.
-    # (they are actually the same object, so this works...)
     raw.to_proto.must_equal key.to_proto
   end
 
@@ -196,10 +193,12 @@ describe "Proto Value methods" do
     raw = Gcloud::Datastore::Proto.from_proto_value value
     assert_kind_of Gcloud::Datastore::Entity, raw
     refute_kind_of Gcloud::Datastore::Proto::Entity, raw
-    # We don't have equality on entity yet,
-    # so let's make sure the proto values are equal.
-    # (they are actually the same object, so this works...)
-    raw.to_proto.must_equal entity.to_proto
+    # Fix up the indexed values so they can match
+    raw_proto = raw.to_proto
+    raw_proto.property.first.value.indexed = true
+    entity_proto = entity.to_proto
+    entity_proto.property.first.value.indexed = true
+    raw_proto.must_equal entity_proto
   end
 
   it "encodes Array" do

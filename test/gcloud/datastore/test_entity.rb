@@ -28,8 +28,8 @@ describe Gcloud::Datastore::Entity do
   it "creates instances with .new" do
     # Calling entity here creates by calling new
     entity.wont_be :nil?
-    entity.properties.must_include ["name", "User McUser"]
-    entity.properties.must_include ["email", "user@example.net"]
+    entity.properties["name"].must_equal "User McUser"
+    entity.properties["email"].must_equal "user@example.net"
   end
 
   it "returns a correct protocol buffer object" do
@@ -65,8 +65,8 @@ describe Gcloud::Datastore::Entity do
     entity_from_proto.key.kind.must_equal "User"
     entity_from_proto.key.id.must_equal 123456
     entity_from_proto.key.name.must_be :nil?
-    entity_from_proto.properties.must_include ["name", "User McNumber"]
-    entity_from_proto.properties.must_include ["email", "number@example.net"]
+    entity_from_proto.properties["name"].must_equal "User McNumber"
+    entity_from_proto.properties["email"].must_equal "number@example.net"
   end
 
   it "can store other entities as properties" do
