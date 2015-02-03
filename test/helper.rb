@@ -16,6 +16,7 @@ gem "minitest"
 require "minitest/autorun"
 require "ostruct"
 require "gcloud/storage"
+require "gcloud/pubsub"
 
 class MockStorage < Minitest::Spec
   let(:project) { "test" }
@@ -87,5 +88,34 @@ class MockStorage < Minitest::Spec
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_storage
+  end
+end
+
+class MockPubsub < Minitest::Spec
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new }
+  let(:pubsub) { Gcloud::Pubsub::Project.new project, credentials }
+
+  def setup
+    @connection = Faraday::Adapter::Test::Stubs.new
+    connection = pubsub.instance_variable_get "@connection"
+    client = connection.instance_variable_get "@client"
+    client.connection = Faraday.new do |builder|
+      # builder.options.params_encoder = Faraday::FlatParamsEncoder
+      builder.adapter :test, @connection
+    end
+  end
+
+  def teardown
+    @connection.verify_stubbed_calls
+  end
+
+  def mock_connection
+    @connection
+  end
+
+  # Register this spec type for when :storage is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_pubsub
   end
 end
