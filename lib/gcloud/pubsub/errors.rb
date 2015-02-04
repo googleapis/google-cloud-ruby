@@ -12,29 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "gcloud/pubsub/connection"
-require "gcloud/pubsub/credentials"
-require "gcloud/pubsub/errors"
-
 module Gcloud
   module Pubsub
     ##
-    # Represents the Project that the Topics and Files belong to.
-    class Project
+    # Base Pubsub exception class.
+    class Error < Gcloud::Error
+    end
+
+    ##
+    # Raised when an API call is not successful.
+    class ApiError < Error
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # The code of the error.
+      attr_reader :code
 
       ##
-      # Creates a new Connection instance.
-      def initialize project, credentials
-        @connection = Connection.new project, credentials
+      # The errors encountered.
+      attr_reader :errors
+
+      def initialize message, code, errors
+        super message
+        @code, @errors = code, errors
       end
 
-      ##
-      # The project identifier.
-      def project
-        connection.project
+      def self.from_response resp #:nodoc:
+        new resp.data["error"]["message"],
+            resp.data["error"]["code"],
+            resp.data["error"]["errors"]
       end
     end
   end
