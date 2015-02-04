@@ -12,31 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "gcloud/pubsub/connection"
-require "gcloud/pubsub/credentials"
-require "gcloud/pubsub/errors"
-require "gcloud/pubsub/topic"
+require "helper"
 
-module Gcloud
-  module Pubsub
-    ##
-    # Represents the Project that the Topics and Files belong to.
-    class Project
-      ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+describe Gcloud::Pubsub::Topic, :mock_pubsub do
+  let(:topic_name) { "topic-name-goes-here" }
+  let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
+                                                pubsub.connection }
 
-      ##
-      # Creates a new Connection instance.
-      def initialize project, credentials
-        @connection = Connection.new project, credentials
-      end
-
-      ##
-      # The project identifier.
-      def project
-        connection.project
-      end
-    end
+  it "knows its name" do
+    topic.name.must_equal topic_path(topic_name)
   end
 end

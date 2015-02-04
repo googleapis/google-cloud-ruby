@@ -15,6 +15,7 @@
 gem "minitest"
 require "minitest/autorun"
 require "ostruct"
+require "json"
 require "gcloud/storage"
 require "gcloud/pubsub"
 
@@ -112,6 +113,18 @@ class MockPubsub < Minitest::Spec
 
   def mock_connection
     @connection
+  end
+
+  def topic_json topic_name
+    { "name" => topic_path(topic_name) }.to_json
+  end
+
+  def topic_slug topic_name
+    "#{project}/#{topic_name}"
+  end
+
+  def topic_path topic_name
+    "/topics/#{topic_slug topic_name}"
   end
 
   # Register this spec type for when :storage is used.
