@@ -152,6 +152,10 @@ class MockPubsub < Minitest::Spec
     "/projects/#{project}"
   end
 
+  def topic_query topic_name
+    "pubsub.googleapis.com/topic in (#{topic_path topic_name})"
+  end
+
   def topic_slug topic_name
     "#{project}/#{topic_name}"
   end

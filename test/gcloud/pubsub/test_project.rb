@@ -45,12 +45,27 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     num_topics = 3
     mock_connection.get "/pubsub/v1beta1/topics" do |env|
       env.params.must_include "query"
-      env.params["query"].must_include "/projects/#{project}"
+      env.params["query"].must_equal project_query
       [200, {"Content-Type"=>"application/json"},
        topics_json(num_topics)]
     end
 
     topics = pubsub.topics
     topics.size.must_equal num_topics
+  end
+
+  it "lists subscriptions" do
+    mock_connection.get "/pubsub/v1beta1/subscriptions" do |env|
+      env.params.must_include "query"
+      env.params["query"].must_equal project_query
+      [200, {"Content-Type"=>"application/json"},
+       subscriptions_json("fake-topic", 3)]
+    end
+
+    subs = pubsub.subscriptions
+    subs.count.must_equal 3
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    end
   end
 end

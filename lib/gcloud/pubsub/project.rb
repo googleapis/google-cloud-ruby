@@ -75,6 +75,19 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+
+      ##
+      # Retrieves a list of subscriptions for the given project.
+      def subscriptions
+        resp = connection.list_subscriptions
+        if resp.success?
+          Array(resp.data["subscription"]).map do |gapi_object|
+            Subscription.from_gapi gapi_object, connection
+          end
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
     end
   end
 end

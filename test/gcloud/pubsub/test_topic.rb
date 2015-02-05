@@ -86,6 +86,8 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "lists subscriptions" do
     mock_connection.get "/pubsub/v1beta1/subscriptions" do |env|
+      env.params.must_include "query"
+      env.params["query"].must_equal topic_query(topic_name)
       [200, {"Content-Type"=>"application/json"},
        subscriptions_json(topic_name, 3)]
     end

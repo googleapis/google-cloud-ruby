@@ -102,11 +102,13 @@ module Gcloud
       end
 
       ##
-      # Lists matching topics.
-      def list_subscriptions topic_name
+      # Lists matching subscriptions by topic or project.
+      # If no topic_name is given then search by project.
+      def list_subscriptions topic_name = nil
+        query = topic_name ? topic_query(topic_name) : project_query
         @client.execute(
           api_method: @pubsub.subscriptions.list,
-          parameters: { query: topic_query(topic_name) }
+          parameters: { query: query }
         )
       end
 
