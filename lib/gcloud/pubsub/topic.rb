@@ -41,6 +41,21 @@ module Gcloud
       end
 
       ##
+      # Permenently deletes the topic.
+      # The topic must be empty.
+      #
+      #   topic.delete
+      def delete
+        ensure_connection!
+        resp = connection.delete_topic topic_name
+        if resp.success?
+          true
+        else
+          ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Topic from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
@@ -55,6 +70,14 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      ##
+      # Gets the topic name from the path.
+      # "/topics/project-identifier/topic-name"
+      # will return "topic-name"
+      def topic_name
+        name.split("/").last
       end
     end
   end

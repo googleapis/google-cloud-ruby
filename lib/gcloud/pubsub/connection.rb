@@ -68,6 +68,18 @@ module Gcloud
         )
       end
 
+      ##
+      # Deletes the topic with the given name.
+      # All subscriptions to this topic are also deleted.
+      # Returns NOT_FOUND if the topic does not exist.
+      # After a topic is deleted, a new topic may be created with the same name.
+      def delete_topic topic_name
+        @client.execute(
+          api_method: @pubsub.topics.delete,
+          parameters: { topic: topic_slug(topic_name) }
+        )
+      end
+
       protected
 
       def project_query

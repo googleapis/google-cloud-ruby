@@ -22,4 +22,12 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   it "knows its name" do
     topic.name.must_equal topic_path(topic_name)
   end
+
+  it "can delete itself" do
+    mock_connection.delete "/pubsub/v1beta1#{topic_path topic_name}" do |env|
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    topic.delete
+  end
 end
