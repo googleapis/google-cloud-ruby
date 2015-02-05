@@ -80,6 +80,18 @@ module Gcloud
         )
       end
 
+      ##
+      # Creates a subscription on a given topic for a given subscriber.
+      def create_subscription topic_name, subscription_name = nil,
+                              deadline = nil, endpoint = nil
+        data = subscription_data topic_name, subscription_name,
+                                 deadline, endpoint
+        @client.execute(
+          api_method: @pubsub.subscriptions.create,
+          body_object: data
+        )
+      end
+
       protected
 
       def project_query
@@ -96,6 +108,23 @@ module Gcloud
 
       def topic_path topic_name
         "/topics/#{topic_slug topic_name}"
+      end
+
+      def subscription_data topic_name, subscription_name = nil,
+                            deadline = nil, endpoint = nil
+        data = { "topic" => topic_path(topic_name) }
+        data["name"] = subscription_path subscription_name if subscription_name
+        data["ackDeadlineSeconds"] = deadline if deadline
+        data["pushConfig"] = { "pushEndpoint" => endpoint } if endpoint
+        data
+      end
+
+      def subscription_slug subscription_name
+        "#{project}/#{subscription_name}"
+      end
+
+      def subscription_path subscription_name
+        "/subscriptions/#{subscription_slug subscription_name}"
       end
     end
   end

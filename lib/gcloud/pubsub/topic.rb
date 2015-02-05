@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "gcloud/pubsub/errors"
+require "gcloud/pubsub/subscription"
 
 module Gcloud
   module Pubsub
@@ -54,6 +55,23 @@ module Gcloud
           ApiError.from_response(resp)
         end
       end
+
+      ##
+      # Creates a subscription on a given topic for a given subscriber.
+      #
+      # If the name is not provided in the request, the server will assign a
+      # random name for this subscription on the same project as the topic.
+      def create_subscription subscription_name = nil
+        ensure_connection!
+        resp = connection.create_subscription topic_name, subscription_name
+        if resp.success?
+          Subscription.from_gapi resp.data, connection
+        else
+          # TODO: Handle ALREADY_EXISTS and NOT_FOUND
+          fail ApiError.from_response(resp)
+        end
+      end
+      alias_method :subscribe, :create_subscription
 
       ##
       # New Topic from a Google API Client object.

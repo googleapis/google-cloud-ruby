@@ -30,4 +30,45 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
     topic.delete
   end
+
+  it "creates a subscription" do
+    new_sub_name = "new-sub-#{Time.now.to_i}"
+    mock_connection.post "/pubsub/v1beta1/subscriptions" do |env|
+      JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
+      JSON.parse(env.body)["name"].must_equal subscription_path(new_sub_name)
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, new_sub_name)]
+    end
+
+    sub = topic.create_subscription new_sub_name
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+  end
+
+  it "creates a subscription without giving a name" do
+    mock_connection.post "/pubsub/v1beta1/subscriptions" do |env|
+      JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
+      JSON.parse(env.body)["name"].must_be :nil?
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, nil)]
+    end
+
+    sub = topic.create_subscription
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+  end
+
+  it "creates a subscription when calling subscribe" do
+    new_sub_name = "new-sub-#{Time.now.to_i}"
+    mock_connection.post "/pubsub/v1beta1/subscriptions" do |env|
+      JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
+      JSON.parse(env.body)["name"].must_equal subscription_path(new_sub_name)
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, new_sub_name)]
+    end
+
+    sub = topic.subscribe new_sub_name
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+  end
 end

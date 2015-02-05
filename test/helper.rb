@@ -125,6 +125,16 @@ class MockPubsub < Minitest::Spec
     { "name" => topic_path(topic_name) }.to_json
   end
 
+  def subscription_json topic_name, sub_name,
+                        deadline = 60,
+                        endpoint = "http://example.com/callback"
+    sub_name = "random-sub-name" if sub_name.nil?
+    { "topic" => topic_path(topic_name),
+      "name" => subscription_path(sub_name),
+      "pushConfig" => { "pushEndpoint" => endpoint },
+      "ackDeadlineSeconds" => deadline }.to_json
+  end
+
   def project_query
     "cloud.googleapis.com/project in (#{project_path})"
   end
