@@ -125,6 +125,15 @@ class MockPubsub < Minitest::Spec
     { "name" => topic_path(topic_name) }.to_json
   end
 
+  def subscriptions_json topic_name, num_subs, token = nil
+    subs = num_subs.times.map do
+      JSON.parse(subscription_json(topic_name, "sub-#{rand 1000}"))
+    end
+    data = { "subscription" => subs }
+    data["nextPageToken"] = token unless token.nil?
+    data.to_json
+  end
+
   def subscription_json topic_name, sub_name,
                         deadline = 60,
                         endpoint = "http://example.com/callback"

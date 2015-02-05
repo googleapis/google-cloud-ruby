@@ -86,6 +86,20 @@ module Gcloud
       end
 
       ##
+      # Retrieves a list of subscriptions on the topic.
+      def subscriptions
+        ensure_connection!
+        resp = connection.list_subscriptions topic_name
+        if resp.success?
+          Array(resp.data["subscription"]).map do |gapi_object|
+            Subscription.from_gapi gapi_object, connection
+          end
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Topic from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|

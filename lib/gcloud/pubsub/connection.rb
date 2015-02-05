@@ -101,6 +101,15 @@ module Gcloud
         )
       end
 
+      ##
+      # Lists matching topics.
+      def list_subscriptions topic_name
+        @client.execute(
+          api_method: @pubsub.subscriptions.list,
+          parameters: { query: topic_query(topic_name) }
+        )
+      end
+
       protected
 
       def project_query
@@ -109,6 +118,10 @@ module Gcloud
 
       def project_path
         "/projects/#{project}"
+      end
+
+      def topic_query topic_name
+        "pubsub.googleapis.com/topic in (#{topic_path topic_name})"
       end
 
       def topic_slug topic_name

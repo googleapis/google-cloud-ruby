@@ -83,4 +83,17 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
   end
+
+  it "lists subscriptions" do
+    mock_connection.get "/pubsub/v1beta1/subscriptions" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscriptions_json(topic_name, 3)]
+    end
+
+    subs = topic.subscriptions
+    subs.count.must_equal 3
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    end
+  end
 end
