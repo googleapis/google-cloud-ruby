@@ -65,12 +65,41 @@ module Gcloud
       end
 
       ##
+      # Deletes an existing subscription.
+      # All pending messages in the subscription are immediately dropped.
+      def delete
+        ensure_connection!
+        resp = connection.delete_subscription subscription_name
+        if resp.success?
+          true
+        else
+          ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Topic from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
           f.gapi = gapi
           f.connection = conn
         end
+      end
+
+      protected
+
+      ##
+      # Raise an error unless an active connection is available.
+      def ensure_connection!
+        fail "Must have active connection" unless connection
+      end
+
+      ##
+      # Gets the topic name from the path.
+      # "/subscriptions/project-identifier/subscription-name"
+      # will return "subscription-name"
+      def subscription_name
+        name.split("/").last
       end
     end
   end

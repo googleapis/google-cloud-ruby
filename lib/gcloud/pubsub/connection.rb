@@ -112,6 +112,16 @@ module Gcloud
         )
       end
 
+      ##
+      # Deletes an existing subscription.
+      # All pending messages in the subscription are immediately dropped.
+      def delete_subscription subscription_name
+        @client.execute(
+          api_method: @pubsub.subscriptions.delete,
+          parameters: { subscription: subscription_slug(subscription_name) }
+        )
+      end
+
       protected
 
       def project_query

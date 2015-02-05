@@ -37,4 +37,12 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
   it "has an endpoint" do
     subscription.must_respond_to :endpoint
   end
+
+  it "can delete itself" do
+    mock_connection.delete "/pubsub/v1beta1#{subscription_path subscription_name}" do |env|
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    subscription.delete
+  end
 end
