@@ -40,4 +40,17 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topic = pubsub.topic topic_name
     topic.name.must_equal topic_path(topic_name)
   end
+
+  it "lists topics" do
+    num_topics = 3
+    mock_connection.get "/pubsub/v1beta1/topics" do |env|
+      env.params.must_include "query"
+      env.params["query"].must_include "/projects/#{project}"
+      [200, {"Content-Type"=>"application/json"},
+       topics_json(num_topics)]
+    end
+
+    topics = pubsub.topics
+    topics.size.must_equal num_topics
+  end
 end

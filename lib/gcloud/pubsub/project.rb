@@ -62,6 +62,19 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+
+      ##
+      # Retrieves a list of topics for the given project.
+      def topics
+        resp = connection.list_topics
+        if resp.success?
+          Array(resp.data["topic"]).map do |gapi_object|
+            Topic.from_gapi gapi_object, connection
+          end
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
     end
   end
 end

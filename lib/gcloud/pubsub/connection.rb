@@ -59,7 +59,24 @@ module Gcloud
         )
       end
 
+      ##
+      # Lists matching topics.
+      def list_topics
+        @client.execute(
+          api_method: @pubsub.topics.list,
+          parameters: { query: project_query }
+        )
+      end
+
       protected
+
+      def project_query
+        "cloud.googleapis.com/project in (#{project_path})"
+      end
+
+      def project_path
+        "/projects/#{project}"
+      end
 
       def topic_slug topic_name
         "#{project}/#{topic_name}"

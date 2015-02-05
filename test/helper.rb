@@ -115,8 +115,22 @@ class MockPubsub < Minitest::Spec
     @connection
   end
 
+  def topics_json num_topics, token = nil
+    data = { "topic" => num_topics.times.map { { "name" => topic_path("topic-#{rand 1000}") } } }
+    data["nextPageToken"] = token unless token.nil?
+    data.to_json
+  end
+
   def topic_json topic_name
     { "name" => topic_path(topic_name) }.to_json
+  end
+
+  def project_query
+    "cloud.googleapis.com/project in (#{project_path})"
+  end
+
+  def project_path
+    "/projects/#{project}"
   end
 
   def topic_slug topic_name
@@ -125,6 +139,14 @@ class MockPubsub < Minitest::Spec
 
   def topic_path topic_name
     "/topics/#{topic_slug topic_name}"
+  end
+
+  def subscription_slug subscription_name
+    "#{project}/#{subscription_name}"
+  end
+
+  def subscription_path subscription_name
+    "/subscriptions/#{subscription_slug subscription_name}"
   end
 
   # Register this spec type for when :storage is used.
