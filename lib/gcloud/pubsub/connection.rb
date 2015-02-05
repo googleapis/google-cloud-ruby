@@ -36,6 +36,25 @@ module Gcloud
         @client.authorization = @credentials.client
         @pubsub = @client.discovered_api "pubsub", API_VERSION
       end
+
+      ##
+      # Creates the given topic with the given name.
+      def create_topic topic_name
+        @client.execute(
+          api_method: @pubsub.topics.create,
+          body_object: { name: topic_path(topic_name) }
+        )
+      end
+
+      protected
+
+      def topic_slug topic_name
+        "#{project}/#{topic_name}"
+      end
+
+      def topic_path topic_name
+        "/topics/#{topic_slug topic_name}"
+      end
     end
   end
 end

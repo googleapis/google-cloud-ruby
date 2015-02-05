@@ -37,6 +37,19 @@ module Gcloud
       def project
         connection.project
       end
+
+      ##
+      # Creates a new topic.
+      #
+      #   topic = project.create_topic "my-topic"
+      def create_topic topic_name
+        resp = connection.create_topic topic_name
+        if resp.success?
+          Topic.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
     end
   end
 end
