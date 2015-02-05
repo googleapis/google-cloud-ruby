@@ -29,4 +29,15 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
 
     pubsub.create_topic new_topic_name
   end
+
+  it "gets a topic" do
+    topic_name = "found-topic"
+    mock_connection.get "/pubsub/v1beta1#{topic_path(topic_name)}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       topic_json(topic_name)]
+    end
+
+    topic = pubsub.topic topic_name
+    topic.name.must_equal topic_path(topic_name)
+  end
 end

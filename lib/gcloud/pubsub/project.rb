@@ -39,6 +39,18 @@ module Gcloud
       end
 
       ##
+      # Retrieves topic by name.
+      def topic topic_name
+        resp = connection.get_topic topic_name
+        if resp.success?
+          Topic.from_gapi resp.data, connection
+        else
+          return nil if resp.data["error"]["code"] == 404
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # Creates a new topic.
       #
       #   topic = project.create_topic "my-topic"

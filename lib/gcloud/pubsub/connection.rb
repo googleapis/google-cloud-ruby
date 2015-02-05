@@ -38,6 +38,19 @@ module Gcloud
       end
 
       ##
+      # Gets the configuration of a topic.
+      # Since the topic only has the name attribute,
+      # this method is only useful to check the existence of a topic.
+      # If other attributes are added in the future,
+      # they will be returned here.
+      def get_topic topic_name
+        @client.execute(
+          api_method: @pubsub.topics.get,
+          parameters: { topic: topic_slug(topic_name) }
+        )
+      end
+
+      ##
       # Creates the given topic with the given name.
       def create_topic topic_name
         @client.execute(
