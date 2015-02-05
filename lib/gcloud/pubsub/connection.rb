@@ -92,6 +92,15 @@ module Gcloud
         )
       end
 
+      ##
+      # Gets the details of a subscription.
+      def get_subscription subscription_name
+        @client.execute(
+          api_method: @pubsub.subscriptions.get,
+          parameters: { subscription: subscription_slug(subscription_name) }
+        )
+      end
+
       protected
 
       def project_query

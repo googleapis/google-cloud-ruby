@@ -71,4 +71,16 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
   end
+
+  it "gets a subscription" do
+    sub_name = "found-sub-#{Time.now.to_i}"
+    mock_connection.get "/pubsub/v1beta1#{subscription_path sub_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, sub_name)]
+    end
+
+    sub = topic.subscription sub_name
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+  end
 end

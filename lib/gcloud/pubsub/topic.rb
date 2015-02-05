@@ -74,6 +74,18 @@ module Gcloud
       alias_method :subscribe, :create_subscription
 
       ##
+      # Retrieves a subscription by name.
+      def subscription subscription_name
+        ensure_connection!
+        resp = connection.get_subscription subscription_name
+        if resp.success?
+          Subscription.from_gapi resp.data, connection
+        else
+          nil
+        end
+      end
+
+      ##
       # New Topic from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
