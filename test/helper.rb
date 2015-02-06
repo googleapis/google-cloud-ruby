@@ -144,6 +144,23 @@ class MockPubsub < Minitest::Spec
       "ackDeadlineSeconds" => deadline }.to_json
   end
 
+  def event_json subscription_name, message
+    {
+      "ackId" => "ack-id-123456789",
+      "pubsubEvent" => {
+        "subscription" => subscription_path(subscription_name),
+        "message" => {
+          "data" => message,
+          "label" => [{ "key" => "label-key",
+                        "numValue" => 1234567890 }],
+          "messageId" => "msg-id-1234567890"
+        },
+        "truncated" => false,
+        "deleted" => false
+      }
+    }.to_json
+  end
+
   def project_query
     "cloud.googleapis.com/project in (#{project_path})"
   end

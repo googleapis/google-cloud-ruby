@@ -100,6 +100,19 @@ module Gcloud
       end
 
       ##
+      # Adds one or more messages to the topic.
+      # Returns NOT_FOUND if the topic does not exist.
+      def publish message
+        ensure_connection!
+        resp = connection.publish topic_name, message
+        if resp.success?
+          true
+        else
+          ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Topic from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|

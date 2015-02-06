@@ -122,6 +122,17 @@ module Gcloud
         )
       end
 
+      ##
+      # Adds a message to the topic.
+      # Returns NOT_FOUND if the topic does not exist.
+      def publish topic_name, message
+        @client.execute(
+          api_method: @pubsub.topics.publish,
+          body_object: { topic: topic_path(topic_name),
+                         message: { data: message } }
+        )
+      end
+
       protected
 
       def project_query

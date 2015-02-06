@@ -98,4 +98,15 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
       sub.must_be_kind_of Gcloud::Pubsub::Subscription
     end
   end
+
+  it "can publish" do
+    message = "new-message-here"
+    mock_connection.post "/pubsub/v1beta1/topics/publish" do |env|
+      JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
+      JSON.parse(env.body)["message"]["data"].must_equal message
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    topic.publish message
+  end
 end
