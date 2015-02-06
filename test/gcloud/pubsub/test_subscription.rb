@@ -57,4 +57,39 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
     event.wont_be :nil?
     event.message.must_equal event_msg
   end
+
+  it "can acknowledge one message" do
+    mock_connection.post "/pubsub/v1beta1/subscriptions/acknowledge" do |env|
+      JSON.parse(env.body)["subscription"].must_equal subscription_path(subscription_name)
+      JSON.parse(env.body)["ackId"].count.must_equal 1
+      JSON.parse(env.body)["ackId"].first.must_equal "ack-id-1"
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    subscription.acknowledge "ack-id-1"
+  end
+
+  it "can acknowledge many messages" do
+    mock_connection.post "/pubsub/v1beta1/subscriptions/acknowledge" do |env|
+      JSON.parse(env.body)["subscription"].must_equal subscription_path(subscription_name)
+      JSON.parse(env.body)["ackId"].count.must_equal 3
+      JSON.parse(env.body)["ackId"].must_include "ack-id-1"
+      JSON.parse(env.body)["ackId"].must_include "ack-id-2"
+      JSON.parse(env.body)["ackId"].must_include "ack-id-3"
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    subscription.acknowledge "ack-id-1", "ack-id-2", "ack-id-3"
+  end
+
+  it "can acknowledge with ack" do
+    mock_connection.post "/pubsub/v1beta1/subscriptions/acknowledge" do |env|
+      JSON.parse(env.body)["subscription"].must_equal subscription_path(subscription_name)
+      JSON.parse(env.body)["ackId"].count.must_equal 1
+      JSON.parse(env.body)["ackId"].first.must_equal "ack-id-1"
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    subscription.ack "ack-id-1"
+  end
 end

@@ -98,6 +98,24 @@ module Gcloud
       end
 
       ##
+      # Acknowledges receipt of a message. After an ack,
+      # the Pub/Sub system can remove the message from the subscription.
+      # Acknowledging a message whose ack deadline has expired may succeed,
+      # although the message may have been sent again.
+      # Acknowledging a message more than once will not result in an error.
+      # This is only used for messages received via pull.
+      def acknowledge *ack_ids
+        ensure_connection!
+        resp = connection.acknowledge subscription_name, *ack_ids
+        if resp.success?
+          true
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+      alias_method :ack, :acknowledge
+
+      ##
       # New Subscription from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|

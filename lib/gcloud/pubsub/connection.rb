@@ -134,12 +134,34 @@ module Gcloud
       end
 
       ##
+      # Adds one or more messages to the topic.
+      # Returns NOT_FOUND if the topic does not exist.
+      def publish_batch topic_name, *messages
+        messages = messages.map { |msg| { data: msg } }
+        @client.execute(
+          api_method: @pubsub.topics.publish_batch,
+          body_object: { topic: topic_path(topic_name),
+                         messages: messages }
+        )
+      end
+
+      ##
       # Pulls a single message from the server.
       def pull subscription_path, immediate = true
         @client.execute(
           api_method: @pubsub.subscriptions.pull,
           body_object: { subscription: subscription_path(subscription_path),
                          returnImmediately: immediate }
+        )
+      end
+
+      ##
+      # Acknowledges receipt of a message.
+      def acknowledge subscription_name, *ack_ids
+        @client.execute(
+          api_method: @pubsub.subscriptions.acknowledge,
+          body_object: { subscription: subscription_path(subscription_name),
+                         ackId: ack_ids }
         )
       end
 
