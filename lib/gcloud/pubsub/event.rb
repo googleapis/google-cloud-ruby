@@ -35,6 +35,12 @@ module Gcloud
       end
 
       ##
+      # The subscription that received the event.
+      def subscription
+        @gapi["pubsubEvent"]["subscription"]
+      end
+
+      ##
       # The acknowledgment ID for the message being acknowledged.
       # This was returned by the Pub/Sub system in the Pull response.
       # This ID must be used to acknowledge the received event.
@@ -58,12 +64,41 @@ module Gcloud
       alias_method :msg_id, :message_id
 
       ##
+      # Acknowledges receipt of the message.
+      def acknowledge!
+        ensure_connection!
+        resp = connection.acknowledge subscription_name, ack_id
+        if resp.success?
+          true
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+      alias_method :ack!, :acknowledge!
+
+      ##
       # New Topic from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
           f.gapi = gapi
           f.connection = conn
         end
+      end
+
+      protected
+
+      ##
+      # Raise an error unless an active connection is available.
+      def ensure_connection!
+        fail "Must have active connection" unless connection
+      end
+
+      ##
+      # Gets the subscription name from the path.
+      # "/subscriptions/project-identifier/subscription-name"
+      # will return "subscription-name"
+      def subscription_name
+        subscription.split("/").last
       end
     end
   end
