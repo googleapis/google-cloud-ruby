@@ -150,7 +150,7 @@ class MockPubsub < Minitest::Spec
       "pubsubEvent" => {
         "subscription" => subscription_path(subscription_name),
         "message" => {
-          "data" => message,
+          "data" => [message].pack("m"),
           "label" => [{ "key" => "label-key",
                         "numValue" => 1234567890 }],
           "messageId" => "msg-id-1234567890"

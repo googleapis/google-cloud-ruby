@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/pubsub/errors"
+require "gcloud/pubsub/event"
+
 module Gcloud
   module Pubsub
     ##
@@ -78,7 +81,24 @@ module Gcloud
       end
 
       ##
-      # New Topic from a Google API Client object.
+      # Pulls a single message from the server.
+      # If immediate is true, the system will respond immediately,
+      # either with a message if available or nil if no message is available.
+      # Otherwise, the call will block until a message is available,
+      # or may return UNAVAILABLE if no messages become available
+      # within a reasonable amount of time.
+      def pull immediate = true
+        ensure_connection!
+        resp = connection.pull name, immediate
+        if resp.success?
+          Event.from_gapi resp.data, connection
+        else
+          nil
+        end
+      end
+
+      ##
+      # New Subscription from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
           f.gapi = gapi

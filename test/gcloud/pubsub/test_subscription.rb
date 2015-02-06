@@ -45,4 +45,16 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
 
     subscription.delete
   end
+
+  it "can pull a message" do
+    event_msg = "pulled-message"
+    mock_connection.post "/pubsub/v1beta1/subscriptions/pull" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       event_json(subscription_name, event_msg)]
+    end
+
+    event = subscription.pull
+    event.wont_be :nil?
+    event.message.must_equal event_msg
+  end
 end

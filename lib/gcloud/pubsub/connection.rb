@@ -133,6 +133,16 @@ module Gcloud
         )
       end
 
+      ##
+      # Pulls a single message from the server.
+      def pull subscription_path, immediate = true
+        @client.execute(
+          api_method: @pubsub.subscriptions.pull,
+          body_object: { subscription: subscription_path(subscription_path),
+                         returnImmediately: immediate }
+        )
+      end
+
       protected
 
       def project_query
