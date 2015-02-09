@@ -73,8 +73,6 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-new">::new</a>
-    
     <li ><a href="#method-i-buckets">#buckets</a>
     
     <li ><a href="#method-i-create_bucket">#create_bucket</a>
@@ -99,6 +97,19 @@
 <p>Represents the <a href="Project.html">Project</a> that the Buckets and
 Files belong to.</p>
 
+<p><a href="Project.html">Gcloud::Storage::Project</a> is the main object for
+interacting with Google <a href="../Storage.html">Storage</a>. <a
+href="Bucket.html">Gcloud::Storage::Bucket</a> objects are created, read,
+updated, and deleted by <a
+href="Project.html">Gcloud::Storage::Project</a>.</p>
+
+<pre>storage = Gcloud::Storage.project &quot;my-todo-project&quot;,
+                                  &quot;/path/to/keyfile.json&quot;
+bucket = storage.find_bucket &quot;my-bucket&quot;
+file = bucket.find_file &quot;path/to/my-file.ext&quot;</pre>
+
+<p>See <a href="../Storage.html#method-c-project">Gcloud::Storage.project</a></p>
+
   </section>
 
   
@@ -114,47 +125,6 @@ Files belong to.</p>
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Class Methods</h3>
-       </header>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(project, credentials)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Creates a new Connection instance.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 32</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
-  <span class="ruby-ivar">@connection</span> = <span class="ruby-constant">Connection</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
@@ -175,12 +145,21 @@ Files belong to.</p>
         <div class="method-description">
           
           <p>Retrieves a list of buckets for the given project.</p>
+
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span>
+<span class="ruby-identifier">buckets</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">buckets</span>
+<span class="ruby-identifier">buckets</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">bucket</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>See <a href="Bucket.html">Gcloud::Storage::Bucket</a></p>
           
           
 
           
           <div class="method-source-code" id="buckets-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 44</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">buckets</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_buckets</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -223,12 +202,14 @@ See <a href="../Backoff.html">Gcloud::Backoff</a> to control this behavior,
 or specify the wanted behavior in the call:</p>
 
 <pre>bucket = project.create_bucket &quot;my-bucket&quot;, retries: 5</pre>
+
+<p>See <a href="Bucket.html">Gcloud::Storage::Bucket</a></p>
           
           
 
           
           <div class="method-source-code" id="create_bucket-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 77</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_bucket</span> <span class="ruby-identifier">bucket_name</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">insert_bucket</span> <span class="ruby-identifier">bucket_name</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -261,12 +242,18 @@ or specify the wanted behavior in the call:</p>
         <div class="method-description">
           
           <p>Retrieves bucket by name.</p>
+
+<pre>storage = Gcloud::Storage.project
+bucket = storage.find_bucket &quot;my-bucket&quot;
+puts bucket.name</pre>
+
+<p>See <a href="Bucket.html">Gcloud::Storage::Bucket</a></p>
           
           
 
           
           <div class="method-source-code" id="find_bucket-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 57</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_bucket</span> <span class="ruby-identifier">bucket_name</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_bucket</span> <span class="ruby-identifier">bucket_name</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -305,7 +292,7 @@ or specify the wanted behavior in the call:</p>
 
           
           <div class="method-source-code" id="project-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 38</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project</span>
   <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">project</span>
 <span class="ruby-keyword">end</span></pre>

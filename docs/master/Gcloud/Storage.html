@@ -138,12 +138,14 @@ href="Storage.html">Storage</a> account you are connecting to. @param
 keyfile [String] the path to the keyfile you downloaded from Google Cloud.
 The file must readable. @return [Gcloud::Storage::Connection] new
 connection</p>
+
+<p>See <a href="Storage/Project.html">Gcloud::Storage::Project</a></p>
           
           
 
           
           <div class="method-source-code" id="project-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage.rb, line 40</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">project</span> <span class="ruby-identifier">project</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;STORAGE_PROJECT&quot;</span>],
                  <span class="ruby-identifier">keyfile</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;STORAGE_KEYFILE&quot;</span>]
   <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>
@@ -181,7 +183,7 @@ then resumable uploads are used.</p>
 
           
           <div class="method-source-code" id="resumable_threshold-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage.rb, line 52</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resumable_threshold</span>
   <span class="ruby-identifier">@@resumable_threshold</span>
 <span class="ruby-keyword">end</span></pre>
@@ -214,7 +216,7 @@ then resumable uploads are used.</p>
 
           
           <div class="method-source-code" id="resumable_threshold-3D-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage.rb, line 58</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resumable_threshold=</span> <span class="ruby-identifier">new_resumable_threshold</span>
   <span class="ruby-comment"># rubocop:disable Style/ClassVars</span>
   <span class="ruby-comment"># Disabled rubocop because this is the best option.</span>

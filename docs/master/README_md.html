@@ -61,6 +61,10 @@
     <li><a href="#label-gcloud">gcloud</a>
     <li><a href="#label-Ruby+API+Client+library+for+Google+Cloud">Ruby API Client library for Google Cloud</a>
     <li><a href="#label-Quick+Start">Quick Start</a>
+    <li><a href="#label-Authorization">Authorization</a>
+    <li><a href="#label-Datastore">Datastore</a>
+    <li><a href="#label-Storage">Storage</a>
+    <li><a href="#label-Supported+Ruby+Versions">Supported Ruby Versions</a>
     <li><a href="#label-Contributing">Contributing</a>
     <li><a href="#label-License">License</a>
   </ul>
@@ -98,13 +102,121 @@ src="https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-ruby.svg"></a><
 
 <p>This client supports the following Google Cloud Platform services:</p>
 <ul><li>
-<p><a href="https://cloud.google.com/products/cloud-datastore">Google Cloud
-Datastore</a></p>
+<p><a href="https://cloud.google.com/datastore/">Google Cloud Datastore</a></p>
+</li><li>
+<p><a href="https://cloud.google.com/storage/">Google Cloud Storage</a></p>
 </li></ul>
+
+<p>If you need support for other Google APIs, check out the <a
+href="https://github.com/google/google-api-ruby-client">Google API Ruby
+Client library</a>.</p>
 
 <h2 id="label-Quick+Start">Quick Start<span><a href="#label-Quick+Start">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
 <pre>$ gem install gcloud</pre>
+
+<h3 id="label-Authorization">Authorization<span><a href="#label-Authorization">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>You need a Google Developers service account to use the Google Cloud
+services. To create a service account:</p>
+<ol><li>
+<p>Visit the <a href="https://console.developers.google.com/project">Google
+Developers Console</a>.</p>
+</li><li>
+<p>Create a new project or click on an existing project.</p>
+</li><li>
+<p>Navigate to <strong>APIs &amp; auth</strong> &gt; <strong>APIs
+section</strong> and turn on the following APIs (you may need to enable
+billing in order to use these services):</p>
+</li><li>
+<p>Google Cloud Datastore API</p>
+</li><li>
+<p>Google Cloud Storage</p>
+</li><li>
+<p>Google Cloud Storage JSON API</p>
+</li><li>
+<p>Navigate to <strong>APIs &amp; auth</strong> &gt;
+<strong>Credentials</strong> and then:</p>
+</li><li>
+<p>If you want to use a new service account, click on <strong>Create new
+Client ID</strong> and select <strong>Service account</strong>. After the
+account is created, you will be prompted to download the JSON key file that
+the library uses to authorize your requests.</p>
+</li><li>
+<p>If you want to generate a new key for an existing service account, click on
+<strong>Generate new JSON key</strong> and download the JSON key file.</p>
+</li></ol>
+
+<p>You will use the <strong>Project ID</strong> and <strong>JSON file</strong>
+to connect to services with gcloud.</p>
+
+<h3 id="label-Datastore">Datastore<span><a href="#label-Datastore">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p><a href="https://cloud.google.com/datastore/">Google Cloud Datastore</a>
+(<a href="https://cloud.google.com/datastore/docs">docs</a>) is a fully
+managed, schemaless database for storing non-relational data. Cloud
+Datastore automatically scales with your users and supports ACID
+transactions, high availability of reads and writes, strong consistency for
+reads and ancestor queries, and eventual consistency for all other queries.</p>
+
+<p>Follow the <a
+href="https://cloud.google.com/datastore/docs/activate">activation
+instructions</a> to use the Google Cloud Datastore API with your project.</p>
+
+<p>See the <a
+href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html">gcloud-ruby
+Datastore API documentation</a> to learn how to interact with the Cloud
+Datastore using this library.</p>
+
+<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my-todo-project-id&quot;</span>,
+                                    <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+
+<span class="ruby-comment"># Create a new task to demo datastore</span>
+<span class="ruby-identifier">demo_task</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">demo_task</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-string">&quot;datastore-demo&quot;</span>
+<span class="ruby-identifier">demo_task</span>[:<span class="ruby-identifier">description</span>] = <span class="ruby-string">&quot;Demonstrate Datastore functionality&quot;</span>
+<span class="ruby-identifier">demo_task</span>[:<span class="ruby-identifier">completed</span>] = <span class="ruby-keyword">false</span>
+
+<span class="ruby-comment"># Save the new task</span>
+<span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">demo_task</span>
+
+<span class="ruby-comment"># Run a query for all completed tasks</span>
+<span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+  <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;completed&quot;</span>, <span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-keyword">true</span>)
+<span class="ruby-identifier">completed_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
+</pre>
+
+<h3 id="label-Storage">Storage<span><a href="#label-Storage">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p><a href="https://cloud.google.com/storage/">Google Cloud Storage</a> (<a
+href="https://cloud.google.com/datastore/docs">docs</a>) allows you to
+store data on Google infrastructure with very high reliability, performance
+and availability, and can be used to distribute large data objects to users
+via direct download.</p>
+
+<p>See the <a
+href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html">gcloud-ruby
+Storage API documentation</a> to learn how to connect to Cloud Storage
+using this library.</p>
+
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span> <span class="ruby-string">&quot;my-todo-project-id&quot;</span>,
+                                  <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;task-attachments&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+
+<span class="ruby-comment"># Download the file to the local file system</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">download</span> <span class="ruby-node">&quot;/tasks/attachments/#{file.name}&quot;</span>
+
+<span class="ruby-comment"># Copy the file to a backup bucket</span>
+<span class="ruby-identifier">backup</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;task-attachment-backups&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">copy</span> <span class="ruby-identifier">backup</span>, <span class="ruby-identifier">file</span>.<span class="ruby-identifier">name</span>
+</pre>
+
+<h1 id="label-Supported+Ruby+Versions">Supported Ruby Versions<span><a href="#label-Supported+Ruby+Versions">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+
+<p>gcloud is supported on Ruby 1.9.3+.</p>
 
 <h2 id="label-Contributing">Contributing<span><a href="#label-Contributing">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
