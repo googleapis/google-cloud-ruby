@@ -37,6 +37,8 @@ module Gcloud
     # @param keyfile [String] the path to the keyfile you downloaded from
     # Google Cloud. The file must readable.
     # @return [Gcloud::Storage::Connection] new connection
+    #
+    # See Gcloud::Storage::Project
     def self.project project = ENV["STORAGE_PROJECT"],
                      keyfile = ENV["STORAGE_KEYFILE"]
       credentials = Gcloud::Storage::Credentials.new keyfile

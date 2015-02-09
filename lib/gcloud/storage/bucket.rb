@@ -97,6 +97,15 @@ module Gcloud
 
       ##
       # Retrieves a list of files matching the criteria.
+      #
+      #   storage = Gcloud::Storage.project
+      #   bucket = storage.find_bucket "my-bucket"
+      #   files = bucket.files
+      #   files.each do |file|
+      #     puts file.name
+      #   end
+      #
+      # See Gcloud::Storage::File
       def files
         ensure_connection!
         resp = connection.list_files name
@@ -111,6 +120,13 @@ module Gcloud
 
       ##
       # Retrieves a file matching the path.
+      #
+      #   storage = Gcloud::Storage.project
+      #   bucket = storage.find_bucket "my-bucket"
+      #   file = bucket.find_file "path/to/my-file.ext"
+      #   puts file.name
+      #
+      # See Gcloud::Storage::File
       def find_file path
         ensure_connection!
         resp = connection.get_file name, path
@@ -125,6 +141,17 @@ module Gcloud
       # Create a new Gcloud::Storeage::File object by providing a
       # File object to upload and the path to store it with.
       #
+      #   storage = Gcloud::Storage.project
+      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket.create_file "path/to/local.file.ext"
+      #
+      # Additionally, a destination path can be specified.
+      #
+      #   storage = Gcloud::Storage.project
+      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket.create_file "path/to/local.file.ext",
+      #                      "destination/path/file.ext"
+      #
       # A chunk_size value can be provided in the options to be used
       # in resumable uploads. This value is the number of bytes per
       # chunk and must be divisible by 256KB. If it is not divisible
@@ -134,6 +161,8 @@ module Gcloud
       #   bucket.create_file "path/to/local.file.ext",
       #                      "destination/path/file.ext",
       #                      chunk_size: 1024*1024 # 1 MB chunk
+      #
+      # See Gcloud::Storage::File
       def create_file file, path = nil, options = {}
         ensure_connection!
         # TODO: Raise if file doesn't exist
