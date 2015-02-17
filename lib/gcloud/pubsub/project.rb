@@ -65,12 +65,10 @@ module Gcloud
 
       ##
       # Retrieves a list of topics for the given project.
-      def topics
-        resp = connection.list_topics
+      def topics options = {}
+        resp = connection.list_topics options
         if resp.success?
-          Array(resp.data["topic"]).map do |gapi_object|
-            Topic.from_gapi gapi_object, connection
-          end
+          Topic::List.from_resp resp, connection
         else
           fail ApiError.from_response(resp)
         end

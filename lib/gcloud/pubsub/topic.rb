@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "gcloud/pubsub/errors"
+require "gcloud/pubsub/topic/list"
 require "gcloud/pubsub/subscription"
 
 module Gcloud

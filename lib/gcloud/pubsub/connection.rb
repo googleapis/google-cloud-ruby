@@ -61,10 +61,14 @@ module Gcloud
 
       ##
       # Lists matching topics.
-      def list_topics
+      def list_topics options = {}
+        params = { query: project_query }
+        params["pageToken"]  = options[:token] if options[:token]
+        params["maxResults"] = options[:max]   if options[:max]
+
         @client.execute(
           api_method: @pubsub.topics.list,
-          parameters: { query: project_query }
+          parameters: params
         )
       end
 

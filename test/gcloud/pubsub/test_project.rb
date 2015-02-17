@@ -54,6 +54,55 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topics.size.must_equal num_topics
   end
 
+  it "paginates topics" do
+    mock_connection.get "/pubsub/v1beta1/topics" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       topics_json(3, "next_page_token")]
+    end
+    mock_connection.get "/pubsub/v1beta1/topics" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       topics_json(2)]
+    end
+
+    first_topics = pubsub.topics
+    first_topics.size.must_equal 3
+    first_topics.token.wont_be :nil?
+    first_topics.token.must_equal "next_page_token"
+
+    second_topics = pubsub.topics token: first_topics.token
+    second_topics.size.must_equal 2
+    second_topics.token.must_be :nil?
+  end
+
+  it "paginates topics with max set" do
+    mock_connection.get "/pubsub/v1beta1/topics" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      [200, {"Content-Type"=>"application/json"},
+       topics_json(3, "next_page_token")]
+    end
+
+    topics = pubsub.topics max: 3
+    topics.size.must_equal 3
+    topics.token.wont_be :nil?
+    topics.token.must_equal "next_page_token"
+  end
+
+  it "doesn't send maxResults when max is not set" do
+    mock_connection.get "/pubsub/v1beta1/topics" do |env|
+      env.params.wont_include "maxResults"
+      [200, {"Content-Type"=>"application/json"},
+       topics_json(3, "next_page_token")]
+    end
+
+    topics = pubsub.topics
+    topics.size.must_equal 3
+    topics.token.wont_be :nil?
+    topics.token.must_equal "next_page_token"
+  end
+
   it "lists subscriptions" do
     mock_connection.get "/pubsub/v1beta1/subscriptions" do |env|
       env.params.must_include "query"
