@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/storage/file/acl"
 require "gcloud/storage/verifier"
 require "digest"
 require "base64"
@@ -187,6 +188,12 @@ module Gcloud
         ensure_connection!
         signer = File::Signer.new self
         signer.signed_url options
+      end
+
+      ##
+      # Access Control List
+      def acl
+        @acl ||= File::Acl.new self
       end
 
       ##

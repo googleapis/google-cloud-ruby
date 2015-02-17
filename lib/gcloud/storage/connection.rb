@@ -252,6 +252,34 @@ module Gcloud
       end
 
       ##
+      # Retrieves a list of ACLs for the given file.
+      def list_file_acls bucket_name, file_name
+        @client.execute(
+          api_method: @storage.object_access_controls.list,
+          parameters: { bucket: bucket_name, object: file_name }
+        )
+      end
+
+      ##
+      # Creates a new file ACL.
+      def insert_file_acl bucket_name, file_name, entity, role
+        @client.execute(
+          api_method: @storage.object_access_controls.insert,
+          parameters: { bucket: bucket_name, object: file_name },
+          body_object: { entity: entity, role: role }
+        )
+      end
+
+      ##
+      # Permenently deletes a file ACL.
+      def delete_file_acl bucket_name, file_name, entity
+        @client.execute(
+          api_method: @storage.object_access_controls.delete,
+          parameters: { bucket: bucket_name, object: file_name, entity: entity }
+        )
+      end
+
+      ##
       # Retrieves the mime-type for a file path.
       # An empty string is returned if no mime-type can be found.
       def mime_type_for path
