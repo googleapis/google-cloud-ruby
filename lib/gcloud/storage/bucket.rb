@@ -185,6 +185,12 @@ module Gcloud
       end
 
       ##
+      # Default Access Control List
+      def default_acl
+        @default_acl ||= Bucket::DefaultAcl.new self
+      end
+
+      ##
       # New Bucket from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
