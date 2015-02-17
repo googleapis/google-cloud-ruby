@@ -127,9 +127,9 @@ module Gcloud
       #   puts file.name
       #
       # See Gcloud::Storage::File
-      def find_file path
+      def find_file path, options = {}
         ensure_connection!
-        resp = connection.get_file name, path
+        resp = connection.get_file name, path, options
         if resp.success?
           File.from_gapi resp.data, connection
         else

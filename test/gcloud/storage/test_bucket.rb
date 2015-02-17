@@ -23,7 +23,6 @@ describe Gcloud::Storage::Bucket, :mock_storage do
 
   it "can delete itself" do
     mock_connection.delete "/storage/v1/b/#{bucket.name}" do |env|
-      # JSON.parse(env.body)["name"].must_equal new_bucket_name
       [200, {"Content-Type"=>"application/json"}, ""]
     end
 
@@ -93,15 +92,30 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     files.size.must_equal num_files
   end
 
-  it "finds a file" do
+  it "finds a file without generation" do
     file_name = "file.ext"
 
     mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
+      URI(env.url).query.must_be :nil?
       [200, {"Content-Type"=>"application/json"},
        create_file_json(bucket.name, file_name)]
     end
 
     file = bucket.find_file file_name
+    file.name.must_equal file_name
+  end
+
+  it "finds a file with generation" do
+    file_name = "file.ext"
+    generation = 123
+
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
+      URI(env.url).query.must_equal "generation=#{generation}"
+      [200, {"Content-Type"=>"application/json"},
+       create_file_json(bucket.name, file_name)]
+    end
+
+    file = bucket.find_file file_name, generation: generation
     file.name.must_equal file_name
   end
 

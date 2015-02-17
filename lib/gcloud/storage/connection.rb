@@ -151,11 +151,13 @@ module Gcloud
 
       ##
       # Retrieves an object or its metadata.
-      def get_file bucket_name, file_path
+      def get_file bucket_name, file_path, options = {}
+        query = { bucket: bucket_name, object: file_path }
+        query[:generation] = options[:generation] if options[:generation]
+
         @client.execute(
           api_method: @storage.objects.get,
-          parameters: { bucket: bucket_name,
-                        object: file_path }
+          parameters: query
         )
       end
 
