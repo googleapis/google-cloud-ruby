@@ -82,6 +82,34 @@ module Gcloud
       end
 
       ##
+      # Retrieves a list of ACLs for the given bucket.
+      def list_bucket_acls bucket_name
+        @client.execute(
+          api_method: @storage.bucket_access_controls.list,
+          parameters: { bucket: bucket_name }
+        )
+      end
+
+      ##
+      # Creates a new bucket.
+      def insert_bucket_acl bucket_name, entity, role
+        @client.execute(
+          api_method: @storage.bucket_access_controls.insert,
+          parameters: { bucket: bucket_name },
+          body_object: { entity: entity, role: role }
+        )
+      end
+
+      ##
+      # Permenently deletes an empty bucket.
+      def delete_bucket_acl bucket_name, entity
+        @client.execute(
+          api_method: @storage.bucket_access_controls.delete,
+          parameters: { bucket: bucket_name, entity: entity }
+        )
+      end
+
+      ##
       # Retrieves a list of files matching the criteria.
       def list_files bucket_name
         @client.execute(

@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/storage/bucket/acl"
+
 module Gcloud
   module Storage
     ##
@@ -174,6 +176,12 @@ module Gcloud
         else
           upload_multipart file, path
         end
+      end
+
+      ##
+      # Access Control List
+      def acl
+        @acl ||= Bucket::Acl.new self
       end
 
       ##
