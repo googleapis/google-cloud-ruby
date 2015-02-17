@@ -88,9 +88,15 @@ backup = storage.find_bucket "task-attachment-backups"
 file.copy backup, file.name
 ```
 
-# Supported Ruby Versions
+## Supported Ruby Versions
 
 gcloud is supported on Ruby 1.9.3+.
+
+## Versioning
+
+This library follows [Semantic Versioning](http://semver.org/).
+
+It is currently in major version zero (0.y.z), which means that anything may change at any time and the public API should not be considered stable.
 
 ## Contributing
 
