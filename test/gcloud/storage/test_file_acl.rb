@@ -46,9 +46,8 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
     file.acl.readers.wont_be :empty?
   end
 
-  it "adds to the ACL" do
+  it "adds to the ACL without generation" do
     mock_connection.get "/storage/v1/b/#{bucket_name}/o/#{file_name}" do |env|
-      URI(env.url).query.must_be :nil?
       [200, {"Content-Type"=>"application/json"},
        random_file_hash(bucket_name, file_name).to_json]
     end
@@ -79,11 +78,58 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
       }
 
     mock_connection.post "/storage/v1/b/#{bucket_name}/o/#{file_name}/acl" do |env|
+      URI(env.url).query.must_be :nil?
       [200, {"Content-Type"=>"application/json"},
        writer_acl.to_json]
     end
 
     file.acl.add_writer writer_entity
+    file.acl.owners.wont_be  :empty?
+    file.acl.writers.wont_be :empty?
+    file.acl.readers.wont_be :empty?
+    file.acl.writers.must_include writer_entity
+  end
+
+  it "adds to the ACL with generation" do
+    generation = "123"
+
+    mock_connection.get "/storage/v1/b/#{bucket_name}/o/#{file_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_file_hash(bucket_name, file_name).to_json]
+    end
+
+    mock_connection.get "/storage/v1/b/#{bucket_name}/o/#{file_name}/acl" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_file_acl_hash(bucket_name, file_name).to_json]
+    end
+
+    file = bucket.find_file file_name
+    file.name.must_equal file_name
+    file.acl.owners.wont_be  :empty?
+    file.acl.writers.must_be :empty?
+    file.acl.readers.wont_be :empty?
+
+    writer_entity = "user-user@example.net"
+    writer_acl = {
+       "kind" => "storage#objectAccessControl",
+       "id" => "#{bucket_name}/#{file_name}/123/user-12345678901234567890",
+       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}/o/#{file_name}/acl/#{writer_entity}",
+       "bucket" => "#{bucket_name}",
+       "object" => "#{file_name}",
+       "generation" => "123",
+       "entity" => writer_entity,
+       "role" => "WRITER",
+       "entityId" => "12345678901234567890",
+       "etag" => "abcDEF123="
+      }
+
+    mock_connection.post "/storage/v1/b/#{bucket_name}/o/#{file_name}/acl" do |env|
+      URI(env.url).query.must_equal "generation=#{generation}"
+      [200, {"Content-Type"=>"application/json"},
+       writer_acl.to_json]
+    end
+
+    file.acl.add_writer writer_entity, generation: generation
     file.acl.owners.wont_be  :empty?
     file.acl.writers.wont_be :empty?
     file.acl.readers.wont_be :empty?

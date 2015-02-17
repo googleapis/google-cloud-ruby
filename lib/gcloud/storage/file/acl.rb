@@ -53,8 +53,9 @@ module Gcloud
           @readers
         end
 
-        def add_owner entity
-          resp = @connection.insert_file_acl @bucket, @file, entity, "OWNER"
+        def add_owner entity, options = {}
+          resp = @connection.insert_file_acl @bucket, @file, entity,
+                                             "OWNER", options
           if resp.success?
             entity = resp.data["entity"]
             @owners.push entity unless @owners.nil?
@@ -63,8 +64,9 @@ module Gcloud
           nil
         end
 
-        def add_writer entity
-          resp = @connection.insert_file_acl @bucket, @file, entity, "WRITER"
+        def add_writer entity, options = {}
+          resp = @connection.insert_file_acl @bucket, @file, entity,
+                                             "WRITER", options
           if resp.success?
             entity = resp.data["entity"]
             @writers.push entity unless @writers.nil?
@@ -73,8 +75,9 @@ module Gcloud
           nil
         end
 
-        def add_reader entity
-          resp = @connection.insert_file_acl @bucket, @file, entity, "READER"
+        def add_reader entity, options = {}
+          resp = @connection.insert_file_acl @bucket, @file, entity,
+                                             "READER", options
           if resp.success?
             entity = resp.data["entity"]
             @readers.push entity unless @readers.nil?

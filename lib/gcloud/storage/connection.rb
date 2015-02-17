@@ -262,10 +262,13 @@ module Gcloud
 
       ##
       # Creates a new file ACL.
-      def insert_file_acl bucket_name, file_name, entity, role
+      def insert_file_acl bucket_name, file_name, entity, role, options = {}
+        query = { bucket: bucket_name, object: file_name }
+        query[:generation] = options[:generation] if options[:generation]
+
         @client.execute(
           api_method: @storage.object_access_controls.insert,
-          parameters: { bucket: bucket_name, object: file_name },
+          parameters: query,
           body_object: { entity: entity, role: role }
         )
       end
