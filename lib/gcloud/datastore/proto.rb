@@ -82,6 +82,23 @@ module Gcloud
         v
       end
 
+      def self.from_proto_properties proto_properties
+        hash_properties = {}
+        Array(proto_properties).each do |p|
+          hash_properties[p.name] = Proto.from_proto_value p.value
+        end
+        hash_properties
+      end
+
+      def self.to_proto_properties hash_properties
+        hash_properties.map do |name, value|
+          Proto::Property.new.tap do |p|
+            p.name = name.to_s
+            p.value = Proto.to_proto_value value
+          end
+        end
+      end
+
       def self.microseconds_from_time time
         (time.utc.to_f * 1000000).to_i
       end

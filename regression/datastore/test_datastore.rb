@@ -59,10 +59,10 @@ describe "Datastore", :datastore do
       dataset.save post
 
       refresh = dataset.find post.key
-      refresh.key.kind.must_equal post.key.kind
-      refresh.key.id.must_equal   post.key.id
-      refresh.key.name.must_equal post.key.name
-      refresh.properties.must_equal post.properties
+      refresh.key.kind.must_equal        post.key.kind
+      refresh.key.id.must_equal          post.key.id
+      refresh.key.name.must_equal        post.key.name
+      refresh.properties.to_h.must_equal post.properties.to_h
 
       dataset.delete post
       refresh = dataset.find post.key
@@ -74,10 +74,10 @@ describe "Datastore", :datastore do
       dataset.save post
 
       refresh = dataset.find post.key
-      refresh.key.kind.must_equal post.key.kind
-      refresh.key.id.must_equal   post.key.id
-      refresh.key.name.must_equal post.key.name
-      refresh.properties.must_equal post.properties
+      refresh.key.kind.must_equal        post.key.kind
+      refresh.key.id.must_equal          post.key.id
+      refresh.key.name.must_equal        post.key.name
+      refresh.properties.to_h.must_equal post.properties.to_h
 
       dataset.delete post.key
       refresh = dataset.find post.key
@@ -89,10 +89,10 @@ describe "Datastore", :datastore do
       dataset.save post
 
       refresh = dataset.find post.key
-      refresh.key.kind.must_equal post.key.kind
-      refresh.key.id.must_equal   post.key.id
-      refresh.key.name.must_equal post.key.name
-      refresh.properties.must_equal post.properties
+      refresh.key.kind.must_equal        post.key.kind
+      refresh.key.id.must_equal          post.key.id
+      refresh.key.name.must_equal        post.key.name
+      refresh.properties.to_h.must_equal post.properties.to_h
 
       dataset.delete post
       refresh = dataset.find post.key
@@ -109,10 +109,10 @@ describe "Datastore", :datastore do
       post.key.id.wont_be :nil?
 
       refresh = dataset.find "Post", post.key.id
-      refresh.key.kind.must_equal post.key.kind
-      refresh.key.id.must_equal   post.key.id
-      refresh.key.name.must_equal post.key.name
-      refresh.properties.must_equal post.properties
+      refresh.key.kind.must_equal        post.key.kind
+      refresh.key.id.must_equal          post.key.id
+      refresh.key.name.must_equal        post.key.name
+      refresh.properties.to_h.must_equal post.properties.to_h
 
       dataset.delete post
       refresh = dataset.find post.key
@@ -368,9 +368,9 @@ describe "Datastore", :datastore do
         select("name", "family")
       entities = dataset.run query
       entities.each do |entity|
-        entity.properties.count.must_equal 2
-        entity.properties.assoc("name").wont_be :nil?
-        entity.properties.assoc("family").wont_be :nil?
+        entity.properties.to_h.keys.count.must_equal 2
+        entity.properties["name"].wont_be :nil?
+        entity.properties["family"].wont_be :nil?
       end
     end
 
@@ -452,10 +452,10 @@ describe "Datastore", :datastore do
 
       entity = dataset.find obj.key
       entity.wont_be :nil?
-      entity.key.kind.must_equal   obj.key.kind
-      entity.key.id.must_equal     obj.key.id
-      entity.key.name.must_equal   obj.key.name
-      entity.properties.must_equal obj.properties
+      entity.key.kind.must_equal        obj.key.kind
+      entity.key.id.must_equal          obj.key.id
+      entity.key.name.must_equal        obj.key.name
+      entity.properties.to_h.must_equal obj.properties.to_h
       dataset.delete entity
     end
 
@@ -475,10 +475,10 @@ describe "Datastore", :datastore do
 
       entity = dataset.find obj.key
       entity.wont_be :nil?
-      entity.key.kind.must_equal   obj.key.kind
-      entity.key.id.must_equal     obj.key.id
-      entity.key.name.must_equal   obj.key.name
-      entity.properties.must_equal obj.properties
+      entity.key.kind.must_equal        obj.key.kind
+      entity.key.id.must_equal          obj.key.id
+      entity.key.name.must_equal        obj.key.name
+      entity.properties.to_h.must_equal obj.properties.to_h
       dataset.delete entity
     end
   end
