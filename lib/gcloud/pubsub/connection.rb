@@ -108,11 +108,15 @@ module Gcloud
       ##
       # Lists matching subscriptions by topic or project.
       # If no topic_name is given then search by project.
-      def list_subscriptions topic_name = nil
+      def list_subscriptions topic_name = nil, options = {}
         query = topic_name ? topic_query(topic_name) : project_query
+        params = { query: query }
+        params["pageToken"]  = options[:token] if options[:token]
+        params["maxResults"] = options[:max]   if options[:max]
+
         @client.execute(
           api_method: @pubsub.subscriptions.list,
-          parameters: { query: query }
+          parameters: params
         )
       end
 

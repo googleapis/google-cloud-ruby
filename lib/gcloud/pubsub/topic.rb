@@ -88,13 +88,11 @@ module Gcloud
 
       ##
       # Retrieves a list of subscriptions on the topic.
-      def subscriptions
+      def subscriptions options = {}
         ensure_connection!
-        resp = connection.list_subscriptions topic_name
+        resp = connection.list_subscriptions topic_name, options
         if resp.success?
-          Array(resp.data["subscription"]).map do |gapi_object|
-            Subscription.from_gapi gapi_object, connection
-          end
+          Subscription::List.from_resp resp, connection
         else
           fail ApiError.from_response(resp)
         end

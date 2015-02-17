@@ -99,6 +99,55 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
     end
   end
 
+  it "paginates subscriptions" do
+    mock_connection.get "/pubsub/v1beta1/subscriptions" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscriptions_json("fake-topic", 3, "next_page_token")]
+    end
+    mock_connection.get "/pubsub/v1beta1/subscriptions" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       subscriptions_json("fake-topic", 2)]
+    end
+
+    first_subs = topic.subscriptions
+    first_subs.count.must_equal 3
+    first_subs.token.wont_be :nil?
+    first_subs.token.must_equal "next_page_token"
+
+    second_subs = topic.subscriptions token: first_subs.token
+    second_subs.count.must_equal 2
+    second_subs.token.must_be :nil?
+  end
+
+  it "paginates subscriptions with max set" do
+    mock_connection.get "/pubsub/v1beta1/subscriptions" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      [200, {"Content-Type"=>"application/json"},
+       subscriptions_json("fake-topic", 3, "next_page_token")]
+    end
+
+    subs = topic.subscriptions max: 3
+    subs.count.must_equal 3
+    subs.token.wont_be :nil?
+    subs.token.must_equal "next_page_token"
+  end
+
+  it "paginates subscriptions without max set" do
+    mock_connection.get "/pubsub/v1beta1/subscriptions" do |env|
+      env.params.wont_include "maxResults"
+      [200, {"Content-Type"=>"application/json"},
+       subscriptions_json("fake-topic", 3, "next_page_token")]
+    end
+
+    subs = topic.subscriptions
+    subs.count.must_equal 3
+    subs.token.wont_be :nil?
+    subs.token.must_equal "next_page_token"
+  end
+
   it "can publish" do
     message = "new-message-here"
     mock_connection.post "/pubsub/v1beta1/topics/publish" do |env|

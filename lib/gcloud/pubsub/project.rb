@@ -76,12 +76,10 @@ module Gcloud
 
       ##
       # Retrieves a list of subscriptions for the given project.
-      def subscriptions
-        resp = connection.list_subscriptions
+      def subscriptions options = {}
+        resp = connection.list_subscriptions nil, options
         if resp.success?
-          Array(resp.data["subscription"]).map do |gapi_object|
-            Subscription.from_gapi gapi_object, connection
-          end
+          Subscription::List.from_resp resp, connection
         else
           fail ApiError.from_response(resp)
         end
