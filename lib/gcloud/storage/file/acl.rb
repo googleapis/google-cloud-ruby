@@ -86,8 +86,8 @@ module Gcloud
           nil
         end
 
-        def delete entity
-          resp = @connection.delete_file_acl @bucket, @file, entity
+        def delete entity, options = {}
+          resp = @connection.delete_file_acl @bucket, @file, entity, options
           if resp.success?
             @owners.delete entity  unless @owners.nil?
             @writers.delete entity unless @writers.nil?

@@ -136,9 +136,8 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
     file.acl.writers.must_include writer_entity
   end
 
-  it "removes from the ACL" do
+  it "removes from the ACL without generation" do
     mock_connection.get "/storage/v1/b/#{bucket_name}/o/#{file_name}" do |env|
-      URI(env.url).query.must_be :nil?
       [200, {"Content-Type"=>"application/json"},
        random_file_hash(bucket_name, file_name).to_json]
     end
@@ -157,10 +156,44 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
     reader_entity = file.acl.readers.first
 
     mock_connection.delete "/storage/v1/b/#{bucket_name}/o/#{file_name}/acl/#{reader_entity}" do |env|
+      URI(env.url).query.must_be :nil?
       [200, {"Content-Type"=>"application/json"}, ""]
     end
 
     file.acl.delete reader_entity
+
+    file.acl.owners.wont_be  :empty?
+    file.acl.writers.must_be :empty?
+    file.acl.readers.must_be :empty?
+  end
+
+  it "removes from the ACL with generation" do
+    generation = "123"
+
+    mock_connection.get "/storage/v1/b/#{bucket_name}/o/#{file_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_file_hash(bucket_name, file_name).to_json]
+    end
+
+    mock_connection.get "/storage/v1/b/#{bucket_name}/o/#{file_name}/acl" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_file_acl_hash(bucket_name, file_name).to_json]
+    end
+
+    file = bucket.find_file file_name
+    file.name.must_equal file_name
+    file.acl.owners.wont_be  :empty?
+    file.acl.writers.must_be :empty?
+    file.acl.readers.wont_be :empty?
+
+    reader_entity = file.acl.readers.first
+
+    mock_connection.delete "/storage/v1/b/#{bucket_name}/o/#{file_name}/acl/#{reader_entity}" do |env|
+      URI(env.url).query.must_equal "generation=#{generation}"
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    file.acl.delete reader_entity, generation: generation
 
     file.acl.owners.wont_be  :empty?
     file.acl.writers.must_be :empty?

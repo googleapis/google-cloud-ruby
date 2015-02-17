@@ -275,10 +275,13 @@ module Gcloud
 
       ##
       # Permenently deletes a file ACL.
-      def delete_file_acl bucket_name, file_name, entity
+      def delete_file_acl bucket_name, file_name, entity, options = {}
+        query = { bucket: bucket_name, object: file_name, entity: entity }
+        query[:generation] = options[:generation] if options[:generation]
+
         @client.execute(
           api_method: @storage.object_access_controls.delete,
-          parameters: { bucket: bucket_name, object: file_name, entity: entity }
+          parameters: query
         )
       end
 
