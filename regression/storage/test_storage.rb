@@ -164,34 +164,37 @@ describe "Storage", :storage do
   end
 
   describe "sign urls" do
-    let(:local_file) { File.open files.logo.path }
+    let(:local_file) { File.new files[:logo][:path] }
     let(:file) do
-      bucket.create_file "LogoToSign.jpg" do |f|
-        f.write File.read(files.logo.path)
-      end
+      bucket.create_file local_file, "LogoToSign.jpg"
     end
 
     it "should create a signed read url" do
-      skip
-
-      five_min_from_now = Time.now + 5 * 60
-      url = file.signed_url action: "read",
+      five_min_from_now = 5 * 60
+      url = file.signed_url method: "GET",
                             expires: five_min_from_now
 
-      read_contents = Net::HTTP.get URI(url)
-      assert_equal local_file.read, read_contents
+      uri = URI url
+      http = Net::HTTP.new uri.host, uri.port
+      http.use_ssl = true
+      resp = http.get uri.request_uri
+      Tempfile.open "gcloud-ruby" do |tmpfile|
+        tmpfile.write resp.body
+        tmpfile.size.must_equal local_file.size
+      end
     end
 
     it "should create a signed delete url" do
-      skip
-
-      url = file.signed_url action: "delete",
+      five_min_from_now = 5 * 60
+      url = file.signed_url method: "DELETE",
                             expires: five_min_from_now
 
-      http = Net::HTTP.new URI(url)
-      resp = http.delete uri.path
+      uri = URI url
+      http = Net::HTTP.new uri.host, uri.port
+      http.use_ssl = true
+      resp = http.delete uri.request_uri
 
-      assert_equal 404, resp.code
+      resp.code.must_equal "204"
     end
   end
 end

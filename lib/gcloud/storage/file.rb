@@ -13,6 +13,9 @@
 # limitations under the License.
 
 require "gcloud/storage/verifier"
+require "digest"
+require "base64"
+require "cgi"
 
 module Gcloud
   module Storage
@@ -180,6 +183,12 @@ module Gcloud
         end
       end
 
+      def signed_url options = {}
+        ensure_connection!
+        signer = File::Signer.new self
+        signer.signed_url options
+      end
+
       ##
       # New File from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
@@ -215,6 +224,57 @@ module Gcloud
         Verifier.verify_md5! self, file    if verify_md5
         Verifier.verify_crc32c! self, file if verify_crc32c
         file
+      end
+
+      ##
+      # Create a signed_url for a file.
+      class Signer #:nodoc
+        def initialize file
+          @file = file
+        end
+
+        ##
+        # The external path to the file.
+        def ext_path
+          "/#{@file.bucket}/#{@file.name}"
+        end
+
+        ##
+        # The external url to the file.
+        def ext_url
+          "https://storage.googleapis.com#{ext_path}"
+        end
+
+        def apply_option_defaults options
+          adjusted_expires = (Time.now.utc + (options[:expires] || 300)).to_i
+          options[:expires] = adjusted_expires
+          options[:method]  ||= "GET"
+          options
+        end
+
+        def signature_str options
+          [options[:method], options[:content_md5],
+           options[:content_type], options[:expires],
+           ext_path].join "\n"
+        end
+
+        def signing_key
+          @file.connection.credentials.signing_key
+        end
+
+        def issuer
+          @file.connection.credentials.issuer
+        end
+
+        def signed_url options
+          options = apply_option_defaults options
+          signed_string = signing_key.sign OpenSSL::Digest::SHA256.new,
+                                           signature_str(options)
+          signature = Base64.encode64(signed_string).gsub("\n", "")
+          "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
+                    "&Expires=#{options[:expires]}" \
+                    "&Signature=#{CGI.escape signature}"
+        end
       end
     end
   end
