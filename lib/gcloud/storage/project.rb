@@ -62,12 +62,10 @@ module Gcloud
       #   end
       #
       # See Gcloud::Storage::Bucket
-      def buckets
-        resp = connection.list_buckets
+      def buckets options = {}
+        resp = connection.list_buckets options
         if resp.success?
-          resp.data["items"].map do |gapi_object|
-            Bucket.from_gapi gapi_object, connection
-          end
+          Bucket::List.from_resp resp, connection
         else
           fail ApiError.from_response(resp)
         end

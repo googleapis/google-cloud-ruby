@@ -13,6 +13,8 @@
 # limitations under the License.
 
 require "gcloud/storage/bucket/acl"
+require "gcloud/storage/bucket/list"
+require "gcloud/storage/file"
 
 module Gcloud
   module Storage

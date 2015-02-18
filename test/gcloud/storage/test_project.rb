@@ -39,6 +39,56 @@ describe Gcloud::Storage::Project, :mock_storage do
     buckets.size.must_equal num_buckets
   end
 
+  it "paginates buckets" do
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(2)]
+    end
+
+    first_buckets = storage.buckets
+    first_buckets.count.must_equal 3
+    first_buckets.token.wont_be :nil?
+    first_buckets.token.must_equal "next_page_token"
+
+    second_buckets = storage.buckets token: first_buckets.token
+    second_buckets.count.must_equal 2
+    second_buckets.token.must_be :nil?
+  end
+
+  it "paginates buckets with max set" do
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "next_page_token")]
+    end
+
+    subs = storage.buckets max: 3
+    subs.count.must_equal 3
+    subs.token.wont_be :nil?
+    subs.token.must_equal "next_page_token"
+  end
+
+  it "paginates buckets without max set" do
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.wont_include "maxResults"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "next_page_token")]
+    end
+
+    subs = storage.buckets
+    subs.count.must_equal 3
+    subs.token.wont_be :nil?
+    subs.token.must_equal "next_page_token"
+  end
+
   it "finds a bucket" do
     bucket_name = "found-bucket"
 
@@ -59,9 +109,10 @@ describe Gcloud::Storage::Project, :mock_storage do
     random_bucket_hash(name).to_json
   end
 
-  def list_buckets_json count = 2
+  def list_buckets_json count = 2, token = nil
     buckets = count.times.map { random_bucket_hash }
-    {"kind"=>"storage#buckets",
-     "items"=>buckets}.to_json
+    hash = {"kind"=>"storage#buckets", "items"=>buckets}
+    hash["nextPageToken"] = token unless token.nil?
+    hash.to_json
   end
 end

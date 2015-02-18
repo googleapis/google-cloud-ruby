@@ -42,10 +42,15 @@ module Gcloud
 
       ##
       # Retrieves a list of buckets for the given project.
-      def list_buckets
+      def list_buckets options = {}
+        params = { project: @project }
+        params["prefix"]     = options[:prefix] if options[:prefix]
+        params["pageToken"]  = options[:token]  if options[:token]
+        params["maxResults"] = options[:max]    if options[:max]
+
         @client.execute(
           api_method: @storage.buckets.list,
-          parameters: { project: @project }
+          parameters: params
         )
       end
 
