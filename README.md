@@ -1,14 +1,19 @@
 # gcloud
 
+Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) services.
+
 [![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby.svg)](https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby/)
 [![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-ruby.svg)](https://coveralls.io/r/GoogleCloudPlatform/gcloud-ruby?branch=master)
+
+* [Homepage][http://googlecloudplatform.github.io/gcloud-ruby/]
+* [API Documentation][http://googlecloudplatform.github.io/gcloud-ruby/docs/master/]
 
 ## Ruby API Client library for Google Cloud
 
 This client supports the following Google Cloud Platform services:
 
-* [Google Cloud Datastore](https://cloud.google.com/datastore/)
-* [Google Cloud Storage](https://cloud.google.com/storage/)
+* [Google Cloud Datastore](https://cloud.google.com/datastore/) ([docs](https://cloud.google.com/datastore/docs))
+* [Google Cloud Storage](https://cloud.google.com/storage/) ([docs](https://cloud.google.com/datastore/docs))
 
 If you need support for other Google APIs, check out the [Google API Ruby Client library](https://github.com/google/google-api-ruby-client).
 
@@ -83,9 +88,15 @@ backup = storage.find_bucket "task-attachment-backups"
 file.copy backup, file.name
 ```
 
-# Supported Ruby Versions
+## Supported Ruby Versions
 
 gcloud is supported on Ruby 1.9.3+.
+
+## Versioning
+
+This library follows [Semantic Versioning](http://semver.org/).
+
+It is currently in major version zero (0.y.z), which means that anything may change at any time and the public API should not be considered stable.
 
 ## Contributing
 
