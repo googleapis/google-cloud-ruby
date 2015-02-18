@@ -5,8 +5,8 @@ Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) ser
 [![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby.svg)](https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby/)
 [![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-ruby.svg)](https://coveralls.io/r/GoogleCloudPlatform/gcloud-ruby?branch=master)
 
-* [Homepage][http://googlecloudplatform.github.io/gcloud-ruby/]
-* [API Documentation][http://googlecloudplatform.github.io/gcloud-ruby/docs/master/]
+* [Homepage](http://googlecloudplatform.github.io/gcloud-ruby/)
+* [API Documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/)
 
 ## Ruby API Client library for Google Cloud
 
