@@ -144,10 +144,19 @@ module Gcloud
 
       ##
       # Retrieves a list of files matching the criteria.
-      def list_files bucket_name
+      def list_files bucket_name, options = {}
+        params = { bucket: bucket_name }
+        params["prefix"]     = options[:prefix] if options[:prefix]
+        params["pageToken"]  = options[:token]  if options[:token]
+        params["maxResults"] = options[:max]    if options[:max]
+        unless options[:versions].nil? # Allow false to work
+          # Force to a boolean
+          params["versions"] = !!options[:versions]
+        end
+
         @client.execute(
           api_method: @storage.objects.list,
-          parameters: { bucket: bucket_name }
+          parameters: params
         )
       end
 

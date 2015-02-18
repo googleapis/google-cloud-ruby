@@ -92,6 +92,108 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     files.size.must_equal num_files
   end
 
+  it "paginates files" do
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_files_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_files_json(2)]
+    end
+
+    first_files = bucket.files
+    first_files.count.must_equal 3
+    first_files.token.wont_be :nil?
+    first_files.token.must_equal "next_page_token"
+
+    second_files = bucket.files token: first_files.token
+    second_files.count.must_equal 2
+    second_files.token.must_be :nil?
+  end
+
+  it "paginates files with prefix set" do
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "prefix"
+      env.params["prefix"].must_equal "/prefix/"
+      [200, {"Content-Type"=>"application/json"},
+       list_files_json(3, nil, ["/prefix/path1/", "/prefix/path2/"])]
+    end
+
+    files = bucket.files prefix: "/prefix/"
+    files.count.must_equal 3
+    files.prefixes.wont_be :empty?
+    files.prefixes.must_include "/prefix/path1/"
+    files.prefixes.must_include "/prefix/path2/"
+  end
+
+  it "paginates files without prefix set" do
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.wont_include "prefix"
+      [200, {"Content-Type"=>"application/json"},
+       list_files_json(3, nil, ["/prefix/path1/", "/prefix/path2/"])]
+    end
+
+    files = bucket.files
+    files.count.must_equal 3
+    files.prefixes.wont_be :empty?
+    files.prefixes.must_include "/prefix/path1/"
+    files.prefixes.must_include "/prefix/path2/"
+  end
+
+  it "paginates files with max set" do
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      [200, {"Content-Type"=>"application/json"},
+       list_files_json(3, "next_page_token")]
+    end
+
+    files = bucket.files max: 3
+    files.count.must_equal 3
+    files.token.wont_be :nil?
+    files.token.must_equal "next_page_token"
+  end
+
+  it "paginates files without max set" do
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.wont_include "maxResults"
+      [200, {"Content-Type"=>"application/json"},
+       list_files_json(3, "next_page_token")]
+    end
+
+    files = bucket.files
+    files.count.must_equal 3
+    files.token.wont_be :nil?
+    files.token.must_equal "next_page_token"
+  end
+
+  it "paginates files with versions set" do
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "versions"
+      env.params["versions"].must_equal "true"
+      [200, {"Content-Type"=>"application/json"},
+       list_files_json(8)]
+    end
+
+    files = bucket.files versions: true
+    files.count.must_equal 8
+  end
+
+  it "paginates files without versions set" do
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.wont_include "versions"
+      [200, {"Content-Type"=>"application/json"},
+       list_files_json(3)]
+    end
+
+    files = bucket.files
+    files.count.must_equal 3
+  end
+
   it "finds a file without generation" do
     file_name = "file.ext"
 
@@ -127,9 +229,11 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     random_file_hash(bucket, name).to_json
   end
 
-  def list_files_json count = 2
+  def list_files_json count = 2, token = nil, prefixes = nil
     files = count.times.map { random_file_hash }
-    {"kind"=>"storage#objects",
-     "items"=>files}.to_json
+    hash = {"kind"=>"storage#objects", "items"=>files}
+    hash["nextPageToken"] = token unless token.nil?
+    hash["prefixes"] = prefixes unless prefixes.nil?
+    hash.to_json
   end
 end

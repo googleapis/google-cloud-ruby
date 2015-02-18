@@ -110,13 +110,11 @@ module Gcloud
       #   end
       #
       # See Gcloud::Storage::File
-      def files
+      def files options = {}
         ensure_connection!
-        resp = connection.list_files name
+        resp = connection.list_files name, options
         if resp.success?
-          resp.data["items"].map do |gapi_object|
-            File.from_gapi gapi_object, connection
-          end
+          File::List.from_resp resp, connection
         else
           fail ApiError.from_response(resp)
         end

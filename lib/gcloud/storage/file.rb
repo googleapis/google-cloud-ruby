@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "gcloud/storage/file/acl"
+require "gcloud/storage/file/list"
 require "gcloud/storage/verifier"
 require "digest"
 require "base64"
