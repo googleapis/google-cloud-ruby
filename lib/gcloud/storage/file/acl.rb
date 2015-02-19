@@ -18,6 +18,22 @@ module Gcloud
       ##
       # Represents a File's Access Control List.
       class Acl
+        RULES = { "authenticatedRead" => "authenticatedRead",
+                  "auth" => "authenticatedRead",
+                  "auth_read" => "authenticatedRead",
+                  "authenticated" => "authenticatedRead",
+                  "authenticated_read" => "authenticatedRead",
+                  "bucketOwnerFullControl" => "bucketOwnerFullControl",
+                  "owner_full" => "bucketOwnerFullControl",
+                  "bucketOwnerRead" => "bucketOwnerRead",
+                  "owner_read" => "bucketOwnerRead",
+                  "private" => "private",
+                  "projectPrivate" => "projectPrivate",
+                  "project_private" => "projectPrivate",
+                  "publicRead" => "publicRead",
+                  "public" => "publicRead",
+                  "public_read" => "publicRead" }
+
         ##
         # Initialized a new Acl object.
         # Must provide a valid Bucket object.
@@ -95,6 +111,10 @@ module Gcloud
             return true
           end
           false
+        end
+
+        def self.predefined_rule_for rule_name
+          RULES[rule_name.to_s]
         end
 
         protected

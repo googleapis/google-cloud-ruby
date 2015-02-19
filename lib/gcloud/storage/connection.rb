@@ -172,21 +172,23 @@ module Gcloud
       ##
       # Stores a new object and metadata.
       # Uses a multipart form post.
-      def insert_file_multipart bucket_name, file, path = nil
+      def insert_file_multipart bucket_name, file, path = nil, options = {}
         local_path = Pathname(file).to_path
         upload_path = Pathname(path || local_path).to_path
         mime_type = mime_type_for local_path
 
         media = Google::APIClient::UploadIO.new local_path, mime_type
 
+        params = { uploadType: "multipart",
+                   bucket: bucket_name,
+                   name: upload_path,
+                   predefinedAcl: options[:acl]
+                 }.delete_if { |_, v| v.nil? }
+
         @client.execute(
           api_method: @storage.objects.insert,
           media: media,
-          parameters: {
-            uploadType: "multipart",
-            bucket: bucket_name,
-            name: upload_path
-          },
+          parameters: params,
           body_object: { contentType: mime_type }
         )
       end
@@ -194,7 +196,7 @@ module Gcloud
       ##
       # Stores a new object and metadata.
       # Uses a resumable upload.
-      def insert_file_resumable bucket_name, file, path = nil, chunk_size = nil
+      def insert_file_resumable bucket_name, file, path = nil, chunk_size = nil, options = {}
         local_path = Pathname(file).to_path
         upload_path = Pathname(path || local_path).to_path
         # mime_type = options[:mime_type] || mime_type_for local_path
@@ -207,14 +209,16 @@ module Gcloud
         media = Google::APIClient::UploadIO.new local_path, mime_type
         media.chunk_size = chunk_size
 
+        params = { uploadType: "resumable",
+                   bucket: bucket_name,
+                   name: upload_path,
+                   predefinedAcl: options[:acl]
+                 }.delete_if { |_, v| v.nil? }
+
         result = @client.execute(
           api_method: @storage.objects.insert,
           media: media,
-          parameters: {
-            uploadType: "resumable",
-            bucket: bucket_name,
-            name: upload_path
-          },
+          parameters: params,
           body_object: { contentType: mime_type }
         )
         upload = result.resumable_upload
