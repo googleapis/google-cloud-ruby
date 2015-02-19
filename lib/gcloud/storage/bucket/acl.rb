@@ -112,7 +112,47 @@ module Gcloud
           RULES[rule_name.to_s]
         end
 
+        # Predefined ACL helpers
+
+        def auth!
+          set_predefined_acl! "authenticatedRead"
+        end
+        alias_method :authenticatedRead!, :auth!
+        alias_method :auth_read!, :auth!
+        alias_method :authenticated!, :auth!
+        alias_method :authenticated_read!, :auth!
+
+        def private!
+          set_predefined_acl! "private"
+        end
+
+        def project_private!
+          set_predefined_acl! "projectPrivate"
+        end
+        alias_method :projectPrivate!, :project_private!
+
+        def public!
+          set_predefined_acl! "publicRead"
+        end
+        alias_method :publicRead!, :public!
+        alias_method :public_read!, :public!
+
+        def public_write!
+          set_predefined_acl! "publicReadWrite"
+        end
+        alias_method :publicReadWrite!, :public_write!
+
         protected
+
+        def set_predefined_acl! acl_role
+          resp = @connection.patch_bucket @bucket,
+                                          acl: acl_role
+
+          if resp.success?
+            return true
+          end
+          false
+        end
 
         def entities_from_acls acls, role
           selected = acls.select { |acl| acl["role"] == role }
@@ -219,7 +259,52 @@ module Gcloud
           RULES[rule_name.to_s]
         end
 
+        # Predefined ACL helpers
+
+        def auth!
+          set_predefined_default_acl! "authenticatedRead"
+        end
+        alias_method :authenticatedRead!, :auth!
+        alias_method :auth_read!, :auth!
+        alias_method :authenticated!, :auth!
+        alias_method :authenticated_read!, :auth!
+
+        def owner_full!
+          set_predefined_default_acl! "bucketOwnerFullControl"
+        end
+        alias_method :bucketOwnerFullControl!, :owner_full!
+
+        def owner_read!
+          set_predefined_default_acl! "bucketOwnerRead"
+        end
+        alias_method :bucketOwnerRead!, :owner_read!
+
+        def private!
+          set_predefined_default_acl! "private"
+        end
+
+        def project_private!
+          set_predefined_default_acl! "projectPrivate"
+        end
+        alias_method :projectPrivate!, :project_private!
+
+        def public!
+          set_predefined_default_acl! "publicRead"
+        end
+        alias_method :publicRead!, :public!
+        alias_method :public_read!, :public!
+
         protected
+
+        def set_predefined_default_acl! acl_role
+          resp = @connection.patch_bucket @bucket,
+                                          default_acl: acl_role
+
+          if resp.success?
+            return true
+          end
+          false
+        end
 
         def entities_from_acls acls, role
           selected = acls.select { |acl| acl["role"] == role }

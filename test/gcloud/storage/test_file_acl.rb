@@ -200,6 +200,106 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
     file.acl.readers.must_be :empty?
   end
 
+  it "sets the predefined ACL rule authenticatedRead" do
+    predefined_acl_update "authenticatedRead" do |acl|
+      acl.authenticatedRead!
+    end
+  end
+
+  it "sets the predefined ACL rule auth" do
+    predefined_acl_update "authenticatedRead" do |acl|
+      acl.auth!
+    end
+  end
+
+  it "sets the predefined ACL rule auth_read" do
+    predefined_acl_update "authenticatedRead" do |acl|
+      acl.auth_read!
+    end
+  end
+
+  it "sets the predefined ACL rule authenticated" do
+    predefined_acl_update "authenticatedRead" do |acl|
+      acl.authenticated!
+    end
+  end
+
+  it "sets the predefined ACL rule authenticated_read" do
+    predefined_acl_update "authenticatedRead" do |acl|
+      acl.authenticated_read!
+    end
+  end
+
+  it "sets the predefined ACL rule bucketOwnerFullControl" do
+    predefined_acl_update "bucketOwnerFullControl" do |acl|
+      acl.bucketOwnerFullControl!
+    end
+  end
+
+  it "sets the predefined ACL rule owner_full" do
+    predefined_acl_update "bucketOwnerFullControl" do |acl|
+      acl.owner_full!
+    end
+  end
+
+  it "sets the predefined ACL rule bucketOwnerRead" do
+    predefined_acl_update "bucketOwnerRead" do |acl|
+      acl.bucketOwnerRead!
+    end
+  end
+
+  it "sets the predefined ACL rule owner_read" do
+    predefined_acl_update "bucketOwnerRead" do |acl|
+      acl.owner_read!
+    end
+  end
+
+  it "sets the predefined ACL rule private" do
+    predefined_acl_update "private" do |acl|
+      acl.private!
+    end
+  end
+
+  it "sets the predefined ACL rule projectPrivate" do
+    predefined_acl_update "projectPrivate" do |acl|
+      acl.projectPrivate!
+    end
+  end
+
+  it "sets the predefined ACL rule project_private" do
+    predefined_acl_update "projectPrivate" do |acl|
+      acl.project_private!
+    end
+  end
+
+  it "sets the predefined ACL rule publicRead" do
+    predefined_acl_update "publicRead" do |acl|
+      acl.publicRead!
+    end
+  end
+
+  it "sets the predefined ACL rule public" do
+    predefined_acl_update "publicRead" do |acl|
+      acl.public!
+    end
+  end
+
+  it "sets the predefined ACL rule public_read" do
+    predefined_acl_update "publicRead" do |acl|
+      acl.public_read!
+    end
+  end
+
+  def predefined_acl_update acl_role
+    mock_connection.patch "/storage/v1/b/#{bucket_name}/o/#{file_name}" do |env|
+      env.params["predefinedAcl"].must_equal acl_role
+      [200, {"Content-Type"=>"application/json"},
+       random_file_hash(bucket_name, file_name).to_json]
+    end
+
+    yield file.acl
+  end
+
   def random_file_acl_hash bucket_name, file_name
     {
      "kind" => "storage#objectAccessControls",

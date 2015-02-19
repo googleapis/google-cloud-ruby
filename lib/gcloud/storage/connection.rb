@@ -81,6 +81,20 @@ module Gcloud
       end
 
       ##
+      # Updates a bucket's metadata.
+      def patch_bucket bucket_name, options = {}
+        params = { bucket: bucket_name,
+                   predefinedAcl: options[:acl],
+                   predefinedDefaultObjectAcl: options.delete(:default_acl)
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @storage.buckets.patch,
+          parameters: params
+        )
+      end
+
+      ##
       # Permenently deletes an empty bucket.
       def delete_bucket bucket_name, opts = {}
         incremental_backoff opts do
@@ -261,6 +275,20 @@ module Gcloud
           parameters: { bucket: bucket_name,
                         object: file_path,
                         alt: :media }
+        )
+      end
+
+      ##
+      # Updates a file's metadata.
+      def patch_file bucket_name, file_path, options = {}
+        params = { bucket: bucket_name,
+                   object: file_path,
+                   predefinedAcl: options.delete(:acl)
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @storage.objects.patch,
+          parameters: params
         )
       end
 
