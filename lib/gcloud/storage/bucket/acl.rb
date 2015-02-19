@@ -18,6 +18,21 @@ module Gcloud
       ##
       # Represents a Bucket's Access Control List.
       class Acl
+        RULES = { "authenticatedRead" => "authenticatedRead",
+                  "auth" => "authenticatedRead",
+                  "auth_read" => "authenticatedRead",
+                  "authenticated" => "authenticatedRead",
+                  "authenticated_read" => "authenticatedRead",
+                  "private" => "private",
+                  "projectPrivate" => "projectPrivate",
+                  "proj_private" => "projectPrivate",
+                  "project_private" => "projectPrivate",
+                  "publicRead" => "publicRead",
+                  "public" => "publicRead",
+                  "public_read" => "publicRead",
+                  "publicReadWrite" => "publicReadWrite",
+                  "public_write" => "publicReadWrite" }
+
         ##
         # Initialized a new Acl object.
         # Must provide a valid Bucket object.
@@ -93,6 +108,10 @@ module Gcloud
           false
         end
 
+        def self.predefined_rule_for rule_name
+          RULES[rule_name.to_s]
+        end
+
         protected
 
         def entities_from_acls acls, role
@@ -105,6 +124,22 @@ module Gcloud
       ##
       # Represents a Bucket's Default Access Control List.
       class DefaultAcl
+        RULES = { "authenticatedRead" => "authenticatedRead",
+                  "auth" => "authenticatedRead",
+                  "auth_read" => "authenticatedRead",
+                  "authenticated" => "authenticatedRead",
+                  "authenticated_read" => "authenticatedRead",
+                  "bucketOwnerFullControl" => "bucketOwnerFullControl",
+                  "owner_full" => "bucketOwnerFullControl",
+                  "bucketOwnerRead" => "bucketOwnerRead",
+                  "owner_read" => "bucketOwnerRead",
+                  "private" => "private",
+                  "projectPrivate" => "projectPrivate",
+                  "project_private" => "projectPrivate",
+                  "publicRead" => "publicRead",
+                  "public" => "publicRead",
+                  "public_read" => "publicRead" }
+
         ##
         # Initialized a new DefaultAcl object.
         # Must provide a valid Bucket object.
@@ -178,6 +213,10 @@ module Gcloud
             return true
           end
           false
+        end
+
+        def self.predefined_rule_for rule_name
+          RULES[rule_name.to_s]
         end
 
         protected

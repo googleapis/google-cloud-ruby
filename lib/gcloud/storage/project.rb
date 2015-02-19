@@ -102,6 +102,11 @@ module Gcloud
       #
       # See Gcloud::Storage::Bucket
       def create_bucket bucket_name, options = {}
+        options[:acl] = Bucket::Acl.predefined_rule_for options[:acl]
+        default_acl = options[:default_acl]
+        default_acl = Bucket::DefaultAcl.predefined_rule_for default_acl
+        options[:default_acl] = default_acl
+
         resp = connection.insert_bucket bucket_name, options
         if resp.success?
           Bucket.from_gapi resp.data, connection

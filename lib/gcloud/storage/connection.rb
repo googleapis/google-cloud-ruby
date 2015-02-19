@@ -66,11 +66,10 @@ module Gcloud
       ##
       # Creates a new bucket.
       def insert_bucket bucket_name, options = {}
-        params = { project: @project }
-        params["predefinedAcl"] = options[:acl].to_s if options[:acl]
-        if options[:default_acl]
-          params["predefinedDefaultObjectAcl"] = options[:default_acl].to_s
-        end
+        params = { project: @project,
+                   predefinedAcl: options[:acl],
+                   predefinedDefaultObjectAcl: options[:default_acl]
+                 }.delete_if { |_, v| v.nil? }
 
         incremental_backoff options do
           @client.execute(
