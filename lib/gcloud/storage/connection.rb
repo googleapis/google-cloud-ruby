@@ -65,11 +65,17 @@ module Gcloud
 
       ##
       # Creates a new bucket.
-      def insert_bucket bucket_name, opts = {}
-        incremental_backoff opts do
+      def insert_bucket bucket_name, options = {}
+        params = { project: @project }
+        params["predefinedAcl"] = options[:acl].to_s if options[:acl]
+        if options[:default_acl]
+          params["predefinedDefaultObjectAcl"] = options[:default_acl].to_s
+        end
+
+        incremental_backoff options do
           @client.execute(
             api_method: @storage.buckets.insert,
-            parameters: { project: @project },
+            parameters: params,
             body_object: { name: bucket_name }
           )
         end

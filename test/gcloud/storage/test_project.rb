@@ -21,11 +21,43 @@ describe Gcloud::Storage::Project, :mock_storage do
 
     mock_connection.post "/storage/v1/b?project=#{project}" do |env|
       JSON.parse(env.body)["name"].must_equal new_bucket_name
+      env.params.wont_include "predefinedAcl"
+      env.params.wont_include "predefinedDefaultObjectAcl"
       [200, {"Content-Type"=>"application/json"},
        create_bucket_json]
     end
 
     storage.create_bucket new_bucket_name
+  end
+
+  it "creates a bucket with predefined acl" do
+    new_bucket_name = "new-bucket-#{Time.now.to_i}"
+
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "predefinedAcl"
+      env.params["predefinedAcl"].must_equal "private"
+      env.params.wont_include "predefinedDefaultObjectAcl"
+      JSON.parse(env.body)["name"].must_equal new_bucket_name
+      [200, {"Content-Type"=>"application/json"},
+       create_bucket_json]
+    end
+
+    storage.create_bucket new_bucket_name, acl: "private"
+  end
+
+  it "creates a bucket with predefined default acl" do
+    new_bucket_name = "new-bucket-#{Time.now.to_i}"
+
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      env.params.wont_include "predefinedAcl"
+      env.params.must_include "predefinedDefaultObjectAcl"
+      env.params["predefinedDefaultObjectAcl"].must_equal "private"
+      JSON.parse(env.body)["name"].must_equal new_bucket_name
+      [200, {"Content-Type"=>"application/json"},
+       create_bucket_json]
+    end
+
+    storage.create_bucket new_bucket_name, default_acl: "private"
   end
 
   it "lists buckets" do
