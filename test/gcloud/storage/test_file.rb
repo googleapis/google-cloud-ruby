@@ -67,8 +67,8 @@ describe Gcloud::Storage::File, :mock_storage do
       stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
       stubbed_crc32c = lambda { |_| fail "Should not be called!" }
 
-      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
-        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+      Gcloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
           Tempfile.open "gcloud-ruby" do |tmpfile|
             file.download tmpfile
           end
@@ -83,8 +83,8 @@ describe Gcloud::Storage::File, :mock_storage do
       stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
       stubbed_crc32c = lambda { |_| fail "Should not be called!" }
 
-      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
-        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+      Gcloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
           Tempfile.open "gcloud-ruby" do |tmpfile|
             file.download tmpfile, verify: :md5
           end
@@ -99,8 +99,8 @@ describe Gcloud::Storage::File, :mock_storage do
       mocked_crc32c.expect :crc32c_mock, file.crc32c
       stubbed_crc32c = lambda { |_| mocked_crc32c.crc32c_mock }
 
-      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
-        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+      Gcloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
           Tempfile.open "gcloud-ruby" do |tmpfile|
             file.download tmpfile, verify: :crc32c
           end
@@ -118,8 +118,8 @@ describe Gcloud::Storage::File, :mock_storage do
       mocked_crc32c.expect :crc32c_mock, file.crc32c
       stubbed_crc32c = lambda { |_| mocked_crc32c.crc32c_mock }
 
-      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
-        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+      Gcloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
           Tempfile.open "gcloud-ruby" do |tmpfile|
             file.download tmpfile, verify: :all
           end
@@ -133,8 +133,8 @@ describe Gcloud::Storage::File, :mock_storage do
       stubbed_md5 = lambda { |_| fail "Should not be called!" }
       stubbed_crc32c = lambda { |_| fail "Should not be called!" }
 
-      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
-        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+      Gcloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
           Tempfile.open "gcloud-ruby" do |tmpfile|
             file.download tmpfile, verify: :none
           end
@@ -148,8 +148,8 @@ describe Gcloud::Storage::File, :mock_storage do
       stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
       stubbed_crc32c = lambda { |_| fail "Should not be called!" }
 
-      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
-        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+      Gcloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
           Tempfile.open "gcloud-ruby" do |tmpfile|
             assert_raises Gcloud::Storage::FileVerificationError do
               file.download tmpfile

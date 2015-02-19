@@ -14,10 +14,7 @@
 
 require "gcloud/storage/file/acl"
 require "gcloud/storage/file/list"
-require "gcloud/storage/verifier"
-require "digest"
-require "base64"
-require "cgi"
+require "gcloud/storage/file/verifier"
 
 module Gcloud
   module Storage
