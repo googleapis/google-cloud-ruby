@@ -158,11 +158,14 @@ module Gcloud
       #
       #   file.copy "new-destination-bucket",
       #             "path/to/destination/file.ext"
-      def copy dest_bucket_or_path, dest_path = nil
+      def copy dest_bucket_or_path, dest_path = nil, options = {}
         ensure_connection!
-        dest_bucket, dest_path = fix_copy_args dest_bucket_or_path, dest_path
+        dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
+                                                        dest_path, options
 
-        resp = connection.copy_file bucket, name, dest_bucket, dest_path
+        resp = connection.copy_file bucket, name,
+                                    dest_bucket, dest_path,
+                                    options
         if resp.success?
           File.from_gapi resp.data, connection
         else
@@ -211,7 +214,11 @@ module Gcloud
         fail "Must have active connection" unless connection
       end
 
-      def fix_copy_args dest_bucket_or_path, dest_path
+      def fix_copy_args dest_bucket_or_path, dest_path, options = {}
+        if dest_path.respond_to?(:to_hash) && options.empty?
+          options = dest_path
+          dest_path = nil
+        end
         if dest_path.nil?
           dest_path = dest_bucket_or_path
           dest_bucket_or_path = bucket
@@ -219,7 +226,8 @@ module Gcloud
         if dest_bucket_or_path.respond_to? :name
           dest_bucket_or_path = dest_bucket_or_path.name
         end
-        [dest_bucket_or_path, dest_path]
+        options[:acl] = File::Acl.predefined_rule_for options[:acl]
+        [dest_bucket_or_path, dest_path, options]
       end
 
       def verify_file! file, options = {}

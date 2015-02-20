@@ -257,13 +257,18 @@ module Gcloud
       ## Copy a file from source bucket/object to a
       # destination bucket/object.
       def copy_file source_bucket_name, source_file_path,
-                    destination_bucket_name, destination_file_path
+                    destination_bucket_name, destination_file_path,
+                    options = {}
+        params = { sourceBucket: source_bucket_name,
+                   sourceObject: source_file_path,
+                   destinationBucket: destination_bucket_name,
+                   destinationObject: destination_file_path,
+                   predefinedAcl: options[:acl]
+                 }.delete_if { |_, v| v.nil? }
+
         @client.execute(
           api_method: @storage.objects.copy,
-          parameters: { sourceBucket: source_bucket_name,
-                        sourceObject: source_file_path,
-                        destinationBucket: destination_bucket_name,
-                        destinationObject: destination_file_path }
+          parameters: params
         )
       end
 

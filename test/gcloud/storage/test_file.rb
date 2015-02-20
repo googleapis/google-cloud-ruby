@@ -170,6 +170,26 @@ describe Gcloud::Storage::File, :mock_storage do
     file.copy "new-file.ext"
   end
 
+  it "can copy itself in the same bucket with predefined ACL" do
+    mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/#{bucket.name}/o/new-file.ext" do |env|
+      env.params["predefinedAcl"].must_equal "private"
+      [200, {"Content-Type"=>"application/json"},
+       file.gapi.to_json]
+    end
+
+    file.copy "new-file.ext", acl: "private"
+  end
+
+  it "can copy itself in the same bucket with ACL alias" do
+    mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/#{bucket.name}/o/new-file.ext" do |env|
+      env.params["predefinedAcl"].must_equal "publicRead"
+      [200, {"Content-Type"=>"application/json"},
+       file.gapi.to_json]
+    end
+
+    file.copy "new-file.ext", acl: :public
+  end
+
   it "can copy itself to a different bucket" do
     mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/new-bucket/o/new-file.ext" do |env|
       [200, {"Content-Type"=>"application/json"},
@@ -177,5 +197,25 @@ describe Gcloud::Storage::File, :mock_storage do
     end
 
     file.copy "new-bucket", "new-file.ext"
+  end
+
+  it "can copy itself to a different bucket with predefined ACL" do
+    mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/new-bucket/o/new-file.ext" do |env|
+      env.params["predefinedAcl"].must_equal "private"
+      [200, {"Content-Type"=>"application/json"},
+       file.gapi.to_json]
+    end
+
+    file.copy "new-bucket", "new-file.ext", acl: "private"
+  end
+
+  it "can copy itself to a different bucket with ACL alias" do
+    mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/new-bucket/o/new-file.ext" do |env|
+      env.params["predefinedAcl"].must_equal "publicRead"
+      [200, {"Content-Type"=>"application/json"},
+       file.gapi.to_json]
+    end
+
+    file.copy "new-bucket", "new-file.ext", acl: :public
   end
 end
