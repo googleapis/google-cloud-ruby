@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Gcloud::Datastore - gcloud-0.0.1 Documentation</title>
-
-<link href="../fonts.css" rel="stylesheet">
-<link href="../rdoc.css" rel="stylesheet">
+<title>module Gcloud::Datastore - gcloud-0.0.1</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/search_index.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/searcher.js"></script>
 <script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="module">
@@ -85,11 +82,12 @@
     
 <p>Google Cloud <a href="Datastore.html">Datastore</a></p>
 
-<pre>dataset = Gcloud::Datastore.dataset &quot;my-todo-project&quot;,
-                                    &quot;/path/to/keyfile.json&quot;
-entity = dataset.find &quot;Task&quot;, &quot;start&quot;
-entity[&quot;completed&quot;] = true
-dataset.save entity</pre>
+<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
+                                    <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<span class="ruby-identifier">entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-string">&quot;start&quot;</span>
+<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;completed&quot;</span>] = <span class="ruby-keyword">true</span>
+<span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">entity</span>
+</pre>
 
   </section>
 
@@ -127,14 +125,15 @@ dataset.save entity</pre>
           
           <p>Create a new <a href="Datastore/Dataset.html">Dataset</a>.</p>
 
-<pre>entity = Gcloud::Datastore::Entity.new
-entity.key = Gcloud::Datastore::Key.new &quot;Task&quot;
-entity[&quot;description&quot;] = &quot;Get started with Google Cloud&quot;
-entity[&quot;completed&quot;] = false
+<pre class="ruby"><span class="ruby-identifier">entity</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>
+<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;description&quot;</span>] = <span class="ruby-string">&quot;Get started with Google Cloud&quot;</span>
+<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;completed&quot;</span>] = <span class="ruby-keyword">false</span>
 
-dataset = Gcloud::Datastore.dataset &quot;my-todo-project&quot;,
-                                    &quot;/path/to/keyfile.json&quot;
-dataset.save entity</pre>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
+                                    <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">entity</span>
+</pre>
 
 <p>@param dataset_id [String] the dataset identifier for the <a
 href="Datastore.html">Datastore</a> you are connecting to. @param keyfile
@@ -176,12 +175,13 @@ must readable. @return [Gcloud::Datastore::Connection] new connection</p>
           
           <p>Special dataset for connecting to a Local Development Server.</p>
 
-<pre>dataset = Gcloud::Datastore.dataset &quot;my-todo-project&quot;,
-                                    &quot;/path/to/keyfile.json&quot;
-entity = dataset.find &quot;Task&quot;, &quot;start&quot;
+<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
+                                    <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<span class="ruby-identifier">entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-string">&quot;start&quot;</span>
 
-devserver = Gcloud::Datastore.devserver &quot;my-todo-project&quot;
-devserver.save entity</pre>
+<span class="ruby-identifier">devserver</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">devserver</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>
+<span class="ruby-identifier">devserver</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">entity</span>
+</pre>
 
 <p>The URL of the devserver should be set in the DATASTORE_HOST environment
 variable.</p>
@@ -219,7 +219,7 @@ href="https://cloud.google.com/datastore/docs/tools/devserver">cloud.google.com/
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

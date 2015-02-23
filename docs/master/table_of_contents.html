@@ -4,26 +4,23 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Table of Contents - gcloud-0.0.1 Documentation</title>
-
-<link href="./fonts.css" rel="stylesheet">
-<link href="./rdoc.css" rel="stylesheet">
+<title>Table of Contents - gcloud-0.0.1</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
 </script>
 
 <script src="./js/jquery.js"></script>
-<script src="./js/navigation.js"></script>
-<script src="./js/search_index.js"></script>
-<script src="./js/search.js"></script>
-<script src="./js/searcher.js"></script>
 <script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" class="table-of-contents">
 <main role="main">
-<h1 class="class">Table of Contents - gcloud-0.0.1 Documentation</h1>
+<h1 class="class">Table of Contents - gcloud-0.0.1</h1>
 
 <h2 id="pages">Pages</h2>
 <ul>
@@ -53,6 +50,7 @@
       <li><a href="README_md.html#label-Datastore">Datastore</a>
       <li><a href="README_md.html#label-Storage">Storage</a>
       <li><a href="README_md.html#label-Supported+Ruby+Versions">Supported Ruby Versions</a>
+      <li><a href="README_md.html#label-Versioning">Versioning</a>
       <li><a href="README_md.html#label-Contributing">Contributing</a>
       <li><a href="README_md.html#label-License">License</a>
     </ul>
@@ -96,6 +94,9 @@
     <a href="Gcloud/Datastore/KeyfileError.html">Gcloud::Datastore::KeyfileError</a>
   </li>
   <li class="class">
+    <a href="Gcloud/Datastore/Properties.html">Gcloud::Datastore::Properties</a>
+  </li>
+  <li class="class">
     <a href="Gcloud/Datastore/PropertyError.html">Gcloud::Datastore::PropertyError</a>
   </li>
   <li class="module">
@@ -126,10 +127,28 @@
     <a href="Gcloud/Storage/Bucket.html">Gcloud::Storage::Bucket</a>
   </li>
   <li class="class">
+    <a href="Gcloud/Storage/Bucket/Acl.html">Gcloud::Storage::Bucket::Acl</a>
+  </li>
+  <li class="class">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html">Gcloud::Storage::Bucket::DefaultAcl</a>
+  </li>
+  <li class="class">
+    <a href="Gcloud/Storage/Bucket/List.html">Gcloud::Storage::Bucket::List</a>
+  </li>
+  <li class="class">
     <a href="Gcloud/Storage/Error.html">Gcloud::Storage::Error</a>
   </li>
   <li class="class">
     <a href="Gcloud/Storage/File.html">Gcloud::Storage::File</a>
+  </li>
+  <li class="class">
+    <a href="Gcloud/Storage/File/Acl.html">Gcloud::Storage::File::Acl</a>
+  </li>
+  <li class="class">
+    <a href="Gcloud/Storage/File/List.html">Gcloud::Storage::File::List</a>
+  </li>
+  <li class="class">
+    <a href="Gcloud/Storage/File/Signer.html">Gcloud::Storage::File::Signer</a>
   </li>
   <li class="class">
     <a href="Gcloud/Storage/FileVerificationError.html">Gcloud::Storage::FileVerificationError</a>
@@ -153,29 +172,9 @@
     <span class="container">Gcloud::Datastore</span>
 
   <li class="method">
-    <a href="Gcloud/Datastore/ApiError.html#method-c-new">::new</a>
+    <a href="Gcloud/Storage/File/List.html#method-c-new">::new</a>
     &mdash;
-    <span class="container">Gcloud::Datastore::ApiError</span>
-
-  <li class="method">
-    <a href="Gcloud/Datastore/Key.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Gcloud::Datastore::Key</span>
-
-  <li class="method">
-    <a href="Gcloud/Datastore/TransactionError.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Gcloud::Datastore::TransactionError</span>
-
-  <li class="method">
-    <a href="Gcloud/Datastore/Dataset/LookupResults.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Gcloud::Datastore::Dataset::LookupResults</span>
-
-  <li class="method">
-    <a href="Gcloud/Storage/File.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Gcloud::Storage::File</span>
+    <span class="container">Gcloud::Storage::File::List</span>
 
   <li class="method">
     <a href="Gcloud/Datastore/Entity.html#method-c-new">::new</a>
@@ -183,14 +182,14 @@
     <span class="container">Gcloud::Datastore::Entity</span>
 
   <li class="method">
-    <a href="Gcloud/Storage/Bucket.html#method-c-new">::new</a>
+    <a href="Gcloud/Datastore/TransactionError.html#method-c-new">::new</a>
     &mdash;
-    <span class="container">Gcloud::Storage::Bucket</span>
+    <span class="container">Gcloud::Datastore::TransactionError</span>
 
   <li class="method">
-    <a href="Gcloud/Datastore/Query.html#method-c-new">::new</a>
+    <a href="Gcloud/Datastore/Key.html#method-c-new">::new</a>
     &mdash;
-    <span class="container">Gcloud::Datastore::Query</span>
+    <span class="container">Gcloud::Datastore::Key</span>
 
   <li class="method">
     <a href="Gcloud/Datastore/Dataset/QueryResults.html#method-c-new">::new</a>
@@ -198,9 +197,64 @@
     <span class="container">Gcloud::Datastore::Dataset::QueryResults</span>
 
   <li class="method">
+    <a href="Gcloud/Storage/File/Signer.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Signer</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Query.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Query</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/List.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::List</span>
+
+  <li class="method">
     <a href="Gcloud/Storage/ApiError.html#method-c-new">::new</a>
     &mdash;
     <span class="container">Gcloud::Storage::ApiError</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Properties.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Properties</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Dataset/LookupResults.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Dataset::LookupResults</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/ApiError.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::ApiError</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-c-predefined_rule_for">::predefined_rule_for</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-c-predefined_rule_for">::predefined_rule_for</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-c-predefined_rule_for">::predefined_rule_for</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
 
   <li class="method">
     <a href="Gcloud/Storage.html#method-c-project">::project</a>
@@ -223,9 +277,74 @@
     <span class="container">Gcloud::Datastore::Entity</span>
 
   <li class="method">
+    <a href="Gcloud/Datastore/Properties.html#method-i-5B-5D">#[]</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Properties</span>
+
+  <li class="method">
     <a href="Gcloud/Datastore/Entity.html#method-i-5B-5D-3D">#[]=</a>
     &mdash;
     <span class="container">Gcloud::Datastore::Entity</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Properties.html#method-i-5B-5D-3D">#[]=</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Properties</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket.html#method-i-acl">#acl</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File.html#method-i-acl">#acl</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-add_owner">#add_owner</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-add_owner">#add_owner</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-add_owner">#add_owner</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-add_reader">#add_reader</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-add_reader">#add_reader</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-add_reader">#add_reader</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-add_writer">#add_writer</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-add_writer">#add_writer</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-add_writer">#add_writer</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
 
   <li class="method">
     <a href="Gcloud/Datastore/Dataset.html#method-i-allocate_ids">#allocate_ids</a>
@@ -238,6 +357,86 @@
     <span class="container">Gcloud::Datastore::Query</span>
 
   <li class="method">
+    <a href="Gcloud/Storage/File/Signer.html#method-i-apply_option_defaults">#apply_option_defaults</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Signer</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-auth-21">#auth!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-auth-21">#auth!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-auth-21">#auth!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-auth_read-21">#auth_read!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-auth_read-21">#auth_read!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-auth_read-21">#auth_read!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-authenticated-21">#authenticated!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-authenticated-21">#authenticated!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-authenticated-21">#authenticated!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-authenticatedRead-21">#authenticatedRead!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-authenticatedRead-21">#authenticatedRead!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-authenticatedRead-21">#authenticatedRead!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-authenticated_read-21">#authenticated_read!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-authenticated_read-21">#authenticated_read!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-authenticated_read-21">#authenticated_read!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
     <a href="Gcloud/Datastore/Transaction.html#method-i-begin_transaction">#begin_transaction</a>
     &mdash;
     <span class="container">Gcloud::Datastore::Transaction</span>
@@ -246,6 +445,26 @@
     <a href="Gcloud/Storage/File.html#method-i-bucket">#bucket</a>
     &mdash;
     <span class="container">Gcloud::Storage::File</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-bucketOwnerFullControl-21">#bucketOwnerFullControl!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-bucketOwnerFullControl-21">#bucketOwnerFullControl!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-bucketOwnerRead-21">#bucketOwnerRead!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-bucketOwnerRead-21">#bucketOwnerRead!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
 
   <li class="method">
     <a href="Gcloud/Storage/Project.html#method-i-buckets">#buckets</a>
@@ -293,14 +512,19 @@
     <span class="container">Gcloud::Datastore::Query</span>
 
   <li class="method">
+    <a href="Gcloud/Storage/Bucket.html#method-i-default_acl">#default_acl</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket</span>
+
+  <li class="method">
     <a href="Gcloud/Storage/Bucket.html#method-i-delete">#delete</a>
     &mdash;
     <span class="container">Gcloud::Storage::Bucket</span>
 
   <li class="method">
-    <a href="Gcloud/Datastore/Dataset.html#method-i-delete">#delete</a>
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-delete">#delete</a>
     &mdash;
-    <span class="container">Gcloud::Datastore::Dataset</span>
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
 
   <li class="method">
     <a href="Gcloud/Datastore/Transaction.html#method-i-delete">#delete</a>
@@ -313,6 +537,26 @@
     <span class="container">Gcloud::Storage::File</span>
 
   <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-delete">#delete</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-delete">#delete</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Dataset.html#method-i-delete">#delete</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Dataset</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Properties.html#method-i-delete">#delete</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Properties</span>
+
+  <li class="method">
     <a href="Gcloud/Storage/File.html#method-i-download">#download</a>
     &mdash;
     <span class="container">Gcloud::Storage::File</span>
@@ -323,14 +567,44 @@
     <span class="container">Gcloud::Datastore::Proto::Key</span>
 
   <li class="method">
-    <a href="Gcloud/Storage/Bucket.html#method-i-ensure_connection-21">#ensure_connection!</a>
+    <a href="Gcloud/Datastore/Properties.html#method-i-each">#each</a>
     &mdash;
-    <span class="container">Gcloud::Storage::Bucket</span>
+    <span class="container">Gcloud::Datastore::Properties</span>
 
   <li class="method">
     <a href="Gcloud/Storage/File.html#method-i-ensure_connection-21">#ensure_connection!</a>
     &mdash;
     <span class="container">Gcloud::Storage::File</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket.html#method-i-ensure_connection-21">#ensure_connection!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Properties.html#method-i-ensure_key_type">#ensure_key_type</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Properties</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Properties.html#method-i-ensure_value_type">#ensure_value_type</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Properties</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-entities_from_acls">#entities_from_acls</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-entities_from_acls">#entities_from_acls</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-entities_from_acls">#entities_from_acls</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
 
   <li class="method">
     <a href="Gcloud/Storage/File.html#method-i-etag">#etag</a>
@@ -346,6 +620,26 @@
     <a href="Gcloud/Datastore/Entity.html#method-i-exclude_from_indexes-3F">#exclude_from_indexes?</a>
     &mdash;
     <span class="container">Gcloud::Datastore::Entity</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Properties.html#method-i-exist-3F">#exist?</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Properties</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Signer.html#method-i-ext_path">#ext_path</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Signer</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Signer.html#method-i-ext_url">#ext_url</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Signer</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Properties.html#method-i-fetch">#fetch</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Properties</span>
 
   <li class="method">
     <a href="Gcloud/Storage/Bucket.html#method-i-files">#files</a>
@@ -413,6 +707,11 @@
     <span class="container">Gcloud::Datastore::Key</span>
 
   <li class="method">
+    <a href="Gcloud/Storage/File/Signer.html#method-i-issuer">#issuer</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Signer</span>
+
+  <li class="method">
     <a href="Gcloud/Datastore/Entity.html#method-i-key-3D">#key=</a>
     &mdash;
     <span class="container">Gcloud::Datastore::Entity</span>
@@ -423,14 +722,14 @@
     <span class="container">Gcloud::Storage::File</span>
 
   <li class="method">
-    <a href="Gcloud/Datastore/Query.html#method-i-kind">#kind</a>
-    &mdash;
-    <span class="container">Gcloud::Datastore::Query</span>
-
-  <li class="method">
     <a href="Gcloud/Storage/Bucket.html#method-i-kind">#kind</a>
     &mdash;
     <span class="container">Gcloud::Storage::Bucket</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Query.html#method-i-kind">#kind</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Query</span>
 
   <li class="method">
     <a href="Gcloud/Datastore/Query.html#method-i-limit">#limit</a>
@@ -463,14 +762,14 @@
     <span class="container">Gcloud::Datastore::Dataset::QueryResults</span>
 
   <li class="method">
-    <a href="Gcloud/Storage/Bucket.html#method-i-name">#name</a>
-    &mdash;
-    <span class="container">Gcloud::Storage::Bucket</span>
-
-  <li class="method">
     <a href="Gcloud/Storage/File.html#method-i-name">#name</a>
     &mdash;
     <span class="container">Gcloud::Storage::File</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket.html#method-i-name">#name</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket</span>
 
   <li class="method">
     <a href="Gcloud/Datastore/Dataset/QueryResults.html#method-i-no_more-3F">#no_more?</a>
@@ -493,6 +792,41 @@
     <span class="container">Gcloud::Datastore::Query</span>
 
   <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-owner_full-21">#owner_full!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-owner_full-21">#owner_full!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-owner_read-21">#owner_read!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-owner_read-21">#owner_read!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-owners">#owners</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-owners">#owners</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-owners">#owners</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
     <a href="Gcloud/Datastore/Key.html#method-i-path">#path</a>
     &mdash;
     <span class="container">Gcloud::Datastore::Key</span>
@@ -501,6 +835,21 @@
     <a href="Gcloud/Datastore/Entity.html#method-i-persisted-3F">#persisted?</a>
     &mdash;
     <span class="container">Gcloud::Datastore::Entity</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-private-21">#private!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-private-21">#private!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-private-21">#private!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
 
   <li class="method">
     <a href="Gcloud/Storage/Project.html#method-i-project">#project</a>
@@ -513,14 +862,129 @@
     <span class="container">Gcloud::Datastore::Dataset</span>
 
   <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-projectPrivate-21">#projectPrivate!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-projectPrivate-21">#projectPrivate!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-projectPrivate-21">#projectPrivate!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-project_private-21">#project_private!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-project_private-21">#project_private!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-project_private-21">#project_private!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
     <a href="Gcloud/Datastore/Query.html#method-i-projection">#projection</a>
     &mdash;
     <span class="container">Gcloud::Datastore::Query</span>
 
   <li class="method">
-    <a href="Gcloud/Datastore/Entity.html#method-i-properties">#properties</a>
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-public-21">#public!</a>
     &mdash;
-    <span class="container">Gcloud::Datastore::Entity</span>
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-public-21">#public!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-public-21">#public!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-publicRead-21">#publicRead!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-publicRead-21">#publicRead!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-publicRead-21">#publicRead!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-publicReadWrite-21">#publicReadWrite!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-public_read-21">#public_read!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-public_read-21">#public_read!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-public_read-21">#public_read!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-public_write-21">#public_write!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Properties.html#method-i-read">#read</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Properties</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-readers">#readers</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-readers">#readers</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-readers">#readers</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-refresh-21">#refresh!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-refresh-21">#refresh!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-refresh-21">#refresh!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
 
   <li class="method">
     <a href="Gcloud/Datastore/Transaction.html#method-i-reset-21">#reset!</a>
@@ -543,19 +1007,39 @@
     <span class="container">Gcloud::Datastore::Dataset</span>
 
   <li class="method">
-    <a href="Gcloud/Datastore/Transaction.html#method-i-save">#save</a>
-    &mdash;
-    <span class="container">Gcloud::Datastore::Transaction</span>
-
-  <li class="method">
     <a href="Gcloud/Datastore/Dataset.html#method-i-save">#save</a>
     &mdash;
     <span class="container">Gcloud::Datastore::Dataset</span>
 
   <li class="method">
+    <a href="Gcloud/Datastore/Transaction.html#method-i-save">#save</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Transaction</span>
+
+  <li class="method">
     <a href="Gcloud/Datastore/Query.html#method-i-select">#select</a>
     &mdash;
     <span class="container">Gcloud::Datastore::Query</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Signer.html#method-i-signature_str">#signature_str</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Signer</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File.html#method-i-signed_url">#signed_url</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Signer.html#method-i-signed_url">#signed_url</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Signer</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Signer.html#method-i-signing_key">#signing_key</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Signer</span>
 
   <li class="method">
     <a href="Gcloud/Storage/File.html#method-i-size">#size</a>
@@ -583,9 +1067,34 @@
     <span class="container">Gcloud::Datastore::Dataset</span>
 
   <li class="method">
+    <a href="Gcloud/Datastore/Properties.html#method-i-to_h">#to_h</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Properties</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Properties.html#method-i-to_hash">#to_hash</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Properties</span>
+
+  <li class="method">
     <a href="Gcloud/Datastore/Dataset.html#method-i-transaction">#transaction</a>
     &mdash;
     <span class="container">Gcloud::Datastore::Dataset</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-update_predefined_acl-21">#update_predefined_acl!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-update_predefined_acl-21">#update_predefined_acl!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-update_predefined_default_acl-21">#update_predefined_default_acl!</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
 
   <li class="method">
     <a href="Gcloud/Storage/File.html#method-i-updated_at">#updated_at</a>
@@ -603,14 +1112,14 @@
     <span class="container">Gcloud::Storage::Bucket</span>
 
   <li class="method">
-    <a href="Gcloud/Storage/Bucket.html#method-i-url">#url</a>
-    &mdash;
-    <span class="container">Gcloud::Storage::Bucket</span>
-
-  <li class="method">
     <a href="Gcloud/Storage/File.html#method-i-url">#url</a>
     &mdash;
     <span class="container">Gcloud::Storage::File</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket.html#method-i-url">#url</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket</span>
 
   <li class="method">
     <a href="Gcloud/Storage/Bucket.html#method-i-verify_chunk_size-21">#verify_chunk_size!</a>
@@ -626,13 +1135,33 @@
     <a href="Gcloud/Datastore/Query.html#method-i-where">#where</a>
     &mdash;
     <span class="container">Gcloud::Datastore::Query</span>
+
+  <li class="method">
+    <a href="Gcloud/Datastore/Properties.html#method-i-write">#write</a>
+    &mdash;
+    <span class="container">Gcloud::Datastore::Properties</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/Acl.html#method-i-writers">#writers</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::Acl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/Bucket/DefaultAcl.html#method-i-writers">#writers</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::Bucket::DefaultAcl</span>
+
+  <li class="method">
+    <a href="Gcloud/Storage/File/Acl.html#method-i-writers">#writers</a>
+    &mdash;
+    <span class="container">Gcloud::Storage::File::Acl</span>
 </ul>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

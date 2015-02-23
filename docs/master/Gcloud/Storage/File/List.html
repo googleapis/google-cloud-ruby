@@ -4,17 +4,17 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Gcloud::Datastore::TransactionError - gcloud-0.0.1</title>
+<title>class Gcloud::Storage::File::List - gcloud-0.0.1</title>
 
 <script type="text/javascript">
-  var rdoc_rel_prefix = "../../";
+  var rdoc_rel_prefix = "../../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/darkfish.js"></script>
 
-<link href="../../css/fonts.css" rel="stylesheet">
-<link href="../../css/rdoc.css" rel="stylesheet">
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
 
 
 
@@ -23,13 +23,13 @@
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
   <h2>
-    <a href="../../index.html" rel="home">Home</a>
+    <a href="../../../index.html" rel="home">Home</a>
   </h2>
 
   <div id="table-of-contents-navigation">
-    <a href="../../table_of_contents.html#pages">Pages</a>
-    <a href="../../table_of_contents.html#classes">Classes</a>
-    <a href="../../table_of_contents.html#methods">Methods</a>
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
   </div>
 </div>
 
@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="Error.html">Gcloud::Datastore::Error</a>
+  <p class="link">DelegateClass(::Array)
   
 </div>
 
@@ -78,14 +78,15 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Gcloud::Datastore::TransactionError">
-  <h1 id="class-Gcloud::Datastore::TransactionError" class="class">
-    class Gcloud::Datastore::TransactionError
+<main role="main" aria-labelledby="class-Gcloud::Storage::File::List">
+  <h1 id="class-Gcloud::Storage::File::List" class="class">
+    class Gcloud::Storage::File::List
   </h1>
 
   <section class="description">
     
-<p>General error for <a href="Transaction.html">Transaction</a> problems.</p>
+<p><a href="List.html">File::List</a> is a special case Array with additional
+values.</p>
 
   </section>
 
@@ -106,15 +107,32 @@
       </header>
 
       
-      <div id="attribute-i-inner" class="method-detail">
+      <div id="attribute-i-prefixes" class="method-detail">
         <div class="method-heading attribute-method-heading">
-          <span class="method-name">inner</span><span
-            class="attribute-access-type">[R]</span>
+          <span class="method-name">prefixes</span><span
+            class="attribute-access-type">[RW]</span>
         </div>
 
         <div class="method-description">
         
-        <p>An error that occurred within the transaction. (optional)</p>
+        <p>The list of prefixes of objects matching-but-not-listed up to and including
+the requested delimiter.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-token" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">token</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>If not empty, indicates that there are more buckets that match the request
+and this value should be passed to the next <a
+href="../Bucket.html#method-i-files">Gcloud::Storage::Bucket#files</a> to
+continue.</p>
         
         </div>
       </div>
@@ -133,7 +151,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(message, inner = nil)</span>
+            class="method-args">(arr = [], token = nil, prefixes = [])</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -142,7 +160,7 @@
 
         <div class="method-description">
           
-          
+          <p>Create a new <a href="List.html">File::List</a> with an array of values.</p>
           
           
             <div class="method-calls-super">
@@ -153,10 +171,11 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/errors.rb, line 59</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">message</span>, <span class="ruby-identifier">inner</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">message</span>)
-  <span class="ruby-ivar">@inner</span> = <span class="ruby-identifier">inner</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/file/list.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">arr</span> = [], <span class="ruby-identifier">token</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">prefixes</span> = []
+  <span class="ruby-keyword">super</span> <span class="ruby-identifier">arr</span>
+  <span class="ruby-ivar">@token</span> = <span class="ruby-identifier">token</span>
+  <span class="ruby-ivar">@prefixes</span> = <span class="ruby-identifier">prefixes</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

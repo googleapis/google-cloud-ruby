@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Gcloud::Datastore::Entity - gcloud-0.0.1 Documentation</title>
-
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<title>class Gcloud::Datastore::Entity - gcloud-0.0.1</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
 <script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -87,8 +84,6 @@
     
     <li ><a href="#method-i-persisted-3F">#persisted?</a>
     
-    <li ><a href="#method-i-properties">#properties</a>
-    
   </ul>
 </div>
 
@@ -107,10 +102,11 @@ href="../Datastore.html">Datastore</a> record. Every <a
 href="Entity.html">Entity</a> has a <a href="Key.html">Key</a>, and a list
 of properties.</p>
 
-<pre>entity = Gcloud::Datastore::Entity.new
-entity.key = Gcloud::Datastore::Key.new &quot;User&quot;, &quot;username&quot;
-entity[&quot;name&quot;] = &quot;User McUser&quot;
-entity[&quot;email&quot;] = &quot;user@example.net&quot;</pre>
+<pre class="ruby"><span class="ruby-identifier">entity</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;username&quot;</span>
+<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;User McUser&quot;</span>
+<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;email&quot;</span>] = <span class="ruby-string">&quot;user@example.net&quot;</span>
+</pre>
 
   </section>
 
@@ -144,6 +140,49 @@ entity[&quot;email&quot;] = &quot;user@example.net&quot;</pre>
         </div>
       </div>
       
+      <div id="attribute-i-properties" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">properties</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Retrieve properties in a hash-like structure. <a
+href="Properties.html">Properties</a> can be accessed or set by string or
+symbol.</p>
+
+<pre class="ruby"><span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>[:<span class="ruby-identifier">name</span>] = <span class="ruby-string">&quot;User McUser&quot;</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>[<span class="ruby-string">&quot;name&quot;</span>] <span class="ruby-comment">#=&gt; &quot;User McUser&quot;</span>
+
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;property #{name} has a value of #{value}&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>A property&#39;s existance can be determined by calling exist?</p>
+
+<pre class="ruby"><span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>.<span class="ruby-identifier">exist?</span> :<span class="ruby-identifier">name</span> <span class="ruby-comment">#=&gt; true</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-string">&quot;name&quot;</span> <span class="ruby-comment">#=&gt; true</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>.<span class="ruby-identifier">exist?</span> :<span class="ruby-identifier">expiration</span> <span class="ruby-comment">#=&gt; false</span>
+</pre>
+
+<p>A property can be removed from the entity.</p>
+
+<pre class="ruby"><span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>.<span class="ruby-identifier">delete</span> :<span class="ruby-identifier">name</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">save</span>
+</pre>
+
+<p>The properties can be converted to a hash:</p>
+
+<pre class="ruby"><span class="ruby-identifier">prop_hash</span> = <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>.<span class="ruby-identifier">to_h</span>
+</pre>
+
+<p>See <a href="Properties.html">Gcloud::Datastore::Properties</a> for more.</p>
+        
+        </div>
+      </div>
+      
     </section>
     
 
@@ -173,10 +212,9 @@ entity[&quot;email&quot;] = &quot;user@example.net&quot;</pre>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 35</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
-  <span class="ruby-ivar">@_entity</span> = <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@_entity</span>.<span class="ruby-identifier">property</span> = []
+  <span class="ruby-ivar">@properties</span> = <span class="ruby-constant">Properties</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@key</span> = <span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@_exclude_indexes</span> = {}
 <span class="ruby-keyword">end</span></pre>
@@ -213,19 +251,18 @@ entity[&quot;email&quot;] = &quot;user@example.net&quot;</pre>
           
           <p>Retrieve a property value.</p>
 
-<pre>puts entity[&quot;name&quot;]</pre>
+<pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;name&quot;</span>]
+</pre>
+
+<p>If a property doesn&#39;t exist then nil will be returned.</p>
           
           
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 46</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span> <span class="ruby-identifier">prop_name</span>
-  <span class="ruby-identifier">prop_name</span> = <span class="ruby-identifier">prop_name</span>.<span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">prop</span> = <span class="ruby-constant">Array</span>(<span class="ruby-ivar">@_entity</span>.<span class="ruby-identifier">property</span>).<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">prop_name</span> }
-  <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">from_proto_value</span> <span class="ruby-identifier">prop</span>.<span class="ruby-identifier">value</span>
-<span class="ruby-keyword">rescue</span>
-  <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@properties</span>[<span class="ruby-identifier">prop_name</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -252,22 +289,16 @@ entity[&quot;email&quot;] = &quot;user@example.net&quot;</pre>
           
           <p>Set a property value.</p>
 
-<pre>entity[&quot;name&quot;] = &quot;User McUser&quot;</pre>
+<pre class="ruby"><span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;User McUser&quot;</span>
+</pre>
           
           
 
           
           <div class="method-source-code" id="5B-5D-3D-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 58</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span> <span class="ruby-identifier">prop_name</span>, <span class="ruby-identifier">prop_value</span>
-  <span class="ruby-identifier">prop</span> = <span class="ruby-constant">Array</span>(<span class="ruby-ivar">@_entity</span>.<span class="ruby-identifier">property</span>).<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">prop_name</span> }
-  <span class="ruby-identifier">prop</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">Property</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">p</span>.<span class="ruby-identifier">name</span> = <span class="ruby-identifier">prop_name</span>
-    <span class="ruby-ivar">@_entity</span>.<span class="ruby-identifier">property</span> <span class="ruby-operator">||=</span> []
-    <span class="ruby-ivar">@_entity</span>.<span class="ruby-identifier">property</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">p</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">prop</span>.<span class="ruby-identifier">value</span> = <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">to_proto_value</span> <span class="ruby-identifier">prop_value</span>
-  <span class="ruby-identifier">prop_value</span>
+  <span class="ruby-ivar">@properties</span>[<span class="ruby-identifier">prop_name</span>] = <span class="ruby-identifier">prop_value</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -297,19 +328,23 @@ href="../Datastore.html">Datastore</a> indexes. Setting true will exclude
 the property from the indexes. Setting false will include the property on
 any applicable indexes. The default value for the flag is false.</p>
 
-<pre>entity[&quot;age&quot;] = 21
-entity.exclude_from_indexes! &quot;age&quot;, true</pre>
+<pre class="ruby"><span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;age&quot;</span>] = <span class="ruby-value">21</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">exclude_from_indexes!</span> <span class="ruby-string">&quot;age&quot;</span>, <span class="ruby-keyword">true</span>
+</pre>
 
-<p>Properties that are arrays can be given multiple exclude flags.</p>
+<p><a href="Properties.html">Properties</a> that are arrays can be given
+multiple exclude flags.</p>
 
-<pre>entity[&quot;tags&quot;] = [&quot;ruby&quot;, &quot;code&quot;]
-entity.exclude_from_indexes! &quot;tags&quot;, [true, false]</pre>
+<pre class="ruby"><span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;tags&quot;</span>] = [<span class="ruby-string">&quot;ruby&quot;</span>, <span class="ruby-string">&quot;code&quot;</span>]
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">exclude_from_indexes!</span> <span class="ruby-string">&quot;tags&quot;</span>, [<span class="ruby-keyword">true</span>, <span class="ruby-keyword">false</span>]
+</pre>
 
 <p>Or, array properties can be given a single flag that will be applied to
 each item in the array.</p>
 
-<pre>entity[&quot;tags&quot;] = [&quot;ruby&quot;, &quot;code&quot;]
-entity.exclude_from_indexes! &quot;tags&quot;, true</pre>
+<pre class="ruby"><span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;tags&quot;</span>] = [<span class="ruby-string">&quot;ruby&quot;</span>, <span class="ruby-string">&quot;code&quot;</span>]
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">exclude_from_indexes!</span> <span class="ruby-string">&quot;tags&quot;</span>, <span class="ruby-keyword">true</span>
+</pre>
 
 <p>Flags can also be set with a block for either single and array values.</p>
 
@@ -323,7 +358,7 @@ entity.exclude_from_indexes! &quot;tags&quot;, true</pre>
 
           
           <div class="method-source-code" id="exclude_from_indexes-21-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 156</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 158</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">exclude_from_indexes!</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
   <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">flag</span> = <span class="ruby-identifier">block</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
@@ -375,7 +410,7 @@ href="../Datastore.html">Datastore</a> indexes. The default value is false.</p>
 
           
           <div class="method-source-code" id="exclude_from_indexes-3F-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 124</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">exclude_from_indexes?</span> <span class="ruby-identifier">name</span>
   <span class="ruby-identifier">value</span> = <span class="ruby-keyword">self</span>[<span class="ruby-identifier">name</span>]
   <span class="ruby-identifier">flag</span> = <span class="ruby-ivar">@_exclude_indexes</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>]
@@ -421,7 +456,7 @@ is frozen and immutable.</p>
 
           
           <div class="method-source-code" id="key-3D-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 99</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">key=</span> <span class="ruby-identifier">new_key</span>
   <span class="ruby-identifier">fail</span> <span class="ruby-string">&quot;This entity&#39;s key is immutable.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">persisted?</span>
   <span class="ruby-ivar">@key</span> = <span class="ruby-identifier">new_key</span>
@@ -456,55 +491,9 @@ false.</p>
 
           
           <div class="method-source-code" id="persisted-3F-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 107</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">persisted?</span>
   <span class="ruby-ivar">@key</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">frozen?</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-properties" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">properties</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Retrieve all properties as an array of arrays. The inner arrays hold the
-property name and value.</p>
-
-<pre class="ruby"><span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{name} has a value of #{value}&quot;</span>
-<span class="ruby-keyword">end</span>
-</pre>
-
-<p>The properties can easilly be converted to a hash:</p>
-
-<pre>prop_hash = Hash[entity.properties]
-prop_hash = entity.properties.to_h</pre>
-          
-          
-
-          
-          <div class="method-source-code" id="properties-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 81</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">properties</span>
-  <span class="ruby-constant">Array</span>(<span class="ruby-ivar">@_entity</span>.<span class="ruby-identifier">property</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
-    [<span class="ruby-identifier">p</span>.<span class="ruby-identifier">name</span>, <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">from_proto_value</span>(<span class="ruby-identifier">p</span>.<span class="ruby-identifier">value</span>)]
-  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -524,7 +513,7 @@ prop_hash = entity.properties.to_h</pre>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

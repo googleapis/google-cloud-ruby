@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Gcloud::Datastore::Dataset - gcloud-0.0.1 Documentation</title>
-
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<title>class Gcloud::Datastore::Dataset - gcloud-0.0.1</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
 <script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -122,13 +119,14 @@ href="Entity.html">Gcloud::Datastore::Entity</a> objects are created, read,
 updated, and deleted by <a
 href="Dataset.html">Gcloud::Datastore::Dataset</a>.</p>
 
-<pre>dataset = Gcloud::Datastore.dataset &quot;my-todo-project&quot;,
-                                    &quot;/path/to/keyfile.json&quot;
+<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
+                                    <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
 
-query = Gcloud::Datastore::Query.new.kind(&quot;Task&quot;).
-  where(&quot;completed&quot;, &quot;=&quot;, true)
+<span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+  <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;completed&quot;</span>, <span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-keyword">true</span>)
 
-tasks = dataset.run query</pre>
+<span class="ruby-identifier">tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
+</pre>
 
 <p>See <a
 href="../Datastore.html#method-c-dataset">Gcloud::Datastore.dataset</a></p>
@@ -169,9 +167,10 @@ href="../Datastore.html#method-c-dataset">Gcloud::Datastore.dataset</a></p>
           
           <p>Generate IDs for a <a href="Key.html">Key</a> before creating an entity.</p>
 
-<pre>dataset = Gcloud::Datastore.dataset
-empty_key = Gcloud::Datastore::Key.new &quot;Task&quot;
-task_keys = dataset.allocate_ids empty_key, 5</pre>
+<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span>
+<span class="ruby-identifier">empty_key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>
+<span class="ruby-identifier">task_keys</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">allocate_ids</span> <span class="ruby-identifier">empty_key</span>, <span class="ruby-value">5</span>
+</pre>
           
           
 
@@ -215,8 +214,9 @@ task_keys = dataset.allocate_ids empty_key, 5</pre>
           <p>Remove entities from the <a href="../Datastore.html">Datastore</a>. Accepts
 <a href="Entity.html">Entity</a> and <a href="Key.html">Key</a> objects.</p>
 
-<pre>dataset = Gcloud::Datastore.dataset
-dataset.delete task1, task2</pre>
+<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span>
+<span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">task1</span>, <span class="ruby-identifier">task2</span>
+</pre>
           
           
 
@@ -259,12 +259,13 @@ dataset.delete task1, task2</pre>
           <p>Retrieve an entity by providing key information. Either a <a
 href="Key.html">Key</a> object or kind and id/name can be provided.</p>
 
-<pre>dataset = Gcloud::Datastore.dataset
-key = Gcloud::Datastore::Key.new &quot;Task&quot;, 123456
-task = dataset.find key
+<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span>
+<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-value">123456</span>
+<span class="ruby-identifier">task</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-identifier">key</span>
 
-dataset = Gcloud::Datastore.dataset
-task = dataset.find &quot;Task&quot;, 123456</pre>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span>
+<span class="ruby-identifier">task</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-value">123456</span>
+</pre>
           
           
 
@@ -305,10 +306,11 @@ task = dataset.find &quot;Task&quot;, 123456</pre>
           
           <p>Retrieve the entities for the provided keys.</p>
 
-<pre>dataset = Gcloud::Datastore.dataset
-key1 = Gcloud::Datastore::Key.new &quot;Task&quot;, 123456
-key2 = Gcloud::Datastore::Key.new &quot;Task&quot;, 987654
-tasks = dataset.find_all key1, key2</pre>
+<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span>
+<span class="ruby-identifier">key1</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-value">123456</span>
+<span class="ruby-identifier">key2</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-value">987654</span>
+<span class="ruby-identifier">tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find_all</span> <span class="ruby-identifier">key1</span>, <span class="ruby-identifier">key2</span>
+</pre>
 
 <p>The entities returned from the lookup are returned in a <a
 href="Dataset/LookupResults.html">Dataset::LookupResults</a> object.</p>
@@ -443,9 +445,10 @@ href="Dataset/LookupResults.html">Dataset::LookupResults</a> object.</p>
           
           <p>Retrieve entities specified by a <a href="Query.html">Query</a>.</p>
 
-<pre>query = Gcloud::Datastore::Query.new.kind(&quot;Task&quot;).
-  where(&quot;completed&quot;, &quot;=&quot;, true)
-tasks = dataset.run query</pre>
+<pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+  <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;completed&quot;</span>, <span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-keyword">true</span>)
+<span class="ruby-identifier">tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
+</pre>
 
 <p>The entities returned from the query are returned in a <a
 href="Dataset/QueryResults.html">Dataset::QueryResults</a> object.</p>
@@ -519,8 +522,9 @@ href="Dataset/QueryResults.html">Dataset::QueryResults</a> object.</p>
           
           <p>Persist entities to the <a href="../Datastore.html">Datastore</a>.</p>
 
-<pre>dataset = Gcloud::Datastore.dataset
-dataset.save task1, task2</pre>
+<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span>
+<span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">task1</span>, <span class="ruby-identifier">task2</span>
+</pre>
           
           
 
@@ -575,20 +579,21 @@ transaction object is returned.</p>
 <p>Alternatively, you can manually commit or rollback by using the returned
 transaction object.</p>
 
-<pre>user = Gcloud::Datastore::Entity.new
-user.key = Gcloud::Datastore::Key.new &quot;User&quot;, &quot;username&quot;
-user[&quot;name&quot;] = &quot;Test&quot;
-user[&quot;email&quot;] = &quot;test@example.net&quot;
+<pre class="ruby"><span class="ruby-identifier">user</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">user</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;username&quot;</span>
+<span class="ruby-identifier">user</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;Test&quot;</span>
+<span class="ruby-identifier">user</span>[<span class="ruby-string">&quot;email&quot;</span>] = <span class="ruby-string">&quot;test@example.net&quot;</span>
 
-tx = dataset.transaction
-begin
-  if tx.find(user.key).nil?
-    tx.save user
-  end
-  tx.commit
-rescue
-  tx.rollback
-end</pre>
+<span class="ruby-identifier">tx</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">transaction</span>
+<span class="ruby-keyword">begin</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">user</span>.<span class="ruby-identifier">key</span>).<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">user</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">commit</span>
+<span class="ruby-keyword">rescue</span>
+  <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">rollback</span>
+<span class="ruby-keyword">end</span>
+</pre>
           
           
 
@@ -707,7 +712,7 @@ href="../../Gcloud.html">Gcloud</a> keys.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

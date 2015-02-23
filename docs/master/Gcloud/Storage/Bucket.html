@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Gcloud::Storage::Bucket - gcloud-0.0.1 Documentation</title>
-
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<title>class Gcloud::Storage::Bucket - gcloud-0.0.1</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
 <script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -75,9 +72,13 @@
     
     <li ><a href="#method-c-new">::new</a>
     
+    <li ><a href="#method-i-acl">#acl</a>
+    
     <li ><a href="#method-i-create_file">#create_file</a>
     
     <li ><a href="#method-i-created_at">#created_at</a>
+    
+    <li ><a href="#method-i-default_acl">#default_acl</a>
     
     <li ><a href="#method-i-delete">#delete</a>
     
@@ -159,7 +160,7 @@ href="Project.html">Project</a> and has many Files.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 30</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-ivar">@connection</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@gapi</span> = {}
@@ -182,6 +183,39 @@ href="Project.html">Project</a> and has many Files.</p>
        </header>
 
     
+      <div id="method-i-acl" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">acl</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Access Control <a href="Bucket/List.html">List</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="acl-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 185</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">acl</span>
+  <span class="ruby-ivar">@acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-create_file" class="method-detail ">
         
         <div class="method-heading">
@@ -198,25 +232,28 @@ href="Project.html">Project</a> and has many Files.</p>
           <p>Create a new Gcloud::Storeage::File object by providing a <a
 href="File.html">File</a> object to upload and the path to store it with.</p>
 
-<pre>storage = Gcloud::Storage.project
-bucket = storage.find_bucket &quot;my-bucket&quot;
-bucket.create_file &quot;path/to/local.file.ext&quot;</pre>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">create_file</span> <span class="ruby-string">&quot;path/to/local.file.ext&quot;</span>
+</pre>
 
 <p>Additionally, a destination path can be specified.</p>
 
-<pre>storage = Gcloud::Storage.project
-bucket = storage.find_bucket &quot;my-bucket&quot;
-bucket.create_file &quot;path/to/local.file.ext&quot;,
-                   &quot;destination/path/file.ext&quot;</pre>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">create_file</span> <span class="ruby-string">&quot;path/to/local.file.ext&quot;</span>,
+                   <span class="ruby-string">&quot;destination/path/file.ext&quot;</span>
+</pre>
 
 <p>A chunk_size value can be provided in the options to be used in resumable
 uploads. This value is the number of bytes per chunk and must be divisible
 by 256KB. If it is not divisible by 265KB then it will be lowered to the
 nearest acceptible value.</p>
 
-<pre>bucket.create_file &quot;path/to/local.file.ext&quot;,
-                   &quot;destination/path/file.ext&quot;,
-                   chunk_size: 1024*1024 # 1 MB chunk</pre>
+<pre class="ruby"><span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">create_file</span> <span class="ruby-string">&quot;path/to/local.file.ext&quot;</span>,
+                   <span class="ruby-string">&quot;destination/path/file.ext&quot;</span>,
+                   <span class="ruby-identifier">chunk_size</span><span class="ruby-operator">:</span> <span class="ruby-value">1024</span><span class="ruby-operator">*</span><span class="ruby-value">1024</span> <span class="ruby-comment"># 1 MB chunk</span>
+</pre>
 
 <p>See <a href="File.html">Gcloud::Storage::File</a></p>
           
@@ -224,17 +261,19 @@ nearest acceptible value.</p>
 
           
           <div class="method-source-code" id="create_file-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 166</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_file</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-comment"># TODO: Raise if file doesn&#39;t exist</span>
   <span class="ruby-comment"># ensure_file_exists!</span>
   <span class="ruby-identifier">fail</span> <span class="ruby-keyword">unless</span> <span class="ruby-operator">::</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">file</span>
 
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>] = <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">predefined_rule_for</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>]
+
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resumable_upload?</span> <span class="ruby-identifier">file</span>
-    <span class="ruby-identifier">upload_resumable</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>[<span class="ruby-value">:chunk_size</span>]
+    <span class="ruby-identifier">upload_resumable</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>[<span class="ruby-value">:chunk_size</span>], <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">upload_multipart</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>
+    <span class="ruby-identifier">upload_multipart</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -266,9 +305,42 @@ nearest acceptible value.</p>
 
           
           <div class="method-source-code" id="created_at-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 73</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">created_at</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;timeCreated&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-default_acl" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">default_acl</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Default Access Control <a href="Bucket/List.html">List</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="default_acl-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 191</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">default_acl</span>
+  <span class="ruby-ivar">@default_acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultAcl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -295,19 +367,21 @@ nearest acceptible value.</p>
           
           <p>Permenently deletes the bucket. The bucket must be empty.</p>
 
-<pre>bucket.delete</pre>
+<pre class="ruby"><span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">delete</span>
+</pre>
 
 <p>The API call to delete the bucket may be retried under certain conditions.
 See <a href="../Backoff.html">Gcloud::Backoff</a> to control this behavior,
 or specify the wanted behavior in the call:</p>
 
-<pre>bucket.delete retries: 5</pre>
+<pre class="ruby"><span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">retries</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>
+</pre>
           
           
 
           
           <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 88</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_bucket</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
@@ -331,7 +405,7 @@ or specify the wanted behavior in the call:</p>
         
         <div class="method-heading">
           <span class="method-name">files</span><span
-            class="method-args">()</span>
+            class="method-args">(options = {})</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -356,14 +430,12 @@ or specify the wanted behavior in the call:</p>
 
           
           <div class="method-source-code" id="files-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 109</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">files</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">files</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
-  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_files</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_files</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;items&quot;</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gapi_object</span><span class="ruby-operator">|</span>
-      <span class="ruby-constant">File</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">gapi_object</span>, <span class="ruby-identifier">connection</span>
-    <span class="ruby-keyword">end</span>
+    <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_resp</span> <span class="ruby-identifier">resp</span>, <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
@@ -382,7 +454,7 @@ or specify the wanted behavior in the call:</p>
         
         <div class="method-heading">
           <span class="method-name">find_file</span><span
-            class="method-args">(path)</span>
+            class="method-args">(path, options = {})</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -393,10 +465,11 @@ or specify the wanted behavior in the call:</p>
           
           <p>Retrieves a file matching the path.</p>
 
-<pre>storage = Gcloud::Storage.project
-bucket = storage.find_bucket &quot;my-bucket&quot;
-file = bucket.find_file &quot;path/to/my-file.ext&quot;
-puts file.name</pre>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">name</span>
+</pre>
 
 <p>See <a href="File.html">Gcloud::Storage::File</a></p>
           
@@ -404,10 +477,10 @@ puts file.name</pre>
 
           
           <div class="method-source-code" id="find_file-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 130</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_file</span> <span class="ruby-identifier">path</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_file</span> <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
-  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_file</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">path</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_file</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">File</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">else</span>
@@ -443,7 +516,7 @@ puts file.name</pre>
 
           
           <div class="method-source-code" id="id-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 44</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;id&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -476,7 +549,7 @@ puts file.name</pre>
 
           
           <div class="method-source-code" id="kind-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 38</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">kind</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;kind&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -514,7 +587,7 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
           
           <div class="method-source-code" id="location-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 67</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">location</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;location&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -547,7 +620,7 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
           
           <div class="method-source-code" id="name-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 50</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;name&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -580,7 +653,7 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
           
           <div class="method-source-code" id="url-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 56</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">url</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -621,7 +694,7 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
           
           <div class="method-source-code" id="ensure_connection-21-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 192</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 208</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">fail</span> <span class="ruby-string">&quot;Must have active connection&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">connection</span>
 <span class="ruby-keyword">end</span></pre>
@@ -639,7 +712,7 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
         
         <div class="method-heading">
           <span class="method-name">upload_multipart</span><span
-            class="method-args">(file, path)</span>
+            class="method-args">(file, path, options = {})</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -654,9 +727,9 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
           
           <div class="method-source-code" id="upload_multipart-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 202</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">upload_multipart</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>
-  <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_file_multipart</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 218</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">upload_multipart</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_file_multipart</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">File</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
@@ -678,7 +751,7 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
         
         <div class="method-heading">
           <span class="method-name">upload_resumable</span><span
-            class="method-args">(file, path, chunk_size)</span>
+            class="method-args">(file, path, chunk_size, options = {})</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -693,11 +766,12 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
           
           <div class="method-source-code" id="upload_resumable-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 212</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">upload_resumable</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">chunk_size</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 228</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">upload_resumable</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">chunk_size</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">chunk_size</span> = <span class="ruby-identifier">verify_chunk_size!</span> <span class="ruby-identifier">chunk_size</span>
 
-  <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_file_resumable</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">chunk_size</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_file_resumable</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">file</span>,
+                                           <span class="ruby-identifier">path</span>, <span class="ruby-identifier">chunk_size</span>, <span class="ruby-identifier">options</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">File</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
@@ -734,7 +808,7 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
           
           <div class="method-source-code" id="verify_chunk_size-21-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 226</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 243</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verify_chunk_size!</span> <span class="ruby-identifier">chunk_size</span>
   <span class="ruby-identifier">chunk_size</span> = <span class="ruby-identifier">chunk_size</span>.<span class="ruby-identifier">to_i</span>
   <span class="ruby-identifier">chunk_mod</span> = <span class="ruby-value">256</span> <span class="ruby-operator">*</span> <span class="ruby-value">1024</span> <span class="ruby-comment"># 256KB</span>
@@ -762,7 +836,7 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

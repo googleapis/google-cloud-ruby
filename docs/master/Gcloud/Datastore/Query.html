@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Gcloud::Datastore::Query - gcloud-0.0.1 Documentation</title>
-
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<title>class Gcloud::Datastore::Query - gcloud-0.0.1</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
 <script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -115,11 +112,12 @@
 <p><a href="Query.html">Query</a> represents a query to be made to the <a
 href="../Datastore.html">Datastore</a>.</p>
 
-<pre>query = Gcloud::Datastore::Query.new
-query.kind(&quot;Task&quot;).
-  where(&quot;completed&quot;, &quot;=&quot;, true)
+<pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+  <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;completed&quot;</span>, <span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-keyword">true</span>)
 
-entities = dataset.run query</pre>
+<span class="ruby-identifier">entities</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
+</pre>
 
   </section>
 
@@ -157,7 +155,8 @@ entities = dataset.run query</pre>
           
           <p>Returns a new query object.</p>
 
-<pre>query = Gcloud::Datastore::Query.new</pre>
+<pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
+</pre>
           
           
 
@@ -200,11 +199,12 @@ entities = dataset.run query</pre>
           
           <p>Add a filter for entities that inherit from a key.</p>
 
-<pre>query = Gcloud::Datastore::Query.new
-query.kind(&quot;Task&quot;).
-  ancestor(parent.key)
+<pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+  <span class="ruby-identifier">ancestor</span>(<span class="ruby-identifier">parent</span>.<span class="ruby-identifier">key</span>)
 
-completed_tasks = dataset.run query</pre>
+<span class="ruby-identifier">completed_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
+</pre>
           
           
 
@@ -297,11 +297,12 @@ completed_tasks = dataset.run query</pre>
           
           <p>Group results by a list of properties.</p>
 
-<pre>query = Gcloud::Datastore::Query.new
-query.kind(&quot;Task&quot;).
-  group_by(&quot;completed&quot;)
+<pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+  <span class="ruby-identifier">group_by</span>(<span class="ruby-string">&quot;completed&quot;</span>)
 
-grouped_tasks = dataset.run query</pre>
+<span class="ruby-identifier">grouped_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
+</pre>
           
           
 
@@ -338,10 +339,11 @@ grouped_tasks = dataset.run query</pre>
           
           <p>Add the kind of entities to query.</p>
 
-<pre>query = Gcloud::Datastore::Query.new
-query.kind &quot;Task&quot;
+<pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span> <span class="ruby-string">&quot;Task&quot;</span>
 
-all_tasks = dataset.run query</pre>
+<span class="ruby-identifier">all_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
+</pre>
           
           
 
@@ -379,11 +381,12 @@ all_tasks = dataset.run query</pre>
           
           <p>Set a limit on the number of results to be returned.</p>
 
-<pre>query = Gcloud::Datastore::Query.new
-query.kind(&quot;Task&quot;).
-  limit(10)
+<pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+  <span class="ruby-identifier">limit</span>(<span class="ruby-value">10</span>)
 
-paginated_tasks = dataset.run query</pre>
+<span class="ruby-identifier">paginated_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
+</pre>
           
           
 
@@ -419,12 +422,13 @@ paginated_tasks = dataset.run query</pre>
           
           <p>Set an offset for the results to be returned.</p>
 
-<pre>query = Gcloud::Datastore::Query.new
-query.kind(&quot;Task&quot;).
-  limit(10).
-  offset(20)
+<pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+  <span class="ruby-identifier">limit</span>(<span class="ruby-value">10</span>).
+  <span class="ruby-identifier">offset</span>(<span class="ruby-value">20</span>)
 
-paginated_tasks = dataset.run query</pre>
+<span class="ruby-identifier">paginated_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
+</pre>
           
           
 
@@ -462,11 +466,12 @@ paginated_tasks = dataset.run query</pre>
 will be used. To sort in descending order, provide a second argument of a
 string or symbol that starts with “d”.</p>
 
-<pre>query = Gcloud::Datastore::Query.new
-query.kind(&quot;Task&quot;).
-  order(&quot;due&quot;, :desc)
+<pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+  <span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;due&quot;</span>, :<span class="ruby-identifier">desc</span>)
 
-sorted_tasks = dataset.run query</pre>
+<span class="ruby-identifier">sorted_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
+</pre>
           
           
 
@@ -535,11 +540,12 @@ sorted_tasks = dataset.run query</pre>
           
           <p>Retrieve only select properties from the matched entities.</p>
 
-<pre>query = Gcloud::Datastore::Query.new
-query.kind(&quot;Task&quot;).
-  select(&quot;completed&quot;, &quot;due&quot;)
+<pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+  <span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;completed&quot;</span>, <span class="ruby-string">&quot;due&quot;</span>)
 
-partial_tasks = dataset.run query</pre>
+<span class="ruby-identifier">partial_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
+</pre>
           
           
 
@@ -580,12 +586,13 @@ partial_tasks = dataset.run query</pre>
           
           <p>Set the cursor to start the results at.</p>
 
-<pre>query = Gcloud::Datastore::Query.new
-query.kind(&quot;Task&quot;).
-  limit(10).
-  cursor(task_cursor)
+<pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+  <span class="ruby-identifier">limit</span>(<span class="ruby-value">10</span>).
+  <span class="ruby-identifier">cursor</span>(<span class="ruby-identifier">task_cursor</span>)
 
-paginated_tasks = dataset.run query</pre>
+<span class="ruby-identifier">paginated_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
+</pre>
           
           
 
@@ -625,11 +632,12 @@ paginated_tasks = dataset.run query</pre>
           
           <p>Add a property filter to the query.</p>
 
-<pre>query = Gcloud::Datastore::Query.new
-query.kind(&quot;Task&quot;).
-  where(&quot;completed&quot;, &quot;=&quot;, true)
+<pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+  <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;completed&quot;</span>, <span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-keyword">true</span>)
 
-completed_tasks = dataset.run query</pre>
+<span class="ruby-identifier">completed_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
+</pre>
           
           
 
@@ -671,7 +679,7 @@ completed_tasks = dataset.run query</pre>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

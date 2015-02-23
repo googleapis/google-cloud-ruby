@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>README - gcloud-0.0.1 Documentation</title>
-
-<link href="./fonts.css" rel="stylesheet">
-<link href="./rdoc.css" rel="stylesheet">
+<title>README - gcloud-0.0.1</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
 </script>
 
 <script src="./js/jquery.js"></script>
-<script src="./js/navigation.js"></script>
-<script src="./js/search_index.js"></script>
-<script src="./js/search.js"></script>
-<script src="./js/searcher.js"></script>
 <script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="file">
@@ -65,6 +62,7 @@
     <li><a href="#label-Datastore">Datastore</a>
     <li><a href="#label-Storage">Storage</a>
     <li><a href="#label-Supported+Ruby+Versions">Supported Ruby Versions</a>
+    <li><a href="#label-Versioning">Versioning</a>
     <li><a href="#label-Contributing">Contributing</a>
     <li><a href="#label-License">License</a>
   </ul>
@@ -91,31 +89,42 @@
 
 <main role="main" aria-label="Page README.md">
 
-<h1 id="label-gcloud">gcloud<span><a href="#label-gcloud">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+<h1 id="label-gcloud">gcloud<span><a href="#label-gcloud">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Idiomatic Ruby client for <a href="https://cloud.google.com/">Google Cloud
+Platform</a> services.</p>
 
 <p><a href="https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby/"><img
 src="https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby.svg"></a> <a
 href="https://coveralls.io/r/GoogleCloudPlatform/gcloud-ruby?branch=master"><img
 src="https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-ruby.svg"></a></p>
+<ul><li>
+<p><a href="http://googlecloudplatform.github.io/gcloud-ruby/">Homepage</a></p>
+</li><li>
+<p><a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/">API
+Documentation</a></p>
+</li></ul>
 
-<h2 id="label-Ruby+API+Client+library+for+Google+Cloud">Ruby API Client library for Google Cloud<span><a href="#label-Ruby+API+Client+library+for+Google+Cloud">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<h2 id="label-Ruby+API+Client+library+for+Google+Cloud">Ruby API Client library for Google Cloud<span><a href="#label-Ruby+API+Client+library+for+Google+Cloud">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>This client supports the following Google Cloud Platform services:</p>
 <ul><li>
-<p><a href="https://cloud.google.com/datastore/">Google Cloud Datastore</a></p>
+<p><a href="https://cloud.google.com/datastore/">Google Cloud Datastore</a>
+(<a href="https://cloud.google.com/datastore/docs">docs</a>)</p>
 </li><li>
-<p><a href="https://cloud.google.com/storage/">Google Cloud Storage</a></p>
+<p><a href="https://cloud.google.com/storage/">Google Cloud Storage</a> (<a
+href="https://cloud.google.com/datastore/docs">docs</a>)</p>
 </li></ul>
 
 <p>If you need support for other Google APIs, check out the <a
 href="https://github.com/google/google-api-ruby-client">Google API Ruby
 Client library</a>.</p>
 
-<h2 id="label-Quick+Start">Quick Start<span><a href="#label-Quick+Start">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<h2 id="label-Quick+Start">Quick Start<span><a href="#label-Quick+Start">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <pre>$ gem install gcloud</pre>
 
-<h3 id="label-Authorization">Authorization<span><a href="#label-Authorization">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+<h3 id="label-Authorization">Authorization<span><a href="#label-Authorization">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <p>You need a Google Developers service account to use the Google Cloud
 services. To create a service account:</p>
@@ -150,7 +159,7 @@ the library uses to authorize your requests.</p>
 <p>You will use the <strong>Project ID</strong> and <strong>JSON file</strong>
 to connect to services with gcloud.</p>
 
-<h3 id="label-Datastore">Datastore<span><a href="#label-Datastore">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+<h3 id="label-Datastore">Datastore<span><a href="#label-Datastore">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <p><a href="https://cloud.google.com/datastore/">Google Cloud Datastore</a>
 (<a href="https://cloud.google.com/datastore/docs">docs</a>) is a fully
@@ -186,7 +195,7 @@ Datastore using this library.</p>
 <span class="ruby-identifier">completed_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
 
-<h3 id="label-Storage">Storage<span><a href="#label-Storage">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+<h3 id="label-Storage">Storage<span><a href="#label-Storage">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <p><a href="https://cloud.google.com/storage/">Google Cloud Storage</a> (<a
 href="https://cloud.google.com/datastore/docs">docs</a>) allows you to
@@ -214,18 +223,25 @@ using this library.</p>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">copy</span> <span class="ruby-identifier">backup</span>, <span class="ruby-identifier">file</span>.<span class="ruby-identifier">name</span>
 </pre>
 
-<h1 id="label-Supported+Ruby+Versions">Supported Ruby Versions<span><a href="#label-Supported+Ruby+Versions">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+<h2 id="label-Supported+Ruby+Versions">Supported Ruby Versions<span><a href="#label-Supported+Ruby+Versions">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>gcloud is supported on Ruby 1.9.3+.</p>
 
-<h2 id="label-Contributing">Contributing<span><a href="#label-Contributing">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<h2 id="label-Versioning">Versioning<span><a href="#label-Versioning">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>This library follows <a href="http://semver.org/">Semantic Versioning</a>.</p>
+
+<p>It is currently in major version zero (0.y.z), which means that anything
+may change at any time and the public API should not be considered stable.</p>
+
+<h2 id="label-Contributing">Contributing<span><a href="#label-Contributing">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>Contributions to this library are always welcome and highly encouraged.</p>
 
 <p>See <a href="CONTRIBUTING.md">CONTRIBUTING</a> for more information on how
 to get started.</p>
 
-<h2 id="label-License">License<span><a href="#label-License">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<h2 id="label-License">License<span><a href="#label-License">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>Apache 2.0 - See <a href="LICENSE">LICENSE</a> for more information.</p>
 </main>
@@ -234,7 +250,7 @@ to get started.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

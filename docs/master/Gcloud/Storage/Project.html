@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Gcloud::Storage::Project - gcloud-0.0.1 Documentation</title>
-
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<title>class Gcloud::Storage::Project - gcloud-0.0.1</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
 <script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -103,10 +100,11 @@ href="Bucket.html">Gcloud::Storage::Bucket</a> objects are created, read,
 updated, and deleted by <a
 href="Project.html">Gcloud::Storage::Project</a>.</p>
 
-<pre>storage = Gcloud::Storage.project &quot;my-todo-project&quot;,
-                                  &quot;/path/to/keyfile.json&quot;
-bucket = storage.find_bucket &quot;my-bucket&quot;
-file = bucket.find_file &quot;path/to/my-file.ext&quot;</pre>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
+                                  <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+</pre>
 
 <p>See <a href="../Storage.html#method-c-project">Gcloud::Storage.project</a></p>
 
@@ -135,7 +133,7 @@ file = bucket.find_file &quot;path/to/my-file.ext&quot;</pre>
         
         <div class="method-heading">
           <span class="method-name">buckets</span><span
-            class="method-args">()</span>
+            class="method-args">(options = {})</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -160,12 +158,10 @@ file = bucket.find_file &quot;path/to/my-file.ext&quot;</pre>
           
           <div class="method-source-code" id="buckets-source">
             <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 65</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">buckets</span>
-  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_buckets</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">buckets</span> <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_buckets</span> <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;items&quot;</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gapi_object</span><span class="ruby-operator">|</span>
-      <span class="ruby-constant">Bucket</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">gapi_object</span>, <span class="ruby-identifier">connection</span>
-    <span class="ruby-keyword">end</span>
+    <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_resp</span> <span class="ruby-identifier">resp</span>, <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
@@ -195,13 +191,15 @@ file = bucket.find_file &quot;path/to/my-file.ext&quot;</pre>
           
           <p>Creates a new bucket.</p>
 
-<pre>bucket = project.create_bucket &quot;my-bucket&quot;</pre>
+<pre class="ruby"><span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">project</span>.<span class="ruby-identifier">create_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+</pre>
 
 <p>The API call to create the bucket may be retried under certain conditions.
 See <a href="../Backoff.html">Gcloud::Backoff</a> to control this behavior,
 or specify the wanted behavior in the call:</p>
 
-<pre>bucket = project.create_bucket &quot;my-bucket&quot;, retries: 5</pre>
+<pre class="ruby"><span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">project</span>.<span class="ruby-identifier">create_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>, <span class="ruby-identifier">retries</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>
+</pre>
 
 <p>See <a href="Bucket.html">Gcloud::Storage::Bucket</a></p>
           
@@ -209,8 +207,13 @@ or specify the wanted behavior in the call:</p>
 
           
           <div class="method-source-code" id="create_bucket-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 106</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_bucket</span> <span class="ruby-identifier">bucket_name</span>, <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>] = <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">predefined_rule_for</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>]
+  <span class="ruby-identifier">default_acl</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:default_acl</span>]
+  <span class="ruby-identifier">default_acl</span> = <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultAcl</span>.<span class="ruby-identifier">predefined_rule_for</span> <span class="ruby-identifier">default_acl</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:default_acl</span>] = <span class="ruby-identifier">default_acl</span>
+
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">insert_bucket</span> <span class="ruby-identifier">bucket_name</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Bucket</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
@@ -243,9 +246,10 @@ or specify the wanted behavior in the call:</p>
           
           <p>Retrieves bucket by name.</p>
 
-<pre>storage = Gcloud::Storage.project
-bucket = storage.find_bucket &quot;my-bucket&quot;
-puts bucket.name</pre>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">name</span>
+</pre>
 
 <p>See <a href="Bucket.html">Gcloud::Storage::Bucket</a></p>
           
@@ -253,7 +257,7 @@ puts bucket.name</pre>
 
           
           <div class="method-source-code" id="find_bucket-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 84</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_bucket</span> <span class="ruby-identifier">bucket_name</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_bucket</span> <span class="ruby-identifier">bucket_name</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -314,7 +318,7 @@ puts bucket.name</pre>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
