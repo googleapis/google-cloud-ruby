@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/storage/bucket/acl"
+require "gcloud/storage/bucket/list"
+require "gcloud/storage/file"
+
 module Gcloud
   module Storage
     ##
@@ -106,13 +110,11 @@ module Gcloud
       #   end
       #
       # See Gcloud::Storage::File
-      def files
+      def files options = {}
         ensure_connection!
-        resp = connection.list_files name
+        resp = connection.list_files name, options
         if resp.success?
-          resp.data["items"].map do |gapi_object|
-            File.from_gapi gapi_object, connection
-          end
+          File::List.from_resp resp, connection
         else
           fail ApiError.from_response(resp)
         end
@@ -127,9 +129,9 @@ module Gcloud
       #   puts file.name
       #
       # See Gcloud::Storage::File
-      def find_file path
+      def find_file path, options = {}
         ensure_connection!
-        resp = connection.get_file name, path
+        resp = connection.get_file name, path, options
         if resp.success?
           File.from_gapi resp.data, connection
         else
@@ -169,11 +171,25 @@ module Gcloud
         # ensure_file_exists!
         fail unless ::File.exist? file
 
+        options[:acl] = File::Acl.predefined_rule_for options[:acl]
+
         if resumable_upload? file
-          upload_resumable file, path, options[:chunk_size]
+          upload_resumable file, path, options[:chunk_size], options
         else
-          upload_multipart file, path
+          upload_multipart file, path, options
         end
+      end
+
+      ##
+      # Access Control List
+      def acl
+        @acl ||= Bucket::Acl.new self
+      end
+
+      ##
+      # Default Access Control List
+      def default_acl
+        @default_acl ||= Bucket::DefaultAcl.new self
       end
 
       ##
@@ -199,8 +215,8 @@ module Gcloud
         ::File.size?(file).to_i > Storage.resumable_threshold
       end
 
-      def upload_multipart file, path
-        resp = @connection.insert_file_multipart name, file, path
+      def upload_multipart file, path, options = {}
+        resp = @connection.insert_file_multipart name, file, path, options
 
         if resp.success?
           File.from_gapi resp.data, connection
@@ -209,10 +225,11 @@ module Gcloud
         end
       end
 
-      def upload_resumable file, path, chunk_size
+      def upload_resumable file, path, chunk_size, options = {}
         chunk_size = verify_chunk_size! chunk_size
 
-        resp = @connection.insert_file_resumable name, file, path, chunk_size
+        resp = @connection.insert_file_resumable name, file,
+                                                 path, chunk_size, options
 
         if resp.success?
           File.from_gapi resp.data, connection

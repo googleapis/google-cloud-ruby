@@ -21,11 +21,73 @@ describe Gcloud::Storage::Project, :mock_storage do
 
     mock_connection.post "/storage/v1/b?project=#{project}" do |env|
       JSON.parse(env.body)["name"].must_equal new_bucket_name
+      env.params.wont_include "predefinedAcl"
+      env.params.wont_include "predefinedDefaultObjectAcl"
       [200, {"Content-Type"=>"application/json"},
        create_bucket_json]
     end
 
     storage.create_bucket new_bucket_name
+  end
+
+  it "creates a bucket with predefined acl" do
+    new_bucket_name = "new-bucket-#{Time.now.to_i}"
+
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "predefinedAcl"
+      env.params["predefinedAcl"].must_equal "private"
+      env.params.wont_include "predefinedDefaultObjectAcl"
+      JSON.parse(env.body)["name"].must_equal new_bucket_name
+      [200, {"Content-Type"=>"application/json"},
+       create_bucket_json]
+    end
+
+    storage.create_bucket new_bucket_name, acl: "private"
+  end
+
+  it "creates a bucket with predefined acl alias" do
+    new_bucket_name = "new-bucket-#{Time.now.to_i}"
+
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "predefinedAcl"
+      env.params["predefinedAcl"].must_equal "publicRead"
+      env.params.wont_include "predefinedDefaultObjectAcl"
+      JSON.parse(env.body)["name"].must_equal new_bucket_name
+      [200, {"Content-Type"=>"application/json"},
+       create_bucket_json]
+    end
+
+    storage.create_bucket new_bucket_name, acl: :public
+  end
+
+  it "creates a bucket with predefined default acl" do
+    new_bucket_name = "new-bucket-#{Time.now.to_i}"
+
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      env.params.wont_include "predefinedAcl"
+      env.params.must_include "predefinedDefaultObjectAcl"
+      env.params["predefinedDefaultObjectAcl"].must_equal "private"
+      JSON.parse(env.body)["name"].must_equal new_bucket_name
+      [200, {"Content-Type"=>"application/json"},
+       create_bucket_json]
+    end
+
+    storage.create_bucket new_bucket_name, default_acl: "private"
+  end
+
+  it "creates a bucket with predefined default acl" do
+    new_bucket_name = "new-bucket-#{Time.now.to_i}"
+
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      env.params.wont_include "predefinedAcl"
+      env.params.must_include "predefinedDefaultObjectAcl"
+      env.params["predefinedDefaultObjectAcl"].must_equal "publicRead"
+      JSON.parse(env.body)["name"].must_equal new_bucket_name
+      [200, {"Content-Type"=>"application/json"},
+       create_bucket_json]
+    end
+
+    storage.create_bucket new_bucket_name, default_acl: :public
   end
 
   it "lists buckets" do
@@ -37,6 +99,56 @@ describe Gcloud::Storage::Project, :mock_storage do
 
     buckets = storage.buckets
     buckets.size.must_equal num_buckets
+  end
+
+  it "paginates buckets" do
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(2)]
+    end
+
+    first_buckets = storage.buckets
+    first_buckets.count.must_equal 3
+    first_buckets.token.wont_be :nil?
+    first_buckets.token.must_equal "next_page_token"
+
+    second_buckets = storage.buckets token: first_buckets.token
+    second_buckets.count.must_equal 2
+    second_buckets.token.must_be :nil?
+  end
+
+  it "paginates buckets with max set" do
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "next_page_token")]
+    end
+
+    subs = storage.buckets max: 3
+    subs.count.must_equal 3
+    subs.token.wont_be :nil?
+    subs.token.must_equal "next_page_token"
+  end
+
+  it "paginates buckets without max set" do
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.wont_include "maxResults"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "next_page_token")]
+    end
+
+    subs = storage.buckets
+    subs.count.must_equal 3
+    subs.token.wont_be :nil?
+    subs.token.must_equal "next_page_token"
   end
 
   it "finds a bucket" do
@@ -59,9 +171,10 @@ describe Gcloud::Storage::Project, :mock_storage do
     random_bucket_hash(name).to_json
   end
 
-  def list_buckets_json count = 2
+  def list_buckets_json count = 2, token = nil
     buckets = count.times.map { random_bucket_hash }
-    {"kind"=>"storage#buckets",
-     "items"=>buckets}.to_json
+    hash = {"kind"=>"storage#buckets", "items"=>buckets}
+    hash["nextPageToken"] = token unless token.nil?
+    hash.to_json
   end
 end

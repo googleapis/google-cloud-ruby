@@ -42,10 +42,15 @@ module Gcloud
 
       ##
       # Retrieves a list of buckets for the given project.
-      def list_buckets
+      def list_buckets options = {}
+        params = { project: @project }
+        params["prefix"]     = options[:prefix] if options[:prefix]
+        params["pageToken"]  = options[:token]  if options[:token]
+        params["maxResults"] = options[:max]    if options[:max]
+
         @client.execute(
           api_method: @storage.buckets.list,
-          parameters: { project: @project }
+          parameters: params
         )
       end
 
@@ -60,14 +65,32 @@ module Gcloud
 
       ##
       # Creates a new bucket.
-      def insert_bucket bucket_name, opts = {}
-        incremental_backoff opts do
+      def insert_bucket bucket_name, options = {}
+        params = { project: @project, predefinedAcl: options[:acl],
+                   predefinedDefaultObjectAcl: options[:default_acl]
+                 }.delete_if { |_, v| v.nil? }
+
+        incremental_backoff options do
           @client.execute(
             api_method: @storage.buckets.insert,
-            parameters: { project: @project },
+            parameters: params,
             body_object: { name: bucket_name }
           )
         end
+      end
+
+      ##
+      # Updates a bucket's metadata.
+      def patch_bucket bucket_name, options = {}
+        params = { bucket: bucket_name,
+                   predefinedAcl: options[:acl],
+                   predefinedDefaultObjectAcl: options.delete(:default_acl)
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @storage.buckets.patch,
+          parameters: params
+        )
       end
 
       ##
@@ -82,36 +105,103 @@ module Gcloud
       end
 
       ##
-      # Retrieves a list of files matching the criteria.
-      def list_files bucket_name
+      # Retrieves a list of ACLs for the given bucket.
+      def list_bucket_acls bucket_name
         @client.execute(
-          api_method: @storage.objects.list,
+          api_method: @storage.bucket_access_controls.list,
           parameters: { bucket: bucket_name }
         )
       end
 
+      ##
+      # Creates a new bucket ACL.
+      def insert_bucket_acl bucket_name, entity, role
+        @client.execute(
+          api_method: @storage.bucket_access_controls.insert,
+          parameters: { bucket: bucket_name },
+          body_object: { entity: entity, role: role }
+        )
+      end
+
+      ##
+      # Permenently deletes a bucket ACL.
+      def delete_bucket_acl bucket_name, entity
+        @client.execute(
+          api_method: @storage.bucket_access_controls.delete,
+          parameters: { bucket: bucket_name, entity: entity }
+        )
+      end
+
+      ##
+      # Retrieves a list of default ACLs for the given bucket.
+      def list_default_acls bucket_name
+        @client.execute(
+          api_method: @storage.default_object_access_controls.list,
+          parameters: { bucket: bucket_name }
+        )
+      end
+
+      ##
+      # Creates a new default ACL.
+      def insert_default_acl bucket_name, entity, role
+        @client.execute(
+          api_method: @storage.default_object_access_controls.insert,
+          parameters: { bucket: bucket_name },
+          body_object: { entity: entity, role: role }
+        )
+      end
+
+      ##
+      # Permenently deletes a default ACL.
+      def delete_default_acl bucket_name, entity
+        @client.execute(
+          api_method: @storage.default_object_access_controls.delete,
+          parameters: { bucket: bucket_name, entity: entity }
+        )
+      end
+
+      ##
+      # Retrieves a list of files matching the criteria.
+      def list_files bucket_name, options = {}
+        params = { bucket:     bucket_name,
+                   prefix:     options[:prefix],
+                   pageToken:  options[:token],
+                   maxResults: options[:max],
+                   versions:   options[:versions]
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @storage.objects.list,
+          parameters: params
+        )
+      end
+
       # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
       # Disabled rubocop because the API we need to use
       # is verbose. No getting around it.
 
       ##
       # Stores a new object and metadata.
       # Uses a multipart form post.
-      def insert_file_multipart bucket_name, file, path = nil
+      def insert_file_multipart bucket_name, file, path = nil,
+                                options = {}
         local_path = Pathname(file).to_path
         upload_path = Pathname(path || local_path).to_path
         mime_type = mime_type_for local_path
 
         media = Google::APIClient::UploadIO.new local_path, mime_type
 
+        params = { uploadType: "multipart",
+                   bucket: bucket_name,
+                   name: upload_path,
+                   predefinedAcl: options[:acl]
+                 }.delete_if { |_, v| v.nil? }
+
         @client.execute(
           api_method: @storage.objects.insert,
           media: media,
-          parameters: {
-            uploadType: "multipart",
-            bucket: bucket_name,
-            name: upload_path
-          },
+          parameters: params,
           body_object: { contentType: mime_type }
         )
       end
@@ -119,7 +209,8 @@ module Gcloud
       ##
       # Stores a new object and metadata.
       # Uses a resumable upload.
-      def insert_file_resumable bucket_name, file, path = nil, chunk_size = nil
+      def insert_file_resumable bucket_name, file, path = nil,
+                                chunk_size = nil, options = {}
         local_path = Pathname(file).to_path
         upload_path = Pathname(path || local_path).to_path
         # mime_type = options[:mime_type] || mime_type_for local_path
@@ -132,14 +223,16 @@ module Gcloud
         media = Google::APIClient::UploadIO.new local_path, mime_type
         media.chunk_size = chunk_size
 
+        params = { uploadType: "resumable",
+                   bucket: bucket_name,
+                   name: upload_path,
+                   predefinedAcl: options[:acl]
+                 }.delete_if { |_, v| v.nil? }
+
         result = @client.execute(
           api_method: @storage.objects.insert,
           media: media,
-          parameters: {
-            uploadType: "resumable",
-            bucket: bucket_name,
-            name: upload_path
-          },
+          parameters: params,
           body_object: { contentType: mime_type }
         )
         upload = result.resumable_upload
@@ -148,28 +241,33 @@ module Gcloud
       end
 
       # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
 
       ##
       # Retrieves an object or its metadata.
-      def get_file bucket_name, file_path
+      def get_file bucket_name, file_path, options = {}
+        query = { bucket: bucket_name, object: file_path }
+        query[:generation] = options[:generation] if options[:generation]
+
         @client.execute(
           api_method: @storage.objects.get,
-          parameters: { bucket: bucket_name,
-                        object: file_path }
+          parameters: query
         )
       end
 
       ## Copy a file from source bucket/object to a
       # destination bucket/object.
       def copy_file source_bucket_name, source_file_path,
-                    destination_bucket_name, destination_file_path
+                    destination_bucket_name, destination_file_path,
+                    options = {}
         @client.execute(
           api_method: @storage.objects.copy,
           parameters: { sourceBucket: source_bucket_name,
                         sourceObject: source_file_path,
                         destinationBucket: destination_bucket_name,
-                        destinationObject: destination_file_path }
-        )
+                        destinationObject: destination_file_path,
+                        predefinedAcl: options[:acl]
+                      }.delete_if { |_, v| v.nil? })
       end
 
       ##
@@ -184,12 +282,60 @@ module Gcloud
       end
 
       ##
+      # Updates a file's metadata.
+      def patch_file bucket_name, file_path, options = {}
+        params = { bucket: bucket_name,
+                   object: file_path,
+                   predefinedAcl: options.delete(:acl)
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @storage.objects.patch,
+          parameters: params
+        )
+      end
+
+      ##
       # Permenently deletes a file.
       def delete_file bucket_name, file_path
         @client.execute(
           api_method: @storage.objects.delete,
           parameters: { bucket: bucket_name,
                         object: file_path }
+        )
+      end
+
+      ##
+      # Retrieves a list of ACLs for the given file.
+      def list_file_acls bucket_name, file_name
+        @client.execute(
+          api_method: @storage.object_access_controls.list,
+          parameters: { bucket: bucket_name, object: file_name }
+        )
+      end
+
+      ##
+      # Creates a new file ACL.
+      def insert_file_acl bucket_name, file_name, entity, role, options = {}
+        query = { bucket: bucket_name, object: file_name }
+        query[:generation] = options[:generation] if options[:generation]
+
+        @client.execute(
+          api_method: @storage.object_access_controls.insert,
+          parameters: query,
+          body_object: { entity: entity, role: role }
+        )
+      end
+
+      ##
+      # Permenently deletes a file ACL.
+      def delete_file_acl bucket_name, file_name, entity, options = {}
+        query = { bucket: bucket_name, object: file_name, entity: entity }
+        query[:generation] = options[:generation] if options[:generation]
+
+        @client.execute(
+          api_method: @storage.object_access_controls.delete,
+          parameters: query
         )
       end
 

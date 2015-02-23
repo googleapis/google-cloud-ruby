@@ -67,8 +67,8 @@ describe Gcloud::Storage::File, :mock_storage do
       stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
       stubbed_crc32c = lambda { |_| fail "Should not be called!" }
 
-      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
-        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+      Gcloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
           Tempfile.open "gcloud-ruby" do |tmpfile|
             file.download tmpfile
           end
@@ -83,8 +83,8 @@ describe Gcloud::Storage::File, :mock_storage do
       stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
       stubbed_crc32c = lambda { |_| fail "Should not be called!" }
 
-      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
-        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+      Gcloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
           Tempfile.open "gcloud-ruby" do |tmpfile|
             file.download tmpfile, verify: :md5
           end
@@ -99,8 +99,8 @@ describe Gcloud::Storage::File, :mock_storage do
       mocked_crc32c.expect :crc32c_mock, file.crc32c
       stubbed_crc32c = lambda { |_| mocked_crc32c.crc32c_mock }
 
-      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
-        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+      Gcloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
           Tempfile.open "gcloud-ruby" do |tmpfile|
             file.download tmpfile, verify: :crc32c
           end
@@ -118,8 +118,8 @@ describe Gcloud::Storage::File, :mock_storage do
       mocked_crc32c.expect :crc32c_mock, file.crc32c
       stubbed_crc32c = lambda { |_| mocked_crc32c.crc32c_mock }
 
-      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
-        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+      Gcloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
           Tempfile.open "gcloud-ruby" do |tmpfile|
             file.download tmpfile, verify: :all
           end
@@ -133,8 +133,8 @@ describe Gcloud::Storage::File, :mock_storage do
       stubbed_md5 = lambda { |_| fail "Should not be called!" }
       stubbed_crc32c = lambda { |_| fail "Should not be called!" }
 
-      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
-        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+      Gcloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
           Tempfile.open "gcloud-ruby" do |tmpfile|
             file.download tmpfile, verify: :none
           end
@@ -148,8 +148,8 @@ describe Gcloud::Storage::File, :mock_storage do
       stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
       stubbed_crc32c = lambda { |_| fail "Should not be called!" }
 
-      Gcloud::Storage::Verifier.stub :md5_for, stubbed_md5 do
-        Gcloud::Storage::Verifier.stub :crc32c_for, stubbed_crc32c do
+      Gcloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
+        Gcloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
           Tempfile.open "gcloud-ruby" do |tmpfile|
             assert_raises Gcloud::Storage::FileVerificationError do
               file.download tmpfile
@@ -170,6 +170,26 @@ describe Gcloud::Storage::File, :mock_storage do
     file.copy "new-file.ext"
   end
 
+  it "can copy itself in the same bucket with predefined ACL" do
+    mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/#{bucket.name}/o/new-file.ext" do |env|
+      env.params["predefinedAcl"].must_equal "private"
+      [200, {"Content-Type"=>"application/json"},
+       file.gapi.to_json]
+    end
+
+    file.copy "new-file.ext", acl: "private"
+  end
+
+  it "can copy itself in the same bucket with ACL alias" do
+    mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/#{bucket.name}/o/new-file.ext" do |env|
+      env.params["predefinedAcl"].must_equal "publicRead"
+      [200, {"Content-Type"=>"application/json"},
+       file.gapi.to_json]
+    end
+
+    file.copy "new-file.ext", acl: :public
+  end
+
   it "can copy itself to a different bucket" do
     mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/new-bucket/o/new-file.ext" do |env|
       [200, {"Content-Type"=>"application/json"},
@@ -177,5 +197,25 @@ describe Gcloud::Storage::File, :mock_storage do
     end
 
     file.copy "new-bucket", "new-file.ext"
+  end
+
+  it "can copy itself to a different bucket with predefined ACL" do
+    mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/new-bucket/o/new-file.ext" do |env|
+      env.params["predefinedAcl"].must_equal "private"
+      [200, {"Content-Type"=>"application/json"},
+       file.gapi.to_json]
+    end
+
+    file.copy "new-bucket", "new-file.ext", acl: "private"
+  end
+
+  it "can copy itself to a different bucket with ACL alias" do
+    mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/new-bucket/o/new-file.ext" do |env|
+      env.params["predefinedAcl"].must_equal "publicRead"
+      [200, {"Content-Type"=>"application/json"},
+       file.gapi.to_json]
+    end
+
+    file.copy "new-bucket", "new-file.ext", acl: :public
   end
 end
