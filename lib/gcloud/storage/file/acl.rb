@@ -120,7 +120,7 @@ module Gcloud
         # Predefined ACL helpers
 
         def auth!
-          set_predefined_acl! "authenticatedRead"
+          update_predefined_acl! "authenticatedRead"
         end
         alias_method :authenticatedRead!, :auth!
         alias_method :auth_read!, :auth!
@@ -128,40 +128,37 @@ module Gcloud
         alias_method :authenticated_read!, :auth!
 
         def owner_full!
-          set_predefined_acl! "bucketOwnerFullControl"
+          update_predefined_acl! "bucketOwnerFullControl"
         end
         alias_method :bucketOwnerFullControl!, :owner_full!
 
         def owner_read!
-          set_predefined_acl! "bucketOwnerRead"
+          update_predefined_acl! "bucketOwnerRead"
         end
         alias_method :bucketOwnerRead!, :owner_read!
 
         def private!
-          set_predefined_acl! "private"
+          update_predefined_acl! "private"
         end
 
         def project_private!
-          set_predefined_acl! "projectPrivate"
+          update_predefined_acl! "projectPrivate"
         end
         alias_method :projectPrivate!, :project_private!
 
         def public!
-          set_predefined_acl! "publicRead"
+          update_predefined_acl! "publicRead"
         end
         alias_method :publicRead!, :public!
         alias_method :public_read!, :public!
 
         protected
 
-        def set_predefined_acl! acl_role
+        def update_predefined_acl! acl_role
           resp = @connection.patch_file @bucket, @file,
                                         acl: acl_role
 
-          if resp.success?
-            return true
-          end
-          false
+          resp.success?
         end
 
         def entities_from_acls acls, role

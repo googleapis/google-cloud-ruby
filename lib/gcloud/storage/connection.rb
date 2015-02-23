@@ -66,8 +66,7 @@ module Gcloud
       ##
       # Creates a new bucket.
       def insert_bucket bucket_name, options = {}
-        params = { project: @project,
-                   predefinedAcl: options[:acl],
+        params = { project: @project, predefinedAcl: options[:acl],
                    predefinedDefaultObjectAcl: options[:default_acl]
                  }.delete_if { |_, v| v.nil? }
 
@@ -164,14 +163,12 @@ module Gcloud
       ##
       # Retrieves a list of files matching the criteria.
       def list_files bucket_name, options = {}
-        params = { bucket: bucket_name }
-        params["prefix"]     = options[:prefix] if options[:prefix]
-        params["pageToken"]  = options[:token]  if options[:token]
-        params["maxResults"] = options[:max]    if options[:max]
-        unless options[:versions].nil? # Allow false to work
-          # Force to a boolean
-          params["versions"] = !!options[:versions]
-        end
+        params = { bucket:     bucket_name,
+                   prefix:     options[:prefix],
+                   pageToken:  options[:token],
+                   maxResults: options[:max],
+                   versions:   options[:versions]
+                 }.delete_if { |_, v| v.nil? }
 
         @client.execute(
           api_method: @storage.objects.list,
@@ -180,13 +177,15 @@ module Gcloud
       end
 
       # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
       # Disabled rubocop because the API we need to use
       # is verbose. No getting around it.
 
       ##
       # Stores a new object and metadata.
       # Uses a multipart form post.
-      def insert_file_multipart bucket_name, file, path = nil, options = {}
+      def insert_file_multipart bucket_name, file, path = nil,
+                                options = {}
         local_path = Pathname(file).to_path
         upload_path = Pathname(path || local_path).to_path
         mime_type = mime_type_for local_path
@@ -210,7 +209,8 @@ module Gcloud
       ##
       # Stores a new object and metadata.
       # Uses a resumable upload.
-      def insert_file_resumable bucket_name, file, path = nil, chunk_size = nil, options = {}
+      def insert_file_resumable bucket_name, file, path = nil,
+                                chunk_size = nil, options = {}
         local_path = Pathname(file).to_path
         upload_path = Pathname(path || local_path).to_path
         # mime_type = options[:mime_type] || mime_type_for local_path
@@ -241,6 +241,7 @@ module Gcloud
       end
 
       # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
 
       ##
       # Retrieves an object or its metadata.
@@ -259,17 +260,14 @@ module Gcloud
       def copy_file source_bucket_name, source_file_path,
                     destination_bucket_name, destination_file_path,
                     options = {}
-        params = { sourceBucket: source_bucket_name,
-                   sourceObject: source_file_path,
-                   destinationBucket: destination_bucket_name,
-                   destinationObject: destination_file_path,
-                   predefinedAcl: options[:acl]
-                 }.delete_if { |_, v| v.nil? }
-
         @client.execute(
           api_method: @storage.objects.copy,
-          parameters: params
-        )
+          parameters: { sourceBucket: source_bucket_name,
+                        sourceObject: source_file_path,
+                        destinationBucket: destination_bucket_name,
+                        destinationObject: destination_file_path,
+                        predefinedAcl: options[:acl]
+                      }.delete_if { |_, v| v.nil? })
       end
 
       ##

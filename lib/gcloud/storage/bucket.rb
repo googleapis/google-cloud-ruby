@@ -228,7 +228,8 @@ module Gcloud
       def upload_resumable file, path, chunk_size, options = {}
         chunk_size = verify_chunk_size! chunk_size
 
-        resp = @connection.insert_file_resumable name, file, path, chunk_size, options
+        resp = @connection.insert_file_resumable name, file,
+                                                 path, chunk_size, options
 
         if resp.success?
           File.from_gapi resp.data, connection
