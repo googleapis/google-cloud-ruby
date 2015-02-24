@@ -25,33 +25,31 @@ describe Gcloud::Pubsub::Event, :mock_pubsub do
   end
   let(:event_name) { "event-name-goes-here" }
   let(:event_msg)  { "event-msg-goes-here" }
-  let(:event_data)  { JSON.parse(event_json(subscription_name, event_msg)) }
+  let(:event_data)  { JSON.parse(event_json(event_msg)) }
   let(:event) { Gcloud::Pubsub::Event.from_gapi event_data,
-                                                pubsub.connection }
+                                                subscription }
 
   it "knows its subscription" do
-    event.subscription.must_equal subscription_path(subscription_name)
+    event.subscription.wont_be :nil?
+    event.subscription.name.must_equal subscription_path(subscription_name)
   end
 
   it "knows its ack_id" do
     event.ack_id.must_equal event_data["ackId"]
   end
 
-  it "knows its message" do
-    event.msg.must_equal event_data["pubsubEvent"]["message"]["data"]
-    event.message.must_equal event_data["pubsubEvent"]["message"]["data"]
-  end
-
-  it "knows its message_id" do
-    event.msg_id.must_equal event_data["pubsubEvent"]["message"]["messageId"]
-    event.message_id.must_equal event_data["pubsubEvent"]["message"]["messageId"]
+  it "has a message" do
+    event.message.wont_be :nil?
+    event.message.data.must_equal event_data["message"]["data"]
+    event.message.attributes.must_equal event_data["message"]["attributes"]
+    event.message.msg_id.must_equal event_data["message"]["messageId"]
+    event.message.message_id.must_equal event_data["message"]["messageId"]
   end
 
   it "can acknowledge" do
-    mock_connection.post "/pubsub/v1beta1/subscriptions/acknowledge" do |env|
-      JSON.parse(env.body)["subscription"].must_equal subscription_path(subscription_name)
-      JSON.parse(env.body)["ackId"].count.must_equal 1
-      JSON.parse(env.body)["ackId"].first.must_equal event.ack_id
+    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
+      JSON.parse(env.body)["ackIds"].count.must_equal 1
+      JSON.parse(env.body)["ackIds"].first.must_equal event.ack_id
       [200, {"Content-Type"=>"application/json"}, ""]
     end
 
@@ -59,10 +57,9 @@ describe Gcloud::Pubsub::Event, :mock_pubsub do
   end
 
   it "can ack" do
-    mock_connection.post "/pubsub/v1beta1/subscriptions/acknowledge" do |env|
-      JSON.parse(env.body)["subscription"].must_equal subscription_path(subscription_name)
-      JSON.parse(env.body)["ackId"].count.must_equal 1
-      JSON.parse(env.body)["ackId"].first.must_equal event.ack_id
+    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
+      JSON.parse(env.body)["ackIds"].count.must_equal 1
+      JSON.parse(env.body)["ackIds"].first.must_equal event.ack_id
       [200, {"Content-Type"=>"application/json"}, ""]
     end
 

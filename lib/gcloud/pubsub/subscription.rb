@@ -1,3 +1,4 @@
+#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -73,7 +74,7 @@ module Gcloud
       # All pending messages in the subscription are immediately dropped.
       def delete
         ensure_connection!
-        resp = connection.delete_subscription subscription_name
+        resp = connection.delete_subscription name
         if resp.success?
           true
         else
@@ -83,18 +84,23 @@ module Gcloud
 
       ##
       # Pulls a single message from the server.
-      # If immediate is true, the system will respond immediately,
-      # either with a message if available or nil if no message is available.
+      # If the option <tt>immediate: true</tt>, the system will
+      # respond immediately, either with a message if available or
+      # nil if no message is available.
       # Otherwise, the call will block until a message is available,
       # or may return UNAVAILABLE if no messages become available
       # within a reasonable amount of time.
-      def pull immediate = true
+      # The option <tt>max: 50</tt> will limit the max number of
+      # messages returned.
+      def pull options = {}
         ensure_connection!
-        resp = connection.pull name, immediate
+        resp = connection.pull name, options
         if resp.success?
-          Event.from_gapi resp.data, connection
+          Array(resp.data["receivedMessages"]).map do |gapi|
+            Event.from_gapi gapi, self
+          end
         else
-          nil
+          fail ApiError.from_response(resp)
         end
       end
 
@@ -107,7 +113,7 @@ module Gcloud
       # This is only used for messages received via pull.
       def acknowledge *ack_ids
         ensure_connection!
-        resp = connection.acknowledge subscription_name, *ack_ids
+        resp = connection.acknowledge name, *ack_ids
         if resp.success?
           true
         else
@@ -131,14 +137,6 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
-      end
-
-      ##
-      # Gets the topic name from the path.
-      # "/subscriptions/project-identifier/subscription-name"
-      # will return "subscription-name"
-      def subscription_name
-        name.split("/").last
       end
     end
   end

@@ -1,3 +1,4 @@
+#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +22,7 @@ module Gcloud
     # Represents the connection to Pubsub,
     # as well as expose the API calls.
     class Connection #:nodoc:
-      API_VERSION = "v1beta1"
+      API_VERSION = "v1beta2"
 
       attr_accessor :project
       attr_accessor :credentials #:nodoc:
@@ -45,8 +46,8 @@ module Gcloud
       # they will be returned here.
       def get_topic topic_name
         @client.execute(
-          api_method: @pubsub.topics.get,
-          parameters: { topic: topic_slug(topic_name) }
+          api_method: @pubsub.projects.topics.get,
+          parameters: { topic: topic_path(topic_name) }
         )
       end
 
@@ -54,20 +55,21 @@ module Gcloud
       # Creates the given topic with the given name.
       def create_topic topic_name
         @client.execute(
-          api_method: @pubsub.topics.create,
-          body_object: { name: topic_path(topic_name) }
+          api_method: @pubsub.projects.topics.create,
+          parameters: { name: topic_path(topic_name) }
         )
       end
 
       ##
       # Lists matching topics.
       def list_topics options = {}
-        params = { query: project_query }
-        params["pageToken"]  = options[:token] if options[:token]
-        params["maxResults"] = options[:max]   if options[:max]
+        params = { project: project_path,
+                   pageToken: options.delete(:token),
+                   pageSize: options.delete(:max)
+                 }.delete_if { |_, v| v.nil? }
 
         @client.execute(
-          api_method: @pubsub.topics.list,
+          api_method: @pubsub.projects.topics.list,
           parameters: params
         )
       end
@@ -77,21 +79,21 @@ module Gcloud
       # All subscriptions to this topic are also deleted.
       # Returns NOT_FOUND if the topic does not exist.
       # After a topic is deleted, a new topic may be created with the same name.
-      def delete_topic topic_name
+      def delete_topic topic
         @client.execute(
-          api_method: @pubsub.topics.delete,
-          parameters: { topic: topic_slug(topic_name) }
+          api_method: @pubsub.projects.topics.delete,
+          parameters: { topic: topic }
         )
       end
 
       ##
       # Creates a subscription on a given topic for a given subscriber.
-      def create_subscription topic_name, subscription_name = nil,
+      def create_subscription topic, subscription_name = nil,
                               deadline = nil, endpoint = nil
-        data = subscription_data topic_name, subscription_name,
-                                 deadline, endpoint
+        data = subscription_data topic, deadline, endpoint
         @client.execute(
-          api_method: @pubsub.subscriptions.create,
+          api_method: @pubsub.projects.subscriptions.create,
+          parameters: { name: subscription_path(subscription_name) },
           body_object: data
         )
       end
@@ -100,22 +102,35 @@ module Gcloud
       # Gets the details of a subscription.
       def get_subscription subscription_name
         @client.execute(
-          api_method: @pubsub.subscriptions.get,
-          parameters: { subscription: subscription_slug(subscription_name) }
+          api_method: @pubsub.projects.subscriptions.get,
+          parameters: { subscription: subscription_path(subscription_name) }
         )
       end
 
       ##
-      # Lists matching subscriptions by topic or project.
-      # If no topic_name is given then search by project.
-      def list_subscriptions topic_name = nil, options = {}
-        query = topic_name ? topic_query(topic_name) : project_query
-        params = { query: query }
-        params["pageToken"]  = options[:token] if options[:token]
-        params["maxResults"] = options[:max]   if options[:max]
+      # Lists matching subscriptions by project.
+      def list_subscriptions options = {}
+        params = { project: project_path,
+                   pageToken: options.delete(:token),
+                   pageSize: options.delete(:max)
+                 }.delete_if { |_, v| v.nil? }
 
         @client.execute(
-          api_method: @pubsub.subscriptions.list,
+          api_method: @pubsub.projects.subscriptions.list,
+          parameters: params
+        )
+      end
+
+      ##
+      # Lists matching subscriptions by project and topic.
+      def list_topics_subscriptions topic, options = {}
+        params = { topic: topic,
+                   pageToken: options.delete(:token),
+                   pageSize: options.delete(:max)
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @pubsub.projects.topics.subscriptions.list,
           parameters: params
         )
       end
@@ -123,93 +138,70 @@ module Gcloud
       ##
       # Deletes an existing subscription.
       # All pending messages in the subscription are immediately dropped.
-      def delete_subscription subscription_name
+      def delete_subscription subscription
         @client.execute(
-          api_method: @pubsub.subscriptions.delete,
-          parameters: { subscription: subscription_slug(subscription_name) }
+          api_method: @pubsub.projects.subscriptions.delete,
+          parameters: { subscription: subscription }
         )
       end
 
       ##
       # Adds a message to the topic.
       # Returns NOT_FOUND if the topic does not exist.
-      def publish topic_name, message
+      def publish topic, message
         @client.execute(
-          api_method: @pubsub.topics.publish,
-          body_object: { topic: topic_path(topic_name),
-                         message: { data: message } }
-        )
-      end
-
-      ##
-      # Adds one or more messages to the topic.
-      # Returns NOT_FOUND if the topic does not exist.
-      def publish_batch topic_name, *messages
-        messages = messages.map { |msg| { data: msg } }
-        @client.execute(
-          api_method: @pubsub.topics.publish_batch,
-          body_object: { topic: topic_path(topic_name),
-                         messages: messages }
+          api_method:  @pubsub.projects.topics.publish,
+          parameters:  { topic: topic },
+          body_object: { messages: [{ data: [message].pack("m") }] }
         )
       end
 
       ##
       # Pulls a single message from the server.
-      def pull subscription_path, immediate = true
+      def pull subscription, options = {}
+        body = { returnImmediately: !(!options.fetch(:immediate, true)),
+                 maxMessages:          options.fetch(:max, 100).to_i }
+
         @client.execute(
-          api_method: @pubsub.subscriptions.pull,
-          body_object: { subscription: subscription_path(subscription_path),
-                         returnImmediately: immediate }
+          api_method:  @pubsub.projects.subscriptions.pull,
+          parameters:  { subscription: subscription },
+          body_object: body
         )
       end
 
       ##
       # Acknowledges receipt of a message.
-      def acknowledge subscription_name, *ack_ids
+      def acknowledge subscription, *ack_ids
         @client.execute(
-          api_method: @pubsub.subscriptions.acknowledge,
-          body_object: { subscription: subscription_path(subscription_name),
-                         ackId: ack_ids }
+          api_method:  @pubsub.projects.subscriptions.acknowledge,
+          parameters:  { subscription: subscription },
+          body_object: { ackIds: ack_ids }
         )
       end
 
       protected
 
-      def project_query
-        "cloud.googleapis.com/project in (#{project_path})"
-      end
-
-      def project_path
-        "/projects/#{project}"
-      end
-
-      def topic_query topic_name
-        "pubsub.googleapis.com/topic in (#{topic_path topic_name})"
-      end
-
-      def topic_slug topic_name
-        "#{project}/#{topic_name}"
-      end
-
-      def topic_path topic_name
-        "/topics/#{topic_slug topic_name}"
-      end
-
-      def subscription_data topic_name, subscription_name = nil,
-                            deadline = nil, endpoint = nil
-        data = { "topic" => topic_path(topic_name) }
-        data["name"] = subscription_path subscription_name if subscription_name
+      def subscription_data topic, deadline = nil,
+                            endpoint = nil, attributes = {}
+        data = { "topic" => topic }
         data["ackDeadlineSeconds"] = deadline if deadline
-        data["pushConfig"] = { "pushEndpoint" => endpoint } if endpoint
+        if endpoint
+          data["pushConfig"] = { "pushEndpoint" => endpoint,
+                                 "attributes" => attributes }
+        end
         data
       end
 
-      def subscription_slug subscription_name
-        "#{project}/#{subscription_name}"
+      def project_path
+        "projects/#{project}"
+      end
+
+      def topic_path topic_name
+        "#{project_path}/topics/#{topic_name}"
       end
 
       def subscription_path subscription_name
-        "/subscriptions/#{subscription_slug subscription_name}"
+        "#{project_path}/subscriptions/#{subscription_name}"
       end
     end
   end

@@ -1,3 +1,4 @@
+#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,8 +35,12 @@ module Gcloud
         ##
         # New Subscription::List from a response object.
         def self.from_resp resp, conn #:nodoc:
-          subs = Array(resp.data["subscription"]).map do |gapi_object|
-            Subscription.from_gapi gapi_object, conn
+          subs = Array(resp.data["subscriptions"]).map do |gapi_object|
+            if gapi_object.is_a? String
+              gapi_object
+            else
+              Subscription.from_gapi gapi_object, conn
+            end
           end
           new subs, resp.data["nextPageToken"]
         end

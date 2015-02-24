@@ -1,3 +1,4 @@
+#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +14,7 @@
 # limitations under the License.
 
 require "gcloud/pubsub/errors"
+require "gcloud/pubsub/message"
 
 module Gcloud
   module Pubsub
@@ -20,8 +22,8 @@ module Gcloud
     # Represents a Pubsub Event.
     class Event
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # The Subscription object.
+      attr_accessor :subscription #:nodoc:
 
       ##
       # The Google API Client object.
@@ -30,14 +32,8 @@ module Gcloud
       ##
       # Create an empty Subscription object.
       def initialize #:nodoc:
-        @connection = nil
+        @subscription = nil
         @gapi = {}
-      end
-
-      ##
-      # The subscription that received the event.
-      def subscription
-        @gapi["pubsubEvent"]["subscription"]
       end
 
       ##
@@ -51,54 +47,33 @@ module Gcloud
       ##
       # The received message.
       def message
-        @gapi["pubsubEvent"]["message"]["data"]
+        Message.from_gapi @gapi["message"]
       end
       alias_method :msg, :message
 
       ##
-      # The ID of this message, assigned by the server at publication time.
-      # Guaranteed to be unique within the topic.
-      def message_id
-        @gapi["pubsubEvent"]["message"]["messageId"]
-      end
-      alias_method :msg_id, :message_id
-
-      ##
       # Acknowledges receipt of the message.
       def acknowledge!
-        ensure_connection!
-        resp = connection.acknowledge subscription_name, ack_id
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_subscription!
+        subscription.acknowledge ack_id
       end
       alias_method :ack!, :acknowledge!
 
       ##
-      # New Topic from a Google API Client object.
-      def self.from_gapi gapi, conn #:nodoc:
+      # New Event from a Google API Client object.
+      def self.from_gapi gapi, subscription #:nodoc:
         new.tap do |f|
-          f.gapi = gapi
-          f.connection = conn
+          f.gapi         = gapi
+          f.subscription = subscription
         end
       end
 
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
-      end
-
-      ##
-      # Gets the subscription name from the path.
-      # "/subscriptions/project-identifier/subscription-name"
-      # will return "subscription-name"
-      def subscription_name
-        subscription.split("/").last
+      # Raise an error unless an active subscription is available.
+      def ensure_subscription!
+        fail "Must have active subscription" unless subscription
       end
     end
   end

@@ -21,8 +21,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
 
   it "creates a topic" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
-    mock_connection.post "/pubsub/v1beta1/topics" do |env|
-      JSON.parse(env.body)["name"].must_equal topic_path(new_topic_name)
+    mock_connection.put "/v1beta2/projects/#{project}/topics/#{new_topic_name}" do |env|
       [200, {"Content-Type"=>"application/json"},
        topic_json(new_topic_name)]
     end
@@ -32,7 +31,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
 
   it "gets a topic" do
     topic_name = "found-topic"
-    mock_connection.get "/pubsub/v1beta1#{topic_path(topic_name)}" do |env|
+    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|
       [200, {"Content-Type"=>"application/json"},
        topic_json(topic_name)]
     end
@@ -43,9 +42,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
 
   it "lists topics" do
     num_topics = 3
-    mock_connection.get "/pubsub/v1beta1/topics" do |env|
-      env.params.must_include "query"
-      env.params["query"].must_equal project_query
+    mock_connection.get "/v1beta2/projects/#{project}/topics" do |env|
       [200, {"Content-Type"=>"application/json"},
        topics_json(num_topics)]
     end
@@ -55,11 +52,11 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
   end
 
   it "paginates topics" do
-    mock_connection.get "/pubsub/v1beta1/topics" do |env|
+    mock_connection.get "/v1beta2/projects/#{project}/topics" do |env|
       [200, {"Content-Type"=>"application/json"},
        topics_json(3, "next_page_token")]
     end
-    mock_connection.get "/pubsub/v1beta1/topics" do |env|
+    mock_connection.get "/v1beta2/projects/#{project}/topics" do |env|
       env.params.must_include "pageToken"
       env.params["pageToken"].must_equal "next_page_token"
       [200, {"Content-Type"=>"application/json"},
@@ -77,9 +74,9 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
   end
 
   it "paginates topics with max set" do
-    mock_connection.get "/pubsub/v1beta1/topics" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
+    mock_connection.get "/v1beta2/projects/#{project}/topics" do |env|
+      env.params.must_include "pageSize"
+      env.params["pageSize"].must_equal "3"
       [200, {"Content-Type"=>"application/json"},
        topics_json(3, "next_page_token")]
     end
@@ -91,8 +88,8 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
   end
 
   it "paginates topics without max set" do
-    mock_connection.get "/pubsub/v1beta1/topics" do |env|
-      env.params.wont_include "maxResults"
+    mock_connection.get "/v1beta2/projects/#{project}/topics" do |env|
+      env.params.wont_include "pageSize"
       [200, {"Content-Type"=>"application/json"},
        topics_json(3, "next_page_token")]
     end
@@ -103,10 +100,20 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topics.token.must_equal "next_page_token"
   end
 
+  it "gets a subscription" do
+    sub_name = "found-sub-#{Time.now.to_i}"
+    mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json("random-topic", sub_name)]
+    end
+
+    sub = pubsub.subscription sub_name
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+  end
+
   it "lists subscriptions" do
-    mock_connection.get "/pubsub/v1beta1/subscriptions" do |env|
-      env.params.must_include "query"
-      env.params["query"].must_equal project_query
+    mock_connection.get "/v1beta2/projects/#{project}/subscriptions" do |env|
       [200, {"Content-Type"=>"application/json"},
        subscriptions_json("fake-topic", 3)]
     end
@@ -119,11 +126,11 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
   end
 
   it "paginates subscriptions" do
-    mock_connection.get "/pubsub/v1beta1/subscriptions" do |env|
+    mock_connection.get "/v1beta2/projects/#{project}/subscriptions" do |env|
       [200, {"Content-Type"=>"application/json"},
        subscriptions_json("fake-topic", 3, "next_page_token")]
     end
-    mock_connection.get "/pubsub/v1beta1/subscriptions" do |env|
+    mock_connection.get "/v1beta2/projects/#{project}/subscriptions" do |env|
       env.params.must_include "pageToken"
       env.params["pageToken"].must_equal "next_page_token"
       [200, {"Content-Type"=>"application/json"},
@@ -141,9 +148,9 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
   end
 
   it "paginates subscriptions with max set" do
-    mock_connection.get "/pubsub/v1beta1/subscriptions" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
+    mock_connection.get "/v1beta2/projects/#{project}/subscriptions" do |env|
+      env.params.must_include "pageSize"
+      env.params["pageSize"].must_equal "3"
       [200, {"Content-Type"=>"application/json"},
        subscriptions_json("fake-topic", 3, "next_page_token")]
     end
@@ -155,8 +162,8 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
   end
 
   it "paginates subscriptions without max set" do
-    mock_connection.get "/pubsub/v1beta1/subscriptions" do |env|
-      env.params.wont_include "maxResults"
+    mock_connection.get "/v1beta2/projects/#{project}/subscriptions" do |env|
+      env.params.wont_include "pageSize"
       [200, {"Content-Type"=>"application/json"},
        subscriptions_json("fake-topic", 3, "next_page_token")]
     end

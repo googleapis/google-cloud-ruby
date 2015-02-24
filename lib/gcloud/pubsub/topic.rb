@@ -1,3 +1,4 @@
+#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,7 +38,8 @@ module Gcloud
       end
 
       ##
-      # The name of the topic.
+      # The name of the topic in the form of
+      # "/projects/project-identifier/topics/topic-name".
       def name
         @gapi["name"]
       end
@@ -49,7 +51,7 @@ module Gcloud
       #   topic.delete
       def delete
         ensure_connection!
-        resp = connection.delete_topic topic_name
+        resp = connection.delete_topic name
         if resp.success?
           true
         else
@@ -64,7 +66,7 @@ module Gcloud
       # random name for this subscription on the same project as the topic.
       def create_subscription subscription_name = nil
         ensure_connection!
-        resp = connection.create_subscription topic_name, subscription_name
+        resp = connection.create_subscription name, subscription_name
         if resp.success?
           Subscription.from_gapi resp.data, connection
         else
@@ -87,10 +89,11 @@ module Gcloud
       end
 
       ##
-      # Retrieves a list of subscriptions on the topic.
+      # Retrieves a list of subscriptions names on the topic.
+      # The values returned are strings, not Subscription objects.
       def subscriptions options = {}
         ensure_connection!
-        resp = connection.list_subscriptions topic_name, options
+        resp = connection.list_topics_subscriptions name, options
         if resp.success?
           Subscription::List.from_resp resp, connection
         else
@@ -103,9 +106,11 @@ module Gcloud
       # Returns NOT_FOUND if the topic does not exist.
       def publish message
         ensure_connection!
-        resp = connection.publish topic_name, message
+        resp = connection.publish name, message
         if resp.success?
-          true
+          gapi = { "data" => message,
+                   "messageId" => Array(resp.data["messageIds"]).first }
+          Message.from_gapi gapi
         else
           ApiError.from_response(resp)
         end
@@ -126,14 +131,6 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
-      end
-
-      ##
-      # Gets the topic name from the path.
-      # "/topics/project-identifier/topic-name"
-      # will return "topic-name"
-      def topic_name
-        name.split("/").last
       end
     end
   end

@@ -1,3 +1,4 @@
+#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,6 +42,7 @@ module Gcloud
       ##
       # Retrieves topic by name.
       def topic topic_name
+        ensure_connection!
         resp = connection.get_topic topic_name
         if resp.success?
           Topic.from_gapi resp.data, connection
@@ -55,6 +57,7 @@ module Gcloud
       #
       #   topic = project.create_topic "my-topic"
       def create_topic topic_name
+        ensure_connection!
         resp = connection.create_topic topic_name
         if resp.success?
           Topic.from_gapi resp.data, connection
@@ -66,6 +69,7 @@ module Gcloud
       ##
       # Retrieves a list of topics for the given project.
       def topics options = {}
+        ensure_connection!
         resp = connection.list_topics options
         if resp.success?
           Topic::List.from_resp resp, connection
@@ -75,14 +79,35 @@ module Gcloud
       end
 
       ##
+      # Retrieves a subscription by name.
+      def subscription subscription_name
+        ensure_connection!
+        resp = connection.get_subscription subscription_name
+        if resp.success?
+          Subscription.from_gapi resp.data, connection
+        else
+          nil
+        end
+      end
+
+      ##
       # Retrieves a list of subscriptions for the given project.
       def subscriptions options = {}
-        resp = connection.list_subscriptions nil, options
+        ensure_connection!
+        resp = connection.list_subscriptions options
         if resp.success?
           Subscription::List.from_resp resp, connection
         else
           fail ApiError.from_response(resp)
         end
+      end
+
+      protected
+
+      ##
+      # Raise an error unless an active connection is available.
+      def ensure_connection!
+        fail "Must have active connection" unless connection
       end
     end
   end

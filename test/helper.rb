@@ -116,7 +116,10 @@ class MockPubsub < Minitest::Spec
   end
 
   def topics_json num_topics, token = nil
-    data = { "topic" => num_topics.times.map { { "name" => topic_path("topic-#{rand 1000}") } } }
+    topics = num_topics.times.map do
+      JSON.parse(topic_json("topic-#{rand 1000}"))
+    end
+    data = { "topics" => topics }
     data["nextPageToken"] = token unless token.nil?
     data.to_json
   end
@@ -129,7 +132,7 @@ class MockPubsub < Minitest::Spec
     subs = num_subs.times.map do
       JSON.parse(subscription_json(topic_name, "sub-#{rand 1000}"))
     end
-    data = { "subscription" => subs }
+    data = { "subscriptions" => subs }
     data["nextPageToken"] = token unless token.nil?
     data.to_json
   end
@@ -137,56 +140,42 @@ class MockPubsub < Minitest::Spec
   def subscription_json topic_name, sub_name,
                         deadline = 60,
                         endpoint = "http://example.com/callback"
-    sub_name = "random-sub-name" if sub_name.nil?
-    { "topic" => topic_path(topic_name),
-      "name" => subscription_path(sub_name),
+    { "name" => subscription_path(sub_name),
+      "topic" => topic_path(topic_name),
       "pushConfig" => { "pushEndpoint" => endpoint },
-      "ackDeadlineSeconds" => deadline }.to_json
+      "ackDeadlineSeconds" => deadline,
+    }.to_json
   end
 
-  def event_json subscription_name, message
+  def event_json message
     {
-      "ackId" => "ack-id-123456789",
-      "pubsubEvent" => {
-        "subscription" => subscription_path(subscription_name),
-        "message" => {
-          "data" => [message].pack("m"),
-          "label" => [{ "key" => "label-key",
-                        "numValue" => 1234567890 }],
-          "messageId" => "msg-id-1234567890"
-        },
-        "truncated" => false,
-        "deleted" => false
+      "ackId": "ack-id-123456789",
+      "message": {
+        "data": [message].pack("m"),
+        "attributes": {},
+        "messageId": "msg-id-123456789",
       }
     }.to_json
   end
 
-  def project_query
-    "cloud.googleapis.com/project in (#{project_path})"
+  def events_json message
+    {
+      "receivedMessages" => [
+        JSON.parse(event_json(message))
+      ]
+    }.to_json
   end
 
   def project_path
-    "/projects/#{project}"
-  end
-
-  def topic_query topic_name
-    "pubsub.googleapis.com/topic in (#{topic_path topic_name})"
-  end
-
-  def topic_slug topic_name
-    "#{project}/#{topic_name}"
+    "projects/#{project}"
   end
 
   def topic_path topic_name
-    "/topics/#{topic_slug topic_name}"
-  end
-
-  def subscription_slug subscription_name
-    "#{project}/#{subscription_name}"
+    "#{project_path}/topics/#{topic_name}"
   end
 
   def subscription_path subscription_name
-    "/subscriptions/#{subscription_slug subscription_name}"
+    "#{project_path}/subscriptions/#{subscription_name}"
   end
 
   # Register this spec type for when :storage is used.

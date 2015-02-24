@@ -1,3 +1,4 @@
+#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,7 +35,7 @@ module Gcloud
         ##
         # New Topic::List from a response object.
         def self.from_resp resp, conn #:nodoc:
-          topics = Array(resp.data["topic"]).map do |gapi_object|
+          topics = Array(resp.data["topics"]).map do |gapi_object|
             Topic.from_gapi gapi_object, conn
           end
           new topics, resp.data["nextPageToken"]
