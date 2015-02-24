@@ -48,6 +48,8 @@ namespace :test do
     ENV["DATASTORE_KEYFILE"] = keyfile
     ENV["STORAGE_PROJECT"] = project
     ENV["STORAGE_KEYFILE"] = keyfile
+    ENV["PUBSUB_PROJECT"] = project
+    ENV["PUBSUB_KEYFILE"] = keyfile
 
     require "simplecov"
     SimpleCov.start("test_frameworks") { command_name "Minitest" }
@@ -71,6 +73,8 @@ namespace :test do
     ENV["DATASTORE_KEYFILE"] = keyfile
     ENV["STORAGE_PROJECT"] = project
     ENV["STORAGE_KEYFILE"] = keyfile
+    ENV["PUBSUB_PROJECT"] = project
+    ENV["PUBSUB_KEYFILE"] = keyfile
 
     require "simplecov"
     require "coveralls"
@@ -95,6 +99,8 @@ namespace :test do
     ENV["DATASTORE_KEYFILE"] = keyfile
     ENV["STORAGE_PROJECT"] = project
     ENV["STORAGE_KEYFILE"] = keyfile
+    ENV["PUBSUB_PROJECT"] = project
+    ENV["PUBSUB_KEYFILE"] = keyfile
 
     $LOAD_PATH.unshift "lib", "test", "regression"
     Dir.glob("regression/**/test*.rb").each { |file| require_relative "../#{file}"}
@@ -154,6 +160,45 @@ namespace :test do
         require "gcloud/storage"
         puts "Cleaning up existing buckets and files"
         Gcloud.storage.buckets.each { |b| b.files.map(&:delete); b.delete }
+      end
+    end
+
+    desc "Runs the pubsub regression tests."
+    task :pubsub, :project, :keyfile do |t, args|
+      project = args[:project]
+      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["PUBSUB_TEST_PROJECT"]
+      keyfile = args[:keyfile]
+      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["PUBSUB_TEST_KEYFILE"]
+      if project.nil? || keyfile.nil?
+        fail "You must provide a project and keyfile. e.g. rake test:regression:pubsub[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:regression:storage"
+      end
+      # always overwrite when running tests
+      ENV["PUBSUB_PROJECT"] = project
+      ENV["PUBSUB_KEYFILE"] = keyfile
+
+      $LOAD_PATH.unshift "lib", "test", "regression"
+      Dir.glob("regression/pubsub/**/test*.rb").each { |file| require_relative "../#{file}"}
+    end
+
+    namespace :pubsub do
+      desc "Removes *ALL* topics and subscriptions. Use with caution."
+      task :cleanup do |t, args|
+        project = args[:project]
+        project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["STORAGE_TEST_PROJECT"]
+        keyfile = args[:keyfile]
+        keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["STORAGE_TEST_KEYFILE"]
+        if project.nil? || keyfile.nil?
+          fail "You must provide a project and keyfile. e.g. rake test:regression:pubsub:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:regression:pubsub:cleanup"
+        end
+        # always overwrite when running tests
+        ENV["PUBSUB_PROJECT"] = project
+        ENV["PUBSUB_KEYFILE"] = keyfile
+
+        $LOAD_PATH.unshift "lib"
+        require "gcloud/pubsub"
+        puts "Cleaning up existing topics and subscriptions"
+        Gcloud.pubsub.topics.map &:delete
+        Gcloud.pubsub.subscriptions.map &:delete
       end
     end
 
