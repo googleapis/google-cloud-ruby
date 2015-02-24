@@ -15,6 +15,8 @@
 module Gcloud
   module Pubsub
     class Subscription
+      ##
+      # Subscription::List is a special case Array with additional values.
       class List < DelegateClass(::Array)
         ##
         # If not empty, indicates that there are more subscriptions
