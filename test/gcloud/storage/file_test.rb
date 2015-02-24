@@ -163,11 +163,23 @@ describe Gcloud::Storage::File, :mock_storage do
 
   it "can copy itself in the same bucket" do
     mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/#{bucket.name}/o/new-file.ext" do |env|
+      env.params.wont_include "sourceGeneration"
+      env.params.wont_include "predefinedAcl"
       [200, {"Content-Type"=>"application/json"},
        file.gapi.to_json]
     end
 
     file.copy "new-file.ext"
+  end
+
+  it "can copy itself in the same bucket with generation" do
+    mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/#{bucket.name}/o/new-file.ext" do |env|
+      env.params["sourceGeneration"].must_equal "123"
+      [200, {"Content-Type"=>"application/json"},
+       file.gapi.to_json]
+    end
+
+    file.copy "new-file.ext", generation: 123
   end
 
   it "can copy itself in the same bucket with predefined ACL" do
@@ -192,11 +204,23 @@ describe Gcloud::Storage::File, :mock_storage do
 
   it "can copy itself to a different bucket" do
     mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/new-bucket/o/new-file.ext" do |env|
+      env.params.wont_include "sourceGeneration"
+      env.params.wont_include "predefinedAcl"
       [200, {"Content-Type"=>"application/json"},
        file.gapi.to_json]
     end
 
     file.copy "new-bucket", "new-file.ext"
+  end
+
+  it "can copy itself to a different bucket with generation" do
+    mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/new-bucket/o/new-file.ext" do |env|
+      env.params["sourceGeneration"].must_equal "123"
+      [200, {"Content-Type"=>"application/json"},
+       file.gapi.to_json]
+    end
+
+    file.copy "new-bucket", "new-file.ext", generation: 123
   end
 
   it "can copy itself to a different bucket with predefined ACL" do
