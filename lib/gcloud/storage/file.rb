@@ -246,6 +246,9 @@ module Gcloud
       #     and project team members get access according to their roles.
       #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
       #     access, and allUsers get READER access.
+      # <code>options[:generation]</code>::
+      #   A specific revision of the source object. The latest version is used
+      #   when this value is not provided. (+Integer+)
       #
       # === Returns
       #
@@ -277,6 +280,19 @@ module Gcloud
       #   file = bucket.file "path/to/my-file.ext"
       #   file.copy "new-destination-bucket",
       #             "path/to/destination/file.ext"
+      #
+      # The file can also be copied by specifying a generation:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #
+      #   bucket = storage.bucket "my-bucket"
+      #
+      #   file = bucket.file "path/to/my-file.ext"
+      #   file.copy "copy/of/previous/generation/file.ext",
+      #             generation: 123456
       #
       def copy dest_bucket_or_path, dest_path = nil, options = {}
         ensure_connection!
