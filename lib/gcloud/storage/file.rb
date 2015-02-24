@@ -278,6 +278,10 @@ module Gcloud
       #   file.copy "new-destination-bucket",
       #             "path/to/destination/file.ext"
       #
+      # The file can also be copied by specifying a generation:
+      #
+      #   file.copy "copy/of/previous/generation/file.ext",
+      #             generation: 123456
       def copy dest_bucket_or_path, dest_path = nil, options = {}
         ensure_connection!
         dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
