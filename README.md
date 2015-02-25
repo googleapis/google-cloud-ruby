@@ -108,3 +108,8 @@ See [CONTRIBUTING](CONTRIBUTING.md) for more information on how to get started.
 
 This library is licensed under Apache 2.0. Full license text is
 available in [LICENSE](LICENSE).
+
+## Support
+
+Please [report bugs at the project on Github](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues).
+Don't hesitate to [ask questions](http://stackoverflow.com/questions/tagged/gcloud-ruby) about the client or APIs on [StackOverflow](http://stackoverflow.com).
