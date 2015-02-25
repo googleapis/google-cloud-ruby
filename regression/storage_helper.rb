@@ -45,7 +45,7 @@ module Regression
     ##
     # Setup project based on available ENV variables
     def setup
-      @storage = Gcloud::Storage.project
+      @storage = Gcloud.storage
 
       refute_nil @storage, "You do not have an active storage to run the tests."
 

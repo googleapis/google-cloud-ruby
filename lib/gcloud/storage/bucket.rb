@@ -102,7 +102,7 @@ module Gcloud
       ##
       # Retrieves a list of files matching the criteria.
       #
-      #   storage = Gcloud::Storage.project
+      #   storage = Gcloud.storage
       #   bucket = storage.find_bucket "my-bucket"
       #   files = bucket.files
       #   files.each do |file|
@@ -123,7 +123,7 @@ module Gcloud
       ##
       # Retrieves a file matching the path.
       #
-      #   storage = Gcloud::Storage.project
+      #   storage = Gcloud.storage
       #   bucket = storage.find_bucket "my-bucket"
       #   file = bucket.find_file "path/to/my-file.ext"
       #   puts file.name
@@ -143,13 +143,13 @@ module Gcloud
       # Create a new Gcloud::Storeage::File object by providing a
       # File object to upload and the path to store it with.
       #
-      #   storage = Gcloud::Storage.project
+      #   storage = Gcloud.storage
       #   bucket = storage.find_bucket "my-bucket"
       #   bucket.create_file "path/to/local.file.ext"
       #
       # Additionally, a destination path can be specified.
       #
-      #   storage = Gcloud::Storage.project
+      #   storage = Gcloud.storage
       #   bucket = storage.find_bucket "my-bucket"
       #   bucket.create_file "path/to/local.file.ext",
       #                      "destination/path/file.ext"

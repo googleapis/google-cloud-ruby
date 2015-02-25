@@ -27,12 +27,12 @@ module Gcloud
     # Google Storage. Gcloud::Storage::Bucket objects are created,
     # read, updated, and deleted by Gcloud::Storage::Project.
     #
-    #   storage = Gcloud::Storage.project "my-todo-project",
-    #                                     "/path/to/keyfile.json"
+    #   storage = Gcloud.storage "my-todo-project",
+    #                            "/path/to/keyfile.json"
     #   bucket = storage.find_bucket "my-bucket"
     #   file = bucket.find_file "path/to/my-file.ext"
     #
-    # See Gcloud::Storage.project
+    # See Gcloud.storage
     class Project
       ##
       # The Connection object.
@@ -41,7 +41,7 @@ module Gcloud
       ##
       # Creates a new Project instance.
       #
-      # See Gcloud::Storage.project
+      # See Gcloud.storage
       def initialize project, credentials #:nodoc:
         @connection = Connection.new project, credentials
       end
@@ -55,7 +55,7 @@ module Gcloud
       ##
       # Retrieves a list of buckets for the given project.
       #
-      #   storage = Gcloud::Storage.project
+      #   storage = Gcloud.storage
       #   buckets = storage.buckets
       #   buckets.each do |bucket|
       #     puts bucket.name
@@ -74,7 +74,7 @@ module Gcloud
       ##
       # Retrieves bucket by name.
       #
-      #   storage = Gcloud::Storage.project
+      #   storage = Gcloud.storage
       #   bucket = storage.find_bucket "my-bucket"
       #   puts bucket.name
       #
