@@ -20,59 +20,63 @@ require "gcloud/datastore/credentials"
 
 module Gcloud
   ##
+  # Create a new Gcloud::Datastore::Dataset.
+  #
+  #   entity = Gcloud::Datastore::Entity.new
+  #   entity.key = Gcloud::Datastore::Key.new "Task"
+  #   entity["description"] = "Get started with Google Cloud"
+  #   entity["completed"] = false
+  #
+  #   dataset = Gcloud.datastore "my-todo-project",
+  #                              "/path/to/keyfile.json"
+  #   dataset.save entity
+  #
+  # @param dataset_id [String] the dataset identifier for the Datastore
+  # you are connecting to.
+  # @param keyfile [String] the path to the keyfile you downloaded from
+  # Google Cloud. The file must readable.
+  # @return [Gcloud::Datastore::Dataset] new dataset.
+  #
+  # See Gcloud::Datastore::Dataset
+  def self.datastore project = ENV["DATASTORE_PROJECT"],
+                     keyfile = ENV["DATASTORE_KEYFILE"]
+    credentials = Gcloud::Datastore::Credentials.new keyfile
+    Gcloud::Datastore::Dataset.new project, credentials
+  end
+
+  ##
+  # Special dataset for connecting to a Local Development Server.
+  #
+  #   dataset = Gcloud.datastore "my-todo-project",
+  #                              "/path/to/keyfile.json"
+  #   entity = dataset.find "Task", "start"
+  #
+  #   devserver = Gcloud.devserver "my-todo-project"
+  #   devserver.save entity
+  #
+  # The URL of the devserver should be set in the DATASTORE_HOST
+  # environment variable.
+  #
+  # See https://cloud.google.com/datastore/docs/tools/devserver
+  def self.devserver project = ENV["DEVSERVER_PROJECT"],
+                     host    = ENV["DEVSERVER_HOST"]
+    credentials = Gcloud::Datastore::Credentials::Empty.new
+    devserver = Gcloud::Datastore::Dataset.new project, credentials
+    devserver.connection.http_host = (host || "http://localhost:8080")
+    devserver
+  end
+
+  ##
   # Google Cloud Datastore
   #
-  #   dataset = Gcloud::Datastore.dataset "my-todo-project",
-  #                                       "/path/to/keyfile.json"
+  #   dataset = Gcloud.datastore "my-todo-project",
+  #                              "/path/to/keyfile.json"
   #   entity = dataset.find "Task", "start"
   #   entity["completed"] = true
   #   dataset.save entity
   #
+  #
+  # See Gcloud::Datastore::Dataset
   module Datastore
-    ##
-    # Create a new Dataset.
-    #
-    #   entity = Gcloud::Datastore::Entity.new
-    #   entity.key = Gcloud::Datastore::Key.new "Task"
-    #   entity["description"] = "Get started with Google Cloud"
-    #   entity["completed"] = false
-    #
-    #   dataset = Gcloud::Datastore.dataset "my-todo-project",
-    #                                       "/path/to/keyfile.json"
-    #   dataset.save entity
-    #
-    # @param dataset_id [String] the dataset identifier for the Datastore
-    # you are connecting to.
-    # @param keyfile [String] the path to the keyfile you downloaded from
-    # Google Cloud. The file must readable.
-    # @return [Gcloud::Datastore::Connection] new connection
-    #
-    def self.dataset project = ENV["DATASTORE_PROJECT"],
-                     keyfile = ENV["DATASTORE_KEYFILE"]
-      credentials = Gcloud::Datastore::Credentials.new keyfile
-      Gcloud::Datastore::Dataset.new project, credentials
-    end
-
-    ##
-    # Special dataset for connecting to a Local Development Server.
-    #
-    #   dataset = Gcloud::Datastore.dataset "my-todo-project",
-    #                                       "/path/to/keyfile.json"
-    #   entity = dataset.find "Task", "start"
-    #
-    #   devserver = Gcloud::Datastore.devserver "my-todo-project"
-    #   devserver.save entity
-    #
-    # The URL of the devserver should be set in the DATASTORE_HOST
-    # environment variable.
-    #
-    # See https://cloud.google.com/datastore/docs/tools/devserver
-    def self.devserver project = ENV["DEVSERVER_PROJECT"],
-                       host    = ENV["DEVSERVER_HOST"]
-      credentials = Gcloud::Datastore::Credentials::Empty.new
-      devserver = Gcloud::Datastore::Dataset.new project, credentials
-      devserver.connection.http_host = (host || "http://localhost:8080")
-      devserver
-    end
   end
 end
