@@ -36,6 +36,7 @@ module Gcloud
                    :scope, :issuer, :signing_key
 
     def initialize keyfile, options = {}
+      keyfile ||= sdk_default_creds
       if keyfile.nil?
         fail "You must provide a keyfile to connect with."
       elsif !::File.exist?(keyfile)
@@ -49,6 +50,18 @@ module Gcloud
       # Keyfile options override everything
       options = options.merge JSON.parse(::File.read(keyfile))
       init_signet_client! options
+    end
+
+    ##
+    # The filepath of the default application credentials used by
+    # the gcloud SDK.
+    #
+    # This file is created when running <tt>gcloud auth login</tt>
+    def self.sdk_default_creds #:nodoc:
+      # This method will likely be moved once we gain better
+      # support for running in a GCE environment.
+      sdk_creds = "~/.config/gcloud/application_default_credentials.json"
+      File.expand_path sdk_creds
     end
 
     protected
