@@ -169,7 +169,7 @@ module Gcloud
         ensure_connection!
         # TODO: Raise if file doesn't exist
         # ensure_file_exists!
-        fail unless ::File.exist? file
+        fail unless ::File.file? file
 
         options[:acl] = File::Acl.predefined_rule_for options[:acl]
 
