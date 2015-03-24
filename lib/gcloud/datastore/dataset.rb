@@ -30,22 +30,22 @@ module Gcloud
     # Google Datastore. Gcloud::Datastore::Entity objects are created,
     # read, updated, and deleted by Gcloud::Datastore::Dataset.
     #
-    #   dataset = Gcloud::Datastore.dataset "my-todo-project",
-    #                                       "/path/to/keyfile.json"
+    #   dataset = Gcloud.datastore "my-todo-project",
+    #                              "/path/to/keyfile.json"
     #
     #   query = Gcloud::Datastore::Query.new.kind("Task").
     #     where("completed", "=", true)
     #
     #   tasks = dataset.run query
     #
-    # See Gcloud::Datastore.dataset
+    # See Gcloud.datastore
     class Dataset
       attr_accessor :connection #:nodoc:
 
       ##
       # Creates a new Dataset instance.
       #
-      # See Gcloud::Datastore.dataset
+      # See Gcloud.datastore
       def initialize project, credentials #:nodoc:
         @connection = Connection.new project, credentials
       end
@@ -59,7 +59,7 @@ module Gcloud
       ##
       # Generate IDs for a Key before creating an entity.
       #
-      #   dataset = Gcloud::Datastore.dataset
+      #   dataset = Gcloud.datastore
       #   empty_key = Gcloud::Datastore::Key.new "Task"
       #   task_keys = dataset.allocate_ids empty_key, 5
       def allocate_ids incomplete_key, count = 1
@@ -77,7 +77,7 @@ module Gcloud
       ##
       # Persist entities to the Datastore.
       #
-      #   dataset = Gcloud::Datastore.dataset
+      #   dataset = Gcloud.datastore
       #   dataset.save task1, task2
       def save *entities
         mutation = Proto.new_mutation
@@ -91,11 +91,11 @@ module Gcloud
       # Retrieve an entity by providing key information.
       # Either a Key object or kind and id/name can be provided.
       #
-      #   dataset = Gcloud::Datastore.dataset
+      #   dataset = Gcloud.datastore
       #   key = Gcloud::Datastore::Key.new "Task", 123456
       #   task = dataset.find key
       #
-      #   dataset = Gcloud::Datastore.dataset
+      #   dataset = Gcloud.datastore
       #   task = dataset.find "Task", 123456
       def find key_or_kind, id_or_name = nil
         key = key_or_kind
@@ -107,7 +107,7 @@ module Gcloud
       ##
       # Retrieve the entities for the provided keys.
       #
-      #   dataset = Gcloud::Datastore.dataset
+      #   dataset = Gcloud.datastore
       #   key1 = Gcloud::Datastore::Key.new "Task", 123456
       #   key2 = Gcloud::Datastore::Key.new "Task", 987654
       #   tasks = dataset.find_all key1, key2
@@ -127,7 +127,7 @@ module Gcloud
       # Remove entities from the Datastore.
       # Accepts Entity and Key objects.
       #
-      #   dataset = Gcloud::Datastore.dataset
+      #   dataset = Gcloud.datastore
       #   dataset.delete task1, task2
       def delete *entities_or_keys
         keys = entities_or_keys.map do |e_or_k|

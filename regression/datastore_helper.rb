@@ -22,9 +22,9 @@ module Regression
     # Setup project based on available ENV variables
     def setup
       if ENV["DEVSERVER_PROJECT"]
-        @dataset = Gcloud::Datastore.devserver
+        @dataset = Gcloud.devserver
       else
-        @dataset = Gcloud::Datastore.dataset
+        @dataset = Gcloud.datastore
       end
 
       refute_nil @dataset, "You do not have an active dataset to run the tests."

@@ -15,36 +15,40 @@
 require "gcloud"
 require "gcloud/storage/project"
 
+##
+# Google Cloud Storage
 module Gcloud
+  ##
+  # Create a new Storage project.
+  #
+  #   storage = Gcloud.storage "my-todo-project",
+  #                            "/path/to/keyfile.json"
+  #   bucket = storage.find_bucket "my-bucket"
+  #   file = bucket.find_file "path/to/my-file.ext"
+  #
+  # @param project [String] the project identifier for the Storage
+  # account you are connecting to.
+  # @param keyfile [String] the path to the keyfile you downloaded from
+  # Google Cloud. The file must readable.
+  # @return [Gcloud::Storage::Project] storage project.
+  #
+  # See Gcloud::Storage::Project
+  def self.storage project = ENV["STORAGE_PROJECT"],
+                   keyfile = ENV["STORAGE_KEYFILE"]
+    credentials = Gcloud::Storage::Credentials.new keyfile
+    Gcloud::Storage::Project.new project, credentials
+  end
+
   ##
   # Google Cloud Storage
   #
-  #   storage = Gcloud::Storage.project "my-todo-project",
-  #                                     "/path/to/keyfile.json"
+  #   storage = Gcloud.storage "my-todo-project",
+  #                            "/path/to/keyfile.json"
   #   bucket = storage.find_bucket "my-bucket"
   #   file = bucket.find_file "path/to/my-file.ext"
+  #
+  # See Gcloud::Storage::Project
   module Storage
-    ##
-    # Create a new Storage project.
-    #
-    #   storage = Gcloud::Storage.project "my-todo-project",
-    #                                     "/path/to/keyfile.json"
-    #   bucket = storage.find_bucket "my-bucket"
-    #   file = bucket.find_file "path/to/my-file.ext"
-    #
-    # @param project [String] the project identifier for the Storage
-    # account you are connecting to.
-    # @param keyfile [String] the path to the keyfile you downloaded from
-    # Google Cloud. The file must readable.
-    # @return [Gcloud::Storage::Connection] new connection
-    #
-    # See Gcloud::Storage::Project
-    def self.project project = ENV["STORAGE_PROJECT"],
-                     keyfile = ENV["STORAGE_KEYFILE"]
-      credentials = Gcloud::Storage::Credentials.new keyfile
-      Gcloud::Storage::Project.new project, credentials
-    end
-
     ##
     # Retrieve resumable threshold.
     # If uploads are larger in size than this value then
