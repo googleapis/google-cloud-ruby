@@ -26,7 +26,7 @@ describe Gcloud::Datastore::Credentials do
     client_mock = Minitest::Mock.new
     client_mock.expect :fetch_access_token!, true
     Signet::OAuth2::Client.stub :new, client_mock do
-      File.stub :exist?, true do
+      File.stub :file?, true do
         File.stub :read, keyfile_json do
           credz = Gcloud::Datastore::Credentials.new "fake.json"
         end

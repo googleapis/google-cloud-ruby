@@ -34,8 +34,12 @@ module Gcloud
   #
   # See Gcloud::Storage::Project
   def self.storage project = ENV["STORAGE_PROJECT"],
-                   keyfile = ENV["STORAGE_KEYFILE"]
-    credentials = Gcloud::Storage::Credentials.new keyfile
+                   keyfile = nil
+    if keyfile.nil?
+      credentials = Gcloud::Storage::Credentials.default
+    else
+      credentials = Gcloud::Storage::Credentials.new keyfile
+    end
     Gcloud::Storage::Project.new project, credentials
   end
 

@@ -15,6 +15,7 @@
 require "json"
 require "signet/oauth_2/client"
 require "forwardable"
+require "googleauth"
 
 module Gcloud
   ##
@@ -25,6 +26,7 @@ module Gcloud
     TOKEN_CREDENTIAL_URI = "https://accounts.google.com/o/oauth2/token"
     AUDIENCE = "https://accounts.google.com/o/oauth2/token"
     SCOPE = []
+    ENV_VARS = ["GOOGLE_CLOUD_KEYFILE"]
 
     attr_accessor :client
 
@@ -36,22 +38,58 @@ module Gcloud
                    :scope, :issuer, :signing_key
 
     def initialize keyfile, options = {}
-      if keyfile.nil?
-        fail "You must provide a keyfile to connect with."
-      elsif !::File.exist?(keyfile)
-        fail "The keyfile '#{keyfile}' is not a valid file."
+      if keyfile.is_a? Signet::OAuth2::Client
+        @client = keyfile
+      else
+        @client = init_client keyfile, options
       end
+      @client.fetch_access_token!
+    end
 
-      # Turn keys to strings
-      options = stringify_hash_keys options
-      # Constructor options override default options
-      options = default_options.merge options
-      # Keyfile options override everything
-      options = options.merge JSON.parse(::File.read(keyfile))
-      init_signet_client! options
+    ##
+    # Returns the default credentials.
+    #
+    def self.default
+      self::ENV_VARS.each do |env_var|
+        keyfile = ENV[env_var].to_s
+        return new keyfile if ::File.file? keyfile
+      end
+      return new sdk_default_creds if ::File.file? sdk_default_creds
+      client = Google::Auth.get_application_default self::SCOPE
+      new client
+    end
+
+    ##
+    # The filepath of the default application credentials used by
+    # the gcloud SDK.
+    #
+    # This file is created when running <tt>gcloud auth login</tt>
+    def self.sdk_default_creds #:nodoc:
+      # This method will likely be moved once we gain better
+      # support for running in a GCE environment.
+      sdk_creds = "~/.config/gcloud/application_default_credentials.json"
+      File.expand_path sdk_creds
     end
 
     protected
+
+    ##
+    # Initializes the Signet client.
+    def init_client keyfile, options
+      verify_keyfile! keyfile
+      client_opts = client_options keyfile, options
+      Signet::OAuth2::Client.new client_opts
+    end
+
+    ##
+    # Initializes the Signet client.
+    def verify_keyfile! keyfile
+      if keyfile.nil?
+        fail "You must provide a keyfile to connect with."
+      elsif !::File.file?(keyfile)
+        fail "The keyfile '#{keyfile}' is not a valid file."
+      end
+    end
 
     ##
     # returns a new Hash with string keys instead of symbol keys.
@@ -67,19 +105,20 @@ module Gcloud
         "scope"                => self.class::SCOPE }
     end
 
-    ##
-    # Initializes the Signet client.
-    def init_signet_client! options
-      client_opts = {
-        token_credential_uri: options["token_credential_uri"],
+    def client_options keyfile, options
+      # Turn keys to strings
+      options = stringify_hash_keys options
+      # Constructor options override default options
+      options = default_options.merge options
+      # Keyfile options override everything
+      options = options.merge JSON.parse(::File.read(keyfile))
+
+      # client options for initializing signet client
+      { token_credential_uri: options["token_credential_uri"],
         audience: options["audience"],
         scope: options["scope"],
         issuer: options["client_email"],
-        signing_key: OpenSSL::PKey::RSA.new(options["private_key"])
-      }
-
-      @client = Signet::OAuth2::Client.new client_opts
-      @client.fetch_access_token!
+        signing_key: OpenSSL::PKey::RSA.new(options["private_key"]) }
     end
   end
 end
