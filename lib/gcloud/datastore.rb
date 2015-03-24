@@ -18,6 +18,8 @@ require "gcloud/datastore/dataset"
 require "gcloud/datastore/transaction"
 require "gcloud/datastore/credentials"
 
+##
+# Google Cloud Datastore
 module Gcloud
   ##
   # Create a new Gcloud::Datastore::Dataset.
