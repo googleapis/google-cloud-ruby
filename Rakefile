@@ -24,9 +24,7 @@ Hoe.spec "gcloud" do
   license "Apache-2.0"
 
   dependency "beefcake", "~> 1.0"
-  dependency "google-api-client", "~> 0.7"
-  # TODO: Remove retriable when the dependency in google-api-client is specified properly
-  dependency "retriable", "~> 1.4"
+  dependency "google-api-client", "~> 0.8.3"
   dependency "mime-types", "~> 2.4"
   dependency "digest-crc", "~> 0.4"
   dependency "rubocop", "~> 0.27", :dev
