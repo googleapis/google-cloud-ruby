@@ -20,6 +20,7 @@ module Gcloud
     # Represents the Oauth2 signing logic for Storage.
     class Credentials < Gcloud::Credentials #:nodoc:
       SCOPE = ["https://www.googleapis.com/auth/devstorage.full_control"]
+      ENV_VARS = ["STORAGE_KEYFILE"]
     end
   end
 end

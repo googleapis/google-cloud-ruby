@@ -25,6 +25,7 @@ module Gcloud
     TOKEN_CREDENTIAL_URI = "https://accounts.google.com/o/oauth2/token"
     AUDIENCE = "https://accounts.google.com/o/oauth2/token"
     SCOPE = []
+    ENV_VARS = ["GOOGLE_CLOUD_KEYFILE"]
 
     attr_accessor :client
 
@@ -36,7 +37,6 @@ module Gcloud
                    :scope, :issuer, :signing_key
 
     def initialize keyfile, options = {}
-      keyfile ||= sdk_default_creds
       if keyfile.nil?
         fail "You must provide a keyfile to connect with."
       elsif !::File.file?(keyfile)
@@ -50,6 +50,18 @@ module Gcloud
       # Keyfile options override everything
       options = options.merge JSON.parse(::File.read(keyfile))
       init_signet_client! options
+    end
+
+    ##
+    # Returns the default credentials.
+    #
+    def self.default
+      self::ENV_VARS.each do |env_var|
+        keyfile = ENV[env_var].to_s
+        return new keyfile if ::File.file? keyfile
+      end
+      return new sdk_default_creds if ::File.file? sdk_default_creds
+      nil
     end
 
     ##
