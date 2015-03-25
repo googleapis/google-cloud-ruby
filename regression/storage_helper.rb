@@ -25,6 +25,7 @@ Faraday.default_adapter = :httpclient
 require "gcloud/backoff"
 
 Gcloud::Backoff.retries = 10
+Gcloud::Backoff.backoff = ->(retries) { puts "Backoff #{retries}"; sleep retries.to_i }
 
 # Create shared storage object so we don't create new for each test
 $storage = Gcloud.storage
