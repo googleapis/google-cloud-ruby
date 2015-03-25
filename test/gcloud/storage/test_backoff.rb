@@ -103,13 +103,8 @@ describe "Gcloud Storage Backoff", :mock_storage do
   def assert_backoff_sleep *args
     mock = Minitest::Mock.new
     args.each { |intv| mock.expect :sleep, nil, [intv] }
-    backoff = Gcloud::Backoff.new retries: 5
-    backoff.instance_variable_set :@sleep_mock, mock
-    def backoff.sleep num
-      if num > 0
-        @sleep_mock.sleep num
-      end
-    end
+    callback = ->(retries) { mock.sleep retries }
+    backoff = Gcloud::Backoff.new retries: 5, backoff: callback
 
     Gcloud::Backoff.stub :new, backoff do
       yield

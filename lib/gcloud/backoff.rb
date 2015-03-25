@@ -45,11 +45,20 @@ module Gcloud
       # The default values are rateLimitExceeded and
       # userRateLimitExceeded.
       attr_accessor :reasons
+
+      ##
+      # The code to run when a backoff is handled.
+      # This must be a Proc and must take the number of
+      # retries as an argument.
+      #
+      # Note: This method is undocumented and may change.
+      attr_accessor :backoff # :nodoc:
     end
     # Set the default values
     self.retries = 3
     self.http_codes = [500, 503]
     self.reasons = %w(rateLimitExceeded userRateLimitExceeded)
+    self.backoff = ->(retries) { sleep retries.to_i }
 
     ##
     # Creates a new Backoff object to catch common errors when calling
@@ -64,16 +73,17 @@ module Gcloud
       @max_retries  = (options[:retries]    || Backoff.retries).to_i
       @http_codes   = (options[:http_codes] || Backoff.http_codes).to_a
       @reasons      = (options[:reasons]    || Backoff.reasons).to_a
+      @backoff      =  options[:backoff]    || Backoff.backoff
     end
 
     def execute #:nodoc:
       current_retries = 0
       loop do
-        sleep current_retries # Incremental backoff
         result = yield # Expecting Google::APIClient::Result
         return result if result.success?
         break result unless retry? result, current_retries
         current_retries += 1
+        @backoff.call current_retries
       end
     end
 
