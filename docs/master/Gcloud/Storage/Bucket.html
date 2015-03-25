@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Gcloud::Storage::Bucket - gcloud-0.0.1</title>
+<title>class Gcloud::Storage::Bucket - gcloud-0.0.1 Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -232,14 +232,14 @@ href="Project.html">Project</a> and has many Files.</p>
           <p>Create a new Gcloud::Storeage::File object by providing a <a
 href="File.html">File</a> object to upload and the path to store it with.</p>
 
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">create_file</span> <span class="ruby-string">&quot;path/to/local.file.ext&quot;</span>
 </pre>
 
 <p>Additionally, a destination path can be specified.</p>
 
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">create_file</span> <span class="ruby-string">&quot;path/to/local.file.ext&quot;</span>,
                    <span class="ruby-string">&quot;destination/path/file.ext&quot;</span>
@@ -266,7 +266,7 @@ nearest acceptible value.</p>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-comment"># TODO: Raise if file doesn&#39;t exist</span>
   <span class="ruby-comment"># ensure_file_exists!</span>
-  <span class="ruby-identifier">fail</span> <span class="ruby-keyword">unless</span> <span class="ruby-operator">::</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">file</span>
+  <span class="ruby-identifier">fail</span> <span class="ruby-keyword">unless</span> <span class="ruby-operator">::</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span> <span class="ruby-identifier">file</span>
 
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>] = <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">predefined_rule_for</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>]
 
@@ -416,7 +416,7 @@ or specify the wanted behavior in the call:</p>
           
           <p>Retrieves a list of files matching the criteria.</p>
 
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">files</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">files</span>
 <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
@@ -465,7 +465,7 @@ or specify the wanted behavior in the call:</p>
           
           <p>Retrieves a file matching the path.</p>
 
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">name</span>

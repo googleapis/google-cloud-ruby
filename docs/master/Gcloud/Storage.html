@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Gcloud::Storage - gcloud-0.0.1</title>
+<title>module Gcloud::Storage - gcloud-0.0.1 Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -63,8 +63,6 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-project">::project</a>
-    
     <li ><a href="#method-c-resumable_threshold">::resumable_threshold</a>
     
     <li ><a href="#method-c-resumable_threshold-3D">::resumable_threshold=</a>
@@ -84,11 +82,13 @@
     
 <p>Google Cloud <a href="Storage.html">Storage</a></p>
 
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
-                                  <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
+                         <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 </pre>
+
+<p>See <a href="Storage/Project.html">Gcloud::Storage::Project</a></p>
 
   </section>
 
@@ -109,55 +109,6 @@
        <header>
          <h3>Public Class Methods</h3>
        </header>
-
-    
-      <div id="method-c-project" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">project</span><span
-            class="method-args">(project = ENV["STORAGE_PROJECT"], keyfile = ENV["STORAGE_KEYFILE"])</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Create a new <a href="Storage.html">Storage</a> project.</p>
-
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
-                                  <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
-</pre>
-
-<p>@param project [String] the project identifier for the <a
-href="Storage.html">Storage</a> account you are connecting to. @param
-keyfile [String] the path to the keyfile you downloaded from Google Cloud.
-The file must readable. @return [Gcloud::Storage::Connection] new
-connection</p>
-
-<p>See <a href="Storage/Project.html">Gcloud::Storage::Project</a></p>
-          
-          
-
-          
-          <div class="method-source-code" id="project-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage.rb, line 42</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">project</span> <span class="ruby-identifier">project</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;STORAGE_PROJECT&quot;</span>],
-                 <span class="ruby-identifier">keyfile</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;STORAGE_KEYFILE&quot;</span>]
-  <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>
-  <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
 
     
       <div id="method-c-resumable_threshold" class="method-detail ">
@@ -182,7 +133,7 @@ then resumable uploads are used.</p>
 
           
           <div class="method-source-code" id="resumable_threshold-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage.rb, line 54</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resumable_threshold</span>
   <span class="ruby-identifier">@@resumable_threshold</span>
 <span class="ruby-keyword">end</span></pre>
@@ -215,7 +166,7 @@ then resumable uploads are used.</p>
 
           
           <div class="method-source-code" id="resumable_threshold-3D-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage.rb, line 60</span>
+            <pre><span class="ruby-comment"># File lib/gcloud/storage.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resumable_threshold=</span> <span class="ruby-identifier">new_resumable_threshold</span>
   <span class="ruby-comment"># rubocop:disable Style/ClassVars</span>
   <span class="ruby-comment"># Disabled rubocop because this is the best option.</span>

@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>README - gcloud-0.0.1</title>
+<title>README - gcloud-0.0.1 Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -65,6 +65,7 @@
     <li><a href="#label-Versioning">Versioning</a>
     <li><a href="#label-Contributing">Contributing</a>
     <li><a href="#label-License">License</a>
+    <li><a href="#label-Support">Support</a>
   </ul>
 </div>
 
@@ -177,8 +178,8 @@ href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storag
 Datastore API documentation</a> to learn how to interact with the Cloud
 Datastore using this library.</p>
 
-<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my-todo-project-id&quot;</span>,
-                                    <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span> <span class="ruby-string">&quot;my-todo-project-id&quot;</span>,
+                           <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
 
 <span class="ruby-comment"># Create a new task to demo datastore</span>
 <span class="ruby-identifier">demo_task</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
@@ -208,8 +209,8 @@ href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storag
 Storage API documentation</a> to learn how to connect to Cloud Storage
 using this library.</p>
 
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span> <span class="ruby-string">&quot;my-todo-project-id&quot;</span>,
-                                  <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-string">&quot;my-todo-project-id&quot;</span>,
+                         <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;task-attachments&quot;</span>
 
@@ -243,7 +244,17 @@ to get started.</p>
 
 <h2 id="label-License">License<span><a href="#label-License">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>Apache 2.0 - See <a href="LICENSE">LICENSE</a> for more information.</p>
+<p>This library is licensed under Apache 2.0. Full license text is available
+in <a href="LICENSE">LICENSE</a>.</p>
+
+<h2 id="label-Support">Support<span><a href="#label-Support">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Please <a
+href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues">report
+bugs at the project on Github</a>. Don&#39;t hesitate to <a
+href="http://stackoverflow.com/questions/tagged/gcloud-ruby">ask
+questions</a> about the client or APIs on <a
+href="http://stackoverflow.com">StackOverflow</a>.</p>
 </main>
 
 

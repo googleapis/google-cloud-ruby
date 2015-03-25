@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Gcloud::Datastore - gcloud-0.0.1</title>
+<title>module Gcloud::Datastore - gcloud-0.0.1 Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -57,19 +57,7 @@
     
     
     
-    <!-- Method Quickref -->
-<div id="method-list-section" class="nav-section">
-  <h3>Methods</h3>
-
-  <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-dataset">::dataset</a>
-    
-    <li ><a href="#method-c-devserver">::devserver</a>
-    
-  </ul>
-</div>
-
   </div>
 </nav>
 
@@ -82,12 +70,14 @@
     
 <p>Google Cloud <a href="Datastore.html">Datastore</a></p>
 
-<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
-                                    <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
+                           <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
 <span class="ruby-identifier">entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-string">&quot;start&quot;</span>
 <span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;completed&quot;</span>] = <span class="ruby-keyword">true</span>
 <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">entity</span>
 </pre>
+
+<p>See <a href="Datastore/Dataset.html">Gcloud::Datastore::Dataset</a></p>
 
   </section>
 
@@ -104,115 +94,6 @@
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Class Methods</h3>
-       </header>
-
-    
-      <div id="method-c-dataset" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">dataset</span><span
-            class="method-args">(project = ENV["DATASTORE_PROJECT"], keyfile = ENV["DATASTORE_KEYFILE"])</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Create a new <a href="Datastore/Dataset.html">Dataset</a>.</p>
-
-<pre class="ruby"><span class="ruby-identifier">entity</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>
-<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;description&quot;</span>] = <span class="ruby-string">&quot;Get started with Google Cloud&quot;</span>
-<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;completed&quot;</span>] = <span class="ruby-keyword">false</span>
-
-<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
-                                    <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
-<span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">entity</span>
-</pre>
-
-<p>@param dataset_id [String] the dataset identifier for the <a
-href="Datastore.html">Datastore</a> you are connecting to. @param keyfile
-[String] the path to the keyfile you downloaded from Google Cloud. The file
-must readable. @return [Gcloud::Datastore::Connection] new connection</p>
-          
-          
-
-          
-          <div class="method-source-code" id="dataset-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore.rb, line 50</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-identifier">project</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;DATASTORE_PROJECT&quot;</span>],
-                 <span class="ruby-identifier">keyfile</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;DATASTORE_KEYFILE&quot;</span>]
-  <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>
-  <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Dataset</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-c-devserver" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">devserver</span><span
-            class="method-args">(project = ENV["DEVSERVER_PROJECT"], host = ENV["DEVSERVER_HOST"])</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Special dataset for connecting to a Local Development Server.</p>
-
-<pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
-                                    <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
-<span class="ruby-identifier">entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-string">&quot;start&quot;</span>
-
-<span class="ruby-identifier">devserver</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">devserver</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>
-<span class="ruby-identifier">devserver</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">entity</span>
-</pre>
-
-<p>The URL of the devserver should be set in the DATASTORE_HOST environment
-variable.</p>
-
-<p>See <a
-href="https://cloud.google.com/datastore/docs/tools/devserver">cloud.google.com/datastore/docs/tools/devserver</a></p>
-          
-          
-
-          
-          <div class="method-source-code" id="devserver-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore.rb, line 70</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">devserver</span> <span class="ruby-identifier">project</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;DEVSERVER_PROJECT&quot;</span>],
-                   <span class="ruby-identifier">host</span>    = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;DEVSERVER_HOST&quot;</span>]
-  <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span><span class="ruby-operator">::</span><span class="ruby-constant">Empty</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">devserver</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Dataset</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
-  <span class="ruby-identifier">devserver</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">http_host</span> = (<span class="ruby-identifier">host</span> <span class="ruby-operator">||</span> <span class="ruby-string">&quot;http://localhost:8080&quot;</span>)
-  <span class="ruby-identifier">devserver</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
   </section>
 </main>
 

@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Gcloud::Storage::Project - gcloud-0.0.1</title>
+<title>class Gcloud::Storage::Project - gcloud-0.0.1 Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -100,13 +100,13 @@ href="Bucket.html">Gcloud::Storage::Bucket</a> objects are created, read,
 updated, and deleted by <a
 href="Project.html">Gcloud::Storage::Project</a>.</p>
 
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
-                                  <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
+                         <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 </pre>
 
-<p>See <a href="../Storage.html#method-c-project">Gcloud::Storage.project</a></p>
+<p>See <a href="../../Gcloud.html#method-c-storage">Gcloud.storage</a></p>
 
   </section>
 
@@ -144,7 +144,7 @@ href="Project.html">Gcloud::Storage::Project</a>.</p>
           
           <p>Retrieves a list of buckets for the given project.</p>
 
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 <span class="ruby-identifier">buckets</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">buckets</span>
 <span class="ruby-identifier">buckets</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">bucket</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">puts</span> <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">name</span>
@@ -246,7 +246,7 @@ or specify the wanted behavior in the call:</p>
           
           <p>Retrieves bucket by name.</p>
 
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span>.<span class="ruby-identifier">project</span>
+<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">name</span>
 </pre>
