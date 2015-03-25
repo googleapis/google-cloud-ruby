@@ -26,6 +26,9 @@ require "gcloud/backoff"
 
 Gcloud::Backoff.retries = 10
 
+# Create shared storage object so we don't create new for each test
+$storage = Gcloud.storage
+
 module Regression
   ##
   # Test class for running against a Storage instance.
@@ -45,7 +48,7 @@ module Regression
     ##
     # Setup project based on available ENV variables
     def setup
-      @storage = Gcloud.storage
+      @storage = $storage
 
       refute_nil @storage, "You do not have an active storage to run the tests."
 
@@ -60,4 +63,26 @@ module Regression
       addl.include? :storage
     end
   end
+end
+
+# Create buckets to be shared with all the tests
+require "time"
+require "securerandom"
+t = Time.now.utc.iso8601.gsub ":", "-"
+$bucket_names = 4.times.map { "gcloud-ruby-regression-#{t}-#{SecureRandom.hex(4)}".downcase }
+
+def clean_up_storage_buckets
+  puts "Cleaning up storage buckets after tests."
+  $bucket_names.each do |bucket_name|
+    if b = $storage.find_bucket(bucket_name)
+      b.files.map { |f| f.delete }
+      b.delete
+    end
+  end
+rescue => e
+  puts "Error while cleaning up storage buckets after tests.\n\n#{e}"
+end
+
+Minitest.after_run do
+  clean_up_storage_buckets
 end

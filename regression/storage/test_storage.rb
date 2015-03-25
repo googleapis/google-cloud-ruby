@@ -13,18 +13,16 @@
 # limitations under the License.
 
 require "storage_helper"
-require "securerandom"
 require "net/http"
 
 # This test is a ruby version of gcloud-node's storage test.
 
 describe "Storage", :storage do
-  let(:bucket) { storage.create_bucket bucket_name }
-  let(:bucket_name) { new_bucket_name }
-
-  def new_bucket_name
-    "gcloud-test-bucket-temp-#{SecureRandom.uuid}"
+  let :bucket do
+    storage.find_bucket(bucket_name) ||
+    storage.create_bucket(bucket_name)
   end
+  let(:bucket_name) { $bucket_names.first }
 
   let(:files) do
     { logo: { path: "regression/data/CloudPlatform_128px_Retina.png" },
@@ -37,28 +35,33 @@ describe "Storage", :storage do
   end
 
   after do
-    bucket.files.map { |file| file.delete }
-    bucket.delete
+    bucket.files.map &:delete
   end
 
   describe "getting buckets" do
-    let(:new_buckets) { new_bucket_names.map { |b| storage.create_bucket b } }
-    let(:new_bucket_names) { [new_bucket_name, new_bucket_name, new_bucket_name] }
+    let(:new_buckets) do
+      new_bucket_names.map do |b|
+        storage.find_bucket(b) ||
+        storage.create_bucket(b)
+      end
+    end
+    let(:new_bucket_names) { $bucket_names.last 3 }
 
     before do
+      bucket
       new_buckets # always create the buckets
     end
 
     after do
-      new_buckets.each { |b| b.delete }
+      new_buckets.each { |b| b.files.map &:delete }
     end
 
     it "should get buckets" do
-      all_buckets = storage.buckets
-      all_buckets.map(&:name).must_include bucket.name
-      all_buckets.map(&:name).must_include new_buckets[0].name
-      all_buckets.map(&:name).must_include new_buckets[1].name
-      all_buckets.map(&:name).must_include new_buckets[2].name
+      all_bucket_names = storage.buckets.map(&:name)
+      all_bucket_names.must_include bucket_name
+      new_bucket_names.each do |new_bucket_name|
+        all_bucket_names.must_include new_bucket_name
+      end
     end
   end
 
