@@ -17,7 +17,7 @@ require "gcloud/datastore"
 
 describe Gcloud::Datastore::Connection do
   let(:project)     { "my-todo-project" }
-  let(:credentials) { Gcloud::Datastore::Credentials::Empty.new }
+  let(:credentials) { OpenStruct.new }
   let(:connection)  { Gcloud::Datastore::Connection.new project, credentials }
   let(:http_mock)   { Minitest::Mock.new }
   let(:mocks)       { [] }

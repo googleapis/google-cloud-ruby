@@ -127,9 +127,9 @@ describe Gcloud::Datastore::Entity do
 
   it "raises when setting an unsupported property type" do
     error = assert_raises Gcloud::Datastore::PropertyError do
-      entity["thing"] = Gcloud::Datastore::Credentials::Empty.new
+      entity["thing"] = OpenStruct.new
     end
-    error.message.must_equal "A property of type Gcloud::Datastore::Credentials::Empty is not supported."
+    error.message.must_equal "A property of type OpenStruct is not supported."
   end
 
   it "raises when setting a key when persisted" do

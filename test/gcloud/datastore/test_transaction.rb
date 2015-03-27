@@ -17,7 +17,7 @@ require "gcloud/datastore"
 
 describe Gcloud::Datastore::Transaction do
   let(:project)     { "my-todo-project" }
-  let(:credentials) { Gcloud::Datastore::Credentials::Empty.new }
+  let(:credentials) { OpenStruct.new }
   let(:connection)  do
     mock = Minitest::Mock.new
     mock.expect :begin_transaction, begin_transaction_response
