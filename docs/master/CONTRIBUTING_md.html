@@ -60,6 +60,7 @@
     <li><a href="#label-Tests">Tests</a>
     <li><a href="#label-Unit+Tests">Unit Tests</a>
     <li><a href="#label-Regression+Tests">Regression Tests</a>
+    <li><a href="#label-Local+Datastore+Devserver">Local Datastore Devserver</a>
     <li><a href="#label-Coding+Style">Coding Style</a>
   </ul>
 </div>
@@ -171,6 +172,14 @@ $ export DATASTORE_TEST_KEYFILE=/path/to/keyfile.json
 $ export STORAGE_TEST_PROJECT=my-other-project-id
 $ export STORAGE_TEST_KEYFILE=/path/to/other/keyfile.json
 $ rake test:regression</pre>
+
+<h3 id="label-Local+Datastore+Devserver">Local Datastore Devserver<span><a href="#label-Local+Datastore+Devserver">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>You can run the Datstore regression tests against a devserver running
+locally. To switch to the devserver set the <code>DATASTORE_HOST</code>
+environment variable with the location of the local devserver.</p>
+
+<pre>$ DATASTORE_HOST=http://127.0.0.1:8080 rake test:regression:datastore</pre>
 
 <h2 id="label-Coding+Style">Coding Style<span><a href="#label-Coding+Style">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
