@@ -17,7 +17,7 @@ require "gcloud/datastore"
 
 describe Gcloud::Datastore::Dataset do
   let(:project)     { "my-todo-project" }
-  let(:credentials) { Gcloud::Datastore::Credentials::Empty.new }
+  let(:credentials) { OpenStruct.new }
   let(:dataset)     { Gcloud::Datastore::Dataset.new project, credentials }
   let(:allocate_ids_response) do
     Gcloud::Datastore::Proto::AllocateIdsResponse.new.tap do |response|

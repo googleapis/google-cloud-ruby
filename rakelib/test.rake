@@ -25,7 +25,6 @@ namespace :test do
     if project.nil? || keyfile.nil?
       fail "You must provide a project and keyfile. e.g. rake test:regression[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake test:regression"
     end
-    ENV["DEVSERVER_PROJECT"] = nil # clear in case it is also set
     # always overwrite when running tests
     ENV["DATASTORE_PROJECT"] = project
     ENV["DATASTORE_KEYFILE"] = keyfile
@@ -49,7 +48,6 @@ namespace :test do
     if project.nil? || keyfile.nil?
       fail "You must provide a project and keyfile. e.g. rake test:regression[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake test:regression"
     end
-    ENV["DEVSERVER_PROJECT"] = nil # clear in case it is also set
     # always overwrite when running tests
     ENV["DATASTORE_PROJECT"] = project
     ENV["DATASTORE_KEYFILE"] = keyfile
@@ -74,7 +72,6 @@ namespace :test do
     if project.nil? || keyfile.nil?
       fail "You must provide a project and keyfile. e.g. rake test:regression[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake test:regression"
     end
-    ENV["DEVSERVER_PROJECT"] = nil # clear in case it is also set
     # always overwrite when running tests
     ENV["DATASTORE_PROJECT"] = project
     ENV["DATASTORE_KEYFILE"] = keyfile
@@ -96,27 +93,9 @@ namespace :test do
       if project.nil? || keyfile.nil?
         fail "You must provide a project and keyfile. e.g. rake test:regression:datastore[test123, /path/to/keyfile.json] or DATASTORE_TEST_PROJECT=test123 DATASTORE_TEST_KEYFILE=/path/to/keyfile.json rake test:regression:datastore"
       end
-      ENV["DEVSERVER_PROJECT"] = nil # clear in case it is also set
       # always overwrite when running tests
       ENV["DATASTORE_PROJECT"] = project
       ENV["DATASTORE_KEYFILE"] = keyfile
-
-      $LOAD_PATH.unshift "lib", "test", "regression"
-      Dir.glob("regression/datastore/**/test*.rb").each { |file| require_relative "../#{file}"}
-    end
-
-    desc "Runs the datastore regression tests against a locally runnning devserver."
-    task :devserver, :project, :host do |t, args|
-      project = args[:project]
-      project ||= ENV["DEVSERVER_PROJECT"]
-      host = args[:host]
-      host ||= ENV["DEVSERVER_HOST"]
-      host ||= "http://localhost:8080"
-      if project.nil?
-        fail "You must provide a project. e.g. rake test:regression:devserver[test123] or DEVSERVER_PROJECT=test123 rake test:regression:devserver"
-      end
-      ENV["DEVSERVER_PROJECT"] = project
-      ENV["DEVSERVER_HOST"]    = host
 
       $LOAD_PATH.unshift "lib", "test", "regression"
       Dir.glob("regression/datastore/**/test*.rb").each { |file| require_relative "../#{file}"}

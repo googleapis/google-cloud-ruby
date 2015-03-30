@@ -71,6 +71,14 @@ $ export STORAGE_TEST_KEYFILE=/path/to/other/keyfile.json
 $ rake test:regression
 ```
 
+### Local Datastore Devserver
+
+You can run the Datstore regression tests against a devserver running locally. To switch to the devserver set the `DATASTORE_HOST` environment variable with the location of the local devserver.
+
+``` sh
+$ DATASTORE_HOST=http://127.0.0.1:8080 rake test:regression:datastore
+```
+
 ## Coding Style
 
 Please follow the established coding style in the library. The style is is largely based on [The Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide) with a few exceptions based on seattle-style:

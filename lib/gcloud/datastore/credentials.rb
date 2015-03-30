@@ -36,15 +36,6 @@ module Gcloud
         end
         request
       end
-
-      ##
-      # Represent the empty credentials, useful for connecting
-      # to a local devserver.
-      class Empty #:nodoc:
-        def sign_http_request request
-          request
-        end
-      end
     end
   end
 end
