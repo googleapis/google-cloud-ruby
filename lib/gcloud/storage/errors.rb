@@ -32,7 +32,8 @@ module Gcloud
 
       def initialize message, code, errors
         super message
-        @code, @errors = code, errors
+        @code = code
+        @errors = errors
       end
 
       def self.from_response resp #:nodoc:

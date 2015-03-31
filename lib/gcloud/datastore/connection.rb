@@ -87,8 +87,9 @@ module Gcloud
       # Commit a transaction, optionally creating, deleting or modifying
       # some entities.
       def commit mutation, transaction = nil
-        mode = transaction ? Proto::CommitRequest::Mode::TRANSACTIONAL :
-                             Proto::CommitRequest::Mode::NON_TRANSACTIONAL
+        mode = Proto::CommitRequest::Mode::NON_TRANSACTIONAL
+        mode = Proto::CommitRequest::Mode::TRANSACTIONAL if transaction
+
         commit = Proto::CommitRequest.new.tap do |c|
           c.mutation = mutation
           c.mode = mode
