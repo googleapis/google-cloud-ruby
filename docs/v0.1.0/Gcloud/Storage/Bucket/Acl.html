@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Gcloud::Storage::Bucket::Acl - gcloud-0.1.0 Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/darkfish.js"></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Object
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-predefined_rule_for">::predefined_rule_for</a>
+    
+    <li ><a href="#method-i-add_owner">#add_owner</a>
+    
+    <li ><a href="#method-i-add_reader">#add_reader</a>
+    
+    <li ><a href="#method-i-add_writer">#add_writer</a>
+    
+    <li ><a href="#method-i-auth-21">#auth!</a>
+    
+    <li ><a href="#method-i-auth_read-21">#auth_read!</a>
+    
+    <li ><a href="#method-i-authenticated-21">#authenticated!</a>
+    
+    <li ><a href="#method-i-authenticatedRead-21">#authenticatedRead!</a>
+    
+    <li ><a href="#method-i-authenticated_read-21">#authenticated_read!</a>
+    
+    <li ><a href="#method-i-delete">#delete</a>
+    
+    <li ><a href="#method-i-entities_from_acls">#entities_from_acls</a>
+    
+    <li ><a href="#method-i-owners">#owners</a>
+    
+    <li ><a href="#method-i-private-21">#private!</a>
+    
+    <li ><a href="#method-i-projectPrivate-21">#projectPrivate!</a>
+    
+    <li ><a href="#method-i-project_private-21">#project_private!</a>
+    
+    <li ><a href="#method-i-public-21">#public!</a>
+    
+    <li ><a href="#method-i-publicRead-21">#publicRead!</a>
+    
+    <li ><a href="#method-i-publicReadWrite-21">#publicReadWrite!</a>
+    
+    <li ><a href="#method-i-public_read-21">#public_read!</a>
+    
+    <li ><a href="#method-i-public_write-21">#public_write!</a>
+    
+    <li ><a href="#method-i-readers">#readers</a>
+    
+    <li ><a href="#method-i-refresh-21">#refresh!</a>
+    
+    <li ><a href="#method-i-update_predefined_acl-21">#update_predefined_acl!</a>
+    
+    <li ><a href="#method-i-writers">#writers</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Gcloud::Storage::Bucket::Acl">
+  <h1 id="class-Gcloud::Storage::Bucket::Acl" class="class">
+    class Gcloud::Storage::Bucket::Acl
+  </h1>
+
+  <section class="description">
+    
+<p>Represents a Bucket&#39;s Access Control <a href="List.html">List</a>.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="RULES">RULES
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-predefined_rule_for" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">predefined_rule_for</span><span
+            class="method-args">(rule_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="predefined_rule_for-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">predefined_rule_for</span> <span class="ruby-identifier">rule_name</span>
+  <span class="ruby-constant">RULES</span>[<span class="ruby-identifier">rule_name</span>.<span class="ruby-identifier">to_s</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-add_owner" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_owner</span><span
+            class="method-args">(entity)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_owner-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_owner</span> <span class="ruby-identifier">entity</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_bucket_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-identifier">entity</span>, <span class="ruby-string">&quot;OWNER&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-identifier">entity</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;entity&quot;</span>]
+    <span class="ruby-ivar">@owners</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">entity</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@owners</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">entity</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-add_reader" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_reader</span><span
+            class="method-args">(entity)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_reader-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_reader</span> <span class="ruby-identifier">entity</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_bucket_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-identifier">entity</span>, <span class="ruby-string">&quot;READER&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-identifier">entity</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;entity&quot;</span>]
+    <span class="ruby-ivar">@readers</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">entity</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@readers</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">entity</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-add_writer" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_writer</span><span
+            class="method-args">(entity)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_writer-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_writer</span> <span class="ruby-identifier">entity</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_bucket_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-identifier">entity</span>, <span class="ruby-string">&quot;WRITER&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-identifier">entity</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;entity&quot;</span>]
+    <span class="ruby-ivar">@writers</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">entity</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@writers</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">entity</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-auth-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">auth!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Predefined ACL helpers</p>
+          
+          
+
+          
+          <div class="method-source-code" id="auth-21-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">auth!</span>
+  <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;authenticatedRead&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Acl.html#method-i-authenticatedRead-21">authenticatedRead!</a>, <a href="Acl.html#method-i-auth_read-21">auth_read!</a>, <a href="Acl.html#method-i-authenticated-21">authenticated!</a>, <a href="Acl.html#method-i-authenticated_read-21">authenticated_read!</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-auth_read-21" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">auth_read!</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Acl.html#method-i-auth-21">auth!</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-authenticated-21" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">authenticated!</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Acl.html#method-i-auth-21">auth!</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-authenticatedRead-21" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">authenticatedRead!</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Acl.html#method-i-auth-21">auth!</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-authenticated_read-21" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">authenticated_read!</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Acl.html#method-i-auth-21">auth!</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-delete" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete</span><span
+            class="method-args">(entity)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="delete-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">entity</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">delete_bucket_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-identifier">entity</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-ivar">@owners</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">entity</span>  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@owners</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@writers</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">entity</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@writers</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@readers</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">entity</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@readers</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-owners" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">owners</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="owners-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">owners</span>
+  <span class="ruby-identifier">refresh!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@owners</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@owners</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-private-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">private!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="private-21-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">private!</span>
+  <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;private&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-projectPrivate-21" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">projectPrivate!</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Acl.html#method-i-project_private-21">project_private!</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-project_private-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">project_private!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="project_private-21-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">project_private!</span>
+  <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;projectPrivate&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Acl.html#method-i-projectPrivate-21">projectPrivate!</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-public-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">public!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="public-21-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">public!</span>
+  <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;publicRead&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Acl.html#method-i-publicRead-21">publicRead!</a>, <a href="Acl.html#method-i-public_read-21">public_read!</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-publicRead-21" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">publicRead!</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Acl.html#method-i-public-21">public!</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-publicReadWrite-21" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">publicReadWrite!</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Acl.html#method-i-public_write-21">public_write!</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-public_read-21" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">public_read!</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Acl.html#method-i-public-21">public!</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-public_write-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">public_write!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="public_write-21-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">public_write!</span>
+  <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;publicReadWrite&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Acl.html#method-i-publicReadWrite-21">publicReadWrite!</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-readers" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">readers</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="readers-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">readers</span>
+  <span class="ruby-identifier">refresh!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@readers</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@readers</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-refresh-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">refresh!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="refresh-21-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">refresh!</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">list_bucket_acls</span> <span class="ruby-ivar">@bucket</span>
+  <span class="ruby-identifier">acls</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;items&quot;</span>]
+  <span class="ruby-ivar">@owners</span>  = <span class="ruby-identifier">entities_from_acls</span> <span class="ruby-identifier">acls</span>, <span class="ruby-string">&quot;OWNER&quot;</span>
+  <span class="ruby-ivar">@writers</span> = <span class="ruby-identifier">entities_from_acls</span> <span class="ruby-identifier">acls</span>, <span class="ruby-string">&quot;WRITER&quot;</span>
+  <span class="ruby-ivar">@readers</span> = <span class="ruby-identifier">entities_from_acls</span> <span class="ruby-identifier">acls</span>, <span class="ruby-string">&quot;READER&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-writers" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">writers</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="writers-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">writers</span>
+  <span class="ruby-identifier">refresh!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@writers</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@writers</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-entities_from_acls" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">entities_from_acls</span><span
+            class="method-args">(acls, role)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="entities_from_acls-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">entities_from_acls</span> <span class="ruby-identifier">acls</span>, <span class="ruby-identifier">role</span>
+  <span class="ruby-identifier">selected</span> = <span class="ruby-identifier">acls</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">acl</span><span class="ruby-operator">|</span> <span class="ruby-identifier">acl</span>[<span class="ruby-string">&quot;role&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">role</span> }
+  <span class="ruby-identifier">entities</span> = <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">acl</span><span class="ruby-operator">|</span> <span class="ruby-identifier">acl</span>[<span class="ruby-string">&quot;entity&quot;</span>] }
+  <span class="ruby-identifier">entities</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-update_predefined_acl-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_predefined_acl!</span><span
+            class="method-args">(acl_role)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="update_predefined_acl-21-source">
+            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 147</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-identifier">acl_role</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">patch_bucket</span> <span class="ruby-ivar">@bucket</span>,
+                                  <span class="ruby-identifier">acl</span><span class="ruby-operator">:</span> <span class="ruby-identifier">acl_role</span>
+
+  <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

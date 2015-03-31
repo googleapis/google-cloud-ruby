@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>CONTRIBUTING - gcloud-0.1.0 Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-Contributing+to+Gcloud">Contributing to Gcloud</a>
+    <li><a href="#label-Contributor+License+Agreements">Contributor License Agreements</a>
+    <li><a href="#label-Tests">Tests</a>
+    <li><a href="#label-Unit+Tests">Unit Tests</a>
+    <li><a href="#label-Regression+Tests">Regression Tests</a>
+    <li><a href="#label-Local+Datastore+Devserver">Local Datastore Devserver</a>
+    <li><a href="#label-Coding+Style">Coding Style</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./CHANGELOG_md.html">CHANGELOG</a>
+  
+    <li><a href="./CONTRIBUTING_md.html">CONTRIBUTING</a>
+  
+    <li><a href="./README_md.html">README</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page CONTRIBUTING.md">
+
+<h1 id="label-Contributing+to+Gcloud">Contributing to <a href="Gcloud.html">Gcloud</a><span><a href="#label-Contributing+to+Gcloud">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<ol><li>
+<p><strong>Sign one of the contributor license agreements below.</strong></p>
+</li><li>
+<p>Fork the repo, develop and test your code changes.</p>
+</li><li>
+<p>Send a pull request.</p>
+</li></ol>
+
+<h2 id="label-Contributor+License+Agreements">Contributor License Agreements<span><a href="#label-Contributor+License+Agreements">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Before we can accept your pull requests you&#39;ll need to sign a
+Contributor License Agreement (CLA):</p>
+<ul><li>
+<p><strong>If you are an individual writing original source code</strong> and
+<strong>you own the intellectual property</strong>, then you&#39;ll need to
+sign an <a
+href="https://developers.google.com/open-source/cla/individual">individual
+CLA</a>.</p>
+</li><li>
+<p><strong>If you work for a company that wants to allow you to contribute
+your work</strong>, then you&#39;ll need to sign a <a
+href="https://developers.google.com/open-source/cla/corporate">corporate
+CLA</a>.</p>
+</li></ul>
+
+<p>You can sign these electronically (just scroll to the bottom). After that,
+we&#39;ll be able to accept your pull requests.</p>
+
+<h2 id="label-Tests">Tests<span><a href="#label-Tests">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Tests are very important part of gcloud-ruby. All contributions should
+include tests that ensure the contributed code behaves as expected.</p>
+
+<h3 id="label-Unit+Tests">Unit Tests<span><a href="#label-Unit+Tests">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>To run the unit tests, simply run:</p>
+
+<pre>$ rake test</pre>
+
+<h3 id="label-Regression+Tests">Regression Tests<span><a href="#label-Regression+Tests">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>To run the regression tests, first create and configure a project in the
+Google Developers Console. Be sure to download the JSON KEY file. Make note
+of the PROJECT_ID and the KEYFILE location on your system.</p>
+
+<p>Then Install the <a
+href="https://developers.google.com/cloud/sdk/gcloud/">gcloud command-line
+tool</a> and use it to create the indexes used in the datastore regression
+tests.</p>
+
+<p>From the project&#39;s root directory:</p>
+
+<pre># Install the app component
+$ gcloud components update app
+
+# Set the default project in your env
+$ gcloud config set project PROJECT_ID
+
+# Authenticate the gcloud tool with your account
+$ gcloud auth login
+
+# Create the indexes
+$ gcloud preview datastore create-indexes regression/data/</pre>
+
+<p>As soon as the indexes are prepared you can run the regression tests:</p>
+
+<pre>$ rake test:regression[PROJECT_ID,KEYFILE_PATH]</pre>
+
+<p>Or, if you prefer you can store the values in the
+<code>GCLOUD_TEST_PROJECT</code> and <code>GCLOUD_TEST_KEYFILE</code>
+environment variables:</p>
+
+<pre>$ export GCLOUD_TEST_PROJECT=my-project-id
+$ export GCLOUD_TEST_KEYFILE=/path/to/keyfile.json
+$ rake test:regression</pre>
+
+<p>If you want to use different values for Datastore vs. Storage regression
+tests, you can use the <code>DATASTORE_TEST_</code> and
+<code>STORAGE_TEST_</code> environment variables:</p>
+
+<pre>$ export DATASTORE_TEST_PROJECT=my-project-id
+$ export DATASTORE_TEST_KEYFILE=/path/to/keyfile.json
+$ export STORAGE_TEST_PROJECT=my-other-project-id
+$ export STORAGE_TEST_KEYFILE=/path/to/other/keyfile.json
+$ rake test:regression</pre>
+
+<h3 id="label-Local+Datastore+Devserver">Local Datastore Devserver<span><a href="#label-Local+Datastore+Devserver">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>You can run the Datstore regression tests against a devserver running
+locally. To switch to the devserver set the <code>DATASTORE_HOST</code>
+environment variable with the location of the local devserver.</p>
+
+<pre>$ DATASTORE_HOST=http://127.0.0.1:8080 rake test:regression:datastore</pre>
+
+<h2 id="label-Coding+Style">Coding Style<span><a href="#label-Coding+Style">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Please follow the established coding style in the library. The style is is
+largely based on <a href="https://github.com/bbatsov/ruby-style-guide">The
+Ruby Style Guide</a> with a few exceptions based on seattle-style:</p>
+<ul><li>
+<p>Avoid parenthesis when possible, including in method definitions.</p>
+</li><li>
+<p>Always use double quotes strings. (<a
+href="https://github.com/bbatsov/ruby-style-guide#strings">Option B</a>)</p>
+</li></ul>
+
+<p>You can check your code against these rules by running Rubocop like so:</p>
+
+<pre>$ rake rubocop</pre>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
