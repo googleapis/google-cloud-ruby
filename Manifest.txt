@@ -37,12 +37,10 @@ lib/gcloud/storage/file/verifier.rb
 lib/gcloud/storage/project.rb
 lib/gcloud/version.rb
 rakelib/console.rake
-rakelib/gh-pages.rake
 rakelib/manifest.rake
 rakelib/proto.rake
 rakelib/rubocop.rake
 rakelib/test.rake
-rakelib/travis.rake
 test/gcloud/datastore/proto/test_cursor.rb
 test/gcloud/datastore/proto/test_direction.rb
 test/gcloud/datastore/proto/test_operator.rb
