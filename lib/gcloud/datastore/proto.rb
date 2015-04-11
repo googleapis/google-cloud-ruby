@@ -1,3 +1,4 @@
+#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -241,7 +242,7 @@ module Gcloud
         end
       end
 
-      class Key
+      class Key #:nodoc:
         def dup
           proto_request_body = ""
           self.encode proto_request_body
