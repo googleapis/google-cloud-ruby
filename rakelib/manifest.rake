@@ -14,7 +14,7 @@
 
 desc "Update the Manifest file."
 task :manifest do
-  exclude_regexp = /regression*|\.travis\.yml|rakelib\/travis.rake|keyfile.json*|rakelib\/gh-pages.rake|Gemfile*/
+  exclude_regexp = /regression*|rdoc*|\.travis\.yml|rakelib\/travis.rake|keyfile.json*|rakelib\/gh-pages.rake|Gemfile*/
   `rake git:manifest`
   new_manifest = []
   File.open("Manifest.txt").each do |line|

@@ -1,0 +1,13 @@
+<h2 id="<%= section.aref %>"><%= section.title %></h2>
+
+<% if section.comment %>
+  <div class="description">
+    <%= section.description %>
+  </div>
+<% end %>
+
+<%= render_partial "constants.html.erb", constants: constants.select(&:display?) %>
+
+<%= render_partial "attributes.html.erb", attributes: attributes %>
+
+<%= render_partial "methods.html.erb", section: section %>
