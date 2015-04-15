@@ -1,127 +1,121 @@
 <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <title>Gcloud::Datastore::Transaction &mdash; gcloud Documentation</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
+<script src="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/modernizr-2.6.2.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto:300,400,700,700italic,400italic|Open+Sans:300' rel='stylesheet' type='text/css'>
 
-<html>
-<head>
-<meta charset="UTF-8">
+  </head>
 
-<title>class Gcloud::Datastore::Transaction - gcloud-0.1.0 Documentation</title>
+  <body class="lang-page">
+    <!--[if lt IE 7]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
-<script type="text/javascript">
-  var rdoc_rel_prefix = "../../";
-</script>
-
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
-
-<link href="../../css/fonts.css" rel="stylesheet">
-<link href="../../css/rdoc.css" rel="stylesheet">
-
-
-
-<body id="top" role="document" class="class">
-<nav role="navigation">
-  <div id="project-navigation">
-    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
-  <h2>
-    <a href="../../index.html" rel="home">Home</a>
-  </h2>
-
-  <div id="table-of-contents-navigation">
-    <a href="../../table_of_contents.html#pages">Pages</a>
-    <a href="../../table_of_contents.html#classes">Classes</a>
-    <a href="../../table_of_contents.html#methods">Methods</a>
-  </div>
-</div>
-
-    <div id="search-section" role="search" class="project-section initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <div id="search-field-wrapper">
-      <input id="search-field" role="combobox" aria-label="Search"
-             aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search" spellcheck="false"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </div>
-
-    <ul id="search-results" aria-label="Search Results"
-        aria-busy="false" aria-expanded="false"
-        aria-atomic="false" class="initially-hidden"></ul>
-  </form>
-</div>
-
-  </div>
-
-  
-
-  <div id="class-metadata">
-    
-    <div id="parent-class-section" class="nav-section">
-  <h3>Parent</h3>
-
-  
-  <p class="link"><a href="Dataset.html">Gcloud::Datastore::Dataset</a>
-  
-</div>
-
-    
-    
-    <!-- Method Quickref -->
-<div id="method-list-section" class="nav-section">
-  <h3>Methods</h3>
-
-  <ul class="link-list" role="directory">
-    
-    <li ><a href="#method-i-begin_transaction">#begin_transaction</a>
-    
-    <li ><a href="#method-i-commit">#commit</a>
-    
-    <li ><a href="#method-i-delete">#delete</a>
-    
-    <li ><a href="#method-i-reset-21">#reset!</a>
-    
-    <li ><a href="#method-i-rollback">#rollback</a>
-    
-    <li ><a href="#method-i-save">#save</a>
-    
-    <li ><a href="#method-i-start">#start</a>
-    
-  </ul>
-</div>
-
-  </div>
-</nav>
-
-<main role="main" aria-labelledby="class-Gcloud::Datastore::Transaction">
-  <h1 id="class-Gcloud::Datastore::Transaction" class="class">
-    class Gcloud::Datastore::Transaction
+<header class="page-header fixed" role="banner">
+  <h1 class="logo">
+    <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="back to home">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/logo.svg" alt="Google Cloud Platform" />
+      <span class="gcloud">gcloud</span>
+    </a>
   </h1>
 
-  <section class="description">
+  <nav class="main-nav">
+    <div class="nav-current">Ruby</div>
+    <ul class="menu">
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-node/" title="gcloud-node">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-nodejs.svg" alt="Node.js icon" class="menu-icon" />
+          Node.js
+        </a>
+      </li>
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-python/" title="gcloud-python">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-python.svg" alt="Python icon" class="menu-icon" />
+          Python
+        </a>
+      </li>
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="gcloud-ruby">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.png" alt="Ruby icon" class="menu-icon" width="24" />
+          Ruby
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+</header>
+
+
+    <article class="main lang-page" role="main">
+
+      <header class="docs-header">
+        <h1 class="page-title">Gcloud::Datastore::Transaction</h1>
+        <div class="versions">
+  <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
+    Version History
+  </a>
+</div>
+<div class="report-issue">
+  <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/new?title=%5BDocumentation+Issue%5D+" target="_blank" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" />
+    Report an Issue
+  </a>
+</div>
+
+      </header>
+
+      <section class="content">
+        
+  
+  <div id="parent-class-section" class="section">
+    <h3 class="section-header">Parent</h3>
     
+      <p class="link"><a href="Dataset.html">Gcloud::Datastore::Dataset</a></p>
+    
+  </div>
+
+
+        
+
+
+        <div id="description" class="description">
+          
 <p>Special Connection instance for running transactions.</p>
 
 <p>See <a
 href="Dataset.html#method-i-transaction">Gcloud::Datastore::Dataset#transaction</a></p>
 
-  </section>
+        </div>
+
+        
+          <h2 id="5Buntitled-5D"></h2>
+
+
+
+
+
+
+
 
   
-  
-  
-  <section id="5Buntitled-5D" class="documentation-section">
-    
+  <div id="attribute-method-details" class="method-section section">
+    <h3 class="section-header">Attributes</h3>
 
     
-
-    
-
-    
-    <section class="attribute-method-details" class="method-section">
-      <header>
-        <h3>Attributes</h3>
-      </header>
-
-      
-      <div id="attribute-i-id" class="method-detail">
+      <div id="id-attribute-method" class="method-detail">
+        <a name="id"></a>
+        
         <div class="method-heading attribute-method-heading">
           <span class="method-name">id</span><span
             class="attribute-access-type">[R]</span>
@@ -129,69 +123,61 @@ href="Dataset.html#method-i-transaction">Gcloud::Datastore::Dataset#transaction<
 
         <div class="method-description">
         
-        
+          
         
         </div>
       </div>
+    
+  </div>
+
+
+
+
+
+    <div id="public-instance-methods" class="methods">
+      <h3 class="section-header">Public Instance Methods</h3>
+
       
-    </section>
+        <div id="begin_transaction-method" class="method alias">
+  <a name="method-i-begin_transaction"></a>
+
+  
+    <h4><code>begin_transaction()</code></h4>
+  
+
+  <div class="method-description">
+    
+      
     
 
     
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Instance Methods</h3>
-       </header>
+  </div>
+
+  
+
+  
+    <div class="aliases">
+      Alias for: <a href="Transaction.html#method-i-start">start</a>
+    </div>
+  
+</div>
+
+      
+        <div id="commit-method" class="method ">
+  <a name="method-i-commit"></a>
+
+  
+    <h4><code>commit()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Commits a transaction.</p>
+    
 
     
-      <div id="method-i-begin_transaction" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">begin_transaction</span><span
-            class="method-args">()</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-        </div>
-
-        
-
-        
-        <div class="aliases">
-          Alias for: <a href="Transaction.html#method-i-start">start</a>
-        </div>
-        
-      </div>
-
-    
-      <div id="method-i-commit" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">commit</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Commits a transaction.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="commit-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 76</span>
+      <!-- <div class="method-source-code" id="commit-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">commit</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@id</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">TransactionError</span>, <span class="ruby-string">&quot;Cannot commit when not in a transaction.&quot;</span>
@@ -201,30 +187,26 @@ href="Dataset.html#method-i-transaction">Gcloud::Datastore::Dataset#transaction<
   <span class="ruby-identifier">auto_id_assign_ids</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">mutation_result</span>.<span class="ruby-identifier">insert_auto_id_key</span>
   <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-delete" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">delete</span><span
-            class="method-args">(*entities)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Remove entities in a transaction.</p>
+  
+
+  
+</div>
+
+      
+        <div id="delete-method" class="method ">
+  <a name="method-i-delete"></a>
+
+  
+    <h4><code>delete(*entities)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Remove entities in a transaction.</p>
 
 <pre class="ruby"><span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tx</span><span class="ruby-operator">|</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">user</span>.<span class="ruby-identifier">key</span>).<span class="ruby-identifier">nil?</span>
@@ -232,12 +214,11 @@ href="Dataset.html#method-i-transaction">Gcloud::Datastore::Dataset#transaction<
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 55</span>
+    
+      <!-- <div class="method-source-code" id="delete-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-operator">*</span><span class="ruby-identifier">entities</span>
   <span class="ruby-identifier">shared_mutation</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">m</span>.<span class="ruby-identifier">delete</span> = <span class="ruby-identifier">entities</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">entity</span><span class="ruby-operator">|</span> <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_proto</span> }
@@ -245,72 +226,62 @@ href="Dataset.html#method-i-transaction">Gcloud::Datastore::Dataset#transaction<
   <span class="ruby-comment"># Do not delete yet</span>
   <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="reset-21-method" class="method ">
+  <a name="method-i-reset-21"></a>
+
+  
+    <h4><code>reset!()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Reset the transaction. <a href="Transaction.html#method-i-start">#start</a>
+must be called afterwards.</p>
+    
 
     
-      <div id="method-i-reset-21" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">reset!</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Reset the transaction. <a href="Transaction.html#method-i-start">#start</a>
-must be called afterwards.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="reset-21-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 100</span>
+      <!-- <div class="method-source-code" id="reset-21-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset!</span>
   <span class="ruby-ivar">@shared_mutation</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@id</span>  = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@_auto_id_entities</span> = []
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="rollback-method" class="method ">
+  <a name="method-i-rollback"></a>
+
+  
+    <h4><code>rollback()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Rolls a transaction back.</p>
+    
 
     
-      <div id="method-i-rollback" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">rollback</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Rolls a transaction back.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="rollback-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 88</span>
+      <!-- <div class="method-source-code" id="rollback-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">rollback</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@id</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">TransactionError</span>, <span class="ruby-string">&quot;Cannot rollback when not in a transaction.&quot;</span>
@@ -319,30 +290,26 @@ must be called afterwards.</p>
   <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">rollback</span> <span class="ruby-ivar">@id</span>
   <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-save" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">save</span><span
-            class="method-args">(*entities)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Persist entities in a transaction.</p>
+  
+
+  
+</div>
+
+      
+        <div id="save-method" class="method ">
+  <a name="method-i-save"></a>
+
+  
+    <h4><code>save(*entities)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Persist entities in a transaction.</p>
 
 <pre class="ruby"><span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tx</span><span class="ruby-operator">|</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">user</span>.<span class="ruby-identifier">key</span>).<span class="ruby-identifier">nil?</span>
@@ -350,77 +317,155 @@ must be called afterwards.</p>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="save-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 41</span>
+    
+      <!-- <div class="method-source-code" id="save-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span> <span class="ruby-operator">*</span><span class="ruby-identifier">entities</span>
   <span class="ruby-identifier">save_entities_to_mutation</span> <span class="ruby-identifier">entities</span>, <span class="ruby-identifier">shared_mutation</span>
   <span class="ruby-comment"># Do not save or assign auto_ids yet</span>
   <span class="ruby-identifier">entities</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="start-method" class="method ">
+  <a name="method-i-start"></a>
+
+  
+    <h4><code>start()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Begins a transaction. This method is run when a new <a
+href="Transaction.html">Transaction</a> is created.</p>
+    
 
     
-      <div id="method-i-start" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">start</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Begins a transaction. This method is run when a new <a
-href="Transaction.html">Transaction</a> is created.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="start-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 66</span>
+      <!-- <div class="method-source-code" id="start-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
   <span class="ruby-identifier">fail</span> <span class="ruby-constant">TransactionError</span>, <span class="ruby-string">&quot;Transaction already opened.&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@id</span>.<span class="ruby-identifier">nil?</span>
 
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">begin_transaction</span>
   <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">response</span>.<span class="ruby-identifier">transaction</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-        <div class="aliases">
-          Also aliased as: <a href="Transaction.html#method-i-begin_transaction">begin_transaction</a>
-        </div>
-        
-
-        
-      </div>
-
+      </div> -->
     
-    </section>
+  </div>
+
   
-  </section>
-</main>
+    <div class="aliases">
+      Also aliased as: <a href="Transaction.html#method-i-begin_transaction">begin_transaction</a>
+    </div>
+  
+
+  
+</div>
+
+      
+    </div>
+  
 
 
-<footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
-</footer>
 
+        
+      </section>
+
+      <nav class="side-nav">
+        <ul>
+          <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
+        </ul>
+        <ul>
+          
+              <li class="toctree-l1" style="padding-left: 0em;">
+                <a class="reference internal" href="../../Gcloud.html">
+                  Gcloud
+                </a>
+              </li>
+          
+              <li class="toctree-l1" style="padding-left: 1em;">
+                <a class="reference internal" href="../Datastore.html">
+                  Datastore
+                </a>
+              </li>
+          
+              <li class="toctree-l1" style="padding-left: 2em;">
+                <a class="reference internal" href="Transaction.html">
+                  Transaction
+                </a>
+              </li>
+          
+          
+        </ul>
+
+        
+          
+          
+              <ul>
+                <li class="toctree-l1">
+                  <a class="reference internal" href="#public-instance-methods">Public Instance Methods</a>
+                </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-begin_transaction">#begin_transaction</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-commit">#commit</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-delete">#delete</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-reset-21">#reset!</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-rollback">#rollback</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-save">#save</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-start">#start</a>
+                  </li>
+                
+              </ul>
+            
+          
+        
+      </nav>
+
+    </article>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/plugins.js"></script>
+<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/main.js"></script>
+
+<script>
+  (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+  function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+  e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+  e.src='//www.google-analytics.com/analytics.js';
+  r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+  ga('create','UA-49880327-13');ga('send','pageview');
+</script>
+
+
+  </body>
+</html>

@@ -1,95 +1,82 @@
 <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <title>README.md &mdash; gcloud Documentation</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
+<script src="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/modernizr-2.6.2.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto:300,400,700,700italic,400italic|Open+Sans:300' rel='stylesheet' type='text/css'>
 
-<html>
-<head>
-<meta charset="UTF-8">
+  </head>
 
-<title>README - gcloud-0.0.1 Documentation</title>
+  <body class="lang-page">
+    <!--[if lt IE 7]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
-<script type="text/javascript">
-  var rdoc_rel_prefix = "./";
-</script>
+<header class="page-header fixed" role="banner">
+  <h1 class="logo">
+    <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="back to home">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/logo.svg" alt="Google Cloud Platform" />
+      <span class="gcloud">gcloud</span>
+    </a>
+  </h1>
 
-<script src="./js/jquery.js"></script>
-<script src="./js/darkfish.js"></script>
+  <nav class="main-nav">
+    <div class="nav-current">Ruby</div>
+    <ul class="menu">
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-node/" title="gcloud-node">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-nodejs.svg" alt="Node.js icon" class="menu-icon" />
+          Node.js
+        </a>
+      </li>
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-python/" title="gcloud-python">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-python.svg" alt="Python icon" class="menu-icon" />
+          Python
+        </a>
+      </li>
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="gcloud-ruby">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.png" alt="Ruby icon" class="menu-icon" width="24" />
+          Ruby
+        </a>
+      </li>
+    </ul>
+  </nav>
 
-<link href="./css/fonts.css" rel="stylesheet">
-<link href="./css/rdoc.css" rel="stylesheet">
+</header>
 
 
+    <article class="main lang-page" role="main">
 
-<body id="top" role="document" class="file">
-<nav role="navigation">
-  <div id="project-navigation">
-    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
-  <h2>
-    <a href="./index.html" rel="home">Home</a>
-  </h2>
-
-  <div id="table-of-contents-navigation">
-    <a href="./table_of_contents.html#pages">Pages</a>
-    <a href="./table_of_contents.html#classes">Classes</a>
-    <a href="./table_of_contents.html#methods">Methods</a>
-  </div>
+      <header class="docs-header">
+        <h1 class="page-title">README.md</h1>
+        <div class="versions">
+  <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
+    Version History
+  </a>
+</div>
+<div class="report-issue">
+  <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/new?title=%5BDocumentation+Issue%5D+" target="_blank" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" />
+    Report an Issue
+  </a>
 </div>
 
-    <div id="search-section" role="search" class="project-section initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <div id="search-field-wrapper">
-      <input id="search-field" role="combobox" aria-label="Search"
-             aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search" spellcheck="false"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </div>
+      </header>
 
-    <ul id="search-results" aria-label="Search Results"
-        aria-busy="false" aria-expanded="false"
-        aria-atomic="false" class="initially-hidden"></ul>
-  </form>
-</div>
-
-  </div>
-
-  
-<div class="nav-section">
-  <h3>Table of Contents</h3>
-
-  <ul class="link-list" role="directory">
-    <li><a href="#label-gcloud">gcloud</a>
-    <li><a href="#label-Ruby+API+Client+library+for+Google+Cloud">Ruby API Client library for Google Cloud</a>
-    <li><a href="#label-Quick+Start">Quick Start</a>
-    <li><a href="#label-Authorization">Authorization</a>
-    <li><a href="#label-Datastore">Datastore</a>
-    <li><a href="#label-Storage">Storage</a>
-    <li><a href="#label-Supported+Ruby+Versions">Supported Ruby Versions</a>
-    <li><a href="#label-Versioning">Versioning</a>
-    <li><a href="#label-Contributing">Contributing</a>
-    <li><a href="#label-License">License</a>
-    <li><a href="#label-Support">Support</a>
-  </ul>
-</div>
-
-
-  <div id="project-metadata">
-    <div id="fileindex-section" class="nav-section">
-  <h3>Pages</h3>
-
-  <ul class="link-list">
-  
-    <li><a href="./CHANGELOG_md.html">CHANGELOG</a>
-  
-    <li><a href="./CONTRIBUTING_md.html">CONTRIBUTING</a>
-  
-    <li><a href="./README_md.html">README</a>
-  
-  </ul>
-</div>
-
-  </div>
-</nav>
-
-<main role="main" aria-label="Page README.md">
-
+      <section class="content">
+        
 <h1 id="label-gcloud">gcloud<span><a href="#label-gcloud">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p>Idiomatic Ruby client for <a href="https://cloud.google.com/">Google Cloud
@@ -255,13 +242,246 @@ bugs at the project on Github</a>. Don&#39;t hesitate to <a
 href="http://stackoverflow.com/questions/tagged/gcloud-ruby">ask
 questions</a> about the client or APIs on <a
 href="http://stackoverflow.com">StackOverflow</a>.</p>
-</main>
+
+      </section>
+
+      <nav class="side-nav">
+        <ul>
+  <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+</ul>
+
+<ul>
+  
+    <li class="toctree-l1" style="padding-left: 0em;">
+      <a class="reference internal" href="Gcloud.html">
+        Gcloud
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 1em;">
+      <a class="reference internal" href="Gcloud/Backoff.html">
+        Backoff
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 1em;">
+      <a class="reference internal" href="Gcloud/Datastore.html">
+        Datastore
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Datastore/ApiError.html">
+        ApiError
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Datastore/Dataset.html">
+        Dataset
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 3em;">
+      <a class="reference internal" href="Gcloud/Datastore/Dataset/LookupResults.html">
+        LookupResults
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 3em;">
+      <a class="reference internal" href="Gcloud/Datastore/Dataset/QueryResults.html">
+        QueryResults
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Datastore/Entity.html">
+        Entity
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Datastore/Error.html">
+        Error
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Datastore/Key.html">
+        Key
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Datastore/KeyfileError.html">
+        KeyfileError
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Datastore/Properties.html">
+        Properties
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Datastore/PropertyError.html">
+        PropertyError
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Datastore/Query.html">
+        Query
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Datastore/Transaction.html">
+        Transaction
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Datastore/TransactionError.html">
+        TransactionError
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 1em;">
+      <a class="reference internal" href="Gcloud/Error.html">
+        Error
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 1em;">
+      <a class="reference internal" href="Gcloud/Storage.html">
+        Storage
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Storage/ApiError.html">
+        ApiError
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Storage/Bucket.html">
+        Bucket
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 3em;">
+      <a class="reference internal" href="Gcloud/Storage/Bucket/Acl.html">
+        Acl
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 3em;">
+      <a class="reference internal" href="Gcloud/Storage/Bucket/DefaultAcl.html">
+        DefaultAcl
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 3em;">
+      <a class="reference internal" href="Gcloud/Storage/Bucket/List.html">
+        List
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Storage/Error.html">
+        Error
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Storage/File.html">
+        File
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 3em;">
+      <a class="reference internal" href="Gcloud/Storage/File/Acl.html">
+        Acl
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 3em;">
+      <a class="reference internal" href="Gcloud/Storage/File/List.html">
+        List
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Storage/FileVerificationError.html">
+        FileVerificationError
+      </a>
+    </li>
+  
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Gcloud/Storage/Project.html">
+        Project
+      </a>
+    </li>
+  
+  
+    <li class="toctree-l1"><a class="reference internal" href="CHANGELOG_md.html">CHANGELOG.md</a></li>
+  
+    <li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING_md.html">CONTRIBUTING.md</a></li>
+  
+    <li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+  
+    <li class="toctree-l1"><a class="reference internal" href="README_md.html">README.md</a></li>
+  
+</ul>
+
+<ul class="external-links">
+  <li>
+    <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby" title="Github repository">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
+      Github
+    </a>
+  </li>
+  <li>
+    <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues" title="Issues on Github">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
+      Issues
+    </a>
+  </li>
+  <li>
+    <a href="http://stackoverflow.com/questions/tagged/gcloud-ruby" title="gcloud on StackOverflow">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon">
+      gcloud-ruby
+    </a>
+  </li>
+  <li>
+    <a href="http://rubygems.org/gems/gcloud" title="RubyGems" class="ext-link">
+       <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-package-manager.svg" alt="Package Manager icon">
+      RubyGems
+    </a>
+  </li>
+</ul>
+
+      </nav>
+
+    </article>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/plugins.js"></script>
+<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/main.js"></script>
+
+<script>
+  (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+  function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+  e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+  e.src='//www.google-analytics.com/analytics.js';
+  r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+  ga('create','UA-49880327-13');ga('send','pageview');
+</script>
 
 
-
-<footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
-</footer>
-
+  </body>
+</html>

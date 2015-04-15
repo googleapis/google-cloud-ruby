@@ -1,114 +1,96 @@
 <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <title>Gcloud::Datastore::Dataset &mdash; gcloud Documentation</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
+<script src="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/modernizr-2.6.2.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto:300,400,700,700italic,400italic|Open+Sans:300' rel='stylesheet' type='text/css'>
 
-<html>
-<head>
-<meta charset="UTF-8">
+  </head>
 
-<title>class Gcloud::Datastore::Dataset - gcloud-0.1.0 Documentation</title>
+  <body class="lang-page">
+    <!--[if lt IE 7]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
-<script type="text/javascript">
-  var rdoc_rel_prefix = "../../";
-</script>
-
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
-
-<link href="../../css/fonts.css" rel="stylesheet">
-<link href="../../css/rdoc.css" rel="stylesheet">
-
-
-
-<body id="top" role="document" class="class">
-<nav role="navigation">
-  <div id="project-navigation">
-    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
-  <h2>
-    <a href="../../index.html" rel="home">Home</a>
-  </h2>
-
-  <div id="table-of-contents-navigation">
-    <a href="../../table_of_contents.html#pages">Pages</a>
-    <a href="../../table_of_contents.html#classes">Classes</a>
-    <a href="../../table_of_contents.html#methods">Methods</a>
-  </div>
-</div>
-
-    <div id="search-section" role="search" class="project-section initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <div id="search-field-wrapper">
-      <input id="search-field" role="combobox" aria-label="Search"
-             aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search" spellcheck="false"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </div>
-
-    <ul id="search-results" aria-label="Search Results"
-        aria-busy="false" aria-expanded="false"
-        aria-atomic="false" class="initially-hidden"></ul>
-  </form>
-</div>
-
-  </div>
-
-  
-
-  <div id="class-metadata">
-    
-    <div id="parent-class-section" class="nav-section">
-  <h3>Parent</h3>
-
-  
-  <p class="link">Object
-  
-</div>
-
-    
-    
-    <!-- Method Quickref -->
-<div id="method-list-section" class="nav-section">
-  <h3>Methods</h3>
-
-  <ul class="link-list" role="directory">
-    
-    <li ><a href="#method-i-allocate_ids">#allocate_ids</a>
-    
-    <li ><a href="#method-i-delete">#delete</a>
-    
-    <li ><a href="#method-i-find">#find</a>
-    
-    <li ><a href="#method-i-find_all">#find_all</a>
-    
-    <li ><a href="#method-i-get">#get</a>
-    
-    <li ><a href="#method-i-lookup">#lookup</a>
-    
-    <li ><a href="#method-i-project">#project</a>
-    
-    <li ><a href="#method-i-run">#run</a>
-    
-    <li ><a href="#method-i-run_query">#run_query</a>
-    
-    <li ><a href="#method-i-save">#save</a>
-    
-    <li ><a href="#method-i-to_gcloud_entities">#to_gcloud_entities</a>
-    
-    <li ><a href="#method-i-to_gcloud_keys">#to_gcloud_keys</a>
-    
-    <li ><a href="#method-i-transaction">#transaction</a>
-    
-  </ul>
-</div>
-
-  </div>
-</nav>
-
-<main role="main" aria-labelledby="class-Gcloud::Datastore::Dataset">
-  <h1 id="class-Gcloud::Datastore::Dataset" class="class">
-    class Gcloud::Datastore::Dataset
+<header class="page-header fixed" role="banner">
+  <h1 class="logo">
+    <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="back to home">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/logo.svg" alt="Google Cloud Platform" />
+      <span class="gcloud">gcloud</span>
+    </a>
   </h1>
 
-  <section class="description">
+  <nav class="main-nav">
+    <div class="nav-current">Ruby</div>
+    <ul class="menu">
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-node/" title="gcloud-node">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-nodejs.svg" alt="Node.js icon" class="menu-icon" />
+          Node.js
+        </a>
+      </li>
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-python/" title="gcloud-python">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-python.svg" alt="Python icon" class="menu-icon" />
+          Python
+        </a>
+      </li>
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="gcloud-ruby">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.png" alt="Ruby icon" class="menu-icon" width="24" />
+          Ruby
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+</header>
+
+
+    <article class="main lang-page" role="main">
+
+      <header class="docs-header">
+        <h1 class="page-title">Gcloud::Datastore::Dataset</h1>
+        <div class="versions">
+  <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
+    Version History
+  </a>
+</div>
+<div class="report-issue">
+  <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/new?title=%5BDocumentation+Issue%5D+" target="_blank" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" />
+    Report an Issue
+  </a>
+</div>
+
+      </header>
+
+      <section class="content">
+        
+  
+  <div id="parent-class-section" class="section">
+    <h3 class="section-header">Parent</h3>
     
+      <p class="link">Object</p>
+    
+  </div>
+
+
+        
+
+
+        <div id="description" class="description">
+          
 <p><a href="Dataset.html">Dataset</a> is the data saved in a project&#39;s <a
 href="../Datastore.html">Datastore</a>. <a href="Dataset.html">Dataset</a>
 is analogous to a database in relational database world.</p>
@@ -130,52 +112,46 @@ href="Dataset.html">Gcloud::Datastore::Dataset</a>.</p>
 
 <p>See <a href="../../Gcloud.html#method-c-datastore">Gcloud.datastore</a></p>
 
-  </section>
-
-  
-  
-  
-  <section id="5Buntitled-5D" class="documentation-section">
-    
-
-    
-
-    
-
-    
-
-    
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Instance Methods</h3>
-       </header>
-
-    
-      <div id="method-i-allocate_ids" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">allocate_ids</span><span
-            class="method-args">(incomplete_key, count = 1)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
-        <div class="method-description">
-          
-          <p>Generate IDs for a <a href="Key.html">Key</a> before creating an entity.</p>
+        
+          <h2 id="5Buntitled-5D"></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="public-instance-methods" class="methods">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+      
+        <div id="allocate_ids-method" class="method ">
+  <a name="method-i-allocate_ids"></a>
+
+  
+    <h4><code>allocate_ids(incomplete_key, count = 1)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Generate IDs for a <a href="Key.html">Key</a> before creating an entity.</p>
 
 <pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
 <span class="ruby-identifier">empty_key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>
 <span class="ruby-identifier">task_keys</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">allocate_ids</span> <span class="ruby-identifier">empty_key</span>, <span class="ruby-value">5</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="allocate_ids-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 65</span>
+    
+      <!-- <div class="method-source-code" id="allocate_ids-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">allocate_ids</span> <span class="ruby-identifier">incomplete_key</span>, <span class="ruby-identifier">count</span> = <span class="ruby-value">1</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">incomplete_key</span>.<span class="ruby-identifier">complete?</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span>, <span class="ruby-string">&quot;An incomplete key must be provided.&quot;</span>
@@ -187,41 +163,36 @@ href="Dataset.html">Gcloud::Datastore::Dataset</a>.</p>
     <span class="ruby-constant">Key</span>.<span class="ruby-identifier">from_proto</span> <span class="ruby-identifier">key</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-delete" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">delete</span><span
-            class="method-args">(*entities_or_keys)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Remove entities from the <a href="../Datastore.html">Datastore</a>. Accepts
+  
+
+  
+</div>
+
+      
+        <div id="delete-method" class="method ">
+  <a name="method-i-delete"></a>
+
+  
+    <h4><code>delete(*entities_or_keys)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Remove entities from the <a href="../Datastore.html">Datastore</a>. Accepts
 <a href="Entity.html">Entity</a> and <a href="Key.html">Key</a> objects.</p>
 
 <pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
 <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">task1</span>, <span class="ruby-identifier">task2</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 132</span>
+    
+      <!-- <div class="method-source-code" id="delete-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 136</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-operator">*</span><span class="ruby-identifier">entities_or_keys</span>
   <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">entities_or_keys</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e_or_k</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">e_or_k</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:key</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">e_or_k</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_proto</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">e_or_k</span>.<span class="ruby-identifier">to_proto</span>
@@ -232,30 +203,26 @@ href="Dataset.html">Gcloud::Datastore::Dataset</a>.</p>
   <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">commit</span> <span class="ruby-identifier">mutation</span>
   <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-find" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">find</span><span
-            class="method-args">(key_or_kind, id_or_name = nil)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Retrieve an entity by providing key information. Either a <a
+  
+
+  
+</div>
+
+      
+        <div id="find-method" class="method ">
+  <a name="method-i-find"></a>
+
+  
+    <h4><code>find(key_or_kind, id_or_name = nil)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Retrieve an entity by providing key information. Either a <a
 href="Key.html">Key</a> object or kind and id/name can be provided.</p>
 
 <pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
@@ -265,45 +232,43 @@ href="Key.html">Key</a> object or kind and id/name can be provided.</p>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
 <span class="ruby-identifier">task</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-value">123456</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="find-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 100</span>
+    
+      <!-- <div class="method-source-code" id="find-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span> <span class="ruby-identifier">key_or_kind</span>, <span class="ruby-identifier">id_or_name</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-identifier">key_or_kind</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">key_or_kind</span>, <span class="ruby-identifier">id_or_name</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key_or_kind</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Key</span>
+  <span class="ruby-comment"># rubocop:disable Performance/Detect</span>
+  <span class="ruby-comment"># Disabled rubocop because it is detecting the wrong thing.</span>
   <span class="ruby-identifier">find_all</span>(<span class="ruby-identifier">key</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-comment"># rubocop:enable Performance/Detect</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-        <div class="aliases">
-          Also aliased as: <a href="Dataset.html#method-i-get">get</a>
-        </div>
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-find_all" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">find_all</span><span
-            class="method-args">(*keys)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Retrieve the entities for the provided keys.</p>
+  
+    <div class="aliases">
+      Also aliased as: <a href="Dataset.html#method-i-get">get</a>
+    </div>
+  
+
+  
+</div>
+
+      
+        <div id="find_all-method" class="method ">
+  <a name="method-i-find_all"></a>
+
+  
+    <h4><code>find_all(*keys)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Retrieve the entities for the provided keys.</p>
 
 <pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
 <span class="ruby-identifier">key1</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-value">123456</span>
@@ -313,12 +278,11 @@ href="Key.html">Key</a> object or kind and id/name can be provided.</p>
 
 <p>The entities returned from the lookup are returned in a <a
 href="Dataset/LookupResults.html">Dataset::LookupResults</a> object.</p>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="find_all-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 117</span>
+    
+      <!-- <div class="method-source-code" id="find_all-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_all</span> <span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">lookup</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_proto</span>))
   <span class="ruby-identifier">entities</span> = <span class="ruby-identifier">to_gcloud_entities</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">found</span>
@@ -326,123 +290,108 @@ href="Dataset/LookupResults.html">Dataset::LookupResults</a> object.</p>
   <span class="ruby-identifier">missing</span>  = <span class="ruby-identifier">to_gcloud_entities</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">missing</span>
   <span class="ruby-constant">LookupResults</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">entities</span>, <span class="ruby-identifier">deferred</span>, <span class="ruby-identifier">missing</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
-        <div class="aliases">
-          Also aliased as: <a href="Dataset.html#method-i-lookup">lookup</a>
-        </div>
-        
+  
+    <div class="aliases">
+      Also aliased as: <a href="Dataset.html#method-i-lookup">lookup</a>
+    </div>
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="get-method" class="method alias">
+  <a name="method-i-get"></a>
+
+  
+    <h4><code>get(key_or_kind, id_or_name = nil)</code></h4>
+  
+
+  <div class="method-description">
+    
+      
+    
 
     
-      <div id="method-i-get" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">get</span><span
-            class="method-args">(key_or_kind, id_or_name = nil)</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          
-          
-          
+  
 
-          
-        </div>
+  
+    <div class="aliases">
+      Alias for: <a href="Dataset.html#method-i-find">find</a>
+    </div>
+  
+</div>
 
-        
+      
+        <div id="lookup-method" class="method alias">
+  <a name="method-i-lookup"></a>
 
-        
-        <div class="aliases">
-          Alias for: <a href="Dataset.html#method-i-find">find</a>
-        </div>
-        
-      </div>
+  
+    <h4><code>lookup(*keys)</code></h4>
+  
+
+  <div class="method-description">
+    
+      
+    
 
     
-      <div id="method-i-lookup" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">lookup</span><span
-            class="method-args">(*keys)</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          
-          
-          
+  
 
-          
-        </div>
+  
+    <div class="aliases">
+      Alias for: <a href="Dataset.html#method-i-find_all">find_all</a>
+    </div>
+  
+</div>
 
-        
+      
+        <div id="project-method" class="method ">
+  <a name="method-i-project"></a>
 
-        
-        <div class="aliases">
-          Alias for: <a href="Dataset.html#method-i-find_all">find_all</a>
-        </div>
-        
-      </div>
+  
+    <h4><code>project()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>The project connected to.</p>
+    
 
     
-      <div id="method-i-project" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">project</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>The project connected to.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="project-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 55</span>
+      <!-- <div class="method-source-code" id="project-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project</span>
   <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">dataset_id</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-run" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">run</span><span
-            class="method-args">(query)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Retrieve entities specified by a <a href="Query.html">Query</a>.</p>
+  
+
+  
+</div>
+
+      
+        <div id="run-method" class="method ">
+  <a name="method-i-run"></a>
+
+  
+    <h4><code>run(query)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Retrieve entities specified by a <a href="Query.html">Query</a>.</p>
 
 <pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
   <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;completed&quot;</span>, <span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-keyword">true</span>)
@@ -451,12 +400,11 @@ href="Dataset/LookupResults.html">Dataset::LookupResults</a> object.</p>
 
 <p>The entities returned from the query are returned in a <a
 href="Dataset/QueryResults.html">Dataset::QueryResults</a> object.</p>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="run-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 152</span>
+    
+      <!-- <div class="method-source-code" id="run-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 156</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">run_query</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">to_proto</span>
   <span class="ruby-identifier">entities</span> = <span class="ruby-identifier">to_gcloud_entities</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">batch</span>.<span class="ruby-identifier">entity_result</span>
@@ -464,72 +412,64 @@ href="Dataset/QueryResults.html">Dataset::QueryResults</a> object.</p>
   <span class="ruby-identifier">more_results</span> = <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">to_more_results_string</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">batch</span>.<span class="ruby-identifier">more_results</span>
   <span class="ruby-constant">QueryResults</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">entities</span>, <span class="ruby-identifier">cursor</span>, <span class="ruby-identifier">more_results</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
-        <div class="aliases">
-          Also aliased as: <a href="Dataset.html#method-i-run_query">run_query</a>
-        </div>
-        
+  
+    <div class="aliases">
+      Also aliased as: <a href="Dataset.html#method-i-run_query">run_query</a>
+    </div>
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="run_query-method" class="method alias">
+  <a name="method-i-run_query"></a>
+
+  
+    <h4><code>run_query(query)</code></h4>
+  
+
+  <div class="method-description">
+    
+      
+    
 
     
-      <div id="method-i-run_query" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">run_query</span><span
-            class="method-args">(query)</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          
-          
-          
+  
 
-          
-        </div>
+  
+    <div class="aliases">
+      Alias for: <a href="Dataset.html#method-i-run">run</a>
+    </div>
+  
+</div>
 
-        
+      
+        <div id="save-method" class="method ">
+  <a name="method-i-save"></a>
 
-        
-        <div class="aliases">
-          Alias for: <a href="Dataset.html#method-i-run">run</a>
-        </div>
-        
-      </div>
+  
+    <h4><code>save(*entities)</code></h4>
+  
 
+  <div class="method-description">
     
-      <div id="method-i-save" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">save</span><span
-            class="method-args">(*entities)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Persist entities to the <a href="../Datastore.html">Datastore</a>.</p>
+      <p>Persist entities to the <a href="../Datastore.html">Datastore</a>.</p>
 
 <pre class="ruby"><span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
 <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">task1</span>, <span class="ruby-identifier">task2</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="save-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 82</span>
+    
+      <!-- <div class="method-source-code" id="save-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span> <span class="ruby-operator">*</span><span class="ruby-identifier">entities</span>
   <span class="ruby-identifier">mutation</span> = <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">new_mutation</span>
   <span class="ruby-identifier">save_entities_to_mutation</span> <span class="ruby-identifier">entities</span>, <span class="ruby-identifier">mutation</span>
@@ -537,30 +477,26 @@ href="Dataset/QueryResults.html">Dataset::QueryResults</a> object.</p>
   <span class="ruby-identifier">auto_id_assign_ids</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">mutation_result</span>.<span class="ruby-identifier">insert_auto_id_key</span>
   <span class="ruby-identifier">entities</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-transaction" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">transaction</span><span
-            class="method-args">() { |tx| ... }</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Runs the given block in a database transaction. If no block is given the
+  
+
+  
+</div>
+
+      
+        <div id="transaction-method" class="method ">
+  <a name="method-i-transaction"></a>
+
+  
+    <h4><code>transaction()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Runs the given block in a database transaction. If no block is given the
 transaction object is returned.</p>
 
 <pre class="ruby"><span class="ruby-identifier">user</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
@@ -593,12 +529,11 @@ transaction object.</p>
   <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">rollback</span>
 <span class="ruby-keyword">end</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="transaction-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 193</span>
+    
+      <!-- <div class="method-source-code" id="transaction-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 197</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">transaction</span>
   <span class="ruby-identifier">tx</span> = <span class="ruby-constant">Transaction</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">tx</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
@@ -611,107 +546,137 @@ transaction object.</p>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">TransactionError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Transaction failed to commit.&quot;</span>, <span class="ruby-identifier">e</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-    </section>
+  </div>
+
   
-     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Protected Instance Methods</h3>
-       </header>
 
-    
-      <div id="method-i-to_gcloud_entities" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">to_gcloud_entities</span><span
-            class="method-args">(proto_results)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Convenince method to convert proto entities to <a
-href="../../Gcloud.html">Gcloud</a> entities.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="to_gcloud_entities-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 210</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_gcloud_entities</span> <span class="ruby-identifier">proto_results</span>
-  <span class="ruby-comment"># Entities are nested in an object.</span>
-  <span class="ruby-constant">Array</span>(<span class="ruby-identifier">proto_results</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">result</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">Entity</span>.<span class="ruby-identifier">from_proto</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">entity</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-to_gcloud_keys" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">to_gcloud_keys</span><span
-            class="method-args">(proto_results)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Convenince method to convert proto keys to <a
-href="../../Gcloud.html">Gcloud</a> keys.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="to_gcloud_keys-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 219</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_gcloud_keys</span> <span class="ruby-identifier">proto_results</span>
-  <span class="ruby-comment"># Keys are not nested in an object like entities are.</span>
-  <span class="ruby-constant">Array</span>(<span class="ruby-identifier">proto_results</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">Key</span>.<span class="ruby-identifier">from_proto</span> <span class="ruby-identifier">key</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
   
-  </section>
-</main>
+</div>
+
+      
+    </div>
+  
 
 
-<footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
-</footer>
 
+        
+      </section>
+
+      <nav class="side-nav">
+        <ul>
+          <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
+        </ul>
+        <ul>
+          
+              <li class="toctree-l1" style="padding-left: 0em;">
+                <a class="reference internal" href="../../Gcloud.html">
+                  Gcloud
+                </a>
+              </li>
+          
+              <li class="toctree-l1" style="padding-left: 1em;">
+                <a class="reference internal" href="../Datastore.html">
+                  Datastore
+                </a>
+              </li>
+          
+              <li class="toctree-l1" style="padding-left: 2em;">
+                <a class="reference internal" href="Dataset.html">
+                  Dataset
+                </a>
+              </li>
+          
+          
+              <li class="toctree-l1" style="padding-left: 3em;">
+                <a class="reference internal" href="Dataset/LookupResults.html">
+                  LookupResults
+                </a>
+              </li>
+          
+              <li class="toctree-l1" style="padding-left: 3em;">
+                <a class="reference internal" href="Dataset/QueryResults.html">
+                  QueryResults
+                </a>
+              </li>
+          
+        </ul>
+
+        
+          
+          
+              <ul>
+                <li class="toctree-l1">
+                  <a class="reference internal" href="#public-instance-methods">Public Instance Methods</a>
+                </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-allocate_ids">#allocate_ids</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-delete">#delete</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-find">#find</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-find_all">#find_all</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-get">#get</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-lookup">#lookup</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-project">#project</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-run">#run</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-run_query">#run_query</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-save">#save</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-transaction">#transaction</a>
+                  </li>
+                
+              </ul>
+            
+          
+        
+      </nav>
+
+    </article>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/plugins.js"></script>
+<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/main.js"></script>
+
+<script>
+  (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+  function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+  e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+  e.src='//www.google-analytics.com/analytics.js';
+  r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+  ga('create','UA-49880327-13');ga('send','pageview');
+</script>
+
+
+  </body>
+</html>

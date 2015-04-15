@@ -1,96 +1,96 @@
 <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <title>Gcloud::Datastore::Key &mdash; gcloud Documentation</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
+<script src="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/modernizr-2.6.2.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto:300,400,700,700italic,400italic|Open+Sans:300' rel='stylesheet' type='text/css'>
 
-<html>
-<head>
-<meta charset="UTF-8">
+  </head>
 
-<title>class Gcloud::Datastore::Key - gcloud-0.1.0 Documentation</title>
+  <body class="lang-page">
+    <!--[if lt IE 7]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
-<script type="text/javascript">
-  var rdoc_rel_prefix = "../../";
-</script>
-
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
-
-<link href="../../css/fonts.css" rel="stylesheet">
-<link href="../../css/rdoc.css" rel="stylesheet">
-
-
-
-<body id="top" role="document" class="class">
-<nav role="navigation">
-  <div id="project-navigation">
-    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
-  <h2>
-    <a href="../../index.html" rel="home">Home</a>
-  </h2>
-
-  <div id="table-of-contents-navigation">
-    <a href="../../table_of_contents.html#pages">Pages</a>
-    <a href="../../table_of_contents.html#classes">Classes</a>
-    <a href="../../table_of_contents.html#methods">Methods</a>
-  </div>
-</div>
-
-    <div id="search-section" role="search" class="project-section initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <div id="search-field-wrapper">
-      <input id="search-field" role="combobox" aria-label="Search"
-             aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search" spellcheck="false"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </div>
-
-    <ul id="search-results" aria-label="Search Results"
-        aria-busy="false" aria-expanded="false"
-        aria-atomic="false" class="initially-hidden"></ul>
-  </form>
-</div>
-
-  </div>
-
-  
-
-  <div id="class-metadata">
-    
-    <div id="parent-class-section" class="nav-section">
-  <h3>Parent</h3>
-
-  
-  <p class="link">Object
-  
-</div>
-
-    
-    
-    <!-- Method Quickref -->
-<div id="method-list-section" class="nav-section">
-  <h3>Methods</h3>
-
-  <ul class="link-list" role="directory">
-    
-    <li ><a href="#method-c-new">::new</a>
-    
-    <li ><a href="#method-i-complete-3F">#complete?</a>
-    
-    <li ><a href="#method-i-incomplete-3F">#incomplete?</a>
-    
-    <li ><a href="#method-i-path">#path</a>
-    
-  </ul>
-</div>
-
-  </div>
-</nav>
-
-<main role="main" aria-labelledby="class-Gcloud::Datastore::Key">
-  <h1 id="class-Gcloud::Datastore::Key" class="class">
-    class Gcloud::Datastore::Key
+<header class="page-header fixed" role="banner">
+  <h1 class="logo">
+    <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="back to home">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/logo.svg" alt="Google Cloud Platform" />
+      <span class="gcloud">gcloud</span>
+    </a>
   </h1>
 
-  <section class="description">
+  <nav class="main-nav">
+    <div class="nav-current">Ruby</div>
+    <ul class="menu">
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-node/" title="gcloud-node">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-nodejs.svg" alt="Node.js icon" class="menu-icon" />
+          Node.js
+        </a>
+      </li>
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-python/" title="gcloud-python">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-python.svg" alt="Python icon" class="menu-icon" />
+          Python
+        </a>
+      </li>
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="gcloud-ruby">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.png" alt="Ruby icon" class="menu-icon" width="24" />
+          Ruby
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+</header>
+
+
+    <article class="main lang-page" role="main">
+
+      <header class="docs-header">
+        <h1 class="page-title">Gcloud::Datastore::Key</h1>
+        <div class="versions">
+  <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
+    Version History
+  </a>
+</div>
+<div class="report-issue">
+  <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/new?title=%5BDocumentation+Issue%5D+" target="_blank" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" />
+    Report an Issue
+  </a>
+</div>
+
+      </header>
+
+      <section class="content">
+        
+  
+  <div id="parent-class-section" class="section">
+    <h3 class="section-header">Parent</h3>
     
+      <p class="link">Object</p>
+    
+  </div>
+
+
+        
+
+
+        <div id="description" class="description">
+          
 <p><a href="../Datastore.html">Datastore</a> <a href="Key.html">Key</a></p>
 
 <p>Every <a href="../Datastore.html">Datastore</a> record has an identifying
@@ -102,26 +102,28 @@ href="../Datastore.html">Datastore</a>.</p>
 <pre class="ruby"><span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;username&quot;</span>
 </pre>
 
-  </section>
+        </div>
+
+        
+          <h2 id="5Buntitled-5D"></h2>
+
+
+
+
+
+
+
 
   
-  
-  
-  <section id="5Buntitled-5D" class="documentation-section">
-    
+  <div id="attribute-method-details" class="method-section section">
+    <h3 class="section-header">Attributes</h3>
 
     
-
-    
-
-    
-    <section class="attribute-method-details" class="method-section">
-      <header>
-        <h3>Attributes</h3>
-      </header>
-
-      
-      <div id="attribute-i-dataset_id" class="method-detail">
+      <div id="dataset_id-attribute-method" class="method-detail">
+        <a name="dataset_id"></a>
+        
+          <a name="dataset_id="></a>
+        
         <div class="method-heading attribute-method-heading">
           <span class="method-name">dataset_id</span><span
             class="attribute-access-type">[RW]</span>
@@ -129,13 +131,15 @@ href="../Datastore.html">Datastore</a>.</p>
 
         <div class="method-description">
         
-        <p>The <a href="Key.html#attribute-i-dataset_id">#dataset_id</a> of the <a
+          <p>The <a href="Key.html#attribute-i-dataset_id">#dataset_id</a> of the <a
 href="Key.html">Key</a>.</p>
         
         </div>
       </div>
-      
-      <div id="attribute-i-id" class="method-detail">
+    
+      <div id="id-attribute-method" class="method-detail">
+        <a name="id"></a>
+        
         <div class="method-heading attribute-method-heading">
           <span class="method-name">id</span><span
             class="attribute-access-type">[R]</span>
@@ -143,12 +147,16 @@ href="Key.html">Key</a>.</p>
 
         <div class="method-description">
         
-        <p>The id of the <a href="Key.html">Key</a>.</p>
+          <p>The id of the <a href="Key.html">Key</a>.</p>
         
         </div>
       </div>
-      
-      <div id="attribute-i-kind" class="method-detail">
+    
+      <div id="kind-attribute-method" class="method-detail">
+        <a name="kind"></a>
+        
+          <a name="kind="></a>
+        
         <div class="method-heading attribute-method-heading">
           <span class="method-name">kind</span><span
             class="attribute-access-type">[RW]</span>
@@ -156,12 +164,14 @@ href="Key.html">Key</a>.</p>
 
         <div class="method-description">
         
-        <p>The kind of the <a href="Key.html">Key</a>.</p>
+          <p>The kind of the <a href="Key.html">Key</a>.</p>
         
         </div>
       </div>
-      
-      <div id="attribute-i-name" class="method-detail">
+    
+      <div id="name-attribute-method" class="method-detail">
+        <a name="name"></a>
+        
         <div class="method-heading attribute-method-heading">
           <span class="method-name">name</span><span
             class="attribute-access-type">[R]</span>
@@ -169,12 +179,16 @@ href="Key.html">Key</a>.</p>
 
         <div class="method-description">
         
-        <p>The name of the <a href="Key.html">Key</a>.</p>
+          <p>The name of the <a href="Key.html">Key</a>.</p>
         
         </div>
       </div>
-      
-      <div id="attribute-i-namespace" class="method-detail">
+    
+      <div id="namespace-attribute-method" class="method-detail">
+        <a name="namespace"></a>
+        
+          <a name="namespace="></a>
+        
         <div class="method-heading attribute-method-heading">
           <span class="method-name">namespace</span><span
             class="attribute-access-type">[RW]</span>
@@ -182,12 +196,14 @@ href="Key.html">Key</a>.</p>
 
         <div class="method-description">
         
-        <p>The namespace of the <a href="Key.html">Key</a>.</p>
+          <p>The namespace of the <a href="Key.html">Key</a>.</p>
         
         </div>
       </div>
-      
-      <div id="attribute-i-parent" class="method-detail">
+    
+      <div id="parent-attribute-method" class="method-detail">
+        <a name="parent"></a>
+        
         <div class="method-heading attribute-method-heading">
           <span class="method-name">parent</span><span
             class="attribute-access-type">[R]</span>
@@ -195,41 +211,35 @@ href="Key.html">Key</a>.</p>
 
         <div class="method-description">
         
-        <p>The parent of the <a href="Key.html">Key</a>.</p>
+          <p>The parent of the <a href="Key.html">Key</a>.</p>
         
         </div>
       </div>
+    
+  </div>
+
+
+
+
+    <div id="public-class-methods" class="methods">
+      <h3 class="section-header">Public Class Methods</h3>
+
       
-    </section>
+        <div id="new-method" class="method ">
+  <a name="method-c-new"></a>
+
+  
+    <h4><code>new(kind = nil, id_or_name = nil)</code></h4>
+  
+
+  <div class="method-description">
+    
+      
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Class Methods</h3>
-       </header>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(kind = nil, id_or_name = nil)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 41</span>
+      <!-- <div class="method-source-code" id="new-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">kind</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">id_or_name</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@kind</span> = <span class="ruby-identifier">kind</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">id_or_name</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Integer</span>
@@ -238,140 +248,203 @@ href="Key.html">Key</a>.</p>
     <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">id_or_name</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-    </section>
+  </div>
+
   
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Instance Methods</h3>
-       </header>
+
+  
+</div>
+
+      
+    </div>
+  
+
+    <div id="public-instance-methods" class="methods">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+      
+        <div id="complete-3F-method" class="method ">
+  <a name="method-i-complete-3F"></a>
+
+  
+    <h4><code>complete?()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Determine if the key is complete. A complete key has either an id or a
+name.</p>
+    
 
     
-      <div id="method-i-complete-3F" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">complete?</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Determine if the key is complete. A complete key has either an id or a
-name.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="complete-3F-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 100</span>
+      <!-- <div class="method-source-code" id="complete-3F-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">complete?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">incomplete?</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="incomplete-3F-method" class="method ">
+  <a name="method-i-incomplete-3F"></a>
+
+  
+    <h4><code>incomplete?()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Determine if the key is incomplete. An incomplete key has neither an id nor
+a name.</p>
+    
 
     
-      <div id="method-i-incomplete-3F" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">incomplete?</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Determine if the key is incomplete. An incomplete key has neither an id nor
-a name.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="incomplete-3F-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 107</span>
+      <!-- <div class="method-source-code" id="incomplete-3F-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">incomplete?</span>
   <span class="ruby-identifier">kind</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">id</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">empty?</span>))
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-path" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">path</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Represent the Key&#39;s path (including parent) as an array of arrays. Each
+  
+
+  
+</div>
+
+      
+        <div id="path-method" class="method ">
+  <a name="method-i-path"></a>
+
+  
+    <h4><code>path()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Represent the Key&#39;s path (including parent) as an array of arrays. Each
 inner array contains two values, the kind and the id or name. If neither an
 id or name exist then nil will be returned.</p>
 
 <pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">path</span> <span class="ruby-comment">#=&gt; [[&quot;Person&quot;, &quot;username&quot;], [&quot;Task&quot;, 123456]]</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="path-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 92</span>
+    
+      <!-- <div class="method-source-code" id="path-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">path</span>
   <span class="ruby-identifier">new_path</span> = <span class="ruby-identifier">parent</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">path</span> <span class="ruby-operator">:</span> []
   <span class="ruby-identifier">new_path</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">kind</span>, (<span class="ruby-identifier">id</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">name</span>)]
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-    </section>
+  </div>
+
   
-  </section>
-</main>
+
+  
+</div>
+
+      
+    </div>
+  
 
 
-<footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
-</footer>
 
+        
+      </section>
+
+      <nav class="side-nav">
+        <ul>
+          <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
+        </ul>
+        <ul>
+          
+              <li class="toctree-l1" style="padding-left: 0em;">
+                <a class="reference internal" href="../../Gcloud.html">
+                  Gcloud
+                </a>
+              </li>
+          
+              <li class="toctree-l1" style="padding-left: 1em;">
+                <a class="reference internal" href="../Datastore.html">
+                  Datastore
+                </a>
+              </li>
+          
+              <li class="toctree-l1" style="padding-left: 2em;">
+                <a class="reference internal" href="Key.html">
+                  Key
+                </a>
+              </li>
+          
+          
+        </ul>
+
+        
+          
+              <ul>
+                <li class="toctree-l1">
+                  <a class="reference internal" href="#public-class-methods">Public Class Methods</a>
+                </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-c-new">::new</a>
+                  </li>
+                
+              </ul>
+            
+          
+              <ul>
+                <li class="toctree-l1">
+                  <a class="reference internal" href="#public-instance-methods">Public Instance Methods</a>
+                </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-complete-3F">#complete?</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-incomplete-3F">#incomplete?</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-path">#path</a>
+                  </li>
+                
+              </ul>
+            
+          
+        
+      </nav>
+
+    </article>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/plugins.js"></script>
+<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/main.js"></script>
+
+<script>
+  (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+  function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+  e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+  e.src='//www.google-analytics.com/analytics.js';
+  r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+  ga('create','UA-49880327-13');ga('send','pageview');
+</script>
+
+
+  </body>
+</html>

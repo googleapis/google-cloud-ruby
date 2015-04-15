@@ -1,235 +1,192 @@
 <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <title>Gcloud::Storage::Bucket &mdash; gcloud Documentation</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
+<script src="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/modernizr-2.6.2.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto:300,400,700,700italic,400italic|Open+Sans:300' rel='stylesheet' type='text/css'>
 
-<html>
-<head>
-<meta charset="UTF-8">
+  </head>
 
-<title>class Gcloud::Storage::Bucket - gcloud-0.0.1 Documentation</title>
+  <body class="lang-page">
+    <!--[if lt IE 7]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
-<script type="text/javascript">
-  var rdoc_rel_prefix = "../../";
-</script>
-
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
-
-<link href="../../css/fonts.css" rel="stylesheet">
-<link href="../../css/rdoc.css" rel="stylesheet">
-
-
-
-<body id="top" role="document" class="class">
-<nav role="navigation">
-  <div id="project-navigation">
-    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
-  <h2>
-    <a href="../../index.html" rel="home">Home</a>
-  </h2>
-
-  <div id="table-of-contents-navigation">
-    <a href="../../table_of_contents.html#pages">Pages</a>
-    <a href="../../table_of_contents.html#classes">Classes</a>
-    <a href="../../table_of_contents.html#methods">Methods</a>
-  </div>
-</div>
-
-    <div id="search-section" role="search" class="project-section initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <div id="search-field-wrapper">
-      <input id="search-field" role="combobox" aria-label="Search"
-             aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search" spellcheck="false"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </div>
-
-    <ul id="search-results" aria-label="Search Results"
-        aria-busy="false" aria-expanded="false"
-        aria-atomic="false" class="initially-hidden"></ul>
-  </form>
-</div>
-
-  </div>
-
-  
-
-  <div id="class-metadata">
-    
-    <div id="parent-class-section" class="nav-section">
-  <h3>Parent</h3>
-
-  
-  <p class="link">Object
-  
-</div>
-
-    
-    
-    <!-- Method Quickref -->
-<div id="method-list-section" class="nav-section">
-  <h3>Methods</h3>
-
-  <ul class="link-list" role="directory">
-    
-    <li ><a href="#method-c-new">::new</a>
-    
-    <li ><a href="#method-i-acl">#acl</a>
-    
-    <li ><a href="#method-i-create_file">#create_file</a>
-    
-    <li ><a href="#method-i-created_at">#created_at</a>
-    
-    <li ><a href="#method-i-default_acl">#default_acl</a>
-    
-    <li ><a href="#method-i-delete">#delete</a>
-    
-    <li ><a href="#method-i-ensure_connection-21">#ensure_connection!</a>
-    
-    <li ><a href="#method-i-files">#files</a>
-    
-    <li ><a href="#method-i-find_file">#find_file</a>
-    
-    <li ><a href="#method-i-id">#id</a>
-    
-    <li ><a href="#method-i-kind">#kind</a>
-    
-    <li ><a href="#method-i-location">#location</a>
-    
-    <li ><a href="#method-i-name">#name</a>
-    
-    <li ><a href="#method-i-upload_multipart">#upload_multipart</a>
-    
-    <li ><a href="#method-i-upload_resumable">#upload_resumable</a>
-    
-    <li ><a href="#method-i-url">#url</a>
-    
-    <li ><a href="#method-i-verify_chunk_size-21">#verify_chunk_size!</a>
-    
-  </ul>
-</div>
-
-  </div>
-</nav>
-
-<main role="main" aria-labelledby="class-Gcloud::Storage::Bucket">
-  <h1 id="class-Gcloud::Storage::Bucket" class="class">
-    class Gcloud::Storage::Bucket
+<header class="page-header fixed" role="banner">
+  <h1 class="logo">
+    <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="back to home">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/logo.svg" alt="Google Cloud Platform" />
+      <span class="gcloud">gcloud</span>
+    </a>
   </h1>
 
-  <section class="description">
+  <nav class="main-nav">
+    <div class="nav-current">Ruby</div>
+    <ul class="menu">
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-node/" title="gcloud-node">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-nodejs.svg" alt="Node.js icon" class="menu-icon" />
+          Node.js
+        </a>
+      </li>
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-python/" title="gcloud-python">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-python.svg" alt="Python icon" class="menu-icon" />
+          Python
+        </a>
+      </li>
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="gcloud-ruby">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.png" alt="Ruby icon" class="menu-icon" width="24" />
+          Ruby
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+</header>
+
+
+    <article class="main lang-page" role="main">
+
+      <header class="docs-header">
+        <h1 class="page-title">Gcloud::Storage::Bucket</h1>
+        <div class="versions">
+  <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
+    Version History
+  </a>
+</div>
+<div class="report-issue">
+  <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/new?title=%5BDocumentation+Issue%5D+" target="_blank" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" />
+    Report an Issue
+  </a>
+</div>
+
+      </header>
+
+      <section class="content">
+        
+  
+  <div id="parent-class-section" class="section">
+    <h3 class="section-header">Parent</h3>
     
+      <p class="link">Object</p>
+    
+  </div>
+
+
+        
+
+
+        <div id="description" class="description">
+          
 <p>Represents a <a href="Bucket.html">Bucket</a>. Belongs to a <a
 href="Project.html">Project</a> and has many Files.</p>
 
-  </section>
-
-  
-  
-  
-  <section id="5Buntitled-5D" class="documentation-section">
-    
-
-    
-
-    
-
-    
-
-    
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Class Methods</h3>
-       </header>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
         </div>
+
         
+          <h2 id="5Buntitled-5D"></h2>
 
-        <div class="method-description">
-          
-          <p>Create an empty <a href="Bucket.html">Bucket</a> object.</p>
-          
-          
 
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 34</span>
+
+
+
+
+
+
+
+
+
+    <div id="public-class-methods" class="methods">
+      <h3 class="section-header">Public Class Methods</h3>
+
+      
+        <div id="new-method" class="method ">
+  <a name="method-c-new"></a>
+
+  
+    <h4><code>new()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Create an empty <a href="Bucket.html">Bucket</a> object.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="new-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-ivar">@connection</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@gapi</span> = {}
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-    </section>
+  </div>
+
   
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Instance Methods</h3>
-       </header>
+
+  
+</div>
+
+      
+    </div>
+  
+
+    <div id="public-instance-methods" class="methods">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+      
+        <div id="acl-method" class="method ">
+  <a name="method-i-acl"></a>
+
+  
+    <h4><code>acl()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Access Control <a href="Bucket/List.html">List</a></p>
+    
 
     
-      <div id="method-i-acl" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">acl</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Access Control <a href="Bucket/List.html">List</a></p>
-          
-          
-
-          
-          <div class="method-source-code" id="acl-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 185</span>
+      <!-- <div class="method-source-code" id="acl-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 186</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acl</span>
   <span class="ruby-ivar">@acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-create_file" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">create_file</span><span
-            class="method-args">(file, path = nil, options = {})</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Create a new Gcloud::Storeage::File object by providing a <a
+  
+
+  
+</div>
+
+      
+        <div id="create_file-method" class="method ">
+  <a name="method-i-create_file"></a>
+
+  
+    <h4><code>create_file(file, path = nil, options = {})</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Create a new Gcloud::Storeage::File object by providing a <a
 href="File.html">File</a> object to upload and the path to store it with.</p>
 
 <pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
@@ -256,12 +213,11 @@ nearest acceptible value.</p>
 </pre>
 
 <p>See <a href="File.html">Gcloud::Storage::File</a></p>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="create_file-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 168</span>
+    
+      <!-- <div class="method-source-code" id="create_file-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 169</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_file</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-comment"># TODO: Raise if file doesn&#39;t exist</span>
@@ -276,96 +232,82 @@ nearest acceptible value.</p>
     <span class="ruby-identifier">upload_multipart</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="created_at-method" class="method ">
+  <a name="method-i-created_at"></a>
+
+  
+    <h4><code>created_at()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Creation time of the bucket.</p>
+    
 
     
-      <div id="method-i-created_at" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">created_at</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Creation time of the bucket.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="created_at-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 77</span>
+      <!-- <div class="method-source-code" id="created_at-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">created_at</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;timeCreated&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="default_acl-method" class="method ">
+  <a name="method-i-default_acl"></a>
+
+  
+    <h4><code>default_acl()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Default Access Control <a href="Bucket/List.html">List</a></p>
+    
 
     
-      <div id="method-i-default_acl" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">default_acl</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Default Access Control <a href="Bucket/List.html">List</a></p>
-          
-          
-
-          
-          <div class="method-source-code" id="default_acl-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 191</span>
+      <!-- <div class="method-source-code" id="default_acl-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 192</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_acl</span>
   <span class="ruby-ivar">@default_acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultAcl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-delete" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">delete</span><span
-            class="method-args">(options = {})</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Permenently deletes the bucket. The bucket must be empty.</p>
+  
+
+  
+</div>
+
+      
+        <div id="delete-method" class="method ">
+  <a name="method-i-delete"></a>
+
+  
+    <h4><code>delete(options = {})</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Permenently deletes the bucket. The bucket must be empty.</p>
 
 <pre class="ruby"><span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">delete</span>
 </pre>
@@ -376,12 +318,11 @@ or specify the wanted behavior in the call:</p>
 
 <pre class="ruby"><span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">retries</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 92</span>
+    
+      <!-- <div class="method-source-code" id="delete-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_bucket</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
@@ -391,30 +332,26 @@ or specify the wanted behavior in the call:</p>
     <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-files" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">files</span><span
-            class="method-args">(options = {})</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Retrieves a list of files matching the criteria.</p>
+  
+
+  
+</div>
+
+      
+        <div id="files-method" class="method ">
+  <a name="method-i-files"></a>
+
+  
+    <h4><code>files(options = {})</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Retrieves a list of files matching the criteria.</p>
 
 <pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
@@ -425,12 +362,11 @@ or specify the wanted behavior in the call:</p>
 </pre>
 
 <p>See <a href="File.html">Gcloud::Storage::File</a></p>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="files-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 113</span>
+    
+      <!-- <div class="method-source-code" id="files-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">files</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_files</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
@@ -440,30 +376,26 @@ or specify the wanted behavior in the call:</p>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-find_file" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">find_file</span><span
-            class="method-args">(path, options = {})</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Retrieves a file matching the path.</p>
+  
+
+  
+</div>
+
+      
+        <div id="find_file-method" class="method ">
+  <a name="method-i-find_file"></a>
+
+  
+    <h4><code>find_file(path, options = {})</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Retrieves a file matching the path.</p>
 
 <pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
@@ -472,12 +404,11 @@ or specify the wanted behavior in the call:</p>
 </pre>
 
 <p>See <a href="File.html">Gcloud::Storage::File</a></p>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="find_file-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 132</span>
+    
+      <!-- <div class="method-source-code" id="find_file-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_file</span> <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_file</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
@@ -487,356 +418,303 @@ or specify the wanted behavior in the call:</p>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="id-method" class="method ">
+  <a name="method-i-id"></a>
+
+  
+    <h4><code>id()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>The ID of the bucket.</p>
+    
 
     
-      <div id="method-i-id" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">id</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>The ID of the bucket.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="id-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 48</span>
+      <!-- <div class="method-source-code" id="id-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;id&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="kind-method" class="method ">
+  <a name="method-i-kind"></a>
+
+  
+    <h4><code>kind()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>The kind of item this is. For buckets, this is always storage#bucket.</p>
+    
 
     
-      <div id="method-i-kind" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">kind</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>The kind of item this is. For buckets, this is always storage#bucket.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="kind-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 42</span>
+      <!-- <div class="method-source-code" id="kind-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">kind</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;kind&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-location" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">location</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>The location of the bucket. Object data for objects in the bucket resides
+  
+
+  
+</div>
+
+      
+        <div id="location-method" class="method ">
+  <a name="method-i-location"></a>
+
+  
+    <h4><code>location()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>The location of the bucket. Object data for objects in the bucket resides
 in physical storage within this region. Defaults to US. See the
 developer&#39;s guide for the authoritative list.</p>
 
 <p><a
 href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.com/storage/docs/concepts-techniques</a></p>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="location-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 71</span>
+    
+      <!-- <div class="method-source-code" id="location-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">location</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;location&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="name-method" class="method ">
+  <a name="method-i-name"></a>
+
+  
+    <h4><code>name()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>The name of the bucket.</p>
+    
 
     
-      <div id="method-i-name" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">name</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>The name of the bucket.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="name-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 54</span>
+      <!-- <div class="method-source-code" id="name-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;name&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="url-method" class="method ">
+  <a name="method-i-url"></a>
+
+  
+    <h4><code>url()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>The URI of this bucket.</p>
+    
 
     
-      <div id="method-i-url" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">url</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>The URI of this bucket.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="url-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 60</span>
+      <!-- <div class="method-source-code" id="url-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">url</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-    </section>
+  </div>
+
   
-     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Protected Instance Methods</h3>
-       </header>
 
-    
-      <div id="method-i-ensure_connection-21" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">ensure_connection!</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Raise an error unless an active connection is available.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="ensure_connection-21-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 208</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">ensure_connection!</span>
-  <span class="ruby-identifier">fail</span> <span class="ruby-string">&quot;Must have active connection&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">connection</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-upload_multipart" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">upload_multipart</span><span
-            class="method-args">(file, path, options = {})</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="upload_multipart-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 218</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">upload_multipart</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_file_multipart</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-constant">File</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-upload_resumable" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">upload_resumable</span><span
-            class="method-args">(file, path, chunk_size, options = {})</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="upload_resumable-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 228</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">upload_resumable</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">chunk_size</span>, <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-identifier">chunk_size</span> = <span class="ruby-identifier">verify_chunk_size!</span> <span class="ruby-identifier">chunk_size</span>
-
-  <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_file_resumable</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">file</span>,
-                                           <span class="ruby-identifier">path</span>, <span class="ruby-identifier">chunk_size</span>, <span class="ruby-identifier">options</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-constant">File</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-verify_chunk_size-21" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">verify_chunk_size!</span><span
-            class="method-args">(chunk_size)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Determines if a chunk_size is valid.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="verify_chunk_size-21-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 243</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">verify_chunk_size!</span> <span class="ruby-identifier">chunk_size</span>
-  <span class="ruby-identifier">chunk_size</span> = <span class="ruby-identifier">chunk_size</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-identifier">chunk_mod</span> = <span class="ruby-value">256</span> <span class="ruby-operator">*</span> <span class="ruby-value">1024</span> <span class="ruby-comment"># 256KB</span>
-  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">chunk_size</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">chunk_mod</span>) <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-    <span class="ruby-identifier">chunk_size</span> = (<span class="ruby-identifier">chunk_size</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">chunk_mod</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">chunk_mod</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">chunk_size</span>.<span class="ruby-identifier">zero?</span>
-  <span class="ruby-identifier">chunk_size</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
   
-  </section>
-</main>
+</div>
+
+      
+    </div>
+  
 
 
-<footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
-</footer>
 
+        
+      </section>
+
+      <nav class="side-nav">
+        <ul>
+          <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
+        </ul>
+        <ul>
+          
+              <li class="toctree-l1" style="padding-left: 0em;">
+                <a class="reference internal" href="../../Gcloud.html">
+                  Gcloud
+                </a>
+              </li>
+          
+              <li class="toctree-l1" style="padding-left: 1em;">
+                <a class="reference internal" href="../Storage.html">
+                  Storage
+                </a>
+              </li>
+          
+              <li class="toctree-l1" style="padding-left: 2em;">
+                <a class="reference internal" href="Bucket.html">
+                  Bucket
+                </a>
+              </li>
+          
+          
+              <li class="toctree-l1" style="padding-left: 3em;">
+                <a class="reference internal" href="Bucket/Acl.html">
+                  Acl
+                </a>
+              </li>
+          
+              <li class="toctree-l1" style="padding-left: 3em;">
+                <a class="reference internal" href="Bucket/DefaultAcl.html">
+                  DefaultAcl
+                </a>
+              </li>
+          
+              <li class="toctree-l1" style="padding-left: 3em;">
+                <a class="reference internal" href="Bucket/List.html">
+                  List
+                </a>
+              </li>
+          
+        </ul>
+
+        
+          
+              <ul>
+                <li class="toctree-l1">
+                  <a class="reference internal" href="#public-class-methods">Public Class Methods</a>
+                </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-c-new">::new</a>
+                  </li>
+                
+              </ul>
+            
+          
+              <ul>
+                <li class="toctree-l1">
+                  <a class="reference internal" href="#public-instance-methods">Public Instance Methods</a>
+                </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-acl">#acl</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-create_file">#create_file</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-created_at">#created_at</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-default_acl">#default_acl</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-delete">#delete</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-files">#files</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-find_file">#find_file</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-id">#id</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-kind">#kind</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-location">#location</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-name">#name</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-url">#url</a>
+                  </li>
+                
+              </ul>
+            
+          
+        
+      </nav>
+
+    </article>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/plugins.js"></script>
+<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/main.js"></script>
+
+<script>
+  (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+  function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+  e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+  e.src='//www.google-analytics.com/analytics.js';
+  r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+  ga('create','UA-49880327-13');ga('send','pageview');
+</script>
+
+
+  </body>
+</html>

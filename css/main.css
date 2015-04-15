@@ -580,13 +580,16 @@ h1, h2, h3, h4, h5, h6 {
  Versions
 */
 
-.versions {
+.versions,
+.report-issue {
     display: inline-block;
     margin-top: 2em;
 }
 
 .versions span,
-.versions a {
+.versions a,
+.report-issue span,
+.report-issue a {
     display: block;
 }
 
@@ -907,11 +910,17 @@ h1, h2, h3, h4, h5, h6 {
      Docs Header
     */
 
-    .versions {
+    .versions,
+    .report-issue {
         position: absolute;
-        top: 6em;
         right: 2em;
         margin: 0;
+    }
+    .versions {
+        top: 6em;
+    }
+    .report-issue {
+        top: 8em;
     }
 
     .v-btn {
@@ -1014,6 +1023,9 @@ h1, h2, h3, h4, h5, h6 {
 
     .versions {
         top: 7em;
+    }
+    .report-issue {
+        top: 9em;
     }
 
 
@@ -1284,4 +1296,49 @@ h1, h2, h3, h4, h5, h6 {
     h3 {
         page-break-after: avoid;
     }
+}
+
+/*Additional style rules for docs*/
+
+h1 > span,
+h2 > span,
+h3 > span,
+h4 > span {
+  padding-left: 2em;
+  visibility: hidden;
+}
+
+h1:hover > span,
+h2:hover > span,
+h3:hover > span,
+h4:hover > span {
+  visibility: visible;
+}
+
+h1 > span > a,
+h2 > span > a,
+h3 > span > a,
+h4 > span > a {
+  color: #ccc;
+  font-size: smaller
+}
+
+pre .ruby-constant   { color: #099; }
+pre .ruby-keyword    { color: #333; font-weight: bold; }
+pre .ruby-ivar       { color: #008080; }
+pre .ruby-operator   { color: #990073; }
+pre .ruby-constant   { color: #458; font-weight: bold; }
+pre .ruby-identifier { color: #008080; }
+pre .ruby-node       { color: #008080; }
+pre .ruby-comment    { color: #998; font-style: italic; }
+pre .ruby-regexp     { color: #009926; }
+pre .ruby-string     { color: #990073; }
+pre .ruby-value      { color: #d14; }
+
+.method h4 {
+  font-size: 1.5em;
+}
+
+.method-description {
+  padding-left: 1em;
 }

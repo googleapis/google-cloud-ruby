@@ -1,114 +1,96 @@
 <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <title>Gcloud::Datastore::Query &mdash; gcloud Documentation</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
+<script src="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/modernizr-2.6.2.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto:300,400,700,700italic,400italic|Open+Sans:300' rel='stylesheet' type='text/css'>
 
-<html>
-<head>
-<meta charset="UTF-8">
+  </head>
 
-<title>class Gcloud::Datastore::Query - gcloud-0.1.0 Documentation</title>
+  <body class="lang-page">
+    <!--[if lt IE 7]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
-<script type="text/javascript">
-  var rdoc_rel_prefix = "../../";
-</script>
-
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
-
-<link href="../../css/fonts.css" rel="stylesheet">
-<link href="../../css/rdoc.css" rel="stylesheet">
-
-
-
-<body id="top" role="document" class="class">
-<nav role="navigation">
-  <div id="project-navigation">
-    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
-  <h2>
-    <a href="../../index.html" rel="home">Home</a>
-  </h2>
-
-  <div id="table-of-contents-navigation">
-    <a href="../../table_of_contents.html#pages">Pages</a>
-    <a href="../../table_of_contents.html#classes">Classes</a>
-    <a href="../../table_of_contents.html#methods">Methods</a>
-  </div>
-</div>
-
-    <div id="search-section" role="search" class="project-section initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <div id="search-field-wrapper">
-      <input id="search-field" role="combobox" aria-label="Search"
-             aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search" spellcheck="false"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </div>
-
-    <ul id="search-results" aria-label="Search Results"
-        aria-busy="false" aria-expanded="false"
-        aria-atomic="false" class="initially-hidden"></ul>
-  </form>
-</div>
-
-  </div>
-
-  
-
-  <div id="class-metadata">
-    
-    <div id="parent-class-section" class="nav-section">
-  <h3>Parent</h3>
-
-  
-  <p class="link">Object
-  
-</div>
-
-    
-    
-    <!-- Method Quickref -->
-<div id="method-list-section" class="nav-section">
-  <h3>Methods</h3>
-
-  <ul class="link-list" role="directory">
-    
-    <li ><a href="#method-c-new">::new</a>
-    
-    <li ><a href="#method-i-ancestor">#ancestor</a>
-    
-    <li ><a href="#method-i-cursor">#cursor</a>
-    
-    <li ><a href="#method-i-filter">#filter</a>
-    
-    <li ><a href="#method-i-group_by">#group_by</a>
-    
-    <li ><a href="#method-i-kind">#kind</a>
-    
-    <li ><a href="#method-i-limit">#limit</a>
-    
-    <li ><a href="#method-i-offset">#offset</a>
-    
-    <li ><a href="#method-i-order">#order</a>
-    
-    <li ><a href="#method-i-projection">#projection</a>
-    
-    <li ><a href="#method-i-select">#select</a>
-    
-    <li ><a href="#method-i-start">#start</a>
-    
-    <li ><a href="#method-i-where">#where</a>
-    
-  </ul>
-</div>
-
-  </div>
-</nav>
-
-<main role="main" aria-labelledby="class-Gcloud::Datastore::Query">
-  <h1 id="class-Gcloud::Datastore::Query" class="class">
-    class Gcloud::Datastore::Query
+<header class="page-header fixed" role="banner">
+  <h1 class="logo">
+    <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="back to home">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/logo.svg" alt="Google Cloud Platform" />
+      <span class="gcloud">gcloud</span>
+    </a>
   </h1>
 
-  <section class="description">
+  <nav class="main-nav">
+    <div class="nav-current">Ruby</div>
+    <ul class="menu">
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-node/" title="gcloud-node">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-nodejs.svg" alt="Node.js icon" class="menu-icon" />
+          Node.js
+        </a>
+      </li>
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-python/" title="gcloud-python">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-python.svg" alt="Python icon" class="menu-icon" />
+          Python
+        </a>
+      </li>
+      <li>
+        <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="gcloud-ruby">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.png" alt="Ruby icon" class="menu-icon" width="24" />
+          Ruby
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+</header>
+
+
+    <article class="main lang-page" role="main">
+
+      <header class="docs-header">
+        <h1 class="page-title">Gcloud::Datastore::Query</h1>
+        <div class="versions">
+  <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
+    Version History
+  </a>
+</div>
+<div class="report-issue">
+  <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/new?title=%5BDocumentation+Issue%5D+" target="_blank" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" />
+    Report an Issue
+  </a>
+</div>
+
+      </header>
+
+      <section class="content">
+        
+  
+  <div id="parent-class-section" class="section">
+    <h3 class="section-header">Parent</h3>
     
+      <p class="link">Object</p>
+    
+  </div>
+
+
+        
+
+
+        <div id="description" class="description">
+          
 <p><a href="Query.html">Query</a> represents a query to be made to the <a
 href="../Datastore.html">Datastore</a>.</p>
 
@@ -119,85 +101,73 @@ href="../Datastore.html">Datastore</a>.</p>
 <span class="ruby-identifier">entities</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
 
-  </section>
-
-  
-  
-  
-  <section id="5Buntitled-5D" class="documentation-section">
-    
-
-    
-
-    
-
-    
-
-    
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Class Methods</h3>
-       </header>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
-        <div class="method-description">
-          
-          <p>Returns a new query object.</p>
+        
+          <h2 id="5Buntitled-5D"></h2>
+
+
+
+
+
+
+
+
+
+
+
+    <div id="public-class-methods" class="methods">
+      <h3 class="section-header">Public Class Methods</h3>
+
+      
+        <div id="new-method" class="method ">
+  <a name="method-c-new"></a>
+
+  
+    <h4><code>new()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Returns a new query object.</p>
 
 <pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 34</span>
+    
+      <!-- <div class="method-source-code" id="new-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-ivar">@_query</span> = <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-    </section>
+  </div>
+
   
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Instance Methods</h3>
-       </header>
 
+  
+</div>
+
+      
+    </div>
+  
+
+    <div id="public-instance-methods" class="methods">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+      
+        <div id="ancestor-method" class="method ">
+  <a name="method-i-ancestor"></a>
+
+  
+    <h4><code>ancestor(parent)</code></h4>
+  
+
+  <div class="method-description">
     
-      <div id="method-i-ancestor" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">ancestor</span><span
-            class="method-args">(parent)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Add a filter for entities that inherit from a key.</p>
+      <p>Add a filter for entities that inherit from a key.</p>
 
 <pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
@@ -205,97 +175,86 @@ href="../Datastore.html">Datastore</a>.</p>
 
 <span class="ruby-identifier">completed_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="ancestor-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 83</span>
+    
+      <!-- <div class="method-source-code" id="ancestor-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ancestor</span> <span class="ruby-identifier">parent</span>
   <span class="ruby-comment"># Use key if given an entity</span>
   <span class="ruby-identifier">parent</span> = <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">key</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:key</span>
   <span class="ruby-identifier">where</span> <span class="ruby-string">&quot;__key__&quot;</span>, <span class="ruby-string">&quot;~&quot;</span>, <span class="ruby-identifier">parent</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="cursor-method" class="method alias">
+  <a name="method-i-cursor"></a>
+
+  
+    <h4><code>cursor(cursor)</code></h4>
+  
+
+  <div class="method-description">
+    
+      
+    
 
     
-      <div id="method-i-cursor" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">cursor</span><span
-            class="method-args">(cursor)</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          
-          
-          
+  
 
-          
-        </div>
+  
+    <div class="aliases">
+      Alias for: <a href="Query.html#method-i-start">start</a>
+    </div>
+  
+</div>
 
-        
+      
+        <div id="filter-method" class="method alias">
+  <a name="method-i-filter"></a>
 
-        
-        <div class="aliases">
-          Alias for: <a href="Query.html#method-i-start">start</a>
-        </div>
-        
-      </div>
+  
+    <h4><code>filter(name, operator, value)</code></h4>
+  
+
+  <div class="method-description">
+    
+      
+    
 
     
-      <div id="method-i-filter" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">filter</span><span
-            class="method-args">(name, operator, value)</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          
-          
-          
+  
 
-          
-        </div>
+  
+    <div class="aliases">
+      Alias for: <a href="Query.html#method-i-where">where</a>
+    </div>
+  
+</div>
 
-        
+      
+        <div id="group_by-method" class="method ">
+  <a name="method-i-group_by"></a>
 
-        
-        <div class="aliases">
-          Alias for: <a href="Query.html#method-i-where">where</a>
-        </div>
-        
-      </div>
+  
+    <h4><code>group_by(*names)</code></h4>
+  
 
+  <div class="method-description">
     
-      <div id="method-i-group_by" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">group_by</span><span
-            class="method-args">(*names)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Group results by a list of properties.</p>
+      <p>Group results by a list of properties.</p>
 
 <pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
@@ -303,83 +262,73 @@ href="../Datastore.html">Datastore</a>.</p>
 
 <span class="ruby-identifier">grouped_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="group_by-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 175</span>
+    
+      <!-- <div class="method-source-code" id="group_by-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">group_by</span> <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">group_by</span> <span class="ruby-operator">||=</span> []
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">group_by</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">new_property_references</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-kind" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">kind</span><span
-            class="method-args">(*kinds)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Add the kind of entities to query.</p>
+  
+
+  
+</div>
+
+      
+        <div id="kind-method" class="method ">
+  <a name="method-i-kind"></a>
+
+  
+    <h4><code>kind(*kinds)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Add the kind of entities to query.</p>
 
 <pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span> <span class="ruby-string">&quot;Task&quot;</span>
 
 <span class="ruby-identifier">all_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="kind-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 45</span>
+    
+      <!-- <div class="method-source-code" id="kind-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">kind</span> <span class="ruby-operator">*</span><span class="ruby-identifier">kinds</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">kind</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">KindExpression</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">kind</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> []
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">kind</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">|=</span> <span class="ruby-identifier">kinds</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-limit" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">limit</span><span
-            class="method-args">(num)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Set a limit on the number of results to be returned.</p>
+  
+
+  
+</div>
+
+      
+        <div id="limit-method" class="method ">
+  <a name="method-i-limit"></a>
+
+  
+    <h4><code>limit(num)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Set a limit on the number of results to be returned.</p>
 
 <pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
@@ -387,40 +336,35 @@ href="../Datastore.html">Datastore</a>.</p>
 
 <span class="ruby-identifier">paginated_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="limit-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 118</span>
+    
+      <!-- <div class="method-source-code" id="limit-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">limit</span> <span class="ruby-identifier">num</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">limit</span> = <span class="ruby-identifier">num</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-offset" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">offset</span><span
-            class="method-args">(num)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Set an offset for the results to be returned.</p>
+  
+
+  
+</div>
+
+      
+        <div id="offset-method" class="method ">
+  <a name="method-i-offset"></a>
+
+  
+    <h4><code>offset(num)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Set an offset for the results to be returned.</p>
 
 <pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
@@ -429,40 +373,35 @@ href="../Datastore.html">Datastore</a>.</p>
 
 <span class="ruby-identifier">paginated_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="offset-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 132</span>
+    
+      <!-- <div class="method-source-code" id="offset-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">offset</span> <span class="ruby-identifier">num</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">offset</span> = <span class="ruby-identifier">num</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-order" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">order</span><span
-            class="method-args">(name, direction = :asc)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Sort the results by a property name. By default, an ascending sort order
+  
+
+  
+</div>
+
+      
+        <div id="order-method" class="method ">
+  <a name="method-i-order"></a>
+
+  
+    <h4><code>order(name, direction = :asc)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Sort the results by a property name. By default, an ascending sort order
 will be used. To sort in descending order, provide a second argument of a
 string or symbol that starts with “d”.</p>
 
@@ -472,12 +411,11 @@ string or symbol that starts with “d”.</p>
 
 <span class="ruby-identifier">sorted_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="order-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 100</span>
+    
+      <!-- <div class="method-source-code" id="order-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">order</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">direction</span> = <span class="ruby-value">:asc</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">order</span> <span class="ruby-operator">||=</span> []
   <span class="ruby-identifier">po</span> = <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">PropertyOrder</span>.<span class="ruby-identifier">new</span>
@@ -487,58 +425,51 @@ string or symbol that starts with “d”.</p>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">order</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">po</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+      </div> -->
+    
+  </div>
 
-        
+  
 
-        
-      </div>
+  
+</div>
+
+      
+        <div id="projection-method" class="method alias">
+  <a name="method-i-projection"></a>
+
+  
+    <h4><code>projection(*names)</code></h4>
+  
+
+  <div class="method-description">
+    
+      
+    
 
     
-      <div id="method-i-projection" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">projection</span><span
-            class="method-args">(*names)</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          
-          
-          
+  
 
-          
-        </div>
+  
+    <div class="aliases">
+      Alias for: <a href="Query.html#method-i-select">select</a>
+    </div>
+  
+</div>
 
-        
+      
+        <div id="select-method" class="method ">
+  <a name="method-i-select"></a>
 
-        
-        <div class="aliases">
-          Alias for: <a href="Query.html#method-i-select">select</a>
-        </div>
-        
-      </div>
+  
+    <h4><code>select(*names)</code></h4>
+  
 
+  <div class="method-description">
     
-      <div id="method-i-select" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">select</span><span
-            class="method-args">(*names)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Retrieve only select properties from the matched entities.</p>
+      <p>Retrieve only select properties from the matched entities.</p>
 
 <pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
@@ -546,45 +477,40 @@ string or symbol that starts with “d”.</p>
 
 <span class="ruby-identifier">partial_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="select-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 160</span>
+    
+      <!-- <div class="method-source-code" id="select-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 161</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">select</span> <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">projection</span> <span class="ruby-operator">||=</span> []
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">projection</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">new_property_expressions</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-        <div class="aliases">
-          Also aliased as: <a href="Query.html#method-i-projection">projection</a>
-        </div>
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-start" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">start</span><span
-            class="method-args">(cursor)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Set the cursor to start the results at.</p>
+  
+    <div class="aliases">
+      Also aliased as: <a href="Query.html#method-i-projection">projection</a>
+    </div>
+  
+
+  
+</div>
+
+      
+        <div id="start-method" class="method ">
+  <a name="method-i-start"></a>
+
+  
+    <h4><code>start(cursor)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Set the cursor to start the results at.</p>
 
 <pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
@@ -593,44 +519,39 @@ string or symbol that starts with “d”.</p>
 
 <span class="ruby-identifier">paginated_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="start-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 146</span>
+    
+      <!-- <div class="method-source-code" id="start-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span> <span class="ruby-identifier">cursor</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">start_cursor</span> = <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">decode_cursor</span> <span class="ruby-identifier">cursor</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-        <div class="aliases">
-          Also aliased as: <a href="Query.html#method-i-cursor">cursor</a>
-        </div>
-        
-
-        
-      </div>
-
+      </div> -->
     
-      <div id="method-i-where" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">where</span><span
-            class="method-args">(name, operator, value)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
+  </div>
 
-        <div class="method-description">
-          
-          <p>Add a property filter to the query.</p>
+  
+    <div class="aliases">
+      Also aliased as: <a href="Query.html#method-i-cursor">cursor</a>
+    </div>
+  
+
+  
+</div>
+
+      
+        <div id="where-method" class="method ">
+  <a name="method-i-where"></a>
+
+  
+    <h4><code>where(name, operator, value)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Add a property filter to the query.</p>
 
 <pre class="ruby"><span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
@@ -638,12 +559,11 @@ string or symbol that starts with “d”.</p>
 
 <span class="ruby-identifier">completed_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
-          
-          
+    
 
-          
-          <div class="method-source-code" id="where-source">
-            <pre><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 60</span>
+    
+      <!-- <div class="method-source-code" id="where-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">where</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">operator</span>, <span class="ruby-identifier">value</span>
   <span class="ruby-comment"># Initialize filter</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">filter</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">new_filter</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
@@ -657,29 +577,144 @@ string or symbol that starts with “d”.</p>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">filter</span>.<span class="ruby-identifier">composite_filter</span>.<span class="ruby-identifier">filter</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">filter</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-        <div class="aliases">
-          Also aliased as: <a href="Query.html#method-i-filter">filter</a>
-        </div>
-        
-
-        
-      </div>
-
+      </div> -->
     
-    </section>
+  </div>
+
   
-  </section>
-</main>
+    <div class="aliases">
+      Also aliased as: <a href="Query.html#method-i-filter">filter</a>
+    </div>
+  
+
+  
+</div>
+
+      
+    </div>
+  
 
 
-<footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
-</footer>
 
+        
+      </section>
+
+      <nav class="side-nav">
+        <ul>
+          <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
+        </ul>
+        <ul>
+          
+              <li class="toctree-l1" style="padding-left: 0em;">
+                <a class="reference internal" href="../../Gcloud.html">
+                  Gcloud
+                </a>
+              </li>
+          
+              <li class="toctree-l1" style="padding-left: 1em;">
+                <a class="reference internal" href="../Datastore.html">
+                  Datastore
+                </a>
+              </li>
+          
+              <li class="toctree-l1" style="padding-left: 2em;">
+                <a class="reference internal" href="Query.html">
+                  Query
+                </a>
+              </li>
+          
+          
+        </ul>
+
+        
+          
+              <ul>
+                <li class="toctree-l1">
+                  <a class="reference internal" href="#public-class-methods">Public Class Methods</a>
+                </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-c-new">::new</a>
+                  </li>
+                
+              </ul>
+            
+          
+              <ul>
+                <li class="toctree-l1">
+                  <a class="reference internal" href="#public-instance-methods">Public Instance Methods</a>
+                </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-ancestor">#ancestor</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-cursor">#cursor</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-filter">#filter</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-group_by">#group_by</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-kind">#kind</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-limit">#limit</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-offset">#offset</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-order">#order</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-projection">#projection</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-select">#select</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-start">#start</a>
+                  </li>
+                
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#method-i-where">#where</a>
+                  </li>
+                
+              </ul>
+            
+          
+        
+      </nav>
+
+    </article>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/plugins.js"></script>
+<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/main.js"></script>
+
+<script>
+  (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+  function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+  e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+  e.src='//www.google-analytics.com/analytics.js';
+  r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+  ga('create','UA-49880327-13');ga('send','pageview');
+</script>
+
+
+  </body>
+</html>
