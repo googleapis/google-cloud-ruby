@@ -33,8 +33,12 @@ module Gcloud
   # Google Cloud. The file must readable.
   # @return [Gcloud::Pubsub::Project] the project instance.
   def self.pubsub project = ENV["PUBSUB_PROJECT"],
-                  keyfile = ENV["PUBSUB_KEYFILE"]
-    credentials = Gcloud::Pubsub::Credentials.new keyfile
+                  keyfile = nil
+    if keyfile.nil?
+      credentials = Gcloud::Pubsub::Credentials.default
+    else
+      credentials = Gcloud::Pubsub::Credentials.new keyfile
+    end
     Gcloud::Pubsub::Project.new project, credentials
   end
 

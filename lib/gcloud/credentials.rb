@@ -26,7 +26,9 @@ module Gcloud
     TOKEN_CREDENTIAL_URI = "https://accounts.google.com/o/oauth2/token"
     AUDIENCE = "https://accounts.google.com/o/oauth2/token"
     SCOPE = []
-    ENV_VARS = ["GOOGLE_CLOUD_KEYFILE"]
+    PATH_ENV_VARS = ["GOOGLE_CLOUD_KEYFILE"]
+    JSON_ENV_VARS = ["GOOGLE_CLOUD_KEYFILE_JSON"]
+    DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
 
     attr_accessor :client
 
@@ -38,57 +40,68 @@ module Gcloud
                    :scope, :issuer, :signing_key
 
     def initialize keyfile, options = {}
+      verify_keyfile_provided! keyfile
       if keyfile.is_a? Signet::OAuth2::Client
         @client = keyfile
-      else
+      elsif keyfile.is_a? Hash
         @client = init_client keyfile, options
+      else
+        verify_keyfile_exists! keyfile
+        @client = init_client JSON.parse(::File.read(keyfile)), options
       end
       @client.fetch_access_token!
     end
+
+    # rubocop:disable all
+    # Disabled rubocop because this is intentionally complex.
 
     ##
     # Returns the default credentials.
     #
     def self.default
-      self::ENV_VARS.each do |env_var|
-        keyfile = ENV[env_var].to_s
-        return new keyfile if ::File.file? keyfile
+      env  = ->(v) { ENV[v] }
+      json = ->(v) { JSON.parse ENV[v] rescue nil unless ENV[v].nil? }
+      path = ->(p) { ::File.file? p }
+
+      # First try to find keyfile file from environment variables.
+      self::PATH_ENV_VARS.map(&env).reject(&:nil?).select(&path).each do |file|
+        return new file
       end
-      return new sdk_default_creds if ::File.file? sdk_default_creds
+      # Second try to find keyfile json from environment variables.
+      self::JSON_ENV_VARS.map(&json).reject(&:nil?).each do |hash|
+        return new hash
+      end
+      # Third try to find keyfile file from known file paths.
+      self::DEFAULT_PATHS.select(&path).each do |file|
+        return new file
+      end
+      # Finally get instantiated client from Google::Auth.
       client = Google::Auth.get_application_default self::SCOPE
       new client
     end
 
-    ##
-    # The filepath of the default application credentials used by
-    # the gcloud SDK.
-    #
-    # This file is created when running <tt>gcloud auth login</tt>
-    def self.sdk_default_creds #:nodoc:
-      # This method will likely be moved once we gain better
-      # support for running in a GCE environment.
-      sdk_creds = "~/.config/gcloud/application_default_credentials.json"
-      File.expand_path sdk_creds
-    end
+    # rubocop:enable all
 
     protected
 
     ##
-    # Initializes the Signet client.
-    def init_client keyfile, options
-      verify_keyfile! keyfile
-      client_opts = client_options keyfile, options
-      Signet::OAuth2::Client.new client_opts
+    # Verify that the keyfile argument is provided.
+    def verify_keyfile_provided! keyfile
+      fail "You must provide a keyfile to connect with." if keyfile.nil?
+    end
+
+    ##
+    # Verify that the keyfile argument is a file.
+    def verify_keyfile_exists! keyfile
+      exists = ::File.file? keyfile
+      fail "The keyfile '#{keyfile}' is not a valid file." unless exists
     end
 
     ##
     # Initializes the Signet client.
-    def verify_keyfile! keyfile
-      if keyfile.nil?
-        fail "You must provide a keyfile to connect with."
-      elsif !::File.file?(keyfile)
-        fail "The keyfile '#{keyfile}' is not a valid file."
-      end
+    def init_client keyfile, options
+      client_opts = client_options keyfile, options
+      Signet::OAuth2::Client.new client_opts
     end
 
     ##
@@ -111,7 +124,7 @@ module Gcloud
       # Constructor options override default options
       options = default_options.merge options
       # Keyfile options override everything
-      options = options.merge JSON.parse(::File.read(keyfile))
+      options = options.merge keyfile
 
       # client options for initializing signet client
       { token_credential_uri: options["token_credential_uri"],
