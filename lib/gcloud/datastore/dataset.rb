@@ -100,7 +100,10 @@ module Gcloud
       def find key_or_kind, id_or_name = nil
         key = key_or_kind
         key = Key.new key_or_kind, id_or_name unless key_or_kind.is_a? Key
+        # rubocop:disable Performance/Detect
+        # Disabled rubocop because it is detecting the wrong thing.
         find_all(key).first
+        # rubocop:enable Performance/Detect
       end
       alias_method :get, :find
 
