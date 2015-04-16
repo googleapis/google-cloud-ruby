@@ -58,25 +58,26 @@ module Gcloud
     ##
     # Returns the default credentials.
     #
-    def self.default
+    def self.default options = {}
       env  = ->(v) { ENV[v] }
       json = ->(v) { JSON.parse ENV[v] rescue nil unless ENV[v].nil? }
       path = ->(p) { ::File.file? p }
 
       # First try to find keyfile file from environment variables.
       self::PATH_ENV_VARS.map(&env).reject(&:nil?).select(&path).each do |file|
-        return new file
+        return new file, options
       end
       # Second try to find keyfile json from environment variables.
       self::JSON_ENV_VARS.map(&json).reject(&:nil?).each do |hash|
-        return new hash
+        return new hash, options
       end
       # Third try to find keyfile file from known file paths.
       self::DEFAULT_PATHS.select(&path).each do |file|
-        return new file
+        return new file, options
       end
       # Finally get instantiated client from Google::Auth.
-      client = Google::Auth.get_application_default self::SCOPE
+      scope = options[:scope] || options["scope"] || self::SCOPE
+      client = Google::Auth.get_application_default scope
       new client
     end
 
