@@ -21,6 +21,11 @@ describe Gcloud::Pubsub, :pubsub do
     pubsub.topic(topic_name) || pubsub.create_topic(topic_name)
   end
 
+  def retrieve_subscription topic, subscription_name
+    topic.subscription(subscription_name) ||
+    topic.create_subscription(subscription_name)
+  end
+
   let(:new_topic_name) {  $topic_names.first }
   let(:topic_names)    {  $topic_names.last 3 }
 
@@ -84,12 +89,42 @@ describe Gcloud::Pubsub, :pubsub do
     end
   end
 
-  describe "Subscription" do
-    def retrieve_subscription topic, subscription_name
-      topic.subscription(subscription_name) ||
-      topic.create_subscription(subscription_name)
+  describe "Subscriptions on Project" do
+    let(:topic) { retrieve_topic $topic_names.last }
+
+    before do
+      3.times.each do |i|
+        retrieve_subscription topic, "#{$topic_prefix}-sub-0#{i}"
+      end
     end
 
+    it "should list all subscriptions registered to the topic" do
+      subscriptions = pubsub.subscriptions
+      subscriptions.each do |subscription|
+        # subscriptions on project are objects...
+        subscription.must_be_kind_of Gcloud::Pubsub::Subscription
+      end
+      subscriptions.token.must_be :nil?
+    end
+
+    it "should return a token if there are more results" do
+      sub_count = pubsub.subscriptions.count
+      subscriptions = pubsub.subscriptions max: (sub_count - 1)
+      subscriptions.count.must_equal (sub_count - 1)
+      subscriptions.each do |subscription|
+        subscription.must_be_kind_of Gcloud::Pubsub::Subscription
+      end
+      subscriptions.token.wont_be :nil?
+
+      # retrieve the next list of subscriptions
+      next_subs = pubsub.subscriptions token: subscriptions.token
+      next_subs.count.must_equal 1
+      next_subs.first.must_be_kind_of Gcloud::Pubsub::Subscription
+      next_subs.token.must_be :nil?
+    end
+  end
+
+  describe "Subscription on Topic" do
     let(:topic) { retrieve_topic $topic_names[1] }
     let(:subs) { [ { name: "#{$topic_prefix}-sub1",
                      options: { deadline: 30 } },
