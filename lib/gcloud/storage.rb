@@ -16,6 +16,7 @@
 require "gcloud"
 require "gcloud/storage/project"
 
+#-
 module Gcloud
   ##
   # Create a new Storage project.

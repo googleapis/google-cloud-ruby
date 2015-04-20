@@ -4,6 +4,7 @@ AllCops:
     - "Rakefile"
     - "lib/gcloud/proto/**/*"
     - "rakelib/**/*"
+    - "rdoc/**/*"
     - "regression/**/*"
     - "test/**/*"
 
