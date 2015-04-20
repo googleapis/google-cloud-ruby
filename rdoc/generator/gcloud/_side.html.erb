@@ -1,8 +1,5 @@
 <ul>
   <li class="toctree-l1"><a class="reference internal" href="<%= l "index.html" %>">Home</a></li>
-  <% store.all_files.select(&:text?).each do |page| %>
-    <li class="toctree-l1"><a class="reference internal" href="<%= l page.path %>"><%= page.full_name %></a></li>
-  <% end %>
 </ul>
 
 <ul>
