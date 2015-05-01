@@ -140,7 +140,7 @@ module Gcloud
         ensure_connection!
         resp = connection.download_file bucket, name
         if resp.success?
-          ::File.open path, "w+" do |f|
+          ::File.open path, "wb+" do |f|
             f.write resp.body
           end
           verify_file! ::File.new(path), options
