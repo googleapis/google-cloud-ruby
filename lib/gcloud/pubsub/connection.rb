@@ -88,9 +88,8 @@ module Gcloud
 
       ##
       # Creates a subscription on a given topic for a given subscriber.
-      def create_subscription topic, subscription_name = nil,
-                              deadline = nil, endpoint = nil
-        data = subscription_data topic, deadline, endpoint
+      def create_subscription topic, subscription_name = nil, options = {}
+        data = subscription_data topic, options
         @client.execute(
           api_method: @pubsub.projects.subscriptions.create,
           parameters: { name: subscription_path(subscription_name) },
@@ -186,13 +185,16 @@ module Gcloud
 
       protected
 
-      def subscription_data topic, deadline = nil,
-                            endpoint = nil, attributes = {}
-        data = { "topic" => topic }
-        data["ackDeadlineSeconds"] = deadline if deadline
+      def subscription_data topic, options = {}
+        deadline   = options[:deadline]
+        endpoint   = options[:endpoint]
+        attributes = options[:attributes].to_h
+
+        data = { topic: topic }
+        data[:ackDeadlineSeconds] = deadline if deadline
         if endpoint
-          data["pushConfig"] = { "pushEndpoint" => endpoint,
-                                 "attributes" => attributes }
+          data[:pushConfig] = { pushEndpoint: endpoint,
+                                attributes:   attributes }
         end
         data
       end

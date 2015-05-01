@@ -65,9 +65,9 @@ module Gcloud
       #
       # If the name is not provided in the request, the server will assign a
       # random name for this subscription on the same project as the topic.
-      def create_subscription subscription_name = nil
+      def create_subscription subscription_name = nil, options = {}
         ensure_connection!
-        resp = connection.create_subscription name, subscription_name
+        resp = connection.create_subscription name, subscription_name, options
         if resp.success?
           Subscription.from_gapi resp.data, connection
         else

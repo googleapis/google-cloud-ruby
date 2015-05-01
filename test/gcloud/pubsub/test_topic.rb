@@ -57,6 +57,36 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
   end
 
+  it "creates a subscription with a deadline" do
+    new_sub_name = "new-sub-#{Time.now.to_i}"
+    deadline = 42
+    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+      JSON.parse(env.body)["topic"].must_equal              topic_path(topic_name)
+      JSON.parse(env.body)["ackDeadlineSeconds"].must_equal deadline
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, new_sub_name)]
+    end
+
+    sub = topic.create_subscription new_sub_name, deadline: deadline
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+  end
+
+  it "creates a subscription with a push endpoint" do
+    new_sub_name = "new-sub-#{Time.now.to_i}"
+    endpoint = "http://foo.bar/baz"
+    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+      JSON.parse(env.body)["topic"].must_equal                      topic_path(topic_name)
+      JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal endpoint
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, new_sub_name)]
+    end
+
+    sub = topic.create_subscription new_sub_name, endpoint: endpoint
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+  end
+
   it "creates a subscription when calling subscribe" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
     mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
