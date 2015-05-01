@@ -69,17 +69,21 @@ describe Gcloud::Pubsub, :pubsub do
     end
 
     it "should publish a message" do
-      msg_id = pubsub.topic(topic_names.first).publish "message from me"
-      msg_id.wont_be :nil?
+      msg = pubsub.topic(topic_names.first).publish "message from me"
+      msg.wont_be :nil?
+      msg.must_be_kind_of Gcloud::Pubsub::Message
     end
 
     it "should publish multiple messages" do
-      skip
-      msg_ids = pubsub.topic(topic_names.first).publish "first message",
-                                                        "second message",
-                                                        "third message"
-      msg_ids.wont_be :nil?
-      msg_ids.count.must_equal 3
+      msgs = pubsub.topic(topic_names.first).publish do |batch|
+        batch.publish "first message"
+        batch.publish "second message"
+        batch.publish "third message", format: :text
+      end
+
+      msgs.wont_be :nil?
+      msgs.count.must_equal 3
+      msgs.each { |msg| msg.must_be_kind_of Gcloud::Pubsub::Message }
     end
 
     it "should be deleted" do

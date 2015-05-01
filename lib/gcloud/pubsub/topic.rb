@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "json"
 require "gcloud/pubsub/errors"
 require "gcloud/pubsub/topic/list"
 require "gcloud/pubsub/subscription"
@@ -104,16 +105,12 @@ module Gcloud
       ##
       # Adds one or more messages to the topic.
       # Returns NOT_FOUND if the topic does not exist.
-      def publish message
+      def publish message = nil, attributes = {}
         ensure_connection!
-        resp = connection.publish name, message
-        if resp.success?
-          gapi = { "data" => message,
-                   "messageId" => Array(resp.data["messageIds"]).first }
-          Message.from_gapi gapi
-        else
-          ApiError.from_response(resp)
-        end
+        batch = Batch.new message, attributes
+        yield batch if block_given?
+        return nil if batch.messages.count.zero?
+        publish_batch_messages batch
       end
 
       ##
@@ -131,6 +128,70 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      ##
+      # Call the publish API with arrays of message data and attrs.
+      def publish_batch_messages batch
+        resp = connection.publish name, batch.messages
+        if resp.success?
+          batch.to_gcloud_messages resp.data["messageIds"]
+        else
+          ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Batch object used to publish multiple messages at once.
+      class Batch
+        ##
+        # The messages to publish
+        attr_reader :messages #:nodoc:
+
+        ##
+        # Create a new instance of the object.
+        def initialize message = nil, attributes = {} #:nodoc:
+          @messages = []
+          @mode = :batch
+          return if message.nil?
+          @mode = :single
+          publish message, attributes
+        end
+
+        ##
+        # Add multiple messages to the topic.
+        # All messages added will be published at once.
+        # See Gcloud::Pubsub::Topic#publish
+        def publish message, attributes = {}
+          @messages << [message, attributes]
+        end
+
+        ##
+        # Create Message objects with message ids.
+        def to_gcloud_messages message_ids #:nodoc:
+          msgs = @messages.zip(Array(message_ids)).map do |arr, id|
+            Message.from_gapi "data"       => arr[0],
+                              "attributes" => jsonify_hash(arr[1]),
+                              "messageId"  => id
+          end
+          # Return just one Message if a single publish,
+          # otherwise return the array of Messages.
+          if @mode == :single && msgs.count <= 1
+            msgs.first
+          else
+            msgs
+          end
+        end
+
+        protected
+
+        ##
+        # Make the hash look like it was returned from the Cloud API.
+        def jsonify_hash hash
+          hash = hash.to_h
+          return hash if hash.empty?
+          JSON.parse(JSON.dump(hash))
+        end
       end
     end
   end

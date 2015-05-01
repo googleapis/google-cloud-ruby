@@ -146,13 +146,18 @@ module Gcloud
       end
 
       ##
-      # Adds a message to the topic.
+      # Adds one or more messages to the topic.
       # Returns NOT_FOUND if the topic does not exist.
-      def publish topic, message
+      # The messages parameter is an array of arrays.
+      # The first element is the data, second is attributes hash.
+      def publish topic, messages
+        gapi_msgs = messages.map do |data, attributes|
+          { data: [data].pack("m"), attributes: attributes.to_h }
+        end
         @client.execute(
           api_method:  @pubsub.projects.topics.publish,
           parameters:  { topic: topic },
-          body_object: { messages: [{ data: [message].pack("m") }] }
+          body_object: { messages: gapi_msgs }
         )
       end
 
