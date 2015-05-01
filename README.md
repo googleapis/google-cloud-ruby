@@ -48,6 +48,8 @@ Follow the [activation instructions](https://cloud.google.com/datastore/docs/act
 See the [gcloud-ruby Datastore API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html) to learn how to interact with the Cloud Datastore using this library.
 
 ```ruby
+require 'gcloud/datastore'
+
 dataset = Gcloud.datastore "my-todo-project-id",
                            "/path/to/keyfile.json"
 
@@ -73,6 +75,8 @@ completed_tasks = dataset.run query
 See the [gcloud-ruby Storage API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html) to learn how to connect to Cloud Storage using this library.
 
 ```ruby
+require 'gcloud/storage'
+
 storage = Gcloud.storage "my-todo-project-id",
                          "/path/to/keyfile.json"
 
