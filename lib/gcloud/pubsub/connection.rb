@@ -194,6 +194,16 @@ module Gcloud
         )
       end
 
+      ##
+      # Modifies the ack deadline for a specific message.
+      def modify_ack_deadline subscription, id, deadline
+        @client.execute(
+          api_method:  @pubsub.projects.subscriptions.modify_ack_deadline,
+          parameters:  { subscription: subscription },
+          body_object: { ackId: id, ackDeadlineSeconds: deadline }
+        )
+      end
+
       protected
 
       def subscription_data topic, options = {}

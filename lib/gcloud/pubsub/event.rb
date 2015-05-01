@@ -60,6 +60,23 @@ module Gcloud
       alias_method :ack!, :acknowledge!
 
       ##
+      # Modifies the acknowledge deadline for the message.
+      # This method is useful to indicate that more time is needed
+      # to process the message, or to make the message available
+      # for redelivery if the processing was interrupted.
+      def delay! new_deadline
+        ensure_subscription!
+        connection = subscription.connection
+        resp = connection.modify_ack_deadline subscription.name,
+                                              ack_id, new_deadline
+        if resp.success?
+          true
+        else
+          ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Event from a Google API Client object.
       def self.from_gapi gapi, subscription #:nodoc:
         new.tap do |f|

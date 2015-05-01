@@ -65,4 +65,16 @@ describe Gcloud::Pubsub::Event, :mock_pubsub do
 
     event.ack!
   end
+
+  it "can delay" do
+    new_deadline = 42
+
+    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}:modifyAckDeadline" do |env|
+      JSON.parse(env.body)["ackId"].must_equal              event.ack_id
+      JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    event.delay! new_deadline
+  end
 end
