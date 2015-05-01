@@ -70,6 +70,18 @@ module Gcloud
       end
 
       ##
+      # A URL locating the endpoint that messages are pushed.
+      def endpoint= new_endpoint
+        ensure_connection!
+        resp = connection.modify_push_config name, new_endpoint, {}
+        if resp.success?
+          @gapi["pushConfig"]["pushEndpoint"] = new_endpoint
+        else
+          ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # Deletes an existing subscription.
       # All pending messages in the subscription are immediately dropped.
       def delete

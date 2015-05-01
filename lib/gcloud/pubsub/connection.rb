@@ -183,6 +183,17 @@ module Gcloud
         )
       end
 
+      ##
+      # Modifies the PushConfig for a specified subscription.
+      def modify_push_config subscription, endpoint, attributes
+        @client.execute(
+          api_method:  @pubsub.projects.subscriptions.modify_push_config,
+          parameters:  { subscription: subscription },
+          body_object: { pushConfig: { pushEndpoint: endpoint,
+                                       attributes: attributes } }
+        )
+      end
+
       protected
 
       def subscription_data topic, options = {}

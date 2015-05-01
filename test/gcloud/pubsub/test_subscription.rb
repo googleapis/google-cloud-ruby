@@ -38,6 +38,17 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
     subscription.must_respond_to :endpoint
   end
 
+  it "can update the endpoint" do
+    new_push_endpoint = "https://foo.bar/baz"
+
+    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}:modifyPushConfig" do |env|
+      JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal new_push_endpoint
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    subscription.endpoint = new_push_endpoint
+  end
+
   it "can delete itself" do
     mock_connection.delete "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}" do |env|
       [200, {"Content-Type"=>"application/json"}, ""]
