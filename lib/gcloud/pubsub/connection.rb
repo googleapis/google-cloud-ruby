@@ -151,7 +151,7 @@ module Gcloud
       # The first element is the data, second is attributes hash.
       def publish topic, messages
         gapi_msgs = messages.map do |data, attributes|
-          { data: [data].pack("m"), attributes: attributes.to_h }
+          { data: [data].pack("m"), attributes: attributes }
         end
         @client.execute(
           api_method:  @pubsub.projects.topics.publish,
@@ -209,7 +209,7 @@ module Gcloud
       def subscription_data topic, options = {}
         deadline   = options[:deadline]
         endpoint   = options[:endpoint]
-        attributes = options[:attributes].to_h
+        attributes = hashify options[:attributes]
 
         data = { topic: topic }
         data[:ackDeadlineSeconds] = deadline if deadline
@@ -218,6 +218,17 @@ module Gcloud
                                 attributes:   attributes }
         end
         data
+      end
+
+      ##
+      # Make sure the object is converted to a hash
+      # Ruby 1.9.3 doesn't support to_h, so here we are.
+      def hashify hash
+        if hash.respond_to? :to_h
+          hash.to_h
+        else
+          Hash.try_convert(hash) || {}
+        end
       end
 
       def project_path

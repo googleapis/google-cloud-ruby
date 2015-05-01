@@ -188,7 +188,11 @@ module Gcloud
         ##
         # Make the hash look like it was returned from the Cloud API.
         def jsonify_hash hash
-          hash = hash.to_h
+          if hash.respond_to? :to_h
+            hash = hash.to_h
+          else
+            hash = Hash.try_convert(hash) || {}
+          end
           return hash if hash.empty?
           JSON.parse(JSON.dump(hash))
         end
