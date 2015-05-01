@@ -100,6 +100,33 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
   end
 
+  it "raises when creating a subscription that already exists" do
+    existing_sub_name = "existing-sub"
+    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{existing_sub_name}" do |env|
+      JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
+      [409, {"Content-Type"=>"application/json"},
+       already_exists_error_json(existing_sub_name)]
+    end
+
+    assert_raises Gcloud::Pubsub::AlreadyExistsError do
+      topic.create_subscription existing_sub_name
+    end
+  end
+
+  it "raises when creating a subscription on a deleted topic" do
+    new_sub_name = "new-sub-#{Time.now.to_i}"
+    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+      JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
+      [404, {"Content-Type"=>"application/json"},
+       not_found_error_json(topic_name)]
+    end
+
+    assert_raises Gcloud::Pubsub::NotFoundError do
+      # Let's assume the topic has been deleted before calling create.
+      topic.create_subscription new_sub_name
+    end
+  end
+
   it "gets a subscription" do
     sub_name = "found-sub-#{Time.now.to_i}"
     mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|

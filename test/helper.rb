@@ -166,6 +166,40 @@ class MockPubsub < Minitest::Spec
     }.to_json
   end
 
+  def already_exists_error_json resource_name
+    {
+      "error" => {
+        "code" => 409,
+        "message" => "Resource already exists in the project (resource=#{resource_name}).",
+        "errors" => [
+          {
+            "message" => "Resource already exists in the project (resource=#{resource_name}).",
+            "domain" => "global",
+            "reason" => "alreadyExists"
+          }
+        ],
+        "status" => "ALREADY_EXISTS"
+      }
+    }.to_json
+  end
+
+  def not_found_error_json resource_name
+    {
+      "error" => {
+        "code" => 404,
+        "message" => "Resource not found (resource=foo2).",
+        "errors" => [
+          {
+            "message" => "Resource not found (resource=foo2).",
+            "domain" => "global",
+            "reason" => "notFound"
+          }
+        ],
+        "status" => "NOT_FOUND"
+      }
+    }.to_json
+  end
+
   def project_path
     "projects/#{project}"
   end
