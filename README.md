@@ -23,21 +23,11 @@ If you need support for other Google APIs, check out the [Google API Ruby Client
 $ gem install gcloud
 ```
 
-### Authorization
+### Authentication
 
-You need a Google Developers service account to use the Google Cloud services. To create a service account:
+Gcloud uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables. Additionally, Cloud SDK credentials can also be discovered automatically, but this is only recommended during development.
 
-1. Visit the [Google Developers Console](https://console.developers.google.com/project).
-2. Create a new project or click on an existing project.
-3. Navigate to **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * Google Cloud Datastore API
-  * Google Cloud Storage
-  * Google Cloud Storage JSON API
-4. Navigate to **APIs & auth** > **Credentials** and then:
-  * If you want to use a new service account, click on **Create new Client ID** and select **Service account**. After the account is created, you will be prompted to download the JSON key file that the library uses to authorize your requests.
-  * If you want to generate a new key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
-
-You will use the **Project ID** and **JSON file** to connect to services with gcloud.
+Instructions and configuration options are covered in the [Authentication guide](AUTHENTICATION.md). The examples in Quick Start will demonstrate providing the **Project ID** and **Credentials JSON file path** in code.
 
 ### Datastore
 
