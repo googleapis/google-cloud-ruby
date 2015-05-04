@@ -30,15 +30,16 @@ module Gcloud
       #
       #   entities = dataset.run query
       #   entities.size #=> 3
-      #   entities.cursor #=> "c3VwZXJhd2Vzb21lIQ"
+      #   entities.end_cursor #=> "c3VwZXJhd2Vzb21lIQ"
       #   names = entities.map { |e| e.name }
       #   names.size #=> 3
       #   names.cursor #=> NoMethodError
       #
       class QueryResults < DelegateClass(::Array)
         ##
-        # The cursor of the QueryResults.
-        attr_reader :cursor
+        # The end_cursor of the QueryResults.
+        attr_reader :end_cursor
+        alias_method :cursor, :end_cursor
 
         ##
         # The state of the query after the current batch.
@@ -76,9 +77,9 @@ module Gcloud
 
         ##
         # Create a new QueryResults with an array of values.
-        def initialize arr = [], cursor = nil, more_results = nil
+        def initialize arr = [], end_cursor = nil, more_results = nil
           super arr
-          @cursor = cursor
+          @end_cursor = end_cursor
           @more_results = more_results
         end
       end

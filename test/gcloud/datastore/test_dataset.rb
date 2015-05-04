@@ -268,6 +268,7 @@ describe Gcloud::Datastore::Dataset do
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
     entities.cursor.must_equal query_cursor
+    entities.end_cursor.must_equal query_cursor
     entities.more_results.must_be :nil?
     refute entities.not_finished?
     refute entities.more_after_limit?
