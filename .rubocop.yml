@@ -17,3 +17,5 @@ Style/SpaceAroundOperators:
   Enabled: false
 Metrics/ClassLength:
   Enabled: false
+Style/EmptyElse:
+  Enabled: false

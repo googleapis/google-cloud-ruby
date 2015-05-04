@@ -15,7 +15,9 @@
 gem "minitest"
 require "minitest/autorun"
 require "ostruct"
+require "json"
 require "gcloud/storage"
+require "gcloud/pubsub"
 
 class MockStorage < Minitest::Spec
   let(:project) { "test" }
@@ -87,5 +89,131 @@ class MockStorage < Minitest::Spec
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_storage
+  end
+end
+
+class MockPubsub < Minitest::Spec
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new }
+  let(:pubsub) { Gcloud::Pubsub::Project.new project, credentials }
+
+  def setup
+    @connection = Faraday::Adapter::Test::Stubs.new
+    connection = pubsub.instance_variable_get "@connection"
+    client = connection.instance_variable_get "@client"
+    client.connection = Faraday.new do |builder|
+      # builder.options.params_encoder = Faraday::FlatParamsEncoder
+      builder.adapter :test, @connection
+    end
+  end
+
+  def teardown
+    @connection.verify_stubbed_calls
+  end
+
+  def mock_connection
+    @connection
+  end
+
+  def topics_json num_topics, token = nil
+    topics = num_topics.times.map do
+      JSON.parse(topic_json("topic-#{rand 1000}"))
+    end
+    data = { "topics" => topics }
+    data["nextPageToken"] = token unless token.nil?
+    data.to_json
+  end
+
+  def topic_json topic_name
+    { "name" => topic_path(topic_name) }.to_json
+  end
+
+  def subscriptions_json topic_name, num_subs, token = nil
+    subs = num_subs.times.map do
+      JSON.parse(subscription_json(topic_name, "sub-#{rand 1000}"))
+    end
+    data = { "subscriptions" => subs }
+    data["nextPageToken"] = token unless token.nil?
+    data.to_json
+  end
+
+  def subscription_json topic_name, sub_name,
+                        deadline = 60,
+                        endpoint = "http://example.com/callback"
+    { "name" => subscription_path(sub_name),
+      "topic" => topic_path(topic_name),
+      "pushConfig" => { "pushEndpoint" => endpoint },
+      "ackDeadlineSeconds" => deadline,
+    }.to_json
+  end
+
+  def event_json message
+    {
+      "ackId" => "ack-id-123456789",
+      "message" => {
+        "data" => [message].pack("m"),
+        "attributes" => {},
+        "messageId" => "msg-id-123456789",
+      }
+    }.to_json
+  end
+
+  def events_json message
+    {
+      "receivedMessages" => [
+        JSON.parse(event_json(message))
+      ]
+    }.to_json
+  end
+
+  def already_exists_error_json resource_name
+    {
+      "error" => {
+        "code" => 409,
+        "message" => "Resource already exists in the project (resource=#{resource_name}).",
+        "errors" => [
+          {
+            "message" => "Resource already exists in the project (resource=#{resource_name}).",
+            "domain" => "global",
+            "reason" => "alreadyExists"
+          }
+        ],
+        "status" => "ALREADY_EXISTS"
+      }
+    }.to_json
+  end
+
+  def not_found_error_json resource_name
+    {
+      "error" => {
+        "code" => 404,
+        "message" => "Resource not found (resource=foo2).",
+        "errors" => [
+          {
+            "message" => "Resource not found (resource=foo2).",
+            "domain" => "global",
+            "reason" => "notFound"
+          }
+        ],
+        "status" => "NOT_FOUND"
+      }
+    }.to_json
+  end
+
+  def project_path
+    "projects/#{project}"
+  end
+
+  def topic_path topic_name
+    "#{project_path}/topics/#{topic_name}"
+  end
+
+  def subscription_path subscription_name
+    "#{project_path}/subscriptions/#{subscription_name}"
+  end
+
+  # Register this spec type for when :storage is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_pubsub
   end
 end
