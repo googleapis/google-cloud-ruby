@@ -33,8 +33,8 @@ module Gcloud
   # @return [Gcloud::Storage::Project] storage project.
   #
   # See Gcloud::Storage::Project
-  def self.storage project = ENV["STORAGE_PROJECT"],
-                   keyfile = nil
+  def self.storage project = nil, keyfile = nil
+    project ||= Gcloud::Storage::Project.default_project
     if keyfile.nil?
       credentials = Gcloud::Storage::Credentials.default
     else
