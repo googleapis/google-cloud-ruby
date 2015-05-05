@@ -40,8 +40,8 @@ module Gcloud
   # @return [Gcloud::Datastore::Dataset] new dataset.
   #
   # See Gcloud::Datastore::Dataset
-  def self.datastore project = ENV["DATASTORE_PROJECT"],
-                     keyfile = nil
+  def self.datastore project = nil, keyfile = nil
+    project ||= Gcloud::Datastore::Dataset.default_project
     if keyfile.nil?
       credentials = Gcloud::Datastore::Credentials.default
     else

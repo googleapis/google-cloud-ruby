@@ -22,6 +22,8 @@ module Gcloud
     class Credentials < Gcloud::Credentials #:nodoc:
       SCOPE = ["https://www.googleapis.com/auth/pubsub",
                "https://www.googleapis.com/auth/cloud-platform"]
+      PATH_ENV_VARS = %w(PUBSUB_KEYFILE GOOGLE_CLOUD_KEYFILE)
+      JSON_ENV_VARS = %w(PUBSUB_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON)
     end
   end
 end

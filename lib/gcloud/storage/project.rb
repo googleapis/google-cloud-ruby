@@ -53,6 +53,12 @@ module Gcloud
       end
 
       ##
+      # Default project.
+      def self.default_project #:nodoc:
+        ENV["STORAGE_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"]
+      end
+
+      ##
       # Retrieves a list of buckets for the given project.
       #
       #   storage = Gcloud.storage

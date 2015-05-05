@@ -40,6 +40,12 @@ module Gcloud
       end
 
       ##
+      # Default project.
+      def self.default_project #:nodoc:
+        ENV["PUBSUB_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"]
+      end
+
+      ##
       # Retrieves topic by name.
       def topic topic_name
         ensure_connection!

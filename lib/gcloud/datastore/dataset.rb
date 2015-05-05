@@ -57,6 +57,12 @@ module Gcloud
       end
 
       ##
+      # Default project.
+      def self.default_project #:nodoc:
+        ENV["DATASTORE_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"]
+      end
+
+      ##
       # Generate IDs for a Key before creating an entity.
       #
       #   dataset = Gcloud.datastore
