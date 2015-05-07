@@ -34,6 +34,12 @@ namespace :test do
     Dir.glob("test/gcloud/pubsub/**/test*.rb").each { |file| require_relative "../#{file}"}
   end
 
+  desc "Runs bigquery tests."
+  task :bigquery do
+    $LOAD_PATH.unshift "lib", "test"
+    Dir.glob("test/gcloud/bigquery/**/test*.rb").each { |file| require_relative "../#{file}"}
+  end
+
   desc "Runs tests with coverage."
   task :coverage, :project, :keyfile do |t, args|
     project = args[:project]
