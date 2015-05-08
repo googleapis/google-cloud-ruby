@@ -52,13 +52,13 @@ layout: home
       </li>
     </ul>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in lacus ut nunc consectetur dictum. Nam suscipit, justo nec mollis condimentum, mi mi blandit eros, eget ullamcorper tortor magna at augue.</p>
+    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in lacus ut nunc consectetur dictum. Nam suscipit, justo nec mollis condimentum, mi mi blandit eros, eget ullamcorper tortor magna at augue.</p> -->
 
-    <ul class="pagination">
+    <!-- <ul class="pagination">
       <li><a href="" class="current">1</a></li>
       <li><a href="">2</a></li>
       <li><a href="">3</a></li>
-    </ul>
+    </ul> -->
   </div><!-- end of .container -->
 </section><!-- end of .featuring -->
 
@@ -86,11 +86,16 @@ layout: home
     <div class="col col-right">
       <h4>Sample code</h4>
 
-       <div hljs="" language="ruby"><pre><code class="hljs ruby">dataset = <span class="hljs-constant">Gcloud::Datastore</span>.dataset <span class="hljs-string">"my-project"</span>,
-                                    <span class="hljs-string">"keyfile.json"</span>
+       <div hljs="" language="ruby">
 
-product = dataset.find <span class="hljs-string">"Product"</span>, <span class="hljs-number">123</span>
-</code></pre></div>
+<pre><code class="hljs ruby"><span class="hljs-identifier"><span class="hljs-keyword">require</span></span> <span class="hljs-string">"gcloud/datastore"</span>
+
+<span class="hljs-identifier">datastore</span> = <span class="hljs-constant">Gcloud</span>.<span class="hljs-identifier">datastore</span> <span class="hljs-string">"my-project"</span>,
+                             <span class="hljs-string">"keyfile.json"</span>
+
+<span class="hljs-identifier">product</span> = <span class="hljs-identifier">dataset</span>.<span class="hljs-identifier"><span class="hljs-keymethods">find</span></span> <span class="hljs-string">"Product"</span>, <span class="hljs-number">123</span></code></pre>
+
+      </div>
 
     </div><!-- end of .col.col-right -->
   </div><!-- end of .container -->
