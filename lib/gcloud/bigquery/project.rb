@@ -16,6 +16,7 @@
 require "gcloud/bigquery/connection"
 require "gcloud/bigquery/credentials"
 require "gcloud/bigquery/errors"
+require "gcloud/bigquery/dataset"
 
 module Gcloud
   module Bigquery
@@ -42,6 +43,53 @@ module Gcloud
       # Default project.
       def self.default_project #:nodoc:
         ENV["PUBSUB_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"]
+      end
+
+      ##
+      # Retrieves dataset by name.
+      def dataset dataset_name
+        ensure_connection!
+        resp = connection.get_dataset dataset_name
+        if resp.success?
+          Dataset.from_gapi resp.data, connection
+        else
+          return nil if resp.data["error"]["code"] == 404
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Creates a new dataset.
+      #
+      #   dataset = project.create_dataset "my-dataset"
+      def create_dataset options = {}
+        ensure_connection!
+        resp = connection.insert_dataset options
+        if resp.success?
+          Dataset.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Retrieves a list of datasets for the given project.
+      def datasets options = {}
+        ensure_connection!
+        resp = connection.list_datasets options
+        if resp.success?
+          List.datasets_from_resp resp, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      protected
+
+      ##
+      # Raise an error unless an active connection is available.
+      def ensure_connection!
+        fail "Must have active connection" unless connection
       end
     end
   end

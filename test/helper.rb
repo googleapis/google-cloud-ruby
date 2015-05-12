@@ -242,6 +242,56 @@ class MockBigquery < Minitest::Spec
     @connection
   end
 
+  def random_dataset_hash name = nil, description = nil, default_expiration = nil
+    name ||= "name"
+    description ||= "description"
+    default_expiration ||= 100
+
+    {
+      "kind" => "bigquery#dataset",
+      "etag" => "etag",
+      "id" => "id",
+      "selfLink" => "link",
+      "datasetReference" => {
+        "datasetId" => "dataset",
+        "projectId" => project
+      },
+      "friendlyName" => name,
+      "description" => description,
+      "defaultTableExpirationMs" => default_expiration,
+      "access" => [
+        {
+          "role" => "role",
+          "userByEmail" => "user@example.com",
+          "groupByEmail" => "group@example.com",
+          "domain" => "example.com",
+          "specialGroup" => "group",
+          "view" => {
+            "projectId" => project,
+            "datasetId" => "dataset",
+            "tableId" => "table"
+          }
+        }
+      ],
+      "creationTime" => Time.now.to_i,
+      "lastModifiedTime" => Time.now.to_i
+    }
+  end
+
+  def random_dataset_small_hash name = nil
+    name ||= "name"
+
+    {
+      "kind" => "bigquery#dataset",
+      "id" => "id",
+      "datasetReference" => {
+        "datasetId" => "dataset",
+        "projectId" => project
+      },
+      "friendlyName" => name
+    }
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_bigquery
