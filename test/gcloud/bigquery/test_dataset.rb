@@ -66,4 +66,127 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
 
     dataset.delete force: true
   end
+
+  it "creates an empty table" do
+    mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       create_table_json]
+    end
+
+    table = dataset.create_table
+    table.must_be_kind_of Gcloud::Bigquery::Table
+  end
+
+  it "creates a table with a name and description" do
+    name = "my-table"
+    description = "This is my table"
+
+    mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      JSON.parse(env.body)["friendlyName"].must_equal name
+      JSON.parse(env.body)["description"].must_equal description
+      [200, {"Content-Type"=>"application/json"},
+       create_table_json(name, description)]
+    end
+
+    table = dataset.create_table name: name,
+                                 description: description
+    table.must_be_kind_of Gcloud::Bigquery::Table
+    table.name.must_equal name
+    table.description.must_equal description
+  end
+
+  it "lists tables" do
+    num_tables = 3
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       list_tables_json(num_tables)]
+    end
+
+    tables = dataset.tables
+    tables.size.must_equal num_tables
+    tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+  end
+
+  it "paginates tables" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_tables_json(3, "next_page_token")]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_tables_json(2)]
+    end
+
+    first_tables = dataset.tables
+    first_tables.count.must_equal 3
+    first_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+    first_tables.token.wont_be :nil?
+    first_tables.token.must_equal "next_page_token"
+
+    second_tables = dataset.tables token: first_tables.token
+    second_tables.count.must_equal 2
+    second_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+    second_tables.token.must_be :nil?
+  end
+
+  it "paginates tables with max set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      [200, {"Content-Type"=>"application/json"},
+       list_tables_json(3, "next_page_token")]
+    end
+
+    tables = dataset.tables max: 3
+    tables.count.must_equal 3
+    tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+    tables.token.wont_be :nil?
+    tables.token.must_equal "next_page_token"
+  end
+
+  it "paginates tables without max set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.wont_include "maxResults"
+      [200, {"Content-Type"=>"application/json"},
+       list_tables_json(3, "next_page_token")]
+    end
+
+    tables = dataset.tables
+    tables.count.must_equal 3
+    tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+    tables.token.wont_be :nil?
+    tables.token.must_equal "next_page_token"
+  end
+
+  it "finds a table" do
+    table_name = "found-table"
+
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables/#{table_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       find_table_json(table_name)]
+    end
+
+    table = dataset.table table_name
+    table.must_be_kind_of Gcloud::Bigquery::Table
+    table.name.must_equal table_name
+  end
+
+  def create_table_json name = nil, description = nil
+    random_table_hash(dataset_id, name, description).to_json
+  end
+
+  def find_table_json name
+    random_table_hash(dataset_id, name).to_json
+  end
+
+  def list_tables_json count = 2, token = nil
+    tables = count.times.map { random_table_small_hash(dataset_id) }
+    hash = {"kind"=>"bigquery#tableList", "tables"=>tables,
+            "totalItems"=> (token ? count+1 : count)}
+    hash["nextPageToken"] = token unless token.nil?
+    hash.to_json
+  end
 end

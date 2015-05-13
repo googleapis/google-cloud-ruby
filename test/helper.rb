@@ -292,6 +292,60 @@ class MockBigquery < Minitest::Spec
     }
   end
 
+  def random_table_hash dataset, name = nil, description = nil
+    name ||= "table-name"
+
+    {
+      "kind" => "bigquery#table",
+      "etag" => "etag",
+      "id" => "id",
+      "selfLink" => "link",
+      "tableReference" => {
+        "projectId" => project,
+        "datasetId" => dataset,
+        "tableId" => "#{name}-id"
+      },
+      "friendlyName" => name,
+      "description" => description,
+      "schema" => {
+        "fields" => [
+          {
+            "name" => "name",
+            "type" => "type",
+            "mode" => "mode",
+            "fields" => [],
+            "description" => "description"
+          }
+        ]
+      },
+      "numBytes" => 100,
+      "numRows" => 100,
+      "creationTime" => (Time.now.to_f * 1000).floor,
+      "expirationTime" => (Time.now.to_f * 1000).floor,
+      "lastModifiedTime" => (Time.now.to_f * 1000).floor,
+      "type" => "TABLE",
+      "view" => {
+        "query" => "query"
+      }
+    }
+  end
+
+  def random_table_small_hash dataset, name = nil
+    name ||= "table-name"
+
+    {
+      "kind" => "bigquery#table",
+      "id" => "id",
+      "tableReference" => {
+        "projectId" => project,
+        "datasetId" => dataset,
+        "tableId" => "#{name}-id"
+      },
+      "friendlyName" => name,
+      "type" => "TABLE"
+    }
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_bigquery

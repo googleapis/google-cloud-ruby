@@ -104,6 +104,74 @@ module Gcloud
         )
       end
 
+      ##
+      # Lists all tables in the specified dataset.
+      # Requires the READER dataset role.
+      def list_tables dataset_id, options = {}
+        params = { projectId: @project,
+                   datasetId: dataset_id,
+                   pageToken: options.delete(:token),
+                   maxResults: options.delete(:max)
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @bigquery.tables.list,
+          parameters: params
+        )
+      end
+
+      ##
+      # Gets the specified table resource by table ID.
+      # This method does not return the data in the table,
+      # it only returns the table resource,
+      # which describes the structure of this table.
+      def get_table dataset_id, table_id
+        @client.execute(
+          api_method: @bigquery.tables.get,
+          parameters: { projectId: @project, datasetId: dataset_id,
+                        tableId: table_id }
+        )
+      end
+
+      ##
+      # Creates a new, empty table in the dataset.
+      def insert_table dataset_id, options = {}
+        @client.execute(
+          api_method: @bigquery.tables.insert,
+          parameters: { projectId: @project, datasetId: dataset_id },
+          body_object: { friendlyName: options[:name],
+                         description: options[:description]
+                       }.delete_if { |_, v| v.nil? }
+        )
+      end
+
+      ##
+      # Updates information in an existing table, replacing fields that
+      # are provided in the submitted table resource.
+      def patch_table dataset_id, table_id, options = {}
+        body = { friendlyName: options[:name],
+                 description: options[:description]
+               }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @bigquery.tables.patch,
+          parameters: { projectId: @project, datasetId: dataset_id,
+                        tableId: table_id },
+          body_object: body
+        )
+      end
+
+      ##
+      # Deletes the table specified by tableId from the dataset.
+      # If the table contains data, all the data will be deleted.
+      def delete_table dataset_id, table_id
+        @client.execute(
+          api_method: @bigquery.tables.delete,
+          parameters: { projectId: @project, datasetId: dataset_id,
+                        tableId: table_id }
+        )
+      end
+
       protected
 
       ##

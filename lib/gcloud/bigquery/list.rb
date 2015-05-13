@@ -16,7 +16,7 @@
 module Gcloud
   module Bigquery
     ##
-    # Dataset::List is a special case Array with additional values.
+    # Bigquery::List is a special case Array with additional values.
     class List < DelegateClass(::Array)
       ##
       # If not empty, indicates that there are more records that match
@@ -24,7 +24,7 @@ module Gcloud
       attr_accessor :token
 
       ##
-      # Create a new Dataset::List with an array of values.
+      # Create a new Bigquery::List with an array of values.
       def initialize arr = [], token = nil
         super arr
         @token = token
@@ -37,6 +37,15 @@ module Gcloud
           Dataset.from_gapi gapi_object, conn
         end
         new datasets, resp.data["nextPageToken"]
+      end
+
+      ##
+      # Create a List of Table objects from an API response.
+      def self.tables_from_resp resp, conn #:nodoc:
+        tables = Array(resp.data["tables"]).map do |gapi_object|
+          Table.from_gapi gapi_object, conn
+        end
+        new tables, resp.data["nextPageToken"]
       end
     end
   end

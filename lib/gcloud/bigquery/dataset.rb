@@ -15,6 +15,7 @@
 
 require "json"
 require "gcloud/bigquery/errors"
+require "gcloud/bigquery/table"
 require "gcloud/bigquery/list"
 
 module Gcloud
@@ -95,6 +96,47 @@ module Gcloud
           true
         else
           ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Creates a table on a given dataset for a given subscriber.
+      #
+      # If the name is not provided in the request, the server will assign a
+      # random name for this table on the same project as the dataset.
+      def create_table options = {}
+        ensure_connection!
+        resp = connection.insert_table dataset_id, options
+        if resp.success?
+          Table.from_gapi resp.data, connection
+        else
+          # TODO: Handle ALREADY_EXISTS and NOT_FOUND
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Retrieves a table by name.
+      def table table_name
+        ensure_connection!
+        resp = connection.get_table dataset_id, table_name
+        if resp.success?
+          Table.from_gapi resp.data, connection
+        else
+          nil
+        end
+      end
+
+      ##
+      # Retrieves a list of tables names on the dataset.
+      # The values returned are strings, not Job objects.
+      def tables options = {}
+        ensure_connection!
+        resp = connection.list_tables dataset_id, options
+        if resp.success?
+          List.tables_from_resp resp, connection
+        else
+          fail ApiError.from_response(resp)
         end
       end
 
