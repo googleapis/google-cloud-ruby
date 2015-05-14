@@ -24,6 +24,8 @@ require "gcloud/datastore/dataset/query_results"
 module Gcloud
   module Datastore
     ##
+    # = Datastore Dataset
+    #
     # Dataset is the data saved in a project's Datastore.
     # Dataset is analogous to a database in relational database world.
     #
@@ -52,7 +54,17 @@ module Gcloud
       end
 
       ##
-      # The project connected to.
+      # The Datastore project connected to.
+      #
+      # === Example
+      #
+      #   require "gcloud/datastore"
+      #
+      #   dataset = Gcloud.datastore "my-todo-project",
+      #                              "/path/to/keyfile.json"
+      #
+      #   dataset.project #=> "my-todo-project"
+      #
       def project
         connection.dataset_id
       end
@@ -66,9 +78,22 @@ module Gcloud
       ##
       # Generate IDs for a Key before creating an entity.
       #
-      #   dataset = Gcloud.datastore
+      # === Parameters
+      #
+      # +incomplete_key+::
+      #   A Key without +id+ or +name+ set. (+Key+)
+      # +count+::
+      #   The number of new key IDs to create. (+Integer+)
+      #
+      # === Returns
+      #
+      # Array of Gcloud::Datastore::Key
+      #
+      # === Example
+      #
       #   empty_key = Gcloud::Datastore::Key.new "Task"
       #   task_keys = dataset.allocate_ids empty_key, 5
+      #
       def allocate_ids incomplete_key, count = 1
         if incomplete_key.complete?
           fail Gcloud::Datastore::Error, "An incomplete key must be provided."
@@ -82,10 +107,22 @@ module Gcloud
       end
 
       ##
-      # Persist entities to the Datastore.
+      # Persist one or more entities to the Datastore.
       #
-      #   dataset = Gcloud.datastore
+      # === Parameters
+      #
+      # +entities+::
+      #   One or more entity objects to be saved without +id+ or +name+ set.
+      #   (+Entity+)
+      #
+      # === Returns
+      #
+      # Array of Gcloud::Datastore::Entity
+      #
+      # === Example
+      #
       #   dataset.save task1, task2
+      #
       def save *entities
         mutation = Proto.new_mutation
         save_entities_to_mutation entities, mutation
@@ -96,14 +133,30 @@ module Gcloud
 
       ##
       # Retrieve an entity by providing key information.
-      # Either a Key object or kind and id/name can be provided.
       #
-      #   dataset = Gcloud.datastore
+      # === Parameters
+      #
+      # +key_or_kind+::
+      #   A Key object or +kind+ string value. (+Key+ or +String+)
+      # +key_or_kind+::
+      #   The Key's +id+ or +name+ value if a +kind+ was provided in the first
+      #   parameter. (+Integer+ or +String+ or +nil+)
+      #
+      # === Returns
+      #
+      # Gcloud::Datastore::Entity or +nil+
+      #
+      # === Example
+      #
+      # Finding an entity with a key:
+      #
       #   key = Gcloud::Datastore::Key.new "Task", 123456
       #   task = dataset.find key
       #
-      #   dataset = Gcloud.datastore
+      # Finding an entity with a +kind+ and +id+/+name+:
+      #
       #   task = dataset.find "Task", 123456
+      #
       def find key_or_kind, id_or_name = nil
         key = key_or_kind
         key = Key.new key_or_kind, id_or_name unless key_or_kind.is_a? Key
@@ -117,13 +170,22 @@ module Gcloud
       ##
       # Retrieve the entities for the provided keys.
       #
+      # === Parameters
+      #
+      # +keys+::
+      #   One or more Key objects to find records for. (+Key+)
+      #
+      # === Returns
+      #
+      # Gcloud::Datastore::Dataset::LookupResults
+      #
+      # === Example
+      #
       #   dataset = Gcloud.datastore
       #   key1 = Gcloud::Datastore::Key.new "Task", 123456
       #   key2 = Gcloud::Datastore::Key.new "Task", 987654
       #   tasks = dataset.find_all key1, key2
       #
-      # The entities returned from the lookup are returned in a
-      # Dataset::LookupResults object.
       def find_all *keys
         response = connection.lookup(*keys.map(&:to_proto))
         entities = to_gcloud_entities response.found
@@ -135,10 +197,21 @@ module Gcloud
 
       ##
       # Remove entities from the Datastore.
-      # Accepts Entity and Key objects.
+      #
+      # === Parameters
+      #
+      # +entities_or_keys+::
+      #   One or more Entity or Key objects to remove. (+Entity+ or +Key+)
+      #
+      # === Returns
+      #
+      # +true+ if successful
+      #
+      # === Example
       #
       #   dataset = Gcloud.datastore
       #   dataset.delete task1, task2
+      #
       def delete *entities_or_keys
         keys = entities_or_keys.map do |e_or_k|
           e_or_k.respond_to?(:key) ? e_or_k.key.to_proto : e_or_k.to_proto
@@ -153,12 +226,21 @@ module Gcloud
       ##
       # Retrieve entities specified by a Query.
       #
+      # === Parameters
+      #
+      # +query+::
+      #   The Query object with the search criteria. (+Query+)
+      #
+      # === Returns
+      #
+      # Gcloud::Datastore::Dataset::QueryResults
+      #
+      # === Example
+      #
       #   query = Gcloud::Datastore::Query.new.kind("Task").
       #     where("completed", "=", true)
       #   tasks = dataset.run query
       #
-      # The entities returned from the query are returned in a
-      # Dataset::QueryResults object.
       def run query
         response = connection.run_query query.to_proto
         entities = to_gcloud_entities response.batch.entity_result
@@ -169,13 +251,22 @@ module Gcloud
       alias_method :run_query, :run
 
       ##
-      # Runs the given block in a database transaction.
-      # If no block is given the transaction object is returned.
+      # Creates a Datastore Transaction.
+      #
+      # === Example
+      #
+      # Runs the given block in a database transaction:
+      #
+      #   require "gcloud/datastore"
+      #
+      #   dataset = Gcloud.datastore
+      #
+      #   key = Gcloud::Datastore::Key.new "User", "heidi"
       #
       #   user = Gcloud::Datastore::Entity.new
-      #   user.key = Gcloud::Datastore::Key.new "User", "username"
-      #   user["name"] = "Test"
-      #   user["email"] = "test@example.net"
+      #   user.key = key
+      #   user["name"] = "Heidi Henderson"
+      #   user["email"] = "heidi@example.net"
       #
       #   dataset.transaction do |tx|
       #     if tx.find(user.key).nil?
@@ -183,13 +274,18 @@ module Gcloud
       #     end
       #   end
       #
-      # Alternatively, you can manually commit or rollback by
-      # using the returned transaction object.
+      # Alternatively, if no block is given a Transaction object is returned:
+      #
+      #   require "gcloud/datastore"
+      #
+      #   dataset = Gcloud.datastore
+      #
+      #   key = Gcloud::Datastore::Key.new "User", "heidi"
       #
       #   user = Gcloud::Datastore::Entity.new
-      #   user.key = Gcloud::Datastore::Key.new "User", "username"
-      #   user["name"] = "Test"
-      #   user["email"] = "test@example.net"
+      #   user.key = key
+      #   user["name"] = "Heidi Henderson"
+      #   user["email"] = "heidi@example.net"
       #
       #   tx = dataset.transaction
       #   begin
@@ -200,6 +296,7 @@ module Gcloud
       #   rescue
       #     tx.rollback
       #   end
+      #
       def transaction
         tx = Transaction.new connection
         return tx unless block_given?
