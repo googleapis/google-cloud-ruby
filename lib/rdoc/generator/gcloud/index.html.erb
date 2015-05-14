@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <title>Gcloud Documentation</title>
+    <%= render_partial "meta.html.erb" %>
+  </head>
+
+  <body class="lang-page">
+    <%= render_partial "header.html.erb" %>
+
+    <article class="main lang-page" role="main">
+
+      <header class="docs-header">
+        <h1 class="page-title">gcloud</h1>
+        <%= render_partial "buttons.html.erb" %>
+      </header>
+
+      <section class="content">
+        <%= current.description %>
+      </section>
+
+      <nav class="side-nav">
+        <%= render_partial "side.html.erb" %>
+      </nav>
+
+    </article>
+
+    <%= render_partial "footer.html.erb" %>
+
+  </body>
+</html>

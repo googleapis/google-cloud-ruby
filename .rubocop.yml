@@ -1,0 +1,18 @@
+AllCops:
+  Exclude:
+    - "gcloud-rdoc.gemspec"
+    - "Rakefile"
+    - "test/**/*"
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/MethodDefParentheses:
+  EnforcedStyle: require_no_parentheses
+Style/NumericLiterals:
+  Enabled: false
+Style/SpaceAroundOperators:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Style/EmptyElse:
+  Enabled: false

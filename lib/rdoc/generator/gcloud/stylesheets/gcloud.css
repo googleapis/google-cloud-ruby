@@ -1,0 +1,18 @@
+pre {
+  background: #262626;
+  border: 1px dashed #999;
+  color: white;
+  margin: 0.5em 0;
+  overflow: auto;
+  padding: 0.5em;
+}
+
+pre .ruby-constant   { color: #7fffd4; }
+pre .ruby-keyword    { color: #00ffff; }
+pre .ruby-ivar       { color: #eedd82; }
+pre .ruby-operator   { color: #00ffee; }
+pre .ruby-identifier { color: #ffdead; }
+pre .ruby-node       { color: #ffa07a; }
+pre .ruby-comment    { color: #dc0000; }
+pre .ruby-regexp     { color: #ffa07a; }
+pre .ruby-value      { color: #7fffd4; }
