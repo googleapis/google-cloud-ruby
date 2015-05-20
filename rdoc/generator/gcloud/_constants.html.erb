@@ -1,0 +1,11 @@
+<% if constants.any? %>
+  <h3>Constants</h3>
+  <dl>
+    <% constants.each do |const| %>
+      <dt><a name="<%= const.name %>"><%= const.name %></a></dt>
+      <% if const.comment %>
+        <dd class="description"><%= const.description.strip %></dd>
+      <% end %>
+    <% end %>
+  </dl>
+<% end %>

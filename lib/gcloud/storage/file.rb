@@ -1,3 +1,4 @@
+#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -234,7 +235,7 @@ module Gcloud
 
       ##
       # Create a signed_url for a file.
-      class Signer #:nodoc
+      class Signer #:nodoc:
         def initialize file
           @file = file
         end

@@ -1,0 +1,43 @@
+<ul>
+  <li class="toctree-l1"><a class="reference internal" href="<%= l "index.html" %>">Home</a></li>
+</ul>
+
+<ul>
+  <% store.all_classes_and_modules.sort.each do |klass| %>
+    <li class="toctree-l1" style="padding-left: <%= klass.full_name.split("::").count - 1 %>em;">
+      <a class="reference internal" href="<%= l klass.path %>">
+        <%= klass.full_name.split("::").last %>
+      </a>
+    </li>
+  <% end %>
+  <% store.all_files.select(&:text?).each do |page| %>
+    <li class="toctree-l1"><a class="reference internal" href="<%= l page.path %>"><%= page.full_name %></a></li>
+  <% end %>
+</ul>
+
+<ul class="external-links">
+  <li>
+    <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby" title="Github repository">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
+      Github
+    </a>
+  </li>
+  <li>
+    <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues" title="Issues on Github">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
+      Issues
+    </a>
+  </li>
+  <li>
+    <a href="http://stackoverflow.com/questions/tagged/gcloud-ruby" title="gcloud on StackOverflow">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon">
+      gcloud-ruby
+    </a>
+  </li>
+  <li>
+    <a href="http://rubygems.org/gems/gcloud" title="RubyGems" class="ext-link">
+       <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-package-manager.svg" alt="Package Manager icon">
+      RubyGems
+    </a>
+  </li>
+</ul>

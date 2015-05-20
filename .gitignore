@@ -1,5 +1,6 @@
 coverage
 doc
+html
 keyfile.json
 
 # directories left by gh-pages

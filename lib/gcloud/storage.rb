@@ -1,3 +1,4 @@
+#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +16,7 @@
 require "gcloud"
 require "gcloud/storage/project"
 
-##
-# Google Cloud Storage
+#-
 module Gcloud
   ##
   # Create a new Storage project.

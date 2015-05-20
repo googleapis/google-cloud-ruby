@@ -1,3 +1,4 @@
+#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,8 +19,7 @@ require "gcloud/datastore/dataset"
 require "gcloud/datastore/transaction"
 require "gcloud/datastore/credentials"
 
-##
-# Google Cloud Datastore
+#-
 module Gcloud
   ##
   # Create a new Gcloud::Datastore::Dataset.

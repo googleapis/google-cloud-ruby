@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <title><%= current.full_name %> &mdash; gcloud Documentation</title>
+    <%= render_partial "meta.html.erb" %>
+  </head>
+
+  <body class="lang-page">
+    <%= render_partial "header.html.erb" %>
+
+    <article class="main lang-page" role="main">
+
+      <header class="docs-header">
+        <h1 class="page-title"><%= current.full_name %></h1>
+        <%= render_partial "buttons.html.erb" %>
+      </header>
+
+      <section class="content">
+        <%= render_partial "parent.html.erb" %>
+        <%= render_partial "includes.html.erb" %>
+
+        <div id="description" class="description">
+          <%= current.description %>
+        </div>
+
+        <% current.each_section do |section, constants, attributes| %>
+          <%= render_partial "section.html.erb", section: section, constants: constants, attributes: attributes %>
+        <% end %>
+      </section>
+
+      <nav class="side-nav">
+        <ul>
+          <li class="toctree-l1"><a class="reference internal" href="<%= l "index.html" %>">Home</a></li>
+        </ul>
+        <ul>
+          <%
+          breadcrumb = []
+          current.full_name.split("::").each do |thing|
+            breadcrumb << thing
+            klass_name = breadcrumb.join "::"
+            klass = store.find_class_or_module klass_name %>
+              <li class="toctree-l1" style="padding-left: <%= breadcrumb.count - 1 %>em;">
+                <a class="reference internal" href="<%= l klass.path %>">
+                  <%= klass.full_name.split("::").last %>
+                </a>
+              </li>
+          <% end %>
+          <% current.classes_and_modules.each do |klass| %>
+              <li class="toctree-l1" style="padding-left: <%= klass.full_name.split("::").count - 1 %>em;">
+                <a class="reference internal" href="<%= l klass.path %>">
+                  <%= klass.full_name.split("::").last %>
+                </a>
+              </li>
+          <% end %>
+        </ul>
+
+        <% current.each_section do |section, constants, attributes| %>
+          <% current.methods_by_type(section).each do |type, visibilities|
+             next if visibilities.empty?
+             visibilities.each do |visibility, methods|
+              next unless visibility == :public
+              next if methods.empty? %>
+              <ul>
+                <li class="toctree-l1">
+                  <a class="reference internal" href="#<%= visibility %>-<%= type %>-methods"><%= visibility.to_s.capitalize %> <%= type.capitalize %> Methods</a>
+                </li>
+                <% methods.each do |method| %>
+                  <li class="toctree-l1" style="padding-left: 1em;">
+                    <a class="reference internal" href="#<%= method.aref %>"><%= method.singleton ? '::' : '#' %><%= method.name %></a>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+          <% end %>
+        <% end %>
+      </nav>
+
+    </article>
+
+    <%= render_partial "footer.html.erb" %>
+
+  </body>
+</html>
