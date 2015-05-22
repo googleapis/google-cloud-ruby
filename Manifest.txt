@@ -22,6 +22,7 @@ lib/rdoc/generator/gcloud/_parent.html.erb
 lib/rdoc/generator/gcloud/_section.html.erb
 lib/rdoc/generator/gcloud/_side.html.erb
 lib/rdoc/generator/gcloud/class.html.erb
+lib/rdoc/generator/gcloud/config/side.yml
 lib/rdoc/generator/gcloud/index.html.erb
 lib/rdoc/generator/gcloud/page.html.erb
 lib/rdoc/generator/gcloud/stylesheets/gcloud.css

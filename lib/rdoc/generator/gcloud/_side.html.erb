@@ -4,18 +4,32 @@
 
 <ul>
 <%
-store.all_classes_and_modules.each do |klass|
+side_config["classes"].each do |side|
+  klass = store.all_classes_and_modules.find { |k| k.full_name == side["full_name"] }
+  if klass
 %>
-    <li class="toctree-l1" style="padding-left: <%= klass.path.count(":") / 2 %>em;">
+    <li class="toctree-l1" style="padding-left: <%= side["indent"] %>em;">
       <a class="reference internal" href="<%= l klass.path %>">
-        <%= klass.full_path %>
+        <%= side["name"] %>
       </a>
     </li>
 <%
+  end
 end
 %>
 <%
-store.all_files.select(&:text?).each |page|
+side_config["pages"].each do |side|
+  page = store.all_files.select(&:text?).find { |p| p.full_name == side["full_name"] }
+  if page
+%>
+  <li class="toctree-l1"><a class="reference internal" href="<%= l page.path %>"><%= side["name"] %></a></li>
+<%
+  end
+end
+# Now for the files that aren't in the config
+other_pages = store.all_files.select(&:text?).reject do |page|
+  side_config["pages"].find { |s| s["full_name"] == page.full_name }
+end.each do |page|
 %>
   <li class="toctree-l1"><a class="reference internal" href="<%= l page.path %>"><%= page.full_name %></a></li>
 <%

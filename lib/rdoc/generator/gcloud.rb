@@ -101,6 +101,21 @@ module RDoc
           File.expand_path("../gcloud/", __FILE__))
         @template_dir + file
       end
+
+      def friendly_page_name page
+        side = side_config["pages"].find { |s| s["full_name"] == page.full_name }
+        side ? side["name"] : page.full_name
+      end
+
+      ## Configuration
+
+      def side_config
+        @side_config ||= begin
+          config_file = File.dirname(File.expand_path(__FILE__)) + "/gcloud/config/side.yml"
+          config_yaml = File.open config_file
+          YAML::load config_yaml
+        end
+      end
     end
   end
 end

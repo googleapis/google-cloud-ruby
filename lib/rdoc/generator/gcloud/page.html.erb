@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <title><%= current.full_name %> &mdash; Gcloud Documentation</title>
+    <title><%= friendly_page_name current %> &mdash; Gcloud Documentation</title>
     <%= render_partial "meta.html.erb" %>
   </head>
 
@@ -14,7 +14,7 @@
     <article class="main lang-page" role="main">
 
       <header class="docs-header">
-        <h1 class="page-title"><%= current.full_name %></h1>
+        <h1 class="page-title"><%= friendly_page_name current %></h1>
         <%= render_partial "buttons.html.erb" %>
       </header>
 
