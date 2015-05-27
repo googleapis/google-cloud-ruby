@@ -38,7 +38,7 @@ module Gcloud
       # The response object of the failed HTTP request.
       attr_reader :response
 
-      def initialize method, response = nil
+      def initialize method, response = nil #:nodoc:
         super("API call to #{method} was not successful")
         @method = method
         @response = response
@@ -57,7 +57,7 @@ module Gcloud
       # An error that occurred within the transaction. (optional)
       attr_reader :inner
 
-      def initialize message, inner = nil
+      def initialize message, inner = nil #:nodoc:
         super(message)
         @inner = inner
       end
