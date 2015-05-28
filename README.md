@@ -41,10 +41,11 @@ Instructions and configuration options are covered in the [Authentication guide]
 #### Preview
 
 ```ruby
-require "gcloud/datastore"
+require "gcloud"
 
-dataset = Gcloud.datastore "my-todo-project-id",
-                           "/path/to/keyfile.json"
+gcloud = Gcloud.new "my-todo-project-id",
+                    "/path/to/keyfile.json"
+datastore = gcloud.datastore
 
 # Create a new task to demo datastore
 demo_task = Gcloud::Datastore::Entity.new
@@ -53,12 +54,12 @@ demo_task[:description] = "Demonstrate Datastore functionality"
 demo_task[:completed] = false
 
 # Save the new task
-dataset.save demo_task
+datastore.save demo_task
 
 # Run a query for all completed tasks
 query = Gcloud::Datastore::Query.new.kind("Task").
   where("completed", "=", true)
-completed_tasks = dataset.run query
+completed_tasks = datastore.run query
 ```
 
 ### Pub/Sub
@@ -69,9 +70,11 @@ completed_tasks = dataset.run query
 #### Preview
 
 ```ruby
-require "gcloud/pubsub"
+require "gcloud"
 
-pubsub = Gcloud.pubsub
+gcloud = Gcloud.new "my-todo-project-id",
+                    "/path/to/keyfile.json"
+pubsub = gcloud.pubsub
 
 # Retrieve a topic
 topic = pubsub.topic "my-topic"
@@ -94,10 +97,11 @@ msgs = sub.pull
 #### Preview
 
 ```ruby
-require "gcloud/storage"
+require "gcloud"
 
-storage = Gcloud.storage "my-todo-project-id",
-                         "/path/to/keyfile.json"
+gcloud = Gcloud.new "my-todo-project-id",
+                    "/path/to/keyfile.json"
+storage = gcloud.storage
 
 bucket = storage.bucket "task-attachments"
 
