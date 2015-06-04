@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <title>Gcloud::Datastore::Key &mdash; Gcloud Documentation</title>
+    <title>Gcloud::Pubsub::ApiError &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
@@ -59,7 +59,7 @@
     <article class="main lang-page" role="main">
 
       <header class="docs-header">
-        <h1 class="page-title">Gcloud::Datastore::Key</h1>
+        <h1 class="page-title">Gcloud::Pubsub::ApiError</h1>
         <div class="buttons">
   <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
     <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
@@ -79,7 +79,7 @@
   <div id="parent-class-section" class="section">
     <h3 class="section-header">Parent</h3>
     
-      <p class="link">Object</p>
+      <p class="link"><a href="Error.html">Gcloud::Pubsub::Error</a></p>
     
   </div>
 
@@ -89,16 +89,7 @@
 
         <div id="description" class="description">
           
-<p><a href="../Datastore.html">Datastore</a> <a href="Key.html">Key</a></p>
-
-<p>Every <a href="../Datastore.html">Datastore</a> record has an identifying
-key, which includes the record&#39;s entity kind and a unique identifier.
-The identifier may be either a key name string, assigned explicitly by the
-application, or an integer numeric ID, assigned automatically by <a
-href="../Datastore.html">Datastore</a>.</p>
-
-<pre class="ruby"><span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;username&quot;</span>
-</pre>
+<p>Raised when an API call is not successful.</p>
 
         </div>
 
@@ -117,99 +108,32 @@ href="../Datastore.html">Datastore</a>.</p>
     <h3 class="section-header">Attributes</h3>
 
     
-      <div id="dataset_id-attribute-method" class="method-detail">
-        <a name="dataset_id"></a>
-        
-          <a name="dataset_id="></a>
+      <div id="code-attribute-method" class="method-detail">
+        <a name="code"></a>
         
         <div class="method-heading attribute-method-heading">
-          <span class="method-name">dataset_id</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
-
-        <div class="method-description">
-        
-          <p>The <a href="Key.html#attribute-i-dataset_id">#dataset_id</a> of the <a
-href="Key.html">Key</a>.</p>
-        
-        </div>
-      </div>
-    
-      <div id="id-attribute-method" class="method-detail">
-        <a name="id"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">id</span><span
+          <span class="method-name">code</span><span
             class="attribute-access-type">[R]</span>
         </div>
 
         <div class="method-description">
         
-          <p>The id of the <a href="Key.html">Key</a>.</p>
+          <p>The code of the error.</p>
         
         </div>
       </div>
     
-      <div id="kind-attribute-method" class="method-detail">
-        <a name="kind"></a>
-        
-          <a name="kind="></a>
+      <div id="errors-attribute-method" class="method-detail">
+        <a name="errors"></a>
         
         <div class="method-heading attribute-method-heading">
-          <span class="method-name">kind</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
-
-        <div class="method-description">
-        
-          <p>The kind of the <a href="Key.html">Key</a>.</p>
-        
-        </div>
-      </div>
-    
-      <div id="name-attribute-method" class="method-detail">
-        <a name="name"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">name</span><span
+          <span class="method-name">errors</span><span
             class="attribute-access-type">[R]</span>
         </div>
 
         <div class="method-description">
         
-          <p>The name of the <a href="Key.html">Key</a>.</p>
-        
-        </div>
-      </div>
-    
-      <div id="namespace-attribute-method" class="method-detail">
-        <a name="namespace"></a>
-        
-          <a name="namespace="></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">namespace</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
-
-        <div class="method-description">
-        
-          <p>The namespace of the <a href="Key.html">Key</a>.</p>
-        
-        </div>
-      </div>
-    
-      <div id="parent-attribute-method" class="method-detail">
-        <a name="parent"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">parent</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-          <p>The parent of the <a href="Key.html">Key</a>.</p>
+          <p>The errors encountered.</p>
         
         </div>
       </div>
@@ -223,11 +147,44 @@ href="Key.html">Key</a>.</p>
       <h3 class="section-header">Public Class Methods</h3>
 
       
+        <div id="klass_for-method" class="method ">
+  <a name="method-c-klass_for"></a>
+
+  
+    <h4><code>klass_for(status)</code></h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+      <!-- <div class="method-source-code" id="klass_for-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/errors.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">klass_for</span> <span class="ruby-identifier">status</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;ALREADY_EXISTS&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">AlreadyExistsError</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;NOT_FOUND&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">NotFoundError</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+      
         <div id="new-method" class="method ">
   <a name="method-c-new"></a>
 
   
-    <h4><code>new(kind = nil, id_or_name = nil)</code></h4>
+    <h4><code>new(message, code, errors)</code></h4>
   
 
   <div class="method-description">
@@ -237,14 +194,11 @@ href="Key.html">Key</a>.</p>
 
     
       <!-- <div class="method-source-code" id="new-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 41</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">kind</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">id_or_name</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@kind</span> = <span class="ruby-identifier">kind</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">id_or_name</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Integer</span>
-    <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">id_or_name</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">id_or_name</span>
-  <span class="ruby-keyword">end</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/errors.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">message</span>, <span class="ruby-identifier">code</span>, <span class="ruby-identifier">errors</span>
+  <span class="ruby-keyword">super</span> <span class="ruby-identifier">message</span>
+  <span class="ruby-ivar">@code</span>   = <span class="ruby-identifier">code</span>
+  <span class="ruby-ivar">@errors</span> = <span class="ruby-identifier">errors</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -259,104 +213,6 @@ href="Key.html">Key</a>.</p>
     </div>
   
 
-    <div id="public-instance-methods" class="methods">
-      <h3 class="section-header">Public Instance Methods</h3>
-
-      
-        <div id="complete-3F-method" class="method ">
-  <a name="method-i-complete-3F"></a>
-
-  
-    <h4><code>complete?()</code></h4>
-  
-
-  <div class="method-description">
-    
-      <p>Determine if the key is complete. A complete key has either an id or a
-name.</p>
-    
-
-    
-      <!-- <div class="method-source-code" id="complete-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 100</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">complete?</span>
-  <span class="ruby-operator">!</span><span class="ruby-identifier">incomplete?</span>
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
-    
-  </div>
-
-  
-
-  
-</div>
-
-      
-        <div id="incomplete-3F-method" class="method ">
-  <a name="method-i-incomplete-3F"></a>
-
-  
-    <h4><code>incomplete?()</code></h4>
-  
-
-  <div class="method-description">
-    
-      <p>Determine if the key is incomplete. An incomplete key has neither an id nor
-a name.</p>
-    
-
-    
-      <!-- <div class="method-source-code" id="incomplete-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 107</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">incomplete?</span>
-  <span class="ruby-identifier">kind</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">id</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">empty?</span>))
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
-    
-  </div>
-
-  
-
-  
-</div>
-
-      
-        <div id="path-method" class="method ">
-  <a name="method-i-path"></a>
-
-  
-    <h4><code>path()</code></h4>
-  
-
-  <div class="method-description">
-    
-      <p>Represent the Key&#39;s path (including parent) as an array of arrays. Each
-inner array contains two values, the kind and the id or name. If neither an
-id or name exist then nil will be returned.</p>
-
-<pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">path</span> <span class="ruby-comment">#=&gt; [[&quot;Person&quot;, &quot;username&quot;], [&quot;Task&quot;, 123456]]</span>
-</pre>
-    
-
-    
-      <!-- <div class="method-source-code" id="path-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/key.rb, line 92</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">path</span>
-  <span class="ruby-identifier">new_path</span> = <span class="ruby-identifier">parent</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">path</span> <span class="ruby-operator">:</span> []
-  <span class="ruby-identifier">new_path</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">kind</span>, (<span class="ruby-identifier">id</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">name</span>)]
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
-    
-  </div>
-
-  
-
-  
-</div>
-
-      
-    </div>
-  
 
 
 
@@ -383,25 +239,25 @@ id or name exist then nil will be returned.</p>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Dataset.html">
+      <a class="reference internal" href="../Datastore/Dataset.html">
         Dataset
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Key.html">
+      <a class="reference internal" href="../Datastore/Key.html">
         Key
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Entity.html">
+      <a class="reference internal" href="../Datastore/Entity.html">
         Entity
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Query.html">
+      <a class="reference internal" href="../Datastore/Query.html">
         Query
       </a>
     </li>
@@ -437,19 +293,19 @@ id or name exist then nil will be returned.</p>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Pubsub/Project.html">
+      <a class="reference internal" href="Project.html">
         Project
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Pubsub/Topic.html">
+      <a class="reference internal" href="Topic.html">
         Topic
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Pubsub/Subscription.html">
+      <a class="reference internal" href="Subscription.html">
         Subscription
       </a>
     </li>

@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <title>Gcloud::Storage::Project &mdash; Gcloud Documentation</title>
+    <title>Gcloud::Pubsub::Project &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
@@ -59,7 +59,7 @@
     <article class="main lang-page" role="main">
 
       <header class="docs-header">
-        <h1 class="page-title">Gcloud::Storage::Project</h1>
+        <h1 class="page-title">Gcloud::Pubsub::Project</h1>
         <div class="buttons">
   <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
     <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
@@ -89,22 +89,8 @@
 
         <div id="description" class="description">
           
-<p>Represents the <a href="Project.html">Project</a> that the Buckets and
-Files belong to.</p>
-
-<p><a href="Project.html">Gcloud::Storage::Project</a> is the main object for
-interacting with Google <a href="../Storage.html">Storage</a>. <a
-href="Bucket.html">Gcloud::Storage::Bucket</a> objects are created, read,
-updated, and deleted by <a
-href="Project.html">Gcloud::Storage::Project</a>.</p>
-
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
-                         <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
-</pre>
-
-<p>See <a href="../../Gcloud.html#method-c-storage">Gcloud.storage</a></p>
+<p>Represents the <a href="Project.html">Project</a> that the Topics and Files
+belong to.</p>
 
         </div>
 
@@ -121,131 +107,69 @@ href="Project.html">Gcloud::Storage::Project</a>.</p>
 
 
 
+    <div id="public-class-methods" class="methods">
+      <h3 class="section-header">Public Class Methods</h3>
+
+      
+        <div id="new-method" class="method ">
+  <a name="method-c-new"></a>
+
+  
+    <h4><code>new(project, credentials)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Creates a new Connection instance.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="new-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
+  <span class="ruby-ivar">@connection</span> = <span class="ruby-constant">Connection</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+      
+    </div>
+  
 
     <div id="public-instance-methods" class="methods">
       <h3 class="section-header">Public Instance Methods</h3>
 
       
-        <div id="buckets-method" class="method ">
-  <a name="method-i-buckets"></a>
+        <div id="create_topic-method" class="method ">
+  <a name="method-i-create_topic"></a>
 
   
-    <h4><code>buckets(options = {})</code></h4>
-  
-
-  <div class="method-description">
-    
-      <p>Retrieves a list of buckets for the given project.</p>
-
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
-<span class="ruby-identifier">buckets</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">buckets</span>
-<span class="ruby-identifier">buckets</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">bucket</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">name</span>
-<span class="ruby-keyword">end</span>
-</pre>
-
-<p>See <a href="Bucket.html">Gcloud::Storage::Bucket</a></p>
-    
-
-    
-      <!-- <div class="method-source-code" id="buckets-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 71</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">buckets</span> <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_buckets</span> <span class="ruby-identifier">options</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_resp</span> <span class="ruby-identifier">resp</span>, <span class="ruby-identifier">connection</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
-    
-  </div>
-
-  
-
-  
-</div>
-
-      
-        <div id="create_bucket-method" class="method ">
-  <a name="method-i-create_bucket"></a>
-
-  
-    <h4><code>create_bucket(bucket_name, options = {})</code></h4>
+    <h4><code>create_topic(topic_name)</code></h4>
   
 
   <div class="method-description">
     
-      <p>Creates a new bucket.</p>
+      <p>Creates a new topic.</p>
 
-<pre class="ruby"><span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">project</span>.<span class="ruby-identifier">create_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">topic</span> = <span class="ruby-identifier">project</span>.<span class="ruby-identifier">create_topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
 </pre>
-
-<p>The API call to create the bucket may be retried under certain conditions.
-See <a href="../Backoff.html">Gcloud::Backoff</a> to control this behavior,
-or specify the wanted behavior in the call:</p>
-
-<pre class="ruby"><span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">project</span>.<span class="ruby-identifier">create_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>, <span class="ruby-identifier">retries</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>
-</pre>
-
-<p>See <a href="Bucket.html">Gcloud::Storage::Bucket</a></p>
     
 
     
-      <!-- <div class="method-source-code" id="create_bucket-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 110</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_bucket</span> <span class="ruby-identifier">bucket_name</span>, <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>] = <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">predefined_rule_for</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>]
-  <span class="ruby-identifier">default_acl</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:default_acl</span>]
-  <span class="ruby-identifier">default_acl</span> = <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultAcl</span>.<span class="ruby-identifier">predefined_rule_for</span> <span class="ruby-identifier">default_acl</span>
-  <span class="ruby-identifier">options</span>[<span class="ruby-value">:default_acl</span>] = <span class="ruby-identifier">default_acl</span>
-
-  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">insert_bucket</span> <span class="ruby-identifier">bucket_name</span>, <span class="ruby-identifier">options</span>
+      <!-- <div class="method-source-code" id="create_topic-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_topic</span> <span class="ruby-identifier">topic_name</span>
+  <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">create_topic</span> <span class="ruby-identifier">topic_name</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-constant">Bucket</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
+    <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
-    
-  </div>
-
-  
-
-  
-</div>
-
-      
-        <div id="find_bucket-method" class="method ">
-  <a name="method-i-find_bucket"></a>
-
-  
-    <h4><code>find_bucket(bucket_name)</code></h4>
-  
-
-  <div class="method-description">
-    
-      <p>Retrieves bucket by name.</p>
-
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
-<span class="ruby-identifier">puts</span> <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">name</span>
-</pre>
-
-<p>See <a href="Bucket.html">Gcloud::Storage::Bucket</a></p>
-    
-
-    
-      <!-- <div class="method-source-code" id="find_bucket-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 88</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_bucket</span> <span class="ruby-identifier">bucket_name</span>
-  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_bucket</span> <span class="ruby-identifier">bucket_name</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-constant">Bucket</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;error&quot;</span>][<span class="ruby-string">&quot;code&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-value">404</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -273,9 +197,146 @@ or specify the wanted behavior in the call:</p>
 
     
       <!-- <div class="method-source-code" id="project-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 51</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project</span>
   <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">project</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+      
+        <div id="subscription-method" class="method ">
+  <a name="method-i-subscription"></a>
+
+  
+    <h4><code>subscription(subscription_name)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Retrieves a subscription by name.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="subscription-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 89</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">subscription</span> <span class="ruby-identifier">subscription_name</span>
+  <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_subscription</span> <span class="ruby-identifier">subscription_name</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-constant">Subscription</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+      
+        <div id="subscriptions-method" class="method ">
+  <a name="method-i-subscriptions"></a>
+
+  
+    <h4><code>subscriptions(options = {})</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Retrieves a list of subscriptions for the given project.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="subscriptions-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">subscriptions</span> <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_subscriptions</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-constant">Subscription</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_resp</span> <span class="ruby-identifier">resp</span>, <span class="ruby-identifier">connection</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+      
+        <div id="topic-method" class="method ">
+  <a name="method-i-topic"></a>
+
+  
+    <h4><code>topic(topic_name)</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Retrieves topic by name.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="topic-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">topic</span> <span class="ruby-identifier">topic_name</span>
+  <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_topic</span> <span class="ruby-identifier">topic_name</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;error&quot;</span>][<span class="ruby-string">&quot;code&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-value">404</span>
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+      
+        <div id="topics-method" class="method ">
+  <a name="method-i-topics"></a>
+
+  
+    <h4><code>topics(options = {})</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>Retrieves a list of topics for the given project.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="topics-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">topics</span> <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_topics</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-constant">Topic</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_resp</span> <span class="ruby-identifier">resp</span>, <span class="ruby-identifier">connection</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -345,19 +406,19 @@ or specify the wanted behavior in the call:</p>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Project.html">
+      <a class="reference internal" href="../Storage/Project.html">
         Project
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Bucket.html">
+      <a class="reference internal" href="../Storage/Bucket.html">
         Bucket
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="File.html">
+      <a class="reference internal" href="../Storage/File.html">
         File
       </a>
     </li>
@@ -369,19 +430,19 @@ or specify the wanted behavior in the call:</p>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Pubsub/Project.html">
+      <a class="reference internal" href="Project.html">
         Project
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Pubsub/Topic.html">
+      <a class="reference internal" href="Topic.html">
         Topic
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Pubsub/Subscription.html">
+      <a class="reference internal" href="Subscription.html">
         Subscription
       </a>
     </li>

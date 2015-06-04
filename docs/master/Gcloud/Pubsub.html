@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <title>Gcloud::Storage &mdash; Gcloud Documentation</title>
+    <title>Gcloud::Pubsub &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
@@ -59,7 +59,7 @@
     <article class="main lang-page" role="main">
 
       <header class="docs-header">
-        <h1 class="page-title">Gcloud::Storage</h1>
+        <h1 class="page-title">Gcloud::Pubsub</h1>
         <div class="buttons">
   <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
     <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
@@ -81,15 +81,15 @@
 
         <div id="description" class="description">
           
-<p>Google Cloud <a href="Storage.html">Storage</a></p>
+<p>Google Cloud <a href="Pubsub.html">Pubsub</a></p>
 
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
-                         <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Pubsub</span>.<span class="ruby-identifier">project</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
+                                <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">msg</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;task completed&quot;</span>
 </pre>
 
-<p>See <a href="Storage/Project.html">Gcloud::Storage::Project</a></p>
+<p>See <a href="Pubsub/Project.html">Gcloud::Pubsub::Project</a></p>
 
         </div>
 
@@ -106,74 +106,6 @@
 
 
 
-    <div id="public-class-methods" class="methods">
-      <h3 class="section-header">Public Class Methods</h3>
-
-      
-        <div id="resumable_threshold-method" class="method ">
-  <a name="method-c-resumable_threshold"></a>
-
-  
-    <h4><code>resumable_threshold()</code></h4>
-  
-
-  <div class="method-description">
-    
-      <p>Retrieve resumable threshold. If uploads are larger in size than this value
-then resumable uploads are used.</p>
-
-<p>The default value is 5 MiB (5,000,000 bytes).</p>
-    
-
-    
-      <!-- <div class="method-source-code" id="resumable_threshold-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage.rb, line 62</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resumable_threshold</span>
-  <span class="ruby-identifier">@@resumable_threshold</span>
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
-    
-  </div>
-
-  
-
-  
-</div>
-
-      
-        <div id="resumable_threshold-3D-method" class="method ">
-  <a name="method-c-resumable_threshold-3D"></a>
-
-  
-    <h4><code>resumable_threshold=(new_resumable_threshold)</code></h4>
-  
-
-  <div class="method-description">
-    
-      <p>Sets a new resumable threshold value.</p>
-    
-
-    
-      <!-- <div class="method-source-code" id="resumable_threshold-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage.rb, line 68</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resumable_threshold=</span> <span class="ruby-identifier">new_resumable_threshold</span>
-  <span class="ruby-comment"># rubocop:disable Style/ClassVars</span>
-  <span class="ruby-comment"># Disabled rubocop because this is the best option.</span>
-  <span class="ruby-identifier">@@resumable_threshold</span> = <span class="ruby-identifier">new_resumable_threshold</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-comment"># rubocop:enable Style/ClassVars</span>
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
-    
-  </div>
-
-  
-
-  
-</div>
-
-      
-    </div>
-  
 
 
 

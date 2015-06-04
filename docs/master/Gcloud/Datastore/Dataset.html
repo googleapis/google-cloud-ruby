@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <title>Gcloud::Datastore::Dataset &mdash; gcloud Documentation</title>
+    <title>Gcloud::Datastore::Dataset &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
@@ -60,13 +60,11 @@
 
       <header class="docs-header">
         <h1 class="page-title">Gcloud::Datastore::Dataset</h1>
-        <div class="versions">
+        <div class="buttons">
   <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
     <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
     Version History
   </a>
-</div>
-<div class="report-issue">
   <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/new?title=%5BDocumentation+Issue%5D+" target="_blank" class="v-btn">
     <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" />
     Report an Issue
@@ -151,7 +149,7 @@ href="Dataset.html">Gcloud::Datastore::Dataset</a>.</p>
 
     
       <!-- <div class="method-source-code" id="allocate_ids-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 66</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">allocate_ids</span> <span class="ruby-identifier">incomplete_key</span>, <span class="ruby-identifier">count</span> = <span class="ruby-value">1</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">incomplete_key</span>.<span class="ruby-identifier">complete?</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span>, <span class="ruby-string">&quot;An incomplete key must be provided.&quot;</span>
@@ -192,7 +190,7 @@ href="Dataset.html">Gcloud::Datastore::Dataset</a>.</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 133</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-operator">*</span><span class="ruby-identifier">entities_or_keys</span>
   <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">entities_or_keys</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e_or_k</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">e_or_k</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:key</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">e_or_k</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_proto</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">e_or_k</span>.<span class="ruby-identifier">to_proto</span>
@@ -236,11 +234,14 @@ href="Key.html">Key</a> object or kind and id/name can be provided.</p>
 
     
       <!-- <div class="method-source-code" id="find-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 101</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span> <span class="ruby-identifier">key_or_kind</span>, <span class="ruby-identifier">id_or_name</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-identifier">key_or_kind</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">key_or_kind</span>, <span class="ruby-identifier">id_or_name</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key_or_kind</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Key</span>
+  <span class="ruby-comment"># rubocop:disable Performance/Detect</span>
+  <span class="ruby-comment"># Disabled rubocop because it is detecting the wrong thing.</span>
   <span class="ruby-identifier">find_all</span>(<span class="ruby-identifier">key</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-comment"># rubocop:enable Performance/Detect</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -279,7 +280,7 @@ href="Dataset/LookupResults.html">Dataset::LookupResults</a> object.</p>
 
     
       <!-- <div class="method-source-code" id="find_all-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 118</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_all</span> <span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">lookup</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_proto</span>))
   <span class="ruby-identifier">entities</span> = <span class="ruby-identifier">to_gcloud_entities</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">found</span>
@@ -365,7 +366,7 @@ href="Dataset/LookupResults.html">Dataset::LookupResults</a> object.</p>
 
     
       <!-- <div class="method-source-code" id="project-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 56</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project</span>
   <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">dataset_id</span>
 <span class="ruby-keyword">end</span></pre>
@@ -401,7 +402,7 @@ href="Dataset/QueryResults.html">Dataset::QueryResults</a> object.</p>
 
     
       <!-- <div class="method-source-code" id="run-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 153</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 161</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">run_query</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">to_proto</span>
   <span class="ruby-identifier">entities</span> = <span class="ruby-identifier">to_gcloud_entities</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">batch</span>.<span class="ruby-identifier">entity_result</span>
@@ -466,7 +467,7 @@ href="Dataset/QueryResults.html">Dataset::QueryResults</a> object.</p>
 
     
       <!-- <div class="method-source-code" id="save-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 83</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span> <span class="ruby-operator">*</span><span class="ruby-identifier">entities</span>
   <span class="ruby-identifier">mutation</span> = <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">new_mutation</span>
   <span class="ruby-identifier">save_entities_to_mutation</span> <span class="ruby-identifier">entities</span>, <span class="ruby-identifier">mutation</span>
@@ -530,7 +531,7 @@ transaction object.</p>
 
     
       <!-- <div class="method-source-code" id="transaction-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 194</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 202</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">transaction</span>
   <span class="ruby-identifier">tx</span> = <span class="ruby-constant">Transaction</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">tx</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
@@ -563,99 +564,134 @@ transaction object.</p>
 
       <nav class="side-nav">
         <ul>
-          <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
-        </ul>
-        <ul>
-          
-              <li class="toctree-l1" style="padding-left: 0em;">
-                <a class="reference internal" href="../../Gcloud.html">
-                  Gcloud
-                </a>
-              </li>
-          
-              <li class="toctree-l1" style="padding-left: 1em;">
-                <a class="reference internal" href="../Datastore.html">
-                  Datastore
-                </a>
-              </li>
-          
-              <li class="toctree-l1" style="padding-left: 2em;">
-                <a class="reference internal" href="Dataset.html">
-                  Dataset
-                </a>
-              </li>
-          
-          
-              <li class="toctree-l1" style="padding-left: 3em;">
-                <a class="reference internal" href="Dataset/LookupResults.html">
-                  LookupResults
-                </a>
-              </li>
-          
-              <li class="toctree-l1" style="padding-left: 3em;">
-                <a class="reference internal" href="Dataset/QueryResults.html">
-                  QueryResults
-                </a>
-              </li>
-          
-        </ul>
+  <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
+</ul>
 
-        
-          
-          
-              <ul>
-                <li class="toctree-l1">
-                  <a class="reference internal" href="#public-instance-methods">Public Instance Methods</a>
-                </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-allocate_ids">#allocate_ids</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-delete">#delete</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-find">#find</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-find_all">#find_all</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-get">#get</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-lookup">#lookup</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-project">#project</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-run">#run</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-run_query">#run_query</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-save">#save</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-transaction">#transaction</a>
-                  </li>
-                
-              </ul>
-            
-          
-        
+<ul>
+
+    <li class="toctree-l1" style="padding-left: 0em;">
+      <a class="reference internal" href="../../Gcloud.html">
+        Gcloud
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 1em;">
+      <a class="reference internal" href="../Datastore.html">
+        Datastore
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Dataset.html">
+        Dataset
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Key.html">
+        Key
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Entity.html">
+        Entity
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Query.html">
+        Query
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 1em;">
+      <a class="reference internal" href="../Storage.html">
+        Storage
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/Project.html">
+        Project
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/Bucket.html">
+        Bucket
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/File.html">
+        File
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 1em;">
+      <a class="reference internal" href="../Pubsub.html">
+        Storage
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Pubsub/Project.html">
+        Project
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Pubsub/Topic.html">
+        Topic
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Pubsub/Subscription.html">
+        Subscription
+      </a>
+    </li>
+
+  <li class="toctree-l1"><a class="reference internal" href="../../reference.html">API Reference</a></li>
+
+  <li class="toctree-l1"><a class="reference internal" href="../../README_md.html">Getting Started</a></li>
+
+  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING_md.html">Contribution Guide</a></li>
+
+  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG_md.html">Release History</a></li>
+
+  <li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+
+</ul>
+
+<ul class="external-links">
+  <li>
+    <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby" title="Github repository">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
+      Github
+    </a>
+  </li>
+  <li>
+    <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues" title="Issues on Github">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
+      Issues
+    </a>
+  </li>
+  <li>
+    <a href="http://stackoverflow.com/questions/tagged/gcloud-ruby" title="gcloud on StackOverflow">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon">
+      StackOverflow
+    </a>
+  </li>
+  <li>
+    <a href="http://rubygems.org/gems/gcloud" title="RubyGems" class="ext-link">
+       <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-package-manager.svg" alt="Package Manager icon">
+      RubyGems
+    </a>
+  </li>
+</ul>
+
       </nav>
 
     </article>

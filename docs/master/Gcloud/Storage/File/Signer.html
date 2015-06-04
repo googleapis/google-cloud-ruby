@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <title>Gcloud::Storage::File::List &mdash; Gcloud Documentation</title>
+    <title>Gcloud::Storage::File::Signer &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
@@ -59,7 +59,7 @@
     <article class="main lang-page" role="main">
 
       <header class="docs-header">
-        <h1 class="page-title">Gcloud::Storage::File::List</h1>
+        <h1 class="page-title">Gcloud::Storage::File::Signer</h1>
         <div class="buttons">
   <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
     <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
@@ -79,7 +79,7 @@
   <div id="parent-class-section" class="section">
     <h3 class="section-header">Parent</h3>
     
-      <p class="link">DelegateClass(::Array)</p>
+      <p class="link">Object</p>
     
   </div>
 
@@ -89,8 +89,8 @@
 
         <div id="description" class="description">
           
-<p><a href="List.html">File::List</a> is a special case Array with additional
-values.</p>
+<p>Create a <a href="Signer.html#method-i-signed_url">#signed_url</a> for a
+file.</p>
 
         </div>
 
@@ -104,51 +104,6 @@ values.</p>
 
 
 
-  
-  <div id="attribute-method-details" class="method-section section">
-    <h3 class="section-header">Attributes</h3>
-
-    
-      <div id="prefixes-attribute-method" class="method-detail">
-        <a name="prefixes"></a>
-        
-          <a name="prefixes="></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">prefixes</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
-
-        <div class="method-description">
-        
-          <p>The list of prefixes of objects matching-but-not-listed up to and including
-the requested delimiter.</p>
-        
-        </div>
-      </div>
-    
-      <div id="token-attribute-method" class="method-detail">
-        <a name="token"></a>
-        
-          <a name="token="></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">token</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
-
-        <div class="method-description">
-        
-          <p>If not empty, indicates that there are more buckets that match the request
-and this value should be passed to the next <a
-href="../Bucket.html#method-i-files">Gcloud::Storage::Bucket#files</a> to
-continue.</p>
-        
-        </div>
-      </div>
-    
-  </div>
-
 
 
 
@@ -160,21 +115,19 @@ continue.</p>
   <a name="method-c-new"></a>
 
   
-    <h4><code>new(arr = [], token = nil, prefixes = [])</code></h4>
+    <h4><code>new(file)</code></h4>
   
 
   <div class="method-description">
     
-      <p>Create a new <a href="List.html">File::List</a> with an array of values.</p>
+      
     
 
     
       <!-- <div class="method-source-code" id="new-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/list.rb, line 33</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">arr</span> = [], <span class="ruby-identifier">token</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">prefixes</span> = []
-  <span class="ruby-keyword">super</span> <span class="ruby-identifier">arr</span>
-  <span class="ruby-ivar">@token</span> = <span class="ruby-identifier">token</span>
-  <span class="ruby-ivar">@prefixes</span> = <span class="ruby-identifier">prefixes</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 238</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">file</span>
+  <span class="ruby-ivar">@file</span> = <span class="ruby-identifier">file</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -189,6 +142,217 @@ continue.</p>
     </div>
   
 
+    <div id="public-instance-methods" class="methods">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+      
+        <div id="apply_option_defaults-method" class="method ">
+  <a name="method-i-apply_option_defaults"></a>
+
+  
+    <h4><code>apply_option_defaults(options)</code></h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+      <!-- <div class="method-source-code" id="apply_option_defaults-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 254</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apply_option_defaults</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">adjusted_expires</span> = (<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">utc</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">options</span>[<span class="ruby-value">:expires</span>] <span class="ruby-operator">||</span> <span class="ruby-value">300</span>)).<span class="ruby-identifier">to_i</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:expires</span>] = <span class="ruby-identifier">adjusted_expires</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:method</span>]  <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;GET&quot;</span>
+  <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+      
+        <div id="ext_path-method" class="method ">
+  <a name="method-i-ext_path"></a>
+
+  
+    <h4><code>ext_path()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>The external path to the file.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="ext_path-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 244</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ext_path</span>
+  <span class="ruby-node">&quot;/#{@file.bucket}/#{@file.name}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+      
+        <div id="ext_url-method" class="method ">
+  <a name="method-i-ext_url"></a>
+
+  
+    <h4><code>ext_url()</code></h4>
+  
+
+  <div class="method-description">
+    
+      <p>The external url to the file.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="ext_url-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 250</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ext_url</span>
+  <span class="ruby-node">&quot;https://storage.googleapis.com#{ext_path}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+      
+        <div id="issuer-method" class="method ">
+  <a name="method-i-issuer"></a>
+
+  
+    <h4><code>issuer()</code></h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+      <!-- <div class="method-source-code" id="issuer-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 271</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">issuer</span>
+  <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">credentials</span>.<span class="ruby-identifier">issuer</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+      
+        <div id="signature_str-method" class="method ">
+  <a name="method-i-signature_str"></a>
+
+  
+    <h4><code>signature_str(options)</code></h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+      <!-- <div class="method-source-code" id="signature_str-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 261</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">signature_str</span> <span class="ruby-identifier">options</span>
+  [<span class="ruby-identifier">options</span>[<span class="ruby-value">:method</span>], <span class="ruby-identifier">options</span>[<span class="ruby-value">:content_md5</span>],
+   <span class="ruby-identifier">options</span>[<span class="ruby-value">:content_type</span>], <span class="ruby-identifier">options</span>[<span class="ruby-value">:expires</span>],
+   <span class="ruby-identifier">ext_path</span>].<span class="ruby-identifier">join</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+      
+        <div id="signed_url-method" class="method ">
+  <a name="method-i-signed_url"></a>
+
+  
+    <h4><code>signed_url(options)</code></h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+      <!-- <div class="method-source-code" id="signed_url-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 275</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">signed_url</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">apply_option_defaults</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">signed_string</span> = <span class="ruby-identifier">signing_key</span>.<span class="ruby-identifier">sign</span> <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">new</span>,
+                                   <span class="ruby-identifier">signature_str</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">signature</span> = <span class="ruby-constant">Base64</span>.<span class="ruby-identifier">encode64</span>(<span class="ruby-identifier">signed_string</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-string">&quot;&quot;</span>)
+  <span class="ruby-node">&quot;#{ext_url}?GoogleAccessId=#{CGI.escape issuer}&quot;</span>                      <span class="ruby-node">&quot;&amp;Expires=#{options[:expires]}&quot;</span>                      <span class="ruby-node">&quot;&amp;Signature=#{CGI.escape signature}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+      
+        <div id="signing_key-method" class="method ">
+  <a name="method-i-signing_key"></a>
+
+  
+    <h4><code>signing_key()</code></h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+      <!-- <div class="method-source-code" id="signing_key-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 267</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">signing_key</span>
+  <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">credentials</span>.<span class="ruby-identifier">signing_key</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+      
+    </div>
+  
 
 
 
