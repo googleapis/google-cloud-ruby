@@ -75,7 +75,12 @@ namespace :pages do
     FileUtils.remove_dir rdocgem if Dir.exists? rdocgem
     FileUtils.mkdir_p rdocgem
 
-    puts `git clone --quiet --branch=gcloud-rdoc git@github.com:GoogleCloudPlatform/gcloud-ruby.git #{rdocgem}`
+    git_repo = "git@github.com:GoogleCloudPlatform/gcloud-ruby.git"
+    if ENV["GH_OAUTH_TOKEN"]
+      git_repo = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
+    end
+
+    puts `git clone --quiet --branch=gcloud-rdoc git_repo #{rdocgem} > /dev/null`
     Dir.chdir rdocgem do
       puts `rake gem`
       puts `gem install pkg/gcloud-rdoc-*.gem`
