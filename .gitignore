@@ -4,3 +4,4 @@ keyfile.json
 
 # directories left by gh-pages
 _site
+html
