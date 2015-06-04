@@ -45,7 +45,11 @@ namespace :pages do
 
     puts `cp -R html/* #{docs}`
     # checkout the gh-pages branch
-    puts `git clone --quiet --branch=gh-pages git@github.com:GoogleCloudPlatform/gcloud-ruby.git #{pages} > /dev/null`
+    git_repo = "git@github.com:GoogleCloudPlatform/gcloud-ruby.git"
+    if ENV["GH_OAUTH_TOKEN"]
+      git_repo = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
+    end
+    puts `git clone --quiet --branch=gh-pages #{git_repo} #{pages} > /dev/null`
     # Change to gh-pages
     Dir.chdir pages do
       # sync the docs
@@ -53,11 +57,10 @@ namespace :pages do
       # commit changes
       puts `git add .`
       if ENV["GH_OAUTH_TOKEN"]
-        push_url = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
         puts `git config --global user.email "travis@travis-ci.org"`
         puts `git config --global user.name "travis-ci"`
         puts `git commit -m "Update documentation for #{commit_hash}"`
-        puts `git push #{push_url} gh-pages:gh-pages`
+        puts `git push #{git_repo} gh-pages:gh-pages`
       else
         puts `git commit -m "Update documentation for #{commit_hash}"`
         puts `git push origin gh-pages`
