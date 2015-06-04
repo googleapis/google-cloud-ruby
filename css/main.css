@@ -754,17 +754,12 @@ h2 .headerlink:hover {
 }
 
 /*
- Versions
+ Header Buttons
 */
 
-.versions {
+header .buttons {
     display: inline-block;
     margin-top: 2em;
-}
-
-.versions span,
-.versions a {
-    display: block;
 }
 
 .v-current {
@@ -1085,7 +1080,7 @@ h2 .headerlink:hover {
      Docs Header
     */
 
-    .versions {
+    header .buttons {
         position: absolute;
         top: 6em;
         right: 2em;
