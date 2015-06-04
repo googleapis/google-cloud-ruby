@@ -1,8 +1,13 @@
 language: ruby
 rvm:
-- 2.2
 - 2.1
 - 2.0
 - 1.9
 script:
 - rake travis
+after_success:
+- rake travis:pages
+matrix:
+  include:
+    - rvm: 2.2
+      env: GCLOUD_BUILD_DOCS=true
