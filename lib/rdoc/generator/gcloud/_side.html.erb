@@ -17,6 +17,7 @@ side_config["classes"].each do |side|
   end
 end
 %>
+  <li class="toctree-l1"><a class="reference internal" href="<%= l "reference.html" %>">API Reference</a></li>
 <%
 side_config["pages"].each do |side|
   page = store.all_files.select(&:text?).find { |p| p.full_name == side["full_name"] }

@@ -57,6 +57,8 @@ module RDoc
         # main index page
         self.current = @store.find_text_page(@options.main_page)
         render_template "index.html.erb", "index.html"
+        # api reference page
+        render_template "reference.html.erb", "reference.html"
       end
 
       def generate_all_files
