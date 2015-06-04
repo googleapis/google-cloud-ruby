@@ -31,7 +31,7 @@ classes:
   name: File
   indent: 2
 - full_name: Gcloud::Pubsub
-  name: Storage
+  name: Pubsub
   indent: 1
 - full_name: Gcloud::Pubsub::Project
   name: Project
