@@ -192,7 +192,7 @@ describe Gcloud::Pubsub, :pubsub do
       msg = topic.publish "hello"
       msg.wont_be :nil?
       # Check it received the published message
-      events = subscription.pull
+      events = pull_with_retry subscription
       events.wont_be :empty?
       events.count.must_equal 1
       event = events.first
@@ -202,6 +202,19 @@ describe Gcloud::Pubsub, :pubsub do
       subscription.ack event.ack_id
       # Remove the subscription
       subscription.delete
+    end
+
+    def pull_with_retry sub
+      events = []
+      retries = 0
+      while retries <= 5 do
+        events = sub.pull
+        break if events.any?
+        retries += 1
+        puts "the subscription does not have the message yet. sleeping for #{retries*retries} second(s) and retrying."
+        sleep retries*retries
+      end
+      events
     end
   end
 end
