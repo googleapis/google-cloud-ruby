@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <title>Gcloud::Storage::Bucket::List &mdash; Gcloud Documentation</title>
+    <title>Gcloud::Datastore::Proto::Key &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
@@ -59,7 +59,7 @@
     <article class="main lang-page" role="main">
 
       <header class="docs-header">
-        <h1 class="page-title">Gcloud::Storage::Bucket::List</h1>
+        <h1 class="page-title">Gcloud::Datastore::Proto::Key</h1>
         <div class="buttons">
   <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
     <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
@@ -79,7 +79,7 @@
   <div id="parent-class-section" class="section">
     <h3 class="section-header">Parent</h3>
     
-      <p class="link">DelegateClass(::Array)</p>
+      <p class="link">Object</p>
     
   </div>
 
@@ -89,9 +89,6 @@
 
         <div id="description" class="description">
           
-<p><a href="List.html">Bucket::List</a> is a special case Array with
-additional values.</p>
-
         </div>
 
         
@@ -104,58 +101,33 @@ additional values.</p>
 
 
 
-  
-  <div id="attribute-method-details" class="method-section section">
-    <h3 class="section-header">Attributes</h3>
-
-    
-      <div id="token-attribute-method" class="method-detail">
-        <a name="token"></a>
-        
-          <a name="token="></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">token</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
-
-        <div class="method-description">
-        
-          <p>If not empty, indicates that there are more buckets that match the request
-and this value should be passed to the next <a
-href="../Project.html#method-i-buckets">Gcloud::Storage::Project#buckets</a>
-to continue.</p>
-        
-        </div>
-      </div>
-    
-  </div>
 
 
 
 
-    <div id="public-class-methods" class="methods">
-      <h3 class="section-header">Public Class Methods</h3>
+    <div id="public-instance-methods" class="methods">
+      <h3 class="section-header">Public Instance Methods</h3>
 
       
-        <div id="new-method" class="method ">
-  <a name="method-c-new"></a>
+        <div id="dup-method" class="method ">
+  <a name="method-i-dup"></a>
 
   
-    <h4><code>new(arr = [], token = nil)</code></h4>
+    <h4><code>dup()</code></h4>
   
 
   <div class="method-description">
     
-      <p>Create a new <a href="List.html">Bucket::List</a> with an array of values.</p>
+      
     
 
     
-      <!-- <div class="method-source-code" id="new-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/list.rb, line 29</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">arr</span> = [], <span class="ruby-identifier">token</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">super</span> <span class="ruby-identifier">arr</span>
-  <span class="ruby-ivar">@token</span> = <span class="ruby-identifier">token</span>
+      <!-- <div class="method-source-code" id="dup-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/proto.rb, line 245</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">proto_request_body</span> = <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">encode</span> <span class="ruby-identifier">proto_request_body</span>
+  <span class="ruby-constant">Key</span>.<span class="ruby-identifier">decode</span> <span class="ruby-identifier">proto_request_body</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -169,7 +141,6 @@ to continue.</p>
       
     </div>
   
-
 
 
 
@@ -196,25 +167,25 @@ to continue.</p>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../../Datastore/Dataset.html">
+      <a class="reference internal" href="../Dataset.html">
         Dataset
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../../Datastore/Key.html">
+      <a class="reference internal" href="../Key.html">
         Key
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../../Datastore/Entity.html">
+      <a class="reference internal" href="../Entity.html">
         Entity
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../../Datastore/Query.html">
+      <a class="reference internal" href="../Query.html">
         Query
       </a>
     </li>
@@ -226,19 +197,19 @@ to continue.</p>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Project.html">
+      <a class="reference internal" href="../../Storage/Project.html">
         Project
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Bucket.html">
+      <a class="reference internal" href="../../Storage/Bucket.html">
         Bucket
       </a>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../File.html">
+      <a class="reference internal" href="../../Storage/File.html">
         File
       </a>
     </li>

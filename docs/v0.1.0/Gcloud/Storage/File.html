@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <title>Gcloud::Storage::File &mdash; gcloud Documentation</title>
+    <title>Gcloud::Storage::File &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
@@ -47,7 +47,7 @@
       </li>
       <li>
         <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="gcloud-ruby">
-          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.svg" alt="Ruby icon" class="menu-icon" width="24">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.png" alt="Ruby icon" class="menu-icon" width="24">
           Ruby
         </a>
       </li>
@@ -60,13 +60,11 @@
 
       <header class="docs-header">
         <h1 class="page-title">Gcloud::Storage::File</h1>
-        <div class="versions">
+        <div class="buttons">
   <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
     <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
     Version History
   </a>
-</div>
-<div class="report-issue">
   <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/new?title=%5BDocumentation+Issue%5D+" target="_blank" class="v-btn">
     <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" />
     Report an Issue
@@ -127,7 +125,7 @@ href="Bucket.html">Bucket</a>.</p>
 
     
       <!-- <div class="method-source-code" id="new-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 35</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-ivar">@connection</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@gapi</span> = {}
@@ -163,7 +161,7 @@ href="Bucket.html">Bucket</a>.</p>
 
     
       <!-- <div class="method-source-code" id="acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 196</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 195</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acl</span>
   <span class="ruby-ivar">@acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -191,7 +189,7 @@ href="Bucket.html">Bucket</a>.</p>
 
     
       <!-- <div class="method-source-code" id="bucket-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 61</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">bucket</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;bucket&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -228,7 +226,7 @@ href="Bucket.html">Bucket</a>.</p>
 
     
       <!-- <div class="method-source-code" id="copy-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 162</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 161</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">copy</span> <span class="ruby-identifier">dest_bucket_or_path</span>, <span class="ruby-identifier">dest_path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">dest_bucket</span>, <span class="ruby-identifier">dest_path</span>, <span class="ruby-identifier">options</span> = <span class="ruby-identifier">fix_copy_args</span> <span class="ruby-identifier">dest_bucket_or_path</span>,
@@ -267,7 +265,7 @@ base64.</p>
 
     
       <!-- <div class="method-source-code" id="crc32c-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 110</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">crc32c</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;crc32c&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -295,7 +293,7 @@ base64.</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 178</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 177</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_file</span> <span class="ruby-identifier">bucket</span>, <span class="ruby-identifier">name</span>
@@ -352,7 +350,7 @@ href="FileVerificationError.html">FileVerificationError</a> is raised.</p>
 
     
       <!-- <div class="method-source-code" id="download-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 140</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">download</span> <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">download_file</span> <span class="ruby-identifier">bucket</span>, <span class="ruby-identifier">name</span>
@@ -389,7 +387,7 @@ href="FileVerificationError.html">FileVerificationError</a> is raised.</p>
 
     
       <!-- <div class="method-source-code" id="etag-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 116</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">etag</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;etag&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -417,7 +415,7 @@ href="FileVerificationError.html">FileVerificationError</a> is raised.</p>
 
     
       <!-- <div class="method-source-code" id="generation-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 68</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">generation</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;generation&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -445,7 +443,7 @@ href="FileVerificationError.html">FileVerificationError</a> is raised.</p>
 
     
       <!-- <div class="method-source-code" id="id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 49</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;id&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -473,7 +471,7 @@ href="FileVerificationError.html">FileVerificationError</a> is raised.</p>
 
     
       <!-- <div class="method-source-code" id="kind-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 43</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">kind</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;kind&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -501,7 +499,7 @@ href="FileVerificationError.html">FileVerificationError</a> is raised.</p>
 
     
       <!-- <div class="method-source-code" id="md5-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 103</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">md5</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;md5Hash&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -532,7 +530,7 @@ particular file.</p>
 
     
       <!-- <div class="method-source-code" id="metageneration-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 77</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">metageneration</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;metageneration&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -560,7 +558,7 @@ particular file.</p>
 
     
       <!-- <div class="method-source-code" id="name-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 55</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;name&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -588,7 +586,7 @@ particular file.</p>
 
     
       <!-- <div class="method-source-code" id="signed_url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 188</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 187</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">signed_url</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">signer</span> = <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Signer</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
@@ -618,7 +616,7 @@ particular file.</p>
 
     
       <!-- <div class="method-source-code" id="size-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 89</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">size</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;size&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -647,7 +645,7 @@ enabled, changing an object&#39;s metadata does not change this property.</p>
 
     
       <!-- <div class="method-source-code" id="updated_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 97</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">updated_at</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;updated&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -675,7 +673,7 @@ enabled, changing an object&#39;s metadata does not change this property.</p>
 
     
       <!-- <div class="method-source-code" id="url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 83</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">url</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -699,134 +697,110 @@ enabled, changing an object&#39;s metadata does not change this property.</p>
 
       <nav class="side-nav">
         <ul>
-          <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
-        </ul>
-        <ul>
-          
-              <li class="toctree-l1" style="padding-left: 0em;">
-                <a class="reference internal" href="../../Gcloud.html">
-                  Gcloud
-                </a>
-              </li>
-          
-              <li class="toctree-l1" style="padding-left: 1em;">
-                <a class="reference internal" href="../Storage.html">
-                  Storage
-                </a>
-              </li>
-          
-              <li class="toctree-l1" style="padding-left: 2em;">
-                <a class="reference internal" href="File.html">
-                  File
-                </a>
-              </li>
-          
-          
-              <li class="toctree-l1" style="padding-left: 3em;">
-                <a class="reference internal" href="File/Acl.html">
-                  Acl
-                </a>
-              </li>
-          
-              <li class="toctree-l1" style="padding-left: 3em;">
-                <a class="reference internal" href="File/List.html">
-                  List
-                </a>
-              </li>
-          
-        </ul>
+  <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
+</ul>
 
-        
-          
-              <ul>
-                <li class="toctree-l1">
-                  <a class="reference internal" href="#public-class-methods">Public Class Methods</a>
-                </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-c-new">::new</a>
-                  </li>
-                
-              </ul>
-            
-          
-              <ul>
-                <li class="toctree-l1">
-                  <a class="reference internal" href="#public-instance-methods">Public Instance Methods</a>
-                </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-acl">#acl</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-bucket">#bucket</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-copy">#copy</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-crc32c">#crc32c</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-delete">#delete</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-download">#download</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-etag">#etag</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-generation">#generation</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-id">#id</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-kind">#kind</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-md5">#md5</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-metageneration">#metageneration</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-name">#name</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-signed_url">#signed_url</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-size">#size</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-updated_at">#updated_at</a>
-                  </li>
-                
-                  <li class="toctree-l1" style="padding-left: 1em;">
-                    <a class="reference internal" href="#method-i-url">#url</a>
-                  </li>
-                
-              </ul>
-            
-          
-        
+<ul>
+
+    <li class="toctree-l1" style="padding-left: 0em;">
+      <a class="reference internal" href="../../Gcloud.html">
+        Gcloud
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 1em;">
+      <a class="reference internal" href="../Datastore.html">
+        Datastore
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Datastore/Dataset.html">
+        Dataset
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Datastore/Key.html">
+        Key
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Datastore/Entity.html">
+        Entity
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Datastore/Query.html">
+        Query
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 1em;">
+      <a class="reference internal" href="../Storage.html">
+        Storage
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Project.html">
+        Project
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="Bucket.html">
+        Bucket
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="File.html">
+        File
+      </a>
+    </li>
+
+  <li class="toctree-l1"><a class="reference internal" href="../../reference.html">API Reference</a></li>
+
+  <li class="toctree-l1"><a class="reference internal" href="../../README_md.html">Getting Started</a></li>
+
+  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING_md.html">Contribution Guide</a></li>
+
+  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG_md.html">Release History</a></li>
+
+  <li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+
+</ul>
+
+<ul class="external-links">
+  <li>
+    <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby" title="Github repository">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
+      Github
+    </a>
+  </li>
+  <li>
+    <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues" title="Issues on Github">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
+      Issues
+    </a>
+  </li>
+  <li>
+    <a href="http://stackoverflow.com/questions/tagged/gcloud-ruby" title="gcloud on StackOverflow">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon">
+      StackOverflow
+    </a>
+  </li>
+  <li>
+    <a href="http://rubygems.org/gems/gcloud" title="RubyGems" class="ext-link">
+       <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-package-manager.svg" alt="Package Manager icon">
+      RubyGems
+    </a>
+  </li>
+</ul>
+
       </nav>
 
     </article>
