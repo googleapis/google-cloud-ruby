@@ -80,7 +80,7 @@ namespace :pages do
       git_repo = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
     end
 
-    puts `git clone --quiet --branch=gcloud-rdoc git_repo #{rdocgem} > /dev/null`
+    puts `git clone --quiet --branch=gcloud-rdoc #{git_repo} #{rdocgem} > /dev/null`
     Dir.chdir rdocgem do
       puts `rake gem`
       puts `gem install pkg/gcloud-rdoc-*.gem`
