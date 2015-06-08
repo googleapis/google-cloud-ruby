@@ -12,8 +12,8 @@ Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) ser
 
 This client supports the following Google Cloud Platform services:
 
-* [Google Cloud Datastore](https://cloud.google.com/datastore/) ([docs](https://cloud.google.com/datastore/docs))
-* [Google Cloud Storage](https://cloud.google.com/storage/) ([docs](https://cloud.google.com/storage/docs/json_api/))
+* [Google Cloud Datastore](#datastore)
+* [Google Cloud Storage](#storage)
 
 If you need support for other Google APIs, check out the [Google API Ruby Client library](https://github.com/google/google-api-ruby-client).
 
