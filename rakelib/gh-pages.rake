@@ -89,18 +89,15 @@ namespace :pages do
 
   RDoc::Task.new do |rdoc|
     begin; require "gcloud-rdoc"; rescue LoadError; end
-    require_relative "../lib/gcloud/version"
+
+    require "rubygems"
+    spec = Gem::Specification::load("gcloud.gemspec")
 
     rdoc.generator = "gcloud"
-    rdoc.title = "gcloud #{Gcloud::VERSION} Documentation"
+    rdoc.title = "gcloud #{spec.version} Documentation"
     rdoc.main = "README.md"
-    rdoc.rdoc_files.include "README.md",
-                            "CONTRIBUTING.md",
-                            "CHANGELOG.md",
-                            "LICENSE",
+    rdoc.rdoc_files.include spec.extra_rdoc_files,
                             "lib/"
-    rdoc.options = ["--exclude", "Manifest.txt",
-                    "--exclude", "lib/gcloud/proto",
-                    "--exclude", "lib/rdoc"]
+    rdoc.options = spec.rdoc_options
   end
 end
