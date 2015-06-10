@@ -73,21 +73,11 @@
       </header>
 
       <section class="content">
-        
-  
-  <div id="parent-class-section" class="section">
-    <h3 class="section-header">Parent</h3>
-    
-      <p class="link"><a href="Dataset.html">Gcloud::Datastore::Dataset</a></p>
-    
-  </div>
-
-
-        
-
 
         <div id="description" class="description">
           
+<h1 id="class-Gcloud::Datastore::Transaction-label-Transaction"><a href="Transaction.html">Transaction</a><span><a href="#class-Gcloud::Datastore::Transaction-label-Transaction">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
 <p>Special Connection instance for running transactions.</p>
 
 <p>See <a
@@ -95,48 +85,55 @@ href="Dataset.html#method-i-transaction">Gcloud::Datastore::Dataset#transaction<
 
         </div>
 
-        
+        <div class="section-links">
+  
+    <div>
+      Parent:
+      
+        <a href="Dataset.html">Gcloud::Datastore::Dataset</a>
+      
+    </div>
+  
 
+  
 
-  <div class="method-links">
+  
     
-      
-      
+    
+      <div>
+        Attributes:
+
+        
+          <a href="#id-attribute-method">id</a>
+        
+      </div>
+    
+
+    
+    
         <div>
-          Attributes:
+          Public Instance Methods:
 
           
-            <a href="#id-attribute-method">id</a>
+            <a href="#begin_transaction-method">begin_transaction</a>
+          
+            <a href="#commit-method">commit</a>
+          
+            <a href="#delete-method">delete</a>
+          
+            <a href="#reset-21-method">reset!</a>
+          
+            <a href="#rollback-method">rollback</a>
+          
+            <a href="#save-method">save</a>
+          
+            <a href="#start-method">start</a>
           
         </div>
       
-
-      
-      
-          <div>
-            Public Instance Methods:
-
-            
-              <a href="#begin_transaction-method">begin_transaction</a>
-            
-              <a href="#commit-method">commit</a>
-            
-              <a href="#delete-method">delete</a>
-            
-              <a href="#reset-21-method">reset!</a>
-            
-              <a href="#rollback-method">rollback</a>
-            
-              <a href="#save-method">save</a>
-            
-              <a href="#start-method">start</a>
-            
-          </div>
-        
-      
     
-  </div>
-
+  
+</div>
 
 
         
@@ -220,7 +217,7 @@ href="Dataset.html#method-i-transaction">Gcloud::Datastore::Dataset#transaction<
 
     
       <!-- <div class="method-source-code" id="commit-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 77</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">commit</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@id</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">TransactionError</span>, <span class="ruby-string">&quot;Cannot commit when not in a transaction.&quot;</span>
@@ -261,7 +258,7 @@ href="Dataset.html#method-i-transaction">Gcloud::Datastore::Dataset#transaction<
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 56</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-operator">*</span><span class="ruby-identifier">entities</span>
   <span class="ruby-identifier">shared_mutation</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">m</span>.<span class="ruby-identifier">delete</span> = <span class="ruby-identifier">entities</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">entity</span><span class="ruby-operator">|</span> <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_proto</span> }
@@ -294,7 +291,7 @@ must be called afterwards.</p>
 
     
       <!-- <div class="method-source-code" id="reset-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 101</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset!</span>
   <span class="ruby-ivar">@shared_mutation</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@id</span>  = <span class="ruby-keyword">nil</span>
@@ -324,7 +321,7 @@ must be called afterwards.</p>
 
     
       <!-- <div class="method-source-code" id="rollback-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 89</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">rollback</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@id</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">TransactionError</span>, <span class="ruby-string">&quot;Cannot rollback when not in a transaction.&quot;</span>
@@ -364,7 +361,7 @@ must be called afterwards.</p>
 
     
       <!-- <div class="method-source-code" id="save-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 42</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span> <span class="ruby-operator">*</span><span class="ruby-identifier">entities</span>
   <span class="ruby-identifier">save_entities_to_mutation</span> <span class="ruby-identifier">entities</span>, <span class="ruby-identifier">shared_mutation</span>
   <span class="ruby-comment"># Do not save or assign auto_ids yet</span>
@@ -395,7 +392,7 @@ href="Transaction.html">Transaction</a> is created.</p>
 
     
       <!-- <div class="method-source-code" id="start-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 67</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/transaction.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
   <span class="ruby-identifier">fail</span> <span class="ruby-constant">TransactionError</span>, <span class="ruby-string">&quot;Transaction already opened.&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@id</span>.<span class="ruby-identifier">nil?</span>
 
@@ -519,6 +516,8 @@ href="Transaction.html">Transaction</a> is created.</p>
   <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.md">Contribution Guide</a></li>
 
   <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.md">Release History</a></li>
+
+  <li class="toctree-l1"><a class="reference internal" href="../../LICENSE">LICENSE</a></li>
 
 </ul>
 
