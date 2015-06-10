@@ -5,43 +5,40 @@ classes:
   indent: 0
 - full_name: Gcloud::Datastore
   name: Datastore
-  indent: 1
+  indent: 0
 - full_name: Gcloud::Datastore::Dataset
   name: Dataset
-  indent: 2
-- full_name: Gcloud::Datastore::Key
-  name: Key
-  indent: 2
-- full_name: Gcloud::Datastore::Entity
-  name: Entity
-  indent: 2
+  indent: 1
 - full_name: Gcloud::Datastore::Query
   name: Query
-  indent: 2
-- full_name: Gcloud::Storage
-  name: Storage
   indent: 1
-- full_name: Gcloud::Storage::Project
-  name: Project
-  indent: 2
-- full_name: Gcloud::Storage::Bucket
-  name: Bucket
-  indent: 2
-- full_name: Gcloud::Storage::File
-  name: File
-  indent: 2
+- full_name: Gcloud::Datastore::Entity
+  name: Entity
+  indent: 1
 - full_name: Gcloud::Pubsub
   name: Pubsub
-  indent: 1
+  indent: 0
 - full_name: Gcloud::Pubsub::Project
   name: Project
-  indent: 2
+  indent: 1
 - full_name: Gcloud::Pubsub::Topic
   name: Topic
-  indent: 2
+  indent: 1
 - full_name: Gcloud::Pubsub::Subscription
   name: Subscription
-  indent: 2
+  indent: 1
+- full_name: Gcloud::Storage
+  name: Storage
+  indent: 0
+- full_name: Gcloud::Storage::Project
+  name: Project
+  indent: 1
+- full_name: Gcloud::Storage::Bucket
+  name: Bucket
+  indent: 1
+- full_name: Gcloud::Storage::File
+  name: File
+  indent: 1
 pages:
 - full_name: README.md
   name: Getting Started
