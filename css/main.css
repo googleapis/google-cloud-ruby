@@ -728,6 +728,14 @@ h2 .headerlink:hover {
   padding: 8px;
 }
 
+.methods .method {
+  border-top: 1px solid gray;
+}
+
+.methods .method:first-child {
+  border-top: none;
+}
+
 .param-optional .param-types {
   font-style: italic;
 }
