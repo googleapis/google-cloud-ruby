@@ -20,15 +20,18 @@ require "pathname"
 namespace :pages do
   desc "Updates the documentation on the gh-pages branch"
   task :master do
-    branch = `git symbolic-ref --short HEAD`.chomp
-    if "master" != branch
-      puts "You are on the #{branch} branch. You must be on the master branch to run this rake task."
-      exit
-    end
+    unless ENV["GH_OAUTH_TOKEN"]
+      # only check this if we are not running on travis
+      branch = `git symbolic-ref --short HEAD`.chomp
+      if "master" != branch
+        puts "You are on the #{branch} branch. You must be on the master branch to run this rake task."
+        exit
+      end
 
-    unless `git status --porcelain`.chomp.empty?
-      puts "The master branch is not clean. Unable to update gh-pages."
-      exit
+      unless `git status --porcelain`.chomp.empty?
+        puts "The master branch is not clean. Unable to update gh-pages."
+        exit
+      end
     end
 
     commit_hash = `git rev-parse --short HEAD`.chomp
