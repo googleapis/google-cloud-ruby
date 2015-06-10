@@ -838,7 +838,7 @@ header .buttons {
 }
 
 .content h2, .content h3, .content h4, .content h5, .content h6 {
-    margin: 2em 0 0.5em;
+    margin: 1em 0 0.5em;
 }
 
 .content>h2:first-child {
