@@ -17,6 +17,12 @@ Hoe.spec "gcloud" do
   self.readme_file  = "README.md"
   self.testlib      = :minitest
 
+  self.spec_extras[:extra_rdoc_files] = ["AUTHENTICATION.md",
+                                         "CHANGELOG.md",
+                                         "CONTRIBUTING.md",
+                                         "LICENSE",
+                                         "README.md"]
+
   self.spec_extras[:rdoc_options] = ["--main", "README.md",
                                      "--exclude", "lib/gcloud/proto/",
                                      "--exclude", "Manifest.txt"]

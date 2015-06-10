@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
-# stub: gcloud 0.1.0.20150610043605 ruby lib
+# stub: gcloud 0.1.0.20150610165058 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "gcloud"
-  s.version = "0.1.0.20150610043605"
+  s.version = "0.1.0.20150610165058"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.date = "2015-06-10"
   s.description = "Gcloud is the official library for interacting with Google Cloud."
   s.email = ["silvano@google.com", "mike@blowmage.com"]
-  s.extra_rdoc_files = ["AUTHENTICATION.md", "CHANGELOG.md", "CONTRIBUTING.md", "Manifest.txt", "README.md"]
+  s.extra_rdoc_files = ["AUTHENTICATION.md", "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE", "README.md"]
   s.files = [".gemtest", ".rubocop.yml", "AUTHENTICATION.md", "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE", "Manifest.txt", "README.md", "Rakefile", "gcloud.gemspec", "lib/gcloud.rb", "lib/gcloud/backoff.rb", "lib/gcloud/credentials.rb", "lib/gcloud/datastore.rb", "lib/gcloud/datastore/connection.rb", "lib/gcloud/datastore/credentials.rb", "lib/gcloud/datastore/dataset.rb", "lib/gcloud/datastore/dataset/lookup_results.rb", "lib/gcloud/datastore/dataset/query_results.rb", "lib/gcloud/datastore/entity.rb", "lib/gcloud/datastore/errors.rb", "lib/gcloud/datastore/key.rb", "lib/gcloud/datastore/properties.rb", "lib/gcloud/datastore/proto.rb", "lib/gcloud/datastore/query.rb", "lib/gcloud/datastore/transaction.rb", "lib/gcloud/proto/datastore_v1.pb.rb", "lib/gcloud/pubsub.rb", "lib/gcloud/pubsub/connection.rb", "lib/gcloud/pubsub/credentials.rb", "lib/gcloud/pubsub/errors.rb", "lib/gcloud/pubsub/event.rb", "lib/gcloud/pubsub/message.rb", "lib/gcloud/pubsub/project.rb", "lib/gcloud/pubsub/subscription.rb", "lib/gcloud/pubsub/subscription/list.rb", "lib/gcloud/pubsub/topic.rb", "lib/gcloud/pubsub/topic/list.rb", "lib/gcloud/storage.rb", "lib/gcloud/storage/bucket.rb", "lib/gcloud/storage/bucket/acl.rb", "lib/gcloud/storage/bucket/list.rb", "lib/gcloud/storage/connection.rb", "lib/gcloud/storage/credentials.rb", "lib/gcloud/storage/errors.rb", "lib/gcloud/storage/file.rb", "lib/gcloud/storage/file/acl.rb", "lib/gcloud/storage/file/list.rb", "lib/gcloud/storage/file/verifier.rb", "lib/gcloud/storage/project.rb", "lib/gcloud/version.rb", "rakelib/console.rake", "rakelib/manifest.rake", "rakelib/proto.rake", "rakelib/rubocop.rake", "rakelib/test.rake", "test/gcloud/datastore/proto/test_cursor.rb", "test/gcloud/datastore/proto/test_direction.rb", "test/gcloud/datastore/proto/test_operator.rb", "test/gcloud/datastore/proto/test_value.rb", "test/gcloud/datastore/test_connection.rb", "test/gcloud/datastore/test_credentials.rb", "test/gcloud/datastore/test_dataset.rb", "test/gcloud/datastore/test_entity.rb", "test/gcloud/datastore/test_entity_exclude.rb", "test/gcloud/datastore/test_key.rb", "test/gcloud/datastore/test_query.rb", "test/gcloud/datastore/test_transaction.rb", "test/gcloud/pubsub/test_event.rb", "test/gcloud/pubsub/test_message.rb", "test/gcloud/pubsub/test_project.rb", "test/gcloud/pubsub/test_subscription.rb", "test/gcloud/pubsub/test_topic.rb", "test/gcloud/storage/test_backoff.rb", "test/gcloud/storage/test_bucket.rb", "test/gcloud/storage/test_bucket_acl.rb", "test/gcloud/storage/test_default_acl.rb", "test/gcloud/storage/test_file.rb", "test/gcloud/storage/test_file_acl.rb", "test/gcloud/storage/test_project.rb", "test/gcloud/storage/test_storage.rb", "test/gcloud/storage/test_verifier.rb", "test/gcloud/test_version.rb", "test/helper.rb"]
   s.homepage = "http://googlecloudplatform.github.io/gcloud-ruby/"
   s.licenses = ["Apache-2.0"]
