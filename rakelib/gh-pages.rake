@@ -56,9 +56,9 @@ namespace :pages do
     # Change to gh-pages
     Dir.chdir pages do
       # sync the docs
-      puts `rsync -r #{docs}/ docs/master/`
+      puts `rsync -r --delete #{docs}/ docs/master/`
       # commit changes
-      puts `git add .`
+      puts `git add -A .`
       if ENV["GH_OAUTH_TOKEN"]
         puts `git config --global user.email "travis@travis-ci.org"`
         puts `git config --global user.name "travis-ci"`
