@@ -723,6 +723,11 @@ h2 .headerlink:hover {
     position: relative;
 }
 
+.method-links {
+  background-color: #e5ecf9;
+  padding: 8px;
+}
+
 .param-optional .param-types {
   font-style: italic;
 }
