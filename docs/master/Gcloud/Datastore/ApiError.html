@@ -7,7 +7,6 @@
     <title>Gcloud::Datastore::ApiError &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
@@ -94,6 +93,32 @@
         </div>
 
         
+
+
+  <div class="method-links">
+    
+      
+      
+        <div>
+          Attributes:
+
+          
+            <a href="#method-attribute-method">method</a>
+          
+            <a href="#response-attribute-method">response</a>
+          
+        </div>
+      
+
+      
+      
+      
+    
+  </div>
+
+
+
+        
           <h2 id="5Buntitled-5D"></h2>
 
 
@@ -103,82 +128,47 @@
 
 
 
-  
-  <div id="attribute-method-details" class="method-section section">
+  <div id="attribute-method-details" class="section">
     <h3 class="section-header">Attributes</h3>
 
-    
-      <div id="method-attribute-method" class="method-detail">
-        <a name="method"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">method</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-          <p>The API method of the failed HTTP request.</p>
-        
-        </div>
-      </div>
-    
-      <div id="response-attribute-method" class="method-detail">
-        <a name="response"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">response</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-          <p>The response object of the failed HTTP request.</p>
-        
-        </div>
-      </div>
-    
-  </div>
-
-
-
-
-    <div id="public-class-methods" class="methods">
-      <h3 class="section-header">Public Class Methods</h3>
-
+    <div class="methods">
       
-        <div id="new-method" class="method ">
-  <a name="method-c-new"></a>
+        <div id="method-attribute-method" class="method">
+          <a name="method"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">method</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-  
-    <h4><code>new(method, response = nil)</code></h4>
-  
-
-  <div class="method-description">
-    
+          <div class="method-description">
+          
+            <p>The API method of the failed HTTP request.</p>
+          
+          </div>
+        </div>
       
-    
+        <div id="response-attribute-method" class="method">
+          <a name="response"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">response</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-    
-      <!-- <div class="method-source-code" id="new-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/errors.rb, line 40</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">method</span>, <span class="ruby-identifier">response</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">super</span>(<span class="ruby-node">&quot;API call to #{method} was not successful&quot;</span>)
-  <span class="ruby-ivar">@method</span> = <span class="ruby-identifier">method</span>
-  <span class="ruby-ivar">@response</span> = <span class="ruby-identifier">response</span>
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
-    
-  </div>
-
-  
-
-  
-</div>
-
+          <div class="method-description">
+          
+            <p>The response object of the failed HTTP request.</p>
+          
+          </div>
+        </div>
       
     </div>
-  
+  </div>
+
+
+
+
 
 
 
@@ -199,7 +189,7 @@
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../Datastore.html">
         Datastore
       </a>
@@ -212,8 +202,8 @@
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Key.html">
-        Key
+      <a class="reference internal" href="Query.html">
+        Query
       </a>
     </li>
 
@@ -223,37 +213,7 @@
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Query.html">
-        Query
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 1em;">
-      <a class="reference internal" href="../Storage.html">
-        Storage
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Storage/Project.html">
-        Project
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Storage/Bucket.html">
-        Bucket
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Storage/File.html">
-        File
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../Pubsub.html">
         Pubsub
       </a>
@@ -277,15 +237,39 @@
       </a>
     </li>
 
+    <li class="toctree-l1" style="padding-left: 0em;">
+      <a class="reference internal" href="../Storage.html">
+        Storage
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/Project.html">
+        Project
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/Bucket.html">
+        Bucket
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/File.html">
+        File
+      </a>
+    </li>
+
   <li class="toctree-l1"><a class="reference internal" href="../../reference.html">API Reference</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../README_md.html">Getting Started</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../README.md">Getting Started</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING_md.html">Contribution Guide</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../AUTHENTICATION.md">Authentication Guide</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG_md.html">Release History</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.md">Contribution Guide</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.md">Release History</a></li>
 
 </ul>
 

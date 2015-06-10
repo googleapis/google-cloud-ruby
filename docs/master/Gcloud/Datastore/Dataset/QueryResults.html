@@ -7,7 +7,6 @@
     <title>Gcloud::Datastore::Dataset::QueryResults &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
@@ -117,6 +116,54 @@ methods will return a new Array instance.</p>
         </div>
 
         
+
+
+  <div class="method-links">
+    
+      
+      
+        <div>
+          Attributes:
+
+          
+            <a href="#cursor-attribute-method">cursor</a>
+          
+            <a href="#end_cursor-attribute-method">end_cursor</a>
+          
+            <a href="#more_results-attribute-method">more_results</a>
+          
+        </div>
+      
+
+      
+          <div>
+            Public Class Methods:
+
+            
+              <a href="#new-method">new</a>
+            
+          </div>
+        
+      
+          <div>
+            Public Instance Methods:
+
+            
+              <a href="#more_after_limit-3F-method">more_after_limit?</a>
+            
+              <a href="#no_more-3F-method">no_more?</a>
+            
+              <a href="#not_finished-3F-method">not_finished?</a>
+            
+          </div>
+        
+      
+    
+  </div>
+
+
+
+        
           <h2 id="5Buntitled-5D"></h2>
 
 
@@ -126,72 +173,74 @@ methods will return a new Array instance.</p>
 
 
 
-  
-  <div id="attribute-method-details" class="method-section section">
+  <div id="attribute-method-details" class="section">
     <h3 class="section-header">Attributes</h3>
 
-    
-      <div id="cursor-attribute-method" class="method-detail">
-        <a name="cursor"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">cursor</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
+    <div class="methods">
+      
+        <div id="cursor-attribute-method" class="method">
+          <a name="cursor"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">cursor</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>The <a href="QueryResults.html#attribute-i-end_cursor">#end_cursor</a> of
+          <div class="method-description">
+          
+            <p>The <a href="QueryResults.html#attribute-i-end_cursor">#end_cursor</a> of
 the <a href="QueryResults.html">QueryResults</a>.</p>
-        
+          
+          </div>
         </div>
-      </div>
-    
-      <div id="end_cursor-attribute-method" class="method-detail">
-        <a name="end_cursor"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">end_cursor</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
+      
+        <div id="end_cursor-attribute-method" class="method">
+          <a name="end_cursor"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">end_cursor</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>The <a href="QueryResults.html#attribute-i-end_cursor">#end_cursor</a> of
+          <div class="method-description">
+          
+            <p>The <a href="QueryResults.html#attribute-i-end_cursor">#end_cursor</a> of
 the <a href="QueryResults.html">QueryResults</a>.</p>
-        
+          
+          </div>
         </div>
-      </div>
-    
-      <div id="more_results-attribute-method" class="method-detail">
-        <a name="more_results"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">more_results</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
+      
+        <div id="more_results-attribute-method" class="method">
+          <a name="more_results"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">more_results</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>The state of the query after the current batch.</p>
+          <div class="method-description">
+          
+            <p>The state of the query after the current batch.</p>
 
 <p>Expected values are:</p>
 
 <p>“MORE_RESULTS_AFTER_LIMIT”: “NOT_FINISHED”: “NO_MORE_RESULTS”:</p>
-        
+          
+          </div>
         </div>
-      </div>
-    
+      
+    </div>
   </div>
 
 
 
 
-    <div id="public-class-methods" class="methods">
+    <div id="public-class-methods" class="section">
       <h3 class="section-header">Public Class Methods</h3>
 
-      
-        <div id="new-method" class="method ">
+      <div class="methods">
+        
+          <div id="new-method" class="method ">
   <a name="method-c-new"></a>
 
   
@@ -206,7 +255,7 @@ values.</p>
 
     
       <!-- <div class="method-source-code" id="new-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 80</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">arr</span> = [], <span class="ruby-identifier">end_cursor</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">more_results</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">super</span> <span class="ruby-identifier">arr</span>
   <span class="ruby-ivar">@end_cursor</span> = <span class="ruby-identifier">end_cursor</span>
@@ -221,15 +270,17 @@ values.</p>
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
-    <div id="public-instance-methods" class="methods">
+    <div id="public-instance-methods" class="section">
       <h3 class="section-header">Public Instance Methods</h3>
 
-      
-        <div id="more_after_limit-3F-method" class="method ">
+      <div class="methods">
+        
+          <div id="more_after_limit-3F-method" class="method ">
   <a name="method-i-more_after_limit-3F"></a>
 
   
@@ -245,7 +296,7 @@ is “MORE_RESULTS_AFTER_LIMIT”</p>
 
     
       <!-- <div class="method-source-code" id="more_after_limit-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 65</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">more_after_limit?</span>
   <span class="ruby-identifier">more_results</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">to_more_results_string</span>(
     <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">QueryResultBatch</span><span class="ruby-operator">::</span><span class="ruby-constant">MoreResultsType</span><span class="ruby-operator">::</span><span class="ruby-constant">MORE_RESULTS_AFTER_LIMIT</span>)
@@ -259,8 +310,8 @@ is “MORE_RESULTS_AFTER_LIMIT”</p>
   
 </div>
 
-      
-        <div id="no_more-3F-method" class="method ">
+        
+          <div id="no_more-3F-method" class="method ">
   <a name="method-i-no_more-3F"></a>
 
   
@@ -276,7 +327,7 @@ is “NO_MORE_RESULTS”</p>
 
     
       <!-- <div class="method-source-code" id="no_more-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 73</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">no_more?</span>
   <span class="ruby-identifier">more_results</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">to_more_results_string</span>(
     <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">QueryResultBatch</span><span class="ruby-operator">::</span><span class="ruby-constant">MoreResultsType</span><span class="ruby-operator">::</span><span class="ruby-constant">NO_MORE_RESULTS</span>)
@@ -290,8 +341,8 @@ is “NO_MORE_RESULTS”</p>
   
 </div>
 
-      
-        <div id="not_finished-3F-method" class="method ">
+        
+          <div id="not_finished-3F-method" class="method ">
   <a name="method-i-not_finished-3F"></a>
 
   
@@ -307,7 +358,7 @@ is “NOT_FINISHED”</p>
 
     
       <!-- <div class="method-source-code" id="not_finished-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 57</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">not_finished?</span>
   <span class="ruby-identifier">more_results</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">to_more_results_string</span>(
     <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">QueryResultBatch</span><span class="ruby-operator">::</span><span class="ruby-constant">MoreResultsType</span><span class="ruby-operator">::</span><span class="ruby-constant">NOT_FINISHED</span>)
@@ -321,7 +372,8 @@ is “NOT_FINISHED”</p>
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
@@ -343,7 +395,7 @@ is “NOT_FINISHED”</p>
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../../Datastore.html">
         Datastore
       </a>
@@ -356,8 +408,8 @@ is “NOT_FINISHED”</p>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Key.html">
-        Key
+      <a class="reference internal" href="../Query.html">
+        Query
       </a>
     </li>
 
@@ -367,37 +419,7 @@ is “NOT_FINISHED”</p>
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Query.html">
-        Query
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 1em;">
-      <a class="reference internal" href="../../Storage.html">
-        Storage
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../../Storage/Project.html">
-        Project
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../../Storage/Bucket.html">
-        Bucket
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../../Storage/File.html">
-        File
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../../Pubsub.html">
         Pubsub
       </a>
@@ -421,15 +443,39 @@ is “NOT_FINISHED”</p>
       </a>
     </li>
 
+    <li class="toctree-l1" style="padding-left: 0em;">
+      <a class="reference internal" href="../../Storage.html">
+        Storage
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../../Storage/Project.html">
+        Project
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../../Storage/Bucket.html">
+        Bucket
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../../Storage/File.html">
+        File
+      </a>
+    </li>
+
   <li class="toctree-l1"><a class="reference internal" href="../../../reference.html">API Reference</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../../README_md.html">Getting Started</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../../README.md">Getting Started</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING_md.html">Contribution Guide</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../../AUTHENTICATION.md">Authentication Guide</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG_md.html">Release History</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.md">Contribution Guide</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">LICENSE</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.md">Release History</a></li>
 
 </ul>
 

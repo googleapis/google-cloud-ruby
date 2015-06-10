@@ -7,7 +7,6 @@
     <title>Gcloud::Datastore::Entity &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
@@ -89,7 +88,9 @@
 
         <div id="description" class="description">
           
-<p><a href="Entity.html">Entity</a> represents the <a
+<h1 id="class-Gcloud::Datastore::Entity-label-Datastore+Entity"><a href="../Datastore.html">Datastore</a> <a href="Entity.html">Entity</a><span><a href="#class-Gcloud::Datastore::Entity-label-Datastore+Entity">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="Entity.html">Entity</a> represents a <a
 href="../Datastore.html">Datastore</a> record. Every <a
 href="Entity.html">Entity</a> has a <a href="Key.html">Key</a>, and a list
 of properties.</p>
@@ -103,6 +104,58 @@ of properties.</p>
         </div>
 
         
+
+
+  <div class="method-links">
+    
+      
+      
+        <div>
+          Attributes:
+
+          
+            <a href="#key-attribute-method">key</a>
+          
+            <a href="#properties-attribute-method">properties</a>
+          
+        </div>
+      
+
+      
+          <div>
+            Public Class Methods:
+
+            
+              <a href="#new-method">new</a>
+            
+          </div>
+        
+      
+          <div>
+            Public Instance Methods:
+
+            
+              <a href="#5B-5D-method">[]</a>
+            
+              <a href="#5B-5D-3D-method">[]=</a>
+            
+              <a href="#exclude_from_indexes-21-method">exclude_from_indexes!</a>
+            
+              <a href="#exclude_from_indexes-3F-method">exclude_from_indexes?</a>
+            
+              <a href="#key-3D-method">key=</a>
+            
+              <a href="#persisted-3F-method">persisted?</a>
+            
+          </div>
+        
+      
+    
+  </div>
+
+
+
+        
           <h2 id="5Buntitled-5D"></h2>
 
 
@@ -112,39 +165,45 @@ of properties.</p>
 
 
 
-  
-  <div id="attribute-method-details" class="method-section section">
+  <div id="attribute-method-details" class="section">
     <h3 class="section-header">Attributes</h3>
 
-    
-      <div id="key-attribute-method" class="method-detail">
-        <a name="key"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">key</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
+    <div class="methods">
+      
+        <div id="key-attribute-method" class="method">
+          <a name="key"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">key</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>The <a href="Key.html">Key</a> that identifies the entity.</p>
-        
+          <div class="method-description">
+          
+            <p>The <a href="Key.html">Key</a> that identifies the entity.</p>
+          
+          </div>
         </div>
-      </div>
-    
-      <div id="properties-attribute-method" class="method-detail">
-        <a name="properties"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">properties</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
+      
+        <div id="properties-attribute-method" class="method">
+          <a name="properties"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">properties</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>Retrieve properties in a hash-like structure. <a
+          <div class="method-description">
+          
+            <p>Retrieve properties in a hash-like structure. <a
 href="Properties.html">Properties</a> can be accessed or set by string or
 symbol.</p>
+
+<h3 id="attribute-i-properties-label-Returns">Returns<span><a href="#attribute-i-properties-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Properties.html">Gcloud::Datastore::Properties</a></p>
+
+<h3 id="attribute-i-properties-label-Example">Example<span><a href="#attribute-i-properties-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <pre class="ruby"><span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>[:<span class="ruby-identifier">name</span>] = <span class="ruby-string">&quot;User McUser&quot;</span>
 <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>[<span class="ruby-string">&quot;name&quot;</span>] <span class="ruby-comment">#=&gt; &quot;User McUser&quot;</span>
@@ -171,22 +230,22 @@ symbol.</p>
 
 <pre class="ruby"><span class="ruby-identifier">prop_hash</span> = <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>.<span class="ruby-identifier">to_h</span>
 </pre>
-
-<p>See <a href="Properties.html">Gcloud::Datastore::Properties</a> for more.</p>
-        
+          
+          </div>
         </div>
-      </div>
-    
+      
+    </div>
   </div>
 
 
 
 
-    <div id="public-class-methods" class="methods">
+    <div id="public-class-methods" class="section">
       <h3 class="section-header">Public Class Methods</h3>
 
-      
-        <div id="new-method" class="method ">
+      <div class="methods">
+        
+          <div id="new-method" class="method ">
   <a name="method-c-new"></a>
 
   
@@ -200,7 +259,7 @@ symbol.</p>
 
     
       <!-- <div class="method-source-code" id="new-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 36</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-ivar">@properties</span> = <span class="ruby-constant">Properties</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@key</span> = <span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span>
@@ -215,15 +274,17 @@ symbol.</p>
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
-    <div id="public-instance-methods" class="methods">
+    <div id="public-instance-methods" class="section">
       <h3 class="section-header">Public Instance Methods</h3>
 
-      
-        <div id="5B-5D-method" class="method ">
+      <div class="methods">
+        
+          <div id="5B-5D-method" class="method ">
   <a name="method-i-5B-5D"></a>
 
   
@@ -232,17 +293,44 @@ symbol.</p>
 
   <div class="method-description">
     
-      <p>Retrieve a property value.</p>
+      <p>Retrieve a property value by providing the name.</p>
 
-<pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;name&quot;</span>]
+<h3 id="method-i-5B-5D-label-Parameters">Parameters<span><a href="#method-i-5B-5D-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>prop_name</code>
+<dd>
+<p>The name of the property. (<code>String</code> or <code>Symbol</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-5B-5D-label-Returns">Returns<span><a href="#method-i-5B-5D-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Object if the property exists, <code>nil</code> if the property doesn&#39;t
+exist</p>
+
+<h3 id="method-i-5B-5D-label-Example">Example<span><a href="#method-i-5B-5D-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Properties.html">Properties</a> can be retrieved with a string
+name:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+
+<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">datastore</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">user</span>[<span class="ruby-string">&quot;name&quot;</span>] <span class="ruby-comment">#=&gt; &quot;Heidi Henderson&quot;</span>
 </pre>
 
-<p>If a property doesn&#39;t exist then nil will be returned.</p>
+<p>Or with a symbol name:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+
+<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">datastore</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">user</span>[:<span class="ruby-identifier">name</span>] <span class="ruby-comment">#=&gt; &quot;Heidi Henderson&quot;</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="5B-5D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 48</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span> <span class="ruby-identifier">prop_name</span>
   <span class="ruby-ivar">@properties</span>[<span class="ruby-identifier">prop_name</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -255,8 +343,8 @@ symbol.</p>
   
 </div>
 
-      
-        <div id="5B-5D-3D-method" class="method ">
+        
+          <div id="5B-5D-3D-method" class="method ">
   <a name="method-i-5B-5D-3D"></a>
 
   
@@ -265,15 +353,41 @@ symbol.</p>
 
   <div class="method-description">
     
-      <p>Set a property value.</p>
+      <p>Set a property value by name.</p>
 
-<pre class="ruby"><span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;User McUser&quot;</span>
+<h3 id="method-i-5B-5D-3D-label-Parameters">Parameters<span><a href="#method-i-5B-5D-3D-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>prop_name</code>
+<dd>
+<p>The name of the property. (<code>String</code> or <code>Symbol</code>)</p>
+</dd><dt><code>prop_value</code>
+<dd>
+<p>The value of the property. (<code>Object</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-5B-5D-3D-label-Example">Example<span><a href="#method-i-5B-5D-3D-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Properties.html">Properties</a> can be set with a string name:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+
+<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">datastore</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">user</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;Heidi H. Henderson&quot;</span>
+</pre>
+
+<p>Or with a symbol name:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+
+<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">datastore</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">user</span>[:<span class="ruby-identifier">name</span>] = <span class="ruby-string">&quot;Heidi H. Henderson&quot;</span>
 </pre>
     
 
     
       <!-- <div class="method-source-code" id="5B-5D-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 56</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span> <span class="ruby-identifier">prop_name</span>, <span class="ruby-identifier">prop_value</span>
   <span class="ruby-ivar">@properties</span>[<span class="ruby-identifier">prop_name</span>] = <span class="ruby-identifier">prop_value</span>
 <span class="ruby-keyword">end</span></pre>
@@ -286,8 +400,8 @@ symbol.</p>
   
 </div>
 
-      
-        <div id="exclude_from_indexes-21-method" class="method ">
+        
+          <div id="exclude_from_indexes-21-method" class="method ">
   <a name="method-i-exclude_from_indexes-21"></a>
 
   
@@ -330,7 +444,7 @@ each item in the array.</p>
 
     
       <!-- <div class="method-source-code" id="exclude_from_indexes-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 158</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 240</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">exclude_from_indexes!</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
   <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">flag</span> = <span class="ruby-identifier">block</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
@@ -349,8 +463,8 @@ each item in the array.</p>
   
 </div>
 
-      
-        <div id="exclude_from_indexes-3F-method" class="method ">
+        
+          <div id="exclude_from_indexes-3F-method" class="method ">
   <a name="method-i-exclude_from_indexes-3F"></a>
 
   
@@ -377,7 +491,7 @@ href="../Datastore.html">Datastore</a> indexes. The default value is false.</p>
 
     
       <!-- <div class="method-source-code" id="exclude_from_indexes-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 126</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 208</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">exclude_from_indexes?</span> <span class="ruby-identifier">name</span>
   <span class="ruby-identifier">value</span> = <span class="ruby-keyword">self</span>[<span class="ruby-identifier">name</span>]
   <span class="ruby-identifier">flag</span> = <span class="ruby-ivar">@_exclude_indexes</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>]
@@ -392,8 +506,8 @@ href="../Datastore.html">Datastore</a> indexes. The default value is false.</p>
   
 </div>
 
-      
-        <div id="key-3D-method" class="method ">
+        
+          <div id="key-3D-method" class="method ">
   <a name="method-i-key-3D"></a>
 
   
@@ -402,23 +516,37 @@ href="../Datastore.html">Datastore</a> indexes. The default value is false.</p>
 
   <div class="method-description">
     
-      <p>Sets the <a href="Key.html">Key</a> that identifies the entity. This can
-only be set before the entity is saved. Once the entity is saved, the key
-is frozen and immutable.</p>
+      <p>Sets the <a href="Key.html">Key</a> that identifies the entity.</p>
 
-<p>Trying to set a key when immutable will raise a RuntimeError.</p>
+<h3 id="method-i-key-3D-label-Example">Example<span><a href="#method-i-key-3D-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">task</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-value">123456</span>
-<span class="ruby-identifier">task</span>.<span class="ruby-identifier">persisted?</span> <span class="ruby-comment">#=&gt; true</span>
-<span class="ruby-identifier">task</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-value">456789</span> <span class="ruby-comment">#=&gt; RuntimeError</span>
-<span class="ruby-identifier">task</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-comment">#=&gt; true</span>
-<span class="ruby-identifier">task</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">id</span> = <span class="ruby-value">456789</span> <span class="ruby-comment">#=&gt; RuntimeError</span>
+<p>The <a href="Key.html">Key</a> can be set before the entity is saved.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/datastore&quot;</span>
+
+<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">entity</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span>
+<span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">entity</span>
+</pre>
+
+<p>Once the entity is saved, the key is frozen and immutable. Trying to set a
+key when immutable will raise a <code>RuntimeError</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+
+<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">persisted?</span> <span class="ruby-comment">#=&gt; true</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span> <span class="ruby-comment">#=&gt; RuntimeError</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-comment">#=&gt; true</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">id</span> = <span class="ruby-value">9876543221</span> <span class="ruby-comment">#=&gt; RuntimeError</span>
 </pre>
     
 
     
       <!-- <div class="method-source-code" id="key-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 101</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 171</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">key=</span> <span class="ruby-identifier">new_key</span>
   <span class="ruby-identifier">fail</span> <span class="ruby-string">&quot;This entity&#39;s key is immutable.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">persisted?</span>
   <span class="ruby-ivar">@key</span> = <span class="ruby-identifier">new_key</span>
@@ -432,8 +560,8 @@ is frozen and immutable.</p>
   
 </div>
 
-      
-        <div id="persisted-3F-method" class="method ">
+        
+          <div id="persisted-3F-method" class="method ">
   <a name="method-i-persisted-3F"></a>
 
   
@@ -442,13 +570,25 @@ is frozen and immutable.</p>
 
   <div class="method-description">
     
-      <p>Returns true if the record is persisted to the datastore. Otherwise returns
-false.</p>
+      <p>Indicates if the record is persisted. Default is false.</p>
+
+<h3 id="method-i-persisted-3F-label-Example">Example<span><a href="#method-i-persisted-3F-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+
+<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
+
+<span class="ruby-identifier">new_entity</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">new_entity</span>.<span class="ruby-identifier">persisted?</span> <span class="ruby-comment">#=&gt; false</span>
+
+<span class="ruby-identifier">found_entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">found_entity</span>.<span class="ruby-identifier">persisted?</span> <span class="ruby-comment">#=&gt; true</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="persisted-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 109</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 191</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">persisted?</span>
   <span class="ruby-ivar">@key</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">frozen?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -461,7 +601,8 @@ false.</p>
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
@@ -483,7 +624,7 @@ false.</p>
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../Datastore.html">
         Datastore
       </a>
@@ -496,8 +637,8 @@ false.</p>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Key.html">
-        Key
+      <a class="reference internal" href="Query.html">
+        Query
       </a>
     </li>
 
@@ -507,37 +648,7 @@ false.</p>
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Query.html">
-        Query
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 1em;">
-      <a class="reference internal" href="../Storage.html">
-        Storage
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Storage/Project.html">
-        Project
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Storage/Bucket.html">
-        Bucket
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Storage/File.html">
-        File
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../Pubsub.html">
         Pubsub
       </a>
@@ -561,15 +672,39 @@ false.</p>
       </a>
     </li>
 
+    <li class="toctree-l1" style="padding-left: 0em;">
+      <a class="reference internal" href="../Storage.html">
+        Storage
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/Project.html">
+        Project
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/Bucket.html">
+        Bucket
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/File.html">
+        File
+      </a>
+    </li>
+
   <li class="toctree-l1"><a class="reference internal" href="../../reference.html">API Reference</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../README_md.html">Getting Started</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../README.md">Getting Started</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING_md.html">Contribution Guide</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../AUTHENTICATION.md">Authentication Guide</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG_md.html">Release History</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.md">Contribution Guide</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.md">Release History</a></li>
 
 </ul>
 

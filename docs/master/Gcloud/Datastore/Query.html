@@ -7,7 +7,6 @@
     <title>Gcloud::Datastore::Query &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
@@ -102,6 +101,60 @@ href="../Datastore.html">Datastore</a>.</p>
         </div>
 
         
+
+
+  <div class="method-links">
+    
+      
+      
+
+      
+          <div>
+            Public Class Methods:
+
+            
+              <a href="#new-method">new</a>
+            
+          </div>
+        
+      
+          <div>
+            Public Instance Methods:
+
+            
+              <a href="#ancestor-method">ancestor</a>
+            
+              <a href="#cursor-method">cursor</a>
+            
+              <a href="#filter-method">filter</a>
+            
+              <a href="#group_by-method">group_by</a>
+            
+              <a href="#kind-method">kind</a>
+            
+              <a href="#limit-method">limit</a>
+            
+              <a href="#offset-method">offset</a>
+            
+              <a href="#order-method">order</a>
+            
+              <a href="#projection-method">projection</a>
+            
+              <a href="#select-method">select</a>
+            
+              <a href="#start-method">start</a>
+            
+              <a href="#where-method">where</a>
+            
+          </div>
+        
+      
+    
+  </div>
+
+
+
+        
           <h2 id="5Buntitled-5D"></h2>
 
 
@@ -114,11 +167,12 @@ href="../Datastore.html">Datastore</a>.</p>
 
 
 
-    <div id="public-class-methods" class="methods">
+    <div id="public-class-methods" class="section">
       <h3 class="section-header">Public Class Methods</h3>
 
-      
-        <div id="new-method" class="method ">
+      <div class="methods">
+        
+          <div id="new-method" class="method ">
   <a name="method-c-new"></a>
 
   
@@ -135,7 +189,7 @@ href="../Datastore.html">Datastore</a>.</p>
 
     
       <!-- <div class="method-source-code" id="new-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 34</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-ivar">@_query</span> = <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -148,15 +202,17 @@ href="../Datastore.html">Datastore</a>.</p>
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
-    <div id="public-instance-methods" class="methods">
+    <div id="public-instance-methods" class="section">
       <h3 class="section-header">Public Instance Methods</h3>
 
-      
-        <div id="ancestor-method" class="method ">
+      <div class="methods">
+        
+          <div id="ancestor-method" class="method ">
   <a name="method-i-ancestor"></a>
 
   
@@ -177,7 +233,7 @@ href="../Datastore.html">Datastore</a>.</p>
 
     
       <!-- <div class="method-source-code" id="ancestor-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 83</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ancestor</span> <span class="ruby-identifier">parent</span>
   <span class="ruby-comment"># Use key if given an entity</span>
   <span class="ruby-identifier">parent</span> = <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">key</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:key</span>
@@ -192,8 +248,8 @@ href="../Datastore.html">Datastore</a>.</p>
   
 </div>
 
-      
-        <div id="cursor-method" class="method alias">
+        
+          <div id="cursor-method" class="method alias">
   <a name="method-i-cursor"></a>
 
   
@@ -217,8 +273,8 @@ href="../Datastore.html">Datastore</a>.</p>
   
 </div>
 
-      
-        <div id="filter-method" class="method alias">
+        
+          <div id="filter-method" class="method alias">
   <a name="method-i-filter"></a>
 
   
@@ -242,8 +298,8 @@ href="../Datastore.html">Datastore</a>.</p>
   
 </div>
 
-      
-        <div id="group_by-method" class="method ">
+        
+          <div id="group_by-method" class="method ">
   <a name="method-i-group_by"></a>
 
   
@@ -264,7 +320,7 @@ href="../Datastore.html">Datastore</a>.</p>
 
     
       <!-- <div class="method-source-code" id="group_by-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 175</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">group_by</span> <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">group_by</span> <span class="ruby-operator">||=</span> []
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">group_by</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">new_property_references</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
@@ -279,8 +335,8 @@ href="../Datastore.html">Datastore</a>.</p>
   
 </div>
 
-      
-        <div id="kind-method" class="method ">
+        
+          <div id="kind-method" class="method ">
   <a name="method-i-kind"></a>
 
   
@@ -300,7 +356,7 @@ href="../Datastore.html">Datastore</a>.</p>
 
     
       <!-- <div class="method-source-code" id="kind-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 45</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">kind</span> <span class="ruby-operator">*</span><span class="ruby-identifier">kinds</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">kind</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">KindExpression</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">kind</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> []
@@ -316,8 +372,8 @@ href="../Datastore.html">Datastore</a>.</p>
   
 </div>
 
-      
-        <div id="limit-method" class="method ">
+        
+          <div id="limit-method" class="method ">
   <a name="method-i-limit"></a>
 
   
@@ -338,7 +394,7 @@ href="../Datastore.html">Datastore</a>.</p>
 
     
       <!-- <div class="method-source-code" id="limit-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 118</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">limit</span> <span class="ruby-identifier">num</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">limit</span> = <span class="ruby-identifier">num</span>
   <span class="ruby-keyword">self</span>
@@ -352,8 +408,8 @@ href="../Datastore.html">Datastore</a>.</p>
   
 </div>
 
-      
-        <div id="offset-method" class="method ">
+        
+          <div id="offset-method" class="method ">
   <a name="method-i-offset"></a>
 
   
@@ -375,7 +431,7 @@ href="../Datastore.html">Datastore</a>.</p>
 
     
       <!-- <div class="method-source-code" id="offset-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 132</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">offset</span> <span class="ruby-identifier">num</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">offset</span> = <span class="ruby-identifier">num</span>
   <span class="ruby-keyword">self</span>
@@ -389,8 +445,8 @@ href="../Datastore.html">Datastore</a>.</p>
   
 </div>
 
-      
-        <div id="order-method" class="method ">
+        
+          <div id="order-method" class="method ">
   <a name="method-i-order"></a>
 
   
@@ -413,7 +469,7 @@ string or symbol that starts with “d”.</p>
 
     
       <!-- <div class="method-source-code" id="order-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 100</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">order</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">direction</span> = <span class="ruby-value">:asc</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">order</span> <span class="ruby-operator">||=</span> []
   <span class="ruby-identifier">po</span> = <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">PropertyOrder</span>.<span class="ruby-identifier">new</span>
@@ -432,8 +488,8 @@ string or symbol that starts with “d”.</p>
   
 </div>
 
-      
-        <div id="projection-method" class="method alias">
+        
+          <div id="projection-method" class="method alias">
   <a name="method-i-projection"></a>
 
   
@@ -457,8 +513,8 @@ string or symbol that starts with “d”.</p>
   
 </div>
 
-      
-        <div id="select-method" class="method ">
+        
+          <div id="select-method" class="method ">
   <a name="method-i-select"></a>
 
   
@@ -479,7 +535,7 @@ string or symbol that starts with “d”.</p>
 
     
       <!-- <div class="method-source-code" id="select-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 160</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 161</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">select</span> <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">projection</span> <span class="ruby-operator">||=</span> []
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">projection</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">new_property_expressions</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
@@ -498,8 +554,8 @@ string or symbol that starts with “d”.</p>
   
 </div>
 
-      
-        <div id="start-method" class="method ">
+        
+          <div id="start-method" class="method ">
   <a name="method-i-start"></a>
 
   
@@ -521,7 +577,7 @@ string or symbol that starts with “d”.</p>
 
     
       <!-- <div class="method-source-code" id="start-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 146</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span> <span class="ruby-identifier">cursor</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">start_cursor</span> = <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">decode_cursor</span> <span class="ruby-identifier">cursor</span>
   <span class="ruby-keyword">self</span>
@@ -539,8 +595,8 @@ string or symbol that starts with “d”.</p>
   
 </div>
 
-      
-        <div id="where-method" class="method ">
+        
+          <div id="where-method" class="method ">
   <a name="method-i-where"></a>
 
   
@@ -561,7 +617,7 @@ string or symbol that starts with “d”.</p>
 
     
       <!-- <div class="method-source-code" id="where-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 60</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/query.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">where</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">operator</span>, <span class="ruby-identifier">value</span>
   <span class="ruby-comment"># Initialize filter</span>
   <span class="ruby-ivar">@_query</span>.<span class="ruby-identifier">filter</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">new_filter</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
@@ -588,7 +644,8 @@ string or symbol that starts with “d”.</p>
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
@@ -610,7 +667,7 @@ string or symbol that starts with “d”.</p>
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../Datastore.html">
         Datastore
       </a>
@@ -623,8 +680,8 @@ string or symbol that starts with “d”.</p>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Key.html">
-        Key
+      <a class="reference internal" href="Query.html">
+        Query
       </a>
     </li>
 
@@ -634,37 +691,7 @@ string or symbol that starts with “d”.</p>
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Query.html">
-        Query
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 1em;">
-      <a class="reference internal" href="../Storage.html">
-        Storage
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Storage/Project.html">
-        Project
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Storage/Bucket.html">
-        Bucket
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Storage/File.html">
-        File
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../Pubsub.html">
         Pubsub
       </a>
@@ -688,15 +715,39 @@ string or symbol that starts with “d”.</p>
       </a>
     </li>
 
+    <li class="toctree-l1" style="padding-left: 0em;">
+      <a class="reference internal" href="../Storage.html">
+        Storage
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/Project.html">
+        Project
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/Bucket.html">
+        Bucket
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/File.html">
+        File
+      </a>
+    </li>
+
   <li class="toctree-l1"><a class="reference internal" href="../../reference.html">API Reference</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../README_md.html">Getting Started</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../README.md">Getting Started</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING_md.html">Contribution Guide</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../AUTHENTICATION.md">Authentication Guide</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG_md.html">Release History</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.md">Contribution Guide</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.md">Release History</a></li>
 
 </ul>
 

@@ -7,7 +7,6 @@
     <title>Gcloud::Datastore::Properties &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
@@ -94,6 +93,56 @@
         </div>
 
         
+
+
+  <div class="method-links">
+    
+      
+      
+
+      
+          <div>
+            Public Class Methods:
+
+            
+              <a href="#new-method">new</a>
+            
+          </div>
+        
+      
+          <div>
+            Public Instance Methods:
+
+            
+              <a href="#5B-5D-method">[]</a>
+            
+              <a href="#5B-5D-3D-method">[]=</a>
+            
+              <a href="#delete-method">delete</a>
+            
+              <a href="#each-method">each</a>
+            
+              <a href="#exist-3F-method">exist?</a>
+            
+              <a href="#fetch-method">fetch</a>
+            
+              <a href="#read-method">read</a>
+            
+              <a href="#to_h-method">to_h</a>
+            
+              <a href="#to_hash-method">to_hash</a>
+            
+              <a href="#write-method">write</a>
+            
+          </div>
+        
+      
+    
+  </div>
+
+
+
+        
           <h2 id="5Buntitled-5D"></h2>
 
 
@@ -106,11 +155,12 @@
 
 
 
-    <div id="public-class-methods" class="methods">
+    <div id="public-class-methods" class="section">
       <h3 class="section-header">Public Class Methods</h3>
 
-      
-        <div id="new-method" class="method ">
+      <div class="methods">
+        
+          <div id="new-method" class="method ">
   <a name="method-c-new"></a>
 
   
@@ -124,7 +174,7 @@
 
     
       <!-- <div class="method-source-code" id="new-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 20</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">properties</span> = {}
   <span class="ruby-ivar">@hash</span> = {}
   <span class="ruby-identifier">properties</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
@@ -142,15 +192,17 @@
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
-    <div id="public-instance-methods" class="methods">
+    <div id="public-instance-methods" class="section">
       <h3 class="section-header">Public Instance Methods</h3>
 
-      
-        <div id="5B-5D-method" class="method ">
+      <div class="methods">
+        
+          <div id="5B-5D-method" class="method ">
   <a name="method-i-5B-5D"></a>
 
   
@@ -164,7 +216,7 @@
 
     
       <!-- <div class="method-source-code" id="5B-5D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 29</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span> <span class="ruby-identifier">key</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-identifier">ensure_key_type</span> <span class="ruby-identifier">key</span>
   <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">key</span>]
@@ -182,8 +234,8 @@
   
 </div>
 
-      
-        <div id="5B-5D-3D-method" class="method ">
+        
+          <div id="5B-5D-3D-method" class="method ">
   <a name="method-i-5B-5D-3D"></a>
 
   
@@ -197,7 +249,7 @@
 
     
       <!-- <div class="method-source-code" id="5B-5D-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 35</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>
   <span class="ruby-identifier">key</span>   = <span class="ruby-identifier">ensure_key_type</span> <span class="ruby-identifier">key</span>
   <span class="ruby-identifier">value</span> = <span class="ruby-identifier">ensure_value_type</span> <span class="ruby-identifier">value</span>
@@ -216,8 +268,8 @@
   
 </div>
 
-      
-        <div id="delete-method" class="method ">
+        
+          <div id="delete-method" class="method ">
   <a name="method-i-delete"></a>
 
   
@@ -231,7 +283,7 @@
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 57</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">key</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-identifier">ensure_key_type</span> <span class="ruby-identifier">key</span>
   <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">key</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
@@ -245,8 +297,8 @@
   
 </div>
 
-      
-        <div id="each-method" class="method ">
+        
+          <div id="each-method" class="method ">
   <a name="method-i-each"></a>
 
   
@@ -260,7 +312,7 @@
 
     
       <!-- <div class="method-source-code" id="each-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 53</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span> <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
   <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -273,8 +325,8 @@
   
 </div>
 
-      
-        <div id="exist-3F-method" class="method ">
+        
+          <div id="exist-3F-method" class="method ">
   <a name="method-i-exist-3F"></a>
 
   
@@ -288,7 +340,7 @@
 
     
       <!-- <div class="method-source-code" id="exist-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 42</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">exist?</span> <span class="ruby-identifier">key</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-identifier">ensure_key_type</span> <span class="ruby-identifier">key</span>
   <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">key?</span> <span class="ruby-identifier">key</span>
@@ -302,8 +354,8 @@
   
 </div>
 
-      
-        <div id="fetch-method" class="method ">
+        
+          <div id="fetch-method" class="method ">
   <a name="method-i-fetch"></a>
 
   
@@ -317,7 +369,7 @@
 
     
       <!-- <div class="method-source-code" id="fetch-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 47</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fetch</span> <span class="ruby-identifier">key</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">_block</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-identifier">ensure_key_type</span> <span class="ruby-identifier">key</span>
   <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-keyword">yield</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">exist?</span> <span class="ruby-identifier">key</span>
@@ -332,8 +384,8 @@
   
 </div>
 
-      
-        <div id="read-method" class="method alias">
+        
+          <div id="read-method" class="method alias">
   <a name="method-i-read"></a>
 
   
@@ -357,8 +409,8 @@
   
 </div>
 
-      
-        <div id="to_h-method" class="method ">
+        
+          <div id="to_h-method" class="method ">
   <a name="method-i-to_h"></a>
 
   
@@ -372,7 +424,7 @@
 
     
       <!-- <div class="method-source-code" id="to_h-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 62</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/properties.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_h</span>
   <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">dup</span>
 <span class="ruby-keyword">end</span></pre>
@@ -389,8 +441,8 @@
   
 </div>
 
-      
-        <div id="to_hash-method" class="method alias">
+        
+          <div id="to_hash-method" class="method alias">
   <a name="method-i-to_hash"></a>
 
   
@@ -414,8 +466,8 @@
   
 </div>
 
-      
-        <div id="write-method" class="method alias">
+        
+          <div id="write-method" class="method alias">
   <a name="method-i-write"></a>
 
   
@@ -439,7 +491,8 @@
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
@@ -461,7 +514,7 @@
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../Datastore.html">
         Datastore
       </a>
@@ -474,8 +527,8 @@
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Key.html">
-        Key
+      <a class="reference internal" href="Query.html">
+        Query
       </a>
     </li>
 
@@ -485,37 +538,7 @@
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Query.html">
-        Query
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 1em;">
-      <a class="reference internal" href="../Storage.html">
-        Storage
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Storage/Project.html">
-        Project
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Storage/Bucket.html">
-        Bucket
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Storage/File.html">
-        File
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../Pubsub.html">
         Pubsub
       </a>
@@ -539,15 +562,39 @@
       </a>
     </li>
 
+    <li class="toctree-l1" style="padding-left: 0em;">
+      <a class="reference internal" href="../Storage.html">
+        Storage
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/Project.html">
+        Project
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/Bucket.html">
+        Bucket
+      </a>
+    </li>
+
+    <li class="toctree-l1" style="padding-left: 2em;">
+      <a class="reference internal" href="../Storage/File.html">
+        File
+      </a>
+    </li>
+
   <li class="toctree-l1"><a class="reference internal" href="../../reference.html">API Reference</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../README_md.html">Getting Started</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../README.md">Getting Started</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING_md.html">Contribution Guide</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../AUTHENTICATION.md">Authentication Guide</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG_md.html">Release History</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.md">Contribution Guide</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.md">Release History</a></li>
 
 </ul>
 
