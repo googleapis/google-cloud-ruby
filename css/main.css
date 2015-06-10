@@ -1493,6 +1493,13 @@ h4 > span > a {
   font-size: smaller
 }
 
+pre.ruby {
+  display: block;
+  padding: .5em;
+  color: #333;
+  background: #f8f8f8;
+}
+
 pre .ruby-constant   { color: #099; }
 pre .ruby-keyword    { color: #333; font-weight: bold; }
 pre .ruby-ivar       { color: #008080; }
