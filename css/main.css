@@ -1516,6 +1516,7 @@ pre .ruby-value      { color: #d14; }
   font-size: 1.5em;
 }
 
-.method-description {
+.method-description,
+.aliases {
   padding-left: 1em;
 }
