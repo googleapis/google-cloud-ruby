@@ -7,7 +7,6 @@
     <title>Gcloud::Datastore::Entity &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
@@ -47,7 +46,7 @@
       </li>
       <li>
         <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="gcloud-ruby">
-          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.png" alt="Ruby icon" class="menu-icon" width="24">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.svg" alt="Ruby icon" class="menu-icon" width="24">
           Ruby
         </a>
       </li>
@@ -103,6 +102,58 @@ of properties.</p>
         </div>
 
         
+
+
+  <div class="method-links">
+    
+      
+      
+        <div>
+          Attributes:
+
+          
+            <a href="#key-attribute-method">key</a>
+          
+            <a href="#properties-attribute-method">properties</a>
+          
+        </div>
+      
+
+      
+          <div>
+            Public Class Methods:
+
+            
+              <a href="#new-method">new</a>
+            
+          </div>
+        
+      
+          <div>
+            Public Instance Methods:
+
+            
+              <a href="#5B-5D-method">[]</a>
+            
+              <a href="#5B-5D-3D-method">[]=</a>
+            
+              <a href="#exclude_from_indexes-21-method">exclude_from_indexes!</a>
+            
+              <a href="#exclude_from_indexes-3F-method">exclude_from_indexes?</a>
+            
+              <a href="#key-3D-method">key=</a>
+            
+              <a href="#persisted-3F-method">persisted?</a>
+            
+          </div>
+        
+      
+    
+  </div>
+
+
+
+        
           <h2 id="5Buntitled-5D"></h2>
 
 
@@ -112,37 +163,37 @@ of properties.</p>
 
 
 
-  
-  <div id="attribute-method-details" class="method-section section">
+  <div id="attribute-method-details" class="section">
     <h3 class="section-header">Attributes</h3>
 
-    
-      <div id="key-attribute-method" class="method-detail">
-        <a name="key"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">key</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
+    <div class="methods">
+      
+        <div id="key-attribute-method" class="method">
+          <a name="key"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">key</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>The <a href="Key.html">Key</a> that identifies the entity.</p>
-        
+          <div class="method-description">
+          
+            <p>The <a href="Key.html">Key</a> that identifies the entity.</p>
+          
+          </div>
         </div>
-      </div>
-    
-      <div id="properties-attribute-method" class="method-detail">
-        <a name="properties"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">properties</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
+      
+        <div id="properties-attribute-method" class="method">
+          <a name="properties"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">properties</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>Retrieve properties in a hash-like structure. <a
+          <div class="method-description">
+          
+            <p>Retrieve properties in a hash-like structure. <a
 href="Properties.html">Properties</a> can be accessed or set by string or
 symbol.</p>
 
@@ -173,20 +224,22 @@ symbol.</p>
 </pre>
 
 <p>See <a href="Properties.html">Gcloud::Datastore::Properties</a> for more.</p>
-        
+          
+          </div>
         </div>
-      </div>
-    
+      
+    </div>
   </div>
 
 
 
 
-    <div id="public-class-methods" class="methods">
+    <div id="public-class-methods" class="section">
       <h3 class="section-header">Public Class Methods</h3>
 
-      
-        <div id="new-method" class="method ">
+      <div class="methods">
+        
+          <div id="new-method" class="method ">
   <a name="method-c-new"></a>
 
   
@@ -215,15 +268,17 @@ symbol.</p>
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
-    <div id="public-instance-methods" class="methods">
+    <div id="public-instance-methods" class="section">
       <h3 class="section-header">Public Instance Methods</h3>
 
-      
-        <div id="5B-5D-method" class="method ">
+      <div class="methods">
+        
+          <div id="5B-5D-method" class="method ">
   <a name="method-i-5B-5D"></a>
 
   
@@ -255,8 +310,8 @@ symbol.</p>
   
 </div>
 
-      
-        <div id="5B-5D-3D-method" class="method ">
+        
+          <div id="5B-5D-3D-method" class="method ">
   <a name="method-i-5B-5D-3D"></a>
 
   
@@ -286,8 +341,8 @@ symbol.</p>
   
 </div>
 
-      
-        <div id="exclude_from_indexes-21-method" class="method ">
+        
+          <div id="exclude_from_indexes-21-method" class="method ">
   <a name="method-i-exclude_from_indexes-21"></a>
 
   
@@ -349,8 +404,8 @@ each item in the array.</p>
   
 </div>
 
-      
-        <div id="exclude_from_indexes-3F-method" class="method ">
+        
+          <div id="exclude_from_indexes-3F-method" class="method ">
   <a name="method-i-exclude_from_indexes-3F"></a>
 
   
@@ -392,8 +447,8 @@ href="../Datastore.html">Datastore</a> indexes. The default value is false.</p>
   
 </div>
 
-      
-        <div id="key-3D-method" class="method ">
+        
+          <div id="key-3D-method" class="method ">
   <a name="method-i-key-3D"></a>
 
   
@@ -432,8 +487,8 @@ is frozen and immutable.</p>
   
 </div>
 
-      
-        <div id="persisted-3F-method" class="method ">
+        
+          <div id="persisted-3F-method" class="method ">
   <a name="method-i-persisted-3F"></a>
 
   
@@ -461,7 +516,8 @@ false.</p>
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
@@ -483,7 +539,7 @@ false.</p>
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../Datastore.html">
         Datastore
       </a>
@@ -496,8 +552,8 @@ false.</p>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Key.html">
-        Key
+      <a class="reference internal" href="Query.html">
+        Query
       </a>
     </li>
 
@@ -507,13 +563,7 @@ false.</p>
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Query.html">
-        Query
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../Storage.html">
         Storage
       </a>
@@ -539,13 +589,11 @@ false.</p>
 
   <li class="toctree-l1"><a class="reference internal" href="../../reference.html">API Reference</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../README_md.html">Getting Started</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../README.md">Getting Started</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING_md.html">Contribution Guide</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.md">Contribution Guide</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG_md.html">Release History</a></li>
-
-  <li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.md">Release History</a></li>
 
 </ul>
 

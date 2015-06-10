@@ -7,7 +7,6 @@
     <title>Gcloud::Datastore::Dataset::QueryResults &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
@@ -47,7 +46,7 @@
       </li>
       <li>
         <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="gcloud-ruby">
-          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.png" alt="Ruby icon" class="menu-icon" width="24">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.svg" alt="Ruby icon" class="menu-icon" width="24">
           Ruby
         </a>
       </li>
@@ -117,6 +116,52 @@ methods will return a new Array instance.</p>
         </div>
 
         
+
+
+  <div class="method-links">
+    
+      
+      
+        <div>
+          Attributes:
+
+          
+            <a href="#cursor-attribute-method">cursor</a>
+          
+            <a href="#more_results-attribute-method">more_results</a>
+          
+        </div>
+      
+
+      
+          <div>
+            Public Class Methods:
+
+            
+              <a href="#new-method">new</a>
+            
+          </div>
+        
+      
+          <div>
+            Public Instance Methods:
+
+            
+              <a href="#more_after_limit-3F-method">more_after_limit?</a>
+            
+              <a href="#no_more-3F-method">no_more?</a>
+            
+              <a href="#not_finished-3F-method">not_finished?</a>
+            
+          </div>
+        
+      
+    
+  </div>
+
+
+
+        
           <h2 id="5Buntitled-5D"></h2>
 
 
@@ -126,55 +171,57 @@ methods will return a new Array instance.</p>
 
 
 
-  
-  <div id="attribute-method-details" class="method-section section">
+  <div id="attribute-method-details" class="section">
     <h3 class="section-header">Attributes</h3>
 
-    
-      <div id="cursor-attribute-method" class="method-detail">
-        <a name="cursor"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">cursor</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
+    <div class="methods">
+      
+        <div id="cursor-attribute-method" class="method">
+          <a name="cursor"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">cursor</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>The cursor of the <a href="QueryResults.html">QueryResults</a>.</p>
-        
+          <div class="method-description">
+          
+            <p>The cursor of the <a href="QueryResults.html">QueryResults</a>.</p>
+          
+          </div>
         </div>
-      </div>
-    
-      <div id="more_results-attribute-method" class="method-detail">
-        <a name="more_results"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">more_results</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
+      
+        <div id="more_results-attribute-method" class="method">
+          <a name="more_results"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">more_results</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>The state of the query after the current batch.</p>
+          <div class="method-description">
+          
+            <p>The state of the query after the current batch.</p>
 
 <p>Expected values are:</p>
 
 <p>“MORE_RESULTS_AFTER_LIMIT”: “NOT_FINISHED”: “NO_MORE_RESULTS”:</p>
-        
+          
+          </div>
         </div>
-      </div>
-    
+      
+    </div>
   </div>
 
 
 
 
-    <div id="public-class-methods" class="methods">
+    <div id="public-class-methods" class="section">
       <h3 class="section-header">Public Class Methods</h3>
 
-      
-        <div id="new-method" class="method ">
+      <div class="methods">
+        
+          <div id="new-method" class="method ">
   <a name="method-c-new"></a>
 
   
@@ -204,15 +251,17 @@ values.</p>
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
-    <div id="public-instance-methods" class="methods">
+    <div id="public-instance-methods" class="section">
       <h3 class="section-header">Public Instance Methods</h3>
 
-      
-        <div id="more_after_limit-3F-method" class="method ">
+      <div class="methods">
+        
+          <div id="more_after_limit-3F-method" class="method ">
   <a name="method-i-more_after_limit-3F"></a>
 
   
@@ -242,8 +291,8 @@ is “MORE_RESULTS_AFTER_LIMIT”</p>
   
 </div>
 
-      
-        <div id="no_more-3F-method" class="method ">
+        
+          <div id="no_more-3F-method" class="method ">
   <a name="method-i-no_more-3F"></a>
 
   
@@ -273,8 +322,8 @@ is “NO_MORE_RESULTS”</p>
   
 </div>
 
-      
-        <div id="not_finished-3F-method" class="method ">
+        
+          <div id="not_finished-3F-method" class="method ">
   <a name="method-i-not_finished-3F"></a>
 
   
@@ -304,7 +353,8 @@ is “NOT_FINISHED”</p>
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
@@ -326,7 +376,7 @@ is “NOT_FINISHED”</p>
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../../Datastore.html">
         Datastore
       </a>
@@ -339,8 +389,8 @@ is “NOT_FINISHED”</p>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Key.html">
-        Key
+      <a class="reference internal" href="../Query.html">
+        Query
       </a>
     </li>
 
@@ -350,13 +400,7 @@ is “NOT_FINISHED”</p>
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="../Query.html">
-        Query
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../../Storage.html">
         Storage
       </a>
@@ -382,13 +426,11 @@ is “NOT_FINISHED”</p>
 
   <li class="toctree-l1"><a class="reference internal" href="../../../reference.html">API Reference</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../../README_md.html">Getting Started</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../../README.md">Getting Started</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING_md.html">Contribution Guide</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.md">Contribution Guide</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG_md.html">Release History</a></li>
-
-  <li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">LICENSE</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.md">Release History</a></li>
 
 </ul>
 

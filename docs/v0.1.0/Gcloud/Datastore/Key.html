@@ -7,7 +7,6 @@
     <title>Gcloud::Datastore::Key &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
 <link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
@@ -47,7 +46,7 @@
       </li>
       <li>
         <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="gcloud-ruby">
-          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.png" alt="Ruby icon" class="menu-icon" width="24">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.svg" alt="Ruby icon" class="menu-icon" width="24">
           Ruby
         </a>
       </li>
@@ -103,6 +102,60 @@ href="../Datastore.html">Datastore</a>.</p>
         </div>
 
         
+
+
+  <div class="method-links">
+    
+      
+      
+        <div>
+          Attributes:
+
+          
+            <a href="#dataset_id-attribute-method">dataset_id</a>
+          
+            <a href="#id-attribute-method">id</a>
+          
+            <a href="#kind-attribute-method">kind</a>
+          
+            <a href="#name-attribute-method">name</a>
+          
+            <a href="#namespace-attribute-method">namespace</a>
+          
+            <a href="#parent-attribute-method">parent</a>
+          
+        </div>
+      
+
+      
+          <div>
+            Public Class Methods:
+
+            
+              <a href="#new-method">new</a>
+            
+          </div>
+        
+      
+          <div>
+            Public Instance Methods:
+
+            
+              <a href="#complete-3F-method">complete?</a>
+            
+              <a href="#incomplete-3F-method">incomplete?</a>
+            
+              <a href="#path-method">path</a>
+            
+          </div>
+        
+      
+    
+  </div>
+
+
+
+        
           <h2 id="5Buntitled-5D"></h2>
 
 
@@ -112,118 +165,120 @@ href="../Datastore.html">Datastore</a>.</p>
 
 
 
-  
-  <div id="attribute-method-details" class="method-section section">
+  <div id="attribute-method-details" class="section">
     <h3 class="section-header">Attributes</h3>
 
-    
-      <div id="dataset_id-attribute-method" class="method-detail">
-        <a name="dataset_id"></a>
-        
-          <a name="dataset_id="></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">dataset_id</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
+    <div class="methods">
+      
+        <div id="dataset_id-attribute-method" class="method">
+          <a name="dataset_id"></a>
+          
+            <a name="dataset_id="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">dataset_id</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>The <a href="Key.html#attribute-i-dataset_id">#dataset_id</a> of the <a
+          <div class="method-description">
+          
+            <p>The <a href="Key.html#attribute-i-dataset_id">#dataset_id</a> of the <a
 href="Key.html">Key</a>.</p>
-        
+          
+          </div>
         </div>
-      </div>
-    
-      <div id="id-attribute-method" class="method-detail">
-        <a name="id"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">id</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
+      
+        <div id="id-attribute-method" class="method">
+          <a name="id"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">id</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>The id of the <a href="Key.html">Key</a>.</p>
-        
+          <div class="method-description">
+          
+            <p>The id of the <a href="Key.html">Key</a>.</p>
+          
+          </div>
         </div>
-      </div>
-    
-      <div id="kind-attribute-method" class="method-detail">
-        <a name="kind"></a>
-        
-          <a name="kind="></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">kind</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
+      
+        <div id="kind-attribute-method" class="method">
+          <a name="kind"></a>
+          
+            <a name="kind="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">kind</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>The kind of the <a href="Key.html">Key</a>.</p>
-        
+          <div class="method-description">
+          
+            <p>The kind of the <a href="Key.html">Key</a>.</p>
+          
+          </div>
         </div>
-      </div>
-    
-      <div id="name-attribute-method" class="method-detail">
-        <a name="name"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">name</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
+      
+        <div id="name-attribute-method" class="method">
+          <a name="name"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">name</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>The name of the <a href="Key.html">Key</a>.</p>
-        
+          <div class="method-description">
+          
+            <p>The name of the <a href="Key.html">Key</a>.</p>
+          
+          </div>
         </div>
-      </div>
-    
-      <div id="namespace-attribute-method" class="method-detail">
-        <a name="namespace"></a>
-        
-          <a name="namespace="></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">namespace</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
+      
+        <div id="namespace-attribute-method" class="method">
+          <a name="namespace"></a>
+          
+            <a name="namespace="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">namespace</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>The namespace of the <a href="Key.html">Key</a>.</p>
-        
+          <div class="method-description">
+          
+            <p>The namespace of the <a href="Key.html">Key</a>.</p>
+          
+          </div>
         </div>
-      </div>
-    
-      <div id="parent-attribute-method" class="method-detail">
-        <a name="parent"></a>
-        
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">parent</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
+      
+        <div id="parent-attribute-method" class="method">
+          <a name="parent"></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">parent</span><span
+              class="attribute-access-type">[R]</span>
+          </div>
 
-        <div class="method-description">
-        
-          <p>The parent of the <a href="Key.html">Key</a>.</p>
-        
+          <div class="method-description">
+          
+            <p>The parent of the <a href="Key.html">Key</a>.</p>
+          
+          </div>
         </div>
-      </div>
-    
+      
+    </div>
   </div>
 
 
 
 
-    <div id="public-class-methods" class="methods">
+    <div id="public-class-methods" class="section">
       <h3 class="section-header">Public Class Methods</h3>
 
-      
-        <div id="new-method" class="method ">
+      <div class="methods">
+        
+          <div id="new-method" class="method ">
   <a name="method-c-new"></a>
 
   
@@ -255,15 +310,17 @@ href="Key.html">Key</a>.</p>
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
-    <div id="public-instance-methods" class="methods">
+    <div id="public-instance-methods" class="section">
       <h3 class="section-header">Public Instance Methods</h3>
 
-      
-        <div id="complete-3F-method" class="method ">
+      <div class="methods">
+        
+          <div id="complete-3F-method" class="method ">
   <a name="method-i-complete-3F"></a>
 
   
@@ -291,8 +348,8 @@ name.</p>
   
 </div>
 
-      
-        <div id="incomplete-3F-method" class="method ">
+        
+          <div id="incomplete-3F-method" class="method ">
   <a name="method-i-incomplete-3F"></a>
 
   
@@ -320,8 +377,8 @@ a name.</p>
   
 </div>
 
-      
-        <div id="path-method" class="method ">
+        
+          <div id="path-method" class="method ">
   <a name="method-i-path"></a>
 
   
@@ -354,7 +411,8 @@ id or name exist then nil will be returned.</p>
   
 </div>
 
-      
+        
+      </div>
     </div>
   
 
@@ -376,7 +434,7 @@ id or name exist then nil will be returned.</p>
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../Datastore.html">
         Datastore
       </a>
@@ -389,8 +447,8 @@ id or name exist then nil will be returned.</p>
     </li>
 
     <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Key.html">
-        Key
+      <a class="reference internal" href="Query.html">
+        Query
       </a>
     </li>
 
@@ -400,13 +458,7 @@ id or name exist then nil will be returned.</p>
       </a>
     </li>
 
-    <li class="toctree-l1" style="padding-left: 2em;">
-      <a class="reference internal" href="Query.html">
-        Query
-      </a>
-    </li>
-
-    <li class="toctree-l1" style="padding-left: 1em;">
+    <li class="toctree-l1" style="padding-left: 0em;">
       <a class="reference internal" href="../Storage.html">
         Storage
       </a>
@@ -432,13 +484,11 @@ id or name exist then nil will be returned.</p>
 
   <li class="toctree-l1"><a class="reference internal" href="../../reference.html">API Reference</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../README_md.html">Getting Started</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../README.md">Getting Started</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING_md.html">Contribution Guide</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.md">Contribution Guide</a></li>
 
-  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG_md.html">Release History</a></li>
-
-  <li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.md">Release History</a></li>
 
 </ul>
 
