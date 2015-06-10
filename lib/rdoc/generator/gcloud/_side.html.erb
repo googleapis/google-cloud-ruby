@@ -8,7 +8,7 @@ side_config["classes"].each do |side|
   klass = store.all_classes_and_modules.find { |k| k.full_name == side["full_name"] }
   if klass
 %>
-    <li class="toctree-l1" style="padding-left: <%= side["indent"] %>em;">
+    <li class="toctree-l1" style="padding-left: <%= side["indent"].to_i * 2 %>em;">
       <a class="reference internal" href="<%= l klass.path %>">
         <%= side["name"] %>
       </a>
