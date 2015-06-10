@@ -40,7 +40,6 @@ namespace :travis do
     if ENV["TRAVIS_BRANCH"] == "master" &&
        ENV["TRAVIS_PULL_REQUEST"] == "false" &&
        ENV["GCLOUD_BUILD_DOCS"] == "true"
-      Rake::Task["pages:install_gcloud_rdoc"].invoke
       Rake::Task["pages:master"].invoke
     end
   end

@@ -71,27 +71,12 @@ namespace :pages do
     end
   end
 
-  desc "Installs the latest gcloud-rdoc gem"
-  task :install_gcloud_rdoc do
-    tmp = Pathname.new(Dir.home) + "tmp"
-    rdocgem = tmp + "gcloud-rdoc"
-    FileUtils.remove_dir rdocgem if Dir.exists? rdocgem
-    FileUtils.mkdir_p rdocgem
-
-    git_repo = "git@github.com:GoogleCloudPlatform/gcloud-ruby.git"
-    if ENV["GH_OAUTH_TOKEN"]
-      git_repo = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
-    end
-
-    puts `git clone --quiet --branch=gcloud-rdoc #{git_repo} #{rdocgem} > /dev/null`
-    Dir.chdir rdocgem do
-      puts `rake gem`
-      puts `gem install pkg/gcloud-rdoc-*.gem`
-    end
-  end
-
   RDoc::Task.new do |rdoc|
-    begin; require "gcloud-rdoc"; rescue LoadError; end
+    begin
+      require "gcloud-rdoc"
+    rescue LoadError
+      puts "Cannot load gcloud-rdoc"
+    end
 
     require "rubygems"
     spec = Gem::Specification::load("gcloud.gemspec")
