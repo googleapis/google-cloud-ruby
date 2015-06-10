@@ -3,12 +3,14 @@
    visibilities.each do |visibility, methods|
     next unless visibility == :public
     next if methods.empty? %>
-    <div id="<%= visibility %>-<%= type %>-methods" class="methods">
+    <div id="<%= visibility %>-<%= type %>-methods" class="section">
       <h3 class="section-header"><%= visibility.to_s.capitalize %> <%= type.capitalize %> Methods</h3>
 
-      <% methods.each do |method| %>
-        <%= render_partial "method.html.erb", method: method %>
-      <% end %>
+      <div class="methods">
+        <% methods.each do |method| %>
+          <%= render_partial "method.html.erb", method: method %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 <% end %>
