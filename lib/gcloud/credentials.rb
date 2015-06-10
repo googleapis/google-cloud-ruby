@@ -18,6 +18,8 @@ require "signet/oauth_2/client"
 require "forwardable"
 require "googleauth"
 
+#--
+# Google Cloud Credentials
 module Gcloud
   ##
   # Represents the Oauth2 signing logic.

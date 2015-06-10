@@ -16,7 +16,7 @@
 require "gcloud"
 require "gcloud/pubsub/project"
 
-##
+#--
 # Google Cloud Pub/Sub
 module Gcloud
   ##
