@@ -23,7 +23,7 @@ side_config["pages"].each do |side|
   page = store.all_files.select(&:text?).find { |p| p.full_name == side["full_name"] }
   if page
 %>
-  <li class="toctree-l1"><a class="reference internal" href="<%= l page.path %>"><%= side["name"] %></a></li>
+  <li class="toctree-l1"><a class="reference internal" href="<%= l page.full_name %>"><%= side["name"] %></a></li>
 <%
   end
 end
@@ -32,7 +32,7 @@ other_pages = store.all_files.select(&:text?).reject do |page|
   side_config["pages"].find { |s| s["full_name"] == page.full_name }
 end.each do |page|
 %>
-  <li class="toctree-l1"><a class="reference internal" href="<%= l page.path %>"><%= page.full_name %></a></li>
+  <li class="toctree-l1"><a class="reference internal" href="<%= l page.full_name %>"><%= page.full_name %></a></li>
 <%
 end
 %>

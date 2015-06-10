@@ -65,7 +65,7 @@ module RDoc
         # text pages
         @store.all_files.select(&:text?).each do |p|
           self.current = p
-          render_template "page.html.erb", p.path
+          render_template "page.html.erb", "#{p.full_name}.html"
         end
       end
 
