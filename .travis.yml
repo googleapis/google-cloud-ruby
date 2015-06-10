@@ -6,7 +6,7 @@ rvm:
 script:
 - rake travis
 after_success:
-- rake travis:pages
+- bundle exec rake travis:pages
 matrix:
   include:
     - rvm: 2.2
