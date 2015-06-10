@@ -26,6 +26,8 @@
           <%= current.description %>
         </div>
 
+        <%= render_partial "section_links.html.erb" %>
+
         <% current.each_section do |section, constants, attributes| %>
           <%= render_partial "section.html.erb", section: section, constants: constants, attributes: attributes %>
         <% end %>

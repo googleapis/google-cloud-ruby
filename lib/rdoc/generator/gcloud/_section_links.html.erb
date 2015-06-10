@@ -1,0 +1,47 @@
+<%
+display = false
+current.each_section do |section, constants, attributes|
+  break if display
+  display = true if attributes.select { |attr| attr.display? }.any?
+  break if display
+  current.methods_by_type(section).each do |type, visibilities|
+     next if visibilities.empty?
+     visibilities.each do |visibility, methods|
+      next unless visibility == :public
+      display = true if methods.any?
+    end
+  end
+end
+%>
+
+<% if display %>
+  <div class="method-links">
+    <% current.each_section do |section, constants, attributes| %>
+      <% attributes = attributes.select { |attr| attr.display? } %>
+      <% if attributes.any? %>
+        <div>
+          Attributes:
+
+          <% attributes.each do |attrib| %>
+            <a href="#<%= attrib.html_name %>-attribute-method"><%= h attrib.name %></a>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% current.methods_by_type(section).each do |type, visibilities|
+         next if visibilities.empty?
+         visibilities.each do |visibility, methods|
+          next unless visibility == :public
+          next if methods.empty? %>
+          <div>
+            <%= visibility.to_s.capitalize %> <%= type.capitalize %> Methods:
+
+            <% methods.each do |method| %>
+              <a href="#<%= method.html_name %>-method"><%= h method.name %></a>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

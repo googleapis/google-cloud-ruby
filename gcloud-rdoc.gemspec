@@ -1,18 +1,18 @@
 # -*- encoding: utf-8 -*-
-# stub: gcloud-rdoc 1.0.0.20150604065341 ruby lib
+# stub: gcloud-rdoc 1.0.0.20150610010209 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "gcloud-rdoc"
-  s.version = "1.0.0.20150604065341"
+  s.version = "1.0.0.20150610010209"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Silvano Luciani", "Mike Moore"]
-  s.date = "2015-06-04"
+  s.date = "2015-06-10"
   s.description = "Gcloud is the official library for interacting with Google Cloud."
   s.email = ["silvano@google.com", "mike@blowmage.com"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt"]
-  s.files = [".gemtest", ".rubocop.yml", ".travis.yml", "History.txt", "Manifest.txt", "README.txt", "Rakefile", "gcloud-rdoc.gemspec", "lib/gcloud-rdoc.rb", "lib/gcloud/rdoc.rb", "lib/rdoc/discover.rb", "lib/rdoc/generator/gcloud.rb", "lib/rdoc/generator/gcloud/_attributes.html.erb", "lib/rdoc/generator/gcloud/_buttons.html.erb", "lib/rdoc/generator/gcloud/_constants.html.erb", "lib/rdoc/generator/gcloud/_footer.html.erb", "lib/rdoc/generator/gcloud/_header.html.erb", "lib/rdoc/generator/gcloud/_includes.html.erb", "lib/rdoc/generator/gcloud/_meta.html.erb", "lib/rdoc/generator/gcloud/_method.html.erb", "lib/rdoc/generator/gcloud/_methods.html.erb", "lib/rdoc/generator/gcloud/_parent.html.erb", "lib/rdoc/generator/gcloud/_section.html.erb", "lib/rdoc/generator/gcloud/_side.html.erb", "lib/rdoc/generator/gcloud/class.html.erb", "lib/rdoc/generator/gcloud/config/side.yml", "lib/rdoc/generator/gcloud/index.html.erb", "lib/rdoc/generator/gcloud/page.html.erb", "lib/rdoc/generator/gcloud/reference.html.erb", "lib/rdoc/generator/gcloud/stylesheets/gcloud.css", "test/gcloud/test_rdoc.rb"]
+  s.files = [".gemtest", ".rubocop.yml", "History.txt", "Manifest.txt", "README.txt", "Rakefile", "gcloud-rdoc.gemspec", "lib/gcloud-rdoc.rb", "lib/gcloud/rdoc.rb", "lib/rdoc/discover.rb", "lib/rdoc/generator/gcloud.rb", "lib/rdoc/generator/gcloud/_attributes.html.erb", "lib/rdoc/generator/gcloud/_buttons.html.erb", "lib/rdoc/generator/gcloud/_constants.html.erb", "lib/rdoc/generator/gcloud/_footer.html.erb", "lib/rdoc/generator/gcloud/_header.html.erb", "lib/rdoc/generator/gcloud/_includes.html.erb", "lib/rdoc/generator/gcloud/_meta.html.erb", "lib/rdoc/generator/gcloud/_method.html.erb", "lib/rdoc/generator/gcloud/_methods.html.erb", "lib/rdoc/generator/gcloud/_parent.html.erb", "lib/rdoc/generator/gcloud/_section.html.erb", "lib/rdoc/generator/gcloud/_section_links.html.erb", "lib/rdoc/generator/gcloud/_side.html.erb", "lib/rdoc/generator/gcloud/class.html.erb", "lib/rdoc/generator/gcloud/config/side.yml", "lib/rdoc/generator/gcloud/index.html.erb", "lib/rdoc/generator/gcloud/page.html.erb", "lib/rdoc/generator/gcloud/reference.html.erb", "lib/rdoc/generator/gcloud/stylesheets/gcloud.css", "test/gcloud/test_rdoc.rb"]
   s.homepage = "http://googlecloudplatform.github.io/gcloud-ruby/"
   s.licenses = ["Apache-2.0"]
   s.rdoc_options = ["--main", "README.txt"]
