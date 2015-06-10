@@ -723,11 +723,6 @@ h2 .headerlink:hover {
     position: relative;
 }
 
-.method-links {
-  background-color: #e5ecf9;
-  padding: 8px;
-}
-
 .methods .method {
   border-top: 1px solid gray;
 }
@@ -744,6 +739,11 @@ h2 .headerlink:hover {
   content: "optional. ";
   color: #aaa;
   font-style: italic;
+}
+
+.section-links {
+  background-color: #e5ecf9;
+  padding: 8px;
 }
 
 .sub-heading {
