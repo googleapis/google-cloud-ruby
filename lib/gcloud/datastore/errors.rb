@@ -18,16 +18,22 @@ require "gcloud"
 module Gcloud
   module Datastore
     ##
+    # = Datastore Error
+    #
     # Base Datastore exception class.
     class Error < Gcloud::Error
     end
 
     ##
+    # = KeyfileError
+    #
     # Raised when a keyfile is not correct.
     class KeyfileError < Gcloud::Datastore::Error
     end
 
     ##
+    # = ApiError
+    #
     # Raised when an API call is not successful.
     class ApiError < Gcloud::Datastore::Error
       ##
@@ -46,11 +52,15 @@ module Gcloud
     end
 
     ##
+    # = PropertyError
+    #
     # Raised when a property is not correct.
     class PropertyError < Gcloud::Datastore::Error
     end
 
     ##
+    # = TransactionError
+    #
     # General error for Transaction problems.
     class TransactionError < Gcloud::Datastore::Error
       ##

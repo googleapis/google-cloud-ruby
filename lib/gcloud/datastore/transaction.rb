@@ -16,6 +16,8 @@
 module Gcloud
   module Datastore
     ##
+    # = Transaction
+    #
     # Special Connection instance for running transactions.
     #
     # See Gcloud::Datastore::Dataset.transaction
