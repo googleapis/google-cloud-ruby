@@ -179,12 +179,9 @@ module Gcloud
         self
       end
 
-      # rubocop:disable Style/TrivialAccessors
       def to_proto #:nodoc:
-        # Disabled rubocop because this implementation will most likely change.
         @_query
       end
-      # rubocop:enable Style/TrivialAccessors
     end
   end
 end
