@@ -13,11 +13,9 @@ lib/rdoc/generator/gcloud/_buttons.html.erb
 lib/rdoc/generator/gcloud/_constants.html.erb
 lib/rdoc/generator/gcloud/_footer.html.erb
 lib/rdoc/generator/gcloud/_header.html.erb
-lib/rdoc/generator/gcloud/_includes.html.erb
 lib/rdoc/generator/gcloud/_meta.html.erb
 lib/rdoc/generator/gcloud/_method.html.erb
 lib/rdoc/generator/gcloud/_methods.html.erb
-lib/rdoc/generator/gcloud/_parent.html.erb
 lib/rdoc/generator/gcloud/_section.html.erb
 lib/rdoc/generator/gcloud/_section_links.html.erb
 lib/rdoc/generator/gcloud/_side.html.erb
