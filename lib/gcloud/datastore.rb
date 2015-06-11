@@ -73,7 +73,7 @@ module Gcloud
   # Gcloud's goal is to provide a API that is familiar and comfortable to
   # Rubyists. Authentication is handled by Gcloud.datastore. You can provide
   # the project and credential information to connect to the Datastore service,
-  # or if you are running on Goocle Compute Engine this configuration is taken
+  # or if you are running on Google Compute Engine this configuration is taken
   # care of for you.
   #
   #   require "glcoud/datastore"

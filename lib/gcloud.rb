@@ -24,7 +24,7 @@ require "gcloud/version"
 #
 # Gcloud's goal is to provide a API that is familiar and comfortable to
 # Rubyists. Authentication is handled by providing project and credential
-# information, or if you are running on Goocle Compute Engine this configuration
+# information, or if you are running on Google Compute Engine this configuration
 # is taken care of for you.
 #
 # You can learn more about various options for connection on the
