@@ -20,7 +20,17 @@ require "gcloud/storage/file"
 module Gcloud
   module Storage
     ##
-    # Represents a Bucket. Belongs to a Project and has many Files.
+    # = Bucket
+    #
+    # Represents a Storage bucket. Belongs to a Project and has many Files.
+    #
+    #   require "glcoud/storage"
+    #
+    #   storage = Gcloud.storage
+    #
+    #   bucket = storage.find_bucket "my-bucket"
+    #   file = bucket.find_file "path/to/my-file.ext"
+    #
     class Bucket
       ##
       # The Connection object.
@@ -32,14 +42,14 @@ module Gcloud
 
       ##
       # Create an empty Bucket object.
-      def initialize
+      def initialize #:nodoc:
         @connection = nil
         @gapi = {}
       end
 
       ##
       # The kind of item this is.
-      # For buckets, this is always storage#bucket.
+      # For buckets, this is always +storage#bucket+.
       def kind
         @gapi["kind"]
       end
@@ -81,15 +91,40 @@ module Gcloud
 
       ##
       # Permenently deletes the bucket.
-      # The bucket must be empty.
+      # The bucket must be empty before it can be deleted.
       #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # +options [:retries]+::
+      #   The number of times the API call should be retried.
+      #   Default is Gcloud::Backoff.retries. (+Integer+)
+      #
+      # === Returns
+      #
+      # +true+ if the bucket was deleted.
+      #
+      # === Examples
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-bucket"
       #   bucket.delete
       #
       # The API call to delete the bucket may be retried under certain
       # conditions. See Gcloud::Backoff to control this behavior, or
       # specify the wanted behavior in the call:
       #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-bucket"
       #   bucket.delete retries: 5
+      #
       def delete options = {}
         ensure_connection!
         resp = connection.delete_bucket name, options
@@ -103,14 +138,66 @@ module Gcloud
       ##
       # Retrieves a list of files matching the criteria.
       #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # +options [:prefix]+::
+      #   Filter results to files whose names begin with this prefix.
+      #   (+String+)
+      # +options [:token]+::
+      #   A previously-returned page token representing part of the larger set
+      #   of results to view. (+String+)
+      # +options [:max]+::
+      #   Maximum number of items plus prefixes to return. As duplicate prefixes
+      #   are omitted, fewer total results may be returned than requested.
+      #   The default value of this parameter is 1,000 items. (+Integer+)
+      # +options [:versions]+::
+      #   If +true+, lists all versions of an object as distinct results.
+      #   The default is +false+. For more information, see
+      #   {Object Versioning
+      #   }[https://cloud.google.com/storage/docs/object-versioning].
+      #   (+Boolean+)
+      # +options [:max]+::
+      #   Maximum number of buckets to return. (+Integer+)
+      #
+      # === Returns
+      #
+      # Array of Gcloud::Datastore::File (Gcloud::Datastore::File::List)
+      #
+      # === Examples
+      #
+      #   require "gcloud/storage"
+      #
       #   storage = Gcloud.storage
+      #
       #   bucket = storage.find_bucket "my-bucket"
       #   files = bucket.files
       #   files.each do |file|
       #     puts file.name
       #   end
       #
-      # See Gcloud::Storage::File
+      # If you have a significant number of files, you may need to paginate
+      # through them: (See File::List#token)
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-bucket"
+      #
+      #   all_files = []
+      #   tmp_files = bucket.files
+      #   while tmp_files.any? do
+      #     tmp_files.each do |file|
+      #       all_files << file
+      #     end
+      #     # break loop if no more buckets available
+      #     break if tmp_files.token.nil?
+      #     # get the next group of files
+      #     tmp_files = bucket.files token: tmp_files.token
+      #   end
+      #
       def files options = {}
         ensure_connection!
         resp = connection.list_files name, options
@@ -124,12 +211,26 @@ module Gcloud
       ##
       # Retrieves a file matching the path.
       #
+      # === Parameters
+      #
+      # +path+::
+      #   Name (path) of the file. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Datastore::File or nil if file does not exist
+      #
+      # === Example
+      #
+      #   require "gcloud/storage"
+      #
       #   storage = Gcloud.storage
+      #
       #   bucket = storage.find_bucket "my-bucket"
+      #
       #   file = bucket.find_file "path/to/my-file.ext"
       #   puts file.name
       #
-      # See Gcloud::Storage::File
       def find_file path, options = {}
         ensure_connection!
         resp = connection.get_file name, path, options
@@ -141,17 +242,57 @@ module Gcloud
       end
 
       ##
-      # Create a new Gcloud::Storeage::File object by providing a
-      # File object to upload and the path to store it with.
+      # Create a new File object by providing a path to a local file to upload
+      # and the path to store it with in the bucket.
+      #
+      # === Parameters
+      #
+      # +file+::
+      #   Path of the file on the filesystem to upload. (+String+)
+      # +path+::
+      #   Path to store the file in Google Cloud Storage. (+String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # +options [:acl]+::
+      #   A predefined set of access controls to apply to this file.
+      #   (+String+)
+      #
+      #   Acceptable values are:
+      #   * +auth+, +auth_read+, +authenticated+, +authenticated_read+,
+      #     +authenticatedRead+:: File owner gets OWNER access, and
+      #     allAuthenticatedUsers get READER access.
+      #   * +owner_full+, +bucketOwnerFullControl+:: File owner gets OWNER
+      #     access, and project team owners get OWNER access.
+      #   * +owner_read+, +bucketOwnerRead+:: File owner gets OWNER access, and
+      #     project team owners get READER access.
+      #   * +private+:: File owner gets OWNER access.
+      #   * +project_private+, +projectPrivate+:: File owner gets OWNER access,
+      #     and project team members get access according to their roles.
+      #   * +public+, +public_read+, +publicRead+:: File owner gets OWNER
+      #     access, and allUsers get READER access.
+      #
+      # === Returns
+      #
+      # Gcloud::Datastore::File
+      #
+      # === Examples
+      #
+      #   require "gcloud/storage"
       #
       #   storage = Gcloud.storage
+      #
       #   bucket = storage.find_bucket "my-bucket"
+      #
       #   bucket.create_file "path/to/local.file.ext"
       #
       # Additionally, a destination path can be specified.
       #
+      #   require "gcloud/storage"
+      #
       #   storage = Gcloud.storage
+      #
       #   bucket = storage.find_bucket "my-bucket"
+      #
       #   bucket.create_file "path/to/local.file.ext",
       #                      "destination/path/file.ext"
       #
@@ -161,11 +302,16 @@ module Gcloud
       # by 265KB then it will be lowered to the nearest acceptible
       # value.
       #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-bucket"
+      #
       #   bucket.create_file "path/to/local.file.ext",
       #                      "destination/path/file.ext",
       #                      chunk_size: 1024*1024 # 1 MB chunk
       #
-      # See Gcloud::Storage::File
       def create_file file, path = nil, options = {}
         ensure_connection!
         # TODO: Raise if file doesn't exist
@@ -182,13 +328,103 @@ module Gcloud
       end
 
       ##
-      # Access Control List
+      # The Bucket::Acl instance used to control access to the bucket.
+      #
+      # A bucket has owners, writers, and readers. Permissions can be granted to
+      # an individual user's email address, a group's email address, as well as
+      # many predefined lists. See the
+      # {Access Control guide
+      # }[https://cloud.google.com/storage/docs/access-control]
+      # for more.
+      #
+      # === Examples
+      #
+      # Access to a bucket can be granted to a user by appending +"user-"+ to
+      # the email address:
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-todo-app"
+      #
+      #   email = "heidi@example.net"
+      #   bucket.acl.add_reader "user-#{email}"
+      #
+      # Access to a bucket can be granted to a group by appending +"group-"+ to
+      # the email address:
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-todo-app"
+      #
+      #   email = "authors@example.net"
+      #   bucket.acl.add_reader "group-#{email}"
+      #
+      # Access to a bucket can also be granted to a predefined list of
+      # permissions:
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-todo-app"
+      #
+      #   bucket.acl.public!
+      #
       def acl
         @acl ||= Bucket::Acl.new self
       end
 
       ##
-      # Default Access Control List
+      # The Bucket::DefaultAcl instance used to control access to the bucket's
+      # files.
+      #
+      # A bucket's files have owners, writers, and readers. Permissions can be
+      # granted to an individual user's email address, a group's email address,
+      # as well as many predefined lists. See the
+      # {Access Control guide
+      # }[https://cloud.google.com/storage/docs/access-control]
+      # for more.
+      #
+      # === Examples
+      #
+      # Access to a bucket's files can be granted to a user by appending
+      # +"user-"+ to the email address:
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-todo-app"
+      #
+      #   email = "heidi@example.net"
+      #   bucket.default_acl.add_reader "user-#{email}"
+      #
+      # Access to a bucket's files can be granted to a group by appending
+      # +"group-"+ to the email address:
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-todo-app"
+      #
+      #   email = "authors@example.net"
+      #   bucket.default_acl.add_reader "group-#{email}"
+      #
+      # Access to a bucket's files can also be granted to a predefined list of
+      # permissions:
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-todo-app"
+      #
+      #   bucket.default_acl.public!
       def default_acl
         @default_acl ||= Bucket::DefaultAcl.new self
       end
