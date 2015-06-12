@@ -113,12 +113,15 @@ body {
    ========================================================================== */
 
 pre {
+    display: block;
+    padding: .5em;
     border: 1px solid rgba(0,0,0,0.2);
     /* Border Radius */
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         border-radius: 5px;
-    background: #fff;
+    background: #f8f8f8;
+    color: #333;
     font-size: 0.9em;
     line-height: 1.6em;
 }
@@ -1467,13 +1470,6 @@ h3 > span > a,
 h4 > span > a {
   color: #ccc;
   font-size: smaller
-}
-
-pre {
-  display: block;
-  padding: .5em;
-  color: #333;
-  background: #f8f8f8;
 }
 
 pre .ruby-constant   { color: #099; }
