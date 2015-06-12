@@ -1348,11 +1348,13 @@ header .buttons {
     }
 
     .side-nav {
-        position: absolute;
+        position: fixed;
+        overflow-y: auto;
         top: 0;
         left: 0;
+        bottom: 0;
         width: 240px;
-        padding-top: 7.7em;
+        padding-top: 5.2em;
         background: none;
         font-size: 0.9em;
     }
