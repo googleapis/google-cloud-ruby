@@ -1469,7 +1469,7 @@ h4 > span > a {
   font-size: smaller
 }
 
-pre.ruby {
+pre {
   display: block;
   padding: .5em;
   color: #333;
