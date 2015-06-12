@@ -42,6 +42,7 @@ classes:
 pages:
 - full_name: README.md
   name: Getting Started
+  ignore: true
 - full_name: AUTHENTICATION.md
   name: Authentication Guide
 - full_name: CONTRIBUTING.md

@@ -21,7 +21,7 @@ end
 <%
 side_config["pages"].each do |side|
   page = store.all_files.select(&:text?).find { |p| p.full_name == side["full_name"] }
-  if page
+  if page && side["ignore"] != true
 %>
   <li class="toctree-l1"><a class="reference internal" href="<%= l page.full_name %>"><%= side["name"] %></a></li>
 <%
