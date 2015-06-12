@@ -15,6 +15,9 @@ classes:
 - full_name: Gcloud::Datastore::Entity
   name: Entity
   indent: 1
+- full_name: Gcloud::Datastore::Key
+  name: Key
+  indent: 1
 - full_name: Gcloud::Pubsub
   name: Pubsub
   indent: 0
