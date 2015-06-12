@@ -1260,7 +1260,7 @@ header .buttons {
 
     .container {
         width: 90%;
-        /*max-width: 1020px;*/
+        max-width: 1020px;
         font-size: 0.9em;
     }
 
