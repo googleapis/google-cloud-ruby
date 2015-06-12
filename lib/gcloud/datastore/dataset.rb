@@ -207,7 +207,7 @@ module Gcloud
       # === Example
       #
       #   dataset = Gcloud.datastore
-      #   dataset.delete task1, task2
+      #   dataset.delete entity1, entity2
       #
       def delete *entities_or_keys
         keys = entities_or_keys.map do |e_or_k|
