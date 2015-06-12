@@ -30,7 +30,7 @@
         Attributes:
 
         <% attributes.each do |attrib| %>
-          <a href="#<%= attrib.html_name %>-attribute-method"><%= h attrib.name %></a>
+          <a href="#<%= attrib.aref %>"><%= h attrib.name %></a>
         <% end %>
       </div>
     <% end %>
@@ -44,7 +44,7 @@
           <%= visibility.to_s.capitalize %> <%= type.capitalize %> Methods:
 
           <% methods.each do |method| %>
-            <a href="#<%= method.html_name %>-method"><%= h method.name %></a>
+            <a href="#<%= method.aref %>"><%= h method.name %></a>
           <% end %>
         </div>
       <% end %>
