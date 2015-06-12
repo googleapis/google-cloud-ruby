@@ -33,8 +33,9 @@ module Gcloud
     # Google Datastore. Gcloud::Datastore::Entity objects are created,
     # read, updated, and deleted by Gcloud::Datastore::Dataset.
     #
-    #   dataset = Gcloud.datastore "my-todo-project",
-    #                              "/path/to/keyfile.json"
+    #   require "gcloud/datastore"
+    #
+    #   dataset = Gcloud.datastore
     #
     #   query = Gcloud::Datastore::Query.new.kind("Task").
     #     where("completed", "=", true)
