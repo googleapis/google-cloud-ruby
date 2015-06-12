@@ -191,6 +191,21 @@ a[name]:before {
     color: #fff;
 }
 
+.hero-banner .col-right{
+    text-align: center;
+}
+
+.latest-release {
+    margin-top: 10px;
+}
+
+.latest-release a {
+    color: #fff;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 .page-header {
     position: relative;
     padding: 1em;
@@ -886,6 +901,14 @@ header .buttons {
 
 .side-nav ul ul a {
     padding-left: 4em;
+}
+
+.side-nav .side-nav--meta {
+    padding: 10px;
+    background-color: #f5f5f5;
+    font-size: smaller;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .side-nav .external-links {

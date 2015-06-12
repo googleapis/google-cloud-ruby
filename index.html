@@ -1,6 +1,7 @@
 ---
 layout: home
 ---
+{% assign release = site.data.releases | first %}
 <section class="hero-banner">
   <div class="container clearfix">
     <div class="col col-left">
@@ -11,6 +12,10 @@ layout: home
     <div class="col col-right">
       <h2>One-line install</h2>
       <pre>$ gem install gcloud</pre>
+      <h4 class="latest-release">Latest Release
+        <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/releases/tag/{{ release.version }}">{{ release.version }}</a>
+        {{ release.date | date: "%b %d, %Y" }}
+      </h4>
     </div><!-- end of .col.col-right -->
   </div><!-- end of .container -->
 </section><!-- end of .hero-banner -->
@@ -19,9 +24,9 @@ layout: home
   <div class="container">
     <ul class="featuring-links">
       <li>
-        <a href="docs/latest" title="Documentation" class="btn btn-docs">
+        <a href="docs/{{ release.version }}" title="Documentation" class="btn btn-docs">
           <img src="img/icon-lang-ruby-gray.svg" alt="Ruby icon" />
-          Documentation
+          Read the Docs
         </a>
       </li>
       <li>
