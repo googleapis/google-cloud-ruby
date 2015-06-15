@@ -17,7 +17,19 @@ module Gcloud
   module Storage
     class File
       ##
+      # = File Access Control List
+      #
       # Represents a File's Access Control List.
+      #
+      #   require "glcoud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-bucket"
+      #
+      #   file = bucket.find_file "path/to/my-file.ext"
+      #   file.acl.readers.each { |reader| puts reader }
+      #
       class Acl
         RULES = { "authenticatedRead" => "authenticatedRead",
                   "auth" => "authenticatedRead",
@@ -33,7 +45,7 @@ module Gcloud
                   "project_private" => "projectPrivate",
                   "publicRead" => "publicRead",
                   "public" => "publicRead",
-                  "public_read" => "publicRead" }
+                  "public_read" => "publicRead" } #:nodoc:
 
         ##
         # Initialized a new Acl object.
@@ -47,6 +59,20 @@ module Gcloud
           @readers = nil
         end
 
+        ##
+        # Reloads all Access Control List data for the file.
+        #
+        # === Example
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file.acl.refresh!
+        #
         def refresh!
           resp = @connection.list_file_acls @bucket, @file
           acls = resp.data["items"]
@@ -55,21 +81,127 @@ module Gcloud
           @readers = entities_from_acls acls, "READER"
         end
 
+        ##
+        # Lists the owners of the file.
+        #
+        # === Returns
+        #
+        # Array of Strings
+        #
+        # === Example
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file.acl.owners.each { |owner| puts owner }
+        #
         def owners
           refresh! if @owners.nil?
           @owners
         end
 
+        ##
+        # Lists the owners of the file.
+        #
+        # === Returns
+        #
+        # Array of Strings
+        #
+        # === Example
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file.acl.writers.each { |writer| puts writer }
+        #
         def writers
           refresh! if @writers.nil?
           @writers
         end
 
+        ##
+        # Lists the readers of the file.
+        #
+        # === Returns
+        #
+        # Array of Strings
+        #
+        # === Example
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file.acl.readers.each { |reader| puts reader }
+        #
         def readers
           refresh! if @readers.nil?
           @readers
         end
 
+        ##
+        # Grants owner permission to the file.
+        #
+        # === Parameters
+        #
+        # +entity+::
+        #   The entity holding the permission, in one of the following forms:
+        #   (+String+)
+        #
+        #   * user-userId
+        #   * user-email
+        #   * group-groupId
+        #   * group-email
+        #   * domain-domain
+        #   * project-team-projectId
+        #   * allUsers
+        #   * allAuthenticatedUsers
+        #
+        # +options+::
+        #   An optional Hash for controlling additional behavor. (+Hash+)
+        # +options [:generation]+::
+        #   When present, selects a specific revision of this object.
+        #   Default is the latest version. (+Integer+)
+        #
+        # === Examples
+        #
+        # Access to a file can be granted to a user by appending +"user-"+ to
+        # the email address:
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   email = "heidi@example.net"
+        #   file.acl.add_owner "user-#{email}"
+        #
+        # Access to a file can be granted to a group by appending +"group-"+ to
+        # the email address:
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   email = "authors@example.net"
+        #   file.acl.add_owner "group-#{email}"
+        #
         def add_owner entity, options = {}
           resp = @connection.insert_file_acl @bucket, @file, entity,
                                              "OWNER", options
@@ -81,6 +213,58 @@ module Gcloud
           nil
         end
 
+        ##
+        # Grants writer permission to the file.
+        #
+        # === Parameters
+        #
+        # +entity+::
+        #   The entity holding the permission, in one of the following forms:
+        #   (+String+)
+        #
+        #   * user-userId
+        #   * user-email
+        #   * group-groupId
+        #   * group-email
+        #   * domain-domain
+        #   * project-team-projectId
+        #   * allUsers
+        #   * allAuthenticatedUsers
+        #
+        # +options+::
+        #   An optional Hash for controlling additional behavor. (+Hash+)
+        # +options [:generation]+::
+        #   When present, selects a specific revision of this object.
+        #   Default is the latest version. (+Integer+)
+        #
+        # === Examples
+        #
+        # Access to a file can be granted to a user by appending +"user-"+ to
+        # the email address:
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   email = "heidi@example.net"
+        #   file.acl.add_writer "user-#{email}"
+        #
+        # Access to a file can be granted to a group by appending +"group-"+ to
+        # the email address:
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   email = "authors@example.net"
+        #   file.acl.add_writer "group-#{email}"
+        #
         def add_writer entity, options = {}
           resp = @connection.insert_file_acl @bucket, @file, entity,
                                              "WRITER", options
@@ -92,6 +276,58 @@ module Gcloud
           nil
         end
 
+        ##
+        # Grants reader permission to the file.
+        #
+        # === Parameters
+        #
+        # +entity+::
+        #   The entity holding the permission, in one of the following forms:
+        #   (+String+)
+        #
+        #   * user-userId
+        #   * user-email
+        #   * group-groupId
+        #   * group-email
+        #   * domain-domain
+        #   * project-team-projectId
+        #   * allUsers
+        #   * allAuthenticatedUsers
+        #
+        # +options+::
+        #   An optional Hash for controlling additional behavor. (+Hash+)
+        # +options [:generation]+::
+        #   When present, selects a specific revision of this object.
+        #   Default is the latest version. (+Integer+)
+        #
+        # === Examples
+        #
+        # Access to a file can be granted to a user by appending +"user-"+ to
+        # the email address:
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   email = "heidi@example.net"
+        #   file.acl.add_reader "user-#{email}"
+        #
+        # Access to a file can be granted to a group by appending +"group-"+ to
+        # the email address:
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   email = "authors@example.net"
+        #   file.acl.add_reader "group-#{email}"
+        #
         def add_reader entity, options = {}
           resp = @connection.insert_file_acl @bucket, @file, entity,
                                              "READER", options
@@ -103,6 +339,42 @@ module Gcloud
           nil
         end
 
+        ##
+        # Permenently deletes the entity from the file's access control list.
+        #
+        # === Parameters
+        #
+        # +entity+::
+        #   The entity holding the permission, in one of the following forms:
+        #   (+String+)
+        #
+        #   * user-userId
+        #   * user-email
+        #   * group-groupId
+        #   * group-email
+        #   * domain-domain
+        #   * project-team-projectId
+        #   * allUsers
+        #   * allAuthenticatedUsers
+        #
+        # +options+::
+        #   An optional Hash for controlling additional behavor. (+Hash+)
+        # +options [:generation]+::
+        #   When present, selects a specific revision of this object.
+        #   Default is the latest version. (+Integer+)
+        #
+        # === Example
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   email = "heidi@example.net"
+        #   file.acl.delete "user-#{email}"
+        #
         def delete entity, options = {}
           resp = @connection.delete_file_acl @bucket, @file, entity, options
           if resp.success?
@@ -114,12 +386,27 @@ module Gcloud
           false
         end
 
-        def self.predefined_rule_for rule_name
+        def self.predefined_rule_for rule_name #:nodoc:
           RULES[rule_name.to_s]
         end
 
         # Predefined ACL helpers
 
+        ##
+        # Convenience method to apply the +authenticatedRead+ predefined ACL
+        # rule to the file.
+        #
+        # === Example
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file.acl.auth!
+        #
         def auth!
           update_predefined_acl! "authenticatedRead"
         end
@@ -128,25 +415,100 @@ module Gcloud
         alias_method :authenticated!, :auth!
         alias_method :authenticated_read!, :auth!
 
+        ##
+        # Convenience method to apply the +bucketOwnerFullControl+ predefined
+        # ACL rule to the file.
+        #
+        # === Example
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file.acl.owner_full!
+        #
         def owner_full!
           update_predefined_acl! "bucketOwnerFullControl"
         end
         alias_method :bucketOwnerFullControl!, :owner_full!
 
+        ##
+        # Convenience method to apply the +bucketOwnerRead+ predefined ACL
+        # rule to the file.
+        #
+        # === Example
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file.acl.owner_read!
+        #
         def owner_read!
           update_predefined_acl! "bucketOwnerRead"
         end
         alias_method :bucketOwnerRead!, :owner_read!
 
+        ##
+        # Convenience method to apply the +private+ predefined ACL
+        # rule to the file.
+        #
+        # === Example
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file.acl.private!
+        #
         def private!
           update_predefined_acl! "private"
         end
 
+        ##
+        # Convenience method to apply the +projectPrivate+ predefined ACL
+        # rule to the file.
+        #
+        # === Example
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file.acl.project_private!
+        #
         def project_private!
           update_predefined_acl! "projectPrivate"
         end
         alias_method :projectPrivate!, :project_private!
 
+        ##
+        # Convenience method to apply the +publicRead+ predefined ACL
+        # rule to the file.
+        #
+        # === Example
+        #
+        #   require "glcoud/storage"
+        #
+        #   storage = Gcloud.storage
+        #
+        #   bucket = storage.find_bucket "my-bucket"
+        #
+        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file.acl.public!
+        #
         def public!
           update_predefined_acl! "publicRead"
         end
