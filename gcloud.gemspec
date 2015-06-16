@@ -15,6 +15,8 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files -- lib/*`.split("\n")
   gem.require_paths = ["lib"]
 
+  gem.required_ruby_version = ">= 1.9.3"
+
   gem.add_dependency                  "beefcake", "~> 1.0"
   gem.add_dependency                  "google-api-client", "~> 0.8.3"
   gem.add_dependency                  "mime-types", "~> 2.4"
