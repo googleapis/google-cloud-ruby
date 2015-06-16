@@ -16,11 +16,15 @@
 module Gcloud
   module Storage
     ##
+    # = Storage Error
+    #
     # Base Storage exception class.
     class Error < Gcloud::Error
     end
 
     ##
+    # = ApiError
+    #
     # Raised when an API call is not successful.
     class ApiError < Error
       ##
@@ -45,6 +49,8 @@ module Gcloud
     end
 
     ##
+    # = FileVerificationError
+    #
     # Raised when a File download fails the verification.
     class FileVerificationError < Error
       ##
