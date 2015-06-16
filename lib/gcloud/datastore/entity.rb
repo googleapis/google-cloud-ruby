@@ -204,7 +204,7 @@ module Gcloud
       # Array property values will return an array of flag settings.
       #
       #   entity["tags"] = ["ruby", "code"]
-      #   entity.exclude_from_indexes? "tags" #=> true [false, false]
+      #   entity.exclude_from_indexes? "tags" #=> [false, false]
       def exclude_from_indexes? name
         value = self[name]
         flag = @_exclude_indexes[name.to_s]
