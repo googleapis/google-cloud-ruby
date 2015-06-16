@@ -8,10 +8,10 @@
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/gcloud-ruby/css/normalize.css">
-<link rel="stylesheet" href="/gcloud-ruby/css/main.css">
-<script src="/gcloud-ruby/js/vendor/modernizr-2.6.2.min.js"></script>
-<link href='//fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto:300,400,700,700italic,400italic|Open+Sans:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
+<script src="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/modernizr-2.6.2.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto:300,400,700,700italic,400italic|Open+Sans:300' rel='stylesheet' type='text/css'>
 <link rel="shortcut icon" href="https://cloud.google.com/images/gcp-favicon.ico">
 
   </head>
@@ -23,8 +23,8 @@
 
 <header class="page-header fixed" role="banner">
   <h1 class="logo">
-    <a href="/gcloud-ruby/" title="back to home">
-      <img src="/gcloud-ruby/img/logo.svg" alt="Google Cloud Platform">
+    <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="back to home">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/logo.svg" alt="Google Cloud Platform">
       <span class="gcloud">gcloud</span>
     </a>
   </h1>
@@ -33,20 +33,20 @@
     <div class="nav-current">Ruby</div>
     <ul class="menu">
       <li>
-        <a href="/gcloud-node/" title="gcloud-node">
-          <img src="/gcloud-ruby/img/icon-lang-nodejs.svg" alt="Node.js icon" class="menu-icon">
+        <a href="http://googlecloudplatform.github.io/gcloud-node/" title="gcloud-node">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-nodejs.svg" alt="Node.js icon" class="menu-icon">
           Node.js
         </a>
       </li>
       <li>
-        <a href="/gcloud-python/" title="gcloud-python">
-          <img src="/gcloud-ruby/img/icon-lang-python.svg" alt="Python icon" class="menu-icon">
+        <a href="http://googlecloudplatform.github.io/gcloud-python/" title="gcloud-python">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-python.svg" alt="Python icon" class="menu-icon">
           Python
         </a>
       </li>
       <li>
-        <a href="/gcloud-ruby/" title="gcloud-ruby">
-          <img src="/gcloud-ruby/img/icon-lang-ruby.svg" alt="Ruby icon" class="menu-icon" width="24">
+        <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="gcloud-ruby">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.svg" alt="Ruby icon" class="menu-icon" width="24">
           Ruby
         </a>
       </li>
@@ -60,12 +60,12 @@
       <header class="docs-header">
         <h1 class="page-title">Gcloud</h1>
         <div class="buttons">
-  <a href="/gcloud-ruby/docs/versions" class="v-btn">
-    <img src="/gcloud-ruby/img/icon-arrow-bullet.svg" />
+  <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
     Version History
   </a>
   <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/new?title=%5BDocumentation+Issue%5D+" target="_blank" class="v-btn">
-    <img src="/gcloud-ruby/img/icon-link-github.svg" />
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" />
     Report an Issue
   </a>
 </div>
@@ -270,26 +270,40 @@ instance.</p>
 
   <div class="method-description">
     
-      <p>Create a new <a href="Gcloud/Storage.html">Storage</a> project.</p>
+      <p>Creates a new object for connecting to the <a
+href="Gcloud/Storage.html">Storage</a> service. Each call creates a new
+connection.</p>
 
-<pre class="ruby"><span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
+<h3 id="method-c-storage-label-Parameters">Parameters<span><a href="#method-c-storage-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>project</code>
+<dd>
+<p>Project identifier for the <a href="Gcloud/Storage.html">Storage</a>
+service you are connecting to. (<code>String</code>)</p>
+</dd><dt><code>keyfile</code>
+<dd>
+<p>Keyfile downloaded from Google Cloud. If file path the file must be
+readable. (<code>String</code> or <code>Hash</code>)</p>
+</dd></dl>
+
+<h3 id="method-c-storage-label-Returns">Returns<span><a href="#method-c-storage-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Gcloud/Storage/Project.html">Gcloud::Storage::Project</a></p>
+
+<h3 id="method-c-storage-label-Example">Example<span><a href="#method-c-storage-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
                          <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 </pre>
-
-<p>@param project [String] the project identifier for the <a
-href="Gcloud/Storage.html">Storage</a> account you are connecting to.
-@param keyfile [String] the path to the keyfile you downloaded from Google
-Cloud. The file must readable. @return [Gcloud::Storage::Project] storage
-project.</p>
-
-<p>See <a href="Gcloud/Storage/Project.html">Gcloud::Storage::Project</a></p>
     
 
     
       <!-- <div class="method-source-code" id="storage-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage.rb, line 37</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">storage</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">project</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">default_project</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyfile</span>.<span class="ruby-identifier">nil?</span>
@@ -425,25 +439,25 @@ project.</p>
 <ul class="external-links">
   <li>
     <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby" title="Github repository">
-      <img src="/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
       Github
     </a>
   </li>
   <li>
     <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues" title="Issues on Github">
-      <img src="/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
       Issues
     </a>
   </li>
   <li>
     <a href="http://stackoverflow.com/questions/tagged/gcloud-ruby" title="gcloud on StackOverflow">
-      <img src="/gcloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon">
       StackOverflow
     </a>
   </li>
   <li>
     <a href="http://rubygems.org/gems/gcloud" title="RubyGems" class="ext-link">
-       <img src="/gcloud-ruby/img/icon-link-package-manager.svg" alt="Package Manager icon">
+       <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-package-manager.svg" alt="Package Manager icon">
       RubyGems
     </a>
   </li>
@@ -454,9 +468,9 @@ project.</p>
     </article>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script ="/gcloud-ruby/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-<script src="/gcloud-ruby/js/plugins.js"></script>
-<script src="/gcloud-ruby/js/main.js"></script>
+<script>window.jQuery || document.write('<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+<script src="http://googlecloudplatform.github.io/gcloud-ruby/js/plugins.js"></script>
+<script src="http://googlecloudplatform.github.io/gcloud-ruby/js/main.js"></script>
 
 <script>
   (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

@@ -8,10 +8,10 @@
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/gcloud-ruby/css/normalize.css">
-<link rel="stylesheet" href="/gcloud-ruby/css/main.css">
-<script src="/gcloud-ruby/js/vendor/modernizr-2.6.2.min.js"></script>
-<link href='//fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto:300,400,700,700italic,400italic|Open+Sans:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/normalize.css">
+<link rel="stylesheet" href="http://googlecloudplatform.github.io/gcloud-ruby/css/main.css">
+<script src="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/modernizr-2.6.2.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto:300,400,700,700italic,400italic|Open+Sans:300' rel='stylesheet' type='text/css'>
 <link rel="shortcut icon" href="https://cloud.google.com/images/gcp-favicon.ico">
 
   </head>
@@ -23,8 +23,8 @@
 
 <header class="page-header fixed" role="banner">
   <h1 class="logo">
-    <a href="/gcloud-ruby/" title="back to home">
-      <img src="/gcloud-ruby/img/logo.svg" alt="Google Cloud Platform">
+    <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="back to home">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/logo.svg" alt="Google Cloud Platform">
       <span class="gcloud">gcloud</span>
     </a>
   </h1>
@@ -33,20 +33,20 @@
     <div class="nav-current">Ruby</div>
     <ul class="menu">
       <li>
-        <a href="/gcloud-node/" title="gcloud-node">
-          <img src="/gcloud-ruby/img/icon-lang-nodejs.svg" alt="Node.js icon" class="menu-icon">
+        <a href="http://googlecloudplatform.github.io/gcloud-node/" title="gcloud-node">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-nodejs.svg" alt="Node.js icon" class="menu-icon">
           Node.js
         </a>
       </li>
       <li>
-        <a href="/gcloud-python/" title="gcloud-python">
-          <img src="/gcloud-ruby/img/icon-lang-python.svg" alt="Python icon" class="menu-icon">
+        <a href="http://googlecloudplatform.github.io/gcloud-python/" title="gcloud-python">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-python.svg" alt="Python icon" class="menu-icon">
           Python
         </a>
       </li>
       <li>
-        <a href="/gcloud-ruby/" title="gcloud-ruby">
-          <img src="/gcloud-ruby/img/icon-lang-ruby.svg" alt="Ruby icon" class="menu-icon" width="24">
+        <a href="http://googlecloudplatform.github.io/gcloud-ruby/" title="gcloud-ruby">
+          <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-lang-ruby.svg" alt="Ruby icon" class="menu-icon" width="24">
           Ruby
         </a>
       </li>
@@ -60,12 +60,12 @@
       <header class="docs-header">
         <h1 class="page-title">Gcloud::Storage::File::Acl</h1>
         <div class="buttons">
-  <a href="/gcloud-ruby/docs/versions" class="v-btn">
-    <img src="/gcloud-ruby/img/icon-arrow-bullet.svg" />
+  <a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/versions" class="v-btn">
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-arrow-bullet.svg" />
     Version History
   </a>
   <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/new?title=%5BDocumentation+Issue%5D+" target="_blank" class="v-btn">
-    <img src="/gcloud-ruby/img/icon-link-github.svg" />
+    <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" />
     Report an Issue
   </a>
 </div>
@@ -76,7 +76,19 @@
 
         <div id="description" class="description">
           
+<h1 id="class-Gcloud::Storage::File::Acl-label-File+Access+Control+List"><a href="../File.html">File</a> Access Control <a href="List.html">List</a><span><a href="#class-Gcloud::Storage::File::Acl-label-File+Access+Control+List">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
 <p>Represents a File&#39;s Access Control <a href="List.html">List</a>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">readers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">reader</span><span class="ruby-operator">|</span> <span class="ruby-identifier">puts</span> <span class="ruby-identifier">reader</span> }
+</pre>
 
         </div>
 
@@ -97,14 +109,6 @@
     
 
     
-        <div>
-          Public Class Methods:
-
-          
-            <a href="#method-c-predefined_rule_for">predefined_rule_for</a>
-          
-        </div>
-      
     
         <div>
           Public Instance Methods:
@@ -169,15 +173,6 @@
 
 
 
-  <h3>Constants</h3>
-  <dl>
-    
-      <dt><a name="RULES">RULES</a></dt>
-      
-        <dd class="description"></dd>
-      
-    
-  </dl>
 
 
 
@@ -185,43 +180,6 @@
 
 
 
-
-    <div id="public-class-methods" class="section">
-      <h3 class="section-header">Public Class Methods</h3>
-
-      <div class="methods">
-        
-          <div id="predefined_rule_for-method" class="method ">
-  <a name="method-c-predefined_rule_for"></a>
-
-  
-    <h4><code>predefined_rule_for(rule_name)</code></h4>
-  
-
-  <div class="method-description">
-    
-      
-    
-
-    
-      <!-- <div class="method-source-code" id="predefined_rule_for-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 117</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">predefined_rule_for</span> <span class="ruby-identifier">rule_name</span>
-  <span class="ruby-constant">RULES</span>[<span class="ruby-identifier">rule_name</span>.<span class="ruby-identifier">to_s</span>]
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
-    
-  </div>
-
-  
-
-  
-</div>
-
-        
-      </div>
-    </div>
-  
 
     <div id="public-instance-methods" class="section">
       <h3 class="section-header">Public Instance Methods</h3>
@@ -237,12 +195,73 @@
 
   <div class="method-description">
     
-      
+      <p>Grants owner permission to the file.</p>
+
+<h3 id="method-i-add_owner-label-Parameters">Parameters<span><a href="#method-i-add_owner-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>entity</code>
+<dd>
+<p>The entity holding the permission, in one of the following forms:
+(<code>String</code>)</p>
+<ul><li>
+<p>user-userId</p>
+</li><li>
+<p>user-email</p>
+</li><li>
+<p>group-groupId</p>
+</li><li>
+<p>group-email</p>
+</li><li>
+<p>domain-domain</p>
+</li><li>
+<p>project-team-projectId</p>
+</li><li>
+<p>allUsers</p>
+</li><li>
+<p>allAuthenticatedUsers</p>
+</li></ul>
+</dd><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
+</dd><dt>+options [:generation]+
+<dd>
+<p>When present, selects a specific revision of this object. Default is the
+latest version. (<code>Integer</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-add_owner-label-Examples">Examples<span><a href="#method-i-add_owner-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Access to a file can be granted to a user by appending +“user-”+ to the
+email address:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_owner</span> <span class="ruby-node">&quot;user-#{email}&quot;</span>
+</pre>
+
+<p>Access to a file can be granted to a group by appending +“group-”+ to the
+email address:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;authors@example.net&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_owner</span> <span class="ruby-node">&quot;group-#{email}&quot;</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="add_owner-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 73</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 205</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_owner</span> <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_file_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-ivar">@file</span>, <span class="ruby-identifier">entity</span>,
                                      <span class="ruby-string">&quot;OWNER&quot;</span>, <span class="ruby-identifier">options</span>
@@ -272,12 +291,73 @@
 
   <div class="method-description">
     
-      
+      <p>Grants reader permission to the file.</p>
+
+<h3 id="method-i-add_reader-label-Parameters">Parameters<span><a href="#method-i-add_reader-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>entity</code>
+<dd>
+<p>The entity holding the permission, in one of the following forms:
+(<code>String</code>)</p>
+<ul><li>
+<p>user-userId</p>
+</li><li>
+<p>user-email</p>
+</li><li>
+<p>group-groupId</p>
+</li><li>
+<p>group-email</p>
+</li><li>
+<p>domain-domain</p>
+</li><li>
+<p>project-team-projectId</p>
+</li><li>
+<p>allUsers</p>
+</li><li>
+<p>allAuthenticatedUsers</p>
+</li></ul>
+</dd><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
+</dd><dt>+options [:generation]+
+<dd>
+<p>When present, selects a specific revision of this object. Default is the
+latest version. (<code>Integer</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-add_reader-label-Examples">Examples<span><a href="#method-i-add_reader-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Access to a file can be granted to a user by appending +“user-”+ to the
+email address:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_reader</span> <span class="ruby-node">&quot;user-#{email}&quot;</span>
+</pre>
+
+<p>Access to a file can be granted to a group by appending +“group-”+ to the
+email address:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;authors@example.net&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_reader</span> <span class="ruby-node">&quot;group-#{email}&quot;</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="add_reader-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 95</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 331</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_reader</span> <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_file_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-ivar">@file</span>, <span class="ruby-identifier">entity</span>,
                                      <span class="ruby-string">&quot;READER&quot;</span>, <span class="ruby-identifier">options</span>
@@ -307,12 +387,73 @@
 
   <div class="method-description">
     
-      
+      <p>Grants writer permission to the file.</p>
+
+<h3 id="method-i-add_writer-label-Parameters">Parameters<span><a href="#method-i-add_writer-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>entity</code>
+<dd>
+<p>The entity holding the permission, in one of the following forms:
+(<code>String</code>)</p>
+<ul><li>
+<p>user-userId</p>
+</li><li>
+<p>user-email</p>
+</li><li>
+<p>group-groupId</p>
+</li><li>
+<p>group-email</p>
+</li><li>
+<p>domain-domain</p>
+</li><li>
+<p>project-team-projectId</p>
+</li><li>
+<p>allUsers</p>
+</li><li>
+<p>allAuthenticatedUsers</p>
+</li></ul>
+</dd><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
+</dd><dt>+options [:generation]+
+<dd>
+<p>When present, selects a specific revision of this object. Default is the
+latest version. (<code>Integer</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-add_writer-label-Examples">Examples<span><a href="#method-i-add_writer-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Access to a file can be granted to a user by appending +“user-”+ to the
+email address:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_writer</span> <span class="ruby-node">&quot;user-#{email}&quot;</span>
+</pre>
+
+<p>Access to a file can be granted to a group by appending +“group-”+ to the
+email address:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;authors@example.net&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_writer</span> <span class="ruby-node">&quot;group-#{email}&quot;</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="add_writer-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 84</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 268</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_writer</span> <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_file_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-ivar">@file</span>, <span class="ruby-identifier">entity</span>,
                                      <span class="ruby-string">&quot;WRITER&quot;</span>, <span class="ruby-identifier">options</span>
@@ -342,12 +483,25 @@
 
   <div class="method-description">
     
-      <p>Predefined ACL helpers</p>
+      <p>Convenience method to apply the <code>authenticatedRead</code> predefined
+ACL rule to the file.</p>
+
+<h3 id="method-i-auth-21-label-Example">Example<span><a href="#method-i-auth-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">auth!</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="auth-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 123</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 410</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">auth!</span>
   <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;authenticatedRead&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -524,12 +678,56 @@
 
   <div class="method-description">
     
-      
+      <p>Permenently deletes the entity from the file&#39;s access control list.</p>
+
+<h3 id="method-i-delete-label-Parameters">Parameters<span><a href="#method-i-delete-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>entity</code>
+<dd>
+<p>The entity holding the permission, in one of the following forms:
+(<code>String</code>)</p>
+<ul><li>
+<p>user-userId</p>
+</li><li>
+<p>user-email</p>
+</li><li>
+<p>group-groupId</p>
+</li><li>
+<p>group-email</p>
+</li><li>
+<p>domain-domain</p>
+</li><li>
+<p>project-team-projectId</p>
+</li><li>
+<p>allUsers</p>
+</li><li>
+<p>allAuthenticatedUsers</p>
+</li></ul>
+</dd><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
+</dd><dt>+options [:generation]+
+<dd>
+<p>When present, selects a specific revision of this object. Default is the
+latest version. (<code>Integer</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-delete-label-Example">Example<span><a href="#method-i-delete-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">delete</span> <span class="ruby-node">&quot;user-#{email}&quot;</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 106</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 378</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">delete_file_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-ivar">@file</span>, <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -559,12 +757,25 @@
 
   <div class="method-description">
     
-      
+      <p>Convenience method to apply the <code>bucketOwnerFullControl</code>
+predefined ACL rule to the file.</p>
+
+<h3 id="method-i-owner_full-21-label-Example">Example<span><a href="#method-i-owner_full-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">owner_full!</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="owner_full-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 131</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 433</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">owner_full!</span>
   <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;bucketOwnerFullControl&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -591,12 +802,25 @@
 
   <div class="method-description">
     
-      
+      <p>Convenience method to apply the <code>bucketOwnerRead</code> predefined ACL
+rule to the file.</p>
+
+<h3 id="method-i-owner_read-21-label-Example">Example<span><a href="#method-i-owner_read-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">owner_read!</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="owner_read-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 136</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 453</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">owner_read!</span>
   <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;bucketOwnerRead&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -623,12 +847,28 @@
 
   <div class="method-description">
     
-      
+      <p>Lists the owners of the file.</p>
+
+<h3 id="method-i-owners-label-Returns">Returns<span><a href="#method-i-owners-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Array of Strings</p>
+
+<h3 id="method-i-owners-label-Example">Example<span><a href="#method-i-owners-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">owners</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">owner</span><span class="ruby-operator">|</span> <span class="ruby-identifier">puts</span> <span class="ruby-identifier">owner</span> }
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="owners-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 58</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">owners</span>
   <span class="ruby-identifier">refresh!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@owners</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@owners</span>
@@ -652,12 +892,25 @@
 
   <div class="method-description">
     
-      
+      <p>Convenience method to apply the <code>private</code> predefined ACL rule to
+the file.</p>
+
+<h3 id="method-i-private-21-label-Example">Example<span><a href="#method-i-private-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">private!</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="private-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 141</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 473</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">private!</span>
   <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;private&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -705,12 +958,25 @@
 
   <div class="method-description">
     
-      
+      <p>Convenience method to apply the <code>projectPrivate</code> predefined ACL
+rule to the file.</p>
+
+<h3 id="method-i-project_private-21-label-Example">Example<span><a href="#method-i-project_private-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">project_private!</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="project_private-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 145</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 492</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project_private!</span>
   <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;projectPrivate&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -737,12 +1003,25 @@
 
   <div class="method-description">
     
-      
+      <p>Convenience method to apply the <code>publicRead</code> predefined ACL rule
+to the file.</p>
+
+<h3 id="method-i-public-21-label-Example">Example<span><a href="#method-i-public-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">public!</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="public-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 150</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 512</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">public!</span>
   <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;publicRead&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -819,12 +1098,28 @@
 
   <div class="method-description">
     
-      
+      <p>Lists the readers of the file.</p>
+
+<h3 id="method-i-readers-label-Returns">Returns<span><a href="#method-i-readers-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Array of Strings</p>
+
+<h3 id="method-i-readers-label-Example">Example<span><a href="#method-i-readers-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">readers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">reader</span><span class="ruby-operator">|</span> <span class="ruby-identifier">puts</span> <span class="ruby-identifier">reader</span> }
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="readers-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 68</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">readers</span>
   <span class="ruby-identifier">refresh!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@readers</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@readers</span>
@@ -848,12 +1143,24 @@
 
   <div class="method-description">
     
-      
+      <p>Reloads all Access Control <a href="List.html">List</a> data for the file.</p>
+
+<h3 id="method-i-refresh-21-label-Example">Example<span><a href="#method-i-refresh-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">refresh!</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="refresh-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 50</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">refresh!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">list_file_acls</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-ivar">@file</span>
   <span class="ruby-identifier">acls</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;items&quot;</span>]
@@ -880,12 +1187,28 @@
 
   <div class="method-description">
     
-      
+      <p>Lists the owners of the file.</p>
+
+<h3 id="method-i-writers-label-Returns">Returns<span><a href="#method-i-writers-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Array of Strings</p>
+
+<h3 id="method-i-writers-label-Example">Example<span><a href="#method-i-writers-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">writers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">writer</span><span class="ruby-operator">|</span> <span class="ruby-identifier">puts</span> <span class="ruby-identifier">writer</span> }
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="writers-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 63</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 125</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">writers</span>
   <span class="ruby-identifier">refresh!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@writers</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@writers</span>
@@ -1015,25 +1338,25 @@
 <ul class="external-links">
   <li>
     <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby" title="Github repository">
-      <img src="/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
       Github
     </a>
   </li>
   <li>
     <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues" title="Issues on Github">
-      <img src="/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-github.svg" alt="Github icon">
       Issues
     </a>
   </li>
   <li>
     <a href="http://stackoverflow.com/questions/tagged/gcloud-ruby" title="gcloud on StackOverflow">
-      <img src="/gcloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon">
+      <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon">
       StackOverflow
     </a>
   </li>
   <li>
     <a href="http://rubygems.org/gems/gcloud" title="RubyGems" class="ext-link">
-       <img src="/gcloud-ruby/img/icon-link-package-manager.svg" alt="Package Manager icon">
+       <img src="http://googlecloudplatform.github.io/gcloud-ruby/img/icon-link-package-manager.svg" alt="Package Manager icon">
       RubyGems
     </a>
   </li>
@@ -1044,9 +1367,9 @@
     </article>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script ="/gcloud-ruby/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-<script src="/gcloud-ruby/js/plugins.js"></script>
-<script src="/gcloud-ruby/js/main.js"></script>
+<script>window.jQuery || document.write('<script ="http://googlecloudplatform.github.io/gcloud-ruby/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+<script src="http://googlecloudplatform.github.io/gcloud-ruby/js/plugins.js"></script>
+<script src="http://googlecloudplatform.github.io/gcloud-ruby/js/main.js"></script>
 
 <script>
   (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
