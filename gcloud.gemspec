@@ -17,6 +17,11 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 1.9.3"
 
+  gem.extra_rdoc_files = ["AUTHENTICATION.md", "CHANGELOG.md",
+                          "CONTRIBUTING.md", "LICENSE", "README.md"]
+  gem.rdoc_options     = ["--main", "README.md",
+                          "--exclude", "lib/gcloud/proto/"]
+
   gem.add_dependency                  "beefcake", "~> 1.0"
   gem.add_dependency                  "google-api-client", "~> 0.8.3"
   gem.add_dependency                  "mime-types", "~> 2.4"
