@@ -6,20 +6,19 @@
     <div class="methods">
       <% attributes.each do |attrib| %>
         <div id="<%= attrib.html_name %>-attribute-method" class="method">
-          <a name="<%= h attrib.name %>"></a>
-          <% if attrib.rw =~ /w/i %>
-            <a name="<%= h attrib.name %>="></a>
-          <% end %>
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name"><%= h attrib.name %></span><span
-              class="attribute-access-type">[<%= attrib.rw %>]</span>
-          </div>
+          <a name="<%= h attrib.aref %>"></a>
+          <h4>
+            <code><%= h attrib.name %></code>
+            <span class="attribute-access-type">[<%= attrib.rw %>]</span>
+            <span>
+              <a href="#<%= h attrib.aref %>">&para;</a>
+              <a href="#top">&uarr;</a>
+            </span>
+          </h4>
 
           <div class="method-description">
           <% if attrib.comment %>
             <%= attrib.description.to_s.strip %>
-          <% else %>
-            <p class="missing-docs">(Not documented)</p>
           <% end %>
           </div>
         </div>

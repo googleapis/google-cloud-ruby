@@ -3,10 +3,22 @@
 
   <% if method.call_seq %>
     <% method.call_seq.strip.split("\n").each_with_index do |call_seq, _| %>
-      <h4><code><%= call_seq.strip.gsub(/->/, '&rarr;').gsub( /^\w+\./m, '') %></code></h4>
+      <h4>
+        <code><%= call_seq.strip.gsub(/->/, '&rarr;').gsub( /^\w+\./m, '') %></code>
+        <span>
+          <a href="#<%= h method.aref %>">&para;</a>
+          <a href="#top">&uarr;</a>
+        </span>
+      </h4>
     <% end %>
   <% else %>
-    <h4><code><%= h method.name %><%= method.params %></code></h4>
+    <h4>
+      <code><%= h method.name %><%= method.params %></code>
+      <span>
+        <a href="#<%= h method.aref %>">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
   <% end %>
 
   <div class="method-description">
