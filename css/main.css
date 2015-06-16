@@ -1479,6 +1479,14 @@ h4 > span > a:first-child:before {
   visibility: visible;
 }
 
+h1 > span.attribute-access-type,
+h2 > span.attribute-access-type,
+h3 > span.attribute-access-type,
+h4 > span.attribute-access-type {
+  color: #ccc;
+  font-size: smaller;
+}
+
 /* Ruby code styles
    ========================================================================== */
 
