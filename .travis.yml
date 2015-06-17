@@ -9,5 +9,13 @@ after_success:
 - bundle exec rake travis:pages
 matrix:
   include:
-    - rvm: 2.2
-      env: GCLOUD_BUILD_DOCS=true
+  - rvm: 2.2
+    env: GCLOUD_BUILD_DOCS=true
+deploy:
+  provider: rubygems
+  api_key:
+    secure: CTbGzuCCZt4Zf3QrUjc3USK8ac205pfc81oZlTEiNnIWVexKxUuCk8JJZnTBhDFylLgKD+hoIbBii4iq1El1quUqk3VAwohUotUFKAVgle4IGSmO71beUj63x2GyY39SGK0r9ZGHVE6WC0oVu3i5wSklgxhMsREAYt872m0xDNE=
+  gem: gcloud
+  on:
+    tags: true
+    repo: GoogleCloudPlatform/gcloud-ruby
