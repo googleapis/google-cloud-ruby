@@ -109,6 +109,10 @@ module RDoc
         side ? side["name"] : page.full_name
       end
 
+      def build_date
+        @build_date ||= Date.today
+      end
+
       ## Configuration
 
       def side_config
