@@ -10,32 +10,23 @@ layout: default
   <h2>Current</h2>
 
   <ul class="v-list">
-    <li><a href="v0.1.0">v0.1.0</a></li>
-    <li><a href="master">master</a></li>
+    {% for release in site.data.releases limit:1 %}
+      <li><a href="/gcloud-ruby/docs/{{ release.version }}">{{ release.version }}</a> <i>(Latest release)</i></li>
+    {% endfor %}
+    <li><a href="master">master</a> <i>(Active development)</i></li>
   </ul>
 
-  <!-- <h2>previous</h2>
+  <h2>Previous</h2>
 
   <ul class="v-list">
-    <li><a href="master">v0.0.0</a></li>
-    <li><a href="master">v0.0.0</a></li>
-    <li><a href="master">v0.0.0</a></li>
-  </ul> -->
+    {% for release in site.data.releases offset:1 %}
+      <li><a href="/gcloud-ruby/docs/{{ release.version }}">{{ release.version }}</a></li>
+    {% endfor %}
+  </ul>
 
 </section><!-- end of .content -->
 
 <nav class="side-nav">
-  <!-- <ul class="page-sections">
-    <li><a href="">gcloud</a></li>
-    <li><a href="">Datastore</a>
-      <ul class="sub-sections">
-        <li><a href="">Dataset</a>
-        <li><a href="">Query</a>
-      </ul>
-    </li>
-    <li><a href="">Storage</a></li>
-  </ul> -->
-
   <ul class="external-links">
     <li>
       <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby" title="Github repository">
