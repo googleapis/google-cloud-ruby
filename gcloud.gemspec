@@ -12,14 +12,14 @@ Gem::Specification.new do |gem|
   gem.homepage      = "http://googlecloudplatform.github.io/gcloud-ruby/"
   gem.license       = "Apache-2.0"
 
-  gem.files         = `git ls-files -- lib/*`.split("\n")
+  gem.files         = `git ls-files -- lib/*`.split("\n") +
+                      `git ls-files -- docs/*`.split("\n")
   gem.require_paths = ["lib"]
 
   gem.required_ruby_version = ">= 1.9.3"
 
-  gem.extra_rdoc_files = ["AUTHENTICATION.md", "CHANGELOG.md",
-                          "CONTRIBUTING.md", "LICENSE", "README.md"]
-  gem.rdoc_options     = ["--main", "README.md",
+  gem.extra_rdoc_files = `git ls-files -- docs/*`.split("\n")
+  gem.rdoc_options     = ["--main", "docs/overview.md",
                           "--exclude", "lib/gcloud/proto/"]
 
   gem.add_dependency                  "beefcake", "~> 1.0"

@@ -160,9 +160,14 @@ namespace :pages do
     require "rubygems"
     spec = Gem::Specification::load("gcloud.gemspec")
 
+    main = "README.md"
+    if main_index = spec.rdoc_options.index("--main")
+      main = spec.rdoc_options[main_index + 1]
+    end
+
     rdoc.generator = "gcloud"
     rdoc.title = "gcloud #{spec.version} Documentation"
-    rdoc.main = "README.md"
+    rdoc.main = main
     rdoc.rdoc_files.include spec.extra_rdoc_files,
                             "lib/"
     rdoc.options = spec.rdoc_options
