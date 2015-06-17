@@ -43,6 +43,9 @@ classes:
   name: File
   indent: 1
 pages:
+- full_name: docs/overview.md
+  name: Getting Started
+  ignore: true
 - full_name: README.md
   name: Getting Started
   ignore: true
