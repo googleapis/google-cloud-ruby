@@ -124,7 +124,7 @@ storage = Gcloud.storage "my-todo-project-id",
 
 bucket = storage.bucket "task-attachments"
 
-file = bucket.find_file "path/to/my-file.ext"
+file = bucket.file "path/to/my-file.ext"
 
 # Download the file to the local file system
 file.download "/tasks/attachments/#{file.name}"

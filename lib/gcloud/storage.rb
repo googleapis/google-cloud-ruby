@@ -44,7 +44,7 @@ module Gcloud
   #                            "/path/to/keyfile.json"
   #
   #   bucket = storage.bucket "my-bucket"
-  #   file = bucket.find_file "path/to/my-file.ext"
+  #   file = bucket.file "path/to/my-file.ext"
   #
   def self.storage project = nil, keyfile = nil
     project ||= Gcloud::Storage::Project.default_project
@@ -76,7 +76,7 @@ module Gcloud
   #                            "/path/to/keyfile.json"
   #
   #   bucket = storage.bucket "my-bucket"
-  #   file = bucket.find_file "path/to/my-file.ext"
+  #   file = bucket.file "path/to/my-file.ext"
   #
   # To learn more about Datastore, read the
   # {Google Cloud Storage Overview
@@ -141,14 +141,14 @@ module Gcloud
   # no limit on the number of objects that you can create in a bucket.
   #
   # Files are retrieved by their name, which is the path of the file in the
-  # bucket: (See Bucket#find_file)
+  # bucket: (See Bucket#file)
   #
   #   require "gcloud/storage"
   #
   #   storage = Gcloud.storage
   #
   #   bucket = storage.bucket "my-todo-app"
-  #   file = bucket.find_file "avatars/heidi/400x400.png"
+  #   file = bucket.file "avatars/heidi/400x400.png"
   #
   # You can also retrieve all files in a bucket: (See Bucket#files)
   #
@@ -212,7 +212,7 @@ module Gcloud
   #   storage = Gcloud.storage
   #
   #   bucket = storage.bucket "my-todo-app"
-  #   file = bucket.find_file "avatars/heidi/400x400.png"
+  #   file = bucket.file "avatars/heidi/400x400.png"
   #   file.download "/var/todo-app/avatars/heidi/400x400.png"
   #
   # == Using Signed URLs
@@ -226,7 +226,7 @@ module Gcloud
   #   storage = Gcloud.storage
   #
   #   bucket = storage.bucket "my-todo-app"
-  #   file = bucket.find_file "avatars/heidi/400x400.png"
+  #   file = bucket.file "avatars/heidi/400x400.png"
   #   shared_url = file.signed_url method: "GET",
   #                                expires: 300 # 5 minutes from now
   #
@@ -287,7 +287,7 @@ module Gcloud
   #   storage = Gcloud.storage
   #
   #   bucket = storage.bucket "my-todo-app"
-  #   file = bucket.find_file "avatars/heidi/400x400.png"
+  #   file = bucket.file "avatars/heidi/400x400.png"
   #
   #   email = "heidi@example.net"
   #   file.acl.add_reader "user-#{email}"
@@ -300,7 +300,7 @@ module Gcloud
   #   storage = Gcloud.storage
   #
   #   bucket = storage.bucket "my-todo-app"
-  #   file = bucket.find_file "avatars/heidi/400x400.png"
+  #   file = bucket.file "avatars/heidi/400x400.png"
   #
   #   email = "authors@example.net"
   #   file.acl.add_reader "group-#{email}"
@@ -312,7 +312,7 @@ module Gcloud
   #   storage = Gcloud.storage
   #
   #   bucket = storage.bucket "my-todo-app"
-  #   file = bucket.find_file "avatars/heidi/400x400.png"
+  #   file = bucket.file "avatars/heidi/400x400.png"
   #
   #   file.acl.public!
   #

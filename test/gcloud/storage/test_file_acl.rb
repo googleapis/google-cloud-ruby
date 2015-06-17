@@ -39,7 +39,7 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
        random_file_acl_hash(bucket_name, file_name).to_json]
     end
 
-    file = bucket.find_file file_name
+    file = bucket.file file_name
     file.name.must_equal file_name
     file.acl.owners.wont_be  :empty?
     file.acl.writers.must_be :empty?
@@ -57,7 +57,7 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
        random_file_acl_hash(bucket_name, file_name).to_json]
     end
 
-    file = bucket.find_file file_name
+    file = bucket.file file_name
     file.name.must_equal file_name
     file.acl.owners.wont_be  :empty?
     file.acl.writers.must_be :empty?
@@ -103,7 +103,7 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
        random_file_acl_hash(bucket_name, file_name).to_json]
     end
 
-    file = bucket.find_file file_name
+    file = bucket.file file_name
     file.name.must_equal file_name
     file.acl.owners.wont_be  :empty?
     file.acl.writers.must_be :empty?
@@ -147,7 +147,7 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
        random_file_acl_hash(bucket_name, file_name).to_json]
     end
 
-    file = bucket.find_file file_name
+    file = bucket.file file_name
     file.name.must_equal file_name
     file.acl.owners.wont_be  :empty?
     file.acl.writers.must_be :empty?
@@ -180,7 +180,7 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
        random_file_acl_hash(bucket_name, file_name).to_json]
     end
 
-    file = bucket.find_file file_name
+    file = bucket.file file_name
     file.name.must_equal file_name
     file.acl.owners.wont_be  :empty?
     file.acl.writers.must_be :empty?

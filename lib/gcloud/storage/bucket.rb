@@ -29,7 +29,7 @@ module Gcloud
     #   storage = Gcloud.storage
     #
     #   bucket = storage.bucket "my-bucket"
-    #   file = bucket.find_file "path/to/my-file.ext"
+    #   file = bucket.file "path/to/my-file.ext"
     #
     class Bucket
       ##
@@ -228,10 +228,10 @@ module Gcloud
       #
       #   bucket = storage.bucket "my-bucket"
       #
-      #   file = bucket.find_file "path/to/my-file.ext"
+      #   file = bucket.file "path/to/my-file.ext"
       #   puts file.name
       #
-      def find_file path, options = {}
+      def file path, options = {}
         ensure_connection!
         resp = connection.get_file name, path, options
         if resp.success?
@@ -240,6 +240,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_file, :file
 
       ##
       # Create a new File object by providing a path to a local file to upload

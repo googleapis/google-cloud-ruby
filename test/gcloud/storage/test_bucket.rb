@@ -259,7 +259,20 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
       URI(env.url).query.must_be :nil?
       [200, {"Content-Type"=>"application/json"},
-       create_file_json(bucket.name, file_name)]
+       find_file_json(bucket.name, file_name)]
+    end
+
+    file = bucket.file file_name
+    file.name.must_equal file_name
+  end
+
+  it "finds a file with find_file alias" do
+    file_name = "file.ext"
+
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
+      URI(env.url).query.must_be :nil?
+      [200, {"Content-Type"=>"application/json"},
+       find_file_json(bucket.name, file_name)]
     end
 
     file = bucket.find_file file_name
@@ -273,10 +286,10 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
       URI(env.url).query.must_equal "generation=#{generation}"
       [200, {"Content-Type"=>"application/json"},
-       create_file_json(bucket.name, file_name)]
+       find_file_json(bucket.name, file_name)]
     end
 
-    file = bucket.find_file file_name, generation: generation
+    file = bucket.file file_name, generation: generation
     file.name.must_equal file_name
   end
 

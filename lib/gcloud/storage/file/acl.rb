@@ -27,7 +27,7 @@ module Gcloud
       #
       #   bucket = storage.bucket "my-bucket"
       #
-      #   file = bucket.find_file "path/to/my-file.ext"
+      #   file = bucket.file "path/to/my-file.ext"
       #   file.acl.readers.each { |reader| puts reader }
       #
       class Acl
@@ -70,7 +70,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   file.acl.refresh!
         #
         def refresh!
@@ -96,7 +96,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   file.acl.owners.each { |owner| puts owner }
         #
         def owners
@@ -119,7 +119,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   file.acl.writers.each { |writer| puts writer }
         #
         def writers
@@ -142,7 +142,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   file.acl.readers.each { |reader| puts reader }
         #
         def readers
@@ -185,7 +185,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   email = "heidi@example.net"
         #   file.acl.add_owner "user-#{email}"
         #
@@ -198,7 +198,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   email = "authors@example.net"
         #   file.acl.add_owner "group-#{email}"
         #
@@ -248,7 +248,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   email = "heidi@example.net"
         #   file.acl.add_writer "user-#{email}"
         #
@@ -261,7 +261,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   email = "authors@example.net"
         #   file.acl.add_writer "group-#{email}"
         #
@@ -311,7 +311,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   email = "heidi@example.net"
         #   file.acl.add_reader "user-#{email}"
         #
@@ -324,7 +324,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   email = "authors@example.net"
         #   file.acl.add_reader "group-#{email}"
         #
@@ -371,7 +371,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   email = "heidi@example.net"
         #   file.acl.delete "user-#{email}"
         #
@@ -404,7 +404,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   file.acl.auth!
         #
         def auth!
@@ -427,7 +427,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   file.acl.owner_full!
         #
         def owner_full!
@@ -447,7 +447,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   file.acl.owner_read!
         #
         def owner_read!
@@ -467,7 +467,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   file.acl.private!
         #
         def private!
@@ -486,7 +486,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   file.acl.project_private!
         #
         def project_private!
@@ -506,7 +506,7 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   file = bucket.find_file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext"
         #   file.acl.public!
         #
         def public!

@@ -38,7 +38,7 @@ module Gcloud
     #   storage = Gcloud.storage
     #
     #   bucket = storage.bucket "my-bucket"
-    #   file = bucket.find_file "path/to/my-file.ext"
+    #   file = bucket.file "path/to/my-file.ext"
     #
     # See Gcloud.storage
     class Project

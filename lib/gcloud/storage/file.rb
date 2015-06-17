@@ -30,7 +30,7 @@ module Gcloud
     #
     #   bucket = storage.bucket "my-bucket"
     #
-    #   file = bucket.find_file "path/to/my-file.ext"
+    #   file = bucket.file "path/to/my-file.ext"
     #   file.download "/downloads/#{bucket.name}/#{file.name}"
     #
     class File
@@ -161,7 +161,7 @@ module Gcloud
       #
       #   bucket = storage.bucket "my-bucket"
       #
-      #   file = bucket.find_file "path/to/my-file.ext"
+      #   file = bucket.file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext"
       #
       # The download is verified by calculating the MD5 digest.
@@ -173,7 +173,7 @@ module Gcloud
       #
       #   bucket = storage.bucket "my-bucket"
       #
-      #   file = bucket.find_file "path/to/my-file.ext"
+      #   file = bucket.file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext", verify: :crc32c
       #
       # Both the MD5 and CRC32c digest can be used by passing :all.
@@ -184,7 +184,7 @@ module Gcloud
       #
       #   bucket = storage.bucket "my-bucket"
       #
-      #   file = bucket.find_file "path/to/my-file.ext"
+      #   file = bucket.file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext", verify: :all
       #
       # The download verification can be disabled by passing :none
@@ -195,7 +195,7 @@ module Gcloud
       #
       #   bucket = storage.bucket "my-bucket"
       #
-      #   file = bucket.find_file "path/to/my-file.ext"
+      #   file = bucket.file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext", verify: :none
       #
       def download path, options = {}
@@ -256,7 +256,7 @@ module Gcloud
       #
       #   bucket = storage.bucket "my-bucket"
       #
-      #   file = bucket.find_file "path/to/my-file.ext"
+      #   file = bucket.file "path/to/my-file.ext"
       #   file.copy "path/to/destination/file.ext"
       #
       # The file can also be copied to a different bucket:
@@ -267,7 +267,7 @@ module Gcloud
       #
       #   bucket = storage.bucket "my-bucket"
       #
-      #   file = bucket.find_file "path/to/my-file.ext"
+      #   file = bucket.file "path/to/my-file.ext"
       #   file.copy "new-destination-bucket",
       #             "path/to/destination/file.ext"
       #
@@ -300,7 +300,7 @@ module Gcloud
       #
       #   bucket = storage.bucket "my-bucket"
       #
-      #   file = bucket.find_file "path/to/my-file.ext"
+      #   file = bucket.file "path/to/my-file.ext"
       #   file.delete
       #
       def delete
@@ -347,7 +347,7 @@ module Gcloud
       #   storage = Gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
-      #   file = bucket.find_file "avatars/heidi/400x400.png"
+      #   file = bucket.file "avatars/heidi/400x400.png"
       #   shared_url = file.signed_url
       #
       # Any of the option parameters may be specified:
@@ -357,7 +357,7 @@ module Gcloud
       #   storage = Gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
-      #   file = bucket.find_file "avatars/heidi/400x400.png"
+      #   file = bucket.file "avatars/heidi/400x400.png"
       #   shared_url = file.signed_url method: "GET",
       #                                expires: 300 # 5 minutes from now
       #
@@ -387,7 +387,7 @@ module Gcloud
       #   storage = Gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
-      #   file = bucket.find_file "avatars/heidi/400x400.png"
+      #   file = bucket.file "avatars/heidi/400x400.png"
       #
       #   email = "heidi@example.net"
       #   file.acl.add_reader "user-#{email}"
@@ -400,7 +400,7 @@ module Gcloud
       #   storage = Gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
-      #   file = bucket.find_file "avatars/heidi/400x400.png"
+      #   file = bucket.file "avatars/heidi/400x400.png"
       #
       #   email = "authors@example.net"
       #   file.acl.add_reader "group-#{email}"
@@ -413,7 +413,7 @@ module Gcloud
       #   storage = Gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
-      #   file = bucket.find_file "avatars/heidi/400x400.png"
+      #   file = bucket.file "avatars/heidi/400x400.png"
       #
       #   file.acl.public!
       #
