@@ -24,6 +24,11 @@ $(document).ready(function() {
     switcher.find('option').each(function(index,element) {
       if (window.location.pathname.startsWith(element.value)) {
         element.selected = true;
+        if (element.text == 'master') {
+          meta.find('#doc-build-date').show();
+        } else {
+          meta.find('#doc-build-date').hide();
+        }
       }
     });
     // Navigate when selection is changed
