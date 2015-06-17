@@ -54,8 +54,12 @@ module RDoc
       end
 
       def generate_main
+        # get the main text page
+        main = @store.find_text_page(@options.main_page).dup
+        # set the path so links always work
+        def main.path; "index.html"; end
+        self.current = main
         # main index page
-        self.current = @store.find_text_page(@options.main_page)
         render_template "index.html.erb", "index.html"
         # api reference page
         render_template "reference.html.erb", "reference.html"
