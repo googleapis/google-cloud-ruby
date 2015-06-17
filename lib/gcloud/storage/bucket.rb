@@ -207,6 +207,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_files, :files
 
       ##
       # Retrieves a file matching the path.

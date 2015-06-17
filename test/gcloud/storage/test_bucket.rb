@@ -151,6 +151,17 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     files.size.must_equal num_files
   end
 
+  it "lists files with find_files alias" do
+    num_files = 3
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       list_files_json(num_files)]
+    end
+
+    files = bucket.find_files
+    files.size.must_equal num_files
+  end
+
   it "paginates files" do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.wont_include "pageToken"
