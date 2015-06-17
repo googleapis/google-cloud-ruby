@@ -14,10 +14,13 @@ $(document).ready(function() {
   if (meta) {
     // Add the release switcher HTML
     meta.prepend($.parseHTML('<div id="release-nav">Browsing Version <select>' +
-      {% for release in site.data.releases %}
+      {% for release in site.data.releases limit:1 %}
         '<option value="/gcloud-ruby/docs/{{ release.version }}">{{ release.version }}</option>' +
       {% endfor %}
       '<option value="/gcloud-ruby/docs/master">master</option>' +
+      {% for release in site.data.releases offset:1 %}
+        '<option value="/gcloud-ruby/docs/{{ release.version }}">{{ release.version }}</option>' +
+      {% endfor %}
       '</select></div>'));
     // Select the current option
     var switcher = meta.find('#release-nav').find('select');
