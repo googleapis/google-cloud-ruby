@@ -85,8 +85,7 @@ namespace :pages do
     end
 
     tmp   = Pathname.new(Dir.home) + "tmp"
-    repo  = tmp + "docs"
-    docs  = tmp + "docs"
+    repo  = tmp + "tag"
     pages = tmp + "pages"
     FileUtils.remove_dir repo if Dir.exists? repo
     FileUtils.remove_dir pages if Dir.exists? pages
@@ -117,7 +116,7 @@ namespace :pages do
       puts `rsync -r --delete #{repo}/html/ docs/#{tag}/`
       # Update releases yaml
       releases = YAML.load_file "_data/releases.yaml"
-      unless releases.select { |r| r["version"] == tag }
+      unless releases.select { |r| r["version"] == tag }.any?
         releases << { "version" => tag, "date" => Date.today.to_s }
       end
       releases.sort! { |x,y| Gem::Version.new(y["version"].sub(/^v/, "")) <=> Gem::Version.new(x["version"].sub(/^v/, "")) }
