@@ -326,6 +326,8 @@ module Gcloud
           upload_multipart file, path, options
         end
       end
+      alias_method :upload_file, :create_file
+      alias_method :new_file, :create_file
 
       ##
       # The Bucket::Acl instance used to control access to the bucket.

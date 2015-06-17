@@ -43,6 +43,34 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     end
   end
 
+  it "creates a file with upload_file alias" do
+    new_file_name = random_file_path
+
+    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.wont_include "predefinedAcl"
+      [200, {"Content-Type"=>"application/json"},
+       create_file_json(bucket.name, new_file_name)]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      bucket.upload_file tmpfile, new_file_name
+    end
+  end
+
+  it "creates a file with new_file alias" do
+    new_file_name = random_file_path
+
+    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.wont_include "predefinedAcl"
+      [200, {"Content-Type"=>"application/json"},
+       create_file_json(bucket.name, new_file_name)]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      bucket.new_file tmpfile, new_file_name
+    end
+  end
+
   it "creates a file with predefined acl" do
     new_file_name = random_file_path
 
