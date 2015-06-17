@@ -93,8 +93,8 @@ href="Project.html">Gcloud::Storage::Project</a>.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 </pre>
 
 <p>See <a href="../../Gcloud.html#method-c-storage">Gcloud.storage</a></p>
@@ -123,11 +123,15 @@ href="Project.html">Gcloud::Storage::Project</a>.</p>
           Public Instance Methods:
 
           
+            <a href="#method-i-bucket">bucket</a>
+          
             <a href="#method-i-buckets">buckets</a>
           
             <a href="#method-i-create_bucket">create_bucket</a>
           
             <a href="#method-i-find_bucket">find_bucket</a>
+          
+            <a href="#method-i-find_buckets">find_buckets</a>
           
             <a href="#method-i-project">project</a>
           
@@ -156,6 +160,70 @@ href="Project.html">Gcloud::Storage::Project</a>.</p>
       <h3 class="section-header">Public Instance Methods</h3>
 
       <div class="methods">
+        
+          <div id="bucket-method" class="method ">
+  <a name="method-i-bucket"></a>
+
+  
+    <h4>
+      <code>bucket(bucket_name)</code>
+      <span>
+        <a href="#method-i-bucket">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Retrieves bucket by name.</p>
+
+<h3 id="method-i-bucket-label-Parameters">Parameters<span><a href="#method-i-bucket-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>bucket_name</code>
+<dd>
+<p>Name of a bucket. (<code>String</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-bucket-label-Returns">Returns<span><a href="#method-i-bucket-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Gcloud::Datastore::Bucket or nil if bucket does not exist</p>
+
+<h3 id="method-i-bucket-label-Example">Example<span><a href="#method-i-bucket-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">name</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="bucket-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bucket</span> <span class="ruby-identifier">bucket_name</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_bucket</span> <span class="ruby-identifier">bucket_name</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-constant">Bucket</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;error&quot;</span>][<span class="ruby-string">&quot;code&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-value">404</span>
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+    <div class="aliases">
+      Also aliased as: <a href="Project.html#method-i-find_bucket">find_bucket</a>
+    </div>
+  
+
+  
+</div>
+
         
           <div id="buckets-method" class="method ">
   <a name="method-i-buckets"></a>
@@ -255,6 +323,10 @@ href="Bucket/List.html#attribute-i-token">Gcloud::Storage::Bucket::List#token</a
   </div>
 
   
+    <div class="aliases">
+      Also aliased as: <a href="Project.html#method-i-find_buckets">find_buckets</a>
+    </div>
+  
 
   
 </div>
@@ -319,7 +391,7 @@ option:</p>
 
     
       <!-- <div class="method-source-code" id="create_bucket-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 213</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 215</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_bucket</span> <span class="ruby-identifier">bucket_name</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>] = <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">predefined_rule_for</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>]
   <span class="ruby-identifier">default_acl</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:default_acl</span>]
@@ -343,7 +415,7 @@ option:</p>
 </div>
 
         
-          <div id="find_bucket-method" class="method ">
+          <div id="find_bucket-method" class="method alias">
   <a name="method-i-find_bucket"></a>
 
   
@@ -358,47 +430,49 @@ option:</p>
 
   <div class="method-description">
     
-      <p>Retrieves bucket by name.</p>
-
-<h3 id="method-i-find_bucket-label-Parameters">Parameters<span><a href="#method-i-find_bucket-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>bucket_name</code>
-<dd>
-<p>Name of a bucket. (<code>String</code>)</p>
-</dd></dl>
-
-<h3 id="method-i-find_bucket-label-Returns">Returns<span><a href="#method-i-find_bucket-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
-
-<p>Gcloud::Datastore::Bucket or nil if bucket does not exist</p>
-
-<h3 id="method-i-find_bucket-label-Example">Example<span><a href="#method-i-find_bucket-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
-
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
-
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
-
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
-<span class="ruby-identifier">puts</span> <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">name</span>
-</pre>
+      
     
 
-    
-      <!-- <div class="method-source-code" id="find_bucket-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 168</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_bucket</span> <span class="ruby-identifier">bucket_name</span>
-  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_bucket</span> <span class="ruby-identifier">bucket_name</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-constant">Bucket</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;error&quot;</span>][<span class="ruby-string">&quot;code&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-value">404</span>
-    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
     
   </div>
 
   
 
+  
+    <div class="aliases">
+      Alias for: <a href="Project.html#method-i-bucket">bucket</a>
+    </div>
+  
+</div>
+
+        
+          <div id="find_buckets-method" class="method alias">
+  <a name="method-i-find_buckets"></a>
+
+  
+    <h4>
+      <code>find_buckets(options = {})</code>
+      <span>
+        <a href="#method-i-find_buckets">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+  </div>
+
+  
+
+  
+    <div class="aliases">
+      Alias for: <a href="Project.html#method-i-buckets">buckets</a>
+    </div>
   
 </div>
 

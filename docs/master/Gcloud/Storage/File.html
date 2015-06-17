@@ -85,9 +85,9 @@ href="Bucket.html">Bucket</a>.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">download</span> <span class="ruby-node">&quot;/downloads/#{bucket.name}/#{file.name}&quot;</span>
 </pre>
 
@@ -208,8 +208,8 @@ email address:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
 
 <span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_reader</span> <span class="ruby-node">&quot;user-#{email}&quot;</span>
@@ -222,8 +222,8 @@ email address:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
 
 <span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;authors@example.net&quot;</span>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_reader</span> <span class="ruby-node">&quot;group-#{email}&quot;</span>
@@ -235,8 +235,8 @@ email address:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
 
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">public!</span>
 </pre>
@@ -379,9 +379,9 @@ copy the file to in the given bucket. (<code>String</code>)</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">copy</span> <span class="ruby-string">&quot;path/to/destination/file.ext&quot;</span>
 </pre>
 
@@ -391,9 +391,9 @@ copy the file to in the given bucket. (<code>String</code>)</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">copy</span> <span class="ruby-string">&quot;new-destination-bucket&quot;</span>,
           <span class="ruby-string">&quot;path/to/destination/file.ext&quot;</span>
 </pre>
@@ -487,9 +487,9 @@ base64.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">delete</span>
 </pre>
     
@@ -576,9 +576,9 @@ correct. Default is <code>:md5</code>. (<code>Symbol</code>)</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">download</span> <span class="ruby-string">&quot;path/to/downloaded/file.ext&quot;</span>
 </pre>
 
@@ -589,9 +589,9 @@ can be used by passing :crc32c.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">download</span> <span class="ruby-string">&quot;path/to/downloaded/file.ext&quot;</span>, <span class="ruby-identifier">verify</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">crc32c</span>
 </pre>
 
@@ -601,9 +601,9 @@ can be used by passing :crc32c.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">download</span> <span class="ruby-string">&quot;path/to/downloaded/file.ext&quot;</span>, <span class="ruby-identifier">verify</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">all</span>
 </pre>
 
@@ -613,9 +613,9 @@ can be used by passing :crc32c.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">download</span> <span class="ruby-string">&quot;path/to/downloaded/file.ext&quot;</span>, <span class="ruby-identifier">verify</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">none</span>
 </pre>
     
@@ -938,8 +938,8 @@ value in its request. (<code>String</code>)</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
 <span class="ruby-identifier">shared_url</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">signed_url</span>
 </pre>
 
@@ -949,8 +949,8 @@ value in its request. (<code>String</code>)</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
 <span class="ruby-identifier">shared_url</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">signed_url</span> <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;GET&quot;</span>,
                              <span class="ruby-identifier">expires</span><span class="ruby-operator">:</span> <span class="ruby-value">300</span> <span class="ruby-comment"># 5 minutes from now</span>
 </pre>

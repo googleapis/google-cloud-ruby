@@ -84,7 +84,7 @@
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">readers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">reader</span><span class="ruby-operator">|</span> <span class="ruby-identifier">puts</span> <span class="ruby-identifier">reader</span> }
 </pre>
@@ -231,7 +231,7 @@ email address:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_owner</span> <span class="ruby-node">&quot;user-#{email}&quot;</span>
@@ -244,7 +244,7 @@ email address:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;authors@example.net&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_owner</span> <span class="ruby-node">&quot;group-#{email}&quot;</span>
@@ -323,7 +323,7 @@ email address:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_reader</span> <span class="ruby-node">&quot;user-#{email}&quot;</span>
@@ -336,7 +336,7 @@ email address:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;authors@example.net&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_reader</span> <span class="ruby-node">&quot;group-#{email}&quot;</span>
@@ -415,7 +415,7 @@ email address:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_writer</span> <span class="ruby-node">&quot;user-#{email}&quot;</span>
@@ -428,7 +428,7 @@ email address:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;authors@example.net&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_writer</span> <span class="ruby-node">&quot;group-#{email}&quot;</span>
@@ -481,7 +481,7 @@ ACL rule to the bucket.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">auth!</span>
 </pre>
@@ -678,7 +678,7 @@ ACL rule to the bucket.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">delete</span> <span class="ruby-node">&quot;user-#{email}&quot;</span>
@@ -735,7 +735,7 @@ ACL rule to the bucket.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">owners</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">owner</span><span class="ruby-operator">|</span> <span class="ruby-identifier">puts</span> <span class="ruby-identifier">owner</span> }
 </pre>
@@ -782,7 +782,7 @@ the bucket.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">private!</span>
 </pre>
@@ -859,7 +859,7 @@ rule to the bucket.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">project_private!</span>
 </pre>
@@ -909,7 +909,7 @@ to the bucket.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">public!</span>
 </pre>
@@ -1052,7 +1052,7 @@ rule to the bucket.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">public_write!</span>
 </pre>
@@ -1105,7 +1105,7 @@ rule to the bucket.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">readers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">reader</span><span class="ruby-operator">|</span> <span class="ruby-identifier">puts</span> <span class="ruby-identifier">reader</span> }
 </pre>
@@ -1152,7 +1152,7 @@ bucket.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">refresh!</span>
 </pre>
@@ -1205,7 +1205,7 @@ bucket.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">writers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">writer</span><span class="ruby-operator">|</span> <span class="ruby-identifier">puts</span> <span class="ruby-identifier">writer</span> }
 </pre>

@@ -275,15 +275,15 @@ using this library.</p>
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-string">&quot;my-todo-project-id&quot;</span>,
                          <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;task-attachments&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;task-attachments&quot;</span>
 
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 
 <span class="ruby-comment"># Download the file to the local file system</span>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">download</span> <span class="ruby-node">&quot;/tasks/attachments/#{file.name}&quot;</span>
 
 <span class="ruby-comment"># Copy the file to a backup bucket</span>
-<span class="ruby-identifier">backup</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;task-attachment-backups&quot;</span>
+<span class="ruby-identifier">backup</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;task-attachment-backups&quot;</span>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">copy</span> <span class="ruby-identifier">backup</span>, <span class="ruby-identifier">file</span>.<span class="ruby-identifier">name</span>
 </pre>
 

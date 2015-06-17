@@ -85,8 +85,8 @@ href="Project.html">Project</a> and has many Files.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 </pre>
 
         </div>
@@ -123,9 +123,13 @@ href="Project.html">Project</a> and has many Files.</p>
           
             <a href="#method-i-delete">delete</a>
           
+            <a href="#method-i-file">file</a>
+          
             <a href="#method-i-files">files</a>
           
             <a href="#method-i-find_file">find_file</a>
+          
+            <a href="#method-i-find_files">find_files</a>
           
             <a href="#method-i-id">id</a>
           
@@ -134,6 +138,10 @@ href="Project.html">Project</a> and has many Files.</p>
             <a href="#method-i-location">location</a>
           
             <a href="#method-i-name">name</a>
+          
+            <a href="#method-i-new_file">new_file</a>
+          
+            <a href="#method-i-upload_file">upload_file</a>
           
             <a href="#method-i-url">url</a>
           
@@ -196,7 +204,7 @@ email address:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 
 <span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_reader</span> <span class="ruby-node">&quot;user-#{email}&quot;</span>
@@ -209,7 +217,7 @@ email address:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 
 <span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;authors@example.net&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">add_reader</span> <span class="ruby-node">&quot;group-#{email}&quot;</span>
@@ -221,7 +229,7 @@ email address:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">acl</span>.<span class="ruby-identifier">public!</span>
 </pre>
@@ -229,7 +237,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 377</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 381</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acl</span>
   <span class="ruby-ivar">@acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -328,7 +336,7 @@ href="../Storage.html">Storage</a>. (<code>String</code>)</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">create_file</span> <span class="ruby-string">&quot;path/to/local.file.ext&quot;</span>
 </pre>
@@ -339,7 +347,7 @@ href="../Storage.html">Storage</a>. (<code>String</code>)</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">create_file</span> <span class="ruby-string">&quot;path/to/local.file.ext&quot;</span>,
                    <span class="ruby-string">&quot;destination/path/file.ext&quot;</span>
@@ -354,7 +362,7 @@ nearest acceptible value.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">create_file</span> <span class="ruby-string">&quot;path/to/local.file.ext&quot;</span>,
                    <span class="ruby-string">&quot;destination/path/file.ext&quot;</span>,
@@ -364,7 +372,7 @@ nearest acceptible value.</p>
 
     
       <!-- <div class="method-source-code" id="create_file-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 315</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 317</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_file</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-comment"># TODO: Raise if file doesn&#39;t exist</span>
@@ -383,6 +391,10 @@ nearest acceptible value.</p>
     
   </div>
 
+  
+    <div class="aliases">
+      Also aliased as: <a href="Bucket.html#method-i-upload_file">upload_file</a>, <a href="Bucket.html#method-i-new_file">new_file</a>
+    </div>
   
 
   
@@ -456,7 +468,7 @@ guide </a> for more.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 
 <span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">default_acl</span>.<span class="ruby-identifier">add_reader</span> <span class="ruby-node">&quot;user-#{email}&quot;</span>
@@ -469,7 +481,7 @@ guide </a> for more.</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 
 <span class="ruby-identifier">email</span> = <span class="ruby-string">&quot;authors@example.net&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">default_acl</span>.<span class="ruby-identifier">add_reader</span> <span class="ruby-node">&quot;group-#{email}&quot;</span>
@@ -482,7 +494,7 @@ permissions:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">default_acl</span>.<span class="ruby-identifier">public!</span>
 </pre>
@@ -490,7 +502,7 @@ permissions:</p>
 
     
       <!-- <div class="method-source-code" id="default_acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 428</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 432</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_acl</span>
   <span class="ruby-ivar">@default_acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultAcl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -543,7 +555,7 @@ href="../Backoff.html#attribute-c-retries">Gcloud::Backoff.retries</a>.
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">delete</span>
 </pre>
 
@@ -555,7 +567,7 @@ or specify the wanted behavior in the call:</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">retries</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>
 </pre>
     
@@ -576,6 +588,72 @@ or specify the wanted behavior in the call:</p>
     
   </div>
 
+  
+
+  
+</div>
+
+        
+          <div id="file-method" class="method ">
+  <a name="method-i-file"></a>
+
+  
+    <h4>
+      <code>file(path, options = {})</code>
+      <span>
+        <a href="#method-i-file">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Retrieves a file matching the path.</p>
+
+<h3 id="method-i-file-label-Parameters">Parameters<span><a href="#method-i-file-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>path</code>
+<dd>
+<p>Name (path) of the file. (<code>String</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-file-label-Returns">Returns<span><a href="#method-i-file-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Gcloud::Datastore::File or nil if file does not exist</p>
+
+<h3 id="method-i-file-label-Example">Example<span><a href="#method-i-file-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">name</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="file-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 235</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">file</span> <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_file</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+    <div class="aliases">
+      Also aliased as: <a href="Bucket.html#method-i-find_file">find_file</a>
+    </div>
   
 
   
@@ -637,7 +715,7 @@ Versioning </a>. (<code>Boolean</code>)</p>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">files</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">files</span>
 <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">puts</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">name</span>
@@ -652,7 +730,7 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
 <span class="ruby-identifier">all_files</span> = []
 <span class="ruby-identifier">tmp_files</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">files</span>
@@ -685,12 +763,16 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
   </div>
 
   
+    <div class="aliases">
+      Also aliased as: <a href="Bucket.html#method-i-find_files">find_files</a>
+    </div>
+  
 
   
 </div>
 
         
-          <div id="find_file-method" class="method ">
+          <div id="find_file-method" class="method alias">
   <a name="method-i-find_file"></a>
 
   
@@ -705,49 +787,49 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
 
   <div class="method-description">
     
-      <p>Retrieves a file matching the path.</p>
-
-<h3 id="method-i-find_file-label-Parameters">Parameters<span><a href="#method-i-find_file-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>path</code>
-<dd>
-<p>Name (path) of the file. (<code>String</code>)</p>
-</dd></dl>
-
-<h3 id="method-i-find_file-label-Returns">Returns<span><a href="#method-i-find_file-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
-
-<p>Gcloud::Datastore::File or nil if file does not exist</p>
-
-<h3 id="method-i-find_file-label-Example">Example<span><a href="#method-i-find_file-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
-
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
-
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
-
-<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
-
-<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">find_file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
-<span class="ruby-identifier">puts</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">name</span>
-</pre>
+      
     
 
-    
-      <!-- <div class="method-source-code" id="find_file-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 234</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_file</span> <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-identifier">ensure_connection!</span>
-  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_file</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-constant">File</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
     
   </div>
 
   
 
+  
+    <div class="aliases">
+      Alias for: <a href="Bucket.html#method-i-file">file</a>
+    </div>
+  
+</div>
+
+        
+          <div id="find_files-method" class="method alias">
+  <a name="method-i-find_files"></a>
+
+  
+    <h4>
+      <code>find_files(options = {})</code>
+      <span>
+        <a href="#method-i-find_files">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+  </div>
+
+  
+
+  
+    <div class="aliases">
+      Alias for: <a href="Bucket.html#method-i-files">files</a>
+    </div>
   
 </div>
 
@@ -889,6 +971,68 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
   
 
+  
+</div>
+
+        
+          <div id="new_file-method" class="method alias">
+  <a name="method-i-new_file"></a>
+
+  
+    <h4>
+      <code>new_file(file, path = nil, options = {})</code>
+      <span>
+        <a href="#method-i-new_file">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+  </div>
+
+  
+
+  
+    <div class="aliases">
+      Alias for: <a href="Bucket.html#method-i-create_file">create_file</a>
+    </div>
+  
+</div>
+
+        
+          <div id="upload_file-method" class="method alias">
+  <a name="method-i-upload_file"></a>
+
+  
+    <h4>
+      <code>upload_file(file, path = nil, options = {})</code>
+      <span>
+        <a href="#method-i-upload_file">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+  </div>
+
+  
+
+  
+    <div class="aliases">
+      Alias for: <a href="Bucket.html#method-i-create_file">create_file</a>
+    </div>
   
 </div>
 
