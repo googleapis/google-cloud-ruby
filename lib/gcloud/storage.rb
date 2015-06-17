@@ -78,9 +78,6 @@ module Gcloud
   #   bucket = storage.find_bucket "my-bucket"
   #   file = bucket.find_file "path/to/my-file.ext"
   #
-  # You can learn more about various options for connection on the
-  # {Authentication Guide}[link:AUTHENTICATION.md].
-  #
   # To learn more about Datastore, read the
   # {Google Cloud Storage Overview
   # }[https://cloud.google.com/storage/docs/overview].

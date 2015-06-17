@@ -84,9 +84,6 @@ module Gcloud
   #   entity["completed"] = true
   #   dataset.save entity
   #
-  # You can learn more about various options for connection on the
-  # {Authentication Guide}[link:AUTHENTICATION.md].
-  #
   # To learn more about Datastore, read the
   # {Google Cloud Datastore Concepts Overview
   # }[https://cloud.google.com/datastore/docs/concepts/overview].
