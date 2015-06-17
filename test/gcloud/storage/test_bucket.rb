@@ -43,6 +43,34 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     end
   end
 
+  it "creates a file with upload_file alias" do
+    new_file_name = random_file_path
+
+    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.wont_include "predefinedAcl"
+      [200, {"Content-Type"=>"application/json"},
+       create_file_json(bucket.name, new_file_name)]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      bucket.upload_file tmpfile, new_file_name
+    end
+  end
+
+  it "creates a file with new_file alias" do
+    new_file_name = random_file_path
+
+    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.wont_include "predefinedAcl"
+      [200, {"Content-Type"=>"application/json"},
+       create_file_json(bucket.name, new_file_name)]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      bucket.new_file tmpfile, new_file_name
+    end
+  end
+
   it "creates a file with predefined acl" do
     new_file_name = random_file_path
 
@@ -120,6 +148,17 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     end
 
     files = bucket.files
+    files.size.must_equal num_files
+  end
+
+  it "lists files with find_files alias" do
+    num_files = 3
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       list_files_json(num_files)]
+    end
+
+    files = bucket.find_files
     files.size.must_equal num_files
   end
 
@@ -231,7 +270,20 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
       URI(env.url).query.must_be :nil?
       [200, {"Content-Type"=>"application/json"},
-       create_file_json(bucket.name, file_name)]
+       find_file_json(bucket.name, file_name)]
+    end
+
+    file = bucket.file file_name
+    file.name.must_equal file_name
+  end
+
+  it "finds a file with find_file alias" do
+    file_name = "file.ext"
+
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
+      URI(env.url).query.must_be :nil?
+      [200, {"Content-Type"=>"application/json"},
+       find_file_json(bucket.name, file_name)]
     end
 
     file = bucket.find_file file_name
@@ -245,10 +297,10 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
       URI(env.url).query.must_equal "generation=#{generation}"
       [200, {"Content-Type"=>"application/json"},
-       create_file_json(bucket.name, file_name)]
+       find_file_json(bucket.name, file_name)]
     end
 
-    file = bucket.find_file file_name, generation: generation
+    file = bucket.file file_name, generation: generation
     file.name.must_equal file_name
   end
 

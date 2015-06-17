@@ -28,8 +28,8 @@ module Gcloud
     #
     #   storage = Gcloud.storage
     #
-    #   bucket = storage.find_bucket "my-bucket"
-    #   file = bucket.find_file "path/to/my-file.ext"
+    #   bucket = storage.bucket "my-bucket"
+    #   file = bucket.file "path/to/my-file.ext"
     #
     class Bucket
       ##
@@ -111,7 +111,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #   bucket.delete
       #
       # The API call to delete the bucket may be retried under certain
@@ -122,7 +122,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #   bucket.delete retries: 5
       #
       def delete options = {}
@@ -171,7 +171,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #   files = bucket.files
       #   files.each do |file|
       #     puts file.name
@@ -184,7 +184,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   all_files = []
       #   tmp_files = bucket.files
@@ -207,6 +207,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_files, :files
 
       ##
       # Retrieves a file matching the path.
@@ -226,12 +227,12 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
-      #   file = bucket.find_file "path/to/my-file.ext"
+      #   file = bucket.file "path/to/my-file.ext"
       #   puts file.name
       #
-      def find_file path, options = {}
+      def file path, options = {}
         ensure_connection!
         resp = connection.get_file name, path, options
         if resp.success?
@@ -240,6 +241,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_file, :file
 
       ##
       # Create a new File object by providing a path to a local file to upload
@@ -281,7 +283,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   bucket.create_file "path/to/local.file.ext"
       #
@@ -291,7 +293,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   bucket.create_file "path/to/local.file.ext",
       #                      "destination/path/file.ext"
@@ -306,7 +308,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   bucket.create_file "path/to/local.file.ext",
       #                      "destination/path/file.ext",
@@ -326,6 +328,8 @@ module Gcloud
           upload_multipart file, path, options
         end
       end
+      alias_method :upload_file, :create_file
+      alias_method :new_file, :create_file
 
       ##
       # The Bucket::Acl instance used to control access to the bucket.
@@ -346,7 +350,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #
       #   email = "heidi@example.net"
       #   bucket.acl.add_reader "user-#{email}"
@@ -358,7 +362,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #
       #   email = "authors@example.net"
       #   bucket.acl.add_reader "group-#{email}"
@@ -370,7 +374,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #
       #   bucket.acl.public!
       #
@@ -398,7 +402,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #
       #   email = "heidi@example.net"
       #   bucket.default_acl.add_reader "user-#{email}"
@@ -410,7 +414,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #
       #   email = "authors@example.net"
       #   bucket.default_acl.add_reader "group-#{email}"
@@ -422,7 +426,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #
       #   bucket.default_acl.public!
       def default_acl

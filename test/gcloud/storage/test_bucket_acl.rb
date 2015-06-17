@@ -34,7 +34,7 @@ describe Gcloud::Storage::Bucket, :acl, :mock_storage do
        random_bucket_acl_hash(bucket_name).to_json]
     end
 
-    bucket = storage.find_bucket bucket_name
+    bucket = storage.bucket bucket_name
     bucket.name.must_equal bucket_name
     bucket.acl.owners.wont_be  :empty?
     bucket.acl.writers.must_be :empty?
@@ -54,7 +54,7 @@ describe Gcloud::Storage::Bucket, :acl, :mock_storage do
        random_bucket_acl_hash(bucket_name).to_json]
     end
 
-    bucket = storage.find_bucket bucket_name
+    bucket = storage.bucket bucket_name
     bucket.name.must_equal bucket_name
     bucket.acl.owners.wont_be  :empty?
     bucket.acl.writers.must_be :empty?
@@ -97,7 +97,7 @@ describe Gcloud::Storage::Bucket, :acl, :mock_storage do
        random_bucket_acl_hash(bucket_name).to_json]
     end
 
-    bucket = storage.find_bucket bucket_name
+    bucket = storage.bucket bucket_name
     bucket.name.must_equal bucket_name
     bucket.acl.owners.wont_be  :empty?
     bucket.acl.writers.must_be :empty?
