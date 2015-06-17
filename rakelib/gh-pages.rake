@@ -16,6 +16,7 @@ gem "rdoc"
 require "rdoc/task"
 require "fileutils"
 require "pathname"
+require "yaml"
 
 namespace :pages do
   desc "Updates the documentation on the gh-pages branch"
@@ -52,7 +53,7 @@ namespace :pages do
     if ENV["GH_OAUTH_TOKEN"]
       git_repo = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
     end
-    puts `git clone --quiet --branch=gh-pages #{git_repo} #{pages} > /dev/null`
+    puts `git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{pages} > /dev/null`
     # Change to gh-pages
     Dir.chdir pages do
       # sync the docs
@@ -66,6 +67,70 @@ namespace :pages do
         puts `git push #{git_repo} gh-pages:gh-pages`
       else
         puts `git commit -m "Update documentation for #{commit_hash}"`
+        puts `git push origin gh-pages`
+      end
+    end
+  end
+
+  desc "Updates the documentation for a tag on the gh-pages branch"
+  task :tag, :tag do |t, args|
+    tag = args[:tag]
+    if tag.nil?
+      fail "You must provide a tag. e.g. rake pages:tag[v1.0.0]"
+    end
+    # Verify the tag exists
+    tag_check = `git show-ref --tags | grep #{tag}`.chomp
+    if tag_check.empty?
+      fail "Cannot find the tag #{tag}."
+    end
+
+    tmp   = Pathname.new(Dir.home) + "tmp"
+    repo  = tmp + "docs"
+    docs  = tmp + "docs"
+    pages = tmp + "pages"
+    FileUtils.remove_dir repo if Dir.exists? repo
+    FileUtils.remove_dir pages if Dir.exists? pages
+    FileUtils.mkdir_p repo
+    FileUtils.mkdir_p pages
+
+    git_repo = "git@github.com:GoogleCloudPlatform/gcloud-ruby.git"
+    if ENV["GH_OAUTH_TOKEN"]
+      git_repo = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
+    end
+
+    # checkout the tag repo
+    puts `git clone --quiet --branch=#{tag} --single-branch #{git_repo} #{repo} > /dev/null`
+    # build the docs in the tag repo
+    Dir.chdir repo do
+      # create the docs
+      puts `bundle install`
+      puts `bundle exec rake pages:rdoc`
+    end
+
+    # checkout the gh-pages branch
+    puts `git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{pages} > /dev/null`
+    # Change to gh-pages
+    Dir.chdir pages do
+      # make the release dir if needed
+      FileUtils.mkdir_p "docs/#{tag}/"
+      # sync the docs
+      puts `rsync -r --delete #{repo}/html/ docs/#{tag}/`
+      # Update releases yaml
+      releases = YAML.load_file "_data/releases.yaml"
+      unless releases.select { |r| r["version"] == tag }
+        releases << { "version" => tag, "date" => Date.today.to_s }
+      end
+      releases.sort! { |x,y| Gem::Version.new(y["version"].sub(/^v/, "")) <=> Gem::Version.new(x["version"].sub(/^v/, "")) }
+      File.write "_data/releases.yaml", releases.to_yaml
+      # commit changes
+      puts `git add -A .`
+      if ENV["GH_OAUTH_TOKEN"]
+        puts `git config --global user.email "travis@travis-ci.org"`
+        puts `git config --global user.name "travis-ci"`
+        puts `git commit -m "Update documentation for #{tag}"`
+        puts `git push #{git_repo} gh-pages:gh-pages`
+      else
+        puts `git commit -m "Update documentation for #{tag}"`
         puts `git push origin gh-pages`
       end
     end
