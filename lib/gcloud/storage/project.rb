@@ -143,6 +143,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_buckets, :buckets
 
       ##
       # Retrieves bucket by name.

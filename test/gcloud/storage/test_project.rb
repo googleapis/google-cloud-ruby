@@ -101,6 +101,17 @@ describe Gcloud::Storage::Project, :mock_storage do
     buckets.size.must_equal num_buckets
   end
 
+  it "lists buckets with find_buckets alias" do
+    num_buckets = 3
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(num_buckets)]
+    end
+
+    buckets = storage.find_buckets
+    buckets.size.must_equal num_buckets
+  end
+
   it "paginates buckets" do
     mock_connection.get "/storage/v1/b?project=#{project}" do |env|
       env.params.wont_include "pageToken"
