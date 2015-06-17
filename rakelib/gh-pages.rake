@@ -38,8 +38,8 @@ namespace :pages do
     commit_hash = `git rev-parse --short HEAD`.chomp
 
     tmp   = Pathname.new(Dir.home) + "tmp"
-    docs  = tmp + "docs"
-    pages = tmp + "pages"
+    docs  = tmp + "master-docs"
+    pages = tmp + "master-pages"
     FileUtils.remove_dir docs if Dir.exists? docs
     FileUtils.remove_dir pages if Dir.exists? pages
     FileUtils.mkdir_p docs
@@ -85,8 +85,8 @@ namespace :pages do
     end
 
     tmp   = Pathname.new(Dir.home) + "tmp"
-    repo  = tmp + "tag"
-    pages = tmp + "pages"
+    repo  = tmp + "#{tag}-repo"
+    pages = tmp + "#{tag}-pages"
     FileUtils.remove_dir repo if Dir.exists? repo
     FileUtils.remove_dir pages if Dir.exists? pages
     FileUtils.mkdir_p repo
@@ -133,6 +133,21 @@ namespace :pages do
         puts `git push origin gh-pages`
       end
     end
+  end
+
+  desc "Updates the documentation for all tags and master"
+  task :rebuild do
+    # Get a list of all tags
+    tags = `git show-ref --tags`.chomp.split("\n").map do |line|
+      line.split(" ").last.split("/").last
+    end
+    tags.each do |tag|
+      puts "Rebuilding #{tag}"
+      Rake::Task["pages:tag"].reenable
+      Rake::Task["pages:tag"].invoke tag
+    end
+    puts "Rebuilding master"
+    Rake::Task["pages:master"].invoke
   end
 
   RDoc::Task.new do |rdoc|
