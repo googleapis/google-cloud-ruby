@@ -74,44 +74,13 @@
 
       <section class="content">
         
-<h1 id="label-gcloud">gcloud<span><a href="#label-gcloud">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="label-Getting+started">Getting started<span><a href="#label-Getting+started">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>Idiomatic Ruby client for <a href="https://cloud.google.com/">Google Cloud
-Platform</a> services.</p>
-
-<p><a href="https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby/"><img
-src="https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby.svg"></a> <a
-href="https://coveralls.io/r/GoogleCloudPlatform/gcloud-ruby?branch=master"><img
-src="https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-ruby.svg"></a>
-<a href="http://badge.fury.io/rb/gcloud"><img
-src="https://badge.fury.io/rb/gcloud.svg"></a></p>
-<ul><li>
-<p><a href="http://googlecloudplatform.github.io/gcloud-ruby/">Homepage</a></p>
-</li><li>
-<p><a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/">API
-Documentation</a></p>
-</li></ul>
-
-<h2 id="label-Ruby+API+Client+library+for+Google+Cloud">Ruby API Client library for Google Cloud<span><a href="#label-Ruby+API+Client+library+for+Google+Cloud">&para;</a> <a href="#top">&uarr;</a></span></h2>
-
-<p>This client supports the following Google Cloud Platform services:</p>
-<ul><li>
-<p><a href="https://cloud.google.com/datastore/">Google Cloud Datastore</a>
-(<a href="https://cloud.google.com/datastore/docs">docs</a>)</p>
-</li><li>
-<p><a href="https://cloud.google.com/storage/">Google Cloud Storage</a> (<a
-href="https://cloud.google.com/storage/docs/json_api/">docs</a>)</p>
-</li></ul>
-
-<p>If you need support for other Google APIs, check out the <a
-href="https://github.com/google/google-api-ruby-client">Google API Ruby
-Client library</a>.</p>
-
-<h2 id="label-Quick+Start">Quick Start<span><a href="#label-Quick+Start">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<p>The <code>gcloud</code> library is installable through rubygems:</p>
 
 <pre>$ gem install gcloud</pre>
 
-<h3 id="label-Authentication">Authentication<span><a href="#label-Authentication">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<h1 id="label-Authentication">Authentication<span><a href="#label-Authentication">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p><a href="Gcloud.html">Gcloud</a> uses Service Account credentials to
 connect to Google Cloud services. When running on Compute Engine the
@@ -121,12 +90,136 @@ the path to the JSON file, or the JSON itself, in environment variables.
 Additionally, Cloud SDK credentials can also be discovered automatically,
 but this is only recommended during development.</p>
 
-<p>Instructions and configuration options are covered in the <a
-href="AUTHENTICATION.md">Authentication guide</a>. The examples in Quick
-Start will demonstrate providing the <strong>Project ID</strong> and
-<strong>Credentials JSON file path</strong> in code.</p>
+<h2 id="label-Creating+a+Service+Account">Creating a Service Account<span><a href="#label-Creating+a+Service+Account">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<h3 id="label-Datastore">Datastore<span><a href="#label-Datastore">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<p><a href="Gcloud.html">Gcloud</a> aims to make authentication as simple as
+possible. Google Cloud requires a <strong>Project ID</strong> and
+<strong>Service Account Credentials</strong> to connect to the APIs. To
+create a service account:</p>
+<ol><li>
+<p>Visit the <a href="https://console.developers.google.com/project">Google
+Developers Console</a>.</p>
+</li><li>
+<p>Create a new project or click on an existing project.</p>
+</li><li>
+<p>Navigate to <strong>APIs &amp; auth</strong> &gt; <strong>APIs
+section</strong> and turn on the following APIs (you may need to enable
+billing in order to use these services):</p>
+</li><li>
+<p>Google Cloud Datastore API</p>
+</li><li>
+<p>Google Cloud Storage</p>
+</li><li>
+<p>Google Cloud Storage JSON API</p>
+</li><li>
+<p>Navigate to <strong>APIs &amp; auth</strong> &gt;
+<strong>Credentials</strong> and then:</p>
+</li><li>
+<p>If you want to use a new service account, click on <strong>Create new
+Client ID</strong> and select <strong>Service account</strong>. After the
+account is created, you will be prompted to download the JSON key file that
+the library uses to authorize your requests.</p>
+</li><li>
+<p>If you want to generate a new key for an existing service account, click on
+<strong>Generate new JSON key</strong> and download the JSON key file.</p>
+</li></ol>
+
+<p>You will use the <strong>Project ID</strong> and <strong>JSON file</strong>
+to connect to services with gcloud.</p>
+
+<h2 id="label-Project+and+Credential+Lookup">Project and Credential Lookup<span><a href="#label-Project+and+Credential+Lookup">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p><a href="Gcloud.html">Gcloud</a> aims to make authentication as simple as
+possible, and provides several mechanisms to configure your system without
+providing <strong>Project ID</strong> and <strong>Service Account
+Credentials</strong> directly in code.</p>
+
+<p><strong>Project ID</strong> is discovered in the following order:</p>
+<ol><li>
+<p>Specify project ID in code</p>
+</li><li>
+<p>Discover project ID in environment variables</p>
+</li><li>
+<p>Discover GCE project ID</p>
+</li></ol>
+
+<p><strong>Credentials</strong> are discovered in the following order:</p>
+<ol><li>
+<p>Specify credentials in code</p>
+</li><li>
+<p>Discover credentials path in environment variables</p>
+</li><li>
+<p>Discover credentials JSON in environment variables</p>
+</li><li>
+<p>Discover credentials file in the Cloud SDK&#39;s path</p>
+</li><li>
+<p>Discover GCE credentials</p>
+</li></ol>
+
+<h3 id="label-Compute+Engine">Compute Engine<span><a href="#label-Compute+Engine">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>While running on Google Compute Engine no extra work is needed. The
+<strong>Project ID</strong> and <strong>Credentials</strong> and are
+discovered automatically. Code should be written as if already
+authenticated.</p>
+
+<h3 id="label-Environment+Variables">Environment Variables<span><a href="#label-Environment+Variables">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>The <strong>Project ID</strong> and <strong>Credentials JSON</strong> can
+be placed in environment variables instead of declaring them directly in
+code. Each service has its own environment variable, allowing for different
+service accounts to be used for different services. The path to the
+<strong>Credentials JSON</strong> file can be stored in the environment
+variable, or the <strong>Credentials JSON</strong> itself can be stored for
+environments such as Docker containers where writing files is difficult or
+not encouraged.</p>
+
+<p>Here are the environment variables that Datastore checks for project ID:</p>
+<ol><li>
+<p>DATASTORE_PROJECT</p>
+</li><li>
+<p>GOOGLE_CLOUD_PROJECT</p>
+</li></ol>
+
+<p>Here are the environment variables that Datastore checks for credentials:</p>
+<ol><li>
+<p>DATASTORE_KEYFILE - Path to JSON file</p>
+</li><li>
+<p>GOOGLE_CLOUD_KEYFILE - Path to JSON file</p>
+</li><li>
+<p>DATASTORE_KEYFILE_JSON - JSON contents</p>
+</li><li>
+<p>GOOGLE_CLOUD_KEYFILE_JSON - JSON contents</p>
+</li></ol>
+
+<h3 id="label-Cloud+SDK">Cloud SDK<span><a href="#label-Cloud+SDK">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>This option allows for an easy way to authenticate during development. If
+credentials are not provided in code or in environment variables, then
+Cloud SDK credentials are discovered.</p>
+
+<p>To configure your system for this, simply:</p>
+<ol><li>
+<p><a href="https://cloud.google.com/sdk">Download and install the Cloud
+SDK</a></p>
+</li><li>
+<p>Authenticate using OAuth2 <code>$ gcloud auth login</code></p>
+</li><li>
+<p>Write code as if already authenticated.</p>
+</li></ol>
+
+<p><strong>NOTE:</strong> This is <em>not</em> recommended for running in
+production. The Cloud SDK should only be used during development.</p>
+
+<h2 id="label-Troubleshooting">Troubleshooting<span><a href="#label-Troubleshooting">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>If you&#39;re having trouble authenticating open a <a
+href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/new?title=Authentication+question">Github
+Issue</a> to get help. Also consider searching or asking <a
+href="http://stackoverflow.com/questions/tagged/gcloud-ruby">questions</a>
+on <a href="http://stackoverflow.com">StackOverflow</a>.</p>
+
+<h1 id="label-Datastore">Datastore<span><a href="#label-Datastore">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p><a href="https://cloud.google.com/datastore/">Google Cloud Datastore</a>
 (<a href="https://cloud.google.com/datastore/docs">docs</a>) is a fully
@@ -164,7 +257,7 @@ Datastore using this library.</p>
 <span class="ruby-identifier">completed_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
 
-<h3 id="label-Storage">Storage<span><a href="#label-Storage">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<h1 id="label-Storage">Storage<span><a href="#label-Storage">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p><a href="https://cloud.google.com/storage/">Google Cloud Storage</a> (<a
 href="https://cloud.google.com/storage/docs/json_api/">docs</a>) allows you
@@ -193,38 +286,6 @@ using this library.</p>
 <span class="ruby-identifier">backup</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">find_bucket</span> <span class="ruby-string">&quot;task-attachment-backups&quot;</span>
 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">copy</span> <span class="ruby-identifier">backup</span>, <span class="ruby-identifier">file</span>.<span class="ruby-identifier">name</span>
 </pre>
-
-<h2 id="label-Supported+Ruby+Versions">Supported Ruby Versions<span><a href="#label-Supported+Ruby+Versions">&para;</a> <a href="#top">&uarr;</a></span></h2>
-
-<p>gcloud is supported on Ruby 1.9.3+.</p>
-
-<h2 id="label-Versioning">Versioning<span><a href="#label-Versioning">&para;</a> <a href="#top">&uarr;</a></span></h2>
-
-<p>This library follows <a href="http://semver.org/">Semantic Versioning</a>.</p>
-
-<p>It is currently in major version zero (0.y.z), which means that anything
-may change at any time and the public API should not be considered stable.</p>
-
-<h2 id="label-Contributing">Contributing<span><a href="#label-Contributing">&para;</a> <a href="#top">&uarr;</a></span></h2>
-
-<p>Contributions to this library are always welcome and highly encouraged.</p>
-
-<p>See <a href="CONTRIBUTING.md">CONTRIBUTING</a> for more information on how
-to get started.</p>
-
-<h2 id="label-License">License<span><a href="#label-License">&para;</a> <a href="#top">&uarr;</a></span></h2>
-
-<p>This library is licensed under Apache 2.0. Full license text is available
-in <a href="LICENSE">LICENSE</a>.</p>
-
-<h2 id="label-Support">Support<span><a href="#label-Support">&para;</a> <a href="#top">&uarr;</a></span></h2>
-
-<p>Please <a
-href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues">report
-bugs at the project on Github</a>. Don&#39;t hesitate to <a
-href="http://stackoverflow.com/questions/tagged/gcloud-ruby">ask
-questions</a> about the client or APIs on <a
-href="http://stackoverflow.com">StackOverflow</a>.</p>
 
       </section>
 
@@ -326,14 +387,6 @@ href="http://stackoverflow.com">StackOverflow</a>.</p>
     </li>
 
   <li class="toctree-l1"><a class="reference internal" href="reference.html">API Reference</a></li>
-
-  <li class="toctree-l1"><a class="reference internal" href="AUTHENTICATION.md">Authentication Guide</a></li>
-
-  <li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.md">Contribution Guide</a></li>
-
-  <li class="toctree-l1"><a class="reference internal" href="CHANGELOG.md">Release History</a></li>
-
-  <li class="toctree-l1"><a class="reference internal" href="LICENSE">LICENSE</a></li>
 
 </ul>
 
