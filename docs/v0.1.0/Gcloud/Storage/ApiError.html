@@ -137,12 +137,15 @@
     <div class="methods">
       
         <div id="code-attribute-method" class="method">
-          <a name="code"></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">code</span><span
-              class="attribute-access-type">[R]</span>
-          </div>
+          <a name="attribute-i-code"></a>
+          <h4>
+            <code>code</code>
+            <span class="attribute-access-type">[R]</span>
+            <span>
+              <a href="#attribute-i-code">&para;</a>
+              <a href="#top">&uarr;</a>
+            </span>
+          </h4>
 
           <div class="method-description">
           
@@ -152,12 +155,15 @@
         </div>
       
         <div id="errors-attribute-method" class="method">
-          <a name="errors"></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">errors</span><span
-              class="attribute-access-type">[R]</span>
-          </div>
+          <a name="attribute-i-errors"></a>
+          <h4>
+            <code>errors</code>
+            <span class="attribute-access-type">[R]</span>
+            <span>
+              <a href="#attribute-i-errors">&para;</a>
+              <a href="#top">&uarr;</a>
+            </span>
+          </h4>
 
           <div class="method-description">
           
@@ -181,7 +187,13 @@
   <a name="method-c-new"></a>
 
   
-    <h4><code>new(message, code, errors)</code></h4>
+    <h4>
+      <code>new(message, code, errors)</code>
+      <span>
+        <a href="#method-c-new">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
   
 
   <div class="method-description">
@@ -194,7 +206,8 @@
 <pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/errors.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">message</span>, <span class="ruby-identifier">code</span>, <span class="ruby-identifier">errors</span>
   <span class="ruby-keyword">super</span> <span class="ruby-identifier">message</span>
-  <span class="ruby-ivar">@code</span>, <span class="ruby-ivar">@errors</span> = <span class="ruby-identifier">code</span>, <span class="ruby-identifier">errors</span>
+  <span class="ruby-ivar">@code</span> = <span class="ruby-identifier">code</span>
+  <span class="ruby-ivar">@errors</span> = <span class="ruby-identifier">errors</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -217,7 +230,13 @@
       </section>
 
       <nav class="side-nav">
-        <ul>
+        <div class="side-nav--meta">
+  <div id="doc-build-date">
+    Docs built on Jun 16, 2015.
+  </div>
+</div>
+
+<ul>
   <li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
 </ul>
 
