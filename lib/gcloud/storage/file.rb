@@ -28,7 +28,7 @@ module Gcloud
     #
     #   storage = Gcloud.storage
     #
-    #   bucket = storage.find_bucket "my-bucket"
+    #   bucket = storage.bucket "my-bucket"
     #
     #   file = bucket.find_file "path/to/my-file.ext"
     #   file.download "/downloads/#{bucket.name}/#{file.name}"
@@ -159,7 +159,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   file = bucket.find_file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext"
@@ -171,7 +171,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   file = bucket.find_file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext", verify: :crc32c
@@ -182,7 +182,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   file = bucket.find_file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext", verify: :all
@@ -193,7 +193,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   file = bucket.find_file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext", verify: :none
@@ -254,7 +254,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   file = bucket.find_file "path/to/my-file.ext"
       #   file.copy "path/to/destination/file.ext"
@@ -265,7 +265,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   file = bucket.find_file "path/to/my-file.ext"
       #   file.copy "new-destination-bucket",
@@ -298,7 +298,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   file = bucket.find_file "path/to/my-file.ext"
       #   file.delete
@@ -346,7 +346,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #   file = bucket.find_file "avatars/heidi/400x400.png"
       #   shared_url = file.signed_url
       #
@@ -356,7 +356,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #   file = bucket.find_file "avatars/heidi/400x400.png"
       #   shared_url = file.signed_url method: "GET",
       #                                expires: 300 # 5 minutes from now
@@ -386,7 +386,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #   file = bucket.find_file "avatars/heidi/400x400.png"
       #
       #   email = "heidi@example.net"
@@ -399,7 +399,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #   file = bucket.find_file "avatars/heidi/400x400.png"
       #
       #   email = "authors@example.net"
@@ -412,7 +412,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #   file = bucket.find_file "avatars/heidi/400x400.png"
       #
       #   file.acl.public!

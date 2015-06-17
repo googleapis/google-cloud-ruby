@@ -37,7 +37,7 @@ module Gcloud
     #
     #   storage = Gcloud.storage
     #
-    #   bucket = storage.find_bucket "my-bucket"
+    #   bucket = storage.bucket "my-bucket"
     #   file = bucket.find_file "path/to/my-file.ext"
     #
     # See Gcloud.storage
@@ -162,10 +162,10 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #   puts bucket.name
       #
-      def find_bucket bucket_name
+      def bucket bucket_name
         resp = connection.get_bucket bucket_name
         if resp.success?
           Bucket.from_gapi resp.data, connection
@@ -174,6 +174,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_bucket, :bucket
 
       ##
       # Creates a new bucket.

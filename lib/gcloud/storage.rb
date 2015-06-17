@@ -43,7 +43,7 @@ module Gcloud
   #   storage = Gcloud.storage "my-todo-project",
   #                            "/path/to/keyfile.json"
   #
-  #   bucket = storage.find_bucket "my-bucket"
+  #   bucket = storage.bucket "my-bucket"
   #   file = bucket.find_file "path/to/my-file.ext"
   #
   def self.storage project = nil, keyfile = nil
@@ -75,7 +75,7 @@ module Gcloud
   #   storage = Gcloud.storage "my-todo-project",
   #                            "/path/to/keyfile.json"
   #
-  #   bucket = storage.find_bucket "my-bucket"
+  #   bucket = storage.bucket "my-bucket"
   #   file = bucket.find_file "path/to/my-file.ext"
   #
   # To learn more about Datastore, read the
@@ -87,13 +87,13 @@ module Gcloud
   # A Bucket is the container for your data. There is no limit on the number of
   # buckets that you can create in a project. You can use buckets to organize
   # and control access to your data. Each bucket has a unique name, which is how
-  # they are retrieved: (See Project#find_bucket)
+  # they are retrieved: (See Project#bucket)
   #
   #   require "gcloud/storage"
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #
   # You can also retrieve all buckets on a project: (See Project#buckets)
   #
@@ -147,7 +147,7 @@ module Gcloud
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #   file = bucket.find_file "avatars/heidi/400x400.png"
   #
   # You can also retrieve all files in a bucket: (See Bucket#files)
@@ -156,7 +156,7 @@ module Gcloud
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #   all_files = bucket.files
   #
   # Or you can retrieve all files in a specified path:
@@ -165,7 +165,7 @@ module Gcloud
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #   avatar_files = bucket.files prefix: "avatars/"
   #
   # If you have a significant number of files, you may need to paginate through
@@ -175,7 +175,7 @@ module Gcloud
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #
   #   all_files = []
   #   tmp_files = bucket.files
@@ -199,7 +199,7 @@ module Gcloud
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #   bucket.create_file "/var/todo-app/avatars/heidi/400x400.png",
   #                      "avatars/heidi/400x400.png"
   #
@@ -211,7 +211,7 @@ module Gcloud
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #   file = bucket.find_file "avatars/heidi/400x400.png"
   #   file.download "/var/todo-app/avatars/heidi/400x400.png"
   #
@@ -225,7 +225,7 @@ module Gcloud
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #   file = bucket.find_file "avatars/heidi/400x400.png"
   #   shared_url = file.signed_url method: "GET",
   #                                expires: 300 # 5 minutes from now
@@ -246,7 +246,7 @@ module Gcloud
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #
   #   email = "heidi@example.net"
   #   bucket.acl.add_reader "user-#{email}"
@@ -258,7 +258,7 @@ module Gcloud
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #
   #   email = "authors@example.net"
   #   bucket.acl.add_reader "group-#{email}"
@@ -269,7 +269,7 @@ module Gcloud
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #
   #   bucket.acl.public!
   #
@@ -286,7 +286,7 @@ module Gcloud
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #   file = bucket.find_file "avatars/heidi/400x400.png"
   #
   #   email = "heidi@example.net"
@@ -299,7 +299,7 @@ module Gcloud
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #   file = bucket.find_file "avatars/heidi/400x400.png"
   #
   #   email = "authors@example.net"
@@ -311,7 +311,7 @@ module Gcloud
   #
   #   storage = Gcloud.storage
   #
-  #   bucket = storage.find_bucket "my-todo-app"
+  #   bucket = storage.bucket "my-todo-app"
   #   file = bucket.find_file "avatars/heidi/400x400.png"
   #
   #   file.acl.public!

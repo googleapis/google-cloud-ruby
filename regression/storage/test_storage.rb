@@ -19,7 +19,7 @@ require "net/http"
 
 describe "Storage", :storage do
   let :bucket do
-    storage.find_bucket(bucket_name) ||
+    storage.bucket(bucket_name) ||
     storage.create_bucket(bucket_name)
   end
   let(:bucket_name) { $bucket_names.first }
@@ -41,7 +41,7 @@ describe "Storage", :storage do
   describe "getting buckets" do
     let(:new_buckets) do
       new_bucket_names.map do |b|
-        storage.find_bucket(b) ||
+        storage.bucket(b) ||
         storage.create_bucket(b)
       end
     end

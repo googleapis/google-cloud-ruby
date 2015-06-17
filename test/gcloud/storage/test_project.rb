@@ -159,6 +159,18 @@ describe Gcloud::Storage::Project, :mock_storage do
        find_bucket_json(bucket_name)]
     end
 
+    bucket = storage.bucket bucket_name
+    bucket.name.must_equal bucket_name
+  end
+
+  it "finds a bucket with find_bucket alias" do
+    bucket_name = "found-bucket"
+
+    mock_connection.get "/storage/v1/b/#{bucket_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       find_bucket_json(bucket_name)]
+    end
+
     bucket = storage.find_bucket bucket_name
     bucket.name.must_equal bucket_name
   end

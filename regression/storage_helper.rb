@@ -75,7 +75,7 @@ $bucket_names = 4.times.map { "gcloud-ruby-regression-#{t}-#{SecureRandom.hex(4)
 def clean_up_storage_buckets
   puts "Cleaning up storage buckets after tests."
   $bucket_names.each do |bucket_name|
-    if b = $storage.find_bucket(bucket_name)
+    if b = $storage.bucket(bucket_name)
       b.files.map { |f| f.delete }
       b.delete
     end

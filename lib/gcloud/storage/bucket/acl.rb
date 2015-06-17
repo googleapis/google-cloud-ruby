@@ -25,7 +25,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   bucket.acl.readers.each { |reader| puts reader }
       #
@@ -65,7 +65,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.refresh!
         #
@@ -90,7 +90,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.owners.each { |owner| puts owner }
         #
@@ -112,7 +112,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.writers.each { |writer| puts writer }
         #
@@ -134,7 +134,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.readers.each { |reader| puts reader }
         #
@@ -170,7 +170,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "heidi@example.net"
         #   bucket.acl.add_owner "user-#{email}"
@@ -182,7 +182,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "authors@example.net"
         #   bucket.acl.add_owner "group-#{email}"
@@ -224,7 +224,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "heidi@example.net"
         #   bucket.acl.add_writer "user-#{email}"
@@ -236,7 +236,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "authors@example.net"
         #   bucket.acl.add_writer "group-#{email}"
@@ -278,7 +278,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "heidi@example.net"
         #   bucket.acl.add_reader "user-#{email}"
@@ -290,7 +290,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "authors@example.net"
         #   bucket.acl.add_reader "group-#{email}"
@@ -329,7 +329,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "heidi@example.net"
         #   bucket.acl.delete "user-#{email}"
@@ -361,7 +361,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.auth!
         #
@@ -383,7 +383,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.private!
         #
@@ -401,7 +401,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.project_private!
         #
@@ -420,7 +420,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.public!
         #
@@ -439,7 +439,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.public_write!
         #
@@ -473,7 +473,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   bucket.default_acl.readers.each { |reader| puts reader }
       #
@@ -514,7 +514,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.default_acl.refresh!
         #
@@ -539,7 +539,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.default_acl.owners.each { |owner| puts owner }
         #
@@ -561,7 +561,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.default_acl.writers.each { |writer| puts writer }
         #
@@ -583,7 +583,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.default_acl.readers.each { |reader| puts reader }
         #
@@ -619,7 +619,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "heidi@example.net"
         #   bucket.default_acl.add_owner "user-#{email}"
@@ -631,7 +631,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "authors@example.net"
         #   bucket.default_acl.add_owner "group-#{email}"
@@ -673,7 +673,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "heidi@example.net"
         #   bucket.default_acl.add_writer "user-#{email}"
@@ -685,7 +685,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "authors@example.net"
         #   bucket.default_acl.add_writer "group-#{email}"
@@ -727,7 +727,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "heidi@example.net"
         #   bucket.default_acl.add_reader "user-#{email}"
@@ -739,7 +739,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "authors@example.net"
         #   bucket.default_acl.add_reader "group-#{email}"
@@ -779,7 +779,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   email = "heidi@example.net"
         #   bucket.default_acl.delete "user-#{email}"
@@ -811,7 +811,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.auth!
         #
@@ -833,7 +833,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.owner_full!
         #
@@ -852,7 +852,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.owner_read!
         #
@@ -871,7 +871,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.private!
         #
@@ -889,7 +889,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.project_private!
         #
@@ -908,7 +908,7 @@ module Gcloud
         #
         #   storage = Gcloud.storage
         #
-        #   bucket = storage.find_bucket "my-bucket"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.acl.public!
         #

@@ -28,7 +28,7 @@ module Gcloud
     #
     #   storage = Gcloud.storage
     #
-    #   bucket = storage.find_bucket "my-bucket"
+    #   bucket = storage.bucket "my-bucket"
     #   file = bucket.find_file "path/to/my-file.ext"
     #
     class Bucket
@@ -111,7 +111,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #   bucket.delete
       #
       # The API call to delete the bucket may be retried under certain
@@ -122,7 +122,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #   bucket.delete retries: 5
       #
       def delete options = {}
@@ -171,7 +171,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #   files = bucket.files
       #   files.each do |file|
       #     puts file.name
@@ -184,7 +184,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   all_files = []
       #   tmp_files = bucket.files
@@ -226,7 +226,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   file = bucket.find_file "path/to/my-file.ext"
       #   puts file.name
@@ -281,7 +281,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   bucket.create_file "path/to/local.file.ext"
       #
@@ -291,7 +291,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   bucket.create_file "path/to/local.file.ext",
       #                      "destination/path/file.ext"
@@ -306,7 +306,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-bucket"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   bucket.create_file "path/to/local.file.ext",
       #                      "destination/path/file.ext",
@@ -346,7 +346,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #
       #   email = "heidi@example.net"
       #   bucket.acl.add_reader "user-#{email}"
@@ -358,7 +358,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #
       #   email = "authors@example.net"
       #   bucket.acl.add_reader "group-#{email}"
@@ -370,7 +370,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #
       #   bucket.acl.public!
       #
@@ -398,7 +398,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #
       #   email = "heidi@example.net"
       #   bucket.default_acl.add_reader "user-#{email}"
@@ -410,7 +410,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #
       #   email = "authors@example.net"
       #   bucket.default_acl.add_reader "group-#{email}"
@@ -422,7 +422,7 @@ module Gcloud
       #
       #   storage = Gcloud.storage
       #
-      #   bucket = storage.find_bucket "my-todo-app"
+      #   bucket = storage.bucket "my-todo-app"
       #
       #   bucket.default_acl.public!
       def default_acl

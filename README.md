@@ -71,7 +71,7 @@ require 'gcloud/storage'
 storage = Gcloud.storage "my-todo-project-id",
                          "/path/to/keyfile.json"
 
-bucket = storage.find_bucket "task-attachments"
+bucket = storage.bucket "task-attachments"
 
 file = bucket.find_file "path/to/my-file.ext"
 
@@ -79,7 +79,7 @@ file = bucket.find_file "path/to/my-file.ext"
 file.download "/tasks/attachments/#{file.name}"
 
 # Copy the file to a backup bucket
-backup = storage.find_bucket "task-attachment-backups"
+backup = storage.bucket "task-attachment-backups"
 file.copy backup, file.name
 ```
 
