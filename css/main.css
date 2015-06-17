@@ -181,6 +181,14 @@ a[name]:before {
   visibility: hidden;
 }
 
+h1[id]:before,
+h2[id]:before,
+h3[id]:before,
+h4[id]:before {
+  margin-top: -90px;
+  height: 90px;
+}
+
 
 /* Header
    ========================================================================== */
