@@ -1,3 +1,4 @@
+#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +20,19 @@ require "gcloud/storage/file/verifier"
 module Gcloud
   module Storage
     ##
+    # = File
+    #
     # Represents the File/Object that belong to a Bucket.
+    #
+    #   require "glcoud/storage"
+    #
+    #   storage = Gcloud.storage
+    #
+    #   bucket = storage.find_bucket "my-bucket"
+    #
+    #   file = bucket.find_file "path/to/my-file.ext"
+    #   file.download "/downloads/#{bucket.name}/#{file.name}"
+    #
     class File
       ##
       # The Connection object.
@@ -31,7 +44,7 @@ module Gcloud
 
       ##
       # Create an empty File object.
-      def initialize
+      def initialize #:nodoc:
         @connection = nil
         @gapi = {}
       end
@@ -118,29 +131,78 @@ module Gcloud
 
       ##
       # Download the file's contents to a local file.
-      # The path provided must be writable.
       #
+      # === Parameters
+      #
+      # +path+::
+      #   The path on the local file system to write the data to.
+      #   The path provided must be writable. (+String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # +options [:verify]+::
+      #   The verification algoruthm used to ensure the downloaded file contents
+      #   are correct. Default is +:md5+. (+Symbol+)
+      #
+      #   Acceptable values are:
+      #   * +md5+:: Verify file content match using the MD5 hash.
+      #   * +crc32c+:: Verify file content match using the CRC32c hash.
+      #   * +all+:: Perform all available file content verification.
+      #   * +none+:: Don't perform file content verification.
+      #
+      # === Returns
+      #
+      # +::File+ object on the local file system
+      #
+      # === Examples
+      #
+      #   require "glcoud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-bucket"
+      #
+      #   file = bucket.find_file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext"
       #
       # The download is verified by calculating the MD5 digest.
       # The CRC32c digest can be used by passing :crc32c.
       #
+      #   require "glcoud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-bucket"
+      #
+      #   file = bucket.find_file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext", verify: :crc32c
       #
       # Both the MD5 and CRC32c digest can be used by passing :all.
       #
+      #   require "glcoud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-bucket"
+      #
+      #   file = bucket.find_file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext", verify: :all
       #
       # The download verification can be disabled by passing :none
       #
+      #   require "glcoud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-bucket"
+      #
+      #   file = bucket.find_file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext", verify: :none
       #
-      # If the verification fails FileVerificationError is raised.
       def download path, options = {}
         ensure_connection!
         resp = connection.download_file bucket, name
         if resp.success?
-          ::File.open path, "w+" do |f|
+          ::File.open path, "wb+" do |f|
             f.write resp.body
           end
           verify_file! ::File.new(path), options
@@ -152,12 +214,63 @@ module Gcloud
       ##
       # Copy the file to a new location.
       #
+      # === Parameters
+      #
+      # +dest_bucket_or_path+::
+      #   Either the bucket to copy the file to, or the path to copy the file to
+      #   in the current bucket. (+String+)
+      # +dest_path+::
+      #   If a bucket was provided in the first parameter, this contains the
+      #   path to copy the file to in the given bucket. (+String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # +options [:acl]+::
+      #   A predefined set of access controls to apply to new file.
+      #   (+String+)
+      #
+      #   Acceptable values are:
+      #   * +auth+, +auth_read+, +authenticated+, +authenticated_read+,
+      #     +authenticatedRead+:: File owner gets OWNER access, and
+      #     allAuthenticatedUsers get READER access.
+      #   * +owner_full+, +bucketOwnerFullControl+:: File owner gets OWNER
+      #     access, and project team owners get OWNER access.
+      #   * +owner_read+, +bucketOwnerRead+:: File owner gets OWNER access, and
+      #     project team owners get READER access.
+      #   * +private+:: File owner gets OWNER access.
+      #   * +project_private+, +projectPrivate+:: File owner gets OWNER access,
+      #     and project team members get access according to their roles.
+      #   * +public+, +public_read+, +publicRead+:: File owner gets OWNER
+      #     access, and allUsers get READER access.
+      #
+      # === Returns
+      #
+      # +File+ object
+      #
+      # === Examples
+      #
+      # The file can also be copied to a new path in the current bucket:
+      #
+      #   require "glcoud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-bucket"
+      #
+      #   file = bucket.find_file "path/to/my-file.ext"
       #   file.copy "path/to/destination/file.ext"
       #
       # The file can also be copied to a different bucket:
       #
+      #   require "glcoud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-bucket"
+      #
+      #   file = bucket.find_file "path/to/my-file.ext"
       #   file.copy "new-destination-bucket",
       #             "path/to/destination/file.ext"
+      #
       def copy dest_bucket_or_path, dest_path = nil, options = {}
         ensure_connection!
         dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
@@ -174,6 +287,22 @@ module Gcloud
 
       ##
       # Permenently deletes the file.
+      #
+      # === Returns
+      #
+      # +true+ if the file was deleted.
+      #
+      # === Example
+      #
+      #   require "glcoud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-bucket"
+      #
+      #   file = bucket.find_file "path/to/my-file.ext"
+      #   file.delete
+      #
       def delete
         ensure_connection!
         resp = connection.delete_file bucket, name
@@ -184,6 +313,54 @@ module Gcloud
         end
       end
 
+      ##
+      # Access without authentication can be granted to a File for a specified
+      # period of time. This URL uses a cryptographic signature
+      # of your credentials to access the file. See the
+      # {Access Control Signed URLs guide
+      # }[https://cloud.google.com/storage/docs/access-control#Signed-URLs]
+      # for more.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # +options [:method]+::
+      #   The HTTP verb to be used with the signed URL. Signed URLs can be used
+      #   with +GET+, +HEAD+, +PUT+, and +DELETE+ requests. Default is +GET+.
+      #   (+String+)
+      # +options [:expires]+::
+      #   The number of seconds until the URL expires. Default is 300/5 minutes.
+      #   (+Integer+)
+      # +options [:content_type]+::
+      #   When provided, the client (browser) must send this value in the
+      #   HTTP header. e.g. +text/plain+ (+String+)
+      # +options [:content_md5]+::
+      #   The MD5 digest value in base64. If you provide this in the string, the
+      #   client (usually a browser) must provide this HTTP header with this
+      #   same value in its request. (+String+)
+      #
+      # === Examples
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-todo-app"
+      #   file = bucket.find_file "avatars/heidi/400x400.png"
+      #   shared_url = file.signed_url
+      #
+      # Any of the option parameters may be specified:
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-todo-app"
+      #   file = bucket.find_file "avatars/heidi/400x400.png"
+      #   shared_url = file.signed_url method: "GET",
+      #                                expires: 300 # 5 minutes from now
+      #
       def signed_url options = {}
         ensure_connection!
         signer = File::Signer.new self
@@ -191,7 +368,55 @@ module Gcloud
       end
 
       ##
-      # Access Control List
+      # The File::Acl instance used to control access to the file.
+      #
+      # A file has owners, writers, and readers. Permissions can be granted to
+      # an individual user's email address, a group's email address,  as well as
+      # many predefined lists. See the
+      # {Access Control guide
+      # }[https://cloud.google.com/storage/docs/access-control]
+      # for more.
+      #
+      # === Examples
+      #
+      # Access to a file can be granted to a user by appending +"user-"+ to the
+      # email address:
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-todo-app"
+      #   file = bucket.find_file "avatars/heidi/400x400.png"
+      #
+      #   email = "heidi@example.net"
+      #   file.acl.add_reader "user-#{email}"
+      #
+      # Access to a file can be granted to a group by appending +"group-"+ to
+      # the email address:
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-todo-app"
+      #   file = bucket.find_file "avatars/heidi/400x400.png"
+      #
+      #   email = "authors@example.net"
+      #   file.acl.add_reader "group-#{email}"
+      #
+      # Access to a file can also be granted to a predefined list of
+      # permissions:
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.find_bucket "my-todo-app"
+      #   file = bucket.find_file "avatars/heidi/400x400.png"
+      #
+      #   file.acl.public!
+      #
       def acl
         @acl ||= File::Acl.new self
       end
@@ -234,7 +459,7 @@ module Gcloud
 
       ##
       # Create a signed_url for a file.
-      class Signer #:nodoc
+      class Signer #:nodoc:
         def initialize file
           @file = file
         end

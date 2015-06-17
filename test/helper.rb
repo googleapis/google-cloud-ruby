@@ -15,6 +15,7 @@
 gem "minitest"
 require "minitest/autorun"
 require "ostruct"
+require "json"
 require "gcloud/storage"
 
 class MockStorage < Minitest::Spec

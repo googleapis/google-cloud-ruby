@@ -33,3 +33,24 @@ task :travis do
     Rake::Task["test"].invoke
   end
 end
+
+namespace :travis do
+  desc "Update documentation in after build"
+  task :pages do
+    if ENV["TRAVIS_BRANCH"] == "master" &&
+       ENV["TRAVIS_PULL_REQUEST"] == "false" &&
+       ENV["GCLOUD_BUILD_DOCS"] == "true"
+      puts ""
+      puts "Building master documents"
+      puts ""
+      Rake::Task["pages:master"].invoke
+    elsif ENV["TRAVIS_TAG"] &&
+       ENV["TRAVIS_PULL_REQUEST"] == "false" &&
+       ENV["GCLOUD_BUILD_DOCS"] == "true"
+      puts ""
+      puts "Building tag #{ENV["TRAVIS_TAG"]} documents"
+      puts ""
+      Rake::Task["pages:tag"].invoke ENV["TRAVIS_TAG"]
+    end
+  end
+end

@@ -1,3 +1,4 @@
+#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +16,8 @@
 module Gcloud
   module Datastore
     ##
+    # = Transaction
+    #
     # Special Connection instance for running transactions.
     #
     # See Gcloud::Datastore::Dataset.transaction

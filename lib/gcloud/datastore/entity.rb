@@ -1,3 +1,4 @@
+#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +20,9 @@ require "gcloud/datastore/proto"
 module Gcloud
   module Datastore
     ##
-    # Entity represents the Datastore record.
+    # = Entity
+    #
+    # Entity represents a Datastore record.
     # Every Entity has a Key, and a list of properties.
     #
     #   entity = Gcloud::Datastore::Entity.new
@@ -40,19 +43,67 @@ module Gcloud
       end
 
       ##
-      # Retrieve a property value.
+      # Retrieve a property value by providing the name.
       #
-      #   puts entity["name"]
+      # === Parameters
       #
-      # If a property doesn't exist then nil will be returned.
+      # +prop_name+::
+      #   The name of the property. (+String+ or +Symbol+)
+      #
+      # === Returns
+      #
+      # Object if the property exists, +nil+ if the property doesn't exist
+      #
+      # === Example
+      #
+      # Properties can be retrieved with a string name:
+      #
+      #   require "gcloud/datastore"
+      #
+      #   dataset = Gcloud.datastore
+      #   user = datastore.find "User", "heidi"
+      #   user["name"] #=> "Heidi Henderson"
+      #
+      # Or with a symbol name:
+      #
+      #   require "gcloud/datastore"
+      #
+      #   dataset = Gcloud.datastore
+      #   user = datastore.find "User", "heidi"
+      #   user[:name] #=> "Heidi Henderson"
+      #
       def [] prop_name
         @properties[prop_name]
       end
 
       ##
-      # Set a property value.
+      # Set a property value by name.
       #
-      #   entity["name"] = "User McUser"
+      # === Parameters
+      #
+      # +prop_name+::
+      #   The name of the property. (+String+ or +Symbol+)
+      # +prop_value+::
+      #   The value of the property. (+Object+)
+      #
+      # === Example
+      #
+      # Properties can be set with a string name:
+      #
+      #   require "gcloud/datastore"
+      #
+      #   dataset = Gcloud.datastore
+      #   user = datastore.find "User", "heidi"
+      #   user["name"] = "Heidi H. Henderson"
+      #
+      # Or with a symbol name:
+      #
+      #   require "gcloud/datastore"
+      #
+      #   dataset = Gcloud.datastore
+      #   user = datastore.find "User", "heidi"
+      #   user[:name] = "Heidi H. Henderson"
+      #
       def []= prop_name, prop_value
         @properties[prop_name] = prop_value
       end
@@ -60,6 +111,12 @@ module Gcloud
       ##
       # Retrieve properties in a hash-like structure.
       # Properties can be accessed or set by string or symbol.
+      #
+      # === Returns
+      #
+      # Gcloud::Datastore::Properties
+      #
+      # === Example
       #
       #   entity.properties[:name] = "User McUser"
       #   entity.properties["name"] #=> "User McUser"
@@ -83,29 +140,54 @@ module Gcloud
       #
       #   prop_hash = entity.properties.to_h
       #
-      # See Gcloud::Datastore::Properties for more.
       attr_reader :properties
 
       ##
       # Sets the Key that identifies the entity.
-      # This can only be set before the entity is saved.
+      #
+      # === Example
+      #
+      # The Key can be set before the entity is saved.
+      #
+      #   require "glcoud/datastore"
+      #
+      #   dataset = Gcloud.datastore
+      #   entity = Gcloud::Datastore::Entity.new
+      #   entity.key = Gcloud::Datastore::Key.new "User"
+      #   dataset.save entity
+      #
       # Once the entity is saved, the key is frozen and immutable.
+      # Trying to set a key when immutable will raise a +RuntimeError+.
       #
-      # Trying to set a key when immutable will raise a RuntimeError.
+      #   require "gcloud/datastore"
       #
-      #   task = dataset.find "Task", 123456
-      #   task.persisted? #=> true
-      #   task.key = Gcloud::Datastore::Key.new "Task", 456789 #=> RuntimeError
-      #   task.key.frozen? #=> true
-      #   task.key.id = 456789 #=> RuntimeError
+      #   dataset = Gcloud.datastore
+      #   entity = dataset.find "User", "heidi"
+      #   entity.persisted? #=> true
+      #   entity.key = Gcloud::Datastore::Key.new "User" #=> RuntimeError
+      #   entity.key.frozen? #=> true
+      #   entity.key.id = 9876543221 #=> RuntimeError
+      #
       def key= new_key
         fail "This entity's key is immutable." if persisted?
         @key = new_key
       end
 
       ##
-      # Returns true if the record is persisted to the datastore.
-      # Otherwise returns false.
+      # Indicates if the record is persisted. Default is false.
+      #
+      # === Example
+      #
+      #   require "gcloud/datastore"
+      #
+      #   dataset = Gcloud.datastore
+      #
+      #   new_entity = Gcloud::Datastore::Entity.new
+      #   new_entity.persisted? #=> false
+      #
+      #   found_entity = dataset.find "User", "heidi"
+      #   found_entity.persisted? #=> true
+      #
       def persisted?
         @key && @key.frozen?
       end
@@ -122,7 +204,7 @@ module Gcloud
       # Array property values will return an array of flag settings.
       #
       #   entity["tags"] = ["ruby", "code"]
-      #   entity.exclude_from_indexes? "tags" #=> true [false, false]
+      #   entity.exclude_from_indexes? "tags" #=> [false, false]
       def exclude_from_indexes? name
         value = self[name]
         flag = @_exclude_indexes[name.to_s]

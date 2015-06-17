@@ -16,6 +16,18 @@ require "rake/testtask"
 
 namespace :test do
 
+  desc "Runs datastore tests."
+  task :datastore do
+    $LOAD_PATH.unshift "lib", "test"
+    Dir.glob("test/gcloud/datastore/**/test*.rb").each { |file| require_relative "../#{file}"}
+  end
+
+  desc "Runs storage tests."
+  task :storage do
+    $LOAD_PATH.unshift "lib", "test"
+    Dir.glob("test/gcloud/storage/**/test*.rb").each { |file| require_relative "../#{file}"}
+  end
+
   desc "Runs tests with coverage."
   task :coverage, :project, :keyfile do |t, args|
     project = args[:project]
@@ -77,6 +89,8 @@ namespace :test do
     ENV["DATASTORE_KEYFILE"] = keyfile
     ENV["STORAGE_PROJECT"] = project
     ENV["STORAGE_KEYFILE"] = keyfile
+    ENV["PUBSUB_PROJECT"] = project
+    ENV["PUBSUB_KEYFILE"] = keyfile
 
     $LOAD_PATH.unshift "lib", "test", "regression"
     Dir.glob("regression/**/test*.rb").each { |file| require_relative "../#{file}"}

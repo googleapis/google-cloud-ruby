@@ -1,3 +1,4 @@
+#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +20,9 @@ require "gcloud/datastore/proto"
 module Gcloud
   module Datastore
     ##
-    # Query represents a query to be made to the Datastore.
+    # = Query
+    #
+    # Represents the search criteria against a Datastore.
     #
     #   query = Gcloud::Datastore::Query.new
     #   query.kind("Task").
@@ -179,7 +182,6 @@ module Gcloud
       end
 
       def to_proto #:nodoc:
-        # Disabled rubocop because this implementation will most likely change.
         @_query
       end
     end

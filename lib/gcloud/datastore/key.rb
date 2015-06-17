@@ -1,3 +1,4 @@
+#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +18,7 @@ require "gcloud/datastore/proto"
 module Gcloud
   module Datastore
     ##
-    # Datastore Key
+    # = Key
     #
     # Every Datastore record has an identifying key, which includes the record's
     # entity kind and a unique identifier. The identifier may be either a key
@@ -28,14 +29,55 @@ module Gcloud
     class Key
       ##
       # The kind of the Key.
+      #
+      # === Returns
+      #
+      # +String+
+      #
+      # === Example
+      #
+      #   key = Gcloud::Datastore::Key.new "User"
+      #   key.kind #=> "User"
+      #   key.kind = "Task"
+      #
       attr_accessor :kind
 
       ##
       # The dataset_id of the Key.
+      #
+      # === Returns
+      #
+      # +String+
+      #
+      # === Example
+      #
+      #   require "glcoud/datastore"
+      #
+      #   dataset = Gcloud.datastore "my-todo-project",
+      #                              "/path/to/keyfile.json"
+      #
+      #   entity = dataset.find "User", "heidi"
+      #   entity.key.dataset_id #=> "my-todo-project"
+      #
       attr_accessor :dataset_id
 
       ##
       # The namespace of the Key.
+      #
+      # === Returns
+      #
+      # +String+ or +nil+
+      #
+      # === Example
+      #
+      #   require "glcoud/datastore"
+      #
+      #   dataset = Gcloud.datastore "my-todo-project",
+      #                              "/path/to/keyfile.json"
+      #
+      #   entity = dataset.find "User", "heidi"
+      #   entity.key.namespace #=> "ns~todo-project"
+      #
       attr_accessor :namespace
 
       def initialize kind = nil, id_or_name = nil
@@ -50,6 +92,20 @@ module Gcloud
       ##
       # Set the id of the Key.
       # If a name is already present it will be removed.
+      #
+      # === Returns
+      #
+      # +Integer+ or +nil+
+      #
+      # === Example
+      #
+      #   key = Gcloud::Datastore::Key.new "User", "heidi"
+      #   key.id #=> nil
+      #   key.name #=> "heidi"
+      #   key.id = 654321
+      #   key.id #=> 654321
+      #   key.name #=> nil
+      #
       def id= new_id #:nodoc:
         @name = nil if new_id
         @id = new_id
@@ -57,11 +113,35 @@ module Gcloud
 
       ##
       # The id of the Key.
+      #
+      # === Returns
+      #
+      # +Integer+ or +nil+
+      #
+      # === Example
+      #
+      #   key = Gcloud::Datastore::Key.new "User", 123456
+      #   key.id #=> 123456
+      #
       attr_reader :id
 
       ##
       # Set the name of the Key.
       # If an id is already present it will be removed.
+      #
+      # === Returns
+      #
+      # +String+ or +nil+
+      #
+      # === Example
+      #
+      #   key = Gcloud::Datastore::Key.new "User", 123456
+      #   key.id #=> 123456
+      #   key.name #=> nil
+      #   key.name = "heidi"
+      #   key.id #=> nil
+      #   key.name #=> "heidi"
+      #
       def name= new_name #:nodoc:
         @id = nil if new_name
         @name = new_name
@@ -69,10 +149,30 @@ module Gcloud
 
       ##
       # The name of the Key.
+      #
+      # === Returns
+      #
+      # +String+ or +nil+
+      #
+      # === Example
+      #
+      #   key = Gcloud::Datastore::Key.new "User", "heidi"
+      #   key.name #=> "heidi"
+      #
       attr_reader :name
 
       ##
       # Set the parent of the Key.
+      #
+      # === Returns
+      #
+      # +Key+ or +nil+
+      #
+      # === Example
+      #
+      #   key = Gcloud::Datastore::Key.new "List", "todos"
+      #   key.parent = Gcloud::Datastore::Key.new "User", "heidi"
+      #
       def parent= new_parent #:nodoc:
         # store key if given an entity
         new_parent = new_parent.key if new_parent.respond_to? :key
@@ -81,6 +181,24 @@ module Gcloud
 
       ##
       # The parent of the Key.
+      #
+      # === Returns
+      #
+      # +Key+ or +nil+
+      #
+      # === Example
+      #
+      #   require "glcoud/datastore"
+      #
+      #   dataset = Gcloud.datastore
+      #
+      #   user = dataset.find "User", "heidi"
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("List").
+      #     ancestor(user.key)
+      #   lists = dataset.run query
+      #   lists.first.key.parent #=> Key("User", "heidi")
+      #
       attr_reader :parent
 
       ##
@@ -88,7 +206,16 @@ module Gcloud
       # Each inner array contains two values, the kind and the id or name.
       # If neither an id or name exist then nil will be returned.
       #
-      #   puts key.path #=> [["Person", "username"], ["Task", 123456]]
+      # === Returns
+      #
+      # Array of arrays
+      #
+      # === Example
+      #
+      #   key = Gcloud::Datastore::Key.new "List", "todos"
+      #   key.parent = Gcloud::Datastore::Key.new "User", "heidi"
+      #   key.path #=> [["User", "heidi"], ["List", "todos"]]
+      #
       def path
         new_path = parent ? parent.path : []
         new_path << [kind, (id || name)]
@@ -97,6 +224,8 @@ module Gcloud
       ##
       # Determine if the key is complete.
       # A complete key has either an id or a name.
+      #
+      # Inverse of #incomplete?
       def complete?
         !incomplete?
       end
@@ -104,6 +233,8 @@ module Gcloud
       ##
       # Determine if the key is incomplete.
       # An incomplete key has neither an id nor a name.
+      #
+      # Inverse of #complete?
       def incomplete?
         kind.nil? || (id.nil? && (name.nil? || name.empty?))
       end
