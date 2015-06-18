@@ -1,3 +1,8 @@
+<%
+def current_class path
+  " current" if path == current.path
+end
+%>
 <div class="side-nav--meta">
   <div id="doc-build-date">
     Docs built on <%= build_date.strftime "%b %d, %Y" %>.
@@ -5,7 +10,7 @@
 </div>
 
 <ul>
-  <li class="toc-l0"><a class="reference internal" href="<%= l "index.html" %>">Overview</a></li>
+  <li class="toc-l0"><a class="reference internal<%= current_class "index.html" %>" href="<%= l "index.html" %>">Overview</a></li>
 </ul>
 
 <ul>
@@ -14,8 +19,8 @@ side_config["classes"].each do |side|
   klass = store.all_classes_and_modules.find { |k| k.full_name == side["full_name"] }
   if klass
 %>
-    <li class="toc-l<%= side["indent"].to_i * 2 %>">
-      <a class="reference internal" href="<%= l klass.path %>">
+    <li class="toc-l<%= side["indent"].to_i %>">
+      <a class="reference internal<%= current_class klass.path %>" href="<%= l klass.path %>">
         <%= side["name"] %>
       </a>
     </li>
@@ -23,13 +28,13 @@ side_config["classes"].each do |side|
   end
 end
 %>
-  <li class="toc-l0"><a class="reference internal" href="<%= l "reference.html" %>">API Reference</a></li>
+  <li class="toc-l0"><a class="reference internal<%= current_class "reference.html" %>" href="<%= l "reference.html" %>">API Reference</a></li>
 <%
 side_config["pages"].each do |side|
   page = store.all_files.select(&:text?).find { |p| p.full_name == side["full_name"] }
   if page && side["ignore"] != true
 %>
-  <li class="toc-l0"><a class="reference internal" href="<%= l page.full_name %>"><%= side["name"] %></a></li>
+  <li class="toc-l0"><a class="reference internal<%= current_class page.path %>" href="<%= l page.full_name %>"><%= side["name"] %></a></li>
 <%
   end
 end
@@ -38,7 +43,7 @@ other_pages = store.all_files.select(&:text?).reject do |page|
   side_config["pages"].find { |s| s["full_name"] == page.full_name }
 end.each do |page|
 %>
-  <li class="toc-l0"><a class="reference internal" href="<%= l page.full_name %>"><%= page.full_name %></a></li>
+  <li class="toc-l0"><a class="reference internal<%= current_class page.path %>" href="<%= l page.full_name %>"><%= page.full_name %></a></li>
 <%
 end
 %>

@@ -62,6 +62,7 @@ module RDoc
         # main index page
         render_template "index.html.erb", "index.html"
         # api reference page
+        def main.path; "reference.html"; end
         render_template "reference.html.erb", "reference.html"
       end
 
