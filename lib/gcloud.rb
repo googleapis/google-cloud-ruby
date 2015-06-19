@@ -27,6 +27,9 @@ require "gcloud/version"
 # information, or if you are running on Google Compute Engine this configuration
 # is taken care of for you.
 #
+# You can learn more about various options for connection on the
+# {Authentication Guide}[AUTHENTICATION.md].
+#
 module Gcloud
   ##
   # Base Gcloud exception class.

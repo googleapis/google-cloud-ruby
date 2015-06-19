@@ -18,8 +18,8 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 1.9.3"
 
-  gem.extra_rdoc_files = `git ls-files -- docs/*`.split("\n")
-  gem.rdoc_options     = ["--main", "docs/overview.md",
+  gem.extra_rdoc_files = ["OVERVIEW.md", "AUTHENTICATION.md", "CHANGELOG.md"]
+  gem.rdoc_options     = ["--main", "OVERVIEW.md",
                           "--exclude", "lib/gcloud/proto/"]
 
   gem.add_dependency                  "beefcake", "~> 1.0"
