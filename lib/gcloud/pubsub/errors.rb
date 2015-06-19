@@ -16,11 +16,15 @@
 module Gcloud
   module Pubsub
     ##
+    # = Storage Error
+    #
     # Base Pubsub exception class.
     class Error < Gcloud::Error
     end
 
     ##
+    # = ApiError
+    #
     # Raised when an API call is not successful.
     class ApiError < Error
       ##
@@ -55,11 +59,15 @@ module Gcloud
     end
 
     ##
+    # = AlreadyExistsError
+    #
     # Raised when Pub/Sub returns an ALREADY_EXISTS error.
     class AlreadyExistsError < ApiError
     end
 
     ##
+    # = NotFoundError
+    #
     # Raised when Pub/Sub returns a NOT_FOUND error.
     class NotFoundError < ApiError
     end
