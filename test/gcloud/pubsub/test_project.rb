@@ -73,6 +73,28 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topics.size.must_equal num_topics
   end
 
+  it "lists topics with find_topics alias" do
+    num_topics = 3
+    mock_connection.get "/v1beta2/projects/#{project}/topics" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       topics_json(num_topics)]
+    end
+
+    topics = pubsub.find_topics
+    topics.size.must_equal num_topics
+  end
+
+  it "lists topics with list_topics alias" do
+    num_topics = 3
+    mock_connection.get "/v1beta2/projects/#{project}/topics" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       topics_json(num_topics)]
+    end
+
+    topics = pubsub.list_topics
+    topics.size.must_equal num_topics
+  end
+
   it "paginates topics" do
     mock_connection.get "/v1beta2/projects/#{project}/topics" do |env|
       [200, {"Content-Type"=>"application/json"},

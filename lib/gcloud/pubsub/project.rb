@@ -189,6 +189,8 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_topics, :topics
+      alias_method :list_topics, :topics
 
       ##
       # Retrieves subscription by name.
