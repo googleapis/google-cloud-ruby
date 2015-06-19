@@ -23,7 +23,7 @@ describe Gcloud::Pubsub, :pubsub do
 
   def retrieve_subscription topic, subscription_name
     topic.subscription(subscription_name) ||
-    topic.create_subscription(subscription_name)
+    topic.subscribe(subscription_name)
   end
 
   let(:new_topic_name) {  $topic_names.first }
@@ -169,7 +169,6 @@ describe Gcloud::Pubsub, :pubsub do
     end
 
     it "should allow creation of a subscription" do
-      # subscription = topic.create_subscription "new-subscription"
       subscription = topic.subscribe "#{$topic_prefix}-sub3"
       subscription.wont_be :nil?
       subscription.must_be_kind_of Gcloud::Pubsub::Subscription

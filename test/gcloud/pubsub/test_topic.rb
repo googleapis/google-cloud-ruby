@@ -39,7 +39,33 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
        subscription_json(topic_name, new_sub_name)]
     end
 
+    sub = topic.subscribe new_sub_name
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+  end
+
+  it "creates a subscription with create_subscription alias" do
+    new_sub_name = "new-sub-#{Time.now.to_i}"
+    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+      JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, new_sub_name)]
+    end
+
     sub = topic.create_subscription new_sub_name
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+  end
+
+  it "creates a subscription with new_subscription alias" do
+    new_sub_name = "new-sub-#{Time.now.to_i}"
+    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+      JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, new_sub_name)]
+    end
+
+    sub = topic.new_subscription new_sub_name
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
   end
@@ -52,7 +78,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
        subscription_json(topic_name, nil)]
     end
 
-    sub = topic.create_subscription
+    sub = topic.subscribe
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
   end
@@ -67,7 +93,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
        subscription_json(topic_name, new_sub_name)]
     end
 
-    sub = topic.create_subscription new_sub_name, deadline: deadline
+    sub = topic.subscribe new_sub_name, deadline: deadline
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
   end
@@ -82,7 +108,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
        subscription_json(topic_name, new_sub_name)]
     end
 
-    sub = topic.create_subscription new_sub_name, endpoint: endpoint
+    sub = topic.subscribe new_sub_name, endpoint: endpoint
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
   end
@@ -109,7 +135,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
     end
 
     assert_raises Gcloud::Pubsub::AlreadyExistsError do
-      topic.create_subscription existing_sub_name
+      topic.subscribe existing_sub_name
     end
   end
 
@@ -123,7 +149,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
     assert_raises Gcloud::Pubsub::NotFoundError do
       # Let's assume the topic has been deleted before calling create.
-      topic.create_subscription new_sub_name
+      topic.subscribe new_sub_name
     end
   end
 

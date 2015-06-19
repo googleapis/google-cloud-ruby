@@ -137,7 +137,7 @@ module Gcloud
       #                         deadline: 120,
       #                         endpoint: "https://example.com/push"
       #
-      def create_subscription subscription_name = nil, options = {}
+      def subscribe subscription_name = nil, options = {}
         ensure_connection!
         resp = connection.create_subscription name, subscription_name, options
         if resp.success?
@@ -147,7 +147,8 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
-      alias_method :subscribe, :create_subscription
+      alias_method :create_subscription, :subscribe
+      alias_method :new_subscription, :subscribe
 
       ##
       # Retrieves a subscription by name.
