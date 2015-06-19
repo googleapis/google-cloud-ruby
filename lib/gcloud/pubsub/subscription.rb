@@ -20,7 +20,19 @@ require "gcloud/pubsub/event"
 module Gcloud
   module Pubsub
     ##
-    # Represents a Subscription.
+    # = Subscription
+    #
+    # Represents a Pubsub subscription, contains the stream of messages from a
+    # single, specific Topic, to be delivered to the subscribing application.
+    #
+    #   require "glcoud/pubsub"
+    #
+    #   pubsub = Gcloud.pubsub
+    #
+    #   sub = pubsub.subscription "my-topic-sub"
+    #   msgs = sub.pull
+    #   msgs.each { |msg| msg.acknowledge! }
+    #
     class Subscription
       ##
       # The Connection object.
@@ -51,8 +63,8 @@ module Gcloud
       end
 
       ##
-      # The maximum time after a subscriber receives a message before
-      # the subscriber should acknowledge or nack the message.
+      # The maximum number of seconds after a subscriber receives a message
+      # before the subscriber should acknowledge or nack the message.
       # If the ack deadline for a message passes without an ack or a nack,
       # the Pub/Sub system will eventually redeliver the message.
       # If a subscriber acknowledges after the deadline,
@@ -84,6 +96,20 @@ module Gcloud
       ##
       # Deletes an existing subscription.
       # All pending messages in the subscription are immediately dropped.
+      #
+      # === Returns
+      #
+      # +true+ if the subscription was deleted.
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   sub.delete
+      #
       def delete
         ensure_connection!
         resp = connection.delete_subscription name
@@ -95,15 +121,60 @@ module Gcloud
       end
 
       ##
-      # Pulls a single message from the server.
-      # If the option <tt>immediate: true</tt>, the system will
-      # respond immediately, either with a message if available or
-      # nil if no message is available.
-      # Otherwise, the call will block until a message is available,
-      # or may return UNAVAILABLE if no messages become available
-      # within a reasonable amount of time.
-      # The option <tt>max: 50</tt> will limit the max number of
-      # messages returned.
+      # Pulls messages from the server. Returns an empty list if there are no
+      # messages available in the backlog. The server may return UNAVAILABLE if
+      # there are too many concurrent pull requests pending for the given
+      # subscription.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # +options [:immediate]+::
+      #   When +true+, the system will respond immediately, either with a
+      #   message if available or +nil+ if no message is available.
+      #   When not specified, or when +false+, the call will block until a
+      #   message is available, or may return UNAVAILABLE if no messages become
+      #   available within a reasonable amount of time. (+Boolean+)
+      #   When +true+ the system will respond immediately even if it is not
+      #   able to return a message. Otherwise the system is allowed to wait
+      #   until at least one message is available.
+      # +options [:max]+::
+      #   The maximum number of messages to return for this request.
+      #   The Pub/Sub system may return fewer than the number specified.
+      #   (+Integer+)
+      #
+      # === Returns
+      #
+      # Array of Gcloud::Pubsub::Event
+      #
+      # === Examples
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   sub.pull.each { |msg| msg.acknowledge! }
+      #
+      # Results can be returned immediately with the +:immediate+ option:
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub", immediate: true
+      #   sub.pull.each { |msg| msg.acknowledge! }
+      #
+      # A maximum number of messages returned can also be speified:
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub", max: 10
+      #   sub.pull.each { |msg| msg.acknowledge! }
+      #
       def pull options = {}
         ensure_connection!
         resp = connection.pull name, options
