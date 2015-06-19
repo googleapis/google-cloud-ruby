@@ -905,8 +905,8 @@ header .buttons {
     padding-left: 2em;
 }
 
-.side-nav .current .current,
-.side-nav .current .current:hover {
+.side-nav .current,
+.side-nav .current:hover {
     background: #e2e2e2;
 }
 
