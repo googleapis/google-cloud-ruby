@@ -898,11 +898,11 @@ header .buttons {
 }
 
 .side-nav ul li.toc-l1 a {
-    padding-left: 1em;
+    padding-left: 3em;
 }
 
 .side-nav ul li.toc-l2 a {
-    padding-left: 2em;
+    padding-left: 4em;
 }
 
 .side-nav .current,
