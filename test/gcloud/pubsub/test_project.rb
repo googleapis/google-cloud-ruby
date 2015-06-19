@@ -29,6 +29,16 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     pubsub.create_topic new_topic_name
   end
 
+  it "creates a topic with new_topic_alias" do
+    new_topic_name = "new-topic-#{Time.now.to_i}"
+    mock_connection.put "/v1beta2/projects/#{project}/topics/#{new_topic_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       topic_json(new_topic_name)]
+    end
+
+    pubsub.new_topic new_topic_name
+  end
+
   it "gets a topic" do
     topic_name = "found-topic"
     mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|

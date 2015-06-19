@@ -130,6 +130,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :new_topic, :create_topic
 
       ##
       # Retrieves a list of topics for the given project.
