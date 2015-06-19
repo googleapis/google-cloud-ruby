@@ -72,8 +72,22 @@
 
         <div id="description" class="description">
           
+<h1 id="class-Gcloud::Pubsub::Event-label-Event"><a href="Event.html">Event</a><span><a href="#class-Gcloud::Pubsub::Event-label-Event">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
 <p>Represents a <a href="../Pubsub.html">Pubsub</a> <a
-href="Event.html">Event</a>.</p>
+href="Message.html">Message</a> that can be acknowledged or delayed.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">event</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">if</span> <span class="ruby-identifier">event</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span>
+  <span class="ruby-identifier">event</span>.<span class="ruby-identifier">acknowledge!</span>
+<span class="ruby-keyword">end</span>
+</pre>
 
         </div>
 
@@ -190,7 +204,7 @@ acknowledge the received event.</p>
 
     
       <!-- <div class="method-source-code" id="ack_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/event.rb, line 43</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/event.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ack_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;ackId&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -220,11 +234,25 @@ acknowledge the received event.</p>
   <div class="method-description">
     
       <p>Acknowledges receipt of the message.</p>
+
+<h3 id="method-i-acknowledge-21-label-Example">Example<span><a href="#method-i-acknowledge-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">event</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">if</span> <span class="ruby-identifier">event</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span>
+  <span class="ruby-identifier">event</span>.<span class="ruby-identifier">acknowledge!</span>
+<span class="ruby-keyword">end</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="acknowledge-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/event.rb, line 56</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/event.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acknowledge!</span>
   <span class="ruby-identifier">ensure_subscription!</span>
   <span class="ruby-identifier">subscription</span>.<span class="ruby-identifier">acknowledge</span> <span class="ruby-identifier">ack_id</span>
@@ -258,14 +286,40 @@ acknowledge the received event.</p>
 
   <div class="method-description">
     
-      <p>Modifies the acknowledge deadline for the message. This method is useful to
-indicate that more time is needed to process the message, or to make the
-message available for redelivery if the processing was interrupted.</p>
+      <p>Modifies the acknowledge deadline for the message.</p>
+
+<p>This indicates that more time is needed to process the message, or to make
+the message available for redelivery if the processing was interrupted.</p>
+
+<h3 id="method-i-delay-21-label-Parameters">Parameters<span><a href="#method-i-delay-21-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>deadline</code>
+<dd>
+<p>The new ack deadline in seconds from the time this request is sent to the
+Pub/Sub system. Must be &gt;= 0. For example, if the value is 10, the new
+ack deadline will expire 10 seconds after the call is made. Specifying zero
+may immediately make the message available for another pull request.
+(<code>Integer</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-delay-21-label-Example">Example<span><a href="#method-i-delay-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">event</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">if</span> <span class="ruby-identifier">event</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span>
+  <span class="ruby-comment"># Delay for 2 minutes</span>
+  <span class="ruby-identifier">event</span>.<span class="ruby-identifier">delay!</span> <span class="ruby-value">120</span>
+<span class="ruby-keyword">end</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="delay-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/event.rb, line 67</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/event.rb, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delay!</span> <span class="ruby-identifier">new_deadline</span>
   <span class="ruby-identifier">ensure_subscription!</span>
   <span class="ruby-identifier">connection</span> = <span class="ruby-identifier">subscription</span>.<span class="ruby-identifier">connection</span>
@@ -307,7 +361,7 @@ message available for redelivery if the processing was interrupted.</p>
 
     
       <!-- <div class="method-source-code" id="message-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/event.rb, line 49</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/event.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">message</span>
   <span class="ruby-constant">Message</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;message&quot;</span>]
 <span class="ruby-keyword">end</span></pre>

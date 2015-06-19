@@ -232,24 +232,39 @@ readable. (<code>String</code> or <code>Hash</code>)</p>
 
   <div class="method-description">
     
-      <p>Create a new <a href="Gcloud/Pubsub.html">Pubsub</a> project.</p>
+      <p>Creates a new object for connecting to the <a
+href="Gcloud/Pubsub.html">Pubsub</a> service. Each call creates a new
+connection.</p>
 
-<pre class="ruby"><span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
-                       <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<h3 id="method-c-pubsub-label-Parameters">Parameters<span><a href="#method-c-pubsub-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>project</code>
+<dd>
+<p>Project identifier for the <a href="Gcloud/Pubsub.html">Pubsub</a> service
+you are connecting to. (<code>String</code>)</p>
+</dd><dt><code>keyfile</code>
+<dd>
+<p>Keyfile downloaded from Google Cloud. If file path the file must be
+readable. (<code>String</code> or <code>Hash</code>)</p>
+</dd></dl>
+
+<h3 id="method-c-pubsub-label-Returns">Returns<span><a href="#method-c-pubsub-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Gcloud/Pubsub/Project.html">Gcloud::Pubsub::Project</a></p>
+
+<h3 id="method-c-pubsub-label-Example">Example<span><a href="#method-c-pubsub-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
 <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;task completed&quot;</span>
 </pre>
-
-<p>@param project [String] the project identifier for the <a
-href="Gcloud/Pubsub.html">Pubsub</a> account you are connecting to. @param
-keyfile [String] the path to the keyfile you downloaded from Google Cloud.
-The file must readable. @return [Gcloud::Pubsub::Project] the project
-instance.</p>
     
 
     
       <!-- <div class="method-source-code" id="pubsub-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub.rb, line 35</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pubsub</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">project</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Pubsub</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">default_project</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyfile</span>.<span class="ruby-identifier">nil?</span>

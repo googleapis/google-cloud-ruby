@@ -72,7 +72,20 @@
 
         <div id="description" class="description">
           
-<p>Represents a <a href="Subscription.html">Subscription</a>.</p>
+<h1 id="class-Gcloud::Pubsub::Subscription-label-Subscription"><a href="Subscription.html">Subscription</a><span><a href="#class-Gcloud::Pubsub::Subscription-label-Subscription">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Represents a <a href="../Pubsub.html">Pubsub</a> subscription, contains the
+stream of messages from a single, specific <a href="Topic.html">Topic</a>,
+to be delivered to the subscribing application.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">msgs</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>
+<span class="ruby-identifier">msgs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">acknowledge!</span> }
+</pre>
 
         </div>
 
@@ -197,7 +210,7 @@ This is only used for messages received via pull.</p>
 
     
       <!-- <div class="method-source-code" id="acknowledge-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 126</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 197</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acknowledge</span> <span class="ruby-operator">*</span><span class="ruby-identifier">ack_ids</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">acknowledge</span> <span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">ack_ids</span>
@@ -236,9 +249,9 @@ This is only used for messages received via pull.</p>
 
   <div class="method-description">
     
-      <p>The maximum time after a subscriber receives a message before the
-subscriber should acknowledge or nack the message. If the ack deadline for
-a message passes without an ack or a nack, the Pub/Sub system will
+      <p>The maximum number of seconds after a subscriber receives a message before
+the subscriber should acknowledge or nack the message. If the ack deadline
+for a message passes without an ack or a nack, the Pub/Sub system will
 eventually redeliver the message. If a subscriber acknowledges after the
 deadline, the Pub/Sub system may accept the ack, but but the message may
 already have been sent again. Multiple acks to the message are allowed.</p>
@@ -246,7 +259,7 @@ already have been sent again. Multiple acks to the message are allowed.</p>
 
     
       <!-- <div class="method-source-code" id="deadline-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 62</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">deadline</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;ackDeadlineSeconds&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -277,11 +290,25 @@ already have been sent again. Multiple acks to the message are allowed.</p>
     
       <p>Deletes an existing subscription. All pending messages in the subscription
 are immediately dropped.</p>
+
+<h3 id="method-i-delete-label-Returns">Returns<span><a href="#method-i-delete-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><code>true</code> if the subscription was deleted.</p>
+
+<h3 id="method-i-delete-label-Example">Example<span><a href="#method-i-delete-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">delete</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 87</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_subscription</span> <span class="ruby-identifier">name</span>
@@ -321,7 +348,7 @@ are immediately dropped.</p>
 
     
       <!-- <div class="method-source-code" id="endpoint-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 68</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">endpoint</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;pushConfig&quot;</span>][<span class="ruby-string">&quot;pushEndpoint&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;pushConfig&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -355,7 +382,7 @@ are immediately dropped.</p>
 
     
       <!-- <div class="method-source-code" id="endpoint-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 74</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">endpoint=</span> <span class="ruby-identifier">new_endpoint</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">modify_push_config</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">new_endpoint</span>, {}
@@ -395,7 +422,7 @@ are immediately dropped.</p>
 
     
       <!-- <div class="method-source-code" id="name-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 42</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;name&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -424,17 +451,70 @@ are immediately dropped.</p>
 
   <div class="method-description">
     
-      <p>Pulls a single message from the server. If the option <code>immediate:
-true</code>, the system will respond immediately, either with a message if
-available or nil if no message is available. Otherwise, the call will block
-until a message is available, or may return UNAVAILABLE if no messages
-become available within a reasonable amount of time. The option <code>max:
-50</code> will limit the max number of messages returned.</p>
+      <p>Pulls messages from the server. Returns an empty list if there are no
+messages available in the backlog. The server may return UNAVAILABLE if
+there are too many concurrent pull requests pending for the given
+subscription.</p>
+
+<h3 id="method-i-pull-label-Parameters">Parameters<span><a href="#method-i-pull-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
+</dd><dt>+options [:immediate]+
+<dd>
+<p>When <code>true</code>, the system will respond immediately, either with a
+message if available or <code>nil</code> if no message is available. When
+not specified, or when <code>false</code>, the call will block until a
+message is available, or may return UNAVAILABLE if no messages become
+available within a reasonable amount of time. (<code>Boolean</code>) When
+<code>true</code> the system will respond immediately even if it is not
+able to return a message. Otherwise the system is allowed to wait until at
+least one message is available.</p>
+</dd><dt>+options [:max]+
+<dd>
+<p>The maximum number of messages to return for this request. The Pub/Sub
+system may return fewer than the number specified. (<code>Integer</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-pull-label-Returns">Returns<span><a href="#method-i-pull-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Array of <a href="Event.html">Gcloud::Pubsub::Event</a></p>
+
+<h3 id="method-i-pull-label-Examples">Examples<span><a href="#method-i-pull-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">acknowledge!</span> }
+</pre>
+
+<p>Results can be returned immediately with the <code>:immediate</code>
+option:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>, <span class="ruby-identifier">immediate</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">acknowledge!</span> }
+</pre>
+
+<p>A maximum number of messages returned can also be speified:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-value">10</span>
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">acknowledge!</span> }
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="pull-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 107</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 178</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pull</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">pull</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
@@ -477,7 +557,7 @@ become available within a reasonable amount of time. The option <code>max:
 
     
       <!-- <div class="method-source-code" id="topic-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 49</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">topic</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;topic&quot;</span>]
 <span class="ruby-keyword">end</span></pre>

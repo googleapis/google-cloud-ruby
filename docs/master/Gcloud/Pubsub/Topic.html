@@ -72,7 +72,19 @@
 
         <div id="description" class="description">
           
-<p>Represents a <a href="Topic.html">Topic</a>.</p>
+<h1 id="class-Gcloud::Pubsub::Topic-label-Topic"><a href="Topic.html">Topic</a><span><a href="#class-Gcloud::Pubsub::Topic-label-Topic">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Represents a <a href="../Pubsub.html">Pubsub</a> topic. Belongs to a <a
+href="Project.html">Project</a> and creates <a
+href="Subscription.html">Subscription</a> and publishes messages.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;task completed&quot;</span>
+</pre>
 
         </div>
 
@@ -153,15 +165,71 @@
 
   <div class="method-description">
     
-      <p>Creates a subscription on a given topic for a given subscriber.</p>
+      <p>Creates a new <a href="Subscription.html">Subscription</a> object on the
+current <a href="Topic.html">Topic</a>.</p>
 
-<p>If the name is not provided in the request, the server will assign a random
-name for this subscription on the same project as the topic.</p>
+<h3 id="method-i-create_subscription-label-Parameters">Parameters<span><a href="#method-i-create_subscription-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>subscription_name</code>
+<dd>
+<p>Name of a subscription. If the name is not provided in the request, the
+server will assign a random name for this subscription on the same project
+as the topic. (<code>String</code>)</p>
+</dd><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
+</dd><dt>+options [:deadline]+
+<dd>
+<p>The maximum number of seconds after a subscriber receives a message before
+the subscriber should acknowledge the message. (<code>Integer</code>)</p>
+</dd><dt>+options [:endpoint]+
+<dd>
+<p>A URL locating the endpoint to which messages should be pushed. e.g. “<a
+href="https://example.com/push">example.com/push</a>” (<code>String</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-create_subscription-label-Returns">Returns<span><a href="#method-i-create_subscription-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Subscription.html">Gcloud::Pubsub::Subscription</a></p>
+
+<h3 id="method-i-create_subscription-label-Examples">Examples<span><a href="#method-i-create_subscription-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">subscribe</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; &quot;my-topic-sub&quot;</span>
+</pre>
+
+<p>The name is optional, and will be generated if not given.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">subscribe</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; &quot;generated-sub-name&quot;</span>
+</pre>
+
+<p>The subscription can be created that waits two minutes for acknowledgement
+and pushed all messages to an endpoint</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">subscribe</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>,
+                      <span class="ruby-identifier">deadline</span><span class="ruby-operator">:</span> <span class="ruby-value">120</span>,
+                      <span class="ruby-identifier">endpoint</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;https://example.com/push&quot;</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="create_subscription-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 68</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_subscription</span> <span class="ruby-identifier">subscription_name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">create_subscription</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">subscription_name</span>, <span class="ruby-identifier">options</span>
@@ -203,13 +271,24 @@ name for this subscription on the same project as the topic.</p>
     
       <p>Permenently deletes the topic. The topic must be empty.</p>
 
-<pre class="ruby"><span class="ruby-identifier">topic</span>.<span class="ruby-identifier">delete</span>
+<h3 id="method-i-delete-label-Returns">Returns<span><a href="#method-i-delete-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><code>true</code> if the topic was deleted.</p>
+
+<h3 id="method-i-delete-label-Example">Example<span><a href="#method-i-delete-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">topic</span>.<span class="ruby-identifier">delete</span>
 </pre>
     
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 53</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_topic</span> <span class="ruby-identifier">name</span>
@@ -250,7 +329,7 @@ name for this subscription on the same project as the topic.</p>
 
     
       <!-- <div class="method-source-code" id="name-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 44</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;name&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -279,13 +358,63 @@ name for this subscription on the same project as the topic.</p>
 
   <div class="method-description">
     
-      <p>Adds one or more messages to the topic. Returns NOT_FOUND if the topic does
-not exist.</p>
+      <p>Publishes one or more messages to the topic.</p>
+
+<h3 id="method-i-publish-label-Parameters">Parameters<span><a href="#method-i-publish-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>message</code>
+<dd>
+<p>The message payload. (<code>String</code>)</p>
+</dd><dt><code>attributes</code>
+<dd>
+<p>Optional attributes for the message. (<code>Hash</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-publish-label-Returns">Returns<span><a href="#method-i-publish-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Message.html">Message</a> object when called without a block,
+Array of <a href="Message.html">Message</a> objects when called with a
+block</p>
+
+<h3 id="method-i-publish-label-Examples">Examples<span><a href="#method-i-publish-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">msg</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;new-message&quot;</span>
+</pre>
+
+<p>Additionally, a message can be published with attributes:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">msg</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;new-message&quot;</span>,
+                    <span class="ruby-identifier">foo</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">bar</span>,
+                    <span class="ruby-identifier">this</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">that</span>
+</pre>
+
+<p>Multiple messages can be published at the same time by passing a block:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">msg</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">batch</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">batch</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;new-message-1&quot;</span>, <span class="ruby-identifier">foo</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">bar</span>
+  <span class="ruby-identifier">batch</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;new-message-2&quot;</span>, <span class="ruby-identifier">foo</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">baz</span>
+  <span class="ruby-identifier">batch</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;new-message-3&quot;</span>, <span class="ruby-identifier">foo</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">bif</span>
+<span class="ruby-keyword">end</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="publish-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 108</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 292</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">publish</span> <span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">attributes</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">batch</span> = <span class="ruby-constant">Batch</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">message</span>, <span class="ruby-identifier">attributes</span>
@@ -350,11 +479,33 @@ not exist.</p>
   <div class="method-description">
     
       <p>Retrieves a subscription by name.</p>
+
+<h3 id="method-i-subscription-label-Parameters">Parameters<span><a href="#method-i-subscription-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>subscription_name</code>
+<dd>
+<p>Name of a subscription. (<code>String</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-subscription-label-Returns">Returns<span><a href="#method-i-subscription-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Subscription.html">Gcloud::Pubsub::Subscription</a> or nil if
+subscription does not exist</p>
+
+<h3 id="method-i-subscription-label-Example">Example<span><a href="#method-i-subscription-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">subscription</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-subscription&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">subscription</span>.<span class="ruby-identifier">name</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="subscription-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 82</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 174</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">subscription</span> <span class="ruby-identifier">subscription_name</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_subscription</span> <span class="ruby-identifier">subscription_name</span>
@@ -389,13 +540,67 @@ not exist.</p>
 
   <div class="method-description">
     
-      <p>Retrieves a list of subscriptions names on the topic. The values returned
-are strings, not <a href="Subscription.html">Subscription</a> objects.</p>
+      <p>Retrieves a list of subscription names for the given project.</p>
+
+<h3 id="method-i-subscriptions-label-Parameters">Parameters<span><a href="#method-i-subscriptions-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
+</dd><dt>+options [:token]+
+<dd>
+<p>The <code>token</code> value returned by the last call to
+<code>subscriptions</code>; indicates that this is a continuation of a
+call, and that the system should return the next page of data.
+(<code>String</code>)</p>
+</dd><dt>+options [:max]+
+<dd>
+<p>Maximum number of subscriptions to return. (<code>Integer</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-subscriptions-label-Returns">Returns<span><a href="#method-i-subscriptions-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Array of subscription name strings, not <a
+href="Subscription.html">Subscription</a> objects</p>
+
+<h3 id="method-i-subscriptions-label-Examples">Examples<span><a href="#method-i-subscriptions-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">subscription</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">subscriptions</span>
+<span class="ruby-identifier">subscriptions</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subscription</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">subscription</span>.<span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>If you have a significant number of subscriptions, you may need to paginate
+through them: (See <a
+href="Subscription/List.html#attribute-i-token">Gcloud::Pubsub::Subscription::List#token</a>)</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">all_subs</span> = []
+<span class="ruby-identifier">tmp_subs</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">subscriptions</span>
+<span class="ruby-keyword">while</span> <span class="ruby-identifier">tmp_subs</span>.<span class="ruby-identifier">any?</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">tmp_subs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subscription</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">all_subs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">subscription</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># break loop if no more subscriptions available</span>
+  <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">tmp_subs</span>.<span class="ruby-identifier">token</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-comment"># get the next group of subscriptions</span>
+  <span class="ruby-identifier">tmp_subs</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">subscriptions</span> <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">tmp_subs</span>.<span class="ruby-identifier">token</span>
+<span class="ruby-keyword">end</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="subscriptions-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 95</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 234</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">subscriptions</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_topics_subscriptions</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
