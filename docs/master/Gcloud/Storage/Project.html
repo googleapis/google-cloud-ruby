@@ -85,7 +85,7 @@ href="Bucket.html">Gcloud::Storage::Bucket</a> objects are created, read,
 updated, and deleted by <a
 href="Project.html">Gcloud::Storage::Project</a>.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
@@ -182,7 +182,8 @@ href="Project.html">Gcloud::Storage::Project</a>.</p>
 
 <h3 id="method-i-bucket-label-Returns">Returns<span><a href="#method-i-bucket-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>Gcloud::Datastore::Bucket or nil if bucket does not exist</p>
+<p><a href="Bucket.html">Gcloud::Storage::Bucket</a> or nil if bucket does not
+exist</p>
 
 <h3 id="method-i-bucket-label-Example">Example<span><a href="#method-i-bucket-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -257,11 +258,12 @@ results to view. (<code>String</code>)</p>
 
 <h3 id="method-i-buckets-label-Returns">Returns<span><a href="#method-i-buckets-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>Array of Gcloud::Datastore::Bucket (Gcloud::Datastore::Bucket::List)</p>
+<p>Array of <a href="Bucket.html">Gcloud::Storage::Bucket</a>
+(Gcloud::Storage::Bucket::List)</p>
 
 <h3 id="method-i-buckets-label-Examples">Examples<span><a href="#method-i-buckets-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
 
@@ -361,7 +363,7 @@ href="../Backoff.html#attribute-c-retries">Gcloud::Backoff.retries</a>.
 
 <h3 id="method-i-create_bucket-label-Returns">Returns<span><a href="#method-i-create_bucket-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>Gcloud::Datastore::Bucket</p>
+<p><a href="Bucket.html">Gcloud::Storage::Bucket</a></p>
 
 <h3 id="method-i-create_bucket-label-Examples">Examples<span><a href="#method-i-create_bucket-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -492,7 +494,7 @@ option:</p>
 
 <h3 id="method-i-project-label-Example">Example<span><a href="#method-i-project-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
                          <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
@@ -625,6 +627,8 @@ option:</p>
     </li>
 
   <li class="toc-l0"><a class="reference internal" href="../../reference.html">API Reference</a></li>
+
+  <li class="toc-l0"><a class="reference internal" href="../../docs/overview.md">docs/overview.md</a></li>
 
 </ul>
 
