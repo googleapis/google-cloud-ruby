@@ -897,6 +897,14 @@ header .buttons {
     background: rgba(255,255,255,0.7);
 }
 
+.side-nav ul li.toc-l1 a {
+    padding-left: 1em;
+}
+
+.side-nav ul li.toc-l2 a {
+    padding-left: 2em;
+}
+
 .side-nav .current .current,
 .side-nav .current .current:hover {
     background: #e2e2e2;
@@ -1398,6 +1406,13 @@ header .buttons {
         padding-left: 2.5em;
     }
 
+    .side-nav ul li.toc-l1 a {
+        padding-left: 4em;
+    }
+
+    .side-nav ul li.toc-l2 a {
+        padding-left: 5.5em;
+    }
 }
 
 @media print,
