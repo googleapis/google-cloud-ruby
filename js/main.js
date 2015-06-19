@@ -18,6 +18,7 @@ $(document).ready(function() {
         '<option value="/gcloud-ruby/docs/{{ release.version }}">{{ release.version }}</option>' +
       {% endfor %}
       '<option value="/gcloud-ruby/docs/master">master</option>' +
+      '<option value="">--------</option>' +
       {% for release in site.data.releases offset:1 %}
         '<option value="/gcloud-ruby/docs/{{ release.version }}">{{ release.version }}</option>' +
       {% endfor %}
