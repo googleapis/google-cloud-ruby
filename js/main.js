@@ -36,7 +36,9 @@ $(document).ready(function() {
     });
     // Navigate when selection is changed
     switcher.change(function() {
-      window.location = this.value;
+      if (this.value && this.value.length > 0) {
+        window.location = this.value;
+      }
     });
   }
 });
