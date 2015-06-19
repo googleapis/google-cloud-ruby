@@ -26,12 +26,14 @@ $(document).ready(function() {
     // Select the current option
     var switcher = meta.find('#release-nav').find('select');
     switcher.find('option').each(function(index,element) {
-      if (window.location.pathname.startsWith(element.value)) {
-        element.selected = true;
-        if (element.text == 'master') {
-          meta.find('#doc-build-date').show();
-        } else {
-          meta.find('#doc-build-date').hide();
+      if (this.value && this.value.length > 0) {
+        if (window.location.pathname.startsWith(element.value)) {
+          element.selected = true;
+          if (element.text == 'master') {
+            meta.find('#doc-build-date').show();
+          } else {
+            meta.find('#doc-build-date').hide();
+          }
         }
       }
     });
