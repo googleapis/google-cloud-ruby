@@ -99,6 +99,8 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_topic, :topic
+      alias_method :get_topic, :topic
 
       ##
       # Creates a new topic.
