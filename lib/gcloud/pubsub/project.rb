@@ -99,6 +99,8 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_topic, :topic
+      alias_method :get_topic, :topic
 
       ##
       # Creates a new topic.
@@ -128,6 +130,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :new_topic, :create_topic
 
       ##
       # Retrieves a list of topics for the given project.
@@ -187,6 +190,8 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_topics, :topics
+      alias_method :list_topics, :topics
 
       ##
       # Retrieves subscription by name.
@@ -218,6 +223,8 @@ module Gcloud
           nil
         end
       end
+      alias_method :find_subscription, :subscription
+      alias_method :get_subscription, :subscription
 
       ##
       # Retrieves a list of subscriptions for the given project.
@@ -279,6 +286,8 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_subscriptions, :subscriptions
+      alias_method :list_subscriptions, :subscriptions
 
       protected
 

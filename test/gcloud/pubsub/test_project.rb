@@ -29,6 +29,16 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     pubsub.create_topic new_topic_name
   end
 
+  it "creates a topic with new_topic_alias" do
+    new_topic_name = "new-topic-#{Time.now.to_i}"
+    mock_connection.put "/v1beta2/projects/#{project}/topics/#{new_topic_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       topic_json(new_topic_name)]
+    end
+
+    pubsub.new_topic new_topic_name
+  end
+
   it "gets a topic" do
     topic_name = "found-topic"
     mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|
@@ -40,6 +50,28 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topic.name.must_equal topic_path(topic_name)
   end
 
+  it "gets a topic with find_topic alias" do
+    topic_name = "found-topic"
+    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       topic_json(topic_name)]
+    end
+
+    topic = pubsub.find_topic topic_name
+    topic.name.must_equal topic_path(topic_name)
+  end
+
+  it "gets a topic with get_topic alias" do
+    topic_name = "found-topic"
+    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       topic_json(topic_name)]
+    end
+
+    topic = pubsub.get_topic topic_name
+    topic.name.must_equal topic_path(topic_name)
+  end
+
   it "lists topics" do
     num_topics = 3
     mock_connection.get "/v1beta2/projects/#{project}/topics" do |env|
@@ -48,6 +80,28 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     end
 
     topics = pubsub.topics
+    topics.size.must_equal num_topics
+  end
+
+  it "lists topics with find_topics alias" do
+    num_topics = 3
+    mock_connection.get "/v1beta2/projects/#{project}/topics" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       topics_json(num_topics)]
+    end
+
+    topics = pubsub.find_topics
+    topics.size.must_equal num_topics
+  end
+
+  it "lists topics with list_topics alias" do
+    num_topics = 3
+    mock_connection.get "/v1beta2/projects/#{project}/topics" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       topics_json(num_topics)]
+    end
+
+    topics = pubsub.list_topics
     topics.size.must_equal num_topics
   end
 
@@ -112,6 +166,30 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
   end
 
+  it "gets a subscription with find_subscription alias" do
+    sub_name = "found-sub-#{Time.now.to_i}"
+    mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json("random-topic", sub_name)]
+    end
+
+    sub = pubsub.find_subscription sub_name
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+  end
+
+  it "gets a subscription with get_subscription alias" do
+    sub_name = "found-sub-#{Time.now.to_i}"
+    mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json("random-topic", sub_name)]
+    end
+
+    sub = pubsub.get_subscription sub_name
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+  end
+
   it "lists subscriptions" do
     mock_connection.get "/v1beta2/projects/#{project}/subscriptions" do |env|
       [200, {"Content-Type"=>"application/json"},
@@ -119,6 +197,32 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     end
 
     subs = pubsub.subscriptions
+    subs.count.must_equal 3
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    end
+  end
+
+  it "lists subscriptions with find_subscriptions alias" do
+    mock_connection.get "/v1beta2/projects/#{project}/subscriptions" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscriptions_json("fake-topic", 3)]
+    end
+
+    subs = pubsub.find_subscriptions
+    subs.count.must_equal 3
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    end
+  end
+
+  it "lists subscriptions with list_subscriptions alias" do
+    mock_connection.get "/v1beta2/projects/#{project}/subscriptions" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscriptions_json("fake-topic", 3)]
+    end
+
+    subs = pubsub.list_subscriptions
     subs.count.must_equal 3
     subs.each do |sub|
       sub.must_be_kind_of Gcloud::Pubsub::Subscription
