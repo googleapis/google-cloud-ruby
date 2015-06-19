@@ -243,6 +243,8 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_subscriptions, :subscriptions
+      alias_method :list_subscriptions, :subscriptions
 
       ##
       # Publishes one or more messages to the topic.

@@ -202,6 +202,32 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
     end
   end
 
+  it "lists subscriptions with find_subscriptions alias" do
+    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscriptions_json(topic_name, 3)]
+    end
+
+    subs = topic.find_subscriptions
+    subs.count.must_equal 3
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    end
+  end
+
+  it "lists subscriptions with list_subscriptions alias" do
+    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscriptions_json(topic_name, 3)]
+    end
+
+    subs = topic.list_subscriptions
+    subs.count.must_equal 3
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    end
+  end
+
   it "paginates subscriptions" do
     mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
       [200, {"Content-Type"=>"application/json"},
