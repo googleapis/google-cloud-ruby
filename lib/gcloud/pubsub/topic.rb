@@ -181,6 +181,8 @@ module Gcloud
           nil
         end
       end
+      alias_method :find_subscription, :subscription
+      alias_method :get_subscription, :subscription
 
       ##
       # Retrieves a list of subscription names for the given project.

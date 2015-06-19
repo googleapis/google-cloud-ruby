@@ -165,6 +165,30 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
   end
 
+  it "gets a subscription with find_subscription alias" do
+    sub_name = "found-sub-#{Time.now.to_i}"
+    mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, sub_name)]
+    end
+
+    sub = topic.find_subscription sub_name
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+  end
+
+  it "gets a subscription with get_subscription alias" do
+    sub_name = "found-sub-#{Time.now.to_i}"
+    mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, sub_name)]
+    end
+
+    sub = topic.get_subscription sub_name
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+  end
+
   it "lists subscriptions" do
     mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
       [200, {"Content-Type"=>"application/json"},
