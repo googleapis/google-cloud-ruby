@@ -21,7 +21,18 @@ require "gcloud/pubsub/subscription"
 module Gcloud
   module Pubsub
     ##
-    # Represents a Topic.
+    # = Topic
+    #
+    # Represents a Pubsub topic. Belongs to a Project and creates Subscription
+    # and publishes messages.
+    #
+    #   require "glcoud/pubsub"
+    #
+    #   pubsub = Gcloud.pubsub
+    #
+    #   topic = pubsub.topic "my-topic"
+    #   topic.publish "task completed"
+    #
     class Topic
       ##
       # The Connection object.
@@ -49,7 +60,19 @@ module Gcloud
       # Permenently deletes the topic.
       # The topic must be empty.
       #
+      # === Returns
+      #
+      # +true+ if the topic was deleted.
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
       #   topic.delete
+      #
       def delete
         ensure_connection!
         resp = connection.delete_topic name
@@ -61,10 +84,59 @@ module Gcloud
       end
 
       ##
-      # Creates a subscription on a given topic for a given subscriber.
+      # Creates a new Subscription object on the current Topic.
       #
-      # If the name is not provided in the request, the server will assign a
-      # random name for this subscription on the same project as the topic.
+      # === Parameters
+      #
+      # +subscription_name+::
+      #   Name of a subscription. If the name is not provided in the request,
+      #   the server will assign a random name for this subscription on the same
+      #   project as the topic. (+String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # +options [:deadline]+::
+      #   The maximum number of seconds after a subscriber receives a message
+      #   before the subscriber should acknowledge the message. (+Integer+)
+      # +options [:endpoint]+::
+      #   A URL locating the endpoint to which messages should be pushed.
+      #   e.g. "https://example.com/push" (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Pubsub::Subscription
+      #
+      # === Examples
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   sub = topic.subscribe "my-topic-sub"
+      #   puts sub.name # => "my-topic-sub"
+      #
+      # The name is optional, and will be generated if not given.
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   sub = topic.subscribe "my-topic-sub"
+      #   puts sub.name # => "generated-sub-name"
+      #
+      # The subscription can be created that waits two minutes for
+      # acknowledgement and pushed all messages to an endpoint
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   sub = topic.subscribe "my-topic-sub",
+      #                         deadline: 120,
+      #                         endpoint: "https://example.com/push"
+      #
       def create_subscription subscription_name = nil, options = {}
         ensure_connection!
         resp = connection.create_subscription name, subscription_name, options
@@ -79,6 +151,26 @@ module Gcloud
 
       ##
       # Retrieves a subscription by name.
+      #
+      # === Parameters
+      #
+      # +subscription_name+::
+      #   Name of a subscription. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Pubsub::Subscription or nil if subscription does not exist
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   subscription = topic.subscription "my-topic-subscription"
+      #   puts subscription.name
+      #
       def subscription subscription_name
         ensure_connection!
         resp = connection.get_subscription subscription_name
@@ -90,8 +182,55 @@ module Gcloud
       end
 
       ##
-      # Retrieves a list of subscriptions names on the topic.
-      # The values returned are strings, not Subscription objects.
+      # Retrieves a list of subscription names for the given project.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # +options [:token]+::
+      #   The +token+ value returned by the last call to +subscriptions+;
+      #   indicates that this is a continuation of a call, and that the system
+      #   should return the next page of data. (+String+)
+      # +options [:max]+::
+      #   Maximum number of subscriptions to return. (+Integer+)
+      #
+      # === Returns
+      #
+      # Array of subscription name strings, not Subscription objects
+      #
+      # === Examples
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   subscription = topic.subscriptions
+      #   subscriptions.each do |subscription|
+      #     puts subscription.name
+      #   end
+      #
+      # If you have a significant number of subscriptions, you may need to
+      # paginate through them: (See Subscription::List#token)
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   all_subs = []
+      #   tmp_subs = topic.subscriptions
+      #   while tmp_subs.any? do
+      #     tmp_subs.each do |subscription|
+      #       all_subs << subscription
+      #     end
+      #     # break loop if no more subscriptions available
+      #     break if tmp_subs.token.nil?
+      #     # get the next group of subscriptions
+      #     tmp_subs = topic.subscriptions token: tmp_subs.token
+      #   end
+      #
       def subscriptions options = {}
         ensure_connection!
         resp = connection.list_topics_subscriptions name, options
@@ -103,8 +242,53 @@ module Gcloud
       end
 
       ##
-      # Adds one or more messages to the topic.
-      # Returns NOT_FOUND if the topic does not exist.
+      # Publishes one or more messages to the topic.
+      #
+      # === Parameters
+      #
+      # +message+::
+      #   The message payload. (+String+)
+      # +attributes+::
+      #   Optional attributes for the message. (+Hash+)
+      #
+      # === Returns
+      #
+      # Message object when called without a block,
+      # Array of Message objects when called with a block
+      #
+      # === Examples
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   msg = topic.publish "new-message"
+      #
+      # Additionally, a message can be published with attributes:
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   msg = topic.publish "new-message",
+      #                       foo: :bar,
+      #                       this: :that
+      #
+      # Multiple messages can be published at the same time by passing a block:
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   msg = topic.publish do |batch|
+      #     batch.publish "new-message-1", foo: :bar
+      #     batch.publish "new-message-2", foo: :baz
+      #     batch.publish "new-message-3", foo: :bif
+      #   end
+      #
       def publish message = nil, attributes = {}
         ensure_connection!
         batch = Batch.new message, attributes
