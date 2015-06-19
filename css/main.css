@@ -346,6 +346,26 @@ h4[id]:before {
     display: block;
 }
 
+/*
+ GitHub Issue
+ */
+
+.page-header .github-issue {
+    position: absolute;
+    display: block;
+    top: 15px;
+    right: 50px;
+}
+
+.page-header .github-issue .v-btn {
+    background-color: #fff;
+    color: #444;
+    border-radius: 5px;
+    border: 0;
+    padding: 11px 10px;
+    font-size: .8em;
+    transition: all 0.3s ease;
+}
 
 
 /* Home Content
@@ -770,11 +790,6 @@ h2 .headerlink:hover {
  Header Buttons
 */
 
-header .buttons {
-    display: inline-block;
-    margin-top: 2em;
-}
-
 .v-current {
     font-size: 1.2em;
     color: #2b70e2;
@@ -1109,13 +1124,6 @@ header .buttons {
      Docs Header
     */
 
-    header .buttons {
-        position: absolute;
-        top: 6em;
-        right: 2em;
-        margin: 0;
-    }
-
     .v-btn {
         font-size: 0.7em;
         line-height: normal;
@@ -1141,6 +1149,11 @@ header .buttons {
         padding: 0 0 0 1em;
         height: 70px;
         line-height: 70px;
+    }
+
+    .page-header .github-issue {
+        top: 20px;
+        right: 20px;
     }
 
     /*
