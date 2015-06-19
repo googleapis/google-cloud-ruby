@@ -163,7 +163,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Datastore::File (Gcloud::Datastore::File::List)
+      # Array of Gcloud::Storage::File (Gcloud::Storage::File::List)
       #
       # === Examples
       #
@@ -219,7 +219,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Datastore::File or nil if file does not exist
+      # Gcloud::Storage::File or nil if file does not exist
       #
       # === Example
       #
@@ -275,7 +275,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Datastore::File
+      # Gcloud::Storage::File
       #
       # === Examples
       #

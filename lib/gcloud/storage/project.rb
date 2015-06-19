@@ -33,7 +33,7 @@ module Gcloud
     # Google Storage. Gcloud::Storage::Bucket objects are created,
     # read, updated, and deleted by Gcloud::Storage::Project.
     #
-    #   require "gcloud/datastore"
+    #   require "gcloud/storage"
     #
     #   storage = Gcloud.storage
     #
@@ -59,7 +59,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud/storage"
       #
       #   storage = Gcloud.storage "my-todo-project",
       #                            "/path/to/keyfile.json"
@@ -94,11 +94,11 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Datastore::Bucket (Gcloud::Datastore::Bucket::List)
+      # Array of Gcloud::Storage::Bucket (Gcloud::Storage::Bucket::List)
       #
       # === Examples
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud/storage"
       #
       #   storage = Gcloud.storage
       #
@@ -155,7 +155,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Datastore::Bucket or nil if bucket does not exist
+      # Gcloud::Storage::Bucket or nil if bucket does not exist
       #
       # === Example
       #
@@ -192,7 +192,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Datastore::Bucket
+      # Gcloud::Storage::Bucket
       #
       # === Examples
       #
