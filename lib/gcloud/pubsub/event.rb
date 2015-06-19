@@ -19,7 +19,21 @@ require "gcloud/pubsub/message"
 module Gcloud
   module Pubsub
     ##
-    # Represents a Pubsub Event.
+    # = Event
+    #
+    # Represents a Pubsub Message that can be acknowledged or delayed.
+    #
+    #   require "glcoud/pubsub"
+    #
+    #   pubsub = Gcloud.pubsub
+    #
+    #   sub = pubsub.subscription "my-topic-sub"
+    #   event = sub.pull.first
+    #   if event
+    #     puts event.message.data
+    #     event.acknowledge!
+    #   end
+    #
     class Event
       ##
       # The Subscription object.
@@ -53,6 +67,20 @@ module Gcloud
 
       ##
       # Acknowledges receipt of the message.
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   event = sub.pull.first
+      #   if event
+      #     puts event.message.data
+      #     event.acknowledge!
+      #   end
+      #
       def acknowledge!
         ensure_subscription!
         subscription.acknowledge ack_id
@@ -61,9 +89,34 @@ module Gcloud
 
       ##
       # Modifies the acknowledge deadline for the message.
-      # This method is useful to indicate that more time is needed
-      # to process the message, or to make the message available
-      # for redelivery if the processing was interrupted.
+      #
+      # This indicates that more time is needed to process the message, or to
+      # make the message available for redelivery if the processing was
+      # interrupted.
+      #
+      # === Parameters
+      #
+      # +deadline+::
+      #   The new ack deadline in seconds from the time this request is sent
+      #   to the Pub/Sub system. Must be >= 0. For example, if the value is 10,
+      #   the new ack deadline will expire 10 seconds after the call is made.
+      #   Specifying zero may immediately make the message available for
+      #   another pull request. (+Integer+)
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   event = sub.pull.first
+      #   if event
+      #     puts event.message.data
+      #     # Delay for 2 minutes
+      #     event.delay! 120
+      #   end
+      #
       def delay! new_deadline
         ensure_subscription!
         connection = subscription.connection

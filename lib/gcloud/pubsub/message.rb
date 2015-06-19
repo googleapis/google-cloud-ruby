@@ -18,7 +18,28 @@ require "gcloud/pubsub/errors"
 module Gcloud
   module Pubsub
     ##
+    # = Message
+    #
     # Represents a Pubsub Message.
+    #
+    # Message objects are created by Topic#publish.
+    # Subscription#pull returns Event objects, which contain a Message object
+    # and can be acknowleged and/or delayed.
+    #
+    #   require "glcoud/pubsub"
+    #
+    #   pubsub = Gcloud.pubsub
+    #
+    #   # Publish a message
+    #   topic = pubsub.topic "my-topic"
+    #   message = topic.publish "new-message"
+    #   puts message.data #=>  "new-message"
+    #
+    #   # Pull an event/message
+    #   sub = pubsub.subscription "my-topic-sub"
+    #   event = sub.pull.first
+    #   puts event.message.data #=>  "new-message"
+    #
     class Message
       ##
       # The Google API Client object.
