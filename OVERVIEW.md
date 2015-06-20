@@ -14,10 +14,10 @@ Gcloud aims to make authentication as simple as possible. Google Cloud requires 
 
 Follow the [activation instructions](https://cloud.google.com/datastore/docs/activate) to use the Google Cloud Datastore API with your project.
 
-See the [gcloud-ruby Datastore API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html) to learn how to interact with the Cloud Datastore using this library.
+See the [gcloud-ruby Datastore API documentation](rdoc-ref:Gcloud::Datastore) to learn how to interact with the Cloud Datastore using this library.
 
 ```ruby
-require 'gcloud/datastore'
+require "gcloud/datastore"
 
 dataset = Gcloud.datastore "my-todo-project-id",
                            "/path/to/keyfile.json"
@@ -37,14 +37,38 @@ query = Gcloud::Datastore::Query.new.kind("Task").
 completed_tasks = dataset.run query
 ```
 
+# Pub/Sub
+
+[Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) ([docs](https://cloud.google.com/pubsub/reference/rest/)) is designed to provide reliable, many-to-many, asynchronous messaging between applications. Publisher applications can send messages to a “topic” and other applications can subscribe to that topic to receive the messages. By decoupling senders and receivers, Google Cloud Pub/Sub allows developers to communicate between independently written applications.
+
+See the [gcloud-ruby Pub/Sub API documentation](rdoc-ref:Gcloud::Pubsub) to learn how to connect to Cloud Pub/Sub using this library.
+
+```ruby
+require "glcoud/pubsub"
+
+pubsub = Gcloud.pubsub
+
+# Retrieve a topic
+topic = pubsub.topic "my-topic"
+
+# Publish a new message
+msg = topic.publish "new-message"
+
+# Retrieve a subscription
+sub = pubsub.subscription "my-topic-sub"
+
+# Pull available messages
+msgs = sub.pull
+```
+
 # Storage
 
 [Google Cloud Storage](https://cloud.google.com/storage/) ([docs](https://cloud.google.com/storage/docs/json_api/)) allows you to store data on Google infrastructure with very high reliability, performance and availability, and can be used to distribute large data objects to users via direct download.
 
-See the [gcloud-ruby Storage API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html) to learn how to connect to Cloud Storage using this library.
+See the [gcloud-ruby Storage API documentation](rdoc-ref:Gcloud::Storage) to learn how to connect to Cloud Storage using this library.
 
 ```ruby
-require 'gcloud/storage'
+require "gcloud/storage"
 
 storage = Gcloud.storage "my-todo-project-id",
                          "/path/to/keyfile.json"
