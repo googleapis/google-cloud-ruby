@@ -95,12 +95,11 @@ reads and ancestor queries, and eventual consistency for all other queries.</p>
 href="https://cloud.google.com/datastore/docs/activate">activation
 instructions</a> to use the Google Cloud Datastore API with your project.</p>
 
-<p>See the <a
-href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html">gcloud-ruby
-Datastore API documentation</a> to learn how to interact with the Cloud
-Datastore using this library.</p>
+<p>See the <a href="Gcloud/Datastore.html">gcloud-ruby Datastore API
+documentation</a> to learn how to interact with the Cloud Datastore using
+this library.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;gcloud/datastore&#39;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
 
 <span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span> <span class="ruby-string">&quot;my-todo-project-id&quot;</span>,
                            <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
@@ -120,6 +119,37 @@ Datastore using this library.</p>
 <span class="ruby-identifier">completed_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
 
+<h1 id="label-Pub-2FSub">Pub/Sub<span><a href="#label-Pub-2FSub">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="https://cloud.google.com/pubsub/">Google Cloud Pub/Sub</a> (<a
+href="https://cloud.google.com/pubsub/reference/rest/">docs</a>) is
+designed to provide reliable, many-to-many, asynchronous messaging between
+applications. Publisher applications can send messages to a “topic” and
+other applications can subscribe to that topic to receive the messages. By
+decoupling senders and receivers, Google Cloud Pub/Sub allows developers to
+communicate between independently written applications.</p>
+
+<p>See the <a href="Gcloud/Pubsub.html">gcloud-ruby Pub/Sub API
+documentation</a> to learn how to connect to Cloud Pub/Sub using this
+library.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-comment"># Retrieve a topic</span>
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+
+<span class="ruby-comment"># Publish a new message</span>
+<span class="ruby-identifier">msg</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;new-message&quot;</span>
+
+<span class="ruby-comment"># Retrieve a subscription</span>
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+
+<span class="ruby-comment"># Pull available messages</span>
+<span class="ruby-identifier">msgs</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>
+</pre>
+
 <h1 id="label-Storage">Storage<span><a href="#label-Storage">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p><a href="https://cloud.google.com/storage/">Google Cloud Storage</a> (<a
@@ -128,12 +158,11 @@ to store data on Google infrastructure with very high reliability,
 performance and availability, and can be used to distribute large data
 objects to users via direct download.</p>
 
-<p>See the <a
-href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html">gcloud-ruby
-Storage API documentation</a> to learn how to connect to Cloud Storage
-using this library.</p>
+<p>See the <a href="Gcloud/Storage.html">gcloud-ruby Storage API
+documentation</a> to learn how to connect to Cloud Storage using this
+library.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;gcloud/storage&#39;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
 
 <span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-string">&quot;my-todo-project-id&quot;</span>,
                          <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
@@ -156,7 +185,7 @@ using this library.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jun 19, 2015.
+    Docs built on Jun 20, 2015.
   </div>
 </div>
 
