@@ -303,6 +303,22 @@ module Gcloud
       end
 
       ##
+      # Determines whether the topic exists in the Pub/Sub service.
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   topic.exists? #=> true
+      #
+      def exists?
+        true
+      end
+
+      ##
       # New Topic from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
