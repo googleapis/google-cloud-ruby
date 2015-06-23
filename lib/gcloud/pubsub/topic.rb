@@ -319,6 +319,22 @@ module Gcloud
       end
 
       ##
+      # Determines whether the topic object was created with an HTTP call.
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   topic.lazy? #=> false
+      #
+      def lazy? #:nodoc:
+        false
+      end
+
+      ##
       # New Topic from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
