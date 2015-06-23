@@ -335,6 +335,23 @@ module Gcloud
       end
 
       ##
+      # Determines whether the lazy topic object should create a topic on the
+      # Pub/Sub service.
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   topic.autocreate? #=> true
+      #
+      def autocreate? #:nodoc:
+        false
+      end
+
+      ##
       # New Topic from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
