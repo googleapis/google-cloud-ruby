@@ -209,11 +209,12 @@ module Gcloud
       end
 
       def topic_path topic_name
-        return topic_name if topic_name.include? "/"
+        return topic_name if topic_name.to_s.include? "/"
         "#{project_path}/topics/#{topic_name}"
       end
 
       def subscription_path subscription_name
+        return subscription_name if subscription_name.to_s.include? "/"
         "#{project_path}/subscriptions/#{subscription_name}"
       end
 

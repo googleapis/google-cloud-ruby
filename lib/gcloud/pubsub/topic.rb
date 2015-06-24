@@ -96,7 +96,7 @@ module Gcloud
         if resp.success?
           true
         else
-          ApiError.from_response(resp)
+          raise ApiError.from_response(resp)
         end
       end
 

@@ -47,12 +47,27 @@ module Gcloud
       def initialize #:nodoc:
         @connection = nil
         @gapi = {}
+        @name = nil
+        @exists = nil
+      end
+
+      ##
+      # New lazy Topic object without making an HTTP request.
+      def self.new_lazy name, conn #:nodoc:
+        sub = new.tap do |f|
+          f.gapi = nil
+          f.connection = conn
+        end
+        sub.instance_eval do
+          @name = conn.subscription_path(name)
+        end
+        sub
       end
 
       ##
       # The name of the subscription.
       def name
-        @gapi["name"]
+        @gapi ? @gapi["name"] : @name
       end
 
       ##
@@ -72,6 +87,7 @@ module Gcloud
       #   sub.topic.name "projects/my-project/topics/my-topic"
       #
       def topic
+        ensure_gapi!
         # Always disable autocreate, we don't want to recreate a topic that
         # was intentionally deleted.
         Topic.new_lazy @gapi["topic"], connection, false
@@ -87,12 +103,14 @@ module Gcloud
       # but but the message may already have been sent again.
       # Multiple acks to the message are allowed.
       def deadline
+        ensure_gapi!
         @gapi["ackDeadlineSeconds"]
       end
 
       ##
       # A URL locating the endpoint that messages are pushed.
       def endpoint
+        ensure_gapi!
         @gapi["pushConfig"]["pushEndpoint"] if @gapi["pushConfig"]
       end
 
@@ -102,10 +120,49 @@ module Gcloud
         ensure_connection!
         resp = connection.modify_push_config name, new_endpoint, {}
         if resp.success?
-          @gapi["pushConfig"]["pushEndpoint"] = new_endpoint
+          @gapi["pushConfig"]["pushEndpoint"] = new_endpoint if @gapi
         else
-          ApiError.from_response(resp)
+          raise ApiError.from_response(resp)
         end
+      end
+
+      ##
+      # Determines whether the subscription exists in the Pub/Sub service.
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   sub.exists? #=> true
+      #
+      def exists?
+        # Always true if we have a gapi object
+        return true unless @gapi.nil?
+        # If we have a value, return it
+        return @exists unless @exists.nil?
+        ensure_gapi!
+        @exists = !@gapi.nil?
+      rescue NotFoundError
+        @exists = false
+      end
+
+      ##
+      # Determines whether the subscription object was created with an HTTP call.
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.get_subscription "my-topic-sub"
+      #   sub.lazy? #=> false
+      #
+      def lazy? #:nodoc:
+        @gapi.nil?
       end
 
       ##
@@ -131,7 +188,7 @@ module Gcloud
         if resp.success?
           true
         else
-          ApiError.from_response(resp)
+          raise ApiError.from_response(resp)
         end
       end
 
@@ -235,6 +292,19 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      ##
+      # Ensures a Google API object exists.
+      def ensure_gapi!
+        ensure_connection!
+        return @gapi if @gapi
+        resp = connection.get_subscription @name
+        if resp.success?
+          @gapi = resp.data
+        else
+          raise ApiError.from_response(resp)
+        end
       end
     end
   end
