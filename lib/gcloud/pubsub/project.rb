@@ -246,6 +246,9 @@ module Gcloud
 
       ##
       # Retrieves subscription by name.
+      # This difference between this method and Project#get_subscription is
+      # that this method does not make an API call to Pub/Sub verify the
+      # subscription exists.
       #
       # === Parameters
       #
@@ -254,7 +257,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Pubsub::Subscription or nil if subscription does not exist
+      # Gcloud::Pubsub::Subscription
       #
       # === Example
       #
@@ -262,10 +265,37 @@ module Gcloud
       #
       #   pubsub = Gcloud.pubsub
       #
-      #   subscription = pubsub.subscription "my-topic-subscription"
+      #   subscription = pubsub.get_subscription "my-topic-subscription"
       #   puts subscription.name
       #
       def subscription subscription_name
+        ensure_connection!
+
+        Subscription.new_lazy subscription_name, connection
+      end
+
+      ##
+      # Retrieves subscription by name.
+      #
+      # === Parameters
+      #
+      # +subscription_name+::
+      #   Name of a subscription. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Pubsub::Subscription or +nil+ if subscription does not exist
+      #
+      # === Example
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   subscription = pubsub.get_subscription "my-topic-subscription"
+      #   puts subscription.name
+      #
+      def get_subscription subscription_name
         ensure_connection!
         resp = connection.get_subscription subscription_name
         if resp.success?
@@ -274,8 +304,7 @@ module Gcloud
           nil
         end
       end
-      alias_method :find_subscription, :subscription
-      alias_method :get_subscription, :subscription
+      alias_method :find_subscription, :get_subscription
 
       ##
       # Retrieves a list of subscriptions for the given project.
