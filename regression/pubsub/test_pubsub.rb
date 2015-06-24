@@ -153,18 +153,17 @@ describe Gcloud::Pubsub, :pubsub do
     end
 
     it "should return a token if there are more results" do
-      skip
       subscriptions = topic.subscriptions max: (subs.count - 1)
       subscriptions.count.must_equal (subs.count - 1)
       subscriptions.each do |subscription|
-        subscription.must_be_kind_of Gcloud::Pubsub::Subscription
+        subscription.must_be_kind_of String
       end
       subscriptions.token.wont_be :nil?
 
       # retrieve the next list of subscriptions
       next_subs = topic.subscriptions token: subscriptions.token
       next_subs.count.must_equal 1
-      next_subs.first.must_be_kind_of Gcloud::Pubsub::Subscription
+      next_subs.first.must_be_kind_of String
       next_subs.token.must_be :nil?
     end
 
