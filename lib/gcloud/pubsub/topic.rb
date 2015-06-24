@@ -160,9 +160,11 @@ module Gcloud
         if resp.success?
           Subscription.from_gapi resp.data, connection
         else
-          # TODO: Handle ALREADY_EXISTS and NOT_FOUND
           fail ApiError.from_response(resp)
         end
+      rescue Gcloud::Pubsub::NotFoundError => e
+        retry if lazily_create_topic!
+        raise e
       end
       alias_method :create_subscription, :subscribe
       alias_method :new_subscription, :subscribe
