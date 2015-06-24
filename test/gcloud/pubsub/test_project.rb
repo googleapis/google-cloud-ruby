@@ -39,15 +39,23 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     pubsub.new_topic new_topic_name
   end
 
-  it "gets a topic" do
+  it "gets a lazy topic" do
+    topic_name = "found-topic"
+    topic = pubsub.topic topic_name
+    topic.name.must_equal topic_path(topic_name)
+    topic.must_be :lazy?
+  end
+
+  it "gets a topic with get_topic" do
     topic_name = "found-topic"
     mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|
       [200, {"Content-Type"=>"application/json"},
        topic_json(topic_name)]
     end
 
-    topic = pubsub.topic topic_name
+    topic = pubsub.get_topic topic_name
     topic.name.must_equal topic_path(topic_name)
+    topic.wont_be :lazy?
   end
 
   it "gets a topic with find_topic alias" do
@@ -59,17 +67,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
 
     topic = pubsub.find_topic topic_name
     topic.name.must_equal topic_path(topic_name)
-  end
-
-  it "gets a topic with get_topic alias" do
-    topic_name = "found-topic"
-    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       topic_json(topic_name)]
-    end
-
-    topic = pubsub.get_topic topic_name
-    topic.name.must_equal topic_path(topic_name)
+    topic.wont_be :lazy?
   end
 
   it "lists topics" do
