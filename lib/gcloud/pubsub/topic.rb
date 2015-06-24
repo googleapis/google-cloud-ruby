@@ -343,9 +343,6 @@ module Gcloud
         return @exists unless @exists.nil?
         ensure_gapi!
         @exists = !@gapi.nil?
-      rescue NotFoundError
-        # Raised error loading gapi? Set to false so we don't load again.
-        @exists = false
       end
 
       ##
@@ -400,22 +397,11 @@ module Gcloud
 
       ##
       # Ensures a Google API object exists.
-      # If autocreate is set to true, the topic will be created if possible.
       def ensure_gapi!
         ensure_connection!
-        retrieve_gapi!
-      end
-
-      ##
-      # Ensures that the gapi object exists.
-      def retrieve_gapi!
         return @gapi if @gapi
         resp = connection.get_topic @name
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        @gapi = resp.data if resp.success?
       end
 
       ##
