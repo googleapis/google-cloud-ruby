@@ -317,6 +317,9 @@ module Gcloud
         yield batch if block_given?
         return nil if batch.messages.count.zero?
         publish_batch_messages batch
+      rescue Gcloud::Pubsub::NotFoundError => e
+        retry if lazily_create_topic!
+        raise e
       end
 
       ##
@@ -414,13 +417,25 @@ module Gcloud
       end
 
       ##
+      def lazily_create_topic!
+        if lazy? && autocreate?
+          resp = connection.create_topic name
+          if resp.success?
+            @gapi = resp.data
+            return true
+          end
+        end
+        nil
+      end
+
+      ##
       # Call the publish API with arrays of message data and attrs.
       def publish_batch_messages batch
         resp = connection.publish name, batch.messages
         if resp.success?
           batch.to_gcloud_messages resp.data["messageIds"]
         else
-          ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 
