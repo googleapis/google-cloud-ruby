@@ -244,10 +244,16 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
     first_subs.count.must_equal 3
     first_subs.token.wont_be :nil?
     first_subs.token.must_equal "next_page_token"
+    first_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    end
 
     second_subs = topic.subscriptions token: first_subs.token
     second_subs.count.must_equal 2
     second_subs.token.must_be :nil?
+    second_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    end
   end
 
   it "paginates subscriptions with max set" do
@@ -262,6 +268,9 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
     subs.count.must_equal 3
     subs.token.wont_be :nil?
     subs.token.must_equal "next_page_token"
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    end
   end
 
   it "paginates subscriptions without max set" do
@@ -275,6 +284,9 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
     subs.count.must_equal 3
     subs.token.wont_be :nil?
     subs.token.must_equal "next_page_token"
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    end
   end
 
   it "can publish a message" do

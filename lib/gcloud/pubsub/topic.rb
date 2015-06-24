@@ -219,7 +219,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of subscription name strings, not Subscription objects
+      # Array of Subscription objects (Subscription::List)
       #
       # === Examples
       #

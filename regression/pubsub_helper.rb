@@ -67,9 +67,7 @@ def clean_up_pubsub_topics
   puts "Cleaning up pubsub topics after tests."
   $topic_names.each do |topic_name|
     if t = $pubsub.get_topic(topic_name)
-      # HACK: The topic's subscriptions are just the names
-      # so call the delete API outside of the object model.
-      t.subscriptions.map { |s| t.connection.delete_subscription s }
+      t.subscriptions.each { |s| s.delete }
       t.delete
     end
   end

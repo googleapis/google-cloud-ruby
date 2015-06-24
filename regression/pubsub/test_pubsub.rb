@@ -159,7 +159,7 @@ describe Gcloud::Pubsub, :pubsub do
       subscriptions.count.must_equal subs.count
       subscriptions.each do |subscription|
         # subscriptions on topic are strings...
-        subscription.must_be_kind_of String
+        subscription.must_be_kind_of Gcloud::Pubsub::Subscription
       end
       subscriptions.token.must_be :nil?
     end
@@ -168,14 +168,14 @@ describe Gcloud::Pubsub, :pubsub do
       subscriptions = topic.subscriptions max: (subs.count - 1)
       subscriptions.count.must_equal (subs.count - 1)
       subscriptions.each do |subscription|
-        subscription.must_be_kind_of String
+        subscription.must_be_kind_of Gcloud::Pubsub::Subscription
       end
       subscriptions.token.wont_be :nil?
 
       # retrieve the next list of subscriptions
       next_subs = topic.subscriptions token: subscriptions.token
       next_subs.count.must_equal 1
-      next_subs.first.must_be_kind_of String
+      next_subs.first.must_be_kind_of Gcloud::Pubsub::Subscription
       next_subs.token.must_be :nil?
     end
 
