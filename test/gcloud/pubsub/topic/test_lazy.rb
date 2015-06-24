@@ -19,7 +19,36 @@ describe Gcloud::Pubsub::Topic, :lazy, :mock_pubsub do
   let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
                                                 pubsub.connection }
 
-  it "knows if it is lazy" do
+  it "is not lazy when created with an HTTP method" do
     topic.wont_be :lazy?
+  end
+
+  describe "lazy topic with default autocreate" do
+    let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
+                                                 pubsub.connection }
+
+    it "will autocreate when created lazily" do
+      topic.must_be :lazy?
+    end
+  end
+
+  describe "lazy topic with explicit autocreate" do
+    let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
+                                                 pubsub.connection,
+                                                 true }
+
+    it "will autocreate when created lazily" do
+      topic.must_be :lazy?
+    end
+  end
+
+  describe "lazy topic without autocomplete" do
+    let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
+                                                 pubsub.connection,
+                                                 false }
+
+    it "knows if it will create a topic on the Pub/Sub service" do
+      topic.must_be :lazy?
+    end
   end
 end

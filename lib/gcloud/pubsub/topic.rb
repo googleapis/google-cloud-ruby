@@ -47,13 +47,30 @@ module Gcloud
       def initialize #:nodoc:
         @connection = nil
         @gapi = {}
+        @name = nil
+        @autocreate = nil
+        @exists = nil
+      end
+
+      ##
+      # New lazy Topic object without making an HTTP request.
+      def self.new_lazy name, conn, autocreate = true #:nodoc:
+        topic = new.tap do |f|
+          f.gapi = nil
+          f.connection = conn
+        end
+        topic.instance_eval do
+          @name = conn.topic_path(name)
+          @autocreate = autocreate
+        end
+        topic
       end
 
       ##
       # The name of the topic in the form of
       # "/projects/project-identifier/topics/topic-name".
       def name
-        @gapi["name"]
+        @gapi ? @gapi["name"] : @name
       end
 
       ##
@@ -315,7 +332,15 @@ module Gcloud
       #   topic.exists? #=> true
       #
       def exists?
-        true
+        # Always true if we have a gapi object
+        return true unless @gapi.nil?
+        # If we have a value, return it
+        return @exists unless @exists.nil?
+        ensure_gapi!
+        @exists = !@gapi.nil?
+      rescue NotFoundError
+        # Raised error loading gapi? Set to false so we don't load again.
+        @exists = false
       end
 
       ##
@@ -331,7 +356,7 @@ module Gcloud
       #   topic.lazy? #=> false
       #
       def lazy? #:nodoc:
-        false
+        @gapi.nil?
       end
 
       ##
@@ -348,7 +373,7 @@ module Gcloud
       #   topic.autocreate? #=> true
       #
       def autocreate? #:nodoc:
-        false
+        @autocreate
       end
 
       ##
@@ -366,6 +391,26 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      ##
+      # Ensures a Google API object exists.
+      # If autocreate is set to true, the topic will be created if possible.
+      def ensure_gapi!
+        ensure_connection!
+        retrieve_gapi!
+      end
+
+      ##
+      # Ensures that the gapi object exists.
+      def retrieve_gapi!
+        return @gapi if @gapi
+        resp = connection.get_topic @name
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
       end
 
       ##

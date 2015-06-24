@@ -14,21 +14,21 @@
 
 require "helper"
 
-describe Gcloud::Pubsub::Topic, :lazy, :mock_pubsub do
+describe Gcloud::Pubsub::Topic, :name, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
                                                 pubsub.connection }
 
-  it "will not autocreate when created with an HTTP method" do
-    topic.wont_be :autocreate?
+  it "gives the name returned from the HTTP method" do
+    topic.name.must_equal "projects/#{project}/topics/#{topic_name}"
   end
 
   describe "lazy topic with default autocreate" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                  pubsub.connection }
 
-    it "will autocreate when created lazily" do
-      topic.must_be :autocreate?
+    it "matches the name returned from the HTTP method" do
+      topic.name.must_equal "projects/#{project}/topics/#{topic_name}"
     end
   end
 
@@ -37,8 +37,8 @@ describe Gcloud::Pubsub::Topic, :lazy, :mock_pubsub do
                                                  pubsub.connection,
                                                  true }
 
-    it "will autocreate when created lazily" do
-      topic.must_be :autocreate?
+    it "matches the name returned from the HTTP method" do
+      topic.name.must_equal "projects/#{project}/topics/#{topic_name}"
     end
   end
 
@@ -47,8 +47,8 @@ describe Gcloud::Pubsub::Topic, :lazy, :mock_pubsub do
                                                  pubsub.connection,
                                                  false }
 
-    it "knows if it will create a topic on the Pub/Sub service" do
-      topic.wont_be :autocreate?
+    it "matches the name returned from the HTTP method" do
+      topic.name.must_equal "projects/#{project}/topics/#{topic_name}"
     end
   end
 end
