@@ -96,7 +96,7 @@ module Gcloud
         if resp.success?
           true
         else
-          raise ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 
@@ -170,6 +170,37 @@ module Gcloud
       alias_method :new_subscription, :subscribe
 
       ##
+      # Retrieves subscription by name.
+      # This difference between this method and Topic#get_subscription is
+      # that this method does not make an API call to Pub/Sub verify the
+      # subscription exists.
+      #
+      # === Parameters
+      #
+      # +subscription_name+::
+      #   Name of a subscription. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Pubsub::Subscription
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   subscription = topic.subscription "my-topic-subscription"
+      #   puts subscription.name
+      #
+      def subscription subscription_name
+        ensure_connection!
+
+        Subscription.new_lazy subscription_name, connection
+      end
+
+      ##
       # Retrieves a subscription by name.
       #
       # === Parameters
@@ -188,10 +219,10 @@ module Gcloud
       #   pubsub = Gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
-      #   subscription = topic.subscription "my-topic-subscription"
+      #   subscription = topic.get_subscription "my-topic-subscription"
       #   puts subscription.name
       #
-      def subscription subscription_name
+      def get_subscription subscription_name
         ensure_connection!
         resp = connection.get_subscription subscription_name
         if resp.success?
@@ -200,8 +231,7 @@ module Gcloud
           nil
         end
       end
-      alias_method :find_subscription, :subscription
-      alias_method :get_subscription, :subscription
+      alias_method :find_subscription, :get_subscription
 
       ##
       # Retrieves a list of subscription names for the given project.

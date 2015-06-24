@@ -122,7 +122,7 @@ module Gcloud
         if resp.success?
           @gapi["pushConfig"]["pushEndpoint"] = new_endpoint if @gapi
         else
-          raise ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 
@@ -150,7 +150,8 @@ module Gcloud
       end
 
       ##
-      # Determines whether the subscription object was created with an HTTP call.
+      # Determines whether the subscription object was created with an
+      # HTTP call.
       #
       # === Example
       #
@@ -188,7 +189,7 @@ module Gcloud
         if resp.success?
           true
         else
-          raise ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 
@@ -303,7 +304,7 @@ module Gcloud
         if resp.success?
           @gapi = resp.data
         else
-          raise ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
     end

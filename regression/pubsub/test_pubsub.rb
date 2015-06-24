@@ -22,7 +22,7 @@ describe Gcloud::Pubsub, :pubsub do
   end
 
   def retrieve_subscription topic, subscription_name
-    topic.subscription(subscription_name) ||
+    topic.get_subscription(subscription_name) ||
     topic.subscribe(subscription_name)
   end
 
@@ -187,7 +187,7 @@ describe Gcloud::Pubsub, :pubsub do
     end
 
     it "should not error when asking for a non-existent subscription" do
-      subscription = topic.subscription "non-existent-subscription"
+      subscription = topic.get_subscription "non-existent-subscription"
       subscription.must_be :nil?
     end
 
