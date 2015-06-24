@@ -56,10 +56,25 @@ module Gcloud
       end
 
       ##
-      # The topic from which this subscription is receiving messages,
-      # in the form /topics/project-identifier/topic-name.
+      # The Topic from which this subscription is receiving messages.
+      #
+      # === Returns
+      #
+      # Topic
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   sub.topic.name "projects/my-project/topics/my-topic"
+      #
       def topic
-        @gapi["topic"]
+        # Always disable autocreate, we don't want to recreate a topic that
+        # was intentionally deleted.
+        Topic.new_lazy @gapi["topic"], connection, false
       end
 
       ##
