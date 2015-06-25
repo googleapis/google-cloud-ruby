@@ -72,6 +72,8 @@ module Gcloud
 
       ##
       # Retrieves topic by name.
+      # This difference between this method and Project#topic is that this
+      # method makes an API call to Pub/Sub verify the topic exists.
       #
       # === Parameters
       #
@@ -276,6 +278,8 @@ module Gcloud
 
       ##
       # Retrieves subscription by name.
+      # This difference between this method and Project#subscription is that
+      # this method makes an API call to Pub/Sub verify the subscription exists.
       #
       # === Parameters
       #
