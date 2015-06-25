@@ -241,6 +241,37 @@ module Gcloud
   #
   # == Modifying a Message
   #
+  # If a message is unable to be acknowledged in a timely manner, it can be
+  # modified to extend the acknowledgement deadline. This indicates that more
+  # time is needed to process the message, or to make the message available for
+  # redelivery if the processing was interrupted.
+  #
+  #   require "glcoud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   event = sub.pull.first
+  #   if event
+  #     puts event.message.data
+  #     # Delay for 2 minutes
+  #     event.delay! 120
+  #   end
+  #
+  # The message can also be made available for immediate redelivery:
+  #
+  #   require "glcoud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   event = sub.pull.first
+  #   if event
+  #     puts event.message.data
+  #     # Mark for redelivery by setting the deadline to now
+  #     event.delay! 0
+  #   end
+  #
   module Pubsub
   end
 end
