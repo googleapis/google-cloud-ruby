@@ -27,7 +27,9 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "knows its topic" do
-    subscription.topic.must_equal topic_path(topic_name)
+    subscription.topic.must_be_kind_of Gcloud::Pubsub::Topic
+    subscription.topic.must_be :lazy?
+    subscription.topic.name.must_equal topic_path(topic_name)
   end
 
   it "has an ack deadline" do

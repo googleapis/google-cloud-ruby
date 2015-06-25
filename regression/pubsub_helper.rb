@@ -61,15 +61,13 @@ require "time"
 require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "-"
 $topic_prefix = "gcloud-ruby-regression-#{t}-".downcase
-$topic_names = 5.times.map { "#{$topic_prefix}-#{SecureRandom.hex(4)}".downcase }
+$topic_names = 7.times.map { "#{$topic_prefix}-#{SecureRandom.hex(4)}".downcase }
 
 def clean_up_pubsub_topics
   puts "Cleaning up pubsub topics after tests."
   $topic_names.each do |topic_name|
-    if t = $pubsub.topic(topic_name)
-      # HACK: The topic's subscriptions are just the names
-      # so call the delete API outside of the object model.
-      t.subscriptions.map { |s| t.connection.delete_subscription s }
+    if t = $pubsub.get_topic(topic_name)
+      t.subscriptions.each { |s| s.delete }
       t.delete
     end
   end

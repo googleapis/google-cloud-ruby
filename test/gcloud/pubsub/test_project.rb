@@ -39,15 +39,23 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     pubsub.new_topic new_topic_name
   end
 
-  it "gets a topic" do
+  it "gets a lazy topic" do
+    topic_name = "found-topic"
+    topic = pubsub.topic topic_name
+    topic.name.must_equal topic_path(topic_name)
+    topic.must_be :lazy?
+  end
+
+  it "gets a topic with get_topic" do
     topic_name = "found-topic"
     mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|
       [200, {"Content-Type"=>"application/json"},
        topic_json(topic_name)]
     end
 
-    topic = pubsub.topic topic_name
+    topic = pubsub.get_topic topic_name
     topic.name.must_equal topic_path(topic_name)
+    topic.wont_be :lazy?
   end
 
   it "gets a topic with find_topic alias" do
@@ -59,17 +67,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
 
     topic = pubsub.find_topic topic_name
     topic.name.must_equal topic_path(topic_name)
-  end
-
-  it "gets a topic with get_topic alias" do
-    topic_name = "found-topic"
-    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       topic_json(topic_name)]
-    end
-
-    topic = pubsub.get_topic topic_name
-    topic.name.must_equal topic_path(topic_name)
+    topic.wont_be :lazy?
   end
 
   it "lists topics" do
@@ -154,16 +152,25 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topics.token.must_equal "next_page_token"
   end
 
-  it "gets a subscription" do
+  it "gets a lazy subscription" do
+    sub_name = "found-sub"
+    sub = pubsub.subscription sub_name
+    sub.name.must_equal subscription_path(sub_name)
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.must_be :lazy?
+  end
+
+  it "gets a subscription with get_subscription" do
     sub_name = "found-sub-#{Time.now.to_i}"
     mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
       [200, {"Content-Type"=>"application/json"},
        subscription_json("random-topic", sub_name)]
     end
 
-    sub = pubsub.subscription sub_name
+    sub = pubsub.get_subscription sub_name
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.wont_be :lazy?
   end
 
   it "gets a subscription with find_subscription alias" do
@@ -176,18 +183,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     sub = pubsub.find_subscription sub_name
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
-  end
-
-  it "gets a subscription with get_subscription alias" do
-    sub_name = "found-sub-#{Time.now.to_i}"
-    mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       subscription_json("random-topic", sub_name)]
-    end
-
-    sub = pubsub.get_subscription sub_name
-    sub.wont_be :nil?
-    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.wont_be :lazy?
   end
 
   it "lists subscriptions" do

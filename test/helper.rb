@@ -187,10 +187,10 @@ class MockPubsub < Minitest::Spec
     {
       "error" => {
         "code" => 404,
-        "message" => "Resource not found (resource=foo2).",
+        "message" => "Resource not found (resource=#{resource_name}).",
         "errors" => [
           {
-            "message" => "Resource not found (resource=foo2).",
+            "message" => "Resource not found (resource=#{resource_name}).",
             "domain" => "global",
             "reason" => "notFound"
           }

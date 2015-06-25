@@ -204,6 +204,20 @@ module Gcloud
         )
       end
 
+      def project_path
+        "projects/#{project}"
+      end
+
+      def topic_path topic_name
+        return topic_name if topic_name.to_s.include? "/"
+        "#{project_path}/topics/#{topic_name}"
+      end
+
+      def subscription_path subscription_name
+        return subscription_name if subscription_name.to_s.include? "/"
+        "#{project_path}/subscriptions/#{subscription_name}"
+      end
+
       protected
 
       def subscription_data topic, options = {}
@@ -229,18 +243,6 @@ module Gcloud
         else
           Hash.try_convert(hash) || {}
         end
-      end
-
-      def project_path
-        "projects/#{project}"
-      end
-
-      def topic_path topic_name
-        "#{project_path}/topics/#{topic_name}"
-      end
-
-      def subscription_path subscription_name
-        "#{project_path}/subscriptions/#{subscription_name}"
       end
     end
   end

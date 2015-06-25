@@ -37,7 +37,7 @@ module Gcloud
         def self.from_resp resp, conn #:nodoc:
           subs = Array(resp.data["subscriptions"]).map do |gapi_object|
             if gapi_object.is_a? String
-              gapi_object
+              Subscription.new_lazy gapi_object, conn
             else
               Subscription.from_gapi gapi_object, conn
             end

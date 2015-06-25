@@ -18,16 +18,17 @@ require "pubsub_helper"
 
 describe Gcloud::Pubsub, :pubsub do
   def retrieve_topic topic_name
-    pubsub.topic(topic_name) || pubsub.create_topic(topic_name)
+    pubsub.get_topic(topic_name) || pubsub.create_topic(topic_name)
   end
 
   def retrieve_subscription topic, subscription_name
-    topic.subscription(subscription_name) ||
+    topic.get_subscription(subscription_name) ||
     topic.subscribe(subscription_name)
   end
 
-  let(:new_topic_name) {  $topic_names.first }
-  let(:topic_names)    {  $topic_names.last 3 }
+  let(:new_topic_name)  {  $topic_names[0] }
+  let(:topic_names)     {  $topic_names[3..5] }
+  let(:lazy_topic_name) {  $topic_names[6] }
 
   before do
     # create all topics
@@ -91,10 +92,21 @@ describe Gcloud::Pubsub, :pubsub do
       pubsub.topics.first.delete
       pubsub.topics.count.must_equal (old_topics_count - 1)
     end
+
+    describe :lazy do
+      it "gets a lazy topic object that can create itself" do
+        lazy_topic = pubsub.topic lazy_topic_name
+        lazy_topic.must_be :lazy?
+        lazy_topic.must_be :autocreate?
+        lazy_topic.wont_be :exists?
+        lazy_topic.publish "this will create the topic"
+        lazy_topic.must_be :exists?
+      end
+    end
   end
 
   describe "Subscriptions on Project" do
-    let(:topic) { retrieve_topic $topic_names.last }
+    let(:topic) { retrieve_topic $topic_names[2] }
 
     before do
       3.times.each do |i|
@@ -147,7 +159,7 @@ describe Gcloud::Pubsub, :pubsub do
       subscriptions.count.must_equal subs.count
       subscriptions.each do |subscription|
         # subscriptions on topic are strings...
-        subscription.must_be_kind_of String
+        subscription.must_be_kind_of Gcloud::Pubsub::Subscription
       end
       subscriptions.token.must_be :nil?
     end
@@ -156,14 +168,14 @@ describe Gcloud::Pubsub, :pubsub do
       subscriptions = topic.subscriptions max: (subs.count - 1)
       subscriptions.count.must_equal (subs.count - 1)
       subscriptions.each do |subscription|
-        subscription.must_be_kind_of String
+        subscription.must_be_kind_of Gcloud::Pubsub::Subscription
       end
       subscriptions.token.wont_be :nil?
 
       # retrieve the next list of subscriptions
       next_subs = topic.subscriptions token: subscriptions.token
       next_subs.count.must_equal 1
-      next_subs.first.must_be_kind_of String
+      next_subs.first.must_be_kind_of Gcloud::Pubsub::Subscription
       next_subs.token.must_be :nil?
     end
 
@@ -175,7 +187,7 @@ describe Gcloud::Pubsub, :pubsub do
     end
 
     it "should not error when asking for a non-existent subscription" do
-      subscription = topic.subscription "non-existent-subscription"
+      subscription = topic.get_subscription "non-existent-subscription"
       subscription.must_be :nil?
     end
 

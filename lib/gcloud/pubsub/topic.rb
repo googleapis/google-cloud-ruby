@@ -47,13 +47,30 @@ module Gcloud
       def initialize #:nodoc:
         @connection = nil
         @gapi = {}
+        @name = nil
+        @autocreate = nil
+        @exists = nil
+      end
+
+      ##
+      # New lazy Topic object without making an HTTP request.
+      def self.new_lazy name, conn, autocreate = true #:nodoc:
+        topic = new.tap do |f|
+          f.gapi = nil
+          f.connection = conn
+        end
+        topic.instance_eval do
+          @name = conn.topic_path(name)
+          @autocreate = autocreate
+        end
+        topic
       end
 
       ##
       # The name of the topic in the form of
       # "/projects/project-identifier/topics/topic-name".
       def name
-        @gapi["name"]
+        @gapi ? @gapi["name"] : @name
       end
 
       ##
@@ -79,7 +96,7 @@ module Gcloud
         if resp.success?
           true
         else
-          ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 
@@ -143,12 +160,45 @@ module Gcloud
         if resp.success?
           Subscription.from_gapi resp.data, connection
         else
-          # TODO: Handle ALREADY_EXISTS and NOT_FOUND
           fail ApiError.from_response(resp)
         end
+      rescue Gcloud::Pubsub::NotFoundError => e
+        retry if lazily_create_topic!
+        raise e
       end
       alias_method :create_subscription, :subscribe
       alias_method :new_subscription, :subscribe
+
+      ##
+      # Retrieves subscription by name.
+      # This difference between this method and Topic#get_subscription is
+      # that this method does not make an API call to Pub/Sub verify the
+      # subscription exists.
+      #
+      # === Parameters
+      #
+      # +subscription_name+::
+      #   Name of a subscription. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Pubsub::Subscription
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   subscription = topic.subscription "my-topic-subscription"
+      #   puts subscription.name
+      #
+      def subscription subscription_name
+        ensure_connection!
+
+        Subscription.new_lazy subscription_name, connection
+      end
 
       ##
       # Retrieves a subscription by name.
@@ -169,10 +219,10 @@ module Gcloud
       #   pubsub = Gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
-      #   subscription = topic.subscription "my-topic-subscription"
+      #   subscription = topic.get_subscription "my-topic-subscription"
       #   puts subscription.name
       #
-      def subscription subscription_name
+      def get_subscription subscription_name
         ensure_connection!
         resp = connection.get_subscription subscription_name
         if resp.success?
@@ -181,8 +231,7 @@ module Gcloud
           nil
         end
       end
-      alias_method :find_subscription, :subscription
-      alias_method :get_subscription, :subscription
+      alias_method :find_subscription, :get_subscription
 
       ##
       # Retrieves a list of subscription names for the given project.
@@ -200,7 +249,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of subscription name strings, not Subscription objects
+      # Array of Subscription objects (Subscription::List)
       #
       # === Examples
       #
@@ -300,6 +349,63 @@ module Gcloud
         yield batch if block_given?
         return nil if batch.messages.count.zero?
         publish_batch_messages batch
+      rescue Gcloud::Pubsub::NotFoundError => e
+        retry if lazily_create_topic!
+        raise e
+      end
+
+      ##
+      # Determines whether the topic exists in the Pub/Sub service.
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   topic.exists? #=> true
+      #
+      def exists?
+        # Always true if we have a gapi object
+        return true unless @gapi.nil?
+        # If we have a value, return it
+        return @exists unless @exists.nil?
+        ensure_gapi!
+        @exists = !@gapi.nil?
+      end
+
+      ##
+      # Determines whether the topic object was created with an HTTP call.
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   topic.lazy? #=> false
+      #
+      def lazy? #:nodoc:
+        @gapi.nil?
+      end
+
+      ##
+      # Determines whether the lazy topic object should create a topic on the
+      # Pub/Sub service.
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   topic.autocreate? #=> true
+      #
+      def autocreate? #:nodoc:
+        @autocreate
       end
 
       ##
@@ -320,13 +426,34 @@ module Gcloud
       end
 
       ##
+      # Ensures a Google API object exists.
+      def ensure_gapi!
+        ensure_connection!
+        return @gapi if @gapi
+        resp = connection.get_topic @name
+        @gapi = resp.data if resp.success?
+      end
+
+      ##
+      def lazily_create_topic!
+        if lazy? && autocreate?
+          resp = connection.create_topic name
+          if resp.success?
+            @gapi = resp.data
+            return true
+          end
+        end
+        nil
+      end
+
+      ##
       # Call the publish API with arrays of message data and attrs.
       def publish_batch_messages batch
         resp = connection.publish name, batch.messages
         if resp.success?
           batch.to_gcloud_messages resp.data["messageIds"]
         else
-          ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 
