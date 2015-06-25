@@ -123,6 +123,8 @@ to be delivered to the subscribing application.</p>
           
             <a href="#method-i-endpoint-3D">endpoint=</a>
           
+            <a href="#method-i-exists-3F">exists?</a>
+          
             <a href="#method-i-name">name</a>
           
             <a href="#method-i-pull">pull</a>
@@ -210,7 +212,7 @@ This is only used for messages received via pull.</p>
 
     
       <!-- <div class="method-source-code" id="acknowledge-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 197</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 270</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acknowledge</span> <span class="ruby-operator">*</span><span class="ruby-identifier">ack_ids</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">acknowledge</span> <span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">ack_ids</span>
@@ -259,8 +261,9 @@ already have been sent again. Multiple acks to the message are allowed.</p>
 
     
       <!-- <div class="method-source-code" id="deadline-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 74</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">deadline</span>
+  <span class="ruby-identifier">ensure_gapi!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;ackDeadlineSeconds&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
       </div> -->
@@ -308,14 +311,14 @@ are immediately dropped.</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 113</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 186</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_subscription</span> <span class="ruby-identifier">name</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-keyword">true</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
@@ -348,8 +351,9 @@ are immediately dropped.</p>
 
     
       <!-- <div class="method-source-code" id="endpoint-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 80</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">endpoint</span>
+  <span class="ruby-identifier">ensure_gapi!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;pushConfig&quot;</span>][<span class="ruby-string">&quot;pushEndpoint&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;pushConfig&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
       </div> -->
@@ -382,15 +386,66 @@ are immediately dropped.</p>
 
     
       <!-- <div class="method-source-code" id="endpoint-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 86</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">endpoint=</span> <span class="ruby-identifier">new_endpoint</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">modify_push_config</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">new_endpoint</span>, {}
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;pushConfig&quot;</span>][<span class="ruby-string">&quot;pushEndpoint&quot;</span>] = <span class="ruby-identifier">new_endpoint</span>
+    <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;pushConfig&quot;</span>][<span class="ruby-string">&quot;pushEndpoint&quot;</span>] = <span class="ruby-identifier">new_endpoint</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="exists-3F-method" class="method ">
+  <a name="method-i-exists-3F"></a>
+
+  
+    <h4>
+      <code>exists?()</code>
+      <span>
+        <a href="#method-i-exists-3F">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Determines whether the subscription exists in the Pub/Sub service.</p>
+
+<h3 id="method-i-exists-3F-label-Example">Example<span><a href="#method-i-exists-3F-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">exists?</span> <span class="ruby-comment">#=&gt; true</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="exists-3F-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">exists?</span>
+  <span class="ruby-comment"># Always true if we have a gapi object</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@gapi</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-comment"># If we have a value, return it</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@exists</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@exists</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">ensure_gapi!</span>
+  <span class="ruby-ivar">@exists</span> = <span class="ruby-operator">!</span><span class="ruby-ivar">@gapi</span>.<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">NotFoundError</span>
+  <span class="ruby-ivar">@exists</span> = <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -422,9 +477,9 @@ are immediately dropped.</p>
 
     
       <!-- <div class="method-source-code" id="name-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 54</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
-  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;name&quot;</span>]
+  <span class="ruby-ivar">@gapi</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;name&quot;</span>] <span class="ruby-operator">:</span> <span class="ruby-ivar">@name</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -514,7 +569,7 @@ option:</p>
 
     
       <!-- <div class="method-source-code" id="pull-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 178</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 251</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pull</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">pull</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
@@ -551,15 +606,32 @@ option:</p>
 
   <div class="method-description">
     
-      <p>The topic from which this subscription is receiving messages, in the form
-/topics/project-identifier/topic-name.</p>
+      <p>The <a href="Topic.html">Topic</a> from which this subscription is
+receiving messages.</p>
+
+<h3 id="method-i-topic-label-Returns">Returns<span><a href="#method-i-topic-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Topic.html">Topic</a></p>
+
+<h3 id="method-i-topic-label-Example">Example<span><a href="#method-i-topic-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">topic</span>.<span class="ruby-identifier">name</span> <span class="ruby-string">&quot;projects/my-project/topics/my-topic&quot;</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="topic-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 61</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">topic</span>
-  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;topic&quot;</span>]
+  <span class="ruby-identifier">ensure_gapi!</span>
+  <span class="ruby-comment"># Always disable autocreate, we don&#39;t want to recreate a topic that</span>
+  <span class="ruby-comment"># was intentionally deleted.</span>
+  <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">new_lazy</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;topic&quot;</span>], <span class="ruby-identifier">connection</span>, <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -584,7 +656,7 @@ option:</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jun 24, 2015.
+    Docs built on Jun 25, 2015.
   </div>
 </div>
 

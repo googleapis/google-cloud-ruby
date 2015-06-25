@@ -328,7 +328,7 @@ may immediately make the message available for another pull request.
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-keyword">true</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
@@ -423,7 +423,7 @@ may immediately make the message available for another pull request.
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jun 24, 2015.
+    Docs built on Jun 25, 2015.
   </div>
 </div>
 
