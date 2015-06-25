@@ -214,6 +214,31 @@ module Gcloud
   #   msgs = sub.pull
   #
   # == Acknowledging a Message
+  #
+  # Messages that are recieved can be acknowledged in Pub/Sub, marking the
+  # message to be removed so it cannot be pulled again.
+  #
+  # A Message that can be acknowledged is called an Event. Events can be
+  # acknowledged one at a time: (See Event#acknowledge!)
+  #
+  #   require "glcoud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   sub.pull.each { |msg| msg.acknowledge! }
+  #
+  # Or, multiple events can be acknowledged in a single API call:
+  # (See Subscription#acknowledge)
+  #
+  #   require "glcoud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   ack_ids = sub.pull.map { |msg| msg.ack_id }
+  #   sub.acknowledge *ack_ids
+  #
   # == Modifying a Message
   #
   module Pubsub
