@@ -346,6 +346,32 @@ class MockBigquery < Minitest::Spec
     }
   end
 
+  def random_job_hash id = "1234567890", state = "running"
+    {
+      "kind" => "bigquery#job",
+      "etag" => "etag",
+      "id" => id,
+      "selfLink" => "http://bigquery/projects/#{project}/jobs/#{id}",
+      "jobReference" => {
+        "projectId" => project,
+        "jobId" => id
+      },
+      "configuration" => {
+        # config call goes here
+        "dryRun" => false
+      },
+      "status" => {
+        "state" => state
+      },
+      "statistics" => {
+        "creationTime" => (Time.now.to_f * 1000).floor,
+        "startTime" => (Time.now.to_f * 1000).floor,
+        "endTime" => (Time.now.to_f * 1000).floor
+      },
+      "user_email" => "user@example.com"
+    }
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_bigquery

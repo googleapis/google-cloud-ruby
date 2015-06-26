@@ -17,6 +17,7 @@ require "gcloud/bigquery/connection"
 require "gcloud/bigquery/credentials"
 require "gcloud/bigquery/errors"
 require "gcloud/bigquery/dataset"
+require "gcloud/bigquery/job"
 
 module Gcloud
   module Bigquery
