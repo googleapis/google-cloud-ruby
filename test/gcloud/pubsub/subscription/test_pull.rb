@@ -25,7 +25,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
   it "can pull messages" do
     event_msg = "pulled-message"
-    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
       [200, {"Content-Type"=>"application/json"},
        events_json(event_msg)]
     end
@@ -43,7 +43,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
     it "can pull messages" do
       event_msg = "pulled-message"
-      mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
         [200, {"Content-Type"=>"application/json"},
          events_json(event_msg)]
       end
@@ -61,7 +61,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
     end
 
     it "raises NotFoundError when pulling messages" do
-      mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
         [404, {"Content-Type"=>"application/json"},
          not_found_error_json(sub_name)]
       end

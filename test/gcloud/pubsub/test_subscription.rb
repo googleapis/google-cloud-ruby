@@ -43,7 +43,7 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
   it "can update the endpoint" do
     new_push_endpoint = "https://foo.bar/baz"
 
-    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}:modifyPushConfig" do |env|
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:modifyPushConfig" do |env|
       JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal new_push_endpoint
       [200, {"Content-Type"=>"application/json"}, ""]
     end
@@ -52,7 +52,7 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can delete itself" do
-    mock_connection.delete "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}" do |env|
+    mock_connection.delete "/v1/projects/#{project}/subscriptions/#{subscription_name}" do |env|
       [200, {"Content-Type"=>"application/json"}, ""]
     end
 
@@ -61,7 +61,7 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
 
   it "can pull a message" do
     event_msg = "pulled-message"
-    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}:pull" do |env|
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:pull" do |env|
       [200, {"Content-Type"=>"application/json"},
        events_json(event_msg)]
     end
@@ -72,7 +72,7 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can acknowledge one message" do
-    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
       JSON.parse(env.body)["ackIds"].count.must_equal 1
       JSON.parse(env.body)["ackIds"].first.must_equal "ack-id-1"
       [200, {"Content-Type"=>"application/json"}, ""]
@@ -82,7 +82,7 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can acknowledge many messages" do
-    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
       JSON.parse(env.body)["ackIds"].count.must_equal 3
       JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
       JSON.parse(env.body)["ackIds"].must_include "ack-id-2"
@@ -94,7 +94,7 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can acknowledge with ack" do
-    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
       JSON.parse(env.body)["ackIds"].count.must_equal 1
       JSON.parse(env.body)["ackIds"].first.must_equal "ack-id-1"
       [200, {"Content-Type"=>"application/json"}, ""]

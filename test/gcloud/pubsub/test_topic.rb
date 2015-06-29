@@ -24,7 +24,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   end
 
   it "can delete itself" do
-    mock_connection.delete "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|
+    mock_connection.delete "/v1/projects/#{project}/topics/#{topic_name}" do |env|
       [200, {"Content-Type"=>"application/json"}, ""]
     end
 
@@ -33,7 +33,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "creates a subscription" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+    mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
       JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
       [200, {"Content-Type"=>"application/json"},
        subscription_json(topic_name, new_sub_name)]
@@ -46,7 +46,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "creates a subscription with create_subscription alias" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+    mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
       JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
       [200, {"Content-Type"=>"application/json"},
        subscription_json(topic_name, new_sub_name)]
@@ -59,7 +59,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "creates a subscription with new_subscription alias" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+    mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
       JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
       [200, {"Content-Type"=>"application/json"},
        subscription_json(topic_name, new_sub_name)]
@@ -71,7 +71,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   end
 
   it "creates a subscription without giving a name" do
-    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/" do |env|
+    mock_connection.put "/v1/projects/#{project}/subscriptions/" do |env|
       JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
       JSON.parse(env.body)["name"].must_be :nil?
       [200, {"Content-Type"=>"application/json"},
@@ -86,7 +86,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   it "creates a subscription with a deadline" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
     deadline = 42
-    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+    mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
       JSON.parse(env.body)["topic"].must_equal              topic_path(topic_name)
       JSON.parse(env.body)["ackDeadlineSeconds"].must_equal deadline
       [200, {"Content-Type"=>"application/json"},
@@ -101,7 +101,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   it "creates a subscription with a push endpoint" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
     endpoint = "http://foo.bar/baz"
-    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+    mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
       JSON.parse(env.body)["topic"].must_equal                      topic_path(topic_name)
       JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal endpoint
       [200, {"Content-Type"=>"application/json"},
@@ -115,7 +115,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "creates a subscription when calling subscribe" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+    mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
       JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
       [200, {"Content-Type"=>"application/json"},
        subscription_json(topic_name, new_sub_name)]
@@ -128,7 +128,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "raises when creating a subscription that already exists" do
     existing_sub_name = "existing-sub"
-    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{existing_sub_name}" do |env|
+    mock_connection.put "/v1/projects/#{project}/subscriptions/#{existing_sub_name}" do |env|
       JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
       [409, {"Content-Type"=>"application/json"},
        already_exists_error_json(existing_sub_name)]
@@ -141,7 +141,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "raises when creating a subscription on a deleted topic" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+    mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
       JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
       [404, {"Content-Type"=>"application/json"},
        not_found_error_json(topic_name)]
@@ -164,7 +164,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "gets a subscription with get_subscription" do
     sub_name = "found-sub-#{Time.now.to_i}"
-    mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+    mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
       [200, {"Content-Type"=>"application/json"},
        subscription_json(topic_name, sub_name)]
     end
@@ -177,7 +177,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "gets a subscription with find_subscription alias" do
     sub_name = "found-sub-#{Time.now.to_i}"
-    mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+    mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
       [200, {"Content-Type"=>"application/json"},
        subscription_json(topic_name, sub_name)]
     end
@@ -189,7 +189,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   end
 
   it "lists subscriptions" do
-    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+    mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
       [200, {"Content-Type"=>"application/json"},
        subscriptions_json(topic_name, 3)]
     end
@@ -202,7 +202,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   end
 
   it "lists subscriptions with find_subscriptions alias" do
-    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+    mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
       [200, {"Content-Type"=>"application/json"},
        subscriptions_json(topic_name, 3)]
     end
@@ -215,7 +215,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   end
 
   it "lists subscriptions with list_subscriptions alias" do
-    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+    mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
       [200, {"Content-Type"=>"application/json"},
        subscriptions_json(topic_name, 3)]
     end
@@ -228,11 +228,11 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   end
 
   it "paginates subscriptions" do
-    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+    mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
       [200, {"Content-Type"=>"application/json"},
        subscriptions_json("fake-topic", 3, "next_page_token")]
     end
-    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+    mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
       env.params.must_include "pageToken"
       env.params["pageToken"].must_equal "next_page_token"
       [200, {"Content-Type"=>"application/json"},
@@ -256,7 +256,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   end
 
   it "paginates subscriptions with max set" do
-    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+    mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
       env.params.must_include "pageSize"
       env.params["pageSize"].must_equal "3"
       [200, {"Content-Type"=>"application/json"},
@@ -273,7 +273,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   end
 
   it "paginates subscriptions without max set" do
-    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+    mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
       env.params.wont_include "pageSize"
       [200, {"Content-Type"=>"application/json"},
        subscriptions_json("fake-topic", 3, "next_page_token")]
@@ -291,7 +291,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   it "can publish a message" do
     message = "new-message-here"
     base_64_msg = [message].pack("m")
-    mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+    mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
       JSON.parse(env.body)["messages"].first["data"].must_equal base_64_msg
       [200, {"Content-Type"=>"application/json"},
        { messageIds: ["msg1"] }.to_json]
@@ -305,7 +305,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   it "can publish a message with attributes" do
     message = "new-message-here"
     base_64_msg = [message].pack("m")
-    mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+    mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
       JSON.parse(env.body)["messages"].first["data"].must_equal base_64_msg
       [200, {"Content-Type"=>"application/json"},
        { messageIds: ["msg1"] }.to_json]
@@ -323,7 +323,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
     base_64_msg1 = [message1].pack("m")
     base_64_msg2 = [message2].pack("m")
 
-    mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+    mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
       JSON.parse(env.body)["messages"].first["data"].must_equal base_64_msg1
       JSON.parse(env.body)["messages"].last["data"].must_equal  base_64_msg2
       [200, {"Content-Type"=>"application/json"},

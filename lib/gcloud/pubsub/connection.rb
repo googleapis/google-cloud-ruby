@@ -22,7 +22,7 @@ module Gcloud
     # Represents the connection to Pub/Sub,
     # as well as expose the API calls.
     class Connection #:nodoc:
-      API_VERSION = "v1beta2"
+      API_VERSION = "v1"
 
       attr_accessor :project
       attr_accessor :credentials #:nodoc:
@@ -196,11 +196,12 @@ module Gcloud
 
       ##
       # Modifies the ack deadline for a specific message.
-      def modify_ack_deadline subscription, id, deadline
+      def modify_ack_deadline subscription, ids, deadline
+        ids = Array ids
         @client.execute(
           api_method:  @pubsub.projects.subscriptions.modify_ack_deadline,
           parameters:  { subscription: subscription },
-          body_object: { ackId: id, ackDeadlineSeconds: deadline }
+          body_object: { ackIds: ids, ackDeadlineSeconds: deadline }
         )
       end
 

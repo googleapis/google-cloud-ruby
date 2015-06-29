@@ -22,7 +22,7 @@ describe Gcloud::Pubsub::Topic, :get_subscription, :mock_pubsub do
   let(:not_found_sub_name) { "found-sub-#{Time.now.to_i}" }
 
   it "gets an existing subscription" do
-    mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
+    mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
       [200, {"Content-Type"=>"application/json"},
        subscription_json(topic_name, found_sub_name)]
     end
@@ -33,7 +33,7 @@ describe Gcloud::Pubsub::Topic, :get_subscription, :mock_pubsub do
   end
 
   it "returns nil when getting an non-existant subscription" do
-    mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
+    mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
       [404, {"Content-Type"=>"application/json"},
        not_found_error_json(not_found_sub_name)]
     end
@@ -49,7 +49,7 @@ describe Gcloud::Pubsub::Topic, :get_subscription, :mock_pubsub do
                                                    true }
 
       it "gets an existing subscription" do
-        mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
+        mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
           [200, {"Content-Type"=>"application/json"},
            subscription_json(topic_name, found_sub_name)]
         end
@@ -60,7 +60,7 @@ describe Gcloud::Pubsub::Topic, :get_subscription, :mock_pubsub do
       end
 
       it "returns nil when getting an non-existant subscription" do
-        mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
+        mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(not_found_sub_name)]
         end
@@ -76,7 +76,7 @@ describe Gcloud::Pubsub::Topic, :get_subscription, :mock_pubsub do
                                                    false }
 
       it "gets an existing subscription" do
-        mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
+        mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
           [200, {"Content-Type"=>"application/json"},
            subscription_json(topic_name, found_sub_name)]
         end
@@ -87,7 +87,7 @@ describe Gcloud::Pubsub::Topic, :get_subscription, :mock_pubsub do
       end
 
       it "returns nil when getting an non-existant subscription" do
-        mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
+        mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(not_found_sub_name)]
         end
@@ -106,7 +106,7 @@ describe Gcloud::Pubsub::Topic, :get_subscription, :mock_pubsub do
 
       it "returns nil when getting an non-existant subscription" do
         # by definition, all subscriptions for this topic are non-existant
-        mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
+        mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(not_found_sub_name)]
         end
@@ -122,7 +122,7 @@ describe Gcloud::Pubsub::Topic, :get_subscription, :mock_pubsub do
                                                    false }
 
       it "returns nil when getting an non-existant subscription" do
-        mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
+        mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(not_found_sub_name)]
         end

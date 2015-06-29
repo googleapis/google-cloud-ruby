@@ -47,7 +47,7 @@ describe Gcloud::Pubsub::Event, :mock_pubsub do
   end
 
   it "can acknowledge" do
-    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
       JSON.parse(env.body)["ackIds"].count.must_equal 1
       JSON.parse(env.body)["ackIds"].first.must_equal event.ack_id
       [200, {"Content-Type"=>"application/json"}, ""]
@@ -57,7 +57,7 @@ describe Gcloud::Pubsub::Event, :mock_pubsub do
   end
 
   it "can ack" do
-    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
       JSON.parse(env.body)["ackIds"].count.must_equal 1
       JSON.parse(env.body)["ackIds"].first.must_equal event.ack_id
       [200, {"Content-Type"=>"application/json"}, ""]
@@ -69,8 +69,8 @@ describe Gcloud::Pubsub::Event, :mock_pubsub do
   it "can delay" do
     new_deadline = 42
 
-    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{subscription_name}:modifyAckDeadline" do |env|
-      JSON.parse(env.body)["ackId"].must_equal              event.ack_id
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:modifyAckDeadline" do |env|
+      JSON.parse(env.body)["ackIds"].must_equal             [event.ack_id]
       JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
       [200, {"Content-Type"=>"application/json"}, ""]
     end

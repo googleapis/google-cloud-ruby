@@ -19,7 +19,7 @@ describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
   let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
                                                 pubsub.connection }
   it "lists subscriptions" do
-    mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+    mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
       [200, {"Content-Type"=>"application/json"},
        subscriptions_json(topic_name, 3)]
     end
@@ -38,7 +38,7 @@ describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
                                                    true }
 
       it "lists subscriptions" do
-        mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+        mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
           [200, {"Content-Type"=>"application/json"},
            subscriptions_json(topic_name, 3)]
         end
@@ -57,7 +57,7 @@ describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
                                                    false }
 
       it "lists subscriptions" do
-        mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+        mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
           [200, {"Content-Type"=>"application/json"},
            subscriptions_json(topic_name, 3)]
         end
@@ -78,7 +78,7 @@ describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
                                                    true }
 
       it "lists subscriptions" do
-        mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+        mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(topic_name)]
         end
@@ -95,7 +95,7 @@ describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
                                                    false }
 
       it "lists subscriptions" do
-        mock_connection.get "/v1beta2/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
+        mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(topic_name)]
         end

@@ -26,7 +26,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
   let(:msg_packed3) { [message3].pack("m") }
 
   it "publishes a message" do
-    mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+    mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
       JSON.parse(env.body)["messages"].first["data"].must_equal msg_packed1
       [200, {"Content-Type"=>"application/json"},
        { messageIds: ["msg1"] }.to_json]
@@ -38,7 +38,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
   end
 
   it "publishes a message with attributes" do
-    mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+    mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
       JSON.parse(env.body)["messages"].first["data"].must_equal msg_packed1
       [200, {"Content-Type"=>"application/json"},
        { messageIds: ["msg1"] }.to_json]
@@ -51,7 +51,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
   end
 
   it "publishes multiple messages with a block" do
-    mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+    mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
       JSON.parse(env.body)["messages"].first["data"].must_equal msg_packed1
       JSON.parse(env.body)["messages"].last["data"].must_equal  msg_packed3
       [200, {"Content-Type"=>"application/json"},
@@ -77,7 +77,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
                                                    true }
 
       it "publishes a message" do
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           JSON.parse(env.body)["messages"].first["data"].must_equal msg_packed1
           [200, {"Content-Type"=>"application/json"},
            { messageIds: ["msg1"] }.to_json]
@@ -89,7 +89,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
       end
 
       it "publishes a message with attributes" do
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           JSON.parse(env.body)["messages"].first["data"].must_equal msg_packed1
           [200, {"Content-Type"=>"application/json"},
            { messageIds: ["msg1"] }.to_json]
@@ -102,7 +102,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
       end
 
       it "publishes multiple messages with a block" do
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           JSON.parse(env.body)["messages"].first["data"].must_equal msg_packed1
           [200, {"Content-Type"=>"application/json"},
            { messageIds: ["msg1", "msg2", "msg3"] }.to_json]
@@ -127,7 +127,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
                                                    false }
 
       it "publishes a message" do
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           JSON.parse(env.body)["messages"].first["data"].must_equal msg_packed1
           [200, {"Content-Type"=>"application/json"},
            { messageIds: ["msg1"] }.to_json]
@@ -139,7 +139,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
       end
 
       it "publishes a message with attributes" do
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           JSON.parse(env.body)["messages"].first["data"].must_equal msg_packed1
           [200, {"Content-Type"=>"application/json"},
            { messageIds: ["msg1"] }.to_json]
@@ -152,7 +152,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
       end
 
       it "publishes multiple messages with a block" do
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           JSON.parse(env.body)["messages"].first["data"].must_equal msg_packed1
           JSON.parse(env.body)["messages"].last["data"].must_equal  msg_packed3
           [200, {"Content-Type"=>"application/json"},
@@ -181,17 +181,17 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
 
       it "publishes a message" do
         #first, failed attempt to publish
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(topic_name)]
         end
         # second, successful attempt to create topic
-        mock_connection.put "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|
+        mock_connection.put "/v1/projects/#{project}/topics/#{topic_name}" do |env|
           [200, {"Content-Type"=>"application/json"},
            topic_json(topic_name)]
         end
         # third, successful attempt to publish
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           JSON.parse(env.body)["messages"].first["data"].must_equal msg_packed1
           [200, {"Content-Type"=>"application/json"},
            { messageIds: ["msg1"] }.to_json]
@@ -204,17 +204,17 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
 
       it "publishes a message with attributes" do
         #first, failed attempt to publish
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(topic_name)]
         end
         # second, successful attempt to create topic
-        mock_connection.put "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|
+        mock_connection.put "/v1/projects/#{project}/topics/#{topic_name}" do |env|
           [200, {"Content-Type"=>"application/json"},
            topic_json(topic_name)]
         end
         # third, successful attempt to publish
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           JSON.parse(env.body)["messages"].first["data"].must_equal msg_packed1
           [200, {"Content-Type"=>"application/json"},
            { messageIds: ["msg1"] }.to_json]
@@ -228,17 +228,17 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
 
       it "publishes multiple messages with a block" do
         #first, failed attempt to publish
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(topic_name)]
         end
         # second, successful attempt to create topic
-        mock_connection.put "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|
+        mock_connection.put "/v1/projects/#{project}/topics/#{topic_name}" do |env|
           [200, {"Content-Type"=>"application/json"},
            topic_json(topic_name)]
         end
         # third, successful attempt to publish
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           JSON.parse(env.body)["messages"].first["data"].must_equal msg_packed1
           JSON.parse(env.body)["messages"].last["data"].must_equal  msg_packed3
           [200, {"Content-Type"=>"application/json"},
@@ -264,7 +264,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
                                                    false }
 
       it "publishes a message" do
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(topic_name)]
         end
@@ -275,7 +275,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
       end
 
       it "publishes a message with attributes" do
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(topic_name)]
         end
@@ -286,7 +286,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
       end
 
       it "publishes multiple messages with a block" do
-        mock_connection.post "/v1beta2/projects/#{project}/topics/#{topic_name}:publish" do |env|
+        mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(topic_name)]
         end

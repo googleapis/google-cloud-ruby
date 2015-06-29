@@ -43,7 +43,7 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
   it "can update the endpoint" do
     new_push_endpoint = "https://foo.bar/baz"
 
-    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{sub_name}:modifyPushConfig" do |env|
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyPushConfig" do |env|
       JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal new_push_endpoint
       [200, {"Content-Type"=>"application/json"}, ""]
     end
@@ -58,7 +58,7 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     end
 
     it "makes an HTTP API call to retrieve topic" do
-      mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
         [200, {"Content-Type"=>"application/json"},
          sub_json]
       end
@@ -69,7 +69,7 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     end
 
     it "makes an HTTP API call to retrieve deadline" do
-      mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
         [200, {"Content-Type"=>"application/json"},
          sub_json]
       end
@@ -78,7 +78,7 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     end
 
     it "makes an HTTP API call to retrieve endpoint" do
-      mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
         [200, {"Content-Type"=>"application/json"},
          sub_json]
       end
@@ -89,7 +89,7 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to update endpoint" do
       new_push_endpoint = "https://foo.bar/baz"
 
-      mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{sub_name}:modifyPushConfig" do |env|
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyPushConfig" do |env|
         JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal new_push_endpoint
         [200, {"Content-Type"=>"application/json"}, ""]
       end
@@ -105,7 +105,7 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     end
 
     it "raises NotFoundError when retrieving topic" do
-      mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
         [404, {"Content-Type"=>"application/json"},
          not_found_error_json(sub_name)]
       end
@@ -116,7 +116,7 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     end
 
     it "raises NotFoundError when retrieving deadline" do
-      mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
         [404, {"Content-Type"=>"application/json"},
          not_found_error_json(sub_name)]
       end
@@ -127,7 +127,7 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     end
 
     it "raises NotFoundError when retrieving endpoint" do
-      mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
         [404, {"Content-Type"=>"application/json"},
          not_found_error_json(sub_name)]
       end
@@ -140,7 +140,7 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     it "raises NotFoundError when updating endpoint" do
       new_push_endpoint = "https://foo.bar/baz"
 
-      mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{sub_name}:modifyPushConfig" do |env|
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyPushConfig" do |env|
         JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal new_push_endpoint
         [404, {"Content-Type"=>"application/json"},
          not_found_error_json(sub_name)]

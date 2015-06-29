@@ -24,7 +24,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
   end
 
   it "can acknowledge messages" do
-    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
       JSON.parse(env.body)["ackIds"].count.must_equal 3
       JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
       JSON.parse(env.body)["ackIds"].must_include "ack-id-2"
@@ -42,7 +42,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
     end
 
     it "can acknowledge messages" do
-      mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
         JSON.parse(env.body)["ackIds"].count.must_equal 3
         JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
         JSON.parse(env.body)["ackIds"].must_include "ack-id-2"
@@ -61,7 +61,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
     end
 
     it "raises NotFoundError when acknowledging messages" do
-      mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
         JSON.parse(env.body)["ackIds"].count.must_equal 3
         JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
         JSON.parse(env.body)["ackIds"].must_include "ack-id-2"
