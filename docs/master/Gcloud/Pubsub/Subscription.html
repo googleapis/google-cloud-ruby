@@ -208,11 +208,28 @@ remove the message from the subscription. Acknowledging a message whose ack
 deadline has expired may succeed, although the message may have been sent
 again. Acknowledging a message more than once will not result in an error.
 This is only used for messages received via pull.</p>
+
+<h3 id="method-i-acknowledge-label-Parameters">Parameters<span><a href="#method-i-acknowledge-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>ack_ids</code>
+<dd>
+<p>One or more ack_id values. (+Event#ack_id+)</p>
+</dd></dl>
+
+<h3 id="method-i-acknowledge-label-Example">Example<span><a href="#method-i-acknowledge-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">ack_ids</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">ack_id</span> }
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">acknowledge</span> <span class="ruby-operator">*</span><span class="ruby-identifier">ack_ids</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="acknowledge-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 270</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 286</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acknowledge</span> <span class="ruby-operator">*</span><span class="ruby-identifier">ack_ids</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">acknowledge</span> <span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">ack_ids</span>
@@ -656,7 +673,7 @@ receiving messages.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jun 25, 2015.
+    Docs built on Jun 29, 2015.
   </div>
 </div>
 

@@ -257,7 +257,68 @@ option:</p>
 
 <h2 id="module-Gcloud::Pubsub-label-Acknowledging+a+Message">Acknowledging a <a href="Pubsub/Message.html">Message</a><span><a href="#module-Gcloud::Pubsub-label-Acknowledging+a+Message">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
+<p>Messages that are recieved can be acknowledged in Pub/Sub, marking the
+message to be removed so it cannot be pulled again.</p>
+
+<p>A <a href="Pubsub/Message.html">Message</a> that can be acknowledged is
+called an <a href="Pubsub/Event.html">Event</a>. Events can be acknowledged
+one at a time: (See <a
+href="Pubsub/Event.html#method-i-acknowledge-21">Gcloud::Pubsub::Event#acknowledge!</a>)</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">acknowledge!</span> }
+</pre>
+
+<p>Or, multiple events can be acknowledged in a single API call: (See <a
+href="Pubsub/Subscription.html#method-i-acknowledge">Gcloud::Pubsub::Subscription#acknowledge</a>)</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">ack_ids</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">ack_id</span> }
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">acknowledge</span> <span class="ruby-operator">*</span><span class="ruby-identifier">ack_ids</span>
+</pre>
+
 <h2 id="module-Gcloud::Pubsub-label-Modifying+a+Message">Modifying a <a href="Pubsub/Message.html">Message</a><span><a href="#module-Gcloud::Pubsub-label-Modifying+a+Message">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>If a message is unable to be acknowledged in a timely manner, it can be
+modified to extend the acknowledgement deadline. This indicates that more
+time is needed to process the message, or to make the message available for
+redelivery if the processing was interrupted.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">event</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">if</span> <span class="ruby-identifier">event</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span>
+  <span class="ruby-comment"># Delay for 2 minutes</span>
+  <span class="ruby-identifier">event</span>.<span class="ruby-identifier">delay!</span> <span class="ruby-value">120</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The message can also be made available for immediate redelivery:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">event</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">if</span> <span class="ruby-identifier">event</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span>
+  <span class="ruby-comment"># Mark for redelivery by setting the deadline to now</span>
+  <span class="ruby-identifier">event</span>.<span class="ruby-identifier">delay!</span> <span class="ruby-value">0</span>
+<span class="ruby-keyword">end</span>
+</pre>
 
         </div>
 
@@ -301,7 +362,7 @@ option:</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jun 25, 2015.
+    Docs built on Jun 29, 2015.
   </div>
 </div>
 
