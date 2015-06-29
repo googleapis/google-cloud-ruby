@@ -19,7 +19,7 @@ classes:
   name: Key
   indent: 1
 - full_name: Gcloud::Pubsub
-  name: Pubsub
+  name: "Pub/Sub"
   indent: 0
 - full_name: Gcloud::Pubsub::Project
   name: Project
