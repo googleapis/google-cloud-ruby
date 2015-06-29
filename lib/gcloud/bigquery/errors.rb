@@ -16,7 +16,7 @@
 module Gcloud
   module Bigquery
     ##
-    # Base Bigquery exception class.
+    # Base BigQuery exception class.
     class Error < Gcloud::Error
     end
 

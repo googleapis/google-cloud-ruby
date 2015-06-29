@@ -15,11 +15,11 @@
 require "gcloud"
 require "gcloud/bigquery/project"
 
-##
-# Google Cloud Bigquery
+#--
+# Google Cloud BigQuery
 module Gcloud
   ##
-  # Create a new Bigquery project.
+  # Create a new BigQuery project.
   #
   #   bigquery = Gcloud.bigquery "my-todo-project",
   #                              "/path/to/keyfile.json"
