@@ -19,7 +19,7 @@ require "google/api_client"
 module Gcloud
   module Pubsub
     ##
-    # Represents the connection to Pubsub,
+    # Represents the connection to Pub/Sub,
     # as well as expose the API calls.
     class Connection #:nodoc:
       API_VERSION = "v1beta2"

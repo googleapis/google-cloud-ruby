@@ -20,13 +20,13 @@ require "gcloud/pubsub/project"
 # Google Cloud Pub/Sub
 module Gcloud
   ##
-  # Creates a new object for connecting to the Pubsub service.
+  # Creates a new object for connecting to the Pub/Sub service.
   # Each call creates a new connection.
   #
   # === Parameters
   #
   # +project+::
-  #   Project identifier for the Pubsub service you are connecting to.
+  #   Project identifier for the Pub/Sub service you are connecting to.
   #   (+String+)
   # +keyfile+::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
@@ -56,7 +56,7 @@ module Gcloud
   end
 
   ##
-  # = Google Cloud Pubsub
+  # = Google Cloud Pub/Sub
   #
   # Google Cloud Pub/Sub is designed to provide reliable, many-to-many,
   # asynchronous messaging between applications. Publisher applications can
@@ -67,7 +67,7 @@ module Gcloud
   #
   # Gcloud's goal is to provide a API that is familiar and comfortable to
   # Rubyists. Authentication is handled by Gcloud.pubsub. You can provide the
-  # project and credential information to connect to the Pubsub service, or if
+  # project and credential information to connect to the Pub/Sub service, or if
   # you are running on Google Compute Engine this configuration is taken care
   # of for you.
   #
@@ -79,7 +79,7 @@ module Gcloud
   #   topic.publish "task completed"
   #
   # To learn more about Datastore, read the
-  # {Google Cloud Pubsub Overview
+  # {Google Cloud Pub/Sub Overview
   # }[https://cloud.google.com/pubsub/overview].
   #
   # == Retrieving Topics

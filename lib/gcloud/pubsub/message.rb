@@ -20,7 +20,7 @@ module Gcloud
     ##
     # = Message
     #
-    # Represents a Pubsub Message.
+    # Represents a Pub/Sub Message.
     #
     # Message objects are created by Topic#publish.
     # Subscription#pull returns Event objects, which contain a Message object

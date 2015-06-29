@@ -18,7 +18,7 @@ require "gcloud/credentials"
 module Gcloud
   module Pubsub
     ##
-    # Represents the Oauth2 signing logic for Pubsub.
+    # Represents the Oauth2 signing logic for Pub/Sub.
     class Credentials < Gcloud::Credentials #:nodoc:
       SCOPE = ["https://www.googleapis.com/auth/pubsub",
                "https://www.googleapis.com/auth/cloud-platform"]

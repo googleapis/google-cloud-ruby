@@ -18,7 +18,7 @@ module Gcloud
     ##
     # = Storage Error
     #
-    # Base Pubsub exception class.
+    # Base Pub/Sub exception class.
     class Error < Gcloud::Error
     end
 

@@ -23,7 +23,7 @@ module Gcloud
     ##
     # = Topic
     #
-    # Represents a Pubsub topic. Belongs to a Project and creates Subscription
+    # Represents a Pub/Sub topic. Belongs to a Project and creates Subscription
     # and publishes messages.
     #
     #   require "glcoud/pubsub"
