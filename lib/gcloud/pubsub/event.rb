@@ -21,7 +21,7 @@ module Gcloud
     ##
     # = Event
     #
-    # Represents a Pubsub Message that can be acknowledged or delayed.
+    # Represents a Pub/Sub Message that can be acknowledged or delayed.
     #
     #   require "glcoud/pubsub"
     #

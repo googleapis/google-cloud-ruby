@@ -22,7 +22,7 @@ module Gcloud
     ##
     # = Subscription
     #
-    # Represents a Pubsub subscription, contains the stream of messages from a
+    # Represents a Pub/Sub subscription, contains the stream of messages from a
     # single, specific Topic, to be delivered to the subscribing application.
     #
     #   require "glcoud/pubsub"

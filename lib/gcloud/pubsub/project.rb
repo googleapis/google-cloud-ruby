@@ -49,7 +49,7 @@ module Gcloud
         @connection = Connection.new project, credentials
       end
 
-      # The Pubsub project connected to.
+      # The Pub/Sub project connected to.
       #
       # === Example
       #
