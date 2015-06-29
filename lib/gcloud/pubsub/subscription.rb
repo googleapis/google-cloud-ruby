@@ -267,6 +267,22 @@ module Gcloud
       # although the message may have been sent again.
       # Acknowledging a message more than once will not result in an error.
       # This is only used for messages received via pull.
+      #
+      # === Parameters
+      #
+      # +ack_ids+::
+      #   One or more ack_id values. (+Event#ack_id+)
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   ack_ids = sub.pull.map { |msg| msg.ack_id }
+      #   sub.acknowledge *ack_ids
+      #
       def acknowledge *ack_ids
         ensure_connection!
         resp = connection.acknowledge name, *ack_ids

@@ -214,7 +214,63 @@ module Gcloud
   #   msgs = sub.pull
   #
   # == Acknowledging a Message
+  #
+  # Messages that are recieved can be acknowledged in Pub/Sub, marking the
+  # message to be removed so it cannot be pulled again.
+  #
+  # A Message that can be acknowledged is called an Event. Events can be
+  # acknowledged one at a time: (See Event#acknowledge!)
+  #
+  #   require "glcoud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   sub.pull.each { |msg| msg.acknowledge! }
+  #
+  # Or, multiple events can be acknowledged in a single API call:
+  # (See Subscription#acknowledge)
+  #
+  #   require "glcoud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   ack_ids = sub.pull.map { |msg| msg.ack_id }
+  #   sub.acknowledge *ack_ids
+  #
   # == Modifying a Message
+  #
+  # If a message is unable to be acknowledged in a timely manner, it can be
+  # modified to extend the acknowledgement deadline. This indicates that more
+  # time is needed to process the message, or to make the message available for
+  # redelivery if the processing was interrupted.
+  #
+  #   require "glcoud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   event = sub.pull.first
+  #   if event
+  #     puts event.message.data
+  #     # Delay for 2 minutes
+  #     event.delay! 120
+  #   end
+  #
+  # The message can also be made available for immediate redelivery:
+  #
+  #   require "glcoud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   event = sub.pull.first
+  #   if event
+  #     puts event.message.data
+  #     # Mark for redelivery by setting the deadline to now
+  #     event.delay! 0
+  #   end
   #
   module Pubsub
   end
