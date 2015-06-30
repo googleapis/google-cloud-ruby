@@ -15,7 +15,7 @@
 
 require "gcloud/pubsub/errors"
 require "gcloud/pubsub/subscription/list"
-require "gcloud/pubsub/event"
+require "gcloud/pubsub/received_message"
 
 module Gcloud
   module Pubsub
@@ -219,7 +219,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Pubsub::Event
+      # Array of Gcloud::Pubsub::ReceivedMesssage
       #
       # === Examples
       #
@@ -253,7 +253,7 @@ module Gcloud
         resp = connection.pull name, options
         if resp.success?
           Array(resp.data["receivedMessages"]).map do |gapi|
-            Event.from_gapi gapi, self
+            ReceivedMesssage.from_gapi gapi, self
           end
         else
           fail ApiError.from_response(resp)
@@ -271,7 +271,8 @@ module Gcloud
       # === Parameters
       #
       # +messages+::
-      #   One or more Event objects or ack_id values. (+Event+/+Event#ack_id+)
+      #   One or more ReceivedMesssage objects or ack_id values.
+      #   (+ReceivedMesssage+/+ReceivedMesssage#ack_id+)
       #
       # === Example
       #
@@ -311,7 +312,8 @@ module Gcloud
       #   Specifying zero may immediately make the messages available for
       #   another pull request. (+Integer+)
       # +messages+::
-      #   One or more Event objects or ack_id values. (+Event+/+Event#ack_id+)
+      #   One or more ReceivedMesssage objects or ack_id values.
+      #   (+ReceivedMesssage+/+ReceivedMesssage#ack_id+)
       #
       # === Example
       #
@@ -320,8 +322,8 @@ module Gcloud
       #   pubsub = Gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
-      #   events = sub.pull
-      #   sub.delay 120, events
+      #   messages = sub.pull
+      #   sub.delay 120, messages
       #
       def delay new_deadline, *messages
         ack_ids = coerce_ack_ids messages
@@ -366,7 +368,7 @@ module Gcloud
 
       ##
       # Makes sure the values are the +ack_id+.
-      # If given several Event objects extract the +ack_id+ values.
+      # If given several ReceivedMesssage objects extract the +ack_id+ values.
       def coerce_ack_ids messages
         Array(messages).flatten.map do |msg|
           msg.respond_to?(:ack_id) ? msg.ack_id : msg.to_s

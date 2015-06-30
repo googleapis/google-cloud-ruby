@@ -195,7 +195,7 @@ describe Gcloud::Pubsub, :pubsub do
       subscription = topic.subscribe "#{$topic_prefix}-sub4"
       subscription.wont_be :nil?
       subscription.must_be_kind_of Gcloud::Pubsub::Subscription
-      # No events, should be empty
+      # No messages, should be empty
       events = subscription.pull
       events.must_be :empty?
       # Publish a new message

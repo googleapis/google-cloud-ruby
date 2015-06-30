@@ -15,7 +15,7 @@
 require "helper"
 
 describe Gcloud::Pubsub::Message, :mock_pubsub do
-  let(:data)       { "event-msg-goes-here" }
+  let(:data)       { "rec_message-msg-goes-here" }
   let(:attributes) { { "foo" => "FOO", "bar" => "BAR" } }
   let(:msg)    { Gcloud::Pubsub::Message.new data, attributes }
 
@@ -36,22 +36,22 @@ describe Gcloud::Pubsub::Message, :mock_pubsub do
       json = JSON.parse(subscription_json(topic_name, subscription_name))
       Gcloud::Pubsub::Subscription.from_gapi json, pubsub.connection
     end
-    let(:event_name) { "event-name-goes-here" }
-    let(:event_msg)  { "event-msg-goes-here" }
-    let(:event_data)  { JSON.parse(event_json(event_msg)) }
-    let(:msg)     { Gcloud::Pubsub::Message.from_gapi event_data["message"] }
+    let(:rec_message_name) { "rec_message-name-goes-here" }
+    let(:rec_message_msg)  { "rec_message-msg-goes-here" }
+    let(:rec_message_data)  { JSON.parse(rec_message_json(rec_message_msg)) }
+    let(:msg)     { Gcloud::Pubsub::Message.from_gapi rec_message_data["message"] }
 
     it "knows its data" do
-      msg.data.must_equal event_data["message"]["data"]
+      msg.data.must_equal rec_message_data["message"]["data"]
     end
 
     it "knows its attributes" do
-      msg.attributes.must_equal event_data["message"]["attributes"]
+      msg.attributes.must_equal rec_message_data["message"]["attributes"]
     end
 
     it "knows its message_id" do
-      msg.msg_id.must_equal     event_data["message"]["messageId"]
-      msg.message_id.must_equal event_data["message"]["messageId"]
+      msg.msg_id.must_equal     rec_message_data["message"]["messageId"]
+      msg.message_id.must_equal rec_message_data["message"]["messageId"]
     end
   end
 end

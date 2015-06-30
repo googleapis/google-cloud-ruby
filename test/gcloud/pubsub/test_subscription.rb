@@ -60,15 +60,15 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can pull a message" do
-    event_msg = "pulled-message"
+    rec_message_msg = "pulled-message"
     mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:pull" do |env|
       [200, {"Content-Type"=>"application/json"},
-       events_json(event_msg)]
+       rec_messages_json(rec_message_msg)]
     end
 
-    events = subscription.pull
-    events.wont_be :empty?
-    events.first.message.data.must_equal event_msg
+    rec_messages = subscription.pull
+    rec_messages.wont_be :empty?
+    rec_messages.first.message.data.must_equal rec_message_msg
   end
 
   it "can acknowledge one message" do

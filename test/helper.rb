@@ -147,7 +147,7 @@ class MockPubsub < Minitest::Spec
     }.to_json
   end
 
-  def event_json message, id = rand(1000000)
+  def rec_message_json message, id = rand(1000000)
     {
       "ackId" => "ack-id-#{id}",
       "message" => {
@@ -158,10 +158,10 @@ class MockPubsub < Minitest::Spec
     }.to_json
   end
 
-  def events_json message
+  def rec_messages_json message
     {
       "receivedMessages" => [
-        JSON.parse(event_json(message))
+        JSON.parse(rec_message_json(message))
       ]
     }.to_json
   end
