@@ -51,6 +51,17 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
     subscription.acknowledge *ack_ids
   end
 
+  it "can acknowledge many ack ids in an array" do
+    ack_ids = [event1.ack_id, event3.ack_id, event3.ack_id]
+
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+      JSON.parse(env.body)["ackIds"].must_equal ack_ids
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    subscription.acknowledge ack_ids
+  end
+
   it "can acknowledge a message" do
     mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
       JSON.parse(env.body)["ackIds"].must_equal [event1.ack_id]
@@ -70,6 +81,18 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
     end
 
     subscription.acknowledge *events
+  end
+
+  it "can acknowledge many messages in an array" do
+    events  = [event1, event3, event3]
+    ack_ids = events.map &:ack_id
+
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+      JSON.parse(env.body)["ackIds"].must_equal ack_ids
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    subscription.acknowledge events
   end
 
   describe "lazy subscription object of a subscription that does exist" do
@@ -100,6 +123,17 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
       subscription.acknowledge *ack_ids
     end
 
+    it "can acknowledge many ack ids in an array" do
+      ack_ids = [event1.ack_id, event3.ack_id, event3.ack_id]
+
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+        JSON.parse(env.body)["ackIds"].must_equal ack_ids
+        [200, {"Content-Type"=>"application/json"}, ""]
+      end
+
+      subscription.acknowledge ack_ids
+    end
+
     it "can acknowledge a message" do
       mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
         JSON.parse(env.body)["ackIds"].must_equal [event1.ack_id]
@@ -119,6 +153,18 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
       end
 
       subscription.acknowledge *events
+    end
+
+    it "can acknowledge many messages in an array" do
+      events  = [event1, event3, event3]
+      ack_ids = events.map &:ack_id
+
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+        JSON.parse(env.body)["ackIds"].must_equal ack_ids
+        [200, {"Content-Type"=>"application/json"}, ""]
+      end
+
+      subscription.acknowledge events
     end
   end
 
@@ -156,6 +202,20 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
       end.must_raise Gcloud::Pubsub::NotFoundError
     end
 
+    it "raises NotFoundError when acknowledging many ack ids in an array" do
+      ack_ids = [event1.ack_id, event3.ack_id, event3.ack_id]
+
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+        JSON.parse(env.body)["ackIds"].must_equal ack_ids
+        [404, {"Content-Type"=>"application/json"},
+         not_found_error_json(sub_name)]
+      end
+
+      expect do
+        subscription.acknowledge ack_ids
+      end.must_raise Gcloud::Pubsub::NotFoundError
+    end
+
     it "raises NotFoundError when acknowledging a message" do
       mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
         JSON.parse(env.body)["ackIds"].must_equal [event1.ack_id]
@@ -180,6 +240,21 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
       expect do
         subscription.acknowledge *events
+      end.must_raise Gcloud::Pubsub::NotFoundError
+    end
+
+    it "raises NotFoundError when acknowledging many messages in an array" do
+      events  = [event1, event3, event3]
+      ack_ids = events.map &:ack_id
+
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+        JSON.parse(env.body)["ackIds"].must_equal ack_ids
+        [404, {"Content-Type"=>"application/json"},
+         not_found_error_json(sub_name)]
+      end
+
+      expect do
+        subscription.acknowledge events
       end.must_raise Gcloud::Pubsub::NotFoundError
     end
   end
