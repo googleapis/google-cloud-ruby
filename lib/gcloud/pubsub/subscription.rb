@@ -295,6 +295,45 @@ module Gcloud
       alias_method :ack, :acknowledge
 
       ##
+      # Modifies the acknowledge deadline for messages.
+      #
+      # This indicates that more time is needed to process the messages, or to
+      # make the messages available for redelivery if the processing was
+      # interrupted.
+      #
+      # === Parameters
+      #
+      # +new_deadline+::
+      #   The new ack deadline in seconds from the time this request is sent
+      #   to the Pub/Sub system. Must be >= 0. For example, if the value is 10,
+      #   the new ack deadline will expire 10 seconds after the call is made.
+      #   Specifying zero may immediately make the messages available for
+      #   another pull request. (+Integer+)
+      # +ack_ids+::
+      #   One or more ack_id values. (+Event#ack_id+)
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   events = sub.pull
+      #   ack_ids = events.map { |msg| msg.ack_id }
+      #   sub.delay 120, *ack_ids
+      #
+      def delay new_deadline, *ack_ids
+        ensure_connection!
+        resp = connection.modify_ack_deadline name, ack_ids, new_deadline
+        if resp.success?
+          true
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Subscription from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
