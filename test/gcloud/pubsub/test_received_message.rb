@@ -46,6 +46,19 @@ describe Gcloud::Pubsub::ReceivedMesssage, :mock_pubsub do
     rec_message.message.message_id.must_equal rec_message_data["message"]["messageId"]
   end
 
+  it "knows the message's data" do
+    rec_message.data.must_equal rec_message.message.data
+  end
+
+  it "knows the message's attributes" do
+    rec_message.attributes.must_equal rec_message.message.attributes
+  end
+
+  it "knows the message's message_id" do
+    rec_message.msg_id.must_equal     rec_message.message.msg_id
+    rec_message.message_id.must_equal rec_message.message.message_id
+  end
+
   it "can acknowledge" do
     mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
       JSON.parse(env.body)["ackIds"].count.must_equal 1

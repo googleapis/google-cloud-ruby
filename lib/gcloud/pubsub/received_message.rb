@@ -66,6 +66,26 @@ module Gcloud
       alias_method :msg, :message
 
       ##
+      # The received message's data.
+      def data
+        message.data
+      end
+
+      ##
+      # The received message's attributes.
+      def attributes
+        message.attributes
+      end
+
+      ##
+      # The ID of received message, assigned by the server at publication time.
+      # Guaranteed to be unique within the topic.
+      def message_id
+        message.message_id
+      end
+      alias_method :msg_id, :message_id
+
+      ##
       # Acknowledges receipt of the message.
       #
       # === Example
