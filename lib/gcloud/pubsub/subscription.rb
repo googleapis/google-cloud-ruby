@@ -309,8 +309,8 @@ module Gcloud
       #   the new ack deadline will expire 10 seconds after the call is made.
       #   Specifying zero may immediately make the messages available for
       #   another pull request. (+Integer+)
-      # +ack_ids+::
-      #   One or more ack_id values. (+Event#ack_id+)
+      # +messages+::
+      #   One or more Event objects or ack_id values. (+Event+/+Event#ack_id+)
       #
       # === Example
       #
@@ -320,10 +320,10 @@ module Gcloud
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   events = sub.pull
-      #   ack_ids = events.map { |msg| msg.ack_id }
-      #   sub.delay 120, *ack_ids
+      #   sub.delay 120, *events
       #
-      def delay new_deadline, *ack_ids
+      def delay new_deadline, *messages
+        ack_ids = coerce_ack_ids messages
         ensure_connection!
         resp = connection.modify_ack_deadline name, ack_ids, new_deadline
         if resp.success?
@@ -360,6 +360,15 @@ module Gcloud
           @gapi = resp.data
         else
           fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Makes sure the values are the +ack_id+.
+      # If given several Event objects extract the +ack_id+ values.
+      def coerce_ack_ids messages
+        Array(messages).map do |msg|
+          msg.respond_to?(:ack_id) ? msg.ack_id : msg.to_s
         end
       end
     end

@@ -55,6 +55,31 @@ describe Gcloud::Pubsub::Subscription, :delay, :mock_pubsub do
     subscription.delay new_deadline, *ack_ids
   end
 
+  it "can delay a message" do
+    new_deadline = 42
+
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
+      JSON.parse(env.body)["ackIds"].must_equal             [event1.ack_id]
+      JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    subscription.delay new_deadline, event1
+  end
+
+  it "can delay many messages" do
+    events = [event1, event3, event3]
+    new_deadline = 42
+
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
+      JSON.parse(env.body)["ackIds"].must_equal             events.map(&:ack_id)
+      JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    subscription.delay new_deadline, *events
+  end
+
   describe "lazy subscription object of a subscription that does exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
@@ -85,6 +110,31 @@ describe Gcloud::Pubsub::Subscription, :delay, :mock_pubsub do
       end
 
       subscription.delay new_deadline, *ack_ids
+    end
+
+    it "can delay a message" do
+      new_deadline = 42
+
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
+        JSON.parse(env.body)["ackIds"].must_equal             [event1.ack_id]
+        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
+        [200, {"Content-Type"=>"application/json"}, ""]
+      end
+
+      subscription.delay new_deadline, event1
+    end
+
+    it "can delay many messages" do
+      events = [event1, event3, event3]
+      new_deadline = 42
+
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
+        JSON.parse(env.body)["ackIds"].must_equal             events.map(&:ack_id)
+        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
+        [200, {"Content-Type"=>"application/json"}, ""]
+      end
+
+      subscription.delay new_deadline, *events
     end
   end
 
@@ -123,6 +173,37 @@ describe Gcloud::Pubsub::Subscription, :delay, :mock_pubsub do
 
       expect do
         subscription.delay new_deadline, *ack_ids
+      end.must_raise Gcloud::Pubsub::NotFoundError
+    end
+
+    it "raises NotFoundError when delaying a message" do
+      new_deadline = 42
+
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
+        JSON.parse(env.body)["ackIds"].must_equal             [event1.ack_id]
+        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
+        [404, {"Content-Type"=>"application/json"},
+         not_found_error_json(sub_name)]
+      end
+
+      expect do
+        subscription.delay new_deadline, event1
+      end.must_raise Gcloud::Pubsub::NotFoundError
+    end
+
+    it "raises NotFoundError when delaying many messages" do
+      events = [event1, event3, event3]
+      new_deadline = 42
+
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
+        JSON.parse(env.body)["ackIds"].must_equal             events.map(&:ack_id)
+        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
+        [404, {"Content-Type"=>"application/json"},
+         not_found_error_json(sub_name)]
+      end
+
+      expect do
+        subscription.delay new_deadline, *events
       end.must_raise Gcloud::Pubsub::NotFoundError
     end
   end
