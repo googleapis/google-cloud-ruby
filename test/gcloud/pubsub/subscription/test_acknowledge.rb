@@ -23,7 +23,17 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
     Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection
   end
 
-  it "can acknowledge messages" do
+  it "can acknowledge an ack id" do
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+      JSON.parse(env.body)["ackIds"].count.must_equal 1
+      JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    subscription.acknowledge "ack-id-1"
+  end
+
+  it "can acknowledge many ack ids" do
     mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
       JSON.parse(env.body)["ackIds"].count.must_equal 3
       JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
@@ -41,7 +51,17 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
                                             pubsub.connection
     end
 
-    it "can acknowledge messages" do
+    it "can acknowledge an ack id" do
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+        JSON.parse(env.body)["ackIds"].count.must_equal 1
+        JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
+        [200, {"Content-Type"=>"application/json"}, ""]
+      end
+
+      subscription.acknowledge "ack-id-1"
+    end
+
+    it "can acknowledge many ack ids" do
       mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
         JSON.parse(env.body)["ackIds"].count.must_equal 3
         JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
@@ -60,7 +80,20 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
                                             pubsub.connection
     end
 
-    it "raises NotFoundError when acknowledging messages" do
+    it "raises NotFoundError when acknowledging an ack_id" do
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+        JSON.parse(env.body)["ackIds"].count.must_equal 1
+        JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
+        [404, {"Content-Type"=>"application/json"},
+         not_found_error_json(sub_name)]
+      end
+
+      expect do
+        subscription.acknowledge "ack-id-1"
+      end.must_raise Gcloud::Pubsub::NotFoundError
+    end
+
+    it "raises NotFoundError when acknowledging many ack ids" do
       mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
         JSON.parse(env.body)["ackIds"].count.must_equal 3
         JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
