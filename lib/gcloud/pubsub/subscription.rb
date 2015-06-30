@@ -270,8 +270,8 @@ module Gcloud
       #
       # === Parameters
       #
-      # +ack_ids+::
-      #   One or more ack_id values. (+Event#ack_id+)
+      # +messages+::
+      #   One or more Event objects or ack_id values. (+Event+/+Event#ack_id+)
       #
       # === Example
       #
@@ -283,7 +283,8 @@ module Gcloud
       #   ack_ids = sub.pull.map { |msg| msg.ack_id }
       #   sub.acknowledge *ack_ids
       #
-      def acknowledge *ack_ids
+      def acknowledge *messages
+        ack_ids = coerce_ack_ids messages
         ensure_connection!
         resp = connection.acknowledge name, *ack_ids
         if resp.success?

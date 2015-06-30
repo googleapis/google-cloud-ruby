@@ -22,27 +22,54 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
   let :subscription do
     Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection
   end
+  let(:event1) { Gcloud::Pubsub::Event.from_gapi \
+                  JSON.parse(event_json("event1-msg-goes-here")), subscription }
+  let(:event2) { Gcloud::Pubsub::Event.from_gapi \
+                  JSON.parse(event_json("event2-msg-goes-here")), subscription }
+  let(:event3) { Gcloud::Pubsub::Event.from_gapi \
+                  JSON.parse(event_json("event3-msg-goes-here")), subscription }
 
   it "can acknowledge an ack id" do
+    ack_id = event1.ack_id
+
     mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-      JSON.parse(env.body)["ackIds"].count.must_equal 1
-      JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
+      JSON.parse(env.body)["ackIds"].must_equal [ack_id]
       [200, {"Content-Type"=>"application/json"}, ""]
     end
 
-    subscription.acknowledge "ack-id-1"
+    subscription.acknowledge ack_id
   end
 
   it "can acknowledge many ack ids" do
+    ack_ids = [event1.ack_id, event3.ack_id, event3.ack_id]
+
     mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-      JSON.parse(env.body)["ackIds"].count.must_equal 3
-      JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
-      JSON.parse(env.body)["ackIds"].must_include "ack-id-2"
-      JSON.parse(env.body)["ackIds"].must_include "ack-id-3"
+      JSON.parse(env.body)["ackIds"].must_equal ack_ids
       [200, {"Content-Type"=>"application/json"}, ""]
     end
 
-    subscription.acknowledge "ack-id-1", "ack-id-2", "ack-id-3"
+    subscription.acknowledge *ack_ids
+  end
+
+  it "can acknowledge a message" do
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+      JSON.parse(env.body)["ackIds"].must_equal [event1.ack_id]
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    subscription.acknowledge event1
+  end
+
+  it "can acknowledge many messages" do
+    events  = [event1, event3, event3]
+    ack_ids = events.map &:ack_id
+
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+      JSON.parse(env.body)["ackIds"].must_equal ack_ids
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    subscription.acknowledge *events
   end
 
   describe "lazy subscription object of a subscription that does exist" do
@@ -52,25 +79,46 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
     end
 
     it "can acknowledge an ack id" do
+      ack_id = event1.ack_id
+
       mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].count.must_equal 1
-        JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
+        JSON.parse(env.body)["ackIds"].must_equal [ack_id]
         [200, {"Content-Type"=>"application/json"}, ""]
       end
 
-      subscription.acknowledge "ack-id-1"
+      subscription.acknowledge ack_id
     end
 
     it "can acknowledge many ack ids" do
+      ack_ids = [event1.ack_id, event3.ack_id, event3.ack_id]
+
       mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].count.must_equal 3
-        JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
-        JSON.parse(env.body)["ackIds"].must_include "ack-id-2"
-        JSON.parse(env.body)["ackIds"].must_include "ack-id-3"
+        JSON.parse(env.body)["ackIds"].must_equal ack_ids
         [200, {"Content-Type"=>"application/json"}, ""]
       end
 
-      subscription.acknowledge "ack-id-1", "ack-id-2", "ack-id-3"
+      subscription.acknowledge *ack_ids
+    end
+
+    it "can acknowledge a message" do
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+        JSON.parse(env.body)["ackIds"].must_equal [event1.ack_id]
+        [200, {"Content-Type"=>"application/json"}, ""]
+      end
+
+      subscription.acknowledge event1
+    end
+
+    it "can acknowledge many messages" do
+      events  = [event1, event3, event3]
+      ack_ids = events.map &:ack_id
+
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+        JSON.parse(env.body)["ackIds"].must_equal ack_ids
+        [200, {"Content-Type"=>"application/json"}, ""]
+      end
+
+      subscription.acknowledge *events
     end
   end
 
@@ -80,31 +128,58 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
                                             pubsub.connection
     end
 
-    it "raises NotFoundError when acknowledging an ack_id" do
+    it "raises NotFoundError when acknowledging an ack id" do
+      ack_id = event1.ack_id
+
       mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].count.must_equal 1
-        JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
+        JSON.parse(env.body)["ackIds"].must_equal [ack_id]
         [404, {"Content-Type"=>"application/json"},
          not_found_error_json(sub_name)]
       end
 
       expect do
-        subscription.acknowledge "ack-id-1"
+        subscription.acknowledge ack_id
       end.must_raise Gcloud::Pubsub::NotFoundError
     end
 
     it "raises NotFoundError when acknowledging many ack ids" do
+      ack_ids = [event1.ack_id, event3.ack_id, event3.ack_id]
+
       mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].count.must_equal 3
-        JSON.parse(env.body)["ackIds"].must_include "ack-id-1"
-        JSON.parse(env.body)["ackIds"].must_include "ack-id-2"
-        JSON.parse(env.body)["ackIds"].must_include "ack-id-3"
+        JSON.parse(env.body)["ackIds"].must_equal ack_ids
         [404, {"Content-Type"=>"application/json"},
          not_found_error_json(sub_name)]
       end
 
       expect do
-        subscription.acknowledge "ack-id-1", "ack-id-2", "ack-id-3"
+        subscription.acknowledge *ack_ids
+      end.must_raise Gcloud::Pubsub::NotFoundError
+    end
+
+    it "raises NotFoundError when acknowledging a message" do
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+        JSON.parse(env.body)["ackIds"].must_equal [event1.ack_id]
+        [404, {"Content-Type"=>"application/json"},
+         not_found_error_json(sub_name)]
+      end
+
+      expect do
+        subscription.acknowledge event1
+      end.must_raise Gcloud::Pubsub::NotFoundError
+    end
+
+    it "raises NotFoundError when acknowledging many messages" do
+      events  = [event1, event3, event3]
+      ack_ids = events.map &:ack_id
+
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
+        JSON.parse(env.body)["ackIds"].must_equal ack_ids
+        [404, {"Content-Type"=>"application/json"},
+         not_found_error_json(sub_name)]
+      end
+
+      expect do
+        subscription.acknowledge *events
       end.must_raise Gcloud::Pubsub::NotFoundError
     end
   end
