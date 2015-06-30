@@ -320,7 +320,7 @@ module Gcloud
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   events = sub.pull
-      #   sub.delay 120, *events
+      #   sub.delay 120, events
       #
       def delay new_deadline, *messages
         ack_ids = coerce_ack_ids messages
@@ -367,7 +367,7 @@ module Gcloud
       # Makes sure the values are the +ack_id+.
       # If given several Event objects extract the +ack_id+ values.
       def coerce_ack_ids messages
-        Array(messages).map do |msg|
+        Array(messages).flatten.map do |msg|
           msg.respond_to?(:ack_id) ? msg.ack_id : msg.to_s
         end
       end
