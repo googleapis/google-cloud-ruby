@@ -237,8 +237,8 @@ module Gcloud
   #   pubsub = Gcloud.pubsub
   #
   #   sub = pubsub.subscription "my-topic-sub"
-  #   ack_ids = sub.pull.map { |msg| msg.ack_id }
-  #   sub.acknowledge *ack_ids
+  #   received_messages = sub.pull
+  #   sub.acknowledge received_messages
   #
   # == Modifying a Message
   #
@@ -246,6 +246,7 @@ module Gcloud
   # modified to extend the acknowledgement deadline. This indicates that more
   # time is needed to process the message, or to make the message available for
   # redelivery if the processing was interrupted.
+  # (See ReceivedMesssageMessage#delay!)
   #
   #   require "glcoud/pubsub"
   #
@@ -272,6 +273,17 @@ module Gcloud
   #     # Mark for redelivery by setting the deadline to now
   #     received_message.delay! 0
   #   end
+  #
+  # Multiple messages can be delayed or made available for immediate redelivery:
+  # (See Subscription#delay)
+  #
+  #   require "glcoud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   received_messages = sub.pull
+  #   sub.delay 120, received_messages
   #
   module Pubsub
   end
