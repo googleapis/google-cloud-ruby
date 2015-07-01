@@ -47,6 +47,15 @@ module Gcloud
         end
         new tables, resp.data["nextPageToken"]
       end
+
+      ##
+      # Create a List of Job objects from an API response.
+      def self.jobs_from_resp resp, conn #:nodoc:
+        tables = Array(resp.data["jobs"]).map do |gapi_object|
+          Job.from_gapi gapi_object, conn
+        end
+        new tables, resp.data["nextPageToken"]
+      end
     end
   end
 end

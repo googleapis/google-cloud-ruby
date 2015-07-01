@@ -85,6 +85,18 @@ module Gcloud
         end
       end
 
+      ##
+      # Retrieves a list of jobs for the given project.
+      def jobs options = {}
+        ensure_connection!
+        resp = connection.list_jobs options
+        if resp.success?
+          List.jobs_from_resp resp, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
       protected
 
       ##

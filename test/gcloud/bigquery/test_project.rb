@@ -127,6 +127,110 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     dataset.name.must_equal dataset_name
   end
 
+  it "lists jobs" do
+    num_jobs = 3
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(num_jobs)]
+    end
+
+    jobs = bigquery.jobs
+    jobs.size.must_equal num_jobs
+    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+  end
+
+  it "paginates jobs" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(3, "next_page_token")]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(2)]
+    end
+
+    first_jobs = bigquery.jobs
+    first_jobs.count.must_equal 3
+    first_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+    first_jobs.token.wont_be :nil?
+    first_jobs.token.must_equal "next_page_token"
+
+    second_jobs = bigquery.jobs token: first_jobs.token
+    second_jobs.count.must_equal 2
+    second_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+    second_jobs.token.must_be :nil?
+  end
+
+  it "paginates jobs without options" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.wont_include "maxResults"
+      env.params.wont_include "projection"
+      env.params.wont_include "stateFilter"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(3, "next_page_token")]
+    end
+
+    jobs = bigquery.jobs
+    jobs.count.must_equal 3
+    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+    jobs.token.wont_be :nil?
+    jobs.token.must_equal "next_page_token"
+  end
+
+  it "paginates jobs with max set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.must_include "maxResults"
+      env.params.wont_include "projection"
+      env.params.wont_include "stateFilter"
+      env.params["maxResults"].must_equal "3"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(3, "next_page_token")]
+    end
+
+    jobs = bigquery.jobs max: 3
+    jobs.count.must_equal 3
+    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+    jobs.token.wont_be :nil?
+    jobs.token.must_equal "next_page_token"
+  end
+
+  it "paginates jobs with projection set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.must_include "projection"
+      env.params.wont_include "maxResults"
+      env.params.wont_include "stateFilter"
+      env.params["projection"].must_equal "full"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(3, "next_page_token")]
+    end
+
+    jobs = bigquery.jobs projection: "full"
+    jobs.count.must_equal 3
+    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+    jobs.token.wont_be :nil?
+    jobs.token.must_equal "next_page_token"
+  end
+
+  it "paginates jobs with filter set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.must_include "stateFilter"
+      env.params.wont_include "maxResults"
+      env.params.wont_include "projection"
+      env.params["stateFilter"].must_equal "running"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(3, "next_page_token")]
+    end
+
+    jobs = bigquery.jobs filter: "running"
+    jobs.count.must_equal 3
+    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+    jobs.token.wont_be :nil?
+    jobs.token.must_equal "next_page_token"
+  end
+
   def create_dataset_json name = nil, description = nil, default_expiration = nil
     random_dataset_hash(name, description, default_expiration).to_json
   end
@@ -138,6 +242,17 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
   def list_datasets_json count = 2, token = nil
     datasets = count.times.map { random_dataset_small_hash }
     hash = {"kind"=>"bigquery#datasetList", "datasets"=>datasets}
+    hash["nextPageToken"] = token unless token.nil?
+    hash.to_json
+  end
+
+  def list_jobs_json count = 2, token = nil
+    hash = {
+      "kind" => "bigquery#jobList",
+      "etag" => "etag",
+      "jobs" => count.times.map { random_job_hash },
+      "totalItems" => count
+    }
     hash["nextPageToken"] = token unless token.nil?
     hash.to_json
   end

@@ -172,6 +172,16 @@ module Gcloud
         )
       end
 
+      ##
+      # Lists all jobs in the specified project to which you have
+      # been granted the READER job role.
+      def list_jobs options = {}
+        @client.execute(
+          api_method: @bigquery.jobs.list,
+          parameters: list_jobs_params(options)
+        )
+      end
+
       protected
 
       ##
@@ -194,6 +204,19 @@ module Gcloud
           "description" => options[:description],
           "defaultTableExpirationMs" => options[:default_expiration]
         }
+      end
+
+      ##
+      # The parameters for the list_jobs call.
+      def list_jobs_params options = {}
+        params = { projectId: @project,
+                   allUsers: options.delete(:all),
+                   pageToken: options.delete(:token),
+                   maxResults: options.delete(:max),
+                   projection: options.delete(:projection),
+                   stateFilter: options.delete(:filter)
+                 }.delete_if { |_, v| v.nil? }
+        params
       end
     end
   end
