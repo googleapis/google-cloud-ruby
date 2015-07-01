@@ -144,10 +144,10 @@ module Gcloud
       #   are correct. Default is +:md5+. (+Symbol+)
       #
       #   Acceptable values are:
-      #   * +md5+:: Verify file content match using the MD5 hash.
-      #   * +crc32c+:: Verify file content match using the CRC32c hash.
-      #   * +all+:: Perform all available file content verification.
-      #   * +none+:: Don't perform file content verification.
+      #   * +md5+ - Verify file content match using the MD5 hash.
+      #   * +crc32c+ - Verify file content match using the CRC32c hash.
+      #   * +all+ - Perform all available file content verification.
+      #   * +none+ - Don't perform file content verification.
       #
       # === Returns
       #
@@ -230,16 +230,16 @@ module Gcloud
       #
       #   Acceptable values are:
       #   * +auth+, +auth_read+, +authenticated+, +authenticated_read+,
-      #     +authenticatedRead+:: File owner gets OWNER access, and
+      #     +authenticatedRead+ - File owner gets OWNER access, and
       #     allAuthenticatedUsers get READER access.
-      #   * +owner_full+, +bucketOwnerFullControl+:: File owner gets OWNER
+      #   * +owner_full+, +bucketOwnerFullControl+ - File owner gets OWNER
       #     access, and project team owners get OWNER access.
-      #   * +owner_read+, +bucketOwnerRead+:: File owner gets OWNER access, and
+      #   * +owner_read+, +bucketOwnerRead+ - File owner gets OWNER access, and
       #     project team owners get READER access.
-      #   * +private+:: File owner gets OWNER access.
-      #   * +project_private+, +projectPrivate+:: File owner gets OWNER access,
+      #   * +private+ - File owner gets OWNER access.
+      #   * +project_private+, +projectPrivate+ - File owner gets OWNER access,
       #     and project team members get access according to their roles.
-      #   * +public+, +public_read+, +publicRead+:: File owner gets OWNER
+      #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
       #     access, and allUsers get READER access.
       #
       # === Returns
