@@ -139,7 +139,7 @@ module Gcloud
       #
       # +key_or_kind+::
       #   A Key object or +kind+ string value. (+Key+ or +String+)
-      # +key_or_kind+::
+      # +id_or_name+::
       #   The Key's +id+ or +name+ value if a +kind+ was provided in the first
       #   parameter. (+Integer+ or +String+ or +nil+)
       #
