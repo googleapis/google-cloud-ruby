@@ -325,41 +325,28 @@ copy the file to in the given bucket. (<code>String</code>)</p>
 <p>Acceptable values are:</p>
 <ul><li>
 <p><code>auth</code>, <code>auth_read</code>, <code>authenticated</code>,
-<code>authenticated_read</code>,</p>
-<dl class="rdoc-list note-list"><dt><code>authenticatedRead</code>
-<dd>
-<p><a href="File.html">File</a> owner gets OWNER access, and</p>
-</dd></dl>
-
-<p>allAuthenticatedUsers get READER access.</p>
-</li><li><dl class="rdoc-list note-list"><dt><code>owner_full</code>, <code>bucketOwnerFullControl</code>
-<dd>
-<p><a href="File.html">File</a> owner gets OWNER</p>
-</dd></dl>
-
-<p>access, and project team owners get OWNER access.</p>
-</li><li><dl class="rdoc-list note-list"><dt><code>owner_read</code>, <code>bucketOwnerRead</code>
-<dd>
-<p><a href="File.html">File</a> owner gets OWNER access, and</p>
-</dd></dl>
-
-<p>project team owners get READER access.</p>
-</li><li><dl class="rdoc-list note-list"><dt><code>private</code>
-<dd>
-<p><a href="File.html">File</a> owner gets OWNER access.</p>
-</dd></dl>
-</li><li><dl class="rdoc-list note-list"><dt><code>project_private</code>, <code>projectPrivate</code>
-<dd>
-<p><a href="File.html">File</a> owner gets OWNER access,</p>
-</dd></dl>
-
-<p>and project team members get access according to their roles.</p>
-</li><li><dl class="rdoc-list note-list"><dt><code>public</code>, <code>public_read</code>, <code>publicRead</code>
-<dd>
-<p><a href="File.html">File</a> owner gets OWNER</p>
-</dd></dl>
-
-<p>access, and allUsers get READER access.</p>
+<code>authenticated_read</code>, <code>authenticatedRead</code> - <a
+href="File.html">File</a> owner gets OWNER access, and
+allAuthenticatedUsers get READER access.</p>
+</li><li>
+<p><code>owner_full</code>, <code>bucketOwnerFullControl</code> - <a
+href="File.html">File</a> owner gets OWNER access, and project team owners
+get OWNER access.</p>
+</li><li>
+<p><code>owner_read</code>, <code>bucketOwnerRead</code> - <a
+href="File.html">File</a> owner gets OWNER access, and project team owners
+get READER access.</p>
+</li><li>
+<p><code>private</code> - <a href="File.html">File</a> owner gets OWNER
+access.</p>
+</li><li>
+<p><code>project_private</code>, <code>projectPrivate</code> - <a
+href="File.html">File</a> owner gets OWNER access, and project team members
+get access according to their roles.</p>
+</li><li>
+<p><code>public</code>, <code>public_read</code>, <code>publicRead</code> - <a
+href="File.html">File</a> owner gets OWNER access, and allUsers get READER
+access.</p>
 </li></ul>
 </dd></dl>
 
@@ -543,22 +530,14 @@ must be writable. (<code>String</code>)</p>
 correct. Default is <code>:md5</code>. (<code>Symbol</code>)</p>
 
 <p>Acceptable values are:</p>
-<ul><li><dl class="rdoc-list note-list"><dt><code>md5</code>
-<dd>
-<p>Verify file content match using the MD5 hash.</p>
-</dd></dl>
-</li><li><dl class="rdoc-list note-list"><dt><code>crc32c</code>
-<dd>
-<p>Verify file content match using the CRC32c hash.</p>
-</dd></dl>
-</li><li><dl class="rdoc-list note-list"><dt><code>all</code>
-<dd>
-<p>Perform all available file content verification.</p>
-</dd></dl>
-</li><li><dl class="rdoc-list note-list"><dt><code>none</code>
-<dd>
-<p>Don&#39;t perform file content verification.</p>
-</dd></dl>
+<ul><li>
+<p><code>md5</code> - Verify file content match using the MD5 hash.</p>
+</li><li>
+<p><code>crc32c</code> - Verify file content match using the CRC32c hash.</p>
+</li><li>
+<p><code>all</code> - Perform all available file content verification.</p>
+</li><li>
+<p><code>none</code> - Don&#39;t perform file content verification.</p>
 </li></ul>
 </dd></dl>
 
