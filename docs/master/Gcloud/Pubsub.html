@@ -281,8 +281,8 @@ href="Pubsub/Subscription.html#method-i-acknowledge">Gcloud::Pubsub::Subscriptio
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
-<span class="ruby-identifier">ack_ids</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">ack_id</span> }
-<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">acknowledge</span> <span class="ruby-operator">*</span><span class="ruby-identifier">ack_ids</span>
+<span class="ruby-identifier">received_messages</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">acknowledge</span> <span class="ruby-identifier">received_messages</span>
 </pre>
 
 <h2 id="module-Gcloud::Pubsub-label-Modifying+a+Message">Modifying a <a href="Pubsub/Message.html">Message</a><span><a href="#module-Gcloud::Pubsub-label-Modifying+a+Message">&para;</a> <a href="#top">&uarr;</a></span></h2>
@@ -290,7 +290,8 @@ href="Pubsub/Subscription.html#method-i-acknowledge">Gcloud::Pubsub::Subscriptio
 <p>If a message is unable to be acknowledged in a timely manner, it can be
 modified to extend the acknowledgement deadline. This indicates that more
 time is needed to process the message, or to make the message available for
-redelivery if the processing was interrupted.</p>
+redelivery if the processing was interrupted. (See
+ReceivedMesssageMessage#delay!)</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
 
@@ -318,6 +319,19 @@ redelivery if the processing was interrupted.</p>
   <span class="ruby-comment"># Mark for redelivery by setting the deadline to now</span>
   <span class="ruby-identifier">received_message</span>.<span class="ruby-identifier">delay!</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span>
+</pre>
+
+<p>Multiple messages can be delayed or made available for immediate
+redelivery: (See <a
+href="Pubsub/Subscription.html#method-i-delay">Gcloud::Pubsub::Subscription#delay</a>)</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">received_messages</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">delay</span> <span class="ruby-value">120</span>, <span class="ruby-identifier">received_messages</span>
 </pre>
 
         </div>
