@@ -272,7 +272,7 @@ module Gcloud
       #
       # +messages+::
       #   One or more ReceivedMesssage objects or ack_id values.
-      #   (+ReceivedMesssage+/+ReceivedMesssage#ack_id+)
+      #   (+ReceivedMesssage+ or +ack_id+)
       #
       # === Example
       #
@@ -313,7 +313,7 @@ module Gcloud
       #   another pull request. (+Integer+)
       # +messages+::
       #   One or more ReceivedMesssage objects or ack_id values.
-      #   (+ReceivedMesssage+/+ReceivedMesssage#ack_id+)
+      #   (+ReceivedMesssage+ or +ack_id+)
       #
       # === Example
       #
