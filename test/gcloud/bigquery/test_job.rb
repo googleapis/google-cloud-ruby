@@ -72,4 +72,15 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     job.started_at.must_be_close_to nowish
     job.ended_at.must_be_close_to nowish
   end
+
+  it "can refresh itself" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_job_hash(job_id, "done").to_json]
+    end
+
+    job.must_be :running?
+    job.refresh!
+    job.must_be :done?
+  end
 end

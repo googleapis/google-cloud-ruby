@@ -94,6 +94,18 @@ module Gcloud
       end
 
       ##
+      # Refreshes the job with current data from the BigQuery service.
+      def refresh!
+        ensure_connection!
+        resp = connection.get_job id
+        if resp.success?
+          @gapi = resp.data
+        else
+          ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Job from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
