@@ -231,6 +231,19 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     jobs.token.must_equal "next_page_token"
   end
 
+  it "finds a job" do
+    job_id = "9876543210"
+
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       find_job_json(job_id)]
+    end
+
+    job = bigquery.job job_id
+    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.id.must_equal job_id
+  end
+
   def create_dataset_json name = nil, description = nil, default_expiration = nil
     random_dataset_hash(name, description, default_expiration).to_json
   end
@@ -244,6 +257,10 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     hash = {"kind"=>"bigquery#datasetList", "datasets"=>datasets}
     hash["nextPageToken"] = token unless token.nil?
     hash.to_json
+  end
+
+  def find_job_json job_id
+    random_job_hash(job_id).to_json
   end
 
   def list_jobs_json count = 2, token = nil

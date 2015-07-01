@@ -86,6 +86,19 @@ module Gcloud
       end
 
       ##
+      # Retrieves job by name.
+      def job job_id
+        ensure_connection!
+        resp = connection.get_job job_id
+        if resp.success?
+          Job.from_gapi resp.data, connection
+        else
+          return nil if resp.data["error"]["code"] == 404
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # Retrieves a list of jobs for the given project.
       def jobs options = {}
         ensure_connection!

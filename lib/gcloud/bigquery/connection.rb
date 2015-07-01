@@ -182,6 +182,15 @@ module Gcloud
         )
       end
 
+      ##
+      # Returns the job specified by jobID.
+      def get_job job_id
+        @client.execute(
+          api_method: @bigquery.jobs.get,
+          parameters: { projectId: @project, jobId: job_id }
+        )
+      end
+
       protected
 
       ##
