@@ -83,13 +83,13 @@ module Gcloud
       #
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
-      # +options [:prefix]+::
+      # <code>options[:prefix]</code>::
       #   Filter results to buckets whose names begin with this prefix.
       #   (+String+)
-      # +options [:token]+::
+      # <code>options[:token]</code>::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
-      # +options [:max]+::
+      # <code>options[:max]</code>::
       #   Maximum number of buckets to return. (+Integer+)
       #
       # === Returns
@@ -186,7 +186,7 @@ module Gcloud
       #   Name of a bucket. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
-      # +options [:retries]+::
+      # <code>options[:retries]</code>::
       #   The number of times the API call should be retried.
       #   Default is Gcloud::Backoff.retries. (+Integer+)
       #

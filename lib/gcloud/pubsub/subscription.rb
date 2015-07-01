@@ -203,7 +203,7 @@ module Gcloud
       #
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
-      # +options [:immediate]+::
+      # <code>options[:immediate]</code>::
       #   When +true+, the system will respond immediately, either with a
       #   message if available or +nil+ if no message is available.
       #   When not specified, or when +false+, the call will block until a
@@ -212,7 +212,7 @@ module Gcloud
       #   When +true+ the system will respond immediately even if it is not
       #   able to return a message. Otherwise the system is allowed to wait
       #   until at least one message is available.
-      # +options [:max]+::
+      # <code>options[:max]</code>::
       #   The maximum number of messages to return for this request.
       #   The Pub/Sub system may return fewer than the number specified.
       #   (+Integer+)

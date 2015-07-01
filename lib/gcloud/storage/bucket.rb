@@ -97,7 +97,7 @@ module Gcloud
       #
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
-      # +options [:retries]+::
+      # <code>options[:retries]</code>::
       #   The number of times the API call should be retried.
       #   Default is Gcloud::Backoff.retries. (+Integer+)
       #
@@ -142,23 +142,23 @@ module Gcloud
       #
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
-      # +options [:prefix]+::
+      # <code>options[:prefix]</code>::
       #   Filter results to files whose names begin with this prefix.
       #   (+String+)
-      # +options [:token]+::
+      # <code>options[:token]</code>::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
-      # +options [:max]+::
+      # <code>options[:max]</code>::
       #   Maximum number of items plus prefixes to return. As duplicate prefixes
       #   are omitted, fewer total results may be returned than requested.
       #   The default value of this parameter is 1,000 items. (+Integer+)
-      # +options [:versions]+::
+      # <code>options[:versions]</code>::
       #   If +true+, lists all versions of an object as distinct results.
       #   The default is +false+. For more information, see
       #   {Object Versioning
       #   }[https://cloud.google.com/storage/docs/object-versioning].
       #   (+Boolean+)
-      # +options [:max]+::
+      # <code>options[:max]</code>::
       #   Maximum number of buckets to return. (+Integer+)
       #
       # === Returns
@@ -255,7 +255,7 @@ module Gcloud
       #   Path to store the file in Google Cloud Storage. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
-      # +options [:acl]+::
+      # <code>options[:acl]</code>::
       #   A predefined set of access controls to apply to this file.
       #   (+String+)
       #

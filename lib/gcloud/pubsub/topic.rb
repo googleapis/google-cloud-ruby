@@ -111,10 +111,10 @@ module Gcloud
       #   project as the topic. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
-      # +options [:deadline]+::
+      # <code>options[:deadline]</code>::
       #   The maximum number of seconds after a subscriber receives a message
       #   before the subscriber should acknowledge the message. (+Integer+)
-      # +options [:endpoint]+::
+      # <code>options[:endpoint]</code>::
       #   A URL locating the endpoint to which messages should be pushed.
       #   e.g. "https://example.com/push" (+String+)
       #
@@ -242,11 +242,11 @@ module Gcloud
       #
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
-      # +options [:token]+::
+      # <code>options[:token]</code>::
       #   The +token+ value returned by the last call to +subscriptions+;
       #   indicates that this is a continuation of a call, and that the system
       #   should return the next page of data. (+String+)
-      # +options [:max]+::
+      # <code>options[:max]</code>::
       #   Maximum number of subscriptions to return. (+Integer+)
       #
       # === Returns

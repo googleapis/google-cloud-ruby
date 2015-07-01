@@ -139,7 +139,7 @@ module Gcloud
       #   The path provided must be writable. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
-      # +options [:verify]+::
+      # <code>options[:verify]</code>::
       #   The verification algoruthm used to ensure the downloaded file contents
       #   are correct. Default is +:md5+. (+Symbol+)
       #
@@ -224,7 +224,7 @@ module Gcloud
       #   path to copy the file to in the given bucket. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
-      # +options [:acl]+::
+      # <code>options[:acl]</code>::
       #   A predefined set of access controls to apply to new file.
       #   (+String+)
       #
@@ -325,17 +325,17 @@ module Gcloud
       #
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
-      # +options [:method]+::
+      # <code>options[:method]</code>::
       #   The HTTP verb to be used with the signed URL. Signed URLs can be used
       #   with +GET+, +HEAD+, +PUT+, and +DELETE+ requests. Default is +GET+.
       #   (+String+)
-      # +options [:expires]+::
+      # <code>options[:expires]</code>::
       #   The number of seconds until the URL expires. Default is 300/5 minutes.
       #   (+Integer+)
-      # +options [:content_type]+::
+      # <code>options[:content_type]</code>::
       #   When provided, the client (browser) must send this value in the
       #   HTTP header. e.g. +text/plain+ (+String+)
-      # +options [:content_md5]+::
+      # <code>options[:content_md5]</code>::
       #   The MD5 digest value in base64. If you provide this in the string, the
       #   client (usually a browser) must provide this HTTP header with this
       #   same value in its request. (+String+)

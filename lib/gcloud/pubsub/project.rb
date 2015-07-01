@@ -114,7 +114,7 @@ module Gcloud
       #   Name of a topic. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
-      # +options [:autocreate]+::
+      # <code>options[:autocreate]</code>::
       #   Flag to control whether the topic should be created when needed.
       #   The default value is +true+. (+Boolean+)
       #
@@ -193,11 +193,11 @@ module Gcloud
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
       #   (+String+)
-      # +options [:token]+::
+      # <code>options[:token]</code>::
       #   The +token+ value returned by the last call to +topics+; indicates
       #   that this is a continuation of a call, and that the system should
       #   return the next page of data. (+String+)
-      # +options [:max]+::
+      # <code>options[:max]</code>::
       #   Maximum number of topics to return. (+Integer+)
       #
       # === Returns
@@ -317,13 +317,13 @@ module Gcloud
       #
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
-      # +options [:prefix]+::
+      # <code>options[:prefix]</code>::
       #   Filter results to subscriptions whose names begin with this prefix.
       #   (+String+)
-      # +options [:token]+::
+      # <code>options[:token]</code>::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
-      # +options [:max]+::
+      # <code>options[:max]</code>::
       #   Maximum number of subscriptions to return. (+Integer+)
       #
       # === Returns
