@@ -246,7 +246,7 @@ module Gcloud
   # modified to extend the acknowledgement deadline. This indicates that more
   # time is needed to process the message, or to make the message available for
   # redelivery if the processing was interrupted.
-  # (See ReceivedMesssageMessage#delay!)
+  # (See ReceivedMesssage#delay!)
   #
   #   require "glcoud/pubsub"
   #
