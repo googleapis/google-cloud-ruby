@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <title>Gcloud::Pubsub::Event &mdash; Gcloud Documentation</title>
+    <title>Gcloud::Pubsub::ReceivedMesssage &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,14 +65,14 @@
     <article class="main lang-page" role="main">
 
       <header class="docs-header">
-        <h1 class="page-title">Gcloud::Pubsub::Event</h1>
+        <h1 class="page-title">Gcloud::Pubsub::ReceivedMesssage</h1>
       </header>
 
       <section class="content">
 
         <div id="description" class="description">
           
-<h1 id="class-Gcloud::Pubsub::Event-label-Event"><a href="Event.html">Event</a><span><a href="#class-Gcloud::Pubsub::Event-label-Event">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="class-Gcloud::Pubsub::ReceivedMesssage-label-ReceivedMesssage"><a href="ReceivedMesssage.html">ReceivedMesssage</a><span><a href="#class-Gcloud::Pubsub::ReceivedMesssage-label-ReceivedMesssage">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p>Represents a Pub/Sub <a href="Message.html">Message</a> that can be
 acknowledged or delayed.</p>
@@ -82,10 +82,10 @@ acknowledged or delayed.</p>
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
-<span class="ruby-identifier">event</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
-<span class="ruby-keyword">if</span> <span class="ruby-identifier">event</span>
-  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span>
-  <span class="ruby-identifier">event</span>.<span class="ruby-identifier">acknowledge!</span>
+<span class="ruby-identifier">received_message</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">if</span> <span class="ruby-identifier">received_message</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">received_message</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span>
+  <span class="ruby-identifier">received_message</span>.<span class="ruby-identifier">acknowledge!</span>
 <span class="ruby-keyword">end</span>
 </pre>
 
@@ -119,11 +119,19 @@ acknowledged or delayed.</p>
           
             <a href="#method-i-acknowledge-21">acknowledge!</a>
           
+            <a href="#method-i-attributes">attributes</a>
+          
+            <a href="#method-i-data">data</a>
+          
             <a href="#method-i-delay-21">delay!</a>
           
             <a href="#method-i-message">message</a>
           
+            <a href="#method-i-message_id">message_id</a>
+          
             <a href="#method-i-msg">msg</a>
+          
+            <a href="#method-i-msg_id">msg_id</a>
           
         </div>
       
@@ -176,7 +184,7 @@ acknowledged or delayed.</p>
 
   
     <div class="aliases">
-      Alias for: <a href="Event.html#method-i-acknowledge-21">acknowledge!</a>
+      Alias for: <a href="ReceivedMesssage.html#method-i-acknowledge-21">acknowledge!</a>
     </div>
   
 </div>
@@ -199,12 +207,12 @@ acknowledged or delayed.</p>
     
       <p>The acknowledgment ID for the message being acknowledged. This was returned
 by the Pub/Sub system in the Pull response. This ID must be used to
-acknowledge the received event.</p>
+acknowledge the received message.</p>
     
 
     
       <!-- <div class="method-source-code" id="ack_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/event.rb, line 57</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ack_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;ackId&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -242,17 +250,17 @@ acknowledge the received event.</p>
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
-<span class="ruby-identifier">event</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
-<span class="ruby-keyword">if</span> <span class="ruby-identifier">event</span>
-  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span>
-  <span class="ruby-identifier">event</span>.<span class="ruby-identifier">acknowledge!</span>
+<span class="ruby-identifier">received_message</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">if</span> <span class="ruby-identifier">received_message</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">received_message</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span>
+  <span class="ruby-identifier">received_message</span>.<span class="ruby-identifier">acknowledge!</span>
 <span class="ruby-keyword">end</span>
 </pre>
     
 
     
       <!-- <div class="method-source-code" id="acknowledge-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/event.rb, line 84</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acknowledge!</span>
   <span class="ruby-identifier">ensure_subscription!</span>
   <span class="ruby-identifier">subscription</span>.<span class="ruby-identifier">acknowledge</span> <span class="ruby-identifier">ack_id</span>
@@ -263,8 +271,76 @@ acknowledge the received event.</p>
 
   
     <div class="aliases">
-      Also aliased as: <a href="Event.html#method-i-ack-21">ack!</a>
+      Also aliased as: <a href="ReceivedMesssage.html#method-i-ack-21">ack!</a>
     </div>
+  
+
+  
+</div>
+
+        
+          <div id="attributes-method" class="method ">
+  <a name="method-i-attributes"></a>
+
+  
+    <h4>
+      <code>attributes()</code>
+      <span>
+        <a href="#method-i-attributes">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>The received message&#39;s attributes.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="attributes-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">attributes</span>
+  <span class="ruby-identifier">message</span>.<span class="ruby-identifier">attributes</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="data-method" class="method ">
+  <a name="method-i-data"></a>
+
+  
+    <h4>
+      <code>data()</code>
+      <span>
+        <a href="#method-i-data">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>The received message&#39;s data.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="data-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span>
+  <span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
   
 
   
@@ -308,18 +384,18 @@ may immediately make the message available for another pull request.
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
-<span class="ruby-identifier">event</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
-<span class="ruby-keyword">if</span> <span class="ruby-identifier">event</span>
-  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span>
+<span class="ruby-identifier">received_message</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">if</span> <span class="ruby-identifier">received_message</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">received_message</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span>
   <span class="ruby-comment"># Delay for 2 minutes</span>
-  <span class="ruby-identifier">event</span>.<span class="ruby-identifier">delay!</span> <span class="ruby-value">120</span>
+  <span class="ruby-identifier">received_message</span>.<span class="ruby-identifier">delay!</span> <span class="ruby-value">120</span>
 <span class="ruby-keyword">end</span>
 </pre>
     
 
     
       <!-- <div class="method-source-code" id="delay-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/event.rb, line 120</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delay!</span> <span class="ruby-identifier">new_deadline</span>
   <span class="ruby-identifier">ensure_subscription!</span>
   <span class="ruby-identifier">connection</span> = <span class="ruby-identifier">subscription</span>.<span class="ruby-identifier">connection</span>
@@ -361,7 +437,7 @@ may immediately make the message available for another pull request.
 
     
       <!-- <div class="method-source-code" id="message-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/event.rb, line 63</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">message</span>
   <span class="ruby-constant">Message</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;message&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -371,7 +447,46 @@ may immediately make the message available for another pull request.
 
   
     <div class="aliases">
-      Also aliased as: <a href="Event.html#method-i-msg">msg</a>
+      Also aliased as: <a href="ReceivedMesssage.html#method-i-msg">msg</a>
+    </div>
+  
+
+  
+</div>
+
+        
+          <div id="message_id-method" class="method ">
+  <a name="method-i-message_id"></a>
+
+  
+    <h4>
+      <code>message_id()</code>
+      <span>
+        <a href="#method-i-message_id">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>The ID of received message, assigned by the server at publication time.
+Guaranteed to be unique within the topic.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="message_id-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">message_id</span>
+  <span class="ruby-identifier">message</span>.<span class="ruby-identifier">message_id</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+    <div class="aliases">
+      Also aliased as: <a href="ReceivedMesssage.html#method-i-msg_id">msg_id</a>
     </div>
   
 
@@ -404,7 +519,38 @@ may immediately make the message available for another pull request.
 
   
     <div class="aliases">
-      Alias for: <a href="Event.html#method-i-message">message</a>
+      Alias for: <a href="ReceivedMesssage.html#method-i-message">message</a>
+    </div>
+  
+</div>
+
+        
+          <div id="msg_id-method" class="method alias">
+  <a name="method-i-msg_id"></a>
+
+  
+    <h4>
+      <code>msg_id()</code>
+      <span>
+        <a href="#method-i-msg_id">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+  </div>
+
+  
+
+  
+    <div class="aliases">
+      Alias for: <a href="ReceivedMesssage.html#method-i-message_id">message_id</a>
     </div>
   
 </div>
@@ -423,7 +569,7 @@ may immediately make the message available for another pull request.
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jun 29, 2015.
+    Docs built on Jul 01, 2015.
   </div>
 </div>
 

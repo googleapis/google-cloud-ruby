@@ -117,6 +117,8 @@ subscribing application.</p>
           
             <a href="#method-i-deadline">deadline</a>
           
+            <a href="#method-i-delay">delay</a>
+          
             <a href="#method-i-delete">delete</a>
           
             <a href="#method-i-endpoint">endpoint</a>
@@ -162,7 +164,7 @@ subscribing application.</p>
 
   
     <h4>
-      <code>ack(*ack_ids)</code>
+      <code>ack(*messages)</code>
       <span>
         <a href="#method-i-ack">&para;</a>
         <a href="#top">&uarr;</a>
@@ -193,7 +195,7 @@ subscribing application.</p>
 
   
     <h4>
-      <code>acknowledge(*ack_ids)</code>
+      <code>acknowledge(*messages)</code>
       <span>
         <a href="#method-i-acknowledge">&para;</a>
         <a href="#top">&uarr;</a>
@@ -210,9 +212,10 @@ again. Acknowledging a message more than once will not result in an error.
 This is only used for messages received via pull.</p>
 
 <h3 id="method-i-acknowledge-label-Parameters">Parameters<span><a href="#method-i-acknowledge-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>ack_ids</code>
+<dl class="rdoc-list note-list"><dt><code>messages</code>
 <dd>
-<p>One or more ack_id values. (+Event#ack_id+)</p>
+<p>One or more <a href="ReceivedMesssage.html">ReceivedMesssage</a> objects or
+ack_id values. (<code>ReceivedMesssage</code>/+ReceivedMesssage#ack_id+)</p>
 </dd></dl>
 
 <h3 id="method-i-acknowledge-label-Example">Example<span><a href="#method-i-acknowledge-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -229,8 +232,9 @@ This is only used for messages received via pull.</p>
 
     
       <!-- <div class="method-source-code" id="acknowledge-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 286</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">acknowledge</span> <span class="ruby-operator">*</span><span class="ruby-identifier">ack_ids</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 287</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">acknowledge</span> <span class="ruby-operator">*</span><span class="ruby-identifier">messages</span>
+  <span class="ruby-identifier">ack_ids</span> = <span class="ruby-identifier">coerce_ack_ids</span> <span class="ruby-identifier">messages</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">acknowledge</span> <span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">ack_ids</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -282,6 +286,75 @@ already have been sent again. Multiple acks to the message are allowed.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">deadline</span>
   <span class="ruby-identifier">ensure_gapi!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;ackDeadlineSeconds&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="delay-method" class="method ">
+  <a name="method-i-delay"></a>
+
+  
+    <h4>
+      <code>delay(new_deadline, *messages)</code>
+      <span>
+        <a href="#method-i-delay">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Modifies the acknowledge deadline for messages.</p>
+
+<p>This indicates that more time is needed to process the messages, or to make
+the messages available for redelivery if the processing was interrupted.</p>
+
+<h3 id="method-i-delay-label-Parameters">Parameters<span><a href="#method-i-delay-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>new_deadline</code>
+<dd>
+<p>The new ack deadline in seconds from the time this request is sent to the
+Pub/Sub system. Must be &gt;= 0. For example, if the value is 10, the new
+ack deadline will expire 10 seconds after the call is made. Specifying zero
+may immediately make the messages available for another pull request.
+(<code>Integer</code>)</p>
+</dd><dt><code>messages</code>
+<dd>
+<p>One or more <a href="ReceivedMesssage.html">ReceivedMesssage</a> objects or
+ack_id values. (<code>ReceivedMesssage</code>/+ReceivedMesssage#ack_id+)</p>
+</dd></dl>
+
+<h3 id="method-i-delay-label-Example">Example<span><a href="#method-i-delay-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">messages</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">delay</span> <span class="ruby-value">120</span>, <span class="ruby-identifier">messages</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="delay-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 328</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delay</span> <span class="ruby-identifier">new_deadline</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">messages</span>
+  <span class="ruby-identifier">ack_ids</span> = <span class="ruby-identifier">coerce_ack_ids</span> <span class="ruby-identifier">messages</span>
+  <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">modify_ack_deadline</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">ack_ids</span>, <span class="ruby-identifier">new_deadline</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -550,7 +623,8 @@ system may return fewer than the number specified. (<code>Integer</code>)</p>
 
 <h3 id="method-i-pull-label-Returns">Returns<span><a href="#method-i-pull-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>Array of <a href="Event.html">Gcloud::Pubsub::Event</a></p>
+<p>Array of <a
+href="ReceivedMesssage.html">Gcloud::Pubsub::ReceivedMesssage</a></p>
 
 <h3 id="method-i-pull-label-Examples">Examples<span><a href="#method-i-pull-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -592,7 +666,7 @@ option:</p>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">pull</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Array</span>(<span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;receivedMessages&quot;</span>]).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gapi</span><span class="ruby-operator">|</span>
-      <span class="ruby-constant">Event</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">gapi</span>, <span class="ruby-keyword">self</span>
+      <span class="ruby-constant">ReceivedMesssage</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">gapi</span>, <span class="ruby-keyword">self</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
@@ -673,7 +747,7 @@ receiving messages.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jun 29, 2015.
+    Docs built on Jul 01, 2015.
   </div>
 </div>
 

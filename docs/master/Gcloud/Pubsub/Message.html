@@ -79,9 +79,9 @@
 <p><a href="Message.html">Message</a> objects are created by <a
 href="Topic.html#method-i-publish">Gcloud::Pubsub::Topic#publish</a>. <a
 href="Subscription.html#method-i-pull">Gcloud::Pubsub::Subscription#pull</a>
-returns <a href="Event.html">Event</a> objects, which contain a <a
-href="Message.html">Message</a> object and can be acknowleged and/or
-delayed.</p>
+returns <a href="ReceivedMesssage.html">ReceivedMesssage</a> objects, which
+contain a <a href="Message.html">Message</a> object and can be acknowleged
+and/or delayed.</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
 
@@ -92,10 +92,10 @@ delayed.</p>
 <span class="ruby-identifier">message</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;new-message&quot;</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span> <span class="ruby-comment">#=&gt;  &quot;new-message&quot;</span>
 
-<span class="ruby-comment"># Pull an event/message</span>
+<span class="ruby-comment"># Pull a message</span>
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
-<span class="ruby-identifier">event</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
-<span class="ruby-identifier">puts</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span> <span class="ruby-comment">#=&gt;  &quot;new-message&quot;</span>
+<span class="ruby-identifier">received_message</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">received_message</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span> <span class="ruby-comment">#=&gt;  &quot;new-message&quot;</span>
 </pre>
 
         </div>
@@ -360,7 +360,7 @@ Guaranteed to be unique within the topic.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jun 29, 2015.
+    Docs built on Jul 01, 2015.
   </div>
 </div>
 
