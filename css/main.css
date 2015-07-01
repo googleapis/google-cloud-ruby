@@ -1572,3 +1572,37 @@ pre .ruby-value      { color: #d14; }
 .aliases {
   padding-left: 1em;
 }
+
+/* Definition lists
+   ========================================================================== */
+
+@media only screen and (min-width: 60em) {
+  dl.rdoc-list {
+    float: left;
+    width: 100%;
+    margin: 0 0 1em 0;
+    padding: 0;
+  }
+
+  dl.rdoc-list dt {
+    background-color: #f6f6f6;
+    border: 1px solid #fff;
+    clear: left;
+    float: left;
+    width: 25%;
+    margin: 0;
+    padding: 0 0.5em;
+  }
+
+  dl.rdoc-list dd {
+    float: left;
+    width: 70%;
+    margin: 0;
+    padding: 0 0.5em;
+  }
+
+  dl.rdoc-list dd p {
+    margin: 0;
+    padding: 0;
+  }
+}
