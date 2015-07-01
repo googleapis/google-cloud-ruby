@@ -38,7 +38,7 @@ describe Gcloud::Pubsub::Subscription, :exists, :mock_pubsub do
     end
 
     it "checks if the subscription exists by making an HTTP call" do
-      mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
         [200, {"Content-Type"=>"application/json"},
          sub_json]
       end
@@ -56,7 +56,7 @@ describe Gcloud::Pubsub::Subscription, :exists, :mock_pubsub do
     end
 
     it "checks if the subscription exists by making an HTTP call" do
-      mock_connection.get "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
         [404, {"Content-Type"=>"application/json"},
          not_found_error_json(sub_name)]
       end

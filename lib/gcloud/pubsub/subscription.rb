@@ -15,7 +15,7 @@
 
 require "gcloud/pubsub/errors"
 require "gcloud/pubsub/subscription/list"
-require "gcloud/pubsub/event"
+require "gcloud/pubsub/received_message"
 
 module Gcloud
   module Pubsub
@@ -219,7 +219,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Pubsub::Event
+      # Array of Gcloud::Pubsub::ReceivedMesssage
       #
       # === Examples
       #
@@ -253,7 +253,7 @@ module Gcloud
         resp = connection.pull name, options
         if resp.success?
           Array(resp.data["receivedMessages"]).map do |gapi|
-            Event.from_gapi gapi, self
+            ReceivedMesssage.from_gapi gapi, self
           end
         else
           fail ApiError.from_response(resp)
@@ -270,8 +270,9 @@ module Gcloud
       #
       # === Parameters
       #
-      # +ack_ids+::
-      #   One or more ack_id values. (+Event#ack_id+)
+      # +messages+::
+      #   One or more ReceivedMesssage objects or ack_id values.
+      #   (+ReceivedMesssage+/+ReceivedMesssage#ack_id+)
       #
       # === Example
       #
@@ -283,7 +284,8 @@ module Gcloud
       #   ack_ids = sub.pull.map { |msg| msg.ack_id }
       #   sub.acknowledge *ack_ids
       #
-      def acknowledge *ack_ids
+      def acknowledge *messages
+        ack_ids = coerce_ack_ids messages
         ensure_connection!
         resp = connection.acknowledge name, *ack_ids
         if resp.success?
@@ -293,6 +295,46 @@ module Gcloud
         end
       end
       alias_method :ack, :acknowledge
+
+      ##
+      # Modifies the acknowledge deadline for messages.
+      #
+      # This indicates that more time is needed to process the messages, or to
+      # make the messages available for redelivery if the processing was
+      # interrupted.
+      #
+      # === Parameters
+      #
+      # +new_deadline+::
+      #   The new ack deadline in seconds from the time this request is sent
+      #   to the Pub/Sub system. Must be >= 0. For example, if the value is 10,
+      #   the new ack deadline will expire 10 seconds after the call is made.
+      #   Specifying zero may immediately make the messages available for
+      #   another pull request. (+Integer+)
+      # +messages+::
+      #   One or more ReceivedMesssage objects or ack_id values.
+      #   (+ReceivedMesssage+/+ReceivedMesssage#ack_id+)
+      #
+      # === Example
+      #
+      #   require "glcoud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   messages = sub.pull
+      #   sub.delay 120, messages
+      #
+      def delay new_deadline, *messages
+        ack_ids = coerce_ack_ids messages
+        ensure_connection!
+        resp = connection.modify_ack_deadline name, ack_ids, new_deadline
+        if resp.success?
+          true
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
 
       ##
       # New Subscription from a Google API Client object.
@@ -321,6 +363,15 @@ module Gcloud
           @gapi = resp.data
         else
           fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Makes sure the values are the +ack_id+.
+      # If given several ReceivedMesssage objects extract the +ack_id+ values.
+      def coerce_ack_ids messages
+        Array(messages).flatten.map do |msg|
+          msg.respond_to?(:ack_id) ? msg.ack_id : msg.to_s
         end
       end
     end

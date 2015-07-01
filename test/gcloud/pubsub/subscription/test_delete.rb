@@ -24,7 +24,7 @@ describe Gcloud::Pubsub::Subscription, :delete, :mock_pubsub do
   end
 
   it "can delete itself" do
-    mock_connection.delete "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+    mock_connection.delete "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
       [200, {"Content-Type"=>"application/json"}, ""]
     end
 
@@ -38,7 +38,7 @@ describe Gcloud::Pubsub::Subscription, :delete, :mock_pubsub do
     end
 
     it "can delete itself" do
-      mock_connection.delete "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      mock_connection.delete "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
         [200, {"Content-Type"=>"application/json"}, ""]
       end
 
@@ -53,7 +53,7 @@ describe Gcloud::Pubsub::Subscription, :delete, :mock_pubsub do
     end
 
     it "raises NotFoundError when deleting itself" do
-      mock_connection.delete "/v1beta2/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      mock_connection.delete "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
         [404, {"Content-Type"=>"application/json"},
          not_found_error_json(sub_name)]
       end

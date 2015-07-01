@@ -24,15 +24,15 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
   end
 
   it "can pull messages" do
-    event_msg = "pulled-message"
-    mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
+    rec_message_msg = "pulled-message"
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
       [200, {"Content-Type"=>"application/json"},
-       events_json(event_msg)]
+       rec_messages_json(rec_message_msg)]
     end
 
-    events = subscription.pull
-    events.wont_be :empty?
-    events.first.message.data.must_equal event_msg
+    rec_messages = subscription.pull
+    rec_messages.wont_be :empty?
+    rec_messages.first.message.data.must_equal rec_message_msg
   end
 
   describe "lazy subscription object of a subscription that does exist" do
@@ -42,15 +42,15 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
     end
 
     it "can pull messages" do
-      event_msg = "pulled-message"
-      mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
+      rec_message_msg = "pulled-message"
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
         [200, {"Content-Type"=>"application/json"},
-         events_json(event_msg)]
+         rec_messages_json(rec_message_msg)]
       end
 
-      events = subscription.pull
-      events.wont_be :empty?
-      events.first.message.data.must_equal event_msg
+      rec_messages = subscription.pull
+      rec_messages.wont_be :empty?
+      rec_messages.first.message.data.must_equal rec_message_msg
     end
   end
 
@@ -61,7 +61,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
     end
 
     it "raises NotFoundError when pulling messages" do
-      mock_connection.post "/v1beta2/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
+      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
         [404, {"Content-Type"=>"application/json"},
          not_found_error_json(sub_name)]
       end

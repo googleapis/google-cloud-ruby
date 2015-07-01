@@ -19,7 +19,7 @@ require "gcloud/pubsub/message"
 module Gcloud
   module Pubsub
     ##
-    # = Event
+    # = ReceivedMesssage
     #
     # Represents a Pub/Sub Message that can be acknowledged or delayed.
     #
@@ -28,13 +28,13 @@ module Gcloud
     #   pubsub = Gcloud.pubsub
     #
     #   sub = pubsub.subscription "my-topic-sub"
-    #   event = sub.pull.first
-    #   if event
-    #     puts event.message.data
-    #     event.acknowledge!
+    #   received_message = sub.pull.first
+    #   if received_message
+    #     puts received_message.message.data
+    #     received_message.acknowledge!
     #   end
     #
-    class Event
+    class ReceivedMesssage
       ##
       # The Subscription object.
       attr_accessor :subscription #:nodoc:
@@ -53,7 +53,7 @@ module Gcloud
       ##
       # The acknowledgment ID for the message being acknowledged.
       # This was returned by the Pub/Sub system in the Pull response.
-      # This ID must be used to acknowledge the received event.
+      # This ID must be used to acknowledge the received message.
       def ack_id
         @gapi["ackId"]
       end
@@ -66,6 +66,26 @@ module Gcloud
       alias_method :msg, :message
 
       ##
+      # The received message's data.
+      def data
+        message.data
+      end
+
+      ##
+      # The received message's attributes.
+      def attributes
+        message.attributes
+      end
+
+      ##
+      # The ID of received message, assigned by the server at publication time.
+      # Guaranteed to be unique within the topic.
+      def message_id
+        message.message_id
+      end
+      alias_method :msg_id, :message_id
+
+      ##
       # Acknowledges receipt of the message.
       #
       # === Example
@@ -75,10 +95,10 @@ module Gcloud
       #   pubsub = Gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
-      #   event = sub.pull.first
-      #   if event
-      #     puts event.message.data
-      #     event.acknowledge!
+      #   received_message = sub.pull.first
+      #   if received_message
+      #     puts received_message.message.data
+      #     received_message.acknowledge!
       #   end
       #
       def acknowledge!
@@ -110,11 +130,11 @@ module Gcloud
       #   pubsub = Gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
-      #   event = sub.pull.first
-      #   if event
-      #     puts event.message.data
+      #   received_message = sub.pull.first
+      #   if received_message
+      #     puts received_message.message.data
       #     # Delay for 2 minutes
-      #     event.delay! 120
+      #     received_message.delay! 120
       #   end
       #
       def delay! new_deadline
@@ -130,7 +150,7 @@ module Gcloud
       end
 
       ##
-      # New Event from a Google API Client object.
+      # New ReceivedMesssage from a Google API Client object.
       def self.from_gapi gapi, subscription #:nodoc:
         new.tap do |f|
           f.gapi         = gapi

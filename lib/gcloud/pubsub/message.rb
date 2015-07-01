@@ -23,8 +23,8 @@ module Gcloud
     # Represents a Pub/Sub Message.
     #
     # Message objects are created by Topic#publish.
-    # Subscription#pull returns Event objects, which contain a Message object
-    # and can be acknowleged and/or delayed.
+    # Subscription#pull returns ReceivedMesssage objects, which contain a
+    # Message object and can be acknowleged and/or delayed.
     #
     #   require "glcoud/pubsub"
     #
@@ -35,10 +35,10 @@ module Gcloud
     #   message = topic.publish "new-message"
     #   puts message.data #=>  "new-message"
     #
-    #   # Pull an event/message
+    #   # Pull a message
     #   sub = pubsub.subscription "my-topic-sub"
-    #   event = sub.pull.first
-    #   puts event.message.data #=>  "new-message"
+    #   received_message = sub.pull.first
+    #   puts received_message.message.data #=>  "new-message"
     #
     class Message
       ##

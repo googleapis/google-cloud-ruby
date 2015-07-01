@@ -21,7 +21,7 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
   let(:new_sub_name) { "new-sub-#{Time.now.to_i}" }
 
   it "creates a subscription when calling subscribe" do
-    mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+    mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
       JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
       [200, {"Content-Type"=>"application/json"},
        subscription_json(topic_name, new_sub_name)]
@@ -39,7 +39,7 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
                                                    true }
 
       it "creates a subscription when calling subscribe" do
-        mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+        mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
           JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
           [200, {"Content-Type"=>"application/json"},
            subscription_json(topic_name, new_sub_name)]
@@ -57,7 +57,7 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
                                                    false }
 
       it "creates a subscription when calling subscribe" do
-        mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+        mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
           JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
           [200, {"Content-Type"=>"application/json"},
            subscription_json(topic_name, new_sub_name)]
@@ -78,17 +78,17 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
 
       it "creates a subscription when calling subscribe" do
         #first, failed attempt to subscribe
-        mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+        mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(topic_name)]
         end
         # second, successful attempt to create topic
-        mock_connection.put "/v1beta2/projects/#{project}/topics/#{topic_name}" do |env|
+        mock_connection.put "/v1/projects/#{project}/topics/#{topic_name}" do |env|
           [200, {"Content-Type"=>"application/json"},
            topic_json(topic_name)]
         end
         # third, successful attempt to subscribe
-        mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+        mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
           JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
           [200, {"Content-Type"=>"application/json"},
            subscription_json(topic_name, new_sub_name)]
@@ -106,7 +106,7 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
                                                    false }
 
       it "raises NotFoundError when calling subscribe" do
-        mock_connection.put "/v1beta2/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+        mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
           [404, {"Content-Type"=>"application/json"},
            not_found_error_json(topic_name)]
         end
