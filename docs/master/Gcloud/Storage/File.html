@@ -317,7 +317,7 @@ copy the file to in the given bucket. (<code>String</code>)</p>
 </dd><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
-</dd><dt>+options [:acl]+
+</dd><dt><code>options[:acl]</code>
 <dd>
 <p>A predefined set of access controls to apply to new file.
 (<code>String</code>)</p>
@@ -537,7 +537,7 @@ must be writable. (<code>String</code>)</p>
 </dd><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
-</dd><dt>+options [:verify]+
+</dd><dt><code>options[:verify]</code>
 <dd>
 <p>The verification algoruthm used to ensure the downloaded file contents are
 correct. Default is <code>:md5</code>. (<code>Symbol</code>)</p>
@@ -907,21 +907,21 @@ Control Signed URLs guide </a> for more.</p>
 <dl class="rdoc-list note-list"><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
-</dd><dt>+options [:method]+
+</dd><dt><code>options[:method]</code>
 <dd>
 <p>The HTTP verb to be used with the signed URL. Signed URLs can be used with
 <code>GET</code>, <code>HEAD</code>, <code>PUT</code>, and
 <code>DELETE</code> requests. Default is <code>GET</code>.
 (<code>String</code>)</p>
-</dd><dt>+options [:expires]+
+</dd><dt><code>options[:expires]</code>
 <dd>
 <p>The number of seconds until the URL expires. Default is 300/5 minutes.
 (<code>Integer</code>)</p>
-</dd><dt>+options [:content_type]+
+</dd><dt><code>options[:content_type]</code>
 <dd>
 <p>When provided, the client (browser) must send this value in the HTTP
 header. e.g. <code>text/plain</code> (<code>String</code>)</p>
-</dd><dt>+options [:content_md5]+
+</dd><dt><code>options[:content_md5]</code>
 <dd>
 <p>The MD5 digest value in base64. If you provide this in the string, the
 client (usually a browser) must provide this HTTP header with this same

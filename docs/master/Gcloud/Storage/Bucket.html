@@ -276,7 +276,7 @@ href="../Storage.html">Storage</a>. (<code>String</code>)</p>
 </dd><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
-</dd><dt>+options [:acl]+
+</dd><dt><code>options[:acl]</code>
 <dd>
 <p>A predefined set of access controls to apply to this file.
 (<code>String</code>)</p>
@@ -534,7 +534,7 @@ deleted.</p>
 <dl class="rdoc-list note-list"><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
-</dd><dt>+options [:retries]+
+</dd><dt><code>options[:retries]</code>
 <dd>
 <p>The number of times the API call should be retried. Default is <a
 href="../Backoff.html#attribute-c-retries">Gcloud::Backoff.retries</a>.
@@ -677,26 +677,26 @@ or specify the wanted behavior in the call:</p>
 <dl class="rdoc-list note-list"><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
-</dd><dt>+options [:prefix]+
+</dd><dt><code>options[:prefix]</code>
 <dd>
 <p>Filter results to files whose names begin with this prefix.
 (<code>String</code>)</p>
-</dd><dt>+options [:token]+
+</dd><dt><code>options[:token]</code>
 <dd>
 <p>A previously-returned page token representing part of the larger set of
 results to view. (<code>String</code>)</p>
-</dd><dt>+options [:max]+
+</dd><dt><code>options[:max]</code>
 <dd>
 <p>Maximum number of items plus prefixes to return. As duplicate prefixes are
 omitted, fewer total results may be returned than requested. The default
 value of this parameter is 1,000 items. (<code>Integer</code>)</p>
-</dd><dt>+options [:versions]+
+</dd><dt><code>options[:versions]</code>
 <dd>
 <p>If <code>true</code>, lists all versions of an object as distinct results.
 The default is <code>false</code>. For more information, see <a
 href="https://cloud.google.com/storage/docs/object-versioning">Object
 Versioning </a>. (<code>Boolean</code>)</p>
-</dd><dt>+options [:max]+
+</dd><dt><code>options[:max]</code>
 <dd>
 <p>Maximum number of buckets to return. (<code>Integer</code>)</p>
 </dd></dl>

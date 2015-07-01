@@ -709,15 +709,15 @@ exists.</p>
 <dl class="rdoc-list note-list"><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
-</dd><dt>+options [:prefix]+
+</dd><dt><code>options[:prefix]</code>
 <dd>
 <p>Filter results to subscriptions whose names begin with this prefix.
 (<code>String</code>)</p>
-</dd><dt>+options [:token]+
+</dd><dt><code>options[:token]</code>
 <dd>
 <p>A previously-returned page token representing part of the larger set of
 results to view. (<code>String</code>)</p>
-</dd><dt>+options [:max]+
+</dd><dt><code>options[:max]</code>
 <dd>
 <p>Maximum number of subscriptions to return. (<code>Integer</code>)</p>
 </dd></dl>
@@ -813,7 +813,7 @@ does not make an API call to Pub/Sub verify the topic exists.</p>
 </dd><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
-</dd><dt>+options [:autocreate]+
+</dd><dt><code>options[:autocreate]</code>
 <dd>
 <p>Flag to control whether the topic should be created when needed. The
 default value is <code>true</code>. (<code>Boolean</code>)</p>
@@ -894,12 +894,12 @@ default value is <code>true</code>. (<code>Boolean</code>)</p>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)
 (<code>String</code>)</p>
-</dd><dt>+options [:token]+
+</dd><dt><code>options[:token]</code>
 <dd>
 <p>The <code>token</code> value returned by the last call to
 <code>topics</code>; indicates that this is a continuation of a call, and
 that the system should return the next page of data. (<code>String</code>)</p>
-</dd><dt>+options [:max]+
+</dd><dt><code>options[:max]</code>
 <dd>
 <p>Maximum number of topics to return. (<code>Integer</code>)</p>
 </dd></dl>

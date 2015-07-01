@@ -642,11 +642,11 @@ as the topic. (<code>String</code>)</p>
 </dd><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
-</dd><dt>+options [:deadline]+
+</dd><dt><code>options[:deadline]</code>
 <dd>
 <p>The maximum number of seconds after a subscriber receives a message before
 the subscriber should acknowledge the message. (<code>Integer</code>)</p>
-</dd><dt>+options [:endpoint]+
+</dd><dt><code>options[:endpoint]</code>
 <dd>
 <p>A URL locating the endpoint to which messages should be pushed. e.g. “<a
 href="https://example.com/push">example.com/push</a>” (<code>String</code>)</p>
@@ -802,13 +802,13 @@ exists.</p>
 <dl class="rdoc-list note-list"><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
-</dd><dt>+options [:token]+
+</dd><dt><code>options[:token]</code>
 <dd>
 <p>The <code>token</code> value returned by the last call to
 <code>subscriptions</code>; indicates that this is a continuation of a
 call, and that the system should return the next page of data.
 (<code>String</code>)</p>
-</dd><dt>+options [:max]+
+</dd><dt><code>options[:max]</code>
 <dd>
 <p>Maximum number of subscriptions to return. (<code>Integer</code>)</p>
 </dd></dl>

@@ -243,15 +243,15 @@ exist</p>
 <dl class="rdoc-list note-list"><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
-</dd><dt>+options [:prefix]+
+</dd><dt><code>options[:prefix]</code>
 <dd>
 <p>Filter results to buckets whose names begin with this prefix.
 (<code>String</code>)</p>
-</dd><dt>+options [:token]+
+</dd><dt><code>options[:token]</code>
 <dd>
 <p>A previously-returned page token representing part of the larger set of
 results to view. (<code>String</code>)</p>
-</dd><dt>+options [:max]+
+</dd><dt><code>options[:max]</code>
 <dd>
 <p>Maximum number of buckets to return. (<code>Integer</code>)</p>
 </dd></dl>
@@ -354,7 +354,7 @@ href="Bucket/List.html#attribute-i-token">Gcloud::Storage::Bucket::List#token</a
 </dd><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
-</dd><dt>+options [:retries]+
+</dd><dt><code>options[:retries]</code>
 <dd>
 <p>The number of times the API call should be retried. Default is <a
 href="../Backoff.html#attribute-c-retries">Gcloud::Backoff.retries</a>.

@@ -605,7 +605,7 @@ subscription.</p>
 <dl class="rdoc-list note-list"><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavor. (<code>Hash</code>)</p>
-</dd><dt>+options [:immediate]+
+</dd><dt><code>options[:immediate]</code>
 <dd>
 <p>When <code>true</code>, the system will respond immediately, either with a
 message if available or <code>nil</code> if no message is available. When
@@ -615,7 +615,7 @@ available within a reasonable amount of time. (<code>Boolean</code>) When
 <code>true</code> the system will respond immediately even if it is not
 able to return a message. Otherwise the system is allowed to wait until at
 least one message is available.</p>
-</dd><dt>+options [:max]+
+</dd><dt><code>options[:max]</code>
 <dd>
 <p>The maximum number of messages to return for this request. The Pub/Sub
 system may return fewer than the number specified. (<code>Integer</code>)</p>
