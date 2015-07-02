@@ -93,6 +93,72 @@ module Gcloud
 
       ##
       # Copy data from one table to another.
+      #
+      # === Parameters
+      #
+      # +target_table+::
+      #   A Table to copy data to. (+Table+)
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # <code>options[:create]</code>::
+      #   Specifies whether the job is allowed to create new tables. (+String+)
+      #
+      #   The following values are supported:
+      #   * +needed+ - Create the table if it does not exist.
+      #   * +never+ - The table must already exist. A 'notFound' error is
+      #     raised if the table does not exist.
+      # <code>options[:write]</code>::
+      #   Specifies the action that occurs if the destination table already
+      #   exists. (+String+)
+      #
+      #   The following values are supported:
+      #   * +truncate+ - BigQuery overwrites the table data.
+      #   * +append+ - BigQuery appends the data to the table.
+      #   * +empty+ - A 'duplicate' error is returned in the job result if the
+      #     table exists and contains data.
+      #
+      # === Returns
+      #
+      # Array of Gcloud::Bigquery::Dataset (Gcloud::Bigquery::Dataset::List)
+      #
+      # === Examples
+      #
+      #   require "glcoud/bigquery"
+      #
+      #   bigquery = Gcloud.bigquery
+      #
+      #   datasets = bigquery.datasets
+      #   datasets.each do |dataset|
+      #     puts dataset.name
+      #   end
+      #
+      # You can also retrieve all datasets, including hidden ones, by providing
+      # the +:all+ option:
+      #
+      #   require "glcoud/bigquery"
+      #
+      #   bigquery = Gcloud.bigquery
+      #
+      #   all_datasets = bigquery.datasets, all: true
+      #
+      # If you have a significant number of datasets, you may need to paginate
+      # through them: (See Dataset::List#token)
+      #
+      #   require "glcoud/bigquery"
+      #
+      #   bigquery = Gcloud.bigquery
+      #
+      #   all_datasets = []
+      #   tmp_datasets = bigquery.datasets
+      #   while tmp_datasets.any? do
+      #     tmp_datasets.each do |dataset|
+      #       all_datasets << dataset
+      #     end
+      #     # break loop if no more datasets available
+      #     break if tmp_datasets.token.nil?
+      #     # get the next group of datasets
+      #     tmp_datasets = bigquery.datasets token: tmp_datasets.token
+      #   end
       def copy target_table, options = {}
         ensure_connection!
         resp = connection.copy_table gapi, target_table.gapi, options
@@ -104,8 +170,21 @@ module Gcloud
       end
 
       ##
-      # Deletes an existing table.
-      # All pending messages in the table are immediately dropped.
+      # Permenently deletes the table.
+      #
+      # === Returns
+      #
+      # +true+ if the table was deleted.
+      #
+      # === Example
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   bigquery = Gcloud.bigquery
+      #   dataset = bigquery.dataset "my-dataset"
+      #   table = dataset.table "my-table"
+      #   table.delete
+      #
       def delete
         ensure_connection!
         resp = connection.delete_table dataset_id, table_id
