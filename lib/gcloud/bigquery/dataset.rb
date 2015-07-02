@@ -16,7 +16,7 @@
 require "json"
 require "gcloud/bigquery/errors"
 require "gcloud/bigquery/table"
-require "gcloud/bigquery/list"
+require "gcloud/bigquery/dataset/list"
 
 module Gcloud
   module Bigquery
@@ -134,7 +134,7 @@ module Gcloud
         ensure_connection!
         resp = connection.list_tables dataset_id, options
         if resp.success?
-          List.tables_from_resp resp, connection
+          Table::List.from_resp resp, connection
         else
           fail ApiError.from_response(resp)
         end

@@ -111,13 +111,13 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       env.params.wont_include "pageToken"
       [200, {"Content-Type"=>"application/json"},
-       list_tables_json(3, "next_page_token")]
+       list_tables_json(3, "next_page_token", 5)]
     end
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       env.params.must_include "pageToken"
       env.params["pageToken"].must_equal "next_page_token"
       [200, {"Content-Type"=>"application/json"},
-       list_tables_json(2)]
+       list_tables_json(2, nil, 5)]
     end
 
     first_tables = dataset.tables
@@ -125,11 +125,13 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     first_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
     first_tables.token.wont_be :nil?
     first_tables.token.must_equal "next_page_token"
+    first_tables.total.must_equal 5
 
     second_tables = dataset.tables token: first_tables.token
     second_tables.count.must_equal 2
     second_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
     second_tables.token.must_be :nil?
+    second_tables.total.must_equal 5
   end
 
   it "paginates tables with max set" do
@@ -182,10 +184,10 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     random_table_hash(dataset_id, name).to_json
   end
 
-  def list_tables_json count = 2, token = nil
+  def list_tables_json count = 2, token = nil, total = nil
     tables = count.times.map { random_table_small_hash(dataset_id) }
     hash = {"kind"=>"bigquery#tableList", "tables"=>tables,
-            "totalItems"=> (token ? count+1 : count)}
+            "totalItems"=> (total || count)}
     hash["nextPageToken"] = token unless token.nil?
     hash.to_json
   end
