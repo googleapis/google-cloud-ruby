@@ -110,7 +110,6 @@ module Gcloud
         if resp.success?
           Table.from_gapi resp.data, connection
         else
-          # TODO: Handle ALREADY_EXISTS and NOT_FOUND
           fail ApiError.from_response(resp)
         end
       end

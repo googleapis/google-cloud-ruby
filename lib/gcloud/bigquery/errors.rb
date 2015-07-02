@@ -38,30 +38,10 @@ module Gcloud
       end
 
       def self.from_response resp #:nodoc:
-        klass = klass_for resp.data["error"]["status"]
-        klass.new resp.data["error"]["message"],
-                  resp.data["error"]["code"],
-                  resp.data["error"]["errors"]
-      end
-
-      def self.klass_for status
-        if status == "ALREADY_EXISTS"
-          return AlreadyExistsError
-        elsif status == "NOT_FOUND"
-          return NotFoundError
-        end
-        self
+        new resp.data["error"]["message"],
+            resp.data["error"]["code"],
+            resp.data["error"]["errors"]
       end
     end
-
-    # ##
-    # # Raised when Pub/Sub returns an ALREADY_EXISTS error.
-    # class AlreadyExistsError < ApiError
-    # end
-
-    # ##
-    # # Raised when Pub/Sub returns a NOT_FOUND error.
-    # class NotFoundError < ApiError
-    # end
   end
 end
