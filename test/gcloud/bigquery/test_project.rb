@@ -143,13 +143,13 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
       env.params.wont_include "pageToken"
       [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "next_page_token")]
+       list_jobs_json(3, "next_page_token", 5)]
     end
     mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
       env.params.must_include "pageToken"
       env.params["pageToken"].must_equal "next_page_token"
       [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(2)]
+       list_jobs_json(2, nil, 5)]
     end
 
     first_jobs = bigquery.jobs
@@ -157,11 +157,13 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     first_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
     first_jobs.token.wont_be :nil?
     first_jobs.token.must_equal "next_page_token"
+    first_jobs.total.must_equal 5
 
     second_jobs = bigquery.jobs token: first_jobs.token
     second_jobs.count.must_equal 2
     second_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
     second_jobs.token.must_be :nil?
+    second_jobs.total.must_equal 5
   end
 
   it "paginates jobs without options" do
@@ -263,12 +265,12 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     random_job_hash(job_id).to_json
   end
 
-  def list_jobs_json count = 2, token = nil
+  def list_jobs_json count = 2, token = nil, total = nil
     hash = {
       "kind" => "bigquery#jobList",
       "etag" => "etag",
       "jobs" => count.times.map { random_job_hash },
-      "totalItems" => count
+      "totalItems" => (total || count)
     }
     hash["nextPageToken"] = token unless token.nil?
     hash.to_json

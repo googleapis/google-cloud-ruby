@@ -104,7 +104,7 @@ module Gcloud
         ensure_connection!
         resp = connection.list_jobs options
         if resp.success?
-          List.jobs_from_resp resp, connection
+          Job::List.from_resp resp, connection
         else
           fail ApiError.from_response(resp)
         end
