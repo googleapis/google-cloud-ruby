@@ -191,6 +191,14 @@ module Gcloud
         )
       end
 
+      def copy_table source, target, options = {}
+        @client.execute(
+          api_method: @bigquery.jobs.insert,
+          parameters: { projectId: @project },
+          body_object: copy_table_config(source, target, options)
+        )
+      end
+
       protected
 
       ##
@@ -227,6 +235,58 @@ module Gcloud
                  }.delete_if { |_, v| v.nil? }
         params
       end
+
+      # rubocop:disable all
+      # Disabled rubocop because the API is verbose and so these methods
+      # are going to be verbose.
+
+      ##
+      # Job descrption for copy job
+      def copy_table_config source, target, options = {}
+        {
+          "configuration" => {
+            "copy" => {
+              "sourceTable" => {
+                "projectId" => source["tableReference"]["projectId"],
+                "datasetId" => source["tableReference"]["datasetId"],
+                "tableId" => source["tableReference"]["tableId"]
+              }.delete_if { |_, v| v.nil? },
+              "destinationTable" => {
+                "projectId" => target["tableReference"]["projectId"],
+                "datasetId" => target["tableReference"]["datasetId"],
+                "tableId" => target["tableReference"]["tableId"]
+              }.delete_if { |_, v| v.nil? },
+              "createDisposition" => copy_create_disposition(options[:create]),
+              "writeDisposition" => copy_write_disposition(options[:write])
+            }.delete_if { |_, v| v.nil? },
+            "dryRun" => options[:dryrun]
+          }.delete_if { |_, v| v.nil? }
+        }
+      end
+
+      def copy_create_disposition str #:nodoc:
+        { "create_if_needed" => "CREATE_IF_NEEDED",
+          "createifneeded" => "CREATE_IF_NEEDED",
+          "if_needed" => "CREATE_IF_NEEDED",
+          "needed" => "CREATE_IF_NEEDED",
+          "create_never" => "CREATE_NEVER",
+          "createnever" => "CREATE_NEVER",
+          "never" => "CREATE_NEVER" }[str.to_s.downcase]
+      end
+
+      def copy_write_disposition str #:nodoc:
+        { "write_truncate" => "WRITE_TRUNCATE",
+          "writetruncate" => "WRITE_TRUNCATE",
+          "truncate" => "WRITE_TRUNCATE",
+          "write_append" => "WRITE_APPEND",
+          "writeappend" => "WRITE_APPEND",
+          "append" => "WRITE_APPEND",
+          "write_empty" => "WRITE_EMPTY",
+          "writeempty" => "WRITE_EMPTY",
+          "empty" => "WRITE_EMPTY" }[str.to_s.downcase]
+      end
+
+      # rubocop:enable all
     end
   end
 end

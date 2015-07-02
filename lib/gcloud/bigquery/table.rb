@@ -92,6 +92,18 @@ module Gcloud
       end
 
       ##
+      # Copy data from one table to another.
+      def copy target_table, options = {}
+        ensure_connection!
+        resp = connection.copy_table gapi, target_table.gapi, options
+        if resp.success?
+          Job.from_gapi resp.data, connection
+        else
+          ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # Deletes an existing table.
       # All pending messages in the table are immediately dropped.
       def delete
