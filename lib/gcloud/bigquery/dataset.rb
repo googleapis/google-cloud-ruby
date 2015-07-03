@@ -86,9 +86,30 @@ module Gcloud
 
       ##
       # Permenently deletes the dataset.
-      # The dataset must be empty.
+      # The dataset must be empty before it can be deleted.
       #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:delete]</code>::
+      #   If +true+, delete all the tables in the dataset. If +false+ and the
+      #   dataset contains tables, the request will fail. Default is +false+.
+      #   (+Boolean+)
+      #
+      # === Returns
+      #
+      # +true+ if the dataset was deleted.
+      #
+      # === Example
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   bigquery = Gcloud.bigquery
+      #
+      #   dataset = bigquery.dataset "my-dataset"
       #   dataset.delete
+      #
       def delete options = {}
         ensure_connection!
         resp = connection.delete_dataset dataset_id, options
@@ -104,6 +125,39 @@ module Gcloud
       #
       # If the name is not provided in the request, the server will assign a
       # random name for this table on the same project as the dataset.
+      ##
+      # Creates a new table.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:name]</code>::
+      #   A descriptive name for the table. (+String+)
+      # <code>options[:description]</code>::
+      #   A user-friendly description of the table. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Bigquery::Table
+      #
+      # === Examples
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   bigquery = Gcloud.bigquery
+      #   dataset = bigquery.dataset "my-dataset"
+      #   table = dataset.create_table
+      #
+      # A name and description can be provided:
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   bigquery = Gcloud.bigquery
+      #   dataset = bigquery.dataset "my-dataset"
+      #   table = dataset.create_table name: "my-table",
+      #                                description: "My Table"
+      #
       def create_table options = {}
         ensure_connection!
         resp = connection.insert_table dataset_id, options
@@ -116,6 +170,25 @@ module Gcloud
 
       ##
       # Retrieves a table by name.
+      #
+      # === Parameters
+      #
+      # +table_name+::
+      #   Name of a table. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Bigquery::Table or nil if table does not exist
+      #
+      # === Example
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   bigquery = Gcloud.bigquery
+      #   dataset = bigquery.dataset "my-dataset"
+      #   table = dataset.table "my-table"
+      #   puts table.name
+      #
       def table table_name
         ensure_connection!
         resp = connection.get_table dataset_id, table_name
@@ -127,8 +200,53 @@ module Gcloud
       end
 
       ##
-      # Retrieves a list of tables names on the dataset.
-      # The values returned are strings, not Job objects.
+      # Retrieves a list of tables for the given dataset.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:token]</code>::
+      #   A previously-returned page token representing part of the larger set
+      #   of results to view. (+String+)
+      # <code>options[:max]</code>::
+      #   Maximum number of tables to return. (+Integer+)
+      #
+      # === Returns
+      #
+      # Array of Gcloud::Bigquery::Table (Gcloud::Bigquery::Table::List)
+      #
+      # === Examples
+      #
+      #   require "glcoud/bigquery"
+      #
+      #   bigquery = Gcloud.bigquery
+      #   dataset = bigquery.dataset "my-dataset"
+      #   tables = dataset.tables
+      #   tables.each do |table|
+      #     puts table.name
+      #   end
+      #
+      # If you have a significant number of tables, you may need to paginate
+      # through them: (See Dataset::List#token)
+      #
+      #   require "glcoud/bigquery"
+      #
+      #   bigquery = Gcloud.bigquery
+      #   dataset = bigquery.dataset "my-dataset"
+      #
+      #   all_tables = []
+      #   tmp_tables = dataset.tables
+      #   while tmp_tables.any? do
+      #     tmp_tables.each do |table|
+      #       all_tables << table
+      #     end
+      #     # break loop if no more tables available
+      #     break if tmp_tables.token.nil?
+      #     # get the next group of tables
+      #     tmp_tables = dataset.tables token: tmp_tables.token
+      #   end
+      #
       def tables options = {}
         ensure_connection!
         resp = connection.list_tables dataset_id, options
