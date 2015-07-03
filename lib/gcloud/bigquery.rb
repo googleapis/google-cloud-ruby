@@ -19,19 +19,30 @@ require "gcloud/bigquery/project"
 # Google Cloud BigQuery
 module Gcloud
   ##
-  # Create a new BigQuery project.
+  # Creates a new object for connecting to the BigQuery service.
+  # Each call creates a new connection.
   #
-  #   bigquery = Gcloud.bigquery "my-todo-project",
-  #                              "/path/to/keyfile.json"
-  #   dataset = bigquery.dataset "my-todo-dataset"
+  # === Parameters
   #
-  # @param project [String] the project identifier for the Bigquery
-  # account you are connecting to.
-  # @param keyfile [String] the path to the keyfile you downloaded from
-  # Google Cloud. The file must readable.
-  # @return [Gcloud::Bigquery::Project] bigquery project.
+  # +project+::
+  #   Project identifier for the BigQuery service you are connecting to.
+  #   (+String+)
+  # +keyfile+::
+  #   Keyfile downloaded from Google Cloud. If file path the file must be
+  #   readable. (+String+ or +Hash+)
   #
-  # See Gcloud::Bigquery::Project
+  # === Returns
+  #
+  # Gcloud::Bigquery::Project
+  #
+  # === Example
+  #
+  #   require "glcoud/bigquery"
+  #
+  #   bigquery = Gcloud.bigquery
+  #   dataset = bigquery.dataset "my-dataset"
+  #   table = dataset.table "my-table"
+  #
   def self.bigquery project = nil, keyfile = nil
     project ||= Gcloud::Bigquery::Project.default_project
     if keyfile.nil?
@@ -40,5 +51,42 @@ module Gcloud
       credentials = Gcloud::Bigquery::Credentials.new keyfile
     end
     Gcloud::Bigquery::Project.new project, credentials
+  end
+
+  ##
+  # = Google Cloud BigQuery
+  #
+  # Google BigQuery enables you to query massive datasets without the time and
+  # expense of building hardware and infrastructure. BigQuery enables
+  # super-fast, SQL-like queries against append-only tables, using the
+  # processing power of Google's infrastructure.
+  #
+  # == Basic Concepts
+  # === Project
+  # === Dataset
+  # === Table
+  # === Job
+  # == Loading Data into BigQuery
+  # === Uploading a file
+  # === Streaming records individually
+  # === Importing from Google Cloud Storage
+  # === Loading from Datastore Backup
+  # === CSV vs. JSON
+  # == Querying Data
+  # === Synchronous queries
+  # === Asynchronous queries
+  # === Interactive vs. batch queries
+  # === Query Caching
+  # == Using Views
+  # === Creating a view
+  # === Listing view vs. tables
+  # === Querying from a view
+  # == Copying Data
+  # == Exporting Data
+  # === One file
+  # === Multiple files
+  # === CSV vs. JSON
+  #
+  module Bigquery
   end
 end
