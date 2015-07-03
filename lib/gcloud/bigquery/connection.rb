@@ -219,7 +219,7 @@ module Gcloud
           "kind" => "bigquery#dataset",
           "friendlyName" => options[:name],
           "description" => options[:description],
-          "defaultTableExpirationMs" => options[:default_expiration]
+          "defaultTableExpirationMs" => options[:expiration]
         }
       end
 
