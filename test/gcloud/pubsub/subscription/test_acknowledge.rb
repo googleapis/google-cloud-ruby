@@ -48,7 +48,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
       [200, {"Content-Type"=>"application/json"}, ""]
     end
 
-    subscription.acknowledge *ack_ids
+    subscription.acknowledge(*ack_ids)
   end
 
   it "can acknowledge many ack ids in an array" do
@@ -73,19 +73,19 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
   it "can acknowledge many messages" do
     rec_messages  = [rec_message1, rec_message3, rec_message3]
-    ack_ids = rec_messages.map &:ack_id
+    ack_ids = rec_messages.map(&:ack_id)
 
     mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
       JSON.parse(env.body)["ackIds"].must_equal ack_ids
       [200, {"Content-Type"=>"application/json"}, ""]
     end
 
-    subscription.acknowledge *rec_messages
+    subscription.acknowledge(*rec_messages)
   end
 
   it "can acknowledge many messages in an array" do
     rec_messages  = [rec_message1, rec_message3, rec_message3]
-    ack_ids = rec_messages.map &:ack_id
+    ack_ids = rec_messages.map(&:ack_id)
 
     mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
       JSON.parse(env.body)["ackIds"].must_equal ack_ids
@@ -120,7 +120,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
         [200, {"Content-Type"=>"application/json"}, ""]
       end
 
-      subscription.acknowledge *ack_ids
+      subscription.acknowledge(*ack_ids)
     end
 
     it "can acknowledge many ack ids in an array" do
@@ -145,19 +145,19 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
     it "can acknowledge many messages" do
       rec_messages  = [rec_message1, rec_message3, rec_message3]
-      ack_ids = rec_messages.map &:ack_id
+      ack_ids = rec_messages.map(&:ack_id)
 
       mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
         JSON.parse(env.body)["ackIds"].must_equal ack_ids
         [200, {"Content-Type"=>"application/json"}, ""]
       end
 
-      subscription.acknowledge *rec_messages
+      subscription.acknowledge(*rec_messages)
     end
 
     it "can acknowledge many messages in an array" do
       rec_messages  = [rec_message1, rec_message3, rec_message3]
-      ack_ids = rec_messages.map &:ack_id
+      ack_ids = rec_messages.map(&:ack_id)
 
       mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
         JSON.parse(env.body)["ackIds"].must_equal ack_ids
@@ -198,7 +198,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
       end
 
       expect do
-        subscription.acknowledge *ack_ids
+        subscription.acknowledge(*ack_ids)
       end.must_raise Gcloud::Pubsub::NotFoundError
     end
 
@@ -230,7 +230,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
     it "raises NotFoundError when acknowledging many messages" do
       rec_messages  = [rec_message1, rec_message3, rec_message3]
-      ack_ids = rec_messages.map &:ack_id
+      ack_ids = rec_messages.map(&:ack_id)
 
       mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
         JSON.parse(env.body)["ackIds"].must_equal ack_ids
@@ -239,13 +239,13 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
       end
 
       expect do
-        subscription.acknowledge *rec_messages
+        subscription.acknowledge(*rec_messages)
       end.must_raise Gcloud::Pubsub::NotFoundError
     end
 
     it "raises NotFoundError when acknowledging many messages in an array" do
       rec_messages  = [rec_message1, rec_message3, rec_message3]
-      ack_ids = rec_messages.map &:ack_id
+      ack_ids = rec_messages.map(&:ack_id)
 
       mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
         JSON.parse(env.body)["ackIds"].must_equal ack_ids
