@@ -41,7 +41,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
 
     dataset = bigquery.create_dataset name: name,
                                       description: description,
-                                      default_expiration: default_expiration
+                                      expiration: default_expiration
     dataset.must_be_kind_of Gcloud::Bigquery::Dataset
     dataset.name.must_equal name
     dataset.description.must_equal description
