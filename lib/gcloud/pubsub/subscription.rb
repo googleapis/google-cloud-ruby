@@ -202,7 +202,7 @@ module Gcloud
       # === Parameters
       #
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:immediate]</code>::
       #   When +true+, the system will respond immediately, either with a
       #   message if available or +nil+ if no message is available.

@@ -113,7 +113,7 @@ module Gcloud
       # +topic_name+::
       #   Name of a topic. (+String+)
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:autocreate]</code>::
       #   Flag to control whether the topic should be created when needed.
       #   The default value is +true+. (+Boolean+)
@@ -191,7 +191,7 @@ module Gcloud
       # === Parameters
       #
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       #   (+String+)
       # <code>options[:token]</code>::
       #   The +token+ value returned by the last call to +topics+; indicates
@@ -316,7 +316,7 @@ module Gcloud
       # === Parameters
       #
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:prefix]</code>::
       #   Filter results to subscriptions whose names begin with this prefix.
       #   (+String+)

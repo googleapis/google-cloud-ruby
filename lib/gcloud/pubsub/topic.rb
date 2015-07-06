@@ -110,7 +110,7 @@ module Gcloud
       #   the server will assign a random name for this subscription on the same
       #   project as the topic. (+String+)
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:deadline]</code>::
       #   The maximum number of seconds after a subscriber receives a message
       #   before the subscriber should acknowledge the message. (+Integer+)
@@ -241,7 +241,7 @@ module Gcloud
       # === Parameters
       #
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:token]</code>::
       #   The +token+ value returned by the last call to +subscriptions+;
       #   indicates that this is a continuation of a call, and that the system

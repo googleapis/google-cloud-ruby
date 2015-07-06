@@ -82,7 +82,7 @@ module Gcloud
       # === Parameters
       #
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:prefix]</code>::
       #   Filter results to buckets whose names begin with this prefix.
       #   (+String+)
@@ -185,7 +185,7 @@ module Gcloud
       # +bucket_name+::
       #   Name of a bucket. (+String+)
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:retries]</code>::
       #   The number of times the API call should be retried.
       #   Default is Gcloud::Backoff.retries. (+Integer+)

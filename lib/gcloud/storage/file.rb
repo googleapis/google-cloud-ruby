@@ -138,7 +138,7 @@ module Gcloud
       #   The path on the local file system to write the data to.
       #   The path provided must be writable. (+String+)
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:verify]</code>::
       #   The verification algoruthm used to ensure the downloaded file contents
       #   are correct. Default is +:md5+. (+Symbol+)
@@ -223,7 +223,7 @@ module Gcloud
       #   If a bucket was provided in the first parameter, this contains the
       #   path to copy the file to in the given bucket. (+String+)
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:acl]</code>::
       #   A predefined set of access controls to apply to new file.
       #   (+String+)
@@ -324,7 +324,7 @@ module Gcloud
       # === Parameters
       #
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:method]</code>::
       #   The HTTP verb to be used with the signed URL. Signed URLs can be used
       #   with +GET+, +HEAD+, +PUT+, and +DELETE+ requests. Default is +GET+.

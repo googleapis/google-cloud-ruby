@@ -169,7 +169,7 @@ module Gcloud
         #   * allAuthenticatedUsers
         #
         # +options+::
-        #   An optional Hash for controlling additional behavor. (+Hash+)
+        #   An optional Hash for controlling additional behavior. (+Hash+)
         # <code>options[:generation]</code>::
         #   When present, selects a specific revision of this object.
         #   Default is the latest version. (+Integer+)
@@ -232,7 +232,7 @@ module Gcloud
         #   * allAuthenticatedUsers
         #
         # +options+::
-        #   An optional Hash for controlling additional behavor. (+Hash+)
+        #   An optional Hash for controlling additional behavior. (+Hash+)
         # <code>options[:generation]</code>::
         #   When present, selects a specific revision of this object.
         #   Default is the latest version. (+Integer+)
@@ -295,7 +295,7 @@ module Gcloud
         #   * allAuthenticatedUsers
         #
         # +options+::
-        #   An optional Hash for controlling additional behavor. (+Hash+)
+        #   An optional Hash for controlling additional behavior. (+Hash+)
         # <code>options[:generation]</code>::
         #   When present, selects a specific revision of this object.
         #   Default is the latest version. (+Integer+)
@@ -358,7 +358,7 @@ module Gcloud
         #   * allAuthenticatedUsers
         #
         # +options+::
-        #   An optional Hash for controlling additional behavor. (+Hash+)
+        #   An optional Hash for controlling additional behavior. (+Hash+)
         # <code>options[:generation]</code>::
         #   When present, selects a specific revision of this object.
         #   Default is the latest version. (+Integer+)
