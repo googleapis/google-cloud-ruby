@@ -197,6 +197,14 @@ module Gcloud
         )
       end
 
+      def link_table table, urls, options = {}
+        @client.execute(
+          api_method: @bigquery.jobs.insert,
+          parameters: { projectId: @project },
+          body_object: link_table_config(table, urls, options)
+        )
+      end
+
       protected
 
       ##
@@ -271,6 +279,24 @@ module Gcloud
                 "projectId" => target["tableReference"]["projectId"],
                 "datasetId" => target["tableReference"]["datasetId"],
                 "tableId" => target["tableReference"]["tableId"]
+              }.delete_if { |_, v| v.nil? },
+              "createDisposition" => create_disposition(options[:create]),
+              "writeDisposition" => write_disposition(options[:write])
+            }.delete_if { |_, v| v.nil? },
+            "dryRun" => options[:dryrun]
+          }.delete_if { |_, v| v.nil? }
+        }
+      end
+
+      def link_table_config table, urls, options = {}
+        {
+          "configuration" => {
+            "link" => {
+              "sourceUri" => Array(urls),
+              "destinationTable" => {
+                "projectId" => table["tableReference"]["projectId"],
+                "datasetId" => table["tableReference"]["datasetId"],
+                "tableId" => table["tableReference"]["tableId"]
               }.delete_if { |_, v| v.nil? },
               "createDisposition" => create_disposition(options[:create]),
               "writeDisposition" => write_disposition(options[:write])
