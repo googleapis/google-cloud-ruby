@@ -33,14 +33,32 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     job.wont_be :pending?
     job.wont_be :done?
 
+    job.gapi["status"]["state"] = "RUNNING"
+    job.state.must_equal "RUNNING"
+    job.must_be :running?
+    job.wont_be :pending?
+    job.wont_be :done?
+
     job.gapi["status"]["state"] = "pending"
     job.state.must_equal "pending"
     job.wont_be :running?
     job.must_be :pending?
     job.wont_be :done?
 
+    job.gapi["status"]["state"] = "PENDING"
+    job.state.must_equal "PENDING"
+    job.wont_be :running?
+    job.must_be :pending?
+    job.wont_be :done?
+
     job.gapi["status"]["state"] = "done"
     job.state.must_equal "done"
+    job.wont_be :running?
+    job.wont_be :pending?
+    job.must_be :done?
+
+    job.gapi["status"]["state"] = "DONE"
+    job.state.must_equal "DONE"
     job.wont_be :running?
     job.wont_be :pending?
     job.must_be :done?

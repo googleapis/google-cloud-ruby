@@ -60,19 +60,22 @@ module Gcloud
       ##
       # Checks if the job's status is "running".
       def running?
-        state == "running"
+        return false if state.nil?
+        "running".casecmp(state).zero?
       end
 
       ##
       # Checks if the job's status is "pending".
       def pending?
-        state == "pending"
+        return false if state.nil?
+        "pending".casecmp(state).zero?
       end
 
       ##
       # Checks if the job's status is "done".
       def done?
-        state == "done"
+        return false if state.nil?
+        "done".casecmp(state).zero?
       end
 
       ##
