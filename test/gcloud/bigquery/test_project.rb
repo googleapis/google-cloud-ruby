@@ -19,15 +19,15 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
   it "creates an empty dataset" do
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets" do |env|
       [200, {"Content-Type"=>"application/json"},
-       create_dataset_json("my-dataset")]
+       create_dataset_json("my_dataset")]
     end
 
-    dataset = bigquery.create_dataset "my-dataset"
+    dataset = bigquery.create_dataset "my_dataset"
     dataset.must_be_kind_of Gcloud::Bigquery::Dataset
   end
 
   it "creates a dataset with a name and description" do
-    id = "my-dataset"
+    id = "my_dataset"
     name = "My Dataset"
     description = "This is my dataset"
     default_expiration = 999
@@ -116,7 +116,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
   end
 
   it "finds a dataset" do
-    dataset_id = "found-dataset"
+    dataset_id = "found_dataset"
     dataset_name = "Found Dataset"
 
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" do |env|

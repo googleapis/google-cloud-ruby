@@ -40,8 +40,8 @@ module Gcloud
   #   require "glcoud/bigquery"
   #
   #   bigquery = Gcloud.bigquery
-  #   dataset = bigquery.dataset "my-dataset"
-  #   table = dataset.table "my-table"
+  #   dataset = bigquery.dataset "my_dataset"
+  #   table = dataset.table "my_table"
   #
   def self.bigquery project = nil, keyfile = nil
     project ||= Gcloud::Bigquery::Project.default_project

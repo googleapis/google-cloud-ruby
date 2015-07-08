@@ -18,7 +18,7 @@ require "uri"
 
 describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   # Create a dataset object with the project's mocked connection object
-  let(:dataset_id) { "my-dataset" }
+  let(:dataset_id) { "my_dataset" }
   let(:dataset_name) { "My Dataset" }
   let(:description) { "This is my dataset" }
   let(:default_expiration) { 999 }
@@ -70,15 +70,15 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   it "creates an empty table" do
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       [200, {"Content-Type"=>"application/json"},
-       create_table_json("my-table")]
+       create_table_json("my_table")]
     end
 
-    table = dataset.create_table "my-table"
+    table = dataset.create_table "my_table"
     table.must_be_kind_of Gcloud::Bigquery::Table
   end
 
   it "creates a table with a name and description" do
-    id = "my-table"
+    id = "my_table"
     name = "My Table"
     description = "This is my table"
 
@@ -167,7 +167,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   end
 
   it "finds a table" do
-    found_table_id = "found-table"
+    found_table_id = "found_table"
 
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables/#{found_table_id}" do |env|
       [200, {"Content-Type"=>"application/json"},

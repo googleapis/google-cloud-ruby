@@ -35,8 +35,8 @@ module Gcloud
     #   require "glcoud/bigquery"
     #
     #   bigquery = Gcloud.bigquery
-    #   dataset = bigquery.dataset "my-dataset"
-    #   table = dataset.table "my-table"
+    #   dataset = bigquery.dataset "my_dataset"
+    #   table = dataset.table "my_table"
     #
     # See Gcloud.bigquery
     class Project
@@ -92,7 +92,7 @@ module Gcloud
       #
       #   bigquery = Gcloud.bigquery
       #
-      #   dataset = bigquery.dataset "my-dataset"
+      #   dataset = bigquery.dataset "my_dataset"
       #   puts dataset.name
       #
       def dataset dataset_name
@@ -135,7 +135,7 @@ module Gcloud
       #
       #   bigquery = Gcloud.bigquery
       #
-      #   dataset = bigquery.create_dataset "my-dataset",
+      #   dataset = bigquery.create_dataset "my_dataset",
       #
       # A name and description can be provided:
       #
@@ -143,7 +143,7 @@ module Gcloud
       #
       #   bigquery = Gcloud.bigquery
       #
-      #   dataset = bigquery.create_dataset "my-dataset",
+      #   dataset = bigquery.create_dataset "my_dataset",
       #                                     name: "My Dataset"
       #                                     description: "This is my Dataset"
       #

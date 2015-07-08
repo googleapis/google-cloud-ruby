@@ -243,9 +243,9 @@ class MockBigquery < Minitest::Spec
   end
 
   def random_dataset_hash id = nil, name = nil, description = nil, default_expiration = nil
-    id ||= "my-dataset"
-    name ||= "dataset-name"
-    description ||= "dataset-description"
+    id ||= "my_dataset"
+    name ||= "My Dataset"
+    description ||= "This is my dataset"
     default_expiration ||= 100
 
     {
@@ -280,8 +280,8 @@ class MockBigquery < Minitest::Spec
   end
 
   def random_dataset_small_hash id = nil, name = nil
-    id ||= "my-dataset"
-    name ||= "name"
+    id ||= "my_dataset"
+    name ||= "My Dataset"
 
     {
       "kind" => "bigquery#dataset",
@@ -295,7 +295,7 @@ class MockBigquery < Minitest::Spec
   end
 
   def random_table_hash dataset, id = nil, name = nil, description = nil
-    id ||= "my-table"
+    id ||= "my_table"
     name ||= "Table Name"
 
     {
@@ -334,7 +334,7 @@ class MockBigquery < Minitest::Spec
   end
 
   def random_table_small_hash dataset, id = nil, name = nil
-    id ||= "my-table"
+    id ||= "my_table"
     name ||= "Table Name"
 
     {

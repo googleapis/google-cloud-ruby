@@ -107,7 +107,7 @@ module Gcloud
       #
       #   bigquery = Gcloud.bigquery
       #
-      #   dataset = bigquery.dataset "my-dataset"
+      #   dataset = bigquery.dataset "my_dataset"
       #   dataset.delete
       #
       def delete options = {}
@@ -150,16 +150,16 @@ module Gcloud
       #   require "gcloud/bigquery"
       #
       #   bigquery = Gcloud.bigquery
-      #   dataset = bigquery.dataset "my-dataset"
-      #   table = dataset.create_table "my-table"
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.create_table "my_table"
       #
       # A name and description can be provided:
       #
       #   require "gcloud/bigquery"
       #
       #   bigquery = Gcloud.bigquery
-      #   dataset = bigquery.dataset "my-dataset"
-      #   table = dataset.create_table "my-table"
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.create_table "my_table"
       #                                name: "My Table",
       #                                description: "This is my table"
       #
@@ -190,8 +190,8 @@ module Gcloud
       #   require "gcloud/bigquery"
       #
       #   bigquery = Gcloud.bigquery
-      #   dataset = bigquery.dataset "my-dataset"
-      #   table = dataset.table "my-table"
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
       #   puts table.name
       #
       def table table_name
@@ -226,7 +226,7 @@ module Gcloud
       #   require "glcoud/bigquery"
       #
       #   bigquery = Gcloud.bigquery
-      #   dataset = bigquery.dataset "my-dataset"
+      #   dataset = bigquery.dataset "my_dataset"
       #   tables = dataset.tables
       #   tables.each do |table|
       #     puts table.name
@@ -238,7 +238,7 @@ module Gcloud
       #   require "glcoud/bigquery"
       #
       #   bigquery = Gcloud.bigquery
-      #   dataset = bigquery.dataset "my-dataset"
+      #   dataset = bigquery.dataset "my_dataset"
       #
       #   all_tables = []
       #   tmp_tables = dataset.tables

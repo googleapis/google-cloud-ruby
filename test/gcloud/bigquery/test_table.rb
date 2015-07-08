@@ -18,10 +18,10 @@ require "uri"
 
 describe Gcloud::Bigquery::Table, :mock_bigquery do
   # Create a table object with the project's mocked connection object
-  let(:table_id) { "my-table" }
+  let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
   let(:description) { "This is my table" }
-  let(:table_hash) { random_table_hash "my-dataset", table_id, table_name, description }
+  let(:table_hash) { random_table_hash "my_dataset", table_id, table_name, description }
   let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash,
                                                   bigquery.connection }
 

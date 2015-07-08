@@ -181,8 +181,8 @@ module Gcloud
       #   require "gcloud/bigquery"
       #
       #   bigquery = Gcloud.bigquery
-      #   dataset = bigquery.dataset "my-dataset"
-      #   table = dataset.table "my-table"
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
       #   table.delete
       #
       def delete
