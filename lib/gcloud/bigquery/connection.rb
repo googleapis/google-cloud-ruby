@@ -135,13 +135,11 @@ module Gcloud
 
       ##
       # Creates a new, empty table in the dataset.
-      def insert_table dataset_id, options = {}
+      def insert_table dataset_id, table_id, options = {}
         @client.execute(
           api_method: @bigquery.tables.insert,
           parameters: { projectId: @project, datasetId: dataset_id },
-          body_object: { friendlyName: options[:name],
-                         description: options[:description]
-                       }.delete_if { |_, v| v.nil? }
+          body_object: insert_table_request(dataset_id, table_id, options)
         )
       end
 
@@ -238,6 +236,20 @@ module Gcloud
                    stateFilter: options.delete(:filter)
                  }.delete_if { |_, v| v.nil? }
         params
+      end
+
+      ##
+      # Create the HTTP body for insert table
+      def insert_table_request dataset_id, table_id, options = {}
+        {
+          tableReference: {
+            projectId: @project,
+            datasetId: dataset_id,
+            tableId: table_id
+          },
+          friendlyName: options[:name],
+          description: options[:description]
+        }.delete_if { |_, v| v.nil? }
       end
 
       # rubocop:disable all

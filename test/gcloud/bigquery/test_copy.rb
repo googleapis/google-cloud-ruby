@@ -16,17 +16,21 @@ require "helper"
 
 describe Gcloud::Bigquery::Table, :copy, :mock_bigquery do
   let(:source_dataset) { "source-dataset" }
-  let(:source_table_name) { "source-table" }
+  let(:source_table_id) { "source-table-id" }
+  let(:source_table_name) { "Source Table" }
   let(:source_description) { "This is the source table" }
   let(:source_table_hash) { random_table_hash source_dataset,
+                                              source_table_id,
                                               source_table_name,
                                               source_description }
   let(:source_table) { Gcloud::Bigquery::Table.from_gapi source_table_hash,
                                                          bigquery.connection }
   let(:target_dataset) { "target-dataset" }
-  let(:target_table_name) { "target-table" }
+  let(:target_table_id) { "target-table-id" }
+  let(:target_table_name) { "Target Table" }
   let(:target_description) { "This is the target table" }
   let(:target_table_hash) { random_table_hash target_dataset,
+                                              target_table_id,
                                               target_table_name,
                                               target_description }
   let(:target_table) { Gcloud::Bigquery::Table.from_gapi target_table_hash,

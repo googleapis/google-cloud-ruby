@@ -130,6 +130,10 @@ module Gcloud
       #
       # === Parameters
       #
+      # +table_id+::
+      #   The ID of the table. The ID must contain only letters (a-z, A-Z),
+      #   numbers (0-9), or underscores (_).
+      #   The maximum length is 1,024 characters. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:name]</code>::
@@ -147,7 +151,7 @@ module Gcloud
       #
       #   bigquery = Gcloud.bigquery
       #   dataset = bigquery.dataset "my-dataset"
-      #   table = dataset.create_table
+      #   table = dataset.create_table "my-table"
       #
       # A name and description can be provided:
       #
@@ -155,12 +159,13 @@ module Gcloud
       #
       #   bigquery = Gcloud.bigquery
       #   dataset = bigquery.dataset "my-dataset"
-      #   table = dataset.create_table name: "my-table",
-      #                                description: "My Table"
+      #   table = dataset.create_table "my-table"
+      #                                name: "My Table",
+      #                                description: "This is my table"
       #
-      def create_table options = {}
+      def create_table table_id, options = {}
         ensure_connection!
-        resp = connection.insert_table dataset_id, options
+        resp = connection.insert_table dataset_id, table_id, options
         if resp.success?
           Table.from_gapi resp.data, connection
         else

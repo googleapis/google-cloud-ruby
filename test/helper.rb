@@ -293,8 +293,9 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def random_table_hash dataset, name = nil, description = nil
-    name ||= "table-name"
+  def random_table_hash dataset, id = nil, name = nil, description = nil
+    id ||= "table-id"
+    name ||= "Table Name"
 
     {
       "kind" => "bigquery#table",
@@ -304,7 +305,7 @@ class MockBigquery < Minitest::Spec
       "tableReference" => {
         "projectId" => project,
         "datasetId" => dataset,
-        "tableId" => "#{name}-id"
+        "tableId" => id
       },
       "friendlyName" => name,
       "description" => description,
@@ -331,8 +332,9 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def random_table_small_hash dataset, name = nil
-    name ||= "table-name"
+  def random_table_small_hash dataset, id = nil, name = nil
+    id ||= "table-id"
+    name ||= "Table Name"
 
     {
       "kind" => "bigquery#table",
@@ -340,7 +342,7 @@ class MockBigquery < Minitest::Spec
       "tableReference" => {
         "projectId" => project,
         "datasetId" => dataset,
-        "tableId" => "#{name}-id"
+        "tableId" => id
       },
       "friendlyName" => name,
       "type" => "TABLE"

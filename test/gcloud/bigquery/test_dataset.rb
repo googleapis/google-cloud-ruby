@@ -70,27 +70,30 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   it "creates an empty table" do
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       [200, {"Content-Type"=>"application/json"},
-       create_table_json]
+       create_table_json("my-table")]
     end
 
-    table = dataset.create_table
+    table = dataset.create_table "my-table"
     table.must_be_kind_of Gcloud::Bigquery::Table
   end
 
   it "creates a table with a name and description" do
-    name = "my-table"
+    id = "my-table"
+    name = "My Table"
     description = "This is my table"
 
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       JSON.parse(env.body)["friendlyName"].must_equal name
       JSON.parse(env.body)["description"].must_equal description
       [200, {"Content-Type"=>"application/json"},
-       create_table_json(name, description)]
+       create_table_json(id, name, description)]
     end
 
-    table = dataset.create_table name: name,
+    table = dataset.create_table id,
+                                 name: name,
                                  description: description
     table.must_be_kind_of Gcloud::Bigquery::Table
+    table.table_id.must_equal id
     table.name.must_equal name
     table.description.must_equal description
   end
@@ -164,24 +167,24 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   end
 
   it "finds a table" do
-    table_name = "found-table"
+    found_table_id = "found-table"
 
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables/#{table_name}" do |env|
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables/#{found_table_id}" do |env|
       [200, {"Content-Type"=>"application/json"},
-       find_table_json(table_name)]
+       find_table_json(found_table_id)]
     end
 
-    table = dataset.table table_name
+    table = dataset.table found_table_id
     table.must_be_kind_of Gcloud::Bigquery::Table
-    table.name.must_equal table_name
+    table.table_id.must_equal found_table_id
   end
 
-  def create_table_json name = nil, description = nil
-    random_table_hash(dataset_id, name, description).to_json
+  def create_table_json id, name = nil, description = nil
+    random_table_hash(dataset_id, id, name, description).to_json
   end
 
-  def find_table_json name
-    random_table_hash(dataset_id, name).to_json
+  def find_table_json id, name = nil, description = nil
+    random_table_hash(dataset_id, id, name, description).to_json
   end
 
   def list_tables_json count = 2, token = nil, total = nil
