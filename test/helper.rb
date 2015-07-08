@@ -280,13 +280,14 @@ class MockBigquery < Minitest::Spec
   end
 
   def random_dataset_small_hash id = nil, name = nil
+    id ||= "my-dataset"
     name ||= "name"
 
     {
       "kind" => "bigquery#dataset",
-      "id" => "id",
+      "id" => "#{project}:#{id}",
       "datasetReference" => {
-        "datasetId" => (id || "my-dataset"),
+        "datasetId" => id,
         "projectId" => project
       },
       "friendlyName" => name
@@ -294,13 +295,13 @@ class MockBigquery < Minitest::Spec
   end
 
   def random_table_hash dataset, id = nil, name = nil, description = nil
-    id ||= "table-id"
+    id ||= "my-table"
     name ||= "Table Name"
 
     {
       "kind" => "bigquery#table",
       "etag" => "etag",
-      "id" => "id",
+      "id" => "#{project}:#{dataset}.#{id}",
       "selfLink" => "link",
       "tableReference" => {
         "projectId" => project,
@@ -333,12 +334,12 @@ class MockBigquery < Minitest::Spec
   end
 
   def random_table_small_hash dataset, id = nil, name = nil
-    id ||= "table-id"
+    id ||= "my-table"
     name ||= "Table Name"
 
     {
       "kind" => "bigquery#table",
-      "id" => "id",
+      "id" => "#{project}:#{dataset}.#{id}",
       "tableReference" => {
         "projectId" => project,
         "datasetId" => dataset,
@@ -353,7 +354,7 @@ class MockBigquery < Minitest::Spec
     {
       "kind" => "bigquery#job",
       "etag" => "etag",
-      "id" => id,
+      "id" => "#{project}:#{id}",
       "selfLink" => "http://bigquery/projects/#{project}/jobs/#{id}",
       "jobReference" => {
         "projectId" => project,

@@ -37,9 +37,17 @@ module Gcloud
       end
 
       ##
-      # Opaque ID field of the job.
-      def id
-        @gapi["id"]
+      # The ID of the job.
+      # The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+      # (_), or dashes (-). The maximum length is 1,024 characters.
+      def job_id
+        @gapi["jobReference"]["jobId"]
+      end
+
+      ##
+      # The ID of the project containing this job.
+      def project_id
+        @gapi["jobReference"]["projectId"]
       end
 
       ##
@@ -98,7 +106,7 @@ module Gcloud
       # Refreshes the job with current data from the BigQuery service.
       def refresh!
         ensure_connection!
-        resp = connection.get_job id
+        resp = connection.get_job job_id
         if resp.success?
           @gapi = resp.data
         else

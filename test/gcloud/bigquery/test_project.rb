@@ -246,7 +246,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
 
     job = bigquery.job job_id
     job.must_be_kind_of Gcloud::Bigquery::Job
-    job.id.must_equal job_id
+    job.job_id.must_equal job_id
   end
 
   def create_dataset_json id, name = nil, description = nil, default_expiration = nil

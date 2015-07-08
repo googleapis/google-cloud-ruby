@@ -21,10 +21,10 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
   let(:job_hash) { random_job_hash }
   let(:job) { Gcloud::Bigquery::Job.from_gapi job_hash,
                                               bigquery.connection }
-  let(:job_id) { job.id }
+  let(:job_id) { job.job_id }
 
   it "knows its attributes" do
-    job.id.must_equal job_hash["id"]
+    job.job_id.must_equal job_hash["jobReference"]["jobId"]
   end
 
   it "knows its state" do
