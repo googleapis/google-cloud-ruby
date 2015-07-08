@@ -19,15 +19,16 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
   it "creates an empty dataset" do
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets" do |env|
       [200, {"Content-Type"=>"application/json"},
-       create_dataset_json]
+       create_dataset_json("my-dataset")]
     end
 
-    dataset = bigquery.create_dataset
+    dataset = bigquery.create_dataset "my-dataset"
     dataset.must_be_kind_of Gcloud::Bigquery::Dataset
   end
 
   it "creates a dataset with a name and description" do
-    name = "my-dataset"
+    id = "my-dataset"
+    name = "My Dataset"
     description = "This is my dataset"
     default_expiration = 999
 
@@ -36,10 +37,10 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
       JSON.parse(env.body)["description"].must_equal description
       JSON.parse(env.body)["defaultTableExpirationMs"].must_equal default_expiration
       [200, {"Content-Type"=>"application/json"},
-       create_dataset_json(name, description, default_expiration)]
+       create_dataset_json(id, name, description, default_expiration)]
     end
 
-    dataset = bigquery.create_dataset name: name,
+    dataset = bigquery.create_dataset id, name: name,
                                       description: description,
                                       expiration: default_expiration
     dataset.must_be_kind_of Gcloud::Bigquery::Dataset
@@ -115,15 +116,17 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
   end
 
   it "finds a dataset" do
-    dataset_name = "found-dataset"
+    dataset_id = "found-dataset"
+    dataset_name = "Found Dataset"
 
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_name}" do |env|
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" do |env|
       [200, {"Content-Type"=>"application/json"},
-       find_dataset_json(dataset_name)]
+       find_dataset_json(dataset_id, dataset_name)]
     end
 
-    dataset = bigquery.dataset dataset_name
+    dataset = bigquery.dataset dataset_id
     dataset.must_be_kind_of Gcloud::Bigquery::Dataset
+    dataset.dataset_id.must_equal dataset_id
     dataset.name.must_equal dataset_name
   end
 
@@ -246,12 +249,12 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     job.id.must_equal job_id
   end
 
-  def create_dataset_json name = nil, description = nil, default_expiration = nil
-    random_dataset_hash(name, description, default_expiration).to_json
+  def create_dataset_json id, name = nil, description = nil, default_expiration = nil
+    random_dataset_hash(id, name, description, default_expiration).to_json
   end
 
-  def find_dataset_json name = nil, description = nil, default_expiration = nil
-    random_dataset_hash(name, description, default_expiration).to_json
+  def find_dataset_json id, name = nil, description = nil, default_expiration = nil
+    random_dataset_hash(id, name, description, default_expiration).to_json
   end
 
   def list_datasets_json count = 2, token = nil

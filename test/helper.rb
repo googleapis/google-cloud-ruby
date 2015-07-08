@@ -242,9 +242,10 @@ class MockBigquery < Minitest::Spec
     @connection
   end
 
-  def random_dataset_hash name = nil, description = nil, default_expiration = nil
-    name ||= "name"
-    description ||= "description"
+  def random_dataset_hash id = nil, name = nil, description = nil, default_expiration = nil
+    id ||= "my-dataset"
+    name ||= "dataset-name"
+    description ||= "dataset-description"
     default_expiration ||= 100
 
     {
@@ -253,7 +254,7 @@ class MockBigquery < Minitest::Spec
       "id" => "id",
       "selfLink" => "link",
       "datasetReference" => {
-        "datasetId" => "dataset",
+        "datasetId" => id,
         "projectId" => project
       },
       "friendlyName" => name,
@@ -278,14 +279,14 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def random_dataset_small_hash name = nil
+  def random_dataset_small_hash id = nil, name = nil
     name ||= "name"
 
     {
       "kind" => "bigquery#dataset",
       "id" => "id",
       "datasetReference" => {
-        "datasetId" => "dataset",
+        "datasetId" => (id || "my-dataset"),
         "projectId" => project
       },
       "friendlyName" => name

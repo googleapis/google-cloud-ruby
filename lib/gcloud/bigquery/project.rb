@@ -111,6 +111,10 @@ module Gcloud
       #
       # === Parameters
       #
+      # +dataset_id+::
+      #   A unique ID for this dataset, without the project name.
+      #   The ID must contain only letters (a-z, A-Z), numbers (0-9), or
+      #   underscores (_). The maximum length is 1,024 characters. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavor. (+Hash+)
       # <code>options[:name]</code>::
@@ -131,7 +135,7 @@ module Gcloud
       #
       #   bigquery = Gcloud.bigquery
       #
-      #   dataset = bigquery.create_dataset
+      #   dataset = bigquery.create_dataset "my-dataset",
       #
       # A name and description can be provided:
       #
@@ -139,12 +143,13 @@ module Gcloud
       #
       #   bigquery = Gcloud.bigquery
       #
-      #   dataset = bigquery.create_dataset name: "my-dataset",
-      #                                     description: "My Dataset"
+      #   dataset = bigquery.create_dataset "my-dataset",
+      #                                     name: "My Dataset"
+      #                                     description: "This is my Dataset"
       #
-      def create_dataset options = {}
+      def create_dataset dataset_id, options = {}
         ensure_connection!
-        resp = connection.insert_dataset options
+        resp = connection.insert_dataset dataset_id, options
         if resp.success?
           Dataset.from_gapi resp.data, connection
         else

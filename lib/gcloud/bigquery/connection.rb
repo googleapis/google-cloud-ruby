@@ -65,11 +65,11 @@ module Gcloud
 
       ##
       # Creates a new empty dataset.
-      def insert_dataset options = {}
+      def insert_dataset dataset_id, options = {}
         @client.execute(
           api_method: @bigquery.datasets.insert,
           parameters: { projectId: @project },
-          body_object: insert_dataset_request(options)
+          body_object: insert_dataset_request(dataset_id, options)
         )
       end
 
@@ -214,13 +214,17 @@ module Gcloud
 
       ##
       # Create the HTTP body for insert dataset
-      def insert_dataset_request options = {}
+      def insert_dataset_request dataset_id, options = {}
         {
           "kind" => "bigquery#dataset",
+          "datasetReference" => {
+            "projectId" => @project,
+            "datasetId" => dataset_id
+          },
           "friendlyName" => options[:name],
           "description" => options[:description],
           "defaultTableExpirationMs" => options[:expiration]
-        }
+        }.delete_if { |_, v| v.nil? }
       end
 
       ##
@@ -256,15 +260,15 @@ module Gcloud
                 "datasetId" => target["tableReference"]["datasetId"],
                 "tableId" => target["tableReference"]["tableId"]
               }.delete_if { |_, v| v.nil? },
-              "createDisposition" => copy_create_disposition(options[:create]),
-              "writeDisposition" => copy_write_disposition(options[:write])
+              "createDisposition" => create_disposition(options[:create]),
+              "writeDisposition" => write_disposition(options[:write])
             }.delete_if { |_, v| v.nil? },
             "dryRun" => options[:dryrun]
           }.delete_if { |_, v| v.nil? }
         }
       end
 
-      def copy_create_disposition str #:nodoc:
+      def create_disposition str #:nodoc:
         { "create_if_needed" => "CREATE_IF_NEEDED",
           "createifneeded" => "CREATE_IF_NEEDED",
           "if_needed" => "CREATE_IF_NEEDED",
@@ -274,7 +278,7 @@ module Gcloud
           "never" => "CREATE_NEVER" }[str.to_s.downcase]
       end
 
-      def copy_write_disposition str #:nodoc:
+      def write_disposition str #:nodoc:
         { "write_truncate" => "WRITE_TRUNCATE",
           "writetruncate" => "WRITE_TRUNCATE",
           "truncate" => "WRITE_TRUNCATE",

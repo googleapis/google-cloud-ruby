@@ -18,13 +18,13 @@ require "uri"
 
 describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   # Create a dataset object with the project's mocked connection object
-  let(:dataset_name) { "my-dataset" }
+  let(:dataset_id) { "my-dataset" }
+  let(:dataset_name) { "My Dataset" }
   let(:description) { "This is my dataset" }
   let(:default_expiration) { 999 }
-  let(:dataset_hash) { random_dataset_hash dataset_name, description, default_expiration }
+  let(:dataset_hash) { random_dataset_hash dataset_id, dataset_name, description, default_expiration }
   let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_hash,
                                                       bigquery.connection }
-  let(:dataset_id) { dataset.dataset_id }
 
   it "knows its attributes" do
     dataset.name.must_equal dataset_name
