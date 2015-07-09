@@ -464,6 +464,13 @@ module Gcloud
       end
 
       ##
+      # URI of the location and file name in the format of
+      # <code>gs://my-bucket/file-name.json</code>.
+      def to_gs_url #:nodoc:
+        "gs://#{bucket}/#{name}"
+      end
+
+      ##
       # New File from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|

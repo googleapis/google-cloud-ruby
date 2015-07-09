@@ -119,7 +119,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Bigquery::Dataset (Gcloud::Bigquery::Dataset::List)
+      # Gcloud::Bigquery::Job
       #
       def copy target_table, options = {}
         ensure_connection!
@@ -132,7 +132,7 @@ module Gcloud
       end
 
       ##
-      # Copy data from one table to another.
+      # Link table data from URL.
       #
       # === Parameters
       #
@@ -159,11 +159,44 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Bigquery::Dataset (Gcloud::Bigquery::Dataset::List)
+      # Gcloud::Bigquery::Job
       #
       def link source_url, options = {}
         ensure_connection!
         resp = connection.link_table gapi, source_url, options
+        if resp.success?
+          Job.from_gapi resp.data, connection
+        else
+          ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Extract data from the table to a Storage file.
+      #
+      # === Parameters
+      #
+      # +extract_url+::
+      #   URI of the location and file name where BigQuery should export the
+      #   files to, in the format of <code>gs://my-bucket/file-name.json</code>.
+      #   (+Gcloud::Storage::File+ or +String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # <code>options[:format]</code>::
+      #   The exported file format. (+String+)
+      #
+      #   The following values are supported:
+      #   * +csv+ - CSV formatted data.
+      #   * +json+ - JSON formatted data.
+      #   * +avro+ - Avro formatted data.
+      #
+      # === Returns
+      #
+      # Gcloud::Bigquery::Job
+      #
+      def extract extract_url, options = {}
+        ensure_connection!
+        resp = connection.extract_table gapi, extract_url, options
         if resp.success?
           Job.from_gapi resp.data, connection
         else

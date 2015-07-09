@@ -205,6 +205,14 @@ module Gcloud
         )
       end
 
+      def extract_table table, storage_files, options = {}
+        @client.execute(
+          api_method: @bigquery.jobs.insert,
+          parameters: { projectId: @project },
+          body_object: extract_table_config(table, storage_files, options)
+        )
+      end
+
       protected
 
       ##
@@ -306,6 +314,27 @@ module Gcloud
         }
       end
 
+      def extract_table_config table, storage_files, options = {}
+        storage_urls = Array(storage_files).map do |url|
+          url.respond_to?(:to_gs_url) ? url.to_gs_url : url
+        end
+        dest_format = extract_destination_format storage_urls.first, options[:format]
+        {
+          "configuration" => {
+            "extract" => {
+              "destinationUris" => Array(storage_urls),
+              "sourceTable" => {
+                "projectId" => table["tableReference"]["projectId"],
+                "datasetId" => table["tableReference"]["datasetId"],
+                "tableId" => table["tableReference"]["tableId"]
+              }.delete_if { |_, v| v.nil? },
+              "destinationFormat" => dest_format,
+            }.delete_if { |_, v| v.nil? },
+            "dryRun" => options[:dryrun]
+          }.delete_if { |_, v| v.nil? }
+        }
+      end
+
       def create_disposition str #:nodoc:
         { "create_if_needed" => "CREATE_IF_NEEDED",
           "createifneeded" => "CREATE_IF_NEEDED",
@@ -326,6 +355,18 @@ module Gcloud
           "write_empty" => "WRITE_EMPTY",
           "writeempty" => "WRITE_EMPTY",
           "empty" => "WRITE_EMPTY" }[str.to_s.downcase]
+      end
+
+      def extract_destination_format url, format
+        val = { "csv" => "CSV",
+                "json" => "NEWLINE_DELIMITED_JSON",
+                "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
+                "avro" => "AVRO" }[format.to_s.downcase]
+        return val unless val.nil?
+        return "CSV" if url.end_with? ".csv"
+        return "NEWLINE_DELIMITED_JSON" if url.end_with? ".json"
+        return "AVRO" if url.end_with? ".avro"
+        nil
       end
 
       # rubocop:enable all
