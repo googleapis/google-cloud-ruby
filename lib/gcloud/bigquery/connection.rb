@@ -15,6 +15,7 @@
 
 require "gcloud/version"
 require "google/api_client"
+require "mime/types"
 
 module Gcloud
   module Bigquery
@@ -213,6 +214,39 @@ module Gcloud
         )
       end
 
+      def load_table table, storage_url, options = {}
+        @client.execute(
+          api_method: @bigquery.jobs.insert,
+          parameters: { projectId: @project },
+          body_object: load_table_config(table, storage_url, options)
+        )
+      end
+
+      def load_multipart table, file, options = {}
+        media = load_media file
+
+        @client.execute(
+          api_method: @bigquery.jobs.insert,
+          media: media,
+          parameters: { projectId: @project, uploadType: "multipart" },
+          body_object: load_table_config(table, nil, options)
+        )
+      end
+
+      def load_resumable table, file, chunk_size = nil, options = {}
+        media = load_media file, chunk_size
+
+        result = @client.execute(
+          api_method: @bigquery.jobs.insert,
+          media: media,
+          parameters: { projectId: @project, uploadType: "resumable" },
+          body_object: load_table_config(table, nil, options)
+        )
+        upload = result.resumable_upload
+        result = @client.execute upload while upload.resumable?
+        result
+      end
+
       protected
 
       ##
@@ -335,6 +369,24 @@ module Gcloud
         }
       end
 
+      def load_table_config table, urls, options = {}
+        {
+          "configuration" => {
+            "load" => {
+              "sourceUri" => Array(urls),
+              "destinationTable" => {
+                "projectId" => table["tableReference"]["projectId"],
+                "datasetId" => table["tableReference"]["datasetId"],
+                "tableId" => table["tableReference"]["tableId"]
+              }.delete_if { |_, v| v.nil? },
+              "createDisposition" => create_disposition(options[:create]),
+              "writeDisposition" => write_disposition(options[:write])
+            }.delete_if { |_, v| v.nil? },
+            "dryRun" => options[:dryrun]
+          }.delete_if { |_, v| v.nil? }
+        }
+      end
+
       def create_disposition str #:nodoc:
         { "create_if_needed" => "CREATE_IF_NEEDED",
           "createifneeded" => "CREATE_IF_NEEDED",
@@ -370,6 +422,15 @@ module Gcloud
       end
 
       # rubocop:enable all
+
+      def load_media file, chunk_size = nil
+        local_path = Pathname(file).to_path
+        mime_type = MIME::Types.of(local_path).first.to_s
+
+        media = Google::APIClient::UploadIO.new local_path, mime_type
+        media.chunk_size = chunk_size unless chunk_size.nil?
+        media
+      end
     end
   end
 end

@@ -205,6 +205,48 @@ module Gcloud
       end
 
       ##
+      # Load data to the table.
+      #
+      # === Parameters
+      #
+      # +file+::
+      #   A file containing the data to load in the table. (+File+ or
+      #   +Gcloud::Storage::File+ or +String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # <code>options[:create]</code>::
+      #   Specifies whether the job is allowed to create new tables. (+String+)
+      #
+      #   The following values are supported:
+      #   * +needed+ - Create the table if it does not exist.
+      #   * +never+ - The table must already exist. A 'notFound' error is
+      #     raised if the table does not exist.
+      # <code>options[:write]</code>::
+      #   Specifies the action that occurs if the destination table already
+      #   exists. (+String+)
+      #
+      #   The following values are supported:
+      #   * +truncate+ - BigQuery overwrites the table data.
+      #   * +append+ - BigQuery appends the data to the table.
+      #   * +empty+ - A 'duplicate' error is returned in the job result if the
+      #     table exists and contains data.
+      #
+      # === Returns
+      #
+      # Gcloud::Bigquery::Job
+      #
+      def load file, options = {}
+        ensure_connection!
+        if storage_url? file
+          load_storage file, options
+        elsif local_file? file
+          load_local file, options
+        else
+          fail Gcloud::Bigquery::Error, "Don't know how to load #{file}"
+        end
+      end
+
+      ##
       # Permenently deletes the table.
       #
       # === Returns
@@ -245,6 +287,75 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      def load_storage file, options = {}
+        # Convert to storage URL
+        file = file.to_gs_url if file.respond_to? :to_gs_url
+
+        resp = connection.load_table gapi, file, options
+        if resp.success?
+          Job.from_gapi resp.data, connection
+        else
+          ApiError.from_response(resp)
+        end
+      end
+
+      def load_local file, options = {}
+        if resumable_upload? file
+          load_resumable file, options
+        else
+          load_multipart file, options
+        end
+      end
+
+      def load_resumable file, options = {}
+        chunk_size = verify_chunk_size! options[:chunk_size]
+        resp = connection.load_resumable gapi, file, chunk_size, options
+        if resp.success?
+          Job.from_gapi resp.data, connection
+        else
+          ApiError.from_response(resp)
+        end
+      end
+
+      def load_multipart file, options = {}
+        resp = connection.load_multipart gapi, file, options
+        if resp.success?
+          Job.from_gapi resp.data, connection
+        else
+          ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Determines if a resumable upload should be used.
+      def resumable_upload? file #:nodoc:
+        ::File.size?(file).to_i > Storage.resumable_threshold
+      end
+
+      def storage_url? file
+        file.respond_to?(:to_gs_url) ||
+          (file.respond_to?(:to_str) &&
+          file.to_str.downcase.start_with?("gs://"))
+      end
+
+      def local_file? file
+        ::File.file? file
+      rescue
+        false
+      end
+
+      ##
+      # Determines if a chunk_size is valid.
+      def verify_chunk_size! chunk_size
+        chunk_size = chunk_size.to_i
+        chunk_mod = 256 * 1024 # 256KB
+        if (chunk_size.to_i % chunk_mod) != 0
+          chunk_size = (chunk_size / chunk_mod) * chunk_mod
+        end
+        return if chunk_size.zero?
+        chunk_size
       end
     end
   end
