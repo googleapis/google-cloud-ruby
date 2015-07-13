@@ -1,5 +1,7 @@
 # gcloud
 
+[![Join the chat at https://gitter.im/GoogleCloudPlatform/gcloud-ruby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/GoogleCloudPlatform/gcloud-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) services.
 
 [![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby.svg)](https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby/)
