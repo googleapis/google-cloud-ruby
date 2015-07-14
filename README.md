@@ -33,11 +33,12 @@ Instructions and configuration options are covered in the [Authentication guide]
 
 ### Datastore
 
-[Google Cloud Datastore](https://cloud.google.com/datastore/) ([docs](https://cloud.google.com/datastore/docs)) is a fully managed, schemaless database for storing non-relational data. Cloud Datastore automatically scales with your users and supports ACID transactions, high availability of reads and writes, strong consistency for reads and ancestor queries, and eventual consistency for all other queries.
+- [gcloud-ruby Datastore API Documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Datastore.html)
+- [Google Cloud Datastore Documentation](https://cloud.google.com/datastore/docs)
 
-Follow the [activation instructions](https://cloud.google.com/datastore/docs/activate) to use the Google Cloud Datastore API with your project.
+*Follow the [activation instructions](https://cloud.google.com/datastore/docs/activate) to use the Google Cloud Datastore API with your project.*
 
-See the [gcloud-ruby Datastore API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Datastore.html) to learn how to interact with the Cloud Datastore using this library.
+#### Preview
 
 ```ruby
 require "gcloud/datastore"
@@ -62,9 +63,10 @@ completed_tasks = dataset.run query
 
 ### Pub/Sub
 
-[Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) ([docs](https://cloud.google.com/pubsub/reference/rest/)) is designed to provide reliable, many-to-many, asynchronous messaging between applications. Publisher applications can send messages to a “topic” and other applications can subscribe to that topic to receive the messages. By decoupling senders and receivers, Google Cloud Pub/Sub allows developers to communicate between independently written applications.
+- [gcloud-ruby Pub/Sub API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Pubsub.html)
+- [Google Cloud Pub/Sub Documentation](https://cloud.google.com/pubsub/docs)
 
-See the [gcloud-ruby Pub/Sub API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Pubsub.html) to learn how to connect to Cloud Pub/Sub using this library.
+#### Preview
 
 ```ruby
 require "glcoud/pubsub"
@@ -86,9 +88,10 @@ msgs = sub.pull
 
 ### Storage
 
-[Google Cloud Storage](https://cloud.google.com/storage/) ([docs](https://cloud.google.com/storage/docs/json_api/)) allows you to store data on Google infrastructure with very high reliability, performance and availability, and can be used to distribute large data objects to users via direct download.
+- [gcloud-ruby Storage API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html)
+- [Google Cloud Storage Documentation](https://cloud.google.com/storage/docs)
 
-See the [gcloud-ruby Storage API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html) to learn how to connect to Cloud Storage using this library.
+#### Preview
 
 ```ruby
 require "gcloud/storage"
