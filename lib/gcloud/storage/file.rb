@@ -24,7 +24,7 @@ module Gcloud
     #
     # Represents the File/Object that belong to a Bucket.
     #
-    #   require "glcoud/storage"
+    #   require "gcloud/storage"
     #
     #   storage = Gcloud.storage
     #
@@ -155,7 +155,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "glcoud/storage"
+      #   require "gcloud/storage"
       #
       #   storage = Gcloud.storage
       #
@@ -167,7 +167,7 @@ module Gcloud
       # The download is verified by calculating the MD5 digest.
       # The CRC32c digest can be used by passing :crc32c.
       #
-      #   require "glcoud/storage"
+      #   require "gcloud/storage"
       #
       #   storage = Gcloud.storage
       #
@@ -178,7 +178,7 @@ module Gcloud
       #
       # Both the MD5 and CRC32c digest can be used by passing :all.
       #
-      #   require "glcoud/storage"
+      #   require "gcloud/storage"
       #
       #   storage = Gcloud.storage
       #
@@ -189,7 +189,7 @@ module Gcloud
       #
       # The download verification can be disabled by passing :none
       #
-      #   require "glcoud/storage"
+      #   require "gcloud/storage"
       #
       #   storage = Gcloud.storage
       #
@@ -250,7 +250,7 @@ module Gcloud
       #
       # The file can also be copied to a new path in the current bucket:
       #
-      #   require "glcoud/storage"
+      #   require "gcloud/storage"
       #
       #   storage = Gcloud.storage
       #
@@ -261,7 +261,7 @@ module Gcloud
       #
       # The file can also be copied to a different bucket:
       #
-      #   require "glcoud/storage"
+      #   require "gcloud/storage"
       #
       #   storage = Gcloud.storage
       #
@@ -294,7 +294,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/storage"
+      #   require "gcloud/storage"
       #
       #   storage = Gcloud.storage
       #

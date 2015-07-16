@@ -26,7 +26,7 @@ module Gcloud
     # Subscription#pull returns ReceivedMesssage objects, which contain a
     # Message object and can be acknowleged and/or delayed.
     #
-    #   require "glcoud/pubsub"
+    #   require "gcloud/pubsub"
     #
     #   pubsub = Gcloud.pubsub
     #

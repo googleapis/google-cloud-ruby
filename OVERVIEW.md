@@ -44,7 +44,7 @@ completed_tasks = dataset.run query
 See the [gcloud-ruby Pub/Sub API documentation](rdoc-ref:Gcloud::Pubsub) to learn how to connect to Cloud Pub/Sub using this library.
 
 ```ruby
-require "glcoud/pubsub"
+require "gcloud/pubsub"
 
 pubsub = Gcloud.pubsub
 

@@ -149,7 +149,7 @@ module Gcloud
       #
       # The Key can be set before the entity is saved.
       #
-      #   require "glcoud/datastore"
+      #   require "gcloud/datastore"
       #
       #   dataset = Gcloud.datastore
       #   entity = Gcloud::Datastore::Entity.new

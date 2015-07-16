@@ -23,7 +23,7 @@ module Gcloud
     #
     # Represents a Pub/Sub Message that can be acknowledged or delayed.
     #
-    #   require "glcoud/pubsub"
+    #   require "gcloud/pubsub"
     #
     #   pubsub = Gcloud.pubsub
     #
@@ -90,7 +90,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -125,7 +125,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #

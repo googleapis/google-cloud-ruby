@@ -38,7 +38,7 @@ module Gcloud
   #
   # === Example
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -71,7 +71,7 @@ module Gcloud
   # you are running on Google Compute Engine this configuration is taken care
   # of for you.
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -87,7 +87,7 @@ module Gcloud
   # A Topic is a named resource to which messages are sent by publishers.
   # A Topic is found by its name. (See Project#topic)
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #   topic = pubsub.topic "my-topic"
@@ -105,7 +105,7 @@ module Gcloud
   #
   # Messages are published to a topic. (See Topic#publish)
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -114,7 +114,7 @@ module Gcloud
   #
   # Messages can also be published with attributes:
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -125,7 +125,7 @@ module Gcloud
   #
   # Multiple messages can be published at the same time by passing a block:
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -142,7 +142,7 @@ module Gcloud
   # a single, specific Topic, to be delivered to the subscribing application.
   # A Subscription is found by its name. (See Topic#subscription)
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -154,7 +154,7 @@ module Gcloud
   #
   # A Subscription is created from a Topic. (See Topic#subscribe)
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -164,7 +164,7 @@ module Gcloud
   #
   # The name is optional, and will be generated if not given.
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -175,7 +175,7 @@ module Gcloud
   # The subscription can be created that specifies the number of seconds to
   # wait to be acknoeledged as well as an endpoint URL to push the messages to:
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -188,7 +188,7 @@ module Gcloud
   #
   # Messages are pulled from a Subscription.
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -197,7 +197,7 @@ module Gcloud
   #
   # Results can be returned immediately with the +:immediate+ option:
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -206,7 +206,7 @@ module Gcloud
   #
   # A maximum number of messages returned can also be specified:
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -222,7 +222,7 @@ module Gcloud
   # ReceivedMesssages can be acknowledged one at a time:
   # (See ReceivedMesssage#acknowledge!)
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -232,7 +232,7 @@ module Gcloud
   # Or, multiple messages can be acknowledged in a single API call:
   # (See Subscription#acknowledge)
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -248,7 +248,7 @@ module Gcloud
   # redelivery if the processing was interrupted.
   # (See ReceivedMesssage#delay!)
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -262,7 +262,7 @@ module Gcloud
   #
   # The message can also be made available for immediate redelivery:
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
@@ -277,7 +277,7 @@ module Gcloud
   # Multiple messages can be delayed or made available for immediate redelivery:
   # (See Subscription#delay)
   #
-  #   require "glcoud/pubsub"
+  #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #

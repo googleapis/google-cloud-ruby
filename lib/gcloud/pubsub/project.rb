@@ -30,7 +30,7 @@ module Gcloud
     # Message is a combination of data and attributes that a publisher sends to
     # a topic and is eventually delivered to subscribers.
     #
-    #   require "glcoud/pubsub"
+    #   require "gcloud/pubsub"
     #
     #   pubsub = Gcloud.pubsub
     #

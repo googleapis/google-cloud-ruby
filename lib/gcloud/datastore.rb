@@ -40,7 +40,7 @@ module Gcloud
   #
   # === Example
   #
-  #   require "glcoud/datastore"
+  #   require "gcloud/datastore"
   #
   #   dataset = Gcloud.datastore "my-todo-project",
   #                              "/path/to/keyfile.json"
@@ -76,7 +76,7 @@ module Gcloud
   # or if you are running on Google Compute Engine this configuration is taken
   # care of for you.
   #
-  #   require "glcoud/datastore"
+  #   require "gcloud/datastore"
   #
   #   dataset = Gcloud.datastore "my-todo-project",
   #                              "/path/to/keyfile.json"
@@ -100,14 +100,14 @@ module Gcloud
   # <tt>name</tt> value. A single record can be retrieved by calling
   # Gcloud::Datastore::Dataset#find and passing the parts of the key:
   #
-  #   require "glcoud/datastore"
+  #   require "gcloud/datastore"
   #
   #   dataset = Gcloud.datastore
   #   entity = dataset.find "Task", "start"
   #
   # Optionally, Gcloud::Datastore::Dataset#find can be given a Key object:
   #
-  #   require "glcoud/datastore"
+  #   require "gcloud/datastore"
   #
   #   dataset = Gcloud.datastore
   #   key = Gcloud::Datastore::Key.new "Task", 12345
@@ -120,7 +120,7 @@ module Gcloud
   # Multiple records can be found that match criteria.
   # (See Gcloud::Datastore::Query#where)
   #
-  #   require "glcoud/datastore"
+  #   require "gcloud/datastore"
   #
   #   dataset = Gcloud.datastore
   #   query = Gcloud::Datastore::Query.new
@@ -130,7 +130,7 @@ module Gcloud
   #
   # Records can also be ordered. (See Gcloud::Datastore::Query#order)
   #
-  #   require "glcoud/datastore"
+  #   require "gcloud/datastore"
   #
   #   dataset = Gcloud.datastore
   #   query = Gcloud::Datastore::Query.new
@@ -142,7 +142,7 @@ module Gcloud
   # The number of records returned can be specified.
   # (See Gcloud::Datastore::Query#limit)
   #
-  #   require "glcoud/datastore"
+  #   require "gcloud/datastore"
   #
   #   dataset = Gcloud.datastore
   #   query = Gcloud::Datastore::Query.new
@@ -155,7 +155,7 @@ module Gcloud
   # Records' Key structures can also be queried.
   # (See Gcloud::Datastore::Query#ancestor)
   #
-  #   require "glcoud/datastore"
+  #   require "gcloud/datastore"
   #
   #   dataset = Gcloud.datastore
   #
@@ -173,7 +173,7 @@ module Gcloud
   # to return them all. The returned records will have a <tt>cursor</tt> if
   # there are more available.
   #
-  #   require "glcoud/datastore"
+  #   require "gcloud/datastore"
   #
   #   dataset = Gcloud.datastore
   #
@@ -204,7 +204,7 @@ module Gcloud
   # The entity must have a Key to be saved. If the Key is incomplete then
   # it will be completed when saved.
   #
-  #   require "glcoud/datastore"
+  #   require "gcloud/datastore"
   #
   #   dataset = Gcloud.datastore
   #   entity = Gcloud::Datastore::Entity.new
@@ -221,7 +221,7 @@ module Gcloud
   # String, Integer, Date, Time, and even other Entity or Key objects. Changes
   # to the Entity's properties are persisted by calling Dataset#save.
   #
-  #   require "glcoud/datastore"
+  #   require "gcloud/datastore"
   #
   #   dataset = Gcloud.datastore
   #   entity = datastore.find "User", "heidi"
@@ -237,7 +237,7 @@ module Gcloud
   # Entities can be removed from Datastore by calling Dataset#delete and passing
   # the Entity object or the entity's Key object.
   #
-  #   require "glcoud/datastore"
+  #   require "gcloud/datastore"
   #
   #   dataset = Gcloud.datastore
   #   entity = datastore.find "User", "heidi"
