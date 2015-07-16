@@ -51,9 +51,7 @@ module Gcloud
       end
 
       ##
-      # The acknowledgment ID for the message being acknowledged.
-      # This was returned by the Pub/Sub system in the Pull response.
-      # This ID must be used to acknowledge the received message.
+      # The acknowledgment ID for the message.
       def ack_id
         @gapi["ackId"]
       end
@@ -78,8 +76,8 @@ module Gcloud
       end
 
       ##
-      # The ID of received message, assigned by the server at publication time.
-      # Guaranteed to be unique within the topic.
+      # The ID of the received message, assigned by the server at publication
+      # time. Guaranteed to be unique within the topic.
       def message_id
         message.message_id
       end
@@ -111,16 +109,15 @@ module Gcloud
       # Modifies the acknowledge deadline for the message.
       #
       # This indicates that more time is needed to process the message, or to
-      # make the message available for redelivery if the processing was
-      # interrupted.
+      # make the message available for redelivery.
       #
       # === Parameters
       #
       # +deadline+::
       #   The new ack deadline in seconds from the time this request is sent
-      #   to the Pub/Sub system. Must be >= 0. For example, if the value is 10,
-      #   the new ack deadline will expire 10 seconds after the call is made.
-      #   Specifying zero may immediately make the message available for
+      #   to the Pub/Sub system. Must be >= 0. For example, if the value is
+      #   +10+, the new ack deadline will expire 10 seconds after the call is
+      #   made. Specifying +0+ may immediately make the message available for
       #   another pull request. (+Integer+)
       #
       # === Example
