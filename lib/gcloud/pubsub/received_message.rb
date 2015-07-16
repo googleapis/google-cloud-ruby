@@ -19,7 +19,7 @@ require "gcloud/pubsub/message"
 module Gcloud
   module Pubsub
     ##
-    # = ReceivedMesssage
+    # = ReceivedMessage
     #
     # Represents a Pub/Sub Message that can be acknowledged or delayed.
     #
@@ -34,7 +34,7 @@ module Gcloud
     #     received_message.acknowledge!
     #   end
     #
-    class ReceivedMesssage
+    class ReceivedMessage
       ##
       # The Subscription object.
       attr_accessor :subscription #:nodoc:
@@ -150,7 +150,7 @@ module Gcloud
       end
 
       ##
-      # New ReceivedMesssage from a Google API Client object.
+      # New ReceivedMessage from a Google API Client object.
       def self.from_gapi gapi, subscription #:nodoc:
         new.tap do |f|
           f.gapi         = gapi

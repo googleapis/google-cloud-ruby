@@ -217,9 +217,9 @@ module Gcloud
   # Messages that are received can be acknowledged in Pub/Sub, marking the
   # message to be removed so it cannot be pulled again.
   #
-  # A Message that can be acknowledged is called a ReceivedMesssage.
-  # ReceivedMesssages can be acknowledged one at a time:
-  # (See ReceivedMesssage#acknowledge!)
+  # A Message that can be acknowledged is called a ReceivedMessage.
+  # ReceivedMessages can be acknowledged one at a time:
+  # (See ReceivedMessage#acknowledge!)
   #
   #   require "gcloud/pubsub"
   #
@@ -244,7 +244,7 @@ module Gcloud
   # A message must be acknowledged after it is pulled, or Pub/Sub will mark the
   # message for redelivery. The message acknowledgement deadline can delayed if
   # more time is needed. This will allow more time to process the message before
-  # the message is marked for redelivery. (See ReceivedMesssage#delay!)
+  # the message is marked for redelivery. (See ReceivedMessage#delay!)
   #
   #   require "gcloud/pubsub"
   #

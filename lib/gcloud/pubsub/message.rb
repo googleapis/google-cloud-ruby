@@ -23,7 +23,7 @@ module Gcloud
     # Represents a Pub/Sub Message.
     #
     # Message objects are created by Topic#publish.
-    # Subscription#pull returns ReceivedMesssage objects, which contain a
+    # Subscription#pull returns ReceivedMessage objects, which contain a
     # Message object and can be acknowleged and/or delayed.
     #
     #   require "gcloud/pubsub"

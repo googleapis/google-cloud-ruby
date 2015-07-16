@@ -216,7 +216,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Pubsub::ReceivedMesssage
+      # Array of Gcloud::Pubsub::ReceivedMessage
       #
       # === Examples
       #
@@ -250,7 +250,7 @@ module Gcloud
         resp = connection.pull name, options
         if resp.success?
           Array(resp.data["receivedMessages"]).map do |gapi|
-            ReceivedMesssage.from_gapi gapi, self
+            ReceivedMessage.from_gapi gapi, self
           end
         else
           fail ApiError.from_response(resp)
@@ -268,8 +268,8 @@ module Gcloud
       # === Parameters
       #
       # +messages+::
-      #   One or more ReceivedMesssage objects or ack_id values.
-      #   (+ReceivedMesssage+ or +ack_id+)
+      #   One or more ReceivedMessage objects or ack_id values.
+      #   (+ReceivedMessage+ or +ack_id+)
       #
       # === Example
       #
@@ -309,8 +309,8 @@ module Gcloud
       #   Specifying zero may immediately make the messages available for
       #   another pull request. (+Integer+)
       # +messages+::
-      #   One or more ReceivedMesssage objects or ack_id values.
-      #   (+ReceivedMesssage+ or +ack_id+)
+      #   One or more ReceivedMessage objects or ack_id values.
+      #   (+ReceivedMessage+ or +ack_id+)
       #
       # === Example
       #
@@ -365,7 +365,7 @@ module Gcloud
 
       ##
       # Makes sure the values are the +ack_id+.
-      # If given several ReceivedMesssage objects extract the +ack_id+ values.
+      # If given several ReceivedMessage objects extract the +ack_id+ values.
       def coerce_ack_ids messages
         Array(messages).flatten.map do |msg|
           msg.respond_to?(:ack_id) ? msg.ack_id : msg.to_s
