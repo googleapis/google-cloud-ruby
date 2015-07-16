@@ -88,7 +88,7 @@ the project and credential information to connect to the Pub/Sub service,
 or if you are running on Google Compute Engine this configuration is taken
 care of for you.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -107,7 +107,7 @@ messages are sent by publishers. A <a href="Pubsub/Topic.html">Topic</a> is
 found by its name. (See <a
 href="Pubsub/Project.html#method-i-topic">Gcloud::Pubsub::Project#topic</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
@@ -130,7 +130,7 @@ href="Pubsub/Project.html#method-i-create_topic">Gcloud::Pubsub::Project#create_
 <p>Messages are published to a topic. (See <a
 href="Pubsub/Topic.html#method-i-publish">Gcloud::Pubsub::Topic#publish</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -140,7 +140,7 @@ href="Pubsub/Topic.html#method-i-publish">Gcloud::Pubsub::Topic#publish</a>)</p>
 
 <p>Messages can also be published with attributes:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -152,7 +152,7 @@ href="Pubsub/Topic.html#method-i-publish">Gcloud::Pubsub::Topic#publish</a>)</p>
 
 <p>Multiple messages can be published at the same time by passing a block:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -173,7 +173,7 @@ application. A <a href="Pubsub/Subscription.html">Subscription</a> is found
 by its name. (See <a
 href="Pubsub/Topic.html#method-i-subscription">Gcloud::Pubsub::Topic#subscription</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -188,7 +188,7 @@ href="Pubsub/Topic.html#method-i-subscription">Gcloud::Pubsub::Topic#subscriptio
 href="Pubsub/Topic.html">Topic</a>. (See <a
 href="Pubsub/Topic.html#method-i-subscribe">Gcloud::Pubsub::Topic#subscribe</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -199,7 +199,7 @@ href="Pubsub/Topic.html#method-i-subscribe">Gcloud::Pubsub::Topic#subscribe</a>)
 
 <p>The name is optional, and will be generated if not given.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -211,7 +211,7 @@ href="Pubsub/Topic.html#method-i-subscribe">Gcloud::Pubsub::Topic#subscribe</a>)
 <p>The subscription can be created that specifies the number of seconds to
 wait to be acknoeledged as well as an endpoint URL to push the messages to:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -226,7 +226,7 @@ wait to be acknoeledged as well as an endpoint URL to push the messages to:</p>
 <p>Messages are pulled from a <a
 href="Pubsub/Subscription.html">Subscription</a>.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -237,7 +237,7 @@ href="Pubsub/Subscription.html">Subscription</a>.</p>
 <p>Results can be returned immediately with the <code>:immediate</code>
 option:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -247,7 +247,7 @@ option:</p>
 
 <p>A maximum number of messages returned can also be specified:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -265,7 +265,7 @@ called an <a href="Pubsub/ReceivedMesssage.html">ReceivedMesssage</a>.
 ReceivedMesssages can be acknowledged one at a time: (See <a
 href="Pubsub/ReceivedMesssage.html#method-i-acknowledge-21">Gcloud::Pubsub::ReceivedMesssage#acknowledge!</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -276,7 +276,7 @@ href="Pubsub/ReceivedMesssage.html#method-i-acknowledge-21">Gcloud::Pubsub::Rece
 <p>Or, multiple messages can be acknowledged in a single API call: (See <a
 href="Pubsub/Subscription.html#method-i-acknowledge">Gcloud::Pubsub::Subscription#acknowledge</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -293,7 +293,7 @@ time is needed to process the message, or to make the message available for
 redelivery if the processing was interrupted. (See <a
 href="Pubsub/ReceivedMesssage.html#method-i-delay-21">Gcloud::Pubsub::ReceivedMesssage#delay!</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -308,7 +308,7 @@ href="Pubsub/ReceivedMesssage.html#method-i-delay-21">Gcloud::Pubsub::ReceivedMe
 
 <p>The message can also be made available for immediate redelivery:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -325,7 +325,7 @@ href="Pubsub/ReceivedMesssage.html#method-i-delay-21">Gcloud::Pubsub::ReceivedMe
 redelivery: (See <a
 href="Pubsub/Subscription.html#method-i-delay">Gcloud::Pubsub::Subscription#delay</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -376,7 +376,7 @@ href="Pubsub/Subscription.html#method-i-delay">Gcloud::Pubsub::Subscription#dela
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jul 01, 2015.
+    Docs built on Jul 16, 2015.
   </div>
 </div>
 

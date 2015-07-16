@@ -78,7 +78,7 @@
 and creates <a href="Subscription.html">Subscription</a> and publishes
 messages.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -216,7 +216,7 @@ messages.</p>
 
 <h3 id="method-i-delete-label-Example">Example<span><a href="#method-i-delete-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -266,7 +266,7 @@ messages.</p>
 
 <h3 id="method-i-exists-3F-label-Example">Example<span><a href="#method-i-exists-3F-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -390,7 +390,7 @@ subscription does not exist</p>
 
 <h3 id="method-i-get_subscription-label-Example">Example<span><a href="#method-i-get_subscription-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -557,7 +557,7 @@ block</p>
 
 <h3 id="method-i-publish-label-Examples">Examples<span><a href="#method-i-publish-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -567,7 +567,7 @@ block</p>
 
 <p>Additionally, a message can be published with attributes:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -579,7 +579,7 @@ block</p>
 
 <p>Multiple messages can be published at the same time by passing a block:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -658,7 +658,7 @@ href="https://example.com/push">example.com/push</a>” (<code>String</code>)</p
 
 <h3 id="method-i-subscribe-label-Examples">Examples<span><a href="#method-i-subscribe-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -669,7 +669,7 @@ href="https://example.com/push">example.com/push</a>” (<code>String</code>)</p
 
 <p>The name is optional, and will be generated if not given.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -681,7 +681,7 @@ href="https://example.com/push">example.com/push</a>” (<code>String</code>)</p
 <p>The subscription can be created that waits two minutes for acknowledgement
 and pushed all messages to an endpoint</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -753,7 +753,7 @@ exists.</p>
 
 <h3 id="method-i-subscription-label-Example">Example<span><a href="#method-i-subscription-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -820,7 +820,7 @@ call, and that the system should return the next page of data.
 
 <h3 id="method-i-subscriptions-label-Examples">Examples<span><a href="#method-i-subscriptions-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -835,7 +835,7 @@ call, and that the system should return the next page of data.
 through them: (See <a
 href="Subscription/List.html#attribute-i-token">Gcloud::Pubsub::Subscription::List#token</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;glcoud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -893,7 +893,7 @@ href="Subscription/List.html#attribute-i-token">Gcloud::Pubsub::Subscription::Li
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jul 06, 2015.
+    Docs built on Jul 16, 2015.
   </div>
 </div>
 
