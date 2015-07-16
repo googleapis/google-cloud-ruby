@@ -172,7 +172,7 @@ module Gcloud
   #   puts sub.name # => "generated-sub-name"
   #
   # The subscription can be created that specifies the number of seconds to
-  # wait to be acknoeledged as well as an endpoint URL to push the messages to:
+  # wait to be acknowledged as well as an endpoint URL to push the messages to:
   #
   #   require "gcloud/pubsub"
   #
