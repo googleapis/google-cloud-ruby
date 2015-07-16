@@ -51,7 +51,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/datastore"
+      #   require "gcloud/datastore"
       #
       #   dataset = Gcloud.datastore "my-todo-project",
       #                              "/path/to/keyfile.json"
@@ -70,7 +70,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/datastore"
+      #   require "gcloud/datastore"
       #
       #   dataset = Gcloud.datastore "my-todo-project",
       #                              "/path/to/keyfile.json"
@@ -188,7 +188,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/datastore"
+      #   require "gcloud/datastore"
       #
       #   dataset = Gcloud.datastore
       #

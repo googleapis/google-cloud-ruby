@@ -24,7 +24,7 @@ module Gcloud
     #
     # Represents a Storage bucket. Belongs to a Project and has many Files.
     #
-    #   require "glcoud/storage"
+    #   require "gcloud/storage"
     #
     #   storage = Gcloud.storage
     #

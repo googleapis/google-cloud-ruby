@@ -69,7 +69,7 @@ completed_tasks = dataset.run query
 #### Preview
 
 ```ruby
-require "glcoud/pubsub"
+require "gcloud/pubsub"
 
 pubsub = Gcloud.pubsub
 

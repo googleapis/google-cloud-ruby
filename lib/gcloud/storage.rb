@@ -38,7 +38,7 @@ module Gcloud
   #
   # === Example
   #
-  #   require "glcoud/storage"
+  #   require "gcloud/storage"
   #
   #   storage = Gcloud.storage "my-todo-project",
   #                            "/path/to/keyfile.json"
@@ -70,7 +70,7 @@ module Gcloud
   # you are running on Google Compute Engine this configuration is taken care
   # of for you.
   #
-  #   require "glcoud/storage"
+  #   require "gcloud/storage"
   #
   #   storage = Gcloud.storage "my-todo-project",
   #                            "/path/to/keyfile.json"

@@ -25,7 +25,7 @@ module Gcloud
     # Represents a Pub/Sub subscription, contains the stream of messages from a
     # single, specific Topic, to be delivered to the subscribing application.
     #
-    #   require "glcoud/pubsub"
+    #   require "gcloud/pubsub"
     #
     #   pubsub = Gcloud.pubsub
     #
@@ -79,7 +79,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -131,7 +131,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -155,7 +155,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -176,7 +176,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -223,7 +223,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -232,7 +232,7 @@ module Gcloud
       #
       # Results can be returned immediately with the +:immediate+ option:
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -241,7 +241,7 @@ module Gcloud
       #
       # A maximum number of messages returned can also be speified:
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -276,7 +276,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -317,7 +317,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #

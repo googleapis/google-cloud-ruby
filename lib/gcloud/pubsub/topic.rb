@@ -26,7 +26,7 @@ module Gcloud
     # Represents a Pub/Sub topic. Belongs to a Project and creates Subscription
     # and publishes messages.
     #
-    #   require "glcoud/pubsub"
+    #   require "gcloud/pubsub"
     #
     #   pubsub = Gcloud.pubsub
     #
@@ -83,7 +83,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -124,7 +124,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -134,7 +134,7 @@ module Gcloud
       #
       # The name is optional, and will be generated if not given.
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -145,7 +145,7 @@ module Gcloud
       # The subscription can be created that waits two minutes for
       # acknowledgement and pushed all messages to an endpoint
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -186,7 +186,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -216,7 +216,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -255,7 +255,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -268,7 +268,7 @@ module Gcloud
       # If you have a significant number of subscriptions, you may need to
       # paginate through them: (See Subscription::List#token)
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -314,7 +314,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -323,7 +323,7 @@ module Gcloud
       #
       # Additionally, a message can be published with attributes:
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -334,7 +334,7 @@ module Gcloud
       #
       # Multiple messages can be published at the same time by passing a block:
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -361,7 +361,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -382,7 +382,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -399,7 +399,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/pubsub"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
