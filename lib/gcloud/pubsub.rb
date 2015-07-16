@@ -78,8 +78,7 @@ module Gcloud
   #   topic = pubsub.topic "my-topic"
   #   topic.publish "task completed"
   #
-  # To learn more about Datastore, read the
-  # {Google Cloud Pub/Sub Overview
+  # To learn more about Pub/Sub, read the {Google Cloud Pub/Sub Overview
   # }[https://cloud.google.com/pubsub/overview].
   #
   # == Retrieving Topics
