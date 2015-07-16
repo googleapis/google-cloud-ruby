@@ -23,8 +23,7 @@ module Gcloud
     ##
     # = Topic
     #
-    # Represents a Pub/Sub topic. Belongs to a Project and creates Subscription
-    # and publishes messages.
+    # A named resource to which messages are published.
     #
     #   require "gcloud/pubsub"
     #
@@ -74,8 +73,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes the topic.
-      # The topic must be empty.
+      # Permanently deletes the topic.
       #
       # === Returns
       #
@@ -106,9 +104,9 @@ module Gcloud
       # === Parameters
       #
       # +subscription_name+::
-      #   Name of a subscription. If the name is not provided in the request,
-      #   the server will assign a random name for this subscription on the same
-      #   project as the topic. (+String+)
+      #   Name of the new subscription. If the name is not provided in the
+      #   request, the server will assign a random name for this subscription
+      #   on the same project as the topic. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:deadline]</code>::
@@ -303,8 +301,8 @@ module Gcloud
       #
       # === Parameters
       #
-      # +message+::
-      #   The message payload. (+String+)
+      # +data+::
+      #   The message data. (+String+)
       # +attributes+::
       #   Optional attributes for the message. (+Hash+)
       #
@@ -340,15 +338,15 @@ module Gcloud
       #   pubsub = Gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
-      #   msg = topic.publish do |batch|
+      #   msgs = topic.publish do |batch|
       #     batch.publish "new-message-1", foo: :bar
       #     batch.publish "new-message-2", foo: :baz
       #     batch.publish "new-message-3", foo: :bif
       #   end
       #
-      def publish message = nil, attributes = {}
+      def publish data = nil, attributes = {}
         ensure_connection!
-        batch = Batch.new message, attributes
+        batch = Batch.new data, attributes
         yield batch if block_given?
         return nil if batch.messages.count.zero?
         publish_batch_messages batch
@@ -450,7 +448,7 @@ module Gcloud
       end
 
       ##
-      # Call the publish API with arrays of message data and attrs.
+      # Call the publish API with arrays of data data and attrs.
       def publish_batch_messages batch
         resp = connection.publish name, batch.messages
         if resp.success?
@@ -469,20 +467,20 @@ module Gcloud
 
         ##
         # Create a new instance of the object.
-        def initialize message = nil, attributes = {} #:nodoc:
+        def initialize data = nil, attributes = {} #:nodoc:
           @messages = []
           @mode = :batch
-          return if message.nil?
+          return if data.nil?
           @mode = :single
-          publish message, attributes
+          publish data, attributes
         end
 
         ##
         # Add multiple messages to the topic.
         # All messages added will be published at once.
         # See Gcloud::Pubsub::Topic#publish
-        def publish message, attributes = {}
-          @messages << [message, attributes]
+        def publish data, attributes = {}
+          @messages << [data, attributes]
         end
 
         ##
