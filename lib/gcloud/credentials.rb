@@ -22,7 +22,7 @@ require "googleauth"
 # Google Cloud Credentials
 module Gcloud
   ##
-  # Represents the Oauth2 signing logic.
+  # Represents the OAuth 2.0 signing logic.
   # This class is intended to be inherited by API-specific classes
   # which overrides the SCOPE constant.
   class Credentials #:nodoc:
