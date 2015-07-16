@@ -129,7 +129,7 @@ module Gcloud
   #   pubsub = Gcloud.pubsub
   #
   #   topic = pubsub.topic "my-topic"
-  #   msg = topic.publish do |batch|
+  #   msgs = topic.publish do |batch|
   #     batch.publish "new-message-1", foo: :bar
   #     batch.publish "new-message-2", foo: :baz
   #     batch.publish "new-message-3", foo: :bif
