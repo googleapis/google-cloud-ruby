@@ -217,7 +217,7 @@ module Gcloud
   # Messages that are recieved can be acknowledged in Pub/Sub, marking the
   # message to be removed so it cannot be pulled again.
   #
-  # A Message that can be acknowledged is called an ReceivedMesssage.
+  # A Message that can be acknowledged is called a ReceivedMesssage.
   # ReceivedMesssages can be acknowledged one at a time:
   # (See ReceivedMesssage#acknowledge!)
   #
