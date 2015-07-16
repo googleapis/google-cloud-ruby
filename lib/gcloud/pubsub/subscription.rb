@@ -205,17 +205,14 @@ module Gcloud
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:immediate]</code>::
       #   When +true+, the system will respond immediately, either with a
-      #   message if available or +nil+ if no message is available.
-      #   When not specified, or when +false+, the call will block until a
-      #   message is available, or may return UNAVAILABLE if no messages become
-      #   available within a reasonable amount of time. (+Boolean+)
-      #   When +true+ the system will respond immediately even if it is not
-      #   able to return a message. Otherwise the system is allowed to wait
-      #   until at least one message is available.
+      #   message if available or +nil+ if no message is available. When not
+      #   specified, or when +false+, the call will block until a message is
+      #   available, or may return UNAVAILABLE if no messages become available
+      #   within a reasonable amount of time. (+Boolean+)
       # <code>options[:max]</code>::
-      #   The maximum number of messages to return for this request.
-      #   The Pub/Sub system may return fewer than the number specified.
-      #   (+Integer+)
+      #   The maximum number of messages to return for this request. The Pub/Sub
+      #   system may return fewer than the number specified. The default value
+      #   is +100+. (+Integer+)
       #
       # === Returns
       #
