@@ -241,11 +241,10 @@ module Gcloud
   #
   # == Modifying a Deadline
   #
-  # If a message is unable to be acknowledged in a timely manner, it can be
-  # modified to extend the acknowledgement deadline. This indicates that more
-  # time is needed to process the message, or to make the message available for
-  # redelivery if the processing was interrupted.
-  # (See ReceivedMesssage#delay!)
+  # A message must be acknowledged after it is pulled, or Pub/Sub will mark the
+  # message for redelivery. The message acknowledgement deadline can delayed if
+  # more time is needed. This will allow more time to process the message before
+  # the message is marked for redelivery. (See ReceivedMesssage#delay!)
   #
   #   require "gcloud/pubsub"
   #
