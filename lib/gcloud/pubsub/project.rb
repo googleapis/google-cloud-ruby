@@ -72,8 +72,8 @@ module Gcloud
 
       ##
       # Retrieves topic by name.
-      # This difference between this method and Project#topic is that this
-      # method makes an API call to Pub/Sub verify the topic exists.
+      # The difference between this method and Project#topic is that this
+      # method makes an API call to Pub/Sub to verify the topic exists.
       #
       # === Parameters
       #
@@ -105,8 +105,8 @@ module Gcloud
 
       ##
       # Retrieves topic by name.
-      # This difference between this method and Project#get_topic is that this
-      # method does not make an API call to Pub/Sub verify the topic exists.
+      # The difference between this method and Project#get_topic is that this
+      # method does not make an API call to Pub/Sub to verify the topic exists.
       #
       # === Parameters
       #
@@ -138,7 +138,7 @@ module Gcloud
       #   topic = pubsub.topic "non-existing-topic"
       #   msg = topic.publish "This will create the topic in Pub/Sub."
       #
-      # Setting the autocomplete flag to false will not create the topic.
+      # Setting the +autocomplete+ flag to false will not create the topic.
       #
       #   require "gcloud/pubsub"
       #
@@ -206,7 +206,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
@@ -248,8 +248,8 @@ module Gcloud
 
       ##
       # Retrieves subscription by name.
-      # This difference between this method and Project#get_subscription is
-      # that this method does not make an API call to Pub/Sub verify the
+      # The difference between this method and Project#get_subscription is
+      # that this method does not make an API call to Pub/Sub to verify the
       # subscription exists.
       #
       # === Parameters
@@ -278,8 +278,9 @@ module Gcloud
 
       ##
       # Retrieves subscription by name.
-      # This difference between this method and Project#subscription is that
-      # this method makes an API call to Pub/Sub verify the subscription exists.
+      # The difference between this method and Project#subscription is that
+      # this method makes an API call to Pub/Sub to verify the subscription
+      # exists.
       #
       # === Parameters
       #
@@ -288,7 +289,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Pubsub::Subscription or +nil+ if subscription does not exist
+      # Gcloud::Pubsub::Subscription or +nil+ if the subscription does not exist
       #
       # === Example
       #
@@ -333,7 +334,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #

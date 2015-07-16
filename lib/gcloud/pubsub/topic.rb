@@ -171,8 +171,8 @@ module Gcloud
 
       ##
       # Retrieves subscription by name.
-      # This difference between this method and Topic#get_subscription is
-      # that this method does not make an API call to Pub/Sub verify the
+      # The difference between this method and Topic#get_subscription is
+      # that this method does not make an API call to Pub/Sub to verify the
       # subscription exists.
       #
       # === Parameters
@@ -202,8 +202,9 @@ module Gcloud
 
       ##
       # Retrieves a subscription by name.
-      # This difference between this method and Topic#subscription is that
-      # this method makes an API call to Pub/Sub verify the subscription exists.
+      # The difference between this method and Topic#subscription is that
+      # this method makes an API call to Pub/Sub to verify the subscription
+      # exists.
       #
       # === Parameters
       #
