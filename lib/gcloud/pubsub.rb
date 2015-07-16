@@ -91,7 +91,7 @@ module Gcloud
   #   pubsub = Gcloud.pubsub
   #   topic = pubsub.topic "my-topic"
   #
-  # == Creating a Topics
+  # == Creating a Topic
   #
   # A Topic is created from a Project. (See Project#create_topic)
   #
