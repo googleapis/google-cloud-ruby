@@ -239,7 +239,7 @@ module Gcloud
   #   received_messages = sub.pull
   #   sub.acknowledge received_messages
   #
-  # == Modifying a Message
+  # == Modifying a Deadline
   #
   # If a message is unable to be acknowledged in a timely manner, it can be
   # modified to extend the acknowledgement deadline. This indicates that more
