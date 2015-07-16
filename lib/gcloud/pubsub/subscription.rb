@@ -212,7 +212,7 @@ module Gcloud
       # <code>options[:max]</code>::
       #   The maximum number of messages to return for this request. The Pub/Sub
       #   system may return fewer than the number specified. The default value
-      #   is +100+. (+Integer+)
+      #   is +100+, the maximum value is +1000+. (+Integer+)
       #
       # === Returns
       #
