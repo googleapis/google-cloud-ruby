@@ -302,6 +302,73 @@ module Gcloud
       end
 
       ##
+      # Poll the backend for new messages. This runs a loop to ping the API,
+      # blocking indefinitely, yielding retrieved messages as they are recieved.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:max]</code>::
+      #   The maximum number of messages to return for this request. The Pub/Sub
+      #   system may return fewer than the number specified. The default value
+      #   is +100+, the maximum value is +1000+. (+Integer+)
+      # <code>options[:autoack]</code>::
+      #   Automatically acknowledge the message as it is pulled. The default
+      #   value is +false+. (+Boolean+)
+      # <code>options[:delay]</code>::
+      #   The number of seconds to pause between requests when the Google Cloud
+      #   service has no messages to return. The default value is +1+.
+      #   (+Number+)
+      #
+      # === Examples
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   sub.listen do |msg|
+      #     # process msg
+      #   end
+      #
+      # The number of messages pulled per batch can be set with the +max+
+      # option:
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   sub.listen max: 20 do |msg|
+      #     # process msg
+      #   end
+      #
+      # Messages can be automatically acknowledged as they are pulled with the
+      # +autoack+ option:
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   sub.listen autoack: true do |msg|
+      #     # process msg
+      #   end
+      #
+      def listen options = {}
+        delay = options.fetch(:delay, 1)
+        loop do
+          msgs = wait_for_messages options
+          if msgs.any?
+            msgs.each { |msg| yield msg }
+          else
+            sleep delay
+          end
+        end
+      end
+
+      ##
       # Acknowledges receipt of a message. After an ack,
       # the Pub/Sub system can remove the message from the subscription.
       # Acknowledging a message whose ack deadline has expired may succeed,
