@@ -79,9 +79,10 @@
 <p><a href="Message.html">Message</a> objects are created by <a
 href="Topic.html#method-i-publish">Gcloud::Pubsub::Topic#publish</a>. <a
 href="Subscription.html#method-i-pull">Gcloud::Pubsub::Subscription#pull</a>
-returns <a href="ReceivedMesssage.html">ReceivedMesssage</a> objects, which
-contain a <a href="Message.html">Message</a> object and can be acknowleged
-and/or delayed.</p>
+returns an array of <a href="ReceivedMessage.html">ReceivedMessage</a>
+objects, each of which contains a <a href="Message.html">Message</a>
+object. Each <a href="ReceivedMessage.html">ReceivedMessage</a> object can
+be acknowledged and/or delayed.</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
@@ -184,7 +185,7 @@ to publish several messages in bulk.</p>
 
     
       <!-- <div class="method-source-code" id="new-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/message.rb, line 51</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/message.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">data</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">attributes</span> = {}
   <span class="ruby-ivar">@gapi</span>               = {}
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;data&quot;</span>]       = <span class="ruby-identifier">data</span>
@@ -229,7 +230,7 @@ to publish several messages in bulk.</p>
 
     
       <!-- <div class="method-source-code" id="attributes-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/message.rb, line 65</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/message.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">attributes</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;attributes&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -263,7 +264,7 @@ to publish several messages in bulk.</p>
 
     
       <!-- <div class="method-source-code" id="data-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/message.rb, line 59</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/message.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;data&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -298,7 +299,7 @@ Guaranteed to be unique within the topic.</p>
 
     
       <!-- <div class="method-source-code" id="message_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/message.rb, line 72</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/message.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">message_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;messageId&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -360,7 +361,7 @@ Guaranteed to be unique within the topic.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jul 16, 2015.
+    Docs built on Jul 17, 2015.
   </div>
 </div>
 

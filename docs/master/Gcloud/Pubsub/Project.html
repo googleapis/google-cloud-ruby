@@ -374,9 +374,9 @@ subscribers.</p>
 
   <div class="method-description">
     
-      <p>Retrieves subscription by name. This difference between this method and <a
+      <p>Retrieves subscription by name. The difference between this method and <a
 href="Project.html#method-i-subscription">#subscription</a> is that this
-method makes an API call to Pub/Sub verify the subscription exists.</p>
+method makes an API call to Pub/Sub to verify the subscription exists.</p>
 
 <h3 id="method-i-get_subscription-label-Parameters">Parameters<span><a href="#method-i-get_subscription-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <dl class="rdoc-list note-list"><dt><code>subscription_name</code>
@@ -387,7 +387,7 @@ method makes an API call to Pub/Sub verify the subscription exists.</p>
 <h3 id="method-i-get_subscription-label-Returns">Returns<span><a href="#method-i-get_subscription-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <p><a href="Subscription.html">Gcloud::Pubsub::Subscription</a> or
-<code>nil</code> if subscription does not exist</p>
+<code>nil</code> if the subscription does not exist</p>
 
 <h3 id="method-i-get_subscription-label-Example">Example<span><a href="#method-i-get_subscription-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -402,7 +402,7 @@ method makes an API call to Pub/Sub verify the subscription exists.</p>
 
     
       <!-- <div class="method-source-code" id="get_subscription-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 302</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 303</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_subscription</span> <span class="ruby-identifier">subscription_name</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_subscription</span> <span class="ruby-identifier">subscription_name</span>
@@ -441,9 +441,9 @@ method makes an API call to Pub/Sub verify the subscription exists.</p>
 
   <div class="method-description">
     
-      <p>Retrieves topic by name. This difference between this method and <a
+      <p>Retrieves topic by name. The difference between this method and <a
 href="Project.html#method-i-topic">#topic</a> is that this method makes an
-API call to Pub/Sub verify the topic exists.</p>
+API call to Pub/Sub to verify the topic exists.</p>
 
 <h3 id="method-i-get_topic-label-Parameters">Parameters<span><a href="#method-i-get_topic-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <dl class="rdoc-list note-list"><dt><code>topic_name</code>
@@ -644,9 +644,9 @@ exist</p>
 
   <div class="method-description">
     
-      <p>Retrieves subscription by name. This difference between this method and <a
+      <p>Retrieves subscription by name. The difference between this method and <a
 href="Project.html#method-i-get_subscription">#get_subscription</a> is that
-this method does not make an API call to Pub/Sub verify the subscription
+this method does not make an API call to Pub/Sub to verify the subscription
 exists.</p>
 
 <h3 id="method-i-subscription-label-Parameters">Parameters<span><a href="#method-i-subscription-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -729,7 +729,7 @@ results to view. (<code>String</code>)</p>
 
 <h3 id="method-i-subscriptions-label-Examples">Examples<span><a href="#method-i-subscriptions-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -763,7 +763,7 @@ href="Subscription/List.html#attribute-i-token">Gcloud::Pubsub::Subscription::Li
 
     
       <!-- <div class="method-source-code" id="subscriptions-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 364</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 365</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">subscriptions</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_subscriptions</span> <span class="ruby-identifier">options</span>
@@ -802,9 +802,9 @@ href="Subscription/List.html#attribute-i-token">Gcloud::Pubsub::Subscription::Li
 
   <div class="method-description">
     
-      <p>Retrieves topic by name. This difference between this method and <a
+      <p>Retrieves topic by name. The difference between this method and <a
 href="Project.html#method-i-get_topic">#get_topic</a> is that this method
-does not make an API call to Pub/Sub verify the topic exists.</p>
+does not make an API call to Pub/Sub to verify the topic exists.</p>
 
 <h3 id="method-i-topic-label-Parameters">Parameters<span><a href="#method-i-topic-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <dl class="rdoc-list note-list"><dt><code>topic_name</code>
@@ -841,7 +841,8 @@ default value is <code>true</code>. (<code>Boolean</code>)</p>
 <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;This will create the topic in Pub/Sub.&quot;</span>
 </pre>
 
-<p>Setting the autocomplete flag to false will not create the topic.</p>
+<p>Setting the <code>autocomplete</code> flag to false will not create the
+topic.</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
@@ -911,7 +912,7 @@ that the system should return the next page of data. (<code>String</code>)</p>
 
 <h3 id="method-i-topics-label-Examples">Examples<span><a href="#method-i-topics-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
@@ -982,7 +983,7 @@ href="Topic/List.html#attribute-i-token">Gcloud::Pubsub::Topic::List#token</a>)<
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jul 16, 2015.
+    Docs built on Jul 17, 2015.
   </div>
 </div>
 

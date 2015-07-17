@@ -96,7 +96,7 @@ care of for you.</p>
 <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;task completed&quot;</span>
 </pre>
 
-<p>To learn more about <a href="Datastore.html">Datastore</a>, read the <a
+<p>To learn more about Pub/Sub, read the <a
 href="https://cloud.google.com/pubsub/overview">Google Cloud Pub/Sub
 Overview </a>.</p>
 
@@ -113,7 +113,7 @@ href="Pubsub/Project.html#method-i-topic">Gcloud::Pubsub::Project#topic</a>)</p>
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
 </pre>
 
-<h2 id="module-Gcloud::Pubsub-label-Creating+a+Topics">Creating a Topics<span><a href="#module-Gcloud::Pubsub-label-Creating+a+Topics">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<h2 id="module-Gcloud::Pubsub-label-Creating+a+Topic">Creating a <a href="Pubsub/Topic.html">Topic</a><span><a href="#module-Gcloud::Pubsub-label-Creating+a+Topic">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>A <a href="Pubsub/Topic.html">Topic</a> is created from a <a
 href="Pubsub/Project.html">Project</a>. (See <a
@@ -157,7 +157,7 @@ href="Pubsub/Topic.html#method-i-publish">Gcloud::Pubsub::Topic#publish</a>)</p>
 <span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
-<span class="ruby-identifier">msg</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">batch</span><span class="ruby-operator">|</span>
+<span class="ruby-identifier">msgs</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">batch</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">batch</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;new-message-1&quot;</span>, <span class="ruby-identifier">foo</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">bar</span>
   <span class="ruby-identifier">batch</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;new-message-2&quot;</span>, <span class="ruby-identifier">foo</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">baz</span>
   <span class="ruby-identifier">batch</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;new-message-3&quot;</span>, <span class="ruby-identifier">foo</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">bif</span>
@@ -209,7 +209,7 @@ href="Pubsub/Topic.html#method-i-subscribe">Gcloud::Pubsub::Topic#subscribe</a>)
 </pre>
 
 <p>The subscription can be created that specifies the number of seconds to
-wait to be acknoeledged as well as an endpoint URL to push the messages to:</p>
+wait to be acknowledged as well as an endpoint URL to push the messages to:</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
@@ -257,13 +257,13 @@ option:</p>
 
 <h2 id="module-Gcloud::Pubsub-label-Acknowledging+a+Message">Acknowledging a <a href="Pubsub/Message.html">Message</a><span><a href="#module-Gcloud::Pubsub-label-Acknowledging+a+Message">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>Messages that are recieved can be acknowledged in Pub/Sub, marking the
+<p>Messages that are received can be acknowledged in Pub/Sub, marking the
 message to be removed so it cannot be pulled again.</p>
 
 <p>A <a href="Pubsub/Message.html">Message</a> that can be acknowledged is
-called an <a href="Pubsub/ReceivedMesssage.html">ReceivedMesssage</a>.
-ReceivedMesssages can be acknowledged one at a time: (See <a
-href="Pubsub/ReceivedMesssage.html#method-i-acknowledge-21">Gcloud::Pubsub::ReceivedMesssage#acknowledge!</a>)</p>
+called a <a href="Pubsub/ReceivedMessage.html">ReceivedMessage</a>.
+ReceivedMessages can be acknowledged one at a time: (See <a
+href="Pubsub/ReceivedMessage.html#method-i-acknowledge-21">Gcloud::Pubsub::ReceivedMessage#acknowledge!</a>)</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
@@ -285,13 +285,13 @@ href="Pubsub/Subscription.html#method-i-acknowledge">Gcloud::Pubsub::Subscriptio
 <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">acknowledge</span> <span class="ruby-identifier">received_messages</span>
 </pre>
 
-<h2 id="module-Gcloud::Pubsub-label-Modifying+a+Message">Modifying a <a href="Pubsub/Message.html">Message</a><span><a href="#module-Gcloud::Pubsub-label-Modifying+a+Message">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<h2 id="module-Gcloud::Pubsub-label-Modifying+a+Deadline">Modifying a Deadline<span><a href="#module-Gcloud::Pubsub-label-Modifying+a+Deadline">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>If a message is unable to be acknowledged in a timely manner, it can be
-modified to extend the acknowledgement deadline. This indicates that more
-time is needed to process the message, or to make the message available for
-redelivery if the processing was interrupted. (See <a
-href="Pubsub/ReceivedMesssage.html#method-i-delay-21">Gcloud::Pubsub::ReceivedMesssage#delay!</a>)</p>
+<p>A message must be acknowledged after it is pulled, or Pub/Sub will mark the
+message for redelivery. The message acknowledgement deadline can delayed if
+more time is needed. This will allow more time to process the message
+before the message is marked for redelivery. (See <a
+href="Pubsub/ReceivedMessage.html#method-i-delay-21">Gcloud::Pubsub::ReceivedMessage#delay!</a>)</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
 
@@ -376,7 +376,7 @@ href="Pubsub/Subscription.html#method-i-delay">Gcloud::Pubsub::Subscription#dela
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jul 16, 2015.
+    Docs built on Jul 17, 2015.
   </div>
 </div>
 
