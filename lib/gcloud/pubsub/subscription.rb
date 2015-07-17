@@ -22,8 +22,8 @@ module Gcloud
     ##
     # = Subscription
     #
-    # Represents a Pub/Sub subscription, contains the stream of messages from a
-    # single, specific Topic, to be delivered to the subscribing application.
+    # A named resource representing the stream of messages from a single,
+    # specific topic, to be delivered to the subscribing application.
     #
     #   require "gcloud/pubsub"
     #
@@ -71,7 +71,7 @@ module Gcloud
       end
 
       ##
-      # The Topic from which this subscription is receiving messages.
+      # The Topic from which this subscription receives messages.
       #
       # === Returns
       #
@@ -84,7 +84,7 @@ module Gcloud
       #   pubsub = Gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
-      #   sub.topic.name "projects/my-project/topics/my-topic"
+      #   sub.topic.name #=> "projects/my-project/topics/my-topic"
       #
       def topic
         ensure_gapi!
@@ -94,28 +94,23 @@ module Gcloud
       end
 
       ##
-      # The maximum number of seconds after a subscriber receives a message
-      # before the subscriber should acknowledge or nack the message.
-      # If the ack deadline for a message passes without an ack or a nack,
-      # the Pub/Sub system will eventually redeliver the message.
-      # If a subscriber acknowledges after the deadline,
-      # the Pub/Sub system may accept the ack,
-      # but but the message may already have been sent again.
-      # Multiple acks to the message are allowed.
+      # This value is the maximum number of seconds after a subscriber receives
+      # a message before the subscriber should acknowledge the message.
       def deadline
         ensure_gapi!
         @gapi["ackDeadlineSeconds"]
       end
 
       ##
-      # A URL locating the endpoint that messages are pushed.
+      # Returns the URL locating the endpoint to which messages should be
+      # pushed.
       def endpoint
         ensure_gapi!
         @gapi["pushConfig"]["pushEndpoint"] if @gapi["pushConfig"]
       end
 
       ##
-      # A URL locating the endpoint that messages are pushed.
+      # Sets the URL locating the endpoint to which messages should be pushed.
       def endpoint= new_endpoint
         ensure_connection!
         resp = connection.modify_push_config name, new_endpoint, {}
@@ -195,9 +190,9 @@ module Gcloud
 
       ##
       # Pulls messages from the server. Returns an empty list if there are no
-      # messages available in the backlog. The server may return UNAVAILABLE if
-      # there are too many concurrent pull requests pending for the given
-      # subscription.
+      # messages available in the backlog. Raises an ApiError with status
+      # +UNAVAILABLE+ if there are too many concurrent pull requests pending
+      # for the given subscription.
       #
       # === Parameters
       #
@@ -205,21 +200,18 @@ module Gcloud
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:immediate]</code>::
       #   When +true+, the system will respond immediately, either with a
-      #   message if available or +nil+ if no message is available.
-      #   When not specified, or when +false+, the call will block until a
-      #   message is available, or may return UNAVAILABLE if no messages become
-      #   available within a reasonable amount of time. (+Boolean+)
-      #   When +true+ the system will respond immediately even if it is not
-      #   able to return a message. Otherwise the system is allowed to wait
-      #   until at least one message is available.
+      #   message if available or +nil+ if no message is available. When not
+      #   specified, or when +false+, the call will block until a message is
+      #   available, or may return UNAVAILABLE if no messages become available
+      #   within a reasonable amount of time. (+Boolean+)
       # <code>options[:max]</code>::
-      #   The maximum number of messages to return for this request.
-      #   The Pub/Sub system may return fewer than the number specified.
-      #   (+Integer+)
+      #   The maximum number of messages to return for this request. The Pub/Sub
+      #   system may return fewer than the number specified. The default value
+      #   is +100+, the maximum value is +1000+. (+Integer+)
       #
       # === Returns
       #
-      # Array of Gcloud::Pubsub::ReceivedMesssage
+      # Array of Gcloud::Pubsub::ReceivedMessage
       #
       # === Examples
       #
@@ -239,7 +231,7 @@ module Gcloud
       #   sub = pubsub.subscription "my-topic-sub", immediate: true
       #   sub.pull.each { |msg| msg.acknowledge! }
       #
-      # A maximum number of messages returned can also be speified:
+      # A maximum number of messages returned can also be specified:
       #
       #   require "gcloud/pubsub"
       #
@@ -253,7 +245,7 @@ module Gcloud
         resp = connection.pull name, options
         if resp.success?
           Array(resp.data["receivedMessages"]).map do |gapi|
-            ReceivedMesssage.from_gapi gapi, self
+            ReceivedMessage.from_gapi gapi, self
           end
         else
           fail ApiError.from_response(resp)
@@ -271,8 +263,8 @@ module Gcloud
       # === Parameters
       #
       # +messages+::
-      #   One or more ReceivedMesssage objects or ack_id values.
-      #   (+ReceivedMesssage+ or +ack_id+)
+      #   One or more ReceivedMessage objects or ack_id values.
+      #   (+ReceivedMessage+ or +ack_id+)
       #
       # === Example
       #
@@ -281,8 +273,8 @@ module Gcloud
       #   pubsub = Gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
-      #   ack_ids = sub.pull.map { |msg| msg.ack_id }
-      #   sub.acknowledge *ack_ids
+      #   messages = sub.pull
+      #   sub.acknowledge messages
       #
       def acknowledge *messages
         ack_ids = coerce_ack_ids messages
@@ -307,13 +299,13 @@ module Gcloud
       #
       # +new_deadline+::
       #   The new ack deadline in seconds from the time this request is sent
-      #   to the Pub/Sub system. Must be >= 0. For example, if the value is 10,
-      #   the new ack deadline will expire 10 seconds after the call is made.
-      #   Specifying zero may immediately make the messages available for
+      #   to the Pub/Sub system. Must be >= 0. For example, if the value is
+      #   +10+, the new ack deadline will expire 10 seconds after the call is
+      #   made. Specifying +0+ may immediately make the messages available for
       #   another pull request. (+Integer+)
       # +messages+::
-      #   One or more ReceivedMesssage objects or ack_id values.
-      #   (+ReceivedMesssage+ or +ack_id+)
+      #   One or more ReceivedMessage objects or ack_id values.
+      #   (+ReceivedMessage+ or +ack_id+)
       #
       # === Example
       #
@@ -368,7 +360,7 @@ module Gcloud
 
       ##
       # Makes sure the values are the +ack_id+.
-      # If given several ReceivedMesssage objects extract the +ack_id+ values.
+      # If given several ReceivedMessage objects extract the +ack_id+ values.
       def coerce_ack_ids messages
         Array(messages).flatten.map do |msg|
           msg.respond_to?(:ack_id) ? msg.ack_id : msg.to_s

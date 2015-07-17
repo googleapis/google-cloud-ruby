@@ -78,8 +78,7 @@ module Gcloud
   #   topic = pubsub.topic "my-topic"
   #   topic.publish "task completed"
   #
-  # To learn more about Datastore, read the
-  # {Google Cloud Pub/Sub Overview
+  # To learn more about Pub/Sub, read the {Google Cloud Pub/Sub Overview
   # }[https://cloud.google.com/pubsub/overview].
   #
   # == Retrieving Topics
@@ -92,7 +91,7 @@ module Gcloud
   #   pubsub = Gcloud.pubsub
   #   topic = pubsub.topic "my-topic"
   #
-  # == Creating a Topics
+  # == Creating a Topic
   #
   # A Topic is created from a Project. (See Project#create_topic)
   #
@@ -130,7 +129,7 @@ module Gcloud
   #   pubsub = Gcloud.pubsub
   #
   #   topic = pubsub.topic "my-topic"
-  #   msg = topic.publish do |batch|
+  #   msgs = topic.publish do |batch|
   #     batch.publish "new-message-1", foo: :bar
   #     batch.publish "new-message-2", foo: :baz
   #     batch.publish "new-message-3", foo: :bif
@@ -173,7 +172,7 @@ module Gcloud
   #   puts sub.name # => "generated-sub-name"
   #
   # The subscription can be created that specifies the number of seconds to
-  # wait to be acknoeledged as well as an endpoint URL to push the messages to:
+  # wait to be acknowledged as well as an endpoint URL to push the messages to:
   #
   #   require "gcloud/pubsub"
   #
@@ -215,12 +214,12 @@ module Gcloud
   #
   # == Acknowledging a Message
   #
-  # Messages that are recieved can be acknowledged in Pub/Sub, marking the
+  # Messages that are received can be acknowledged in Pub/Sub, marking the
   # message to be removed so it cannot be pulled again.
   #
-  # A Message that can be acknowledged is called an ReceivedMesssage.
-  # ReceivedMesssages can be acknowledged one at a time:
-  # (See ReceivedMesssage#acknowledge!)
+  # A Message that can be acknowledged is called a ReceivedMessage.
+  # ReceivedMessages can be acknowledged one at a time:
+  # (See ReceivedMessage#acknowledge!)
   #
   #   require "gcloud/pubsub"
   #
@@ -240,13 +239,12 @@ module Gcloud
   #   received_messages = sub.pull
   #   sub.acknowledge received_messages
   #
-  # == Modifying a Message
+  # == Modifying a Deadline
   #
-  # If a message is unable to be acknowledged in a timely manner, it can be
-  # modified to extend the acknowledgement deadline. This indicates that more
-  # time is needed to process the message, or to make the message available for
-  # redelivery if the processing was interrupted.
-  # (See ReceivedMesssage#delay!)
+  # A message must be acknowledged after it is pulled, or Pub/Sub will mark the
+  # message for redelivery. The message acknowledgement deadline can delayed if
+  # more time is needed. This will allow more time to process the message before
+  # the message is marked for redelivery. (See ReceivedMessage#delay!)
   #
   #   require "gcloud/pubsub"
   #

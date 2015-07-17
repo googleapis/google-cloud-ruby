@@ -30,7 +30,7 @@ module Gcloud
       JSON_ENV_VARS = %w(DATASTORE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON)
 
       ##
-      # Sign Oauth2 API calls.
+      # Sign OAuth 2.0 API calls.
       def sign_http_request request #:nodoc:
         if @client
           @client.fetch_access_token! if @client.expired?

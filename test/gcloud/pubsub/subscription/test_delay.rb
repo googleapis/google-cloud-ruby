@@ -22,11 +22,11 @@ describe Gcloud::Pubsub::Subscription, :delay, :mock_pubsub do
   let :subscription do
     Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection
   end
-  let(:rec_message1) { Gcloud::Pubsub::ReceivedMesssage.from_gapi \
+  let(:rec_message1) { Gcloud::Pubsub::ReceivedMessage.from_gapi \
                   JSON.parse(rec_message_json("rec_message1-msg-goes-here")), subscription }
-  let(:rec_message2) { Gcloud::Pubsub::ReceivedMesssage.from_gapi \
+  let(:rec_message2) { Gcloud::Pubsub::ReceivedMessage.from_gapi \
                   JSON.parse(rec_message_json("rec_message2-msg-goes-here")), subscription }
-  let(:rec_message3) { Gcloud::Pubsub::ReceivedMesssage.from_gapi \
+  let(:rec_message3) { Gcloud::Pubsub::ReceivedMessage.from_gapi \
                   JSON.parse(rec_message_json("rec_message3-msg-goes-here")), subscription }
 
   it "can delay an ack id" do
