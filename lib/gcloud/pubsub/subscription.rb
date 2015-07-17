@@ -210,6 +210,9 @@ module Gcloud
       #   The maximum number of messages to return for this request. The Pub/Sub
       #   system may return fewer than the number specified. The default value
       #   is +100+, the maximum value is +1000+. (+Integer+)
+      # <code>options[:autoack]</code>::
+      #   Automatically acknowledge the message as it is pulled. The default
+      #   value is +false+. (+Boolean+)
       #
       # === Returns
       #
@@ -248,9 +251,11 @@ module Gcloud
         ensure_connection!
         resp = connection.pull name, options
         if resp.success?
-          Array(resp.data["receivedMessages"]).map do |gapi|
+          messages = Array(resp.data["receivedMessages"]).map do |gapi|
             ReceivedMessage.from_gapi gapi, self
           end
+          acknowledge messages if options[:autoack]
+          messages
         else
           fail ApiError.from_response(resp)
         end
@@ -274,6 +279,9 @@ module Gcloud
       #   The maximum number of messages to return for this request. The Pub/Sub
       #   system may return fewer than the number specified. The default value
       #   is +100+, the maximum value is +1000+. (+Integer+)
+      # <code>options[:autoack]</code>::
+      #   Automatically acknowledge the message as it is pulled. The default
+      #   value is +false+. (+Boolean+)
       #
       # === Returns
       #
