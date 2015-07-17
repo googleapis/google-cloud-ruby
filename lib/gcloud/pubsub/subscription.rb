@@ -224,7 +224,16 @@ module Gcloud
       #   sub = pubsub.subscription "my-topic-sub"
       #   sub.pull.each { |msg| msg.acknowledge! }
       #
-      # The call can wait until results can be returned by setting the
+      # A maximum number of messages returned can also be specified:
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub", max: 10
+      #   sub.pull.each { |msg| msg.acknowledge! }
+      #
+      # The call can block until messages are available by setting the
       # +:immediate+ option to +false+:
       #
       #   require "gcloud/pubsub"
@@ -234,15 +243,6 @@ module Gcloud
       #   sub = pubsub.subscription "my-topic-sub"
       #   msgs = sub.pull immediate: false
       #   msgs.each { |msg| msg.acknowledge! }
-      #
-      # A maximum number of messages returned can also be specified:
-      #
-      #   require "gcloud/pubsub"
-      #
-      #   pubsub = Gcloud.pubsub
-      #
-      #   sub = pubsub.subscription "my-topic-sub", max: 10
-      #   sub.pull.each { |msg| msg.acknowledge! }
       #
       def pull options = {}
         ensure_connection!
@@ -259,6 +259,39 @@ module Gcloud
       end
 
       # rubocop:enable Metrics/MethodLength
+
+      ##
+      # Pulls from the server while waiting for messages to become available.
+      # This is the same as:
+      #
+      #   subscription.pull immediate: false
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:max]</code>::
+      #   The maximum number of messages to return for this request. The Pub/Sub
+      #   system may return fewer than the number specified. The default value
+      #   is +100+, the maximum value is +1000+. (+Integer+)
+      #
+      # === Returns
+      #
+      # Array of Gcloud::Pubsub::ReceivedMessage
+      #
+      # === Example
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   msgs = sub.wait_for_messages
+      #   msgs.each { |msg| msg.acknowledge! }
+      #
+      def wait_for_messages options = {}
+        pull options.merge(immediate: false)
+      end
 
       ##
       # Acknowledges receipt of a message. After an ack,

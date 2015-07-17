@@ -37,6 +37,20 @@ describe Gcloud::Pubsub::Subscription, :pull, :wait, :mock_pubsub do
     rec_messages.first.message.data.must_equal rec_message_msg
   end
 
+  it "can pull messages by calling wait_for_messages" do
+    rec_message_msg = "pulled-message"
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
+      # We could sleep here, but, really, why?
+      JSON.parse(env.body)["returnImmediately"].must_equal false
+      [200, {"Content-Type"=>"application/json"},
+       rec_messages_json(rec_message_msg)]
+    end
+
+    rec_messages = subscription.wait_for_messages
+    rec_messages.wont_be :empty?
+    rec_messages.first.message.data.must_equal rec_message_msg
+  end
+
   it "will not error when a request times out with Faraday::TimeoutError" do
     rec_message_msg = "pulled-message"
     mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|

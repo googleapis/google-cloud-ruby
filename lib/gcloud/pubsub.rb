@@ -185,7 +185,7 @@ module Gcloud
   #
   # == Pulling Messages
   #
-  # Messages are pulled from a Subscription.
+  # Messages are pulled from a Subscription. (See Subscription#pull)
   #
   #   require "gcloud/pubsub"
   #
@@ -193,16 +193,6 @@ module Gcloud
   #
   #   sub = pubsub.subscription "my-topic-sub"
   #   msgs = sub.pull
-  #
-  # The pull request can block until messages are available by setting the
-  # +:immediate+ option to +false+:
-  #
-  #   require "gcloud/pubsub"
-  #
-  #   pubsub = Gcloud.pubsub
-  #
-  #   sub = pubsub.subscription "my-topic-sub"
-  #   msgs = sub.pull immediate: false
   #
   # A maximum number of messages returned can also be specified:
   #
@@ -212,6 +202,16 @@ module Gcloud
   #
   #   sub = pubsub.subscription "my-topic-sub", max: 10
   #   msgs = sub.pull
+  #
+  # The request for messages can also block until messages are available.
+  # (See Subscription#wait_for_messages)
+  #
+  #   require "gcloud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   msgs = sub.wait_for_messages
   #
   # == Acknowledging a Message
   #
