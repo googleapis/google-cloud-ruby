@@ -52,7 +52,6 @@ describe Gcloud::Pubsub::Subscription, :pull, :wait, :mock_pubsub do
   end
 
   it "will not error when a request times out with Faraday::TimeoutError" do
-    rec_message_msg = "pulled-message"
     mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
       # simulate a timed out HTTP request
       raise Faraday::TimeoutError
