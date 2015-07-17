@@ -199,11 +199,10 @@ module Gcloud
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:immediate]</code>::
-      #   When +true+, the system will respond immediately, either with a
-      #   message if available or +nil+ if no message is available. When not
-      #   specified, or when +false+, the call will block until a message is
-      #   available, or may return UNAVAILABLE if no messages become available
-      #   within a reasonable amount of time. (+Boolean+)
+      #   When +true+ the system will respond immediately even if it is not able
+      #   to return messages. When +false+ the system is allowed to wait until
+      #   it can return least one message. No messages are returned when a
+      #   request times out. The default value is +true+. (+Boolean+)
       # <code>options[:max]</code>::
       #   The maximum number of messages to return for this request. The Pub/Sub
       #   system may return fewer than the number specified. The default value
@@ -222,14 +221,16 @@ module Gcloud
       #   sub = pubsub.subscription "my-topic-sub"
       #   sub.pull.each { |msg| msg.acknowledge! }
       #
-      # Results can be returned immediately with the +:immediate+ option:
+      # The call can wait until results can be returned by setting the
+      # +:immediate+ option to +false+:
       #
       #   require "gcloud/pubsub"
       #
       #   pubsub = Gcloud.pubsub
       #
-      #   sub = pubsub.subscription "my-topic-sub", immediate: true
-      #   sub.pull.each { |msg| msg.acknowledge! }
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   msgs = sub.pull immediate: false
+      #   msgs.each { |msg| msg.acknowledge! }
       #
       # A maximum number of messages returned can also be specified:
       #

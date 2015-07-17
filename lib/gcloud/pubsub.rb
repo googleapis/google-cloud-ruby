@@ -194,14 +194,15 @@ module Gcloud
   #   sub = pubsub.subscription "my-topic-sub"
   #   msgs = sub.pull
   #
-  # Results can be returned immediately with the +:immediate+ option:
+  # The pull request can block until messages are available by setting the
+  # +:immediate+ option to +false+:
   #
   #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
-  #   sub = pubsub.subscription "my-topic-sub", immediate: true
-  #   msgs = sub.pull
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   msgs = sub.pull immediate: false
   #
   # A maximum number of messages returned can also be specified:
   #
