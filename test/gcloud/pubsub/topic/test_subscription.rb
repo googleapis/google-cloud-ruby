@@ -37,7 +37,7 @@ describe Gcloud::Pubsub::Topic, :subscription, :mock_pubsub do
     describe "created with autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   true }
+                                                   autocreate: true }
 
       it "gets lazy sub for an existing subscription" do
         sub = topic.subscription found_sub_name
@@ -55,7 +55,7 @@ describe Gcloud::Pubsub::Topic, :subscription, :mock_pubsub do
     describe "created without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   false }
+                                                   autocreate: false }
 
       it "gets lazy sub for an existing subscription" do
         sub = topic.subscription found_sub_name
@@ -75,7 +75,7 @@ describe Gcloud::Pubsub::Topic, :subscription, :mock_pubsub do
     describe "created with autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   true }
+                                                   autocreate: true }
 
       it "gets lazy sub for an existing subscription" do
         sub = topic.subscription found_sub_name
@@ -87,7 +87,7 @@ describe Gcloud::Pubsub::Topic, :subscription, :mock_pubsub do
     describe "created without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   false }
+                                                   autocreate: false }
 
       it "returns lazy sub when getting an non-existant subscription" do
         sub = topic.subscription not_found_sub_name

@@ -35,7 +35,7 @@ describe Gcloud::Pubsub::Topic, :lazy, :mock_pubsub do
   describe "lazy topic with explicit autocreate" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                  pubsub.connection,
-                                                 true }
+                                                 autocreate: true }
 
     it "will autocreate when created lazily" do
       topic.must_be :lazy?
@@ -45,7 +45,7 @@ describe Gcloud::Pubsub::Topic, :lazy, :mock_pubsub do
   describe "lazy topic without autocomplete" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                  pubsub.connection,
-                                                 false }
+                                                 autocreate: false }
 
     it "knows if it will create a topic on the Pub/Sub service" do
       topic.must_be :lazy?

@@ -53,13 +53,13 @@ module Gcloud
 
       ##
       # New lazy Topic object without making an HTTP request.
-      def self.new_lazy name, conn #:nodoc:
+      def self.new_lazy name, conn, options = {} #:nodoc:
         sub = new.tap do |f|
           f.gapi = nil
           f.connection = conn
         end
         sub.instance_eval do
-          @name = conn.subscription_path(name)
+          @name = conn.subscription_path(name, options)
         end
         sub
       end
@@ -90,7 +90,7 @@ module Gcloud
         ensure_gapi!
         # Always disable autocreate, we don't want to recreate a topic that
         # was intentionally deleted.
-        Topic.new_lazy @gapi["topic"], connection, false
+        Topic.new_lazy @gapi["topic"], connection, autocreate: false
       end
 
       ##

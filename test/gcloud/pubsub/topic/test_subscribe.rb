@@ -36,7 +36,7 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
     describe "created with autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   true }
+                                                   autocreate: true }
 
       it "creates a subscription when calling subscribe" do
         mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
@@ -54,7 +54,7 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
     describe "created without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   false }
+                                                   autocreate: false }
 
       it "creates a subscription when calling subscribe" do
         mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
@@ -74,7 +74,7 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
     describe "created with autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   true }
+                                                   autocreate: true }
 
       it "creates a subscription when calling subscribe" do
         #first, failed attempt to subscribe
@@ -103,7 +103,7 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
     describe "created without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   false }
+                                                   autocreate: false }
 
       it "raises NotFoundError when calling subscribe" do
         mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|

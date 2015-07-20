@@ -53,16 +53,16 @@ module Gcloud
 
       ##
       # New lazy Topic object without making an HTTP request.
-      def self.new_lazy name, conn, autocreate = true #:nodoc:
-        topic = new.tap do |f|
-          f.gapi = nil
-          f.connection = conn
+      def self.new_lazy name, conn, options = {} #:nodoc:
+        options[:autocreate] = true if options[:autocreate].nil?
+        new.tap do |t|
+          t.gapi = nil
+          t.connection = conn
+          t.instance_eval do
+            @name = conn.topic_path(name, options)
+            @autocreate = options[:autocreate]
+          end
         end
-        topic.instance_eval do
-          @name = conn.topic_path(name)
-          @autocreate = autocreate
-        end
-        topic
       end
 
       ##

@@ -35,7 +35,7 @@ describe Gcloud::Pubsub::Topic, :name, :mock_pubsub do
   describe "lazy topic with explicit autocreate" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                  pubsub.connection,
-                                                 true }
+                                                 autocreate: true }
 
     it "matches the name returned from the HTTP method" do
       topic.name.must_equal "projects/#{project}/topics/#{topic_name}"
@@ -45,7 +45,7 @@ describe Gcloud::Pubsub::Topic, :name, :mock_pubsub do
   describe "lazy topic without autocomplete" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                  pubsub.connection,
-                                                 false }
+                                                 autocreate: false }
 
     it "matches the name returned from the HTTP method" do
       topic.name.must_equal "projects/#{project}/topics/#{topic_name}"

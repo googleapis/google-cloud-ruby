@@ -117,6 +117,10 @@ module Gcloud
       # <code>options[:autocreate]</code>::
       #   Flag to control whether the topic should be created when needed.
       #   The default value is +true+. (+Boolean+)
+      # <code>options[:project]</code>::
+      #   If the topic belongs to a project other than the one currently
+      #   connected to, the alternate project ID can be specified here.
+      #   (+String+)
       #
       # === Returns
       #
@@ -146,13 +150,17 @@ module Gcloud
       #   topic = pubsub.topic "non-existing-topic"
       #   msg = topic.publish "This raises." #=> Gcloud::Pubsub::NotFoundError
       #
+      # A topic in a different project can be created using the +project+ flag.
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #   topic = pubsub.topic "another-topic", project: "another-project"
+      #
       def topic topic_name, options = {}
         ensure_connection!
 
-        autocreate = options[:autocreate]
-        autocreate = true if autocreate.nil?
-
-        Topic.new_lazy topic_name, connection, autocreate
+        Topic.new_lazy topic_name, connection, options
       end
 
       ##
