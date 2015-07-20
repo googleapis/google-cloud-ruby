@@ -358,6 +358,107 @@ module Gcloud
       end
 
       ##
+      # Gets the access control policy.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:force]</code>::
+      #   Force the latest policy to be retrieved from the Pub/Sub service when
+      #   +true. Otherwise the policy will be memoized to reduce the number of
+      #   API calls made to the Pub/Sub service. The default is +false+.
+      #   (+Boolean+)
+      #
+      # === Returns
+      #
+      # A hash that conforms to the following structure:
+      #
+      #   {
+      #     "bindings" => [{
+      #       "role" => "roles/viewer",
+      #       "members" => ["serviceAccount:your-service-account"]
+      #     }],
+      #     "rules" => []
+      #   }
+      #
+      # === Examples
+      #
+      # By default, the policy values are memoized to reduce the number of API
+      # calls to the Pub/Sub service.
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   puts topic.policy["bindings"]
+      #   puts topic.policy["rules"]
+      #
+      # To retrieve the latest policy from the Pub/Sub service, use the +force+
+      # flag.
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   policy = topic.policy force: true
+      #
+      def policy options = {}
+        @policy = nil if options[:force]
+        @policy ||= begin
+          ensure_connection!
+          resp = connection.get_topic_policy name
+          policy = resp.data["policy"]
+          policy = policy.to_hash if policy.respond_to? :to_hash
+          policy
+        end
+      end
+
+      ##
+      # Sets the access control policy.
+      #
+      # === Parameters
+      #
+      # +new_policy+::
+      #   A hash that conforms to the following structure:
+      #
+      #     {
+      #       "bindings" => [{
+      #         "role" => "roles/viewer",
+      #         "members" => ["serviceAccount:your-service-account"]
+      #       }],
+      #       "rules" => []
+      #     }
+      #
+      # === Example
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   viewer_policy = {
+      #     "bindings" => [{
+      #       "role" => "roles/viewer",
+      #       "members" => ["serviceAccount:your-service-account"]
+      #     }]
+      #   }
+      #   topic = pubsub.topic "my-topic"
+      #   topic.policy = viewer_policy
+      #
+      def policy= new_policy
+        ensure_connection!
+        resp = connection.set_topic_policy name, new_policy
+        if resp.success?
+          @policy = resp.data["policy"]
+          @policy = @policy.to_hash if @policy.respond_to? :to_hash
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # Determines whether the topic exists in the Pub/Sub service.
       #
       # === Example

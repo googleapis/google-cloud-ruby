@@ -86,6 +86,21 @@ module Gcloud
         )
       end
 
+      def get_topic_policy topic_name, options = {}
+        @client.execute(
+          api_method: @pubsub.projects.topics.get_iam_policy,
+          parameters: { resource: topic_path(topic_name, options) }
+        )
+      end
+
+      def set_topic_policy topic_name, new_policy, options = {}
+        @client.execute(
+          api_method: @pubsub.projects.topics.set_iam_policy,
+          parameters: { resource: topic_path(topic_name, options) },
+          body_object: { policy: new_policy }
+        )
+      end
+
       ##
       # Creates a subscription on a given topic for a given subscriber.
       def create_subscription topic, subscription_name, options = {}
