@@ -173,6 +173,40 @@ module Gcloud
   #                         deadline: 120,
   #                         endpoint: "https://example.com/push"
   #
+  # == Working Across Projects
+  #
+  # All calls to the Pub/Sub service use the same project and credentials
+  # provided to the Gcloud.pubsub method. However, it is common to reference
+  # topics or subscriptions in other projects, which can be achieved by using
+  # the +project+ option. The main credentials must have permissions to the
+  # topics and subscriptions in other projects.
+  #
+  #   require "gcloud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub # my-project-id
+  #
+  #   # Get a topic in the current project
+  #   my_topic = pubsub.topic "my-topic"
+  #   my_topic.name #=> "projects/my-project-id/topics/my-topic"
+  #   # Get a topic in another project
+  #   other_topic = pubsub.topic "other-topic", project: "other-project-id"
+  #   other_topic.name #=> "projects/other-project-id/topics/other-topic"
+  #
+  # It is possible to create a subscription in the current project that pulls
+  # from a topic in another project:
+  #
+  #   require "gcloud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub # my-project-id
+  #
+  #   # Get a topic in another project
+  #   topic = pubsub.topic "other-topic", project: "other-project-id"
+  #   # Create a subscription in the current project that pulls from
+  #   # the topic in another project
+  #   sub = topic.subscribe "my-sub"
+  #   sub.name #=> "projects/my-project-id/subscriptions/my-sub"
+  #   sub.topic.name #=> "projects/other-project-id/topics/other-topic"
+  #
   # == Pulling Messages
   #
   # Messages are pulled from a Subscription. (See Subscription#pull)
