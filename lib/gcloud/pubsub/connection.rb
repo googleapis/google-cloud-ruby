@@ -88,7 +88,7 @@ module Gcloud
 
       ##
       # Creates a subscription on a given topic for a given subscriber.
-      def create_subscription topic, subscription_name = nil, options = {}
+      def create_subscription topic, subscription_name, options = {}
         data = subscription_data topic, options
         @client.execute(
           api_method: @pubsub.projects.subscriptions.create,

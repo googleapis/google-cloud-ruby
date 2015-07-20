@@ -161,16 +161,6 @@ module Gcloud
   #   sub = topic.subscribe "my-topic-sub"
   #   puts sub.name # => "my-topic-sub"
   #
-  # The name is optional, and will be generated if not given.
-  #
-  #   require "gcloud/pubsub"
-  #
-  #   pubsub = Gcloud.pubsub
-  #
-  #   topic = pubsub.topic "my-topic"
-  #   sub = topic.subscribe "my-topic-sub"
-  #   puts sub.name # => "generated-sub-name"
-  #
   # The subscription can be created that specifies the number of seconds to
   # wait to be acknowledged as well as an endpoint URL to push the messages to:
   #

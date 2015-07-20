@@ -104,9 +104,11 @@ module Gcloud
       # === Parameters
       #
       # +subscription_name+::
-      #   Name of the new subscription. If the name is not provided in the
-      #   request, the server will assign a random name for this subscription
-      #   on the same project as the topic. (+String+)
+      #   Name of the new subscription. Must start with a letter, and contain
+      #   only letters ([A-Za-z]), numbers ([0-9], dashes (-), underscores (_),
+      #   periods (.), tildes (~), plus (+) or percent signs (%). It must be
+      #   between 3 and 255 characters in length, and it must not start with
+      #   "goog". (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:deadline]</code>::
@@ -152,7 +154,7 @@ module Gcloud
       #                         deadline: 120,
       #                         endpoint: "https://example.com/push"
       #
-      def subscribe subscription_name = nil, options = {}
+      def subscribe subscription_name, options = {}
         ensure_connection!
         resp = connection.create_subscription name, subscription_name, options
         if resp.success?
