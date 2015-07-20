@@ -303,7 +303,7 @@ module Gcloud
 
       ##
       # Poll the backend for new messages. This runs a loop to ping the API,
-      # blocking indefinitely, yielding retrieved messages as they are recieved.
+      # blocking indefinitely, yielding retrieved messages as they are received.
       #
       # === Parameters
       #

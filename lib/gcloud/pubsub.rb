@@ -274,6 +274,46 @@ module Gcloud
   #   received_messages = sub.pull
   #   sub.delay 120, received_messages
   #
+  # == Listening for Messages
+  #
+  # Long running workers are easy to create with +listen+, which runs an
+  # infinitely blocking loop to process messages as they are received. (See
+  # Subscription#listen)
+  #
+  #   require "gcloud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   sub.listen do |msg|
+  #     # process msg
+  #   end
+  #
+  # Messages are retrieved in batches for efficiency. The number of messages
+  # pulled per batch can be limited with the +max+ option:
+  #
+  #   require "gcloud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   sub.listen max: 20 do |msg|
+  #     # process msg
+  #   end
+  #
+  # When processing time and the acknowledgement deadline are a concern,
+  # messages can be automatically acknowledged as they are pulled with the
+  # +autoack+ option:
+  #
+  #   require "gcloud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   sub.listen autoack: true do |msg|
+  #     # process msg
+  #   end
+  #
   module Pubsub
   end
 end
