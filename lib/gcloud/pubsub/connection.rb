@@ -160,6 +160,23 @@ module Gcloud
         )
       end
 
+      def get_subscription_policy subscription_name, options = {}
+        @client.execute(
+          api_method: @pubsub.projects.subscriptions.get_iam_policy,
+          parameters: {
+            resource: subscription_path(subscription_name, options) }
+        )
+      end
+
+      def set_subscription_policy subscription_name, new_policy, options = {}
+        @client.execute(
+          api_method: @pubsub.projects.subscriptions.set_iam_policy,
+          parameters: {
+            resource: subscription_path(subscription_name, options) },
+          body_object: { policy: new_policy }
+        )
+      end
+
       ##
       # Adds one or more messages to the topic.
       # Returns NOT_FOUND if the topic does not exist.
