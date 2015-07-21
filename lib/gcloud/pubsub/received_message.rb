@@ -23,9 +23,10 @@ module Gcloud
     #
     # Represents a Pub/Sub Message that can be acknowledged or delayed.
     #
-    #   require "gcloud/pubsub"
+    #   require "gcloud"
     #
-    #   pubsub = Gcloud.pubsub
+    #   gcloud = Gcloud.new
+    #   pubsub = gcloud.pubsub
     #
     #   sub = pubsub.subscription "my-topic-sub"
     #   received_message = sub.pull.first
@@ -88,9 +89,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   received_message = sub.pull.first
@@ -122,9 +124,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   received_message = sub.pull.first

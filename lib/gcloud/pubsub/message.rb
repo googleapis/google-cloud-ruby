@@ -27,9 +27,10 @@ module Gcloud
     # which contains a Message object. Each ReceivedMessage object can be
     # acknowledged and/or delayed.
     #
-    #   require "gcloud/pubsub"
+    #   require "gcloud"
     #
-    #   pubsub = Gcloud.pubsub
+    #   gcloud = Gcloud.new
+    #   pubsub = gcloud.pubsub
     #
     #   # Publish a message
     #   topic = pubsub.topic "my-topic"
