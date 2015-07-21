@@ -24,9 +24,10 @@ module Gcloud
     #
     # Represents the File/Object that belong to a Bucket.
     #
-    #   require "gcloud/storage"
+    #   require "gcloud"
     #
-    #   storage = Gcloud.storage
+    #   gcloud = Gcloud.new
+    #   storage = gcloud.storage
     #
     #   bucket = storage.bucket "my-bucket"
     #
@@ -155,9 +156,10 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -167,9 +169,10 @@ module Gcloud
       # The download is verified by calculating the MD5 digest.
       # The CRC32c digest can be used by passing :crc32c.
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -178,9 +181,10 @@ module Gcloud
       #
       # Both the MD5 and CRC32c digest can be used by passing :all.
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -189,9 +193,10 @@ module Gcloud
       #
       # The download verification can be disabled by passing :none
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -250,9 +255,10 @@ module Gcloud
       #
       # The file can also be copied to a new path in the current bucket:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -261,9 +267,10 @@ module Gcloud
       #
       # The file can also be copied to a different bucket:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -294,9 +301,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -354,9 +362,10 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
       #   file = bucket.file "avatars/heidi/400x400.png"
@@ -364,9 +373,10 @@ module Gcloud
       #
       # Any of the option parameters may be specified:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
       #   file = bucket.file "avatars/heidi/400x400.png"
@@ -411,9 +421,10 @@ module Gcloud
       # Access to a file can be granted to a user by appending +"user-"+ to the
       # email address:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
       #   file = bucket.file "avatars/heidi/400x400.png"
@@ -424,9 +435,10 @@ module Gcloud
       # Access to a file can be granted to a group by appending +"group-"+ to
       # the email address:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
       #   file = bucket.file "avatars/heidi/400x400.png"
@@ -437,9 +449,10 @@ module Gcloud
       # Access to a file can also be granted to a predefined list of
       # permissions:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
       #   file = bucket.file "avatars/heidi/400x400.png"

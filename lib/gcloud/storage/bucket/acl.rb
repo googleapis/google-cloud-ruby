@@ -21,9 +21,10 @@ module Gcloud
       #
       # Represents a Bucket's Access Control List.
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -61,9 +62,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -86,9 +88,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -108,9 +111,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -130,9 +134,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -166,9 +171,10 @@ module Gcloud
         # Access to a bucket can be granted to a user by appending +"user-"+ to
         # the email address:
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -178,9 +184,10 @@ module Gcloud
         # Access to a bucket can be granted to a group by appending +"group-"+
         # to the email address:
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -220,9 +227,10 @@ module Gcloud
         # Access to a bucket can be granted to a user by appending +"user-"+ to
         # the email address:
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -232,9 +240,10 @@ module Gcloud
         # Access to a bucket can be granted to a group by appending +"group-"+
         # to the email address:
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -274,9 +283,10 @@ module Gcloud
         # Access to a bucket can be granted to a user by appending +"user-"+ to
         # the email address:
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -286,9 +296,10 @@ module Gcloud
         # Access to a bucket can be granted to a group by appending +"group-"+
         # to the email address:
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -325,9 +336,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -357,9 +369,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -379,9 +392,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -397,9 +411,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -416,9 +431,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -435,9 +451,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -469,9 +486,10 @@ module Gcloud
       #
       # Represents a Bucket's Default Access Control List.
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -510,9 +528,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -535,9 +554,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -557,9 +577,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -579,9 +600,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -615,9 +637,10 @@ module Gcloud
         # Access to a bucket can be granted to a user by appending +"user-"+ to
         # the email address:
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -627,9 +650,10 @@ module Gcloud
         # Access to a bucket can be granted to a group by appending +"group-"+
         # to the email address:
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -669,9 +693,10 @@ module Gcloud
         # Access to a bucket can be granted to a user by appending +"user-"+ to
         # the email address:
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -681,9 +706,10 @@ module Gcloud
         # Access to a bucket can be granted to a group by appending +"group-"+
         # to the email address:
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -723,9 +749,10 @@ module Gcloud
         # Access to a bucket can be granted to a user by appending +"user-"+ to
         # the email address:
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -735,9 +762,10 @@ module Gcloud
         # Access to a bucket can be granted to a group by appending +"group-"+
         # to the email address:
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -775,9 +803,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -807,9 +836,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -829,9 +859,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -848,9 +879,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -867,9 +899,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -885,9 +918,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -904,9 +938,10 @@ module Gcloud
         #
         # === Example
         #
-        #   require "gcloud/storage"
+        #   require "gcloud"
         #
-        #   storage = Gcloud.storage
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
         #
         #   bucket = storage.bucket "my-bucket"
         #
