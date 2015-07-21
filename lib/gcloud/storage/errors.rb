@@ -82,5 +82,13 @@ module Gcloud
         end
       end
     end
+
+    ##
+    # = SignedUrlUnavailable Error
+    #
+    # This is raised when File#signed_url is unable to generate a URL due to
+    # missing credentials needed to create the URL.
+    class SignedUrlUnavailable < Error
+    end
   end
 end

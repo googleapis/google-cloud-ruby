@@ -489,21 +489,39 @@ module Gcloud
            ext_path].join "\n"
         end
 
-        def signing_key
-          @file.connection.credentials.signing_key
+        def determine_signing_key options = {}
+          options[:signing_key] || options[:private_key] ||
+            @file.connection.credentials.signing_key
         end
 
-        def issuer
-          @file.connection.credentials.issuer
+        def determine_issuer options = {}
+          options[:issuer] || options[:client_email] ||
+            @file.connection.credentials.issuer
         end
 
         def signed_url options
           options = apply_option_defaults options
-          signed_string = signing_key.sign OpenSSL::Digest::SHA256.new,
-                                           signature_str(options)
+
+          i = determine_issuer options
+          s = determine_signing_key options
+
+          fail SignedUrlUnavailable unless i && s
+
+          sig = generate_signature s, options
+          generate_signed_url i, sig, options[:expires]
+        end
+
+        def generate_signature signing_key, options = {}
+          unless signing_key.respond_to? :sign
+            signing_key = OpenSSL::PKey::RSA.new signing_key
+          end
+          signing_key.sign OpenSSL::Digest::SHA256.new, signature_str(options)
+        end
+
+        def generate_signed_url issuer, signed_string, expires
           signature = Base64.encode64(signed_string).gsub("\n", "")
           "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
-                    "&Expires=#{options[:expires]}" \
+                    "&Expires=#{expires}" \
                     "&Signature=#{CGI.escape signature}"
         end
       end
