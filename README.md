@@ -45,7 +45,7 @@ require "gcloud"
 
 gcloud = Gcloud.new "my-todo-project-id",
                     "/path/to/keyfile.json"
-datastore = gcloud.datastore
+dataset = gcloud.datastore
 
 # Create a new task to demo datastore
 demo_task = Gcloud::Datastore::Entity.new
@@ -54,7 +54,7 @@ demo_task[:description] = "Demonstrate Datastore functionality"
 demo_task[:completed] = false
 
 # Save the new task
-datastore.save demo_task
+dataset.save demo_task
 
 # Run a query for all completed tasks
 query = Gcloud::Datastore::Query.new.kind("Task").

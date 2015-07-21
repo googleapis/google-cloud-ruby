@@ -51,10 +51,10 @@ module Gcloud
   #
   #   require "gcloud"
   #
-  #   gcloud    = Gcloud.new
-  #   datastore = gcloud.datastore
-  #   pubsub    = gcloud.pubsub
-  #   storage   = gcloud.storage
+  #   gcloud  = Gcloud.new
+  #   dataset = gcloud.datastore
+  #   pubsub  = gcloud.pubsub
+  #   storage = gcloud.storage
   #
   def self.new project = nil, keyfile = nil
     gcloud = Object.new
@@ -78,15 +78,15 @@ module Gcloud
   #
   #   require "gcloud"
   #
-  #   gcloud    = Gcloud.new
-  #   datastore = gcloud.datastore
+  #   gcloud  = Gcloud.new
+  #   dataset = gcloud.datastore
   #
   #   entity = Gcloud::Datastore::Entity.new
   #   entity.key = Gcloud::Datastore::Key.new "Task"
   #   entity["description"] = "Get started with Google Cloud"
   #   entity["completed"] = false
   #
-  #   datastore.save entity
+  #   dataset.save entity
   #
   def datastore
     require "gcloud/datastore"

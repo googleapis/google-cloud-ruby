@@ -58,17 +58,19 @@ module Gcloud
       #
       # Properties can be retrieved with a string name:
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud"
       #
-      #   dataset = Gcloud.datastore
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
       #   user = datastore.find "User", "heidi"
       #   user["name"] #=> "Heidi Henderson"
       #
       # Or with a symbol name:
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud"
       #
-      #   dataset = Gcloud.datastore
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
       #   user = datastore.find "User", "heidi"
       #   user[:name] #=> "Heidi Henderson"
       #
@@ -90,17 +92,19 @@ module Gcloud
       #
       # Properties can be set with a string name:
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud"
       #
-      #   dataset = Gcloud.datastore
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
       #   user = datastore.find "User", "heidi"
       #   user["name"] = "Heidi H. Henderson"
       #
       # Or with a symbol name:
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud"
       #
-      #   dataset = Gcloud.datastore
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
       #   user = datastore.find "User", "heidi"
       #   user[:name] = "Heidi H. Henderson"
       #
@@ -149,9 +153,10 @@ module Gcloud
       #
       # The Key can be set before the entity is saved.
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud"
       #
-      #   dataset = Gcloud.datastore
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
       #   entity = Gcloud::Datastore::Entity.new
       #   entity.key = Gcloud::Datastore::Key.new "User"
       #   dataset.save entity
@@ -159,9 +164,10 @@ module Gcloud
       # Once the entity is saved, the key is frozen and immutable.
       # Trying to set a key when immutable will raise a +RuntimeError+.
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud"
       #
-      #   dataset = Gcloud.datastore
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
       #   entity = dataset.find "User", "heidi"
       #   entity.persisted? #=> true
       #   entity.key = Gcloud::Datastore::Key.new "User" #=> RuntimeError
@@ -178,9 +184,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud"
       #
-      #   dataset = Gcloud.datastore
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
       #
       #   new_entity = Gcloud::Datastore::Entity.new
       #   new_entity.persisted? #=> false
