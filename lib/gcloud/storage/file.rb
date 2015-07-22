@@ -321,6 +321,14 @@ module Gcloud
       # }[https://cloud.google.com/storage/docs/access-control#Signed-URLs]
       # for more.
       #
+      # Generating a URL requires service account credentials, either by
+      # connecting with a service account when calling Gcloud.storage, or by
+      # passing in the service account +issuer+ and +signing_key+ values. A
+      # SignedUrlUnavailable is raised if the service account credentials are
+      # missing. Service account credentials are acquired by following the steps
+      # in {Service Account Authentication}[
+      # https://cloud.google.com/storage/docs/authentication#service_accounts].
+      #
       # === Parameters
       #
       # +options+::
@@ -339,6 +347,10 @@ module Gcloud
       #   The MD5 digest value in base64. If you provide this in the string, the
       #   client (usually a browser) must provide this HTTP header with this
       #   same value in its request. (+String+)
+      # <code>options[:issuer]</code>::
+      #   Service Account's Client Email. (+String+)
+      # <code>options[:signing_key]</code>::
+      #   Service Account's Private Key. (+OpenSSL::PKey::RSA+ or +String+)
       #
       # === Examples
       #
@@ -360,6 +372,23 @@ module Gcloud
       #   file = bucket.file "avatars/heidi/400x400.png"
       #   shared_url = file.signed_url method: "GET",
       #                                expires: 300 # 5 minutes from now
+      #
+      # Signed URLs require service account credentials. If you are not
+      # authenticated with a service account, those credentials can be passed in
+      # using the +issuer+ and +signing_key+ options. Although the private key
+      # can be passed as a string for convenience, creating and storing an
+      # instance of +OpenSSL::PKey::RSA+ is more efficient when making multiple
+      # calls to +signed_url+.
+      #
+      #   require "gcloud/storage"
+      #
+      #   storage = Gcloud.storage
+      #
+      #   bucket = storage.bucket "my-todo-app"
+      #   file = bucket.file "avatars/heidi/400x400.png"
+      #   key = OpenSSL::PKey::RSA.new "-----BEGIN PRIVATE KEY-----\n..."
+      #   shared_url = file.signed_url issuer: "service-account@gcloud.com",
+      #                                signing_key: key
       #
       def signed_url options = {}
         ensure_connection!
@@ -489,21 +518,39 @@ module Gcloud
            ext_path].join "\n"
         end
 
-        def signing_key
-          @file.connection.credentials.signing_key
+        def determine_signing_key options = {}
+          options[:signing_key] || options[:private_key] ||
+            @file.connection.credentials.signing_key
         end
 
-        def issuer
-          @file.connection.credentials.issuer
+        def determine_issuer options = {}
+          options[:issuer] || options[:client_email] ||
+            @file.connection.credentials.issuer
         end
 
         def signed_url options
           options = apply_option_defaults options
-          signed_string = signing_key.sign OpenSSL::Digest::SHA256.new,
-                                           signature_str(options)
+
+          i = determine_issuer options
+          s = determine_signing_key options
+
+          fail SignedUrlUnavailable unless i && s
+
+          sig = generate_signature s, options
+          generate_signed_url i, sig, options[:expires]
+        end
+
+        def generate_signature signing_key, options = {}
+          unless signing_key.respond_to? :sign
+            signing_key = OpenSSL::PKey::RSA.new signing_key
+          end
+          signing_key.sign OpenSSL::Digest::SHA256.new, signature_str(options)
+        end
+
+        def generate_signed_url issuer, signed_string, expires
           signature = Base64.encode64(signed_string).gsub("\n", "")
           "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
-                    "&Expires=#{options[:expires]}" \
+                    "&Expires=#{expires}" \
                     "&Signature=#{CGI.escape signature}"
         end
       end
