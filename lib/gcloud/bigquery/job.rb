@@ -113,7 +113,7 @@ module Gcloud
         if resp.success?
           @gapi = resp.data
         else
-          ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 

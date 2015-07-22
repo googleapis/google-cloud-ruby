@@ -127,7 +127,7 @@ module Gcloud
         if resp.success?
           Job.from_gapi resp.data, connection
         else
-          ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 
@@ -167,7 +167,7 @@ module Gcloud
         if resp.success?
           Job.from_gapi resp.data, connection
         else
-          ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 
@@ -200,7 +200,7 @@ module Gcloud
         if resp.success?
           Job.from_gapi resp.data, connection
         else
-          ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 
@@ -268,7 +268,7 @@ module Gcloud
         if resp.success?
           true
         else
-          ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 
@@ -297,7 +297,7 @@ module Gcloud
         if resp.success?
           Job.from_gapi resp.data, connection
         else
-          ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 
@@ -315,7 +315,7 @@ module Gcloud
         if resp.success?
           Job.from_gapi resp.data, connection
         else
-          ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 
@@ -324,7 +324,7 @@ module Gcloud
         if resp.success?
           Job.from_gapi resp.data, connection
         else
-          ApiError.from_response(resp)
+          fail ApiError.from_response(resp)
         end
       end
 
