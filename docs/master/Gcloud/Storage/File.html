@@ -240,7 +240,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 420</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 449</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acl</span>
   <span class="ruby-ivar">@acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -882,6 +882,16 @@ cryptographic signature of your credentials to access the file. See the <a
 href="https://cloud.google.com/storage/docs/access-control#Signed-URLs">Access
 Control Signed URLs guide </a> for more.</p>
 
+<p>Generating a URL requires service account credentials, either by connecting
+with a service account when calling <a
+href="../../Gcloud.html#method-c-storage">Gcloud.storage</a>, or by passing
+in the service account <code>issuer</code> and <code>signing_key</code>
+values. A <a href="SignedUrlUnavailable.html">SignedUrlUnavailable</a> is
+raised if the service account credentials are missing. Service account
+credentials are acquired by following the steps in {Service Account
+Authentication}[ <a
+href="https://cloud.google.com/storage/docs/authentication#service_accounts">cloud.google.com/storage/docs/authentication#service_accounts</a>].</p>
+
 <h3 id="method-i-signed_url-label-Parameters">Parameters<span><a href="#method-i-signed_url-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <dl class="rdoc-list note-list"><dt><code>options</code>
 <dd>
@@ -905,6 +915,13 @@ header. e.g. <code>text/plain</code> (<code>String</code>)</p>
 <p>The MD5 digest value in base64. If you provide this in the string, the
 client (usually a browser) must provide this HTTP header with this same
 value in its request. (<code>String</code>)</p>
+</dd><dt><code>options[:issuer]</code>
+<dd>
+<p>Service Account&#39;s Client Email. (<code>String</code>)</p>
+</dd><dt><code>options[:signing_key]</code>
+<dd>
+<p>Service Account&#39;s Private Key. (<code>OpenSSL::PKey::RSA</code> or
+<code>String</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-signed_url-label-Examples">Examples<span><a href="#method-i-signed_url-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -929,11 +946,29 @@ value in its request. (<code>String</code>)</p>
 <span class="ruby-identifier">shared_url</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">signed_url</span> <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;GET&quot;</span>,
                              <span class="ruby-identifier">expires</span><span class="ruby-operator">:</span> <span class="ruby-value">300</span> <span class="ruby-comment"># 5 minutes from now</span>
 </pre>
+
+<p>Signed URLs require service account credentials. If you are not
+authenticated with a service account, those credentials can be passed in
+using the <code>issuer</code> and <code>signing_key</code> options.
+Although the private key can be passed as a string for convenience,
+creating and storing an instance of <code>OpenSSL::PKey::RSA</code> is more
+efficient when making multiple calls to <code>signed_url</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+
+<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
+<span class="ruby-identifier">key</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">PKey</span><span class="ruby-operator">::</span><span class="ruby-constant">RSA</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;-----BEGIN PRIVATE KEY-----\n...&quot;</span>
+<span class="ruby-identifier">shared_url</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">signed_url</span> <span class="ruby-identifier">issuer</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;service-account@gcloud.com&quot;</span>,
+                             <span class="ruby-identifier">signing_key</span><span class="ruby-operator">:</span> <span class="ruby-identifier">key</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="signed_url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 364</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 393</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">signed_url</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">signer</span> = <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Signer</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
@@ -1065,7 +1100,7 @@ enabled, changing an object&#39;s metadata does not change this property.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Jul 16, 2015.
+    Docs built on Jul 22, 2015.
   </div>
 </div>
 
