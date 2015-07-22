@@ -17,10 +17,10 @@ Follow the [activation instructions](https://cloud.google.com/datastore/docs/act
 See the [gcloud-ruby Datastore API documentation](rdoc-ref:Gcloud::Datastore) to learn how to interact with the Cloud Datastore using this library.
 
 ```ruby
-require "gcloud/datastore"
+require "gcloud"
 
-dataset = Gcloud.datastore "my-todo-project-id",
-                           "/path/to/keyfile.json"
+gcloud = Gcloud.new
+dataset = gcloud.datastore
 
 # Create a new task to demo datastore
 demo_task = Gcloud::Datastore::Entity.new
@@ -44,9 +44,10 @@ completed_tasks = dataset.run query
 See the [gcloud-ruby Pub/Sub API documentation](rdoc-ref:Gcloud::Pubsub) to learn how to connect to Cloud Pub/Sub using this library.
 
 ```ruby
-require "gcloud/pubsub"
+require "gcloud"
 
-pubsub = Gcloud.pubsub
+gcloud = Gcloud.new
+pubsub = gcloud.pubsub
 
 # Retrieve a topic
 topic = pubsub.topic "my-topic"
@@ -68,10 +69,10 @@ msgs = sub.pull
 See the [gcloud-ruby Storage API documentation](rdoc-ref:Gcloud::Storage) to learn how to connect to Cloud Storage using this library.
 
 ```ruby
-require "gcloud/storage"
+require "gcloud"
 
-storage = Gcloud.storage "my-todo-project-id",
-                         "/path/to/keyfile.json"
+gcloud = Gcloud.new
+storage = gcloud.storage
 
 bucket = storage.bucket "task-attachments"
 
