@@ -126,11 +126,19 @@ specific topic, to be delivered to the subscribing application.</p>
           
             <a href="#method-i-exists-3F">exists?</a>
           
+            <a href="#method-i-listen">listen</a>
+          
             <a href="#method-i-name">name</a>
+          
+            <a href="#method-i-policy">policy</a>
+          
+            <a href="#method-i-policy-3D">policy=</a>
           
             <a href="#method-i-pull">pull</a>
           
             <a href="#method-i-topic">topic</a>
+          
+            <a href="#method-i-wait_for_messages">wait_for_messages</a>
           
         </div>
       
@@ -231,7 +239,7 @@ ack_id values. (<code>ReceivedMessage</code> or <code>ack_id</code>)</p>
 
     
       <!-- <div class="method-source-code" id="acknowledge-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 279</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 395</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acknowledge</span> <span class="ruby-operator">*</span><span class="ruby-identifier">messages</span>
   <span class="ruby-identifier">ack_ids</span> = <span class="ruby-identifier">coerce_ack_ids</span> <span class="ruby-identifier">messages</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -340,7 +348,7 @@ ack_id values. (<code>ReceivedMessage</code> or <code>ack_id</code>)</p>
 
     
       <!-- <div class="method-source-code" id="delay-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 320</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 436</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delay</span> <span class="ruby-identifier">new_deadline</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">messages</span>
   <span class="ruby-identifier">ack_ids</span> = <span class="ruby-identifier">coerce_ack_ids</span> <span class="ruby-identifier">messages</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -542,6 +550,108 @@ are immediately dropped.</p>
 </div>
 
         
+          <div id="listen-method" class="method ">
+  <a name="method-i-listen"></a>
+
+  
+    <h4>
+      <code>listen(options = {})</code>
+      <span>
+        <a href="#method-i-listen">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Poll the backend for new messages. This runs a loop to ping the API,
+blocking indefinitely, yielding retrieved messages as they are received.</p>
+
+<h3 id="method-i-listen-label-Parameters">Parameters<span><a href="#method-i-listen-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
+</dd><dt><code>options[:max]</code>
+<dd>
+<p>The maximum number of messages to return for this request. The Pub/Sub
+system may return fewer than the number specified. The default value is
+<code>100</code>, the maximum value is <code>1000</code>.
+(<code>Integer</code>)</p>
+</dd><dt><code>options[:autoack]</code>
+<dd>
+<p>Automatically acknowledge the message as it is pulled. The default value is
+<code>false</code>. (<code>Boolean</code>)</p>
+</dd><dt><code>options[:delay]</code>
+<dd>
+<p>The number of seconds to pause between requests when the Google Cloud
+service has no messages to return. The default value is <code>1</code>.
+(<code>Number</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-listen-label-Examples">Examples<span><a href="#method-i-listen-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">listen</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
+  <span class="ruby-comment"># process msg</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The number of messages pulled per batch can be set with the
+<code>max</code> option:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">listen</span> <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-value">20</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
+  <span class="ruby-comment"># process msg</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Messages can be automatically acknowledged as they are pulled with the
+<code>autoack</code> option:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">listen</span> <span class="ruby-identifier">autoack</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
+  <span class="ruby-comment"># process msg</span>
+<span class="ruby-keyword">end</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="listen-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 359</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">listen</span> <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-identifier">delay</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:delay</span>, <span class="ruby-value">1</span>)
+  <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">msgs</span> = <span class="ruby-identifier">wait_for_messages</span> <span class="ruby-identifier">options</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">msgs</span>.<span class="ruby-identifier">any?</span>
+      <span class="ruby-identifier">msgs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">msg</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">sleep</span> <span class="ruby-identifier">delay</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
           <div id="name-method" class="method ">
   <a name="method-i-name"></a>
 
@@ -565,6 +675,169 @@ are immediately dropped.</p>
 <pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@gapi</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;name&quot;</span>] <span class="ruby-operator">:</span> <span class="ruby-ivar">@name</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="policy-method" class="method ">
+  <a name="method-i-policy"></a>
+
+  
+    <h4>
+      <code>policy(options = {})</code>
+      <span>
+        <a href="#method-i-policy">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Gets the access control policy.</p>
+
+<h3 id="method-i-policy-label-Parameters">Parameters<span><a href="#method-i-policy-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
+</dd><dt><code>options[:force]</code>
+<dd>
+<p>Force the latest policy to be retrieved from the Pub/Sub service when
++true. Otherwise the policy will be memoized to reduce the number of API
+calls made to the Pub/Sub service. The default is <code>false</code>.
+(<code>Boolean</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-policy-label-Returns">Returns<span><a href="#method-i-policy-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>A hash that conforms to the following structure:</p>
+
+<pre class="ruby">{
+  <span class="ruby-string">&quot;bindings&quot;</span> =<span class="ruby-operator">&gt;</span> [{
+    <span class="ruby-string">&quot;role&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;roles/viewer&quot;</span>,
+    <span class="ruby-string">&quot;members&quot;</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">&quot;serviceAccount:your-service-account&quot;</span>]
+  }],
+  <span class="ruby-string">&quot;rules&quot;</span> =<span class="ruby-operator">&gt;</span> []
+}
+</pre>
+
+<h3 id="method-i-policy-label-Examples">Examples<span><a href="#method-i-policy-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>By default, the policy values are memoized to reduce the number of API
+calls to the Pub/Sub service.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">subscription</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-subscription&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">subscription</span>.<span class="ruby-identifier">policy</span>[<span class="ruby-string">&quot;bindings&quot;</span>]
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">subscription</span>.<span class="ruby-identifier">policy</span>[<span class="ruby-string">&quot;rules&quot;</span>]
+</pre>
+
+<p>To retrieve the latest policy from the Pub/Sub service, use the
+<code>force</code> flag.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">subscription</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-subscription&quot;</span>
+<span class="ruby-identifier">policy</span> = <span class="ruby-identifier">subscription</span>.<span class="ruby-identifier">policy</span> <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="policy-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 495</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">policy</span> <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-ivar">@policy</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:force</span>]
+  <span class="ruby-ivar">@policy</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">ensure_connection!</span>
+    <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_subscription_policy</span> <span class="ruby-identifier">name</span>
+    <span class="ruby-identifier">policy</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;policy&quot;</span>]
+    <span class="ruby-identifier">policy</span> = <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
+    <span class="ruby-identifier">policy</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="policy-3D-method" class="method ">
+  <a name="method-i-policy-3D"></a>
+
+  
+    <h4>
+      <code>policy=(new_policy)</code>
+      <span>
+        <a href="#method-i-policy-3D">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Sets the access control policy.</p>
+
+<h3 id="method-i-policy-3D-label-Parameters">Parameters<span><a href="#method-i-policy-3D-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>new_policy</code>
+<dd>
+<p>A hash that conforms to the following structure:</p>
+
+<pre class="ruby">{
+  <span class="ruby-string">&quot;bindings&quot;</span> =<span class="ruby-operator">&gt;</span> [{
+    <span class="ruby-string">&quot;role&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;roles/viewer&quot;</span>,
+    <span class="ruby-string">&quot;members&quot;</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">&quot;serviceAccount:your-service-account&quot;</span>]
+  }],
+  <span class="ruby-string">&quot;rules&quot;</span> =<span class="ruby-operator">&gt;</span> []
+}
+</pre>
+</dd></dl>
+
+<h3 id="method-i-policy-3D-label-Example">Example<span><a href="#method-i-policy-3D-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">viewer_policy</span> = {
+  <span class="ruby-string">&quot;bindings&quot;</span> =<span class="ruby-operator">&gt;</span> [{
+    <span class="ruby-string">&quot;role&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;roles/viewer&quot;</span>,
+    <span class="ruby-string">&quot;members&quot;</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">&quot;serviceAccount:your-service-account&quot;</span>]
+  }]
+}
+<span class="ruby-identifier">subscription</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-subscription&quot;</span>
+<span class="ruby-identifier">subscription</span>.<span class="ruby-identifier">policy</span> = <span class="ruby-identifier">viewer_policy</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="policy-3D-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 537</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">policy=</span> <span class="ruby-identifier">new_policy</span>
+  <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">set_subscription_policy</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">new_policy</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-ivar">@policy</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;policy&quot;</span>]
+    <span class="ruby-ivar">@policy</span> = <span class="ruby-ivar">@policy</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@policy</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -603,17 +876,21 @@ subscription.</p>
 <p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
 </dd><dt><code>options[:immediate]</code>
 <dd>
-<p>When <code>true</code>, the system will respond immediately, either with a
-message if available or <code>nil</code> if no message is available. When
-not specified, or when <code>false</code>, the call will block until a
-message is available, or may return UNAVAILABLE if no messages become
-available within a reasonable amount of time. (<code>Boolean</code>)</p>
+<p>When <code>true</code> the system will respond immediately even if it is
+not able to return messages. When <code>false</code> the system is allowed
+to wait until it can return least one message. No messages are returned
+when a request times out. The default value is <code>true</code>.
+(<code>Boolean</code>)</p>
 </dd><dt><code>options[:max]</code>
 <dd>
 <p>The maximum number of messages to return for this request. The Pub/Sub
 system may return fewer than the number specified. The default value is
 <code>100</code>, the maximum value is <code>1000</code>.
 (<code>Integer</code>)</p>
+</dd><dt><code>options[:autoack]</code>
+<dd>
+<p>Automatically acknowledge the message as it is pulled. The default value is
+<code>false</code>. (<code>Boolean</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-pull-label-Returns">Returns<span><a href="#method-i-pull-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -630,17 +907,6 @@ system may return fewer than the number specified. The default value is
 <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">acknowledge!</span> }
 </pre>
 
-<p>Results can be returned immediately with the <code>:immediate</code>
-option:</p>
-
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
-
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
-
-<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>, <span class="ruby-identifier">immediate</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
-<span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">acknowledge!</span> }
-</pre>
-
 <p>A maximum number of messages returned can also be specified:</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
@@ -650,21 +916,37 @@ option:</p>
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-value">10</span>
 <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">acknowledge!</span> }
 </pre>
+
+<p>The call can block until messages are available by setting the
+<code>:immediate</code> option to <code>false</code>:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">msgs</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span> <span class="ruby-identifier">immediate</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-identifier">msgs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">acknowledge!</span> }
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="pull-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 243</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 250</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pull</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">pull</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-constant">Array</span>(<span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;receivedMessages&quot;</span>]).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gapi</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">messages</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;receivedMessages&quot;</span>]).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gapi</span><span class="ruby-operator">|</span>
       <span class="ruby-constant">ReceivedMessage</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">gapi</span>, <span class="ruby-keyword">self</span>
     <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">acknowledge</span> <span class="ruby-identifier">messages</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:autoack</span>]
+    <span class="ruby-identifier">messages</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Faraday</span><span class="ruby-operator">::</span><span class="ruby-constant">TimeoutError</span>
+  []
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -716,7 +998,76 @@ messages.</p>
   <span class="ruby-identifier">ensure_gapi!</span>
   <span class="ruby-comment"># Always disable autocreate, we don&#39;t want to recreate a topic that</span>
   <span class="ruby-comment"># was intentionally deleted.</span>
-  <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">new_lazy</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;topic&quot;</span>], <span class="ruby-identifier">connection</span>, <span class="ruby-keyword">false</span>
+  <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">new_lazy</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;topic&quot;</span>], <span class="ruby-identifier">connection</span>, <span class="ruby-identifier">autocreate</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="wait_for_messages-method" class="method ">
+  <a name="method-i-wait_for_messages"></a>
+
+  
+    <h4>
+      <code>wait_for_messages(options = {})</code>
+      <span>
+        <a href="#method-i-wait_for_messages">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Pulls from the server while waiting for messages to become available. This
+is the same as:</p>
+
+<pre class="ruby"><span class="ruby-identifier">subscription</span>.<span class="ruby-identifier">pull</span> <span class="ruby-identifier">immediate</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+</pre>
+
+<h3 id="method-i-wait_for_messages-label-Parameters">Parameters<span><a href="#method-i-wait_for_messages-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
+</dd><dt><code>options[:max]</code>
+<dd>
+<p>The maximum number of messages to return for this request. The Pub/Sub
+system may return fewer than the number specified. The default value is
+<code>100</code>, the maximum value is <code>1000</code>.
+(<code>Integer</code>)</p>
+</dd><dt><code>options[:autoack]</code>
+<dd>
+<p>Automatically acknowledge the message as it is pulled. The default value is
+<code>false</code>. (<code>Boolean</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-wait_for_messages-label-Returns">Returns<span><a href="#method-i-wait_for_messages-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Array of <a href="ReceivedMessage.html">Gcloud::Pubsub::ReceivedMessage</a></p>
+
+<h3 id="method-i-wait_for_messages-label-Example">Example<span><a href="#method-i-wait_for_messages-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
+<span class="ruby-identifier">msgs</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">wait_for_messages</span>
+<span class="ruby-identifier">msgs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">acknowledge!</span> }
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="wait_for_messages-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 300</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">wait_for_messages</span> <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-identifier">pull</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">immediate</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     

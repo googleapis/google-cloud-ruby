@@ -126,6 +126,10 @@
           
             <a href="#method-i-new_subscription">new_subscription</a>
           
+            <a href="#method-i-policy">policy</a>
+          
+            <a href="#method-i-policy-3D">policy=</a>
+          
             <a href="#method-i-publish">publish</a>
           
             <a href="#method-i-subscribe">subscribe</a>
@@ -165,7 +169,7 @@
 
   
     <h4>
-      <code>create_subscription(subscription_name = nil, options = {})</code>
+      <code>create_subscription(subscription_name, options = {})</code>
       <span>
         <a href="#method-i-create_subscription">&para;</a>
         <a href="#top">&uarr;</a>
@@ -275,7 +279,7 @@
 
     
       <!-- <div class="method-source-code" id="exists-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 370</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 473</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">exists?</span>
   <span class="ruby-comment"># Always true if we have a gapi object</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@gapi</span>.<span class="ruby-identifier">nil?</span>
@@ -400,7 +404,7 @@ subscription does not exist</p>
 
     
       <!-- <div class="method-source-code" id="get_subscription-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 226</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 228</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_subscription</span> <span class="ruby-identifier">subscription_name</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_subscription</span> <span class="ruby-identifier">subscription_name</span>
@@ -495,7 +499,7 @@ subscription does not exist</p>
 
   
     <h4>
-      <code>new_subscription(subscription_name = nil, options = {})</code>
+      <code>new_subscription(subscription_name, options = {})</code>
       <span>
         <a href="#method-i-new_subscription">&para;</a>
         <a href="#top">&uarr;</a>
@@ -517,6 +521,169 @@ subscription does not exist</p>
     <div class="aliases">
       Alias for: <a href="Topic.html#method-i-subscribe">subscribe</a>
     </div>
+  
+</div>
+
+        
+          <div id="policy-method" class="method ">
+  <a name="method-i-policy"></a>
+
+  
+    <h4>
+      <code>policy(options = {})</code>
+      <span>
+        <a href="#method-i-policy">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Gets the access control policy.</p>
+
+<h3 id="method-i-policy-label-Parameters">Parameters<span><a href="#method-i-policy-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
+</dd><dt><code>options[:force]</code>
+<dd>
+<p>Force the latest policy to be retrieved from the Pub/Sub service when
++true. Otherwise the policy will be memoized to reduce the number of API
+calls made to the Pub/Sub service. The default is <code>false</code>.
+(<code>Boolean</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-policy-label-Returns">Returns<span><a href="#method-i-policy-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>A hash that conforms to the following structure:</p>
+
+<pre class="ruby">{
+  <span class="ruby-string">&quot;bindings&quot;</span> =<span class="ruby-operator">&gt;</span> [{
+    <span class="ruby-string">&quot;role&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;roles/viewer&quot;</span>,
+    <span class="ruby-string">&quot;members&quot;</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">&quot;serviceAccount:your-service-account&quot;</span>]
+  }],
+  <span class="ruby-string">&quot;rules&quot;</span> =<span class="ruby-operator">&gt;</span> []
+}
+</pre>
+
+<h3 id="method-i-policy-label-Examples">Examples<span><a href="#method-i-policy-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>By default, the policy values are memoized to reduce the number of API
+calls to the Pub/Sub service.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">policy</span>[<span class="ruby-string">&quot;bindings&quot;</span>]
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">policy</span>[<span class="ruby-string">&quot;rules&quot;</span>]
+</pre>
+
+<p>To retrieve the latest policy from the Pub/Sub service, use the
+<code>force</code> flag.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">policy</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">policy</span> <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="policy-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 408</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">policy</span> <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-ivar">@policy</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:force</span>]
+  <span class="ruby-ivar">@policy</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">ensure_connection!</span>
+    <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_topic_policy</span> <span class="ruby-identifier">name</span>
+    <span class="ruby-identifier">policy</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;policy&quot;</span>]
+    <span class="ruby-identifier">policy</span> = <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
+    <span class="ruby-identifier">policy</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="policy-3D-method" class="method ">
+  <a name="method-i-policy-3D"></a>
+
+  
+    <h4>
+      <code>policy=(new_policy)</code>
+      <span>
+        <a href="#method-i-policy-3D">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Sets the access control policy.</p>
+
+<h3 id="method-i-policy-3D-label-Parameters">Parameters<span><a href="#method-i-policy-3D-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>new_policy</code>
+<dd>
+<p>A hash that conforms to the following structure:</p>
+
+<pre class="ruby">{
+  <span class="ruby-string">&quot;bindings&quot;</span> =<span class="ruby-operator">&gt;</span> [{
+    <span class="ruby-string">&quot;role&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;roles/viewer&quot;</span>,
+    <span class="ruby-string">&quot;members&quot;</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">&quot;serviceAccount:your-service-account&quot;</span>]
+  }],
+  <span class="ruby-string">&quot;rules&quot;</span> =<span class="ruby-operator">&gt;</span> []
+}
+</pre>
+</dd></dl>
+
+<h3 id="method-i-policy-3D-label-Example">Example<span><a href="#method-i-policy-3D-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+
+<span class="ruby-identifier">viewer_policy</span> = {
+  <span class="ruby-string">&quot;bindings&quot;</span> =<span class="ruby-operator">&gt;</span> [{
+    <span class="ruby-string">&quot;role&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;roles/viewer&quot;</span>,
+    <span class="ruby-string">&quot;members&quot;</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">&quot;serviceAccount:your-service-account&quot;</span>]
+  }]
+}
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">topic</span>.<span class="ruby-identifier">policy</span> = <span class="ruby-identifier">viewer_policy</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="policy-3D-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 450</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">policy=</span> <span class="ruby-identifier">new_policy</span>
+  <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">set_topic_policy</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">new_policy</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-ivar">@policy</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;policy&quot;</span>]
+    <span class="ruby-ivar">@policy</span> = <span class="ruby-ivar">@policy</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@policy</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
   
 </div>
 
@@ -592,7 +759,7 @@ block</p>
 
     
       <!-- <div class="method-source-code" id="publish-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 347</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 349</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">publish</span> <span class="ruby-identifier">data</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">attributes</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">batch</span> = <span class="ruby-constant">Batch</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">data</span>, <span class="ruby-identifier">attributes</span>
@@ -618,7 +785,7 @@ block</p>
 
   
     <h4>
-      <code>subscribe(subscription_name = nil, options = {})</code>
+      <code>subscribe(subscription_name, options = {})</code>
       <span>
         <a href="#method-i-subscribe">&para;</a>
         <a href="#top">&uarr;</a>
@@ -634,9 +801,11 @@ current <a href="Topic.html">Topic</a>.</p>
 <h3 id="method-i-subscribe-label-Parameters">Parameters<span><a href="#method-i-subscribe-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <dl class="rdoc-list note-list"><dt><code>subscription_name</code>
 <dd>
-<p>Name of the new subscription. If the name is not provided in the request,
-the server will assign a random name for this subscription on the same
-project as the topic. (<code>String</code>)</p>
+<p>Name of the new subscription. Must start with a letter, and contain only
+letters ([A-Za-z]), numbers ([0-9], dashes (-), underscores (_), periods
+(.), tildes (~), plus (+) or percent signs (%). It must be between 3 and
+255 characters in length, and it must not start with “goog”.
+(<code>String</code>)</p>
 </dd><dt><code>options</code>
 <dd>
 <p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
@@ -692,8 +861,8 @@ and pushed all messages to an endpoint</p>
 
     
       <!-- <div class="method-source-code" id="subscribe-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 155</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">subscribe</span> <span class="ruby-identifier">subscription_name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">subscribe</span> <span class="ruby-identifier">subscription_name</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">create_subscription</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">subscription_name</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -763,7 +932,7 @@ exists.</p>
 
     
       <!-- <div class="method-source-code" id="subscription-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 195</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 197</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">subscription</span> <span class="ruby-identifier">subscription_name</span>
   <span class="ruby-identifier">ensure_connection!</span>
 
@@ -854,7 +1023,7 @@ href="Subscription/List.html#attribute-i-token">Gcloud::Pubsub::Subscription::Li
 
     
       <!-- <div class="method-source-code" id="subscriptions-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 287</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 289</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">subscriptions</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_topics_subscriptions</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>

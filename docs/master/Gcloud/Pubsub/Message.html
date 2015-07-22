@@ -232,7 +232,9 @@ to publish several messages in bulk.</p>
       <!-- <div class="method-source-code" id="attributes-source">
 <pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/message.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">attributes</span>
-  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;attributes&quot;</span>]
+  <span class="ruby-identifier">attrs</span> = <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;attributes&quot;</span>]
+  <span class="ruby-identifier">attrs</span> = <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
+  <span class="ruby-identifier">attrs</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -299,7 +301,7 @@ Guaranteed to be unique within the topic.</p>
 
     
       <!-- <div class="method-source-code" id="message_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/message.rb, line 73</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/message.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">message_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;messageId&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
