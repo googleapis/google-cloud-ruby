@@ -70,6 +70,22 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topic.wont_be :lazy?
   end
 
+  it "gets a lazy topic by providing the full name" do
+    topic_name = "projects/another-project/topics/another-topic"
+    topic = pubsub.topic topic_name
+    topic.name.must_equal topic_name
+    topic.name.wont_match project_path
+    topic.must_be :lazy?
+  end
+
+  it "gets a lazy topic by providing alternate project" do
+    topic_name = "another-topic"
+    topic = pubsub.topic topic_name, project: "another-project"
+    topic.name.must_equal "projects/another-project/topics/another-topic"
+    topic.name.wont_match project_path
+    topic.must_be :lazy?
+  end
+
   it "lists topics" do
     num_topics = 3
     mock_connection.get "/v1/projects/#{project}/topics" do |env|

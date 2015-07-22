@@ -35,7 +35,7 @@ describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
     describe "created with autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   true }
+                                                   autocreate: true }
 
       it "lists subscriptions" do
         mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
@@ -54,7 +54,7 @@ describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
     describe "created without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   false }
+                                                   autocreate: false }
 
       it "lists subscriptions" do
         mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
@@ -75,7 +75,7 @@ describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
     describe "created with autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   true }
+                                                   autocreate: true }
 
       it "lists subscriptions" do
         mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
@@ -92,7 +92,7 @@ describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
     describe "created without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   false }
+                                                   autocreate: false }
 
       it "lists subscriptions" do
         mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|

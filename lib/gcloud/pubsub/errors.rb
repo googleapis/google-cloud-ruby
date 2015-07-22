@@ -20,6 +20,15 @@ module Gcloud
     #
     # Base Pub/Sub exception class.
     class Error < Gcloud::Error
+      ##
+      # The response object of the failed HTTP request.
+      attr_reader :response
+
+      def self.from_response resp #:nodoc:
+        new.tap do |e|
+          e.response = resp
+        end
+      end
     end
 
     ##
@@ -29,23 +38,30 @@ module Gcloud
     class ApiError < Error
       ##
       # The code of the error.
-      attr_reader :code
+      def code
+        response.data["error"]["code"]
+      rescue
+        nil
+      end
 
       ##
       # The errors encountered.
-      attr_reader :errors
+      def errors
+        response.data["error"]["errors"]
+      rescue
+        []
+      end
 
-      def initialize message, code, errors
+      def initialize message, response
         super message
-        @code   = code
-        @errors = errors
+        @response = response
       end
 
       def self.from_response resp #:nodoc:
         klass = klass_for resp.data["error"]["status"]
-        klass.new resp.data["error"]["message"],
-                  resp.data["error"]["code"],
-                  resp.data["error"]["errors"]
+        klass.new resp.data["error"]["message"], resp
+      rescue
+        Gcloud::Pubsub::Error.from_response resp
       end
 
       def self.klass_for status
@@ -61,14 +77,14 @@ module Gcloud
     ##
     # = AlreadyExistsError
     #
-    # Raised when Pub/Sub returns an ALREADY_EXISTS error.
+    # Raised when Pub/Sub returns an +ALREADY_EXISTS+ error.
     class AlreadyExistsError < ApiError
     end
 
     ##
     # = NotFoundError
     #
-    # Raised when Pub/Sub returns a NOT_FOUND error.
+    # Raised when Pub/Sub returns a +NOT_FOUND+ error.
     class NotFoundError < ApiError
     end
   end

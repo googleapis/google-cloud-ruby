@@ -53,13 +53,13 @@ module Gcloud
 
       ##
       # New lazy Topic object without making an HTTP request.
-      def self.new_lazy name, conn #:nodoc:
+      def self.new_lazy name, conn, options = {} #:nodoc:
         sub = new.tap do |f|
           f.gapi = nil
           f.connection = conn
         end
         sub.instance_eval do
-          @name = conn.subscription_path(name)
+          @name = conn.subscription_path(name, options)
         end
         sub
       end
@@ -90,7 +90,7 @@ module Gcloud
         ensure_gapi!
         # Always disable autocreate, we don't want to recreate a topic that
         # was intentionally deleted.
-        Topic.new_lazy @gapi["topic"], connection, false
+        Topic.new_lazy @gapi["topic"], connection, autocreate: false
       end
 
       ##
@@ -188,6 +188,9 @@ module Gcloud
         end
       end
 
+      # rubocop:disable Metrics/MethodLength
+      # Disabled rubocop because these lines are needed.
+
       ##
       # Pulls messages from the server. Returns an empty list if there are no
       # messages available in the backlog. Raises an ApiError with status
@@ -199,15 +202,17 @@ module Gcloud
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:immediate]</code>::
-      #   When +true+, the system will respond immediately, either with a
-      #   message if available or +nil+ if no message is available. When not
-      #   specified, or when +false+, the call will block until a message is
-      #   available, or may return UNAVAILABLE if no messages become available
-      #   within a reasonable amount of time. (+Boolean+)
+      #   When +true+ the system will respond immediately even if it is not able
+      #   to return messages. When +false+ the system is allowed to wait until
+      #   it can return least one message. No messages are returned when a
+      #   request times out. The default value is +true+. (+Boolean+)
       # <code>options[:max]</code>::
       #   The maximum number of messages to return for this request. The Pub/Sub
       #   system may return fewer than the number specified. The default value
       #   is +100+, the maximum value is +1000+. (+Integer+)
+      # <code>options[:autoack]</code>::
+      #   Automatically acknowledge the message as it is pulled. The default
+      #   value is +false+. (+Boolean+)
       #
       # === Returns
       #
@@ -222,15 +227,6 @@ module Gcloud
       #   sub = pubsub.subscription "my-topic-sub"
       #   sub.pull.each { |msg| msg.acknowledge! }
       #
-      # Results can be returned immediately with the +:immediate+ option:
-      #
-      #   require "gcloud/pubsub"
-      #
-      #   pubsub = Gcloud.pubsub
-      #
-      #   sub = pubsub.subscription "my-topic-sub", immediate: true
-      #   sub.pull.each { |msg| msg.acknowledge! }
-      #
       # A maximum number of messages returned can also be specified:
       #
       #   require "gcloud/pubsub"
@@ -240,15 +236,135 @@ module Gcloud
       #   sub = pubsub.subscription "my-topic-sub", max: 10
       #   sub.pull.each { |msg| msg.acknowledge! }
       #
+      # The call can block until messages are available by setting the
+      # +:immediate+ option to +false+:
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   msgs = sub.pull immediate: false
+      #   msgs.each { |msg| msg.acknowledge! }
+      #
       def pull options = {}
         ensure_connection!
         resp = connection.pull name, options
         if resp.success?
-          Array(resp.data["receivedMessages"]).map do |gapi|
+          messages = Array(resp.data["receivedMessages"]).map do |gapi|
             ReceivedMessage.from_gapi gapi, self
           end
+          acknowledge messages if options[:autoack]
+          messages
         else
           fail ApiError.from_response(resp)
+        end
+      rescue Faraday::TimeoutError
+        []
+      end
+
+      # rubocop:enable Metrics/MethodLength
+
+      ##
+      # Pulls from the server while waiting for messages to become available.
+      # This is the same as:
+      #
+      #   subscription.pull immediate: false
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:max]</code>::
+      #   The maximum number of messages to return for this request. The Pub/Sub
+      #   system may return fewer than the number specified. The default value
+      #   is +100+, the maximum value is +1000+. (+Integer+)
+      # <code>options[:autoack]</code>::
+      #   Automatically acknowledge the message as it is pulled. The default
+      #   value is +false+. (+Boolean+)
+      #
+      # === Returns
+      #
+      # Array of Gcloud::Pubsub::ReceivedMessage
+      #
+      # === Example
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   msgs = sub.wait_for_messages
+      #   msgs.each { |msg| msg.acknowledge! }
+      #
+      def wait_for_messages options = {}
+        pull options.merge(immediate: false)
+      end
+
+      ##
+      # Poll the backend for new messages. This runs a loop to ping the API,
+      # blocking indefinitely, yielding retrieved messages as they are received.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:max]</code>::
+      #   The maximum number of messages to return for this request. The Pub/Sub
+      #   system may return fewer than the number specified. The default value
+      #   is +100+, the maximum value is +1000+. (+Integer+)
+      # <code>options[:autoack]</code>::
+      #   Automatically acknowledge the message as it is pulled. The default
+      #   value is +false+. (+Boolean+)
+      # <code>options[:delay]</code>::
+      #   The number of seconds to pause between requests when the Google Cloud
+      #   service has no messages to return. The default value is +1+.
+      #   (+Number+)
+      #
+      # === Examples
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   sub.listen do |msg|
+      #     # process msg
+      #   end
+      #
+      # The number of messages pulled per batch can be set with the +max+
+      # option:
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   sub.listen max: 20 do |msg|
+      #     # process msg
+      #   end
+      #
+      # Messages can be automatically acknowledged as they are pulled with the
+      # +autoack+ option:
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   sub = pubsub.subscription "my-topic-sub"
+      #   sub.listen autoack: true do |msg|
+      #     # process msg
+      #   end
+      #
+      def listen options = {}
+        delay = options.fetch(:delay, 1)
+        loop do
+          msgs = wait_for_messages options
+          if msgs.any?
+            msgs.each { |msg| yield msg }
+          else
+            sleep delay
+          end
         end
       end
 
@@ -323,6 +439,107 @@ module Gcloud
         resp = connection.modify_ack_deadline name, ack_ids, new_deadline
         if resp.success?
           true
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Gets the access control policy.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:force]</code>::
+      #   Force the latest policy to be retrieved from the Pub/Sub service when
+      #   +true. Otherwise the policy will be memoized to reduce the number of
+      #   API calls made to the Pub/Sub service. The default is +false+.
+      #   (+Boolean+)
+      #
+      # === Returns
+      #
+      # A hash that conforms to the following structure:
+      #
+      #   {
+      #     "bindings" => [{
+      #       "role" => "roles/viewer",
+      #       "members" => ["serviceAccount:your-service-account"]
+      #     }],
+      #     "rules" => []
+      #   }
+      #
+      # === Examples
+      #
+      # By default, the policy values are memoized to reduce the number of API
+      # calls to the Pub/Sub service.
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   subscription = pubsub.subscription "my-subscription"
+      #   puts subscription.policy["bindings"]
+      #   puts subscription.policy["rules"]
+      #
+      # To retrieve the latest policy from the Pub/Sub service, use the +force+
+      # flag.
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   subscription = pubsub.subscription "my-subscription"
+      #   policy = subscription.policy force: true
+      #
+      def policy options = {}
+        @policy = nil if options[:force]
+        @policy ||= begin
+          ensure_connection!
+          resp = connection.get_subscription_policy name
+          policy = resp.data["policy"]
+          policy = policy.to_hash if policy.respond_to? :to_hash
+          policy
+        end
+      end
+
+      ##
+      # Sets the access control policy.
+      #
+      # === Parameters
+      #
+      # +new_policy+::
+      #   A hash that conforms to the following structure:
+      #
+      #     {
+      #       "bindings" => [{
+      #         "role" => "roles/viewer",
+      #         "members" => ["serviceAccount:your-service-account"]
+      #       }],
+      #       "rules" => []
+      #     }
+      #
+      # === Example
+      #
+      #   require "gcloud/pubsub"
+      #
+      #   pubsub = Gcloud.pubsub
+      #
+      #   viewer_policy = {
+      #     "bindings" => [{
+      #       "role" => "roles/viewer",
+      #       "members" => ["serviceAccount:your-service-account"]
+      #     }]
+      #   }
+      #   subscription = pubsub.subscription "my-subscription"
+      #   subscription.policy = viewer_policy
+      #
+      def policy= new_policy
+        ensure_connection!
+        resp = connection.set_subscription_policy name, new_policy
+        if resp.success?
+          @policy = resp.data["policy"]
+          @policy = @policy.to_hash if @policy.respond_to? :to_hash
         else
           fail ApiError.from_response(resp)
         end

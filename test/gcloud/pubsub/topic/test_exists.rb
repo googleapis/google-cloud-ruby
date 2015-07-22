@@ -47,7 +47,7 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
     describe "lazy topic with explicit autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   true }
+                                                   autocreate: true }
 
       it "checks if the topic exists by making an HTTP call" do
         mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}" do |env|
@@ -64,7 +64,7 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
     describe "lazy topic without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   false }
+                                                   autocreate: false }
 
       it "checks if the topic exists by making an HTTP call" do
         mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}" do |env|
@@ -99,7 +99,7 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
     describe "lazy topic with explicit autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   true }
+                                                   autocreate: true }
 
       it "checks if the topic exists by making an HTTP call" do
         mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}" do |env|
@@ -116,7 +116,7 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
     describe "lazy topic without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   false }
+                                                   autocreate: false }
 
       it "checks if the topic exists by making an HTTP call" do
         mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}" do |env|

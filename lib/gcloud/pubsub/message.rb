@@ -64,7 +64,9 @@ module Gcloud
       ##
       # The received attributes.
       def attributes
-        @gapi["attributes"]
+        attrs = @gapi["attributes"]
+        attrs = attrs.to_hash if attrs.respond_to? :to_hash
+        attrs
       end
 
       ##

@@ -74,7 +74,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
     describe "created with autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   true }
+                                                   autocreate: true }
 
       it "publishes a message" do
         mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
@@ -124,7 +124,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
     describe "created without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   false }
+                                                   autocreate: false }
 
       it "publishes a message" do
         mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
@@ -177,7 +177,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
     describe "created with autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   true }
+                                                   autocreate: true }
 
       it "publishes a message" do
         #first, failed attempt to publish
@@ -261,7 +261,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
     describe "created without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   false }
+                                                   autocreate: false }
 
       it "publishes a message" do
         mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|

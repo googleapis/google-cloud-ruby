@@ -44,26 +44,26 @@ module Gcloud
       # this method is only useful to check the existence of a topic.
       # If other attributes are added in the future,
       # they will be returned here.
-      def get_topic topic_name
+      def get_topic topic_name, options = {}
         @client.execute(
           api_method: @pubsub.projects.topics.get,
-          parameters: { topic: topic_path(topic_name) }
+          parameters: { topic: topic_path(topic_name, options) }
         )
       end
 
       ##
       # Creates the given topic with the given name.
-      def create_topic topic_name
+      def create_topic topic_name, options = {}
         @client.execute(
           api_method: @pubsub.projects.topics.create,
-          parameters: { name: topic_path(topic_name) }
+          parameters: { name: topic_path(topic_name, options) }
         )
       end
 
       ##
       # Lists matching topics.
       def list_topics options = {}
-        params = { project: project_path,
+        params = { project: project_path(options),
                    pageToken: options.delete(:token),
                    pageSize: options.delete(:max)
                  }.delete_if { |_, v| v.nil? }
@@ -86,30 +86,46 @@ module Gcloud
         )
       end
 
+      def get_topic_policy topic_name, options = {}
+        @client.execute(
+          api_method: @pubsub.projects.topics.get_iam_policy,
+          parameters: { resource: topic_path(topic_name, options) }
+        )
+      end
+
+      def set_topic_policy topic_name, new_policy, options = {}
+        @client.execute(
+          api_method: @pubsub.projects.topics.set_iam_policy,
+          parameters: { resource: topic_path(topic_name, options) },
+          body_object: { policy: new_policy }
+        )
+      end
+
       ##
       # Creates a subscription on a given topic for a given subscriber.
-      def create_subscription topic, subscription_name = nil, options = {}
+      def create_subscription topic, subscription_name, options = {}
         data = subscription_data topic, options
         @client.execute(
           api_method: @pubsub.projects.subscriptions.create,
-          parameters: { name: subscription_path(subscription_name) },
+          parameters: { name: subscription_path(subscription_name, options) },
           body_object: data
         )
       end
 
       ##
       # Gets the details of a subscription.
-      def get_subscription subscription_name
+      def get_subscription subscription_name, options = {}
         @client.execute(
           api_method: @pubsub.projects.subscriptions.get,
-          parameters: { subscription: subscription_path(subscription_name) }
+          parameters: {
+            subscription: subscription_path(subscription_name, options) }
         )
       end
 
       ##
       # Lists matching subscriptions by project.
       def list_subscriptions options = {}
-        params = { project: project_path,
+        params = { project: project_path(options),
                    pageToken: options.delete(:token),
                    pageSize: options.delete(:max)
                  }.delete_if { |_, v| v.nil? }
@@ -141,6 +157,23 @@ module Gcloud
         @client.execute(
           api_method: @pubsub.projects.subscriptions.delete,
           parameters: { subscription: subscription }
+        )
+      end
+
+      def get_subscription_policy subscription_name, options = {}
+        @client.execute(
+          api_method: @pubsub.projects.subscriptions.get_iam_policy,
+          parameters: {
+            resource: subscription_path(subscription_name, options) }
+        )
+      end
+
+      def set_subscription_policy subscription_name, new_policy, options = {}
+        @client.execute(
+          api_method: @pubsub.projects.subscriptions.set_iam_policy,
+          parameters: {
+            resource: subscription_path(subscription_name, options) },
+          body_object: { policy: new_policy }
         )
       end
 
@@ -205,18 +238,19 @@ module Gcloud
         )
       end
 
-      def project_path
-        "projects/#{project}"
+      def project_path options = {}
+        project_name = options[:project] || project
+        "projects/#{project_name}"
       end
 
-      def topic_path topic_name
+      def topic_path topic_name, options = {}
         return topic_name if topic_name.to_s.include? "/"
-        "#{project_path}/topics/#{topic_name}"
+        "#{project_path(options)}/topics/#{topic_name}"
       end
 
-      def subscription_path subscription_name
+      def subscription_path subscription_name, options = {}
         return subscription_name if subscription_name.to_s.include? "/"
-        "#{project_path}/subscriptions/#{subscription_name}"
+        "#{project_path(options)}/subscriptions/#{subscription_name}"
       end
 
       protected

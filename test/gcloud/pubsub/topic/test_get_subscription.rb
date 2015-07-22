@@ -46,7 +46,7 @@ describe Gcloud::Pubsub::Topic, :get_subscription, :mock_pubsub do
     describe "created with autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   true }
+                                                   autocreate: true }
 
       it "gets an existing subscription" do
         mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
@@ -73,7 +73,7 @@ describe Gcloud::Pubsub::Topic, :get_subscription, :mock_pubsub do
     describe "created without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   false }
+                                                   autocreate: false }
 
       it "gets an existing subscription" do
         mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
@@ -102,7 +102,7 @@ describe Gcloud::Pubsub::Topic, :get_subscription, :mock_pubsub do
     describe "created with autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   true }
+                                                   autocreate: true }
 
       it "returns nil when getting an non-existant subscription" do
         # by definition, all subscriptions for this topic are non-existant
@@ -119,7 +119,7 @@ describe Gcloud::Pubsub::Topic, :get_subscription, :mock_pubsub do
     describe "created without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                    pubsub.connection,
-                                                   false }
+                                                   autocreate: false }
 
       it "returns nil when getting an non-existant subscription" do
         mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|

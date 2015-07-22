@@ -161,16 +161,6 @@ module Gcloud
   #   sub = topic.subscribe "my-topic-sub"
   #   puts sub.name # => "my-topic-sub"
   #
-  # The name is optional, and will be generated if not given.
-  #
-  #   require "gcloud/pubsub"
-  #
-  #   pubsub = Gcloud.pubsub
-  #
-  #   topic = pubsub.topic "my-topic"
-  #   sub = topic.subscribe "my-topic-sub"
-  #   puts sub.name # => "generated-sub-name"
-  #
   # The subscription can be created that specifies the number of seconds to
   # wait to be acknowledged as well as an endpoint URL to push the messages to:
   #
@@ -183,24 +173,49 @@ module Gcloud
   #                         deadline: 120,
   #                         endpoint: "https://example.com/push"
   #
+  # == Working Across Projects
+  #
+  # All calls to the Pub/Sub service use the same project and credentials
+  # provided to the Gcloud.pubsub method. However, it is common to reference
+  # topics or subscriptions in other projects, which can be achieved by using
+  # the +project+ option. The main credentials must have permissions to the
+  # topics and subscriptions in other projects.
+  #
+  #   require "gcloud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub # my-project-id
+  #
+  #   # Get a topic in the current project
+  #   my_topic = pubsub.topic "my-topic"
+  #   my_topic.name #=> "projects/my-project-id/topics/my-topic"
+  #   # Get a topic in another project
+  #   other_topic = pubsub.topic "other-topic", project: "other-project-id"
+  #   other_topic.name #=> "projects/other-project-id/topics/other-topic"
+  #
+  # It is possible to create a subscription in the current project that pulls
+  # from a topic in another project:
+  #
+  #   require "gcloud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub # my-project-id
+  #
+  #   # Get a topic in another project
+  #   topic = pubsub.topic "other-topic", project: "other-project-id"
+  #   # Create a subscription in the current project that pulls from
+  #   # the topic in another project
+  #   sub = topic.subscribe "my-sub"
+  #   sub.name #=> "projects/my-project-id/subscriptions/my-sub"
+  #   sub.topic.name #=> "projects/other-project-id/topics/other-topic"
+  #
   # == Pulling Messages
   #
-  # Messages are pulled from a Subscription.
+  # Messages are pulled from a Subscription. (See Subscription#pull)
   #
   #   require "gcloud/pubsub"
   #
   #   pubsub = Gcloud.pubsub
   #
   #   sub = pubsub.subscription "my-topic-sub"
-  #   msgs = sub.pull
-  #
-  # Results can be returned immediately with the +:immediate+ option:
-  #
-  #   require "gcloud/pubsub"
-  #
-  #   pubsub = Gcloud.pubsub
-  #
-  #   sub = pubsub.subscription "my-topic-sub", immediate: true
   #   msgs = sub.pull
   #
   # A maximum number of messages returned can also be specified:
@@ -211,6 +226,16 @@ module Gcloud
   #
   #   sub = pubsub.subscription "my-topic-sub", max: 10
   #   msgs = sub.pull
+  #
+  # The request for messages can also block until messages are available.
+  # (See Subscription#wait_for_messages)
+  #
+  #   require "gcloud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   msgs = sub.wait_for_messages
   #
   # == Acknowledging a Message
   #
@@ -282,6 +307,46 @@ module Gcloud
   #   sub = pubsub.subscription "my-topic-sub"
   #   received_messages = sub.pull
   #   sub.delay 120, received_messages
+  #
+  # == Listening for Messages
+  #
+  # Long running workers are easy to create with +listen+, which runs an
+  # infinitely blocking loop to process messages as they are received. (See
+  # Subscription#listen)
+  #
+  #   require "gcloud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   sub.listen do |msg|
+  #     # process msg
+  #   end
+  #
+  # Messages are retrieved in batches for efficiency. The number of messages
+  # pulled per batch can be limited with the +max+ option:
+  #
+  #   require "gcloud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   sub.listen max: 20 do |msg|
+  #     # process msg
+  #   end
+  #
+  # When processing time and the acknowledgement deadline are a concern,
+  # messages can be automatically acknowledged as they are pulled with the
+  # +autoack+ option:
+  #
+  #   require "gcloud/pubsub"
+  #
+  #   pubsub = Gcloud.pubsub
+  #
+  #   sub = pubsub.subscription "my-topic-sub"
+  #   sub.listen autoack: true do |msg|
+  #     # process msg
+  #   end
   #
   module Pubsub
   end
