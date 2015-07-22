@@ -62,7 +62,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
-      #   user = datastore.find "User", "heidi"
+      #   user = dataset.find "User", "heidi"
       #   user["name"] #=> "Heidi Henderson"
       #
       # Or with a symbol name:
@@ -71,7 +71,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
-      #   user = datastore.find "User", "heidi"
+      #   user = dataset.find "User", "heidi"
       #   user[:name] #=> "Heidi Henderson"
       #
       def [] prop_name
@@ -96,7 +96,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
-      #   user = datastore.find "User", "heidi"
+      #   user = dataset.find "User", "heidi"
       #   user["name"] = "Heidi H. Henderson"
       #
       # Or with a symbol name:
@@ -105,7 +105,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
-      #   user = datastore.find "User", "heidi"
+      #   user = dataset.find "User", "heidi"
       #   user[:name] = "Heidi H. Henderson"
       #
       def []= prop_name, prop_value

@@ -234,7 +234,7 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
-  #   entity = datastore.find "User", "heidi"
+  #   entity = dataset.find "User", "heidi"
   #   # Read the status property
   #   entity["status"] #=> "inactive"
   #   # Write the status property
@@ -251,7 +251,7 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
-  #   entity = datastore.find "User", "heidi"
+  #   entity = dataset.find "User", "heidi"
   #   dataset.delete entity
   #
   # == Transactions
