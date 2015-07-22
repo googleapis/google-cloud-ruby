@@ -105,6 +105,8 @@ href="AUTHENTICATION.md">Authentication Guide</a>.</p>
           
             <a href="#method-c-datastore">datastore</a>
           
+            <a href="#method-c-new">new</a>
+          
             <a href="#method-c-pubsub">pubsub</a>
           
             <a href="#method-c-storage">storage</a>
@@ -112,6 +114,18 @@ href="AUTHENTICATION.md">Authentication Guide</a>.</p>
         </div>
       
     
+        <div>
+          Public Instance Methods:
+
+          
+            <a href="#method-i-datastore">datastore</a>
+          
+            <a href="#method-i-pubsub">pubsub</a>
+          
+            <a href="#method-i-storage">storage</a>
+          
+        </div>
+      
     
   
 </div>
@@ -206,6 +220,71 @@ readable. (<code>String</code> or <code>Hash</code>)</p>
     <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Dataset</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="new-method" class="method ">
+  <a name="method-c-new"></a>
+
+  
+    <h4>
+      <code>new(project = nil, keyfile = nil)</code>
+      <span>
+        <a href="#method-c-new">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Creates a new object for connecting to Google Cloud.</p>
+
+<h3 id="method-c-new-label-Parameters">Parameters<span><a href="#method-c-new-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>project</code>
+<dd>
+<p>Project identifier for the Pub/Sub service you are connecting to.
+(<code>String</code>)</p>
+</dd><dt><code>keyfile</code>
+<dd>
+<p>Keyfile downloaded from Google Cloud. If file path the file must be
+readable. (<code>String</code> or <code>Hash</code>)</p>
+</dd></dl>
+
+<h3 id="method-c-new-label-Returns">Returns<span><a href="#method-c-new-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Gcloud.html">Gcloud</a></p>
+
+<h3 id="method-c-new-label-Example">Example<span><a href="#method-c-new-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span>  = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">pubsub</span>  = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="new-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">instance_eval</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@project</span> = <span class="ruby-identifier">project</span>
+    <span class="ruby-ivar">@keyfile</span> = <span class="ruby-identifier">keyfile</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">Gcloud</span>
+  <span class="ruby-identifier">gcloud</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -355,6 +434,171 @@ readable. (<code>String</code> or <code>Hash</code>)</p>
     </div>
   
 
+    <div id="public-instance-methods" class="section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+      <div class="methods">
+        
+          <div id="datastore-method" class="method ">
+  <a name="method-i-datastore"></a>
+
+  
+    <h4>
+      <code>datastore()</code>
+      <span>
+        <a href="#method-i-datastore">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Creates a new object for connecting to the <a
+href="Gcloud/Datastore.html">Datastore</a> service. Each call creates a new
+connection.</p>
+
+<h3 id="method-i-datastore-label-Returns">Returns<span><a href="#method-i-datastore-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Gcloud/Datastore/Dataset.html">Gcloud::Datastore::Dataset</a></p>
+
+<h3 id="method-i-datastore-label-Example">Example<span><a href="#method-i-datastore-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span>  = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
+
+<span class="ruby-identifier">entity</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>
+<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;description&quot;</span>] = <span class="ruby-string">&quot;Get started with Google Cloud&quot;</span>
+<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;completed&quot;</span>] = <span class="ruby-keyword">false</span>
+
+<span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">entity</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="datastore-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">datastore</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="pubsub-method" class="method ">
+  <a name="method-i-pubsub"></a>
+
+  
+    <h4>
+      <code>pubsub()</code>
+      <span>
+        <a href="#method-i-pubsub">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Creates a new object for connecting to the Pub/Sub service. Each call
+creates a new connection.</p>
+
+<h3 id="method-i-pubsub-label-Returns">Returns<span><a href="#method-i-pubsub-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Gcloud/Pubsub/Project.html">Gcloud::Pubsub::Project</a></p>
+
+<h3 id="method-i-pubsub-label-Example">Example<span><a href="#method-i-pubsub-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;task completed&quot;</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="pubsub-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 135</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pubsub</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="storage-method" class="method ">
+  <a name="method-i-storage"></a>
+
+  
+    <h4>
+      <code>storage()</code>
+      <span>
+        <a href="#method-i-storage">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Creates a new object for connecting to the <a
+href="Gcloud/Storage.html">Storage</a> service. Each call creates a new
+connection.</p>
+
+<h3 id="method-i-storage-label-Returns">Returns<span><a href="#method-i-storage-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Gcloud/Storage/Project.html">Gcloud::Storage::Project</a></p>
+
+<h3 id="method-i-storage-label-Example">Example<span><a href="#method-i-storage-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span>  = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="storage-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">storage</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+      </div>
+    </div>
+  
 
 
 

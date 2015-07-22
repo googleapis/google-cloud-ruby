@@ -77,9 +77,10 @@
 <p>Represents a Pub/Sub <a href="Message.html">Message</a> that can be
 acknowledged or delayed.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
 <span class="ruby-identifier">received_message</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
@@ -210,7 +211,7 @@ acknowledged or delayed.</p>
 
     
       <!-- <div class="method-source-code" id="ack_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 55</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ack_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;ackId&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -243,9 +244,10 @@ acknowledged or delayed.</p>
 
 <h3 id="method-i-acknowledge-21-label-Example">Example<span><a href="#method-i-acknowledge-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
 <span class="ruby-identifier">received_message</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
@@ -258,7 +260,7 @@ acknowledged or delayed.</p>
 
     
       <!-- <div class="method-source-code" id="acknowledge-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 102</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acknowledge!</span>
   <span class="ruby-identifier">ensure_subscription!</span>
   <span class="ruby-identifier">subscription</span>.<span class="ruby-identifier">acknowledge</span> <span class="ruby-identifier">ack_id</span>
@@ -297,7 +299,7 @@ acknowledged or delayed.</p>
 
     
       <!-- <div class="method-source-code" id="attributes-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 74</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">attributes</span>
   <span class="ruby-identifier">message</span>.<span class="ruby-identifier">attributes</span>
 <span class="ruby-keyword">end</span></pre>
@@ -331,7 +333,7 @@ acknowledged or delayed.</p>
 
     
       <!-- <div class="method-source-code" id="data-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 68</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span>
   <span class="ruby-identifier">message</span>.<span class="ruby-identifier">data</span>
 <span class="ruby-keyword">end</span></pre>
@@ -377,9 +379,10 @@ available for another pull request. (<code>Integer</code>)</p>
 
 <h3 id="method-i-delay-21-label-Example">Example<span><a href="#method-i-delay-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
 <span class="ruby-identifier">received_message</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
@@ -393,7 +396,7 @@ available for another pull request. (<code>Integer</code>)</p>
 
     
       <!-- <div class="method-source-code" id="delay-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 137</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delay!</span> <span class="ruby-identifier">new_deadline</span>
   <span class="ruby-identifier">ensure_subscription!</span>
   <span class="ruby-identifier">connection</span> = <span class="ruby-identifier">subscription</span>.<span class="ruby-identifier">connection</span>
@@ -435,7 +438,7 @@ available for another pull request. (<code>Integer</code>)</p>
 
     
       <!-- <div class="method-source-code" id="message-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 61</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">message</span>
   <span class="ruby-constant">Message</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;message&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -474,7 +477,7 @@ Guaranteed to be unique within the topic.</p>
 
     
       <!-- <div class="method-source-code" id="message_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 81</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/received_message.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">message_id</span>
   <span class="ruby-identifier">message</span>.<span class="ruby-identifier">message_id</span>
 <span class="ruby-keyword">end</span></pre>

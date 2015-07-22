@@ -82,15 +82,16 @@ data operations in a cost effective manner.</p>
 
 <p>Gcloud&#39;s goal is to provide a API that is familiar and comfortable to
 Rubyists. Authentication is handled by <a
-href="../Gcloud.html#method-c-storage">Gcloud.storage</a>. You can provide
+href="../Gcloud.html#method-i-storage">Gcloud#storage</a>. You can provide
 the project and credential information to connect to the <a
 href="Storage.html">Storage</a> service, or if you are running on Google
 Compute Engine this configuration is taken care of for you.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
-                         <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
+                    <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
@@ -111,9 +112,10 @@ project. You can use buckets to organize and control access to your data.
 Each bucket has a unique name, which is how they are retrieved: (See <a
 href="Storage/Project.html#method-i-bucket">Gcloud::Storage::Project#bucket</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 </pre>
@@ -121,9 +123,10 @@ href="Storage/Project.html#method-i-bucket">Gcloud::Storage::Project#bucket</a>)
 <p>You can also retrieve all buckets on a project: (See <a
 href="Storage/Project.html#method-i-buckets">Gcloud::Storage::Project#buckets</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">all_buckets</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">buckets</span>
 </pre>
@@ -132,9 +135,10 @@ href="Storage/Project.html#method-i-buckets">Gcloud::Storage::Project#buckets</a
 through them: (See <a
 href="Storage/Bucket/List.html#attribute-i-token">Gcloud::Storage::Bucket::List#token</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">all_buckets</span> = []
 <span class="ruby-identifier">tmp_buckets</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">buckets</span>
@@ -154,9 +158,10 @@ href="Storage/Bucket/List.html#attribute-i-token">Gcloud::Storage::Bucket::List#
 <p>A unique name is all that is needed to create a new bucket: (See <a
 href="Storage/Project.html#method-i-create_bucket">Gcloud::Storage::Project#create_bucket</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">create_bucket</span> <span class="ruby-string">&quot;my-todo-app-attachments&quot;</span>
 </pre>
@@ -173,9 +178,10 @@ of objects that you can create in a bucket.</p>
 bucket: (See <a
 href="Storage/Bucket.html#method-i-file">Gcloud::Storage::Bucket#file</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
@@ -184,9 +190,10 @@ href="Storage/Bucket.html#method-i-file">Gcloud::Storage::Bucket#file</a>)</p>
 <p>You can also retrieve all files in a bucket: (See <a
 href="Storage/Bucket.html#method-i-files">Gcloud::Storage::Bucket#files</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">all_files</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">files</span>
@@ -194,9 +201,10 @@ href="Storage/Bucket.html#method-i-files">Gcloud::Storage::Bucket#files</a>)</p>
 
 <p>Or you can retrieve all files in a specified path:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">avatar_files</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">files</span> <span class="ruby-identifier">prefix</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;avatars/&quot;</span>
@@ -206,9 +214,10 @@ href="Storage/Bucket.html#method-i-files">Gcloud::Storage::Bucket#files</a>)</p>
 them: (See <a
 href="Storage/File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 
@@ -232,9 +241,10 @@ the location of a file on the local file system, and the name/path that the
 file should be stored in the bucket. (See <a
 href="Storage/Bucket.html#method-i-create_file">Gcloud::Storage::Bucket#create_file</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">create_file</span> <span class="ruby-string">&quot;/var/todo-app/avatars/heidi/400x400.png&quot;</span>,
@@ -246,9 +256,10 @@ href="Storage/Bucket.html#method-i-create_file">Gcloud::Storage::Bucket#create_f
 <p>Files can be downloaded to the local file system. (See <a
 href="Storage/File.html#method-i-download">Gcloud::Storage::File#download</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
@@ -263,9 +274,10 @@ uses a cryptographic signature of your credentials to access the file. (See
 <a
 href="Storage/File.html#method-i-signed_url">Gcloud::Storage::File#signed_url</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
@@ -286,9 +298,10 @@ guide</a> for more.</p>
 <p>Access to a bucket can be granted to a user by appending +“user-”+ to the
 email address:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 
@@ -299,9 +312,10 @@ email address:</p>
 <p>Access to a bucket can be granted to a group by appending +“group-”+ to the
 email address:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 
@@ -311,9 +325,10 @@ email address:</p>
 
 <p>Access to a bucket can also be granted to a predefined list of permissions:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 
@@ -331,9 +346,10 @@ href="Storage/File.html#method-i-acl">Gcloud::Storage::File#acl</a>.</p>
 <p>Access to a file can be granted to a user by appending +“user-”+ to the
 email address:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
@@ -345,9 +361,10 @@ email address:</p>
 <p>Access to a file can be granted to a group by appending +“group-”+ to the
 email address:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
@@ -358,9 +375,10 @@ email address:</p>
 
 <p>Access to a file can also be granted to a predefined list of permissions:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
@@ -437,7 +455,7 @@ then resumable uploads are used.</p>
 
     
       <!-- <div class="method-source-code" id="resumable_threshold-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage.rb, line 329</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage.rb, line 347</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resumable_threshold</span>
   <span class="ruby-identifier">@@resumable_threshold</span>
 <span class="ruby-keyword">end</span></pre>
@@ -471,7 +489,7 @@ then resumable uploads are used.</p>
 
     
       <!-- <div class="method-source-code" id="resumable_threshold-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage.rb, line 335</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage.rb, line 353</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resumable_threshold=</span> <span class="ruby-identifier">new_resumable_threshold</span>
   <span class="ruby-comment"># rubocop:disable Style/ClassVars</span>
   <span class="ruby-comment"># Disabled rubocop because this is the best option.</span>

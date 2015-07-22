@@ -77,9 +77,10 @@
 <p>Represents the File/Object that belong to a <a
 href="Bucket.html">Bucket</a>.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -200,9 +201,10 @@ guide </a> for more.</p>
 <p>Access to a file can be granted to a user by appending +“user-”+ to the
 email address:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
@@ -214,9 +216,10 @@ email address:</p>
 <p>Access to a file can be granted to a group by appending +“group-”+ to the
 email address:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
@@ -227,9 +230,10 @@ email address:</p>
 
 <p>Access to a file can also be granted to a predefined list of permissions:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
@@ -240,7 +244,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 449</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 462</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acl</span>
   <span class="ruby-ivar">@acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -274,7 +278,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="bucket-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 73</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">bucket</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;bucket&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -358,9 +362,10 @@ access.</p>
 
 <p>The file can also be copied to a new path in the current bucket:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -370,9 +375,10 @@ access.</p>
 
 <p>The file can also be copied to a different bucket:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -384,7 +390,7 @@ access.</p>
 
     
       <!-- <div class="method-source-code" id="copy-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 274</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 281</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">copy</span> <span class="ruby-identifier">dest_bucket_or_path</span>, <span class="ruby-identifier">dest_path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">dest_bucket</span>, <span class="ruby-identifier">dest_path</span>, <span class="ruby-identifier">options</span> = <span class="ruby-identifier">fix_copy_args</span> <span class="ruby-identifier">dest_bucket_or_path</span>,
@@ -429,7 +435,7 @@ base64.</p>
 
     
       <!-- <div class="method-source-code" id="crc32c-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 122</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">crc32c</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;crc32c&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -466,9 +472,10 @@ base64.</p>
 
 <h3 id="method-i-delete-label-Example">Example<span><a href="#method-i-delete-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -479,7 +486,7 @@ base64.</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 306</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 314</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_file</span> <span class="ruby-identifier">bucket</span>, <span class="ruby-identifier">name</span>
@@ -547,9 +554,10 @@ correct. Default is <code>:md5</code>. (<code>Symbol</code>)</p>
 
 <h3 id="method-i-download-label-Examples">Examples<span><a href="#method-i-download-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -560,9 +568,10 @@ correct. Default is <code>:md5</code>. (<code>Symbol</code>)</p>
 <p>The download is verified by calculating the MD5 digest. The CRC32c digest
 can be used by passing :crc32c.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -572,9 +581,10 @@ can be used by passing :crc32c.</p>
 
 <p>Both the MD5 and CRC32c digest can be used by passing :all.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -584,9 +594,10 @@ can be used by passing :crc32c.</p>
 
 <p>The download verification can be disabled by passing :none</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -597,7 +608,7 @@ can be used by passing :crc32c.</p>
 
     
       <!-- <div class="method-source-code" id="download-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 201</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 206</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">download</span> <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">download_file</span> <span class="ruby-identifier">bucket</span>, <span class="ruby-identifier">name</span>
@@ -640,7 +651,7 @@ can be used by passing :crc32c.</p>
 
     
       <!-- <div class="method-source-code" id="etag-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 128</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 129</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">etag</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;etag&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -674,7 +685,7 @@ can be used by passing :crc32c.</p>
 
     
       <!-- <div class="method-source-code" id="generation-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 80</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">generation</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;generation&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -708,7 +719,7 @@ can be used by passing :crc32c.</p>
 
     
       <!-- <div class="method-source-code" id="id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 61</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;id&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -742,7 +753,7 @@ can be used by passing :crc32c.</p>
 
     
       <!-- <div class="method-source-code" id="kind-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 55</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">kind</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;kind&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -776,7 +787,7 @@ can be used by passing :crc32c.</p>
 
     
       <!-- <div class="method-source-code" id="md5-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 115</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">md5</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;md5Hash&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -813,7 +824,7 @@ particular file.</p>
 
     
       <!-- <div class="method-source-code" id="metageneration-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 89</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">metageneration</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;metageneration&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -847,7 +858,7 @@ particular file.</p>
 
     
       <!-- <div class="method-source-code" id="name-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 67</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;name&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -884,7 +895,7 @@ Control Signed URLs guide </a> for more.</p>
 
 <p>Generating a URL requires service account credentials, either by connecting
 with a service account when calling <a
-href="../../Gcloud.html#method-c-storage">Gcloud.storage</a>, or by passing
+href="../../Gcloud.html#method-i-storage">Gcloud#storage</a>, or by passing
 in the service account <code>issuer</code> and <code>signing_key</code>
 values. A <a href="SignedUrlUnavailable.html">SignedUrlUnavailable</a> is
 raised if the service account credentials are missing. Service account
@@ -926,9 +937,10 @@ value in its request. (<code>String</code>)</p>
 
 <h3 id="method-i-signed_url-label-Examples">Examples<span><a href="#method-i-signed_url-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
@@ -937,9 +949,10 @@ value in its request. (<code>String</code>)</p>
 
 <p>Any of the option parameters may be specified:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
@@ -968,7 +981,7 @@ efficient when making multiple calls to <code>signed_url</code>.</p>
 
     
       <!-- <div class="method-source-code" id="signed_url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 393</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 403</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">signed_url</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">signer</span> = <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Signer</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
@@ -1004,7 +1017,7 @@ efficient when making multiple calls to <code>signed_url</code>.</p>
 
     
       <!-- <div class="method-source-code" id="size-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 101</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">size</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;size&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -1039,7 +1052,7 @@ enabled, changing an object&#39;s metadata does not change this property.</p>
 
     
       <!-- <div class="method-source-code" id="updated_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 109</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">updated_at</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;updated&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -1073,7 +1086,7 @@ enabled, changing an object&#39;s metadata does not change this property.</p>
 
     
       <!-- <div class="method-source-code" id="url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 95</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">url</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
 <span class="ruby-keyword">end</span></pre>

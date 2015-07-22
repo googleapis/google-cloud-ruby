@@ -320,26 +320,28 @@ exist</p>
 <p><a href="Properties.html">Properties</a> can be retrieved with a string
 name:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">user</span> = <span class="ruby-identifier">datastore</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
 <span class="ruby-identifier">user</span>[<span class="ruby-string">&quot;name&quot;</span>] <span class="ruby-comment">#=&gt; &quot;Heidi Henderson&quot;</span>
 </pre>
 
 <p>Or with a symbol name:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">user</span> = <span class="ruby-identifier">datastore</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
 <span class="ruby-identifier">user</span>[:<span class="ruby-identifier">name</span>] <span class="ruby-comment">#=&gt; &quot;Heidi Henderson&quot;</span>
 </pre>
     
 
     
       <!-- <div class="method-source-code" id="5B-5D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 75</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span> <span class="ruby-identifier">prop_name</span>
   <span class="ruby-ivar">@properties</span>[<span class="ruby-identifier">prop_name</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -383,26 +385,28 @@ name:</p>
 
 <p><a href="Properties.html">Properties</a> can be set with a string name:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">user</span> = <span class="ruby-identifier">datastore</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
 <span class="ruby-identifier">user</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;Heidi H. Henderson&quot;</span>
 </pre>
 
 <p>Or with a symbol name:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">user</span> = <span class="ruby-identifier">datastore</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
 <span class="ruby-identifier">user</span>[:<span class="ruby-identifier">name</span>] = <span class="ruby-string">&quot;Heidi H. Henderson&quot;</span>
 </pre>
     
 
     
       <!-- <div class="method-source-code" id="5B-5D-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 107</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span> <span class="ruby-identifier">prop_name</span>, <span class="ruby-identifier">prop_value</span>
   <span class="ruby-ivar">@properties</span>[<span class="ruby-identifier">prop_name</span>] = <span class="ruby-identifier">prop_value</span>
 <span class="ruby-keyword">end</span></pre>
@@ -465,7 +469,7 @@ each item in the array.</p>
 
     
       <!-- <div class="method-source-code" id="exclude_from_indexes-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 240</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 247</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">exclude_from_indexes!</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
   <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">flag</span> = <span class="ruby-identifier">block</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
@@ -518,7 +522,7 @@ href="../Datastore.html">Datastore</a> indexes. The default value is false.</p>
 
     
       <!-- <div class="method-source-code" id="exclude_from_indexes-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 208</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 215</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">exclude_from_indexes?</span> <span class="ruby-identifier">name</span>
   <span class="ruby-identifier">value</span> = <span class="ruby-keyword">self</span>[<span class="ruby-identifier">name</span>]
   <span class="ruby-identifier">flag</span> = <span class="ruby-ivar">@_exclude_indexes</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>]
@@ -555,9 +559,10 @@ href="../Datastore.html">Datastore</a> indexes. The default value is false.</p>
 
 <p>The <a href="Key.html">Key</a> can be set before the entity is saved.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
 <span class="ruby-identifier">entity</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span>
 <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">entity</span>
@@ -566,9 +571,10 @@ href="../Datastore.html">Datastore</a> indexes. The default value is false.</p>
 <p>Once the entity is saved, the key is frozen and immutable. Trying to set a
 key when immutable will raise a <code>RuntimeError</code>.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
 <span class="ruby-identifier">entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
 <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">persisted?</span> <span class="ruby-comment">#=&gt; true</span>
 <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span> <span class="ruby-comment">#=&gt; RuntimeError</span>
@@ -579,7 +585,7 @@ key when immutable will raise a <code>RuntimeError</code>.</p>
 
     
       <!-- <div class="method-source-code" id="key-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 171</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 177</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">key=</span> <span class="ruby-identifier">new_key</span>
   <span class="ruby-identifier">fail</span> <span class="ruby-string">&quot;This entity&#39;s key is immutable.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">persisted?</span>
   <span class="ruby-ivar">@key</span> = <span class="ruby-identifier">new_key</span>
@@ -613,9 +619,10 @@ key when immutable will raise a <code>RuntimeError</code>.</p>
 
 <h3 id="method-i-persisted-3F-label-Example">Example<span><a href="#method-i-persisted-3F-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
 
 <span class="ruby-identifier">new_entity</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">new_entity</span>.<span class="ruby-identifier">persisted?</span> <span class="ruby-comment">#=&gt; false</span>
@@ -627,7 +634,7 @@ key when immutable will raise a <code>RuntimeError</code>.</p>
 
     
       <!-- <div class="method-source-code" id="persisted-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 191</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/entity.rb, line 198</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">persisted?</span>
   <span class="ruby-ivar">@key</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">frozen?</span>
 <span class="ruby-keyword">end</span></pre>

@@ -85,15 +85,16 @@ href="Bucket.html">Gcloud::Storage::Bucket</a> objects are created, read,
 updated, and deleted by <a
 href="Project.html">Gcloud::Storage::Project</a>.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">file</span> <span class="ruby-string">&quot;path/to/my-file.ext&quot;</span>
 </pre>
 
-<p>See <a href="../../Gcloud.html#method-c-storage">Gcloud.storage</a></p>
+<p>See <a href="../../Gcloud.html#method-i-storage">Gcloud#storage</a></p>
 
         </div>
 
@@ -187,9 +188,10 @@ exist</p>
 
 <h3 id="method-i-bucket-label-Example">Example<span><a href="#method-i-bucket-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">name</span>
@@ -198,7 +200,7 @@ exist</p>
 
     
       <!-- <div class="method-source-code" id="bucket-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 169</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 175</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">bucket</span> <span class="ruby-identifier">bucket_name</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_bucket</span> <span class="ruby-identifier">bucket_name</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -263,9 +265,10 @@ results to view. (<code>String</code>)</p>
 
 <h3 id="method-i-buckets-label-Examples">Examples<span><a href="#method-i-buckets-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">buckets</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">buckets</span>
 <span class="ruby-identifier">buckets</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">bucket</span><span class="ruby-operator">|</span>
@@ -276,9 +279,10 @@ results to view. (<code>String</code>)</p>
 <p>You can also retrieve all buckets whose names begin with a prefix using the
 <code>:prefix</code> option:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">user_buckets</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">buckets</span> <span class="ruby-identifier">prefix</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;user-&quot;</span>
 </pre>
@@ -287,9 +291,10 @@ results to view. (<code>String</code>)</p>
 through them: (See <a
 href="Bucket/List.html#attribute-i-token">Gcloud::Storage::Bucket::List#token</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">all_buckets</span> = []
 <span class="ruby-identifier">tmp_buckets</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">buckets</span>
@@ -307,7 +312,7 @@ href="Bucket/List.html#attribute-i-token">Gcloud::Storage::Bucket::List#token</a
 
     
       <!-- <div class="method-source-code" id="buckets-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 138</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">buckets</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_buckets</span> <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -367,9 +372,10 @@ href="../Backoff.html#attribute-c-retries">Gcloud::Backoff.retries</a>.
 
 <h3 id="method-i-create_bucket-label-Examples">Examples<span><a href="#method-i-create_bucket-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">create_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 </pre>
@@ -379,9 +385,10 @@ See <a href="../Backoff.html">Gcloud::Backoff</a> to control this behavior,
 or specify the wanted behavior in the call with the <code>:retries:</code>
 option:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">create_bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>, <span class="ruby-identifier">retries</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>
 </pre>
@@ -389,7 +396,7 @@ option:</p>
 
     
       <!-- <div class="method-source-code" id="create_bucket-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 215</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 223</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_bucket</span> <span class="ruby-identifier">bucket_name</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>] = <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">predefined_rule_for</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>]
   <span class="ruby-identifier">default_acl</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:default_acl</span>]
@@ -494,10 +501,11 @@ option:</p>
 
 <h3 id="method-i-project-label-Example">Example<span><a href="#method-i-project-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
-                         <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
+                    <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">project</span> <span class="ruby-comment">#=&gt; &quot;my-todo-project&quot;</span>
 </pre>
@@ -505,7 +513,7 @@ option:</p>
 
     
       <!-- <div class="method-source-code" id="project-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 69</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project</span>
   <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">project</span>
 <span class="ruby-keyword">end</span></pre>

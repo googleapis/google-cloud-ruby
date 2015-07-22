@@ -83,14 +83,15 @@ written applications.</p>
 
 <p>Gcloud&#39;s goal is to provide a API that is familiar and comfortable to
 Rubyists. Authentication is handled by <a
-href="../Gcloud.html#method-c-pubsub">Gcloud.pubsub</a>. You can provide
+href="../Gcloud.html#method-i-pubsub">Gcloud#pubsub</a>. You can provide
 the project and credential information to connect to the Pub/Sub service,
 or if you are running on Google Compute Engine this configuration is taken
 care of for you.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
 <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;task completed&quot;</span>
@@ -107,9 +108,10 @@ messages are sent by publishers. A <a href="Pubsub/Topic.html">Topic</a> is
 found by its name. (See <a
 href="Pubsub/Project.html#method-i-topic">Gcloud::Pubsub::Project#topic</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
 </pre>
 
@@ -119,9 +121,10 @@ href="Pubsub/Project.html#method-i-topic">Gcloud::Pubsub::Project#topic</a>)</p>
 href="Pubsub/Project.html">Project</a>. (See <a
 href="Pubsub/Project.html#method-i-create_topic">Gcloud::Pubsub::Project#create_topic</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">create_topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
 </pre>
 
@@ -130,9 +133,10 @@ href="Pubsub/Project.html#method-i-create_topic">Gcloud::Pubsub::Project#create_
 <p>Messages are published to a topic. (See <a
 href="Pubsub/Topic.html#method-i-publish">Gcloud::Pubsub::Topic#publish</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
 <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;new-message&quot;</span>
@@ -140,9 +144,10 @@ href="Pubsub/Topic.html#method-i-publish">Gcloud::Pubsub::Topic#publish</a>)</p>
 
 <p>Messages can also be published with attributes:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
 <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-string">&quot;new-message&quot;</span>,
@@ -152,9 +157,10 @@ href="Pubsub/Topic.html#method-i-publish">Gcloud::Pubsub::Topic#publish</a>)</p>
 
 <p>Multiple messages can be published at the same time by passing a block:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
 <span class="ruby-identifier">msgs</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">publish</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">batch</span><span class="ruby-operator">|</span>
@@ -173,9 +179,10 @@ application. A <a href="Pubsub/Subscription.html">Subscription</a> is found
 by its name. (See <a
 href="Pubsub/Topic.html#method-i-subscription">Gcloud::Pubsub::Topic#subscription</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
 <span class="ruby-identifier">subscription</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-subscription&quot;</span>
@@ -188,9 +195,10 @@ href="Pubsub/Topic.html#method-i-subscription">Gcloud::Pubsub::Topic#subscriptio
 href="Pubsub/Topic.html">Topic</a>. (See <a
 href="Pubsub/Topic.html#method-i-subscribe">Gcloud::Pubsub::Topic#subscribe</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">subscribe</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
@@ -200,9 +208,10 @@ href="Pubsub/Topic.html#method-i-subscribe">Gcloud::Pubsub::Topic#subscribe</a>)
 <p>The subscription can be created that specifies the number of seconds to
 wait to be acknowledged as well as an endpoint URL to push the messages to:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">subscribe</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>,
@@ -213,15 +222,16 @@ wait to be acknowledged as well as an endpoint URL to push the messages to:</p>
 <h2 id="module-Gcloud::Pubsub-label-Working+Across+Projects">Working Across Projects<span><a href="#module-Gcloud::Pubsub-label-Working+Across+Projects">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>All calls to the Pub/Sub service use the same project and credentials
-provided to the <a href="../Gcloud.html#method-c-pubsub">Gcloud.pubsub</a>
+provided to the <a href="../Gcloud.html#method-i-pubsub">Gcloud#pubsub</a>
 method. However, it is common to reference topics or subscriptions in other
 projects, which can be achieved by using the <code>project</code> option.
 The main credentials must have permissions to the topics and subscriptions
 in other projects.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span> <span class="ruby-comment"># my-project-id</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span> <span class="ruby-comment"># my-project-id</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-comment"># Get a topic in the current project</span>
 <span class="ruby-identifier">my_topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
@@ -234,9 +244,10 @@ in other projects.</p>
 <p>It is possible to create a subscription in the current project that pulls
 from a topic in another project:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span> <span class="ruby-comment"># my-project-id</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span> <span class="ruby-comment"># my-project-id</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-comment"># Get a topic in another project</span>
 <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;other-topic&quot;</span>, <span class="ruby-identifier">project</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;other-project-id&quot;</span>
@@ -253,9 +264,10 @@ from a topic in another project:</p>
 href="Pubsub/Subscription.html">Subscription</a>. (See <a
 href="Pubsub/Subscription.html#method-i-pull">Gcloud::Pubsub::Subscription#pull</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
 <span class="ruby-identifier">msgs</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>
@@ -263,9 +275,10 @@ href="Pubsub/Subscription.html#method-i-pull">Gcloud::Pubsub::Subscription#pull<
 
 <p>A maximum number of messages returned can also be specified:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-value">10</span>
 <span class="ruby-identifier">msgs</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>
@@ -275,9 +288,10 @@ href="Pubsub/Subscription.html#method-i-pull">Gcloud::Pubsub::Subscription#pull<
 <a
 href="Pubsub/Subscription.html#method-i-wait_for_messages">Gcloud::Pubsub::Subscription#wait_for_messages</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
 <span class="ruby-identifier">msgs</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">wait_for_messages</span>
@@ -293,9 +307,10 @@ called a <a href="Pubsub/ReceivedMessage.html">ReceivedMessage</a>.
 ReceivedMessages can be acknowledged one at a time: (See <a
 href="Pubsub/ReceivedMessage.html#method-i-acknowledge-21">Gcloud::Pubsub::ReceivedMessage#acknowledge!</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
 <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">acknowledge!</span> }
@@ -304,9 +319,10 @@ href="Pubsub/ReceivedMessage.html#method-i-acknowledge-21">Gcloud::Pubsub::Recei
 <p>Or, multiple messages can be acknowledged in a single API call: (See <a
 href="Pubsub/Subscription.html#method-i-acknowledge">Gcloud::Pubsub::Subscription#acknowledge</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
 <span class="ruby-identifier">received_messages</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>
@@ -321,9 +337,10 @@ more time is needed. This will allow more time to process the message
 before the message is marked for redelivery. (See <a
 href="Pubsub/ReceivedMessage.html#method-i-delay-21">Gcloud::Pubsub::ReceivedMessage#delay!</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
 <span class="ruby-identifier">received_message</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
@@ -336,9 +353,10 @@ href="Pubsub/ReceivedMessage.html#method-i-delay-21">Gcloud::Pubsub::ReceivedMes
 
 <p>The message can also be made available for immediate redelivery:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
 <span class="ruby-identifier">received_message</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>.<span class="ruby-identifier">first</span>
@@ -353,9 +371,10 @@ href="Pubsub/ReceivedMessage.html#method-i-delay-21">Gcloud::Pubsub::ReceivedMes
 redelivery: (See <a
 href="Pubsub/Subscription.html#method-i-delay">Gcloud::Pubsub::Subscription#delay</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
 <span class="ruby-identifier">received_messages</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>
@@ -369,9 +388,10 @@ runs an infinitely blocking loop to process messages as they are received.
 (See <a
 href="Pubsub/Subscription.html#method-i-listen">Gcloud::Pubsub::Subscription#listen</a>)</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
 <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">listen</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
@@ -382,9 +402,10 @@ href="Pubsub/Subscription.html#method-i-listen">Gcloud::Pubsub::Subscription#lis
 <p>Messages are retrieved in batches for efficiency. The number of messages
 pulled per batch can be limited with the <code>max</code> option:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
 <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">listen</span> <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-value">20</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
@@ -396,9 +417,10 @@ pulled per batch can be limited with the <code>max</code> option:</p>
 messages can be automatically acknowledged as they are pulled with the
 <code>autoack</code> option:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">pubsub</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
 
 <span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-topic-sub&quot;</span>
 <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">listen</span> <span class="ruby-identifier">autoack</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>

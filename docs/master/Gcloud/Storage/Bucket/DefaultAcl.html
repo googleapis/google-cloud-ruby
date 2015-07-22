@@ -77,9 +77,10 @@
 <p>Represents a Bucket&#39;s Default Access Control <a
 href="List.html">List</a>.</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -228,9 +229,10 @@ href="List.html">List</a>.</p>
 <p>Access to a bucket can be granted to a user by appending +“user-”+ to the
 email address:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -241,9 +243,10 @@ email address:</p>
 <p>Access to a bucket can be granted to a group by appending +“group-”+ to the
 email address:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -254,7 +257,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="add_owner-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 639</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 663</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_owner</span> <span class="ruby-identifier">entity</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_default_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-identifier">entity</span>, <span class="ruby-string">&quot;OWNER&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -320,9 +323,10 @@ email address:</p>
 <p>Access to a bucket can be granted to a user by appending +“user-”+ to the
 email address:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -333,9 +337,10 @@ email address:</p>
 <p>Access to a bucket can be granted to a group by appending +“group-”+ to the
 email address:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -346,7 +351,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="add_reader-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 747</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 775</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_reader</span> <span class="ruby-identifier">entity</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_default_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-identifier">entity</span>, <span class="ruby-string">&quot;READER&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -412,9 +417,10 @@ email address:</p>
 <p>Access to a bucket can be granted to a user by appending +“user-”+ to the
 email address:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -425,9 +431,10 @@ email address:</p>
 <p>Access to a bucket can be granted to a group by appending +“group-”+ to the
 email address:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -438,7 +445,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="add_writer-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 693</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 719</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_writer</span> <span class="ruby-identifier">entity</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_default_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-identifier">entity</span>, <span class="ruby-string">&quot;WRITER&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -478,9 +485,10 @@ predefined ACL rule to files in the bucket.</p>
 
 <h3 id="method-i-auth-21-label-Example">Example<span><a href="#method-i-auth-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -490,7 +498,7 @@ predefined ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="auth-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 818</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 848</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">auth!</span>
   <span class="ruby-identifier">update_predefined_default_acl!</span> <span class="ruby-string">&quot;authenticatedRead&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -738,9 +746,10 @@ list for files.</p>
 
 <h3 id="method-i-delete-label-Example">Example<span><a href="#method-i-delete-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -751,7 +760,7 @@ list for files.</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 787</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 816</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">entity</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">delete_default_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-identifier">entity</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -792,9 +801,10 @@ predefined ACL rule to files in the bucket.</p>
 
 <h3 id="method-i-owner_full-21-label-Example">Example<span><a href="#method-i-owner_full-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -804,7 +814,7 @@ predefined ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="owner_full-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 840</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 871</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">owner_full!</span>
   <span class="ruby-identifier">update_predefined_default_acl!</span> <span class="ruby-string">&quot;bucketOwnerFullControl&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -842,9 +852,10 @@ predefined ACL rule to files in the bucket.</p>
 
 <h3 id="method-i-owner_read-21-label-Example">Example<span><a href="#method-i-owner_read-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -854,7 +865,7 @@ predefined ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="owner_read-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 859</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 891</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">owner_read!</span>
   <span class="ruby-identifier">update_predefined_default_acl!</span> <span class="ruby-string">&quot;bucketOwnerRead&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -895,9 +906,10 @@ predefined ACL rule to files in the bucket.</p>
 
 <h3 id="method-i-owners-label-Example">Example<span><a href="#method-i-owners-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -907,7 +919,7 @@ predefined ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="owners-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 546</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 566</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">owners</span>
   <span class="ruby-identifier">refresh!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@owners</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@owners</span>
@@ -942,9 +954,10 @@ rule to files in the bucket.</p>
 
 <h3 id="method-i-private-21-label-Example">Example<span><a href="#method-i-private-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -954,7 +967,7 @@ rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="private-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 878</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 911</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">private!</span>
   <span class="ruby-identifier">update_predefined_default_acl!</span> <span class="ruby-string">&quot;private&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1019,9 +1032,10 @@ predefined ACL rule to files in the bucket.</p>
 
 <h3 id="method-i-project_private-21-label-Example">Example<span><a href="#method-i-project_private-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -1031,7 +1045,7 @@ predefined ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="project_private-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 896</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 930</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project_private!</span>
   <span class="ruby-identifier">update_predefined_default_acl!</span> <span class="ruby-string">&quot;projectPrivate&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1069,9 +1083,10 @@ ACL rule to files in the bucket.</p>
 
 <h3 id="method-i-public-21-label-Example">Example<span><a href="#method-i-public-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -1081,7 +1096,7 @@ ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="public-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 915</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 950</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">public!</span>
   <span class="ruby-identifier">update_predefined_default_acl!</span> <span class="ruby-string">&quot;publicRead&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1184,9 +1199,10 @@ ACL rule to files in the bucket.</p>
 
 <h3 id="method-i-readers-label-Example">Example<span><a href="#method-i-readers-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -1196,7 +1212,7 @@ ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="readers-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 590</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 612</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">readers</span>
   <span class="ruby-identifier">refresh!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@readers</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@readers</span>
@@ -1231,9 +1247,10 @@ the bucket.</p>
 
 <h3 id="method-i-refresh-21-label-Example">Example<span><a href="#method-i-refresh-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -1243,7 +1260,7 @@ the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="refresh-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 521</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 540</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">refresh!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">list_default_acls</span> <span class="ruby-ivar">@bucket</span>
   <span class="ruby-identifier">acls</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;items&quot;</span>]
@@ -1284,9 +1301,10 @@ the bucket.</p>
 
 <h3 id="method-i-writers-label-Example">Example<span><a href="#method-i-writers-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">storage</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
 
 <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
 
@@ -1296,7 +1314,7 @@ the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="writers-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 568</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 589</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">writers</span>
   <span class="ruby-identifier">refresh!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@writers</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@writers</span>
