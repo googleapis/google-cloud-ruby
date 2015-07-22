@@ -33,14 +33,15 @@ module Gcloud
     # Google Storage. Gcloud::Storage::Bucket objects are created,
     # read, updated, and deleted by Gcloud::Storage::Project.
     #
-    #   require "gcloud/storage"
+    #   require "gcloud"
     #
-    #   storage = Gcloud.storage
+    #   gcloud = Gcloud.new
+    #   storage = gcloud.storage
     #
     #   bucket = storage.bucket "my-bucket"
     #   file = bucket.file "path/to/my-file.ext"
     #
-    # See Gcloud.storage
+    # See Gcloud#storage
     class Project
       ##
       # The Connection object.
@@ -49,7 +50,7 @@ module Gcloud
       ##
       # Creates a new Project instance.
       #
-      # See Gcloud.storage
+      # See Gcloud#storage
       def initialize project, credentials #:nodoc:
         @connection = Connection.new project, credentials
       end
@@ -59,10 +60,11 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage "my-todo-project",
-      #                            "/path/to/keyfile.json"
+      #   gcloud = Gcloud.new "my-todo-project",
+      #                       "/path/to/keyfile.json"
+      #   storage = gcloud.storage
       #
       #   storage.project #=> "my-todo-project"
       #
@@ -98,9 +100,10 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   buckets = storage.buckets
       #   buckets.each do |bucket|
@@ -110,18 +113,20 @@ module Gcloud
       # You can also retrieve all buckets whose names begin with a prefix using
       # the +:prefix+ option:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   user_buckets = storage.buckets prefix: "user-"
       #
       # If you have a significant number of buckets, you may need to paginate
       # through them: (See Bucket::List#token)
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   all_buckets = []
       #   tmp_buckets = storage.buckets
@@ -159,9 +164,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #   puts bucket.name
@@ -196,9 +202,10 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.create_bucket "my-bucket"
       #
@@ -206,9 +213,10 @@ module Gcloud
       # conditions. See Gcloud::Backoff to control this behavior, or
       # specify the wanted behavior in the call with the +:retries:+ option:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.create_bucket "my-bucket", retries: 5
       #

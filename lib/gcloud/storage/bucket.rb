@@ -24,9 +24,10 @@ module Gcloud
     #
     # Represents a Storage bucket. Belongs to a Project and has many Files.
     #
-    #   require "gcloud/storage"
+    #   require "gcloud"
     #
-    #   storage = Gcloud.storage
+    #   gcloud = Gcloud.new
+    #   storage = gcloud.storage
     #
     #   bucket = storage.bucket "my-bucket"
     #   file = bucket.file "path/to/my-file.ext"
@@ -107,9 +108,10 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #   bucket.delete
@@ -118,9 +120,10 @@ module Gcloud
       # conditions. See Gcloud::Backoff to control this behavior, or
       # specify the wanted behavior in the call:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #   bucket.delete retries: 5
@@ -167,9 +170,10 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #   files = bucket.files
@@ -180,9 +184,10 @@ module Gcloud
       # If you have a significant number of files, you may need to paginate
       # through them: (See File::List#token)
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -223,9 +228,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -279,9 +285,10 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -289,9 +296,10 @@ module Gcloud
       #
       # Additionally, a destination path can be specified.
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -304,9 +312,10 @@ module Gcloud
       # by 265KB then it will be lowered to the nearest acceptible
       # value.
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -346,9 +355,10 @@ module Gcloud
       # Access to a bucket can be granted to a user by appending +"user-"+ to
       # the email address:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
       #
@@ -358,9 +368,10 @@ module Gcloud
       # Access to a bucket can be granted to a group by appending +"group-"+ to
       # the email address:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
       #
@@ -370,9 +381,10 @@ module Gcloud
       # Access to a bucket can also be granted to a predefined list of
       # permissions:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
       #
@@ -398,9 +410,10 @@ module Gcloud
       # Access to a bucket's files can be granted to a user by appending
       # +"user-"+ to the email address:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
       #
@@ -410,9 +423,10 @@ module Gcloud
       # Access to a bucket's files can be granted to a group by appending
       # +"group-"+ to the email address:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
       #
@@ -422,9 +436,10 @@ module Gcloud
       # Access to a bucket's files can also be granted to a predefined list of
       # permissions:
       #
-      #   require "gcloud/storage"
+      #   require "gcloud"
       #
-      #   storage = Gcloud.storage
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-todo-app"
       #

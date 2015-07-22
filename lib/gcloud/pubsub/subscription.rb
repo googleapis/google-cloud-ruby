@@ -25,9 +25,10 @@ module Gcloud
     # A named resource representing the stream of messages from a single,
     # specific topic, to be delivered to the subscribing application.
     #
-    #   require "gcloud/pubsub"
+    #   require "gcloud"
     #
-    #   pubsub = Gcloud.pubsub
+    #   gcloud = Gcloud.new
+    #   pubsub = gcloud.pubsub
     #
     #   sub = pubsub.subscription "my-topic-sub"
     #   msgs = sub.pull
@@ -79,9 +80,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   sub.topic.name #=> "projects/my-project/topics/my-topic"
@@ -126,9 +128,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   sub.exists? #=> true
@@ -150,9 +153,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.get_subscription "my-topic-sub"
       #   sub.lazy? #=> false
@@ -171,9 +175,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   sub.delete
@@ -220,18 +225,20 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   sub.pull.each { |msg| msg.acknowledge! }
       #
       # A maximum number of messages returned can also be specified:
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub", max: 10
       #   sub.pull.each { |msg| msg.acknowledge! }
@@ -239,9 +246,10 @@ module Gcloud
       # The call can block until messages are available by setting the
       # +:immediate+ option to +false+:
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   msgs = sub.pull immediate: false
@@ -289,9 +297,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   msgs = sub.wait_for_messages
@@ -323,9 +332,10 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   sub.listen do |msg|
@@ -335,9 +345,10 @@ module Gcloud
       # The number of messages pulled per batch can be set with the +max+
       # option:
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   sub.listen max: 20 do |msg|
@@ -347,9 +358,10 @@ module Gcloud
       # Messages can be automatically acknowledged as they are pulled with the
       # +autoack+ option:
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   sub.listen autoack: true do |msg|
@@ -384,9 +396,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   messages = sub.pull
@@ -425,9 +438,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   messages = sub.pull
@@ -474,9 +488,10 @@ module Gcloud
       # By default, the policy values are memoized to reduce the number of API
       # calls to the Pub/Sub service.
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   subscription = pubsub.subscription "my-subscription"
       #   puts subscription.policy["bindings"]
@@ -485,9 +500,10 @@ module Gcloud
       # To retrieve the latest policy from the Pub/Sub service, use the +force+
       # flag.
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   subscription = pubsub.subscription "my-subscription"
       #   policy = subscription.policy force: true
@@ -521,9 +537,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   viewer_policy = {
       #     "bindings" => [{

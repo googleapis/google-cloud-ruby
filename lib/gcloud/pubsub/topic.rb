@@ -25,9 +25,10 @@ module Gcloud
     #
     # A named resource to which messages are published.
     #
-    #   require "gcloud/pubsub"
+    #   require "gcloud"
     #
-    #   pubsub = Gcloud.pubsub
+    #   gcloud = Gcloud.new
+    #   pubsub = gcloud.pubsub
     #
     #   topic = pubsub.topic "my-topic"
     #   topic.publish "task completed"
@@ -81,9 +82,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   topic.delete
@@ -124,9 +126,10 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   sub = topic.subscribe "my-topic-sub"
@@ -134,9 +137,10 @@ module Gcloud
       #
       # The name is optional, and will be generated if not given.
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   sub = topic.subscribe "my-topic-sub"
@@ -145,9 +149,10 @@ module Gcloud
       # The subscription can be created that waits two minutes for
       # acknowledgement and pushed all messages to an endpoint
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   sub = topic.subscribe "my-topic-sub",
@@ -186,9 +191,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   subscription = topic.subscription "my-topic-subscription"
@@ -217,9 +223,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   subscription = topic.get_subscription "my-topic-subscription"
@@ -256,9 +263,10 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   subscription = topic.subscriptions
@@ -269,9 +277,10 @@ module Gcloud
       # If you have a significant number of subscriptions, you may need to
       # paginate through them: (See Subscription::List#token)
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   all_subs = []
@@ -315,18 +324,20 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   msg = topic.publish "new-message"
       #
       # Additionally, a message can be published with attributes:
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   msg = topic.publish "new-message",
@@ -335,9 +346,10 @@ module Gcloud
       #
       # Multiple messages can be published at the same time by passing a block:
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   msgs = topic.publish do |batch|
@@ -387,9 +399,10 @@ module Gcloud
       # By default, the policy values are memoized to reduce the number of API
       # calls to the Pub/Sub service.
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   puts topic.policy["bindings"]
@@ -398,9 +411,10 @@ module Gcloud
       # To retrieve the latest policy from the Pub/Sub service, use the +force+
       # flag.
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   policy = topic.policy force: true
@@ -434,9 +448,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   viewer_policy = {
       #     "bindings" => [{
@@ -463,9 +478,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   topic.exists? #=> true
@@ -484,9 +500,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   topic.lazy? #=> false
@@ -501,9 +518,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
       #   topic.autocreate? #=> true

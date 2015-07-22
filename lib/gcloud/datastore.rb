@@ -71,15 +71,16 @@ module Gcloud
   # make the most of using Datastore.
   #
   # Gcloud's goal is to provide a API that is familiar and comfortable to
-  # Rubyists. Authentication is handled by Gcloud.datastore. You can provide
+  # Rubyists. Authentication is handled by Gcloud#datastore. You can provide
   # the project and credential information to connect to the Datastore service,
   # or if you are running on Google Compute Engine this configuration is taken
   # care of for you.
   #
-  #   require "gcloud/datastore"
+  #   require "gcloud"
   #
-  #   dataset = Gcloud.datastore "my-todo-project",
-  #                              "/path/to/keyfile.json"
+  #   gcloud = Gcloud.new "my-todo-project",
+  #                       "/path/to/keyfile.json"
+  #   dataset = gcloud.datastore
   #   entity = dataset.find "Task", "start"
   #   entity["completed"] = true
   #   dataset.save entity
@@ -100,16 +101,18 @@ module Gcloud
   # <tt>name</tt> value. A single record can be retrieved by calling
   # Gcloud::Datastore::Dataset#find and passing the parts of the key:
   #
-  #   require "gcloud/datastore"
+  #   require "gcloud"
   #
-  #   dataset = Gcloud.datastore
+  #   gcloud = Gcloud.new
+  #   dataset = gcloud.datastore
   #   entity = dataset.find "Task", "start"
   #
   # Optionally, Gcloud::Datastore::Dataset#find can be given a Key object:
   #
-  #   require "gcloud/datastore"
+  #   require "gcloud"
   #
-  #   dataset = Gcloud.datastore
+  #   gcloud = Gcloud.new
+  #   dataset = gcloud.datastore
   #   key = Gcloud::Datastore::Key.new "Task", 12345
   #   entity = dataset.find key
   #
@@ -120,9 +123,10 @@ module Gcloud
   # Multiple records can be found that match criteria.
   # (See Gcloud::Datastore::Query#where)
   #
-  #   require "gcloud/datastore"
+  #   require "gcloud"
   #
-  #   dataset = Gcloud.datastore
+  #   gcloud = Gcloud.new
+  #   dataset = gcloud.datastore
   #   query = Gcloud::Datastore::Query.new
   #   query.kind("List").
   #     where("active", "=", true)
@@ -130,9 +134,10 @@ module Gcloud
   #
   # Records can also be ordered. (See Gcloud::Datastore::Query#order)
   #
-  #   require "gcloud/datastore"
+  #   require "gcloud"
   #
-  #   dataset = Gcloud.datastore
+  #   gcloud = Gcloud.new
+  #   dataset = gcloud.datastore
   #   query = Gcloud::Datastore::Query.new
   #   query.kind("List").
   #     where("active", "=", true).
@@ -142,9 +147,10 @@ module Gcloud
   # The number of records returned can be specified.
   # (See Gcloud::Datastore::Query#limit)
   #
-  #   require "gcloud/datastore"
+  #   require "gcloud"
   #
-  #   dataset = Gcloud.datastore
+  #   gcloud = Gcloud.new
+  #   dataset = gcloud.datastore
   #   query = Gcloud::Datastore::Query.new
   #   query.kind("List").
   #     where("active", "=", true).
@@ -155,9 +161,10 @@ module Gcloud
   # Records' Key structures can also be queried.
   # (See Gcloud::Datastore::Query#ancestor)
   #
-  #   require "gcloud/datastore"
+  #   require "gcloud"
   #
-  #   dataset = Gcloud.datastore
+  #   gcloud = Gcloud.new
+  #   dataset = gcloud.datastore
   #
   #   list = dataset.find "List", "todos"
   #   query = Gcloud::Datastore::Query.new
@@ -173,9 +180,10 @@ module Gcloud
   # to return them all. The returned records will have a <tt>cursor</tt> if
   # there are more available.
   #
-  #   require "gcloud/datastore"
+  #   require "gcloud"
   #
-  #   dataset = Gcloud.datastore
+  #   gcloud = Gcloud.new
+  #   dataset = gcloud.datastore
   #
   #   list = dataset.find "List", "todos"
   #   query = Gcloud::Datastore::Query.new
@@ -204,9 +212,10 @@ module Gcloud
   # The entity must have a Key to be saved. If the Key is incomplete then
   # it will be completed when saved.
   #
-  #   require "gcloud/datastore"
+  #   require "gcloud"
   #
-  #   dataset = Gcloud.datastore
+  #   gcloud = Gcloud.new
+  #   dataset = gcloud.datastore
   #   entity = Gcloud::Datastore::Entity.new
   #   entity.key = Gcloud::Datastore::Key.new "User"
   #   entity["name"] = "Heidi Henderson"
@@ -221,10 +230,11 @@ module Gcloud
   # String, Integer, Date, Time, and even other Entity or Key objects. Changes
   # to the Entity's properties are persisted by calling Dataset#save.
   #
-  #   require "gcloud/datastore"
+  #   require "gcloud"
   #
-  #   dataset = Gcloud.datastore
-  #   entity = datastore.find "User", "heidi"
+  #   gcloud = Gcloud.new
+  #   dataset = gcloud.datastore
+  #   entity = dataset.find "User", "heidi"
   #   # Read the status property
   #   entity["status"] #=> "inactive"
   #   # Write the status property
@@ -237,10 +247,11 @@ module Gcloud
   # Entities can be removed from Datastore by calling Dataset#delete and passing
   # the Entity object or the entity's Key object.
   #
-  #   require "gcloud/datastore"
+  #   require "gcloud"
   #
-  #   dataset = Gcloud.datastore
-  #   entity = datastore.find "User", "heidi"
+  #   gcloud = Gcloud.new
+  #   dataset = gcloud.datastore
+  #   entity = dataset.find "User", "heidi"
   #   dataset.delete entity
   #
   # == Transactions
@@ -249,9 +260,10 @@ module Gcloud
   # within the Dataset#transaction block are run within the transaction scope,
   # and will be automatically committed when the block completes.
   #
-  #   require "gcloud/datastore"
+  #   require "gcloud"
   #
-  #   dataset = Gcloud.datastore
+  #   gcloud = Gcloud.new
+  #   dataset = gcloud.datastore
   #
   #   key = Gcloud::Datastore::Key.new "User", "heidi"
   #
@@ -269,9 +281,10 @@ module Gcloud
   # Alternatively, if no block is given the transaction object is returned
   # allowing you to commit or rollback manually.
   #
-  #   require "gcloud/datastore"
+  #   require "gcloud"
   #
-  #   dataset = Gcloud.datastore
+  #   gcloud = Gcloud.new
+  #   dataset = gcloud.datastore
   #
   #   key = Gcloud::Datastore::Key.new "User", "heidi"
   #

@@ -51,11 +51,12 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud"
       #
-      #   dataset = Gcloud.datastore "my-todo-project",
-      #                              "/path/to/keyfile.json"
+      #   gcloud = Gcloud.new "my-todo-project",
+      #                       "/path/to/keyfile.json"
       #
+      #   dataset = gcloud.datastore
       #   entity = dataset.find "User", "heidi"
       #   entity.key.dataset_id #=> "my-todo-project"
       #
@@ -70,11 +71,12 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud"
       #
-      #   dataset = Gcloud.datastore "my-todo-project",
-      #                              "/path/to/keyfile.json"
+      #   gcloud = Gcloud.new "my-todo-project",
+      #                       "/path/to/keyfile.json"
       #
+      #   dataset = gcloud.datastore
       #   entity = dataset.find "User", "heidi"
       #   entity.key.namespace #=> "ns~todo-project"
       #
@@ -188,9 +190,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud"
       #
-      #   dataset = Gcloud.datastore
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
       #
       #   user = dataset.find "User", "heidi"
       #   query = Gcloud::Datastore::Query.new

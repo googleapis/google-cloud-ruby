@@ -30,14 +30,15 @@ module Gcloud
     # Message is a combination of data and attributes that a publisher sends to
     # a topic and is eventually delivered to subscribers.
     #
-    #   require "gcloud/pubsub"
+    #   require "gcloud"
     #
-    #   pubsub = Gcloud.pubsub
+    #   gcloud = Gcloud.new
+    #   pubsub = gcloud.pubsub
     #
     #   topic = pubsub.topic "my-topic"
     #   topic.publish "task completed"
     #
-    # See Gcloud.pubsub
+    # See Gcloud#pubsub
     class Project
       ##
       # The Connection object.
@@ -53,10 +54,11 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub "my-todo-project",
-      #                          "/path/to/keyfile.json"
+      #   gcloud = Gcloud.new "my-todo-project",
+      #                       "/path/to/keyfile.json"
+      #   pubsub = gcloud.pubsub
       #
       #   pubsub.project #=> "my-todo-project"
       #
@@ -86,9 +88,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #   topic = pubsub.get_topic "my-topic"
       #
       def get_topic topic_name
@@ -128,33 +131,37 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "existing-topic"
       #   msg = topic.publish "This is the first API call to Pub/Sub."
       #
       # By default the topic will be created in Pub/Sub when needed.
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "non-existing-topic"
       #   msg = topic.publish "This will create the topic in Pub/Sub."
       #
       # Setting the +autocomplete+ flag to false will not create the topic.
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "non-existing-topic"
       #   msg = topic.publish "This raises." #=> Gcloud::Pubsub::NotFoundError
       #
       # A topic in a different project can be created using the +project+ flag.
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "another-topic", project: "another-project"
       #
       def topic topic_name, options = {}
@@ -177,9 +184,10 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #   topic = pubsub.create_topic "my-topic"
       #
       def create_topic topic_name
@@ -214,9 +222,10 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   topics = pubsub.topics
       #   topics.each do |topic|
@@ -226,9 +235,10 @@ module Gcloud
       # If you have a significant number of topics, you may need to paginate
       # through them: (See Topic::List#token)
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   all_topics = []
       #   tmp_topics = pubsub.topics
@@ -271,9 +281,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   subscription = pubsub.get_subscription "my-topic-subscription"
       #   puts subscription.name
@@ -301,9 +312,10 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   subscription = pubsub.get_subscription "my-topic-subscription"
       #   puts subscription.name
@@ -342,9 +354,10 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   subscriptions = pubsub.subscriptions
       #   subscriptions.each do |subscription|
@@ -354,9 +367,10 @@ module Gcloud
       # If you have a significant number of subscriptions, you may need to
       # paginate through them: (See Subscription::List#token)
       #
-      #   require "gcloud/pubsub"
+      #   require "gcloud"
       #
-      #   pubsub = Gcloud.pubsub
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
       #
       #   all_subs = []
       #   tmp_subs = pubsub.subscriptions

@@ -33,23 +33,24 @@ module Gcloud
     # Google Datastore. Gcloud::Datastore::Entity objects are created,
     # read, updated, and deleted by Gcloud::Datastore::Dataset.
     #
-    #   require "gcloud/datastore"
+    #   require "gcloud"
     #
-    #   dataset = Gcloud.datastore
+    #   gcloud = Gcloud.new
+    #   dataset = gcloud.datastore
     #
     #   query = Gcloud::Datastore::Query.new.kind("Task").
     #     where("completed", "=", true)
     #
     #   tasks = dataset.run query
     #
-    # See Gcloud.datastore
+    # See Gcloud#datastore
     class Dataset
       attr_accessor :connection #:nodoc:
 
       ##
       # Creates a new Dataset instance.
       #
-      # See Gcloud.datastore
+      # See Gcloud#datastore
       def initialize project, credentials #:nodoc:
         @connection = Connection.new project, credentials
       end
@@ -59,11 +60,12 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud"
       #
-      #   dataset = Gcloud.datastore "my-todo-project",
-      #                              "/path/to/keyfile.json"
+      #   gcloud = Gcloud.new "my-todo-project",
+      #                       "/path/to/keyfile.json"
       #
+      #   dataset = gcloud.datastore
       #   dataset.project #=> "my-todo-project"
       #
       def project
@@ -179,7 +181,8 @@ module Gcloud
       #
       # === Example
       #
-      #   dataset = Gcloud.datastore
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
       #   key1 = Gcloud::Datastore::Key.new "Task", 123456
       #   key2 = Gcloud::Datastore::Key.new "Task", 987654
       #   tasks = dataset.find_all key1, key2
@@ -207,7 +210,8 @@ module Gcloud
       #
       # === Example
       #
-      #   dataset = Gcloud.datastore
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
       #   dataset.delete entity1, entity2
       #
       def delete *entities_or_keys
@@ -255,9 +259,10 @@ module Gcloud
       #
       # Runs the given block in a database transaction:
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud"
       #
-      #   dataset = Gcloud.datastore
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
       #
       #   key = Gcloud::Datastore::Key.new "User", "heidi"
       #
@@ -274,9 +279,10 @@ module Gcloud
       #
       # Alternatively, if no block is given a Transaction object is returned:
       #
-      #   require "gcloud/datastore"
+      #   require "gcloud"
       #
-      #   dataset = Gcloud.datastore
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
       #
       #   key = Gcloud::Datastore::Key.new "User", "heidi"
       #

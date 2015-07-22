@@ -32,6 +32,112 @@ require "gcloud/version"
 #
 module Gcloud
   ##
+  # Creates a new object for connecting to Google Cloud.
+  #
+  # === Parameters
+  #
+  # +project+::
+  #   Project identifier for the Pub/Sub service you are connecting to.
+  #   (+String+)
+  # +keyfile+::
+  #   Keyfile downloaded from Google Cloud. If file path the file must be
+  #   readable. (+String+ or +Hash+)
+  #
+  # === Returns
+  #
+  # Gcloud
+  #
+  # === Example
+  #
+  #   require "gcloud"
+  #
+  #   gcloud  = Gcloud.new
+  #   dataset = gcloud.datastore
+  #   pubsub  = gcloud.pubsub
+  #   storage = gcloud.storage
+  #
+  def self.new project = nil, keyfile = nil
+    gcloud = Object.new
+    gcloud.instance_eval do
+      @project = project
+      @keyfile = keyfile
+    end
+    gcloud.extend Gcloud
+    gcloud
+  end
+
+  ##
+  # Creates a new object for connecting to the Datastore service.
+  # Each call creates a new connection.
+  #
+  # === Returns
+  #
+  # Gcloud::Datastore::Dataset
+  #
+  # === Example
+  #
+  #   require "gcloud"
+  #
+  #   gcloud  = Gcloud.new
+  #   dataset = gcloud.datastore
+  #
+  #   entity = Gcloud::Datastore::Entity.new
+  #   entity.key = Gcloud::Datastore::Key.new "Task"
+  #   entity["description"] = "Get started with Google Cloud"
+  #   entity["completed"] = false
+  #
+  #   dataset.save entity
+  #
+  def datastore
+    require "gcloud/datastore"
+    Gcloud.datastore @project, @keyfile
+  end
+
+  ##
+  # Creates a new object for connecting to the Storage service.
+  # Each call creates a new connection.
+  #
+  # === Returns
+  #
+  # Gcloud::Storage::Project
+  #
+  # === Example
+  #
+  #   require "gcloud"
+  #
+  #   gcloud  = Gcloud.new
+  #   storage = gcloud.storage
+  #   bucket = storage.bucket "my-bucket"
+  #   file = bucket.file "path/to/my-file.ext"
+  #
+  def storage
+    require "gcloud/storage"
+    Gcloud.storage @project, @keyfile
+  end
+
+  ##
+  # Creates a new object for connecting to the Pub/Sub service.
+  # Each call creates a new connection.
+  #
+  # === Returns
+  #
+  # Gcloud::Pubsub::Project
+  #
+  # === Example
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   pubsub = gcloud.pubsub
+  #   topic = pubsub.topic "my-topic"
+  #   topic.publish "task completed"
+  #
+  def pubsub
+    require "gcloud/pubsub"
+    Gcloud.pubsub @project, @keyfile
+  end
+
+  ##
   # Base Gcloud exception class.
   class Error < StandardError
   end

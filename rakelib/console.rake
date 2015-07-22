@@ -21,7 +21,7 @@ task :console do
   $:.unshift lib unless $:.include?(lib)
 
   require "gcloud"
-  require "gcloud/datastore"
+  def gcloud; @gcloud ||= Gcloud.new; end
 
   ARGV.clear
   IRB.start
