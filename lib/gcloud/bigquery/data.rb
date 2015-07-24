@@ -18,7 +18,34 @@ module Gcloud
     ##
     # Represents Table Data.
     class Data < DelegateClass(::Array)
+      ##
+      # The Google API Client object.
+      attr_accessor :gapi #:nodoc:
+
+      ##
+      # The resource type of the API response.
+      def kind
+        @gapi["kind"]
+      end
+
+      ##
+      # A token used for paging results.
+      def token
+        @gapi["pageToken"]
+      end
+
+      # A hash of this page of results.
+      def etag
+        @gapi["etag"]
+      end
+
+      # The total number of rows in the complete table.
+      def total
+        @gapi["totalRows"]
+      end
+
       def initialize arr = []
+        @gapi = {}
         super arr
       end
 
@@ -30,7 +57,9 @@ module Gcloud
 
         formatted_rows = format_rows rows, fields
 
-        new formatted_rows
+        data = new formatted_rows
+        data.gapi = resp.data
+        data
       end
 
       # rubocop:disable all

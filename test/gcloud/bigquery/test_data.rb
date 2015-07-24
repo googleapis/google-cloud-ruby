@@ -52,6 +52,19 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data[2]["active"].must_equal nil
   end
 
+  it "knows the data metadata" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+
+    data = table.data
+    data.kind.must_equal "bigquery#tableDataList"
+    data.etag.must_equal "etag1234567890"
+    data.token.must_equal "token1234567890"
+    data.total.must_equal 3
+  end
+
   # TODO: maxResults	unsigned integer	Maximum number of results to return
   # TODO: pageToken	string	Page token, returned by a previous call, identifying the result set
   # TODO: startIndex	unsigned long	Zero-based index of the starting row to read
@@ -121,8 +134,8 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
           ]
         }
       ],
-      "pageToken" => "1234567890",
-      "totalRows" => "3"
+      "pageToken" => "token1234567890",
+      "totalRows" => 3
     }
   end
 
