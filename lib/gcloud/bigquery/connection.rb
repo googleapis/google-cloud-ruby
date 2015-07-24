@@ -173,10 +173,12 @@ module Gcloud
 
       ##
       # Retrieves data from the table.
-      def list_tabledata dataset_id, table_id
+      def list_tabledata dataset_id, table_id, options = {}
         params = { projectId: @project,
-                   datasetId: dataset_id,
-                   tableId: table_id
+                   datasetId: dataset_id, tableId: table_id,
+                   pageToken: options.delete(:token),
+                   maxResults: options.delete(:max),
+                   startIndex: options.delete(:start)
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(

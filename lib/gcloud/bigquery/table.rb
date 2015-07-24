@@ -95,13 +95,25 @@ module Gcloud
       ##
       # Retrieves data from the table.
       #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # <code>options[:token]</code>::
+      #   Page token, returned by a previous call, identifying the result set.
+      #   (+String+)
+      # <code>options[:max]</code>::
+      #   Maximum number of results to return. (+Integer+)
+      # <code>options[:start]</code>::
+      #   Zero-based index of the starting row to read. (+Integer+)
+      #
       # === Returns
       #
       # Gcloud::Bigquery::Data
       #
-      def data
+      def data options = {}
         ensure_connection!
-        resp = connection.list_tabledata dataset_id, table_id
+        resp = connection.list_tabledata dataset_id, table_id, options
         if resp.success?
           Data.from_response resp, self
         else

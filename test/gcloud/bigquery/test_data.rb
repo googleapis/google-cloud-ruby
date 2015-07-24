@@ -90,9 +90,80 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data.raw[2][3].must_equal nil
   end
 
-  # TODO: maxResults	unsigned integer	Maximum number of results to return
-  # TODO: pageToken	string	Page token, returned by a previous call, identifying the result set
-  # TODO: startIndex	unsigned long	Zero-based index of the starting row to read
+  it "knows the data metadata" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+
+    data = table.data
+    data.kind.must_equal "bigquery#tableDataList"
+    data.etag.must_equal "etag1234567890"
+    data.token.must_equal "token1234567890"
+    data.total.must_equal 3
+  end
+
+  it "paginates datasets" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "token1234567890"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+
+    data1 = table.data
+    data1.token.wont_be :nil?
+    data1.token.must_equal "token1234567890"
+    data2 = table.data token: data1.token
+  end
+
+  it "paginates datasets with max set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+
+    data = table.data max: 3
+  end
+
+  it "paginates datasets without max set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.wont_include "maxResults"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+
+    data = table.data
+  end
+
+  it "paginates datasets with start set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.must_include "startIndex"
+      env.params["startIndex"].must_equal "25"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+
+    data = table.data start: 25
+  end
+
+  it "paginates datasets without max set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.wont_include "startIndex"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+
+    data = table.data
+  end
+
   # TODO: get headers/fields from table
 
   def table_data_json
