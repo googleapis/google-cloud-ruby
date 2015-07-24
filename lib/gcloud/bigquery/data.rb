@@ -62,10 +62,7 @@ module Gcloud
       ##
       # New Data from a response object.
       def self.from_response resp, table #:nodoc:
-        rows = Array resp.data["rows"]
-        fields = table.gapi["schema"]["fields"]
-
-        formatted_rows = format_rows rows, fields
+        formatted_rows = format_rows resp.data["rows"], table.fields
 
         data = new formatted_rows
         data.gapi = resp.data

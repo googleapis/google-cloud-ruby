@@ -93,6 +93,30 @@ module Gcloud
       end
 
       ##
+      # The schema of the table.
+      def schema
+        s = @gapi["schema"]
+        s = s.to_hash if s.respond_to? :to_hash
+        s = {} if s.nil?
+        s
+      end
+
+      ##
+      # The fields of the table.
+      def fields
+        f = schema["fields"]
+        f = f.to_hash if f.respond_to? :to_hash
+        f = [] if f.nil?
+        f
+      end
+
+      ##
+      # The name of the columns in the table.
+      def headers
+        fields.map { |f| f["name"] }
+      end
+
+      ##
       # Retrieves data from the table.
       #
       # === Parameters

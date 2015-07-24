@@ -52,6 +52,13 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     table.expires_at.must_be_close_to now
   end
 
+  it "knows schema, fields, and headers" do
+    table.schema.must_be_kind_of Hash
+    table.schema.keys.must_include "fields"
+    table.fields.must_equal table.schema["fields"]
+    table.headers.must_equal ["name", "age", "score", "active"]
+  end
+
   it "can delete itself" do
     mock_connection.delete "/bigquery/v2/projects/#{project}/datasets/#{table.dataset_id}/tables/#{table.table_id}" do |env|
       [200, {"Content-Type"=>"application/json"}, ""]

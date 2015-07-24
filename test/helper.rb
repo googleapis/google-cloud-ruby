@@ -314,10 +314,23 @@ class MockBigquery < Minitest::Spec
         "fields" => [
           {
             "name" => "name",
-            "type" => "type",
-            "mode" => "mode",
-            "fields" => [],
-            "description" => "description"
+            "type" => "STRING",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "age",
+            "type" => "INTEGER",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "score",
+            "type" => "FLOAT",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "active",
+            "type" => "BOOLEAN",
+            "mode" => "NULLABLE"
           }
         ]
       },

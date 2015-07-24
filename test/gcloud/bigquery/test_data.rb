@@ -19,11 +19,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
   let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
   let(:description) { "This is my table" }
-  let(:table_hash) {
-    hash = random_table_hash dataset_id, table_id, table_name, description
-    hash["schema"] = table_schema["schema"]
-    hash
-  }
+  let(:table_hash) { random_table_hash dataset_id, table_id, table_name, description }
   let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash,
                                                   bigquery.connection }
 
@@ -164,8 +160,6 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data = table.data
   end
 
-  # TODO: get headers/fields from table
-
   def table_data_json
     table_data_hash.to_json
   end
@@ -226,35 +220,6 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
       ],
       "pageToken" => "token1234567890",
       "totalRows" => 3
-    }
-  end
-
-  def table_schema
-    {
-      "schema" => {
-        "fields" => [
-          {
-            "name" => "name",
-            "type" => "STRING",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "age",
-            "type" => "INTEGER",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "score",
-            "type" => "FLOAT",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "active",
-            "type" => "BOOLEAN",
-            "mode" => "NULLABLE"
-          }
-        ]
-      }
     }
   end
 end
