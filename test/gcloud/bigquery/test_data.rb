@@ -65,15 +65,34 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data.total.must_equal 3
   end
 
+  it "knows the raw, unformatted data" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+
+    data = table.data
+    data.raw.wont_be :nil?
+    data.raw.count.must_equal data.count
+    data.raw[0][0].must_equal data[0]["name"].to_s
+    data.raw[0][1].must_equal data[0]["age"].to_s
+    data.raw[0][2].must_equal data[0]["score"].to_s
+    data.raw[0][3].must_equal data[0]["active"].to_s
+
+    data.raw[1][0].must_equal data[1]["name"].to_s
+    data.raw[1][1].must_equal data[1]["age"].to_s
+    data.raw[1][2].must_equal data[1]["score"].to_s
+    data.raw[1][3].must_equal data[1]["active"].to_s
+
+    data.raw[2][0].must_equal data[2]["name"].to_s
+    data.raw[2][1].must_equal nil
+    data.raw[2][2].must_equal nil
+    data.raw[2][3].must_equal nil
+  end
+
   # TODO: maxResults	unsigned integer	Maximum number of results to return
   # TODO: pageToken	string	Page token, returned by a previous call, identifying the result set
   # TODO: startIndex	unsigned long	Zero-based index of the starting row to read
-  # TODO: get raw rows from the data (data.raw)
-  # data.raw.count.must_equal 3
-  # data.raw[0].must_equal "Mike"
-  # data.raw[0].must_equal "41"
-  # data.raw[0].must_equal "7.65"
-  # data.raw[0].must_equal "true"
   # TODO: get headers/fields from table
 
   def table_data_json

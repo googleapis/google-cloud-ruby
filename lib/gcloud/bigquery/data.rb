@@ -16,7 +16,10 @@
 module Gcloud
   module Bigquery
     ##
-    # Represents Table Data.
+    # = Data
+    #
+    # Represents Table Data as a list of name/value pairs.
+    # Also contains metadata such as +etag+ and +total+.
     class Data < DelegateClass(::Array)
       ##
       # The Google API Client object.
@@ -47,6 +50,13 @@ module Gcloud
       def initialize arr = []
         @gapi = {}
         super arr
+      end
+
+      ##
+      # Represents Table Data as a list of positional values (array of arrays).
+      # No type conversion is made, e.g. numbers are formatted as strings.
+      def raw
+        Array(gapi["rows"]).map { |row| row["f"].map { |f| f["v"] } }
       end
 
       ##
