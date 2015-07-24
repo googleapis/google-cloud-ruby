@@ -172,6 +172,20 @@ module Gcloud
       end
 
       ##
+      # Retrieves data from the table.
+      def list_tabledata dataset_id, table_id
+        params = { projectId: @project,
+                   datasetId: dataset_id,
+                   tableId: table_id
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @bigquery.tabledata.list,
+          parameters: params
+        )
+      end
+
+      ##
       # Lists all jobs in the specified project to which you have
       # been granted the READER job role.
       def list_jobs options = {}

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/bigquery/data"
 require "gcloud/bigquery/table/list"
 require "gcloud/bigquery/errors"
 
@@ -89,6 +90,23 @@ module Gcloud
       def expires_at
         return nil if @gapi["expirationTime"].nil?
         Time.at(@gapi["expirationTime"] / 1000.0)
+      end
+
+      ##
+      # Retrieves data from the table.
+      #
+      # === Returns
+      #
+      # Gcloud::Bigquery::Data
+      #
+      def data
+        ensure_connection!
+        resp = connection.list_tabledata dataset_id, table_id
+        if resp.success?
+          Data.from_response resp, self
+        else
+          fail ApiError.from_response(resp)
+        end
       end
 
       ##
