@@ -138,6 +138,31 @@ module Gcloud
   end
 
   ##
+  # Creates a new object for connecting to the BigQuery service.
+  # Each call creates a new connection.
+  #
+  # === Returns
+  #
+  # Gcloud::Bigquery::Project
+  #
+  # === Example
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   bigquery = gcloud.bigquery
+  #   dataset = bigquery.dataset "my-dataset"
+  #   table = dataset.table "my-table"
+  #   table.data.each do |row|
+  #     puts row
+  #   end
+  #
+  def bigquery
+    require "gcloud/bigquery"
+    Gcloud.bigquery @project, @keyfile
+  end
+
+  ##
   # Base Gcloud exception class.
   class Error < StandardError
   end
