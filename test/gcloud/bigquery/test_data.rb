@@ -150,7 +150,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data = table.data start: 25
   end
 
-  it "paginates datasets without max set" do
+  it "paginates datasets without start set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
       env.params.wont_include "startIndex"
       [200, {"Content-Type"=>"application/json"},

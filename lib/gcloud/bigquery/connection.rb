@@ -206,6 +206,22 @@ module Gcloud
         )
       end
 
+      ##
+      # Returns the query data for the job
+      def job_query_results job_id, options = {}
+        params = { projectId: @project, jobId: job_id,
+                   pageToken: options.delete(:token),
+                   maxResults: options.delete(:max),
+                   startIndex: options.delete(:start),
+                   timeoutMs: options.delete(:timeout)
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @bigquery.jobs.get_query_results,
+          parameters: params
+        )
+      end
+
       def copy_table source, target, options = {}
         @client.execute(
           api_method: @bigquery.jobs.insert,

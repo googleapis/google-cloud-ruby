@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/bigquery/query_data"
 require "gcloud/bigquery/job/list"
 require "gcloud/bigquery/errors"
 
@@ -112,6 +113,38 @@ module Gcloud
         resp = connection.get_job job_id
         if resp.success?
           @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Get the data for the job.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavor. (+Hash+)
+      # <code>options[:token]</code>::
+      #   Page token, returned by a previous call, identifying the result set.
+      #   (+String+)
+      # <code>options[:max]</code>::
+      #   Maximum number of results to return. (+Integer+)
+      # <code>options[:start]</code>::
+      #   Zero-based index of the starting row to read. (+Integer+)
+      # <code>options[:timeout]</code>::
+      #   How long to wait for the query to complete, in milliseconds, before
+      #   returning. Default is 10,000 milliseconds (10 seconds). (+Integer+)
+      #
+      # === Returns
+      #
+      # Gcloud::Bigquery::QueryData
+      #
+      def query_results options = {}
+        ensure_connection!
+        resp = connection.job_query_results job_id, options
+        if resp.success?
+          QueryData.from_response resp, connection
         else
           fail ApiError.from_response(resp)
         end
