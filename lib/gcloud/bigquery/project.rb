@@ -76,6 +76,41 @@ module Gcloud
       end
 
       ##
+      # Queries data.
+      #
+      # === Parameters
+      #
+      # +query+::
+      #   Query. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Bigquery::Job
+      #
+      # === Example
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   bigquery = Gcloud.bigquery
+      #
+      #   job = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]"
+      #   if job.complete?
+      #     job.query_results.each do |row|
+      #       puts row["name"]
+      #     end
+      #   end
+      #
+      def query query
+        ensure_connection!
+        resp = connection.query_job query
+        if resp.success?
+          Job.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # Retrieves dataset by name.
       #
       # === Parameters

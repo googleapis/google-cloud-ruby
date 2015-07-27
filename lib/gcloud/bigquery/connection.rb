@@ -206,6 +206,14 @@ module Gcloud
         )
       end
 
+      def query_job query
+        @client.execute(
+          api_method: @bigquery.jobs.insert,
+          parameters: { projectId: @project },
+          body_object: query_table_config(query)
+        )
+      end
+
       ##
       # Returns the query data for the job
       def job_query_results job_id, options = {}
@@ -339,7 +347,36 @@ module Gcloud
       # are going to be verbose.
 
       ##
-      # Job descrption for copy job
+      # Job description for query job
+      def query_table_config query
+        {
+          "configuration" => {
+            "query" => {
+              "query" => query
+              # "tableDefinitions" => { ... },
+              # "createDisposition" => create_disposition(options[:create]),
+              # "writeDisposition" => write_disposition(options[:write]),
+              # "defaultDataset" => {
+              #   "datasetId" => string,
+              #   "projectId" => string
+              # },
+              # "destinationTable" => {
+              #   "projectId" => string,
+              #   "datasetId" => string,
+              #   "tableId" => string
+              # },
+              # "priority" => string,
+              # "preserveNulls" => boolean,
+              # "allowLargeResults" => boolean,
+              # "useQueryCache" => boolean,
+              # "flattenResults" => boolean
+            }.delete_if { |_, v| v.nil? }
+          }.delete_if { |_, v| v.nil? }
+        }
+      end
+
+      ##
+      # Job description for copy job
       def copy_table_config source, target, options = {}
         {
           "configuration" => {
