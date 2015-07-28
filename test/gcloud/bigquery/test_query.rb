@@ -36,6 +36,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
       json["configuration"]["query"]["writeDispositokns"].must_be :nil?
       json["configuration"]["query"]["allowLargeResults"].must_be :nil?
       json["configuration"]["query"]["flattenResults"].must_be :nil?
+      json["configuration"]["query"]["defaultDataset"].must_be :nil?
       [200, {"Content-Type"=>"application/json"},
        query_job_json(query)]
     end
@@ -77,6 +78,36 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     job = bigquery.query query, table: table,
                                 create: :never, write: :truncate,
                                 large_results: true, flatten: false
+    job.must_be_kind_of Gcloud::Bigquery::Job
+  end
+
+  it "queries the data with dataset option as a Dataset" do
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(env.body)
+      json["configuration"]["query"]["query"].must_equal query
+      json["configuration"]["query"]["defaultDataset"].wont_be :nil?
+      json["configuration"]["query"]["defaultDataset"]["projectId"].must_equal dataset.project_id
+      json["configuration"]["query"]["defaultDataset"]["datasetId"].must_equal dataset.dataset_id
+      [200, {"Content-Type"=>"application/json"},
+       query_job_json(query)]
+    end
+
+    job = bigquery.query query, dataset: dataset
+    job.must_be_kind_of Gcloud::Bigquery::Job
+  end
+
+  it "queries the data with dataset option as a String" do
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(env.body)
+      json["configuration"]["query"]["query"].must_equal query
+      json["configuration"]["query"]["defaultDataset"].wont_be :nil?
+      json["configuration"]["query"]["defaultDataset"]["projectId"].must_be :nil?
+      json["configuration"]["query"]["defaultDataset"]["datasetId"].must_equal dataset_id
+      [200, {"Content-Type"=>"application/json"},
+       query_job_json(query)]
+    end
+
+    job = bigquery.query query, dataset: dataset_id
     job.must_be_kind_of Gcloud::Bigquery::Job
   end
 

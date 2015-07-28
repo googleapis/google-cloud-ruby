@@ -117,6 +117,9 @@ module Gcloud
       #   Flattens all nested and repeated fields in the query results. The
       #   default value is +true+. <code>options[:large_results]</code> must be
       #   +true+ if this is set to +false+. (+Boolean+)
+      # <code>options[:dataset]</code>::
+      #   Specifies the default dataset to use for unqualified table names in
+      #   the query. (+Dataset+ or +String+)
       #
       # === Returns
       #

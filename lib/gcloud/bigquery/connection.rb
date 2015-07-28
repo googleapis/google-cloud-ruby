@@ -355,6 +355,15 @@ module Gcloud
                           "datasetId" => options[:table].dataset_id,
                           "tableId"   => options[:table].table_id }
         end
+        default_dataset = nil
+        if dataset = options[:dataset]
+          if dataset.respond_to? :dataset_id
+            default_dataset = { "projectId" => dataset.project_id,
+                                "datasetId" => dataset.dataset_id }
+          else
+            default_dataset = { "datasetId" => dataset }
+          end
+        end
         {
           "configuration" => {
             "query" => {
@@ -366,11 +375,8 @@ module Gcloud
               "createDisposition" => create_disposition(options[:create]),
               "writeDisposition" => write_disposition(options[:write]),
               "allowLargeResults" => options[:large_results],
-              "flattenResults" => options[:flatten]
-              # "defaultDataset" => {
-              #   "datasetId" => string,
-              #   "projectId" => string
-              # }
+              "flattenResults" => options[:flatten],
+              "defaultDataset" => default_dataset
             }.delete_if { |_, v| v.nil? }
           }.delete_if { |_, v| v.nil? }
         }
