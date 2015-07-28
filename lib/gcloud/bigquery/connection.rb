@@ -206,11 +206,11 @@ module Gcloud
         )
       end
 
-      def query_job query
+      def query_job query, options = {}
         @client.execute(
           api_method: @bigquery.jobs.insert,
           parameters: { projectId: @project },
-          body_object: query_table_config(query)
+          body_object: query_table_config(query, options)
         )
       end
 
@@ -348,11 +348,11 @@ module Gcloud
 
       ##
       # Job description for query job
-      def query_table_config query
+      def query_table_config query, options
         {
           "configuration" => {
             "query" => {
-              "query" => query
+              "query" => query,
               # "tableDefinitions" => { ... },
               # "createDisposition" => create_disposition(options[:create]),
               # "writeDisposition" => write_disposition(options[:write]),
@@ -365,10 +365,10 @@ module Gcloud
               #   "datasetId" => string,
               #   "tableId" => string
               # },
-              # "priority" => string,
+              "priority" => priority_value(options[:priority]),
               # "preserveNulls" => boolean,
               # "allowLargeResults" => boolean,
-              # "useQueryCache" => boolean,
+              "useQueryCache" => options[:cache]
               # "flattenResults" => boolean
             }.delete_if { |_, v| v.nil? }
           }.delete_if { |_, v| v.nil? }
@@ -476,6 +476,11 @@ module Gcloud
           "write_empty" => "WRITE_EMPTY",
           "writeempty" => "WRITE_EMPTY",
           "empty" => "WRITE_EMPTY" }[str.to_s.downcase]
+      end
+
+      def priority_value str
+        { "batch" => "BATCH",
+          "interactive" => "INTERACTIVE" }[str.to_s.downcase]
       end
 
       def extract_destination_format url, format

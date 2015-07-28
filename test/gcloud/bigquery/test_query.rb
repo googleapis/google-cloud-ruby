@@ -16,12 +16,13 @@ require "helper"
 
 describe Gcloud::Bigquery::Project, :mock_bigquery do
   let(:query) { "SELECT name, age, score, active FROM [some_project:some_dataset.users]" }
-  # let(:query2) { "SELECT name, age, score, active FROM [users]" }
 
   it "queries the data" do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(env.body)
       json["configuration"]["query"]["query"].must_equal query
+      json["configuration"]["query"]["priority"].must_be :nil?
+      json["configuration"]["query"]["useQueryCache"].must_be :nil?
       [200, {"Content-Type"=>"application/json"},
        query_job_json(query)]
     end
@@ -30,17 +31,19 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     job.must_be_kind_of Gcloud::Bigquery::Job
   end
 
-  # it "queries the data with a default dataset" do
-  #   mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-  #     json = JSON.parse(env.body)
-  #     json["configuration"]["query"]["query"].must_equal query2
-  #     [200, {"Content-Type"=>"application/json"},
-  #      query_job_json(query)]
-  #   end
-  #
-  #   job = bigquery.query query2
-  #   job.must_be_kind_of Gcloud::Bigquery::Job
-  # end
+  it "queries the data with options set" do
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(env.body)
+      json["configuration"]["query"]["query"].must_equal query
+      json["configuration"]["query"]["priority"].must_equal "BATCH"
+      json["configuration"]["query"]["useQueryCache"].must_equal false
+      [200, {"Content-Type"=>"application/json"},
+       query_job_json(query)]
+    end
+
+    job = bigquery.query query, priority: :batch, cache: false
+    job.must_be_kind_of Gcloud::Bigquery::Job
+  end
 
   def query_job_json query
     hash = random_job_hash

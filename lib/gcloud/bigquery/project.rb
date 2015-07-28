@@ -82,6 +82,14 @@ module Gcloud
       #
       # +query+::
       #   Query. (+String+)
+      # <code>options[:priority]</code>::
+      #   Specifies a priority for the query. Possible values include
+      #   +INTERACTIVE+ and +BATCH+. The default value is +INTERACTIVE+.
+      #   (+String+)
+      # <code>options[:cache]</code>::
+      #   Whether to look for the result in the query cache. The query cache is
+      #   a best-effort cache that will be flushed whenever tables in the query
+      #   are modified. The default value is +true+. (+Boolean+)
       #
       # === Returns
       #
@@ -100,9 +108,9 @@ module Gcloud
       #     end
       #   end
       #
-      def query query
+      def query query, options = {}
         ensure_connection!
-        resp = connection.query_job query
+        resp = connection.query_job query, options
         if resp.success?
           Job.from_gapi resp.data, connection
         else
