@@ -33,7 +33,7 @@ describe Gcloud::Bigquery::Dataset, :query, :mock_bigquery do
     end
 
     job = dataset.query query
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::QueryJob
   end
 
   def query_job_json query

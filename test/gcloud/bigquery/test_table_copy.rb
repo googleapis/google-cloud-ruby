@@ -53,7 +53,7 @@ describe Gcloud::Bigquery::Table, :copy, :mock_bigquery do
     end
 
     job = source_table.copy target_table
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
   it "can copy itself as a dryrun" do
@@ -74,7 +74,7 @@ describe Gcloud::Bigquery::Table, :copy, :mock_bigquery do
     end
 
     job = source_table.copy target_table, dryrun: true
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
   it "can copy itself with create disposition" do
@@ -95,7 +95,7 @@ describe Gcloud::Bigquery::Table, :copy, :mock_bigquery do
     end
 
     job = source_table.copy target_table, create: "CREATE_NEVER"
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
   it "can copy itself with create disposition symbol" do
@@ -116,7 +116,7 @@ describe Gcloud::Bigquery::Table, :copy, :mock_bigquery do
     end
 
     job = source_table.copy target_table, create: :never
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
   it "can copy itself with write disposition" do
@@ -137,7 +137,7 @@ describe Gcloud::Bigquery::Table, :copy, :mock_bigquery do
     end
 
     job = source_table.copy target_table, write: "WRITE_TRUNCATE"
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
   it "can copy itself with write disposition symbol" do
@@ -158,7 +158,7 @@ describe Gcloud::Bigquery::Table, :copy, :mock_bigquery do
     end
 
     job = source_table.copy target_table, write: :truncate
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
   def copy_job_json source, target

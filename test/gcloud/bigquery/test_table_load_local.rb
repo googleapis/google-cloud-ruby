@@ -34,7 +34,7 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
 
     temp_csv do |file|
       job = table.load file
-      job.must_be_kind_of Gcloud::Bigquery::Job
+      job.must_be_kind_of Gcloud::Bigquery::LoadJob
     end
   end
 
@@ -46,7 +46,7 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
 
     temp_json do |file|
       job = table.load file
-      job.must_be_kind_of Gcloud::Bigquery::Job
+      job.must_be_kind_of Gcloud::Bigquery::LoadJob
     end
   end
 

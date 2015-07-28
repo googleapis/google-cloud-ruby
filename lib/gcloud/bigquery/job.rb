@@ -106,6 +106,10 @@ module Gcloud
         Time.at(@gapi["statistics"]["endTime"] / 1000.0)
       end
 
+      def config
+        @gapi["configuration"] || {}
+      end
+
       ##
       # Refreshes the job with current data from the BigQuery service.
       def refresh!
@@ -119,41 +123,10 @@ module Gcloud
       end
 
       ##
-      # Get the data for the job.
-      #
-      # === Parameters
-      #
-      # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
-      # <code>options[:token]</code>::
-      #   Page token, returned by a previous call, identifying the result set.
-      #   (+String+)
-      # <code>options[:max]</code>::
-      #   Maximum number of results to return. (+Integer+)
-      # <code>options[:start]</code>::
-      #   Zero-based index of the starting row to read. (+Integer+)
-      # <code>options[:timeout]</code>::
-      #   How long to wait for the query to complete, in milliseconds, before
-      #   returning. Default is 10,000 milliseconds (10 seconds). (+Integer+)
-      #
-      # === Returns
-      #
-      # Gcloud::Bigquery::QueryData
-      #
-      def query_results options = {}
-        ensure_connection!
-        resp = connection.job_query_results job_id, options
-        if resp.success?
-          QueryData.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
-      end
-
-      ##
       # New Job from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
-        new.tap do |f|
+        klass = klass_for gapi
+        klass.new.tap do |f|
           f.gapi = gapi
           f.connection = conn
         end
@@ -166,6 +139,38 @@ module Gcloud
       def ensure_connection!
         fail "Must have active connection" unless connection
       end
+
+      ##
+      # Get the subclass for a job type
+      def self.klass_for gapi
+        if gapi["configuration"]["copy"]
+          return CopyJob
+        elsif gapi["configuration"]["extract"]
+          return ExtractJob
+        elsif gapi["configuration"]["load"]
+          return LoadJob
+        elsif gapi["configuration"]["query"]
+          return QueryJob
+        end
+        Job
+      end
+
+      def retrieve_table project_id, dataset_id, table_id
+        ensure_connection!
+        resp = connection.get_project_table project_id, dataset_id, table_id
+        if resp.success?
+          Table.from_gapi resp.data, connection
+        else
+          return nil if resp.status == 404
+          fail ApiError.from_response(resp)
+        end
+      end
     end
   end
 end
+
+# We need Job to be defined before loading these.
+require "gcloud/bigquery/copy_job"
+require "gcloud/bigquery/extract_job"
+require "gcloud/bigquery/load_job"
+require "gcloud/bigquery/query_job"

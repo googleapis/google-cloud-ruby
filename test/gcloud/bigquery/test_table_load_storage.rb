@@ -49,7 +49,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     end
 
     job = table.load load_file
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
   end
 
   it "can specify a storage url" do
@@ -67,7 +67,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     end
 
     job = table.load load_url
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
   end
 
   it "can load itself as a dryrun" do
@@ -86,7 +86,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     end
 
     job = table.load load_url, dryrun: true
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
   end
 
   it "can load itself with create disposition" do
@@ -105,7 +105,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     end
 
     job = table.load load_url, create: "CREATE_NEVER"
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
   end
 
   it "can load itself with create disposition symbol" do
@@ -124,7 +124,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     end
 
     job = table.load load_url, create: :never
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
   end
 
   it "can load itself with write disposition" do
@@ -143,7 +143,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     end
 
     job = table.load load_url, write: "WRITE_TRUNCATE"
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
   end
 
   it "can load itself with write disposition symbol" do
@@ -162,7 +162,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     end
 
     job = table.load load_url, write: :truncate
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
   end
 
   def load_job_json table, load_url

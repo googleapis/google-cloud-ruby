@@ -173,7 +173,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Bigquery::Job
+      # Gcloud::Bigquery::CopyJob
       #
       def copy target_table, options = {}
         ensure_connection!
@@ -246,7 +246,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Bigquery::Job
+      # Gcloud::Bigquery::ExtractJob
       #
       def extract extract_url, options = {}
         ensure_connection!
@@ -287,7 +287,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Bigquery::Job
+      # Gcloud::Bigquery::LoadJob
       #
       def load file, options = {}
         ensure_connection!

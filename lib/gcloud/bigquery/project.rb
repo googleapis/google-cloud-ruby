@@ -123,7 +123,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Bigquery::Job
+      # Gcloud::Bigquery::QueryJob
       #
       # === Example
       #

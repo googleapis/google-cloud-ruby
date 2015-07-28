@@ -121,17 +121,21 @@ module Gcloud
         )
       end
 
+      def get_project_table project_id, dataset_id, table_id
+        @client.execute(
+          api_method: @bigquery.tables.get,
+          parameters: { projectId: project_id, datasetId: dataset_id,
+                        tableId: table_id }
+        )
+      end
+
       ##
       # Gets the specified table resource by table ID.
       # This method does not return the data in the table,
       # it only returns the table resource,
       # which describes the structure of this table.
       def get_table dataset_id, table_id
-        @client.execute(
-          api_method: @bigquery.tables.get,
-          parameters: { projectId: @project, datasetId: dataset_id,
-                        tableId: table_id }
-        )
+        get_project_table @project, dataset_id, table_id
       end
 
       ##

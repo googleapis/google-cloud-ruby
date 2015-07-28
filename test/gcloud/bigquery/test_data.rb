@@ -30,6 +30,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     end
 
     data = table.data
+    data.class.must_equal Gcloud::Bigquery::Data
     data.count.must_equal 3
     data[0].must_be_kind_of Hash
     data[0]["name"].must_equal "Heidi"
@@ -55,6 +56,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     end
 
     data = table.data
+    data.class.must_equal Gcloud::Bigquery::Data
     data.kind.must_equal "bigquery#tableDataList"
     data.etag.must_equal "etag1234567890"
     data.token.must_equal "token1234567890"
@@ -68,6 +70,8 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     end
 
     data = table.data
+    data.class.must_equal Gcloud::Bigquery::Data
+
     data.raw.wont_be :nil?
     data.raw.count.must_equal data.count
     data.raw[0][0].must_equal data[0]["name"].to_s
@@ -93,6 +97,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     end
 
     data = table.data
+    data.class.must_equal Gcloud::Bigquery::Data
     data.kind.must_equal "bigquery#tableDataList"
     data.etag.must_equal "etag1234567890"
     data.token.must_equal "token1234567890"
@@ -113,9 +118,11 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     end
 
     data1 = table.data
+    data1.class.must_equal Gcloud::Bigquery::Data
     data1.token.wont_be :nil?
     data1.token.must_equal "token1234567890"
     data2 = table.data token: data1.token
+    data2.class.must_equal Gcloud::Bigquery::Data
   end
 
   it "paginates datasets with max set" do
@@ -127,6 +134,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     end
 
     data = table.data max: 3
+    data.class.must_equal Gcloud::Bigquery::Data
   end
 
   it "paginates datasets without max set" do
@@ -137,6 +145,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     end
 
     data = table.data
+    data.class.must_equal Gcloud::Bigquery::Data
   end
 
   it "paginates datasets with start set" do
@@ -148,6 +157,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     end
 
     data = table.data start: 25
+    data.class.must_equal Gcloud::Bigquery::Data
   end
 
   it "paginates datasets without start set" do
@@ -158,6 +168,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     end
 
     data = table.data
+    data.class.must_equal Gcloud::Bigquery::Data
   end
 
   def table_data_json

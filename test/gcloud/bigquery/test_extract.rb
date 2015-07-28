@@ -48,7 +48,7 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
     end
 
     job = table.extract extract_file
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself to a storage url" do
@@ -65,7 +65,7 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
     end
 
     job = table.extract extract_url
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself as a dryrun" do
@@ -83,7 +83,7 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
     end
 
     job = table.extract extract_url, dryrun: true
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and determine the csv format" do
@@ -100,7 +100,7 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
     end
 
     job = table.extract "#{extract_url}.csv"
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the csv format" do
@@ -117,7 +117,7 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
     end
 
     job = table.extract extract_url, format: :csv
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and determine the json format" do
@@ -134,7 +134,7 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
     end
 
     job = table.extract "#{extract_url}.json"
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the json format" do
@@ -151,7 +151,7 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
     end
 
     job = table.extract extract_url, format: :json
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and determine the avro format" do
@@ -168,7 +168,7 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
     end
 
     job = table.extract "#{extract_url}.avro"
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the avro format" do
@@ -185,7 +185,7 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
     end
 
     job = table.extract extract_url, format: :avro
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   def extract_job_json table, extract_file

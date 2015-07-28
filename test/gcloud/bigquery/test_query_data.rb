@@ -99,7 +99,9 @@ describe Gcloud::Bigquery::QueryData, :mock_bigquery do
 
     # Additional calls do not make additional HTTP API calls
     job2 = query_data.job
+    job2.must_equal job
     job3 = query_data.job
+    job3.must_equal job
   end
 
   it "can hold a job object and not make HTTP API calls to return it" do

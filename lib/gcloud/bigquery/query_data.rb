@@ -26,6 +26,11 @@ module Gcloud
       # The Connection object.
       attr_accessor :connection #:nodoc:
 
+      def initialize arr = []
+        @job = nil
+        super
+      end
+
       # The total number of bytes processed for this query.
       def total_bytes
         @gapi["totalBytesProcessed"]

@@ -32,8 +32,8 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
       json["configuration"]["query"]["priority"].must_be :nil?
       json["configuration"]["query"]["useQueryCache"].must_be :nil?
       json["configuration"]["query"]["destinationTable"].must_be :nil?
-      json["configuration"]["query"]["createDispiostion"].must_be :nil?
-      json["configuration"]["query"]["writeDispositokns"].must_be :nil?
+      json["configuration"]["query"]["createDisposition"].must_be :nil?
+      json["configuration"]["query"]["writeDisposition"].must_be :nil?
       json["configuration"]["query"]["allowLargeResults"].must_be :nil?
       json["configuration"]["query"]["flattenResults"].must_be :nil?
       json["configuration"]["query"]["defaultDataset"].must_be :nil?
@@ -42,7 +42,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     end
 
     job = bigquery.query query
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::QueryJob
   end
 
   it "queries the data with options set" do
@@ -56,7 +56,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     end
 
     job = bigquery.query query, priority: :batch, cache: false
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::QueryJob
   end
 
   it "queries the data with table options" do
@@ -78,7 +78,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     job = bigquery.query query, table: table,
                                 create: :never, write: :truncate,
                                 large_results: true, flatten: false
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::QueryJob
   end
 
   it "queries the data with dataset option as a Dataset" do
@@ -93,7 +93,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     end
 
     job = bigquery.query query, dataset: dataset
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::QueryJob
   end
 
   it "queries the data with dataset option as a String" do
@@ -108,7 +108,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     end
 
     job = bigquery.query query, dataset: dataset_id
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Gcloud::Bigquery::QueryJob
   end
 
   def query_job_json query
