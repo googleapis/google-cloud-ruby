@@ -90,6 +90,33 @@ module Gcloud
       #   Whether to look for the result in the query cache. The query cache is
       #   a best-effort cache that will be flushed whenever tables in the query
       #   are modified. The default value is +true+. (+Boolean+)
+      # <code>options[:table]</code>::
+      #   The table where the query results should be stored. If not present, a
+      #   new table will be created to store the results. (+Table+)
+      # <code>options[:create]</code>::
+      #   Specifies whether the job is allowed to create new tables. (+String+)
+      #
+      #   The following values are supported:
+      #   * +needed+ - Create the table if it does not exist.
+      #   * +never+ - The table must already exist. A 'notFound' error is
+      #     raised if the table does not exist.
+      # <code>options[:write]</code>::
+      #   Specifies the action that occurs if the destination table already
+      #   exists. (+String+)
+      #
+      #   The following values are supported:
+      #   * +truncate+ - BigQuery overwrites the table data.
+      #   * +append+ - BigQuery appends the data to the table.
+      #   * +empty+ - A 'duplicate' error is returned in the job result if the
+      #     table exists and contains data.
+      # <code>options[:large_results]</code>::
+      #   If +true+, allows the query to produce arbitrarily large result tables
+      #   at a slight cost in performance. Requires <code>options[:table]</code>
+      #   to be set. (+Boolean+)
+      # <code>options[:flatten]</code>::
+      #   Flattens all nested and repeated fields in the query results. The
+      #   default value is +true+. <code>options[:large_results]</code> must be
+      #   +true+ if this is set to +false+. (+Boolean+)
       #
       # === Returns
       #

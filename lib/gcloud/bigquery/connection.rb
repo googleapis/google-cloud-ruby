@@ -349,27 +349,28 @@ module Gcloud
       ##
       # Job description for query job
       def query_table_config query, options
+        dest_table = nil
+        if options[:table]
+          dest_table = { "projectId"  => options[:table].project_id,
+                          "datasetId" => options[:table].dataset_id,
+                          "tableId"   => options[:table].table_id }
+        end
         {
           "configuration" => {
             "query" => {
               "query" => query,
               # "tableDefinitions" => { ... },
-              # "createDisposition" => create_disposition(options[:create]),
-              # "writeDisposition" => write_disposition(options[:write]),
+              "priority" => priority_value(options[:priority]),
+              "useQueryCache" => options[:cache],
+              "destinationTable" => dest_table,
+              "createDisposition" => create_disposition(options[:create]),
+              "writeDisposition" => write_disposition(options[:write]),
+              "allowLargeResults" => options[:large_results],
+              "flattenResults" => options[:flatten]
               # "defaultDataset" => {
               #   "datasetId" => string,
               #   "projectId" => string
-              # },
-              # "destinationTable" => {
-              #   "projectId" => string,
-              #   "datasetId" => string,
-              #   "tableId" => string
-              # },
-              "priority" => priority_value(options[:priority]),
-              # "preserveNulls" => boolean,
-              # "allowLargeResults" => boolean,
-              "useQueryCache" => options[:cache]
-              # "flattenResults" => boolean
+              # }
             }.delete_if { |_, v| v.nil? }
           }.delete_if { |_, v| v.nil? }
         }
