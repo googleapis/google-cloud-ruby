@@ -91,6 +91,11 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     job.ended_at.must_be_close_to nowish
   end
 
+  it "knows its stats config" do
+    job.stats.must_be_kind_of Hash
+    job.stats["creationTime"].wont_be :nil?
+  end
+
   it "can refresh itself" do
     mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
       [200, {"Content-Type"=>"application/json"},

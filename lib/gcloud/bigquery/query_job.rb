@@ -19,32 +19,44 @@ module Gcloud
     # = Query Job
     class QueryJob < Job
       def batch?
-        val = @gapi["configuration"]["query"]["priority"]
+        val = config["query"]["priority"]
         val == "BATCH"
       end
 
       def interactive?
-        val = @gapi["configuration"]["query"]["priority"]
+        val = config["query"]["priority"]
         return true if val.nil?
         val == "INTERACTIVE"
       end
 
       def large_results?
-        val = @gapi["configuration"]["query"]["preserveNulls"]
+        val = config["query"]["preserveNulls"]
         return false if val.nil?
         val
       end
 
       def cache?
-        val = @gapi["configuration"]["query"]["useQueryCache"]
+        val = config["query"]["useQueryCache"]
         return false if val.nil?
         val
       end
 
       def flatten?
-        val = @gapi["configuration"]["query"]["flattenResults"]
+        val = config["query"]["flattenResults"]
         return true if val.nil?
         val
+      end
+
+      ##
+      # Whether the query result was fetched from the query cache.
+      def cache_hit?
+        stats["query"]["cacheHit"]
+      end
+
+      ##
+      # Total bytes processed for this job.
+      def bytes_processed
+        stats["query"]["totalBytesProcessed"]
       end
 
       def destination

@@ -35,27 +35,27 @@ module Gcloud
       end
 
       def create_if_needed?
-        disp = @gapi["configuration"]["copy"]["createDisposition"]
+        disp = config["copy"]["createDisposition"]
         disp == "CREATE_IF_NEEDED"
       end
 
       def create_never?
-        disp = @gapi["configuration"]["copy"]["createDisposition"]
+        disp = config["copy"]["createDisposition"]
         disp == "CREATE_NEVER"
       end
 
       def write_truncate?
-        disp = @gapi["configuration"]["copy"]["writeDisposition"]
+        disp = config["copy"]["writeDisposition"]
         disp == "WRITE_TRUNCATE"
       end
 
       def write_append?
-        disp = @gapi["configuration"]["copy"]["writeDisposition"]
+        disp = config["copy"]["writeDisposition"]
         disp == "WRITE_APPEND"
       end
 
       def write_empty?
-        disp = @gapi["configuration"]["copy"]["writeDisposition"]
+        disp = config["copy"]["writeDisposition"]
         disp == "WRITE_EMPTY"
       end
     end

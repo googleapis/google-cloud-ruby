@@ -43,7 +43,7 @@ module Gcloud
       end
 
       # Whether the query result was fetched from the query cache.
-      def cache?
+      def cache_hit?
         @gapi["cacheHit"]
       end
 

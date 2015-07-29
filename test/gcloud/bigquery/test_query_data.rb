@@ -46,7 +46,7 @@ describe Gcloud::Bigquery::QueryData, :mock_bigquery do
     query_data.total_bytes.must_equal 456789
     # Cannot call `query_data.must_be :complete?` on a delegate
     query_data.complete?.must_equal true
-    query_data.cache?.must_equal false
+    query_data.cache_hit?.must_equal false
   end
 
   it "knows the raw, unformatted data" do

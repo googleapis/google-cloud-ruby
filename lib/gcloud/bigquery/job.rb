@@ -107,7 +107,15 @@ module Gcloud
       end
 
       def config
-        @gapi["configuration"] || {}
+        hash = @gapi["configuration"] || {}
+        hash = hash.to_hash if hash.respond_to? :to_hash
+        hash
+      end
+
+      def stats
+        hash = @gapi["statistics"] || {}
+        hash = hash.to_hash if hash.respond_to? :to_hash
+        hash
       end
 
       ##

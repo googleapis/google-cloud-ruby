@@ -28,7 +28,7 @@ describe Gcloud::Bigquery::CopyJob, :mock_bigquery do
   it "knows its destination uris" do
     job.destinations.must_be_kind_of Array
     job.destinations.count.must_equal 1
-    job.destinations.first.must_equal "gs://bucket/file.ext"
+    job.destinations.first.must_equal "gs://bucket/file-*.ext"
   end
 
   it "knows its source table" do
@@ -59,10 +59,22 @@ describe Gcloud::Bigquery::CopyJob, :mock_bigquery do
     job.config["extract"]["fieldDelimiter"].must_equal ","
   end
 
+  it "knows its statistics attributes" do
+    # stats convenience method
+    job.destinations_file_counts.must_be_kind_of Array
+    job.destinations_file_counts.count.must_equal 1
+    job.destinations_file_counts.first.must_equal 123
+
+    # hash of the uris and the file counts
+    job.destinations_counts.must_be_kind_of Hash
+    job.destinations_counts.count.must_equal 1
+    job.destinations_counts["gs://bucket/file-*.ext"].must_equal 123
+  end
+
   def extract_job_hash
     hash = random_job_hash
     hash["configuration"]["extract"] = {
-      "destinationUris" => ["gs://bucket/file.ext"],
+      "destinationUris" => ["gs://bucket/file-*.ext"],
       "sourceTable" => {
         "projectId" => "source_project_id",
         "datasetId" => "source_dataset_id",
@@ -72,6 +84,9 @@ describe Gcloud::Bigquery::CopyJob, :mock_bigquery do
       "destinationFormat" => "NEWLINE_DELIMITED_JSON",
       "fieldDelimiter" => ",",
       "printHeader" => true
+    }
+    hash["statistics"]["extract"] = {
+      "destinationUriFileCounts" => [123]
     }
     hash
   end

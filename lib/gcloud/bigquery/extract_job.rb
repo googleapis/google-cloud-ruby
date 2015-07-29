@@ -31,36 +31,44 @@ module Gcloud
       end
 
       def compression?
-        val = @gapi["configuration"]["extract"]["compression"]
+        val = config["extract"]["compression"]
         val == "GZIP"
       end
 
       def json?
-        val = @gapi["configuration"]["extract"]["destinationFormat"]
+        val = config["extract"]["destinationFormat"]
         val == "NEWLINE_DELIMITED_JSON"
       end
 
       def csv?
-        val = @gapi["configuration"]["extract"]["destinationFormat"]
+        val = config["extract"]["destinationFormat"]
         return true if val.nil?
         val == "CSV"
       end
 
       def avro?
-        val = @gapi["configuration"]["extract"]["destinationFormat"]
+        val = config["extract"]["destinationFormat"]
         val == "AVRO"
       end
 
       def delimiter
-        val = @gapi["configuration"]["extract"]["fieldDelimiter"]
+        val = config["extract"]["fieldDelimiter"]
         val = "," if val.nil?
         val
       end
 
       def print_header?
-        val = @gapi["configuration"]["extract"]["printHeader"]
+        val = config["extract"]["printHeader"]
         val = true if val.nil?
         val
+      end
+
+      def destinations_file_counts
+        Array stats["extract"]["destinationUriFileCounts"]
+      end
+
+      def destinations_counts
+        Hash[destinations.zip destinations_file_counts]
       end
     end
   end

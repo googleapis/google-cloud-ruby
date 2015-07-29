@@ -38,15 +38,16 @@ describe Gcloud::Bigquery::QueryJob, :mock_bigquery do
   end
 
   it "knows its attributes" do
-    # "priority" => string,
     job.must_be :batch?
     job.wont_be :interactive?
-    # "allowLargeResults" => boolean,
     job.must_be :large_results?
-    # "useQueryCache" => boolean,
     job.must_be :cache?
-    # "flattenResults" => boolean
     job.must_be :flatten?
+  end
+
+  it "knows its statistics data" do
+    job.wont_be :cache_hit?
+    job.bytes_processed.must_equal 123456
   end
 
   it "knows its query config" do
@@ -77,6 +78,10 @@ describe Gcloud::Bigquery::QueryJob, :mock_bigquery do
       "allowLargeResults" => true,
       "useQueryCache" => true,
       "flattenResults" => true
+    }
+    hash["statistics"]["query"] = {
+      "cacheHit" => false,
+      "totalBytesProcessed" => 123456
     }
     hash
   end

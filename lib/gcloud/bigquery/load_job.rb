@@ -31,78 +31,94 @@ module Gcloud
       end
 
       def delimiter
-        val = @gapi["configuration"]["load"]["fieldDelimiter"]
+        val = config["load"]["fieldDelimiter"]
         val = "," if val.nil?
         val
       end
 
       def skip_leading_rows
-        val = @gapi["configuration"]["load"]["skipLeadingRows"]
+        val = config["load"]["skipLeadingRows"]
         val = 0 if val.nil?
         val
       end
 
       def utf8?
-        val = @gapi["configuration"]["load"]["encoding"]
+        val = config["load"]["encoding"]
         return true if val.nil?
         val == "UTF-8"
       end
 
       def iso8859_1?
-        val = @gapi["configuration"]["load"]["encoding"]
+        val = config["load"]["encoding"]
         val == "ISO-8859-1"
       end
 
       def quote
-        val = @gapi["configuration"]["load"]["quote"]
+        val = config["load"]["quote"]
         val = "\"" if val.nil?
         val
       end
 
       def max_bad_records
-        val = @gapi["configuration"]["load"]["maxBadRecords"]
+        val = config["load"]["maxBadRecords"]
         val = 0 if val.nil?
         val
       end
 
       def quoted_newlines?
-        val = @gapi["configuration"]["load"]["allowQuotedNewlines"]
+        val = config["load"]["allowQuotedNewlines"]
         val = true if val.nil?
         val
       end
 
       def json?
-        val = @gapi["configuration"]["load"]["sourceFormat"]
+        val = config["load"]["sourceFormat"]
         val == "NEWLINE_DELIMITED_JSON"
       end
 
       def csv?
-        val = @gapi["configuration"]["load"]["sourceFormat"]
+        val = config["load"]["sourceFormat"]
         return true if val.nil?
         val == "CSV"
       end
 
       def backup?
-        val = @gapi["configuration"]["load"]["sourceFormat"]
+        val = config["load"]["sourceFormat"]
         val == "DATASTORE_BACKUP"
       end
 
       def allow_jagged_rows?
-        val = @gapi["configuration"]["load"]["allowJaggedRows"]
+        val = config["load"]["allowJaggedRows"]
         val = false if val.nil?
         val
       end
 
       def ignore_unknown_values?
-        val = @gapi["configuration"]["load"]["ignoreUnknownValues"]
+        val = config["load"]["ignoreUnknownValues"]
         val = false if val.nil?
         val
       end
 
       def schema
-        val = @gapi["configuration"]["load"]["schema"]
+        val = config["load"]["schema"]
         val = {} if val.nil?
         val
+      end
+
+      def input_files
+        stats["load"]["inputFiles"]
+      end
+
+      def input_file_bytes
+        stats["load"]["inputFileBytes"]
+      end
+
+      def output_rows
+        stats["load"]["outputRows"]
+      end
+
+      def output_bytes
+        stats["load"]["outputBytes"]
       end
     end
   end

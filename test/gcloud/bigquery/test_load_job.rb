@@ -58,6 +58,13 @@ describe Gcloud::Bigquery::LoadJob, :mock_bigquery do
     job.must_be :ignore_unknown_values?
   end
 
+  it "knows its statistics data" do
+    job.input_files.must_equal 3
+    job.input_file_bytes.must_equal 456
+    job.output_rows.must_equal 5
+    job.output_bytes.must_equal 789
+  end
+
   it "knows its schema" do
     job.schema.must_be_kind_of Hash
     job.schema["fields"][0]["name"].must_equal "name"
@@ -106,6 +113,12 @@ describe Gcloud::Bigquery::LoadJob, :mock_bigquery do
       "sourceFormat" => "NEWLINE_DELIMITED_JSON",
       "allowJaggedRows" => true,
       "ignoreUnknownValues" => true
+    }
+    hash["statistics"]["load"] = {
+      "inputFiles" => 3,
+      "inputFileBytes" => 456,
+      "outputRows" => 5,
+      "outputBytes" => 789
     }
     hash
   end
