@@ -300,6 +300,17 @@ module Gcloud
         end
       end
 
+      def insert rows, options = {}
+        rows = [rows] if rows.is_a? Hash
+        ensure_connection!
+        resp = connection.insert_tabledata dataset_id, table_id, rows, options
+        if resp.success?
+          InsertResponse.from_gapi rows, resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
       ##
       # Permenently deletes the table.
       #
@@ -410,6 +421,68 @@ module Gcloud
         end
         return if chunk_size.zero?
         chunk_size
+      end
+
+      ##
+      # InsertResponse
+      class InsertResponse
+        def initialize rows, gapi #:nodoc:
+          @rows = rows
+          @gapi = gapi
+        end
+
+        def success?
+          error_count.zero?
+        end
+
+        def insert_count
+          @insert_count ||= @rows.count - error_count
+        end
+
+        def error_count
+          @error_count ||= Array(@gapi["insertErrors"]).count
+        end
+
+        def insert_errors
+          @insert_errors ||= begin
+            Array(@gapi["insertErrors"]).map do |ie|
+              row = @rows[ie["index"]]
+              errors = ie["errors"]
+              InsertError.new row, errors
+            end
+          end
+        end
+
+        def error_rows
+          @error_rows ||= begin
+            Array(@gapi["insertErrors"]).map do |ie|
+              @rows[ie["index"]]
+            end
+          end
+        end
+
+        def errors_for row
+          ie = insert_errors.detect { |e| e.row == row }
+          return ie.errors if ie
+          []
+        end
+
+        def self.from_gapi rows, gapi #:nodoc:
+          gapi = gapi.to_hash if gapi.respond_to? :to_hash
+          new rows, gapi
+        end
+
+        ##
+        # InsertError
+        class InsertError
+          attr_reader :row
+          attr_reader :errors
+
+          def initialize row, errors
+            @row = row
+            @errors = errors
+          end
+        end
       end
     end
   end

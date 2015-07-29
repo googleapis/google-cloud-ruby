@@ -16,6 +16,7 @@
 require "gcloud/version"
 require "google/api_client"
 require "mime/types"
+require "digest/md5"
 
 module Gcloud
   module Bigquery
@@ -191,6 +192,16 @@ module Gcloud
         )
       end
 
+      def insert_tabledata dataset_id, table_id, rows, options = {}
+        @client.execute(
+          api_method: @bigquery.tabledata.insert_all,
+          parameters: { projectId: @project,
+                        datasetId: dataset_id,
+                        tableId: table_id },
+          body_object: insert_tabledata_rows(rows, options)
+        )
+      end
+
       ##
       # Lists all jobs in the specified project to which you have
       # been granted the READER job role.
@@ -343,6 +354,18 @@ module Gcloud
           },
           friendlyName: options[:name],
           description: options[:description]
+        }.delete_if { |_, v| v.nil? }
+      end
+
+      def insert_tabledata_rows rows, options = {}
+        {
+          "kind" => "bigquery#tableDataInsertAllRequest",
+          "skipInvalidRows" => options[:skip_invalid],
+          "ignoreUnknownValues" => options[:ignore_unknown],
+          "rows" => rows.map do |row|
+            { "insertId" => Digest::MD5.base64digest(row.inspect),
+              "json" => row }
+          end
         }.delete_if { |_, v| v.nil? }
       end
 
