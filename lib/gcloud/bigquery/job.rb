@@ -112,17 +112,19 @@ module Gcloud
         Time.at(@gapi["statistics"]["endTime"] / 1000.0)
       end
 
-      def config
+      def configuration
         hash = @gapi["configuration"] || {}
         hash = hash.to_hash if hash.respond_to? :to_hash
         hash
       end
+      alias_method :config, :configuration
 
-      def stats
+      def statistics
         hash = @gapi["statistics"] || {}
         hash = hash.to_hash if hash.respond_to? :to_hash
         hash
       end
+      alias_method :stats, :statistics
 
       def status
         hash = @gapi["status"] || {}

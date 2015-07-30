@@ -118,7 +118,16 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     job.ended_at.must_be_close_to nowish
   end
 
-  it "knows its stats config" do
+  it "knows its configuration" do
+    job.config.must_be_kind_of Hash
+    job.config["dryRun"].must_equal false
+    job.configuration.must_be_kind_of Hash
+    job.configuration["dryRun"].must_equal false
+  end
+
+  it "knows its statistics config" do
+    job.statistics.must_be_kind_of Hash
+    job.statistics["creationTime"].wont_be :nil?
     job.stats.must_be_kind_of Hash
     job.stats["creationTime"].wont_be :nil?
   end
