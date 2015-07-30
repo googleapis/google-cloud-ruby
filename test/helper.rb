@@ -378,7 +378,9 @@ class MockBigquery < Minitest::Spec
         "dryRun" => false
       },
       "status" => {
-        "state" => state
+        "state" => state,
+        "errorResult" => nil,
+        "errors" => nil
       },
       "statistics" => {
         "creationTime" => (Time.now.to_f * 1000).floor,

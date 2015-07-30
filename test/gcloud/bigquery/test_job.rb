@@ -23,6 +23,26 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
                                               bigquery.connection }
   let(:job_id) { job.job_id }
 
+  let(:failed_job_hash) do
+    hash = random_job_hash "1234567890", "DONE"
+    hash["status"]["errorResult"] = {
+      "reason"    => "r34s0n",
+      "location"  => "l0c4t10n",
+      "debugInfo" => "d3bugInf0",
+      "message"   => "m3ss4g3"
+    }
+    hash["status"]["errors"] = [{
+      "reason"    => "r34s0n",
+      "location"  => "l0c4t10n",
+      "debugInfo" => "d3bugInf0",
+      "message"   => "m3ss4g3"
+    }]
+    hash
+  end
+  let(:failed_job) { Gcloud::Bigquery::Job.from_gapi failed_job_hash,
+                                              bigquery.connection }
+  let(:failed_job_id) { failed_job.job_id }
+
   it "knows its attributes" do
     job.job_id.must_equal job_hash["jobReference"]["jobId"]
   end
@@ -32,42 +52,49 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     job.must_be :running?
     job.wont_be :pending?
     job.wont_be :done?
+    job.wont_be :failed?
 
     job.gapi["status"]["state"] = "RUNNING"
     job.state.must_equal "RUNNING"
     job.must_be :running?
     job.wont_be :pending?
     job.wont_be :done?
+    job.wont_be :failed?
 
     job.gapi["status"]["state"] = "pending"
     job.state.must_equal "pending"
     job.wont_be :running?
     job.must_be :pending?
     job.wont_be :done?
+    job.wont_be :failed?
 
     job.gapi["status"]["state"] = "PENDING"
     job.state.must_equal "PENDING"
     job.wont_be :running?
     job.must_be :pending?
     job.wont_be :done?
+    job.wont_be :failed?
 
     job.gapi["status"]["state"] = "done"
     job.state.must_equal "done"
     job.wont_be :running?
     job.wont_be :pending?
     job.must_be :done?
+    job.wont_be :failed?
 
     job.gapi["status"]["state"] = "DONE"
     job.state.must_equal "DONE"
     job.wont_be :running?
     job.wont_be :pending?
     job.must_be :done?
+    job.wont_be :failed?
 
     job.gapi["status"]["state"] = nil
     job.state.must_equal nil
     job.wont_be :running?
     job.wont_be :pending?
     job.wont_be :done?
+    job.wont_be :failed?
   end
 
   it "knows its creation and modification times" do
@@ -94,6 +121,28 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
   it "knows its stats config" do
     job.stats.must_be_kind_of Hash
     job.stats["creationTime"].wont_be :nil?
+  end
+
+  it "knows its error info if it has not failed" do
+    job.wont_be :failed?
+    job.error.must_be :nil?
+    job.errors.count.must_equal 0
+  end
+
+  it "knows if it has failed" do
+    failed_job.state.must_equal "DONE"
+    failed_job.must_be :failed?
+    failed_job.error.must_be_kind_of Hash
+    failed_job.error.wont_be :empty?
+    failed_job.error["reason"].must_equal "r34s0n"
+    failed_job.error["location"].must_equal "l0c4t10n"
+    failed_job.error["debugInfo"].must_equal "d3bugInf0"
+    failed_job.error["message"].must_equal "m3ss4g3"
+    failed_job.errors.count.must_equal 1
+    failed_job.errors.first["reason"].must_equal "r34s0n"
+    failed_job.errors.first["location"].must_equal "l0c4t10n"
+    failed_job.errors.first["debugInfo"].must_equal "d3bugInf0"
+    failed_job.errors.first["message"].must_equal "m3ss4g3"
   end
 
   it "can refresh itself" do

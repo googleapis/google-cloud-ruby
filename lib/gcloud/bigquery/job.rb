@@ -80,6 +80,12 @@ module Gcloud
       end
 
       ##
+      # Checks if the job's status is "done" and an error is present.
+      def failed?
+        !error.nil?
+      end
+
+      ##
       # The time when this job was created.
       def created_at
         return nil if @gapi["statistics"].nil?
@@ -116,6 +122,20 @@ module Gcloud
         hash = @gapi["statistics"] || {}
         hash = hash.to_hash if hash.respond_to? :to_hash
         hash
+      end
+
+      def status
+        hash = @gapi["status"] || {}
+        hash = hash.to_hash if hash.respond_to? :to_hash
+        hash
+      end
+
+      def error
+        status["errorResult"]
+      end
+
+      def errors
+        Array status["errors"]
       end
 
       ##
