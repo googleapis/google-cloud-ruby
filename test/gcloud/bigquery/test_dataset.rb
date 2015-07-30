@@ -22,6 +22,9 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   let(:dataset_name) { "My Dataset" }
   let(:description) { "This is my dataset" }
   let(:default_expiration) { 999 }
+  let(:etag) { "etag123456789" }
+  let(:location_code) { "US" }
+  let(:url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" }
   let(:dataset_hash) { random_dataset_hash dataset_id, dataset_name, description, default_expiration }
   let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_hash,
                                                       bigquery.connection }
@@ -30,19 +33,16 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     dataset.name.must_equal dataset_name
     dataset.description.must_equal description
     dataset.default_expiration.must_equal default_expiration
+    dataset.etag.must_equal etag
+    dataset.url.must_equal url
+    dataset.location.must_equal location_code
   end
 
   it "knows its creation and modification times" do
     now = Time.now
 
-    dataset.gapi["creationTime"] = nil
-    dataset.created_at.must_be :nil?
-
     dataset.gapi["creationTime"] = (now.to_f * 1000).floor
     dataset.created_at.must_be_close_to now
-
-    dataset.gapi["lastModifiedTime"] = nil
-    dataset.modified_at.must_be :nil?
 
     dataset.gapi["lastModifiedTime"] = (now.to_f * 1000).floor
     dataset.modified_at.must_be_close_to now

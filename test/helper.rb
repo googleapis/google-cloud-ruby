@@ -250,9 +250,9 @@ class MockBigquery < Minitest::Spec
 
     {
       "kind" => "bigquery#dataset",
-      "etag" => "etag",
+      "etag" => "etag123456789",
       "id" => "id",
-      "selfLink" => "link",
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{id}",
       "datasetReference" => {
         "datasetId" => id,
         "projectId" => project
@@ -274,8 +274,9 @@ class MockBigquery < Minitest::Spec
           }
         }
       ],
-      "creationTime" => Time.now.to_i,
-      "lastModifiedTime" => Time.now.to_i
+      "creationTime" => Time.now.to_i*1000,
+      "lastModifiedTime" => Time.now.to_i*1000,
+      "location" => "US"
     }
   end
 

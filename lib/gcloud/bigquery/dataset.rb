@@ -59,29 +59,53 @@ module Gcloud
       end
 
       ##
+      # A string hash of the dataset.
+      def etag
+        ensure_full_data!
+        @gapi["etag"]
+      end
+
+      ##
+      # A URL that can be used to access the dataset using the REST API.
+      def url
+        ensure_full_data!
+        @gapi["selfLink"]
+      end
+
+      ##
       # A user-friendly description of the dataset.
       def description
+        ensure_full_data!
         @gapi["description"]
       end
 
       ##
       # The default lifetime of all tables in the dataset, in milliseconds.
       def default_expiration
+        ensure_full_data!
         @gapi["defaultTableExpirationMs"]
       end
 
       ##
       # The time when this dataset was created.
       def created_at
-        return nil if @gapi["creationTime"].nil?
+        ensure_full_data!
         Time.at(@gapi["creationTime"] / 1000.0)
       end
 
       ##
       # The date when this dataset or any of its tables was last modified.
       def modified_at
-        return nil if @gapi["lastModifiedTime"].nil?
+        ensure_full_data!
         Time.at(@gapi["lastModifiedTime"] / 1000.0)
+      end
+
+      ##
+      # The geographic location where the dataset should reside. Possible
+      # values include EU and US. The default value is US.
+      def location
+        ensure_full_data!
+        @gapi["location"]
       end
 
       ##
@@ -351,6 +375,27 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      ##
+      # Load the complete representation of the dataset if it has been
+      # only partially loaded by a request to the API list method.
+      def ensure_full_data!
+        reload_gapi! unless data_complete?
+      end
+
+      def reload_gapi!
+        ensure_connection!
+        resp = connection.get_dataset dataset_id
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      def data_complete?
+        !@gapi["creationTime"].nil?
       end
     end
   end
