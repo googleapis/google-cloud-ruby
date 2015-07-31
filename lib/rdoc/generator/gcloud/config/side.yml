@@ -3,6 +3,21 @@ classes:
 - full_name: Gcloud
   name: Gcloud
   indent: 0
+- full_name: Gcloud::Bigquery
+  name: BigQuery
+  indent: 0
+- full_name: Gcloud::Bigquery::Project
+  name: Project
+  indent: 1
+- full_name: Gcloud::Bigquery::Dataset
+  name: Dataset
+  indent: 1
+- full_name: Gcloud::Bigquery::Job
+  name: Job
+  indent: 1
+- full_name: Gcloud::Bigquery::Table
+  name: Table
+  indent: 1
 - full_name: Gcloud::Datastore
   name: Datastore
   indent: 0
