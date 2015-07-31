@@ -334,8 +334,8 @@ module Gcloud
                    allUsers: options.delete(:all),
                    pageToken: options.delete(:token),
                    maxResults: options.delete(:max),
-                   projection: options.delete(:projection),
-                   stateFilter: options.delete(:filter)
+                   stateFilter: options.delete(:filter),
+                   projection: "full"
                  }.delete_if { |_, v| v.nil? }
         params
       end

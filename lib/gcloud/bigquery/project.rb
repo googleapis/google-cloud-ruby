@@ -346,12 +346,6 @@ module Gcloud
       #   of results to view. (+String+)
       # <code>options[:max]</code>::
       #   Maximum number of jobs to return. (+Integer+)
-      # <code>options[:projection]</code>::
-      #   Restrict information returned to a set of selected fields (+String+)
-      #
-      #   Acceptable values are:
-      #   * +full+ - Includes all job data.
-      #   * +minimal+ - Does not include the job configuration.
       # <code>options[:filter]</code>::
       #   Filter for job state (+String+)
       #
