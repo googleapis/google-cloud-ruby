@@ -59,6 +59,12 @@ module Gcloud
       end
 
       ##
+      # Updates the descriptive name for the dataset.
+      def name= new_name
+        patch_gapi! name: new_name
+      end
+
+      ##
       # A string hash of the dataset.
       def etag
         ensure_full_data!
@@ -80,10 +86,23 @@ module Gcloud
       end
 
       ##
+      # Updates the user-friendly description of the dataset.
+      def description= new_description
+        patch_gapi! description: new_description
+      end
+
+      ##
       # The default lifetime of all tables in the dataset, in milliseconds.
       def default_expiration
         ensure_full_data!
         @gapi["defaultTableExpirationMs"]
+      end
+
+      ##
+      # Updates the default lifetime of all tables in the dataset, in
+      # milliseconds.
+      def default_expiration= new_default_expiration
+        patch_gapi! default_expiration: new_default_expiration
       end
 
       ##
@@ -375,6 +394,16 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      def patch_gapi! options = {}
+        ensure_connection!
+        resp = connection.patch_dataset dataset_id, options
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
       end
 
       ##

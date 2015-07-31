@@ -78,10 +78,11 @@ module Gcloud
       ##
       # Updates information in an existing dataset, only replacing
       # fields that are provided in the submitted dataset resource.
-      def patch_dataset project_id, dataset_id, options = {}
+      def patch_dataset dataset_id, options = {}
+        project_id = options[:project_id] || @project
         body = { friendlyName: options[:name],
                  description: options[:description],
-                 defaultTableExpirationMs: options[:table_expiration]
+                 defaultTableExpirationMs: options[:default_expiration]
                }.delete_if { |_, v| v.nil? }
 
         @client.execute(
