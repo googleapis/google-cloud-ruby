@@ -64,23 +64,45 @@ module Gcloud
       end
 
       ##
+      # A string hash of the dataset.
+      def etag
+        ensure_full_data!
+        @gapi["etag"]
+      end
+
+      ##
+      # A URL that can be used to access the dataset using the REST API.
+      def url
+        ensure_full_data!
+        @gapi["selfLink"]
+      end
+
+      ##
       # The description of the table.
       def description
+        ensure_full_data!
         @gapi["description"]
+      end
+
+      ##
+      # The number of bytes in the table.
+      def bytes_count
+        ensure_full_data!
+        @gapi["numBytes"]
+      end
+
+      ##
+      # The number of rows in the table.
+      def rows_count
+        ensure_full_data!
+        @gapi["numRows"]
       end
 
       ##
       # The time when this table was created.
       def created_at
-        return nil if @gapi["creationTime"].nil?
+        ensure_full_data!
         Time.at(@gapi["creationTime"] / 1000.0)
-      end
-
-      ##
-      # The date when this table was last modified.
-      def modified_at
-        return nil if @gapi["lastModifiedTime"].nil?
-        Time.at(@gapi["lastModifiedTime"] / 1000.0)
       end
 
       ##
@@ -88,13 +110,42 @@ module Gcloud
       # If not present, the table will persist indefinitely.
       # Expired tables will be deleted and their storage reclaimed.
       def expires_at
+        ensure_full_data!
         return nil if @gapi["expirationTime"].nil?
         Time.at(@gapi["expirationTime"] / 1000.0)
       end
 
       ##
+      # The date when this table was last modified.
+      def modified_at
+        ensure_full_data!
+        Time.at(@gapi["lastModifiedTime"] / 1000.0)
+      end
+
+      ##
+      # Checks if the table's type is "TABLE".
+      def table?
+        @gapi["type"] == "TABLE"
+      end
+
+      ##
+      # Checks if the table's type is "VIEW".
+      def view?
+        @gapi["type"] == "VIEW"
+      end
+
+      ##
+      # The geographic location where the table should reside. Possible
+      # values include EU and US. The default value is US.
+      def location
+        ensure_full_data!
+        @gapi["location"]
+      end
+
+      ##
       # The schema of the table.
       def schema
+        ensure_full_data!
         s = @gapi["schema"]
         s = s.to_hash if s.respond_to? :to_hash
         s = {} if s.nil?
@@ -421,6 +472,27 @@ module Gcloud
         end
         return if chunk_size.zero?
         chunk_size
+      end
+
+      ##
+      # Load the complete representation of the table if it has been
+      # only partially loaded by a request to the API list method.
+      def ensure_full_data!
+        reload_gapi! unless data_complete?
+      end
+
+      def reload_gapi!
+        ensure_connection!
+        resp = connection.get_table dataset_id, table_id
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      def data_complete?
+        !@gapi["creationTime"].nil?
       end
 
       ##

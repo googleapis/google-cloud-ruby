@@ -301,9 +301,9 @@ class MockBigquery < Minitest::Spec
 
     {
       "kind" => "bigquery#table",
-      "etag" => "etag",
+      "etag" => "etag123456789",
       "id" => "#{project}:#{dataset}.#{id}",
-      "selfLink" => "link",
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
       "tableReference" => {
         "projectId" => project,
         "datasetId" => dataset,
@@ -335,7 +335,7 @@ class MockBigquery < Minitest::Spec
           }
         ]
       },
-      "numBytes" => 100,
+      "numBytes" => 1000,
       "numRows" => 100,
       "creationTime" => (Time.now.to_f * 1000).floor,
       "expirationTime" => (Time.now.to_f * 1000).floor,
@@ -343,7 +343,8 @@ class MockBigquery < Minitest::Spec
       "type" => "TABLE",
       "view" => {
         "query" => "query"
-      }
+      },
+      "location" => "US"
     }
   end
 

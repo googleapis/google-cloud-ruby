@@ -18,29 +18,34 @@ require "uri"
 
 describe Gcloud::Bigquery::Table, :mock_bigquery do
   # Create a table object with the project's mocked connection object
+  let(:dataset) { "my_dataset" }
   let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
   let(:description) { "This is my table" }
-  let(:table_hash) { random_table_hash "my_dataset", table_id, table_name, description }
+  let(:etag) { "etag123456789" }
+  let(:location_code) { "US" }
+  let(:url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
+  let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash,
                                                   bigquery.connection }
 
   it "knows its attributes" do
     table.name.must_equal table_name
     table.description.must_equal description
+    table.etag.must_equal etag
+    table.url.must_equal url
+    table.bytes_count.must_equal 1000
+    table.rows_count.must_equal 100
+    table.table?.must_equal true
+    table.view?.must_equal false
+    table.location.must_equal location_code
   end
 
   it "knows its creation and modification and expiration times" do
     now = Time.now
 
-    table.gapi["creationTime"] = nil
-    table.created_at.must_be :nil?
-
     table.gapi["creationTime"] = (now.to_f * 1000).floor
     table.created_at.must_be_close_to now
-
-    table.gapi["lastModifiedTime"] = nil
-    table.modified_at.must_be :nil?
 
     table.gapi["lastModifiedTime"] = (now.to_f * 1000).floor
     table.modified_at.must_be_close_to now
