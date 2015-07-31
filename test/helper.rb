@@ -341,9 +341,6 @@ class MockBigquery < Minitest::Spec
       "expirationTime" => (Time.now.to_f * 1000).floor,
       "lastModifiedTime" => (Time.now.to_f * 1000).floor,
       "type" => "TABLE",
-      "view" => {
-        "query" => "query"
-      },
       "location" => "US"
     }
   end

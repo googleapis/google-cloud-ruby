@@ -349,15 +349,15 @@ module Gcloud
       ##
       # Create the HTTP body for insert table
       def insert_table_request dataset_id, table_id, options = {}
-        {
+        hash = {
           tableReference: {
-            projectId: @project,
-            datasetId: dataset_id,
-            tableId: table_id
+            projectId: @project, datasetId: dataset_id, tableId: table_id
           },
           friendlyName: options[:name],
           description: options[:description]
         }.delete_if { |_, v| v.nil? }
+        hash["view"] = { "query" => options[:query] } if options[:query]
+        hash
       end
 
       def insert_tabledata_rows rows, options = {}

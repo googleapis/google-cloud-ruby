@@ -75,6 +75,10 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
 
     table = dataset.create_table "my_table"
     table.must_be_kind_of Gcloud::Bigquery::Table
+    table.table_id.must_equal "my_table"
+    table.query.must_be :nil?
+    table.must_be :table?
+    table.wont_be :view?
   end
 
   it "creates a table with a name and description" do
@@ -94,8 +98,52 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
                                  description: description
     table.must_be_kind_of Gcloud::Bigquery::Table
     table.table_id.must_equal id
+    table.query.must_be :nil?
     table.name.must_equal name
     table.description.must_equal description
+    table.must_be :table?
+    table.wont_be :view?
+  end
+
+  it "can create a empty view" do
+    query = "SELECT * FROM [table]"
+
+    mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       create_view_json("my_view", query)]
+    end
+
+    table = dataset.create_view "my_view", query
+    table.table_id.must_equal "my_view"
+    table.query.must_equal query
+    table.must_be_kind_of Gcloud::Bigquery::Table
+    table.must_be :view?
+    table.wont_be :table?
+  end
+
+  it "can create a view with a name and description" do
+    id = "my_view"
+    query = "SELECT * FROM [table]"
+    name = "My View"
+    description = "This is my view"
+
+    mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      JSON.parse(env.body)["friendlyName"].must_equal name
+      JSON.parse(env.body)["description"].must_equal description
+      [200, {"Content-Type"=>"application/json"},
+       create_view_json(id, query, name, description)]
+    end
+
+    table = dataset.create_view id, query,
+                                name: name,
+                                description: description
+    table.must_be_kind_of Gcloud::Bigquery::Table
+    table.table_id.must_equal id
+    table.query.must_equal query
+    table.name.must_equal name
+    table.description.must_equal description
+    table.must_be :view?
+    table.wont_be :table?
   end
 
   it "lists tables" do
@@ -181,6 +229,13 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
 
   def create_table_json id, name = nil, description = nil
     random_table_hash(dataset_id, id, name, description).to_json
+  end
+
+  def create_view_json id, query, name = nil, description = nil
+    hash = random_table_hash dataset_id, id, name, description
+    hash["view"] = { "query" => query }
+    hash["type"] = "VIEW"
+    hash.to_json
   end
 
   def find_table_json id, name = nil, description = nil

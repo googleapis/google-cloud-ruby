@@ -186,6 +186,13 @@ module Gcloud
       end
 
       ##
+      # The query that BigQuery executes when the view is referenced.
+      # This returns +nil+ when the table is not a view.
+      def query
+        @gapi["view"]["query"] if @gapi["view"]
+      end
+
+      ##
       # Retrieves data from the table.
       #
       # === Parameters

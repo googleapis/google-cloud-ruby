@@ -164,19 +164,14 @@ module Gcloud
       end
 
       ##
-      # Creates a table on a given dataset for a given subscriber.
-      #
-      # If the name is not provided in the request, the server will assign a
-      # random name for this table on the same project as the dataset.
-      ##
       # Creates a new table.
       #
       # === Parameters
       #
       # +table_id+::
       #   The ID of the table. The ID must contain only letters (a-z, A-Z),
-      #   numbers (0-9), or underscores (_).
-      #   The maximum length is 1,024 characters. (+String+)
+      #   numbers (0-9), or underscores (_). The maximum length is 1,024
+      #   characters. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:name]</code>::
@@ -214,6 +209,53 @@ module Gcloud
         else
           fail ApiError.from_response(resp)
         end
+      end
+
+      ##
+      # Creates a new view table from the given query.
+      #
+      # === Parameters
+      #
+      # +table_id+::
+      #   The ID of the table. The ID must contain only letters (a-z, A-Z),
+      #   numbers (0-9), or underscores (_). The maximum length is 1,024
+      #   characters. (+String+)
+      # +query+::
+      #   The query that BigQuery executes when the view is referenced.
+      #   (+String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:name]</code>::
+      #   A descriptive name for the table. (+String+)
+      # <code>options[:description]</code>::
+      #   A user-friendly description of the table. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Bigquery::Table
+      #
+      # === Examples
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   bigquery = Gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.create_view "my_table",
+      #             "SELECT name, age FROM [proj:dataset.users]"
+      #
+      # A name and description can be provided:
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   bigquery = Gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.create_view "my_table",
+      #             "SELECT name, age FROM [proj:dataset.users]",
+      #             name: "My Table", description: "This is my table"
+      #
+      def create_view table_id, query, options = {}
+        options[:query] = query
+        create_table table_id, options
       end
 
       ##
