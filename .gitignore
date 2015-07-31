@@ -1,3 +1,5 @@
 doc/
 pkg/
 html/
+_site/
+Gemfile.lock
