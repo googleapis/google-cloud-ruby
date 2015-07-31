@@ -154,17 +154,11 @@ module Gcloud
       # Updates information in an existing table, replacing fields that
       # are provided in the submitted table resource.
       def patch_table dataset_id, table_id, options = {}
-        body = { friendlyName: options[:name],
-                 description: options[:description],
-                 schema: options[:schema]
-               }.delete_if { |_, v| v.nil? }
-        # body["view"] = { "query" => options[:query] } if options[:query]
-
         @client.execute(
           api_method: @bigquery.tables.patch,
           parameters: { projectId: @project, datasetId: dataset_id,
                         tableId: table_id },
-          body_object: body
+          body_object: patch_table_request(options)
         )
       end
 
@@ -358,6 +352,15 @@ module Gcloud
         }.delete_if { |_, v| v.nil? }
         hash["view"] = { "query" => options[:query] } if options[:query]
         hash
+      end
+
+      def patch_table_request options = {}
+        body = { friendlyName: options[:name],
+                 description: options[:description],
+                 schema: options[:schema]
+               }.delete_if { |_, v| v.nil? }
+        body["view"] = { "query" => options[:query] } if options[:query]
+        body
       end
 
       def insert_tabledata_rows rows, options = {}

@@ -91,9 +91,38 @@ describe Gcloud::Bigquery::Table, :update, :mock_bigquery do
     table.schema["fields"].first["name"].must_equal "moniker"
   end
 
+  it "updates its query" do
+    new_query = "SELECT name, age FROM [users]"
+
+    mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}" do |env|
+      json = JSON.parse env.body
+      json["view"]["query"].must_equal new_query
+      [200, {"Content-Type"=>"application/json"},
+       new_view_json(new_query)]
+    end
+
+    table.name.must_equal table_name
+    table.description.must_equal description
+    table.schema.must_equal schema
+    table.query.must_be :nil?
+
+    table.query = new_query
+
+    table.name.must_equal table_name
+    table.description.must_equal description
+    table.schema.must_equal schema
+    table.query.must_equal new_query
+  end
+
   def new_table_schema_json
     hash = random_table_hash dataset_id, table_id, table_name, description
     hash["schema"]["fields"].first["name"] = "moniker"
+    hash.to_json
+  end
+
+  def new_view_json query
+    hash = random_table_hash dataset_id, table_id, table_name, description
+    hash["view"] = { "query" => query }
     hash.to_json
   end
 end

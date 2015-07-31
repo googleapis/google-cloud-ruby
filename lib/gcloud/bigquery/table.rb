@@ -193,6 +193,12 @@ module Gcloud
       end
 
       ##
+      # Updates the query that BigQuery executes when the view is referenced.
+      def query= new_query
+        patch_gapi! query: new_query
+      end
+
+      ##
       # Retrieves data from the table.
       #
       # === Parameters
