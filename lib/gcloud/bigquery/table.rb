@@ -64,6 +64,12 @@ module Gcloud
       end
 
       ##
+      # Updates the name of the table.
+      def name= new_name
+        patch_gapi! name: new_name
+      end
+
+      ##
       # A string hash of the dataset.
       def etag
         ensure_full_data!
@@ -82,6 +88,12 @@ module Gcloud
       def description
         ensure_full_data!
         @gapi["description"]
+      end
+
+      ##
+      # Updates the description of the table.
+      def description= new_description
+        patch_gapi! description: new_description
       end
 
       ##
@@ -150,6 +162,12 @@ module Gcloud
         s = s.to_hash if s.respond_to? :to_hash
         s = {} if s.nil?
         s
+      end
+
+      ##
+      # Updates the schema of the table.
+      def schema= new_schema
+        patch_gapi! schema: new_schema
       end
 
       ##
@@ -403,6 +421,16 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      def patch_gapi! options = {}
+        ensure_connection!
+        resp = connection.patch_table dataset_id, table_id, options
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
       end
 
       def load_storage file, options = {}

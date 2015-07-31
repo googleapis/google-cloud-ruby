@@ -155,8 +155,10 @@ module Gcloud
       # are provided in the submitted table resource.
       def patch_table dataset_id, table_id, options = {}
         body = { friendlyName: options[:name],
-                 description: options[:description]
+                 description: options[:description],
+                 schema: options[:schema]
                }.delete_if { |_, v| v.nil? }
+        # body["view"] = { "query" => options[:query] } if options[:query]
 
         @client.execute(
           api_method: @bigquery.tables.patch,
