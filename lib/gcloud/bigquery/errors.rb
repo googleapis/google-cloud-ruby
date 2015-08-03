@@ -31,7 +31,7 @@ module Gcloud
       # The errors encountered.
       attr_reader :errors
 
-      def initialize message, code, errors
+      def initialize message, code, errors #:nodoc:
         super message
         @code   = code
         @errors = errors

@@ -591,7 +591,7 @@ module Gcloud
           attr_reader :row
           attr_reader :errors
 
-          def initialize row, errors
+          def initialize row, errors #:nodoc:
             @row = row
             @errors = errors
           end

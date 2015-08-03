@@ -47,7 +47,7 @@ module Gcloud
         @gapi["totalRows"]
       end
 
-      def initialize arr = []
+      def initialize arr = [] #:nodoc:
         @gapi = {}
         super arr
       end

@@ -31,7 +31,7 @@ module Gcloud
 
       ##
       # Creates a new Connection instance.
-      def initialize project, credentials
+      def initialize project, credentials #:nodoc:
         @project = project
         @credentials = credentials
         @client = Google::APIClient.new application_name:    "gcloud-ruby",

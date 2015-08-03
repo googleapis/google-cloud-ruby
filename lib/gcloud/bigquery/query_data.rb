@@ -26,7 +26,7 @@ module Gcloud
       # The Connection object.
       attr_accessor :connection #:nodoc:
 
-      def initialize arr = []
+      def initialize arr = [] #:nodoc:
         @job = nil
         super
       end
