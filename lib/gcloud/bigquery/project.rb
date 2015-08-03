@@ -35,11 +35,12 @@ module Gcloud
     #
     #   require "gcloud/bigquery"
     #
-    #   bigquery = Gcloud.bigquery
+    #   gcloud = Gcloud.new
+    #   bigquery = gcloud.bigquery
     #   dataset = bigquery.dataset "my_dataset"
     #   table = dataset.table "my_table"
     #
-    # See Gcloud.bigquery
+    # See Gcloud#bigquery
     class Project
       ##
       # The Connection object.
@@ -60,8 +61,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery "my-todo-project",
-      #                              "/path/to/keyfile.json"
+      #   gcloud = Gcloud.new "my-todo-project", "/path/to/keyfile.json"
+      #   bigquery = gcloud.bigquery
       #
       #   bigquery.project #=> "my-todo-project"
       #
@@ -129,7 +130,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #
       #   job = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]"
       #   if job.complete?
@@ -164,7 +166,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #
       #   dataset = bigquery.dataset "my_dataset"
       #   puts dataset.name
@@ -207,7 +210,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #
       #   dataset = bigquery.create_dataset "my_dataset",
       #
@@ -215,7 +219,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #
       #   dataset = bigquery.create_dataset "my_dataset",
       #                                     name: "My Dataset"
@@ -255,7 +260,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #
       #   datasets = bigquery.datasets
       #   datasets.each do |dataset|
@@ -267,7 +273,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #
       #   all_datasets = bigquery.datasets, all: true
       #
@@ -276,7 +283,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #
       #   all_datasets = []
       #   tmp_datasets = bigquery.datasets
@@ -316,7 +324,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #
       #   job = bigquery.job "existing-job"
       #
@@ -362,7 +371,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #
       #   jobs = bigquery.jobs
       #
@@ -370,7 +380,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #
       #   running_jobs = bigquery.jobs filter: "running"
       #
@@ -379,7 +390,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #
       #   all_jobs = []
       #   tmp_jobs = bigquery.jobs

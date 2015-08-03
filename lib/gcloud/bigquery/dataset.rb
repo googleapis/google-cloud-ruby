@@ -148,7 +148,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #
       #   dataset = bigquery.dataset "my_dataset"
       #   dataset.delete
@@ -187,7 +188,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.create_table "my_table"
       #
@@ -195,7 +197,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.create_table "my_table"
       #                                name: "My Table",
@@ -238,7 +241,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.create_view "my_table",
       #             "SELECT name, age FROM [proj:dataset.users]"
@@ -247,7 +251,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.create_view "my_table",
       #             "SELECT name, age FROM [proj:dataset.users]",
@@ -274,7 +279,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.table "my_table"
       #   puts table.name
@@ -310,7 +316,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
       #   tables = dataset.tables
       #   tables.each do |table|
@@ -322,7 +329,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
       #
       #   all_tables = []
@@ -401,7 +409,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #
       #   job = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]"
       #   if job.complete?

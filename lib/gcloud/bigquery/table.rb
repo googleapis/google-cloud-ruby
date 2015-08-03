@@ -404,7 +404,8 @@ module Gcloud
       #
       #   require "gcloud/bigquery"
       #
-      #   bigquery = Gcloud.bigquery
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.table "my_table"
       #   table.delete
