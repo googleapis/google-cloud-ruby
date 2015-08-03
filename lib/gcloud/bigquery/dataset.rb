@@ -128,7 +128,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes the dataset.
+      # Permanently deletes the dataset.
       # The dataset must be empty before it can be deleted.
       #
       # === Parameters
@@ -308,7 +308,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "glcoud/bigquery"
+      #   require "gcloud/bigquery"
       #
       #   bigquery = Gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
@@ -320,7 +320,7 @@ module Gcloud
       # If you have a significant number of tables, you may need to paginate
       # through them: (See Dataset::List#token)
       #
-      #   require "glcoud/bigquery"
+      #   require "gcloud/bigquery"
       #
       #   bigquery = Gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"

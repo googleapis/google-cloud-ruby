@@ -37,7 +37,7 @@ module Gcloud
   #
   # === Example
   #
-  #   require "glcoud/bigquery"
+  #   require "gcloud/bigquery"
   #
   #   bigquery = Gcloud.bigquery
   #   dataset = bigquery.dataset "my_dataset"

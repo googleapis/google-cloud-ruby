@@ -73,7 +73,7 @@ module Gcloud
       # === Parameters
       #
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:token]</code>::
       #   Page token, returned by a previous call, identifying the result set.
       #   (+String+)

@@ -204,7 +204,7 @@ module Gcloud
       # === Parameters
       #
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:token]</code>::
       #   Page token, returned by a previous call, identifying the result set.
       #   (+String+)
@@ -235,7 +235,7 @@ module Gcloud
       # +target_table+::
       #   A Table to copy data to. (+Table+)
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:create]</code>::
       #   Specifies whether the job is allowed to create new tables. (+String+)
       #
@@ -275,7 +275,7 @@ module Gcloud
       # +source_url+::
       #   URI of source table to link. (+String+)
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:create]</code>::
       #   Specifies whether the job is allowed to create new tables. (+String+)
       #
@@ -317,7 +317,7 @@ module Gcloud
       #   files to, in the format of <code>gs://my-bucket/file-name.json</code>.
       #   (+Gcloud::Storage::File+ or +String+)
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:format]</code>::
       #   The exported file format. (+String+)
       #
@@ -349,7 +349,7 @@ module Gcloud
       #   A file containing the data to load in the table. (+File+ or
       #   +Gcloud::Storage::File+ or +String+)
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:create]</code>::
       #   Specifies whether the job is allowed to create new tables. (+String+)
       #
@@ -394,7 +394,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes the table.
+      # Permanently deletes the table.
       #
       # === Returns
       #

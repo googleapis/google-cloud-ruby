@@ -33,7 +33,7 @@ module Gcloud
     # Google BigQuery. Gcloud::Bigquery::Dataset objects are created,
     # used, and deleted by Gcloud::Bigquery::Project.
     #
-    #   require "glcoud/bigquery"
+    #   require "gcloud/bigquery"
     #
     #   bigquery = Gcloud.bigquery
     #   dataset = bigquery.dataset "my_dataset"
@@ -58,7 +58,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "glcoud/bigquery"
+      #   require "gcloud/bigquery"
       #
       #   bigquery = Gcloud.bigquery "my-todo-project",
       #                              "/path/to/keyfile.json"
@@ -190,7 +190,7 @@ module Gcloud
       #   The ID must contain only letters (a-z, A-Z), numbers (0-9), or
       #   underscores (_). The maximum length is 1,024 characters. (+String+)
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:name]</code>::
       #   A descriptive name for the dataset. (+String+)
       # <code>options[:description]</code>::
@@ -237,7 +237,7 @@ module Gcloud
       # === Parameters
       #
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:all]</code>::
       #   Whether to list all datasets, including hidden ones.
       #   (+Boolean+)
@@ -253,7 +253,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "glcoud/bigquery"
+      #   require "gcloud/bigquery"
       #
       #   bigquery = Gcloud.bigquery
       #
@@ -265,7 +265,7 @@ module Gcloud
       # You can also retrieve all datasets, including hidden ones, by providing
       # the +:all+ option:
       #
-      #   require "glcoud/bigquery"
+      #   require "gcloud/bigquery"
       #
       #   bigquery = Gcloud.bigquery
       #
@@ -274,7 +274,7 @@ module Gcloud
       # If you have a significant number of datasets, you may need to paginate
       # through them: (See Dataset::List#token)
       #
-      #   require "glcoud/bigquery"
+      #   require "gcloud/bigquery"
       #
       #   bigquery = Gcloud.bigquery
       #
@@ -337,7 +337,7 @@ module Gcloud
       # === Parameters
       #
       # +options+::
-      #   An optional Hash for controlling additional behavor. (+Hash+)
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:all]</code>::
       #   Whether to display jobs owned by all users in the project.
       #   Default is false. (+Boolean+)
