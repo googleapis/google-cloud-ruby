@@ -172,8 +172,8 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
   it "paginates jobs without options" do
     mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
       env.params.wont_include "maxResults"
-      env.params.wont_include "projection"
       env.params.wont_include "stateFilter"
+      env.params["projection"].must_equal "full"
       [200, {"Content-Type"=>"application/json"},
        list_jobs_json(3, "next_page_token")]
     end
@@ -188,9 +188,9 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
   it "paginates jobs with max set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
       env.params.must_include "maxResults"
-      env.params.wont_include "projection"
       env.params.wont_include "stateFilter"
       env.params["maxResults"].must_equal "3"
+      env.params["projection"].must_equal "full"
       [200, {"Content-Type"=>"application/json"},
        list_jobs_json(3, "next_page_token")]
     end
@@ -202,29 +202,12 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     jobs.token.must_equal "next_page_token"
   end
 
-  it "paginates jobs with projection set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.must_include "projection"
-      env.params.wont_include "maxResults"
-      env.params.wont_include "stateFilter"
-      env.params["projection"].must_equal "full"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "next_page_token")]
-    end
-
-    jobs = bigquery.jobs projection: "full"
-    jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
-    jobs.token.wont_be :nil?
-    jobs.token.must_equal "next_page_token"
-  end
-
   it "paginates jobs with filter set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
       env.params.must_include "stateFilter"
       env.params.wont_include "maxResults"
-      env.params.wont_include "projection"
       env.params["stateFilter"].must_equal "running"
+      env.params["projection"].must_equal "full"
       [200, {"Content-Type"=>"application/json"},
        list_jobs_json(3, "next_page_token")]
     end
