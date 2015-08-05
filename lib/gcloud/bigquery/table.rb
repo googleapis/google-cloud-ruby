@@ -20,7 +20,64 @@ require "gcloud/bigquery/errors"
 module Gcloud
   module Bigquery
     ##
-    # Represents a Table.
+    # = Table
+    #
+    # A named resource representing a BigQuery table that holds zero or more
+    # records. Every table is defined by a schema
+    # that may contain nested and repeated fields. (For more information
+    # about nested and repeated fields, see {Preparing Data for
+    # BigQuery}[https://cloud.google.com/bigquery/preparing-data-for-bigquery].)
+    #
+    #   require "gcloud/bigquery"
+    #
+    #   gcloud = Gcloud.new
+    #   bigquery = gcloud.bigquery
+    #   dataset = bigquery.dataset "my_dataset"
+    #   table = dataset.create_table "my_table"
+    #
+    #   schema = {
+    #     "fields" => [
+    #       {
+    #         "name" => "first_name",
+    #         "type" => "STRING",
+    #         "mode" => "REQUIRED"
+    #       },
+    #       {
+    #         "name" => "cities_lived",
+    #         "type" => "RECORD",
+    #         "mode" => "REPEATED",
+    #         "fields" => [
+    #           {
+    #             "name" => "place",
+    #             "type" => "STRING",
+    #             "mode" => "REQUIRED"
+    #           },
+    #           {
+    #             "name" => "number_of_years",
+    #             "type" => "INTEGER",
+    #             "mode" => "REQUIRED"
+    #           }
+    #         ]
+    #       }
+    #     ]
+    #   }
+    #   table.schema = schema
+    #
+    #   row = {
+    #     "first_name" => "Alice",
+    #     "cities_lived" => [
+    #       {
+    #         "place": "Seattle",
+    #         "number_of_years": 5
+    #       },
+    #       {
+    #         "place": "Stockholm",
+    #         "number_of_years": 6
+    #       }
+    #     ]
+    #   }
+    #   table.insert row
+    #
     class Table
       ##
       # The Connection object.
@@ -41,36 +98,54 @@ module Gcloud
       # A unique ID for this table.
       # The ID must contain only letters (a-z, A-Z), numbers (0-9),
       # or underscores (_). The maximum length is 1,024 characters.
+      #
+      # :category: Attributes
+      #
       def table_id
         @gapi["tableReference"]["tableId"]
       end
 
       ##
-      # The ID of the dataset containing this table.
+      # The ID of the +Dataset+ containing this table.
+      #
+      # :category: Attributes
+      #
       def dataset_id
         @gapi["tableReference"]["datasetId"]
       end
 
       ##
-      # The ID of the project containing this table.
+      # The ID of the +Project+ containing this table.
+      #
+      # :category: Attributes
+      #
       def project_id
         @gapi["tableReference"]["projectId"]
       end
 
       ##
       # The name of the table.
+      #
+      # :category: Attributes
+      #
       def name
         @gapi["friendlyName"]
       end
 
       ##
       # Updates the name of the table.
+      #
+      # :category: Lifecycle
+      #
       def name= new_name
         patch_gapi! name: new_name
       end
 
       ##
       # A string hash of the dataset.
+      #
+      # :category: Attributes
+      #
       def etag
         ensure_full_data!
         @gapi["etag"]
@@ -78,6 +153,9 @@ module Gcloud
 
       ##
       # A URL that can be used to access the dataset using the REST API.
+      #
+      # :category: Attributes
+      #
       def url
         ensure_full_data!
         @gapi["selfLink"]
@@ -85,6 +163,9 @@ module Gcloud
 
       ##
       # The description of the table.
+      #
+      # :category: Attributes
+      #
       def description
         ensure_full_data!
         @gapi["description"]
@@ -92,12 +173,18 @@ module Gcloud
 
       ##
       # Updates the description of the table.
+      #
+      # :category: Lifecycle
+      #
       def description= new_description
         patch_gapi! description: new_description
       end
 
       ##
       # The number of bytes in the table.
+      #
+      # :category: Data
+      #
       def bytes_count
         ensure_full_data!
         @gapi["numBytes"]
@@ -105,6 +192,9 @@ module Gcloud
 
       ##
       # The number of rows in the table.
+      #
+      # :category: Data
+      #
       def rows_count
         ensure_full_data!
         @gapi["numRows"]
@@ -112,6 +202,9 @@ module Gcloud
 
       ##
       # The time when this table was created.
+      #
+      # :category: Attributes
+      #
       def created_at
         ensure_full_data!
         Time.at(@gapi["creationTime"] / 1000.0)
@@ -121,6 +214,9 @@ module Gcloud
       # The time when this table expires.
       # If not present, the table will persist indefinitely.
       # Expired tables will be deleted and their storage reclaimed.
+      #
+      # :category: Attributes
+      #
       def expires_at
         ensure_full_data!
         return nil if @gapi["expirationTime"].nil?
@@ -129,6 +225,9 @@ module Gcloud
 
       ##
       # The date when this table was last modified.
+      #
+      # :category: Attributes
+      #
       def modified_at
         ensure_full_data!
         Time.at(@gapi["lastModifiedTime"] / 1000.0)
@@ -136,12 +235,18 @@ module Gcloud
 
       ##
       # Checks if the table's type is "TABLE".
+      #
+      # :category: Attributes
+      #
       def table?
         @gapi["type"] == "TABLE"
       end
 
       ##
       # Checks if the table's type is "VIEW".
+      #
+      # :category: Attributes
+      #
       def view?
         @gapi["type"] == "VIEW"
       end
@@ -149,6 +254,9 @@ module Gcloud
       ##
       # The geographic location where the table should reside. Possible
       # values include EU and US. The default value is US.
+      #
+      # :category: Attributes
+      #
       def location
         ensure_full_data!
         @gapi["location"]
@@ -156,6 +264,9 @@ module Gcloud
 
       ##
       # The schema of the table.
+      #
+      # :category: Attributes
+      #
       def schema
         ensure_full_data!
         s = @gapi["schema"]
@@ -166,12 +277,43 @@ module Gcloud
 
       ##
       # Updates the schema of the table.
+      #
+      # === Example
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.create_table "my_table"
+      #
+      #   schema = {
+      #     "fields" => [
+      #       {
+      #         "name" => "first_name",
+      #         "type" => "STRING",
+      #         "mode" => "REQUIRED"
+      #       },
+      #       {
+      #         "name" => "age",
+      #         "type" => "INTEGER",
+      #         "mode" => "REQUIRED"
+      #       }
+      #     ]
+      #   }
+      #   table.schema = schema
+      #
+      # :category: Lifecycle
+      #
       def schema= new_schema
         patch_gapi! schema: new_schema
       end
 
       ##
       # The fields of the table.
+      #
+      # :category: Attributes
+      #
       def fields
         f = schema["fields"]
         f = f.to_hash if f.respond_to? :to_hash
@@ -180,20 +322,46 @@ module Gcloud
       end
 
       ##
-      # The name of the columns in the table.
+      # The names of the columns in the table.
+      #
+      # :category: Attributes
+      #
       def headers
         fields.map { |f| f["name"] }
       end
 
       ##
-      # The query that BigQuery executes when the view is referenced.
-      # This returns +nil+ when the table is not a view.
+      # The query that executes each time the view is loaded.
+      #
+      # :category: Attributes
+      #
       def query
         @gapi["view"]["query"] if @gapi["view"]
       end
 
       ##
-      # Updates the query that BigQuery executes when the view is referenced.
+      # Updates the query that executes each time the view is loaded.
+      # See the BigQuery {Query Reference
+      # }[https://cloud.google.com/bigquery/query-reference].
+      #
+      # === Parameters
+      #
+      # +new_query+::
+      #   The query that defines the view. (+String+)
+      #
+      # === Example
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   view = dataset.table "my_view"
+      #
+      #   view.query = "SELECT first_name FROM [my_project:my_dataset.my_table]"
+      #
+      # :category: Lifecycle
+      #
       def query= new_query
         patch_gapi! query: new_query
       end
@@ -217,6 +385,23 @@ module Gcloud
       #
       # Gcloud::Bigquery::Data
       #
+      # === Example
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   data = table.data
+      #   data.each do |row|
+      #     puts row["first_name"]
+      #   end
+      #   more_data = table.data token: data.token
+      #
+      # :category: Data
+      #
       def data options = {}
         ensure_connection!
         resp = connection.list_tabledata dataset_id, table_id, options
@@ -228,12 +413,12 @@ module Gcloud
       end
 
       ##
-      # Copy data from one table to another.
+      # Copies the data from the table to another table.
       #
       # === Parameters
       #
-      # +target_table+::
-      #   A Table to copy data to. (+Table+)
+      # +destination_table+::
+      #   The destination for the copied data. (+Table+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:create]</code>::
@@ -244,22 +429,36 @@ module Gcloud
       #   * +never+ - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
       # <code>options[:write]</code>::
-      #   Specifies the action that occurs if the destination table already
-      #   exists. (+String+)
+      #   Specifies how to handle data already present in the destination table.
+      #   The default value is +empty+. (+String+)
       #
       #   The following values are supported:
       #   * +truncate+ - BigQuery overwrites the table data.
       #   * +append+ - BigQuery appends the data to the table.
-      #   * +empty+ - A 'duplicate' error is returned in the job result if the
-      #     table exists and contains data.
+      #   * +empty+ - An error will be returned if the destination table already
+      #     contains data.
       #
       # === Returns
       #
       # Gcloud::Bigquery::CopyJob
       #
-      def copy target_table, options = {}
+      # === Example
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #   destination_table = dataset.table "my_destination_table"
+      #
+      #   copy_job = table.copy destination_table
+      #
+      # :category: Data
+      #
+      def copy destination_table, options = {}
         ensure_connection!
-        resp = connection.copy_table gapi, target_table.gapi, options
+        resp = connection.copy_table gapi, destination_table.gapi, options
         if resp.success?
           Job.from_gapi resp.data, connection
         else
@@ -268,12 +467,12 @@ module Gcloud
       end
 
       ##
-      # Link table data from URL.
+      # Links the table to a source table identified by a URI.
       #
       # === Parameters
       #
       # +source_url+::
-      #   URI of source table to link. (+String+)
+      #   The URI of source table to link. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:create]</code>::
@@ -284,20 +483,22 @@ module Gcloud
       #   * +never+ - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
       # <code>options[:write]</code>::
-      #   Specifies the action that occurs if the destination table already
-      #   exists. (+String+)
+      #   Specifies how to handle data already present in the table.
+      #   The default value is +empty+. (+String+)
       #
       #   The following values are supported:
       #   * +truncate+ - BigQuery overwrites the table data.
       #   * +append+ - BigQuery appends the data to the table.
-      #   * +empty+ - A 'duplicate' error is returned in the job result if the
-      #     table exists and contains data.
+      #   * +empty+ - An error will be returned if the table already contains
+      #     data.
       #
       # === Returns
       #
       # Gcloud::Bigquery::Job
       #
-      def link source_url, options = {}
+      # :category: Data
+      #
+      def link source_url, options = {} #:nodoc:
         ensure_connection!
         resp = connection.link_table gapi, source_url, options
         if resp.success?
@@ -308,27 +509,43 @@ module Gcloud
       end
 
       ##
-      # Extract data from the table to a Storage file.
+      # Extract the data from the table to a Google Cloud Storage file. For
+      # more information, see {Exporting Data From BigQuery
+      # }[https://cloud.google.com/bigquery/exporting-data-from-bigquery].
       #
       # === Parameters
       #
       # +extract_url+::
-      #   URI of the location and file name where BigQuery should export the
-      #   files to, in the format of <code>gs://my-bucket/file-name.json</code>.
-      #   (+Gcloud::Storage::File+ or +String+)
+      #   The Google Storage file or file URI pattern(s) to which BigQuery
+      #   should extract the table data.
+      #   (+Gcloud::Storage::File+ or +String+ or +Array+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:format]</code>::
-      #   The exported file format. (+String+)
+      #   The exported file format. The default value is +csv+. (+String+)
       #
       #   The following values are supported:
-      #   * +csv+ - CSV formatted data.
-      #   * +json+ - JSON formatted data.
-      #   * +avro+ - Avro formatted data.
+      #   * +csv+ - CSV
+      #   * +json+ - {Newline-delimited JSON}[http://jsonlines.org/]
+      #   * +avro+ - {Avro}[http://avro.apache.org/]
       #
       # === Returns
       #
       # Gcloud::Bigquery::ExtractJob
+      #
+      # === Example
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   extract_job = table.extract "gs://my-bucket/file-name.json",
+      #                               format: "json"
+      #
+      # :category: Data
       #
       def extract extract_url, options = {}
         ensure_connection!
@@ -341,13 +558,14 @@ module Gcloud
       end
 
       ##
-      # Load data to the table.
+      # Loads data into the table.
       #
       # === Parameters
       #
       # +file+::
-      #   A file containing the data to load in the table. (+File+ or
-      #   +Gcloud::Storage::File+ or +String+)
+      #   A file or the URI of a Google Cloud Storage file containing
+      #   data to load into the table.
+      #   (+File+ or +Gcloud::Storage::File+ or +String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:create]</code>::
@@ -358,18 +576,60 @@ module Gcloud
       #   * +never+ - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
       # <code>options[:write]</code>::
-      #   Specifies the action that occurs if the destination table already
-      #   exists. (+String+)
+      #   Specifies how to handle data already present in the table.
+      #   The default value is +empty+. (+String+)
       #
       #   The following values are supported:
       #   * +truncate+ - BigQuery overwrites the table data.
       #   * +append+ - BigQuery appends the data to the table.
-      #   * +empty+ - A 'duplicate' error is returned in the job result if the
-      #     table exists and contains data.
+      #   * +empty+ - An error will be returned if the table already contains
+      #     data.
       #
       # === Returns
       #
       # Gcloud::Bigquery::LoadJob
+      #
+      # === Examples
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   load_job = table.load "gs://my-bucket/file-name.csv"
+      #
+      # You can also pass a gcloud storage file instance.
+      #
+      #   require "gcloud/bigquery"
+      #   require "gcloud/storage"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   storage = gcloud.storage
+      #   bucket = storage.bucket "my-bucket"
+      #   file = bucket.file "file-name.csv"
+      #   load_job = table.load file
+      #
+      # Or, you can upload a smaller file directly.
+      # See {Loading Data with a POST Request}[
+      # https://cloud.google.com/bigquery/loading-data-post-request#multipart].
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   file = File.open "my_data.csv"
+      #   load_job = table.load file
+      #
+      # :category: Data
       #
       def load file, options = {}
         ensure_connection!
@@ -382,6 +642,49 @@ module Gcloud
         end
       end
 
+      ##
+      # Inserts data into the table for near-immediate querying, without the
+      # need to complete a #load operation before the data can appear in query
+      # results. See {Streaming Data Into BigQuery
+      # }[https://cloud.google.com/bigquery/streaming-data-into-bigquery].
+      #
+      # === Parameters
+      #
+      # +rows+::
+      #   A hash object or array of hash objects containing the data.
+      #   (+Array+ or +Hash+)
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:skip_invalid]</code>::
+      #   Insert all valid rows of a request, even if invalid rows exist. The
+      #   default value is +false+, which causes the entire request to fail if
+      #   any invalid rows exist. (+Boolean+)
+      # <code>options[:ignore_unknown]</code>::
+      #   Accept rows that contain values that do not match the schema. The
+      #   unknown values are ignored. Default is false, which treats unknown
+      #   values as errors. (+Boolean+)
+      #
+      # === Returns
+      #
+      # Gcloud::Bigquery::InsertResponse
+      #
+      # === Example
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   rows = [
+      #     { "first_name" => "Alice", "age" => 21 },
+      #     { "first_name" => "Bob", "age" => 22 }
+      #   ]
+      #   table.insert rows
+      #
+      # :category: Data
+      #
       def insert rows, options = {}
         rows = [rows] if rows.is_a? Hash
         ensure_connection!
@@ -408,7 +711,10 @@ module Gcloud
       #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.table "my_table"
+      #
       #   table.delete
+      #
+      # :category: Lifecycle
       #
       def delete
         ensure_connection!
