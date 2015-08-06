@@ -15,9 +15,8 @@
 require "helper"
 
 describe Gcloud::Bigquery::QueryData, :mock_bigquery do
-  let(:response) { OpenStruct.new data: query_data_hash }
-  let(:query_data) { Gcloud::Bigquery::QueryData.from_response response,
-                                                               bigquery.connection }
+  let(:query_data) { Gcloud::Bigquery::QueryData.from_gapi query_data_hash,
+                                                           bigquery.connection }
 
   it "returns data as a list of hashes" do
     query_data.count.must_equal 3
@@ -111,99 +110,5 @@ describe Gcloud::Bigquery::QueryData, :mock_bigquery do
 
     job = query_data.job
     job.must_equal "I AM A STUBBED JOB"
-  end
-
-  def query_data_json
-    query_data_hash.to_json
-  end
-
-  def query_data_hash
-    {
-      "kind" => "bigquery#getQueryResultsResponse",
-      "etag" => "etag1234567890",
-      "jobReference" => {
-        "projectId" => project,
-        "jobId" => "job9876543210"
-      },
-      "schema" => {
-        "fields" => [
-          {
-            "name" => "name",
-            "type" => "STRING",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "age",
-            "type" => "INTEGER",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "score",
-            "type" => "FLOAT",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "active",
-            "type" => "BOOLEAN",
-            "mode" => "NULLABLE"
-          }
-        ]
-      },
-      "rows" => [
-        {
-          "f" => [
-            {
-              "v" => "Heidi"
-            },
-            {
-              "v" => "36"
-            },
-            {
-              "v" => "7.65"
-            },
-            {
-              "v" => "true"
-            }
-          ]
-        },
-        {
-          "f" => [
-            {
-              "v" => "Aaron"
-            },
-            {
-              "v" => "42"
-            },
-            {
-              "v" => "8.15"
-            },
-            {
-              "v" => "false"
-            }
-          ]
-        },
-        {
-          "f" => [
-            {
-              "v" => "Sally"
-            },
-            {
-              "v" => nil
-            },
-            {
-              "v" => nil
-            },
-            {
-              "v" => nil
-            }
-          ]
-        }
-      ],
-      "pageToken" => "token1234567890",
-      "totalRows" => 3,
-      "totalBytesProcessed" => 456789,
-      "jobComplete" => true,
-      "cacheHit" => false
-    }
   end
 end

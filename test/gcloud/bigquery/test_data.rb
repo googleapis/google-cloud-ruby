@@ -141,7 +141,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data1 = table.data
     data1.class.must_equal Gcloud::Bigquery::Data
     data1.token.wont_be :nil?
-    (!!data1.next?).must_equal true # can't use must_be :next?
+    data1.next?.must_equal true # can't use must_be :next?
     data2 = data1.next
     data2.class.must_equal Gcloud::Bigquery::Data
   end

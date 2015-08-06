@@ -60,7 +60,7 @@ module Gcloud
       ##
       # Is there a next page of data?
       def next?
-        token
+        !token.nil?
       end
 
       def next

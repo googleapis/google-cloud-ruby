@@ -458,6 +458,100 @@ class MockBigquery < Minitest::Spec
     }
   end
 
+  def query_data_json
+    query_data_hash.to_json
+  end
+
+  def query_data_hash
+    {
+      "kind" => "bigquery#getQueryResultsResponse",
+      "etag" => "etag1234567890",
+      "jobReference" => {
+        "projectId" => project,
+        "jobId" => "job9876543210"
+      },
+      "schema" => {
+        "fields" => [
+          {
+            "name" => "name",
+            "type" => "STRING",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "age",
+            "type" => "INTEGER",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "score",
+            "type" => "FLOAT",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "active",
+            "type" => "BOOLEAN",
+            "mode" => "NULLABLE"
+          }
+        ]
+      },
+      "rows" => [
+        {
+          "f" => [
+            {
+              "v" => "Heidi"
+            },
+            {
+              "v" => "36"
+            },
+            {
+              "v" => "7.65"
+            },
+            {
+              "v" => "true"
+            }
+          ]
+        },
+        {
+          "f" => [
+            {
+              "v" => "Aaron"
+            },
+            {
+              "v" => "42"
+            },
+            {
+              "v" => "8.15"
+            },
+            {
+              "v" => "false"
+            }
+          ]
+        },
+        {
+          "f" => [
+            {
+              "v" => "Sally"
+            },
+            {
+              "v" => nil
+            },
+            {
+              "v" => nil
+            },
+            {
+              "v" => nil
+            }
+          ]
+        }
+      ],
+      "pageToken" => "token1234567890",
+      "totalRows" => 3,
+      "totalBytesProcessed" => 456789,
+      "jobComplete" => true,
+      "cacheHit" => false
+    }
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_bigquery

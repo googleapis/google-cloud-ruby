@@ -93,7 +93,7 @@ module Gcloud
         ensure_connection!
         resp = connection.job_query_results job_id, options
         if resp.success?
-          QueryData.from_response resp, connection
+          QueryData.from_gapi resp.data, connection
         else
           fail ApiError.from_response(resp)
         end

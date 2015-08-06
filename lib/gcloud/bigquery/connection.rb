@@ -226,6 +226,14 @@ module Gcloud
         )
       end
 
+      def query query, options = {}
+        @client.execute(
+          api_method: @bigquery.jobs.query,
+          parameters: { projectId: @project },
+          body_object: query_config(query, options)
+        )
+      end
+
       ##
       # Returns the query data for the job
       def job_query_results job_id, options = {}
@@ -413,6 +421,25 @@ module Gcloud
             }.delete_if { |_, v| v.nil? }
           }.delete_if { |_, v| v.nil? }
         }
+      end
+
+      def query_config query, options = {}
+        dataset_config = nil
+        dataset_config = {
+          "datasetId" => options[:dataset],
+          "projectId" => options[:project] || @project
+        } if options[:dataset]
+
+        {
+          "kind" => "bigquery#queryRequest",
+          "query" => query,
+          "maxResults" => options[:max],
+          "defaultDataset" => dataset_config,
+          "timeoutMs" => options[:timeout],
+          "dryRun" => options[:dryrun],
+          "preserveNulls" => options[:preserve_nulls],
+          "useQueryCache" => options[:cache]
+        }.delete_if { |_, v| v.nil? }
       end
 
       ##

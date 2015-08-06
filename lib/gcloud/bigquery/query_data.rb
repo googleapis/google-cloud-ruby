@@ -74,7 +74,7 @@ module Gcloud
       ##
       # Is there a next page of data?
       def next?
-        token
+        !token.nil?
       end
 
       def next
@@ -82,7 +82,7 @@ module Gcloud
         ensure_connection!
         resp = connection.job_query_results job_id, token: token
         if resp.success?
-          QueryData.from_response resp, connection
+          QueryData.from_gapi resp.data, connection
         else
           fail ApiError.from_response(resp)
         end
@@ -110,12 +110,12 @@ module Gcloud
 
       ##
       # New Data from a response object.
-      def self.from_response resp, connection #:nodoc:
-        formatted_rows = format_rows resp.data["rows"],
-                                     resp.data["schema"]["fields"]
+      def self.from_gapi gapi, connection #:nodoc:
+        formatted_rows = format_rows gapi["rows"],
+                                     gapi["schema"]["fields"]
 
         data = new formatted_rows
-        data.gapi = resp.data
+        data.gapi = gapi
         data.connection = connection
         data
       end

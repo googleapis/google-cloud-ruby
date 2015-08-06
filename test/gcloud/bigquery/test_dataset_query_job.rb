@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Gcloud::Bigquery::Dataset, :query, :mock_bigquery do
+describe Gcloud::Bigquery::Dataset, :query_job, :mock_bigquery do
   let(:query) { "SELECT name, age, score, active FROM [some_project:some_dataset.users]" }
   let(:dataset_id) { "my_dataset" }
   let(:dataset_hash) { random_dataset_hash dataset_id }

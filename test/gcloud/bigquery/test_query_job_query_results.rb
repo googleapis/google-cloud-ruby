@@ -82,7 +82,7 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     data1 = job.query_results
     data1.class.must_equal Gcloud::Bigquery::QueryData
     data1.token.wont_be :nil?
-    (!!data1.next?).must_equal true
+    data1.next?.must_equal true
     data2 = data1.next
     data2.class.must_equal Gcloud::Bigquery::QueryData
   end
