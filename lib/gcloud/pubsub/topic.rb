@@ -512,6 +512,9 @@ module Gcloud
         @gapi.nil?
       end
 
+      # rubocop:disable Style/TrivialAccessors
+      # Disabled rubocop because you can't use "?" in an attr.
+
       ##
       # Determines whether the lazy topic object should create a topic on the
       # Pub/Sub service.
@@ -529,6 +532,8 @@ module Gcloud
       def autocreate? #:nodoc:
         @autocreate
       end
+
+      # rubocop:enable Style/TrivialAccessors
 
       ##
       # New Topic from a Google API Client object.
