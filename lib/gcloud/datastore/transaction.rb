@@ -102,7 +102,7 @@ module Gcloud
       # Transaction#start must be called afterwards.
       def reset!
         @shared_mutation = nil
-        @id  = nil
+        @id = nil
         @_auto_id_entities = []
       end
 
