@@ -41,7 +41,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
        query_job_json(query)]
     end
 
-    job = bigquery.query query
+    job = bigquery.query_job query
     job.must_be_kind_of Gcloud::Bigquery::QueryJob
   end
 
@@ -55,7 +55,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
        query_job_json(query)]
     end
 
-    job = bigquery.query query, priority: :batch, cache: false
+    job = bigquery.query_job query, priority: :batch, cache: false
     job.must_be_kind_of Gcloud::Bigquery::QueryJob
   end
 
@@ -75,7 +75,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
        query_job_json(query)]
     end
 
-    job = bigquery.query query, table: table,
+    job = bigquery.query_job query, table: table,
                                 create: :never, write: :truncate,
                                 large_results: true, flatten: false
     job.must_be_kind_of Gcloud::Bigquery::QueryJob
@@ -92,7 +92,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
        query_job_json(query)]
     end
 
-    job = bigquery.query query, dataset: dataset
+    job = bigquery.query_job query, dataset: dataset
     job.must_be_kind_of Gcloud::Bigquery::QueryJob
   end
 
@@ -107,7 +107,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
        query_job_json(query)]
     end
 
-    job = bigquery.query query, dataset: dataset_id
+    job = bigquery.query_job query, dataset: dataset_id
     job.must_be_kind_of Gcloud::Bigquery::QueryJob
   end
 

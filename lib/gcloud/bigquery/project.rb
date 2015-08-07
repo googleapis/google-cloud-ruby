@@ -133,14 +133,14 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #
-      #   job = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]"
+      #   job = bigquery.query_job "SELECT name FROM [my_proj:my_data.my_table]"
       #   if job.complete?
       #     job.query_results.each do |row|
       #       puts row["name"]
       #     end
       #   end
       #
-      def query query, options = {}
+      def query_job query, options = {}
         ensure_connection!
         resp = connection.query_job query, options
         if resp.success?
