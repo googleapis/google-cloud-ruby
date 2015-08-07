@@ -413,7 +413,7 @@ module Gcloud
       #   bigquery = gcloud.bigquery
       #
       #   job = bigquery.query_job "SELECT name FROM [my_proj:my_data.my_table]"
-      #   if job.complete?
+      #   if job.done?
       #     job.query_results.each do |row|
       #       puts row["name"]
       #     end

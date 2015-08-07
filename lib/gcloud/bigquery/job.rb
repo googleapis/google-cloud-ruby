@@ -20,7 +20,43 @@ require "gcloud/bigquery/errors"
 module Gcloud
   module Bigquery
     ##
-    # Represents a Job.
+    # = Job
+    #
+    # Represents a generic Job that may be performed on a Table.
+    #
+    # See {Managing Jobs, Datasets, and Projects
+    # }[https://cloud.google.com/bigquery/docs/managing_jobs_datasets_projects]
+    # for an overview of BigQuery jobs, and the {Jobs API
+    # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs]
+    # for details.
+    #
+    # The subclasses of Job each contain data specific to the BigQuery job type.
+    #
+    # The current subclasses are CopyJob, ExtractJob, LoadJob, and QueryJob.
+    #
+    # A job instance is created when you call Project#query_job or one of the
+    # Table operations such as Table#copy, Table#extract, or Table#load.
+    #
+    #   require "gcloud/bigquery"
+    #
+    #   gcloud = Gcloud.new
+    #   bigquery = gcloud.bigquery
+    #
+    #   q = "SELECT COUNT(word) as count FROM publicdata:samples.shakespeare"
+    #   job = bigquery.query_job q
+    #
+    #   loop do
+    #     break if job.done?
+    #     sleep 1
+    #     job.refresh!
+    #   end
+    #
+    #   if job.failed?
+    #     puts job.error
+    #   else
+    #     puts job.query_results.first
+    #   end
+    #
     class Job
       ##
       # The Connection object.
@@ -39,54 +75,58 @@ module Gcloud
 
       ##
       # The ID of the job.
-      # The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
-      # (_), or dashes (-). The maximum length is 1,024 characters.
       def job_id
         @gapi["jobReference"]["jobId"]
       end
 
       ##
-      # The ID of the project containing this job.
+      # The ID of the project containing the job.
       def project_id
         @gapi["jobReference"]["projectId"]
       end
 
       ##
-      # Running state of the job.
+      # The current status of the job. The possible values are +PENDING+,
+      # +RUNNING+, and +DONE+. A +DONE+ state does not mean that the job
+      # completed successfully. Use #failed? to discover if an error occurred
+      # or if the job was successful.
       def state
         return nil if @gapi["status"].nil?
         @gapi["status"]["state"]
       end
 
       ##
-      # Checks if the job's status is "running".
+      # Checks if the job's status is +RUNNING+.
       def running?
         return false if state.nil?
         "running".casecmp(state).zero?
       end
 
       ##
-      # Checks if the job's status is "pending".
+      # Checks if the job's status is +PENDING+.
       def pending?
         return false if state.nil?
         "pending".casecmp(state).zero?
       end
 
       ##
-      # Checks if the job's status is "done".
+      # Checks if the job's status is +DONE+. When true, the job has stopped
+      # running. However, a +DONE+ state does not mean that the job completed
+      # successfully.  Use #failed? to detect if an error occurred or if the
+      # job was successful.
       def done?
         return false if state.nil?
         "done".casecmp(state).zero?
       end
 
       ##
-      # Checks if the job's status is "done" and an error is present.
+      # Checks if an error is present.
       def failed?
         !error.nil?
       end
 
       ##
-      # The time when this job was created.
+      # The time when the job was created.
       def created_at
         return nil if @gapi["statistics"].nil?
         return nil if @gapi["statistics"]["creationTime"].nil?
@@ -94,9 +134,9 @@ module Gcloud
       end
 
       ##
-      # The time when this job was started.
-      # This field will be present when the job transitions from the PENDING
-      # state to either RUNNING or DONE.
+      # The time when the job was started.
+      # This field will be present when the job state transitions from +PENDING+
+      # to either +RUNNING+ or +DONE+.
       def started_at
         return nil if @gapi["statistics"].nil?
         return nil if @gapi["statistics"]["startTime"].nil?
@@ -104,14 +144,17 @@ module Gcloud
       end
 
       ##
-      # The time when this job ended.
-      # This field will be present whenever a job is in the DONE state.
+      # The time when the job ended.
+      # This field will be present when the job state is +DONE+.
       def ended_at
         return nil if @gapi["statistics"].nil?
         return nil if @gapi["statistics"]["endTime"].nil?
         Time.at(@gapi["statistics"]["endTime"] / 1000.0)
       end
 
+      ##
+      # The configuration for the job. Returns a +Hash+. See the {Jobs API
+      # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs].
       def configuration
         hash = @gapi["configuration"] || {}
         hash = hash.to_hash if hash.respond_to? :to_hash
@@ -119,6 +162,9 @@ module Gcloud
       end
       alias_method :config, :configuration
 
+      ##
+      # The statistics for the job. Returns a +Hash+. See the {Jobs API
+      # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs].
       def statistics
         hash = @gapi["statistics"] || {}
         hash = hash.to_hash if hash.respond_to? :to_hash
@@ -126,22 +172,42 @@ module Gcloud
       end
       alias_method :stats, :statistics
 
+      ##
+      # The job's status. This data is also exposed by #state, #error, and
+      # #errors.
       def status
         hash = @gapi["status"] || {}
         hash = hash.to_hash if hash.respond_to? :to_hash
         hash
       end
 
+      ##
+      # The last error for the job, if any errors have occurred. Returns a
+      # +Hash+. See the {Jobs API
+      # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs].
+      #
+      # === Returns
+      #
+      # +Hash+
+      #
+      #   {
+      #     "reason"=>"notFound",
+      #     "message"=>"Not found: Table publicdata:samples.BAD_ID"
+      #   }
+      #
       def error
         status["errorResult"]
       end
 
+      ##
+      # The errors for the job, if any errors have occurred. Returns an +Array+
+      # of +Hash+ objects. See #error.
       def errors
         Array status["errors"]
       end
 
       ##
-      # Refreshes the job with current data from the BigQuery service.
+      # Reloads the job with current data from the BigQuery service.
       def refresh!
         ensure_connection!
         resp = connection.get_job job_id
