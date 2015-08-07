@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/bigquery/view"
 require "gcloud/bigquery/data"
 require "gcloud/bigquery/table/list"
 require "gcloud/bigquery/errors"
@@ -328,42 +329,6 @@ module Gcloud
       #
       def headers
         fields.map { |f| f["name"] }
-      end
-
-      ##
-      # The query that executes each time the view is loaded.
-      #
-      # :category: Attributes
-      #
-      def query
-        @gapi["view"]["query"] if @gapi["view"]
-      end
-
-      ##
-      # Updates the query that executes each time the view is loaded.
-      # See the BigQuery {Query Reference
-      # }[https://cloud.google.com/bigquery/query-reference].
-      #
-      # === Parameters
-      #
-      # +new_query+::
-      #   The query that defines the view. (+String+)
-      #
-      # === Example
-      #
-      #   require "gcloud/bigquery"
-      #
-      #   gcloud = Gcloud.new
-      #   bigquery = gcloud.bigquery
-      #   dataset = bigquery.dataset "my_dataset"
-      #   view = dataset.table "my_view"
-      #
-      #   view.query = "SELECT first_name FROM [my_project:my_dataset.my_table]"
-      #
-      # :category: Lifecycle
-      #
-      def query= new_query
-        patch_gapi! query: new_query
       end
 
       ##
@@ -729,7 +694,8 @@ module Gcloud
       ##
       # New Table from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
-        new.tap do |f|
+        klass = class_for gapi
+        klass.new.tap do |f|
           f.gapi = gapi
           f.connection = conn
         end
@@ -751,6 +717,11 @@ module Gcloud
         else
           fail ApiError.from_response(resp)
         end
+      end
+
+      def self.class_for gapi
+        return View if gapi["type"] == "VIEW"
+        self
       end
 
       def load_storage file, options = {}

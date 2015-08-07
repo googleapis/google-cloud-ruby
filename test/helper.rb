@@ -362,6 +362,74 @@ class MockBigquery < Minitest::Spec
     }
   end
 
+  def random_view_hash dataset, id = nil, name = nil, description = nil
+    id ||= "my_view"
+    name ||= "View Name"
+
+    {
+      "kind" => "bigquery#table",
+      "etag" => "etag123456789",
+      "id" => "#{project}:#{dataset}.#{id}",
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
+      "tableReference" => {
+        "projectId" => project,
+        "datasetId" => dataset,
+        "tableId" => id
+      },
+      "friendlyName" => name,
+      "description" => description,
+      "schema" => {
+        "fields" => [
+          {
+            "name" => "name",
+            "type" => "STRING",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "age",
+            "type" => "INTEGER",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "score",
+            "type" => "FLOAT",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "active",
+            "type" => "BOOLEAN",
+            "mode" => "NULLABLE"
+          }
+        ]
+      },
+      "creationTime" => (Time.now.to_f * 1000).floor,
+      "expirationTime" => (Time.now.to_f * 1000).floor,
+      "lastModifiedTime" => (Time.now.to_f * 1000).floor,
+      "type" => "VIEW",
+      "view" => {
+        "query" => "SELECT name, age, score, active FROM [external:publicdata.users]"
+      },
+      "location" => "US"
+    }
+  end
+
+  def random_view_small_hash dataset, id = nil, name = nil
+    id ||= "my_view"
+    name ||= "View Name"
+
+    {
+      "kind" => "bigquery#table",
+      "id" => "#{project}:#{dataset}.#{id}",
+      "tableReference" => {
+        "projectId" => project,
+        "datasetId" => dataset,
+        "tableId" => id
+      },
+      "friendlyName" => name,
+      "type" => "VIEW"
+    }
+  end
+
   def random_job_hash id = "1234567890", state = "running"
     {
       "kind" => "bigquery#job",

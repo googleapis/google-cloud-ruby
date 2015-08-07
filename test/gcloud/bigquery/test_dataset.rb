@@ -76,7 +76,6 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     table = dataset.create_table "my_table"
     table.must_be_kind_of Gcloud::Bigquery::Table
     table.table_id.must_equal "my_table"
-    table.query.must_be :nil?
     table.must_be :table?
     table.wont_be :view?
   end
@@ -98,7 +97,6 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
                                  description: description
     table.must_be_kind_of Gcloud::Bigquery::Table
     table.table_id.must_equal id
-    table.query.must_be :nil?
     table.name.must_equal name
     table.description.must_equal description
     table.must_be :table?
@@ -116,7 +114,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     table = dataset.create_view "my_view", query
     table.table_id.must_equal "my_view"
     table.query.must_equal query
-    table.must_be_kind_of Gcloud::Bigquery::Table
+    table.must_be_kind_of Gcloud::Bigquery::View
     table.must_be :view?
     table.wont_be :table?
   end
@@ -137,7 +135,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     table = dataset.create_view id, query,
                                 name: name,
                                 description: description
-    table.must_be_kind_of Gcloud::Bigquery::Table
+    table.must_be_kind_of Gcloud::Bigquery::View
     table.table_id.must_equal id
     table.query.must_equal query
     table.name.must_equal name
