@@ -104,7 +104,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data.total.must_equal 3
   end
 
-  it "paginates datasets" do
+  it "paginates data" do
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
       env.params.wont_include "pageToken"
       [200, {"Content-Type"=>"application/json"},
@@ -125,7 +125,28 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data2.class.must_equal Gcloud::Bigquery::Data
   end
 
-  it "paginates datasets with max set" do
+  it "paginates data using next? and next" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "token1234567890"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+
+    data1 = table.data
+    data1.class.must_equal Gcloud::Bigquery::Data
+    data1.token.wont_be :nil?
+    (!!data1.next?).must_equal true # can't use must_be :next?
+    data2 = data1.next
+    data2.class.must_equal Gcloud::Bigquery::Data
+  end
+
+  it "paginates data with max set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
       env.params.must_include "maxResults"
       env.params["maxResults"].must_equal "3"
@@ -137,7 +158,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data.class.must_equal Gcloud::Bigquery::Data
   end
 
-  it "paginates datasets without max set" do
+  it "paginates data without max set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
       env.params.wont_include "maxResults"
       [200, {"Content-Type"=>"application/json"},
@@ -148,7 +169,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data.class.must_equal Gcloud::Bigquery::Data
   end
 
-  it "paginates datasets with start set" do
+  it "paginates data with start set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
       env.params.must_include "startIndex"
       env.params["startIndex"].must_equal "25"
@@ -160,7 +181,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data.class.must_equal Gcloud::Bigquery::Data
   end
 
-  it "paginates datasets without start set" do
+  it "paginates data without start set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
       env.params.wont_include "startIndex"
       [200, {"Content-Type"=>"application/json"},

@@ -22,8 +22,18 @@ module Gcloud
     # Also contains metadata such as +etag+ and +total+.
     class Data < DelegateClass(::Array)
       ##
+      # The Table object the data belongs to.
+      attr_accessor :table #:nodoc:
+
+      ##
       # The Google API Client object.
       attr_accessor :gapi #:nodoc:
+
+      def initialize arr = [] #:nodoc:
+        @table = nil
+        @gapi = {}
+        super arr
+      end
 
       ##
       # The resource type of the API response.
@@ -47,9 +57,16 @@ module Gcloud
         @gapi["totalRows"]
       end
 
-      def initialize arr = [] #:nodoc:
-        @gapi = {}
-        super arr
+      ##
+      # Is there a next page of data?
+      def next?
+        token
+      end
+
+      def next
+        return nil unless next?
+        ensure_table!
+        table.data token: token
       end
 
       ##
@@ -65,6 +82,7 @@ module Gcloud
         formatted_rows = format_rows resp.data["rows"], table.fields
 
         data = new formatted_rows
+        data.table = table
         data.gapi = resp.data
         data
       end
@@ -103,6 +121,14 @@ module Gcloud
         end
       end
       # rubocop:enable all
+
+      protected
+
+      ##
+      # Raise an error unless an active connection is available.
+      def ensure_table!
+        fail "Must have active connection" unless table
+      end
     end
   end
 end
