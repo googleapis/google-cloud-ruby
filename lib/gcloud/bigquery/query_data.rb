@@ -72,10 +72,31 @@ module Gcloud
       end
 
       ##
+      # Is there a next page of data?
+      def next?
+        token
+      end
+
+      def next
+        return nil unless next?
+        ensure_connection!
+        resp = connection.job_query_results job_id, token: token
+        if resp.success?
+          QueryData.from_response resp, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      # rubocop:disable Metrics/AbcSize
+      # Disabling because its better to keep this logic together.
+
+      ##
       # The BigQuery Job that was created to run the query.
       def job
         return @job if @job
         return nil unless job?
+        ensure_connection!
         resp = connection.get_job job_id
         if resp.success?
           @job = Job.from_gapi resp.data, connection
@@ -84,6 +105,8 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+
+      # rubocop:enable Metrics/AbcSize
 
       ##
       # New Data from a response object.
@@ -98,6 +121,12 @@ module Gcloud
       end
 
       protected
+
+      ##
+      # Raise an error unless an active connection is available.
+      def ensure_connection!
+        fail "Must have active connection" unless connection
+      end
 
       def job?
         @gapi["jobReference"] && @gapi["jobReference"]["jobId"]

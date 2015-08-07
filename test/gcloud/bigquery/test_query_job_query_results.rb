@@ -66,7 +66,28 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     data2.class.must_equal Gcloud::Bigquery::QueryData
   end
 
-  it "paginates datasets with max set" do
+  it "paginates data using next? and next" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       query_data_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "token1234567890"
+      [200, {"Content-Type"=>"application/json"},
+       query_data_json]
+    end
+
+    data1 = job.query_results
+    data1.class.must_equal Gcloud::Bigquery::QueryData
+    data1.token.wont_be :nil?
+    (!!data1.next?).must_equal true
+    data2 = data1.next
+    data2.class.must_equal Gcloud::Bigquery::QueryData
+  end
+
+  it "paginates data with max set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
       env.params.must_include "maxResults"
       env.params["maxResults"].must_equal "3"
@@ -78,7 +99,7 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     data.class.must_equal Gcloud::Bigquery::QueryData
   end
 
-  it "paginates datasets without max set" do
+  it "paginates data without max set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
       env.params.wont_include "maxResults"
       [200, {"Content-Type"=>"application/json"},
@@ -89,7 +110,7 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     data.class.must_equal Gcloud::Bigquery::QueryData
   end
 
-  it "paginates datasets with start set" do
+  it "paginates data with start set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
       env.params.must_include "startIndex"
       env.params["startIndex"].must_equal "25"
@@ -101,7 +122,7 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     data.class.must_equal Gcloud::Bigquery::QueryData
   end
 
-  it "paginates datasets without start set" do
+  it "paginates data without start set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
       env.params.wont_include "startIndex"
       [200, {"Content-Type"=>"application/json"},
@@ -112,7 +133,7 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     data.class.must_equal Gcloud::Bigquery::QueryData
   end
 
-  it "paginates datasets with timeout set" do
+  it "paginates data with timeout set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
       env.params.must_include "timeoutMs"
       env.params["timeoutMs"].must_equal "1000"
@@ -124,7 +145,7 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     data.class.must_equal Gcloud::Bigquery::QueryData
   end
 
-  it "paginates datasets without timeout set" do
+  it "paginates data without timeout set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
       env.params.wont_include "timeoutMs"
       [200, {"Content-Type"=>"application/json"},
@@ -136,7 +157,7 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
   end
 
   def query_job_hash
-    hash = random_job_hash
+    hash = random_job_hash("job9876543210")
     hash["configuration"]["query"] = {
       "query" => "SELECT name, age, score, active FROM [users]",
       "destinationTable" => {
