@@ -356,7 +356,7 @@ module Gcloud
       end
 
       ##
-      # Queries data.
+      # Queries data. Returns a QueryJob.
       #
       # Sets the current dataset as the default dataset in the query. Useful for
       # using unqualified table names.
@@ -364,7 +364,9 @@ module Gcloud
       # === Parameters
       #
       # +query+::
-      #   Query. (+String+)
+      #   A query string, following the BigQuery query syntax, of the query to
+      #   execute. Example: "SELECT count(f1) FROM
+      #   [myProjectId:myDatasetId.myTableId]". (+String+)
       # <code>options[:priority]</code>::
       #   Specifies a priority for the query. Possible values include
       #   +INTERACTIVE+ and +BATCH+. The default value is +INTERACTIVE+.
@@ -425,6 +427,80 @@ module Gcloud
         resp = connection.query_job query, options
         if resp.success?
           Job.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Queries data. Returns QueryData.
+      #
+      # Sets the current dataset as the default dataset in the query. Useful for
+      # using unqualified table names.
+      #
+      # === Parameters
+      #
+      # +query+::
+      #   A query string, following the BigQuery query syntax, of the query to
+      #   execute. Example: "SELECT count(f1) FROM
+      #   [myProjectId:myDatasetId.myTableId]". (+String+)
+      # <code>options[:max]</code>::
+      #   The maximum number of rows of data to return per page of results.
+      #   Setting this flag to a small value such as 1000 and then paging
+      #   through results might improve reliability when the query result set is
+      #   large. In addition to this limit, responses are also limited to 10 MB.
+      #   By default, there is no maximum row count, and only the byte limit
+      #   applies. (+Integer+)
+      # <code>options[:timeout]</code>::
+      #   How long to wait for the query to complete, in milliseconds, before
+      #   the request times out and returns. Note that this is only a timeout
+      #   for the request, not the query. If the query takes longer to run than
+      #   the timeout value, the call returns without any results and with
+      #   QueryData#complete? set to false. The default value is 10000
+      #   milliseconds (10 seconds). (+Integer+)
+      # <code>options[:dryrun]</code>::
+      #   If set to +true+, BigQuery doesn't run the job. Instead, if the query
+      #   is valid, BigQuery returns statistics about the job such as how many
+      #   bytes would be processed. If the query is invalid, an error returns.
+      #   The default value is +false+. (+Boolean+)
+      # <code>options[:cache]</code>::
+      #   Whether to look for the result in the query cache. The query cache is
+      #   a best-effort cache that will be flushed whenever tables in the query
+      #   are modified. The default value is true. For more information, see
+      #   {query caching}[https://developers.google.com/bigquery/querying-data].
+      #   (+Boolean+)
+      # <code>options[:dataset]</code>::
+      #   Specifies the default datasetId and projectId to assume for any
+      #   unqualified table names in the query. If not set, all table names in
+      #   the query string must be qualified in the format 'datasetId.tableId'.
+      #   (+String+)
+      # <code>options[:project]</code>::
+      #   Specifies the default projectId to assume for any unqualified table
+      #   names in the query. Only used if +dataset+ option is set. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Bigquery::QueryJob
+      #
+      # === Example
+      #
+      #   require "gcloud/bigquery"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #
+      #   data = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]"
+      #   data.each do |row|
+      #     puts row["name"]
+      #   end
+      #
+      def query query, options = {}
+        options[:dataset] ||= dataset_id
+        options[:project] ||= project_id
+        ensure_connection!
+        resp = connection.query query, options
+        if resp.success?
+          QueryData.from_gapi resp.data, connection
         else
           fail ApiError.from_response(resp)
         end
