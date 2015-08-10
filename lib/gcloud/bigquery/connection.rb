@@ -278,7 +278,8 @@ module Gcloud
         @client.execute(
           api_method: @bigquery.jobs.insert,
           parameters: { projectId: @project },
-          body_object: load_table_config(table, storage_url, options)
+          body_object: load_table_config(table, storage_url,
+                                         Array(storage_url).first, options)
         )
       end
 
@@ -289,7 +290,7 @@ module Gcloud
           api_method: @bigquery.jobs.insert,
           media: media,
           parameters: { projectId: @project, uploadType: "multipart" },
-          body_object: load_table_config(table, nil, options)
+          body_object: load_table_config(table, nil, file, options)
         )
       end
 
@@ -300,7 +301,7 @@ module Gcloud
           api_method: @bigquery.jobs.insert,
           media: media,
           parameters: { projectId: @project, uploadType: "resumable" },
-          body_object: load_table_config(table, nil, options)
+          body_object: load_table_config(table, nil, file, options)
         )
         upload = result.resumable_upload
         result = @client.execute upload while upload.resumable?
@@ -467,6 +468,7 @@ module Gcloud
       end
 
       def link_table_config table, urls, options = {}
+        path = Array(urls).first
         {
           "configuration" => {
             "link" => {
@@ -477,7 +479,8 @@ module Gcloud
                 "tableId" => table["tableReference"]["tableId"]
               }.delete_if { |_, v| v.nil? },
               "createDisposition" => create_disposition(options[:create]),
-              "writeDisposition" => write_disposition(options[:write])
+              "writeDisposition" => write_disposition(options[:write]),
+              "sourceFormat" => source_format(path, options[:format])
             }.delete_if { |_, v| v.nil? },
             "dryRun" => options[:dryrun]
           }.delete_if { |_, v| v.nil? }
@@ -488,7 +491,7 @@ module Gcloud
         storage_urls = Array(storage_files).map do |url|
           url.respond_to?(:to_gs_url) ? url.to_gs_url : url
         end
-        dest_format = extract_destination_format storage_urls.first, options[:format]
+        dest_format = source_format storage_urls.first, options[:format]
         {
           "configuration" => {
             "extract" => {
@@ -498,14 +501,16 @@ module Gcloud
                 "datasetId" => table["tableReference"]["datasetId"],
                 "tableId" => table["tableReference"]["tableId"]
               }.delete_if { |_, v| v.nil? },
-              "destinationFormat" => dest_format,
+              "destinationFormat" => dest_format
             }.delete_if { |_, v| v.nil? },
             "dryRun" => options[:dryrun]
           }.delete_if { |_, v| v.nil? }
         }
       end
 
-      def load_table_config table, urls, options = {}
+      def load_table_config table, urls, file, options = {}
+        path = Array(urls).first
+        path = Pathname(file).to_path unless file.nil?
         {
           "configuration" => {
             "load" => {
@@ -516,7 +521,8 @@ module Gcloud
                 "tableId" => table["tableReference"]["tableId"]
               }.delete_if { |_, v| v.nil? },
               "createDisposition" => create_disposition(options[:create]),
-              "writeDisposition" => write_disposition(options[:write])
+              "writeDisposition" => write_disposition(options[:write]),
+              "sourceFormat" => source_format(path, options[:format])
             }.delete_if { |_, v| v.nil? },
             "dryRun" => options[:dryrun]
           }.delete_if { |_, v| v.nil? }
@@ -550,15 +556,16 @@ module Gcloud
           "interactive" => "INTERACTIVE" }[str.to_s.downcase]
       end
 
-      def extract_destination_format url, format
+      def source_format path, format
         val = { "csv" => "CSV",
                 "json" => "NEWLINE_DELIMITED_JSON",
                 "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
                 "avro" => "AVRO" }[format.to_s.downcase]
         return val unless val.nil?
-        return "CSV" if url.end_with? ".csv"
-        return "NEWLINE_DELIMITED_JSON" if url.end_with? ".json"
-        return "AVRO" if url.end_with? ".avro"
+        return nil if path.nil?
+        return "CSV" if path.end_with? ".csv"
+        return "NEWLINE_DELIMITED_JSON" if path.end_with? ".json"
+        return "AVRO" if path.end_with? ".avro"
         nil
       end
 

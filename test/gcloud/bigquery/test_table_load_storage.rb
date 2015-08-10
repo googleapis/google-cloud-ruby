@@ -19,8 +19,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   let(:storage) { Gcloud::Storage::Project.new project, credentials }
   let(:load_bucket) { Gcloud::Storage::Bucket.from_gapi random_bucket_hash,
                                                            storage.connection }
-  let(:load_file) { Gcloud::Storage::File.from_gapi random_file_hash(load_bucket.name),
-                                                       storage.connection }
+  let(:load_file) { storage_file }
   let(:load_url) { load_file.to_gs_url }
 
   let(:dataset) { "dataset" }
@@ -34,6 +33,12 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash,
                                                   bigquery.connection }
 
+  def storage_file path = nil
+    Gcloud::Storage::File.from_gapi random_file_hash(load_bucket.name, path),
+                                    storage.connection
+  end
+
+
   it "can specify a storage file" do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(env.body)
@@ -43,12 +48,57 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
       json["configuration"]["load"].wont_include "createDisposition"
       json["configuration"]["load"].wont_include "writeDisposition"
+      json["configuration"]["load"]["sourceFormat"].must_be :nil?
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        load_job_json(table, load_url)]
     end
 
     job = table.load load_file
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
+  end
+
+  it "can specify a storage file with format" do
+    special_file = storage_file "data.json"
+    special_url = special_file.to_gs_url
+
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(env.body)
+      json["configuration"]["load"]["sourceUri"].must_equal [special_url]
+      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
+      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
+      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
+      json["configuration"]["load"].wont_include "createDisposition"
+      json["configuration"]["load"].wont_include "writeDisposition"
+      json["configuration"]["load"]["sourceFormat"].must_equal "CSV"
+      json["configuration"].wont_include "dryRun"
+      [200, {"Content-Type"=>"application/json"},
+       load_job_json(table, load_url)]
+    end
+
+    job = table.load special_file, format: :csv
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
+  end
+
+  it "can specify a storage file and derive format" do
+    special_file = storage_file "data.csv"
+    special_url = special_file.to_gs_url
+
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(env.body)
+      json["configuration"]["load"]["sourceUri"].must_equal [special_url]
+      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
+      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
+      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
+      json["configuration"]["load"].wont_include "createDisposition"
+      json["configuration"]["load"].wont_include "writeDisposition"
+      json["configuration"]["load"]["sourceFormat"].must_equal "CSV"
+      json["configuration"].wont_include "dryRun"
+      [200, {"Content-Type"=>"application/json"},
+       load_job_json(table, load_url)]
+    end
+
+    job = table.load special_file
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
   end
 

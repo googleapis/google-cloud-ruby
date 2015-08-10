@@ -28,26 +28,64 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
 
   it "can upload a csv file" do
     mock_connection.post "/upload/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(get_json_from_multipart_body(env))
+      json["configuration"]["load"]["sourceUri"].must_equal []
+      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
+      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
+      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
+      json["configuration"]["load"].wont_include "createDisposition"
+      json["configuration"]["load"].wont_include "writeDisposition"
+      json["configuration"]["load"]["sourceFormat"].must_equal "CSV"
+      json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json", Location: "/resumable/upload/bigquery/v2/projects/#{project}/jobs"},
        load_job_json(table, "some/file/path.csv")]
     end
 
     temp_csv do |file|
-      job = table.load file
+      job = table.load file, format: :csv
       job.must_be_kind_of Gcloud::Bigquery::LoadJob
     end
   end
 
   it "can upload a json file" do
     mock_connection.post "/upload/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(get_json_from_multipart_body(env))
+      json["configuration"]["load"]["sourceUri"].must_equal []
+      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
+      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
+      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
+      json["configuration"]["load"].wont_include "createDisposition"
+      json["configuration"]["load"].wont_include "writeDisposition"
+      json["configuration"]["load"]["sourceFormat"].must_equal "NEWLINE_DELIMITED_JSON"
+      json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json", Location: "/resumable/upload/bigquery/v2/projects/#{project}/jobs"},
        load_job_json(table, "some/file/path.json")]
     end
 
     temp_json do |file|
-      job = table.load file
+      job = table.load file, format: "JSON"
       job.must_be_kind_of Gcloud::Bigquery::LoadJob
     end
+  end
+
+  it "can upload a json file and derive the format" do
+    mock_connection.post "/upload/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(get_json_from_multipart_body(env))
+      json["configuration"]["load"]["sourceUri"].must_equal []
+      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
+      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
+      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
+      json["configuration"]["load"].wont_include "createDisposition"
+      json["configuration"]["load"].wont_include "writeDisposition"
+      json["configuration"]["load"]["sourceFormat"].must_equal "NEWLINE_DELIMITED_JSON"
+      json["configuration"].wont_include "dryRun"
+      [200, {"Content-Type"=>"application/json", Location: "/resumable/upload/bigquery/v2/projects/#{project}/jobs"},
+       load_job_json(table, "some/file/path.json")]
+    end
+
+    local_json = "regression/data/kitten-test-data.json"
+    job = table.load local_json
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
   end
 
   def load_job_json table, load_url
@@ -80,5 +118,12 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
       tmpfile.write h.to_json
       yield tmpfile
     end
+  end
+
+  def get_json_from_multipart_body env
+    body = env.body.read.split("\n")
+    env.body.rewind
+    json = body.detect { |line| line.start_with? "{\"" }
+    json
   end
 end

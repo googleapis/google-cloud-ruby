@@ -533,6 +533,13 @@ module Gcloud
       #   (+File+ or +Gcloud::Storage::File+ or +String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:format]</code>::
+      #   The exported file format. The default value is +csv+. (+String+)
+      #
+      #   The following values are supported:
+      #   * +csv+ - CSV
+      #   * +json+ - {Newline-delimited JSON}[http://jsonlines.org/]
+      #   * +avro+ - {Avro}[http://avro.apache.org/]
       # <code>options[:create]</code>::
       #   Specifies whether the job is allowed to create new tables. (+String+)
       #
