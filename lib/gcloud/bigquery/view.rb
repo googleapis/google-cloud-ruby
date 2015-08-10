@@ -273,23 +273,41 @@ module Gcloud
       end
 
       ##
-      # Retrieves data from the table.
+      # Runs a query to retrieve all data from the view.
       #
       # === Parameters
       #
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:token]</code>::
-      #   Page token, returned by a previous call, identifying the result set.
-      #   (+String+)
       # <code>options[:max]</code>::
-      #   Maximum number of results to return. (+Integer+)
-      # <code>options[:start]</code>::
-      #   Zero-based index of the starting row to read. (+Integer+)
+      #   The maximum number of rows of data to return per page of results.
+      #   Setting this flag to a small value such as 1000 and then paging
+      #   through results might improve reliability when the query result set is
+      #   large. In addition to this limit, responses are also limited to 10 MB.
+      #   By default, there is no maximum row count, and only the byte limit
+      #   applies. (+Integer+)
+      # <code>options[:timeout]</code>::
+      #   How long to wait for the query to complete, in milliseconds, before
+      #   the request times out and returns. Note that this is only a timeout
+      #   for the request, not the query. If the query takes longer to run than
+      #   the timeout value, the call returns without any results and with
+      #   QueryData#complete? set to false. The default value is 10000
+      #   milliseconds (10 seconds). (+Integer+)
+      # <code>options[:dryrun]</code>::
+      #   If set to +true+, BigQuery doesn't run the job. Instead, if the query
+      #   is valid, BigQuery returns statistics about the job such as how many
+      #   bytes would be processed. If the query is invalid, an error returns.
+      #   The default value is +false+. (+Boolean+)
+      # <code>options[:cache]</code>::
+      #   Whether to look for the result in the query cache. The query cache is
+      #   a best-effort cache that will be flushed whenever tables in the query
+      #   are modified. The default value is true. For more information, see
+      #   {query caching}[https://developers.google.com/bigquery/querying-data].
+      #   (+Boolean+)
       #
       # === Returns
       #
-      # Gcloud::Bigquery::Data
+      # Gcloud::Bigquery::QueryData
       #
       # === Example
       #
@@ -298,21 +316,22 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
-      #   table = dataset.table "my_table"
+      #   view = dataset.table "my_view"
       #
-      #   data = table.data
+      #   data = view.data
       #   data.each do |row|
       #     puts row["first_name"]
       #   end
-      #   more_data = table.data token: data.token
+      #   more_data = data.next if data.next?
       #
       # :category: Data
       #
       def data options = {}
+        sql = "SELECT * FROM #{@gapi['id']}"
         ensure_connection!
-        resp = connection.list_tabledata dataset_id, table_id, options
+        resp = connection.query sql, options
         if resp.success?
-          Data.from_response resp, self
+          QueryData.from_gapi resp.data, connection
         else
           fail ApiError.from_response(resp)
         end
