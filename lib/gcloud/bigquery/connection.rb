@@ -513,7 +513,7 @@ module Gcloud
         {
           "configuration" => {
             "load" => {
-              "sourceUri" => Array(urls),
+              "sourceUris" => Array(urls),
               "destinationTable" => {
                 "projectId" => table["tableReference"]["projectId"],
                 "datasetId" => table["tableReference"]["datasetId"],

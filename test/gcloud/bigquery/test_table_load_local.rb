@@ -29,7 +29,7 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
   it "can upload a csv file" do
     mock_connection.post "/upload/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(get_json_from_multipart_body(env))
-      json["configuration"]["load"]["sourceUri"].must_equal []
+      json["configuration"]["load"]["sourceUris"].must_equal []
       json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
       json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
@@ -50,7 +50,7 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
   it "can upload a json file" do
     mock_connection.post "/upload/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(get_json_from_multipart_body(env))
-      json["configuration"]["load"]["sourceUri"].must_equal []
+      json["configuration"]["load"]["sourceUris"].must_equal []
       json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
       json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
@@ -71,7 +71,7 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
   it "can upload a json file and derive the format" do
     mock_connection.post "/upload/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(get_json_from_multipart_body(env))
-      json["configuration"]["load"]["sourceUri"].must_equal []
+      json["configuration"]["load"]["sourceUris"].must_equal []
       json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
       json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
@@ -91,7 +91,7 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
   def load_job_json table, load_url
     hash = random_job_hash
     hash["configuration"]["load"] = {
-      "sourceUris" => [load_url],
+      "sourceUriss" => [load_url],
       "destinationTable" => {
         "projectId" => table.project_id,
         "datasetId" => table.dataset_id,

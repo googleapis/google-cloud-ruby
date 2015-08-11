@@ -42,7 +42,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   it "can specify a storage file" do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUri"].must_equal [load_url]
+      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
       json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
       json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
@@ -64,7 +64,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
 
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUri"].must_equal [special_url]
+      json["configuration"]["load"]["sourceUris"].must_equal [special_url]
       json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
       json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
@@ -86,7 +86,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
 
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUri"].must_equal [special_url]
+      json["configuration"]["load"]["sourceUris"].must_equal [special_url]
       json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
       json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
@@ -105,7 +105,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   it "can specify a storage url" do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUri"].must_equal [load_url]
+      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
       json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
       json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
@@ -123,7 +123,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   it "can load itself as a dryrun" do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUri"].must_equal [load_url]
+      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
       json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
       json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
@@ -142,7 +142,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   it "can load itself with create disposition" do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUri"].must_equal [load_url]
+      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
       json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
       json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
@@ -161,7 +161,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   it "can load itself with create disposition symbol" do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUri"].must_equal [load_url]
+      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
       json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
       json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
@@ -180,7 +180,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   it "can load itself with write disposition" do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUri"].must_equal [load_url]
+      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
       json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
       json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
@@ -199,7 +199,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   it "can load itself with write disposition symbol" do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUri"].must_equal [load_url]
+      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
       json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
       json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
@@ -218,7 +218,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   def load_job_json table, load_url
     hash = random_job_hash
     hash["configuration"]["load"] = {
-      "sourceUris" => [load_url],
+      "sourceUriss" => [load_url],
       "destinationTable" => {
         "projectId" => table.project_id,
         "datasetId" => table.dataset_id,
