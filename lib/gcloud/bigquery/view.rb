@@ -30,7 +30,7 @@ module Gcloud
     # queried. Queries are billed according to the total amount of data in all
     # table fields referenced directly or indirectly by the top-level query.
     #
-    #   require "gcloud/bigquery"
+    #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   bigquery = gcloud.bigquery
@@ -257,7 +257,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -311,7 +311,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -346,7 +346,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery

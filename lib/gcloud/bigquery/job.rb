@@ -36,7 +36,7 @@ module Gcloud
     # A job instance is created when you call Project#query_job,
     # Dataset#query_job, Table#copy, Table#extract, Table#load, or View#data.
     #
-    #   require "gcloud/bigquery"
+    #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   bigquery = gcloud.bigquery

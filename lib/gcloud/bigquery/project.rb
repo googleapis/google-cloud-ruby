@@ -33,7 +33,7 @@ module Gcloud
     # Google BigQuery. Gcloud::Bigquery::Dataset objects are created,
     # used, and deleted by Gcloud::Bigquery::Project.
     #
-    #   require "gcloud/bigquery"
+    #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   bigquery = gcloud.bigquery
@@ -59,7 +59,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new "my-todo-project", "/path/to/keyfile.json"
       #   bigquery = gcloud.bigquery
@@ -130,7 +130,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -201,7 +201,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -235,7 +235,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -279,7 +279,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -288,7 +288,7 @@ module Gcloud
       #
       # A name and description can be provided:
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -329,7 +329,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -342,7 +342,7 @@ module Gcloud
       # You can also retrieve all datasets, including hidden ones, by providing
       # the +:all+ option:
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -352,7 +352,7 @@ module Gcloud
       # If you have a significant number of datasets, you may need to paginate
       # through them: (See Dataset::List#token)
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -393,7 +393,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -440,7 +440,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -449,7 +449,7 @@ module Gcloud
       #
       # You can also retrieve all running jobs using the +:filter+ option:
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -459,7 +459,7 @@ module Gcloud
       # If you have a significant number of jobs, you may need to paginate
       # through them: (See Job::List#token)
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery

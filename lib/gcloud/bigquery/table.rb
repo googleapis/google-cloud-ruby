@@ -31,7 +31,7 @@ module Gcloud
     # about nested and repeated fields, see {Preparing Data for
     # BigQuery}[https://cloud.google.com/bigquery/preparing-data-for-bigquery].)
     #
-    #   require "gcloud/bigquery"
+    #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   bigquery = gcloud.bigquery
@@ -283,7 +283,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -354,7 +354,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -411,7 +411,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -502,7 +502,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -565,7 +565,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -576,7 +576,7 @@ module Gcloud
       #
       # You can also pass a gcloud storage file instance.
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #   require "gcloud/storage"
       #
       #   gcloud = Gcloud.new
@@ -593,7 +593,7 @@ module Gcloud
       # See {Loading Data with a POST Request}[
       # https://cloud.google.com/bigquery/loading-data-post-request#multipart].
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -644,7 +644,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -679,7 +679,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery

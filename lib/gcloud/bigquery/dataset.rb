@@ -146,7 +146,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -186,7 +186,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -195,7 +195,7 @@ module Gcloud
       #
       # A name and description can be provided:
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -239,7 +239,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -249,7 +249,7 @@ module Gcloud
       #
       # A name and description can be provided:
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -277,7 +277,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -314,7 +314,7 @@ module Gcloud
       #
       # === Examples
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -327,7 +327,7 @@ module Gcloud
       # If you have a significant number of tables, you may need to paginate
       # through them: (See Dataset::List#token)
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -409,7 +409,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
@@ -484,7 +484,7 @@ module Gcloud
       #
       # === Example
       #
-      #   require "gcloud/bigquery"
+      #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
