@@ -110,7 +110,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
 
     Tempfile.open "gcloud-ruby" do |tmpfile|
       tmpfile.write "The quick brown fox jumps over the lazy dog."
-      Gcloud::Storage.stub :resumable_threshold, tmpfile.size/2 do
+      Gcloud::Upload.stub :resumable_threshold, tmpfile.size/2 do
         bucket.create_file tmpfile, "resumable.ext"
       end
     end
@@ -134,7 +134,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
       10000.times do # write enough to be larger than the chunk_size
         tmpfile.write "The quick brown fox jumps over the lazy dog."
       end
-      Gcloud::Storage.stub :resumable_threshold, tmpfile.size/2 do
+      Gcloud::Upload.stub :resumable_threshold, tmpfile.size/2 do
         bucket.create_file tmpfile, "resumable.ext", chunk_size: invalid_chunk_size
       end
     end

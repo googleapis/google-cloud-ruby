@@ -17,6 +17,7 @@ require "gcloud/bigquery/view"
 require "gcloud/bigquery/data"
 require "gcloud/bigquery/table/list"
 require "gcloud/bigquery/errors"
+require "gcloud/upload"
 
 module Gcloud
   module Bigquery
@@ -773,7 +774,7 @@ module Gcloud
       ##
       # Determines if a resumable upload should be used.
       def resumable_upload? file #:nodoc:
-        ::File.size?(file).to_i > Storage.resumable_threshold
+        ::File.size?(file).to_i > Upload.resumable_threshold
       end
 
       def storage_url? file

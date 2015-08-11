@@ -17,13 +17,13 @@ require "gcloud/storage"
 
 describe Gcloud::Storage do
   it "has resumable_threshold" do
-    Gcloud::Storage.resumable_threshold.must_equal 5_000_000
+    Gcloud::Upload.resumable_threshold.must_equal 5_000_000
   end
 
   it "can update resumable_threshold" do
-    old_threshold = Gcloud::Storage.resumable_threshold
-    Gcloud::Storage.resumable_threshold = 10_000_000
-    Gcloud::Storage.resumable_threshold.must_equal 10_000_000
-    Gcloud::Storage.resumable_threshold = old_threshold
+    old_threshold = Gcloud::Upload.resumable_threshold
+    Gcloud::Upload.resumable_threshold = 10_000_000
+    Gcloud::Upload.resumable_threshold.must_equal 10_000_000
+    Gcloud::Upload.resumable_threshold = old_threshold
   end
 end
