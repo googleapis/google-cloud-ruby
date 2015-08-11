@@ -15,7 +15,6 @@
 
 require "gcloud/version"
 require "google/api_client"
-require "mime/types"
 require "digest/md5"
 
 module Gcloud
@@ -573,7 +572,7 @@ module Gcloud
 
       def load_media file, chunk_size = nil
         local_path = Pathname(file).to_path
-        mime_type = MIME::Types.of(local_path).first.to_s
+        mime_type = "application/octet-stream"
 
         media = Google::APIClient::UploadIO.new local_path, mime_type
         media.chunk_size = chunk_size unless chunk_size.nil?
