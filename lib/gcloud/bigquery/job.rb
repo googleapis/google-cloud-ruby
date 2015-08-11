@@ -30,12 +30,11 @@ module Gcloud
     # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs]
     # for details.
     #
-    # The subclasses of Job each contain data specific to the BigQuery job type.
+    # The subclasses of Job represent the specific BigQuery job types: CopyJob,
+    # ExtractJob, LoadJob, and QueryJob.
     #
-    # The current subclasses are CopyJob, ExtractJob, LoadJob, and QueryJob.
-    #
-    # A job instance is created when you call Project#query_job or one of the
-    # Table operations such as Table#copy, Table#extract, or Table#load.
+    # A job instance is created when you call Project#query_job,
+    # Dataset#query_job, Table#copy, Table#extract, Table#load, or View#data.
     #
     #   require "gcloud/bigquery"
     #
@@ -86,7 +85,7 @@ module Gcloud
       end
 
       ##
-      # The current status of the job. The possible values are +PENDING+,
+      # The current state of the job. The possible values are +PENDING+,
       # +RUNNING+, and +DONE+. A +DONE+ state does not mean that the job
       # completed successfully. Use #failed? to discover if an error occurred
       # or if the job was successful.
@@ -96,21 +95,21 @@ module Gcloud
       end
 
       ##
-      # Checks if the job's status is +RUNNING+.
+      # Checks if the job's state is +RUNNING+.
       def running?
         return false if state.nil?
         "running".casecmp(state).zero?
       end
 
       ##
-      # Checks if the job's status is +PENDING+.
+      # Checks if the job's state is +PENDING+.
       def pending?
         return false if state.nil?
         "pending".casecmp(state).zero?
       end
 
       ##
-      # Checks if the job's status is +DONE+. When true, the job has stopped
+      # Checks if the job's state is +DONE+. When +true+, the job has stopped
       # running. However, a +DONE+ state does not mean that the job completed
       # successfully.  Use #failed? to detect if an error occurred or if the
       # job was successful.
@@ -135,7 +134,7 @@ module Gcloud
 
       ##
       # The time when the job was started.
-      # This field will be present when the job state transitions from +PENDING+
+      # This field is present after the job's state changes from +PENDING+
       # to either +RUNNING+ or +DONE+.
       def started_at
         return nil if @gapi["statistics"].nil?
@@ -145,7 +144,7 @@ module Gcloud
 
       ##
       # The time when the job ended.
-      # This field will be present when the job state is +DONE+.
+      # This field is present when the job's state is +DONE+.
       def ended_at
         return nil if @gapi["statistics"].nil?
         return nil if @gapi["statistics"]["endTime"].nil?
@@ -153,7 +152,7 @@ module Gcloud
       end
 
       ##
-      # The configuration for the job. Returns a +Hash+. See the {Jobs API
+      # The configuration for the job. Returns a hash. See the {Jobs API
       # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs].
       def configuration
         hash = @gapi["configuration"] || {}
@@ -163,7 +162,7 @@ module Gcloud
       alias_method :config, :configuration
 
       ##
-      # The statistics for the job. Returns a +Hash+. See the {Jobs API
+      # The statistics for the job. Returns a hash. See the {Jobs API
       # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs].
       def statistics
         hash = @gapi["statistics"] || {}
@@ -173,8 +172,8 @@ module Gcloud
       alias_method :stats, :statistics
 
       ##
-      # The job's status. This data is also exposed by #state, #error, and
-      # #errors.
+      # The job's status. Returns a hash. The values contained in the hash are
+      # also exposed by #state, #error, and #errors.
       def status
         hash = @gapi["status"] || {}
         hash = hash.to_hash if hash.respond_to? :to_hash
@@ -183,7 +182,7 @@ module Gcloud
 
       ##
       # The last error for the job, if any errors have occurred. Returns a
-      # +Hash+. See the {Jobs API
+      # hash. See the {Jobs API
       # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs].
       #
       # === Returns
@@ -200,8 +199,8 @@ module Gcloud
       end
 
       ##
-      # The errors for the job, if any errors have occurred. Returns an +Array+
-      # of +Hash+ objects. See #error.
+      # The errors for the job, if any errors have occurred. Returns an array
+      # of hash objects. See #error.
       def errors
         Array status["errors"]
       end
