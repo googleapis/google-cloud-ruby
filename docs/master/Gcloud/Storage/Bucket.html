@@ -237,7 +237,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 393</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 394</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acl</span>
   <span class="ruby-ivar">@acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -362,7 +362,7 @@ nearest acceptible value.</p>
 
     
       <!-- <div class="method-source-code" id="create_file-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 326</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 327</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_file</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-comment"># TODO: Raise if file doesn&#39;t exist</span>
@@ -411,7 +411,7 @@ nearest acceptible value.</p>
 
     
       <!-- <div class="method-source-code" id="created_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 89</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">created_at</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;timeCreated&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -495,7 +495,7 @@ permissions:</p>
 
     
       <!-- <div class="method-source-code" id="default_acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 447</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 448</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_acl</span>
   <span class="ruby-ivar">@default_acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultAcl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -569,7 +569,7 @@ or specify the wanted behavior in the call:</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 131</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_bucket</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
@@ -632,7 +632,7 @@ or specify the wanted behavior in the call:</p>
 
     
       <!-- <div class="method-source-code" id="file-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 241</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 242</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">file</span> <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_file</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
@@ -747,7 +747,7 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
 
     
       <!-- <div class="method-source-code" id="files-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 206</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 207</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">files</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_files</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
@@ -853,7 +853,7 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
 
     
       <!-- <div class="method-source-code" id="id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 60</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;id&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -887,7 +887,7 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
 
     
       <!-- <div class="method-source-code" id="kind-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 54</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">kind</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;kind&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -926,7 +926,7 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
     
       <!-- <div class="method-source-code" id="location-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 83</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">location</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;location&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -960,7 +960,7 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
     
       <!-- <div class="method-source-code" id="name-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 66</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;name&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -1056,7 +1056,7 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
     
       <!-- <div class="method-source-code" id="url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 72</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">url</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -1096,6 +1096,36 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
     <li class="toc-l0">
       <a class="reference internal" href="../../Gcloud.html">
         Gcloud
+      </a>
+    </li>
+
+    <li class="toc-l0">
+      <a class="reference internal" href="../Bigquery.html">
+        BigQuery
+      </a>
+    </li>
+
+    <li class="toc-l1">
+      <a class="reference internal" href="../Bigquery/Project.html">
+        Project
+      </a>
+    </li>
+
+    <li class="toc-l1">
+      <a class="reference internal" href="../Bigquery/Dataset.html">
+        Dataset
+      </a>
+    </li>
+
+    <li class="toc-l1">
+      <a class="reference internal" href="../Bigquery/Job.html">
+        Job
+      </a>
+    </li>
+
+    <li class="toc-l1">
+      <a class="reference internal" href="../Bigquery/Table.html">
+        Table
       </a>
     </li>
 

@@ -82,6 +82,43 @@ possible. Google Cloud requires a <strong>Project ID</strong> and
 can learn more about various options for connection on the <a
 href="AUTHENTICATION.md">Authentication Guide</a>.</p>
 
+<h1 id="label-BigQuery">BigQuery<span><a href="#label-BigQuery">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="https://cloud.google.com/bigquery/">Google Cloud BigQuery</a> (<a
+href="https://cloud.google.com/bigquery/docs">docs</a>) enables super-fast,
+SQL-like queries against append-only tables, using the processing power of
+Google&#39;s infrastructure. Simply move your data into BigQuery and let it
+handle the hard work. You can control access to both the project and your
+data based on your business needs, such as giving others the ability to
+view or query your data.</p>
+
+<p>See the <a href="Gcloud/Bigquery.html">gcloud-ruby BigQuery API
+documentation</a> to learn how to connect to Cloud BigQuery using this
+library.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+
+<span class="ruby-comment"># Create a new table to archive todos</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my-todo-archive&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;todos&quot;</span>,
+          <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Todos Archive&quot;</span>,
+          <span class="ruby-identifier">description</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Archive for completed TODO records&quot;</span>
+
+<span class="ruby-comment"># Load data into the table</span>
+<span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-string">&quot;/archive/todos/completed-todos.csv&quot;</span>
+<span class="ruby-identifier">load_job</span> = <span class="ruby-identifier">table</span>.<span class="ruby-identifier">load</span> <span class="ruby-identifier">file</span>
+
+<span class="ruby-comment"># Run a query for the number of completed todos by owner</span>
+<span class="ruby-identifier">count_sql</span> = <span class="ruby-string">&quot;SELECT owner, COUNT(*) AS complete_count FROM todos GROUP BY owner&quot;</span>
+<span class="ruby-identifier">data</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">query</span> <span class="ruby-identifier">count_sql</span>
+<span class="ruby-identifier">data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;name&quot;</span>]
+<span class="ruby-keyword">end</span>
+</pre>
+
 <h1 id="label-Datastore">Datastore<span><a href="#label-Datastore">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p><a href="https://cloud.google.com/datastore/">Google Cloud Datastore</a>
@@ -199,6 +236,36 @@ library.</p>
     <li class="toc-l0">
       <a class="reference internal" href="Gcloud.html">
         Gcloud
+      </a>
+    </li>
+
+    <li class="toc-l0">
+      <a class="reference internal" href="Gcloud/Bigquery.html">
+        BigQuery
+      </a>
+    </li>
+
+    <li class="toc-l1">
+      <a class="reference internal" href="Gcloud/Bigquery/Project.html">
+        Project
+      </a>
+    </li>
+
+    <li class="toc-l1">
+      <a class="reference internal" href="Gcloud/Bigquery/Dataset.html">
+        Dataset
+      </a>
+    </li>
+
+    <li class="toc-l1">
+      <a class="reference internal" href="Gcloud/Bigquery/Job.html">
+        Job
+      </a>
+    </li>
+
+    <li class="toc-l1">
+      <a class="reference internal" href="Gcloud/Bigquery/Table.html">
+        Table
       </a>
     </li>
 

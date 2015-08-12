@@ -103,6 +103,8 @@ href="AUTHENTICATION.md">Authentication Guide</a>.</p>
           Public Class Methods:
 
           
+            <a href="#method-c-bigquery">bigquery</a>
+          
             <a href="#method-c-datastore">datastore</a>
           
             <a href="#method-c-new">new</a>
@@ -117,6 +119,8 @@ href="AUTHENTICATION.md">Authentication Guide</a>.</p>
         <div>
           Public Instance Methods:
 
+          
+            <a href="#method-i-bigquery">bigquery</a>
           
             <a href="#method-i-datastore">datastore</a>
           
@@ -158,6 +162,71 @@ href="AUTHENTICATION.md">Authentication Guide</a>.</p>
       <h3 class="section-header">Public Class Methods</h3>
 
       <div class="methods">
+        
+          <div id="bigquery-method" class="method ">
+  <a name="method-c-bigquery"></a>
+
+  
+    <h4>
+      <code>bigquery(project = nil, keyfile = nil)</code>
+      <span>
+        <a href="#method-c-bigquery">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Creates a new object for connecting to the BigQuery service. Each call
+creates a new connection.</p>
+
+<h3 id="method-c-bigquery-label-Parameters">Parameters<span><a href="#method-c-bigquery-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>project</code>
+<dd>
+<p>Project identifier for the BigQuery service you are connecting to.
+(<code>String</code>)</p>
+</dd><dt><code>keyfile</code>
+<dd>
+<p>Keyfile downloaded from Google Cloud. If file path the file must be
+readable. (<code>String</code> or <code>Hash</code>)</p>
+</dd></dl>
+
+<h3 id="method-c-bigquery-label-Returns">Returns<span><a href="#method-c-bigquery-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Gcloud/Bigquery/Project.html">Gcloud::Bigquery::Project</a></p>
+
+<h3 id="method-c-bigquery-label-Example">Example<span><a href="#method-c-bigquery-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/bigquery&quot;</span>
+
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">table</span> <span class="ruby-string">&quot;my_table&quot;</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="bigquery-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">bigquery</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">project</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Bigquery</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">default_project</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyfile</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Bigquery</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Bigquery</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Bigquery</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
         
           <div id="datastore-method" class="method ">
   <a name="method-c-datastore"></a>
@@ -439,6 +508,59 @@ readable. (<code>String</code> or <code>Hash</code>)</p>
 
       <div class="methods">
         
+          <div id="bigquery-method" class="method ">
+  <a name="method-i-bigquery"></a>
+
+  
+    <h4>
+      <code>bigquery()</code>
+      <span>
+        <a href="#method-i-bigquery">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Creates a new object for connecting to the BigQuery service. Each call
+creates a new connection.</p>
+
+<h3 id="method-i-bigquery-label-Returns">Returns<span><a href="#method-i-bigquery-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Gcloud/Bigquery/Project.html">Gcloud::Bigquery::Project</a></p>
+
+<h3 id="method-i-bigquery-label-Example">Example<span><a href="#method-i-bigquery-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my-dataset&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">table</span> <span class="ruby-string">&quot;my-table&quot;</span>
+<span class="ruby-identifier">table</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">row</span>
+<span class="ruby-keyword">end</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="bigquery-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 160</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bigquery</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/bigquery&quot;</span>
+  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">bigquery</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
           <div id="datastore-method" class="method ">
   <a name="method-i-datastore"></a>
 
@@ -622,6 +744,36 @@ connection.</p>
     <li class="toc-l0">
       <a class="reference internal current" href="Gcloud.html">
         Gcloud
+      </a>
+    </li>
+
+    <li class="toc-l0">
+      <a class="reference internal" href="Gcloud/Bigquery.html">
+        BigQuery
+      </a>
+    </li>
+
+    <li class="toc-l1">
+      <a class="reference internal" href="Gcloud/Bigquery/Project.html">
+        Project
+      </a>
+    </li>
+
+    <li class="toc-l1">
+      <a class="reference internal" href="Gcloud/Bigquery/Dataset.html">
+        Dataset
+      </a>
+    </li>
+
+    <li class="toc-l1">
+      <a class="reference internal" href="Gcloud/Bigquery/Job.html">
+        Job
+      </a>
+    </li>
+
+    <li class="toc-l1">
+      <a class="reference internal" href="Gcloud/Bigquery/Table.html">
+        Table
       </a>
     </li>
 
