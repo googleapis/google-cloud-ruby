@@ -164,4 +164,15 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     job.refresh!
     job.must_be :done?
   end
+
+  it "can re-run itself" do
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_job_hash(job_id + "-rerun").to_json]
+    end
+
+    new_job = job.rerun!
+    new_job.configuration.must_equal job.configuration
+    new_job.job_id.wont_equal job.job_id
+  end
 end

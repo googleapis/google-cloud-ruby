@@ -206,6 +206,18 @@ module Gcloud
       end
 
       ##
+      # Created a new job with the current configuration.
+      def rerun!
+        ensure_connection!
+        resp = connection.insert_job configuration
+        if resp.success?
+          Job.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # Reloads the job with current data from the BigQuery service.
       def refresh!
         ensure_connection!

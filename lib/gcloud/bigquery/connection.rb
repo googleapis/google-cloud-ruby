@@ -217,6 +217,14 @@ module Gcloud
         )
       end
 
+      def insert_job config
+        @client.execute(
+          api_method: @bigquery.jobs.insert,
+          parameters: { projectId: @project },
+          body_object: { "configuration" => config }
+        )
+      end
+
       def query_job query, options = {}
         @client.execute(
           api_method: @bigquery.jobs.insert,
