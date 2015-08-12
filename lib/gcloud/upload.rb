@@ -14,7 +14,6 @@
 # limitations under the License.
 
 require "gcloud"
-require "gcloud/storage/project"
 
 #--
 # Google Cloud Upload
