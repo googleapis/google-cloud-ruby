@@ -21,7 +21,22 @@ require "gcloud/bigquery/dataset/list"
 module Gcloud
   module Bigquery
     ##
-    # Represents a Dataset.
+    # = Dataset
+    #
+    # Represents a Dataset. A dataset is a grouping mechanism that holds zero or
+    # more tables. Datasets are the lowest level unit of access control; you
+    # cannot control access at the table level. A dataset is contained within a
+    # specific project.
+    #
+    #   require "gcloud"
+    #
+    #   gcloud = Gcloud.new
+    #   bigquery = gcloud.bigquery
+    #
+    #   dataset = bigquery.create_dataset "my_dataset",
+    #                                     name: "My Dataset"
+    #                                     description: "This is my Dataset"
+    #
     class Dataset
       ##
       # The Connection object.
@@ -42,30 +57,45 @@ module Gcloud
       # A unique ID for this dataset, without the project name.
       # The ID must contain only letters (a-z, A-Z), numbers (0-9),
       # or underscores (_). The maximum length is 1,024 characters.
+      #
+      # :category: Attributes
+      #
       def dataset_id
         @gapi["datasetReference"]["datasetId"]
       end
 
       ##
       # The ID of the project containing this dataset.
+      #
+      # :category: Attributes
+      #
       def project_id
         @gapi["datasetReference"]["projectId"]
       end
 
       ##
       # A descriptive name for the dataset.
+      #
+      # :category: Attributes
+      #
       def name
         @gapi["friendlyName"]
       end
 
       ##
       # Updates the descriptive name for the dataset.
+      #
+      # :category: Attributes
+      #
       def name= new_name
         patch_gapi! name: new_name
       end
 
       ##
       # A string hash of the dataset.
+      #
+      # :category: Attributes
+      #
       def etag
         ensure_full_data!
         @gapi["etag"]
@@ -73,6 +103,9 @@ module Gcloud
 
       ##
       # A URL that can be used to access the dataset using the REST API.
+      #
+      # :category: Attributes
+      #
       def url
         ensure_full_data!
         @gapi["selfLink"]
@@ -80,6 +113,9 @@ module Gcloud
 
       ##
       # A user-friendly description of the dataset.
+      #
+      # :category: Attributes
+      #
       def description
         ensure_full_data!
         @gapi["description"]
@@ -87,12 +123,18 @@ module Gcloud
 
       ##
       # Updates the user-friendly description of the dataset.
+      #
+      # :category: Attributes
+      #
       def description= new_description
         patch_gapi! description: new_description
       end
 
       ##
       # The default lifetime of all tables in the dataset, in milliseconds.
+      #
+      # :category: Attributes
+      #
       def default_expiration
         ensure_full_data!
         @gapi["defaultTableExpirationMs"]
@@ -101,12 +143,18 @@ module Gcloud
       ##
       # Updates the default lifetime of all tables in the dataset, in
       # milliseconds.
+      #
+      # :category: Attributes
+      #
       def default_expiration= new_default_expiration
         patch_gapi! default_expiration: new_default_expiration
       end
 
       ##
       # The time when this dataset was created.
+      #
+      # :category: Attributes
+      #
       def created_at
         ensure_full_data!
         Time.at(@gapi["creationTime"] / 1000.0)
@@ -114,6 +162,9 @@ module Gcloud
 
       ##
       # The date when this dataset or any of its tables was last modified.
+      #
+      # :category: Attributes
+      #
       def modified_at
         ensure_full_data!
         Time.at(@gapi["lastModifiedTime"] / 1000.0)
@@ -122,20 +173,23 @@ module Gcloud
       ##
       # The geographic location where the dataset should reside. Possible
       # values include EU and US. The default value is US.
+      #
+      # :category: Attributes
+      #
       def location
         ensure_full_data!
         @gapi["location"]
       end
 
       ##
-      # Permanently deletes the dataset.
-      # The dataset must be empty before it can be deleted.
+      # Permanently deletes the dataset. The dataset must be empty before it can
+      # be deleted unless the +force+ option is set to +true+.
       #
       # === Parameters
       #
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:delete]</code>::
+      # <code>options[:force]</code>::
       #   If +true+, delete all the tables in the dataset. If +false+ and the
       #   dataset contains tables, the request will fail. Default is +false+.
       #   (+Boolean+)
@@ -153,6 +207,8 @@ module Gcloud
       #
       #   dataset = bigquery.dataset "my_dataset"
       #   dataset.delete
+      #
+      # :category: Lifecycle
       #
       def delete options = {}
         ensure_connection!
@@ -236,6 +292,8 @@ module Gcloud
       #                                name: "My Table",
       #                                schema: schema
       #
+      # :category: Table
+      #
       def create_table table_id, options = {}
         ensure_connection!
         resp = connection.insert_table dataset_id, table_id, options
@@ -252,7 +310,7 @@ module Gcloud
       # === Parameters
       #
       # +table_id+::
-      #   The ID of the table. The ID must contain only letters (a-z, A-Z),
+      #   The ID of the view table. The ID must contain only letters (a-z, A-Z),
       #   numbers (0-9), or underscores (_). The maximum length is 1,024
       #   characters. (+String+)
       # +query+::
@@ -267,7 +325,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Bigquery::Table
+      # Gcloud::Bigquery::View
       #
       # === Examples
       #
@@ -276,7 +334,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
-      #   table = dataset.create_view "my_table",
+      #   view = dataset.create_view "my_view",
       #             "SELECT name, age FROM [proj:dataset.users]"
       #
       # A name and description can be provided:
@@ -286,9 +344,11 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
-      #   table = dataset.create_view "my_table",
+      #   view = dataset.create_view "my_view",
       #             "SELECT name, age FROM [proj:dataset.users]",
-      #             name: "My Table", description: "This is my table"
+      #             name: "My View", description: "This is my view"
+      #
+      # :category: Table
       #
       def create_view table_id, query, options = {}
         options[:query] = query
@@ -296,16 +356,17 @@ module Gcloud
       end
 
       ##
-      # Retrieves a table by name.
+      # Retrieves an existing table by ID.
       #
       # === Parameters
       #
-      # +table_name+::
-      #   Name of a table. (+String+)
+      # +table_id+::
+      #   The ID of a table. (+String+)
       #
       # === Returns
       #
-      # Gcloud::Bigquery::Table or nil if table does not exist
+      # Gcloud::Bigquery::Table or Gcloud::Bigquery::View or nil if the table
+      # does not exist
       #
       # === Example
       #
@@ -317,9 +378,11 @@ module Gcloud
       #   table = dataset.table "my_table"
       #   puts table.name
       #
-      def table table_name
+      # :category: Table
+      #
+      def table table_id
         ensure_connection!
-        resp = connection.get_table dataset_id, table_name
+        resp = connection.get_table dataset_id, table_id
         if resp.success?
           Table.from_gapi resp.data, connection
         else
@@ -328,7 +391,7 @@ module Gcloud
       end
 
       ##
-      # Retrieves a list of tables for the given dataset.
+      # Retrieves the list of tables belonging to the dataset.
       #
       # === Parameters
       #
@@ -342,7 +405,8 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Bigquery::Table (Gcloud::Bigquery::Table::List)
+      # Array of Gcloud::Bigquery::Table or Gcloud::Bigquery::View
+      # (Gcloud::Bigquery::Table::List)
       #
       # === Examples
       #
@@ -377,6 +441,8 @@ module Gcloud
       #     tmp_tables = dataset.tables token: tmp_tables.token
       #   end
       #
+      # :category: Table
+      #
       def tables options = {}
         ensure_connection!
         resp = connection.list_tables dataset_id, options
@@ -388,7 +454,8 @@ module Gcloud
       end
 
       ##
-      # Queries data. Returns a QueryJob.
+      # Queries data using the {asynchronous
+      # method}[https://cloud.google.com/bigquery/querying-data].
       #
       # Sets the current dataset as the default dataset in the query. Useful for
       # using unqualified table names.
@@ -396,8 +463,9 @@ module Gcloud
       # === Parameters
       #
       # +query+::
-      #   A query string, following the BigQuery query syntax, of the query to
-      #   execute. Example: "SELECT count(f1) FROM
+      #   A query string, following the BigQuery {query
+      #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
+      #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]". (+String+)
       # <code>options[:priority]</code>::
       #   Specifies a priority for the query. Possible values include
@@ -408,8 +476,8 @@ module Gcloud
       #   a best-effort cache that will be flushed whenever tables in the query
       #   are modified. The default value is +true+. (+Boolean+)
       # <code>options[:table]</code>::
-      #   The table where the query results should be stored. If not present, a
-      #   new table will be created to store the results. (+Table+)
+      #   The destination table where the query results should be stored. If not
+      #   present, a new table will be created to store the results. (+Table+)
       # <code>options[:create]</code>::
       #   Specifies whether the job is allowed to create new tables. (+String+)
       #
@@ -446,12 +514,20 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #
-      #   job = bigquery.query_job "SELECT name FROM [my_proj:my_data.my_table]"
-      #   if job.done?
+      #   job = bigquery.query_job "SELECT name FROM my_table"
+      #
+      #   loop do
+      #     break if job.done?
+      #     sleep 1
+      #     job.refresh!
+      #   end
+      #   if !job.failed?
       #     job.query_results.each do |row|
       #       puts row["name"]
       #     end
       #   end
+      #
+      # :category: Data
       #
       def query_job query, options = {}
         options[:dataset] ||= self
@@ -465,7 +541,8 @@ module Gcloud
       end
 
       ##
-      # Queries data. Returns QueryData.
+      # Queries data using the {synchronous
+      # method}[https://cloud.google.com/bigquery/querying-data].
       #
       # Sets the current dataset as the default dataset in the query. Useful for
       # using unqualified table names.
@@ -473,8 +550,9 @@ module Gcloud
       # === Parameters
       #
       # +query+::
-      #   A query string, following the BigQuery query syntax, of the query to
-      #   execute. Example: "SELECT count(f1) FROM
+      #   A query string, following the BigQuery {query
+      #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
+      #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]". (+String+)
       # <code>options[:max]</code>::
       #   The maximum number of rows of data to return per page of results.
@@ -501,18 +579,10 @@ module Gcloud
       #   are modified. The default value is true. For more information, see
       #   {query caching}[https://developers.google.com/bigquery/querying-data].
       #   (+Boolean+)
-      # <code>options[:dataset]</code>::
-      #   Specifies the default datasetId and projectId to assume for any
-      #   unqualified table names in the query. If not set, all table names in
-      #   the query string must be qualified in the format 'datasetId.tableId'.
-      #   (+String+)
-      # <code>options[:project]</code>::
-      #   Specifies the default projectId to assume for any unqualified table
-      #   names in the query. Only used if +dataset+ option is set. (+String+)
       #
       # === Returns
       #
-      # Gcloud::Bigquery::QueryJob
+      # Gcloud::Bigquery::QueryData
       #
       # === Example
       #
@@ -521,10 +591,12 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #
-      #   data = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]"
+      #   data = bigquery.query "SELECT name FROM my_table"
       #   data.each do |row|
       #     puts row["name"]
       #   end
+      #
+      # :category: Data
       #
       def query query, options = {}
         options[:dataset] ||= dataset_id

@@ -138,7 +138,7 @@ module Gcloud
       ##
       # Updates the name of the table.
       #
-      # :category: Lifecycle
+      # :category: Attributes
       #
       def name= new_name
         patch_gapi! name: new_name
@@ -177,7 +177,7 @@ module Gcloud
       ##
       # Updates the description of the table.
       #
-      # :category: Lifecycle
+      # :category: Attributes
       #
       def description= new_description
         patch_gapi! description: new_description
@@ -306,7 +306,7 @@ module Gcloud
       #   }
       #   table.schema = schema
       #
-      # :category: Lifecycle
+      # :category: Attributes
       #
       def schema= new_schema
         patch_gapi! schema: new_schema

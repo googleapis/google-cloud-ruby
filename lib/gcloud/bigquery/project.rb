@@ -31,7 +31,7 @@ module Gcloud
     #
     # Gcloud::Bigquery::Project is the main object for interacting with
     # Google BigQuery. Gcloud::Bigquery::Dataset objects are created,
-    # used, and deleted by Gcloud::Bigquery::Project.
+    # accessed, and deleted by Gcloud::Bigquery::Project.
     #
     #   require "gcloud"
     #
@@ -77,13 +77,15 @@ module Gcloud
       end
 
       ##
-      # Queries data. Returns a QueryJob.
+      # Queries data using the {asynchronous
+      # method}[https://cloud.google.com/bigquery/querying-data].
       #
       # === Parameters
       #
       # +query+::
-      #   A query string, following the BigQuery query syntax, of the query to
-      #   execute. Example: "SELECT count(f1) FROM
+      #   A query string, following the BigQuery {query
+      #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
+      #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]". (+String+)
       # <code>options[:priority]</code>::
       #   Specifies a priority for the query. Possible values include
@@ -94,8 +96,8 @@ module Gcloud
       #   a best-effort cache that will be flushed whenever tables in the query
       #   are modified. The default value is +true+. (+Boolean+)
       # <code>options[:table]</code>::
-      #   The table where the query results should be stored. If not present, a
-      #   new table will be created to store the results. (+Table+)
+      #   The destination table where the query results should be stored. If not
+      #   present, a new table will be created to store the results. (+Table+)
       # <code>options[:create]</code>::
       #   Specifies whether the job is allowed to create new tables. (+String+)
       #
@@ -136,7 +138,13 @@ module Gcloud
       #   bigquery = gcloud.bigquery
       #
       #   job = bigquery.query_job "SELECT name FROM [my_proj:my_data.my_table]"
-      #   if job.complete?
+      #
+      #   loop do
+      #     break if job.done?
+      #     sleep 1
+      #     job.refresh!
+      #   end
+      #   if !job.failed?
       #     job.query_results.each do |row|
       #       puts row["name"]
       #     end
@@ -153,13 +161,15 @@ module Gcloud
       end
 
       ##
-      # Queries data. Returns QueryData.
+      # Queries data using the {synchronous
+      # method}[https://cloud.google.com/bigquery/querying-data].
       #
       # === Parameters
       #
       # +query+::
-      #   A query string, following the BigQuery query syntax, of the query to
-      #   execute. Example: "SELECT count(f1) FROM
+      #   A query string, following the BigQuery {query
+      #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
+      #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]". (+String+)
       # <code>options[:max]</code>::
       #   The maximum number of rows of data to return per page of results.
@@ -197,7 +207,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Bigquery::QueryJob
+      # Gcloud::Bigquery::QueryData
       #
       # === Example
       #
@@ -222,12 +232,12 @@ module Gcloud
       end
 
       ##
-      # Retrieves dataset by name.
+      # Retrieves an existing dataset by ID.
       #
       # === Parameters
       #
-      # +dataset_name+::
-      #   Name of a dataset. (+String+)
+      # +dataset_id+::
+      #   The ID of a dataset. (+String+)
       #
       # === Returns
       #
@@ -243,9 +253,9 @@ module Gcloud
       #   dataset = bigquery.dataset "my_dataset"
       #   puts dataset.name
       #
-      def dataset dataset_name
+      def dataset dataset_id
         ensure_connection!
-        resp = connection.get_dataset dataset_name
+        resp = connection.get_dataset dataset_id
         if resp.success?
           Dataset.from_gapi resp.data, connection
         else
@@ -269,7 +279,7 @@ module Gcloud
       #   A descriptive name for the dataset. (+String+)
       # <code>options[:description]</code>::
       #   A user-friendly description of the dataset. (+String+)
-      # <code>options[:retries]</code>::
+      # <code>options[:expiration]</code>::
       #   The default lifetime of all tables in the dataset, in milliseconds.
       #   The minimum value is 3600000 milliseconds (one hour). (+Integer+)
       #
@@ -284,7 +294,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #
-      #   dataset = bigquery.create_dataset "my_dataset",
+      #   dataset = bigquery.create_dataset "my_dataset"
       #
       # A name and description can be provided:
       #
@@ -294,7 +304,7 @@ module Gcloud
       #   bigquery = gcloud.bigquery
       #
       #   dataset = bigquery.create_dataset "my_dataset",
-      #                                     name: "My Dataset"
+      #                                     name: "My Dataset",
       #                                     description: "This is my Dataset"
       #
       def create_dataset dataset_id, options = {}
@@ -308,15 +318,15 @@ module Gcloud
       end
 
       ##
-      # Retrieves a list of datasets for the given project.
+      # Retrieves the list of datasets belonging to the project.
       #
       # === Parameters
       #
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:all]</code>::
-      #   Whether to list all datasets, including hidden ones.
-      #   (+Boolean+)
+      #   Whether to list all datasets, including hidden ones. The default is
+      #   +false+. (+Boolean+)
       # <code>options[:token]</code>::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
@@ -380,12 +390,12 @@ module Gcloud
       end
 
       ##
-      # Retrieves job by ID.
+      # Retrieves an existing job by ID.
       #
       # === Parameters
       #
       # +job_id+::
-      #   Job ID of the requested job. (+String+)
+      #   The ID of a job. (+String+)
       #
       # === Returns
       #
@@ -398,7 +408,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #
-      #   job = bigquery.job "existing-job"
+      #   job = bigquery.job "my_job"
       #
       def job job_id
         ensure_connection!
@@ -412,7 +422,7 @@ module Gcloud
       end
 
       ##
-      # Retrieves a list of jobs for the given project.
+      # Retrieves the list of jobs belonging to the project.
       #
       # === Parameters
       #
@@ -420,19 +430,19 @@ module Gcloud
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:all]</code>::
       #   Whether to display jobs owned by all users in the project.
-      #   Default is false. (+Boolean+)
+      #   The default is +false+. (+Boolean+)
       # <code>options[:token]</code>::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
       # <code>options[:max]</code>::
       #   Maximum number of jobs to return. (+Integer+)
       # <code>options[:filter]</code>::
-      #   Filter for job state (+String+)
+      #   A filter for job state. (+String+)
       #
       #   Acceptable values are:
-      #   * +done+ - Finished jobs.
-      #   * +pending+ - Pending jobs.
-      #   * +running+ - Running jobs.
+      #   * +done+ - Finished jobs
+      #   * +pending+ - Pending jobs
+      #   * +running+ - Running jobs
       #
       # === Returns
       #
@@ -447,7 +457,7 @@ module Gcloud
       #
       #   jobs = bigquery.jobs
       #
-      # You can also retrieve all running jobs using the +:filter+ option:
+      # You can also retrieve only running jobs using the +:filter+ option:
       #
       #   require "gcloud"
       #
