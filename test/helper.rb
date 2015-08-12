@@ -18,6 +18,7 @@ require "ostruct"
 require "json"
 require "gcloud/storage"
 require "gcloud/pubsub"
+require "gcloud/bigquery"
 
 class MockStorage < Minitest::Spec
   let(:project) { "test" }
@@ -215,5 +216,344 @@ class MockPubsub < Minitest::Spec
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_pubsub
+  end
+end
+
+class MockBigquery < Minitest::Spec
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new }
+  let(:bigquery) { Gcloud::Bigquery::Project.new project, credentials }
+
+  def setup
+    @connection = Faraday::Adapter::Test::Stubs.new
+    connection = bigquery.instance_variable_get "@connection"
+    client = connection.instance_variable_get "@client"
+    client.connection = Faraday.new do |builder|
+      # builder.options.params_encoder = Faraday::FlatParamsEncoder
+      builder.adapter :test, @connection
+    end
+  end
+
+  def teardown
+    @connection.verify_stubbed_calls
+  end
+
+  def mock_connection
+    @connection
+  end
+
+  def random_dataset_hash id = nil, name = nil, description = nil, default_expiration = nil
+    id ||= "my_dataset"
+    name ||= "My Dataset"
+    description ||= "This is my dataset"
+    default_expiration ||= 100
+
+    {
+      "kind" => "bigquery#dataset",
+      "etag" => "etag123456789",
+      "id" => "id",
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{id}",
+      "datasetReference" => {
+        "datasetId" => id,
+        "projectId" => project
+      },
+      "friendlyName" => name,
+      "description" => description,
+      "defaultTableExpirationMs" => default_expiration,
+      "access" => [
+        {
+          "role" => "role",
+          "userByEmail" => "user@example.com",
+          "groupByEmail" => "group@example.com",
+          "domain" => "example.com",
+          "specialGroup" => "group",
+          "view" => {
+            "projectId" => project,
+            "datasetId" => "dataset",
+            "tableId" => "table"
+          }
+        }
+      ],
+      "creationTime" => Time.now.to_i*1000,
+      "lastModifiedTime" => Time.now.to_i*1000,
+      "location" => "US"
+    }
+  end
+
+  def random_dataset_small_hash id = nil, name = nil
+    id ||= "my_dataset"
+    name ||= "My Dataset"
+
+    {
+      "kind" => "bigquery#dataset",
+      "id" => "#{project}:#{id}",
+      "datasetReference" => {
+        "datasetId" => id,
+        "projectId" => project
+      },
+      "friendlyName" => name
+    }
+  end
+
+  def random_table_hash dataset, id = nil, name = nil, description = nil
+    id ||= "my_table"
+    name ||= "Table Name"
+
+    {
+      "kind" => "bigquery#table",
+      "etag" => "etag123456789",
+      "id" => "#{project}:#{dataset}.#{id}",
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
+      "tableReference" => {
+        "projectId" => project,
+        "datasetId" => dataset,
+        "tableId" => id
+      },
+      "friendlyName" => name,
+      "description" => description,
+      "schema" => {
+        "fields" => [
+          {
+            "name" => "name",
+            "type" => "STRING",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "age",
+            "type" => "INTEGER",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "score",
+            "type" => "FLOAT",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "active",
+            "type" => "BOOLEAN",
+            "mode" => "NULLABLE"
+          }
+        ]
+      },
+      "numBytes" => 1000,
+      "numRows" => 100,
+      "creationTime" => (Time.now.to_f * 1000).floor,
+      "expirationTime" => (Time.now.to_f * 1000).floor,
+      "lastModifiedTime" => (Time.now.to_f * 1000).floor,
+      "type" => "TABLE",
+      "location" => "US"
+    }
+  end
+
+  def random_table_small_hash dataset, id = nil, name = nil
+    id ||= "my_table"
+    name ||= "Table Name"
+
+    {
+      "kind" => "bigquery#table",
+      "id" => "#{project}:#{dataset}.#{id}",
+      "tableReference" => {
+        "projectId" => project,
+        "datasetId" => dataset,
+        "tableId" => id
+      },
+      "friendlyName" => name,
+      "type" => "TABLE"
+    }
+  end
+
+  def random_view_hash dataset, id = nil, name = nil, description = nil
+    id ||= "my_view"
+    name ||= "View Name"
+
+    {
+      "kind" => "bigquery#table",
+      "etag" => "etag123456789",
+      "id" => "#{project}:#{dataset}.#{id}",
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
+      "tableReference" => {
+        "projectId" => project,
+        "datasetId" => dataset,
+        "tableId" => id
+      },
+      "friendlyName" => name,
+      "description" => description,
+      "schema" => {
+        "fields" => [
+          {
+            "name" => "name",
+            "type" => "STRING",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "age",
+            "type" => "INTEGER",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "score",
+            "type" => "FLOAT",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "active",
+            "type" => "BOOLEAN",
+            "mode" => "NULLABLE"
+          }
+        ]
+      },
+      "creationTime" => (Time.now.to_f * 1000).floor,
+      "expirationTime" => (Time.now.to_f * 1000).floor,
+      "lastModifiedTime" => (Time.now.to_f * 1000).floor,
+      "type" => "VIEW",
+      "view" => {
+        "query" => "SELECT name, age, score, active FROM [external:publicdata.users]"
+      },
+      "location" => "US"
+    }
+  end
+
+  def random_view_small_hash dataset, id = nil, name = nil
+    id ||= "my_view"
+    name ||= "View Name"
+
+    {
+      "kind" => "bigquery#table",
+      "id" => "#{project}:#{dataset}.#{id}",
+      "tableReference" => {
+        "projectId" => project,
+        "datasetId" => dataset,
+        "tableId" => id
+      },
+      "friendlyName" => name,
+      "type" => "VIEW"
+    }
+  end
+
+  def random_job_hash id = "1234567890", state = "running"
+    {
+      "kind" => "bigquery#job",
+      "etag" => "etag",
+      "id" => "#{project}:#{id}",
+      "selfLink" => "http://bigquery/projects/#{project}/jobs/#{id}",
+      "jobReference" => {
+        "projectId" => project,
+        "jobId" => id
+      },
+      "configuration" => {
+        # config call goes here
+        "dryRun" => false
+      },
+      "status" => {
+        "state" => state,
+        "errorResult" => nil,
+        "errors" => nil
+      },
+      "statistics" => {
+        "creationTime" => (Time.now.to_f * 1000).floor,
+        "startTime" => (Time.now.to_f * 1000).floor,
+        "endTime" => (Time.now.to_f * 1000).floor
+      },
+      "user_email" => "user@example.com"
+    }
+  end
+
+  def query_data_json
+    query_data_hash.to_json
+  end
+
+  def query_data_hash
+    {
+      "kind" => "bigquery#getQueryResultsResponse",
+      "etag" => "etag1234567890",
+      "jobReference" => {
+        "projectId" => project,
+        "jobId" => "job9876543210"
+      },
+      "schema" => {
+        "fields" => [
+          {
+            "name" => "name",
+            "type" => "STRING",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "age",
+            "type" => "INTEGER",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "score",
+            "type" => "FLOAT",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "active",
+            "type" => "BOOLEAN",
+            "mode" => "NULLABLE"
+          }
+        ]
+      },
+      "rows" => [
+        {
+          "f" => [
+            {
+              "v" => "Heidi"
+            },
+            {
+              "v" => "36"
+            },
+            {
+              "v" => "7.65"
+            },
+            {
+              "v" => "true"
+            }
+          ]
+        },
+        {
+          "f" => [
+            {
+              "v" => "Aaron"
+            },
+            {
+              "v" => "42"
+            },
+            {
+              "v" => "8.15"
+            },
+            {
+              "v" => "false"
+            }
+          ]
+        },
+        {
+          "f" => [
+            {
+              "v" => "Sally"
+            },
+            {
+              "v" => nil
+            },
+            {
+              "v" => nil
+            },
+            {
+              "v" => nil
+            }
+          ]
+        }
+      ],
+      "pageToken" => "token1234567890",
+      "totalRows" => 3,
+      "totalBytesProcessed" => 456789,
+      "jobComplete" => true,
+      "cacheHit" => false
+    }
+  end
+
+  # Register this spec type for when :storage is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_bigquery
   end
 end

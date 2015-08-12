@@ -13,6 +13,7 @@ Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) ser
 
 This client supports the following Google Cloud Platform services:
 
+* [Google Cloud BigQuery](#bigquery)
 * [Google Cloud Datastore](#datastore)
 * [Google Cloud Pub/Sub](#pubsub)
 * [Google Cloud Storage](#storage)
@@ -30,6 +31,38 @@ $ gem install gcloud
 Gcloud uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables. Additionally, Cloud SDK credentials can also be discovered automatically, but this is only recommended during development.
 
 Instructions and configuration options are covered in the [Authentication guide](AUTHENTICATION.md). The examples in Quick Start will demonstrate providing the **Project ID** and **Credentials JSON file path** in code.
+
+### BigQuery
+
+- [gcloud-ruby BigQuery API Documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Bigquery.html)
+- [Google Cloud BigQuery Documentation](https://cloud.google.com/bigquery/docs)
+
+#### Preview
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new "my-todo-project-id",
+                    "/path/to/keyfile.json"
+bigquery = gcloud.bigquery
+
+# Create a new table to archive todos
+dataset = bigquery.dataset "my-todo-archive"
+table = dataset.create_table "todos",
+          name: "Todos Archive",
+          description: "Archive for completed TODO records"
+
+# Load data into the table
+file = File.open "/archive/todos/completed-todos.csv"
+load_job = table.load file
+
+# Run a query for the number of completed todos by owner
+count_sql = "SELECT owner, COUNT(*) AS complete_count FROM todos GROUP BY owner"
+data = bigquery.query count_sql
+data.each do |row|
+  puts row["name"]
+end
+```
 
 ### Datastore
 

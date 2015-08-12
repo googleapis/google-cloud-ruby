@@ -16,6 +16,7 @@
 require "gcloud/storage/bucket/acl"
 require "gcloud/storage/bucket/list"
 require "gcloud/storage/file"
+require "gcloud/upload"
 
 module Gcloud
   module Storage
@@ -468,7 +469,7 @@ module Gcloud
       ##
       # Determines if a resumable upload should be used.
       def resumable_upload? file #:nodoc:
-        ::File.size?(file).to_i > Storage.resumable_threshold
+        ::File.size?(file).to_i > Upload.resumable_threshold
       end
 
       def upload_multipart file, path, options = {}

@@ -8,6 +8,36 @@ $ gem install gcloud
 
 Gcloud aims to make authentication as simple as possible. Google Cloud requires a **Project ID** and **Service Account Credentials** to connect to the APIs. You can learn more about various options for connection on the [Authentication Guide](AUTHENTICATION.md).
 
+# BigQuery
+
+[Google Cloud BigQuery](https://cloud.google.com/bigquery/) ([docs](https://cloud.google.com/bigquery/docs)) enables super-fast, SQL-like queries against append-only tables, using the processing power of Google's infrastructure. Simply move your data into BigQuery and let it handle the hard work. You can control access to both the project and your data based on your business needs, such as giving others the ability to view or query your data.
+
+See the [gcloud-ruby BigQuery API documentation](rdoc-ref:Gcloud::Bigquery) to learn how to connect to Cloud BigQuery using this library.
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new
+bigquery = gcloud.bigquery
+
+# Create a new table to archive todos
+dataset = bigquery.dataset "my-todo-archive"
+table = dataset.create_table "todos",
+          name: "Todos Archive",
+          description: "Archive for completed TODO records"
+
+# Load data into the table
+file = File.open "/archive/todos/completed-todos.csv"
+load_job = table.load file
+
+# Run a query for the number of completed todos by owner
+count_sql = "SELECT owner, COUNT(*) AS complete_count FROM todos GROUP BY owner"
+data = bigquery.query count_sql
+data.each do |row|
+  puts row["name"]
+end
+```
+
 # Datastore
 
 [Google Cloud Datastore](https://cloud.google.com/datastore/) ([docs](https://cloud.google.com/datastore/docs)) is a fully managed, schemaless database for storing non-relational data. Cloud Datastore automatically scales with your users and supports ACID transactions, high availability of reads and writes, strong consistency for reads and ancestor queries, and eventual consistency for all other queries.

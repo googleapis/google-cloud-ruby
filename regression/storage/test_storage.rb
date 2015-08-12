@@ -83,7 +83,7 @@ describe "Storage", :storage do
 
     it "should upload resumable and download a file" do
       original = File.new files[:big][:path]
-      Gcloud::Storage.stub :resumable_threshold, original.size-1 do
+      Gcloud::Upload.stub :resumable_threshold, original.size-1 do
         uploaded = bucket.create_file original, "BigLogo"
         Tempfile.open "gcloud-ruby" do |tmpfile|
           downloaded = uploaded.download tmpfile
@@ -98,7 +98,7 @@ describe "Storage", :storage do
 
     it "should upload resumable with chunk_size" do
       original = File.new files[:big][:path]
-      Gcloud::Storage.stub :resumable_threshold, original.size-1 do
+      Gcloud::Upload.stub :resumable_threshold, original.size-1 do
         uploaded = bucket.create_file original, "BigLogo", chunk_size: 1024*1024*2 # 2MB
         Tempfile.open "gcloud-ruby" do |tmpfile|
           downloaded = uploaded.download tmpfile
