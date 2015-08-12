@@ -19,3 +19,6 @@ deploy:
   on:
     tags: true
     repo: GoogleCloudPlatform/gcloud-ruby
+notifications:
+  slack:
+    secure: Ksji5MDNOWnuzuyu9Hblbxse6kGLdH4kXyYkF98C+wawIGLSONWWkuA65wpdqSLtBN/79RCLMWoBzKAGX4xy9BL6Rxb3rLjAMT+FVur6II2yaApzyJ0dmTVeTXnkchPcrO27FK5taPb0Ghr86DUiG3OViY/q1N0AVALDYce5tfE=
