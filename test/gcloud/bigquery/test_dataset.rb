@@ -21,6 +21,32 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   let(:dataset_id) { "my_dataset" }
   let(:dataset_name) { "My Dataset" }
   let(:description) { "This is my dataset" }
+  let(:table_schema) {
+    {
+      "fields" => [
+        {
+          "name" => "name",
+          "type" => "STRING",
+          "mode" => "NULLABLE"
+        },
+        {
+          "name" => "age",
+          "type" => "INTEGER",
+          "mode" => "NULLABLE"
+        },
+        {
+          "name" => "score",
+          "type" => "FLOAT",
+          "mode" => "NULLABLE"
+        },
+        {
+          "name" => "active",
+          "type" => "BOOLEAN",
+          "mode" => "NULLABLE"
+        }
+      ]
+    }
+  }
   let(:default_expiration) { 999 }
   let(:etag) { "etag123456789" }
   let(:location_code) { "US" }
@@ -51,7 +77,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   it "can delete itself" do
     mock_connection.delete "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}" do |env|
       env.params.wont_include "deleteContents"
-      [200, {"Content-Type"=>"application/json"}, ""]
+      [200, {"Content-Type" => "application/json"}, ""]
     end
 
     dataset.delete
@@ -61,7 +87,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     mock_connection.delete "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}" do |env|
       env.params.must_include "deleteContents"
       env.params["deleteContents"].must_equal "true"
-      [200, {"Content-Type"=>"application/json"}, ""]
+      [200, {"Content-Type" => "application/json"}, ""]
     end
 
     dataset.delete force: true
@@ -69,7 +95,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
 
   it "creates an empty table" do
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      [200, {"Content-Type"=>"application/json"},
+      [200, {"Content-Type" => "application/json"},
        create_table_json("my_table")]
     end
 
@@ -80,7 +106,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     table.wont_be :view?
   end
 
-  it "creates a table with a name and description" do
+  it "creates a table with a name, description, and schema" do
     id = "my_table"
     name = "My Table"
     description = "This is my table"
@@ -88,17 +114,19 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       JSON.parse(env.body)["friendlyName"].must_equal name
       JSON.parse(env.body)["description"].must_equal description
-      [200, {"Content-Type"=>"application/json"},
+      [200, {"Content-Type" => "application/json"},
        create_table_json(id, name, description)]
     end
 
     table = dataset.create_table id,
                                  name: name,
-                                 description: description
+                                 description: description,
+                                 schema: table_schema
     table.must_be_kind_of Gcloud::Bigquery::Table
     table.table_id.must_equal id
     table.name.must_equal name
     table.description.must_equal description
+    table.schema.must_equal table_schema
     table.must_be :table?
     table.wont_be :view?
   end
@@ -107,7 +135,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     query = "SELECT * FROM [table]"
 
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      [200, {"Content-Type"=>"application/json"},
+      [200, {"Content-Type" => "application/json"},
        create_view_json("my_view", query)]
     end
 
@@ -128,7 +156,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       JSON.parse(env.body)["friendlyName"].must_equal name
       JSON.parse(env.body)["description"].must_equal description
-      [200, {"Content-Type"=>"application/json"},
+      [200, {"Content-Type" => "application/json"},
        create_view_json(id, query, name, description)]
     end
 
@@ -147,7 +175,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   it "lists tables" do
     num_tables = 3
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      [200, {"Content-Type"=>"application/json"},
+      [200, {"Content-Type" => "application/json"},
        list_tables_json(num_tables)]
     end
 
@@ -159,13 +187,13 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   it "paginates tables" do
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
+      [200, {"Content-Type" => "application/json"},
        list_tables_json(3, "next_page_token", 5)]
     end
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       env.params.must_include "pageToken"
       env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
+      [200, {"Content-Type" => "application/json"},
        list_tables_json(2, nil, 5)]
     end
 
@@ -187,7 +215,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       env.params.must_include "maxResults"
       env.params["maxResults"].must_equal "3"
-      [200, {"Content-Type"=>"application/json"},
+      [200, {"Content-Type" => "application/json"},
        list_tables_json(3, "next_page_token")]
     end
 
@@ -201,7 +229,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   it "paginates tables without max set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       env.params.wont_include "maxResults"
-      [200, {"Content-Type"=>"application/json"},
+      [200, {"Content-Type" => "application/json"},
        list_tables_json(3, "next_page_token")]
     end
 
@@ -216,7 +244,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     found_table_id = "found_table"
 
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables/#{found_table_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
+      [200, {"Content-Type" => "application/json"},
        find_table_json(found_table_id)]
     end
 
@@ -231,7 +259,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
 
   def create_view_json id, query, name = nil, description = nil
     hash = random_table_hash dataset_id, id, name, description
-    hash["view"] = { "query" => query }
+    hash["view"] = {"query" => query}
     hash["type"] = "VIEW"
     hash.to_json
   end
@@ -242,8 +270,8 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
 
   def list_tables_json count = 2, token = nil, total = nil
     tables = count.times.map { random_table_small_hash(dataset_id) }
-    hash = {"kind"=>"bigquery#tableList", "tables"=>tables,
-            "totalItems"=> (total || count)}
+    hash = {"kind" => "bigquery#tableList", "tables" => tables,
+            "totalItems" => (total || count)}
     hash["nextPageToken"] = token unless token.nil?
     hash.to_json
   end

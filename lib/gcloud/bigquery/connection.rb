@@ -364,7 +364,8 @@ module Gcloud
             projectId: @project, datasetId: dataset_id, tableId: table_id
           },
           friendlyName: options[:name],
-          description: options[:description]
+          description: options[:description],
+          schema: options[:schema]
         }.delete_if { |_, v| v.nil? }
         hash["view"] = { "query" => options[:query] } if options[:query]
         hash

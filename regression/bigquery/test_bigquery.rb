@@ -38,8 +38,7 @@ describe Gcloud::Pubsub, :bigquery do
   let(:table) do
     t = dataset.table table_id
     if t.nil?
-      t = dataset.create_table table_id
-      t.schema = schema
+      t = dataset.create_table table_id, schema: schema
     end
     t
   end

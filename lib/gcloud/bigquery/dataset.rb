@@ -179,6 +179,11 @@ module Gcloud
       #   A descriptive name for the table. (+String+)
       # <code>options[:description]</code>::
       #   A user-friendly description of the table. (+String+)
+      # <code>options[:schema]</code>::
+      #   A schema specifying fields and data types for the table. See the
+      #   {Tables resource
+      #   }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource]
+      #   for more information. (+Hash+)
       #
       # === Returns
       #
@@ -200,9 +205,36 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
+      #
+      #   schema = {
+      #     "fields" => [
+      #       {
+      #         "name" => "first_name",
+      #         "type" => "STRING",
+      #         "mode" => "REQUIRED"
+      #       },
+      #       {
+      #         "name" => "cities_lived",
+      #         "type" => "RECORD",
+      #         "mode" => "REPEATED",
+      #         "fields" => [
+      #           {
+      #             "name" => "place",
+      #             "type" => "STRING",
+      #             "mode" => "REQUIRED"
+      #           },
+      #           {
+      #             "name" => "number_of_years",
+      #             "type" => "INTEGER",
+      #             "mode" => "REQUIRED"
+      #           }
+      #         ]
+      #       }
+      #     ]
+      #   }
       #   table = dataset.create_table "my_table"
       #                                name: "My Table",
-      #                                description: "This is my table"
+      #                                schema: schema
       #
       def create_table table_id, options = {}
         ensure_connection!
