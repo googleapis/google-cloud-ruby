@@ -10,43 +10,61 @@ end
 </div>
 
 <ul>
+  <h4 class="list-item--heading">Getting Started</h4>
   <li class="toc-l0"><a class="reference internal<%= current_class "index.html" %>" href="<%= l "index.html" %>">Overview</a></li>
+  <%
+  side_config["pages"].each do |side|
+    page = store.all_files.select(&:text?).find { |p| p.full_name == side["full_name"] }
+    if page && side["ignore"] != true
+  %>
+    <li class="toc-l0"><a class="reference internal<%= current_class page.path %>" href="<%= l page.full_name %>"><%= side["name"] %></a></li>
+  <%
+    end
+  end
+  # Now for the files that aren't in the config
+  other_pages = store.all_files.select(&:text?).reject do |page|
+    side_config["pages"].find { |s| s["full_name"] == page.full_name }
+  end.each do |page|
+  %>
+    <li class="toc-l0"><a class="reference internal<%= current_class page.path %>" href="<%= l page.full_name %>"><%= page.full_name %></a></li>
+  <%
+  end
+  %>
 </ul>
 
 <ul>
-<%
-side_config["classes"].each do |side|
-  klass = store.all_classes_and_modules.find { |k| k.full_name == side["full_name"] }
-  if klass
-%>
-    <li class="toc-l<%= side["indent"].to_i %>">
-      <a class="reference internal<%= current_class klass.path %>" href="<%= l klass.path %>">
-        <%= side["name"] %>
-      </a>
-    </li>
-<%
+  <h4 class="list-item--heading">API</h4>
+  <%
+  side_config["classes"].each do |side|
+    klass = store.all_classes_and_modules.find { |k| k.full_name == side["full_name"] }
+    if klass
+  %>
+      <li class="toc-l0">
+        <a class="reference internal<%= current_class klass.path %>" href="<%= l klass.path %>">
+          <%= side["name"] %>
+        </a>
+      </li>
+      <%
+      if current.full_name.start_with? side["full_name"]
+        Array(side["classes"]).each do |sub|
+          sub_klass = store.all_classes_and_modules.find { |k| k.full_name == sub["full_name"] }
+          if sub_klass
+      %>
+        <li class="toc-l1">
+          <a class="reference internal<%= current_class sub_klass.path %>" href="<%= l sub_klass.path %>">
+            <%= sub["name"] %>
+          </a>
+        </li>
+      <%
+          end
+        end
+      end
+      %>
+  <%
+    end
   end
-end
-%>
+  %>
   <li class="toc-l0"><a class="reference internal<%= current_class "reference.html" %>" href="<%= l "reference.html" %>">API Reference</a></li>
-<%
-side_config["pages"].each do |side|
-  page = store.all_files.select(&:text?).find { |p| p.full_name == side["full_name"] }
-  if page && side["ignore"] != true
-%>
-  <li class="toc-l0"><a class="reference internal<%= current_class page.path %>" href="<%= l page.full_name %>"><%= side["name"] %></a></li>
-<%
-  end
-end
-# Now for the files that aren't in the config
-other_pages = store.all_files.select(&:text?).reject do |page|
-  side_config["pages"].find { |s| s["full_name"] == page.full_name }
-end.each do |page|
-%>
-  <li class="toc-l0"><a class="reference internal<%= current_class page.path %>" href="<%= l page.full_name %>"><%= page.full_name %></a></li>
-<%
-end
-%>
 </ul>
 
 <ul class="external-links">

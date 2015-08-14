@@ -2,67 +2,52 @@
 classes:
 - full_name: Gcloud
   name: Gcloud
-  indent: 0
 - full_name: Gcloud::Bigquery
   name: BigQuery
-  indent: 0
-- full_name: Gcloud::Bigquery::Project
-  name: Project
-  indent: 1
-- full_name: Gcloud::Bigquery::Dataset
-  name: Dataset
-  indent: 1
-- full_name: Gcloud::Bigquery::Job
-  name: Job
-  indent: 1
-- full_name: Gcloud::Bigquery::Table
-  name: Table
-  indent: 1
+  classes:
+  - full_name: Gcloud::Bigquery::Project
+    name: Project
+  - full_name: Gcloud::Bigquery::Dataset
+    name: Dataset
+  - full_name: Gcloud::Bigquery::Job
+    name: Job
+  - full_name: Gcloud::Bigquery::Table
+    name: Table
 - full_name: Gcloud::Datastore
   name: Datastore
-  indent: 0
-- full_name: Gcloud::Datastore::Dataset
-  name: Dataset
-  indent: 1
-- full_name: Gcloud::Datastore::Query
-  name: Query
-  indent: 1
-- full_name: Gcloud::Datastore::Entity
-  name: Entity
-  indent: 1
-- full_name: Gcloud::Datastore::Key
-  name: Key
-  indent: 1
+  classes:
+  - full_name: Gcloud::Datastore::Dataset
+    name: Dataset
+  - full_name: Gcloud::Datastore::Query
+    name: Query
+  - full_name: Gcloud::Datastore::Entity
+    name: Entity
+  - full_name: Gcloud::Datastore::Key
+    name: Key
 - full_name: Gcloud::Pubsub
   name: "Pub/Sub"
-  indent: 0
-- full_name: Gcloud::Pubsub::Project
-  name: Project
-  indent: 1
-- full_name: Gcloud::Pubsub::Topic
-  name: Topic
-  indent: 1
-- full_name: Gcloud::Pubsub::Subscription
-  name: Subscription
-  indent: 1
+  classes:
+  - full_name: Gcloud::Pubsub::Project
+    name: Project
+  - full_name: Gcloud::Pubsub::Topic
+    name: Topic
+  - full_name: Gcloud::Pubsub::Subscription
+    name: Subscription
 - full_name: Gcloud::Storage
   name: Storage
-  indent: 0
-- full_name: Gcloud::Storage::Project
-  name: Project
-  indent: 1
-- full_name: Gcloud::Storage::Bucket
-  name: Bucket
-  indent: 1
-- full_name: Gcloud::Storage::File
-  name: File
-  indent: 1
+  classes:
+  - full_name: Gcloud::Storage::Project
+    name: Project
+  - full_name: Gcloud::Storage::Bucket
+    name: Bucket
+  - full_name: Gcloud::Storage::File
+    name: File
 pages:
 - full_name: OVERVIEW.md
-  name: Getting Started
+  name: Overview
   ignore: true
 - full_name: README.md
-  name: Getting Started
+  name: Readme
   ignore: true
 - full_name: AUTHENTICATION.md
   name: Authentication Guide
