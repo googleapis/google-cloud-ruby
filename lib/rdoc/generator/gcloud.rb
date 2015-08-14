@@ -118,6 +118,18 @@ module RDoc
         @build_date ||= Date.today
       end
 
+      def show_section? section, attributes
+        return true if attributes = attributes.select(&:display?).any?
+        current.methods_by_type(section).each do |type, visibilities|
+          next if visibilities.empty?
+          visibilities.each do |visibility, methods|
+            next unless visibility == :public
+            return true if methods.any?
+          end
+        end
+        false
+      end
+
       ## Configuration
 
       def side_config
