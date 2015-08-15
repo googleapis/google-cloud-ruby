@@ -19,14 +19,14 @@ require "gcloud/bigquery/project"
 # Google Cloud BigQuery
 module Gcloud
   ##
-  # Creates a new object for connecting to the BigQuery service.
+  # Creates a new +Project+ instance connected to the BigQuery service.
   # Each call creates a new connection.
   #
   # === Parameters
   #
   # +project+::
-  #   Project identifier for the BigQuery service you are connecting to.
-  #   (+String+)
+  #   Identifier for a BigQuery project. If not present, the default project for
+  #   the credentials is used. (+String+)
   # +keyfile+::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
   #   readable. (+String+ or +Hash+)
@@ -56,36 +56,332 @@ module Gcloud
   ##
   # = Google Cloud BigQuery
   #
-  # Google BigQuery enables you to query massive datasets without the time and
-  # expense of building hardware and infrastructure. BigQuery enables
-  # super-fast, SQL-like queries against append-only tables, using the
-  # processing power of Google's infrastructure.
+  # Google Cloud BigQuery enables super-fast, SQL-like queries against massive
+  # datasets, using the processing power of Google's infrastructure. To learn
+  # more, read {What is
+  # BigQuery?}[https://cloud.google.com/bigquery/what-is-bigquery].
   #
-  # == Basic Concepts
-  # === Project
-  # === Dataset
-  # === Table
-  # === Job
-  # == Loading Data into BigQuery
-  # === Uploading a file
-  # === Streaming records individually
-  # === Importing from Google Cloud Storage
-  # === Loading from Datastore Backup
-  # === CSV vs. JSON
-  # == Querying Data
+  # Gcloud's goal is to provide an API that is familiar and comfortable to
+  # Rubyists. Authentication is handled by Gcloud#bigquery. You can provide
+  # the project and credential information to connect to the BigQuery service,
+  # or if you are running on Google Compute Engine this configuration is taken
+  # care of for you. You can read more about the options for connecting in the
+  # {Authentication Guide}[link:AUTHENTICATION.md].
+  #
+  # To help you get started quickly, the first few examples below use a public
+  # dataset provided by Google. As soon as you have {signed
+  # up}[https://cloud.google.com/bigquery/sign-up] to use BigQuery, and provided
+  # that you stay in the free tier for queries, you should be able to run these
+  # first examples without the need to set up billing or to load data (although
+  # we'll show you how to do that too.)
+  #
+  # == Listing Datasets and Tables
+  #
+  # A BigQuery project holds datasets, which in turn hold tables. Assuming that
+  # you have not yet created datasets or tables in your own project, let's
+  # connect to Google's +publicdata+ project, and see what you find.
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new "publicdata"
+  #   bigquery = gcloud.bigquery
+  #
+  #   bigquery.datasets.count #=> 1
+  #   bigquery.datasets.first.dataset_id #=> "samples"
+  #
+  #   dataset = bigquery.datasets.first
+  #   tables = dataset.tables
+  #
+  #   tables.count #=> 7
+  #   tables.map &:table_id #=> [..., "shakespeare", "trigrams", "wikipedia"]
+  #
+  # In addition listing all datasets and tables in the project, you can also
+  # retrieve individual datasets and tables by ID. Let's look at the structure
+  # of the +shakespeare+ table, which contains an entry for every word in every
+  # play written by Shakespeare.
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new "publicdata"
+  #   bigquery = gcloud.bigquery
+  #
+  #   dataset = bigquery.dataset "samples"
+  #   table = dataset.table "shakespeare"
+  #
+  #   table.headers #=> ["word", "word_count", "corpus", "corpus_date"]
+  #   table.rows_count #=> 164656
+  #
+  # Now that you know the column names for the Shakespeare table, you can write
+  # and run a query.
+  #
+  # == Running queries
+  #
+  # BigQuery offers both synchronous and asynchronous methods, as explained in
+  # {Querying Data}[https://cloud.google.com/bigquery/querying-data].
+  #
   # === Synchronous queries
+  #
+  # Let's start with the simpler synchronous approach. Notice that this time you
+  # are connecting using your own default project. This is necessary for running
+  # a query, since queries need to be able to create tables to hold results.
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   bigquery = gcloud.bigquery
+  #
+  #   sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " +
+  #         "FROM publicdata:samples.shakespeare"
+  #   data = bigquery.query sql
+  #
+  #   data.count #=> 50
+  #   data.next? #=> false
+  #   data.first #=> {"word"=>"you", "count"=>42}
+  #
+  # The +TOP+ function shown above is just one of a variety of functions
+  # offered by BigQuery. See the {Query
+  # Reference}[https://cloud.google.com/bigquery/query-reference] for a full
+  # listing.
+  #
   # === Asynchronous queries
-  # === Interactive vs. batch queries
-  # === Query Caching
-  # == Using Views
-  # === Creating a view
-  # === Listing view vs. tables
-  # === Querying from a view
-  # == Copying Data
-  # == Exporting Data
-  # === One file
-  # === Multiple files
-  # === CSV vs. JSON
+  #
+  # Because you probably should not block for most BigQuery operations,
+  # including querying as well as importing, exporting, and copying data, the
+  # BigQuery API enables you to manage longer-running jobs. In the asynchronous
+  # approach to running a query, an instance of Gcloud::Bigquery::QueryJob is
+  # returned, rather than an instance of Gcloud::Bigquery::QueryData.
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   bigquery = gcloud.bigquery
+  #
+  #   sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " +
+  #         "FROM publicdata:samples.shakespeare"
+  #   job = bigquery.query_job sql
+  #
+  #   loop do
+  #     break if job.done?
+  #     sleep 1
+  #     job.refresh!
+  #   end
+  #   if !job.failed?
+  #     job.query_results.each do |row|
+  #       puts row["word"]
+  #     end
+  #   end
+  #
+  # Once you have determined that the job is done and has not failed, you can
+  # obtain an instance of Gcloud::Bigquery::QueryData by calling
+  # Gcloud::Bigquery::QueryJob#query_results. The query results for both of
+  # the above examples are stored in temporary tables with a lifetime of about
+  # 24 hours. See the final example below for a demonstration of how to store
+  # query results in a permanent table.
+  #
+  # == Creating Datasets and Tables
+  #
+  # The first thing you need to do in a new BigQuery project is to create a
+  # Gcloud::Bigquery::Dataset. Datasets hold tables and control access to them.
+  #
+  #   require "gcloud/bigquery"
+  #
+  #   gcloud = Gcloud.new
+  #   bigquery = gcloud.bigquery
+  #   dataset = bigquery.create_dataset "my_dataset"
+  #
+  # Now that you have a dataset, you can use it to create a table. Every table
+  # is defined by a schema that may contain nested and repeated fields. The
+  # example below shows a schema with a repeated record field named
+  # +cities_lived+. (For more information about nested and repeated fields, see
+  # {Preparing Data for
+  # BigQuery}[https://cloud.google.com/bigquery/preparing-data-for-bigquery].)
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   bigquery = gcloud.bigquery
+  #   dataset = bigquery.dataset "my_dataset"
+  #
+  #   schema = {
+  #     "fields" => [
+  #       {
+  #         "name" => "first_name",
+  #         "type" => "STRING",
+  #         "mode" => "REQUIRED"
+  #       },
+  #       {
+  #         "name" => "cities_lived",
+  #         "type" => "RECORD",
+  #         "mode" => "REPEATED",
+  #         "fields" => [
+  #           {
+  #             "name" => "place",
+  #             "type" => "STRING",
+  #             "mode" => "REQUIRED"
+  #           },
+  #           {
+  #             "name" => "number_of_years",
+  #             "type" => "INTEGER",
+  #             "mode" => "REQUIRED"
+  #           }
+  #         ]
+  #       }
+  #     ]
+  #   }
+  #   table = dataset.create_table "people", schema: schema
+  #
+  # Because of the repeated field in this schema, we cannot use the CSV format
+  # to load data into the table.
+  #
+  # == Loading records
+  #
+  # In addition to CSV, data can be imported from files that are formatted as
+  # {Newline-delimited JSON}[http://jsonlines.org/] or
+  # {Avro}[http://avro.apache.org/], or from a Google Cloud Datastore backup. It
+  # can also be "streamed" into BigQuery.
+  #
+  # To follow along with these examples, you will need to set up billing on the
+  # {Google Developers Console}[https://console.developers.google.com].
+  #
+  # === Streaming records
+  #
+  # For situations in which you want new data to be available for querying as
+  # soon as possible, inserting individual records directly from your Ruby
+  # application is a great approach.
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   bigquery = gcloud.bigquery
+  #   dataset = bigquery.dataset "my_dataset"
+  #   table = dataset.table "people"
+  #
+  #   rows = [
+  #       {
+  #           "first_name" => "Anna",
+  #           "cities_lived" => [
+  #               {
+  #                   "place" => "Stockholm",
+  #                   "number_of_years" => 2
+  #               }
+  #           ]
+  #       },
+  #       {
+  #           "first_name" => "Bob",
+  #           "cities_lived" => [
+  #               {
+  #                   "place" => "Seattle",
+  #                   "number_of_years" => 5
+  #               },
+  #               {
+  #                   "place" => "Austin",
+  #                   "number_of_years" => 6
+  #               }
+  #           ]
+  #       }
+  #   ]
+  #   table.insert rows
+  #
+  # There are some trade-offs involved with streaming, so be sure to read the
+  # discussion of data consistency in {Streaming Data Into
+  # BigQuery}[https://cloud.google.com/bigquery/streaming-data-into-bigquery].
+  #
+  # === Uploading a file
+  #
+  # To follow along with this example, please download the
+  # {names.zip}[http://www.ssa.gov/OACT/babynames/names.zip] archive from the
+  # U.S. Social Security Administration. Inside the archive you will find over
+  # 100 files containing baby name records since the year 1880. A PDF file also
+  # contained in the archive specifies the schema used below.
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   bigquery = gcloud.bigquery
+  #   dataset = bigquery.dataset "my_dataset"
+  #   schema = {
+  #     "fields" => [
+  #       {
+  #         "name" => "name",
+  #         "type" => "STRING",
+  #         "mode" => "REQUIRED"
+  #       },
+  #       {
+  #         "name" => "sex",
+  #         "type" => "STRING",
+  #         "mode" => "REQUIRED"
+  #       },
+  #       {
+  #         "name" => "number",
+  #         "type" => "INTEGER",
+  #         "mode" => "REQUIRED"
+  #       }
+  #     ]
+  #   }
+  #   table = dataset.create_table "baby_names", schema: schema
+  #
+  #   file = File.open "names/yob2014.txt"
+  #   load_job = table.load file, format: "csv"
+  #
+  # Because the names data, although formatted as CSV, is distributed in files
+  # with a +.txt+ extension, this example explicitly passes the +format+ option
+  # in order to demonstrate how to handle such situations. Because CSV is the
+  # default format for load operations, the option is not actually necessary.
+  # For JSON saved with a +.txt+ extension, however, it would be.
+  #
+  # == Exporting query results to Google Cloud Storage
+  #
+  # The example below shows how to pass the +table+ option with a query in order
+  # to store results in a permanent table. It also shows how to export the
+  # result data to a Google Cloud Storage file. In order to follow along, you
+  # will need to enable the Google Cloud Storage API in addition to setting up
+  # billing.
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   bigquery = gcloud.bigquery
+  #   dataset = bigquery.dataset "my_dataset"
+  #   source_table = dataset.table "baby_names"
+  #   result_table = dataset.create_table "baby_names_results"
+  #
+  #   sql = "SELECT name, number as count " +
+  #         "FROM baby_names " +
+  #         "WHERE name CONTAINS 'Sam' " +
+  #         "ORDER BY count DESC"
+  #   query_job = dataset.query_job sql, table: result_table
+  #
+  #   loop do
+  #     break if query_job.done?
+  #     sleep 1
+  #     query_job.refresh!
+  #   end
+  #
+  #   if !query_job.failed?
+  #
+  #     storage = gcloud.storage
+  #     bucket_id = "bigquery-exports-#{SecureRandom.uuid}"
+  #     bucket = storage.create_bucket bucket_id
+  #     extract_url = "gs://#{bucket.id}/baby-names-sam.csv"
+  #
+  #     extract_job = result_table.extract extract_url
+  #
+  #     loop do
+  #       break if extract_job.done?
+  #       sleep 1
+  #       extract_job.refresh!
+  #     end
+  #
+  #     # Download to local filesystem
+  #     bucket.files.first.download "baby-names-sam.csv"
+  #
+  #   end
+  #
+  # If a table you wish to export contains a large amount of data, you can pass
+  # a wildcard URI to export to multiple files (for sharding), or an array of
+  # URIs (for partitioning), or both. See {Exporting Data From
+  # BigQuery}[https://cloud.google.com/bigquery/exporting-data-from-bigquery]
+  # for details.
   #
   module Bigquery
   end
