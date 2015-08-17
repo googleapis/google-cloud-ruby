@@ -140,6 +140,17 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     end
   end
 
+  it "raises when given a file that does not exist" do
+    bad_file_path = "/this/file/does/not/exist.ext"
+
+    refute ::File.file?(bad_file_path)
+
+    err = expect {
+      bucket.create_file bad_file_path
+    }.must_raise ArgumentError
+    err.message.must_match bad_file_path
+  end
+
   it "lists files" do
     num_files = 3
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|

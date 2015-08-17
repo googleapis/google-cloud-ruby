@@ -326,9 +326,7 @@ module Gcloud
       #
       def create_file file, path = nil, options = {}
         ensure_connection!
-        # TODO: Raise if file doesn't exist
-        # ensure_file_exists!
-        fail unless ::File.file? file
+        ensure_file_exists! file
 
         options[:acl] = File::Acl.predefined_rule_for options[:acl]
 
@@ -464,6 +462,13 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      ##
+      # Raise an error if the file is not found.
+      def ensure_file_exists! file
+        return if ::File.file? file
+        fail ArgumentError, "cannot find file #{file}"
       end
 
       ##
