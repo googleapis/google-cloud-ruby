@@ -15,6 +15,7 @@
 gem "minitest"
 require "minitest/autorun"
 require "minitest/focus"
+require "minitest/rg"
 require "ostruct"
 require "json"
 require "gcloud/storage"
