@@ -55,3 +55,4 @@ pages:
   name: Contribution Guide
 - full_name: CHANGELOG.md
   name: Release History
+  ignore: true
