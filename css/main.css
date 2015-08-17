@@ -942,6 +942,12 @@ h2 .headerlink:hover {
     margin-bottom: 10px;
 }
 
+.side-nav .list-item--heading {
+    color: #999;
+    margin-bottom: 0;
+    padding-left: 1em;
+}
+
 .side-nav .external-links {
     margin-top: 2em;
 }
