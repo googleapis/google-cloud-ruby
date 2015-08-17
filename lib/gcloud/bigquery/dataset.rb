@@ -288,7 +288,7 @@ module Gcloud
       #       }
       #     ]
       #   }
-      #   table = dataset.create_table "my_table"
+      #   table = dataset.create_table "my_table",
       #                                name: "My Table",
       #                                schema: schema
       #
