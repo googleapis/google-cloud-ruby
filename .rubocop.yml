@@ -4,7 +4,7 @@ AllCops:
     - "Rakefile"
     - "lib/gcloud/proto/**/*"
     - "rakelib/**/*"
-    - "regression/**/*"
+    - "acceptance/**/*"
     - "test/**/*"
 
 Style/StringLiterals:

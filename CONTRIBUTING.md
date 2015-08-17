@@ -27,9 +27,9 @@ $ rake test
 
 ### Regression Tests
 
-To run the regression tests, first create and configure a project in the Google Developers Console. Be sure to download the JSON KEY file. Make note of the PROJECT_ID and the KEYFILE location on your system.
+To run the acceptance tests, first create and configure a project in the Google Developers Console. Be sure to download the JSON KEY file. Make note of the PROJECT_ID and the KEYFILE location on your system.
 
-Then Install the [gcloud command-line tool](https://developers.google.com/cloud/sdk/gcloud/) and use it to create the indexes used in the datastore regression tests.
+Then Install the [gcloud command-line tool](https://developers.google.com/cloud/sdk/gcloud/) and use it to create the indexes used in the datastore acceptance tests.
 
 From the project's root directory:
 
@@ -44,13 +44,13 @@ $ gcloud config set project PROJECT_ID
 $ gcloud auth login
 
 # Create the indexes
-$ gcloud preview datastore create-indexes regression/data/
+$ gcloud preview datastore create-indexes acceptance/data/
 ```
 
-As soon as the indexes are prepared you can run the regression tests:
+As soon as the indexes are prepared you can run the acceptance tests:
 
 ``` sh
-$ rake test:regression[PROJECT_ID,KEYFILE_PATH]
+$ rake test:acceptance[PROJECT_ID,KEYFILE_PATH]
 ```
 
 Or, if you prefer you can store the values in the `GCLOUD_TEST_PROJECT` and `GCLOUD_TEST_KEYFILE` environment variables:
@@ -58,25 +58,25 @@ Or, if you prefer you can store the values in the `GCLOUD_TEST_PROJECT` and `GCL
 ``` sh
 $ export GCLOUD_TEST_PROJECT=my-project-id
 $ export GCLOUD_TEST_KEYFILE=/path/to/keyfile.json
-$ rake test:regression
+$ rake test:acceptance
 ```
 
-If you want to use different values for Datastore vs. Storage regression tests, you can use the `DATASTORE_TEST_` and `STORAGE_TEST_` environment variables:
+If you want to use different values for Datastore vs. Storage acceptance tests, you can use the `DATASTORE_TEST_` and `STORAGE_TEST_` environment variables:
 
 ``` sh
 $ export DATASTORE_TEST_PROJECT=my-project-id
 $ export DATASTORE_TEST_KEYFILE=/path/to/keyfile.json
 $ export STORAGE_TEST_PROJECT=my-other-project-id
 $ export STORAGE_TEST_KEYFILE=/path/to/other/keyfile.json
-$ rake test:regression
+$ rake test:acceptance
 ```
 
 ### Local Datastore Devserver
 
-You can run the Datstore regression tests against a devserver running locally. To switch to the devserver set the `DATASTORE_HOST` environment variable with the location of the local devserver.
+You can run the Datstore acceptance tests against a devserver running locally. To switch to the devserver set the `DATASTORE_HOST` environment variable with the location of the local devserver.
 
 ``` sh
-$ DATASTORE_HOST=http://127.0.0.1:8080 rake test:regression:datastore
+$ DATASTORE_HOST=http://127.0.0.1:8080 rake test:acceptance:datastore
 ```
 
 ## Coding Style

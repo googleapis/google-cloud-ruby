@@ -19,7 +19,7 @@ task :travis do
   if ENV["TRAVIS_BRANCH"] == "master" &&
      ENV["TRAVIS_PULL_REQUEST"] == "false"
     puts ""
-    puts "Preparing to run regression tests."
+    puts "Preparing to run acceptance tests."
     puts ""
     # Decrypt the keyfile
     `openssl aes-256-cbc -K $encrypted_629ec55f39b2_key -iv $encrypted_629ec55f39b2_iv -in keyfile.json.enc -out keyfile.json -d`
@@ -27,7 +27,7 @@ task :travis do
     Rake::Task["test:coveralls"].invoke
   else
     puts ""
-    puts "Skipping regression tests."
+    puts "Skipping acceptance tests."
     puts ""
 
     Rake::Task["test"].invoke

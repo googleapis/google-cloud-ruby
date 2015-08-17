@@ -28,6 +28,10 @@ Gem::Specification.new do |gem|
   gem.add_dependency                  "digest-crc", "~> 0.4"
 
   gem.add_development_dependency      "minitest", "~> 5.7"
+  gem.add_development_dependency      "minitest-autotest", "~> 1.0"
+  gem.add_development_dependency      "minitest-focus", "~> 1.1"
+  gem.add_development_dependency      "minitest-rg", "~> 5.2"
+  gem.add_development_dependency      "autotest-suffix", "~> 1.1"
   gem.add_development_dependency      "rdoc", "~> 4.0"
   gem.add_development_dependency      "rubocop", "~> 0.27"
   gem.add_development_dependency      "httpclient", "~> 2.5"

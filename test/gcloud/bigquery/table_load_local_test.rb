@@ -83,7 +83,7 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
        load_job_json(table, "some/file/path.json")]
     end
 
-    local_json = "regression/data/kitten-test-data.json"
+    local_json = "acceptance/data/kitten-test-data.json"
     job = table.load local_json
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
   end
