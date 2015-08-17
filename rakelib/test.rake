@@ -47,7 +47,7 @@ namespace :test do
     keyfile = args[:keyfile]
     keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_TEST_KEYFILE"]
     if project.nil? || keyfile.nil?
-      fail "You must provide a project and keyfile. e.g. rake test:regression[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake test:regression"
+      fail "You must provide a project and keyfile. e.g. rake test:coverage[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake test:coverage"
     end
     # always overwrite when running tests
     ENV["DATASTORE_PROJECT"] = project
@@ -63,8 +63,8 @@ namespace :test do
     SimpleCov.start("test_frameworks") { command_name "Minitest" }
 
     # Rake::Task["test"].execute
-    $LOAD_PATH.unshift "lib", "test", "regression"
-    Dir.glob("{test,regression}/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    $LOAD_PATH.unshift "lib", "test", "acceptance"
+    Dir.glob("{test,acceptance}/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs tests with coveralls."
@@ -74,7 +74,7 @@ namespace :test do
     keyfile = args[:keyfile]
     keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_TEST_KEYFILE"]
     if project.nil? || keyfile.nil?
-      fail "You must provide a project and keyfile. e.g. rake test:regression[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake test:regression"
+      fail "You must provide a project and keyfile. e.g. rake test:coveralls[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake test:coveralls"
     end
     # always overwrite when running tests
     ENV["DATASTORE_PROJECT"] = project
@@ -91,18 +91,18 @@ namespace :test do
     SimpleCov.formatter = Coveralls::SimpleCov::Formatter
     SimpleCov.start("test_frameworks") { command_name "Minitest" }
 
-    $LOAD_PATH.unshift "lib", "test", "regression"
-    Dir.glob("{test,regression}/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    $LOAD_PATH.unshift "lib", "test", "acceptance"
+    Dir.glob("{test,acceptance}/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
-  desc "Runs the regression tests."
-  task :regression, :project, :keyfile do |t, args|
+  desc "Runs the acceptance tests."
+  task :acceptance, :project, :keyfile do |t, args|
     project = args[:project]
     project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DATASTORE_TEST_PROJECT"]
     keyfile = args[:keyfile]
     keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_TEST_KEYFILE"]
     if project.nil? || keyfile.nil?
-      fail "You must provide a project and keyfile. e.g. rake test:regression[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake test:regression"
+      fail "You must provide a project and keyfile. e.g. rake test:acceptance[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance"
     end
     # always overwrite when running tests
     ENV["DATASTORE_PROJECT"] = project
@@ -114,44 +114,44 @@ namespace :test do
     ENV["BIGQUERY_PROJECT"] = project
     ENV["BIGQUERY_KEYFILE"] = keyfile
 
-    $LOAD_PATH.unshift "lib", "test", "regression"
-    Dir.glob("regression/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    $LOAD_PATH.unshift "lib", "test", "acceptance"
+    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
-  namespace :regression do
+  namespace :acceptance do
 
-    desc "Runs the datastore regression tests."
+    desc "Runs the datastore acceptance tests."
     task :datastore, :project, :keyfile do |t, args|
       project = args[:project]
       project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DATASTORE_TEST_PROJECT"]
       keyfile = args[:keyfile]
       keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_TEST_KEYFILE"]
       if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:regression:datastore[test123, /path/to/keyfile.json] or DATASTORE_TEST_PROJECT=test123 DATASTORE_TEST_KEYFILE=/path/to/keyfile.json rake test:regression:datastore"
+        fail "You must provide a project and keyfile. e.g. rake test:acceptance:datastore[test123, /path/to/keyfile.json] or DATASTORE_TEST_PROJECT=test123 DATASTORE_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:datastore"
       end
       # always overwrite when running tests
       ENV["DATASTORE_PROJECT"] = project
       ENV["DATASTORE_KEYFILE"] = keyfile
 
-      $LOAD_PATH.unshift "lib", "test", "regression"
-      Dir.glob("regression/datastore/**/*_test.rb").each { |file| require_relative "../#{file}"}
+      $LOAD_PATH.unshift "lib", "test", "acceptance"
+      Dir.glob("acceptance/datastore/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
-    desc "Runs the storage regression tests."
+    desc "Runs the storage acceptance tests."
     task :storage, :project, :keyfile do |t, args|
       project = args[:project]
       project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["STORAGE_TEST_PROJECT"]
       keyfile = args[:keyfile]
       keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["STORAGE_TEST_KEYFILE"]
       if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:regression:storage[test123, /path/to/keyfile.json] or STORAGE_TEST_PROJECT=test123 STORAGE_TEST_KEYFILE=/path/to/keyfile.json rake test:regression:storage"
+        fail "You must provide a project and keyfile. e.g. rake test:acceptance:storage[test123, /path/to/keyfile.json] or STORAGE_TEST_PROJECT=test123 STORAGE_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:storage"
       end
       # always overwrite when running tests
       ENV["STORAGE_PROJECT"] = project
       ENV["STORAGE_KEYFILE"] = keyfile
 
-      $LOAD_PATH.unshift "lib", "test", "regression"
-      Dir.glob("regression/storage/**/*_test.rb").each { |file| require_relative "../#{file}"}
+      $LOAD_PATH.unshift "lib", "test", "acceptance"
+      Dir.glob("acceptance/storage/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
     namespace :storage do
@@ -162,7 +162,7 @@ namespace :test do
         keyfile = args[:keyfile]
         keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["STORAGE_TEST_KEYFILE"]
         if project.nil? || keyfile.nil?
-          fail "You must provide a project and keyfile. e.g. rake test:regression:storage:cleanup[test123, /path/to/keyfile.json] or STORAGE_TEST_PROJECT=test123 STORAGE_TEST_KEYFILE=/path/to/keyfile.json rake test:regression:storage:cleanup"
+          fail "You must provide a project and keyfile. e.g. rake test:acceptance:storage:cleanup[test123, /path/to/keyfile.json] or STORAGE_TEST_PROJECT=test123 STORAGE_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:storage:cleanup"
         end
         # always overwrite when running tests
         ENV["STORAGE_PROJECT"] = project
@@ -175,21 +175,21 @@ namespace :test do
       end
     end
 
-    desc "Runs the pubsub regression tests."
+    desc "Runs the pubsub acceptance tests."
     task :pubsub, :project, :keyfile do |t, args|
       project = args[:project]
       project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["PUBSUB_TEST_PROJECT"]
       keyfile = args[:keyfile]
       keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["PUBSUB_TEST_KEYFILE"]
       if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:regression:pubsub[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:regression:storage"
+        fail "You must provide a project and keyfile. e.g. rake test:acceptance:pubsub[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:storage"
       end
       # always overwrite when running tests
       ENV["PUBSUB_PROJECT"] = project
       ENV["PUBSUB_KEYFILE"] = keyfile
 
-      $LOAD_PATH.unshift "lib", "test", "regression"
-      Dir.glob("regression/pubsub/**/*_test.rb").each { |file| require_relative "../#{file}"}
+      $LOAD_PATH.unshift "lib", "test", "acceptance"
+      Dir.glob("acceptance/pubsub/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
     namespace :pubsub do
@@ -200,7 +200,7 @@ namespace :test do
         keyfile = args[:keyfile]
         keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["PUBSUB_TEST_PROJECT"]
         if project.nil? || keyfile.nil?
-          fail "You must provide a project and keyfile. e.g. rake test:regression:pubsub:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:regression:pubsub:cleanup"
+          fail "You must provide a project and keyfile. e.g. rake test:acceptance:pubsub:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:pubsub:cleanup"
         end
         # always overwrite when running tests
         ENV["PUBSUB_PROJECT"] = project
@@ -214,21 +214,21 @@ namespace :test do
       end
     end
 
-    desc "Runs the bigquery regression tests."
+    desc "Runs the bigquery acceptance tests."
     task :bigquery, :project, :keyfile do |t, args|
       project = args[:project]
       project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["BIGQUERY_TEST_PROJECT"]
       keyfile = args[:keyfile]
       keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["BIGQUERY_TEST_KEYFILE"]
       if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:regression:bigquery[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:regression:storage"
+        fail "You must provide a project and keyfile. e.g. rake test:acceptance:bigquery[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:storage"
       end
       # always overwrite when running tests
       ENV["BIGQUERY_PROJECT"] = project
       ENV["BIGQUERY_KEYFILE"] = keyfile
 
-      $LOAD_PATH.unshift "lib", "test", "regression"
-      Dir.glob("regression/bigquery/**/*_test.rb").each { |file| require_relative "../#{file}"}
+      $LOAD_PATH.unshift "lib", "test", "acceptance"
+      Dir.glob("acceptance/bigquery/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
     namespace :bigquery do
@@ -239,7 +239,7 @@ namespace :test do
         keyfile = args[:keyfile]
         keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["BIGQUERY_TEST_KEYFILE"]
         if project.nil? || keyfile.nil?
-          fail "You must provide a project and keyfile. e.g. rake test:regression:bigquery:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:regression:bigquery:cleanup"
+          fail "You must provide a project and keyfile. e.g. rake test:acceptance:bigquery:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:bigquery:cleanup"
         end
         # always overwrite when running tests
         ENV["BIGQUERY_PROJECT"] = project

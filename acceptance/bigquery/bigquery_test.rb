@@ -88,7 +88,7 @@ describe Gcloud::Pubsub, :bigquery do
   end
 
   describe "BigQuery/Table" do
-    let(:local_file) { "regression/data/kitten-test-data.json" }
+    let(:local_file) { "acceptance/data/kitten-test-data.json" }
 
     it "has the correct schema" do
       table.schema.must_equal({

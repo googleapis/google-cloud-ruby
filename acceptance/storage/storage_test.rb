@@ -25,8 +25,8 @@ describe "Storage", :storage do
   let(:bucket_name) { $bucket_names.first }
 
   let(:files) do
-    { logo: { path: "regression/data/CloudPlatform_128px_Retina.png" },
-      big:  { path: "regression/data/three-mb-file.tif" } }
+    { logo: { path: "acceptance/data/CloudPlatform_128px_Retina.png" },
+      big:  { path: "acceptance/data/three-mb-file.tif" } }
   end
 
   before do

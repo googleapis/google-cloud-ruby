@@ -24,7 +24,7 @@ $bigquery = Gcloud.bigquery
 require "time"
 require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "_"
-$prefix = "gcloud_ruby_regression_#{t}_#{SecureRandom.hex(4)}".downcase.gsub "-", "_"
+$prefix = "gcloud_ruby_acceptance_#{t}_#{SecureRandom.hex(4)}".downcase.gsub "-", "_"
 
 module Regression
   ##
