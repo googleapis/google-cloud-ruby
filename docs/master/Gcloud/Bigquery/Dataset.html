@@ -1123,41 +1123,42 @@ resource </a> for more information. (<code>Hash</code>)</p>
 
 <p>A name and description can be provided:</p>
 
-<pre>require &quot;gcloud&quot;
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-gcloud = Gcloud.new
-bigquery = gcloud.bigquery
-dataset = bigquery.dataset &quot;my_dataset&quot;
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
 
-schema = {
-  &quot;fields&quot; =&gt; [
+<span class="ruby-identifier">schema</span> = {
+  <span class="ruby-string">&quot;fields&quot;</span> =<span class="ruby-operator">&gt;</span> [
     {
-      &quot;name&quot; =&gt; &quot;first_name&quot;,
-      &quot;type&quot; =&gt; &quot;STRING&quot;,
-      &quot;mode&quot; =&gt; &quot;REQUIRED&quot;
+      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;first_name&quot;</span>,
+      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;STRING&quot;</span>,
+      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
     },
     {
-      &quot;name&quot; =&gt; &quot;cities_lived&quot;,
-      &quot;type&quot; =&gt; &quot;RECORD&quot;,
-      &quot;mode&quot; =&gt; &quot;REPEATED&quot;,
-      &quot;fields&quot; =&gt; [
+      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;cities_lived&quot;</span>,
+      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;RECORD&quot;</span>,
+      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REPEATED&quot;</span>,
+      <span class="ruby-string">&quot;fields&quot;</span> =<span class="ruby-operator">&gt;</span> [
         {
-          &quot;name&quot; =&gt; &quot;place&quot;,
-          &quot;type&quot; =&gt; &quot;STRING&quot;,
-          &quot;mode&quot; =&gt; &quot;REQUIRED&quot;
+          <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;place&quot;</span>,
+          <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;STRING&quot;</span>,
+          <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
         },
         {
-          &quot;name&quot; =&gt; &quot;number_of_years&quot;,
-          &quot;type&quot; =&gt; &quot;INTEGER&quot;,
-          &quot;mode&quot; =&gt; &quot;REQUIRED&quot;
+          <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;number_of_years&quot;</span>,
+          <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;INTEGER&quot;</span>,
+          <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
         }
       ]
     }
   ]
 }
-table = dataset.create_table &quot;my_table&quot;
-                             name: &quot;My Table&quot;,
-                             schema: schema</pre>
+<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;my_table&quot;</span>,
+                             <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;My Table&quot;</span>,
+                             <span class="ruby-identifier">schema</span><span class="ruby-operator">:</span> <span class="ruby-identifier">schema</span>
+</pre>
     
 
     
