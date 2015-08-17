@@ -19,25 +19,25 @@ namespace :test do
   desc "Runs datastore tests."
   task :datastore do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/datastore/**/test*.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/gcloud/datastore/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs storage tests."
   task :storage do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/storage/**/test*.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/gcloud/storage/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs pubsub tests."
   task :pubsub do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/pubsub/**/test*.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/gcloud/pubsub/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs bigquery tests."
   task :bigquery do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/bigquery/**/test*.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/gcloud/bigquery/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs tests with coverage."
@@ -64,7 +64,7 @@ namespace :test do
 
     # Rake::Task["test"].execute
     $LOAD_PATH.unshift "lib", "test", "regression"
-    Dir.glob("{test,regression}/**/test*.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("{test,regression}/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs tests with coveralls."
@@ -92,7 +92,7 @@ namespace :test do
     SimpleCov.start("test_frameworks") { command_name "Minitest" }
 
     $LOAD_PATH.unshift "lib", "test", "regression"
-    Dir.glob("{test,regression}/**/test*.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("{test,regression}/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs the regression tests."
@@ -115,7 +115,7 @@ namespace :test do
     ENV["BIGQUERY_KEYFILE"] = keyfile
 
     $LOAD_PATH.unshift "lib", "test", "regression"
-    Dir.glob("regression/**/test*.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("regression/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   namespace :regression do
@@ -134,7 +134,7 @@ namespace :test do
       ENV["DATASTORE_KEYFILE"] = keyfile
 
       $LOAD_PATH.unshift "lib", "test", "regression"
-      Dir.glob("regression/datastore/**/test*.rb").each { |file| require_relative "../#{file}"}
+      Dir.glob("regression/datastore/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
     desc "Runs the storage regression tests."
@@ -151,7 +151,7 @@ namespace :test do
       ENV["STORAGE_KEYFILE"] = keyfile
 
       $LOAD_PATH.unshift "lib", "test", "regression"
-      Dir.glob("regression/storage/**/test*.rb").each { |file| require_relative "../#{file}"}
+      Dir.glob("regression/storage/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
     namespace :storage do
@@ -189,7 +189,7 @@ namespace :test do
       ENV["PUBSUB_KEYFILE"] = keyfile
 
       $LOAD_PATH.unshift "lib", "test", "regression"
-      Dir.glob("regression/pubsub/**/test*.rb").each { |file| require_relative "../#{file}"}
+      Dir.glob("regression/pubsub/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
     namespace :pubsub do
@@ -228,7 +228,7 @@ namespace :test do
       ENV["BIGQUERY_KEYFILE"] = keyfile
 
       $LOAD_PATH.unshift "lib", "test", "regression"
-      Dir.glob("regression/bigquery/**/test*.rb").each { |file| require_relative "../#{file}"}
+      Dir.glob("regression/bigquery/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
     namespace :bigquery do
