@@ -20,7 +20,7 @@ Gcloud::Backoff.retries = 10
 # Create shared pubsub object so we don't create new for each test
 $pubsub = Gcloud.pubsub
 
-module Regression
+module Acceptance
   ##
   # Test class for running against a PubSub instance.
   # Ensures that there is an active connection for the tests to use.

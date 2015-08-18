@@ -1,7 +1,7 @@
 require "helper"
 require "gcloud/datastore"
 
-module Regression
+module Acceptance
   ##
   # Test class for running against a Datastore instance.
   # Ensures that there is an active connection for the tests to use.

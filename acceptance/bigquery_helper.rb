@@ -26,7 +26,7 @@ require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "_"
 $prefix = "gcloud_ruby_acceptance_#{t}_#{SecureRandom.hex(4)}".downcase.gsub "-", "_"
 
-module Regression
+module Acceptance
   ##
   # Test class for running against a BigQuery instance.
   # Ensures that there is an active connection for the tests to use.

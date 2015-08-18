@@ -30,7 +30,7 @@ Gcloud::Backoff.backoff = ->(retries) { puts "Backoff #{retries}"; sleep retries
 # Create shared storage object so we don't create new for each test
 $storage = Gcloud.storage
 
-module Regression
+module Acceptance
   ##
   # Test class for running against a Storage instance.
   # Ensures that there is an active connection for the tests to use.

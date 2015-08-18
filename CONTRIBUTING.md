@@ -25,7 +25,7 @@ To run the unit tests, simply run:
 $ rake test
 ```
 
-### Regression Tests
+### Acceptance Tests
 
 To run the acceptance tests, first create and configure a project in the Google Developers Console. Be sure to download the JSON KEY file. Make note of the PROJECT_ID and the KEYFILE location on your system.
 
