@@ -88,9 +88,9 @@ module Gcloud
   #
   #   dataset.save entity
   #
-  def datastore
+  def datastore options = {}
     require "gcloud/datastore"
-    Gcloud.datastore @project, @keyfile
+    Gcloud.datastore @project, @keyfile, options
   end
 
   ##
@@ -110,9 +110,9 @@ module Gcloud
   #   bucket = storage.bucket "my-bucket"
   #   file = bucket.file "path/to/my-file.ext"
   #
-  def storage
+  def storage options = {}
     require "gcloud/storage"
-    Gcloud.storage @project, @keyfile
+    Gcloud.storage @project, @keyfile, options
   end
 
   ##
@@ -132,9 +132,9 @@ module Gcloud
   #   topic = pubsub.topic "my-topic"
   #   topic.publish "task completed"
   #
-  def pubsub
+  def pubsub options = {}
     require "gcloud/pubsub"
-    Gcloud.pubsub @project, @keyfile
+    Gcloud.pubsub @project, @keyfile, options
   end
 
   ##
@@ -157,9 +157,9 @@ module Gcloud
   #     puts row
   #   end
   #
-  def bigquery
+  def bigquery options = {}
     require "gcloud/bigquery"
-    Gcloud.bigquery @project, @keyfile
+    Gcloud.bigquery @project, @keyfile, options
   end
 
   ##

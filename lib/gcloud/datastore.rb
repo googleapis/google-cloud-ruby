@@ -52,12 +52,12 @@ module Gcloud
   #
   #   dataset.save entity
   #
-  def self.datastore project = nil, keyfile = nil
+  def self.datastore project = nil, keyfile = nil, options = {}
     project ||= Gcloud::Datastore::Dataset.default_project
     if keyfile.nil?
-      credentials = Gcloud::Datastore::Credentials.default
+      credentials = Gcloud::Datastore::Credentials.default options
     else
-      credentials = Gcloud::Datastore::Credentials.new keyfile
+      credentials = Gcloud::Datastore::Credentials.new keyfile, options
     end
     Gcloud::Datastore::Dataset.new project, credentials
   end

@@ -133,7 +133,7 @@ module Gcloud
       # client options for initializing signet client
       { token_credential_uri: options["token_credential_uri"],
         audience: options["audience"],
-        scope: options["scope"],
+        scope: Array(options["scope"]),
         issuer: options["client_email"],
         signing_key: OpenSSL::PKey::RSA.new(options["private_key"]) }
     end

@@ -46,12 +46,12 @@ module Gcloud
   #   bucket = storage.bucket "my-bucket"
   #   file = bucket.file "path/to/my-file.ext"
   #
-  def self.storage project = nil, keyfile = nil
+  def self.storage project = nil, keyfile = nil, options = {}
     project ||= Gcloud::Storage::Project.default_project
     if keyfile.nil?
-      credentials = Gcloud::Storage::Credentials.default
+      credentials = Gcloud::Storage::Credentials.default options
     else
-      credentials = Gcloud::Storage::Credentials.new keyfile
+      credentials = Gcloud::Storage::Credentials.new keyfile, options
     end
     Gcloud::Storage::Project.new project, credentials
   end

@@ -45,12 +45,12 @@ module Gcloud
   #   topic = pubsub.topic "my-topic"
   #   topic.publish "task completed"
   #
-  def self.pubsub project = nil, keyfile = nil
+  def self.pubsub project = nil, keyfile = nil, options = {}
     project ||= Gcloud::Pubsub::Project.default_project
     if keyfile.nil?
-      credentials = Gcloud::Pubsub::Credentials.default
+      credentials = Gcloud::Pubsub::Credentials.default options
     else
-      credentials = Gcloud::Pubsub::Credentials.new keyfile
+      credentials = Gcloud::Pubsub::Credentials.new keyfile, options
     end
     Gcloud::Pubsub::Project.new project, credentials
   end

@@ -43,12 +43,12 @@ module Gcloud
   #   dataset = bigquery.dataset "my_dataset"
   #   table = dataset.table "my_table"
   #
-  def self.bigquery project = nil, keyfile = nil
+  def self.bigquery project = nil, keyfile = nil, options = {}
     project ||= Gcloud::Bigquery::Project.default_project
     if keyfile.nil?
-      credentials = Gcloud::Bigquery::Credentials.default
+      credentials = Gcloud::Bigquery::Credentials.default options
     else
-      credentials = Gcloud::Bigquery::Credentials.new keyfile
+      credentials = Gcloud::Bigquery::Credentials.new keyfile, options
     end
     Gcloud::Bigquery::Project.new project, credentials
   end
