@@ -74,60 +74,356 @@
           
 <h1 id="module-Gcloud::Bigquery-label-Google+Cloud+BigQuery">Google Cloud BigQuery<span><a href="#module-Gcloud::Bigquery-label-Google+Cloud+BigQuery">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>Google BigQuery enables you to query massive datasets without the time and
-expense of building hardware and infrastructure. BigQuery enables
-super-fast, SQL-like queries against append-only tables, using the
-processing power of Google&#39;s infrastructure.</p>
+<p>Google Cloud BigQuery enables super-fast, SQL-like queries against massive
+datasets, using the processing power of Google&#39;s infrastructure. To
+learn more, read <a
+href="https://cloud.google.com/bigquery/what-is-bigquery">What is
+BigQuery?</a>.</p>
 
-<h2 id="module-Gcloud::Bigquery-label-Basic+Concepts">Basic Concepts<span><a href="#module-Gcloud::Bigquery-label-Basic+Concepts">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<p>Gcloud&#39;s goal is to provide an API that is familiar and comfortable to
+Rubyists. Authentication is handled by <a
+href="../Gcloud.html#method-i-bigquery">Gcloud#bigquery</a>. You can
+provide the project and credential information to connect to the BigQuery
+service, or if you are running on Google Compute Engine this configuration
+is taken care of for you. You can read more about the options for
+connecting in the <a href="../AUTHENTICATION.md">Authentication Guide</a>.</p>
 
-<h3 id="module-Gcloud::Bigquery-label-Project"><a href="Bigquery/Project.html">Project</a><span><a href="#module-Gcloud::Bigquery-label-Project">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<p>To help you get started quickly, the first few examples below use a public
+dataset provided by Google. As soon as you have <a
+href="https://cloud.google.com/bigquery/sign-up">signed up</a> to use
+BigQuery, and provided that you stay in the free tier for queries, you
+should be able to run these first examples without the need to set up
+billing or to load data (although we&#39;ll show you how to do that too.)</p>
 
-<h3 id="module-Gcloud::Bigquery-label-Dataset"><a href="Bigquery/Dataset.html">Dataset</a><span><a href="#module-Gcloud::Bigquery-label-Dataset">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<h2 id="module-Gcloud::Bigquery-label-Listing+Datasets+and+Tables">Listing Datasets and Tables<span><a href="#module-Gcloud::Bigquery-label-Listing+Datasets+and+Tables">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<h3 id="module-Gcloud::Bigquery-label-Table"><a href="Bigquery/Table.html">Table</a><span><a href="#module-Gcloud::Bigquery-label-Table">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<p>A BigQuery project holds datasets, which in turn hold tables. Assuming that
+you have not yet created datasets or tables in your own project, let&#39;s
+connect to Google&#39;s <code>publicdata</code> project, and see what you
+find.</p>
 
-<h3 id="module-Gcloud::Bigquery-label-Job"><a href="Bigquery/Job.html">Job</a><span><a href="#module-Gcloud::Bigquery-label-Job">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<h2 id="module-Gcloud::Bigquery-label-Loading+Data+into+BigQuery">Loading <a href="Bigquery/Data.html">Data</a> into BigQuery<span><a href="#module-Gcloud::Bigquery-label-Loading+Data+into+BigQuery">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;publicdata&quot;</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
 
-<h3 id="module-Gcloud::Bigquery-label-Uploading+a+file">Uploading a file<span><a href="#module-Gcloud::Bigquery-label-Uploading+a+file">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">datasets</span>.<span class="ruby-identifier">count</span> <span class="ruby-comment">#=&gt; 1</span>
+<span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">datasets</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">dataset_id</span> <span class="ruby-comment">#=&gt; &quot;samples&quot;</span>
 
-<h3 id="module-Gcloud::Bigquery-label-Streaming+records+individually">Streaming records individually<span><a href="#module-Gcloud::Bigquery-label-Streaming+records+individually">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">datasets</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-identifier">tables</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">tables</span>
 
-<h3 id="module-Gcloud::Bigquery-label-Importing+from+Google+Cloud+Storage">Importing from Google Cloud <a href="Storage.html">Storage</a><span><a href="#module-Gcloud::Bigquery-label-Importing+from+Google+Cloud+Storage">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span class="ruby-identifier">tables</span>.<span class="ruby-identifier">count</span> <span class="ruby-comment">#=&gt; 7</span>
+<span class="ruby-identifier">tables</span>.<span class="ruby-identifier">map</span> <span class="ruby-operator">&amp;</span>:<span class="ruby-identifier">table_id</span> <span class="ruby-comment">#=&gt; [..., &quot;shakespeare&quot;, &quot;trigrams&quot;, &quot;wikipedia&quot;]</span>
+</pre>
 
-<h3 id="module-Gcloud::Bigquery-label-Loading+from+Datastore+Backup">Loading from <a href="Datastore.html">Datastore</a> Backup<span><a href="#module-Gcloud::Bigquery-label-Loading+from+Datastore+Backup">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<p>In addition listing all datasets and tables in the project, you can also
+retrieve individual datasets and tables by ID. Let&#39;s look at the
+structure of the <code>shakespeare</code> table, which contains an entry
+for every word in every play written by Shakespeare.</p>
 
-<h3 id="module-Gcloud::Bigquery-label-CSV+vs.+JSON">CSV vs. JSON<span><a href="#module-Gcloud::Bigquery-label-CSV+vs.+JSON">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<h2 id="module-Gcloud::Bigquery-label-Querying+Data">Querying <a href="Bigquery/Data.html">Data</a><span><a href="#module-Gcloud::Bigquery-label-Querying+Data">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;publicdata&quot;</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;samples&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">table</span> <span class="ruby-string">&quot;shakespeare&quot;</span>
+
+<span class="ruby-identifier">table</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment">#=&gt; [&quot;word&quot;, &quot;word_count&quot;, &quot;corpus&quot;, &quot;corpus_date&quot;]</span>
+<span class="ruby-identifier">table</span>.<span class="ruby-identifier">rows_count</span> <span class="ruby-comment">#=&gt; 164656</span>
+</pre>
+
+<p>Now that you know the column names for the Shakespeare table, you can write
+and run a query.</p>
+
+<h2 id="module-Gcloud::Bigquery-label-Running+queries">Running queries<span><a href="#module-Gcloud::Bigquery-label-Running+queries">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>BigQuery offers both synchronous and asynchronous methods, as explained in
+<a href="https://cloud.google.com/bigquery/querying-data">Querying
+Data</a>.</p>
 
 <h3 id="module-Gcloud::Bigquery-label-Synchronous+queries">Synchronous queries<span><a href="#module-Gcloud::Bigquery-label-Synchronous+queries">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
+<p>Let&#39;s start with the simpler synchronous approach. Notice that this
+time you are connecting using your own default project. This is necessary
+for running a query, since queries need to be able to create tables to hold
+results.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+
+<span class="ruby-identifier">sql</span> = <span class="ruby-string">&quot;SELECT TOP(word, 50) as word, COUNT(*) as count &quot;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-string">&quot;FROM publicdata:samples.shakespeare&quot;</span>
+<span class="ruby-identifier">data</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">query</span> <span class="ruby-identifier">sql</span>
+
+<span class="ruby-identifier">data</span>.<span class="ruby-identifier">count</span> <span class="ruby-comment">#=&gt; 50</span>
+<span class="ruby-identifier">data</span>.<span class="ruby-identifier">next?</span> <span class="ruby-comment">#=&gt; false</span>
+<span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span> <span class="ruby-comment">#=&gt; {&quot;word&quot;=&gt;&quot;you&quot;, &quot;count&quot;=&gt;42}</span>
+</pre>
+
+<p>The <code>TOP</code> function shown above is just one of a variety of
+functions offered by BigQuery. See the <a
+href="https://cloud.google.com/bigquery/query-reference">Query
+Reference</a> for a full listing.</p>
+
 <h3 id="module-Gcloud::Bigquery-label-Asynchronous+queries">Asynchronous queries<span><a href="#module-Gcloud::Bigquery-label-Asynchronous+queries">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<h3 id="module-Gcloud::Bigquery-label-Interactive+vs.+batch+queries">Interactive vs. batch queries<span><a href="#module-Gcloud::Bigquery-label-Interactive+vs.+batch+queries">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<p>Because you probably should not block for most BigQuery operations,
+including querying as well as importing, exporting, and copying data, the
+BigQuery API enables you to manage longer-running jobs. In the asynchronous
+approach to running a query, an instance of <a
+href="Bigquery/QueryJob.html">Gcloud::Bigquery::QueryJob</a> is returned,
+rather than an instance of <a
+href="Bigquery/QueryData.html">Gcloud::Bigquery::QueryData</a>.</p>
 
-<h3 id="module-Gcloud::Bigquery-label-Query+Caching">Query Caching<span><a href="#module-Gcloud::Bigquery-label-Query+Caching">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<h2 id="module-Gcloud::Bigquery-label-Using+Views">Using Views<span><a href="#module-Gcloud::Bigquery-label-Using+Views">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
 
-<h3 id="module-Gcloud::Bigquery-label-Creating+a+view">Creating a view<span><a href="#module-Gcloud::Bigquery-label-Creating+a+view">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span class="ruby-identifier">sql</span> = <span class="ruby-string">&quot;SELECT TOP(word, 50) as word, COUNT(*) as count &quot;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-string">&quot;FROM publicdata:samples.shakespeare&quot;</span>
+<span class="ruby-identifier">job</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">query_job</span> <span class="ruby-identifier">sql</span>
 
-<h3 id="module-Gcloud::Bigquery-label-Listing+view+vs.+tables">Listing view vs. tables<span><a href="#module-Gcloud::Bigquery-label-Listing+view+vs.+tables">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">done?</span>
+  <span class="ruby-identifier">sleep</span> <span class="ruby-value">1</span>
+  <span class="ruby-identifier">job</span>.<span class="ruby-identifier">refresh!</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">job</span>.<span class="ruby-identifier">failed?</span>
+  <span class="ruby-identifier">job</span>.<span class="ruby-identifier">query_results</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;word&quot;</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
 
-<h3 id="module-Gcloud::Bigquery-label-Querying+from+a+view">Querying from a view<span><a href="#module-Gcloud::Bigquery-label-Querying+from+a+view">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<p>Once you have determined that the job is done and has not failed, you can
+obtain an instance of <a
+href="Bigquery/QueryData.html">Gcloud::Bigquery::QueryData</a> by calling
+<a
+href="Bigquery/QueryJob.html#method-i-query_results">Gcloud::Bigquery::QueryJob#query_results</a>.
+The query results for both of the above examples are stored in temporary
+tables with a lifetime of about 24 hours. See the final example below for a
+demonstration of how to store query results in a permanent table.</p>
 
-<h2 id="module-Gcloud::Bigquery-label-Copying+Data">Copying <a href="Bigquery/Data.html">Data</a><span><a href="#module-Gcloud::Bigquery-label-Copying+Data">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<h2 id="module-Gcloud::Bigquery-label-Creating+Datasets+and+Tables">Creating Datasets and Tables<span><a href="#module-Gcloud::Bigquery-label-Creating+Datasets+and+Tables">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<h2 id="module-Gcloud::Bigquery-label-Exporting+Data">Exporting <a href="Bigquery/Data.html">Data</a><span><a href="#module-Gcloud::Bigquery-label-Exporting+Data">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<p>The first thing you need to do in a new BigQuery project is to create a <a
+href="Bigquery/Dataset.html">Gcloud::Bigquery::Dataset</a>. Datasets hold
+tables and control access to them.</p>
 
-<h3 id="module-Gcloud::Bigquery-label-One+file">One file<span><a href="#module-Gcloud::Bigquery-label-One+file">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/bigquery&quot;</span>
 
-<h3 id="module-Gcloud::Bigquery-label-Multiple+files">Multiple files<span><a href="#module-Gcloud::Bigquery-label-Multiple+files">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">create_dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
+</pre>
 
-<h3 id="module-Gcloud::Bigquery-label-CSV+vs.+JSON">CSV vs. JSON<span><a href="#module-Gcloud::Bigquery-label-CSV+vs.+JSON">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<p>Now that you have a dataset, you can use it to create a table. Every table
+is defined by a schema that may contain nested and repeated fields. The
+example below shows a schema with a repeated record field named
+<code>cities_lived</code>. (For more information about nested and repeated
+fields, see <a
+href="https://cloud.google.com/bigquery/preparing-data-for-bigquery">Preparing
+Data for BigQuery</a>.)</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
+
+<span class="ruby-identifier">schema</span> = {
+  <span class="ruby-string">&quot;fields&quot;</span> =<span class="ruby-operator">&gt;</span> [
+    {
+      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;first_name&quot;</span>,
+      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;STRING&quot;</span>,
+      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
+    },
+    {
+      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;cities_lived&quot;</span>,
+      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;RECORD&quot;</span>,
+      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REPEATED&quot;</span>,
+      <span class="ruby-string">&quot;fields&quot;</span> =<span class="ruby-operator">&gt;</span> [
+        {
+          <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;place&quot;</span>,
+          <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;STRING&quot;</span>,
+          <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
+        },
+        {
+          <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;number_of_years&quot;</span>,
+          <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;INTEGER&quot;</span>,
+          <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
+        }
+      ]
+    }
+  ]
+}
+<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;people&quot;</span>, <span class="ruby-identifier">schema</span><span class="ruby-operator">:</span> <span class="ruby-identifier">schema</span>
+</pre>
+
+<p>Because of the repeated field in this schema, we cannot use the CSV format
+to load data into the table.</p>
+
+<h2 id="module-Gcloud::Bigquery-label-Loading+records">Loading records<span><a href="#module-Gcloud::Bigquery-label-Loading+records">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>In addition to CSV, data can be imported from files that are formatted as
+<a href="http://jsonlines.org/">Newline-delimited JSON</a> or <a
+href="http://avro.apache.org/">Avro</a>, or from a Google Cloud <a
+href="Datastore.html">Datastore</a> backup. It can also be “streamed” into
+BigQuery.</p>
+
+<p>To follow along with these examples, you will need to set up billing on the
+<a href="https://console.developers.google.com">Google Developers
+Console</a>.</p>
+
+<h3 id="module-Gcloud::Bigquery-label-Streaming+records">Streaming records<span><a href="#module-Gcloud::Bigquery-label-Streaming+records">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>For situations in which you want new data to be available for querying as
+soon as possible, inserting individual records directly from your Ruby
+application is a great approach.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">table</span> <span class="ruby-string">&quot;people&quot;</span>
+
+<span class="ruby-identifier">rows</span> = [
+    {
+        <span class="ruby-string">&quot;first_name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Anna&quot;</span>,
+        <span class="ruby-string">&quot;cities_lived&quot;</span> =<span class="ruby-operator">&gt;</span> [
+            {
+                <span class="ruby-string">&quot;place&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Stockholm&quot;</span>,
+                <span class="ruby-string">&quot;number_of_years&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>
+            }
+        ]
+    },
+    {
+        <span class="ruby-string">&quot;first_name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Bob&quot;</span>,
+        <span class="ruby-string">&quot;cities_lived&quot;</span> =<span class="ruby-operator">&gt;</span> [
+            {
+                <span class="ruby-string">&quot;place&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Seattle&quot;</span>,
+                <span class="ruby-string">&quot;number_of_years&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">5</span>
+            },
+            {
+                <span class="ruby-string">&quot;place&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Austin&quot;</span>,
+                <span class="ruby-string">&quot;number_of_years&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">6</span>
+            }
+        ]
+    }
+]
+<span class="ruby-identifier">table</span>.<span class="ruby-identifier">insert</span> <span class="ruby-identifier">rows</span>
+</pre>
+
+<p>There are some trade-offs involved with streaming, so be sure to read the
+discussion of data consistency in <a
+href="https://cloud.google.com/bigquery/streaming-data-into-bigquery">Streaming
+Data Into BigQuery</a>.</p>
+
+<h3 id="module-Gcloud::Bigquery-label-Uploading+a+file">Uploading a file<span><a href="#module-Gcloud::Bigquery-label-Uploading+a+file">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>To follow along with this example, please download the <a
+href="http://www.ssa.gov/OACT/babynames/names.zip">names.zip</a> archive
+from the U.S. Social Security Administration. Inside the archive you will
+find over 100 files containing baby name records since the year 1880. A PDF
+file also contained in the archive specifies the schema used below.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
+<span class="ruby-identifier">schema</span> = {
+  <span class="ruby-string">&quot;fields&quot;</span> =<span class="ruby-operator">&gt;</span> [
+    {
+      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;name&quot;</span>,
+      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;STRING&quot;</span>,
+      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
+    },
+    {
+      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;sex&quot;</span>,
+      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;STRING&quot;</span>,
+      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
+    },
+    {
+      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;number&quot;</span>,
+      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;INTEGER&quot;</span>,
+      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
+    }
+  ]
+}
+<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;baby_names&quot;</span>, <span class="ruby-identifier">schema</span><span class="ruby-operator">:</span> <span class="ruby-identifier">schema</span>
+
+<span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-string">&quot;names/yob2014.txt&quot;</span>
+<span class="ruby-identifier">load_job</span> = <span class="ruby-identifier">table</span>.<span class="ruby-identifier">load</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">format</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;csv&quot;</span>
+</pre>
+
+<p>Because the names data, although formatted as CSV, is distributed in files
+with a <code>.txt</code> extension, this example explicitly passes the
+<code>format</code> option in order to demonstrate how to handle such
+situations. Because CSV is the default format for load operations, the
+option is not actually necessary. For JSON saved with a <code>.txt</code>
+extension, however, it would be.</p>
+
+<h2 id="module-Gcloud::Bigquery-label-Exporting+query+results+to+Google+Cloud+Storage">Exporting query results to Google Cloud <a href="Storage.html">Storage</a><span><a href="#module-Gcloud::Bigquery-label-Exporting+query+results+to+Google+Cloud+Storage">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The example below shows how to pass the <code>table</code> option with a
+query in order to store results in a permanent table. It also shows how to
+export the result data to a Google Cloud <a href="Storage.html">Storage</a>
+file. In order to follow along, you will need to enable the Google Cloud <a
+href="Storage.html">Storage</a> API in addition to setting up billing.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
+<span class="ruby-identifier">source_table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">table</span> <span class="ruby-string">&quot;baby_names&quot;</span>
+<span class="ruby-identifier">result_table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;baby_names_results&quot;</span>
+
+<span class="ruby-identifier">sql</span> = <span class="ruby-string">&quot;SELECT name, number as count &quot;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-string">&quot;FROM baby_names &quot;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-string">&quot;WHERE name CONTAINS &#39;Sam&#39; &quot;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-string">&quot;ORDER BY count DESC&quot;</span>
+<span class="ruby-identifier">query_job</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">query_job</span> <span class="ruby-identifier">sql</span>, <span class="ruby-identifier">table</span><span class="ruby-operator">:</span> <span class="ruby-identifier">result_table</span>
+
+<span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">query_job</span>.<span class="ruby-identifier">done?</span>
+  <span class="ruby-identifier">sleep</span> <span class="ruby-value">1</span>
+  <span class="ruby-identifier">query_job</span>.<span class="ruby-identifier">refresh!</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">query_job</span>.<span class="ruby-identifier">failed?</span>
+
+  <span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
+  <span class="ruby-identifier">bucket_id</span> = <span class="ruby-node">&quot;bigquery-exports-#{SecureRandom.uuid}&quot;</span>
+  <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">create_bucket</span> <span class="ruby-identifier">bucket_id</span>
+  <span class="ruby-identifier">extract_url</span> = <span class="ruby-node">&quot;gs://#{bucket.id}/baby-names-sam.csv&quot;</span>
+
+  <span class="ruby-identifier">extract_job</span> = <span class="ruby-identifier">result_table</span>.<span class="ruby-identifier">extract</span> <span class="ruby-identifier">extract_url</span>
+
+  <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">extract_job</span>.<span class="ruby-identifier">done?</span>
+    <span class="ruby-identifier">sleep</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">extract_job</span>.<span class="ruby-identifier">refresh!</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Download to local filesystem</span>
+  <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">files</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">download</span> <span class="ruby-string">&quot;baby-names-sam.csv&quot;</span>
+
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>If a table you wish to export contains a large amount of data, you can pass
+a wildcard URI to export to multiple files (for sharding), or an array of
+URIs (for partitioning), or both. See <a
+href="https://cloud.google.com/bigquery/exporting-data-from-bigquery">Exporting
+Data From BigQuery</a> for details.</p>
 
         </div>
 
@@ -151,7 +447,7 @@ processing power of Google&#39;s infrastructure.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Aug 18, 2015.
+    Docs built on Aug 19, 2015.
   </div>
 </div>
 

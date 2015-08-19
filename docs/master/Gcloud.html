@@ -178,14 +178,14 @@ href="AUTHENTICATION.md">Authentication Guide</a>.</p>
 
   <div class="method-description">
     
-      <p>Creates a new object for connecting to the BigQuery service. Each call
-creates a new connection.</p>
+      <p>Creates a new <code>Project</code> instance connected to the BigQuery
+service. Each call creates a new connection.</p>
 
 <h3 id="method-c-bigquery-label-Parameters">Parameters<span><a href="#method-c-bigquery-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <dl class="rdoc-list note-list"><dt><code>project</code>
 <dd>
-<p>Project identifier for the BigQuery service you are connecting to.
-(<code>String</code>)</p>
+<p>Identifier for a BigQuery project. If not present, the default project for
+the credentials is used. (<code>String</code>)</p>
 </dd><dt><code>keyfile</code>
 <dd>
 <p>Keyfile downloaded from Google Cloud. If file path the file must be
@@ -732,7 +732,7 @@ connection.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Aug 18, 2015.
+    Docs built on Aug 19, 2015.
   </div>
 </div>
 
