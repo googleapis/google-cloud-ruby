@@ -70,11 +70,26 @@ module Gcloud
   # Creates a new object for connecting to the Datastore service.
   # Each call creates a new connection.
   #
+  # === Parameters
+  #
+  # +options+::
+  #   An optional Hash for controlling additional behavior. (+Hash+)
+  # <code>options[:scope]</code>::
+  #   The OAuth 2.0 scopes controlling the set of resources and operations that
+  #   the connection can access. See {Using OAuth 2.0 to Access Google
+  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   or +Array+)
+  #
+  #   The default scopes are:
+  #
+  #   * +https://www.googleapis.com/auth/datastore+
+  #   * +https://www.googleapis.com/auth/userinfo.email+
+  #
   # === Returns
   #
   # Gcloud::Datastore::Dataset
   #
-  # === Example
+  # === Examples
   #
   #   require "gcloud"
   #
@@ -88,6 +103,15 @@ module Gcloud
   #
   #   dataset.save entity
   #
+  # You shouldn't need to override the default scope, but it is possible to do
+  # so with the +scope+ option:
+  #
+  #   require "gcloud"
+  #
+  #   gcloud  = Gcloud.new
+  #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
+  #   dataset = gcloud.datastore scope: platform_scope
+  #
   def datastore options = {}
     require "gcloud/datastore"
     Gcloud.datastore @project, @keyfile, options
@@ -97,11 +121,25 @@ module Gcloud
   # Creates a new object for connecting to the Storage service.
   # Each call creates a new connection.
   #
+  # === Parameters
+  #
+  # +options+::
+  #   An optional Hash for controlling additional behavior. (+Hash+)
+  # <code>options[:scope]</code>::
+  #   The OAuth 2.0 scopes controlling the set of resources and operations that
+  #   the connection can access. See {Using OAuth 2.0 to Access Google
+  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   or +Array+)
+  #
+  #   The default scope is:
+  #
+  #   * +https://www.googleapis.com/auth/devstorage.full_control+
+  #
   # === Returns
   #
   # Gcloud::Storage::Project
   #
-  # === Example
+  # === Examples
   #
   #   require "gcloud"
   #
@@ -109,6 +147,16 @@ module Gcloud
   #   storage = gcloud.storage
   #   bucket = storage.bucket "my-bucket"
   #   file = bucket.file "path/to/my-file.ext"
+  #
+  # The default scope can be overridden with the +scope+ option. For more
+  # information see {Storage OAuth 2.0
+  # Authentication}[https://cloud.google.com/storage/docs/authentication#oauth].
+  #
+  #   require "gcloud"
+  #
+  #   gcloud  = Gcloud.new
+  #   readonly_scope = "https://www.googleapis.com/auth/devstorage.read_only"
+  #   readonly_storage = gcloud.storage scope: readonly_scope
   #
   def storage options = {}
     require "gcloud/storage"
@@ -119,11 +167,25 @@ module Gcloud
   # Creates a new object for connecting to the Pub/Sub service.
   # Each call creates a new connection.
   #
+  # === Parameters
+  #
+  # +options+::
+  #   An optional Hash for controlling additional behavior. (+Hash+)
+  # <code>options[:scope]</code>::
+  #   The OAuth 2.0 scopes controlling the set of resources and operations that
+  #   the connection can access. See {Using OAuth 2.0 to Access Google
+  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   or +Array+)
+  #
+  #   The default scope is:
+  #
+  #   * +https://www.googleapis.com/auth/pubsub+
+  #
   # === Returns
   #
   # Gcloud::Pubsub::Project
   #
-  # === Example
+  # === Examples
   #
   #   require "gcloud"
   #
@@ -131,6 +193,14 @@ module Gcloud
   #   pubsub = gcloud.pubsub
   #   topic = pubsub.topic "my-topic"
   #   topic.publish "task completed"
+  #
+  # The default scope can be overridden with the +scope+ option:
+  #
+  #   require "gcloud"
+  #
+  #   gcloud  = Gcloud.new
+  #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
+  #   pubsub = gcloud.pubsub scope: platform_scope
   #
   def pubsub options = {}
     require "gcloud/pubsub"
@@ -141,11 +211,25 @@ module Gcloud
   # Creates a new object for connecting to the BigQuery service.
   # Each call creates a new connection.
   #
+  # === Parameters
+  #
+  # +options+::
+  #   An optional Hash for controlling additional behavior. (+Hash+)
+  # <code>options[:scope]</code>::
+  #   The OAuth 2.0 scopes controlling the set of resources and operations that
+  #   the connection can access. See {Using OAuth 2.0 to Access Google
+  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   or +Array+)
+  #
+  #   The default scope is:
+  #
+  #   * +https://www.googleapis.com/auth/bigquery+
+  #
   # === Returns
   #
   # Gcloud::Bigquery::Project
   #
-  # === Example
+  # === Examples
   #
   #   require "gcloud"
   #
@@ -156,6 +240,14 @@ module Gcloud
   #   table.data.each do |row|
   #     puts row
   #   end
+  #
+  # The default scope can be overridden with the +scope+ option:
+  #
+  #   require "gcloud"
+  #
+  #   gcloud  = Gcloud.new
+  #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
+  #   bigquery = gcloud.bigquery scope: platform_scope
   #
   def bigquery options = {}
     require "gcloud/bigquery"

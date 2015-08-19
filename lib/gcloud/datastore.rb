@@ -33,6 +33,18 @@ module Gcloud
   # +keyfile+::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
   #   readable. (+String+ or +Hash+)
+  # +options+::
+  #   An optional Hash for controlling additional behavior. (+Hash+)
+  # <code>options[:scope]</code>::
+  #   The OAuth 2.0 scopes controlling the set of resources and operations that
+  #   the connection can access. See {Using OAuth 2.0 to Access Google
+  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   or +Array+)
+  #
+  #   The default scopes are:
+  #
+  #   * +https://www.googleapis.com/auth/datastore+
+  #   * +https://www.googleapis.com/auth/userinfo.email+
   #
   # === Returns
   #
