@@ -52,6 +52,8 @@ module Gcloud
       #
       # See Gcloud#storage
       def initialize project, credentials #:nodoc:
+        project = project.to_s # Always cast to a string
+        fail ArgumentError, "project is missing" if project.empty?
         @connection = Connection.new project, credentials
       end
 
