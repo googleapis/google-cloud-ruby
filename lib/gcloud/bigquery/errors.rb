@@ -31,16 +31,31 @@ module Gcloud
       # The errors encountered.
       attr_reader :errors
 
-      def initialize message, code, errors #:nodoc:
+      def initialize message, code, errors = [] #:nodoc:
         super message
         @code   = code
         @errors = errors
       end
 
       def self.from_response resp #:nodoc:
-        new resp.data["error"]["message"],
-            resp.data["error"]["code"],
-            resp.data["error"]["errors"]
+        if resp.data? && resp.data["error"]
+          from_response_data resp.data["error"]
+        else
+          from_response_status resp
+        end
+      end
+
+      def self.from_response_data error #:nodoc:
+        new error["message"], error["code"], error["errors"]
+      end
+
+      def self.from_response_status resp #:nodoc:
+        if resp.status == 404
+          new "#{resp.error_message}: #{resp.request.uri.request_uri}",
+              resp.status
+        else
+          new resp.error_message, resp.status
+        end
       end
     end
   end

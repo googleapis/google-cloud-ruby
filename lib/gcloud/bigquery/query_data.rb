@@ -88,9 +88,6 @@ module Gcloud
         end
       end
 
-      # rubocop:disable Metrics/AbcSize
-      # Disabling because its better to keep this logic together.
-
       ##
       # The BigQuery Job that was created to run the query.
       def job
@@ -101,12 +98,10 @@ module Gcloud
         if resp.success?
           @job = Job.from_gapi resp.data, connection
         else
-          return nil if resp.data["error"]["code"] == 404
+          return nil if resp.status == 404
           fail ApiError.from_response(resp)
         end
       end
-
-      # rubocop:enable Metrics/AbcSize
 
       ##
       # New Data from a response object.

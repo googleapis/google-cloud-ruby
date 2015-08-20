@@ -259,7 +259,7 @@ module Gcloud
         if resp.success?
           Dataset.from_gapi resp.data, connection
         else
-          return nil if resp.data["error"]["code"] == 404
+          return nil if resp.status == 404
           fail ApiError.from_response(resp)
         end
       end
@@ -416,7 +416,7 @@ module Gcloud
         if resp.success?
           Job.from_gapi resp.data, connection
         else
-          return nil if resp.data["error"]["code"] == 404
+          return nil if resp.status == 404
           fail ApiError.from_response(resp)
         end
       end
