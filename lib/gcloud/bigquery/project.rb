@@ -51,6 +51,8 @@ module Gcloud
       #
       # See Gcloud.bigquery
       def initialize project, credentials
+        project = project.to_s # Always cast to a string
+        fail ArgumentError, "project is missing" if project.empty?
         @connection = Connection.new project, credentials
       end
 
