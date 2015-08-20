@@ -204,7 +204,7 @@ exist</p>
 
     
       <!-- <div class="method-source-code" id="bucket-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 175</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 177</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">bucket</span> <span class="ruby-identifier">bucket_name</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_bucket</span> <span class="ruby-identifier">bucket_name</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -316,7 +316,7 @@ href="Bucket/List.html#attribute-i-token">Gcloud::Storage::Bucket::List#token</a
 
     
       <!-- <div class="method-source-code" id="buckets-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 143</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">buckets</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_buckets</span> <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -400,7 +400,7 @@ option:</p>
 
     
       <!-- <div class="method-source-code" id="create_bucket-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 223</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 225</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_bucket</span> <span class="ruby-identifier">bucket_name</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>] = <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">predefined_rule_for</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>]
   <span class="ruby-identifier">default_acl</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:default_acl</span>]
@@ -517,7 +517,7 @@ option:</p>
 
     
       <!-- <div class="method-source-code" id="project-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 71</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project</span>
   <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">project</span>
 <span class="ruby-keyword">end</span></pre>
