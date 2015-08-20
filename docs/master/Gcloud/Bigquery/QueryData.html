@@ -310,7 +310,7 @@ will not be available.</p>
 
     
       <!-- <div class="method-source-code" id="job-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/query_data.rb, line 96</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/query_data.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">job</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@job</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@job</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">job?</span>
@@ -319,7 +319,7 @@ will not be available.</p>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-ivar">@job</span> = <span class="ruby-constant">Job</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;error&quot;</span>][<span class="ruby-string">&quot;code&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-value">404</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">404</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -493,7 +493,7 @@ will not be available.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Aug 19, 2015.
+    Docs built on Aug 20, 2015.
   </div>
 </div>
 
