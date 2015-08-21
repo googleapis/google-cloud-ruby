@@ -33,6 +33,18 @@ module Gcloud
   # +keyfile+::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
   #   readable. (+String+ or +Hash+)
+  # +options+::
+  #   An optional Hash for controlling additional behavior. (+Hash+)
+  # <code>options[:scope]</code>::
+  #   The OAuth 2.0 scopes controlling the set of resources and operations that
+  #   the connection can access. See {Using OAuth 2.0 to Access Google
+  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   or +Array+)
+  #
+  #   The default scopes are:
+  #
+  #   * +https://www.googleapis.com/auth/datastore+
+  #   * +https://www.googleapis.com/auth/userinfo.email+
   #
   # === Returns
   #
@@ -52,12 +64,12 @@ module Gcloud
   #
   #   dataset.save entity
   #
-  def self.datastore project = nil, keyfile = nil
+  def self.datastore project = nil, keyfile = nil, options = {}
     project ||= Gcloud::Datastore::Dataset.default_project
     if keyfile.nil?
-      credentials = Gcloud::Datastore::Credentials.default
+      credentials = Gcloud::Datastore::Credentials.default options
     else
-      credentials = Gcloud::Datastore::Credentials.new keyfile
+      credentials = Gcloud::Datastore::Credentials.new keyfile, options
     end
     Gcloud::Datastore::Dataset.new project, credentials
   end
