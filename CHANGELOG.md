@@ -1,5 +1,17 @@
 # Release History
 
+### 0.3.0 / 2015-08-21
+
+#### Major changes
+
+Add BigQuery service
+
+#### Minor changes
+
+* Improve error messaging when uploading files to Storage
+* Add `GCLOUD_PROJECT` and `GCLOUD_KEYFILE` environment variables
+* Specify OAuth 2.0 scopes when connecting to services
+
 ### 0.2.0 / 2015-07-22
 
 #### Major changes
