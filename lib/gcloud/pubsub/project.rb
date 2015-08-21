@@ -71,7 +71,9 @@ module Gcloud
       ##
       # Default project.
       def self.default_project #:nodoc:
-        ENV["PUBSUB_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"]
+        ENV["PUBSUB_PROJECT"] ||
+          ENV["GCLOUD_PROJECT"] ||
+          ENV["GOOGLE_CLOUD_PROJECT"]
       end
 
       ##

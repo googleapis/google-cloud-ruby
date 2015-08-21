@@ -77,7 +77,9 @@ module Gcloud
       ##
       # Default project.
       def self.default_project #:nodoc:
-        ENV["STORAGE_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"]
+        ENV["STORAGE_PROJECT"] ||
+          ENV["GCLOUD_PROJECT"] ||
+          ENV["GOOGLE_CLOUD_PROJECT"]
       end
 
       ##

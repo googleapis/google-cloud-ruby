@@ -21,8 +21,9 @@ module Gcloud
     # Represents the Oauth2 signing logic for Bigquery.
     class Credentials < Gcloud::Credentials #:nodoc:
       SCOPE = ["https://www.googleapis.com/auth/bigquery"]
-      PATH_ENV_VARS = %w(BIGQUERY_KEYFILE GOOGLE_CLOUD_KEYFILE)
-      JSON_ENV_VARS = %w(BIGQUERY_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON)
+      PATH_ENV_VARS = %w(BIGQUERY_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
+      JSON_ENV_VARS = %w(BIGQUERY_KEYFILE_JSON GCLOUD_KEYFILE_JSON
+                         GOOGLE_CLOUD_KEYFILE_JSON)
     end
   end
 end

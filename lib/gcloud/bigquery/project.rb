@@ -75,7 +75,9 @@ module Gcloud
       ##
       # Default project.
       def self.default_project #:nodoc:
-        ENV["BIGQUERY_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"]
+        ENV["BIGQUERY_PROJECT"] ||
+          ENV["GCLOUD_PROJECT"] ||
+          ENV["GOOGLE_CLOUD_PROJECT"]
       end
 
       ##
