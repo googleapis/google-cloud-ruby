@@ -1,4 +1,6 @@
 ---
+- version: v0.3.0
+  date: '2015-08-21'
 - version: v0.2.0
   date: '2015-07-22'
 - version: v0.1.1
