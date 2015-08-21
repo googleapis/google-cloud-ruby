@@ -26,8 +26,9 @@ module Gcloud
     class Credentials < Gcloud::Credentials #:nodoc:
       SCOPE = ["https://www.googleapis.com/auth/datastore",
                "https://www.googleapis.com/auth/userinfo.email"]
-      PATH_ENV_VARS = %w(DATASTORE_KEYFILE GOOGLE_CLOUD_KEYFILE)
-      JSON_ENV_VARS = %w(DATASTORE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON)
+      PATH_ENV_VARS = %w(DATASTORE_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
+      JSON_ENV_VARS = %w(DATASTORE_KEYFILE_JSON GCLOUD_KEYFILE_JSON
+                         GOOGLE_CLOUD_KEYFILE_JSON)
 
       ##
       # Sign OAuth 2.0 API calls.
