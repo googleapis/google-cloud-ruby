@@ -34,7 +34,7 @@ module Gcloud
     #   bigquery = gcloud.bigquery
     #
     #   dataset = bigquery.create_dataset "my_dataset",
-    #                                     name: "My Dataset"
+    #                                     name: "My Dataset",
     #                                     description: "This is my Dataset"
     #
     class Dataset
