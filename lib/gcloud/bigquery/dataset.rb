@@ -17,6 +17,7 @@ require "json"
 require "gcloud/bigquery/errors"
 require "gcloud/bigquery/table"
 require "gcloud/bigquery/dataset/list"
+require "gcloud/bigquery/dataset/access"
 
 module Gcloud
   module Bigquery
@@ -179,6 +180,52 @@ module Gcloud
       def location
         ensure_full_data!
         @gapi["location"]
+      end
+
+      ##
+      # Manage the Access rules for a Dataset. See Dataset::Acl for all the
+      # methods available. See {BigQuery Access
+      # Control}[https://cloud.google.com/bigquery/access-control] for more
+      # information.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #
+      #   dataset.access #=> [{"role"=>"OWNER",
+      #                        "specialGroup"=>"projectOwners"},
+      #                       {"role"=>"WRITER",
+      #                        "specialGroup"=>"projectWriters"},
+      #                       {"role"=>"READER",
+      #                        "specialGroup"=>"projectReaders"},
+      #                       {"role"=>"OWNER",
+      #                        "userByEmail"=>"123456789-...com"}]
+      #
+      #   dataset.access do |access|
+      #     access.add_owner_group "owners@example.com"
+      #     access.add_writer_user "writer@example.com"
+      #     access.remove_writer_user "readers@example.com"
+      #     access.add_reader_special :all
+      #     access.add_reader_view other_dataset_view_object
+      #   end
+      #
+      # See Dataset::Access
+      #
+      def access
+        ensure_full_data!
+        g = @gapi
+        g = g.to_hash if g.respond_to? :to_hash
+        a = g["access"] ||= []
+        return a unless block_given?
+        a2 = Access.new a
+        yield a2
+        self.access = a2.access if a2.changed?
+      end
+
+      def access= new_access
+        patch_gapi! access: new_access
       end
 
       ##

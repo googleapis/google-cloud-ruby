@@ -278,20 +278,7 @@ class MockBigquery < Minitest::Spec
       "friendlyName" => name,
       "description" => description,
       "defaultTableExpirationMs" => default_expiration,
-      "access" => [
-        {
-          "role" => "role",
-          "userByEmail" => "user@example.com",
-          "groupByEmail" => "group@example.com",
-          "domain" => "example.com",
-          "specialGroup" => "group",
-          "view" => {
-            "projectId" => project,
-            "datasetId" => "dataset",
-            "tableId" => "table"
-          }
-        }
-      ],
+      "access" => [],
       "creationTime" => Time.now.to_i*1000,
       "lastModifiedTime" => Time.now.to_i*1000,
       "location" => "US"

@@ -79,15 +79,11 @@ module Gcloud
       # fields that are provided in the submitted dataset resource.
       def patch_dataset dataset_id, options = {}
         project_id = options[:project_id] || @project
-        body = { friendlyName: options[:name],
-                 description: options[:description],
-                 defaultTableExpirationMs: options[:default_expiration]
-               }.delete_if { |_, v| v.nil? }
 
         @client.execute(
           api_method: @bigquery.datasets.patch,
           parameters: { projectId: project_id, datasetId: dataset_id },
-          body_object: body
+          body_object: patch_dataset_request(options)
         )
       end
 
@@ -360,6 +356,15 @@ module Gcloud
           "friendlyName" => options[:name],
           "description" => options[:description],
           "defaultTableExpirationMs" => options[:expiration]
+        }.delete_if { |_, v| v.nil? }
+      end
+
+      def patch_dataset_request options = {}
+        {
+          friendlyName: options[:name],
+          description: options[:description],
+          defaultTableExpirationMs: options[:default_expiration],
+          access: options[:access]
         }.delete_if { |_, v| v.nil? }
       end
 
