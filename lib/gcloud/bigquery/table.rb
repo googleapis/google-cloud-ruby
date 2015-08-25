@@ -542,6 +542,7 @@ module Gcloud
       #   * +csv+ - CSV
       #   * +json+ - {Newline-delimited JSON}[http://jsonlines.org/]
       #   * +avro+ - {Avro}[http://avro.apache.org/]
+      #   * +datastore_backup+ - Cloud Datastore backup
       # <code>options[:create]</code>::
       #   Specifies whether the job is allowed to create new tables. (+String+)
       #
@@ -558,6 +559,12 @@ module Gcloud
       #   * +append+ - BigQuery appends the data to the table.
       #   * +empty+ - An error will be returned if the table already contains
       #     data.
+      # <code>options[:projection_fields]</code>::
+      #   If the +format+ option is set to +datastore_backup+, indicates which
+      #   entity properties to load from a Cloud Datastore backup. Property
+      #   names are case sensitive and must be top-level properties. If not set,
+      #   BigQuery loads all properties. If any named property isn't found in
+      #   the Cloud Datastore backup, an invalid error is returned. (+Array+)
       #
       # === Returns
       #

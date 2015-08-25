@@ -530,7 +530,8 @@ module Gcloud
               }.delete_if { |_, v| v.nil? },
               "createDisposition" => create_disposition(options[:create]),
               "writeDisposition" => write_disposition(options[:write]),
-              "sourceFormat" => source_format(path, options[:format])
+              "sourceFormat" => source_format(path, options[:format]),
+              "projectionFields" => projection_fields(options[:projection_fields])
             }.delete_if { |_, v| v.nil? },
             "dryRun" => options[:dryrun]
           }.delete_if { |_, v| v.nil? }
@@ -568,13 +569,20 @@ module Gcloud
         val = { "csv" => "CSV",
                 "json" => "NEWLINE_DELIMITED_JSON",
                 "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
-                "avro" => "AVRO" }[format.to_s.downcase]
+                "avro" => "AVRO",
+                "datastore" => "DATASTORE_BACKUP",
+                "datastore_backup" => "DATASTORE_BACKUP"}[format.to_s.downcase]
         return val unless val.nil?
         return nil if path.nil?
         return "CSV" if path.end_with? ".csv"
         return "NEWLINE_DELIMITED_JSON" if path.end_with? ".json"
         return "AVRO" if path.end_with? ".avro"
+        return "DATASTORE_BACKUP" if path.end_with? ".backup_info"
         nil
+      end
+
+      def projection_fields array_or_str
+        Array(array_or_str) unless array_or_str.nil?
       end
 
       # rubocop:enable all
