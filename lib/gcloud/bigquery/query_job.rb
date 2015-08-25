@@ -126,11 +126,7 @@ module Gcloud
       #   q = "SELECT word FROM publicdata:samples.shakespeare"
       #   job = bigquery.query_job q
       #
-      #   loop do
-      #     break if job.done?
-      #     sleep 1
-      #     job.refresh!
-      #   end
+      #   job.wait_until_done!
       #   data = job.query_results
       #   data.each do |row|
       #     puts row["word"]

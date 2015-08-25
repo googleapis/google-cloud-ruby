@@ -165,6 +165,37 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     job.must_be :done?
   end
 
+  it "can wait until done" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_job_hash(job_id, "pending").to_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_job_hash(job_id, "pending").to_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_job_hash(job_id, "running").to_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_job_hash(job_id, "running").to_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_job_hash(job_id, "done").to_json]
+    end
+
+    # mock out the sleep method so the test doesn't actually block
+    def job.sleep *args
+    end
+
+    job.must_be :running?
+    job.wait_until_done!
+    job.must_be :done?
+  end
+
   it "can re-run itself" do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
       [200, {"Content-Type"=>"application/json"},

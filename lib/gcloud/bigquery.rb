@@ -171,11 +171,7 @@ module Gcloud
   #         "FROM publicdata:samples.shakespeare"
   #   job = bigquery.query_job sql
   #
-  #   loop do
-  #     break if job.done?
-  #     sleep 1
-  #     job.refresh!
-  #   end
+  #   job.wait_until_done!
   #   if !job.failed?
   #     job.query_results.each do |row|
   #       puts row["word"]
@@ -362,11 +358,7 @@ module Gcloud
   #         "ORDER BY count DESC"
   #   query_job = dataset.query_job sql, table: result_table
   #
-  #   loop do
-  #     break if query_job.done?
-  #     sleep 1
-  #     query_job.refresh!
-  #   end
+  #   query_job.wait_until_done!
   #
   #   if !query_job.failed?
   #
@@ -377,11 +369,7 @@ module Gcloud
   #
   #     extract_job = result_table.extract extract_url
   #
-  #     loop do
-  #       break if extract_job.done?
-  #       sleep 1
-  #       extract_job.refresh!
-  #     end
+  #     extract_job.wait_until_done!
   #
   #     # Download to local filesystem
   #     bucket.files.first.download "baby-names-sam.csv"
