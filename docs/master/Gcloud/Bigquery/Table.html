@@ -1346,7 +1346,7 @@ errors. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="insert-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 662</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 669</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span> <span class="ruby-identifier">rows</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">rows</span> = [<span class="ruby-identifier">rows</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -1406,6 +1406,9 @@ file containing data to load into the table. (<code>File</code> or
 JSON</a></p>
 </li><li>
 <p><code>avro</code> - <a href="http://avro.apache.org/">Avro</a></p>
+</li><li>
+<p><code>datastore_backup</code> - Cloud <a
+href="../Datastore.html">Datastore</a> backup</p>
 </li></ul>
 </dd><dt><code>options[:create]</code>
 <dd>
@@ -1433,6 +1436,15 @@ value is <code>empty</code>. (<code>String</code>)</p>
 <p><code>empty</code> - An error will be returned if the table already
 contains data.</p>
 </li></ul>
+</dd><dt><code>options[:projection_fields]</code>
+<dd>
+<p>If the <code>format</code> option is set to <code>datastore_backup</code>,
+indicates which entity properties to load from a Cloud <a
+href="../Datastore.html">Datastore</a> backup. Property names are case
+sensitive and must be top-level properties. If not set, BigQuery loads all
+properties. If any named property isn&#39;t found in the Cloud <a
+href="../Datastore.html">Datastore</a> backup, an invalid error is
+returned. (<code>Array</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-load-label-Returns">Returns<span><a href="#method-i-load-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -1485,7 +1497,7 @@ href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">clo
 
     
       <!-- <div class="method-source-code" id="load-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 608</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 615</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">load</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">storage_url?</span> <span class="ruby-identifier">file</span>
@@ -1604,7 +1616,7 @@ href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">clo
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 693</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 700</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
