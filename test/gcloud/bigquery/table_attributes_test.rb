@@ -93,7 +93,7 @@ describe Gcloud::Bigquery::Table, :attributes, :mock_bigquery do
 
   attr_test :description, "This is my table"
   attr_test :etag, "etag123456789"
-  attr_test :url, "http://googleapi/bigquery/v2/projects/test/datasets/my_table/tables/my_table"
+  attr_test :url, "http://googleapi/bigquery/v2/projects/test-project/datasets/my_table/tables/my_table"
   attr_test :bytes_count, 1000
   attr_test :rows_count, 100
   attr_test :location, "US"

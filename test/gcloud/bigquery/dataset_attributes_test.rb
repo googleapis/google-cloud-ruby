@@ -68,7 +68,7 @@ describe Gcloud::Bigquery::Dataset, :attributes, :mock_bigquery do
   attr_test :description, "This is my dataset"
   attr_test :default_expiration, 999
   attr_test :etag, "etag123456789"
-  attr_test :url, "http://googleapi/bigquery/v2/projects/test/datasets/my_dataset"
+  attr_test :url, "http://googleapi/bigquery/v2/projects/test-project/datasets/my_dataset"
   attr_test :location, "US"
 
 end

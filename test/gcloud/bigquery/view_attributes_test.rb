@@ -93,7 +93,7 @@ describe Gcloud::Bigquery::View, :attributes, :mock_bigquery do
 
   attr_test :description, "This is my view"
   attr_test :etag, "etag123456789"
-  attr_test :url, "http://googleapi/bigquery/v2/projects/test/datasets/my_view/tables/my_view"
+  attr_test :url, "http://googleapi/bigquery/v2/projects/test-project/datasets/my_view/tables/my_view"
   attr_test :location, "US"
 
 end

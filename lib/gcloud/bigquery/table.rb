@@ -127,6 +127,31 @@ module Gcloud
       end
 
       ##
+      # The combined Project ID, Dataset ID, and Table ID for this table, in the
+      # format specified by the {Query
+      # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+      # +project_name:datasetId.tableId+. Surrounded by square brackets if the
+      # Project ID contains dashes. Useful in queries.
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   data = bigquery.query "SELECT name FROM #{table.id}"
+      #
+      # :category: Attributes
+      #
+      def id
+        id_str = "#{project_id}:#{dataset_id}.#{table_id}"
+        project_id["-"] ? "[#{id_str}]" : id_str
+      end
+
+      ##
       # The name of the table.
       #
       # :category: Attributes

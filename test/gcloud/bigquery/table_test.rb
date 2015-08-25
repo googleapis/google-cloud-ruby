@@ -41,6 +41,10 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     table.location.must_equal location_code
   end
 
+  it "knows its fully-qualified ID" do
+    table.id.must_equal "[#{project}:#{dataset}.#{table_id}]"
+  end
+
   it "knows its creation and modification and expiration times" do
     now = Time.now
 
