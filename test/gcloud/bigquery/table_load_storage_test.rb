@@ -48,6 +48,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
       json["configuration"]["load"].wont_include "createDisposition"
       json["configuration"]["load"].wont_include "writeDisposition"
+      json["configuration"]["load"].wont_include "projectionFields"
       json["configuration"]["load"]["sourceFormat"].must_be :nil?
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
@@ -100,6 +101,46 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
 
     job = table.load special_file
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
+  end
+
+  it "can specify a storage file and derive Avro format" do
+    special_file = storage_file "data.avro"
+
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(env.body)
+      json["configuration"]["load"]["sourceFormat"].must_equal "AVRO"
+      [200, {"Content-Type"=>"application/json"},
+       load_job_json(table, load_url)]
+    end
+
+    table.load special_file
+  end
+
+  it "can specify a storage file and derive Datastore backup format" do
+    special_file = storage_file "data.backup_info"
+
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(env.body)
+      json["configuration"]["load"]["sourceFormat"].must_equal "DATASTORE_BACKUP"
+      [200, {"Content-Type"=>"application/json"},
+       load_job_json(table, load_url)]
+    end
+
+    table.load special_file
+  end
+
+  it "can load a Datastore backup file and specify projection fields" do
+    special_file = storage_file "data.backup_info"
+
+    projection_fields = ["first_name"]
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(env.body)
+      json["configuration"]["load"]["projectionFields"].must_equal projection_fields
+      [200, {"Content-Type"=>"application/json"},
+       load_job_json(table, load_url)]
+    end
+
+    table.load special_file, projection_fields: projection_fields
   end
 
   it "can specify a storage url" do
