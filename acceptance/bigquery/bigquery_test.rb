@@ -124,7 +124,7 @@ describe Gcloud::Pubsub, :bigquery do
 
     it "imports data from a local files" do
       job = table.load local_file
-      wait_until_complete job
+      job.wait_until_done!
       job.output_rows.must_equal "3"
     end
 
@@ -134,7 +134,7 @@ describe Gcloud::Pubsub, :bigquery do
         file = bucket.create_file local_file
 
         job = table.load file
-        wait_until_complete job
+        job.wait_until_done!
         job.wont_be :failed?
       ensure
         post_bucket = Gcloud.storage.bucket "#{prefix}_bucket"
@@ -148,12 +148,13 @@ describe Gcloud::Pubsub, :bigquery do
     it "extracts data to a url in your bucket" do
       begin
         # Make sure there is data to extract...
-        wait_until_complete table.load(local_file)
+        load_job = table.load(local_file)
+        load_job.wait_until_done!
         Tempfile.open "empty_extract_file.json" do |tmp|
           bucket = Gcloud.storage.create_bucket "#{prefix}_bucket"
           extract_url = "gs://#{bucket.name}/kitten-test-data-backup.json"
           extract_job = table.extract extract_url
-          wait_until_complete extract_job
+          extract_job.wait_until_done!
           extract_job.wont_be :failed?
           extract_file = bucket.file "kitten-test-data-backup.json"
           downloaded_file = extract_file.download tmp.path
@@ -171,13 +172,14 @@ describe Gcloud::Pubsub, :bigquery do
     it "extracts data to a file in your bucket" do
       begin
         # Make sure there is data to extract...
-        wait_until_complete table.load(local_file)
+        load_job = table.load(local_file)
+        load_job.wait_until_done!
         Tempfile.open "empty_extract_file.json" do |tmp|
           tmp.size.must_equal 0
           bucket = Gcloud.storage.create_bucket "#{prefix}_bucket"
           extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
           extract_job = table.extract extract_file
-          wait_until_complete extract_job
+          extract_job.wait_until_done!
           extract_job.wont_be :failed?
           # Refresh to get the latest file data
           extract_file = bucket.file "kitten-test-data-backup.json"
@@ -191,17 +193,6 @@ describe Gcloud::Pubsub, :bigquery do
           post_bucket.delete
         end
       end
-    end
-  end
-
-  def wait_until_complete job
-    delay = 0
-    while !job.done?
-      delay += 1
-      raise "job never completed" if delay > 20
-      puts "waiting for job to complete for #{delay} second(s)" if delay > 5
-      sleep delay
-      job.refresh!
     end
   end
 end

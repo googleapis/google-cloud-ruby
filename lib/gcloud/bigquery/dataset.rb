@@ -516,11 +516,7 @@ module Gcloud
       #
       #   job = bigquery.query_job "SELECT name FROM my_table"
       #
-      #   loop do
-      #     break if job.done?
-      #     sleep 1
-      #     job.refresh!
-      #   end
+      #   job.wait_until_done!
       #   if !job.failed?
       #     job.query_results.each do |row|
       #       puts row["name"]

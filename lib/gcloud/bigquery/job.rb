@@ -44,11 +44,7 @@ module Gcloud
     #   q = "SELECT COUNT(word) as count FROM publicdata:samples.shakespeare"
     #   job = bigquery.query_job q
     #
-    #   loop do
-    #     break if job.done?
-    #     sleep 1
-    #     job.refresh!
-    #   end
+    #   job.wait_until_done!
     #
     #   if job.failed?
     #     puts job.error
@@ -226,6 +222,33 @@ module Gcloud
           @gapi = resp.data
         else
           fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Refreshes the job until the job is +DONE+.
+      # The delay between refreshes will incrementally increase.
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   extract_job = table.extract "gs://my-bucket/file-name.json",
+      #                               format: "json"
+      #   extract_job.wait_until_done!
+      #   extract_job.done? #=> true
+      def wait_until_done!
+        backoff = ->(retries) { sleep 2 * retries + 5 }
+        retries = 0
+        until done?
+          backoff.call retries
+          retries += 1
+          refresh!
         end
       end
 
