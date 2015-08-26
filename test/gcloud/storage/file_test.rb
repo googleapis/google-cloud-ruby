@@ -218,4 +218,26 @@ describe Gcloud::Storage::File, :mock_storage do
 
     file.copy "new-bucket", "new-file.ext", acl: :public
   end
+
+  it "can refresh itself" do
+
+    file_name = "file.ext"
+
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
+      URI(env.url).query.must_be :nil?
+      [200, {"Content-Type"=>"application/json"},
+        random_file_hash(bucket.name, file_name, 1234567891).to_json]
+    end
+
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
+      URI(env.url).query.must_be :nil?
+      [200, {"Content-Type"=>"application/json"},
+        random_file_hash(bucket.name, file_name, 1234567892).to_json]
+    end
+
+    file = bucket.file file_name
+    file.generation.must_equal 1234567891
+    file.refresh!
+    file.generation.must_equal 1234567892
+  end
 end

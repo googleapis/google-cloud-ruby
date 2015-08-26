@@ -464,6 +464,18 @@ module Gcloud
       end
 
       ##
+      # Reloads the file with current data from the Storage service.
+      def refresh!
+        ensure_connection!
+        resp = connection.get_file bucket, name
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # URI of the location and file name in the format of
       # <code>gs://my-bucket/file-name.json</code>.
       def to_gs_url #:nodoc:

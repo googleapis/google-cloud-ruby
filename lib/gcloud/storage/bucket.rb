@@ -448,6 +448,18 @@ module Gcloud
       end
 
       ##
+      # Reloads the bucket with current data from the Storage service.
+      def refresh!
+        ensure_connection!
+        resp = connection.get_bucket name
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Bucket from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|

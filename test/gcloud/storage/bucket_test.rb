@@ -315,6 +315,29 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     file.name.must_equal file_name
   end
 
+  it "can refresh itself" do
+    bucket_name = "found-bucket"
+
+    mock_connection.get "/storage/v1/b/#{bucket_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name).to_json]
+    end
+
+    new_url_root = "https://www.googleapis.com/storage/v2"
+    mock_connection.get "/storage/v1/b/#{bucket_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, new_url_root).to_json]
+    end
+
+    bucket = storage.bucket bucket_name
+    bucket.url.must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
+
+    bucket.refresh!
+
+    # replace url with a legitimately mutable attribute when issue #91 is closed.
+    bucket.url.must_equal "#{new_url_root}/b/#{bucket_name}"
+  end
+
   def create_file_json bucket=nil, name = nil
     random_file_hash(bucket, name).to_json
   end
