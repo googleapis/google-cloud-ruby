@@ -80,7 +80,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     table.delete
   end
 
-  it "can refresh itself" do
+  it "can reload itself" do
     new_description = "New description of the table."
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{table.dataset_id}/tables/#{table.table_id}" do |env|
       [200, {"Content-Type"=>"application/json"},
@@ -88,7 +88,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     end
 
     table.description.must_equal description
-    table.refresh!
+    table.reload!
     table.description.must_equal new_description
   end
 end

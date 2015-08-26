@@ -46,10 +46,10 @@ class MockStorage < Minitest::Spec
   end
 
 
-  def random_bucket_hash name=random_bucket_name
+  def random_bucket_hash name=random_bucket_name, url_root="https://www.googleapis.com/storage/v1"
     {"kind"=>"storage#bucket",
         "id"=>name,
-        "selfLink"=>"https://www.googleapis.com/storage/v1/b/#{name}",
+        "selfLink"=>"#{url_root}/b/#{name}",
         "projectNumber"=>"1234567890",
         "name"=>name,
         "timeCreated"=>Time.now,
@@ -60,13 +60,13 @@ class MockStorage < Minitest::Spec
         "etag"=>"CAE="}
   end
 
-  def random_file_hash bucket=random_bucket_name, name=random_file_path
+  def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890"
     {"kind"=>"storage#object",
      "id"=>"#{bucket}/#{name}/1234567890",
      "selfLink"=>"https://www.googleapis.com/storage/v1/b/#{bucket}/o/#{name}",
      "name"=>"#{name}",
      "bucket"=>"#{bucket}",
-     "generation"=>"1234567890",
+     "generation"=>generation,
      "metageneration"=>"1",
      "contentType"=>"text/plain",
      "updated"=>Time.now,

@@ -215,7 +215,7 @@ module Gcloud
 
       ##
       # Reloads the job with current data from the BigQuery service.
-      def refresh!
+      def reload!
         ensure_connection!
         resp = connection.get_job job_id
         if resp.success?
@@ -224,6 +224,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :refresh!, :reload!
 
       ##
       # Refreshes the job until the job is +DONE+.
@@ -248,7 +249,7 @@ module Gcloud
         until done?
           backoff.call retries
           retries += 1
-          refresh!
+          reload!
         end
       end
 

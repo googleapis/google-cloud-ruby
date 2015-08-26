@@ -154,14 +154,14 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     failed_job.errors.first["message"].must_equal "m3ss4g3"
   end
 
-  it "can refresh itself" do
+  it "can reload itself" do
     mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
       [200, {"Content-Type"=>"application/json"},
        random_job_hash(job_id, "done").to_json]
     end
 
     job.must_be :running?
-    job.refresh!
+    job.reload!
     job.must_be :done?
   end
 
