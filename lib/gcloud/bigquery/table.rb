@@ -127,6 +127,42 @@ module Gcloud
       end
 
       ##
+      # The combined Project ID, Dataset ID, and Table ID for this table, in the
+      # format specified by the {Query
+      # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+      # +project_name:datasetId.tableId+. To use this value in queries see
+      # #query_id.
+      #
+      # :category: Attributes
+      #
+      def id
+        @gapi["id"]
+      end
+
+      ##
+      # The value returned by #id, wrapped in square brackets if the Project ID
+      # contains dashes, as specified by the {Query
+      # Reference}[https://cloud.google.com/bigquery/query-reference#from].
+      # Useful in queries.
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   data = bigquery.query "SELECT name FROM #{table.query_id}"
+      #
+      # :category: Attributes
+      #
+      def query_id
+        project_id["-"] ? "[#{id}]" : id
+      end
+
+      ##
       # The name of the table.
       #
       # :category: Attributes
@@ -702,6 +738,21 @@ module Gcloud
         resp = connection.delete_table dataset_id, table_id
         if resp.success?
           true
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Reloads the table with current data from the BigQuery service.
+      #
+      # :category: Lifecycle
+      #
+      def refresh!
+        ensure_connection!
+        resp = connection.get_table dataset_id, table_id
+        if resp.success?
+          @gapi = resp.data
         else
           fail ApiError.from_response(resp)
         end

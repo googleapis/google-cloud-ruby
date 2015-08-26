@@ -41,6 +41,14 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     table.location.must_equal location_code
   end
 
+  it "knows its fully-qualified ID" do
+    table.id.must_equal "#{project}:#{dataset}.#{table_id}"
+  end
+
+  it "knows its fully-qualified query ID" do
+    table.query_id.must_equal "[#{project}:#{dataset}.#{table_id}]"
+  end
+
   it "knows its creation and modification and expiration times" do
     now = Time.now
 
@@ -70,5 +78,17 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     end
 
     table.delete
+  end
+
+  it "can refresh itself" do
+    new_description = "New description of the table."
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{table.dataset_id}/tables/#{table.table_id}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_table_hash(dataset, table_id, table_name, new_description).to_json]
+    end
+
+    table.description.must_equal description
+    table.refresh!
+    table.description.must_equal new_description
   end
 end

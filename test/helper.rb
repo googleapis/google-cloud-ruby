@@ -222,7 +222,7 @@ class MockPubsub < Minitest::Spec
 end
 
 class MockBigquery < Minitest::Spec
-  let(:project) { "test" }
+  let(:project) { "test-project" }
   let(:credentials) { OpenStruct.new }
   let(:bigquery) { Gcloud::Bigquery::Project.new project, credentials }
 

@@ -368,6 +368,21 @@ module Gcloud
       end
 
       ##
+      # Reloads the table with current data from the BigQuery service.
+      #
+      # :category: Lifecycle
+      #
+      def refresh!
+        ensure_connection!
+        resp = connection.get_table dataset_id, table_id
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Table from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
