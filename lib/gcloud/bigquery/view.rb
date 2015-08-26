@@ -369,7 +369,7 @@ module Gcloud
 
       ##
       # Reloads the table with current data from the BigQuery service.
-      def reload!
+      def refresh!
         ensure_connection!
         resp = connection.get_table dataset_id, table_id
         if resp.success?
@@ -378,7 +378,6 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
-      alias_method :refresh!, :reload!
 
       ##
       # New Table from a Google API Client object.

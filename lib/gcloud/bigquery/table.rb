@@ -130,8 +130,20 @@ module Gcloud
       # The combined Project ID, Dataset ID, and Table ID for this table, in the
       # format specified by the {Query
       # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
-      # +project_name:datasetId.tableId+. Surrounded by square brackets if the
-      # Project ID contains dashes. Useful in queries.
+      # +project_name:datasetId.tableId+. To use this value in queries see
+      # #query_id.
+      #
+      # :category: Attributes
+      #
+      def id
+        @gapi["id"]
+      end
+
+      ##
+      # The value returned by #id, wrapped in square brackets if the Project ID
+      # contains dashes, as specified by the {Query
+      # Reference}[https://cloud.google.com/bigquery/query-reference#from].
+      # Useful in queries.
       #
       # === Example
       #
@@ -142,11 +154,11 @@ module Gcloud
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.table "my_table"
       #
-      #   data = bigquery.query "SELECT name FROM #{table.id}"
+      #   data = bigquery.query "SELECT name FROM #{table.query_id}"
       #
       # :category: Attributes
       #
-      def id
+      def query_id
         id_str = "#{project_id}:#{dataset_id}.#{table_id}"
         project_id["-"] ? "[#{id_str}]" : id_str
       end
@@ -734,7 +746,10 @@ module Gcloud
 
       ##
       # Reloads the table with current data from the BigQuery service.
-      def reload!
+      #
+      # :category: Lifecycle
+      #
+      def refresh!
         ensure_connection!
         resp = connection.get_table dataset_id, table_id
         if resp.success?
@@ -743,7 +758,6 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
-      alias_method :refresh!, :reload!
 
       ##
       # New Table from a Google API Client object.

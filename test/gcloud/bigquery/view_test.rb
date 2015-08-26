@@ -70,7 +70,7 @@ describe Gcloud::Bigquery::View, :mock_bigquery do
     view.delete
   end
 
-  it "can reload itself" do
+  it "can refresh itself" do
     new_description = "New description of the view."
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{view.dataset_id}/tables/#{view.table_id}" do |env|
       [200, {"Content-Type"=>"application/json"},
@@ -78,7 +78,7 @@ describe Gcloud::Bigquery::View, :mock_bigquery do
     end
 
     view.description.must_equal description
-    view.reload!
+    view.refresh!
     view.description.must_equal new_description
   end
 end

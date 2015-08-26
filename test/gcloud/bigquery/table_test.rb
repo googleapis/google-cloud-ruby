@@ -42,7 +42,11 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
   end
 
   it "knows its fully-qualified ID" do
-    table.id.must_equal "[#{project}:#{dataset}.#{table_id}]"
+    table.id.must_equal "#{project}:#{dataset}.#{table_id}"
+  end
+
+  it "knows its fully-qualified query ID" do
+    table.query_id.must_equal "[#{project}:#{dataset}.#{table_id}]"
   end
 
   it "knows its creation and modification and expiration times" do
@@ -76,7 +80,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     table.delete
   end
 
-  it "can reload itself" do
+  it "can refresh itself" do
     new_description = "New description of the table."
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{table.dataset_id}/tables/#{table.table_id}" do |env|
       [200, {"Content-Type"=>"application/json"},
@@ -84,7 +88,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     end
 
     table.description.must_equal description
-    table.reload!
+    table.refresh!
     table.description.must_equal new_description
   end
 end
