@@ -794,7 +794,7 @@ caching</a>. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="query-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 601</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 597</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">query</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:dataset</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">dataset_id</span>
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:project</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">project_id</span>
@@ -912,11 +912,7 @@ value is <code>true</code>. <code>options[:large_results]</code> must be
 
 <span class="ruby-identifier">job</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">query_job</span> <span class="ruby-string">&quot;SELECT name FROM my_table&quot;</span>
 
-<span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
-  <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">done?</span>
-  <span class="ruby-identifier">sleep</span> <span class="ruby-value">1</span>
-  <span class="ruby-identifier">job</span>.<span class="ruby-identifier">refresh!</span>
-<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">job</span>.<span class="ruby-identifier">wait_until_done!</span>
 <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">job</span>.<span class="ruby-identifier">failed?</span>
   <span class="ruby-identifier">job</span>.<span class="ruby-identifier">query_results</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;name&quot;</span>]
@@ -927,7 +923,7 @@ value is <code>true</code>. <code>options[:large_results]</code> must be
 
     
       <!-- <div class="method-source-code" id="query_job-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 532</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 528</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">query_job</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:dataset</span>] <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -1438,7 +1434,7 @@ href="Dataset/List.html#attribute-i-token">Gcloud::Bigquery::Dataset::List#token
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Aug 25, 2015.
+    Docs built on Aug 26, 2015.
   </div>
 </div>
 

@@ -188,11 +188,7 @@ href="Bigquery/QueryData.html">Gcloud::Bigquery::QueryData</a>.</p>
       <span class="ruby-string">&quot;FROM publicdata:samples.shakespeare&quot;</span>
 <span class="ruby-identifier">job</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">query_job</span> <span class="ruby-identifier">sql</span>
 
-<span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
-  <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">done?</span>
-  <span class="ruby-identifier">sleep</span> <span class="ruby-value">1</span>
-  <span class="ruby-identifier">job</span>.<span class="ruby-identifier">refresh!</span>
-<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">job</span>.<span class="ruby-identifier">wait_until_done!</span>
 <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">job</span>.<span class="ruby-identifier">failed?</span>
   <span class="ruby-identifier">job</span>.<span class="ruby-identifier">query_results</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;word&quot;</span>]
@@ -392,11 +388,7 @@ href="Storage.html">Storage</a> API in addition to setting up billing.</p>
       <span class="ruby-string">&quot;ORDER BY count DESC&quot;</span>
 <span class="ruby-identifier">query_job</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">query_job</span> <span class="ruby-identifier">sql</span>, <span class="ruby-identifier">table</span><span class="ruby-operator">:</span> <span class="ruby-identifier">result_table</span>
 
-<span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
-  <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">query_job</span>.<span class="ruby-identifier">done?</span>
-  <span class="ruby-identifier">sleep</span> <span class="ruby-value">1</span>
-  <span class="ruby-identifier">query_job</span>.<span class="ruby-identifier">refresh!</span>
-<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">query_job</span>.<span class="ruby-identifier">wait_until_done!</span>
 
 <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">query_job</span>.<span class="ruby-identifier">failed?</span>
 
@@ -407,11 +399,7 @@ href="Storage.html">Storage</a> API in addition to setting up billing.</p>
 
   <span class="ruby-identifier">extract_job</span> = <span class="ruby-identifier">result_table</span>.<span class="ruby-identifier">extract</span> <span class="ruby-identifier">extract_url</span>
 
-  <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
-    <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">extract_job</span>.<span class="ruby-identifier">done?</span>
-    <span class="ruby-identifier">sleep</span> <span class="ruby-value">1</span>
-    <span class="ruby-identifier">extract_job</span>.<span class="ruby-identifier">refresh!</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">extract_job</span>.<span class="ruby-identifier">wait_until_done!</span>
 
   <span class="ruby-comment"># Download to local filesystem</span>
   <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">files</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">download</span> <span class="ruby-string">&quot;baby-names-sam.csv&quot;</span>
@@ -447,7 +435,7 @@ Data From BigQuery</a> for details.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Aug 25, 2015.
+    Docs built on Aug 26, 2015.
   </div>
 </div>
 

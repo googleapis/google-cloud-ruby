@@ -105,11 +105,7 @@ href="View.html#method-i-data">Gcloud::Bigquery::View#data</a>.</p>
 <span class="ruby-identifier">q</span> = <span class="ruby-string">&quot;SELECT COUNT(word) as count FROM publicdata:samples.shakespeare&quot;</span>
 <span class="ruby-identifier">job</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">query_job</span> <span class="ruby-identifier">q</span>
 
-<span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
-  <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">done?</span>
-  <span class="ruby-identifier">sleep</span> <span class="ruby-value">1</span>
-  <span class="ruby-identifier">job</span>.<span class="ruby-identifier">refresh!</span>
-<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">job</span>.<span class="ruby-identifier">wait_until_done!</span>
 
 <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">failed?</span>
   <span class="ruby-identifier">puts</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">error</span>
@@ -180,6 +176,8 @@ href="View.html#method-i-data">Gcloud::Bigquery::View#data</a>.</p>
               <a href="#method-i-stats">stats</a>
             
               <a href="#method-i-status">status</a>
+            
+              <a href="#method-i-wait_until_done-21">wait_until_done!</a>
             
           
         
@@ -263,7 +261,7 @@ reference</a>.</p>
 
     
       <!-- <div class="method-source-code" id="configuration-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 157</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configuration</span>
   <span class="ruby-identifier">hash</span> = <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;configuration&quot;</span>] <span class="ruby-operator">||</span> {}
   <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
@@ -303,7 +301,7 @@ reference</a>.</p>
 
     
       <!-- <div class="method-source-code" id="created_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 129</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 125</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">created_at</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;statistics&quot;</span>].<span class="ruby-identifier">nil?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;statistics&quot;</span>][<span class="ruby-string">&quot;creationTime&quot;</span>].<span class="ruby-identifier">nil?</span>
@@ -343,7 +341,7 @@ occurred or if the job was successful.</p>
 
     
       <!-- <div class="method-source-code" id="done-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 116</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">done?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">state</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-string">&quot;done&quot;</span>.<span class="ruby-identifier">casecmp</span>(<span class="ruby-identifier">state</span>).<span class="ruby-identifier">zero?</span>
@@ -379,7 +377,7 @@ is <code>DONE</code>.</p>
 
     
       <!-- <div class="method-source-code" id="ended_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 148</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ended_at</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;statistics&quot;</span>].<span class="ruby-identifier">nil?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;statistics&quot;</span>][<span class="ruby-string">&quot;endTime&quot;</span>].<span class="ruby-identifier">nil?</span>
@@ -428,7 +426,7 @@ reference</a>.</p>
 
     
       <!-- <div class="method-source-code" id="error-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 197</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 193</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">error</span>
   <span class="ruby-identifier">status</span>[<span class="ruby-string">&quot;errorResult&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -463,7 +461,7 @@ hash objects. See <a href="Job.html#method-i-error">error</a>.</p>
 
     
       <!-- <div class="method-source-code" id="errors-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 204</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 200</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">errors</span>
   <span class="ruby-constant">Array</span> <span class="ruby-identifier">status</span>[<span class="ruby-string">&quot;errors&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -497,7 +495,7 @@ hash objects. See <a href="Job.html#method-i-error">error</a>.</p>
 
     
       <!-- <div class="method-source-code" id="failed-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 123</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">failed?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">error</span>.<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -531,7 +529,7 @@ hash objects. See <a href="Job.html#method-i-error">error</a>.</p>
 
     
       <!-- <div class="method-source-code" id="job_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 77</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">job_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;jobReference&quot;</span>][<span class="ruby-string">&quot;jobId&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -565,7 +563,7 @@ hash objects. See <a href="Job.html#method-i-error">error</a>.</p>
 
     
       <!-- <div class="method-source-code" id="pending-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 106</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pending?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">state</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-string">&quot;pending&quot;</span>.<span class="ruby-identifier">casecmp</span>(<span class="ruby-identifier">state</span>).<span class="ruby-identifier">zero?</span>
@@ -600,7 +598,7 @@ hash objects. See <a href="Job.html#method-i-error">error</a>.</p>
 
     
       <!-- <div class="method-source-code" id="project_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 83</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;jobReference&quot;</span>][<span class="ruby-string">&quot;projectId&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -634,7 +632,7 @@ hash objects. See <a href="Job.html#method-i-error">error</a>.</p>
 
     
       <!-- <div class="method-source-code" id="refresh-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 222</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 218</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">refresh!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_job</span> <span class="ruby-identifier">job_id</span>
@@ -674,7 +672,7 @@ hash objects. See <a href="Job.html#method-i-error">error</a>.</p>
 
     
       <!-- <div class="method-source-code" id="rerun-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 210</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 206</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">rerun!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">insert_job</span> <span class="ruby-identifier">configuration</span>
@@ -714,7 +712,7 @@ hash objects. See <a href="Job.html#method-i-error">error</a>.</p>
 
     
       <!-- <div class="method-source-code" id="running-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 99</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">running?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">state</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-string">&quot;running&quot;</span>.<span class="ruby-identifier">casecmp</span>(<span class="ruby-identifier">state</span>).<span class="ruby-identifier">zero?</span>
@@ -751,7 +749,7 @@ job&#39;s state changes from <code>PENDING</code> to either
 
     
       <!-- <div class="method-source-code" id="started_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 139</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">started_at</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;statistics&quot;</span>].<span class="ruby-identifier">nil?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;statistics&quot;</span>][<span class="ruby-string">&quot;startTime&quot;</span>].<span class="ruby-identifier">nil?</span>
@@ -791,7 +789,7 @@ occurred or if the job was successful.</p>
 
     
       <!-- <div class="method-source-code" id="state-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 92</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">state</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;status&quot;</span>].<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;status&quot;</span>][<span class="ruby-string">&quot;state&quot;</span>]
@@ -828,7 +826,7 @@ reference</a>.</p>
 
     
       <!-- <div class="method-source-code" id="statistics-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 167</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">statistics</span>
   <span class="ruby-identifier">hash</span> = <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;statistics&quot;</span>] <span class="ruby-operator">||</span> {}
   <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
@@ -902,11 +900,67 @@ href="Job.html#method-i-errors">errors</a>.</p>
 
     
       <!-- <div class="method-source-code" id="status-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 177</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 173</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">status</span>
   <span class="ruby-identifier">hash</span> = <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;status&quot;</span>] <span class="ruby-operator">||</span> {}
   <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
   <span class="ruby-identifier">hash</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="wait_until_done-21-method" class="method ">
+  <a name="method-i-wait_until_done-21"></a>
+
+  
+    <h4>
+      <code>wait_until_done!()</code>
+      <span>
+        <a href="#method-i-wait_until_done-21">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Refreshes the job until the job is <code>DONE</code>. The delay between
+refreshes will incrementally increase.</p>
+
+<h3 id="method-i-wait_until_done-21-label-Example">Example<span><a href="#method-i-wait_until_done-21-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">table</span> <span class="ruby-string">&quot;my_table&quot;</span>
+
+<span class="ruby-identifier">extract_job</span> = <span class="ruby-identifier">table</span>.<span class="ruby-identifier">extract</span> <span class="ruby-string">&quot;gs://my-bucket/file-name.json&quot;</span>,
+                            <span class="ruby-identifier">format</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;json&quot;</span>
+<span class="ruby-identifier">extract_job</span>.<span class="ruby-identifier">wait_until_done!</span>
+<span class="ruby-identifier">extract_job</span>.<span class="ruby-identifier">done?</span> <span class="ruby-comment">#=&gt; true</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="wait_until_done-21-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 245</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">wait_until_done!</span>
+  <span class="ruby-identifier">backoff</span> = <span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span>(<span class="ruby-identifier">retries</span>) { <span class="ruby-identifier">sleep</span> <span class="ruby-value">2</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">retries</span> <span class="ruby-operator">+</span> <span class="ruby-value">5</span> }
+  <span class="ruby-identifier">retries</span> = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">until</span> <span class="ruby-identifier">done?</span>
+    <span class="ruby-identifier">backoff</span>.<span class="ruby-identifier">call</span> <span class="ruby-identifier">retries</span>
+    <span class="ruby-identifier">retries</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">refresh!</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -932,7 +986,7 @@ href="Job.html#method-i-errors">errors</a>.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Aug 25, 2015.
+    Docs built on Aug 26, 2015.
   </div>
 </div>
 
