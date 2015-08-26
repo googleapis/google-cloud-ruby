@@ -369,6 +369,9 @@ module Gcloud
 
       ##
       # Reloads the table with current data from the BigQuery service.
+      #
+      # :category: Lifecycle
+      #
       def refresh!
         ensure_connection!
         resp = connection.get_table dataset_id, table_id

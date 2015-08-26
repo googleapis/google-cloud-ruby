@@ -159,8 +159,7 @@ module Gcloud
       # :category: Attributes
       #
       def query_id
-        id_str = "#{project_id}:#{dataset_id}.#{table_id}"
-        project_id["-"] ? "[#{id_str}]" : id_str
+        project_id["-"] ? "[#{id}]" : id
       end
 
       ##
