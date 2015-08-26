@@ -73,15 +73,16 @@ module Gcloud
         #   bucket = storage.bucket "my-bucket"
         #
         #   file = bucket.file "path/to/my-file.ext"
-        #   file.acl.refresh!
+        #   file.acl.reload!
         #
-        def refresh!
+        def reload!
           resp = @connection.list_file_acls @bucket, @file
           acls = resp.data["items"]
           @owners  = entities_from_acls acls, "OWNER"
           @writers = entities_from_acls acls, "WRITER"
           @readers = entities_from_acls acls, "READER"
         end
+        alias_method :refresh!, :reload!
 
         ##
         # Lists the owners of the file.
@@ -103,7 +104,7 @@ module Gcloud
         #   file.acl.owners.each { |owner| puts owner }
         #
         def owners
-          refresh! if @owners.nil?
+          reload! if @owners.nil?
           @owners
         end
 
@@ -127,7 +128,7 @@ module Gcloud
         #   file.acl.writers.each { |writer| puts writer }
         #
         def writers
-          refresh! if @writers.nil?
+          reload! if @writers.nil?
           @writers
         end
 
@@ -151,7 +152,7 @@ module Gcloud
         #   file.acl.readers.each { |reader| puts reader }
         #
         def readers
-          refresh! if @readers.nil?
+          reload! if @readers.nil?
           @readers
         end
 

@@ -69,15 +69,16 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   bucket.acl.refresh!
+        #   bucket.acl.reload!
         #
-        def refresh!
+        def reload!
           resp = @connection.list_bucket_acls @bucket
           acls = resp.data["items"]
           @owners  = entities_from_acls acls, "OWNER"
           @writers = entities_from_acls acls, "WRITER"
           @readers = entities_from_acls acls, "READER"
         end
+        alias_method :refresh!, :reload!
 
         ##
         # Lists the owners of the bucket.
@@ -98,7 +99,7 @@ module Gcloud
         #   bucket.acl.owners.each { |owner| puts owner }
         #
         def owners
-          refresh! if @owners.nil?
+          reload! if @owners.nil?
           @owners
         end
 
@@ -121,7 +122,7 @@ module Gcloud
         #   bucket.acl.writers.each { |writer| puts writer }
         #
         def writers
-          refresh! if @writers.nil?
+          reload! if @writers.nil?
           @writers
         end
 
@@ -144,7 +145,7 @@ module Gcloud
         #   bucket.acl.readers.each { |reader| puts reader }
         #
         def readers
-          refresh! if @readers.nil?
+          reload! if @readers.nil?
           @readers
         end
 
@@ -535,15 +536,16 @@ module Gcloud
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   bucket.default_acl.refresh!
+        #   bucket.default_acl.reload!
         #
-        def refresh!
+        def reload!
           resp = @connection.list_default_acls @bucket
           acls = resp.data["items"]
           @owners  = entities_from_acls acls, "OWNER"
           @writers = entities_from_acls acls, "WRITER"
           @readers = entities_from_acls acls, "READER"
         end
+        alias_method :refresh!, :reload!
 
         ##
         # Lists the default owners for files in the bucket.
@@ -564,7 +566,7 @@ module Gcloud
         #   bucket.default_acl.owners.each { |owner| puts owner }
         #
         def owners
-          refresh! if @owners.nil?
+          reload! if @owners.nil?
           @owners
         end
 
@@ -587,7 +589,7 @@ module Gcloud
         #   bucket.default_acl.writers.each { |writer| puts writer }
         #
         def writers
-          refresh! if @writers.nil?
+          reload! if @writers.nil?
           @writers
         end
 
@@ -610,7 +612,7 @@ module Gcloud
         #   bucket.default_acl.readers.each { |reader| puts reader }
         #
         def readers
-          refresh! if @readers.nil?
+          reload! if @readers.nil?
           @readers
         end
 

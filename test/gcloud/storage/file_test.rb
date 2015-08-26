@@ -219,7 +219,7 @@ describe Gcloud::Storage::File, :mock_storage do
     file.copy "new-bucket", "new-file.ext", acl: :public
   end
 
-  it "can refresh itself" do
+  it "can reload itself" do
 
     file_name = "file.ext"
 
@@ -237,7 +237,7 @@ describe Gcloud::Storage::File, :mock_storage do
 
     file = bucket.file file_name
     file.generation.must_equal 1234567891
-    file.refresh!
+    file.reload!
     file.generation.must_equal 1234567892
   end
 end

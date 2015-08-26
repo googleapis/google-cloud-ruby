@@ -449,7 +449,7 @@ module Gcloud
 
       ##
       # Reloads the bucket with current data from the Storage service.
-      def refresh!
+      def reload!
         ensure_connection!
         resp = connection.get_bucket name
         if resp.success?
@@ -458,6 +458,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :refresh!, :reload!
 
       ##
       # New Bucket from a Google API Client object.

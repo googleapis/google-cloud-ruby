@@ -315,7 +315,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     file.name.must_equal file_name
   end
 
-  it "can refresh itself" do
+  it "can reload itself" do
     bucket_name = "found-bucket"
 
     mock_connection.get "/storage/v1/b/#{bucket_name}" do |env|
@@ -332,7 +332,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     bucket = storage.bucket bucket_name
     bucket.url.must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
 
-    bucket.refresh!
+    bucket.reload!
 
     # replace url with a legitimately mutable attribute when issue #91 is closed.
     bucket.url.must_equal "#{new_url_root}/b/#{bucket_name}"

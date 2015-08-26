@@ -465,7 +465,7 @@ module Gcloud
 
       ##
       # Reloads the file with current data from the Storage service.
-      def refresh!
+      def reload!
         ensure_connection!
         resp = connection.get_file bucket, name
         if resp.success?
@@ -474,6 +474,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :refresh!, :reload!
 
       ##
       # URI of the location and file name in the format of
