@@ -148,6 +148,22 @@ Data for BigQuery</a>.)</p>
 
   
     
+      <div>
+         Methods:
+
+        
+        
+
+        
+        
+            
+              <a href="#method-i-refresh-21">refresh!</a>
+            
+          
+        
+
+      </div>
+    
   
     
       <div>
@@ -249,7 +265,7 @@ Data for BigQuery</a>.)</p>
             
               <a href="#method-i-delete">delete</a>
             
-              <a href="#method-i-refresh-21">refresh!</a>
+              <a href="#method-i-reload-21">reload!</a>
             
           
         
@@ -261,6 +277,62 @@ Data for BigQuery</a>.)</p>
 
 
         
+          
+            <h2 id="5Buntitled-5D"> Methods</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="public-instance-methods" class="section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+      <div class="methods">
+        
+          <div id="refresh-21-method" class="method alias">
+  <a name="method-i-refresh-21"></a>
+
+  
+    <h4>
+      <code>refresh!()</code>
+      <span>
+        <a href="#method-i-refresh-21">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+  </div>
+
+  
+
+  
+    <div class="aliases">
+      Alias for: <a href="Table.html#method-i-reload-21">reload!</a>
+    </div>
+  
+</div>
+
+        
+      </div>
+    </div>
+  
+
+
+
           
         
           
@@ -1731,14 +1803,14 @@ href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">clo
 </div>
 
         
-          <div id="refresh-21-method" class="method ">
-  <a name="method-i-refresh-21"></a>
+          <div id="reload-21-method" class="method ">
+  <a name="method-i-reload-21"></a>
 
   
     <h4>
-      <code>refresh!()</code>
+      <code>reload!()</code>
       <span>
-        <a href="#method-i-refresh-21">&para;</a>
+        <a href="#method-i-reload-21">&para;</a>
         <a href="#top">&uarr;</a>
       </span>
     </h4>
@@ -1750,9 +1822,9 @@ href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">clo
     
 
     
-      <!-- <div class="method-source-code" id="refresh-21-source">
+      <!-- <div class="method-source-code" id="reload-21-source">
 <pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 751</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">refresh!</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -1765,6 +1837,10 @@ href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">clo
     
   </div>
 
+  
+    <div class="aliases">
+      Also aliased as: <a href="Table.html#method-i-refresh-21">refresh!</a>
+    </div>
   
 
   
@@ -1785,7 +1861,7 @@ href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">clo
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Aug 26, 2015.
+    Docs built on Aug 27, 2015.
   </div>
 </div>
 

@@ -139,6 +139,10 @@ href="Project.html">Project</a> and has many Files.</p>
             
               <a href="#method-i-new_file">new_file</a>
             
+              <a href="#method-i-refresh-21">refresh!</a>
+            
+              <a href="#method-i-reload-21">reload!</a>
+            
               <a href="#method-i-upload_file">upload_file</a>
             
               <a href="#method-i-url">url</a>
@@ -1007,6 +1011,82 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 </div>
 
         
+          <div id="refresh-21-method" class="method alias">
+  <a name="method-i-refresh-21"></a>
+
+  
+    <h4>
+      <code>refresh!()</code>
+      <span>
+        <a href="#method-i-refresh-21">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+  </div>
+
+  
+
+  
+    <div class="aliases">
+      Alias for: <a href="Bucket.html#method-i-reload-21">reload!</a>
+    </div>
+  
+</div>
+
+        
+          <div id="reload-21-method" class="method ">
+  <a name="method-i-reload-21"></a>
+
+  
+    <h4>
+      <code>reload!()</code>
+      <span>
+        <a href="#method-i-reload-21">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Reloads the bucket with current data from the <a
+href="../Storage.html">Storage</a> service.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="reload-21-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 452</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
+  <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_bucket</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-ivar">@gapi</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+    <div class="aliases">
+      Also aliased as: <a href="Bucket.html#method-i-refresh-21">refresh!</a>
+    </div>
+  
+
+  
+</div>
+
+        
           <div id="upload_file-method" class="method alias">
   <a name="method-i-upload_file"></a>
 
@@ -1086,7 +1166,7 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Aug 26, 2015.
+    Docs built on Aug 27, 2015.
   </div>
 </div>
 

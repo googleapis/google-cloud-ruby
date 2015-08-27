@@ -163,6 +163,8 @@ href="View.html#method-i-data">Gcloud::Bigquery::View#data</a>.</p>
             
               <a href="#method-i-refresh-21">refresh!</a>
             
+              <a href="#method-i-reload-21">reload!</a>
+            
               <a href="#method-i-rerun-21">rerun!</a>
             
               <a href="#method-i-running-3F">running?</a>
@@ -612,7 +614,7 @@ hash objects. See <a href="Job.html#method-i-error">error</a>.</p>
 </div>
 
         
-          <div id="refresh-21-method" class="method ">
+          <div id="refresh-21-method" class="method alias">
   <a name="method-i-refresh-21"></a>
 
   
@@ -627,13 +629,44 @@ hash objects. See <a href="Job.html#method-i-error">error</a>.</p>
 
   <div class="method-description">
     
+      
+    
+
+    
+  </div>
+
+  
+
+  
+    <div class="aliases">
+      Alias for: <a href="Job.html#method-i-reload-21">reload!</a>
+    </div>
+  
+</div>
+
+        
+          <div id="reload-21-method" class="method ">
+  <a name="method-i-reload-21"></a>
+
+  
+    <h4>
+      <code>reload!()</code>
+      <span>
+        <a href="#method-i-reload-21">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
       <p>Reloads the job with current data from the BigQuery service.</p>
     
 
     
-      <!-- <div class="method-source-code" id="refresh-21-source">
+      <!-- <div class="method-source-code" id="reload-21-source">
 <pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 218</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">refresh!</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_job</span> <span class="ruby-identifier">job_id</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -646,6 +679,10 @@ hash objects. See <a href="Job.html#method-i-error">error</a>.</p>
     
   </div>
 
+  
+    <div class="aliases">
+      Also aliased as: <a href="Job.html#method-i-refresh-21">refresh!</a>
+    </div>
   
 
   
@@ -952,14 +989,14 @@ refreshes will incrementally increase.</p>
 
     
       <!-- <div class="method-source-code" id="wait_until_done-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 245</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/job.rb, line 246</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">wait_until_done!</span>
   <span class="ruby-identifier">backoff</span> = <span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span>(<span class="ruby-identifier">retries</span>) { <span class="ruby-identifier">sleep</span> <span class="ruby-value">2</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">retries</span> <span class="ruby-operator">+</span> <span class="ruby-value">5</span> }
   <span class="ruby-identifier">retries</span> = <span class="ruby-value">0</span>
   <span class="ruby-keyword">until</span> <span class="ruby-identifier">done?</span>
     <span class="ruby-identifier">backoff</span>.<span class="ruby-identifier">call</span> <span class="ruby-identifier">retries</span>
     <span class="ruby-identifier">retries</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-    <span class="ruby-identifier">refresh!</span>
+    <span class="ruby-identifier">reload!</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
@@ -986,7 +1023,7 @@ refreshes will incrementally increase.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Aug 26, 2015.
+    Docs built on Aug 27, 2015.
   </div>
 </div>
 

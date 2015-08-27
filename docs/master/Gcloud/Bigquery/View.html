@@ -107,6 +107,22 @@ table fields referenced directly or indirectly by the top-level query.</p>
 
   
     
+      <div>
+         Methods:
+
+        
+        
+
+        
+        
+            
+              <a href="#method-i-refresh-21">refresh!</a>
+            
+          
+        
+
+      </div>
+    
   
     
       <div>
@@ -194,7 +210,7 @@ table fields referenced directly or indirectly by the top-level query.</p>
             
               <a href="#method-i-query-3D">query=</a>
             
-              <a href="#method-i-refresh-21">refresh!</a>
+              <a href="#method-i-reload-21">reload!</a>
             
           
         
@@ -206,6 +222,62 @@ table fields referenced directly or indirectly by the top-level query.</p>
 
 
         
+          
+            <h2 id="5Buntitled-5D"> Methods</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="public-instance-methods" class="section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+      <div class="methods">
+        
+          <div id="refresh-21-method" class="method alias">
+  <a name="method-i-refresh-21"></a>
+
+  
+    <h4>
+      <code>refresh!()</code>
+      <span>
+        <a href="#method-i-refresh-21">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+  </div>
+
+  
+
+  
+    <div class="aliases">
+      Alias for: <a href="View.html#method-i-reload-21">reload!</a>
+    </div>
+  
+</div>
+
+        
+      </div>
+    </div>
+  
+
+
+
           
         
           
@@ -1151,14 +1223,14 @@ Reference </a>.</p>
 </div>
 
         
-          <div id="refresh-21-method" class="method ">
-  <a name="method-i-refresh-21"></a>
+          <div id="reload-21-method" class="method ">
+  <a name="method-i-reload-21"></a>
 
   
     <h4>
-      <code>refresh!()</code>
+      <code>reload!()</code>
       <span>
-        <a href="#method-i-refresh-21">&para;</a>
+        <a href="#method-i-reload-21">&para;</a>
         <a href="#top">&uarr;</a>
       </span>
     </h4>
@@ -1170,9 +1242,9 @@ Reference </a>.</p>
     
 
     
-      <!-- <div class="method-source-code" id="refresh-21-source">
+      <!-- <div class="method-source-code" id="reload-21-source">
 <pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 375</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">refresh!</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -1185,6 +1257,10 @@ Reference </a>.</p>
     
   </div>
 
+  
+    <div class="aliases">
+      Also aliased as: <a href="View.html#method-i-refresh-21">refresh!</a>
+    </div>
   
 
   
@@ -1205,7 +1281,7 @@ Reference </a>.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Aug 26, 2015.
+    Docs built on Aug 27, 2015.
   </div>
 </div>
 
