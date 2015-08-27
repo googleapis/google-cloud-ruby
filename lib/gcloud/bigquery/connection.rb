@@ -315,6 +315,10 @@ module Gcloud
         result
       end
 
+      def inspect #:nodoc:
+        "#{self.class}(#{@project})"
+      end
+
       protected
 
       ##

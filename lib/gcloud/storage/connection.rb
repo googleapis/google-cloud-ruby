@@ -347,6 +347,10 @@ module Gcloud
         MIME::Types.of(path).first.to_s
       end
 
+      def inspect #:nodoc:
+        "#{self.class}(#{@project})"
+      end
+
       protected
 
       def incremental_backoff options = {}

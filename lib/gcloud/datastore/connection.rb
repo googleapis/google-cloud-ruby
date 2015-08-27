@@ -144,6 +144,10 @@ module Gcloud
         @http_host = new_http_host
       end
 
+      def inspect #:nodoc:
+        "#{self.class}(#{@dataset_id})"
+      end
+
       protected
 
       ##

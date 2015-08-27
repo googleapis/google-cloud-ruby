@@ -253,6 +253,10 @@ module Gcloud
         "#{project_path(options)}/subscriptions/#{subscription_name}"
       end
 
+      def inspect #:nodoc:
+        "#{self.class}(#{@project})"
+      end
+
       protected
 
       def subscription_data topic, options = {}
