@@ -347,7 +347,7 @@ module Gcloud
         MIME::Types.of(path).first.to_s
       end
 
-      def inspect
+      def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end
 

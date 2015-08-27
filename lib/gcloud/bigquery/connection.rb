@@ -315,7 +315,7 @@ module Gcloud
         result
       end
 
-      def inspect
+      def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end
 
