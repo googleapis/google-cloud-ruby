@@ -315,6 +315,10 @@ module Gcloud
         result
       end
 
+      def inspect
+        "#{self.class}(#{@project})"
+      end
+
       protected
 
       ##
