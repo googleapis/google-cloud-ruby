@@ -35,7 +35,7 @@ module Gcloud
 
         ##
         # New Dataset::List from a response object.
-        def self.from_resp resp, conn #:nodoc:
+        def self.from_response resp, conn #:nodoc:
           datasets = List.new(Array(resp.data["datasets"]).map do |gapi_object|
             Dataset.from_gapi gapi_object, conn
           end)

@@ -34,7 +34,7 @@ module Gcloud
 
         ##
         # New Subscription::List from a response object.
-        def self.from_resp resp, conn #:nodoc:
+        def self.from_response resp, conn #:nodoc:
           subs = Array(resp.data["subscriptions"]).map do |gapi_object|
             if gapi_object.is_a? String
               Subscription.new_lazy gapi_object, conn

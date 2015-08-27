@@ -383,7 +383,7 @@ module Gcloud
         ensure_connection!
         resp = connection.list_datasets options
         if resp.success?
-          Dataset::List.from_resp resp, connection
+          Dataset::List.from_response resp, connection
         else
           fail ApiError.from_response(resp)
         end
@@ -490,7 +490,7 @@ module Gcloud
         ensure_connection!
         resp = connection.list_jobs options
         if resp.success?
-          Job::List.from_resp resp, connection
+          Job::List.from_response resp, connection
         else
           fail ApiError.from_response(resp)
         end

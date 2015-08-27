@@ -34,7 +34,7 @@ module Gcloud
 
         ##
         # New Topic::List from a response object.
-        def self.from_resp resp, conn #:nodoc:
+        def self.from_response resp, conn #:nodoc:
           topics = Array(resp.data["topics"]).map do |gapi_object|
             Topic.from_gapi gapi_object, conn
           end
