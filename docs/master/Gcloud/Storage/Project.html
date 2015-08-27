@@ -320,7 +320,7 @@ href="Bucket/List.html#attribute-i-token">Gcloud::Storage::Bucket::List#token</a
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">buckets</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_buckets</span> <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_resp</span> <span class="ruby-identifier">resp</span>, <span class="ruby-identifier">connection</span>
+    <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_response</span> <span class="ruby-identifier">resp</span>, <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
