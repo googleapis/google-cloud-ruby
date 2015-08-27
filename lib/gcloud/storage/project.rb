@@ -147,7 +147,7 @@ module Gcloud
       def buckets options = {}
         resp = connection.list_buckets options
         if resp.success?
-          Bucket::List.from_resp resp, connection
+          Bucket::List.from_response resp, connection
         else
           fail ApiError.from_response(resp)
         end

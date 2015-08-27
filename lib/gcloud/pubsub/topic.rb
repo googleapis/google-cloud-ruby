@@ -299,7 +299,7 @@ module Gcloud
         ensure_connection!
         resp = connection.list_topics_subscriptions name, options
         if resp.success?
-          Subscription::List.from_resp resp, connection
+          Subscription::List.from_response resp, connection
         else
           fail ApiError.from_response(resp)
         end

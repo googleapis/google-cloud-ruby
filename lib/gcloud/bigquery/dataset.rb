@@ -447,7 +447,7 @@ module Gcloud
         ensure_connection!
         resp = connection.list_tables dataset_id, options
         if resp.success?
-          Table::List.from_resp resp, connection
+          Table::List.from_response resp, connection
         else
           fail ApiError.from_response(resp)
         end

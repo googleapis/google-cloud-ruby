@@ -34,7 +34,7 @@ module Gcloud
 
         ##
         # New Bucket::List from a response object.
-        def self.from_resp resp, conn #:nodoc:
+        def self.from_response resp, conn #:nodoc:
           buckets = Array(resp.data["items"]).map do |gapi_object|
             Bucket.from_gapi gapi_object, conn
           end

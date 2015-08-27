@@ -208,7 +208,7 @@ module Gcloud
         ensure_connection!
         resp = connection.list_files name, options
         if resp.success?
-          File::List.from_resp resp, connection
+          File::List.from_response resp, connection
         else
           fail ApiError.from_response(resp)
         end
