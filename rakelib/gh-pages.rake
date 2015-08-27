@@ -13,6 +13,7 @@
 # limitations under the License.
 
 gem "rdoc"
+require "bundler"
 require "rdoc/task"
 require "fileutils"
 require "pathname"
@@ -101,9 +102,11 @@ namespace :pages do
     puts `git clone --quiet --branch=#{tag} --single-branch #{git_repo} #{repo} > /dev/null`
     # build the docs in the tag repo
     Dir.chdir repo do
-      # create the docs
-      puts `bundle install`
-      puts `bundle exec rake pages:rdoc`
+      Bundler.with_clean_env do
+        # create the docs
+        puts `bundle install --path .bundle`
+        puts `bundle exec rake pages:rdoc`
+      end
     end
 
     # checkout the gh-pages branch
