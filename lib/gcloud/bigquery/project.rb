@@ -264,6 +264,9 @@ module Gcloud
         end
       end
 
+      # rubocop:disable Metrics/MethodLength
+      # Disabled rubocop because the level of abstraction is not violated here
+
       ##
       # Creates a new dataset.
       #
@@ -308,6 +311,12 @@ module Gcloud
       #                                     description: "This is my Dataset"
       #
       def create_dataset dataset_id, options = {}
+        if block_given?
+          access_builder = Dataset::Access.new([])
+          yield access_builder
+          options[:access] = access_builder.access if access_builder.changed?
+        end
+
         ensure_connection!
         resp = connection.insert_dataset dataset_id, options
         if resp.success?
@@ -316,6 +325,8 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+
+      # rubocop:enable Metrics/MethodLength
 
       ##
       # Retrieves the list of datasets belonging to the project.

@@ -351,11 +351,11 @@ module Gcloud
           "kind" => "bigquery#dataset",
           "datasetReference" => {
             "projectId" => @project,
-            "datasetId" => dataset_id
-          },
+            "datasetId" => dataset_id },
           "friendlyName" => options[:name],
           "description" => options[:description],
-          "defaultTableExpirationMs" => options[:expiration]
+          "defaultTableExpirationMs" => options[:expiration],
+          "access" => options[:access]
         }.delete_if { |_, v| v.nil? }
       end
 
