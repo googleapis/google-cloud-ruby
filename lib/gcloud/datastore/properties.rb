@@ -89,6 +89,7 @@ module Gcloud
         if Time                      === value ||
            Gcloud::Datastore::Key    === value ||
            Gcloud::Datastore::Entity === value ||
+           NilClass                  === value ||
            TrueClass                 === value ||
            FalseClass                === value ||
            Float                     === value ||

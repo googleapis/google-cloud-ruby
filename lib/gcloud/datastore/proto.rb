@@ -14,6 +14,7 @@
 # limitations under the License.
 
 require "gcloud/proto/datastore_v1.pb"
+require "gcloud/datastore/errors"
 
 module Gcloud
   module Datastore
@@ -63,6 +64,8 @@ module Gcloud
           v.key_value = value.to_proto
         elsif Gcloud::Datastore::Entity === value
           v.entity_value = value.to_proto
+        elsif NilClass === value
+          # The correct behavior is to not set a value property
         elsif TrueClass === value
           v.boolean_value = true
         elsif FalseClass === value
