@@ -47,6 +47,24 @@ describe "Proto Value methods" do
     raw.must_equal str
   end
 
+  it "encodes nil" do
+    value = Gcloud::Datastore::Proto.to_proto_value nil
+    value.boolean_value.must_be :nil?
+    value.timestamp_microseconds_value.must_be :nil?
+    value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
+    value.double_value.must_be :nil?
+    value.integer_value.must_be :nil?
+    value.string_value.must_be :nil?
+    value.list_value.must_be :nil?
+  end
+
+  it "decodes NULL" do
+    value = Gcloud::Datastore::Proto::Value.new
+    raw = Gcloud::Datastore::Proto.from_proto_value value
+    raw.must_equal nil
+  end
+
   it "encodes true" do
     value = Gcloud::Datastore::Proto.to_proto_value true
     value.boolean_value.must_equal true

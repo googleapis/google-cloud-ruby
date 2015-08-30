@@ -54,11 +54,14 @@ describe Gcloud::Datastore::Entity do
     proto.key.path_element.first.kind = "User"
     proto.key.path_element.first.id = 123456
     proto.property = [Gcloud::Datastore::Proto::Property.new,
+                      Gcloud::Datastore::Proto::Property.new,
                       Gcloud::Datastore::Proto::Property.new]
-    proto.property.first.name = "name"
-    proto.property.first.value = Gcloud::Datastore::Proto.to_proto_value "User McNumber"
-    proto.property.last.name = "email"
-    proto.property.last.value = Gcloud::Datastore::Proto.to_proto_value "number@example.net"
+    proto.property[0].name = "name"
+    proto.property[0].value = Gcloud::Datastore::Proto.to_proto_value "User McNumber"
+    proto.property[1].name = "email"
+    proto.property[1].value = Gcloud::Datastore::Proto.to_proto_value "number@example.net"
+    proto.property[2].name = "avatar"
+    proto.property[2].value = Gcloud::Datastore::Proto.to_proto_value nil
 
     entity_from_proto = Gcloud::Datastore::Entity.from_proto proto
 
@@ -67,6 +70,8 @@ describe Gcloud::Datastore::Entity do
     entity_from_proto.key.name.must_be :nil?
     entity_from_proto.properties["name"].must_equal "User McNumber"
     entity_from_proto.properties["email"].must_equal "number@example.net"
+    entity_from_proto.properties.exist?("avatar").must_equal true
+    entity_from_proto.properties["avatar"].must_equal nil
   end
 
   it "can store other entities as properties" do
