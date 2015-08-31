@@ -92,6 +92,20 @@ module Gcloud
       end
 
       ##
+      # Whether versioning is enabled for this bucket.
+      #
+      def versioning
+        @gapi["versioning"]["enabled"] if @gapi["versioning"]
+      end
+
+      ##
+      # Enables (or disables) versioning for this bucket.
+      #
+      def versioning= new_versioning
+        patch_gapi! versioning: new_versioning
+      end
+
+      ##
       # Permenently deletes the bucket.
       # The bucket must be empty before it can be deleted.
       #
@@ -492,6 +506,16 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      def patch_gapi! options = {}
+        ensure_connection!
+        resp = connection.patch_bucket name, options
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
       end
 
       ##
