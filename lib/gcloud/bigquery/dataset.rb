@@ -16,6 +16,7 @@
 require "json"
 require "gcloud/bigquery/errors"
 require "gcloud/bigquery/table"
+require "gcloud/bigquery/table/schema"
 require "gcloud/bigquery/dataset/list"
 require "gcloud/bigquery/dataset/access"
 
@@ -389,12 +390,15 @@ module Gcloud
       #
       def create_table table_id, options = {}
         ensure_connection!
-        resp = connection.insert_table dataset_id, table_id, options
-        if resp.success?
-          Table.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
+        if block_given?
+          if options[:schema]
+            fail ArgumentError, "only schema block or schema option is allowed"
+          end
+          schema_builder = Table::Schema.new nil
+          yield schema_builder
+          options[:schema] = schema_builder.schema if schema_builder.changed?
         end
+        insert_table table_id, options
       end
 
       ##
@@ -709,6 +713,15 @@ module Gcloud
       end
 
       protected
+
+      def insert_table table_id, options
+        resp = connection.insert_table dataset_id, table_id, options
+        if resp.success?
+          Table.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
 
       ##
       # Raise an error unless an active connection is available.

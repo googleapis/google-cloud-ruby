@@ -16,6 +16,7 @@
 require "gcloud/bigquery/view"
 require "gcloud/bigquery/data"
 require "gcloud/bigquery/table/list"
+require "gcloud/bigquery/table/schema"
 require "gcloud/bigquery/errors"
 require "gcloud/bigquery/insert_response"
 require "gcloud/upload"
@@ -315,12 +316,16 @@ module Gcloud
       #
       # :category: Attributes
       #
-      def schema
+      def schema options = {}
         ensure_full_data!
-        s = @gapi["schema"]
-        s = s.to_hash if s.respond_to? :to_hash
-        s = {} if s.nil?
-        s
+        g = @gapi
+        g = g.to_hash if g.respond_to? :to_hash
+        s = g["schema"] ||= {}
+        return s unless block_given?
+        old_schema = options[:replace] ? nil : s
+        schema_builder = Schema.new old_schema
+        yield schema_builder
+        self.schema = schema_builder.schema if schema_builder.changed?
       end
 
       ##

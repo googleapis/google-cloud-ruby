@@ -337,22 +337,20 @@ class MockBigquery < Minitest::Spec
           {
             "name" => "name",
             "type" => "STRING",
-            "mode" => "NULLABLE"
+            "mode" => "REQUIRED"
           },
           {
             "name" => "age",
-            "type" => "INTEGER",
-            "mode" => "NULLABLE"
+            "type" => "INTEGER"
           },
           {
             "name" => "score",
             "type" => "FLOAT",
-            "mode" => "NULLABLE"
+            "description" => "A score from 0.0 to 10.0"
           },
           {
             "name" => "active",
-            "type" => "BOOLEAN",
-            "mode" => "NULLABLE"
+            "type" => "BOOLEAN"
           }
         ]
       },
