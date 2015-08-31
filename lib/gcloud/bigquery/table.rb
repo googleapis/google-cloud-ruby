@@ -127,6 +127,12 @@ module Gcloud
       end
 
       ##
+      # The Project ID, Dataset ID, and Table ID as a camel-cased hash.
+      def table_ref #:nodoc:
+        @gapi["tableReference"]
+      end
+
+      ##
       # The combined Project ID, Dataset ID, and Table ID for this table, in the
       # format specified by the {Query
       # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
@@ -461,7 +467,9 @@ module Gcloud
       #
       def copy destination_table, options = {}
         ensure_connection!
-        resp = connection.copy_table gapi, destination_table.gapi, options
+        resp = connection.copy_table table_ref,
+                                     destination_table.table_ref,
+                                     options
         if resp.success?
           Job.from_gapi resp.data, connection
         else
@@ -503,7 +511,7 @@ module Gcloud
       #
       def link source_url, options = {} #:nodoc:
         ensure_connection!
-        resp = connection.link_table gapi, source_url, options
+        resp = connection.link_table table_ref, source_url, options
         if resp.success?
           Job.from_gapi resp.data, connection
         else
@@ -552,7 +560,7 @@ module Gcloud
       #
       def extract extract_url, options = {}
         ensure_connection!
-        resp = connection.extract_table gapi, extract_url, options
+        resp = connection.extract_table table_ref, extract_url, options
         if resp.success?
           Job.from_gapi resp.data, connection
         else
@@ -796,7 +804,7 @@ module Gcloud
         # Convert to storage URL
         file = file.to_gs_url if file.respond_to? :to_gs_url
 
-        resp = connection.load_table gapi, file, options
+        resp = connection.load_table table_ref, file, options
         if resp.success?
           Job.from_gapi resp.data, connection
         else
@@ -814,7 +822,7 @@ module Gcloud
 
       def load_resumable file, options = {}
         chunk_size = verify_chunk_size! options[:chunk_size]
-        resp = connection.load_resumable gapi, file, chunk_size, options
+        resp = connection.load_resumable table_ref, file, chunk_size, options
         if resp.success?
           Job.from_gapi resp.data, connection
         else
@@ -823,7 +831,7 @@ module Gcloud
       end
 
       def load_multipart file, options = {}
-        resp = connection.load_multipart gapi, file, options
+        resp = connection.load_multipart table_ref, file, options
         if resp.success?
           Job.from_gapi resp.data, connection
         else

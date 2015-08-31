@@ -461,16 +461,8 @@ module Gcloud
         {
           "configuration" => {
             "copy" => {
-              "sourceTable" => {
-                "projectId" => source["tableReference"]["projectId"],
-                "datasetId" => source["tableReference"]["datasetId"],
-                "tableId" => source["tableReference"]["tableId"]
-              }.delete_if { |_, v| v.nil? },
-              "destinationTable" => {
-                "projectId" => target["tableReference"]["projectId"],
-                "datasetId" => target["tableReference"]["datasetId"],
-                "tableId" => target["tableReference"]["tableId"]
-              }.delete_if { |_, v| v.nil? },
+              "sourceTable" => source,
+              "destinationTable" => target,
               "createDisposition" => create_disposition(options[:create]),
               "writeDisposition" => write_disposition(options[:write])
             }.delete_if { |_, v| v.nil? },
@@ -485,11 +477,7 @@ module Gcloud
           "configuration" => {
             "link" => {
               "sourceUri" => Array(urls),
-              "destinationTable" => {
-                "projectId" => table["tableReference"]["projectId"],
-                "datasetId" => table["tableReference"]["datasetId"],
-                "tableId" => table["tableReference"]["tableId"]
-              }.delete_if { |_, v| v.nil? },
+              "destinationTable" => table,
               "createDisposition" => create_disposition(options[:create]),
               "writeDisposition" => write_disposition(options[:write]),
               "sourceFormat" => source_format(path, options[:format])
@@ -508,11 +496,7 @@ module Gcloud
           "configuration" => {
             "extract" => {
               "destinationUris" => Array(storage_urls),
-              "sourceTable" => {
-                "projectId" => table["tableReference"]["projectId"],
-                "datasetId" => table["tableReference"]["datasetId"],
-                "tableId" => table["tableReference"]["tableId"]
-              }.delete_if { |_, v| v.nil? },
+              "sourceTable" => table,
               "destinationFormat" => dest_format
             }.delete_if { |_, v| v.nil? },
             "dryRun" => options[:dryrun]
@@ -527,11 +511,7 @@ module Gcloud
           "configuration" => {
             "load" => {
               "sourceUris" => Array(urls),
-              "destinationTable" => {
-                "projectId" => table["tableReference"]["projectId"],
-                "datasetId" => table["tableReference"]["datasetId"],
-                "tableId" => table["tableReference"]["tableId"]
-              }.delete_if { |_, v| v.nil? },
+              "destinationTable" => table,
               "createDisposition" => create_disposition(options[:create]),
               "writeDisposition" => write_disposition(options[:write]),
               "sourceFormat" => source_format(path, options[:format]),
