@@ -89,6 +89,22 @@ class MockStorage < Minitest::Spec
      (0...10).map { ("a".."z").to_a[rand(26)] }.join + ".txt"].join "/"
   end
 
+  def invalid_bucket_name_error_json bucket_name
+    {
+      "error" => {
+        "code" => 400,
+        "message" => "Invalid bucket name: '#{bucket_name}'.",
+        "errors" => [
+          {
+            "message" => "Invalid bucket name: '#{bucket_name}'.",
+            "domain" => "global",
+            "reason" => "invalidParameter"
+          }
+        ]
+      }
+    }.to_json
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_storage
@@ -295,6 +311,22 @@ class MockBigquery < Minitest::Spec
       },
       "friendlyName" => name
     }
+  end
+
+  def invalid_dataset_id_error_json id
+    {
+      "error" => {
+        "code" => 400,
+        "message" => "Invalid dataset ID \"#{id}\". Dataset IDs must be alphanumeric (plus underscores, dashes, and colons) and must be at most 1024 characters long.",
+        "errors" => [
+          {
+            "message" => "Invalid dataset ID \"#{id}\". Dataset IDs must be alphanumeric (plus underscores, dashes, and colons) and must be at most 1024 characters long.",
+            "domain" => "global",
+            "reason" => "invalid"
+          }
+        ]
+      }
+    }.to_json
   end
 
   def random_table_hash dataset, id = nil, name = nil, description = nil, project_id = nil

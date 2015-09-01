@@ -90,6 +90,19 @@ describe Gcloud::Storage::Project, :mock_storage do
     storage.create_bucket new_bucket_name, default_acl: :public
   end
 
+  it "raises when creating a bucket with a blank name" do
+    bucket_name = ""
+
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      [400, { "Content-Type" => "application/json" },
+       invalid_bucket_name_error_json(bucket_name)]
+    end
+
+    assert_raises Gcloud::Storage::ApiError do
+      storage.create_bucket bucket_name
+    end
+  end
+
   it "lists buckets" do
     num_buckets = 3
     mock_connection.get "/storage/v1/b?project=#{project}" do |env|

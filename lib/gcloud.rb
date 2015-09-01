@@ -253,9 +253,4 @@ module Gcloud
     require "gcloud/bigquery"
     Gcloud.bigquery @project, @keyfile, options
   end
-
-  ##
-  # Base Gcloud exception class.
-  class Error < StandardError
-  end
 end
