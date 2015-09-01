@@ -127,6 +127,15 @@ module Gcloud
       end
 
       ##
+      # The gapi fragment containing the Project ID, Dataset ID, and Table ID as
+      # a camel-cased hash.
+      def table_ref #:nodoc:
+        table_ref = @gapi["tableReference"]
+        table_ref = table_ref.to_hash if table_ref.respond_to? :to_hash
+        table_ref
+      end
+
+      ##
       # The combined Project ID, Dataset ID, and Table ID for this table, in the
       # format specified by the {Query
       # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
@@ -421,7 +430,7 @@ module Gcloud
       # === Parameters
       #
       # +destination_table+::
-      #   The destination for the copied data. (+Table+)
+      #   The destination for the copied data. (+Table+ or +String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:create]</code>::
@@ -445,7 +454,7 @@ module Gcloud
       #
       # Gcloud::Bigquery::CopyJob
       #
-      # === Example
+      # === Examples
       #
       #   require "gcloud"
       #
@@ -457,11 +466,28 @@ module Gcloud
       #
       #   copy_job = table.copy destination_table
       #
+      # The destination table argument can also be a string identifier as
+      # specified by the {Query
+      # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+      # +project_name:datasetId.tableId+. This is useful for referencing tables
+      # in other projects and datasets.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   copy_job = table.copy "other-project:other_dataset.other_table"
+      #
       # :category: Data
       #
       def copy destination_table, options = {}
         ensure_connection!
-        resp = connection.copy_table gapi, destination_table.gapi, options
+        resp = connection.copy_table table_ref,
+                                     get_table_ref(destination_table),
+                                     options
         if resp.success?
           Job.from_gapi resp.data, connection
         else
@@ -503,7 +529,7 @@ module Gcloud
       #
       def link source_url, options = {} #:nodoc:
         ensure_connection!
-        resp = connection.link_table gapi, source_url, options
+        resp = connection.link_table table_ref, source_url, options
         if resp.success?
           Job.from_gapi resp.data, connection
         else
@@ -552,7 +578,7 @@ module Gcloud
       #
       def extract extract_url, options = {}
         ensure_connection!
-        resp = connection.extract_table gapi, extract_url, options
+        resp = connection.extract_table table_ref, extract_url, options
         if resp.success?
           Job.from_gapi resp.data, connection
         else
@@ -796,7 +822,7 @@ module Gcloud
         # Convert to storage URL
         file = file.to_gs_url if file.respond_to? :to_gs_url
 
-        resp = connection.load_table gapi, file, options
+        resp = connection.load_table table_ref, file, options
         if resp.success?
           Job.from_gapi resp.data, connection
         else
@@ -814,7 +840,7 @@ module Gcloud
 
       def load_resumable file, options = {}
         chunk_size = verify_chunk_size! options[:chunk_size]
-        resp = connection.load_resumable gapi, file, chunk_size, options
+        resp = connection.load_resumable table_ref, file, chunk_size, options
         if resp.success?
           Job.from_gapi resp.data, connection
         else
@@ -823,7 +849,7 @@ module Gcloud
       end
 
       def load_multipart file, options = {}
-        resp = connection.load_multipart gapi, file, options
+        resp = connection.load_multipart table_ref, file, options
         if resp.success?
           Job.from_gapi resp.data, connection
         else
@@ -880,6 +906,16 @@ module Gcloud
 
       def data_complete?
         !@gapi["creationTime"].nil?
+      end
+
+      private
+
+      def get_table_ref table
+        if table.respond_to? :table_ref
+          table.table_ref
+        else
+          connection.table_ref_from_s table, table_ref
+        end
       end
     end
   end

@@ -35,6 +35,13 @@ describe Gcloud::Bigquery::Table, :copy, :mock_bigquery do
                                               target_description }
   let(:target_table) { Gcloud::Bigquery::Table.from_gapi target_table_hash,
                                                          bigquery.connection }
+  let(:target_table_other_proj_hash) { random_table_hash target_dataset,
+                                              target_table_id,
+                                              target_table_name,
+                                              target_description,
+                                              "target-project" }
+  let(:target_table_other_proj) { Gcloud::Bigquery::Table.from_gapi target_table_other_proj_hash,
+                                                         bigquery.connection }
 
   it "can copy itself" do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
@@ -55,6 +62,22 @@ describe Gcloud::Bigquery::Table, :copy, :mock_bigquery do
     job = source_table.copy target_table
     job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
+
+  it "can copy to a table identified by a string" do
+      mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+        json = JSON.parse(env.body)
+        json["configuration"]["copy"]["sourceTable"]["projectId"].must_equal source_table.project_id
+        json["configuration"]["copy"]["sourceTable"]["datasetId"].must_equal source_table.dataset_id
+        json["configuration"]["copy"]["sourceTable"]["tableId"].must_equal source_table.table_id
+        json["configuration"]["copy"]["destinationTable"]["projectId"].must_equal target_table_other_proj.project_id
+        json["configuration"]["copy"]["destinationTable"]["datasetId"].must_equal target_table_other_proj.dataset_id
+        json["configuration"]["copy"]["destinationTable"]["tableId"].must_equal target_table_other_proj.table_id
+        [200, {"Content-Type"=>"application/json"},
+         copy_job_json(source_table, target_table_other_proj)]
+      end
+
+      job = source_table.copy "target-project:target_dataset.target_table_id"
+    end
 
   it "can copy itself as a dryrun" do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
