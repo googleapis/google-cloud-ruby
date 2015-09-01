@@ -49,6 +49,19 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     dataset.default_expiration.must_equal default_expiration
   end
 
+  it "raises when creating a dataset with a blank id" do
+    id = ""
+
+    mock_connection.post "/bigquery/v2/projects/#{project}/datasets" do |env|
+      [400, { "Content-Type" => "application/json" },
+       invalid_dataset_id_error_json(id)]
+    end
+
+    assert_raises Gcloud::Bigquery::ApiError do
+      bigquery.create_dataset id
+    end
+  end
+
   it "lists datasets" do
     num_datasets = 3
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
