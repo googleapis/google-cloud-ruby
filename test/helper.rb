@@ -297,7 +297,7 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def random_table_hash dataset, id = nil, name = nil, description = nil
+  def random_table_hash dataset, id = nil, name = nil, description = nil, project_id = nil
     id ||= "my_table"
     name ||= "Table Name"
 
@@ -307,7 +307,7 @@ class MockBigquery < Minitest::Spec
       "id" => "#{project}:#{dataset}.#{id}",
       "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
       "tableReference" => {
-        "projectId" => project,
+        "projectId" => (project_id || project),
         "datasetId" => dataset,
         "tableId" => id
       },
