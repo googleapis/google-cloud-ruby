@@ -70,12 +70,12 @@ module Gcloud
     #     "first_name" => "Alice",
     #     "cities_lived" => [
     #       {
-    #         "place": "Seattle",
-    #         "number_of_years": 5
+    #         "place" => "Seattle",
+    #         "number_of_years" => 5
     #       },
     #       {
-    #         "place": "Stockholm",
-    #         "number_of_years": 6
+    #         "place" => "Stockholm",
+    #         "number_of_years" => 6
     #       }
     #     ]
     #   }
