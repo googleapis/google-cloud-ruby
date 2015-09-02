@@ -77,6 +77,7 @@ describe Gcloud::Bigquery::Table, :copy, :mock_bigquery do
       end
 
       job = source_table.copy "target-project:target_dataset.target_table_id"
+      job.must_be_kind_of Gcloud::Bigquery::CopyJob
     end
 
   it "can copy itself as a dryrun" do

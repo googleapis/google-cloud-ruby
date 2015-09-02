@@ -84,6 +84,15 @@ module Gcloud
       end
 
       ##
+      # The gapi fragment containing the Project ID, Dataset ID, and Table ID as
+      # a camel-cased hash.
+      def table_ref #:nodoc:
+        table_ref = @gapi["tableReference"]
+        table_ref = table_ref.to_hash if table_ref.respond_to? :to_hash
+        table_ref
+      end
+
+      ##
       # The name of the table.
       #
       # :category: Attributes

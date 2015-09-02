@@ -62,6 +62,61 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     end
   end
 
+  it "creates a dataset with optional access" do
+    mock_connection.post "/bigquery/v2/projects/#{project}/datasets" do |env|
+      json = JSON.parse env.body
+      access = json["access"]
+      access.wont_be :nil?
+      access.must_be_kind_of Array
+      access.wont_be :empty?
+      access.count.must_equal 1
+      rule = access.first
+      rule.wont_be :nil?
+      rule.must_be_kind_of Hash
+      rule["role"].must_equal "WRITER"
+      rule["userByEmail"].must_equal "writers@example.com"
+
+      ret_dataset = random_dataset_hash("my_dataset")
+      ret_dataset["access"] = access
+      [200, {"Content-Type"=>"application/json"},
+       ret_dataset.to_json]
+    end
+
+    dataset = bigquery.create_dataset "my_dataset",
+      access: [{"role"=>"WRITER", "userByEmail"=>"writers@example.com"}]
+    dataset.must_be_kind_of Gcloud::Bigquery::Dataset
+    dataset.access.wont_be :empty?
+  end
+
+  it "creates a dataset with access block" do
+    mock_connection.post "/bigquery/v2/projects/#{project}/datasets" do |env|
+      json = JSON.parse env.body
+      access = json["access"]
+      access.wont_be :nil?
+      access.must_be_kind_of Array
+      access.wont_be :empty?
+      access.count.must_equal 5
+      rule = access.last
+      rule.wont_be :nil?
+      rule.must_be_kind_of Hash
+      rule["role"].must_equal "WRITER"
+      rule["userByEmail"].must_equal "writers@example.com"
+
+      ret_dataset = random_dataset_hash("my_dataset")
+      ret_dataset["access"] = access
+      [200, {"Content-Type"=>"application/json"},
+       ret_dataset.to_json]
+    end
+
+    dataset = bigquery.create_dataset "my_dataset" do |acl|
+      refute acl.writer_user? "writers@example.com"
+      acl.add_writer_user "writers@example.com"
+      assert acl.writer_user? "writers@example.com"
+    end
+    dataset.must_be_kind_of Gcloud::Bigquery::Dataset
+    dataset.access.wont_be :empty?
+  end
+
   it "lists datasets" do
     num_datasets = 3
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|

@@ -79,15 +79,11 @@ module Gcloud
       # fields that are provided in the submitted dataset resource.
       def patch_dataset dataset_id, options = {}
         project_id = options[:project_id] || @project
-        body = { friendlyName: options[:name],
-                 description: options[:description],
-                 defaultTableExpirationMs: options[:default_expiration]
-               }.delete_if { |_, v| v.nil? }
 
         @client.execute(
           api_method: @bigquery.datasets.patch,
           parameters: { projectId: project_id, datasetId: dataset_id },
-          body_object: body
+          body_object: patch_dataset_request(options)
         )
       end
 
@@ -315,12 +311,21 @@ module Gcloud
         result
       end
 
+      def default_access_rules
+        [
+          { "role" => "OWNER",  "specialGroup" => "projectOwners" },
+          { "role" => "WRITER", "specialGroup" => "projectWriters" },
+          { "role" => "READER", "specialGroup" => "projectReaders" },
+          { "role" => "OWNER",  "userByEmail"  => credentials.issuer }
+        ]
+      end
+
       ##
       # Extracts at least +tbl+ group, and possibly +dts+ and +prj+ groups,
       # from strings in the formats: "my_table", "my_dataset.my_table", or
       # "my-project:my_dataset.my_table". Then merges project_id and
       # dataset_id from the default table if they are missing.
-      def table_ref_from_s str, default_table_ref
+      def self.table_ref_from_s str, default_table_ref
         str = str.to_s
         m = /\A(((?<prj>\S*):)?(?<dts>\S*)\.)?(?<tbl>\S*)\z/.match str
         unless m
@@ -355,11 +360,20 @@ module Gcloud
           "kind" => "bigquery#dataset",
           "datasetReference" => {
             "projectId" => @project,
-            "datasetId" => dataset_id
-          },
+            "datasetId" => dataset_id },
           "friendlyName" => options[:name],
           "description" => options[:description],
-          "defaultTableExpirationMs" => options[:expiration]
+          "defaultTableExpirationMs" => options[:expiration],
+          "access" => options[:access]
+        }.delete_if { |_, v| v.nil? }
+      end
+
+      def patch_dataset_request options = {}
+        {
+          friendlyName: options[:name],
+          description: options[:description],
+          defaultTableExpirationMs: options[:default_expiration],
+          access: options[:access]
         }.delete_if { |_, v| v.nil? }
       end
 

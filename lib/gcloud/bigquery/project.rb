@@ -264,6 +264,10 @@ module Gcloud
         end
       end
 
+      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/MethodLength
+      # Disabled rubocop because the level of abstraction is not violated here
+
       ##
       # Creates a new dataset.
       #
@@ -282,6 +286,11 @@ module Gcloud
       # <code>options[:expiration]</code>::
       #   The default lifetime of all tables in the dataset, in milliseconds.
       #   The minimum value is 3600000 milliseconds (one hour). (+Integer+)
+      # <code>options[:access]</code>::
+      #   The access rules for a Dataset using the Google Cloud Datastore API
+      #   data structure of an array of hashes. See {BigQuery Access
+      #   Control}[https://cloud.google.com/bigquery/access-control] for more
+      #   information. (+Array of Hashes+)
       #
       # === Returns
       #
@@ -307,7 +316,36 @@ module Gcloud
       #                                     name: "My Dataset",
       #                                     description: "This is my Dataset"
       #
+      # Access rules can be provided with the +access+ option:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #
+      #   dataset = bigquery.create_dataset "my_dataset",
+      #     access: [{"role"=>"WRITER", "userByEmail"=>"writers@example.com"}]
+      #
+      # Or access rules can be configured by using the block syntax:
+      # (See Dataset::Access)
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #
+      #   dataset = bigquery.create_dataset "my_dataset" do |access|
+      #     access.add_writer_user "writers@example.com"
+      #   end
+      #
       def create_dataset dataset_id, options = {}
+        if block_given?
+          access_builder = Dataset::Access.new connection.default_access_rules,
+                                               "projectId" => project
+          yield access_builder
+          options[:access] = access_builder.access if access_builder.changed?
+        end
+
         ensure_connection!
         resp = connection.insert_dataset dataset_id, options
         if resp.success?
@@ -316,6 +354,9 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+
+      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/MethodLength
 
       ##
       # Retrieves the list of datasets belonging to the project.

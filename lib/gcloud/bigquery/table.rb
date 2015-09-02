@@ -914,7 +914,7 @@ module Gcloud
         if table.respond_to? :table_ref
           table.table_ref
         else
-          connection.table_ref_from_s table, table_ref
+          Connection.table_ref_from_s table, table_ref
         end
       end
     end

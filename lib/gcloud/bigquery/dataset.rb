@@ -17,6 +17,7 @@ require "json"
 require "gcloud/bigquery/errors"
 require "gcloud/bigquery/table"
 require "gcloud/bigquery/dataset/list"
+require "gcloud/bigquery/dataset/access"
 
 module Gcloud
   module Bigquery
@@ -71,6 +72,15 @@ module Gcloud
       #
       def project_id
         @gapi["datasetReference"]["projectId"]
+      end
+
+      ##
+      # The gapi fragment containing the Project ID and Dataset ID as a
+      # camel-cased hash.
+      def dataset_ref #:nodoc:
+        dataset_ref = @gapi["datasetReference"]
+        dataset_ref = dataset_ref.to_hash if dataset_ref.respond_to? :to_hash
+        dataset_ref
       end
 
       ##
@@ -179,6 +189,89 @@ module Gcloud
       def location
         ensure_full_data!
         @gapi["location"]
+      end
+
+      ##
+      # Retrieves the access rules for a Dataset using the Google Cloud
+      # Datastore API data structure of an array of hashes. The rules can be
+      # updated when passing a block, see Dataset::Access for all the methods
+      # available. See {BigQuery Access
+      # Control}[https://cloud.google.com/bigquery/access-control] for more
+      # information.
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #
+      #   dataset.access #=> [{"role"=>"OWNER",
+      #                        "specialGroup"=>"projectOwners"},
+      #                       {"role"=>"WRITER",
+      #                        "specialGroup"=>"projectWriters"},
+      #                       {"role"=>"READER",
+      #                        "specialGroup"=>"projectReaders"},
+      #                       {"role"=>"OWNER",
+      #                        "userByEmail"=>"123456789-...com"}]
+      #
+      # Manage the access rules by passing a block.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #
+      #   dataset.access do |access|
+      #     access.add_owner_group "owners@example.com"
+      #     access.add_writer_user "writer@example.com"
+      #     access.remove_writer_user "readers@example.com"
+      #     access.add_reader_special :all
+      #     access.add_reader_view other_dataset_view_object
+      #   end
+      #
+      def access
+        ensure_full_data!
+        g = @gapi
+        g = g.to_hash if g.respond_to? :to_hash
+        a = g["access"] ||= []
+        return a unless block_given?
+        a2 = Access.new a, dataset_ref
+        yield a2
+        self.access = a2.access if a2.changed?
+      end
+
+      ##
+      # Sets the access rules for a Dataset using the Google Cloud Datastore API
+      # data structure of an array of hashes. See {BigQuery Access
+      # Control}[https://cloud.google.com/bigquery/access-control] for more
+      # information.
+      #
+      # This method is provided for advanced usage of managing the access rules.
+      # Calling #access with a block is the preferred way to manage access
+      # rules.
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #
+      #   dataset.access = [{"role"=>"OWNER",
+      #                      "specialGroup"=>"projectOwners"},
+      #                     {"role"=>"WRITER",
+      #                      "specialGroup"=>"projectWriters"},
+      #                     {"role"=>"READER",
+      #                      "specialGroup"=>"projectReaders"},
+      #                     {"role"=>"OWNER",
+      #                      "userByEmail"=>"123456789-...com"}]
+      #
+      def access= new_access
+        patch_gapi! access: new_access
       end
 
       ##
