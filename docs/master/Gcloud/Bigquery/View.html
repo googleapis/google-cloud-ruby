@@ -325,7 +325,7 @@ table fields referenced directly or indirectly by the top-level query.</p>
 
     
       <!-- <div class="method-source-code" id="created_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 148</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">created_at</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;creationTime&quot;</span>] <span class="ruby-operator">/</span> <span class="ruby-value">1000.0</span>)
@@ -394,7 +394,7 @@ table fields referenced directly or indirectly by the top-level query.</p>
 
     
       <!-- <div class="method-source-code" id="description-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 129</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">description</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;description&quot;</span>]
@@ -429,7 +429,7 @@ table fields referenced directly or indirectly by the top-level query.</p>
 
     
       <!-- <div class="method-source-code" id="etag-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 109</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">etag</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;etag&quot;</span>]
@@ -465,7 +465,7 @@ indefinitely. Expired tables will be deleted and their storage reclaimed.</p>
 
     
       <!-- <div class="method-source-code" id="expires_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 160</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 169</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">expires_at</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;expirationTime&quot;</span>].<span class="ruby-identifier">nil?</span>
@@ -501,7 +501,7 @@ indefinitely. Expired tables will be deleted and their storage reclaimed.</p>
 
     
       <!-- <div class="method-source-code" id="fields-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 223</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 232</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fields</span>
   <span class="ruby-identifier">f</span> = <span class="ruby-identifier">schema</span>[<span class="ruby-string">&quot;fields&quot;</span>]
   <span class="ruby-identifier">f</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
@@ -538,7 +538,7 @@ indefinitely. Expired tables will be deleted and their storage reclaimed.</p>
 
     
       <!-- <div class="method-source-code" id="headers-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 235</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 244</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">headers</span>
   <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>[<span class="ruby-string">&quot;name&quot;</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -573,7 +573,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="location-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 200</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 209</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">location</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;location&quot;</span>]
@@ -608,7 +608,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="modified_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 171</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 180</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">modified_at</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;lastModifiedTime&quot;</span>] <span class="ruby-operator">/</span> <span class="ruby-value">1000.0</span>)
@@ -643,7 +643,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="name-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 91</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;friendlyName&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -711,7 +711,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="query-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 244</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 253</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">query</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;view&quot;</span>][<span class="ruby-string">&quot;query&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;view&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -745,7 +745,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="schema-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 210</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 219</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">schema</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-identifier">s</span> = <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;schema&quot;</span>]
@@ -783,7 +783,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="table-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 181</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 190</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">table?</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;type&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;TABLE&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -852,7 +852,7 @@ numbers (0-9), or underscores (_). The maximum length is 1,024 characters.</p>
 
     
       <!-- <div class="method-source-code" id="url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 119</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">url</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
@@ -887,7 +887,7 @@ numbers (0-9), or underscores (_). The maximum length is 1,024 characters.</p>
 
     
       <!-- <div class="method-source-code" id="view-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 190</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">view?</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;type&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;VIEW&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1003,7 +1003,7 @@ caching</a>. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="data-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 329</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 338</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">sql</span> = <span class="ruby-node">&quot;SELECT * FROM #{@gapi[&#39;id&#39;]}&quot;</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -1087,7 +1087,7 @@ caching</a>. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 360</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 369</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -1127,7 +1127,7 @@ caching</a>. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="description-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 139</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">description=</span> <span class="ruby-identifier">new_description</span>
   <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">description</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_description</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1161,7 +1161,7 @@ caching</a>. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="name-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 100</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name=</span> <span class="ruby-identifier">new_name</span>
   <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_name</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1215,7 +1215,7 @@ Reference </a>.</p>
 
     
       <!-- <div class="method-source-code" id="query-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 271</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 280</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">query=</span> <span class="ruby-identifier">new_query</span>
   <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">query</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_query</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1249,7 +1249,7 @@ Reference </a>.</p>
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 375</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 384</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -1287,7 +1287,7 @@ Reference </a>.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 01, 2015.
+    Docs built on Sep 02, 2015.
   </div>
 </div>
 

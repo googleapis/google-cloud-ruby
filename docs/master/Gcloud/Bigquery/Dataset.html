@@ -111,6 +111,24 @@ dataset is contained within a specific project.</p>
 
   
     
+      <div>
+         Methods:
+
+        
+        
+
+        
+        
+            
+              <a href="#method-i-access">access</a>
+            
+              <a href="#method-i-access-3D">access=</a>
+            
+          
+        
+
+      </div>
+    
   
     
       <div>
@@ -221,6 +239,172 @@ dataset is contained within a specific project.</p>
 
         
           
+            <h2 id="5Buntitled-5D"> Methods</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="public-instance-methods" class="section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+      <div class="methods">
+        
+          <div id="access-method" class="method ">
+  <a name="method-i-access"></a>
+
+  
+    <h4>
+      <code>access()</code>
+      <span>
+        <a href="#method-i-access">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Retrieves the access rules for a <a href="Dataset.html">Dataset</a> using
+the Google Cloud <a href="../Datastore.html">Datastore</a> API data
+structure of an array of hashes. The rules can be updated when passing a
+block, see <a href="Dataset/Access.html">Dataset::Access</a> for all the
+methods available. See <a
+href="https://cloud.google.com/bigquery/access-control">BigQuery Access
+Control</a> for more information.</p>
+
+<h3 id="method-i-access-label-Examples">Examples<span><a href="#method-i-access-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre>require &quot;gcloud&quot;
+
+gcloud = Gcloud.new
+bigquery = gcloud.bigquery
+dataset = bigquery.dataset &quot;my_dataset&quot;
+
+dataset.access #=&gt; [{&quot;role&quot;=&gt;&quot;OWNER&quot;,
+                     &quot;specialGroup&quot;=&gt;&quot;projectOwners&quot;},
+                    {&quot;role&quot;=&gt;&quot;WRITER&quot;,
+                     &quot;specialGroup&quot;=&gt;&quot;projectWriters&quot;},
+                    {&quot;role&quot;=&gt;&quot;READER&quot;,
+                     &quot;specialGroup&quot;=&gt;&quot;projectReaders&quot;},
+                    {&quot;role&quot;=&gt;&quot;OWNER&quot;,
+                     &quot;userByEmail&quot;=&gt;&quot;123456789-...com&quot;}]</pre>
+
+<p>Manage the access rules by passing a block.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
+
+<span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">access</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">access</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">access</span>.<span class="ruby-identifier">add_owner_group</span> <span class="ruby-string">&quot;owners@example.com&quot;</span>
+  <span class="ruby-identifier">access</span>.<span class="ruby-identifier">add_writer_user</span> <span class="ruby-string">&quot;writer@example.com&quot;</span>
+  <span class="ruby-identifier">access</span>.<span class="ruby-identifier">remove_writer_user</span> <span class="ruby-string">&quot;readers@example.com&quot;</span>
+  <span class="ruby-identifier">access</span>.<span class="ruby-identifier">add_reader_special</span> :<span class="ruby-identifier">all</span>
+  <span class="ruby-identifier">access</span>.<span class="ruby-identifier">add_reader_view</span> <span class="ruby-identifier">other_dataset_view_object</span>
+<span class="ruby-keyword">end</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="access-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 235</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">access</span>
+  <span class="ruby-identifier">ensure_full_data!</span>
+  <span class="ruby-identifier">g</span> = <span class="ruby-ivar">@gapi</span>
+  <span class="ruby-identifier">g</span> = <span class="ruby-identifier">g</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
+  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">g</span>[<span class="ruby-string">&quot;access&quot;</span>] <span class="ruby-operator">||=</span> []
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">a</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-identifier">a2</span> = <span class="ruby-constant">Access</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">a</span>, <span class="ruby-identifier">dataset_ref</span>
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">a2</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">access</span> = <span class="ruby-identifier">a2</span>.<span class="ruby-identifier">access</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">a2</span>.<span class="ruby-identifier">changed?</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="access-3D-method" class="method ">
+  <a name="method-i-access-3D"></a>
+
+  
+    <h4>
+      <code>access=(new_access)</code>
+      <span>
+        <a href="#method-i-access-3D">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Sets the access rules for a <a href="Dataset.html">Dataset</a> using the
+Google Cloud <a href="../Datastore.html">Datastore</a> API data structure
+of an array of hashes. See <a
+href="https://cloud.google.com/bigquery/access-control">BigQuery Access
+Control</a> for more information.</p>
+
+<p>This method is provided for advanced usage of managing the access rules.
+Calling <a href="Dataset.html#method-i-access">access</a> with a block is
+the preferred way to manage access rules.</p>
+
+<h3 id="method-i-access-3D-label-Example">Example<span><a href="#method-i-access-3D-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
+
+<span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">access</span> = [{<span class="ruby-string">&quot;role&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;OWNER&quot;</span>,
+                   <span class="ruby-string">&quot;specialGroup&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;projectOwners&quot;</span>},
+                  {<span class="ruby-string">&quot;role&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;WRITER&quot;</span>,
+                   <span class="ruby-string">&quot;specialGroup&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;projectWriters&quot;</span>},
+                  {<span class="ruby-string">&quot;role&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;READER&quot;</span>,
+                   <span class="ruby-string">&quot;specialGroup&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;projectReaders&quot;</span>},
+                  {<span class="ruby-string">&quot;role&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;OWNER&quot;</span>,
+                   <span class="ruby-string">&quot;userByEmail&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;123456789-...com&quot;</span>}]
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="access-3D-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 273</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">access=</span> <span class="ruby-identifier">new_access</span>
+  <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">access</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_access</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+      </div>
+    </div>
+  
+
+
+
+          
         
           
             <h2 id="Attributes">Attributes Methods</h2>
@@ -261,7 +445,7 @@ dataset is contained within a specific project.</p>
 
     
       <!-- <div class="method-source-code" id="created_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 158</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">created_at</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;creationTime&quot;</span>] <span class="ruby-operator">/</span> <span class="ruby-value">1000.0</span>)
@@ -298,7 +482,7 @@ length is 1,024 characters.</p>
 
     
       <!-- <div class="method-source-code" id="dataset_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 63</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">dataset_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;datasetReference&quot;</span>][<span class="ruby-string">&quot;datasetId&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -332,7 +516,7 @@ length is 1,024 characters.</p>
 
     
       <!-- <div class="method-source-code" id="default_expiration-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 138</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_expiration</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;defaultTableExpirationMs&quot;</span>]
@@ -367,7 +551,7 @@ length is 1,024 characters.</p>
 
     
       <!-- <div class="method-source-code" id="default_expiration-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 149</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 159</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_expiration=</span> <span class="ruby-identifier">new_default_expiration</span>
   <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">default_expiration</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_default_expiration</span>
 <span class="ruby-keyword">end</span></pre>
@@ -401,7 +585,7 @@ length is 1,024 characters.</p>
 
     
       <!-- <div class="method-source-code" id="description-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 119</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 129</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">description</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;description&quot;</span>]
@@ -436,7 +620,7 @@ length is 1,024 characters.</p>
 
     
       <!-- <div class="method-source-code" id="description-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 129</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">description=</span> <span class="ruby-identifier">new_description</span>
   <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">description</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_description</span>
 <span class="ruby-keyword">end</span></pre>
@@ -470,7 +654,7 @@ length is 1,024 characters.</p>
 
     
       <!-- <div class="method-source-code" id="etag-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 99</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">etag</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;etag&quot;</span>]
@@ -506,7 +690,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="location-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 179</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 189</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">location</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;location&quot;</span>]
@@ -541,7 +725,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="modified_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 168</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 178</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">modified_at</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;lastModifiedTime&quot;</span>] <span class="ruby-operator">/</span> <span class="ruby-value">1000.0</span>)
@@ -576,7 +760,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="name-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 81</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;friendlyName&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -610,7 +794,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="name-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 90</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name=</span> <span class="ruby-identifier">new_name</span>
   <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_name</span>
 <span class="ruby-keyword">end</span></pre>
@@ -644,7 +828,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="project_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 72</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;datasetReference&quot;</span>][<span class="ruby-string">&quot;projectId&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -678,7 +862,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 109</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">url</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
@@ -800,7 +984,7 @@ caching</a>. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="query-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 597</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 690</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">query</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:dataset</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">dataset_id</span>
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:project</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">project_id</span>
@@ -929,7 +1113,7 @@ value is <code>true</code>. <code>options[:large_results]</code> must be
 
     
       <!-- <div class="method-source-code" id="query_job-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 528</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 621</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">query_job</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:dataset</span>] <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -1024,7 +1208,7 @@ Default is <code>false</code>. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 213</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 306</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_dataset</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">options</span>
@@ -1166,7 +1350,7 @@ resource </a> for more information. (<code>Hash</code>)</p>
 
     
       <!-- <div class="method-source-code" id="create_table-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 297</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 390</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_table</span> <span class="ruby-identifier">table_id</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">insert_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>, <span class="ruby-identifier">options</span>
@@ -1254,7 +1438,7 @@ numbers (0-9), or underscores (_). The maximum length is 1,024 characters.
 
     
       <!-- <div class="method-source-code" id="create_view-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 353</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 446</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_view</span> <span class="ruby-identifier">table_id</span>, <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:query</span>] = <span class="ruby-identifier">query</span>
   <span class="ruby-identifier">create_table</span> <span class="ruby-identifier">table_id</span>, <span class="ruby-identifier">options</span>
@@ -1312,7 +1496,7 @@ exist</p>
 
     
       <!-- <div class="method-source-code" id="table-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 383</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 476</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">table</span> <span class="ruby-identifier">table_id</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -1406,7 +1590,7 @@ href="Dataset/List.html#attribute-i-token">Gcloud::Bigquery::Dataset::List#token
 
     
       <!-- <div class="method-source-code" id="tables-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 446</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 539</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tables</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_tables</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">options</span>
@@ -1440,7 +1624,7 @@ href="Dataset/List.html#attribute-i-token">Gcloud::Bigquery::Dataset::List#token
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 01, 2015.
+    Docs built on Sep 02, 2015.
   </div>
 </div>
 
