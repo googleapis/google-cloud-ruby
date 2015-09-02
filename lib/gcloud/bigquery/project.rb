@@ -264,6 +264,7 @@ module Gcloud
         end
       end
 
+      # rubocop:disable Metrics/AbcSize
       # rubocop:disable Metrics/MethodLength
       # Disabled rubocop because the level of abstraction is not violated here
 
@@ -312,9 +313,9 @@ module Gcloud
       #
       def create_dataset dataset_id, options = {}
         if block_given?
-          access_builder = Dataset::Access.new([])
-          yield access_builder
-          options[:access] = access_builder.access if access_builder.changed?
+          ab = Dataset::Access.new([], "projectId" => project)
+          yield ab
+          options[:access] = ab.access if ab.changed?
         end
 
         ensure_connection!
@@ -326,6 +327,7 @@ module Gcloud
         end
       end
 
+      # rubocop:enable Metrics/AbcSize
       # rubocop:enable Metrics/MethodLength
 
       ##

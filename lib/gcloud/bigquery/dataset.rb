@@ -75,6 +75,15 @@ module Gcloud
       end
 
       ##
+      # The gapi fragment containing the Project ID and Dataset ID as a
+      # camel-cased hash.
+      def dataset_ref #:nodoc:
+        dataset_ref = @gapi["datasetReference"]
+        dataset_ref = dataset_ref.to_hash if dataset_ref.respond_to? :to_hash
+        dataset_ref
+      end
+
+      ##
       # A descriptive name for the dataset.
       #
       # :category: Attributes
@@ -219,7 +228,7 @@ module Gcloud
         g = g.to_hash if g.respond_to? :to_hash
         a = g["access"] ||= []
         return a unless block_given?
-        a2 = Access.new a
+        a2 = Access.new a, dataset_ref, connection
         yield a2
         self.access = a2.access if a2.changed?
       end

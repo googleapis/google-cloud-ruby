@@ -156,6 +156,69 @@ describe Gcloud::Bigquery::Dataset, :access, :mock_bigquery do
     end
   end
 
+  describe :view do
+    let(:view_id) { "new-view" }
+    let(:view_hash) { random_view_hash dataset_id, view_id }
+    let(:view) { Gcloud::Bigquery::View.from_gapi view_hash,
+                                                  bigquery.connection }
+
+    it "adds an access entry with specifying a view object" do
+      mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" do |env|
+        json = JSON.parse env.body
+        access = json["access"]
+        access.wont_be :nil?
+        access.must_be_kind_of Array
+        access.wont_be :empty?
+        access.count.must_equal 1
+        rule = access.first
+        rule.wont_be :nil?
+        rule.must_be_kind_of Hash
+        rule["role"].must_equal "READER"
+        rule["view"].wont_be :empty?
+        rule["view"]["projectId"].must_equal project
+        rule["view"]["datasetId"].must_equal dataset_id
+        rule["view"]["tableId"].must_equal view_id
+
+        ret_dataset = random_dataset_hash(dataset_id)
+        ret_dataset["access"] = access
+        [200, {"Content-Type"=>"application/json"},
+         ret_dataset.to_json]
+      end
+
+      dataset.access do |acl|
+        acl.add_reader_view view
+      end
+    end
+
+    it "adds an access entry with specifying a view string" do
+      mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" do |env|
+        json = JSON.parse env.body
+        access = json["access"]
+        access.wont_be :nil?
+        access.must_be_kind_of Array
+        access.wont_be :empty?
+        access.count.must_equal 1
+        rule = access.first
+        rule.wont_be :nil?
+        rule.must_be_kind_of Hash
+        rule["role"].must_equal "READER"
+        rule["view"].wont_be :empty?
+        rule["view"]["projectId"].must_equal "test-project_id"
+        rule["view"]["datasetId"].must_equal "test-dataset_id"
+        rule["view"]["tableId"].must_equal "test-view_id"
+
+        ret_dataset = random_dataset_hash(dataset_id)
+        ret_dataset["access"] = access
+        [200, {"Content-Type"=>"application/json"},
+         ret_dataset.to_json]
+      end
+
+      dataset.access do |acl|
+        acl.add_reader_view "test-project_id:test-dataset_id.test-view_id"
+      end
+    end
+  end
+
   it "updates multiple access entries in the block" do
     mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" do |env|
       json = JSON.parse env.body

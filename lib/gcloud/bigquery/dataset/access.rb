@@ -71,9 +71,11 @@ module Gcloud
         ##
         # Initialized a new Access object.
         # Must provide a valid Dataset object.
-        def initialize access #:nodoc:
-          @original = access.dup
-          @access = access.dup
+        def initialize access, context, connection #:nodoc:
+          @original   = access.dup
+          @access     = access.dup
+          @context    = context
+          @connection = connection
         end
 
         def changed? #:nodoc:
@@ -294,14 +296,11 @@ module Gcloud
         end
 
         def validate_view view #:nodoc:
-          unless view.is_a? Gcloud::Bigquery::View
-            fail ArgumentError "Not a view #{view}"
+          if view.respond_to? :table_ref
+            view.table_ref
+          else
+            @connection.table_ref_from_s view, @context
           end
-          {
-            "projectId" => view.project_id,
-            "datasetId" => view.dataset_id,
-            "tableId"   => view.table_id
-          }
         end
 
         def add_access_role_scope_value role, scope, value #:nodoc:
