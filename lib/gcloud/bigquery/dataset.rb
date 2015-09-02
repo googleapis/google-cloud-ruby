@@ -192,10 +192,14 @@ module Gcloud
       end
 
       ##
-      # Manage the Access rules for a Dataset. See Dataset::Acl for all the
-      # methods available. See {BigQuery Access
+      # Retrieves the access rules for a Dataset using the Google Cloud
+      # Datastore API data structure of an array of hashes. The rules can be
+      # managed when passing a block, see Dataset::Access for all the methods
+      # available. See {BigQuery Access
       # Control}[https://cloud.google.com/bigquery/access-control] for more
       # information.
+      #
+      # === Examples
       #
       #   require "gcloud"
       #
@@ -212,6 +216,8 @@ module Gcloud
       #                       {"role"=>"OWNER",
       #                        "userByEmail"=>"123456789-...com"}]
       #
+      # Manage the access rules by passing a block.
+      #
       #   dataset.access do |access|
       #     access.add_owner_group "owners@example.com"
       #     access.add_writer_user "writer@example.com"
@@ -219,8 +225,6 @@ module Gcloud
       #     access.add_reader_special :all
       #     access.add_reader_view other_dataset_view_object
       #   end
-      #
-      # See Dataset::Access
       #
       def access
         ensure_full_data!
@@ -233,6 +237,30 @@ module Gcloud
         self.access = a2.access if a2.changed?
       end
 
+      ##
+      # Sets the access rules for a Dataset using the Google Cloud Datastore API
+      # data structure of an array of hashes. Dataset::Access can also be used
+      # to update these access rules. See {BigQuery Access
+      # Control}[https://cloud.google.com/bigquery/access-control] for more
+      # information.
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #
+      #   dataset.access = [{"role"=>"OWNER",
+      #                      "specialGroup"=>"projectOwners"},
+      #                     {"role"=>"WRITER",
+      #                      "specialGroup"=>"projectWriters"},
+      #                     {"role"=>"READER",
+      #                      "specialGroup"=>"projectReaders"},
+      #                     {"role"=>"OWNER",
+      #                      "userByEmail"=>"123456789-...com"}]
+      #
       def access= new_access
         patch_gapi! access: new_access
       end
