@@ -311,6 +311,15 @@ module Gcloud
         result
       end
 
+      def default_access_rules
+        [
+          { "role" => "OWNER",  "specialGroup" => "projectOwners" },
+          { "role" => "WRITER", "specialGroup" => "projectWriters" },
+          { "role" => "READER", "specialGroup" => "projectReaders" },
+          { "role" => "OWNER",  "userByEmail"  => credentials.issuer }
+        ]
+      end
+
       ##
       # Extracts at least +tbl+ group, and possibly +dts+ and +prj+ groups,
       # from strings in the formats: "my_table", "my_dataset.my_table", or

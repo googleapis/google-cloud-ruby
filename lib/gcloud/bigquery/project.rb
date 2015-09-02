@@ -340,9 +340,10 @@ module Gcloud
       #
       def create_dataset dataset_id, options = {}
         if block_given?
-          ab = Dataset::Access.new([], "projectId" => project)
-          yield ab
-          options[:access] = ab.access if ab.changed?
+          access_builder = Dataset::Access.new connection.default_access_rules,
+                                               "projectId" => project
+          yield access_builder
+          options[:access] = access_builder.access if access_builder.changed?
         end
 
         ensure_connection!

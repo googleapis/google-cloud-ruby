@@ -95,8 +95,8 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
       access.wont_be :nil?
       access.must_be_kind_of Array
       access.wont_be :empty?
-      access.count.must_equal 1
-      rule = access.first
+      access.count.must_equal 5
+      rule = access.last
       rule.wont_be :nil?
       rule.must_be_kind_of Hash
       rule["role"].must_equal "WRITER"
