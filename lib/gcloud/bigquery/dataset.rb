@@ -194,7 +194,7 @@ module Gcloud
       ##
       # Retrieves the access rules for a Dataset using the Google Cloud
       # Datastore API data structure of an array of hashes. The rules can be
-      # managed when passing a block, see Dataset::Access for all the methods
+      # updated when passing a block, see Dataset::Access for all the methods
       # available. See {BigQuery Access
       # Control}[https://cloud.google.com/bigquery/access-control] for more
       # information.
@@ -218,6 +218,12 @@ module Gcloud
       #
       # Manage the access rules by passing a block.
       #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #
       #   dataset.access do |access|
       #     access.add_owner_group "owners@example.com"
       #     access.add_writer_user "writer@example.com"
@@ -239,10 +245,13 @@ module Gcloud
 
       ##
       # Sets the access rules for a Dataset using the Google Cloud Datastore API
-      # data structure of an array of hashes. Dataset::Access can also be used
-      # to update these access rules. See {BigQuery Access
+      # data structure of an array of hashes. See {BigQuery Access
       # Control}[https://cloud.google.com/bigquery/access-control] for more
       # information.
+      #
+      # This method is provided for advanced usage of managing the access rules.
+      # Calling #access with a block is the preferred way to manage access
+      # rules.
       #
       # === Example
       #
