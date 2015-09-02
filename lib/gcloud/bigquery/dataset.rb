@@ -228,7 +228,7 @@ module Gcloud
         g = g.to_hash if g.respond_to? :to_hash
         a = g["access"] ||= []
         return a unless block_given?
-        a2 = Access.new a, dataset_ref, connection
+        a2 = Access.new a, dataset_ref
         yield a2
         self.access = a2.access if a2.changed?
       end

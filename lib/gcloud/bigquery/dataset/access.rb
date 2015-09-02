@@ -71,11 +71,10 @@ module Gcloud
         ##
         # Initialized a new Access object.
         # Must provide a valid Dataset object.
-        def initialize access, context, connection #:nodoc:
+        def initialize access, context #:nodoc:
           @original   = access.dup
           @access     = access.dup
           @context    = context
-          @connection = connection
         end
 
         def changed? #:nodoc:
@@ -299,7 +298,7 @@ module Gcloud
           if view.respond_to? :table_ref
             view.table_ref
           else
-            @connection.table_ref_from_s view, @context
+            Connection.table_ref_from_s view, @context
           end
         end
 

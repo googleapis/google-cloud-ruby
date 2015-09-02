@@ -316,7 +316,7 @@ module Gcloud
       # from strings in the formats: "my_table", "my_dataset.my_table", or
       # "my-project:my_dataset.my_table". Then merges project_id and
       # dataset_id from the default table if they are missing.
-      def table_ref_from_s str, default_table_ref
+      def self.table_ref_from_s str, default_table_ref
         str = str.to_s
         m = /\A(((?<prj>\S*):)?(?<dts>\S*)\.)?(?<tbl>\S*)\z/.match str
         unless m
