@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/gce"
 require "gcloud/storage/errors"
 require "gcloud/storage/connection"
 require "gcloud/storage/credentials"
@@ -79,7 +80,8 @@ module Gcloud
       def self.default_project #:nodoc:
         ENV["STORAGE_PROJECT"] ||
           ENV["GCLOUD_PROJECT"] ||
-          ENV["GOOGLE_CLOUD_PROJECT"]
+          ENV["GOOGLE_CLOUD_PROJECT"] ||
+          Gcloud::GCE.project_id
       end
 
       ##

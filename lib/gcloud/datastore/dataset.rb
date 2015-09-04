@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/gce"
 require "gcloud/datastore/connection"
 require "gcloud/datastore/credentials"
 require "gcloud/datastore/entity"
@@ -80,7 +81,8 @@ module Gcloud
         ENV["DATASTORE_DATASET"] ||
           ENV["DATASTORE_PROJECT"] ||
           ENV["GCLOUD_PROJECT"] ||
-          ENV["GOOGLE_CLOUD_PROJECT"]
+          ENV["GOOGLE_CLOUD_PROJECT"] ||
+          Gcloud::GCE.project_id
       end
 
       ##
