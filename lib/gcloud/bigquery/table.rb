@@ -658,7 +658,7 @@ module Gcloud
       #   file = bucket.file "file-name.csv"
       #   load_job = table.load file
       #
-      # Or, you can upload a smaller file directly.
+      # Or, you can upload a file directly.
       # See {Loading Data with a POST Request}[
       # https://cloud.google.com/bigquery/loading-data-post-request#multipart].
       #
@@ -671,6 +671,23 @@ module Gcloud
       #
       #   file = File.open "my_data.csv"
       #   load_job = table.load file
+      #
+      # === A note about large direct uploads
+      #
+      # You may encounter a broken pipe error while attempting to upload large
+      # files. To avoid this problem, add
+      # {httpclient}[https://rubygems.org/gems/httpclient] as a dependency to
+      # your project, and configure {Faraday}[https://rubygems.org/gems/faraday]
+      # to use it, after requiring Gcloud, but before initiating your Gcloud
+      # connection.
+      #
+      #   require "gcloud"
+      #
+      #   Faraday.default_adapter = :httpclient
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
       #
       # :category: Data
       #

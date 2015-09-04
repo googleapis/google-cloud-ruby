@@ -227,6 +227,22 @@ module Gcloud
   #   bucket.create_file "/var/todo-app/avatars/heidi/400x400.png",
   #                      "avatars/heidi/400x400.png"
   #
+  # === A note about large uploads
+  #
+  # You may encounter a broken pipe error while attempting to upload large
+  # files. To avoid this problem, add
+  # {httpclient}[https://rubygems.org/gems/httpclient] as a dependency to your
+  # project, and configure {Faraday}[https://rubygems.org/gems/faraday] to use
+  # it, after requiring Gcloud, but before initiating your Gcloud connection.
+  #
+  #   require "gcloud"
+  #
+  #   Faraday.default_adapter = :httpclient
+  #
+  #   gcloud = Gcloud.new
+  #   storage = gcloud.storage
+  #   bucket = storage.bucket "my-todo-app"
+  #
   # == Downloading a File
   #
   # Files can be downloaded to the local file system. (See File#download)

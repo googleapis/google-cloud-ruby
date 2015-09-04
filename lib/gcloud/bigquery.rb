@@ -336,6 +336,22 @@ module Gcloud
   # default format for load operations, the option is not actually necessary.
   # For JSON saved with a +.txt+ extension, however, it would be.
   #
+  # === A note about large uploads
+  #
+  # You may encounter a broken pipe error while attempting to upload large
+  # files. To avoid this problem, add
+  # {httpclient}[https://rubygems.org/gems/httpclient] as a dependency to your
+  # project, and configure {Faraday}[https://rubygems.org/gems/faraday] to use
+  # it, after requiring Gcloud, but before initiating your Gcloud connection.
+  #
+  #   require "gcloud"
+  #
+  #   Faraday.default_adapter = :httpclient
+  #
+  #   gcloud = Gcloud.new
+  #   bigquery = gcloud.bigquery
+  #   dataset = bigquery.dataset "my_dataset"
+  #
   # == Exporting query results to Google Cloud Storage
   #
   # The example below shows how to pass the +table+ option with a query in order

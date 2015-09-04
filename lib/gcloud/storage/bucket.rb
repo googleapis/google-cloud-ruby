@@ -324,6 +324,23 @@ module Gcloud
       #                      "destination/path/file.ext",
       #                      chunk_size: 1024*1024 # 1 MB chunk
       #
+      # ==== A note about large uploads
+      #
+      # You may encounter a broken pipe error while attempting to upload large
+      # files. To avoid this problem, add
+      # {httpclient}[https://rubygems.org/gems/httpclient] as a dependency to
+      # your project, and configure {Faraday}[https://rubygems.org/gems/faraday]
+      # to use it, after requiring Gcloud, but before initiating your Gcloud
+      # connection.
+      #
+      #   require "gcloud"
+      #
+      #   Faraday.default_adapter = :httpclient
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #   bucket = storage.bucket "my-todo-app"
+      #
       def create_file file, path = nil, options = {}
         ensure_connection!
         ensure_file_exists! file
