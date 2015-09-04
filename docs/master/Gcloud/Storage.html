@@ -257,6 +257,25 @@ href="Storage/Bucket.html#method-i-create_file">Gcloud::Storage::Bucket#create_f
                    <span class="ruby-string">&quot;avatars/heidi/400x400.png&quot;</span>
 </pre>
 
+<h3 id="module-Gcloud::Storage-label-A+note+about+large+uploads">A note about large uploads<span><a href="#module-Gcloud::Storage-label-A+note+about+large+uploads">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>You may encounter a broken pipe error while attempting to upload large
+files. To avoid this problem, add <a
+href="https://rubygems.org/gems/httpclient">httpclient</a> as a dependency
+to your project, and configure <a
+href="https://rubygems.org/gems/faraday">Faraday</a> to use it, after
+requiring <a href="../Gcloud.html">Gcloud</a>, but before initiating your
+<a href="../Gcloud.html">Gcloud</a> connection.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">default_adapter</span> = :<span class="ruby-identifier">httpclient</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+</pre>
+
 <h2 id="module-Gcloud::Storage-label-Downloading+a+File">Downloading a <a href="Storage/File.html">File</a><span><a href="#module-Gcloud::Storage-label-Downloading+a+File">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>Files can be downloaded to the local file system. (See <a
@@ -414,7 +433,7 @@ email address:</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 03, 2015.
+    Docs built on Sep 04, 2015.
   </div>
 </div>
 

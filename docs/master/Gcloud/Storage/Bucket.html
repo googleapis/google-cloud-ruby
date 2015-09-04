@@ -251,7 +251,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 392</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 409</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acl</span>
   <span class="ruby-ivar">@acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -372,11 +372,30 @@ nearest acceptible value.</p>
                    <span class="ruby-string">&quot;destination/path/file.ext&quot;</span>,
                    <span class="ruby-identifier">chunk_size</span><span class="ruby-operator">:</span> <span class="ruby-value">1024</span><span class="ruby-operator">*</span><span class="ruby-value">1024</span> <span class="ruby-comment"># 1 MB chunk</span>
 </pre>
+
+<h4 id="method-i-create_file-label-A+note+about+large+uploads">A note about large uploads<span><a href="#method-i-create_file-label-A+note+about+large+uploads">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>You may encounter a broken pipe error while attempting to upload large
+files. To avoid this problem, add <a
+href="https://rubygems.org/gems/httpclient">httpclient</a> as a dependency
+to your project, and configure <a
+href="https://rubygems.org/gems/faraday">Faraday</a> to use it, after
+requiring <a href="../../Gcloud.html">Gcloud</a>, but before initiating
+your <a href="../../Gcloud.html">Gcloud</a> connection.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">default_adapter</span> = :<span class="ruby-identifier">httpclient</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="create_file-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 327</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 344</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_file</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">ensure_file_exists!</span> <span class="ruby-identifier">file</span>
@@ -507,7 +526,7 @@ permissions:</p>
 
     
       <!-- <div class="method-source-code" id="default_acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 446</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 463</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_acl</span>
   <span class="ruby-ivar">@default_acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultAcl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1069,7 +1088,7 @@ href="../Storage.html">Storage</a> service.</p>
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 452</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 469</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_bucket</span> <span class="ruby-identifier">name</span>
@@ -1172,7 +1191,7 @@ href="../Storage.html">Storage</a> service.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 03, 2015.
+    Docs built on Sep 04, 2015.
   </div>
 </div>
 

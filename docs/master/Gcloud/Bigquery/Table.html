@@ -1538,7 +1538,7 @@ errors. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="insert-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 731</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 748</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span> <span class="ruby-identifier">rows</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">rows</span> = [<span class="ruby-identifier">rows</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -1671,7 +1671,7 @@ returned. (<code>Array</code>)</p>
 <span class="ruby-identifier">load_job</span> = <span class="ruby-identifier">table</span>.<span class="ruby-identifier">load</span> <span class="ruby-identifier">file</span>
 </pre>
 
-<p>Or, you can upload a smaller file directly. See {Loading <a
+<p>Or, you can upload a file directly. See {Loading <a
 href="Data.html">Data</a> with a POST Request}[ <a
 href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">cloud.google.com/bigquery/loading-data-post-request#multipart</a>].</p>
 
@@ -1685,11 +1685,30 @@ href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">clo
 <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-string">&quot;my_data.csv&quot;</span>
 <span class="ruby-identifier">load_job</span> = <span class="ruby-identifier">table</span>.<span class="ruby-identifier">load</span> <span class="ruby-identifier">file</span>
 </pre>
+
+<h3 id="method-i-load-label-A+note+about+large+direct+uploads">A note about large direct uploads<span><a href="#method-i-load-label-A+note+about+large+direct+uploads">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>You may encounter a broken pipe error while attempting to upload large
+files. To avoid this problem, add <a
+href="https://rubygems.org/gems/httpclient">httpclient</a> as a dependency
+to your project, and configure <a
+href="https://rubygems.org/gems/faraday">Faraday</a> to use it, after
+requiring <a href="../../Gcloud.html">Gcloud</a>, but before initiating
+your <a href="../../Gcloud.html">Gcloud</a> connection.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">default_adapter</span> = :<span class="ruby-identifier">httpclient</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="load-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 677</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 694</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">load</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">storage_url?</span> <span class="ruby-identifier">file</span>
@@ -1808,7 +1827,7 @@ href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">clo
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 762</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 779</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -1848,7 +1867,7 @@ href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">clo
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 777</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 794</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -1886,7 +1905,7 @@ href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">clo
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 03, 2015.
+    Docs built on Sep 04, 2015.
   </div>
 </div>
 

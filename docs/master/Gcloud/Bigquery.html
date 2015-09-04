@@ -372,6 +372,25 @@ situations. Because CSV is the default format for load operations, the
 option is not actually necessary. For JSON saved with a <code>.txt</code>
 extension, however, it would be.</p>
 
+<h3 id="module-Gcloud::Bigquery-label-A+note+about+large+uploads">A note about large uploads<span><a href="#module-Gcloud::Bigquery-label-A+note+about+large+uploads">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>You may encounter a broken pipe error while attempting to upload large
+files. To avoid this problem, add <a
+href="https://rubygems.org/gems/httpclient">httpclient</a> as a dependency
+to your project, and configure <a
+href="https://rubygems.org/gems/faraday">Faraday</a> to use it, after
+requiring <a href="../Gcloud.html">Gcloud</a>, but before initiating your
+<a href="../Gcloud.html">Gcloud</a> connection.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">default_adapter</span> = :<span class="ruby-identifier">httpclient</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
+</pre>
+
 <h2 id="module-Gcloud::Bigquery-label-Exporting+query+results+to+Google+Cloud+Storage">Exporting query results to Google Cloud <a href="Storage.html">Storage</a><span><a href="#module-Gcloud::Bigquery-label-Exporting+query+results+to+Google+Cloud+Storage">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>The example below shows how to pass the <code>table</code> option with a
@@ -441,7 +460,7 @@ Data From BigQuery</a> for details.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 03, 2015.
+    Docs built on Sep 04, 2015.
   </div>
 </div>
 
