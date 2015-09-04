@@ -66,34 +66,4 @@ describe Gcloud::Bigquery::Table, :update, :mock_bigquery do
     table.description.must_equal new_description
     table.schema.must_equal schema
   end
-
-  it "updates its schema" do
-    new_schema = schema.dup
-    new_schema["fields"].first["name"].must_equal "name"
-    new_schema["fields"].first["name"] = "moniker"
-
-    mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}" do |env|
-      json = JSON.parse env.body
-      json["schema"].must_equal new_schema
-      [200, {"Content-Type"=>"application/json"},
-       new_table_schema_json]
-    end
-
-    table.name.must_equal table_name
-    table.description.must_equal description
-    table.schema.must_equal schema
-
-    table.schema = new_schema
-
-    table.name.must_equal table_name
-    table.description.must_equal description
-    table.schema.must_equal new_schema
-    table.schema["fields"].first["name"].must_equal "moniker"
-  end
-
-  def new_table_schema_json
-    hash = random_table_hash dataset_id, table_id, table_name, description
-    hash["schema"]["fields"].first["name"] = "moniker"
-    hash.to_json
-  end
 end

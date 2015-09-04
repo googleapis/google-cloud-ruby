@@ -27,22 +27,20 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
         {
           "name" => "name",
           "type" => "STRING",
-          "mode" => "NULLABLE"
+          "mode" => "REQUIRED"
         },
         {
           "name" => "age",
-          "type" => "INTEGER",
-          "mode" => "NULLABLE"
+          "type" => "INTEGER"
         },
         {
           "name" => "score",
           "type" => "FLOAT",
-          "mode" => "NULLABLE"
+          "description" => "A score from 0.0 to 10.0"
         },
         {
           "name" => "active",
-          "type" => "BOOLEAN",
-          "mode" => "NULLABLE"
+          "type" => "BOOLEAN"
         }
       ]
     }
@@ -106,7 +104,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     table.wont_be :view?
   end
 
-  it "creates a table with a name, description, and schema" do
+  it "creates a table with a name, description, and schema option" do
     id = "my_table"
     name = "My Table"
     description = "This is my table"
@@ -114,6 +112,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       JSON.parse(env.body)["friendlyName"].must_equal name
       JSON.parse(env.body)["description"].must_equal description
+      JSON.parse(env.body)["schema"].must_equal table_schema
       [200, {"Content-Type" => "application/json"},
        create_table_json(id, name, description)]
     end
@@ -126,6 +125,28 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     table.table_id.must_equal id
     table.name.must_equal name
     table.description.must_equal description
+    table.schema.must_equal table_schema
+    table.must_be :table?
+    table.wont_be :view?
+  end
+
+  it "creates a table with a schema block" do
+    id = "my_table"
+
+    mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      JSON.parse(env.body)["schema"].must_equal table_schema
+      [200, {"Content-Type" => "application/json"},
+       create_table_json(id, name, description)]
+    end
+
+    table = dataset.create_table id do |schema|
+      schema.string "name", mode: :required
+      schema.integer "age"
+      schema.float "score", description: "A score from 0.0 to 10.0"
+      schema.boolean "active"
+    end
+    table.must_be_kind_of Gcloud::Bigquery::Table
+    table.table_id.must_equal id
     table.schema.must_equal table_schema
     table.must_be :table?
     table.wont_be :view?

@@ -16,6 +16,7 @@
 require "gcloud/bigquery/view"
 require "gcloud/bigquery/data"
 require "gcloud/bigquery/table/list"
+require "gcloud/bigquery/table/schema"
 require "gcloud/bigquery/errors"
 require "gcloud/bigquery/insert_response"
 require "gcloud/upload"
@@ -36,35 +37,14 @@ module Gcloud
     #   gcloud = Gcloud.new
     #   bigquery = gcloud.bigquery
     #   dataset = bigquery.dataset "my_dataset"
-    #   table = dataset.create_table "my_table"
     #
-    #   schema = {
-    #     "fields" => [
-    #       {
-    #         "name" => "first_name",
-    #         "type" => "STRING",
-    #         "mode" => "REQUIRED"
-    #       },
-    #       {
-    #         "name" => "cities_lived",
-    #         "type" => "RECORD",
-    #         "mode" => "REPEATED",
-    #         "fields" => [
-    #           {
-    #             "name" => "place",
-    #             "type" => "STRING",
-    #             "mode" => "REQUIRED"
-    #           },
-    #           {
-    #             "name" => "number_of_years",
-    #             "type" => "INTEGER",
-    #             "mode" => "REQUIRED"
-    #           }
-    #         ]
-    #       }
-    #     ]
-    #   }
-    #   table.schema = schema
+    #   table = dataset.create_table "my_table" do |schema|
+    #     schema.string "first_name", mode: :required
+    #     schema.record "cities_lived", mode: :repeated do |nested_schema|
+    #       nested_schema.string "place", mode: :required
+    #       nested_schema.integer "number_of_years", mode: :required
+    #     end
+    #   end
     #
     #   row = {
     #     "first_name" => "Alice",
@@ -311,20 +291,64 @@ module Gcloud
       end
 
       ##
-      # The schema of the table.
+      # Returns the table's schema as hash containing the keys and values
+      # returned by the Google Cloud BigQuery {Rest API
+      # }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource].
+      # This method can also be used to replace or update the schema by passing
+      # a block. See Table::Schema for available methods. To replace the current
+      # schema by passing a hash instead, use #schema=.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:replace]</code>::
+      #   Whether to replace the existing schema with the new schema. If
+      #   +false+, new fields will be added to the existing schema.  The default
+      #   value is +true+. (+Boolean+)
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.create_table "my_table"
+      #
+      #   table.schema do |schema|
+      #     schema.string "first_name", mode: :required
+      #     schema.record "cities_lived", mode: :repeated do |nested_schema|
+      #       nested_schema.string "place", mode: :required
+      #       nested_schema.integer "number_of_years", mode: :required
+      #     end
+      #   end
       #
       # :category: Attributes
       #
-      def schema
+      def schema options = {}
         ensure_full_data!
-        s = @gapi["schema"]
-        s = s.to_hash if s.respond_to? :to_hash
-        s = {} if s.nil?
-        s
+        g = @gapi
+        g = g.to_hash if g.respond_to? :to_hash
+        s = g["schema"] ||= {}
+        return s unless block_given?
+        old_schema = options[:replace] == false ? s : nil
+        schema_builder = Schema.new old_schema
+        yield schema_builder
+        self.schema = schema_builder.schema if schema_builder.changed?
       end
 
       ##
       # Updates the schema of the table.
+      # To update the schema using a block instead, use #schema.
+      #
+      # === Parameters
+      #
+      # +schema+::
+      #   A hash containing keys and values as specified by the Google Cloud
+      #   BigQuery {Rest API
+      #   }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource]
+      #   . (+Hash+)
       #
       # === Example
       #

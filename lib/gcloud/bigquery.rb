@@ -209,33 +209,13 @@ module Gcloud
   #   bigquery = gcloud.bigquery
   #   dataset = bigquery.dataset "my_dataset"
   #
-  #   schema = {
-  #     "fields" => [
-  #       {
-  #         "name" => "first_name",
-  #         "type" => "STRING",
-  #         "mode" => "REQUIRED"
-  #       },
-  #       {
-  #         "name" => "cities_lived",
-  #         "type" => "RECORD",
-  #         "mode" => "REPEATED",
-  #         "fields" => [
-  #           {
-  #             "name" => "place",
-  #             "type" => "STRING",
-  #             "mode" => "REQUIRED"
-  #           },
-  #           {
-  #             "name" => "number_of_years",
-  #             "type" => "INTEGER",
-  #             "mode" => "REQUIRED"
-  #           }
-  #         ]
-  #       }
-  #     ]
-  #   }
-  #   table = dataset.create_table "people", schema: schema
+  #   table = dataset.create_table "people" do |schema|
+  #     schema.string "first_name", mode: :required
+  #     schema.record "cities_lived", mode: :repeated do |nested_schema|
+  #       nested_schema.string "place", mode: :required
+  #       nested_schema.integer "number_of_years", mode: :required
+  #     end
+  #   end
   #
   # Because of the repeated field in this schema, we cannot use the CSV format
   # to load data into the table.
@@ -306,26 +286,11 @@ module Gcloud
   #   gcloud = Gcloud.new
   #   bigquery = gcloud.bigquery
   #   dataset = bigquery.dataset "my_dataset"
-  #   schema = {
-  #     "fields" => [
-  #       {
-  #         "name" => "name",
-  #         "type" => "STRING",
-  #         "mode" => "REQUIRED"
-  #       },
-  #       {
-  #         "name" => "sex",
-  #         "type" => "STRING",
-  #         "mode" => "REQUIRED"
-  #       },
-  #       {
-  #         "name" => "number",
-  #         "type" => "INTEGER",
-  #         "mode" => "REQUIRED"
-  #       }
-  #     ]
-  #   }
-  #   table = dataset.create_table "baby_names", schema: schema
+  #   table = dataset.create_table "baby_names" do |schema|
+  #     schema.string "name", mode: :required
+  #     schema.string "sex", mode: :required
+  #     schema.integer "number", mode: :required
+  #   end
   #
   #   file = File.open "names/yob2014.txt"
   #   load_job = table.load file, format: "csv"
