@@ -330,10 +330,11 @@ module Gcloud
       # <code>options[:description]</code>::
       #   A user-friendly description of the table. (+String+)
       # <code>options[:schema]</code>::
-      #   A schema specifying fields and data types for the table. See the
+      #   A hash specifying fields and data types for the table. A block may be
+      #   passed instead (see examples.) For the format of this hash, see the
       #   {Tables resource
       #   }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource]
-      #   for more information. (+Hash+)
+      #   . (+Hash+)
       #
       # === Returns
       #
@@ -348,7 +349,35 @@ module Gcloud
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.create_table "my_table"
       #
-      # A name and description can be provided:
+      # You can also pass name and description options.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.create_table "my_table"
+      #                                name: "My Table",
+      #                                description: "A description of my table."
+      #
+      # You can define the table's schema using a block.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.create_table "my_table" do |schema|
+      #     schema.string "first_name", mode: :required
+      #     schema.record "cities_lived", mode: :repeated do |nested_schema|
+      #       nested_schema.string "place", mode: :required
+      #       nested_schema.integer "number_of_years", mode: :required
+      #     end
+      #   end
+      #
+      # Or, if you are adapting existing code that was written for the {Rest API
+      # }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource],
+      # you can pass the table's schema as a hash.
       #
       #   require "gcloud"
       #
@@ -382,9 +411,7 @@ module Gcloud
       #       }
       #     ]
       #   }
-      #   table = dataset.create_table "my_table",
-      #                                name: "My Table",
-      #                                schema: schema
+      #   table = dataset.create_table "my_table", schema: schema
       #
       # :category: Table
       #

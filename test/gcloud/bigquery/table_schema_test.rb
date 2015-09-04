@@ -70,7 +70,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
       [200, { "Content-Type" => "application/json" }, new_table_data.to_json]
     end
 
-    table.schema replace: true do |schema|
+    table.schema do |schema|
       schema.string "first_name", mode: :required
       schema.integer "rank", description: "An integer value from 1 to 100"
       schema.float "accuracy"
@@ -90,7 +90,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
       [200, { "Content-Type" => "application/json" }, new_table_data.to_json]
     end
 
-    table.schema do |schema|
+    table.schema replace: false do |schema|
       schema.timestamp "start_date"
     end
 
@@ -109,7 +109,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
       [200, { "Content-Type" => "application/json" }, new_table_data.to_json]
     end
 
-    table.schema replace: true do |schema|
+    table.schema do |schema|
       schema.string "first_name", mode: :required
       schema.record "cities_lived", mode: :repeated do |nested|
         nested.integer "rank", description: "An integer value from 1 to 100"
@@ -124,7 +124,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     original_schema = table.schema.dup
 
     assert_raises ArgumentError do
-      table.schema replace: true do |schema|
+      table.schema do |schema|
         schema.string "first_name", mode: :required
         schema.record "countries_lived", mode: :repeated do |nested|
           nested.record "cities_lived", mode: :repeated do |nested_2|

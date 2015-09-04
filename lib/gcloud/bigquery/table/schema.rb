@@ -17,14 +17,13 @@ module Gcloud
   module Bigquery
     class Table
       ##
-      # Table::Schema is a builder for a BigQuery table schema. It enables a
-      # "dirty check" comparison of the newly built schema with a provided
-      # existing schema.
+      # = Table Schema
       #
-      # Every table is defined by a schema
-      # that may contain nested and repeated fields. (For more information
-      # about nested and repeated fields, see {Preparing Data for BigQuery
-      # }[https://cloud.google.com/bigquery/preparing-data-for-bigquery].)
+      # A builder for BigQuery table schemas, passed to block arguments to
+      # Dataset#create_table and Table#schema. Supports nested and
+      # repeated fields via a nested block. For more information about BigQuery
+      # schema definitions, see {Preparing Data for BigQuery
+      # }[https://cloud.google.com/bigquery/preparing-data-for-bigquery].
       #
       #   require "gcloud"
       #
@@ -41,42 +40,15 @@ module Gcloud
       #     end
       #   end
       #
-      #   table.schema #=> {
-      #     "fields" => [
-      #       {
-      #         "name" => "first_name",
-      #         "type" => "STRING",
-      #         "mode" => "REQUIRED"
-      #       },
-      #       {
-      #         "name" => "cities_lived",
-      #         "type" => "RECORD",
-      #         "mode" => "REPEATED",
-      #         "fields" => [
-      #           {
-      #             "name" => "place",
-      #             "type" => "STRING",
-      #             "mode" => "REQUIRED"
-      #           },
-      #           {
-      #             "name" => "number_of_years",
-      #             "type" => "INTEGER",
-      #             "mode" => "REQUIRED"
-      #           }
-      #         ]
-      #       }
-      #     ]
-      #   }
-      #
       class Schema
-        MODES = %w( NULLABLE REQUIRED REPEATED )
-        TYPES = %w( STRING INTEGER FLOAT BOOLEAN TIMESTAMP RECORD )
+        MODES = %w( NULLABLE REQUIRED REPEATED ) #:nodoc:
+        TYPES = %w( STRING INTEGER FLOAT BOOLEAN TIMESTAMP RECORD ) #:nodoc:
 
         attr_reader :fields #:nodoc:
 
         ##
         # Initializes a new schema object with an existing schema.
-        def initialize schema = nil, nested = false
+        def initialize schema = nil, nested = false #:nodoc:
           fields = (schema && schema["fields"]) || []
           @original_fields = fields.dup
           @fields = fields.dup
@@ -87,45 +59,165 @@ module Gcloud
           @original_fields != @fields
         end
 
-        def schema
+        ##
+        # Returns the schema as hash containing the keys and values specified by
+        # the Google Cloud BigQuery {Rest API
+        # }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource]
+        # .
+        def schema #:nodoc:
           {
             "fields" => @fields
           }
         end
 
+        ##
+        # Adds a string field to the schema.
+        #
+        # === Parameters
+        #
+        # +name+::
+        #   The field name. The name must contain only letters (a-z, A-Z),
+        #   numbers (0-9), or underscores (_), and must start with a letter or
+        #   underscore. The maximum length is 128 characters. (+String+)
+        # +options+::
+        #   An optional Hash for controlling additional behavior. (+Hash+)
+        # <code>options[:description]</code>::
+        #   A description of the field. (+String+)
+        # <code>options[:mode]</code>::
+        #   The field's mode. The possible values are +:nullable+, +:required+,
+        #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
         def string name, options = {}
           add_field name, :string, nil, options
         end
 
+        ##
+        # Adds an integer field to the schema.
+        #
+        # === Parameters
+        #
+        # +name+::
+        #   The field name. The name must contain only letters (a-z, A-Z),
+        #   numbers (0-9), or underscores (_), and must start with a letter or
+        #   underscore. The maximum length is 128 characters. (+String+)
+        # +options+::
+        #   An optional Hash for controlling additional behavior. (+Hash+)
+        # <code>options[:description]</code>::
+        #   A description of the field. (+String+)
+        # <code>options[:mode]</code>::
+        #   The field's mode. The possible values are +:nullable+, +:required+,
+        #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
         def integer name, options = {}
           add_field name, :integer, nil, options
         end
 
+        ##
+        # Adds a floating-point number field to the schema.
+        #
+        # === Parameters
+        #
+        # +name+::
+        #   The field name. The name must contain only letters (a-z, A-Z),
+        #   numbers (0-9), or underscores (_), and must start with a letter or
+        #   underscore. The maximum length is 128 characters. (+String+)
+        # +options+::
+        #   An optional Hash for controlling additional behavior. (+Hash+)
+        # <code>options[:description]</code>::
+        #   A description of the field. (+String+)
+        # <code>options[:mode]</code>::
+        #   The field's mode. The possible values are +:nullable+, +:required+,
+        #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
         def float name, options = {}
           add_field name, :float, nil, options
         end
 
+        ##
+        # Adds a boolean field to the schema.
+        #
+        # === Parameters
+        #
+        # +name+::
+        #   The field name. The name must contain only letters (a-z, A-Z),
+        #   numbers (0-9), or underscores (_), and must start with a letter or
+        #   underscore. The maximum length is 128 characters. (+String+)
+        # +options+::
+        #   An optional Hash for controlling additional behavior. (+Hash+)
+        # <code>options[:description]</code>::
+        #   A description of the field. (+String+)
+        # <code>options[:mode]</code>::
+        #   The field's mode. The possible values are +:nullable+, +:required+,
+        #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
         def boolean name, options = {}
           add_field name, :boolean, nil, options
         end
 
+        ##
+        # Adds a timestamp field to the schema.
+        #
+        # === Parameters
+        #
+        # +name+::
+        #   The field name. The name must contain only letters (a-z, A-Z),
+        #   numbers (0-9), or underscores (_), and must start with a letter or
+        #   underscore. The maximum length is 128 characters. (+String+)
+        # +options+::
+        #   An optional Hash for controlling additional behavior. (+Hash+)
+        # <code>options[:description]</code>::
+        #   A description of the field. (+String+)
+        # <code>options[:mode]</code>::
+        #   The field's mode. The possible values are +:nullable+, +:required+,
+        #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
         def timestamp name, options = {}
           add_field name, :timestamp, nil, options
         end
 
+        ##
+        # Adds a record field to the schema. A block must be passed describing
+        # the nested fields of the record. For more information about nested
+        # and repeated records, see {Preparing Data for BigQuery
+        # }[https://cloud.google.com/bigquery/preparing-data-for-bigquery].
+        #
+        # === Parameters
+        #
+        # +name+::
+        #   The field name. The name must contain only letters (a-z, A-Z),
+        #   numbers (0-9), or underscores (_), and must start with a letter or
+        #   underscore. The maximum length is 128 characters. (+String+)
+        # +options+::
+        #   An optional Hash for controlling additional behavior. (+Hash+)
+        # <code>options[:description]</code>::
+        #   A description of the field. (+String+)
+        # <code>options[:mode]</code>::
+        #   The field's mode. The possible values are +:nullable+, +:required+,
+        #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
+        #
+        # === Example
+        #
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table"
+        #
+        #   table.schema do |schema|
+        #     schema.string "first_name", mode: :required
+        #     schema.record "cities_lived", mode: :repeated do |cities_lived|
+        #       cities_lived.string "place", mode: :required
+        #       cities_lived.integer "number_of_years", mode: :required
+        #     end
+        #   end
+        #
         def record name, options = {}
           fail ArgumentError, "nested RECORD type is not permitted" if @nested
-          fields = if block_given?
-                     nested_schema = self.class.new nil, true
-                     yield nested_schema
-                     nested_schema.changed? ? nested_schema.fields : nil
-                   end
-          add_field name, :record, fields, options
+          fail ArgumentError, "a block is required" unless block_given?
+          nested_schema = self.class.new nil, true
+          yield nested_schema
+          add_field name, :record, nested_schema.fields, options
         end
 
         protected
 
-        def upcase_type type #:nodoc:
+        def upcase_type type
           upcase_type = type.to_s.upcase
           unless TYPES.include? upcase_type
             fail ArgumentError,
@@ -134,7 +226,7 @@ module Gcloud
           upcase_type
         end
 
-        def upcase_mode mode #:nodoc:
+        def upcase_mode mode
           upcase_mode = mode.to_s.upcase
           unless MODES.include? upcase_mode
             fail ArgumentError "Unable to determine mode for '#{mode}'"
