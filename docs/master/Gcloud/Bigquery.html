@@ -238,33 +238,13 @@ Data for BigQuery</a>.)</p>
 <span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
 
-<span class="ruby-identifier">schema</span> = {
-  <span class="ruby-string">&quot;fields&quot;</span> =<span class="ruby-operator">&gt;</span> [
-    {
-      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;first_name&quot;</span>,
-      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;STRING&quot;</span>,
-      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
-    },
-    {
-      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;cities_lived&quot;</span>,
-      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;RECORD&quot;</span>,
-      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REPEATED&quot;</span>,
-      <span class="ruby-string">&quot;fields&quot;</span> =<span class="ruby-operator">&gt;</span> [
-        {
-          <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;place&quot;</span>,
-          <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;STRING&quot;</span>,
-          <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
-        },
-        {
-          <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;number_of_years&quot;</span>,
-          <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;INTEGER&quot;</span>,
-          <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
-        }
-      ]
-    }
-  ]
-}
-<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;people&quot;</span>, <span class="ruby-identifier">schema</span><span class="ruby-operator">:</span> <span class="ruby-identifier">schema</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;people&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">schema</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">string</span> <span class="ruby-string">&quot;first_name&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">required</span>
+  <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">record</span> <span class="ruby-string">&quot;cities_lived&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">repeated</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">nested_schema</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">nested_schema</span>.<span class="ruby-identifier">string</span> <span class="ruby-string">&quot;place&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">required</span>
+    <span class="ruby-identifier">nested_schema</span>.<span class="ruby-identifier">integer</span> <span class="ruby-string">&quot;number_of_years&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">required</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
 </pre>
 
 <p>Because of the repeated field in this schema, we cannot use the CSV format
@@ -340,26 +320,11 @@ file also contained in the archive specifies the schema used below.</p>
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
-<span class="ruby-identifier">schema</span> = {
-  <span class="ruby-string">&quot;fields&quot;</span> =<span class="ruby-operator">&gt;</span> [
-    {
-      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;name&quot;</span>,
-      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;STRING&quot;</span>,
-      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
-    },
-    {
-      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;sex&quot;</span>,
-      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;STRING&quot;</span>,
-      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
-    },
-    {
-      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;number&quot;</span>,
-      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;INTEGER&quot;</span>,
-      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
-    }
-  ]
-}
-<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;baby_names&quot;</span>, <span class="ruby-identifier">schema</span><span class="ruby-operator">:</span> <span class="ruby-identifier">schema</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;baby_names&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">schema</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">string</span> <span class="ruby-string">&quot;name&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">required</span>
+  <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">string</span> <span class="ruby-string">&quot;sex&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">required</span>
+  <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">integer</span> <span class="ruby-string">&quot;number&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">required</span>
+<span class="ruby-keyword">end</span>
 
 <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-string">&quot;names/yob2014.txt&quot;</span>
 <span class="ruby-identifier">load_job</span> = <span class="ruby-identifier">table</span>.<span class="ruby-identifier">load</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">format</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;csv&quot;</span>
@@ -460,7 +425,7 @@ Data From BigQuery</a> for details.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 04, 2015.
+    Docs built on Sep 05, 2015.
   </div>
 </div>
 

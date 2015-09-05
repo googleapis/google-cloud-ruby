@@ -92,35 +92,14 @@ Data for BigQuery</a>.)</p>
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;my_table&quot;</span>
 
-<span class="ruby-identifier">schema</span> = {
-  <span class="ruby-string">&quot;fields&quot;</span> =<span class="ruby-operator">&gt;</span> [
-    {
-      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;first_name&quot;</span>,
-      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;STRING&quot;</span>,
-      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
-    },
-    {
-      <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;cities_lived&quot;</span>,
-      <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;RECORD&quot;</span>,
-      <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REPEATED&quot;</span>,
-      <span class="ruby-string">&quot;fields&quot;</span> =<span class="ruby-operator">&gt;</span> [
-        {
-          <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;place&quot;</span>,
-          <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;STRING&quot;</span>,
-          <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
-        },
-        {
-          <span class="ruby-string">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;number_of_years&quot;</span>,
-          <span class="ruby-string">&quot;type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;INTEGER&quot;</span>,
-          <span class="ruby-string">&quot;mode&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;REQUIRED&quot;</span>
-        }
-      ]
-    }
-  ]
-}
-<span class="ruby-identifier">table</span>.<span class="ruby-identifier">schema</span> = <span class="ruby-identifier">schema</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;my_table&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">schema</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">string</span> <span class="ruby-string">&quot;first_name&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">required</span>
+  <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">record</span> <span class="ruby-string">&quot;cities_lived&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">repeated</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">nested_schema</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">nested_schema</span>.<span class="ruby-identifier">string</span> <span class="ruby-string">&quot;place&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">required</span>
+    <span class="ruby-identifier">nested_schema</span>.<span class="ruby-identifier">integer</span> <span class="ruby-string">&quot;number_of_years&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">required</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
 
 <span class="ruby-identifier">row</span> = {
   <span class="ruby-string">&quot;first_name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Alice&quot;</span>,
@@ -380,7 +359,7 @@ Data for BigQuery</a>.)</p>
 
     
       <!-- <div class="method-source-code" id="created_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 256</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 236</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">created_at</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;creationTime&quot;</span>] <span class="ruby-operator">/</span> <span class="ruby-value">1000.0</span>)
@@ -415,7 +394,7 @@ Data for BigQuery</a>.)</p>
 
     
       <!-- <div class="method-source-code" id="dataset_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 116</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">dataset_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;tableReference&quot;</span>][<span class="ruby-string">&quot;datasetId&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -449,7 +428,7 @@ Data for BigQuery</a>.)</p>
 
     
       <!-- <div class="method-source-code" id="description-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 217</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 197</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">description</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;description&quot;</span>]
@@ -484,7 +463,7 @@ Data for BigQuery</a>.)</p>
 
     
       <!-- <div class="method-source-code" id="description-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 227</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 207</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">description=</span> <span class="ruby-identifier">new_description</span>
   <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">description</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_description</span>
 <span class="ruby-keyword">end</span></pre>
@@ -518,7 +497,7 @@ Data for BigQuery</a>.)</p>
 
     
       <!-- <div class="method-source-code" id="etag-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 197</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 177</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">etag</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;etag&quot;</span>]
@@ -554,7 +533,7 @@ indefinitely. Expired tables will be deleted and their storage reclaimed.</p>
 
     
       <!-- <div class="method-source-code" id="expires_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 268</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 248</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">expires_at</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;expirationTime&quot;</span>].<span class="ruby-identifier">nil?</span>
@@ -590,7 +569,7 @@ indefinitely. Expired tables will be deleted and their storage reclaimed.</p>
 
     
       <!-- <div class="method-source-code" id="fields-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 365</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 389</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fields</span>
   <span class="ruby-identifier">f</span> = <span class="ruby-identifier">schema</span>[<span class="ruby-string">&quot;fields&quot;</span>]
   <span class="ruby-identifier">f</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
@@ -627,7 +606,7 @@ indefinitely. Expired tables will be deleted and their storage reclaimed.</p>
 
     
       <!-- <div class="method-source-code" id="headers-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 377</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 401</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">headers</span>
   <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>[<span class="ruby-string">&quot;name&quot;</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -666,7 +645,7 @@ value in queries see <a href="Table.html#method-i-query_id">query_id</a>.</p>
 
     
       <!-- <div class="method-source-code" id="id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 147</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;id&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -701,7 +680,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="location-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 308</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 288</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">location</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;location&quot;</span>]
@@ -736,7 +715,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="modified_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 279</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 259</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">modified_at</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;lastModifiedTime&quot;</span>] <span class="ruby-operator">/</span> <span class="ruby-value">1000.0</span>)
@@ -771,7 +750,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="name-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 179</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 159</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;friendlyName&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -805,7 +784,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="name-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 188</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name=</span> <span class="ruby-identifier">new_name</span>
   <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_name</span>
 <span class="ruby-keyword">end</span></pre>
@@ -839,7 +818,7 @@ include EU and US. The default value is US.</p>
 
     
       <!-- <div class="method-source-code" id="project_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 125</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;tableReference&quot;</span>][<span class="ruby-string">&quot;projectId&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -889,7 +868,7 @@ Reference</a>. Useful in queries.</p>
 
     
       <!-- <div class="method-source-code" id="query_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 170</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 150</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">query_id</span>
   <span class="ruby-identifier">project_id</span>[<span class="ruby-string">&quot;-&quot;</span>] <span class="ruby-operator">?</span> <span class="ruby-node">&quot;[#{id}]&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">id</span>
 <span class="ruby-keyword">end</span></pre>
@@ -908,7 +887,7 @@ Reference</a>. Useful in queries.</p>
 
   
     <h4>
-      <code>schema()</code>
+      <code>schema(options = {})</code>
       <span>
         <a href="#method-i-schema">&para;</a>
         <a href="#top">&uarr;</a>
@@ -918,18 +897,57 @@ Reference</a>. Useful in queries.</p>
 
   <div class="method-description">
     
-      <p>The schema of the table.</p>
+      <p>Returns the table&#39;s schema as hash containing the keys and values
+returned by the Google Cloud BigQuery <a
+href="https://cloud.google.com/bigquery/docs/reference/v2/tables#resource">Rest
+API </a>. This method can also be used to replace or update the schema by
+passing a block. See <a href="Table/Schema.html">Table::Schema</a> for
+available methods. To replace the current schema by passing a hash instead,
+use <a href="Table.html#method-i-schema-3D">schema=</a>.</p>
+
+<h3 id="method-i-schema-label-Parameters">Parameters<span><a href="#method-i-schema-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
+</dd><dt><code>options[:replace]</code>
+<dd>
+<p>Whether to replace the existing schema with the new schema. If
+<code>false</code>, new fields will be added to the existing schema.  The
+default value is <code>true</code>. (<code>Boolean</code>)</p>
+</dd></dl>
+
+<h3 id="method-i-schema-label-Examples">Examples<span><a href="#method-i-schema-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;my_table&quot;</span>
+
+<span class="ruby-identifier">table</span>.<span class="ruby-identifier">schema</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">schema</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">string</span> <span class="ruby-string">&quot;first_name&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">required</span>
+  <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">record</span> <span class="ruby-string">&quot;cities_lived&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">repeated</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">nested_schema</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">nested_schema</span>.<span class="ruby-identifier">string</span> <span class="ruby-string">&quot;place&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">required</span>
+    <span class="ruby-identifier">nested_schema</span>.<span class="ruby-identifier">integer</span> <span class="ruby-string">&quot;number_of_years&quot;</span>, <span class="ruby-identifier">mode</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">required</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="schema-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 318</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">schema</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 329</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">schema</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_full_data!</span>
-  <span class="ruby-identifier">s</span> = <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;schema&quot;</span>]
-  <span class="ruby-identifier">s</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
-  <span class="ruby-identifier">s</span> = {} <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">nil?</span>
-  <span class="ruby-identifier">s</span>
+  <span class="ruby-identifier">g</span> = <span class="ruby-ivar">@gapi</span>
+  <span class="ruby-identifier">g</span> = <span class="ruby-identifier">g</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
+  <span class="ruby-identifier">s</span> = <span class="ruby-identifier">g</span>[<span class="ruby-string">&quot;schema&quot;</span>] <span class="ruby-operator">||=</span> {}
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">s</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-identifier">old_schema</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:replace</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">schema_builder</span> = <span class="ruby-constant">Schema</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">old_schema</span>
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">schema_builder</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">schema</span> = <span class="ruby-identifier">schema_builder</span>.<span class="ruby-identifier">schema</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">schema_builder</span>.<span class="ruby-identifier">changed?</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -956,7 +974,17 @@ Reference</a>. Useful in queries.</p>
 
   <div class="method-description">
     
-      <p>Updates the schema of the table.</p>
+      <p>Updates the schema of the table. To update the schema using a block
+instead, use <a href="Table.html#method-i-schema">schema</a>.</p>
+
+<h3 id="method-i-schema-3D-label-Parameters">Parameters<span><a href="#method-i-schema-3D-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>schema</code>
+<dd>
+<p>A hash containing keys and values as specified by the Google Cloud BigQuery
+<a
+href="https://cloud.google.com/bigquery/docs/reference/v2/tables#resource">Rest
+API </a> . (<code>Hash</code>)</p>
+</dd></dl>
 
 <h3 id="method-i-schema-3D-label-Example">Example<span><a href="#method-i-schema-3D-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -987,7 +1015,7 @@ Reference</a>. Useful in queries.</p>
 
     
       <!-- <div class="method-source-code" id="schema-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 356</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 380</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">schema=</span> <span class="ruby-identifier">new_schema</span>
   <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">schema</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_schema</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1021,7 +1049,7 @@ Reference</a>. Useful in queries.</p>
 
     
       <!-- <div class="method-source-code" id="table-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 289</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 269</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">table?</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;type&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;TABLE&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1056,7 +1084,7 @@ numbers (0-9), or underscores (_). The maximum length is 1,024 characters.</p>
 
     
       <!-- <div class="method-source-code" id="table_id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 107</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">table_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;tableReference&quot;</span>][<span class="ruby-string">&quot;tableId&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -1090,7 +1118,7 @@ numbers (0-9), or underscores (_). The maximum length is 1,024 characters.</p>
 
     
       <!-- <div class="method-source-code" id="url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 207</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 187</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">url</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
@@ -1125,7 +1153,7 @@ numbers (0-9), or underscores (_). The maximum length is 1,024 characters.</p>
 
     
       <!-- <div class="method-source-code" id="view-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 298</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 278</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">view?</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;type&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;VIEW&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1186,7 +1214,7 @@ numbers (0-9), or underscores (_). The maximum length is 1,024 characters.</p>
 
     
       <!-- <div class="method-source-code" id="bytes_count-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 236</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 216</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">bytes_count</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;numBytes&quot;</span>]
@@ -1290,7 +1318,7 @@ for referencing tables in other projects and datasets.</p>
 
     
       <!-- <div class="method-source-code" id="copy-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 486</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 510</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">copy</span> <span class="ruby-identifier">destination_table</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">copy_table</span> <span class="ruby-identifier">table_ref</span>,
@@ -1368,7 +1396,7 @@ for referencing tables in other projects and datasets.</p>
 
     
       <!-- <div class="method-source-code" id="data-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 417</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 441</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_tabledata</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>, <span class="ruby-identifier">options</span>
@@ -1454,7 +1482,7 @@ JSON</a></p>
 
     
       <!-- <div class="method-source-code" id="extract-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 579</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 603</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">extract</span> <span class="ruby-identifier">extract_url</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">extract_table</span> <span class="ruby-identifier">table_ref</span>, <span class="ruby-identifier">extract_url</span>, <span class="ruby-identifier">options</span>
@@ -1538,7 +1566,7 @@ errors. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="insert-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 748</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 772</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span> <span class="ruby-identifier">rows</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">rows</span> = [<span class="ruby-identifier">rows</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -1708,7 +1736,7 @@ your <a href="../../Gcloud.html">Gcloud</a> connection.</p>
 
     
       <!-- <div class="method-source-code" id="load-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 694</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 718</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">load</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">storage_url?</span> <span class="ruby-identifier">file</span>
@@ -1749,7 +1777,7 @@ your <a href="../../Gcloud.html">Gcloud</a> connection.</p>
 
     
       <!-- <div class="method-source-code" id="rows_count-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 246</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 226</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">rows_count</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;numRows&quot;</span>]
@@ -1827,7 +1855,7 @@ your <a href="../../Gcloud.html">Gcloud</a> connection.</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 779</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 803</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -1867,7 +1895,7 @@ your <a href="../../Gcloud.html">Gcloud</a> connection.</p>
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 794</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 818</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -1905,7 +1933,7 @@ your <a href="../../Gcloud.html">Gcloud</a> connection.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 04, 2015.
+    Docs built on Sep 05, 2015.
   </div>
 </div>
 
