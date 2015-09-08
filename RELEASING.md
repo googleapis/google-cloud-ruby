@@ -53,7 +53,7 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/gcloud-ruby/pul
 1. Tag the version.
 
   ```sh
-  $ git tag -m 'v<version>' <version>
+  $ git tag -m 'v<version>' v<version>
   ```
 
 1. Push your commit.
