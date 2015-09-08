@@ -569,7 +569,7 @@ indefinitely. Expired tables will be deleted and their storage reclaimed.</p>
 
     
       <!-- <div class="method-source-code" id="fields-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 389</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 391</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fields</span>
   <span class="ruby-identifier">f</span> = <span class="ruby-identifier">schema</span>[<span class="ruby-string">&quot;fields&quot;</span>]
   <span class="ruby-identifier">f</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
@@ -606,7 +606,7 @@ indefinitely. Expired tables will be deleted and their storage reclaimed.</p>
 
     
       <!-- <div class="method-source-code" id="headers-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 401</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 403</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">headers</span>
   <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>[<span class="ruby-string">&quot;name&quot;</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -900,10 +900,11 @@ Reference</a>. Useful in queries.</p>
       <p>Returns the table&#39;s schema as hash containing the keys and values
 returned by the Google Cloud BigQuery <a
 href="https://cloud.google.com/bigquery/docs/reference/v2/tables#resource">Rest
-API </a>. This method can also be used to replace or update the schema by
-passing a block. See <a href="Table/Schema.html">Table::Schema</a> for
-available methods. To replace the current schema by passing a hash instead,
-use <a href="Table.html#method-i-schema-3D">schema=</a>.</p>
+API </a>. This method can also be used to set, replace, or add to the
+schema by passing a block. See <a
+href="Table/Schema.html">Table::Schema</a> for available methods. To set
+the schema by passing a hash instead, use <a
+href="Table.html#method-i-schema-3D">schema=</a>.</p>
 
 <h3 id="method-i-schema-label-Parameters">Parameters<span><a href="#method-i-schema-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <dl class="rdoc-list note-list"><dt><code>options</code>
@@ -912,8 +913,10 @@ use <a href="Table.html#method-i-schema-3D">schema=</a>.</p>
 </dd><dt><code>options[:replace]</code>
 <dd>
 <p>Whether to replace the existing schema with the new schema. If
-<code>false</code>, new fields will be added to the existing schema.  The
-default value is <code>true</code>. (<code>Boolean</code>)</p>
+<code>true</code>, the fields will replace the existing schema. If
+<code>false</code>, the fields will be added to the existing schema. When a
+table already contains data, schema changes must be additive. Thus, the
+default value is <code>false</code>. (<code>Boolean</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-schema-label-Examples">Examples<span><a href="#method-i-schema-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -937,15 +940,15 @@ default value is <code>true</code>. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="schema-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 329</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 331</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">schema</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-identifier">g</span> = <span class="ruby-ivar">@gapi</span>
   <span class="ruby-identifier">g</span> = <span class="ruby-identifier">g</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
   <span class="ruby-identifier">s</span> = <span class="ruby-identifier">g</span>[<span class="ruby-string">&quot;schema&quot;</span>] <span class="ruby-operator">||=</span> {}
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">s</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
-  <span class="ruby-identifier">old_schema</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:replace</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-identifier">schema_builder</span> = <span class="ruby-constant">Schema</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">old_schema</span>
+  <span class="ruby-identifier">s</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:replace</span>]
+  <span class="ruby-identifier">schema_builder</span> = <span class="ruby-constant">Schema</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">s</span>
   <span class="ruby-keyword">yield</span> <span class="ruby-identifier">schema_builder</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">schema</span> = <span class="ruby-identifier">schema_builder</span>.<span class="ruby-identifier">schema</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">schema_builder</span>.<span class="ruby-identifier">changed?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1015,7 +1018,7 @@ API </a> . (<code>Hash</code>)</p>
 
     
       <!-- <div class="method-source-code" id="schema-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 380</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 382</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">schema=</span> <span class="ruby-identifier">new_schema</span>
   <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">schema</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_schema</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1318,7 +1321,7 @@ for referencing tables in other projects and datasets.</p>
 
     
       <!-- <div class="method-source-code" id="copy-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 510</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 512</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">copy</span> <span class="ruby-identifier">destination_table</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">copy_table</span> <span class="ruby-identifier">table_ref</span>,
@@ -1396,7 +1399,7 @@ for referencing tables in other projects and datasets.</p>
 
     
       <!-- <div class="method-source-code" id="data-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 441</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 443</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_tabledata</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>, <span class="ruby-identifier">options</span>
@@ -1482,7 +1485,7 @@ JSON</a></p>
 
     
       <!-- <div class="method-source-code" id="extract-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 603</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 605</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">extract</span> <span class="ruby-identifier">extract_url</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">extract_table</span> <span class="ruby-identifier">table_ref</span>, <span class="ruby-identifier">extract_url</span>, <span class="ruby-identifier">options</span>
@@ -1566,7 +1569,7 @@ errors. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="insert-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 772</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 774</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span> <span class="ruby-identifier">rows</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">rows</span> = [<span class="ruby-identifier">rows</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -1736,7 +1739,7 @@ your <a href="../../Gcloud.html">Gcloud</a> connection.</p>
 
     
       <!-- <div class="method-source-code" id="load-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 718</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 720</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">load</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">storage_url?</span> <span class="ruby-identifier">file</span>
@@ -1855,7 +1858,7 @@ your <a href="../../Gcloud.html">Gcloud</a> connection.</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 803</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 805</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -1895,7 +1898,7 @@ your <a href="../../Gcloud.html">Gcloud</a> connection.</p>
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 818</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 820</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -1933,7 +1936,7 @@ your <a href="../../Gcloud.html">Gcloud</a> connection.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 05, 2015.
+    Docs built on Sep 08, 2015.
   </div>
 </div>
 
