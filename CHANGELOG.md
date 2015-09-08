@@ -1,5 +1,26 @@
 # Release History
 
+### 0.3.1 / 2015-09-08
+
+#### Changes
+
+* Auto-discovery of project-id on Google Compute Engine
+* Support getting project id from GCE auth compute
+* New dataset access DSL for BigQuery
+* New table schema DSL for BigQuery
+* Add Code of Conduct
+
+#### Minor changes
+
+* Load data to BigQuery from Datastore backup
+* Add `Job#wait_until_complete` convenience method to BigQuery
+* Add String representation of tables in BigQuery
+* Add `refresh!` methods to Storage and BigQuery
+* Support `DATASTORE_DATASET` environment variable
+* Update Storage and BigQuery documentation for possible errors during large file uploads
+* Fix missing Pathname require
+* Truncate object representation in interactive output
+
 ### 0.3.0 / 2015-08-21
 
 #### Major changes
