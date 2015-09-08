@@ -209,13 +209,13 @@ module Gcloud
       #   dataset = bigquery.dataset "my_dataset"
       #
       #   dataset.access #=> [{"role"=>"OWNER",
-      #                        "specialGroup"=>"projectOwners"},
-      #                       {"role"=>"WRITER",
-      #                        "specialGroup"=>"projectWriters"},
-      #                       {"role"=>"READER",
-      #                        "specialGroup"=>"projectReaders"},
-      #                       {"role"=>"OWNER",
-      #                        "userByEmail"=>"123456789-...com"}]
+      #                  #     "specialGroup"=>"projectOwners"},
+      #                  #    {"role"=>"WRITER",
+      #                  #     "specialGroup"=>"projectWriters"},
+      #                  #    {"role"=>"READER",
+      #                  #     "specialGroup"=>"projectReaders"},
+      #                  #    {"role"=>"OWNER",
+      #                  #     "userByEmail"=>"123456789-...com"}]
       #
       # Manage the access rules by passing a block.
       #
