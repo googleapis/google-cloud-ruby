@@ -294,8 +294,8 @@ module Gcloud
       # Returns the table's schema as hash containing the keys and values
       # returned by the Google Cloud BigQuery {Rest API
       # }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource].
-      # This method can also be used to replace or update the schema by passing
-      # a block. See Table::Schema for available methods. To replace the current
+      # This method can also be used to set, replace, or add to the schema by
+      # passing a block. See Table::Schema for available methods. To set the
       # schema by passing a hash instead, use #schema=.
       #
       # === Parameters
@@ -304,8 +304,10 @@ module Gcloud
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:replace]</code>::
       #   Whether to replace the existing schema with the new schema. If
-      #   +false+, new fields will be added to the existing schema.  The default
-      #   value is +true+. (+Boolean+)
+      #   +true+, the fields will replace the existing schema. If
+      #   +false+, the fields will be added to the existing schema. When a table
+      #   already contains data, schema changes must be additive. Thus, the
+      #   default value is +false+. (+Boolean+)
       #
       # === Examples
       #
@@ -332,8 +334,8 @@ module Gcloud
         g = g.to_hash if g.respond_to? :to_hash
         s = g["schema"] ||= {}
         return s unless block_given?
-        old_schema = options[:replace] == false ? s : nil
-        schema_builder = Schema.new old_schema
+        s = nil if options[:replace]
+        schema_builder = Schema.new s
         yield schema_builder
         self.schema = schema_builder.schema if schema_builder.changed?
       end

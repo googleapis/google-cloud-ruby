@@ -55,7 +55,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     table.schema["fields"].first["name"].must_equal "moniker"
   end
 
-  it "sets a flat schema via a block" do
+  it "sets a flat schema via a block with replace option true" do
     new_table_data = new_table_hash
     new_table_data["schema"]["fields"] = [
       field_string_required,
@@ -70,7 +70,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
       [200, { "Content-Type" => "application/json" }, new_table_data.to_json]
     end
 
-    table.schema do |schema|
+    table.schema replace: true do |schema|
       schema.string "first_name", mode: :required
       schema.integer "rank", description: "An integer value from 1 to 100"
       schema.float "accuracy"
@@ -81,7 +81,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     table.schema.must_equal new_table_data["schema"]
   end
 
-  it "adds to its existing schema with replace option false" do
+  it "adds to its existing schema with replace option default" do
     new_table_data = new_table_hash
     new_table_data["schema"]["fields"] << field_timestamp
     mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" do |env|
@@ -90,7 +90,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
       [200, { "Content-Type" => "application/json" }, new_table_data.to_json]
     end
 
-    table.schema replace: false do |schema|
+    table.schema do |schema|
       schema.timestamp "start_date"
     end
 
@@ -109,7 +109,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
       [200, { "Content-Type" => "application/json" }, new_table_data.to_json]
     end
 
-    table.schema do |schema|
+    table.schema replace: true do |schema|
       schema.string "first_name", mode: :required
       schema.record "cities_lived", mode: :repeated do |nested|
         nested.integer "rank", description: "An integer value from 1 to 100"

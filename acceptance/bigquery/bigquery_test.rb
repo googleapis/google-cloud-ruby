@@ -38,7 +38,12 @@ describe Gcloud::Pubsub, :bigquery do
   let(:table) do
     t = dataset.table table_id
     if t.nil?
-      t = dataset.create_table table_id, schema: schema
+      t = dataset.create_table table_id do |schema|
+        schema.integer "id"
+        schema.string "breed"
+        schema.string "name"
+        schema.timestamp "dob"
+      end
     end
     t
   end
@@ -91,14 +96,7 @@ describe Gcloud::Pubsub, :bigquery do
     let(:local_file) { "acceptance/data/kitten-test-data.json" }
 
     it "has the correct schema" do
-      table.schema.must_equal({
-        "fields" => [
-          { "name" => "id",    "type" => "INTEGER" },
-          { "name" => "breed", "type" => "STRING" },
-          { "name" => "name",  "type" => "STRING" },
-          { "name" => "dob",   "type" => "TIMESTAMP" }
-        ]
-      })
+      table.schema.must_equal schema
     end
 
     it "gets and sets metadata" do
