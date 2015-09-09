@@ -282,20 +282,21 @@ Control</a> for more information.</p>
 
 <h3 id="method-i-access-label-Examples">Examples<span><a href="#method-i-access-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre>require &quot;gcloud&quot;
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-gcloud = Gcloud.new
-bigquery = gcloud.bigquery
-dataset = bigquery.dataset &quot;my_dataset&quot;
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
+<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
 
-dataset.access #=&gt; [{&quot;role&quot;=&gt;&quot;OWNER&quot;,
-                     &quot;specialGroup&quot;=&gt;&quot;projectOwners&quot;},
-                    {&quot;role&quot;=&gt;&quot;WRITER&quot;,
-                     &quot;specialGroup&quot;=&gt;&quot;projectWriters&quot;},
-                    {&quot;role&quot;=&gt;&quot;READER&quot;,
-                     &quot;specialGroup&quot;=&gt;&quot;projectReaders&quot;},
-                    {&quot;role&quot;=&gt;&quot;OWNER&quot;,
-                     &quot;userByEmail&quot;=&gt;&quot;123456789-...com&quot;}]</pre>
+<span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">access</span> <span class="ruby-comment">#=&gt; [{&quot;role&quot;=&gt;&quot;OWNER&quot;,</span>
+               <span class="ruby-comment">#     &quot;specialGroup&quot;=&gt;&quot;projectOwners&quot;},</span>
+               <span class="ruby-comment">#    {&quot;role&quot;=&gt;&quot;WRITER&quot;,</span>
+               <span class="ruby-comment">#     &quot;specialGroup&quot;=&gt;&quot;projectWriters&quot;},</span>
+               <span class="ruby-comment">#    {&quot;role&quot;=&gt;&quot;READER&quot;,</span>
+               <span class="ruby-comment">#     &quot;specialGroup&quot;=&gt;&quot;projectReaders&quot;},</span>
+               <span class="ruby-comment">#    {&quot;role&quot;=&gt;&quot;OWNER&quot;,</span>
+               <span class="ruby-comment">#     &quot;userByEmail&quot;=&gt;&quot;123456789-...com&quot;}]</span>
+</pre>
 
 <p>Manage the access rules by passing a block.</p>
 
@@ -1655,7 +1656,7 @@ href="Dataset/List.html#attribute-i-token">Gcloud::Bigquery::Dataset::List#token
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 08, 2015.
+    Docs built on Sep 09, 2015.
   </div>
 </div>
 
