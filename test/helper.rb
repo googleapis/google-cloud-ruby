@@ -21,6 +21,7 @@ require "json"
 require "gcloud/storage"
 require "gcloud/pubsub"
 require "gcloud/bigquery"
+require "gcloud/dns"
 
 class MockStorage < Minitest::Spec
   let(:project) { "test" }
@@ -574,5 +575,34 @@ class MockBigquery < Minitest::Spec
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_bigquery
+  end
+end
+
+class MockDns < Minitest::Spec
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new }
+  let(:dns) { Gcloud::Dns::Project.new project, credentials }
+
+  def setup
+    @connection = Faraday::Adapter::Test::Stubs.new
+    connection = dns.instance_variable_get "@connection"
+    client = connection.instance_variable_get "@client"
+    client.connection = Faraday.new do |builder|
+      # builder.options.params_encoder = Faraday::FlatParamsEncoder
+      builder.adapter :test, @connection
+    end
+  end
+
+  def teardown
+    @connection.verify_stubbed_calls
+  end
+
+  def mock_connection
+    @connection
+  end
+
+  # Register this spec type for when :storage is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_dns
   end
 end

@@ -185,4 +185,46 @@ describe Gcloud do
       dataset.must_equal "bigquery-project-object-scoped"
     end
   end
+
+  it "calls out to Gcloud.dns" do
+    gcloud = Gcloud.new
+    stubbed_dns = ->(project, keyfile, options) {
+      project.must_equal nil
+      keyfile.must_equal nil
+      options.must_equal({})
+      "dns-project-object-empty"
+    }
+    Gcloud.stub :dns, stubbed_dns do
+      dataset = gcloud.dns
+      dataset.must_equal "dns-project-object-empty"
+    end
+  end
+
+  it "passes project and keyfile to Gcloud.dns" do
+    gcloud = Gcloud.new "project-id", "keyfile-path"
+    stubbed_dns = ->(project, keyfile, options) {
+      project.must_equal "project-id"
+      keyfile.must_equal "keyfile-path"
+      options.must_equal({})
+      "dns-project-object"
+    }
+    Gcloud.stub :dns, stubbed_dns do
+      dataset = gcloud.dns
+      dataset.must_equal "dns-project-object"
+    end
+  end
+
+  it "passes project and keyfile and options to Gcloud.dns" do
+    gcloud = Gcloud.new "project-id", "keyfile-path"
+    stubbed_dns = ->(project, keyfile, options) {
+      project.must_equal "project-id"
+      keyfile.must_equal "keyfile-path"
+      options.must_equal({scope: "http://example.com/scope"})
+      "dns-project-object-scoped"
+    }
+    Gcloud.stub :dns, stubbed_dns do
+      dataset = gcloud.dns scope: "http://example.com/scope"
+      dataset.must_equal "dns-project-object-scoped"
+    end
+  end
 end
