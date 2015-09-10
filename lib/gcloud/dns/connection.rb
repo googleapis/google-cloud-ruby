@@ -64,6 +64,20 @@ module Gcloud
         )
       end
 
+      def create_zone zone_name, zone_dns, options = {}
+        body = { kind: "dns#managedZone",
+                 name: zone_name, dnsName: zone_dns,
+                 description: options[:description],
+                 nameServerSet: options[:name_server_set]
+               }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @dns.managed_zones.create,
+          parameters: { project: @project },
+          body_object: body
+        )
+      end
+
       def delete_zone zone_id
         @client.execute(
           api_method: @dns.managed_zones.delete,

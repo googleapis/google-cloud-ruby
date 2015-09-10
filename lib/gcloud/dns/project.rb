@@ -162,6 +162,61 @@ module Gcloud
         end
       end
 
+      ##
+      # Creates a new zone.
+      #
+      # === Parameters
+      #
+      # +zone_name+::
+      #   User assigned name for this resource. Must be unique within the
+      #   project. The name must be 1-32 characters long, must begin with a
+      #   letter, end with a letter or digit, and only contain lowercase
+      #   letters, digits or dashes. (+String+)
+      # +zone_dns+::
+      #   The DNS name of this managed zone, for instance "example.com.".
+      #   (+String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:description]</code>::
+      #   A string of at most 1024 characters associated with this resource for
+      #   the user's convenience. Has no effect on the managed zone's function.
+      #   (+String+)
+      # <code>options[:name_server_set]</code>::
+      #   A NameServerSet is a set of DNS name servers that all host the same
+      #   ManagedZones. Most users will leave this field unset. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Dns::Zone
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.create_zones "Example Zone", "example.com"
+      #
+      # You can also pass +description+ and +name_server_set+ options.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.create_zones "example-zone", "example.com",
+      #                           description: "A description of my zone.",
+      #                           name_server_set: "example"
+      #
+      def create_zone zone_name, zone_dns, options = {}
+        ensure_connection!
+        resp = connection.create_zone zone_name, zone_dns, options
+        if resp.success?
+          Zone.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
       protected
 
       ##

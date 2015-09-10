@@ -134,6 +134,68 @@ describe Gcloud::Dns::Project, :mock_dns do
     zones.token.must_equal "next_page_token"
   end
 
+  it "creates a zone" do
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones" do |env|
+      json = JSON.parse(env.body)
+      json["kind"].must_equal "dns#managedZone"
+      json["name"].must_equal "example-zone"
+      json["dnsName"].must_equal "example.net"
+      json["description"].must_be :nil?
+      json["nameServerSet"].must_be :nil?
+      [200, {"Content-Type"=>"application/json"},
+       create_zone_json("example-zone", "example.net")]
+    end
+
+    zone = dns.create_zone "example-zone", "example.net"
+    zone.must_be_kind_of Gcloud::Dns::Zone
+    zone.name.must_equal "example-zone"
+    zone.dns.must_equal "example.net"
+    zone.description.must_be :nil?
+    zone.name_server_set.must_be :nil?
+  end
+
+  it "creates a zone with a description" do
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones" do |env|
+      json = JSON.parse(env.body)
+      json["kind"].must_equal "dns#managedZone"
+      json["name"].must_equal "example-zone"
+      json["dnsName"].must_equal "example.net"
+      json["description"].must_equal "Example Zone Description"
+      json["nameServerSet"].must_be :nil?
+      [200, {"Content-Type"=>"application/json"},
+       create_zone_json("example-zone", "example.net", description: json["description"])]
+    end
+
+    zone = dns.create_zone "example-zone", "example.net",
+                            description: "Example Zone Description"
+    zone.must_be_kind_of Gcloud::Dns::Zone
+    zone.name.must_equal "example-zone"
+    zone.dns.must_equal "example.net"
+    zone.description.must_equal "Example Zone Description"
+    zone.name_server_set.must_be :nil?
+  end
+
+  it "creates a zone with a name_server_set" do
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones" do |env|
+      json = JSON.parse(env.body)
+      json["kind"].must_equal "dns#managedZone"
+      json["name"].must_equal "example-zone"
+      json["dnsName"].must_equal "example.net"
+      json["description"].must_be :nil?
+      json["nameServerSet"].must_equal "example-set"
+      [200, {"Content-Type"=>"application/json"},
+       create_zone_json("example-zone", "example.net", name_server_set: json["nameServerSet"])]
+    end
+
+    zone = dns.create_zone "example-zone", "example.net",
+                            name_server_set: "example-set"
+    zone.must_be_kind_of Gcloud::Dns::Zone
+    zone.name.must_equal "example-zone"
+    zone.dns.must_equal "example.net"
+    zone.description.must_be :nil?
+    zone.name_server_set.must_equal "example-set"
+  end
+
   def find_zone_json name, dns = nil
     random_zone_hash(name, dns).to_json
   end
@@ -142,6 +204,13 @@ describe Gcloud::Dns::Project, :mock_dns do
     zones = count.times.map { random_zone_hash("example-#{rand(99999)}.com") }
     hash = { "kind" => "dns#managedZonesListResponse", "managedZones" => zones }
     hash["nextPageToken"] = token unless token.nil?
+    hash.to_json
+  end
+
+  def create_zone_json name, dns, options = {}
+    hash = random_zone_hash name, dns
+    hash["description"]   = options[:description]
+    hash["nameServerSet"] = options[:name_server_set]
     hash.to_json
   end
 end
