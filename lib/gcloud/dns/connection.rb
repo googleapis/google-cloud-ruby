@@ -84,6 +84,10 @@ module Gcloud
           parameters: { project: @project, managedZone: zone_id }
         )
       end
+
+      def inspect #:nodoc:
+        "#{self.class}(#{@project})"
+      end
     end
   end
 end
