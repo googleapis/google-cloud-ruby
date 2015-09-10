@@ -601,11 +601,11 @@ class MockDns < Minitest::Spec
     @connection
   end
 
-  def random_zone_hash zone_name, zone_dns = nil
+  def random_zone_hash zone_name, zone_dns
     {
       "kind" => "dns#managedZone",
       "name" => zone_name,
-      "dnsName" => zone_dns || "#{zone_name}.",
+      "dnsName" => zone_dns,
       "description" => "",
       "id" => 123456789,
       "nameServers" => [ "virtual-dns-1.google.example",

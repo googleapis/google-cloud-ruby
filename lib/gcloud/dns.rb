@@ -52,7 +52,7 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   dns = gcloud.dns
-  #   zone = dns.zone "example.com"
+  #   zone = dns.zone "example-zone"
   #
   def self.dns project = nil, keyfile = nil, options = {}
     project ||= Gcloud::Dns::Project.default_project

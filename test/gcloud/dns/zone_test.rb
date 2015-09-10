@@ -16,7 +16,7 @@ require "helper"
 
 describe Gcloud::Dns::Zone, :mock_dns do
   # Create a zone object with the project's mocked connection object
-  let(:zone_name) { "example.com" }
+  let(:zone_name) { "example-zone" }
   let(:zone_dns) { "example.com." }
   let(:zone_hash) { random_zone_hash zone_name, zone_dns }
   let(:zone) { Gcloud::Dns::Zone.from_gapi zone_hash, dns.connection }

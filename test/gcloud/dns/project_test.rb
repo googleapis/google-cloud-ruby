@@ -201,7 +201,10 @@ describe Gcloud::Dns::Project, :mock_dns do
   end
 
   def list_zones_json count = 2, token = nil
-    zones = count.times.map { random_zone_hash("example-#{rand(99999)}.com.") }
+    zones = count.times.map do
+      seed = rand 99999
+      random_zone_hash "example-#{seed}-zone", "example-#{seed}.com."
+    end
     hash = { "kind" => "dns#managedZonesListResponse", "managedZones" => zones }
     hash["nextPageToken"] = token unless token.nil?
     hash.to_json

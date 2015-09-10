@@ -30,7 +30,7 @@ module Gcloud
     #
     #   gcloud = Gcloud.new
     #   dns = gcloud.dns
-    #   zone = dns.zone "example.com"
+    #   zone = dns.zone "example-zone"
     #   zone.records.each do |record|
     #     puts record.name
     #   end
@@ -122,7 +122,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example.com"
+      #   zone = dns.zone "example-zone"
       #   zone.delete
       #
       def delete
