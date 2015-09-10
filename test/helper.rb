@@ -614,6 +614,17 @@ class MockDns < Minitest::Spec
     }
   end
 
+  def random_change_hash
+    {
+      "kind" => "dns#change",
+      "id" => "dns-change-1234567890",
+      "additions" => [],
+      "deletions" => [],
+      "startTime" => "2015-01-01T00:00:00-00:00",
+      "status" => "done"
+    }
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_dns
