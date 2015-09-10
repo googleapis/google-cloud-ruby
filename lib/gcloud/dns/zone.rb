@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/dns/change"
 require "gcloud/dns/zone/list"
 require "time"
 
@@ -132,6 +133,41 @@ module Gcloud
           true
         else
           fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Retrieves an existing change by id.
+      #
+      # === Parameters
+      #
+      # +change_id+::
+      #   The id of a change. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Bigquery::Change or +nil+ if the change does not exist
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example.com."
+      #   change = zone.change "dns-change-1234567890"
+      #   if change
+      #     puts "Change includes #{change.additions.count} additions " \
+      #          "and #{change.additions.count} deletions."
+      #   end
+      #
+      def change change_id
+        ensure_connection!
+        resp = connection.get_change id, change_id
+        if resp.success?
+          Change.from_gapi resp.data, connection
+        else
+          nil
         end
       end
 

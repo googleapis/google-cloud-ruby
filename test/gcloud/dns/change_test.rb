@@ -13,7 +13,6 @@
 # limitations under the License.
 
 require "helper"
-require "gcloud/dns/change"
 
 describe Gcloud::Dns::Change, :mock_dns do
   let(:change) { Gcloud::Dns::Change.from_gapi random_change_hash, dns.connection }

@@ -85,6 +85,14 @@ module Gcloud
         )
       end
 
+      def get_change zone_id, change_id
+        @client.execute(
+          api_method: @dns.changes.get,
+          parameters: { project: @project, managedZone: zone_id,
+                        changeId: change_id }
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end

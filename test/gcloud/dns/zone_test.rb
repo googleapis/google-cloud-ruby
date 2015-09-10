@@ -41,4 +41,35 @@ describe Gcloud::Dns::Zone, :mock_dns do
 
     zone.delete
   end
+
+  it "finds a change" do
+    found_change = "dns-change-1234567890"
+
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{found_change}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       find_change_json(found_change)]
+    end
+
+    change = zone.change found_change
+    change.must_be_kind_of Gcloud::Dns::Change
+    change.id.must_equal found_change
+  end
+
+  it "returns nil when it cannot find a change" do
+    unfound_change = "dns-change-0987654321"
+
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{unfound_change}" do |env|
+      [404, {"Content-Type" => "application/json"},
+       ""]
+    end
+
+    change = zone.change unfound_change
+    change.must_be :nil?
+  end
+
+  def find_change_json change_id
+    hash = random_change_hash
+    hash["id"] = change_id
+    hash.to_json
+  end
 end
