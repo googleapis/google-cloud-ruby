@@ -601,6 +601,19 @@ class MockDns < Minitest::Spec
     @connection
   end
 
+  def random_zone_hash zone_name, zone_dns = nil
+    {
+      "kind" => "dns#managedZone",
+      "name" => zone_name,
+      "dnsName" => zone_dns || "#{zone_name}.",
+      "description" => "",
+      "id" => 123456789,
+      "nameServers" => [ "virtual-dns-1.google.example",
+                         "virtual-dns-2.google.example" ],
+      "creationTime" => "2015-01-01T00:00:00-00:00"
+    }
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_dns
