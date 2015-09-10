@@ -67,7 +67,7 @@ module Gcloud
       def create_zone zone_name, zone_dns, options = {}
         body = { kind: "dns#managedZone",
                  name: zone_name, dnsName: zone_dns,
-                 description: options[:description],
+                 description: (options[:description] || ""),
                  nameServerSet: options[:name_server_set]
                }.delete_if { |_, v| v.nil? }
 
