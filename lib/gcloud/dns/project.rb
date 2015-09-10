@@ -77,6 +77,37 @@ module Gcloud
           Gcloud::GCE.project_id
       end
 
+      ##
+      # Retrieves an existing zone by name or id.
+      #
+      # === Parameters
+      #
+      # +zone_id+::
+      #   The name or id of a zone. (+String+ or +Integer+)
+      #
+      # === Returns
+      #
+      # Gcloud::Bigquery::Zone or +nil+ if the zone does not exist
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example.com"
+      #   puts zone.name
+      #
+      def zone zone_id
+        ensure_connection!
+        resp = connection.get_zone zone_id
+        if resp.success?
+          Zone.from_gapi resp.data, connection
+        else
+          nil
+        end
+      end
+
       protected
 
       ##
