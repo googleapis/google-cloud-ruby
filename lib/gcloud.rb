@@ -253,4 +253,50 @@ module Gcloud
     require "gcloud/bigquery"
     Gcloud.bigquery @project, @keyfile, options
   end
+
+  ##
+  # Creates a new object for connecting to the DNS service.
+  # Each call creates a new connection.
+  #
+  # === Parameters
+  #
+  # +options+::
+  #   An optional Hash for controlling additional behavior. (+Hash+)
+  # <code>options[:scope]</code>::
+  #   The OAuth 2.0 scopes controlling the set of resources and operations that
+  #   the connection can access. See {Using OAuth 2.0 to Access Google
+  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   or +Array+)
+  #
+  #   The default scope is:
+  #
+  #   * +https://www.googleapis.com/auth/ndev.clouddns.readwrite+
+  #
+  # === Returns
+  #
+  # Gcloud::Dns::Project
+  #
+  # === Examples
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   dns = gcloud.dns
+  #   zone = dns.zone "example-zone"
+  #   zone.records.each do |record|
+  #     puts record.name
+  #   end
+  #
+  # The default scope can be overridden with the +scope+ option:
+  #
+  #   require "gcloud"
+  #
+  #   gcloud  = Gcloud.new
+  #   readonly_scope = "https://www.googleapis.com/auth/ndev.clouddns.readonly"
+  #   dns = gcloud.dns scope: readonly_scope
+  #
+  def dns options = {}
+    require "gcloud/dns"
+    Gcloud.dns @project, @keyfile, options
+  end
 end

@@ -21,6 +21,7 @@ require "json"
 require "gcloud/storage"
 require "gcloud/pubsub"
 require "gcloud/bigquery"
+require "gcloud/dns"
 
 class MockStorage < Minitest::Spec
   let(:project) { "test" }
@@ -574,5 +575,47 @@ class MockBigquery < Minitest::Spec
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_bigquery
+  end
+end
+
+class MockDns < Minitest::Spec
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new }
+  let(:dns) { Gcloud::Dns::Project.new project, credentials }
+
+  def setup
+    @connection = Faraday::Adapter::Test::Stubs.new
+    connection = dns.instance_variable_get "@connection"
+    client = connection.instance_variable_get "@client"
+    client.connection = Faraday.new do |builder|
+      # builder.options.params_encoder = Faraday::FlatParamsEncoder
+      builder.adapter :test, @connection
+    end
+  end
+
+  def teardown
+    @connection.verify_stubbed_calls
+  end
+
+  def mock_connection
+    @connection
+  end
+
+  def random_zone_hash zone_name, zone_dns
+    {
+      "kind" => "dns#managedZone",
+      "name" => zone_name,
+      "dnsName" => zone_dns,
+      "description" => "",
+      "id" => 123456789,
+      "nameServers" => [ "virtual-dns-1.google.example",
+                         "virtual-dns-2.google.example" ],
+      "creationTime" => "2015-01-01T00:00:00-00:00"
+    }
+  end
+
+  # Register this spec type for when :storage is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_dns
   end
 end
