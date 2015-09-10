@@ -109,6 +109,32 @@ module Gcloud
       end
 
       ##
+      # Permanently deletes the zone.
+      #
+      # === Returns
+      #
+      # +true+ if the zone was deleted.
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example.com"
+      #   zone.delete
+      #
+      def delete
+        ensure_connection!
+        resp = connection.delete_zone id
+        if resp.success?
+          true
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Zone from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|

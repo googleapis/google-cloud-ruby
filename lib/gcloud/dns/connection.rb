@@ -44,6 +44,13 @@ module Gcloud
           parameters: { project: project_id }
         )
       end
+
+      def delete_zone zone_id
+        @client.execute(
+          api_method: @dns.managed_zones.delete,
+          parameters: { project: @project, managedZone: zone_id }
+        )
+      end
     end
   end
 end

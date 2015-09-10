@@ -33,4 +33,12 @@ describe Gcloud::Dns::Zone, :mock_dns do
     creation_time = Time.new 2015, 1, 1, 0, 0, 0, 0
     zone.created_at.must_equal creation_time
   end
+
+  it "can delete itself" do
+    mock_connection.delete "/dns/v1/projects/#{project}/managedZones/#{zone.id}" do |env|
+      [200, {"Content-Type" => "application/json"}, ""]
+    end
+
+    zone.delete
+  end
 end
