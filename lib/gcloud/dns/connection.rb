@@ -52,6 +52,18 @@ module Gcloud
         )
       end
 
+      def list_zones options = {}
+        params = { project: @project,
+                   pageToken: options.delete(:token),
+                   maxResults: options.delete(:max)
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @dns.managed_zones.list,
+          parameters: params
+        )
+      end
+
       def delete_zone zone_id
         @client.execute(
           api_method: @dns.managed_zones.delete,

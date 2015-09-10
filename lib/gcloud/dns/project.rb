@@ -108,6 +108,60 @@ module Gcloud
         end
       end
 
+      ##
+      # Retrieves the list of zones belonging to the project.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:token]</code>::
+      #   A previously-returned page token representing part of the larger set
+      #   of results to view. (+String+)
+      # <code>options[:max]</code>::
+      #   Maximum number of zones to return. (+Integer+)
+      #
+      # === Returns
+      #
+      # Array of Gcloud::Bigquery::Zone (Gcloud::Bigquery::Zone::List)
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zones = dns.zones
+      #   zones.each do |zone|
+      #     puts zone.name
+      #   end
+      #
+      # If you have a significant number of zones, you may need to paginate
+      # through them: (See Gcloud::Bigquery::Zone::List)
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zones = dns.zones
+      #   loop do
+      #     zones.each do |zone|
+      #       puts zone.name
+      #     end
+      #     break unless zones.next?
+      #     zones = zones.next
+      #   end
+      #
+      def zones options = {}
+        ensure_connection!
+        resp = connection.list_zones options
+        if resp.success?
+          Zone::List.from_response resp, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
       protected
 
       ##
