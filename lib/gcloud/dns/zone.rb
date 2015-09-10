@@ -172,6 +172,62 @@ module Gcloud
       end
 
       ##
+      # Retrieves the list of changes belonging to the zone.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:token]</code>::
+      #   A previously-returned page token representing part of the larger set
+      #   of results to view. (+String+)
+      # <code>options[:max]</code>::
+      #   Maximum number of changes to return. (+Integer+)
+      #
+      # === Returns
+      #
+      # Array of Gcloud::Bigquery::Change (Gcloud::Bigquery::Change::List)
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   changes = zone.changes
+      #   changes.each do |change|
+      #     puts change.name
+      #   end
+      #
+      # If you have a significant number of changes, you may need to paginate
+      # through them: (See Gcloud::Bigquery::Change::List)
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   changes = zone.changes
+      #   loop do
+      #     changes.each do |change|
+      #       puts change.name
+      #     end
+      #     break unless changes.next?
+      #     changes = changes.next
+      #   end
+      #
+      def changes options = {}
+        ensure_connection!
+        resp = connection.list_changes id, options
+        if resp.success?
+          Change::List.from_response resp, self
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Zone from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|

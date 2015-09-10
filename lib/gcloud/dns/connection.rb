@@ -93,6 +93,18 @@ module Gcloud
         )
       end
 
+      def list_changes zone_id, options = {}
+        params = { project: @project, managedZone: zone_id,
+                   pageToken: options.delete(:token),
+                   maxResults: options.delete(:max)
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @dns.changes.list,
+          parameters: params
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end
