@@ -48,7 +48,7 @@ module Gcloud
         # New Changes::List from a response object.
         def self.from_response resp, zone #:nodoc:
           changes = new(Array(resp.data["changes"]).map do |gapi_object|
-            Change.from_gapi gapi_object, zone.connection
+            Change.from_gapi gapi_object, zone
           end)
           changes.instance_eval do
             @token = resp.data["nextPageToken"]

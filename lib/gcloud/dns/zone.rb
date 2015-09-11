@@ -165,7 +165,7 @@ module Gcloud
         ensure_connection!
         resp = connection.get_change id, change_id
         if resp.success?
-          Change.from_gapi resp.data, connection
+          Change.from_gapi resp.data, self
         else
           nil
         end

@@ -38,8 +38,8 @@ module Gcloud
     #
     class Change
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # The Zone object this Change belongs to.
+      attr_accessor :zone #:nodoc:
 
       ##
       # The Google API Client object.
@@ -48,7 +48,7 @@ module Gcloud
       ##
       # Create an empty Change object.
       def initialize #:nodoc:
-        @connection = nil
+        @zone = nil
         @gapi = {}
       end
 
@@ -104,11 +104,24 @@ module Gcloud
       end
 
       ##
+      # Reloads the change with updated status from the DNS service.
+      def reload!
+        ensure_connection!
+        resp = zone.connection.get_change @zone.id, id
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+      alias_method :refresh!, :reload!
+
+      ##
       # New Change from a Google API Client object.
-      def self.from_gapi gapi, conn #:nodoc:
+      def self.from_gapi gapi, zone #:nodoc:
         new.tap do |f|
           f.gapi = gapi
-          f.connection = conn
+          f.zone = zone
         end
       end
 
@@ -117,7 +130,7 @@ module Gcloud
       ##
       # Raise an error unless an active connection is available.
       def ensure_connection!
-        fail "Must have active connection" unless connection
+        fail "Must have active connection" unless zone && zone.connection
       end
     end
   end
