@@ -20,7 +20,10 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   # Create a dataset object with the project's mocked connection object
   let(:dataset_id) { "my_dataset" }
   let(:dataset_name) { "My Dataset" }
-  let(:description) { "This is my dataset" }
+  let(:dataset_description) { "This is my dataset" }
+  let(:table_id) { "my_table" }
+  let(:table_name) { "My Table" }
+  let(:table_description) { "This is my table" }
   let(:table_schema) {
     {
       "fields" => [
@@ -45,17 +48,21 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
       ]
     }
   }
+  let(:view_id) { "my_view" }
+  let(:view_name) { "My View" }
+  let(:view_description) { "This is my view" }
+  let(:query) { "SELECT * FROM [table]" }
   let(:default_expiration) { 999 }
   let(:etag) { "etag123456789" }
   let(:location_code) { "US" }
   let(:url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" }
-  let(:dataset_hash) { random_dataset_hash dataset_id, dataset_name, description, default_expiration }
+  let(:dataset_hash) { random_dataset_hash dataset_id, dataset_name, dataset_description, default_expiration }
   let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_hash,
                                                       bigquery.connection }
 
   it "knows its attributes" do
     dataset.name.must_equal dataset_name
-    dataset.description.must_equal description
+    dataset.description.must_equal dataset_description
     dataset.default_expiration.must_equal default_expiration
     dataset.etag.must_equal etag
     dataset.url.must_equal url
@@ -94,74 +101,66 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   it "creates an empty table" do
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       [200, {"Content-Type" => "application/json"},
-       create_table_json("my_table")]
+       create_table_json(table_id)]
     end
 
-    table = dataset.create_table "my_table"
+    table = dataset.create_table table_id
     table.must_be_kind_of Gcloud::Bigquery::Table
-    table.table_id.must_equal "my_table"
+    table.table_id.must_equal table_id
     table.must_be :table?
     table.wont_be :view?
   end
 
   it "creates a table with a name, description, and schema option" do
-    id = "my_table"
-    name = "My Table"
-    description = "This is my table"
-
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      JSON.parse(env.body)["friendlyName"].must_equal name
-      JSON.parse(env.body)["description"].must_equal description
+      JSON.parse(env.body)["friendlyName"].must_equal table_name
+      JSON.parse(env.body)["description"].must_equal table_description
       JSON.parse(env.body)["schema"].must_equal table_schema
       [200, {"Content-Type" => "application/json"},
-       create_table_json(id, name, description)]
+       create_table_json(table_id, table_name, table_description)]
     end
 
-    table = dataset.create_table id,
-                                 name: name,
-                                 description: description,
+    table = dataset.create_table table_id,
+                                 name: table_name,
+                                 description: table_description,
                                  schema: table_schema
     table.must_be_kind_of Gcloud::Bigquery::Table
-    table.table_id.must_equal id
-    table.name.must_equal name
-    table.description.must_equal description
+    table.table_id.must_equal table_id
+    table.name.must_equal table_name
+    table.description.must_equal table_description
     table.schema.must_equal table_schema
     table.must_be :table?
     table.wont_be :view?
   end
 
   it "creates a table with a schema block" do
-    id = "my_table"
-
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       JSON.parse(env.body)["schema"].must_equal table_schema
       [200, {"Content-Type" => "application/json"},
-       create_table_json(id, name, description)]
+       create_table_json(table_id, table_name, table_description)]
     end
 
-    table = dataset.create_table id do |schema|
+    table = dataset.create_table table_id do |schema|
       schema.string "name", mode: :required
       schema.integer "age"
       schema.float "score", description: "A score from 0.0 to 10.0"
       schema.boolean "active"
     end
     table.must_be_kind_of Gcloud::Bigquery::Table
-    table.table_id.must_equal id
+    table.table_id.must_equal table_id
     table.schema.must_equal table_schema
     table.must_be :table?
     table.wont_be :view?
   end
 
   it "can create a empty view" do
-    query = "SELECT * FROM [table]"
-
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       [200, {"Content-Type" => "application/json"},
-       create_view_json("my_view", query)]
+       create_view_json(view_id, query)]
     end
 
-    table = dataset.create_view "my_view", query
-    table.table_id.must_equal "my_view"
+    table = dataset.create_view view_id, query
+    table.table_id.must_equal view_id
     table.query.must_equal query
     table.must_be_kind_of Gcloud::Bigquery::View
     table.must_be :view?
@@ -169,26 +168,21 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   end
 
   it "can create a view with a name and description" do
-    id = "my_view"
-    query = "SELECT * FROM [table]"
-    name = "My View"
-    description = "This is my view"
-
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      JSON.parse(env.body)["friendlyName"].must_equal name
-      JSON.parse(env.body)["description"].must_equal description
+      JSON.parse(env.body)["friendlyName"].must_equal view_name
+      JSON.parse(env.body)["description"].must_equal view_description
       [200, {"Content-Type" => "application/json"},
-       create_view_json(id, query, name, description)]
+       create_view_json(view_id, query, view_name, view_description)]
     end
 
-    table = dataset.create_view id, query,
-                                name: name,
-                                description: description
+    table = dataset.create_view view_id, query,
+                                name: view_name,
+                                description: view_description
     table.must_be_kind_of Gcloud::Bigquery::View
-    table.table_id.must_equal id
+    table.table_id.must_equal view_id
     table.query.must_equal query
-    table.name.must_equal name
-    table.description.must_equal description
+    table.name.must_equal view_name
+    table.description.must_equal view_description
     table.must_be :view?
     table.wont_be :table?
   end
