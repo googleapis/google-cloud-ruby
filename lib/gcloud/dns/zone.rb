@@ -247,6 +247,27 @@ module Gcloud
       end
 
       ##
+      # Creates a new, unsaved Record that can be added to a Zone.
+      #
+      # === Returns
+      #
+      # A new Record instance.
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   record = zone.record "example.com.", 86400, "A", ["1.2.3.4"]
+      #   zone.add_records [record_1]
+      #
+      def record name, ttl, type, data
+        Gcloud::Dns::Record.new name, ttl, type, data
+      end
+
+      ##
       # New Zone from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|

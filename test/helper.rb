@@ -625,6 +625,16 @@ class MockDns < Minitest::Spec
     }
   end
 
+  def random_record_hash name, ttl, type, data
+    {
+      "kind" => "dns#resourceRecordSet",
+      "name" => name,
+      "rrdatas" => data,
+      "ttl" => ttl,
+      "type" => type
+    }
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_dns

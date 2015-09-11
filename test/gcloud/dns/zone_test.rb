@@ -20,6 +20,10 @@ describe Gcloud::Dns::Zone, :mock_dns do
   let(:zone_dns) { "example.com." }
   let(:zone_hash) { random_zone_hash zone_name, zone_dns }
   let(:zone) { Gcloud::Dns::Zone.from_gapi zone_hash, dns.connection }
+  let(:record_name) { "example.com." }
+  let(:record_ttl)  { 86400 }
+  let(:record_type) { "A" }
+  let(:record_data) { ["1.2.3.4"] }
 
   it "knows its attributes" do
     zone.name.must_equal zone_name
@@ -199,5 +203,14 @@ describe Gcloud::Dns::Zone, :mock_dns do
     hash = { "kind" => "dns#changesListResponse", "changes" => changes }
     hash["nextPageToken"] = token unless token.nil?
     hash.to_json
+  end
+
+  it "can create a record" do
+    record = zone.record record_name, record_ttl, record_type, record_data
+
+    record.name.must_equal record_name
+    record.ttl.must_equal  record_ttl
+    record.type.must_equal record_type
+    record.data.must_equal record_data
   end
 end
