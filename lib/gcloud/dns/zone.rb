@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/dns/change"
 require "gcloud/dns/zone/list"
 require "time"
 
@@ -136,6 +137,116 @@ module Gcloud
       end
 
       ##
+      # Retrieves an existing change by id.
+      #
+      # === Parameters
+      #
+      # +change_id+::
+      #   The id of a change. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Bigquery::Change or +nil+ if the change does not exist
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example.com."
+      #   change = zone.change "dns-change-1234567890"
+      #   if change
+      #     puts "Change includes #{change.additions.count} additions " \
+      #          "and #{change.additions.count} deletions."
+      #   end
+      #
+      def change change_id
+        ensure_connection!
+        resp = connection.get_change id, change_id
+        if resp.success?
+          Change.from_gapi resp.data, self
+        else
+          nil
+        end
+      end
+
+      ##
+      # Retrieves the list of changes belonging to the zone.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:token]</code>::
+      #   A previously-returned page token representing part of the larger set
+      #   of results to view. (+String+)
+      # <code>options[:max]</code>::
+      #   Maximum number of changes to return. (+Integer+)
+      # <code>options[:order]</code>::
+      #   Sort the changes by change sequence. (+Symbol+ or +String+)
+      #
+      #   Acceptable values are:
+      #   * +asc+ - Sort by ascending change sequence
+      #   * +desc+ - Sort by descending change sequence
+      #
+      # === Returns
+      #
+      # Array of Gcloud::Bigquery::Change (Gcloud::Bigquery::Change::List)
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   changes = zone.changes
+      #   changes.each do |change|
+      #     puts change.name
+      #   end
+      #
+      # The changes can be sorted by change sequence:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   changes = zone.changes order: :desc
+      #
+      # If you have a significant number of changes, you may need to paginate
+      # through them: (See Gcloud::Bigquery::Change::List)
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   changes = zone.changes
+      #   loop do
+      #     changes.each do |change|
+      #       puts change.name
+      #     end
+      #     break unless changes.next?
+      #     changes = changes.next
+      #   end
+      #
+      def changes options = {}
+        ensure_connection!
+        # Fix the sort options
+        options[:order] = adjust_change_sort_order options[:order]
+        options[:sort]  = "changeSequence" if options[:order]
+        # Continue with the API call
+        resp = connection.list_changes id, options
+        if resp.success?
+          Change::List.from_response resp, self
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Zone from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
@@ -150,6 +261,15 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      def adjust_change_sort_order order
+        return nil if order.nil?
+        if order.to_s.downcase.start_with? "d"
+          "descending"
+        else
+          "ascending"
+        end
       end
     end
   end
