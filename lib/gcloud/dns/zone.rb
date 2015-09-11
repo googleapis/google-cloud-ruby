@@ -15,6 +15,7 @@
 
 require "gcloud/dns/change"
 require "gcloud/dns/zone/list"
+require "gcloud/dns/record"
 require "time"
 
 module Gcloud
@@ -245,6 +246,81 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+
+      # rubocop:disable
+
+      ##
+      # Retrieves the list of records belonging to the zone.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:token]</code>::
+      #   A previously-returned page token representing part of the larger set
+      #   of results to view. (+String+)
+      # <code>options[:max]</code>::
+      #   Maximum number of records to return. (+Integer+)
+      # <code>options[:name]</code>::
+      #   Return only records with this fully-qualified domain name. (+String+)
+      # <code>options[:type]</code>::
+      #   Return only records with this {record
+      #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
+      #   If present, the +name+ parameter must also be present. (+String+)
+      #
+      # === Returns
+      #
+      # Array of Gcloud::Bigquery::Record (Gcloud::Bigquery::Record::List)
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   records = zone.records
+      #   records.each do |record|
+      #     puts record.name
+      #   end
+      #
+      # Records can be filtered by name and type.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   records = zone.records name: "example.com.", type: "A"
+      #
+      # If you have a significant number of records, you may need to paginate
+      # through them: (See Gcloud::Bigquery::Record::List)
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   records = zone.records
+      #   loop do
+      #     records.each do |record|
+      #       puts record.name
+      #     end
+      #     break unless records.next?
+      #     records = records.next
+      #   end
+      #
+      def records options = {}
+        ensure_connection!
+        resp = connection.list_records id, options
+        if resp.success?
+          Record::List.from_response resp, self
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      # rubocop:enable
 
       ##
       # Creates a new, unsaved Record that can be added to a Zone.

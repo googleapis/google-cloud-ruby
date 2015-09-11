@@ -194,6 +194,132 @@ describe Gcloud::Dns::Zone, :mock_dns do
     second_changes.next?.must_equal false
   end
 
+  it "lists records" do
+    num_records = 3
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(num_records)]
+    end
+
+    records = zone.records
+    records.size.must_equal num_records
+    records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+  end
+
+  it "lists records with name set" do
+    num_records = 3
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal record_name
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(num_records)]
+    end
+
+    records = zone.records name: record_name
+    records.size.must_equal num_records
+    records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+  end
+
+  it "lists records with name and type set" do
+    num_records = 3
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal record_name
+      env.params["type"].must_equal record_type
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(num_records)]
+    end
+
+    records = zone.records name: record_name, type: record_type
+    records.size.must_equal num_records
+    records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+  end
+
+  it "paginates records" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(2)]
+    end
+
+    first_records = zone.records
+    first_records.count.must_equal 3
+    first_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+    first_records.token.wont_be :nil?
+    first_records.token.must_equal "next_page_token"
+
+    second_records = zone.records token: first_records.token
+    second_records.count.must_equal 2
+    second_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+    second_records.token.must_be :nil?
+  end
+
+  it "paginates records with next? and next" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(2)]
+    end
+
+    first_records = zone.records
+    first_records.count.must_equal 3
+    first_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+    first_records.next?.must_equal true
+
+    second_records = first_records.next
+    second_records.count.must_equal 2
+    second_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+    second_records.next?.must_equal false
+  end
+
+  it "paginates records with max set" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(3, "next_page_token")]
+    end
+
+    records = zone.records max: 3
+    records.count.must_equal 3
+    records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+    records.token.wont_be :nil?
+    records.token.must_equal "next_page_token"
+  end
+
+  it "paginates records without max set" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.wont_include "maxResults"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(3, "next_page_token")]
+    end
+
+    records = zone.records
+    records.count.must_equal 3
+    records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+    records.token.wont_be :nil?
+    records.token.must_equal "next_page_token"
+  end
+
+  it "can create a record" do
+    record = zone.record record_name, record_ttl, record_type, record_data
+
+    record.name.must_equal record_name
+    record.ttl.must_equal  record_ttl
+    record.type.must_equal record_type
+    record.data.must_equal record_data
+  end
+
   def list_changes_json count = 2, token = nil
     changes = count.times.map do
       ch = random_change_hash
@@ -205,12 +331,14 @@ describe Gcloud::Dns::Zone, :mock_dns do
     hash.to_json
   end
 
-  it "can create a record" do
-    record = zone.record record_name, record_ttl, record_type, record_data
-
-    record.name.must_equal record_name
-    record.ttl.must_equal  record_ttl
-    record.type.must_equal record_type
-    record.data.must_equal record_data
+  def list_records_json count = 2, token = nil
+    seed = rand 99999
+    name = "example-#{seed}.com."
+    records = count.times.map do
+      random_record_hash name, seed, "A", ["1.2.3.4"]
+    end
+    hash = { "kind" => "dns#resourceRecordSet", "rrsets" => records }
+    hash["nextPageToken"] = token unless token.nil?
+    hash.to_json
   end
 end

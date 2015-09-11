@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/dns/record/list"
+
 module Gcloud
   module Dns
     ##
@@ -66,8 +68,8 @@ module Gcloud
       #   (+Integer+)
       # +type+::
       #   The identifier of a {supported record
-      #   type}[https://cloud.google.com/dns/what-is-cloud-dns]. For example:
-      #   +A+, +AAAA+, +CNAME+, +MX+, or +TXT+. (+String+)
+      #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
+      #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+. (+String+)
       # +data+::
       #   The resource record data, as determined by +type+ and defined in RFC
       #   1035 (section 5) and RFC 1034 (section 3.6.1). For example:

@@ -17,7 +17,6 @@ require "gcloud/gce"
 require "gcloud/dns/connection"
 require "gcloud/dns/credentials"
 require "gcloud/dns/zone"
-require "gcloud/dns/record"
 require "gcloud/dns/errors"
 
 module Gcloud
