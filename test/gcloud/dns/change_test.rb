@@ -81,6 +81,39 @@ describe Gcloud::Dns::Change, :mock_dns do
     change.must_be :done?
   end
 
+  it "can wait until done" do
+    pending_change = Gcloud::Dns::Change.from_gapi pending_change_hash, zone
+
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       pending_change_json(pending_change.id)]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       pending_change_json(pending_change.id)]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       pending_change_json(pending_change.id)]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       pending_change_json(pending_change.id)]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       done_change_json(pending_change.id)]
+    end
+
+    # mock out the sleep method so the test doesn't actually block
+    def pending_change.sleep *args
+    end
+
+    pending_change.must_be :pending?
+    pending_change.wait_until_done!
+    pending_change.must_be :done?
+  end
+
   def done_change_hash change_id = nil
     hash = random_change_hash
     hash["id"] = change_id if change_id

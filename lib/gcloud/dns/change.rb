@@ -117,6 +117,32 @@ module Gcloud
       alias_method :refresh!, :reload!
 
       ##
+      # Refreshes the change until the status is +done+.
+      # The delay between refreshes will incrementally increase.
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   change = zone.change 1234567890
+      #   change.done? #=> false
+      #   change.wait_until_done!
+      #   change.done? #=> true
+      #
+      def wait_until_done!
+        backoff = ->(retries) { sleep 2 * retries + 5 }
+        retries = 0
+        until done?
+          backoff.call retries
+          retries += 1
+          reload!
+        end
+      end
+
+      ##
       # New Change from a Google API Client object.
       def self.from_gapi gapi, zone #:nodoc:
         new.tap do |f|
