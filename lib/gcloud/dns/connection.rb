@@ -107,6 +107,20 @@ module Gcloud
         )
       end
 
+      def list_records zone_id, options = {}
+        params = { project: @project, managedZone: zone_id,
+                   pageToken: options.delete(:token),
+                   maxResults: options.delete(:max),
+                   name: options.delete(:name),
+                   type: options.delete(:type)
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @dns.resource_record_sets.list,
+          parameters: params
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end
