@@ -183,6 +183,12 @@ module Gcloud
       #   of results to view. (+String+)
       # <code>options[:max]</code>::
       #   Maximum number of changes to return. (+Integer+)
+      # <code>options[:order]</code>::
+      #   Sort the changes by change sequence. (+Symbol+ or +String+)
+      #
+      #   Acceptable values are:
+      #   * +asc+ - Sort by ascending change sequence
+      #   * +desc+ - Sort by descending change sequence
       #
       # === Returns
       #
@@ -199,6 +205,15 @@ module Gcloud
       #   changes.each do |change|
       #     puts change.name
       #   end
+      #
+      # The changes can be sorted by change sequence:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   changes = zone.changes order: :desc
       #
       # If you have a significant number of changes, you may need to paginate
       # through them: (See Gcloud::Bigquery::Change::List)
@@ -219,6 +234,10 @@ module Gcloud
       #
       def changes options = {}
         ensure_connection!
+        # Fix the sort options
+        options[:order] = adjust_change_sort_order options[:order]
+        options[:sort]  = "changeSequence" if options[:order]
+        # Continue with the API call
         resp = connection.list_changes id, options
         if resp.success?
           Change::List.from_response resp, self
@@ -242,6 +261,15 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      def adjust_change_sort_order order
+        return nil if order.nil?
+        if order.to_s.downcase.start_with? "d"
+          "descending"
+        else
+          "ascending"
+        end
       end
     end
   end
