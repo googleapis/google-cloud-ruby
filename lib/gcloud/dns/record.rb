@@ -91,6 +91,10 @@ module Gcloud
       def self.from_gapi gapi #:nodoc:
         new gapi["name"], gapi["ttl"], gapi["type"], gapi["rrdatas"]
       end
+
+      def to_gapi
+        { "name" => name, "ttl" => ttl, "type" => type, "rrdatas" => data }
+      end
     end
   end
 end

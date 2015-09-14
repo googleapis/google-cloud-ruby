@@ -23,8 +23,10 @@ describe Gcloud::Dns::Change, :mock_dns do
 
   it "knows its attributes" do
     change.id.must_equal "dns-change-1234567890"
-    change.additions.must_be :empty?
-    change.deletions.must_be :empty?
+    change.additions.count.must_equal 1
+    change.additions.first.must_be_kind_of Gcloud::Dns::Record
+    change.deletions.count.must_equal 1
+    change.deletions.first.must_be_kind_of Gcloud::Dns::Record
     change.status.must_equal "done"
     change.must_be :done?
     change.wont_be :pending?
@@ -37,8 +39,10 @@ describe Gcloud::Dns::Change, :mock_dns do
     pending_change = Gcloud::Dns::Change.from_gapi pending_change_hash, zone
 
     pending_change.id.must_equal "dns-change-1234567890"
-    pending_change.additions.must_be :empty?
-    pending_change.deletions.must_be :empty?
+    pending_change.additions.count.must_equal 1
+    pending_change.additions.first.must_be_kind_of Gcloud::Dns::Record
+    pending_change.deletions.count.must_equal 1
+    pending_change.deletions.first.must_be_kind_of Gcloud::Dns::Record
     pending_change.status.must_equal "pending"
     pending_change.wont_be :done?
     pending_change.must_be :pending?
@@ -117,6 +121,8 @@ describe Gcloud::Dns::Change, :mock_dns do
   def done_change_hash change_id = nil
     hash = random_change_hash
     hash["id"] = change_id if change_id
+    hash["additions"] = [{ "name" => "example.net.", "ttl" => 18600, "type" => "A", "rrdatas" => ["example.com."] }]
+    hash["deletions"] = [{ "name" => "example.net.", "ttl" => 18600, "type" => "A", "rrdatas" => ["example.org."] }]
     hash
   end
 

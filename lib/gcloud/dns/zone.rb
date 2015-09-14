@@ -343,6 +343,19 @@ module Gcloud
         Gcloud::Dns::Record.new name, ttl, type, data
       end
 
+      def update records_to_add = [], records_to_remove = []
+        records_to_add = Array(records_to_add).map! &:to_gapi
+        records_to_remove = Array(records_to_remove).map! &:to_gapi
+
+        ensure_connection!
+        resp = connection.create_change id, records_to_add, records_to_remove
+        if resp.success?
+          Change.from_gapi resp.data, self
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
       ##
       # New Zone from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
