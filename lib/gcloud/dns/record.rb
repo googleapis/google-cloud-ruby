@@ -80,9 +80,9 @@ module Gcloud
         fail ArgumentError, "ttl is required" unless ttl
         fail ArgumentError, "type is required" unless type
         fail ArgumentError, "data is required" unless data
-        @name = name
-        @ttl = ttl
-        @type = type
+        @name = name.to_s
+        @ttl = Integer(ttl)
+        @type = type.to_s.upcase
         @data = Array(data)
       end
 
@@ -94,6 +94,80 @@ module Gcloud
 
       def to_gapi
         { "name" => name, "type" => type, "ttl" => ttl, "rrdatas" => data }
+      end
+
+      # rubocop:disable all
+      # Rubocop's line-length and branch condition restrictions would prevent
+      # the most straightforward approach to converting zonefile's records
+      # to our own. So disable rubocop for these operations.
+
+      ##
+      # The zonefile library returns a two-element array in which the first
+      # element is a symbol type (:a, :mx, and so on), and the second element
+      # is an array containing the records of that type. We need to convert to a
+      # single array of records; and at the same time, aggregate records of the
+      # same name, ttl, and type into a single record with an array of rrdatas.
+      def self.from_zonefile zf # :nodoc:
+        final = {}
+        zf.records.map do |r|
+          type = r.first
+          type = :aaaa if type == :a4
+          r.last.each do |record|
+            ttl = ttl_to_i(record[:ttl] || zf.ttl)
+            key = [(record[:name] || zf.name), ttl, type]
+            final[key] ||= []
+            final[key] << data_from_zonefile_record(type, record)
+          end
+        end
+        final.map do |key, value|
+          Record.new key[0], key[1], key[2], value
+        end
+      end
+
+      def self.data_from_zonefile_record type, zf_record # :nodoc:
+        case type.to_s.upcase
+        when "A"
+          "#{zf_record[:host]}"
+        when "AAAA"
+          "#{zf_record[:host]}"
+        when "CNAME"
+          "#{zf_record[:host]}"
+        when "MX"
+          "#{zf_record[:pri]} #{zf_record[:host]}"
+        when "NAPTR"
+          "#{zf_record[:order]} #{zf_record[:preference]} #{zf_record[:flags]} #{zf_record[:service]} #{zf_record[:regexp]} #{zf_record[:replacement]}"
+        when "NS"
+          "#{zf_record[:host]}"
+        when "PTR"
+          "#{zf_record[:host]}"
+        when "SOA"
+          "#{zf_record[:mname]} #{zf_record[:rname]} #{zf_record[:serial]} #{zf_record[:retry]} #{zf_record[:refresh]} #{zf_record[:expire]} #{zf_record[:minimum]}"
+        when "SPF"
+          "#{zf_record[:data]}"
+        when "SRV"
+          "#{zf_record[:pri]} #{zf_record[:weight]} #{zf_record[:port]} #{zf_record[:host]}"
+        when "TXT"
+          "#{zf_record[:text]}"
+        else
+          fail ArgumentError, "record type '#{type}' is not supported"
+        end
+      end
+
+      # rubocop:enable all
+
+      MULTIPLIER = { "s" => (1),
+                     "m" => (60),
+                     "h" => (60 * 60),
+                     "d" => (60 * 60 * 24),
+                     "w" => (60 * 60 * 24 * 7) } # :nodoc:
+
+      def self.ttl_to_i ttl # :nodoc:
+        if ttl.respond_to?(:to_int) || ttl.to_s =~ /\A\d+\z/
+          return ttl.to_i
+        elsif (m = /\A(\d+)(w|d|h|m|s)\z/.match ttl)
+          return m[1].to_i * MULTIPLIER[m[2]].to_i
+        end
+        fail ArgumentError, "ttl '#{ttl}' is not convertible to seconds"
       end
     end
   end

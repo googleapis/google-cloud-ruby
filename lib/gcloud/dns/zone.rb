@@ -17,6 +17,7 @@ require "gcloud/dns/change"
 require "gcloud/dns/zone/list"
 require "gcloud/dns/record"
 require "time"
+require "zonefile"
 
 module Gcloud
   module Dns
@@ -337,6 +338,13 @@ module Gcloud
       #
       def record name, type, ttl, data
         Gcloud::Dns::Record.new name, type, ttl, data
+      end
+
+      def import file_path
+        zf = Zonefile.from_file file_path
+        Record.from_zonefile zf
+        # TODO: pass return value of line above when add_records is available
+        # add_records records
       end
 
       ##
