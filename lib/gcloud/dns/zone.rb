@@ -340,6 +340,23 @@ module Gcloud
         Gcloud::Dns::Record.new name, type, ttl, data
       end
 
+      ##
+      # Imports resource records from a {DNS zone
+      # file}[https://en.wikipedia.org/wiki/Zone_file].
+      #
+      # === Returns
+      #
+      # A new Change adding the imported Record instances.
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   change = zone.import "path/to/db.example.com"
+      #
       def import file_path
         zf = Zonefile.from_file file_path
         Record.from_zonefile zf
