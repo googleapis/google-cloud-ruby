@@ -114,7 +114,7 @@ module Gcloud
           type = :aaaa if type == :a4
           r.last.each do |record|
             ttl = ttl_to_i(record[:ttl] || zf.ttl)
-            key = [(record[:name] || zf.name), ttl, type]
+            key = [(record[:name] || zf.origin), ttl, type]
             final[key] ||= []
             final[key] << data_from_zonefile_record(type, record)
           end
