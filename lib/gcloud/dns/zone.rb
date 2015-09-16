@@ -344,6 +344,12 @@ module Gcloud
       # Imports resource records from a {DNS zone
       # file}[https://en.wikipedia.org/wiki/Zone_file].
       #
+      # === Parameters
+      #
+      # +path_or_io+::
+      #   The path to a zone file on the filesystem, or an IO instance from
+      #   which zone file data can be read. (+String or +IO+)
+      #
       # === Returns
       #
       # A new Change adding the imported Record instances.
@@ -357,8 +363,12 @@ module Gcloud
       #   zone = dns.zone "example-zone"
       #   change = zone.import "path/to/db.example.com"
       #
-      def import file_path
-        zf = Zonefile.from_file file_path
+      def import path_or_io
+        zf = if path_or_io.respond_to? :read
+          Zonefile.new path_or_io.read
+        else
+          Zonefile.from_file path_or_io
+        end
         Record.from_zonefile zf
         # TODO: pass return value of line above when add_records is available
         # add_records records
