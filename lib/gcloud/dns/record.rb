@@ -109,19 +109,28 @@ module Gcloud
       # same name, ttl, and type into a single record with an array of rrdatas.
       def self.from_zonefile zf # :nodoc:
         final = {}
+        add_zonefile_record final, zf, :soa, zf.soa
         zf.records.map do |r|
           type = r.first
           type = :aaaa if type == :a4
           r.last.each do |record|
-            ttl = ttl_to_i(record[:ttl] || zf.ttl)
-            key = [(record[:name] || zf.origin), ttl, type]
-            final[key] ||= []
-            final[key] << data_from_zonefile_record(type, record)
+            add_zonefile_record final, zf, type, record
           end
         end
         final.map do |key, value|
           Record.new key[0], key[1], key[2], value
         end
+      end
+
+      def self.add_zonefile_record final, zf, type, record # :nodoc:
+        ttl = if record[:ttl] && !record[:ttl].empty?
+                ttl_to_i record[:ttl]
+              else
+                ttl_to_i zf.ttl
+              end
+        key = [(record[:name] || zf.origin), ttl, type]
+        final[key] ||= []
+        final[key] << data_from_zonefile_record(type, record)
       end
 
       def self.data_from_zonefile_record type, zf_record # :nodoc:
@@ -141,7 +150,7 @@ module Gcloud
         when "PTR"
           "#{zf_record[:host]}"
         when "SOA"
-          "#{zf_record[:mname]} #{zf_record[:rname]} #{zf_record[:serial]} #{zf_record[:retry]} #{zf_record[:refresh]} #{zf_record[:expire]} #{zf_record[:minimum]}"
+          "#{zf_record[:primary]} #{zf_record[:email]} #{zf_record[:serial]} #{zf_record[:refresh]} #{zf_record[:retry]} #{zf_record[:expire]} #{zf_record[:minimumTTL]}"
         when "SPF"
           "#{zf_record[:data]}"
         when "SRV"

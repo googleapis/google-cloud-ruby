@@ -365,10 +365,10 @@ module Gcloud
       #
       def import path_or_io
         zf = if path_or_io.respond_to? :read
-          Zonefile.new path_or_io.read
-        else
-          Zonefile.from_file path_or_io
-        end
+               Zonefile.new path_or_io.read
+             else
+               Zonefile.from_file path_or_io
+             end
         Record.from_zonefile zf
         # TODO: pass return value of line above when add_records is available
         # add_records records
