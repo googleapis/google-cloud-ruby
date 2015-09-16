@@ -108,9 +108,9 @@ module Gcloud
       end
 
       def create_change zone_id, additions, deletions
-        change = { "kind" => "dns#change",
-          "additions" => Array(additions),
-          "deletions" => Array(deletions) }
+        change = { "kind"      => "dns#change",
+                   "additions" => Array(additions),
+                   "deletions" => Array(deletions) }
 
         @client.execute(
           api_method: @dns.changes.create,

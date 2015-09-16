@@ -344,8 +344,8 @@ module Gcloud
       end
 
       def update records_to_add = [], records_to_remove = []
-        records_to_add = Array(records_to_add).map! &:to_gapi
-        records_to_remove = Array(records_to_remove).map! &:to_gapi
+        records_to_add = Array(records_to_add).map(&:to_gapi)
+        records_to_remove = Array(records_to_remove).map(&:to_gapi)
 
         ensure_connection!
         resp = connection.create_change id, records_to_add, records_to_remove
@@ -354,6 +354,14 @@ module Gcloud
         else
           fail ApiError.from_response(resp)
         end
+      end
+
+      def add *records
+        update Array(records).flatten, []
+      end
+
+      def remove *records
+        update [], Array(records).flatten
       end
 
       ##
