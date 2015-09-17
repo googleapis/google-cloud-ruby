@@ -87,7 +87,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Bigquery::Zone or +nil+ if the zone does not exist
+      # Gcloud::Dns::Zone or +nil+ if the zone does not exist
       #
       # === Example
       #
@@ -123,7 +123,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Bigquery::Zone (Gcloud::Bigquery::Zone::List)
+      # Array of Gcloud::Dns::Zone (Gcloud::Dns::Zone::List)
       #
       # === Examples
       #
@@ -137,7 +137,7 @@ module Gcloud
       #   end
       #
       # If you have a significant number of zones, you may need to paginate
-      # through them: (See Gcloud::Bigquery::Zone::List)
+      # through them: (See Gcloud::Dns::Zone::List)
       #
       #   require "gcloud"
       #

@@ -147,7 +147,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Bigquery::Change or +nil+ if the change does not exist
+      # Gcloud::Dns::Change or +nil+ if the change does not exist
       #
       # === Example
       #
@@ -193,7 +193,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Bigquery::Change (Gcloud::Bigquery::Change::List)
+      # Array of Gcloud::Dns::Change (Gcloud::Dns::Change::List)
       #
       # === Examples
       #
@@ -217,7 +217,7 @@ module Gcloud
       #   changes = zone.changes order: :desc
       #
       # If you have a significant number of changes, you may need to paginate
-      # through them: (See Gcloud::Bigquery::Change::List)
+      # through them: (See Gcloud::Dns::Change::List)
       #
       #   require "gcloud"
       #
@@ -247,8 +247,6 @@ module Gcloud
         end
       end
 
-      # rubocop:disable
-
       ##
       # Retrieves the list of records belonging to the zone.
       #
@@ -270,7 +268,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Bigquery::Record (Gcloud::Bigquery::Record::List)
+      # Array of Gcloud::Dns::Record (Gcloud::Dns::Record::List)
       #
       # === Examples
       #
@@ -294,7 +292,7 @@ module Gcloud
       #   records = zone.records name: "example.com.", type: "A"
       #
       # If you have a significant number of records, you may need to paginate
-      # through them: (See Gcloud::Bigquery::Record::List)
+      # through them: (See Gcloud::Dns::Record::List)
       #
       #   require "gcloud"
       #
@@ -320,14 +318,12 @@ module Gcloud
         end
       end
 
-      # rubocop:enable
-
       ##
       # Creates a new, unsaved Record that can be added to a Zone.
       #
       # === Returns
       #
-      # A new Record instance.
+      # Gcloud::Dns::Record
       #
       # === Example
       #
@@ -337,12 +333,31 @@ module Gcloud
       #   dns = gcloud.dns
       #   zone = dns.zone "example-zone"
       #   record = zone.record "example.com.", 86400, "A", ["1.2.3.4"]
-      #   zone.add_records [record_1]
+      #   zone.add record
       #
       def record name, ttl, type, data
         Gcloud::Dns::Record.new name, ttl, type, data
       end
 
+      ##
+      # Adds and removes Records from the Zone. All changes are made in a single
+      # API request.
+      #
+      # === Returns
+      #
+      # Gcloud::Dns::Change
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   new_record = zone.record "example.com.", 86400, "A", ["1.2.3.4"]
+      #   old_record = zone.record "example.com.", 86400, "A", ["1.2.3.4"]
+      #   zone.update [new_record], [old_record]
+      #
       def update records_to_add = [], records_to_remove = []
         records_to_add = Array(records_to_add).map(&:to_gapi)
         records_to_remove = Array(records_to_remove).map(&:to_gapi)
@@ -356,10 +371,46 @@ module Gcloud
         end
       end
 
+      ##
+      # Adds records to the Zone. In order to update existing records, or add
+      # and delete records in the same transaction, use #update.
+      #
+      # === Returns
+      #
+      # Gcloud::Dns::Change
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   record = zone.record "example.com.", 86400, "A", ["1.2.3.4"]
+      #   zone.add record
+      #
       def add *records
         update Array(records).flatten, []
       end
 
+      ##
+      # Removes records from the Zone. In order to update existing records, or
+      # add and remove records in the same transaction, use #update.
+      #
+      # === Returns
+      #
+      # Gcloud::Dns::Change
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   record = zone.record "example.com.", 86400, "A", ["1.2.3.4"]
+      #   zone.remove record
+      #
       def remove *records
         update [], Array(records).flatten
       end
