@@ -63,14 +63,14 @@ module Gcloud
       # The records added in this change request.
       #
       def additions
-        Array @gapi["additions"]
+        Array(@gapi["additions"]).map { |gapi| Record.from_gapi gapi }
       end
 
       ##
       # The records removed in this change request.
       #
       def deletions
-        Array @gapi["deletions"]
+        Array(@gapi["deletions"]).map { |gapi| Record.from_gapi gapi }
       end
 
       ##

@@ -107,6 +107,18 @@ module Gcloud
         )
       end
 
+      def create_change zone_id, additions, deletions
+        change = { "kind"      => "dns#change",
+                   "additions" => Array(additions),
+                   "deletions" => Array(deletions) }
+
+        @client.execute(
+          api_method: @dns.changes.create,
+          parameters: { project: @project, managedZone: zone_id },
+          body_object: change
+        )
+      end
+
       def list_records zone_id, options = {}
         params = { project: @project, managedZone: zone_id,
                    pageToken: options.delete(:token),
