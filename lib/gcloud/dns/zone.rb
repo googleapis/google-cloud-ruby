@@ -342,7 +342,8 @@ module Gcloud
 
       ##
       # Imports resource records from a {DNS zone
-      # file}[https://en.wikipedia.org/wiki/Zone_file].
+      # file}[https://en.wikipedia.org/wiki/Zone_file], adding the new Records
+      # to the zone, without removing any existing Records from the zone.
       #
       # === Parameters
       #
@@ -369,9 +370,8 @@ module Gcloud
              else
                Zonefile.from_file path_or_io
              end
-        Record.from_zonefile zf
-        # TODO: pass return value of line above when add_records is available
-        # add_records records
+        records = Record.from_zonefile zf
+        add records
       end
 
       ##
