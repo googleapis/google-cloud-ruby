@@ -45,6 +45,18 @@ module Gcloud
         end
 
         ##
+        # Retrieve all records and add to the current list.
+        # This changes the contained records.
+        def all
+          while next?
+            next_records = self.next
+            push(*next_records)
+            self.token = next_records.token
+          end
+          self
+        end
+
+        ##
         # New Records::List from a response object.
         def self.from_response resp, zone #:nodoc:
           records = new(Array(resp.data["rrsets"]).map do |gapi_object|
