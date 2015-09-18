@@ -87,6 +87,30 @@ module Gcloud
       end
 
       ##
+      # Imports resource records from a {DNS zone
+      # file}[https://en.wikipedia.org/wiki/Zone_file]. The zone file's SOA
+      # record is not included.
+      #
+      # === Parameters
+      #
+      # +path_or_io+::
+      #   The path to a zone file on the filesystem, or an IO instance from
+      #   which zone file data can be read. (+String or +IO+)
+      #
+      # === Returns
+      #
+      # An array of unsaved Record instances.
+      #
+      def self.import path_or_io
+        zf = if path_or_io.respond_to? :read
+               Zonefile.new path_or_io.read
+             else
+               Zonefile.from_file path_or_io
+             end
+        from_zonefile zf
+      end
+
+      ##
       # New Record from a Google API Client object.
       def self.from_gapi gapi #:nodoc:
         new gapi["name"], gapi["type"], gapi["ttl"], gapi["rrdatas"]
@@ -109,7 +133,6 @@ module Gcloud
       # same name, ttl, and type into a single record with an array of rrdatas.
       def self.from_zonefile zf # :nodoc:
         final = {}
-        add_zonefile_record final, zf, :soa, zf.soa
         zf.records.map do |r|
           type = r.first
           type = :aaaa if type == :a4

@@ -343,7 +343,12 @@ module Gcloud
       ##
       # Imports resource records from a {DNS zone
       # file}[https://en.wikipedia.org/wiki/Zone_file], adding the new Records
-      # to the zone, without removing any existing Records from the zone.
+      # to the zone, without removing any existing Records from the zone. The
+      # zone file's SOA record is not imported, because the existing SOA record
+      # that was generated for the zone by Google Cloud DNS, and which points to
+      # a Google Cloud DNS name server, is probably more appropriate. The zone
+      # file's +NS+ records are imported, however, so you should delete any
+      # records that you do not want to keep.
       #
       # === Parameters
       #
@@ -365,13 +370,7 @@ module Gcloud
       #   change = zone.import "path/to/db.example.com"
       #
       def import path_or_io
-        zf = if path_or_io.respond_to? :read
-               Zonefile.new path_or_io.read
-             else
-               Zonefile.from_file path_or_io
-             end
-        records = Record.from_zonefile zf
-        add records
+        add Record.import(path_or_io)
       end
 
       ##
