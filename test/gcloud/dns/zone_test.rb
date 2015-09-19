@@ -21,8 +21,8 @@ describe Gcloud::Dns::Zone, :mock_dns do
   let(:zone_hash) { random_zone_hash zone_name, zone_dns }
   let(:zone) { Gcloud::Dns::Zone.from_gapi zone_hash, dns.connection }
   let(:record_name) { "example.com." }
-  let(:record_ttl)  { 86400 }
   let(:record_type) { "A" }
+  let(:record_ttl)  { 86400 }
   let(:record_data) { ["1.2.3.4"] }
 
   it "knows its attributes" do
@@ -365,12 +365,12 @@ describe Gcloud::Dns::Zone, :mock_dns do
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.name
-    change.additions.first.ttl.must_equal  to_add.ttl
     change.additions.first.type.must_equal to_add.type
+    change.additions.first.ttl.must_equal  to_add.ttl
     change.additions.first.data.must_equal to_add.data
     change.deletions.first.name.must_equal to_remove.name
-    change.deletions.first.ttl.must_equal  to_remove.ttl
     change.deletions.first.type.must_equal to_remove.type
+    change.deletions.first.ttl.must_equal  to_remove.ttl
     change.deletions.first.data.must_equal to_remove.data
   end
 
@@ -395,7 +395,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
     change.additions.first.type.must_equal to_add.type
     change.additions.first.data.must_equal to_add.data
     change.deletions.must_be :empty?
-  end
+ end
 
   it "removes records" do
     to_remove = zone.record "example.net.", "A", 18600, "example.org."
@@ -415,8 +415,8 @@ describe Gcloud::Dns::Zone, :mock_dns do
     change.id.must_equal "dns-change-created"
     change.additions.must_be :empty?
     change.deletions.first.name.must_equal to_remove.name
-    change.deletions.first.ttl.must_equal  to_remove.ttl
     change.deletions.first.type.must_equal to_remove.type
+    change.deletions.first.ttl.must_equal  to_remove.ttl
     change.deletions.first.data.must_equal to_remove.data
   end
 
