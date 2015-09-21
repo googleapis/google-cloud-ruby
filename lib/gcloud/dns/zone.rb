@@ -436,7 +436,46 @@ module Gcloud
       #   change = zone.remove "example.com.", "A"
       #
       def remove name, type
-        update [], records(name: name, type: type)
+        update [], records(name: name, type: type).all.to_a
+      end
+
+      ##
+      # Replaces existing records on the Zone. Records matching the +name+ and
+      # +type+ are replaced. In order to update existing records, or add and
+      # delete records in the same transaction, use #update.
+      #
+      # === Parameters
+      #
+      # +name+::
+      #   The owner of the record. For example: +example.com.+. (+String+)
+      # +type+::
+      #   The identifier of a {supported record
+      #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
+      #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+. (+String+)
+      # +ttl+::
+      #   The number of seconds that the record can be cached by resolvers.
+      #   (+Integer+)
+      # +data+::
+      #   The resource record data, as determined by +type+ and defined in RFC
+      #   1035 (section 5) and RFC 1034 (section 3.6.1). For example:
+      #   +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of +String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Dns::Change
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   change = zone.replace "example.com.", "A", 86400, ["5.6.7.8"]
+      #
+      def replace name, type, ttl, data
+        update [record(name, type, ttl, data)],
+               records(name: name, type: type).all.to_a
       end
 
       ##
