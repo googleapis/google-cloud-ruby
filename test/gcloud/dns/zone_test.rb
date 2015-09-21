@@ -429,7 +429,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
     change.deletions.first.data.must_equal to_remove.data
   end
 
-  it "removes records by name and type" do
+  it "replaces records by name and type" do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
     to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
