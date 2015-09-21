@@ -45,8 +45,18 @@ module Gcloud
         end
 
         ##
-        # Retrieve all records and add to the current list.
-        # This changes the contained records.
+        # Retrieves all records by repeatedly loading pages until #next? returns
+        # false. Returns the list instance for method chaining.
+        #
+        # === Example
+        #
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   dns = gcloud.dns
+        #   zone = dns.zone "example-zone"
+        #   records = zone.records.all # Load all pages of records
+        #
         def all
           while next?
             next_records = self.next
