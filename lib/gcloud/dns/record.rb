@@ -32,7 +32,7 @@ module Gcloud
     #   record_1 = zone.record "example.com.", "A", 86400, "1.2.3.4"
     #   mx_data = ["10 mail.example.com.","20 mail2.example.com."]
     #   record_2 = zone.record "example.com.", "A", 86400, mx_data
-    #   zone.add_records [record_1, record_2]
+    #   zone.change [record_1, record_2], []
     #
     class Record
       ##
