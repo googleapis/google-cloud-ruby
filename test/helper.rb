@@ -625,7 +625,7 @@ class MockDns < Minitest::Spec
     }
   end
 
-  def random_record_hash name, ttl, type, data
+  def random_record_hash name, type, ttl, data
     {
       "kind" => "dns#resourceRecordSet",
       "name" => name,

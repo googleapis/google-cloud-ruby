@@ -29,10 +29,10 @@ module Gcloud
     #   dns = gcloud.dns
     #   zone = dns.zone "example-zone"
     #
-    #   record_1 = zone.record "example.com.", 86400, "A", "1.2.3.4"
+    #   record_1 = zone.record "example.com.", "A", 86400, "1.2.3.4"
     #   mx_data = ["10 mail.example.com.","20 mail2.example.com."]
-    #   record_2 = zone.record "example.com.", 86400, "A", mx_data
-    #   zone.add_records [record_1, record_2]
+    #   record_2 = zone.record "example.com.", "A", 86400, mx_data
+    #   zone.change [record_1, record_2], []
     #
     class Record
       ##
@@ -63,19 +63,19 @@ module Gcloud
       #
       # +name+::
       #   The owner of the record. For example: +example.com.+. (+String+)
-      # +ttl+::
-      #   The number of seconds that the record can be cached by resolvers.
-      #   (+Integer+)
       # +type+::
       #   The identifier of a {supported record
       #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
       #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+. (+String+)
+      # +ttl+::
+      #   The number of seconds that the record can be cached by resolvers.
+      #   (+Integer+)
       # +data+::
       #   The resource record data, as determined by +type+ and defined in RFC
       #   1035 (section 5) and RFC 1034 (section 3.6.1). For example:
       #   +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of +String+)
       #
-      def initialize name, ttl, type, data
+      def initialize name, type, ttl, data
         fail ArgumentError, "name is required" unless name
         fail ArgumentError, "ttl is required" unless ttl
         fail ArgumentError, "type is required" unless type
@@ -89,11 +89,11 @@ module Gcloud
       ##
       # New Record from a Google API Client object.
       def self.from_gapi gapi #:nodoc:
-        new gapi["name"], gapi["ttl"], gapi["type"], gapi["rrdatas"]
+        new gapi["name"], gapi["type"], gapi["ttl"], gapi["rrdatas"]
       end
 
       def to_gapi
-        { "name" => name, "ttl" => ttl, "type" => type, "rrdatas" => data }
+        { "name" => name, "type" => type, "ttl" => ttl, "rrdatas" => data }
       end
     end
   end

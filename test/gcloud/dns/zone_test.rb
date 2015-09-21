@@ -21,8 +21,8 @@ describe Gcloud::Dns::Zone, :mock_dns do
   let(:zone_hash) { random_zone_hash zone_name, zone_dns }
   let(:zone) { Gcloud::Dns::Zone.from_gapi zone_hash, dns.connection }
   let(:record_name) { "example.com." }
-  let(:record_ttl)  { 86400 }
   let(:record_type) { "A" }
+  let(:record_ttl)  { 86400 }
   let(:record_data) { ["1.2.3.4"] }
 
   it "knows its attributes" do
@@ -339,7 +339,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
   end
 
   it "can create a record" do
-    record = zone.record record_name, record_ttl, record_type, record_data
+    record = zone.record record_name, record_type, record_ttl, record_data
 
     record.name.must_equal record_name
     record.ttl.must_equal  record_ttl
@@ -348,8 +348,8 @@ describe Gcloud::Dns::Zone, :mock_dns do
   end
 
   it "adds and removes records with update" do
-    to_add = zone.record "example.net.", 18600, "A", "example.com."
-    to_remove = zone.record "example.net.", 18600, "A", "example.org."
+    to_add = zone.record "example.net.", "A", 18600, "example.com."
+    to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
@@ -365,17 +365,17 @@ describe Gcloud::Dns::Zone, :mock_dns do
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.name
-    change.additions.first.ttl.must_equal  to_add.ttl
     change.additions.first.type.must_equal to_add.type
+    change.additions.first.ttl.must_equal  to_add.ttl
     change.additions.first.data.must_equal to_add.data
     change.deletions.first.name.must_equal to_remove.name
-    change.deletions.first.ttl.must_equal  to_remove.ttl
     change.deletions.first.type.must_equal to_remove.type
+    change.deletions.first.ttl.must_equal  to_remove.ttl
     change.deletions.first.data.must_equal to_remove.data
   end
 
-  it "adds records" do
-    to_add = zone.record "example.net.", 18600, "A", "example.com."
+  it "adds a record" do
+    to_add = zone.record "example.net.", "A", 18600, "example.com."
 
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
@@ -387,19 +387,28 @@ describe Gcloud::Dns::Zone, :mock_dns do
        create_change_json(to_add, [])]
     end
 
-    change = zone.add to_add
+    change = zone.add "example.net.", "A", 18600, "example.com."
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.name
-    change.additions.first.ttl.must_equal  to_add.ttl
     change.additions.first.type.must_equal to_add.type
+    change.additions.first.ttl.must_equal  to_add.ttl
     change.additions.first.data.must_equal to_add.data
     change.deletions.must_be :empty?
   end
 
-  it "removes records" do
-    to_remove = zone.record "example.net.", 18600, "A", "example.org."
+  it "removes records by name and type" do
+    to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
+    # The request for the records to remove.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.net."
+      env.params["type"].must_equal "A"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(to_remove)]
+    end
+
+    # The request to remove the records.
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
       json["additions"].count.must_equal 0
@@ -410,14 +419,55 @@ describe Gcloud::Dns::Zone, :mock_dns do
        create_change_json([], to_remove)]
     end
 
-    change = zone.remove to_remove
+    change = zone.remove "example.net.", "A"
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.must_be :empty?
     change.deletions.first.name.must_equal to_remove.name
-    change.deletions.first.ttl.must_equal  to_remove.ttl
     change.deletions.first.type.must_equal to_remove.type
+    change.deletions.first.ttl.must_equal  to_remove.ttl
     change.deletions.first.data.must_equal to_remove.data
+  end
+
+  it "removes records by name and type" do
+    to_add = zone.record "example.net.", "A", 18600, "example.com."
+    to_remove = zone.record "example.net.", "A", 18600, "example.org."
+
+    # The request for the records to remove.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.net."
+      env.params["type"].must_equal "A"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(to_remove)]
+    end
+
+    # The request to add and remove the records.
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      json = JSON.parse env.body
+      json["additions"].count.must_equal 1
+      json["deletions"].count.must_equal 1
+      json["additions"].first.must_equal to_add.to_gapi
+      json["deletions"].first.must_equal to_remove.to_gapi
+      [200, {"Content-Type" => "application/json"},
+       create_change_json(to_add, to_remove)]
+    end
+
+    change = zone.replace "example.net.", "A", 18600, "example.com."
+    change.must_be_kind_of Gcloud::Dns::Change
+    change.id.must_equal "dns-change-created"
+    change.additions.first.name.must_equal to_add.name
+    change.additions.first.type.must_equal to_add.type
+    change.additions.first.ttl.must_equal  to_add.ttl
+    change.additions.first.data.must_equal to_add.data
+    change.deletions.first.name.must_equal to_remove.name
+    change.deletions.first.type.must_equal to_remove.type
+    change.deletions.first.ttl.must_equal  to_remove.ttl
+    change.deletions.first.data.must_equal to_remove.data
+  end
+
+  def lookup_records_json record
+    hash = { "kind" => "dns#resourceRecordSet", "rrsets" => [record.to_gapi] }
+    hash.to_json
   end
 
   def create_change_json to_add, to_remove
@@ -443,7 +493,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
     seed = rand 99999
     name = "example-#{seed}.com."
     records = count.times.map do
-      random_record_hash name, seed, "A", ["1.2.3.4"]
+      random_record_hash name, "A", seed, ["1.2.3.4"]
     end
     hash = { "kind" => "dns#resourceRecordSet", "rrsets" => records }
     hash["nextPageToken"] = token unless token.nil?

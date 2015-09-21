@@ -17,16 +17,16 @@ require "helper"
 describe Gcloud::Dns::Record, :mock_dns do
   # Create a record object with the project's mocked connection object
   let(:record_name) { "example.com." }
-  let(:record_ttl)  { 86400 }
   let(:record_type) { "A" }
+  let(:record_ttl)  { 86400 }
   let(:record_data) { ["1.2.3.4"] }
-  let(:record_hash) { random_record_hash record_name, record_ttl, record_type, record_data }
+  let(:record_hash) { random_record_hash record_name, record_type, record_ttl, record_data }
   let(:record) { Gcloud::Dns::Record.from_gapi record_hash }
 
   it "knows its attributes" do
     record.name.must_equal record_name
-    record.ttl.must_equal  record_ttl
     record.type.must_equal record_type
+    record.ttl.must_equal  record_ttl
     record.data.must_equal record_data
   end
 end
