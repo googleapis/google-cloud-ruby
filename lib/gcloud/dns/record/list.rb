@@ -45,6 +45,28 @@ module Gcloud
         end
 
         ##
+        # Retrieves all records by repeatedly loading pages until #next? returns
+        # false. Returns the list instance for method chaining.
+        #
+        # === Example
+        #
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   dns = gcloud.dns
+        #   zone = dns.zone "example-zone"
+        #   records = zone.records.all # Load all pages of records
+        #
+        def all
+          while next?
+            next_records = self.next
+            push(*next_records)
+            self.token = next_records.token
+          end
+          self
+        end
+
+        ##
         # New Records::List from a response object.
         def self.from_response resp, zone #:nodoc:
           records = new(Array(resp.data["rrsets"]).map do |gapi_object|

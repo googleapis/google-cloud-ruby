@@ -282,6 +282,33 @@ describe Gcloud::Dns::Zone, :mock_dns do
     second_records.next?.must_equal false
   end
 
+  it "loads all records with all" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(2)]
+    end
+
+    all_records = zone.records
+    all_records.count.must_equal 3
+    all_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+    all_records.next?.must_equal true
+
+    all_records.all
+    all_records.count.must_equal 5
+    all_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+    all_records.next?.must_equal false
+
+    # Calling all again does nothing, returns self
+    all_records.must_equal all_records.all
+  end
+
   it "paginates records with max set" do
     mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
       env.params.must_include "maxResults"
