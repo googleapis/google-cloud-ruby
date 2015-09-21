@@ -14,6 +14,7 @@
 # limitations under the License.
 
 require "gcloud/dns/change"
+require "gcloud/dns/zone/transaction"
 require "gcloud/dns/zone/list"
 require "gcloud/dns/record"
 require "time"
@@ -347,7 +348,24 @@ module Gcloud
       #
       # Gcloud::Dns::Change
       #
-      # === Example
+      # === Examples
+      #
+      # The recommended way to make changes is call +update+ with a block. See
+      # Zone::Transaction.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   zone.update do |tx|
+      #     tx.add     "example.com.", "A",  86400, "1.2.3.4"
+      #     tx.remove  "example.com.", "TXT"
+      #     tx.replace "example.com.", "MX", 86400, ["10 mail1.example.com.",
+      #                                              "20 mail2.example.com."]
+      #   end
+      #
+      # Or you can provide the record objects to add and remove.
       #
       #   require "gcloud"
       #
@@ -355,24 +373,25 @@ module Gcloud
       #   dns = gcloud.dns
       #   zone = dns.zone "example-zone"
       #   new_record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
-      #   old_record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
+      #   old_record = zone.record "example.com.", "A", 18600, ["1.2.3.4"]
       #   zone.update [new_record], [old_record]
       #
-      def update records_to_add = [], records_to_remove = []
-        records_to_add = Array(records_to_add).map(&:to_gapi)
-        records_to_remove = Array(records_to_remove).map(&:to_gapi)
+      def update additions = [], deletions = []
+        additions = Array additions
+        deletions = Array deletions
 
-        ensure_connection!
-        resp = connection.create_change id, records_to_add, records_to_remove
-        if resp.success?
-          Change.from_gapi resp.data, self
-        else
-          fail ApiError.from_response(resp)
+        if block_given?
+          updater = Zone::Transaction.new self
+          yield updater
+          additions += updater.additions
+          deletions += updater.deletions
         end
+
+        create_change additions, deletions
       end
 
       ##
-      # Adds records to the Zone. In order to update existing records, or add
+      # Adds a record to the Zone. In order to update existing records, or add
       # and delete records in the same transaction, use #update.
       #
       # === Parameters
@@ -493,6 +512,18 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      def create_change additions, deletions
+        ensure_connection!
+        resp = connection.create_change id,
+                                        additions.map(&:to_gapi),
+                                        deletions.map(&:to_gapi)
+        if resp.success?
+          Change.from_gapi resp.data, self
+        else
+          fail ApiError.from_response(resp)
+        end
       end
 
       def adjust_change_sort_order order
