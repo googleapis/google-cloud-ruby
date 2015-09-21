@@ -397,20 +397,29 @@ describe Gcloud::Dns::Zone, :mock_dns do
     change.deletions.must_be :empty?
   end
 
-  it "removes records" do
+  it "removes records by name and type" do
     to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
+    # The request for the records to remove.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.net."
+      env.params["type"].must_equal "A"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(1)]
+    end
+
+    # The request to remove the records.
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
       json["additions"].count.must_equal 0
       json["deletions"].count.must_equal 1
       json["additions"].must_be :empty?
-      json["deletions"].first.must_equal to_remove.to_gapi
+      # json["deletions"].first.must_equal to_remove.to_gapi
       [200, {"Content-Type" => "application/json"},
        create_change_json([], to_remove)]
     end
 
-    change = zone.remove to_remove
+    change = zone.remove "example.net.", "A"
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.must_be :empty?

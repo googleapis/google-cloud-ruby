@@ -409,8 +409,18 @@ module Gcloud
       end
 
       ##
-      # Removes records from the Zone. In order to update existing records, or
-      # add and remove records in the same transaction, use #update.
+      # Removes records from the Zone. The records are looked up before they are
+      # removed. In order to update existing records, or add and remove records
+      # in the same transaction, use #update.
+      #
+      # === Parameters
+      #
+      # +name+::
+      #   The owner of the record. For example: +example.com.+. (+String+)
+      # +type+::
+      #   The identifier of a {supported record
+      #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
+      #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+. (+String+)
       #
       # === Returns
       #
@@ -423,11 +433,10 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
       #   zone = dns.zone "example-zone"
-      #   record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
-      #   zone.remove record
+      #   change = zone.remove "example.com.", "A"
       #
-      def remove *records
-        update [], Array(records).flatten
+      def remove name, type
+        update [], records(name: name, type: type)
       end
 
       ##
