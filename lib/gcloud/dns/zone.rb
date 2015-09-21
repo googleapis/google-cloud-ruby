@@ -393,9 +393,9 @@ module Gcloud
       def import path_or_io, options = {}
         unless options[:nameservers]
           options[:except] ||= []
-          options[:except] = (Array(options[:except]) + ["SOA","NS"]).uniq
+          options[:except] = (Array(options[:except]) + %w(SOA NS)).uniq
         end
-        add Gcloud::Dns::Importer.new(path_or_io).records(options)
+        update Gcloud::Dns::Importer.new(path_or_io).records(options), []
       end
 
       ##

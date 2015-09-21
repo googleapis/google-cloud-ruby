@@ -114,7 +114,7 @@ module Gcloud
           data = zf_records.map do |zf_record|
             data_from_zonefile_record(key[1], zf_record)
           end
-          Gcloud::Dns::Record.new key[0], ttl, key[1], data
+          Gcloud::Dns::Record.new key[0], key[1], ttl, data
         end
       end
 
@@ -122,7 +122,7 @@ module Gcloud
         zf_soa = @zonefile.soa
         ttl = ttl_to_i(zf_soa[:ttl]) || ttl_to_i(@zonefile.ttl)
         data = data_from_zonefile_record :soa, zf_soa
-        Gcloud::Dns::Record.new zf_soa[:origin], ttl, "SOA", data
+        Gcloud::Dns::Record.new zf_soa[:origin], "SOA", ttl, data
       end
 
       ##

@@ -21,7 +21,7 @@ describe Gcloud::Dns::Importer, :mock_dns do
 
   # Zone file example from http://www.zytrax.com/books/dns/ch6/mydomain.html
   let(:zone_file) {
-<<-EOS
+    <<-EOS
 $TTL	86400 ; 24 hours could have been written as 24h or 1d
 ; $TTL used for all RRs without explicit TTL value
 $ORIGIN example.com.
