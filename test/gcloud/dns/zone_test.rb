@@ -374,6 +374,50 @@ describe Gcloud::Dns::Zone, :mock_dns do
     change.deletions.first.data.must_equal to_remove.data
   end
 
+  it "returns nil when calling update without any records to change" do
+    change = zone.update [], []
+    change.must_be :nil?
+  end
+
+  it "returns nil when calling update with records that have not changed" do
+    a_record = zone.record zone.dns, "A", 18600, "0.0.0.0"
+    change = zone.update a_record, a_record
+    change.must_be :nil?
+  end
+
+  it "only updates the records that have changed" do
+    a_record = zone.record zone.dns, "A", 18600, "example.com."
+    cname_record = zone.record zone.dns, "CNAME", 86400, "example.com."
+    mx_record = zone.record zone.dns, "MX", 86400, ["10 mail.#{zone.dns}",
+                                                    "20 mail2.#{zone.dns}"]
+    to_add = [a_record, cname_record, mx_record]
+    to_remove = to_add.map &:dup
+    to_remove.first.data = ["example.org."]
+
+    # The request to add and remove the records.
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      json = JSON.parse env.body
+      json["additions"].count.must_equal 1
+      json["deletions"].count.must_equal 1
+      json["additions"].first.must_equal to_add.first.to_gapi
+      json["deletions"].first.must_equal to_remove.first.to_gapi
+      [200, {"Content-Type" => "application/json"},
+       create_change_json([to_add.first], [to_remove.first])]
+    end
+
+    change = zone.update to_add, to_remove
+    change.must_be_kind_of Gcloud::Dns::Change
+    change.id.must_equal "dns-change-created"
+    change.additions.first.name.must_equal to_add.first.name
+    change.additions.first.type.must_equal to_add.first.type
+    change.additions.first.ttl.must_equal  to_add.first.ttl
+    change.additions.first.data.must_equal to_add.first.data
+    change.deletions.first.name.must_equal to_remove.first.name
+    change.deletions.first.type.must_equal to_remove.first.type
+    change.deletions.first.ttl.must_equal  to_remove.first.ttl
+    change.deletions.first.data.must_equal to_remove.first.data
+  end
+
   it "adds a record" do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
 

@@ -111,19 +111,20 @@ module Gcloud
         [name, type, ttl, data].hash
       end
 
-      def eql?(other) #:nodoc:
+      def eql? other #:nodoc:
         return false unless other.is_a? self.class
         name == other.name && type == other.type &&
           ttl == other.ttl && data == other.data
       end
 
-      def ==(other) #:nodoc:
+      def == other #:nodoc:
         self.eql? other
       end
 
-      def <=>(other) #:nodoc:
+      def <=> other #:nodoc:
         return nil unless other.is_a? self.class
-        [name, type, ttl, data] <=> [other.name, other.type, other.ttl, other.data]
+        [name, type, ttl, data] <=>
+          [other.name, other.type, other.ttl, other.data]
       end
     end
   end

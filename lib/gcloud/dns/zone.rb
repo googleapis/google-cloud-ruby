@@ -434,6 +434,9 @@ module Gcloud
         update Gcloud::Dns::Importer.new(path_or_io).records(options), []
       end
 
+      # rubocop:disable Metrics/MethodLength
+      # Disabled rubocop because the yield needs to happen in this method.
+
       ##
       # Adds and removes Records from the Zone. All changes are made in a single
       # API request.
@@ -481,8 +484,13 @@ module Gcloud
           deletions += updater.deletions
         end
 
-        create_change additions, deletions
+        to_add    = additions - deletions
+        to_remove = deletions - additions
+        return nil if to_add.empty? && to_remove.empty?
+        create_change to_add, to_remove
       end
+
+      # rubocop:enable Metrics/MethodLength
 
       ##
       # Adds a record to the Zone. In order to update existing records, or add
@@ -624,7 +632,7 @@ module Gcloud
       #
       def modify name, type
         existing = records(name: name, type: type).all.to_a
-        updated = existing.map &:dup
+        updated = existing.map(&:dup)
         updated.each { |r| yield r }
         update updated, existing
       end
