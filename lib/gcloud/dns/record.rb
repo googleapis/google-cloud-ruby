@@ -101,6 +101,8 @@ module Gcloud
         new gapi["name"], gapi["type"], gapi["ttl"], gapi["rrdatas"]
       end
 
+      ##
+      # Convert the record object to a Google API hash.
       def to_gapi #:nodoc:
         { "name" => name, "type" => type, "ttl" => ttl, "rrdatas" => data }
       end
