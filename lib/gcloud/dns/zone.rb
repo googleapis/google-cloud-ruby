@@ -352,12 +352,17 @@ module Gcloud
       # records have a +ttl+ value, the zone file's global TTL is used for the
       # record.
       #
-      # The zone file's SOA record is not imported by default, because the
-      # existing SOA record that was generated for the zone by Google Cloud DNS,
-      # which points to a Cloud DNS name server, is probably more appropriate.
-      # The zone file's NS records are imported, however. If you do not want
-      # to import them, you can exclude records of a specific type with the
-      # +except+ option.
+      # The zone file's SOA and NS records are not imported by default, because
+      # the zone was already given SOA and NS records when it was created. These
+      # generated records point to Cloud DNS name servers and are probably the
+      # ones that you want. You can override this behavior with the
+      # +nameservers+ option, however.
+      #
+      # The Google Cloud DNS service requires that record names and data use
+      # fully-qualified addresses. The @ symbol is not accepted, nor are
+      # unqualified subdomain addresses like www. If your zone file contains
+      # such values, you may need to pre-process it in order for the import
+      # operation to succeed.
       #
       # === Parameters
       #
