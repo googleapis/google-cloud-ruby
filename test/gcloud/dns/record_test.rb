@@ -36,4 +36,28 @@ describe Gcloud::Dns::Record, :mock_dns do
     zonefile_records.first.must_equal "#{record_name} #{record_ttl} IN #{record_type} #{record_data.first}"
     zonefile_records.last.must_equal "#{record_name} #{record_ttl} IN #{record_type} #{record_data.last}"
   end
+
+  it "knows if it is equal to other records" do
+    dupe = record.dup
+    dupe.must_equal record
+    dupe.data = ["5.6.7.8"]
+    dupe.wont_equal record
+  end
+
+  it "is comparable in arrays" do
+    original = [ Gcloud::Dns::Record.new("example.com.", "A", 86400, "localhost"),
+                 Gcloud::Dns::Record.new("example.net.", "A", 86400, "localhost"),
+                 Gcloud::Dns::Record.new("example.org.", "A", 86400, "localhost") ]
+    changed = original.map &:dup
+    changed.must_equal original
+    changed.first.ttl = 18600
+    changed.wont_equal original
+
+    existing = original - changed
+    updated = changed - original
+    existing.count.must_equal 1
+    updated.count.must_equal 1
+    existing.first.must_equal original.first
+    updated.first.must_equal changed.first
+  end
 end
