@@ -19,6 +19,25 @@ module Gcloud
       ##
       # = DNS Zone Transaction
       #
+      # This object is used by Zone#update when passed a block. These methods
+      # are used to update the records that are sent to the Google Cloud DNS
+      # API.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   zone.update do |tx|
+      #     tx.add     "example.com.", "A",  86400, "1.2.3.4"
+      #     tx.remove  "example.com.", "TXT"
+      #     tx.replace "example.com.", "MX", 86400, ["10 mail1.example.com.",
+      #                                              "20 mail2.example.com."]
+      #     tx.modify "www.example.com.", "CNAME" do |cname|
+      #       cname.ttl = 86400 # only change the TTL
+      #     end
+      #   end
+      #
       class Transaction
         attr_reader :additions, :deletions #:nodoc:
 
@@ -58,9 +77,6 @@ module Gcloud
         #   zone = dns.zone "example-zone"
         #   zone.update do |tx|
         #     tx.add     "example.com.", "A",  86400, "1.2.3.4"
-        #     tx.remove  "example.com.", "TXT"
-        #     tx.replace "example.com.", "MX", 86400, ["10 mail1.example.com.",
-        #                                              "20 mail2.example.com."]
         #   end
         #
         def add name, type, ttl, data
@@ -88,10 +104,7 @@ module Gcloud
         #   dns = gcloud.dns
         #   zone = dns.zone "example-zone"
         #   zone.update do |tx|
-        #     tx.add     "example.com.", "A",  86400, "1.2.3.4"
         #     tx.remove  "example.com.", "TXT"
-        #     tx.replace "example.com.", "MX", 86400, ["10 mail1.example.com.",
-        #                                              "20 mail2.example.com."]
         #   end
         #
         def remove name, type
@@ -126,8 +139,6 @@ module Gcloud
         #   dns = gcloud.dns
         #   zone = dns.zone "example-zone"
         #   zone.update do |tx|
-        #     tx.add     "example.com.", "A",  86400, "1.2.3.4"
-        #     tx.remove  "example.com.", "TXT"
         #     tx.replace "example.com.", "MX", 86400, ["10 mail1.example.com.",
         #                                              "20 mail2.example.com."]
         #   end
@@ -135,6 +146,39 @@ module Gcloud
         def replace name, type, ttl, data
           remove name, type
           add name, type, ttl, data
+        end
+
+        ##
+        # Modifies records on the Zone. Records matching the +name+ and +type+
+        # are yielded to the block where they can be modified.
+        #
+        # === Parameters
+        #
+        # +name+::
+        #   The owner of the record. For example: +example.com.+. (+String+)
+        # +type+::
+        #   The identifier of a {supported record
+        #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
+        #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+. (+String+)
+        #
+        # === Example
+        #
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   dns = gcloud.dns
+        #   zone.update do |tx|
+        #     tx.modify "www.example.com.", "CNAME" do |cname|
+        #       cname.ttl = 86400 # only change the TTL
+        #     end
+        #   end
+        #
+        def modify name, type
+          existing = @zone.records(name: name, type: type).all.to_a
+          updated = existing.map(&:dup)
+          updated.each { |r| yield r }
+          @additions += updated
+          @deletions += existing
         end
       end
     end

@@ -552,6 +552,8 @@ describe Gcloud::Dns::Zone, :mock_dns do
     txt_to_remove = zone.record "example.com.", "TXT", 1, "Hello world!"
     mx_to_add = zone.record "example.com.", "MX", 18600, ["mail1.example.com", "mail2.example.com"]
     mx_to_remove = zone.record "example.com.", "MX", 18600, ["mail1.example.net", "mail2.example.net"]
+    cname_to_add = zone.record "www.example.com.", "CNAME", 18600, "example.com."
+    cname_to_remove = zone.record "www.example.com.", "CNAME", 360, "example.com."
 
     # mock the lookup for TXT
     mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
@@ -567,15 +569,24 @@ describe Gcloud::Dns::Zone, :mock_dns do
       [200, {"Content-Type" => "application/json"},
        lookup_records_json(mx_to_remove)]
     end
+    # mock the lookup for CNAME
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "www.example.com."
+      env.params["type"].must_equal "CNAME"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(cname_to_remove)]
+    end
     # mock the update call, test that additions and deletions are correct
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
-      json["additions"].count.must_equal 2
-      json["deletions"].count.must_equal 2
+      json["additions"].count.must_equal 3
+      json["deletions"].count.must_equal 3
       json["additions"].must_include a_to_add.to_gapi
       json["additions"].must_include mx_to_add.to_gapi
+      json["additions"].must_include cname_to_add.to_gapi
       json["deletions"].must_include txt_to_remove.to_gapi
       json["deletions"].must_include mx_to_remove.to_gapi
+      json["deletions"].must_include cname_to_remove.to_gapi
       [200, {"Content-Type" => "application/json"},
        create_change_json([a_to_add, mx_to_add], [txt_to_remove, mx_to_remove])]
     end
@@ -584,6 +595,9 @@ describe Gcloud::Dns::Zone, :mock_dns do
       tx.add "example.com.", "A", 18600, "127.0.0.1"
       tx.remove "example.com.", "TXT"
       tx.replace "example.com.", "MX", 18600, ["mail1.example.com", "mail2.example.com"]
+      tx.modify "www.example.com.", "CNAME" do |cname|
+        cname.ttl = 18600
+      end
     end
   end
 
