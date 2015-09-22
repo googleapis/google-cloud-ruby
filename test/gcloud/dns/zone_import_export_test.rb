@@ -21,9 +21,23 @@ describe Gcloud::Dns::Zone, :mock_dns do
   let(:zone_hash) { random_zone_hash zone_name, zone_dns }
   let(:zone) { Gcloud::Dns::Zone.from_gapi zone_hash, dns.connection }
 
+
+  # Actual output of gcloud command line tool:
+  # $ gcloud dns record-sets export example-zone.txt --zone-file-format --zone example-zone
+  let(:zone_export_expected) {
+    <<-EOS
+example.net. 21600 IN NS ns-cloud-b1.googledomains.com.
+example.net. 21600 IN NS ns-cloud-b2.googledomains.com.
+example.net. 21600 IN NS ns-cloud-b3.googledomains.com.
+example.net. 21600 IN NS ns-cloud-b4.googledomains.com.
+example.net. 21600 IN SOA ns-cloud-b1.googledomains.com. dns-admin.google.com. 0 21600 3600 1209600 300
+www.example.net. 18600 IN A 127.0.0.1
+EOS
+  }
+
   # Zone file example from http://www.zytrax.com/books/dns/ch6/mydomain.html
-  let(:zone_file_io) {
-    zone_file = <<-EOS
+  let(:zonefile_io) {
+    zonefile = <<-EOS
 $ORIGIN example.com.
 $TTL	86400 ; 24 hours could have been written as 24h or 1d
 @  1h  IN  SOA ns1.example.com. hostmaster.example.com. (
@@ -39,10 +53,32 @@ $TTL	86400 ; 24 hours could have been written as 24h or 1d
        IN  MX  20 mail.yetanother.com. ; external mail provider
 www 1h IN  A      192.168.0.2  ;web server definition
 EOS
-    StringIO.new zone_file
+    StringIO.new zonefile
   }
 
-  it "imports records from a zone file" do
+  it "exports records to a zonefile string" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      [200, {"Content-Type" => "application/json"},
+       list_records_json]
+    end
+
+    zonefile = zone.to_zonefile
+    zonefile.must_equal zone_export_expected.strip
+  end
+
+  it "exports records to a zonefile file" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      [200, {"Content-Type" => "application/json"},
+       list_records_json]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      zone.export tmpfile
+      File.read(tmpfile).must_equal zone_export_expected.strip
+    end
+  end
+
+  it "imports records from a zonefile" do
     to_add = [
       zone.record("example.com.", "MX", 86400, ["10 mail.another.com.", "20 mail.yetanother.com."]),
       zone.record("www", "A", 3600, ["192.168.0.2"])
@@ -59,7 +95,7 @@ EOS
        create_change_json(to_add, [])]
     end
 
-    change = zone.import zone_file_io
+    change = zone.import zonefile_io
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     record_must_be change.additions[0], to_add[0]
@@ -88,7 +124,7 @@ EOS
        create_change_json(to_add, [])]
     end
 
-    change = zone.import zone_file_io, nameservers: true
+    change = zone.import zonefile_io, nameservers: true
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     record_must_be change.additions[0], to_add[0]
@@ -96,6 +132,17 @@ EOS
     record_must_be change.additions[2], to_add[2]
     record_must_be change.additions[3], to_add[3]
     change.deletions.must_be :empty?
+  end
+
+  def list_records_json
+    records = []
+    ns_data = (1..4).map { |i| "ns-cloud-b#{i}.googledomains.com." }
+    records << random_record_hash("example.net.", "NS", 21600, ns_data)
+    records << random_record_hash("example.net.", "SOA", 21600, ["ns-cloud-b1.googledomains.com. dns-admin.google.com. 0 21600 3600 1209600 300"])
+    records << random_record_hash("www.example.net.", "A", 18600, ["127.0.0.1"])
+
+    hash = { "kind" => "dns#resourceRecordSet", "rrsets" => records }
+    hash.to_json
   end
 
   def create_change_json to_add, to_remove
