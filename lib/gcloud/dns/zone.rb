@@ -16,6 +16,7 @@
 require "gcloud/dns/change"
 require "gcloud/dns/zone/list"
 require "gcloud/dns/record"
+require "gcloud/dns/importer"
 require "time"
 
 module Gcloud
@@ -337,6 +338,69 @@ module Gcloud
       #
       def record name, type, ttl, data
         Gcloud::Dns::Record.new name, type, ttl, data
+      end
+
+      ##
+      # Imports resource records from a {DNS zone
+      # file}[https://en.wikipedia.org/wiki/Zone_file], adding the new records
+      # to the zone, without removing any existing records from the zone.
+      #
+      # Because the Google Cloud DNS API only accepts a single resource record
+      # for each +name+ and +type+ combination (with multiple +data+ elements),
+      # the zone file's records are merged as necessary. During this merge, the
+      # lowest +ttl+ of the merged records is used. If none of the merged
+      # records have a +ttl+ value, the zone file's global TTL is used for the
+      # record.
+      #
+      # The zone file's SOA and NS records are not imported by default, because
+      # the zone was already given SOA and NS records when it was created. These
+      # generated records point to Cloud DNS name servers and are probably the
+      # ones that you want. You can override this behavior with the
+      # +nameservers+ option, however.
+      #
+      # The Google Cloud DNS service requires that record names and data use
+      # fully-qualified addresses. The @ symbol is not accepted, nor are
+      # unqualified subdomain addresses like www. If your zone file contains
+      # such values, you may need to pre-process it in order for the import
+      # operation to succeed.
+      #
+      # === Parameters
+      #
+      # +path_or_io+::
+      #   The path to a zone file on the filesystem, or an IO instance from
+      #   which zone file data can be read. (+String+ or +IO+)
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:only]</code>::
+      #   Include only records of this type or types. (+String+ or +Array+)
+      # <code>options[:except]</code>::
+      #   Exclude records of this type or types. (+String+ or +Array+)
+      # <code>options[:nameservers]</code>::
+      #   Add the SOA and NS records from the zone file to the zone. This may
+      #   result in an ApiError if the zone already contains records of this
+      #   type for its origin. (When a Zone is created, the Cloud DNS service
+      #   automatically adds SOA and NS records to it.) The default value is
+      #   +false+. (+Boolean+)
+      #
+      # === Returns
+      #
+      # A new Change adding the imported Record instances.
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   change = zone.import "path/to/db.example.com"
+      #
+      def import path_or_io, options = {}
+        unless options[:nameservers]
+          options[:except] ||= []
+          options[:except] = (Array(options[:except]) + %w(SOA NS)).uniq
+        end
+        update Gcloud::Dns::Importer.new(path_or_io).records(options), []
       end
 
       ##

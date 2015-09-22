@@ -26,6 +26,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency                  "google-api-client", "~> 0.8.3"
   gem.add_dependency                  "mime-types", "~> 2.4"
   gem.add_dependency                  "digest-crc", "~> 0.4"
+  gem.add_dependency                  "zonefile", "~> 1.04"
 
   gem.add_development_dependency      "minitest", "~> 5.7"
   gem.add_development_dependency      "minitest-autotest", "~> 1.0"

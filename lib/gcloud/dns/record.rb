@@ -80,9 +80,9 @@ module Gcloud
         fail ArgumentError, "ttl is required" unless ttl
         fail ArgumentError, "type is required" unless type
         fail ArgumentError, "data is required" unless data
-        @name = name
-        @ttl = ttl
-        @type = type
+        @name = name.to_s
+        @ttl = Integer(ttl)
+        @type = type.to_s.upcase
         @data = Array(data)
       end
 
