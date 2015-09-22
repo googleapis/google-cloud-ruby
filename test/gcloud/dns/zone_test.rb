@@ -25,27 +25,6 @@ describe Gcloud::Dns::Zone, :mock_dns do
   let(:record_ttl)  { 86400 }
   let(:record_data) { ["1.2.3.4"] }
 
-  # Zone file example from http://www.zytrax.com/books/dns/ch6/mydomain.html
-  let(:zone_file_io) {
-    zone_file = <<-EOS
-$ORIGIN example.com.
-$TTL	86400 ; 24 hours could have been written as 24h or 1d
-@  1h  IN  SOA ns1.example.com. hostmaster.example.com. (
-            2002022401 ; serial
-            3H ; refresh
-            15 ; retry
-            1w ; expire
-            3h ; minimum
-           )
-       IN  NS     ns1.example.com. ; in the domain
-       IN  NS     ns2.smokeyjoe.com. ; external to domain
-       IN  MX  10 mail.another.com. ; external mail provider
-       IN  MX  20 mail.yetanother.com. ; external mail provider
-www 1h IN  A      192.168.0.2  ;web server definition
-EOS
-    StringIO.new zone_file
-  }
-
   it "knows its attributes" do
     zone.name.must_equal zone_name
     zone.dns.must_equal zone.dns
@@ -418,62 +397,6 @@ EOS
     change.deletions.must_be :empty?
   end
 
-  it "imports records from a zone file" do
-    to_add = [
-      zone.record("example.com.", "MX", 86400, ["10 mail.another.com.", "20 mail.yetanother.com."]),
-      zone.record("www", "A", 3600, ["192.168.0.2"])
-    ]
-
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 2
-      json["deletions"].count.must_equal 0
-      json["additions"][0].must_equal to_add[0].to_gapi
-      json["additions"][1].must_equal to_add[1].to_gapi
-      json["deletions"].must_be :empty?
-      [200, {"Content-Type" => "application/json"},
-       create_change_json(to_add, [])]
-    end
-
-    change = zone.import zone_file_io
-    change.must_be_kind_of Gcloud::Dns::Change
-    change.id.must_equal "dns-change-created"
-    record_must_be change.additions[0], to_add[0]
-    record_must_be change.additions[1], to_add[1]
-    change.deletions.must_be :empty?
-  end
-
-  it "imports records including SOA and NS with nameservers option" do
-    to_add = [
-      zone.record("@", "SOA", 3600, ["ns1.example.com. hostmaster.example.com. 2002022401 3H 15 1w 3h"]),
-      zone.record("example.com.", "MX", 86400, ["10 mail.another.com.", "20 mail.yetanother.com."]),
-      zone.record("www", "A", 3600, ["192.168.0.2"]),
-      zone.record("example.com.", "NS", 86400, ["ns1.example.com.", "ns2.smokeyjoe.com."])
-    ]
-
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 4
-      json["deletions"].count.must_equal 0
-      json["additions"][0].must_equal to_add[0].to_gapi
-      json["additions"][1].must_equal to_add[1].to_gapi
-      json["additions"][2].must_equal to_add[2].to_gapi
-      json["additions"][3].must_equal to_add[3].to_gapi
-      json["deletions"].must_be :empty?
-      [200, {"Content-Type" => "application/json"},
-       create_change_json(to_add, [])]
-    end
-
-    change = zone.import zone_file_io, nameservers: true
-    change.must_be_kind_of Gcloud::Dns::Change
-    change.id.must_equal "dns-change-created"
-    record_must_be change.additions[0], to_add[0]
-    record_must_be change.additions[1], to_add[1]
-    record_must_be change.additions[2], to_add[2]
-    record_must_be change.additions[3], to_add[3]
-    change.deletions.must_be :empty?
-  end
-
   it "removes records by name and type" do
     to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
@@ -575,12 +498,5 @@ EOS
     hash = { "kind" => "dns#resourceRecordSet", "rrsets" => records }
     hash["nextPageToken"] = token unless token.nil?
     hash.to_json
-  end
-
-  def record_must_be actual, expected
-    actual.name.must_equal expected.name
-    actual.type.must_equal expected.type
-    actual.ttl.must_equal expected.ttl
-    actual.data.must_equal expected.data
   end
 end
