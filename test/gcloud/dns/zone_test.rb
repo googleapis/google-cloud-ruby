@@ -465,6 +465,44 @@ describe Gcloud::Dns::Zone, :mock_dns do
     change.deletions.first.data.must_equal to_remove.data
   end
 
+  it "modifies records by name and type" do
+    to_add = zone.record "example.net.", "A", 18600, "example.com."
+    to_remove = zone.record "example.net.", "A", 18600, "example.org."
+
+    # The request for the records to remove.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.net."
+      env.params["type"].must_equal "A"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(to_remove)]
+    end
+
+    # The request to add and remove the records.
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      json = JSON.parse env.body
+      json["additions"].count.must_equal 1
+      json["deletions"].count.must_equal 1
+      json["additions"].first.must_equal to_add.to_gapi
+      json["deletions"].first.must_equal to_remove.to_gapi
+      [200, {"Content-Type" => "application/json"},
+       create_change_json(to_add, to_remove)]
+    end
+
+    change = zone.modify "example.net.", "A" do |a|
+      a.data = ["example.com."]
+    end
+    change.must_be_kind_of Gcloud::Dns::Change
+    change.id.must_equal "dns-change-created"
+    change.additions.first.name.must_equal to_add.name
+    change.additions.first.type.must_equal to_add.type
+    change.additions.first.ttl.must_equal  to_add.ttl
+    change.additions.first.data.must_equal to_add.data
+    change.deletions.first.name.must_equal to_remove.name
+    change.deletions.first.type.must_equal to_remove.type
+    change.deletions.first.ttl.must_equal  to_remove.ttl
+    change.deletions.first.data.must_equal to_remove.data
+  end
+
   it "allows for multiple changes in one update using the DSL" do
     a_to_add = zone.record "example.com.", "A", 18600, "127.0.0.1"
     txt_to_remove = zone.record "example.com.", "TXT", 1, "Hello world!"

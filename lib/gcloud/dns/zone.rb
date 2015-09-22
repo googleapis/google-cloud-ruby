@@ -596,6 +596,40 @@ module Gcloud
       end
 
       ##
+      # Modifies records on the Zone. Records matching the +name+ and +type+ are
+      # yielded to the block where they can be modified.
+      #
+      # === Parameters
+      #
+      # +name+::
+      #   The owner of the record. For example: +example.com.+. (+String+)
+      # +type+::
+      #   The identifier of a {supported record
+      #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
+      #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Dns::Change
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   change = zone.modify "example.com.", "MX" do |mx|
+      #     mx.ttl = 3600 # change only the TTL
+      #   end
+      #
+      def modify name, type
+        existing = records(name: name, type: type).all.to_a
+        updated = existing.map &:dup
+        updated.each { |r| yield r }
+        update updated, existing
+      end
+
+      ##
       # New Zone from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
         new.tap do |f|
