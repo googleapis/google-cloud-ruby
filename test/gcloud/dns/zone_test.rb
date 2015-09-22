@@ -506,7 +506,7 @@ EOS
     change.deletions.first.data.must_equal to_remove.data
   end
 
-  it "removes records by name and type" do
+  it "replaces records by name and type" do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
     to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
@@ -540,6 +540,46 @@ EOS
     change.deletions.first.type.must_equal to_remove.type
     change.deletions.first.ttl.must_equal  to_remove.ttl
     change.deletions.first.data.must_equal to_remove.data
+  end
+
+  it "allows for multiple changes in one update using the DSL" do
+    a_to_add = zone.record "example.com.", "A", 18600, "127.0.0.1"
+    txt_to_remove = zone.record "example.com.", "TXT", 1, "Hello world!"
+    mx_to_add = zone.record "example.com.", "MX", 18600, ["mail1.example.com", "mail2.example.com"]
+    mx_to_remove = zone.record "example.com.", "MX", 18600, ["mail1.example.net", "mail2.example.net"]
+
+    # mock the lookup for TXT
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.com."
+      env.params["type"].must_equal "TXT"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(txt_to_remove)]
+    end
+    # mock the lookup for MX
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.com."
+      env.params["type"].must_equal "MX"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(mx_to_remove)]
+    end
+    # mock the update call, test that additions and deletions are correct
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      json = JSON.parse env.body
+      json["additions"].count.must_equal 2
+      json["deletions"].count.must_equal 2
+      json["additions"].must_include a_to_add.to_gapi
+      json["additions"].must_include mx_to_add.to_gapi
+      json["deletions"].must_include txt_to_remove.to_gapi
+      json["deletions"].must_include mx_to_remove.to_gapi
+      [200, {"Content-Type" => "application/json"},
+       create_change_json([a_to_add, mx_to_add], [txt_to_remove, mx_to_remove])]
+    end
+
+    zone.update do |tx|
+      tx.add "example.com.", "A", 18600, "127.0.0.1"
+      tx.remove "example.com.", "TXT"
+      tx.replace "example.com.", "MX", 18600, ["mail1.example.com", "mail2.example.com"]
+    end
   end
 
   def lookup_records_json record
