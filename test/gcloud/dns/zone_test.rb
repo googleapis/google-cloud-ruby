@@ -391,7 +391,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
     mx_record = zone.record zone.dns, "MX", 86400, ["10 mail.#{zone.dns}",
                                                     "20 mail2.#{zone.dns}"]
     to_add = [a_record, cname_record, mx_record]
-    to_remove = to_add.map &:dup
+    to_remove = to_add.map(&:dup)
     to_remove.first.data = ["example.org."]
 
     # The request to add and remove the records.
@@ -609,8 +609,8 @@ describe Gcloud::Dns::Zone, :mock_dns do
   def create_change_json to_add, to_remove
     hash = random_change_hash
     hash["id"] = "dns-change-created"
-    hash["additions"] = Array(to_add).map &:to_gapi
-    hash["deletions"] = Array(to_remove).map &:to_gapi
+    hash["additions"] = Array(to_add).map(&:to_gapi)
+    hash["deletions"] = Array(to_remove).map(&:to_gapi)
     hash.to_json
   end
 

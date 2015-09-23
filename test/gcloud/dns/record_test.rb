@@ -48,7 +48,7 @@ describe Gcloud::Dns::Record, :mock_dns do
     original = [ Gcloud::Dns::Record.new("example.com.", "A", 86400, "localhost"),
                  Gcloud::Dns::Record.new("example.net.", "A", 86400, "localhost"),
                  Gcloud::Dns::Record.new("example.org.", "A", 86400, "localhost") ]
-    changed = original.map &:dup
+    changed = original.map(&:dup)
     changed.must_equal original
     changed.first.ttl = 18600
     changed.wont_equal original
