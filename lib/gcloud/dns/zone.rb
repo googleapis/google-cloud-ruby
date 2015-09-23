@@ -383,11 +383,9 @@ module Gcloud
       # records have a +ttl+ value, the zone file's global TTL is used for the
       # record.
       #
-      # The zone file's SOA and NS records are not imported by default, because
-      # the zone was already given SOA and NS records when it was created. These
-      # generated records point to Cloud DNS name servers and are probably the
-      # ones that you want. You can override this behavior with the
-      # +nameservers+ option, however.
+      # The zone file's SOA and NS records are not imported, because the zone
+      # was given SOA and NS records when it was created. These generated
+      # records point to Cloud DNS name servers.
       #
       # The Google Cloud DNS service requires that record names and data use
       # fully-qualified addresses. The @ symbol is not accepted, nor are
@@ -406,12 +404,6 @@ module Gcloud
       #   Include only records of this type or types. (+String+ or +Array+)
       # <code>options[:except]</code>::
       #   Exclude records of this type or types. (+String+ or +Array+)
-      # <code>options[:nameservers]</code>::
-      #   Add the SOA and NS records from the zone file to the zone. This may
-      #   result in an ApiError if the zone already contains records of this
-      #   type for its origin. (When a Zone is created, the Cloud DNS service
-      #   automatically adds SOA and NS records to it.) The default value is
-      #   +false+. (+Boolean+)
       #
       # === Returns
       #
@@ -427,15 +419,14 @@ module Gcloud
       #   change = zone.import "path/to/db.example.com"
       #
       def import path_or_io, options = {}
-        unless options[:nameservers]
-          options[:except] ||= []
-          options[:except] = (Array(options[:except]) + %w(SOA NS)).uniq
-        end
-        update Gcloud::Dns::Importer.new(path_or_io).records(options), []
+        options[:except] = Array(options[:except]).map(&:to_s).map(&:upcase)
+        options[:except] = (options[:except] + %w(SOA NS)).uniq
+        additions = Gcloud::Dns::Importer.new(path_or_io).records(options)
+        update additions, []
       end
 
-      # rubocop:disable Metrics/MethodLength
-      # Disabled rubocop because the yield needs to happen in this method.
+      # rubocop:disable all
+      # Disabled rubocop because this complexity cannot easily be avoided.
 
       ##
       # Adds and removes Records from the Zone. All changes are made in a single
@@ -473,7 +464,13 @@ module Gcloud
       #   old_record = zone.record "example.com.", "A", 18600, ["1.2.3.4"]
       #   zone.update [new_record], [old_record]
       #
-      def update additions = [], deletions = []
+      def update additions = [], deletions = [], options = {}
+        # Handle only sending in options
+        if additions.is_a?(::Hash) && deletions.empty? && options.empty?
+          options = additions
+          additions = []
+        end
+
         additions = Array additions
         deletions = Array deletions
 
@@ -487,10 +484,11 @@ module Gcloud
         to_add    = additions - deletions
         to_remove = deletions - additions
         return nil if to_add.empty? && to_remove.empty?
+        increment_soa to_add, to_remove unless options[:skip_soa]
         create_change to_add, to_remove
       end
 
-      # rubocop:enable Metrics/MethodLength
+      # rubocop:enable all
 
       ##
       # Adds a record to the Zone. In order to update existing records, or add
@@ -525,8 +523,8 @@ module Gcloud
       #   zone = dns.zone "example-zone"
       #   change = zone.add "example.com.", "A", 86400, ["1.2.3.4"]
       #
-      def add name, type, ttl, data
-        update [record(name, type, ttl, data)], []
+      def add name, type, ttl, data, options = {}
+        update [record(name, type, ttl, data)], [], options
       end
 
       ##
@@ -556,8 +554,8 @@ module Gcloud
       #   zone = dns.zone "example-zone"
       #   change = zone.remove "example.com.", "A"
       #
-      def remove name, type
-        update [], records(name: name, type: type).all.to_a
+      def remove name, type, options = {}
+        update [], records(name: name, type: type).all.to_a, options
       end
 
       ##
@@ -594,9 +592,10 @@ module Gcloud
       #   zone = dns.zone "example-zone"
       #   change = zone.replace "example.com.", "A", 86400, ["5.6.7.8"]
       #
-      def replace name, type, ttl, data
+      def replace name, type, ttl, data, options = {}
         update [record(name, type, ttl, data)],
-               records(name: name, type: type).all.to_a
+               records(name: name, type: type).all.to_a,
+               options
       end
 
       def to_zonefile #:nodoc:
@@ -630,11 +629,11 @@ module Gcloud
       #     mx.ttl = 3600 # change only the TTL
       #   end
       #
-      def modify name, type
+      def modify name, type, options = {}
         existing = records(name: name, type: type).all.to_a
         updated = existing.map(&:dup)
         updated.each { |r| yield r }
-        update updated, existing
+        update updated, existing, options
       end
 
       ##
@@ -664,6 +663,28 @@ module Gcloud
         else
           fail ApiError.from_response(resp)
         end
+      end
+
+      # rubocop:disable all
+      # TODO: enable rubocop after finalizing
+
+      def increment_soa additions, deletions
+        return false if detect_soa(additions) || detect_soa(deletions)
+        current_soa = detect_soa records(name: dns, type: "SOA").all
+        return false if current_soa.nil?
+        updated_soa = current_soa.dup
+        soa_data = updated_soa.data.first.split " "
+        # TODO: use serial option if present (call or .to_s)
+        soa_data[2] = soa_data[2].to_i + 1
+        updated_soa.data[0] = soa_data.join " "
+        additions << updated_soa
+        deletions << current_soa
+      end
+
+      # rubocop:enable all
+
+      def detect_soa records
+        records.detect { |r| r.type == "SOA" }
       end
 
       def adjust_change_sort_order order

@@ -96,6 +96,15 @@ module Gcloud
       end
 
       ##
+      # Returns a deep copy of the record. Useful for changing records, since
+      # the original record must be passed for deletion when using Zone#update.
+      def dup
+        other = super
+        other.data = data.map(&:dup)
+        other
+      end
+
+      ##
       # New Record from a Google API Client object.
       def self.from_gapi gapi #:nodoc:
         new gapi["name"], gapi["type"], gapi["ttl"], gapi["rrdatas"]

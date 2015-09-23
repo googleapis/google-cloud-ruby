@@ -44,6 +44,45 @@ describe Gcloud::Dns::Record, :mock_dns do
     dupe.wont_equal record
   end
 
+  it "duplicates all its data deeply" do
+    dupe = record.dup
+    dupe.must_equal record
+    dupe.data.must_equal record.data
+    dupe.data[0].must_equal record.data[0]
+
+    dupe.data[0] = "5.6.7.8"
+
+    dupe.wont_equal record
+    dupe.data.wont_equal record.data
+    dupe.data[0].wont_equal record.data[0]
+  end
+
+  it "duplicates its data array" do
+    dupe = record.dup
+    dupe.must_equal record
+    dupe.data.must_equal record.data
+    dupe.data.count.must_equal record.data.count
+
+    dupe.data << "ns-cloud-b3.googledomains.com."
+
+    dupe.wont_equal record
+    dupe.data.wont_equal record.data
+    dupe.data.count.wont_equal record.data.count
+  end
+
+  it "duplicates its data array elements" do
+    dupe = record.dup
+    dupe.must_equal record
+    dupe.data.must_equal record.data
+    dupe.data[0].must_equal record.data[0]
+
+    dupe.data[0].gsub! "com", "net"
+
+    dupe.wont_equal record
+    dupe.data.wont_equal record.data
+    dupe.data[0].wont_equal record.data[0]
+  end
+
   it "is comparable in arrays" do
     original = [ Gcloud::Dns::Record.new("example.com.", "A", 86400, "localhost"),
                  Gcloud::Dns::Record.new("example.net.", "A", 86400, "localhost"),
