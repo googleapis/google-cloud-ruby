@@ -40,15 +40,15 @@ module Gcloud
       attr_accessor :name
 
       ##
-      # The number of seconds that the record can be cached by resolvers.
-      # (+Integer+)
-      attr_accessor :ttl
-
-      ##
       # The identifier of a {supported record type
       # }[https://cloud.google.com/dns/what-is-cloud-dns#supported_record_types]
       # . For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+. (+String+)
       attr_accessor :type
+
+      ##
+      # The number of seconds that the record can be cached by resolvers.
+      # (+Integer+)
+      attr_accessor :ttl
 
       ##
       # The resource record data, as determined by +type+ and defined in RFC
@@ -77,12 +77,12 @@ module Gcloud
       #
       def initialize name, type, ttl, data
         fail ArgumentError, "name is required" unless name
-        fail ArgumentError, "ttl is required" unless ttl
         fail ArgumentError, "type is required" unless type
+        fail ArgumentError, "ttl is required" unless ttl
         fail ArgumentError, "data is required" unless data
         @name = name.to_s
-        @ttl = Integer(ttl)
         @type = type.to_s.upcase
+        @ttl = Integer(ttl)
         @data = Array(data)
       end
 
@@ -101,8 +101,30 @@ module Gcloud
         new gapi["name"], gapi["type"], gapi["ttl"], gapi["rrdatas"]
       end
 
+      ##
+      # Convert the record object to a Google API hash.
       def to_gapi #:nodoc:
         { "name" => name, "type" => type, "ttl" => ttl, "rrdatas" => data }
+      end
+
+      def hash #:nodoc:
+        [name, type, ttl, data].hash
+      end
+
+      def eql? other #:nodoc:
+        return false unless other.is_a? self.class
+        name == other.name && type == other.type &&
+          ttl == other.ttl && data == other.data
+      end
+
+      def == other #:nodoc:
+        self.eql? other
+      end
+
+      def <=> other #:nodoc:
+        return nil unless other.is_a? self.class
+        [name, type, ttl, data] <=>
+          [other.name, other.type, other.ttl, other.data]
       end
     end
   end

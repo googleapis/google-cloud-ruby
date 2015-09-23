@@ -374,6 +374,50 @@ describe Gcloud::Dns::Zone, :mock_dns do
     change.deletions.first.data.must_equal to_remove.data
   end
 
+  it "returns nil when calling update without any records to change" do
+    change = zone.update [], []
+    change.must_be :nil?
+  end
+
+  it "returns nil when calling update with records that have not changed" do
+    a_record = zone.record zone.dns, "A", 18600, "0.0.0.0"
+    change = zone.update a_record, a_record
+    change.must_be :nil?
+  end
+
+  it "only updates the records that have changed" do
+    a_record = zone.record zone.dns, "A", 18600, "example.com."
+    cname_record = zone.record zone.dns, "CNAME", 86400, "example.com."
+    mx_record = zone.record zone.dns, "MX", 86400, ["10 mail.#{zone.dns}",
+                                                    "20 mail2.#{zone.dns}"]
+    to_add = [a_record, cname_record, mx_record]
+    to_remove = to_add.map(&:dup)
+    to_remove.first.data = ["example.org."]
+
+    # The request to add and remove the records.
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      json = JSON.parse env.body
+      json["additions"].count.must_equal 1
+      json["deletions"].count.must_equal 1
+      json["additions"].first.must_equal to_add.first.to_gapi
+      json["deletions"].first.must_equal to_remove.first.to_gapi
+      [200, {"Content-Type" => "application/json"},
+       create_change_json([to_add.first], [to_remove.first])]
+    end
+
+    change = zone.update to_add, to_remove
+    change.must_be_kind_of Gcloud::Dns::Change
+    change.id.must_equal "dns-change-created"
+    change.additions.first.name.must_equal to_add.first.name
+    change.additions.first.type.must_equal to_add.first.type
+    change.additions.first.ttl.must_equal  to_add.first.ttl
+    change.additions.first.data.must_equal to_add.first.data
+    change.deletions.first.name.must_equal to_remove.first.name
+    change.deletions.first.type.must_equal to_remove.first.type
+    change.deletions.first.ttl.must_equal  to_remove.first.ttl
+    change.deletions.first.data.must_equal to_remove.first.data
+  end
+
   it "adds a record" do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
 
@@ -465,11 +509,51 @@ describe Gcloud::Dns::Zone, :mock_dns do
     change.deletions.first.data.must_equal to_remove.data
   end
 
+  it "modifies records by name and type" do
+    to_add = zone.record "example.net.", "A", 18600, "example.com."
+    to_remove = zone.record "example.net.", "A", 18600, "example.org."
+
+    # The request for the records to remove.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.net."
+      env.params["type"].must_equal "A"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(to_remove)]
+    end
+
+    # The request to add and remove the records.
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      json = JSON.parse env.body
+      json["additions"].count.must_equal 1
+      json["deletions"].count.must_equal 1
+      json["additions"].first.must_equal to_add.to_gapi
+      json["deletions"].first.must_equal to_remove.to_gapi
+      [200, {"Content-Type" => "application/json"},
+       create_change_json(to_add, to_remove)]
+    end
+
+    change = zone.modify "example.net.", "A" do |a|
+      a.data = ["example.com."]
+    end
+    change.must_be_kind_of Gcloud::Dns::Change
+    change.id.must_equal "dns-change-created"
+    change.additions.first.name.must_equal to_add.name
+    change.additions.first.type.must_equal to_add.type
+    change.additions.first.ttl.must_equal  to_add.ttl
+    change.additions.first.data.must_equal to_add.data
+    change.deletions.first.name.must_equal to_remove.name
+    change.deletions.first.type.must_equal to_remove.type
+    change.deletions.first.ttl.must_equal  to_remove.ttl
+    change.deletions.first.data.must_equal to_remove.data
+  end
+
   it "allows for multiple changes in one update using the DSL" do
     a_to_add = zone.record "example.com.", "A", 18600, "127.0.0.1"
     txt_to_remove = zone.record "example.com.", "TXT", 1, "Hello world!"
     mx_to_add = zone.record "example.com.", "MX", 18600, ["mail1.example.com", "mail2.example.com"]
     mx_to_remove = zone.record "example.com.", "MX", 18600, ["mail1.example.net", "mail2.example.net"]
+    cname_to_add = zone.record "www.example.com.", "CNAME", 18600, "example.com."
+    cname_to_remove = zone.record "www.example.com.", "CNAME", 360, "example.com."
 
     # mock the lookup for TXT
     mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
@@ -485,15 +569,24 @@ describe Gcloud::Dns::Zone, :mock_dns do
       [200, {"Content-Type" => "application/json"},
        lookup_records_json(mx_to_remove)]
     end
+    # mock the lookup for CNAME
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "www.example.com."
+      env.params["type"].must_equal "CNAME"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(cname_to_remove)]
+    end
     # mock the update call, test that additions and deletions are correct
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
-      json["additions"].count.must_equal 2
-      json["deletions"].count.must_equal 2
+      json["additions"].count.must_equal 3
+      json["deletions"].count.must_equal 3
       json["additions"].must_include a_to_add.to_gapi
       json["additions"].must_include mx_to_add.to_gapi
+      json["additions"].must_include cname_to_add.to_gapi
       json["deletions"].must_include txt_to_remove.to_gapi
       json["deletions"].must_include mx_to_remove.to_gapi
+      json["deletions"].must_include cname_to_remove.to_gapi
       [200, {"Content-Type" => "application/json"},
        create_change_json([a_to_add, mx_to_add], [txt_to_remove, mx_to_remove])]
     end
@@ -502,6 +595,9 @@ describe Gcloud::Dns::Zone, :mock_dns do
       tx.add "example.com.", "A", 18600, "127.0.0.1"
       tx.remove "example.com.", "TXT"
       tx.replace "example.com.", "MX", 18600, ["mail1.example.com", "mail2.example.com"]
+      tx.modify "www.example.com.", "CNAME" do |cname|
+        cname.ttl = 18600
+      end
     end
   end
 
@@ -513,8 +609,8 @@ describe Gcloud::Dns::Zone, :mock_dns do
   def create_change_json to_add, to_remove
     hash = random_change_hash
     hash["id"] = "dns-change-created"
-    hash["additions"] = Array(to_add).map &:to_gapi
-    hash["deletions"] = Array(to_remove).map &:to_gapi
+    hash["additions"] = Array(to_add).map(&:to_gapi)
+    hash["deletions"] = Array(to_remove).map(&:to_gapi)
     hash.to_json
   end
 

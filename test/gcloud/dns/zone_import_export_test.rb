@@ -148,8 +148,8 @@ EOS
   def create_change_json to_add, to_remove
     hash = random_change_hash
     hash["id"] = "dns-change-created"
-    hash["additions"] = Array(to_add).map &:to_gapi
-    hash["deletions"] = Array(to_remove).map &:to_gapi
+    hash["additions"] = Array(to_add).map(&:to_gapi)
+    hash["deletions"] = Array(to_remove).map(&:to_gapi)
     hash.to_json
   end
 

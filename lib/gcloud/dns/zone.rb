@@ -434,6 +434,9 @@ module Gcloud
         update Gcloud::Dns::Importer.new(path_or_io).records(options), []
       end
 
+      # rubocop:disable Metrics/MethodLength
+      # Disabled rubocop because the yield needs to happen in this method.
+
       ##
       # Adds and removes Records from the Zone. All changes are made in a single
       # API request.
@@ -481,8 +484,13 @@ module Gcloud
           deletions += updater.deletions
         end
 
-        create_change additions, deletions
+        to_add    = additions - deletions
+        to_remove = deletions - additions
+        return nil if to_add.empty? && to_remove.empty?
+        create_change to_add, to_remove
       end
+
+      # rubocop:enable Metrics/MethodLength
 
       ##
       # Adds a record to the Zone. In order to update existing records, or add
@@ -593,6 +601,40 @@ module Gcloud
 
       def to_zonefile #:nodoc:
         records.all.map(&:to_zonefile_records).flatten.join("\n")
+      end
+
+      ##
+      # Modifies records on the Zone. Records matching the +name+ and +type+ are
+      # yielded to the block where they can be modified.
+      #
+      # === Parameters
+      #
+      # +name+::
+      #   The owner of the record. For example: +example.com.+. (+String+)
+      # +type+::
+      #   The identifier of a {supported record
+      #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
+      #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Dns::Change
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   change = zone.modify "example.com.", "MX" do |mx|
+      #     mx.ttl = 3600 # change only the TTL
+      #   end
+      #
+      def modify name, type
+        existing = records(name: name, type: type).all.to_a
+        updated = existing.map(&:dup)
+        updated.each { |r| yield r }
+        update updated, existing
       end
 
       ##
