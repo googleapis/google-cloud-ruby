@@ -87,12 +87,21 @@ module Gcloud
       end
 
       ##
+      # Returns an array of strings in the zone file format, one
+      # for each element in the record's data array.
+      def to_zonefile_records
+        data.map do |rrdata|
+          "#{name} #{ttl} IN #{type} #{rrdata}"
+        end
+      end
+
+      ##
       # New Record from a Google API Client object.
       def self.from_gapi gapi #:nodoc:
         new gapi["name"], gapi["type"], gapi["ttl"], gapi["rrdatas"]
       end
 
-      def to_gapi
+      def to_gapi #:nodoc:
         { "name" => name, "type" => type, "ttl" => ttl, "rrdatas" => data }
       end
     end

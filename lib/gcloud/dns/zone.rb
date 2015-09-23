@@ -342,6 +342,36 @@ module Gcloud
       end
 
       ##
+      # Exports the zone to a local {DNS zone
+      # file}[https://en.wikipedia.org/wiki/Zone_file].
+      #
+      # === Parameters
+      #
+      # +path+::
+      #   The path on the local file system to write the data to.
+      #   The path provided must be writable. (+String+)
+      #
+      # === Returns
+      #
+      # +::File+ object on the local file system
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #
+      #   zone.export "path/to/db.example.com"
+      #
+      def export path
+        File.open path, "w" do |f|
+          f.write to_zonefile
+        end
+      end
+
+      ##
       # Imports resource records from a {DNS zone
       # file}[https://en.wikipedia.org/wiki/Zone_file], adding the new records
       # to the zone, without removing any existing records from the zone.
@@ -559,6 +589,10 @@ module Gcloud
       def replace name, type, ttl, data
         update [record(name, type, ttl, data)],
                records(name: name, type: type).all.to_a
+      end
+
+      def to_zonefile #:nodoc:
+        records.all.map(&:to_zonefile_records).flatten.join("\n")
       end
 
       ##

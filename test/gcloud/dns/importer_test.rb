@@ -17,10 +17,10 @@ require "helper"
 describe Gcloud::Dns::Importer, :mock_dns do
 
   # Zone file example from https://en.wikipedia.org/wiki/Zone_file
-  let(:zone_file_path) { "acceptance/data/db.example.com" }
+  let(:zonefile_path) { "acceptance/data/db.example.com" }
 
   # Zone file example from http://www.zytrax.com/books/dns/ch6/mydomain.html
-  let(:zone_file) {
+  let(:zonefile) {
     <<-EOS
 $TTL	86400 ; 24 hours could have been written as 24h or 1d
 ; $TTL used for all RRs without explicit TTL value
@@ -45,10 +45,10 @@ fred   IN  A      192.168.0.4
 EOS
   }
 
-  let(:zone_file_io) { StringIO.new zone_file }
+  let(:zonefile_io) { StringIO.new zonefile }
 
   it "imports records from zonefile file path with nameservers" do
-    importer = Gcloud::Dns::Importer.new zone_file_path
+    importer = Gcloud::Dns::Importer.new zonefile_path
     records = importer.records nameservers: true
     records.size.must_equal 17
     records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
@@ -72,7 +72,7 @@ EOS
   end
 
   it "imports records from zonefile IO instance" do
-    importer = Gcloud::Dns::Importer.new zone_file_io
+    importer = Gcloud::Dns::Importer.new zonefile_io
     records = importer.records
     records.size.must_equal 8
     records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
@@ -87,7 +87,7 @@ EOS
   end
 
   it "accepts an only option string" do
-    importer = Gcloud::Dns::Importer.new zone_file_io
+    importer = Gcloud::Dns::Importer.new zonefile_io
     records = importer.records only: "A"
     records.size.must_equal 4
     record_must_be records[0], "ns1", "A", 86400, ["192.168.0.1"]
@@ -97,7 +97,7 @@ EOS
   end
 
   it "accepts an only option array" do
-    importer = Gcloud::Dns::Importer.new zone_file_io
+    importer = Gcloud::Dns::Importer.new zonefile_io
     records = importer.records only: ["A","NS"]
     records.size.must_equal 5
     record_must_be records[0], "ns1", "A", 86400, ["192.168.0.1"]
@@ -108,7 +108,7 @@ EOS
   end
 
   it "accepts an except option string" do
-    importer = Gcloud::Dns::Importer.new zone_file_io
+    importer = Gcloud::Dns::Importer.new zonefile_io
     records = importer.records except: "A"
     records.size.must_equal 4
     record_must_be records[0], "@", "SOA", 3600, ["ns1.example.com. hostmaster.example.com. 2002022401 3H 15 1w 3h"]
@@ -118,7 +118,7 @@ EOS
   end
 
   it "accepts an except option array" do
-    importer = Gcloud::Dns::Importer.new zone_file_io
+    importer = Gcloud::Dns::Importer.new zonefile_io
     records = importer.records except: ["A","CNAME"]
     records.size.must_equal 3
     record_must_be records[0], "@", "SOA", 3600, ["ns1.example.com. hostmaster.example.com. 2002022401 3H 15 1w 3h"]

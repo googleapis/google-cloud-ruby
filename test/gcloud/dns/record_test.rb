@@ -17,9 +17,9 @@ require "helper"
 describe Gcloud::Dns::Record, :mock_dns do
   # Create a record object with the project's mocked connection object
   let(:record_name) { "example.com." }
-  let(:record_type) { "A" }
+  let(:record_type) { "NS" }
   let(:record_ttl)  { 86400 }
-  let(:record_data) { ["1.2.3.4"] }
+  let(:record_data) { ["ns-cloud-b1.googledomains.com.","ns-cloud-b2.googledomains.com."] }
   let(:record_hash) { random_record_hash record_name, record_type, record_ttl, record_data }
   let(:record) { Gcloud::Dns::Record.from_gapi record_hash }
 
@@ -28,5 +28,12 @@ describe Gcloud::Dns::Record, :mock_dns do
     record.type.must_equal record_type
     record.ttl.must_equal  record_ttl
     record.data.must_equal record_data
+  end
+
+  it "exports to zonefile record string" do
+    zonefile_records = record.to_zonefile_records
+    zonefile_records.count.must_equal 2
+    zonefile_records.first.must_equal "#{record_name} #{record_ttl} IN #{record_type} #{record_data.first}"
+    zonefile_records.last.must_equal "#{record_name} #{record_ttl} IN #{record_type} #{record_data.last}"
   end
 end
