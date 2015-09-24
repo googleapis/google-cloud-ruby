@@ -24,6 +24,13 @@ classes:
     name: Entity
   - full_name: Gcloud::Datastore::Key
     name: Key
+- full_name: Gcloud::Dns
+  name: DNS
+  classes:
+  - full_name: Gcloud::Dns::Zone
+    name: Zone
+  - full_name: Gcloud::Dns::Record
+    name: Record
 - full_name: Gcloud::Pubsub
   name: "Pub/Sub"
   classes:
