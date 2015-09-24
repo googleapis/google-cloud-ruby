@@ -24,6 +24,8 @@ describe Gcloud::Dns::Zone, :mock_dns do
   let(:record_type) { "A" }
   let(:record_ttl)  { 86400 }
   let(:record_data) { ["1.2.3.4"] }
+  let(:soa) { Gcloud::Dns::Record.new "example.com.", "SOA", 18600, "ns-cloud-b1.googledomains.com. dns-admin.google.com. 0 21600 3600 1209600 300" }
+  let(:updated_soa) { Gcloud::Dns::Record.new "example.com.", "SOA", 18600, "ns-cloud-b1.googledomains.com. dns-admin.google.com. 1 21600 3600 1209600 300" }
 
   it "knows its attributes" do
     zone.name.must_equal zone_name
@@ -351,12 +353,22 @@ describe Gcloud::Dns::Zone, :mock_dns do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
     to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
+    # The request for the SOA record, to update its serial number.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.com."
+      env.params["type"].must_equal "SOA"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(soa)]
+    end
+
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
-      json["additions"].count.must_equal 1
-      json["deletions"].count.must_equal 1
+      json["additions"].count.must_equal 2
+      json["deletions"].count.must_equal 2
       json["additions"].first.must_equal to_add.to_gapi
+      json["additions"].last.must_equal updated_soa.to_gapi
       json["deletions"].first.must_equal to_remove.to_gapi
+      json["deletions"].last.must_equal soa.to_gapi
       [200, {"Content-Type" => "application/json"},
        create_change_json(to_add, to_remove)]
     end
@@ -394,13 +406,23 @@ describe Gcloud::Dns::Zone, :mock_dns do
     to_remove = to_add.map(&:dup)
     to_remove.first.data = ["example.org."]
 
+    # The request for the SOA record, to update its serial number.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.com."
+      env.params["type"].must_equal "SOA"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(soa)]
+    end
+
     # The request to add and remove the records.
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
-      json["additions"].count.must_equal 1
-      json["deletions"].count.must_equal 1
+      json["additions"].count.must_equal 2
+      json["deletions"].count.must_equal 2
       json["additions"].first.must_equal to_add.first.to_gapi
+      json["additions"].last.must_equal updated_soa.to_gapi
       json["deletions"].first.must_equal to_remove.first.to_gapi
+      json["deletions"].last.must_equal soa.to_gapi
       [200, {"Content-Type" => "application/json"},
        create_change_json([to_add.first], [to_remove.first])]
     end
@@ -421,6 +443,39 @@ describe Gcloud::Dns::Zone, :mock_dns do
   it "adds a record" do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
 
+    # The request for the SOA record, to update its serial number.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.com."
+      env.params["type"].must_equal "SOA"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(soa)]
+    end
+
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      json = JSON.parse env.body
+      json["additions"].count.must_equal 2
+      json["deletions"].count.must_equal 1
+      json["additions"].first.must_equal to_add.to_gapi
+      json["additions"][1].must_equal updated_soa.to_gapi
+      json["deletions"].first.must_equal soa.to_gapi
+      [200, {"Content-Type" => "application/json"},
+       create_change_json([to_add, updated_soa], soa)]
+    end
+
+    change = zone.add "example.net.", "A", 18600, "example.com."
+    change.must_be_kind_of Gcloud::Dns::Change
+    change.id.must_equal "dns-change-created"
+    change.additions.first.name.must_equal to_add.name
+    change.additions.first.type.must_equal to_add.type
+    change.additions.first.ttl.must_equal  to_add.ttl
+    change.additions.first.data.must_equal to_add.data
+    change.additions[1].data.must_equal updated_soa.data
+    change.deletions.first.data.must_equal soa.data
+  end
+
+  it "updates without updating soa" do
+    to_add = zone.record "example.net.", "A", 18600, "example.com."
+
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
       json["additions"].count.must_equal 1
@@ -431,7 +486,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
        create_change_json(to_add, [])]
     end
 
-    change = zone.add "example.net.", "A", 18600, "example.com."
+    change = zone.update to_add, skip_soa: true
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.name
@@ -439,6 +494,62 @@ describe Gcloud::Dns::Zone, :mock_dns do
     change.additions.first.ttl.must_equal  to_add.ttl
     change.additions.first.data.must_equal to_add.data
     change.deletions.must_be :empty?
+  end
+
+  it "updates with an integer for soa_serial" do
+    to_add = zone.record "example.net.", "A", 18600, "example.com."
+    expected_soa = updated_soa
+    expected_soa.data = ["ns-cloud-b1.googledomains.com. dns-admin.google.com. 10 21600 3600 1209600 300"]
+
+    # The request for the SOA record, to update its serial number.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.com."
+      env.params["type"].must_equal "SOA"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(soa)]
+    end
+
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      json = JSON.parse env.body
+      json["additions"].count.must_equal 2
+      json["deletions"].count.must_equal 1
+      json["additions"].first.must_equal to_add.to_gapi
+      json["additions"].last.must_equal expected_soa.to_gapi
+      json["deletions"].first.must_equal soa.to_gapi
+      [200, {"Content-Type" => "application/json"},
+       create_change_json([to_add, expected_soa], soa)]
+    end
+
+    change = zone.update to_add, [], soa_serial: 10
+    change.additions[1].data.must_equal expected_soa.data
+  end
+
+  it "updates with a lambda for soa_serial" do
+    to_add = zone.record "example.net.", "A", 18600, "example.com."
+    expected_soa = updated_soa
+    expected_soa.data = ["ns-cloud-b1.googledomains.com. dns-admin.google.com. 10 21600 3600 1209600 300"]
+
+    # The request for the SOA record, to update its serial number.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.com."
+      env.params["type"].must_equal "SOA"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(soa)]
+    end
+
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      json = JSON.parse env.body
+      json["additions"].count.must_equal 2
+      json["deletions"].count.must_equal 1
+      json["additions"].first.must_equal to_add.to_gapi
+      json["additions"].last.must_equal expected_soa.to_gapi
+      json["deletions"].first.must_equal soa.to_gapi
+      [200, {"Content-Type" => "application/json"},
+       create_change_json([to_add, expected_soa], soa)]
+    end
+
+    change = zone.update to_add, [], soa_serial: lambda { |sn| sn + 10 }
+    change.additions[1].data.must_equal expected_soa.data
   end
 
   it "removes records by name and type" do
@@ -452,13 +563,22 @@ describe Gcloud::Dns::Zone, :mock_dns do
        lookup_records_json(to_remove)]
     end
 
+    # The request for the SOA record, to update its serial number.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.com."
+      env.params["type"].must_equal "SOA"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(soa)]
+    end
+
     # The request to remove the records.
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
-      json["additions"].count.must_equal 0
-      json["deletions"].count.must_equal 1
-      json["additions"].must_be :empty?
+      json["additions"].count.must_equal 1
+      json["deletions"].count.must_equal 2
+      json["additions"].first.must_equal updated_soa.to_gapi
       json["deletions"].first.must_equal to_remove.to_gapi
+      json["deletions"].last.must_equal soa.to_gapi
       [200, {"Content-Type" => "application/json"},
        create_change_json([], to_remove)]
     end
@@ -485,13 +605,23 @@ describe Gcloud::Dns::Zone, :mock_dns do
        lookup_records_json(to_remove)]
     end
 
+    # The request for the SOA record, to update its serial number.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.com."
+      env.params["type"].must_equal "SOA"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(soa)]
+    end
+
     # The request to add and remove the records.
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
-      json["additions"].count.must_equal 1
-      json["deletions"].count.must_equal 1
+      json["additions"].count.must_equal 2
+      json["deletions"].count.must_equal 2
       json["additions"].first.must_equal to_add.to_gapi
+      json["additions"].last.must_equal updated_soa.to_gapi
       json["deletions"].first.must_equal to_remove.to_gapi
+      json["deletions"].last.must_equal soa.to_gapi
       [200, {"Content-Type" => "application/json"},
        create_change_json(to_add, to_remove)]
     end
@@ -521,13 +651,23 @@ describe Gcloud::Dns::Zone, :mock_dns do
        lookup_records_json(to_remove)]
     end
 
+    # The request for the SOA record, to update its serial number.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.com."
+      env.params["type"].must_equal "SOA"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(soa)]
+    end
+
     # The request to add and remove the records.
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
-      json["additions"].count.must_equal 1
-      json["deletions"].count.must_equal 1
+      json["additions"].count.must_equal 2
+      json["deletions"].count.must_equal 2
       json["additions"].first.must_equal to_add.to_gapi
+      json["additions"].last.must_equal updated_soa.to_gapi
       json["deletions"].first.must_equal to_remove.to_gapi
+      json["deletions"].last.must_equal soa.to_gapi
       [200, {"Content-Type" => "application/json"},
        create_change_json(to_add, to_remove)]
     end
@@ -591,7 +731,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
        create_change_json([a_to_add, mx_to_add], [txt_to_remove, mx_to_remove])]
     end
 
-    zone.update do |tx|
+    zone.update skip_soa: true do |tx|
       tx.add "example.com.", "A", 18600, "127.0.0.1"
       tx.remove "example.com.", "TXT"
       tx.replace "example.com.", "MX", 18600, ["mail1.example.com", "mail2.example.com"]

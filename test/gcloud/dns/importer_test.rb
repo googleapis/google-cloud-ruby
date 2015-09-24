@@ -47,9 +47,9 @@ EOS
 
   let(:zonefile_io) { StringIO.new zonefile }
 
-  it "imports records from zonefile file path with nameservers" do
+  it "imports records from zonefile file path" do
     importer = Gcloud::Dns::Importer.new zonefile_path
-    records = importer.records nameservers: true
+    records = importer.records
     records.size.must_equal 17
     records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
     record_must_be records[0], "example.com.", "SOA", 3600, ["ns.example.com. username.example.com. 2007120710 1d 2h 4w 1h"]
