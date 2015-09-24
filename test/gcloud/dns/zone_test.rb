@@ -344,9 +344,63 @@ describe Gcloud::Dns::Zone, :mock_dns do
     record = zone.record record_name, record_type, record_ttl, record_data
 
     record.name.must_equal record_name
-    record.ttl.must_equal  record_ttl
     record.type.must_equal record_type
+    record.ttl.must_equal  record_ttl
     record.data.must_equal record_data
+  end
+
+  it "creates a record with a fully domain name when not given one" do
+    record = zone.record "example.com", record_type, record_ttl, record_data
+
+    record.name.must_equal "example.com." # it appends "."
+    record.type.must_equal record_type
+    record.ttl.must_equal  record_ttl
+    record.data.must_equal record_data
+  end
+
+  it "creates a record when given nil for the domain name" do
+    record = zone.record nil, record_type, record_ttl, record_data
+
+    record.name.must_equal "example.com."
+    record.type.must_equal record_type
+    record.ttl.must_equal  record_ttl
+    record.data.must_equal record_data
+  end
+
+  it "creates a record when given an empty string for the domain name" do
+    record = zone.record "", record_type, record_ttl, record_data
+
+    record.name.must_equal "example.com."
+    record.type.must_equal record_type
+    record.ttl.must_equal  record_ttl
+    record.data.must_equal record_data
+  end
+
+  it "creates a record when given '@' for the domain name" do
+    record = zone.record "@", record_type, record_ttl, record_data
+
+    record.name.must_equal "example.com."
+    record.type.must_equal record_type
+    record.ttl.must_equal  record_ttl
+    record.data.must_equal record_data
+  end
+
+  it "creates a record with a qualified name when given only a subdomain" do
+    record = zone.record "www", record_type, record_ttl, record_data
+
+    record.name.must_equal "www.example.com."
+    record.type.must_equal record_type
+    record.ttl.must_equal  record_ttl
+    record.data.must_equal record_data
+  end
+
+  it "creates a record without changing name when it is a NAPTR record" do
+    record = zone.record "1.2.3.4", "NAPTR", 3600, "10 100 \"U\" \"E2U+sip\" \"!^\\+44111555(.+)$!sip:7\\1@sip.example.com!\" ."
+
+    record.name.must_equal "1.2.3.4"
+    record.type.must_equal "NAPTR"
+    record.ttl.must_equal  3600
+    record.data.must_equal ["10 100 \"U\" \"E2U+sip\" \"!^\\+44111555(.+)$!sip:7\\1@sip.example.com!\" ."]
   end
 
   it "adds and removes records with update" do

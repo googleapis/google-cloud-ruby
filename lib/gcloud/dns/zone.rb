@@ -338,6 +338,13 @@ module Gcloud
       #   zone.add record
       #
       def record name, type, ttl, data
+        name = name.to_s.strip
+        name = dns if name.empty?
+        name = dns if name == "@"
+        unless ["NAPTR"].include?(type.to_s.upcase)
+          name = "#{name}.#{dns}" unless name.include? "."
+          name = "#{name}." unless name.end_with? "."
+        end
         Gcloud::Dns::Record.new name, type, ttl, data
       end
 
@@ -429,7 +436,7 @@ module Gcloud
       def import path_or_io, options = {}
         options[:except] = Array(options[:except]).map(&:to_s).map(&:upcase)
         options[:except] = (options[:except] + %w(SOA NS)).uniq
-        additions = Gcloud::Dns::Importer.new(path_or_io).records(options)
+        additions = Gcloud::Dns::Importer.new(self, path_or_io).records(options)
         update additions, []
       end
 
