@@ -338,8 +338,12 @@ module Gcloud
       #   zone.add record
       #
       def record name, type, ttl, data
-        name = dns if name.to_s == "@"
-        name = "#{name}.#{dns}" if subdomain? name
+        # if modify_name?
+        unless ["NAPTR"].include?(type.to_s.upcase)
+          name = dns if name.to_s == "@"
+          # if partial_domain?
+          name = "#{name}.#{dns}" unless name.to_s.strip.end_with?(".")
+        end
         Gcloud::Dns::Record.new name, type, ttl, data
       end
 
@@ -785,10 +789,6 @@ module Gcloud
         else
           "ascending"
         end
-      end
-
-      def subdomain? name
-        name.to_s.strip =~ /\A[^\d]*[^\.]\z/
       end
     end
   end
