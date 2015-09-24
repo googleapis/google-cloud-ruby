@@ -349,6 +349,33 @@ describe Gcloud::Dns::Zone, :mock_dns do
     record.data.must_equal record_data
   end
 
+  it "creates a record with a fully domain name when not given one" do
+    record = zone.record "example.com", record_type, record_ttl, record_data
+
+    record.name.must_equal "example.com." # it appends "."
+    record.type.must_equal record_type
+    record.ttl.must_equal  record_ttl
+    record.data.must_equal record_data
+  end
+
+  it "creates a record when given nil for the domain name" do
+    record = zone.record nil, record_type, record_ttl, record_data
+
+    record.name.must_equal "example.com."
+    record.type.must_equal record_type
+    record.ttl.must_equal  record_ttl
+    record.data.must_equal record_data
+  end
+
+  it "creates a record when given an empty string for the domain name" do
+    record = zone.record "", record_type, record_ttl, record_data
+
+    record.name.must_equal "example.com."
+    record.type.must_equal record_type
+    record.ttl.must_equal  record_ttl
+    record.data.must_equal record_data
+  end
+
   it "creates a record when given '@' for the domain name" do
     record = zone.record "@", record_type, record_ttl, record_data
 

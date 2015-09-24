@@ -338,11 +338,12 @@ module Gcloud
       #   zone.add record
       #
       def record name, type, ttl, data
-        # if modify_name?
+        name = name.to_s.strip
+        name = dns if name.empty?
+        name = dns if name == "@"
         unless ["NAPTR"].include?(type.to_s.upcase)
-          name = dns if name.to_s == "@"
-          # if partial_domain?
-          name = "#{name}.#{dns}" unless name.to_s.strip.end_with?(".")
+          name = "#{name}.#{dns}" unless name.include? "."
+          name = "#{name}." unless name.end_with? "."
         end
         Gcloud::Dns::Record.new name, type, ttl, data
       end
