@@ -358,6 +358,24 @@ describe Gcloud::Dns::Zone, :mock_dns do
     record.data.must_equal record_data
   end
 
+  it "creates a record with a qualified name when given only a subdomain" do
+    record = zone.record "www", record_type, record_ttl, record_data
+
+    record.name.must_equal "www.example.com."
+    record.ttl.must_equal  record_ttl
+    record.type.must_equal record_type
+    record.data.must_equal record_data
+  end
+
+  it "creates a record without changing name when given an IP address" do
+    record = zone.record "1.2.3.4", record_type, record_ttl, record_data
+
+    record.name.must_equal "1.2.3.4"
+    record.ttl.must_equal  record_ttl
+    record.type.must_equal record_type
+    record.data.must_equal record_data
+  end
+
   it "adds and removes records with update" do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
     to_remove = zone.record "example.net.", "A", 18600, "example.org."

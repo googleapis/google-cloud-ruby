@@ -339,6 +339,7 @@ module Gcloud
       #
       def record name, type, ttl, data
         name = dns if name.to_s == "@"
+        name = "#{name}.#{dns}" if subdomain? name
         Gcloud::Dns::Record.new name, type, ttl, data
       end
 
@@ -430,7 +431,7 @@ module Gcloud
       def import path_or_io, options = {}
         options[:except] = Array(options[:except]).map(&:to_s).map(&:upcase)
         options[:except] = (options[:except] + %w(SOA NS)).uniq
-        additions = Gcloud::Dns::Importer.new(path_or_io).records(options)
+        additions = Gcloud::Dns::Importer.new(self, path_or_io).records(options)
         update additions, []
       end
 
@@ -784,6 +785,10 @@ module Gcloud
         else
           "ascending"
         end
+      end
+
+      def subdomain? name
+        name.to_s.strip =~ /\A[^\d]*[^\.]\z/
       end
     end
   end
