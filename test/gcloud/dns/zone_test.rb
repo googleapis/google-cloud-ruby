@@ -456,9 +456,10 @@ describe Gcloud::Dns::Zone, :mock_dns do
       json["additions"].count.must_equal 2
       json["deletions"].count.must_equal 1
       json["additions"].first.must_equal to_add.to_gapi
+      json["additions"][1].must_equal updated_soa.to_gapi
       json["deletions"].first.must_equal soa.to_gapi
       [200, {"Content-Type" => "application/json"},
-       create_change_json(to_add, [])]
+       create_change_json([to_add, updated_soa], soa)]
     end
 
     change = zone.add "example.net.", "A", 18600, "example.com."
@@ -468,10 +469,11 @@ describe Gcloud::Dns::Zone, :mock_dns do
     change.additions.first.type.must_equal to_add.type
     change.additions.first.ttl.must_equal  to_add.ttl
     change.additions.first.data.must_equal to_add.data
-    change.deletions.must_be :empty?
+    change.additions[1].data.must_equal updated_soa.data
+    change.deletions.first.data.must_equal soa.data
   end
 
-  it "adds a record without updating soa" do
+  it "updates without updating soa" do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
 
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
@@ -484,7 +486,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
        create_change_json(to_add, [])]
     end
 
-    change = zone.add "example.net.", "A", 18600, "example.com.", skip_soa: true
+    change = zone.update to_add, skip_soa: true
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.name
@@ -492,6 +494,62 @@ describe Gcloud::Dns::Zone, :mock_dns do
     change.additions.first.ttl.must_equal  to_add.ttl
     change.additions.first.data.must_equal to_add.data
     change.deletions.must_be :empty?
+  end
+
+  it "updates with an integer for soa_serial" do
+    to_add = zone.record "example.net.", "A", 18600, "example.com."
+    expected_soa = updated_soa
+    expected_soa.data = ["ns-cloud-b1.googledomains.com. dns-admin.google.com. 10 21600 3600 1209600 300"]
+
+    # The request for the SOA record, to update its serial number.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.com."
+      env.params["type"].must_equal "SOA"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(soa)]
+    end
+
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      json = JSON.parse env.body
+      json["additions"].count.must_equal 2
+      json["deletions"].count.must_equal 1
+      json["additions"].first.must_equal to_add.to_gapi
+      json["additions"].last.must_equal expected_soa.to_gapi
+      json["deletions"].first.must_equal soa.to_gapi
+      [200, {"Content-Type" => "application/json"},
+       create_change_json([to_add, expected_soa], soa)]
+    end
+
+    change = zone.update to_add, [], soa_serial: 10
+    change.additions[1].data.must_equal expected_soa.data
+  end
+
+  it "updates with a lambda for soa_serial" do
+    to_add = zone.record "example.net.", "A", 18600, "example.com."
+    expected_soa = updated_soa
+    expected_soa.data = ["ns-cloud-b1.googledomains.com. dns-admin.google.com. 10 21600 3600 1209600 300"]
+
+    # The request for the SOA record, to update its serial number.
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "example.com."
+      env.params["type"].must_equal "SOA"
+      [200, {"Content-Type" => "application/json"},
+       lookup_records_json(soa)]
+    end
+
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      json = JSON.parse env.body
+      json["additions"].count.must_equal 2
+      json["deletions"].count.must_equal 1
+      json["additions"].first.must_equal to_add.to_gapi
+      json["additions"].last.must_equal expected_soa.to_gapi
+      json["deletions"].first.must_equal soa.to_gapi
+      [200, {"Content-Type" => "application/json"},
+       create_change_json([to_add, expected_soa], soa)]
+    end
+
+    change = zone.update to_add, [], soa_serial: lambda { |sn| sn + 10 }
+    change.additions[1].data.must_equal expected_soa.data
   end
 
   it "removes records by name and type" do

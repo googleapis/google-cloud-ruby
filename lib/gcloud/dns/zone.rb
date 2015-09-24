@@ -387,6 +387,9 @@ module Gcloud
       # was given SOA and NS records when it was created. These generated
       # records point to Cloud DNS name servers.
       #
+      # This operation automatically updates the SOA record serial number unless
+      # prevented with the +skip_soa+ option. See #update for details.
+      #
       # The Google Cloud DNS service requires that record names and data use
       # fully-qualified addresses. The @ symbol is not accepted, nor are
       # unqualified subdomain addresses like www. If your zone file contains
@@ -404,6 +407,11 @@ module Gcloud
       #   Include only records of this type or types. (+String+ or +Array+)
       # <code>options[:except]</code>::
       #   Exclude records of this type or types. (+String+ or +Array+)
+      # <code>options[:skip_soa]</code>::
+      #   Do not automatically update the SOA record serial number. (+Boolean+)
+      # <code>options[:soa_serial]</code>::
+      #   A value (or a lambda or Proc returning a value) for the new SOA record
+      #   serial number. (+Integer+, lambda, or +Proc+)
       #
       # === Returns
       #
@@ -429,8 +437,29 @@ module Gcloud
       # Disabled rubocop because this complexity cannot easily be avoided.
 
       ##
-      # Adds and removes Records from the Zone. All changes are made in a single
+      # Adds and removes Records from the zone. All changes are made in a single
       # API request.
+      #
+      # If the SOA record for the zone is not present in +additions+ or
+      # +deletions+ (and if present in one, it should be present in the other),
+      # it will be added to both, and its serial number will be incremented by
+      # adding +1+. This update to the SOA record can be prevented with the
+      # +skip_soa+ option. To provide your own value or behavior for the new
+      # serial number, use the +soa_serial+ option.
+      #
+      # === Parameters
+      #
+      # +additions+::
+      #   The Record or array of records to add. (Record or +Array+)
+      # +deletions+::
+      #   The Record or array of records to remove. (Record or +Array+)
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:skip_soa]</code>::
+      #   Do not automatically update the SOA record serial number. (+Boolean+)
+      # <code>options[:soa_serial]</code>::
+      #   A value (or a lambda or Proc returning a value) for the new SOA record
+      #   serial number. (+Integer+, lambda, or +Proc+)
       #
       # === Returns
       #
@@ -464,11 +493,25 @@ module Gcloud
       #   old_record = zone.record "example.com.", "A", 18600, ["1.2.3.4"]
       #   zone.update [new_record], [old_record]
       #
+      # You can provide a lambda or Proc that receives the current SOA record
+      # serial number and returns a new serial number.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   new_record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
+      #   zone.update new_record, soa_serial: lambda { |sn| sn + 10 }
+      #
       def update additions = [], deletions = [], options = {}
         # Handle only sending in options
         if additions.is_a?(::Hash) && deletions.empty? && options.empty?
           options = additions
           additions = []
+        elsif deletions.is_a?(::Hash) && options.empty?
+          options = deletions
+          deletions = []
         end
 
         additions = Array additions
@@ -484,7 +527,9 @@ module Gcloud
         to_add    = additions - deletions
         to_remove = deletions - additions
         return nil if to_add.empty? && to_remove.empty?
-        increment_soa to_add, to_remove unless options[:skip_soa]
+        unless options[:skip_soa] || detect_soa(to_add) || detect_soa(to_remove)
+          increment_soa to_add, to_remove, options[:soa_serial]
+        end
         create_change to_add, to_remove
       end
 
@@ -493,6 +538,9 @@ module Gcloud
       ##
       # Adds a record to the Zone. In order to update existing records, or add
       # and delete records in the same transaction, use #update.
+      #
+      # This operation automatically updates the SOA record serial number unless
+      # prevented with the +skip_soa+ option. See #update for details.
       #
       # === Parameters
       #
@@ -509,6 +557,13 @@ module Gcloud
       #   The resource record data, as determined by +type+ and defined in RFC
       #   1035 (section 5) and RFC 1034 (section 3.6.1). For example:
       #   +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of +String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:skip_soa]</code>::
+      #   Do not automatically update the SOA record serial number. (+Boolean+)
+      # <code>options[:soa_serial]</code>::
+      #   A value (or a lambda or Proc returning a value) for the new SOA record
+      #   serial number. (+Integer+, lambda, or +Proc+)
       #
       # === Returns
       #
@@ -532,6 +587,9 @@ module Gcloud
       # removed. In order to update existing records, or add and remove records
       # in the same transaction, use #update.
       #
+      # This operation automatically updates the SOA record serial number unless
+      # prevented with the +skip_soa+ option. See #update for details.
+      #
       # === Parameters
       #
       # +name+::
@@ -540,6 +598,13 @@ module Gcloud
       #   The identifier of a {supported record
       #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
       #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+. (+String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:skip_soa]</code>::
+      #   Do not automatically update the SOA record serial number. (+Boolean+)
+      # <code>options[:soa_serial]</code>::
+      #   A value (or a lambda or Proc returning a value) for the new SOA record
+      #   serial number. (+Integer+, lambda, or +Proc+)
       #
       # === Returns
       #
@@ -563,6 +628,9 @@ module Gcloud
       # +type+ are replaced. In order to update existing records, or add and
       # delete records in the same transaction, use #update.
       #
+      # This operation automatically updates the SOA record serial number unless
+      # prevented with the +skip_soa+ option. See #update for details.
+      #
       # === Parameters
       #
       # +name+::
@@ -578,6 +646,13 @@ module Gcloud
       #   The resource record data, as determined by +type+ and defined in RFC
       #   1035 (section 5) and RFC 1034 (section 3.6.1). For example:
       #   +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of +String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:skip_soa]</code>::
+      #   Do not automatically update the SOA record serial number. (+Boolean+)
+      # <code>options[:soa_serial]</code>::
+      #   A value (or a lambda or Proc returning a value) for the new SOA record
+      #   serial number. (+Integer+, lambda, or +Proc+)
       #
       # === Returns
       #
@@ -606,6 +681,9 @@ module Gcloud
       # Modifies records on the Zone. Records matching the +name+ and +type+ are
       # yielded to the block where they can be modified.
       #
+      # This operation automatically updates the SOA record serial number unless
+      # prevented with the +skip_soa+ option. See #update for details.
+      #
       # === Parameters
       #
       # +name+::
@@ -614,6 +692,13 @@ module Gcloud
       #   The identifier of a {supported record
       #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
       #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+. (+String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:skip_soa]</code>::
+      #   Do not automatically update the SOA record serial number. (+Boolean+)
+      # <code>options[:soa_serial]</code>::
+      #   A value (or a lambda or Proc returning a value) for the new SOA record
+      #   serial number. (+Integer+, lambda, or +Proc+)
       #
       # === Returns
       #
@@ -665,26 +750,30 @@ module Gcloud
         end
       end
 
-      # rubocop:disable all
-      # TODO: enable rubocop after finalizing
-
-      def increment_soa additions, deletions
-        return false if detect_soa(additions) || detect_soa(deletions)
+      def increment_soa to_add, to_remove, soa_serial
         current_soa = detect_soa records(name: dns, type: "SOA").all
         return false if current_soa.nil?
         updated_soa = current_soa.dup
-        soa_data = updated_soa.data.first.split " "
-        # TODO: use serial option if present (call or .to_s)
-        soa_data[2] = soa_data[2].to_i + 1
-        updated_soa.data[0] = soa_data.join " "
-        additions << updated_soa
-        deletions << current_soa
+        updated_soa.data[0] = replace_soa_serial updated_soa.data[0], soa_serial
+        to_add << updated_soa
+        to_remove << current_soa
       end
-
-      # rubocop:enable all
 
       def detect_soa records
         records.detect { |r| r.type == "SOA" }
+      end
+
+      def replace_soa_serial soa_data, soa_serial
+        soa_data = soa_data.split " "
+        current_serial = soa_data[2].to_i
+        soa_data[2] = if soa_serial && soa_serial.respond_to?(:call)
+                        soa_serial.call current_serial
+                      elsif soa_serial
+                        soa_serial.to_i
+                      else
+                        current_serial + 1
+                      end
+        soa_data.join " "
       end
 
       def adjust_change_sort_order order
