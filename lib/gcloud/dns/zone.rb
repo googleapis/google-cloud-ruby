@@ -338,6 +338,7 @@ module Gcloud
       #   zone.add record
       #
       def record name, type, ttl, data
+        name = dns if name.to_s == "@"
         Gcloud::Dns::Record.new name, type, ttl, data
       end
 

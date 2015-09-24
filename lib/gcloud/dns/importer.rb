@@ -46,7 +46,8 @@ module Gcloud
       #   The path to a zone file on the filesystem, or an IO instance from
       #   which zone file data can be read. (+String+ or +IO+)
       #
-      def initialize path_or_io
+      def initialize zone, path_or_io
+        @zone = zone
         @grouped_zf_records = {}
         @records = []
         @zonefile = if path_or_io.respond_to? :read
@@ -114,7 +115,7 @@ module Gcloud
           data = zf_records.map do |zf_record|
             data_from_zonefile_record(key[1], zf_record)
           end
-          Gcloud::Dns::Record.new key[0], key[1], ttl, data
+          @zone.record key[0], key[1], ttl, data
         end
       end
 
@@ -122,7 +123,7 @@ module Gcloud
         zf_soa = @zonefile.soa
         ttl = ttl_to_i(zf_soa[:ttl]) || ttl_to_i(@zonefile.ttl)
         data = data_from_zonefile_record :soa, zf_soa
-        Gcloud::Dns::Record.new zf_soa[:origin], "SOA", ttl, data
+        @zone.record zf_soa[:origin], "SOA", ttl, data
       end
 
       ##

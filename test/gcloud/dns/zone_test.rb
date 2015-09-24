@@ -349,6 +349,15 @@ describe Gcloud::Dns::Zone, :mock_dns do
     record.data.must_equal record_data
   end
 
+  it "creates a record when given '@' for the domain name" do
+    record = zone.record "@", record_type, record_ttl, record_data
+
+    record.name.must_equal "example.com."
+    record.ttl.must_equal  record_ttl
+    record.type.must_equal record_type
+    record.data.must_equal record_data
+  end
+
   it "adds and removes records with update" do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
     to_remove = zone.record "example.net.", "A", 18600, "example.org."
