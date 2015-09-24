@@ -50,11 +50,7 @@ module Gcloud
         @zone = zone
         @grouped_zf_records = {}
         @records = []
-        @zonefile = if path_or_io.respond_to? :read
-                      Zonefile.new path_or_io.read
-                    else
-                      Zonefile.from_file path_or_io
-                    end
+        @zonefile = create_zonefile path_or_io
         sort_zonefile_records
         from_zonefile_records
         @records.unshift soa_record
@@ -185,6 +181,14 @@ module Gcloud
           return m[1].to_i * MULTIPLIER[m[2]].to_i
         end
         nil
+      end
+
+      def create_zonefile path_or_io # :nodoc:
+        if path_or_io.respond_to? :read
+          Zonefile.new path_or_io.read
+        else
+          Zonefile.from_file path_or_io
+        end
       end
     end
   end
