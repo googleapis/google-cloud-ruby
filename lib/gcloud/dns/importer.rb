@@ -48,10 +48,10 @@ module Gcloud
       #
       def initialize zone, path_or_io
         @zone = zone
-        @grouped_zf_records = {}
+        @merged_zf_records = {}
         @records = []
         @zonefile = create_zonefile path_or_io
-        sort_zonefile_records
+        merge_zonefile_records
         from_zonefile_records
         @records.unshift soa_record
       end
@@ -90,14 +90,15 @@ module Gcloud
       # element is a symbol type (:a, :mx, and so on), and the second element
       # is an array containing the records of that type. Group the records by
       # name and type instead.
-      def sort_zonefile_records
+      def merge_zonefile_records
         @zonefile.records.map do |r|
           type = r.first
           type = :aaaa if type == :a4
           r.last.each do |zf_record|
-            key = [(zf_record[:name] || @zonefile.origin), type]
-            @grouped_zf_records[key] ||= []
-            @grouped_zf_records[key] << zf_record
+            name = zf_record[:name]
+            name = @zonefile.origin if name.nil? || name == "@"
+            key = [name, type]
+            (@merged_zf_records[key] ||= []) << zf_record
           end
         end
       end
@@ -106,7 +107,7 @@ module Gcloud
       # Convert the grouped records to single array of records, merging records
       # of the same name and type into a single record with an array of rrdatas.
       def from_zonefile_records
-        @records = @grouped_zf_records.map do |key, zf_records|
+        @records = @merged_zf_records.map do |key, zf_records|
           ttl = ttl_from_zonefile_records zf_records
           data = zf_records.map do |zf_record|
             data_from_zonefile_record(key[1], zf_record)
