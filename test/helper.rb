@@ -635,6 +635,28 @@ class MockDns < Minitest::Spec
     }
   end
 
+  def done_change_hash change_id = nil
+    hash = random_change_hash
+    hash["id"] = change_id if change_id
+    hash["additions"] = [{ "name" => "example.net.", "ttl" => 18600, "type" => "A", "rrdatas" => ["example.com."] }]
+    hash["deletions"] = [{ "name" => "example.net.", "ttl" => 18600, "type" => "A", "rrdatas" => ["example.org."] }]
+    hash
+  end
+
+  def pending_change_hash change_id = nil
+    hash = done_change_hash change_id
+    hash["status"] = "pending"
+    hash
+  end
+
+  def done_change_json change_id = nil
+    done_change_hash(change_id).to_json
+  end
+
+  def pending_change_json change_id = nil
+    pending_change_hash(change_id).to_json
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_dns
