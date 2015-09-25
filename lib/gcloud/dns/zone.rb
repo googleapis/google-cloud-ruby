@@ -116,11 +116,20 @@ module Gcloud
       ##
       # Permanently deletes the zone.
       #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:force]</code>::
+      #   If +true+, forces the deletion of the zone by delete all records. If
+      #   +false+ and the zone contains non-essential records, the request will
+      #   fail. Default is +false+. (+Boolean+)
+      #
       # === Returns
       #
       # +true+ if the zone was deleted.
       #
-      # === Example
+      # === Examples
       #
       #   require "gcloud"
       #
@@ -129,7 +138,18 @@ module Gcloud
       #   zone = dns.zone "example-zone"
       #   zone.delete
       #
-      def delete
+      # The zone can be forcefully deleted with the +force+ option:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   zone.delete force: true
+      #
+      def delete options = {}
+        clear! if options[:force]
+
         ensure_connection!
         resp = connection.delete_zone id
         if resp.success?
@@ -137,6 +157,25 @@ module Gcloud
         else
           fail ApiError.from_response(resp)
         end
+      end
+
+      ##
+      # Removes non-essential records the zone. Only NS and SOA records will be
+      # kept.
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   zone.clear!
+      #
+      def clear!
+        non_essential = records.all.reject { |r| %w(SOA NS).include?(r.type) }
+        change = update [], non_essential
+        change.wait_until_done! unless change.nil?
       end
 
       ##

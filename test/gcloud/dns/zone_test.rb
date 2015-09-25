@@ -48,6 +48,49 @@ describe Gcloud::Dns::Zone, :mock_dns do
     zone.delete
   end
 
+  it "can forcefuly delete itself" do
+    # get all records
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(5)]
+    end
+
+    # delete non-essential records and update SOA
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      json = JSON.parse env.body
+      json["additions"].count.must_equal 0
+      json["deletions"].count.must_equal 5
+      [200, {"Content-Type" => "application/json"},
+       done_change_json]
+    end
+
+    # delete zone call
+    mock_connection.delete "/dns/v1/projects/#{project}/managedZones/#{zone.id}" do |env|
+      [200, {"Content-Type" => "application/json"}, ""]
+    end
+
+    zone.delete force: true
+  end
+
+  it "can clear all non-essential records" do
+    # get all records
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(5)]
+    end
+
+    # delete non-essential records and update SOA
+    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      json = JSON.parse env.body
+      json["additions"].count.must_equal 0
+      json["deletions"].count.must_equal 5
+      [200, {"Content-Type" => "application/json"},
+       done_change_json]
+    end
+
+    zone.clear!
+  end
+
   it "finds a change" do
     found_change = "dns-change-1234567890"
 
