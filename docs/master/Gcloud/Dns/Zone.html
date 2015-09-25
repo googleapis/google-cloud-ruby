@@ -126,6 +126,8 @@ name.</p>
             
               <a href="#method-i-changes">changes</a>
             
+              <a href="#method-i-clear-21">clear!</a>
+            
               <a href="#method-i-created_at">created_at</a>
             
               <a href="#method-i-delete">delete</a>
@@ -262,7 +264,7 @@ serial number. (<code>Integer</code>, lambda, or <code>Proc</code>)</p>
 
     
       <!-- <div class="method-source-code" id="add-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 588</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 627</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">update</span> [<span class="ruby-identifier">record</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>)], [], <span class="ruby-identifier">options</span>
 <span class="ruby-keyword">end</span></pre>
@@ -320,7 +322,7 @@ change does not exist</p>
 
     
       <!-- <div class="method-source-code" id="change-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 167</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 206</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">change</span> <span class="ruby-identifier">change_id</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_change</span> <span class="ruby-identifier">id</span>, <span class="ruby-identifier">change_id</span>
@@ -431,7 +433,7 @@ href="Change/List.html">Gcloud::Dns::Change::List</a>)</p>
 
     
       <!-- <div class="method-source-code" id="changes-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 238</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 277</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">changes</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-comment"># Fix the sort options</span>
@@ -444,6 +446,53 @@ href="Change/List.html">Gcloud::Dns::Change::List</a>)</p>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="clear-21-method" class="method ">
+  <a name="method-i-clear-21"></a>
+
+  
+    <h4>
+      <code>clear!()</code>
+      <span>
+        <a href="#method-i-clear-21">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Removes non-essential records from the zone. Only NS and SOA records will
+be kept.</p>
+
+<h3 id="method-i-clear-21-label-Examples">Examples<span><a href="#method-i-clear-21-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-zone&quot;</span>
+<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">clear!</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="clear-21-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 175</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">clear!</span>
+  <span class="ruby-identifier">non_essential</span> = <span class="ruby-identifier">records</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-node">%w(SOA NS)</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">r</span>.<span class="ruby-identifier">type</span>) }
+  <span class="ruby-identifier">change</span> = <span class="ruby-identifier">update</span> [], <span class="ruby-identifier">non_essential</span>
+  <span class="ruby-identifier">change</span>.<span class="ruby-identifier">wait_until_done!</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">change</span>.<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -496,7 +545,7 @@ href="Change/List.html">Gcloud::Dns::Change::List</a>)</p>
 
   
     <h4>
-      <code>delete()</code>
+      <code>delete(options = {})</code>
       <span>
         <a href="#method-i-delete">&para;</a>
         <a href="#top">&uarr;</a>
@@ -508,11 +557,23 @@ href="Change/List.html">Gcloud::Dns::Change::List</a>)</p>
     
       <p>Permanently deletes the zone.</p>
 
+<h3 id="method-i-delete-label-Parameters">Parameters<span><a href="#method-i-delete-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
+</dd><dt><code>options[:force]</code>
+<dd>
+<p>If <code>true</code>, ensures the deletion of the zone by first deleting
+all records. If <code>false</code> and the zone contains non-essential
+records, the request will fail. Default is <code>false</code>.
+(<code>Boolean</code>)</p>
+</dd></dl>
+
 <h3 id="method-i-delete-label-Returns">Returns<span><a href="#method-i-delete-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <p><code>true</code> if the zone was deleted.</p>
 
-<h3 id="method-i-delete-label-Example">Example<span><a href="#method-i-delete-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<h3 id="method-i-delete-label-Examples">Examples<span><a href="#method-i-delete-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
@@ -521,12 +582,24 @@ href="Change/List.html">Gcloud::Dns::Change::List</a>)</p>
 <span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-zone&quot;</span>
 <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">delete</span>
 </pre>
+
+<p>The zone can be forcefully deleted with the <code>force</code> option:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-zone&quot;</span>
+<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+</pre>
     
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 132</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-identifier">clear!</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:force</span>]
+
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_zone</span> <span class="ruby-identifier">id</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -657,7 +730,7 @@ must be writable. (<code>String</code>)</p>
 
     
       <!-- <div class="method-source-code" id="export-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 375</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 414</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">export</span> <span class="ruby-identifier">path</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-identifier">path</span>, <span class="ruby-string">&quot;w&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span> <span class="ruby-identifier">to_zonefile</span>
@@ -792,7 +865,7 @@ href="Record.html">Record</a> instances.</p>
 
     
       <!-- <div class="method-source-code" id="import-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 436</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 475</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">import</span> <span class="ruby-identifier">path_or_io</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:except</span>] = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:except</span>]).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_s</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:upcase</span>)
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:except</span>] = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:except</span>] <span class="ruby-operator">+</span> <span class="ruby-node">%w(SOA NS)</span>).<span class="ruby-identifier">uniq</span>
@@ -875,7 +948,7 @@ serial number. (<code>Integer</code>, lambda, or <code>Proc</code>)</p>
 
     
       <!-- <div class="method-source-code" id="modify-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 724</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 763</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">modify</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">existing</span> = <span class="ruby-identifier">records</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-identifier">type</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">to_a</span>
   <span class="ruby-identifier">updated</span> = <span class="ruby-identifier">existing</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:dup</span>)
@@ -1035,7 +1108,7 @@ to a <a href="Zone.html">Zone</a>.</p>
 
     
       <!-- <div class="method-source-code" id="record-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 340</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 379</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">record</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>
   <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
   <span class="ruby-identifier">name</span> = <span class="ruby-identifier">dns</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">empty?</span>
@@ -1146,7 +1219,7 @@ href="Record/List.html">Gcloud::Dns::Record::List</a>)</p>
 
     
       <!-- <div class="method-source-code" id="records-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 313</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 352</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">records</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_records</span> <span class="ruby-identifier">id</span>, <span class="ruby-identifier">options</span>
@@ -1232,7 +1305,7 @@ serial number. (<code>Integer</code>, lambda, or <code>Proc</code>)</p>
 
     
       <!-- <div class="method-source-code" id="remove-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 629</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 668</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remove</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">update</span> [], <span class="ruby-identifier">records</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-identifier">type</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">to_a</span>, <span class="ruby-identifier">options</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1322,7 +1395,7 @@ serial number. (<code>Integer</code>, lambda, or <code>Proc</code>)</p>
 
     
       <!-- <div class="method-source-code" id="replace-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 677</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 716</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">replace</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">update</span> [<span class="ruby-identifier">record</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>)],
          <span class="ruby-identifier">records</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-identifier">type</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">to_a</span>,
@@ -1434,7 +1507,7 @@ serial number and returns a new serial number.</p>
 
     
       <!-- <div class="method-source-code" id="update-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 514</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 553</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span> <span class="ruby-identifier">additions</span> = [], <span class="ruby-identifier">deletions</span> = [], <span class="ruby-identifier">options</span> = {}
   <span class="ruby-comment"># Handle only sending in options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">additions</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">deletions</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">empty?</span>
@@ -1487,7 +1560,7 @@ serial number and returns a new serial number.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 24, 2015.
+    Docs built on Sep 25, 2015.
   </div>
 </div>
 
