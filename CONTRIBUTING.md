@@ -71,6 +71,10 @@ $ export STORAGE_TEST_KEYFILE=/path/to/other/keyfile.json
 $ rake test:acceptance
 ```
 
+### DNS Acceptance Tests
+
+To run the DNS acceptance tests you must give your service account permissions to a domain name in [Webmaster Central](https://www.google.com/webmasters/verification) and set the `GCLOUD_TEST_DNS_DOMAIN` environment variable to the fully qualified domain name. (e.g. "example.com.")
+
 ### Local Datastore Devserver
 
 You can run the Datstore acceptance tests against a devserver running locally. To switch to the devserver set the `DATASTORE_HOST` environment variable with the location of the local devserver.
