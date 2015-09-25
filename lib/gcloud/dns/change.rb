@@ -30,7 +30,7 @@ module Gcloud
     #
     #   gcloud = Gcloud.new
     #   dns = gcloud.dns
-    #   zone = dns.zone "example-zone"
+    #   zone = dns.zone "example-com"
     #   zone.changes.each do |change|
     #     puts "Change includes #{change.additions.count} additions " \
     #          "and #{change.additions.count} deletions."
@@ -126,7 +126,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   change = zone.change 1234567890
       #   change.done? #=> false
       #   change.wait_until_done!

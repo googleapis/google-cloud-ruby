@@ -31,7 +31,7 @@ module Gcloud
     #
     #   gcloud = Gcloud.new
     #   dns = gcloud.dns
-    #   zone = dns.zone "example-zone"
+    #   zone = dns.zone "example-com"
     #   zone.records.each do |record|
     #     puts record.name
     #   end
@@ -95,7 +95,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   puts zone.name
       #
       def zone zone_id
@@ -198,7 +198,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.create_zone "example-zone", "example.com."
+      #   zone = dns.create_zone "example-com", "example.com."
       #
       # You can also pass +description+ and +name_server_set+ options.
       #
@@ -206,7 +206,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.create_zone "example-zone", "example.com.",
+      #   zone = dns.create_zone "example-com", "example.com.",
       #                           description: "A description of my zone.",
       #                           name_server_set: "example"
       #

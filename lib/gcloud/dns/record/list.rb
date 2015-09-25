@@ -54,7 +54,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   dns = gcloud.dns
-        #   zone = dns.zone "example-zone"
+        #   zone = dns.zone "example-com"
         #   records = zone.records.all # Load all pages of records
         #
         def all

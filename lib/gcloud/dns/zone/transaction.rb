@@ -27,7 +27,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   zone.update do |tx|
       #     tx.add     "example.com.", "A",  86400, "1.2.3.4"
       #     tx.remove  "example.com.", "TXT"
@@ -74,7 +74,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   dns = gcloud.dns
-        #   zone = dns.zone "example-zone"
+        #   zone = dns.zone "example-com"
         #   zone.update do |tx|
         #     tx.add     "example.com.", "A",  86400, "1.2.3.4"
         #   end
@@ -102,7 +102,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   dns = gcloud.dns
-        #   zone = dns.zone "example-zone"
+        #   zone = dns.zone "example-com"
         #   zone.update do |tx|
         #     tx.remove  "example.com.", "TXT"
         #   end
@@ -137,7 +137,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   dns = gcloud.dns
-        #   zone = dns.zone "example-zone"
+        #   zone = dns.zone "example-com"
         #   zone.update do |tx|
         #     tx.replace "example.com.", "MX", 86400, ["10 mail1.example.com.",
         #                                              "20 mail2.example.com."]
