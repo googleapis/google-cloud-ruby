@@ -121,9 +121,9 @@ module Gcloud
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:force]</code>::
-      #   If +true+, forces the deletion of the zone by delete all records. If
-      #   +false+ and the zone contains non-essential records, the request will
-      #   fail. Default is +false+. (+Boolean+)
+      #   If +true+, ensures the deletion of the zone by first deleting all
+      #   records. If +false+ and the zone contains non-essential records, the
+      #   request will fail. Default is +false+. (+Boolean+)
       #
       # === Returns
       #
@@ -160,8 +160,8 @@ module Gcloud
       end
 
       ##
-      # Removes non-essential records the zone. Only NS and SOA records will be
-      # kept.
+      # Removes non-essential records from the zone. Only NS and SOA records
+      # will be kept.
       #
       # === Examples
       #
