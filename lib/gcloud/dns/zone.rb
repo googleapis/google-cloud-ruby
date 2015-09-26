@@ -332,11 +332,11 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
       #   zone = dns.zone "example-zone"
-      #   record = zone.record "example.com.", 86400, "A", ["1.2.3.4"]
+      #   record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
       #   zone.add record
       #
-      def record name, ttl, type, data
-        Gcloud::Dns::Record.new name, ttl, type, data
+      def record name, type, ttl, data
+        Gcloud::Dns::Record.new name, type, ttl, data
       end
 
       ##
@@ -354,8 +354,8 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
       #   zone = dns.zone "example-zone"
-      #   new_record = zone.record "example.com.", 86400, "A", ["1.2.3.4"]
-      #   old_record = zone.record "example.com.", 86400, "A", ["1.2.3.4"]
+      #   new_record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
+      #   old_record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
       #   zone.update [new_record], [old_record]
       #
       def update records_to_add = [], records_to_remove = []
@@ -386,7 +386,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
       #   zone = dns.zone "example-zone"
-      #   record = zone.record "example.com.", 86400, "A", ["1.2.3.4"]
+      #   record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
       #   zone.add record
       #
       def add *records
@@ -408,7 +408,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
       #   zone = dns.zone "example-zone"
-      #   record = zone.record "example.com.", 86400, "A", ["1.2.3.4"]
+      #   record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
       #   zone.remove record
       #
       def remove *records

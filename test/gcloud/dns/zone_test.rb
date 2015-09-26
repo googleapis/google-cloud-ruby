@@ -339,7 +339,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
   end
 
   it "can create a record" do
-    record = zone.record record_name, record_ttl, record_type, record_data
+    record = zone.record record_name, record_type, record_ttl, record_data
 
     record.name.must_equal record_name
     record.ttl.must_equal  record_ttl
@@ -348,8 +348,8 @@ describe Gcloud::Dns::Zone, :mock_dns do
   end
 
   it "adds and removes records with update" do
-    to_add = zone.record "example.net.", 18600, "A", "example.com."
-    to_remove = zone.record "example.net.", 18600, "A", "example.org."
+    to_add = zone.record "example.net.", "A", 18600, "example.com."
+    to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
@@ -375,7 +375,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
   end
 
   it "adds records" do
-    to_add = zone.record "example.net.", 18600, "A", "example.com."
+    to_add = zone.record "example.net.", "A", 18600, "example.com."
 
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
@@ -398,7 +398,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
   end
 
   it "removes records" do
-    to_remove = zone.record "example.net.", 18600, "A", "example.org."
+    to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
     mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       json = JSON.parse env.body
@@ -443,7 +443,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
     seed = rand 99999
     name = "example-#{seed}.com."
     records = count.times.map do
-      random_record_hash name, seed, "A", ["1.2.3.4"]
+      random_record_hash name, "A", seed, ["1.2.3.4"]
     end
     hash = { "kind" => "dns#resourceRecordSet", "rrsets" => records }
     hash["nextPageToken"] = token unless token.nil?
