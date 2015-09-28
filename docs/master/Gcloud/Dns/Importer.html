@@ -188,10 +188,10 @@ zone file data can be read. (<code>String</code> or <code>IO</code>)</p>
 <pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/importer.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">zone</span>, <span class="ruby-identifier">path_or_io</span>
   <span class="ruby-ivar">@zone</span> = <span class="ruby-identifier">zone</span>
-  <span class="ruby-ivar">@grouped_zf_records</span> = {}
+  <span class="ruby-ivar">@merged_zf_records</span> = {}
   <span class="ruby-ivar">@records</span> = []
   <span class="ruby-ivar">@zonefile</span> = <span class="ruby-identifier">create_zonefile</span> <span class="ruby-identifier">path_or_io</span>
-  <span class="ruby-identifier">sort_zonefile_records</span>
+  <span class="ruby-identifier">merge_zonefile_records</span>
   <span class="ruby-identifier">from_zonefile_records</span>
   <span class="ruby-ivar">@records</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">soa_record</span>
 <span class="ruby-keyword">end</span></pre>
