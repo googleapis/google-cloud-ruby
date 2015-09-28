@@ -27,6 +27,8 @@ classes:
 - full_name: Gcloud::Dns
   name: DNS
   classes:
+  - full_name: Gcloud::Dns::Project
+    name: Project
   - full_name: Gcloud::Dns::Zone
     name: Zone
   - full_name: Gcloud::Dns::Record
