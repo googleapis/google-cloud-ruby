@@ -351,6 +351,8 @@ module Gcloud
       #
       def records options = {}
         ensure_connection!
+        # Ensure name is a FQDN
+        options[:name] = fqdn(options[:name]) if options[:name]
         resp = connection.list_records id, options
         if resp.success?
           Record::List.from_response resp, self
