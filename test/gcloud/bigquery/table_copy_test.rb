@@ -64,21 +64,38 @@ describe Gcloud::Bigquery::Table, :copy, :mock_bigquery do
   end
 
   it "can copy to a table identified by a string" do
-      mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-        json = JSON.parse(env.body)
-        json["configuration"]["copy"]["sourceTable"]["projectId"].must_equal source_table.project_id
-        json["configuration"]["copy"]["sourceTable"]["datasetId"].must_equal source_table.dataset_id
-        json["configuration"]["copy"]["sourceTable"]["tableId"].must_equal source_table.table_id
-        json["configuration"]["copy"]["destinationTable"]["projectId"].must_equal target_table_other_proj.project_id
-        json["configuration"]["copy"]["destinationTable"]["datasetId"].must_equal target_table_other_proj.dataset_id
-        json["configuration"]["copy"]["destinationTable"]["tableId"].must_equal target_table_other_proj.table_id
-        [200, {"Content-Type"=>"application/json"},
-         copy_job_json(source_table, target_table_other_proj)]
-      end
-
-      job = source_table.copy "target-project:target_dataset.target_table_id"
-      job.must_be_kind_of Gcloud::Bigquery::CopyJob
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(env.body)
+      json["configuration"]["copy"]["sourceTable"]["projectId"].must_equal source_table.project_id
+      json["configuration"]["copy"]["sourceTable"]["datasetId"].must_equal source_table.dataset_id
+      json["configuration"]["copy"]["sourceTable"]["tableId"].must_equal   source_table.table_id
+      json["configuration"]["copy"]["destinationTable"]["projectId"].must_equal target_table_other_proj.project_id
+      json["configuration"]["copy"]["destinationTable"]["datasetId"].must_equal target_table_other_proj.dataset_id
+      json["configuration"]["copy"]["destinationTable"]["tableId"].must_equal   target_table_other_proj.table_id
+      [200, {"Content-Type"=>"application/json"},
+       copy_job_json(source_table, target_table_other_proj)]
     end
+
+    job = source_table.copy "target-project:target_dataset.target_table_id"
+    job.must_be_kind_of Gcloud::Bigquery::CopyJob
+  end
+
+  it "can copy to a table name string only" do
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(env.body)
+      json["configuration"]["copy"]["sourceTable"]["projectId"].must_equal source_table.project_id
+      json["configuration"]["copy"]["sourceTable"]["datasetId"].must_equal source_table.dataset_id
+      json["configuration"]["copy"]["sourceTable"]["tableId"].must_equal   source_table.table_id
+      json["configuration"]["copy"]["destinationTable"]["projectId"].must_equal source_table.project_id
+      json["configuration"]["copy"]["destinationTable"]["datasetId"].must_equal source_table.dataset_id
+      json["configuration"]["copy"]["destinationTable"]["tableId"].must_equal   "new_target_table_id"
+      [200, {"Content-Type"=>"application/json"},
+       copy_job_json(source_table, target_table_other_proj)]
+    end
+
+    job = source_table.copy "new_target_table_id"
+    job.must_be_kind_of Gcloud::Bigquery::CopyJob
+  end
 
   it "can copy itself as a dryrun" do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
