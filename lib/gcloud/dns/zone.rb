@@ -212,6 +212,8 @@ module Gcloud
           nil
         end
       end
+      alias_method :find_change, :change
+      alias_method :get_change, :change
 
       ##
       # Retrieves the list of changes belonging to the zone.
@@ -287,6 +289,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_changes, :changes
 
       ##
       # Retrieves the list of records belonging to the zone.
@@ -360,6 +363,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_records, :records
 
       ##
       # Creates a new, unsaved Record that can be added to a Zone.
@@ -381,6 +385,7 @@ module Gcloud
       def record name, type, ttl, data
         Gcloud::Dns::Record.new fqdn(name), type, ttl, data
       end
+      alias_method :new_record, :record
 
       ##
       # Exports the zone to a local {DNS zone
