@@ -293,6 +293,12 @@ module Gcloud
       #
       # === Parameters
       #
+      # +name+::
+      #   Return only records with this fully-qualified domain name. (+String+)
+      # +type+::
+      #   Return only records with this {record
+      #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
+      #   If present, the +name+ parameter must also be present. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:token]</code>::
@@ -300,12 +306,6 @@ module Gcloud
       #   of results to view. (+String+)
       # <code>options[:max]</code>::
       #   Maximum number of records to return. (+Integer+)
-      # <code>options[:name]</code>::
-      #   Return only records with this fully-qualified domain name. (+String+)
-      # <code>options[:type]</code>::
-      #   Return only records with this {record
-      #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
-      #   If present, the +name+ parameter must also be present. (+String+)
       #
       # === Returns
       #
@@ -330,7 +330,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
       #   zone = dns.zone "example-zone"
-      #   records = zone.records name: "example.com.", type: "A"
+      #   records = zone.records "example.com.", "A"
       #
       # If you have a significant number of records, you may need to paginate
       # through them: (See Gcloud::Dns::Record::List)
@@ -340,7 +340,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
       #   zone = dns.zone "example-zone"
-      #   records = zone.records
+      #   records = zone.records "example.com."
       #   loop do
       #     records.each do |record|
       #       puts record.name
@@ -349,10 +349,11 @@ module Gcloud
       #     records = records.next
       #   end
       #
-      def records options = {}
+      def records name = nil, type = nil, options = {}
         ensure_connection!
-        # Ensure name is a FQDN
-        options[:name] = fqdn(options[:name]) if options[:name]
+
+        options = build_records_options name, type, options
+
         resp = connection.list_records id, options
         if resp.success?
           Record::List.from_response resp, self
@@ -807,6 +808,32 @@ module Gcloud
       def ensure_connection!
         fail "Must have active connection" unless connection
       end
+
+      # rubocop:disable all
+      # Disabled rubocop because this complexity cannot easily be avoided.
+
+      def build_records_options name, type, options
+        # Handle only sending in options
+        if name.is_a?(::Hash) && type.nil? && options.empty?
+          options = name
+          name = nil
+        elsif type.is_a?(::Hash) && options.empty?
+          options = type
+          type = nil
+        end
+
+        # Set parameters as options, params have priority
+        options[:name] = name || options[:name]
+        options[:type] = type || options[:type]
+
+        # Ensure name is a FQDN
+        options[:name] = fqdn(options[:name]) if options[:name]
+
+        # return only the options
+        options
+      end
+
+      # rubocop:enable all
 
       def create_change additions, deletions
         ensure_connection!
