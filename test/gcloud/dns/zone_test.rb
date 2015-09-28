@@ -251,7 +251,20 @@ describe Gcloud::Dns::Zone, :mock_dns do
     records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
 
-  it "lists records with name set" do
+  it "lists records with name param" do
+    num_records = 3
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal record_name
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(num_records)]
+    end
+
+    records = zone.records record_name
+    records.size.must_equal num_records
+    records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+  end
+
+  it "lists records with name option" do
     num_records = 3
     mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
       env.params["name"].must_equal record_name
@@ -264,7 +277,21 @@ describe Gcloud::Dns::Zone, :mock_dns do
     records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
 
-  it "lists records with name and type set" do
+  it "lists records with name and type params" do
+    num_records = 3
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal record_name
+      env.params["type"].must_equal record_type
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(num_records)]
+    end
+
+    records = zone.records record_name, record_type
+    records.size.must_equal num_records
+    records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+  end
+
+  it "lists records with name and type options" do
     num_records = 3
     mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
       env.params["name"].must_equal record_name
@@ -278,7 +305,21 @@ describe Gcloud::Dns::Zone, :mock_dns do
     records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
 
-  it "lists records with subdomain and type" do
+  it "lists records with subdomain and type params" do
+    num_records = 3
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params["name"].must_equal "www.example.com."
+      env.params["type"].must_equal "A"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(num_records)]
+    end
+
+    records = zone.records "www", "A"
+    records.size.must_equal num_records
+    records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+  end
+
+  it "lists records with subdomain and type options" do
     num_records = 3
     mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
       env.params["name"].must_equal "www.example.com."
