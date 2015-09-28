@@ -44,7 +44,9 @@ www 1h IN  A      192.168.0.2  ;web server definition
 ftp    IN  CNAME  www.example.com.  ;ftp server definition
 ; non server domain hosts
 bill   IN  A      192.168.0.3
-fred   IN  A      192.168.0.4
+example.com. IN A 192.168.0.4
+@      IN  A      192.168.0.5
+       IN  A      192.168.0.6
 EOS
   }
 
@@ -53,25 +55,24 @@ EOS
   it "imports records from zonefile file path" do
     importer = Gcloud::Dns::Importer.new zone, zonefile_path
     records = importer.records
-    records.size.must_equal 17
+    records.size.must_equal 16
     records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
     record_must_be records[0], "example.com.", "SOA", 3600, ["ns.example.com. username.example.com. 2007120710 1d 2h 4w 1h"]
-    record_must_be records[1], "example.com.", "MX", 3600, ["10 mail.example.com."]
-    record_must_be records[2], "example.com.", "MX", 3600, ["20 mail2.example.com.","50 mail3"]
-    record_must_be records[3], "example.com.", "A", 3600, ["192.0.2.1"]
-    record_must_be records[4], "ns.example.com.", "A", 3600, ["192.0.2.2"]
-    record_must_be records[5], "mail.example.com.", "A", 3600, ["192.0.2.3"]
-    record_must_be records[6], "mail2.example.com.", "A", 3600, ["192.0.2.4"]
-    record_must_be records[7], "mail3.example.com.", "A", 3600, ["192.0.2.5"]
-    record_must_be records[8], "example.com.", "AAAA", 3600, ["2001:db8:10::1"]
-    record_must_be records[9], "ns.example.com.", "AAAA", 3600, ["2001:db8:10::2"]
-    record_must_be records[10], "example.com.", "NS", 3600, ["ns","ns.somewhere.example."]
-    record_must_be records[11], "www.example.com.", "CNAME", 3600, ["example.com."]
-    record_must_be records[12], "wwwtest.example.com.", "CNAME", 3600, ["www"]
-    record_must_be records[13], "sip.example.com.", "TXT", 3600, ["\"text; containing ; spaces; and; semicolons ;\""]
-    record_must_be records[14], "2.1.0.10.in-addr.arpa.", "PTR", 3600, ["server.example.com."]
-    record_must_be records[15], "sip.example.com.", "SRV", 3600, ["0 5 5060 sip.example.com."]
-    record_must_be records[16], "2.1.2.1", "NAPTR", 3600, ["10 100 \"u\" \"E2U+sip\" \"!^.*$!sip:info@example.com!\" .","10 101 \"u\" \"E2U+h323\" \"!^.*$!h323:info@example.com!\" .","10 102 \"u\" \"E2U+msg\" \"!^.*$!mailto:info@example.com!\" ."]
+    record_must_be records[1], "example.com.", "MX", 3600, ["10 mail.example.com.", "20 mail2.example.com.", "50 mail3"]
+    record_must_be records[2], "example.com.", "A", 3600, ["192.0.2.1"]
+    record_must_be records[3], "ns.example.com.", "A", 3600, ["192.0.2.2"]
+    record_must_be records[4], "mail.example.com.", "A", 3600, ["192.0.2.3"]
+    record_must_be records[5], "mail2.example.com.", "A", 3600, ["192.0.2.4"]
+    record_must_be records[6], "mail3.example.com.", "A", 3600, ["192.0.2.5"]
+    record_must_be records[7], "example.com.", "AAAA", 3600, ["2001:db8:10::1"]
+    record_must_be records[8], "ns.example.com.", "AAAA", 3600, ["2001:db8:10::2"]
+    record_must_be records[9], "example.com.", "NS", 3600, ["ns","ns.somewhere.example."]
+    record_must_be records[10], "www.example.com.", "CNAME", 3600, ["example.com."]
+    record_must_be records[11], "wwwtest.example.com.", "CNAME", 3600, ["www"]
+    record_must_be records[12], "sip.example.com.", "TXT", 3600, ["\"text; containing ; spaces; and; semicolons ;\""]
+    record_must_be records[13], "2.1.0.10.in-addr.arpa.", "PTR", 3600, ["server.example.com."]
+    record_must_be records[14], "sip.example.com.", "SRV", 3600, ["0 5 5060 sip.example.com."]
+    record_must_be records[15], "2.1.2.1", "NAPTR", 3600, ["10 100 \"u\" \"E2U+sip\" \"!^.*$!sip:info@example.com!\" .","10 101 \"u\" \"E2U+h323\" \"!^.*$!h323:info@example.com!\" .","10 102 \"u\" \"E2U+msg\" \"!^.*$!mailto:info@example.com!\" ."]
   end
 
   it "imports records from zonefile IO instance" do
@@ -84,7 +85,7 @@ EOS
     record_must_be records[2], "ns1.example.com.", "A", 86400, ["192.168.0.1"]
     record_must_be records[3], "www.example.com.", "A", 3600, ["192.168.0.2"]
     record_must_be records[4], "bill.example.com.", "A", 86400, ["192.168.0.3"]
-    record_must_be records[5], "fred.example.com.", "A", 86400, ["192.168.0.4"]
+    record_must_be records[5], "example.com.", "A", 86400, ["192.168.0.4", "192.168.0.5", "192.168.0.6"]
     record_must_be records[6], "example.com.", "NS", 86400, ["ns1.example.com.", "ns2.smokeyjoe.com."]
     record_must_be records[7], "ftp.example.com.", "CNAME", 86400, ["www.example.com."]
   end
@@ -96,7 +97,7 @@ EOS
     record_must_be records[0], "ns1.example.com.", "A", 86400, ["192.168.0.1"]
     record_must_be records[1], "www.example.com.", "A", 3600, ["192.168.0.2"]
     record_must_be records[2], "bill.example.com.", "A", 86400, ["192.168.0.3"]
-    record_must_be records[3], "fred.example.com.", "A", 86400, ["192.168.0.4"]
+    record_must_be records[3], "example.com.", "A", 86400, ["192.168.0.4", "192.168.0.5", "192.168.0.6"]
   end
 
   it "accepts an only option array" do
@@ -106,7 +107,7 @@ EOS
     record_must_be records[0], "ns1.example.com.", "A", 86400, ["192.168.0.1"]
     record_must_be records[1], "www.example.com.", "A", 3600, ["192.168.0.2"]
     record_must_be records[2], "bill.example.com.", "A", 86400, ["192.168.0.3"]
-    record_must_be records[3], "fred.example.com.", "A", 86400, ["192.168.0.4"]
+    record_must_be records[3], "example.com.", "A", 86400, ["192.168.0.4", "192.168.0.5", "192.168.0.6"]
     record_must_be records[4], "example.com.", "NS", 86400, ["ns1.example.com.", "ns2.smokeyjoe.com."]
   end
 
