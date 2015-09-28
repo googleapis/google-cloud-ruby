@@ -27,7 +27,7 @@ module Gcloud
     #
     #   gcloud = Gcloud.new
     #   dns = gcloud.dns
-    #   zone = dns.zone "example-zone"
+    #   zone = dns.zone "example-com"
     #
     #   record_1 = zone.record "example.com.", "A", 86400, "1.2.3.4"
     #   mx_data = ["10 mail.example.com.","20 mail2.example.com."]
@@ -89,7 +89,7 @@ module Gcloud
       ##
       # Returns an array of strings in the zone file format, one
       # for each element in the record's data array.
-      def to_zonefile_records
+      def to_zonefile_records #:nodoc:
         data.map do |rrdata|
           "#{name} #{ttl} IN #{type} #{rrdata}"
         end

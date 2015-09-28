@@ -34,10 +34,13 @@ module Gcloud
     #
     #   gcloud = Gcloud.new
     #   dns = gcloud.dns
-    #   zone = dns.zone "example-zone"
+    #   zone = dns.zone "example-com"
     #   zone.records.each do |record|
     #     puts record.name
     #   end
+    #
+    # For more information, see {Managing
+    # Zones}[https://cloud.google.com/dns/zones/].
     #
     class Zone
       ##
@@ -135,7 +138,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   zone.delete
       #
       # The zone can be forcefully deleted with the +force+ option:
@@ -144,7 +147,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   zone.delete force: true
       #
       def delete options = {}
@@ -169,7 +172,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   zone.clear!
       #
       def clear!
@@ -244,10 +247,10 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   changes = zone.changes
       #   changes.each do |change|
-      #     puts change.name
+      #     puts "#{change.name} - #{change.status}"
       #   end
       #
       # The changes can be sorted by change sequence:
@@ -256,7 +259,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   changes = zone.changes order: :desc
       #
       # If you have a significant number of changes, you may need to paginate
@@ -266,11 +269,11 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   changes = zone.changes
       #   loop do
       #     changes.each do |change|
-      #       puts change.name
+      #       puts "#{change.name} - #{change.status}"
       #     end
       #     break unless changes.next?
       #     changes = changes.next
@@ -320,7 +323,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   records = zone.records
       #   records.each do |record|
       #     puts record.name
@@ -332,7 +335,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   records = zone.records "example.com.", "A"
       #
       # If you have a significant number of records, you may need to paginate
@@ -342,7 +345,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   records = zone.records "example.com."
       #   loop do
       #     records.each do |record|
@@ -351,6 +354,16 @@ module Gcloud
       #     break unless records.next?
       #     records = records.next
       #   end
+      #
+      # Or, instead of paging manually, you can retrieve all of the pages in a
+      # single call: (See Gcloud::Dns::Record::List#all)
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-com"
+      #   records = zone.records.all
       #
       def records name = nil, type = nil, options = {}
         ensure_connection!
@@ -379,7 +392,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
       #   zone.add record
       #
@@ -408,7 +421,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #
       #   zone.export "path/to/db.example.com"
       #
@@ -470,7 +483,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   change = zone.import "path/to/db.example.com"
       #
       def import path_or_io, options = {}
@@ -521,12 +534,15 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
-      #   zone.update do |tx|
+      #   zone = dns.zone "example-com"
+      #   change = zone.update do |tx|
       #     tx.add     "example.com.", "A",  86400, "1.2.3.4"
       #     tx.remove  "example.com.", "TXT"
       #     tx.replace "example.com.", "MX", 86400, ["10 mail1.example.com.",
       #                                              "20 mail2.example.com."]
+      #     tx.modify "www.example.com.", "CNAME" do |cname|
+      #       cname.ttl = 86400 # only change the TTL
+      #     end
       #   end
       #
       # Or you can provide the record objects to add and remove.
@@ -535,10 +551,10 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   new_record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
       #   old_record = zone.record "example.com.", "A", 18600, ["1.2.3.4"]
-      #   zone.update [new_record], [old_record]
+      #   change = zone.update [new_record], [old_record]
       #
       # You can provide a lambda or Proc that receives the current SOA record
       # serial number and returns a new serial number.
@@ -547,9 +563,9 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   new_record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
-      #   zone.update new_record, soa_serial: lambda { |sn| sn + 10 }
+      #   change = zone.update new_record, soa_serial: lambda { |sn| sn + 10 }
       #
       def update additions = [], deletions = [], options = {}
         # Handle only sending in options
@@ -622,7 +638,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   change = zone.add "example.com.", "A", 86400, ["1.2.3.4"]
       #
       def add name, type, ttl, data, options = {}
@@ -663,7 +679,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   change = zone.remove "example.com.", "A"
       #
       def remove name, type, options = {}
@@ -711,7 +727,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   change = zone.replace "example.com.", "A", 86400, ["5.6.7.8"]
       #
       def replace name, type, ttl, data, options = {}
@@ -757,7 +773,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   change = zone.modify "example.com.", "MX" do |mx|
       #     mx.ttl = 3600 # change only the TTL
       #   end
@@ -788,7 +804,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example-zone"
+      #   zone = dns.zone "example-com"
       #   zone.fqdn "www" #=> "www.example.com."
       #   zone.fqdn "@" #=> "example.com."
       #   zone.fqdn "mail.example.com." #=> "mail.example.com."
