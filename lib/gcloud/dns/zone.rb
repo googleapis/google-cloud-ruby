@@ -377,14 +377,7 @@ module Gcloud
       #   zone.add record
       #
       def record name, type, ttl, data
-        name = name.to_s.strip
-        name = dns if name.empty?
-        name = dns if name == "@"
-        unless ["NAPTR"].include?(type.to_s.upcase)
-          name = "#{name}.#{dns}" unless name.include? "."
-          name = "#{name}." unless name.end_with? "."
-        end
-        Gcloud::Dns::Record.new name, type, ttl, data
+        Gcloud::Dns::Record.new fqdn(name), type, ttl, data
       end
 
       ##
@@ -756,6 +749,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
       #   change = zone.modify "example.com.", "MX" do |mx|
       #     mx.ttl = 3600 # change only the TTL
       #   end
@@ -765,6 +759,34 @@ module Gcloud
         updated = existing.map(&:dup)
         updated.each { |r| yield r }
         update updated, existing, options
+      end
+
+      ##
+      # Ensures the given domain name is a Fully Qualified Domain Name. A
+      # subdomain like "www" will be prepended to the zone's domain name.
+      #
+      # === Parameters
+      #
+      # +domain_name+::
+      #   The domain name to ensure is a fully qualified domain name. (+String+)
+      #
+      # === Returns
+      #
+      # A fully qualified domain name. (+String+)
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dns = gcloud.dns
+      #   zone = dns.zone "example-zone"
+      #   zone.fqdn "www" #=> "www.example.com."
+      #   zone.fqdn "@" #=> "example.com."
+      #   zone.fqdn "mail.example.com." #=> "mail.example.com."
+      #
+      def fqdn domain_name
+        Connection.fqdn domain_name, dns
       end
 
       ##
