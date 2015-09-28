@@ -332,9 +332,10 @@ module Gcloud
         unless m
           fail ArgumentError, "unable to identify table from #{str.inspect}"
         end
-        default_table_ref.merge("projectId" => m["prj"],
-                                "datasetId" => m["dts"],
-                                "tableId" => m["tbl"])
+        str_table_ref = { "projectId" => m["prj"],
+                          "datasetId" => m["dts"],
+                          "tableId"   => m["tbl"] }.delete_if { |_, v| v.nil? }
+        default_table_ref.merge str_table_ref
       end
 
       def inspect #:nodoc:
