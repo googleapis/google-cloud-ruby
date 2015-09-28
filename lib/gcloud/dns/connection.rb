@@ -146,6 +146,9 @@ module Gcloud
       end
 
       require "ipaddr"
+      # Fix to make ip_addr? work on ruby 1.9
+      IPAddr::Error = ArgumentError unless defined? IPAddr::Error
+
       def self.ip_addr? name
         IPAddr.new name
         true
