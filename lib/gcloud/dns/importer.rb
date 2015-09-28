@@ -95,8 +95,7 @@ module Gcloud
           type = r.first
           type = :aaaa if type == :a4
           r.last.each do |zf_record|
-            name = zf_record[:name]
-            name = @zonefile.origin if name.nil? || name == "@"
+            name = Connection.fqdn(zf_record[:name], @zonefile.origin)
             key = [name, type]
             (@merged_zf_records[key] ||= []) << zf_record
           end

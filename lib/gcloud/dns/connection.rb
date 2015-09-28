@@ -133,6 +133,29 @@ module Gcloud
         )
       end
 
+      ##
+      # Fully Qualified Domain Name
+      def self.fqdn name, origin_dns
+        name = name.to_s.strip
+        return name if self.ip_addr? name
+        name = origin_dns if name.empty?
+        name = origin_dns if name == "@"
+        name = "#{name}.#{origin_dns}" unless name.include? "."
+        name = "#{name}." unless name.end_with? "."
+        name
+      end
+
+      require "ipaddr"
+      # Fix to make ip_addr? work on ruby 1.9
+      IPAddr::Error = ArgumentError unless defined? IPAddr::Error
+
+      def self.ip_addr? name
+        IPAddr.new name
+        true
+      rescue IPAddr::Error
+        false
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end
