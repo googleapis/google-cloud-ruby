@@ -107,6 +107,8 @@ module Gcloud
           nil
         end
       end
+      alias_method :find_zone, :zone
+      alias_method :get_zone, :zone
 
       ##
       # Retrieves the list of zones belonging to the project.
@@ -161,6 +163,7 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+      alias_method :find_zones, :zones
 
       ##
       # Creates a new zone.
