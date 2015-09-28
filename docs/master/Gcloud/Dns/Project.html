@@ -126,6 +126,12 @@ ManagedZones. Projects can be created only in the APIs console.</p>
             
               <a href="#method-i-create_zone">create_zone</a>
             
+              <a href="#method-i-find_zone">find_zone</a>
+            
+              <a href="#method-i-find_zones">find_zones</a>
+            
+              <a href="#method-i-get_zone">get_zone</a>
+            
               <a href="#method-i-project">project</a>
             
               <a href="#method-i-zone">zone</a>
@@ -277,7 +283,7 @@ options.</p>
 
     
       <!-- <div class="method-source-code" id="create_zone-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/project.rb, line 210</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/project.rb, line 213</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_zone</span> <span class="ruby-identifier">zone_name</span>, <span class="ruby-identifier">zone_dns</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">create_zone</span> <span class="ruby-identifier">zone_name</span>, <span class="ruby-identifier">zone_dns</span>, <span class="ruby-identifier">options</span>
@@ -293,6 +299,99 @@ options.</p>
 
   
 
+  
+</div>
+
+        
+          <div id="find_zone-method" class="method alias">
+  <a name="method-i-find_zone"></a>
+
+  
+    <h4>
+      <code>find_zone(zone_id)</code>
+      <span>
+        <a href="#method-i-find_zone">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+  </div>
+
+  
+
+  
+    <div class="aliases">
+      Alias for: <a href="Project.html#method-i-zone">zone</a>
+    </div>
+  
+</div>
+
+        
+          <div id="find_zones-method" class="method alias">
+  <a name="method-i-find_zones"></a>
+
+  
+    <h4>
+      <code>find_zones(options = {})</code>
+      <span>
+        <a href="#method-i-find_zones">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+  </div>
+
+  
+
+  
+    <div class="aliases">
+      Alias for: <a href="Project.html#method-i-zones">zones</a>
+    </div>
+  
+</div>
+
+        
+          <div id="get_zone-method" class="method alias">
+  <a name="method-i-get_zone"></a>
+
+  
+    <h4>
+      <code>get_zone(zone_id)</code>
+      <span>
+        <a href="#method-i-get_zone">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      
+    
+
+    
+  </div>
+
+  
+
+  
+    <div class="aliases">
+      Alias for: <a href="Project.html#method-i-zone">zone</a>
+    </div>
   
 </div>
 
@@ -397,6 +496,10 @@ does not exist</p>
   </div>
 
   
+    <div class="aliases">
+      Also aliased as: <a href="Project.html#method-i-find_zone">find_zone</a>, <a href="Project.html#method-i-get_zone">get_zone</a>
+    </div>
+  
 
   
 </div>
@@ -469,7 +572,7 @@ them: (See <a href="Zone/List.html">Gcloud::Dns::Zone::List</a>)</p>
 
     
       <!-- <div class="method-source-code" id="zones-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/project.rb, line 155</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/project.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">zones</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_zones</span> <span class="ruby-identifier">options</span>
@@ -483,6 +586,10 @@ them: (See <a href="Zone/List.html">Gcloud::Dns::Zone::List</a>)</p>
     
   </div>
 
+  
+    <div class="aliases">
+      Also aliased as: <a href="Project.html#method-i-find_zones">find_zones</a>
+    </div>
   
 
   
@@ -544,6 +651,12 @@ them: (See <a href="Zone/List.html">Gcloud::Dns::Zone::List</a>)</p>
           DNS
         </a>
       </li>
+      
+        <li class="toc-l1">
+          <a class="reference internal current" href="Project.html">
+            Project
+          </a>
+        </li>
       
         <li class="toc-l1">
           <a class="reference internal" href="Zone.html">
