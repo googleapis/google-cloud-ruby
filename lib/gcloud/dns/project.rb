@@ -25,7 +25,8 @@ module Gcloud
     # = Project
     #
     # The project is a top level container for resources including Cloud DNS
-    # ManagedZones. Projects can be created only in the APIs console.
+    # ManagedZones. Projects can be created only in the {Google Developers
+    # Console}[https://console.developers.google.com].
     #
     #   require "gcloud"
     #
@@ -46,7 +47,7 @@ module Gcloud
       # Creates a new Connection instance.
       #
       # See Gcloud.dns
-      def initialize project, credentials
+      def initialize project, credentials #:nodoc:
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
         @connection = Connection.new project, credentials

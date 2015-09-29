@@ -64,9 +64,6 @@ module Gcloud
     Gcloud::Dns::Project.new project, credentials
   end
 
-  # rubocop:disable all
-  # Disabled rubocop because necessary URLs violate line length limit.
-
   ##
   # = Google Cloud DNS
   #
@@ -78,8 +75,8 @@ module Gcloud
   # DNS?}[https://cloud.google.com/dns/what-is-cloud-dns].
   #
   # Gcloud's goal is to provide an API that is familiar and comfortable to
-  # Rubyists. Authentication is handled by Gcloud#bigquery. You can provide
-  # the project and credential information to connect to the BigQuery service,
+  # Rubyists. Authentication is handled by Gcloud#dns. You can provide
+  # the project and credential information to connect to the Cloud DNS service,
   # or if you are running on Google Compute Engine this configuration is taken
   # care of for you. You can read more about the options for connecting in the
   # {Authentication Guide}[link:AUTHENTICATION.md].
@@ -87,7 +84,7 @@ module Gcloud
   # == Creating Zones
   #
   # To get started with Google Cloud DNS, use your DNS Project to create a new
-  # Zone. The second argument to Project#create_zone must be a globally unique
+  # Zone. The second argument to Project#create_zone must be a unique
   # domain name for which you can {verify
   # ownership}[https://www.google.com/webmasters/verification/home]. Substitute
   # a domain name of your own (ending with a dot to signify that it is {fully
@@ -114,7 +111,7 @@ module Gcloud
   #   dns = gcloud.dns
   #   zones = dns.zones
   #   zones.each do |zone|
-  #     puts zone.name
+  #     puts "#{zone.name} - #{zone.dns}"
   #   end
   #
   # You can also retrieve a single zone by either name or id.
@@ -139,11 +136,30 @@ module Gcloud
   #   records = zone.records
   #   records.count #=> 2
   #   records.map &:type #=> ["NS", "SOA"]
+  #   zone.records.first.data.count #=> 4
   #   zone.records.first.data #=> ["ns-cloud-d1.googledomains.com.", ...]
   #
-  # You can also retrieve records by +name+ and +type+. The +name+ argument can
-  # be just a prefix (e.g., +www+) for convenience, but notice that the
-  # retrieved record's name is always fully-qualified.
+  # Note that Record#data returns an array. The Cloud DNS service only allows
+  # the zone to have one Record instance for each name and type combination. It
+  # supports multiple "resource records" (in this case, the four nameserver
+  # addresses) via this +data+ collection.
+  #
+  # == Managing Records
+  #
+  # You can easily add your own records to the zone. Each call to Zone#add
+  # results in a new Cloud DNS Change instance.
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   dns = gcloud.dns
+  #   zone = dns.zone "example-com"
+  #   change = zone.add "www", "A", 86400, ["1.2.3.4"]
+  #   record = change.additions.first
+  #
+  # You can retrieve records by name and type. The name argument can be a
+  # subdomain (e.g., +www+) fragment for convenience, but notice that the
+  # retrieved record's domain name is always fully-qualified.
   #
   #   require "gcloud"
   #
@@ -153,40 +169,6 @@ module Gcloud
   #   records = zone.records "www", "A"
   #   records.first.name #=> "www.example.com."
   #
-  # == Managing Records
-  #
-  # You can easily add your own records to the zone. Each call to Zone#add
-  # results in a new Cloud DNS Change.
-  #
-  #   require "gcloud"
-  #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
-  #   change = zone.add "example.com.", "A", 86400, ["1.2.3.4"]
-  #   record = change.additions.first
-  #
-  # You can also delete records by name and type.
-  #
-  #   require "gcloud"
-  #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
-  #   change = zone.remove "example.com.", "A"
-  #
-  # Or, you can delete a record by reference, using Zone#update. Note that although the
-  # Zone#records method returns an array, the Cloud DNS service only allows the
-  # zone to have one record for each name and type combination.
-  #
-  #   require "gcloud"
-  #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
-  #   record_to_delete = zone.records "example.com.", "MX"
-  #   change = zone.update [], record_to_delete
-  #
   # You can use Zone#replace to update the +ttl+ and +data+ for a record.
   #
   #   require "gcloud"
@@ -194,7 +176,7 @@ module Gcloud
   #   gcloud = Gcloud.new
   #   dns = gcloud.dns
   #   zone = dns.zone "example-com"
-  #   change = zone.replace "example.com.", "A", 86400, ["5.6.7.8"]
+  #   change = zone.replace "www", "A", 86400, ["5.6.7.8"]
   #
   # Or, you can use Zone#modify to update just the +ttl+ or +data+, without the
   # risk of inadvertently changing values that you wish to leave unchanged.
@@ -204,13 +186,23 @@ module Gcloud
   #   gcloud = Gcloud.new
   #   dns = gcloud.dns
   #   zone = dns.zone "example-com"
-  #   change = zone.modify "example.com.", "MX" do |mx|
-  #     mx.ttl = 3600 # change only the TTL
+  #   change = zone.modify "www", "A" do |r|
+  #     r.ttl = 3600 # change only the TTL
   #   end
   #
-  # The best way to add, remove, and update multiple in a single
-  # {transaction}[https://cloud.google.com/dns/records/#modifying_records_using_transactions]
-  # is to call +update+ with a block. See Zone::Transaction.
+  # You can also delete records by name and type.
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   dns = gcloud.dns
+  #   zone = dns.zone "example-com"
+  #   change = zone.remove "www", "A"
+  #   record = change.deletions.first
+  #
+  # The best way to add, remove, and update multiple records in a single
+  # {transaction}[https://cloud.google.com/dns/records] is to call +update+ with
+  # a block. See Zone::Transaction.
   #
   #   require "gcloud"
   #
@@ -218,19 +210,30 @@ module Gcloud
   #   dns = gcloud.dns
   #   zone = dns.zone "example-com"
   #   change = zone.update do |tx|
-  #     tx.add     "example.com.", "A",  86400, "1.2.3.4"
+  #     tx.add     "www", "A",  86400, "1.2.3.4"
   #     tx.remove  "example.com.", "TXT"
   #     tx.replace "example.com.", "MX", 86400, ["10 mail1.example.com.",
   #                                              "20 mail2.example.com."]
-  #     tx.modify "www.example.com.", "CNAME" do |cname|
-  #       cname.ttl = 86400 # only change the TTL
+  #     tx.modify "www.example.com.", "CNAME" do |r|
+  #       r.ttl = 86400 # only change the TTL
   #     end
   #   end
   #
+  # Finally, you can add and delete records by reference, using Zone#update.
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   dns = gcloud.dns
+  #   zone = dns.zone "example-com"
+  #   to_add = zone.record "www", "AAAA", 86400, ["2607:f8b0:400a:801::1005"]
+  #   to_delete = zone.records "www", "A"
+  #   change = zone.update to_add, to_delete
+  #
   # == Listing Changes
   #
-  # Because the transactions you execute against your zone do not complete
-  # immediately, you can retrieve and inspect changes.
+  # Because the transactions you execute against your zone do not always
+  # complete immediately, you can retrieve and inspect changes.
   #
   #   require "gcloud"
   #
@@ -239,12 +242,14 @@ module Gcloud
   #   zone = dns.zone "example-com"
   #   changes = zone.changes
   #   changes.each do |change|
-  #     puts "#{change.name} - #{change.status}"
+  #     puts "#{change.id} - #{change.started_at} - #{change.status}"
   #   end
   #
   # == Importing and exporting zone files
   #
-  # You can import from a zone file.
+  # You can import from a zone file. Because the Cloud DNS service only allows
+  # the zone to have one Record instance for each name and type combination,
+  # lines may be merged as needed into records with multiple +data+ values.
   #
   #   require "gcloud"
   #
@@ -253,7 +258,7 @@ module Gcloud
   #   zone = dns.zone "example-com"
   #   change = zone.import "path/to/db.example.com"
   #
-  # And export to a zone file.
+  # You can also export to a zone file.
   #
   #   require "gcloud"
   #
@@ -264,6 +269,4 @@ module Gcloud
   #   zone.export "path/to/db.example.com"
   module Dns
   end
-
-  # rubocop:enable all
 end
