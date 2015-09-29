@@ -44,6 +44,10 @@ module Gcloud
       attr_accessor :connection #:nodoc:
 
       ##
+      # The Google API Client object.
+      attr_accessor :gapi #:nodoc:
+
+      ##
       # Creates a new Connection instance.
       #
       # See Gcloud.dns
@@ -51,6 +55,7 @@ module Gcloud
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
         @connection = Connection.new project, credentials
+        @gapi = nil
       end
 
       ##
@@ -67,6 +72,56 @@ module Gcloud
       #
       def project
         connection.project
+      end
+      alias_method :id, :project
+
+      ##
+      # The project number.
+      def number
+        reload! if @gapi.nil?
+        @gapi["number"]
+      end
+
+      ##
+      # Maximum allowed number of zones in the project.
+      def zones_quota
+        reload! if @gapi.nil?
+        @gapi["quota"]["managedZones"] if @gapi["quota"]
+      end
+
+      ##
+      # Maximum allowed number of data entries per record.
+      def data_per_record
+        reload! if @gapi.nil?
+        @gapi["quota"]["resourceRecordsPerRrset"] if @gapi["quota"]
+      end
+
+      ##
+      # Maximum allowed number of records to add per change.
+      def additions_per_change
+        reload! if @gapi.nil?
+        @gapi["quota"]["rrsetAdditionsPerChange"] if @gapi["quota"]
+      end
+
+      ##
+      # Maximum allowed number of records to delete per change.
+      def deletions_per_change
+        reload! if @gapi.nil?
+        @gapi["quota"]["rrsetDeletionsPerChange"] if @gapi["quota"]
+      end
+
+      ##
+      # Maximum allowed number of records per zone in the project.
+      def records_per_zone
+        reload! if @gapi.nil?
+        @gapi["quota"]["rrsetsPerManagedZone"] if @gapi["quota"]
+      end
+
+      ##
+      # Maximum allowed total bytes size for all the data in one change.
+      def total_data_per_change
+        reload! if @gapi.nil?
+        @gapi["quota"]["totalRrdataSizePerChange"] if @gapi["quota"]
       end
 
       ##
@@ -220,6 +275,19 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+
+      ##
+      # Reloads the change with updated status from the DNS service.
+      def reload!
+        ensure_connection!
+        resp = connection.get_project
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+      alias_method :refresh!, :reload!
 
       protected
 

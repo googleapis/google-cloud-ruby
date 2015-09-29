@@ -19,6 +19,22 @@ describe Gcloud::Dns::Project, :mock_dns do
     dns.project.must_equal project
   end
 
+  it "knows its quota information" do
+    mock_connection.get "/dns/v1/projects/#{project}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       random_project_hash.to_json]
+    end
+
+    dns.id.must_equal project
+    dns.number.must_equal 123456789
+    dns.zones_quota.must_equal 101
+    dns.records_per_zone.must_equal 1002
+    dns.additions_per_change.must_equal 103
+    dns.deletions_per_change.must_equal 104
+    dns.total_data_per_change.must_equal 8000
+    dns.data_per_record.must_equal 105
+  end
+
   it "finds a zone" do
     found_zone = "example.net."
 
@@ -194,6 +210,15 @@ describe Gcloud::Dns::Project, :mock_dns do
     zone.dns.must_equal "example.net."
     zone.description.must_equal ""
     zone.name_server_set.must_equal "example-set"
+  end
+
+  it "reload! calls to the API" do
+    mock_connection.get "/dns/v1/projects/#{project}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       random_project_hash.to_json]
+    end
+
+    dns.reload!
   end
 
   def find_zone_json name, dns = nil

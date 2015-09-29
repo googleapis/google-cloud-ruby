@@ -601,6 +601,23 @@ class MockDns < Minitest::Spec
     @connection
   end
 
+  def random_project_hash
+    {
+      "kind" => "dns#project",
+      "number" => 123456789,
+      "id" => project,
+      "quota" => {
+        "kind" => "dns#quota",
+        "managedZones" => 101,
+        "rrsetsPerManagedZone" => 1002,
+        "rrsetAdditionsPerChange" => 103,
+        "rrsetDeletionsPerChange" => 104,
+        "totalRrdataSizePerChange" => 8000,
+        "resourceRecordsPerRrset" => 105
+      }
+    }
+  end
+
   def random_zone_hash zone_name, zone_dns
     {
       "kind" => "dns#managedZone",
