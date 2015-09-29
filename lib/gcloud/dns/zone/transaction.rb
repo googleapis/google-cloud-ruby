@@ -64,9 +64,12 @@ module Gcloud
         #   The number of seconds that the record can be cached by resolvers.
         #   (+Integer+)
         # +data+::
-        #   The resource record data, as determined by +type+ and defined in RFC
-        #   1035 (section 5) and RFC 1034 (section 3.6.1). For example:
-        #   +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of +String+)
+        #   The resource record data, as determined by +type+ and defined in
+        #   {RFC 1035 (section 5)}[http://tools.ietf.org/html/rfc1035#section-5]
+        #   and {RFC 1034 (section
+        #   3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1]. For
+        #   example: +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of
+        #   +String+)
         #
         # === Example
         #
@@ -127,9 +130,12 @@ module Gcloud
         #   The number of seconds that the record can be cached by resolvers.
         #   (+Integer+)
         # +data+::
-        #   The resource record data, as determined by +type+ and defined in RFC
-        #   1035 (section 5) and RFC 1034 (section 3.6.1). For example:
-        #   +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of +String+)
+        #   The resource record data, as determined by +type+ and defined in
+        #   {RFC 1035 (section 5)}[http://tools.ietf.org/html/rfc1035#section-5]
+        #   and {RFC 1034 (section
+        #   3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1]. For
+        #   example: +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of
+        #   +String+)
         #
         # === Example
         #

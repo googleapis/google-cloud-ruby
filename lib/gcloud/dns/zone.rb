@@ -199,11 +199,10 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
-      #   zone = dns.zone "example.com."
-      #   change = zone.change "dns-change-1234567890"
+      #   zone = dns.zone "example-com"
+      #   change = zone.change "2"
       #   if change
-      #     puts "Change includes #{change.additions.count} additions " \
-      #          "and #{change.additions.count} deletions."
+      #     puts "#{change.id} - #{change.started_at} - #{change.status}"
       #   end
       #
       def change change_id
@@ -250,7 +249,7 @@ module Gcloud
       #   zone = dns.zone "example-com"
       #   changes = zone.changes
       #   changes.each do |change|
-      #     puts "#{change.name} - #{change.status}"
+      #     puts "#{change.id} - #{change.started_at} - #{change.status}"
       #   end
       #
       # The changes can be sorted by change sequence:
@@ -300,7 +299,7 @@ module Gcloud
       # === Parameters
       #
       # +name+::
-      #   Return only records with this fully-qualified domain name. (+String+)
+      #   Return only records with this domain or subdomain name. (+String+)
       # +type+::
       #   Return only records with this {record
       #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
@@ -329,14 +328,17 @@ module Gcloud
       #     puts record.name
       #   end
       #
-      # Records can be filtered by name and type.
+      # Records can be filtered by name and type. The name argument can be a
+      # subdomain (e.g., +www+) fragment for convenience, but notice that the
+      # retrieved record's domain name is always fully-qualified.
       #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
       #   zone = dns.zone "example-com"
-      #   records = zone.records "example.com.", "A"
+      #   records = zone.records "www", "A"
+      #   records.first.name #=> "www.example.com."
       #
       # If you have a significant number of records, you may need to paginate
       # through them: (See Gcloud::Dns::Record::List)
@@ -468,10 +470,11 @@ module Gcloud
       # <code>options[:except]</code>::
       #   Exclude records of this type or types. (+String+ or +Array+)
       # <code>options[:skip_soa]</code>::
-      #   Do not automatically update the SOA record serial number. (+Boolean+)
+      #   Do not automatically update the SOA record serial number. See #update
+      #   for details. (+Boolean+)
       # <code>options[:soa_serial]</code>::
       #   A value (or a lambda or Proc returning a value) for the new SOA record
-      #   serial number. (+Integer+, lambda, or +Proc+)
+      #   serial number. See #update for details. (+Integer+, lambda, or +Proc+)
       #
       # === Returns
       #
@@ -527,7 +530,8 @@ module Gcloud
       #
       # === Examples
       #
-      # The recommended way to make changes is call +update+ with a block. See
+      # The best way to add, remove, and update multiple records in a single
+      # {transaction}[https://cloud.google.com/dns/records] is with a block. See
       # Zone::Transaction.
       #
       #   require "gcloud"
@@ -617,16 +621,20 @@ module Gcloud
       #   The number of seconds that the record can be cached by resolvers.
       #   (+Integer+)
       # +data+::
-      #   The resource record data, as determined by +type+ and defined in RFC
-      #   1035 (section 5) and RFC 1034 (section 3.6.1). For example:
-      #   +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of +String+)
+      #   The resource record data, as determined by +type+ and defined in {RFC
+      #   1035 (section 5)}[http://tools.ietf.org/html/rfc1035#section-5] and
+      #   {RFC 1034
+      #   (section 3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1].
+      #   For example: +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of
+      #   +String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:skip_soa]</code>::
-      #   Do not automatically update the SOA record serial number. (+Boolean+)
+      #   Do not automatically update the SOA record serial number. See #update
+      #   for details. (+Boolean+)
       # <code>options[:soa_serial]</code>::
       #   A value (or a lambda or Proc returning a value) for the new SOA record
-      #   serial number. (+Integer+, lambda, or +Proc+)
+      #   serial number. See #update for details. (+Integer+, lambda, or +Proc+)
       #
       # === Returns
       #
@@ -664,10 +672,11 @@ module Gcloud
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:skip_soa]</code>::
-      #   Do not automatically update the SOA record serial number. (+Boolean+)
+      #   Do not automatically update the SOA record serial number. See #update
+      #   for details. (+Boolean+)
       # <code>options[:soa_serial]</code>::
       #   A value (or a lambda or Proc returning a value) for the new SOA record
-      #   serial number. (+Integer+, lambda, or +Proc+)
+      #   serial number. See #update for details. (+Integer+, lambda, or +Proc+)
       #
       # === Returns
       #
@@ -706,16 +715,20 @@ module Gcloud
       #   The number of seconds that the record can be cached by resolvers.
       #   (+Integer+)
       # +data+::
-      #   The resource record data, as determined by +type+ and defined in RFC
-      #   1035 (section 5) and RFC 1034 (section 3.6.1). For example:
-      #   +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of +String+)
+      #   The resource record data, as determined by +type+ and defined in
+      #   {RFC 1035 (section 5)}[http://tools.ietf.org/html/rfc1035#section-5]
+      #   and {RFC 1034 (section
+      #   3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1]. For
+      #   example: +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of
+      #   +String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:skip_soa]</code>::
-      #   Do not automatically update the SOA record serial number. (+Boolean+)
+      #   Do not automatically update the SOA record serial number. See #update
+      #   for details. (+Boolean+)
       # <code>options[:soa_serial]</code>::
       #   A value (or a lambda or Proc returning a value) for the new SOA record
-      #   serial number. (+Integer+, lambda, or +Proc+)
+      #   serial number. See #update for details. (+Integer+, lambda, or +Proc+)
       #
       # === Returns
       #
@@ -758,10 +771,11 @@ module Gcloud
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:skip_soa]</code>::
-      #   Do not automatically update the SOA record serial number. (+Boolean+)
+      #   Do not automatically update the SOA record serial number. See #update
+      #   for details. (+Boolean+)
       # <code>options[:soa_serial]</code>::
       #   A value (or a lambda or Proc returning a value) for the new SOA record
-      #   serial number. (+Integer+, lambda, or +Proc+)
+      #   serial number. See #update for details. (+Integer+, lambda, or +Proc+)
       #
       # === Returns
       #
@@ -786,13 +800,16 @@ module Gcloud
       end
 
       ##
-      # Ensures the given domain name is a Fully Qualified Domain Name. A
-      # subdomain like "www" will be prepended to the zone's domain name.
+      # This helper converts the given domain name or subdomain (e.g., +www+)
+      # fragment to a {fully qualified domain name
+      # (FQDN)}[https://en.wikipedia.org/wiki/Fully_qualified_domain_name] for
+      # the zone's #dns. If the argument is already a FQDN, it is returned
+      # unchanged.
       #
       # === Parameters
       #
       # +domain_name+::
-      #   The domain name to ensure is a fully qualified domain name. (+String+)
+      #   The name to convert to a fully qualified domain name. (+String+)
       #
       # === Returns
       #

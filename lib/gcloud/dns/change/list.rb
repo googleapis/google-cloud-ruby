@@ -25,7 +25,7 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Table::List with an array of jobs.
+        # Create a new Change::List with an array of Change instances.
         def initialize arr = []
           super arr
         end

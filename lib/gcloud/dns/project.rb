@@ -59,7 +59,7 @@ module Gcloud
       end
 
       ##
-      # The DNS project connected to.
+      # The unique ID string for the current project.
       #
       # === Example
       #
@@ -255,16 +255,6 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
       #   zone = dns.create_zone "example-com", "example.com."
-      #
-      # You can also pass +description+ and +name_server_set+ options.
-      #
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   dns = gcloud.dns
-      #   zone = dns.create_zone "example-com", "example.com.",
-      #                           description: "A description of my zone.",
-      #                           name_server_set: "example"
       #
       def create_zone zone_name, zone_dns, options = {}
         ensure_connection!
