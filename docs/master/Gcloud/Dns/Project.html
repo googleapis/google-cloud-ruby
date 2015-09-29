@@ -87,7 +87,7 @@ ManagedZones. Projects can be created only in the APIs console.</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
-<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-zone&quot;</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
 <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">records</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">record</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">puts</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span>
@@ -265,7 +265,7 @@ ManagedZones. Most users will leave this field unset. (<code>String</code>)</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
-<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">create_zone</span> <span class="ruby-string">&quot;example-zone&quot;</span>, <span class="ruby-string">&quot;example.com.&quot;</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">create_zone</span> <span class="ruby-string">&quot;example-com&quot;</span>, <span class="ruby-string">&quot;example.com.&quot;</span>
 </pre>
 
 <p>You can also pass <code>description</code> and <code>name_server_set</code>
@@ -275,7 +275,7 @@ options.</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
-<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">create_zone</span> <span class="ruby-string">&quot;example-zone&quot;</span>, <span class="ruby-string">&quot;example.com.&quot;</span>,
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">create_zone</span> <span class="ruby-string">&quot;example-com&quot;</span>, <span class="ruby-string">&quot;example.com.&quot;</span>,
                         <span class="ruby-identifier">description</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;A description of my zone.&quot;</span>,
                         <span class="ruby-identifier">name_server_set</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;example&quot;</span>
 </pre>
@@ -474,7 +474,7 @@ does not exist</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
-<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-zone&quot;</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">name</span>
 </pre>
     
@@ -610,7 +610,7 @@ them: (See <a href="Zone/List.html">Gcloud::Dns::Zone::List</a>)</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 28, 2015.
+    Docs built on Sep 29, 2015.
   </div>
 </div>
 

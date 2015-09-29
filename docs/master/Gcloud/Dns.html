@@ -80,7 +80,227 @@
           
 <h1 id="module-Gcloud::Dns-label-Google+Cloud+DNS">Google Cloud DNS<span><a href="#module-Gcloud::Dns-label-Google+Cloud+DNS">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>Google Cloud DNS is …</p>
+<p>Google Cloud DNS is a high-performance, resilient, global DNS service that
+provides a cost-effective way to make your applications and services
+available to your users. This programmable, authoritative DNS service can
+be used to easily publish and manage DNS records using the same
+infrastructure relied upon by Google. To learn more, read <a
+href="https://cloud.google.com/dns/what-is-cloud-dns">What is Google Cloud
+DNS?</a>.</p>
+
+<p>Gcloud&#39;s goal is to provide an API that is familiar and comfortable to
+Rubyists. Authentication is handled by <a
+href="../Gcloud.html#method-i-bigquery">Gcloud#bigquery</a>. You can
+provide the project and credential information to connect to the BigQuery
+service, or if you are running on Google Compute Engine this configuration
+is taken care of for you. You can read more about the options for
+connecting in the <a href="../AUTHENTICATION.md">Authentication Guide</a>.</p>
+
+<h2 id="module-Gcloud::Dns-label-Creating+Zones">Creating Zones<span><a href="#module-Gcloud::Dns-label-Creating+Zones">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>To get started with Google Cloud DNS, use your DNS <a
+href="Dns/Project.html">Project</a> to create a new <a
+href="Dns/Zone.html">Zone</a>. The second argument to <a
+href="Dns/Project.html#method-i-create_zone">Gcloud::Dns::Project#create_zone</a>
+must be a globally unique domain name for which you can <a
+href="https://www.google.com/webmasters/verification/home">verify
+ownership</a>. Substitute a domain name of your own (ending with a dot to
+signify that it is <a
+href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name">fully
+qualified</a>) as you follow along with these examples.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">create_zone</span> <span class="ruby-string">&quot;example-com&quot;</span>, <span class="ruby-string">&quot;example.com.&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">id</span> <span class="ruby-comment"># unique identifier defined by the server</span>
+</pre>
+
+<p>For more information, see <a
+href="https://cloud.google.com/dns/zones/">Managing Zones</a>.</p>
+
+<h2 id="module-Gcloud::Dns-label-Listing+Zones">Listing Zones<span><a href="#module-Gcloud::Dns-label-Listing+Zones">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>You can retrieve all the zones in your project.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zones</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zones</span>
+<span class="ruby-identifier">zones</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">zone</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>You can also retrieve a single zone by either name or id.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
+</pre>
+
+<h2 id="module-Gcloud::Dns-label-Listing+Records">Listing Records<span><a href="#module-Gcloud::Dns-label-Listing+Records">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>When you create a zone, the Cloud DNS service automatically creates two
+records for it, providing configuration for Cloud DNS nameservers.
+Let&#39;s take a look at these records.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
+<span class="ruby-identifier">records</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">records</span>
+<span class="ruby-identifier">records</span>.<span class="ruby-identifier">count</span> <span class="ruby-comment">#=&gt; 2</span>
+<span class="ruby-identifier">records</span>.<span class="ruby-identifier">map</span> <span class="ruby-operator">&amp;</span>:<span class="ruby-identifier">type</span> <span class="ruby-comment">#=&gt; [&quot;NS&quot;, &quot;SOA&quot;]</span>
+<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">records</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">data</span> <span class="ruby-comment">#=&gt; [&quot;ns-cloud-d1.googledomains.com.&quot;, ...]</span>
+</pre>
+
+<p>You can also retrieve records by <code>name</code> and <code>type</code>.
+The <code>name</code> argument can be just a prefix (e.g.,
+<code>www</code>) for convenience, but notice that the retrieved
+record&#39;s name is always fully-qualified.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
+<span class="ruby-identifier">records</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">records</span> <span class="ruby-string">&quot;www&quot;</span>, <span class="ruby-string">&quot;A&quot;</span>
+<span class="ruby-identifier">records</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment">#=&gt; &quot;www.example.com.&quot;</span>
+</pre>
+
+<h2 id="module-Gcloud::Dns-label-Managing+Records">Managing Records<span><a href="#module-Gcloud::Dns-label-Managing+Records">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>You can easily add your own records to the zone. Each call to <a
+href="Dns/Zone.html#method-i-add">Gcloud::Dns::Zone#add</a> results in a
+new Cloud DNS <a href="Dns/Change.html">Change</a>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
+<span class="ruby-identifier">change</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">add</span> <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;A&quot;</span>, <span class="ruby-value">86400</span>, [<span class="ruby-string">&quot;1.2.3.4&quot;</span>]
+<span class="ruby-identifier">record</span> = <span class="ruby-identifier">change</span>.<span class="ruby-identifier">additions</span>.<span class="ruby-identifier">first</span>
+</pre>
+
+<p>You can also delete records by name and type.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
+<span class="ruby-identifier">change</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">remove</span> <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;A&quot;</span>
+</pre>
+
+<p>Or, you can delete a record by reference, using <a
+href="Dns/Zone.html#method-i-update">Gcloud::Dns::Zone#update</a>. Note
+that although the <a
+href="Dns/Zone.html#method-i-records">Gcloud::Dns::Zone#records</a> method
+returns an array, the Cloud DNS service only allows the zone to have one
+record for each name and type combination.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
+<span class="ruby-identifier">record_to_delete</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">records</span> <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;MX&quot;</span>
+<span class="ruby-identifier">change</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">update</span> [], <span class="ruby-identifier">record_to_delete</span>
+</pre>
+
+<p>You can use <a
+href="Dns/Zone.html#method-i-replace">Gcloud::Dns::Zone#replace</a> to
+update the <code>ttl</code> and <code>data</code> for a record.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
+<span class="ruby-identifier">change</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">replace</span> <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;A&quot;</span>, <span class="ruby-value">86400</span>, [<span class="ruby-string">&quot;5.6.7.8&quot;</span>]
+</pre>
+
+<p>Or, you can use <a
+href="Dns/Zone.html#method-i-modify">Gcloud::Dns::Zone#modify</a> to update
+just the <code>ttl</code> or <code>data</code>, without the risk of
+inadvertently changing values that you wish to leave unchanged.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
+<span class="ruby-identifier">change</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">modify</span> <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;MX&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mx</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">mx</span>.<span class="ruby-identifier">ttl</span> = <span class="ruby-value">3600</span> <span class="ruby-comment"># change only the TTL</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The best way to add, remove, and update multiple in a single <a
+href="https://cloud.google.com/dns/records/#modifying_records_using_transactions">transaction</a>
+is to call <code>update</code> with a block. See <a
+href="Dns/Zone/Transaction.html">Zone::Transaction</a>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
+<span class="ruby-identifier">change</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">update</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tx</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">add</span>     <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;A&quot;</span>,  <span class="ruby-value">86400</span>, <span class="ruby-string">&quot;1.2.3.4&quot;</span>
+  <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">remove</span>  <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;TXT&quot;</span>
+  <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">replace</span> <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;MX&quot;</span>, <span class="ruby-value">86400</span>, [<span class="ruby-string">&quot;10 mail1.example.com.&quot;</span>,
+                                           <span class="ruby-string">&quot;20 mail2.example.com.&quot;</span>]
+  <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">modify</span> <span class="ruby-string">&quot;www.example.com.&quot;</span>, <span class="ruby-string">&quot;CNAME&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cname</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">cname</span>.<span class="ruby-identifier">ttl</span> = <span class="ruby-value">86400</span> <span class="ruby-comment"># only change the TTL</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="module-Gcloud::Dns-label-Listing+Changes">Listing Changes<span><a href="#module-Gcloud::Dns-label-Listing+Changes">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Because the transactions you execute against your zone do not complete
+immediately, you can retrieve and inspect changes.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
+<span class="ruby-identifier">changes</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">changes</span>
+<span class="ruby-identifier">changes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">change</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{change.name} - #{change.status}&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="module-Gcloud::Dns-label-Importing+and+exporting+zone+files">Importing and exporting zone files<span><a href="#module-Gcloud::Dns-label-Importing+and+exporting+zone+files">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>You can import from a zone file.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
+<span class="ruby-identifier">change</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">import</span> <span class="ruby-string">&quot;path/to/db.example.com&quot;</span>
+</pre>
+
+<p>And export to a zone file.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
+
+<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">export</span> <span class="ruby-string">&quot;path/to/db.example.com&quot;</span>
+</pre>
 
         </div>
 
@@ -104,7 +324,7 @@
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 28, 2015.
+    Docs built on Sep 29, 2015.
   </div>
 </div>
 

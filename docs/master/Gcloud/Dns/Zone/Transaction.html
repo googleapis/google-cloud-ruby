@@ -89,7 +89,7 @@ to the Google Cloud DNS API.</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
-<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-zone&quot;</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
 <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">update</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tx</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">add</span>     <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;A&quot;</span>,  <span class="ruby-value">86400</span>, <span class="ruby-string">&quot;1.2.3.4&quot;</span>
   <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">remove</span>  <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;TXT&quot;</span>
@@ -210,7 +210,7 @@ or <code>Array</code> of <code>String</code>)</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
-<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-zone&quot;</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
 <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">update</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tx</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">add</span>     <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;A&quot;</span>,  <span class="ruby-value">86400</span>, <span class="ruby-string">&quot;1.2.3.4&quot;</span>
 <span class="ruby-keyword">end</span>
@@ -338,7 +338,7 @@ type</a>. For example: <code>A</code>, <code>AAAA</code>,
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
-<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-zone&quot;</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
 <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">update</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tx</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">remove</span>  <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;TXT&quot;</span>
 <span class="ruby-keyword">end</span>
@@ -409,7 +409,7 @@ or <code>Array</code> of <code>String</code>)</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
-<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-zone&quot;</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
 <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">update</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tx</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">replace</span> <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;MX&quot;</span>, <span class="ruby-value">86400</span>, [<span class="ruby-string">&quot;10 mail1.example.com.&quot;</span>,
                                            <span class="ruby-string">&quot;20 mail2.example.com.&quot;</span>]
@@ -448,7 +448,7 @@ or <code>Array</code> of <code>String</code>)</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 28, 2015.
+    Docs built on Sep 29, 2015.
   </div>
 </div>
 

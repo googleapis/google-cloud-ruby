@@ -87,7 +87,7 @@ record is transient until it is added to a Zone&#39;s resource record set.</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
-<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-zone&quot;</span>
+<span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
 
 <span class="ruby-identifier">record_1</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">record</span> <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;A&quot;</span>, <span class="ruby-value">86400</span>, <span class="ruby-string">&quot;1.2.3.4&quot;</span>
 <span class="ruby-identifier">mx_data</span> = [<span class="ruby-string">&quot;10 mail.example.com.&quot;</span>,<span class="ruby-string">&quot;20 mail2.example.com.&quot;</span>]
@@ -135,8 +135,6 @@ record is transient until it is added to a Zone&#39;s resource record set.</p>
         
             
               <a href="#method-i-dup">dup</a>
-            
-              <a href="#method-i-to_zonefile_records">to_zonefile_records</a>
             
           
         
@@ -367,43 +365,6 @@ href="Zone.html#method-i-update">Gcloud::Dns::Zone#update</a>.</p>
 </div>
 
         
-          <div id="to_zonefile_records-method" class="method ">
-  <a name="method-i-to_zonefile_records"></a>
-
-  
-    <h4>
-      <code>to_zonefile_records()</code>
-      <span>
-        <a href="#method-i-to_zonefile_records">&para;</a>
-        <a href="#top">&uarr;</a>
-      </span>
-    </h4>
-  
-
-  <div class="method-description">
-    
-      <p>Returns an array of strings in the zone file format, one for each element
-in the record&#39;s data array.</p>
-    
-
-    
-      <!-- <div class="method-source-code" id="to_zonefile_records-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/record.rb, line 92</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_zonefile_records</span>
-  <span class="ruby-identifier">data</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rrdata</span><span class="ruby-operator">|</span>
-    <span class="ruby-node">&quot;#{name} #{ttl} IN #{type} #{rrdata}&quot;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
-    
-  </div>
-
-  
-
-  
-</div>
-
-        
       </div>
     </div>
   
@@ -418,7 +379,7 @@ in the record&#39;s data array.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 28, 2015.
+    Docs built on Sep 29, 2015.
   </div>
 </div>
 
