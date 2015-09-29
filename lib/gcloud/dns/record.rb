@@ -20,8 +20,11 @@ module Gcloud
     ##
     # = DNS Record
     #
-    # A value object representing a DNS resource record (RR). A newly created
-    # record is transient until it is added to a Zone's resource record set.
+    # Represents a set of DNS resource records (RRs) for a given #name and #type
+    # in a Zone. Since it is a value object, a newly created Record instance
+    # is transient until it is added to a Zone with Zone#update. Note that
+    # Zone#add and the Zone#update block parameter can be used instead of
+    # Zone#record or +Record.new+ to create new records.
     #
     #   require "gcloud"
     #
@@ -29,10 +32,12 @@ module Gcloud
     #   dns = gcloud.dns
     #   zone = dns.zone "example-com"
     #
-    #   record_1 = zone.record "example.com.", "A", 86400, "1.2.3.4"
-    #   mx_data = ["10 mail.example.com.","20 mail2.example.com."]
-    #   record_2 = zone.record "example.com.", "A", 86400, mx_data
-    #   zone.change [record_1, record_2], []
+    #   zone.records.count #=> 2
+    #   record = zone.record "example.com.", "A", 86400, "1.2.3.4"
+    #   zone.records.count #=> 2
+    #   change = zone.update record
+    #   zone.records.count #=> 3
+    #
     #
     class Record
       ##
@@ -51,9 +56,12 @@ module Gcloud
       attr_accessor :ttl
 
       ##
-      # The resource record data, as determined by +type+ and defined in RFC
-      # 1035 (section 5) and RFC 1034 (section 3.6.1). For example: +192.0.2.1+
-      # or +example.com.+. (+Array+ of +String+)
+      # The array of resource record data, as determined by +type+ and defined
+      # in {RFC 1035 (section 5)}[http://tools.ietf.org/html/rfc1035#section-5]
+      # and {RFC
+      # 1034 (section 3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1].
+      # For example: ["10 mail.example.com.", "20 mail2.example.com."].
+      # (+Array+ of +String+)
       attr_accessor :data
 
       ##
@@ -71,9 +79,12 @@ module Gcloud
       #   The number of seconds that the record can be cached by resolvers.
       #   (+Integer+)
       # +data+::
-      #   The resource record data, as determined by +type+ and defined in RFC
-      #   1035 (section 5) and RFC 1034 (section 3.6.1). For example:
-      #   +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of +String+)
+      #   The resource record data, as determined by +type+ and defined in {RFC
+      #   1035 (section 5)}[http://tools.ietf.org/html/rfc1035#section-5] and
+      #   {RFC 1034
+      #   (section 3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1].
+      #   For example: ["10 mail.example.com.", "20 mail2.example.com."].
+      #   (+String+ or +Array+ of +String+)
       #
       def initialize name, type, ttl, data
         fail ArgumentError, "name is required" unless name
@@ -96,8 +107,9 @@ module Gcloud
       end
 
       ##
-      # Returns a deep copy of the record. Useful for changing records, since
-      # the original record must be passed for deletion when using Zone#update.
+      # Returns a deep copy of the record. Useful for updating records, since
+      # the original, unmodified record must be passed for deletion when using
+      # Zone#update.
       def dup
         other = super
         other.data = data.map(&:dup)

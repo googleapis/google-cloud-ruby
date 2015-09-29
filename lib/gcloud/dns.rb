@@ -125,8 +125,8 @@ module Gcloud
   # == Listing Records
   #
   # When you create a zone, the Cloud DNS service automatically creates two
-  # records for it, providing configuration for Cloud DNS nameservers. Let's
-  # take a look at these records.
+  # Record instances for it, providing configuration for Cloud DNS nameservers.
+  # Let's take a look at these records.
   #
   #   require "gcloud"
   #
@@ -155,7 +155,14 @@ module Gcloud
   #   dns = gcloud.dns
   #   zone = dns.zone "example-com"
   #   change = zone.add "www", "A", 86400, ["1.2.3.4"]
-  #   record = change.additions.first
+  #   change.additions.map &:type #=> ["A", "SOA"]
+  #   change.deletions.map &:type #=> ["SOA"]
+  #
+  # Whenever you change the set of records belonging to a zone, the zone's start
+  # of authority (SOA) record should be updated with a higher serial number. The
+  # gcloud library automates this update for you, deleting the old SOA record
+  # and adding an updated one, as shown in the example above. You can disable or
+  # modify this behavior, of course. See Zone#update for details.
   #
   # You can retrieve records by name and type. The name argument can be a
   # subdomain (e.g., +www+) fragment for convenience, but notice that the
@@ -201,8 +208,8 @@ module Gcloud
   #   record = change.deletions.first
   #
   # The best way to add, remove, and update multiple records in a single
-  # {transaction}[https://cloud.google.com/dns/records] is to call +update+ with
-  # a block. See Zone::Transaction.
+  # {transaction}[https://cloud.google.com/dns/records] is to call Zone#update
+  # with a block. See Zone::Transaction.
   #
   #   require "gcloud"
   #
