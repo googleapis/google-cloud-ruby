@@ -35,7 +35,7 @@ module Gcloud
     #
     # The following record types are supported: A, AAAA, CNAME, MX, NAPTR, NS,
     # PTR, SOA, SPF, SRV, and TXT.
-    class Importer
+    class Importer #:nodoc:
       ##
       # Creates a new Importer that immediately parses the provided zone file
       # data and creates Record instances.
