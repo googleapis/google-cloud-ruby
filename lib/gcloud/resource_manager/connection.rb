@@ -36,6 +36,25 @@ module Gcloud
         @res_man = @client.discovered_api "cloudresourcemanager", API_VERSION
       end
 
+      def list_project options = {}
+        params = { filter: options.delete(:filter),
+                   pageToken: options.delete(:token),
+                   maxResults: options.delete(:max)
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @res_man.projects.list,
+          parameters: params
+        )
+      end
+
+      def get_project project_id
+        @client.execute(
+          api_method: @res_man.projects.get,
+          parameters: { projectId: project_id }
+        )
+      end
+
       ##
       # Updated the project, given the project Google API Client object/hash.
       # We try not to pass the gapi objects, but there is no PATCH, so we need
@@ -47,13 +66,6 @@ module Gcloud
           api_method: @res_man.projects.update,
           parameters: { projectId: project_id },
           body_object: project_gapi
-        )
-      end
-
-      def get_project project_id
-        @client.execute(
-          api_method: @res_man.projects.get,
-          parameters: { projectId: project_id }
         )
       end
 
