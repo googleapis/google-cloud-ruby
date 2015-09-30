@@ -15,6 +15,7 @@
 
 require "time"
 require "gcloud/resource_manager/errors"
+require "gcloud/resource_manager/project/updater"
 
 module Gcloud
   module ResourceManager
@@ -184,6 +185,31 @@ module Gcloud
         Time.parse @gapi["createTime"]
       rescue
         nil
+      end
+
+      # Updates the project in a single API call. See Project::Updater
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   project = resource_manager.project "tokyo-rain-123"
+      #   project.update do |tx|
+      #     tx.name = "My Project"
+      #     tx.labels["env"] = "production"
+      #   end
+      #
+      def update
+        updater = Updater.from_project self
+        yield updater
+        resp = connection.update_project updater.gapi
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
       end
 
       ##
