@@ -22,6 +22,7 @@ require "gcloud/storage"
 require "gcloud/pubsub"
 require "gcloud/bigquery"
 require "gcloud/dns"
+require "gcloud/resource_manager"
 
 class MockStorage < Minitest::Spec
   let(:project) { storage.connection.project }
@@ -677,5 +678,33 @@ class MockDns < Minitest::Spec
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_dns
+  end
+end
+
+class MockResourceManager < Minitest::Spec
+  let(:credentials) { OpenStruct.new }
+  let(:resource_manager) { $gcloud_resource_manager_global ||= Gcloud::ResourceManager::Manager.new(OpenStruct.new) }
+
+  def setup
+    @connection = Faraday::Adapter::Test::Stubs.new
+    connection = resource_manager.instance_variable_get "@connection"
+    client = connection.instance_variable_get "@client"
+    client.connection = Faraday.new do |builder|
+      # builder.options.params_encoder = Faraday::FlatParamsEncoder
+      builder.adapter :test, @connection
+    end
+  end
+
+  def teardown
+    @connection.verify_stubbed_calls
+  end
+
+  def mock_connection
+    @connection
+  end
+
+  # Register this spec type for when :storage is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_res_man
   end
 end
