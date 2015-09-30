@@ -63,15 +63,37 @@ module Gcloud
       end
 
       ##
-      # The user-assigned name of the project. This field is optional and can
-      # remain unset.
-      #
-      # Allowed characters are: lowercase and uppercase letters, numbers,
-      # hyphen, single-quote, double-quote, space, and exclamation point. e.g.
-      # My Project
+      # The user-assigned name of the project.
       #
       def name
         @gapi["name"]
+      end
+
+      ##
+      # Updates the user-assigned name of the project. This field is optional
+      # and can remain unset.
+      #
+      # Allowed characters are: lowercase and uppercase letters, numbers,
+      # hyphen, single-quote, double-quote, space, and exclamation point.
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   project = resource_manager.project "tokyo-rain-123"
+      #   project.name = "My Project"
+      #
+      def name= new_name
+        ensure_connection!
+        @gapi["name"] = new_name
+        resp = connection.update_project @gapi
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
       end
 
       ##
