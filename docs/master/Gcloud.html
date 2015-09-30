@@ -391,15 +391,16 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
-<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
+<span class="ruby-identifier">dns</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">dns</span> <span class="ruby-string">&quot;my-dns-project&quot;</span>,
+                 <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
+
 <span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
 </pre>
     
 
     
       <!-- <div class="method-source-code" id="dns-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns.rb, line 57</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dns</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">project</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Dns</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">default_project</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyfile</span>.<span class="ruby-identifier">nil?</span>
