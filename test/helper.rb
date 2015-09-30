@@ -22,6 +22,7 @@ require "gcloud/storage"
 require "gcloud/pubsub"
 require "gcloud/bigquery"
 require "gcloud/dns"
+require "gcloud/resource_manager"
 
 class MockStorage < Minitest::Spec
   let(:project) { "test" }
@@ -677,5 +678,47 @@ class MockDns < Minitest::Spec
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_dns
+  end
+end
+
+class MockResourceManager < Minitest::Spec
+  let(:credentials) { OpenStruct.new }
+  let(:resource_manager) { Gcloud::ResourceManager::Manager.new credentials }
+
+  def setup
+    @connection = Faraday::Adapter::Test::Stubs.new
+    connection = resource_manager.instance_variable_get "@connection"
+    client = connection.instance_variable_get "@client"
+    client.connection = Faraday.new do |builder|
+      # builder.options.params_encoder = Faraday::FlatParamsEncoder
+      builder.adapter :test, @connection
+    end
+  end
+
+  def teardown
+    @connection.verify_stubbed_calls
+  end
+
+  def mock_connection
+    @connection
+  end
+
+  def random_project_hash seed, name = nil, labels = nil
+    seed ||= rand(9999)
+    name ||= "Example Project #{seed}"
+    labels = { "env" => "production" } if labels.nil?
+    {
+      "projectNumber" => "123456789#{seed}",
+      "projectId" => "example-project-#{seed}",
+      "lifecycleState" => "ACTIVE",
+      "name" => name,
+      "createTime" => "2015-09-01T12:00:00.00Z",
+      "labels" => labels
+    }
+  end
+
+  # Register this spec type for when :storage is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_res_man
   end
 end
