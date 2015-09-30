@@ -50,6 +50,13 @@ module Gcloud
         )
       end
 
+      def get_project project_id
+        @client.execute(
+          api_method: @res_man.projects.get,
+          parameters: { projectId: project_id }
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end

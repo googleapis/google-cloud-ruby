@@ -21,13 +21,11 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
                                                              resource_manager.connection }
 
   it "knows its attributes" do
-    creation_time = Time.new 2015, 9, 1, 12, 0, 0, 0
-
     project.project_id.must_equal "example-project-123"
     project.project_number.must_equal "123456789123"
     project.name.must_equal "Example Project 123"
     project.labels["env"].must_equal "production"
-    project.created_at.must_equal creation_time
+    project.created_at.must_equal Time.new(2015, 9, 1, 12, 0, 0, 0)
   end
 
   it "updates the name" do
@@ -100,6 +98,20 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
       tx.name = "Updated Project 123"
       tx.labels = { "env" => "testing" }
     end
+  end
+
+  it "reloads itself" do
+    unspecified_hash = random_project_hash 123
+    unspecified_hash["state"] = "LIFECYCLE_STATE_UNSPECIFIED"
+
+    mock_connection.get "/v1beta1/projects/#{project.project_id}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       unspecified_hash.to_json]
+    end
+
+    project.must_be :active?
+    project.reload!
+    project.must_be :unspecified?
   end
 
   describe :state do
