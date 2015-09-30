@@ -50,8 +50,9 @@ module Gcloud
   #
   #   require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
+  #   dns = Gcloud.dns "my-dns-project",
+  #                    "/path/to/keyfile.json"
+  #
   #   zone = dns.zone "example-com"
   #
   def self.dns project = nil, keyfile = nil, options = {}
