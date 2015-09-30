@@ -75,7 +75,7 @@ module Gcloud
           @client.execute(
             api_method: @storage.buckets.insert,
             parameters: params,
-            body_object: { name: bucket_name }
+            body_object: insert_bucket_request(bucket_name, options)
           )
         end
       end
@@ -352,6 +352,13 @@ module Gcloud
       end
 
       protected
+
+      def insert_bucket_request name, options = {}
+        {
+          "name" => name,
+          "location" => options[:location]
+        }.delete_if { |_, v| v.nil? }
+      end
 
       def incremental_backoff options = {}
         Gcloud::Backoff.new(options).execute do
