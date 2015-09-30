@@ -703,13 +703,14 @@ class MockResourceManager < Minitest::Spec
     @connection
   end
 
-  def random_project_hash seed
+  def random_project_hash seed, name = nil
     seed ||= rand(9999)
+    name ||= "Example Project #{seed}"
     {
       "projectNumber" => "123456789#{seed}",
       "projectId" => "example-project-#{seed}",
       "lifecycleState" => "ACTIVE",
-      "name" => "Example Project #{seed}",
+      "name" => name,
       "createTime" => "2015-09-01T12:00:00.00Z",
       "labels" => { "env" => "production" }
     }
