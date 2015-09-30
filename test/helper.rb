@@ -713,7 +713,8 @@ class MockResourceManager < Minitest::Spec
       "lifecycleState" => "ACTIVE",
       "name" => name,
       "createTime" => "2015-09-01T12:00:00.00Z",
-      "labels" => labels
+      "labels" => labels,
+      "state" => "ACTIVE"
     }
   end
 
