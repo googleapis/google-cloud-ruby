@@ -92,7 +92,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes the bucket.
+      # Permanently deletes the bucket.
       # The bucket must be empty before it can be deleted.
       #
       # === Parameters
@@ -310,7 +310,7 @@ module Gcloud
       # A chunk_size value can be provided in the options to be used
       # in resumable uploads. This value is the number of bytes per
       # chunk and must be divisible by 256KB. If it is not divisible
-      # by 265KB then it will be lowered to the nearest acceptible
+      # by 265KB then it will be lowered to the nearest acceptable
       # value.
       #
       #   require "gcloud"

@@ -352,7 +352,7 @@ module Gcloud
         end
 
         ##
-        # Permenently deletes the entity from the file's access control list.
+        # Permanently deletes the entity from the file's access control list.
         #
         # === Parameters
         #
