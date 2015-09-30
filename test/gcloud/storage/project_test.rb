@@ -16,6 +16,11 @@ require "helper"
 require "json"
 
 describe Gcloud::Storage::Project, :mock_storage do
+  let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
+  let(:bucket_url_root) { "https://www.googleapis.com/storage/v1" }
+  let(:bucket_url) { "#{bucket_url_root}/b/#{bucket_name}" }
+  let(:bucket_location) { "EU" }
+
   it "creates a bucket" do
     new_bucket_name = "new-bucket-#{Time.now.to_i}"
 
@@ -28,6 +33,20 @@ describe Gcloud::Storage::Project, :mock_storage do
     end
 
     storage.create_bucket new_bucket_name
+  end
+
+  it "creates a bucket with location" do
+
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      JSON.parse(env.body)["name"].must_equal bucket_name
+      JSON.parse(env.body)["location"].must_equal bucket_location
+
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location).to_json]
+    end
+
+    bucket = storage.create_bucket bucket_name, location: bucket_location
+    bucket.location.must_equal bucket_location
   end
 
   it "creates a bucket with predefined acl" do
