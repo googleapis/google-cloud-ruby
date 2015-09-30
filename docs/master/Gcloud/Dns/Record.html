@@ -80,8 +80,18 @@
           
 <h1 id="class-Gcloud::Dns::Record-label-DNS+Record">DNS <a href="Record.html">Record</a><span><a href="#class-Gcloud::Dns::Record-label-DNS+Record">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>A value object representing a DNS resource record (RR). A newly created
-record is transient until it is added to a Zone&#39;s resource record set.</p>
+<p>Represents a set of DNS resource records (RRs) for a given <a
+href="Record.html#attribute-i-name">name</a> and <a
+href="Record.html#attribute-i-type">type</a> in a <a
+href="Zone.html">Zone</a>. Since it is a value object, a newly created <a
+href="Record.html">Record</a> instance is transient until it is added to a
+<a href="Zone.html">Zone</a> with <a
+href="Zone.html#method-i-update">Gcloud::Dns::Zone#update</a>. Note that <a
+href="Zone.html#method-i-add">Gcloud::Dns::Zone#add</a> and the <a
+href="Zone.html#method-i-update">Gcloud::Dns::Zone#update</a> block
+parameter can be used instead of <a
+href="Zone.html#method-i-record">Gcloud::Dns::Zone#record</a> or
+<code>Record.new</code> to create new records.</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
@@ -89,10 +99,11 @@ record is transient until it is added to a Zone&#39;s resource record set.</p>
 <span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
 <span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
 
-<span class="ruby-identifier">record_1</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">record</span> <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;A&quot;</span>, <span class="ruby-value">86400</span>, <span class="ruby-string">&quot;1.2.3.4&quot;</span>
-<span class="ruby-identifier">mx_data</span> = [<span class="ruby-string">&quot;10 mail.example.com.&quot;</span>,<span class="ruby-string">&quot;20 mail2.example.com.&quot;</span>]
-<span class="ruby-identifier">record_2</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">record</span> <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;A&quot;</span>, <span class="ruby-value">86400</span>, <span class="ruby-identifier">mx_data</span>
-<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">change</span> [<span class="ruby-identifier">record_1</span>, <span class="ruby-identifier">record_2</span>], []
+<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">records</span>.<span class="ruby-identifier">count</span> <span class="ruby-comment">#=&gt; 2</span>
+<span class="ruby-identifier">record</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">record</span> <span class="ruby-string">&quot;example.com.&quot;</span>, <span class="ruby-string">&quot;A&quot;</span>, <span class="ruby-value">86400</span>, <span class="ruby-string">&quot;1.2.3.4&quot;</span>
+<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">records</span>.<span class="ruby-identifier">count</span> <span class="ruby-comment">#=&gt; 2</span>
+<span class="ruby-identifier">change</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">update</span> <span class="ruby-identifier">record</span>
+<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">records</span>.<span class="ruby-identifier">count</span> <span class="ruby-comment">#=&gt; 3</span>
 </pre>
 
         </div>
@@ -174,10 +185,12 @@ record is transient until it is added to a Zone&#39;s resource record set.</p>
 
           <div class="method-description">
           
-            <p>The resource record data, as determined by <code>type</code> and defined in
-RFC 1035 (section 5) and RFC 1034 (section 3.6.1). For example:
-<code>192.0.2.1</code> or <code>example.com.</code>. (<code>Array</code> of
-<code>String</code>)</p>
+            <p>The array of resource record data, as determined by <code>type</code> and
+defined in <a href="http://tools.ietf.org/html/rfc1035#section-5">RFC 1035
+(section 5)</a> and <a
+href="http://tools.ietf.org/html/rfc1034#section-3.6.1">RFC 1034 (section
+3.6.1)</a>. For example: [“10 mail.example.com.”, “20 mail2.example.com.”].
+(<code>Array</code> of <code>String</code>)</p>
           
           </div>
         </div>
@@ -289,15 +302,17 @@ type</a>. For example: <code>A</code>, <code>AAAA</code>,
 </dd><dt><code>data</code>
 <dd>
 <p>The resource record data, as determined by <code>type</code> and defined in
-RFC 1035 (section 5) and RFC 1034 (section 3.6.1). For example:
-<code>192.0.2.1</code> or <code>example.com.</code>. (<code>String</code>
-or <code>Array</code> of <code>String</code>)</p>
+<a href="http://tools.ietf.org/html/rfc1035#section-5">RFC 1035 (section
+5)</a> and <a href="http://tools.ietf.org/html/rfc1034#section-3.6.1">RFC
+1034 (section 3.6.1)</a>. For example: [“10 mail.example.com.”, “20
+mail2.example.com.”]. (<code>String</code> or <code>Array</code> of
+<code>String</code>)</p>
 </dd></dl>
     
 
     
       <!-- <div class="method-source-code" id="new-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/record.rb, line 78</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/record.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>
   <span class="ruby-identifier">fail</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;name is required&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">name</span>
   <span class="ruby-identifier">fail</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;type is required&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">type</span>
@@ -342,14 +357,14 @@ or <code>Array</code> of <code>String</code>)</p>
 
   <div class="method-description">
     
-      <p>Returns a deep copy of the record. Useful for changing records, since the
-original record must be passed for deletion when using <a
+      <p>Returns a deep copy of the record. Useful for updating records, since the
+original, unmodified record must be passed for deletion when using <a
 href="Zone.html#method-i-update">Gcloud::Dns::Zone#update</a>.</p>
     
 
     
       <!-- <div class="method-source-code" id="dup-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/record.rb, line 101</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/record.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">dup</span>
   <span class="ruby-identifier">other</span> = <span class="ruby-keyword">super</span>
   <span class="ruby-identifier">other</span>.<span class="ruby-identifier">data</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:dup</span>)
@@ -379,7 +394,7 @@ href="Zone.html#method-i-update">Gcloud::Dns::Zone#update</a>.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 29, 2015.
+    Docs built on Sep 30, 2015.
   </div>
 </div>
 

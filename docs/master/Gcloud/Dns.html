@@ -145,9 +145,9 @@ href="https://cloud.google.com/dns/zones/">Managing Zones</a>.</p>
 
 <h2 id="module-Gcloud::Dns-label-Listing+Records">Listing Records<span><a href="#module-Gcloud::Dns-label-Listing+Records">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>When you create a zone, the Cloud DNS service automatically creates two
-records for it, providing configuration for Cloud DNS nameservers.
-Let&#39;s take a look at these records.</p>
+<p>When you create a zone, the Cloud DNS service automatically creates two <a
+href="Dns/Record.html">Record</a> instances for it, providing configuration
+for Cloud DNS nameservers. Let&#39;s take a look at these records.</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
@@ -180,8 +180,17 @@ new Cloud DNS <a href="Dns/Change.html">Change</a> instance.</p>
 <span class="ruby-identifier">dns</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">dns</span>
 <span class="ruby-identifier">zone</span> = <span class="ruby-identifier">dns</span>.<span class="ruby-identifier">zone</span> <span class="ruby-string">&quot;example-com&quot;</span>
 <span class="ruby-identifier">change</span> = <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">add</span> <span class="ruby-string">&quot;www&quot;</span>, <span class="ruby-string">&quot;A&quot;</span>, <span class="ruby-value">86400</span>, [<span class="ruby-string">&quot;1.2.3.4&quot;</span>]
-<span class="ruby-identifier">record</span> = <span class="ruby-identifier">change</span>.<span class="ruby-identifier">additions</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-identifier">change</span>.<span class="ruby-identifier">additions</span>.<span class="ruby-identifier">map</span> <span class="ruby-operator">&amp;</span>:<span class="ruby-identifier">type</span> <span class="ruby-comment">#=&gt; [&quot;A&quot;, &quot;SOA&quot;]</span>
+<span class="ruby-identifier">change</span>.<span class="ruby-identifier">deletions</span>.<span class="ruby-identifier">map</span> <span class="ruby-operator">&amp;</span>:<span class="ruby-identifier">type</span> <span class="ruby-comment">#=&gt; [&quot;SOA&quot;]</span>
 </pre>
+
+<p>Whenever you change the set of records belonging to a zone, the zone&#39;s
+start of authority (SOA) record should be updated with a higher serial
+number. The gcloud library automates this update for you, deleting the old
+SOA record and adding an updated one, as shown in the example above. You
+can disable or modify this behavior, of course. See <a
+href="Dns/Zone.html#method-i-update">Gcloud::Dns::Zone#update</a> for
+details.</p>
 
 <p>You can retrieve records by name and type. The name argument can be a
 subdomain (e.g., <code>www</code>) fragment for convenience, but notice
@@ -235,9 +244,9 @@ inadvertently changing values that you wish to leave unchanged.</p>
 </pre>
 
 <p>The best way to add, remove, and update multiple records in a single <a
-href="https://cloud.google.com/dns/records">transaction</a> is to call
-<code>update</code> with a block. See <a
-href="Dns/Zone/Transaction.html">Zone::Transaction</a>.</p>
+href="https://cloud.google.com/dns/records">transaction</a> is to call <a
+href="Dns/Zone.html#method-i-update">Gcloud::Dns::Zone#update</a> with a
+block. See <a href="Dns/Zone/Transaction.html">Zone::Transaction</a>.</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
@@ -332,7 +341,7 @@ multiple <code>data</code> values.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 29, 2015.
+    Docs built on Sep 30, 2015.
   </div>
 </div>
 

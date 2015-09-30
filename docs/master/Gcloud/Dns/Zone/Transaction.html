@@ -199,9 +199,11 @@ type</a>. For example: <code>A</code>, <code>AAAA</code>,
 </dd><dt><code>data</code>
 <dd>
 <p>The resource record data, as determined by <code>type</code> and defined in
-RFC 1035 (section 5) and RFC 1034 (section 3.6.1). For example:
-<code>192.0.2.1</code> or <code>example.com.</code>. (<code>String</code>
-or <code>Array</code> of <code>String</code>)</p>
+<a href="http://tools.ietf.org/html/rfc1035#section-5">RFC 1035 (section
+5)</a> and <a href="http://tools.ietf.org/html/rfc1034#section-3.6.1">RFC
+1034 (section 3.6.1)</a>. For example: <code>192.0.2.1</code> or
+<code>example.com.</code>. (<code>String</code> or <code>Array</code> of
+<code>String</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-add-label-Example">Example<span><a href="#method-i-add-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -219,7 +221,7 @@ or <code>Array</code> of <code>String</code>)</p>
 
     
       <!-- <div class="method-source-code" id="add-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone/transaction.rb, line 82</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone/transaction.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>
   <span class="ruby-ivar">@additions</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">Array</span>(<span class="ruby-ivar">@zone</span>.<span class="ruby-identifier">record</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -282,7 +284,7 @@ type</a>. For example: <code>A</code>, <code>AAAA</code>,
 
     
       <!-- <div class="method-source-code" id="modify-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone/transaction.rb, line 176</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone/transaction.rb, line 182</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">modify</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>
   <span class="ruby-identifier">existing</span> = <span class="ruby-ivar">@zone</span>.<span class="ruby-identifier">records</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-identifier">type</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">to_a</span>
   <span class="ruby-identifier">updated</span> = <span class="ruby-identifier">existing</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:dup</span>)
@@ -347,7 +349,7 @@ type</a>. For example: <code>A</code>, <code>AAAA</code>,
 
     
       <!-- <div class="method-source-code" id="remove-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone/transaction.rb, line 110</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone/transaction.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remove</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>
   <span class="ruby-ivar">@deletions</span> <span class="ruby-operator">+=</span> <span class="ruby-ivar">@zone</span>.<span class="ruby-identifier">records</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-identifier">type</span>).<span class="ruby-identifier">all</span>
 <span class="ruby-keyword">end</span></pre>
@@ -398,9 +400,11 @@ type</a>. For example: <code>A</code>, <code>AAAA</code>,
 </dd><dt><code>data</code>
 <dd>
 <p>The resource record data, as determined by <code>type</code> and defined in
-RFC 1035 (section 5) and RFC 1034 (section 3.6.1). For example:
-<code>192.0.2.1</code> or <code>example.com.</code>. (<code>String</code>
-or <code>Array</code> of <code>String</code>)</p>
+<a href="http://tools.ietf.org/html/rfc1035#section-5">RFC 1035 (section
+5)</a> and <a href="http://tools.ietf.org/html/rfc1034#section-3.6.1">RFC
+1034 (section 3.6.1)</a>. For example: <code>192.0.2.1</code> or
+<code>example.com.</code>. (<code>String</code> or <code>Array</code> of
+<code>String</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-replace-label-Example">Example<span><a href="#method-i-replace-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -419,7 +423,7 @@ or <code>Array</code> of <code>String</code>)</p>
 
     
       <!-- <div class="method-source-code" id="replace-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone/transaction.rb, line 146</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone/transaction.rb, line 152</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">replace</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>
   <span class="ruby-identifier">remove</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>
   <span class="ruby-identifier">add</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>
@@ -448,7 +452,7 @@ or <code>Array</code> of <code>String</code>)</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Sep 29, 2015.
+    Docs built on Sep 30, 2015.
   </div>
 </div>
 
