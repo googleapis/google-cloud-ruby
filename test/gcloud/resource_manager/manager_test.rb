@@ -15,7 +15,15 @@
 require "helper"
 
 describe Gcloud::ResourceManager::Manager, :mock_res_man do
-  it "knows the project identifier" do
-    resource_manager.must_be_kind_of Gcloud::ResourceManager::Manager
+  it "gets a project given a project_id" do
+    mock_connection.get "/v1beta1/projects/example-project-123" do |env|
+      [200, {"Content-Type" => "application/json"},
+       random_project_hash(123).to_json]
+    end
+
+    project = resource_manager.project "example-project-123"
+
+    project.must_be_kind_of Gcloud::ResourceManager::Project
+    project.project_id.must_equal "example-project-123"
   end
 end

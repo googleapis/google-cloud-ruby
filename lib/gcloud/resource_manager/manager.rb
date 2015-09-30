@@ -43,6 +43,31 @@ module Gcloud
       def initialize credentials #:nodoc:
         @connection = Connection.new credentials
       end
+
+      ##
+      # Retrieves the project identified by the specified +project_id+.
+      #
+      # === Returns
+      #
+      # Gcloud::ResourceManager::Project, or +nil+ if the project does not exist
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   project = resource_manager.project "tokyo-rain-123"
+      #   project.project_id #=> "tokyo-rain-123"
+      #
+      def project project_id
+        resp = connection.get_project project_id
+        if resp.success?
+          Project.from_gapi resp.data, connection
+        else
+          nil
+        end
+      end
     end
   end
 end
