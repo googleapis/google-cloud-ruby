@@ -232,6 +232,7 @@ module Gcloud
         "DELETE_IN_PROGRESS".casecmp(state).zero?
       end
 
+      ##
       # Updates the project in a single API call. See Project::Updater
       #
       # === Example
@@ -256,6 +257,29 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+
+      ##
+      # Reloads the project (with updated state) from the Google Cloud Resource
+      # Manager service.
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   project = resource_manager.project "tokyo-rain-123"
+      #   project.reload!
+      #
+      def reload!
+        resp = connection.get_project project_id
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+      alias_method :refresh!, :reload!
 
       ##
       # New Change from a Google API Client object.
