@@ -15,6 +15,7 @@
 
 require "time"
 require "gcloud/resource_manager/errors"
+require "gcloud/resource_manager/project/list"
 require "gcloud/resource_manager/project/updater"
 
 module Gcloud

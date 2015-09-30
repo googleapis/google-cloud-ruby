@@ -703,7 +703,7 @@ class MockResourceManager < Minitest::Spec
     @connection
   end
 
-  def random_project_hash seed, name = nil, labels = nil
+  def random_project_hash seed = nil, name = nil, labels = nil
     seed ||= rand(9999)
     name ||= "Example Project #{seed}"
     labels = { "env" => "production" } if labels.nil?
