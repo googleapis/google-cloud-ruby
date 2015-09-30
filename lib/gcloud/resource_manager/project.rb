@@ -187,6 +187,51 @@ module Gcloud
         nil
       end
 
+      ##
+      # The project lifecycle state.
+      #
+      # Acceptable values are:
+      # * +ACTIVE+ - The normal and active state.
+      # * +LIFECYCLE_STATE_UNSPECIFIED+ - Unspecified state. This is only
+      # used/useful for distinguishing unset values.
+      # * +DELETE_REQUESTED+ - The project has been marked for deletion by the
+      # user (by invoking DeleteProject) or by the system (Google Cloud
+      # Platform). This can generally be reversed by invoking UndeleteProject.
+      # * +DELETE_IN_PROGRESS+ - The process of deleting the project has begun.
+      # Reversing the deletion is no longer possible.
+      #
+      def state
+        @gapi["state"]
+      end
+
+      ##
+      # Checks if the state is +ACTIVE+.
+      def active?
+        return false if state.nil?
+        "ACTIVE".casecmp(state).zero?
+      end
+
+      ##
+      # Checks if the state is +LIFECYCLE_STATE_UNSPECIFIED+.
+      def unspecified?
+        return false if state.nil?
+        "LIFECYCLE_STATE_UNSPECIFIED".casecmp(state).zero?
+      end
+
+      ##
+      # Checks if the state is +DELETE_REQUESTED+.
+      def delete_requested?
+        return false if state.nil?
+        "DELETE_REQUESTED".casecmp(state).zero?
+      end
+
+      ##
+      # Checks if the state is +DELETE_IN_PROGRESS+.
+      def delete_in_progress?
+        return false if state.nil?
+        "DELETE_IN_PROGRESS".casecmp(state).zero?
+      end
+
       # Updates the project in a single API call. See Project::Updater
       #
       # === Example
