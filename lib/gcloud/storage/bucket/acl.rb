@@ -318,7 +318,7 @@ module Gcloud
         end
 
         ##
-        # Permenently deletes the entity from the bucket's access control list.
+        # Permanently deletes the entity from the bucket's access control list.
         #
         # === Parameters
         #
@@ -785,7 +785,7 @@ module Gcloud
         end
 
         ##
-        # Permenently deletes the entity from the bucket's default access
+        # Permanently deletes the entity from the bucket's default access
         # control list for files.
         #
         # === Parameters
