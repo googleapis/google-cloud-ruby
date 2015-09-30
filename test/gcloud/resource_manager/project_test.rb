@@ -28,4 +28,14 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     project.labels["env"].must_equal "production"
     project.created_at.must_equal creation_time
   end
+
+  it "updates the name" do
+    mock_connection.put "/v1beta1/projects/#{project.project_id}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       random_project_hash(123, "Updated Project 123").to_json]
+    end
+
+    project.name = "Updated Project 123"
+    project.name.must_equal "Updated Project 123"
+  end
 end

@@ -36,6 +36,20 @@ module Gcloud
         @res_man = @client.discovered_api "cloudresourcemanager", API_VERSION
       end
 
+      ##
+      # Updated the project, given the project Google API Client object/hash.
+      # We try not to pass the gapi objects, but there is no PATCH, so we need
+      # to pass in a complete Project object.
+      def update_project project_gapi
+        project_id = project_gapi["projectId"]
+
+        @client.execute(
+          api_method: @res_man.projects.update,
+          parameters: { projectId: project_id },
+          body_object: project_gapi
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end
