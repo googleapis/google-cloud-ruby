@@ -51,9 +51,7 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:filter]</code>::
+      # +filter+::
       #   An expression for filtering the results of the request. Filter rules
       #   are case insensitive. (+String+)
       #
@@ -71,6 +69,8 @@ module Gcloud
       #   * +labels.color:red+ - The project's label color has the value red.
       #   * +labels.color:red label.size:big+ - The project's label color has
       #   the value red and its label size has the value big.
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:token]</code>::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
@@ -99,7 +99,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
-      #   projects = resource_manager.projects filter: "labels.env:production"
+      #   projects = resource_manager.projects "labels.env:production"
       #   projects.each do |project|
       #     puts project.project_id
       #   end
@@ -116,8 +116,8 @@ module Gcloud
       #     puts project.project_id
       #   end
       #
-      def projects options = {}
-        resp = connection.list_project options
+      def projects filter = nil, options = {}
+        resp = connection.list_project list_projects_options(filter, options)
         if resp.success?
           Project::List.from_response resp, self
         else
@@ -148,6 +148,21 @@ module Gcloud
         else
           nil
         end
+      end
+
+      protected
+
+      ##
+      # Create an options hash from the projects parameters.
+      def list_projects_options filter, options
+        # Handle only sending in options
+        if filter.is_a?(::Hash) && options.empty?
+          options = filter
+          filter = nil
+        end
+        # Give named parameter priority
+        options[:filter] = filter || options[:filter]
+        options
       end
     end
   end
