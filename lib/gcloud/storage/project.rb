@@ -201,6 +201,12 @@ module Gcloud
       # <code>options[:retries]</code>::
       #   The number of times the API call should be retried.
       #   Default is Gcloud::Backoff.retries. (+Integer+)
+      # <code>options[:location]</code>::
+      #   The location of the bucket. Object data for objects in the bucket
+      #   resides in physical storage within this region. Possible values
+      #   include +ASIA+, +EU+, and +US+.(See the {developer's
+      #   guide}[https://cloud.google.com/storage/docs/bucket-locations] for the
+      #   authoritative list. The default value is +US+. (+String+)
       #
       # === Returns
       #

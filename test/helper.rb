@@ -47,7 +47,7 @@ class MockStorage < Minitest::Spec
   end
 
 
-  def random_bucket_hash name=random_bucket_name, url_root="https://www.googleapis.com/storage/v1"
+  def random_bucket_hash name=random_bucket_name, url_root="https://www.googleapis.com/storage/v1", location="US", storage_class="STANDARD"
     {"kind"=>"storage#bucket",
         "id"=>name,
         "selfLink"=>"#{url_root}/b/#{name}",
@@ -56,8 +56,8 @@ class MockStorage < Minitest::Spec
         "timeCreated"=>Time.now,
         "metageneration"=>"1",
         "owner"=>{"entity"=>"project-owners-1234567890"},
-        "location"=>"US",
-        "storageClass"=>"STANDARD",
+        "location"=>location,
+        "storageClass"=>storage_class,
         "etag"=>"CAE="}
   end
 
