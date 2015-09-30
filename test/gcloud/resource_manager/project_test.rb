@@ -38,4 +38,30 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     project.name = "Updated Project 123"
     project.name.must_equal "Updated Project 123"
   end
+
+  it "can't update labels directly" do
+    expect do
+      project.labels["env"] = "testing"
+    end.must_raise RuntimeError # because labels is frozen
+  end
+
+  it "can update labels by setting a new hash" do
+    mock_connection.put "/v1beta1/projects/#{project.project_id}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       random_project_hash(123, nil, "env" => "testing").to_json]
+    end
+
+    project.labels = { "env" => "testing" }
+  end
+
+  it "can update labels by using a block" do
+    mock_connection.put "/v1beta1/projects/#{project.project_id}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       random_project_hash(123, nil, "env" => "testing").to_json]
+    end
+
+    project.labels do |labels|
+      labels["env"] = "testing"
+    end
+  end
 end
