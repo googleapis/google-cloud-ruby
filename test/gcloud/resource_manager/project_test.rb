@@ -16,7 +16,8 @@ require "helper"
 
 describe Gcloud::ResourceManager::Project, :mock_res_man do
   let(:seed) { 123 }
-  let(:project) { Gcloud::ResourceManager::Project.from_gapi random_project_hash(seed),
+  let(:project_hash) { random_project_hash(seed) }
+  let(:project) { Gcloud::ResourceManager::Project.from_gapi project_hash,
                                                              resource_manager.connection }
 
   it "knows its attributes" do
@@ -98,6 +99,64 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     project.update do |tx|
       tx.name = "Updated Project 123"
       tx.labels = { "env" => "testing" }
+    end
+  end
+
+  describe :state do
+    it "knows its state" do
+      project.state.must_equal "ACTIVE"
+      project.must_be :active?
+      project.wont_be :unspecified?
+      project.wont_be :delete_requested?
+      project.wont_be :delete_in_progress?
+    end
+
+    describe :unspecified do
+      let(:project_hash) do
+        hash = random_project_hash(seed)
+        hash["state"] = "LIFECYCLE_STATE_UNSPECIFIED"
+        hash
+      end
+
+      it "can be unspecified" do
+        project.state.must_equal "LIFECYCLE_STATE_UNSPECIFIED"
+        project.wont_be :active?
+        project.must_be :unspecified?
+        project.wont_be :delete_requested?
+        project.wont_be :delete_in_progress?
+      end
+    end
+
+    describe :delete_requested do
+      let(:project_hash) do
+        hash = random_project_hash(seed)
+        hash["state"] = "DELETE_REQUESTED"
+        hash
+      end
+
+      it "can be delete_requested" do
+        project.state.must_equal "DELETE_REQUESTED"
+        project.wont_be :active?
+        project.wont_be :unspecified?
+        project.must_be :delete_requested?
+        project.wont_be :delete_in_progress?
+      end
+    end
+
+    describe :delete_in_progress do
+      let(:project_hash) do
+        hash = random_project_hash(seed)
+        hash["state"] = "DELETE_IN_PROGRESS"
+        hash
+      end
+
+      it "can be DELETE_IN_PROGRESS" do
+        project.state.must_equal "DELETE_IN_PROGRESS"
+        project.wont_be :active?
+        project.wont_be :unspecified?
+        project.wont_be :delete_requested?
+        project.must_be :delete_in_progress?
+      end
     end
   end
 end
