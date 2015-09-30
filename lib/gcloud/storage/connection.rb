@@ -95,7 +95,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes an empty bucket.
+      # Permanently deletes an empty bucket.
       def delete_bucket bucket_name, opts = {}
         incremental_backoff opts do
           @client.execute(
@@ -125,7 +125,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes a bucket ACL.
+      # Permanently deletes a bucket ACL.
       def delete_bucket_acl bucket_name, entity
         @client.execute(
           api_method: @storage.bucket_access_controls.delete,
@@ -153,7 +153,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes a default ACL.
+      # Permanently deletes a default ACL.
       def delete_default_acl bucket_name, entity
         @client.execute(
           api_method: @storage.default_object_access_controls.delete,
@@ -297,7 +297,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes a file.
+      # Permanently deletes a file.
       def delete_file bucket_name, file_path
         @client.execute(
           api_method: @storage.objects.delete,
@@ -329,7 +329,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes a file ACL.
+      # Permanently deletes a file ACL.
       def delete_file_acl bucket_name, file_name, entity, options = {}
         query = { bucket: bucket_name, object: file_name, entity: entity }
         query[:generation] = options[:generation] if options[:generation]
