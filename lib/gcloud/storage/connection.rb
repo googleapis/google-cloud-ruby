@@ -90,7 +90,8 @@ module Gcloud
 
         @client.execute(
           api_method: @storage.buckets.patch,
-          parameters: params
+          parameters: params,
+          body_object: patch_bucket_request(options)
         )
       end
 
@@ -357,6 +358,59 @@ module Gcloud
         Gcloud::Backoff.new(options).execute do
           yield
         end
+      end
+
+      def patch_bucket_request options = {}
+        versioning = { "enabled" => options[:versioning] }
+        versioning = nil if options[:versioning].nil?
+        {
+          # "acl" => [
+          #   bucketAccessControls Resource
+          # ],
+          # "defaultObjectAcl" => [
+          #   defaultObjectAccessControls Resource
+          # ],
+          # "location" => string,
+          # "website" => {
+          #   "mainPageSuffix" => string,
+          #   "notFoundPage" => string
+          # },
+          # "logging" => {
+          #   "logBucket" => string,
+          #   "logObjectPrefix" => string
+          # },
+          "versioning" => versioning,
+          # "cors" => [
+          #   {
+          #     "origin" => [
+          #       string
+          #     ],
+          #     "method" => [
+          #       string
+          #     ],
+          #     "responseHeader" => [
+          #       string
+          #     ],
+          #     "maxAgeSeconds" => integer
+          #   }
+          # ],
+          # "lifecycle" => {
+          #   "rule" => [
+          #     {
+          #       "action" => {
+          #         "type" => string
+          #       },
+          #       "condition" => {
+          #         "age" => integer,
+          #         "createdBefore" => date,
+          #         "isLive" => boolean,
+          #         "numNewerVersions" => integer
+          #       }
+          #     }
+          #   ]
+          # },
+          # "storageClass" => string,
+        }.delete_if { |_, v| v.nil? }
       end
     end
   end
