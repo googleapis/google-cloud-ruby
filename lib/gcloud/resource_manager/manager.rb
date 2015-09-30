@@ -15,6 +15,7 @@
 
 require "gcloud/resource_manager/connection"
 require "gcloud/resource_manager/errors"
+require "gcloud/resource_manager/project"
 
 module Gcloud
   module ResourceManager

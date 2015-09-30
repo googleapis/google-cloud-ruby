@@ -730,6 +730,18 @@ class MockResourceManager < Minitest::Spec
     @connection
   end
 
+  def random_project_hash seed
+    seed ||= rand(9999)
+    {
+      "projectNumber" => "123456789#{seed}",
+      "projectId" => "example-project-#{seed}",
+      "lifecycleState" => "ACTIVE",
+      "name" => "Example Project #{seed}",
+      "createTime" => "2015-09-01T12:00:00.00Z",
+      "labels" => { "env" => "production" }
+    }
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_res_man
