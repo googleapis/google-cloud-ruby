@@ -202,7 +202,7 @@ module Gcloud
       # Reversing the deletion is no longer possible.
       #
       def state
-        @gapi["state"]
+        @gapi["lifecycleState"]
       end
 
       ##
