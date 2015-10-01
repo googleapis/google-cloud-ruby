@@ -114,6 +114,14 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     project.must_be :unspecified?
   end
 
+  it "deletes itself" do
+    mock_connection.delete "/v1beta1/projects/#{project.project_id}" do |env|
+      [200, {}, ""]
+    end
+
+    project.delete
+  end
+
   describe :state do
     it "knows its state" do
       project.state.must_equal "ACTIVE"
