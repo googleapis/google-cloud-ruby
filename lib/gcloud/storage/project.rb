@@ -207,6 +207,13 @@ module Gcloud
       #   include +ASIA+, +EU+, and +US+.(See the {developer's
       #   guide}[https://cloud.google.com/storage/docs/bucket-locations] for the
       #   authoritative list. The default value is +US+. (+String+)
+      # <code>options[:storage_class]</code>::
+      #   Defines how objects in the bucket are stored and determines the SLA
+      #   and the cost of storage. Values include +:standard+, +:nearline+, and
+      #   +:dra+ (Durable Reduced Availability), as well as the strings returned
+      #   by Bucket#storage_class. For more information, see {Storage
+      #   Classes}[https://cloud.google.com/storage/docs/storage-classes].
+      #   The default value is +:standard+. (+Symbol+ or +String+)
       #
       # === Returns
       #
