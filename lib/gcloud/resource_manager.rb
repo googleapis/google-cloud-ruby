@@ -37,7 +37,7 @@ module Gcloud
   #
   #   The default scope is:
   #
-  #   * +https://www.googleapis.com/auth/cloudresourcemanager+
+  #   * +https://www.googleapis.com/auth/cloud-platform+
   #
   # === Returns
   #
