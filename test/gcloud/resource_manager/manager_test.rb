@@ -182,6 +182,14 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
     resource_manager.delete "existing-project-123"
   end
 
+  it "undeletes a project" do
+    mock_connection.post "/v1beta1/projects/deleted-project-456:undelete" do |env|
+      [200, {}, ""]
+    end
+
+    resource_manager.undelete "deleted-project-456"
+  end
+
   def create_project_json project_id = nil, name = nil, labels = {}
     hash = random_project_hash
     hash["projectId"] = project_id if project_id

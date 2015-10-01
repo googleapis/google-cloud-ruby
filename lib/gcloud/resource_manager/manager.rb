@@ -266,6 +266,36 @@ module Gcloud
         end
       end
 
+      ##
+      # Restores the project. You can only use this method for a project that
+      # has a lifecycle state of +DELETE_REQUESTED+. After deletion starts, as
+      # indicated by a lifecycle state of +DELETE_IN_PROGRESS+, the project
+      # cannot be restored.
+      #
+      # The caller must have modify permissions for this project.
+      #
+      # === Parameters
+      #
+      # +project_id+::
+      #   The ID of the project. (+String+)
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   resource_manager.undelete "tokyo-rain-123"
+      #
+      def undelete project_id
+        resp = connection.undelete_project project_id
+        if resp.success?
+          true
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
       protected
 
       ##
