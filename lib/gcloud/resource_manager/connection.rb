@@ -55,6 +55,16 @@ module Gcloud
         )
       end
 
+      def create_project project_id, name, labels
+        project_gapi = { projectId: project_id, name: name,
+                         labels: labels }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @res_man.projects.create,
+          body_object: project_gapi
+        )
+      end
+
       ##
       # Updated the project, given the project Google API Client object/hash.
       # We try not to pass the gapi objects, but there is no PATCH, so we need
