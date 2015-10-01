@@ -92,6 +92,14 @@ module Gcloud
       end
 
       ##
+      # The bucket's storage class. This defines how objects in the bucket are
+      # stored and determines the SLA and the cost of storage. Values include
+      # +STANDARD+, +NEARLINE+, and +DURABLE_REDUCED_AVAILABILITY+.
+      def storage_class
+        @gapi["storageClass"]
+      end
+
+      ##
       # Permanently deletes the bucket.
       # The bucket must be empty before it can be deleted.
       #
