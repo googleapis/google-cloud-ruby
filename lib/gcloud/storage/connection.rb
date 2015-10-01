@@ -356,8 +356,17 @@ module Gcloud
       def insert_bucket_request name, options = {}
         {
           "name" => name,
-          "location" => options[:location]
+          "location" => options[:location],
+          "storageClass" => storage_class(options[:storage_class])
         }.delete_if { |_, v| v.nil? }
+      end
+
+      def storage_class str #:nodoc:
+        { "durable_reduced_availability" => "DURABLE_REDUCED_AVAILABILITY",
+          "dra" => "DURABLE_REDUCED_AVAILABILITY",
+          "durable" => "DURABLE_REDUCED_AVAILABILITY",
+          "nearline" => "NEARLINE",
+          "standard" => "STANDARD" }[str.to_s.downcase]
       end
 
       def incremental_backoff options = {}
