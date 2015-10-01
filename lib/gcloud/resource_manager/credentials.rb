@@ -20,7 +20,7 @@ module Gcloud
     ##
     # Represents the Oauth2 signing logic for Resource Manager.
     class Credentials < Gcloud::Credentials #:nodoc:
-      SCOPE = ["https://www.googleapis.com/auth/cloudresourcemanager"]
+      SCOPE = ["https://www.googleapis.com/auth/cloud-platform"]
       PATH_ENV_VARS = %w(RESOURCE_MANAGER_KEYFILE
                          GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
       JSON_ENV_VARS = %w(RESOURCE_MANAGER_KEYFILE_JSON GCLOUD_KEYFILE_JSON
