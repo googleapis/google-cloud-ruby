@@ -79,6 +79,13 @@ module Gcloud
         )
       end
 
+      def delete_project project_id
+        @client.execute(
+          api_method: @res_man.projects.delete,
+          parameters: { projectId: project_id }
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end

@@ -129,6 +129,11 @@ module Gcloud
       ##
       # Retrieves the project identified by the specified +project_id+.
       #
+      # === Parameters
+      #
+      # +project_id+::
+      #   The ID of the project. (+String+)
+      #
       # === Returns
       #
       # Gcloud::ResourceManager::Project, or +nil+ if the project does not exist
@@ -215,6 +220,47 @@ module Gcloud
         resp = connection.create_project project_id, name, labels
         if resp.success?
           Project.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Marks the project for deletion. This method will only affect the project
+      # if the following criteria are met:
+      #
+      # * The project does not have a billing account associated with it.
+      # * The project has a lifecycle state of +ACTIVE+.
+      # * This method changes the project's lifecycle state from +ACTIVE+ to
+      # +DELETE_REQUESTED_. The deletion starts at an unspecified time, at which
+      # point the lifecycle state changes to +DELETE_IN_PROGRESS+.
+      #
+      # Until the deletion completes, you can check the lifecycle state checked
+      # by retrieving the project with GetProject, and the project remains
+      # visible to ListProjects. However, you cannot update the project.
+      #
+      # After the deletion completes, the project is not retrievable by the
+      # GetProject and ListProjects methods.
+      #
+      # The caller must have modify permissions for this project.
+      #
+      # === Parameters
+      #
+      # +project_id+::
+      #   The ID of the project. (+String+)
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   resource_manager.delete "tokyo-rain-123"
+      #
+      def delete project_id
+        resp = connection.delete_project project_id
+        if resp.success?
+          true
         else
           fail ApiError.from_response(resp)
         end
