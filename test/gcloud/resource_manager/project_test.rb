@@ -122,6 +122,14 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     project.delete
   end
 
+  it "undeletes itself" do
+    mock_connection.post "/v1beta1/projects/#{project.project_id}:undelete" do |env|
+      [200, {}, ""]
+    end
+
+    project.undelete
+  end
+
   describe :state do
     it "knows its state" do
       project.state.must_equal "ACTIVE"

@@ -86,6 +86,13 @@ module Gcloud
         )
       end
 
+      def undelete_project project_id
+        @client.execute(
+          api_method: @res_man.projects.undelete,
+          parameters: { projectId: project_id }
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end
