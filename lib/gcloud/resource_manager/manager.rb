@@ -150,6 +150,75 @@ module Gcloud
         end
       end
 
+      ##
+      # Creates a project resource.
+      #
+      # Initially, the project resource is owned by its creator exclusively. The
+      # creator can later grant permission to others to read or update the
+      # project.
+      #
+      # Several APIs are activated automatically for the project, including
+      # Google Cloud Storage.
+      #
+      # === Parameters
+      #
+      # +project_id+::
+      #   The unique, user-assigned ID of the project. It must be 6 to 30
+      #   lowercase letters, digits, or hyphens. It must start with a letter.
+      #   Trailing hyphens are prohibited. (+String+)
+      # +name+::
+      #   The user-assigned name of the project. This field is optional and can
+      #   remain unset.
+      #
+      #   Allowed characters are: lowercase and uppercase letters, numbers,
+      #   hyphen, single-quote, double-quote, space, and exclamation point.
+      #   (+String+)
+      # +name+::
+      #   The labels associated with this project.
+      #
+      #   Label keys must be between 1 and 63 characters long and must conform
+      #   to the following regular expression: [a-z]([-a-z0-9]*[a-z0-9])?.
+      #
+      #   Label values must be between 0 and 63 characters long and must conform
+      #   to the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?.
+      #
+      #   No more than 256 labels can be associated with a given resource.
+      #
+      #   Clients should store labels in a representation such as JSON that does
+      #   not depend on specific characters being disallowed. (+Hash+)
+      #
+      # === Returns
+      #
+      # Gcloud::ResourceManager::Project
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   project = resource_manager.create_project "tokyo-rain-123"
+      #
+      # A project can also be created with a +name+ and +labels+.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   project = resource_manager.create_project "tokyo-rain-123",
+      #                                             "Todos Development",
+      #                                             "env" => "development"
+      #
+      def create_project project_id, name = nil, labels = {}
+        labels = nil if labels && labels.empty?
+        resp = connection.create_project project_id, name, labels
+        if resp.success?
+          Project.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
       protected
 
       ##

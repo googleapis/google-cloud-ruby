@@ -27,6 +27,42 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
     project.project_id.must_equal "example-project-123"
   end
 
+  it "creates a project" do
+    mock_connection.post "/v1beta1/projects" do |env|
+      json = JSON.parse(env.body)
+      json["projectId"].must_equal "new-project-456"
+      json["name"].must_be :nil?
+      json["labels"].must_be :nil?
+      [200, {"Content-Type"=>"application/json"},
+       create_project_json("new-project-456")]
+    end
+
+    project = resource_manager.create_project "new-project-456"
+    project.must_be_kind_of Gcloud::ResourceManager::Project
+    project.project_id.must_equal "new-project-456"
+    project.name.must_equal nil
+    project.labels.must_be :empty?
+  end
+
+  it "creates a project with a name and labels" do
+    mock_connection.post "/v1beta1/projects" do |env|
+      json = JSON.parse(env.body)
+      json["projectId"].must_equal "new-project-789"
+      json["name"].must_equal "My New Project"
+      json["labels"].must_equal "env" => "development"
+      [200, {"Content-Type"=>"application/json"},
+       create_project_json("new-project-789", "My New Project", env: :development)]
+    end
+
+    project = resource_manager.create_project "new-project-789",
+                                              "My New Project",
+                                              env: :development
+    project.must_be_kind_of Gcloud::ResourceManager::Project
+    project.project_id.must_equal "new-project-789"
+    project.name.must_equal "My New Project"
+    project.labels.must_equal("env" => "development")
+  end
+
   it "lists projects" do
     num_projects = 3
     mock_connection.get "/v1beta1/projects" do |env|
@@ -136,6 +172,14 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
     second_projects.count.must_equal 2
     second_projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
     second_projects.next?.must_equal false
+  end
+
+  def create_project_json project_id = nil, name = nil, labels = {}
+    hash = random_project_hash
+    hash["projectId"] = project_id if project_id
+    hash["name"]      = name
+    hash["labels"]    = labels
+    hash.to_json
   end
 
   def list_projects_json count = 2, token = nil
