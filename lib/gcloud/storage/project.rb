@@ -214,6 +214,11 @@ module Gcloud
       #   by Bucket#storage_class. For more information, see {Storage
       #   Classes}[https://cloud.google.com/storage/docs/storage-classes].
       #   The default value is +:standard+. (+Symbol+ or +String+)
+      # <code>options[:versioning]</code>::
+      #   Whether {Object
+      #   Versioning}[https://cloud.google.com/storage/docs/object-versioning]
+      #   is to be enabled for the bucket. The default value is +false+.
+      #   (+Boolean+)
       #
       # === Returns
       #

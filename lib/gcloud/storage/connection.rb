@@ -81,16 +81,17 @@ module Gcloud
       end
 
       ##
-      # Updates a bucket's metadata.
-      def patch_bucket bucket_name, options = {}
+      # Updates a bucket, including its ACL metadata.
+      def patch_bucket bucket_name, param_options = {}, body_options = {}
         params = { bucket: bucket_name,
-                   predefinedAcl: options[:acl],
-                   predefinedDefaultObjectAcl: options.delete(:default_acl)
+                   predefinedAcl: param_options[:acl],
+                   predefinedDefaultObjectAcl: param_options[:default_acl]
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(
           api_method: @storage.buckets.patch,
-          parameters: params
+          parameters: params,
+          body_object: patch_bucket_request(body_options)
         )
       end
 
@@ -354,10 +355,23 @@ module Gcloud
       protected
 
       def insert_bucket_request name, options = {}
+        versioning = if options[:versioning]
+                       { "enabled" => options[:versioning] }
+                     end
         {
           "name" => name,
           "location" => options[:location],
-          "storageClass" => storage_class(options[:storage_class])
+          "storageClass" => storage_class(options[:storage_class]),
+          "versioning" => versioning
+        }.delete_if { |_, v| v.nil? }
+      end
+
+      def patch_bucket_request options = {}
+        versioning = unless options[:versioning].nil?
+                       { "enabled" => options[:versioning] }
+                     end
+        {
+          "versioning" => versioning
         }.delete_if { |_, v| v.nil? }
       end
 

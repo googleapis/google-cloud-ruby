@@ -64,6 +64,20 @@ describe Gcloud::Storage::Project, :mock_storage do
     bucket.storage_class.must_equal bucket_storage_class
   end
 
+  it "creates a bucket with versioning" do
+
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      JSON.parse(env.body)["name"].must_equal bucket_name
+      JSON.parse(env.body)["versioning"]["enabled"].must_equal true
+
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, true).to_json]
+    end
+
+    bucket = storage.create_bucket bucket_name, versioning: true
+    bucket.versioning?.must_equal true
+  end
+
   it "creates a bucket with predefined acl" do
     new_bucket_name = "new-bucket-#{Time.now.to_i}"
 
