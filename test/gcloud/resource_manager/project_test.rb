@@ -102,7 +102,7 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
 
   it "reloads itself" do
     unspecified_hash = random_project_hash 123
-    unspecified_hash["state"] = "LIFECYCLE_STATE_UNSPECIFIED"
+    unspecified_hash["lifecycleState"] = "LIFECYCLE_STATE_UNSPECIFIED"
 
     mock_connection.get "/v1beta1/projects/#{project.project_id}" do |env|
       [200, {"Content-Type" => "application/json"},
@@ -142,7 +142,7 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     describe :unspecified do
       let(:project_hash) do
         hash = random_project_hash(seed)
-        hash["state"] = "LIFECYCLE_STATE_UNSPECIFIED"
+        hash["lifecycleState"] = "LIFECYCLE_STATE_UNSPECIFIED"
         hash
       end
 
@@ -158,7 +158,7 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     describe :delete_requested do
       let(:project_hash) do
         hash = random_project_hash(seed)
-        hash["state"] = "DELETE_REQUESTED"
+        hash["lifecycleState"] = "DELETE_REQUESTED"
         hash
       end
 
@@ -174,7 +174,7 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     describe :delete_in_progress do
       let(:project_hash) do
         hash = random_project_hash(seed)
-        hash["state"] = "DELETE_IN_PROGRESS"
+        hash["lifecycleState"] = "DELETE_IN_PROGRESS"
         hash
       end
 
