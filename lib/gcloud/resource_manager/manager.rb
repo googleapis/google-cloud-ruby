@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/resource_manager/credentials"
 require "gcloud/resource_manager/connection"
 require "gcloud/resource_manager/errors"
 require "gcloud/resource_manager/project"
