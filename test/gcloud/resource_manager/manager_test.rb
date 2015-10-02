@@ -55,7 +55,7 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
     end
 
     project = resource_manager.create_project "new-project-789",
-                                              "My New Project",
+                                              name: "My New Project",
                                               labels: {env: :development}
     project.must_be_kind_of Gcloud::ResourceManager::Project
     project.project_id.must_equal "new-project-789"
