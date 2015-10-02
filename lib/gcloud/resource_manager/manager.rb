@@ -172,15 +172,15 @@ module Gcloud
       #   The unique, user-assigned ID of the project. It must be 6 to 30
       #   lowercase letters, digits, or hyphens. It must start with a letter.
       #   Trailing hyphens are prohibited. (+String+)
-      # +name+::
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:name]</code>::
       #   The user-assigned name of the project. This field is optional and can
       #   remain unset.
       #
       #   Allowed characters are: lowercase and uppercase letters, numbers,
       #   hyphen, single-quote, double-quote, space, and exclamation point.
       #   (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:labels]</code>::
       #   The labels associated with this project.
       #
@@ -214,16 +214,13 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
       #   project = resource_manager.create_project "tokyo-rain-123",
-      #               "Todos Development", labels: {env: :development}
+      #                                             name: "Todos Development",
+      #                                             labels: {env: :development}
       #
-      def create_project project_id, name = nil, options = {}
-        # Handle the options hash being sent on the wrong parameter
-        if name.is_a?(::Hash) && options.empty?
-          options = name
-          name = nil
-        end
-
-        resp = connection.create_project project_id, name, options[:labels]
+      def create_project project_id, options = {}
+        resp = connection.create_project project_id,
+                                         options[:name],
+                                         options[:labels]
         if resp.success?
           Project.from_gapi resp.data, connection
         else
