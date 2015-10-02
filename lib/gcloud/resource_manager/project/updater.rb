@@ -54,10 +54,11 @@ module Gcloud
         # The labels associated with this project.
         #
         # Label keys must be between 1 and 63 characters long and must conform
-        # to the following regular expression: [a-z]([-a-z0-9]*[a-z0-9])?.
+        # to the following regular expression:
+        # <code>[a-z]([-a-z0-9]*[a-z0-9])?</code>.
         #
         # Label values must be between 0 and 63 characters long and must conform
-        # to the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?.
+        # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
         #
         # No more than 256 labels can be associated with a given resource.
         #
@@ -83,10 +84,11 @@ module Gcloud
         # Updates the labels associated with this project.
         #
         # Label keys must be between 1 and 63 characters long and must conform
-        # to the following regular expression: [a-z]([-a-z0-9]*[a-z0-9])?.
+        # to the following regular expression:
+        # <code>[a-z]([-a-z0-9]*[a-z0-9])?</code>.
         #
         # Label values must be between 0 and 63 characters long and must conform
-        # to the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?.
+        # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
         #
         # No more than 256 labels can be associated with a given resource.
         #
