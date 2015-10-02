@@ -313,10 +313,13 @@ module Gcloud
       #   project = resource_manager.project "tokyo-rain-123"
       #   project.active? #=> true
       #   project.delete
+      #   project.active? #=> false
+      #   project.delete_requested? #=> true
       #
       def delete
         resp = connection.delete_project project_id
         if resp.success?
+          reload!
           true
         else
           fail ApiError.from_response(resp)
@@ -340,10 +343,13 @@ module Gcloud
       #   project = resource_manager.project "tokyo-rain-123"
       #   project.delete_requested? #=> true
       #   project.undelete
+      #   project.delete_requested? #=> false
+      #   project.active? #=> true
       #
       def undelete
         resp = connection.undelete_project project_id
         if resp.success?
+          reload!
           true
         else
           fail ApiError.from_response(resp)
