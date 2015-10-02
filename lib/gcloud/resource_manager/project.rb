@@ -23,15 +23,20 @@ module Gcloud
     ##
     # = Project
     #
+    # Project is a high-level Google Cloud Platform entity. It is a container
+    # for ACLs, APIs, AppEngine Apps, VMs, and other Google Cloud Platform
+    # resources.
+    #
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   resource_manager = gcloud.resource_manager
-    #   resource_manager.projects.each do |project|
-    #     puts projects.project_id
+    #   project = resource_manager.project "tokyo-rain-123"
+    #   project.update do |tx|
+    #     tx.name = "My Project"
+    #     tx.labels["env"] = "production"
     #   end
     #
-    # See Gcloud#resource_manager
     class Project
       ##
       # The Connection object.
