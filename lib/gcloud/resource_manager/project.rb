@@ -201,7 +201,7 @@ module Gcloud
       ##
       # The project lifecycle state.
       #
-      # Acceptable values are:
+      # Possible values are:
       # * +ACTIVE+ - The normal and active state.
       # * +LIFECYCLE_STATE_UNSPECIFIED+ - Unspecified state. This is only
       # used/useful for distinguishing unset values.
