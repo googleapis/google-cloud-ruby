@@ -179,7 +179,9 @@ module Gcloud
       #   Allowed characters are: lowercase and uppercase letters, numbers,
       #   hyphen, single-quote, double-quote, space, and exclamation point.
       #   (+String+)
-      # +name+::
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:labels]</code>::
       #   The labels associated with this project.
       #
       #   Label keys must be between 1 and 63 characters long and must conform
@@ -212,12 +214,16 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
       #   project = resource_manager.create_project "tokyo-rain-123",
-      #                                             "Todos Development",
-      #                                             "env" => "development"
+      #               "Todos Development", labels: {env: :development}
       #
-      def create_project project_id, name = nil, labels = {}
-        labels = nil if labels && labels.empty?
-        resp = connection.create_project project_id, name, labels
+      def create_project project_id, name = nil, options = {}
+        # Handle the options hash being sent on the wrong parameter
+        if name.is_a?(::Hash) && options.empty?
+          options = name
+          name = nil
+        end
+
+        resp = connection.create_project project_id, name, options[:labels]
         if resp.success?
           Project.from_gapi resp.data, connection
         else
