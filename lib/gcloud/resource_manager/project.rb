@@ -302,9 +302,10 @@ module Gcloud
       # +DELETE_REQUESTED+. The deletion starts at an unspecified time, at which
       # point the lifecycle state changes to +DELETE_IN_PROGRESS+.
       #
-      # Until the deletion completes, you can check the lifecycle state checked
-      # by retrieving the project with Manager#project, and the project remains
-      # visible to Manager#projects. However, you cannot update the project.
+      # Until the deletion completes, you can check the lifecycle state by
+      # calling #reload!, or by retrieving the project with Manager#project. The
+      # project remains visible to Manager#project and Manager#projects, but
+      # cannot be updated.
       #
       # After the deletion completes, the project is not retrievable by the
       # Manager#project and Manager#projects methods.
