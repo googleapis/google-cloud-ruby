@@ -114,12 +114,15 @@ module Gcloud
       #
       # === Examples
       #
+      # Labels are read-only and cannot be changed by direct assignment.
+      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
       #   project = resource_manager.project "tokyo-rain-123"
-      #   project.labels["env"] = "dev"
+      #   project.labels["env"] #=> "dev" # read only
+      #   project.labels["env"] = "production" # raises error
       #
       # Labels can be updated by passing a block, or by calling the #labels=
       # method.

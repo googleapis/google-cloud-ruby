@@ -44,7 +44,6 @@ module Gcloud
         #   project = resource_manager.project "tokyo-rain-123"
         #   project.update do |tx|
         #     tx.name = "My Project"
-        #     tx.labels["env"] = "production"
         #   end
         #
         def name= new_name
@@ -65,17 +64,7 @@ module Gcloud
         # Clients should store labels in a representation such as JSON that does
         # not depend on specific characters being disallowed.
         #
-        # === Examples
-        #
-        #   require "gcloud"
-        #
-        #   gcloud = Gcloud.new
-        #   resource_manager = gcloud.resource_manager
-        #   project = resource_manager.project "tokyo-rain-123"
-        #   project.labels["env"] = "dev"
-        #
-        # Labels can be updated by passing a block, or by calling the #labels=
-        # method.
+        # === Example
         #
         #   require "gcloud"
         #
@@ -83,7 +72,6 @@ module Gcloud
         #   resource_manager = gcloud.resource_manager
         #   project = resource_manager.project "tokyo-rain-123"
         #   project.update do |tx|
-        #     tx.name = "My Project"
         #     tx.labels["env"] = "production"
         #   end
         #
@@ -113,7 +101,6 @@ module Gcloud
         #   resource_manager = gcloud.resource_manager
         #   project = resource_manager.project "tokyo-rain-123"
         #   project.update do |tx|
-        #     tx.name = "My Project"
         #     tx.labels = { "env" => "production" }
         #   end
         #
