@@ -298,11 +298,11 @@ module Gcloud
       # point the lifecycle state changes to +DELETE_IN_PROGRESS+.
       #
       # Until the deletion completes, you can check the lifecycle state checked
-      # by retrieving the project with GetProject, and the project remains
-      # visible to ListProjects. However, you cannot update the project.
+      # by retrieving the project with Manager#project, and the project remains
+      # visible to Manager#projects. However, you cannot update the project.
       #
       # After the deletion completes, the project is not retrievable by the
-      # GetProject and ListProjects methods.
+      # Manager#project and Manager#projects methods.
       #
       # The caller must have modify permissions for this project.
       #

@@ -236,15 +236,15 @@ module Gcloud
       # * The project does not have a billing account associated with it.
       # * The project has a lifecycle state of +ACTIVE+.
       # * This method changes the project's lifecycle state from +ACTIVE+ to
-      # +DELETE_REQUESTED_. The deletion starts at an unspecified time, at which
+      # +DELETE_REQUESTED+. The deletion starts at an unspecified time, at which
       # point the lifecycle state changes to +DELETE_IN_PROGRESS+.
       #
       # Until the deletion completes, you can check the lifecycle state checked
-      # by retrieving the project with GetProject, and the project remains
-      # visible to ListProjects. However, you cannot update the project.
+      # by retrieving the project with Manager#project, and the project remains
+      # visible to Manager#projects. However, you cannot update the project.
       #
       # After the deletion completes, the project is not retrievable by the
-      # GetProject and ListProjects methods.
+      # Manager#project and Manager#projects methods.
       #
       # The caller must have modify permissions for this project.
       #
