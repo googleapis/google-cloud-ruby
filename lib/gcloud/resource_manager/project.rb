@@ -114,9 +114,7 @@ module Gcloud
       # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
       #
       # No more than 256 labels can be associated with a given resource.
-      #
-      # Clients should store labels in a representation such as JSON that does
-      # not depend on specific characters being disallowed.
+      # (+Hash+)
       #
       # === Examples
       #
@@ -165,9 +163,7 @@ module Gcloud
       # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
       #
       # No more than 256 labels can be associated with a given resource.
-      #
-      # Clients should store labels in a representation such as JSON that does
-      # not depend on specific characters being disallowed.
+      # (+Hash+)
       #
       # === Example
       #
