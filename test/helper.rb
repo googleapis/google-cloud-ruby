@@ -710,7 +710,6 @@ class MockResourceManager < Minitest::Spec
     {
       "projectNumber" => "123456789#{seed}",
       "projectId" => "example-project-#{seed}",
-      "lifecycleState" => "ACTIVE",
       "name" => name,
       "createTime" => "2015-09-01T12:00:00.00Z",
       "labels" => labels,
