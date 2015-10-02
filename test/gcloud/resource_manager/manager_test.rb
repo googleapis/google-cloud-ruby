@@ -93,23 +93,7 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
     projects.token.must_equal "next_page_token"
   end
 
-  it "lists projects with filter named parameter" do
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "filter"
-      env.params["filter"].must_equal "labels.env:production"
-      env.params.wont_include "maxResults"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "next_page_token")]
-    end
-
-    projects = resource_manager.projects "labels.env:production"
-    projects.count.must_equal 3
-    projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
-    projects.token.wont_be :nil?
-    projects.token.must_equal "next_page_token"
-  end
-
-  it "lists projects with filter option" do
+  it "lists projects with filter set" do
     mock_connection.get "/v1beta1/projects" do |env|
       env.params.must_include "filter"
       env.params["filter"].must_equal "labels.env:production"
