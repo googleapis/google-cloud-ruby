@@ -68,7 +68,7 @@ module Gcloud
       #   * +NAME:howl+ - Equivalent to above.
       #   * +labels.color:*+ - The project has the label color.
       #   * +labels.color:red+ - The project's label color has the value red.
-      #   * +labels.color:red label.size:big+ - The project's label color has
+      #   * +labels.color:red labels.size:big+ - The project's label color has
       #   the value red and its label size has the value big.
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
