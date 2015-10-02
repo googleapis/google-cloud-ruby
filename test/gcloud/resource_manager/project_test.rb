@@ -115,19 +115,41 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
   end
 
   it "deletes itself" do
+    # The delete request
     mock_connection.delete "/v1beta1/projects/#{project.project_id}" do |env|
       [200, {}, ""]
+    end
+
+    # The reload request
+    unspecified_hash = random_project_hash 123
+    unspecified_hash["lifecycleState"] = "LIFECYCLE_STATE_UNSPECIFIED"
+
+    mock_connection.get "/v1beta1/projects/#{project.project_id}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       unspecified_hash.to_json]
     end
 
     project.delete
   end
 
   it "undeletes itself" do
+    # Set project to delete_requested?
+    project.gapi["lifecycleState"] = "DELETE_REQUESTED"
+
+    # The undelete request
     mock_connection.post "/v1beta1/projects/#{project.project_id}:undelete" do |env|
       [200, {}, ""]
     end
 
+    # The reload request
+    mock_connection.get "/v1beta1/projects/#{project.project_id}" do |env|
+      [200, {"Content-Type" => "application/json"},
+       random_project_hash(seed).to_json]
+    end
+
+    project.wont_be :unspecified?
     project.undelete
+    project.must_be :active?
   end
 
   describe :state do
