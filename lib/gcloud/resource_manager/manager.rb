@@ -23,6 +23,8 @@ module Gcloud
     ##
     # = Manager
     #
+    # Provides methods for creating, retrieving, and updating projects.
+    #
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
