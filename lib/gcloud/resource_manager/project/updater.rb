@@ -42,8 +42,8 @@ module Gcloud
         #   gcloud = Gcloud.new
         #   resource_manager = gcloud.resource_manager
         #   project = resource_manager.project "tokyo-rain-123"
-        #   project.update do |tx|
-        #     tx.name = "My Project"
+        #   project.update do |p|
+        #     p.name = "My Project"
         #   end
         #
         def name= new_name
@@ -72,8 +72,8 @@ module Gcloud
         #   gcloud = Gcloud.new
         #   resource_manager = gcloud.resource_manager
         #   project = resource_manager.project "tokyo-rain-123"
-        #   project.update do |tx|
-        #     tx.labels["env"] = "production"
+        #   project.update do |p|
+        #     p.labels["env"] = "production"
         #   end
         #
         def labels
@@ -102,8 +102,8 @@ module Gcloud
         #   gcloud = Gcloud.new
         #   resource_manager = gcloud.resource_manager
         #   project = resource_manager.project "tokyo-rain-123"
-        #   project.update do |tx|
-        #     tx.labels = { "env" => "production" }
+        #   project.update do |p|
+        #     p.labels = { "env" => "production" }
         #   end
         #
         def labels= new_labels
