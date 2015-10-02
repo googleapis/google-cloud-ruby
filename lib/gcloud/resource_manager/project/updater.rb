@@ -20,7 +20,21 @@ module Gcloud
   module ResourceManager
     class Project
       ##
-      # = Project Updater
+      # = DNS Zone Transaction
+      #
+      # This object is used by Project#update when passed a block. These methods
+      # are used to update the project data in a single API call.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   project = resource_manager.project "tokyo-rain-123"
+      #   project.update do |p|
+      #     p.name = "My Project"
+      #     p.labels["env"] = "production"
+      #   end
+      #
       class Updater < DelegateClass(Project)
         ##
         # Create an Updater object.
