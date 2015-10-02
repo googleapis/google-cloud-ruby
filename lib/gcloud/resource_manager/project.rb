@@ -102,10 +102,11 @@ module Gcloud
       # The labels associated with this project.
       #
       # Label keys must be between 1 and 63 characters long and must conform to
-      # the following regular expression: [a-z]([-a-z0-9]*[a-z0-9])?.
+      # the following regular expression:
+      # <code>[a-z]([-a-z0-9]*[a-z0-9])?</code>.
       #
       # Label values must be between 0 and 63 characters long and must conform
-      # to the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?.
+      # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
       #
       # No more than 256 labels can be associated with a given resource.
       #
@@ -152,10 +153,11 @@ module Gcloud
       # Updates the labels associated with this project.
       #
       # Label keys must be between 1 and 63 characters long and must conform to
-      # the following regular expression: [a-z]([-a-z0-9]*[a-z0-9])?.
+      # the following regular expression:
+      # <code>[a-z]([-a-z0-9]*[a-z0-9])?</code>.
       #
       # Label values must be between 0 and 63 characters long and must conform
-      # to the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?.
+      # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
       #
       # No more than 256 labels can be associated with a given resource.
       #
@@ -292,7 +294,7 @@ module Gcloud
       # * The project does not have a billing account associated with it.
       # * The project has a lifecycle state of +ACTIVE+.
       # * This method changes the project's lifecycle state from +ACTIVE+ to
-      # +DELETE_REQUESTED_. The deletion starts at an unspecified time, at which
+      # +DELETE_REQUESTED+. The deletion starts at an unspecified time, at which
       # point the lifecycle state changes to +DELETE_IN_PROGRESS+.
       #
       # Until the deletion completes, you can check the lifecycle state checked
