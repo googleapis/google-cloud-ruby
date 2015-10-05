@@ -338,6 +338,25 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     bucket.url.must_equal "#{new_url_root}/b/#{bucket_name}"
   end
 
+  it "knows if versioning is enabled" do
+      bucket.versioning.must_equal true
+  end
+
+  it "can update the versioning" do
+    mock_connection.patch "/storage/v1/b/#{bucket.name}" do |env|
+      json = JSON.parse env.body
+      json["versioning"]["enabled"].must_equal false
+      updated_gapi = bucket.gapi.dup
+      updated_gapi["versioning"]["enabled"] = false
+      [200, {"Content-Type"=>"application/json"},
+       updated_gapi.to_json]
+    end
+
+    bucket.versioning.must_equal true
+    bucket.versioning = false
+    bucket.versioning.must_equal false
+  end
+
   def create_file_json bucket=nil, name = nil
     random_file_hash(bucket, name).to_json
   end

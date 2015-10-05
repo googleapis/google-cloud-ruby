@@ -57,6 +57,7 @@ class MockStorage < Minitest::Spec
         "metageneration"=>"1",
         "owner"=>{"entity"=>"project-owners-1234567890"},
         "location"=>"US",
+        "versioning"=>{"enabled"=>true},
         "storageClass"=>"STANDARD",
         "etag"=>"CAE="}
   end
