@@ -67,6 +67,34 @@ query = Gcloud::Datastore::Query.new.kind("Task").
 completed_tasks = dataset.run query
 ```
 
+# DNS
+
+[Google Cloud DNS](https://cloud.google.com/dns/) ([docs](https://cloud.google.com/dns/docs)) is a high-performance, resilient, global DNS service that provides a cost-effective way to make your applications and services available to your users. This programmable, authoritative DNS service can be used to easily publish and manage DNS records using the same infrastructure relied upon by Google. To learn more, read [What is Google Cloud DNS?](https://cloud.google.com/dns/what-is-cloud-dns).
+
+See the [gcloud-ruby DNS API documentation](rdoc-ref:Gcloud::Dns) to learn how to connect to Cloud DNS using this library.
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new
+dns = gcloud.dns
+
+# Retrieve a zone
+zone = dns.zone "example-com"
+
+# Update records in the zone
+change = zone.update do |tx|
+  tx.add     "www", "A",  86400, "1.2.3.4"
+  tx.remove  "example.com.", "TXT"
+  tx.replace "example.com.", "MX", 86400, ["10 mail1.example.com.",
+                                           "20 mail2.example.com."]
+  tx.modify "www.example.com.", "CNAME" do |r|
+    r.ttl = 86400 # only change the TTL
+  end
+end
+
+```
+
 # Pub/Sub
 
 [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) ([docs](https://cloud.google.com/pubsub/reference/rest/)) is designed to provide reliable, many-to-many, asynchronous messaging between applications. Publisher applications can send messages to a “topic” and other applications can subscribe to that topic to receive the messages. By decoupling senders and receivers, Google Cloud Pub/Sub allows developers to communicate between independently written applications.
