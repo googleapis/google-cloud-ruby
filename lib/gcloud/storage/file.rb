@@ -229,6 +229,9 @@ module Gcloud
       #   path to copy the file to in the given bucket. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:generation]</code>::
+      #   Select a specific revision of the file to copy. The default is the
+      #   latest version. (+Integer+)
       # <code>options[:acl]</code>::
       #   A predefined set of access controls to apply to new file.
       #   (+String+)
@@ -277,6 +280,11 @@ module Gcloud
       #   file = bucket.file "path/to/my-file.ext"
       #   file.copy "new-destination-bucket",
       #             "path/to/destination/file.ext"
+      #
+      # The file can also be copied by specifying a generation:
+      #
+      #   file.copy "copy/of/previous/generation/file.ext",
+      #             generation: 123456
       #
       def copy dest_bucket_or_path, dest_path = nil, options = {}
         ensure_connection!
