@@ -96,7 +96,7 @@ query = Gcloud::Datastore::Query.new.kind("Task").
 completed_tasks = dataset.run query
 ```
 
-# DNS
+### DNS
 
 - [gcloud-ruby DNS API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Dns.html)
 - [Google Cloud DNS Documentation](https://cloud.google.com/dns/docs)
