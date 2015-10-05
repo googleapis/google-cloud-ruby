@@ -15,6 +15,7 @@ This client supports the following Google Cloud Platform services:
 
 * [Google Cloud BigQuery](#bigquery)
 * [Google Cloud Datastore](#datastore)
+* [Google Cloud DNS](#dns)
 * [Google Cloud Pub/Sub](#pubsub)
 * [Google Cloud Storage](#storage)
 
@@ -93,6 +94,35 @@ dataset.save demo_task
 query = Gcloud::Datastore::Query.new.kind("Task").
   where("completed", "=", true)
 completed_tasks = dataset.run query
+```
+
+# DNS
+
+- [gcloud-ruby DNS API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Dns.html)
+- [Google Cloud DNS Documentation](https://cloud.google.com/dns/docs)
+
+#### Preview
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new
+dns = gcloud.dns
+
+# Retrieve a zone
+zone = dns.zone "example-com"
+
+# Update records in the zone
+change = zone.update do |tx|
+  tx.add     "www", "A",  86400, "1.2.3.4"
+  tx.remove  "example.com.", "TXT"
+  tx.replace "example.com.", "MX", 86400, ["10 mail1.example.com.",
+                                           "20 mail2.example.com."]
+  tx.modify "www.example.com.", "CNAME" do |r|
+    r.ttl = 86400 # only change the TTL
+  end
+end
+
 ```
 
 ### Pub/Sub
