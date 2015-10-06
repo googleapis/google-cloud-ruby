@@ -338,4 +338,35 @@ module Gcloud
   end
 
   # rubocop:enable Metrics/LineLength
+
+  ##
+  # Creates a new object for connecting to the Search service.
+  # Each call creates a new connection.
+  #
+  # === Parameters
+  #
+  # +options+::
+  #   An optional Hash for controlling additional behavior. (+Hash+)
+  # <code>options[:scope]</code>::
+  #   The OAuth 2.0 scopes controlling the set of resources and operations that
+  #   the connection can access. See {Using OAuth 2.0 to Access Google
+  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   or +Array+)
+  #
+  #   The default scope is:
+  #
+  #   * +https://www.googleapis.com/auth/cloudsearch+
+  #
+  # === Returns
+  #
+  # Gcloud::Search::Project
+  #
+  # === Examples
+  #
+  #   require "gcloud"
+  #
+  def search options = {}
+    require "gcloud/search"
+    Gcloud.search @project, @keyfile, options
+  end
 end
