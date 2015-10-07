@@ -339,21 +339,30 @@ extension, however, it would be.</p>
 
 <h3 id="module-Gcloud::Bigquery-label-A+note+about+large+uploads">A note about large uploads<span><a href="#module-Gcloud::Bigquery-label-A+note+about+large+uploads">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>You may encounter a broken pipe error while attempting to upload large
-files. To avoid this problem, add <a
-href="https://rubygems.org/gems/httpclient">httpclient</a> as a dependency
-to your project, and configure <a
-href="https://rubygems.org/gems/faraday">Faraday</a> to use it, after
-requiring <a href="../Gcloud.html">Gcloud</a>, but before initiating your
-<a href="../Gcloud.html">Gcloud</a> connection.</p>
+<p>You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
+upload large files. To avoid this problem, add the <a
+href="https://rubygems.org/gems/httpclient">httpclient</a> gem to your
+project, and the line (or lines) of configuration shown below. These lines
+must execute after you require gcloud but before you make your first gcloud
+connection. The first statement configures <a
+href="https://rubygems.org/gems/faraday">Faraday</a> to use httpclient. The
+second statement, which should only be added if you are using a version of
+Faraday at or above 0.9.2, is a workaround for <a
+href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367">this
+gzip issue</a>.</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
+<span class="ruby-comment"># Use httpclient to avoid broken pipe errors with large uploads</span>
 <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">default_adapter</span> = :<span class="ruby-identifier">httpclient</span>
+
+<span class="ruby-comment"># Only add the following statement if using Faraday &gt;= 0.9.2</span>
+<span class="ruby-comment"># Override gzip middleware with no-op for httpclient</span>
+<span class="ruby-constant">Faraday</span><span class="ruby-operator">::</span><span class="ruby-constant">Response</span>.<span class="ruby-identifier">register_middleware</span> :<span class="ruby-identifier">gzip</span> =<span class="ruby-operator">&gt;</span>
+                                        <span class="ruby-constant">Faraday</span><span class="ruby-operator">::</span><span class="ruby-constant">Response</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">bigquery</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">bigquery</span>
-<span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">bigquery</span>.<span class="ruby-identifier">dataset</span> <span class="ruby-string">&quot;my_dataset&quot;</span>
 </pre>
 
 <h2 id="module-Gcloud::Bigquery-label-Exporting+query+results+to+Google+Cloud+Storage">Exporting query results to Google Cloud <a href="Storage.html">Storage</a><span><a href="#module-Gcloud::Bigquery-label-Exporting+query+results+to+Google+Cloud+Storage">&para;</a> <a href="#top">&uarr;</a></span></h2>
@@ -425,7 +434,7 @@ Data From BigQuery</a> for details.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Oct 05, 2015.
+    Docs built on Oct 07, 2015.
   </div>
 </div>
 
