@@ -229,19 +229,28 @@ module Gcloud
   #
   # === A note about large uploads
   #
-  # You may encounter a broken pipe error while attempting to upload large
-  # files. To avoid this problem, add
-  # {httpclient}[https://rubygems.org/gems/httpclient] as a dependency to your
-  # project, and configure {Faraday}[https://rubygems.org/gems/faraday] to use
-  # it, after requiring Gcloud, but before initiating your Gcloud connection.
+  # You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
+  # upload large files. To avoid this problem, add the
+  # {httpclient}[https://rubygems.org/gems/httpclient] gem to your project, and
+  # the line (or lines) of configuration shown below. These lines must execute
+  # after you require gcloud but before you make your first gcloud connection.
+  # The first statement configures {Faraday}[https://rubygems.org/gems/faraday]
+  # to use httpclient. The second statement, which should only be added if you
+  # are using a version of Faraday at or above 0.9.2, is a workaround for {this
+  # gzip issue}[https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367].
   #
   #   require "gcloud"
   #
+  #   # Use httpclient to avoid broken pipe errors with large uploads
   #   Faraday.default_adapter = :httpclient
+  #
+  #   # Only add the following statement if using Faraday >= 0.9.2
+  #   # Override gzip middleware with no-op for httpclient
+  #   Faraday::Response.register_middleware :gzip =>
+  #                                           Faraday::Response::Middleware
   #
   #   gcloud = Gcloud.new
   #   storage = gcloud.storage
-  #   bucket = storage.bucket "my-todo-app"
   #
   # == Downloading a File
   #
