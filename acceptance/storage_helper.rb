@@ -20,6 +20,8 @@ require "gcloud/storage"
 # and https://github.com/google/google-api-ruby-client/issues/69
 # and https://github.com/google/google-api-ruby-client/issues/106
 Faraday.default_adapter = :httpclient
+# Remove Google API Client Gzip middleware
+Faraday::Response.register_middleware :gzip => Faraday::Response::Middleware
 
 # Increase the number of retries because we run so many tests in parallel
 require "gcloud/backoff"
