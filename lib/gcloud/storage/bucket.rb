@@ -92,6 +92,30 @@ module Gcloud
       end
 
       ##
+      # The CORS configuration for a static website served from the
+      # bucket. For more information, see {Cross-Origin Resource
+      # Sharing (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
+      # Returns an array of hashes containing the attributes specified for the
+      # Bucket resource field
+      # {cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
+      def cors
+        g = @gapi
+        g = g.to_hash if g.respond_to? :to_hash
+        g["cors"] ||= [] # TODO: consider freezing the array so no updates?
+      end
+
+      ##
+      # Updates the CORS configuration for a static website served from the
+      # bucket. For more information, see {Cross-Origin Resource
+      # Sharing (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
+      # Accepts an array of hashes containing the attributes specified for the
+      # {resource description of
+      # cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
+      def cors= new_cors
+        patch_gapi! cors: new_cors
+      end
+
+      ##
       # The bucket's storage class. This defines how objects in the bucket are
       # stored and determines the SLA and the cost of storage. Values include
       # +STANDARD+, +NEARLINE+, and +DURABLE_REDUCED_AVAILABILITY+.
