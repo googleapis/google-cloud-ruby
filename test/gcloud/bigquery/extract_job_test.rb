@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require "uri"
 
-describe Gcloud::Bigquery::CopyJob, :mock_bigquery do
+describe Gcloud::Bigquery::ExtractJob, :mock_bigquery do
   let(:job) { Gcloud::Bigquery::Job.from_gapi extract_job_hash,
                                               bigquery.connection }
   let(:job_id) { job.job_id }
