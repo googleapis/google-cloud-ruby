@@ -151,6 +151,44 @@ module Gcloud
       end
 
       ##
+      # The index page returned from a static website served from the bucket
+      # when a site visitor requests the top level directory. For more
+      # information, see {How to Host a Static Website
+      # }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      def website_main
+        @gapi["website"]["mainPageSuffix"] if @gapi["website"]
+      end
+
+      ##
+      # Updates the index page returned from a static website served from the
+      # bucket when a site visitor requests the top level directory. For more
+      # information, see {How to Host a Static Website
+      # }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      # (+String+)
+      def website_main= website_main
+        patch_gapi! website_main: website_main
+      end
+
+      ##
+      # The page returned from a static website served from the bucket when a
+      # site visitor requests a resource that does not exist. For more
+      # information, see {How to Host a Static Website
+      # }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      def website_404
+        @gapi["website"]["notFoundPage"] if @gapi["website"]
+      end
+
+      ##
+      # Updates the page returned from a static website served from the bucket
+      # when a site visitor requests a resource that does not exist. For more
+      # information, see {How to Host a Static Website
+      # }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      # (+String+)
+      def website_404= website_404
+        patch_gapi! website_404: website_404
+      end
+
+      ##
       # Permanently deletes the bucket.
       # The bucket must be empty before it can be deleted.
       #

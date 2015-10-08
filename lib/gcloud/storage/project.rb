@@ -213,8 +213,8 @@ module Gcloud
       #   at most 900 characters and must be a {valid object
       #   name}[https://cloud.google.com/storage/docs/bucket-naming#objectnames]
       #   . By default, the object prefix is the name
-      #   of the bucket for which the logs are enabled. For more information, see
-      #   {Access Logs}[https://cloud.google.com/storage/docs/access-logs].
+      #   of the bucket for which the logs are enabled. For more information,
+      #   see {Access Logs}[https://cloud.google.com/storage/docs/access-logs].
       #   (+String+)
       # <code>options[:retries]</code>::
       #   The number of times the API call should be retried.
@@ -231,6 +231,16 @@ module Gcloud
       #   Versioning}[https://cloud.google.com/storage/docs/object-versioning]
       #   is to be enabled for the bucket. The default value is +false+.
       #   (+Boolean+)
+      # <code>options[:website_main]</code>::
+      #   The index page returned from a static website served from the bucket
+      #   when a site visitor requests the top level directory. For more
+      #   information, see {How to Host a Static Website
+      #   }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      # <code>options[:website_404]</code>::
+      #   The page returned from a static website served from the bucket when a
+      #   site visitor requests a resource that does not exist. For more
+      #   information, see {How to Host a Static Website
+      #   }[https://cloud.google.com/storage/docs/website-configuration#step4].
       #
       # === Returns
       #
