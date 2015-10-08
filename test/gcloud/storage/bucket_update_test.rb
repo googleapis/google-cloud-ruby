@@ -23,6 +23,8 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
   let(:bucket_url) { "#{bucket_url_root}/b/#{bucket_name}" }
   let(:bucket_location) { "US" }
   let(:bucket_storage_class) { "STANDARD" }
+  let(:bucket_logging_bucket) { "bucket-name-logging" }
+  let(:bucket_logging_prefix) { "AccessLog" }
   let(:bucket_hash) { random_bucket_hash bucket_name, bucket_url, bucket_location, bucket_storage_class }
   let(:bucket) { Gcloud::Storage::Bucket.from_gapi bucket_hash, storage.connection }
 
@@ -38,5 +40,33 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
     bucket.versioning?.must_equal false
     bucket.versioning = true
     bucket.versioning?.must_equal true
+  end
+
+  it "updates its logging bucket" do
+
+    mock_connection.patch "/storage/v1/b/#{bucket_name}" do |env|
+      json = JSON.parse env.body
+      json["logging"]["logBucket"].must_equal bucket_logging_bucket
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, bucket_logging_bucket).to_json]
+    end
+
+    bucket.logging_bucket.must_equal nil
+    bucket.logging_bucket = bucket_logging_bucket
+    bucket.logging_bucket.must_equal bucket_logging_bucket
+  end
+
+  it "updates its logging prefix" do
+
+    mock_connection.patch "/storage/v1/b/#{bucket_name}" do |env|
+      json = JSON.parse env.body
+      json["logging"]["logObjectPrefix"].must_equal bucket_logging_prefix
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, bucket_logging_prefix).to_json]
+    end
+
+    bucket.logging_prefix.must_equal nil
+    bucket.logging_prefix = bucket_logging_prefix
+    bucket.logging_prefix.must_equal bucket_logging_prefix
   end
 end
