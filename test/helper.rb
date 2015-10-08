@@ -47,7 +47,7 @@ class MockStorage < Minitest::Spec
   end
 
 
-  def random_bucket_hash name=random_bucket_name, url_root="https://www.googleapis.com/storage/v1", location="US", storage_class="STANDARD", versioning=nil
+  def random_bucket_hash name=random_bucket_name, url_root="https://www.googleapis.com/storage/v1", location="US", storage_class="STANDARD", versioning=nil, logging_bucket=nil, logging_prefix=nil
     versioning_config = { "enabled" => versioning } if versioning
     { "kind" => "storage#bucket",
       "id" => name,
@@ -58,9 +58,17 @@ class MockStorage < Minitest::Spec
       "metageneration" => "1",
       "owner" => { "entity" => "project-owners-1234567890" },
       "location" => location,
+      "logging" => logging_hash(logging_bucket, logging_prefix),
       "storageClass" => storage_class,
       "versioning" => versioning_config,
       "etag" => "CAE=" }.delete_if { |_, v| v.nil? }
+  end
+
+  def logging_hash(bucket, prefix)
+    {
+      "logBucket" => bucket,
+      "logObjectPrefix" => prefix,
+    }.delete_if { |_, v| v.nil? }  if bucket || prefix
   end
 
   def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890"
