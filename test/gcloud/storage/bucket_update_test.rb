@@ -25,14 +25,15 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
   let(:bucket_storage_class) { "STANDARD" }
   let(:bucket_logging_bucket) { "bucket-name-logging" }
   let(:bucket_logging_prefix) { "AccessLog" }
+  let(:bucket_website_main) { "index.html" }
+  let(:bucket_website_404) { "404.html" }
+
   let(:bucket_hash) { random_bucket_hash bucket_name, bucket_url, bucket_location, bucket_storage_class }
   let(:bucket) { Gcloud::Storage::Bucket.from_gapi bucket_hash, storage.connection }
 
   it "updates its versioning" do
-
     mock_connection.patch "/storage/v1/b/#{bucket_name}" do |env|
-      json = JSON.parse env.body
-      json["versioning"]["enabled"].must_equal true
+      JSON.parse(env.body)["versioning"]["enabled"].must_equal true
       [200, {"Content-Type"=>"application/json"},
        random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, true).to_json]
     end
@@ -43,10 +44,8 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
   end
 
   it "updates its logging bucket" do
-
     mock_connection.patch "/storage/v1/b/#{bucket_name}" do |env|
-      json = JSON.parse env.body
-      json["logging"]["logBucket"].must_equal bucket_logging_bucket
+      JSON.parse(env.body)["logging"]["logBucket"].must_equal bucket_logging_bucket
       [200, {"Content-Type"=>"application/json"},
        random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, bucket_logging_bucket).to_json]
     end
@@ -56,17 +55,27 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
     bucket.logging_bucket.must_equal bucket_logging_bucket
   end
 
-  it "updates its logging prefix" do
-
+  it "updates its website main page" do
     mock_connection.patch "/storage/v1/b/#{bucket_name}" do |env|
-      json = JSON.parse env.body
-      json["logging"]["logObjectPrefix"].must_equal bucket_logging_prefix
+      JSON.parse(env.body)["website"]["mainPageSuffix"].must_equal bucket_website_main
       [200, {"Content-Type"=>"application/json"},
-       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, bucket_logging_prefix).to_json]
+       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, bucket_website_main).to_json]
     end
 
-    bucket.logging_prefix.must_equal nil
-    bucket.logging_prefix = bucket_logging_prefix
-    bucket.logging_prefix.must_equal bucket_logging_prefix
+    bucket.website_main.must_equal nil
+    bucket.website_main = bucket_website_main
+    bucket.website_main.must_equal bucket_website_main
+  end
+
+  it "updates its website not found 404 page" do
+    mock_connection.patch "/storage/v1/b/#{bucket_name}" do |env|
+      JSON.parse(env.body)["website"]["notFoundPage"].must_equal bucket_website_404
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, bucket_website_404).to_json]
+    end
+
+    bucket.website_404.must_equal nil
+    bucket.website_404 = bucket_website_404
+    bucket.website_404.must_equal bucket_website_404
   end
 end
