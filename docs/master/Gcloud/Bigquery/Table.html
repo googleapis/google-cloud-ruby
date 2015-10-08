@@ -1463,6 +1463,19 @@ JSON</a></p>
 </li><li>
 <p><code>avro</code> - <a href="http://avro.apache.org/">Avro</a></p>
 </li></ul>
+</dd><dt><code>options[:compression]</code>
+<dd>
+<p>The compression type to use for exported files. Possible values include
+<code>GZIP</code> and <code>NONE</code>. The default value is
+<code>NONE</code>. (<code>String</code>)</p>
+</dd><dt><code>options[:delimiter]</code>
+<dd>
+<p>Delimiter to use between fields in the exported data. Default is
+<code>,</code>. (<code>String</code>)</p>
+</dd><dt><code>options[:header]</code>
+<dd>
+<p>Whether to print out a header row in the results. Default is
+<code>true</code>. (<code>Boolean</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-extract-label-Returns">Returns<span><a href="#method-i-extract-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -1485,7 +1498,7 @@ JSON</a></p>
 
     
       <!-- <div class="method-source-code" id="extract-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 605</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 614</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">extract</span> <span class="ruby-identifier">extract_url</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">extract_table</span> <span class="ruby-identifier">table_ref</span>, <span class="ruby-identifier">extract_url</span>, <span class="ruby-identifier">options</span>
@@ -1569,7 +1582,7 @@ errors. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="insert-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 787</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 841</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span> <span class="ruby-identifier">rows</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">rows</span> = [<span class="ruby-identifier">rows</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -1668,11 +1681,66 @@ sensitive and must be top-level properties. If not set, BigQuery loads all
 properties. If any named property isn&#39;t found in the Cloud <a
 href="../Datastore.html">Datastore</a> backup, an invalid error is
 returned. (<code>Array</code>)</p>
+</dd><dt><code>options[:jagged_rows]</code>
+<dd>
+<p>Accept rows that are missing trailing optional columns. The missing values
+are treated as nulls. If <code>false</code>, records with missing trailing
+columns are treated as bad records, and if there are too many bad records,
+an invalid error is returned in the job result. The default value is
+<code>false</code>. Only applicable to CSV, ignored for other formats.
+(<code>Boolean</code>)</p>
+</dd><dt><code>options[:quoted_newlines]</code>
+<dd>
+<p>Indicates if BigQuery should allow quoted data sections that contain
+newline characters in a CSV file. The default value is <code>false</code>.
+(<code>Boolean</code>)</p>
+</dd><dt><code>options[:encoding]</code>
+<dd>
+<p>The character encoding of the data. The supported values are
+<code>UTF-8</code> or <code>ISO-8859-1</code>. The default value is
+<code>UTF-8</code>. (<code>String</code>)</p>
 </dd><dt><code>options[:delimiter]</code>
 <dd>
 <p>Specifices the separator for fields in a CSV file. BigQuery converts the
-string to ISO-8859-1 encoding, and then uses the first byte of the encoded
-string to split the data in its raw, binary state.</p>
+string to <code>ISO-8859-1</code> encoding, and then uses the first byte of
+the encoded string to split the data in its raw, binary state. Default is
+<code>,</code>. (<code>String</code>)</p>
+</dd><dt><code>options[:ignore_unknown]</code>
+<dd>
+<p>Indicates if BigQuery should allow extra values that are not represented in
+the table schema. If true, the extra values are ignored. If false, records
+with extra columns are treated as bad records, and if there are too many
+bad records, an invalid error is returned in the job result. The default
+value is <code>false</code>. (<code>Boolean</code>)</p>
+
+<p>The <code>format</code> property determines what BigQuery treats as an
+extra value:</p>
+<ul><li>
+<p><code>CSV</code>: Trailing columns</p>
+</li><li>
+<p><code>JSON</code>: Named values that don&#39;t match any column names</p>
+</li></ul>
+</dd><dt><code>options[:max_bad_records]</code>
+<dd>
+<p>The maximum number of bad records that BigQuery can ignore when running the
+job. If the number of bad records exceeds this value, an invalid error is
+returned in the job result. The default value is <code>0</code>, which
+requires that all records are valid. (<code>Integer</code>)</p>
+</dd><dt><code>options[:quote]</code>
+<dd>
+<p>The value that is used to quote data sections in a CSV file. BigQuery
+converts the string to ISO-8859-1 encoding, and then uses the first byte of
+the encoded string to split the data in its raw, binary state. The default
+value is a double-quote <code>&quot;</code>. If your data does not contain
+quoted sections, set the property value to an empty string. If your data
+contains quoted newline characters, you must also set the
+allowQuotedNewlines property to true. (<code>String</code>)</p>
+</dd><dt><code>options[:skip_leading]</code>
+<dd>
+<p>The number of rows at the top of a CSV file that BigQuery will skip when
+loading the data. The default value is <code>0</code>. This property is
+useful if you have header rows in the file that should be skipped.
+(<code>Integer</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-load-label-Returns">Returns<span><a href="#method-i-load-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -1753,7 +1821,7 @@ gzip issue</a>.</p>
 
     
       <!-- <div class="method-source-code" id="load-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 733</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 787</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">load</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">storage_url?</span> <span class="ruby-identifier">file</span>
@@ -1872,7 +1940,7 @@ gzip issue</a>.</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 818</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 872</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -1912,7 +1980,7 @@ gzip issue</a>.</p>
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 833</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 887</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
