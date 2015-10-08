@@ -588,7 +588,7 @@ module Gcloud
       #   include +GZIP+ and +NONE+. The default value is +NONE+. (+String+)
       # <code>options[:delimiter]</code>::
       #   Delimiter to use between fields in the exported data. Default is
-      #   <code>,</code> (+String+)
+      #   <code>,</code>. (+String+)
       # <code>options[:header]</code>::
       #   Whether to print out a header row in the results. Default is +true+.
       #   (+Boolean+)
@@ -679,8 +679,8 @@ module Gcloud
       # <code>options[:delimiter]</code>::
       #   Specifices the separator for fields in a CSV file. BigQuery converts
       #   the string to +ISO-8859-1+ encoding, and then uses the first byte of
-      #   the encoded string to split the data in its raw, binary state.
-      #   (+String+)
+      #   the encoded string to split the data in its raw, binary state. Default
+      #   is <code>,</code>. (+String+)
       # <code>options[:ignore_unknown]</code>::
       #   Indicates if BigQuery should allow extra values that are not
       #   represented in the table schema. If true, the extra values are
