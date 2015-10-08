@@ -355,35 +355,46 @@ module Gcloud
       protected
 
       def insert_bucket_request name, options = {}
-        logging = logging_config options[:logging_bucket],
-                                 options[:logging_prefix]
         {
           "name" => name,
           "location" => options[:location],
-          "logging" => logging,
+          "logging" => logging_config(options[:logging_bucket],
+                                      options[:logging_prefix]),
           "storageClass" => storage_class(options[:storage_class]),
-          "versioning" => versioning_config(options[:versioning])
+          "versioning" => versioning_config(options[:versioning]),
+          "website" => website_config(options[:website_main],
+                                      options[:website_404])
         }.delete_if { |_, v| v.nil? }
       end
 
       def patch_bucket_request options = {}
         logging = logging_config options[:logging_bucket],
                                  options[:logging_prefix]
+        website = website_config options[:website_main],
+                                 options[:website_404]
         {
           "logging" => logging,
-          "versioning" => versioning_config(options[:versioning])
+          "versioning" => versioning_config(options[:versioning]),
+          "website" => website
         }.delete_if { |_, v| v.nil? }
       end
 
-      def versioning_config(enabled)
+      def versioning_config enabled
         { "enabled" => enabled } unless enabled.nil?
       end
 
-      def logging_config(bucket, prefix)
+      def logging_config bucket, prefix
         {
           "logBucket" => bucket,
-          "logObjectPrefix" => prefix,
-        }.delete_if { |_, v| v.nil? }  if bucket || prefix
+          "logObjectPrefix" => prefix
+        }.delete_if { |_, v| v.nil? } if bucket || prefix
+      end
+
+      def website_config website_main, website_404
+        {
+          "mainPageSuffix" => website_main,
+          "notFoundPage" => website_404
+        }.delete_if { |_, v| v.nil? } if website_main || website_404
       end
 
       def storage_class str #:nodoc:
