@@ -36,13 +36,14 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
       json["configuration"]["load"].wont_include "createDisposition"
       json["configuration"]["load"].wont_include "writeDisposition"
       json["configuration"]["load"]["sourceFormat"].must_equal "CSV"
+      json["configuration"]["load"]["fieldDelimiter"].must_equal "\t"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json", Location: "/resumable/upload/bigquery/v2/projects/#{project}/jobs"},
        load_job_json(table, "some/file/path.csv")]
     end
 
     temp_csv do |file|
-      job = table.load file, format: :csv
+      job = table.load file, format: :csv, delimiter: "\t"
       job.must_be_kind_of Gcloud::Bigquery::LoadJob
     end
   end
