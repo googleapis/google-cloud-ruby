@@ -116,6 +116,41 @@ module Gcloud
       end
 
       ##
+      # The destination bucket name for the bucket's logs. For more information,
+      # see {Access Logs}[https://cloud.google.com/storage/docs/access-logs].
+      def logging_bucket
+        @gapi["logging"]["logBucket"] if @gapi["logging"]
+      end
+
+      ##
+      # Updates the destination bucket for the bucket's logs. For more
+      # information, see {Access
+      # Logs}[https://cloud.google.com/storage/docs/access-logs]. (+String+)
+      def logging_bucket= logging_bucket
+        patch_gapi! logging_bucket: logging_bucket
+      end
+
+      ##
+      # The logging object prefix for the bucket's logs. For more information,
+      # see {Access Logs}[https://cloud.google.com/storage/docs/access-logs].
+      def logging_prefix
+        @gapi["logging"]["logObjectPrefix"] if @gapi["logging"]
+      end
+
+      ##
+      # Updates the logging object prefix. This prefix will be used to create
+      # log object names for the bucket. It can be at most 900 characters and
+      # must be a {valid object
+      # name}[https://cloud.google.com/storage/docs/bucket-naming#objectnames].
+      # By default, the object prefix is the name
+      # of the bucket for which the logs are enabled. For more information, see
+      # {Access Logs}[https://cloud.google.com/storage/docs/access-logs].
+      # (+String+)
+      def logging_prefix= logging_prefix
+        patch_gapi! logging_prefix: logging_prefix
+      end
+
+      ##
       # Permanently deletes the bucket.
       # The bucket must be empty before it can be deleted.
       #
