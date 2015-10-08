@@ -25,6 +25,10 @@ describe Gcloud::Storage::Project, :mock_storage do
   let(:bucket_logging_prefix) { "AccessLog" }
   let(:bucket_website_main) { "index.html" }
   let(:bucket_website_404) { "404.html" }
+  let(:bucket_cors) { [{ "maxAgeSeconds" => 300,
+                         "origin" => ["http://example.org", "https://example.org"],
+                         "method" => ["*"],
+                         "responseHeader" => ["X-My-Custom-Header"] }] }
 
   it "creates a bucket" do
     new_bucket_name = "new-bucket-#{Time.now.to_i}"
@@ -110,6 +114,19 @@ describe Gcloud::Storage::Project, :mock_storage do
     bucket = storage.create_bucket bucket_name, website_main: bucket_website_main, website_404: bucket_website_404
     bucket.website_main.must_equal bucket_website_main
     bucket.website_404.must_equal bucket_website_404
+  end
+
+  it "creates a bucket with raw CORS" do
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      JSON.parse(env.body)["name"].must_equal bucket_name
+      JSON.parse(env.body)["cors"].must_equal bucket_cors
+
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, bucket_cors).to_json]
+    end
+
+    bucket = storage.create_bucket bucket_name, cors: bucket_cors
+    bucket.cors.must_equal bucket_cors
   end
 
   it "creates a bucket with predefined acl" do
