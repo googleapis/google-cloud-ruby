@@ -653,6 +653,10 @@ module Gcloud
       #   names are case sensitive and must be top-level properties. If not set,
       #   BigQuery loads all properties. If any named property isn't found in
       #   the Cloud Datastore backup, an invalid error is returned. (+Array+)
+      # <code>options[:delimiter]</code>::
+      #   Specifices the separator for fields in a CSV file. BigQuery converts
+      #   the string to ISO-8859-1 encoding, and then uses the first byte of
+      #   the encoded string to split the data in its raw, binary state.
       #
       # === Returns
       #

@@ -547,7 +547,8 @@ module Gcloud
               "createDisposition" => create_disposition(options[:create]),
               "writeDisposition" => write_disposition(options[:write]),
               "sourceFormat" => source_format(path, options[:format]),
-              "projectionFields" => projection_fields(options[:projection_fields])
+              "projectionFields" => projection_fields(options[:projection_fields]),
+              "fieldDelimiter" => options[:delimiter]
             }.delete_if { |_, v| v.nil? },
             "dryRun" => options[:dryrun]
           }.delete_if { |_, v| v.nil? }
