@@ -42,6 +42,13 @@ classes:
     name: Topic
   - full_name: Gcloud::Pubsub::Subscription
     name: Subscription
+- full_name: Gcloud::ResourceManager
+  name: "Resource Manager"
+  classes:
+  - full_name: Gcloud::ResourceManager::Manager
+    name: Manager
+  - full_name: Gcloud::ResourceManager::Project
+    name: Project
 - full_name: Gcloud::Storage
   name: Storage
   classes:
