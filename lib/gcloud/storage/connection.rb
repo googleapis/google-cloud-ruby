@@ -358,24 +358,20 @@ module Gcloud
         {
           "name" => name,
           "location" => options[:location],
-          "logging" => logging_config(options[:logging_bucket],
-                                      options[:logging_prefix]),
+          "cors" => options[:cors],
+          "logging" => logging_config(options),
           "storageClass" => storage_class(options[:storage_class]),
           "versioning" => versioning_config(options[:versioning]),
-          "website" => website_config(options[:website_main],
-                                      options[:website_404])
+          "website" => website_config(options)
         }.delete_if { |_, v| v.nil? }
       end
 
       def patch_bucket_request options = {}
-        logging = logging_config options[:logging_bucket],
-                                 options[:logging_prefix]
-        website = website_config options[:website_main],
-                                 options[:website_404]
         {
-          "logging" => logging,
+          "cors" => options[:cors],
+          "logging" => logging_config(options),
           "versioning" => versioning_config(options[:versioning]),
-          "website" => website
+          "website" => website_config(options)
         }.delete_if { |_, v| v.nil? }
       end
 
@@ -383,14 +379,18 @@ module Gcloud
         { "enabled" => enabled } unless enabled.nil?
       end
 
-      def logging_config bucket, prefix
+      def logging_config options
+        bucket = options[:logging_bucket]
+        prefix = options[:logging_prefix]
         {
           "logBucket" => bucket,
           "logObjectPrefix" => prefix
         }.delete_if { |_, v| v.nil? } if bucket || prefix
       end
 
-      def website_config website_main, website_404
+      def website_config options
+        website_main = options[:website_main]
+        website_404 = options[:website_404]
         {
           "mainPageSuffix" => website_main,
           "notFoundPage" => website_404

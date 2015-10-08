@@ -198,6 +198,13 @@ module Gcloud
       #   Name of a bucket. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:cors]</code>::
+      #   The CORS configuration for a static website served from the
+      #   bucket. For more information, see {Cross-Origin Resource
+      #   Sharing (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
+      #   Accepts an array of hashes containing the attributes specified for the
+      #   {resource description of
+      #   cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
       # <code>options[:location]</code>::
       #   The location of the bucket. Object data for objects in the bucket
       #   resides in physical storage within this region. Possible values
