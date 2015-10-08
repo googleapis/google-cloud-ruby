@@ -175,4 +175,48 @@ namespace :pages do
                             "lib/"
     rdoc.options = spec.rdoc_options
   end
+
+  desc "Updates the documentation for a feature branch"
+  task :feature, :push do |t, args|
+    push = args[:push]
+    if ENV["GH_OAUTH_TOKEN"]
+      # don't allow to be run on travis
+      puts "This task cannot be run on travis."
+      exit
+    end
+
+    # only check this if we are not running on travis
+    branch = `git symbolic-ref --short HEAD`.chomp
+    if "master" == branch
+      puts "You are on master. This task is intended to be run from a feature branch."
+      exit
+    end
+
+    unless `git status --porcelain`.chomp.empty?
+      puts "The branch is not clean. Unable to continue."
+      exit
+    end
+
+    tmp   = Pathname.new(Dir.home) + "tmp"
+    docs  = tmp + "feature-docs"
+    FileUtils.remove_dir docs if Dir.exists? docs
+    FileUtils.mkdir_p docs
+
+    Rake::Task["pages:rerdoc"].invoke
+
+    puts `cp -R html/* #{docs}`
+
+    # Checkout origin's gh-pages
+    puts `git checkout gh-pages`
+    puts `git fetch origin`
+    puts `git reset --hard origin/gh-pages`
+
+    # sync the docs
+    puts `rsync -r --delete #{docs}/ docs/master/`
+    # commit changes
+    puts `git add -A .`
+    puts `git commit -m "Update documentation for #{branch}"`
+    puts `git push #{push} gh-pages -f` if push
+    puts `git checkout #{branch}`
+  end
 end
