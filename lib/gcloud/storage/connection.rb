@@ -355,24 +355,35 @@ module Gcloud
       protected
 
       def insert_bucket_request name, options = {}
-        versioning = if options[:versioning]
-                       { "enabled" => options[:versioning] }
-                     end
+        logging = logging_config options[:logging_bucket],
+                                 options[:logging_prefix]
         {
           "name" => name,
           "location" => options[:location],
+          "logging" => logging,
           "storageClass" => storage_class(options[:storage_class]),
-          "versioning" => versioning
+          "versioning" => versioning_config(options[:versioning])
         }.delete_if { |_, v| v.nil? }
       end
 
       def patch_bucket_request options = {}
-        versioning = unless options[:versioning].nil?
-                       { "enabled" => options[:versioning] }
-                     end
+        logging = logging_config options[:logging_bucket],
+                                 options[:logging_prefix]
         {
-          "versioning" => versioning
+          "logging" => logging,
+          "versioning" => versioning_config(options[:versioning])
         }.delete_if { |_, v| v.nil? }
+      end
+
+      def versioning_config(enabled)
+        { "enabled" => enabled } unless enabled.nil?
+      end
+
+      def logging_config(bucket, prefix)
+        {
+          "logBucket" => bucket,
+          "logObjectPrefix" => prefix,
+        }.delete_if { |_, v| v.nil? }  if bucket || prefix
       end
 
       def storage_class str #:nodoc:
