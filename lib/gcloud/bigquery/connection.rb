@@ -527,9 +527,12 @@ module Gcloud
         {
           "configuration" => {
             "extract" => {
-              "destinationUris" => Array(storage_urls),
-              "sourceTable" => table,
-              "destinationFormat" => dest_format
+              "destinationUris"   => Array(storage_urls),
+              "sourceTable"       => table,
+              "destinationFormat" => dest_format,
+              "compression"       => options[:compression],
+              "fieldDelimiter"    => options[:delimiter],
+              "printHeader"       => options[:header]
             }.delete_if { |_, v| v.nil? },
             "dryRun" => options[:dryrun]
           }.delete_if { |_, v| v.nil? }

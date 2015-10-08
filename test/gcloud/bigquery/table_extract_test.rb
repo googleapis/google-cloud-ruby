@@ -42,6 +42,9 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
       json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
       json["configuration"]["extract"].wont_include "destinationFormat"
+      json["configuration"]["extract"].wont_include "compression"
+      json["configuration"]["extract"].wont_include "fieldDelimiter"
+      json["configuration"]["extract"].wont_include "printHeader"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        extract_job_json(table, extract_file)]
@@ -59,6 +62,9 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
       json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
       json["configuration"]["extract"].wont_include "destinationFormat"
+      json["configuration"]["extract"].wont_include "compression"
+      json["configuration"]["extract"].wont_include "fieldDelimiter"
+      json["configuration"]["extract"].wont_include "printHeader"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        extract_job_json(table, extract_file)]
@@ -76,6 +82,9 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
       json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
       json["configuration"]["extract"].wont_include "destinationFormat"
+      json["configuration"]["extract"].wont_include "compression"
+      json["configuration"]["extract"].wont_include "fieldDelimiter"
+      json["configuration"]["extract"].wont_include "printHeader"
       json["configuration"].must_include "dryRun"
       json["configuration"]["dryRun"].must_equal true
       [200, {"Content-Type"=>"application/json"},
@@ -94,6 +103,9 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
       json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
       json["configuration"]["extract"]["destinationFormat"].must_equal "CSV"
+      json["configuration"]["extract"].wont_include "compression"
+      json["configuration"]["extract"].wont_include "fieldDelimiter"
+      json["configuration"]["extract"].wont_include "printHeader"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        extract_job_json(table, extract_file)]
@@ -111,12 +123,35 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
       json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
       json["configuration"]["extract"]["destinationFormat"].must_equal "CSV"
+      json["configuration"]["extract"].wont_include "compression"
+      json["configuration"]["extract"].wont_include "fieldDelimiter"
+      json["configuration"]["extract"].wont_include "printHeader"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        extract_job_json(table, extract_file)]
     end
 
     job = table.extract extract_url, format: :csv
+    job.must_be_kind_of Gcloud::Bigquery::ExtractJob
+  end
+
+  it "can extract itself and specify the csv format and options" do
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(env.body)
+      json["configuration"]["extract"]["destinationUris"].must_equal [extract_url]
+      json["configuration"]["extract"]["sourceTable"]["projectId"].must_equal table.project_id
+      json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
+      json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
+      json["configuration"]["extract"]["destinationFormat"].must_equal "CSV"
+      json["configuration"]["extract"]["compression"].must_equal "GZIP"
+      json["configuration"]["extract"]["fieldDelimiter"].must_equal "\t"
+      json["configuration"]["extract"]["printHeader"].must_equal false
+      json["configuration"].wont_include "dryRun"
+      [200, {"Content-Type"=>"application/json"},
+       extract_job_json(table, extract_file)]
+    end
+
+    job = table.extract extract_url, format: :csv, compression: "GZIP", delimiter: "\t", header: false
     job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
@@ -128,6 +163,9 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
       json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
       json["configuration"]["extract"]["destinationFormat"].must_equal "NEWLINE_DELIMITED_JSON"
+      json["configuration"]["extract"].wont_include "compression"
+      json["configuration"]["extract"].wont_include "fieldDelimiter"
+      json["configuration"]["extract"].wont_include "printHeader"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        extract_job_json(table, extract_file)]
@@ -145,6 +183,9 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
       json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
       json["configuration"]["extract"]["destinationFormat"].must_equal "NEWLINE_DELIMITED_JSON"
+      json["configuration"]["extract"].wont_include "compression"
+      json["configuration"]["extract"].wont_include "fieldDelimiter"
+      json["configuration"]["extract"].wont_include "printHeader"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        extract_job_json(table, extract_file)]
@@ -162,6 +203,9 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
       json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
       json["configuration"]["extract"]["destinationFormat"].must_equal "AVRO"
+      json["configuration"]["extract"].wont_include "compression"
+      json["configuration"]["extract"].wont_include "fieldDelimiter"
+      json["configuration"]["extract"].wont_include "printHeader"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        extract_job_json(table, extract_file)]
@@ -179,6 +223,9 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
       json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
       json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
       json["configuration"]["extract"]["destinationFormat"].must_equal "AVRO"
+      json["configuration"]["extract"].wont_include "compression"
+      json["configuration"]["extract"].wont_include "fieldDelimiter"
+      json["configuration"]["extract"].wont_include "printHeader"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        extract_job_json(table, extract_file)]

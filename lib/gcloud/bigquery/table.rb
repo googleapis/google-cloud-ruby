@@ -583,6 +583,15 @@ module Gcloud
       #   * +csv+ - CSV
       #   * +json+ - {Newline-delimited JSON}[http://jsonlines.org/]
       #   * +avro+ - {Avro}[http://avro.apache.org/]
+      # <code>options[:compression]</code>::
+      #   The compression type to use for exported files. Possible values
+      #   include +GZIP+ and +NONE+. The default value is +NONE+. (+String+)
+      # <code>options[:delimiter]</code>::
+      #   Delimiter to use between fields in the exported data. Default is
+      #   <code>,</code> (+String+)
+      # <code>options[:header]</code>::
+      #   Whether to print out a header row in the results. Default is +true+.
+      #   (+Boolean+)
       #
       # === Returns
       #
