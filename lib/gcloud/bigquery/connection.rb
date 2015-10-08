@@ -542,13 +542,21 @@ module Gcloud
         {
           "configuration" => {
             "load" => {
-              "sourceUris" => Array(urls),
-              "destinationTable" => table,
-              "createDisposition" => create_disposition(options[:create]),
-              "writeDisposition" => write_disposition(options[:write]),
-              "sourceFormat" => source_format(path, options[:format]),
-              "projectionFields" => projection_fields(options[:projection_fields]),
-              "fieldDelimiter" => options[:delimiter]
+              "sourceUris"          => Array(urls),
+              "destinationTable"    => table,
+              "createDisposition"   => create_disposition(options[:create]),
+              "writeDisposition"    => write_disposition(options[:write]),
+              "sourceFormat"        => source_format(path, options[:format]),
+              "projectionFields"    => projection_fields(options[:projection_fields]),
+              "allowJaggedRows"     => options[:jagged_rows],
+              "allowQuotedNewlines" => options[:quoted_newlines],
+              "encoding"            => options[:encoding],
+              "fieldDelimiter"      => options[:delimiter],
+              "ignoreUnknownValues" => options[:ignore_unknown],
+              "maxBadRecords"       => options[:max_bad_records],
+              "quote"               => options[:quote],
+              "schema"              => options[:schema],
+              "skipLeadingRows"     => options[:skip_leading]
             }.delete_if { |_, v| v.nil? },
             "dryRun" => options[:dryrun]
           }.delete_if { |_, v| v.nil? }

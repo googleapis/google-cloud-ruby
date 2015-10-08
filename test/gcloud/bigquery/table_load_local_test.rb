@@ -36,14 +36,54 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
       json["configuration"]["load"].wont_include "createDisposition"
       json["configuration"]["load"].wont_include "writeDisposition"
       json["configuration"]["load"]["sourceFormat"].must_equal "CSV"
-      json["configuration"]["load"]["fieldDelimiter"].must_equal "\t"
+      json["configuration"]["load"].wont_include "allowJaggedRows"
+      json["configuration"]["load"].wont_include "allowQuotedNewlines"
+      json["configuration"]["load"].wont_include "encoding"
+      json["configuration"]["load"].wont_include "fieldDelimiter"
+      json["configuration"]["load"].wont_include "ignoreUnknownValues"
+      json["configuration"]["load"].wont_include "maxBadRecords"
+      json["configuration"]["load"].wont_include "quote"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"].wont_include "skipLeadingRows"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json", Location: "/resumable/upload/bigquery/v2/projects/#{project}/jobs"},
        load_job_json(table, "some/file/path.csv")]
     end
 
     temp_csv do |file|
-      job = table.load file, format: :csv, delimiter: "\t"
+      job = table.load file, format: :csv
+      job.must_be_kind_of Gcloud::Bigquery::LoadJob
+    end
+  end
+
+  it "can upload a csv file with CSV options" do
+    mock_connection.post "/upload/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(get_json_from_multipart_body(env))
+      json["configuration"]["load"]["sourceUris"].must_equal []
+      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
+      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
+      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
+      json["configuration"]["load"].wont_include "createDisposition"
+      json["configuration"]["load"].wont_include "writeDisposition"
+      json["configuration"]["load"]["sourceFormat"].must_equal "CSV"
+      json["configuration"]["load"]["allowJaggedRows"].must_equal true
+      json["configuration"]["load"]["allowQuotedNewlines"].must_equal true
+      json["configuration"]["load"]["encoding"].must_equal "ISO-8859-1"
+      json["configuration"]["load"]["fieldDelimiter"].must_equal "\t"
+      json["configuration"]["load"]["ignoreUnknownValues"].must_equal true
+      json["configuration"]["load"]["maxBadRecords"].must_equal 42
+      json["configuration"]["load"]["quote"].must_equal "'"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"]["skipLeadingRows"].must_equal 1
+      json["configuration"].wont_include "dryRun"
+      [200, {"Content-Type"=>"application/json", Location: "/resumable/upload/bigquery/v2/projects/#{project}/jobs"},
+       load_job_json(table, "some/file/path.csv")]
+    end
+
+    temp_csv do |file|
+      job = table.load file, format: :csv, jagged_rows: true, quoted_newlines: true,
+        encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42,
+        quote: "'", skip_leading: 1
       job.must_be_kind_of Gcloud::Bigquery::LoadJob
     end
   end
@@ -58,6 +98,15 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
       json["configuration"]["load"].wont_include "createDisposition"
       json["configuration"]["load"].wont_include "writeDisposition"
       json["configuration"]["load"]["sourceFormat"].must_equal "NEWLINE_DELIMITED_JSON"
+      json["configuration"]["load"].wont_include "allowJaggedRows"
+      json["configuration"]["load"].wont_include "allowQuotedNewlines"
+      json["configuration"]["load"].wont_include "encoding"
+      json["configuration"]["load"].wont_include "fieldDelimiter"
+      json["configuration"]["load"].wont_include "ignoreUnknownValues"
+      json["configuration"]["load"].wont_include "maxBadRecords"
+      json["configuration"]["load"].wont_include "quote"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"].wont_include "skipLeadingRows"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json", Location: "/resumable/upload/bigquery/v2/projects/#{project}/jobs"},
        load_job_json(table, "some/file/path.json")]
@@ -79,6 +128,15 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
       json["configuration"]["load"].wont_include "createDisposition"
       json["configuration"]["load"].wont_include "writeDisposition"
       json["configuration"]["load"]["sourceFormat"].must_equal "NEWLINE_DELIMITED_JSON"
+      json["configuration"]["load"].wont_include "allowJaggedRows"
+      json["configuration"]["load"].wont_include "allowQuotedNewlines"
+      json["configuration"]["load"].wont_include "encoding"
+      json["configuration"]["load"].wont_include "fieldDelimiter"
+      json["configuration"]["load"].wont_include "ignoreUnknownValues"
+      json["configuration"]["load"].wont_include "maxBadRecords"
+      json["configuration"]["load"].wont_include "quote"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"].wont_include "skipLeadingRows"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json", Location: "/resumable/upload/bigquery/v2/projects/#{project}/jobs"},
        load_job_json(table, "some/file/path.json")]

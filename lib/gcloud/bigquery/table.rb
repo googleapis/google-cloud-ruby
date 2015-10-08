@@ -653,10 +653,55 @@ module Gcloud
       #   names are case sensitive and must be top-level properties. If not set,
       #   BigQuery loads all properties. If any named property isn't found in
       #   the Cloud Datastore backup, an invalid error is returned. (+Array+)
+      # <code>options[:jagged_rows]</code>::
+      #   Accept rows that are missing trailing optional columns. The missing
+      #   values are treated as nulls. If +false+, records with missing trailing
+      #   columns are treated as bad records, and if there are too many bad
+      #   records, an invalid error is returned in the job result. The default
+      #   value is +false+. Only applicable to CSV, ignored for other formats.
+      #   (+Boolean+)
+      # <code>options[:quoted_newlines]</code>::
+      #   Indicates if BigQuery should allow quoted data sections that contain
+      #   newline characters in a CSV file. The default value is +false+.
+      #   (+Boolean+)
+      # <code>options[:encoding]</code>::
+      #   The character encoding of the data. The supported values are +UTF-8+
+      #   or +ISO-8859-1+. The default value is +UTF-8+. (+String+)
       # <code>options[:delimiter]</code>::
       #   Specifices the separator for fields in a CSV file. BigQuery converts
-      #   the string to ISO-8859-1 encoding, and then uses the first byte of
+      #   the string to +ISO-8859-1+ encoding, and then uses the first byte of
       #   the encoded string to split the data in its raw, binary state.
+      #   (+String+)
+      # <code>options[:ignore_unknown]</code>::
+      #   Indicates if BigQuery should allow extra values that are not
+      #   represented in the table schema. If true, the extra values are
+      #   ignored. If false, records with extra columns are treated as bad
+      #   records, and if there are too many bad records, an invalid error is
+      #   returned in the job result. The default value is +false+. (+Boolean+)
+      #
+      #   The +format+ property determines what BigQuery treats as an extra
+      #   value:
+      #
+      #   * +CSV+: Trailing columns
+      #   * +JSON+: Named values that don't match any column names
+      # <code>options[:max_bad_records]</code>::
+      #   The maximum number of bad records that BigQuery can ignore when
+      #   running the job. If the number of bad records exceeds this value, an
+      #   invalid error is returned in the job result. The default value is +0+,
+      #   which requires that all records are valid. (+Integer+)
+      # <code>options[:quote]</code>::
+      #   The value that is used to quote data sections in a CSV file. BigQuery
+      #   converts the string to ISO-8859-1 encoding, and then uses the first
+      #   byte of the encoded string to split the data in its raw, binary state.
+      #   The default value is a double-quote <code>"</code>. If your data does
+      #   not contain quoted sections, set the property value to an empty
+      #   string. If your data contains quoted newline characters, you must also
+      #   set the allowQuotedNewlines property to true. (+String+)
+      # <code>options[:skip_leading]</code>::
+      #   The number of rows at the top of a CSV file that BigQuery will skip
+      #   when loading the data. The default value is +0+. This property is
+      #   useful if you have header rows in the file that should be skipped.
+      #   (+Integer+)
       #
       # === Returns
       #

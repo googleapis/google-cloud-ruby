@@ -49,7 +49,16 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       json["configuration"]["load"].wont_include "createDisposition"
       json["configuration"]["load"].wont_include "writeDisposition"
       json["configuration"]["load"].wont_include "projectionFields"
-      json["configuration"]["load"]["sourceFormat"].must_be :nil?
+      json["configuration"]["load"].wont_include "sourceFormat"
+      json["configuration"]["load"].wont_include "allowJaggedRows"
+      json["configuration"]["load"].wont_include "allowQuotedNewlines"
+      json["configuration"]["load"].wont_include "encoding"
+      json["configuration"]["load"].wont_include "fieldDelimiter"
+      json["configuration"]["load"].wont_include "ignoreUnknownValues"
+      json["configuration"]["load"].wont_include "maxBadRecords"
+      json["configuration"]["load"].wont_include "quote"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"].wont_include "skipLeadingRows"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        load_job_json(table, load_url)]
@@ -72,6 +81,16 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       json["configuration"]["load"].wont_include "createDisposition"
       json["configuration"]["load"].wont_include "writeDisposition"
       json["configuration"]["load"]["sourceFormat"].must_equal "CSV"
+      json["configuration"]["load"].wont_include "allowJaggedRows"
+      json["configuration"]["load"].wont_include "allowQuotedNewlines"
+      json["configuration"]["load"].wont_include "encoding"
+      json["configuration"]["load"].wont_include "fieldDelimiter"
+      json["configuration"]["load"].wont_include "ignoreUnknownValues"
+      json["configuration"]["load"].wont_include "maxBadRecords"
+      json["configuration"]["load"].wont_include "quote"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"].wont_include "skipLeadingRows"
+
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        load_job_json(table, load_url)]
@@ -81,7 +100,7 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
   end
 
-  it "can specify a storage file and derive format" do
+  it "can specify a storage file and derive CSV format" do
     special_file = storage_file "data.csv"
     special_url = special_file.to_gs_url
 
@@ -94,12 +113,56 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       json["configuration"]["load"].wont_include "createDisposition"
       json["configuration"]["load"].wont_include "writeDisposition"
       json["configuration"]["load"]["sourceFormat"].must_equal "CSV"
+      json["configuration"]["load"].wont_include "allowJaggedRows"
+      json["configuration"]["load"].wont_include "allowQuotedNewlines"
+      json["configuration"]["load"].wont_include "encoding"
+      json["configuration"]["load"].wont_include "fieldDelimiter"
+      json["configuration"]["load"].wont_include "ignoreUnknownValues"
+      json["configuration"]["load"].wont_include "maxBadRecords"
+      json["configuration"]["load"].wont_include "quote"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"].wont_include "skipLeadingRows"
+
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        load_job_json(table, load_url)]
     end
 
     job = table.load special_file
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
+  end
+
+  it "can specify a storage file and derive CSV format with CSV options" do
+    special_file = storage_file "data.csv"
+    special_url = special_file.to_gs_url
+
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(env.body)
+      json["configuration"]["load"]["sourceUris"].must_equal [special_url]
+      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
+      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
+      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
+      json["configuration"]["load"].wont_include "createDisposition"
+      json["configuration"]["load"].wont_include "writeDisposition"
+      json["configuration"]["load"]["sourceFormat"].must_equal "CSV"
+      json["configuration"]["load"]["allowJaggedRows"].must_equal true
+      json["configuration"]["load"]["allowQuotedNewlines"].must_equal true
+      json["configuration"]["load"]["encoding"].must_equal "ISO-8859-1"
+      json["configuration"]["load"]["fieldDelimiter"].must_equal "\t"
+      json["configuration"]["load"]["ignoreUnknownValues"].must_equal true
+      json["configuration"]["load"]["maxBadRecords"].must_equal 42
+      json["configuration"]["load"]["quote"].must_equal "'"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"]["skipLeadingRows"].must_equal 1
+
+      json["configuration"].wont_include "dryRun"
+      [200, {"Content-Type"=>"application/json"},
+       load_job_json(table, load_url)]
+    end
+
+    job = table.load special_file, jagged_rows: true, quoted_newlines: true,
+      encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42,
+      quote: "'", skip_leading: 1
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
   end
 
@@ -152,6 +215,16 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
       json["configuration"]["load"].wont_include "createDisposition"
       json["configuration"]["load"].wont_include "writeDisposition"
+      json["configuration"]["load"].wont_include "sourceFormat"
+      json["configuration"]["load"].wont_include "allowJaggedRows"
+      json["configuration"]["load"].wont_include "allowQuotedNewlines"
+      json["configuration"]["load"].wont_include "encoding"
+      json["configuration"]["load"].wont_include "fieldDelimiter"
+      json["configuration"]["load"].wont_include "ignoreUnknownValues"
+      json["configuration"]["load"].wont_include "maxBadRecords"
+      json["configuration"]["load"].wont_include "quote"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"].wont_include "skipLeadingRows"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        load_job_json(table, load_url)]
@@ -170,6 +243,16 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
       json["configuration"]["load"].wont_include "createDisposition"
       json["configuration"]["load"].wont_include "writeDisposition"
+      json["configuration"]["load"].wont_include "sourceFormat"
+      json["configuration"]["load"].wont_include "allowJaggedRows"
+      json["configuration"]["load"].wont_include "allowQuotedNewlines"
+      json["configuration"]["load"].wont_include "encoding"
+      json["configuration"]["load"].wont_include "fieldDelimiter"
+      json["configuration"]["load"].wont_include "ignoreUnknownValues"
+      json["configuration"]["load"].wont_include "maxBadRecords"
+      json["configuration"]["load"].wont_include "quote"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"].wont_include "skipLeadingRows"
       json["configuration"].must_include "dryRun"
       json["configuration"]["dryRun"].must_equal true
       [200, {"Content-Type"=>"application/json"},
@@ -190,6 +273,16 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       json["configuration"]["load"].must_include "createDisposition"
       json["configuration"]["load"]["createDisposition"].must_equal "CREATE_NEVER"
       json["configuration"]["load"].wont_include "writeDisposition"
+      json["configuration"]["load"].wont_include "sourceFormat"
+      json["configuration"]["load"].wont_include "allowJaggedRows"
+      json["configuration"]["load"].wont_include "allowQuotedNewlines"
+      json["configuration"]["load"].wont_include "encoding"
+      json["configuration"]["load"].wont_include "fieldDelimiter"
+      json["configuration"]["load"].wont_include "ignoreUnknownValues"
+      json["configuration"]["load"].wont_include "maxBadRecords"
+      json["configuration"]["load"].wont_include "quote"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"].wont_include "skipLeadingRows"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        load_job_json(table, load_url)]
@@ -209,6 +302,16 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       json["configuration"]["load"].must_include "createDisposition"
       json["configuration"]["load"]["createDisposition"].must_equal "CREATE_NEVER"
       json["configuration"]["load"].wont_include "writeDisposition"
+      json["configuration"]["load"].wont_include "sourceFormat"
+      json["configuration"]["load"].wont_include "allowJaggedRows"
+      json["configuration"]["load"].wont_include "allowQuotedNewlines"
+      json["configuration"]["load"].wont_include "encoding"
+      json["configuration"]["load"].wont_include "fieldDelimiter"
+      json["configuration"]["load"].wont_include "ignoreUnknownValues"
+      json["configuration"]["load"].wont_include "maxBadRecords"
+      json["configuration"]["load"].wont_include "quote"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"].wont_include "skipLeadingRows"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        load_job_json(table, load_url)]
@@ -228,6 +331,16 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       json["configuration"]["load"].wont_include "createDisposition"
       json["configuration"]["load"].must_include "writeDisposition"
       json["configuration"]["load"]["writeDisposition"].must_equal "WRITE_TRUNCATE"
+      json["configuration"]["load"].wont_include "sourceFormat"
+      json["configuration"]["load"].wont_include "allowJaggedRows"
+      json["configuration"]["load"].wont_include "allowQuotedNewlines"
+      json["configuration"]["load"].wont_include "encoding"
+      json["configuration"]["load"].wont_include "fieldDelimiter"
+      json["configuration"]["load"].wont_include "ignoreUnknownValues"
+      json["configuration"]["load"].wont_include "maxBadRecords"
+      json["configuration"]["load"].wont_include "quote"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"].wont_include "skipLeadingRows"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        load_job_json(table, load_url)]
@@ -247,6 +360,16 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       json["configuration"]["load"].wont_include "createDisposition"
       json["configuration"]["load"].must_include "writeDisposition"
       json["configuration"]["load"]["writeDisposition"].must_equal "WRITE_TRUNCATE"
+      json["configuration"]["load"].wont_include "sourceFormat"
+      json["configuration"]["load"].wont_include "allowJaggedRows"
+      json["configuration"]["load"].wont_include "allowQuotedNewlines"
+      json["configuration"]["load"].wont_include "encoding"
+      json["configuration"]["load"].wont_include "fieldDelimiter"
+      json["configuration"]["load"].wont_include "ignoreUnknownValues"
+      json["configuration"]["load"].wont_include "maxBadRecords"
+      json["configuration"]["load"].wont_include "quote"
+      json["configuration"]["load"].wont_include "schema"
+      json["configuration"]["load"].wont_include "skipLeadingRows"
       json["configuration"].wont_include "dryRun"
       [200, {"Content-Type"=>"application/json"},
        load_job_json(table, load_url)]
