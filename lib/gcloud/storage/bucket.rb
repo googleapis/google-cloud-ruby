@@ -213,6 +213,33 @@ module Gcloud
       end
 
       ##
+      # Updates the bucket with changes made in the given block in a single
+      # PATCH request. Nested objects accessible in the block, such as the
+      # values in the CORS configuration, are also mutable and will be included
+      # in the request.
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #
+      #   bucket = storage.bucket "my-bucket"
+      #   bucket.update do |b|
+      #     b.website_main = "index.html"
+      #     b.website_404 = "not_found.html"
+      #     b.cors[0]["method"] = ["PUT"]
+      #     b.cors[1]["responseHeader"] << "X-Another-Custom-Header"
+      #   end
+      #
+      def update
+        updater = Updater.new @gapi
+        yield updater
+        patch_gapi! updater.body_options unless updater.body_options.empty?
+      end
+
+      ##
       # Permanently deletes the bucket.
       # The bucket must be empty before it can be deleted.
       #
@@ -680,6 +707,33 @@ module Gcloud
         end
         return if chunk_size.zero?
         chunk_size
+      end
+
+      ##
+      # Yielded to a block to accumulate changes for a patch request.
+      class Updater
+        attr_reader :body_options
+        ##
+        # Create an Updater object.
+        def initialize gapi
+          @gapi = gapi.dup
+          @gapi = @gapi.to_hash if @gapi.respond_to? :to_hash
+          # TODO: recursive deep to_hash ?
+          @body_options = {}
+        end
+
+        BUCKET_ATTRS = [:cors, :versioning, :logging_bucket, :logging_prefix,
+                        :website_main, :website_404]
+
+        BUCKET_ATTRS.each do |attr|
+          define_method "#{attr}=" do |arg|
+            body_options[attr] = arg
+          end
+        end
+
+        def cors
+          body_options[:cors] = @gapi["cors"] || []
+        end
       end
     end
   end
