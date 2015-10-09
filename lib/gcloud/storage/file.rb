@@ -301,7 +301,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes the file.
+      # Permanently deletes the file.
       #
       # === Returns
       #

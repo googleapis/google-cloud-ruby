@@ -16,6 +16,20 @@ require "helper"
 require "json"
 
 describe Gcloud::Storage::Project, :mock_storage do
+  let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
+  let(:bucket_url_root) { "https://www.googleapis.com/storage/v1" }
+  let(:bucket_url) { "#{bucket_url_root}/b/#{bucket_name}" }
+  let(:bucket_location) { "EU" }
+  let(:bucket_storage_class) { "DURABLE_REDUCED_AVAILABILITY" }
+  let(:bucket_logging_bucket) { "bucket-name-logging" }
+  let(:bucket_logging_prefix) { "AccessLog" }
+  let(:bucket_website_main) { "index.html" }
+  let(:bucket_website_404) { "404.html" }
+  let(:bucket_cors) { [{ "maxAgeSeconds" => 300,
+                         "origin" => ["http://example.org", "https://example.org"],
+                         "method" => ["*"],
+                         "responseHeader" => ["X-My-Custom-Header"] }] }
+
   it "creates a bucket" do
     new_bucket_name = "new-bucket-#{Time.now.to_i}"
 
@@ -28,6 +42,91 @@ describe Gcloud::Storage::Project, :mock_storage do
     end
 
     storage.create_bucket new_bucket_name
+  end
+
+  it "creates a bucket with location" do
+
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      JSON.parse(env.body)["name"].must_equal bucket_name
+      JSON.parse(env.body)["location"].must_equal bucket_location
+
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location).to_json]
+    end
+
+    bucket = storage.create_bucket bucket_name, location: bucket_location
+    bucket.location.must_equal bucket_location
+  end
+
+  it "creates a bucket with storage_class" do
+
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      JSON.parse(env.body)["name"].must_equal bucket_name
+      JSON.parse(env.body)["storageClass"].must_equal bucket_storage_class
+
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class).to_json]
+    end
+
+    bucket = storage.create_bucket bucket_name, storage_class: :dra
+    bucket.storage_class.must_equal bucket_storage_class
+  end
+
+  it "creates a bucket with versioning" do
+
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      JSON.parse(env.body)["name"].must_equal bucket_name
+      JSON.parse(env.body)["versioning"]["enabled"].must_equal true
+
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, true).to_json]
+    end
+
+    bucket = storage.create_bucket bucket_name, versioning: true
+    bucket.versioning?.must_equal true
+  end
+
+  it "creates a bucket with logging bucket and prefix" do
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      JSON.parse(env.body)["name"].must_equal bucket_name
+      JSON.parse(env.body)["logging"]["logBucket"].must_equal bucket_logging_bucket
+      JSON.parse(env.body)["logging"]["logObjectPrefix"].must_equal bucket_logging_prefix
+
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, bucket_logging_bucket, bucket_logging_prefix).to_json]
+    end
+
+    bucket = storage.create_bucket bucket_name, logging_bucket: bucket_logging_bucket, logging_prefix: bucket_logging_prefix
+    bucket.logging_bucket.must_equal bucket_logging_bucket
+    bucket.logging_prefix.must_equal bucket_logging_prefix
+  end
+
+  it "creates a bucket with website main and 404" do
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      JSON.parse(env.body)["name"].must_equal bucket_name
+      JSON.parse(env.body)["website"]["mainPageSuffix"].must_equal bucket_website_main
+      JSON.parse(env.body)["website"]["notFoundPage"].must_equal bucket_website_404
+
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, bucket_website_main, bucket_website_404).to_json]
+    end
+
+    bucket = storage.create_bucket bucket_name, website_main: bucket_website_main, website_404: bucket_website_404
+    bucket.website_main.must_equal bucket_website_main
+    bucket.website_404.must_equal bucket_website_404
+  end
+
+  it "creates a bucket with raw CORS" do
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      JSON.parse(env.body)["name"].must_equal bucket_name
+      JSON.parse(env.body)["cors"].must_equal bucket_cors
+
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, bucket_cors).to_json]
+    end
+
+    bucket = storage.create_bucket bucket_name, cors: bucket_cors
+    bucket.cors.must_equal bucket_cors
   end
 
   it "creates a bucket with predefined acl" do

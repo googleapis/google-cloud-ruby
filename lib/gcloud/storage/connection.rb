@@ -75,27 +75,28 @@ module Gcloud
           @client.execute(
             api_method: @storage.buckets.insert,
             parameters: params,
-            body_object: { name: bucket_name }
+            body_object: insert_bucket_request(bucket_name, options)
           )
         end
       end
 
       ##
-      # Updates a bucket's metadata.
-      def patch_bucket bucket_name, options = {}
+      # Updates a bucket, including its ACL metadata.
+      def patch_bucket bucket_name, param_options = {}, body_options = {}
         params = { bucket: bucket_name,
-                   predefinedAcl: options[:acl],
-                   predefinedDefaultObjectAcl: options.delete(:default_acl)
+                   predefinedAcl: param_options[:acl],
+                   predefinedDefaultObjectAcl: param_options[:default_acl]
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(
           api_method: @storage.buckets.patch,
-          parameters: params
+          parameters: params,
+          body_object: patch_bucket_request(body_options)
         )
       end
 
       ##
-      # Permenently deletes an empty bucket.
+      # Permanently deletes an empty bucket.
       def delete_bucket bucket_name, opts = {}
         incremental_backoff opts do
           @client.execute(
@@ -125,7 +126,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes a bucket ACL.
+      # Permanently deletes a bucket ACL.
       def delete_bucket_acl bucket_name, entity
         @client.execute(
           api_method: @storage.bucket_access_controls.delete,
@@ -153,7 +154,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes a default ACL.
+      # Permanently deletes a default ACL.
       def delete_default_acl bucket_name, entity
         @client.execute(
           api_method: @storage.default_object_access_controls.delete,
@@ -297,7 +298,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes a file.
+      # Permanently deletes a file.
       def delete_file bucket_name, file_path
         @client.execute(
           api_method: @storage.objects.delete,
@@ -329,7 +330,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes a file ACL.
+      # Permanently deletes a file ACL.
       def delete_file_acl bucket_name, file_name, entity, options = {}
         query = { bucket: bucket_name, object: file_name, entity: entity }
         query[:generation] = options[:generation] if options[:generation]
@@ -352,6 +353,57 @@ module Gcloud
       end
 
       protected
+
+      def insert_bucket_request name, options = {}
+        {
+          "name" => name,
+          "location" => options[:location],
+          "cors" => options[:cors],
+          "logging" => logging_config(options),
+          "storageClass" => storage_class(options[:storage_class]),
+          "versioning" => versioning_config(options[:versioning]),
+          "website" => website_config(options)
+        }.delete_if { |_, v| v.nil? }
+      end
+
+      def patch_bucket_request options = {}
+        {
+          "cors" => options[:cors],
+          "logging" => logging_config(options),
+          "versioning" => versioning_config(options[:versioning]),
+          "website" => website_config(options)
+        }.delete_if { |_, v| v.nil? }
+      end
+
+      def versioning_config enabled
+        { "enabled" => enabled } unless enabled.nil?
+      end
+
+      def logging_config options
+        bucket = options[:logging_bucket]
+        prefix = options[:logging_prefix]
+        {
+          "logBucket" => bucket,
+          "logObjectPrefix" => prefix
+        }.delete_if { |_, v| v.nil? } if bucket || prefix
+      end
+
+      def website_config options
+        website_main = options[:website_main]
+        website_404 = options[:website_404]
+        {
+          "mainPageSuffix" => website_main,
+          "notFoundPage" => website_404
+        }.delete_if { |_, v| v.nil? } if website_main || website_404
+      end
+
+      def storage_class str #:nodoc:
+        { "durable_reduced_availability" => "DURABLE_REDUCED_AVAILABILITY",
+          "dra" => "DURABLE_REDUCED_AVAILABILITY",
+          "durable" => "DURABLE_REDUCED_AVAILABILITY",
+          "nearline" => "NEARLINE",
+          "standard" => "STANDARD" }[str.to_s.downcase]
+      end
 
       def incremental_backoff options = {}
         Gcloud::Backoff.new(options).execute do

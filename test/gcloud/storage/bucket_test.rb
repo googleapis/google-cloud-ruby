@@ -18,8 +18,18 @@ require "uri"
 
 describe Gcloud::Storage::Bucket, :mock_storage do
   # Create a bucket object with the project's mocked connection object
-  let(:bucket) { Gcloud::Storage::Bucket.from_gapi random_bucket_hash,
-                                                   storage.connection }
+  let(:bucket_hash) { random_bucket_hash }
+  let(:bucket) { Gcloud::Storage::Bucket.from_gapi bucket_hash, storage.connection }
+
+  it "knows its attributes" do
+    bucket.id.must_equal bucket_hash["id"]
+    bucket.name.must_equal bucket_hash["name"]
+    bucket.created_at.must_equal bucket_hash["timeCreated"]
+    bucket.url.must_equal bucket_hash["selfLink"]
+    bucket.location.must_equal bucket_hash["location"]
+    bucket.storage_class.must_equal bucket_hash["storageClass"]
+    bucket.versioning?.must_equal false
+  end
 
   it "can delete itself" do
     mock_connection.delete "/storage/v1/b/#{bucket.name}" do |env|

@@ -198,9 +198,56 @@ module Gcloud
       #   Name of a bucket. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:cors]</code>::
+      #   The CORS configuration for a static website served from the
+      #   bucket. For more information, see {Cross-Origin Resource
+      #   Sharing (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
+      #   Accepts an array of hashes containing the attributes specified for the
+      #   {resource description of
+      #   cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
+      # <code>options[:location]</code>::
+      #   The location of the bucket. Object data for objects in the bucket
+      #   resides in physical storage within this region. Possible values
+      #   include +ASIA+, +EU+, and +US+.(See the {developer's
+      #   guide}[https://cloud.google.com/storage/docs/bucket-locations] for the
+      #   authoritative list. The default value is +US+. (+String+)
+      # <code>options[:logging_bucket]</code>::
+      #   The destination bucket for the bucket's logs. For more information,
+      #   see {Access
+      #   Logs}[https://cloud.google.com/storage/docs/access-logs]. (+String+)
+      # <code>options[:logging_prefix]</code>::
+      #   The prefix used to create log object names for the bucket. It can be
+      #   at most 900 characters and must be a {valid object
+      #   name}[https://cloud.google.com/storage/docs/bucket-naming#objectnames]
+      #   . By default, the object prefix is the name
+      #   of the bucket for which the logs are enabled. For more information,
+      #   see {Access Logs}[https://cloud.google.com/storage/docs/access-logs].
+      #   (+String+)
       # <code>options[:retries]</code>::
       #   The number of times the API call should be retried.
       #   Default is Gcloud::Backoff.retries. (+Integer+)
+      # <code>options[:storage_class]</code>::
+      #   Defines how objects in the bucket are stored and determines the SLA
+      #   and the cost of storage. Values include +:standard+, +:nearline+, and
+      #   +:dra+ (Durable Reduced Availability), as well as the strings returned
+      #   by Bucket#storage_class. For more information, see {Storage
+      #   Classes}[https://cloud.google.com/storage/docs/storage-classes].
+      #   The default value is +:standard+. (+Symbol+ or +String+)
+      # <code>options[:versioning]</code>::
+      #   Whether {Object
+      #   Versioning}[https://cloud.google.com/storage/docs/object-versioning]
+      #   is to be enabled for the bucket. The default value is +false+.
+      #   (+Boolean+)
+      # <code>options[:website_main]</code>::
+      #   The index page returned from a static website served from the bucket
+      #   when a site visitor requests the top level directory. For more
+      #   information, see {How to Host a Static Website
+      #   }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      # <code>options[:website_404]</code>::
+      #   The page returned from a static website served from the bucket when a
+      #   site visitor requests a resource that does not exist. For more
+      #   information, see {How to Host a Static Website
+      #   }[https://cloud.google.com/storage/docs/website-configuration#step4].
       #
       # === Returns
       #

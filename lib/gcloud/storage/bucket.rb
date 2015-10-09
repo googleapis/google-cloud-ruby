@@ -92,7 +92,128 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes the bucket.
+      # The CORS configuration for a static website served from the
+      # bucket. For more information, see {Cross-Origin Resource
+      # Sharing (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
+      # Returns an array of hashes containing the attributes specified for the
+      # Bucket resource field
+      # {cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
+      def cors
+        g = @gapi
+        g = g.to_hash if g.respond_to? :to_hash
+        g["cors"] ||= [] # TODO: consider freezing the array so no updates?
+      end
+
+      ##
+      # Updates the CORS configuration for a static website served from the
+      # bucket. For more information, see {Cross-Origin Resource
+      # Sharing (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
+      # Accepts an array of hashes containing the attributes specified for the
+      # {resource description of
+      # cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
+      def cors= new_cors
+        patch_gapi! cors: new_cors
+      end
+
+      ##
+      # The bucket's storage class. This defines how objects in the bucket are
+      # stored and determines the SLA and the cost of storage. Values include
+      # +STANDARD+, +NEARLINE+, and +DURABLE_REDUCED_AVAILABILITY+.
+      def storage_class
+        @gapi["storageClass"]
+      end
+
+      ##
+      # Whether {Object
+      # Versioning}[https://cloud.google.com/storage/docs/object-versioning] is
+      # enabled for the bucket.
+      def versioning?
+        !@gapi["versioning"].nil? && @gapi["versioning"]["enabled"]
+      end
+
+      ##
+      # Updates whether {Object
+      # Versioning}[https://cloud.google.com/storage/docs/object-versioning] is
+      # enabled for the bucket. (+Boolean+)
+      def versioning= new_versioning
+        patch_gapi! versioning: new_versioning
+      end
+
+      ##
+      # The destination bucket name for the bucket's logs. For more information,
+      # see {Access Logs}[https://cloud.google.com/storage/docs/access-logs].
+      def logging_bucket
+        @gapi["logging"]["logBucket"] if @gapi["logging"]
+      end
+
+      ##
+      # Updates the destination bucket for the bucket's logs. For more
+      # information, see {Access
+      # Logs}[https://cloud.google.com/storage/docs/access-logs]. (+String+)
+      def logging_bucket= logging_bucket
+        patch_gapi! logging_bucket: logging_bucket
+      end
+
+      ##
+      # The logging object prefix for the bucket's logs. For more information,
+      # see {Access Logs}[https://cloud.google.com/storage/docs/access-logs].
+      def logging_prefix
+        @gapi["logging"]["logObjectPrefix"] if @gapi["logging"]
+      end
+
+      ##
+      # Updates the logging object prefix. This prefix will be used to create
+      # log object names for the bucket. It can be at most 900 characters and
+      # must be a {valid object
+      # name}[https://cloud.google.com/storage/docs/bucket-naming#objectnames].
+      # By default, the object prefix is the name
+      # of the bucket for which the logs are enabled. For more information, see
+      # {Access Logs}[https://cloud.google.com/storage/docs/access-logs].
+      # (+String+)
+      def logging_prefix= logging_prefix
+        patch_gapi! logging_prefix: logging_prefix
+      end
+
+      ##
+      # The index page returned from a static website served from the bucket
+      # when a site visitor requests the top level directory. For more
+      # information, see {How to Host a Static Website
+      # }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      def website_main
+        @gapi["website"]["mainPageSuffix"] if @gapi["website"]
+      end
+
+      ##
+      # Updates the index page returned from a static website served from the
+      # bucket when a site visitor requests the top level directory. For more
+      # information, see {How to Host a Static Website
+      # }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      # (+String+)
+      def website_main= website_main
+        patch_gapi! website_main: website_main
+      end
+
+      ##
+      # The page returned from a static website served from the bucket when a
+      # site visitor requests a resource that does not exist. For more
+      # information, see {How to Host a Static Website
+      # }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      def website_404
+        @gapi["website"]["notFoundPage"] if @gapi["website"]
+      end
+
+      ##
+      # Updates the page returned from a static website served from the bucket
+      # when a site visitor requests a resource that does not exist. For more
+      # information, see {How to Host a Static Website
+      # }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      # (+String+)
+      def website_404= website_404
+        patch_gapi! website_404: website_404
+      end
+
+      ##
+      # Permanently deletes the bucket.
       # The bucket must be empty before it can be deleted.
       #
       # === Parameters
@@ -310,7 +431,7 @@ module Gcloud
       # A chunk_size value can be provided in the options to be used
       # in resumable uploads. This value is the number of bytes per
       # chunk and must be divisible by 256KB. If it is not divisible
-      # by 265KB then it will be lowered to the nearest acceptible
+      # by 265KB then it will be lowered to the nearest acceptable
       # value.
       #
       #   require "gcloud"
@@ -501,6 +622,16 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      def patch_gapi! options = {}
+        ensure_connection!
+        resp = connection.patch_bucket name, {}, options
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
       end
 
       ##
