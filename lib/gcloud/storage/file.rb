@@ -22,7 +22,16 @@ module Gcloud
     ##
     # = File
     #
-    # Represents the File/Object that belong to a Bucket.
+    # Represents a File
+    # ({Object}[https://cloud.google.com/storage/docs/json_api/v1/objects]) that
+    # belongs to a Bucket. Files (Objects) are
+    # the individual pieces of data that you store in Google Cloud Storage. A
+    # file can be up to 5 TB in size. Files have two components:
+    # data and metadata. The data component is the data from an external file or
+    # other data source that you want to store in Google Cloud Storage. The
+    # metadata component is a collection of name-value pairs that describe
+    # various qualities of the data. For more information, see {Concepts and
+    # Techniques}[https://cloud.google.com/storage/docs/concepts-techniques].
     #
     #   require "gcloud"
     #
