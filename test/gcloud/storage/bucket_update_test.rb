@@ -35,6 +35,10 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
   let(:bucket_hash) { random_bucket_hash bucket_name, bucket_url, bucket_location, bucket_storage_class }
   let(:bucket) { Gcloud::Storage::Bucket.from_gapi bucket_hash, storage.connection }
 
+  let(:bucket_with_cors_hash) { random_bucket_hash bucket_name, bucket_url, bucket_location, bucket_storage_class,
+                                                   nil, nil, nil, nil, nil, bucket_cors }
+  let(:bucket_with_cors) { Gcloud::Storage::Bucket.from_gapi bucket_with_cors_hash, storage.connection }
+
   it "updates its versioning" do
     mock_connection.patch "/storage/v1/b/#{bucket_name}" do |env|
       JSON.parse(env.body)["versioning"]["enabled"].must_equal true
@@ -112,5 +116,50 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
     bucket.cors.must_equal []
     bucket.cors = bucket_cors
     bucket.cors.must_equal bucket_cors
+  end
+
+  it "updates multiple attributes in a block" do
+    mock_connection.patch "/storage/v1/b/#{bucket_name}" do |env|
+      JSON.parse(env.body)["website"]["mainPageSuffix"].must_equal bucket_website_main
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, bucket_website_main, bucket_website_404).to_json]
+    end
+
+    bucket.website_main.must_equal nil
+    bucket.website_404.must_equal nil
+    bucket.update do |b|
+      b.website_main = bucket_website_main
+      b.website_404 = bucket_website_404
+    end
+    bucket.website_main.must_equal bucket_website_main
+    bucket.website_404.must_equal bucket_website_404
+  end
+
+  it "updates existing cors rules in a block" do
+    mock_connection.patch "/storage/v1/b/#{bucket_with_cors.name}" do |env|
+      json = JSON.parse env.body
+      rules = json["cors"]
+      rules.count.must_equal 1
+      rule = rules.first
+      rule["maxAgeSeconds"].must_equal 600
+      rule["origin"].must_equal ["http://example.org", "https://example.org", "https://example.com"]
+      rule["method"].must_equal ["PUT"]
+      rule["responseHeader"].must_equal ["X-My-Custom-Header", "X-Another-Custom-Header"]
+
+      updated_gapi = bucket_with_cors.gapi.dup
+      updated_gapi["cors"] = json["cors"]
+      [200, { "Content-Type" => "application/json" },
+       random_bucket_hash(bucket_name, bucket_url, bucket_location,
+                                 bucket_storage_class, nil, nil, nil, nil, nil,
+                                 bucket_cors).to_json]
+    end
+
+
+    bucket_with_cors.update do |b|
+      b.cors.first["maxAgeSeconds"] = 600
+      b.cors.first["origin"] << "https://example.com"
+      b.cors.first["method"] = ["PUT"]
+      b.cors.first["responseHeader"] << "X-Another-Custom-Header"
+    end
   end
 end
