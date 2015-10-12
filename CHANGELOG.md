@@ -1,5 +1,17 @@
 # Release History
 
+### 0.4.0 / 2015-10-12
+
+#### Major changes
+
+* Add DNS Service
+
+#### Minor changes
+
+* Improved BigQuery table recognition from a string (vitaliel)
+* Add missing options from BigQuery `Table#load` (gramos74)
+* Add missing options from BigQuery `Table#extract`
+
 ### 0.3.1 / 2015-09-08
 
 #### Changes
