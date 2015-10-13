@@ -18,17 +18,47 @@ require "uri"
 
 describe Gcloud::Storage::Bucket, :mock_storage do
   # Create a bucket object with the project's mocked connection object
-  let(:bucket_hash) { random_bucket_hash }
+  let(:bucket_hash) { random_bucket_hash  }
   let(:bucket) { Gcloud::Storage::Bucket.from_gapi bucket_hash, storage.connection }
 
+  let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
+  let(:bucket_url_root) { "https://www.googleapis.com/storage/v1" }
+  let(:bucket_url) { "#{bucket_url_root}/b/#{bucket_name}" }
+  let(:bucket_cors) { [{ "maxAgeSeconds" => 300,
+                         "origin" => ["http://example.org", "https://example.org"],
+                         "method" => ["*"],
+                         "responseHeader" => ["X-My-Custom-Header"] }] }
+  let(:bucket_location) { "US" }
+  let(:bucket_logging_bucket) { "bucket-name-logging" }
+  let(:bucket_logging_prefix) { "AccessLog" }
+  let(:bucket_storage_class) { "STANDARD" }
+  let(:bucket_versioning) { true }
+  let(:bucket_website_main) { "index.html" }
+  let(:bucket_website_404) { "404.html" }
+  let(:bucket_hash_complete) { random_bucket_hash bucket_name, bucket_url_root,
+                                 bucket_location, bucket_storage_class, bucket_versioning,
+                                 bucket_logging_bucket, bucket_logging_prefix, bucket_website_main,
+                                 bucket_website_404, bucket_cors }
+  let(:bucket_complete) { Gcloud::Storage::Bucket.from_gapi bucket_hash_complete, storage.connection }
+
   it "knows its attributes" do
-    bucket.id.must_equal bucket_hash["id"]
-    bucket.name.must_equal bucket_hash["name"]
-    bucket.created_at.must_equal bucket_hash["timeCreated"]
-    bucket.url.must_equal bucket_hash["selfLink"]
-    bucket.location.must_equal bucket_hash["location"]
-    bucket.storage_class.must_equal bucket_hash["storageClass"]
-    bucket.versioning?.must_equal false
+    bucket_complete.id.must_equal bucket_hash_complete["id"]
+    bucket_complete.name.must_equal bucket_name
+    bucket_complete.created_at.must_equal bucket_hash_complete["timeCreated"]
+    bucket_complete.url.must_equal bucket_url
+    bucket_complete.location.must_equal bucket_location
+    bucket_complete.logging_bucket.must_equal bucket_logging_bucket
+    bucket_complete.logging_prefix.must_equal bucket_logging_prefix
+    bucket_complete.storage_class.must_equal bucket_storage_class
+    bucket_complete.versioning?.must_equal bucket_versioning
+    bucket_complete.website_main.must_equal bucket_website_main
+    bucket_complete.website_404.must_equal bucket_website_404
+  end
+
+  it "return frozen cors" do
+    bucket_complete.cors.must_equal bucket_hash_complete["cors"]
+    bucket_complete.cors.frozen?.must_equal true
+    bucket_complete.cors.first.frozen?.must_equal true
   end
 
   it "can delete itself" do
