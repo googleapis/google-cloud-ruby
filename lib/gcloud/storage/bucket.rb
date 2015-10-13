@@ -15,6 +15,7 @@
 
 require "gcloud/storage/bucket/acl"
 require "gcloud/storage/bucket/list"
+require "gcloud/storage/bucket/cors"
 require "gcloud/storage/file"
 require "gcloud/upload"
 
@@ -101,7 +102,9 @@ module Gcloud
       def cors
         g = @gapi
         g = g.to_hash if g.respond_to? :to_hash
-        g["cors"] ||= [] # TODO: consider freezing the array so no updates?
+        # TODO: consider freezing the array so no updates?
+        # TODO: deep to_hash...
+        g["cors"] ||= []
       end
 
       ##
@@ -214,11 +217,12 @@ module Gcloud
 
       ##
       # Updates the bucket with changes made in the given block in a single
-      # PATCH request. Nested objects accessible in the block, such as the
-      # values in the CORS configuration, are also mutable and will be included
-      # in the request.
+      # PATCH request. The following attributes may be set: #cors=,
+      # #logging_bucket=, #logging_prefix=, #versioning=, #website_main=, and
+      # #website_404=. In addition, the #cors configuration accessible in the
+      # block is completely mutable and will be included in the request.
       #
-      # === Example
+      # === Examples
       #
       #   require "gcloud"
       #
@@ -233,8 +237,26 @@ module Gcloud
       #     b.cors[1]["responseHeader"] << "X-Another-Custom-Header"
       #   end
       #
+      # New CORS rules can also be added in a nested block. See Bucket::Cors for
+      # details.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #   bucket = storage.bucket "my-todo-app"
+      #
+      #   bucket.update do |b|
+      #     b.cors do |c|
+      #       c.add_rule ["http://example.org", "https://example.org"],
+      #                  "*",
+      #                  response_headers: ["X-My-Custom-Header"],
+      #                  max_age: 300
+      #     end
+      #   end
+      #
       def update
-        updater = Updater.new @gapi
+        updater = Updater.new @gapi["cors"]
         yield updater
         patch_gapi! updater.body_options unless updater.body_options.empty?
       end
@@ -715,14 +737,13 @@ module Gcloud
         attr_reader :body_options
         ##
         # Create an Updater object.
-        def initialize gapi
-          @gapi = gapi.dup
-          @gapi = @gapi.to_hash if @gapi.respond_to? :to_hash
-          # TODO: recursive deep to_hash ?
+        def initialize cors
+          @cors = cors ? Array(cors.dup) : []
+          @cors = @cors.map { |x| x.to_hash if x.respond_to? :to_hash }
           @body_options = {}
         end
 
-        BUCKET_ATTRS = [:cors, :versioning, :logging_bucket, :logging_prefix,
+        BUCKET_ATTRS = [:cors, :logging_bucket, :logging_prefix, :versioning,
                         :website_main, :website_404]
 
         BUCKET_ATTRS.each do |attr|
@@ -731,8 +752,17 @@ module Gcloud
           end
         end
 
+        ##
+        # Return CORS for mutation. Also adds CORS to @body_options so that it
+        # is included in the patch request.
         def cors
-          body_options[:cors] = @gapi["cors"] || []
+          body_options[:cors] ||= @cors
+          if block_given?
+            cors_builder = Bucket::Cors.new body_options[:cors]
+            yield cors_builder
+            body_options[:cors] = cors_builder.cors if cors_builder.changed?
+          end
+          body_options[:cors]
         end
       end
     end
