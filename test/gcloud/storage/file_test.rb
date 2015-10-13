@@ -22,8 +22,21 @@ describe Gcloud::Storage::File, :mock_storage do
                                                    storage.connection }
 
   # Create a file object with the project's mocked connection object
-  let(:file) { Gcloud::Storage::File.from_gapi random_file_hash(bucket.name, "file.ext"),
-                                               storage.connection }
+  let(:file_hash) { random_file_hash bucket.name, "file.ext" }
+  let(:file) { Gcloud::Storage::File.from_gapi file_hash, storage.connection }
+
+  it "knows its attributes" do
+    file.id.must_equal file_hash["id"]
+    file.name.must_equal file_hash["name"]
+    file.created_at.must_equal file_hash["timeCreated"]
+    file.url.must_equal file_hash["selfLink"]
+
+    file.cache_control.must_equal "public, max-age=3600"
+    file.content_disposition.must_equal "attachment; filename=filename.ext"
+    file.content_encoding.must_equal "gzip"
+    file.content_language.must_equal "en"
+    file.content_type.must_equal "text/plain"
+  end
 
   it "can delete itself" do
     mock_connection.delete "/storage/v1/b/#{bucket.name}/o/#{file.name}" do |env|
