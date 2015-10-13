@@ -113,6 +113,12 @@ module Gcloud
       end
 
       ##
+      # Creation time of the file.
+      def created_at
+        @gapi["timeCreated"]
+      end
+
+      ##
       # The creation or modification time of the file.
       # For buckets with versioning enabled, changing an object's
       # metadata does not change this property.
@@ -137,6 +143,78 @@ module Gcloud
       # HTTP 1.1 Entity tag for the file.
       def etag
         @gapi["etag"]
+      end
+
+      ##
+      # The {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      # directive for the file data.
+      def cache_control
+        @gapi["cacheControl"]
+      end
+
+      ##
+      # Updates the
+      # {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      # directive for the file data.
+      def cache_control= cache_control
+        patch_gapi! cache_control: cache_control
+      end
+
+      ##
+      # The {Content-Disposition}[https://tools.ietf.org/html/rfc6266] of the
+      # file data.
+      def content_disposition
+        @gapi["contentDisposition"]
+      end
+
+      ##
+      # Updates the {Content-Disposition}[https://tools.ietf.org/html/rfc6266]
+      # of the file data.
+      def content_disposition= content_disposition
+        patch_gapi! content_disposition: content_disposition
+      end
+
+      ##
+      # The {Content-Encoding
+      # }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] of the file data.
+      def content_encoding
+        @gapi["contentEncoding"]
+      end
+
+      ##
+      # Updates the {Content-Encoding
+      # }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] of the file data.
+      def content_encoding= content_encoding
+        patch_gapi! content_encoding: content_encoding
+      end
+
+      ##
+      # The {Content-Language}[http://tools.ietf.org/html/bcp47] of the file
+      # data.
+      def content_language
+        @gapi["contentLanguage"]
+      end
+
+      ##
+      # Updates the {Content-Language}[http://tools.ietf.org/html/bcp47] of the
+      # file data.
+      def content_language= content_language
+        patch_gapi! content_language: content_language
+      end
+
+      ##
+      # The {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17] of
+      # the file data.
+      def content_type
+        @gapi["contentType"]
+      end
+
+      ##
+      # Updates the
+      # {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17] of the
+      # file data.
+      def content_type= content_type
+        patch_gapi! content_type: content_type
       end
 
       ##
@@ -515,6 +593,16 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      def patch_gapi! options = {}
+        ensure_connection!
+        resp = connection.patch_file bucket, name, {}, options
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
       end
 
       def fix_copy_args dest_bucket, dest_path, options = {}
