@@ -76,35 +76,61 @@ module Gcloud
       end
 
       ##
-      # The location of the bucket.
-      # Object data for objects in the bucket resides in physical
-      # storage within this region. Defaults to US.
-      # See the developer's guide for the authoritative list.
-      #
-      # https://cloud.google.com/storage/docs/concepts-techniques
-      def location
-        @gapi["location"]
-      end
-
-      ##
       # Creation time of the bucket.
       def created_at
         @gapi["timeCreated"]
       end
 
       ##
-      # The CORS configuration for a static website served from the
-      # bucket. For more information, see {Cross-Origin Resource
+      # Returns the current CORS configuration for a static website served from
+      # the bucket. For more information, see {Cross-Origin Resource
       # Sharing (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
-      # Returns an array of hashes containing the attributes specified for the
-      # Bucket resource field
+      # The return value is a frozen (unmodifiable) array of hashes containing
+      # the attributes specified for the Bucket resource field
       # {cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
+      #
+      # This method also accepts a block for updating the bucket's CORS rules.
+      # See Bucket::Cors for details.
+      #
+      # === Examples
+      #
+      # Retrieving the bucket's CORS rules.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #
+      #   bucket = storage.bucket "my-todo-app"
+      #   bucket.cors #=> [{"origin"=>["http://example.org"],
+      #               #     "method"=>["GET","POST","DELETE"],
+      #               #     "responseHeader"=>["X-My-Custom-Header"],
+      #               #     "maxAgeSeconds"=>3600}]
+      #
+      # Updating the bucket's CORS rules inside a block.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #   bucket = storage.bucket "my-todo-app"
+      #
+      #   bucket.update do |b|
+      #     b.cors do |c|
+      #       c.add_rule ["http://example.org", "https://example.org"],
+      #                  "*",
+      #                  response_headers: ["X-My-Custom-Header"],
+      #                  max_age: 3600
+      #     end
+      #   end
+      #
       def cors
-        g = @gapi
-        g = g.to_hash if g.respond_to? :to_hash
-        # TODO: consider freezing the array so no updates?
-        # TODO: deep to_hash...
-        g["cors"] ||= []
+        if block_given?
+          cors_builder = Bucket::Cors.new @gapi["cors"]
+          yield cors_builder
+          self.cors = cors_builder.cors if cors_builder.changed?
+        end
+        deep_dup_and_freeze @gapi["cors"]
       end
 
       ##
@@ -119,27 +145,14 @@ module Gcloud
       end
 
       ##
-      # The bucket's storage class. This defines how objects in the bucket are
-      # stored and determines the SLA and the cost of storage. Values include
-      # +STANDARD+, +NEARLINE+, and +DURABLE_REDUCED_AVAILABILITY+.
-      def storage_class
-        @gapi["storageClass"]
-      end
-
-      ##
-      # Whether {Object
-      # Versioning}[https://cloud.google.com/storage/docs/object-versioning] is
-      # enabled for the bucket.
-      def versioning?
-        !@gapi["versioning"].nil? && @gapi["versioning"]["enabled"]
-      end
-
-      ##
-      # Updates whether {Object
-      # Versioning}[https://cloud.google.com/storage/docs/object-versioning] is
-      # enabled for the bucket. (+Boolean+)
-      def versioning= new_versioning
-        patch_gapi! versioning: new_versioning
+      # The location of the bucket.
+      # Object data for objects in the bucket resides in physical
+      # storage within this region. Defaults to US.
+      # See the developer's guide for the authoritative list.
+      #
+      # https://cloud.google.com/storage/docs/concepts-techniques
+      def location
+        @gapi["location"]
       end
 
       ##
@@ -175,6 +188,30 @@ module Gcloud
       # (+String+)
       def logging_prefix= logging_prefix
         patch_gapi! logging_prefix: logging_prefix
+      end
+
+      ##
+      # The bucket's storage class. This defines how objects in the bucket are
+      # stored and determines the SLA and the cost of storage. Values include
+      # +STANDARD+, +NEARLINE+, and +DURABLE_REDUCED_AVAILABILITY+.
+      def storage_class
+        @gapi["storageClass"]
+      end
+
+      ##
+      # Whether {Object
+      # Versioning}[https://cloud.google.com/storage/docs/object-versioning] is
+      # enabled for the bucket.
+      def versioning?
+        !@gapi["versioning"].nil? && @gapi["versioning"]["enabled"]
+      end
+
+      ##
+      # Updates whether {Object
+      # Versioning}[https://cloud.google.com/storage/docs/object-versioning] is
+      # enabled for the bucket. (+Boolean+)
+      def versioning= new_versioning
+        patch_gapi! versioning: new_versioning
       end
 
       ##
@@ -233,7 +270,7 @@ module Gcloud
       #   bucket.update do |b|
       #     b.website_main = "index.html"
       #     b.website_404 = "not_found.html"
-      #     b.cors[0]["method"] = ["PUT"]
+      #     b.cors[0]["method"] = ["GET","POST","DELETE"]
       #     b.cors[1]["responseHeader"] << "X-Another-Custom-Header"
       #   end
       #
@@ -729,6 +766,20 @@ module Gcloud
         end
         return if chunk_size.zero?
         chunk_size
+      end
+
+      ##
+      # Given nil, empty array, a gapi array of hashes, or any value, returns a
+      # deeply dup'd and frozen array of simple hashes or values (not gapi
+      # objects.)
+      def deep_dup_and_freeze array
+        return [].freeze if array.nil? || array.empty?
+        array = Array(array.dup)
+        array = array.map do |h|
+          h = h.to_hash if h.respond_to? :to_hash
+          h.dup.freeze
+        end
+        array.freeze
       end
 
       ##
