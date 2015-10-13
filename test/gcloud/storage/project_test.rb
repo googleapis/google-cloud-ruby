@@ -129,6 +129,24 @@ describe Gcloud::Storage::Project, :mock_storage do
     bucket.cors.must_equal bucket_cors
   end
 
+  it "creates a bucket with block CORS" do
+    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
+      JSON.parse(env.body)["name"].must_equal bucket_name
+      JSON.parse(env.body)["cors"].must_equal bucket_cors
+
+      [200, {"Content-Type"=>"application/json"},
+       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, bucket_cors).to_json]
+    end
+
+    bucket = storage.create_bucket bucket_name do |c|
+      c.add_rule ["http://example.org", "https://example.org"],
+                 "*",
+                 headers: "X-My-Custom-Header",
+                 max_age: 300
+    end
+    bucket.cors.must_equal bucket_cors
+  end
+
   it "creates a bucket with predefined acl" do
     new_bucket_name = "new-bucket-#{Time.now.to_i}"
 

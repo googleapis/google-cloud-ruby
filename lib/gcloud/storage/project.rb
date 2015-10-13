@@ -18,6 +18,7 @@ require "gcloud/storage/errors"
 require "gcloud/storage/connection"
 require "gcloud/storage/credentials"
 require "gcloud/storage/bucket"
+require "gcloud/storage/bucket/cors"
 require "gcloud/storage/file"
 
 module Gcloud
@@ -190,7 +191,13 @@ module Gcloud
       alias_method :find_bucket, :bucket
 
       ##
-      # Creates a new bucket.
+      # Creates a new bucket with optional attributes. Also accepts a block for
+      # defining the CORS configuration for a static website served from the
+      # bucket. See Bucket::Cors for details. For more information about
+      # configuring buckets as static websites, see {How to Host a Static
+      # Website }[https://cloud.google.com/storage/docs/website-configuration].
+      # For more information about CORS, see {Cross-Origin Resource Sharing
+      # (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
       #
       # === Parameters
       #
@@ -199,11 +206,8 @@ module Gcloud
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:cors]</code>::
-      #   The CORS configuration for a static website served from the
-      #   bucket. For more information, see {Cross-Origin Resource
-      #   Sharing (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
-      #   Accepts an array of hashes containing the attributes specified for the
-      #   {resource description of
+      #   The CORS rules for the bucket. Accepts an array of hashes containing
+      #   the attributes specified for the {resource description of
       #   cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
       # <code>options[:location]</code>::
       #   The location of the bucket. Object data for objects in the bucket
@@ -273,12 +277,45 @@ module Gcloud
       #
       #   bucket = storage.create_bucket "my-bucket", retries: 5
       #
+      # You can pass {website
+      # settings}[https://cloud.google.com/storage/docs/website-configuration]
+      # for the bucket, including a block that defines CORS rule. See
+      # Bucket::Cors for details.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #
+      #   options = {
+      #     website_main: "index.html"
+      #     website_404: "not_found.html"
+      #   }
+      #   bucket = storage.create_bucket "my-bucket", options do |c|
+      #     c.add_rule ["http://example.org", "https://example.org"],
+      #                "*",
+      #                response_headers: ["X-My-Custom-Header"],
+      #                max_age: 300
+      #   end
+      #
       def create_bucket bucket_name, options = {}
-        options[:acl] = Bucket::Acl.predefined_rule_for options[:acl]
-        default_acl = options[:default_acl]
-        default_acl = Bucket::DefaultAcl.predefined_rule_for default_acl
-        options[:default_acl] = default_acl
+        options[:acl] = acl_rule options[:acl]
+        options[:default_acl] = acl_rule options[:default_acl]
+        if block_given?
+          cors_builder = Bucket::Cors.new
+          yield cors_builder
+          options[:cors] = cors_builder.cors if cors_builder.changed?
+        end
+        insert_bucket bucket_name, options
+      end
 
+      protected
+
+      def acl_rule option_name
+        Bucket::Acl.predefined_rule_for option_name
+      end
+
+      def insert_bucket bucket_name, options
         resp = connection.insert_bucket bucket_name, options
         if resp.success?
           Bucket.from_gapi resp.data, connection
