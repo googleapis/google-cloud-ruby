@@ -135,7 +135,7 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
     bucket.website_404.must_equal bucket_website_404
   end
 
-  it "updates existing cors rules in a block" do
+  it "updates raw CORS rules in a block" do
     mock_connection.patch "/storage/v1/b/#{bucket_with_cors.name}" do |env|
       json = JSON.parse env.body
       rules = json["cors"]
@@ -163,7 +163,7 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
     end
   end
 
-  it "adds cors rules in a nested block in update" do
+  it "adds CORS rules in a nested block in update" do
       mock_connection.patch "/storage/v1/b/#{bucket.name}" do |env|
         json = JSON.parse env.body
         rules = json["cors"]
@@ -204,7 +204,7 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
       end
     end
 
-  it "adds cors rules in a block to cors" do
+  it "adds CORS rules in a block to cors" do
       mock_connection.patch "/storage/v1/b/#{bucket.name}" do |env|
         json = JSON.parse env.body
         rules = json["cors"]
