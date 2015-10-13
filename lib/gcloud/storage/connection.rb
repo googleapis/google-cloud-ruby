@@ -285,7 +285,7 @@ module Gcloud
 
       ##
       # Updates a file's metadata.
-      def patch_file bucket_name, file_path, options = {}
+      def patch_file bucket_name, file_path, options = {}, body_options = {}
         params = { bucket: bucket_name,
                    object: file_path,
                    predefinedAcl: options.delete(:acl)
@@ -293,7 +293,8 @@ module Gcloud
 
         @client.execute(
           api_method: @storage.objects.patch,
-          parameters: params
+          parameters: params,
+          body_object: patch_file_request(body_options)
         )
       end
 
@@ -403,6 +404,16 @@ module Gcloud
           "durable" => "DURABLE_REDUCED_AVAILABILITY",
           "nearline" => "NEARLINE",
           "standard" => "STANDARD" }[str.to_s.downcase]
+      end
+
+      def patch_file_request options = {}
+        {
+          "cacheControl" => options[:cache_control],
+          "contentDisposition" => options[:content_disposition],
+          "contentEncoding" => options[:content_encoding],
+          "contentLanguage" => options[:content_language],
+          "contentType" => options[:content_type]
+        }.delete_if { |_, v| v.nil? }
       end
 
       def incremental_backoff options = {}
