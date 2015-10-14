@@ -244,4 +244,34 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
       returned_cors.frozen?.must_equal true
       returned_cors.first.frozen?.must_equal true
     end
+
+  it "updates CORS rules in a block to cors" do
+      mock_connection.patch "/storage/v1/b/#{bucket_with_cors.name}" do |env|
+        json = JSON.parse env.body
+        rules = json["cors"]
+        rules.count.must_equal 1
+        rules[0]["maxAgeSeconds"].must_equal 1800
+        rules[0]["origin"].must_equal ["http://example.net"]
+        rules[0]["method"].must_equal ["GET"]
+        rules[0]["responseHeader"].must_equal []
+
+        updated_gapi = bucket_with_cors.gapi.dup
+        updated_gapi["cors"] = json["cors"]
+        [200, { "Content-Type" => "application/json" },
+         random_bucket_hash(bucket_name, bucket_url, bucket_location,
+                                   bucket_storage_class, nil, nil, nil, nil, nil,
+                                   bucket_cors).to_json]
+      end
+
+      bucket_with_cors.cors.size.must_equal 1
+      bucket_with_cors.cors[0]["origin"].must_equal ["http://example.org", "https://example.org"]
+      bucket_with_cors.cors do |c|
+        c.add_rule "http://example.net", "GET"
+        c.add_rule "http://example.net", "POST"
+        # Remove the last CORS rule from the array
+        c.pop
+        # Remove all existing rules with the https protocol
+        c.delete_if { |r| r["origin"].include? "http://example.org" }
+      end
+    end
 end

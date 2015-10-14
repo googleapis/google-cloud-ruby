@@ -304,7 +304,7 @@ module Gcloud
         if block_given?
           cors_builder = Bucket::Cors.new
           yield cors_builder
-          options[:cors] = cors_builder.cors if cors_builder.changed?
+          options[:cors] = cors_builder if cors_builder.changed?
         end
         insert_bucket bucket_name, options
       end
