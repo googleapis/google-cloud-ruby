@@ -19,20 +19,40 @@ module Gcloud
       ##
       # = Bucket Cors
       #
-      # Accumulates CORS rules to set on a bucket. See {Cross-Origin Resource
+      # A special-case Array for managing the website CORS rules for a bucket.
+      # Accessed via a block argument to Project#create_bucket, Bucket#cors, or
+      # Bucket#update.
+      #
+      # For more information about CORS, see {Cross-Origin Resource
       # Sharing (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
-      class Cors
-        attr_reader :cors #:nodoc:
-
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #   bucket = storage.bucket "my-todo-app"
+      #
+      #   bucket.cors do |c|
+      #     # Remove the last CORS rule from the array
+      #     c.pop
+      #     # Remove all existing rules with the https protocol
+      #     c.delete_if { |r| r["origin"].include? "http://example.com" }
+      #     c.add_rule ["http://example.org", "https://example.org"],
+      #                ["GET", "POST", "DELETE"],
+      #                response_headers: ["X-My-Custom-Header"],
+      #                max_age: 3600
+      #   end
+      #
+      class Cors < DelegateClass(::Array)
         ##
         # Initialize a new CORS rules builder with existing CORS rules, if any.
         def initialize cors = [] #:nodoc:
+          super cors.dup
           @original = cors.dup
-          @cors = cors.dup
         end
 
         def changed? #:nodoc:
-          @original != @cors
+          @original != self
         end
 
         ##
@@ -72,22 +92,19 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   storage = gcloud.storage
-        #   bucket = storage.bucket "my-todo-app"
         #
-        #   bucket.update do |b|
-        #     b.cors do |c|
-        #       c.add_rule ["http://example.org", "https://example.org"],
-        #                  "*",
-        #                  response_headers: ["X-My-Custom-Header"],
-        #                  max_age: 300
-        #     end
+        #   bucket = storage.create_bucket "my-bucket" do |c|
+        #     c.add_rule ["http://example.org", "https://example.org"],
+        #                "*",
+        #                response_headers: ["X-My-Custom-Header"],
+        #                max_age: 300
         #   end
         #
         def add_rule origin, methods, options = {}
           rule = { "origin" => Array(origin), "method" => Array(methods) }
           rule["responseHeader"] = Array(options[:headers]) || []
           rule["maxAgeSeconds"] = options[:max_age] || 1800
-          @cors << rule
+          push rule
         end
       end
     end

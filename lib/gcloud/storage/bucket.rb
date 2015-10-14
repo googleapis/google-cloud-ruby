@@ -128,7 +128,7 @@ module Gcloud
         if block_given?
           cors_builder = Bucket::Cors.new @gapi["cors"]
           yield cors_builder
-          self.cors = cors_builder.cors if cors_builder.changed?
+          self.cors = cors_builder if cors_builder.changed?
         end
         deep_dup_and_freeze @gapi["cors"]
       end
@@ -811,7 +811,7 @@ module Gcloud
           if block_given?
             cors_builder = Bucket::Cors.new body_options[:cors]
             yield cors_builder
-            body_options[:cors] = cors_builder.cors if cors_builder.changed?
+            body_options[:cors] = cors_builder if cors_builder.changed?
           end
           body_options[:cors]
         end
