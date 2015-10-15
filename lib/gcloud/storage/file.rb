@@ -597,7 +597,7 @@ module Gcloud
 
       def patch_gapi! options = {}
         ensure_connection!
-        resp = connection.patch_file bucket, name, {}, options
+        resp = connection.patch_file bucket, name, options
         if resp.success?
           @gapi = resp.data
         else
