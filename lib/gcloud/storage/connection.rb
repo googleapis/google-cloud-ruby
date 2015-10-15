@@ -82,16 +82,16 @@ module Gcloud
 
       ##
       # Updates a bucket, including its ACL metadata.
-      def patch_bucket bucket_name, param_options = {}, body_options = {}
+      def patch_bucket bucket_name, options = {}
         params = { bucket: bucket_name,
-                   predefinedAcl: param_options[:acl],
-                   predefinedDefaultObjectAcl: param_options[:default_acl]
+                   predefinedAcl: options[:acl],
+                   predefinedDefaultObjectAcl: options[:default_acl]
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(
           api_method: @storage.buckets.patch,
           parameters: params,
-          body_object: patch_bucket_request(body_options)
+          body_object: patch_bucket_request(options)
         )
       end
 
