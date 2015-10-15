@@ -450,6 +450,7 @@ module Gcloud
             default_dataset = { "datasetId" => dataset }
           end
         end
+        udfs = options[:udfs].map{|udf| {"inlineCode" => udf}}
         {
           "configuration" => {
             "query" => {
@@ -462,7 +463,8 @@ module Gcloud
               "writeDisposition" => write_disposition(options[:write]),
               "allowLargeResults" => options[:large_results],
               "flattenResults" => options[:flatten],
-              "defaultDataset" => default_dataset
+              "defaultDataset" => default_dataset,
+              "userDefinedFunctionResources" => udfs
             }.delete_if { |_, v| v.nil? }
           }.delete_if { |_, v| v.nil? }
         }
