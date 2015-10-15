@@ -450,7 +450,6 @@ module Gcloud
             default_dataset = { "datasetId" => dataset }
           end
         end
-        udfs = options[:udfs].map{|udf| {"inlineCode" => udf}}
         {
           "configuration" => {
             "query" => {
@@ -464,7 +463,7 @@ module Gcloud
               "allowLargeResults" => options[:large_results],
               "flattenResults" => options[:flatten],
               "defaultDataset" => default_dataset,
-              "userDefinedFunctionResources" => udfs
+              "userDefinedFunctionResources" => user_defined_function_resources(options[:udfs])
             }.delete_if { |_, v| v.nil? }
           }.delete_if { |_, v| v.nil? }
         }
@@ -624,6 +623,14 @@ module Gcloud
         media = Google::APIClient::UploadIO.new local_path, mime_type
         media.chunk_size = chunk_size unless chunk_size.nil?
         media
+      end
+
+      def user_defined_function_resources array_or_str
+        return nil if array_or_str.nil?
+
+        Array(array_or_str).map{|udf|
+          udf.to_s.downcase.start_with?("gs://") ? {"resourceUri" => udf } : {"inlineCode" => udf }
+        }
       end
     end
   end
