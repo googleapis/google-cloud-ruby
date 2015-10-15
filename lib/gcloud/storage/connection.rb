@@ -285,16 +285,16 @@ module Gcloud
 
       ##
       # Updates a file's metadata.
-      def patch_file bucket_name, file_path, options = {}, body_options = {}
+      def patch_file bucket_name, file_path, options = {}
         params = { bucket: bucket_name,
                    object: file_path,
-                   predefinedAcl: options.delete(:acl)
+                   predefinedAcl: options[:acl]
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(
           api_method: @storage.objects.patch,
           parameters: params,
-          body_object: patch_file_request(body_options)
+          body_object: patch_file_request(options)
         )
       end
 
