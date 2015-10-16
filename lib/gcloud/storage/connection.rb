@@ -178,72 +178,24 @@ module Gcloud
         )
       end
 
-      # rubocop:disable Metrics/MethodLength
-      # rubocop:disable Metrics/AbcSize
-      # Disabled rubocop because the API we need to use
-      # is verbose. No getting around it.
-
       ##
-      # Stores a new object and metadata.
-      # Uses a multipart form post.
-      def insert_file_multipart bucket_name, file, path = nil,
-                                options = {}
+      # Stores a new object and metadata. If resumable is true, a resumable
+      # upload, otherwise uses a multipart form post.
+      #
+      # UploadIO comes from Faraday, which gets it from multipart-post
+      # The initializer signature is:
+      # filename_or_io, content_type, filename = nil, opts = {}
+      def upload_file resumable, bucket_name, file, path = nil, options = {}
         local_path = Pathname(file).to_path
+        options[:content_type] ||= mime_type_for(local_path)
+        media = file_media local_path, options, resumable
         upload_path = Pathname(path || local_path).to_path
-        mime_type = mime_type_for local_path
-
-        media = Google::APIClient::UploadIO.new local_path, mime_type
-
-        params = { uploadType: "multipart",
-                   bucket: bucket_name,
-                   name: upload_path,
-                   predefinedAcl: options[:acl]
-                 }.delete_if { |_, v| v.nil? }
-
-        @client.execute(
-          api_method: @storage.objects.insert,
-          media: media,
-          parameters: params,
-          body_object: { contentType: mime_type }
-        )
-      end
-
-      ##
-      # Stores a new object and metadata.
-      # Uses a resumable upload.
-      def insert_file_resumable bucket_name, file, path = nil,
-                                chunk_size = nil, options = {}
-        local_path = Pathname(file).to_path
-        upload_path = Pathname(path || local_path).to_path
-        # mime_type = options[:mime_type] || mime_type_for local_path
-        mime_type = mime_type_for local_path
-
-        # This comes from Faraday, which gets it from multipart-post
-        # The signature is:
-        # filename_or_io, content_type, filename = nil, opts = {}
-
-        media = Google::APIClient::UploadIO.new local_path, mime_type
-        media.chunk_size = chunk_size
-
-        params = { uploadType: "resumable",
-                   bucket: bucket_name,
-                   name: upload_path,
-                   predefinedAcl: options[:acl]
-                 }.delete_if { |_, v| v.nil? }
-
-        result = @client.execute(
-          api_method: @storage.objects.insert,
-          media: media,
-          parameters: params,
-          body_object: { contentType: mime_type }
-        )
+        result = insert_file resumable, bucket_name, upload_path, media, options
+        return result unless resumable
         upload = result.resumable_upload
         result = @client.execute upload while upload.resumable?
         result
       end
-
-      # rubocop:enable Metrics/MethodLength
-      # rubocop:enable Metrics/AbcSize
 
       ##
       # Retrieves an object or its metadata.
@@ -406,6 +358,35 @@ module Gcloud
           "standard" => "STANDARD" }[str.to_s.downcase]
       end
 
+      def insert_file resumable, bucket_name, path, media, options
+        params = { uploadType: (resumable ? "resumable" : "multipart"),
+                   bucket: bucket_name,
+                   name: path,
+                   predefinedAcl: options[:acl]
+        }.delete_if { |_, v| v.nil? }
+
+        @client.execute api_method: @storage.objects.insert,
+                        media: media,
+                        parameters: params,
+                        body_object: insert_file_request(options)
+      end
+
+      def file_media local_path, options, resumable
+        media = Google::APIClient::UploadIO.new local_path,
+                                                options[:content_type]
+        return media unless resumable && options[:chunk_size]
+        media.chunk_size = verify_chunk_size!(options.delete(:chunk_size))
+        media
+      end
+
+      def insert_file_request options = {}
+        request = {
+          "md5Hash" => options[:md5],
+          "crc32c" => options[:crc32c]
+        }.delete_if { |_, v| v.nil? }
+        request.merge patch_file_request(options)
+      end
+
       def patch_file_request options = {}
         {
           "cacheControl" => options[:cache_control],
@@ -420,6 +401,18 @@ module Gcloud
         Gcloud::Backoff.new(options).execute do
           yield
         end
+      end
+
+      ##
+      # Determines if a chunk_size is valid.
+      def verify_chunk_size! chunk_size
+        chunk_size = chunk_size.to_i
+        chunk_mod = 256 * 1024 # 256KB
+        if (chunk_size.to_i % chunk_mod) != 0
+          chunk_size = (chunk_size / chunk_mod) * chunk_mod
+        end
+        return if chunk_size.zero?
+        chunk_size
       end
     end
   end
