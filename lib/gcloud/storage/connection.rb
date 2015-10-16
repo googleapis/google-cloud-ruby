@@ -381,8 +381,9 @@ module Gcloud
 
       def insert_file_request options = {}
         request = {
+          "crc32c" => options[:crc32c],
           "md5Hash" => options[:md5],
-          "crc32c" => options[:crc32c]
+          "metadata" => options[:metadata]
         }.delete_if { |_, v| v.nil? }
         request.merge patch_file_request(options)
       end
