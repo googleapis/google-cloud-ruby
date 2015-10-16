@@ -232,6 +232,29 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     end
   end
 
+  it "creates a file with metadata" do
+    new_file_name = random_file_path
+    metadata = {
+      "player" => "John",
+      score: 10
+    }
+    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+      multipart_params = parse_multipart env
+
+      json = JSON.parse multipart_params.first[:body]
+      json["metadata"].must_be_kind_of Hash
+      json["metadata"].size.must_equal 2
+      json["metadata"]["player"].must_equal "John"
+      json["metadata"]["score"].must_equal 10
+      [200, { "Content-Type" => "application/json" },
+       create_file_json(bucket.name, new_file_name)]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      bucket.create_file tmpfile, new_file_name, metadata: metadata
+    end
+  end
+
   it "does not error on an invalid chunk_size" do
     # Mock the upload
     valid_chunk_size = 256 * 1024 # 256KB

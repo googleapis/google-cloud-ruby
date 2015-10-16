@@ -519,6 +519,10 @@ module Gcloud
       #   service. See
       #   {Validation}[https://cloud.google.com/storage/docs/hashes-etags]
       #   for more information. (+String+)
+      # <code>options[:metadata]</code>::
+      #   A hash of custom, user-provided web-safe keys and arbitrary string
+      #   values that will returned with requests for the file as "x-goog-meta-"
+      #   response headers. (+Hash+)
       #
       # === Returns
       #
