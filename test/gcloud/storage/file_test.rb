@@ -31,6 +31,10 @@ describe Gcloud::Storage::File, :mock_storage do
     file.created_at.must_equal file_hash["timeCreated"]
     file.url.must_equal file_hash["selfLink"]
 
+    file.md5.must_equal file_hash["md5Hash"]
+    file.crc32c.must_equal file_hash["crc32c"]
+    file.etag.must_equal file_hash["etag"]
+
     file.cache_control.must_equal "public, max-age=3600"
     file.content_disposition.must_equal "attachment; filename=filename.ext"
     file.content_encoding.must_equal "gzip"
