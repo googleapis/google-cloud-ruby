@@ -133,8 +133,9 @@ module Gcloud
       end
 
       ##
-      # CRC32c checksum, as described in RFC 4960, Appendix B;
-      # encoded using base64.
+      # The CRC32c checksum of the data, as described in
+      # {RFC 4960, Appendix B}[http://tools.ietf.org/html/rfc4960#appendix-B].
+      # Encoded using base64 in big-endian byte order.
       def crc32c
         @gapi["crc32c"]
       end
