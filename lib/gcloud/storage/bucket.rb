@@ -295,7 +295,7 @@ module Gcloud
       def update
         updater = Updater.new @gapi["cors"]
         yield updater
-        patch_gapi! updater.body_options unless updater.body_options.empty?
+        patch_gapi! updater.updates unless updater.updates.empty?
       end
 
       ##
@@ -788,35 +788,35 @@ module Gcloud
       ##
       # Yielded to a block to accumulate changes for a patch request.
       class Updater
-        attr_reader :body_options
+        attr_reader :updates
         ##
         # Create an Updater object.
         def initialize cors
           @cors = cors ? Array(cors.dup) : []
           @cors = @cors.map { |x| x.to_hash if x.respond_to? :to_hash }
-          @body_options = {}
+          @updates = {}
         end
 
-        BUCKET_ATTRS = [:cors, :logging_bucket, :logging_prefix, :versioning,
-                        :website_main, :website_404]
+        ATTRS = [:cors, :logging_bucket, :logging_prefix, :versioning,
+                 :website_main, :website_404]
 
-        BUCKET_ATTRS.each do |attr|
+        ATTRS.each do |attr|
           define_method "#{attr}=" do |arg|
-            body_options[attr] = arg
+            updates[attr] = arg
           end
         end
 
         ##
-        # Return CORS for mutation. Also adds CORS to @body_options so that it
+        # Return CORS for mutation. Also adds CORS to @updates so that it
         # is included in the patch request.
         def cors
-          body_options[:cors] ||= @cors
+          updates[:cors] ||= @cors
           if block_given?
-            cors_builder = Bucket::Cors.new body_options[:cors]
+            cors_builder = Bucket::Cors.new updates[:cors]
             yield cors_builder
-            body_options[:cors] = cors_builder if cors_builder.changed?
+            updates[:cors] = cors_builder if cors_builder.changed?
           end
-          body_options[:cors]
+          updates[:cors]
         end
       end
     end
