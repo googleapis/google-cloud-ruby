@@ -394,7 +394,8 @@ module Gcloud
           "contentDisposition" => options[:content_disposition],
           "contentEncoding" => options[:content_encoding],
           "contentLanguage" => options[:content_language],
-          "contentType" => options[:content_type]
+          "contentType" => options[:content_type],
+          "metadata" => options[:metadata]
         }.delete_if { |_, v| v.nil? }
       end
 

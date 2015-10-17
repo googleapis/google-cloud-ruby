@@ -40,6 +40,12 @@ describe Gcloud::Storage::File, :mock_storage do
     file.content_encoding.must_equal "gzip"
     file.content_language.must_equal "en"
     file.content_type.must_equal "text/plain"
+
+    file.metadata.must_be_kind_of Hash
+    file.metadata.size.must_equal 2
+    file.metadata.frozen?.must_equal true
+    file.metadata["player"].must_equal "Alice"
+    file.metadata["score"].must_equal "101"
   end
 
   it "can delete itself" do
