@@ -219,6 +219,22 @@ module Gcloud
       end
 
       ##
+      # A hash of custom, user-provided web-safe keys and arbitrary string
+      # values that will returned with requests for the file as "x-goog-meta-"
+      # response headers.
+      def metadata
+        @gapi["metadata"].freeze
+      end
+
+      ##
+      # Updates the hash of custom, user-provided web-safe keys and arbitrary
+      # string values that will returned with requests for the file as
+      # "x-goog-meta-" response headers.
+      def metadata= metadata
+        patch_gapi! metadata: metadata
+      end
+
+      ##
       # Download the file's contents to a local file.
       #
       # === Parameters
