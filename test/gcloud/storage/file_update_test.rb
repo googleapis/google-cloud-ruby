@@ -88,8 +88,35 @@ describe Gcloud::Storage::File, :update, :mock_storage do
        random_file_hash.to_json]
     end
 
-    existing_metadata = {"player"=>"Alice", "score"=>"101"}
-    file.metadata.must_equal existing_metadata
+    file.metadata.must_equal({"player"=>"Alice", "score"=>"101"})
     file.metadata = { "player" => "Bob", score: 10 }
+  end
+
+  it "updates multiple attributes in a block" do
+    mock_connection.patch "/storage/v1/b/#{bucket_name}/o/#{file.name}" do |env|
+      json = JSON.parse(env.body)
+      json["cacheControl"].must_equal "private, max-age=0, no-cache"
+      json["contentDisposition"].must_equal "inline; filename=filename.ext"
+      json["contentEncoding"].must_equal "deflate"
+      json["contentLanguage"].must_equal "de"
+      json["contentType"].must_equal "application/json"
+      metadata = json["metadata"]
+      metadata.must_be_kind_of Hash
+      metadata.size.must_equal 2
+      metadata["player"].must_equal "Bob"
+      metadata["score"].must_equal "10"
+      [200, {"Content-Type"=>"application/json"},
+       random_file_hash.to_json]
+    end
+
+    file.update do |f|
+      f.cache_control = "private, max-age=0, no-cache"
+      f.content_disposition = "inline; filename=filename.ext"
+      f.content_encoding = "deflate"
+      f.content_language = "de"
+      f.content_type = "application/json"
+      f.metadata["player"] = "Bob"
+      f.metadata["score"] = "10"
+    end
   end
 end
