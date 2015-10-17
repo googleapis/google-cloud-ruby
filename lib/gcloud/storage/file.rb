@@ -223,7 +223,9 @@ module Gcloud
       # values that will returned with requests for the file as "x-goog-meta-"
       # response headers.
       def metadata
-        @gapi["metadata"].freeze
+        m = @gapi["metadata"]
+        m = m.to_hash if m.respond_to? :to_hash
+        m.freeze
       end
 
       ##
@@ -232,6 +234,40 @@ module Gcloud
       # "x-goog-meta-" response headers.
       def metadata= metadata
         patch_gapi! metadata: metadata
+      end
+
+      ##
+      # Updates the file with changes made in the given block in a single
+      # PATCH request. The following attributes may be set: #cache_control=,
+      # #content_disposition=, #content_encoding=, #content_language=,
+      # #content_type=, and #metadata=. The #metadata hash accessible in the
+      # block is completely mutable and will be included in the request.
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #
+      #   bucket = storage.bucket "my-bucket"
+      #
+      #   file = bucket.file "path/to/my-file.ext"
+      #
+      #   file.update do |f|
+      #     f.cache_control = "private, max-age=0, no-cache"
+      #     f.content_disposition = "inline; filename=filename.ext"
+      #     f.content_encoding = "deflate"
+      #     f.content_language = "de"
+      #     f.content_type = "application/json"
+      #     f.metadata["player"] = "Bob"
+      #     f.metadata["score"] = "10"
+      #   end
+      #
+      def update
+        updater = Updater.new metadata
+        yield updater
+        patch_gapi! updater.updates unless updater.updates.empty?
       end
 
       ##
@@ -707,6 +743,38 @@ module Gcloud
           "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
                     "&Expires=#{expires}" \
                     "&Signature=#{CGI.escape signature}"
+        end
+      end
+
+      ##
+      # Yielded to a block to accumulate changes for a patch request.
+      class Updater
+        attr_reader :updates
+        ##
+        # Create an Updater object.
+        def initialize metadata
+          @metadata = if metadata.nil?
+                        {}
+                      else
+                        metadata.dup
+                      end
+          @updates = {}
+        end
+
+        ATTRS = [:cache_control, :content_disposition, :content_encoding,
+                 :content_language, :content_type, :metadata]
+
+        ATTRS.each do |attr|
+          define_method "#{attr}=" do |arg|
+            updates[attr] = arg
+          end
+        end
+
+        ##
+        # Return metadata for mutation. Also adds metadata to @updates so that
+        # it is included in the patch request.
+        def metadata
+          updates[:metadata] ||= @metadata
         end
       end
     end
