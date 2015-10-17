@@ -102,6 +102,7 @@ class MockStorage < Minitest::Spec
       "size" => rand(10_000),
       "md5Hash" => "HXB937GQDFxDFqUGi//weQ==",
       "mediaLink" => "https://www.googleapis.com/download/storage/v1/b/#{bucket}/o/#{name}?generation=1234567890&alt=media",
+      "metadata" => { "player" => "Alice", "score" => "101" },
       "owner" => { "entity" => "user-1234567890", "entityId" => "abc123" },
       "crc32c" => "Lm1F3g==",
       "etag" => "CKih16GjycICEAE=" }

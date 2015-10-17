@@ -76,4 +76,20 @@ describe Gcloud::Storage::File, :update, :mock_storage do
     file.content_type.must_equal "text/plain"
     file.content_type = "application/json"
   end
+
+  it "updates its metadata" do
+    mock_connection.patch "/storage/v1/b/#{bucket_name}/o/#{file.name}" do |env|
+      metadata = JSON.parse(env.body)["metadata"]
+      metadata.must_be_kind_of Hash
+      metadata.size.must_equal 2
+      metadata["player"].must_equal "Bob"
+      metadata["score"].must_equal 10
+      [200, {"Content-Type"=>"application/json"},
+       random_file_hash.to_json]
+    end
+
+    existing_metadata = {"player"=>"Alice", "score"=>"101"}
+    file.metadata.must_equal existing_metadata
+    file.metadata = { "player" => "Bob", score: 10 }
+  end
 end
