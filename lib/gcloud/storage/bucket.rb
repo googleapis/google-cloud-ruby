@@ -295,7 +295,7 @@ module Gcloud
       def update
         updater = Updater.new @gapi["cors"]
         yield updater
-        patch_gapi! updater.body_options unless updater.body_options.empty?
+        patch_gapi! updater.updates unless updater.updates.empty?
       end
 
       ##
@@ -486,6 +486,43 @@ module Gcloud
       #     and project team members get access according to their roles.
       #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
       #     access, and allUsers get READER access.
+      # <code>options[:cache_control]</code>::
+      #   The {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      #   response header to be returned when the file is downloaded. (+String+)
+      # <code>options[:content_disposition]</code>::
+      #   The {Content-Disposition}[https://tools.ietf.org/html/rfc6266]
+      #   response header to be returned when the file is downloaded. (+String+)
+      # <code>options[:content_encoding]</code>::
+      #   The {Content-Encoding
+      #   }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] response header
+      #   to be returned when the file is downloaded. (+String+)
+      # <code>options[:content_language]</code>::
+      #   The {Content-Language}[http://tools.ietf.org/html/bcp47] response
+      #   header to be returned when the file is downloaded. (+String+)
+      # <code>options[:content_type]</code>::
+      #   The {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17]
+      #   response header to be returned when the file is downloaded. (+String+)
+      # <code>options[:chunk_size]</code>::
+      #   The number of bytes per chunk in a resumable upload. Must be divisible
+      #   by 256KB. If it is not divisible by 265KB then it will be lowered to
+      #   the nearest acceptable value. (+Integer+)
+      # <code>options[:crc32c]</code>::
+      #   The CRC32c checksum of the file data, as described in
+      #   {RFC 4960, Appendix B}[http://tools.ietf.org/html/rfc4960#appendix-B].
+      #   If provided, Cloud Storage will only create the file if the value
+      #   matches the value calculated by the service. See
+      #   {Validation}[https://cloud.google.com/storage/docs/hashes-etags]
+      #   for more information. (+String+)
+      # <code>options[:md5]</code>::
+      #   The MD5 hash of the file data. If provided, Cloud Storage will only
+      #   create the file if the value matches the value calculated by the
+      #   service. See
+      #   {Validation}[https://cloud.google.com/storage/docs/hashes-etags]
+      #   for more information. (+String+)
+      # <code>options[:metadata]</code>::
+      #   A hash of custom, user-provided web-safe keys and arbitrary string
+      #   values that will returned with requests for the file as "x-goog-meta-"
+      #   response headers. (+Hash+)
       #
       # === Returns
       #
@@ -560,13 +597,14 @@ module Gcloud
       def create_file file, path = nil, options = {}
         ensure_connection!
         ensure_file_exists! file
-
         options[:acl] = File::Acl.predefined_rule_for options[:acl]
+        resumable = resumable_upload?(file)
+        resp = @connection.upload_file resumable, name, file, path, options
 
-        if resumable_upload? file
-          upload_resumable file, path, options[:chunk_size], options
+        if resp.success?
+          File.from_gapi resp.data, connection
         else
-          upload_multipart file, path, options
+          fail ApiError.from_response(resp)
         end
       end
       alias_method :upload_file, :create_file
@@ -712,7 +750,7 @@ module Gcloud
 
       def patch_gapi! options = {}
         ensure_connection!
-        resp = connection.patch_bucket name, {}, options
+        resp = connection.patch_bucket name, options
         if resp.success?
           @gapi = resp.data
         else
@@ -733,41 +771,6 @@ module Gcloud
         ::File.size?(file).to_i > Upload.resumable_threshold
       end
 
-      def upload_multipart file, path, options = {}
-        resp = @connection.insert_file_multipart name, file, path, options
-
-        if resp.success?
-          File.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
-      end
-
-      def upload_resumable file, path, chunk_size, options = {}
-        chunk_size = verify_chunk_size! chunk_size
-
-        resp = @connection.insert_file_resumable name, file,
-                                                 path, chunk_size, options
-
-        if resp.success?
-          File.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
-      end
-
-      ##
-      # Determines if a chunk_size is valid.
-      def verify_chunk_size! chunk_size
-        chunk_size = chunk_size.to_i
-        chunk_mod = 256 * 1024 # 256KB
-        if (chunk_size.to_i % chunk_mod) != 0
-          chunk_size = (chunk_size / chunk_mod) * chunk_mod
-        end
-        return if chunk_size.zero?
-        chunk_size
-      end
-
       ##
       # Given nil, empty array, a gapi array of hashes, or any value, returns a
       # deeply dup'd and frozen array of simple hashes or values (not gapi
@@ -785,35 +788,35 @@ module Gcloud
       ##
       # Yielded to a block to accumulate changes for a patch request.
       class Updater
-        attr_reader :body_options
+        attr_reader :updates
         ##
         # Create an Updater object.
         def initialize cors
           @cors = cors ? Array(cors.dup) : []
           @cors = @cors.map { |x| x.to_hash if x.respond_to? :to_hash }
-          @body_options = {}
+          @updates = {}
         end
 
-        BUCKET_ATTRS = [:cors, :logging_bucket, :logging_prefix, :versioning,
-                        :website_main, :website_404]
+        ATTRS = [:cors, :logging_bucket, :logging_prefix, :versioning,
+                 :website_main, :website_404]
 
-        BUCKET_ATTRS.each do |attr|
+        ATTRS.each do |attr|
           define_method "#{attr}=" do |arg|
-            body_options[attr] = arg
+            updates[attr] = arg
           end
         end
 
         ##
-        # Return CORS for mutation. Also adds CORS to @body_options so that it
+        # Return CORS for mutation. Also adds CORS to @updates so that it
         # is included in the patch request.
         def cors
-          body_options[:cors] ||= @cors
+          updates[:cors] ||= @cors
           if block_given?
-            cors_builder = Bucket::Cors.new body_options[:cors]
+            cors_builder = Bucket::Cors.new updates[:cors]
             yield cors_builder
-            body_options[:cors] = cors_builder if cors_builder.changed?
+            updates[:cors] = cors_builder if cors_builder.changed?
           end
-          body_options[:cors]
+          updates[:cors]
         end
       end
     end
