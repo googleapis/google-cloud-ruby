@@ -24,7 +24,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
   let(:description) { "This is my table" }
   let(:etag) { "etag123456789" }
   let(:location_code) { "US" }
-  let(:url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
+  let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash,
                                                   bigquery.connection }
@@ -33,7 +33,7 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     table.name.must_equal table_name
     table.description.must_equal description
     table.etag.must_equal etag
-    table.url.must_equal url
+    table.api_url.must_equal api_url
     table.bytes_count.must_equal 1000
     table.rows_count.must_equal 100
     table.table?.must_equal true

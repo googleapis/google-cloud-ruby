@@ -45,7 +45,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     bucket_complete.id.must_equal bucket_hash_complete["id"]
     bucket_complete.name.must_equal bucket_name
     bucket_complete.created_at.must_equal bucket_hash_complete["timeCreated"]
-    bucket_complete.url.must_equal bucket_url
+    bucket_complete.api_url.must_equal bucket_url
     bucket_complete.location.must_equal bucket_location
     bucket_complete.logging_bucket.must_equal bucket_logging_bucket
     bucket_complete.logging_prefix.must_equal bucket_logging_prefix
@@ -469,12 +469,11 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     end
 
     bucket = storage.bucket bucket_name
-    bucket.url.must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
+    bucket.api_url.must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
 
     bucket.reload!
 
-    # replace url with a legitimately mutable attribute when issue #91 is closed.
-    bucket.url.must_equal "#{new_url_root}/b/#{bucket_name}"
+    bucket.api_url.must_equal "#{new_url_root}/b/#{bucket_name}"
   end
 
   def create_file_json bucket=nil, name = nil

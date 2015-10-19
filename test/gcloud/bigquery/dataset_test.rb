@@ -55,7 +55,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   let(:default_expiration) { 999 }
   let(:etag) { "etag123456789" }
   let(:location_code) { "US" }
-  let(:url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" }
+  let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" }
   let(:dataset_hash) { random_dataset_hash dataset_id, dataset_name, dataset_description, default_expiration }
   let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_hash,
                                                       bigquery.connection }
@@ -65,7 +65,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     dataset.description.must_equal dataset_description
     dataset.default_expiration.must_equal default_expiration
     dataset.etag.must_equal etag
-    dataset.url.must_equal url
+    dataset.api_url.must_equal api_url
     dataset.location.must_equal location_code
   end
 
