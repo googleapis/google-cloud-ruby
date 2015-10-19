@@ -483,6 +483,13 @@ module Gcloud
       #
       # To share a file that is not public see #signed_url.
       #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:protocol]</code>::
+      #   The protocol to use for the URL. Default is +HTTPS+. (+String+)
+      #
       # === Examples
       #
       #   require "gcloud"
@@ -494,8 +501,21 @@ module Gcloud
       #   file = bucket.file "avatars/heidi/400x400.png"
       #   public_url = file.public_url
       #
-      def public_url
-        "https://storage.googleapis.com/#{bucket}/#{name}"
+      # To generate the URL with a protocol other than HTTPS, use the +protocol+
+      # option:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #
+      #   bucket = storage.bucket "my-todo-app"
+      #   file = bucket.file "avatars/heidi/400x400.png"
+      #   public_url = file.public_url protocol: "http"
+      #
+      def public_url options = {}
+        protocol = options[:protocol] || :https
+        "#{protocol}://storage.googleapis.com/#{bucket}/#{name}"
       end
       alias_method :url, :public_url
 
