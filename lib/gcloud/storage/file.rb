@@ -107,6 +107,12 @@ module Gcloud
       end
 
       ##
+      # A URL that can be used to download the file using the REST API.
+      def media_url
+        @gapi["mediaLink"]
+      end
+
+      ##
       # Content-Length of the data in bytes.
       def size
         @gapi["size"]
