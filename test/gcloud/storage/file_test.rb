@@ -32,6 +32,7 @@ describe Gcloud::Storage::File, :mock_storage do
     file.api_url.must_equal file_hash["selfLink"]
     file.media_url.must_equal file_hash["mediaLink"]
     file.public_url.must_equal "https://storage.googleapis.com/#{file.bucket}/#{file.name}"
+    file.public_url(protocol: :http).must_equal "http://storage.googleapis.com/#{file.bucket}/#{file.name}"
     file.url.must_equal file.public_url
 
     file.md5.must_equal file_hash["md5Hash"]
