@@ -70,8 +70,8 @@ module Gcloud
       end
 
       ##
-      # The URI of this bucket.
-      def url
+      # A URL that can be used to access the bucket using the REST API.
+      def api_url
         @gapi["selfLink"]
       end
 

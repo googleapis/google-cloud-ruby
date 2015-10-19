@@ -117,7 +117,7 @@ module Gcloud
       #
       # :category: Attributes
       #
-      def url
+      def api_url
         ensure_full_data!
         @gapi["selfLink"]
       end
