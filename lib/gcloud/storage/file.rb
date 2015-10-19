@@ -101,8 +101,8 @@ module Gcloud
       end
 
       ##
-      # The url to the file.
-      def url
+      # A URL that can be used to access the file using the REST API.
+      def api_url
         @gapi["selfLink"]
       end
 

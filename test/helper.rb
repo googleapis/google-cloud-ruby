@@ -46,7 +46,6 @@ class MockStorage < Minitest::Spec
     @connection
   end
 
-
   def random_bucket_hash(name=random_bucket_name,
     url_root="https://www.googleapis.com/storage/v1", location="US",
     storage_class="STANDARD", versioning=nil, logging_bucket=nil,

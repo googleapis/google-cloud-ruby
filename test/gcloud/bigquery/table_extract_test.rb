@@ -238,7 +238,7 @@ describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
   def extract_job_json table, extract_file
     hash = random_job_hash
     hash["configuration"]["extract"] = {
-      "destinationUris" => [extract_file.url],
+      "destinationUris" => [extract_file.api_url],
       "sourceTable" => {
         "projectId" => table.project_id,
         "datasetId" => table.dataset_id,
