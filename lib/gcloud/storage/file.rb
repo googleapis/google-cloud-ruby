@@ -476,6 +476,30 @@ module Gcloud
       end
 
       ##
+      # Public URL to access the file. If the file is not public, requests to
+      # the URL will return an error. (See File::Acl#public! and
+      # Bucket::DefaultAcl#public!) For more information, read [Accessing Public
+      # Data]{https://cloud.google.com/storage/docs/access-public-data}.
+      #
+      # To share a file that is not public see #signed_url.
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #
+      #   bucket = storage.bucket "my-todo-app"
+      #   file = bucket.file "avatars/heidi/400x400.png"
+      #   public_url = file.public_url
+      #
+      def public_url
+        "https://storage.googleapis.com/#{bucket}/#{name}"
+      end
+      alias_method :url, :public_url
+
+      ##
       # Access without authentication can be granted to a File for a specified
       # period of time. This URL uses a cryptographic signature
       # of your credentials to access the file. See the
