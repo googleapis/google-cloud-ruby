@@ -24,9 +24,9 @@ require "gcloud/bigquery"
 require "gcloud/dns"
 
 class MockStorage < Minitest::Spec
-  let(:project) { "test" }
-  let(:credentials) { OpenStruct.new }
-  let(:storage) { Gcloud::Storage::Project.new project, credentials }
+  let(:project) { storage.connection.project }
+  let(:credentials) { storage.connection.credentials }
+  let(:storage) { $gcloud_storage_global ||= Gcloud::Storage::Project.new("test", OpenStruct.new) }
 
   def setup
     @connection = Faraday::Adapter::Test::Stubs.new
@@ -113,9 +113,9 @@ class MockStorage < Minitest::Spec
 end
 
 class MockPubsub < Minitest::Spec
-  let(:project) { "test" }
-  let(:credentials) { OpenStruct.new }
-  let(:pubsub) { Gcloud::Pubsub::Project.new project, credentials }
+  let(:project) { pubsub.connection.project }
+  let(:credentials) { pubsub.connection.credentials }
+  let(:pubsub) { $gcloud_pubsub_global ||= Gcloud::Pubsub::Project.new("test", OpenStruct.new) }
 
   def setup
     @connection = Faraday::Adapter::Test::Stubs.new
@@ -239,9 +239,9 @@ class MockPubsub < Minitest::Spec
 end
 
 class MockBigquery < Minitest::Spec
-  let(:project) { "test-project" }
-  let(:credentials) { OpenStruct.new }
-  let(:bigquery) { Gcloud::Bigquery::Project.new project, credentials }
+  let(:project) { bigquery.connection.project }
+  let(:credentials) { bigquery.connection.credentials }
+  let(:bigquery) { $gcloud_bigquery_global ||= Gcloud::Bigquery::Project.new("test-project", OpenStruct.new) }
 
   def setup
     @connection = Faraday::Adapter::Test::Stubs.new
@@ -579,9 +579,9 @@ class MockBigquery < Minitest::Spec
 end
 
 class MockDns < Minitest::Spec
-  let(:project) { "test" }
-  let(:credentials) { OpenStruct.new }
-  let(:dns) { Gcloud::Dns::Project.new project, credentials }
+  let(:project) { dns.connection.project }
+  let(:credentials) { dns.connection.credentials }
+  let(:dns) { $gcloud_dns_global ||= Gcloud::Dns::Project.new("test", OpenStruct.new) }
 
   def setup
     @connection = Faraday::Adapter::Test::Stubs.new
