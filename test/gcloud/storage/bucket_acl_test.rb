@@ -275,6 +275,7 @@ describe Gcloud::Storage::Bucket, :acl, :mock_storage do
   def predefined_acl_update acl_role
     mock_connection.patch "/storage/v1/b/#{bucket.name}" do |env|
       env.params["predefinedAcl"].must_equal acl_role
+      JSON.parse(env.body)["acl"].must_equal []
       [200, {"Content-Type"=>"application/json"},
        random_bucket_hash(bucket.name).to_json]
     end

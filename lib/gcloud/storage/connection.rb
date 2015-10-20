@@ -84,8 +84,8 @@ module Gcloud
       # Updates a bucket, including its ACL metadata.
       def patch_bucket bucket_name, options = {}
         params = { bucket: bucket_name,
-                   predefinedAcl: options[:acl],
-                   predefinedDefaultObjectAcl: options[:default_acl]
+                   predefinedAcl: options[:predefined_acl],
+                   predefinedDefaultObjectAcl: options[:predefined_default_acl]
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(
@@ -324,7 +324,9 @@ module Gcloud
           "cors" => options[:cors],
           "logging" => logging_config(options),
           "versioning" => versioning_config(options[:versioning]),
-          "website" => website_config(options)
+          "website" => website_config(options),
+          "acl" => options[:acl],
+          "defaultObjectAcl" => options[:default_acl]
         }.delete_if { |_, v| v.nil? }
       end
 

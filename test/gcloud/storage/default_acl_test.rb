@@ -299,6 +299,7 @@ describe Gcloud::Storage::Bucket, :default_acl, :mock_storage do
   def predefined_default_acl_update acl_role
     mock_connection.patch "/storage/v1/b/#{bucket.name}" do |env|
       env.params["predefinedDefaultObjectAcl"].must_equal acl_role
+      JSON.parse(env.body)["defaultObjectAcl"].must_equal []
       [200, {"Content-Type"=>"application/json"},
        random_bucket_hash(bucket.name).to_json]
     end
