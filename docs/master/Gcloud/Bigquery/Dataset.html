@@ -140,6 +140,8 @@ dataset is contained within a specific project.</p>
         
         
             
+              <a href="#method-i-api_url">api_url</a>
+            
               <a href="#method-i-created_at">created_at</a>
             
               <a href="#method-i-dataset_id">dataset_id</a>
@@ -163,8 +165,6 @@ dataset is contained within a specific project.</p>
               <a href="#method-i-name-3D">name=</a>
             
               <a href="#method-i-project_id">project_id</a>
-            
-              <a href="#method-i-url">url</a>
             
           
         
@@ -425,6 +425,41 @@ the preferred way to manage access rules.</p>
       <h3 class="section-header">Public Instance Methods</h3>
 
       <div class="methods">
+        
+          <div id="api_url-method" class="method ">
+  <a name="method-i-api_url"></a>
+
+  
+    <h4>
+      <code>api_url()</code>
+      <span>
+        <a href="#method-i-api_url">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>A URL that can be used to access the dataset using the REST API.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="api_url-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">api_url</span>
+  <span class="ruby-identifier">ensure_full_data!</span>
+  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
         
           <div id="created_at-method" class="method ">
   <a name="method-i-created_at"></a>
@@ -832,41 +867,6 @@ include EU and US. The default value is US.</p>
 <pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;datasetReference&quot;</span>][<span class="ruby-string">&quot;projectId&quot;</span>]
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
-    
-  </div>
-
-  
-
-  
-</div>
-
-        
-          <div id="url-method" class="method ">
-  <a name="method-i-url"></a>
-
-  
-    <h4>
-      <code>url()</code>
-      <span>
-        <a href="#method-i-url">&para;</a>
-        <a href="#top">&uarr;</a>
-      </span>
-    </h4>
-  
-
-  <div class="method-description">
-    
-      <p>A URL that can be used to access the dataset using the REST API.</p>
-    
-
-    
-      <!-- <div class="method-source-code" id="url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/dataset.rb, line 120</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">url</span>
-  <span class="ruby-identifier">ensure_full_data!</span>
-  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     

@@ -269,7 +269,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="add_owner-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 665</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 674</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_owner</span> <span class="ruby-identifier">entity</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_default_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-identifier">entity</span>, <span class="ruby-string">&quot;OWNER&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -363,7 +363,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="add_reader-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 777</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 786</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_reader</span> <span class="ruby-identifier">entity</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_default_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-identifier">entity</span>, <span class="ruby-string">&quot;READER&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -457,7 +457,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="add_writer-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 721</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 730</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_writer</span> <span class="ruby-identifier">entity</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_default_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-identifier">entity</span>, <span class="ruby-string">&quot;WRITER&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -510,7 +510,7 @@ predefined ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="auth-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 850</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 859</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">auth!</span>
   <span class="ruby-identifier">update_predefined_default_acl!</span> <span class="ruby-string">&quot;authenticatedRead&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -729,7 +729,7 @@ predefined ACL rule to files in the bucket.</p>
 
   <div class="method-description">
     
-      <p>Permenently deletes the entity from the bucket&#39;s default access control
+      <p>Permanently deletes the entity from the bucket&#39;s default access control
 list for files.</p>
 
 <h3 id="method-i-delete-label-Parameters">Parameters<span><a href="#method-i-delete-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -772,7 +772,7 @@ list for files.</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 818</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 827</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">entity</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">delete_default_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-identifier">entity</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -826,7 +826,7 @@ predefined ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="owner_full-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 873</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 882</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">owner_full!</span>
   <span class="ruby-identifier">update_predefined_default_acl!</span> <span class="ruby-string">&quot;bucketOwnerFullControl&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -877,7 +877,7 @@ predefined ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="owner_read-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 893</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 902</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">owner_read!</span>
   <span class="ruby-identifier">update_predefined_default_acl!</span> <span class="ruby-string">&quot;bucketOwnerRead&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -931,7 +931,7 @@ predefined ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="owners-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 568</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 577</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">owners</span>
   <span class="ruby-identifier">reload!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@owners</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@owners</span>
@@ -979,7 +979,7 @@ rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="private-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 913</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 922</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">private!</span>
   <span class="ruby-identifier">update_predefined_default_acl!</span> <span class="ruby-string">&quot;private&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1057,7 +1057,7 @@ predefined ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="project_private-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 932</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 941</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project_private!</span>
   <span class="ruby-identifier">update_predefined_default_acl!</span> <span class="ruby-string">&quot;projectPrivate&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1108,7 +1108,7 @@ ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="public-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 952</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 961</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">public!</span>
   <span class="ruby-identifier">update_predefined_default_acl!</span> <span class="ruby-string">&quot;publicRead&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1224,7 +1224,7 @@ ACL rule to files in the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="readers-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 614</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 623</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">readers</span>
   <span class="ruby-identifier">reload!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@readers</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@readers</span>
@@ -1303,7 +1303,7 @@ the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 541</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 550</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">list_default_acls</span> <span class="ruby-ivar">@bucket</span>
   <span class="ruby-identifier">acls</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;items&quot;</span>]
@@ -1361,7 +1361,7 @@ the bucket.</p>
 
     
       <!-- <div class="method-source-code" id="writers-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 591</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket/acl.rb, line 600</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">writers</span>
   <span class="ruby-identifier">reload!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@writers</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@writers</span>

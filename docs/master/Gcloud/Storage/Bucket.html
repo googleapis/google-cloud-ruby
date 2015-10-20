@@ -119,6 +119,12 @@ href="Project.html">Project</a> and has many Files.</p>
             
               <a href="#method-i-acl">acl</a>
             
+              <a href="#method-i-api_url">api_url</a>
+            
+              <a href="#method-i-cors">cors</a>
+            
+              <a href="#method-i-cors-3D">cors=</a>
+            
               <a href="#method-i-create_file">create_file</a>
             
               <a href="#method-i-created_at">created_at</a>
@@ -141,6 +147,14 @@ href="Project.html">Project</a> and has many Files.</p>
             
               <a href="#method-i-location">location</a>
             
+              <a href="#method-i-logging_bucket">logging_bucket</a>
+            
+              <a href="#method-i-logging_bucket-3D">logging_bucket=</a>
+            
+              <a href="#method-i-logging_prefix">logging_prefix</a>
+            
+              <a href="#method-i-logging_prefix-3D">logging_prefix=</a>
+            
               <a href="#method-i-name">name</a>
             
               <a href="#method-i-new_file">new_file</a>
@@ -149,9 +163,23 @@ href="Project.html">Project</a> and has many Files.</p>
             
               <a href="#method-i-reload-21">reload!</a>
             
+              <a href="#method-i-storage_class">storage_class</a>
+            
+              <a href="#method-i-update">update</a>
+            
               <a href="#method-i-upload_file">upload_file</a>
             
-              <a href="#method-i-url">url</a>
+              <a href="#method-i-versioning-3D">versioning=</a>
+            
+              <a href="#method-i-versioning-3F">versioning?</a>
+            
+              <a href="#method-i-website_404">website_404</a>
+            
+              <a href="#method-i-website_404-3D">website_404=</a>
+            
+              <a href="#method-i-website_main">website_main</a>
+            
+              <a href="#method-i-website_main-3D">website_main=</a>
             
           
         
@@ -251,9 +279,165 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 418</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 663</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acl</span>
   <span class="ruby-ivar">@acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="api_url-method" class="method ">
+  <a name="method-i-api_url"></a>
+
+  
+    <h4>
+      <code>api_url()</code>
+      <span>
+        <a href="#method-i-api_url">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>A URL that can be used to access the bucket using the REST API.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="api_url-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">api_url</span>
+  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="cors-method" class="method ">
+  <a name="method-i-cors"></a>
+
+  
+    <h4>
+      <code>cors()</code>
+      <span>
+        <a href="#method-i-cors">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Returns the current CORS configuration for a static website served from the
+bucket. For more information, see <a
+href="https://cloud.google.com/storage/docs/cross-origin">Cross-Origin
+Resource Sharing (CORS)</a>. The return value is a frozen (unmodifiable)
+array of hashes containing the attributes specified for the <a
+href="Bucket.html">Bucket</a> resource field <a
+href="https://cloud.google.com/storage/docs/json_api/v1/buckets#cors">cors</a>.</p>
+
+<p>This method also accepts a block for updating the bucket&#39;s CORS rules.
+See <a href="Bucket/Cors.html">Bucket::Cors</a> for details.</p>
+
+<h3 id="method-i-cors-label-Examples">Examples<span><a href="#method-i-cors-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Retrieving the bucket&#39;s CORS rules.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+<span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">cors</span> <span class="ruby-comment">#=&gt; [{&quot;origin&quot;=&gt;[&quot;http://example.org&quot;],</span>
+            <span class="ruby-comment">#     &quot;method&quot;=&gt;[&quot;GET&quot;,&quot;POST&quot;,&quot;DELETE&quot;],</span>
+            <span class="ruby-comment">#     &quot;responseHeader&quot;=&gt;[&quot;X-My-Custom-Header&quot;],</span>
+            <span class="ruby-comment">#     &quot;maxAgeSeconds&quot;=&gt;3600}]</span>
+</pre>
+
+<p>Updating the bucket&#39;s CORS rules inside a block.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+
+<span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">update</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">b</span>.<span class="ruby-identifier">cors</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">add_rule</span> [<span class="ruby-string">&quot;http://example.org&quot;</span>, <span class="ruby-string">&quot;https://example.org&quot;</span>],
+               <span class="ruby-string">&quot;*&quot;</span>,
+               <span class="ruby-identifier">response_headers</span><span class="ruby-operator">:</span> [<span class="ruby-string">&quot;X-My-Custom-Header&quot;</span>],
+               <span class="ruby-identifier">max_age</span><span class="ruby-operator">:</span> <span class="ruby-value">3600</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="cors-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cors</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">cors_builder</span> = <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Cors</span>.<span class="ruby-identifier">new</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;cors&quot;</span>]
+    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">cors_builder</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cors</span> = <span class="ruby-identifier">cors_builder</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cors_builder</span>.<span class="ruby-identifier">changed?</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">deep_dup_and_freeze</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;cors&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="cors-3D-method" class="method ">
+  <a name="method-i-cors-3D"></a>
+
+  
+    <h4>
+      <code>cors=(new_cors)</code>
+      <span>
+        <a href="#method-i-cors-3D">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Updates the CORS configuration for a static website served from the bucket.
+For more information, see <a
+href="https://cloud.google.com/storage/docs/cross-origin">Cross-Origin
+Resource Sharing (CORS)</a>. Accepts an array of hashes containing the
+attributes specified for the <a
+href="https://cloud.google.com/storage/docs/json_api/v1/buckets#cors">resource
+description of cors</a>.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="cors-3D-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 143</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cors=</span> <span class="ruby-identifier">new_cors</span>
+  <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">cors</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_cors</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -325,6 +509,60 @@ get access according to their roles.</p>
 href="File.html">File</a> owner gets OWNER access, and allUsers get READER
 access.</p>
 </li></ul>
+</dd><dt><code>options[:cache_control]</code>
+<dd>
+<p>The <a
+href="https://tools.ietf.org/html/rfc7234#section-5.2">Cache-Control</a>
+response header to be returned when the file is downloaded.
+(<code>String</code>)</p>
+</dd><dt><code>options[:content_disposition]</code>
+<dd>
+<p>The <a href="https://tools.ietf.org/html/rfc6266">Content-Disposition</a>
+response header to be returned when the file is downloaded.
+(<code>String</code>)</p>
+</dd><dt><code>options[:content_encoding]</code>
+<dd>
+<p>The <a
+href="https://tools.ietf.org/html/rfc7231#section-3.1.2.2">Content-Encoding
+</a> response header to be returned when the file is downloaded.
+(<code>String</code>)</p>
+</dd><dt><code>options[:content_language]</code>
+<dd>
+<p>The <a href="http://tools.ietf.org/html/bcp47">Content-Language</a>
+response header to be returned when the file is downloaded.
+(<code>String</code>)</p>
+</dd><dt><code>options[:content_type]</code>
+<dd>
+<p>The <a
+href="https://tools.ietf.org/html/rfc2616#section-14.17">Content-Type</a>
+response header to be returned when the file is downloaded.
+(<code>String</code>)</p>
+</dd><dt><code>options[:chunk_size]</code>
+<dd>
+<p>The number of bytes per chunk in a resumable upload. Must be divisible by
+256KB. If it is not divisible by 265KB then it will be lowered to the
+nearest acceptable value. (<code>Integer</code>)</p>
+</dd><dt><code>options[:crc32c]</code>
+<dd>
+<p>The CRC32c checksum of the file data, as described in <a
+href="http://tools.ietf.org/html/rfc4960#appendix-B">RFC 4960, Appendix
+B</a>. If provided, Cloud <a href="../Storage.html">Storage</a> will only
+create the file if the value matches the value calculated by the service.
+See <a
+href="https://cloud.google.com/storage/docs/hashes-etags">Validation</a>
+for more information. (<code>String</code>)</p>
+</dd><dt><code>options[:md5]</code>
+<dd>
+<p>The MD5 hash of the file data. If provided, Cloud <a
+href="../Storage.html">Storage</a> will only create the file if the value
+matches the value calculated by the service. See <a
+href="https://cloud.google.com/storage/docs/hashes-etags">Validation</a>
+for more information. (<code>String</code>)</p>
+</dd><dt><code>options[:metadata]</code>
+<dd>
+<p>A hash of custom, user-provided web-safe keys and arbitrary string values
+that will returned with requests for the file as “x-goog-meta-” response
+headers. (<code>Hash</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-create_file-label-Returns">Returns<span><a href="#method-i-create_file-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -359,7 +597,7 @@ access.</p>
 <p>A chunk_size value can be provided in the options to be used in resumable
 uploads. This value is the number of bytes per chunk and must be divisible
 by 256KB. If it is not divisible by 265KB then it will be lowered to the
-nearest acceptible value.</p>
+nearest acceptable value.</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
@@ -404,17 +642,18 @@ gzip issue</a>.</p>
 
     
       <!-- <div class="method-source-code" id="create_file-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 353</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 597</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_file</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">ensure_file_exists!</span> <span class="ruby-identifier">file</span>
-
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>] = <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">predefined_rule_for</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>]
+  <span class="ruby-identifier">resumable</span> = <span class="ruby-identifier">resumable_upload?</span>(<span class="ruby-identifier">file</span>)
+  <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">upload_file</span> <span class="ruby-identifier">resumable</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resumable_upload?</span> <span class="ruby-identifier">file</span>
-    <span class="ruby-identifier">upload_resumable</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>[<span class="ruby-value">:chunk_size</span>], <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">upload_multipart</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
@@ -451,7 +690,7 @@ gzip issue</a>.</p>
 
     
       <!-- <div class="method-source-code" id="created_at-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 90</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">created_at</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;timeCreated&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -535,7 +774,7 @@ permissions:</p>
 
     
       <!-- <div class="method-source-code" id="default_acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 472</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 717</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_acl</span>
   <span class="ruby-ivar">@default_acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultAcl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -564,7 +803,7 @@ permissions:</p>
 
   <div class="method-description">
     
-      <p>Permenently deletes the bucket. The bucket must be empty before it can be
+      <p>Permanently deletes the bucket. The bucket must be empty before it can be
 deleted.</p>
 
 <h3 id="method-i-delete-label-Parameters">Parameters<span><a href="#method-i-delete-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -609,7 +848,7 @@ or specify the wanted behavior in the call:</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 132</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 339</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_bucket</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
@@ -672,7 +911,7 @@ or specify the wanted behavior in the call:</p>
 
     
       <!-- <div class="method-source-code" id="file-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 242</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 449</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">file</span> <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_file</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
@@ -787,7 +1026,7 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
 
     
       <!-- <div class="method-source-code" id="files-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 207</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 414</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">files</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_files</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
@@ -893,7 +1132,7 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
 
     
       <!-- <div class="method-source-code" id="id-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 61</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;id&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -927,7 +1166,7 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
 
     
       <!-- <div class="method-source-code" id="kind-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 55</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">kind</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;kind&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -966,9 +1205,159 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
     
       <!-- <div class="method-source-code" id="location-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 84</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 154</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">location</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;location&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="logging_bucket-method" class="method ">
+  <a name="method-i-logging_bucket"></a>
+
+  
+    <h4>
+      <code>logging_bucket()</code>
+      <span>
+        <a href="#method-i-logging_bucket">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>The destination bucket name for the bucket&#39;s logs. For more
+information, see <a
+href="https://cloud.google.com/storage/docs/access-logs">Access Logs</a>.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="logging_bucket-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 161</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">logging_bucket</span>
+  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;logging&quot;</span>][<span class="ruby-string">&quot;logBucket&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;logging&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="logging_bucket-3D-method" class="method ">
+  <a name="method-i-logging_bucket-3D"></a>
+
+  
+    <h4>
+      <code>logging_bucket=(logging_bucket)</code>
+      <span>
+        <a href="#method-i-logging_bucket-3D">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Updates the destination bucket for the bucket&#39;s logs. For more
+information, see <a
+href="https://cloud.google.com/storage/docs/access-logs">Access Logs</a>.
+(<code>String</code>)</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="logging_bucket-3D-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">logging_bucket=</span> <span class="ruby-identifier">logging_bucket</span>
+  <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">logging_bucket</span><span class="ruby-operator">:</span> <span class="ruby-identifier">logging_bucket</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="logging_prefix-method" class="method ">
+  <a name="method-i-logging_prefix"></a>
+
+  
+    <h4>
+      <code>logging_prefix()</code>
+      <span>
+        <a href="#method-i-logging_prefix">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>The logging object prefix for the bucket&#39;s logs. For more information,
+see <a href="https://cloud.google.com/storage/docs/access-logs">Access
+Logs</a>.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="logging_prefix-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 176</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">logging_prefix</span>
+  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;logging&quot;</span>][<span class="ruby-string">&quot;logObjectPrefix&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;logging&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="logging_prefix-3D-method" class="method ">
+  <a name="method-i-logging_prefix-3D"></a>
+
+  
+    <h4>
+      <code>logging_prefix=(logging_prefix)</code>
+      <span>
+        <a href="#method-i-logging_prefix-3D">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Updates the logging object prefix. This prefix will be used to create log
+object names for the bucket. It can be at most 900 characters and must be a
+<a
+href="https://cloud.google.com/storage/docs/bucket-naming#objectnames">valid
+object name</a>. By default, the object prefix is the name of the bucket
+for which the logs are enabled. For more information, see <a
+href="https://cloud.google.com/storage/docs/access-logs">Access Logs</a>.
+(<code>String</code>)</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="logging_prefix-3D-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 189</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">logging_prefix=</span> <span class="ruby-identifier">logging_prefix</span>
+  <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">logging_prefix</span><span class="ruby-operator">:</span> <span class="ruby-identifier">logging_prefix</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -1000,7 +1389,7 @@ href="https://cloud.google.com/storage/docs/concepts-techniques">cloud.google.co
 
     
       <!-- <div class="method-source-code" id="name-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 67</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;name&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -1097,7 +1486,7 @@ href="../Storage.html">Storage</a> service.</p>
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 478</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 723</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_bucket</span> <span class="ruby-identifier">name</span>
@@ -1115,6 +1504,123 @@ href="../Storage.html">Storage</a> service.</p>
     <div class="aliases">
       Also aliased as: <a href="Bucket.html#method-i-refresh-21">refresh!</a>
     </div>
+  
+
+  
+</div>
+
+        
+          <div id="storage_class-method" class="method ">
+  <a name="method-i-storage_class"></a>
+
+  
+    <h4>
+      <code>storage_class()</code>
+      <span>
+        <a href="#method-i-storage_class">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>The bucket&#39;s storage class. This defines how objects in the bucket are
+stored and determines the SLA and the cost of storage. Values include
+<code>STANDARD</code>, <code>NEARLINE</code>, and
+<code>DURABLE_REDUCED_AVAILABILITY</code>.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="storage_class-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 197</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">storage_class</span>
+  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;storageClass&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="update-method" class="method ">
+  <a name="method-i-update"></a>
+
+  
+    <h4>
+      <code>update()</code>
+      <span>
+        <a href="#method-i-update">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Updates the bucket with changes made in the given block in a single PATCH
+request. The following attributes may be set: <a
+href="Bucket.html#method-i-cors-3D">cors=</a>, <a
+href="Bucket.html#method-i-logging_bucket-3D">logging_bucket=</a>, <a
+href="Bucket.html#method-i-logging_prefix-3D">logging_prefix=</a>, <a
+href="Bucket.html#method-i-versioning-3D">versioning=</a>, <a
+href="Bucket.html#method-i-website_main-3D">website_main=</a>, and <a
+href="Bucket.html#method-i-website_404-3D">website_404=</a>. In addition,
+the <a href="Bucket.html#method-i-cors">cors</a> configuration accessible
+in the block is completely mutable and will be included in the request.</p>
+
+<h3 id="method-i-update-label-Examples">Examples<span><a href="#method-i-update-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
+
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-bucket&quot;</span>
+<span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">update</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">b</span>.<span class="ruby-identifier">website_main</span> = <span class="ruby-string">&quot;index.html&quot;</span>
+  <span class="ruby-identifier">b</span>.<span class="ruby-identifier">website_404</span> = <span class="ruby-string">&quot;not_found.html&quot;</span>
+  <span class="ruby-identifier">b</span>.<span class="ruby-identifier">cors</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&quot;method&quot;</span>] = [<span class="ruby-string">&quot;GET&quot;</span>,<span class="ruby-string">&quot;POST&quot;</span>,<span class="ruby-string">&quot;DELETE&quot;</span>]
+  <span class="ruby-identifier">b</span>.<span class="ruby-identifier">cors</span>[<span class="ruby-value">1</span>][<span class="ruby-string">&quot;responseHeader&quot;</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;X-Another-Custom-Header&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>New CORS rules can also be added in a nested block. See <a
+href="Bucket/Cors.html">Bucket::Cors</a> for details.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">storage</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">storage</span>
+<span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">storage</span>.<span class="ruby-identifier">bucket</span> <span class="ruby-string">&quot;my-todo-app&quot;</span>
+
+<span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">update</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">b</span>.<span class="ruby-identifier">cors</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">add_rule</span> [<span class="ruby-string">&quot;http://example.org&quot;</span>, <span class="ruby-string">&quot;https://example.org&quot;</span>],
+               <span class="ruby-string">&quot;*&quot;</span>,
+               <span class="ruby-identifier">response_headers</span><span class="ruby-operator">:</span> [<span class="ruby-string">&quot;X-My-Custom-Header&quot;</span>],
+               <span class="ruby-identifier">max_age</span><span class="ruby-operator">:</span> <span class="ruby-value">300</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="update-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 295</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
+  <span class="ruby-identifier">updater</span> = <span class="ruby-constant">Updater</span>.<span class="ruby-identifier">new</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;cors&quot;</span>]
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">updater</span>
+  <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">updater</span>.<span class="ruby-identifier">updates</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">updater</span>.<span class="ruby-identifier">updates</span>.<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
   
 
   
@@ -1152,14 +1658,14 @@ href="../Storage.html">Storage</a> service.</p>
 </div>
 
         
-          <div id="url-method" class="method ">
-  <a name="method-i-url"></a>
+          <div id="versioning-3D-method" class="method ">
+  <a name="method-i-versioning-3D"></a>
 
   
     <h4>
-      <code>url()</code>
+      <code>versioning=(new_versioning)</code>
       <span>
-        <a href="#method-i-url">&para;</a>
+        <a href="#method-i-versioning-3D">&para;</a>
         <a href="#top">&uarr;</a>
       </span>
     </h4>
@@ -1167,14 +1673,203 @@ href="../Storage.html">Storage</a> service.</p>
 
   <div class="method-description">
     
-      <p>The URI of this bucket.</p>
+      <p>Updates whether <a
+href="https://cloud.google.com/storage/docs/object-versioning">Object
+Versioning</a> is enabled for the bucket. (<code>Boolean</code>)</p>
     
 
     
-      <!-- <div class="method-source-code" id="url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 73</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">url</span>
-  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
+      <!-- <div class="method-source-code" id="versioning-3D-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">versioning=</span> <span class="ruby-identifier">new_versioning</span>
+  <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">versioning</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_versioning</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="versioning-3F-method" class="method ">
+  <a name="method-i-versioning-3F"></a>
+
+  
+    <h4>
+      <code>versioning?()</code>
+      <span>
+        <a href="#method-i-versioning-3F">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Whether <a
+href="https://cloud.google.com/storage/docs/object-versioning">Object
+Versioning</a> is enabled for the bucket.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="versioning-3F-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 205</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">versioning?</span>
+  <span class="ruby-operator">!</span><span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;versioning&quot;</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;versioning&quot;</span>][<span class="ruby-string">&quot;enabled&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="website_404-method" class="method ">
+  <a name="method-i-website_404"></a>
+
+  
+    <h4>
+      <code>website_404()</code>
+      <span>
+        <a href="#method-i-website_404">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>The page returned from a static website served from the bucket when a site
+visitor requests a resource that does not exist. For more information, see
+<a
+href="https://cloud.google.com/storage/docs/website-configuration#step4">How
+to Host a Static Website </a>.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="website_404-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 241</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">website_404</span>
+  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;website&quot;</span>][<span class="ruby-string">&quot;notFoundPage&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;website&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="website_404-3D-method" class="method ">
+  <a name="method-i-website_404-3D"></a>
+
+  
+    <h4>
+      <code>website_404=(website_404)</code>
+      <span>
+        <a href="#method-i-website_404-3D">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Updates the page returned from a static website served from the bucket when
+a site visitor requests a resource that does not exist. For more
+information, see <a
+href="https://cloud.google.com/storage/docs/website-configuration#step4">How
+to Host a Static Website </a>. (<code>String</code>)</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="website_404-3D-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 251</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">website_404=</span> <span class="ruby-identifier">website_404</span>
+  <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">website_404</span><span class="ruby-operator">:</span> <span class="ruby-identifier">website_404</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="website_main-method" class="method ">
+  <a name="method-i-website_main"></a>
+
+  
+    <h4>
+      <code>website_main()</code>
+      <span>
+        <a href="#method-i-website_main">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>The index page returned from a static website served from the bucket when a
+site visitor requests the top level directory. For more information, see <a
+href="https://cloud.google.com/storage/docs/website-configuration#step4">How
+to Host a Static Website </a>.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="website_main-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 222</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">website_main</span>
+  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;website&quot;</span>][<span class="ruby-string">&quot;mainPageSuffix&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;website&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="website_main-3D-method" class="method ">
+  <a name="method-i-website_main-3D"></a>
+
+  
+    <h4>
+      <code>website_main=(website_main)</code>
+      <span>
+        <a href="#method-i-website_main-3D">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Updates the index page returned from a static website served from the
+bucket when a site visitor requests the top level directory. For more
+information, see <a
+href="https://cloud.google.com/storage/docs/website-configuration#step4">How
+to Host a Static Website </a>. (<code>String</code>)</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="website_main-3D-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 232</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">website_main=</span> <span class="ruby-identifier">website_main</span>
+  <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">website_main</span><span class="ruby-operator">:</span> <span class="ruby-identifier">website_main</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     

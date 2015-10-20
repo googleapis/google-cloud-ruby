@@ -160,6 +160,8 @@ Data for BigQuery</a>.)</p>
         
         
             
+              <a href="#method-i-api_url">api_url</a>
+            
               <a href="#method-i-created_at">created_at</a>
             
               <a href="#method-i-dataset_id">dataset_id</a>
@@ -197,8 +199,6 @@ Data for BigQuery</a>.)</p>
               <a href="#method-i-table-3F">table?</a>
             
               <a href="#method-i-table_id">table_id</a>
-            
-              <a href="#method-i-url">url</a>
             
               <a href="#method-i-view-3F">view?</a>
             
@@ -338,6 +338,41 @@ Data for BigQuery</a>.)</p>
       <h3 class="section-header">Public Instance Methods</h3>
 
       <div class="methods">
+        
+          <div id="api_url-method" class="method ">
+  <a name="method-i-api_url"></a>
+
+  
+    <h4>
+      <code>api_url()</code>
+      <span>
+        <a href="#method-i-api_url">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>A URL that can be used to access the dataset using the REST API.</p>
+    
+
+    
+      <!-- <div class="method-source-code" id="api_url-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 187</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">api_url</span>
+  <span class="ruby-identifier">ensure_full_data!</span>
+  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
         
           <div id="created_at-method" class="method ">
   <a name="method-i-created_at"></a>
@@ -1090,41 +1125,6 @@ numbers (0-9), or underscores (_). The maximum length is 1,024 characters.</p>
 <pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">table_id</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;tableReference&quot;</span>][<span class="ruby-string">&quot;tableId&quot;</span>]
-<span class="ruby-keyword">end</span></pre>
-      </div> -->
-    
-  </div>
-
-  
-
-  
-</div>
-
-        
-          <div id="url-method" class="method ">
-  <a name="method-i-url"></a>
-
-  
-    <h4>
-      <code>url()</code>
-      <span>
-        <a href="#method-i-url">&para;</a>
-        <a href="#top">&uarr;</a>
-      </span>
-    </h4>
-  
-
-  <div class="method-description">
-    
-      <p>A URL that can be used to access the dataset using the REST API.</p>
-    
-
-    
-      <!-- <div class="method-source-code" id="url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 187</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">url</span>
-  <span class="ruby-identifier">ensure_full_data!</span>
-  <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;selfLink&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
