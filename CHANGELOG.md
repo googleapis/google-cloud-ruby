@@ -1,5 +1,26 @@
 # Release History
 
+### 0.4.1 / 2015-10-20
+
+#### Changes
+
+* Add support for Bucket attributes, including:
+  * CORS
+  * logging
+  * versioning
+  * location
+  * website
+  * storage class
+* Add support for File attributes, including:
+  * cache_control
+  * content_dispostion
+  * content_encoding
+  * content_language
+  * content_type
+* Add support for File upload validation with MD5 or CRC32c
+* Add File#public_url
+* Improve stability and error reporting of Storage ACL helpers
+
 ### 0.4.0 / 2015-10-12
 
 #### Major changes
