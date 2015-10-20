@@ -35,5 +35,15 @@ module Acceptance
     register_spec_type(self) do |desc, *addl|
       addl.include? :datastore
     end
+
+    def self.run_one_method klass, method_name, reporter
+      result = nil
+      (1..3).each do |try|
+        result = Minitest.run_one_method(klass, method_name)
+        break if result.passed?
+        puts "Retrying #{klass}##{method_name} (#{try})"
+      end
+      reporter.record result
+    end
   end
 end

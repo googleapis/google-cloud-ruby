@@ -66,6 +66,16 @@ if ENV["GCLOUD_TEST_DNS_DOMAIN"]
         addl.include? :dns
       end
     end
+
+    def self.run_one_method klass, method_name, reporter
+      result = nil
+      (1..3).each do |try|
+        result = Minitest.run_one_method(klass, method_name)
+        break if result.passed?
+        puts "Retrying #{klass}##{method_name} (#{try})"
+      end
+      reporter.record result
+    end
   end
 
   def clean_up_dns_zones
