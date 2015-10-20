@@ -22,8 +22,35 @@ describe Gcloud::Storage::File, :mock_storage do
                                                    storage.connection }
 
   # Create a file object with the project's mocked connection object
-  let(:file) { Gcloud::Storage::File.from_gapi random_file_hash(bucket.name, "file.ext"),
-                                               storage.connection }
+  let(:file_hash) { random_file_hash bucket.name, "file.ext" }
+  let(:file) { Gcloud::Storage::File.from_gapi file_hash, storage.connection }
+
+  it "knows its attributes" do
+    file.id.must_equal file_hash["id"]
+    file.name.must_equal file_hash["name"]
+    file.created_at.must_equal file_hash["timeCreated"]
+    file.api_url.must_equal file_hash["selfLink"]
+    file.media_url.must_equal file_hash["mediaLink"]
+    file.public_url.must_equal "https://storage.googleapis.com/#{file.bucket}/#{file.name}"
+    file.public_url(protocol: :http).must_equal "http://storage.googleapis.com/#{file.bucket}/#{file.name}"
+    file.url.must_equal file.public_url
+
+    file.md5.must_equal file_hash["md5Hash"]
+    file.crc32c.must_equal file_hash["crc32c"]
+    file.etag.must_equal file_hash["etag"]
+
+    file.cache_control.must_equal "public, max-age=3600"
+    file.content_disposition.must_equal "attachment; filename=filename.ext"
+    file.content_encoding.must_equal "gzip"
+    file.content_language.must_equal "en"
+    file.content_type.must_equal "text/plain"
+
+    file.metadata.must_be_kind_of Hash
+    file.metadata.size.must_equal 2
+    file.metadata.frozen?.must_equal true
+    file.metadata["player"].must_equal "Alice"
+    file.metadata["score"].must_equal "101"
+  end
 
   it "can delete itself" do
     mock_connection.delete "/storage/v1/b/#{bucket.name}/o/#{file.name}" do |env|
@@ -163,11 +190,23 @@ describe Gcloud::Storage::File, :mock_storage do
 
   it "can copy itself in the same bucket" do
     mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/#{bucket.name}/o/new-file.ext" do |env|
+      env.params.wont_include "sourceGeneration"
+      env.params.wont_include "predefinedAcl"
       [200, {"Content-Type"=>"application/json"},
        file.gapi.to_json]
     end
 
     file.copy "new-file.ext"
+  end
+
+  it "can copy itself in the same bucket with generation" do
+    mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/#{bucket.name}/o/new-file.ext" do |env|
+      env.params["sourceGeneration"].must_equal "123"
+      [200, {"Content-Type"=>"application/json"},
+       file.gapi.to_json]
+    end
+
+    file.copy "new-file.ext", generation: 123
   end
 
   it "can copy itself in the same bucket with predefined ACL" do
@@ -192,11 +231,23 @@ describe Gcloud::Storage::File, :mock_storage do
 
   it "can copy itself to a different bucket" do
     mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/new-bucket/o/new-file.ext" do |env|
+      env.params.wont_include "sourceGeneration"
+      env.params.wont_include "predefinedAcl"
       [200, {"Content-Type"=>"application/json"},
        file.gapi.to_json]
     end
 
     file.copy "new-bucket", "new-file.ext"
+  end
+
+  it "can copy itself to a different bucket with generation" do
+    mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/new-bucket/o/new-file.ext" do |env|
+      env.params["sourceGeneration"].must_equal "123"
+      [200, {"Content-Type"=>"application/json"},
+       file.gapi.to_json]
+    end
+
+    file.copy "new-bucket", "new-file.ext", generation: 123
   end
 
   it "can copy itself to a different bucket with predefined ACL" do

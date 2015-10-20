@@ -24,7 +24,7 @@ describe Gcloud::Bigquery::View, :mock_bigquery do
   let(:description) { "This is my view" }
   let(:etag) { "etag123456789" }
   let(:location_code) { "US" }
-  let(:url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
+  let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
   let(:view_hash) { random_view_hash dataset, table_id, table_name, description }
   let(:view) { Gcloud::Bigquery::View.from_gapi view_hash,
                                                 bigquery.connection }
@@ -33,7 +33,7 @@ describe Gcloud::Bigquery::View, :mock_bigquery do
     view.name.must_equal table_name
     view.description.must_equal description
     view.etag.must_equal etag
-    view.url.must_equal url
+    view.api_url.must_equal api_url
     view.view?.must_equal true
     view.table?.must_equal false
     view.location.must_equal location_code

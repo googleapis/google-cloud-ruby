@@ -15,6 +15,7 @@
 
 require "gcloud/storage/bucket/acl"
 require "gcloud/storage/bucket/list"
+require "gcloud/storage/bucket/cors"
 require "gcloud/storage/file"
 require "gcloud/upload"
 
@@ -69,9 +70,78 @@ module Gcloud
       end
 
       ##
-      # The URI of this bucket.
-      def url
+      # A URL that can be used to access the bucket using the REST API.
+      def api_url
         @gapi["selfLink"]
+      end
+
+      ##
+      # Creation time of the bucket.
+      def created_at
+        @gapi["timeCreated"]
+      end
+
+      ##
+      # Returns the current CORS configuration for a static website served from
+      # the bucket. For more information, see {Cross-Origin Resource
+      # Sharing (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
+      # The return value is a frozen (unmodifiable) array of hashes containing
+      # the attributes specified for the Bucket resource field
+      # {cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
+      #
+      # This method also accepts a block for updating the bucket's CORS rules.
+      # See Bucket::Cors for details.
+      #
+      # === Examples
+      #
+      # Retrieving the bucket's CORS rules.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #
+      #   bucket = storage.bucket "my-todo-app"
+      #   bucket.cors #=> [{"origin"=>["http://example.org"],
+      #               #     "method"=>["GET","POST","DELETE"],
+      #               #     "responseHeader"=>["X-My-Custom-Header"],
+      #               #     "maxAgeSeconds"=>3600}]
+      #
+      # Updating the bucket's CORS rules inside a block.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #   bucket = storage.bucket "my-todo-app"
+      #
+      #   bucket.update do |b|
+      #     b.cors do |c|
+      #       c.add_rule ["http://example.org", "https://example.org"],
+      #                  "*",
+      #                  response_headers: ["X-My-Custom-Header"],
+      #                  max_age: 3600
+      #     end
+      #   end
+      #
+      def cors
+        if block_given?
+          cors_builder = Bucket::Cors.new @gapi["cors"]
+          yield cors_builder
+          self.cors = cors_builder if cors_builder.changed?
+        end
+        deep_dup_and_freeze @gapi["cors"]
+      end
+
+      ##
+      # Updates the CORS configuration for a static website served from the
+      # bucket. For more information, see {Cross-Origin Resource
+      # Sharing (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
+      # Accepts an array of hashes containing the attributes specified for the
+      # {resource description of
+      # cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
+      def cors= new_cors
+        patch_gapi! cors: new_cors
       end
 
       ##
@@ -86,13 +156,150 @@ module Gcloud
       end
 
       ##
-      # Creation time of the bucket.
-      def created_at
-        @gapi["timeCreated"]
+      # The destination bucket name for the bucket's logs. For more information,
+      # see {Access Logs}[https://cloud.google.com/storage/docs/access-logs].
+      def logging_bucket
+        @gapi["logging"]["logBucket"] if @gapi["logging"]
       end
 
       ##
-      # Permenently deletes the bucket.
+      # Updates the destination bucket for the bucket's logs. For more
+      # information, see {Access
+      # Logs}[https://cloud.google.com/storage/docs/access-logs]. (+String+)
+      def logging_bucket= logging_bucket
+        patch_gapi! logging_bucket: logging_bucket
+      end
+
+      ##
+      # The logging object prefix for the bucket's logs. For more information,
+      # see {Access Logs}[https://cloud.google.com/storage/docs/access-logs].
+      def logging_prefix
+        @gapi["logging"]["logObjectPrefix"] if @gapi["logging"]
+      end
+
+      ##
+      # Updates the logging object prefix. This prefix will be used to create
+      # log object names for the bucket. It can be at most 900 characters and
+      # must be a {valid object
+      # name}[https://cloud.google.com/storage/docs/bucket-naming#objectnames].
+      # By default, the object prefix is the name
+      # of the bucket for which the logs are enabled. For more information, see
+      # {Access Logs}[https://cloud.google.com/storage/docs/access-logs].
+      # (+String+)
+      def logging_prefix= logging_prefix
+        patch_gapi! logging_prefix: logging_prefix
+      end
+
+      ##
+      # The bucket's storage class. This defines how objects in the bucket are
+      # stored and determines the SLA and the cost of storage. Values include
+      # +STANDARD+, +NEARLINE+, and +DURABLE_REDUCED_AVAILABILITY+.
+      def storage_class
+        @gapi["storageClass"]
+      end
+
+      ##
+      # Whether {Object
+      # Versioning}[https://cloud.google.com/storage/docs/object-versioning] is
+      # enabled for the bucket.
+      def versioning?
+        !@gapi["versioning"].nil? && @gapi["versioning"]["enabled"]
+      end
+
+      ##
+      # Updates whether {Object
+      # Versioning}[https://cloud.google.com/storage/docs/object-versioning] is
+      # enabled for the bucket. (+Boolean+)
+      def versioning= new_versioning
+        patch_gapi! versioning: new_versioning
+      end
+
+      ##
+      # The index page returned from a static website served from the bucket
+      # when a site visitor requests the top level directory. For more
+      # information, see {How to Host a Static Website
+      # }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      def website_main
+        @gapi["website"]["mainPageSuffix"] if @gapi["website"]
+      end
+
+      ##
+      # Updates the index page returned from a static website served from the
+      # bucket when a site visitor requests the top level directory. For more
+      # information, see {How to Host a Static Website
+      # }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      # (+String+)
+      def website_main= website_main
+        patch_gapi! website_main: website_main
+      end
+
+      ##
+      # The page returned from a static website served from the bucket when a
+      # site visitor requests a resource that does not exist. For more
+      # information, see {How to Host a Static Website
+      # }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      def website_404
+        @gapi["website"]["notFoundPage"] if @gapi["website"]
+      end
+
+      ##
+      # Updates the page returned from a static website served from the bucket
+      # when a site visitor requests a resource that does not exist. For more
+      # information, see {How to Host a Static Website
+      # }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      # (+String+)
+      def website_404= website_404
+        patch_gapi! website_404: website_404
+      end
+
+      ##
+      # Updates the bucket with changes made in the given block in a single
+      # PATCH request. The following attributes may be set: #cors=,
+      # #logging_bucket=, #logging_prefix=, #versioning=, #website_main=, and
+      # #website_404=. In addition, the #cors configuration accessible in the
+      # block is completely mutable and will be included in the request.
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #
+      #   bucket = storage.bucket "my-bucket"
+      #   bucket.update do |b|
+      #     b.website_main = "index.html"
+      #     b.website_404 = "not_found.html"
+      #     b.cors[0]["method"] = ["GET","POST","DELETE"]
+      #     b.cors[1]["responseHeader"] << "X-Another-Custom-Header"
+      #   end
+      #
+      # New CORS rules can also be added in a nested block. See Bucket::Cors for
+      # details.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #   bucket = storage.bucket "my-todo-app"
+      #
+      #   bucket.update do |b|
+      #     b.cors do |c|
+      #       c.add_rule ["http://example.org", "https://example.org"],
+      #                  "*",
+      #                  response_headers: ["X-My-Custom-Header"],
+      #                  max_age: 300
+      #     end
+      #   end
+      #
+      def update
+        updater = Updater.new @gapi["cors"]
+        yield updater
+        patch_gapi! updater.updates unless updater.updates.empty?
+      end
+
+      ##
+      # Permanently deletes the bucket.
       # The bucket must be empty before it can be deleted.
       #
       # === Parameters
@@ -279,6 +486,43 @@ module Gcloud
       #     and project team members get access according to their roles.
       #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
       #     access, and allUsers get READER access.
+      # <code>options[:cache_control]</code>::
+      #   The {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      #   response header to be returned when the file is downloaded. (+String+)
+      # <code>options[:content_disposition]</code>::
+      #   The {Content-Disposition}[https://tools.ietf.org/html/rfc6266]
+      #   response header to be returned when the file is downloaded. (+String+)
+      # <code>options[:content_encoding]</code>::
+      #   The {Content-Encoding
+      #   }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] response header
+      #   to be returned when the file is downloaded. (+String+)
+      # <code>options[:content_language]</code>::
+      #   The {Content-Language}[http://tools.ietf.org/html/bcp47] response
+      #   header to be returned when the file is downloaded. (+String+)
+      # <code>options[:content_type]</code>::
+      #   The {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17]
+      #   response header to be returned when the file is downloaded. (+String+)
+      # <code>options[:chunk_size]</code>::
+      #   The number of bytes per chunk in a resumable upload. Must be divisible
+      #   by 256KB. If it is not divisible by 265KB then it will be lowered to
+      #   the nearest acceptable value. (+Integer+)
+      # <code>options[:crc32c]</code>::
+      #   The CRC32c checksum of the file data, as described in
+      #   {RFC 4960, Appendix B}[http://tools.ietf.org/html/rfc4960#appendix-B].
+      #   If provided, Cloud Storage will only create the file if the value
+      #   matches the value calculated by the service. See
+      #   {Validation}[https://cloud.google.com/storage/docs/hashes-etags]
+      #   for more information. (+String+)
+      # <code>options[:md5]</code>::
+      #   The MD5 hash of the file data. If provided, Cloud Storage will only
+      #   create the file if the value matches the value calculated by the
+      #   service. See
+      #   {Validation}[https://cloud.google.com/storage/docs/hashes-etags]
+      #   for more information. (+String+)
+      # <code>options[:metadata]</code>::
+      #   A hash of custom, user-provided web-safe keys and arbitrary string
+      #   values that will returned with requests for the file as "x-goog-meta-"
+      #   response headers. (+Hash+)
       #
       # === Returns
       #
@@ -310,7 +554,7 @@ module Gcloud
       # A chunk_size value can be provided in the options to be used
       # in resumable uploads. This value is the number of bytes per
       # chunk and must be divisible by 256KB. If it is not divisible
-      # by 265KB then it will be lowered to the nearest acceptible
+      # by 265KB then it will be lowered to the nearest acceptable
       # value.
       #
       #   require "gcloud"
@@ -353,13 +597,14 @@ module Gcloud
       def create_file file, path = nil, options = {}
         ensure_connection!
         ensure_file_exists! file
-
         options[:acl] = File::Acl.predefined_rule_for options[:acl]
+        resumable = resumable_upload?(file)
+        resp = @connection.upload_file resumable, name, file, path, options
 
-        if resumable_upload? file
-          upload_resumable file, path, options[:chunk_size], options
+        if resp.success?
+          File.from_gapi resp.data, connection
         else
-          upload_multipart file, path, options
+          fail ApiError.from_response(resp)
         end
       end
       alias_method :upload_file, :create_file
@@ -503,6 +748,16 @@ module Gcloud
         fail "Must have active connection" unless connection
       end
 
+      def patch_gapi! options = {}
+        ensure_connection!
+        resp = connection.patch_bucket name, options
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
       ##
       # Raise an error if the file is not found.
       def ensure_file_exists! file
@@ -516,39 +771,53 @@ module Gcloud
         ::File.size?(file).to_i > Upload.resumable_threshold
       end
 
-      def upload_multipart file, path, options = {}
-        resp = @connection.insert_file_multipart name, file, path, options
-
-        if resp.success?
-          File.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
+      ##
+      # Given nil, empty array, a gapi array of hashes, or any value, returns a
+      # deeply dup'd and frozen array of simple hashes or values (not gapi
+      # objects.)
+      def deep_dup_and_freeze array
+        return [].freeze if array.nil? || array.empty?
+        array = Array(array.dup)
+        array = array.map do |h|
+          h = h.to_hash if h.respond_to? :to_hash
+          h.dup.freeze
         end
-      end
-
-      def upload_resumable file, path, chunk_size, options = {}
-        chunk_size = verify_chunk_size! chunk_size
-
-        resp = @connection.insert_file_resumable name, file,
-                                                 path, chunk_size, options
-
-        if resp.success?
-          File.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        array.freeze
       end
 
       ##
-      # Determines if a chunk_size is valid.
-      def verify_chunk_size! chunk_size
-        chunk_size = chunk_size.to_i
-        chunk_mod = 256 * 1024 # 256KB
-        if (chunk_size.to_i % chunk_mod) != 0
-          chunk_size = (chunk_size / chunk_mod) * chunk_mod
+      # Yielded to a block to accumulate changes for a patch request.
+      class Updater
+        attr_reader :updates
+        ##
+        # Create an Updater object.
+        def initialize cors
+          @cors = cors ? Array(cors.dup) : []
+          @cors = @cors.map { |x| x.to_hash if x.respond_to? :to_hash }
+          @updates = {}
         end
-        return if chunk_size.zero?
-        chunk_size
+
+        ATTRS = [:cors, :logging_bucket, :logging_prefix, :versioning,
+                 :website_main, :website_404]
+
+        ATTRS.each do |attr|
+          define_method "#{attr}=" do |arg|
+            updates[attr] = arg
+          end
+        end
+
+        ##
+        # Return CORS for mutation. Also adds CORS to @updates so that it
+        # is included in the patch request.
+        def cors
+          updates[:cors] ||= @cors
+          if block_given?
+            cors_builder = Bucket::Cors.new updates[:cors]
+            yield cors_builder
+            updates[:cors] = cors_builder if cors_builder.changed?
+          end
+          updates[:cors]
+        end
       end
     end
   end

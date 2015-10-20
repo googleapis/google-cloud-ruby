@@ -46,38 +46,65 @@ class MockStorage < Minitest::Spec
     @connection
   end
 
+  def random_bucket_hash(name=random_bucket_name,
+    url_root="https://www.googleapis.com/storage/v1", location="US",
+    storage_class="STANDARD", versioning=nil, logging_bucket=nil,
+    logging_prefix=nil, website_main=nil, website_404=nil, cors=[])
+    versioning_config = { "enabled" => versioning } if versioning
+    { "kind" => "storage#bucket",
+      "id" => name,
+      "selfLink" => "#{url_root}/b/#{name}",
+      "projectNumber" => "1234567890",
+      "name" => name,
+      "timeCreated" => Time.now,
+      "metageneration" => "1",
+      "owner" => { "entity" => "project-owners-1234567890" },
+      "location" => location,
+      "cors" => cors,
+      "logging" => logging_hash(logging_bucket, logging_prefix),
+      "storageClass" => storage_class,
+      "versioning" => versioning_config,
+      "website" => website_hash(website_main, website_404),
+      "etag" => "CAE=" }.delete_if { |_, v| v.nil? }
+  end
 
-  def random_bucket_hash name=random_bucket_name, url_root="https://www.googleapis.com/storage/v1"
-    {"kind"=>"storage#bucket",
-        "id"=>name,
-        "selfLink"=>"#{url_root}/b/#{name}",
-        "projectNumber"=>"1234567890",
-        "name"=>name,
-        "timeCreated"=>Time.now,
-        "metageneration"=>"1",
-        "owner"=>{"entity"=>"project-owners-1234567890"},
-        "location"=>"US",
-        "storageClass"=>"STANDARD",
-        "etag"=>"CAE="}
+  def logging_hash(bucket, prefix)
+    {
+      "logBucket" => bucket,
+      "logObjectPrefix" => prefix,
+    }.delete_if { |_, v| v.nil? }  if bucket || prefix
+  end
+
+  def website_hash(website_main, website_404)
+    {
+      "mainPageSuffix" => website_main,
+      "notFoundPage" => website_404,
+    }.delete_if { |_, v| v.nil? }  if website_main || website_404
   end
 
   def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890"
-    {"kind"=>"storage#object",
-     "id"=>"#{bucket}/#{name}/1234567890",
-     "selfLink"=>"https://www.googleapis.com/storage/v1/b/#{bucket}/o/#{name}",
-     "name"=>"#{name}",
-     "bucket"=>"#{bucket}",
-     "generation"=>generation,
-     "metageneration"=>"1",
-     "contentType"=>"text/plain",
-     "updated"=>Time.now,
-     "storageClass"=>"STANDARD",
-     "size"=>rand(10_000),
-     "md5Hash"=>"HXB937GQDFxDFqUGi//weQ==",
-     "mediaLink"=>"https://www.googleapis.com/download/storage/v1/b/#{bucket}/o/#{name}?generation=1234567890&alt=media",
-     "owner"=>{"entity"=>"user-1234567890", "entityId"=>"abc123"},
-     "crc32c"=>"Lm1F3g==",
-     "etag"=>"CKih16GjycICEAE="}
+    { "kind" => "storage#object",
+      "id" => "#{bucket}/#{name}/1234567890",
+      "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket}/o/#{name}",
+      "name" => "#{name}",
+      "timeCreated" => Time.now,
+      "bucket" => "#{bucket}",
+      "generation" => generation,
+      "metageneration" => "1",
+      "cacheControl" => "public, max-age=3600",
+      "contentDisposition" => "attachment; filename=filename.ext",
+      "contentEncoding" => "gzip",
+      "contentLanguage" => "en",
+      "contentType" => "text/plain",
+      "updated" => Time.now,
+      "storageClass" => "STANDARD",
+      "size" => rand(10_000),
+      "md5Hash" => "HXB937GQDFxDFqUGi//weQ==",
+      "mediaLink" => "https://www.googleapis.com/download/storage/v1/b/#{bucket}/o/#{name}?generation=1234567890&alt=media",
+      "metadata" => { "player" => "Alice", "score" => "101" },
+      "owner" => { "entity" => "user-1234567890", "entityId" => "abc123" },
+      "crc32c" => "Lm1F3g==",
+      "etag" => "CKih16GjycICEAE=" }
   end
 
   def random_bucket_name

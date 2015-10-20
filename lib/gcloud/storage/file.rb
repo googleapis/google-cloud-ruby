@@ -22,7 +22,16 @@ module Gcloud
     ##
     # = File
     #
-    # Represents the File/Object that belong to a Bucket.
+    # Represents a File
+    # ({Object}[https://cloud.google.com/storage/docs/json_api/v1/objects]) that
+    # belongs to a Bucket. Files (Objects) are
+    # the individual pieces of data that you store in Google Cloud Storage. A
+    # file can be up to 5 TB in size. Files have two components:
+    # data and metadata. The data component is the data from an external file or
+    # other data source that you want to store in Google Cloud Storage. The
+    # metadata component is a collection of name-value pairs that describe
+    # various qualities of the data. For more information, see {Concepts and
+    # Techniques}[https://cloud.google.com/storage/docs/concepts-techniques].
     #
     #   require "gcloud"
     #
@@ -92,15 +101,27 @@ module Gcloud
       end
 
       ##
-      # The url to the file.
-      def url
+      # A URL that can be used to access the file using the REST API.
+      def api_url
         @gapi["selfLink"]
+      end
+
+      ##
+      # A URL that can be used to download the file using the REST API.
+      def media_url
+        @gapi["mediaLink"]
       end
 
       ##
       # Content-Length of the data in bytes.
       def size
         @gapi["size"]
+      end
+
+      ##
+      # Creation time of the file.
+      def created_at
+        @gapi["timeCreated"]
       end
 
       ##
@@ -118,8 +139,9 @@ module Gcloud
       end
 
       ##
-      # CRC32c checksum, as described in RFC 4960, Appendix B;
-      # encoded using base64.
+      # The CRC32c checksum of the data, as described in
+      # {RFC 4960, Appendix B}[http://tools.ietf.org/html/rfc4960#appendix-B].
+      # Encoded using base64 in big-endian byte order.
       def crc32c
         @gapi["crc32c"]
       end
@@ -128,6 +150,130 @@ module Gcloud
       # HTTP 1.1 Entity tag for the file.
       def etag
         @gapi["etag"]
+      end
+
+      ##
+      # The {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      # directive for the file data.
+      def cache_control
+        @gapi["cacheControl"]
+      end
+
+      ##
+      # Updates the
+      # {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      # directive for the file data.
+      def cache_control= cache_control
+        patch_gapi! cache_control: cache_control
+      end
+
+      ##
+      # The {Content-Disposition}[https://tools.ietf.org/html/rfc6266] of the
+      # file data.
+      def content_disposition
+        @gapi["contentDisposition"]
+      end
+
+      ##
+      # Updates the {Content-Disposition}[https://tools.ietf.org/html/rfc6266]
+      # of the file data.
+      def content_disposition= content_disposition
+        patch_gapi! content_disposition: content_disposition
+      end
+
+      ##
+      # The {Content-Encoding
+      # }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] of the file data.
+      def content_encoding
+        @gapi["contentEncoding"]
+      end
+
+      ##
+      # Updates the {Content-Encoding
+      # }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] of the file data.
+      def content_encoding= content_encoding
+        patch_gapi! content_encoding: content_encoding
+      end
+
+      ##
+      # The {Content-Language}[http://tools.ietf.org/html/bcp47] of the file
+      # data.
+      def content_language
+        @gapi["contentLanguage"]
+      end
+
+      ##
+      # Updates the {Content-Language}[http://tools.ietf.org/html/bcp47] of the
+      # file data.
+      def content_language= content_language
+        patch_gapi! content_language: content_language
+      end
+
+      ##
+      # The {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17] of
+      # the file data.
+      def content_type
+        @gapi["contentType"]
+      end
+
+      ##
+      # Updates the
+      # {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17] of the
+      # file data.
+      def content_type= content_type
+        patch_gapi! content_type: content_type
+      end
+
+      ##
+      # A hash of custom, user-provided web-safe keys and arbitrary string
+      # values that will returned with requests for the file as "x-goog-meta-"
+      # response headers.
+      def metadata
+        m = @gapi["metadata"]
+        m = m.to_hash if m.respond_to? :to_hash
+        m.freeze
+      end
+
+      ##
+      # Updates the hash of custom, user-provided web-safe keys and arbitrary
+      # string values that will returned with requests for the file as
+      # "x-goog-meta-" response headers.
+      def metadata= metadata
+        patch_gapi! metadata: metadata
+      end
+
+      ##
+      # Updates the file with changes made in the given block in a single
+      # PATCH request. The following attributes may be set: #cache_control=,
+      # #content_disposition=, #content_encoding=, #content_language=,
+      # #content_type=, and #metadata=. The #metadata hash accessible in the
+      # block is completely mutable and will be included in the request.
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #
+      #   bucket = storage.bucket "my-bucket"
+      #
+      #   file = bucket.file "path/to/my-file.ext"
+      #
+      #   file.update do |f|
+      #     f.cache_control = "private, max-age=0, no-cache"
+      #     f.content_disposition = "inline; filename=filename.ext"
+      #     f.content_encoding = "deflate"
+      #     f.content_language = "de"
+      #     f.content_type = "application/json"
+      #     f.metadata["player"] = "Bob"
+      #     f.metadata["score"] = "10"
+      #   end
+      #
+      def update
+        updater = Updater.new metadata
+        yield updater
+        patch_gapi! updater.updates unless updater.updates.empty?
       end
 
       ##
@@ -229,6 +375,9 @@ module Gcloud
       #   path to copy the file to in the given bucket. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:generation]</code>::
+      #   Select a specific revision of the file to copy. The default is the
+      #   latest version. (+Integer+)
       # <code>options[:acl]</code>::
       #   A predefined set of access controls to apply to new file.
       #   (+String+)
@@ -278,6 +427,11 @@ module Gcloud
       #   file.copy "new-destination-bucket",
       #             "path/to/destination/file.ext"
       #
+      # The file can also be copied by specifying a generation:
+      #
+      #   file.copy "copy/of/previous/generation/file.ext",
+      #             generation: 123456
+      #
       def copy dest_bucket_or_path, dest_path = nil, options = {}
         ensure_connection!
         dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
@@ -293,7 +447,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes the file.
+      # Permanently deletes the file.
       #
       # === Returns
       #
@@ -320,6 +474,50 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
+
+      ##
+      # Public URL to access the file. If the file is not public, requests to
+      # the URL will return an error. (See File::Acl#public! and
+      # Bucket::DefaultAcl#public!) For more information, read [Accessing Public
+      # Data]{https://cloud.google.com/storage/docs/access-public-data}.
+      #
+      # To share a file that is not public see #signed_url.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:protocol]</code>::
+      #   The protocol to use for the URL. Default is +HTTPS+. (+String+)
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #
+      #   bucket = storage.bucket "my-todo-app"
+      #   file = bucket.file "avatars/heidi/400x400.png"
+      #   public_url = file.public_url
+      #
+      # To generate the URL with a protocol other than HTTPS, use the +protocol+
+      # option:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #
+      #   bucket = storage.bucket "my-todo-app"
+      #   file = bucket.file "avatars/heidi/400x400.png"
+      #   public_url = file.public_url protocol: "http"
+      #
+      def public_url options = {}
+        protocol = options[:protocol] || :https
+        "#{protocol}://storage.googleapis.com/#{bucket}/#{name}"
+      end
+      alias_method :url, :public_url
 
       ##
       # Access without authentication can be granted to a File for a specified
@@ -500,6 +698,16 @@ module Gcloud
         fail "Must have active connection" unless connection
       end
 
+      def patch_gapi! options = {}
+        ensure_connection!
+        resp = connection.patch_file bucket, name, options
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
       def fix_copy_args dest_bucket, dest_path, options = {}
         if dest_path.respond_to?(:to_hash) && options.empty?
           options, dest_path = dest_path, nil
@@ -585,6 +793,38 @@ module Gcloud
           "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
                     "&Expires=#{expires}" \
                     "&Signature=#{CGI.escape signature}"
+        end
+      end
+
+      ##
+      # Yielded to a block to accumulate changes for a patch request.
+      class Updater
+        attr_reader :updates
+        ##
+        # Create an Updater object.
+        def initialize metadata
+          @metadata = if metadata.nil?
+                        {}
+                      else
+                        metadata.dup
+                      end
+          @updates = {}
+        end
+
+        ATTRS = [:cache_control, :content_disposition, :content_encoding,
+                 :content_language, :content_type, :metadata]
+
+        ATTRS.each do |attr|
+          define_method "#{attr}=" do |arg|
+            updates[attr] = arg
+          end
+        end
+
+        ##
+        # Return metadata for mutation. Also adds metadata to @updates so that
+        # it is included in the patch request.
+        def metadata
+          updates[:metadata] ||= @metadata
         end
       end
     end

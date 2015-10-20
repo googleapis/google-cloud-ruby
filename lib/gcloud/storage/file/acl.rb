@@ -352,7 +352,7 @@ module Gcloud
         end
 
         ##
-        # Permenently deletes the entity from the file's access control list.
+        # Permanently deletes the entity from the file's access control list.
         #
         # === Parameters
         #
@@ -536,11 +536,20 @@ module Gcloud
 
         protected
 
+        def clear!
+          @owners  = nil
+          @writers = nil
+          @readers = nil
+          self
+        end
+
         def update_predefined_acl! acl_role
           resp = @connection.patch_file @bucket, @file,
-                                        acl: acl_role
+                                        predefined_acl: acl_role,
+                                        acl: []
 
-          resp.success?
+          return clear! if resp.success?
+          fail Gcloud::Storage::ApiError.from_response(resp)
         end
 
         def entities_from_acls acls, role

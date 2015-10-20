@@ -75,27 +75,28 @@ module Gcloud
           @client.execute(
             api_method: @storage.buckets.insert,
             parameters: params,
-            body_object: { name: bucket_name }
+            body_object: insert_bucket_request(bucket_name, options)
           )
         end
       end
 
       ##
-      # Updates a bucket's metadata.
+      # Updates a bucket, including its ACL metadata.
       def patch_bucket bucket_name, options = {}
         params = { bucket: bucket_name,
-                   predefinedAcl: options[:acl],
-                   predefinedDefaultObjectAcl: options.delete(:default_acl)
+                   predefinedAcl: options[:predefined_acl],
+                   predefinedDefaultObjectAcl: options[:predefined_default_acl]
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(
           api_method: @storage.buckets.patch,
-          parameters: params
+          parameters: params,
+          body_object: patch_bucket_request(options)
         )
       end
 
       ##
-      # Permenently deletes an empty bucket.
+      # Permanently deletes an empty bucket.
       def delete_bucket bucket_name, opts = {}
         incremental_backoff opts do
           @client.execute(
@@ -125,7 +126,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes a bucket ACL.
+      # Permanently deletes a bucket ACL.
       def delete_bucket_acl bucket_name, entity
         @client.execute(
           api_method: @storage.bucket_access_controls.delete,
@@ -153,7 +154,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes a default ACL.
+      # Permanently deletes a default ACL.
       def delete_default_acl bucket_name, entity
         @client.execute(
           api_method: @storage.default_object_access_controls.delete,
@@ -177,72 +178,24 @@ module Gcloud
         )
       end
 
-      # rubocop:disable Metrics/MethodLength
-      # rubocop:disable Metrics/AbcSize
-      # Disabled rubocop because the API we need to use
-      # is verbose. No getting around it.
-
       ##
-      # Stores a new object and metadata.
-      # Uses a multipart form post.
-      def insert_file_multipart bucket_name, file, path = nil,
-                                options = {}
+      # Stores a new object and metadata. If resumable is true, a resumable
+      # upload, otherwise uses a multipart form post.
+      #
+      # UploadIO comes from Faraday, which gets it from multipart-post
+      # The initializer signature is:
+      # filename_or_io, content_type, filename = nil, opts = {}
+      def upload_file resumable, bucket_name, file, path = nil, options = {}
         local_path = Pathname(file).to_path
+        options[:content_type] ||= mime_type_for(local_path)
+        media = file_media local_path, options, resumable
         upload_path = Pathname(path || local_path).to_path
-        mime_type = mime_type_for local_path
-
-        media = Google::APIClient::UploadIO.new local_path, mime_type
-
-        params = { uploadType: "multipart",
-                   bucket: bucket_name,
-                   name: upload_path,
-                   predefinedAcl: options[:acl]
-                 }.delete_if { |_, v| v.nil? }
-
-        @client.execute(
-          api_method: @storage.objects.insert,
-          media: media,
-          parameters: params,
-          body_object: { contentType: mime_type }
-        )
-      end
-
-      ##
-      # Stores a new object and metadata.
-      # Uses a resumable upload.
-      def insert_file_resumable bucket_name, file, path = nil,
-                                chunk_size = nil, options = {}
-        local_path = Pathname(file).to_path
-        upload_path = Pathname(path || local_path).to_path
-        # mime_type = options[:mime_type] || mime_type_for local_path
-        mime_type = mime_type_for local_path
-
-        # This comes from Faraday, which gets it from multipart-post
-        # The signature is:
-        # filename_or_io, content_type, filename = nil, opts = {}
-
-        media = Google::APIClient::UploadIO.new local_path, mime_type
-        media.chunk_size = chunk_size
-
-        params = { uploadType: "resumable",
-                   bucket: bucket_name,
-                   name: upload_path,
-                   predefinedAcl: options[:acl]
-                 }.delete_if { |_, v| v.nil? }
-
-        result = @client.execute(
-          api_method: @storage.objects.insert,
-          media: media,
-          parameters: params,
-          body_object: { contentType: mime_type }
-        )
+        result = insert_file resumable, bucket_name, upload_path, media, options
+        return result unless resumable
         upload = result.resumable_upload
         result = @client.execute upload while upload.resumable?
         result
       end
-
-      # rubocop:enable Metrics/MethodLength
-      # rubocop:enable Metrics/AbcSize
 
       ##
       # Retrieves an object or its metadata.
@@ -259,12 +212,12 @@ module Gcloud
       ## Copy a file from source bucket/object to a
       # destination bucket/object.
       def copy_file source_bucket_name, source_file_path,
-                    destination_bucket_name, destination_file_path,
-                    options = {}
+                    destination_bucket_name, destination_file_path, options = {}
         @client.execute(
           api_method: @storage.objects.copy,
           parameters: { sourceBucket: source_bucket_name,
                         sourceObject: source_file_path,
+                        sourceGeneration: options[:generation],
                         destinationBucket: destination_bucket_name,
                         destinationObject: destination_file_path,
                         predefinedAcl: options[:acl]
@@ -287,17 +240,18 @@ module Gcloud
       def patch_file bucket_name, file_path, options = {}
         params = { bucket: bucket_name,
                    object: file_path,
-                   predefinedAcl: options.delete(:acl)
+                   predefinedAcl: options[:predefined_acl]
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(
           api_method: @storage.objects.patch,
-          parameters: params
+          parameters: params,
+          body_object: patch_file_request(options)
         )
       end
 
       ##
-      # Permenently deletes a file.
+      # Permanently deletes a file.
       def delete_file bucket_name, file_path
         @client.execute(
           api_method: @storage.objects.delete,
@@ -329,7 +283,7 @@ module Gcloud
       end
 
       ##
-      # Permenently deletes a file ACL.
+      # Permanently deletes a file ACL.
       def delete_file_acl bucket_name, file_name, entity, options = {}
         query = { bucket: bucket_name, object: file_name, entity: entity }
         query[:generation] = options[:generation] if options[:generation]
@@ -353,10 +307,117 @@ module Gcloud
 
       protected
 
+      def insert_bucket_request name, options = {}
+        {
+          "name" => name,
+          "location" => options[:location],
+          "cors" => options[:cors],
+          "logging" => logging_config(options),
+          "storageClass" => storage_class(options[:storage_class]),
+          "versioning" => versioning_config(options[:versioning]),
+          "website" => website_config(options)
+        }.delete_if { |_, v| v.nil? }
+      end
+
+      def patch_bucket_request options = {}
+        {
+          "cors" => options[:cors],
+          "logging" => logging_config(options),
+          "versioning" => versioning_config(options[:versioning]),
+          "website" => website_config(options),
+          "acl" => options[:acl],
+          "defaultObjectAcl" => options[:default_acl]
+        }.delete_if { |_, v| v.nil? }
+      end
+
+      def versioning_config enabled
+        { "enabled" => enabled } unless enabled.nil?
+      end
+
+      def logging_config options
+        bucket = options[:logging_bucket]
+        prefix = options[:logging_prefix]
+        {
+          "logBucket" => bucket,
+          "logObjectPrefix" => prefix
+        }.delete_if { |_, v| v.nil? } if bucket || prefix
+      end
+
+      def website_config options
+        website_main = options[:website_main]
+        website_404 = options[:website_404]
+        {
+          "mainPageSuffix" => website_main,
+          "notFoundPage" => website_404
+        }.delete_if { |_, v| v.nil? } if website_main || website_404
+      end
+
+      def storage_class str #:nodoc:
+        { "durable_reduced_availability" => "DURABLE_REDUCED_AVAILABILITY",
+          "dra" => "DURABLE_REDUCED_AVAILABILITY",
+          "durable" => "DURABLE_REDUCED_AVAILABILITY",
+          "nearline" => "NEARLINE",
+          "standard" => "STANDARD" }[str.to_s.downcase]
+      end
+
+      def insert_file resumable, bucket_name, path, media, options
+        params = { uploadType: (resumable ? "resumable" : "multipart"),
+                   bucket: bucket_name,
+                   name: path,
+                   predefinedAcl: options[:acl]
+        }.delete_if { |_, v| v.nil? }
+
+        @client.execute api_method: @storage.objects.insert,
+                        media: media,
+                        parameters: params,
+                        body_object: insert_file_request(options)
+      end
+
+      def file_media local_path, options, resumable
+        media = Google::APIClient::UploadIO.new local_path,
+                                                options[:content_type]
+        return media unless resumable && options[:chunk_size]
+        media.chunk_size = verify_chunk_size!(options.delete(:chunk_size))
+        media
+      end
+
+      def insert_file_request options = {}
+        request = {
+          "crc32c" => options[:crc32c],
+          "md5Hash" => options[:md5],
+          "metadata" => options[:metadata]
+        }.delete_if { |_, v| v.nil? }
+        request.merge patch_file_request(options)
+      end
+
+      def patch_file_request options = {}
+        {
+          "cacheControl" => options[:cache_control],
+          "contentDisposition" => options[:content_disposition],
+          "contentEncoding" => options[:content_encoding],
+          "contentLanguage" => options[:content_language],
+          "contentType" => options[:content_type],
+          "metadata" => options[:metadata],
+          "acl" => options[:acl]
+        }.delete_if { |_, v| v.nil? }
+      end
+
       def incremental_backoff options = {}
         Gcloud::Backoff.new(options).execute do
           yield
         end
+      end
+
+      ##
+      # Determines if a chunk_size is valid.
+      def verify_chunk_size! chunk_size
+        chunk_size = chunk_size.to_i
+        chunk_mod = 256 * 1024 # 256KB
+        if (chunk_size.to_i % chunk_mod) != 0
+          chunk_size = (chunk_size / chunk_mod) * chunk_mod
+        end
+        return if chunk_size.zero?
+        chunk_size
       end
     end
   end

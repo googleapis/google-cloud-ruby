@@ -318,7 +318,7 @@ module Gcloud
         end
 
         ##
-        # Permenently deletes the entity from the bucket's access control list.
+        # Permanently deletes the entity from the bucket's access control list.
         #
         # === Parameters
         #
@@ -468,11 +468,20 @@ module Gcloud
 
         protected
 
+        def clear!
+          @owners  = nil
+          @writers = nil
+          @readers = nil
+          self
+        end
+
         def update_predefined_acl! acl_role
           resp = @connection.patch_bucket @bucket,
-                                          acl: acl_role
+                                          predefined_acl: acl_role,
+                                          acl: []
 
-          resp.success?
+          return clear! if resp.success?
+          fail Gcloud::Storage::ApiError.from_response(resp)
         end
 
         def entities_from_acls acls, role
@@ -785,7 +794,7 @@ module Gcloud
         end
 
         ##
-        # Permenently deletes the entity from the bucket's default access
+        # Permanently deletes the entity from the bucket's default access
         # control list for files.
         #
         # === Parameters
@@ -957,11 +966,20 @@ module Gcloud
 
         protected
 
+        def clear!
+          @owners  = nil
+          @writers = nil
+          @readers = nil
+          self
+        end
+
         def update_predefined_default_acl! acl_role
           resp = @connection.patch_bucket @bucket,
-                                          default_acl: acl_role
+                                          predefined_default_acl: acl_role,
+                                          default_acl: []
 
-          resp.success?
+          return clear! if resp.success?
+          fail Gcloud::Storage::ApiError.from_response(resp)
         end
 
         def entities_from_acls acls, role

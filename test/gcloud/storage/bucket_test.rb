@@ -18,12 +18,52 @@ require "uri"
 
 describe Gcloud::Storage::Bucket, :mock_storage do
   # Create a bucket object with the project's mocked connection object
-  let(:bucket) { Gcloud::Storage::Bucket.from_gapi random_bucket_hash,
-                                                   storage.connection }
+  let(:bucket_hash) { random_bucket_hash }
+  let(:bucket) { Gcloud::Storage::Bucket.from_gapi bucket_hash, storage.connection }
+
+  let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
+  let(:bucket_url_root) { "https://www.googleapis.com/storage/v1" }
+  let(:bucket_url) { "#{bucket_url_root}/b/#{bucket_name}" }
+  let(:bucket_cors) { [{ "maxAgeSeconds" => 300,
+                         "origin" => ["http://example.org", "https://example.org"],
+                         "method" => ["*"],
+                         "responseHeader" => ["X-My-Custom-Header"] }] }
+  let(:bucket_location) { "US" }
+  let(:bucket_logging_bucket) { "bucket-name-logging" }
+  let(:bucket_logging_prefix) { "AccessLog" }
+  let(:bucket_storage_class) { "STANDARD" }
+  let(:bucket_versioning) { true }
+  let(:bucket_website_main) { "index.html" }
+  let(:bucket_website_404) { "404.html" }
+  let(:bucket_hash_complete) { random_bucket_hash bucket_name, bucket_url_root,
+                                                  bucket_location, bucket_storage_class, bucket_versioning,
+                                                  bucket_logging_bucket, bucket_logging_prefix, bucket_website_main,
+                                                  bucket_website_404, bucket_cors }
+  let(:bucket_complete) { Gcloud::Storage::Bucket.from_gapi bucket_hash_complete, storage.connection }
+
+  it "knows its attributes" do
+    bucket_complete.id.must_equal bucket_hash_complete["id"]
+    bucket_complete.name.must_equal bucket_name
+    bucket_complete.created_at.must_equal bucket_hash_complete["timeCreated"]
+    bucket_complete.api_url.must_equal bucket_url
+    bucket_complete.location.must_equal bucket_location
+    bucket_complete.logging_bucket.must_equal bucket_logging_bucket
+    bucket_complete.logging_prefix.must_equal bucket_logging_prefix
+    bucket_complete.storage_class.must_equal bucket_storage_class
+    bucket_complete.versioning?.must_equal bucket_versioning
+    bucket_complete.website_main.must_equal bucket_website_main
+    bucket_complete.website_404.must_equal bucket_website_404
+  end
+
+  it "return frozen cors" do
+    bucket_complete.cors.must_equal bucket_hash_complete["cors"]
+    bucket_complete.cors.frozen?.must_equal true
+    bucket_complete.cors.first.frozen?.must_equal true
+  end
 
   it "can delete itself" do
     mock_connection.delete "/storage/v1/b/#{bucket.name}" do |env|
-      [200, {"Content-Type"=>"application/json"}, ""]
+      [200, { "Content-Type" => "application/json" }, ""]
     end
 
     bucket.delete
@@ -47,7 +87,8 @@ describe Gcloud::Storage::Bucket, :mock_storage do
       multipart_params.last[:headers]["Content-Transfer-Encoding"].must_equal "binary"
       multipart_params.last[:body].must_equal "Hello world"
 
-      [200, {"Content-Type"=>"application/json"},
+
+      [200, { "Content-Type" => "application/json" },
        create_file_json(bucket.name, new_file_name)]
     end
 
@@ -64,7 +105,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
 
     mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.wont_include "predefinedAcl"
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        create_file_json(bucket.name, new_file_name)]
     end
 
@@ -78,7 +119,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
 
     mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.wont_include "predefinedAcl"
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        create_file_json(bucket.name, new_file_name)]
     end
 
@@ -93,7 +134,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.must_include "predefinedAcl"
       env.params["predefinedAcl"].must_equal "private"
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        create_file_json(bucket.name, new_file_name)]
     end
 
@@ -108,7 +149,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.must_include "predefinedAcl"
       env.params["predefinedAcl"].must_equal "publicRead"
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        create_file_json(bucket.name, new_file_name)]
     end
 
@@ -120,7 +161,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
   it "creates with resumable" do
     # Mock the upload
     mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-      [200, {"Content-Type"=>"application/json", Location: "/upload/resumable-uri"},
+      [200, { "Content-Type" => "application/json", Location: "/upload/resumable-uri" },
        create_file_json(bucket.name, "resumable.ext")]
     end
 
@@ -129,6 +170,88 @@ describe Gcloud::Storage::Bucket, :mock_storage do
       Gcloud::Upload.stub :resumable_threshold, tmpfile.size/2 do
         bucket.create_file tmpfile, "resumable.ext"
       end
+    end
+  end
+
+  it "creates a file with md5" do
+    new_file_name = random_file_path
+
+    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+      multipart_params = parse_multipart env
+
+      json = JSON.parse multipart_params.first[:body]
+      json["md5Hash"].must_equal "HXB937GQDFxDFqUGi//weQ=="
+      [200, { "Content-Type" => "application/json" },
+       create_file_json(bucket.name, new_file_name)]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      bucket.create_file tmpfile, new_file_name, md5: "HXB937GQDFxDFqUGi//weQ=="
+    end
+  end
+
+  it "creates a file with crc32c" do
+    new_file_name = random_file_path
+
+    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+      multipart_params = parse_multipart env
+      json = JSON.parse multipart_params.first[:body]
+      json["crc32c"].must_equal "Lm1F3g=="
+      [200, { "Content-Type" => "application/json" },
+       create_file_json(bucket.name, new_file_name)]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      bucket.create_file tmpfile, new_file_name, crc32c: "Lm1F3g=="
+    end
+  end
+
+  it "creates a file with attributes" do
+    new_file_name = random_file_path
+
+    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+      multipart_params = parse_multipart env
+      json = JSON.parse multipart_params.first[:body]
+      json["cacheControl"].must_equal "public, max-age=3600"
+      json["contentDisposition"].must_equal "attachment; filename=filename.ext"
+      json["contentEncoding"].must_equal "gzip"
+      json["contentLanguage"].must_equal "en"
+      json["contentType"].must_equal "image/png"
+      [200, { "Content-Type" => "application/json" },
+       create_file_json(bucket.name, new_file_name)]
+    end
+    options = {
+      cache_control: "public, max-age=3600",
+      content_disposition: "attachment; filename=filename.ext",
+      content_encoding: "gzip",
+      content_language: "en",
+      content_type: "image/png"
+    }
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      bucket.create_file tmpfile, new_file_name, options
+    end
+  end
+
+  it "creates a file with metadata" do
+    new_file_name = random_file_path
+    metadata = {
+      "player" => "Bob",
+      score: 10
+    }
+    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+      multipart_params = parse_multipart env
+
+      json = JSON.parse multipart_params.first[:body]
+      json["metadata"].must_be_kind_of Hash
+      json["metadata"].size.must_equal 2
+      json["metadata"]["player"].must_equal "Bob"
+      json["metadata"]["score"].must_equal 10
+      [200, { "Content-Type" => "application/json" },
+       create_file_json(bucket.name, new_file_name)]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      bucket.create_file tmpfile, new_file_name, metadata: metadata
     end
   end
 
@@ -143,7 +266,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
         env.request_headers["Content-length"].to_i.must_equal valid_chunk_size
       end
       upload_request = true
-      [200, {"Content-Type"=>"application/json", Location: "/upload/resumable-uri"},
+      [200, { "Content-Type" => "application/json", Location: "/upload/resumable-uri" },
        create_file_json(bucket.name, "resumable.ext")]
     end
     Tempfile.open "gcloud-ruby" do |tmpfile|
@@ -170,7 +293,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
   it "lists files" do
     num_files = 3
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        list_files_json(num_files)]
     end
 
@@ -181,7 +304,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
   it "lists files with find_files alias" do
     num_files = 3
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        list_files_json(num_files)]
     end
 
@@ -192,13 +315,13 @@ describe Gcloud::Storage::Bucket, :mock_storage do
   it "paginates files" do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        list_files_json(3, "next_page_token")]
     end
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.must_include "pageToken"
       env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        list_files_json(2)]
     end
 
@@ -216,7 +339,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.must_include "prefix"
       env.params["prefix"].must_equal "/prefix/"
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        list_files_json(3, nil, ["/prefix/path1/", "/prefix/path2/"])]
     end
 
@@ -230,7 +353,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
   it "paginates files without prefix set" do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.wont_include "prefix"
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        list_files_json(3, nil, ["/prefix/path1/", "/prefix/path2/"])]
     end
 
@@ -245,7 +368,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.must_include "maxResults"
       env.params["maxResults"].must_equal "3"
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        list_files_json(3, "next_page_token")]
     end
 
@@ -258,7 +381,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
   it "paginates files without max set" do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.wont_include "maxResults"
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        list_files_json(3, "next_page_token")]
     end
 
@@ -272,7 +395,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.must_include "versions"
       env.params["versions"].must_equal "true"
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        list_files_json(8)]
     end
 
@@ -283,7 +406,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
   it "paginates files without versions set" do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.wont_include "versions"
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        list_files_json(3)]
     end
 
@@ -296,7 +419,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
 
     mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
       URI(env.url).query.must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        find_file_json(bucket.name, file_name)]
     end
 
@@ -309,7 +432,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
 
     mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
       URI(env.url).query.must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        find_file_json(bucket.name, file_name)]
     end
 
@@ -323,7 +446,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
 
     mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
       URI(env.url).query.must_equal "generation=#{generation}"
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        find_file_json(bucket.name, file_name)]
     end
 
@@ -335,23 +458,22 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     bucket_name = "found-bucket"
 
     mock_connection.get "/storage/v1/b/#{bucket_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        random_bucket_hash(bucket_name).to_json]
     end
 
     new_url_root = "https://www.googleapis.com/storage/v2"
     mock_connection.get "/storage/v1/b/#{bucket_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
+      [200, { "Content-Type" => "application/json" },
        random_bucket_hash(bucket_name, new_url_root).to_json]
     end
 
     bucket = storage.bucket bucket_name
-    bucket.url.must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
+    bucket.api_url.must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
 
     bucket.reload!
 
-    # replace url with a legitimately mutable attribute when issue #91 is closed.
-    bucket.url.must_equal "#{new_url_root}/b/#{bucket_name}"
+    bucket.api_url.must_equal "#{new_url_root}/b/#{bucket_name}"
   end
 
   def create_file_json bucket=nil, name = nil
@@ -364,7 +486,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
 
   def list_files_json count = 2, token = nil, prefixes = nil
     files = count.times.map { random_file_hash }
-    hash = {"kind"=>"storage#objects", "items"=>files}
+    hash = { "kind" => "storage#objects", "items" => files }
     hash["nextPageToken"] = token unless token.nil?
     hash["prefixes"] = prefixes unless prefixes.nil?
     hash.to_json
