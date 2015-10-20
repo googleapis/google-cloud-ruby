@@ -545,7 +545,8 @@ module Gcloud
 
         def update_predefined_acl! acl_role
           resp = @connection.patch_file @bucket, @file,
-                                        acl: acl_role
+                                        predefined_acl: acl_role,
+                                        acl: []
 
           return clear! if resp.success?
           fail Gcloud::Storage::ApiError.from_response(resp)

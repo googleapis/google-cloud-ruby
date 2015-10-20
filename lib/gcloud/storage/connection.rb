@@ -240,7 +240,7 @@ module Gcloud
       def patch_file bucket_name, file_path, options = {}
         params = { bucket: bucket_name,
                    object: file_path,
-                   predefinedAcl: options[:acl]
+                   predefinedAcl: options[:predefined_acl]
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(
@@ -395,7 +395,8 @@ module Gcloud
           "contentEncoding" => options[:content_encoding],
           "contentLanguage" => options[:content_language],
           "contentType" => options[:content_type],
-          "metadata" => options[:metadata]
+          "metadata" => options[:metadata],
+          "acl" => options[:acl]
         }.delete_if { |_, v| v.nil? }
       end
 
