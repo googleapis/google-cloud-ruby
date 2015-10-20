@@ -25,6 +25,7 @@ describe Gcloud::Dns::Project, :mock_dns do
        random_project_hash.to_json]
     end
 
+    dns.reload!
     dns.id.must_equal project
     dns.number.must_equal 123456789
     dns.zones_quota.must_equal 101
