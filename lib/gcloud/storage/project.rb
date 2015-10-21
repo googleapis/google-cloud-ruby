@@ -103,7 +103,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Storage::Bucket (Gcloud::Storage::Bucket::List)
+      # Array of Gcloud::Storage::Bucket (See Gcloud::Storage::Bucket::List)
       #
       # === Examples
       #
