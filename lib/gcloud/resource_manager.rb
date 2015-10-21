@@ -84,8 +84,8 @@ module Gcloud
   #
   # == Accessing the Service
   #
-  # The Resource Manager API cannot be enabled in the developer console, and can
-  # only be enabled by your account manager or a member of the Google Cloud
+  # The Resource Manager API *cannot* be enabled in the developer console, and
+  # can only be enabled by your account manager or a member of the Google Cloud
   # sales team.
   #
   # == Authentication
