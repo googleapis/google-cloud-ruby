@@ -378,7 +378,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Bigquery::Dataset (Gcloud::Bigquery::Dataset::List)
+      # Array of Gcloud::Bigquery::Dataset (See Gcloud::Bigquery::Dataset::List)
       #
       # === Examples
       #
@@ -489,7 +489,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Bigquery::Job (Gcloud::Bigquery::Job::List)
+      # Array of Gcloud::Bigquery::Job (See Gcloud::Bigquery::Job::List)
       #
       # === Examples
       #

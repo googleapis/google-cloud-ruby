@@ -181,7 +181,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Dns::Zone (Gcloud::Dns::Zone::List)
+      # Array of Gcloud::Dns::Zone (See Gcloud::Dns::Zone::List)
       #
       # === Examples
       #

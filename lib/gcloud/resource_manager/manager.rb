@@ -83,7 +83,7 @@ module Gcloud
       # === Returns
       #
       # Array of Gcloud::ResourceManager::Project
-      # (Gcloud::ResourceManager::Project::List)
+      # (See Gcloud::ResourceManager::Project::List)
       #
       # === Examples
       #
@@ -108,7 +108,7 @@ module Gcloud
       #   end
       #
       # If you have a significant number of projects, you may need to paginate
-      # through them: (Gcloud::ResourceManager::Project::List)
+      # through them: (See Gcloud::ResourceManager::Project::List)
       #
       #   require "gcloud"
       #

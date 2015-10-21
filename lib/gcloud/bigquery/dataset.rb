@@ -530,7 +530,7 @@ module Gcloud
       # === Returns
       #
       # Array of Gcloud::Bigquery::Table or Gcloud::Bigquery::View
-      # (Gcloud::Bigquery::Table::List)
+      # (See Gcloud::Bigquery::Table::List)
       #
       # === Examples
       #
