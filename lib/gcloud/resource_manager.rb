@@ -61,9 +61,132 @@ module Gcloud
     Gcloud::ResourceManager::Manager.new credentials
   end
 
+  # rubocop:disable Metrics/LineLength
+  # Disabled because there are links in the docs that are long.
+
   ##
   # = Google Cloud Resource Manager
   #
+  # The Resource Manager API provides methods that you can use to
+  # programmatically manage your projects in the Google Cloud Platform. You may
+  # be familiar with managing projects in the {Developers
+  # Console}[https://developers.google.com/console/help/new/]. With this API you
+  # can do the following:
+  #
+  # * Get a list of all projects associated with an account
+  # * Create new projects
+  # * Update existing projects
+  # * Delete projects
+  # * Undelete, or recover, projects that you don't want to delete
+  #
+  # The Resource Manager API is a Beta release and is not covered by any SLA or
+  # deprecation policy and may be subject to backward-incompatible changes.
+  #
+  # == Accessing the Service
+  #
+  # The Resource Manager API *cannot* be enabled in the developer console, and
+  # can only be enabled by your account manager or a member of the Google Cloud
+  # sales team.
+  #
+  # == Authentication
+  #
+  # The Resource Manager API currently requires authentication of a {User
+  # Account}[https://developers.google.com/identity/protocols/OAuth2], and
+  # cannot currently be accessed with a {Service
+  # Account}[https://developers.google.com/identity/protocols/OAuth2ServiceAccount].
+  # To use a User Account install the {Google Cloud
+  # SDK}[http://cloud.google.com/sdk] and authenticate with the following:
+  #
+  #   $ gcloud auth login
+  #
+  # Also make sure all +GCLOUD+ environment variables are cleared of any service
+  # accounts. Then gcloud will be able to detect the user authentication and
+  # connect with those credentials.
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   resource_manager = gcloud.resource_manager
+  #
+  # == Listing Projects
+  #
+  # Project is a collection of settings, credentials, and metadata about the
+  # application or applications you're working on. You can retrieve and inspect
+  # all projects that you have permissions to. (See Manager#projects)
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   resource_manager = gcloud.resource_manager
+  #   resource_manager.projects.each do |project|
+  #     puts projects.project_id
+  #   end
+  #
+  # == Managing Projects with Labels
+  #
+  # Labels can be added to or removed from projects. (See Project#labels)
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   resource_manager = gcloud.resource_manager
+  #   project = resource_manager.project "tokyo-rain-123"
+  #   # Label the project as production
+  #   project.update do |p|
+  #     p.labels["env"] = "production"
+  #   end
+  #
+  # Projects can then be filtered by labels. (See Manager#projects)
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   resource_manager = gcloud.resource_manager
+  #   # Find only the productions projects
+  #   projects = resource_manager.projects filter: "labels.env:production"
+  #   projects.each do |project|
+  #     puts project.project_id
+  #   end
+  #
+  # == Creating a Project
+  #
+  # You can also use the API to create new projects. (See
+  # Manager#create_project)
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   resource_manager = gcloud.resource_manager
+  #   project = resource_manager.create_project "tokyo-rain-123",
+  #                                             name: "Todos Development",
+  #                                             labels: {env: :development}
+  #
+  # == Deleting a Project
+  #
+  # You can delete projects when they are no longer needed. (See
+  # Manager#delete and Project#delete)
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   resource_manager = gcloud.resource_manager
+  #   resource_manager.delete "tokyo-rain-123"
+  #
+  # == Undeleting a Project
+  #
+  # You can also restore a deleted project within the waiting period that
+  # starts when the project was deleted. Restoring a project returns it to the
+  # state it was in prior to being deleted. (See Manager#undelete and
+  # Project#undelete)
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   resource_manager = gcloud.resource_manager
+  #   resource_manager.undelete "tokyo-rain-123"
+  #
   module ResourceManager
   end
+
+  # rubocop:enable Metrics/LineLength
 end

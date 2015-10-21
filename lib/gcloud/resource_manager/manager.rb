@@ -72,8 +72,8 @@ module Gcloud
       #   * +NAME:howl+ - Equivalent to above.
       #   * +labels.color:*+ - The project has the label color.
       #   * +labels.color:red+ - The project's label color has the value red.
-      #   * +labels.color:red labels.size:big+ - The project's label color has
-      #   the value red and its label size has the value big.
+      #   * <code>labels.color:red labels.size:big</code> - The project's label
+      #     color has the value red and its label size has the value big.
       # <code>options[:token]</code>::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
@@ -83,7 +83,7 @@ module Gcloud
       # === Returns
       #
       # Array of Gcloud::ResourceManager::Project
-      # (Gcloud::ResourceManager::Project::List)
+      # (See Gcloud::ResourceManager::Project::List)
       #
       # === Examples
       #
@@ -108,7 +108,7 @@ module Gcloud
       #   end
       #
       # If you have a significant number of projects, you may need to paginate
-      # through them: (Gcloud::ResourceManager::Project::List)
+      # through them: (See Gcloud::ResourceManager::Project::List)
       #
       #   require "gcloud"
       #
@@ -236,8 +236,8 @@ module Gcloud
       # * The project does not have a billing account associated with it.
       # * The project has a lifecycle state of +ACTIVE+.
       # * This method changes the project's lifecycle state from +ACTIVE+ to
-      # +DELETE_REQUESTED+. The deletion starts at an unspecified time, at which
-      # point the lifecycle state changes to +DELETE_IN_PROGRESS+.
+      #   +DELETE_REQUESTED+. The deletion starts at an unspecified time, at
+      #   which point the lifecycle state changes to +DELETE_IN_PROGRESS+.
       #
       # Until the deletion completes, you can check the lifecycle state by
       # retrieving the project with Manager#project. The project remains visible
