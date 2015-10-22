@@ -424,6 +424,51 @@ module Gcloud
       end
 
       ##
+      # Sets the {Cloud IAM}[https://cloud.google.com/iam/] access control
+      # policy. See {Managing
+      # Policies}[https://cloud.google.com/iam/docs/managing-policies]
+      # for more information.
+      #
+      # === Parameters
+      #
+      # +new_policy+::
+      #   A hash that conforms to the following structure:
+      #
+      #   {
+      #     "bindings" => [{
+      #       "role" => "roles/viewer",
+      #       "members" => ["serviceAccount:your-service-account"]
+      #     }]
+      #   }
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   project = resource_manager.project "tokyo-rain-123"
+      #
+      #   viewer_policy = {
+      #     "bindings" => [{
+      #       "role" => "roles/viewer",
+      #       "members" => ["serviceAccount:your-service-account"]
+      #     }]
+      #   }
+      #   project.policy = viewer_policy
+      #
+      def policy= new_policy
+        ensure_connection!
+        resp = connection.set_policy project_id, new_policy
+        if resp.success?
+          @policy = resp.data["policy"]
+          @policy = @policy.to_hash if @policy.respond_to? :to_hash
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Change from a Google API Client object.
       def self.from_gapi gapi, connection #:nodoc:
         new.tap do |p|

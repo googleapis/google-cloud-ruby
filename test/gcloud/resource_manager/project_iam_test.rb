@@ -100,4 +100,25 @@ describe Gcloud::ResourceManager::Project, :iam, :mock_res_man do
     policy["bindings"].first["members"].first.must_equal "user:viewer@example.com"
     policy["bindings"].first["members"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
+
+  it "sets the policy" do
+    mock_connection.post "/v1beta1/projects/#{project.project_id}:setIamPolicy" do |env|
+      json_policy = JSON.parse env.body
+      json_policy["policy"]["bindings"].count.must_equal 1
+      json_policy["policy"]["bindings"].first["role"].must_equal "roles/viewer"
+      json_policy["policy"]["bindings"].first["members"].count.must_equal 2
+      json_policy["policy"]["bindings"].first["members"].first.must_equal "user:viewer@example.com"
+      json_policy["policy"]["bindings"].first["members"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
+      [200, {"Content-Type"=>"application/json"},
+       new_policy_json]
+    end
+
+    project.policy = new_bindings_hash
+    # Setting the policy also memoizes the policy
+    project.policy["bindings"].count.must_equal 1
+    project.policy["bindings"].first["role"].must_equal "roles/viewer"
+    project.policy["bindings"].first["members"].count.must_equal 2
+    project.policy["bindings"].first["members"].first.must_equal "user:viewer@example.com"
+    project.policy["bindings"].first["members"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
+  end
 end
