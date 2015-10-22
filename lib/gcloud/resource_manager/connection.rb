@@ -100,6 +100,14 @@ module Gcloud
         )
       end
 
+      def set_policy project_id, new_policy
+        @client.execute(
+          api_method: @res_man.projects.set_iam_policy,
+          parameters: { resource: project_id },
+          body_object: { policy: new_policy }
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end
