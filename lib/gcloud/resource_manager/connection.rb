@@ -93,6 +93,13 @@ module Gcloud
         )
       end
 
+      def get_policy project_id
+        @client.execute(
+          api_method: @res_man.projects.get_iam_policy,
+          parameters: { resource: project_id }
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end

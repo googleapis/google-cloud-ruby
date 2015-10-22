@@ -359,6 +359,71 @@ module Gcloud
       end
 
       ##
+      # Gets the {Cloud IAM}[https://cloud.google.com/iam/] access control
+      # policy. See {Managing
+      # Policies}[https://cloud.google.com/iam/docs/managing-policies]
+      # for more information.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:force]</code>::
+      #   Force load the latest policy when +true+. Otherwise the policy will be
+      #   memoized to reduce the number of API calls made. The default is
+      #   +false+. (+Boolean+)
+      #
+      # === Returns
+      #
+      # A hash that conforms to the following structure:
+      #
+      #   {
+      #     "bindings" => [{
+      #       "role" => "roles/viewer",
+      #       "members" => ["serviceAccount:your-service-account"]
+      #     }],
+      #     "version" => 0,
+      #     "etag" => "CAE="
+      #   }
+      #
+      # === Examples
+      #
+      # By default the policy values are memoized to reduce the number of API
+      # calls made.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   project = resource_manager.project "tokyo-rain-123"
+      #   policy = project.policy
+      #
+      #   puts policy["bindings"]
+      #   puts policy["version"]
+      #   puts policy["etag"]
+      #
+      # Use the +force+ option to retrieve the latest policy from the service.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   project = resource_manager.project "tokyo-rain-123"
+      #   policy = project.policy force: true
+      #
+      def policy options = {}
+        @policy = nil if options[:force]
+        @policy ||= begin
+          ensure_connection!
+          resp = connection.get_policy project_id
+          fail ApiError.from_response(resp) unless resp.success?
+          policy = resp.data["policy"]
+          policy = policy.to_hash if policy.respond_to? :to_hash
+          policy
+        end
+      end
+
+      ##
       # New Change from a Google API Client object.
       def self.from_gapi gapi, connection #:nodoc:
         new.tap do |p|
