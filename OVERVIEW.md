@@ -120,6 +120,39 @@ sub = pubsub.subscription "my-topic-sub"
 msgs = sub.pull
 ```
 
+# Resource Manager
+
+[Google Cloud Resource Manager](https://cloud.google.com/resource-manager/) ([docs](https://cloud.google.com/resource-manager/reference/rest/)) provides methods that you can use to programmatically manage your projects in the Google Cloud Platform. You may be familiar with managing projects in the [Developers Console](https://developers.google.com/console/help/new/). With this API you can do the following:
+
+* Get a list of all projects associated with an account
+* Create new projects
+* Update existing projects
+* Delete projects
+* Undelete, or recover, projects that you don't want to delete
+
+See the [gcloud-ruby Resource Manager API documentation](rdoc-ref:Gcloud::ResourceManager) to learn how to connect to Cloud Resource Manager using this library.
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new
+resource_manager = gcloud.resource_manager
+
+# List all projects
+resource_manager.projects.each do |project|
+  puts projects.project_id
+end
+
+# Label a project as production
+project = resource_manager.project "tokyo-rain-123"
+project.update do |p|
+  p.labels["env"] = "production"
+end
+
+# List only projects with the "production" label
+projects = resource_manager.projects filter: "labels.env:production"
+```
+
 # Storage
 
 [Google Cloud Storage](https://cloud.google.com/storage/) ([docs](https://cloud.google.com/storage/docs/json_api/)) allows you to store data on Google infrastructure with very high reliability, performance and availability, and can be used to distribute large data objects to users via direct download.
