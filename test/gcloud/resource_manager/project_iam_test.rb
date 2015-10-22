@@ -121,4 +121,20 @@ describe Gcloud::ResourceManager::Project, :iam, :mock_res_man do
     project.policy["bindings"].first["members"].first.must_equal "user:viewer@example.com"
     project.policy["bindings"].first["members"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
+
+  it "tests the permissions available" do
+    # skip
+    mock_connection.post "/v1beta1/projects/#{project.project_id}:testIamPermissions" do |env|
+      json_permissions = JSON.parse env.body
+      json_permissions["permissions"].count.must_equal 2
+      json_permissions["permissions"].first.must_equal "resourcemanager.projects.get"
+      json_permissions["permissions"].last.must_equal  "resourcemanager.projects.delete"
+      [200, {"Content-Type"=>"application/json"},
+       { "permissions" => ["resourcemanager.projects.get"] }.to_json]
+    end
+
+    permissions = project.test_permissions "resourcemanager.projects.get",
+                                           "resourcemanager.projects.delete"
+    permissions.must_equal ["resourcemanager.projects.get"]
+  end
 end
