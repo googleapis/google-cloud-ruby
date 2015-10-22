@@ -434,12 +434,12 @@ module Gcloud
       # +new_policy+::
       #   A hash that conforms to the following structure:
       #
-      #   {
-      #     "bindings" => [{
-      #       "role" => "roles/viewer",
-      #       "members" => ["serviceAccount:your-service-account"]
-      #     }]
-      #   }
+      #     {
+      #       "bindings" => [{
+      #         "role" => "roles/viewer",
+      #         "members" => ["serviceAccount:your-service-account"]
+      #       }]
+      #     }
       #
       # === Example
       #
