@@ -152,6 +152,34 @@ sub = pubsub.subscription "my-topic-sub"
 msgs = sub.pull
 ```
 
+### Resource Manager
+
+- [gcloud-ruby Resource Manager API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/ResourceManager.html)
+- [Google Cloud Resource Manager Documentation](https://cloud.google.com/resource-manager/)
+
+#### Preview
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new
+resource_manager = gcloud.resource_manager
+
+# List all projects
+resource_manager.projects.each do |project|
+  puts projects.project_id
+end
+
+# Label a project as production
+project = resource_manager.project "tokyo-rain-123"
+project.update do |p|
+  p.labels["env"] = "production"
+end
+
+# List only projects with the "production" label
+projects = resource_manager.projects filter: "labels.env:production"
+```
+
 ### Storage
 
 - [gcloud-ruby Storage API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html)
