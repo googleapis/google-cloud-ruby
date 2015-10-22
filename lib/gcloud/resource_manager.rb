@@ -185,6 +185,54 @@ module Gcloud
   #   resource_manager = gcloud.resource_manager
   #   resource_manager.undelete "tokyo-rain-123"
   #
+  # == Managing IAM Policies
+  #
+  # Google Cloud Identity and Access Management ({Cloud
+  # IAM}[https://cloud.google.com/iam/]) access control policies can be managed
+  # on projects. These policies allow project owners to manage _who_ (identity)
+  # has access to _what_ (role). See {Cloud IAM
+  # Overview}[https://cloud.google.com/iam/docs/overview] for more information.
+  #
+  # A project's access control policy can be retrieved. (See Project#policy)
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   resource_manager = gcloud.resource_manager
+  #   project = resource_manager.project "tokyo-rain-123"
+  #   policy = project.policy
+  #
+  # A project's access control policy can also be set. (See Project#policy=)
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   resource_manager = gcloud.resource_manager
+  #   project = resource_manager.project "tokyo-rain-123"
+  #
+  #   viewer_policy = {
+  #     "bindings" => [{
+  #       "role" => "roles/viewer",
+  #       "members" => ["serviceAccount:your-service-account"]
+  #     }]
+  #   }
+  #   project.policy = viewer_policy
+  #
+  # And permissions can be tested on a project. (See Project#test_permissions)
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   resource_manager = gcloud.resource_manager
+  #   project = resource_manager.project "tokyo-rain-123"
+  #   perms = project.test_permissions "resourcemanager.projects.get",
+  #                                    "resourcemanager.projects.delete"
+  #   perms.include? "resourcemanager.projects.get"    #=> true
+  #   perms.include? "resourcemanager.projects.delete" #=> false
+  #
+  # For more information about using access control policies see {Managing
+  # Policies}[https://cloud.google.com/iam/docs/managing-policies].
+  #
   module ResourceManager
   end
 
