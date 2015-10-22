@@ -84,9 +84,13 @@ module Gcloud
   #
   # == Accessing the Service
   #
-  # The Resource Manager API *cannot* be enabled in the developer console, and
-  # can only be enabled by your account manager or a member of the Google Cloud
-  # sales team.
+  # Currently, the full functionality of the Resource Manager API is available
+  # only to whitelisted users. (Contact your account manager or a member of the
+  # Google Cloud sales team if you are interested in access.) Read-only methods
+  # such as ResourceManager::Manager#projects and
+  # ResourceManager::Manager#project are accessible to any user who enables the
+  # Resource Manager API in the {Developers
+  # Console}[https://console.developers.google.com].
   #
   # == Authentication
   #
