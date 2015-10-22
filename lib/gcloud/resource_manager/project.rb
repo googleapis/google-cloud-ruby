@@ -469,6 +469,46 @@ module Gcloud
       end
 
       ##
+      # Tests the specified permissions against the {Cloud
+      # IAM}[https://cloud.google.com/iam/] access control policy. See
+      # {Managing Policies}[https://cloud.google.com/iam/docs/managing-policies]
+      # for more information.
+      #
+      # === Parameters
+      #
+      # +permissions+::
+      #   The set of permissions to check access for. Permissions with wildcards
+      #   (such as +*+ or +storage.*+) are not allowed.
+      #   (String or Array of Strings)
+      #
+      # === Returns
+      #
+      # The permissions that have access. (Array of Strings)
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   project = resource_manager.project "tokyo-rain-123"
+      #   perms = project.test_permissions "resourcemanager.projects.get",
+      #                                    "resourcemanager.projects.delete"
+      #   perms.include? "resourcemanager.projects.get"    #=> true
+      #   perms.include? "resourcemanager.projects.delete" #=> false
+      #
+      def test_permissions *permissions
+        permissions = Array(permissions).flatten
+        ensure_connection!
+        resp = connection.test_permissions project_id, permissions
+        if resp.success?
+          Array(resp.data["permissions"])
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # New Change from a Google API Client object.
       def self.from_gapi gapi, connection #:nodoc:
         new.tap do |p|

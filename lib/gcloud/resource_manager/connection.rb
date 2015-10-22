@@ -108,6 +108,14 @@ module Gcloud
         )
       end
 
+      def test_permissions project_id, permissions
+        @client.execute(
+          api_method: @res_man.projects.test_iam_permissions,
+          parameters: { resource: project_id },
+          body_object: { permissions: permissions }
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end
