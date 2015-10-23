@@ -617,7 +617,7 @@ calls to the Pub/Sub service.</p>
   <span class="ruby-ivar">@policy</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">ensure_connection!</span>
     <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_topic_policy</span> <span class="ruby-identifier">name</span>
-    <span class="ruby-identifier">policy</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;policy&quot;</span>]
+    <span class="ruby-identifier">policy</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>
     <span class="ruby-identifier">policy</span> = <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
     <span class="ruby-identifier">policy</span>
   <span class="ruby-keyword">end</span>
@@ -1087,7 +1087,7 @@ href="Subscription/List.html#attribute-i-token">Gcloud::Pubsub::Subscription::Li
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Oct 20, 2015.
+    Docs built on Oct 23, 2015.
   </div>
 </div>
 
