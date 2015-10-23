@@ -476,11 +476,11 @@ module Gcloud
       # A hash that conforms to the following structure:
       #
       #   {
+      #     "etag"=>"CAE=",
       #     "bindings" => [{
       #       "role" => "roles/viewer",
       #       "members" => ["serviceAccount:your-service-account"]
-      #     }],
-      #     "rules" => []
+      #     }]
       #   }
       #
       # === Examples
@@ -513,7 +513,7 @@ module Gcloud
         @policy ||= begin
           ensure_connection!
           resp = connection.get_subscription_policy name
-          policy = resp.data["policy"]
+          policy = resp.data
           policy = policy.to_hash if policy.respond_to? :to_hash
           policy
         end
@@ -531,8 +531,7 @@ module Gcloud
       #       "bindings" => [{
       #         "role" => "roles/viewer",
       #         "members" => ["serviceAccount:your-service-account"]
-      #       }],
-      #       "rules" => []
+      #       }]
       #     }
       #
       # === Example

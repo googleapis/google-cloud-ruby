@@ -25,15 +25,14 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
 
   it "gets the IAM Policy" do
     policy_json = {
-      "policy" => {
-        "bindings" => [{
-          "role" => "roles/viewer",
-          "members" => [
-            "user:viewer@example.com",
-            "serviceAccount:1234567890@developer.gserviceaccount.com"
-          ],
-        }],
-      }
+      "etag"=>"CAE=",
+      "bindings" => [{
+        "role" => "roles/viewer",
+        "members" => [
+          "user:viewer@example.com",
+          "serviceAccount:1234567890@developer.gserviceaccount.com"
+        ],
+      }]
     }.to_json
 
     mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}:getIamPolicy" do |env|
@@ -52,6 +51,7 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
 
   it "memoizes policy" do
     policy_hash = {
+      "etag"=>"CAE=",
       "bindings" => [{
         "role" => "roles/viewer",
         "members" => [
@@ -75,6 +75,7 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
 
   it "makes API calls when forced, even if already memoized" do
     policy_hash = {
+      "etag"=>"CAE=",
       "bindings" => [{
         "role" => "roles/viewer",
         "members" => [
@@ -85,15 +86,14 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
     }
 
     policy_json = {
-      "policy" => {
-        "bindings" => [{
-          "role" => "roles/owner",
-          "members" => [
-            "user:owner@example.com",
-            "serviceAccount:0987654321@developer.gserviceaccount.com"
-          ],
-        }],
-      }
+      "etag"=>"CAE=",
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => [
+          "user:owner@example.com",
+          "serviceAccount:0987654321@developer.gserviceaccount.com"
+        ],
+      }]
     }.to_json
 
     mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}:getIamPolicy" do |env|

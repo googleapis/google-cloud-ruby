@@ -387,11 +387,11 @@ module Gcloud
       # A hash that conforms to the following structure:
       #
       #   {
+      #     "etag"=>"CAE=",
       #     "bindings" => [{
       #       "role" => "roles/viewer",
       #       "members" => ["serviceAccount:your-service-account"]
-      #     }],
-      #     "rules" => []
+      #     }]
       #   }
       #
       # === Examples
@@ -442,8 +442,7 @@ module Gcloud
       #       "bindings" => [{
       #         "role" => "roles/viewer",
       #         "members" => ["serviceAccount:your-service-account"]
-      #       }],
-      #       "rules" => []
+      #       }]
       #     }
       #
       # === Example

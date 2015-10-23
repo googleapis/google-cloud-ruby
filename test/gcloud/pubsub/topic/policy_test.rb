@@ -21,7 +21,7 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
 
   it "gets the IAM Policy" do
     policy_json = {
-      "etag"=>"BwUiutJSWn8=",
+      "etag"=>"CAE=",
       "bindings"=>[{
         "role"=>"roles/viewer",
         "members"=>[
@@ -47,6 +47,7 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
 
   it "memoizes policy" do
     policy_hash = {
+      "etag"=>"CAE=",
       "bindings" => [{
         "role" => "roles/viewer",
         "members" => [
@@ -70,6 +71,7 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
 
   it "makes API calls when forced, even if already memoized" do
     policy_hash = {
+      "etag"=>"CAE=",
       "bindings" => [{
         "role" => "roles/viewer",
         "members" => [
@@ -80,7 +82,7 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
     }
 
     policy_json = {
-      "etag"=>"BwUiutJSWn8=",
+      "etag"=>"CAE=",
       "bindings"=>[{
         "role"=>"roles/owner",
         "members"=>[
