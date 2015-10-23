@@ -21,15 +21,14 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
 
   it "gets the IAM Policy" do
     policy_json = {
-      "policy" => {
-        "bindings" => [{
-          "role" => "roles/viewer",
-          "members" => [
-            "user:viewer@example.com",
-            "serviceAccount:1234567890@developer.gserviceaccount.com"
-          ],
-        }],
-      }
+      "etag"=>"BwUiutJSWn8=",
+      "bindings"=>[{
+        "role"=>"roles/viewer",
+        "members"=>[
+          "user:viewer@example.com",
+          "serviceAccount:1234567890@developer.gserviceaccount.com"
+         ]
+      }]
     }.to_json
 
     mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}:getIamPolicy" do |env|
@@ -81,15 +80,14 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
     }
 
     policy_json = {
-      "policy" => {
-        "bindings" => [{
-          "role" => "roles/owner",
-          "members" => [
-            "user:owner@example.com",
-            "serviceAccount:0987654321@developer.gserviceaccount.com"
-          ],
-        }],
-      }
+      "etag"=>"BwUiutJSWn8=",
+      "bindings"=>[{
+        "role"=>"roles/owner",
+        "members"=>[
+          "user:owner@example.com",
+          "serviceAccount:0987654321@developer.gserviceaccount.com"
+         ]
+      }]
     }.to_json
 
     mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}:getIamPolicy" do |env|

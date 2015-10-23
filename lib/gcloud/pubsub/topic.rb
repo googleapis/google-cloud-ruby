@@ -424,7 +424,7 @@ module Gcloud
         @policy ||= begin
           ensure_connection!
           resp = connection.get_topic_policy name
-          policy = resp.data["policy"]
+          policy = resp.data
           policy = policy.to_hash if policy.respond_to? :to_hash
           policy
         end
