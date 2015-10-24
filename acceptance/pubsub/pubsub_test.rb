@@ -227,4 +227,45 @@ describe Gcloud::Pubsub, :pubsub do
       events
     end
   end
+
+  describe "Policies" do
+    let(:topic) { retrieve_topic $topic_names[1] }
+    let(:subs) { [ { name: "#{$topic_prefix}-sub1",
+                     options: { deadline: 30 } },
+                   { name: "#{$topic_prefix}-sub2",
+                     options: { deadline: 60 } }
+                 ] }
+    let(:service_account) { pubsub.connection.credentials.client.issuer }
+
+    before do
+      subs.each do |sub|
+        retrieve_subscription topic, sub[:name]
+      end
+    end
+
+    it "allows policy to be set on a topic" do
+      topic.policy.must_be_kind_of Hash
+
+      role = {"role"=>"roles/pubsub.subscriber", "members"=>["serviceAccount:#{service_account}"]}
+      tp = topic.policy.dup
+      tp["bindings"] ||= []
+      tp["bindings"] << role
+      topic.policy = tp
+
+      topic.policy(force: true)["bindings"].must_include role
+    end
+
+    it "allows policy to be set on a subscription" do
+      sub = topic.subscription "#{$topic_prefix}-sub1"
+      sub.policy.must_be_kind_of Hash
+
+      role = {"role"=>"roles/pubsub.subscriber", "members"=>["serviceAccount:#{service_account}"]}
+      sp = sub.policy.dup
+      sp["bindings"] ||= []
+      sp["bindings"] << role
+      sub.policy = sp
+
+      sub.policy(force: true)["bindings"].must_include role
+    end
+  end
 end
