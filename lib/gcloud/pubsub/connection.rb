@@ -177,6 +177,16 @@ module Gcloud
         )
       end
 
+      def test_subscription_permissions subscription_name,
+                                        permissions, options = {}
+        @client.execute(
+          api_method: @pubsub.projects.subscriptions.test_iam_permissions,
+          parameters: {
+            resource: subscription_path(subscription_name, options) },
+          body_object: { permissions: permissions }
+        )
+      end
+
       ##
       # Adds one or more messages to the topic.
       # Returns NOT_FOUND if the topic does not exist.
