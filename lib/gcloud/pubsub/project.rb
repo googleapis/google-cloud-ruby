@@ -80,42 +80,6 @@ module Gcloud
 
       ##
       # Retrieves topic by name.
-      # The difference between this method and Project#topic is that this
-      # method makes an API call to Pub/Sub to verify the topic exists.
-      #
-      # === Parameters
-      #
-      # +topic_name+::
-      #   Name of a topic. (+String+)
-      #
-      # === Returns
-      #
-      # Gcloud::Pubsub::Topic or nil if topic does not exist
-      #
-      # === Example
-      #
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   pubsub = gcloud.pubsub
-      #   topic = pubsub.get_topic "my-topic"
-      #
-      def get_topic topic_name
-        ensure_connection!
-        resp = connection.get_topic topic_name
-        if resp.success?
-          Topic.from_gapi resp.data, connection
-        else
-          return nil if resp.data["error"]["code"] == 404
-          fail ApiError.from_response(resp)
-        end
-      end
-      alias_method :find_topic, :get_topic
-
-      ##
-      # Retrieves topic by name.
-      # The difference between this method and Project#get_topic is that this
-      # method does not make an API call to Pub/Sub to verify the topic exists.
       #
       # === Parameters
       #
@@ -125,7 +89,7 @@ module Gcloud
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:autocreate]</code>::
       #   Flag to control whether the topic should be created when needed.
-      #   The default value is +true+. (+Boolean+)
+      #   The default value is +false+. (+Boolean+)
       # <code>options[:project]</code>::
       #   If the topic belongs to a project other than the one currently
       #   connected to, the alternate project ID can be specified here.
@@ -133,7 +97,9 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Pubsub::Topic
+      # Gcloud::Pubsub::Topic or nil if topic does not exist. Can return a newly
+      # created Gcloud::Pubsub::Topic if the topic does not exist and
+      # +autocreate+ is not set to +true+
       #
       # === Examples
       #
@@ -142,25 +108,24 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "existing-topic"
-      #   msg = topic.publish "This is the first API call to Pub/Sub."
       #
-      # By default the topic will be created in Pub/Sub when needed.
-      #
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   pubsub = gcloud.pubsub
-      #   topic = pubsub.topic "non-existing-topic"
-      #   msg = topic.publish "This will create the topic in Pub/Sub."
-      #
-      # Setting the +autocomplete+ flag to false will not create the topic.
+      # By default +nil+ will be returned if the topic does not exist.
+      # the topic will be created in Pub/Sub when needed.
       #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
-      #   topic = pubsub.topic "non-existing-topic"
-      #   msg = topic.publish "This raises." #=> Gcloud::Pubsub::NotFoundError
+      #   topic = pubsub.topic "non-existing-topic" #=> nil
+      #
+      # The topic will be created if the topic does not exist and the
+      # +autocreate+ option is set to true.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #   topic = pubsub.topic "non-existing-topic", autocreate: true
       #
       # A topic in a different project can be created using the +project+ flag.
       #
@@ -172,9 +137,16 @@ module Gcloud
       #
       def topic topic_name, options = {}
         ensure_connection!
-
-        Topic.new_lazy topic_name, connection, options
+        resp = connection.get_topic topic_name
+        return Topic.from_gapi(resp.data, connection) if resp.success?
+        if resp.status == 404
+          return create_topic(topic_name) if options[:autocreate]
+          return nil
+        end
+        fail ApiError.from_response(resp)
       end
+      alias_method :get_topic, :topic
+      alias_method :find_topic, :topic
 
       ##
       # Creates a new topic.

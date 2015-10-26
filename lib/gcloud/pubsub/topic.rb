@@ -48,20 +48,17 @@ module Gcloud
         @connection = nil
         @gapi = {}
         @name = nil
-        @autocreate = nil
         @exists = nil
       end
 
       ##
       # New lazy Topic object without making an HTTP request.
       def self.new_lazy name, conn, options = {} #:nodoc:
-        options[:autocreate] = true if options[:autocreate].nil?
         new.tap do |t|
           t.gapi = nil
           t.connection = conn
           t.instance_eval do
             @name = conn.topic_path(name, options)
-            @autocreate = options[:autocreate]
           end
         end
       end
@@ -167,9 +164,6 @@ module Gcloud
         else
           fail ApiError.from_response(resp)
         end
-      rescue Gcloud::Pubsub::NotFoundError => e
-        retry if lazily_create_topic!
-        raise e
       end
       alias_method :create_subscription, :subscribe
       alias_method :new_subscription, :subscribe
@@ -364,9 +358,6 @@ module Gcloud
         yield batch if block_given?
         return nil if batch.messages.count.zero?
         publish_batch_messages batch
-      rescue Gcloud::Pubsub::NotFoundError => e
-        retry if lazily_create_topic!
-        raise e
       end
 
       ##
@@ -551,29 +542,6 @@ module Gcloud
         @gapi.nil?
       end
 
-      # rubocop:disable Style/TrivialAccessors
-      # Disabled rubocop because you can't use "?" in an attr.
-
-      ##
-      # Determines whether the lazy topic object should create a topic on the
-      # Pub/Sub service.
-      #
-      # === Example
-      #
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   pubsub = gcloud.pubsub
-      #
-      #   topic = pubsub.topic "my-topic"
-      #   topic.autocreate? #=> true
-      #
-      def autocreate? #:nodoc:
-        @autocreate
-      end
-
-      # rubocop:enable Style/TrivialAccessors
-
       ##
       # New Topic from a Google API Client object.
       def self.from_gapi gapi, conn #:nodoc:
@@ -598,18 +566,6 @@ module Gcloud
         return @gapi if @gapi
         resp = connection.get_topic @name
         @gapi = resp.data if resp.success?
-      end
-
-      ##
-      def lazily_create_topic!
-        if lazy? && autocreate?
-          resp = connection.create_topic name
-          if resp.success?
-            @gapi = resp.data
-            return true
-          end
-        end
-        nil
       end
 
       ##
