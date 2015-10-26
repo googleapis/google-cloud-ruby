@@ -417,7 +417,7 @@ module Gcloud
           ensure_connection!
           resp = connection.get_policy project_id
           fail ApiError.from_response(resp) unless resp.success?
-          policy = resp.data["policy"]
+          policy = resp.data
           policy = policy.to_hash if policy.respond_to? :to_hash
           policy
         end
@@ -461,7 +461,7 @@ module Gcloud
         ensure_connection!
         resp = connection.set_policy project_id, new_policy
         if resp.success?
-          @policy = resp.data["policy"]
+          @policy = resp.data
           @policy = @policy.to_hash if @policy.respond_to? :to_hash
         else
           fail ApiError.from_response(resp)

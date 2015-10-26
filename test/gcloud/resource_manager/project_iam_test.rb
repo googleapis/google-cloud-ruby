@@ -20,22 +20,24 @@ describe Gcloud::ResourceManager::Project, :iam, :mock_res_man do
   let(:project) { Gcloud::ResourceManager::Project.from_gapi project_hash,
                                                              resource_manager.connection }
   let(:old_bindings_hash) do
-    { "bindings" => [{
+    { "etag"=>"CAE=",
+      "bindings" => [{
         "role" => "roles/viewer",
         "members" => [
           "user:viewer@example.com"
         ], }], }
   end
   let(:new_bindings_hash) do
-    { "bindings" => [{
+    { "etag"=>"CAE=",
+      "bindings" => [{
         "role" => "roles/viewer",
         "members" => [
           "user:viewer@example.com",
           "serviceAccount:1234567890@developer.gserviceaccount.com"
         ], }], }
   end
-  let(:old_policy_json) { { "policy" => old_bindings_hash }.to_json }
-  let(:new_policy_json) { { "policy" => new_bindings_hash }.to_json }
+  let(:old_policy_json) { old_bindings_hash.to_json }
+  let(:new_policy_json) { new_bindings_hash.to_json }
 
   it "gets the policy" do
     mock_connection.post "/v1beta1/projects/#{project.project_id}:getIamPolicy" do |env|
