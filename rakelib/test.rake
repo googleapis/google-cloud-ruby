@@ -182,7 +182,7 @@ namespace :test do
 
         $LOAD_PATH.unshift "lib"
         require "gcloud/storage"
-        puts "Cleaning up existing buckets and files"
+        puts "Cleaning up Storage buckets and files"
         Gcloud.storage.buckets.each { |b| b.files.map(&:delete); b.delete }
       end
     end
@@ -220,7 +220,7 @@ namespace :test do
 
         $LOAD_PATH.unshift "lib"
         require "gcloud/pubsub"
-        puts "Cleaning up existing topics and subscriptions"
+        puts "Cleaning up Pub/Sub topics and subscriptions"
         Gcloud.pubsub.topics.map &:delete
         Gcloud.pubsub.subscriptions.map &:delete
       end
@@ -259,7 +259,7 @@ namespace :test do
 
         $LOAD_PATH.unshift "lib"
         require "gcloud/bigquery"
-        puts "Cleaning up existing topics and subscriptions"
+        puts "Cleaning up BigQuery datasets and tables"
         Gcloud.bigquery.datasets.each do |ds|
           begin
             ds.tables.map &:delete
@@ -314,6 +314,14 @@ namespace :test do
           end
         end
       end
+    end
+
+    desc "Removes *ALL* acceptance test data. Use with caution."
+    task :cleanup do
+      Rake::Task["test:acceptance:bigquery:cleanup"].invoke
+      Rake::Task["test:acceptance:dns:cleanup"].invoke
+      Rake::Task["test:acceptance:pubsub:cleanup"].invoke
+      Rake::Task["test:acceptance:storage:cleanup"].invoke
     end
   end
 
