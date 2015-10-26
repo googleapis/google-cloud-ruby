@@ -227,4 +227,48 @@ describe Gcloud::Pubsub, :pubsub do
       events
     end
   end
+
+  describe "IAM Policies and Permissions" do
+    let(:topic) { retrieve_topic $topic_names[3] }
+    let(:subscription) { retrieve_subscription topic, "#{$topic_prefix}-subIAM" }
+    let(:service_account) { pubsub.connection.credentials.client.issuer }
+
+    it "allows policy to be set on a topic" do
+      topic.policy.must_be_kind_of Hash
+
+      role = {"role"=>"roles/pubsub.subscriber", "members"=>["serviceAccount:#{service_account}"]}
+      tp = topic.policy.dup
+      tp["bindings"] ||= []
+      tp["bindings"] << role
+      topic.policy = tp
+
+      topic.policy(force: true)["bindings"].must_include role
+    end
+
+    it "allows policy to be set on a subscription" do
+      subscription.policy.must_be_kind_of Hash
+
+      role = {"role"=>"roles/pubsub.subscriber", "members"=>["serviceAccount:#{service_account}"]}
+      sp = subscription.policy.dup
+      sp["bindings"] ||= []
+      sp["bindings"] << role
+      subscription.policy = sp
+
+      subscription.policy(force: true)["bindings"].must_include role
+    end
+
+    it "allows permissions to be tested on a topic" do
+      skip
+      roles = ["projects.topic.list", "projects.topic.publish"]
+      permissions = topic.test_permissions roles
+      permissions.must_equal roles
+    end
+
+    it "allows permissions to be tested on a subscription" do
+      skip
+      roles = ["projects.subscriptions.list", "projects.subscriptions.pull"]
+      permissions = subscription.test_permissions roles
+      permissions.must_equal roles
+    end
+  end
 end

@@ -58,7 +58,7 @@ module Acceptance
       result = nil
       (1..3).each do |try|
         result = Minitest.run_one_method(klass, method_name)
-        break if result.passed?
+        break if (result.passed? || result.skipped?)
         puts "Retrying #{klass}##{method_name} (#{try})"
       end
       reporter.record result

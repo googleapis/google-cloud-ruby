@@ -476,11 +476,11 @@ module Gcloud
       # A hash that conforms to the following structure:
       #
       #   {
+      #     "etag"=>"CAE=",
       #     "bindings" => [{
       #       "role" => "roles/viewer",
       #       "members" => ["serviceAccount:your-service-account"]
-      #     }],
-      #     "rules" => []
+      #     }]
       #   }
       #
       # === Examples
@@ -513,7 +513,7 @@ module Gcloud
         @policy ||= begin
           ensure_connection!
           resp = connection.get_subscription_policy name
-          policy = resp.data["policy"]
+          policy = resp.data
           policy = policy.to_hash if policy.respond_to? :to_hash
           policy
         end
@@ -531,8 +531,7 @@ module Gcloud
       #       "bindings" => [{
       #         "role" => "roles/viewer",
       #         "members" => ["serviceAccount:your-service-account"]
-      #       }],
-      #       "rules" => []
+      #       }]
       #     }
       #
       # === Example
@@ -557,6 +556,46 @@ module Gcloud
         if resp.success?
           @policy = resp.data["policy"]
           @policy = @policy.to_hash if @policy.respond_to? :to_hash
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Tests the specified permissions against the {Cloud
+      # IAM}[https://cloud.google.com/iam/] access control policy. See
+      # {Managing Policies}[https://cloud.google.com/iam/docs/managing-policies]
+      # for more information.
+      #
+      # === Parameters
+      #
+      # +permissions+::
+      #   The set of permissions to check access for. Permissions with wildcards
+      #   (such as +*+ or +storage.*+) are not allowed.
+      #   (String or Array of Strings)
+      #
+      # === Returns
+      #
+      # The permissions that have access. (Array of Strings)
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #   sub = pubsub.subscription "my-subscription"
+      #   perms = sub.test_permissions "projects.subscriptions.list",
+      #                                "projects.subscriptions.pull"
+      #   perms.include? "projects.subscriptions.list" #=> true
+      #   perms.include? "projects.subscriptions.pull" #=> false
+      #
+      def test_permissions *permissions
+        permissions = Array(permissions).flatten
+        ensure_connection!
+        resp = connection.test_subscription_permissions name, permissions
+        if resp.success?
+          Array(resp.data["permissions"])
         else
           fail ApiError.from_response(resp)
         end

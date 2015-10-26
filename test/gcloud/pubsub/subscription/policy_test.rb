@@ -25,15 +25,14 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
 
   it "gets the IAM Policy" do
     policy_json = {
-      "policy" => {
-        "bindings" => [{
-          "role" => "roles/viewer",
-          "members" => [
-            "user:viewer@example.com",
-            "serviceAccount:1234567890@developer.gserviceaccount.com"
-          ],
-        }],
-      }
+      "etag"=>"CAE=",
+      "bindings" => [{
+        "role" => "roles/viewer",
+        "members" => [
+          "user:viewer@example.com",
+          "serviceAccount:1234567890@developer.gserviceaccount.com"
+        ],
+      }]
     }.to_json
 
     mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}:getIamPolicy" do |env|
@@ -52,6 +51,7 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
 
   it "memoizes policy" do
     policy_hash = {
+      "etag"=>"CAE=",
       "bindings" => [{
         "role" => "roles/viewer",
         "members" => [
@@ -75,6 +75,7 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
 
   it "makes API calls when forced, even if already memoized" do
     policy_hash = {
+      "etag"=>"CAE=",
       "bindings" => [{
         "role" => "roles/viewer",
         "members" => [
@@ -85,15 +86,14 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
     }
 
     policy_json = {
-      "policy" => {
-        "bindings" => [{
-          "role" => "roles/owner",
-          "members" => [
-            "user:owner@example.com",
-            "serviceAccount:0987654321@developer.gserviceaccount.com"
-          ],
-        }],
-      }
+      "etag"=>"CAE=",
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => [
+          "user:owner@example.com",
+          "serviceAccount:0987654321@developer.gserviceaccount.com"
+        ],
+      }]
     }.to_json
 
     mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}:getIamPolicy" do |env|
@@ -148,5 +148,20 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
     subscription.policy["bindings"].first["members"].count.must_equal 2
     subscription.policy["bindings"].first["members"].first.must_equal "user:owner@example.com"
     subscription.policy["bindings"].first["members"].last.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
+  end
+
+  it "tests the available permissions" do
+    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:testIamPermissions" do |env|
+      json_permissions = JSON.parse env.body
+      json_permissions["permissions"].count.must_equal 2
+      json_permissions["permissions"].first.must_equal "projects.subscriptions.list"
+      json_permissions["permissions"].last.must_equal  "projects.subscriptions.pull"
+      [200, {"Content-Type"=>"application/json"},
+       { "permissions" => ["projects.subscriptions.list"] }.to_json]
+    end
+
+    permissions = subscription.test_permissions "projects.subscriptions.list",
+                                                "projects.subscriptions.pull"
+    permissions.must_equal ["projects.subscriptions.list"]
   end
 end

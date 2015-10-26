@@ -101,6 +101,14 @@ module Gcloud
         )
       end
 
+      def test_topic_permissions topic_name, permissions, options = {}
+        @client.execute(
+          api_method: @pubsub.projects.topics.test_iam_permissions,
+          parameters: { resource: topic_path(topic_name, options) },
+          body_object: { permissions: permissions }
+        )
+      end
+
       ##
       # Creates a subscription on a given topic for a given subscriber.
       def create_subscription topic, subscription_name, options = {}
@@ -174,6 +182,16 @@ module Gcloud
           parameters: {
             resource: subscription_path(subscription_name, options) },
           body_object: { policy: new_policy }
+        )
+      end
+
+      def test_subscription_permissions subscription_name,
+                                        permissions, options = {}
+        @client.execute(
+          api_method: @pubsub.projects.subscriptions.test_iam_permissions,
+          parameters: {
+            resource: subscription_path(subscription_name, options) },
+          body_object: { permissions: permissions }
         )
       end
 
