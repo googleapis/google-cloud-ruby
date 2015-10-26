@@ -146,6 +146,8 @@
             
               <a href="#method-i-subscriptions">subscriptions</a>
             
+              <a href="#method-i-test_permissions">test_permissions</a>
+            
           
         
 
@@ -292,7 +294,7 @@
 
     
       <!-- <div class="method-source-code" id="exists-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 489</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 528</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">exists?</span>
   <span class="ruby-comment"># Always true if we have a gapi object</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@gapi</span>.<span class="ruby-identifier">nil?</span>
@@ -573,11 +575,11 @@ calls made to the Pub/Sub service. The default is <code>false</code>.
 <p>A hash that conforms to the following structure:</p>
 
 <pre class="ruby">{
+  <span class="ruby-string">&quot;etag&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;CAE=&quot;</span>,
   <span class="ruby-string">&quot;bindings&quot;</span> =<span class="ruby-operator">&gt;</span> [{
     <span class="ruby-string">&quot;role&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;roles/viewer&quot;</span>,
     <span class="ruby-string">&quot;members&quot;</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">&quot;serviceAccount:your-service-account&quot;</span>]
-  }],
-  <span class="ruby-string">&quot;rules&quot;</span> =<span class="ruby-operator">&gt;</span> []
+  }]
 }
 </pre>
 
@@ -658,8 +660,7 @@ calls to the Pub/Sub service.</p>
   <span class="ruby-string">&quot;bindings&quot;</span> =<span class="ruby-operator">&gt;</span> [{
     <span class="ruby-string">&quot;role&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;roles/viewer&quot;</span>,
     <span class="ruby-string">&quot;members&quot;</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">&quot;serviceAccount:your-service-account&quot;</span>]
-  }],
-  <span class="ruby-string">&quot;rules&quot;</span> =<span class="ruby-operator">&gt;</span> []
+  }]
 }
 </pre>
 </dd></dl>
@@ -684,7 +685,7 @@ calls to the Pub/Sub service.</p>
 
     
       <!-- <div class="method-source-code" id="policy-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 465</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 464</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">policy=</span> <span class="ruby-identifier">new_policy</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">set_topic_policy</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">new_policy</span>
@@ -1073,6 +1074,75 @@ href="Subscription/List.html#attribute-i-token">Gcloud::Pubsub::Subscription::Li
 </div>
 
         
+          <div id="test_permissions-method" class="method ">
+  <a name="method-i-test_permissions"></a>
+
+  
+    <h4>
+      <code>test_permissions(*permissions)</code>
+      <span>
+        <a href="#method-i-test_permissions">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Tests the specified permissions against the <a
+href="https://cloud.google.com/iam/">Cloud IAM</a> access control policy.
+See <a href="https://cloud.google.com/iam/docs/managing-policies">Managing
+Policies</a> for more information.</p>
+
+<h3 id="method-i-test_permissions-label-Parameters">Parameters<span><a href="#method-i-test_permissions-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>permissions</code>
+<dd>
+<p>The set of permissions to check access for. Permissions with wildcards
+(such as +*+ or <code>storage.*</code>) are not allowed. (String or Array
+of Strings)</p>
+</dd></dl>
+
+<h3 id="method-i-test_permissions-label-Returns">Returns<span><a href="#method-i-test_permissions-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>The permissions that have access. (Array of Strings)</p>
+
+<h3 id="method-i-test_permissions-label-Example">Example<span><a href="#method-i-test_permissions-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">topic</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">topic</span> <span class="ruby-string">&quot;my-topic&quot;</span>
+<span class="ruby-identifier">perms</span> = <span class="ruby-identifier">topic</span>.<span class="ruby-identifier">test_permissions</span> <span class="ruby-string">&quot;projects.topic.list&quot;</span>,
+                               <span class="ruby-string">&quot;projects.topic.publish&quot;</span>
+<span class="ruby-identifier">perms</span>.<span class="ruby-identifier">include?</span> <span class="ruby-string">&quot;projects.topic.list&quot;</span> <span class="ruby-comment">#=&gt; true</span>
+<span class="ruby-identifier">perms</span>.<span class="ruby-identifier">include?</span> <span class="ruby-string">&quot;projects.topic.publish&quot;</span> <span class="ruby-comment">#=&gt; false</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="test_permissions-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 504</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_permissions</span> <span class="ruby-operator">*</span><span class="ruby-identifier">permissions</span>
+  <span class="ruby-identifier">permissions</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">permissions</span>).<span class="ruby-identifier">flatten</span>
+  <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">test_topic_permissions</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">permissions</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-constant">Array</span>(<span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;permissions&quot;</span>])
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
       </div>
     </div>
   
@@ -1087,7 +1157,7 @@ href="Subscription/List.html#attribute-i-token">Gcloud::Pubsub::Subscription::Li
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Oct 23, 2015.
+    Docs built on Oct 26, 2015.
   </div>
 </div>
 

@@ -144,6 +144,8 @@ specific topic, to be delivered to the subscribing application.</p>
             
               <a href="#method-i-pull">pull</a>
             
+              <a href="#method-i-test_permissions">test_permissions</a>
+            
               <a href="#method-i-topic">topic</a>
             
               <a href="#method-i-wait_for_messages">wait_for_messages</a>
@@ -738,11 +740,11 @@ calls made to the Pub/Sub service. The default is <code>false</code>.
 <p>A hash that conforms to the following structure:</p>
 
 <pre class="ruby">{
+  <span class="ruby-string">&quot;etag&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;CAE=&quot;</span>,
   <span class="ruby-string">&quot;bindings&quot;</span> =<span class="ruby-operator">&gt;</span> [{
     <span class="ruby-string">&quot;role&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;roles/viewer&quot;</span>,
     <span class="ruby-string">&quot;members&quot;</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">&quot;serviceAccount:your-service-account&quot;</span>]
-  }],
-  <span class="ruby-string">&quot;rules&quot;</span> =<span class="ruby-operator">&gt;</span> []
+  }]
 }
 </pre>
 
@@ -782,7 +784,7 @@ calls to the Pub/Sub service.</p>
   <span class="ruby-ivar">@policy</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">ensure_connection!</span>
     <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_subscription_policy</span> <span class="ruby-identifier">name</span>
-    <span class="ruby-identifier">policy</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;policy&quot;</span>]
+    <span class="ruby-identifier">policy</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>
     <span class="ruby-identifier">policy</span> = <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
     <span class="ruby-identifier">policy</span>
   <span class="ruby-keyword">end</span>
@@ -823,8 +825,7 @@ calls to the Pub/Sub service.</p>
   <span class="ruby-string">&quot;bindings&quot;</span> =<span class="ruby-operator">&gt;</span> [{
     <span class="ruby-string">&quot;role&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;roles/viewer&quot;</span>,
     <span class="ruby-string">&quot;members&quot;</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">&quot;serviceAccount:your-service-account&quot;</span>]
-  }],
-  <span class="ruby-string">&quot;rules&quot;</span> =<span class="ruby-operator">&gt;</span> []
+  }]
 }
 </pre>
 </dd></dl>
@@ -849,7 +850,7 @@ calls to the Pub/Sub service.</p>
 
     
       <!-- <div class="method-source-code" id="policy-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 554</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 553</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">policy=</span> <span class="ruby-identifier">new_policy</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">set_subscription_policy</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">new_policy</span>
@@ -971,6 +972,75 @@ system may return fewer than the number specified. The default value is
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Faraday</span><span class="ruby-operator">::</span><span class="ruby-constant">TimeoutError</span>
   []
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
+          <div id="test_permissions-method" class="method ">
+  <a name="method-i-test_permissions"></a>
+
+  
+    <h4>
+      <code>test_permissions(*permissions)</code>
+      <span>
+        <a href="#method-i-test_permissions">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Tests the specified permissions against the <a
+href="https://cloud.google.com/iam/">Cloud IAM</a> access control policy.
+See <a href="https://cloud.google.com/iam/docs/managing-policies">Managing
+Policies</a> for more information.</p>
+
+<h3 id="method-i-test_permissions-label-Parameters">Parameters<span><a href="#method-i-test_permissions-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>permissions</code>
+<dd>
+<p>The set of permissions to check access for. Permissions with wildcards
+(such as +*+ or <code>storage.*</code>) are not allowed. (String or Array
+of Strings)</p>
+</dd></dl>
+
+<h3 id="method-i-test_permissions-label-Returns">Returns<span><a href="#method-i-test_permissions-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>The permissions that have access. (Array of Strings)</p>
+
+<h3 id="method-i-test_permissions-label-Example">Example<span><a href="#method-i-test_permissions-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">pubsub</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">pubsub</span>
+<span class="ruby-identifier">sub</span> = <span class="ruby-identifier">pubsub</span>.<span class="ruby-identifier">subscription</span> <span class="ruby-string">&quot;my-subscription&quot;</span>
+<span class="ruby-identifier">perms</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">test_permissions</span> <span class="ruby-string">&quot;projects.subscriptions.list&quot;</span>,
+                             <span class="ruby-string">&quot;projects.subscriptions.pull&quot;</span>
+<span class="ruby-identifier">perms</span>.<span class="ruby-identifier">include?</span> <span class="ruby-string">&quot;projects.subscriptions.list&quot;</span> <span class="ruby-comment">#=&gt; true</span>
+<span class="ruby-identifier">perms</span>.<span class="ruby-identifier">include?</span> <span class="ruby-string">&quot;projects.subscriptions.pull&quot;</span> <span class="ruby-comment">#=&gt; false</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="test_permissions-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 593</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_permissions</span> <span class="ruby-operator">*</span><span class="ruby-identifier">permissions</span>
+  <span class="ruby-identifier">permissions</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">permissions</span>).<span class="ruby-identifier">flatten</span>
+  <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">test_subscription_permissions</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">permissions</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+    <span class="ruby-constant">Array</span>(<span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;permissions&quot;</span>])
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -1119,7 +1189,7 @@ system may return fewer than the number specified. The default value is
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Oct 23, 2015.
+    Docs built on Oct 26, 2015.
   </div>
 </div>
 
