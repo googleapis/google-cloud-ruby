@@ -228,20 +228,10 @@ describe Gcloud::Pubsub, :pubsub do
     end
   end
 
-  describe "Policies" do
-    let(:topic) { retrieve_topic $topic_names[1] }
-    let(:subs) { [ { name: "#{$topic_prefix}-sub1",
-                     options: { deadline: 30 } },
-                   { name: "#{$topic_prefix}-sub2",
-                     options: { deadline: 60 } }
-                 ] }
+  describe "IAM Policies and Permissions" do
+    let(:topic) { retrieve_topic $topic_names[3] }
+    let(:subscription) { retrieve_subscription topic, "#{$topic_prefix}-subIAM" }
     let(:service_account) { pubsub.connection.credentials.client.issuer }
-
-    before do
-      subs.each do |sub|
-        retrieve_subscription topic, sub[:name]
-      end
-    end
 
     it "allows policy to be set on a topic" do
       topic.policy.must_be_kind_of Hash
@@ -256,16 +246,29 @@ describe Gcloud::Pubsub, :pubsub do
     end
 
     it "allows policy to be set on a subscription" do
-      sub = topic.subscription "#{$topic_prefix}-sub1"
-      sub.policy.must_be_kind_of Hash
+      subscription.policy.must_be_kind_of Hash
 
       role = {"role"=>"roles/pubsub.subscriber", "members"=>["serviceAccount:#{service_account}"]}
-      sp = sub.policy.dup
+      sp = subscription.policy.dup
       sp["bindings"] ||= []
       sp["bindings"] << role
-      sub.policy = sp
+      subscription.policy = sp
 
-      sub.policy(force: true)["bindings"].must_include role
+      subscription.policy(force: true)["bindings"].must_include role
+    end
+
+    it "allows permissions to be tested on a topic" do
+      skip
+      roles = ["projects.topic.list", "projects.topic.publish"]
+      permissions = topic.test_permissions roles
+      permissions.must_equal roles
+    end
+
+    it "allows permissions to be tested on a subscription" do
+      skip
+      roles = ["projects.subscriptions.list", "projects.subscriptions.pull"]
+      permissions = subscription.test_permissions roles
+      permissions.must_equal roles
     end
   end
 end
