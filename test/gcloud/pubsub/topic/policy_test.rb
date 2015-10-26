@@ -145,4 +145,19 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
     topic.policy["bindings"].first["members"].first.must_equal "user:owner@example.com"
     topic.policy["bindings"].first["members"].last.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
   end
+
+  it "tests the available permissions" do
+    mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:testIamPermissions" do |env|
+      json_permissions = JSON.parse env.body
+      json_permissions["permissions"].count.must_equal 2
+      json_permissions["permissions"].first.must_equal "projects.topic.list"
+      json_permissions["permissions"].last.must_equal  "projects.topic.publish"
+      [200, {"Content-Type"=>"application/json"},
+       { "permissions" => ["projects.topic.list"] }.to_json]
+    end
+
+    permissions = topic.test_permissions "projects.topic.list",
+                                         "projects.topic.publish"
+    permissions.must_equal ["projects.topic.list"]
+  end
 end
