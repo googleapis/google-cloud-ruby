@@ -196,6 +196,27 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     sub.wont_be :lazy?
   end
 
+  it "returns nil when getting an non-existant subscription" do
+    not_found_sub_name = "does-not-exist"
+    mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
+      [404, {"Content-Type"=>"application/json"},
+       not_found_error_json(not_found_sub_name)]
+    end
+
+    sub = pubsub.subscription not_found_sub_name
+    sub.must_be :nil?
+  end
+
+  it "gets a subscription with skip_lookup option" do
+    sub_name = "found-sub-#{Time.now.to_i}"
+    # No HTTP mock needed, since the lookup is not made
+
+    sub = pubsub.subscription sub_name, skip_lookup: true
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.must_be :lazy?
+  end
+
   it "lists subscriptions" do
     mock_connection.get "/v1/projects/#{project}/subscriptions" do |env|
       [200, {"Content-Type"=>"application/json"},
