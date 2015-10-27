@@ -282,7 +282,7 @@ module Gcloud
         endpoint   = options[:endpoint]
         attributes = hashify options[:attributes]
 
-        data = { topic: topic }
+        data = { topic: topic_path(topic) }
         data[:ackDeadlineSeconds] = deadline if deadline
         if endpoint
           data[:pushConfig] = { pushEndpoint: endpoint,

@@ -296,7 +296,6 @@ module Gcloud
       # Additionally, the topic will be created if the topic does previously not
       # exist and the +autocreate+ option is provided.
       #
-      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -318,6 +317,96 @@ module Gcloud
         return nil if batch.messages.count.zero?
         publish_batch_messages topic_name, batch, autocreate
       end
+
+      # rubocop:disable Metrics/AbcSize
+      # Disabling because this is very close to the limit.
+
+      ##
+      # Creates a new Subscription object on the current Topic.
+      #
+      # === Parameters
+      #
+      # +topic_name+::
+      #   Name of a topic. (+String+)
+      # +subscription_name+::
+      #   Name of the new subscription. Must start with a letter, and contain
+      #   only letters ([A-Za-z]), numbers ([0-9], dashes (-), underscores (_),
+      #   periods (.), tildes (~), plus (+) or percent signs (%). It must be
+      #   between 3 and 255 characters in length, and it must not start with
+      #   "goog". (+String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:deadline]</code>::
+      #   The maximum number of seconds after a subscriber receives a message
+      #   before the subscriber should acknowledge the message. (+Integer+)
+      # <code>options[:endpoint]</code>::
+      #   A URL locating the endpoint to which messages should be pushed.
+      #   e.g. "https://example.com/push" (+String+)
+      # <code>attributes[:autocreate]</code>::
+      #   Flag to control whether the topic should be created when needed.
+      #
+      # === Returns
+      #
+      # Gcloud::Pubsub::Subscription
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #
+      #   sub = pubsub.subscribe "my-topic", "my-topic-sub"
+      #   puts sub.name # => "my-topic-sub"
+      #
+      # The name is optional, and will be generated if not given.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #
+      #   sub = pubsub.subscribe "my-topic"
+      #   puts sub.name # => "generated-sub-name"
+      #
+      # The subscription can be created that waits two minutes for
+      # acknowledgement and pushed all messages to an endpoint
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #
+      #   sub = pubsub.subscribe "my-topic", "my-topic-sub",
+      #                          deadline: 120,
+      #                          endpoint: "https://example.com/push"
+      #
+      # Additionally, the topic will be created if the topic does previously not
+      # exist and the +autocreate+ option is provided.
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #
+      #   sub = pubsub.subscribe "new-topic", "new-topic-sub", autocreate: true
+      #
+      def subscribe topic_name, subscription_name, options = {}
+        ensure_connection!
+        resp = connection.create_subscription topic_name,
+                                              subscription_name, options
+        return Subscription.from_gapi(resp.data, connection) if resp.success?
+        if options[:autocreate] && resp.status == 404
+          create_topic topic_name
+          return subscribe(topic_name, subscription_name,
+                           options.merge(autocreate: false))
+        end
+        fail ApiError.from_response(resp)
+      end
+      alias_method :create_subscription, :subscribe
+      alias_method :new_subscription, :subscribe
+
+      # rubocop:enable Metrics/AbcSize
 
       ##
       # Retrieves subscription by name.
