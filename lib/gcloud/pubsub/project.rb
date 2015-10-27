@@ -155,7 +155,9 @@ module Gcloud
       #
       def topic topic_name, options = {}
         ensure_connection!
-        return Topic.new_lazy(topic_name, connection) if options[:skip_lookup]
+        if options[:skip_lookup]
+          return Topic.new_lazy(topic_name, connection, options)
+        end
         resp = connection.get_topic topic_name
         return Topic.from_gapi(resp.data, connection) if resp.success?
         if resp.status == 404
@@ -443,6 +445,10 @@ module Gcloud
       #   Name of a subscription. (+String+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:project]</code>::
+      #   If the subscription belongs to a project other than the one currently
+      #   connected to, the alternate project ID can be specified here.
+      #   (+String+)
       # <code>options[:skip_lookup]</code>::
       #   Optionally create a Subscription object without verifying the
       #   subscription resource exists on the Pub/Sub service. Calls made on
@@ -478,7 +484,7 @@ module Gcloud
       def subscription subscription_name, options = {}
         ensure_connection!
         if options[:skip_lookup]
-          return Subscription.new_lazy(subscription_name, connection)
+          return Subscription.new_lazy(subscription_name, connection, options)
         end
         resp = connection.get_subscription subscription_name
         return Subscription.from_gapi(resp.data, connection) if resp.success?

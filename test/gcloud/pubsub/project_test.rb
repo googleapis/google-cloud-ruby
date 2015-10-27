@@ -95,6 +95,15 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topic.must_be :lazy?
   end
 
+  it "gets a topic with skip_lookup and project options" do
+    topic_name = "found-topic"
+    # No HTTP mock needed, since the lookup is not made
+
+    topic = pubsub.find_topic topic_name, skip_lookup: true, project: "custom"
+    topic.name.must_equal "projects/custom/topics/found-topic"
+    topic.must_be :lazy?
+  end
+
   it "lists topics" do
     num_topics = 3
     mock_connection.get "/v1/projects/#{project}/topics" do |env|
@@ -187,6 +196,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     sub = pubsub.subscription sub_name
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.name.must_equal subscription_path(sub_name)
     sub.wont_be :lazy?
   end
 
@@ -200,6 +210,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     sub = pubsub.get_subscription sub_name
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.name.must_equal subscription_path(sub_name)
     sub.wont_be :lazy?
   end
 
@@ -213,6 +224,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     sub = pubsub.find_subscription sub_name
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.name.must_equal subscription_path(sub_name)
     sub.wont_be :lazy?
   end
 
@@ -234,6 +246,18 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     sub = pubsub.subscription sub_name, skip_lookup: true
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.name.must_equal subscription_path(sub_name)
+    sub.must_be :lazy?
+  end
+
+  it "gets a subscription with skip_lookup and project options" do
+    sub_name = "found-sub-#{Time.now.to_i}"
+    # No HTTP mock needed, since the lookup is not made
+
+    sub = pubsub.subscription sub_name, skip_lookup: true, project: "custom"
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.name.must_equal "projects/custom/subscriptions/#{sub_name}"
     sub.must_be :lazy?
   end
 

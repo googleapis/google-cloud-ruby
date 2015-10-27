@@ -213,7 +213,7 @@ module Gcloud
       def subscription subscription_name, options = {}
         ensure_connection!
         if options[:skip_lookup]
-          return Subscription.new_lazy(subscription_name, connection)
+          return Subscription.new_lazy(subscription_name, connection, options)
         end
         resp = connection.get_subscription subscription_name
         return Subscription.from_gapi(resp.data, connection) if resp.success?
