@@ -92,7 +92,8 @@ module Gcloud
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:autocreate]</code>::
       #   Flag to control whether the requested topic will be created if it does
-      #   not exist. The default value is +false+. (+Boolean+)
+      #   not exist. Ignored if +skip_lookup+ is +true+. The default value is
+      #   +false+. (+Boolean+)
       # <code>options[:project]</code>::
       #   If the topic belongs to a project other than the one currently
       #   connected to, the alternate project ID can be specified here.
@@ -324,6 +325,9 @@ module Gcloud
       #
       #   msg = pubsub.publish "new-topic", "new-message", autocreate: true
       #
+      # A note about auto-creating the topic: Any message published to a topic
+      # without a subscription will be lost.
+      #
       def publish topic_name, data = nil, attributes = {}
         # Fix parameters
         if data.is_a?(::Hash) && attributes.empty?
@@ -343,7 +347,7 @@ module Gcloud
       # Disabling because this is very close to the limit.
 
       ##
-      # Creates a new Subscription object on the current Topic.
+      # Creates a new Subscription object for the provided topic.
       #
       # === Parameters
       #
@@ -364,8 +368,8 @@ module Gcloud
       #   A URL locating the endpoint to which messages should be pushed.
       #   e.g. "https://example.com/push" (+String+)
       # <code>attributes[:autocreate]</code>::
-      #   Flag to control whether the provided topic will be created if it does
-      #   not exist.
+      #   Flag to control whether the topic will be created if it does not
+      #   exist.
       #
       # === Returns
       #
