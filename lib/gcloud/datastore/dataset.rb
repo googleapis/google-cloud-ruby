@@ -250,8 +250,8 @@ module Gcloud
       #     where("completed", "=", true)
       #   tasks = dataset.run query
       #
-      def run query
-        response = connection.run_query query.to_proto
+      def run query, opts={}
+        response = connection.run_query query.to_proto, opts
         entities = to_gcloud_entities response.batch.entity_result
         cursor = Proto.encode_cursor response.batch.end_cursor
         more_results = Proto.to_more_results_string response.batch.more_results

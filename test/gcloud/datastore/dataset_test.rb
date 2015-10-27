@@ -259,7 +259,7 @@ describe Gcloud::Datastore::Dataset do
   it "run will fulfill a query" do
     dataset.connection.expect :run_query,
                               run_query_response,
-                              [Gcloud::Datastore::Proto::Query]
+                              [Gcloud::Datastore::Proto::Query, {}]
 
     query = Gcloud::Datastore::Query.new.kind("User")
     entities = dataset.run query
@@ -278,7 +278,7 @@ describe Gcloud::Datastore::Dataset do
   it "run_query will fulfill a query" do
     dataset.connection.expect :run_query,
                               run_query_response,
-                              [Gcloud::Datastore::Proto::Query]
+                              [Gcloud::Datastore::Proto::Query, {}]
 
     query = Gcloud::Datastore::Query.new.kind("User")
     entities = dataset.run_query query
@@ -292,6 +292,26 @@ describe Gcloud::Datastore::Dataset do
     refute entities.more_after_limit?
     refute entities.no_more?
   end
+
+
+  it "run_query will fulfill a query with a namespace" do
+    dataset.connection.expect :run_query,
+                              run_query_response,
+                              [Gcloud::Datastore::Proto::Query, { :namespace => 'foobar' }]
+
+    query = Gcloud::Datastore::Query.new.kind("User")
+    entities = dataset.run_query query, :namespace => 'foobar'
+    entities.count.must_equal 2
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.more_results.must_be :nil?
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.no_more?
+  end
+
 
   describe "query result object" do
     let(:run_query_response_not_finished) do
@@ -316,7 +336,7 @@ describe Gcloud::Datastore::Dataset do
     it "has more_results not_finished" do
       dataset.connection.expect :run_query,
                                 run_query_response_not_finished,
-                                [Gcloud::Datastore::Proto::Query]
+                                [Gcloud::Datastore::Proto::Query, {}]
 
       query = Gcloud::Datastore::Query.new.kind("User")
       entities = dataset.run query
@@ -334,7 +354,7 @@ describe Gcloud::Datastore::Dataset do
     it "has more_results more_after_limit" do
       dataset.connection.expect :run_query,
                                 run_query_response_more_after_limit,
-                                [Gcloud::Datastore::Proto::Query]
+                                [Gcloud::Datastore::Proto::Query, {}]
 
       query = Gcloud::Datastore::Query.new.kind("User")
       entities = dataset.run query
@@ -352,7 +372,7 @@ describe Gcloud::Datastore::Dataset do
     it "has more_results no_more" do
       dataset.connection.expect :run_query,
                                 run_query_response_no_more,
-                                [Gcloud::Datastore::Proto::Query]
+                                [Gcloud::Datastore::Proto::Query, {}]
 
       query = Gcloud::Datastore::Query.new.kind("User")
       entities = dataset.run query
