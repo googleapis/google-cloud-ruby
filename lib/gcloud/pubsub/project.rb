@@ -243,6 +243,83 @@ module Gcloud
       alias_method :list_topics, :topics
 
       ##
+      # Publishes one or more messages to the given topic.
+      #
+      # === Parameters
+      #
+      # +topic_name+::
+      #   Name of a topic. (+String+)
+      # +data+::
+      #   The message data. (+String+)
+      # +attributes+::
+      #   Optional attributes for the message. (+Hash+)
+      # <code>attributes[:autocreate]</code>::
+      #   Flag to control whether the topic should be created when needed.
+      #
+      # === Returns
+      #
+      # Message object when called without a block,
+      # Array of Message objects when called with a block
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #
+      #   msg = pubsub.publish "my-topic", "new-message"
+      #
+      # Additionally, a message can be published with attributes:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #
+      #   msg = pubsub.publish "my-topic", "new-message", foo: :bar,
+      #                                                   this: :that
+      #
+      # Multiple messages can be published at the same time by passing a block:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #
+      #   msgs = pubsub.publish "my-topic" do |batch|
+      #     batch.publish "new-message-1", foo: :bar
+      #     batch.publish "new-message-2", foo: :baz
+      #     batch.publish "new-message-3", foo: :bif
+      #   end
+      #
+      # Additionally, the topic will be created if the topic does previously not
+      # exist and the +autocreate+ option is provided.
+      #
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #
+      #   msg = pubsub.publish "new-topic", "new-message", autocreate: true
+      #
+      def publish topic_name, data = nil, attributes = {}
+        # Fix parameters
+        if data.is_a?(::Hash) && attributes.empty?
+          attributes = data
+          data = nil
+        end
+        # extract autocreate option
+        autocreate = attributes.delete :autocreate
+        ensure_connection!
+        batch = Topic::Batch.new data, attributes
+        yield batch if block_given?
+        return nil if batch.messages.count.zero?
+        publish_batch_messages topic_name, batch, autocreate
+      end
+
+      ##
       # Retrieves subscription by name.
       # The difference between this method and Project#get_subscription is
       # that this method does not make an API call to Pub/Sub to verify the
@@ -380,6 +457,20 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      ##
+      # Call the publish API with arrays of data data and attrs.
+      def publish_batch_messages topic_name, batch, autocreate = false
+        resp = connection.publish topic_name, batch.messages
+        if resp.success?
+          batch.to_gcloud_messages resp.data["messageIds"]
+        elsif autocreate && resp.status == 404
+          create_topic topic_name
+          publish_batch_messages topic_name, batch, false
+        else
+          fail ApiError.from_response(resp)
+        end
       end
     end
   end

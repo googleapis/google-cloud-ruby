@@ -206,7 +206,7 @@ module Gcloud
         end
         @client.execute(
           api_method:  @pubsub.projects.topics.publish,
-          parameters:  { topic: topic },
+          parameters:  { topic: topic_path(topic) },
           body_object: { messages: gapi_msgs }
         )
       end
