@@ -64,6 +64,14 @@ describe Gcloud::Pubsub::Topic, :subscription, :mock_pubsub do
     sub.must_be :nil?
   end
 
+  it "gets a subscription with skip_lookup option" do
+    # No HTTP mock needed, since the lookup is not made
+
+    sub = topic.find_subscription found_sub_name, skip_lookup: true
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.must_be :lazy?
+  end
+
   describe "lazy topic that exists" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
                                                  pubsub.connection }

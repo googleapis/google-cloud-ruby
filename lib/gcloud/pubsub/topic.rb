@@ -175,6 +175,13 @@ module Gcloud
       #
       # +subscription_name+::
       #   Name of a subscription. (+String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:skip_lookup]</code>::
+      #   Optionally create a Subscription object without verifying the
+      #   subscription resource exists on the Pub/Sub service. Calls made on
+      #   this object will raise errors if the service resource does not exist.
+      #   Default is +false+. (+Boolean+)
       #
       # === Returns
       #
@@ -191,8 +198,23 @@ module Gcloud
       #   subscription = topic.subscription "my-topic-subscription"
       #   puts subscription.name
       #
-      def subscription subscription_name
+      # The lookup against the Pub/Sub service can be skipped using the
+      # +skip_lookup+ option:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #
+      #   # No API call is made to retrieve the subscription information.
+      #   subscription = pubsub.subscription "my-sub", skip_lookup: true
+      #   puts subscription.name
+      #
+      def subscription subscription_name, options = {}
         ensure_connection!
+        if options[:skip_lookup]
+          return Subscription.new_lazy(subscription_name, connection)
+        end
         resp = connection.get_subscription subscription_name
         return Subscription.from_gapi(resp.data, connection) if resp.success?
         return nil if resp.status == 404
