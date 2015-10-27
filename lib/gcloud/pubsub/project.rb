@@ -91,8 +91,8 @@ module Gcloud
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:autocreate]</code>::
-      #   Flag to control whether the topic should be created when needed.
-      #   The default value is +false+. (+Boolean+)
+      #   Flag to control whether the requested topic will be created if it does
+      #   not exist. The default value is +false+. (+Boolean+)
       # <code>options[:project]</code>::
       #   If the topic belongs to a project other than the one currently
       #   connected to, the alternate project ID can be specified here.
@@ -105,9 +105,9 @@ module Gcloud
       #
       # === Returns
       #
-      # Gcloud::Pubsub::Topic or nil if topic does not exist. Can return a newly
-      # created Gcloud::Pubsub::Topic if the topic does not exist and
-      # +autocreate+ is not set to +true+
+      # Gcloud::Pubsub::Topic or nil if topic does not exist. Will return a
+      # newly created Gcloud::Pubsub::Topic if the topic does not exist and
+      # +autocreate+ is set to +true+.
       #
       # === Examples
       #
@@ -274,7 +274,8 @@ module Gcloud
       # +attributes+::
       #   Optional attributes for the message. (+Hash+)
       # <code>attributes[:autocreate]</code>::
-      #   Flag to control whether the topic should be created when needed.
+      #   Flag to control whether the provided topic will be created if it does
+      #   not exist.
       #
       # === Returns
       #
@@ -363,7 +364,8 @@ module Gcloud
       #   A URL locating the endpoint to which messages should be pushed.
       #   e.g. "https://example.com/push" (+String+)
       # <code>attributes[:autocreate]</code>::
-      #   Flag to control whether the topic should be created when needed.
+      #   Flag to control whether the provided topic will be created if it does
+      #   not exist.
       #
       # === Returns
       #
