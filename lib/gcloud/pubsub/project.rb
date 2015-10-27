@@ -78,6 +78,9 @@ module Gcloud
           Gcloud::GCE.project_id
       end
 
+      # rubocop:disable Metrics/AbcSize
+      # Disabled rubocop because there isn't much benefit to adding indirection
+
       ##
       # Retrieves topic by name.
       #
@@ -94,6 +97,11 @@ module Gcloud
       #   If the topic belongs to a project other than the one currently
       #   connected to, the alternate project ID can be specified here.
       #   (+String+)
+      # <code>options[:skip_lookup]</code>::
+      #   Optionally create a Topic object without verifying the topic resource
+      #   exists on the Pub/Sub service. Calls made on this object will raise
+      #   errors if the topic resource does not exist. Default is +false+.
+      #   (+Boolean+)
       #
       # === Returns
       #
@@ -135,8 +143,18 @@ module Gcloud
       #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "another-topic", project: "another-project"
       #
+      # The lookup against the Pub/Sub service can be skipped using the
+      # +skip_lookup+ option:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #   topic = pubsub.topic "another-topic", skip_lookup: true
+      #
       def topic topic_name, options = {}
         ensure_connection!
+        return Topic.new_lazy(topic_name, connection) if options[:skip_lookup]
         resp = connection.get_topic topic_name
         return Topic.from_gapi(resp.data, connection) if resp.success?
         if resp.status == 404
@@ -147,6 +165,8 @@ module Gcloud
       end
       alias_method :get_topic, :topic
       alias_method :find_topic, :topic
+
+      # rubocop:enable Metrics/AbcSize
 
       ##
       # Creates a new topic.

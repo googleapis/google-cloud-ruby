@@ -75,6 +75,26 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topic.wont_be :lazy?
   end
 
+  it "returns nil when getting an non-existant topic" do
+    not_found_topic_name = "not-found-topic"
+    mock_connection.get "/v1/projects/#{project}/topics/#{not_found_topic_name}" do |env|
+      [404, {"Content-Type"=>"application/json"},
+       not_found_error_json(not_found_topic_name)]
+    end
+
+    topic = pubsub.find_topic not_found_topic_name
+    topic.must_be :nil?
+  end
+
+  it "gets a topic with skip_lookup option" do
+    topic_name = "found-topic"
+    # No HTTP mock needed, since the lookup is not made
+
+    topic = pubsub.find_topic topic_name, skip_lookup: true
+    topic.name.must_equal topic_path(topic_name)
+    topic.must_be :lazy?
+  end
+
   it "lists topics" do
     num_topics = 3
     mock_connection.get "/v1/projects/#{project}/topics" do |env|
