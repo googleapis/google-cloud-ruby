@@ -114,9 +114,53 @@ module Gcloud
   #   pubsub = gcloud.pubsub
   #   topic = pubsub.create_topic "my-topic"
   #
+  # == Retrieving Subscriptions
+  #
+  # A Subscription is a named resource representing the stream of messages from
+  # a single, specific Topic, to be delivered to the subscribing application.
+  # A Subscription is found by its name. (See Topic#subscription)
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   pubsub = gcloud.pubsub
+  #
+  #   topic = pubsub.topic "my-topic"
+  #   subscription = topic.subscription "my-topic-subscription"
+  #   puts subscription.name
+  #
+  # == Creating a Subscription
+  #
+  # A Subscription is created from a Topic. (See Topic#subscribe and
+  # Project#subscribe)
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   pubsub = gcloud.pubsub
+  #
+  #   topic = pubsub.topic "my-topic"
+  #   sub = topic.subscribe "my-topic-sub"
+  #   puts sub.name # => "my-topic-sub"
+  #
+  # The subscription can be created that specifies the number of seconds to
+  # wait to be acknowledged as well as an endpoint URL to push the messages to:
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   pubsub = gcloud.pubsub
+  #
+  #   topic = pubsub.topic "my-topic"
+  #   sub = topic.subscribe "my-topic-sub",
+  #                         deadline: 120,
+  #                         endpoint: "https://example.com/push"
+  #
   # == Publishing Messages
   #
-  # Messages are published to a topic. (See Topic#publish)
+  # Messages are published to a topic. Any message published to a topic without
+  # a subscription will be lost. Ensure the topic has a subscription before
+  # publishing. (See Topic#publish and Project#publish)
   #
   #   require "gcloud"
   #
@@ -151,83 +195,6 @@ module Gcloud
   #     batch.publish "new-message-2", foo: :baz
   #     batch.publish "new-message-3", foo: :bif
   #   end
-  #
-  # == Retrieving Subscriptions
-  #
-  # A Subscription is a named resource representing the stream of messages from
-  # a single, specific Topic, to be delivered to the subscribing application.
-  # A Subscription is found by its name. (See Topic#subscription)
-  #
-  #   require "gcloud"
-  #
-  #   gcloud = Gcloud.new
-  #   pubsub = gcloud.pubsub
-  #
-  #   topic = pubsub.topic "my-topic"
-  #   subscription = topic.subscription "my-topic-subscription"
-  #   puts subscription.name
-  #
-  # == Creating a Subscription
-  #
-  # A Subscription is created from a Topic. (See Topic#subscribe)
-  #
-  #   require "gcloud"
-  #
-  #   gcloud = Gcloud.new
-  #   pubsub = gcloud.pubsub
-  #
-  #   topic = pubsub.topic "my-topic"
-  #   sub = topic.subscribe "my-topic-sub"
-  #   puts sub.name # => "my-topic-sub"
-  #
-  # The subscription can be created that specifies the number of seconds to
-  # wait to be acknowledged as well as an endpoint URL to push the messages to:
-  #
-  #   require "gcloud"
-  #
-  #   gcloud = Gcloud.new
-  #   pubsub = gcloud.pubsub
-  #
-  #   topic = pubsub.topic "my-topic"
-  #   sub = topic.subscribe "my-topic-sub",
-  #                         deadline: 120,
-  #                         endpoint: "https://example.com/push"
-  #
-  # == Working Across Projects
-  #
-  # All calls to the Pub/Sub service use the same project and credentials
-  # provided to the Gcloud#pubsub method. However, it is common to reference
-  # topics or subscriptions in other projects, which can be achieved by using
-  # the +project+ option. The main credentials must have permissions to the
-  # topics and subscriptions in other projects.
-  #
-  #   require "gcloud"
-  #
-  #   gcloud = Gcloud.new # my-project-id
-  #   pubsub = gcloud.pubsub
-  #
-  #   # Get a topic in the current project
-  #   my_topic = pubsub.topic "my-topic"
-  #   my_topic.name #=> "projects/my-project-id/topics/my-topic"
-  #   # Get a topic in another project
-  #   other_topic = pubsub.topic "other-topic", project: "other-project-id"
-  #   other_topic.name #=> "projects/other-project-id/topics/other-topic"
-  #
-  # It is possible to create a subscription in the current project that pulls
-  # from a topic in another project:
-  #
-  #   require "gcloud"
-  #
-  #   gcloud = Gcloud.new # my-project-id
-  #   pubsub = gcloud.pubsub
-  #
-  #   # Get a topic in another project
-  #   topic = pubsub.topic "other-topic", project: "other-project-id"
-  #   # Create a subscription in the current project that pulls from
-  #   # the topic in another project
-  #   sub = topic.subscribe "my-sub"
-  #   sub.name #=> "projects/my-project-id/subscriptions/my-sub"
-  #   sub.topic.name #=> "projects/other-project-id/topics/other-topic"
   #
   # == Pulling Messages
   #
@@ -380,6 +347,42 @@ module Gcloud
   #   sub.listen autoack: true do |msg|
   #     # process msg
   #   end
+  #
+  # == Working Across Projects
+  #
+  # All calls to the Pub/Sub service use the same project and credentials
+  # provided to the Gcloud#pubsub method. However, it is common to reference
+  # topics or subscriptions in other projects, which can be achieved by using
+  # the +project+ option. The main credentials must have permissions to the
+  # topics and subscriptions in other projects.
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new # my-project-id
+  #   pubsub = gcloud.pubsub
+  #
+  #   # Get a topic in the current project
+  #   my_topic = pubsub.topic "my-topic"
+  #   my_topic.name #=> "projects/my-project-id/topics/my-topic"
+  #   # Get a topic in another project
+  #   other_topic = pubsub.topic "other-topic", project: "other-project-id"
+  #   other_topic.name #=> "projects/other-project-id/topics/other-topic"
+  #
+  # It is possible to create a subscription in the current project that pulls
+  # from a topic in another project:
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new # my-project-id
+  #   pubsub = gcloud.pubsub
+  #
+  #   # Get a topic in another project
+  #   topic = pubsub.topic "other-topic", project: "other-project-id"
+  #   # Create a subscription in the current project that pulls from
+  #   # the topic in another project
+  #   sub = topic.subscribe "my-sub"
+  #   sub.name #=> "projects/my-project-id/subscriptions/my-sub"
+  #   sub.topic.name #=> "projects/other-project-id/topics/other-topic"
   #
   module Pubsub
   end
