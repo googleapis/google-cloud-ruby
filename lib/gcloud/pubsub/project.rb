@@ -79,6 +79,7 @@ module Gcloud
       end
 
       # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/MethodLength
       # Disabled rubocop because there isn't much benefit to adding indirection
 
       ##
@@ -170,6 +171,7 @@ module Gcloud
       alias_method :find_topic, :topic
 
       # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/MethodLength
 
       ##
       # Creates a new topic.
