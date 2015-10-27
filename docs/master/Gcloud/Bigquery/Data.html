@@ -178,7 +178,7 @@ last.</p>
 
     
       <!-- <div class="method-source-code" id="format_rows-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 93</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format_rows</span> <span class="ruby-identifier">rows</span>, <span class="ruby-identifier">fields</span>
   <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>[<span class="ruby-string">&quot;name&quot;</span>] }
   <span class="ruby-identifier">field_types</span> = <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>[<span class="ruby-string">&quot;type&quot;</span>] }
@@ -219,7 +219,7 @@ last.</p>
 
     
       <!-- <div class="method-source-code" id="format_values-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 104</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format_values</span> <span class="ruby-identifier">field_types</span>, <span class="ruby-identifier">values</span>
   <span class="ruby-identifier">field_types</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">values</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">begin</span>
@@ -278,7 +278,7 @@ last.</p>
 
     
       <!-- <div class="method-source-code" id="etag-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 51</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">etag</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;etag&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -312,7 +312,7 @@ last.</p>
 
     
       <!-- <div class="method-source-code" id="kind-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 40</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">kind</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;kind&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -346,7 +346,7 @@ last.</p>
 
     
       <!-- <div class="method-source-code" id="next-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 66</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">next</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">next?</span>
   <span class="ruby-identifier">ensure_table!</span>
@@ -382,7 +382,7 @@ last.</p>
 
     
       <!-- <div class="method-source-code" id="next-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 62</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">next?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">token</span>.<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -418,7 +418,7 @@ e.g. numbers are formatted as strings.</p>
 
     
       <!-- <div class="method-source-code" id="raw-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 75</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">raw</span>
   <span class="ruby-constant">Array</span>(<span class="ruby-identifier">gapi</span>[<span class="ruby-string">&quot;rows&quot;</span>]).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;f&quot;</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>[<span class="ruby-string">&quot;v&quot;</span>] } }
 <span class="ruby-keyword">end</span></pre>
@@ -452,7 +452,7 @@ e.g. numbers are formatted as strings.</p>
 
     
       <!-- <div class="method-source-code" id="token-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 46</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">token</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;pageToken&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -486,7 +486,7 @@ e.g. numbers are formatted as strings.</p>
 
     
       <!-- <div class="method-source-code" id="total-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 56</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/data.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">total</span>
   <span class="ruby-ivar">@gapi</span>[<span class="ruby-string">&quot;totalRows&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -514,7 +514,7 @@ e.g. numbers are formatted as strings.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Oct 26, 2015.
+    Docs built on Oct 27, 2015.
   </div>
 </div>
 

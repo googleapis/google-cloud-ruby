@@ -263,7 +263,7 @@ values.</p>
 
     
       <!-- <div class="method-source-code" id="new-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 81</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">arr</span> = [], <span class="ruby-identifier">end_cursor</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">more_results</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">super</span> <span class="ruby-identifier">arr</span>
   <span class="ruby-ivar">@end_cursor</span> = <span class="ruby-identifier">end_cursor</span>
@@ -310,7 +310,7 @@ is “MORE_RESULTS_AFTER_LIMIT”</p>
 
     
       <!-- <div class="method-source-code" id="more_after_limit-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 66</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">more_after_limit?</span>
   <span class="ruby-identifier">more_results</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">to_more_results_string</span>(
     <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">QueryResultBatch</span><span class="ruby-operator">::</span><span class="ruby-constant">MoreResultsType</span><span class="ruby-operator">::</span><span class="ruby-constant">MORE_RESULTS_AFTER_LIMIT</span>)
@@ -347,7 +347,7 @@ is “NO_MORE_RESULTS”</p>
 
     
       <!-- <div class="method-source-code" id="no_more-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 74</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">no_more?</span>
   <span class="ruby-identifier">more_results</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">to_more_results_string</span>(
     <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">QueryResultBatch</span><span class="ruby-operator">::</span><span class="ruby-constant">MoreResultsType</span><span class="ruby-operator">::</span><span class="ruby-constant">NO_MORE_RESULTS</span>)
@@ -384,7 +384,7 @@ is “NOT_FINISHED”</p>
 
     
       <!-- <div class="method-source-code" id="not_finished-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 58</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset/query_results.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">not_finished?</span>
   <span class="ruby-identifier">more_results</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">to_more_results_string</span>(
     <span class="ruby-constant">Proto</span><span class="ruby-operator">::</span><span class="ruby-constant">QueryResultBatch</span><span class="ruby-operator">::</span><span class="ruby-constant">MoreResultsType</span><span class="ruby-operator">::</span><span class="ruby-constant">NOT_FINISHED</span>)
@@ -413,7 +413,7 @@ is “NOT_FINISHED”</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Oct 26, 2015.
+    Docs built on Oct 27, 2015.
   </div>
 </div>
 
