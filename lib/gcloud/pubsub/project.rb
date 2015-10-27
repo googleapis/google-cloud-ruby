@@ -321,40 +321,6 @@ module Gcloud
 
       ##
       # Retrieves subscription by name.
-      # The difference between this method and Project#get_subscription is
-      # that this method does not make an API call to Pub/Sub to verify the
-      # subscription exists.
-      #
-      # === Parameters
-      #
-      # +subscription_name+::
-      #   Name of a subscription. (+String+)
-      #
-      # === Returns
-      #
-      # Gcloud::Pubsub::Subscription
-      #
-      # === Example
-      #
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   pubsub = gcloud.pubsub
-      #
-      #   subscription = pubsub.get_subscription "my-topic-subscription"
-      #   puts subscription.name
-      #
-      def subscription subscription_name
-        ensure_connection!
-
-        Subscription.new_lazy subscription_name, connection
-      end
-
-      ##
-      # Retrieves subscription by name.
-      # The difference between this method and Project#subscription is that
-      # this method makes an API call to Pub/Sub to verify the subscription
-      # exists.
       #
       # === Parameters
       #
@@ -372,19 +338,18 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #
-      #   subscription = pubsub.get_subscription "my-topic-subscription"
+      #   subscription = pubsub.subscription "my-topic-subscription"
       #   puts subscription.name
       #
-      def get_subscription subscription_name
+      def subscription subscription_name
         ensure_connection!
         resp = connection.get_subscription subscription_name
-        if resp.success?
-          Subscription.from_gapi resp.data, connection
-        else
-          nil
-        end
+        return Subscription.from_gapi(resp.data, connection) if resp.success?
+        return nil if resp.status == 404
+        fail ApiError.from_response(resp)
       end
-      alias_method :find_subscription, :get_subscription
+      alias_method :get_subscription, :subscription
+      alias_method :find_subscription, :subscription
 
       ##
       # Retrieves a list of subscriptions for the given project.
