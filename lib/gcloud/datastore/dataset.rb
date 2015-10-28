@@ -101,7 +101,7 @@ module Gcloud
       #
       # === Example
       #
-      #   empty_key = Gcloud::Datastore::Key.new "Task"
+      #   empty_key = dataset.key "Task"
       #   task_keys = dataset.allocate_ids empty_key, 5
       #
       def allocate_ids incomplete_key, count = 1
@@ -160,7 +160,7 @@ module Gcloud
       #
       # Finding an entity with a key:
       #
-      #   key = Gcloud::Datastore::Key.new "Task", 123456
+      #   key = dataset.key "Task", 123456
       #   task = dataset.find key
       #
       # Finding an entity with a +kind+ and +id+/+name+:
@@ -190,8 +190,8 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
-      #   key1 = Gcloud::Datastore::Key.new "Task", 123456
-      #   key2 = Gcloud::Datastore::Key.new "Task", 987654
+      #   key1 = dataset.key "Task", 123456
+      #   key2 = dataset.key "Task", 987654
       #   tasks = dataset.find_all key1, key2
       #
       def find_all *keys
@@ -271,7 +271,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
       #
-      #   key = Gcloud::Datastore::Key.new "User", "heidi"
+      #   key = dataset.key "User", "heidi"
       #
       #   user = Gcloud::Datastore::Entity.new
       #   user.key = key
@@ -291,7 +291,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
       #
-      #   key = Gcloud::Datastore::Key.new "User", "heidi"
+      #   key = dataset.key "User", "heidi"
       #
       #   user = Gcloud::Datastore::Entity.new
       #   user.key = key
@@ -351,6 +351,33 @@ module Gcloud
         query = Query.new
         query.kind(*kinds) unless kinds.empty?
         query
+      end
+
+      ##
+      # Create a new Key instance. This is a convenience method to make the
+      # creation of Key objects easier.
+      #
+      # === Parameters
+      #
+      # +kind+::
+      #   The kind of the Key. This is optional. (+String+)
+      # +id_or_name+::
+      #   The id or name of the Key. This is optional. (+Integer+ or +String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Datastore::Key
+      #
+      # === Example
+      #
+      #   key = dataset.key "User", "username"
+      #
+      # This code is equivalent to the following:
+      #
+      #   key = dataset.key "User", "username"
+      #
+      def key kind = nil, id_or_name = nil
+        Key.new kind, id_or_name
       end
 
       protected

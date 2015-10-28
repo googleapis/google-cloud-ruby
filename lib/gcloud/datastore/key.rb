@@ -82,6 +82,24 @@ module Gcloud
       #
       attr_accessor :namespace
 
+      ##
+      # Create a new Key instance.
+      #
+      # === Parameters
+      #
+      # +kind+::
+      #   The kind of the Key. This is optional. (+String+)
+      # +id_or_name+::
+      #   The id or name of the Key. This is optional. (+Integer+ or +String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Datastore::Dataset::Key
+      #
+      # === Example
+      #
+      #   key = Gcloud::Datastore::Key.new "User", "username"
+      #
       def initialize kind = nil, id_or_name = nil
         @kind = kind
         if id_or_name.is_a? Integer

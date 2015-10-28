@@ -328,6 +328,20 @@ describe Gcloud::Datastore::Dataset do
     proto.kind.name.must_include "User"
   end
 
+  it "key returns a Key instance" do
+    key = dataset.key "ThisThing", 1234
+    key.must_be_kind_of Gcloud::Datastore::Key
+    key.kind.must_equal "ThisThing"
+    key.id.must_equal 1234
+    key.name.must_be :nil?
+
+    key = dataset.key "ThisThing", "charlie"
+    key.must_be_kind_of Gcloud::Datastore::Key
+    key.kind.must_equal "ThisThing"
+    key.id.must_be :nil?
+    key.name.must_equal "charlie"
+  end
+
   describe "query result object" do
     let(:run_query_response_not_finished) do
       run_query_response.tap do |response|

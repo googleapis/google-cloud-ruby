@@ -58,7 +58,7 @@ module Gcloud
   #                              "/path/to/keyfile.json"
   #
   #   entity = Gcloud::Datastore::Entity.new
-  #   entity.key = Gcloud::Datastore::Key.new "Task"
+  #   entity.key = dataset.key "Task"
   #   entity["description"] = "Get started with Google Cloud"
   #   entity["completed"] = false
   #
@@ -125,7 +125,7 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
-  #   key = Gcloud::Datastore::Key.new "Task", 12345
+  #   key = dataset.key "Task", 12345
   #   entity = dataset.find key
   #
   # See Gcloud::Datastore::Dataset#find
@@ -224,7 +224,7 @@ module Gcloud
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
   #   entity = Gcloud::Datastore::Entity.new
-  #   entity.key = Gcloud::Datastore::Key.new "User"
+  #   entity.key = dataset.key "User"
   #   entity["name"] = "Heidi Henderson"
   #   entity.key.id #=> nil
   #   dataset.save entity
@@ -272,7 +272,7 @@ module Gcloud
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
   #
-  #   key = Gcloud::Datastore::Key.new "User", "heidi"
+  #   key = dataset.key "User", "heidi"
   #
   #   user = Gcloud::Datastore::Entity.new
   #   user.key = key
@@ -293,7 +293,7 @@ module Gcloud
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
   #
-  #   key = Gcloud::Datastore::Key.new "User", "heidi"
+  #   key = dataset.key "User", "heidi"
   #
   #   user = Gcloud::Datastore::Entity.new
   #   user.key = key

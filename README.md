@@ -83,7 +83,7 @@ dataset = gcloud.datastore
 
 # Create a new task to demo datastore
 demo_task = Gcloud::Datastore::Entity.new
-demo_task.key = Gcloud::Datastore::Key.new "Task", "datastore-demo"
+demo_task.key = dataset.key "Task", "datastore-demo"
 demo_task[:description] = "Demonstrate Datastore functionality"
 demo_task[:completed] = false
 
