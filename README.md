@@ -82,16 +82,16 @@ gcloud = Gcloud.new "my-todo-project-id",
 dataset = gcloud.datastore
 
 # Create a new task to demo datastore
-demo_task = Gcloud::Datastore::Entity.new
-demo_task.key = Gcloud::Datastore::Key.new "Task", "datastore-demo"
-demo_task[:description] = "Demonstrate Datastore functionality"
-demo_task[:completed] = false
+demo_task = dataset.entity "Task", "datastore-demo" do |t|
+  t["description"] = "Demonstrate Datastore functionality"
+  t["completed"] = false
+end
 
 # Save the new task
 dataset.save demo_task
 
 # Run a query for all completed tasks
-query = Gcloud::Datastore::Query.new.kind("Task").
+query = dataset.query("Task").
   where("completed", "=", true)
 completed_tasks = dataset.run query
 ```

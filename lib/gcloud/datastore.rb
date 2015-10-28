@@ -57,10 +57,10 @@ module Gcloud
   #   dataset = Gcloud.datastore "my-todo-project",
   #                              "/path/to/keyfile.json"
   #
-  #   entity = Gcloud::Datastore::Entity.new
-  #   entity.key = Gcloud::Datastore::Key.new "Task"
-  #   entity["description"] = "Get started with Google Cloud"
-  #   entity["completed"] = false
+  #   entity = dataset.entity "Task" do |t|
+  #     t["description"] = "Get started with Google Cloud"
+  #     t["completed"] = false
+  #   end
   #
   #   dataset.save entity
   #
@@ -125,7 +125,7 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
-  #   key = Gcloud::Datastore::Key.new "Task", 12345
+  #   key = dataset.key "Task", 12345
   #   entity = dataset.find key
   #
   # See Gcloud::Datastore::Dataset#find
@@ -139,8 +139,7 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
-  #   query = Gcloud::Datastore::Query.new
-  #   query.kind("List").
+  #   query = dataset.query("List").
   #     where("active", "=", true)
   #   active_lists = dataset.run query
   #
@@ -150,8 +149,7 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
-  #   query = Gcloud::Datastore::Query.new
-  #   query.kind("List").
+  #   query = dataset.query("List").
   #     where("active", "=", true).
   #     order("name")
   #   active_lists = dataset.run query
@@ -163,8 +161,7 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
-  #   query = Gcloud::Datastore::Query.new
-  #   query.kind("List").
+  #   query = dataset.query("List").
   #     where("active", "=", true).
   #     order("name").
   #     limit(5)
@@ -179,8 +176,7 @@ module Gcloud
   #   dataset = gcloud.datastore
   #
   #   list = dataset.find "List", "todos"
-  #   query = Gcloud::Datastore::Query.new
-  #   query.kind("Task").
+  #   query = dataset.query("Task").
   #     ancestor(list.key)
   #   items = dataset.run query
   #
@@ -198,8 +194,7 @@ module Gcloud
   #   dataset = gcloud.datastore
   #
   #   list = dataset.find "List", "todos"
-  #   query = Gcloud::Datastore::Query.new
-  #   query.kind("Task").
+  #   query = dataset.query("Task").
   #     ancestor(list.key)
   #   all_tasks = []
   #   tmp_tasks = dataset.run query
@@ -228,9 +223,9 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
-  #   entity = Gcloud::Datastore::Entity.new
-  #   entity.key = Gcloud::Datastore::Key.new "User"
-  #   entity["name"] = "Heidi Henderson"
+  #   entity = dataset.entity "User" do |e|
+  #     e["name"] = "Heidi Henderson"
+  #   end
   #   entity.key.id #=> nil
   #   dataset.save entity
   #   entity.key.id #=> 123456789
@@ -277,12 +272,12 @@ module Gcloud
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
   #
-  #   key = Gcloud::Datastore::Key.new "User", "heidi"
+  #   key = dataset.key "User", "heidi"
   #
-  #   user = Gcloud::Datastore::Entity.new
-  #   user.key = key
-  #   user["name"] = "Heidi Henderson"
-  #   user["email"] = "heidi@example.net"
+  #   user = dataset.entity key do |u|
+  #     u["name"] = "Heidi Henderson"
+  #     u["email"] = "heidi@example.net"
+  #   end
   #
   #   dataset.transaction do |tx|
   #     if tx.find(user.key).nil?
@@ -298,12 +293,12 @@ module Gcloud
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
   #
-  #   key = Gcloud::Datastore::Key.new "User", "heidi"
+  #   key = dataset.key "User", "heidi"
   #
-  #   user = Gcloud::Datastore::Entity.new
-  #   user.key = key
-  #   user["name"] = "Heidi Henderson"
-  #   user["email"] = "heidi@example.net"
+  #   user = dataset.entity key do |u|
+  #     u["name"] = "Heidi Henderson"
+  #     u["email"] = "heidi@example.net"
+  #   end
   #
   #   tx = dataset.transaction
   #   begin

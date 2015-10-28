@@ -96,10 +96,10 @@ module Gcloud
   #   gcloud  = Gcloud.new
   #   dataset = gcloud.datastore
   #
-  #   entity = Gcloud::Datastore::Entity.new
-  #   entity.key = Gcloud::Datastore::Key.new "Task"
-  #   entity["description"] = "Get started with Google Cloud"
-  #   entity["completed"] = false
+  #   entity = dataset.entity "Task" do |t|
+  #     t["description"] = "Get started with Google Cloud"
+  #     t["completed"] = false
+  #   end
   #
   #   dataset.save entity
   #
