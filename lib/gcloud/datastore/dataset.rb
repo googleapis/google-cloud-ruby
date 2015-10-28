@@ -242,16 +242,27 @@ module Gcloud
       #
       # +query+::
       #   The Query object with the search criteria. (+Query+)
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:namespace]</code>::
+      #   The namespace the query is to run within. (+String+)
       #
       # === Returns
       #
       # Gcloud::Datastore::Dataset::QueryResults
       #
-      # === Example
+      # === Examples
       #
       #   query = Gcloud::Datastore::Query.new.kind("Task").
       #     where("completed", "=", true)
       #   tasks = dataset.run query
+      #
+      # The query can optionally run within namespace when the +namespace+
+      # option is provided:
+      #
+      #   query = Gcloud::Datastore::Query.new.kind("Task").
+      #     where("completed", "=", true)
+      #   tasks = dataset.run query, namespace: "ns~todo-project"
       #
       def run query, options = {}
         partition = optional_partition_id options[:namespace]
@@ -383,7 +394,7 @@ module Gcloud
         return nil if namespace.nil?
         Proto::PartitionId.new.tap do |p|
           p.namespace = namespace
-          p.datasetId = project
+          p.dataset_id = project
         end
       end
     end
