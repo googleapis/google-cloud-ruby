@@ -148,16 +148,16 @@ this library.</p>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
 
 <span class="ruby-comment"># Create a new task to demo datastore</span>
-<span class="ruby-identifier">demo_task</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">demo_task</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-string">&quot;datastore-demo&quot;</span>
-<span class="ruby-identifier">demo_task</span>[:<span class="ruby-identifier">description</span>] = <span class="ruby-string">&quot;Demonstrate Datastore functionality&quot;</span>
-<span class="ruby-identifier">demo_task</span>[:<span class="ruby-identifier">completed</span>] = <span class="ruby-keyword">false</span>
+<span class="ruby-identifier">demo_task</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">entity</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-string">&quot;datastore-demo&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">t</span>[<span class="ruby-string">&quot;description&quot;</span>] = <span class="ruby-string">&quot;Demonstrate Datastore functionality&quot;</span>
+  <span class="ruby-identifier">t</span>[<span class="ruby-string">&quot;completed&quot;</span>] = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span>
 
 <span class="ruby-comment"># Save the new task</span>
 <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">demo_task</span>
 
 <span class="ruby-comment"># Run a query for all completed tasks</span>
-<span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+<span class="ruby-identifier">query</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">query</span>(<span class="ruby-string">&quot;Task&quot;</span>).
   <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;completed&quot;</span>, <span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">completed_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
@@ -263,7 +263,7 @@ library.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Oct 27, 2015.
+    Docs built on Oct 28, 2015.
   </div>
 </div>
 

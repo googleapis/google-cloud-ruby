@@ -86,9 +86,8 @@ href="Entity.html">Entity</a> has a <a href="Key.html">Key</a>, and a list
 of properties.</p>
 
 <pre class="ruby"><span class="ruby-identifier">entity</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;username&quot;</span>
-<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;User McUser&quot;</span>
-<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;email&quot;</span>] = <span class="ruby-string">&quot;user@example.net&quot;</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi@example.com&quot;</span>
+<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;Heidi Henderson&quot;</span>
 </pre>
 
         </div>
@@ -204,8 +203,8 @@ symbol.</p>
 
 <h3 id="attribute-i-properties-label-Example">Example<span><a href="#attribute-i-properties-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<pre class="ruby"><span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>[:<span class="ruby-identifier">name</span>] = <span class="ruby-string">&quot;User McUser&quot;</span>
-<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>[<span class="ruby-string">&quot;name&quot;</span>] <span class="ruby-comment">#=&gt; &quot;User McUser&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>[:<span class="ruby-identifier">name</span>] = <span class="ruby-string">&quot;Heidi H. Henderson&quot;</span>
+<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>[<span class="ruby-string">&quot;name&quot;</span>] <span class="ruby-comment">#=&gt; &quot;Heidi H. Henderson&quot;</span>
 
 <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">properties</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;property #{name} has a value of #{value}&quot;</span>
@@ -326,7 +325,7 @@ name:</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi@example.com&quot;</span>
 <span class="ruby-identifier">user</span>[<span class="ruby-string">&quot;name&quot;</span>] <span class="ruby-comment">#=&gt; &quot;Heidi Henderson&quot;</span>
 </pre>
 
@@ -336,7 +335,7 @@ name:</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi@example.com&quot;</span>
 <span class="ruby-identifier">user</span>[:<span class="ruby-identifier">name</span>] <span class="ruby-comment">#=&gt; &quot;Heidi Henderson&quot;</span>
 </pre>
     
@@ -391,7 +390,7 @@ name:</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi@example.com&quot;</span>
 <span class="ruby-identifier">user</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;Heidi H. Henderson&quot;</span>
 </pre>
 
@@ -401,7 +400,7 @@ name:</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi@example.com&quot;</span>
 <span class="ruby-identifier">user</span>[:<span class="ruby-identifier">name</span>] = <span class="ruby-string">&quot;Heidi H. Henderson&quot;</span>
 </pre>
     
@@ -577,7 +576,7 @@ key when immutable will raise a <code>RuntimeError</code>.</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi@example.com&quot;</span>
 <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">persisted?</span> <span class="ruby-comment">#=&gt; true</span>
 <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span> <span class="ruby-comment">#=&gt; RuntimeError</span>
 <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-comment">#=&gt; true</span>
@@ -629,7 +628,7 @@ key when immutable will raise a <code>RuntimeError</code>.</p>
 <span class="ruby-identifier">new_entity</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">new_entity</span>.<span class="ruby-identifier">persisted?</span> <span class="ruby-comment">#=&gt; false</span>
 
-<span class="ruby-identifier">found_entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">found_entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi@example.com&quot;</span>
 <span class="ruby-identifier">found_entity</span>.<span class="ruby-identifier">persisted?</span> <span class="ruby-comment">#=&gt; true</span>
 </pre>
     
@@ -664,7 +663,7 @@ key when immutable will raise a <code>RuntimeError</code>.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Oct 27, 2015.
+    Docs built on Oct 28, 2015.
   </div>
 </div>
 

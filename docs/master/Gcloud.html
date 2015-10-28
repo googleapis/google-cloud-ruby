@@ -309,10 +309,10 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 <span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span> <span class="ruby-string">&quot;my-todo-project&quot;</span>,
                            <span class="ruby-string">&quot;/path/to/keyfile.json&quot;</span>
 
-<span class="ruby-identifier">entity</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>
-<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;description&quot;</span>] = <span class="ruby-string">&quot;Get started with Google Cloud&quot;</span>
-<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;completed&quot;</span>] = <span class="ruby-keyword">false</span>
+<span class="ruby-identifier">entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">entity</span> <span class="ruby-string">&quot;Task&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">t</span>[<span class="ruby-string">&quot;description&quot;</span>] = <span class="ruby-string">&quot;Get started with Google Cloud&quot;</span>
+  <span class="ruby-identifier">t</span>[<span class="ruby-string">&quot;completed&quot;</span>] = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span>
 
 <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">entity</span>
 </pre>
@@ -784,10 +784,10 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 <span class="ruby-identifier">gcloud</span>  = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
 
-<span class="ruby-identifier">entity</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>
-<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;description&quot;</span>] = <span class="ruby-string">&quot;Get started with Google Cloud&quot;</span>
-<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;completed&quot;</span>] = <span class="ruby-keyword">false</span>
+<span class="ruby-identifier">entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">entity</span> <span class="ruby-string">&quot;Task&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">t</span>[<span class="ruby-string">&quot;description&quot;</span>] = <span class="ruby-string">&quot;Get started with Google Cloud&quot;</span>
+  <span class="ruby-identifier">t</span>[<span class="ruby-string">&quot;completed&quot;</span>] = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span>
 
 <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">entity</span>
 </pre>
@@ -1068,7 +1068,7 @@ OAuth 2.0 Authentication</a>.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Oct 27, 2015.
+    Docs built on Oct 28, 2015.
   </div>
 </div>
 

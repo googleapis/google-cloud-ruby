@@ -138,7 +138,7 @@ can be given a <a href="Datastore/Key.html">Key</a> object:</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-value">12345</span>
+<span class="ruby-identifier">key</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">key</span> <span class="ruby-string">&quot;Task&quot;</span>, <span class="ruby-value">12345</span>
 <span class="ruby-identifier">entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-identifier">key</span>
 </pre>
 
@@ -154,8 +154,7 @@ href="Datastore/Query.html#method-i-where">Gcloud::Datastore::Query#where</a>)</
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;List&quot;</span>).
+<span class="ruby-identifier">query</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">query</span>(<span class="ruby-string">&quot;List&quot;</span>).
   <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;active&quot;</span>, <span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">active_lists</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
@@ -167,8 +166,7 @@ href="Datastore/Query.html#method-i-order">Gcloud::Datastore::Query#order</a>)</
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;List&quot;</span>).
+<span class="ruby-identifier">query</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">query</span>(<span class="ruby-string">&quot;List&quot;</span>).
   <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;active&quot;</span>, <span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-keyword">true</span>).
   <span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;name&quot;</span>)
 <span class="ruby-identifier">active_lists</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
@@ -181,8 +179,7 @@ href="Datastore/Query.html#method-i-limit">Gcloud::Datastore::Query#limit</a>)</
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;List&quot;</span>).
+<span class="ruby-identifier">query</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">query</span>(<span class="ruby-string">&quot;List&quot;</span>).
   <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;active&quot;</span>, <span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-keyword">true</span>).
   <span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;name&quot;</span>).
   <span class="ruby-identifier">limit</span>(<span class="ruby-value">5</span>)
@@ -199,8 +196,7 @@ href="Datastore/Query.html#method-i-ancestor">Gcloud::Datastore::Query#ancestor<
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
 
 <span class="ruby-identifier">list</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;List&quot;</span>, <span class="ruby-string">&quot;todos&quot;</span>
-<span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+<span class="ruby-identifier">query</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">query</span>(<span class="ruby-string">&quot;Task&quot;</span>).
   <span class="ruby-identifier">ancestor</span>(<span class="ruby-identifier">list</span>.<span class="ruby-identifier">key</span>)
 <span class="ruby-identifier">items</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
 </pre>
@@ -220,8 +216,7 @@ records will have a <code>cursor</code> if there are more available.</p>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
 
 <span class="ruby-identifier">list</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;List&quot;</span>, <span class="ruby-string">&quot;todos&quot;</span>
-<span class="ruby-identifier">query</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-string">&quot;Task&quot;</span>).
+<span class="ruby-identifier">query</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">query</span>(<span class="ruby-string">&quot;Task&quot;</span>).
   <span class="ruby-identifier">ancestor</span>(<span class="ruby-identifier">list</span>.<span class="ruby-identifier">key</span>)
 <span class="ruby-identifier">all_tasks</span> = []
 <span class="ruby-identifier">tmp_tasks</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>
@@ -255,9 +250,9 @@ completed when saved.</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
-<span class="ruby-identifier">entity</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span>
-<span class="ruby-identifier">entity</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;Heidi Henderson&quot;</span>
+<span class="ruby-identifier">entity</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">entity</span> <span class="ruby-string">&quot;User&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">e</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;Heidi Henderson&quot;</span>
+<span class="ruby-keyword">end</span>
 <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">id</span> <span class="ruby-comment">#=&gt; nil</span>
 <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">save</span> <span class="ruby-identifier">entity</span>
 <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">key</span>.<span class="ruby-identifier">id</span> <span class="ruby-comment">#=&gt; 123456789</span>
@@ -316,12 +311,12 @@ committed when the block completes.</p>
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
 
-<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">key</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">key</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
 
-<span class="ruby-identifier">user</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">user</span>.<span class="ruby-identifier">key</span> = <span class="ruby-identifier">key</span>
-<span class="ruby-identifier">user</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;Heidi Henderson&quot;</span>
-<span class="ruby-identifier">user</span>[<span class="ruby-string">&quot;email&quot;</span>] = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">entity</span> <span class="ruby-identifier">key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">u</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">u</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;Heidi Henderson&quot;</span>
+  <span class="ruby-identifier">u</span>[<span class="ruby-string">&quot;email&quot;</span>] = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
+<span class="ruby-keyword">end</span>
 
 <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tx</span><span class="ruby-operator">|</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">tx</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">user</span>.<span class="ruby-identifier">key</span>).<span class="ruby-identifier">nil?</span>
@@ -338,12 +333,12 @@ allowing you to commit or rollback manually.</p>
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">dataset</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">datastore</span>
 
-<span class="ruby-identifier">key</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
+<span class="ruby-identifier">key</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">key</span> <span class="ruby-string">&quot;User&quot;</span>, <span class="ruby-string">&quot;heidi&quot;</span>
 
-<span class="ruby-identifier">user</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-identifier">user</span>.<span class="ruby-identifier">key</span> = <span class="ruby-identifier">key</span>
-<span class="ruby-identifier">user</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;Heidi Henderson&quot;</span>
-<span class="ruby-identifier">user</span>[<span class="ruby-string">&quot;email&quot;</span>] = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">entity</span> <span class="ruby-identifier">key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">u</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">u</span>[<span class="ruby-string">&quot;name&quot;</span>] = <span class="ruby-string">&quot;Heidi Henderson&quot;</span>
+  <span class="ruby-identifier">u</span>[<span class="ruby-string">&quot;email&quot;</span>] = <span class="ruby-string">&quot;heidi@example.net&quot;</span>
+<span class="ruby-keyword">end</span>
 
 <span class="ruby-identifier">tx</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">transaction</span>
 <span class="ruby-keyword">begin</span>
@@ -382,7 +377,7 @@ href="Datastore/Dataset.html#method-i-transaction">Gcloud::Datastore::Dataset#tr
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Oct 27, 2015.
+    Docs built on Oct 28, 2015.
   </div>
 </div>
 
