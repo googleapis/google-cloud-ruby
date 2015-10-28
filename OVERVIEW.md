@@ -62,7 +62,7 @@ demo_task[:completed] = false
 dataset.save demo_task
 
 # Run a query for all completed tasks
-query = Gcloud::Datastore::Query.new.kind("Task").
+query = dataset.query("Task").
   where("completed", "=", true)
 completed_tasks = dataset.run query
 ```

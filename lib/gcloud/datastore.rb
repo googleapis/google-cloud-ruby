@@ -139,8 +139,7 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
-  #   query = Gcloud::Datastore::Query.new
-  #   query.kind("List").
+  #   query = dataset.query("List").
   #     where("active", "=", true)
   #   active_lists = dataset.run query
   #
@@ -150,8 +149,7 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
-  #   query = Gcloud::Datastore::Query.new
-  #   query.kind("List").
+  #   query = dataset.query("List").
   #     where("active", "=", true).
   #     order("name")
   #   active_lists = dataset.run query
@@ -163,8 +161,7 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
-  #   query = Gcloud::Datastore::Query.new
-  #   query.kind("List").
+  #   query = dataset.query("List").
   #     where("active", "=", true).
   #     order("name").
   #     limit(5)
@@ -179,8 +176,7 @@ module Gcloud
   #   dataset = gcloud.datastore
   #
   #   list = dataset.find "List", "todos"
-  #   query = Gcloud::Datastore::Query.new
-  #   query.kind("Task").
+  #   query = dataset.query("Task").
   #     ancestor(list.key)
   #   items = dataset.run query
   #
@@ -198,8 +194,7 @@ module Gcloud
   #   dataset = gcloud.datastore
   #
   #   list = dataset.find "List", "todos"
-  #   query = Gcloud::Datastore::Query.new
-  #   query.kind("Task").
+  #   query = dataset.query("Task").
   #     ancestor(list.key)
   #   all_tasks = []
   #   tmp_tasks = dataset.run query

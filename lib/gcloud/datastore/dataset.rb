@@ -39,7 +39,7 @@ module Gcloud
     #   gcloud = Gcloud.new
     #   dataset = gcloud.datastore
     #
-    #   query = Gcloud::Datastore::Query.new.kind("Task").
+    #   query = dataset.query("Task").
     #     where("completed", "=", true)
     #
     #   tasks = dataset.run query
@@ -246,7 +246,7 @@ module Gcloud
       #
       # === Example
       #
-      #   query = Gcloud::Datastore::Query.new.kind("Task").
+      #   query = dataset.query("Task").
       #     where("completed", "=", true)
       #   tasks = dataset.run query
       #
@@ -319,6 +319,38 @@ module Gcloud
           tx.rollback
           raise TransactionError.new("Transaction failed to commit.", e)
         end
+      end
+
+      ##
+      # Create a new Query instance. This is a convenience method to make the
+      # creation of Query objects easier.
+      #
+      # === Parameters
+      #
+      # +kinds+::
+      #   The kind of entities to query. This is optional. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Datastore::Query
+      #
+      # === Example
+      #
+      #   query = dataset.query("Task").
+      #     where("completed", "=", true)
+      #   tasks = dataset.run query
+      #
+      # This code is equivalent to the following:
+      #
+      #   query = Gcloud::Datastore::Query.new.
+      #     kind("Task").
+      #     where("completed", "=", true)
+      #   tasks = dataset.run query
+      #
+      def query *kinds
+        query = Query.new
+        query.kind(*kinds) unless kinds.empty?
+        query
       end
 
       protected

@@ -312,6 +312,21 @@ describe Gcloud::Datastore::Dataset do
     refute entities.no_more?
   end
 
+  it "query returns a Query instance" do
+    query = dataset.query "Task"
+    query.must_be_kind_of Gcloud::Datastore::Query
+
+    proto = query.to_proto
+    proto.kind.name.must_include "Task"
+    proto.kind.name.wont_include "User"
+
+    # Add a second kind to the query
+    query.kind "User"
+
+    proto = query.to_proto
+    proto.kind.name.must_include "Task"
+    proto.kind.name.must_include "User"
+  end
 
   describe "query result object" do
     let(:run_query_response_not_finished) do

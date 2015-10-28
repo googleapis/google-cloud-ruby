@@ -196,8 +196,7 @@ module Gcloud
       #   dataset = gcloud.datastore
       #
       #   user = dataset.find "User", "heidi"
-      #   query = Gcloud::Datastore::Query.new
-      #   query.kind("List").
+      #   query = dataset.query("List").
       #     ancestor(user.key)
       #   lists = dataset.run query
       #   lists.first.key.parent #=> Key("User", "heidi")
