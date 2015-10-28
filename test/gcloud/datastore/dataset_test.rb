@@ -347,13 +347,48 @@ describe Gcloud::Datastore::Dataset do
     entity.must_be_kind_of Gcloud::Datastore::Entity
   end
 
+  it "entity sets the Key's kind for the new Entity" do
+    entity = dataset.entity "User"
+    entity.must_be_kind_of Gcloud::Datastore::Entity
+    entity.key.kind.must_equal "User"
+    entity.key.id.must_be :nil?
+    entity.key.name.must_be :nil?
+  end
+
+  it "entity sets the Key's kind and id for the new Entity" do
+    entity = dataset.entity "User", 123
+    entity.must_be_kind_of Gcloud::Datastore::Entity
+    entity.key.kind.must_equal "User"
+    entity.key.id.must_equal 123
+    entity.key.name.must_be :nil?
+  end
+
+  it "entity sets the Key's kind and name for the new Entity" do
+    entity = dataset.entity "User", "username"
+    entity.must_be_kind_of Gcloud::Datastore::Entity
+    entity.key.kind.must_equal "User"
+    entity.key.id.must_be :nil?
+    entity.key.name.must_equal "username"
+  end
+
+  it "entity sets the Key object for the new Entity" do
+    key = dataset.key "User", "username"
+    entity = dataset.entity key
+    entity.must_be_kind_of Gcloud::Datastore::Entity
+    entity.key.kind.must_equal "User"
+    entity.key.id.must_be :nil?
+    entity.key.name.must_equal "username"
+  end
+
   it "entity can configure the new Entity using a block" do
-    entity = dataset.entity do |e|
-      e.key = dataset.key "User", "username"
+    entity = dataset.entity "User", "username" do |e|
       e["name"] = "User McUser"
       e["email"] = "user@example.net"
     end
     entity.must_be_kind_of Gcloud::Datastore::Entity
+    entity.key.kind.must_equal "User"
+    entity.key.id.must_be :nil?
+    entity.key.name.must_equal "username"
     entity.properties["name"].must_equal "User McUser"
     entity.properties["email"].must_equal "user@example.net"
   end

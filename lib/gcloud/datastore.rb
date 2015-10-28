@@ -57,10 +57,10 @@ module Gcloud
   #   dataset = Gcloud.datastore "my-todo-project",
   #                              "/path/to/keyfile.json"
   #
-  #   entity = dataset.entity
-  #   entity.key = dataset.key "Task"
-  #   entity["description"] = "Get started with Google Cloud"
-  #   entity["completed"] = false
+  #   entity = dataset.entity "Task" do |t|
+  #     t["description"] = "Get started with Google Cloud"
+  #     t["completed"] = false
+  #   end
   #
   #   dataset.save entity
   #
@@ -223,9 +223,9 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   dataset = gcloud.datastore
-  #   entity = dataset.entity
-  #   entity.key = dataset.key "User"
-  #   entity["name"] = "Heidi Henderson"
+  #   entity = dataset.entity "User" do |e|
+  #     e["name"] = "Heidi Henderson"
+  #   end
   #   entity.key.id #=> nil
   #   dataset.save entity
   #   entity.key.id #=> 123456789
@@ -274,10 +274,10 @@ module Gcloud
   #
   #   key = dataset.key "User", "heidi"
   #
-  #   user = dataset.entity
-  #   user.key = key
-  #   user["name"] = "Heidi Henderson"
-  #   user["email"] = "heidi@example.net"
+  #   user = dataset.entity key do |u|
+  #     u["name"] = "Heidi Henderson"
+  #     u["email"] = "heidi@example.net"
+  #   end
   #
   #   dataset.transaction do |tx|
   #     if tx.find(user.key).nil?
@@ -295,10 +295,10 @@ module Gcloud
   #
   #   key = dataset.key "User", "heidi"
   #
-  #   user = dataset.entity
-  #   user.key = key
-  #   user["name"] = "Heidi Henderson"
-  #   user["email"] = "heidi@example.net"
+  #   user = dataset.entity key do |u|
+  #     u["name"] = "Heidi Henderson"
+  #     u["email"] = "heidi@example.net"
+  #   end
   #
   #   tx = dataset.transaction
   #   begin

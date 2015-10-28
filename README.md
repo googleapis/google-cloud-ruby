@@ -82,10 +82,9 @@ gcloud = Gcloud.new "my-todo-project-id",
 dataset = gcloud.datastore
 
 # Create a new task to demo datastore
-demo_task = dataset.entity do |e|
-  e.key = dataset.key "Task", "datastore-demo"
-  e["description"] = "Demonstrate Datastore functionality"
-  e["completed"] = false
+demo_task = dataset.entity "Task", "datastore-demo" do |t|
+  t["description"] = "Demonstrate Datastore functionality"
+  t["completed"] = false
 end
 
 # Save the new task

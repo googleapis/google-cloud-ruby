@@ -169,7 +169,9 @@ module Gcloud
       #
       def find key_or_kind, id_or_name = nil
         key = key_or_kind
-        key = Key.new key_or_kind, id_or_name unless key_or_kind.is_a? Key
+        unless key.is_a? Gcloud::Datastore::Key
+          key = Key.new key_or_kind, id_or_name
+        end
         find_all(key).first
       end
       alias_method :get, :find
@@ -271,12 +273,10 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
       #
-      #   key = dataset.key "User", "heidi"
-      #
-      #   user = dataset.entity
-      #   user.key = key
-      #   user["name"] = "Heidi Henderson"
-      #   user["email"] = "heidi@example.net"
+      #   user = dataset.entity "User", "heidi" do |u|
+      #     u["name"] = "Heidi Henderson"
+      #     u["email"] = "heidi@example.net"
+      #   end
       #
       #   dataset.transaction do |tx|
       #     if tx.find(user.key).nil?
@@ -291,12 +291,10 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
       #
-      #   key = dataset.key "User", "heidi"
-      #
-      #   user = dataset.entity
-      #   user.key = key
-      #   user["name"] = "Heidi Henderson"
-      #   user["email"] = "heidi@example.net"
+      #   user = dataset.entity "User", "heidi" do |u|
+      #     u["name"] = "Heidi Henderson"
+      #     u["email"] = "heidi@example.net"
+      #   end
       #
       #   tx = dataset.transaction
       #   begin
@@ -374,7 +372,7 @@ module Gcloud
       #
       # This code is equivalent to the following:
       #
-      #   key = dataset.key "User", "username"
+      #   key = Gcloud::Datastore::Key.new "User", "username"
       #
       def key kind = nil, id_or_name = nil
         Key.new kind, id_or_name
@@ -383,6 +381,15 @@ module Gcloud
       ##
       # Create a new empty Entity instance. This is a convenience method to make
       # the creation of Entity objects easier.
+      #
+      # === Parameters
+      #
+      # +key_or_kind+::
+      #   A Key object or +kind+ string value. This is optional. (+Key+ or
+      #   +String+ or +nil+)
+      # +id_or_name+::
+      #   The Key's +id+ or +name+ value if a +kind+ was provided in the first
+      #   parameter. (+Integer+ or +String+ or +nil+)
       #
       # === Returns
       #
@@ -396,17 +403,46 @@ module Gcloud
       #
       #   entity = Gcloud::Datastore::Entity.new
       #
-      # The newly created entity object can be configured by passing a block:
+      # The key can also be passed in as an object:
       #
-      #   demo_task = dataset.entity do |e|
-      #     e.key = dataset.key "Task", "datastore-demo"
-      #     e[:description] = "Demonstrate Datastore functionality"
-      #     e[:completed] = false
+      #   key = dataset.key "User", "username"
+      #   entity = dataset.entity key
+      #
+      # Or the key values can be passed in as parameters:
+      #
+      #   entity = dataset.entity "User", "username"
+      #
+      # This code is equivalent to the following:
+      #
+      #   key = Gcloud::Datastore::Key.new "User", "username"
+      #   entity = Gcloud::Datastore::Entity.new
+      #   entity.key = key
+      #
+      # The newly created entity object can also be configured using a block:
+      #
+      #   user = dataset.entity "User", "username" do |u|
+      #     u["name"] = "Heidi Henderson"
       #  end
       #
-      def entity
+      # This code is equivalent to the following:
+      #
+      #   key = Gcloud::Datastore::Key.new "User", "username"
+      #   entity = Gcloud::Datastore::Entity.new
+      #   entity.key = key
+      #   entity["name"] = "Heidi Henderson"
+      #
+      def entity key_or_kind = nil, id_or_name = nil
         entity = Entity.new
+
+        # Set the key
+        key = key_or_kind
+        unless key.is_a? Gcloud::Datastore::Key
+          key = Key.new key_or_kind, id_or_name
+        end
+        entity.key = key
+
         yield entity if block_given?
+
         entity
       end
 
