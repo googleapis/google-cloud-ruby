@@ -96,7 +96,7 @@ module Gcloud
   #   gcloud  = Gcloud.new
   #   dataset = gcloud.datastore
   #
-  #   entity = Gcloud::Datastore::Entity.new
+  #   entity = dataset.entity
   #   entity.key = dataset.key "Task"
   #   entity["description"] = "Get started with Google Cloud"
   #   entity["completed"] = false

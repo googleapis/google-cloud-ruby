@@ -273,7 +273,7 @@ module Gcloud
       #
       #   key = dataset.key "User", "heidi"
       #
-      #   user = Gcloud::Datastore::Entity.new
+      #   user = dataset.entity
       #   user.key = key
       #   user["name"] = "Heidi Henderson"
       #   user["email"] = "heidi@example.net"
@@ -293,7 +293,7 @@ module Gcloud
       #
       #   key = dataset.key "User", "heidi"
       #
-      #   user = Gcloud::Datastore::Entity.new
+      #   user = dataset.entity
       #   user.key = key
       #   user["name"] = "Heidi Henderson"
       #   user["email"] = "heidi@example.net"
@@ -378,6 +378,36 @@ module Gcloud
       #
       def key kind = nil, id_or_name = nil
         Key.new kind, id_or_name
+      end
+
+      ##
+      # Create a new empty Entity instance. This is a convenience method to make
+      # the creation of Entity objects easier.
+      #
+      # === Returns
+      #
+      # Gcloud::Datastore::Entity
+      #
+      # === Examples
+      #
+      #   entity = dataset.entity
+      #
+      # This code is equivalent to the following:
+      #
+      #   entity = Gcloud::Datastore::Entity.new
+      #
+      # The newly created entity object can be configured by passing a block:
+      #
+      #   demo_task = dataset.entity do |e|
+      #     e.key = dataset.key "Task", "datastore-demo"
+      #     e[:description] = "Demonstrate Datastore functionality"
+      #     e[:completed] = false
+      #  end
+      #
+      def entity
+        entity = Entity.new
+        yield entity if block_given?
+        entity
       end
 
       protected

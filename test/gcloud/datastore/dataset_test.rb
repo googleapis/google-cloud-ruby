@@ -342,6 +342,22 @@ describe Gcloud::Datastore::Dataset do
     key.name.must_equal "charlie"
   end
 
+  it "entity returns an Entity instance" do
+    entity = dataset.entity
+    entity.must_be_kind_of Gcloud::Datastore::Entity
+  end
+
+  it "entity can configure the new Entity using a block" do
+    entity = dataset.entity do |e|
+      e.key = dataset.key "User", "username"
+      e["name"] = "User McUser"
+      e["email"] = "user@example.net"
+    end
+    entity.must_be_kind_of Gcloud::Datastore::Entity
+    entity.properties["name"].must_equal "User McUser"
+    entity.properties["email"].must_equal "user@example.net"
+  end
+
   describe "query result object" do
     let(:run_query_response_not_finished) do
       run_query_response.tap do |response|
