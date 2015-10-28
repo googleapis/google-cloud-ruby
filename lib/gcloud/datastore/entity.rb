@@ -26,9 +26,9 @@ module Gcloud
     # Every Entity has a Key, and a list of properties.
     #
     #   entity = Gcloud::Datastore::Entity.new
-    #   entity.key = Gcloud::Datastore::Key.new "User", "username"
-    #   entity["name"] = "User McUser"
-    #   entity["email"] = "user@example.net"
+    #   entity.key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
+    #   entity["name"] = "Heidi Henderson"
+    #
     class Entity
       ##
       # The Key that identifies the entity.
@@ -62,7 +62,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi"
+      #   user = dataset.find "User", "heidi@example.com"
       #   user["name"] #=> "Heidi Henderson"
       #
       # Or with a symbol name:
@@ -71,7 +71,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi"
+      #   user = dataset.find "User", "heidi@example.com"
       #   user[:name] #=> "Heidi Henderson"
       #
       def [] prop_name
@@ -96,7 +96,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi"
+      #   user = dataset.find "User", "heidi@example.com"
       #   user["name"] = "Heidi H. Henderson"
       #
       # Or with a symbol name:
@@ -105,7 +105,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi"
+      #   user = dataset.find "User", "heidi@example.com"
       #   user[:name] = "Heidi H. Henderson"
       #
       def []= prop_name, prop_value
@@ -122,8 +122,8 @@ module Gcloud
       #
       # === Example
       #
-      #   entity.properties[:name] = "User McUser"
-      #   entity.properties["name"] #=> "User McUser"
+      #   entity.properties[:name] = "Heidi H. Henderson"
+      #   entity.properties["name"] #=> "Heidi H. Henderson"
       #
       #   entity.properties.each do |name, value|
       #     puts "property #{name} has a value of #{value}"
@@ -168,7 +168,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
-      #   entity = dataset.find "User", "heidi"
+      #   entity = dataset.find "User", "heidi@example.com"
       #   entity.persisted? #=> true
       #   entity.key = Gcloud::Datastore::Key.new "User" #=> RuntimeError
       #   entity.key.frozen? #=> true
@@ -192,7 +192,7 @@ module Gcloud
       #   new_entity = Gcloud::Datastore::Entity.new
       #   new_entity.persisted? #=> false
       #
-      #   found_entity = dataset.find "User", "heidi"
+      #   found_entity = dataset.find "User", "heidi@example.com"
       #   found_entity.persisted? #=> true
       #
       def persisted?

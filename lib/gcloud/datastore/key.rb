@@ -25,7 +25,7 @@ module Gcloud
     # name string, assigned explicitly by the application, or an integer numeric
     # ID, assigned automatically by Datastore.
     #
-    #   key = Gcloud::Datastore::Key.new "User", "username"
+    #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
     class Key
       ##
       # The kind of the Key.
@@ -57,7 +57,7 @@ module Gcloud
       #                       "/path/to/keyfile.json"
       #
       #   dataset = gcloud.datastore
-      #   entity = dataset.find "User", "heidi"
+      #   entity = dataset.find "User", "heidi@example.com"
       #   entity.key.dataset_id #=> "my-todo-project"
       #
       attr_accessor :dataset_id
@@ -77,7 +77,7 @@ module Gcloud
       #                       "/path/to/keyfile.json"
       #
       #   dataset = gcloud.datastore
-      #   entity = dataset.find "User", "heidi"
+      #   entity = dataset.find "User", "heidi@example.com"
       #   entity.key.namespace #=> "ns~todo-project"
       #
       attr_accessor :namespace
@@ -98,7 +98,7 @@ module Gcloud
       #
       # === Example
       #
-      #   key = Gcloud::Datastore::Key.new "User", "username"
+      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #
       def initialize kind = nil, id_or_name = nil
         @kind = kind
@@ -119,9 +119,9 @@ module Gcloud
       #
       # === Example
       #
-      #   key = Gcloud::Datastore::Key.new "User", "heidi"
+      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #   key.id #=> nil
-      #   key.name #=> "heidi"
+      #   key.name #=> "heidi@example.com"
       #   key.id = 654321
       #   key.id #=> 654321
       #   key.name #=> nil
@@ -158,9 +158,9 @@ module Gcloud
       #   key = Gcloud::Datastore::Key.new "User", 123456
       #   key.id #=> 123456
       #   key.name #=> nil
-      #   key.name = "heidi"
+      #   key.name = "heidi@example.com"
       #   key.id #=> nil
-      #   key.name #=> "heidi"
+      #   key.name #=> "heidi@example.com"
       #
       def name= new_name #:nodoc:
         @id = nil if new_name
@@ -176,8 +176,8 @@ module Gcloud
       #
       # === Example
       #
-      #   key = Gcloud::Datastore::Key.new "User", "heidi"
-      #   key.name #=> "heidi"
+      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
+      #   key.name #=> "heidi@example.com"
       #
       attr_reader :name
 
@@ -191,7 +191,7 @@ module Gcloud
       # === Example
       #
       #   key = Gcloud::Datastore::Key.new "List", "todos"
-      #   key.parent = Gcloud::Datastore::Key.new "User", "heidi"
+      #   key.parent = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #
       def parent= new_parent #:nodoc:
         # store key if given an entity
@@ -213,11 +213,11 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
       #
-      #   user = dataset.find "User", "heidi"
+      #   user = dataset.find "User", "heidi@example.com"
       #   query = dataset.query("List").
       #     ancestor(user.key)
       #   lists = dataset.run query
-      #   lists.first.key.parent #=> Key("User", "heidi")
+      #   lists.first.key.parent #=> Key("User", "heidi@example.com")
       #
       attr_reader :parent
 
@@ -233,8 +233,8 @@ module Gcloud
       # === Example
       #
       #   key = Gcloud::Datastore::Key.new "List", "todos"
-      #   key.parent = Gcloud::Datastore::Key.new "User", "heidi"
-      #   key.path #=> [["User", "heidi"], ["List", "todos"]]
+      #   key.parent = Gcloud::Datastore::Key.new "User", "heidi@example.com"
+      #   key.path #=> [["User", "heidi@example.com"], ["List", "todos"]]
       #
       def path
         new_path = parent ? parent.path : []

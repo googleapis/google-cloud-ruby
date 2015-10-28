@@ -368,11 +368,11 @@ module Gcloud
       #
       # === Example
       #
-      #   key = dataset.key "User", "username"
+      #   key = dataset.key "User", "heidi@example.com"
       #
       # This code is equivalent to the following:
       #
-      #   key = Gcloud::Datastore::Key.new "User", "username"
+      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #
       def key kind = nil, id_or_name = nil
         Key.new kind, id_or_name
@@ -405,28 +405,28 @@ module Gcloud
       #
       # The key can also be passed in as an object:
       #
-      #   key = dataset.key "User", "username"
+      #   key = dataset.key "User", "heidi@example.com"
       #   entity = dataset.entity key
       #
       # Or the key values can be passed in as parameters:
       #
-      #   entity = dataset.entity "User", "username"
+      #   entity = dataset.entity "User", "heidi@example.com"
       #
       # This code is equivalent to the following:
       #
-      #   key = Gcloud::Datastore::Key.new "User", "username"
+      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #   entity = Gcloud::Datastore::Entity.new
       #   entity.key = key
       #
       # The newly created entity object can also be configured using a block:
       #
-      #   user = dataset.entity "User", "username" do |u|
+      #   user = dataset.entity "User", "heidi@example.com" do |u|
       #     u["name"] = "Heidi Henderson"
       #  end
       #
       # This code is equivalent to the following:
       #
-      #   key = Gcloud::Datastore::Key.new "User", "username"
+      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #   entity = Gcloud::Datastore::Entity.new
       #   entity.key = key
       #   entity["name"] = "Heidi Henderson"
