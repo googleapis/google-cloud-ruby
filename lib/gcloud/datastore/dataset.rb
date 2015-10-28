@@ -232,6 +232,9 @@ module Gcloud
         true
       end
 
+      # rubocop:disable Metrics/AbcSize
+      # Disabled rubocop because the level of abstraction is not violated here
+
       ##
       # Retrieve entities specified by a Query.
       #
@@ -250,14 +253,17 @@ module Gcloud
       #     where("completed", "=", true)
       #   tasks = dataset.run query
       #
-      def run query, opts = {}
-        response = connection.run_query query.to_proto, opts
+      def run query, options = {}
+        partition = optional_partition_id options[:namespace]
+        response = connection.run_query query.to_proto, partition
         entities = to_gcloud_entities response.batch.entity_result
         cursor = Proto.encode_cursor response.batch.end_cursor
         more_results = Proto.to_more_results_string response.batch.more_results
         QueryResults.new entities, cursor, more_results
       end
       alias_method :run_query, :run
+
+      # rubocop:enable Metrics/AbcSize
 
       ##
       # Creates a Datastore Transaction.
@@ -370,6 +376,14 @@ module Gcloud
           else
             mutation.upsert << entity.to_proto
           end
+        end
+      end
+
+      def optional_partition_id namespace = nil
+        return nil if namespace.nil?
+        Proto::PartitionId.new.tap do |p|
+          p.namespace = namespace
+          p.datasetId = project
         end
       end
     end
