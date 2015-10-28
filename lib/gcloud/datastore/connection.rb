@@ -67,14 +67,10 @@ module Gcloud
       end
 
       # Query for entities.
-      def run_query query, opts = {}
+      def run_query query, partition = nil
         run_query = Proto::RunQueryRequest.new.tap do |rq|
           rq.query = query
-          ns = opts[:namespace]
-          if ns
-            pt = Proto::PartitionId.new.tap { |p| p.namespace = ns }
-            rq.partition_id = pt
-          end
+          rq.partition_id = partition if partition
           rq
         end
 
