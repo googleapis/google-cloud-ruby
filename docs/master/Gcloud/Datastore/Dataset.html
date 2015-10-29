@@ -387,7 +387,7 @@ is optional. (<code>Key</code> or <code>String</code> or <code>nil</code>)</p>
 
     
       <!-- <div class="method-source-code" id="entity-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 451</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 446</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">entity</span> <span class="ruby-identifier">key_or_kind</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">id_or_name</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">entity</span> = <span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
 
@@ -624,7 +624,7 @@ method to make the creation of <a href="Key.html">Key</a> objects easier.</p>
 
     
       <!-- <div class="method-source-code" id="key-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 394</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 389</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">key</span> <span class="ruby-identifier">kind</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">id_or_name</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">kind</span>, <span class="ruby-identifier">id_or_name</span>
 <span class="ruby-keyword">end</span></pre>
@@ -761,7 +761,7 @@ easier.</p>
 
     
       <!-- <div class="method-source-code" id="query-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 365</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 360</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">query</span> <span class="ruby-operator">*</span><span class="ruby-identifier">kinds</span>
   <span class="ruby-identifier">query</span> = <span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">kinds</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">kinds</span>.<span class="ruby-identifier">empty?</span>
@@ -830,7 +830,7 @@ href="Dataset/QueryResults.html">Gcloud::Datastore::Dataset::QueryResults</a></p
 
     
       <!-- <div class="method-source-code" id="run-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 269</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 266</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">partition</span> = <span class="ruby-identifier">optional_partition_id</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:namespace</span>]
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">run_query</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">to_proto</span>, <span class="ruby-identifier">partition</span>
@@ -1005,7 +1005,7 @@ href="Transaction.html">Transaction</a> object is returned:</p>
 
     
       <!-- <div class="method-source-code" id="transaction-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 326</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 321</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">transaction</span>
   <span class="ruby-identifier">tx</span> = <span class="ruby-constant">Transaction</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">tx</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>

@@ -318,7 +318,7 @@ href="Dataset/Access.html">Dataset::Access</a>)</p>
 
     
       <!-- <div class="method-source-code" id="create_dataset-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 343</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 339</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_dataset</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
     <span class="ruby-identifier">access_builder</span> = <span class="ruby-constant">Dataset</span><span class="ruby-operator">::</span><span class="ruby-constant">Access</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">default_access_rules</span>,
@@ -495,7 +495,7 @@ href="Dataset/List.html#attribute-i-token">Gcloud::Bigquery::Dataset::List#token
 
     
       <!-- <div class="method-source-code" id="datasets-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 425</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 418</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">datasets</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_datasets</span> <span class="ruby-identifier">options</span>
@@ -555,7 +555,7 @@ href="Dataset/List.html#attribute-i-token">Gcloud::Bigquery::Dataset::List#token
 
     
       <!-- <div class="method-source-code" id="job-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 456</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 449</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">job</span> <span class="ruby-identifier">job_id</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_job</span> <span class="ruby-identifier">job_id</span>
@@ -673,7 +673,7 @@ href="Job/List.html#attribute-i-token">Gcloud::Bigquery::Job::List#token</a>)</p
 
     
       <!-- <div class="method-source-code" id="jobs-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 532</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 525</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">jobs</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_jobs</span> <span class="ruby-identifier">options</span>

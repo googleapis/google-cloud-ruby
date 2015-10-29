@@ -262,7 +262,7 @@ subscribers.</p>
 
     
       <!-- <div class="method-source-code" id="create_topic-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 196</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 189</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_topic</span> <span class="ruby-identifier">topic_name</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">create_topic</span> <span class="ruby-identifier">topic_name</span>
@@ -732,7 +732,7 @@ without a subscription will be lost.</p>
 
     
       <!-- <div class="method-source-code" id="publish-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 335</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 328</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">publish</span> <span class="ruby-identifier">topic_name</span>, <span class="ruby-identifier">data</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">attributes</span> = {}
   <span class="ruby-comment"># Fix parameters</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">empty?</span>
@@ -855,7 +855,7 @@ exist and the <code>autocreate</code> option is provided.</p>
 
     
       <!-- <div class="method-source-code" id="subscribe-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 424</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 414</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">subscribe</span> <span class="ruby-identifier">topic_name</span>, <span class="ruby-identifier">subscription_name</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">create_subscription</span> <span class="ruby-identifier">topic_name</span>,
@@ -951,7 +951,7 @@ not exist. Default is <code>false</code>. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="subscription-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 486</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 474</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">subscription</span> <span class="ruby-identifier">subscription_name</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_lookup</span>]
@@ -1053,7 +1053,7 @@ href="Subscription/List.html#attribute-i-token">Gcloud::Pubsub::Subscription::Li
 
     
       <!-- <div class="method-source-code" id="subscriptions-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 552</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 540</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">subscriptions</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_subscriptions</span> <span class="ruby-identifier">options</span>
@@ -1177,7 +1177,7 @@ the topic will be created in Pub/Sub when needed.</p>
 
     
       <!-- <div class="method-source-code" id="topic-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 157</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">topic</span> <span class="ruby-identifier">topic_name</span>, <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_lookup</span>]
@@ -1280,7 +1280,7 @@ href="Topic/List.html#attribute-i-token">Gcloud::Pubsub::Topic::List#token</a>)<
 
     
       <!-- <div class="method-source-code" id="topics-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 258</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/project.rb, line 251</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">topics</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_topics</span> <span class="ruby-identifier">options</span>

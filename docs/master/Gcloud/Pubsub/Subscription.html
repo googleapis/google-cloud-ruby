@@ -253,7 +253,7 @@ ack_id values. (<code>ReceivedMessage</code> or <code>ack_id</code>)</p>
 
     
       <!-- <div class="method-source-code" id="acknowledge-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 406</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 401</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acknowledge</span> <span class="ruby-operator">*</span><span class="ruby-identifier">messages</span>
   <span class="ruby-identifier">ack_ids</span> = <span class="ruby-identifier">coerce_ack_ids</span> <span class="ruby-identifier">messages</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -363,7 +363,7 @@ ack_id values. (<code>ReceivedMessage</code> or <code>ack_id</code>)</p>
 
     
       <!-- <div class="method-source-code" id="delay-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 448</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 443</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delay</span> <span class="ruby-identifier">new_deadline</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">messages</span>
   <span class="ruby-identifier">ack_ids</span> = <span class="ruby-identifier">coerce_ack_ids</span> <span class="ruby-identifier">messages</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -650,7 +650,7 @@ service has no messages to return. The default value is <code>1</code>.
 
     
       <!-- <div class="method-source-code" id="listen-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 369</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 364</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">listen</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">delay</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:delay</span>, <span class="ruby-value">1</span>)
   <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
@@ -778,7 +778,7 @@ calls to the Pub/Sub service.</p>
 
     
       <!-- <div class="method-source-code" id="policy-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 509</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 504</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">policy</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-ivar">@policy</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:force</span>]
   <span class="ruby-ivar">@policy</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
@@ -850,7 +850,7 @@ calls to the Pub/Sub service.</p>
 
     
       <!-- <div class="method-source-code" id="policy-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 551</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 546</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">policy=</span> <span class="ruby-identifier">new_policy</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">set_subscription_policy</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">new_policy</span>
@@ -957,7 +957,7 @@ system may return fewer than the number specified. The default value is
 
     
       <!-- <div class="method-source-code" id="pull-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 256</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 253</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pull</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">pull</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
@@ -1031,7 +1031,7 @@ of Strings)</p>
 
     
       <!-- <div class="method-source-code" id="test_permissions-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 591</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 586</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_permissions</span> <span class="ruby-operator">*</span><span class="ruby-identifier">permissions</span>
   <span class="ruby-identifier">permissions</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">permissions</span>).<span class="ruby-identifier">flatten</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -1159,7 +1159,7 @@ system may return fewer than the number specified. The default value is
 
     
       <!-- <div class="method-source-code" id="wait_for_messages-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 307</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 302</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">wait_for_messages</span> <span class="ruby-identifier">options</span> = {}
   <span class="ruby-identifier">pull</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">immediate</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
 <span class="ruby-keyword">end</span></pre>
