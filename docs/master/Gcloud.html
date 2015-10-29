@@ -120,6 +120,8 @@ href="AUTHENTICATION.md">Authentication Guide</a>.</p>
             
               <a href="#method-c-pubsub">pubsub</a>
             
+              <a href="#method-c-resource_manager">resource_manager</a>
+            
               <a href="#method-c-storage">storage</a>
             
           
@@ -132,6 +134,8 @@ href="AUTHENTICATION.md">Authentication Guide</a>.</p>
               <a href="#method-i-dns">dns</a>
             
               <a href="#method-i-pubsub">pubsub</a>
+            
+              <a href="#method-i-resource_manager">resource_manager</a>
             
               <a href="#method-i-storage">storage</a>
             
@@ -565,6 +569,82 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 </div>
 
         
+          <div id="resource_manager-method" class="method ">
+  <a name="method-c-resource_manager"></a>
+
+  
+    <h4>
+      <code>resource_manager(keyfile = nil, options = {})</code>
+      <span>
+        <a href="#method-c-resource_manager">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Creates a new <code>Project</code> instance connected to the Resource
+Manager service. Each call creates a new connection.</p>
+
+<h3 id="method-c-resource_manager-label-Parameters">Parameters<span><a href="#method-c-resource_manager-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>keyfile</code>
+<dd>
+<p>Keyfile downloaded from Google Cloud. If file path the file must be
+readable. (<code>String</code> or <code>Hash</code>)</p>
+</dd><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
+</dd><dt><code>options[:scope]</code>
+<dd>
+<p>The OAuth 2.0 scopes controlling the set of resources and operations that
+the connection can access. See <a
+href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
+2.0 to Access Google APIs</a>. (<code>String</code> or <code>Array</code>)</p>
+
+<p>The default scope is:</p>
+<ul><li>
+<p><code>https://www.googleapis.com/auth/cloud-platform</code></p>
+</li></ul>
+</dd></dl>
+
+<h3 id="method-c-resource_manager-label-Returns">Returns<span><a href="#method-c-resource_manager-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a
+href="Gcloud/ResourceManager/Manager.html">Gcloud::ResourceManager::Manager</a></p>
+
+<h3 id="method-c-resource_manager-label-Example">Example<span><a href="#method-c-resource_manager-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/resource_manager&quot;</span>
+
+<span class="ruby-identifier">resource_manager</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">resource_manager</span>
+<span class="ruby-identifier">resource_manager</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">project</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">projects</span>.<span class="ruby-identifier">project_id</span>
+<span class="ruby-keyword">end</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="resource_manager-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resource_manager</span> <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyfile</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">ResourceManager</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">ResourceManager</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>, <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">ResourceManager</span><span class="ruby-operator">::</span><span class="ruby-constant">Manager</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">credentials</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
           <div id="storage-method" class="method ">
   <a name="method-c-storage"></a>
 
@@ -974,6 +1054,84 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 </div>
 
         
+          <div id="resource_manager-method" class="method ">
+  <a name="method-i-resource_manager"></a>
+
+  
+    <h4>
+      <code>resource_manager(options = {})</code>
+      <span>
+        <a href="#method-i-resource_manager">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Creates a new object for connecting to the Resource Manager service. Each
+call creates a new connection.</p>
+
+<h3 id="method-i-resource_manager-label-Parameters">Parameters<span><a href="#method-i-resource_manager-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>options</code>
+<dd>
+<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
+</dd><dt><code>options[:scope]</code>
+<dd>
+<p>The OAuth 2.0 scopes controlling the set of resources and operations that
+the connection can access. See <a
+href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
+2.0 to Access Google APIs</a>. (<code>String</code> or <code>Array</code>)</p>
+
+<p>The default scope is:</p>
+<ul><li>
+<p><code>https://www.googleapis.com/auth/cloud-platform</code></p>
+</li></ul>
+</dd></dl>
+
+<h3 id="method-i-resource_manager-label-Returns">Returns<span><a href="#method-i-resource_manager-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a
+href="Gcloud/ResourceManager/Manager.html">Gcloud::ResourceManager::Manager</a></p>
+
+<h3 id="method-i-resource_manager-label-Examples">Examples<span><a href="#method-i-resource_manager-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">resource_manager</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">resource_manager</span>
+<span class="ruby-identifier">resource_manager</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">project</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">projects</span>.<span class="ruby-identifier">project_id</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The default scope can be overridden with the <code>scope</code> option:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span>  = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">readonly_scope</span> = <span class="ruby-string">&quot;https://www.googleapis.com/auth/cloudresourcemanager.readonly&quot;</span>
+<span class="ruby-identifier">resource_manager</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">resource_manager</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">readonly_scope</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="resource_manager-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 347</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">resource_manager</span> <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/resource_manager&quot;</span>
+  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">resource_manager</span> <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
           <div id="storage-method" class="method ">
   <a name="method-i-storage"></a>
 
@@ -1114,6 +1272,13 @@ OAuth 2.0 Authentication</a>.</p>
       <li class="toc-l0">
         <a class="reference internal" href="Gcloud/Pubsub.html">
           Pub/Sub
+        </a>
+      </li>
+      
+  
+      <li class="toc-l0">
+        <a class="reference internal" href="Gcloud/ResourceManager.html">
+          Resource Manager
         </a>
       </li>
       

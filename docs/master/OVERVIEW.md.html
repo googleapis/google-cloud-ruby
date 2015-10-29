@@ -228,6 +228,51 @@ library.</p>
 <span class="ruby-identifier">msgs</span> = <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">pull</span>
 </pre>
 
+<h1 id="label-Resource+Manager">Resource Manager<span><a href="#label-Resource+Manager">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="https://cloud.google.com/resource-manager/">Google Cloud Resource
+Manager</a> (<a
+href="https://cloud.google.com/resource-manager/reference/rest/">docs</a>)
+provides methods that you can use to programmatically manage your projects
+in the Google Cloud Platform. You may be familiar with managing projects in
+the <a href="https://developers.google.com/console/help/new/">Developers
+Console</a>. With this API you can do the following:</p>
+<ul><li>
+<p>Get a list of all projects associated with an account</p>
+</li><li>
+<p>Create new projects</p>
+</li><li>
+<p>Update existing projects</p>
+</li><li>
+<p>Delete projects</p>
+</li><li>
+<p>Undelete, or recover, projects that you don&#39;t want to delete</p>
+</li></ul>
+
+<p>See the <a href="Gcloud/ResourceManager.html">gcloud-ruby Resource Manager
+API documentation</a> to learn how to connect to Cloud Resource Manager
+using this library.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">resource_manager</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">resource_manager</span>
+
+<span class="ruby-comment"># List all projects</span>
+<span class="ruby-identifier">resource_manager</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">project</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">projects</span>.<span class="ruby-identifier">project_id</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># Label a project as production</span>
+<span class="ruby-identifier">project</span> = <span class="ruby-identifier">resource_manager</span>.<span class="ruby-identifier">project</span> <span class="ruby-string">&quot;tokyo-rain-123&quot;</span>
+<span class="ruby-identifier">project</span>.<span class="ruby-identifier">update</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">p</span>.<span class="ruby-identifier">labels</span>[<span class="ruby-string">&quot;env&quot;</span>] = <span class="ruby-string">&quot;production&quot;</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># List only projects with the &quot;production&quot; label</span>
+<span class="ruby-identifier">projects</span> = <span class="ruby-identifier">resource_manager</span>.<span class="ruby-identifier">projects</span> <span class="ruby-identifier">filter</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;labels.env:production&quot;</span>
+</pre>
+
 <h1 id="label-Storage">Storage<span><a href="#label-Storage">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p><a href="https://cloud.google.com/storage/">Google Cloud Storage</a> (<a
@@ -309,6 +354,13 @@ library.</p>
       <li class="toc-l0">
         <a class="reference internal" href="Gcloud/Pubsub.html">
           Pub/Sub
+        </a>
+      </li>
+      
+  
+      <li class="toc-l0">
+        <a class="reference internal" href="Gcloud/ResourceManager.html">
+          Resource Manager
         </a>
       </li>
       
