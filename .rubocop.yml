@@ -19,3 +19,7 @@ Metrics/ClassLength:
   Enabled: false
 Style/EmptyElse:
   Enabled: false
+Metrics/AbcSize:
+  Max: 20
+Metrics/MethodLength:
+  Max: 15

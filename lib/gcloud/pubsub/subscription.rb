@@ -191,9 +191,6 @@ module Gcloud
         end
       end
 
-      # rubocop:disable Metrics/MethodLength
-      # Disabled rubocop because these lines are needed.
-
       ##
       # Pulls messages from the server. Returns an empty list if there are no
       # messages available in the backlog. Raises an ApiError with status
@@ -268,8 +265,6 @@ module Gcloud
       rescue Faraday::TimeoutError
         []
       end
-
-      # rubocop:enable Metrics/MethodLength
 
       ##
       # Pulls from the server while waiting for messages to become available.

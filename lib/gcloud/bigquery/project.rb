@@ -266,10 +266,6 @@ module Gcloud
         end
       end
 
-      # rubocop:disable Metrics/AbcSize
-      # rubocop:disable Metrics/MethodLength
-      # Disabled rubocop because the level of abstraction is not violated here
-
       ##
       # Creates a new dataset.
       #
@@ -356,9 +352,6 @@ module Gcloud
           fail ApiError.from_response(resp)
         end
       end
-
-      # rubocop:enable Metrics/AbcSize
-      # rubocop:enable Metrics/MethodLength
 
       ##
       # Retrieves the list of datasets belonging to the project.
