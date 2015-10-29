@@ -1,5 +1,20 @@
 # Release History
 
+### 0.5.0 / 2015-10-29
+
+#### Changes
+
+* Add support for Release Manager service
+* Pub/Sub Additions
+  * Fix issue getting and setting policies (jeffmendoza)
+  * Modified `autocreate` default value and behavior
+  * Add `skip_lookup` option on resource lookup methods
+  * Add `Project#publish` method
+  * Add `Project#subscribe` method
+* Datastore Additions
+  * Add `namespace` option on running queries (jondot)
+  * Add `query`, `entity`, and `key` helpers to Dataset
+
 ### 0.4.1 / 2015-10-20
 
 #### Changes
