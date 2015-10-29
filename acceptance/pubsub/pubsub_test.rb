@@ -92,17 +92,6 @@ describe Gcloud::Pubsub, :pubsub do
       pubsub.topics.first.delete
       pubsub.topics.count.must_equal (old_topics_count - 1)
     end
-
-    describe :lazy do
-      it "gets a lazy topic object that can create itself" do
-        lazy_topic = pubsub.topic lazy_topic_name
-        lazy_topic.must_be :lazy?
-        lazy_topic.must_be :autocreate?
-        lazy_topic.wont_be :exists?
-        lazy_topic.publish "this will create the topic"
-        lazy_topic.must_be :exists?
-      end
-    end
   end
 
   describe "Subscriptions on Project" do

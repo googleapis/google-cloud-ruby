@@ -206,7 +206,7 @@ module Gcloud
         end
         @client.execute(
           api_method:  @pubsub.projects.topics.publish,
-          parameters:  { topic: topic },
+          parameters:  { topic: topic_path(topic) },
           body_object: { messages: gapi_msgs }
         )
       end
@@ -282,7 +282,7 @@ module Gcloud
         endpoint   = options[:endpoint]
         attributes = hashify options[:attributes]
 
-        data = { topic: topic }
+        data = { topic: topic_path(topic) }
         data[:ackDeadlineSeconds] = deadline if deadline
         if endpoint
           data[:pushConfig] = { pushEndpoint: endpoint,

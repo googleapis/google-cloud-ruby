@@ -19,81 +19,97 @@ describe Gcloud::Pubsub::Topic, :subscription, :mock_pubsub do
   let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
                                                 pubsub.connection }
   let(:found_sub_name) { "found-sub-#{Time.now.to_i}" }
-  let(:not_found_sub_name) { "not-found-sub-#{Time.now.to_i}" }
+  let(:not_found_sub_name) { "found-sub-#{Time.now.to_i}" }
 
-  it "gets lazy sub for an existing subscription" do
+  it "gets an existing subscription" do
+    mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, found_sub_name)]
+    end
+
     sub = topic.subscription found_sub_name
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
-    sub.must_be :lazy?
+    sub.wont_be :lazy?
   end
 
-  it "returns lazy sub when getting an non-existant subscription" do
-    sub = topic.subscription not_found_sub_name
+  it "gets an existing subscription with get_subscription alias" do
+    mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, found_sub_name)]
+    end
+
+    sub = topic.get_subscription found_sub_name
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.wont_be :lazy?
+  end
+
+  it "gets an existing subscription with find_subscription alias" do
+    mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, found_sub_name)]
+    end
+
+    sub = topic.find_subscription found_sub_name
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.wont_be :lazy?
+  end
+
+  it "returns nil when getting an non-existant subscription" do
+    mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
+      [404, {"Content-Type"=>"application/json"},
+       not_found_error_json(not_found_sub_name)]
+    end
+
+    sub = topic.subscription found_sub_name
+    sub.must_be :nil?
+  end
+
+  it "gets a subscription with skip_lookup option" do
+    # No HTTP mock needed, since the lookup is not made
+
+    sub = topic.find_subscription found_sub_name, skip_lookup: true
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
     sub.must_be :lazy?
   end
 
   describe "lazy topic that exists" do
-    describe "created with autocreate" do
-      let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection,
-                                                   autocreate: true }
+    let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
+                                                 pubsub.connection }
 
-      it "gets lazy sub for an existing subscription" do
-        sub = topic.subscription found_sub_name
-        sub.must_be_kind_of Gcloud::Pubsub::Subscription
-        sub.must_be :lazy?
+    it "gets an existing subscription" do
+      mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
+        [200, {"Content-Type"=>"application/json"},
+         subscription_json(topic_name, found_sub_name)]
       end
 
-      it "returns lazy sub when getting an non-existant subscription" do
-        sub = topic.subscription not_found_sub_name
-        sub.must_be_kind_of Gcloud::Pubsub::Subscription
-        sub.must_be :lazy?
-      end
+      sub = topic.subscription found_sub_name
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
     end
 
-    describe "created without autocomplete" do
-      let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection,
-                                                   autocreate: false }
-
-      it "gets lazy sub for an existing subscription" do
-        sub = topic.subscription found_sub_name
-        sub.must_be_kind_of Gcloud::Pubsub::Subscription
-        sub.must_be :lazy?
+    it "returns nil when getting an non-existant subscription" do
+      mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
+        [404, {"Content-Type"=>"application/json"},
+         not_found_error_json(not_found_sub_name)]
       end
 
-      it "returns lazy sub when getting an non-existant subscription" do
-        sub = topic.subscription not_found_sub_name
-        sub.must_be_kind_of Gcloud::Pubsub::Subscription
-        sub.must_be :lazy?
-      end
+      sub = topic.subscription found_sub_name
+      sub.must_be :nil?
     end
   end
 
   describe "lazy topic that does not exist" do
-    describe "created with autocreate" do
-      let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection,
-                                                   autocreate: true }
+    let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
+                                                 pubsub.connection }
 
-      it "gets lazy sub for an existing subscription" do
-        sub = topic.subscription found_sub_name
-        sub.must_be_kind_of Gcloud::Pubsub::Subscription
-        sub.must_be :lazy?
+    it "returns nil when getting an non-existant subscription" do
+      mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
+        [404, {"Content-Type"=>"application/json"},
+         not_found_error_json(not_found_sub_name)]
       end
-    end
 
-    describe "created without autocomplete" do
-      let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection,
-                                                   autocreate: false }
-
-      it "returns lazy sub when getting an non-existant subscription" do
-        sub = topic.subscription not_found_sub_name
-        sub.must_be_kind_of Gcloud::Pubsub::Subscription
-        sub.must_be :lazy?
-      end
+      sub = topic.subscription found_sub_name
+      sub.must_be :nil?
     end
   end
 end

@@ -39,14 +39,19 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     pubsub.new_topic new_topic_name
   end
 
-  it "gets a lazy topic" do
+  it "gets a topic" do
     topic_name = "found-topic"
+    mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       topic_json(topic_name)]
+    end
+
     topic = pubsub.topic topic_name
     topic.name.must_equal topic_path(topic_name)
-    topic.must_be :lazy?
+    topic.wont_be :lazy?
   end
 
-  it "gets a topic with get_topic" do
+  it "gets a topic with get_topic alias" do
     topic_name = "found-topic"
     mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}" do |env|
       [200, {"Content-Type"=>"application/json"},
@@ -70,19 +75,32 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topic.wont_be :lazy?
   end
 
-  it "gets a lazy topic by providing the full name" do
-    topic_name = "projects/another-project/topics/another-topic"
-    topic = pubsub.topic topic_name
-    topic.name.must_equal topic_name
-    topic.name.wont_match project_path
+  it "returns nil when getting an non-existant topic" do
+    not_found_topic_name = "not-found-topic"
+    mock_connection.get "/v1/projects/#{project}/topics/#{not_found_topic_name}" do |env|
+      [404, {"Content-Type"=>"application/json"},
+       not_found_error_json(not_found_topic_name)]
+    end
+
+    topic = pubsub.find_topic not_found_topic_name
+    topic.must_be :nil?
+  end
+
+  it "gets a topic with skip_lookup option" do
+    topic_name = "found-topic"
+    # No HTTP mock needed, since the lookup is not made
+
+    topic = pubsub.find_topic topic_name, skip_lookup: true
+    topic.name.must_equal topic_path(topic_name)
     topic.must_be :lazy?
   end
 
-  it "gets a lazy topic by providing alternate project" do
-    topic_name = "another-topic"
-    topic = pubsub.topic topic_name, project: "another-project"
-    topic.name.must_equal "projects/another-project/topics/another-topic"
-    topic.name.wont_match project_path
+  it "gets a topic with skip_lookup and project options" do
+    topic_name = "found-topic"
+    # No HTTP mock needed, since the lookup is not made
+
+    topic = pubsub.find_topic topic_name, skip_lookup: true, project: "custom"
+    topic.name.must_equal "projects/custom/topics/found-topic"
     topic.must_be :lazy?
   end
 
@@ -168,15 +186,21 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topics.token.must_equal "next_page_token"
   end
 
-  it "gets a lazy subscription" do
-    sub_name = "found-sub"
+  it "gets a subscription" do
+    sub_name = "found-sub-#{Time.now.to_i}"
+    mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json("random-topic", sub_name)]
+    end
+
     sub = pubsub.subscription sub_name
-    sub.name.must_equal subscription_path(sub_name)
+    sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
-    sub.must_be :lazy?
+    sub.name.must_equal subscription_path(sub_name)
+    sub.wont_be :lazy?
   end
 
-  it "gets a subscription with get_subscription" do
+  it "gets a subscription with get_subscription alias" do
     sub_name = "found-sub-#{Time.now.to_i}"
     mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
       [200, {"Content-Type"=>"application/json"},
@@ -186,6 +210,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     sub = pubsub.get_subscription sub_name
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.name.must_equal subscription_path(sub_name)
     sub.wont_be :lazy?
   end
 
@@ -199,7 +224,41 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     sub = pubsub.find_subscription sub_name
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.name.must_equal subscription_path(sub_name)
     sub.wont_be :lazy?
+  end
+
+  it "returns nil when getting an non-existant subscription" do
+    not_found_sub_name = "does-not-exist"
+    mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
+      [404, {"Content-Type"=>"application/json"},
+       not_found_error_json(not_found_sub_name)]
+    end
+
+    sub = pubsub.subscription not_found_sub_name
+    sub.must_be :nil?
+  end
+
+  it "gets a subscription with skip_lookup option" do
+    sub_name = "found-sub-#{Time.now.to_i}"
+    # No HTTP mock needed, since the lookup is not made
+
+    sub = pubsub.subscription sub_name, skip_lookup: true
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.name.must_equal subscription_path(sub_name)
+    sub.must_be :lazy?
+  end
+
+  it "gets a subscription with skip_lookup and project options" do
+    sub_name = "found-sub-#{Time.now.to_i}"
+    # No HTTP mock needed, since the lookup is not made
+
+    sub = pubsub.subscription sub_name, skip_lookup: true, project: "custom"
+    sub.wont_be :nil?
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.name.must_equal "projects/custom/subscriptions/#{sub_name}"
+    sub.must_be :lazy?
   end
 
   it "lists subscriptions" do

@@ -14,10 +14,8 @@
 
 require "helper"
 
-describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
+describe Gcloud::Pubsub::Project, :subscribe, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
-                                                pubsub.connection }
   let(:new_sub_name) { "new-sub-#{Time.now.to_i}" }
 
   it "creates a subscription when calling subscribe" do
@@ -27,13 +25,46 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
        subscription_json(topic_name, new_sub_name)]
     end
 
-    sub = topic.subscribe new_sub_name
+    sub = pubsub.subscribe topic_name, new_sub_name
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
+  end
+
+  it "creates a subscription and topic when called with autocreate" do
+    mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+      JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
+      [404, {"Content-Type"=>"application/json"},
+       not_found_error_json(topic_name)]
+    end
+    mock_connection.put "/v1/projects/#{project}/topics/#{topic_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       topic_json(topic_name)]
+    end
+    mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+      JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, new_sub_name)]
+    end
+
+    sub = pubsub.subscribe topic_name, new_sub_name, autocreate: true
+    sub.must_be_kind_of Gcloud::Pubsub::Subscription
+    sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
+  end
+
+  it "creates a subscription but not topic even when called with autocreate" do
+    mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
+      JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
+      [200, {"Content-Type"=>"application/json"},
+       subscription_json(topic_name, new_sub_name)]
+    end
+
+    sub = pubsub.subscribe topic_name, new_sub_name, autocreate: true
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
     sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
   end
 
   describe "lazy topic that exists" do
-    let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
+    let(:topic) { Gcloud::Pubsub::pubsub.new_lazy topic_name,
                                                  pubsub.connection,
                                                  autocreate: false }
 
@@ -44,14 +75,14 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
          subscription_json(topic_name, new_sub_name)]
       end
 
-      sub = topic.subscribe new_sub_name
+      sub = pubsub.subscribe topic_name, new_sub_name
       sub.must_be_kind_of Gcloud::Pubsub::Subscription
       sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
     end
   end
 
   describe "lazy topic that does not exist" do
-    let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
+    let(:topic) { Gcloud::Pubsub::pubsub.new_lazy topic_name,
                                                  pubsub.connection,
                                                  autocreate: false }
 
@@ -62,7 +93,7 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
       end
 
       expect do
-        topic.subscribe new_sub_name
+        pubsub.subscribe topic_name, new_sub_name
       end.must_raise Gcloud::Pubsub::NotFoundError
     end
   end

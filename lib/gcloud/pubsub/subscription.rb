@@ -90,9 +90,7 @@ module Gcloud
       #
       def topic
         ensure_gapi!
-        # Always disable autocreate, we don't want to recreate a topic that
-        # was intentionally deleted.
-        Topic.new_lazy @gapi["topic"], connection, autocreate: false
+        Topic.new_lazy @gapi["topic"], connection
       end
 
       ##
