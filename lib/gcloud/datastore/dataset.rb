@@ -234,9 +234,6 @@ module Gcloud
         true
       end
 
-      # rubocop:disable Metrics/AbcSize
-      # Disabled rubocop because the level of abstraction is not violated here
-
       ##
       # Retrieve entities specified by a Query.
       #
@@ -275,8 +272,6 @@ module Gcloud
         QueryResults.new entities, cursor, more_results
       end
       alias_method :run_query, :run
-
-      # rubocop:enable Metrics/AbcSize
 
       ##
       # Creates a Datastore Transaction.

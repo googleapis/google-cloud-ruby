@@ -78,10 +78,6 @@ module Gcloud
           Gcloud::GCE.project_id
       end
 
-      # rubocop:disable Metrics/AbcSize
-      # rubocop:disable Metrics/MethodLength
-      # Disabled rubocop because there isn't much benefit to adding indirection
-
       ##
       # Retrieves topic by name.
       #
@@ -169,9 +165,6 @@ module Gcloud
       end
       alias_method :get_topic, :topic
       alias_method :find_topic, :topic
-
-      # rubocop:enable Metrics/AbcSize
-      # rubocop:enable Metrics/MethodLength
 
       ##
       # Creates a new topic.
@@ -347,9 +340,6 @@ module Gcloud
         publish_batch_messages topic_name, batch, autocreate
       end
 
-      # rubocop:disable Metrics/AbcSize
-      # Disabling because this is very close to the limit.
-
       ##
       # Creates a new Subscription object for the provided topic.
       #
@@ -435,8 +425,6 @@ module Gcloud
       end
       alias_method :create_subscription, :subscribe
       alias_method :new_subscription, :subscribe
-
-      # rubocop:enable Metrics/AbcSize
 
       ##
       # Retrieves subscription by name.

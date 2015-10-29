@@ -24,9 +24,6 @@ module Gcloud
     CHECK_URI = "http://169.254.169.254"
     PROJECT_URI = "#{CHECK_URI}/computeMetadata/v1/project/project-id"
 
-    # rubocop:disable all
-    # Disabled rubocop because this is private and we don't need more methods.
-
     def self.gce? options = {}
       conn = options[:connection] || Faraday.default_connection
       resp = conn.get CHECK_URI do |req|
@@ -56,7 +53,5 @@ module Gcloud
       @gce ||= {}
       @gce[:project_id] = nil
     end
-
-    # rubocop:enable all
   end
 end
