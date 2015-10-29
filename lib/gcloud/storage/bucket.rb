@@ -374,7 +374,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Storage::File (Gcloud::Storage::File::List)
+      # Array of Gcloud::Storage::File (See Gcloud::Storage::File::List)
       #
       # === Examples
       #

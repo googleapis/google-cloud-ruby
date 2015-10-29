@@ -221,7 +221,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Pubsub::Topic (Gcloud::Pubsub::Topic::List)
+      # Array of Gcloud::Pubsub::Topic (See Gcloud::Pubsub::Topic::List)
       #
       # === Examples
       #
@@ -515,7 +515,7 @@ module Gcloud
       # === Returns
       #
       # Array of Gcloud::Pubsub::Subscription
-      # (Gcloud::Pubsub::Subscription::List)
+      # (See Gcloud::Pubsub::Subscription::List)
       #
       # === Examples
       #

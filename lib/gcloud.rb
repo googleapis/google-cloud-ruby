@@ -299,4 +299,55 @@ module Gcloud
     require "gcloud/dns"
     Gcloud.dns @project, @keyfile, options
   end
+
+  # rubocop:disable Metrics/LineLength
+  # Disabled because the readonly scope in the example code is long and we can't
+  # shorten it.
+
+  ##
+  # Creates a new object for connecting to the Resource Manager service.
+  # Each call creates a new connection.
+  #
+  # === Parameters
+  #
+  # +options+::
+  #   An optional Hash for controlling additional behavior. (+Hash+)
+  # <code>options[:scope]</code>::
+  #   The OAuth 2.0 scopes controlling the set of resources and operations that
+  #   the connection can access. See {Using OAuth 2.0 to Access Google
+  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   or +Array+)
+  #
+  #   The default scope is:
+  #
+  #   * +https://www.googleapis.com/auth/cloud-platform+
+  #
+  # === Returns
+  #
+  # Gcloud::ResourceManager::Manager
+  #
+  # === Examples
+  #
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   resource_manager = gcloud.resource_manager
+  #   resource_manager.projects.each do |project|
+  #     puts projects.project_id
+  #   end
+  #
+  # The default scope can be overridden with the +scope+ option:
+  #
+  #   require "gcloud"
+  #
+  #   gcloud  = Gcloud.new
+  #   readonly_scope = "https://www.googleapis.com/auth/cloudresourcemanager.readonly"
+  #   resource_manager = gcloud.resource_manager scope: readonly_scope
+  #
+  def resource_manager options = {}
+    require "gcloud/resource_manager"
+    Gcloud.resource_manager @keyfile, options
+  end
+
+  # rubocop:enable Metrics/LineLength
 end

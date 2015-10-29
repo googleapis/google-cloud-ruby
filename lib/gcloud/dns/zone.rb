@@ -238,7 +238,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Dns::Change (Gcloud::Dns::Change::List)
+      # Array of Gcloud::Dns::Change (See Gcloud::Dns::Change::List)
       #
       # === Examples
       #
@@ -314,7 +314,7 @@ module Gcloud
       #
       # === Returns
       #
-      # Array of Gcloud::Dns::Record (Gcloud::Dns::Record::List)
+      # Array of Gcloud::Dns::Record (See Gcloud::Dns::Record::List)
       #
       # === Examples
       #
