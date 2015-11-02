@@ -74,7 +74,7 @@ module Gcloud
           end
           indexes
         rescue JSON::ParserError
-          ApiError.from_response_status resp
+          raise ApiError.from_response(resp)
         end
 
         protected
