@@ -85,11 +85,11 @@ module Gcloud
         end
 
         def delete
-          api_method :delete, "/#{@resource_id_param}"
+          api_method :delete, "/{docId}"
         end
 
         def get
-          api_method :get, "/#{@resource_id_param}"
+          api_method :get, "/{docId}"
         end
 
         def list
