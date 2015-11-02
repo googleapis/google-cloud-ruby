@@ -16,6 +16,7 @@
 require "gcloud/gce"
 require "gcloud/search/connection"
 require "gcloud/search/credentials"
+require "gcloud/search/index"
 require "gcloud/search/errors"
 
 module Gcloud
@@ -62,6 +63,21 @@ module Gcloud
           ENV["GCLOUD_PROJECT"] ||
           ENV["GOOGLE_CLOUD_PROJECT"] ||
           Gcloud::GCE.project_id
+      end
+
+      def index index_id
+        ensure_connection!
+        resp = connection.list_indexes prefix: index_id
+        if resp.success?
+          # Find the index with the exact id, otherwise return nil
+          data = Array(JSON.parse(resp.body)["indexes"]).detect do |ix|
+            ix["indexId"] == index_id
+          end
+          return Index.from_raw(data, connection) unless data.nil?
+          nil
+        else
+          fail ApiError.from_response(resp)
+        end
       end
 
       protected

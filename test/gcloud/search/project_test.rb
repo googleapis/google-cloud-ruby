@@ -18,4 +18,78 @@ describe Gcloud::Search::Project, :mock_search do
   it "exists" do
     search.must_be_kind_of Gcloud::Search::Project
   end
+
+  it "gets an index" do
+    index_id = "found_index"
+
+    mock_connection.get "/v1/projects/#{project}/indexes" do |env|
+      env.params.must_include "indexNamePrefix"
+      env.params.wont_include "pageSize"
+      env.params.wont_include "pageToken"
+      env.params["indexNamePrefix"].must_equal index_id
+      [200, {"Content-Type"=>"application/json"},
+       get_index_json(index_id)]
+    end
+
+    index = search.index index_id
+    index.must_be_kind_of Gcloud::Search::Index
+    index.index_id.must_equal index_id
+  end
+
+  it "gets nil if an index is not found" do
+    index_id = "not_found_index"
+    mock_connection.get "/v1/projects/#{project}/indexes" do |env|
+      env.params.must_include "indexNamePrefix"
+      env.params.wont_include "pageSize"
+      env.params.wont_include "pageToken"
+      env.params["indexNamePrefix"].must_equal index_id
+      [200, {"Content-Type"=>"application/json"},
+       list_index_json(0)]
+    end
+
+    index = search.index index_id
+    index.must_be :nil?
+  end
+
+  it "gets nil if the returned indexes do not match" do
+    index_id = "not_found_index"
+    mock_connection.get "/v1/projects/#{project}/indexes" do |env|
+      env.params.must_include "indexNamePrefix"
+      env.params.wont_include "pageSize"
+      env.params.wont_include "pageToken"
+      env.params["indexNamePrefix"].must_equal index_id
+      [200, {"Content-Type"=>"application/json"},
+       list_index_json(3)]
+    end
+
+    index = search.index index_id
+    index.must_be :nil?
+  end
+
+  def random_index_hash index_id = nil
+    index_id ||= "rnd_index_#{rand 999999}"
+    {
+      "projectId" => project,
+      "indexId" => index_id,
+      "indexedField" => {
+        "textFields" => ["title", "body"],
+        "htmlFields" => ["body"],
+        "atomFields" => ["slug"],
+        "dateFields" => ["published"],
+        "numberFields" => ["likes"],
+        "geoFields" => ["location"]
+      }
+    }
+  end
+
+  def get_index_json index_id
+    { "indexes" => [random_index_hash(index_id)] }.to_json
+  end
+
+  def list_index_json index_count, token = nil
+    {
+      "indexes" => index_count.times.map { random_index_hash },
+      "nextPageToken" => token,
+    }.delete_if { |_, v| v.nil? }.to_json
+  end
 end
