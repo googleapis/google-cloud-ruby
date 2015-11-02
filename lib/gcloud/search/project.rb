@@ -66,15 +66,16 @@ module Gcloud
       end
 
       def index index_id
+        indexes(prefix: index_id).all.detect do |ix|
+          ix.index_id == index_id
+        end
+      end
+
+      def indexes options = {}
         ensure_connection!
-        resp = connection.list_indexes prefix: index_id
+        resp = connection.list_indexes options
         if resp.success?
-          # Find the index with the exact id, otherwise return nil
-          data = Array(JSON.parse(resp.body)["indexes"]).detect do |ix|
-            ix["indexId"] == index_id
-          end
-          return Index.from_raw(data, connection) unless data.nil?
-          nil
+          Index::List.from_response resp, connection
         else
           fail ApiError.from_response(resp)
         end
