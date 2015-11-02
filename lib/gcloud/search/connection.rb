@@ -26,6 +26,8 @@ module Gcloud
 
       attr_accessor :project
       attr_accessor :credentials #:nodoc:
+      attr_accessor :client #:nodoc:
+      attr_accessor :connection #:nodoc:
 
       ##
       # Creates a new Connection instance.
@@ -36,8 +38,37 @@ module Gcloud
         @connection = Faraday.default_connection
       end
 
+      def list_indexes options = {}
+        if options[:prefix]
+          options[:params] ||= {}
+          options[:params]["indexNamePrefix"] = options.delete :prefix
+        end
+        run "indexes", options
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
+      end
+
+      protected
+
+      def run path, options = {}
+        options[:uri] = uri path
+        if @client.nil?
+          @connection.get do |req|
+            req.url options[:uri]
+            req.params = options[:params] if options[:params]
+            req.body = options[:body] if options[:body]
+          end
+        else
+          options[:connection] = @connection
+          @client.fetch_protected_resource options
+        end
+      end
+
+      def uri path
+        host = "https://cloudsearch.googleapis.com"
+        "#{host}/#{API_VERSION}/projects/#{@project}/#{path}"
       end
     end
   end
