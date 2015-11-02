@@ -19,55 +19,31 @@ require "gcloud/search/index/list"
 module Gcloud
   module Search
     ##
-    # = Index
+    # = Document
     #
-    # See Gcloud#search
-    class Index
-      ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
-
+    class Document
       ##
       # The raw data object.
       attr_accessor :raw #:nodoc:
 
       ##
-      # Creates a new Index instance.
+      # Creates a new Document instance.
       #
       def initialize #:nodoc:
         @connection = nil
         @raw = nil
       end
 
-      def index_id
-        @raw["indexId"]
-      end
-
-      def document doc_id
-        ensure_connection!
-        resp = connection.get_doc index_id, doc_id
-        return Document.from_hash(JSON.parse(resp.body)) if resp.success?
-        return nil if resp.status == 404
-        fail ApiError.from_response(resp)
-      rescue JSON::ParserError
-        raise ApiError.from_response(resp)
+      def doc_id
+        @raw["docId"]
       end
 
       ##
-      # New Index from a raw data object.
-      def self.from_raw raw, conn #:nodoc:
+      # New Document from a raw data object.
+      def self.from_hash hash #:nodoc:
         new.tap do |f|
-          f.raw = raw
-          f.connection = conn
+          f.raw = hash
         end
-      end
-
-      protected
-
-      ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
       end
     end
   end
