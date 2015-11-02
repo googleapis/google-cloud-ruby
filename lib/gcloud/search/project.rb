@@ -80,6 +80,16 @@ module Gcloud
         end
       end
 
+      def indexes options = {}
+        ensure_connection!
+        resp = connection.list_indexes options
+        if resp.success?
+          Index::List.from_response resp, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
       protected
 
       ##

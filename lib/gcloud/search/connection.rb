@@ -39,10 +39,12 @@ module Gcloud
       end
 
       def list_indexes options = {}
-        if options[:prefix]
-          options[:params] ||= {}
-          options[:params]["indexNamePrefix"] = options.delete :prefix
-        end
+        options[:params] = {
+          "indexNamePrefix" => options.delete(:prefix),
+          "pageSize" => options.delete(:max),
+          "pageToken" => options.delete(:token)
+        }.delete_if { |_, v| v.nil? }
+
         run "indexes", options
       end
 
