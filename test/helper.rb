@@ -23,6 +23,7 @@ require "gcloud/pubsub"
 require "gcloud/bigquery"
 require "gcloud/dns"
 require "gcloud/resource_manager"
+require "gcloud/search"
 
 class MockStorage < Minitest::Spec
   let(:project) { storage.connection.project }
@@ -747,5 +748,32 @@ class MockResourceManager < Minitest::Spec
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_res_man
+  end
+end
+
+class MockSearch < Minitest::Spec
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new }
+  let(:search) { Gcloud::Search::Project.new project, credentials }
+
+  def setup
+    @connection = Faraday::Adapter::Test::Stubs.new
+    search.connection.connection = Faraday.new "https://cloudsearch.googleapis.com" do |builder|
+      # builder.options.params_encoder = Faraday::FlatParamsEncoder
+      builder.adapter :test, @connection
+    end
+  end
+
+  def teardown
+    @connection.verify_stubbed_calls
+  end
+
+  def mock_connection
+    @connection
+  end
+
+  # Register this spec type for when :storage is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_search
   end
 end
