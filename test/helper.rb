@@ -772,6 +772,45 @@ class MockSearch < Minitest::Spec
     @connection
   end
 
+  def random_doc_hash doc_id = nil, rank = nil
+    doc_id ||= "rnd_doc_#{rand 999999}"
+    rank ||= rand(99999999)
+    {
+      "docId" => doc_id,
+      "rank" => rank,
+      "fields" => {
+        "title" => {
+          "values" => [
+            {
+              "stringFormat" => "TEXT",
+              "lang" => "en",
+              "stringValue" => "Hello Gcloud!"
+            }
+          ]
+        },
+        "body" => {
+          "values" => [
+            {
+              "stringFormat" => "TEXT",
+              "lang" => "en",
+              "stringValue" => "gcloud is a client library for accessing Google Cloud Platform services that ..."
+            },
+            {
+              "stringFormat" => "HTML",
+              "lang" => "en",
+              "stringValue" => "<p><code>gcloud</code> is a client library for accessing Google Cloud Platform services that ...</p>"
+            },
+            {
+              "stringFormat" => "HTML",
+              "lang" => "eo",
+              "stringValue" => "<p><code>gcloud</code> estas kliento biblioteko por aliranta Google Nubo Platformo servoj kiu ...</p>"
+            }
+          ]
+        }
+      }
+    }
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_search
