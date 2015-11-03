@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "gcloud/search/document"
-require "gcloud/search/index/list"
+require "gcloud/search/document/list"
 
 module Gcloud
   module Search
