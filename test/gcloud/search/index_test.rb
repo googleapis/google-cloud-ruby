@@ -44,44 +44,6 @@ describe Gcloud::Search::Index, :mock_search do
     doc.must_be :nil?
   end
 
-  def random_doc_hash doc_id = nil
-    doc_id ||= "rnd_doc_#{rand 999999}"
-    {
-      "docId" => doc_id,
-      "rank" => rand(99999999),
-      "fields" => {
-        "title" => {
-          "values" => [
-            {
-              "stringFormat" => "TEXT",
-              "lang" => "en",
-              "stringValue" => "Hello Gcloud!"
-            }
-          ]
-        },
-        "body" => {
-          "values" => [
-            {
-              "stringFormat" => "TEXT",
-              "lang" => "en",
-              "stringValue" => "gcloud is a client library for accessing Google Cloud Platform services that ..."
-            },
-            {
-              "stringFormat" => "HTML",
-              "lang" => "en",
-              "stringValue" => "<p><code>gcloud</code> is a client library for accessing Google Cloud Platform services that ...</p>"
-            },
-            {
-              "stringFormat" => "HTML",
-              "lang" => "eo",
-              "stringValue" => "<p><code>gcloud</code> estas kliento biblioteko por aliranta Google Nubo Platformo servoj kiu ...</p>"
-            }
-          ]
-        }
-      }
-    }
-  end
-
   def get_doc_json doc_id
     random_doc_hash(doc_id).to_json
   end
