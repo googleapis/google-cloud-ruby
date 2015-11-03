@@ -44,11 +44,131 @@ describe Gcloud::Search::Index, :mock_search do
     doc.must_be :nil?
   end
 
+  it "lists documents" do
+    num_documents = 3
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.wont_include "pageToken"
+      env.params.wont_include "pageSize"
+      env.params.must_include "view"
+      env.params["view"].must_equal "FULL"
+      [200, {"Content-Type"=>"application/json"},
+       list_docs_json(num_documents)]
+    end
+
+    documents = index.documents
+    documents.size.must_equal num_documents
+    documents.each { |ds| ds.must_be_kind_of Gcloud::Search::Document }
+  end
+
+  it "paginates documents" do
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.wont_include "pageToken"
+      env.params.wont_include "pageSize"
+      env.params.must_include "view"
+      env.params["view"].must_equal "FULL"
+      [200, {"Content-Type"=>"application/json"},
+       list_docs_json(3, "next_page_token")]
+    end
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      env.params.wont_include "pageSize"
+      env.params.must_include "view"
+      env.params["view"].must_equal "FULL"
+      [200, {"Content-Type"=>"application/json"},
+       list_docs_json(2)]
+    end
+
+    first_documents = index.documents
+    first_documents.count.must_equal 3
+    first_documents.each { |ds| ds.must_be_kind_of Gcloud::Search::Document }
+    first_documents.token.wont_be :nil?
+    first_documents.token.must_equal "next_page_token"
+
+    second_documents = index.documents token: first_documents.token
+    second_documents.count.must_equal 2
+    second_documents.each { |ds| ds.must_be_kind_of Gcloud::Search::Document }
+    second_documents.token.must_be :nil?
+  end
+
+  it "paginates documents with next" do
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.wont_include "pageToken"
+      env.params.wont_include "pageSize"
+      env.params.must_include "view"
+      env.params["view"].must_equal "FULL"
+      [200, {"Content-Type"=>"application/json"},
+       list_docs_json(3, "next_page_token")]
+    end
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      env.params.wont_include "pageSize"
+      env.params.must_include "view"
+      env.params["view"].must_equal "FULL"
+      [200, {"Content-Type"=>"application/json"},
+       list_docs_json(2)]
+    end
+
+    first_documents = index.documents
+    first_documents.count.must_equal 3
+    first_documents.each { |ds| ds.must_be_kind_of Gcloud::Search::Document }
+    first_documents.next?.must_equal true
+
+    second_documents = first_documents.next
+    second_documents.count.must_equal 2
+    second_documents.each { |ds| ds.must_be_kind_of Gcloud::Search::Document }
+    second_documents.next?.must_equal false
+  end
+
+  it "paginates documents with all" do
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.wont_include "pageToken"
+      env.params.wont_include "pageSize"
+      env.params.must_include "view"
+      env.params["view"].must_equal "FULL"
+      [200, {"Content-Type"=>"application/json"},
+       list_docs_json(3, "next_page_token")]
+    end
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      env.params.wont_include "pageSize"
+      env.params.must_include "view"
+      env.params["view"].must_equal "FULL"
+      [200, {"Content-Type"=>"application/json"},
+       list_docs_json(2)]
+    end
+
+    all_documents = index.documents.all
+    all_documents.count.must_equal 5
+    all_documents.each { |ds| ds.must_be_kind_of Gcloud::Search::Document }
+    all_documents.token.must_be :nil?
+  end
+
+  it "paginates documents with max set" do
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.wont_include "pageToken"
+      env.params.must_include "pageSize"
+      env.params["pageSize"].must_equal "3"
+      env.params.must_include "view"
+      env.params["view"].must_equal "FULL"
+      [200, {"Content-Type"=>"application/json"},
+       list_docs_json(3, "next_page_token")]
+    end
+
+    documents = index.documents max: 3
+    documents.count.must_equal 3
+    documents.each { |ds| ds.must_be_kind_of Gcloud::Search::Document }
+    documents.token.wont_be :nil?
+    documents.token.must_equal "next_page_token"
+  end
+
   def get_doc_json doc_id
     random_doc_hash(doc_id).to_json
   end
 
-  def list_doc_json doc_count, token = nil
+  def list_docs_json doc_count, token = nil
     {
       "documents" => doc_count.times.map { random_doc_hash },
       "nextPageToken" => token,

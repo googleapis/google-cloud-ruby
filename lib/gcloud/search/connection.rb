@@ -66,6 +66,20 @@ module Gcloud
         )
       end
 
+      def list_docs index_id, options = {}
+        params = { projectId: @project,
+                   indexId: index_id,
+                   view: "FULL",
+                   pageSize: options[:max],
+                   pageToken: options[:token]
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @search.documents.list,
+          parameters: params
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end
