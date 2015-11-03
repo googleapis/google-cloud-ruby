@@ -53,6 +53,13 @@ module Gcloud
         raise ApiError.from_response(resp)
       end
 
+      def documents options = {}
+        ensure_connection!
+        resp = connection.list_docs index_id, options
+        return Document::List.from_response(resp, self) if resp.success?
+        fail ApiError.from_response(resp)
+      end
+
       ##
       # New Index from a raw data object.
       def self.from_raw raw, conn #:nodoc:
