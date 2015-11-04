@@ -121,6 +121,12 @@ module Gcloud
           f.raw = hash
         end
       end
+
+      ##
+      # Returns the Document data as a hash
+      def to_hash #:nodoc:
+        @raw
+      end
     end
   end
 end

@@ -164,6 +164,25 @@ describe Gcloud::Search::Index, :mock_search do
     documents.token.must_equal "next_page_token"
   end
 
+  it "saves a document" do
+    document = Gcloud::Search::Document.from_hash random_doc_hash
+    document.doc_id = nil
+    document.rank = nil
+
+    mock_connection.post "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      json = JSON.parse(env.body)
+      json["doc_id"].must_be :nil?
+      json["rank"].must_be :nil?
+      [200, {"Content-Type" => "application/json"},
+       random_doc_hash.to_json]
+    end
+
+    new_doc = index.save document
+    new_doc.doc_id.wont_be :nil?
+    new_doc.rank.wont_be :nil?
+    # new_doc.must_equal document
+  end
+
   def get_doc_json doc_id
     random_doc_hash(doc_id).to_json
   end
