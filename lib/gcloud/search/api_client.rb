@@ -114,7 +114,7 @@ module Gcloud
           @connection.send method do |req|
             req.url uri
             req.params = options[:parameters] if options[:parameters]
-            req.body = options[:body_object] if options[:body_object]
+            req.body = options[:body_object].to_json if options[:body_object]
           end
         else
           # TODO: Support POST, DELETE
