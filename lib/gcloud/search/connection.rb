@@ -14,7 +14,7 @@
 # limitations under the License.
 
 require "gcloud/version"
-require "google/api_client"
+require "gcloud/search/api_client"
 
 module Gcloud
   module Search
@@ -34,43 +34,31 @@ module Gcloud
       def initialize project, credentials #:nodoc:
         @project = project
         @credentials = credentials
-        @client = @credentials.client
-        @connection = Faraday.default_connection
+        client_config = {
+          application_name: "gcloud-ruby",
+          application_version: Gcloud::VERSION
+        }
+        @client = Gcloud::Search::APIClient.new client_config
+        @client.authorization = @credentials.client
+        @search = @client.discovered_api "cloudsearch", API_VERSION
       end
 
       def list_indexes options = {}
-        options[:params] = {
-          "indexNamePrefix" => options.delete(:prefix),
-          "pageSize" => options.delete(:max),
-          "pageToken" => options.delete(:token)
-        }.delete_if { |_, v| v.nil? }
+        params = { projectId: @project,
+                   all: options.delete(:all),
+                   indexNamePrefix: options.delete(:prefix),
+                   pageSize: options.delete(:max),
+                   pageToken: options.delete(:token)
+                 }.delete_if { |_, v| v.nil? }
 
-        run "indexes", options
+        @client.execute(
+          api_method: @search.indexes.list,
+          parameters: params
+        )
       end
 
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
-      end
-
-      protected
-
-      def run path, options = {}
-        options[:uri] = uri path
-        if @client.nil?
-          @connection.get do |req|
-            req.url options[:uri]
-            req.params = options[:params] if options[:params]
-            req.body = options[:body] if options[:body]
-          end
-        else
-          options[:connection] = @connection
-          @client.fetch_protected_resource options
-        end
-      end
-
-      def uri path
-        host = "https://cloudsearch.googleapis.com"
-        "#{host}/#{API_VERSION}/projects/#{@project}/#{path}"
       end
     end
   end
