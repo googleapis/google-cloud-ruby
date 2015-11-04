@@ -60,6 +60,18 @@ module Gcloud
         fail ApiError.from_response(resp)
       end
 
+      def save document
+        ensure_connection!
+        resp = connection.create_doc index_id, document.to_hash
+        if resp.success?
+          document.raw = JSON.parse resp.body
+          return document
+        end
+        fail ApiError.from_response(resp)
+      rescue JSON::ParserError
+        raise ApiError.from_response(resp)
+      end
+
       ##
       # New Index from a raw data object.
       def self.from_raw raw, conn #:nodoc:

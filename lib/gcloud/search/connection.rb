@@ -80,6 +80,15 @@ module Gcloud
         )
       end
 
+      def create_doc index_id, document_hash
+        @client.execute(
+          api_method: @search.documents.create,
+          parameters: { projectId: @project,
+                        indexId: index_id },
+          body_object: document_hash
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end
