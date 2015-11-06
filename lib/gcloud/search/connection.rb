@@ -49,7 +49,7 @@ module Gcloud
                    indexNamePrefix: options.delete(:prefix),
                    pageSize: options.delete(:max),
                    pageToken: options.delete(:token)
-                 }.delete_if { |_, v| v.nil? }
+        }.delete_if { |_, v| v.nil? }
 
         @client.execute(
           api_method: @search.indexes.list,
@@ -106,8 +106,33 @@ module Gcloud
         )
       end
 
+      def search index_id, query, options = {}
+        @client.execute(
+          api_method: @search.indexes.search,
+          parameters: search_request(index_id, query, options)
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
+      end
+
+      protected
+
+      def search_request index_id, query, options = {}
+        { projectId: @project,
+          indexId: index_id,
+          query: query,
+          fieldExpressions: options[:expressions],
+          matchedCountAccuracy: options[:matched_count_accuracy],
+          offset: options[:offset],
+          orderBy: options[:order],
+          pageSize: options[:max],
+          pageToken: options[:token],
+          returnFields: options[:return_fields],
+          scorerSize: options[:scorer_size],
+          scorer: options[:scorer]
+        }.delete_if { |_, v| v.nil? }
       end
     end
   end

@@ -811,6 +811,14 @@ class MockSearch < Minitest::Spec
     }
   end
 
+  def random_index_hash index_id = nil
+    index_id ||= "example-index-#{rand(9999)}"
+    {
+      "projectId" => project,
+      "indexId" => index_id
+    }
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_search
