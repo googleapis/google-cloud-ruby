@@ -105,7 +105,7 @@ module Gcloud
       # Special-case return type for DiscoveredApi http search verb method
       class IndexResourcePath < ResourcePath
         def search
-          api_method :get, "/search"
+          api_method :get, "/{indexId}/search"
         end
       end
 
