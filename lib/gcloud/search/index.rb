@@ -81,6 +81,19 @@ module Gcloud
         fail ApiError.from_response(resp)
       end
 
+      def delete options = {}
+        ensure_connection!
+        docs_to_be_removed = documents
+        return if docs_to_be_removed.empty?
+        unless options[:force]
+          fail "Unable to delete because documents exist. Use :force option."
+        end
+        while docs_to_be_removed
+          docs_to_be_removed.each { |d| remove d }
+          docs_to_be_removed = docs_to_be_removed.next
+        end
+      end
+
       ##
       # New Index from a raw data object.
       def self.from_raw raw, conn #:nodoc:

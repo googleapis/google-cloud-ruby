@@ -19,6 +19,43 @@ describe Gcloud::Search::Index, :mock_search do
   let(:index_hash) { { "indexId" => index_id, "projectId" => project } }
   let(:index) { Gcloud::Search::Index.from_raw(index_hash, search.connection) }
 
+  it "deletes itself with the force option" do
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       page_one_docs_json]
+    end
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       page_two_docs_json]
+    end
+    ("doc_1".."doc_5").each do |doc_id|
+      mock_connection.delete "/v1/projects/#{project}/indexes/#{index_id}/documents/#{doc_id}" do |env|
+        [200, {"Content-Type" => "text/plain"},
+         ""]
+      end
+    end
+
+    index.delete force: true
+  end
+
+  it "delete will succeed if no documents exist" do
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      [200, {"Content-Type"=>"application/json"},
+        { "documents" => [] }.to_json]
+    end
+
+    index.delete
+  end
+
+  it "delete will fail if documents exist and force is not set" do
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       page_one_docs_json]
+    end
+
+    expect { index.delete }.must_raise
+  end
+
   it "gets a document" do
     doc_id = "found_doc"
 
@@ -204,6 +241,19 @@ describe Gcloud::Search::Index, :mock_search do
     end
 
     index.remove doc_id
+  end
+
+  def page_one_docs_json
+    {
+      "documents" => [random_doc_hash("doc_1"), random_doc_hash("doc_2"), random_doc_hash("doc_3")],
+      "nextPageToken" => "next_page_token",
+    }.to_json
+  end
+
+  def page_two_docs_json
+    {
+      "documents" => [random_doc_hash("doc_4"), random_doc_hash("doc_5")]
+    }.to_json
   end
 
   def get_doc_json doc_id

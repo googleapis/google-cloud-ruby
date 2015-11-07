@@ -57,6 +57,14 @@ module Gcloud
         )
       end
 
+      def delete_index index_id
+        @client.execute(
+          api_method: @search.indexes.delete,
+          parameters: { projectId: @project,
+                        indexId: index_id }
+        )
+      end
+
       def get_doc index_id, doc_id
         @client.execute(
           api_method: @search.documents.get,
