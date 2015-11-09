@@ -72,6 +72,15 @@ module Gcloud
         raise ApiError.from_response(resp)
       end
 
+      def remove doc_id
+        # Get the id if passes a Document object
+        doc_id = doc_id.doc_id if doc_id.respond_to? :doc_id
+        ensure_connection!
+        resp = connection.delete_doc index_id, doc_id
+        return true if resp.success?
+        fail ApiError.from_response(resp)
+      end
+
       ##
       # New Index from a raw data object.
       def self.from_raw raw, conn #:nodoc:
