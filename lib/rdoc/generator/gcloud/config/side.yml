@@ -49,6 +49,15 @@ classes:
     name: Manager
   - full_name: Gcloud::ResourceManager::Project
     name: Project
+- full_name: Gcloud::Search
+  name: Search
+  classes:
+  - full_name: Gcloud::Search::Project
+    name: Project
+  - full_name: Gcloud::Search::Index
+    name: Index
+  - full_name: Gcloud::Search::Document
+    name: Document
 - full_name: Gcloud::Storage
   name: Storage
   classes:
