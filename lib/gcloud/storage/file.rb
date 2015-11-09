@@ -710,9 +710,13 @@ module Gcloud
 
       def fix_copy_args dest_bucket, dest_path, options = {}
         if dest_path.respond_to?(:to_hash) && options.empty?
-          options, dest_path = dest_path, nil
+          options = dest_path
+          dest_path = nil
         end
-        dest_path, dest_bucket = dest_bucket, bucket if dest_path.nil?
+        if dest_path.nil?
+          dest_path = dest_bucket
+          dest_bucket = bucket
+        end
         dest_bucket = dest_bucket.name if dest_bucket.respond_to? :name
         options[:acl] = File::Acl.predefined_rule_for options[:acl]
         [dest_bucket, dest_path, options]
