@@ -44,6 +44,8 @@ module Gcloud
       end
 
       def document doc_id
+        # Get the id if passes a Document object
+        doc_id = doc_id.doc_id if doc_id.respond_to? :doc_id
         ensure_connection!
         resp = connection.get_doc index_id, doc_id
         return Document.from_hash(JSON.parse(resp.body)) if resp.success?
