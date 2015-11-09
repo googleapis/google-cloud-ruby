@@ -89,6 +89,15 @@ module Gcloud
         )
       end
 
+      def delete_doc index_id, doc_id
+        @client.execute(
+          api_method: @search.documents.delete,
+          parameters: { projectId: @project,
+                        indexId: index_id,
+                        docId: doc_id }
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end
