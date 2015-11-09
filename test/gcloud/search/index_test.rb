@@ -69,6 +69,20 @@ describe Gcloud::Search::Index, :mock_search do
     doc.doc_id.must_equal doc_id
   end
 
+  it "gets a document when passed a document" do
+    doc_id = "found_doc"
+    document = Gcloud::Search::Document.from_hash random_doc_hash(doc_id)
+
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents/#{doc_id}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       get_doc_json(doc_id)]
+    end
+
+    gotten_doc = index.document document
+    gotten_doc.must_be_kind_of Gcloud::Search::Document
+    gotten_doc.doc_id.must_equal doc_id
+  end
+
   it "gets nil if a document is not found" do
     doc_id = "not_found_doc"
 
