@@ -183,6 +183,29 @@ describe Gcloud::Search::Index, :mock_search do
     # new_doc.must_equal document
   end
 
+  it "removes a document from the index" do
+    doc_id = "document-to-be-deleted"
+    document = Gcloud::Search::Document.from_hash random_doc_hash(doc_id)
+
+    mock_connection.delete "/v1/projects/#{project}/indexes/#{index_id}/documents/#{doc_id}" do |env|
+      [200, {"Content-Type" => "text/plain"},
+       ""]
+    end
+
+    index.remove document
+  end
+
+  it "removes a document by doc_id" do
+    doc_id = "document-to-be-deleted"
+
+    mock_connection.delete "/v1/projects/#{project}/indexes/#{index_id}/documents/#{doc_id}" do |env|
+      [200, {"Content-Type" => "text/plain"},
+       ""]
+    end
+
+    index.remove doc_id
+  end
+
   def get_doc_json doc_id
     random_doc_hash(doc_id).to_json
   end
