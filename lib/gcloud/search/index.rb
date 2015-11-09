@@ -66,7 +66,7 @@ module Gcloud
         ensure_connection!
         resp = connection.create_doc index_id, document.to_hash
         if resp.success?
-          document.raw = JSON.parse resp.body
+          document.raw.merge! JSON.parse(resp.body)
           return document
         end
         fail ApiError.from_response(resp)
