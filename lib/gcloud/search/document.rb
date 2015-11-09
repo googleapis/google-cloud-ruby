@@ -29,8 +29,7 @@ module Gcloud
       # Creates a new Document instance.
       #
       def initialize #:nodoc:
-        @connection = nil
-        @raw = nil
+        @raw = {}
       end
 
       ##
@@ -117,15 +116,15 @@ module Gcloud
       ##
       # New Document from a raw data object.
       def self.from_hash hash #:nodoc:
-        new.tap do |f|
-          f.raw = hash
+        new.tap do |d|
+          d.raw = hash
         end
       end
 
       ##
       # Returns the Document data as a hash
       def to_hash #:nodoc:
-        @raw
+        @raw.dup
       end
     end
   end
