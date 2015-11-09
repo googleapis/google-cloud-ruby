@@ -231,7 +231,11 @@ describe Gcloud::Search::Index, :mock_search do
     new_doc = index.save document
     new_doc.doc_id.wont_be :nil?
     new_doc.rank.wont_be :nil?
-    # new_doc.must_equal document
+    # The object passed in is also updated
+    document.doc_id.wont_be :nil?
+    document.rank.wont_be :nil?
+    # The object passed in is the same as the object returned
+    new_doc.must_equal document
   end
 
   it "removes a document from the index" do
