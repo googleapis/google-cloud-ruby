@@ -19,6 +19,7 @@ describe Gcloud::Search::Index, :mock_search do
   let(:index_hash) { random_index_hash(index_id) }
   let(:index) { Gcloud::Search::Index.from_raw(index_hash, search.connection) }
   let(:query) { "dark stormy" }
+  let(:search_token) { "search-token-123" }
 
   it "exists" do
     index.must_be_kind_of Gcloud::Search::Index
@@ -273,13 +274,17 @@ describe Gcloud::Search::Index, :mock_search do
   it "searches" do
     mock_connection.get "/v1/projects/#{project}/indexes/#{index.index_id}/search" do |env|
       env.params["query"].must_equal query
-      [200, {"Content-Type"=>"application/json"}, search_results_json(3)]
+      [200, {"Content-Type"=>"application/json"}, search_results_json(3, search_token)]
     end
 
-    search_results = index.search query
-    search_results.size.must_equal 3
-    search_results.matched_count.must_equal 3
-    search_results.each { |sr| sr.must_be_kind_of Hash }
+    results = index.search query
+    results.size.must_equal 3
+    results.matched_count.must_equal 3
+    results.each do |result| 
+      result.must_be_kind_of Gcloud::Search::Result
+      result.doc_id.wont_be :nil?
+      result.token.must_equal search_token
+    end
   end
 
   it "searches with expressions set" do
@@ -296,8 +301,8 @@ describe Gcloud::Search::Index, :mock_search do
       [200, {"Content-Type"=>"application/json"}, search_results_json(3)]
     end
 
-    search_results = index.search query, expressions: expressions
-    search_results.size.must_equal 3
+    results = index.search query, expressions: expressions
+    results.size.must_equal 3
   end
 
   it "searches with matched_count_accuracy set" do
@@ -306,8 +311,8 @@ describe Gcloud::Search::Index, :mock_search do
       [200, {"Content-Type"=>"application/json"}, search_results_json(3)]
     end
 
-    search_results = index.search query, matched_count_accuracy: 100
-    search_results.size.must_equal 3
+    results = index.search query, matched_count_accuracy: 100
+    results.size.must_equal 3
   end
 
   it "searches with offset set" do
@@ -316,8 +321,8 @@ describe Gcloud::Search::Index, :mock_search do
       [200, {"Content-Type"=>"application/json"}, search_results_json(3)]
     end
 
-    search_results = index.search query, offset: 20
-    search_results.size.must_equal 3
+    results = index.search query, offset: 20
+    results.size.must_equal 3
   end
 
   it "searches with order set" do
@@ -327,8 +332,8 @@ describe Gcloud::Search::Index, :mock_search do
       [200, {"Content-Type"=>"application/json"}, search_results_json(3)]
     end
 
-    search_results = index.search query, order: order
-    search_results.size.must_equal 3
+    results = index.search query, order: order
+    results.size.must_equal 3
   end
 
   it "searches with return_fields set" do
@@ -338,8 +343,8 @@ describe Gcloud::Search::Index, :mock_search do
       [200, {"Content-Type"=>"application/json"}, search_results_json(3)]
     end
 
-    search_results = index.search query, return_fields: return_fields
-    search_results.size.must_equal 3
+    results = index.search query, return_fields: return_fields
+    results.size.must_equal 3
   end
 
   it "searches with scorer set" do
@@ -348,8 +353,8 @@ describe Gcloud::Search::Index, :mock_search do
       [200, {"Content-Type"=>"application/json"}, search_results_json(3)]
     end
 
-    search_results = index.search query, scorer: :generic
-    search_results.size.must_equal 3
+    results = index.search query, scorer: :generic
+    results.size.must_equal 3
   end
 
   it "searches with scorer_size set" do
@@ -358,8 +363,8 @@ describe Gcloud::Search::Index, :mock_search do
       [200, {"Content-Type"=>"application/json"}, search_results_json(3)]
     end
 
-    search_results = index.search query, scorer_size: 50
-    search_results.size.must_equal 3
+    results = index.search query, scorer_size: 50
+    results.size.must_equal 3
   end
 
   it "paginates search results" do
@@ -373,11 +378,11 @@ describe Gcloud::Search::Index, :mock_search do
       [200, {"Content-Type"=>"application/json"}, search_results_json(2)]
     end
 
-    search_results = index.search query
-    search_results.count.must_equal 3
-    search_results.token.must_equal "next_page_token"
+    results = index.search query
+    results.count.must_equal 3
+    results.token.must_equal "next_page_token"
 
-    search_results_2 = index.search nil, token: search_results.token
+    search_results_2 = index.search nil, token: results.token
     search_results_2.count.must_equal 2
     search_results_2.token.must_be :nil?
   end
@@ -390,9 +395,9 @@ describe Gcloud::Search::Index, :mock_search do
        search_results_json(3, "next_page_token")]
     end
 
-    search_results = index.search query, max: 3
-    search_results.count.must_equal 3
-    search_results.token.must_equal "next_page_token"
+    results = index.search query, max: 3
+    results.count.must_equal 3
+    results.token.must_equal "next_page_token"
   end
 
   def page_one_docs_json
