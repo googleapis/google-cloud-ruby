@@ -15,8 +15,7 @@
 
 require "gcloud/search/document"
 require "gcloud/search/index/list"
-# TODO: replace with /result, require list in Result
-require "gcloud/search/result/list"
+require "gcloud/search/result"
 
 module Gcloud
   module Search
@@ -193,7 +192,7 @@ module Gcloud
       #
       #   results = index.search "dark stormy"
       #   results.each do |result|
-      #     puts result.document_id
+      #     puts result.doc_id
       #   end
       #
       # If you have a significant number of search results, you may need to
@@ -208,7 +207,7 @@ module Gcloud
       #   results = index.results
       #   loop do
       #     results.each do |result|
-      #       puts result.document_id
+      #       puts result.doc_id
       #     end
       #     break unless results.next?
       #     results = results.next
