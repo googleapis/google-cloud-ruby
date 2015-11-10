@@ -38,4 +38,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency      "httpclient", "~> 2.5"
   gem.add_development_dependency      "simplecov", "~> 0.9"
   gem.add_development_dependency      "coveralls", "~> 0.7"
+  # Cap tins at 1.6.0 for compatibility with Ruby 1.9
+  gem.add_development_dependency      "tins", "<= 1.6.0"
 end
