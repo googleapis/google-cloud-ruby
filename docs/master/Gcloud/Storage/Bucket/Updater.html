@@ -199,7 +199,7 @@
 
     
       <!-- <div class="method-source-code" id="new-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 794</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 804</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">cors</span>
   <span class="ruby-ivar">@cors</span> = <span class="ruby-identifier">cors</span> <span class="ruby-operator">?</span> <span class="ruby-constant">Array</span>(<span class="ruby-identifier">cors</span>.<span class="ruby-identifier">dup</span>) <span class="ruby-operator">:</span> []
   <span class="ruby-ivar">@cors</span> = <span class="ruby-ivar">@cors</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span> }
@@ -245,7 +245,7 @@ in the patch request.</p>
 
     
       <!-- <div class="method-source-code" id="cors-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 812</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 822</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cors</span>
   <span class="ruby-identifier">updates</span>[<span class="ruby-value">:cors</span>] <span class="ruby-operator">||=</span> <span class="ruby-ivar">@cors</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
@@ -279,7 +279,7 @@ in the patch request.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 09, 2015.
+    Docs built on Nov 10, 2015.
   </div>
 </div>
 
