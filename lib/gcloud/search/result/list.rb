@@ -67,7 +67,9 @@ module Gcloud
         # New Result::List from a response object.
         def self.from_response resp, index #:nodoc:
           data = JSON.parse resp.body
-          results = new(Array(data["results"]))
+          results = new(Array(data["results"]).map do |raw|
+            Result.new raw, index
+          end)
           results.instance_eval do
             @token = data["results"].last["nextPageToken"]
             @matched_count = data["matchedCount"]
