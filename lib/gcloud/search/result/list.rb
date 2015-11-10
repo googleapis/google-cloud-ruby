@@ -85,7 +85,7 @@ module Gcloud
         ##
         # Raise an error unless an active connection is available.
         def ensure_index!
-          fail "Must have @index" unless @index
+          fail "Must have active connection" unless @index
         end
       end
     end
