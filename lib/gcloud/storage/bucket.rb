@@ -551,7 +551,7 @@ module Gcloud
       #   bucket.create_file "path/to/local.file.ext",
       #                      "destination/path/file.ext"
       #
-      # A chunk_size value can be provided in the options to be used
+      # A +chunk_size+ value can be provided in the options to be used
       # in resumable uploads. This value is the number of bytes per
       # chunk and must be divisible by 256KB. If it is not divisible
       # by 265KB then it will be lowered to the nearest acceptable
@@ -568,17 +568,27 @@ module Gcloud
       #                      "destination/path/file.ext",
       #                      chunk_size: 1024*1024 # 1 MB chunk
       #
-      # ==== A note about large uploads
+      # ==== Troubleshooting large uploads
       #
-      # You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
-      # upload large files. To avoid this problem, add the
+      # You may encounter errors while attempting to upload large files. Below
+      # are a couple of common cases and their solutions.
+      #
+      # ===== Handling memory errors
+      #
+      # If you encounter a memory error such as +NoMemoryError+, try performing
+      # a resumable upload and setting the +chunk_size+ option to a value that
+      # works for your environment, as explained in the final example above.
+      #
+      # ===== Handling broken pipe errors
+      #
+      # To avoid broken pipe (+Errno::EPIPE+) errors when uploading, add the
       # {httpclient}[https://rubygems.org/gems/httpclient] gem to your project,
-      # and the line (or lines) of configuration shown below. These lines must
-      # execute after you require gcloud but before you make your first gcloud
-      # connection. The first statement configures
-      # {Faraday}[https://rubygems.org/gems/faraday] to use httpclient. The
-      # second statement, which should only be added if you are using a version
-      # of Faraday at or above 0.9.2, is a workaround for {this gzip
+      # and the configuration shown below. These lines must execute after you
+      # require gcloud but before you make your first gcloud connection. The
+      # first statement configures {Faraday}[https://rubygems.org/gems/faraday]
+      # to use httpclient. The second statement, which should only be added if
+      # you are using a version of Faraday at or above 0.9.2, is a workaround
+      # for {this gzip
       # issue}[https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367].
       #
       #   require "gcloud"
