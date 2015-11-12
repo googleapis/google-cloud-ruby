@@ -21,11 +21,15 @@ describe Gcloud::Search::Fields, :mock_search do
 
   let(:doc_id) { "my-doc" }
   let(:doc_rank) { 123456 }
-  let(:doc_hash) { random_doc_hash doc_id, doc_rank }
-  let(:fields) { Gcloud::Search::Fields.new doc_hash }
+  let(:fields_hash) { random_fields_hash }
+  let(:fields) { Gcloud::Search::Fields.new fields_hash }
 
   it "exists" do
     fields.must_be_kind_of Hash
+  end
+
+  it "returns its rest api representation" do
+    fields.to_raw.must_equal fields_hash
   end
 
   it "returns a number field" do
@@ -72,53 +76,47 @@ describe Gcloud::Search::Fields, :mock_search do
     values[2].lang.must_equal "eo"
   end
 
-  def random_doc_hash doc_id = nil, rank = nil
-    doc_id ||= "rnd_doc_#{rand 999999}"
-    rank ||= rand(99999999)
+  def random_fields_hash
     {
-      "docId" => doc_id,
-      "rank" => rank,
-      "fields" => {
-        "price" => {
-          "values" => [
-            {
-              "numberValue" => 24.95
-            }
-          ]
-        },
-        "since" => {
-          "values" => [
-            {
-              "timestampValue" => "2015-10-02T15:00:00.05Z"
-            }
-          ]
-        },
-        "location" => {
-          "values" => [
-            {
-              "geoValue" => "-33.857, 151.215"
-            }
-          ]
-        },
-        "body" => {
-          "values" => [
-            {
-              "stringFormat" => "TEXT",
-              "lang" => "en",
-              "stringValue" => "gcloud is a client library"
-            },
-            {
-              "stringFormat" => "HTML",
-              "lang" => "en",
-              "stringValue" => "<code>gcloud</code> is a client library"
-            },
-            {
-              "stringFormat" => "HTML",
-              "lang" => "eo",
-              "stringValue" => "<code>gcloud</code> estas kliento biblioteko"
-            }
-          ]
-        }
+      "price" => {
+        "values" => [
+          {
+            "numberValue" => 24.95
+          }
+        ]
+      },
+      "since" => {
+        "values" => [
+          {
+            "timestampValue" => "2015-10-02T15:00:00+00:00"
+          }
+        ]
+      },
+      "location" => {
+        "values" => [
+          {
+            "geoValue" => "-33.857, 151.215"
+          }
+        ]
+      },
+      "body" => {
+        "values" => [
+          {
+            "stringFormat" => "TEXT",
+            "lang" => "en",
+            "stringValue" => "gcloud is a client library"
+          },
+          {
+            "stringFormat" => "HTML",
+            "lang" => "en",
+            "stringValue" => "<code>gcloud</code> is a client library"
+          },
+          {
+            "stringFormat" => "HTML",
+            "lang" => "eo",
+            "stringValue" => "<code>gcloud</code> estas kliento biblioteko"
+          }
+        ]
       }
     }
   end
