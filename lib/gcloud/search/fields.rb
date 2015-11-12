@@ -35,21 +35,29 @@ module Gcloud
     # fields}[https://cloud.google.com/search/documents_indexes#documents_and_fields].
     #
     class Fields < DelegateClass(::Hash)
-      def initialize hash = {}
-        super extract_fields(hash["fields"])
+      def initialize raw = {}
+        super from_raw(raw)
       end
 
-      protected
-
-      def extract_fields raw_fields
+      def to_raw
         hsh = {}
-        raw_fields.each_pair do |k, v|
-          hsh[k] = extract_values(v).first
+        each_pair do |k, v|
+          hsh[k] = to_raw_values(v)
         end
         hsh
       end
 
-      def extract_values raw_field
+      protected
+
+      def from_raw raw
+        hsh = {}
+        raw.each_pair do |k, v|
+          hsh[k] = from_raw_values(v).first
+        end
+        hsh
+      end
+
+      def from_raw_values raw_field
         values = []
         raw_field["values"].each do |v|
           values << if v["stringValue"]
@@ -64,7 +72,52 @@ module Gcloud
                       NumberValue.new values, v["numberValue"]
                     end
         end
-        values.freeze
+        values
+      end
+
+      def to_raw_values field
+        raw_values = field.values.map do |v|
+          case v.type
+          when :atom, :default, :html, :text
+            to_raw_string v
+          when :geo
+            to_raw_geo v
+          when :number
+            to_raw_number v
+          when :timestamp
+            to_raw_timestamp v
+          end
+        end
+        {
+          "values" => raw_values
+        }
+      end
+
+      def to_raw_string v
+        {
+          "stringFormat" => v.type.to_s.upcase,
+          "lang" => v.lang,
+          "stringValue" => v
+        }
+      end
+
+      def to_raw_geo v
+        {
+          "geoValue" => "#{v.latitude}, #{v.longitude}"
+        }
+      end
+
+      def to_raw_number v
+        numeric = v.is_a?(Integer) ? v.to_i : v.to_f
+        {
+          "numberValue" => numeric
+        }
+      end
+
+      def to_raw_timestamp v
+        {
+          "timestampValue" => v.rfc3339
+        }
       end
     end
     # rubocop:enable all
@@ -115,6 +168,10 @@ module Gcloud
 
     ##
     # Extends DateTime with :values, :type readers
+    #
+    # Timestamp is a JSON string following RFC 3339, where generated output will
+    # always be Z-normalized and uses 3, 6, or 9 fractional digits depending on
+    # required precision.
     class TimestampValue < DelegateClass(::DateTime)
       attr_reader :values, :type
 
