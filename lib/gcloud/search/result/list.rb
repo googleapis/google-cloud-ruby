@@ -68,7 +68,7 @@ module Gcloud
         def self.from_response resp, index, query, search_options #:nodoc:
           data = JSON.parse resp.body
           results = new(Array(data["results"]).map do |raw|
-            Result.new raw
+            Result.from_hash raw
           end)
           results.instance_eval do
             @token = data["results"].last["nextPageToken"]
