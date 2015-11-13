@@ -24,9 +24,8 @@ module Gcloud
     class Result
       ##
       # Creates a new Result instance.
-      def initialize raw, index #:nodoc:
+      def initialize raw #:nodoc:
         @raw = raw
-        @index = index
       end
 
       ##
@@ -34,14 +33,6 @@ module Gcloud
       def doc_id
         @raw["docId"]
       end
-
-      # TODO: Uncomment after PR #427 is merged
-      ##
-      # Retrieves the Document referenced by this result. Accepts the same
-      # options as Index#document.
-      # def document options = {}
-      #   @index.document doc_id
-      # end
 
       ##
       # The token for the next page of results.
