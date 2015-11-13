@@ -23,9 +23,13 @@ module Gcloud
     # See Gcloud#search
     class Result
       ##
+      # The raw data object.
+      attr_accessor :raw #:nodoc:
+
+      ##
       # Creates a new Result instance.
-      def initialize raw #:nodoc:
-        @raw = raw
+      def initialize #:nodoc:
+        @raw = {}
       end
 
       ##
@@ -49,6 +53,14 @@ module Gcloud
 
       def inspect #:nodoc:
         "#{self.class}(doc_id: #{doc_id}, token: #{truncated_token}...)"
+      end
+
+      ##
+      # New Result from a raw data object.
+      def self.from_hash hash #:nodoc:
+        new.tap do |d|
+          d.raw = hash
+        end
       end
 
       ##
