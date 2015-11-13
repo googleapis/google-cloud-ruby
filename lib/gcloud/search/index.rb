@@ -238,7 +238,7 @@ module Gcloud
         ensure_connection!
         resp = connection.search index_id, query, options
         if resp.success?
-          Result::List.from_response resp, self
+          Result::List.from_response resp, self, query, options
         else
           fail ApiError.from_response(resp)
         end

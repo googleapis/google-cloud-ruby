@@ -48,7 +48,7 @@ module Gcloud
         def next
           return nil unless next?
           ensure_index!
-          @index.search nil, token: token
+          @index.search @query, @search_options.merge(token: token)
         end
 
         ##
@@ -65,7 +65,7 @@ module Gcloud
 
         ##
         # New Result::List from a response object.
-        def self.from_response resp, index #:nodoc:
+        def self.from_response resp, index, query, search_options #:nodoc:
           data = JSON.parse resp.body
           results = new(Array(data["results"]).map do |raw|
             Result.new raw
@@ -74,6 +74,8 @@ module Gcloud
             @token = data["results"].last["nextPageToken"]
             @matched_count = data["matchedCount"]
             @index = index
+            @query = query
+            @search_options = search_options
           end
           results
         rescue JSON::ParserError
