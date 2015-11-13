@@ -367,22 +367,27 @@ describe Gcloud::Search::Index, :mock_search do
     results.size.must_equal 3
   end
 
-  it "paginates search results" do
+  it "paginates search results with same search arguments" do
+    scorer = :generic
     mock_connection.get "/v1/projects/#{project}/indexes/#{index.index_id}/search" do |env|
+      env.params["query"].must_equal query
+      env.params["scorer"].must_equal scorer.to_s
       env.params.wont_include "pageToken"
       [200, {"Content-Type"=>"application/json"}, search_results_json(3, "next_page_token")]
     end
     mock_connection.get "/v1/projects/#{project}/indexes/#{index.index_id}/search" do |env|
-      env.params.must_include "pageToken"
+      env.params["query"].must_equal query
+      env.params["scorer"].must_equal scorer.to_s
       env.params["pageToken"].must_equal "next_page_token"
       [200, {"Content-Type"=>"application/json"}, search_results_json(2)]
     end
 
-    results = index.search query
+    results = index.search query, scorer: scorer
     results.count.must_equal 3
     results.token.must_equal "next_page_token"
+    results.next?.must_equal true
 
-    search_results_2 = index.search nil, token: results.token
+    search_results_2 = results.next
     search_results_2.count.must_equal 2
     search_results_2.token.must_be :nil?
   end
