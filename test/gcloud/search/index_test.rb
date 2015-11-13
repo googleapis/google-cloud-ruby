@@ -280,7 +280,7 @@ describe Gcloud::Search::Index, :mock_search do
     results = index.search query
     results.size.must_equal 3
     results.matched_count.must_equal 3
-    results.each do |result| 
+    results.each do |result|
       result.must_be_kind_of Gcloud::Search::Result
       result.doc_id.wont_be :nil?
       result.token.must_equal search_token
