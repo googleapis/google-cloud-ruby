@@ -39,6 +39,10 @@ module Gcloud
         super from_raw(raw)
       end
 
+      def []= k, v
+        super k, from_native_values(v).first
+      end
+
       def to_raw
         hsh = {}
         each_pair do |k, v|
@@ -48,6 +52,23 @@ module Gcloud
       end
 
       protected
+
+      def from_native_values native_values
+        values = []
+        native_values = [native_values] unless native_values.is_a?(Array)
+        native_values.each do |v|
+          values << if v.is_a?(Hash) && v[:latitude] && v[:longitude]
+                      GeoValue.new values, v
+                    elsif v.is_a?(Time) || v.respond_to?(:rfc3339)
+                      TimestampValue.new values, v
+                    elsif v.is_a? Numeric
+                      NumberValue.new values, v
+                    else
+                      StringValue.new values, v.to_s
+                    end
+        end
+        values
+      end
 
       def from_raw raw
         hsh = {}
@@ -103,7 +124,7 @@ module Gcloud
 
       def to_raw_geo v
         {
-          "geoValue" => "#{v.latitude}, #{v.longitude}"
+          "geoValue" => v.to_s
         }
       end
 
@@ -128,16 +149,25 @@ module Gcloud
       attr_reader :latitude, :longitude, :values, :type
 
       def initialize values, v
-        latlon = v.split(",").map(&:strip)
-        fail "Invalid geo string" unless latlon.size == 2
-        @latitude = latlon[0].to_f
-        @longitude = latlon[1].to_f
+        if v.is_a?(Hash) && v[:latitude] && v[:longitude]
+          @latitude = v[:latitude].to_f
+          @longitude = v[:longitude].to_f
+        elsif v.is_a? String
+          latlon = v.split(",").map(&:strip)
+          fail "Invalid geo string" unless latlon.size == 2
+          @latitude = latlon[0].to_f
+          @longitude = latlon[1].to_f
+        end
         @values = values
         @type = :geo
       end
 
+      def to_s
+        "#{latitude}, #{longitude}"
+      end
+
       def inspect
-        "GeoValue(#{latitude},#{longitude})"
+        "GeoValue(#{self})"
       end
     end
 
@@ -158,7 +188,7 @@ module Gcloud
     class StringValue < DelegateClass(::String)
       attr_reader :values, :type, :lang
 
-      def initialize values, v, type, lang
+      def initialize values, v, type = :default, lang = nil
         super v
         @values = values
         @type = type
