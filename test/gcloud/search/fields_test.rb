@@ -19,13 +19,47 @@ require "helper"
 # cannot have multiple Timestamp or number values.
 describe Gcloud::Search::Fields, :mock_search do
 
-  let(:doc_id) { "my-doc" }
-  let(:doc_rank) { 123456 }
   let(:fields_hash) { random_fields_hash }
   let(:fields) { Gcloud::Search::Fields.new fields_hash }
 
-  it "exists" do
-    fields.must_be_kind_of Hash
+  it "sets a number field from float" do
+    fields["rating"] = 4.5
+
+    field = fields["rating"]
+    field.must_be_kind_of Numeric
+    field.must_equal 4.5
+    field.type.must_equal :number
+  end
+
+  it "sets a timestamp field from DateTime" do
+    fields["posted_at"] = DateTime.new 2001, 2, 3, 4, 5, 6, '+7'
+
+    field = fields["posted_at"]
+    field.must_be_kind_of DateTime
+    field.to_s.must_equal "2001-02-03T04:05:06+07:00"
+    field.type.must_equal :timestamp
+  end
+
+  it "sets a geo field from Hash" do
+    latlon = { latitude: 40.58, longitude: "-111.65" }
+    fields["destination"] = latlon
+
+    field = fields["destination"]
+    field.must_be_kind_of Gcloud::Search::GeoValue
+    field.latitude.must_equal 40.58
+    field.longitude.must_equal -111.65
+    field.to_s.must_equal "40.58, -111.65"
+    field.type.must_equal :geo
+  end
+
+  it "sets a string default field" do
+    fields["serial_number"] = "abc123"
+
+    field = fields["serial_number"]
+    field.must_be_kind_of String
+    field.must_equal "abc123"
+    field.type.must_equal :default
+    field.lang.must_be :nil?
   end
 
   it "returns its rest api representation" do
@@ -35,23 +69,23 @@ describe Gcloud::Search::Fields, :mock_search do
   it "returns a number field" do
     field = fields["price"]
     field.must_be_kind_of Numeric
-    field.type.must_equal :number
     field.must_equal 24.95
+    field.type.must_equal :number
   end
 
   it "returns a timestamp field" do
     field = fields["since"]
     field.must_be_kind_of DateTime
-    field.type.must_equal :timestamp
     field.to_s.must_equal "2015-10-02T15:00:00+00:00"
+    field.type.must_equal :timestamp
   end
 
   it "returns a geoValue field" do
     field = fields["location"]
     field.must_be_kind_of Gcloud::Search::GeoValue
-    field.type.must_equal :geo
     field.latitude.must_equal -33.857
     field.longitude.must_equal 151.215
+    field.type.must_equal :geo
   end
 
   it "returns a string field with lang and type" do
