@@ -57,6 +57,55 @@ module Gcloud
         )
       end
 
+      def delete_index index_id
+        @client.execute(
+          api_method: @search.indexes.delete,
+          parameters: { projectId: @project,
+                        indexId: index_id }
+        )
+      end
+
+      def get_doc index_id, doc_id
+        @client.execute(
+          api_method: @search.documents.get,
+          parameters: { projectId: @project,
+                        indexId: index_id,
+                        docId: doc_id }
+        )
+      end
+
+      def list_docs index_id, options = {}
+        params = { projectId: @project,
+                   indexId: index_id,
+                   view: "FULL",
+                   pageSize: options[:max],
+                   pageToken: options[:token]
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @search.documents.list,
+          parameters: params
+        )
+      end
+
+      def create_doc index_id, document_hash
+        @client.execute(
+          api_method: @search.documents.create,
+          parameters: { projectId: @project,
+                        indexId: index_id },
+          body_object: document_hash
+        )
+      end
+
+      def delete_doc index_id, doc_id
+        @client.execute(
+          api_method: @search.documents.delete,
+          parameters: { projectId: @project,
+                        indexId: index_id,
+                        docId: doc_id }
+        )
+      end
+
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
       end

@@ -85,11 +85,11 @@ module Gcloud
         end
 
         def delete
-          api_method :delete, "/#{@resource_id_param}"
+          api_method :delete, "/{docId}"
         end
 
         def get
-          api_method :get, "/#{@resource_id_param}"
+          api_method :get, "/{docId}"
         end
 
         def list
@@ -110,18 +110,25 @@ module Gcloud
       end
 
       def run method, uri, options = {}
+        fix_serialization! options
         if authorization.nil?
           @connection.send method do |req|
             req.url uri
             req.params = options[:parameters] if options[:parameters]
-            req.body = options[:body_object] if options[:body_object]
+            req.body = options[:body] if options[:body]
           end
         else
-          # TODO: Support POST, DELETE
+          options[:method] = method
           options[:uri] = uri
           options[:connection] = @connection
           authorization.fetch_protected_resource options
         end
+      end
+
+      def fix_serialization! options
+        return unless options[:body_object]
+        options[:headers] = { "Content-Type" => "application/json" }
+        options[:body] = options.delete(:body_object).to_json
       end
     end
   end

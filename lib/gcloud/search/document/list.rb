@@ -15,9 +15,9 @@
 
 module Gcloud
   module Search
-    class Index
+    class Document
       ##
-      # Index::List is a special case Array with additional values.
+      # Document::List is a special case Array with additional values.
       class List < DelegateClass(::Array)
         ##
         # If not empty, indicates that there are more records that match
@@ -25,54 +25,49 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Index::List with an array of Index instances.
+        # Create a new Document::List with an array of Document instances.
         def initialize arr = []
           super arr
         end
 
         ##
-        # Whether there a next page of indexes.
+        # Whether there a next page of documents.
         def next?
           !token.nil?
         end
 
         ##
-        # Retrieve the next page of indexes.
+        # Retrieve the next page of documents.
         def next
           return nil unless next?
-          ensure_connection!
-          resp = @connection.list_indexes token: token
-          if resp.success?
-            Index::List.from_response resp, @connection
-          else
-            fail ApiError.from_response(resp)
-          end
+          ensure_index!
+          @index.documents token: token
         end
 
         ##
-        # Retrieves all indexes by repeatedly loading pages until #next?
+        # Retrieves all documents by repeatedly loading pages until #next?
         # returns false. Returns the list instance for method chaining.
         def all
           while next?
-            next_indexes = self.next
-            push(*next_indexes)
-            self.token = next_indexes.token
+            next_documents = self.next
+            push(*next_documents)
+            self.token = next_documents.token
           end
           self
         end
 
         ##
-        # New Indexs::List from a response object.
-        def self.from_response resp, conn #:nodoc:
+        # New Documents::List from a response object.
+        def self.from_response resp, index #:nodoc:
           data = JSON.parse resp.body
-          indexes = new(Array(data["indexes"]).map do |raw_index|
-            Index.from_raw raw_index, conn
+          documents = new(Array(data["documents"]).map do |doc_hash|
+            Document.from_hash doc_hash
           end)
-          indexes.instance_eval do
+          documents.instance_eval do
             @token = data["nextPageToken"]
-            @connection = conn
+            @index = index
           end
-          indexes
+          documents
         rescue JSON::ParserError
           raise ApiError.from_response(resp)
         end
@@ -81,8 +76,8 @@ module Gcloud
 
         ##
         # Raise an error unless an active connection is available.
-        def ensure_connection!
-          fail "Must have active connection" unless @connection
+        def ensure_index!
+          fail "Must have active connection" unless @index
         end
       end
     end
