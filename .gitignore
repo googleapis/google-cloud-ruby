@@ -4,6 +4,9 @@ coverage
 doc
 pkg
 
+# Ignore vagrant directory
+.vagrant
+
 # directories left by gh-pages
 _site
 html
