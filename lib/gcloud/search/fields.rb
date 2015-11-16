@@ -13,12 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "gcloud/gce"
-require "gcloud/search/connection"
-require "gcloud/search/credentials"
-require "gcloud/search/index"
-require "gcloud/search/errors"
-
 module Gcloud
   module Search
     # rubocop:disable all
@@ -34,13 +28,21 @@ module Gcloud
     # For more information see {Documents and
     # fields}[https://cloud.google.com/search/documents_indexes#documents_and_fields].
     #
-    class Fields < DelegateClass(::Hash)
+    class Fields #:nodoc:
       def initialize raw = {}
-        super from_raw(raw)
+        @hash = from_raw(raw)
       end
 
       def []= k, v
-        super k, from_native_values(v).first
+        @hash[k] = from_native_values(v).first
+      end
+
+      def [] k
+        @hash[k]
+      end
+
+      def each_pair &block
+        @hash.each_pair &block
       end
 
       def to_raw

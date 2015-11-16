@@ -14,6 +14,7 @@
 # limitations under the License.
 
 require "gcloud/search/result/list"
+require "gcloud/search/fields"
 
 module Gcloud
   module Search
@@ -42,6 +43,15 @@ module Gcloud
       # The token for the next page of results.
       def token
         @raw["nextPageToken"]
+      end
+
+      def fields
+        @raw["fields"]
+      end
+
+      def [] key
+        @fields ||= Fields.new fields
+        @fields[key]
       end
 
       ##
