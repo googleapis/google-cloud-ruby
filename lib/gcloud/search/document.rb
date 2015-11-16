@@ -14,6 +14,7 @@
 # limitations under the License.
 
 require "gcloud/search/document/list"
+require "gcloud/search/fields"
 
 module Gcloud
   module Search
@@ -30,6 +31,7 @@ module Gcloud
       #
       def initialize #:nodoc:
         @raw = {}
+        @fields = Fields.new
       end
 
       ##
@@ -104,13 +106,21 @@ module Gcloud
       # empty string. A field can have multiple values with same or different
       # types, however, it cannot have multiple Timestamp or number values.
       def fields
-        @raw["fields"]
+        @fields.to_raw
       end
 
       ##
       # Sets the fields in the document.
       def fields= new_fields
-        @raw["fields"] = new_fields
+        @fields = Fields.new new_fields
+      end
+
+      def [] key
+        @fields[key]
+      end
+
+      def []= key, value
+        @fields[key] = value
       end
 
       ##
@@ -118,13 +128,16 @@ module Gcloud
       def self.from_hash hash #:nodoc:
         new.tap do |d|
           d.raw = hash
+          d.instance_variable_set "@fields", Fields.new(hash["fields"])
         end
       end
 
       ##
       # Returns the Document data as a hash
       def to_hash #:nodoc:
-        @raw.dup
+        hash = @raw.dup
+        hash["fields"] = @fields.to_raw
+        hash
       end
     end
   end
