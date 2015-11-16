@@ -17,24 +17,29 @@ require "helper"
 ##
 # A field can have multiple values with same or different types; however, it
 # cannot have multiple Timestamp or number values.
-describe Gcloud::Search::Fields, :mock_search do
+describe Gcloud::Search::Document, :fields, :mock_search do
 
-  let(:fields_hash) { random_fields_hash }
-  let(:fields) { Gcloud::Search::Fields.new fields_hash }
+  let(:index_id) { "my-index" }
+  let(:index_hash) { { "indexId" => index_id, "projectId" => project } }
+  let(:index) { Gcloud::Search::Index.from_raw index_hash, search.connection }
+  let(:doc_id) { "my-doc" }
+  let(:doc_rank) { 123456 }
+  let(:doc_hash) { {"docId" => doc_id, "rank" => doc_rank, "fields" => random_fields_hash } }
+  let(:document) { Gcloud::Search::Document.from_hash doc_hash }
 
   it "sets a number field from float" do
-    fields["rating"] = 4.5
+    document["rating"] = 4.5
 
-    field = fields["rating"]
+    field = document["rating"]
     field.must_be_kind_of Numeric
     field.must_equal 4.5
     field.type.must_equal :number
   end
 
   it "sets a timestamp field from DateTime" do
-    fields["posted_at"] = DateTime.new 2001, 2, 3, 4, 5, 6, '+7'
+    document["posted_at"] = DateTime.new 2001, 2, 3, 4, 5, 6, '+7'
 
-    field = fields["posted_at"]
+    field = document["posted_at"]
     field.must_be_kind_of DateTime
     field.to_s.must_equal "2001-02-03T04:05:06+07:00"
     field.type.must_equal :timestamp
@@ -42,9 +47,9 @@ describe Gcloud::Search::Fields, :mock_search do
 
   it "sets a geo field from Hash" do
     latlon = { latitude: 40.58, longitude: "-111.65" }
-    fields["destination"] = latlon
+    document["destination"] = latlon
 
-    field = fields["destination"]
+    field = document["destination"]
     field.must_be_kind_of Gcloud::Search::GeoValue
     field.latitude.must_equal 40.58
     field.longitude.must_equal -111.65
@@ -53,9 +58,9 @@ describe Gcloud::Search::Fields, :mock_search do
   end
 
   it "sets a string default field" do
-    fields["serial_number"] = "abc123"
+    document["serial_number"] = "abc123"
 
-    field = fields["serial_number"]
+    field = document["serial_number"]
     field.must_be_kind_of String
     field.must_equal "abc123"
     field.type.must_equal :default
@@ -63,25 +68,25 @@ describe Gcloud::Search::Fields, :mock_search do
   end
 
   it "returns its rest api representation" do
-    fields.to_raw.must_equal fields_hash
+    document.fields.must_equal doc_hash["fields"]
   end
 
   it "returns a number field" do
-    field = fields["price"]
+    field = document["price"]
     field.must_be_kind_of Numeric
     field.must_equal 24.95
     field.type.must_equal :number
   end
 
   it "returns a timestamp field" do
-    field = fields["since"]
+    field = document["since"]
     field.must_be_kind_of DateTime
     field.to_s.must_equal "2015-10-02T15:00:00+00:00"
     field.type.must_equal :timestamp
   end
 
   it "returns a geoValue field" do
-    field = fields["location"]
+    field = document["location"]
     field.must_be_kind_of Gcloud::Search::GeoValue
     field.latitude.must_equal -33.857
     field.longitude.must_equal 151.215
@@ -89,7 +94,7 @@ describe Gcloud::Search::Fields, :mock_search do
   end
 
   it "returns a string field with lang and type" do
-    field = fields["body"]
+    field = document["body"]
     field.must_be_kind_of String
     field.must_equal "gcloud is a client library"
     field.type.must_equal :text
@@ -97,7 +102,7 @@ describe Gcloud::Search::Fields, :mock_search do
   end
 
   it "returns all values for a field with values" do
-    values = fields["body"].values
+    values = document["body"].values
     values.must_be_kind_of Array
     values[0].must_equal "gcloud is a client library"
     values[0].type.must_equal :text
