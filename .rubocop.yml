@@ -6,6 +6,7 @@ AllCops:
     - "rakelib/**/*"
     - "acceptance/**/*"
     - "test/**/*"
+    - "Vagrantfile"
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
