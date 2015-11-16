@@ -27,7 +27,10 @@ gem install bundler grpc
 SCRIPT
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "helderco/trusty64"
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.provider "vmware_fusion" do |v, override|
+    override.vm.box = "helderco/trusty64"
+  end
 
   config.ssh.forward_agent = true
 
