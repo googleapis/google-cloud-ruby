@@ -123,4 +123,9 @@ describe Gcloud::Search::Document, :fields, :mock_search do
     values[2].lang.must_equal "eo"
   end
 
+  it "deletes fields by key" do
+    document.fields.keys.must_include "price"
+    document.delete "price"
+    document.fields.keys.wont_include "price"
+  end
 end
