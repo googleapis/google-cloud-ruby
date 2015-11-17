@@ -91,7 +91,7 @@ module Gcloud
       end
 
       def [] k
-        @fields[k]
+        @fields[k].dup.freeze
       end
 
       def each_pair &block

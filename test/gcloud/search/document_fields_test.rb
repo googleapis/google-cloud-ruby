@@ -112,6 +112,7 @@ describe Gcloud::Search::Document, :fields, :mock_search do
   it "returns all values for a field with values" do
     values = document["body"]
     values.must_be_kind_of Array
+    values.count.must_equal 3
     values[0].value.must_equal "gcloud is a client library"
     values[0].type.must_equal :text
     values[0].lang.must_equal "en"
@@ -121,6 +122,16 @@ describe Gcloud::Search::Document, :fields, :mock_search do
     values[2].value.must_equal "<code>gcloud</code> estas kliento biblioteko"
     values[2].type.must_equal :html
     values[2].lang.must_equal "eo"
+  end
+
+  it "cannot manipulate field values directly" do
+    values = document["body"]
+    values.must_be_kind_of Array
+    values.count.must_equal 3
+    err = expect do
+      values << "adding a new 4th value to the array isn't allowed"
+    end.must_raise RuntimeError
+    err.message.must_equal "can't modify frozen Array"
   end
 
   it "deletes fields by key" do
