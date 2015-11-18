@@ -20,6 +20,11 @@ describe Gcloud::Search::Index, :mock_search do
   let(:index) { Gcloud::Search::Index.from_raw(index_hash, search.connection) }
   let(:query) { "dark stormy" }
   let(:search_token) { "search-token-123" }
+  let(:doc_id) { "doc-id" }
+  let(:document_hash) { random_doc_hash doc_id }
+  let(:document) { Gcloud::Search::Document.from_hash document_hash }
+  let(:new_document_hash) { random_doc_hash }
+  let(:new_document) { Gcloud::Search::Document.new }
 
   it "exists" do
     index.must_be_kind_of Gcloud::Search::Index
@@ -67,8 +72,6 @@ describe Gcloud::Search::Index, :mock_search do
   end
 
   it "gets a document" do
-    doc_id = "found_doc"
-
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents/#{doc_id}" do |env|
       [200, {"Content-Type"=>"application/json"},
        get_doc_json(doc_id)]
@@ -80,9 +83,6 @@ describe Gcloud::Search::Index, :mock_search do
   end
 
   it "gets a document when passed a document" do
-    doc_id = "found_doc"
-    document = Gcloud::Search::Document.from_hash random_doc_hash(doc_id)
-
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents/#{doc_id}" do |env|
       [200, {"Content-Type"=>"application/json"},
        get_doc_json(doc_id)]
@@ -94,8 +94,6 @@ describe Gcloud::Search::Index, :mock_search do
   end
 
   it "gets nil if a document is not found" do
-    doc_id = "not_found_doc"
-
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents/#{doc_id}" do |env|
       [404, {"Content-Type"=>"text/plain"},
        ""]
@@ -226,32 +224,44 @@ describe Gcloud::Search::Index, :mock_search do
   end
 
   it "saves a document" do
-    document = Gcloud::Search::Document.from_hash random_doc_hash
-    document.doc_id = nil
-    document.rank = nil
-
     mock_connection.post "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
       json = JSON.parse(env.body)
       json["doc_id"].must_be :nil?
       json["rank"].must_be :nil?
+      json["fields"].must_be :empty?
       [200, {"Content-Type" => "application/json"},
        random_doc_hash.to_json]
     end
 
-    new_doc = index.save document
+    new_doc = index.save new_document
     new_doc.doc_id.wont_be :nil?
     new_doc.rank.wont_be :nil?
     # The object passed in is also updated
-    document.doc_id.wont_be :nil?
-    document.rank.wont_be :nil?
+    new_document.doc_id.wont_be :nil?
+    new_document.rank.wont_be :nil?
     # The object passed in is the same as the object returned
-    new_doc.must_equal document
+    new_doc.must_equal new_document
+  end
+
+  it "saves a document with fields" do
+    mock_connection.post "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      json = JSON.parse(env.body)
+      json["fields"].must_equal document_hash["fields"]
+      [200, {"Content-Type" => "application/json"},
+       random_doc_hash.to_json]
+    end
+
+    new_document.add "price", 24.95
+    new_document.add "since", DateTime.new(2015, 10, 2, 15)
+    new_document.add "location", "-33.857, 151.215", type: :geo
+    new_document.add "body", "gcloud is a client library", type: :text, lang: "en"
+    new_document.add "body", "<code>gcloud</code> is a client library", type: :html, lang: "en"
+    new_document.add "body", "<code>gcloud</code> estas kliento biblioteko", type: :html, lang: "eo"
+
+    index.save new_document
   end
 
   it "removes a document from the index" do
-    doc_id = "document-to-be-deleted"
-    document = Gcloud::Search::Document.from_hash random_doc_hash(doc_id)
-
     mock_connection.delete "/v1/projects/#{project}/indexes/#{index_id}/documents/#{doc_id}" do |env|
       [200, {"Content-Type" => "text/plain"},
        ""]
@@ -261,8 +271,6 @@ describe Gcloud::Search::Index, :mock_search do
   end
 
   it "removes a document by doc_id" do
-    doc_id = "document-to-be-deleted"
-
     mock_connection.delete "/v1/projects/#{project}/indexes/#{index_id}/documents/#{doc_id}" do |env|
       [200, {"Content-Type" => "text/plain"},
        ""]

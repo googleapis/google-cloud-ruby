@@ -772,41 +772,58 @@ class MockSearch < Minitest::Spec
     @connection
   end
 
-  def random_doc_hash doc_id = nil, rank = nil
+  def random_doc_hash doc_id = nil, rank = nil, fields = nil
     doc_id ||= "rnd_doc_#{rand 999999}"
     rank ||= rand(99999999)
+    fields ||= random_fields_hash
     {
       "docId" => doc_id,
       "rank" => rank,
-      "fields" => {
-        "title" => {
-          "values" => [
-            {
-              "stringFormat" => "TEXT",
-              "lang" => "en",
-              "stringValue" => "Hello Gcloud!"
-            }
-          ]
-        },
-        "body" => {
-          "values" => [
-            {
-              "stringFormat" => "TEXT",
-              "lang" => "en",
-              "stringValue" => "gcloud is a client library for accessing Google Cloud Platform services that ..."
-            },
-            {
-              "stringFormat" => "HTML",
-              "lang" => "en",
-              "stringValue" => "<p><code>gcloud</code> is a client library for accessing Google Cloud Platform services that ...</p>"
-            },
-            {
-              "stringFormat" => "HTML",
-              "lang" => "eo",
-              "stringValue" => "<p><code>gcloud</code> estas kliento biblioteko por aliranta Google Nubo Platformo servoj kiu ...</p>"
-            }
-          ]
-        }
+      "fields" => fields
+    }
+  end
+
+  def random_fields_hash
+    {
+      "price" => {
+        "values" => [
+          {
+            "numberValue" => 24.95
+          }
+        ]
+      },
+      "since" => {
+        "values" => [
+          {
+            "timestampValue" => "2015-10-02T15:00:00+00:00"
+          }
+        ]
+      },
+      "location" => {
+        "values" => [
+          {
+            "geoValue" => "-33.857, 151.215"
+          }
+        ]
+      },
+      "body" => {
+        "values" => [
+          {
+            "stringFormat" => "TEXT",
+            "lang" => "en",
+            "stringValue" => "gcloud is a client library"
+          },
+          {
+            "stringFormat" => "HTML",
+            "lang" => "en",
+            "stringValue" => "<code>gcloud</code> is a client library"
+          },
+          {
+            "stringFormat" => "HTML",
+            "lang" => "eo",
+            "stringValue" => "<code>gcloud</code> estas kliento biblioteko"
+          }
+        ]
       }
     }
   end

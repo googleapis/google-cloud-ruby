@@ -18,7 +18,6 @@ require "gcloud/search/connection"
 require "gcloud/search/credentials"
 require "gcloud/search/index"
 require "gcloud/search/errors"
-require "gcloud/search/fields"
 
 module Gcloud
   module Search

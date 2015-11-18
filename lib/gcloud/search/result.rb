@@ -14,7 +14,7 @@
 # limitations under the License.
 
 require "gcloud/search/result/list"
-require "gcloud/search/fields"
+require "gcloud/search/connection"
 
 module Gcloud
   module Search
@@ -27,10 +27,15 @@ module Gcloud
       # The raw data object.
       attr_accessor :raw #:nodoc:
 
+      # The hash of fields in the result. Each key is a field name and each
+      # value is a list of FieldValue objects.
+      attr_accessor :fields
+
       ##
       # Creates a new Result instance.
       def initialize #:nodoc:
-        @raw = {}
+        @fields = {}
+        @raw = { "fields" => @fields }
       end
 
       ##
@@ -45,13 +50,24 @@ module Gcloud
         @raw["nextPageToken"]
       end
 
-      def fields
-        @raw["fields"]
+      def [] k
+        @fields[k]
       end
 
-      def [] key
-        @fields ||= Fields.new fields
-        @fields[key]
+      def delete key, &block
+        @fields.delete key, &block
+      end
+
+      def each &block
+        @fields.each(&block)
+      end
+
+      def each_pair &block
+        @fields.each_pair(&block)
+      end
+
+      def field? k
+        @fields.key? k
       end
 
       ##
@@ -68,8 +84,10 @@ module Gcloud
       ##
       # New Result from a raw data object.
       def self.from_hash hash #:nodoc:
+        hash["fields"] = Connection.from_raw_fields hash["fields"]
         new.tap do |d|
           d.raw = hash
+          d.fields = hash["fields"]
         end
       end
 
