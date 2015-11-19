@@ -14,7 +14,7 @@
 # limitations under the License.
 
 require "gcloud/search/document/list"
-require "gcloud/search/fields"
+require "gcloud/search/connection"
 
 module Gcloud
   module Search
@@ -27,11 +27,16 @@ module Gcloud
       attr_accessor :raw #:nodoc:
 
       ##
+      # The hash of fields in the document. Each key is a field name and each
+      # value is a list of FieldValue objects.
+      attr_accessor :fields
+
+      ##
       # Creates a new Document instance.
       #
       def initialize #:nodoc:
-        @raw = {}
-        @fields = Fields.new
+        @fields = {}
+        @raw = { "fields" => @fields }
       end
 
       ##
@@ -73,71 +78,44 @@ module Gcloud
         @raw["rank"] = new_rank
       end
 
-      ##
-      # The fields in the document.
-      #
-      # The fields is a Hash that must conform to the following structure:
-      #
-      #   {
-      #     "title" => {
-      #       "values" => [
-      #         {
-      #           "stringFormat" => "TEXT",
-      #           "lang" => "en",
-      #           "stringValue" => "Hello World!"
-      #         }
-      #       ]
-      #     },
-      #     "body" => {
-      #       "values" => [
-      #         {
-      #           "stringFormat" => "HTML",
-      #           "lang" => "en",
-      #           "stringValue" => "<p>Greetings...</p>"
-      #         }
-      #       ]
-      #     }
-      #   }
-      #
-      # Each field has a name and a list of values. The field name is unique to
-      # a document and is case sensitive. The name can only contain ASCII
-      # characters. It must start with a letter and can contain letters, digits,
-      # or underscore. It cannot be longer than 500 characters and cannot be the
-      # empty string. A field can have multiple values with same or different
-      # types, however, it cannot have multiple Timestamp or number values.
-      def fields
-        @fields.to_raw
+      def add name, value, options = {}
+        @fields[name] ||= []
+        @fields[name] << FieldValue.new(name, value, options)
       end
 
-      ##
-      # Sets the fields in the document.
-      def fields= new_fields
-        @fields = Fields.new new_fields
+      def []= k, v
+        v = Array v
+        @fields[k] = v.map do |value|
+          value.is_a?(FieldValue) ? value : FieldValue.new(k, value)
+        end
       end
 
-      def [] key
-        @fields[key]
+      def [] k
+        @fields[k]
       end
 
-      def []= key, value
-        @fields[key] = value
+      def delete key, &block
+        @fields.delete key, &block
+      end
+
+      def each_pair &block
+        @fields.each_pair(&block)
       end
 
       ##
       # New Document from a raw data object.
       def self.from_hash hash #:nodoc:
+        hash["fields"] = Connection.from_raw_fields hash["fields"]
         new.tap do |d|
           d.raw = hash
-          d.instance_variable_set "@fields", Fields.new(hash["fields"])
+          d.fields = hash["fields"]
         end
       end
 
       ##
       # Returns the Document data as a hash
       def to_hash #:nodoc:
-        hash = @raw.dup
-        hash["fields"] = @fields.to_raw
-        hash
+        @raw.dup
       end
     end
   end
