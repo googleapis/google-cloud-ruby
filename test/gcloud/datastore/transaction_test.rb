@@ -93,8 +93,6 @@ describe Gcloud::Datastore::Transaction do
     end
 
     it "commit will raise if transaction is not open" do
-      transaction.connection.expect :begin_transaction, begin_transaction_response
-
       transaction.id.wont_be :nil?
       transaction.reset!
       transaction.id.must_be :nil?
@@ -106,8 +104,6 @@ describe Gcloud::Datastore::Transaction do
     end
 
     it "transaction will raise if transaction is not open" do
-      transaction.connection.expect :begin_transaction, begin_transaction_response
-
       transaction.id.wont_be :nil?
       transaction.reset!
       transaction.id.must_be :nil?
