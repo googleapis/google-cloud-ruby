@@ -94,6 +94,10 @@ module Gcloud
         @fields[k]
       end
 
+      def delete key, &block
+        @fields.delete key, &block
+      end
+
       def each_pair &block
         @fields.each_pair(&block)
       end
