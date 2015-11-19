@@ -54,10 +54,6 @@ module Gcloud
         @fields[k]
       end
 
-      def delete key, &block
-        @fields.delete key, &block
-      end
-
       def each &block
         @fields.each(&block)
       end
