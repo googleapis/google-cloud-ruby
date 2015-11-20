@@ -55,7 +55,7 @@ module Gcloud
       end
 
       def add value, options = {}
-        @values << FieldValue.new(@name, value, options)
+        @values << FieldValue.new(value, options.merge(name: @name))
       end
 
       ##
@@ -82,7 +82,7 @@ module Gcloud
       end
 
       def self.from_raw name, values #:nodoc:
-        field_values = values.map { |value| FieldValue.from_raw name, value }
+        field_values = values.map { |value| FieldValue.from_raw value, name }
         FieldValues.new name, field_values
       end
 
