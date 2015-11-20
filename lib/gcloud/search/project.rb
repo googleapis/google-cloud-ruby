@@ -112,8 +112,6 @@ module Gcloud
       #
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:all]</code>::
-      #   Whether to list all indexes. The default is +false+. (+Boolean+)
       # <code>options[:prefix]</code>::
       #   The prefix of the index name. It is used to list all indexes with
       #   names that have this prefix. (+String+)
