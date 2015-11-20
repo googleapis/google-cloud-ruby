@@ -57,6 +57,13 @@ module Gcloud
       end
       alias_method :get, :find
 
+      def document doc_id = nil, rank = nil
+        Document.new.tap do |d|
+          d.doc_id = doc_id
+          d.rank = rank
+        end
+      end
+
       def documents options = {}
         ensure_connection!
         resp = connection.list_docs index_id, options
