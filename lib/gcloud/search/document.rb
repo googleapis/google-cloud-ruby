@@ -15,6 +15,7 @@
 
 require "gcloud/search/document/list"
 require "gcloud/search/connection"
+require "gcloud/search/fields"
 
 module Gcloud
   module Search
@@ -23,20 +24,11 @@ module Gcloud
     #
     class Document
       ##
-      # The raw data object.
-      attr_accessor :raw #:nodoc:
-
-      ##
-      # The hash of fields in the document. Each key is a field name and each
-      # value is a list of FieldValue objects.
-      attr_accessor :fields
-
-      ##
       # Creates a new Document instance.
       #
       def initialize #:nodoc:
-        @fields = {}
-        @raw = { "fields" => @fields }
+        @fields = Fields.new
+        @raw = {}
       end
 
       ##
@@ -78,44 +70,65 @@ module Gcloud
         @raw["rank"] = new_rank
       end
 
-      def add name, value, options = {}
-        @fields[name] ||= []
-        @fields[name] << FieldValue.new(name, value, options)
-      end
-
-      def []= k, v
-        v = Array v
-        @fields[k] = v.map do |value|
-          value.is_a?(FieldValue) ? value : FieldValue.new(k, value)
-        end
-      end
-
       def [] k
         @fields[k]
+      end
+
+      # rubocop:disable Style/TrivialAccessors
+      # Disable rubocop because we want .fields to be listed with the other
+      # methods on the class.
+
+      ##
+      # The fields in the document. Each key is a field name and each
+      # value is a FieldValues. See Fields.
+      def fields
+        @fields
+      end
+
+      # rubocop:enable Style/TrivialAccessors
+
+      def add name, value, options = {}
+        @fields[name].add value, options
       end
 
       def delete key, &block
         @fields.delete key, &block
       end
 
+      def each &block
+        @fields.each(&block)
+      end
+
       def each_pair &block
         @fields.each_pair(&block)
+      end
+
+      def keys
+        @fields.keys
+      end
+
+      def inspect #:nodoc:
+        insp_rank = ""
+        insp_rank = ", rank: #{rank}" if rank
+        insp_fields = ", fields: (#{fields.keys.join ', '})"
+        "#{self.class}(doc_id: #{doc_id.inspect}#{insp_rank}#{insp_fields})"
       end
 
       ##
       # New Document from a raw data object.
       def self.from_hash hash #:nodoc:
-        hash["fields"] = Connection.from_raw_fields hash["fields"]
-        new.tap do |d|
-          d.raw = hash
-          d.fields = hash["fields"]
-        end
+        doc = new
+        doc.instance_variable_set "@raw", hash
+        doc.instance_variable_set "@fields", Fields.from_raw(hash["fields"])
+        doc
       end
 
       ##
       # Returns the Document data as a hash
       def to_hash #:nodoc:
-        @raw.dup
+        hash = @raw.dup
+        hash["fields"] = @fields.to_raw
+        hash
       end
     end
   end

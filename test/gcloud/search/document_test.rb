@@ -27,7 +27,7 @@ describe Gcloud::Search::Document, :mock_search do
     document.must_be_kind_of Gcloud::Search::Document
     document.doc_id.must_equal doc_id
     document.rank.must_equal doc_rank
-    document.fields.must_equal doc_hash["fields"]
+    document.to_hash["fields"].must_equal doc_hash["fields"]
   end
 
   it "can set new attribute values" do
@@ -37,12 +37,22 @@ describe Gcloud::Search::Document, :mock_search do
                                                     "lang" => "en",
                                                     "stringValue" => "Hello Gcloud!" } ] } }
 
-    document.doc_id = new_doc_id
-    document.rank = new_doc_rank
-    document.fields = new_doc_fields
+    new_doc = Gcloud::Search::Document.new
+    new_doc.doc_id = new_doc_id
+    new_doc.rank = new_doc_rank
+    new_doc.fields["title"].add "Hello Gcloud!", type: :text, lang: "en"
 
-    document.doc_id.must_equal new_doc_id
-    document.rank.must_equal new_doc_rank
-    document.fields.must_equal new_doc_fields
+    new_doc.doc_id.must_equal new_doc_id
+    new_doc.rank.must_equal new_doc_rank
+    new_doc.to_hash["fields"].must_equal new_doc_fields
+  end
+
+  it "can be created without fields" do
+    incomplete_hash = { "docId" => "incomplete-doc" }
+    incomplete_doc = Gcloud::Search::Document.from_hash incomplete_hash
+    incomplete_doc.must_be_kind_of Gcloud::Search::Document
+    incomplete_doc.doc_id.must_equal "incomplete-doc"
+    incomplete_doc.rank.must_equal nil
+    incomplete_doc.fields.count.must_equal 0
   end
 end

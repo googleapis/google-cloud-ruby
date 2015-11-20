@@ -44,7 +44,7 @@ module Gcloud
         @raw["indexId"]
       end
 
-      def document doc_id
+      def find doc_id
         # Get the id if passes a Document object
         doc_id = doc_id.doc_id if doc_id.respond_to? :doc_id
         ensure_connection!
@@ -54,6 +54,14 @@ module Gcloud
         fail ApiError.from_response(resp)
       rescue JSON::ParserError
         raise ApiError.from_response(resp)
+      end
+      alias_method :get, :find
+
+      def document doc_id = nil, rank = nil
+        Document.new.tap do |d|
+          d.doc_id = doc_id
+          d.rank = rank
+        end
       end
 
       def documents options = {}
@@ -67,7 +75,8 @@ module Gcloud
         ensure_connection!
         resp = connection.create_doc index_id, document.to_hash
         if resp.success?
-          document.raw.merge! JSON.parse(resp.body)
+          raw = document.instance_variable_get "@raw"
+          raw.merge! JSON.parse(resp.body)
           return document
         end
         fail ApiError.from_response(resp)

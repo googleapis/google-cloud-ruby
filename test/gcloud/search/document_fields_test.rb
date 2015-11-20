@@ -31,7 +31,7 @@ describe Gcloud::Search::Document, :fields, :mock_search do
     document.add "rating", 4.5
 
     fields = document["rating"]
-    fields.size.must_equal 1
+    fields.count.must_equal 1
     field = fields.first
     field.name.must_equal "rating"
     field.value.must_equal 4.5
@@ -66,7 +66,9 @@ describe Gcloud::Search::Document, :fields, :mock_search do
   end
 
   it "sets a new array of values in a field" do
-    document["body"] = ["new body 1", Gcloud::Search::FieldValue.new("body", "new body 2", type: :html, lang: "en")]
+    document.delete "body"
+    document.add "body", "new body 1"
+    document.add "body", "new body 2", type: :html, lang: "en"
 
     fields = document["body"]
     fields[0].name.must_equal "body"
@@ -111,7 +113,8 @@ describe Gcloud::Search::Document, :fields, :mock_search do
 
   it "returns all values for a field with values" do
     values = document["body"]
-    values.must_be_kind_of Array
+    values.must_be_kind_of Gcloud::Search::FieldValues
+    values.count.must_equal 3
     values[0].value.must_equal "gcloud is a client library"
     values[0].type.must_equal :text
     values[0].lang.must_equal "en"
@@ -123,4 +126,180 @@ describe Gcloud::Search::Document, :fields, :mock_search do
     values[2].lang.must_equal "eo"
   end
 
+  it "cannot manipulate field values directly" do
+    values = document["body"]
+    values.must_be_kind_of Gcloud::Search::FieldValues
+    values.count.must_equal 3
+    expect do
+      values << "adding a new 4th value to the array isn't allowed"
+    end.must_raise NoMethodError
+  end
+
+  it "deletes field by key" do
+    document.keys.must_include "price"
+    document.delete "price"
+    document.keys.wont_include "price"
+  end
+
+  it "deletes field by key on fields" do
+    document.fields.keys.must_include "price"
+    document.fields.delete "price"
+    document.fields.keys.wont_include "price"
+  end
+
+  it "deletes field value by field value object" do
+    document["body"].count.must_equal 3
+    document["body"].first.value.must_equal "gcloud is a client library"
+    document["body"].delete document["body"].first.value
+    document["body"].count.must_equal 2
+  end
+
+  it "deletes field value by field value object on fields" do
+    document.fields["body"].count.must_equal 3
+    document.fields["body"].first.value.must_equal "gcloud is a client library"
+    document.fields["body"].delete document.fields["body"].first.value
+    document.fields["body"].count.must_equal 2
+  end
+
+  it "deletes field value by raw value" do
+    document["body"].count.must_equal 3
+    document["body"].first.value.must_equal "gcloud is a client library"
+    document["body"].delete "gcloud is a client library"
+    document["body"].count.must_equal 2
+  end
+
+  it "deletes field value by raw value on fields" do
+    document.fields["body"].count.must_equal 3
+    document.fields["body"].first.value.must_equal "gcloud is a client library"
+    document.fields["body"].delete "gcloud is a client library"
+    document.fields["body"].count.must_equal 2
+  end
+
+  it "deletes field value by index" do
+    document["body"].count.must_equal 3
+    document["body"].delete_at 0
+    document["body"].count.must_equal 2
+  end
+
+  it "deletes field value by index on fields" do
+    document.fields["body"].count.must_equal 3
+    document.fields["body"].delete_at 0
+    document.fields["body"].count.must_equal 2
+  end
+
+  it "identifies the field names with keys" do
+    document.keys.must_include "body"
+    document.keys.must_include "location"
+    document.keys.must_include "price"
+    document.keys.must_include "since"
+  end
+
+  it "empty fields are not returned with keys" do
+    document["rando_field"].add "rando value"
+    document["rando_field"].delete_at 0
+
+    document.keys.wont_include "rando_field"
+  end
+
+  it "identifies the field names with fields.keys" do
+    document.fields.keys.must_include "body"
+    document.fields.keys.must_include "location"
+    document.fields.keys.must_include "price"
+    document.fields.keys.must_include "since"
+  end
+
+  it "empty fields are not returned with fields.keys" do
+    document["rando_field"].add "rando value"
+    document["rando_field"].delete_at 0
+
+    document.fields.keys.wont_include "rando_field"
+  end
+
+  it "iterates through all the fields with each" do
+    all_keys = []
+    document.each do |name, values|
+      all_keys << name
+    end
+    all_keys.must_include "body"
+    all_keys.must_include "location"
+    all_keys.must_include "price"
+    all_keys.must_include "since"
+  end
+
+  it "empty fields are not iterated on with each" do
+    document["rando_field"].add "rando value"
+    document["rando_field"].delete_at 0
+
+    all_keys = []
+    document.each do |name, values|
+      all_keys << name
+    end
+    all_keys.wont_include "rando_field"
+  end
+
+  it "iterates through all the fields with fields.each" do
+    all_keys = []
+    document.fields.each do |name, values|
+      all_keys << name
+    end
+    all_keys.must_include "body"
+    all_keys.must_include "location"
+    all_keys.must_include "price"
+    all_keys.must_include "since"
+  end
+
+  it "empty fields are not iterated on with fields.each" do
+    document["rando_field"].add "rando value"
+    document["rando_field"].delete_at 0
+
+    all_keys = []
+    document.fields.each do |name, values|
+      all_keys << name
+    end
+    all_keys.wont_include "rando_field"
+  end
+
+  it "iterates through all the fields with each_pair" do
+    all_keys = []
+    document.each_pair do |name, values|
+      all_keys << name
+    end
+    all_keys.must_include "body"
+    all_keys.must_include "location"
+    all_keys.must_include "price"
+    all_keys.must_include "since"
+  end
+
+  it "empty fields are not iterated on with each_pair" do
+    document["rando_field"].add "rando value"
+    document["rando_field"].delete_at 0
+
+    all_keys = []
+    document.each_pair do |name, values|
+      all_keys << name
+    end
+    all_keys.wont_include "rando_field"
+  end
+
+  it "iterates through all the fields with fields.each_pair" do
+    all_keys = []
+    document.fields.each_pair do |name, values|
+      all_keys << name
+    end
+    all_keys.must_include "body"
+    all_keys.must_include "location"
+    all_keys.must_include "price"
+    all_keys.must_include "since"
+  end
+
+  it "empty fields are not iterated on with fields.each_pair" do
+    document["rando_field"].add "rando value"
+    document["rando_field"].delete_at 0
+
+    all_keys = []
+    document.fields.each_pair do |name, values|
+      all_keys << name
+    end
+    all_keys.wont_include "rando_field"
+  end
 end

@@ -59,7 +59,7 @@ describe Gcloud::Search::Document, :fields, :mock_search do
 
   it "returns all values for a field" do
     values = result["body"]
-    values.must_be_kind_of Array
+    values.must_be_kind_of Gcloud::Search::FieldValues
     values[0].name.must_equal "body"
     values[0].value.must_equal "gcloud is a client library"
     values[0].type.must_equal :text

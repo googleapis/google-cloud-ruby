@@ -71,36 +71,74 @@ describe Gcloud::Search::Index, :mock_search do
     expect { index.delete }.must_raise
   end
 
-  it "gets a document" do
+  it "finds a document" do
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents/#{doc_id}" do |env|
       [200, {"Content-Type"=>"application/json"},
        get_doc_json(doc_id)]
     end
 
-    doc = index.document doc_id
+    doc = index.find doc_id
     doc.must_be_kind_of Gcloud::Search::Document
     doc.doc_id.must_equal doc_id
   end
 
-  it "gets a document when passed a document" do
+  it "finds a document with the get alias" do
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents/#{doc_id}" do |env|
       [200, {"Content-Type"=>"application/json"},
        get_doc_json(doc_id)]
     end
 
-    gotten_doc = index.document document
+    doc = index.get doc_id
+    doc.must_be_kind_of Gcloud::Search::Document
+    doc.doc_id.must_equal doc_id
+  end
+
+  it "finds a document when passed a document" do
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents/#{doc_id}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       get_doc_json(doc_id)]
+    end
+
+    gotten_doc = index.find document
     gotten_doc.must_be_kind_of Gcloud::Search::Document
     gotten_doc.doc_id.must_equal doc_id
   end
 
-  it "gets nil if a document is not found" do
+  it "finds nil if a document is not found" do
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents/#{doc_id}" do |env|
       [404, {"Content-Type"=>"text/plain"},
        ""]
     end
 
-    doc = index.document doc_id
+    doc = index.find doc_id
     doc.must_be :nil?
+  end
+
+  it "creates a new Document instance with .document" do
+    new_doc = index.document
+
+    new_doc.must_be_kind_of Gcloud::Search::Document
+    new_doc.doc_id.must_equal nil
+    new_doc.rank.must_equal nil
+    new_doc.fields.keys.must_be :empty?
+  end
+
+  it "creates a new Document instance with a doc_id" do
+    new_doc = index.document "hello-i-am-a-new-doc"
+
+    new_doc.must_be_kind_of Gcloud::Search::Document
+    new_doc.doc_id.must_equal "hello-i-am-a-new-doc"
+    new_doc.rank.must_equal nil
+    new_doc.fields.keys.must_be :empty?
+  end
+
+  it "creates a new Document instance with a doc_id and rank" do
+    new_doc = index.document "hello-i-am-a-new-doc", 42
+
+    new_doc.must_be_kind_of Gcloud::Search::Document
+    new_doc.doc_id.must_equal "hello-i-am-a-new-doc"
+    new_doc.rank.must_equal 42
+    new_doc.fields.keys.must_be :empty?
   end
 
   it "lists documents" do
