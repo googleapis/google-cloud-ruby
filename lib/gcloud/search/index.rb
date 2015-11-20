@@ -221,6 +221,23 @@ module Gcloud
       #     break unless results.next?
       #     results = results.next
       #   end
+      # By default, all queries are sorted by the rank value set when the
+      # document was created. For more information see the {REST API documentation
+      # for Document.rank}[https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank].
+      #
+      # To sort differently, use the :order_by option:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   search = gcloud.search
+      #   index = search.index "books"
+      #
+      #   results = index.search "dark stormy" , order_by: ["published", "-avg_review"]
+      #   documents = index.search query # API call
+      #
+      # Note that the - character before +avg_review+ means that this query will
+      # be sorted ascending by +published+ and then descending by +avg_review+.
       #
       # You can add computed fields with the +expressions+ option, and limit the
       # fields that are returned with the +fields+ option. In this example, an
