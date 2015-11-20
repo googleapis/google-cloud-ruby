@@ -60,26 +60,25 @@ module Gcloud
       # rubocop:enable Style/TrivialAccessors
 
       def each &block
-        @hash.each(&block)
+        @fields.each(&block)
       end
 
       def each_pair &block
         @fields.each_pair(&block)
       end
 
-      def field? key
-        @fields.keys.include? key
-      end
-
-      ##
-      # A shorter version of the pagination token returned by #token. Helpful
-      # for comparison and logging, but not valid for the next page of results.
-      def truncated_token
-        "#{token[0...(token.index('_') || 24)]}..." if token
+      def keys
+        @fields.keys
       end
 
       def inspect #:nodoc:
-        "#{self.class}(doc_id: #{doc_id}, token: #{truncated_token}...)"
+        insp_token = ""
+        if token
+          trunc_token = token[0...(token.index("_") || 24)].inspect
+          insp_token = ", token: #{trunc_token}..."
+        end
+        insp_fields = ", fields: (#{fields.keys.join ', '})"
+        "#{self.class}(doc_id: #{doc_id.inspect}#{insp_token}#{insp_fields})"
       end
 
       ##
