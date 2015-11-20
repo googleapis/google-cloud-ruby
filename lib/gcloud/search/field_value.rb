@@ -56,7 +56,7 @@ module Gcloud
         new name, value, type: type, lang: field_value["lang"]
       end
 
-      def to_raw
+      def to_raw #:nodoc:
         case type
         when :atom, :default, :html, :text
           {

@@ -25,7 +25,8 @@ module Gcloud
     class FieldValues
       include Enumerable
 
-      def initialize values = [] # :nodoc:
+      def initialize name, values = [] # :nodoc:
+        @name = name
         @values = values
       end
 
@@ -53,8 +54,8 @@ module Gcloud
         @values.each(&block)
       end
 
-      def add name, value, options = {}
-        @values << FieldValue.new(name, value, options)
+      def add value, options = {}
+        @values << FieldValue.new(@name, value, options)
       end
 
       ##
@@ -74,12 +75,18 @@ module Gcloud
         @values.delete_at index
       end
 
-      def self.from_raw name, values
-        values = values.map { |value| FieldValue.from_raw name, value }
-        FieldValues.new values
+      ##
+      # Returns +true+ if there are no values.
+      def empty?
+        @values.empty?
       end
 
-      def to_raw
+      def self.from_raw name, values #:nodoc:
+        field_values = values.map { |value| FieldValue.from_raw name, value }
+        FieldValues.new name, field_values
+      end
+
+      def to_raw #:nodoc:
         { "values" => @values.map(&:to_raw) }
       end
     end

@@ -14,7 +14,7 @@
 # limitations under the License.
 
 require "gcloud/search/result/list"
-require "gcloud/search/connection"
+require "gcloud/search/fields"
 
 module Gcloud
   module Search
@@ -24,18 +24,10 @@ module Gcloud
     # See Gcloud#search
     class Result
       ##
-      # The raw data object.
-      attr_accessor :raw #:nodoc:
-
-      # The hash of fields in the result. Each key is a field name and each
-      # value is a list of FieldValue objects.
-      attr_accessor :fields
-
-      ##
       # Creates a new Result instance.
       def initialize #:nodoc:
-        @fields = {}
-        @raw = { "fields" => @fields }
+        @fields = Fields.new
+        @raw = {}
       end
 
       ##
@@ -54,16 +46,29 @@ module Gcloud
         @fields[k]
       end
 
+      # rubocop:disable Style/TrivialAccessors
+      # Disable rubocop because we want .fields to be listed with the other
+      # methods on the class.
+
+      ##
+      # The fields in the search result. Each key is a field name and each
+      # value is a FieldValues. See Fields.
+      def fields
+        @fields
+      end
+
+      # rubocop:enable Style/TrivialAccessors
+
       def each &block
-        @fields.each(&block)
+        @hash.each(&block)
       end
 
       def each_pair &block
         @fields.each_pair(&block)
       end
 
-      def field? k
-        @fields.key? k
+      def field? key
+        @fields.keys.include? key
       end
 
       ##
@@ -80,17 +85,18 @@ module Gcloud
       ##
       # New Result from a raw data object.
       def self.from_hash hash #:nodoc:
-        hash["fields"] = Connection.from_raw_fields hash["fields"]
-        new.tap do |d|
-          d.raw = hash
-          d.fields = hash["fields"]
-        end
+        result = new
+        result.instance_variable_set "@raw", hash
+        result.instance_variable_set "@fields", Fields.from_raw(hash["fields"])
+        result
       end
 
       ##
       # Returns the Result data as a hash
       def to_hash #:nodoc:
-        @raw.dup
+        hash = @raw.dup
+        hash["fields"] = @fields.to_raw
+        hash
       end
     end
   end
