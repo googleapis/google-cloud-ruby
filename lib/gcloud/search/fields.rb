@@ -66,7 +66,7 @@ module Gcloud
         hsh = {}
         raw.each_pair do |k, v|
           hsh[k] = FieldValues.from_raw k, v["values"]
-        end
+        end unless raw.nil?
         fields = new
         fields.instance_variable_set "@hash", hsh
         fields
