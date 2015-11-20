@@ -25,21 +25,21 @@ module Gcloud
     # fields}[https://cloud.google.com/search/documents_indexes].
     #
     class FieldValue
-      attr_reader :name, :value, :type, :lang
+      attr_reader :value, :type, :lang, :name
 
-      def initialize name, value, options = {}
-        @name = name
+      def initialize value, options = {} #:nodoc:
         @value = value
         @type = options[:type].to_s.downcase.to_sym if options[:type]
         @type = infer_type if @type.nil?
         @lang = options[:lang] if string_type?
+        @name = options[:name]
       end
 
       def string_type?
         [:atom, :default, :html, :text].include? type
       end
 
-      def self.from_raw name, field_value #:nodoc:
+      def self.from_raw field_value, name = nil #:nodoc:
         value = field_value["stringValue"]
         type = field_value["stringFormat"]
         if field_value["timestampValue"]
@@ -53,7 +53,7 @@ module Gcloud
           type = :number
         end
         fail "No value found in #{raw_field.inspect}" if value.nil?
-        new name, value, type: type, lang: field_value["lang"]
+        new value, type: type, lang: field_value["lang"], name: name
       end
 
       def to_raw #:nodoc:
