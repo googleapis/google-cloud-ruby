@@ -46,4 +46,13 @@ describe Gcloud::Search::Document, :mock_search do
     new_doc.rank.must_equal new_doc_rank
     new_doc.to_hash["fields"].must_equal new_doc_fields
   end
+
+  it "can be created without fields" do
+    incomplete_hash = { "docId" => "incomplete-doc" }
+    incomplete_doc = Gcloud::Search::Document.from_hash incomplete_hash
+    incomplete_doc.must_be_kind_of Gcloud::Search::Document
+    incomplete_doc.doc_id.must_equal "incomplete-doc"
+    incomplete_doc.rank.must_equal nil
+    incomplete_doc.fields.count.must_equal 0
+  end
 end
