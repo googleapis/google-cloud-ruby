@@ -30,13 +30,47 @@ module Gcloud
       def initialize name, value, options = {}
         @name = name
         @value = value
-        @type = options[:type].to_sym if options[:type]
+        @type = options[:type].to_s.downcase.to_sym if options[:type]
         @type = infer_type if @type.nil?
         @lang = options[:lang] if string_type?
       end
 
       def string_type?
         [:atom, :default, :html, :text].include? type
+      end
+
+      def self.from_raw name, field_value #:nodoc:
+        value = field_value["stringValue"]
+        type = field_value["stringFormat"]
+        if field_value["timestampValue"]
+          value = DateTime.parse(field_value["timestampValue"])
+          type = :timestamp
+        elsif field_value["geoValue"]
+          value = field_value["geoValue"]
+          type = :geo
+        elsif field_value["numberValue"]
+          value = Float(field_value["numberValue"])
+          type = :number
+        end
+        fail "No value found in #{raw_field.inspect}" if value.nil?
+        new name, value, type: type, lang: field_value["lang"]
+      end
+
+      def to_raw
+        case type
+        when :atom, :default, :html, :text
+          {
+            "stringFormat" => type.to_s.upcase,
+            "lang" => lang,
+            "stringValue" => value.to_s
+          }.delete_if { |_, v| v.nil? }
+        when :geo
+          { "geoValue" => value.to_s }
+        when :number
+          { "numberValue" => value.to_f }
+        when :timestamp
+          { "timestampValue" => value.rfc3339 }
+        end
       end
 
       protected

@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gcloud/search/field_value"
+
 module Gcloud
   module Search
     ##
@@ -23,7 +25,7 @@ module Gcloud
     class FieldValues
       include Enumerable
 
-      def initialize values # :nodoc:
+      def initialize values = [] # :nodoc:
         @values = values
       end
 
@@ -51,6 +53,10 @@ module Gcloud
         @values.each(&block)
       end
 
+      def add name, value, options = {}
+        @values << FieldValue.new(name, value, options)
+      end
+
       ##
       # Deletes all values that are equal to value.
       #
@@ -66,6 +72,15 @@ module Gcloud
       # +nil+ if the index is out of range.
       def delete_at index
         @values.delete_at index
+      end
+
+      def self.from_raw name, values
+        values = values.map { |value| FieldValue.from_raw name, value }
+        FieldValues.new values
+      end
+
+      def to_raw
+        { "values" => @values.map(&:to_raw) }
       end
     end
   end

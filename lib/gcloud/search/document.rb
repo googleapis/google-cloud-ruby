@@ -15,6 +15,8 @@
 
 require "gcloud/search/document/list"
 require "gcloud/search/connection"
+require "gcloud/search/field_values"
+require "gcloud/search/field_value"
 
 module Gcloud
   module Search
@@ -78,11 +80,6 @@ module Gcloud
         @raw["rank"] = new_rank
       end
 
-      def add name, value, options = {}
-        @fields[name] ||= []
-        @fields[name] << FieldValue.new(name, value, options)
-      end
-
       def []= k, v
         v = Array v
         @fields[k] = v.map do |value|
@@ -94,12 +91,17 @@ module Gcloud
         @fields[k].dup.freeze
       end
 
-      def each_pair &block
-        @fields.each_pair(&block)
+      def add name, value, options = {}
+        @fields[name] ||= FieldValues.new
+        @fields[name].add name, value, options
       end
 
       def delete key, &block
         @fields.delete key, &block
+      end
+
+      def each_pair &block
+        @fields.each_pair(&block)
       end
 
       ##
@@ -115,7 +117,9 @@ module Gcloud
       ##
       # Returns the Document data as a hash
       def to_hash #:nodoc:
-        @raw.dup
+        hash = @raw.dup
+        hash["fields"] = Connection.to_raw_fields @fields
+        hash
       end
     end
   end
