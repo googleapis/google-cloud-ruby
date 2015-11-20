@@ -92,7 +92,7 @@ module Gcloud
   #
   #   indexes = search.indexes  # API call
   #   indexes.each do |index|
-  #     puts index.name
+  #     puts index.index_id
   #   end
   #
   # Create a new index:
