@@ -31,7 +31,7 @@ describe Gcloud::Search::Document, :fields, :mock_search do
     document.add "rating", 4.5
 
     fields = document["rating"]
-    fields.size.must_equal 1
+    fields.count.must_equal 1
     field = fields.first
     field.name.must_equal "rating"
     field.value.must_equal 4.5
