@@ -111,7 +111,7 @@ describe Gcloud::Search::Document, :fields, :mock_search do
 
   it "returns all values for a field with values" do
     values = document["body"]
-    values.must_be_kind_of Array
+    values.must_be_kind_of Gcloud::Search::FieldValues
     values.count.must_equal 3
     values[0].value.must_equal "gcloud is a client library"
     values[0].type.must_equal :text
@@ -126,17 +126,31 @@ describe Gcloud::Search::Document, :fields, :mock_search do
 
   it "cannot manipulate field values directly" do
     values = document["body"]
-    values.must_be_kind_of Array
+    values.must_be_kind_of Gcloud::Search::FieldValues
     values.count.must_equal 3
-    err = expect do
+    expect do
       values << "adding a new 4th value to the array isn't allowed"
-    end.must_raise RuntimeError
-    err.message.must_equal "can't modify frozen Array"
+    end.must_raise NoMethodError
   end
 
   it "deletes fields by key" do
     document.fields.keys.must_include "price"
     document.delete "price"
     document.fields.keys.wont_include "price"
+  end
+
+  it "deletes field value by value" do
+    values = document["body"]
+    values.count.must_equal 3
+    values.first.value.must_equal "gcloud is a client library"
+    values.delete values.first.value
+    values.count.must_equal 2
+  end
+
+  it "deletes field value by index" do
+    values = document["body"]
+    values.count.must_equal 3
+    values.delete_at 0
+    values.count.must_equal 2
   end
 end

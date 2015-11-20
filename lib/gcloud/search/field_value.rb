@@ -15,9 +15,6 @@
 
 module Gcloud
   module Search
-    # Disabled because there are links in the docs that are long, and a long
-    # if/else chain.
-
     ##
     # = FieldValue
     #

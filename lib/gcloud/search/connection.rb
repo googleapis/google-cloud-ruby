@@ -15,6 +15,7 @@
 
 require "gcloud/version"
 require "gcloud/search/api_client"
+require "gcloud/search/field_values"
 require "gcloud/search/field_value"
 
 module Gcloud
@@ -134,7 +135,7 @@ module Gcloud
       # Disabled because there is a long if/else chain.
 
       def self.from_raw_field_values name, raw_field
-        raw_field["values"].map do |v|
+        values = raw_field["values"].map do |v|
           if v["stringValue"]
             type = v["stringFormat"].downcase.to_sym
             FieldValue.new name, v["stringValue"], type: type, lang: v["lang"]
@@ -148,6 +149,7 @@ module Gcloud
             fail "No value found in #{raw_field.inspect}"
           end
         end
+        FieldValues.new values
       end
 
       # rubocop:enable all
