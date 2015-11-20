@@ -18,9 +18,6 @@ require "gcloud/search/field_value"
 
 module Gcloud
   module Search
-    # rubocop:disable Metrics/LineLength
-    # Disabled because there are links in the docs that are long.
-
     ##
     # = Fields
     #
@@ -28,7 +25,7 @@ module Gcloud
     # cannot have multiple Timestamp or number values.
     #
     # For more information see {Documents and
-    # fields}[https://cloud.google.com/search/documents_indexes#documents_and_fields].
+    # fields}[https://cloud.google.com/search/documents_indexes].
     #
     class Fields
       include Enumerable
