@@ -107,6 +107,13 @@ module Gcloud
         @fields.keys
       end
 
+      def inspect #:nodoc:
+        insp_rank = ""
+        insp_rank = ", rank: #{rank}" if rank
+        insp_fields = ", fields: (#{fields.keys.join ', '})"
+        "#{self.class}(doc_id: #{doc_id.inspect}#{insp_rank}#{insp_fields})"
+      end
+
       ##
       # New Document from a raw data object.
       def self.from_hash hash #:nodoc:
