@@ -15,8 +15,6 @@
 
 require "gcloud/version"
 require "gcloud/search/api_client"
-require "gcloud/search/field_values"
-require "gcloud/search/field_value"
 
 module Gcloud
   module Search
@@ -117,22 +115,6 @@ module Gcloud
 
       def inspect #:nodoc:
         "#{self.class}(#{@project})"
-      end
-
-      def self.from_raw_fields raw
-        hsh = {}
-        raw.each_pair do |k, v|
-          hsh[k] = FieldValues.from_raw k, v["values"]
-        end
-        hsh
-      end
-
-      def self.to_raw_fields raw
-        hsh = {}
-        raw.each_pair do |k, v|
-          hsh[k] = v.to_raw
-        end
-        hsh
       end
 
       protected
