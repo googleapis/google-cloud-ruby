@@ -114,6 +114,33 @@ describe Gcloud::Search::Index, :mock_search do
     doc.must_be :nil?
   end
 
+  it "creates a new Document instance with .document" do
+    new_doc = index.document
+
+    new_doc.must_be_kind_of Gcloud::Search::Document
+    new_doc.doc_id.must_equal nil
+    new_doc.rank.must_equal nil
+    new_doc.fields.keys.must_be :empty?
+  end
+
+  it "creates a new Document instance with a doc_id" do
+    new_doc = index.document "hello-i-am-a-new-doc"
+
+    new_doc.must_be_kind_of Gcloud::Search::Document
+    new_doc.doc_id.must_equal "hello-i-am-a-new-doc"
+    new_doc.rank.must_equal nil
+    new_doc.fields.keys.must_be :empty?
+  end
+
+  it "creates a new Document instance with a doc_id and rank" do
+    new_doc = index.document "hello-i-am-a-new-doc", 42
+
+    new_doc.must_be_kind_of Gcloud::Search::Document
+    new_doc.doc_id.must_equal "hello-i-am-a-new-doc"
+    new_doc.rank.must_equal 42
+    new_doc.fields.keys.must_be :empty?
+  end
+
   it "lists documents" do
     num_documents = 3
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
