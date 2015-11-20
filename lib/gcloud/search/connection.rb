@@ -45,10 +45,10 @@ module Gcloud
 
       def list_indexes options = {}
         params = { projectId: @project,
-                   all: options.delete(:all),
-                   indexNamePrefix: options.delete(:prefix),
-                   pageSize: options.delete(:max),
-                   pageToken: options.delete(:token)
+                   indexNamePrefix: options[:prefix],
+                   view: (options[:view] || "FULL"),
+                   pageSize: options[:max],
+                   pageToken: options[:token]
         }.delete_if { |_, v| v.nil? }
 
         @client.execute(
@@ -77,7 +77,7 @@ module Gcloud
       def list_docs index_id, options = {}
         params = { projectId: @project,
                    indexId: index_id,
-                   view: "FULL",
+                   view: (options[:view] || "FULL"),
                    pageSize: options[:max],
                    pageToken: options[:token]
                  }.delete_if { |_, v| v.nil? }
