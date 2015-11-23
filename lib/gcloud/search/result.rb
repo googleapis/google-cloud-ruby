@@ -31,7 +31,7 @@ module Gcloud
       end
 
       ##
-      # The ID of the Document referenced by this result.
+      # The unique identifier of the document referenced in the search result.
       def doc_id
         @raw["docId"]
       end
@@ -42,6 +42,34 @@ module Gcloud
         @raw["nextPageToken"]
       end
 
+      ##
+      # Retrieve the field values associated to a field name.
+      #
+      # === Parameters
+      #
+      # +name+::
+      #   The name of the field. New values will be configured with this name.
+      #   (+String+)
+      #
+      # === Returns
+      #
+      # FieldValue
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   search = gcloud.search
+      #   index = search.index "products"
+      #
+      #   documents = index.search "best T-shirt ever"
+      #   document = documents.first
+      #   puts "The best match for your search is:"
+      #   document["description"].each do |value|
+      #     puts "* #{value.value} (#{value.type}) [#{value.lang}]"
+      #   end
+      #
       def [] k
         @fields[k]
       end
@@ -59,18 +87,83 @@ module Gcloud
 
       # rubocop:enable Style/TrivialAccessors
 
+      ##
+      # Calls block once for each key, passing the field name and values pair as
+      # parameters. If no block is given an enumerator is returned instead.
+      # (See Fields#each)
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   search = gcloud.search
+      #   index = search.index "products"
+      #
+      #   documents = index.search "best T-shirt ever"
+      #   document = documents.first
+      #   puts "The best match for your search is:"
+      #   document.each do |key, values|
+      #     puts "* #{key}:"
+      #     values.each do |value|
+      #       puts "  * #{value.value} (#{value.type})"
+      #     end
+      #   end
+      #
       def each &block
         @fields.each(&block)
       end
 
+      ##
+      # Calls block once for each key, passing the field name and values pair as
+      # parameters. If no block is given an enumerator is returned instead.
+      # (See Fields#each_pair)
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   search = gcloud.search
+      #   index = search.index "products"
+      #
+      #   documents = index.search "best T-shirt ever"
+      #   document = documents.first
+      #   puts "The best match for your search is:"
+      #   document.each_pair do |key, values|
+      #     puts "* #{key}:"
+      #     values.each do |value|
+      #       puts "  * #{value.value} (#{value.type})"
+      #     end
+      #   end
+      #
       def each_pair &block
         @fields.each_pair(&block)
       end
 
+      ##
+      # Returns a new array populated with all the field names.
+      # (See Fields#keys)
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   search = gcloud.search
+      #   index = search.index "products"
+      #
+      #   documents = index.search "best T-shirt ever"
+      #   document = documents.first
+      #   puts "The best match has the following fields:"
+      #   document.keys.each do |key|
+      #     puts "* #{key}:"
+      #   end
+      #
       def keys
         @fields.keys
       end
 
+      ##
+      # Override to keep working in interactive shells manageable.
       def inspect #:nodoc:
         insp_token = ""
         if token
