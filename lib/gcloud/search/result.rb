@@ -167,7 +167,8 @@ module Gcloud
       def inspect #:nodoc:
         insp_token = ""
         if token
-          trunc_token = token[0...(token.index("_") || 24)].inspect
+          trunc_token = "#{token[0, 8]}...#{token[-5..-1]}"
+          trunc_token = token if token.length < 20
           insp_token = ", token: #{trunc_token}..."
         end
         insp_fields = ", fields: (#{fields.keys.join ', '})"
