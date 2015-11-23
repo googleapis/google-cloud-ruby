@@ -27,6 +27,10 @@ describe Gcloud::Search::Document, :fields, :mock_search do
   let(:doc_hash) { {"docId" => doc_id, "rank" => doc_rank, "fields" => random_fields_hash } }
   let(:document) { Gcloud::Search::Document.from_hash doc_hash }
 
+  it "knows its field count" do
+    document.fields.count.must_equal 4
+  end
+
   it "adds a number to a field" do
     document.add "rating", 4.5
 

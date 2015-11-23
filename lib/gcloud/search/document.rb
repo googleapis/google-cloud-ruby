@@ -36,9 +36,9 @@ module Gcloud
       #
       # It must contain only visible, printable ASCII characters (ASCII codes 33
       # through 126 inclusive) and be no longer than 500 characters. It cannot
-      # begin with an exclamation point <code>!</code>, and it can't begin and
-      # end with double underscores <code>__</code>. If missing, it is
-      # automatically assigned for the document when saved.
+      # begin with an exclamation point (<code>!</code>), and it cannot begin
+      # and end with double underscores (<code>__</code>). If missing, it is
+      # automatically assigned to the document when saved.
       def doc_id
         @raw["docId"]
       end
