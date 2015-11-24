@@ -122,6 +122,26 @@ module Gcloud
       end
 
       ##
+      # The names of all the fields that are stored on the index.
+      def field_names
+        (text_fields + html_fields + atom_fields + datetime_fields +
+          number_fields + geo_fields).uniq
+      end
+
+      ##
+      # The field value types that are stored on the field name.
+      def field_types_for name
+        {
+          text: text_fields.include?(name),
+          html: html_fields.include?(name),
+          atom: atom_fields.include?(name),
+          datetime: datetime_fields.include?(name),
+          number: number_fields.include?(name),
+          geo: geo_fields.include?(name)
+        }.delete_if { |_k, v| !v }.keys
+      end
+
+      ##
       # Retrieves an existing document by id.
       #
       # === Parameters
