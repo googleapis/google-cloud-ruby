@@ -22,7 +22,7 @@ module Gcloud
     # Fields and FieldValues)
     #
     # A field value must have a type. A value that is a Numeric will default to
-    # `:number`, while a DateTime will default to `:timestamp`. If a type is not
+    # `:number`, while a DateTime will default to `:datetime`. If a type is not
     # provided it will be determined by looking at the value.
     #
     # String values (text, html, atom) can also specify a lang value, which is
@@ -38,14 +38,14 @@ module Gcloud
     #   document = index.document "product-sku-000001"
     #   puts "The document description is:"
     #   document["description"].each do |value|
-    #     puts "* #{value.value} (#{value.type}) [#{value.lang}]"
+    #     puts "* #{value} (#{value.type}) [#{value.lang}]"
     #   end
     #
     # For more information see {Documents and
     # fields}[https://cloud.google.com/search/documents_indexes].
     #
-    class FieldValue
-      attr_reader :value, :type, :lang, :name
+    class FieldValue < DelegateClass(::Object)
+      attr_reader :type, :lang, :name
 
       # rubocop:disable Metrics/LineLength
       # Disabled because there are links in the docs that are long.
@@ -74,7 +74,7 @@ module Gcloud
       #     longitude coordinates, represented in string with any of the listed
       #     {ways of writing
       #     coordinates}[http://en.wikipedia.org/wiki/Geographic_coordinate_conversion].
-      #   * +:timestamp+ - The value is a +DateTime+.
+      #   * +:datetime+ - The value is a +DateTime+.
       #   * +:number+ - The value is a +Numeric+ between -2,147,483,647 and
       #     2,147,483,647. The value will be stored as a double precision
       #     floating point value in Cloud Search.
@@ -87,9 +87,12 @@ module Gcloud
       #   (+String+)
       #
       def initialize value, options = {} #:nodoc:
-        @value = value
-        @type = options[:type].to_s.downcase.to_sym if options[:type]
-        @type = infer_type if @type.nil?
+        super value
+        if options[:type]
+          @type = options[:type].to_s.downcase.to_sym
+        else
+          @type = infer_type
+        end
         @lang = options[:lang] if string_type?
         @name = options[:name]
       end
@@ -104,13 +107,19 @@ module Gcloud
       end
 
       ##
+      # Get the original value object.
+      def value #:nodoc:
+        __getobj__
+      end
+
+      ##
       # Create a new FieldValue instance from a value Hash.
       def self.from_raw field_value, name = nil #:nodoc:
         value = field_value["stringValue"]
         type = field_value["stringFormat"]
         if field_value["timestampValue"]
           value = DateTime.parse(field_value["timestampValue"])
-          type = :timestamp
+          type = :datetime
         elsif field_value["geoValue"]
           value = field_value["geoValue"]
           type = :geo
@@ -130,23 +139,23 @@ module Gcloud
           {
             "stringFormat" => type.to_s.upcase,
             "lang" => lang,
-            "stringValue" => value.to_s
+            "stringValue" => to_s
           }.delete_if { |_, v| v.nil? }
         when :geo
-          { "geoValue" => value.to_s }
+          { "geoValue" => to_s }
         when :number
-          { "numberValue" => value.to_f }
-        when :timestamp
-          { "timestampValue" => value.rfc3339 }
+          { "numberValue" => to_f }
+        when :datetime
+          { "timestampValue" => rfc3339 }
         end
       end
 
       protected
 
       def infer_type #:nodoc:
-        if value.respond_to?(:rfc3339)
-          :timestamp
-        elsif value.is_a? Numeric
+        if respond_to? :rfc3339
+          :datetime
+        elsif value.is_a? Numeric # must call on original object...
           :number
         else
           :default

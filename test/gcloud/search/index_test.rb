@@ -32,14 +32,36 @@ describe Gcloud::Search::Index, :mock_search do
 
   it "knows its attributes" do
     index.index_id.must_equal index_id
+    index.text_fields.must_equal ["title", "body"]
+    index.html_fields.must_equal ["body"]
+    index.atom_fields.must_equal ["slug"]
+    index.datetime_fields.must_equal ["published"]
+    index.number_fields.must_equal ["likes"]
+    index.geo_fields.must_equal ["location"]
+  end
+
+  it "knows its attributes even when indexedField is missing" do
+    simple_index = Gcloud::Search::Index.from_raw simple_index_hash("simple_index_456"), search.connection
+
+    simple_index.index_id.must_equal "simple_index_456"
+    simple_index.text_fields.must_be :empty?
+    simple_index.html_fields.must_be :empty?
+    simple_index.atom_fields.must_be :empty?
+    simple_index.datetime_fields.must_be :empty?
+    simple_index.number_fields.must_be :empty?
+    simple_index.geo_fields.must_be :empty?
   end
 
   it "deletes itself with the force option" do
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.must_include "view"
+      env.params["view"].must_equal "ID_ONLY"
       [200, {"Content-Type"=>"application/json"},
        page_one_docs_json]
     end
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.must_include "view"
+      env.params["view"].must_equal "ID_ONLY"
       [200, {"Content-Type"=>"application/json"},
        page_two_docs_json]
     end
@@ -55,6 +77,8 @@ describe Gcloud::Search::Index, :mock_search do
 
   it "delete will succeed if no documents exist" do
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.must_include "view"
+      env.params["view"].must_equal "ID_ONLY"
       [200, {"Content-Type"=>"application/json"},
         { "documents" => [] }.to_json]
     end
@@ -64,6 +88,8 @@ describe Gcloud::Search::Index, :mock_search do
 
   it "delete will fail if documents exist and force is not set" do
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.must_include "view"
+      env.params["view"].must_equal "ID_ONLY"
       [200, {"Content-Type"=>"application/json"},
        page_one_docs_json]
     end
@@ -120,7 +146,7 @@ describe Gcloud::Search::Index, :mock_search do
     new_doc.must_be_kind_of Gcloud::Search::Document
     new_doc.doc_id.must_equal nil
     new_doc.rank.must_equal nil
-    new_doc.fields.keys.must_be :empty?
+    new_doc.fields.names.must_be :empty?
   end
 
   it "creates a new Document instance with a doc_id" do
@@ -129,7 +155,7 @@ describe Gcloud::Search::Index, :mock_search do
     new_doc.must_be_kind_of Gcloud::Search::Document
     new_doc.doc_id.must_equal "hello-i-am-a-new-doc"
     new_doc.rank.must_equal nil
-    new_doc.fields.keys.must_be :empty?
+    new_doc.fields.names.must_be :empty?
   end
 
   it "creates a new Document instance with a doc_id and rank" do
@@ -138,7 +164,7 @@ describe Gcloud::Search::Index, :mock_search do
     new_doc.must_be_kind_of Gcloud::Search::Document
     new_doc.doc_id.must_equal "hello-i-am-a-new-doc"
     new_doc.rank.must_equal 42
-    new_doc.fields.keys.must_be :empty?
+    new_doc.fields.names.must_be :empty?
   end
 
   it "lists documents" do
@@ -473,6 +499,14 @@ describe Gcloud::Search::Index, :mock_search do
       "documents" => doc_count.times.map { random_doc_hash },
       "nextPageToken" => token
     }.delete_if { |_, v| v.nil? }.to_json
+  end
+
+  def simple_index_hash index_id = nil
+    index_id ||= "example-index-#{rand(9999)}"
+    {
+      "projectId" => project,
+      "indexId" => index_id
+    }
   end
 
   def random_search_result_hash doc_id = nil, token = nil

@@ -75,6 +75,48 @@ module Gcloud
       end
 
       ##
+      # The names of fields in which TEXT values are stored.
+      def text_fields
+        return @raw["indexedField"]["textFields"] if @raw["indexedField"]
+        []
+      end
+
+      ##
+      # The names of fields in which HTML values are stored.
+      def html_fields
+        return @raw["indexedField"]["htmlFields"] if @raw["indexedField"]
+        []
+      end
+
+      ##
+      # The names of fields in which ATOM values are stored.
+      def atom_fields
+        return @raw["indexedField"]["atomFields"] if @raw["indexedField"]
+        []
+      end
+
+      ##
+      # The names of fields in which DATE values are stored.
+      def datetime_fields
+        return @raw["indexedField"]["dateFields"] if @raw["indexedField"]
+        []
+      end
+
+      ##
+      # The names of fields in which NUMBER values are stored.
+      def number_fields
+        return @raw["indexedField"]["numberFields"] if @raw["indexedField"]
+        []
+      end
+
+      ##
+      # The names of fields in which GEO values are stored.
+      def geo_fields
+        return @raw["indexedField"]["geoFields"] if @raw["indexedField"]
+        []
+      end
+
+      ##
       # Retrieves an existing document by id.
       #
       # === Parameters
@@ -335,14 +377,19 @@ module Gcloud
       #
       def delete options = {}
         ensure_connection!
-        docs_to_be_removed = documents
+        docs_to_be_removed = documents view: "ID_ONLY"
         return if docs_to_be_removed.empty?
         unless options[:force]
           fail "Unable to delete because documents exist. Use :force option."
         end
         while docs_to_be_removed
           docs_to_be_removed.each { |d| remove d }
-          docs_to_be_removed = docs_to_be_removed.next
+          if docs_to_be_removed.next?
+            docs_to_be_removed = documents token: docs_to_be_removed.token,
+                                           view: "ID_ONLY"
+          else
+            docs_to_be_removed = nil
+          end
         end
       end
 

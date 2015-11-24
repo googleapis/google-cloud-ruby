@@ -38,7 +38,7 @@ describe Gcloud::Search::Document, :fields, :mock_search do
     fields.count.must_equal 1
     field = fields.first
     field.name.must_equal "rating"
-    field.value.must_equal 4.5
+    field.must_equal 4.5
     field.type.must_equal :number
   end
 
@@ -47,16 +47,16 @@ describe Gcloud::Search::Document, :fields, :mock_search do
 
     field = document["posted_at"].first
     field.name.must_equal "posted_at"
-    field.value.must_be_kind_of DateTime
-    field.value.to_s.must_equal "2001-02-03T04:05:06+07:00"
-    field.type.must_equal :timestamp
+    field.must_be_kind_of DateTime
+    field.to_s.must_equal "2001-02-03T04:05:06+07:00"
+    field.type.must_equal :datetime
   end
 
   it "adds a coordinate to a field with type geo set" do
     document.add "destination", "40.58, -111.65", type: :geo
 
     field = document["destination"].first
-    field.value.must_equal "40.58, -111.65"
+    field.must_equal "40.58, -111.65"
     field.type.must_equal :geo
   end
 
@@ -64,7 +64,7 @@ describe Gcloud::Search::Document, :fields, :mock_search do
     document.add "serial_number", "abc123"
 
     field = document["serial_number"].first
-    field.value.must_equal "abc123"
+    field.must_equal "abc123"
     field.type.must_equal :default
     field.lang.must_be :nil?
   end
@@ -88,29 +88,29 @@ describe Gcloud::Search::Document, :fields, :mock_search do
   it "returns a number field" do
     field = document["price"].first
     field.name.must_equal "price"
-    field.value.must_equal 24.95
+    field.must_equal 24.95
     field.type.must_equal :number
   end
 
   it "returns a timestamp field" do
     field = document["since"].first
     field.name.must_equal "since"
-    field.value.must_be_kind_of DateTime
-    field.value.to_s.must_equal "2015-10-02T15:00:00+00:00"
-    field.type.must_equal :timestamp
+    field.must_be_kind_of DateTime
+    field.to_s.must_equal "2015-10-02T15:00:00+00:00"
+    field.type.must_equal :datetime
   end
 
   it "returns a geoValue field" do
     field = document["location"].first
     field.name.must_equal "location"
-    field.value.must_equal "-33.857, 151.215"
+    field.must_equal "-33.857, 151.215"
     field.type.must_equal :geo
   end
 
   it "returns a string field with lang and type" do
     field = document["body"].first
     field.name.must_equal "body"
-    field.value.must_equal "gcloud is a client library"
+    field.must_equal "gcloud is a client library"
     field.type.must_equal :text
     field.lang.must_equal "en"
   end
@@ -139,16 +139,16 @@ describe Gcloud::Search::Document, :fields, :mock_search do
     end.must_raise NoMethodError
   end
 
-  it "deletes field by key" do
-    document.keys.must_include "price"
+  it "deletes field by name" do
+    document.names.must_include "price"
     document.delete "price"
-    document.keys.wont_include "price"
+    document.names.wont_include "price"
   end
 
-  it "deletes field by key on fields" do
-    document.fields.keys.must_include "price"
+  it "deletes field by name on fields" do
+    document.fields.names.must_include "price"
     document.fields.delete "price"
-    document.fields.keys.wont_include "price"
+    document.fields.names.wont_include "price"
   end
 
   it "deletes field value by field value object" do
@@ -191,119 +191,75 @@ describe Gcloud::Search::Document, :fields, :mock_search do
     document.fields["body"].count.must_equal 2
   end
 
-  it "identifies the field names with keys" do
-    document.keys.must_include "body"
-    document.keys.must_include "location"
-    document.keys.must_include "price"
-    document.keys.must_include "since"
+  it "identifies the field names with names" do
+    document.names.must_include "body"
+    document.names.must_include "location"
+    document.names.must_include "price"
+    document.names.must_include "since"
   end
 
-  it "empty fields are not returned with keys" do
+  it "empty fields are not returned with names" do
     document["rando_field"].add "rando value"
     document["rando_field"].delete_at 0
 
-    document.keys.wont_include "rando_field"
+    document.names.wont_include "rando_field"
   end
 
-  it "identifies the field names with fields.keys" do
-    document.fields.keys.must_include "body"
-    document.fields.keys.must_include "location"
-    document.fields.keys.must_include "price"
-    document.fields.keys.must_include "since"
+  it "identifies the field names with fields.names" do
+    document.fields.names.must_include "body"
+    document.fields.names.must_include "location"
+    document.fields.names.must_include "price"
+    document.fields.names.must_include "since"
   end
 
-  it "empty fields are not returned with fields.keys" do
+  it "empty fields are not returned with fields.names" do
     document["rando_field"].add "rando value"
     document["rando_field"].delete_at 0
 
-    document.fields.keys.wont_include "rando_field"
+    document.fields.names.wont_include "rando_field"
   end
 
   it "iterates through all the fields with each" do
-    all_keys = []
+    all_names = []
     document.each do |name, values|
-      all_keys << name
+      all_names << name
     end
-    all_keys.must_include "body"
-    all_keys.must_include "location"
-    all_keys.must_include "price"
-    all_keys.must_include "since"
+    all_names.must_include "body"
+    all_names.must_include "location"
+    all_names.must_include "price"
+    all_names.must_include "since"
   end
 
   it "empty fields are not iterated on with each" do
     document["rando_field"].add "rando value"
     document["rando_field"].delete_at 0
 
-    all_keys = []
+    all_names = []
     document.each do |name, values|
-      all_keys << name
+      all_names << name
     end
-    all_keys.wont_include "rando_field"
+    all_names.wont_include "rando_field"
   end
 
   it "iterates through all the fields with fields.each" do
-    all_keys = []
+    all_names = []
     document.fields.each do |name, values|
-      all_keys << name
+      all_names << name
     end
-    all_keys.must_include "body"
-    all_keys.must_include "location"
-    all_keys.must_include "price"
-    all_keys.must_include "since"
+    all_names.must_include "body"
+    all_names.must_include "location"
+    all_names.must_include "price"
+    all_names.must_include "since"
   end
 
   it "empty fields are not iterated on with fields.each" do
     document["rando_field"].add "rando value"
     document["rando_field"].delete_at 0
 
-    all_keys = []
+    all_names = []
     document.fields.each do |name, values|
-      all_keys << name
+      all_names << name
     end
-    all_keys.wont_include "rando_field"
-  end
-
-  it "iterates through all the fields with each_pair" do
-    all_keys = []
-    document.each_pair do |name, values|
-      all_keys << name
-    end
-    all_keys.must_include "body"
-    all_keys.must_include "location"
-    all_keys.must_include "price"
-    all_keys.must_include "since"
-  end
-
-  it "empty fields are not iterated on with each_pair" do
-    document["rando_field"].add "rando value"
-    document["rando_field"].delete_at 0
-
-    all_keys = []
-    document.each_pair do |name, values|
-      all_keys << name
-    end
-    all_keys.wont_include "rando_field"
-  end
-
-  it "iterates through all the fields with fields.each_pair" do
-    all_keys = []
-    document.fields.each_pair do |name, values|
-      all_keys << name
-    end
-    all_keys.must_include "body"
-    all_keys.must_include "location"
-    all_keys.must_include "price"
-    all_keys.must_include "since"
-  end
-
-  it "empty fields are not iterated on with fields.each_pair" do
-    document["rando_field"].add "rando value"
-    document["rando_field"].delete_at 0
-
-    all_keys = []
-    document.fields.each_pair do |name, values|
-      all_keys << name
-    end
-    all_keys.wont_include "rando_field"
+    all_names.wont_include "rando_field"
   end
 end

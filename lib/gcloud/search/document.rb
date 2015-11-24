@@ -94,11 +94,11 @@ module Gcloud
       #   document = index.document "product-sku-000001"
       #   puts "The document description is:"
       #   document["description"].each do |value|
-      #     puts "* #{value.value} (#{value.type}) [#{value.lang}]"
+      #     puts "* #{value} (#{value.type}) [#{value.lang}]"
       #   end
       #
-      def [] k
-        @fields[k]
+      def [] name
+        @fields[name]
       end
 
       # rubocop:disable Style/TrivialAccessors
@@ -106,8 +106,8 @@ module Gcloud
       # methods on the class.
 
       ##
-      # The fields in the document. Each key is a field name and each
-      # value is a FieldValues. See Fields.
+      # The fields in the document. Each field has a name (String) and a list of
+      # values (FieldValues). (See Fields)
       def fields
         @fields
       end
@@ -144,7 +144,7 @@ module Gcloud
       #     longitude coordinates, represented in string with any of the listed
       #     {ways of writing
       #     coordinates}[http://en.wikipedia.org/wiki/Geographic_coordinate_conversion].
-      #   * +:timestamp+ - The value is a +DateTime+.
+      #   * +:datetime+ - The value is a +DateTime+.
       #   * +:number+ - The value is a +Numeric+ between -2,147,483,647 and
       #     2,147,483,647. The value will be stored as a double precision
       #     floating point value in Cloud Search.
@@ -194,13 +194,13 @@ module Gcloud
       #   document = index.document "product-sku-000001"
       #   document.delete "description"
       #
-      def delete key, &block
-        @fields.delete key, &block
+      def delete name, &block
+        @fields.delete name, &block
       end
 
       ##
-      # Calls block once for each key, passing the field name and values pair as
-      # parameters. If no block is given an enumerator is returned instead.
+      # Calls block once for each field, passing the field name and values pair
+      # as parameters. If no block is given an enumerator is returned instead.
       # (See Fields#each)
       #
       # === Example
@@ -213,10 +213,10 @@ module Gcloud
       #
       #   document = index.document "product-sku-000001"
       #   puts "The document #{document.doc_id} has the following fields:"
-      #   document.each do |key, values|
-      #     puts "* #{key}:"
+      #   document.each do |name, values|
+      #     puts "* #{name}:"
       #     values.each do |value|
-      #       puts "  * #{value.value} (#{value.type})"
+      #       puts "  * #{value} (#{value.type})"
       #     end
       #   end
       #
@@ -225,34 +225,8 @@ module Gcloud
       end
 
       ##
-      # Calls block once for each key, passing the field name and values pair as
-      # parameters. If no block is given an enumerator is returned instead.
-      # (See Fields#each_pair)
-      #
-      # === Example
-      #
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   search = gcloud.search
-      #   index = search.index "products"
-      #
-      #   document = index.document "product-sku-000001"
-      #   puts "The document #{document.doc_id} has the following fields:"
-      #   document.each_pair do |key, values|
-      #     puts "* #{key}:"
-      #     values.each do |value|
-      #       puts "  * #{value.value} (#{value.type})"
-      #     end
-      #   end
-      #
-      def each_pair &block
-        @fields.each_pair(&block)
-      end
-
-      ##
       # Returns a new array populated with all the field names.
-      # (See Fields#keys)
+      # (See Fields#names)
       #
       #   require "gcloud"
       #
@@ -262,12 +236,12 @@ module Gcloud
       #
       #   document = index.document "product-sku-000001"
       #   puts "The document #{document.doc_id} has the following fields:"
-      #   document.keys.each do |key|
-      #     puts "* #{key}:"
+      #   document.names.each do |name|
+      #     puts "* #{name}:"
       #   end
       #
-      def keys
-        @fields.keys
+      def names
+        @fields.names
       end
 
       ##
@@ -275,7 +249,7 @@ module Gcloud
       def inspect #:nodoc:
         insp_rank = ""
         insp_rank = ", rank: #{rank}" if rank
-        insp_fields = ", fields: (#{fields.keys.join ', '})"
+        insp_fields = ", fields: (#{fields.names.map(&:inspect).join ', '})"
         "#{self.class}(doc_id: #{doc_id.inspect}#{insp_rank}#{insp_fields})"
       end
 

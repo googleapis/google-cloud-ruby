@@ -36,6 +36,14 @@ describe Gcloud::Search::Project, :mock_search do
     index.index_id.must_equal index_id
   end
 
+  it "gets an index by skipping lookup" do
+    index_id = "unknown_index"
+
+    index = search.index index_id, skip_lookup: true
+    index.must_be_kind_of Gcloud::Search::Index
+    index.index_id.must_equal index_id
+  end
+
   it "gets nil if an index is not found" do
     index_id = "not_found_index"
     mock_connection.get "/v1/projects/#{project}/indexes" do |env|
@@ -142,22 +150,6 @@ describe Gcloud::Search::Project, :mock_search do
     indexes.each { |ds| ds.must_be_kind_of Gcloud::Search::Index }
     indexes.token.wont_be :nil?
     indexes.token.must_equal "next_page_token"
-  end
-
-  def random_index_hash index_id = nil
-    index_id ||= "rnd_index_#{rand 999999}"
-    {
-      "projectId" => project,
-      "indexId" => index_id,
-      "indexedField" => {
-        "textFields" => ["title", "body"],
-        "htmlFields" => ["body"],
-        "atomFields" => ["slug"],
-        "dateFields" => ["published"],
-        "numberFields" => ["likes"],
-        "geoFields" => ["location"]
-      }
-    }
   end
 
   def get_index_json index_id

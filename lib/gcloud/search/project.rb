@@ -84,12 +84,19 @@ module Gcloud
       #
       # +index_id+::
       #   The ID of an index. (+String+)
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:skip_lookup]</code>::
+      #   Optionally create an Index object without verifying the index resource
+      #   exists on the Search service. Documents saved on this object will
+      #   create the index resource if the resource does not yet exist. Default
+      #   is +false+. (+Boolean+)
       #
       # === Returns
       #
       # Gcloud::Search::Index or nil if the index does not exist
       #
-      # === Example
+      # === Examples
       #
       #   require "gcloud"
       #
@@ -99,7 +106,24 @@ module Gcloud
       #   index = search.index "books"
       #   index.index_id #=> "books"
       #
-      def index index_id
+      # A new index can be created by providing the desired +index_id+ and the
+      # +skip_lookup+ option:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   search = gcloud.search
+      #
+      #   index = search.index "more-books"
+      #   index #=> nil
+      #   index = search.index "more-books", skip_lookup: true
+      #   index.index_id #=> "more-books"
+      #
+      def index index_id, options = {}
+        if options[:skip_lookup]
+          index_hash = { "indexId" => index_id, "projectId" => project }
+          return Gcloud::Search::Index.from_raw index_hash, connection
+        end
         indexes(prefix: index_id).all.detect do |ix|
           ix.index_id == index_id
         end

@@ -29,7 +29,7 @@ module Gcloud
     # letters, digits, or underscore, with a maximum of 500 characters.
     #
     # A field can have multiple values with same or different types; however, it
-    # cannot have multiple timestamp (DateTime) or number (Float) values. (See
+    # cannot have multiple datetime (DateTime) or number (Float) values. (See
     # FieldValues and FieldValue)
     #
     #   require "gcloud"
@@ -40,10 +40,10 @@ module Gcloud
     #
     #   document = index.document "product-sku-000001"
     #   puts "The document #{document.doc_id} has the following fields:"
-    #   document.keys.each do |key|
-    #     puts "* #{key}:"
-    #     document[key].each do |value|
-    #       puts "  * #{value.value} (#{value.type})"
+    #   document.names.each do |name|
+    #     puts "* #{name}:"
+    #     document[name].each do |value|
+    #       puts "  * #{value} (#{value.type})"
     #     end
     #   end
     #
@@ -83,7 +83,7 @@ module Gcloud
       #   document = index.document "product-sku-000001"
       #   puts "The document description is:"
       #   document.fields["description"].each do |value|
-      #     puts "* #{value.value} (#{value.type}) [#{value.lang}]"
+      #     puts "* #{value} (#{value.type}) [#{value.lang}]"
       #   end
       #
       def [] name
@@ -119,7 +119,7 @@ module Gcloud
       #     longitude coordinates, represented in string with any of the listed
       #     {ways of writing
       #     coordinates}[http://en.wikipedia.org/wiki/Geographic_coordinate_conversion].
-      #   * +:timestamp+ - The value is a +DateTime+.
+      #   * +:datetime+ - The value is a +DateTime+.
       #   * +:number+ - The value is a +Numeric+ between -2,147,483,647 and
       #     2,147,483,647. The value will be stored as a double precision
       #     floating point value in Cloud Search.
@@ -175,8 +175,8 @@ module Gcloud
       end
 
       ##
-      # Calls block once for each key, passing the field name and values pair as
-      # parameters. If no block is given an enumerator is returned instead.
+      # Calls block once for each field, passing the field name and values pair
+      # as parameters. If no block is given an enumerator is returned instead.
       #
       # === Example
       #
@@ -188,40 +188,16 @@ module Gcloud
       #
       #   document = index.document "product-sku-000001"
       #   puts "The document #{document.doc_id} has the following fields:"
-      #   document.fields.each do |key, values|
-      #     puts "* #{key}:"
+      #   document.fields.each do |name, values|
+      #     puts "* #{name}:"
       #     values.each do |value|
-      #       puts "  * #{value.value} (#{value.type})"
+      #       puts "  * #{value} (#{value.type})"
       #     end
       #   end
       #
       def each &block
-        # Only yield keys that have values.
+        # Only yield fields that have values.
         fields_with_values.each(&block)
-      end
-
-      ##
-      # Calls block once for each key, passing the field name and values pair as
-      # parameters. If no block is given an enumerator is returned instead.
-      #
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   search = gcloud.search
-      #   index = search.index "products"
-      #
-      #   document = index.document "product-sku-000001"
-      #   puts "The document #{document.doc_id} has the following fields:"
-      #   document.fields.each_pair do |key, values|
-      #     puts "* #{key}:"
-      #     values.each do |value|
-      #       puts "  * #{value.value} (#{value.type})"
-      #     end
-      #   end
-      #
-      def each_pair &block
-        # Only yield pairs that have values.
-        fields_with_values.each_pair(&block)
       end
 
       ##
@@ -235,12 +211,12 @@ module Gcloud
       #
       #   document = index.document "product-sku-000001"
       #   puts "The document #{document.doc_id} has the following fields:"
-      #   document.fields.keys.each do |key|
-      #     puts "* #{key}:"
+      #   document.fields.names.each do |name|
+      #     puts "* #{name}:"
       #   end
       #
-      def keys
-        # Only return keys that have values.
+      def names
+        # Only return fields that have values.
         fields_with_values.keys
       end
 
@@ -248,7 +224,7 @@ module Gcloud
       # Create a new Fields instance from a raw Hash.
       def self.from_raw raw #:nodoc:
         hsh = {}
-        raw.each_pair do |k, v|
+        raw.each do |k, v|
           hsh[k] = FieldValues.from_raw k, v["values"]
         end unless raw.nil?
         fields = new
@@ -260,7 +236,7 @@ module Gcloud
       # Create a raw Hash object containing all the field names and values.
       def to_raw #:nodoc:
         hsh = {}
-        @hash.each_pair do |k, v|
+        @hash.each do |k, v|
           hsh[k] = v.to_raw unless v.empty?
         end
         hsh
