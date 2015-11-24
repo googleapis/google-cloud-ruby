@@ -32,6 +32,24 @@ describe Gcloud::Search::Index, :mock_search do
 
   it "knows its attributes" do
     index.index_id.must_equal index_id
+    index.text_fields.must_equal ["title", "body"]
+    index.html_fields.must_equal ["body"]
+    index.atom_fields.must_equal ["slug"]
+    index.date_fields.must_equal ["published"]
+    index.number_fields.must_equal ["likes"]
+    index.geo_fields.must_equal ["location"]
+  end
+
+  it "knows its attributes even when indexedField is missing" do
+    simple_index = Gcloud::Search::Index.from_raw simple_index_hash("simple_index_456"), search.connection
+
+    simple_index.index_id.must_equal "simple_index_456"
+    simple_index.text_fields.must_be :empty?
+    simple_index.html_fields.must_be :empty?
+    simple_index.atom_fields.must_be :empty?
+    simple_index.date_fields.must_be :empty?
+    simple_index.number_fields.must_be :empty?
+    simple_index.geo_fields.must_be :empty?
   end
 
   it "deletes itself with the force option" do
@@ -481,6 +499,14 @@ describe Gcloud::Search::Index, :mock_search do
       "documents" => doc_count.times.map { random_doc_hash },
       "nextPageToken" => token
     }.delete_if { |_, v| v.nil? }.to_json
+  end
+
+  def simple_index_hash index_id = nil
+    index_id ||= "example-index-#{rand(9999)}"
+    {
+      "projectId" => project,
+      "indexId" => index_id
+    }
   end
 
   def random_search_result_hash doc_id = nil, token = nil

@@ -152,22 +152,6 @@ describe Gcloud::Search::Project, :mock_search do
     indexes.token.must_equal "next_page_token"
   end
 
-  def random_index_hash index_id = nil
-    index_id ||= "rnd_index_#{rand 999999}"
-    {
-      "projectId" => project,
-      "indexId" => index_id,
-      "indexedField" => {
-        "textFields" => ["title", "body"],
-        "htmlFields" => ["body"],
-        "atomFields" => ["slug"],
-        "dateFields" => ["published"],
-        "numberFields" => ["likes"],
-        "geoFields" => ["location"]
-      }
-    }
-  end
-
   def get_index_json index_id
     { "indexes" => [random_index_hash(index_id)] }.to_json
   end
