@@ -24,6 +24,18 @@ module Gcloud
     ##
     # = Project
     #
+    # Projects are top-level containers in Google Cloud Platform. They store
+    # information about billing and authorized users, and they control access to
+    # Google Cloud Search resources. Each project has a friendly name and a
+    # unique ID. Projects can be created only in the {Google Developers
+    # Console}[https://console.developers.google.com].
+    #
+    #   require "gcloud"
+    #
+    #   gcloud = Gcloud.new
+    #   search = gcloud.search
+    #   index = search.index "books"
+    #
     # See Gcloud#search
     class Project
       ##
@@ -41,16 +53,16 @@ module Gcloud
       end
 
       ##
-      # The unique ID string for the current project.
+      # The ID of the current project.
       #
       # === Example
       #
       #   require "gcloud"
       #
-      #   gcloud = Gcloud.new "my-todo-project", "/path/to/keyfile.json"
+      #   gcloud = Gcloud.new "my-project", "/path/to/keyfile.json"
       #   search = gcloud.search
       #
-      #   search.project #=> "my-todo-project"
+      #   search.project #=> "my-project"
       #
       def project
         connection.project
@@ -65,12 +77,83 @@ module Gcloud
           Gcloud::GCE.project_id
       end
 
+      ##
+      # Retrieves an existing index by ID.
+      #
+      # === Parameters
+      #
+      # +index_id+::
+      #   The ID of an index. (+String+)
+      #
+      # === Returns
+      #
+      # Gcloud::Search::Index or nil if the index does not exist
+      #
+      # === Example
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   search = gcloud.search
+      #
+      #   index = search.index "books"
+      #   index.index_id #=> "books"
+      #
       def index index_id
         indexes(prefix: index_id).all.detect do |ix|
           ix.index_id == index_id
         end
       end
 
+      ##
+      # Retrieves the list of indexes belonging to the project.
+      #
+      # === Parameters
+      #
+      # +options+::
+      #   An optional Hash for controlling additional behavior. (+Hash+)
+      # <code>options[:prefix]</code>::
+      #   The prefix of the index name. It is used to list all indexes with
+      #   names that have this prefix. (+String+)
+      # <code>options[:token]</code>::
+      #   A previously-returned page token representing part of the larger set
+      #   of results to view. (+String+)
+      # <code>options[:max]</code>::
+      #   Maximum number of indexes to return. (+Integer+)
+      #
+      # === Returns
+      #
+      # Array of Gcloud::Search::Index (See Gcloud::Search::Index::List)
+      #
+      # === Examples
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   search = gcloud.search
+      #
+      #   indexes = search.indexes
+      #   indexes.each do |index|
+      #     puts index.index_id
+      #   end
+      #
+      # If you have a significant number of indexes, you may need to paginate
+      # through them: (See Gcloud::Search::Index::List)
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   search = gcloud.search
+      #
+      #   indexes = search.indexes
+      #   loop do
+      #     indexes.each do |index|
+      #       puts index.index_id
+      #     end
+      #     break unless indexes.next?
+      #     indexes = indexes.next
+      #   end
+      #
       def indexes options = {}
         ensure_connection!
         resp = connection.list_indexes options
