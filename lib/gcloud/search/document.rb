@@ -97,8 +97,8 @@ module Gcloud
       #     puts "* #{value.value} (#{value.type}) [#{value.lang}]"
       #   end
       #
-      def [] k
-        @fields[k]
+      def [] name
+        @fields[name]
       end
 
       # rubocop:disable Style/TrivialAccessors
@@ -106,8 +106,8 @@ module Gcloud
       # methods on the class.
 
       ##
-      # The fields in the document. Each key is a field name and each
-      # value is a FieldValues. See Fields.
+      # The fields in the document. Each field has a name (String) and a list of
+      # values (FieldValues). (See Fields)
       def fields
         @fields
       end
@@ -194,13 +194,13 @@ module Gcloud
       #   document = index.document "product-sku-000001"
       #   document.delete "description"
       #
-      def delete key, &block
-        @fields.delete key, &block
+      def delete name, &block
+        @fields.delete name, &block
       end
 
       ##
-      # Calls block once for each key, passing the field name and values pair as
-      # parameters. If no block is given an enumerator is returned instead.
+      # Calls block once for each field, passing the field name and values pair
+      # as parameters. If no block is given an enumerator is returned instead.
       # (See Fields#each)
       #
       # === Example
@@ -213,8 +213,8 @@ module Gcloud
       #
       #   document = index.document "product-sku-000001"
       #   puts "The document #{document.doc_id} has the following fields:"
-      #   document.each do |key, values|
-      #     puts "* #{key}:"
+      #   document.each do |name, values|
+      #     puts "* #{name}:"
       #     values.each do |value|
       #       puts "  * #{value.value} (#{value.type})"
       #     end
@@ -226,7 +226,7 @@ module Gcloud
 
       ##
       # Returns a new array populated with all the field names.
-      # (See Fields#keys)
+      # (See Fields#names)
       #
       #   require "gcloud"
       #
@@ -236,12 +236,12 @@ module Gcloud
       #
       #   document = index.document "product-sku-000001"
       #   puts "The document #{document.doc_id} has the following fields:"
-      #   document.keys.each do |key|
-      #     puts "* #{key}:"
+      #   document.names.each do |name|
+      #     puts "* #{name}:"
       #   end
       #
-      def keys
-        @fields.keys
+      def names
+        @fields.names
       end
 
       ##
@@ -249,7 +249,7 @@ module Gcloud
       def inspect #:nodoc:
         insp_rank = ""
         insp_rank = ", rank: #{rank}" if rank
-        insp_fields = ", fields: (#{fields.keys.join ', '})"
+        insp_fields = ", fields: (#{fields.names.join ', '})"
         "#{self.class}(doc_id: #{doc_id.inspect}#{insp_rank}#{insp_fields})"
       end
 
