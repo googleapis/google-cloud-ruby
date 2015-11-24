@@ -249,7 +249,7 @@ module Gcloud
       def inspect #:nodoc:
         insp_rank = ""
         insp_rank = ", rank: #{rank}" if rank
-        insp_fields = ", fields: (#{fields.names.join ', '})"
+        insp_fields = ", fields: (#{fields.names.map(&:inspect).join ', '})"
         "#{self.class}(doc_id: #{doc_id.inspect}#{insp_rank}#{insp_fields})"
       end
 

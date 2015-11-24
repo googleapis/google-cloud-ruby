@@ -142,9 +142,9 @@ module Gcloud
         if token
           trunc_token = "#{token[0, 8]}...#{token[-5..-1]}"
           trunc_token = token if token.length < 20
-          insp_token = ", token: #{trunc_token}..."
+          insp_token = ", token: #{trunc_token.inspect}"
         end
-        insp_fields = ", fields: (#{fields.names.join ', '})"
+        insp_fields = ", fields: (#{fields.names.map(&:inspect).join ', '})"
         "#{self.class}(doc_id: #{doc_id.inspect}#{insp_token}#{insp_fields})"
       end
 
