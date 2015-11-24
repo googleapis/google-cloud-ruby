@@ -335,14 +335,19 @@ module Gcloud
       #
       def delete options = {}
         ensure_connection!
-        docs_to_be_removed = documents
+        docs_to_be_removed = documents view: "ID_ONLY"
         return if docs_to_be_removed.empty?
         unless options[:force]
           fail "Unable to delete because documents exist. Use :force option."
         end
         while docs_to_be_removed
           docs_to_be_removed.each { |d| remove d }
-          docs_to_be_removed = docs_to_be_removed.next
+          if docs_to_be_removed.next?
+            docs_to_be_removed = documents token: docs_to_be_removed.token,
+                                           view: "ID_ONLY"
+          else
+            docs_to_be_removed = nil
+          end
         end
       end
 
