@@ -34,21 +34,59 @@ describe Gcloud::Search::Document, :fields, :mock_search do
   it "adds a number to a field" do
     document.add "rating", 4.5
 
-    fields = document["rating"]
-    fields.count.must_equal 1
-    field = fields.first
+    document["rating"].count.must_equal 1
+    field = document["rating"].first
     field.name.must_equal "rating"
     field.must_equal 4.5
+    field.type.must_equal :number
+  end
+
+  it "adding multiple numbers to a field only keeps the last one" do
+    document.add "rating", 4.5
+
+    document["rating"].count.must_equal 1
+    field = document["rating"].first
+    field.name.must_equal "rating"
+    field.must_equal 4.5
+    field.type.must_equal :number
+
+    document.add "rating", 99.9
+
+    document["rating"].count.must_equal 1
+    field = document["rating"].first
+    field.name.must_equal "rating"
+    field.must_equal 99.9
     field.type.must_equal :number
   end
 
   it "adds a DateTime to a field" do
     document.add "posted_at", DateTime.new(2001, 2, 3, 4, 5, 6, '+7')
 
+    document["posted_at"].count.must_equal 1
     field = document["posted_at"].first
     field.name.must_equal "posted_at"
     field.must_be_kind_of DateTime
     field.to_s.must_equal "2001-02-03T04:05:06+07:00"
+    field.type.must_equal :datetime
+  end
+
+  it "adding multiple DateTimes to a field only keeps the last one" do
+    document.add "posted_at", DateTime.new(2001, 2, 3, 4, 5, 6, '+7')
+
+    document["posted_at"].count.must_equal 1
+    field = document["posted_at"].first
+    field.name.must_equal "posted_at"
+    field.must_be_kind_of DateTime
+    field.to_s.must_equal "2001-02-03T04:05:06+07:00"
+    field.type.must_equal :datetime
+
+    document.add "posted_at", DateTime.new(2010, 1, 2, 3, 4, 5, '+6')
+
+    document["posted_at"].count.must_equal 1
+    field = document["posted_at"].first
+    field.name.must_equal "posted_at"
+    field.must_be_kind_of DateTime
+    field.to_s.must_equal "2010-01-02T03:04:05+06:00"
     field.type.must_equal :datetime
   end
 

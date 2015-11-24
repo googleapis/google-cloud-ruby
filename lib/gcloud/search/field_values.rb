@@ -143,7 +143,11 @@ module Gcloud
       #   document["price"].add 24.95
       #
       def add value, options = {}
-        @values << FieldValue.new(value, options.merge(name: @name))
+        new_field = FieldValue.new(value, options.merge(name: @name))
+        if [:datetime, :number].include? new_field.type
+          @values.delete_if { |v| v.type == new_field.type }
+        end
+        @values << new_field
       end
 
       # rubocop:enable Metrics/LineLength
