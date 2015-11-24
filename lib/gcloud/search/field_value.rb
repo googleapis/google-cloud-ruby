@@ -88,6 +88,7 @@ module Gcloud
       #
       def initialize value, options = {} #:nodoc:
         @value = value
+        @type = nil
         @type = options[:type].to_s.downcase.to_sym if options[:type]
         @type = infer_type if @type.nil?
         @lang = options[:lang] if string_type?
