@@ -262,48 +262,4 @@ describe Gcloud::Search::Document, :fields, :mock_search do
     end
     all_keys.wont_include "rando_field"
   end
-
-  it "iterates through all the fields with each_pair" do
-    all_keys = []
-    document.each_pair do |name, values|
-      all_keys << name
-    end
-    all_keys.must_include "body"
-    all_keys.must_include "location"
-    all_keys.must_include "price"
-    all_keys.must_include "since"
-  end
-
-  it "empty fields are not iterated on with each_pair" do
-    document["rando_field"].add "rando value"
-    document["rando_field"].delete_at 0
-
-    all_keys = []
-    document.each_pair do |name, values|
-      all_keys << name
-    end
-    all_keys.wont_include "rando_field"
-  end
-
-  it "iterates through all the fields with fields.each_pair" do
-    all_keys = []
-    document.fields.each_pair do |name, values|
-      all_keys << name
-    end
-    all_keys.must_include "body"
-    all_keys.must_include "location"
-    all_keys.must_include "price"
-    all_keys.must_include "since"
-  end
-
-  it "empty fields are not iterated on with fields.each_pair" do
-    document["rando_field"].add "rando value"
-    document["rando_field"].delete_at 0
-
-    all_keys = []
-    document.fields.each_pair do |name, values|
-      all_keys << name
-    end
-    all_keys.wont_include "rando_field"
-  end
 end
