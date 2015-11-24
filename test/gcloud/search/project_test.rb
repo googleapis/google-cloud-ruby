@@ -36,6 +36,14 @@ describe Gcloud::Search::Project, :mock_search do
     index.index_id.must_equal index_id
   end
 
+  it "gets an index by skipping lookup" do
+    index_id = "unknown_index"
+
+    index = search.index index_id, skip_lookup: true
+    index.must_be_kind_of Gcloud::Search::Index
+    index.index_id.must_equal index_id
+  end
+
   it "gets nil if an index is not found" do
     index_id = "not_found_index"
     mock_connection.get "/v1/projects/#{project}/indexes" do |env|
