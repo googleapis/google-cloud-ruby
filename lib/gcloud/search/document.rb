@@ -225,32 +225,6 @@ module Gcloud
       end
 
       ##
-      # Calls block once for each key, passing the field name and values pair as
-      # parameters. If no block is given an enumerator is returned instead.
-      # (See Fields#each_pair)
-      #
-      # === Example
-      #
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   search = gcloud.search
-      #   index = search.index "products"
-      #
-      #   document = index.document "product-sku-000001"
-      #   puts "The document #{document.doc_id} has the following fields:"
-      #   document.each_pair do |key, values|
-      #     puts "* #{key}:"
-      #     values.each do |value|
-      #       puts "  * #{value.value} (#{value.type})"
-      #     end
-      #   end
-      #
-      def each_pair &block
-        @fields.each_pair(&block)
-      end
-
-      ##
       # Returns a new array populated with all the field names.
       # (See Fields#keys)
       #

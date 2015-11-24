@@ -201,30 +201,6 @@ module Gcloud
       end
 
       ##
-      # Calls block once for each key, passing the field name and values pair as
-      # parameters. If no block is given an enumerator is returned instead.
-      #
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   search = gcloud.search
-      #   index = search.index "products"
-      #
-      #   document = index.document "product-sku-000001"
-      #   puts "The document #{document.doc_id} has the following fields:"
-      #   document.fields.each_pair do |key, values|
-      #     puts "* #{key}:"
-      #     values.each do |value|
-      #       puts "  * #{value.value} (#{value.type})"
-      #     end
-      #   end
-      #
-      def each_pair &block
-        # Only yield pairs that have values.
-        fields_with_values.each_pair(&block)
-      end
-
-      ##
       # Returns a new array populated with all the field names.
       #
       #   require "gcloud"
@@ -248,7 +224,7 @@ module Gcloud
       # Create a new Fields instance from a raw Hash.
       def self.from_raw raw #:nodoc:
         hsh = {}
-        raw.each_pair do |k, v|
+        raw.each do |k, v|
           hsh[k] = FieldValues.from_raw k, v["values"]
         end unless raw.nil?
         fields = new
@@ -260,7 +236,7 @@ module Gcloud
       # Create a raw Hash object containing all the field names and values.
       def to_raw #:nodoc:
         hsh = {}
-        @hash.each_pair do |k, v|
+        @hash.each do |k, v|
           hsh[k] = v.to_raw unless v.empty?
         end
         hsh
