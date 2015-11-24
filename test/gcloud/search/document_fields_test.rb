@@ -49,7 +49,7 @@ describe Gcloud::Search::Document, :fields, :mock_search do
     field.name.must_equal "posted_at"
     field.must_be_kind_of DateTime
     field.to_s.must_equal "2001-02-03T04:05:06+07:00"
-    field.type.must_equal :timestamp
+    field.type.must_equal :datetime
   end
 
   it "adds a coordinate to a field with type geo set" do
@@ -97,7 +97,7 @@ describe Gcloud::Search::Document, :fields, :mock_search do
     field.name.must_equal "since"
     field.must_be_kind_of DateTime
     field.to_s.must_equal "2015-10-02T15:00:00+00:00"
-    field.type.must_equal :timestamp
+    field.type.must_equal :datetime
   end
 
   it "returns a geoValue field" do

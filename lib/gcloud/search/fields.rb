@@ -29,7 +29,7 @@ module Gcloud
     # letters, digits, or underscore, with a maximum of 500 characters.
     #
     # A field can have multiple values with same or different types; however, it
-    # cannot have multiple timestamp (DateTime) or number (Float) values. (See
+    # cannot have multiple datetime (DateTime) or number (Float) values. (See
     # FieldValues and FieldValue)
     #
     #   require "gcloud"
@@ -119,7 +119,7 @@ module Gcloud
       #     longitude coordinates, represented in string with any of the listed
       #     {ways of writing
       #     coordinates}[http://en.wikipedia.org/wiki/Geographic_coordinate_conversion].
-      #   * +:timestamp+ - The value is a +DateTime+.
+      #   * +:datetime+ - The value is a +DateTime+.
       #   * +:number+ - The value is a +Numeric+ between -2,147,483,647 and
       #     2,147,483,647. The value will be stored as a double precision
       #     floating point value in Cloud Search.
