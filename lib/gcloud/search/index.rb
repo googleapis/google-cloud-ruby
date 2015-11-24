@@ -75,6 +75,48 @@ module Gcloud
       end
 
       ##
+      # The names of fields in which TEXT values are stored.
+      def text_fields
+        return @raw["indexedField"]["textFields"] if @raw["indexedField"]
+        []
+      end
+
+      ##
+      # The names of fields in which HTML values are stored.
+      def html_fields
+        return @raw["indexedField"]["htmlFields"] if @raw["indexedField"]
+        []
+      end
+
+      ##
+      # The names of fields in which ATOM values are stored.
+      def atom_fields
+        return @raw["indexedField"]["atomFields"] if @raw["indexedField"]
+        []
+      end
+
+      ##
+      # The names of fields in which DATE values are stored.
+      def date_fields
+        return @raw["indexedField"]["dateFields"] if @raw["indexedField"]
+        []
+      end
+
+      ##
+      # The names of fields in which NUMBER values are stored.
+      def number_fields
+        return @raw["indexedField"]["numberFields"] if @raw["indexedField"]
+        []
+      end
+
+      ##
+      # The names of fields in which GEO values are stored.
+      def geo_fields
+        return @raw["indexedField"]["geoFields"] if @raw["indexedField"]
+        []
+      end
+
+      ##
       # Retrieves an existing document by id.
       #
       # === Parameters

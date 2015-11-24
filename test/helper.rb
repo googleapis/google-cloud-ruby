@@ -832,7 +832,15 @@ class MockSearch < Minitest::Spec
     index_id ||= "example-index-#{rand(9999)}"
     {
       "projectId" => project,
-      "indexId" => index_id
+      "indexId" => index_id,
+      "indexedField" => {
+        "textFields" => ["title", "body"],
+        "htmlFields" => ["body"],
+        "atomFields" => ["slug"],
+        "dateFields" => ["published"],
+        "numberFields" => ["likes"],
+        "geoFields" => ["location"]
+      }
     }
   end
 
