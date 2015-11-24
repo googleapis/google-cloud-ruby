@@ -38,14 +38,14 @@ module Gcloud
     #   document = index.document "product-sku-000001"
     #   puts "The document description is:"
     #   document["description"].each do |value|
-    #     puts "* #{value.value} (#{value.type}) [#{value.lang}]"
+    #     puts "* #{value} (#{value.type}) [#{value.lang}]"
     #   end
     #
     # For more information see {Documents and
     # fields}[https://cloud.google.com/search/documents_indexes].
     #
-    class FieldValue
-      attr_reader :value, :type, :lang, :name
+    class FieldValue < DelegateClass(::Object)
+      attr_reader :type, :lang, :name
 
       # rubocop:disable Metrics/LineLength
       # Disabled because there are links in the docs that are long.
@@ -87,10 +87,12 @@ module Gcloud
       #   (+String+)
       #
       def initialize value, options = {} #:nodoc:
-        @value = value
-        @type = nil
-        @type = options[:type].to_s.downcase.to_sym if options[:type]
-        @type = infer_type if @type.nil?
+        super value
+        if options[:type]
+          @type = options[:type].to_s.downcase.to_sym
+        else
+          @type = infer_type
+        end
         @lang = options[:lang] if string_type?
         @name = options[:name]
       end
@@ -102,6 +104,12 @@ module Gcloud
       # (or default).
       def string_type?
         [:atom, :default, :html, :text].include? type
+      end
+
+      ##
+      # Get the original value object.
+      def value #:nodoc:
+        __getobj__
       end
 
       ##
@@ -131,23 +139,23 @@ module Gcloud
           {
             "stringFormat" => type.to_s.upcase,
             "lang" => lang,
-            "stringValue" => value.to_s
+            "stringValue" => to_s
           }.delete_if { |_, v| v.nil? }
         when :geo
-          { "geoValue" => value.to_s }
+          { "geoValue" => to_s }
         when :number
-          { "numberValue" => value.to_f }
+          { "numberValue" => to_f }
         when :timestamp
-          { "timestampValue" => value.rfc3339 }
+          { "timestampValue" => rfc3339 }
         end
       end
 
       protected
 
       def infer_type #:nodoc:
-        if value.respond_to?(:rfc3339)
+        if respond_to? :rfc3339
           :timestamp
-        elsif value.is_a? Numeric
+        elsif value.is_a? Numeric # must call on original object...
           :number
         else
           :default

@@ -67,7 +67,7 @@ module Gcloud
       #   document = documents.first
       #   puts "The best match for your search is:"
       #   document["description"].each do |value|
-      #     puts "* #{value.value} (#{value.type}) [#{value.lang}]"
+      #     puts "* #{value} (#{value.type}) [#{value.lang}]"
       #   end
       #
       def [] name
@@ -106,7 +106,7 @@ module Gcloud
       #   document.each do |name, values|
       #     puts "* #{name}:"
       #     values.each do |value|
-      #       puts "  * #{value.value} (#{value.type})"
+      #       puts "  * #{value} (#{value.type})"
       #     end
       #   end
       #

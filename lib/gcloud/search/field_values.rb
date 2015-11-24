@@ -41,7 +41,7 @@ module Gcloud
     #   document = index.document "product-sku-000001"
     #   puts "The document description is:"
     #   document["description"].each do |value|
-    #     puts "* #{value.value} (#{value.type}) [#{value.lang}]"
+    #     puts "* #{value} (#{value.type}) [#{value.lang}]"
     #   end
     #
     # For more information see {Documents and
@@ -170,7 +170,7 @@ module Gcloud
       #   document["description"].count #=> 1
       #
       def delete value, &block
-        fv = @values.detect { |v| v.value == value }
+        fv = @values.detect { |v| v == value }
         @values.delete fv, &block
       end
 
@@ -224,7 +224,7 @@ module Gcloud
       #   document = index.document "product-sku-000001"
       #   puts "The document description is:"
       #   document["description"].each do |value|
-      #     puts "* #{value.value} (#{value.type}) [#{value.lang}]"
+      #     puts "* #{value} (#{value.type}) [#{value.lang}]"
       #   end
       #
       def each &block

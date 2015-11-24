@@ -30,29 +30,29 @@ describe Gcloud::Search::Document, :fields, :mock_search do
   it "returns a number field" do
     field = result["price"].first
     field.name.must_equal "price"
-    field.value.must_equal 24.95
+    field.must_equal 24.95
     field.type.must_equal :number
   end
 
   it "returns a timestamp field" do
     field = result["since"].first
     field.name.must_equal "since"
-    field.value.must_be_kind_of DateTime
-    field.value.to_s.must_equal "2015-10-02T15:00:00+00:00"
+    field.must_be_kind_of DateTime
+    field.to_s.must_equal "2015-10-02T15:00:00+00:00"
     field.type.must_equal :timestamp
   end
 
   it "returns a geoValue field" do
     field = result["location"].first
     field.name.must_equal "location"
-    field.value.must_equal "-33.857, 151.215"
+    field.must_equal "-33.857, 151.215"
     field.type.must_equal :geo
   end
 
   it "returns a string field with lang and type" do
     field = result["body"].first
     field.name.must_equal "body"
-    field.value.must_equal "gcloud is a client library"
+    field.must_equal "gcloud is a client library"
     field.type.must_equal :text
     field.lang.must_equal "en"
   end
