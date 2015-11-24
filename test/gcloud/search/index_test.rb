@@ -36,10 +36,14 @@ describe Gcloud::Search::Index, :mock_search do
 
   it "deletes itself with the force option" do
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.must_include "view"
+      env.params["view"].must_equal "ID_ONLY"
       [200, {"Content-Type"=>"application/json"},
        page_one_docs_json]
     end
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.must_include "view"
+      env.params["view"].must_equal "ID_ONLY"
       [200, {"Content-Type"=>"application/json"},
        page_two_docs_json]
     end
@@ -55,6 +59,8 @@ describe Gcloud::Search::Index, :mock_search do
 
   it "delete will succeed if no documents exist" do
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.must_include "view"
+      env.params["view"].must_equal "ID_ONLY"
       [200, {"Content-Type"=>"application/json"},
         { "documents" => [] }.to_json]
     end
@@ -64,6 +70,8 @@ describe Gcloud::Search::Index, :mock_search do
 
   it "delete will fail if documents exist and force is not set" do
     mock_connection.get "/v1/projects/#{project}/indexes/#{index_id}/documents" do |env|
+      env.params.must_include "view"
+      env.params["view"].must_equal "ID_ONLY"
       [200, {"Content-Type"=>"application/json"},
        page_one_docs_json]
     end
