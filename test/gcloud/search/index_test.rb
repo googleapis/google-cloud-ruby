@@ -120,7 +120,7 @@ describe Gcloud::Search::Index, :mock_search do
     new_doc.must_be_kind_of Gcloud::Search::Document
     new_doc.doc_id.must_equal nil
     new_doc.rank.must_equal nil
-    new_doc.fields.keys.must_be :empty?
+    new_doc.fields.names.must_be :empty?
   end
 
   it "creates a new Document instance with a doc_id" do
@@ -129,7 +129,7 @@ describe Gcloud::Search::Index, :mock_search do
     new_doc.must_be_kind_of Gcloud::Search::Document
     new_doc.doc_id.must_equal "hello-i-am-a-new-doc"
     new_doc.rank.must_equal nil
-    new_doc.fields.keys.must_be :empty?
+    new_doc.fields.names.must_be :empty?
   end
 
   it "creates a new Document instance with a doc_id and rank" do
@@ -138,7 +138,7 @@ describe Gcloud::Search::Index, :mock_search do
     new_doc.must_be_kind_of Gcloud::Search::Document
     new_doc.doc_id.must_equal "hello-i-am-a-new-doc"
     new_doc.rank.must_equal 42
-    new_doc.fields.keys.must_be :empty?
+    new_doc.fields.names.must_be :empty?
   end
 
   it "lists documents" do

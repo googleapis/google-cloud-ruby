@@ -70,8 +70,8 @@ module Gcloud
       #     puts "* #{value.value} (#{value.type}) [#{value.lang}]"
       #   end
       #
-      def [] k
-        @fields[k]
+      def [] name
+        @fields[name]
       end
 
       # rubocop:disable Style/TrivialAccessors
@@ -79,8 +79,8 @@ module Gcloud
       # methods on the class.
 
       ##
-      # The fields in the search result. Each key is a field name and each
-      # value is a FieldValues. See Fields.
+      # The fields in the search result. Each field has a name (String) and a
+      # list of values (FieldValues). (See Fields)
       def fields
         @fields
       end
@@ -88,8 +88,8 @@ module Gcloud
       # rubocop:enable Style/TrivialAccessors
 
       ##
-      # Calls block once for each key, passing the field name and values pair as
-      # parameters. If no block is given an enumerator is returned instead.
+      # Calls block once for each field, passing the field name and values pair
+      # as parameters. If no block is given an enumerator is returned instead.
       # (See Fields#each)
       #
       # === Example
@@ -103,8 +103,8 @@ module Gcloud
       #   documents = index.search "best T-shirt ever"
       #   document = documents.first
       #   puts "The best match for your search is:"
-      #   document.each do |key, values|
-      #     puts "* #{key}:"
+      #   document.each do |name, values|
+      #     puts "* #{name}:"
       #     values.each do |value|
       #       puts "  * #{value.value} (#{value.type})"
       #     end
@@ -116,7 +116,7 @@ module Gcloud
 
       ##
       # Returns a new array populated with all the field names.
-      # (See Fields#keys)
+      # (See Fields#names)
       #
       #   require "gcloud"
       #
@@ -127,12 +127,12 @@ module Gcloud
       #   documents = index.search "best T-shirt ever"
       #   document = documents.first
       #   puts "The best match has the following fields:"
-      #   document.keys.each do |key|
-      #     puts "* #{key}:"
+      #   document.names.each do |name|
+      #     puts "* #{name}:"
       #   end
       #
-      def keys
-        @fields.keys
+      def names
+        @fields.names
       end
 
       ##
@@ -144,7 +144,7 @@ module Gcloud
           trunc_token = token if token.length < 20
           insp_token = ", token: #{trunc_token}..."
         end
-        insp_fields = ", fields: (#{fields.keys.join ', '})"
+        insp_fields = ", fields: (#{fields.names.join ', '})"
         "#{self.class}(doc_id: #{doc_id.inspect}#{insp_token}#{insp_fields})"
       end
 

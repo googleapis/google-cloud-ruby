@@ -40,9 +40,9 @@ module Gcloud
     #
     #   document = index.document "product-sku-000001"
     #   puts "The document #{document.doc_id} has the following fields:"
-    #   document.keys.each do |key|
-    #     puts "* #{key}:"
-    #     document[key].each do |value|
+    #   document.names.each do |name|
+    #     puts "* #{name}:"
+    #     document[name].each do |value|
     #       puts "  * #{value.value} (#{value.type})"
     #     end
     #   end
@@ -175,8 +175,8 @@ module Gcloud
       end
 
       ##
-      # Calls block once for each key, passing the field name and values pair as
-      # parameters. If no block is given an enumerator is returned instead.
+      # Calls block once for each field, passing the field name and values pair
+      # as parameters. If no block is given an enumerator is returned instead.
       #
       # === Example
       #
@@ -188,15 +188,15 @@ module Gcloud
       #
       #   document = index.document "product-sku-000001"
       #   puts "The document #{document.doc_id} has the following fields:"
-      #   document.fields.each do |key, values|
-      #     puts "* #{key}:"
+      #   document.fields.each do |name, values|
+      #     puts "* #{name}:"
       #     values.each do |value|
       #       puts "  * #{value.value} (#{value.type})"
       #     end
       #   end
       #
       def each &block
-        # Only yield keys that have values.
+        # Only yield fields that have values.
         fields_with_values.each(&block)
       end
 
@@ -211,12 +211,12 @@ module Gcloud
       #
       #   document = index.document "product-sku-000001"
       #   puts "The document #{document.doc_id} has the following fields:"
-      #   document.fields.keys.each do |key|
-      #     puts "* #{key}:"
+      #   document.fields.names.each do |name|
+      #     puts "* #{name}:"
       #   end
       #
-      def keys
-        # Only return keys that have values.
+      def names
+        # Only return fields that have values.
         fields_with_values.keys
       end
 
