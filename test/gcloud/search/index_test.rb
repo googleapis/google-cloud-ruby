@@ -35,7 +35,7 @@ describe Gcloud::Search::Index, :mock_search do
     index.text_fields.must_equal ["title", "body"]
     index.html_fields.must_equal ["body"]
     index.atom_fields.must_equal ["slug"]
-    index.date_fields.must_equal ["published"]
+    index.datetime_fields.must_equal ["published"]
     index.number_fields.must_equal ["likes"]
     index.geo_fields.must_equal ["location"]
   end
@@ -47,7 +47,7 @@ describe Gcloud::Search::Index, :mock_search do
     simple_index.text_fields.must_be :empty?
     simple_index.html_fields.must_be :empty?
     simple_index.atom_fields.must_be :empty?
-    simple_index.date_fields.must_be :empty?
+    simple_index.datetime_fields.must_be :empty?
     simple_index.number_fields.must_be :empty?
     simple_index.geo_fields.must_be :empty?
   end

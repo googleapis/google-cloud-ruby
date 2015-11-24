@@ -22,7 +22,7 @@ module Gcloud
     # Fields and FieldValues)
     #
     # A field value must have a type. A value that is a Numeric will default to
-    # `:number`, while a DateTime will default to `:timestamp`. If a type is not
+    # `:number`, while a DateTime will default to `:datetime`. If a type is not
     # provided it will be determined by looking at the value.
     #
     # String values (text, html, atom) can also specify a lang value, which is
@@ -74,7 +74,7 @@ module Gcloud
       #     longitude coordinates, represented in string with any of the listed
       #     {ways of writing
       #     coordinates}[http://en.wikipedia.org/wiki/Geographic_coordinate_conversion].
-      #   * +:timestamp+ - The value is a +DateTime+.
+      #   * +:datetime+ - The value is a +DateTime+.
       #   * +:number+ - The value is a +Numeric+ between -2,147,483,647 and
       #     2,147,483,647. The value will be stored as a double precision
       #     floating point value in Cloud Search.
@@ -119,7 +119,7 @@ module Gcloud
         type = field_value["stringFormat"]
         if field_value["timestampValue"]
           value = DateTime.parse(field_value["timestampValue"])
-          type = :timestamp
+          type = :datetime
         elsif field_value["geoValue"]
           value = field_value["geoValue"]
           type = :geo
@@ -145,7 +145,7 @@ module Gcloud
           { "geoValue" => to_s }
         when :number
           { "numberValue" => to_f }
-        when :timestamp
+        when :datetime
           { "timestampValue" => rfc3339 }
         end
       end
@@ -154,7 +154,7 @@ module Gcloud
 
       def infer_type #:nodoc:
         if respond_to? :rfc3339
-          :timestamp
+          :datetime
         elsif value.is_a? Numeric # must call on original object...
           :number
         else

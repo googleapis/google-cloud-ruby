@@ -97,7 +97,7 @@ module Gcloud
 
       ##
       # The names of fields in which DATE values are stored.
-      def date_fields
+      def datetime_fields
         return @raw["indexedField"]["dateFields"] if @raw["indexedField"]
         []
       end
