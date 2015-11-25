@@ -73,58 +73,53 @@ module Gcloud
         @raw["indexId"]
       end
 
-      # rubocop:disable Metrics/LineLength
-      # Disabled because there are links in the docs that are long.
-
       ##
-      # The names of fields in which TEXT values are stored. (See {Index
-      # schemas}[https://cloud.google.com/search/documents_indexes#index_schemas].)
+      # The names of fields in which TEXT values are stored. See {Index schemas
+      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
       def text_fields
         return @raw["indexedField"]["textFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which HTML values are stored. (See {Index
-      # schemas}[https://cloud.google.com/search/documents_indexes#index_schemas].)
+      # The names of fields in which HTML values are stored. See {Index schemas
+      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
       def html_fields
         return @raw["indexedField"]["htmlFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which ATOM values are stored. (See {Index
-      # schemas}[https://cloud.google.com/search/documents_indexes#index_schemas].)
+      # The names of fields in which ATOM values are stored. See {Index schemas
+      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
       def atom_fields
         return @raw["indexedField"]["atomFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which DATE values are stored. (See {Index
-      # schemas}[https://cloud.google.com/search/documents_indexes#index_schemas].)
+      # The names of fields in which DATE values are stored. See {Index schemas
+      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
       def datetime_fields
         return @raw["indexedField"]["dateFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which NUMBER values are stored. (See {Index
-      # schemas}[https://cloud.google.com/search/documents_indexes#index_schemas].)
+      # The names of fields in which NUMBER values are stored. See {Indexschemas
+      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
       def number_fields
         return @raw["indexedField"]["numberFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which GEO values are stored. (See {Index
-      # schemas}[https://cloud.google.com/search/documents_indexes#index_schemas].)
+      # The names of fields in which GEO values are stored. See {Index
+      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
       def geo_fields
         return @raw["indexedField"]["geoFields"] if @raw["indexedField"]
         []
       end
-
-      # rubocop:enable Metrics/LineLength
 
       ##
       # Retrieves an existing document by id.
