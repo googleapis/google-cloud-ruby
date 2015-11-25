@@ -86,7 +86,10 @@ module Gcloud
       # Disabled because there are links in the docs that are long.
 
       ##
-      # Add a new value. The field name will be added to the value object.
+      # Add a new value. The field name will be added to the value object. If
+      # the field value is a DateTime or Numeric, or the type is set to
+      # +:datetime+ or +:number+, then the added value will replace any existing
+      # values of the same type (since there can be only one).
       #
       # === Parameters
       #
@@ -143,7 +146,11 @@ module Gcloud
       #   document["price"].add 24.95
       #
       def add value, options = {}
-        @values << FieldValue.new(value, options.merge(name: @name))
+        new_field = FieldValue.new(value, options.merge(name: @name))
+        if [:datetime, :number].include? new_field.type
+          @values.delete_if { |v| v.type == new_field.type }
+        end
+        @values << new_field
       end
 
       # rubocop:enable Metrics/LineLength
