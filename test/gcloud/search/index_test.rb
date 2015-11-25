@@ -38,6 +38,14 @@ describe Gcloud::Search::Index, :mock_search do
     index.datetime_fields.must_equal ["published"]
     index.number_fields.must_equal ["likes"]
     index.geo_fields.must_equal ["location"]
+
+    index.field_names.must_equal ["title", "body", "slug", "published", "likes", "location"]
+    index.field_types_for("title").must_equal [:text]
+    index.field_types_for("body").must_equal [:text, :html]
+    index.field_types_for("slug").must_equal [:atom]
+    index.field_types_for("published").must_equal [:datetime]
+    index.field_types_for("likes").must_equal [:number]
+    index.field_types_for("location").must_equal [:geo]
   end
 
   it "knows its attributes even when indexedField is missing" do
@@ -50,6 +58,9 @@ describe Gcloud::Search::Index, :mock_search do
     simple_index.datetime_fields.must_be :empty?
     simple_index.number_fields.must_be :empty?
     simple_index.geo_fields.must_be :empty?
+
+    simple_index.field_names.must_be :empty?
+    simple_index.field_types_for("title").must_be :empty?
   end
 
   it "deletes itself with the force option" do
