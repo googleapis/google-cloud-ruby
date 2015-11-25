@@ -94,7 +94,10 @@ module Gcloud
       # Disabled because there are links in the docs that are long.
 
       ##
-      # Add a new value. If the field name does not exist it will be added.
+      # Add a new value. If the field name does not exist it will be added. If
+      # the field value is a DateTime or Numeric, or the type is set to
+      # +:datetime+ or +:number+, then the added value will replace any existing
+      # values of the same type (since there can be only one).
       #
       # === Parameters
       #

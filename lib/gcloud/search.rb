@@ -167,8 +167,7 @@ module Gcloud
   #   document = index.find "product-sku-000001"
   #
   #   document.rank = 12345
-  #   document.delete "price" # clear existing value
-  #   document.add "price", 9.95
+  #   document.add "price", 9.95 # replace existing number value
   #   index.save document # API call
   #
   # == Adding document fields
