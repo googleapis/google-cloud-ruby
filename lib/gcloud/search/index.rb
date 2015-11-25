@@ -22,15 +22,14 @@ module Gcloud
     ##
     # = Index
     #
-    # An index stores documents for retrieval. Indexes cannot be created,
-    # updated, or deleted directly on the server: they are derived from the
-    # documents which are created "within" them.
+    # An index manages Document instances for retrieval. Indexes cannot be
+    # created, updated, or deleted directly on the server: They are derived from
+    # the documents that reference them. You can manage groups of documents by
+    # putting them into separate indexes.
     #
-    # From an index, you can retrieve a single document by its ID, a range of
-    # documents with consecutive IDs, or all the documents it contains. You can
-    # also search an index to retrieve documents that satisfy given criteria on
-    # fields and their values, specified as a query string. You can manage
-    # groups of documents by putting them into separate indexes.
+    # With an index, you can retrieve documents with #find and #documents;
+    # manage them with #document, #save, and #remove; and perform searches over
+    # their fields with #search.
     #
     #   require "gcloud"
     #
@@ -75,42 +74,48 @@ module Gcloud
       end
 
       ##
-      # The names of fields in which TEXT values are stored.
+      # The names of fields in which TEXT values are stored. See {Index schemas
+      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
       def text_fields
         return @raw["indexedField"]["textFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which HTML values are stored.
+      # The names of fields in which HTML values are stored. See {Index schemas
+      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
       def html_fields
         return @raw["indexedField"]["htmlFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which ATOM values are stored.
+      # The names of fields in which ATOM values are stored. See {Index schemas
+      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
       def atom_fields
         return @raw["indexedField"]["atomFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which DATE values are stored.
+      # The names of fields in which DATE values are stored. See {Index schemas
+      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
       def datetime_fields
         return @raw["indexedField"]["dateFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which NUMBER values are stored.
+      # The names of fields in which NUMBER values are stored. See {Indexschemas
+      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
       def number_fields
         return @raw["indexedField"]["numberFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which GEO values are stored.
+      # The names of fields in which GEO values are stored. See {Index
+      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
       def geo_fields
         return @raw["indexedField"]["geoFields"] if @raw["indexedField"]
         []
@@ -345,8 +350,8 @@ module Gcloud
 
       ##
       # Permanently deletes the index by deleting its documents. (Indexes cannot
-      # be created, updated, or deleted directly on the server: they are derived
-      # from the documents which are created "within" them.)
+      # be created, updated, or deleted directly on the server: They are derived
+      # from the documents that reference them.)
       #
       # === Parameters
       #
@@ -508,11 +513,14 @@ module Gcloud
       #     break unless results.next?
       #     results = results.next
       #   end
-      # By default, all queries are sorted by the rank value set when the
-      # document was created. For more information see the {REST API documentation
-      # for Document.rank}[https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank].
       #
-      # To sort differently, use the :order_by option:
+      # By default, Result objects are sorted by document rank. For more information
+      # see the {REST API documentation for Document.rank}[https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank].
+      #
+      # You can specify how to sort results with the +order+ option. In the example
+      # below, the <code>-</code> character before +avg_review+ means that results
+      # will be sorted in ascending order by +published+ and then in descending
+      # order by +avg_review+.
       #
       #   require "gcloud"
       #
@@ -520,18 +528,11 @@ module Gcloud
       #   search = gcloud.search
       #   index = search.index "books"
       #
-      #   results = index.search "dark stormy" , order_by: ["published", "-avg_review"]
+      #   results = index.search "dark stormy" , order: ["published", "-avg_review"]
       #   documents = index.search query # API call
       #
-      # Note that the - character before +avg_review+ means that this query will
-      # be sorted ascending by +published+ and then descending by +avg_review+.
-      #
       # You can add computed fields with the +expressions+ option, and limit the
-      # fields that are returned with the +fields+ option. In this example, an
-      # expression uses the Search service's +snippet+ function to truncate
-      # document data. For more information see the App Engine Search Python
-      # guide, {Writing
-      # expressions}[https://cloud.google.com/appengine/docs/python/search/options#Python_Writing_expressions].
+      # fields that are returned with the +fields+ option:
       #
       #   require "gcloud"
       #
@@ -539,13 +540,28 @@ module Gcloud
       #   search = gcloud.search
       #   index = search.index "products"
       #
-      #   expressions = [
-      #     { name: "total_price", expression: "(price + tax)" },
-      #     { name: "highlight", expression: "snippet('cotton', description, 80)" }
-      #   ]
+      #   expressions = [{ name: "total_price", expression: "(price + tax)" }]
       #   results = index.search "cotton T-shirt",
       #                          expressions: expressions,
       #                          fields: [name, total_price, highlight]
+      #
+      # Just as in documents, Result data is accessible via Fields methods:
+      #
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   search = gcloud.search
+      #   index = search.index "products"
+      #   document = index.find "product-sku-000001"
+      #   results = index.search "cotton T-shirt"
+      #   values = results[0]["description"]
+      #
+      #   values[0] #=> "100% organic cotton ruby gem T-shirt"
+      #   values[0].type #=> :text
+      #   values[0].lang #=> "en"
+      #   values[1] #=> "<p>100% organic cotton ruby gem T-shirt</p>"
+      #   values[1].type #=> :html
+      #   values[1].lang #=> "en"
       #
       def search query, options = {}
         ensure_connection!

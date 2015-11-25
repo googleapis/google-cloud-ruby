@@ -79,11 +79,11 @@ module Gcloud
   # is taken care of for you. You can read more about the options for connecting
   # in the {Authentication Guide}[link:AUTHENTICATION.md].
   #
-  # == Listing Indexes
+  # == Managing Indexes
   #
-  # Indexes are searchable collections of documents.
+  # An Index is a searchable collection of documents that belongs to a Project.
   #
-  # List all indexes in the project:
+  # You can list the indexes in your current project:
   #
   #   require "gcloud"
   #
@@ -95,25 +95,25 @@ module Gcloud
   #     puts index.index_id
   #   end
   #
-  # Create a new index:
+  # And you can use the project to create new indexes:
   #
   #   require "gcloud"
   #
   #   gcloud = Gcloud.new
   #   search = gcloud.search
   #
-  #   new_index = search.index "products"
+  #   index = search.index "products", skip_lookup: true
   #
-  # The new index is an unsaved value object. Indexes cannot be created,
-  # updated, or deleted directly on the server: they are derived from the
-  # documents which are created "within" them.
+  # A new index is an unsaved value object. Indexes cannot be created,
+  # updated, or deleted directly in the service: They are derived from the
+  # documents which are created "within" them. A new index will exist in the
+  # service once you save a document that references it.
   #
-  # == Documents
+  # == Managing Documents
   #
-  # Create a document instance, which is not yet saved to the service. You can
-  # provide your own unique document id (as shown below), which can be handy for
-  # updating the document (actually replacing it) without having to retrieve it
-  # first through a query in order to obtain its id.
+  # Using an index, create a new, unsaved Document instance, providing
+  # your own unique document ID, as shown below, or omitting this argument to
+  # let the service assign the ID.
   #
   #   require "gcloud"
   #
@@ -126,19 +126,17 @@ module Gcloud
   #   #=> nil
   #   document.rank #=> nil
   #
-  # Add one or more fields to the document. Since the document's id is not a
-  # field and thus is not returned in query results, it is a good idea to also
-  # set the value in a field when providing your own document id.
+  # Add one or more fields to the document. (See {Adding document fields}[#module-Gcloud::Search-label-Adding+document+fields], below.)
   #
-  #   document.add "sku", "product-sku-000001", type: :atom
+  #   document.add "price", 24.95
   #
-  # Save the document into the index:
+  # When your document is complete, save it:
   #
   #   index.save document # API call
   #   document.rank # set by the server
   #   #=> 1443648166
   #
-  # List all documents in an index:
+  # You can list the documents in an index:
   #
   #   require "gcloud"
   #
@@ -148,7 +146,7 @@ module Gcloud
   #   documents = index.documents # API call
   #   documents.map &:doc_id #=> ["product-sku-000001"]
   #
-  # Delete a document from its index:
+  # And you can delete documents:
   #
   #   require "gcloud"
   #
@@ -160,8 +158,7 @@ module Gcloud
   #   index.find document # API call
   #   #=> nil
   #
-  # To update a document in place after manipulating its fields or rank, just
-  # re-save it:
+  # To update a document after manipulating its fields or rank, just re-save it:
   #
   #   require "gcloud"
   #
@@ -170,32 +167,40 @@ module Gcloud
   #   document = index.find "product-sku-000001"
   #
   #   document.rank = 12345
-  #   document.add "price", 24.95
+  #   document.delete "price" # clear existing value
+  #   document.add "price", 9.95
   #   index.save document # API call
   #
-  # == Fields
+  # == Adding document fields
   #
   # Fields belong to documents and are the data that actually gets searched.
-  # Each field can have multiple values, which can be of the following types:
+  # Each field has a FieldValues collection, which facilitates access to
+  # FieldValue objects. Each FieldValue object will be saved as one of the
+  # {Cloud Search types}[https://cloud.google.com/search/documents_indexes#document_fields_field_names_and_multi-valued_fields].
+  # The type will be inferred from the value when possible, or you can
+  # explicitly specify it by passing a symbol with the +type+ option to
+  # Document#add.
   #
-  # - String
-  # - Number
-  # - Timestamp
-  # - Geovalue
+  # - String (+:atom+, +:html+, +:text+, or +:default+)
+  # - Number (+:number+)
+  # - Timestamp (+:datetime+)
+  # - Geovalue (+:geo+)
   #
   # String values can be tokenized using one of three different types of
-  # tokenization, which can be passed when the value is added:
+  # tokenization, which can be passed with the +type+ option when the value is
+  # added:
   #
-  # - :atom means "don't tokenize this string", treat it as one
+  # - +:atom+ means "don't tokenize this string", treat it as one
   #   thing to compare against.
   #
-  # - :text means "treat this string as normal text" and split words
-  #   apart to be compared against.
-  #
-  # - :html means "treat this string as HTML", understanding the
+  # - +:html+ means "treat this string as HTML", understanding the
   #   tags, and treating the rest of the content like Text.
   #
-  # More than one value can be added to a field.
+  # - +:text+ means "treat this string as normal text" and split words
+  #   apart to be compared against.
+  #
+  # Again, you can add more than one value to a field, and the values may be of
+  # different types.
   #
   #   require "gcloud"
   #
@@ -210,8 +215,8 @@ module Gcloud
   #
   # == Searching
   #
-  # After populating an index with documents, search through them by issuing a
-  # search query:
+  # After populating an index with documents, you can request search results
+  # with a query:
   #
   #   require "gcloud"
   #
@@ -224,10 +229,13 @@ module Gcloud
   #     puts result.doc_id
   #   end
   #
-  # By default, all queries are sorted by the rank value set when the document
-  # was created. For more information see the {REST API documentation for
-  # Document.rank}[https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank].   #
-  # To sort differently, use the :order_by option:
+  # By default, Result objects are sorted by document rank. For more information
+  # see the {REST API documentation for Document.rank}[https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank].
+  #
+  # You can specify how to sort results with the +order+ option. In the example
+  # below, the <code>-</code> character before +avg_review+ means that results
+  # will be sorted in ascending order by +published+ and then in descending
+  # order by +avg_review+.
   #
   #   require "gcloud"
   #
@@ -235,16 +243,11 @@ module Gcloud
   #   search = gcloud.search
   #   index = search.index "books"
   #
-  #   results = index.search "dark stormy" , order_by: ["published", "-avg_review"]
+  #   results = index.search "dark stormy" , order: ["published", "-avg_review"]
   #   documents = index.search query # API call
   #
-  # Note that the - character before +avg_review+ means that this query will be
-  # sorted ascending by +published+ and then descending by +avg_review+. # You
-  # can add computed fields with the +expressions+ option, and limit the fields
-  # that are returned with the +fields+ option. In this example, an expression
-  # uses the Search service's +snippet+ function to truncate document data. For
-  # more information see the App Engine Search Python guide, {Writing
-  # expressions}[https://cloud.google.com/appengine/docs/python/search/options#Python_Writing_expressions].
+  # You can add computed fields with the +expressions+ option, and limit the
+  # fields that are returned with the +fields+ option:
   #
   #   require "gcloud"
   #
@@ -252,15 +255,12 @@ module Gcloud
   #   search = gcloud.search
   #   index = search.index "products"
   #
-  #   expressions = [
-  #     { name: "total_price", expression: "(price + tax)" },
-  #     { name: "highlight", expression: "snippet('cotton', description, 80)" }
-  #   ]
+  #   expressions = [{ name: "total_price", expression: "(price + tax)" }]
   #   results = index.search "cotton T-shirt",
   #                          expressions: expressions,
   #                          fields: [name, total_price, highlight]
   #
-  # Field values are accessible by name.
+  # Just as in documents, Result data is accessible via Fields methods:
   #
   #   require "gcloud"
   #
@@ -271,18 +271,13 @@ module Gcloud
   #   results = index.search "cotton T-shirt"
   #   values = results[0]["description"]
   #
-  #   values[0].name #=> "description"
-  #   values[0].value #=> "100% organic cotton ruby gem T-shirt"
+  #   values[0] #=> "100% organic cotton ruby gem T-shirt"
   #   values[0].type #=> :text
   #   values[0].lang #=> "en"
-  #   values[1].name #=> "description"
-  #   values[1].value #=> "<p>100% organic cotton ruby gem T-shirt</p>"
+  #   values[1] #=> "<p>100% organic cotton ruby gem T-shirt</p>"
   #   values[1].type #=> :html
   #   values[1].lang #=> "en"
   #
-  # Each value contains the +name+ of its field. (Without it, building a flat
-  # collection of values extracted from multiple fields is problematic, since
-  # the field names are lost.)
   module Search
   end
   # rubocop:enable Metrics/LineLength
