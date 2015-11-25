@@ -95,11 +95,15 @@ module Gcloud
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:type]</code>::
-      #   The type of the field value. A field can have multiple values with
-      #   same or different types; however, it cannot have multiple Timestamp or
-      #   number values. (+Symbol+)
+      #   The type of the field value. An attempt is made to set the correct
+      #   type when this option is missing, although it must be provided for
+      #   +:geo+ values. A field can have multiple values with same or different
+      #   types; however, it cannot have multiple +:datetime+ or +:number+
+      #   values. (+Symbol+)
       #
       #   The following values are supported:
+      #   * +:default+ - The value is a string. The format will be automatically
+      #     detected. This is the default value for strings.
       #   * +:text+ - The value is a string with maximum length 1024**2
       #     characters.
       #   * +:html+ - The value is an HTML-formatted string with maximum length
