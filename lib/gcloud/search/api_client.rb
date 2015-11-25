@@ -53,7 +53,7 @@ module Gcloud
 
       ##
       # Return type for APIClient#discovered_api
-      class DiscoveredApi
+      class DiscoveredApi #:nodoc:
         def initialize name, version
           @name = name
           @version = version
@@ -73,7 +73,7 @@ module Gcloud
 
       ##
       # Return type for DiscoveredApi http verb methods
-      class ResourcePath
+      class ResourcePath #:nodoc:
         def initialize api_name, api_version, resource_root, resource_id_param
           @root = "https://#{api_name}.googleapis.com/#{api_version}" \
                   "/projects/{projectId}/#{resource_root}"
@@ -103,7 +103,7 @@ module Gcloud
 
       ##
       # Special-case return type for DiscoveredApi http search verb method
-      class IndexResourcePath < ResourcePath
+      class IndexResourcePath < ResourcePath #:nodoc:
         def search
           api_method :get, "/{indexId}/search"
         end
