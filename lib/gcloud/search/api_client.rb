@@ -37,11 +37,7 @@ module Gcloud
 
       def execute options
         api_method = options[:api_method]
-        uri = api_method[:uri]
-        params = options[:parameters]
-        uri.gsub! "{projectId}", params.delete(:projectId) if params[:projectId]
-        uri.gsub! "{indexId}", params.delete(:indexId) if params[:indexId]
-        uri.gsub! "{docId}", params.delete(:docId) if params[:docId]
+        uri = generate_search_uri api_method[:uri], options
         run api_method[:method], uri, options
       end
 
@@ -123,6 +119,18 @@ module Gcloud
           options[:connection] = @connection
           authorization.fetch_protected_resource options
         end
+      end
+
+      def generate_search_uri uri, options = {}
+        params = options.delete :parameters
+        [:projectId, :indexId, :docId].each do |param|
+          uri.gsub! "{#{param}}", params.delete(param) if params[param]
+        end
+        uri = URI uri
+        unless params.empty?
+          uri.query = Faraday::FlatParamsEncoder.encode params
+        end
+        uri.to_s
       end
 
       def fix_serialization! options

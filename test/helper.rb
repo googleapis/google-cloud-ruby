@@ -759,7 +759,7 @@ class MockSearch < Minitest::Spec
   def setup
     @connection = Faraday::Adapter::Test::Stubs.new
     search.connection.client.connection = Faraday.new "https://cloudsearch.googleapis.com" do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
+      builder.options.params_encoder = Faraday::FlatParamsEncoder
       builder.adapter :test, @connection
     end
   end
