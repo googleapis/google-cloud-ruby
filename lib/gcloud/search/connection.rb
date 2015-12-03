@@ -107,6 +107,13 @@ module Gcloud
       end
 
       def search index_id, query, options = {}
+        # Always encode expression hashes as JSON strings
+        if options[:expressions]
+          # Force to an array of hashes, this works with an array or a hash
+          tmp = [options[:expressions]].flatten.map { |ex| JSON.dump ex }
+          options[:expressions] = tmp
+        end
+
         @client.execute(
           api_method: @search.indexes.search,
           parameters: search_request(index_id, query, options)

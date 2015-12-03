@@ -370,6 +370,19 @@ describe Gcloud::Search::Index, :mock_search do
     end
   end
 
+  it "searches one expression set" do
+    expression = { name: "TotalPrice", expression: "(Price+Tax)" }
+    expression_json = { "expression" => "(Price+Tax)", "name" => "TotalPrice" }
+
+    mock_connection.get "/v1/projects/#{project}/indexes/#{index.index_id}/search" do |env|
+      JSON.parse(env.params["fieldExpressions"]).must_equal expression_json
+      [200, {"Content-Type"=>"application/json"}, search_results_json(3)]
+    end
+
+    results = index.search query, expressions: expression
+    results.size.must_equal 3
+  end
+
   it "searches with expressions set" do
     expressions = [
       { name: "TotalPrice", expression: "(Price+Tax)" },
@@ -379,8 +392,9 @@ describe Gcloud::Search::Index, :mock_search do
       { "expression" => "(Price+Tax)", "name" => "TotalPrice" },
       { "expression" => "snippet('good times', content)", "name" => "snippet" }
     ]
+
     mock_connection.get "/v1/projects/#{project}/indexes/#{index.index_id}/search" do |env|
-      env.params["fieldExpressions"].must_equal expressions_json
+      env.params["fieldExpressions"].map { |v| JSON.parse v }.must_equal expressions_json
       [200, {"Content-Type"=>"application/json"}, search_results_json(3)]
     end
 
