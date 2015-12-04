@@ -345,17 +345,6 @@ module Gcloud
       protected
 
       ##
-      # Make sure the object is converted to a hash
-      # Ruby 1.9.3 doesn't support to_h, so here we are.
-      def hashify hash
-        if hash.respond_to? :to_h
-          hash.to_h
-        else
-          Hash.try_convert(hash) || {}
-        end
-      end
-
-      ##
       # Create the HTTP body for insert dataset
       def insert_dataset_request dataset_id, options = {}
         {
