@@ -20,10 +20,10 @@ require "gcloud/pubsub"
 describe Gcloud do
   it "calls out to Gcloud.datastore" do
     gcloud = Gcloud.new
-    stubbed_datastore = ->(project, keyfile, options) {
+    stubbed_datastore = ->(project, keyfile, scope: nil) {
       project.must_equal nil
       keyfile.must_equal nil
-      options.must_equal({})
+      scope.must_be :nil?
       "datastore-project-object-empty"
     }
     Gcloud.stub :datastore, stubbed_datastore do
@@ -34,10 +34,10 @@ describe Gcloud do
 
   it "passes project and keyfile to Gcloud.datastore" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_datastore = ->(project, keyfile, options) {
+    stubbed_datastore = ->(project, keyfile, scope: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
-      options.must_equal({})
+      scope.must_be :nil?
       "datastore-project-object"
     }
     Gcloud.stub :datastore, stubbed_datastore do
@@ -48,10 +48,10 @@ describe Gcloud do
 
   it "passes project and keyfile and options to Gcloud.datastore" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_datastore = ->(project, keyfile, options) {
+    stubbed_datastore = ->(project, keyfile, scope: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
-      options.must_equal({scope: "http://example.com/scope"})
+      scope.must_equal "http://example.com/scope"
       "datastore-project-object-scoped"
     }
     Gcloud.stub :datastore, stubbed_datastore do
@@ -62,10 +62,10 @@ describe Gcloud do
 
   it "calls out to Gcloud.storage" do
     gcloud = Gcloud.new
-    stubbed_storage = ->(project, keyfile, options) {
+    stubbed_storage = ->(project, keyfile, scope: nil) {
       project.must_equal nil
       keyfile.must_equal nil
-      options.must_equal({})
+      scope.must_be :nil?
       "storage-project-object-empty"
     }
     Gcloud.stub :storage, stubbed_storage do
@@ -76,10 +76,10 @@ describe Gcloud do
 
   it "passes project and keyfile to Gcloud.storage" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_storage = ->(project, keyfile, options) {
+    stubbed_storage = ->(project, keyfile, scope: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
-      options.must_equal({})
+      scope.must_be :nil?
       "storage-project-object"
     }
     Gcloud.stub :storage, stubbed_storage do
@@ -90,10 +90,10 @@ describe Gcloud do
 
   it "passes project and keyfile and options to Gcloud.storage" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_storage = ->(project, keyfile, options) {
+    stubbed_storage = ->(project, keyfile, scope: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
-      options.must_equal({scope: "http://example.com/scope"})
+      scope.must_equal "http://example.com/scope"
       "storage-project-object-scoped"
     }
     Gcloud.stub :storage, stubbed_storage do
@@ -104,10 +104,10 @@ describe Gcloud do
 
   it "calls out to Gcloud.pubsub" do
     gcloud = Gcloud.new
-    stubbed_pubsub = ->(project, keyfile, options) {
+    stubbed_pubsub = ->(project, keyfile, scope: nil) {
       project.must_equal nil
       keyfile.must_equal nil
-      options.must_equal({})
+      scope.must_be :nil?
       "pubsub-project-object-empty"
     }
     Gcloud.stub :pubsub, stubbed_pubsub do
@@ -118,10 +118,10 @@ describe Gcloud do
 
   it "passes project and keyfile to Gcloud.pubsub" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_pubsub = ->(project, keyfile, options) {
+    stubbed_pubsub = ->(project, keyfile, scope: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
-      options.must_equal({})
+      scope.must_be :nil?
       "pubsub-project-object"
     }
     Gcloud.stub :pubsub, stubbed_pubsub do
@@ -132,10 +132,10 @@ describe Gcloud do
 
   it "passes project and keyfile and options to Gcloud.pubsub" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_pubsub = ->(project, keyfile, options) {
+    stubbed_pubsub = ->(project, keyfile, scope: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
-      options.must_equal({scope: "http://example.com/scope"})
+      scope.must_equal "http://example.com/scope"
       "pubsub-project-object-scoped"
     }
     Gcloud.stub :pubsub, stubbed_pubsub do
@@ -146,10 +146,10 @@ describe Gcloud do
 
   it "calls out to Gcloud.bigquery" do
     gcloud = Gcloud.new
-    stubbed_bigquery = ->(project, keyfile, options) {
+    stubbed_bigquery = ->(project, keyfile, scope: nil) {
       project.must_equal nil
       keyfile.must_equal nil
-      options.must_equal({})
+      scope.must_be :nil?
       "bigquery-project-object-empty"
     }
     Gcloud.stub :bigquery, stubbed_bigquery do
@@ -160,10 +160,10 @@ describe Gcloud do
 
   it "passes project and keyfile to Gcloud.bigquery" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_bigquery = ->(project, keyfile, options) {
+    stubbed_bigquery = ->(project, keyfile, scope: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
-      options.must_equal({})
+      scope.must_be :nil?
       "bigquery-project-object"
     }
     Gcloud.stub :bigquery, stubbed_bigquery do
@@ -174,10 +174,10 @@ describe Gcloud do
 
   it "passes project and keyfile and options to Gcloud.bigquery" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_bigquery = ->(project, keyfile, options) {
+    stubbed_bigquery = ->(project, keyfile, scope: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
-      options.must_equal({scope: "http://example.com/scope"})
+      scope.must_equal "http://example.com/scope"
       "bigquery-project-object-scoped"
     }
     Gcloud.stub :bigquery, stubbed_bigquery do
@@ -188,10 +188,10 @@ describe Gcloud do
 
   it "calls out to Gcloud.dns" do
     gcloud = Gcloud.new
-    stubbed_dns = ->(project, keyfile, options) {
+    stubbed_dns = ->(project, keyfile, scope: nil) {
       project.must_equal nil
       keyfile.must_equal nil
-      options.must_equal({})
+      scope.must_be :nil?
       "dns-project-object-empty"
     }
     Gcloud.stub :dns, stubbed_dns do
@@ -202,10 +202,10 @@ describe Gcloud do
 
   it "passes project and keyfile to Gcloud.dns" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_dns = ->(project, keyfile, options) {
+    stubbed_dns = ->(project, keyfile, scope: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
-      options.must_equal({})
+      scope.must_be :nil?
       "dns-project-object"
     }
     Gcloud.stub :dns, stubbed_dns do
@@ -216,10 +216,10 @@ describe Gcloud do
 
   it "passes project and keyfile and options to Gcloud.dns" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_dns = ->(project, keyfile, options) {
+    stubbed_dns = ->(project, keyfile, scope: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
-      options.must_equal({scope: "http://example.com/scope"})
+      scope.must_equal "http://example.com/scope"
       "dns-project-object-scoped"
     }
     Gcloud.stub :dns, stubbed_dns do
