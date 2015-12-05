@@ -57,9 +57,10 @@ module Gcloud
   def self.bigquery project = nil, keyfile = nil, options = {}
     project ||= Gcloud::Bigquery::Project.default_project
     if keyfile.nil?
-      credentials = Gcloud::Bigquery::Credentials.default options
+      credentials = Gcloud::Bigquery::Credentials.default scope: options[:scope]
     else
-      credentials = Gcloud::Bigquery::Credentials.new keyfile, options
+      credentials = Gcloud::Bigquery::Credentials.new keyfile,
+                                                      scope: options[:scope]
     end
     Gcloud::Bigquery::Project.new project, credentials
   end

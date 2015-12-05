@@ -54,9 +54,11 @@ module Gcloud
   #
   def self.resource_manager keyfile = nil, options = {}
     if keyfile.nil?
-      credentials = Gcloud::ResourceManager::Credentials.default options
+      credentials = Gcloud::ResourceManager::Credentials.default(
+        scope: options[:scope])
     else
-      credentials = Gcloud::ResourceManager::Credentials.new keyfile, options
+      credentials = Gcloud::ResourceManager::Credentials.new(
+        keyfile, scope: options[:scope])
     end
     Gcloud::ResourceManager::Manager.new credentials
   end

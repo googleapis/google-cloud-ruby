@@ -60,9 +60,10 @@ module Gcloud
   def self.storage project = nil, keyfile = nil, options = {}
     project ||= Gcloud::Storage::Project.default_project
     if keyfile.nil?
-      credentials = Gcloud::Storage::Credentials.default options
+      credentials = Gcloud::Storage::Credentials.default scope: options[:scope]
     else
-      credentials = Gcloud::Storage::Credentials.new keyfile, options
+      credentials = Gcloud::Storage::Credentials.new keyfile,
+                                                     scope: options[:scope]
     end
     Gcloud::Storage::Project.new project, credentials
   end

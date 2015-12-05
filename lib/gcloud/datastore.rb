@@ -67,9 +67,11 @@ module Gcloud
   def self.datastore project = nil, keyfile = nil, options = {}
     project ||= Gcloud::Datastore::Dataset.default_project
     if keyfile.nil?
-      credentials = Gcloud::Datastore::Credentials.default options
+      credentials = Gcloud::Datastore::Credentials.default(
+        scope: options[:scope])
     else
-      credentials = Gcloud::Datastore::Credentials.new keyfile, options
+      credentials = Gcloud::Datastore::Credentials.new keyfile,
+                                                       scope: options[:scope]
     end
     Gcloud::Datastore::Dataset.new project, credentials
   end

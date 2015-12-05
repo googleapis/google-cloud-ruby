@@ -42,15 +42,19 @@ module Gcloud
                    :token_credential_uri, :audience,
                    :scope, :issuer, :signing_key
 
-    def initialize keyfile, options = {}
+    def initialize keyfile, scope: nil
       verify_keyfile_provided! keyfile
       if keyfile.is_a? Signet::OAuth2::Client
         @client = keyfile
       elsif keyfile.is_a? Hash
-        @client = init_client keyfile, options
+        hash = stringify_hash_keys keyfile
+        hash["scope"] ||= scope
+        @client = init_client hash
       else
         verify_keyfile_exists! keyfile
-        @client = init_client JSON.parse(::File.read(keyfile)), options
+        json = JSON.parse ::File.read(keyfile)
+        json["scope"] ||= scope
+        @client = init_client json
       end
       @client.fetch_access_token!
     end
@@ -61,25 +65,25 @@ module Gcloud
     ##
     # Returns the default credentials.
     #
-    def self.default options = {}
+    def self.default scope: nil
       env  = ->(v) { ENV[v] }
       json = ->(v) { JSON.parse ENV[v] rescue nil unless ENV[v].nil? }
       path = ->(p) { ::File.file? p }
 
       # First try to find keyfile file from environment variables.
       self::PATH_ENV_VARS.map(&env).reject(&:nil?).select(&path).each do |file|
-        return new file, options
+        return new file, scope: scope
       end
       # Second try to find keyfile json from environment variables.
       self::JSON_ENV_VARS.map(&json).reject(&:nil?).each do |hash|
-        return new hash, options
+        return new hash, scope: scope
       end
       # Third try to find keyfile file from known file paths.
       self::DEFAULT_PATHS.select(&path).each do |file|
-        return new file, options
+        return new file, scope: scope
       end
       # Finally get instantiated client from Google::Auth.
-      scope = options[:scope] || options["scope"] || self::SCOPE
+      scope ||= self::SCOPE
       client = Google::Auth.get_application_default scope
       new client
     end
@@ -103,8 +107,8 @@ module Gcloud
 
     ##
     # Initializes the Signet client.
-    def init_client keyfile, options
-      client_opts = client_options keyfile, options
+    def init_client keyfile
+      client_opts = client_options keyfile
       Signet::OAuth2::Client.new client_opts
     end
 
@@ -114,21 +118,11 @@ module Gcloud
       Hash[hash.map { |(k, v)| [k.to_s, v] }]
     end
 
-    ##
-    # The default options using the values in the constants.
-    def default_options
-      { "token_credential_uri" => self.class::TOKEN_CREDENTIAL_URI,
-        "audience"             => self.class::AUDIENCE,
-        "scope"                => self.class::SCOPE }
-    end
-
-    def client_options keyfile, options
-      # Turn keys to strings
-      options = stringify_hash_keys options
-      # Constructor options override default options
-      options = default_options.merge options
-      # Keyfile options override everything
-      options = options.merge keyfile
+    def client_options options
+      # Keyfile options have higher priority over constructor defaults
+      options["token_credential_uri"] ||= self.class::TOKEN_CREDENTIAL_URI
+      options["audience"]             ||= self.class::AUDIENCE
+      options["scope"]                ||= self.class::SCOPE
 
       # client options for initializing signet client
       { token_credential_uri: options["token_credential_uri"],

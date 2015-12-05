@@ -59,9 +59,10 @@ module Gcloud
   def self.pubsub project = nil, keyfile = nil, options = {}
     project ||= Gcloud::Pubsub::Project.default_project
     if keyfile.nil?
-      credentials = Gcloud::Pubsub::Credentials.default options
+      credentials = Gcloud::Pubsub::Credentials.default scope: options[:scope]
     else
-      credentials = Gcloud::Pubsub::Credentials.new keyfile, options
+      credentials = Gcloud::Pubsub::Credentials.new keyfile,
+                                                    scope: options[:scope]
     end
     Gcloud::Pubsub::Project.new project, credentials
   end

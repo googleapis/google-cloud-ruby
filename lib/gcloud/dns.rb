@@ -58,9 +58,9 @@ module Gcloud
   def self.dns project = nil, keyfile = nil, options = {}
     project ||= Gcloud::Dns::Project.default_project
     if keyfile.nil?
-      credentials = Gcloud::Dns::Credentials.default options
+      credentials = Gcloud::Dns::Credentials.default scope: options[:scope]
     else
-      credentials = Gcloud::Dns::Credentials.new keyfile, options
+      credentials = Gcloud::Dns::Credentials.new keyfile, scope: options[:scope]
     end
     Gcloud::Dns::Project.new project, credentials
   end
