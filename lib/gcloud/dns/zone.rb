@@ -304,12 +304,10 @@ module Gcloud
       #   Return only records with this {record
       #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
       #   If present, the +name+ parameter must also be present. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:token]</code>::
+      # +token+::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of records to return. (+Integer+)
       #
       # === Returns
@@ -516,11 +514,9 @@ module Gcloud
       #   The Record or array of records to add. (Record or +Array+)
       # +deletions+::
       #   The Record or array of records to remove. (Record or +Array+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:skip_soa]</code>::
+      # +skip_soa+::
       #   Do not automatically update the SOA record serial number. (+Boolean+)
-      # <code>options[:soa_serial]</code>::
+      # +soa_serial+::
       #   A value (or a lambda or Proc returning a value) for the new SOA record
       #   serial number. (+Integer+, lambda, or +Proc+)
       #
@@ -571,7 +567,7 @@ module Gcloud
       #   new_record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
       #   change = zone.update new_record, soa_serial: lambda { |sn| sn + 10 }
       #
-      def update additions = [], deletions = [], options = {}
+      def update additions = [], deletions = [], skip_soa: nil, soa_serial: nil
         # Handle only sending in options
         if additions.is_a?(::Hash) && deletions.empty? && options.empty?
           options = additions
@@ -594,8 +590,8 @@ module Gcloud
         to_add    = additions - deletions
         to_remove = deletions - additions
         return nil if to_add.empty? && to_remove.empty?
-        unless options[:skip_soa] || detect_soa(to_add) || detect_soa(to_remove)
-          increment_soa to_add, to_remove, options[:soa_serial]
+        unless skip_soa || detect_soa(to_add) || detect_soa(to_remove)
+          increment_soa to_add, to_remove, soa_serial
         end
         create_change to_add, to_remove
       end
@@ -627,12 +623,10 @@ module Gcloud
       #   (section 3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1].
       #   For example: +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of
       #   +String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:skip_soa]</code>::
+      # +skip_soa+::
       #   Do not automatically update the SOA record serial number. See #update
       #   for details. (+Boolean+)
-      # <code>options[:soa_serial]</code>::
+      # +soa_serial+::
       #   A value (or a lambda or Proc returning a value) for the new SOA record
       #   serial number. See #update for details. (+Integer+, lambda, or +Proc+)
       #
@@ -649,8 +643,9 @@ module Gcloud
       #   zone = dns.zone "example-com"
       #   change = zone.add "example.com.", "A", 86400, ["1.2.3.4"]
       #
-      def add name, type, ttl, data, options = {}
-        update [record(name, type, ttl, data)], [], options
+      def add name, type, ttl, data, skip_soa: nil, soa_serial: nil
+        update [record(name, type, ttl, data)], [],
+               skip_soa: skip_soa, soa_serial: soa_serial
       end
 
       ##
@@ -669,12 +664,10 @@ module Gcloud
       #   The identifier of a {supported record
       #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
       #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:skip_soa]</code>::
+      # +skip_soa+::
       #   Do not automatically update the SOA record serial number. See #update
       #   for details. (+Boolean+)
-      # <code>options[:soa_serial]</code>::
+      # +soa_serial+::
       #   A value (or a lambda or Proc returning a value) for the new SOA record
       #   serial number. See #update for details. (+Integer+, lambda, or +Proc+)
       #
@@ -691,8 +684,9 @@ module Gcloud
       #   zone = dns.zone "example-com"
       #   change = zone.remove "example.com.", "A"
       #
-      def remove name, type, options = {}
-        update [], records(name, type).all.to_a, options
+      def remove name, type, skip_soa: nil, soa_serial: nil
+        update [], records(name, type).all.to_a,
+               skip_soa: skip_soa, soa_serial: soa_serial
       end
 
       ##
@@ -721,12 +715,10 @@ module Gcloud
       #   3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1]. For
       #   example: +192.0.2.1+ or +example.com.+. (+String+ or +Array+ of
       #   +String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:skip_soa]</code>::
+      # +skip_soa+::
       #   Do not automatically update the SOA record serial number. See #update
       #   for details. (+Boolean+)
-      # <code>options[:soa_serial]</code>::
+      # +soa_serial+::
       #   A value (or a lambda or Proc returning a value) for the new SOA record
       #   serial number. See #update for details. (+Integer+, lambda, or +Proc+)
       #
@@ -743,10 +735,10 @@ module Gcloud
       #   zone = dns.zone "example-com"
       #   change = zone.replace "example.com.", "A", 86400, ["5.6.7.8"]
       #
-      def replace name, type, ttl, data, options = {}
+      def replace name, type, ttl, data, skip_soa: nil, soa_serial: nil
         update [record(name, type, ttl, data)],
                records(name, type).all.to_a,
-               options
+               skip_soa: skip_soa, soa_serial: soa_serial
       end
 
       def to_zonefile #:nodoc:
@@ -768,12 +760,10 @@ module Gcloud
       #   The identifier of a {supported record
       #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
       #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:skip_soa]</code>::
+      # +skip_soa+::
       #   Do not automatically update the SOA record serial number. See #update
       #   for details. (+Boolean+)
-      # <code>options[:soa_serial]</code>::
+      # +soa_serial+::
       #   A value (or a lambda or Proc returning a value) for the new SOA record
       #   serial number. See #update for details. (+Integer+, lambda, or +Proc+)
       #
@@ -792,11 +782,11 @@ module Gcloud
       #     mx.ttl = 3600 # change only the TTL
       #   end
       #
-      def modify name, type, options = {}
+      def modify name, type, skip_soa: nil, soa_serial: nil
         existing = records(name, type).all.to_a
         updated = existing.map(&:dup)
         updated.each { |r| yield r }
-        update updated, existing, options
+        update updated, existing, skip_soa: skip_soa, soa_serial: soa_serial
       end
 
       ##
