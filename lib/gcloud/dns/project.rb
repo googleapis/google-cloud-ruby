@@ -171,12 +171,10 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:token]</code>::
+      # +token+::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of zones to return. (+Integer+)
       #
       # === Returns
@@ -210,9 +208,9 @@ module Gcloud
       #     zones = zones.next
       #   end
       #
-      def zones options = {}
+      def zones token: nil, max: nil
         ensure_connection!
-        resp = connection.list_zones options
+        resp = connection.list_zones token: token, max: max
         if resp.success?
           Zone::List.from_response resp, connection
         else
@@ -234,13 +232,11 @@ module Gcloud
       # +zone_dns+::
       #   The DNS name of this managed zone, for instance "example.com.".
       #   (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:description]</code>::
+      # +description+::
       #   A string of at most 1024 characters associated with this resource for
       #   the user's convenience. Has no effect on the managed zone's function.
       #   (+String+)
-      # <code>options[:name_server_set]</code>::
+      # +name_server_set+::
       #   A NameServerSet is a set of DNS name servers that all host the same
       #   ManagedZones. Most users will leave this field unset. (+String+)
       #
@@ -256,9 +252,12 @@ module Gcloud
       #   dns = gcloud.dns
       #   zone = dns.create_zone "example-com", "example.com."
       #
-      def create_zone zone_name, zone_dns, options = {}
+      def create_zone zone_name, zone_dns, description: nil,
+                      name_server_set: nil
         ensure_connection!
-        resp = connection.create_zone zone_name, zone_dns, options
+        resp = connection.create_zone zone_name, zone_dns,
+                                      description: description,
+                                      name_server_set: name_server_set
         if resp.success?
           Zone.from_gapi resp.data, connection
         else

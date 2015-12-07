@@ -52,10 +52,10 @@ module Gcloud
         )
       end
 
-      def list_zones options = {}
+      def list_zones token: nil, max: nil
         params = { project: @project,
-                   pageToken: options.delete(:token),
-                   maxResults: options.delete(:max)
+                   pageToken: token,
+                   maxResults: max
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(
@@ -64,11 +64,12 @@ module Gcloud
         )
       end
 
-      def create_zone zone_name, zone_dns, options = {}
+      def create_zone zone_name, zone_dns, description: nil,
+                      name_server_set: nil
         body = { kind: "dns#managedZone",
                  name: zone_name, dnsName: zone_dns,
-                 description: (options[:description] || ""),
-                 nameServerSet: options[:name_server_set]
+                 description: (description || ""),
+                 nameServerSet: name_server_set
                }.delete_if { |_, v| v.nil? }
 
         @client.execute(
