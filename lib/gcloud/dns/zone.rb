@@ -222,12 +222,12 @@ module Gcloud
       #
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:token]</code>::
+      # +token+::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of changes to return. (+Integer+)
-      # <code>options[:order]</code>::
+      # +order+::
       #   Sort the changes by change sequence. (+Symbol+ or +String+)
       #
       #   Acceptable values are:
@@ -462,14 +462,14 @@ module Gcloud
       #   which zone file data can be read. (+String+ or +IO+)
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:only]</code>::
+      # +only+::
       #   Include only records of this type or types. (+String+ or +Array+)
-      # <code>options[:except]</code>::
+      # +except+::
       #   Exclude records of this type or types. (+String+ or +Array+)
-      # <code>options[:skip_soa]</code>::
+      # +skip_soa+::
       #   Do not automatically update the SOA record serial number. See #update
       #   for details. (+Boolean+)
-      # <code>options[:soa_serial]</code>::
+      # +soa_serial+::
       #   A value (or a lambda or Proc returning a value) for the new SOA record
       #   serial number. See #update for details. (+Integer+, lambda, or +Proc+)
       #
@@ -486,11 +486,12 @@ module Gcloud
       #   zone = dns.zone "example-com"
       #   change = zone.import "path/to/db.example.com"
       #
-      def import path_or_io, options = {}
-        options[:except] = Array(options[:except]).map(&:to_s).map(&:upcase)
-        options[:except] = (options[:except] + %w(SOA NS)).uniq
-        additions = Gcloud::Dns::Importer.new(self, path_or_io).records(options)
-        update additions, []
+      def import path_or_io, only: nil, except: nil,
+                 skip_soa: nil, soa_serial: nil
+        except = (Array(except).map(&:to_s).map(&:upcase) + %w(SOA NS)).uniq
+        importer = Gcloud::Dns::Importer.new self, path_or_io
+        additions = importer.records only: only, except: except
+        update additions, [], skip_soa: skip_soa, soa_serial: soa_serial
       end
 
       # rubocop:disable all
