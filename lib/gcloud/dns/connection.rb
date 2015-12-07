@@ -120,12 +120,12 @@ module Gcloud
         )
       end
 
-      def list_records zone_id, options = {}
+      def list_records zone_id, name = nil, type = nil, token: nil, max: nil
         params = { project: @project, managedZone: zone_id,
-                   pageToken: options.delete(:token),
-                   maxResults: options.delete(:max),
-                   name: options.delete(:name),
-                   type: options.delete(:type)
+                   pageToken: token,
+                   maxResults: max,
+                   name: name,
+                   type: type
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(

@@ -367,12 +367,12 @@ module Gcloud
       #   zone = dns.zone "example-com"
       #   records = zone.records.all
       #
-      def records name = nil, type = nil, options = {}
+      def records name = nil, type = nil, token: nil, max: nil
         ensure_connection!
 
-        options = build_records_options name, type, options
+        name = fqdn(name) if name
 
-        resp = connection.list_records id, options
+        resp = connection.list_records id, name, type, token: token, max: max
         if resp.success?
           Record::List.from_response resp, self
         else
@@ -692,7 +692,7 @@ module Gcloud
       #   change = zone.remove "example.com.", "A"
       #
       def remove name, type, options = {}
-        update [], records(name: name, type: type).all.to_a, options
+        update [], records(name, type).all.to_a, options
       end
 
       ##
@@ -745,7 +745,7 @@ module Gcloud
       #
       def replace name, type, ttl, data, options = {}
         update [record(name, type, ttl, data)],
-               records(name: name, type: type).all.to_a,
+               records(name, type).all.to_a,
                options
       end
 
@@ -793,7 +793,7 @@ module Gcloud
       #   end
       #
       def modify name, type, options = {}
-        existing = records(name: name, type: type).all.to_a
+        existing = records(name, type).all.to_a
         updated = existing.map(&:dup)
         updated.each { |r| yield r }
         update updated, existing, options
@@ -847,32 +847,6 @@ module Gcloud
         fail "Must have active connection" unless connection
       end
 
-      # rubocop:disable all
-      # Disabled rubocop because this complexity cannot easily be avoided.
-
-      def build_records_options name, type, options
-        # Handle only sending in options
-        if name.is_a?(::Hash) && type.nil? && options.empty?
-          options = name
-          name = nil
-        elsif type.is_a?(::Hash) && options.empty?
-          options = type
-          type = nil
-        end
-
-        # Set parameters as options, params have priority
-        options[:name] = name || options[:name]
-        options[:type] = type || options[:type]
-
-        # Ensure name is a FQDN
-        options[:name] = fqdn(options[:name]) if options[:name]
-
-        # return only the options
-        options
-      end
-
-      # rubocop:enable all
-
       def create_change additions, deletions
         ensure_connection!
         resp = connection.create_change id,
@@ -886,7 +860,7 @@ module Gcloud
       end
 
       def increment_soa to_add, to_remove, soa_serial
-        current_soa = detect_soa records(name: dns, type: "SOA").all
+        current_soa = detect_soa records(dns, "SOA").all
         return false if current_soa.nil?
         updated_soa = current_soa.dup
         updated_soa.data[0] = replace_soa_serial updated_soa.data[0], soa_serial
