@@ -5,8 +5,8 @@ Gem::Specification.new do |gem|
   gem.name          = "gcloud"
   gem.version       = Gcloud::VERSION
 
-  gem.authors       = ["Silvano Luciani", "Mike Moore"]
-  gem.email         = ["silvano@google.com", "mike@blowmage.com"]
+  gem.authors       = ["Silvano Luciani", "Mike Moore", "Chris Smith"]
+  gem.email         = ["silvano@google.com", "mike@blowmage.com", "quartzmo@gmail.com"]
   gem.description   = "Gcloud is the official library for interacting with Google Cloud."
   gem.summary       = "API Client library for Google Cloud"
   gem.homepage      = "http://googlecloudplatform.github.io/gcloud-ruby/"
