@@ -79,15 +79,13 @@ module Gcloud
         #   The field name. The name must contain only letters (a-z, A-Z),
         #   numbers (0-9), or underscores (_), and must start with a letter or
         #   underscore. The maximum length is 128 characters. (+String+)
-        # +options+::
-        #   An optional Hash for controlling additional behavior. (+Hash+)
-        # <code>options[:description]</code>::
+        # +description+::
         #   A description of the field. (+String+)
-        # <code>options[:mode]</code>::
+        # +mode+::
         #   The field's mode. The possible values are +:nullable+, +:required+,
         #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
-        def string name, options = {}
-          add_field name, :string, nil, options
+        def string name, description: nil, mode: nil
+          add_field name, :string, nil, description: description, mode: mode
         end
 
         ##
@@ -99,15 +97,13 @@ module Gcloud
         #   The field name. The name must contain only letters (a-z, A-Z),
         #   numbers (0-9), or underscores (_), and must start with a letter or
         #   underscore. The maximum length is 128 characters. (+String+)
-        # +options+::
-        #   An optional Hash for controlling additional behavior. (+Hash+)
-        # <code>options[:description]</code>::
+        # +description+::
         #   A description of the field. (+String+)
-        # <code>options[:mode]</code>::
+        # +mode+::
         #   The field's mode. The possible values are +:nullable+, +:required+,
         #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
-        def integer name, options = {}
-          add_field name, :integer, nil, options
+        def integer name, description: nil, mode: nil
+          add_field name, :integer, nil, description: description, mode: mode
         end
 
         ##
@@ -119,15 +115,13 @@ module Gcloud
         #   The field name. The name must contain only letters (a-z, A-Z),
         #   numbers (0-9), or underscores (_), and must start with a letter or
         #   underscore. The maximum length is 128 characters. (+String+)
-        # +options+::
-        #   An optional Hash for controlling additional behavior. (+Hash+)
-        # <code>options[:description]</code>::
+        # +description+::
         #   A description of the field. (+String+)
-        # <code>options[:mode]</code>::
+        # +mode+::
         #   The field's mode. The possible values are +:nullable+, +:required+,
         #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
-        def float name, options = {}
-          add_field name, :float, nil, options
+        def float name, description: nil, mode: nil
+          add_field name, :float, nil, description: description, mode: mode
         end
 
         ##
@@ -139,15 +133,13 @@ module Gcloud
         #   The field name. The name must contain only letters (a-z, A-Z),
         #   numbers (0-9), or underscores (_), and must start with a letter or
         #   underscore. The maximum length is 128 characters. (+String+)
-        # +options+::
-        #   An optional Hash for controlling additional behavior. (+Hash+)
-        # <code>options[:description]</code>::
+        # +description+::
         #   A description of the field. (+String+)
-        # <code>options[:mode]</code>::
+        # +mode+::
         #   The field's mode. The possible values are +:nullable+, +:required+,
         #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
-        def boolean name, options = {}
-          add_field name, :boolean, nil, options
+        def boolean name, description: nil, mode: nil
+          add_field name, :boolean, nil, description: description, mode: mode
         end
 
         ##
@@ -159,15 +151,13 @@ module Gcloud
         #   The field name. The name must contain only letters (a-z, A-Z),
         #   numbers (0-9), or underscores (_), and must start with a letter or
         #   underscore. The maximum length is 128 characters. (+String+)
-        # +options+::
-        #   An optional Hash for controlling additional behavior. (+Hash+)
-        # <code>options[:description]</code>::
+        # +description+::
         #   A description of the field. (+String+)
-        # <code>options[:mode]</code>::
+        # +mode+::
         #   The field's mode. The possible values are +:nullable+, +:required+,
         #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
-        def timestamp name, options = {}
-          add_field name, :timestamp, nil, options
+        def timestamp name, description: nil, mode: nil
+          add_field name, :timestamp, nil, description: description, mode: mode
         end
 
         ##
@@ -182,11 +172,9 @@ module Gcloud
         #   The field name. The name must contain only letters (a-z, A-Z),
         #   numbers (0-9), or underscores (_), and must start with a letter or
         #   underscore. The maximum length is 128 characters. (+String+)
-        # +options+::
-        #   An optional Hash for controlling additional behavior. (+Hash+)
-        # <code>options[:description]</code>::
+        # +description+::
         #   A description of the field. (+String+)
-        # <code>options[:mode]</code>::
+        # +mode+::
         #   The field's mode. The possible values are +:nullable+, +:required+,
         #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
         #
@@ -207,12 +195,13 @@ module Gcloud
         #     end
         #   end
         #
-        def record name, options = {}
+        def record name, description: nil, mode: nil
           fail ArgumentError, "nested RECORD type is not permitted" if @nested
           fail ArgumentError, "a block is required" unless block_given?
           nested_schema = self.class.new nil, true
           yield nested_schema
-          add_field name, :record, nested_schema.fields, options
+          add_field name, :record, nested_schema.fields,
+                    description: description, mode: mode
         end
 
         protected
@@ -234,16 +223,17 @@ module Gcloud
           upcase_mode
         end
 
-        def add_field name, type, nested_fields, options
+        def add_field name, type, nested_fields, description: nil,
+                      mode: :nullable
           # Remove any existing field of this name
           @fields.reject! { |h| h["name"] == name }
           field = {
             "name" => name,
             "type" => upcase_type(type)
           }
-          field["mode"] = upcase_mode(options[:mode]) if options[:mode]
-          field["description"] =options[:description] if options[:description]
-          field["fields"] = nested_fields if nested_fields
+          field["fields"]      = nested_fields     if nested_fields
+          field["description"] = description       if description
+          field["mode"]        = upcase_mode(mode) if mode
           @fields << field
         end
       end
