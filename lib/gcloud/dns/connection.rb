@@ -94,12 +94,12 @@ module Gcloud
         )
       end
 
-      def list_changes zone_id, options = {}
+      def list_changes zone_id, token: nil, max: nil, order: nil, sort: nil
         params = { project: @project, managedZone: zone_id,
-                   pageToken: options.delete(:token),
-                   maxResults: options.delete(:max),
-                   sortBy: options.delete(:sort),
-                   sortOrder: options.delete(:order)
+                   pageToken: token,
+                   maxResults: max,
+                   sortBy: sort,
+                   sortOrder: order
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(

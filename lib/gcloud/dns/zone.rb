@@ -276,13 +276,14 @@ module Gcloud
       #     changes = changes.next
       #   end
       #
-      def changes options = {}
+      def changes token: nil, max: nil, order: nil
         ensure_connection!
         # Fix the sort options
-        options[:order] = adjust_change_sort_order options[:order]
-        options[:sort]  = "changeSequence" if options[:order]
+        order = adjust_change_sort_order order
+        sort  = "changeSequence" if order
         # Continue with the API call
-        resp = connection.list_changes id, options
+        resp = connection.list_changes id, token: token, max: max,
+                                           order: order, sort: sort
         if resp.success?
           Change::List.from_response resp, self
         else
