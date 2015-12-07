@@ -99,16 +99,14 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:token]</code>::
+      # +token+::
       #   Page token, returned by a previous call, identifying the result set.
       #   (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of results to return. (+Integer+)
-      # <code>options[:start]</code>::
+      # +start+::
       #   Zero-based index of the starting row to read. (+Integer+)
-      # <code>options[:timeout]</code>::
+      # +timeout+::
       #   How long to wait for the query to complete, in milliseconds, before
       #   returning. Default is 10,000 milliseconds (10 seconds). (+Integer+)
       #
@@ -133,8 +131,9 @@ module Gcloud
       #   end
       #   data = data.next if data.next?
       #
-      def query_results options = {}
+      def query_results token: nil, max: nil, start: nil, timeout: nil
         ensure_connection!
+        options = { token: token, max: max, start: start, timeout: timeout }
         resp = connection.job_query_results job_id, options
         if resp.success?
           QueryData.from_gapi resp.data, connection
