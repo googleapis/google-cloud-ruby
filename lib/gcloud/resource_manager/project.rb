@@ -366,9 +366,7 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:force]</code>::
+      # +force+::
       #   Force load the latest policy when +true+. Otherwise the policy will be
       #   memoized to reduce the number of API calls made. The default is
       #   +false+. (+Boolean+)
@@ -411,8 +409,8 @@ module Gcloud
       #   project = resource_manager.project "tokyo-rain-123"
       #   policy = project.policy force: true
       #
-      def policy options = {}
-        @policy = nil if options[:force]
+      def policy force: nil
+        @policy = nil if force
         @policy ||= begin
           ensure_connection!
           resp = connection.get_policy project_id

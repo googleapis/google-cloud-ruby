@@ -36,10 +36,10 @@ module Gcloud
         @res_man = @client.discovered_api "cloudresourcemanager", API_VERSION
       end
 
-      def list_project options = {}
-        params = { filter: options.delete(:filter),
-                   pageToken: options.delete(:token),
-                   maxResults: options.delete(:max)
+      def list_project filter: nil, token: nil, max: nil
+        params = { filter: filter,
+                   pageToken: token,
+                   maxResults: max
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(

@@ -54,9 +54,7 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:filter]</code>::
+      # +filter+::
       #   An expression for filtering the results of the request. Filter rules
       #   are case insensitive. (+String+)
       #
@@ -74,10 +72,10 @@ module Gcloud
       #   * +labels.color:red+ - The project's label color has the value red.
       #   * <code>labels.color:red labels.size:big</code> - The project's label
       #     color has the value red and its label size has the value big.
-      # <code>options[:token]</code>::
+      # +token+::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of projects to return. (+Integer+)
       #
       # === Returns
@@ -119,8 +117,8 @@ module Gcloud
       #     puts project.project_id
       #   end
       #
-      def projects options = {}
-        resp = connection.list_project options
+      def projects filter: nil, token: nil, max: nil
+        resp = connection.list_project filter: filter, token: token, max: max
         if resp.success?
           Project::List.from_response resp, self
         else
@@ -174,16 +172,14 @@ module Gcloud
       #   The unique, user-assigned ID of the project. It must be 6 to 30
       #   lowercase letters, digits, or hyphens. It must start with a letter.
       #   Trailing hyphens are prohibited. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:name]</code>::
+      # +name+::
       #   The user-assigned name of the project. This field is optional and can
       #   remain unset.
       #
       #   Allowed characters are: lowercase and uppercase letters, numbers,
       #   hyphen, single-quote, double-quote, space, and exclamation point.
       #   (+String+)
-      # <code>options[:labels]</code>::
+      # +labels+::
       #   The labels associated with this project.
       #
       #   Label keys must be between 1 and 63 characters long and must conform
@@ -218,10 +214,10 @@ module Gcloud
       #                                             name: "Todos Development",
       #                                             labels: {env: :development}
       #
-      def create_project project_id, options = {}
+      def create_project project_id, name: nil, labels: nil
         resp = connection.create_project project_id,
-                                         options[:name],
-                                         options[:labels]
+                                         name,
+                                         labels
         if resp.success?
           Project.from_gapi resp.data, connection
         else
