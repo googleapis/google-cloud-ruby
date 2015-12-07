@@ -31,7 +31,6 @@ describe Gcloud::Bigquery::Dataset, :query, :mock_bigquery do
       json["defaultDataset"]["projectId"].must_equal dataset.project_id
       json["timeoutMs"].must_equal 10000
       json["dryRun"].must_be :nil?
-      json["preserveNulls"].must_be :nil?
       json["useQueryCache"].must_equal true
       [200, {"Content-Type"=>"application/json"},
        query_data_json]

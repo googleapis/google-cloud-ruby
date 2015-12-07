@@ -471,7 +471,6 @@ module Gcloud
           "defaultDataset" => dataset_config,
           "timeoutMs" => options[:timeout],
           "dryRun" => options[:dryrun],
-          "preserveNulls" => options[:preserve_nulls],
           "useQueryCache" => options[:cache]
         }.delete_if { |_, v| v.nil? }
       end

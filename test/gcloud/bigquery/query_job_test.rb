@@ -74,7 +74,6 @@ describe Gcloud::Bigquery::QueryJob, :mock_bigquery do
         "projectId" => project
       },
       "priority" => "BATCH",
-      "preserveNulls" => true,
       "allowLargeResults" => true,
       "useQueryCache" => true,
       "flattenResults" => true

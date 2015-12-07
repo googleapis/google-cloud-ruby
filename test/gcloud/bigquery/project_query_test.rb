@@ -31,10 +31,9 @@ describe Gcloud::Bigquery::Project, :query, :mock_bigquery do
       json["query"].must_equal query
       json["maxResults"].must_be :nil?
       json["defaultDataset"].must_be :nil?
-      json["timeoutMs"].must_be :nil?
+      json["timeoutMs"].must_equal 10000
       json["dryRun"].must_be :nil?
-      json["preserveNulls"].must_be :nil?
-      json["useQueryCache"].must_be :nil?
+      json["useQueryCache"].must_equal true
       [200, {"Content-Type"=>"application/json"},
        query_data_json]
     end
@@ -92,10 +91,9 @@ describe Gcloud::Bigquery::Project, :query, :mock_bigquery do
       json["query"].must_equal query
       json["maxResults"].must_equal 42
       json["defaultDataset"].must_be :nil?
-      json["timeoutMs"].must_be :nil?
+      json["timeoutMs"].must_equal 10000
       json["dryRun"].must_be :nil?
-      json["preserveNulls"].must_be :nil?
-      json["useQueryCache"].must_be :nil?
+      json["useQueryCache"].must_equal true
       [200, {"Content-Type"=>"application/json"},
        query_data_json]
     end
@@ -113,10 +111,9 @@ describe Gcloud::Bigquery::Project, :query, :mock_bigquery do
       json["defaultDataset"].wont_be :nil?
       json["defaultDataset"]["datasetId"].must_equal "some_random_dataset"
       json["defaultDataset"]["projectId"].must_equal project
-      json["timeoutMs"].must_be :nil?
+      json["timeoutMs"].must_equal 10000
       json["dryRun"].must_be :nil?
-      json["preserveNulls"].must_be :nil?
-      json["useQueryCache"].must_be :nil?
+      json["useQueryCache"].must_equal true
       [200, {"Content-Type"=>"application/json"},
        query_data_json]
     end
@@ -134,10 +131,9 @@ describe Gcloud::Bigquery::Project, :query, :mock_bigquery do
       json["defaultDataset"].wont_be :nil?
       json["defaultDataset"]["datasetId"].must_equal "some_random_dataset"
       json["defaultDataset"]["projectId"].must_equal "some_random_project"
-      json["timeoutMs"].must_be :nil?
+      json["timeoutMs"].must_equal 10000
       json["dryRun"].must_be :nil?
-      json["preserveNulls"].must_be :nil?
-      json["useQueryCache"].must_be :nil?
+      json["useQueryCache"].must_equal true
       [200, {"Content-Type"=>"application/json"},
        query_data_json]
     end
@@ -156,8 +152,7 @@ describe Gcloud::Bigquery::Project, :query, :mock_bigquery do
       json["defaultDataset"].must_be :nil?
       json["timeoutMs"].must_equal 15000
       json["dryRun"].must_be :nil?
-      json["preserveNulls"].must_be :nil?
-      json["useQueryCache"].must_be :nil?
+      json["useQueryCache"].must_equal true
       [200, {"Content-Type"=>"application/json"},
        query_data_json]
     end
@@ -167,40 +162,20 @@ describe Gcloud::Bigquery::Project, :query, :mock_bigquery do
     data.count.must_equal 3
   end
 
-  it "queries the data with XXX option" do
+  it "queries the data with dryrun option" do
     mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
       json = JSON.parse(env.body)
       json["query"].must_equal query
       json["maxResults"].must_be :nil?
       json["defaultDataset"].must_be :nil?
-      json["timeoutMs"].must_be :nil?
+      json["timeoutMs"].must_equal 10000
       json["dryRun"].must_equal true
-      json["preserveNulls"].must_be :nil?
-      json["useQueryCache"].must_be :nil?
+      json["useQueryCache"].must_equal true
       [200, {"Content-Type"=>"application/json"},
        query_data_json]
     end
 
     data = bigquery.query query, dryrun: true
-    data.class.must_equal Gcloud::Bigquery::QueryData
-    data.count.must_equal 3
-  end
-
-  it "queries the data with preserve_nulls option" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      json = JSON.parse(env.body)
-      json["query"].must_equal query
-      json["maxResults"].must_be :nil?
-      json["defaultDataset"].must_be :nil?
-      json["timeoutMs"].must_be :nil?
-      json["dryRun"].must_be :nil?
-      json["preserveNulls"].must_equal true
-      json["useQueryCache"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
-
-    data = bigquery.query query, preserve_nulls: true
     data.class.must_equal Gcloud::Bigquery::QueryData
     data.count.must_equal 3
   end
@@ -211,9 +186,8 @@ describe Gcloud::Bigquery::Project, :query, :mock_bigquery do
       json["query"].must_equal query
       json["maxResults"].must_be :nil?
       json["defaultDataset"].must_be :nil?
-      json["timeoutMs"].must_be :nil?
+      json["timeoutMs"].must_equal 10000
       json["dryRun"].must_be :nil?
-      json["preserveNulls"].must_be :nil?
       json["useQueryCache"].must_equal true
       [200, {"Content-Type"=>"application/json"},
        query_data_json]

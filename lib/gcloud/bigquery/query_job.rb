@@ -47,7 +47,7 @@ module Gcloud
       # Checks if the the query job allows arbitrarily large results at a slight
       # cost to performance.
       def large_results?
-        val = config["query"]["preserveNulls"]
+        val = config["query"]["allowLargeResults"]
         return false if val.nil?
         val
       end
