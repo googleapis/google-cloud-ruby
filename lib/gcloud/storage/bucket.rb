@@ -304,9 +304,7 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:retries]</code>::
+      # +retries+::
       #   The number of times the API call should be retried.
       #   Default is Gcloud::Backoff.retries. (+Integer+)
       #
@@ -336,8 +334,9 @@ module Gcloud
       #   bucket = storage.bucket "my-bucket"
       #   bucket.delete retries: 5
       #
-      def delete options = {}
+      def delete retries: nil
         ensure_connection!
+        options = { retries: retries }
         resp = connection.delete_bucket name, options
         if resp.success?
           true
@@ -351,26 +350,22 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:prefix]</code>::
+      # +prefix+::
       #   Filter results to files whose names begin with this prefix.
       #   (+String+)
-      # <code>options[:token]</code>::
+      # +token+::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of items plus prefixes to return. As duplicate prefixes
       #   are omitted, fewer total results may be returned than requested.
       #   The default value of this parameter is 1,000 items. (+Integer+)
-      # <code>options[:versions]</code>::
+      # +versions+::
       #   If +true+, lists all versions of an object as distinct results.
       #   The default is +false+. For more information, see
       #   {Object Versioning
       #   }[https://cloud.google.com/storage/docs/object-versioning].
       #   (+Boolean+)
-      # <code>options[:max]</code>::
-      #   Maximum number of buckets to return. (+Integer+)
       #
       # === Returns
       #
@@ -411,8 +406,9 @@ module Gcloud
       #     tmp_files = bucket.files token: tmp_files.token
       #   end
       #
-      def files options = {}
+      def files prefix: nil, token: nil, max: nil, versions: nil
         ensure_connection!
+        options = { prefix: prefix, token: token, max: max, versions: versions }
         resp = connection.list_files name, options
         if resp.success?
           File::List.from_response resp, connection
@@ -429,6 +425,9 @@ module Gcloud
       #
       # +path+::
       #   Name (path) of the file. (+String+)
+      # +generation+::
+      #   When present, selects a specific revision of this object.
+      #   Default is the latest version. (+Integer+)
       #
       # === Returns
       #
@@ -446,8 +445,9 @@ module Gcloud
       #   file = bucket.file "path/to/my-file.ext"
       #   puts file.name
       #
-      def file path, options = {}
+      def file path, generation: nil
         ensure_connection!
+        options = { generation: generation }
         resp = connection.get_file name, path, options
         if resp.success?
           File.from_gapi resp.data, connection
@@ -467,9 +467,7 @@ module Gcloud
       #   Path of the file on the filesystem to upload. (+String+)
       # +path+::
       #   Path to store the file in Google Cloud Storage. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:acl]</code>::
+      # +acl+::
       #   A predefined set of access controls to apply to this file.
       #   (+String+)
       #
@@ -486,40 +484,40 @@ module Gcloud
       #     and project team members get access according to their roles.
       #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
       #     access, and allUsers get READER access.
-      # <code>options[:cache_control]</code>::
+      # +cache_control+::
       #   The {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
       #   response header to be returned when the file is downloaded. (+String+)
-      # <code>options[:content_disposition]</code>::
+      # +content_disposition+::
       #   The {Content-Disposition}[https://tools.ietf.org/html/rfc6266]
       #   response header to be returned when the file is downloaded. (+String+)
-      # <code>options[:content_encoding]</code>::
+      # +content_encoding+::
       #   The {Content-Encoding
       #   }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] response header
       #   to be returned when the file is downloaded. (+String+)
-      # <code>options[:content_language]</code>::
+      # +content_language+::
       #   The {Content-Language}[http://tools.ietf.org/html/bcp47] response
       #   header to be returned when the file is downloaded. (+String+)
-      # <code>options[:content_type]</code>::
+      # +content_type+::
       #   The {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17]
       #   response header to be returned when the file is downloaded. (+String+)
-      # <code>options[:chunk_size]</code>::
+      # +chunk_size+::
       #   The number of bytes per chunk in a resumable upload. Must be divisible
       #   by 256KB. If it is not divisible by 265KB then it will be lowered to
       #   the nearest acceptable value. (+Integer+)
-      # <code>options[:crc32c]</code>::
+      # +crc32c+::
       #   The CRC32c checksum of the file data, as described in
       #   {RFC 4960, Appendix B}[http://tools.ietf.org/html/rfc4960#appendix-B].
       #   If provided, Cloud Storage will only create the file if the value
       #   matches the value calculated by the service. See
       #   {Validation}[https://cloud.google.com/storage/docs/hashes-etags]
       #   for more information. (+String+)
-      # <code>options[:md5]</code>::
+      # +md5+::
       #   The MD5 hash of the file data. If provided, Cloud Storage will only
       #   create the file if the value matches the value calculated by the
       #   service. See
       #   {Validation}[https://cloud.google.com/storage/docs/hashes-etags]
       #   for more information. (+String+)
-      # <code>options[:metadata]</code>::
+      # +metadata+::
       #   A hash of custom, user-provided web-safe keys and arbitrary string
       #   values that will returned with requests for the file as "x-goog-meta-"
       #   response headers. (+Hash+)
@@ -604,18 +602,22 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   storage = gcloud.storage
       #
-      def create_file file, path = nil, options = {}
+      def create_file file, path = nil, acl: nil, cache_control: nil,
+                      content_disposition: nil, content_encoding: nil,
+                      content_language: nil, content_type: nil, chunk_size: nil,
+                      crc32c: nil, md5: nil, metadata: nil
         ensure_connection!
+        options = { acl: File::Acl.predefined_rule_for(acl), md5: md5,
+                    cache_control: cache_control, content_type: content_type,
+                    content_disposition: content_disposition, crc32c: crc32c,
+                    content_encoding: content_encoding, chunk_size: chunk_size,
+                    content_language: content_language, metadata: metadata }
         ensure_file_exists! file
-        options[:acl] = File::Acl.predefined_rule_for options[:acl]
         resumable = resumable_upload?(file)
         resp = @connection.upload_file resumable, name, file, path, options
 
-        if resp.success?
-          File.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        return File.from_gapi(resp.data, connection) if resp.success?
+        fail ApiError.from_response(resp)
       end
       alias_method :upload_file, :create_file
       alias_method :new_file, :create_file
