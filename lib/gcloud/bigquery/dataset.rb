@@ -281,9 +281,7 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:force]</code>::
+      # +force+::
       #   If +true+, delete all the tables in the dataset. If +false+ and the
       #   dataset contains tables, the request will fail. Default is +false+.
       #   (+Boolean+)
@@ -304,9 +302,9 @@ module Gcloud
       #
       # :category: Lifecycle
       #
-      def delete options = {}
+      def delete force: nil
         ensure_connection!
-        resp = connection.delete_dataset dataset_id, options
+        resp = connection.delete_dataset dataset_id, force
         if resp.success?
           true
         else
@@ -323,13 +321,11 @@ module Gcloud
       #   The ID of the table. The ID must contain only letters (a-z, A-Z),
       #   numbers (0-9), or underscores (_). The maximum length is 1,024
       #   characters. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:name]</code>::
+      # +name+::
       #   A descriptive name for the table. (+String+)
-      # <code>options[:description]</code>::
+      # +description+::
       #   A user-friendly description of the table. (+String+)
-      # <code>options[:schema]</code>::
+      # +schema+::
       #   A hash specifying fields and data types for the table. A block may be
       #   passed instead (see examples.) For the format of this hash, see the
       #   {Tables resource
@@ -415,16 +411,17 @@ module Gcloud
       #
       # :category: Table
       #
-      def create_table table_id, options = {}
+      def create_table table_id, name: nil, description: nil, schema: nil
         ensure_connection!
         if block_given?
-          if options[:schema]
+          if schema
             fail ArgumentError, "only schema block or schema option is allowed"
           end
           schema_builder = Table::Schema.new nil
           yield schema_builder
-          options[:schema] = schema_builder.schema if schema_builder.changed?
+          schema = schema_builder.schema if schema_builder.changed?
         end
+        options = { name: name, description: description, schema: schema }
         insert_table table_id, options
       end
 
@@ -440,11 +437,9 @@ module Gcloud
       # +query+::
       #   The query that BigQuery executes when the view is referenced.
       #   (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:name]</code>::
+      # +name+::
       #   A descriptive name for the table. (+String+)
-      # <code>options[:description]</code>::
+      # +description+::
       #   A user-friendly description of the table. (+String+)
       #
       # === Returns
@@ -474,9 +469,9 @@ module Gcloud
       #
       # :category: Table
       #
-      def create_view table_id, query, options = {}
-        options[:query] = query
-        create_table table_id, options
+      def create_view table_id, query, name: nil, description: nil
+        options = { query: query, name: name, description: description }
+        insert_table table_id, options
       end
 
       ##
@@ -519,12 +514,10 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:token]</code>::
+      # +token+::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of tables to return. (+Integer+)
       #
       # === Returns
@@ -567,8 +560,9 @@ module Gcloud
       #
       # :category: Table
       #
-      def tables options = {}
+      def tables token: nil, max: nil
         ensure_connection!
+        options = { token: token, max: max }
         resp = connection.list_tables dataset_id, options
         if resp.success?
           Table::List.from_response resp, connection
@@ -591,25 +585,25 @@ module Gcloud
       #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
       #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]". (+String+)
-      # <code>options[:priority]</code>::
+      # +priority+::
       #   Specifies a priority for the query. Possible values include
       #   +INTERACTIVE+ and +BATCH+. The default value is +INTERACTIVE+.
       #   (+String+)
-      # <code>options[:cache]</code>::
+      # +cache+::
       #   Whether to look for the result in the query cache. The query cache is
       #   a best-effort cache that will be flushed whenever tables in the query
       #   are modified. The default value is +true+. (+Boolean+)
-      # <code>options[:table]</code>::
+      # +table+::
       #   The destination table where the query results should be stored. If not
       #   present, a new table will be created to store the results. (+Table+)
-      # <code>options[:create]</code>::
+      # +create+::
       #   Specifies whether the job is allowed to create new tables. (+String+)
       #
       #   The following values are supported:
       #   * +needed+ - Create the table if it does not exist.
       #   * +never+ - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
-      # <code>options[:write]</code>::
+      # +write+::
       #   Specifies the action that occurs if the destination table already
       #   exists. (+String+)
       #
@@ -618,11 +612,11 @@ module Gcloud
       #   * +append+ - BigQuery appends the data to the table.
       #   * +empty+ - A 'duplicate' error is returned in the job result if the
       #     table exists and contains data.
-      # <code>options[:large_results]</code>::
+      # +large_results+::
       #   If +true+, allows the query to produce arbitrarily large result tables
       #   at a slight cost in performance. Requires <code>options[:table]</code>
       #   to be set. (+Boolean+)
-      # <code>options[:flatten]</code>::
+      # +flatten+::
       #   Flattens all nested and repeated fields in the query results. The
       #   default value is +true+. <code>options[:large_results]</code> must be
       #   +true+ if this is set to +false+. (+Boolean+)
@@ -649,7 +643,11 @@ module Gcloud
       #
       # :category: Data
       #
-      def query_job query, options = {}
+      def query_job query, priority: "INTERACTIVE", cache: true, table: nil,
+                    create: nil, write: nil, large_results: nil, flatten: nil
+        options = { priority: priority, cache: cache, table: table,
+                    create: create, write: write, large_results: large_results,
+                    flatten: flatten }
         options[:dataset] ||= self
         ensure_connection!
         resp = connection.query_job query, options
@@ -674,26 +672,26 @@ module Gcloud
       #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
       #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]". (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   The maximum number of rows of data to return per page of results.
       #   Setting this flag to a small value such as 1000 and then paging
       #   through results might improve reliability when the query result set is
       #   large. In addition to this limit, responses are also limited to 10 MB.
       #   By default, there is no maximum row count, and only the byte limit
       #   applies. (+Integer+)
-      # <code>options[:timeout]</code>::
+      # +timeout+::
       #   How long to wait for the query to complete, in milliseconds, before
       #   the request times out and returns. Note that this is only a timeout
       #   for the request, not the query. If the query takes longer to run than
       #   the timeout value, the call returns without any results and with
       #   QueryData#complete? set to false. The default value is 10000
       #   milliseconds (10 seconds). (+Integer+)
-      # <code>options[:dryrun]</code>::
+      # +dryrun+::
       #   If set to +true+, BigQuery doesn't run the job. Instead, if the query
       #   is valid, BigQuery returns statistics about the job such as how many
       #   bytes would be processed. If the query is invalid, an error returns.
       #   The default value is +false+. (+Boolean+)
-      # <code>options[:cache]</code>::
+      # +cache+::
       #   Whether to look for the result in the query cache. The query cache is
       #   a best-effort cache that will be flushed whenever tables in the query
       #   are modified. The default value is true. For more information, see
@@ -718,7 +716,8 @@ module Gcloud
       #
       # :category: Data
       #
-      def query query, options = {}
+      def query query, max: nil, timeout: 10000, dryrun: nil, cache: true
+        options = { max: max, timeout: timeout, dryrun: dryrun, cache: cache }
         options[:dataset] ||= dataset_id
         options[:project] ||= project_id
         ensure_connection!

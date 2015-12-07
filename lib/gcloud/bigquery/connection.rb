@@ -94,11 +94,11 @@ module Gcloud
       # either manually or by specifying force: true in options.
       # Immediately after deletion, you can create another dataset with
       # the same name.
-      def delete_dataset dataset_id, options = {}
+      def delete_dataset dataset_id, force = nil
         @client.execute(
           api_method: @bigquery.datasets.delete,
           parameters: { projectId: @project, datasetId: dataset_id,
-                        deleteContents: options[:force]
+                        deleteContents: force
                       }.delete_if { |_, v| v.nil? }
         )
       end
