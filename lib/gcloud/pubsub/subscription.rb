@@ -199,18 +199,16 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:immediate]</code>::
+      # +immediate+::
       #   When +true+ the system will respond immediately even if it is not able
       #   to return messages. When +false+ the system is allowed to wait until
       #   it can return least one message. No messages are returned when a
       #   request times out. The default value is +true+. (+Boolean+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   The maximum number of messages to return for this request. The Pub/Sub
       #   system may return fewer than the number specified. The default value
       #   is +100+, the maximum value is +1000+. (+Integer+)
-      # <code>options[:autoack]</code>::
+      # +autoack+::
       #   Automatically acknowledge the message as it is pulled. The default
       #   value is +false+. (+Boolean+)
       #
@@ -250,14 +248,15 @@ module Gcloud
       #   msgs = sub.pull immediate: false
       #   msgs.each { |msg| msg.acknowledge! }
       #
-      def pull options = {}
+      def pull immediate: true, max: 100, autoack: false
         ensure_connection!
+        options = { immediate: immediate, max: max }
         resp = connection.pull name, options
         if resp.success?
           messages = Array(resp.data["receivedMessages"]).map do |gapi|
             ReceivedMessage.from_gapi gapi, self
           end
-          acknowledge messages if options[:autoack]
+          acknowledge messages if autoack
           messages
         else
           fail ApiError.from_response(resp)
@@ -274,13 +273,11 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   The maximum number of messages to return for this request. The Pub/Sub
       #   system may return fewer than the number specified. The default value
       #   is +100+, the maximum value is +1000+. (+Integer+)
-      # <code>options[:autoack]</code>::
+      # +autoack+::
       #   Automatically acknowledge the message as it is pulled. The default
       #   value is +false+. (+Boolean+)
       #
@@ -299,8 +296,8 @@ module Gcloud
       #   msgs = sub.wait_for_messages
       #   msgs.each { |msg| msg.acknowledge! }
       #
-      def wait_for_messages options = {}
-        pull options.merge(immediate: false)
+      def wait_for_messages max: 100, autoack: false
+        pull immediate: false, max: max, autoack: autoack
       end
 
       ##
@@ -309,16 +306,14 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   The maximum number of messages to return for this request. The Pub/Sub
       #   system may return fewer than the number specified. The default value
       #   is +100+, the maximum value is +1000+. (+Integer+)
-      # <code>options[:autoack]</code>::
+      # +autoack+::
       #   Automatically acknowledge the message as it is pulled. The default
       #   value is +false+. (+Boolean+)
-      # <code>options[:delay]</code>::
+      # +delay+::
       #   The number of seconds to pause between requests when the Google Cloud
       #   service has no messages to return. The default value is +1+.
       #   (+Number+)
@@ -361,10 +356,9 @@ module Gcloud
       #     # process msg
       #   end
       #
-      def listen options = {}
-        delay = options.fetch(:delay, 1)
+      def listen max: 100, autoack: false, delay: 1
         loop do
-          msgs = wait_for_messages options
+          msgs = wait_for_messages max: max, autoack: autoack
           if msgs.any?
             msgs.each { |msg| yield msg }
           else
@@ -456,9 +450,7 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:force]</code>::
+      # +force+::
       #   Force the latest policy to be retrieved from the Pub/Sub service when
       #   +true. Otherwise the policy will be memoized to reduce the number of
       #   API calls made to the Pub/Sub service. The default is +false+.
@@ -501,8 +493,8 @@ module Gcloud
       #   subscription = pubsub.subscription "my-subscription"
       #   policy = subscription.policy force: true
       #
-      def policy options = {}
-        @policy = nil if options[:force]
+      def policy force: nil
+        @policy = nil if force
         @policy ||= begin
           ensure_connection!
           resp = connection.get_subscription_policy name
