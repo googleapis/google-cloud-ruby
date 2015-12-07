@@ -241,9 +241,7 @@ module Gcloud
       #
       # +query+::
       #   The Query object with the search criteria. (+Query+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:namespace]</code>::
+      # +namespace+::
       #   The namespace the query is to run within. (+String+)
       #
       # === Returns
@@ -263,8 +261,8 @@ module Gcloud
       #     where("completed", "=", true)
       #   tasks = dataset.run query, namespace: "ns~todo-project"
       #
-      def run query, options = {}
-        partition = optional_partition_id options[:namespace]
+      def run query, namespace: nil
+        partition = optional_partition_id namespace
         response = connection.run_query query.to_proto, partition
         entities = to_gcloud_entities response.batch.entity_result
         cursor = Proto.encode_cursor response.batch.end_cursor
