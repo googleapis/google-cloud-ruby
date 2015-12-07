@@ -121,9 +121,7 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:force]</code>::
+      # +force+::
       #   If +true+, ensures the deletion of the zone by first deleting all
       #   records. If +false+ and the zone contains non-essential records, the
       #   request will fail. Default is +false+. (+Boolean+)
@@ -150,8 +148,8 @@ module Gcloud
       #   zone = dns.zone "example-com"
       #   zone.delete force: true
       #
-      def delete options = {}
-        clear! if options[:force]
+      def delete force: false
+        clear! if force
 
         ensure_connection!
         resp = connection.delete_zone id
