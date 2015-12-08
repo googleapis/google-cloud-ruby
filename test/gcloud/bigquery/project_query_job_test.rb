@@ -29,8 +29,8 @@ describe Gcloud::Bigquery::Project, :query_job, :mock_bigquery do
     mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(env.body)
       json["configuration"]["query"]["query"].must_equal query
-      json["configuration"]["query"]["priority"].must_be :nil?
-      json["configuration"]["query"]["useQueryCache"].must_be :nil?
+      json["configuration"]["query"]["priority"].must_equal "INTERACTIVE"
+      json["configuration"]["query"]["useQueryCache"].must_equal true
       json["configuration"]["query"]["destinationTable"].must_be :nil?
       json["configuration"]["query"]["createDisposition"].must_be :nil?
       json["configuration"]["query"]["writeDisposition"].must_be :nil?

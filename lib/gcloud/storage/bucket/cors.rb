@@ -75,14 +75,12 @@ module Gcloud
         #   The list of HTTP methods permitted in cross origin resource sharing
         #   with the bucket. (GET, OPTIONS, POST, etc) Note: "*" is permitted in
         #   the list of methods, and means "any method". (+String+ or +Array+)
-        # +options+::
-        #   An optional Hash for controlling additional behavior. (+Hash+)
-        # <code>options[:headers]</code>::
+        # +headers+::
         #   The list of header field names to send in the
         #   Access-Control-Allow-Headers header in the preflight response.
         #   Indicates the custom request headers that may be used in the actual
         #   request. (+String+ or +Array+)
-        # <code>options[:max_age]</code>::
+        # +max_age+::
         #   The value to send in the Access-Control-Max-Age header in the
         #   preflight response. Indicates how many seconds the results of a
         #   preflight request can be cached in a preflight result cache. The
@@ -102,10 +100,10 @@ module Gcloud
         #                max_age: 300
         #   end
         #
-        def add_rule origin, methods, options = {}
+        def add_rule origin, methods, headers: nil, max_age: nil
           rule = { "origin" => Array(origin), "method" => Array(methods) }
-          rule["responseHeader"] = Array(options[:headers]) || []
-          rule["maxAgeSeconds"] = options[:max_age] || 1800
+          rule["responseHeader"] = Array(headers) || []
+          rule["maxAgeSeconds"]  = max_age || 1800
           push rule
         end
       end

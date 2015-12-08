@@ -33,7 +33,7 @@ describe Gcloud::Credentials, :private do
     mocked_signet = MiniTest::Mock.new
     mocked_signet.expect :fetch_access_token!, true
 
-    stubbed_signet = ->(options) {
+    stubbed_signet = ->(options, scope: nil) {
       options[:token_credential_uri].must_equal "https://accounts.google.com/o/oauth2/token"
       options[:audience].must_equal "https://accounts.google.com/o/oauth2/token"
       options[:scope].must_equal []
@@ -54,7 +54,7 @@ describe Gcloud::Credentials, :private do
     mocked_signet = MiniTest::Mock.new
     mocked_signet.expect :fetch_access_token!, true
 
-    stubbed_signet = ->(options) {
+    stubbed_signet = ->(options, scope: nil) {
       options[:token_credential_uri].must_equal "https://accounts.google.com/o/oauth2/token"
       options[:audience].must_equal "https://accounts.google.com/o/oauth2/token"
       options[:scope].must_equal ["http://example.com/scope"]

@@ -85,17 +85,15 @@ module Gcloud
       #
       # +topic_name+::
       #   Name of a topic. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:autocreate]</code>::
+      # +autocreate+::
       #   Flag to control whether the requested topic will be created if it does
       #   not exist. Ignored if +skip_lookup+ is +true+. The default value is
       #   +false+. (+Boolean+)
-      # <code>options[:project]</code>::
+      # +project+::
       #   If the topic belongs to a project other than the one currently
       #   connected to, the alternate project ID can be specified here.
       #   (+String+)
-      # <code>options[:skip_lookup]</code>::
+      # +skip_lookup+::
       #   Optionally create a Topic object without verifying the topic resource
       #   exists on the Pub/Sub service. Calls made on this object will raise
       #   errors if the topic resource does not exist. Default is +false+.
@@ -150,15 +148,14 @@ module Gcloud
       #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "another-topic", skip_lookup: true
       #
-      def topic topic_name, options = {}
+      def topic topic_name, autocreate: nil, project: nil, skip_lookup: nil
         ensure_connection!
-        if options[:skip_lookup]
-          return Topic.new_lazy(topic_name, connection, options)
-        end
+        options = { project: project }
+        return Topic.new_lazy(topic_name, connection, options) if skip_lookup
         resp = connection.get_topic topic_name
         return Topic.from_gapi(resp.data, connection) if resp.success?
         if resp.status == 404
-          return create_topic(topic_name) if options[:autocreate]
+          return create_topic(topic_name) if autocreate
           return nil
         end
         fail ApiError.from_response(resp)
@@ -202,14 +199,11 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      #   (+String+)
-      # <code>options[:token]</code>::
+      # +token+::
       #   The +token+ value returned by the last call to +topics+; indicates
       #   that this is a continuation of a call, and that the system should
       #   return the next page of data. (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of topics to return. (+Integer+)
       #
       # === Returns
@@ -248,8 +242,9 @@ module Gcloud
       #     tmp_topics = pubsub.topics token: tmp_topics.token
       #   end
       #
-      def topics options = {}
+      def topics token: nil, max: nil
         ensure_connection!
+        options = { token: token, max: max }
         resp = connection.list_topics options
         if resp.success?
           Topic::List.from_response resp, connection
@@ -353,15 +348,13 @@ module Gcloud
       #   periods (.), tildes (~), plus (+) or percent signs (%). It must be
       #   between 3 and 255 characters in length, and it must not start with
       #   "goog". (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:deadline]</code>::
+      # +deadline+::
       #   The maximum number of seconds after a subscriber receives a message
       #   before the subscriber should acknowledge the message. (+Integer+)
-      # <code>options[:endpoint]</code>::
+      # +endpoint+::
       #   A URL locating the endpoint to which messages should be pushed.
       #   e.g. "https://example.com/push" (+String+)
-      # <code>attributes[:autocreate]</code>::
+      # +autocreate+::
       #   Flag to control whether the topic will be created if it does not
       #   exist.
       #
@@ -411,15 +404,18 @@ module Gcloud
       #
       #   sub = pubsub.subscribe "new-topic", "new-topic-sub", autocreate: true
       #
-      def subscribe topic_name, subscription_name, options = {}
+      def subscribe topic_name, subscription_name, deadline: nil, endpoint: nil,
+                    autocreate: nil
         ensure_connection!
+        options = { deadline: deadline, endpoint: endpoint }
         resp = connection.create_subscription topic_name,
                                               subscription_name, options
         return Subscription.from_gapi(resp.data, connection) if resp.success?
-        if options[:autocreate] && resp.status == 404
+        if autocreate && resp.status == 404
           create_topic topic_name
           return subscribe(topic_name, subscription_name,
-                           options.merge(autocreate: false))
+                           deadline: deadline, endpoint: endpoint,
+                           autocreate: false)
         end
         fail ApiError.from_response(resp)
       end
@@ -433,13 +429,11 @@ module Gcloud
       #
       # +subscription_name+::
       #   Name of a subscription. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:project]</code>::
+      # +project+::
       #   If the subscription belongs to a project other than the one currently
       #   connected to, the alternate project ID can be specified here.
       #   (+String+)
-      # <code>options[:skip_lookup]</code>::
+      # +skip_lookup+::
       #   Optionally create a Subscription object without verifying the
       #   subscription resource exists on the Pub/Sub service. Calls made on
       #   this object will raise errors if the service resource does not exist.
@@ -471,9 +465,10 @@ module Gcloud
       #   subscription = pubsub.subscription "my-sub", skip_lookup: true
       #   puts subscription.name
       #
-      def subscription subscription_name, options = {}
+      def subscription subscription_name, project: nil, skip_lookup: nil
         ensure_connection!
-        if options[:skip_lookup]
+        options = { project: project }
+        if skip_lookup
           return Subscription.new_lazy(subscription_name, connection, options)
         end
         resp = connection.get_subscription subscription_name
@@ -489,15 +484,13 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:prefix]</code>::
+      # +prefix+::
       #   Filter results to subscriptions whose names begin with this prefix.
       #   (+String+)
-      # <code>options[:token]</code>::
+      # +token+::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of subscriptions to return. (+Integer+)
       #
       # === Returns
@@ -537,8 +530,9 @@ module Gcloud
       #     tmp_subs = pubsub.subscriptions token: tmp_subs.token
       #   end
       #
-      def subscriptions options = {}
+      def subscriptions prefix: nil, token: nil, max: nil
         ensure_connection!
+        options = { prefix: prefix, token: token, max: max }
         resp = connection.list_subscriptions options
         if resp.success?
           Subscription::List.from_response resp, connection

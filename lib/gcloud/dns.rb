@@ -30,9 +30,7 @@ module Gcloud
   # +keyfile+::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
   #   readable. (+String+ or +Hash+)
-  # +options+::
-  #   An optional Hash for controlling additional behavior. (+Hash+)
-  # <code>options[:scope]</code>::
+  # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See {Using OAuth 2.0 to Access Google
   #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
@@ -55,12 +53,12 @@ module Gcloud
   #
   #   zone = dns.zone "example-com"
   #
-  def self.dns project = nil, keyfile = nil, options = {}
+  def self.dns project = nil, keyfile = nil, scope: nil
     project ||= Gcloud::Dns::Project.default_project
     if keyfile.nil?
-      credentials = Gcloud::Dns::Credentials.default options
+      credentials = Gcloud::Dns::Credentials.default scope: scope
     else
-      credentials = Gcloud::Dns::Credentials.new keyfile, options
+      credentials = Gcloud::Dns::Credentials.new keyfile, scope: scope
     end
     Gcloud::Dns::Project.new project, credentials
   end

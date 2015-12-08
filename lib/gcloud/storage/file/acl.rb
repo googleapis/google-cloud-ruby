@@ -174,9 +174,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # +options+::
-        #   An optional Hash for controlling additional behavior. (+Hash+)
-        # <code>options[:generation]</code>::
+        # +generation+::
         #   When present, selects a specific revision of this object.
         #   Default is the latest version. (+Integer+)
         #
@@ -210,7 +208,8 @@ module Gcloud
         #   email = "authors@example.net"
         #   file.acl.add_owner "group-#{email}"
         #
-        def add_owner entity, options = {}
+        def add_owner entity, generation: nil
+          options = { generation: generation }
           resp = @connection.insert_file_acl @bucket, @file, entity,
                                              "OWNER", options
           if resp.success?
@@ -239,9 +238,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # +options+::
-        #   An optional Hash for controlling additional behavior. (+Hash+)
-        # <code>options[:generation]</code>::
+        # +generation+::
         #   When present, selects a specific revision of this object.
         #   Default is the latest version. (+Integer+)
         #
@@ -275,7 +272,8 @@ module Gcloud
         #   email = "authors@example.net"
         #   file.acl.add_writer "group-#{email}"
         #
-        def add_writer entity, options = {}
+        def add_writer entity, generation: nil
+          options = { generation: generation }
           resp = @connection.insert_file_acl @bucket, @file, entity,
                                              "WRITER", options
           if resp.success?
@@ -304,9 +302,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # +options+::
-        #   An optional Hash for controlling additional behavior. (+Hash+)
-        # <code>options[:generation]</code>::
+        # +generation+::
         #   When present, selects a specific revision of this object.
         #   Default is the latest version. (+Integer+)
         #
@@ -340,7 +336,8 @@ module Gcloud
         #   email = "authors@example.net"
         #   file.acl.add_reader "group-#{email}"
         #
-        def add_reader entity, options = {}
+        def add_reader entity, generation: nil
+          options = { generation: generation }
           resp = @connection.insert_file_acl @bucket, @file, entity,
                                              "READER", options
           if resp.success?
@@ -369,9 +366,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # +options+::
-        #   An optional Hash for controlling additional behavior. (+Hash+)
-        # <code>options[:generation]</code>::
+        # +generation+::
         #   When present, selects a specific revision of this object.
         #   Default is the latest version. (+Integer+)
         #
@@ -388,7 +383,8 @@ module Gcloud
         #   email = "heidi@example.net"
         #   file.acl.delete "user-#{email}"
         #
-        def delete entity, options = {}
+        def delete entity, generation: nil
+          options = { generation: generation }
           resp = @connection.delete_file_acl @bucket, @file, entity, options
           if resp.success?
             @owners.delete entity  unless @owners.nil?

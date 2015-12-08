@@ -108,12 +108,10 @@ module Gcloud
       #   periods (.), tildes (~), plus (+) or percent signs (%). It must be
       #   between 3 and 255 characters in length, and it must not start with
       #   "goog". (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:deadline]</code>::
+      # +deadline+::
       #   The maximum number of seconds after a subscriber receives a message
       #   before the subscriber should acknowledge the message. (+Integer+)
-      # <code>options[:endpoint]</code>::
+      # +endpoint+::
       #   A URL locating the endpoint to which messages should be pushed.
       #   e.g. "https://example.com/push" (+String+)
       #
@@ -156,8 +154,9 @@ module Gcloud
       #                         deadline: 120,
       #                         endpoint: "https://example.com/push"
       #
-      def subscribe subscription_name, options = {}
+      def subscribe subscription_name, deadline: nil, endpoint: nil
         ensure_connection!
+        options = { deadline: deadline, endpoint: endpoint }
         resp = connection.create_subscription name, subscription_name, options
         if resp.success?
           Subscription.from_gapi resp.data, connection
@@ -175,9 +174,7 @@ module Gcloud
       #
       # +subscription_name+::
       #   Name of a subscription. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:skip_lookup]</code>::
+      # +skip_lookup+::
       #   Optionally create a Subscription object without verifying the
       #   subscription resource exists on the Pub/Sub service. Calls made on
       #   this object will raise errors if the service resource does not exist.
@@ -210,10 +207,10 @@ module Gcloud
       #   subscription = pubsub.subscription "my-sub", skip_lookup: true
       #   puts subscription.name
       #
-      def subscription subscription_name, options = {}
+      def subscription subscription_name, skip_lookup: nil
         ensure_connection!
-        if options[:skip_lookup]
-          return Subscription.new_lazy(subscription_name, connection, options)
+        if skip_lookup
+          return Subscription.new_lazy(subscription_name, connection)
         end
         resp = connection.get_subscription subscription_name
         return Subscription.from_gapi(resp.data, connection) if resp.success?
@@ -228,13 +225,11 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:token]</code>::
+      # +token+::
       #   The +token+ value returned by the last call to +subscriptions+;
       #   indicates that this is a continuation of a call, and that the system
       #   should return the next page of data. (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of subscriptions to return. (+Integer+)
       #
       # === Returns
@@ -275,8 +270,9 @@ module Gcloud
       #     tmp_subs = topic.subscriptions token: tmp_subs.token
       #   end
       #
-      def subscriptions options = {}
+      def subscriptions token: nil, max: nil
         ensure_connection!
+        options = { token: token, max: max }
         resp = connection.list_topics_subscriptions name, options
         if resp.success?
           Subscription::List.from_response resp, connection
@@ -351,9 +347,7 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:force]</code>::
+      # +force+::
       #   Force the latest policy to be retrieved from the Pub/Sub service when
       #   +true. Otherwise the policy will be memoized to reduce the number of
       #   API calls made to the Pub/Sub service. The default is +false+.
@@ -396,8 +390,8 @@ module Gcloud
       #   topic = pubsub.topic "my-topic"
       #   policy = topic.policy force: true
       #
-      def policy options = {}
-        @policy = nil if options[:force]
+      def policy force: nil
+        @policy = nil if force
         @policy ||= begin
           ensure_connection!
           resp = connection.get_topic_policy name
@@ -612,11 +606,7 @@ module Gcloud
         ##
         # Make the hash look like it was returned from the Cloud API.
         def jsonify_hash hash
-          if hash.respond_to? :to_h
-            hash = hash.to_h
-          else
-            hash = Hash.try_convert(hash) || {}
-          end
+          hash = (hash || {}).to_h
           return hash if hash.empty?
           JSON.parse(JSON.dump(hash))
         end

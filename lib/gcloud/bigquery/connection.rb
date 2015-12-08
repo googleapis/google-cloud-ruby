@@ -94,11 +94,11 @@ module Gcloud
       # either manually or by specifying force: true in options.
       # Immediately after deletion, you can create another dataset with
       # the same name.
-      def delete_dataset dataset_id, options = {}
+      def delete_dataset dataset_id, force = nil
         @client.execute(
           api_method: @bigquery.datasets.delete,
           parameters: { projectId: @project, datasetId: dataset_id,
-                        deleteContents: options[:force]
+                        deleteContents: force
                       }.delete_if { |_, v| v.nil? }
         )
       end
@@ -345,17 +345,6 @@ module Gcloud
       protected
 
       ##
-      # Make sure the object is converted to a hash
-      # Ruby 1.9.3 doesn't support to_h, so here we are.
-      def hashify hash
-        if hash.respond_to? :to_h
-          hash.to_h
-        else
-          Hash.try_convert(hash) || {}
-        end
-      end
-
-      ##
       # Create the HTTP body for insert dataset
       def insert_dataset_request dataset_id, options = {}
         {
@@ -482,7 +471,6 @@ module Gcloud
           "defaultDataset" => dataset_config,
           "timeoutMs" => options[:timeout],
           "dryRun" => options[:dryrun],
-          "preserveNulls" => options[:preserve_nulls],
           "useQueryCache" => options[:cache]
         }.delete_if { |_, v| v.nil? }
       end

@@ -280,7 +280,7 @@ module Gcloud
       def subscription_data topic, options = {}
         deadline   = options[:deadline]
         endpoint   = options[:endpoint]
-        attributes = hashify options[:attributes]
+        attributes = (options[:attributes] || {}).to_h
 
         data = { topic: topic_path(topic) }
         data[:ackDeadlineSeconds] = deadline if deadline
@@ -289,17 +289,6 @@ module Gcloud
                                 attributes:   attributes }
         end
         data
-      end
-
-      ##
-      # Make sure the object is converted to a hash
-      # Ruby 1.9.3 doesn't support to_h, so here we are.
-      def hashify hash
-        if hash.respond_to? :to_h
-          hash.to_h
-        else
-          Hash.try_convert(hash) || {}
-        end
       end
     end
   end

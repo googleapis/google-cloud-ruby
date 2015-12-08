@@ -208,7 +208,7 @@ file.copy backup, file.name
 
 ## Supported Ruby Versions
 
-gcloud is supported on Ruby 1.9.3+.
+gcloud is supported on Ruby 2.0+.
 
 ## Versioning
 

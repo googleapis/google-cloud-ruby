@@ -300,9 +300,7 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:replace]</code>::
+      # +replace+::
       #   Whether to replace the existing schema with the new schema. If
       #   +true+, the fields will replace the existing schema. If
       #   +false+, the fields will be added to the existing schema. When a table
@@ -328,13 +326,13 @@ module Gcloud
       #
       # :category: Attributes
       #
-      def schema options = {}
+      def schema replace: false
         ensure_full_data!
         g = @gapi
         g = g.to_hash if g.respond_to? :to_hash
         s = g["schema"] ||= {}
         return s unless block_given?
-        s = nil if options[:replace]
+        s = nil if replace
         schema_builder = Schema.new s
         yield schema_builder
         self.schema = schema_builder.schema if schema_builder.changed?
@@ -409,14 +407,12 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:token]</code>::
+      # +token+::
       #   Page token, returned by a previous call, identifying the result set.
       #   (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of results to return. (+Integer+)
-      # <code>options[:start]</code>::
+      # +start+::
       #   Zero-based index of the starting row to read. (+Integer+)
       #
       # === Returns
@@ -440,8 +436,9 @@ module Gcloud
       #
       # :category: Data
       #
-      def data options = {}
+      def data token: nil, max: nil, start: nil
         ensure_connection!
+        options = { token: token, max: max, start: start }
         resp = connection.list_tabledata dataset_id, table_id, options
         if resp.success?
           Data.from_response resp, self
@@ -457,16 +454,14 @@ module Gcloud
       #
       # +destination_table+::
       #   The destination for the copied data. (+Table+ or +String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:create]</code>::
+      # +create+::
       #   Specifies whether the job is allowed to create new tables. (+String+)
       #
       #   The following values are supported:
       #   * +needed+ - Create the table if it does not exist.
       #   * +never+ - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
-      # <code>options[:write]</code>::
+      # +write+::
       #   Specifies how to handle data already present in the destination table.
       #   The default value is +empty+. (+String+)
       #
@@ -509,8 +504,9 @@ module Gcloud
       #
       # :category: Data
       #
-      def copy destination_table, options = {}
+      def copy destination_table, create: nil, write: nil, dryrun: nil
         ensure_connection!
+        options = { create: create, write: write, dryrun: dryrun }
         resp = connection.copy_table table_ref,
                                      get_table_ref(destination_table),
                                      options
@@ -528,16 +524,14 @@ module Gcloud
       #
       # +source_url+::
       #   The URI of source table to link. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:create]</code>::
+      # +create+::
       #   Specifies whether the job is allowed to create new tables. (+String+)
       #
       #   The following values are supported:
       #   * +needed+ - Create the table if it does not exist.
       #   * +never+ - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
-      # <code>options[:write]</code>::
+      # +write+::
       #   Specifies how to handle data already present in the table.
       #   The default value is +empty+. (+String+)
       #
@@ -553,8 +547,9 @@ module Gcloud
       #
       # :category: Data
       #
-      def link source_url, options = {} #:nodoc:
+      def link source_url, create: nil, write: nil, dryrun: nil #:nodoc:
         ensure_connection!
+        options = { create: create, write: write, dryrun: dryrun }
         resp = connection.link_table table_ref, source_url, options
         if resp.success?
           Job.from_gapi resp.data, connection
@@ -574,22 +569,20 @@ module Gcloud
       #   The Google Storage file or file URI pattern(s) to which BigQuery
       #   should extract the table data.
       #   (+Gcloud::Storage::File+ or +String+ or +Array+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:format]</code>::
+      # +format+::
       #   The exported file format. The default value is +csv+. (+String+)
       #
       #   The following values are supported:
       #   * +csv+ - CSV
       #   * +json+ - {Newline-delimited JSON}[http://jsonlines.org/]
       #   * +avro+ - {Avro}[http://avro.apache.org/]
-      # <code>options[:compression]</code>::
+      # +compression+::
       #   The compression type to use for exported files. Possible values
       #   include +GZIP+ and +NONE+. The default value is +NONE+. (+String+)
-      # <code>options[:delimiter]</code>::
+      # +delimiter+::
       #   Delimiter to use between fields in the exported data. Default is
       #   <code>,</code>. (+String+)
-      # <code>options[:header]</code>::
+      # +header+::
       #   Whether to print out a header row in the results. Default is +true+.
       #   (+Boolean+)
       #
@@ -611,8 +604,11 @@ module Gcloud
       #
       # :category: Data
       #
-      def extract extract_url, options = {}
+      def extract extract_url, format: nil, compression: nil, delimiter: nil,
+                  header: nil, dryrun: nil
         ensure_connection!
+        options = { format: format, compression: compression,
+                    delimiter: delimiter, header: header, dryrun: dryrun }
         resp = connection.extract_table table_ref, extract_url, options
         if resp.success?
           Job.from_gapi resp.data, connection
@@ -630,9 +626,7 @@ module Gcloud
       #   A file or the URI of a Google Cloud Storage file containing
       #   data to load into the table.
       #   (+File+ or +Gcloud::Storage::File+ or +String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:format]</code>::
+      # +format+::
       #   The exported file format. The default value is +csv+. (+String+)
       #
       #   The following values are supported:
@@ -640,14 +634,14 @@ module Gcloud
       #   * +json+ - {Newline-delimited JSON}[http://jsonlines.org/]
       #   * +avro+ - {Avro}[http://avro.apache.org/]
       #   * +datastore_backup+ - Cloud Datastore backup
-      # <code>options[:create]</code>::
+      # +create+::
       #   Specifies whether the job is allowed to create new tables. (+String+)
       #
       #   The following values are supported:
       #   * +needed+ - Create the table if it does not exist.
       #   * +never+ - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
-      # <code>options[:write]</code>::
+      # +write+::
       #   Specifies how to handle data already present in the table.
       #   The default value is +empty+. (+String+)
       #
@@ -656,32 +650,32 @@ module Gcloud
       #   * +append+ - BigQuery appends the data to the table.
       #   * +empty+ - An error will be returned if the table already contains
       #     data.
-      # <code>options[:projection_fields]</code>::
+      # +projection_fields+::
       #   If the +format+ option is set to +datastore_backup+, indicates which
       #   entity properties to load from a Cloud Datastore backup. Property
       #   names are case sensitive and must be top-level properties. If not set,
       #   BigQuery loads all properties. If any named property isn't found in
       #   the Cloud Datastore backup, an invalid error is returned. (+Array+)
-      # <code>options[:jagged_rows]</code>::
+      # +jagged_rows+::
       #   Accept rows that are missing trailing optional columns. The missing
       #   values are treated as nulls. If +false+, records with missing trailing
       #   columns are treated as bad records, and if there are too many bad
       #   records, an invalid error is returned in the job result. The default
       #   value is +false+. Only applicable to CSV, ignored for other formats.
       #   (+Boolean+)
-      # <code>options[:quoted_newlines]</code>::
+      # +quoted_newlines+::
       #   Indicates if BigQuery should allow quoted data sections that contain
       #   newline characters in a CSV file. The default value is +false+.
       #   (+Boolean+)
-      # <code>options[:encoding]</code>::
+      # +encoding+::
       #   The character encoding of the data. The supported values are +UTF-8+
       #   or +ISO-8859-1+. The default value is +UTF-8+. (+String+)
-      # <code>options[:delimiter]</code>::
+      # +delimiter+::
       #   Specifices the separator for fields in a CSV file. BigQuery converts
       #   the string to +ISO-8859-1+ encoding, and then uses the first byte of
       #   the encoded string to split the data in its raw, binary state. Default
       #   is <code>,</code>. (+String+)
-      # <code>options[:ignore_unknown]</code>::
+      # +ignore_unknown+::
       #   Indicates if BigQuery should allow extra values that are not
       #   represented in the table schema. If true, the extra values are
       #   ignored. If false, records with extra columns are treated as bad
@@ -693,12 +687,12 @@ module Gcloud
       #
       #   * +CSV+: Trailing columns
       #   * +JSON+: Named values that don't match any column names
-      # <code>options[:max_bad_records]</code>::
+      # +max_bad_records+::
       #   The maximum number of bad records that BigQuery can ignore when
       #   running the job. If the number of bad records exceeds this value, an
       #   invalid error is returned in the job result. The default value is +0+,
       #   which requires that all records are valid. (+Integer+)
-      # <code>options[:quote]</code>::
+      # +quote+::
       #   The value that is used to quote data sections in a CSV file. BigQuery
       #   converts the string to ISO-8859-1 encoding, and then uses the first
       #   byte of the encoded string to split the data in its raw, binary state.
@@ -706,7 +700,7 @@ module Gcloud
       #   not contain quoted sections, set the property value to an empty
       #   string. If your data contains quoted newline characters, you must also
       #   set the allowQuotedNewlines property to true. (+String+)
-      # <code>options[:skip_leading]</code>::
+      # +skip_leading+::
       #   The number of rows at the top of a CSV file that BigQuery will skip
       #   when loading the data. The default value is +0+. This property is
       #   useful if you have header rows in the file that should be skipped.
@@ -784,15 +778,21 @@ module Gcloud
       #
       # :category: Data
       #
-      def load file, options = {}
+      def load file, format: nil, create: nil, write: nil,
+               projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
+               encoding: nil, delimiter: nil, ignore_unknown: nil,
+               max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil
         ensure_connection!
-        if storage_url? file
-          load_storage file, options
-        elsif local_file? file
-          load_local file, options
-        else
-          fail Gcloud::Bigquery::Error, "Don't know how to load #{file}"
-        end
+        options = { format: format, create: create, write: write,
+                    projection_fields: projection_fields,
+                    jagged_rows: jagged_rows, quoted_newlines: quoted_newlines,
+                    encoding: encoding, delimiter: delimiter,
+                    ignore_unknown: ignore_unknown,
+                    max_bad_records: max_bad_records, quote: quote,
+                    skip_leading: skip_leading, dryrun: dryrun }
+        return load_storage(file, options) if storage_url? file
+        return load_local(file, options) if local_file? file
+        fail Gcloud::Bigquery::Error, "Don't know how to load #{file}"
       end
 
       ##
@@ -806,13 +806,11 @@ module Gcloud
       # +rows+::
       #   A hash object or array of hash objects containing the data.
       #   (+Array+ or +Hash+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:skip_invalid]</code>::
+      # +skip_invalid+::
       #   Insert all valid rows of a request, even if invalid rows exist. The
       #   default value is +false+, which causes the entire request to fail if
       #   any invalid rows exist. (+Boolean+)
-      # <code>options[:ignore_unknown]</code>::
+      # +ignore_unknown+::
       #   Accept rows that contain values that do not match the schema. The
       #   unknown values are ignored. Default is false, which treats unknown
       #   values as errors. (+Boolean+)
@@ -838,9 +836,10 @@ module Gcloud
       #
       # :category: Data
       #
-      def insert rows, options = {}
+      def insert rows, skip_invalid: nil, ignore_unknown: nil
         rows = [rows] if rows.is_a? Hash
         ensure_connection!
+        options = { skip_invalid: skip_invalid, ignore_unknown: ignore_unknown }
         resp = connection.insert_tabledata dataset_id, table_id, rows, options
         if resp.success?
           InsertResponse.from_gapi rows, resp.data

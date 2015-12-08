@@ -286,33 +286,31 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   The maximum number of rows of data to return per page of results.
       #   Setting this flag to a small value such as 1000 and then paging
       #   through results might improve reliability when the query result set is
       #   large. In addition to this limit, responses are also limited to 10 MB.
       #   By default, there is no maximum row count, and only the byte limit
       #   applies. (+Integer+)
-      # <code>options[:timeout]</code>::
+      # +timeout+::
       #   How long to wait for the query to complete, in milliseconds, before
       #   the request times out and returns. Note that this is only a timeout
       #   for the request, not the query. If the query takes longer to run than
       #   the timeout value, the call returns without any results and with
       #   QueryData#complete? set to false. The default value is 10000
       #   milliseconds (10 seconds). (+Integer+)
-      # <code>options[:dryrun]</code>::
-      #   If set to +true+, BigQuery doesn't run the job. Instead, if the query
-      #   is valid, BigQuery returns statistics about the job such as how many
-      #   bytes would be processed. If the query is invalid, an error returns.
-      #   The default value is +false+. (+Boolean+)
-      # <code>options[:cache]</code>::
+      # +cache+::
       #   Whether to look for the result in the query cache. The query cache is
       #   a best-effort cache that will be flushed whenever tables in the query
       #   are modified. The default value is true. For more information, see
       #   {query caching}[https://developers.google.com/bigquery/querying-data].
       #   (+Boolean+)
+      # +dryrun+::
+      #   If set to +true+, BigQuery doesn't run the job. Instead, if the query
+      #   is valid, BigQuery returns statistics about the job such as how many
+      #   bytes would be processed. If the query is invalid, an error returns.
+      #   The default value is +false+. (+Boolean+)
       #
       # === Returns
       #
@@ -335,9 +333,10 @@ module Gcloud
       #
       # :category: Data
       #
-      def data options = {}
+      def data max: nil, timeout: nil, cache: nil, dryrun: nil
         sql = "SELECT * FROM #{@gapi['id']}"
         ensure_connection!
+        options = { max: max, timeout: timeout, cache: cache, dryrun: dryrun }
         resp = connection.query sql, options
         if resp.success?
           QueryData.from_gapi resp.data, connection

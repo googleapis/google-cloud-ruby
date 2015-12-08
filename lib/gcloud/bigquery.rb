@@ -30,9 +30,7 @@ module Gcloud
   # +keyfile+::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
   #   readable. (+String+ or +Hash+)
-  # +options+::
-  #   An optional Hash for controlling additional behavior. (+Hash+)
-  # <code>options[:scope]</code>::
+  # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See {Using OAuth 2.0 to Access Google
   #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
@@ -54,12 +52,12 @@ module Gcloud
   #   dataset = bigquery.dataset "my_dataset"
   #   table = dataset.table "my_table"
   #
-  def self.bigquery project = nil, keyfile = nil, options = {}
+  def self.bigquery project = nil, keyfile = nil, scope: nil
     project ||= Gcloud::Bigquery::Project.default_project
     if keyfile.nil?
-      credentials = Gcloud::Bigquery::Credentials.default options
+      credentials = Gcloud::Bigquery::Credentials.default scope: scope
     else
-      credentials = Gcloud::Bigquery::Credentials.new keyfile, options
+      credentials = Gcloud::Bigquery::Credentials.new keyfile, scope: scope
     end
     Gcloud::Bigquery::Project.new project, credentials
   end

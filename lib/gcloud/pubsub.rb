@@ -31,9 +31,7 @@ module Gcloud
   # +keyfile+::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
   #   readable. (+String+ or +Hash+)
-  # +options+::
-  #   An optional Hash for controlling additional behavior. (+Hash+)
-  # <code>options[:scope]</code>::
+  # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See {Using OAuth 2.0 to Access Google
   #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
@@ -56,12 +54,12 @@ module Gcloud
   #   topic = pubsub.topic "my-topic"
   #   topic.publish "task completed"
   #
-  def self.pubsub project = nil, keyfile = nil, options = {}
+  def self.pubsub project = nil, keyfile = nil, scope: nil
     project ||= Gcloud::Pubsub::Project.default_project
     if keyfile.nil?
-      credentials = Gcloud::Pubsub::Credentials.default options
+      credentials = Gcloud::Pubsub::Credentials.default scope: scope
     else
-      credentials = Gcloud::Pubsub::Credentials.new keyfile, options
+      credentials = Gcloud::Pubsub::Credentials.new keyfile, scope: scope
     end
     Gcloud::Pubsub::Project.new project, credentials
   end

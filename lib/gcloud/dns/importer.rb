@@ -61,29 +61,23 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:only]</code>::
+      # +only+::
       #   Include only records of this type or types. (+String+ or +Array+)
-      # <code>options[:except]</code>::
+      # +except+::
       #   Exclude records of this type or types. (+String+ or +Array+)
       #
       # === Returns
       #
       # An array of unsaved Record instances.
       #
-      def records options = {}
-        filtered_records options[:only], options[:except]
-      end
-
-      protected
-
-      def filtered_records only, except
+      def records only: nil, except: nil
         ret = @records
         ret = ret.select { |r| Array(only).include? r.type } if only
         ret = ret.reject { |r| Array(except).include? r.type } if except
         ret
       end
+
+      protected
 
       ##
       # The zonefile library returns a two-element array in which the first

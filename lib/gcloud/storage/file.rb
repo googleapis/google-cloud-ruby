@@ -284,9 +284,7 @@ module Gcloud
       # +path+::
       #   The path on the local file system to write the data to.
       #   The path provided must be writable. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:verify]</code>::
+      # +verify+::
       #   The verification algoruthm used to ensure the downloaded file contents
       #   are correct. Default is +:md5+. (+Symbol+)
       #
@@ -349,14 +347,14 @@ module Gcloud
       #   file = bucket.file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext", verify: :none
       #
-      def download path, options = {}
+      def download path, verify: :md5
         ensure_connection!
         resp = connection.download_file bucket, name
         if resp.success?
           ::File.open path, "wb+" do |f|
             f.write resp.body
           end
-          verify_file! ::File.new(path), options
+          verify_file! ::File.new(path), verify
         else
           fail ApiError.from_response(resp)
         end
@@ -373,12 +371,7 @@ module Gcloud
       # +dest_path+::
       #   If a bucket was provided in the first parameter, this contains the
       #   path to copy the file to in the given bucket. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:generation]</code>::
-      #   Select a specific revision of the file to copy. The default is the
-      #   latest version. (+Integer+)
-      # <code>options[:acl]</code>::
+      # +acl+::
       #   A predefined set of access controls to apply to new file.
       #   (+String+)
       #
@@ -395,6 +388,9 @@ module Gcloud
       #     and project team members get access according to their roles.
       #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
       #     access, and allUsers get READER access.
+      # +generation+::
+      #   Select a specific revision of the file to copy. The default is the
+      #   latest version. (+Integer+)
       #
       # === Returns
       #
@@ -432,8 +428,9 @@ module Gcloud
       #   file.copy "copy/of/previous/generation/file.ext",
       #             generation: 123456
       #
-      def copy dest_bucket_or_path, dest_path = nil, options = {}
+      def copy dest_bucket_or_path, dest_path = nil, acl: nil, generation: nil
         ensure_connection!
+        options = { acl: acl, generation: generation }
         dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
                                                         dest_path, options
 
@@ -485,9 +482,7 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:protocol]</code>::
+      # +protocol+::
       #   The protocol to use for the URL. Default is +HTTPS+. (+String+)
       #
       # === Examples
@@ -513,8 +508,7 @@ module Gcloud
       #   file = bucket.file "avatars/heidi/400x400.png"
       #   public_url = file.public_url protocol: "http"
       #
-      def public_url options = {}
-        protocol = options[:protocol] || :https
+      def public_url protocol: :https
         "#{protocol}://storage.googleapis.com/#{bucket}/#{name}"
       end
       alias_method :url, :public_url
@@ -537,25 +531,27 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:method]</code>::
+      # +method+::
       #   The HTTP verb to be used with the signed URL. Signed URLs can be used
       #   with +GET+, +HEAD+, +PUT+, and +DELETE+ requests. Default is +GET+.
       #   (+String+)
-      # <code>options[:expires]</code>::
+      # +expires+::
       #   The number of seconds until the URL expires. Default is 300/5 minutes.
       #   (+Integer+)
-      # <code>options[:content_type]</code>::
+      # +content_type+::
       #   When provided, the client (browser) must send this value in the
       #   HTTP header. e.g. +text/plain+ (+String+)
-      # <code>options[:content_md5]</code>::
+      # +content_md5+::
       #   The MD5 digest value in base64. If you provide this in the string, the
       #   client (usually a browser) must provide this HTTP header with this
       #   same value in its request. (+String+)
-      # <code>options[:issuer]</code>::
+      # +issuer+::
       #   Service Account's Client Email. (+String+)
-      # <code>options[:signing_key]</code>::
+      # +client_email+::
+      #   Service Account's Client Email. (+String+)
+      # +signing_key+::
+      #   Service Account's Private Key. (+OpenSSL::PKey::RSA+ or +String+)
+      # +private_key+::
       #   Service Account's Private Key. (+OpenSSL::PKey::RSA+ or +String+)
       #
       # === Examples
@@ -598,8 +594,14 @@ module Gcloud
       #   shared_url = file.signed_url issuer: "service-account@gcloud.com",
       #                                signing_key: key
       #
-      def signed_url options = {}
+      def signed_url method: nil, expires: nil, content_type: nil,
+                     content_md5: nil, issuer: nil, client_email: nil,
+                     signing_key: nil, private_key: nil
         ensure_connection!
+        options = { method: method, expires: expires,
+                    content_type: content_type, content_md5: content_md5,
+                    issuer: issuer, client_email: client_email,
+                    signing_key: signing_key, private_key: private_key }
         signer = File::Signer.new self
         signer.signed_url options
       end
@@ -722,8 +724,7 @@ module Gcloud
         [dest_bucket, dest_path, options]
       end
 
-      def verify_file! file, options = {}
-        verify = options[:verify] || :md5
+      def verify_file! file, verify = :md5
         verify_md5    = verify == :md5    || verify == :all
         verify_crc32c = verify == :crc32c || verify == :all
         Verifier.verify_md5! self, file    if verify_md5

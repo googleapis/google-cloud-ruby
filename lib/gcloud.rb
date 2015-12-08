@@ -72,9 +72,7 @@ module Gcloud
   #
   # === Parameters
   #
-  # +options+::
-  #   An optional Hash for controlling additional behavior. (+Hash+)
-  # <code>options[:scope]</code>::
+  # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See {Using OAuth 2.0 to Access Google
   #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
@@ -112,9 +110,9 @@ module Gcloud
   #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
   #   dataset = gcloud.datastore scope: platform_scope
   #
-  def datastore options = {}
+  def datastore scope: nil
     require "gcloud/datastore"
-    Gcloud.datastore @project, @keyfile, options
+    Gcloud.datastore @project, @keyfile, scope: scope
   end
 
   ##
@@ -123,9 +121,7 @@ module Gcloud
   #
   # === Parameters
   #
-  # +options+::
-  #   An optional Hash for controlling additional behavior. (+Hash+)
-  # <code>options[:scope]</code>::
+  # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See {Using OAuth 2.0 to Access Google
   #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
@@ -158,9 +154,9 @@ module Gcloud
   #   readonly_scope = "https://www.googleapis.com/auth/devstorage.read_only"
   #   readonly_storage = gcloud.storage scope: readonly_scope
   #
-  def storage options = {}
+  def storage scope: nil
     require "gcloud/storage"
-    Gcloud.storage @project, @keyfile, options
+    Gcloud.storage @project, @keyfile, scope: scope
   end
 
   ##
@@ -169,9 +165,7 @@ module Gcloud
   #
   # === Parameters
   #
-  # +options+::
-  #   An optional Hash for controlling additional behavior. (+Hash+)
-  # <code>options[:scope]</code>::
+  # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See {Using OAuth 2.0 to Access Google
   #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
@@ -202,9 +196,9 @@ module Gcloud
   #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
   #   pubsub = gcloud.pubsub scope: platform_scope
   #
-  def pubsub options = {}
+  def pubsub scope: nil
     require "gcloud/pubsub"
-    Gcloud.pubsub @project, @keyfile, options
+    Gcloud.pubsub @project, @keyfile, scope: scope
   end
 
   ##
@@ -213,9 +207,7 @@ module Gcloud
   #
   # === Parameters
   #
-  # +options+::
-  #   An optional Hash for controlling additional behavior. (+Hash+)
-  # <code>options[:scope]</code>::
+  # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See {Using OAuth 2.0 to Access Google
   #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
@@ -249,9 +241,9 @@ module Gcloud
   #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
   #   bigquery = gcloud.bigquery scope: platform_scope
   #
-  def bigquery options = {}
+  def bigquery scope: nil
     require "gcloud/bigquery"
-    Gcloud.bigquery @project, @keyfile, options
+    Gcloud.bigquery @project, @keyfile, scope: scope
   end
 
   ##
@@ -260,9 +252,7 @@ module Gcloud
   #
   # === Parameters
   #
-  # +options+::
-  #   An optional Hash for controlling additional behavior. (+Hash+)
-  # <code>options[:scope]</code>::
+  # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See {Using OAuth 2.0 to Access Google
   #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
@@ -295,9 +285,9 @@ module Gcloud
   #   readonly_scope = "https://www.googleapis.com/auth/ndev.clouddns.readonly"
   #   dns = gcloud.dns scope: readonly_scope
   #
-  def dns options = {}
+  def dns scope: nil
     require "gcloud/dns"
-    Gcloud.dns @project, @keyfile, options
+    Gcloud.dns @project, @keyfile, scope: scope
   end
 
   # rubocop:disable Metrics/LineLength
@@ -310,9 +300,7 @@ module Gcloud
   #
   # === Parameters
   #
-  # +options+::
-  #   An optional Hash for controlling additional behavior. (+Hash+)
-  # <code>options[:scope]</code>::
+  # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See {Using OAuth 2.0 to Access Google
   #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
@@ -344,9 +332,9 @@ module Gcloud
   #   readonly_scope = "https://www.googleapis.com/auth/cloudresourcemanager.readonly"
   #   resource_manager = gcloud.resource_manager scope: readonly_scope
   #
-  def resource_manager options = {}
+  def resource_manager scope: nil
     require "gcloud/resource_manager"
-    Gcloud.resource_manager @keyfile, options
+    Gcloud.resource_manager @keyfile, scope: scope
   end
 
   # rubocop:enable Metrics/LineLength

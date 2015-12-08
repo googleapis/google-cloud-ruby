@@ -31,9 +31,7 @@ module Gcloud
   # +keyfile+::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
   #   readable. (+String+ or +Hash+)
-  # +options+::
-  #   An optional Hash for controlling additional behavior. (+Hash+)
-  # <code>options[:scope]</code>::
+  # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See {Using OAuth 2.0 to Access Google
   #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
@@ -57,12 +55,12 @@ module Gcloud
   #   bucket = storage.bucket "my-bucket"
   #   file = bucket.file "path/to/my-file.ext"
   #
-  def self.storage project = nil, keyfile = nil, options = {}
+  def self.storage project = nil, keyfile = nil, scope: nil
     project ||= Gcloud::Storage::Project.default_project
     if keyfile.nil?
-      credentials = Gcloud::Storage::Credentials.default options
+      credentials = Gcloud::Storage::Credentials.default scope: scope
     else
-      credentials = Gcloud::Storage::Credentials.new keyfile, options
+      credentials = Gcloud::Storage::Credentials.new keyfile, scope: scope
     end
     Gcloud::Storage::Project.new project, credentials
   end

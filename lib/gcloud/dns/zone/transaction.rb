@@ -111,7 +111,7 @@ module Gcloud
         #   end
         #
         def remove name, type
-          @deletions += @zone.records(name: name, type: type).all
+          @deletions += @zone.records(name, type).all
         end
 
         ##
@@ -180,7 +180,7 @@ module Gcloud
         #   end
         #
         def modify name, type
-          existing = @zone.records(name: name, type: type).all.to_a
+          existing = @zone.records(name, type).all.to_a
           updated = existing.map(&:dup)
           updated.each { |r| yield r }
           @additions += updated

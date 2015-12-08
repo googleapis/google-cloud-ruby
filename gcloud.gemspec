@@ -5,8 +5,8 @@ Gem::Specification.new do |gem|
   gem.name          = "gcloud"
   gem.version       = Gcloud::VERSION
 
-  gem.authors       = ["Silvano Luciani", "Mike Moore"]
-  gem.email         = ["silvano@google.com", "mike@blowmage.com"]
+  gem.authors       = ["Silvano Luciani", "Mike Moore", "Chris Smith"]
+  gem.email         = ["silvano@google.com", "mike@blowmage.com", "quartzmo@gmail.com"]
   gem.description   = "Gcloud is the official library for interacting with Google Cloud."
   gem.summary       = "API Client library for Google Cloud"
   gem.homepage      = "http://googlecloudplatform.github.io/gcloud-ruby/"
@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
                       `git ls-files -- docs/*`.split("\n")
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 1.9.3"
+  gem.required_ruby_version = ">= 2.0.0"
 
   gem.extra_rdoc_files = ["OVERVIEW.md", "AUTHENTICATION.md", "CHANGELOG.md"]
   gem.rdoc_options     = ["--main", "OVERVIEW.md",
@@ -38,6 +38,4 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency      "httpclient", "~> 2.5"
   gem.add_development_dependency      "simplecov", "~> 0.9"
   gem.add_development_dependency      "coveralls", "~> 0.7"
-  # Cap tins at 1.6.0 for compatibility with Ruby 1.9
-  gem.add_development_dependency      "tins", "<= 1.6.0"
 end
