@@ -170,21 +170,21 @@ describe Gcloud::Dns, :dns do
       change = zone.add "retrieve.#{zone.dns}", "A", 86400, "9.10.11.12"
       change.wait_until_done!
 
-      zone.records(name: "retrieve.#{zone.dns}", type: "A").count.must_be :>=, 1
+      zone.records("retrieve.#{zone.dns}", "A").count.must_be :>=, 1
     end
 
     it "replaces records" do
-      zone.records(name: "replace.#{zone.dns}", type: "A").count.must_be :zero?
+      zone.records("replace.#{zone.dns}", "A").count.must_be :zero?
 
       change = zone.add "replace.#{zone.dns}", "A", 86400, "1.2.3.4"
       change.wait_until_done!
 
-      zone.records(name: "replace.#{zone.dns}", type: "A").count.wont_be :zero?
+      zone.records("replace.#{zone.dns}", "A").count.wont_be :zero?
 
       change = zone.replace "replace.#{zone.dns}", "A", 86400, "5.6.7.8"
       change.wait_until_done!
 
-      zone.records(name: "replace.#{zone.dns}", type: "A").count.wont_be :zero?
+      zone.records("replace.#{zone.dns}", "A").count.wont_be :zero?
     end
   end
 
