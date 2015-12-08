@@ -302,7 +302,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 660</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 662</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acl</span>
   <span class="ruby-ivar">@acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -746,7 +746,7 @@ of the file data.</p>
 
   
     <h4>
-      <code>copy(dest_bucket_or_path, dest_path = nil, options = {})</code>
+      <code>copy(dest_bucket_or_path, dest_path = nil, acl: nil, generation: nil)</code>
       <span>
         <a href="#method-i-copy">&para;</a>
         <a href="#top">&uarr;</a>
@@ -767,14 +767,7 @@ the current bucket. (<code>String</code>)</p>
 <dd>
 <p>If a bucket was provided in the first parameter, this contains the path to
 copy the file to in the given bucket. (<code>String</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:generation]</code>
-<dd>
-<p>Select a specific revision of the file to copy. The default is the latest
-version. (<code>Integer</code>)</p>
-</dd><dt><code>options[:acl]</code>
+</dd><dt><code>acl</code>
 <dd>
 <p>A predefined set of access controls to apply to new file.
 (<code>String</code>)</p>
@@ -805,6 +798,10 @@ get access according to their roles.</p>
 href="File.html">File</a> owner gets OWNER access, and allUsers get READER
 access.</p>
 </li></ul>
+</dd><dt><code>generation</code>
+<dd>
+<p>Select a specific revision of the file to copy. The default is the latest
+version. (<code>Integer</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-copy-label-Returns">Returns<span><a href="#method-i-copy-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -849,9 +846,10 @@ access.</p>
 
     
       <!-- <div class="method-source-code" id="copy-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 435</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">copy</span> <span class="ruby-identifier">dest_bucket_or_path</span>, <span class="ruby-identifier">dest_path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 431</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">copy</span> <span class="ruby-identifier">dest_bucket_or_path</span>, <span class="ruby-identifier">dest_path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">acl</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">acl</span><span class="ruby-operator">:</span> <span class="ruby-identifier">acl</span>, <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-identifier">generation</span> }
   <span class="ruby-identifier">dest_bucket</span>, <span class="ruby-identifier">dest_path</span>, <span class="ruby-identifier">options</span> = <span class="ruby-identifier">fix_copy_args</span> <span class="ruby-identifier">dest_bucket_or_path</span>,
                                                   <span class="ruby-identifier">dest_path</span>, <span class="ruby-identifier">options</span>
 
@@ -980,7 +978,7 @@ B</a>. Encoded using base64 in big-endian byte order.</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 468</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 465</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_file</span> <span class="ruby-identifier">bucket</span>, <span class="ruby-identifier">name</span>
@@ -1005,7 +1003,7 @@ B</a>. Encoded using base64 in big-endian byte order.</p>
 
   
     <h4>
-      <code>download(path, options = {})</code>
+      <code>download(path, verify: :md5)</code>
       <span>
         <a href="#method-i-download">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1022,10 +1020,7 @@ B</a>. Encoded using base64 in big-endian byte order.</p>
 <dd>
 <p>The path on the local file system to write the data to. The path provided
 must be writable. (<code>String</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:verify]</code>
+</dd><dt><code>verify</code>
 <dd>
 <p>The verification algoruthm used to ensure the downloaded file contents are
 correct. Default is <code>:md5</code>. (<code>Symbol</code>)</p>
@@ -1102,15 +1097,15 @@ can be used by passing :crc32c.</p>
 
     
       <!-- <div class="method-source-code" id="download-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 352</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">download</span> <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 350</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">download</span> <span class="ruby-identifier">path</span>, <span class="ruby-identifier">verify</span><span class="ruby-operator">:</span> <span class="ruby-value">:md5</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">download_file</span> <span class="ruby-identifier">bucket</span>, <span class="ruby-identifier">name</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-operator">::</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-identifier">path</span>, <span class="ruby-string">&quot;wb+&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">body</span>
     <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">verify_file!</span> <span class="ruby-operator">::</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>), <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">verify_file!</span> <span class="ruby-operator">::</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>), <span class="ruby-identifier">verify</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
   <span class="ruby-keyword">end</span>
@@ -1479,7 +1474,7 @@ particular file.</p>
 
   
     <h4>
-      <code>public_url(options = {})</code>
+      <code>public_url(protocol: :https)</code>
       <span>
         <a href="#method-i-public_url">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1501,10 +1496,7 @@ href="https://cloud.google.com/storage/docs/access-public-data">cloud.google.com
 href="File.html#method-i-signed_url">signed_url</a>.</p>
 
 <h3 id="method-i-public_url-label-Parameters">Parameters<span><a href="#method-i-public_url-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:protocol]</code>
+<dl class="rdoc-list note-list"><dt><code>protocol</code>
 <dd>
 <p>The protocol to use for the URL. Default is <code>HTTPS</code>.
 (<code>String</code>)</p>
@@ -1538,9 +1530,8 @@ href="File.html#method-i-signed_url">signed_url</a>.</p>
 
     
       <!-- <div class="method-source-code" id="public_url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 516</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">public_url</span> <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-identifier">protocol</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:protocol</span>] <span class="ruby-operator">||</span> <span class="ruby-value">:https</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 511</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">public_url</span> <span class="ruby-identifier">protocol</span><span class="ruby-operator">:</span> <span class="ruby-value">:https</span>
   <span class="ruby-node">&quot;#{protocol}://storage.googleapis.com/#{bucket}/#{name}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
@@ -1609,7 +1600,7 @@ href="../Storage.html">Storage</a> service.</p>
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 666</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 668</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_file</span> <span class="ruby-identifier">bucket</span>, <span class="ruby-identifier">name</span>
@@ -1638,7 +1629,7 @@ href="../Storage.html">Storage</a> service.</p>
 
   
     <h4>
-      <code>signed_url(options = {})</code>
+      <code>signed_url(method: nil, expires: nil, content_type: nil, content_md5: nil, issuer: nil, client_email: nil, signing_key: nil, private_key: nil)</code>
       <span>
         <a href="#method-i-signed_url">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1665,32 +1656,36 @@ Authentication}[ <a
 href="https://cloud.google.com/storage/docs/authentication#service_accounts">cloud.google.com/storage/docs/authentication#service_accounts</a>].</p>
 
 <h3 id="method-i-signed_url-label-Parameters">Parameters<span><a href="#method-i-signed_url-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:method]</code>
+<dl class="rdoc-list note-list"><dt><code>method</code>
 <dd>
 <p>The HTTP verb to be used with the signed URL. Signed URLs can be used with
 <code>GET</code>, <code>HEAD</code>, <code>PUT</code>, and
 <code>DELETE</code> requests. Default is <code>GET</code>.
 (<code>String</code>)</p>
-</dd><dt><code>options[:expires]</code>
+</dd><dt><code>expires</code>
 <dd>
 <p>The number of seconds until the URL expires. Default is 300/5 minutes.
 (<code>Integer</code>)</p>
-</dd><dt><code>options[:content_type]</code>
+</dd><dt><code>content_type</code>
 <dd>
 <p>When provided, the client (browser) must send this value in the HTTP
 header. e.g. <code>text/plain</code> (<code>String</code>)</p>
-</dd><dt><code>options[:content_md5]</code>
+</dd><dt><code>content_md5</code>
 <dd>
 <p>The MD5 digest value in base64. If you provide this in the string, the
 client (usually a browser) must provide this HTTP header with this same
 value in its request. (<code>String</code>)</p>
-</dd><dt><code>options[:issuer]</code>
+</dd><dt><code>issuer</code>
 <dd>
 <p>Service Account&#39;s Client Email. (<code>String</code>)</p>
-</dd><dt><code>options[:signing_key]</code>
+</dd><dt><code>client_email</code>
+<dd>
+<p>Service Account&#39;s Client Email. (<code>String</code>)</p>
+</dd><dt><code>signing_key</code>
+<dd>
+<p>Service Account&#39;s Private Key. (<code>OpenSSL::PKey::RSA</code> or
+<code>String</code>)</p>
+</dd><dt><code>private_key</code>
 <dd>
 <p>Service Account&#39;s Private Key. (<code>OpenSSL::PKey::RSA</code> or
 <code>String</code>)</p>
@@ -1742,9 +1737,15 @@ efficient when making multiple calls to <code>signed_url</code>.</p>
 
     
       <!-- <div class="method-source-code" id="signed_url-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 601</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">signed_url</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file.rb, line 597</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">signed_url</span> <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">expires</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">content_type</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+               <span class="ruby-identifier">content_md5</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">issuer</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client_email</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+               <span class="ruby-identifier">signing_key</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">private_key</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-identifier">method</span>, <span class="ruby-identifier">expires</span><span class="ruby-operator">:</span> <span class="ruby-identifier">expires</span>,
+              <span class="ruby-identifier">content_type</span><span class="ruby-operator">:</span> <span class="ruby-identifier">content_type</span>, <span class="ruby-identifier">content_md5</span><span class="ruby-operator">:</span> <span class="ruby-identifier">content_md5</span>,
+              <span class="ruby-identifier">issuer</span><span class="ruby-operator">:</span> <span class="ruby-identifier">issuer</span>, <span class="ruby-identifier">client_email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client_email</span>,
+              <span class="ruby-identifier">signing_key</span><span class="ruby-operator">:</span> <span class="ruby-identifier">signing_key</span>, <span class="ruby-identifier">private_key</span><span class="ruby-operator">:</span> <span class="ruby-identifier">private_key</span> }
   <span class="ruby-identifier">signer</span> = <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Signer</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
   <span class="ruby-identifier">signer</span>.<span class="ruby-identifier">signed_url</span> <span class="ruby-identifier">options</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1899,7 +1900,7 @@ enabled, changing an object&#39;s metadata does not change this property.</p>
 
   
     <h4>
-      <code>url(options = {})</code>
+      <code>url(protocol: :https)</code>
       <span>
         <a href="#method-i-url">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1939,7 +1940,7 @@ enabled, changing an object&#39;s metadata does not change this property.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

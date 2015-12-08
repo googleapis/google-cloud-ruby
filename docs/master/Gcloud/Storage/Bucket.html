@@ -279,7 +279,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 673</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 675</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acl</span>
   <span class="ruby-ivar">@acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -454,7 +454,7 @@ description of cors</a>.</p>
 
   
     <h4>
-      <code>create_file(file, path = nil, options = {})</code>
+      <code>create_file(file, path = nil, acl: nil, cache_control: nil, content_disposition: nil, content_encoding: nil, content_language: nil, content_type: nil, chunk_size: nil, crc32c: nil, md5: nil, metadata: nil)</code>
       <span>
         <a href="#method-i-create_file">&para;</a>
         <a href="#top">&uarr;</a>
@@ -475,10 +475,7 @@ local file to upload and the path to store it with in the bucket.</p>
 <dd>
 <p>Path to store the file in Google Cloud <a
 href="../Storage.html">Storage</a>. (<code>String</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:acl]</code>
+</dd><dt><code>acl</code>
 <dd>
 <p>A predefined set of access controls to apply to this file.
 (<code>String</code>)</p>
@@ -509,40 +506,40 @@ get access according to their roles.</p>
 href="File.html">File</a> owner gets OWNER access, and allUsers get READER
 access.</p>
 </li></ul>
-</dd><dt><code>options[:cache_control]</code>
+</dd><dt><code>cache_control</code>
 <dd>
 <p>The <a
 href="https://tools.ietf.org/html/rfc7234#section-5.2">Cache-Control</a>
 response header to be returned when the file is downloaded.
 (<code>String</code>)</p>
-</dd><dt><code>options[:content_disposition]</code>
+</dd><dt><code>content_disposition</code>
 <dd>
 <p>The <a href="https://tools.ietf.org/html/rfc6266">Content-Disposition</a>
 response header to be returned when the file is downloaded.
 (<code>String</code>)</p>
-</dd><dt><code>options[:content_encoding]</code>
+</dd><dt><code>content_encoding</code>
 <dd>
 <p>The <a
 href="https://tools.ietf.org/html/rfc7231#section-3.1.2.2">Content-Encoding
 </a> response header to be returned when the file is downloaded.
 (<code>String</code>)</p>
-</dd><dt><code>options[:content_language]</code>
+</dd><dt><code>content_language</code>
 <dd>
 <p>The <a href="http://tools.ietf.org/html/bcp47">Content-Language</a>
 response header to be returned when the file is downloaded.
 (<code>String</code>)</p>
-</dd><dt><code>options[:content_type]</code>
+</dd><dt><code>content_type</code>
 <dd>
 <p>The <a
 href="https://tools.ietf.org/html/rfc2616#section-14.17">Content-Type</a>
 response header to be returned when the file is downloaded.
 (<code>String</code>)</p>
-</dd><dt><code>options[:chunk_size]</code>
+</dd><dt><code>chunk_size</code>
 <dd>
 <p>The number of bytes per chunk in a resumable upload. Must be divisible by
 256KB. If it is not divisible by 265KB then it will be lowered to the
 nearest acceptable value. (<code>Integer</code>)</p>
-</dd><dt><code>options[:crc32c]</code>
+</dd><dt><code>crc32c</code>
 <dd>
 <p>The CRC32c checksum of the file data, as described in <a
 href="http://tools.ietf.org/html/rfc4960#appendix-B">RFC 4960, Appendix
@@ -551,14 +548,14 @@ create the file if the value matches the value calculated by the service.
 See <a
 href="https://cloud.google.com/storage/docs/hashes-etags">Validation</a>
 for more information. (<code>String</code>)</p>
-</dd><dt><code>options[:md5]</code>
+</dd><dt><code>md5</code>
 <dd>
 <p>The MD5 hash of the file data. If provided, Cloud <a
 href="../Storage.html">Storage</a> will only create the file if the value
 matches the value calculated by the service. See <a
 href="https://cloud.google.com/storage/docs/hashes-etags">Validation</a>
 for more information. (<code>String</code>)</p>
-</dd><dt><code>options[:metadata]</code>
+</dd><dt><code>metadata</code>
 <dd>
 <p>A hash of custom, user-provided web-safe keys and arbitrary string values
 that will returned with requests for the file as “x-goog-meta-” response
@@ -653,19 +650,23 @@ gzip issue</a>.</p>
 
     
       <!-- <div class="method-source-code" id="create_file-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 607</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_file</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 605</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_file</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">acl</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">cache_control</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+                <span class="ruby-identifier">content_disposition</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">content_encoding</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+                <span class="ruby-identifier">content_language</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">content_type</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">chunk_size</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+                <span class="ruby-identifier">crc32c</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">md5</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">metadata</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">acl</span><span class="ruby-operator">:</span> <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">predefined_rule_for</span>(<span class="ruby-identifier">acl</span>), <span class="ruby-identifier">md5</span><span class="ruby-operator">:</span> <span class="ruby-identifier">md5</span>,
+              <span class="ruby-identifier">cache_control</span><span class="ruby-operator">:</span> <span class="ruby-identifier">cache_control</span>, <span class="ruby-identifier">content_type</span><span class="ruby-operator">:</span> <span class="ruby-identifier">content_type</span>,
+              <span class="ruby-identifier">content_disposition</span><span class="ruby-operator">:</span> <span class="ruby-identifier">content_disposition</span>, <span class="ruby-identifier">crc32c</span><span class="ruby-operator">:</span> <span class="ruby-identifier">crc32c</span>,
+              <span class="ruby-identifier">content_encoding</span><span class="ruby-operator">:</span> <span class="ruby-identifier">content_encoding</span>, <span class="ruby-identifier">chunk_size</span><span class="ruby-operator">:</span> <span class="ruby-identifier">chunk_size</span>,
+              <span class="ruby-identifier">content_language</span><span class="ruby-operator">:</span> <span class="ruby-identifier">content_language</span>, <span class="ruby-identifier">metadata</span><span class="ruby-operator">:</span> <span class="ruby-identifier">metadata</span> }
   <span class="ruby-identifier">ensure_file_exists!</span> <span class="ruby-identifier">file</span>
-  <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>] = <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">predefined_rule_for</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>]
   <span class="ruby-identifier">resumable</span> = <span class="ruby-identifier">resumable_upload?</span>(<span class="ruby-identifier">file</span>)
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">upload_file</span> <span class="ruby-identifier">resumable</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-constant">File</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">from_gapi</span>(<span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+  <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -785,7 +786,7 @@ permissions:</p>
 
     
       <!-- <div class="method-source-code" id="default_acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 727</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 729</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_acl</span>
   <span class="ruby-ivar">@default_acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultAcl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -804,7 +805,7 @@ permissions:</p>
 
   
     <h4>
-      <code>delete(options = {})</code>
+      <code>delete(retries: nil)</code>
       <span>
         <a href="#method-i-delete">&para;</a>
         <a href="#top">&uarr;</a>
@@ -818,10 +819,7 @@ permissions:</p>
 deleted.</p>
 
 <h3 id="method-i-delete-label-Parameters">Parameters<span><a href="#method-i-delete-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:retries]</code>
+<dl class="rdoc-list note-list"><dt><code>retries</code>
 <dd>
 <p>The number of times the API call should be retried. Default is <a
 href="../Backoff.html#attribute-c-retries">Gcloud::Backoff.retries</a>.
@@ -859,9 +857,10 @@ or specify the wanted behavior in the call:</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 339</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 337</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">retries</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">retries</span><span class="ruby-operator">:</span> <span class="ruby-identifier">retries</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_bucket</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-keyword">true</span>
@@ -884,7 +883,7 @@ or specify the wanted behavior in the call:</p>
 
   
     <h4>
-      <code>file(path, options = {})</code>
+      <code>file(path, generation: nil)</code>
       <span>
         <a href="#method-i-file">&para;</a>
         <a href="#top">&uarr;</a>
@@ -900,6 +899,10 @@ or specify the wanted behavior in the call:</p>
 <dl class="rdoc-list note-list"><dt><code>path</code>
 <dd>
 <p>Name (path) of the file. (<code>String</code>)</p>
+</dd><dt><code>generation</code>
+<dd>
+<p>When present, selects a specific revision of this object. Default is the
+latest version. (<code>Integer</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-file-label-Returns">Returns<span><a href="#method-i-file-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -922,9 +925,10 @@ or specify the wanted behavior in the call:</p>
 
     
       <!-- <div class="method-source-code" id="file-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 449</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">file</span> <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 448</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">file</span> <span class="ruby-identifier">path</span>, <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-identifier">generation</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_file</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">File</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
@@ -951,7 +955,7 @@ or specify the wanted behavior in the call:</p>
 
   
     <h4>
-      <code>files(options = {})</code>
+      <code>files(prefix: nil, token: nil, max: nil, versions: nil)</code>
       <span>
         <a href="#method-i-files">&para;</a>
         <a href="#top">&uarr;</a>
@@ -964,31 +968,25 @@ or specify the wanted behavior in the call:</p>
       <p>Retrieves a list of files matching the criteria.</p>
 
 <h3 id="method-i-files-label-Parameters">Parameters<span><a href="#method-i-files-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:prefix]</code>
+<dl class="rdoc-list note-list"><dt><code>prefix</code>
 <dd>
 <p>Filter results to files whose names begin with this prefix.
 (<code>String</code>)</p>
-</dd><dt><code>options[:token]</code>
+</dd><dt><code>token</code>
 <dd>
 <p>A previously-returned page token representing part of the larger set of
 results to view. (<code>String</code>)</p>
-</dd><dt><code>options[:max]</code>
+</dd><dt><code>max</code>
 <dd>
 <p>Maximum number of items plus prefixes to return. As duplicate prefixes are
 omitted, fewer total results may be returned than requested. The default
 value of this parameter is 1,000 items. (<code>Integer</code>)</p>
-</dd><dt><code>options[:versions]</code>
+</dd><dt><code>versions</code>
 <dd>
 <p>If <code>true</code>, lists all versions of an object as distinct results.
 The default is <code>false</code>. For more information, see <a
 href="https://cloud.google.com/storage/docs/object-versioning">Object
 Versioning </a>. (<code>Boolean</code>)</p>
-</dd><dt><code>options[:max]</code>
-<dd>
-<p>Maximum number of buckets to return. (<code>Integer</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-files-label-Returns">Returns<span><a href="#method-i-files-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -1037,9 +1035,10 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
 
     
       <!-- <div class="method-source-code" id="files-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 414</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">files</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 409</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">files</span> <span class="ruby-identifier">prefix</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">versions</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">prefix</span><span class="ruby-operator">:</span> <span class="ruby-identifier">prefix</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">token</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span>, <span class="ruby-identifier">versions</span><span class="ruby-operator">:</span> <span class="ruby-identifier">versions</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_files</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_response</span> <span class="ruby-identifier">resp</span>, <span class="ruby-identifier">connection</span>
@@ -1066,7 +1065,7 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
 
   
     <h4>
-      <code>find_file(path, options = {})</code>
+      <code>find_file(path, generation: nil)</code>
       <span>
         <a href="#method-i-find_file">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1097,7 +1096,7 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
 
   
     <h4>
-      <code>find_files(options = {})</code>
+      <code>find_files(prefix: nil, token: nil, max: nil, versions: nil)</code>
       <span>
         <a href="#method-i-find_files">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1419,7 +1418,7 @@ href="https://cloud.google.com/storage/docs/access-logs">Access Logs</a>.
 
   
     <h4>
-      <code>new_file(file, path = nil, options = {})</code>
+      <code>new_file(file, path = nil, acl: nil, cache_control: nil, content_disposition: nil, content_encoding: nil, content_language: nil, content_type: nil, chunk_size: nil, crc32c: nil, md5: nil, metadata: nil)</code>
       <span>
         <a href="#method-i-new_file">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1497,7 +1496,7 @@ href="../Storage.html">Storage</a> service.</p>
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 733</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 735</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_bucket</span> <span class="ruby-identifier">name</span>
@@ -1643,7 +1642,7 @@ href="Bucket/Cors.html">Bucket::Cors</a> for details.</p>
 
   
     <h4>
-      <code>upload_file(file, path = nil, options = {})</code>
+      <code>upload_file(file, path = nil, acl: nil, cache_control: nil, content_disposition: nil, content_encoding: nil, content_language: nil, content_type: nil, chunk_size: nil, crc32c: nil, md5: nil, metadata: nil)</code>
       <span>
         <a href="#method-i-upload_file">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1906,7 +1905,7 @@ to Host a Static Website </a>. (<code>String</code>)</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

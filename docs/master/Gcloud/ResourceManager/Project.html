@@ -643,7 +643,7 @@ single-quote, double-quote, space, and exclamation point.</p>
 
   
     <h4>
-      <code>policy(options = {})</code>
+      <code>policy(force: nil)</code>
       <span>
         <a href="#method-i-policy">&para;</a>
         <a href="#top">&uarr;</a>
@@ -659,10 +659,7 @@ href="https://cloud.google.com/iam/docs/managing-policies">Managing
 Policies</a> for more information.</p>
 
 <h3 id="method-i-policy-label-Parameters">Parameters<span><a href="#method-i-policy-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:force]</code>
+<dl class="rdoc-list note-list"><dt><code>force</code>
 <dd>
 <p>Force load the latest policy when <code>true</code>. Otherwise the policy
 will be memoized to reduce the number of API calls made. The default is
@@ -714,9 +711,9 @@ service.</p>
 
     
       <!-- <div class="method-source-code" id="policy-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/project.rb, line 414</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">policy</span> <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-ivar">@policy</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:force</span>]
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/project.rb, line 412</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">policy</span> <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@policy</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">force</span>
   <span class="ruby-ivar">@policy</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">ensure_connection!</span>
     <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_policy</span> <span class="ruby-identifier">project_id</span>
@@ -790,7 +787,7 @@ Policies</a> for more information.</p>
 
     
       <!-- <div class="method-source-code" id="policy-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/project.rb, line 460</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/project.rb, line 458</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">policy=</span> <span class="ruby-identifier">new_policy</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">set_policy</span> <span class="ruby-identifier">project_id</span>, <span class="ruby-identifier">new_policy</span>
@@ -1063,7 +1060,7 @@ of Strings)</p>
 
     
       <!-- <div class="method-source-code" id="test_permissions-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/project.rb, line 500</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/project.rb, line 498</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_permissions</span> <span class="ruby-operator">*</span><span class="ruby-identifier">permissions</span>
   <span class="ruby-identifier">permissions</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">permissions</span>).<span class="ruby-identifier">flatten</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -1246,7 +1243,7 @@ href="Project/Updater.html">Project::Updater</a></p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

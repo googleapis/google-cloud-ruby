@@ -224,7 +224,7 @@ href="https://console.developers.google.com">Google Developers Console</a>.</p>
 
   
     <h4>
-      <code>create_zone(zone_name, zone_dns, options = {})</code>
+      <code>create_zone(zone_name, zone_dns, description: nil, name_server_set: nil)</code>
       <span>
         <a href="#method-i-create_zone">&para;</a>
         <a href="#top">&uarr;</a>
@@ -247,15 +247,12 @@ letter or digit, and only contain lowercase letters, digits or dashes.
 <dd>
 <p>The DNS name of this managed zone, for instance “example.com.”.
 (<code>String</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:description]</code>
+</dd><dt><code>description</code>
 <dd>
 <p>A string of at most 1024 characters associated with this resource for the
 user&#39;s convenience. Has no effect on the managed zone&#39;s function.
 (<code>String</code>)</p>
-</dd><dt><code>options[:name_server_set]</code>
+</dd><dt><code>name_server_set</code>
 <dd>
 <p>A NameServerSet is a set of DNS name servers that all host the same
 ManagedZones. Most users will leave this field unset. (<code>String</code>)</p>
@@ -277,10 +274,13 @@ ManagedZones. Most users will leave this field unset. (<code>String</code>)</p>
 
     
       <!-- <div class="method-source-code" id="create_zone-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/project.rb, line 259</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_zone</span> <span class="ruby-identifier">zone_name</span>, <span class="ruby-identifier">zone_dns</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/project.rb, line 255</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_zone</span> <span class="ruby-identifier">zone_name</span>, <span class="ruby-identifier">zone_dns</span>, <span class="ruby-identifier">description</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+                <span class="ruby-identifier">name_server_set</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
-  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">create_zone</span> <span class="ruby-identifier">zone_name</span>, <span class="ruby-identifier">zone_dns</span>, <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">create_zone</span> <span class="ruby-identifier">zone_name</span>, <span class="ruby-identifier">zone_dns</span>,
+                                <span class="ruby-identifier">description</span><span class="ruby-operator">:</span> <span class="ruby-identifier">description</span>,
+                                <span class="ruby-identifier">name_server_set</span><span class="ruby-operator">:</span> <span class="ruby-identifier">name_server_set</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Zone</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">else</span>
@@ -403,7 +403,7 @@ ManagedZones. Most users will leave this field unset. (<code>String</code>)</p>
 
   
     <h4>
-      <code>find_zones(options = {})</code>
+      <code>find_zones(token: nil, max: nil)</code>
       <span>
         <a href="#method-i-find_zones">&para;</a>
         <a href="#top">&uarr;</a>
@@ -660,7 +660,7 @@ ManagedZones. Most users will leave this field unset. (<code>String</code>)</p>
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/project.rb, line 271</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/project.rb, line 270</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_project</span>
@@ -789,7 +789,7 @@ does not exist</p>
 
   
     <h4>
-      <code>zones(options = {})</code>
+      <code>zones(token: nil, max: nil)</code>
       <span>
         <a href="#method-i-zones">&para;</a>
         <a href="#top">&uarr;</a>
@@ -802,14 +802,11 @@ does not exist</p>
       <p>Retrieves the list of zones belonging to the project.</p>
 
 <h3 id="method-i-zones-label-Parameters">Parameters<span><a href="#method-i-zones-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:token]</code>
+<dl class="rdoc-list note-list"><dt><code>token</code>
 <dd>
 <p>A previously-returned page token representing part of the larger set of
 results to view. (<code>String</code>)</p>
-</dd><dt><code>options[:max]</code>
+</dd><dt><code>max</code>
 <dd>
 <p>Maximum number of zones to return. (<code>Integer</code>)</p>
 </dd></dl>
@@ -851,10 +848,10 @@ them: (See <a href="Zone/List.html">Gcloud::Dns::Zone::List</a>)</p>
 
     
       <!-- <div class="method-source-code" id="zones-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/project.rb, line 213</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">zones</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/project.rb, line 211</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">zones</span> <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
-  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_zones</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_zones</span> <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">token</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Zone</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_response</span> <span class="ruby-identifier">resp</span>, <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">else</span>
@@ -924,7 +921,7 @@ them: (See <a href="Zone/List.html">Gcloud::Dns::Zone::List</a>)</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

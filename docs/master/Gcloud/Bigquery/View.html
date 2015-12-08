@@ -933,7 +933,7 @@ numbers (0-9), or underscores (_). The maximum length is 1,024 characters.</p>
 
   
     <h4>
-      <code>data(options = {})</code>
+      <code>data(max: nil, timeout: nil, cache: nil, dryrun: nil)</code>
       <span>
         <a href="#method-i-data">&para;</a>
         <a href="#top">&uarr;</a>
@@ -946,17 +946,14 @@ numbers (0-9), or underscores (_). The maximum length is 1,024 characters.</p>
       <p>Runs a query to retrieve all data from the view.</p>
 
 <h3 id="method-i-data-label-Parameters">Parameters<span><a href="#method-i-data-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:max]</code>
+<dl class="rdoc-list note-list"><dt><code>max</code>
 <dd>
 <p>The maximum number of rows of data to return per page of results. Setting
 this flag to a small value such as 1000 and then paging through results
 might improve reliability when the query result set is large. In addition
 to this limit, responses are also limited to 10 MB. By default, there is no
 maximum row count, and only the byte limit applies. (<code>Integer</code>)</p>
-</dd><dt><code>options[:timeout]</code>
+</dd><dt><code>timeout</code>
 <dd>
 <p>How long to wait for the query to complete, in milliseconds, before the
 request times out and returns. Note that this is only a timeout for the
@@ -965,19 +962,19 @@ value, the call returns without any results and with <a
 href="QueryData.html#method-i-complete-3F">Gcloud::Bigquery::QueryData#complete?</a>
 set to false. The default value is 10000 milliseconds (10 seconds).
 (<code>Integer</code>)</p>
-</dd><dt><code>options[:dryrun]</code>
-<dd>
-<p>If set to <code>true</code>, BigQuery doesn&#39;t run the job. Instead, if
-the query is valid, BigQuery returns statistics about the job such as how
-many bytes would be processed. If the query is invalid, an error returns.
-The default value is <code>false</code>. (<code>Boolean</code>)</p>
-</dd><dt><code>options[:cache]</code>
+</dd><dt><code>cache</code>
 <dd>
 <p>Whether to look for the result in the query cache. The query cache is a
 best-effort cache that will be flushed whenever tables in the query are
 modified. The default value is true. For more information, see <a
 href="https://developers.google.com/bigquery/querying-data">query
 caching</a>. (<code>Boolean</code>)</p>
+</dd><dt><code>dryrun</code>
+<dd>
+<p>If set to <code>true</code>, BigQuery doesn&#39;t run the job. Instead, if
+the query is valid, BigQuery returns statistics about the job such as how
+many bytes would be processed. If the query is invalid, an error returns.
+The default value is <code>false</code>. (<code>Boolean</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-data-label-Returns">Returns<span><a href="#method-i-data-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -1003,10 +1000,11 @@ caching</a>. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="data-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 338</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 336</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span> <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">cache</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">dryrun</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">sql</span> = <span class="ruby-node">&quot;SELECT * FROM #{@gapi[&#39;id&#39;]}&quot;</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span>, <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-identifier">timeout</span>, <span class="ruby-identifier">cache</span><span class="ruby-operator">:</span> <span class="ruby-identifier">cache</span>, <span class="ruby-identifier">dryrun</span><span class="ruby-operator">:</span> <span class="ruby-identifier">dryrun</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">query</span> <span class="ruby-identifier">sql</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">QueryData</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
@@ -1087,7 +1085,7 @@ caching</a>. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 369</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 368</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -1249,7 +1247,7 @@ Reference </a>.</p>
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 384</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/view.rb, line 383</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -1287,7 +1285,7 @@ Reference </a>.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

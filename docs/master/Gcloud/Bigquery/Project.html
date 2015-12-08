@@ -225,7 +225,7 @@ href="Project.html">Gcloud::Bigquery::Project</a>.</p>
 
   
     <h4>
-      <code>create_dataset(dataset_id, options = {})</code>
+      <code>create_dataset(dataset_id, name: nil, description: nil, expiration: nil, access: nil)</code>
       <span>
         <a href="#method-i-create_dataset">&para;</a>
         <a href="#top">&uarr;</a>
@@ -243,20 +243,17 @@ href="Project.html">Gcloud::Bigquery::Project</a>.</p>
 <p>A unique ID for this dataset, without the project name. The ID must contain
 only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum
 length is 1,024 characters. (<code>String</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:name]</code>
+</dd><dt><code>name</code>
 <dd>
 <p>A descriptive name for the dataset. (<code>String</code>)</p>
-</dd><dt><code>options[:description]</code>
+</dd><dt><code>description</code>
 <dd>
 <p>A user-friendly description of the dataset. (<code>String</code>)</p>
-</dd><dt><code>options[:expiration]</code>
+</dd><dt><code>expiration</code>
 <dd>
 <p>The default lifetime of all tables in the dataset, in milliseconds. The
 minimum value is 3600000 milliseconds (one hour). (<code>Integer</code>)</p>
-</dd><dt><code>options[:access]</code>
+</dd><dt><code>access</code>
 <dd>
 <p>The access rules for a <a href="Dataset.html">Dataset</a> using the Google
 Cloud <a href="../Datastore.html">Datastore</a> API data structure of an
@@ -318,22 +315,22 @@ href="Dataset/Access.html">Dataset::Access</a>)</p>
 
     
       <!-- <div class="method-source-code" id="create_dataset-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 339</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_dataset</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 345</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_dataset</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">description</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+                   <span class="ruby-identifier">expiration</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">access</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
     <span class="ruby-identifier">access_builder</span> = <span class="ruby-constant">Dataset</span><span class="ruby-operator">::</span><span class="ruby-constant">Access</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">default_access_rules</span>,
                                          <span class="ruby-string">&quot;projectId&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">project</span>
     <span class="ruby-keyword">yield</span> <span class="ruby-identifier">access_builder</span>
-    <span class="ruby-identifier">options</span>[<span class="ruby-value">:access</span>] = <span class="ruby-identifier">access_builder</span>.<span class="ruby-identifier">access</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">access_builder</span>.<span class="ruby-identifier">changed?</span>
+    <span class="ruby-identifier">access</span> = <span class="ruby-identifier">access_builder</span>.<span class="ruby-identifier">access</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">access_builder</span>.<span class="ruby-identifier">changed?</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">description</span><span class="ruby-operator">:</span> <span class="ruby-identifier">description</span>,
+              <span class="ruby-identifier">expiration</span><span class="ruby-operator">:</span> <span class="ruby-identifier">expiration</span>, <span class="ruby-identifier">access</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">insert_dataset</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">options</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
-    <span class="ruby-constant">Dataset</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Dataset</span>.<span class="ruby-identifier">from_gapi</span>(<span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
+  <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -387,7 +384,7 @@ not exist</p>
 
     
       <!-- <div class="method-source-code" id="dataset-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 258</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 266</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">dataset</span> <span class="ruby-identifier">dataset_id</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_dataset</span> <span class="ruby-identifier">dataset_id</span>
@@ -413,7 +410,7 @@ not exist</p>
 
   
     <h4>
-      <code>datasets(options = {})</code>
+      <code>datasets(all: nil, token: nil, max: nil)</code>
       <span>
         <a href="#method-i-datasets">&para;</a>
         <a href="#top">&uarr;</a>
@@ -426,18 +423,15 @@ not exist</p>
       <p>Retrieves the list of datasets belonging to the project.</p>
 
 <h3 id="method-i-datasets-label-Parameters">Parameters<span><a href="#method-i-datasets-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:all]</code>
+<dl class="rdoc-list note-list"><dt><code>all</code>
 <dd>
 <p>Whether to list all datasets, including hidden ones. The default is
 <code>false</code>. (<code>Boolean</code>)</p>
-</dd><dt><code>options[:token]</code>
+</dd><dt><code>token</code>
 <dd>
 <p>A previously-returned page token representing part of the larger set of
 results to view. (<code>String</code>)</p>
-</dd><dt><code>options[:max]</code>
+</dd><dt><code>max</code>
 <dd>
 <p>Maximum number of datasets to return. (<code>Integer</code>)</p>
 </dd></dl>
@@ -495,9 +489,10 @@ href="Dataset/List.html#attribute-i-token">Gcloud::Bigquery::Dataset::List#token
 
     
       <!-- <div class="method-source-code" id="datasets-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 418</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">datasets</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 422</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">datasets</span> <span class="ruby-identifier">all</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">all</span><span class="ruby-operator">:</span> <span class="ruby-identifier">all</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">token</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_datasets</span> <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Dataset</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_response</span> <span class="ruby-identifier">resp</span>, <span class="ruby-identifier">connection</span>
@@ -555,7 +550,7 @@ href="Dataset/List.html#attribute-i-token">Gcloud::Bigquery::Dataset::List#token
 
     
       <!-- <div class="method-source-code" id="job-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 449</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 454</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">job</span> <span class="ruby-identifier">job_id</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_job</span> <span class="ruby-identifier">job_id</span>
@@ -581,7 +576,7 @@ href="Dataset/List.html#attribute-i-token">Gcloud::Bigquery::Dataset::List#token
 
   
     <h4>
-      <code>jobs(options = {})</code>
+      <code>jobs(all: nil, token: nil, max: nil, filter: nil)</code>
       <span>
         <a href="#method-i-jobs">&para;</a>
         <a href="#top">&uarr;</a>
@@ -594,21 +589,18 @@ href="Dataset/List.html#attribute-i-token">Gcloud::Bigquery::Dataset::List#token
       <p>Retrieves the list of jobs belonging to the project.</p>
 
 <h3 id="method-i-jobs-label-Parameters">Parameters<span><a href="#method-i-jobs-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:all]</code>
+<dl class="rdoc-list note-list"><dt><code>all</code>
 <dd>
 <p>Whether to display jobs owned by all users in the project. The default is
 <code>false</code>. (<code>Boolean</code>)</p>
-</dd><dt><code>options[:token]</code>
+</dd><dt><code>token</code>
 <dd>
 <p>A previously-returned page token representing part of the larger set of
 results to view. (<code>String</code>)</p>
-</dd><dt><code>options[:max]</code>
+</dd><dt><code>max</code>
 <dd>
 <p>Maximum number of jobs to return. (<code>Integer</code>)</p>
-</dd><dt><code>options[:filter]</code>
+</dd><dt><code>filter</code>
 <dd>
 <p>A filter for job state. (<code>String</code>)</p>
 
@@ -673,9 +665,10 @@ href="Job/List.html#attribute-i-token">Gcloud::Bigquery::Job::List#token</a>)</p
 
     
       <!-- <div class="method-source-code" id="jobs-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 525</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">jobs</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 528</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">jobs</span> <span class="ruby-identifier">all</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">filter</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">all</span><span class="ruby-operator">:</span> <span class="ruby-identifier">all</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">token</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span>, <span class="ruby-identifier">filter</span><span class="ruby-operator">:</span> <span class="ruby-identifier">filter</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_jobs</span> <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Job</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_response</span> <span class="ruby-identifier">resp</span>, <span class="ruby-identifier">connection</span>
@@ -742,7 +735,7 @@ href="Job/List.html#attribute-i-token">Gcloud::Bigquery::Job::List#token</a>)</p
 
   
     <h4>
-      <code>query(query, options = {})</code>
+      <code>query(query, max: nil, timeout: 10000, dryrun: nil, cache: true, dataset: nil, project: nil)</code>
       <span>
         <a href="#method-i-query">&para;</a>
         <a href="#top">&uarr;</a>
@@ -763,14 +756,14 @@ method</a>.</p>
 href="https://cloud.google.com/bigquery/query-reference">query syntax</a>,
 of the query to execute. Example: “SELECT count(f1) FROM
 [myProjectId:myDatasetId.myTableId]”. (<code>String</code>)</p>
-</dd><dt><code>options[:max]</code>
+</dd><dt><code>max</code>
 <dd>
 <p>The maximum number of rows of data to return per page of results. Setting
 this flag to a small value such as 1000 and then paging through results
 might improve reliability when the query result set is large. In addition
 to this limit, responses are also limited to 10 MB. By default, there is no
 maximum row count, and only the byte limit applies. (<code>Integer</code>)</p>
-</dd><dt><code>options[:timeout]</code>
+</dd><dt><code>timeout</code>
 <dd>
 <p>How long to wait for the query to complete, in milliseconds, before the
 request times out and returns. Note that this is only a timeout for the
@@ -779,26 +772,26 @@ value, the call returns without any results and with <a
 href="QueryData.html#method-i-complete-3F">Gcloud::Bigquery::QueryData#complete?</a>
 set to false. The default value is 10000 milliseconds (10 seconds).
 (<code>Integer</code>)</p>
-</dd><dt><code>options[:dryrun]</code>
+</dd><dt><code>dryrun</code>
 <dd>
 <p>If set to <code>true</code>, BigQuery doesn&#39;t run the job. Instead, if
 the query is valid, BigQuery returns statistics about the job such as how
 many bytes would be processed. If the query is invalid, an error returns.
 The default value is <code>false</code>. (<code>Boolean</code>)</p>
-</dd><dt><code>options[:cache]</code>
+</dd><dt><code>cache</code>
 <dd>
 <p>Whether to look for the result in the query cache. The query cache is a
 best-effort cache that will be flushed whenever tables in the query are
 modified. The default value is true. For more information, see <a
 href="https://developers.google.com/bigquery/querying-data">query
 caching</a>. (<code>Boolean</code>)</p>
-</dd><dt><code>options[:dataset]</code>
+</dd><dt><code>dataset</code>
 <dd>
 <p>Specifies the default datasetId and projectId to assume for any unqualified
 table names in the query. If not set, all table names in the query string
 must be qualified in the format &#39;datasetId.tableId&#39;.
 (<code>String</code>)</p>
-</dd><dt><code>options[:project]</code>
+</dd><dt><code>project</code>
 <dd>
 <p>Specifies the default projectId to assume for any unqualified table names
 in the query. Only used if <code>dataset</code> option is set.
@@ -825,9 +818,12 @@ in the query. Only used if <code>dataset</code> option is set.
 
     
       <!-- <div class="method-source-code" id="query-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 226</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">query</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 231</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">query</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-value">10000</span>, <span class="ruby-identifier">dryrun</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">cache</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>,
+          <span class="ruby-identifier">dataset</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">project</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span>, <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-identifier">timeout</span>, <span class="ruby-identifier">dryrun</span><span class="ruby-operator">:</span> <span class="ruby-identifier">dryrun</span>, <span class="ruby-identifier">cache</span><span class="ruby-operator">:</span> <span class="ruby-identifier">cache</span>,
+              <span class="ruby-identifier">dataset</span><span class="ruby-operator">:</span> <span class="ruby-identifier">dataset</span>, <span class="ruby-identifier">project</span><span class="ruby-operator">:</span> <span class="ruby-identifier">project</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">query</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">QueryData</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
@@ -850,7 +846,7 @@ in the query. Only used if <code>dataset</code> option is set.
 
   
     <h4>
-      <code>query_job(query, options = {})</code>
+      <code>query_job(query, priority: "INTERACTIVE", cache: true, table: nil, create: nil, write: nil, large_results: nil, flatten: nil, dataset: nil)</code>
       <span>
         <a href="#method-i-query_job">&para;</a>
         <a href="#top">&uarr;</a>
@@ -871,22 +867,22 @@ method</a>.</p>
 href="https://cloud.google.com/bigquery/query-reference">query syntax</a>,
 of the query to execute. Example: “SELECT count(f1) FROM
 [myProjectId:myDatasetId.myTableId]”. (<code>String</code>)</p>
-</dd><dt><code>options[:priority]</code>
+</dd><dt><code>priority</code>
 <dd>
 <p>Specifies a priority for the query. Possible values include
 <code>INTERACTIVE</code> and <code>BATCH</code>. The default value is
 <code>INTERACTIVE</code>. (<code>String</code>)</p>
-</dd><dt><code>options[:cache]</code>
+</dd><dt><code>cache</code>
 <dd>
 <p>Whether to look for the result in the query cache. The query cache is a
 best-effort cache that will be flushed whenever tables in the query are
 modified. The default value is <code>true</code>. (<code>Boolean</code>)</p>
-</dd><dt><code>options[:table]</code>
+</dd><dt><code>table</code>
 <dd>
 <p>The destination table where the query results should be stored. If not
 present, a new table will be created to store the results.
 (<code>Table</code>)</p>
-</dd><dt><code>options[:create]</code>
+</dd><dt><code>create</code>
 <dd>
 <p>Specifies whether the job is allowed to create new tables.
 (<code>String</code>)</p>
@@ -898,7 +894,7 @@ present, a new table will be created to store the results.
 <p><code>never</code> - The table must already exist. A &#39;notFound&#39;
 error is raised if the table does not exist.</p>
 </li></ul>
-</dd><dt><code>options[:write]</code>
+</dd><dt><code>write</code>
 <dd>
 <p>Specifies the action that occurs if the destination table already exists.
 (<code>String</code>)</p>
@@ -912,18 +908,18 @@ error is raised if the table does not exist.</p>
 <p><code>empty</code> - A &#39;duplicate&#39; error is returned in the job
 result if the table exists and contains data.</p>
 </li></ul>
-</dd><dt><code>options[:large_results]</code>
+</dd><dt><code>large_results</code>
 <dd>
 <p>If <code>true</code>, allows the query to produce arbitrarily large result
-tables at a slight cost in performance. Requires
-<code>options[:table]</code> to be set. (<code>Boolean</code>)</p>
-</dd><dt><code>options[:flatten]</code>
+tables at a slight cost in performance. Requires <code>table</code>
+parameter to be set. (<code>Boolean</code>)</p>
+</dd><dt><code>flatten</code>
 <dd>
 <p>Flattens all nested and repeated fields in the query results. The default
-value is <code>true</code>. <code>options[:large_results]</code> must be
+value is <code>true</code>. <code>large_results</code> parameter must be
 <code>true</code> if this is set to <code>false</code>.
 (<code>Boolean</code>)</p>
-</dd><dt><code>options[:dataset]</code>
+</dd><dt><code>dataset</code>
 <dd>
 <p>Specifies the default dataset to use for unqualified table names in the
 query. (<code>Dataset</code> or <code>String</code>)</p>
@@ -954,8 +950,13 @@ query. (<code>Dataset</code> or <code>String</code>)</p>
     
       <!-- <div class="method-source-code" id="query_job-source">
 <pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/project.rb, line 155</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">query_job</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span> = {}
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">query_job</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">priority</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;INTERACTIVE&quot;</span>, <span class="ruby-identifier">cache</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">table</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+              <span class="ruby-identifier">create</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">write</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">large_results</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">flatten</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+              <span class="ruby-identifier">dataset</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">priority</span><span class="ruby-operator">:</span> <span class="ruby-identifier">priority</span>, <span class="ruby-identifier">cache</span><span class="ruby-operator">:</span> <span class="ruby-identifier">cache</span>, <span class="ruby-identifier">table</span><span class="ruby-operator">:</span> <span class="ruby-identifier">table</span>,
+              <span class="ruby-identifier">create</span><span class="ruby-operator">:</span> <span class="ruby-identifier">create</span>, <span class="ruby-identifier">write</span><span class="ruby-operator">:</span> <span class="ruby-identifier">write</span>, <span class="ruby-identifier">large_results</span><span class="ruby-operator">:</span> <span class="ruby-identifier">large_results</span>,
+              <span class="ruby-identifier">flatten</span><span class="ruby-operator">:</span> <span class="ruby-identifier">flatten</span>, <span class="ruby-identifier">dataset</span><span class="ruby-operator">:</span> <span class="ruby-identifier">dataset</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">query_job</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Job</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
@@ -987,7 +988,7 @@ query. (<code>Dataset</code> or <code>String</code>)</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

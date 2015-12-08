@@ -210,7 +210,7 @@ exist</p>
 
     
       <!-- <div class="method-source-code" id="bucket-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 182</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 181</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">bucket</span> <span class="ruby-identifier">bucket_name</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_bucket</span> <span class="ruby-identifier">bucket_name</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -239,7 +239,7 @@ exist</p>
 
   
     <h4>
-      <code>buckets(options = {})</code>
+      <code>buckets(prefix: nil, token: nil, max: nil)</code>
       <span>
         <a href="#method-i-buckets">&para;</a>
         <a href="#top">&uarr;</a>
@@ -252,18 +252,15 @@ exist</p>
       <p>Retrieves a list of buckets for the given project.</p>
 
 <h3 id="method-i-buckets-label-Parameters">Parameters<span><a href="#method-i-buckets-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:prefix]</code>
+<dl class="rdoc-list note-list"><dt><code>prefix</code>
 <dd>
 <p>Filter results to buckets whose names begin with this prefix.
 (<code>String</code>)</p>
-</dd><dt><code>options[:token]</code>
+</dd><dt><code>token</code>
 <dd>
 <p>A previously-returned page token representing part of the larger set of
 results to view. (<code>String</code>)</p>
-</dd><dt><code>options[:max]</code>
+</dd><dt><code>max</code>
 <dd>
 <p>Maximum number of buckets to return. (<code>Integer</code>)</p>
 </dd></dl>
@@ -322,8 +319,9 @@ href="Bucket/List.html#attribute-i-token">Gcloud::Storage::Bucket::List#token</a
 
     
       <!-- <div class="method-source-code" id="buckets-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 150</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">buckets</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">buckets</span> <span class="ruby-identifier">prefix</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">prefix</span><span class="ruby-operator">:</span> <span class="ruby-identifier">prefix</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">token</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_buckets</span> <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_response</span> <span class="ruby-identifier">resp</span>, <span class="ruby-identifier">connection</span>
@@ -350,7 +348,7 @@ href="Bucket/List.html#attribute-i-token">Gcloud::Storage::Bucket::List#token</a
 
   
     <h4>
-      <code>create_bucket(bucket_name, options = {})</code>
+      <code>create_bucket(bucket_name, acl: nil, default_acl: nil, cors: nil, location: nil, logging_bucket: nil, logging_prefix: nil, retries: nil, storage_class: nil, versioning: nil, website_main: nil, website_404: nil)</code>
       <span>
         <a href="#method-i-create_bucket">&para;</a>
         <a href="#top">&uarr;</a>
@@ -373,16 +371,71 @@ Resource Sharing (CORS)</a>.</p>
 <dl class="rdoc-list note-list"><dt><code>bucket_name</code>
 <dd>
 <p>Name of a bucket. (<code>String</code>)</p>
-</dd><dt><code>options</code>
+</dd><dt><code>acl</code>
 <dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:cors]</code>
+<p>Apply a predefined set of access controls to this bucket.
+(<code>String</code>)</p>
+
+<p>Acceptable values are:</p>
+<ul><li>
+<p><code>auth</code>, <code>auth_read</code>, <code>authenticated</code>,
+<code>authenticated_read</code>, <code>authenticatedRead</code> - <a
+href="Project.html">Project</a> team owners get OWNER access, and
+allAuthenticatedUsers get READER access.</p>
+</li><li>
+<p><code>private</code> - <a href="Project.html">Project</a> team owners get
+OWNER access.</p>
+</li><li>
+<p><code>project_private</code>, <code>projectPrivate</code> - <a
+href="Project.html">Project</a> team members get access according to their
+roles.</p>
+</li><li>
+<p><code>public</code>, <code>public_read</code>, <code>publicRead</code> - <a
+href="Project.html">Project</a> team owners get OWNER access, and allUsers
+get READER access.</p>
+</li><li>
+<p><code>public_write</code>, <code>publicReadWrite</code> - <a
+href="Project.html">Project</a> team owners get OWNER access, and allUsers
+get WRITER access.</p>
+</li></ul>
+</dd><dt><code>default_acl</code>
+<dd>
+<p>Apply a predefined set of default object access controls to this bucket.
+(<code>String</code>)</p>
+
+<p>Acceptable values are:</p>
+<ul><li>
+<p><code>auth</code>, <code>auth_read</code>, <code>authenticated</code>,
+<code>authenticated_read</code>, <code>authenticatedRead</code> - <a
+href="File.html">File</a> owner gets OWNER access, and
+allAuthenticatedUsers get READER access.</p>
+</li><li>
+<p><code>owner_full</code>, <code>bucketOwnerFullControl</code> - <a
+href="File.html">File</a> owner gets OWNER access, and project team owners
+get OWNER access.</p>
+</li><li>
+<p><code>owner_read</code>, <code>bucketOwnerRead</code> - <a
+href="File.html">File</a> owner gets OWNER access, and project team owners
+get READER access.</p>
+</li><li>
+<p><code>private</code> - <a href="File.html">File</a> owner gets OWNER
+access.</p>
+</li><li>
+<p><code>project_private</code>, <code>projectPrivate</code> - <a
+href="File.html">File</a> owner gets OWNER access, and project team members
+get access according to their roles.</p>
+</li><li>
+<p><code>public</code>, <code>public_read</code>, <code>publicRead</code> - <a
+href="File.html">File</a> owner gets OWNER access, and allUsers get READER
+access.</p>
+</li></ul>
+</dd><dt><code>cors</code>
 <dd>
 <p>The CORS rules for the bucket. Accepts an array of hashes containing the
 attributes specified for the <a
 href="https://cloud.google.com/storage/docs/json_api/v1/buckets#cors">resource
 description of cors</a>.</p>
-</dd><dt><code>options[:location]</code>
+</dd><dt><code>location</code>
 <dd>
 <p>The location of the bucket. Object data for objects in the bucket resides
 in physical storage within this region. Possible values include
@@ -390,12 +443,12 @@ in physical storage within this region. Possible values include
 href="https://cloud.google.com/storage/docs/bucket-locations">developer’s
 guide</a> for the authoritative list. The default value is <code>US</code>.
 (<code>String</code>)</p>
-</dd><dt><code>options[:logging_bucket]</code>
+</dd><dt><code>logging_bucket</code>
 <dd>
 <p>The destination bucket for the bucket&#39;s logs. For more information, see
 <a href="https://cloud.google.com/storage/docs/access-logs">Access
 Logs</a>. (<code>String</code>)</p>
-</dd><dt><code>options[:logging_prefix]</code>
+</dd><dt><code>logging_prefix</code>
 <dd>
 <p>The prefix used to create log object names for the bucket. It can be at
 most 900 characters and must be a <a
@@ -404,12 +457,12 @@ object name</a> . By default, the object prefix is the name of the bucket
 for which the logs are enabled. For more information, see <a
 href="https://cloud.google.com/storage/docs/access-logs">Access Logs</a>.
 (<code>String</code>)</p>
-</dd><dt><code>options[:retries]</code>
+</dd><dt><code>retries</code>
 <dd>
 <p>The number of times the API call should be retried. Default is <a
 href="../Backoff.html#attribute-c-retries">Gcloud::Backoff.retries</a>.
 (<code>Integer</code>)</p>
-</dd><dt><code>options[:storage_class]</code>
+</dd><dt><code>storage_class</code>
 <dd>
 <p>Defines how objects in the bucket are stored and determines the SLA and the
 cost of storage. Values include <code>:standard</code>,
@@ -420,19 +473,19 @@ For more information, see <a
 href="https://cloud.google.com/storage/docs/storage-classes">Storage
 Classes</a>. The default value is <code>:standard</code>.
 (<code>Symbol</code> or <code>String</code>)</p>
-</dd><dt><code>options[:versioning]</code>
+</dd><dt><code>versioning</code>
 <dd>
 <p>Whether <a
 href="https://cloud.google.com/storage/docs/object-versioning">Object
 Versioning</a> is to be enabled for the bucket. The default value is
 <code>false</code>. (<code>Boolean</code>)</p>
-</dd><dt><code>options[:website_main]</code>
+</dd><dt><code>website_main</code>
 <dd>
 <p>The index page returned from a static website served from the bucket when a
 site visitor requests the top level directory. For more information, see <a
 href="https://cloud.google.com/storage/docs/website-configuration#step4">How
 to Host a Static Website </a>.</p>
-</dd><dt><code>options[:website_404]</code>
+</dd><dt><code>website_404</code>
 <dd>
 <p>The page returned from a static website served from the bucket when a site
 visitor requests a resource that does not exist. For more information, see
@@ -492,16 +545,22 @@ end</pre>
 
     
       <!-- <div class="method-source-code" id="create_bucket-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 301</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_bucket</span> <span class="ruby-identifier">bucket_name</span>, <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>] = <span class="ruby-identifier">acl_rule</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:acl</span>]
-  <span class="ruby-identifier">options</span>[<span class="ruby-value">:default_acl</span>] = <span class="ruby-identifier">acl_rule</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:default_acl</span>]
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/project.rb, line 329</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_bucket</span> <span class="ruby-identifier">bucket_name</span>, <span class="ruby-identifier">acl</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">default_acl</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">cors</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+                  <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">logging_bucket</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">logging_prefix</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+                  <span class="ruby-identifier">retries</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">storage_class</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">versioning</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+                  <span class="ruby-identifier">website_main</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">website_404</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">opts</span> = { <span class="ruby-identifier">acl</span><span class="ruby-operator">:</span> <span class="ruby-identifier">acl_rule</span>(<span class="ruby-identifier">acl</span>), <span class="ruby-identifier">default_acl</span><span class="ruby-operator">:</span> <span class="ruby-identifier">acl_rule</span>(<span class="ruby-identifier">default_acl</span>),
+           <span class="ruby-identifier">cors</span><span class="ruby-operator">:</span> <span class="ruby-identifier">cors</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">location</span>, <span class="ruby-identifier">logging_bucket</span><span class="ruby-operator">:</span> <span class="ruby-identifier">logging_bucket</span>,
+           <span class="ruby-identifier">logging_prefix</span><span class="ruby-operator">:</span> <span class="ruby-identifier">logging_prefix</span>, <span class="ruby-identifier">retries</span><span class="ruby-operator">:</span> <span class="ruby-identifier">retries</span>,
+           <span class="ruby-identifier">storage_class</span><span class="ruby-operator">:</span> <span class="ruby-identifier">storage_class</span>, <span class="ruby-identifier">versioning</span><span class="ruby-operator">:</span> <span class="ruby-identifier">versioning</span>,
+           <span class="ruby-identifier">website_main</span><span class="ruby-operator">:</span> <span class="ruby-identifier">website_main</span>, <span class="ruby-identifier">website_404</span><span class="ruby-operator">:</span> <span class="ruby-identifier">website_404</span> }
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
     <span class="ruby-identifier">cors_builder</span> = <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Cors</span>.<span class="ruby-identifier">new</span>
     <span class="ruby-keyword">yield</span> <span class="ruby-identifier">cors_builder</span>
-    <span class="ruby-identifier">options</span>[<span class="ruby-value">:cors</span>] = <span class="ruby-identifier">cors_builder</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cors_builder</span>.<span class="ruby-identifier">changed?</span>
+    <span class="ruby-identifier">opts</span>[<span class="ruby-value">:cors</span>] = <span class="ruby-identifier">cors_builder</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cors_builder</span>.<span class="ruby-identifier">changed?</span>
   <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">insert_bucket</span> <span class="ruby-identifier">bucket_name</span>, <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">insert_bucket</span> <span class="ruby-identifier">bucket_name</span>, <span class="ruby-identifier">opts</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -549,7 +608,7 @@ end</pre>
 
   
     <h4>
-      <code>find_buckets(options = {})</code>
+      <code>find_buckets(prefix: nil, token: nil, max: nil)</code>
       <span>
         <a href="#method-i-find_buckets">&para;</a>
         <a href="#top">&uarr;</a>
@@ -634,7 +693,7 @@ end</pre>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

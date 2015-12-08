@@ -387,7 +387,7 @@ is optional. (<code>Key</code> or <code>String</code> or <code>nil</code>)</p>
 
     
       <!-- <div class="method-source-code" id="entity-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 446</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 444</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">entity</span> <span class="ruby-identifier">key_or_kind</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">id_or_name</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">entity</span> = <span class="ruby-constant">Entity</span>.<span class="ruby-identifier">new</span>
 
@@ -624,7 +624,7 @@ method to make the creation of <a href="Key.html">Key</a> objects easier.</p>
 
     
       <!-- <div class="method-source-code" id="key-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 389</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 387</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">key</span> <span class="ruby-identifier">kind</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">id_or_name</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-constant">Key</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">kind</span>, <span class="ruby-identifier">id_or_name</span>
 <span class="ruby-keyword">end</span></pre>
@@ -761,7 +761,7 @@ easier.</p>
 
     
       <!-- <div class="method-source-code" id="query-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 360</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 358</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">query</span> <span class="ruby-operator">*</span><span class="ruby-identifier">kinds</span>
   <span class="ruby-identifier">query</span> = <span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">kinds</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">kinds</span>.<span class="ruby-identifier">empty?</span>
@@ -782,7 +782,7 @@ easier.</p>
 
   
     <h4>
-      <code>run(query, options = {})</code>
+      <code>run(query, namespace: nil)</code>
       <span>
         <a href="#method-i-run">&para;</a>
         <a href="#top">&uarr;</a>
@@ -799,10 +799,7 @@ easier.</p>
 <dd>
 <p>The <a href="Query.html">Query</a> object with the search criteria.
 (<code>Query</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:namespace]</code>
+</dd><dt><code>namespace</code>
 <dd>
 <p>The namespace the query is to run within. (<code>String</code>)</p>
 </dd></dl>
@@ -830,9 +827,9 @@ href="Dataset/QueryResults.html">Gcloud::Datastore::Dataset::QueryResults</a></p
 
     
       <!-- <div class="method-source-code" id="run-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 266</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-identifier">partition</span> = <span class="ruby-identifier">optional_partition_id</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:namespace</span>]
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 264</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">namespace</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">partition</span> = <span class="ruby-identifier">optional_partition_id</span> <span class="ruby-identifier">namespace</span>
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">run_query</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">to_proto</span>, <span class="ruby-identifier">partition</span>
   <span class="ruby-identifier">entities</span> = <span class="ruby-identifier">to_gcloud_entities</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">batch</span>.<span class="ruby-identifier">entity_result</span>
   <span class="ruby-identifier">cursor</span> = <span class="ruby-constant">Proto</span>.<span class="ruby-identifier">encode_cursor</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">batch</span>.<span class="ruby-identifier">end_cursor</span>
@@ -858,7 +855,7 @@ href="Dataset/QueryResults.html">Gcloud::Datastore::Dataset::QueryResults</a></p
 
   
     <h4>
-      <code>run_query(query, options = {})</code>
+      <code>run_query(query, namespace: nil)</code>
       <span>
         <a href="#method-i-run_query">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1005,7 +1002,7 @@ href="Transaction.html">Transaction</a> object is returned:</p>
 
     
       <!-- <div class="method-source-code" id="transaction-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 321</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore/dataset.rb, line 319</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">transaction</span>
   <span class="ruby-identifier">tx</span> = <span class="ruby-constant">Transaction</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">tx</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
@@ -1042,7 +1039,7 @@ href="Transaction.html">Transaction</a> object is returned:</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

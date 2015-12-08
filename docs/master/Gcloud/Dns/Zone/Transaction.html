@@ -286,7 +286,7 @@ type</a>. For example: <code>A</code>, <code>AAAA</code>,
       <!-- <div class="method-source-code" id="modify-source">
 <pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone/transaction.rb, line 182</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">modify</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>
-  <span class="ruby-identifier">existing</span> = <span class="ruby-ivar">@zone</span>.<span class="ruby-identifier">records</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-identifier">type</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">to_a</span>
+  <span class="ruby-identifier">existing</span> = <span class="ruby-ivar">@zone</span>.<span class="ruby-identifier">records</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">to_a</span>
   <span class="ruby-identifier">updated</span> = <span class="ruby-identifier">existing</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:dup</span>)
   <span class="ruby-identifier">updated</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">r</span> }
   <span class="ruby-ivar">@additions</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">updated</span>
@@ -351,7 +351,7 @@ type</a>. For example: <code>A</code>, <code>AAAA</code>,
       <!-- <div class="method-source-code" id="remove-source">
 <pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone/transaction.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remove</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>
-  <span class="ruby-ivar">@deletions</span> <span class="ruby-operator">+=</span> <span class="ruby-ivar">@zone</span>.<span class="ruby-identifier">records</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-identifier">type</span>).<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@deletions</span> <span class="ruby-operator">+=</span> <span class="ruby-ivar">@zone</span>.<span class="ruby-identifier">records</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>).<span class="ruby-identifier">all</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -452,7 +452,7 @@ type</a>. For example: <code>A</code>, <code>AAAA</code>,
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

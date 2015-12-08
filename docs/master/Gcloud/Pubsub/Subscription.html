@@ -253,7 +253,7 @@ ack_id values. (<code>ReceivedMessage</code> or <code>ack_id</code>)</p>
 
     
       <!-- <div class="method-source-code" id="acknowledge-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 401</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 395</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acknowledge</span> <span class="ruby-operator">*</span><span class="ruby-identifier">messages</span>
   <span class="ruby-identifier">ack_ids</span> = <span class="ruby-identifier">coerce_ack_ids</span> <span class="ruby-identifier">messages</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -363,7 +363,7 @@ ack_id values. (<code>ReceivedMessage</code> or <code>ack_id</code>)</p>
 
     
       <!-- <div class="method-source-code" id="delay-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 443</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 437</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delay</span> <span class="ruby-identifier">new_deadline</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">messages</span>
   <span class="ruby-identifier">ack_ids</span> = <span class="ruby-identifier">coerce_ack_ids</span> <span class="ruby-identifier">messages</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -572,7 +572,7 @@ are immediately dropped.</p>
 
   
     <h4>
-      <code>listen(options = {})</code>
+      <code>listen(max: 100, autoack: false, delay: 1)</code>
       <span>
         <a href="#method-i-listen">&para;</a>
         <a href="#top">&uarr;</a>
@@ -586,20 +586,17 @@ are immediately dropped.</p>
 blocking indefinitely, yielding retrieved messages as they are received.</p>
 
 <h3 id="method-i-listen-label-Parameters">Parameters<span><a href="#method-i-listen-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:max]</code>
+<dl class="rdoc-list note-list"><dt><code>max</code>
 <dd>
 <p>The maximum number of messages to return for this request. The Pub/Sub
 system may return fewer than the number specified. The default value is
 <code>100</code>, the maximum value is <code>1000</code>.
 (<code>Integer</code>)</p>
-</dd><dt><code>options[:autoack]</code>
+</dd><dt><code>autoack</code>
 <dd>
 <p>Automatically acknowledge the message as it is pulled. The default value is
 <code>false</code>. (<code>Boolean</code>)</p>
-</dd><dt><code>options[:delay]</code>
+</dd><dt><code>delay</code>
 <dd>
 <p>The number of seconds to pause between requests when the Google Cloud
 service has no messages to return. The default value is <code>1</code>.
@@ -650,11 +647,10 @@ service has no messages to return. The default value is <code>1</code>.
 
     
       <!-- <div class="method-source-code" id="listen-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 364</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">listen</span> <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-identifier">delay</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:delay</span>, <span class="ruby-value">1</span>)
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 359</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">listen</span> <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-value">100</span>, <span class="ruby-identifier">autoack</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>, <span class="ruby-identifier">delay</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>
   <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
-    <span class="ruby-identifier">msgs</span> = <span class="ruby-identifier">wait_for_messages</span> <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">msgs</span> = <span class="ruby-identifier">wait_for_messages</span> <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span>, <span class="ruby-identifier">autoack</span><span class="ruby-operator">:</span> <span class="ruby-identifier">autoack</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">msgs</span>.<span class="ruby-identifier">any?</span>
       <span class="ruby-identifier">msgs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">msg</span> }
     <span class="ruby-keyword">else</span>
@@ -711,7 +707,7 @@ service has no messages to return. The default value is <code>1</code>.
 
   
     <h4>
-      <code>policy(options = {})</code>
+      <code>policy(force: nil)</code>
       <span>
         <a href="#method-i-policy">&para;</a>
         <a href="#top">&uarr;</a>
@@ -724,10 +720,7 @@ service has no messages to return. The default value is <code>1</code>.
       <p>Gets the access control policy.</p>
 
 <h3 id="method-i-policy-label-Parameters">Parameters<span><a href="#method-i-policy-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:force]</code>
+<dl class="rdoc-list note-list"><dt><code>force</code>
 <dd>
 <p>Force the latest policy to be retrieved from the Pub/Sub service when
 +true. Otherwise the policy will be memoized to reduce the number of API
@@ -778,9 +771,9 @@ calls to the Pub/Sub service.</p>
 
     
       <!-- <div class="method-source-code" id="policy-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 504</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">policy</span> <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-ivar">@policy</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:force</span>]
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 496</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">policy</span> <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@policy</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">force</span>
   <span class="ruby-ivar">@policy</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">ensure_connection!</span>
     <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_subscription_policy</span> <span class="ruby-identifier">name</span>
@@ -850,7 +843,7 @@ calls to the Pub/Sub service.</p>
 
     
       <!-- <div class="method-source-code" id="policy-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 546</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 538</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">policy=</span> <span class="ruby-identifier">new_policy</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">set_subscription_policy</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">new_policy</span>
@@ -876,7 +869,7 @@ calls to the Pub/Sub service.</p>
 
   
     <h4>
-      <code>pull(options = {})</code>
+      <code>pull(immediate: true, max: 100, autoack: false)</code>
       <span>
         <a href="#method-i-pull">&para;</a>
         <a href="#top">&uarr;</a>
@@ -893,23 +886,20 @@ there are too many concurrent pull requests pending for the given
 subscription.</p>
 
 <h3 id="method-i-pull-label-Parameters">Parameters<span><a href="#method-i-pull-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:immediate]</code>
+<dl class="rdoc-list note-list"><dt><code>immediate</code>
 <dd>
 <p>When <code>true</code> the system will respond immediately even if it is
 not able to return messages. When <code>false</code> the system is allowed
 to wait until it can return least one message. No messages are returned
 when a request times out. The default value is <code>true</code>.
 (<code>Boolean</code>)</p>
-</dd><dt><code>options[:max]</code>
+</dd><dt><code>max</code>
 <dd>
 <p>The maximum number of messages to return for this request. The Pub/Sub
 system may return fewer than the number specified. The default value is
 <code>100</code>, the maximum value is <code>1000</code>.
 (<code>Integer</code>)</p>
-</dd><dt><code>options[:autoack]</code>
+</dd><dt><code>autoack</code>
 <dd>
 <p>Automatically acknowledge the message as it is pulled. The default value is
 <code>false</code>. (<code>Boolean</code>)</p>
@@ -957,15 +947,16 @@ system may return fewer than the number specified. The default value is
 
     
       <!-- <div class="method-source-code" id="pull-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 253</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">pull</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 251</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pull</span> <span class="ruby-identifier">immediate</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-value">100</span>, <span class="ruby-identifier">autoack</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">immediate</span><span class="ruby-operator">:</span> <span class="ruby-identifier">immediate</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">pull</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-identifier">messages</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;receivedMessages&quot;</span>]).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gapi</span><span class="ruby-operator">|</span>
       <span class="ruby-constant">ReceivedMessage</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">gapi</span>, <span class="ruby-keyword">self</span>
     <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">acknowledge</span> <span class="ruby-identifier">messages</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:autoack</span>]
+    <span class="ruby-identifier">acknowledge</span> <span class="ruby-identifier">messages</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">autoack</span>
     <span class="ruby-identifier">messages</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">fail</span> <span class="ruby-constant">ApiError</span>.<span class="ruby-identifier">from_response</span>(<span class="ruby-identifier">resp</span>)
@@ -1031,7 +1022,7 @@ of Strings)</p>
 
     
       <!-- <div class="method-source-code" id="test_permissions-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 586</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 578</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_permissions</span> <span class="ruby-operator">*</span><span class="ruby-identifier">permissions</span>
   <span class="ruby-identifier">permissions</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">permissions</span>).<span class="ruby-identifier">flatten</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -1108,7 +1099,7 @@ messages.</p>
 
   
     <h4>
-      <code>wait_for_messages(options = {})</code>
+      <code>wait_for_messages(max: 100, autoack: false)</code>
       <span>
         <a href="#method-i-wait_for_messages">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1125,16 +1116,13 @@ is the same as:</p>
 </pre>
 
 <h3 id="method-i-wait_for_messages-label-Parameters">Parameters<span><a href="#method-i-wait_for_messages-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:max]</code>
+<dl class="rdoc-list note-list"><dt><code>max</code>
 <dd>
 <p>The maximum number of messages to return for this request. The Pub/Sub
 system may return fewer than the number specified. The default value is
 <code>100</code>, the maximum value is <code>1000</code>.
 (<code>Integer</code>)</p>
-</dd><dt><code>options[:autoack]</code>
+</dd><dt><code>autoack</code>
 <dd>
 <p>Automatically acknowledge the message as it is pulled. The default value is
 <code>false</code>. (<code>Boolean</code>)</p>
@@ -1159,9 +1147,9 @@ system may return fewer than the number specified. The default value is
 
     
       <!-- <div class="method-source-code" id="wait_for_messages-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 302</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">wait_for_messages</span> <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-identifier">pull</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">immediate</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/subscription.rb, line 299</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">wait_for_messages</span> <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-value">100</span>, <span class="ruby-identifier">autoack</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">pull</span> <span class="ruby-identifier">immediate</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span>, <span class="ruby-identifier">autoack</span><span class="ruby-operator">:</span> <span class="ruby-identifier">autoack</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -1187,7 +1175,7 @@ system may return fewer than the number specified. The default value is
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

@@ -200,7 +200,7 @@
 
   
     <h4>
-      <code>add_owner(entity, options = {})</code>
+      <code>add_owner(entity, generation: nil)</code>
       <span>
         <a href="#method-i-add_owner">&para;</a>
         <a href="#top">&uarr;</a>
@@ -234,10 +234,7 @@
 </li><li>
 <p>allAuthenticatedUsers</p>
 </li></ul>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:generation]</code>
+</dd><dt><code>generation</code>
 <dd>
 <p>When present, selects a specific revision of this object. Default is the
 latest version. (<code>Integer</code>)</p>
@@ -278,8 +275,9 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="add_owner-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 213</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_owner</span> <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 211</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_owner</span> <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-identifier">generation</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_file_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-ivar">@file</span>, <span class="ruby-identifier">entity</span>,
                                      <span class="ruby-string">&quot;OWNER&quot;</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -304,7 +302,7 @@ email address:</p>
 
   
     <h4>
-      <code>add_reader(entity, options = {})</code>
+      <code>add_reader(entity, generation: nil)</code>
       <span>
         <a href="#method-i-add_reader">&para;</a>
         <a href="#top">&uarr;</a>
@@ -338,10 +336,7 @@ email address:</p>
 </li><li>
 <p>allAuthenticatedUsers</p>
 </li></ul>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:generation]</code>
+</dd><dt><code>generation</code>
 <dd>
 <p>When present, selects a specific revision of this object. Default is the
 latest version. (<code>Integer</code>)</p>
@@ -382,8 +377,9 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="add_reader-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 343</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_reader</span> <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 339</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_reader</span> <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-identifier">generation</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_file_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-ivar">@file</span>, <span class="ruby-identifier">entity</span>,
                                      <span class="ruby-string">&quot;READER&quot;</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -408,7 +404,7 @@ email address:</p>
 
   
     <h4>
-      <code>add_writer(entity, options = {})</code>
+      <code>add_writer(entity, generation: nil)</code>
       <span>
         <a href="#method-i-add_writer">&para;</a>
         <a href="#top">&uarr;</a>
@@ -442,10 +438,7 @@ email address:</p>
 </li><li>
 <p>allAuthenticatedUsers</p>
 </li></ul>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:generation]</code>
+</dd><dt><code>generation</code>
 <dd>
 <p>When present, selects a specific revision of this object. Default is the
 latest version. (<code>Integer</code>)</p>
@@ -486,8 +479,9 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="add_writer-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 278</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_writer</span> <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 275</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_writer</span> <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-identifier">generation</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_file_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-ivar">@file</span>, <span class="ruby-identifier">entity</span>,
                                      <span class="ruby-string">&quot;WRITER&quot;</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -541,7 +535,7 @@ ACL rule to the file.</p>
 
     
       <!-- <div class="method-source-code" id="auth-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 424</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 420</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">auth!</span>
   <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;authenticatedRead&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -750,7 +744,7 @@ ACL rule to the file.</p>
 
   
     <h4>
-      <code>delete(entity, options = {})</code>
+      <code>delete(entity, generation: nil)</code>
       <span>
         <a href="#method-i-delete">&para;</a>
         <a href="#top">&uarr;</a>
@@ -784,10 +778,7 @@ ACL rule to the file.</p>
 </li><li>
 <p>allAuthenticatedUsers</p>
 </li></ul>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:generation]</code>
+</dd><dt><code>generation</code>
 <dd>
 <p>When present, selects a specific revision of this object. Default is the
 latest version. (<code>Integer</code>)</p>
@@ -810,8 +801,9 @@ latest version. (<code>Integer</code>)</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 391</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 386</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-identifier">generation</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">delete_file_acl</span> <span class="ruby-ivar">@bucket</span>, <span class="ruby-ivar">@file</span>, <span class="ruby-identifier">entity</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-ivar">@owners</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">entity</span>  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@owners</span>.<span class="ruby-identifier">nil?</span>
@@ -865,7 +857,7 @@ predefined ACL rule to the file.</p>
 
     
       <!-- <div class="method-source-code" id="owner_full-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 448</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 444</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">owner_full!</span>
   <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;bucketOwnerFullControl&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -917,7 +909,7 @@ rule to the file.</p>
 
     
       <!-- <div class="method-source-code" id="owner_read-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 469</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 465</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">owner_read!</span>
   <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;bucketOwnerRead&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1021,7 +1013,7 @@ the file.</p>
 
     
       <!-- <div class="method-source-code" id="private-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 490</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 486</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">private!</span>
   <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;private&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1100,7 +1092,7 @@ rule to the file.</p>
 
     
       <!-- <div class="method-source-code" id="project_private-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 510</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 506</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project_private!</span>
   <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;projectPrivate&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1152,7 +1144,7 @@ to the file.</p>
 
     
       <!-- <div class="method-source-code" id="public-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 531</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/file/acl.rb, line 527</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">public!</span>
   <span class="ruby-identifier">update_predefined_acl!</span> <span class="ruby-string">&quot;publicRead&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1436,7 +1428,7 @@ to the file.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

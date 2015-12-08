@@ -163,7 +163,7 @@ href="../../Gcloud.html#method-i-resource_manager">Gcloud#resource_manager</a></
 
   
     <h4>
-      <code>create_project(project_id, options = {})</code>
+      <code>create_project(project_id, name: nil, labels: nil)</code>
       <span>
         <a href="#method-i-create_project">&para;</a>
         <a href="#top">&uarr;</a>
@@ -187,10 +187,7 @@ Cloud <a href="../Storage.html">Storage</a>.</p>
 <p>The unique, user-assigned ID of the project. It must be 6 to 30 lowercase
 letters, digits, or hyphens. It must start with a letter. Trailing hyphens
 are prohibited. (<code>String</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:name]</code>
+</dd><dt><code>name</code>
 <dd>
 <p>The user-assigned name of the project. This field is optional and can
 remain unset.</p>
@@ -198,7 +195,7 @@ remain unset.</p>
 <p>Allowed characters are: lowercase and uppercase letters, numbers, hyphen,
 single-quote, double-quote, space, and exclamation point.
 (<code>String</code>)</p>
-</dd><dt><code>options[:labels]</code>
+</dd><dt><code>labels</code>
 <dd>
 <p>The labels associated with this project.</p>
 
@@ -240,11 +237,11 @@ the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.</p>
 
     
       <!-- <div class="method-source-code" id="create_project-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/manager.rb, line 221</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_project</span> <span class="ruby-identifier">project_id</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/manager.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_project</span> <span class="ruby-identifier">project_id</span>, <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">labels</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">create_project</span> <span class="ruby-identifier">project_id</span>,
-                                   <span class="ruby-identifier">options</span>[<span class="ruby-value">:name</span>],
-                                   <span class="ruby-identifier">options</span>[<span class="ruby-value">:labels</span>]
+                                   <span class="ruby-identifier">name</span>,
+                                   <span class="ruby-identifier">labels</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Project</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
   <span class="ruby-keyword">else</span>
@@ -319,7 +316,7 @@ href="Manager.html#method-i-projects">#projects</a> methods.</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/manager.rb, line 264</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/manager.rb, line 260</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">project_id</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_project</span> <span class="ruby-identifier">project_id</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -379,7 +376,7 @@ href="Manager.html#method-i-projects">#projects</a> methods.</p>
 
     
       <!-- <div class="method-source-code" id="project-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/manager.rb, line 152</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/manager.rb, line 150</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project</span> <span class="ruby-identifier">project_id</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_project</span> <span class="ruby-identifier">project_id</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -403,7 +400,7 @@ href="Manager.html#method-i-projects">#projects</a> methods.</p>
 
   
     <h4>
-      <code>projects(options = {})</code>
+      <code>projects(filter: nil, token: nil, max: nil)</code>
       <span>
         <a href="#method-i-projects">&para;</a>
         <a href="#top">&uarr;</a>
@@ -418,10 +415,7 @@ specified filter. This method returns projects in an unspecified order. New
 projects do not necessarily appear at the end of the list.</p>
 
 <h3 id="method-i-projects-label-Parameters">Parameters<span><a href="#method-i-projects-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:filter]</code>
+<dl class="rdoc-list note-list"><dt><code>filter</code>
 <dd>
 <p>An expression for filtering the results of the request. Filter rules are
 case insensitive. (<code>String</code>)</p>
@@ -453,11 +447,11 @@ red.</p>
 <p><code>labels.color:red labels.size:big</code> - The project&#39;s label
 color has the value red and its label size has the value big.</p>
 </li></ul>
-</dd><dt><code>options[:token]</code>
+</dd><dt><code>token</code>
 <dd>
 <p>A previously-returned page token representing part of the larger set of
 results to view. (<code>String</code>)</p>
-</dd><dt><code>options[:max]</code>
+</dd><dt><code>max</code>
 <dd>
 <p>Maximum number of projects to return. (<code>Integer</code>)</p>
 </dd></dl>
@@ -508,9 +502,9 @@ href="Project/List.html">Gcloud::ResourceManager::Project::List</a>)</p>
 
     
       <!-- <div class="method-source-code" id="projects-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/manager.rb, line 122</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">projects</span> <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_project</span> <span class="ruby-identifier">options</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/manager.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">projects</span> <span class="ruby-identifier">filter</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_project</span> <span class="ruby-identifier">filter</span><span class="ruby-operator">:</span> <span class="ruby-identifier">filter</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">token</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Project</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_response</span> <span class="ruby-identifier">resp</span>, <span class="ruby-keyword">self</span>
   <span class="ruby-keyword">else</span>
@@ -567,7 +561,7 @@ project cannot be restored.</p>
 
     
       <!-- <div class="method-source-code" id="undelete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/manager.rb, line 294</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager/manager.rb, line 290</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">undelete</span> <span class="ruby-identifier">project_id</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">undelete_project</span> <span class="ruby-identifier">project_id</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -600,7 +594,7 @@ project cannot be restored.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

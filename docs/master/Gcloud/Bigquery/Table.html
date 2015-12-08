@@ -604,7 +604,7 @@ indefinitely. Expired tables will be deleted and their storage reclaimed.</p>
 
     
       <!-- <div class="method-source-code" id="fields-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 391</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 389</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fields</span>
   <span class="ruby-identifier">f</span> = <span class="ruby-identifier">schema</span>[<span class="ruby-string">&quot;fields&quot;</span>]
   <span class="ruby-identifier">f</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
@@ -641,7 +641,7 @@ indefinitely. Expired tables will be deleted and their storage reclaimed.</p>
 
     
       <!-- <div class="method-source-code" id="headers-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 403</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 401</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">headers</span>
   <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>[<span class="ruby-string">&quot;name&quot;</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -922,7 +922,7 @@ Reference</a>. Useful in queries.</p>
 
   
     <h4>
-      <code>schema(options = {})</code>
+      <code>schema(replace: false)</code>
       <span>
         <a href="#method-i-schema">&para;</a>
         <a href="#top">&uarr;</a>
@@ -942,10 +942,7 @@ the schema by passing a hash instead, use <a
 href="Table.html#method-i-schema-3D">schema=</a>.</p>
 
 <h3 id="method-i-schema-label-Parameters">Parameters<span><a href="#method-i-schema-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:replace]</code>
+<dl class="rdoc-list note-list"><dt><code>replace</code>
 <dd>
 <p>Whether to replace the existing schema with the new schema. If
 <code>true</code>, the fields will replace the existing schema. If
@@ -975,14 +972,14 @@ default value is <code>false</code>. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="schema-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 331</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">schema</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 329</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">schema</span> <span class="ruby-identifier">replace</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
   <span class="ruby-identifier">ensure_full_data!</span>
   <span class="ruby-identifier">g</span> = <span class="ruby-ivar">@gapi</span>
   <span class="ruby-identifier">g</span> = <span class="ruby-identifier">g</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:to_hash</span>
   <span class="ruby-identifier">s</span> = <span class="ruby-identifier">g</span>[<span class="ruby-string">&quot;schema&quot;</span>] <span class="ruby-operator">||=</span> {}
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">s</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
-  <span class="ruby-identifier">s</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:replace</span>]
+  <span class="ruby-identifier">s</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">replace</span>
   <span class="ruby-identifier">schema_builder</span> = <span class="ruby-constant">Schema</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">s</span>
   <span class="ruby-keyword">yield</span> <span class="ruby-identifier">schema_builder</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">schema</span> = <span class="ruby-identifier">schema_builder</span>.<span class="ruby-identifier">schema</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">schema_builder</span>.<span class="ruby-identifier">changed?</span>
@@ -1053,7 +1050,7 @@ API </a> . (<code>Hash</code>)</p>
 
     
       <!-- <div class="method-source-code" id="schema-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 382</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 380</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">schema=</span> <span class="ruby-identifier">new_schema</span>
   <span class="ruby-identifier">patch_gapi!</span> <span class="ruby-identifier">schema</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_schema</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1237,7 +1234,7 @@ numbers (0-9), or underscores (_). The maximum length is 1,024 characters.</p>
 
   
     <h4>
-      <code>copy(destination_table, options = {})</code>
+      <code>copy(destination_table, create: nil, write: nil, dryrun: nil)</code>
       <span>
         <a href="#method-i-copy">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1254,10 +1251,7 @@ numbers (0-9), or underscores (_). The maximum length is 1,024 characters.</p>
 <dd>
 <p>The destination for the copied data. (<code>Table</code> or
 <code>String</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:create]</code>
+</dd><dt><code>create</code>
 <dd>
 <p>Specifies whether the job is allowed to create new tables.
 (<code>String</code>)</p>
@@ -1269,7 +1263,7 @@ numbers (0-9), or underscores (_). The maximum length is 1,024 characters.</p>
 <p><code>never</code> - The table must already exist. A &#39;notFound&#39;
 error is raised if the table does not exist.</p>
 </li></ul>
-</dd><dt><code>options[:write]</code>
+</dd><dt><code>write</code>
 <dd>
 <p>Specifies how to handle data already present in the destination table. The
 default value is <code>empty</code>. (<code>String</code>)</p>
@@ -1321,9 +1315,10 @@ for referencing tables in other projects and datasets.</p>
 
     
       <!-- <div class="method-source-code" id="copy-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 512</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">copy</span> <span class="ruby-identifier">destination_table</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 507</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">copy</span> <span class="ruby-identifier">destination_table</span>, <span class="ruby-identifier">create</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">write</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">dryrun</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">create</span><span class="ruby-operator">:</span> <span class="ruby-identifier">create</span>, <span class="ruby-identifier">write</span><span class="ruby-operator">:</span> <span class="ruby-identifier">write</span>, <span class="ruby-identifier">dryrun</span><span class="ruby-operator">:</span> <span class="ruby-identifier">dryrun</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">copy_table</span> <span class="ruby-identifier">table_ref</span>,
                                <span class="ruby-identifier">get_table_ref</span>(<span class="ruby-identifier">destination_table</span>),
                                <span class="ruby-identifier">options</span>
@@ -1348,7 +1343,7 @@ for referencing tables in other projects and datasets.</p>
 
   
     <h4>
-      <code>data(options = {})</code>
+      <code>data(token: nil, max: nil, start: nil)</code>
       <span>
         <a href="#method-i-data">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1361,17 +1356,14 @@ for referencing tables in other projects and datasets.</p>
       <p>Retrieves data from the table.</p>
 
 <h3 id="method-i-data-label-Parameters">Parameters<span><a href="#method-i-data-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:token]</code>
+<dl class="rdoc-list note-list"><dt><code>token</code>
 <dd>
 <p>Page token, returned by a previous call, identifying the result set.
 (<code>String</code>)</p>
-</dd><dt><code>options[:max]</code>
+</dd><dt><code>max</code>
 <dd>
 <p>Maximum number of results to return. (<code>Integer</code>)</p>
-</dd><dt><code>options[:start]</code>
+</dd><dt><code>start</code>
 <dd>
 <p>Zero-based index of the starting row to read. (<code>Integer</code>)</p>
 </dd></dl>
@@ -1399,9 +1391,10 @@ for referencing tables in other projects and datasets.</p>
 
     
       <!-- <div class="method-source-code" id="data-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 443</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 439</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span> <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">start</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">token</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span>, <span class="ruby-identifier">start</span><span class="ruby-operator">:</span> <span class="ruby-identifier">start</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_tabledata</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Data</span>.<span class="ruby-identifier">from_response</span> <span class="ruby-identifier">resp</span>, <span class="ruby-keyword">self</span>
@@ -1424,7 +1417,7 @@ for referencing tables in other projects and datasets.</p>
 
   
     <h4>
-      <code>extract(extract_url, options = {})</code>
+      <code>extract(extract_url, format: nil, compression: nil, delimiter: nil, header: nil, dryrun: nil)</code>
       <span>
         <a href="#method-i-extract">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1446,10 +1439,7 @@ Data From BigQuery </a>.</p>
 pattern(s) to which BigQuery should extract the table data.
 (<code>Gcloud::Storage::File</code> or <code>String</code> or
 <code>Array</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:format]</code>
+</dd><dt><code>format</code>
 <dd>
 <p>The exported file format. The default value is <code>csv</code>.
 (<code>String</code>)</p>
@@ -1463,16 +1453,16 @@ JSON</a></p>
 </li><li>
 <p><code>avro</code> - <a href="http://avro.apache.org/">Avro</a></p>
 </li></ul>
-</dd><dt><code>options[:compression]</code>
+</dd><dt><code>compression</code>
 <dd>
 <p>The compression type to use for exported files. Possible values include
 <code>GZIP</code> and <code>NONE</code>. The default value is
 <code>NONE</code>. (<code>String</code>)</p>
-</dd><dt><code>options[:delimiter]</code>
+</dd><dt><code>delimiter</code>
 <dd>
 <p>Delimiter to use between fields in the exported data. Default is
 <code>,</code>. (<code>String</code>)</p>
-</dd><dt><code>options[:header]</code>
+</dd><dt><code>header</code>
 <dd>
 <p>Whether to print out a header row in the results. Default is
 <code>true</code>. (<code>Boolean</code>)</p>
@@ -1498,9 +1488,12 @@ JSON</a></p>
 
     
       <!-- <div class="method-source-code" id="extract-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 614</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">extract</span> <span class="ruby-identifier">extract_url</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 607</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">extract</span> <span class="ruby-identifier">extract_url</span>, <span class="ruby-identifier">format</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">compression</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">delimiter</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+            <span class="ruby-identifier">header</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">dryrun</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">format</span><span class="ruby-operator">:</span> <span class="ruby-identifier">format</span>, <span class="ruby-identifier">compression</span><span class="ruby-operator">:</span> <span class="ruby-identifier">compression</span>,
+              <span class="ruby-identifier">delimiter</span><span class="ruby-operator">:</span> <span class="ruby-identifier">delimiter</span>, <span class="ruby-identifier">header</span><span class="ruby-operator">:</span> <span class="ruby-identifier">header</span>, <span class="ruby-identifier">dryrun</span><span class="ruby-operator">:</span> <span class="ruby-identifier">dryrun</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">extract_table</span> <span class="ruby-identifier">table_ref</span>, <span class="ruby-identifier">extract_url</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Job</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
@@ -1523,7 +1516,7 @@ JSON</a></p>
 
   
     <h4>
-      <code>insert(rows, options = {})</code>
+      <code>insert(rows, skip_invalid: nil, ignore_unknown: nil)</code>
       <span>
         <a href="#method-i-insert">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1544,15 +1537,12 @@ Data Into BigQuery </a>.</p>
 <dd>
 <p>A hash object or array of hash objects containing the data.
 (<code>Array</code> or <code>Hash</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:skip_invalid]</code>
+</dd><dt><code>skip_invalid</code>
 <dd>
 <p>Insert all valid rows of a request, even if invalid rows exist. The default
 value is <code>false</code>, which causes the entire request to fail if any
 invalid rows exist. (<code>Boolean</code>)</p>
-</dd><dt><code>options[:ignore_unknown]</code>
+</dd><dt><code>ignore_unknown</code>
 <dd>
 <p>Accept rows that contain values that do not match the schema. The unknown
 values are ignored. Default is false, which treats unknown values as
@@ -1582,10 +1572,11 @@ errors. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="insert-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 841</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span> <span class="ruby-identifier">rows</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 839</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span> <span class="ruby-identifier">rows</span>, <span class="ruby-identifier">skip_invalid</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">ignore_unknown</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">rows</span> = [<span class="ruby-identifier">rows</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">skip_invalid</span><span class="ruby-operator">:</span> <span class="ruby-identifier">skip_invalid</span>, <span class="ruby-identifier">ignore_unknown</span><span class="ruby-operator">:</span> <span class="ruby-identifier">ignore_unknown</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">insert_tabledata</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>, <span class="ruby-identifier">rows</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">InsertResponse</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">rows</span>, <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>
@@ -1608,7 +1599,7 @@ errors. (<code>Boolean</code>)</p>
 
   
     <h4>
-      <code>load(file, options = {})</code>
+      <code>load(file, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil)</code>
       <span>
         <a href="#method-i-load">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1626,10 +1617,7 @@ errors. (<code>Boolean</code>)</p>
 <p>A file or the URI of a Google Cloud <a href="../Storage.html">Storage</a>
 file containing data to load into the table. (<code>File</code> or
 <code>Gcloud::Storage::File</code> or <code>String</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:format]</code>
+</dd><dt><code>format</code>
 <dd>
 <p>The exported file format. The default value is <code>csv</code>.
 (<code>String</code>)</p>
@@ -1646,7 +1634,7 @@ JSON</a></p>
 <p><code>datastore_backup</code> - Cloud <a
 href="../Datastore.html">Datastore</a> backup</p>
 </li></ul>
-</dd><dt><code>options[:create]</code>
+</dd><dt><code>create</code>
 <dd>
 <p>Specifies whether the job is allowed to create new tables.
 (<code>String</code>)</p>
@@ -1658,7 +1646,7 @@ href="../Datastore.html">Datastore</a> backup</p>
 <p><code>never</code> - The table must already exist. A &#39;notFound&#39;
 error is raised if the table does not exist.</p>
 </li></ul>
-</dd><dt><code>options[:write]</code>
+</dd><dt><code>write</code>
 <dd>
 <p>Specifies how to handle data already present in the table. The default
 value is <code>empty</code>. (<code>String</code>)</p>
@@ -1672,7 +1660,7 @@ value is <code>empty</code>. (<code>String</code>)</p>
 <p><code>empty</code> - An error will be returned if the table already
 contains data.</p>
 </li></ul>
-</dd><dt><code>options[:projection_fields]</code>
+</dd><dt><code>projection_fields</code>
 <dd>
 <p>If the <code>format</code> option is set to <code>datastore_backup</code>,
 indicates which entity properties to load from a Cloud <a
@@ -1681,7 +1669,7 @@ sensitive and must be top-level properties. If not set, BigQuery loads all
 properties. If any named property isn&#39;t found in the Cloud <a
 href="../Datastore.html">Datastore</a> backup, an invalid error is
 returned. (<code>Array</code>)</p>
-</dd><dt><code>options[:jagged_rows]</code>
+</dd><dt><code>jagged_rows</code>
 <dd>
 <p>Accept rows that are missing trailing optional columns. The missing values
 are treated as nulls. If <code>false</code>, records with missing trailing
@@ -1689,23 +1677,23 @@ columns are treated as bad records, and if there are too many bad records,
 an invalid error is returned in the job result. The default value is
 <code>false</code>. Only applicable to CSV, ignored for other formats.
 (<code>Boolean</code>)</p>
-</dd><dt><code>options[:quoted_newlines]</code>
+</dd><dt><code>quoted_newlines</code>
 <dd>
 <p>Indicates if BigQuery should allow quoted data sections that contain
 newline characters in a CSV file. The default value is <code>false</code>.
 (<code>Boolean</code>)</p>
-</dd><dt><code>options[:encoding]</code>
+</dd><dt><code>encoding</code>
 <dd>
 <p>The character encoding of the data. The supported values are
 <code>UTF-8</code> or <code>ISO-8859-1</code>. The default value is
 <code>UTF-8</code>. (<code>String</code>)</p>
-</dd><dt><code>options[:delimiter]</code>
+</dd><dt><code>delimiter</code>
 <dd>
 <p>Specifices the separator for fields in a CSV file. BigQuery converts the
 string to <code>ISO-8859-1</code> encoding, and then uses the first byte of
 the encoded string to split the data in its raw, binary state. Default is
 <code>,</code>. (<code>String</code>)</p>
-</dd><dt><code>options[:ignore_unknown]</code>
+</dd><dt><code>ignore_unknown</code>
 <dd>
 <p>Indicates if BigQuery should allow extra values that are not represented in
 the table schema. If true, the extra values are ignored. If false, records
@@ -1720,13 +1708,13 @@ extra value:</p>
 </li><li>
 <p><code>JSON</code>: Named values that don&#39;t match any column names</p>
 </li></ul>
-</dd><dt><code>options[:max_bad_records]</code>
+</dd><dt><code>max_bad_records</code>
 <dd>
 <p>The maximum number of bad records that BigQuery can ignore when running the
 job. If the number of bad records exceeds this value, an invalid error is
 returned in the job result. The default value is <code>0</code>, which
 requires that all records are valid. (<code>Integer</code>)</p>
-</dd><dt><code>options[:quote]</code>
+</dd><dt><code>quote</code>
 <dd>
 <p>The value that is used to quote data sections in a CSV file. BigQuery
 converts the string to ISO-8859-1 encoding, and then uses the first byte of
@@ -1735,7 +1723,7 @@ value is a double-quote <code>&quot;</code>. If your data does not contain
 quoted sections, set the property value to an empty string. If your data
 contains quoted newline characters, you must also set the
 allowQuotedNewlines property to true. (<code>String</code>)</p>
-</dd><dt><code>options[:skip_leading]</code>
+</dd><dt><code>skip_leading</code>
 <dd>
 <p>The number of rows at the top of a CSV file that BigQuery will skip when
 loading the data. The default value is <code>0</code>. This property is
@@ -1821,16 +1809,22 @@ gzip issue</a>.</p>
 
     
       <!-- <div class="method-source-code" id="load-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 787</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">load</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 781</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">load</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">format</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">create</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">write</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+         <span class="ruby-identifier">projection_fields</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">jagged_rows</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">quoted_newlines</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+         <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">delimiter</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">ignore_unknown</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+         <span class="ruby-identifier">max_bad_records</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">quote</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">skip_leading</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">dryrun</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">storage_url?</span> <span class="ruby-identifier">file</span>
-    <span class="ruby-identifier">load_storage</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">local_file?</span> <span class="ruby-identifier">file</span>
-    <span class="ruby-identifier">load_local</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">fail</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Bigquery</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span>, <span class="ruby-node">&quot;Don&#39;t know how to load #{file}&quot;</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">format</span><span class="ruby-operator">:</span> <span class="ruby-identifier">format</span>, <span class="ruby-identifier">create</span><span class="ruby-operator">:</span> <span class="ruby-identifier">create</span>, <span class="ruby-identifier">write</span><span class="ruby-operator">:</span> <span class="ruby-identifier">write</span>,
+              <span class="ruby-identifier">projection_fields</span><span class="ruby-operator">:</span> <span class="ruby-identifier">projection_fields</span>,
+              <span class="ruby-identifier">jagged_rows</span><span class="ruby-operator">:</span> <span class="ruby-identifier">jagged_rows</span>, <span class="ruby-identifier">quoted_newlines</span><span class="ruby-operator">:</span> <span class="ruby-identifier">quoted_newlines</span>,
+              <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-identifier">encoding</span>, <span class="ruby-identifier">delimiter</span><span class="ruby-operator">:</span> <span class="ruby-identifier">delimiter</span>,
+              <span class="ruby-identifier">ignore_unknown</span><span class="ruby-operator">:</span> <span class="ruby-identifier">ignore_unknown</span>,
+              <span class="ruby-identifier">max_bad_records</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max_bad_records</span>, <span class="ruby-identifier">quote</span><span class="ruby-operator">:</span> <span class="ruby-identifier">quote</span>,
+              <span class="ruby-identifier">skip_leading</span><span class="ruby-operator">:</span> <span class="ruby-identifier">skip_leading</span>, <span class="ruby-identifier">dryrun</span><span class="ruby-operator">:</span> <span class="ruby-identifier">dryrun</span> }
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">load_storage</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">storage_url?</span> <span class="ruby-identifier">file</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">load_local</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">local_file?</span> <span class="ruby-identifier">file</span>
+  <span class="ruby-identifier">fail</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Bigquery</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span>, <span class="ruby-node">&quot;Don&#39;t know how to load #{file}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -1940,7 +1934,7 @@ gzip issue</a>.</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 872</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 871</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -1980,7 +1974,7 @@ gzip issue</a>.</p>
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 887</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery/table.rb, line 886</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_table</span> <span class="ruby-identifier">dataset_id</span>, <span class="ruby-identifier">table_id</span>
@@ -2018,7 +2012,7 @@ gzip issue</a>.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

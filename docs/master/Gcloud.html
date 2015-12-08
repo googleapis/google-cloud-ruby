@@ -182,7 +182,7 @@ href="AUTHENTICATION.md">Authentication Guide</a>.</p>
 
   
     <h4>
-      <code>bigquery(project = nil, keyfile = nil, options = {})</code>
+      <code>bigquery(project = nil, keyfile = nil, scope: nil)</code>
       <span>
         <a href="#method-c-bigquery">&para;</a>
         <a href="#top">&uarr;</a>
@@ -204,10 +204,7 @@ the credentials is used. (<code>String</code>)</p>
 <dd>
 <p>Keyfile downloaded from Google Cloud. If file path the file must be
 readable. (<code>String</code> or <code>Hash</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:scope]</code>
+</dd><dt><code>scope</code>
 <dd>
 <p>The OAuth 2.0 scopes controlling the set of resources and operations that
 the connection can access. See <a
@@ -236,13 +233,13 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
     
       <!-- <div class="method-source-code" id="bigquery-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery.rb, line 57</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">bigquery</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/bigquery.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">bigquery</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">project</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Bigquery</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">default_project</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyfile</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Bigquery</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Bigquery</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Bigquery</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>, <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Bigquery</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Bigquery</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
 <span class="ruby-keyword">end</span></pre>
@@ -261,7 +258,7 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
   
     <h4>
-      <code>datastore(project = nil, keyfile = nil, options = {})</code>
+      <code>datastore(project = nil, keyfile = nil, scope: nil)</code>
       <span>
         <a href="#method-c-datastore">&para;</a>
         <a href="#top">&uarr;</a>
@@ -284,10 +281,7 @@ you are connecting to. (<code>String</code>)</p>
 <dd>
 <p>Keyfile downloaded from Google Cloud. If file path the file must be
 readable. (<code>String</code> or <code>Hash</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:scope]</code>
+</dd><dt><code>scope</code>
 <dd>
 <p>The OAuth 2.0 scopes controlling the set of resources and operations that
 the connection can access. See <a
@@ -324,13 +318,13 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
     
       <!-- <div class="method-source-code" id="datastore-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore.rb, line 67</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">datastore</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/datastore.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">datastore</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">project</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Dataset</span>.<span class="ruby-identifier">default_project</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyfile</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>, <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Datastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Dataset</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
 <span class="ruby-keyword">end</span></pre>
@@ -349,7 +343,7 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
   
     <h4>
-      <code>dns(project = nil, keyfile = nil, options = {})</code>
+      <code>dns(project = nil, keyfile = nil, scope: nil)</code>
       <span>
         <a href="#method-c-dns">&para;</a>
         <a href="#top">&uarr;</a>
@@ -371,10 +365,7 @@ credentials is used. (<code>String</code>)</p>
 <dd>
 <p>Keyfile downloaded from Google Cloud. If file path the file must be
 readable. (<code>String</code> or <code>Hash</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:scope]</code>
+</dd><dt><code>scope</code>
 <dd>
 <p>The OAuth 2.0 scopes controlling the set of resources and operations that
 the connection can access. See <a
@@ -404,13 +395,13 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
     
       <!-- <div class="method-source-code" id="dns-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns.rb, line 58</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dns</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dns</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">project</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Dns</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">default_project</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyfile</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Dns</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Dns</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Dns</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>, <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Dns</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Dns</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
 <span class="ruby-keyword">end</span></pre>
@@ -494,7 +485,7 @@ readable. (<code>String</code> or <code>Hash</code>)</p>
 
   
     <h4>
-      <code>pubsub(project = nil, keyfile = nil, options = {})</code>
+      <code>pubsub(project = nil, keyfile = nil, scope: nil)</code>
       <span>
         <a href="#method-c-pubsub">&para;</a>
         <a href="#top">&uarr;</a>
@@ -516,10 +507,7 @@ creates a new connection.</p>
 <dd>
 <p>Keyfile downloaded from Google Cloud. If file path the file must be
 readable. (<code>String</code> or <code>Hash</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:scope]</code>
+</dd><dt><code>scope</code>
 <dd>
 <p>The OAuth 2.0 scopes controlling the set of resources and operations that
 the connection can access. See <a
@@ -549,13 +537,13 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
     
       <!-- <div class="method-source-code" id="pubsub-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub.rb, line 59</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pubsub</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pubsub</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">project</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Pubsub</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">default_project</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyfile</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Pubsub</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Pubsub</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Pubsub</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>, <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Pubsub</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Pubsub</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
 <span class="ruby-keyword">end</span></pre>
@@ -574,7 +562,7 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
   
     <h4>
-      <code>resource_manager(keyfile = nil, options = {})</code>
+      <code>resource_manager(keyfile = nil, scope: nil)</code>
       <span>
         <a href="#method-c-resource_manager">&para;</a>
         <a href="#top">&uarr;</a>
@@ -592,10 +580,7 @@ Manager service. Each call creates a new connection.</p>
 <dd>
 <p>Keyfile downloaded from Google Cloud. If file path the file must be
 readable. (<code>String</code> or <code>Hash</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:scope]</code>
+</dd><dt><code>scope</code>
 <dd>
 <p>The OAuth 2.0 scopes controlling the set of resources and operations that
 the connection can access. See <a
@@ -626,12 +611,13 @@ href="Gcloud/ResourceManager/Manager.html">Gcloud::ResourceManager::Manager</a><
 
     
       <!-- <div class="method-source-code" id="resource_manager-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager.rb, line 55</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resource_manager</span> <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/resource_manager.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resource_manager</span> <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyfile</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">ResourceManager</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">ResourceManager</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">ResourceManager</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>, <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">ResourceManager</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>,
+                                                           <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">ResourceManager</span><span class="ruby-operator">::</span><span class="ruby-constant">Manager</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">credentials</span>
 <span class="ruby-keyword">end</span></pre>
@@ -650,7 +636,7 @@ href="Gcloud/ResourceManager/Manager.html">Gcloud::ResourceManager::Manager</a><
 
   
     <h4>
-      <code>storage(project = nil, keyfile = nil, options = {})</code>
+      <code>storage(project = nil, keyfile = nil, scope: nil)</code>
       <span>
         <a href="#method-c-storage">&para;</a>
         <a href="#top">&uarr;</a>
@@ -673,10 +659,7 @@ service you are connecting to. (<code>String</code>)</p>
 <dd>
 <p>Keyfile downloaded from Google Cloud. If file path the file must be
 readable. (<code>String</code> or <code>Hash</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:scope]</code>
+</dd><dt><code>scope</code>
 <dd>
 <p>The OAuth 2.0 scopes controlling the set of resources and operations that
 the connection can access. See <a
@@ -707,13 +690,13 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
     
       <!-- <div class="method-source-code" id="storage-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage.rb, line 60</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">storage</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">storage</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">project</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">default_project</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyfile</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>, <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Storage</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
 <span class="ruby-keyword">end</span></pre>
@@ -741,7 +724,7 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
   
     <h4>
-      <code>bigquery(options = {})</code>
+      <code>bigquery(scope: nil)</code>
       <span>
         <a href="#method-i-bigquery">&para;</a>
         <a href="#top">&uarr;</a>
@@ -755,10 +738,7 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 creates a new connection.</p>
 
 <h3 id="method-i-bigquery-label-Parameters">Parameters<span><a href="#method-i-bigquery-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:scope]</code>
+<dl class="rdoc-list note-list"><dt><code>scope</code>
 <dd>
 <p>The OAuth 2.0 scopes controlling the set of resources and operations that
 the connection can access. See <a
@@ -800,10 +780,10 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
     
       <!-- <div class="method-source-code" id="bigquery-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 252</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">bigquery</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 244</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bigquery</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/bigquery&quot;</span>
-  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">bigquery</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">options</span>
+  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">bigquery</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -820,7 +800,7 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
   
     <h4>
-      <code>datastore(options = {})</code>
+      <code>datastore(scope: nil)</code>
       <span>
         <a href="#method-i-datastore">&para;</a>
         <a href="#top">&uarr;</a>
@@ -835,10 +815,7 @@ href="Gcloud/Datastore.html">Datastore</a> service. Each call creates a new
 connection.</p>
 
 <h3 id="method-i-datastore-label-Parameters">Parameters<span><a href="#method-i-datastore-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:scope]</code>
+<dl class="rdoc-list note-list"><dt><code>scope</code>
 <dd>
 <p>The OAuth 2.0 scopes controlling the set of resources and operations that
 the connection can access. See <a
@@ -885,10 +862,10 @@ do so with the <code>scope</code> option:</p>
 
     
       <!-- <div class="method-source-code" id="datastore-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 115</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">datastore</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">datastore</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/datastore&quot;</span>
-  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">options</span>
+  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">datastore</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -905,7 +882,7 @@ do so with the <code>scope</code> option:</p>
 
   
     <h4>
-      <code>dns(options = {})</code>
+      <code>dns(scope: nil)</code>
       <span>
         <a href="#method-i-dns">&para;</a>
         <a href="#top">&uarr;</a>
@@ -919,10 +896,7 @@ do so with the <code>scope</code> option:</p>
 new connection.</p>
 
 <h3 id="method-i-dns-label-Parameters">Parameters<span><a href="#method-i-dns-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:scope]</code>
+<dl class="rdoc-list note-list"><dt><code>scope</code>
 <dd>
 <p>The OAuth 2.0 scopes controlling the set of resources and operations that
 the connection can access. See <a
@@ -963,10 +937,10 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
     
       <!-- <div class="method-source-code" id="dns-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 298</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">dns</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 288</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dns</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/dns&quot;</span>
-  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">dns</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">options</span>
+  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">dns</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -983,7 +957,7 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
   
     <h4>
-      <code>pubsub(options = {})</code>
+      <code>pubsub(scope: nil)</code>
       <span>
         <a href="#method-i-pubsub">&para;</a>
         <a href="#top">&uarr;</a>
@@ -997,10 +971,7 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 creates a new connection.</p>
 
 <h3 id="method-i-pubsub-label-Parameters">Parameters<span><a href="#method-i-pubsub-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:scope]</code>
+<dl class="rdoc-list note-list"><dt><code>scope</code>
 <dd>
 <p>The OAuth 2.0 scopes controlling the set of resources and operations that
 the connection can access. See <a
@@ -1039,10 +1010,10 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
     
       <!-- <div class="method-source-code" id="pubsub-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 205</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">pubsub</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 199</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pubsub</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/pubsub&quot;</span>
-  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">options</span>
+  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">pubsub</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -1059,7 +1030,7 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 
   
     <h4>
-      <code>resource_manager(options = {})</code>
+      <code>resource_manager(scope: nil)</code>
       <span>
         <a href="#method-i-resource_manager">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1073,10 +1044,7 @@ href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
 call creates a new connection.</p>
 
 <h3 id="method-i-resource_manager-label-Parameters">Parameters<span><a href="#method-i-resource_manager-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:scope]</code>
+<dl class="rdoc-list note-list"><dt><code>scope</code>
 <dd>
 <p>The OAuth 2.0 scopes controlling the set of resources and operations that
 the connection can access. See <a
@@ -1117,10 +1085,10 @@ href="Gcloud/ResourceManager/Manager.html">Gcloud::ResourceManager::Manager</a><
 
     
       <!-- <div class="method-source-code" id="resource_manager-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 347</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">resource_manager</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 335</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">resource_manager</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/resource_manager&quot;</span>
-  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">resource_manager</span> <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">options</span>
+  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">resource_manager</span> <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -1137,7 +1105,7 @@ href="Gcloud/ResourceManager/Manager.html">Gcloud::ResourceManager::Manager</a><
 
   
     <h4>
-      <code>storage(options = {})</code>
+      <code>storage(scope: nil)</code>
       <span>
         <a href="#method-i-storage">&para;</a>
         <a href="#top">&uarr;</a>
@@ -1152,10 +1120,7 @@ href="Gcloud/Storage.html">Storage</a> service. Each call creates a new
 connection.</p>
 
 <h3 id="method-i-storage-label-Parameters">Parameters<span><a href="#method-i-storage-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:scope]</code>
+<dl class="rdoc-list note-list"><dt><code>scope</code>
 <dd>
 <p>The OAuth 2.0 scopes controlling the set of resources and operations that
 the connection can access. See <a
@@ -1197,10 +1162,10 @@ OAuth 2.0 Authentication</a>.</p>
 
     
       <!-- <div class="method-source-code" id="storage-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 161</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">storage</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">storage</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/storage&quot;</span>
-  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">options</span>
+  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">storage</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
 <span class="ruby-keyword">end</span></pre>
       </div> -->
     
@@ -1226,7 +1191,7 @@ OAuth 2.0 Authentication</a>.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 

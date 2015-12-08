@@ -182,7 +182,7 @@
 
   
     <h4>
-      <code>create_subscription(subscription_name, options = {})</code>
+      <code>create_subscription(subscription_name, deadline: nil, endpoint: nil)</code>
       <span>
         <a href="#method-i-create_subscription">&para;</a>
         <a href="#top">&uarr;</a>
@@ -294,7 +294,7 @@
 
     
       <!-- <div class="method-source-code" id="exists-3F-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 505</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 499</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">exists?</span>
   <span class="ruby-comment"># Always true if we have a gapi object</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@gapi</span>.<span class="ruby-identifier">nil?</span>
@@ -318,7 +318,7 @@
 
   
     <h4>
-      <code>find_subscription(subscription_name, options = {})</code>
+      <code>find_subscription(subscription_name, skip_lookup: nil)</code>
       <span>
         <a href="#method-i-find_subscription">&para;</a>
         <a href="#top">&uarr;</a>
@@ -349,7 +349,7 @@
 
   
     <h4>
-      <code>find_subscriptions(options = {})</code>
+      <code>find_subscriptions(token: nil, max: nil)</code>
       <span>
         <a href="#method-i-find_subscriptions">&para;</a>
         <a href="#top">&uarr;</a>
@@ -380,7 +380,7 @@
 
   
     <h4>
-      <code>get_subscription(subscription_name, options = {})</code>
+      <code>get_subscription(subscription_name, skip_lookup: nil)</code>
       <span>
         <a href="#method-i-get_subscription">&para;</a>
         <a href="#top">&uarr;</a>
@@ -411,7 +411,7 @@
 
   
     <h4>
-      <code>list_subscriptions(options = {})</code>
+      <code>list_subscriptions(token: nil, max: nil)</code>
       <span>
         <a href="#method-i-list_subscriptions">&para;</a>
         <a href="#top">&uarr;</a>
@@ -477,7 +477,7 @@
 
   
     <h4>
-      <code>new_subscription(subscription_name, options = {})</code>
+      <code>new_subscription(subscription_name, deadline: nil, endpoint: nil)</code>
       <span>
         <a href="#method-i-new_subscription">&para;</a>
         <a href="#top">&uarr;</a>
@@ -508,7 +508,7 @@
 
   
     <h4>
-      <code>policy(options = {})</code>
+      <code>policy(force: nil)</code>
       <span>
         <a href="#method-i-policy">&para;</a>
         <a href="#top">&uarr;</a>
@@ -521,10 +521,7 @@
       <p>Gets the access control policy.</p>
 
 <h3 id="method-i-policy-label-Parameters">Parameters<span><a href="#method-i-policy-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:force]</code>
+<dl class="rdoc-list note-list"><dt><code>force</code>
 <dd>
 <p>Force the latest policy to be retrieved from the Pub/Sub service when
 +true. Otherwise the policy will be memoized to reduce the number of API
@@ -575,9 +572,9 @@ calls to the Pub/Sub service.</p>
 
     
       <!-- <div class="method-source-code" id="policy-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 399</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">policy</span> <span class="ruby-identifier">options</span> = {}
-  <span class="ruby-ivar">@policy</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:force</span>]
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 393</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">policy</span> <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@policy</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">force</span>
   <span class="ruby-ivar">@policy</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">ensure_connection!</span>
     <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_topic_policy</span> <span class="ruby-identifier">name</span>
@@ -647,7 +644,7 @@ calls to the Pub/Sub service.</p>
 
     
       <!-- <div class="method-source-code" id="policy-3D-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 441</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 435</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">policy=</span> <span class="ruby-identifier">new_policy</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">set_topic_policy</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">new_policy</span>
@@ -742,7 +739,7 @@ block</p>
 
     
       <!-- <div class="method-source-code" id="publish-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 341</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 337</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">publish</span> <span class="ruby-identifier">data</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">attributes</span> = {}
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">batch</span> = <span class="ruby-constant">Batch</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">data</span>, <span class="ruby-identifier">attributes</span>
@@ -765,7 +762,7 @@ block</p>
 
   
     <h4>
-      <code>subscribe(subscription_name, options = {})</code>
+      <code>subscribe(subscription_name, deadline: nil, endpoint: nil)</code>
       <span>
         <a href="#method-i-subscribe">&para;</a>
         <a href="#top">&uarr;</a>
@@ -786,14 +783,11 @@ letters ([A-Za-z]), numbers ([0-9], dashes (-), underscores (_), periods
 (.), tildes (~), plus (+) or percent signs (%). It must be between 3 and
 255 characters in length, and it must not start with “goog”.
 (<code>String</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:deadline]</code>
+</dd><dt><code>deadline</code>
 <dd>
 <p>The maximum number of seconds after a subscriber receives a message before
 the subscriber should acknowledge the message. (<code>Integer</code>)</p>
-</dd><dt><code>options[:endpoint]</code>
+</dd><dt><code>endpoint</code>
 <dd>
 <p>A URL locating the endpoint to which messages should be pushed. e.g. “<a
 href="https://example.com/push">example.com/push</a>” (<code>String</code>)</p>
@@ -844,9 +838,10 @@ and pushed all messages to an endpoint</p>
 
     
       <!-- <div class="method-source-code" id="subscribe-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 159</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">subscribe</span> <span class="ruby-identifier">subscription_name</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">subscribe</span> <span class="ruby-identifier">subscription_name</span>, <span class="ruby-identifier">deadline</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">endpoint</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">deadline</span><span class="ruby-operator">:</span> <span class="ruby-identifier">deadline</span>, <span class="ruby-identifier">endpoint</span><span class="ruby-operator">:</span> <span class="ruby-identifier">endpoint</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">create_subscription</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">subscription_name</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Subscription</span>.<span class="ruby-identifier">from_gapi</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>
@@ -873,7 +868,7 @@ and pushed all messages to an endpoint</p>
 
   
     <h4>
-      <code>subscription(subscription_name, options = {})</code>
+      <code>subscription(subscription_name, skip_lookup: nil)</code>
       <span>
         <a href="#method-i-subscription">&para;</a>
         <a href="#top">&uarr;</a>
@@ -889,10 +884,7 @@ and pushed all messages to an endpoint</p>
 <dl class="rdoc-list note-list"><dt><code>subscription_name</code>
 <dd>
 <p>Name of a subscription. (<code>String</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:skip_lookup]</code>
+</dd><dt><code>skip_lookup</code>
 <dd>
 <p>Optionally create a <a href="Subscription.html">Subscription</a> object
 without verifying the subscription resource exists on the Pub/Sub service.
@@ -933,11 +925,11 @@ subscription does not exist</p>
 
     
       <!-- <div class="method-source-code" id="subscription-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 213</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">subscription</span> <span class="ruby-identifier">subscription_name</span>, <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 210</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">subscription</span> <span class="ruby-identifier">subscription_name</span>, <span class="ruby-identifier">skip_lookup</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_lookup</span>]
-    <span class="ruby-keyword">return</span> <span class="ruby-constant">Subscription</span>.<span class="ruby-identifier">new_lazy</span>(<span class="ruby-identifier">subscription_name</span>, <span class="ruby-identifier">connection</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">skip_lookup</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">Subscription</span>.<span class="ruby-identifier">new_lazy</span>(<span class="ruby-identifier">subscription_name</span>, <span class="ruby-identifier">connection</span>)
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_subscription</span> <span class="ruby-identifier">subscription_name</span>
   <span class="ruby-keyword">return</span> <span class="ruby-constant">Subscription</span>.<span class="ruby-identifier">from_gapi</span>(<span class="ruby-identifier">resp</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">connection</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
@@ -963,7 +955,7 @@ subscription does not exist</p>
 
   
     <h4>
-      <code>subscriptions(options = {})</code>
+      <code>subscriptions(token: nil, max: nil)</code>
       <span>
         <a href="#method-i-subscriptions">&para;</a>
         <a href="#top">&uarr;</a>
@@ -976,16 +968,13 @@ subscription does not exist</p>
       <p>Retrieves a list of subscription names for the given project.</p>
 
 <h3 id="method-i-subscriptions-label-Parameters">Parameters<span><a href="#method-i-subscriptions-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>options[:token]</code>
+<dl class="rdoc-list note-list"><dt><code>token</code>
 <dd>
 <p>The <code>token</code> value returned by the last call to
 <code>subscriptions</code>; indicates that this is a continuation of a
 call, and that the system should return the next page of data.
 (<code>String</code>)</p>
-</dd><dt><code>options[:max]</code>
+</dd><dt><code>max</code>
 <dd>
 <p>Maximum number of subscriptions to return. (<code>Integer</code>)</p>
 </dd></dl>
@@ -1035,9 +1024,10 @@ href="Subscription/List.html#attribute-i-token">Gcloud::Pubsub::Subscription::Li
 
     
       <!-- <div class="method-source-code" id="subscriptions-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 278</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">subscriptions</span> <span class="ruby-identifier">options</span> = {}
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 273</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">subscriptions</span> <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">token</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_topics_subscriptions</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Subscription</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_response</span> <span class="ruby-identifier">resp</span>, <span class="ruby-identifier">connection</span>
@@ -1107,7 +1097,7 @@ of Strings)</p>
 
     
       <!-- <div class="method-source-code" id="test_permissions-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 481</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/pubsub/topic.rb, line 475</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_permissions</span> <span class="ruby-operator">*</span><span class="ruby-identifier">permissions</span>
   <span class="ruby-identifier">permissions</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">permissions</span>).<span class="ruby-identifier">flatten</span>
   <span class="ruby-identifier">ensure_connection!</span>
@@ -1142,7 +1132,7 @@ of Strings)</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Nov 19, 2015.
+    Docs built on Dec 08, 2015.
   </div>
 </div>
 
