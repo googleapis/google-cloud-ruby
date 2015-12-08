@@ -266,7 +266,7 @@ module Gcloud
       #   The message data. (+String+)
       # +attributes+::
       #   Optional attributes for the message. (+Hash+)
-      # <code>attributes[:autocreate+::
+      # <code>attributes[:autocreate]</code>::
       #   Flag to control whether the provided topic will be created if it does
       #   not exist.
       #
@@ -354,7 +354,7 @@ module Gcloud
       # +endpoint+::
       #   A URL locating the endpoint to which messages should be pushed.
       #   e.g. "https://example.com/push" (+String+)
-      # <code>attributes[:autocreate+::
+      # +autocreate+::
       #   Flag to control whether the topic will be created if it does not
       #   exist.
       #
