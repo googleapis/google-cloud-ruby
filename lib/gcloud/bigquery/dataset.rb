@@ -614,12 +614,12 @@ module Gcloud
       #     table exists and contains data.
       # +large_results+::
       #   If +true+, allows the query to produce arbitrarily large result tables
-      #   at a slight cost in performance. Requires <code>options[:table]</code>
-      #   to be set. (+Boolean+)
+      #   at a slight cost in performance. Requires +table+ parameter to be set.
+      #   (+Boolean+)
       # +flatten+::
       #   Flattens all nested and repeated fields in the query results. The
-      #   default value is +true+. <code>options[:large_results]</code> must be
-      #   +true+ if this is set to +false+. (+Boolean+)
+      #   default value is +true+. +large_results+ parameter must be +true+ if
+      #   this is set to +false+. (+Boolean+)
       #
       # === Returns
       #
