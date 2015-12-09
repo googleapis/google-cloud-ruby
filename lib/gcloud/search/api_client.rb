@@ -28,7 +28,8 @@ module Gcloud
       ##
       # Creates a new APIClient instance.
       def initialize _options
-        @connection = Faraday.default_connection
+        @connection = Faraday.new request: {
+          params_encoder: Faraday::FlatParamsEncoder }
       end
 
       def discovered_api name, version
