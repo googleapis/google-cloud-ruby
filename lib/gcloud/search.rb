@@ -38,9 +38,10 @@ module Gcloud
   #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
   #   or +Array+)
   #
-  #   The default scope is:
+  #   The default scopes are:
   #
   #   * +https://www.googleapis.com/auth/cloudsearch+
+  #   * +https://www.googleapis.com/auth/userinfo.email+
   #
   # === Returns
   #
