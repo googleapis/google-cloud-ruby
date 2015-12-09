@@ -20,7 +20,8 @@ module Gcloud
     ##
     # Represents the Oauth2 signing logic for Search.
     class Credentials < Gcloud::Credentials #:nodoc:
-      SCOPE = ["https://www.googleapis.com/auth/cloudsearch"]
+      SCOPE = ["https://www.googleapis.com/auth/cloudsearch",
+               "https://www.googleapis.com/auth/userinfo.email"]
       PATH_ENV_VARS = %w(SEARCH_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
       JSON_ENV_VARS = %w(SEARCH_KEYFILE_JSON GCLOUD_KEYFILE_JSON
                          GOOGLE_CLOUD_KEYFILE_JSON)
