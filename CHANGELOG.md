@@ -1,5 +1,13 @@
 # Release History
 
+### 0.6.0 / 2015-12-11
+
+#### Changes
+
+* Add support for Search service
+* Drop support for Ruby 1.9.3
+  * Replace options hash parameter with named parameters
+
 ### 0.5.0 / 2015-10-29
 
 #### Changes
