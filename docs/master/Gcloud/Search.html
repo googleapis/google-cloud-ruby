@@ -87,13 +87,24 @@ service.</p>
 
 <p>Cloud <a href="Search.html">Search</a> provides a model for indexing
 documents containing structured data, with documents and indexes saved to a
-separate persistent store optimized for search operations.</p>
+separate persistent store optimized for search operations. The API supports
+full text matching on string fields and allows indexing any number of
+documents in any number of indexes.</p>
 
-<p>The API supports full text matching on string fields and allows indexing
-any number of documents in any number of indexes.</p>
+<p>The Cloud <a href="Search.html">Search</a> API is an Alpha release, and
+might be changed in backward-incompatible ways. It is not currently
+recommended for production use. It is not subject to any SLA or deprecation
+policy.</p>
 
-<p>Gcloud&#39;s goal is to provide an API that is familiar and comfortable to
-Rubyists. Authentication is handled by <a
+<h2 id="module-Gcloud::Search-label-Accessing+the+Service">Accessing the Service<span><a href="#module-Gcloud::Search-label-Accessing+the+Service">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Currently, the Cloud <a href="Search.html">Search</a> API is available only
+to white-listed users. Contact your account manager or a member of the
+Google Cloud sales team if you are interested in access.</p>
+
+<h2 id="module-Gcloud::Search-label-Authentication">Authentication<span><a href="#module-Gcloud::Search-label-Authentication">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Authentication is handled by <a
 href="../Gcloud.html#method-i-search">Gcloud#search</a>. You can provide
 the project and credential information to connect to the Cloud <a
 href="Search.html">Search</a> service, or if you are running on Google
@@ -173,6 +184,7 @@ fields</a>, below.)</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">search</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">search</span>
+<span class="ruby-identifier">index</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">index</span> <span class="ruby-string">&quot;products&quot;</span>
 
 <span class="ruby-identifier">documents</span> = <span class="ruby-identifier">index</span>.<span class="ruby-identifier">documents</span> <span class="ruby-comment"># API call</span>
 <span class="ruby-identifier">documents</span>.<span class="ruby-identifier">map</span> <span class="ruby-operator">&amp;</span>:<span class="ruby-identifier">doc_id</span> <span class="ruby-comment">#=&gt; [&quot;product-sku-000001&quot;]</span>
@@ -184,6 +196,8 @@ fields</a>, below.)</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">search</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">search</span>
+<span class="ruby-identifier">index</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">index</span> <span class="ruby-string">&quot;products&quot;</span>
+
 <span class="ruby-identifier">document</span> = <span class="ruby-identifier">index</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;product-sku-000001&quot;</span>
 
 <span class="ruby-identifier">document</span>.<span class="ruby-identifier">delete</span>  <span class="ruby-comment"># API call</span>
@@ -198,6 +212,8 @@ it:</p>
 
 <span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-identifier">search</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">search</span>
+<span class="ruby-identifier">index</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">index</span> <span class="ruby-string">&quot;products&quot;</span>
+
 <span class="ruby-identifier">document</span> = <span class="ruby-identifier">index</span>.<span class="ruby-identifier">find</span> <span class="ruby-string">&quot;product-sku-000001&quot;</span>
 
 <span class="ruby-identifier">document</span>.<span class="ruby-identifier">rank</span> = <span class="ruby-value">12345</span>
@@ -234,13 +250,13 @@ tokenization, which can be passed with the <code>type</code> option when
 the value is added:</p>
 <ul><li>
 <p><code>:atom</code> means “don&#39;t tokenize this string”, treat it as one
-thing to compare against.</p>
+thing to compare against</p>
 </li><li>
-<p><code>:html</code> means “treat this string as HTML”, understanding the
-tags, and treating the rest of the content like Text.</p>
+<p><code>:html</code> means “treat this string as HTML”, not comparing against
+the tags, and treating the rest of the content like <code>:text</code></p>
 </li><li>
 <p><code>:text</code> means “treat this string as normal text” and split words
-apart to be compared against.</p>
+apart to be compared against</p>
 </li></ul>
 
 <p>Again, you can add more than one value to a field, and the values may be of
@@ -280,11 +296,7 @@ document rank. For more information see the <a
 href="https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank">REST
 API documentation for Document.rank</a>.</p>
 
-<p>You can specify how to sort results with the <code>order</code> option. In
-the example below, the <code>-</code> character before
-<code>avg_review</code> means that results will be sorted in ascending
-order by <code>published</code> and then in descending order by
-<code>avg_review</code>.</p>
+<p>You can specify how to sort results with the <code>order</code> option:</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 
@@ -297,7 +309,9 @@ order by <code>published</code> and then in descending order by
 </pre>
 
 <p>You can add computed fields with the <code>expressions</code> option, and
-limit the fields that are returned with the <code>fields</code> option:</p>
+specify the fields that are returned with the <code>fields</code> option.
+No document data will be returned if you omit the <code>fields</code>
+option, only `doc_id` references to any matched documents.</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
 

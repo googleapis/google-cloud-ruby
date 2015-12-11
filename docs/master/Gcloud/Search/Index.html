@@ -276,7 +276,7 @@ schemas </a>.</p>
 
   
     <h4>
-      <code>delete(force: nil)</code>
+      <code>delete(force: false)</code>
       <span>
         <a href="#method-i-delete">&para;</a>
         <a href="#top">&uarr;</a>
@@ -321,8 +321,8 @@ request will fail. Default is <code>false</code>. (<code>Boolean</code>)</p>
 
     
       <!-- <div class="method-source-code" id="delete-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search/index.rb, line 400</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search/index.rb, line 401</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">docs_to_be_removed</span> = <span class="ruby-identifier">documents</span> <span class="ruby-identifier">view</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;ID_ONLY&quot;</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">docs_to_be_removed</span>.<span class="ruby-identifier">empty?</span>
@@ -466,7 +466,8 @@ instance to <a href="Index.html#method-i-find">find</a>:</p>
 results to view. (<code>String</code>)</p>
 </dd><dt><code>max</code>
 <dd>
-<p>Maximum number of documents to return. (<code>Integer</code>)</p>
+<p>Maximum number of documents to return. The default is <code>100</code>.
+(<code>Integer</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-documents-label-Returns">Returns<span><a href="#method-i-documents-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -511,7 +512,7 @@ href="Document/List.html">Gcloud::Search::Document::List</a>)</p>
 
     
       <!-- <div class="method-source-code" id="documents-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search/index.rb, line 287</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search/index.rb, line 288</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">documents</span> <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">view</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">token</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span>, <span class="ruby-identifier">view</span><span class="ruby-operator">:</span> <span class="ruby-identifier">view</span> }
@@ -897,7 +898,7 @@ href="https://cloud.google.com/search/documents_indexes#index_schemas">Indexsche
 
     
       <!-- <div class="method-source-code" id="remove-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search/index.rb, line 361</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search/index.rb, line 362</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remove</span> <span class="ruby-identifier">doc_id</span>
   <span class="ruby-comment"># Get the id if passes a Document object</span>
   <span class="ruby-identifier">doc_id</span> = <span class="ruby-identifier">doc_id</span>.<span class="ruby-identifier">doc_id</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">doc_id</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:doc_id</span>
@@ -968,7 +969,7 @@ href="Index.html#method-i-find">find</a>).</p>
 
     
       <!-- <div class="method-source-code" id="save-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search/index.rb, line 326</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search/index.rb, line 327</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span> <span class="ruby-identifier">document</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">create_doc</span> <span class="ruby-identifier">index_id</span>, <span class="ruby-identifier">document</span>.<span class="ruby-identifier">to_hash</span>
@@ -1038,10 +1039,10 @@ use the <code>snippet</code> function. (<code>Hash</code>)</p>
 <p>Minimum accuracy requirement for <a
 href="Result/List.html#attribute-i-matched_count">Gcloud::Search::Result::List#matched_count</a>.
 If specified, <code>matched_count</code> will be accurate to at least that
-number. For example, when set to 100, any +matched_count &lt;= 100+ is
-accurate. This option may add considerable latency/expense. By default
-(when it is not specified or set to 0), the accuracy is the same as
-<code>max</code>. (<code>Integer</code>)</p>
+number. For example, when set to 100, any <code>matched_count &lt;=
+100</code> is accurate. This option may add considerable latency/expense.
+By default (when it is not specified or set to 0), the accuracy is the same
+as <code>max</code>. (<code>Integer</code>)</p>
 </dd><dt><code>offset</code>
 <dd>
 <p>Used to advance pagination to an arbitrary result, independent of the
@@ -1184,7 +1185,7 @@ via <a href="Fields.html">Fields</a> methods:</p>
 
     
       <!-- <div class="method-source-code" id="search-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search/index.rb, line 579</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search/index.rb, line 580</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">expressions</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">matched_count_accuracy</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
            <span class="ruby-identifier">offset</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">fields</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">scorer</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
            <span class="ruby-identifier">scorer_size</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>

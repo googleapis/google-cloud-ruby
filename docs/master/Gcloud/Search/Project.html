@@ -160,7 +160,7 @@ href="https://console.developers.google.com">Google Developers Console</a>.</p>
 
   
     <h4>
-      <code>index(index_id, skip_lookup: nil)</code>
+      <code>index(index_id, skip_lookup: false)</code>
       <span>
         <a href="#method-i-index">&para;</a>
         <a href="#top">&uarr;</a>
@@ -219,7 +219,7 @@ and the <code>skip_lookup</code> option:</p>
     
       <!-- <div class="method-source-code" id="index-source">
 <pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search/project.rb, line 120</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span> <span class="ruby-identifier">index_id</span>, <span class="ruby-identifier">skip_lookup</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span> <span class="ruby-identifier">index_id</span>, <span class="ruby-identifier">skip_lookup</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">skip_lookup</span>
     <span class="ruby-identifier">index_hash</span> = { <span class="ruby-string">&quot;indexId&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">index_id</span>, <span class="ruby-string">&quot;projectId&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">project</span> }
     <span class="ruby-keyword">return</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Index</span>.<span class="ruby-identifier">from_raw</span> <span class="ruby-identifier">index_hash</span>, <span class="ruby-identifier">connection</span>
@@ -266,7 +266,8 @@ that have this prefix. (<code>String</code>)</p>
 results to view. (<code>String</code>)</p>
 </dd><dt><code>max</code>
 <dd>
-<p>Maximum number of indexes to return. (<code>Integer</code>)</p>
+<p>Maximum number of indexes to return. The default is <code>100</code>.
+(<code>Integer</code>)</p>
 </dd></dl>
 
 <h3 id="method-i-indexes-label-Returns">Returns<span><a href="#method-i-indexes-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
