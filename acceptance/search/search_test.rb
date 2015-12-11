@@ -96,7 +96,7 @@ describe "Search", :search do
     search_results.first["rank"].must_be :empty?
     search_results.first["score"].must_be :empty?
 
-    search_results = index.search "where", return_fields: ["question"]
+    search_results = index.search "where", fields: ["question"]
     search_results.count.must_equal 2
     search_results.map(&:doc_id).must_include chris_where_doc.doc_id
     search_results.map(&:doc_id).must_include mike_where_doc.doc_id
@@ -108,7 +108,7 @@ describe "Search", :search do
       sr["score"].must_be :empty?
     end
 
-    search_results = index.search "chris", return_fields: ["question", "answer"]
+    search_results = index.search "chris", fields: ["question", "answer"]
     search_results.count.must_equal 2
     search_results.map(&:doc_id).must_include chris_where_doc.doc_id
     search_results.map(&:doc_id).must_include chris_what_doc.doc_id
@@ -120,7 +120,7 @@ describe "Search", :search do
       sr["score"].must_be :empty?
     end
 
-    search_results = index.search "mike", return_fields: "*"
+    search_results = index.search "mike", fields: "*"
     search_results.count.must_equal 2
     search_results.map(&:doc_id).must_include mike_where_doc.doc_id
     search_results.map(&:doc_id).must_include mike_what_doc.doc_id
@@ -132,7 +132,7 @@ describe "Search", :search do
       sr["score"].must_be :empty?
     end
 
-    search_results = index.search "mike", return_fields: "*", order: "question, answer"
+    search_results = index.search "mike", fields: "*", order: "question, answer"
     search_results.count.must_equal 2
     search_results.map(&:doc_id).must_include mike_where_doc.doc_id
     search_results.map(&:doc_id).must_include mike_what_doc.doc_id
@@ -144,7 +144,7 @@ describe "Search", :search do
       sr["score"].must_be :empty?
     end
 
-    search_results = index.search "mike", return_fields: ["*", "rank", "score"], scorer: "generic", order: "score desc"
+    search_results = index.search "mike", fields: ["*", "rank", "score"], scorer: "generic", order: "score desc"
     search_results.count.must_equal 2
     search_results.map(&:doc_id).must_include mike_where_doc.doc_id
     search_results.map(&:doc_id).must_include mike_what_doc.doc_id
@@ -156,7 +156,7 @@ describe "Search", :search do
       sr["score"].wont_be :empty?
     end
 
-    search_results = index.search "ruby", return_fields: ["tags", "rank", "score"], scorer: "generic"
+    search_results = index.search "ruby", fields: ["tags", "rank", "score"], scorer: "generic"
     search_results.count.must_equal 4
     search_results.map(&:doc_id).must_include chris_where_doc.doc_id
     search_results.map(&:doc_id).must_include chris_what_doc.doc_id
@@ -170,7 +170,7 @@ describe "Search", :search do
       sr["score"].wont_be :empty?
     end
 
-    search_results = index.search "where", return_fields: ["question_snippet", "answer"], expressions: {name: "question_snippet", expression: "snippet(\"where\", question)"}
+    search_results = index.search "where", fields: ["question_snippet", "answer"], expressions: {name: "question_snippet", expression: "snippet(\"where\", question)"}
     search_results.count.must_equal 2
     search_results.map(&:doc_id).must_include chris_where_doc.doc_id
     search_results.map(&:doc_id).must_include mike_where_doc.doc_id

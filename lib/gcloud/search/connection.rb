@@ -136,7 +136,7 @@ module Gcloud
           orderBy: options[:order],
           pageSize: options[:max],
           pageToken: options[:token],
-          returnFields: options[:return_fields],
+          returnFields: options[:fields],
           scorerSize: options[:scorer_size],
           scorer: options[:scorer]
         }.delete_if { |_, v| v.nil? }
