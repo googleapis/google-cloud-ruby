@@ -201,7 +201,7 @@ module Gcloud
       #   set at the time the document is saved to the number of seconds since
       #   January 1, 2011. The rank can be used in the +expressions+, +order+,
       #   and +fields+ options in #search, where it should referenced as
-      #   +_rank+. (+Integer+)
+      #   +rank+. (+Integer+)
       #
       # === Returns
       #
@@ -445,8 +445,8 @@ module Gcloud
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:expressions]</code>::
       #   Customized expressions used in +order+ or +fields+. The expression can
-      #   contain fields in Document, the built-in fields ( +_rank+, the
-      #   document +rank+, and +_score+ if scoring is enabled) and fields
+      #   contain fields in Document, the built-in fields ( +rank+, the
+      #   document +rank+, and +score+ if scoring is enabled) and fields
       #   defined in +expressions+. Each field expression is represented in a
       #   json object with +name+ and +expression+ fields. The expression value
       #   can be a combination of supported functions encoded in the string.
@@ -469,23 +469,23 @@ module Gcloud
       #   (+Integer+)
       # <code>options[:order]</code>::
       #   A comma-separated list of fields for sorting on the search result,
-      #   including fields from Document, the built-in fields (+_rank+ and
-      #   +_score+), and fields defined in expressions. The default sorting
+      #   including fields from Document, the built-in fields (+rank+ and
+      #   +score+), and fields defined in expressions. The default sorting
       #   order is ascending. To specify descending order for a field, a suffix
       #   <code>" desc"</code> should be appended to the field name. For
       #   example: <code>orderBy="foo desc,bar"</code>. The default value for
       #   text sort is the empty string, and the default value for numeric sort
       #   is 0. If not specified, the search results are automatically sorted by
-      #   descending +_rank+. Sorting by ascending +_rank+ is not allowed.
+      #   descending +rank+. Sorting by ascending +rank+ is not allowed.
       #   (+String+)
       # <code>options[:fields]</code>::
       #   The fields to return in the Search::Result objects. These can be
-      #   fields from Document, the built-in fields +_rank+ and +_score+, and
+      #   fields from Document, the built-in fields +rank+ and +score+, and
       #   fields defined in expressions. The default is to return all fields.
       #   (+String+ or +Array+ of +String+)
       # <code>options[:scorer]</code>::
       #   The scoring function to invoke on a search result for this query. If
-      #   scorer is not set, scoring is disabled and +_score+ is 0 for all
+      #   scorer is not set, scoring is disabled and +score+ is 0 for all
       #   documents in the search result. To enable document relevancy score
       #   based on term frequency, set +scorer+ to +:generic+.
       #   (+String+ or +Symbol+)
