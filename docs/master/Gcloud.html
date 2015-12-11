@@ -122,6 +122,8 @@ href="AUTHENTICATION.md">Authentication Guide</a>.</p>
             
               <a href="#method-c-resource_manager">resource_manager</a>
             
+              <a href="#method-c-search">search</a>
+            
               <a href="#method-c-storage">storage</a>
             
           
@@ -136,6 +138,8 @@ href="AUTHENTICATION.md">Authentication Guide</a>.</p>
               <a href="#method-i-pubsub">pubsub</a>
             
               <a href="#method-i-resource_manager">resource_manager</a>
+            
+              <a href="#method-i-search">search</a>
             
               <a href="#method-i-storage">storage</a>
             
@@ -631,6 +635,77 @@ href="Gcloud/ResourceManager/Manager.html">Gcloud::ResourceManager::Manager</a><
 </div>
 
         
+          <div id="search-method" class="method ">
+  <a name="method-c-search"></a>
+
+  
+    <h4>
+      <code>search(project = nil, keyfile = nil, scope: nil)</code>
+      <span>
+        <a href="#method-c-search">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Creates a new <code>Project</code> instance connected to the <a
+href="Gcloud/Search.html">Search</a> service. Each call creates a new
+connection.</p>
+
+<h3 id="method-c-search-label-Parameters">Parameters<span><a href="#method-c-search-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>project</code>
+<dd>
+<p>Identifier for a <a href="Gcloud/Search.html">Search</a> project. If not
+present, the default project for the credentials is used.
+(<code>String</code>)</p>
+</dd><dt><code>keyfile</code>
+<dd>
+<p>Keyfile downloaded from Google Cloud. If file path the file must be
+readable. (<code>String</code> or <code>Hash</code>)</p>
+</dd><dt>+scope
+<dd>
+<p>The OAuth 2.0 scopes controlling the set of resources and operations that
+the connection can access. See <a
+href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
+2.0 to Access Google APIs</a>. (<code>String</code> or <code>Array</code>)</p>
+
+<p>The default scopes are:</p>
+<ul><li>
+<p><code>https://www.googleapis.com/auth/cloudsearch</code></p>
+</li><li>
+<p><code>https://www.googleapis.com/auth/userinfo.email</code></p>
+</li></ul>
+</dd></dl>
+
+<h3 id="method-c-search-label-Returns">Returns<span><a href="#method-c-search-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Gcloud/Search/Project.html">Gcloud::Search::Project</a></p>
+    
+
+    
+      <!-- <div class="method-source-code" id="search-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span> <span class="ruby-identifier">project</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keyfile</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">project</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">default_project</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyfile</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">default</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">credentials</span> = <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Credentials</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">keyfile</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Project</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">project</span>, <span class="ruby-identifier">credentials</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
           <div id="storage-method" class="method ">
   <a name="method-c-storage"></a>
 
@@ -1100,6 +1175,68 @@ href="Gcloud/ResourceManager/Manager.html">Gcloud::ResourceManager::Manager</a><
 </div>
 
         
+          <div id="search-method" class="method ">
+  <a name="method-i-search"></a>
+
+  
+    <h4>
+      <code>search(scope: nil)</code>
+      <span>
+        <a href="#method-i-search">&para;</a>
+        <a href="#top">&uarr;</a>
+      </span>
+    </h4>
+  
+
+  <div class="method-description">
+    
+      <p>Creates a new object for connecting to the <a
+href="Gcloud/Search.html">Search</a> service. Each call creates a new
+connection.</p>
+
+<h3 id="method-i-search-label-Parameters">Parameters<span><a href="#method-i-search-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt><code>scope</code>
+<dd>
+<p>The OAuth 2.0 scopes controlling the set of resources and operations that
+the connection can access. See <a
+href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth
+2.0 to Access Google APIs</a>. (<code>String</code> or <code>Array</code>)</p>
+
+<p>The default scopes are:</p>
+<ul><li>
+<p><code>https://www.googleapis.com/auth/cloudsearch</code></p>
+</li><li>
+<p><code>https://www.googleapis.com/auth/userinfo.email</code></p>
+</li></ul>
+</dd></dl>
+
+<h3 id="method-i-search-label-Returns">Returns<span><a href="#method-i-search-label-Returns">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Gcloud/Search/Project.html">Gcloud::Search::Project</a></p>
+
+<h3 id="method-i-search-label-Examples">Examples<span><a href="#method-i-search-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+</pre>
+    
+
+    
+      <!-- <div class="method-source-code" id="search-source">
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud.rb, line 367</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span> <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud/search&quot;</span>
+  <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">search</span> <span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@keyfile</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scope</span>
+<span class="ruby-keyword">end</span></pre>
+      </div> -->
+    
+  </div>
+
+  
+
+  
+</div>
+
+        
           <div id="storage-method" class="method ">
   <a name="method-i-storage"></a>
 
@@ -1191,7 +1328,7 @@ OAuth 2.0 Authentication</a>.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Dec 08, 2015.
+    Docs built on Dec 11, 2015.
   </div>
 </div>
 
@@ -1244,6 +1381,13 @@ OAuth 2.0 Authentication</a>.</p>
       <li class="toc-l0">
         <a class="reference internal" href="Gcloud/ResourceManager.html">
           Resource Manager
+        </a>
+      </li>
+      
+  
+      <li class="toc-l0">
+        <a class="reference internal" href="Gcloud/Search.html">
+          Search
         </a>
       </li>
       

@@ -280,7 +280,7 @@ details. (<code>Integer</code>, lambda, or <code>Proc</code>)</p>
 
     
       <!-- <div class="method-source-code" id="add-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 646</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 642</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">skip_soa</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">soa_serial</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">update</span> [<span class="ruby-identifier">record</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>)], [],
          <span class="ruby-identifier">skip_soa</span><span class="ruby-operator">:</span> <span class="ruby-identifier">skip_soa</span>, <span class="ruby-identifier">soa_serial</span><span class="ruby-operator">:</span> <span class="ruby-identifier">soa_serial</span>
@@ -381,10 +381,7 @@ change does not exist</p>
       <p>Retrieves the list of changes belonging to the zone.</p>
 
 <h3 id="method-i-changes-label-Parameters">Parameters<span><a href="#method-i-changes-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
-</dd><dt><code>token</code>
+<dl class="rdoc-list note-list"><dt><code>token</code>
 <dd>
 <p>A previously-returned page token representing part of the larger set of
 results to view. (<code>String</code>)</p>
@@ -454,7 +451,7 @@ href="Change/List.html">Gcloud::Dns::Change::List</a>)</p>
 
     
       <!-- <div class="method-source-code" id="changes-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 279</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 277</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">changes</span> <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-comment"># Fix the sort options</span>
@@ -753,7 +750,7 @@ must be writable. (<code>String</code>)</p>
 
     
       <!-- <div class="method-source-code" id="export-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 427</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 425</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">export</span> <span class="ruby-identifier">path</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-identifier">path</span>, <span class="ruby-string">&quot;w&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span> <span class="ruby-identifier">to_zonefile</span>
@@ -909,7 +906,7 @@ it is returned unchanged.</p>
 
     
       <!-- <div class="method-source-code" id="fqdn-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 819</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 815</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fqdn</span> <span class="ruby-identifier">domain_name</span>
   <span class="ruby-constant">Connection</span>.<span class="ruby-identifier">fqdn</span> <span class="ruby-identifier">domain_name</span>, <span class="ruby-identifier">dns</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1034,9 +1031,6 @@ succeed.</p>
 <dd>
 <p>The path to a zone file on the filesystem, or an IO instance from which
 zone file data can be read. (<code>String</code> or <code>IO</code>)</p>
-</dd><dt><code>options</code>
-<dd>
-<p>An optional Hash for controlling additional behavior. (<code>Hash</code>)</p>
 </dd><dt><code>only</code>
 <dd>
 <p>Include only records of this type or types. (<code>String</code> or
@@ -1075,7 +1069,7 @@ href="Record.html">Record</a> instances.</p>
 
     
       <!-- <div class="method-source-code" id="import-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 489</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 485</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">import</span> <span class="ruby-identifier">path_or_io</span>, <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">except</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
            <span class="ruby-identifier">skip_soa</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">soa_serial</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">except</span> = (<span class="ruby-constant">Array</span>(<span class="ruby-identifier">except</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_s</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:upcase</span>) <span class="ruby-operator">+</span> <span class="ruby-node">%w(SOA NS)</span>).<span class="ruby-identifier">uniq</span>
@@ -1159,7 +1153,7 @@ details. (<code>Integer</code>, lambda, or <code>Proc</code>)</p>
 
     
       <!-- <div class="method-source-code" id="modify-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 785</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 781</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">modify</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">skip_soa</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">soa_serial</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">existing</span> = <span class="ruby-identifier">records</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">to_a</span>
   <span class="ruby-identifier">updated</span> = <span class="ruby-identifier">existing</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:dup</span>)
@@ -1350,7 +1344,7 @@ to a <a href="Zone.html">Zone</a>.</p>
 
     
       <!-- <div class="method-source-code" id="record-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 398</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 396</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">record</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>
   <span class="ruby-constant">Gcloud</span><span class="ruby-operator">::</span><span class="ruby-constant">Dns</span><span class="ruby-operator">::</span><span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">fqdn</span>(<span class="ruby-identifier">name</span>), <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1470,7 +1464,7 @@ href="Record/List.html#method-i-all">Gcloud::Dns::Record::List#all</a>)</p>
 
     
       <!-- <div class="method-source-code" id="records-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 367</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 365</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">records</span> <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">type</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
 
@@ -1562,7 +1556,7 @@ details. (<code>Integer</code>, lambda, or <code>Proc</code>)</p>
 
     
       <!-- <div class="method-source-code" id="remove-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 687</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 683</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remove</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">skip_soa</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">soa_serial</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">update</span> [], <span class="ruby-identifier">records</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">to_a</span>,
          <span class="ruby-identifier">skip_soa</span><span class="ruby-operator">:</span> <span class="ruby-identifier">skip_soa</span>, <span class="ruby-identifier">soa_serial</span><span class="ruby-operator">:</span> <span class="ruby-identifier">soa_serial</span>
@@ -1654,7 +1648,7 @@ details. (<code>Integer</code>, lambda, or <code>Proc</code>)</p>
 
     
       <!-- <div class="method-source-code" id="replace-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 738</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 734</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">replace</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">skip_soa</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">soa_serial</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">update</span> [<span class="ruby-identifier">record</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">ttl</span>, <span class="ruby-identifier">data</span>)],
          <span class="ruby-identifier">records</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">to_a</span>,
@@ -1767,7 +1761,7 @@ serial number and returns a new serial number.</p>
 
     
       <!-- <div class="method-source-code" id="update-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 570</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/dns/zone.rb, line 566</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span> <span class="ruby-identifier">additions</span> = [], <span class="ruby-identifier">deletions</span> = [], <span class="ruby-identifier">skip_soa</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">soa_serial</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-comment"># Handle only sending in options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">additions</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">deletions</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">empty?</span>
@@ -1820,7 +1814,7 @@ serial number and returns a new serial number.</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Dec 08, 2015.
+    Docs built on Dec 11, 2015.
   </div>
 </div>
 
@@ -1891,6 +1885,13 @@ serial number and returns a new serial number.</p>
       <li class="toc-l0">
         <a class="reference internal" href="../ResourceManager.html">
           Resource Manager
+        </a>
+      </li>
+      
+  
+      <li class="toc-l0">
+        <a class="reference internal" href="../Search.html">
+          Search
         </a>
       </li>
       
