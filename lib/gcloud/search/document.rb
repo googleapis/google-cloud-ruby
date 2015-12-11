@@ -152,9 +152,7 @@ module Gcloud
       #   The name of the field. (+String+)
       # +value+::
       #   The value to add to the field. (+String+ or +Datetime+ or +Float+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:type]</code>::
+      # +type+::
       #   The type of the field value. An attempt is made to set the correct
       #   type when this option is missing, although it must be provided for
       #   +:geo+ values. A field can have multiple values with same or different
@@ -177,7 +175,7 @@ module Gcloud
       #   * +:number+ - The value is a +Numeric+ between -2,147,483,647 and
       #     2,147,483,647. The value will be stored as a double precision
       #     floating point value in Cloud Search.
-      # <code>options[:lang]</code>::
+      # +lang+::
       #   The language of a string value. Must be a valid {ISO 639-1
       #   code}[https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes].
       #   (+String+)
@@ -198,8 +196,8 @@ module Gcloud
       #                type: :html, lang: "en"
       #   document.add "price", 24.95
       #
-      def add name, value, options = {}
-        @fields[name].add value, options
+      def add name, value, type: nil, lang: nil
+        @fields[name].add value, type: type, lang: lang
       end
 
       # rubocop:enable Metrics/LineLength

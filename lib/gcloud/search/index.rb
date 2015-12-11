@@ -243,8 +243,6 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:token]</code>::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
@@ -286,8 +284,9 @@ module Gcloud
       #     documents = documents.next
       #   end
       #
-      def documents options = {}
+      def documents token: nil, max: nil, view: nil
         ensure_connection!
+        options = { token: token, max: max, view: view }
         resp = connection.list_docs index_id, options
         return Document::List.from_response(resp, self) if resp.success?
         fail ApiError.from_response(resp)
@@ -375,8 +374,6 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:force]</code>::
       #   If +true+, ensures the deletion of the index by first deleting all
       #   documents. If +false+ and the index contains documents, the request
@@ -400,12 +397,12 @@ module Gcloud
       #   index = search.index "books"
       #   index.delete force: true
       #
-      def delete options = {}
+      def delete force: nil
         ensure_connection!
         docs_to_be_removed = documents view: "ID_ONLY"
         return if docs_to_be_removed.empty?
-        unless options[:force]
-          fail "Unable to delete because documents exist. Use :force option."
+        unless force
+          fail "Unable to delete because documents exist. Use force option."
         end
         while docs_to_be_removed
           docs_to_be_removed.each { |d| remove d }
@@ -441,8 +438,6 @@ module Gcloud
       #   The query string in search query syntax. If the query is +nil+ or
       #   empty, all documents are returned. For more information see {Query
       #   Strings}[https://cloud.google.com/search/query]. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:expressions]</code>::
       #   Customized expressions used in +order+ or +fields+. The expression can
       #   contain fields in Document, the built-in fields ( +rank+, the
@@ -582,8 +577,14 @@ module Gcloud
       #   values[1].type #=> :html
       #   values[1].lang #=> "en"
       #
-      def search query, options = {}
+      def search query, expressions: nil, matched_count_accuracy: nil,
+                 offset: nil, order: nil, fields: nil, scorer: nil,
+                 scorer_size: nil, token: nil, max: nil
         ensure_connection!
+        options = { expressions: expressions, offset: offset, order: order,
+                    matched_count_accuracy: matched_count_accuracy,
+                    fields: fields, scorer: scorer, scorer_size: scorer_size,
+                    token: token, max: max }
         resp = connection.search index_id, query, options
         if resp.success?
           Result::List.from_response resp, self, query, options

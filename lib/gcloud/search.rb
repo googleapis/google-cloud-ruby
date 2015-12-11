@@ -30,9 +30,7 @@ module Gcloud
   # +keyfile+::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
   #   readable. (+String+ or +Hash+)
-  # +options+::
-  #   An optional Hash for controlling additional behavior. (+Hash+)
-  # <code>options[:scope]</code>::
+  # +scope::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See {Using OAuth 2.0 to Access Google
   #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
@@ -46,12 +44,12 @@ module Gcloud
   # === Returns
   #
   # Gcloud::Search::Project
-  def self.search project = nil, keyfile = nil, options = {}
+  def self.search project = nil, keyfile = nil, scope: nil
     project ||= Gcloud::Search::Project.default_project
     if keyfile.nil?
-      credentials = Gcloud::Search::Credentials.default options
+      credentials = Gcloud::Search::Credentials.default scope: scope
     else
-      credentials = Gcloud::Search::Credentials.new keyfile, options
+      credentials = Gcloud::Search::Credentials.new keyfile, scope: scope
     end
     Gcloud::Search::Project.new project, credentials
   end
