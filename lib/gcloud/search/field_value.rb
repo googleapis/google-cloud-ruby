@@ -57,9 +57,7 @@ module Gcloud
       #
       # +value+::
       #   The value to add to the field. (+String+ or +Datetime+ or +Float+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:type]</code>::
+      # +type+::
       #   The type of the field value. A field can have multiple values with
       #   same or different types; however, it cannot have multiple Timestamp or
       #   number values. (+Symbol+)
@@ -78,23 +76,23 @@ module Gcloud
       #   * +:number+ - The value is a +Numeric+ between -2,147,483,647 and
       #     2,147,483,647. The value will be stored as a double precision
       #     floating point value in Cloud Search.
-      # <code>options[:lang]</code>::
+      # +lang+::
       #   The language of a string value. Must be a valid {ISO 639-1
       #   code}[https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes].
       #   (+String+)
-      # <code>options[:name]</code>::
+      # +name+::
       #   The name of the field. New values will be configured with this name.
       #   (+String+)
       #
-      def initialize value, options = {} #:nodoc:
+      def initialize value, type: nil, lang: nil, name: nil #:nodoc:
         super value
-        if options[:type]
-          @type = options[:type].to_s.downcase.to_sym
+        if type
+          @type = type.to_s.downcase.to_sym
         else
           @type = infer_type
         end
-        @lang = options[:lang] if string_type?
-        @name = options[:name]
+        @lang = lang if string_type?
+        @name = name
       end
 
       # rubocop:enable Metrics/LineLength

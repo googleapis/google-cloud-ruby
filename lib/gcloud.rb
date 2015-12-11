@@ -345,9 +345,7 @@ module Gcloud
   #
   # === Parameters
   #
-  # +options+::
-  #   An optional Hash for controlling additional behavior. (+Hash+)
-  # <code>options[:scope]</code>::
+  # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See {Using OAuth 2.0 to Access Google
   #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
@@ -366,8 +364,8 @@ module Gcloud
   #
   #   require "gcloud"
   #
-  def search options = {}
+  def search scope: nil
     require "gcloud/search"
-    Gcloud.search @project, @keyfile, options
+    Gcloud.search @project, @keyfile, scope: scope
   end
 end

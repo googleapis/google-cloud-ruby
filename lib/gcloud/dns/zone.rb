@@ -220,8 +220,6 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
       # +token+::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
@@ -460,8 +458,6 @@ module Gcloud
       # +path_or_io+::
       #   The path to a zone file on the filesystem, or an IO instance from
       #   which zone file data can be read. (+String+ or +IO+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
       # +only+::
       #   Include only records of this type or types. (+String+ or +Array+)
       # +except+::

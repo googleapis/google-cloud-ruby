@@ -84,9 +84,7 @@ module Gcloud
       #
       # +index_id+::
       #   The ID of an index. (+String+)
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:skip_lookup]</code>::
+      # +skip_lookup+::
       #   Optionally create an Index object without verifying the index resource
       #   exists on the Search service. Documents saved on this object will
       #   create the index resource if the resource does not yet exist. Default
@@ -119,8 +117,8 @@ module Gcloud
       #   index = search.index "more-books", skip_lookup: true
       #   index.index_id #=> "more-books"
       #
-      def index index_id, options = {}
-        if options[:skip_lookup]
+      def index index_id, skip_lookup: nil
+        if skip_lookup
           index_hash = { "indexId" => index_id, "projectId" => project }
           return Gcloud::Search::Index.from_raw index_hash, connection
         end
@@ -134,15 +132,13 @@ module Gcloud
       #
       # === Parameters
       #
-      # +options+::
-      #   An optional Hash for controlling additional behavior. (+Hash+)
-      # <code>options[:prefix]</code>::
+      # +prefix+::
       #   The prefix of the index name. It is used to list all indexes with
       #   names that have this prefix. (+String+)
-      # <code>options[:token]</code>::
+      # +token+::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of indexes to return. (+Integer+)
       #
       # === Returns
@@ -178,8 +174,9 @@ module Gcloud
       #     indexes = indexes.next
       #   end
       #
-      def indexes options = {}
+      def indexes prefix: nil, token: nil, max: nil
         ensure_connection!
+        options = { prefix: prefix, token: token, max: max }
         resp = connection.list_indexes options
         if resp.success?
           Index::List.from_response resp, connection
