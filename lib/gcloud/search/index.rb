@@ -454,7 +454,7 @@ module Gcloud
       #   (+, -, *, /) and the built-in numeric functions (+max+, +min+, +pow+,
       #   +count+, +log+, +abs+). Expressions involving geopoint fields can use
       #   the geopoint and distance functions. Expressions for text and html
-      #   fields can use the +snippet+ function. (+String+)
+      #   fields can use the +snippet+ function. (+Hash+ or +Array+ of +Hash+)
       # <code>options[:matched_count_accuracy]</code>::
       #   Minimum accuracy requirement for Result::List#matched_count. If
       #   specified, +matched_count+ will be accurate to at least that number.
