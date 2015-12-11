@@ -117,7 +117,7 @@ module Gcloud
       #   index = search.index "more-books", skip_lookup: true
       #   index.index_id #=> "more-books"
       #
-      def index index_id, skip_lookup: nil
+      def index index_id, skip_lookup: false
         if skip_lookup
           index_hash = { "indexId" => index_id, "projectId" => project }
           return Gcloud::Search::Index.from_raw index_hash, connection
@@ -139,7 +139,7 @@ module Gcloud
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
       # +max+::
-      #   Maximum number of indexes to return. (+Integer+)
+      #   Maximum number of indexes to return. The default is +100+. (+Integer+)
       #
       # === Returns
       #
