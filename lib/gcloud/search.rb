@@ -253,9 +253,8 @@ module Gcloud
   #   search = gcloud.search
   #   index = search.index "products"
   #
-  #   expressions = [{ name: "total_price", expression: "(price + tax)" }]
   #   results = index.search "cotton T-shirt",
-  #                          expressions: expressions,
+  #                          expressions: { total_price: "(price + tax)" },
   #                          fields: ["name", "total_price", "highlight"]
   #
   # Just as in documents, Result data is accessible via Fields methods:
