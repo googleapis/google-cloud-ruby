@@ -305,9 +305,8 @@ limit the fields that are returned with the <code>fields</code> option:</p>
 <span class="ruby-identifier">search</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">search</span>
 <span class="ruby-identifier">index</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">index</span> <span class="ruby-string">&quot;products&quot;</span>
 
-<span class="ruby-identifier">expressions</span> = [{ <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;total_price&quot;</span>, <span class="ruby-identifier">expression</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;(price + tax)&quot;</span> }]
 <span class="ruby-identifier">results</span> = <span class="ruby-identifier">index</span>.<span class="ruby-identifier">search</span> <span class="ruby-string">&quot;cotton T-shirt&quot;</span>,
-                       <span class="ruby-identifier">expressions</span><span class="ruby-operator">:</span> <span class="ruby-identifier">expressions</span>,
+                       <span class="ruby-identifier">expressions</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">total_price</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;(price + tax)&quot;</span> },
                        <span class="ruby-identifier">fields</span><span class="ruby-operator">:</span> [<span class="ruby-string">&quot;name&quot;</span>, <span class="ruby-string">&quot;total_price&quot;</span>, <span class="ruby-string">&quot;highlight&quot;</span>]
 </pre>
 

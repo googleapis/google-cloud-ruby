@@ -1023,16 +1023,16 @@ href="https://cloud.google.com/search/query">Query Strings</a>.
 The expression can contain fields in <a href="Document.html">Document</a>,
 the built-in fields ( <code>rank</code>, the document <code>rank</code>,
 and <code>score</code> if scoring is enabled) and fields defined in
-<code>expressions</code>. Each field expression is represented in a json
-object with <code>name</code> and <code>expression</code> fields. The
-expression value can be a combination of supported functions encoded in the
-string. Expressions involving number fields can use the arithmetical
-operators (+, -, *, /) and the built-in numeric functions
-(<code>max</code>, <code>min</code>, <code>pow</code>, <code>count</code>,
-<code>log</code>, <code>abs</code>). Expressions involving geopoint fields
-can use the geopoint and distance functions. Expressions for text and html
-fields can use the <code>snippet</code> function. (<code>Hash</code> or
-<code>Array</code> of <code>Hash</code>)</p>
+<code>expressions</code>. All field expressions expressed as a
+<code>Hash</code> with the keys as the <code>name</code> and the values as
+the <code>expression</code>. The expression value can be a combination of
+supported functions encoded in the string. Expressions involving number
+fields can use the arithmetical operators (+, -, *, /) and the built-in
+numeric functions (<code>max</code>, <code>min</code>, <code>pow</code>,
+<code>count</code>, <code>log</code>, <code>abs</code>). Expressions
+involving geopoint fields can use the <code>geopoint</code> and
+<code>distance</code> functions. Expressions for text and html fields can
+use the <code>snippet</code> function. (<code>Hash</code>)</p>
 </dd><dt><code>matched_count_accuracy</code>
 <dd>
 <p>Minimum accuracy requirement for <a
@@ -1156,9 +1156,8 @@ limit the fields that are returned with the <code>fields</code> option:</p>
 <span class="ruby-identifier">search</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">search</span>
 <span class="ruby-identifier">index</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">index</span> <span class="ruby-string">&quot;products&quot;</span>
 
-<span class="ruby-identifier">expressions</span> = [{ <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;total_price&quot;</span>, <span class="ruby-identifier">expression</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;(price + tax)&quot;</span> }]
 <span class="ruby-identifier">results</span> = <span class="ruby-identifier">index</span>.<span class="ruby-identifier">search</span> <span class="ruby-string">&quot;cotton T-shirt&quot;</span>,
-                       <span class="ruby-identifier">expressions</span><span class="ruby-operator">:</span> <span class="ruby-identifier">expressions</span>,
+                       <span class="ruby-identifier">expressions</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">total_price</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;(price + tax)&quot;</span> },
                        <span class="ruby-identifier">fields</span><span class="ruby-operator">:</span> [<span class="ruby-string">&quot;name&quot;</span>, <span class="ruby-string">&quot;total_price&quot;</span>, <span class="ruby-string">&quot;highlight&quot;</span>]
 </pre>
 
@@ -1185,15 +1184,16 @@ via <a href="Fields.html">Fields</a> methods:</p>
 
     
       <!-- <div class="method-source-code" id="search-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search/index.rb, line 580</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/search/index.rb, line 579</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span> <span class="ruby-identifier">query</span>, <span class="ruby-identifier">expressions</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">matched_count_accuracy</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
            <span class="ruby-identifier">offset</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">fields</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">scorer</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
            <span class="ruby-identifier">scorer_size</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
-  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">expressions</span><span class="ruby-operator">:</span> <span class="ruby-identifier">expressions</span>, <span class="ruby-identifier">offset</span><span class="ruby-operator">:</span> <span class="ruby-identifier">offset</span>, <span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order</span>,
+  <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">expressions</span><span class="ruby-operator">:</span> <span class="ruby-identifier">format_expressions</span>(<span class="ruby-identifier">expressions</span>),
               <span class="ruby-identifier">matched_count_accuracy</span><span class="ruby-operator">:</span> <span class="ruby-identifier">matched_count_accuracy</span>,
-              <span class="ruby-identifier">fields</span><span class="ruby-operator">:</span> <span class="ruby-identifier">fields</span>, <span class="ruby-identifier">scorer</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scorer</span>, <span class="ruby-identifier">scorer_size</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scorer_size</span>,
-              <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">token</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span> }
+              <span class="ruby-identifier">offset</span><span class="ruby-operator">:</span> <span class="ruby-identifier">offset</span>, <span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order</span>, <span class="ruby-identifier">fields</span><span class="ruby-operator">:</span> <span class="ruby-identifier">fields</span>,
+              <span class="ruby-identifier">scorer</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scorer</span>, <span class="ruby-identifier">scorer_size</span><span class="ruby-operator">:</span> <span class="ruby-identifier">scorer_size</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">token</span>,
+              <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span> }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">search</span> <span class="ruby-identifier">index_id</span>, <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
     <span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">from_response</span> <span class="ruby-identifier">resp</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span>
