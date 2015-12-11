@@ -243,7 +243,7 @@ module Gcloud
   #   search = gcloud.search
   #   index = search.index "books"
   #
-  #   results = index.search "dark stormy" , order: ["published", "-avg_review"]
+  #   results = index.search "dark stormy", order: "published, avg_review desc"
   #   documents = index.search query # API call
   #
   # You can add computed fields with the +expressions+ option, and limit the
