@@ -243,10 +243,10 @@ module Gcloud
       #
       # === Parameters
       #
-      # <code>options[:token]</code>::
+      # +token+::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of documents to return. (+Integer+)
       #
       # === Returns
@@ -374,7 +374,7 @@ module Gcloud
       #
       # === Parameters
       #
-      # <code>options[:force]</code>::
+      # +force+::
       #   If +true+, ensures the deletion of the index by first deleting all
       #   documents. If +false+ and the index contains documents, the request
       #   will fail. Default is +false+. (+Boolean+)
@@ -438,7 +438,7 @@ module Gcloud
       #   The query string in search query syntax. If the query is +nil+ or
       #   empty, all documents are returned. For more information see {Query
       #   Strings}[https://cloud.google.com/search/query]. (+String+)
-      # <code>options[:expressions]</code>::
+      # +expressions+::
       #   Customized expressions used in +order+ or +fields+. The expression can
       #   contain fields in Document, the built-in fields ( +rank+, the
       #   document +rank+, and +score+ if scoring is enabled) and fields
@@ -450,19 +450,19 @@ module Gcloud
       #   +count+, +log+, +abs+). Expressions involving geopoint fields can use
       #   the geopoint and distance functions. Expressions for text and html
       #   fields can use the +snippet+ function. (+Hash+ or +Array+ of +Hash+)
-      # <code>options[:matched_count_accuracy]</code>::
+      # +matched_count_accuracy+::
       #   Minimum accuracy requirement for Result::List#matched_count. If
       #   specified, +matched_count+ will be accurate to at least that number.
       #   For example, when set to 100, any +matched_count <= 100+ is accurate.
       #   This option may add considerable latency/expense. By default (when it
       #   is not specified or set to 0), the accuracy is the same as +max+.
       #   (+Integer+)
-      # <code>options[:offset]</code>::
+      # +offset+::
       #   Used to advance pagination to an arbitrary result, independent of the
       #   previous results. Offsets are an inefficient alternative to using
       #   +token+. (Both cannot be both set.) The default is 0.
       #   (+Integer+)
-      # <code>options[:order]</code>::
+      # +order+::
       #   A comma-separated list of fields for sorting on the search result,
       #   including fields from Document, the built-in fields (+rank+ and
       #   +score+), and fields defined in expressions. The default sorting
@@ -473,24 +473,24 @@ module Gcloud
       #   is 0. If not specified, the search results are automatically sorted by
       #   descending +rank+. Sorting by ascending +rank+ is not allowed.
       #   (+String+)
-      # <code>options[:fields]</code>::
+      # +fields+::
       #   The fields to return in the Search::Result objects. These can be
       #   fields from Document, the built-in fields +rank+ and +score+, and
       #   fields defined in expressions. The default is to return all fields.
       #   (+String+ or +Array+ of +String+)
-      # <code>options[:scorer]</code>::
+      # +scorer+::
       #   The scoring function to invoke on a search result for this query. If
       #   scorer is not set, scoring is disabled and +score+ is 0 for all
       #   documents in the search result. To enable document relevancy score
       #   based on term frequency, set +scorer+ to +:generic+.
       #   (+String+ or +Symbol+)
-      # <code>options[:scorer_size]</code>::
+      # +scorer_size+::
       #   Maximum number of top retrieved results to score. It is valid only
       #   when +scorer+ is set. The default is 100. (+Integer+)
-      # <code>options[:token]</code>::
+      # +token+::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
-      # <code>options[:max]</code>::
+      # +max+::
       #   Maximum number of results to return per page. (+Integer+)
       #
       # === Returns
