@@ -170,7 +170,8 @@ describe "Search", :search do
       sr["score"].wont_be :empty?
     end
 
-    search_results = index.search "where", fields: ["question_snippet", "answer"], expressions: {name: "question_snippet", expression: "snippet(\"where\", question)"}
+    search_results = index.search "where", fields: ["question_snippet", "answer"],
+                                  expressions: { question_snippet: "snippet(\"where\", question)" }
     search_results.count.must_equal 2
     search_results.map(&:doc_id).must_include chris_where_doc.doc_id
     search_results.map(&:doc_id).must_include mike_where_doc.doc_id
@@ -178,6 +179,23 @@ describe "Search", :search do
       sr["question"].must_be :empty?
       sr["question_snippet"].wont_be :empty?
       sr["answer"].wont_be :empty?
+      sr["answer_snippet"].must_be :empty?
+      sr["tags"].must_be :empty?
+      sr["rank"].must_be :empty?
+      sr["score"].must_be :empty?
+    end
+
+    search_results = index.search "What", fields: ["question_snippet", "answer_snippet"],
+                                  expressions: { question_snippet: "snippet(\"what\", question)",
+                                                 answer_snippet: "snippet(\"what\", answer)" }
+    search_results.count.must_equal 2
+    search_results.map(&:doc_id).must_include chris_what_doc.doc_id
+    search_results.map(&:doc_id).must_include mike_what_doc.doc_id
+    search_results.each do |sr|
+      sr["question"].must_be :empty?
+      sr["question_snippet"].wont_be :empty?
+      sr["answer"].must_be :empty?
+      sr["answer_snippet"].wont_be :empty?
       sr["tags"].must_be :empty?
       sr["rank"].must_be :empty?
       sr["score"].must_be :empty?

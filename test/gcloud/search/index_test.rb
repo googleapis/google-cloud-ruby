@@ -371,7 +371,7 @@ describe Gcloud::Search::Index, :mock_search do
   end
 
   it "searches one expression set" do
-    expression = { name: "TotalPrice", expression: "(Price+Tax)" }
+    expression = { "TotalPrice" => "(Price+Tax)" }
     expression_json = { "expression" => "(Price+Tax)", "name" => "TotalPrice" }
 
     mock_connection.get "/v1/projects/#{project}/indexes/#{index.index_id}/search" do |env|
@@ -384,13 +384,11 @@ describe Gcloud::Search::Index, :mock_search do
   end
 
   it "searches with expressions set" do
-    expressions = [
-      { name: "TotalPrice", expression: "(Price+Tax)" },
-      { name: "snippet", expression: "snippet('good times', content)" }
-    ]
+    expressions = { "TotalPrice" => "(Price+Tax)",
+                    snippet: "snippet(\"good times\", content)" }
     expressions_json = [
       { "expression" => "(Price+Tax)", "name" => "TotalPrice" },
-      { "expression" => "snippet('good times', content)", "name" => "snippet" }
+      { "expression" => "snippet(\"good times\", content)", "name" => "snippet" }
     ]
 
     mock_connection.get "/v1/projects/#{project}/indexes/#{index.index_id}/search" do |env|

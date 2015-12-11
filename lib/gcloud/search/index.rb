@@ -440,16 +440,16 @@ module Gcloud
       #   Strings}[https://cloud.google.com/search/query]. (+String+)
       # +expressions+::
       #   Customized expressions used in +order+ or +fields+. The expression can
-      #   contain fields in Document, the built-in fields ( +rank+, the
-      #   document +rank+, and +score+ if scoring is enabled) and fields
-      #   defined in +expressions+. Each field expression is represented in a
-      #   json object with +name+ and +expression+ fields. The expression value
-      #   can be a combination of supported functions encoded in the string.
-      #   Expressions involving number fields can use the arithmetical operators
-      #   (+, -, *, /) and the built-in numeric functions (+max+, +min+, +pow+,
-      #   +count+, +log+, +abs+). Expressions involving geopoint fields can use
-      #   the geopoint and distance functions. Expressions for text and html
-      #   fields can use the +snippet+ function. (+Hash+ or +Array+ of +Hash+)
+      #   contain fields in Document, the built-in fields ( +rank+, the document
+      #   +rank+, and +score+ if scoring is enabled) and fields defined in
+      #   +expressions+. All field expressions expressed as a +Hash+ with the
+      #   keys as the +name+ and the values as the +expression+. The expression
+      #   value can be a combination of supported functions encoded in the
+      #   string. Expressions involving number fields can use the arithmetical
+      #   operators (+, -, *, /) and the built-in numeric functions (+max+,
+      #   +min+, +pow+, +count+, +log+, +abs+). Expressions involving geopoint
+      #   fields can use the +geopoint+ and +distance+ functions. Expressions
+      #   for text and html fields can use the +snippet+ function. (+Hash+)
       # +matched_count_accuracy+::
       #   Minimum accuracy requirement for Result::List#matched_count. If
       #   specified, +matched_count+ will be accurate to at least that number.
@@ -554,9 +554,8 @@ module Gcloud
       #   search = gcloud.search
       #   index = search.index "products"
       #
-      #   expressions = [{ name: "total_price", expression: "(price + tax)" }]
       #   results = index.search "cotton T-shirt",
-      #                          expressions: expressions,
+      #                          expressions: { total_price: "(price + tax)" },
       #                          fields: ["name", "total_price", "highlight"]
       #
       # Just as in documents, Result data is accessible via Fields methods:
@@ -581,10 +580,11 @@ module Gcloud
                  offset: nil, order: nil, fields: nil, scorer: nil,
                  scorer_size: nil, token: nil, max: nil
         ensure_connection!
-        options = { expressions: expressions, offset: offset, order: order,
+        options = { expressions: format_expressions(expressions),
                     matched_count_accuracy: matched_count_accuracy,
-                    fields: fields, scorer: scorer, scorer_size: scorer_size,
-                    token: token, max: max }
+                    offset: offset, order: order, fields: fields,
+                    scorer: scorer, scorer_size: scorer_size, token: token,
+                    max: max }
         resp = connection.search index_id, query, options
         if resp.success?
           Result::List.from_response resp, self, query, options
@@ -601,6 +601,11 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      def format_expressions expressions
+        return nil if expressions.nil?
+        expressions.to_h.map { |k, v| { name: k, expression: v } }
       end
     end
   end
