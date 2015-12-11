@@ -180,6 +180,25 @@ end
 projects = resource_manager.projects filter: "labels.env:production"
 ```
 
+### Search
+
+- [gcloud-ruby Search API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Search.html)
+- [Google Cloud Storage Documentation](https://cloud.google.com/search/)
+
+#### Preview
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new
+search = gcloud.search
+index = search.index "products"
+
+results = index.search "cotton T-shirt",
+                       expressions: { total_price: "(price + tax)" },
+                       fields: ["name", "total_price", "highlight"]
+```
+
 ### Storage
 
 - [gcloud-ruby Storage API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html)
