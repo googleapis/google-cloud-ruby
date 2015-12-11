@@ -66,17 +66,27 @@ module Gcloud
   #
   # Cloud Search provides a model for indexing documents containing structured
   # data, with documents and indexes saved to a separate persistent store
-  # optimized for search operations.
+  # optimized for search operations. The API supports full text matching on
+  # string fields and allows indexing any number of documents in any number of
+  # indexes.
   #
-  # The API supports full text matching on string fields and allows indexing any
-  # number of documents in any number of indexes.
+  # The Cloud Search API is an Alpha release, and might be changed in
+  # backward-incompatible ways. It is not currently recommended for production
+  # use. It is not subject to any SLA or deprecation policy.
   #
-  # Gcloud's goal is to provide an API that is familiar and comfortable to
-  # Rubyists. Authentication is handled by Gcloud#search. You can provide
-  # the project and credential information to connect to the Cloud Search
-  # service, or if you are running on Google Compute Engine this configuration
-  # is taken care of for you. You can read more about the options for connecting
-  # in the {Authentication Guide}[link:AUTHENTICATION.md].
+  # == Accessing the Service
+  #
+  # Currently, the Cloud Search API is available only to white-listed users.
+  # Contact your account manager or a member of the Google Cloud sales team if
+  # you are interested in access.
+  #
+  # == Authentication
+  #
+  # Authentication is handled by Gcloud#search. You can provide the project and
+  # credential information to connect to the Cloud Search service, or if you are
+  # running on Google Compute Engine this configuration is taken care of for
+  # you. You can read more about the options for connecting in the
+  # {Authentication Guide}[link:AUTHENTICATION.md].
   #
   # == Managing Indexes
   #
@@ -141,6 +151,7 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   search = gcloud.search
+  #   index = search.index "products"
   #
   #   documents = index.documents # API call
   #   documents.map &:doc_id #=> ["product-sku-000001"]
@@ -151,6 +162,8 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   search = gcloud.search
+  #   index = search.index "products"
+  #
   #   document = index.find "product-sku-000001"
   #
   #   document.delete  # API call
@@ -163,6 +176,8 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   search = gcloud.search
+  #   index = search.index "products"
+  #
   #   document = index.find "product-sku-000001"
   #
   #   document.rank = 12345
@@ -189,13 +204,13 @@ module Gcloud
   # added:
   #
   # - +:atom+ means "don't tokenize this string", treat it as one
-  #   thing to compare against.
+  #   thing to compare against
   #
-  # - +:html+ means "treat this string as HTML", understanding the
-  #   tags, and treating the rest of the content like Text.
+  # - +:html+ means "treat this string as HTML", not comparing against the
+  #   tags, and treating the rest of the content like +:text+
   #
   # - +:text+ means "treat this string as normal text" and split words
-  #   apart to be compared against.
+  #   apart to be compared against
   #
   # Again, you can add more than one value to a field, and the values may be of
   # different types.
@@ -230,10 +245,7 @@ module Gcloud
   # By default, Result objects are sorted by document rank. For more information
   # see the {REST API documentation for Document.rank}[https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank].
   #
-  # You can specify how to sort results with the +order+ option. In the example
-  # below, the <code>-</code> character before +avg_review+ means that results
-  # will be sorted in ascending order by +published+ and then in descending
-  # order by +avg_review+.
+  # You can specify how to sort results with the +order+ option:
   #
   #   require "gcloud"
   #
@@ -244,8 +256,10 @@ module Gcloud
   #   results = index.search "dark stormy", order: "published, avg_review desc"
   #   documents = index.search query # API call
   #
-  # You can add computed fields with the +expressions+ option, and limit the
-  # fields that are returned with the +fields+ option:
+  # You can add computed fields with the +expressions+ option, and specify the
+  # fields that are returned with the +fields+ option. No document data will be
+  # returned if you omit the +fields+ option, only `doc_id` references to any
+  # matched documents.
   #
   #   require "gcloud"
   #
