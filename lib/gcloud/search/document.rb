@@ -88,7 +88,7 @@ module Gcloud
       # not specified or set to 0), it is set at the time the document is
       # created to the number of seconds since January 1, 2011. The rank can be
       # used in Index#search options +expressions+, +order+, and
-      # +fields+, where it is referenced as +_rank+.
+      # +fields+, where it is referenced as +rank+.
       def rank= new_rank
         @raw["rank"] = new_rank
       end
