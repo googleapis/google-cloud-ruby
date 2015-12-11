@@ -433,14 +433,14 @@ describe Gcloud::Search::Index, :mock_search do
     results.size.must_equal 3
   end
 
-  it "searches with return_fields set" do
-    return_fields = ["sku", "description"]
+  it "searches with fields set" do
+    fields = ["sku", "description"]
     mock_connection.get "/v1/projects/#{project}/indexes/#{index.index_id}/search" do |env|
-      env.params["returnFields"].must_equal return_fields
+      env.params["returnFields"].must_equal fields
       [200, {"Content-Type"=>"application/json"}, search_results_json(3)]
     end
 
-    results = index.search query, return_fields: return_fields
+    results = index.search query, fields: fields
     results.size.must_equal 3
   end
 

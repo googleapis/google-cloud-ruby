@@ -200,7 +200,7 @@ module Gcloud
       #   documents. By default (when it is not specified or set to 0), it is
       #   set at the time the document is saved to the number of seconds since
       #   January 1, 2011. The rank can be used in the +expressions+, +order+,
-      #   and +return_fields+ options in #search, where it should referenced as
+      #   and +fields+ options in #search, where it should referenced as
       #   +_rank+. (+Integer+)
       #
       # === Returns
@@ -444,18 +444,17 @@ module Gcloud
       # +options+::
       #   An optional Hash for controlling additional behavior. (+Hash+)
       # <code>options[:expressions]</code>::
-      #   Customized expressions used in +order+ or +return_fields+. The
-      #   expression can contain fields in Document, the built-in fields (
-      #   +_rank+, the document +rank+, and +_score+ if scoring is enabled) and
-      #   fields defined in +expressions+. Each field expression is represented
-      #   in a json object with +name+ and +expression+ fields. The expression
-      #   value can be a combination of supported functions encoded in the
-      #   string. Expressions involving number fields can use the arithmetical
-      #   operators (+, -, *, /) and the built-in numeric functions (+max+,
-      #   +min+, +pow+, +count+, +log+, +abs+). Expressions involving geopoint
-      #   fields can use the geopoint and distance functions. Expressions for
-      #   text and html fields can use the +snippet+ function.
-      #   (+String+)
+      #   Customized expressions used in +order+ or +fields+. The expression can
+      #   contain fields in Document, the built-in fields ( +_rank+, the
+      #   document +rank+, and +_score+ if scoring is enabled) and fields
+      #   defined in +expressions+. Each field expression is represented in a
+      #   json object with +name+ and +expression+ fields. The expression value
+      #   can be a combination of supported functions encoded in the string.
+      #   Expressions involving number fields can use the arithmetical operators
+      #   (+, -, *, /) and the built-in numeric functions (+max+, +min+, +pow+,
+      #   +count+, +log+, +abs+). Expressions involving geopoint fields can use
+      #   the geopoint and distance functions. Expressions for text and html
+      #   fields can use the +snippet+ function. (+String+)
       # <code>options[:matched_count_accuracy]</code>::
       #   Minimum accuracy requirement for Result::List#matched_count. If
       #   specified, +matched_count+ will be accurate to at least that number.
@@ -479,11 +478,11 @@ module Gcloud
       #   is 0. If not specified, the search results are automatically sorted by
       #   descending +_rank+. Sorting by ascending +_rank+ is not allowed.
       #   (+String+)
-      # <code>options[:return_fields]</code>::
+      # <code>options[:fields]</code>::
       #   The fields to return in the Search::Result objects. These can be
       #   fields from Document, the built-in fields +_rank+ and +_score+, and
       #   fields defined in expressions. The default is to return all fields.
-      #   (+String+)
+      #   (+String+ or +Array+ of +String+)
       # <code>options[:scorer]</code>::
       #   The scoring function to invoke on a search result for this query. If
       #   scorer is not set, scoring is disabled and +_score+ is 0 for all
@@ -563,7 +562,7 @@ module Gcloud
       #   expressions = [{ name: "total_price", expression: "(price + tax)" }]
       #   results = index.search "cotton T-shirt",
       #                          expressions: expressions,
-      #                          fields: [name, total_price, highlight]
+      #                          fields: ["name", "total_price", "highlight"]
       #
       # Just as in documents, Result data is accessible via Fields methods:
       #

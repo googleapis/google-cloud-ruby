@@ -258,7 +258,7 @@ module Gcloud
   #   expressions = [{ name: "total_price", expression: "(price + tax)" }]
   #   results = index.search "cotton T-shirt",
   #                          expressions: expressions,
-  #                          fields: [name, total_price, highlight]
+  #                          fields: ["name", "total_price", "highlight"]
   #
   # Just as in documents, Result data is accessible via Fields methods:
   #
