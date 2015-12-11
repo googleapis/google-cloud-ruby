@@ -78,6 +78,8 @@ namespace :test do
     ENV["BIGQUERY_KEYFILE"] = keyfile
     ENV["DNS_PROJECT"] = project
     ENV["DNS_KEYFILE"] = keyfile
+    ENV["SEARCH_PROJECT"] = project
+    ENV["SEARCH_KEYFILE"] = keyfile
 
     require "simplecov"
     SimpleCov.start("test_frameworks") { command_name "Minitest" }
@@ -107,6 +109,8 @@ namespace :test do
     ENV["BIGQUERY_KEYFILE"] = keyfile
     ENV["DNS_PROJECT"] = project
     ENV["DNS_KEYFILE"] = keyfile
+    ENV["SEARCH_PROJECT"] = project
+    ENV["SEARCH_KEYFILE"] = keyfile
 
     require "simplecov"
     require "coveralls"
@@ -137,6 +141,8 @@ namespace :test do
     ENV["BIGQUERY_KEYFILE"] = keyfile
     ENV["DNS_PROJECT"] = project
     ENV["DNS_KEYFILE"] = keyfile
+    ENV["SEARCH_PROJECT"] = project
+    ENV["SEARCH_KEYFILE"] = keyfile
 
     $LOAD_PATH.unshift "lib", "test", "acceptance"
     Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative "../#{file}"}
@@ -206,7 +212,7 @@ namespace :test do
       keyfile = args[:keyfile]
       keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["PUBSUB_TEST_KEYFILE"]
       if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:acceptance:pubsub[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:storage"
+        fail "You must provide a project and keyfile. e.g. rake test:acceptance:pubsub[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:pubsub"
       end
       # always overwrite when running tests
       ENV["PUBSUB_PROJECT"] = project
@@ -245,7 +251,7 @@ namespace :test do
       keyfile = args[:keyfile]
       keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["BIGQUERY_TEST_KEYFILE"]
       if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:acceptance:bigquery[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:storage"
+        fail "You must provide a project and keyfile. e.g. rake test:acceptance:bigquery[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:bigquery"
       end
       # always overwrite when running tests
       ENV["BIGQUERY_PROJECT"] = project
@@ -290,7 +296,7 @@ namespace :test do
       keyfile = args[:keyfile]
       keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DNS_TEST_KEYFILE"]
       if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:acceptance:dns[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:storage"
+        fail "You must provide a project and keyfile. e.g. rake test:acceptance:dns[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:dns"
       end
       # always overwrite when running tests
       ENV["DNS_PROJECT"] = project
@@ -331,15 +337,15 @@ namespace :test do
     desc "Runs the search acceptance tests."
     task :search, :project, :keyfile do |t, args|
       project = args[:project]
-      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["SEARCH_TEST_PROJECT"] || "helical-zone-771"
-      # keyfile = args[:keyfile]
-      # keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["SEARCH_TEST_KEYFILE"]
-      # if project.nil? || keyfile.nil?
-      #   fail "You must provide a project and keyfile. e.g. rake test:acceptance:search:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:search:cleanup"
-      # end
+      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["SEARCH_TEST_PROJECT"]
+      keyfile = args[:keyfile]
+      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["SEARCH_TEST_KEYFILE"]
+      if project.nil? || keyfile.nil?
+        fail "You must provide a project and keyfile. e.g. rake test:acceptance:search[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:search"
+      end
       # always overwrite when running tests
       ENV["SEARCH_PROJECT"] = project
-      # ENV["SEARCH_KEYFILE"] = keyfile
+      ENV["SEARCH_KEYFILE"] = keyfile
 
       $LOAD_PATH.unshift "lib", "test", "acceptance"
       Dir.glob("acceptance/search/**/*_test.rb").each { |file| require_relative "../#{file}"}
@@ -349,15 +355,15 @@ namespace :test do
       desc "Removes *ALL* SEARCH zones and records. Use with caution."
       task :cleanup do |t, args|
         project = args[:project]
-        project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["SEARCH_TEST_PROJECT"] || "helical-zone-771"
-        # keyfile = args[:keyfile]
-        # keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["SEARCH_TEST_KEYFILE"]
-        # if project.nil? || keyfile.nil?
-        #   fail "You must provide a project and keyfile. e.g. rake test:acceptance:search:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:search:cleanup"
-        # end
+        project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["SEARCH_TEST_PROJECT"]
+        keyfile = args[:keyfile]
+        keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["SEARCH_TEST_KEYFILE"]
+        if project.nil? || keyfile.nil?
+          fail "You must provide a project and keyfile. e.g. rake test:acceptance:search:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:search:cleanup"
+        end
         # always overwrite when running tests
         ENV["SEARCH_PROJECT"] = project
-        # ENV["SEARCH_KEYFILE"] = keyfile
+        ENV["SEARCH_KEYFILE"] = keyfile
 
         $LOAD_PATH.unshift "lib"
         require "gcloud/search"
