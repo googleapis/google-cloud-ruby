@@ -247,7 +247,8 @@ module Gcloud
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
       # +max+::
-      #   Maximum number of documents to return. (+Integer+)
+      #   Maximum number of documents to return. The default is +100+.
+      #   (+Integer+)
       #
       # === Returns
       #
@@ -397,7 +398,7 @@ module Gcloud
       #   index = search.index "books"
       #   index.delete force: true
       #
-      def delete force: nil
+      def delete force: false
         ensure_connection!
         docs_to_be_removed = documents view: "ID_ONLY"
         return if docs_to_be_removed.empty?
@@ -453,10 +454,10 @@ module Gcloud
       # +matched_count_accuracy+::
       #   Minimum accuracy requirement for Result::List#matched_count. If
       #   specified, +matched_count+ will be accurate to at least that number.
-      #   For example, when set to 100, any +matched_count <= 100+ is accurate.
-      #   This option may add considerable latency/expense. By default (when it
-      #   is not specified or set to 0), the accuracy is the same as +max+.
-      #   (+Integer+)
+      #   For example, when set to 100, any <code>matched_count <= 100</code> is
+      #   accurate. This option may add considerable latency/expense. By default
+      #   (when it is not specified or set to 0), the accuracy is the same as
+      #   +max+. (+Integer+)
       # +offset+::
       #   Used to advance pagination to an arbitrary result, independent of the
       #   previous results. Offsets are an inefficient alternative to using
