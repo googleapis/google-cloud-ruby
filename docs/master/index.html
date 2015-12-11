@@ -273,6 +273,29 @@ using this library.</p>
 <span class="ruby-identifier">projects</span> = <span class="ruby-identifier">resource_manager</span>.<span class="ruby-identifier">projects</span> <span class="ruby-identifier">filter</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;labels.env:production&quot;</span>
 </pre>
 
+<h1 id="label-Search">Search<span><a href="#label-Search">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="https://cloud.google.com/search/">Google Cloud Search</a> (<a
+href="https://cloud.google.com/search/reference/rest/index">docs</a>)
+allows an application to quickly perform full-text and geo-spatial searches
+without having to spin up instances and without the hassle of managing and
+maintaining a search service.</p>
+
+<p>See the <a href="Gcloud/Search.html">gcloud-ruby Search API
+documentation</a> to learn how to connect to Cloud Search using this
+library.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;gcloud&quot;</span>
+
+<span class="ruby-identifier">gcloud</span> = <span class="ruby-constant">Gcloud</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">search</span> = <span class="ruby-identifier">gcloud</span>.<span class="ruby-identifier">search</span>
+<span class="ruby-identifier">index</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">index</span> <span class="ruby-string">&quot;products&quot;</span>
+
+<span class="ruby-identifier">results</span> = <span class="ruby-identifier">index</span>.<span class="ruby-identifier">search</span> <span class="ruby-string">&quot;cotton T-shirt&quot;</span>,
+                       <span class="ruby-identifier">expressions</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">total_price</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;(price + tax)&quot;</span> },
+                       <span class="ruby-identifier">fields</span><span class="ruby-operator">:</span> [<span class="ruby-string">&quot;name&quot;</span>, <span class="ruby-string">&quot;total_price&quot;</span>, <span class="ruby-string">&quot;highlight&quot;</span>]
+</pre>
+
 <h1 id="label-Storage">Storage<span><a href="#label-Storage">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p><a href="https://cloud.google.com/storage/">Google Cloud Storage</a> (<a
