@@ -38,4 +38,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency      "httpclient", "~> 2.5"
   gem.add_development_dependency      "simplecov", "~> 0.9"
   gem.add_development_dependency      "coveralls", "~> 0.7"
+  gem.add_development_dependency      "yard", "~> 0.8"
 end
