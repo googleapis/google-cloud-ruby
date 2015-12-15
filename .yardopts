@@ -1,0 +1,12 @@
+--no-private
+--output-dir html
+--markup-provider=redcarpet
+--markup=markdown
+--title=Gcloud YARD
+--template gcloud
+--template-path ./templates/
+
+./lib/**/*.rb
+-
+OVERVIEW.md
+LICENSE
