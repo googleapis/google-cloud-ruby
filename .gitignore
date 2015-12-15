@@ -4,6 +4,9 @@ coverage
 doc
 pkg
 
+# Ignore YARD cache
+.yardoc
+
 # Ignore vagrant directory
 .vagrant
 
