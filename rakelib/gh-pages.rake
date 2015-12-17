@@ -18,6 +18,8 @@ require "rdoc/task"
 require "fileutils"
 require "pathname"
 require "yaml"
+require "yard"
+require "yard/rake/yardoc_task"
 
 namespace :pages do
   desc "Updates the documentation on the gh-pages branch"
@@ -46,7 +48,7 @@ namespace :pages do
     FileUtils.mkdir_p docs
     FileUtils.mkdir_p pages
 
-    Rake::Task["pages:rdoc"].invoke
+    Rake::Task["pages:yard"].invoke
 
     puts `cp -R html/* #{docs}`
     # checkout the gh-pages branch
@@ -93,6 +95,11 @@ namespace :pages do
     FileUtils.mkdir_p repo
     FileUtils.mkdir_p pages
 
+    # Decide if we are using YARD or RDoc...
+    tag_version = Gem::Version.new tag.sub(/\Av/, "")
+    cutoff_version = Gem::Version.new "0.7.0"
+    use_rdoc = tag_version < cutoff_version
+
     git_repo = "git@github.com:GoogleCloudPlatform/gcloud-ruby.git"
     if ENV["GH_OAUTH_TOKEN"]
       git_repo = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
@@ -105,7 +112,11 @@ namespace :pages do
       Bundler.with_clean_env do
         # create the docs
         puts `bundle install --path .bundle`
-        puts `bundle exec rake pages:rdoc`
+        if use_rdoc
+          puts `bundle exec rake pages:rdoc`
+        else
+          puts `bundle exec rake pages:yard`
+        end
       end
     end
 
@@ -153,29 +164,6 @@ namespace :pages do
     Rake::Task["pages:master"].invoke
   end
 
-  RDoc::Task.new do |rdoc|
-    begin
-      require "gcloud-rdoc"
-    rescue LoadError
-      puts "Cannot load gcloud-rdoc"
-    end
-
-    require "rubygems"
-    spec = Gem::Specification::load("gcloud.gemspec")
-
-    main = "README.md"
-    if main_index = spec.rdoc_options.index("--main")
-      main = spec.rdoc_options[main_index + 1]
-    end
-
-    rdoc.generator = "gcloud"
-    rdoc.title = "gcloud #{spec.version} Documentation"
-    rdoc.main = main
-    rdoc.rdoc_files.include spec.extra_rdoc_files,
-                            "lib/"
-    rdoc.options = spec.rdoc_options
-  end
-
   desc "Updates the documentation for a feature branch"
   task :feature, :push do |t, args|
     push = args[:push]
@@ -202,7 +190,9 @@ namespace :pages do
     FileUtils.remove_dir docs if Dir.exists? docs
     FileUtils.mkdir_p docs
 
-    Rake::Task["pages:rerdoc"].invoke
+    puts `rm -rf html`
+
+    Rake::Task["pages:yard"].invoke
 
     puts `cp -R html/* #{docs}`
 
@@ -218,5 +208,43 @@ namespace :pages do
     puts `git commit -m "Update documentation for #{branch}"`
     puts `git push #{push} gh-pages -f` if push
     puts `git checkout #{branch}`
+  end
+
+  RDoc::Task.new do |rdoc|
+    begin
+      require "gcloud-rdoc"
+    rescue LoadError
+      puts "Cannot load gcloud-rdoc"
+    end
+
+    require "rubygems"
+    spec = Gem::Specification::load("gcloud.gemspec")
+
+    main = "README.md"
+    if main_index = spec.rdoc_options.index("--main")
+      main = spec.rdoc_options[main_index + 1]
+    end
+
+    rdoc.generator = "gcloud"
+    rdoc.title = "gcloud #{spec.version} Documentation"
+    rdoc.main = main
+    rdoc.rdoc_files.include spec.extra_rdoc_files, "lib/"
+    rdoc.options = spec.rdoc_options
+  end
+
+  YARD::Rake::YardocTask.new do |t|
+    begin
+      require "yard-gcloud"
+    rescue LoadError
+      puts "Cannot load yard-gcloud"
+    end
+
+    if defined? YARD::Gcloud
+      t.options << "--template" << "gcloud"
+      t.options << "--markup" << "markdown"
+      t.options << "--markup-provider" << "kramdown"
+      t.options << "--readme" << "OVERVIEW.md"
+      t.options << "--output-dir" << "html"
+    end
   end
 end
