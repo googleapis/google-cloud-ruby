@@ -25,7 +25,7 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Index::List with an array of Index instances.
+        # Create a new Index::List with an array of {Index} instances.
         def initialize arr = []
           super arr
         end
@@ -50,7 +50,7 @@ module Gcloud
         end
 
         ##
-        # Retrieves all indexes by repeatedly loading pages until #next?
+        # Retrieves all indexes by repeatedly loading pages until {#next?}
         # returns false. Returns the list instance for method chaining.
         def all
           while next?
@@ -62,8 +62,8 @@ module Gcloud
         end
 
         ##
-        # New Indexs::List from a response object.
-        def self.from_response resp, conn #:nodoc:
+        # @private New Index::List from a response object.
+        def self.from_response resp, conn
           data = JSON.parse resp.body
           indexes = new(Array(data["indexes"]).map do |raw_index|
             Index.from_raw raw_index, conn

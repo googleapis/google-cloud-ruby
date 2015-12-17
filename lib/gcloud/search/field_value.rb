@@ -19,7 +19,7 @@ module Gcloud
     # = FieldValue
     #
     # FieldValue is used to represent a value that belongs to a field. (See
-    # Fields and FieldValues)
+    # {Fields} and {FieldValues})
     #
     # A field value must have a type. A value that is a Numeric will default to
     # `:number`, while a DateTime will default to `:datetime`. If a type is not
@@ -29,6 +29,7 @@ module Gcloud
     # an {ISO 639-1
     # code}[https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes].
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -41,8 +42,8 @@ module Gcloud
     #     puts "* #{value} (#{value.type}) [#{value.lang}]"
     #   end
     #
-    # For more information see {Documents and
-    # fields}[https://cloud.google.com/search/documents_indexes].
+    # @see https://cloud.google.com/search/documents_indexes Documents and
+    #   fields
     #
     class FieldValue < DelegateClass(::Object)
       attr_reader :type, :lang, :name
@@ -51,16 +52,12 @@ module Gcloud
       # Disabled because there are links in the docs that are long.
 
       ##
-      # Create a new FieldValue object.
+      # @private Create a new FieldValue object.
       #
-      # === Parameters
-      #
-      # +value+::
-      #   The value to add to the field. (+String+ or +Datetime+ or +Float+)
-      # +type+::
-      #   The type of the field value. A field can have multiple values with
+      # @param [String, Datetime, Float] value The value to add to the field.
+      # @param [Symbol] type The type of the field value. A field can have multiple values with
       #   same or different types; however, it cannot have multiple Timestamp or
-      #   number values. (+Symbol+)
+      #   number values.
       #
       #   The following values are supported:
       #   * +:text+ - The value is a string with maximum length 1024**2
@@ -76,15 +73,11 @@ module Gcloud
       #   * +:number+ - The value is a +Numeric+ between -2,147,483,647 and
       #     2,147,483,647. The value will be stored as a double precision
       #     floating point value in Cloud Search.
-      # +lang+::
-      #   The language of a string value. Must be a valid {ISO 639-1
+      # @param [String] lang The language of a string value. Must be a valid {ISO 639-1
       #   code}[https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes].
-      #   (+String+)
-      # +name+::
-      #   The name of the field. New values will be configured with this name.
-      #   (+String+)
+      # @param [String] name The name of the field. New values will be configured with this name.
       #
-      def initialize value, type: nil, lang: nil, name: nil #:nodoc:
+      def initialize value, type: nil, lang: nil, name: nil
         super value
         if type
           @type = type.to_s.downcase.to_sym
@@ -105,14 +98,14 @@ module Gcloud
       end
 
       ##
-      # Get the original value object.
-      def value #:nodoc:
+      # @private Get the original value object.
+      def value
         __getobj__
       end
 
       ##
-      # Create a new FieldValue instance from a value Hash.
-      def self.from_raw field_value, name = nil #:nodoc:
+      # @private Create a new FieldValue instance from a value Hash.
+      def self.from_raw field_value, name = nil
         value = field_value["stringValue"]
         type = field_value["stringFormat"]
         if field_value["timestampValue"]
@@ -130,8 +123,8 @@ module Gcloud
       end
 
       ##
-      # Create a raw Hash object containing the field value.
-      def to_raw #:nodoc:
+      # @private Create a raw Hash object containing the field value.
+      def to_raw
         case type
         when :atom, :default, :html, :text
           {
@@ -150,7 +143,7 @@ module Gcloud
 
       protected
 
-      def infer_type #:nodoc:
+      def infer_type
         if respond_to? :rfc3339
           :datetime
         elsif value.is_a? Numeric # must call on original object...
