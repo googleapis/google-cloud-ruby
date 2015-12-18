@@ -52,8 +52,8 @@ module Gcloud
         end
 
         ##
-        # New Zones::List from a response object.
-        def self.from_response resp, conn #:nodoc:
+        # @private New Zones::List from a response object.
+        def self.from_response resp, conn
           zones = new(Array(resp.data["managedZones"]).map do |gapi_object|
             Zone.from_gapi gapi_object, conn
           end)

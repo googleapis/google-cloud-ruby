@@ -26,6 +26,7 @@ module Gcloud
     # transaction, and take effect at the same time in each authoritative DNS
     # server.
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -38,16 +39,16 @@ module Gcloud
     #
     class Change
       ##
-      # The Zone object this Change belongs to.
-      attr_accessor :zone #:nodoc:
+      # @private The Zone object this Change belongs to.
+      attr_accessor :zone
 
       ##
-      # The Google API Client object.
-      attr_accessor :gapi #:nodoc:
+      # @private The Google API Client object.
+      attr_accessor :gapi
 
       ##
-      # Create an empty Change object.
-      def initialize #:nodoc:
+      # @private Create an empty Change object.
+      def initialize
         @zone = nil
         @gapi = {}
       end
@@ -120,8 +121,7 @@ module Gcloud
       # Refreshes the change until the status is +done+.
       # The delay between refreshes will incrementally increase.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -143,8 +143,8 @@ module Gcloud
       end
 
       ##
-      # New Change from a Google API Client object.
-      def self.from_gapi gapi, zone #:nodoc:
+      # @private New Change from a Google API Client object.
+      def self.from_gapi gapi, zone
         new.tap do |f|
           f.gapi = gapi
           f.zone = zone
