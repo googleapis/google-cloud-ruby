@@ -1,4 +1,15 @@
 Gemfile.lock
+keyfile.json
+coverage
+doc
+pkg
+
+# Ignore YARD cache
+.yardoc
+
+# Ignore vagrant directory
+.vagrant
+
+# directories left by gh-pages
 _site
 html
-pkg
