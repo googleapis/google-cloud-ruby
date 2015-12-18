@@ -88,7 +88,6 @@ module Gcloud
       # +:datetime+ or +:number+, then the added value will replace any existing
       # values of the same type (since there can be only one).
       #
-      # @param [String] name The name of the field.
       # @param [String, Datetime, Float] value The value to add to the field.
       # @param [Symbol] type The type of the field value. An attempt is made to
       #   set the correct type when this option is missing, although it must be

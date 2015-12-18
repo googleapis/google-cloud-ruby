@@ -27,6 +27,7 @@ module Gcloud
     # for ACLs, APIs, AppEngine Apps, VMs, and other Google Cloud Platform
     # resources.
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -39,16 +40,16 @@ module Gcloud
     #
     class Project
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
       ##
-      # The Google API Client object.
-      attr_accessor :gapi #:nodoc:
+      # @private The Google API Client object.
+      attr_accessor :gapi
 
       ##
-      # Create an empty Project object.
-      def initialize #:nodoc:
+      # @private Create an empty Project object.
+      def initialize
         @connection = nil
         @gapi = {}
       end
@@ -83,8 +84,7 @@ module Gcloud
       # Allowed characters are: lowercase and uppercase letters, numbers,
       # hyphen, single-quote, double-quote, space, and exclamation point.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -115,10 +115,7 @@ module Gcloud
       # No more than 256 labels can be associated with a given resource.
       # (+Hash+)
       #
-      # === Examples
-      #
-      # Labels are read-only and cannot be changed by direct assignment.
-      #
+      # @example Labels are read-only and cannot be changed:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -127,9 +124,7 @@ module Gcloud
       #   project.labels["env"] #=> "dev" # read only
       #   project.labels["env"] = "production" # raises error
       #
-      # Labels can be updated by passing a block, or by calling the #labels=
-      # method.
-      #
+      # @example Labels can be updated by passing a block, or with {#labels=}:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -163,8 +158,7 @@ module Gcloud
       # No more than 256 labels can be associated with a given resource.
       # (+Hash+)
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -238,10 +232,9 @@ module Gcloud
       end
 
       ##
-      # Updates the project in a single API call. See Project::Updater
+      # Updates the project in a single API call. See {Project::Updater}
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -267,8 +260,7 @@ module Gcloud
       # Reloads the project (with updated state) from the Google Cloud Resource
       # Manager service.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -306,8 +298,7 @@ module Gcloud
       #
       # The caller must have modify permissions for this project.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -336,8 +327,7 @@ module Gcloud
       #
       # The caller must have modify permissions for this project.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -360,20 +350,7 @@ module Gcloud
 
       ##
       # Gets the {Cloud IAM}[https://cloud.google.com/iam/] access control
-      # policy. See {Managing
-      # Policies}[https://cloud.google.com/iam/docs/managing-policies]
-      # for more information.
-      #
-      # === Parameters
-      #
-      # +force+::
-      #   Force load the latest policy when +true+. Otherwise the policy will be
-      #   memoized to reduce the number of API calls made. The default is
-      #   +false+. (+Boolean+)
-      #
-      # === Returns
-      #
-      # A hash that conforms to the following structure:
+      # policy. Returns a hash that conforms to the following structure:
       #
       #   {
       #     "bindings" => [{
@@ -384,11 +361,16 @@ module Gcloud
       #     "etag" => "CAE="
       #   }
       #
-      # === Examples
+      # @see https://cloud.google.com/iam/docs/managing-policies Managing
+      #   Policies
       #
-      # By default the policy values are memoized to reduce the number of API
-      # calls made.
+      # @param [Boolean] force Force load the latest policy when +true+.
+      #   Otherwise the policy will be memoized to reduce the number of API
+      #   calls made. The default is +false+.
       #
+      # @return [Hash] See description
+      #
+      # @example Policy values are memoized by default:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -400,8 +382,7 @@ module Gcloud
       #   puts policy["version"]
       #   puts policy["etag"]
       #
-      # Use the +force+ option to retrieve the latest policy from the service.
-      #
+      # @example Use the +force+ option to retrieve the latest policy:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -409,7 +390,7 @@ module Gcloud
       #   project = resource_manager.project "tokyo-rain-123"
       #   policy = project.policy force: true
       #
-      def policy force: nil
+      def policy force: false
         @policy = nil if force
         @policy ||= begin
           ensure_connection!
@@ -423,14 +404,13 @@ module Gcloud
 
       ##
       # Sets the {Cloud IAM}[https://cloud.google.com/iam/] access control
-      # policy. See {Managing
-      # Policies}[https://cloud.google.com/iam/docs/managing-policies]
-      # for more information.
+      # policy.
       #
-      # === Parameters
+      # @see https://cloud.google.com/iam/docs/managing-policies Managing
+      #   Policies
       #
-      # +new_policy+::
-      #   A hash that conforms to the following structure:
+      # @param [String] new_policy A hash that conforms to the following
+      #   structure:
       #
       #     {
       #       "bindings" => [{
@@ -439,8 +419,7 @@ module Gcloud
       #       }]
       #     }
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -468,23 +447,18 @@ module Gcloud
 
       ##
       # Tests the specified permissions against the {Cloud
-      # IAM}[https://cloud.google.com/iam/] access control policy. See
-      # {Managing Policies}[https://cloud.google.com/iam/docs/managing-policies]
-      # for more information.
+      # IAM}[https://cloud.google.com/iam/] access control policy.
       #
-      # === Parameters
+      # @see https://cloud.google.com/iam/docs/managing-policies Managing
+      #   Policies
       #
-      # +permissions+::
-      #   The set of permissions to check access for. Permissions with wildcards
-      #   (such as +*+ or +storage.*+) are not allowed.
-      #   (String or Array of Strings)
+      # @param [String, Array<String>] permissions The set of permissions to
+      #   check access for. Permissions with wildcards (such as +*+ or
+      #   +storage.*+) are not allowed.
       #
-      # === Returns
+      # @return [Array<String>] The permissions that have access
       #
-      # The permissions that have access. (Array of Strings)
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -507,8 +481,8 @@ module Gcloud
       end
 
       ##
-      # New Change from a Google API Client object.
-      def self.from_gapi gapi, connection #:nodoc:
+      # @private New Change from a Google API Client object.
+      def self.from_gapi gapi, connection
         new.tap do |p|
           p.gapi = gapi
           p.connection = connection
