@@ -19,17 +19,16 @@ require "google/api_client"
 module Gcloud
   module Dns
     ##
-    # Represents the connection to DNS,
-    # as well as expose the API calls.
-    class Connection #:nodoc:
+    # @private Represents the connection to DNS, as well as expose the API calls
+    class Connection
       API_VERSION = "v1"
 
       attr_accessor :project
-      attr_accessor :credentials #:nodoc:
+      attr_accessor :credentials
 
       ##
       # Creates a new Connection instance.
-      def initialize project, credentials #:nodoc:
+      def initialize project, credentials
         @project = project
         @credentials = credentials
         @client = Google::APIClient.new application_name:    "gcloud-ruby",
@@ -136,7 +135,7 @@ module Gcloud
 
       ##
       # Fully Qualified Domain Name
-      def self.fqdn name, origin_dns #:nodoc:
+      def self.fqdn name, origin_dns
         name = name.to_s.strip
         return name if self.ip_addr? name
         name = origin_dns if name.empty?
@@ -148,16 +147,16 @@ module Gcloud
 
       require "ipaddr"
       # Fix to make ip_addr? work on ruby 1.9
-      IPAddr::Error = ArgumentError unless defined? IPAddr::Error #:nodoc:
+      IPAddr::Error = ArgumentError unless defined? IPAddr::Error
 
-      def self.ip_addr? name #:nodoc:
+      def self.ip_addr? name
         IPAddr.new name
         true
       rescue IPAddr::Error
         false
       end
 
-      def inspect #:nodoc:
+      def inspect
         "#{self.class}(#{@project})"
       end
     end

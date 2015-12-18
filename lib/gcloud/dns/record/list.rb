@@ -47,11 +47,10 @@ module Gcloud
         end
 
         ##
-        # Retrieves all records by repeatedly loading pages until #next? returns
-        # false. Returns the list instance for method chaining.
+        # Retrieves all records by repeatedly loading pages until {#next?}
+        # returns false. Returns the list instance for method chaining.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -69,8 +68,8 @@ module Gcloud
         end
 
         ##
-        # New Records::List from a response object.
-        def self.from_response resp, zone #:nodoc:
+        # @private New Records::List from a response object.
+        def self.from_response resp, zone
           records = new(Array(resp.data["rrsets"]).map do |gapi_object|
             Record.from_gapi gapi_object
           end)
