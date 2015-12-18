@@ -37,8 +37,8 @@ module Gcloud
       #
       class Updater < DelegateClass(Project)
         ##
-        # Create an Updater object.
-        def initialize project #:nodoc:
+        # @private Create an Updater object.
+        def initialize project
           super project
         end
 
@@ -49,8 +49,7 @@ module Gcloud
         # Allowed characters are: lowercase and uppercase letters, numbers,
         # hyphen, single-quote, double-quote, space, and exclamation point.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -77,8 +76,7 @@ module Gcloud
         # No more than 256 labels can be associated with a given resource.
         # (+Hash+)
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -105,8 +103,7 @@ module Gcloud
         # No more than 256 labels can be associated with a given resource.
         # (+Hash+)
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -121,8 +118,8 @@ module Gcloud
         end
 
         ##
-        # Create an Updater object.
-        def self.from_project project #:nodoc:
+        # @private Create an Updater object.
+        def self.from_project project
           dupe_gapi = project.gapi.dup
           dupe_gapi = dupe_gapi.to_hash if dupe_gapi.respond_to? :to_hash
           if dupe_gapi["labels"].respond_to? :to_hash

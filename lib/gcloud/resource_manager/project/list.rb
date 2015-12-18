@@ -48,8 +48,7 @@ module Gcloud
         # Retrieves all projects by repeatedly loading pages until #next?
         # returns false. Returns the list instance for method chaining.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -66,8 +65,8 @@ module Gcloud
         end
 
         ##
-        # New Projects::List from a response object.
-        def self.from_response resp, manager #:nodoc:
+        # @private New Projects::List from a response object.
+        def self.from_response resp, manager
           projects = new(Array(resp.data["projects"]).map do |gapi_object|
             Project.from_gapi gapi_object, manager.connection
           end)
