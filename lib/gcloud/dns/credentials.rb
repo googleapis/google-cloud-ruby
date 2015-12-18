@@ -18,8 +18,8 @@ require "gcloud/credentials"
 module Gcloud
   module Dns
     ##
-    # Represents the Oauth2 signing logic for DNS.
-    class Credentials < Gcloud::Credentials #:nodoc:
+    # @private Represents the Oauth2 signing logic for DNS.
+    class Credentials < Gcloud::Credentials
       SCOPE = ["https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
       PATH_ENV_VARS = %w(DNS_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
       JSON_ENV_VARS = %w(DNS_KEYFILE_JSON GCLOUD_KEYFILE_JSON

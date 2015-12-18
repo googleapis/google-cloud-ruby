@@ -47,8 +47,8 @@ module Gcloud
         end
 
         ##
-        # New Changes::List from a response object.
-        def self.from_response resp, zone #:nodoc:
+        # @private New Changes::List from a response object.
+        def self.from_response resp, zone
           changes = new(Array(resp.data["changes"]).map do |gapi_object|
             Change.from_gapi gapi_object, zone
           end)
