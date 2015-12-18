@@ -18,8 +18,8 @@ require "gcloud/credentials"
 module Gcloud
   module ResourceManager
     ##
-    # Represents the Oauth2 signing logic for Resource Manager.
-    class Credentials < Gcloud::Credentials #:nodoc:
+    # @private Represents the Oauth2 signing logic for Resource Manager.
+    class Credentials < Gcloud::Credentials
       SCOPE = ["https://www.googleapis.com/auth/cloud-platform"]
       PATH_ENV_VARS = %w(RESOURCE_MANAGER_KEYFILE
                          GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
