@@ -75,7 +75,7 @@
       <section class="content">
 
         <div id="description" class="description">
-          <%= options.object.docstring %>
+          <%= htmlify options.object.docstring %>
         </div>
 
         <% if options.object.meths.any? %>
@@ -84,7 +84,7 @@
               <li>
                 <code><%= (method.scope == :instance) ? "#" : "." %><%= method.name %></code>
                 <% if method.docstring %>
-                  <br><%= method.docstring %>
+                  <br><%= htmlify method.docstring %>
                 <% end %>
               </li>
             <% end %>
