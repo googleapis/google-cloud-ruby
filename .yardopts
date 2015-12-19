@@ -1,7 +1,7 @@
 --no-private
 --output-dir html
---markup-provider=redcarpet
 --markup=markdown
+--markup-provider=kramdown
 --title=Gcloud YARD
 --template gcloud
 --template-path ./templates/
