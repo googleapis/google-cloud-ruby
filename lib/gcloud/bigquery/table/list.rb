@@ -39,8 +39,8 @@ module Gcloud
         end
 
         ##
-        # New Table::List from a response object.
-        def self.from_response resp, conn #:nodoc:
+        # @private New Table::List from a response object.
+        def self.from_response resp, conn
           tables = List.new(Array(resp.data["tables"]).map do |gapi_object|
             Table.from_gapi gapi_object, conn
           end)
