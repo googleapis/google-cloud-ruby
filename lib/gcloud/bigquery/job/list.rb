@@ -39,8 +39,8 @@ module Gcloud
         end
 
         ##
-        # New Job::List from a response object.
-        def self.from_response resp, conn #:nodoc:
+        # @private New Job::List from a response object.
+        def self.from_response resp, conn
           jobs = List.new(Array(resp.data["jobs"]).map do |gapi_object|
             Job.from_gapi gapi_object, conn
           end)

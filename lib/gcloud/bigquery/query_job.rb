@@ -18,14 +18,13 @@ module Gcloud
     ##
     # = QueryJob
     #
-    # A Job subclass representing a query operation that may be performed
-    # on a Table. A QueryJob instance is created when you call
-    # Project#query_job, Dataset#query_job, or View#data.
+    # A {Job} subclass representing a query operation that may be performed
+    # on a {Table}. A QueryJob instance is created when you call
+    # {Project#query_job}, {Dataset#query_job}, or {View#data}.
     #
-    # See {Querying Data}[https://cloud.google.com/bigquery/querying-data]
-    # and the {Jobs API
-    # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs]
-    # for details.
+    # @see https://cloud.google.com/bigquery/querying-data Querying Data
+    # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
+    #   reference
     #
     class QueryJob < Job
       ##
@@ -97,25 +96,17 @@ module Gcloud
       ##
       # Retrieves the query results for the job.
       #
-      # === Parameters
+      # @param [String] token Page token, returned by a previous call,
+      #   identifying the result set.
+      # @param [Integer] max Maximum number of results to return.
+      # @param [Integer] start Zero-based index of the starting row to read.
+      # @param [Integer] timeout How long to wait for the query to complete, in
+      #   milliseconds, before returning. Default is 10,000 milliseconds (10
+      #   seconds).
       #
-      # +token+::
-      #   Page token, returned by a previous call, identifying the result set.
-      #   (+String+)
-      # +max+::
-      #   Maximum number of results to return. (+Integer+)
-      # +start+::
-      #   Zero-based index of the starting row to read. (+Integer+)
-      # +timeout+::
-      #   How long to wait for the query to complete, in milliseconds, before
-      #   returning. Default is 10,000 milliseconds (10 seconds). (+Integer+)
+      # @return [Gcloud::Bigquery::QueryData]
       #
-      # === Returns
-      #
-      # Gcloud::Bigquery::QueryData
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

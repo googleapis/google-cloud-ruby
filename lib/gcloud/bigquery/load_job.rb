@@ -18,14 +18,13 @@ module Gcloud
     ##
     # = LoadJob
     #
-    # A Job subclass representing a load operation that may be performed
-    # on a Table. A LoadJob instance is created when you call Table#load.
+    # A {Job} subclass representing a load operation that may be performed
+    # on a {Table}. A LoadJob instance is created when you call {Table#load}.
     #
-    # See {Loading Data Into
-    # BigQuery}[https://cloud.google.com/bigquery/loading-data-into-bigquery]
-    # and the {Jobs API
-    # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs]
-    # for details.
+    # @see https://cloud.google.com/bigquery/loading-data-into-bigquery Loading
+    #   Data Into BigQuery
+    # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
+    #   reference
     #
     class LoadJob < Job
       ##
@@ -37,7 +36,7 @@ module Gcloud
 
       ##
       # The table into which the operation loads data. This is the table on
-      # which Table#load was invoked. Returns a Table instance.
+      # which {Table#load} was invoked. Returns a {Table} instance.
       def destination
         table = config["load"]["destinationTable"]
         return nil unless table
@@ -84,7 +83,7 @@ module Gcloud
       # The value that is used to quote data sections in a CSV file.
       # The default value is a double-quote (+"+). If your data does not contain
       # quoted sections, the value should be an empty string. If your data
-      # contains quoted newline characters, #quoted_newlines? should return
+      # contains quoted newline characters, {#quoted_newlines?} should return
       # +true+.
       def quote
         val = config["load"]["quote"]
@@ -161,8 +160,8 @@ module Gcloud
 
       ##
       # The schema for the data. Returns a hash. Can be empty if the table
-      # has already has the correct schema (see Table#schema= and Table#schema),
-      # or if the schema can be inferred from the loaded data.
+      # has already has the correct schema (see {Table#schema=} and
+      # {Table#schema}), or if the schema can be inferred from the loaded data.
       def schema
         val = config["load"]["schema"]
         val = {} if val.nil?
