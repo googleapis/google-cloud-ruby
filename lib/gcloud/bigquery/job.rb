@@ -22,20 +22,21 @@ module Gcloud
     ##
     # = Job
     #
-    # Represents a generic Job that may be performed on a Table.
+    # Represents a generic Job that may be performed on a {Table}.
     #
-    # See {Managing Jobs, Datasets, and Projects
-    # }[https://cloud.google.com/bigquery/docs/managing_jobs_datasets_projects]
-    # for an overview of BigQuery jobs, and the {Jobs API
-    # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs]
-    # for details.
+    # The subclasses of Job represent the specific BigQuery job types:
+    # {CopyJob}, {ExtractJob}, {LoadJob}, and {QueryJob}.
     #
-    # The subclasses of Job represent the specific BigQuery job types: CopyJob,
-    # ExtractJob, LoadJob, and QueryJob.
+    # A job instance is created when you call {Project#query_job},
+    # {Dataset#query_job}, {Table#copy}, {Table#extract}, {Table#load}, or
+    # {View#data}.
     #
-    # A job instance is created when you call Project#query_job,
-    # Dataset#query_job, Table#copy, Table#extract, Table#load, or View#data.
+    # @see https://cloud.google.com/bigquery/docs/managing_jobs_datasets_projects
+    #   Managing Jobs, Datasets, and Projects
+    # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
+    #   reference
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -54,16 +55,16 @@ module Gcloud
     #
     class Job
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
       ##
-      # The Google API Client object.
-      attr_accessor :gapi #:nodoc:
+      # @private The Google API Client object.
+      attr_accessor :gapi
 
       ##
-      # Create an empty Job object.
-      def initialize #:nodoc:
+      # @private Create an empty Job object.
+      def initialize
         @connection = nil
         @gapi = {}
       end
@@ -83,7 +84,7 @@ module Gcloud
       ##
       # The current state of the job. The possible values are +PENDING+,
       # +RUNNING+, and +DONE+. A +DONE+ state does not mean that the job
-      # completed successfully. Use #failed? to discover if an error occurred
+      # completed successfully. Use {#failed?} to discover if an error occurred
       # or if the job was successful.
       def state
         return nil if @gapi["status"].nil?
@@ -107,7 +108,7 @@ module Gcloud
       ##
       # Checks if the job's state is +DONE+. When +true+, the job has stopped
       # running. However, a +DONE+ state does not mean that the job completed
-      # successfully.  Use #failed? to detect if an error occurred or if the
+      # successfully.  Use {#failed?} to detect if an error occurred or if the
       # job was successful.
       def done?
         return false if state.nil?
@@ -148,8 +149,10 @@ module Gcloud
       end
 
       ##
-      # The configuration for the job. Returns a hash. See the {Jobs API
-      # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs].
+      # The configuration for the job. Returns a hash.
+      #
+      # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
+      #   reference
       def configuration
         hash = @gapi["configuration"] || {}
         hash = hash.to_hash if hash.respond_to? :to_hash
@@ -158,8 +161,10 @@ module Gcloud
       alias_method :config, :configuration
 
       ##
-      # The statistics for the job. Returns a hash. See the {Jobs API
-      # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs].
+      # The statistics for the job. Returns a hash.
+      #
+      # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
+      #   reference
       def statistics
         hash = @gapi["statistics"] || {}
         hash = hash.to_hash if hash.respond_to? :to_hash
@@ -169,7 +174,7 @@ module Gcloud
 
       ##
       # The job's status. Returns a hash. The values contained in the hash are
-      # also exposed by #state, #error, and #errors.
+      # also exposed by {#state}, {#error}, and {#errors}.
       def status
         hash = @gapi["status"] || {}
         hash = hash.to_hash if hash.respond_to? :to_hash
@@ -178,12 +183,12 @@ module Gcloud
 
       ##
       # The last error for the job, if any errors have occurred. Returns a
-      # hash. See the {Jobs API
-      # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs].
+      # hash.
       #
-      # === Returns
+      # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
+      #   reference
       #
-      # +Hash+
+      # @return [Hash] Returns a hash containing +reason+ and +message+ keys:
       #
       #   {
       #     "reason"=>"notFound",
@@ -196,7 +201,7 @@ module Gcloud
 
       ##
       # The errors for the job, if any errors have occurred. Returns an array
-      # of hash objects. See #error.
+      # of hash objects. See {#error}.
       def errors
         Array status["errors"]
       end
@@ -230,8 +235,7 @@ module Gcloud
       # Refreshes the job until the job is +DONE+.
       # The delay between refreshes will incrementally increase.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -254,8 +258,8 @@ module Gcloud
       end
 
       ##
-      # New Job from a Google API Client object.
-      def self.from_gapi gapi, conn #:nodoc:
+      # @private New Job from a Google API Client object.
+      def self.from_gapi gapi, conn
         klass = klass_for gapi
         klass.new.tap do |f|
           f.gapi = gapi

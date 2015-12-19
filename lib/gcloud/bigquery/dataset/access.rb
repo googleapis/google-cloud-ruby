@@ -19,9 +19,12 @@ module Gcloud
       ##
       # = Dataset Access Control
       #
-      # Represents the Access rules for a Dataset. See {BigQuery Access
-      # Control}[https://cloud.google.com/bigquery/access-control].
+      # Represents the Access rules for a {Dataset}.
       #
+      # @see https://cloud.google.com/bigquery/access-control BigQuery Access
+      #   Control
+      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -37,10 +40,12 @@ module Gcloud
       #   end
       #
       class Access
+        # @private
         ROLES = { "reader" => "READER",
                   "writer" => "WRITER",
-                  "owner"  => "OWNER" } #:nodoc:
+                  "owner"  => "OWNER" }
 
+        # @private
         SCOPES = { "user"           => "userByEmail",
                    "user_by_email"  => "userByEmail",
                    "userByEmail"    => "userByEmail",
@@ -51,8 +56,9 @@ module Gcloud
                    "special"        => "specialGroup",
                    "special_group"  => "specialGroup",
                    "specialGroup"   => "specialGroup",
-                   "view"           => "view" } #:nodoc:
+                   "view"           => "view" }
 
+        # @private
         GROUPS = { "owners"                  => "projectOwners",
                    "project_owners"          => "projectOwners",
                    "projectOwners"           => "projectOwners",
@@ -66,18 +72,21 @@ module Gcloud
                    "all_authenticated_users" => "allAuthenticatedUsers",
                    "allAuthenticatedUsers"   => "allAuthenticatedUsers" }
 
-        attr_reader :access #:nodoc:
+        # @private
+        attr_reader :access
 
         ##
+        # @private
         # Initialized a new Access object.
         # Must provide a valid Dataset object.
-        def initialize access, context #:nodoc:
+        def initialize access, context
           @original   = access.dup
           @access     = access.dup
           @context    = context
         end
 
-        def changed? #:nodoc:
+        # @private
+        def changed?
           @original != @access
         end
 
@@ -112,7 +121,7 @@ module Gcloud
         # or a string identifier as specified by the
         # {Query
         # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
-        # +project_name:datasetId.tableId+.
+        # @param [String] project_name:datasetId.tableId+.
         def add_reader_view view
           add_access_role_scope_value :reader, :view, view
         end
@@ -148,7 +157,7 @@ module Gcloud
         # or a string identifier as specified by the
         # {Query
         # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
-        # +project_name:datasetId.tableId+.
+        # @param [String] project_name:datasetId.tableId+.
         def add_writer_view view
           add_access_role_scope_value :writer, :view, view
         end
@@ -184,7 +193,7 @@ module Gcloud
         # or a string identifier as specified by the
         # {Query
         # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
-        # +project_name:datasetId.tableId+.
+        # @param [String] project_name:datasetId.tableId+.
         def add_owner_view view
           add_access_role_scope_value :owner, :view, view
         end
@@ -220,7 +229,7 @@ module Gcloud
         # or a string identifier as specified by the
         # {Query
         # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
-        # +project_name:datasetId.tableId+.
+        # @param [String] project_name:datasetId.tableId+.
         def remove_reader_view view
           remove_access_role_scope_value :reader, :view, view
         end
@@ -256,7 +265,7 @@ module Gcloud
         # or a string identifier as specified by the
         # {Query
         # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
-        # +project_name:datasetId.tableId+.
+        # @param [String] project_name:datasetId.tableId+.
         def remove_writer_view view
           remove_access_role_scope_value :writer, :view, view
         end
@@ -292,7 +301,7 @@ module Gcloud
         # or a string identifier as specified by the
         # {Query
         # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
-        # +project_name:datasetId.tableId+.
+        # @param [String] project_name:datasetId.tableId+.
         def remove_owner_view view
           remove_access_role_scope_value :owner, :view, view
         end
@@ -328,7 +337,7 @@ module Gcloud
         # or a string identifier as specified by the
         # {Query
         # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
-        # +project_name:datasetId.tableId+.
+        # @param [String] project_name:datasetId.tableId+.
         def reader_view? view
           lookup_access_role_scope_value :reader, :view, view
         end
@@ -364,7 +373,7 @@ module Gcloud
         # or a string identifier as specified by the
         # {Query
         # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
-        # +project_name:datasetId.tableId+.
+        # @param [String] project_name:datasetId.tableId+.
         def writer_view? view
           lookup_access_role_scope_value :writer, :view, view
         end
@@ -400,14 +409,15 @@ module Gcloud
         # or a string identifier as specified by the
         # {Query
         # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
-        # +project_name:datasetId.tableId+.
+        # @param [String] project_name:datasetId.tableId+.
         def owner_view? view
           lookup_access_role_scope_value :owner, :view, view
         end
 
         protected
 
-        def validate_role role #:nodoc:
+        # @private
+        def validate_role role
           good_role = ROLES[role.to_s]
           if good_role.nil?
             fail ArgumentError "Unable to determine role for #{role}"
@@ -415,7 +425,8 @@ module Gcloud
           good_role
         end
 
-        def validate_scope scope #:nodoc:
+        # @private
+        def validate_scope scope
           good_scope = SCOPES[scope.to_s]
           if good_scope.nil?
             fail ArgumentError "Unable to determine scope for #{scope}"
@@ -423,13 +434,15 @@ module Gcloud
           good_scope
         end
 
-        def validate_special_group value #:nodoc:
+        # @private
+        def validate_special_group value
           good_value = GROUPS[value.to_s]
           return good_value unless good_value.nil?
           scope
         end
 
-        def validate_view view #:nodoc:
+        # @private
+        def validate_view view
           if view.respond_to? :table_ref
             view.table_ref
           else
@@ -437,7 +450,8 @@ module Gcloud
           end
         end
 
-        def add_access_role_scope_value role, scope, value #:nodoc:
+        # @private
+        def add_access_role_scope_value role, scope, value
           role = validate_role role
           scope = validate_scope scope
           # If scope is special group, make sure value is in the list
@@ -450,7 +464,8 @@ module Gcloud
           access << { "role" => role, scope => value }
         end
 
-        def remove_access_role_scope_value role, scope, value #:nodoc:
+        # @private
+        def remove_access_role_scope_value role, scope, value
           role = validate_role role
           scope = validate_scope scope
           # If scope is special group, make sure value is in the list
@@ -461,7 +476,8 @@ module Gcloud
           access.reject! { |h| h["role"] == role && h[scope] == value }
         end
 
-        def lookup_access_role_scope_value role, scope, value #:nodoc:
+        # @private
+        def lookup_access_role_scope_value role, scope, value
           role = validate_role role
           scope = validate_scope scope
           # If scope is special group, make sure value is in the list

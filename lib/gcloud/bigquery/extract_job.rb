@@ -18,14 +18,14 @@ module Gcloud
     ##
     # = ExtractJob
     #
-    # A Job subclass representing an export operation that may be performed
-    # on a Table. A ExtractJob instance is created when you call Table#extract.
+    # A {Job} subclass representing an export operation that may be performed
+    # on a {Table}. A ExtractJob instance is created when you call
+    # {Table#extract}.
     #
-    # See {Exporting Data From
-    # BigQuery}[https://cloud.google.com/bigquery/exporting-data-from-bigquery]
-    # and the {Jobs API
-    # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs]
-    # for details.
+    # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
+    #   Exporting Data From BigQuery
+    # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
+    #   reference
     #
     class ExtractJob < Job
       ##
@@ -37,7 +37,7 @@ module Gcloud
 
       ##
       # The table from which the data is exported. This is the table upon
-      # which Table#extract was called. Returns a Table instance.
+      # which {Table#extract} was called. Returns a {Table} instance.
       def source
         table = config["extract"]["sourceTable"]
         return nil unless table
@@ -99,7 +99,7 @@ module Gcloud
 
       ##
       # The count of files per destination URI or URI pattern specified in
-      # #destinations. Returns an Array of values in the same order as the URI
+      # {#destinations}. Returns an Array of values in the same order as the URI
       # patterns.
       def destinations_file_counts
         Array stats["extract"]["destinationUriFileCounts"]
@@ -107,7 +107,7 @@ module Gcloud
 
       ##
       # The count of files per destination URI or URI pattern specified in
-      # #destinations. Returns a Hash with the URI patterns as keys and the
+      # {#destinations}. Returns a Hash with the URI patterns as keys and the
       # counts as values.
       def destinations_counts
         Hash[destinations.zip destinations_file_counts]

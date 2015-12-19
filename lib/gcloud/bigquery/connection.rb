@@ -21,17 +21,17 @@ require "digest/md5"
 module Gcloud
   module Bigquery
     ##
-    # Represents the connection to Bigquery,
+    # @private Represents the connection to Bigquery,
     # as well as expose the API calls.
-    class Connection #:nodoc:
+    class Connection
       API_VERSION = "v2"
 
       attr_accessor :project
-      attr_accessor :credentials #:nodoc:
+      attr_accessor :credentials
 
       ##
       # Creates a new Connection instance.
-      def initialize project, credentials #:nodoc:
+      def initialize project, credentials
         @project = project
         @credentials = credentials
         @client = Google::APIClient.new application_name:    "gcloud-ruby",
@@ -338,7 +338,7 @@ module Gcloud
         default_table_ref.merge str_table_ref
       end
 
-      def inspect #:nodoc:
+      def inspect
         "#{self.class}(#{@project})"
       end
 
@@ -554,7 +554,7 @@ module Gcloud
         }
       end
 
-      def create_disposition str #:nodoc:
+      def create_disposition str
         { "create_if_needed" => "CREATE_IF_NEEDED",
           "createifneeded" => "CREATE_IF_NEEDED",
           "if_needed" => "CREATE_IF_NEEDED",
@@ -564,7 +564,7 @@ module Gcloud
           "never" => "CREATE_NEVER" }[str.to_s.downcase]
       end
 
-      def write_disposition str #:nodoc:
+      def write_disposition str
         { "write_truncate" => "WRITE_TRUNCATE",
           "writetruncate" => "WRITE_TRUNCATE",
           "truncate" => "WRITE_TRUNCATE",

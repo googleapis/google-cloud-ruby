@@ -20,11 +20,13 @@ module Gcloud
       # = Table Schema
       #
       # A builder for BigQuery table schemas, passed to block arguments to
-      # Dataset#create_table and Table#schema. Supports nested and
-      # repeated fields via a nested block. For more information about BigQuery
-      # schema definitions, see {Preparing Data for BigQuery
-      # }[https://cloud.google.com/bigquery/preparing-data-for-bigquery].
+      # {Dataset#create_table} and {Table#schema}. Supports nested and
+      # repeated fields via a nested block.
       #
+      # @see https://cloud.google.com/bigquery/preparing-data-for-bigquery
+      #   Preparing Data for BigQuery
+      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -41,13 +43,17 @@ module Gcloud
       #   end
       #
       class Schema
+        # @private
         MODES = %w( NULLABLE REQUIRED REPEATED ) #:nodoc:
+
+        # @private
         TYPES = %w( STRING INTEGER FLOAT BOOLEAN TIMESTAMP RECORD ) #:nodoc:
 
+        # @private
         attr_reader :fields #:nodoc:
 
         ##
-        # Initializes a new schema object with an existing schema.
+        # @private  Initializes a new schema object with an existing schema.
         def initialize schema = nil, nested = false #:nodoc:
           fields = (schema && schema["fields"]) || []
           @original_fields = fields.dup
@@ -55,16 +61,18 @@ module Gcloud
           @nested = nested
         end
 
-        def changed? #:nodoc:
+        # @private
+        def changed?
           @original_fields != @fields
         end
 
         ##
+        # @private
         # Returns the schema as hash containing the keys and values specified by
         # the Google Cloud BigQuery {Rest API
         # }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource]
         # .
-        def schema #:nodoc:
+        def schema
           {
             "fields" => @fields
           }
@@ -73,17 +81,14 @@ module Gcloud
         ##
         # Adds a string field to the schema.
         #
-        # === Parameters
-        #
-        # +name+::
-        #   The field name. The name must contain only letters (a-z, A-Z),
-        #   numbers (0-9), or underscores (_), and must start with a letter or
-        #   underscore. The maximum length is 128 characters. (+String+)
-        # +description+::
-        #   A description of the field. (+String+)
-        # +mode+::
-        #   The field's mode. The possible values are +:nullable+, +:required+,
-        #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   +:nullable+, +:required+, and +:repeated+. The default value is
+        #   +:nullable+.
         def string name, description: nil, mode: nil
           add_field name, :string, nil, description: description, mode: mode
         end
@@ -91,17 +96,14 @@ module Gcloud
         ##
         # Adds an integer field to the schema.
         #
-        # === Parameters
-        #
-        # +name+::
-        #   The field name. The name must contain only letters (a-z, A-Z),
-        #   numbers (0-9), or underscores (_), and must start with a letter or
-        #   underscore. The maximum length is 128 characters. (+String+)
-        # +description+::
-        #   A description of the field. (+String+)
-        # +mode+::
-        #   The field's mode. The possible values are +:nullable+, +:required+,
-        #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   +:nullable+, +:required+, and +:repeated+. The default value is
+        #   +:nullable+.
         def integer name, description: nil, mode: nil
           add_field name, :integer, nil, description: description, mode: mode
         end
@@ -109,17 +111,14 @@ module Gcloud
         ##
         # Adds a floating-point number field to the schema.
         #
-        # === Parameters
-        #
-        # +name+::
-        #   The field name. The name must contain only letters (a-z, A-Z),
-        #   numbers (0-9), or underscores (_), and must start with a letter or
-        #   underscore. The maximum length is 128 characters. (+String+)
-        # +description+::
-        #   A description of the field. (+String+)
-        # +mode+::
-        #   The field's mode. The possible values are +:nullable+, +:required+,
-        #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   +:nullable+, +:required+, and +:repeated+. The default value is
+        #   +:nullable+.
         def float name, description: nil, mode: nil
           add_field name, :float, nil, description: description, mode: mode
         end
@@ -127,17 +126,14 @@ module Gcloud
         ##
         # Adds a boolean field to the schema.
         #
-        # === Parameters
-        #
-        # +name+::
-        #   The field name. The name must contain only letters (a-z, A-Z),
-        #   numbers (0-9), or underscores (_), and must start with a letter or
-        #   underscore. The maximum length is 128 characters. (+String+)
-        # +description+::
-        #   A description of the field. (+String+)
-        # +mode+::
-        #   The field's mode. The possible values are +:nullable+, +:required+,
-        #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   +:nullable+, +:required+, and +:repeated+. The default value is
+        #   +:nullable+.
         def boolean name, description: nil, mode: nil
           add_field name, :boolean, nil, description: description, mode: mode
         end
@@ -145,17 +141,14 @@ module Gcloud
         ##
         # Adds a timestamp field to the schema.
         #
-        # === Parameters
-        #
-        # +name+::
-        #   The field name. The name must contain only letters (a-z, A-Z),
-        #   numbers (0-9), or underscores (_), and must start with a letter or
-        #   underscore. The maximum length is 128 characters. (+String+)
-        # +description+::
-        #   A description of the field. (+String+)
-        # +mode+::
-        #   The field's mode. The possible values are +:nullable+, +:required+,
-        #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   +:nullable+, +:required+, and +:repeated+. The default value is
+        #   +:nullable+.
         def timestamp name, description: nil, mode: nil
           add_field name, :timestamp, nil, description: description, mode: mode
         end
@@ -166,20 +159,16 @@ module Gcloud
         # and repeated records, see {Preparing Data for BigQuery
         # }[https://cloud.google.com/bigquery/preparing-data-for-bigquery].
         #
-        # === Parameters
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   +:nullable+, +:required+, and +:repeated+. The default value is
+        #   +:nullable+.
         #
-        # +name+::
-        #   The field name. The name must contain only letters (a-z, A-Z),
-        #   numbers (0-9), or underscores (_), and must start with a letter or
-        #   underscore. The maximum length is 128 characters. (+String+)
-        # +description+::
-        #   A description of the field. (+String+)
-        # +mode+::
-        #   The field's mode. The possible values are +:nullable+, +:required+,
-        #   and +:repeated+. The default value is +:nullable+. (+Symbol+)
-        #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
