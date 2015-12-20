@@ -18,19 +18,18 @@ module Gcloud
     ##
     # = CopyJob
     #
-    # A Job subclass representing a copy operation that may be performed on a
-    # Table. A CopyJob instance is created when you call Table#copy.
+    # A {Job} subclass representing a copy operation that may be performed on a
+    # {Table}. A CopyJob instance is created when you call {Table#copy}.
     #
-    # See {Copying an Existing
-    # Table}[https://cloud.google.com/bigquery/docs/tables#copyingtable]
-    # and the {Jobs API
-    # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs]
-    # for details.
+    # @see https://cloud.google.com/bigquery/docs/tables#copyingtable Copying an
+    #   Existing Table
+    # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
+    #   reference
     #
     class CopyJob < Job
       ##
       # The table from which data is copied. This is the table on
-      # which Table#copy was called. Returns a Table instance.
+      # which {Table#copy} was called. Returns a {Table} instance.
       def source
         table = config["copy"]["sourceTable"]
         return nil unless table
@@ -40,7 +39,7 @@ module Gcloud
       end
 
       ##
-      # The table to which data is copied. Returns a Table instance.
+      # The table to which data is copied. Returns a {Table} instance.
       def destination
         table = config["copy"]["destinationTable"]
         return nil unless table

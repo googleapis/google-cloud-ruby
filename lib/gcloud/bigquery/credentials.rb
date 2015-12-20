@@ -18,8 +18,8 @@ require "gcloud/credentials"
 module Gcloud
   module Bigquery
     ##
-    # Represents the Oauth2 signing logic for Bigquery.
-    class Credentials < Gcloud::Credentials #:nodoc:
+    # @private Represents the Oauth2 signing logic for Bigquery.
+    class Credentials < Gcloud::Credentials
       SCOPE = ["https://www.googleapis.com/auth/bigquery"]
       PATH_ENV_VARS = %w(BIGQUERY_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
       JSON_ENV_VARS = %w(BIGQUERY_KEYFILE_JSON GCLOUD_KEYFILE_JSON

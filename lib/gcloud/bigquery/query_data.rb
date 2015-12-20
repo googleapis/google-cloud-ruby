@@ -23,10 +23,11 @@ module Gcloud
     # Represents Data returned from a query a a list of name/value pairs.
     class QueryData < Data
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
-      def initialize arr = [] #:nodoc:
+      # @private
+      def initialize arr = []
         @job = nil
         super
       end
@@ -89,7 +90,7 @@ module Gcloud
       end
 
       ##
-      # The BigQuery Job that was created to run the query.
+      # The BigQuery {Job} that was created to run the query.
       def job
         return @job if @job
         return nil unless job?
@@ -104,8 +105,8 @@ module Gcloud
       end
 
       ##
-      # New Data from a response object.
-      def self.from_gapi gapi, connection #:nodoc:
+      # @private New Data from a response object.
+      def self.from_gapi gapi, connection
         formatted_rows = format_rows gapi["rows"],
                                      gapi["schema"]["fields"]
 
