@@ -403,7 +403,7 @@ module Gcloud
       # @see https://cloud.google.com/iam/docs/managing-policies Managing
       #   Policies
       #
-      # @param [String, Array<String>] permissions The set of permissions to
+      # @param [String, Array<String>] *permissions The set of permissions to
       #   check access for. Permissions with wildcards (such as +*+ or
       #   +storage.*+) are not allowed.
       #
