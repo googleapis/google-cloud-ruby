@@ -24,13 +24,15 @@ module Gcloud
       # the Entities from the query as well as the query's cursor and
       # more_results value.
       #
+      # Please be cautious when treating the QueryResults as an Array.
+      # Many common Array methods will return a new Array instance.
+      #
+      # @example
       #   entities = dataset.run query
       #   entities.size #=> 3
       #   entities.cursor #=> "c3VwZXJhd2Vzb21lIQ"
       #
-      # Please be cautious when treating the QueryResults as an Array.
-      # Many common Array methods will return a new Array instance.
-      #
+      # @example Caution, many Array methods will return a new Array instance:
       #   entities = dataset.run query
       #   entities.size #=> 3
       #   entities.end_cursor #=> "c3VwZXJhd2Vzb21lIQ"
