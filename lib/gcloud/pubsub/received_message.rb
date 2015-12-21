@@ -21,8 +21,9 @@ module Gcloud
     ##
     # = ReceivedMessage
     #
-    # Represents a Pub/Sub Message that can be acknowledged or delayed.
+    # Represents a Pub/Sub {Message} that can be acknowledged or delayed.
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -37,16 +38,16 @@ module Gcloud
     #
     class ReceivedMessage
       ##
-      # The Subscription object.
-      attr_accessor :subscription #:nodoc:
+      # @private The {Subscription} object.
+      attr_accessor :subscription
 
       ##
-      # The Google API Client object.
-      attr_accessor :gapi #:nodoc:
+      # @private The Google API Client object.
+      attr_accessor :gapi
 
       ##
-      # Create an empty Subscription object.
-      def initialize #:nodoc:
+      # @private Create an empty {Subscription} object.
+      def initialize
         @subscription = nil
         @gapi = {}
       end
@@ -87,8 +88,7 @@ module Gcloud
       ##
       # Acknowledges receipt of the message.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -113,17 +113,13 @@ module Gcloud
       # This indicates that more time is needed to process the message, or to
       # make the message available for redelivery.
       #
-      # === Parameters
+      # @param [Integer] deadline The new ack deadline in seconds from the time
+      #   this request is sent to the Pub/Sub system. Must be >= 0. For example,
+      #   if the value is +10+, the new ack deadline will expire 10 seconds
+      #   after the call is made. Specifying +0+ may immediately make the
+      #   message available for another pull request.
       #
-      # +deadline+::
-      #   The new ack deadline in seconds from the time this request is sent
-      #   to the Pub/Sub system. Must be >= 0. For example, if the value is
-      #   +10+, the new ack deadline will expire 10 seconds after the call is
-      #   made. Specifying +0+ may immediately make the message available for
-      #   another pull request. (+Integer+)
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -150,8 +146,8 @@ module Gcloud
       end
 
       ##
-      # New ReceivedMessage from a Google API Client object.
-      def self.from_gapi gapi, subscription #:nodoc:
+      # @private New ReceivedMessage from a Google API Client object.
+      def self.from_gapi gapi, subscription
         new.tap do |f|
           f.gapi         = gapi
           f.subscription = subscription

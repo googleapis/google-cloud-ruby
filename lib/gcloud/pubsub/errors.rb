@@ -26,7 +26,8 @@ module Gcloud
       # The response object of the failed HTTP request.
       attr_reader :response
 
-      def self.from_response resp #:nodoc:
+      # @private
+      def self.from_response resp
         new.tap do |e|
           e.response = resp
         end
@@ -59,7 +60,8 @@ module Gcloud
         @response = response
       end
 
-      def self.from_response resp #:nodoc:
+      # @private
+      def self.from_response resp
         klass = klass_for resp.data["error"]["status"]
         klass.new resp.data["error"]["message"], resp
       rescue
