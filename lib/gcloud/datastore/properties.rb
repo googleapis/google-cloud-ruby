@@ -20,7 +20,7 @@ module Gcloud
     #
     # Hash-like data structure for Datastore properties.
     #
-    # See Entity#properties
+    # See {Entity#properties}
     class Properties
       def initialize properties = {}
         @hash = {}
