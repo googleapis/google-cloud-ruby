@@ -23,8 +23,9 @@ module Gcloud
     # = Subscription
     #
     # A named resource representing the stream of messages from a single,
-    # specific topic, to be delivered to the subscribing application.
+    # specific {Topic}, to be delivered to the subscribing application.
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -36,16 +37,16 @@ module Gcloud
     #
     class Subscription
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
       ##
-      # The Google API Client object.
-      attr_accessor :gapi #:nodoc:
+      # @private The Google API Client object.
+      attr_accessor :gapi
 
       ##
-      # Create an empty Subscription object.
-      def initialize #:nodoc:
+      # @private Create an empty {Subscription} object.
+      def initialize
         @connection = nil
         @gapi = {}
         @name = nil
@@ -53,8 +54,8 @@ module Gcloud
       end
 
       ##
-      # New lazy Topic object without making an HTTP request.
-      def self.new_lazy name, conn, options = {} #:nodoc:
+      # @private New lazy {Topic} object without making an HTTP request.
+      def self.new_lazy name, conn, options = {}
         sub = new.tap do |f|
           f.gapi = nil
           f.connection = conn
@@ -72,14 +73,11 @@ module Gcloud
       end
 
       ##
-      # The Topic from which this subscription receives messages.
+      # The {Topic} from which this subscription receives messages.
       #
-      # === Returns
+      # @return [Topic]
       #
-      # Topic
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -124,8 +122,7 @@ module Gcloud
       ##
       # Determines whether the subscription exists in the Pub/Sub service.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -146,11 +143,11 @@ module Gcloud
       end
 
       ##
+      # @private
       # Determines whether the subscription object was created with an
       # HTTP call.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -159,7 +156,7 @@ module Gcloud
       #   sub = pubsub.get_subscription "my-topic-sub"
       #   sub.lazy? #=> false
       #
-      def lazy? #:nodoc:
+      def lazy?
         @gapi.nil?
       end
 
@@ -167,12 +164,9 @@ module Gcloud
       # Deletes an existing subscription.
       # All pending messages in the subscription are immediately dropped.
       #
-      # === Returns
+      # @return [Boolean] Returns +true+ if the subscription was deleted.
       #
-      # +true+ if the subscription was deleted.
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -197,27 +191,20 @@ module Gcloud
       # +UNAVAILABLE+ if there are too many concurrent pull requests pending
       # for the given subscription.
       #
-      # === Parameters
+      # @param [Boolean] immediate When +true+ the system will respond
+      #   immediately even if it is not able to return messages. When +false+
+      #   the system is allowed to wait until it can return least one message.
+      #   No messages are returned when a request times out. The default value
+      #   is +true+.
+      # @param [Integer] max The maximum number of messages to return for this
+      #   request. The Pub/Sub system may return fewer than the number
+      #   specified. The default value is +100+, the maximum value is +1000+.
+      # @param [Boolean] autoack Automatically acknowledge the message as it is
+      #   pulled. The default value is +false+.
       #
-      # +immediate+::
-      #   When +true+ the system will respond immediately even if it is not able
-      #   to return messages. When +false+ the system is allowed to wait until
-      #   it can return least one message. No messages are returned when a
-      #   request times out. The default value is +true+. (+Boolean+)
-      # +max+::
-      #   The maximum number of messages to return for this request. The Pub/Sub
-      #   system may return fewer than the number specified. The default value
-      #   is +100+, the maximum value is +1000+. (+Integer+)
-      # +autoack+::
-      #   Automatically acknowledge the message as it is pulled. The default
-      #   value is +false+. (+Boolean+)
+      # @return [Array<Gcloud::Pubsub::ReceivedMessage>]
       #
-      # === Returns
-      #
-      # Array of Gcloud::Pubsub::ReceivedMessage
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -226,8 +213,7 @@ module Gcloud
       #   sub = pubsub.subscription "my-topic-sub"
       #   sub.pull.each { |msg| msg.acknowledge! }
       #
-      # A maximum number of messages returned can also be specified:
-      #
+      # @example A maximum number of messages returned can also be specified:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -236,9 +222,7 @@ module Gcloud
       #   sub = pubsub.subscription "my-topic-sub", max: 10
       #   sub.pull.each { |msg| msg.acknowledge! }
       #
-      # The call can block until messages are available by setting the
-      # +:immediate+ option to +false+:
-      #
+      # @example The call can block until messages are available:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -271,22 +255,15 @@ module Gcloud
       #
       #   subscription.pull immediate: false
       #
-      # === Parameters
+      # @param [Integer] max The maximum number of messages to return for this
+      #   request. The Pub/Sub system may return fewer than the number
+      #   specified. The default value is +100+, the maximum value is +1000+.
+      # @param [Boolean] autoack Automatically acknowledge the message as it is
+      #   pulled. The default value is +false+.
       #
-      # +max+::
-      #   The maximum number of messages to return for this request. The Pub/Sub
-      #   system may return fewer than the number specified. The default value
-      #   is +100+, the maximum value is +1000+. (+Integer+)
-      # +autoack+::
-      #   Automatically acknowledge the message as it is pulled. The default
-      #   value is +false+. (+Boolean+)
+      # @return [Array<Gcloud::Pubsub::ReceivedMessage>]
       #
-      # === Returns
-      #
-      # Array of Gcloud::Pubsub::ReceivedMessage
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -304,22 +281,16 @@ module Gcloud
       # Poll the backend for new messages. This runs a loop to ping the API,
       # blocking indefinitely, yielding retrieved messages as they are received.
       #
-      # === Parameters
+      # @param [Integer] max The maximum number of messages to return for this
+      #   request. The Pub/Sub system may return fewer than the number
+      #   specified. The default value is +100+, the maximum value is +1000+.
+      # @param [Boolean] autoack Automatically acknowledge the message as it is
+      #   pulled. The default value is +false+.
+      # @param [Number] delay The number of seconds to pause between requests
+      #   when the Google Cloud service has no messages to return. The default
+      #   value is +1+.
       #
-      # +max+::
-      #   The maximum number of messages to return for this request. The Pub/Sub
-      #   system may return fewer than the number specified. The default value
-      #   is +100+, the maximum value is +1000+. (+Integer+)
-      # +autoack+::
-      #   Automatically acknowledge the message as it is pulled. The default
-      #   value is +false+. (+Boolean+)
-      # +delay+::
-      #   The number of seconds to pause between requests when the Google Cloud
-      #   service has no messages to return. The default value is +1+.
-      #   (+Number+)
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -330,9 +301,7 @@ module Gcloud
       #     # process msg
       #   end
       #
-      # The number of messages pulled per batch can be set with the +max+
-      # option:
-      #
+      # @example Limit the number of messages pulled per batch with +max+:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -343,9 +312,7 @@ module Gcloud
       #     # process msg
       #   end
       #
-      # Messages can be automatically acknowledged as they are pulled with the
-      # +autoack+ option:
-      #
+      # @example Automatically acknowledge messages with +autoack+:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -375,14 +342,10 @@ module Gcloud
       # Acknowledging a message more than once will not result in an error.
       # This is only used for messages received via pull.
       #
-      # === Parameters
+      # @param [ReceivedMessage, String] messages One or more {ReceivedMessage}
+      #   objects or ack_id values.
       #
-      # +messages+::
-      #   One or more ReceivedMessage objects or ack_id values.
-      #   (+ReceivedMessage+ or +ack_id+)
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -411,20 +374,15 @@ module Gcloud
       # make the messages available for redelivery if the processing was
       # interrupted.
       #
-      # === Parameters
+      # @param [Integer] new_deadline The new ack deadline in seconds from the
+      #   time this request is sent to the Pub/Sub system. Must be >= 0. For
+      #   example, if the value is +10+, the new ack deadline will expire 10
+      #   seconds after the call is made. Specifying +0+ may immediately make
+      #   the message available for another pull request.
+      # @param [ReceivedMessage, String] messages One or more {ReceivedMessage}
+      #   objects or ack_id values.
       #
-      # +new_deadline+::
-      #   The new ack deadline in seconds from the time this request is sent
-      #   to the Pub/Sub system. Must be >= 0. For example, if the value is
-      #   +10+, the new ack deadline will expire 10 seconds after the call is
-      #   made. Specifying +0+ may immediately make the messages available for
-      #   another pull request. (+Integer+)
-      # +messages+::
-      #   One or more ReceivedMessage objects or ack_id values.
-      #   (+ReceivedMessage+ or +ack_id+)
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -448,17 +406,15 @@ module Gcloud
       ##
       # Gets the access control policy.
       #
-      # === Parameters
+      # By default, the policy values are memoized to reduce the number of API
+      # calls to the Pub/Sub service.
       #
-      # +force+::
-      #   Force the latest policy to be retrieved from the Pub/Sub service when
-      #   +true. Otherwise the policy will be memoized to reduce the number of
-      #   API calls made to the Pub/Sub service. The default is +false+.
-      #   (+Boolean+)
+      # @param [Boolean] force Force the latest policy to be retrieved from the
+      #   Pub/Sub service when +true. Otherwise the policy will be memoized to
+      #   reduce the number of API calls made to the Pub/Sub service. The
+      #   default is +false+.
       #
-      # === Returns
-      #
-      # A hash that conforms to the following structure:
+      # @return [Hash] Returns a hash that conforms to the following structure:
       #
       #   {
       #     "etag"=>"CAE=",
@@ -468,11 +424,7 @@ module Gcloud
       #     }]
       #   }
       #
-      # === Examples
-      #
-      # By default, the policy values are memoized to reduce the number of API
-      # calls to the Pub/Sub service.
-      #
+      # @example Policy values are memoized to reduce the number of API calls:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -482,9 +434,7 @@ module Gcloud
       #   puts subscription.policy["bindings"]
       #   puts subscription.policy["rules"]
       #
-      # To retrieve the latest policy from the Pub/Sub service, use the +force+
-      # flag.
-      #
+      # @example Use +force+ to retrieve the latest policy from the service:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -507,10 +457,8 @@ module Gcloud
       ##
       # Sets the access control policy.
       #
-      # === Parameters
-      #
-      # +new_policy+::
-      #   A hash that conforms to the following structure:
+      # @param [String] new_policy A hash that conforms to the following
+      #   structure:
       #
       #     {
       #       "bindings" => [{
@@ -519,8 +467,7 @@ module Gcloud
       #       }]
       #     }
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -548,23 +495,18 @@ module Gcloud
 
       ##
       # Tests the specified permissions against the {Cloud
-      # IAM}[https://cloud.google.com/iam/] access control policy. See
-      # {Managing Policies}[https://cloud.google.com/iam/docs/managing-policies]
-      # for more information.
+      # IAM}[https://cloud.google.com/iam/] access control policy.
       #
-      # === Parameters
+      # @see https://cloud.google.com/iam/docs/managing-policies Managing
+      #   Policies
       #
-      # +permissions+::
-      #   The set of permissions to check access for. Permissions with wildcards
-      #   (such as +*+ or +storage.*+) are not allowed.
-      #   (String or Array of Strings)
+      # @param [String, Array<String>] permissions The set of permissions to
+      #   check access for. Permissions with wildcards (such as +*+ or
+      #   +storage.*+) are not allowed.
       #
-      # === Returns
+      # @return [Array<String>] The permissions that have access.
       #
-      # The permissions that have access. (Array of Strings)
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -587,8 +529,8 @@ module Gcloud
       end
 
       ##
-      # New Subscription from a Google API Client object.
-      def self.from_gapi gapi, conn #:nodoc:
+      # @private New {Subscription} from a Google API Client object.
+      def self.from_gapi gapi, conn
         new.tap do |f|
           f.gapi = gapi
           f.connection = conn
@@ -618,7 +560,7 @@ module Gcloud
 
       ##
       # Makes sure the values are the +ack_id+.
-      # If given several ReceivedMessage objects extract the +ack_id+ values.
+      # If given several {ReceivedMessage} objects extract the +ack_id+ values.
       def coerce_ack_ids messages
         Array(messages).flatten.map do |msg|
           msg.respond_to?(:ack_id) ? msg.ack_id : msg.to_s

@@ -25,6 +25,7 @@ module Gcloud
     #
     # A named resource to which messages are published.
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -35,16 +36,16 @@ module Gcloud
     #
     class Topic
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
       ##
-      # The Google API Client object.
-      attr_accessor :gapi #:nodoc:
+      # @private The Google API Client object.
+      attr_accessor :gapi
 
       ##
-      # Create an empty Topic object.
-      def initialize #:nodoc:
+      # @private Create an empty {Topic} object.
+      def initialize
         @connection = nil
         @gapi = {}
         @name = nil
@@ -52,8 +53,8 @@ module Gcloud
       end
 
       ##
-      # New lazy Topic object without making an HTTP request.
-      def self.new_lazy name, conn, options = {} #:nodoc:
+      # @private New lazy {Topic} object without making an HTTP request.
+      def self.new_lazy name, conn, options = {}
         new.tap do |t|
           t.gapi = nil
           t.connection = conn
@@ -73,12 +74,9 @@ module Gcloud
       ##
       # Permanently deletes the topic.
       #
-      # === Returns
+      # @return [Boolean] Returns +true+ if the topic was deleted.
       #
-      # +true+ if the topic was deleted.
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -98,29 +96,22 @@ module Gcloud
       end
 
       ##
-      # Creates a new Subscription object on the current Topic.
+      # Creates a new {Subscription} object on the current Topic.
       #
-      # === Parameters
+      # @param [String] subscription_name Name of the new subscription. Must
+      #   start with a letter, and contain only letters ([A-Za-z]), numbers
+      #   ([0-9], dashes (-), underscores (_), periods (.), tildes (~), plus (+)
+      #   or percent signs (%). It must be between 3 and 255 characters in
+      #   length, and it must not start with "goog".
+      # @param [Integer] deadline The maximum number of seconds after a
+      #   subscriber receives a message before the subscriber should acknowledge
+      #   the message.
+      # @param [String] endpoint A URL locating the endpoint to which messages
+      #   should be pushed.
       #
-      # +subscription_name+::
-      #   Name of the new subscription. Must start with a letter, and contain
-      #   only letters ([A-Za-z]), numbers ([0-9], dashes (-), underscores (_),
-      #   periods (.), tildes (~), plus (+) or percent signs (%). It must be
-      #   between 3 and 255 characters in length, and it must not start with
-      #   "goog". (+String+)
-      # +deadline+::
-      #   The maximum number of seconds after a subscriber receives a message
-      #   before the subscriber should acknowledge the message. (+Integer+)
-      # +endpoint+::
-      #   A URL locating the endpoint to which messages should be pushed.
-      #   e.g. "https://example.com/push" (+String+)
+      # @return [Gcloud::Pubsub::Subscription]
       #
-      # === Returns
-      #
-      # Gcloud::Pubsub::Subscription
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -130,7 +121,7 @@ module Gcloud
       #   sub = topic.subscribe "my-topic-sub"
       #   puts sub.name # => "my-topic-sub"
       #
-      # The name is optional, and will be generated if not given.
+      # @example The name is optional, and will be generated if not given:
       #
       #   require "gcloud"
       #
@@ -141,8 +132,7 @@ module Gcloud
       #   sub = topic.subscribe "my-topic-sub"
       #   puts sub.name # => "generated-sub-name"
       #
-      # The subscription can be created that waits two minutes for
-      # acknowledgement and pushed all messages to an endpoint
+      # @example Wait 2 minutes for acknowledgement and push all to an endpoint:
       #
       #   require "gcloud"
       #
@@ -170,22 +160,16 @@ module Gcloud
       ##
       # Retrieves subscription by name.
       #
-      # === Parameters
+      # @param [String] subscription_name Name of a subscription.
+      # @param [Boolean] skip_lookup Optionally create a {Subscription} object
+      #   without verifying the subscription resource exists on the Pub/Sub
+      #   service. Calls made on this object will raise errors if the service
+      #   resource does not exist. Default is +false+.
       #
-      # +subscription_name+::
-      #   Name of a subscription. (+String+)
-      # +skip_lookup+::
-      #   Optionally create a Subscription object without verifying the
-      #   subscription resource exists on the Pub/Sub service. Calls made on
-      #   this object will raise errors if the service resource does not exist.
-      #   Default is +false+. (+Boolean+)
+      # @return [Gcloud::Pubsub::Subscription, nil] Returns +nil+ if
+      #   the subscription does not exist.
       #
-      # === Returns
-      #
-      # Gcloud::Pubsub::Subscription or nil if subscription does not exist
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -195,9 +179,7 @@ module Gcloud
       #   subscription = topic.subscription "my-topic-subscription"
       #   puts subscription.name
       #
-      # The lookup against the Pub/Sub service can be skipped using the
-      # +skip_lookup+ option:
-      #
+      # @example Skip the lookup against the service with +skip_lookup+:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -223,21 +205,14 @@ module Gcloud
       ##
       # Retrieves a list of subscription names for the given project.
       #
-      # === Parameters
+      # @param [String] token The +token+ value returned by the last call to
+      #   +subscriptions+; indicates that this is a continuation of a call, and
+      #   that the system should return the next page of data.
+      # @param [Integer] max Maximum number of subscriptions to return.
       #
-      # +token+::
-      #   The +token+ value returned by the last call to +subscriptions+;
-      #   indicates that this is a continuation of a call, and that the system
-      #   should return the next page of data. (+String+)
-      # +max+::
-      #   Maximum number of subscriptions to return. (+Integer+)
+      # @return [Array<Subscription>] (See {Subscription::List})
       #
-      # === Returns
-      #
-      # Array of Subscription objects (See Subscription::List)
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -249,8 +224,7 @@ module Gcloud
       #     puts subscription.name
       #   end
       #
-      # If you have a significant number of subscriptions, you may need to
-      # paginate through them: (See Subscription::List#token)
+      # @example With pagination: (See {Subscription::List#token})
       #
       #   require "gcloud"
       #
@@ -286,20 +260,14 @@ module Gcloud
       ##
       # Publishes one or more messages to the topic.
       #
-      # === Parameters
+      # @param [String] data The message data.
+      # @param [Hash] attributes Optional attributes for the message.
       #
-      # +data+::
-      #   The message data. (+String+)
-      # +attributes+::
-      #   Optional attributes for the message. (+Hash+)
+      # @return [Message, Array<Message>] Returns the published message when
+      #   called without a block, or an array of messages when called with a
+      #   block.
       #
-      # === Returns
-      #
-      # Message object when called without a block,
-      # Array of Message objects when called with a block
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -308,7 +276,7 @@ module Gcloud
       #   topic = pubsub.topic "my-topic"
       #   msg = topic.publish "new-message"
       #
-      # Additionally, a message can be published with attributes:
+      # @example Additionally, a message can be published with attributes:
       #
       #   require "gcloud"
       #
@@ -320,8 +288,7 @@ module Gcloud
       #                       foo: :bar,
       #                       this: :that
       #
-      # Multiple messages can be published at the same time by passing a block:
-      #
+      # @example Multiple messages can be sent at the same time using a block:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -345,17 +312,12 @@ module Gcloud
       ##
       # Gets the access control policy.
       #
-      # === Parameters
+      # @param [Boolean] force Force the latest policy to be retrieved from the
+      #   Pub/Sub service when +true. Otherwise the policy will be memoized to
+      #   reduce the number of API calls made to the Pub/Sub service. The
+      #   default is +false+.
       #
-      # +force+::
-      #   Force the latest policy to be retrieved from the Pub/Sub service when
-      #   +true. Otherwise the policy will be memoized to reduce the number of
-      #   API calls made to the Pub/Sub service. The default is +false+.
-      #   (+Boolean+)
-      #
-      # === Returns
-      #
-      # A hash that conforms to the following structure:
+      # @return [Hash] Returns a hash that conforms to the following structure:
       #
       #   {
       #     "etag"=>"CAE=",
@@ -365,11 +327,7 @@ module Gcloud
       #     }]
       #   }
       #
-      # === Examples
-      #
-      # By default, the policy values are memoized to reduce the number of API
-      # calls to the Pub/Sub service.
-      #
+      # @example Policy values are memoized to reduce the number of API calls:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -379,9 +337,7 @@ module Gcloud
       #   puts topic.policy["bindings"]
       #   puts topic.policy["rules"]
       #
-      # To retrieve the latest policy from the Pub/Sub service, use the +force+
-      # flag.
-      #
+      # @example Use +force+ to retrieve the latest policy from the service:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -404,10 +360,8 @@ module Gcloud
       ##
       # Sets the access control policy.
       #
-      # === Parameters
-      #
-      # +new_policy+::
-      #   A hash that conforms to the following structure:
+      # @param [String] new_policy A hash that conforms to the following
+      #   structure:
       #
       #     {
       #       "bindings" => [{
@@ -416,8 +370,7 @@ module Gcloud
       #       }]
       #     }
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -445,23 +398,18 @@ module Gcloud
 
       ##
       # Tests the specified permissions against the {Cloud
-      # IAM}[https://cloud.google.com/iam/] access control policy. See
-      # {Managing Policies}[https://cloud.google.com/iam/docs/managing-policies]
-      # for more information.
+      # IAM}[https://cloud.google.com/iam/] access control policy.
       #
-      # === Parameters
+      # @see https://cloud.google.com/iam/docs/managing-policies Managing
+      #   Policies
       #
-      # +permissions+::
-      #   The set of permissions to check access for. Permissions with wildcards
-      #   (such as +*+ or +storage.*+) are not allowed.
-      #   (String or Array of Strings)
+      # @param [String, Array<String>] permissions The set of permissions to
+      #   check access for. Permissions with wildcards (such as +*+ or
+      #   +storage.*+) are not allowed.
       #
-      # === Returns
+      # @return [Array<Strings>] The permissions that have access.
       #
-      # The permissions that have access. (Array of Strings)
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -486,8 +434,7 @@ module Gcloud
       ##
       # Determines whether the topic exists in the Pub/Sub service.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -506,10 +453,10 @@ module Gcloud
       end
 
       ##
+      # @private
       # Determines whether the topic object was created with an HTTP call.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -518,13 +465,13 @@ module Gcloud
       #   topic = pubsub.topic "my-topic"
       #   topic.lazy? #=> false
       #
-      def lazy? #:nodoc:
+      def lazy?
         @gapi.nil?
       end
 
       ##
-      # New Topic from a Google API Client object.
-      def self.from_gapi gapi, conn #:nodoc:
+      # @private New {Topic} from a Google API Client object.
+      def self.from_gapi gapi, conn
         new.tap do |f|
           f.gapi = gapi
           f.connection = conn
@@ -563,12 +510,12 @@ module Gcloud
       # Batch object used to publish multiple messages at once.
       class Batch
         ##
-        # The messages to publish
-        attr_reader :messages #:nodoc:
+        # @private The messages to publish
+        attr_reader :messages
 
         ##
-        # Create a new instance of the object.
-        def initialize data = nil, attributes = {} #:nodoc:
+        # @private Create a new instance of the object.
+        def initialize data = nil, attributes = {}
           @messages = []
           @mode = :batch
           return if data.nil?
@@ -579,14 +526,14 @@ module Gcloud
         ##
         # Add multiple messages to the topic.
         # All messages added will be published at once.
-        # See Gcloud::Pubsub::Topic#publish
+        # See {Gcloud::Pubsub::Topic#publish}
         def publish data, attributes = {}
           @messages << [data, attributes]
         end
 
         ##
-        # Create Message objects with message ids.
-        def to_gcloud_messages message_ids #:nodoc:
+        # @private Create Message objects with message ids.
+        def to_gcloud_messages message_ids
           msgs = @messages.zip(Array(message_ids)).map do |arr, id|
             Message.from_gapi "data"       => arr[0],
                               "attributes" => jsonify_hash(arr[1]),

@@ -24,7 +24,7 @@ module Gcloud
         ##
         # If not empty, indicates that there are more subscriptions
         # that match the request and this value should be passed to
-        # the next Gcloud::PubSub::Topic#subscriptions to continue.
+        # the next {Gcloud::PubSub::Topic#subscriptions} to continue.
         attr_accessor :token
 
         ##
@@ -35,8 +35,8 @@ module Gcloud
         end
 
         ##
-        # New Subscription::List from a response object.
-        def self.from_response resp, conn #:nodoc:
+        # @private New Subscription::List from a response object.
+        def self.from_response resp, conn
           subs = Array(resp.data["subscriptions"]).map do |gapi_object|
             if gapi_object.is_a? String
               Subscription.new_lazy gapi_object, conn
