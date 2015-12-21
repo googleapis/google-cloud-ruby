@@ -24,7 +24,7 @@ module Gcloud
         ##
         # If not empty, indicates that there are more topics
         # that match the request and this value should be passed to
-        # the next Gcloud::PubSub::Project#topics to continue.
+        # the next {Gcloud::PubSub::Project#topics} to continue.
         attr_accessor :token
 
         ##
@@ -35,8 +35,8 @@ module Gcloud
         end
 
         ##
-        # New Topic::List from a response object.
-        def self.from_response resp, conn #:nodoc:
+        # @private New Topic::List from a response object.
+        def self.from_response resp, conn
           topics = Array(resp.data["topics"]).map do |gapi_object|
             Topic.from_gapi gapi_object, conn
           end

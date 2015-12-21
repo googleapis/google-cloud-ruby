@@ -19,13 +19,13 @@ require "google/api_client"
 module Gcloud
   module Pubsub
     ##
-    # Represents the connection to Pub/Sub,
+    # @private Represents the connection to Pub/Sub,
     # as well as expose the API calls.
-    class Connection #:nodoc:
+    class Connection
       API_VERSION = "v1"
 
       attr_accessor :project
-      attr_accessor :credentials #:nodoc:
+      attr_accessor :credentials
 
       ##
       # Creates a new Connection instance.
@@ -271,7 +271,7 @@ module Gcloud
         "#{project_path(options)}/subscriptions/#{subscription_name}"
       end
 
-      def inspect #:nodoc:
+      def inspect
         "#{self.class}(#{@project})"
       end
 

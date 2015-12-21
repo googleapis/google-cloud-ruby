@@ -25,12 +25,15 @@ module Gcloud
     # = Project
     #
     # Represents the project that pubsub messages are pushed to and pulled from.
-    # Topic is a named resource to which messages are sent by publishers.
-    # Subscription is a named resource representing the stream of messages from
-    # a single, specific topic, to be delivered to the subscribing application.
-    # Message is a combination of data and attributes that a publisher sends to
-    # a topic and is eventually delivered to subscribers.
+    # {Topic} is a named resource to which messages are sent by publishers.
+    # {Subscription} is a named resource representing the stream of messages
+    # from a single, specific topic, to be delivered to the subscribing
+    # application. {Message} is a combination of data and attributes that a
+    # publisher sends to a topic and is eventually delivered to subscribers.
     #
+    # See {Gcloud#pubsub}
+    #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -39,15 +42,14 @@ module Gcloud
     #   topic = pubsub.topic "my-topic"
     #   topic.publish "task completed"
     #
-    # See Gcloud#pubsub
     class Project
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
       ##
-      # Creates a new Connection instance.
-      def initialize project, credentials #:nodoc:
+      # @private Creates a new Connection instance.
+      def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
         @connection = Connection.new project, credentials
@@ -55,8 +57,7 @@ module Gcloud
 
       # The Pub/Sub project connected to.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new "my-todo-project",
@@ -70,8 +71,8 @@ module Gcloud
       end
 
       ##
-      # Default project.
-      def self.default_project #:nodoc:
+      # @private Default project.
+      def self.default_project
         ENV["PUBSUB_PROJECT"] ||
           ENV["GCLOUD_PROJECT"] ||
           ENV["GOOGLE_CLOUD_PROJECT"] ||
@@ -81,67 +82,54 @@ module Gcloud
       ##
       # Retrieves topic by name.
       #
-      # === Parameters
+      # The topic will be created if the topic does not exist and the
+      # +autocreate+ option is set to true.
       #
-      # +topic_name+::
-      #   Name of a topic. (+String+)
-      # +autocreate+::
-      #   Flag to control whether the requested topic will be created if it does
-      #   not exist. Ignored if +skip_lookup+ is +true+. The default value is
-      #   +false+. (+Boolean+)
-      # +project+::
-      #   If the topic belongs to a project other than the one currently
-      #   connected to, the alternate project ID can be specified here.
-      #   (+String+)
-      # +skip_lookup+::
-      #   Optionally create a Topic object without verifying the topic resource
-      #   exists on the Pub/Sub service. Calls made on this object will raise
-      #   errors if the topic resource does not exist. Default is +false+.
-      #   (+Boolean+)
+      # @param [String] topic_name Name of a topic.
+      # @param [Boolean] autocreate Flag to control whether the requested topic
+      #   will be created if it does not exist. Ignored if +skip_lookup+ is
+      #   +true+. The default value is +false+.
+      # @param [String] project If the topic belongs to a project other than the
+      #   one currently connected to, the alternate project ID can be specified
+      #   here.
+      # @param [Boolean] skip_lookup Optionally create a {Topic} object without
+      #   verifying the topic resource exists on the Pub/Sub service. Calls made
+      #   on this object will raise errors if the topic resource does not exist.
+      #   Default is +false+.
       #
-      # === Returns
+      # @return [Gcloud::Pubsub::Topic, nil] Returns +nil+ if topic does not
+      #   exist. Will return a newly created{ Gcloud::Pubsub::Topic} if the
+      #   topic does not exist and +autocreate+ is set to +true+.
       #
-      # Gcloud::Pubsub::Topic or nil if topic does not exist. Will return a
-      # newly created Gcloud::Pubsub::Topic if the topic does not exist and
-      # +autocreate+ is set to +true+.
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "existing-topic"
       #
-      # By default +nil+ will be returned if the topic does not exist.
-      # the topic will be created in Pub/Sub when needed.
-      #
+      # @example By default +nil+ will be returned if the topic does not exist.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "non-existing-topic" #=> nil
       #
-      # The topic will be created if the topic does not exist and the
-      # +autocreate+ option is set to true.
-      #
+      # @example With the +autocreate+ option set to +true+.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "non-existing-topic", autocreate: true
       #
-      # A topic in a different project can be created using the +project+ flag.
-      #
+      # @example Create a topic in a different project with the +project+ flag.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "another-topic", project: "another-project"
       #
-      # The lookup against the Pub/Sub service can be skipped using the
-      # +skip_lookup+ option:
-      #
+      # @example Skip the lookup against the service with +skip_lookup+:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -166,17 +154,11 @@ module Gcloud
       ##
       # Creates a new topic.
       #
-      # === Parameters
+      # @param [String] topic_name Name of a topic.
       #
-      # +topic_name+::
-      #   Name of a topic. (+String+)
+      # @return [Gcloud::Pubsub::Topic]
       #
-      # === Returns
-      #
-      # Gcloud::Pubsub::Topic
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -197,21 +179,15 @@ module Gcloud
       ##
       # Retrieves a list of topics for the given project.
       #
-      # === Parameters
+      # @param [String] token The +token+ value returned by the last call to
+      #   +topics+; indicates that this is a continuation of a call, and that
+      #   the system should return the next page of data.
+      # @param [Integer] max Maximum number of topics to return.
       #
-      # +token+::
-      #   The +token+ value returned by the last call to +topics+; indicates
-      #   that this is a continuation of a call, and that the system should
-      #   return the next page of data. (+String+)
-      # +max+::
-      #   Maximum number of topics to return. (+Integer+)
+      # @return [Array<Gcloud::Pubsub::Topic>] (See
+      #   {Gcloud::Pubsub::Topic::List})
       #
-      # === Returns
-      #
-      # Array of Gcloud::Pubsub::Topic (See Gcloud::Pubsub::Topic::List)
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -222,9 +198,7 @@ module Gcloud
       #     puts topic.name
       #   end
       #
-      # If you have a significant number of topics, you may need to paginate
-      # through them: (See Topic::List#token)
-      #
+      # @example With pagination: (See {Topic::List#token})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -256,27 +230,24 @@ module Gcloud
       alias_method :list_topics, :topics
 
       ##
-      # Publishes one or more messages to the given topic.
+      # Publishes one or more messages to the given topic. The topic will be
+      # created if the topic does previously not exist and the +autocreate+
+      # option is provided.
       #
-      # === Parameters
+      # A note about auto-creating the topic: Any message published to a topic
+      # without a subscription will be lost.
       #
-      # +topic_name+::
-      #   Name of a topic. (+String+)
-      # +data+::
-      #   The message data. (+String+)
-      # +attributes+::
-      #   Optional attributes for the message. (+Hash+)
-      # <code>attributes[:autocreate]</code>::
-      #   Flag to control whether the provided topic will be created if it does
-      #   not exist.
+      # @param [String] topic_name Name of a topic.
+      # @param [String] data The message data.
+      # @param [Hash] attributes Optional attributes for the message.
+      # @option attributes [Boolean] :autocreate Flag to control whether the
+      #   provided topic will be created if it does not exist.
       #
-      # === Returns
+      # @return [Message, Array<Message>] Returns the published message when
+      #   called without a block, or an array of messages when called with a
+      #   block.
       #
-      # Message object when called without a block,
-      # Array of Message objects when called with a block
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -284,8 +255,7 @@ module Gcloud
       #
       #   msg = pubsub.publish "my-topic", "new-message"
       #
-      # Additionally, a message can be published with attributes:
-      #
+      # @example Additionally, a message can be published with attributes:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -294,8 +264,7 @@ module Gcloud
       #   msg = pubsub.publish "my-topic", "new-message", foo: :bar,
       #                                                   this: :that
       #
-      # Multiple messages can be published at the same time by passing a block:
-      #
+      # @example Multiple messages can be sent at the same time using a block:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -307,18 +276,13 @@ module Gcloud
       #     batch.publish "new-message-3", foo: :bif
       #   end
       #
-      # Additionally, the topic will be created if the topic does previously not
-      # exist and the +autocreate+ option is provided.
-      #
+      # @example With +autocreate+:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #
       #   msg = pubsub.publish "new-topic", "new-message", autocreate: true
-      #
-      # A note about auto-creating the topic: Any message published to a topic
-      # without a subscription will be lost.
       #
       def publish topic_name, data = nil, attributes = {}
         # Fix parameters
@@ -336,34 +300,27 @@ module Gcloud
       end
 
       ##
-      # Creates a new Subscription object for the provided topic.
+      # Creates a new {Subscription} object for the provided topic. The topic
+      # will be created if the topic does previously not exist and the
+      # +autocreate+ option is provided.
       #
-      # === Parameters
+      # @param [String] topic_name Name of a topic.
+      # @param [String] subscription_name Name of the new subscription. Must
+      #   start with a letter, and contain only letters ([A-Za-z]), numbers
+      #   ([0-9], dashes (-), underscores (_), periods (.), tildes (~), plus (+)
+      #   or percent signs (%). It must be between 3 and 255 characters in
+      #   length, and it must not start with "goog".
+      # @param [Integer] deadline The maximum number of seconds after a
+      #   subscriber receives a message before the subscriber should acknowledge
+      #   the message.
+      # @param [String] endpoint A URL locating the endpoint to which messages
+      #   should be pushed.
+      # @param [String] autocreate Flag to control whether the topic will be
+      #   created if it does not exist.
       #
-      # +topic_name+::
-      #   Name of a topic. (+String+)
-      # +subscription_name+::
-      #   Name of the new subscription. Must start with a letter, and contain
-      #   only letters ([A-Za-z]), numbers ([0-9], dashes (-), underscores (_),
-      #   periods (.), tildes (~), plus (+) or percent signs (%). It must be
-      #   between 3 and 255 characters in length, and it must not start with
-      #   "goog". (+String+)
-      # +deadline+::
-      #   The maximum number of seconds after a subscriber receives a message
-      #   before the subscriber should acknowledge the message. (+Integer+)
-      # +endpoint+::
-      #   A URL locating the endpoint to which messages should be pushed.
-      #   e.g. "https://example.com/push" (+String+)
-      # +autocreate+::
-      #   Flag to control whether the topic will be created if it does not
-      #   exist.
+      # @return [Gcloud::Pubsub::Subscription]
       #
-      # === Returns
-      #
-      # Gcloud::Pubsub::Subscription
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -372,8 +329,7 @@ module Gcloud
       #   sub = pubsub.subscribe "my-topic", "my-topic-sub"
       #   puts sub.name # => "my-topic-sub"
       #
-      # The name is optional, and will be generated if not given.
-      #
+      # @example The name is optional, and will be generated if not given.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -382,9 +338,7 @@ module Gcloud
       #   sub = pubsub.subscribe "my-topic"
       #   puts sub.name # => "generated-sub-name"
       #
-      # The subscription can be created that waits two minutes for
-      # acknowledgement and pushed all messages to an endpoint
-      #
+      # @example Wait 2 minutes for acknowledgement and push all to an endpoint:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -394,9 +348,7 @@ module Gcloud
       #                          deadline: 120,
       #                          endpoint: "https://example.com/push"
       #
-      # Additionally, the topic will be created if the topic does previously not
-      # exist and the +autocreate+ option is provided.
-      #
+      # @example With +autocreate+:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -425,26 +377,19 @@ module Gcloud
       ##
       # Retrieves subscription by name.
       #
-      # === Parameters
+      # @param [String] subscription_name Name of a subscription.
+      # @param [String] project If the subscription belongs to a project other
+      #   than the one currently connected to, the alternate project ID can be
+      #   specified here.
+      # @param [Boolean] skip_lookup Optionally create a {Subscription} object
+      #   without verifying the subscription resource exists on the Pub/Sub
+      #   service. Calls made on this object will raise errors if the service
+      #   resource does not exist. Default is +false+.
       #
-      # +subscription_name+::
-      #   Name of a subscription. (+String+)
-      # +project+::
-      #   If the subscription belongs to a project other than the one currently
-      #   connected to, the alternate project ID can be specified here.
-      #   (+String+)
-      # +skip_lookup+::
-      #   Optionally create a Subscription object without verifying the
-      #   subscription resource exists on the Pub/Sub service. Calls made on
-      #   this object will raise errors if the service resource does not exist.
-      #   Default is +false+. (+Boolean+)
+      # @return [Gcloud::Pubsub::Subscription, nil] Returns +nil+ if the
+      #   subscription does not exist
       #
-      # === Returns
-      #
-      # Gcloud::Pubsub::Subscription or +nil+ if the subscription does not exist
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -453,9 +398,7 @@ module Gcloud
       #   subscription = pubsub.subscription "my-sub"
       #   puts subscription.name
       #
-      # The lookup against the Pub/Sub service can be skipped using the
-      # +skip_lookup+ option:
-      #
+      # @example Skip the lookup against the service with +skip_lookup+:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -482,24 +425,16 @@ module Gcloud
       ##
       # Retrieves a list of subscriptions for the given project.
       #
-      # === Parameters
+      # @param [String] prefix Filter results to subscriptions whose names begin
+      #   with this prefix.
+      # @param [String] token A previously-returned page token representing part
+      #   of the larger set of results to view.
+      # @param [Integer] max Maximum number of subscriptions to return.
       #
-      # +prefix+::
-      #   Filter results to subscriptions whose names begin with this prefix.
-      #   (+String+)
-      # +token+::
-      #   A previously-returned page token representing part of the larger set
-      #   of results to view. (+String+)
-      # +max+::
-      #   Maximum number of subscriptions to return. (+Integer+)
+      # @return [Array<Gcloud::Pubsub::Subscription>] (See
+      #   {Gcloud::Pubsub::Subscription::List})
       #
-      # === Returns
-      #
-      # Array of Gcloud::Pubsub::Subscription
-      # (See Gcloud::Pubsub::Subscription::List)
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -510,8 +445,7 @@ module Gcloud
       #     puts subscription.name
       #   end
       #
-      # If you have a significant number of subscriptions, you may need to
-      # paginate through them: (See Subscription::List#token)
+      # @example With pagination: (See {Subscription::List#token})
       #
       #   require "gcloud"
       #
