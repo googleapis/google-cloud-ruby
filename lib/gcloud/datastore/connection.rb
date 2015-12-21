@@ -18,12 +18,14 @@ require "faraday"
 module Gcloud
   module Datastore
     ##
+    # @private
+    #
     # Represent the HTTP connection to the Datastore,
     # as well as the Datastore API calls.
     #
     # This class only deals with Protocol Buffer objects,
     # and is not part of the public API.
-    class Connection #:nodoc:
+    class Connection
       API_VERSION = "v1beta2"
       API_URL = "https://www.googleapis.com"
 
@@ -33,13 +35,15 @@ module Gcloud
 
       ##
       # The Credentials object for signing HTTP requests.
-      attr_accessor :credentials #:nodoc:
+      attr_accessor :credentials
 
       ##
       # Create a new Connection instance.
       #
+      # @example
       #   conn = Gcloud::Datastore.Connection.new "my-todo-project",
       #     Gcloud::Datastore::Credentials.new("/path/to/keyfile.json")
+      #
       def initialize dataset_id, credentials
         @dataset_id = dataset_id
         @credentials = credentials
@@ -114,24 +118,24 @@ module Gcloud
 
       ##
       # The default HTTP headers to be sent on all API calls.
-      def default_http_headers #:nodoc:
+      def default_http_headers
         @default_http_headers ||= {
           "User-Agent"   => "gcloud-node/#{Gcloud::VERSION}",
           "Content-Type" => "application/x-protobuf" }
       end
       ##
       # Update the default HTTP headers.
-      attr_writer :default_http_headers #:nodoc:
+      attr_writer :default_http_headers
 
       ##
       # The HTTP object that makes calls to Datastore.
       # This must be a Faraday object.
-      def http #:nodoc:
+      def http
         @http ||= Faraday.new url: http_host
       end
       ##
       # Update the HTTP object.
-      attr_writer :http #:nodoc:
+      attr_writer :http
 
       ##
       # The Datastore API URL.
@@ -146,7 +150,7 @@ module Gcloud
         @http_host = new_http_host
       end
 
-      def inspect #:nodoc:
+      def inspect
         "#{self.class}(#{@dataset_id})"
       end
 
