@@ -24,6 +24,7 @@ require "gcloud/bigquery"
 require "gcloud/dns"
 require "gcloud/resource_manager"
 require "gcloud/search"
+require "gcloud/logging"
 
 class MockStorage < Minitest::Spec
   let(:project) { storage.connection.project }
@@ -847,5 +848,34 @@ class MockSearch < Minitest::Spec
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_search
+  end
+end
+
+class MockLogging < Minitest::Spec
+  let(:project) { logging.connection.project }
+  let(:credentials) { logging.connection.credentials }
+  let(:logging) { $gcloud_logging_global ||= Gcloud::Logging::Project.new("test", OpenStruct.new) }
+
+  def setup
+    @connection = Faraday::Adapter::Test::Stubs.new
+    connection = logging.instance_variable_get "@connection"
+    client = connection.instance_variable_get "@client"
+    client.connection = Faraday.new do |builder|
+      # builder.options.params_encoder = Faraday::FlatParamsEncoder
+      builder.adapter :test, @connection
+    end
+  end
+
+  def teardown
+    @connection.verify_stubbed_calls
+  end
+
+  def mock_connection
+    @connection
+  end
+
+  # Register this spec type for when :storage is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_logging
   end
 end
