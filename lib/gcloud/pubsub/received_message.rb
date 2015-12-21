@@ -113,11 +113,11 @@ module Gcloud
       # This indicates that more time is needed to process the message, or to
       # make the message available for redelivery.
       #
-      # @param [Integer] deadline The new ack deadline in seconds from the time
-      #   this request is sent to the Pub/Sub system. Must be >= 0. For example,
-      #   if the value is +10+, the new ack deadline will expire 10 seconds
-      #   after the call is made. Specifying +0+ may immediately make the
-      #   message available for another pull request.
+      # @param [Integer] new_deadline The new ack deadline in seconds from the
+      #   time this request is sent to the Pub/Sub system. Must be >= 0. For
+      #   example, if the value is +10+, the new ack deadline will expire 10
+      #   seconds after the call is made. Specifying +0+ may immediately make
+      #   the message available for another pull request.
       #
       # @example
       #   require "gcloud"

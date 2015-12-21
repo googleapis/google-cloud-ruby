@@ -21,6 +21,8 @@ module Gcloud
     # rubocop:disable all
 
     ##
+    # @private
+    #
     # Proto is the namespace that contains all Protocol Buffer objects.
     #
     # The methods in this module are for convenience in using the
@@ -30,7 +32,7 @@ module Gcloud
     # this module's existance, may change in the future.
     #
     # You have been warned.
-    module Proto #:nodoc:
+    module Proto
       def self.from_proto_value proto_value
         if !proto_value.timestamp_microseconds_value.nil?
           microseconds = proto_value.timestamp_microseconds_value
@@ -111,7 +113,7 @@ module Gcloud
         Time.at(microseconds / 1000000, microseconds % 1000000).utc
       end
 
-      #:nodoc:
+      @private
       PROP_FILTER_OPS = {
         "<"   => PropertyFilter::Operator::LESS_THAN,
         "lt"  => PropertyFilter::Operator::LESS_THAN,
@@ -245,7 +247,8 @@ module Gcloud
         end
       end
 
-      class Key #:nodoc:
+      # @private
+      class Key
         def dup
           proto_request_body = ""
           self.encode proto_request_body
