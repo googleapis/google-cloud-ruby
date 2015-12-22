@@ -21,6 +21,7 @@ module Gcloud
       #
       # Represents a Bucket's Access Control List.
       #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -31,6 +32,7 @@ module Gcloud
       #   bucket.acl.readers.each { |reader| puts reader }
       #
       class Acl
+        # @private
         RULES = { "authenticatedRead" => "authenticatedRead",
                   "auth" => "authenticatedRead",
                   "auth_read" => "authenticatedRead",
@@ -44,12 +46,12 @@ module Gcloud
                   "public" => "publicRead",
                   "public_read" => "publicRead",
                   "publicReadWrite" => "publicReadWrite",
-                  "public_write" => "publicReadWrite" } #:nodoc:
+                  "public_write" => "publicReadWrite" }
 
         ##
-        # Initialized a new Acl object.
+        # @private Initialized a new Acl object.
         # Must provide a valid Bucket object.
-        def initialize bucket #:nodoc:
+        def initialize bucket
           @bucket = bucket.name
           @connection = bucket.connection
           @owners  = nil
@@ -60,8 +62,7 @@ module Gcloud
         ##
         # Reloads all Access Control List data for the bucket.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -83,12 +84,9 @@ module Gcloud
         ##
         # Lists the owners of the bucket.
         #
-        # === Returns
+        # @return [Array<String>]
         #
-        # Array of Strings
-        #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -106,12 +104,9 @@ module Gcloud
         ##
         # Lists the owners of the bucket.
         #
-        # === Returns
+        # @return [Array<String>]
         #
-        # Array of Strings
-        #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -129,12 +124,9 @@ module Gcloud
         ##
         # Lists the readers of the bucket.
         #
-        # === Returns
+        # @return [Array<String>]
         #
-        # Array of Strings
-        #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -152,11 +144,8 @@ module Gcloud
         ##
         # Grants owner permission to the bucket.
         #
-        # === Parameters
-        #
-        # +entity+::
-        #   The entity holding the permission, in one of the following forms:
-        #   (+String+)
+        # @param [String] entity The entity holding the permission, in one of
+        #   the following forms:
         #
         #   * user-userId
         #   * user-email
@@ -167,11 +156,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # === Examples
-        #
-        # Access to a bucket can be granted to a user by appending +"user-"+ to
-        # the email address:
-        #
+        # @example Grant access to a user by pre-pending +"user-"+ to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -182,9 +167,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   bucket.acl.add_owner "user-#{email}"
         #
-        # Access to a bucket can be granted to a group by appending +"group-"+
-        # to the email address:
-        #
+        # @example Grant access to a group by pre-pending +"group-"+ to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -208,11 +191,8 @@ module Gcloud
         ##
         # Grants writer permission to the bucket.
         #
-        # === Parameters
-        #
-        # +entity+::
-        #   The entity holding the permission, in one of the following forms:
-        #   (+String+)
+        # @param [String] entity The entity holding the permission, in one of
+        #   the following forms:
         #
         #   * user-userId
         #   * user-email
@@ -223,11 +203,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # === Examples
-        #
-        # Access to a bucket can be granted to a user by appending +"user-"+ to
-        # the email address:
-        #
+        # @example Grant access to a user by pre-pending +"user-"+ to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -238,9 +214,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   bucket.acl.add_writer "user-#{email}"
         #
-        # Access to a bucket can be granted to a group by appending +"group-"+
-        # to the email address:
-        #
+        # @example Grant access to a group by pre-pending +"group-"+ to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -264,11 +238,8 @@ module Gcloud
         ##
         # Grants reader permission to the bucket.
         #
-        # === Parameters
-        #
-        # +entity+::
-        #   The entity holding the permission, in one of the following forms:
-        #   (+String+)
+        # @param [String] entity The entity holding the permission, in one of
+        #   the following forms:
         #
         #   * user-userId
         #   * user-email
@@ -279,11 +250,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # === Examples
-        #
-        # Access to a bucket can be granted to a user by appending +"user-"+ to
-        # the email address:
-        #
+        # @example Grant access to a user by pre-pending +"user-"+ to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -294,9 +261,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   bucket.acl.add_reader "user-#{email}"
         #
-        # Access to a bucket can be granted to a group by appending +"group-"+
-        # to the email address:
-        #
+        # @example Grant access to a group by pre-pending +"group-"+ to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -320,11 +285,8 @@ module Gcloud
         ##
         # Permanently deletes the entity from the bucket's access control list.
         #
-        # === Parameters
-        #
-        # +entity+::
-        #   The entity holding the permission, in one of the following forms:
-        #   (+String+)
+        # @param [String] entity The entity holding the permission, in one of
+        #   the following forms:
         #
         #   * user-userId
         #   * user-email
@@ -335,8 +297,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -358,7 +319,8 @@ module Gcloud
           false
         end
 
-        def self.predefined_rule_for rule_name #:nodoc:
+        # @private
+        def self.predefined_rule_for rule_name
           RULES[rule_name.to_s]
         end
 
@@ -368,8 +330,7 @@ module Gcloud
         # Convenience method to apply the +authenticatedRead+ predefined ACL
         # rule to the bucket.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -391,8 +352,7 @@ module Gcloud
         # Convenience method to apply the +private+ predefined ACL
         # rule to the bucket.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -410,8 +370,7 @@ module Gcloud
         # Convenience method to apply the +projectPrivate+ predefined ACL
         # rule to the bucket.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -430,8 +389,7 @@ module Gcloud
         # Convenience method to apply the +publicRead+ predefined ACL
         # rule to the bucket.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -450,8 +408,7 @@ module Gcloud
         # Convenience method to apply the +publicReadWrite+ predefined ACL
         # rule to the bucket.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -506,6 +463,7 @@ module Gcloud
       #   bucket.default_acl.readers.each { |reader| puts reader }
       #
       class DefaultAcl
+        # @private
         RULES = { "authenticatedRead" => "authenticatedRead",
                   "auth" => "authenticatedRead",
                   "auth_read" => "authenticatedRead",
@@ -520,12 +478,12 @@ module Gcloud
                   "project_private" => "projectPrivate",
                   "publicRead" => "publicRead",
                   "public" => "publicRead",
-                  "public_read" => "publicRead" } #:nodoc:
+                  "public_read" => "publicRead" }
 
         ##
-        # Initialized a new DefaultAcl object.
+        # @private Initialized a new DefaultAcl object.
         # Must provide a valid Bucket object.
-        def initialize bucket #:nodoc:
+        def initialize bucket
           @bucket = bucket.name
           @connection = bucket.connection
           @owners  = nil
@@ -536,8 +494,7 @@ module Gcloud
         ##
         # Reloads all Default Access Control List data for the bucket.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -559,12 +516,9 @@ module Gcloud
         ##
         # Lists the default owners for files in the bucket.
         #
-        # === Returns
+        # @return [Array<String>]
         #
-        # Array of Strings
-        #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -582,12 +536,9 @@ module Gcloud
         ##
         # Lists the default writers for files in the bucket.
         #
-        # === Returns
+        # @return [Array<String>]
         #
-        # Array of Strings
-        #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -605,12 +556,9 @@ module Gcloud
         ##
         # Lists the default readers for files in the bucket.
         #
-        # === Returns
+        # @return [Array<String>]
         #
-        # Array of Strings
-        #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -628,11 +576,8 @@ module Gcloud
         ##
         # Grants default owner permission to files in the bucket.
         #
-        # === Parameters
-        #
-        # +entity+::
-        #   The entity holding the permission, in one of the following forms:
-        #   (+String+)
+        # @param [String] entity The entity holding the permission, in one of
+        #   the following forms:
         #
         #   * user-userId
         #   * user-email
@@ -643,11 +588,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # === Examples
-        #
-        # Access to a bucket can be granted to a user by appending +"user-"+ to
-        # the email address:
-        #
+        # @example Grant access to a user by pre-pending +"user-"+ to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -658,9 +599,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   bucket.default_acl.add_owner "user-#{email}"
         #
-        # Access to a bucket can be granted to a group by appending +"group-"+
-        # to the email address:
-        #
+        # @example Grant access to a group by pre-pending +"group-"+ to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -684,11 +623,8 @@ module Gcloud
         ##
         # Grants default writer permission to files in the bucket.
         #
-        # === Parameters
-        #
-        # +entity+::
-        #   The entity holding the permission, in one of the following forms:
-        #   (+String+)
+        # @param [String] entity The entity holding the permission, in one of
+        #   the following forms:
         #
         #   * user-userId
         #   * user-email
@@ -699,11 +635,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # === Examples
-        #
-        # Access to a bucket can be granted to a user by appending +"user-"+ to
-        # the email address:
-        #
+        # @example Grant access to a user by pre-pending +"user-"+ to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -714,9 +646,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   bucket.default_acl.add_writer "user-#{email}"
         #
-        # Access to a bucket can be granted to a group by appending +"group-"+
-        # to the email address:
-        #
+        # @example Grant access to a group by pre-pending +"group-"+ to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -740,11 +670,8 @@ module Gcloud
         ##
         # Grants default reader permission to files in the bucket.
         #
-        # === Parameters
-        #
-        # +entity+::
-        #   The entity holding the permission, in one of the following forms:
-        #   (+String+)
+        # @param [String] entity The entity holding the permission, in one of
+        #   the following forms:
         #
         #   * user-userId
         #   * user-email
@@ -755,11 +682,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # === Examples
-        #
-        # Access to a bucket can be granted to a user by appending +"user-"+ to
-        # the email address:
-        #
+        # @example Grant access to a user by pre-pending +"user-"+ to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -770,9 +693,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   bucket.default_acl.add_reader "user-#{email}"
         #
-        # Access to a bucket can be granted to a group by appending +"group-"+
-        # to the email address:
-        #
+        # @example Grant access to a group by pre-pending +"group-"+ to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -797,11 +718,8 @@ module Gcloud
         # Permanently deletes the entity from the bucket's default access
         # control list for files.
         #
-        # === Parameters
-        #
-        # +entity+::
-        #   The entity holding the permission, in one of the following forms:
-        #   (+String+)
+        # @param [String] entity The entity holding the permission, in one of
+        #   the following forms:
         #
         #   * user-userId
         #   * user-email
@@ -812,8 +730,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -835,7 +752,8 @@ module Gcloud
           false
         end
 
-        def self.predefined_rule_for rule_name #:nodoc:
+        # @private
+        def self.predefined_rule_for rule_name
           RULES[rule_name.to_s]
         end
 
@@ -845,8 +763,7 @@ module Gcloud
         # Convenience method to apply the default +authenticatedRead+
         # predefined ACL rule to files in the bucket.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -868,8 +785,7 @@ module Gcloud
         # Convenience method to apply the default +bucketOwnerFullControl+
         # predefined ACL rule to files in the bucket.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -888,8 +804,7 @@ module Gcloud
         # Convenience method to apply the default +bucketOwnerRead+
         # predefined ACL rule to files in the bucket.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -908,8 +823,7 @@ module Gcloud
         # Convenience method to apply the default +private+
         # predefined ACL rule to files in the bucket.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -927,8 +841,7 @@ module Gcloud
         # Convenience method to apply the default +projectPrivate+
         # predefined ACL rule to files in the bucket.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -947,8 +860,7 @@ module Gcloud
         # Convenience method to apply the default +publicRead+
         # predefined ACL rule to files in the bucket.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
