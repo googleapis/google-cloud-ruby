@@ -22,13 +22,15 @@ require "mime/types"
 module Gcloud
   module Storage
     ##
-    # Represents the connection to Storage,
+    # @private Represents the connection to Storage,
     # as well as expose the API calls.
-    class Connection #:nodoc:
+    class Connection
       API_VERSION = "v1"
 
       attr_accessor :project
-      attr_accessor :credentials #:nodoc:
+
+      # @private
+      attr_accessor :credentials
 
       ##
       # Creates a new Connection instance.
@@ -303,7 +305,8 @@ module Gcloud
         MIME::Types.of(path).first.to_s
       end
 
-      def inspect #:nodoc:
+      # @private
+      def inspect
         "#{self.class}(#{@project})"
       end
 
@@ -354,7 +357,8 @@ module Gcloud
         }.delete_if { |_, v| v.nil? } if website_main || website_404
       end
 
-      def storage_class str #:nodoc:
+      # @private
+      def storage_class str
         { "durable_reduced_availability" => "DURABLE_REDUCED_AVAILABILITY",
           "dra" => "DURABLE_REDUCED_AVAILABILITY",
           "durable" => "DURABLE_REDUCED_AVAILABILITY",
