@@ -21,6 +21,7 @@ module Gcloud
       #
       # Represents a File's Access Control List.
       #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -32,6 +33,7 @@ module Gcloud
       #   file.acl.readers.each { |reader| puts reader }
       #
       class Acl
+        # @private
         RULES = { "authenticatedRead" => "authenticatedRead",
                   "auth" => "authenticatedRead",
                   "auth_read" => "authenticatedRead",
@@ -46,12 +48,12 @@ module Gcloud
                   "project_private" => "projectPrivate",
                   "publicRead" => "publicRead",
                   "public" => "publicRead",
-                  "public_read" => "publicRead" } #:nodoc:
+                  "public_read" => "publicRead" }
 
         ##
-        # Initialized a new Acl object.
+        # @private Initialized a new Acl object.
         # Must provide a valid Bucket object.
-        def initialize file #:nodoc:
+        def initialize file
           @bucket = file.bucket
           @file = file.name
           @connection = file.connection
@@ -63,8 +65,7 @@ module Gcloud
         ##
         # Reloads all Access Control List data for the file.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -87,12 +88,9 @@ module Gcloud
         ##
         # Lists the owners of the file.
         #
-        # === Returns
+        # @return [Array<String>]
         #
-        # Array of Strings
-        #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -111,12 +109,9 @@ module Gcloud
         ##
         # Lists the owners of the file.
         #
-        # === Returns
+        # @return [Array<String>]
         #
-        # Array of Strings
-        #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -135,12 +130,9 @@ module Gcloud
         ##
         # Lists the readers of the file.
         #
-        # === Returns
+        # @return [Array<String>]
         #
-        # Array of Strings
-        #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -159,11 +151,8 @@ module Gcloud
         ##
         # Grants owner permission to the file.
         #
-        # === Parameters
-        #
-        # +entity+::
-        #   The entity holding the permission, in one of the following forms:
-        #   (+String+)
+        # @param [String] entity The entity holding the permission, in one of
+        #   the following forms:
         #
         #   * user-userId
         #   * user-email
@@ -174,15 +163,10 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # +generation+::
-        #   When present, selects a specific revision of this object.
-        #   Default is the latest version. (+Integer+)
+        # @param [Integer] generation When present, selects a specific revision
+        #   of this object. Default is the latest version.
         #
-        # === Examples
-        #
-        # Access to a file can be granted to a user by appending +"user-"+ to
-        # the email address:
-        #
+        # @example Grant access to a user by pre-pending +"user-"+ to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -194,9 +178,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   file.acl.add_owner "user-#{email}"
         #
-        # Access to a file can be granted to a group by appending +"group-"+ to
-        # the email address:
-        #
+        # @example Grant access to a group by pre-pending +"group-"+ to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -223,11 +205,8 @@ module Gcloud
         ##
         # Grants writer permission to the file.
         #
-        # === Parameters
-        #
-        # +entity+::
-        #   The entity holding the permission, in one of the following forms:
-        #   (+String+)
+        # @param [String] entity The entity holding the permission, in one of
+        #   the following forms:
         #
         #   * user-userId
         #   * user-email
@@ -238,15 +217,10 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # +generation+::
-        #   When present, selects a specific revision of this object.
-        #   Default is the latest version. (+Integer+)
+        # @param [Integer] generation When present, selects a specific revision
+        #   of this object. Default is the latest version.
         #
-        # === Examples
-        #
-        # Access to a file can be granted to a user by appending +"user-"+ to
-        # the email address:
-        #
+        # @example Grant access to a user by pre-pending +"user-"+ to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -258,9 +232,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   file.acl.add_writer "user-#{email}"
         #
-        # Access to a file can be granted to a group by appending +"group-"+ to
-        # the email address:
-        #
+        # @example Grant access to a group by pre-pending +"group-"+ to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -287,11 +259,8 @@ module Gcloud
         ##
         # Grants reader permission to the file.
         #
-        # === Parameters
-        #
-        # +entity+::
-        #   The entity holding the permission, in one of the following forms:
-        #   (+String+)
+        # @param [String] entity The entity holding the permission, in one of
+        #   the following forms:
         #
         #   * user-userId
         #   * user-email
@@ -302,15 +271,10 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # +generation+::
-        #   When present, selects a specific revision of this object.
-        #   Default is the latest version. (+Integer+)
+        # @param [Integer] generation When present, selects a specific revision
+        #   of this object. Default is the latest version.
         #
-        # === Examples
-        #
-        # Access to a file can be granted to a user by appending +"user-"+ to
-        # the email address:
-        #
+        # @example Grant access to a user by pre-pending +"user-"+ to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -322,9 +286,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   file.acl.add_reader "user-#{email}"
         #
-        # Access to a file can be granted to a group by appending +"group-"+ to
-        # the email address:
-        #
+        # @example Grant access to a group by pre-pending +"group-"+ to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -351,11 +313,8 @@ module Gcloud
         ##
         # Permanently deletes the entity from the file's access control list.
         #
-        # === Parameters
-        #
-        # +entity+::
-        #   The entity holding the permission, in one of the following forms:
-        #   (+String+)
+        # @param [String] entity The entity holding the permission, in one of
+        #   the following forms:
         #
         #   * user-userId
         #   * user-email
@@ -366,12 +325,10 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # +generation+::
-        #   When present, selects a specific revision of this object.
-        #   Default is the latest version. (+Integer+)
+        # @param [Integer] generation When present, selects a specific revision
+        #   of this object. Default is the latest version.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -395,7 +352,8 @@ module Gcloud
           false
         end
 
-        def self.predefined_rule_for rule_name #:nodoc:
+        # @private
+        def self.predefined_rule_for rule_name
           RULES[rule_name.to_s]
         end
 
@@ -405,8 +363,7 @@ module Gcloud
         # Convenience method to apply the +authenticatedRead+ predefined ACL
         # rule to the file.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -429,8 +386,7 @@ module Gcloud
         # Convenience method to apply the +bucketOwnerFullControl+ predefined
         # ACL rule to the file.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -450,8 +406,7 @@ module Gcloud
         # Convenience method to apply the +bucketOwnerRead+ predefined ACL
         # rule to the file.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -471,8 +426,7 @@ module Gcloud
         # Convenience method to apply the +private+ predefined ACL
         # rule to the file.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -491,8 +445,7 @@ module Gcloud
         # Convenience method to apply the +projectPrivate+ predefined ACL
         # rule to the file.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -512,8 +465,7 @@ module Gcloud
         # Convenience method to apply the +publicRead+ predefined ACL
         # rule to the file.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
