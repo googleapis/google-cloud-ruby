@@ -78,16 +78,20 @@
           <%= htmlify options.object.docstring %>
         </div>
 
-        <% if options.object.meths.any? %>
+        <% methods_in_groups(object.groups, object.meths) do |group, methods| %>
           <ul>
-            <% object.meths.each do |method| %>
-              <li>
-                <code><%= (method.scope == :instance) ? "#" : "." %><%= method.name %></code>
-                <% if method.docstring %>
-                  <br><%= htmlify method.docstring %>
+            <li><%= group %>
+              <ul>
+                <% methods.each do |method| %>
+                  <li>
+                    <code><%= (method.scope == :instance) ? "#" : "." %><%= method.name %></code>
+                    <% if method.docstring %>
+                      <br><%= htmlify method.docstring %>
+                    <% end %>
+                  </li>
                 <% end %>
-              </li>
-            <% end %>
+              </ul>
+            </li>
           </ul>
         <% end %>
       </section>

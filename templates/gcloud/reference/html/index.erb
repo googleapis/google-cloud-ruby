@@ -84,9 +84,16 @@
                 <a href="<%= object.path %>" onclick="$('#details-<%= object.path.gsub("::", "_") %>').toggle(); return false;">(methods)</a></p>
                 <div id="details-<%= object.path.gsub("::", "_") %>" style="display: none">
                   <ul>
-                    <% object.meths.each do |method| %>
-                      <li class="toctree-l1">
-                        <code><%= (method.scope == :instance) ? "#" : "." %><%= method.name %></code>
+                    <% methods_in_groups(object.groups, object.meths) do |group, methods| %>
+                      <li class="toctree-l0">
+                        <%= group %>
+                        <ul>
+                          <% methods.each do |method| %>
+                            <li class="toctree-l1">
+                              <code><%= (method.scope == :instance) ? "#" : "." %><%= method.name %></code>
+                            </li>
+                          <% end %>
+                        </ul>
                       </li>
                     <% end %>
                   </ul>
