@@ -32,9 +32,12 @@ module Gcloud
     # authentication, and monitoring settings for those APIs.
     #
     # Gcloud::Storage::Project is the main object for interacting with
-    # Google Storage. Gcloud::Storage::Bucket objects are created,
+    # Google Storage. {Gcloud::Storage::Bucket} objects are created,
     # read, updated, and deleted by Gcloud::Storage::Project.
     #
+    # See {Gcloud#storage}
+    #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -43,17 +46,16 @@ module Gcloud
     #   bucket = storage.bucket "my-bucket"
     #   file = bucket.file "path/to/my-file.ext"
     #
-    # See Gcloud#storage
     class Project
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
       ##
-      # Creates a new Project instance.
+      # @private Creates a new Project instance.
       #
-      # See Gcloud#storage
-      def initialize project, credentials #:nodoc:
+      # See {Gcloud#storage}
+      def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
         @connection = Connection.new project, credentials
@@ -62,8 +64,7 @@ module Gcloud
       ##
       # The Storage project connected to.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new "my-todo-project",
@@ -77,8 +78,8 @@ module Gcloud
       end
 
       ##
-      # Default project.
-      def self.default_project #:nodoc:
+      # @private Default project.
+      def self.default_project
         ENV["STORAGE_PROJECT"] ||
           ENV["GCLOUD_PROJECT"] ||
           ENV["GOOGLE_CLOUD_PROJECT"] ||
@@ -88,23 +89,16 @@ module Gcloud
       ##
       # Retrieves a list of buckets for the given project.
       #
-      # === Parameters
+      # @param [String] prefix Filter results to buckets whose names begin with
+      #   this prefix.
+      # @param [String] token A previously-returned page token representing part
+      #   of the larger set of results to view.
+      # @param [Integer] max Maximum number of buckets to return.
       #
-      # +prefix+::
-      #   Filter results to buckets whose names begin with this prefix.
-      #   (+String+)
-      # +token+::
-      #   A previously-returned page token representing part of the larger set
-      #   of results to view. (+String+)
-      # +max+::
-      #   Maximum number of buckets to return. (+Integer+)
+      # @return [Array<Gcloud::Storage::Bucket>] (See
+      #   {Gcloud::Storage::Bucket::List})
       #
-      # === Returns
-      #
-      # Array of Gcloud::Storage::Bucket (See Gcloud::Storage::Bucket::List)
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -115,9 +109,7 @@ module Gcloud
       #     puts bucket.name
       #   end
       #
-      # You can also retrieve all buckets whose names begin with a prefix using
-      # the +:prefix+ option:
-      #
+      # @example Retrieve all buckets with names that begin with a given prefix:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -125,9 +117,7 @@ module Gcloud
       #
       #   user_buckets = storage.buckets prefix: "user-"
       #
-      # If you have a significant number of buckets, you may need to paginate
-      # through them: (See Bucket::List#token)
-      #
+      # @example With pagination: (See {Bucket::List#token})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -159,17 +149,12 @@ module Gcloud
       ##
       # Retrieves bucket by name.
       #
-      # === Parameters
+      # @param [String] bucket_name Name of a bucket.
       #
-      # +bucket_name+::
-      #   Name of a bucket. (+String+)
+      # @return [Gcloud::Storage::Bucket, nil] Returns nil if bucket does not
+      #   exist
       #
-      # === Returns
-      #
-      # Gcloud::Storage::Bucket or nil if bucket does not exist
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -192,18 +177,25 @@ module Gcloud
       ##
       # Creates a new bucket with optional attributes. Also accepts a block for
       # defining the CORS configuration for a static website served from the
-      # bucket. See Bucket::Cors for details. For more information about
-      # configuring buckets as static websites, see {How to Host a Static
-      # Website }[https://cloud.google.com/storage/docs/website-configuration].
-      # For more information about CORS, see {Cross-Origin Resource Sharing
-      # (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
+      # bucket. See {Bucket::Cors} for details.
       #
-      # === Parameters
+      # The API call to create the bucket may be retried under certain
+      # conditions. See {Gcloud::Backoff} to control this behavior, or
+      # specify the wanted behavior in the call with the +:retries:+ option.
       #
-      # +bucket_name+::
-      #   Name of a bucket. (+String+)
-      # +acl+::
-      #   Apply a predefined set of access controls to this bucket. (+String+)
+      # You can pass {website
+      # settings}[https://cloud.google.com/storage/docs/website-configuration]
+      # for the bucket, including a block that defines CORS rule. See
+      # {Bucket::Cors} for details.
+      #
+      # @see https://cloud.google.com/storage/docs/cross-origin Cross-Origin
+      #   Resource Sharing (CORS)
+      # @see https://cloud.google.com/storage/docs/website-configuration How to
+      #   Host a Static Website
+      #
+      # @param [String] bucket_name Name of a bucket.
+      # @param [String] acl Apply a predefined set of access controls to this
+      #   bucket.
       #
       #   Acceptable values are:
       #   * +auth+, +auth_read+, +authenticated+, +authenticated_read+,
@@ -216,9 +208,8 @@ module Gcloud
       #     OWNER access, and allUsers get READER access.
       #   * +public_write+, +publicReadWrite+ - Project team owners get OWNER
       #     access, and allUsers get WRITER access.
-      # +default_acl+::
-      #   Apply a predefined set of default object access controls to this
-      #   bucket. (+String+)
+      # @param [String] default_acl Apply a predefined set of default object
+      #   access controls to this bucket.
       #
       #   Acceptable values are:
       #   * +auth+, +auth_read+, +authenticated+, +authenticated_read+,
@@ -233,60 +224,51 @@ module Gcloud
       #     and project team members get access according to their roles.
       #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
       #     access, and allUsers get READER access.
-      # +cors+::
-      #   The CORS rules for the bucket. Accepts an array of hashes containing
-      #   the attributes specified for the {resource description of
+      # @param [String] cors The CORS rules for the bucket. Accepts an array of
+      #   hashes containing the attributes specified for the {resource
+      #   description of
       #   cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
-      # +location+::
-      #   The location of the bucket. Object data for objects in the bucket
-      #   resides in physical storage within this region. Possible values
-      #   include +ASIA+, +EU+, and +US+.(See the {developer's
+      # @param [String] location The location of the bucket. Object data for
+      #   objects in the bucket resides in physical storage within this region.
+      #   Possible values include +ASIA+, +EU+, and +US+.(See the {developer's
       #   guide}[https://cloud.google.com/storage/docs/bucket-locations] for the
-      #   authoritative list. The default value is +US+. (+String+)
-      # +logging_bucket+::
-      #   The destination bucket for the bucket's logs. For more information,
-      #   see {Access
-      #   Logs}[https://cloud.google.com/storage/docs/access-logs]. (+String+)
-      # +logging_prefix+::
-      #   The prefix used to create log object names for the bucket. It can be
-      #   at most 900 characters and must be a {valid object
+      #   authoritative list. The default value is +US+.
+      # @param [String] logging_bucket The destination bucket for the bucket's
+      #   logs. For more information, see {Access
+      #   Logs}[https://cloud.google.com/storage/docs/access-logs].
+      # @param [String] logging_prefix The prefix used to create log object
+      #   names for the bucket. It can be at most 900 characters and must be a
+      #   {valid object
       #   name}[https://cloud.google.com/storage/docs/bucket-naming#objectnames]
-      #   . By default, the object prefix is the name
-      #   of the bucket for which the logs are enabled. For more information,
-      #   see {Access Logs}[https://cloud.google.com/storage/docs/access-logs].
-      #   (+String+)
-      # +retries+::
-      #   The number of times the API call should be retried.
-      #   Default is Gcloud::Backoff.retries. (+Integer+)
-      # +storage_class+::
-      #   Defines how objects in the bucket are stored and determines the SLA
-      #   and the cost of storage. Values include +:standard+, +:nearline+, and
-      #   +:dra+ (Durable Reduced Availability), as well as the strings returned
-      #   by Bucket#storage_class. For more information, see {Storage
-      #   Classes}[https://cloud.google.com/storage/docs/storage-classes].
-      #   The default value is +:standard+. (+Symbol+ or +String+)
-      # +versioning+::
-      #   Whether {Object
+      #   . By default, the object prefix is the name of the bucket for which
+      #   the logs are enabled. For more information, see {Access
+      #   Logs}[https://cloud.google.com/storage/docs/access-logs].
+      # @param [Integer] retries The number of times the API call should be
+      #   retried. Default is {Gcloud::Backoff.retries}.
+      # @param [Symbol, String] storage_class Defines how objects in the bucket
+      #   are stored and determines the SLA and the cost of storage. Values
+      #   include +:standard+, +:nearline+, and +:dra+ (Durable Reduced
+      #   Availability), as well as the strings returned by
+      #   Bucket#storage_class. For more information, see {Storage
+      #   Classes}[https://cloud.google.com/storage/docs/storage-classes]. The
+      #   default value is +:standard+.
+      # @param [Boolean] versioning Whether {Object
       #   Versioning}[https://cloud.google.com/storage/docs/object-versioning]
       #   is to be enabled for the bucket. The default value is +false+.
-      #   (+Boolean+)
-      # +website_main+::
-      #   The index page returned from a static website served from the bucket
-      #   when a site visitor requests the top level directory. For more
-      #   information, see {How to Host a Static Website
+      # @param [String] website_main The index page returned from a static
+      #   website served from the bucket when a site visitor requests the top
+      #   level directory. For more information, see {How to Host a Static
+      #   Website
       #   }[https://cloud.google.com/storage/docs/website-configuration#step4].
-      # +website_404+::
-      #   The page returned from a static website served from the bucket when a
-      #   site visitor requests a resource that does not exist. For more
-      #   information, see {How to Host a Static Website
+      # @param [String] website_404 The page returned from a static website
+      #   served from the bucket when a site visitor requests a resource that
+      #   does not exist. For more information, see {How to Host a Static
+      #   Website
       #   }[https://cloud.google.com/storage/docs/website-configuration#step4].
       #
-      # === Returns
+      # @return [Gcloud::Storage::Bucket]
       #
-      # Gcloud::Storage::Bucket
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -294,10 +276,7 @@ module Gcloud
       #
       #   bucket = storage.create_bucket "my-bucket"
       #
-      # The API call to create the bucket may be retried under certain
-      # conditions. See Gcloud::Backoff to control this behavior, or
-      # specify the wanted behavior in the call with the +:retries:+ option:
-      #
+      # @example Specify the number of retries to attempt:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -305,11 +284,7 @@ module Gcloud
       #
       #   bucket = storage.create_bucket "my-bucket", retries: 5
       #
-      # You can pass {website
-      # settings}[https://cloud.google.com/storage/docs/website-configuration]
-      # for the bucket, including a block that defines CORS rule. See
-      # Bucket::Cors for details.
-      #
+      # @example Add CORS rules in a block:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

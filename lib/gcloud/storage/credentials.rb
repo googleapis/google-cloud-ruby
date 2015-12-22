@@ -18,8 +18,8 @@ require "gcloud/credentials"
 module Gcloud
   module Storage
     ##
-    # Represents the OAuth 2.0 signing logic for Storage.
-    class Credentials < Gcloud::Credentials #:nodoc:
+    # @private Represents the OAuth 2.0 signing logic for Storage.
+    class Credentials < Gcloud::Credentials
       SCOPE = ["https://www.googleapis.com/auth/devstorage.full_control"]
       PATH_ENV_VARS = %w(STORAGE_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
       JSON_ENV_VARS = %w(STORAGE_KEYFILE_JSON GCLOUD_KEYFILE_JSON
