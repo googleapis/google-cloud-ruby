@@ -29,7 +29,7 @@ module Gcloud
   # `keyfile`::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
   #   readable. (`String` or `Hash`)
-  # +scope::
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
   #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
