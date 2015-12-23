@@ -98,7 +98,7 @@ module Gcloud
   # ```
   #
   # You can learn more about various options for connection on the
-  # [Authentication Guide](link:AUTHENTICATION.md).
+  # [Authentication Guide](../AUTHENTICATION).
   #
   # To learn more about Datastore, read the
   # [Google Cloud Datastore Concepts Overview
