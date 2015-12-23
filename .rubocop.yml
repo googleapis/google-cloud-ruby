@@ -8,6 +8,9 @@ AllCops:
     - "test/**/*"
     - "Vagrantfile"
 
+Documentation:
+  Enabled: false
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/MethodDefParentheses:
@@ -17,6 +20,8 @@ Style/NumericLiterals:
 Style/SpaceAroundOperators:
   Enabled: false
 Metrics/ClassLength:
+  Enabled: false
+Style/EmptyLines:
   Enabled: false
 Style/EmptyElse:
   Enabled: false

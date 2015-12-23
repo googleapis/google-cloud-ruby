@@ -12,11 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud"
 require "gcloud/resource_manager/manager"
 
-#--
-# Google Cloud Resource Manager
 module Gcloud
   ##
   # Creates a new `Project` instance connected to the Resource Manager service.
