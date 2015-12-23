@@ -18,7 +18,7 @@ require "gcloud/datastore/proto"
 module Gcloud
   module Datastore
     ##
-    # = Key
+    # # Key
     #
     # Every Datastore record has an identifying key, which includes the record's
     # entity kind and a unique identifier. The identifier may be either a key

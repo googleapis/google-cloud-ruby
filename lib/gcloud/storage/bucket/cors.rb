@@ -19,7 +19,7 @@ module Gcloud
   module Storage
     class Bucket
       ##
-      # = Bucket Cors
+      # # Bucket Cors
       #
       # A special-case Array for managing the website CORS rules for a bucket.
       # Accessed via a block argument to {Project#create_bucket}, {Bucket#cors},

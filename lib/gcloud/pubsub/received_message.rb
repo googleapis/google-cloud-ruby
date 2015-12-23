@@ -19,7 +19,7 @@ require "gcloud/pubsub/message"
 module Gcloud
   module Pubsub
     ##
-    # = ReceivedMessage
+    # # ReceivedMessage
     #
     # Represents a Pub/Sub {Message} that can be acknowledged or delayed.
     #

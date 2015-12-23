@@ -16,7 +16,7 @@
 module Gcloud
   module Bigquery
     ##
-    # = QueryJob
+    # # QueryJob
     #
     # A {Job} subclass representing a query operation that may be performed
     # on a {Table}. A QueryJob instance is created when you call

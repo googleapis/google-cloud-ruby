@@ -18,7 +18,7 @@ require "gcloud/dns/record/list"
 module Gcloud
   module Dns
     ##
-    # = DNS Record
+    # # DNS Record
     #
     # Represents a set of DNS resource records (RRs) for a given {#name} and
     # {#type} in a {Zone}. Since it is a value object, a newly created Record

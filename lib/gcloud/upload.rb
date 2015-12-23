@@ -19,7 +19,7 @@ require "gcloud"
 # Google Cloud Upload
 module Gcloud
   ##
-  # = Upload Settings
+  # # Upload Settings
   #
   # Upload allows users to configure how files are uploaded to the Google Cloud
   # Service APIs.

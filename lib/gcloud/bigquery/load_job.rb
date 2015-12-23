@@ -16,7 +16,7 @@
 module Gcloud
   module Bigquery
     ##
-    # = LoadJob
+    # # LoadJob
     #
     # A {Job} subclass representing a load operation that may be performed
     # on a {Table}. A LoadJob instance is created when you call {Table#load}.

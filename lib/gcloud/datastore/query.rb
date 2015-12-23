@@ -20,7 +20,7 @@ require "gcloud/datastore/proto"
 module Gcloud
   module Datastore
     ##
-    # = Query
+    # # Query
     #
     # Represents the search criteria against a Datastore.
     #

@@ -22,7 +22,7 @@ module Gcloud
   # Creates a new +Project+ instance connected to the BigQuery service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +project+::
   #   Identifier for a BigQuery project. If not present, the default project for
@@ -40,11 +40,11 @@ module Gcloud
   #
   #   * +https://www.googleapis.com/auth/bigquery+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::Bigquery::Project
   #
-  # === Example
+  # ### Example
   #
   #   require "gcloud/bigquery"
   #
@@ -63,7 +63,7 @@ module Gcloud
   end
 
   ##
-  # = Google Cloud BigQuery
+  # # Google Cloud BigQuery
   #
   # Google Cloud BigQuery enables super-fast, SQL-like queries against massive
   # datasets, using the processing power of Google's infrastructure. To learn
@@ -84,7 +84,7 @@ module Gcloud
   # first examples without the need to set up billing or to load data (although
   # we'll show you how to do that too.)
   #
-  # == Listing Datasets and Tables
+  # ## Listing Datasets and Tables
   #
   # A BigQuery project holds datasets, which in turn hold tables. Assuming that
   # you have not yet created datasets or tables in your own project, let's
@@ -123,12 +123,12 @@ module Gcloud
   # Now that you know the column names for the Shakespeare table, you can write
   # and run a query.
   #
-  # == Running queries
+  # ## Running queries
   #
   # BigQuery offers both synchronous and asynchronous methods, as explained in
   # {Querying Data}[https://cloud.google.com/bigquery/querying-data].
   #
-  # === Synchronous queries
+  # ### Synchronous queries
   #
   # Let's start with the simpler synchronous approach. Notice that this time you
   # are connecting using your own default project. This is necessary for running
@@ -152,7 +152,7 @@ module Gcloud
   # Reference}[https://cloud.google.com/bigquery/query-reference] for a full
   # listing.
   #
-  # === Asynchronous queries
+  # ### Asynchronous queries
   #
   # Because you probably should not block for most BigQuery operations,
   # including querying as well as importing, exporting, and copying data, the
@@ -183,7 +183,7 @@ module Gcloud
   # 24 hours. See the final example below for a demonstration of how to store
   # query results in a permanent table.
   #
-  # == Creating Datasets and Tables
+  # ## Creating Datasets and Tables
   #
   # The first thing you need to do in a new BigQuery project is to create a
   # Gcloud::Bigquery::Dataset. Datasets hold tables and control access to them.
@@ -218,7 +218,7 @@ module Gcloud
   # Because of the repeated field in this schema, we cannot use the CSV format
   # to load data into the table.
   #
-  # == Loading records
+  # ## Loading records
   #
   # In addition to CSV, data can be imported from files that are formatted as
   # {Newline-delimited JSON}[http://jsonlines.org/] or
@@ -228,7 +228,7 @@ module Gcloud
   # To follow along with these examples, you will need to set up billing on the
   # {Google Developers Console}[https://console.developers.google.com].
   #
-  # === Streaming records
+  # ### Streaming records
   #
   # For situations in which you want new data to be available for querying as
   # soon as possible, inserting individual records directly from your Ruby
@@ -271,7 +271,7 @@ module Gcloud
   # discussion of data consistency in {Streaming Data Into
   # BigQuery}[https://cloud.google.com/bigquery/streaming-data-into-bigquery].
   #
-  # === Uploading a file
+  # ### Uploading a file
   #
   # To follow along with this example, please download the
   # {names.zip}[http://www.ssa.gov/OACT/babynames/names.zip] archive from the
@@ -299,7 +299,7 @@ module Gcloud
   # default format for load operations, the option is not actually necessary.
   # For JSON saved with a +.txt+ extension, however, it would be.
   #
-  # === A note about large uploads
+  # ### A note about large uploads
   #
   # You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
   # upload large files. To avoid this problem, add the
@@ -324,7 +324,7 @@ module Gcloud
   #   gcloud = Gcloud.new
   #   bigquery = gcloud.bigquery
   #
-  # == Exporting query results to Google Cloud Storage
+  # ## Exporting query results to Google Cloud Storage
   #
   # The example below shows how to pass the +table+ option with a query in order
   # to store results in a permanent table. It also shows how to export the

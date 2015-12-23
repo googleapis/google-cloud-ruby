@@ -17,7 +17,7 @@ module Gcloud
   module Dns
     class Zone
       ##
-      # = DNS Zone Transaction
+      # # DNS Zone Transaction
       #
       # This object is used by {Zone#update} when passed a block. These methods
       # are used to update the records that are sent to the Google Cloud DNS

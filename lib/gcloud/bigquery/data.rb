@@ -18,7 +18,7 @@ require "delegate"
 module Gcloud
   module Bigquery
     ##
-    # = Data
+    # # Data
     #
     # Represents {Table} Data as a list of name/value pairs.
     # Also contains metadata such as +etag+ and +total+.

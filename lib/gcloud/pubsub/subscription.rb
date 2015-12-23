@@ -20,7 +20,7 @@ require "gcloud/pubsub/received_message"
 module Gcloud
   module Pubsub
     ##
-    # = Subscription
+    # # Subscription
     #
     # A named resource representing the stream of messages from a single,
     # specific {Topic}, to be delivered to the subscribing application.

@@ -20,7 +20,7 @@ require "gcloud/search/fields"
 module Gcloud
   module Search
     ##
-    # = Document
+    # # Document
     #
     # A document is an object that stores data that can be searched. Each
     # document has a {#doc_id} that is unique within its index, a {#rank}, and a

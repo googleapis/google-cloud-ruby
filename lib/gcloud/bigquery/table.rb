@@ -24,7 +24,7 @@ require "gcloud/upload"
 module Gcloud
   module Bigquery
     ##
-    # = Table
+    # # Table
     #
     # A named resource representing a BigQuery table that holds zero or more
     # records. Every table is defined by a schema that may contain nested and
@@ -707,7 +707,7 @@ module Gcloud
       #   file = File.open "my_data.csv"
       #   load_job = table.load file
       #
-      # === A note about large direct uploads
+      # ### A note about large direct uploads
       #
       # You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
       # upload large files. To avoid this problem, add the

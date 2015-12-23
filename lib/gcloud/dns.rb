@@ -22,7 +22,7 @@ module Gcloud
   # Creates a new +Project+ instance connected to the DNS service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +project+::
   #   Identifier for a DNS project. If not present, the default project for
@@ -40,11 +40,11 @@ module Gcloud
   #
   #   * +https://www.googleapis.com/auth/ndev.clouddns.readwrite+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::Dns::Project
   #
-  # === Example
+  # ### Example
   #
   #   require "gcloud"
   #
@@ -64,7 +64,7 @@ module Gcloud
   end
 
   ##
-  # = Google Cloud DNS
+  # # Google Cloud DNS
   #
   # Google Cloud DNS is a high-performance, resilient, global DNS service that
   # provides a cost-effective way to make your applications and services
@@ -80,7 +80,7 @@ module Gcloud
   # care of for you. You can read more about the options for connecting in the
   # {Authentication Guide}[link:AUTHENTICATION.md].
   #
-  # == Creating Zones
+  # ## Creating Zones
   #
   # To get started with Google Cloud DNS, use your DNS Project to create a new
   # Zone. The second argument to Project#create_zone must be a unique
@@ -100,7 +100,7 @@ module Gcloud
   # For more information, see {Managing
   # Zones}[https://cloud.google.com/dns/zones/].
   #
-  # == Listing Zones
+  # ## Listing Zones
   #
   # You can retrieve all the zones in your project.
   #
@@ -121,7 +121,7 @@ module Gcloud
   #   dns = gcloud.dns
   #   zone = dns.zone "example-com"
   #
-  # == Listing Records
+  # ## Listing Records
   #
   # When you create a zone, the Cloud DNS service automatically creates two
   # Record instances for it, providing configuration for Cloud DNS nameservers.
@@ -143,7 +143,7 @@ module Gcloud
   # supports multiple "resource records" (in this case, the four nameserver
   # addresses) via this +data+ collection.
   #
-  # == Managing Records
+  # ## Managing Records
   #
   # You can easily add your own records to the zone. Each call to Zone#add
   # results in a new Cloud DNS Change instance.
@@ -236,7 +236,7 @@ module Gcloud
   #   to_delete = zone.records "www", "A"
   #   change = zone.update to_add, to_delete
   #
-  # == Listing Changes
+  # ## Listing Changes
   #
   # Because the transactions you execute against your zone do not always
   # complete immediately, you can retrieve and inspect changes.
@@ -251,7 +251,7 @@ module Gcloud
   #     puts "#{change.id} - #{change.started_at} - #{change.status}"
   #   end
   #
-  # == Importing and exporting zone files
+  # ## Importing and exporting zone files
   #
   # You can import from a zone file. Because the Cloud DNS service only allows
   # the zone to have one Record instance for each name and type combination,

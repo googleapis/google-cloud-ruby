@@ -16,7 +16,7 @@
 module Gcloud
   module Search
     ##
-    # = FieldValue
+    # # FieldValue
     #
     # FieldValue is used to represent a value that belongs to a field. (See
     # {Fields} and {FieldValues})

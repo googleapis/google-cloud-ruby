@@ -18,7 +18,7 @@ require "gcloud/bigquery/data"
 module Gcloud
   module Bigquery
     ##
-    # = QueryData
+    # # QueryData
     #
     # Represents Data returned from a query a a list of name/value pairs.
     class QueryData < Data

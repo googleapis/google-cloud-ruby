@@ -24,7 +24,7 @@ require "gcloud/storage/file"
 module Gcloud
   module Storage
     ##
-    # = Project
+    # # Project
     #
     # Represents the project that storage buckets and files belong to.
     # All data in Google Cloud Storage belongs inside a project.

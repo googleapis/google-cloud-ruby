@@ -22,7 +22,7 @@ require "gcloud/upload"
 module Gcloud
   module Storage
     ##
-    # = Bucket
+    # # Bucket
     #
     # Represents a Storage bucket. Belongs to a Project and has many Files.
     #
@@ -555,18 +555,18 @@ module Gcloud
       #                      "destination/path/file.ext",
       #                      chunk_size: 1024*1024 # 1 MB chunk
       #
-      # ==== Troubleshooting large uploads
+      # #### Troubleshooting large uploads
       #
       # You may encounter errors while attempting to upload large files. Below
       # are a couple of common cases and their solutions.
       #
-      # ===== Handling memory errors
+      # ##### Handling memory errors
       #
       # If you encounter a memory error such as +NoMemoryError+, try performing
       # a resumable upload and setting the +chunk_size+ option to a value that
       # works for your environment, as explained in the final example above.
       #
-      # ===== Handling broken pipe errors
+      # ##### Handling broken pipe errors
       #
       # To avoid broken pipe (+Errno::EPIPE+) errors when uploading, add the
       # {httpclient}[https://rubygems.org/gems/httpclient] gem to your project,
