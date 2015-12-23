@@ -79,14 +79,16 @@ module Gcloud
   # you are running on Google Compute Engine this configuration is taken care
   # of for you.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new "my-todo-project",
-  #                       "/path/to/keyfile.json"
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new "my-todo-project",
+  #                     "/path/to/keyfile.json"
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-bucket"
-  #   file = bucket.file "path/to/my-file.ext"
+  # bucket = storage.bucket "my-bucket"
+  # file = bucket.file "path/to/my-file.ext"
+  # ```
   #
   # You can learn more about various options for connection on the
   # [Authentication Guide](link:AUTHENTICATION.md).
@@ -102,53 +104,61 @@ module Gcloud
   # and control access to your data. Each bucket has a unique name, which is how
   # they are retrieved: (See Project#bucket)
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
+  # bucket = storage.bucket "my-todo-app"
+  # ```
   #
   # You can also retrieve all buckets on a project: (See Project#buckets)
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   all_buckets = storage.buckets
+  # all_buckets = storage.buckets
+  # ```
   #
   # If you have a significant number of buckets, you may need to paginate
   # through them: (See Bucket::List#token)
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   all_buckets = []
-  #   tmp_buckets = storage.buckets
-  #   while tmp_buckets.any? do
-  #     tmp_buckets.each do |bucket|
-  #       all_buckets << bucket
-  #     end
-  #     # break loop if no more buckets available
-  #     break if tmp_buckets.token.nil?
-  #     # get the next group of buckets
-  #     tmp_buckets = storage.buckets token: tmp_buckets.token
+  # all_buckets = []
+  # tmp_buckets = storage.buckets
+  # while tmp_buckets.any? do
+  #   tmp_buckets.each do |bucket|
+  #     all_buckets << bucket
   #   end
+  #   # break loop if no more buckets available
+  #   break if tmp_buckets.token.nil?
+  #   # get the next group of buckets
+  #   tmp_buckets = storage.buckets token: tmp_buckets.token
+  # end
+  # ```
   #
   # ## Creating a Bucket
   #
   # A unique name is all that is needed to create a new bucket:
   # (See Project#create_bucket)
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.create_bucket "my-todo-app-attachments"
+  # bucket = storage.create_bucket "my-todo-app-attachments"
+  # ```
   #
   # ## Retrieving Files
   #
@@ -160,55 +170,63 @@ module Gcloud
   # Files are retrieved by their name, which is the path of the file in the
   # bucket: (See Bucket#file)
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
-  #   file = bucket.file "avatars/heidi/400x400.png"
+  # bucket = storage.bucket "my-todo-app"
+  # file = bucket.file "avatars/heidi/400x400.png"
+  # ```
   #
   # You can also retrieve all files in a bucket: (See Bucket#files)
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
-  #   all_files = bucket.files
+  # bucket = storage.bucket "my-todo-app"
+  # all_files = bucket.files
+  # ```
   #
   # Or you can retrieve all files in a specified path:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
-  #   avatar_files = bucket.files prefix: "avatars/"
+  # bucket = storage.bucket "my-todo-app"
+  # avatar_files = bucket.files prefix: "avatars/"
+  # ```
   #
   # If you have a significant number of files, you may need to paginate through
   # them: (See File::List#token)
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
+  # bucket = storage.bucket "my-todo-app"
   #
-  #   all_files = []
-  #   tmp_files = bucket.files
-  #   while tmp_files.any? do
-  #     tmp_files.each do |file|
-  #       all_files << file
-  #     end
-  #     # break loop if no more files available
-  #     break if tmp_files.token.nil?
-  #     # get the next group of files
-  #     tmp_files = bucket.files token: tmp_files.token
+  # all_files = []
+  # tmp_files = bucket.files
+  # while tmp_files.any? do
+  #   tmp_files.each do |file|
+  #     all_files << file
   #   end
+  #   # break loop if no more files available
+  #   break if tmp_files.token.nil?
+  #   # get the next group of files
+  #   tmp_files = bucket.files token: tmp_files.token
+  # end
+  # ```
   #
   # ## Creating a File
   #
@@ -216,14 +234,16 @@ module Gcloud
   # file system, and the name/path that the file should be stored in the bucket.
   # (See Bucket#create_file)
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
-  #   bucket.create_file "/var/todo-app/avatars/heidi/400x400.png",
-  #                      "avatars/heidi/400x400.png"
+  # bucket = storage.bucket "my-todo-app"
+  # bucket.create_file "/var/todo-app/avatars/heidi/400x400.png",
+  #                    "avatars/heidi/400x400.png"
+  # ```
   #
   # ### A note about large uploads
   #
@@ -237,31 +257,35 @@ module Gcloud
   # are using a version of Faraday at or above 0.9.2, is a workaround for [this
   # gzip issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367).
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   # Use httpclient to avoid broken pipe errors with large uploads
-  #   Faraday.default_adapter = :httpclient
+  # # Use httpclient to avoid broken pipe errors with large uploads
+  # Faraday.default_adapter = :httpclient
   #
-  #   # Only add the following statement if using Faraday >= 0.9.2
-  #   # Override gzip middleware with no-op for httpclient
-  #   Faraday::Response.register_middleware :gzip =>
-  #                                           Faraday::Response::Middleware
+  # # Only add the following statement if using Faraday >= 0.9.2
+  # # Override gzip middleware with no-op for httpclient
+  # Faraday::Response.register_middleware :gzip =>
+  #                                         Faraday::Response::Middleware
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
+  # ```
   #
   # ## Downloading a File
   #
   # Files can be downloaded to the local file system. (See File#download)
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
-  #   file = bucket.file "avatars/heidi/400x400.png"
-  #   file.download "/var/todo-app/avatars/heidi/400x400.png"
+  # bucket = storage.bucket "my-todo-app"
+  # file = bucket.file "avatars/heidi/400x400.png"
+  # file.download "/var/todo-app/avatars/heidi/400x400.png"
+  # ```
   #
   # ## Using Signed URLs
   #
@@ -269,15 +293,17 @@ module Gcloud
   # period of time. This URL uses a cryptographic signature
   # of your credentials to access the file. (See File#signed_url)
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
-  #   file = bucket.file "avatars/heidi/400x400.png"
-  #   shared_url = file.signed_url method: "GET",
-  #                                expires: 300 # 5 minutes from now
+  # bucket = storage.bucket "my-todo-app"
+  # file = bucket.file "avatars/heidi/400x400.png"
+  # shared_url = file.signed_url method: "GET",
+  #                              expires: 300 # 5 minutes from now
+  # ```
   #
   # ## Controlling Access to a Bucket
   #
@@ -291,39 +317,45 @@ module Gcloud
   # Access to a bucket can be granted to a user by appending `"user-"` to the
   # email address:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
+  # bucket = storage.bucket "my-todo-app"
   #
-  #   email = "heidi@example.net"
-  #   bucket.acl.add_reader "user-#{email}"
+  # email = "heidi@example.net"
+  # bucket.acl.add_reader "user-#{email}"
+  # ```
   #
   # Access to a bucket can be granted to a group by appending `"group-"` to the
   # email address:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
+  # bucket = storage.bucket "my-todo-app"
   #
-  #   email = "authors@example.net"
-  #   bucket.acl.add_reader "group-#{email}"
+  # email = "authors@example.net"
+  # bucket.acl.add_reader "group-#{email}"
+  # ```
   #
   # Access to a bucket can also be granted to a predefined list of permissions:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
+  # bucket = storage.bucket "my-todo-app"
   #
-  #   bucket.acl.public!
+  # bucket.acl.public!
+  # ```
   #
   # ## Controlling Access to a File
   #
@@ -334,42 +366,48 @@ module Gcloud
   # Access to a file can be granted to a user by appending `"user-"` to the
   # email address:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
-  #   file = bucket.file "avatars/heidi/400x400.png"
+  # bucket = storage.bucket "my-todo-app"
+  # file = bucket.file "avatars/heidi/400x400.png"
   #
-  #   email = "heidi@example.net"
-  #   file.acl.add_reader "user-#{email}"
+  # email = "heidi@example.net"
+  # file.acl.add_reader "user-#{email}"
+  # ```
   #
   # Access to a file can be granted to a group by appending `"group-"` to the
   # email address:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
-  #   file = bucket.file "avatars/heidi/400x400.png"
+  # bucket = storage.bucket "my-todo-app"
+  # file = bucket.file "avatars/heidi/400x400.png"
   #
-  #   email = "authors@example.net"
-  #   file.acl.add_reader "group-#{email}"
+  # email = "authors@example.net"
+  # file.acl.add_reader "group-#{email}"
+  # ```
   #
   # Access to a file can also be granted to a predefined list of permissions:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   storage = gcloud.storage
+  # gcloud = Gcloud.new
+  # storage = gcloud.storage
   #
-  #   bucket = storage.bucket "my-todo-app"
-  #   file = bucket.file "avatars/heidi/400x400.png"
+  # bucket = storage.bucket "my-todo-app"
+  # file = bucket.file "avatars/heidi/400x400.png"
   #
-  #   file.acl.public!
+  # file.acl.public!
+  # ```
   #
   module Storage
   end

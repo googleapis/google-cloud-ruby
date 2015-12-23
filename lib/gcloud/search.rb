@@ -94,24 +94,28 @@ module Gcloud
   #
   # You can list the indexes in your current project:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   search = gcloud.search
+  # gcloud = Gcloud.new
+  # search = gcloud.search
   #
-  #   indexes = search.indexes  # API call
-  #   indexes.each do |index|
-  #     puts index.index_id
-  #   end
+  # indexes = search.indexes  # API call
+  # indexes.each do |index|
+  #   puts index.index_id
+  # end
+  # ```
   #
   # And you can use the project to create new indexes:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   search = gcloud.search
+  # gcloud = Gcloud.new
+  # search = gcloud.search
   #
-  #   index = search.index "products", skip_lookup: true
+  # index = search.index "products", skip_lookup: true
+  # ```
   #
   # A new index is an unsaved value object. Indexes cannot be created,
   # updated, or deleted directly in the service: They are derived from the
@@ -124,65 +128,77 @@ module Gcloud
   # your own unique document ID, as shown below, or omitting this argument to
   # let the service assign the ID.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   search = gcloud.search
+  # gcloud = Gcloud.new
+  # search = gcloud.search
   #
-  #   index = search.index "products"
-  #   document = index.document "product-sku-000001"
-  #   index.find document # API call
-  #   #=> nil
-  #   document.rank #=> nil
+  # index = search.index "products"
+  # document = index.document "product-sku-000001"
+  # index.find document # API call
+  # #=> nil
+  # document.rank #=> nil
+  # ```
   #
   # Add one or more fields to the document. (See [Adding document fields](#module-Gcloud::Search-label-Adding`document`fields), below.)
   #
-  #   document.add "price", 24.95
+  # ```ruby
+  # document.add "price", 24.95
+  # ```
   #
   # When your document is complete, save it:
   #
-  #   index.save document # API call
-  #   document.rank # set by the server
-  #   #=> 1443648166
+  # ```ruby
+  # index.save document # API call
+  # document.rank # set by the server
+  # #=> 1443648166
+  # ```
   #
   # You can list the documents in an index:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   search = gcloud.search
-  #   index = search.index "products"
+  # gcloud = Gcloud.new
+  # search = gcloud.search
+  # index = search.index "products"
   #
-  #   documents = index.documents # API call
-  #   documents.map &:doc_id #=> ["product-sku-000001"]
+  # documents = index.documents # API call
+  # documents.map &:doc_id #=> ["product-sku-000001"]
+  # ```
   #
   # And you can delete documents:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   search = gcloud.search
-  #   index = search.index "products"
+  # gcloud = Gcloud.new
+  # search = gcloud.search
+  # index = search.index "products"
   #
-  #   document = index.find "product-sku-000001"
+  # document = index.find "product-sku-000001"
   #
-  #   document.delete  # API call
-  #   index.find document # API call
-  #   #=> nil
+  # document.delete  # API call
+  # index.find document # API call
+  # #=> nil
+  # ```
   #
   # To update a document after manipulating its fields or rank, just re-save it:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   search = gcloud.search
-  #   index = search.index "products"
+  # gcloud = Gcloud.new
+  # search = gcloud.search
+  # index = search.index "products"
   #
-  #   document = index.find "product-sku-000001"
+  # document = index.find "product-sku-000001"
   #
-  #   document.rank = 12345
-  #   document.add "price", 9.95 # replace existing number value
-  #   index.save document # API call
+  # document.rank = 12345
+  # document.add "price", 9.95 # replace existing number value
+  # index.save document # API call
+  # ```
   #
   # ## Adding document fields
   #
@@ -215,79 +231,89 @@ module Gcloud
   # Again, you can add more than one value to a field, and the values may be of
   # different types.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   search = gcloud.search
+  # gcloud = Gcloud.new
+  # search = gcloud.search
   #
-  #   index = search.index "products"
-  #   document = index.find "product-sku-000001"
-  #   document.add "description", "The best T-shirt ever.", type: :text, lang: "en"
-  #   document.add "description", "<p>The best T-shirt ever.</p>", type: :html, lang: "en"
-  #   document["description"].size #=> 2
+  # index = search.index "products"
+  # document = index.find "product-sku-000001"
+  # document.add "description", "The best T-shirt ever.", type: :text, lang: "en"
+  # document.add "description", "<p>The best T-shirt ever.</p>", type: :html, lang: "en"
+  # document["description"].size #=> 2
+  # ```
   #
   # ## Searching
   #
   # After populating an index with documents, you can request search results
   # with a query:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   search = gcloud.search
-  #   index = search.index "books"
+  # gcloud = Gcloud.new
+  # search = gcloud.search
+  # index = search.index "books"
   #
-  #   results = index.search "dark stormy"
-  #   results.each do |result|
-  #     puts result.doc_id
-  #   end
+  # results = index.search "dark stormy"
+  # results.each do |result|
+  #   puts result.doc_id
+  # end
+  # ```
   #
   # By default, Result objects are sorted by document rank. For more information
   # see the [REST API documentation for Document.rank](https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank).
   #
   # You can specify how to sort results with the `order` option:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   search = gcloud.search
-  #   index = search.index "books"
+  # gcloud = Gcloud.new
+  # search = gcloud.search
+  # index = search.index "books"
   #
-  #   results = index.search "dark stormy", order: "published, avg_review desc"
-  #   documents = index.search query # API call
+  # results = index.search "dark stormy", order: "published, avg_review desc"
+  # documents = index.search query # API call
+  # ```
   #
   # You can add computed fields with the `expressions` option, and specify the
   # fields that are returned with the `fields` option. No document data will be
   # returned if you omit the `fields` option, only `doc_id` references to any
   # matched documents.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   search = gcloud.search
-  #   index = search.index "products"
+  # gcloud = Gcloud.new
+  # search = gcloud.search
+  # index = search.index "products"
   #
-  #   results = index.search "cotton T-shirt",
-  #                          expressions: { total_price: "(price + tax)" },
-  #                          fields: ["name", "total_price", "highlight"]
+  # results = index.search "cotton T-shirt",
+  #                        expressions: { total_price: "(price + tax)" },
+  #                        fields: ["name", "total_price", "highlight"]
+  # ```
   #
   # Just as in documents, Result data is accessible via Fields methods:
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   search = gcloud.search
-  #   index = search.index "products"
-  #   document = index.find "product-sku-000001"
-  #   results = index.search "cotton T-shirt"
-  #   values = results[0]["description"]
+  # gcloud = Gcloud.new
+  # search = gcloud.search
+  # index = search.index "products"
+  # document = index.find "product-sku-000001"
+  # results = index.search "cotton T-shirt"
+  # values = results[0]["description"]
   #
-  #   values[0] #=> "100% organic cotton ruby gem T-shirt"
-  #   values[0].type #=> :text
-  #   values[0].lang #=> "en"
-  #   values[1] #=> "<p>100% organic cotton ruby gem T-shirt</p>"
-  #   values[1].type #=> :html
-  #   values[1].lang #=> "en"
+  # values[0] #=> "100% organic cotton ruby gem T-shirt"
+  # values[0].type #=> :text
+  # values[0].lang #=> "en"
+  # values[1] #=> "<p>100% organic cotton ruby gem T-shirt</p>"
+  # values[1].type #=> :html
+  # values[1].lang #=> "en"
+  # ```
   #
   module Search
   end
