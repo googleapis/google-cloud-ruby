@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/bigquery/data"
 require "gcloud/bigquery/table/list"
 require "gcloud/bigquery/errors"
@@ -20,7 +20,7 @@ require "gcloud/bigquery/errors"
 module Gcloud
   module Bigquery
     ##
-    # = View
+    # # View
     #
     # A view is a virtual table defined by a SQL query. You can query views in
     # the browser tool, or by using a query job.
@@ -67,7 +67,7 @@ module Gcloud
       end
 
       ##
-      # The ID of the +Dataset+ containing this table.
+      # The ID of the `Dataset` containing this table.
       #
       # @!group Attributes
       #
@@ -76,7 +76,7 @@ module Gcloud
       end
 
       ##
-      # The ID of the +Project+ containing this table.
+      # The ID of the `Project` containing this table.
       #
       # @!group Attributes
       #
@@ -298,12 +298,12 @@ module Gcloud
       # @param [Boolean] cache Whether to look for the result in the query
       #   cache. The query cache is a best-effort cache that will be flushed
       #   whenever tables in the query are modified. The default value is true.
-      #   For more information, see {query
-      #   caching}[https://developers.google.com/bigquery/querying-data].
-      # @param [Boolean] dryrun If set to +true+, BigQuery doesn't run the job.
+      #   For more information, see [query
+      #   caching](https://developers.google.com/bigquery/querying-data).
+      # @param [Boolean] dryrun If set to `true`, BigQuery doesn't run the job.
       #   Instead, if the query is valid, BigQuery returns statistics about the
       #   job such as how many bytes would be processed. If the query is
-      #   invalid, an error returns. The default value is +false+.
+      #   invalid, an error returns. The default value is `false`.
       #
       # @return [Gcloud::Bigquery::QueryData]
       #
@@ -338,7 +338,7 @@ module Gcloud
       ##
       # Permanently deletes the table.
       #
-      # @return [Boolean] Returns +true+ if the table was deleted.
+      # @return [Boolean] Returns `true` if the table was deleted.
       #
       # @example
       #   require "gcloud"

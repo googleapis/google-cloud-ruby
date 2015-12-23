@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Gcloud
   module Bigquery
     class Dataset
       ##
-      # = Dataset Access Control
+      # # Dataset Access Control
       #
       # Represents the Access rules for a {Dataset}.
       #
@@ -110,7 +110,7 @@ module Gcloud
 
         ##
         # Add reader access to a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def add_reader_special group
           add_access_role_scope_value :reader, :special, group
         end
@@ -119,8 +119,8 @@ module Gcloud
         # Add reader access to a view.
         # The view can be a Gcloud::Bigquery::View object,
         # or a string identifier as specified by the
-        # {Query
-        # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+        # [Query
+        # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # @param [String] project_name:datasetId.tableId+.
         def add_reader_view view
           add_access_role_scope_value :reader, :view, view
@@ -146,7 +146,7 @@ module Gcloud
 
         ##
         # Add writer access to a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def add_writer_special group
           add_access_role_scope_value :writer, :special, group
         end
@@ -155,8 +155,8 @@ module Gcloud
         # Add writer access to a view.
         # The view can be a Gcloud::Bigquery::View object,
         # or a string identifier as specified by the
-        # {Query
-        # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+        # [Query
+        # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # @param [String] project_name:datasetId.tableId+.
         def add_writer_view view
           add_access_role_scope_value :writer, :view, view
@@ -182,7 +182,7 @@ module Gcloud
 
         ##
         # Add owner access to a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def add_owner_special group
           add_access_role_scope_value :owner, :special, group
         end
@@ -191,8 +191,8 @@ module Gcloud
         # Add owner access to a view.
         # The view can be a Gcloud::Bigquery::View object,
         # or a string identifier as specified by the
-        # {Query
-        # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+        # [Query
+        # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # @param [String] project_name:datasetId.tableId+.
         def add_owner_view view
           add_access_role_scope_value :owner, :view, view
@@ -218,7 +218,7 @@ module Gcloud
 
         ##
         # Remove reader access from a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def remove_reader_special group
           remove_access_role_scope_value :reader, :special, group
         end
@@ -227,8 +227,8 @@ module Gcloud
         # Remove reader access from a view.
         # The view can be a Gcloud::Bigquery::View object,
         # or a string identifier as specified by the
-        # {Query
-        # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+        # [Query
+        # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # @param [String] project_name:datasetId.tableId+.
         def remove_reader_view view
           remove_access_role_scope_value :reader, :view, view
@@ -254,7 +254,7 @@ module Gcloud
 
         ##
         # Remove writer access from a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def remove_writer_special group
           remove_access_role_scope_value :writer, :special, group
         end
@@ -263,8 +263,8 @@ module Gcloud
         # Remove writer access from a view.
         # The view can be a Gcloud::Bigquery::View object,
         # or a string identifier as specified by the
-        # {Query
-        # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+        # [Query
+        # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # @param [String] project_name:datasetId.tableId+.
         def remove_writer_view view
           remove_access_role_scope_value :writer, :view, view
@@ -290,7 +290,7 @@ module Gcloud
 
         ##
         # Remove owner access from a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def remove_owner_special group
           remove_access_role_scope_value :owner, :special, group
         end
@@ -299,8 +299,8 @@ module Gcloud
         # Remove owner access from a view.
         # The view can be a Gcloud::Bigquery::View object,
         # or a string identifier as specified by the
-        # {Query
-        # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+        # [Query
+        # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # @param [String] project_name:datasetId.tableId+.
         def remove_owner_view view
           remove_access_role_scope_value :owner, :view, view
@@ -326,7 +326,7 @@ module Gcloud
 
         ##
         # Checks reader access for a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def reader_special? group
           lookup_access_role_scope_value :reader, :special, group
         end
@@ -335,8 +335,8 @@ module Gcloud
         # Checks reader access for a view.
         # The view can be a Gcloud::Bigquery::View object,
         # or a string identifier as specified by the
-        # {Query
-        # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+        # [Query
+        # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # @param [String] project_name:datasetId.tableId+.
         def reader_view? view
           lookup_access_role_scope_value :reader, :view, view
@@ -362,7 +362,7 @@ module Gcloud
 
         ##
         # Checks writer access for a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def writer_special? group
           lookup_access_role_scope_value :writer, :special, group
         end
@@ -371,8 +371,8 @@ module Gcloud
         # Checks writer access for a view.
         # The view can be a Gcloud::Bigquery::View object,
         # or a string identifier as specified by the
-        # {Query
-        # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+        # [Query
+        # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # @param [String] project_name:datasetId.tableId+.
         def writer_view? view
           lookup_access_role_scope_value :writer, :view, view
@@ -398,7 +398,7 @@ module Gcloud
 
         ##
         # Checks owner access for a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def owner_special? group
           lookup_access_role_scope_value :owner, :special, group
         end
@@ -407,8 +407,8 @@ module Gcloud
         # Checks owner access for a view.
         # The view can be a Gcloud::Bigquery::View object,
         # or a string identifier as specified by the
-        # {Query
-        # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+        # [Query
+        # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # @param [String] project_name:datasetId.tableId+.
         def owner_view? view
           lookup_access_role_scope_value :owner, :view, view

@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,8 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#--
-# Google Cloud Backoff
+
 module Gcloud
   ##
   # Backoff allows users to control how Google API calls are retried.

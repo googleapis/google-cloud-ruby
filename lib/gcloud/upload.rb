@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,13 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud"
 
-#--
-# Google Cloud Upload
 module Gcloud
   ##
-  # = Upload Settings
+  # # Upload Settings
   #
   # Upload allows users to configure how files are uploaded to the Google Cloud
   # Service APIs.

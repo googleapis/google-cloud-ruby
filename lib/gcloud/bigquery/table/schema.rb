@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Gcloud
   module Bigquery
     class Table
       ##
-      # = Table Schema
+      # # Table Schema
       #
       # A builder for BigQuery table schemas, passed to block arguments to
       # {Dataset#create_table} and {Table#schema}. Supports nested and
@@ -69,8 +69,8 @@ module Gcloud
         ##
         # @private
         # Returns the schema as hash containing the keys and values specified by
-        # the Google Cloud BigQuery {Rest API
-        # }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource]
+        # the Google Cloud BigQuery [Rest API
+        # ](https://cloud.google.com/bigquery/docs/reference/v2/tables#resource)
         # .
         def schema
           {
@@ -87,8 +87,8 @@ module Gcloud
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
-        #   +:nullable+, +:required+, and +:repeated+. The default value is
-        #   +:nullable+.
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
         def string name, description: nil, mode: nil
           add_field name, :string, nil, description: description, mode: mode
         end
@@ -102,8 +102,8 @@ module Gcloud
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
-        #   +:nullable+, +:required+, and +:repeated+. The default value is
-        #   +:nullable+.
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
         def integer name, description: nil, mode: nil
           add_field name, :integer, nil, description: description, mode: mode
         end
@@ -117,8 +117,8 @@ module Gcloud
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
-        #   +:nullable+, +:required+, and +:repeated+. The default value is
-        #   +:nullable+.
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
         def float name, description: nil, mode: nil
           add_field name, :float, nil, description: description, mode: mode
         end
@@ -132,8 +132,8 @@ module Gcloud
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
-        #   +:nullable+, +:required+, and +:repeated+. The default value is
-        #   +:nullable+.
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
         def boolean name, description: nil, mode: nil
           add_field name, :boolean, nil, description: description, mode: mode
         end
@@ -147,8 +147,8 @@ module Gcloud
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
-        #   +:nullable+, +:required+, and +:repeated+. The default value is
-        #   +:nullable+.
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
         def timestamp name, description: nil, mode: nil
           add_field name, :timestamp, nil, description: description, mode: mode
         end
@@ -156,8 +156,8 @@ module Gcloud
         ##
         # Adds a record field to the schema. A block must be passed describing
         # the nested fields of the record. For more information about nested
-        # and repeated records, see {Preparing Data for BigQuery
-        # }[https://cloud.google.com/bigquery/preparing-data-for-bigquery].
+        # and repeated records, see [Preparing Data for BigQuery
+        # ](https://cloud.google.com/bigquery/preparing-data-for-bigquery).
         #
         # @param [String] name The field name. The name must contain only
         #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
@@ -165,8 +165,8 @@ module Gcloud
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
-        #   +:nullable+, +:required+, and +:repeated+. The default value is
-        #   +:nullable+.
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
         #
         # @example
         #   require "gcloud"

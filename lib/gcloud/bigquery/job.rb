@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/bigquery/query_data"
 require "gcloud/bigquery/job/list"
 require "gcloud/bigquery/errors"
@@ -20,7 +20,7 @@ require "gcloud/bigquery/errors"
 module Gcloud
   module Bigquery
     ##
-    # = Job
+    # # Job
     #
     # Represents a generic Job that may be performed on a {Table}.
     #
@@ -82,8 +82,8 @@ module Gcloud
       end
 
       ##
-      # The current state of the job. The possible values are +PENDING+,
-      # +RUNNING+, and +DONE+. A +DONE+ state does not mean that the job
+      # The current state of the job. The possible values are `PENDING`,
+      # `RUNNING`, and `DONE`. A `DONE` state does not mean that the job
       # completed successfully. Use {#failed?} to discover if an error occurred
       # or if the job was successful.
       def state
@@ -92,22 +92,22 @@ module Gcloud
       end
 
       ##
-      # Checks if the job's state is +RUNNING+.
+      # Checks if the job's state is `RUNNING`.
       def running?
         return false if state.nil?
         "running".casecmp(state).zero?
       end
 
       ##
-      # Checks if the job's state is +PENDING+.
+      # Checks if the job's state is `PENDING`.
       def pending?
         return false if state.nil?
         "pending".casecmp(state).zero?
       end
 
       ##
-      # Checks if the job's state is +DONE+. When +true+, the job has stopped
-      # running. However, a +DONE+ state does not mean that the job completed
+      # Checks if the job's state is `DONE`. When `true`, the job has stopped
+      # running. However, a `DONE` state does not mean that the job completed
       # successfully.  Use {#failed?} to detect if an error occurred or if the
       # job was successful.
       def done?
@@ -131,8 +131,8 @@ module Gcloud
 
       ##
       # The time when the job was started.
-      # This field is present after the job's state changes from +PENDING+
-      # to either +RUNNING+ or +DONE+.
+      # This field is present after the job's state changes from `PENDING`
+      # to either `RUNNING` or `DONE`.
       def started_at
         return nil if @gapi["statistics"].nil?
         return nil if @gapi["statistics"]["startTime"].nil?
@@ -141,7 +141,7 @@ module Gcloud
 
       ##
       # The time when the job ended.
-      # This field is present when the job's state is +DONE+.
+      # This field is present when the job's state is `DONE`.
       def ended_at
         return nil if @gapi["statistics"].nil?
         return nil if @gapi["statistics"]["endTime"].nil?
@@ -188,7 +188,7 @@ module Gcloud
       # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
       #   reference
       #
-      # @return [Hash] Returns a hash containing +reason+ and +message+ keys:
+      # @return [Hash] Returns a hash containing `reason` and `message` keys:
       #
       #   {
       #     "reason"=>"notFound",
@@ -232,7 +232,7 @@ module Gcloud
       alias_method :refresh!, :reload!
 
       ##
-      # Refreshes the job until the job is +DONE+.
+      # Refreshes the job until the job is `DONE`.
       # The delay between refreshes will incrementally increase.
       #
       # @example

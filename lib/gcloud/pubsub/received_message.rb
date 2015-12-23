@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,13 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/pubsub/errors"
 require "gcloud/pubsub/message"
 
 module Gcloud
   module Pubsub
     ##
-    # = ReceivedMessage
+    # # ReceivedMessage
     #
     # Represents a Pub/Sub {Message} that can be acknowledged or delayed.
     #
@@ -115,8 +115,8 @@ module Gcloud
       #
       # @param [Integer] new_deadline The new ack deadline in seconds from the
       #   time this request is sent to the Pub/Sub system. Must be >= 0. For
-      #   example, if the value is +10+, the new ack deadline will expire 10
-      #   seconds after the call is made. Specifying +0+ may immediately make
+      #   example, if the value is `10`, the new ack deadline will expire 10
+      #   seconds after the call is made. Specifying `0` may immediately make
       #   the message available for another pull request.
       #
       # @example

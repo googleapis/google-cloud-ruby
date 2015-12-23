@@ -6,7 +6,7 @@ The `gcloud` library is installable through rubygems:
 $ gem install gcloud
 ```
 
-Gcloud aims to make authentication as simple as possible. Google Cloud requires a **Project ID** and **Service Account Credentials** to connect to the APIs. You can learn more about various options for connection on the [Authentication Guide](AUTHENTICATION.md).
+Gcloud aims to make authentication as simple as possible. Google Cloud requires a **Project ID** and **Service Account Credentials** to connect to the APIs. You can learn more about various options for connection on the [Authentication Guide](AUTHENTICATION).
 
 # BigQuery
 

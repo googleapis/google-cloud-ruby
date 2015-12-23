@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,18 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/dns/record/list"
 
 module Gcloud
   module Dns
     ##
-    # = DNS Record
+    # # DNS Record
     #
     # Represents a set of DNS resource records (RRs) for a given {#name} and
     # {#type} in a {Zone}. Since it is a value object, a newly created Record
     # instance is transient until it is added to a Zone with {Zone#update}. Note
     # that {Zone#add} and the {Zone#update} block parameter can be used instead
-    # of {Zone#record} or +Record.new+ to create new records.
+    # of {Zone#record} or `Record.new` to create new records.
     #
     # @example
     #   require "gcloud"
@@ -41,16 +41,16 @@ module Gcloud
     #
     class Record
       ##
-      # The owner of the record. For example: +example.com.+.
+      # The owner of the record. For example: `example.com.`.
       #
       # @return [String]
       #
       attr_accessor :name
 
       ##
-      # The identifier of a {supported record type
-      # }[https://cloud.google.com/dns/what-is-cloud-dns#supported_record_types]
-      # . For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
+      # The identifier of a [supported record type
+      # ](https://cloud.google.com/dns/what-is-cloud-dns#supported_record_types)
+      # . For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
       #
       # @return [String]
       #
@@ -64,10 +64,10 @@ module Gcloud
       attr_accessor :ttl
 
       ##
-      # The array of resource record data, as determined by +type+ and defined
-      # in {RFC 1035 (section 5)}[http://tools.ietf.org/html/rfc1035#section-5]
-      # and {RFC
-      # 1034 (section 3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1].
+      # The array of resource record data, as determined by `type` and defined
+      # in [RFC 1035 (section 5)](http://tools.ietf.org/html/rfc1035#section-5)
+      # and [RFC
+      # 1034 (section 3.6.1)](http://tools.ietf.org/html/rfc1034#section-3.6.1).
       # For example: ["10 mail.example.com.", "20 mail2.example.com."].
       #
       # @return [Array<String>]
@@ -78,17 +78,17 @@ module Gcloud
       # Creates a Record value object.
       #
       # @param [String] name The owner of the record. For example:
-      #   +example.com.+.
-      # @param [String] type The identifier of a {supported record
-      #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
-      #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
+      #   `example.com.`.
+      # @param [String] type The identifier of a [supported record
+      #   type](https://cloud.google.com/dns/what-is-cloud-dns).
+      #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
       # @param [Integer] ttl The number of seconds that the record can be cached
       #   by resolvers.
       # @param [String, Array<String>] data The resource record data, as
-      #   determined by +type+ and defined in {RFC
-      #   1035 (section 5)}[http://tools.ietf.org/html/rfc1035#section-5] and
-      #   {RFC 1034
-      #   (section 3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1].
+      #   determined by `type` and defined in [RFC
+      #   1035 (section 5)](http://tools.ietf.org/html/rfc1035#section-5) and
+      #   [RFC 1034
+      #   (section 3.6.1)](http://tools.ietf.org/html/rfc1034#section-3.6.1).
       #   For example: ["10 mail.example.com.", "20 mail2.example.com."].
       #
       def initialize name, type, ttl, data

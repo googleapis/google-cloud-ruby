@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/gce"
 require "gcloud/datastore/connection"
 require "gcloud/datastore/credentials"
@@ -25,7 +25,7 @@ require "gcloud/datastore/dataset/query_results"
 module Gcloud
   module Datastore
     ##
-    # = Dataset
+    # # Dataset
     #
     # Dataset is the data saved in a project's Datastore.
     # Dataset is analogous to a database in relational database world.
@@ -90,7 +90,7 @@ module Gcloud
       ##
       # Generate IDs for a Key before creating an entity.
       #
-      # @param [Key] incomplete_key A Key without +id+ or +name+ set.
+      # @param [Key] incomplete_key A Key without `id` or `name` set.
       # @param [String] count The number of new key IDs to create.
       #
       # @return [Array<Gcloud::Datastore::Key>]
@@ -115,7 +115,7 @@ module Gcloud
       # Persist one or more entities to the Datastore.
       #
       # @param [Entity] *entities One or more entity objects to be saved without
-      #   +id+ or +name+ set.
+      #   `id` or `name` set.
       #
       # @return [Array<Gcloud::Datastore::Entity>]
       #
@@ -133,9 +133,9 @@ module Gcloud
       ##
       # Retrieve an entity by providing key information.
       #
-      # @param [Key, String] key_or_kind A Key object or +kind+ string value.
-      # @param [Integer, String, nil] id_or_name The Key's +id+ or +name+ value
-      #   if a +kind+ was provided in the first parameter.
+      # @param [Key, String] key_or_kind A Key object or `kind` string value.
+      # @param [Integer, String, nil] id_or_name The Key's `id` or `name` value
+      #   if a `kind` was provided in the first parameter.
       #
       # @return [Gcloud::Datastore::Entity, nil]
       #
@@ -143,7 +143,7 @@ module Gcloud
       #   key = dataset.key "Task", 123456
       #   task = dataset.find key
       #
-      # @example Finding an entity with a +kind+ and +id+/+name+:
+      # @example Finding an entity with a `kind` and `id`/`name`:
       #   task = dataset.find "Task", 123456
       #
       def find key_or_kind, id_or_name = nil
@@ -184,7 +184,7 @@ module Gcloud
       # @param [Entity, Key] *entities_or_keys One or more Entity or Key objects
       #   to remove.
       #
-      # @return [Boolean] Returns +true+ if successful
+      # @return [Boolean] Returns `true` if successful
       #
       # @example
       #   gcloud = Gcloud.new
@@ -215,7 +215,7 @@ module Gcloud
       #     where("completed", "=", true)
       #   tasks = dataset.run query
       #
-      # @example Run the query within a namespace with the +namespace+ option:
+      # @example Run the query within a namespace with the `namespace` option:
       #   query = Gcloud::Datastore::Query.new.kind("Task").
       #     where("completed", "=", true)
       #   tasks = dataset.run query, namespace: "ns~todo-project"
@@ -333,10 +333,10 @@ module Gcloud
       # Create a new empty Entity instance. This is a convenience method to make
       # the creation of Entity objects easier.
       #
-      # @param [Key, String, nil] key_or_kind A Key object or +kind+ string
+      # @param [Key, String, nil] key_or_kind A Key object or `kind` string
       #   value. This is optional.
-      # @param [Integer, String, nil] id_or_name The Key's +id+ or +name+ value
-      #   if a +kind+ was provided in the first parameter.
+      # @param [Integer, String, nil] id_or_name The Key's `id` or `name` value
+      #   if a `kind` was provided in the first parameter.
       #
       # @return [Gcloud::Datastore::Entity]
       #

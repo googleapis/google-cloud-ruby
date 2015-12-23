@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Gcloud
   module Storage
     class File
       ##
-      # = File Access Control List
+      # # File Access Control List
       #
       # Represents a File's Access Control List.
       #
@@ -166,7 +166,7 @@ module Gcloud
         # @param [Integer] generation When present, selects a specific revision
         #   of this object. Default is the latest version.
         #
-        # @example Grant access to a user by pre-pending +"user-"+ to an email:
+        # @example Grant access to a user by pre-pending `"user-"` to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -178,7 +178,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   file.acl.add_owner "user-#{email}"
         #
-        # @example Grant access to a group by pre-pending +"group-"+ to an email
+        # @example Grant access to a group by pre-pending `"group-"` to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -220,7 +220,7 @@ module Gcloud
         # @param [Integer] generation When present, selects a specific revision
         #   of this object. Default is the latest version.
         #
-        # @example Grant access to a user by pre-pending +"user-"+ to an email:
+        # @example Grant access to a user by pre-pending `"user-"` to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -232,7 +232,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   file.acl.add_writer "user-#{email}"
         #
-        # @example Grant access to a group by pre-pending +"group-"+ to an email
+        # @example Grant access to a group by pre-pending `"group-"` to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -274,7 +274,7 @@ module Gcloud
         # @param [Integer] generation When present, selects a specific revision
         #   of this object. Default is the latest version.
         #
-        # @example Grant access to a user by pre-pending +"user-"+ to an email:
+        # @example Grant access to a user by pre-pending `"user-"` to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -286,7 +286,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   file.acl.add_reader "user-#{email}"
         #
-        # @example Grant access to a group by pre-pending +"group-"+ to an email
+        # @example Grant access to a group by pre-pending `"group-"` to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -360,7 +360,7 @@ module Gcloud
         # Predefined ACL helpers
 
         ##
-        # Convenience method to apply the +authenticatedRead+ predefined ACL
+        # Convenience method to apply the `authenticatedRead` predefined ACL
         # rule to the file.
         #
         # @example
@@ -383,7 +383,7 @@ module Gcloud
         alias_method :authenticated_read!, :auth!
 
         ##
-        # Convenience method to apply the +bucketOwnerFullControl+ predefined
+        # Convenience method to apply the `bucketOwnerFullControl` predefined
         # ACL rule to the file.
         #
         # @example
@@ -403,7 +403,7 @@ module Gcloud
         alias_method :bucketOwnerFullControl!, :owner_full!
 
         ##
-        # Convenience method to apply the +bucketOwnerRead+ predefined ACL
+        # Convenience method to apply the `bucketOwnerRead` predefined ACL
         # rule to the file.
         #
         # @example
@@ -423,7 +423,7 @@ module Gcloud
         alias_method :bucketOwnerRead!, :owner_read!
 
         ##
-        # Convenience method to apply the +private+ predefined ACL
+        # Convenience method to apply the `private` predefined ACL
         # rule to the file.
         #
         # @example
@@ -442,7 +442,7 @@ module Gcloud
         end
 
         ##
-        # Convenience method to apply the +projectPrivate+ predefined ACL
+        # Convenience method to apply the `projectPrivate` predefined ACL
         # rule to the file.
         #
         # @example
@@ -462,7 +462,7 @@ module Gcloud
         alias_method :projectPrivate!, :project_private!
 
         ##
-        # Convenience method to apply the +publicRead+ predefined ACL
+        # Convenience method to apply the `publicRead` predefined ACL
         # rule to the file.
         #
         # @example

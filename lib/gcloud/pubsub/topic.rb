@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "json"
 require "gcloud/pubsub/errors"
 require "gcloud/pubsub/topic/list"
@@ -21,7 +21,7 @@ require "gcloud/pubsub/subscription"
 module Gcloud
   module Pubsub
     ##
-    # = Topic
+    # # Topic
     #
     # A named resource to which messages are published.
     #
@@ -74,7 +74,7 @@ module Gcloud
       ##
       # Permanently deletes the topic.
       #
-      # @return [Boolean] Returns +true+ if the topic was deleted.
+      # @return [Boolean] Returns `true` if the topic was deleted.
       #
       # @example
       #   require "gcloud"
@@ -164,9 +164,9 @@ module Gcloud
       # @param [Boolean] skip_lookup Optionally create a {Subscription} object
       #   without verifying the subscription resource exists on the Pub/Sub
       #   service. Calls made on this object will raise errors if the service
-      #   resource does not exist. Default is +false+.
+      #   resource does not exist. Default is `false`.
       #
-      # @return [Gcloud::Pubsub::Subscription, nil] Returns +nil+ if
+      # @return [Gcloud::Pubsub::Subscription, nil] Returns `nil` if
       #   the subscription does not exist.
       #
       # @example
@@ -179,7 +179,7 @@ module Gcloud
       #   subscription = topic.subscription "my-topic-subscription"
       #   puts subscription.name
       #
-      # @example Skip the lookup against the service with +skip_lookup+:
+      # @example Skip the lookup against the service with `skip_lookup`:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -205,8 +205,8 @@ module Gcloud
       ##
       # Retrieves a list of subscription names for the given project.
       #
-      # @param [String] token The +token+ value returned by the last call to
-      #   +subscriptions+; indicates that this is a continuation of a call, and
+      # @param [String] token The `token` value returned by the last call to
+      #   `subscriptions`; indicates that this is a continuation of a call, and
       #   that the system should return the next page of data.
       # @param [Integer] max Maximum number of subscriptions to return.
       #
@@ -313,9 +313,9 @@ module Gcloud
       # Gets the access control policy.
       #
       # @param [Boolean] force Force the latest policy to be retrieved from the
-      #   Pub/Sub service when +true. Otherwise the policy will be memoized to
+      #   Pub/Sub service when `true`. Otherwise the policy will be memoized to
       #   reduce the number of API calls made to the Pub/Sub service. The
-      #   default is +false+.
+      #   default is `false`.
       #
       # @return [Hash] Returns a hash that conforms to the following structure:
       #
@@ -337,7 +337,7 @@ module Gcloud
       #   puts topic.policy["bindings"]
       #   puts topic.policy["rules"]
       #
-      # @example Use +force+ to retrieve the latest policy from the service:
+      # @example Use `force` to retrieve the latest policy from the service:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -397,15 +397,15 @@ module Gcloud
       end
 
       ##
-      # Tests the specified permissions against the {Cloud
-      # IAM}[https://cloud.google.com/iam/] access control policy.
+      # Tests the specified permissions against the [Cloud
+      # IAM](https://cloud.google.com/iam/) access control policy.
       #
       # @see https://cloud.google.com/iam/docs/managing-policies Managing
       #   Policies
       #
       # @param [String, Array<String>] *permissions The set of permissions to
-      #   check access for. Permissions with wildcards (such as +*+ or
-      #   +storage.*+) are not allowed.
+      #   check access for. Permissions with wildcards (such as `*` or
+      #   `storage.*`) are not allowed.
       #
       # @return [Array<Strings>] The permissions that have access.
       #

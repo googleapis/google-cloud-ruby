@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "json"
 require "gcloud/bigquery/errors"
 require "gcloud/bigquery/table"
@@ -23,7 +23,7 @@ require "gcloud/bigquery/dataset/access"
 module Gcloud
   module Bigquery
     ##
-    # = Dataset
+    # # Dataset
     #
     # Represents a Dataset. A dataset is a grouping mechanism that holds zero or
     # more tables. Datasets are the lowest level unit of access control; you
@@ -247,8 +247,8 @@ module Gcloud
 
       ##
       # Sets the access rules for a Dataset using the Google Cloud Datastore API
-      # data structure of an array of hashes. See {BigQuery Access
-      # Control}[https://cloud.google.com/bigquery/access-control] for more
+      # data structure of an array of hashes. See [BigQuery Access
+      # Control](https://cloud.google.com/bigquery/access-control) for more
       # information.
       #
       # This method is provided for advanced usage of managing the access rules.
@@ -277,13 +277,13 @@ module Gcloud
 
       ##
       # Permanently deletes the dataset. The dataset must be empty before it can
-      # be deleted unless the +force+ option is set to +true+.
+      # be deleted unless the `force` option is set to `true`.
       #
-      # @param [Boolean] force If +true+, delete all the tables in the dataset.
-      #   If +false+ and the dataset contains tables, the request will fail.
-      #   Default is +false+.
+      # @param [Boolean] force If `true`, delete all the tables in the dataset.
+      #   If `false` and the dataset contains tables, the request will fail.
+      #   Default is `false`.
       #
-      # @return [Boolean] Returns +true+ if the dataset was deleted.
+      # @return [Boolean] Returns `true` if the dataset was deleted.
       #
       # @example
       #   require "gcloud"
@@ -308,8 +308,8 @@ module Gcloud
 
       ##
       # Creates a new table. If you are adapting existing code that was written
-      # for the {Rest API
-      # }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource],
+      # for the [Rest API
+      # ](https://cloud.google.com/bigquery/docs/reference/v2/tables#resource),
       # you can pass the table's schema as a hash (see example.)
       #
       # @param [String] table_id The ID of the table. The ID must contain only
@@ -319,8 +319,8 @@ module Gcloud
       # @param [String] description A user-friendly description of the table.
       # @param [Hash] schema A hash specifying fields and data types for the
       #   table. A block may be passed instead (see examples.) For the format of
-      #   this hash, see the {Tables resource
-      #   }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource]
+      #   this hash, see the [Tables resource
+      #   ](https://cloud.google.com/bigquery/docs/reference/v2/tables#resource)
       #   .
       #
       # @return [Gcloud::Bigquery::Table]
@@ -453,7 +453,7 @@ module Gcloud
       # @param [String] table_id The ID of a table.
       #
       # @return [Gcloud::Bigquery::Table, Gcloud::Bigquery::View, nil] Returns
-      #   +nil+ if the table does not exist
+      #   `nil` if the table does not exist
       #
       # @example
       #   require "gcloud"
@@ -530,24 +530,24 @@ module Gcloud
       end
 
       ##
-      # Queries data using the {asynchronous
-      # method}[https://cloud.google.com/bigquery/querying-data].
+      # Queries data using the [asynchronous
+      # method](https://cloud.google.com/bigquery/querying-data).
       #
       # Sets the current dataset as the default dataset in the query. Useful for
       # using unqualified table names.
       #
-      # @param [String] query A query string, following the BigQuery {query
-      #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
+      # @param [String] query A query string, following the BigQuery [query
+      #   syntax](https://cloud.google.com/bigquery/query-reference), of the
       #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]".
       # @param [String] priority Specifies a priority for the query. Possible
-      #   values include +INTERACTIVE+ and +BATCH+. The default value is
-      #   +INTERACTIVE+.
+      #   values include `INTERACTIVE` and `BATCH`. The default value is
+      #   `INTERACTIVE`.
       # @param [Boolean] cache Whether to look for the result in the query
       #   cache. The query cache is a best-effort cache that will be flushed
       #   whenever tables in the query are modified. The default value is true.
-      #   For more information, see {query
-      #   caching}[https://developers.google.com/bigquery/querying-data].
+      #   For more information, see [query
+      #   caching](https://developers.google.com/bigquery/querying-data).
       # @param [Table] table The destination table where the query results
       #   should be stored. If not present, a new table will be created to store
       #   the results.
@@ -555,23 +555,23 @@ module Gcloud
       #   new tables.
       #
       #   The following values are supported:
-      #   * +needed+ - Create the table if it does not exist.
-      #   * +never+ - The table must already exist. A 'notFound' error is
+      #   * `needed` - Create the table if it does not exist.
+      #   * `never` - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
       # @param [String] write Specifies the action that occurs if the
       #   destination table already exists.
       #
       #   The following values are supported:
-      #   * +truncate+ - BigQuery overwrites the table data.
-      #   * +append+ - BigQuery appends the data to the table.
-      #   * +empty+ - A 'duplicate' error is returned in the job result if the
+      #   * `truncate` - BigQuery overwrites the table data.
+      #   * `append` - BigQuery appends the data to the table.
+      #   * `empty` - A 'duplicate' error is returned in the job result if the
       #     table exists and contains data.
-      # @param [Boolean] large_results If +true+, allows the query to produce
+      # @param [Boolean] large_results If `true`, allows the query to produce
       #   arbitrarily large result tables at a slight cost in performance.
-      #   Requires +table+ parameter to be set.
+      #   Requires `table` parameter to be set.
       # @param [Boolean] flatten Flattens all nested and repeated fields in the
-      #   query results. The default value is +true+. +large_results+ parameter
-      #   must be +true+ if this is set to +false+.
+      #   query results. The default value is `true`. `large_results` parameter
+      #   must be `true` if this is set to `false`.
       #
       # @return [Gcloud::Bigquery::QueryJob]
       #
@@ -608,14 +608,14 @@ module Gcloud
       end
 
       ##
-      # Queries data using the {synchronous
-      # method}[https://cloud.google.com/bigquery/querying-data].
+      # Queries data using the [synchronous
+      # method](https://cloud.google.com/bigquery/querying-data).
       #
       # Sets the current dataset as the default dataset in the query. Useful for
       # using unqualified table names.
       #
-      # @param [String] query A query string, following the BigQuery {query
-      #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
+      # @param [String] query A query string, following the BigQuery [query
+      #   syntax](https://cloud.google.com/bigquery/query-reference), of the
       #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]".
       # @param [Integer] max The maximum number of rows of data to return per
@@ -630,15 +630,15 @@ module Gcloud
       #   longer to run than the timeout value, the call returns without any
       #   results and with QueryData#complete? set to false. The default value
       #   is 10000 milliseconds (10 seconds).
-      # @param [Boolean] dryrun If set to +true+, BigQuery doesn't run the job.
+      # @param [Boolean] dryrun If set to `true`, BigQuery doesn't run the job.
       #   Instead, if the query is valid, BigQuery returns statistics about the
       #   job such as how many bytes would be processed. If the query is
-      #   invalid, an error returns. The default value is +false+.
+      #   invalid, an error returns. The default value is `false`.
       # @param [Boolean] cache Whether to look for the result in the query
       #   cache. The query cache is a best-effort cache that will be flushed
       #   whenever tables in the query are modified. The default value is true.
-      #   For more information, see {query
-      #   caching}[https://developers.google.com/bigquery/querying-data].
+      #   For more information, see [query
+      #   caching](https://developers.google.com/bigquery/querying-data).
       #
       # @return [Gcloud::Bigquery::QueryData]
       #

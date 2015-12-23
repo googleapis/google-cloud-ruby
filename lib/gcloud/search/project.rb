@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/gce"
 require "gcloud/search/connection"
 require "gcloud/search/credentials"
@@ -22,13 +22,13 @@ require "gcloud/search/errors"
 module Gcloud
   module Search
     ##
-    # = Project
+    # # Project
     #
     # Projects are top-level containers in Google Cloud Platform. They store
     # information about billing and authorized users, and they control access to
     # Google Cloud Search resources. Each project has a friendly name and a
-    # unique ID. Projects can be created only in the {Google Developers
-    # Console}[https://console.developers.google.com]. See {Gcloud#search}.
+    # unique ID. Projects can be created only in the [Google Developers
+    # Console](https://console.developers.google.com). See {Gcloud#search}.
     #
     # @example
     #   require "gcloud"
@@ -85,7 +85,7 @@ module Gcloud
       # @param [Boolean] skip_lookup Optionally create an Index object without
       #   verifying the index resource exists on the Search service. Documents
       #   saved on this object will create the index resource if the resource
-      #   does not yet exist. Default is +false+.
+      #   does not yet exist. Default is `false`.
       #
       # @return [Gcloud::Search::Index, nil] nil if the index does not exist
       #
@@ -98,7 +98,7 @@ module Gcloud
       #   index = search.index "books"
       #   index.index_id #=> "books"
       #
-      # @example A new index can be created with +index_id+ and +skip_lookup+:
+      # @example A new index can be created with `index_id` and `skip_lookup`:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -127,7 +127,7 @@ module Gcloud
       # @param [String] token A previously-returned page token representing part
       #   of the larger set of results to view.
       # @param [Integer] max Maximum number of indexes to return. The default is
-      #   +100+.
+      #   `100`.
       #
       # @return [Array<Gcloud::Search::Index>] (See
       #   {Gcloud::Search::Index::List})

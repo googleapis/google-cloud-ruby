@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/gce"
 require "gcloud/bigquery/connection"
 require "gcloud/bigquery/credentials"
@@ -24,7 +24,7 @@ require "gcloud/bigquery/query_data"
 module Gcloud
   module Bigquery
     ##
-    # = Project
+    # # Project
     #
     # Projects are top-level containers in Google Cloud Platform. They store
     # information about billing and authorized users, and they contain BigQuery
@@ -84,21 +84,21 @@ module Gcloud
       end
 
       ##
-      # Queries data using the {asynchronous
-      # method}[https://cloud.google.com/bigquery/querying-data].
+      # Queries data using the [asynchronous
+      # method](https://cloud.google.com/bigquery/querying-data).
       #
-      # @param [String] query A query string, following the BigQuery {query
-      #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
+      # @param [String] query A query string, following the BigQuery [query
+      #   syntax](https://cloud.google.com/bigquery/query-reference), of the
       #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]".
       # @param [String] priority Specifies a priority for the query. Possible
-      #   values include +INTERACTIVE+ and +BATCH+. The default value is
-      #   +INTERACTIVE+.
+      #   values include `INTERACTIVE` and `BATCH`. The default value is
+      #   `INTERACTIVE`.
       # @param [Boolean] cache Whether to look for the result in the query
       #   cache. The query cache is a best-effort cache that will be flushed
       #   whenever tables in the query are modified. The default value is true.
-      #   For more information, see {query
-      #   caching}[https://developers.google.com/bigquery/querying-data].
+      #   For more information, see [query
+      #   caching](https://developers.google.com/bigquery/querying-data).
       # @param [Table] table The destination table where the query results
       #   should be stored. If not present, a new table will be created to store
       #   the results.
@@ -106,23 +106,23 @@ module Gcloud
       #   new tables.
       #
       #   The following values are supported:
-      #   * +needed+ - Create the table if it does not exist.
-      #   * +never+ - The table must already exist. A 'notFound' error is
+      #   * `needed` - Create the table if it does not exist.
+      #   * `never` - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
       # @param [String] write Specifies the action that occurs if the
       #   destination table already exists.
       #
       #   The following values are supported:
-      #   * +truncate+ - BigQuery overwrites the table data.
-      #   * +append+ - BigQuery appends the data to the table.
-      #   * +empty+ - A 'duplicate' error is returned in the job result if the
+      #   * `truncate` - BigQuery overwrites the table data.
+      #   * `append` - BigQuery appends the data to the table.
+      #   * `empty` - A 'duplicate' error is returned in the job result if the
       #     table exists and contains data.
-      # @param [Boolean] large_results If +true+, allows the query to produce
+      # @param [Boolean] large_results If `true`, allows the query to produce
       #   arbitrarily large result tables at a slight cost in performance.
-      #   Requires +table+ parameter to be set.
+      #   Requires `table` parameter to be set.
       # @param [Boolean] flatten Flattens all nested and repeated fields in the
-      #   query results. The default value is +true+. +large_results+ parameter
-      #   must be +true+ if this is set to +false+.
+      #   query results. The default value is `true`. `large_results` parameter
+      #   must be `true` if this is set to `false`.
       # @param [Dataset, String] dataset Specifies the default dataset to use
       #   for unqualified table names in the query.
       #
@@ -159,11 +159,11 @@ module Gcloud
       end
 
       ##
-      # Queries data using the {synchronous
-      # method}[https://cloud.google.com/bigquery/querying-data].
+      # Queries data using the [synchronous
+      # method](https://cloud.google.com/bigquery/querying-data).
       #
-      # @param [String] query A query string, following the BigQuery {query
-      #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
+      # @param [String] query A query string, following the BigQuery [query
+      #   syntax](https://cloud.google.com/bigquery/query-reference), of the
       #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]".
       # @param [Integer] timeout How long to wait for the query to complete, in
@@ -178,21 +178,21 @@ module Gcloud
       #   longer to run than the timeout value, the call returns without any
       #   results and with QueryData#complete? set to false. The default value
       #   is 10000 milliseconds (10 seconds).
-      # @param [Boolean] dryrun If set to +true+, BigQuery doesn't run the job.
+      # @param [Boolean] dryrun If set to `true`, BigQuery doesn't run the job.
       #   Instead, if the query is valid, BigQuery returns statistics about the
       #   job such as how many bytes would be processed. If the query is
-      #   invalid, an error returns. The default value is +false+.
+      #   invalid, an error returns. The default value is `false`.
       # @param [Boolean] cache Whether to look for the result in the query
       #   cache. The query cache is a best-effort cache that will be flushed
       #   whenever tables in the query are modified. The default value is true.
-      #   For more information, see {query
-      #   caching}[https://developers.google.com/bigquery/querying-data].
+      #   For more information, see [query
+      #   caching](https://developers.google.com/bigquery/querying-data).
       # @param [String] dataset Specifies the default datasetId and projectId to
       #   assume for any unqualified table names in the query. If not set, all
       #   table names in the query string must be qualified in the format
       #   'datasetId.tableId'.
       # @param [String] project Specifies the default projectId to assume for
-      #   any unqualified table names in the query. Only used if +dataset+
+      #   any unqualified table names in the query. Only used if `dataset`
       #   option is set.
       #
       # @return [Gcloud::Bigquery::QueryData]
@@ -226,7 +226,7 @@ module Gcloud
       #
       # @param [String] dataset_id The ID of a dataset.
       #
-      # @return [Gcloud::Bigquery::Dataset, nil] Returns +nil+ if the dataset
+      # @return [Gcloud::Bigquery::Dataset, nil] Returns `nil` if the dataset
       #   does not exist.
       #
       # @example
@@ -262,8 +262,8 @@ module Gcloud
       #   (one hour).
       # @param [Array<Hash>] access The access rules for a Dataset using the
       #   Google Cloud Datastore API data structure of an array of hashes. See
-      #   {BigQuery Access
-      #   Control}[https://cloud.google.com/bigquery/access-control] for more
+      #   [BigQuery Access
+      #   Control](https://cloud.google.com/bigquery/access-control) for more
       #   information.
       #
       # @return [Gcloud::Bigquery::Dataset]
@@ -286,7 +286,7 @@ module Gcloud
       #                                     name: "My Dataset",
       #                                     description: "This is my Dataset"
       #
-      # @example Access rules can be provided with the +access+ option:
+      # @example Access rules can be provided with the `access` option:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -326,7 +326,7 @@ module Gcloud
       # Retrieves the list of datasets belonging to the project.
       #
       # @param [Boolean] all Whether to list all datasets, including hidden
-      #   ones. The default is +false+.
+      #   ones. The default is `false`.
       # @param [String] token A previously-returned page token representing part
       #   of the larger set of results to view.
       # @param [Integer] max Maximum number of datasets to return.
@@ -345,7 +345,7 @@ module Gcloud
       #     puts dataset.name
       #   end
       #
-      # @example Retrieve all datasets, including hidden ones, with +:all+:
+      # @example Retrieve all datasets, including hidden ones, with `:all`:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -387,7 +387,7 @@ module Gcloud
       #
       # @param [String] job_id The ID of a job.
       #
-      # @return [Gcloud::Bigquery::Job, nil] Returns +nil+ if the job does not
+      # @return [Gcloud::Bigquery::Job, nil] Returns `nil` if the job does not
       #   exist.
       #
       # @example
@@ -413,16 +413,16 @@ module Gcloud
       # Retrieves the list of jobs belonging to the project.
       #
       # @param [Boolean] all Whether to display jobs owned by all users in the
-      #   project. The default is +false+.
+      #   project. The default is `false`.
       # @param [String] token A previously-returned page token representing part
       #   of the larger set of results to view.
       # @param [Integer] max Maximum number of jobs to return.
       # @param [String] filter A filter for job state.
       #
       #   Acceptable values are:
-      #   * +done+ - Finished jobs
-      #   * +pending+ - Pending jobs
-      #   * +running+ - Running jobs
+      #   * `done` - Finished jobs
+      #   * `pending` - Pending jobs
+      #   * `running` - Running jobs
       #
       # @return [Array<Gcloud::Bigquery::Job>] (See
       #   {Gcloud::Bigquery::Job::List})
@@ -435,7 +435,7 @@ module Gcloud
       #
       #   jobs = bigquery.jobs
       #
-      # @example Retrieve only running jobs using the +:filter+ option:
+      # @example Retrieve only running jobs using the `:filter` option:
       #
       #   require "gcloud"
       #

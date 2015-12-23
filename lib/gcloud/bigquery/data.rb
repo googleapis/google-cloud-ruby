@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,15 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "delegate"
 
 module Gcloud
   module Bigquery
     ##
-    # = Data
+    # # Data
     #
     # Represents {Table} Data as a list of name/value pairs.
-    # Also contains metadata such as +etag+ and +total+.
+    # Also contains metadata such as `etag` and `total`.
     class Data < DelegateClass(::Array)
       ##
       # @private The {Table} object the data belongs to.

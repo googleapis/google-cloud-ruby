@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "time"
 require "gcloud/resource_manager/errors"
 
@@ -20,7 +20,7 @@ module Gcloud
   module ResourceManager
     class Project
       ##
-      # = Project Updater
+      # # Project Updater
       #
       # This object is used by Project#update when passed a block. These methods
       # are used to update the project data in a single API call.
@@ -74,7 +74,7 @@ module Gcloud
         # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
         #
         # No more than 256 labels can be associated with a given resource.
-        # (+Hash+)
+        # (`Hash`)
         #
         # @example
         #   require "gcloud"
@@ -101,7 +101,7 @@ module Gcloud
         # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
         #
         # No more than 256 labels can be associated with a given resource.
-        # (+Hash+)
+        # (`Hash`)
         #
         # @example
         #   require "gcloud"

@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Gcloud
   module Dns
     class Zone
       ##
-      # = DNS Zone Transaction
+      # # DNS Zone Transaction
       #
       # This object is used by {Zone#update} when passed a block. These methods
       # are used to update the records that are sent to the Google Cloud DNS
@@ -55,18 +55,18 @@ module Gcloud
         # Adds a record to the Zone.
         #
         # @param [String] name The owner of the record. For example:
-        #   +example.com.+.
-        # @param [String] type The identifier of a {supported record
-        #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
-        #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
+        #   `example.com.`.
+        # @param [String] type The identifier of a [supported record
+        #   type](https://cloud.google.com/dns/what-is-cloud-dns).
+        #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
         # @param [Integer] ttl The number of seconds that the record can be
         #   cached by resolvers.
         # @param [String, Array<String>] data The resource record data, as
-        #   determined by +type+ and defined in
-        #   {RFC 1035 (section 5)}[http://tools.ietf.org/html/rfc1035#section-5]
-        #   and {RFC 1034 (section
-        #   3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1]. For
-        #   example: +192.0.2.1+ or +example.com.+.
+        #   determined by `type` and defined in
+        #   [RFC 1035 (section 5)](http://tools.ietf.org/html/rfc1035#section-5)
+        #   and [RFC 1034 (section
+        #   3.6.1)](http://tools.ietf.org/html/rfc1034#section-3.6.1). For
+        #   example: `192.0.2.1` or `example.com.`.
         #
         # @example
         #   require "gcloud"
@@ -87,10 +87,10 @@ module Gcloud
         # are removed.
         #
         # @param [String] name The owner of the record. For example:
-        #   +example.com.+.
-        # @param [String] type The identifier of a {supported record
-        #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
-        #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
+        #   `example.com.`.
+        # @param [String] type The identifier of a [supported record
+        #   type](https://cloud.google.com/dns/what-is-cloud-dns).
+        #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
         #
         # @example
         #   require "gcloud"
@@ -107,22 +107,22 @@ module Gcloud
         end
 
         ##
-        # Replaces existing records on the Zone. Records matching the +name+ and
-        # +type+ are replaced.
+        # Replaces existing records on the Zone. Records matching the `name` and
+        # `type` are replaced.
         #
         # @param [String] name The owner of the record. For example:
-        #   +example.com.+.
-        # @param [String] type The identifier of a {supported record
-        #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
-        #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
+        #   `example.com.`.
+        # @param [String] type The identifier of a [supported record
+        #   type](https://cloud.google.com/dns/what-is-cloud-dns).
+        #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
         # @param [Integer] ttl The number of seconds that the record can be
         #   cached by resolvers.
         # @param [String, Array<String>] data The resource record data, as
-        #   determined by +type+ and defined in
-        #   {RFC 1035 (section 5)}[http://tools.ietf.org/html/rfc1035#section-5]
-        #   and {RFC 1034 (section
-        #   3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1]. For
-        #   example: +192.0.2.1+ or +example.com.+.
+        #   determined by `type` and defined in
+        #   [RFC 1035 (section 5)](http://tools.ietf.org/html/rfc1035#section-5)
+        #   and [RFC 1034 (section
+        #   3.6.1)](http://tools.ietf.org/html/rfc1034#section-3.6.1). For
+        #   example: `192.0.2.1` or `example.com.`.
         #
         # @example
         #   require "gcloud"
@@ -141,14 +141,14 @@ module Gcloud
         end
 
         ##
-        # Modifies records on the Zone. Records matching the +name+ and +type+
+        # Modifies records on the Zone. Records matching the `name` and `type`
         # are yielded to the block where they can be modified.
         #
         # @param [String] name The owner of the record. For example:
-        #   +example.com.+.
-        # @param [String] type The identifier of a {supported record
-        #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
-        #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
+        #   `example.com.`.
+        # @param [String] type The identifier of a [supported record
+        #   type](https://cloud.google.com/dns/what-is-cloud-dns).
+        #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
         #
         # @example
         #   require "gcloud"

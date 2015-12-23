@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
 require "gcloud/datastore/proto"
@@ -20,7 +20,7 @@ require "gcloud/datastore/proto"
 module Gcloud
   module Datastore
     ##
-    # = Query
+    # # Query
     #
     # Represents the search criteria against a Datastore.
     #

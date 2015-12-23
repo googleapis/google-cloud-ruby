@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/storage/bucket/acl"
 require "gcloud/storage/bucket/list"
 require "gcloud/storage/bucket/cors"
@@ -22,7 +22,7 @@ require "gcloud/upload"
 module Gcloud
   module Storage
     ##
-    # = Bucket
+    # # Bucket
     #
     # Represents a Storage bucket. Belongs to a Project and has many Files.
     #
@@ -53,7 +53,7 @@ module Gcloud
 
       ##
       # The kind of item this is.
-      # For buckets, this is always +storage#bucket+.
+      # For buckets, this is always `storage#bucket`.
       def kind
         @gapi["kind"]
       end
@@ -88,7 +88,7 @@ module Gcloud
       #
       # The return value is a frozen (unmodifiable) array of hashes containing
       # the attributes specified for the Bucket resource field
-      # {cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
+      # [cors](https://cloud.google.com/storage/docs/json_api/v1/buckets#cors).
       #
       # This method also accepts a block for updating the bucket's CORS rules.
       # See {Bucket::Cors} for details.
@@ -138,8 +138,8 @@ module Gcloud
       # bucket.
       #
       # Accepts an array of hashes containing the attributes specified for the
-      # {resource description of
-      # cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
+      # [resource description of
+      # cors](https://cloud.google.com/storage/docs/json_api/v1/buckets#cors).
       #
       # @see https://cloud.google.com/storage/docs/cross-origin Cross-Origin
       #   Resource Sharing (CORS)
@@ -190,8 +190,8 @@ module Gcloud
       ##
       # Updates the logging object prefix. This prefix will be used to create
       # log object names for the bucket. It can be at most 900 characters and
-      # must be a {valid object
-      # name}[https://cloud.google.com/storage/docs/bucket-naming#objectnames].
+      # must be a [valid object
+      # name](https://cloud.google.com/storage/docs/bucket-naming#objectnames).
       # By default, the object prefix is the name
       # of the bucket for which the logs are enabled.
       #
@@ -204,22 +204,22 @@ module Gcloud
       ##
       # The bucket's storage class. This defines how objects in the bucket are
       # stored and determines the SLA and the cost of storage. Values include
-      # +STANDARD+, +NEARLINE+, and +DURABLE_REDUCED_AVAILABILITY+.
+      # `STANDARD`, `NEARLINE`, and `DURABLE_REDUCED_AVAILABILITY`.
       def storage_class
         @gapi["storageClass"]
       end
 
       ##
-      # Whether {Object
-      # Versioning}[https://cloud.google.com/storage/docs/object-versioning] is
+      # Whether [Object
+      # Versioning](https://cloud.google.com/storage/docs/object-versioning) is
       # enabled for the bucket.
       def versioning?
         !@gapi["versioning"].nil? && @gapi["versioning"]["enabled"]
       end
 
       ##
-      # Updates whether {Object
-      # Versioning}[https://cloud.google.com/storage/docs/object-versioning] is
+      # Updates whether [Object
+      # Versioning](https://cloud.google.com/storage/docs/object-versioning) is
       # enabled for the bucket.
       #
       # @return [Boolean]
@@ -322,12 +322,12 @@ module Gcloud
       #
       # The API call to delete the bucket may be retried under certain
       # conditions. See {Gcloud::Backoff} to control this behavior, or
-      # specify the wanted behavior using the +retries+ option.
+      # specify the wanted behavior using the `retries` option.
       #
       # @param [Integer] retries The number of times the API call should be
       #   retried. Default is Gcloud::Backoff.retries.
       #
-      # @return [Boolean] Returns +true+ if the bucket was deleted.
+      # @return [Boolean] Returns `true` if the bucket was deleted.
       #
       # @example
       #   require "gcloud"
@@ -368,10 +368,10 @@ module Gcloud
       # @param [Integer] max Maximum number of items plus prefixes to return. As
       #   duplicate prefixes are omitted, fewer total results may be returned
       #   than requested. The default value of this parameter is 1,000 items.
-      # @param [Boolean] versions If +true+, lists all versions of an object as
-      #   distinct results. The default is +false+. For more information, see
-      #   {Object Versioning
-      #   }[https://cloud.google.com/storage/docs/object-versioning].
+      # @param [Boolean] versions If `true`, lists all versions of an object as
+      #   distinct results. The default is `false`. For more information, see
+      #   [Object Versioning
+      #   ](https://cloud.google.com/storage/docs/object-versioning).
       #
       # @return [Array<Gcloud::Storage::File>] (See
       #   {Gcloud::Storage::File::List})
@@ -456,7 +456,7 @@ module Gcloud
       # Create a new File object by providing a path to a local file to upload
       # and the path to store it with in the bucket.
       #
-      # A +chunk_size+ value can be provided in the options to be used
+      # A `chunk_size` value can be provided in the options to be used
       # in resumable uploads. This value is the number of bytes per
       # chunk and must be divisible by 256KB. If it is not divisible
       # by 256KB then it will be lowered to the nearest acceptable
@@ -468,47 +468,47 @@ module Gcloud
       #   file.
       #
       #   Acceptable values are:
-      #   * +auth+, +auth_read+, +authenticated+, +authenticated_read+,
-      #     +authenticatedRead+ - File owner gets OWNER access, and
+      #   * `auth`, `auth_read`, `authenticated`, `authenticated_read`,
+      #     `authenticatedRead` - File owner gets OWNER access, and
       #     allAuthenticatedUsers get READER access.
-      #   * +owner_full+, +bucketOwnerFullControl+ - File owner gets OWNER
+      #   * `owner_full`, `bucketOwnerFullControl` - File owner gets OWNER
       #     access, and project team owners get OWNER access.
-      #   * +owner_read+, +bucketOwnerRead+ - File owner gets OWNER access, and
+      #   * `owner_read`, `bucketOwnerRead` - File owner gets OWNER access, and
       #     project team owners get READER access.
-      #   * +private+ - File owner gets OWNER access.
-      #   * +project_private+, +projectPrivate+ - File owner gets OWNER access,
+      #   * `private` - File owner gets OWNER access.
+      #   * `project_private`, `projectPrivate` - File owner gets OWNER access,
       #     and project team members get access according to their roles.
-      #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
+      #   * `public`, `public_read`, `publicRead` - File owner gets OWNER
       #     access, and allUsers get READER access.
       # @param [String] cache_control The
-      #   {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      #   [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2)
       #   response header to be returned when the file is downloaded.
       # @param [String] content_disposition The
-      #   {Content-Disposition}[https://tools.ietf.org/html/rfc6266]
+      #   [Content-Disposition](https://tools.ietf.org/html/rfc6266)
       #   response header to be returned when the file is downloaded.
-      # @param [String] content_encoding The {Content-Encoding
-      #   }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] response header
+      # @param [String] content_encoding The [Content-Encoding
+      #   ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) response header
       #   to be returned when the file is downloaded.
       # @param [String] content_language The
-      #   {Content-Language}[http://tools.ietf.org/html/bcp47] response
+      #   [Content-Language](http://tools.ietf.org/html/bcp47) response
       #   header to be returned when the file is downloaded.
       # @param [String] content_type The
-      #   {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17]
+      #   [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17)
       #   response header to be returned when the file is downloaded.
       # @param [Integer] chunk_size The number of bytes per chunk in a resumable
       #   upload. Must be divisible by 256KB. If it is not divisible by 265KB
       #   then it will be lowered to the nearest acceptable value.
       # @param [String] crc32c The CRC32c checksum of the file data, as
-      #   described in {RFC 4960, Appendix
-      #   B}[http://tools.ietf.org/html/rfc4960#appendix-B].
+      #   described in [RFC 4960, Appendix
+      #   B](http://tools.ietf.org/html/rfc4960#appendix-B).
       #   If provided, Cloud Storage will only create the file if the value
       #   matches the value calculated by the service. See
-      #   {Validation}[https://cloud.google.com/storage/docs/hashes-etags]
+      #   [Validation](https://cloud.google.com/storage/docs/hashes-etags)
       #   for more information.
       # @param [String] md5 The MD5 hash of the file data. If provided, Cloud
       #   Storage will only create the file if the value matches the value
       #   calculated by the service. See
-      #   {Validation}[https://cloud.google.com/storage/docs/hashes-etags] for
+      #   [Validation](https://cloud.google.com/storage/docs/hashes-etags) for
       #   more information.
       # @param [Hash] metadata A hash of custom, user-provided web-safe keys and
       #   arbitrary string values that will returned with requests for the file
@@ -549,28 +549,28 @@ module Gcloud
       #                      "destination/path/file.ext",
       #                      chunk_size: 1024*1024 # 1 MB chunk
       #
-      # ==== Troubleshooting large uploads
+      # #### Troubleshooting large uploads
       #
       # You may encounter errors while attempting to upload large files. Below
       # are a couple of common cases and their solutions.
       #
-      # ===== Handling memory errors
+      # ##### Handling memory errors
       #
-      # If you encounter a memory error such as +NoMemoryError+, try performing
-      # a resumable upload and setting the +chunk_size+ option to a value that
+      # If you encounter a memory error such as `NoMemoryError`, try performing
+      # a resumable upload and setting the `chunk_size` option to a value that
       # works for your environment, as explained in the final example above.
       #
-      # ===== Handling broken pipe errors
+      # ##### Handling broken pipe errors
       #
-      # To avoid broken pipe (+Errno::EPIPE+) errors when uploading, add the
-      # {httpclient}[https://rubygems.org/gems/httpclient] gem to your project,
+      # To avoid broken pipe (`Errno::EPIPE`) errors when uploading, add the
+      # [httpclient](https://rubygems.org/gems/httpclient) gem to your project,
       # and the configuration shown below. These lines must execute after you
       # require gcloud but before you make your first gcloud connection. The
-      # first statement configures {Faraday}[https://rubygems.org/gems/faraday]
+      # first statement configures [Faraday](https://rubygems.org/gems/faraday)
       # to use httpclient. The second statement, which should only be added if
       # you are using a version of Faraday at or above 0.9.2, is a workaround
-      # for {this gzip
-      # issue}[https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367].
+      # for [this gzip
+      # issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367).
       #
       #   require "gcloud"
       #
@@ -615,7 +615,7 @@ module Gcloud
       # @see https://cloud.google.com/storage/docs/access-control Access Control
       #   guide
       #
-      # @example Grant access to a user by pre-pending +"user-"+ to an email:
+      # @example Grant access to a user by pre-pending `"user-"` to an email:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -626,7 +626,7 @@ module Gcloud
       #   email = "heidi@example.net"
       #   bucket.acl.add_reader "user-#{email}"
       #
-      # @example Grant access to a group by pre-pending +"group-"+ to an email:
+      # @example Grant access to a group by pre-pending `"group-"` to an email:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -662,7 +662,7 @@ module Gcloud
       # @see https://cloud.google.com/storage/docs/access-control Access Control
       #   guide
       #
-      # @example Grant access to a user by pre-pending +"user-"+ to an email:
+      # @example Grant access to a user by pre-pending `"user-"` to an email:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -673,7 +673,7 @@ module Gcloud
       #   email = "heidi@example.net"
       #   bucket.default_acl.add_reader "user-#{email}"
       #
-      # @example Grant access to a group by pre-pending +"group-"+ to an email
+      # @example Grant access to a group by pre-pending `"group-"` to an email
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

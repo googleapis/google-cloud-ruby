@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/gce"
 require "gcloud/dns/connection"
 require "gcloud/dns/credentials"
@@ -22,11 +22,11 @@ require "gcloud/dns/errors"
 module Gcloud
   module Dns
     ##
-    # = Project
+    # # Project
     #
     # The project is a top level container for resources including Cloud DNS
-    # ManagedZones. Projects can be created only in the {Google Developers
-    # Console}[https://console.developers.google.com].
+    # ManagedZones. Projects can be created only in the [Google Developers
+    # Console](https://console.developers.google.com).
     #
     # @example
     #   require "gcloud"
@@ -138,7 +138,7 @@ module Gcloud
       #
       # @param [String, Integer] zone_id The name or id of a zone.
       #
-      # @return [Gcloud::Dns::Zone, nil] Returns +nil+ if the zone does not
+      # @return [Gcloud::Dns::Zone, nil] Returns `nil` if the zone does not
       #   exist.
       #
       # @example

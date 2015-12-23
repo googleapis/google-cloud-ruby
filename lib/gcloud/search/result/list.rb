@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 
 module Gcloud
   module Search
@@ -28,7 +28,7 @@ module Gcloud
         # The number of documents that match the query. It is greater than or
         # equal to the number of documents actually returned. This is an
         # approximation and not an exact count unless it is less than or equal
-        # to the {Index#search} +matched_count_accuracy+ option.
+        # to the {Index#search} `matched_count_accuracy` option.
         attr_reader :matched_count
 
         ##

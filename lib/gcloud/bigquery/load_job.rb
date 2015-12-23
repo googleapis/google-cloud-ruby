@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Gcloud
   module Bigquery
     ##
-    # = LoadJob
+    # # LoadJob
     #
     # A {Job} subclass representing a load operation that may be performed
     # on a {Table}. A LoadJob instance is created when you call {Table#load}.
@@ -56,7 +56,7 @@ module Gcloud
 
       ##
       # The number of header rows at the top of a CSV file to skip. The default
-      # value is +0+.
+      # value is `0`.
       def skip_leading_rows
         val = config["load"]["skipLeadingRows"]
         val = 0 if val.nil?
@@ -81,10 +81,10 @@ module Gcloud
 
       ##
       # The value that is used to quote data sections in a CSV file.
-      # The default value is a double-quote (+"+). If your data does not contain
+      # The default value is a double-quote (`"`). If your data does not contain
       # quoted sections, the value should be an empty string. If your data
       # contains quoted newline characters, {#quoted_newlines?} should return
-      # +true+.
+      # `true`.
       def quote
         val = config["load"]["quote"]
         val = "\"" if val.nil?
@@ -94,7 +94,7 @@ module Gcloud
       ##
       # The maximum number of bad records that the load operation can ignore. If
       # the number of bad records exceeds this value, an error is
-      # returned. The default value is +0+, which requires that all records be
+      # returned. The default value is `0`, which requires that all records be
       # valid.
       def max_bad_records
         val = config["load"]["maxBadRecords"]
@@ -104,7 +104,7 @@ module Gcloud
 
       ##
       # Checks if quoted data sections may contain newline characters in a CSV
-      # file. The default is +false+.
+      # file. The default is `false`.
       def quoted_newlines?
         val = config["load"]["allowQuotedNewlines"]
         val = true if val.nil?
@@ -113,14 +113,14 @@ module Gcloud
 
       ##
       # Checks if the format of the source data is
-      # {newline-delimited JSON}[http://jsonlines.org/]. The default is +false+.
+      # [newline-delimited JSON](http://jsonlines.org/). The default is `false`.
       def json?
         val = config["load"]["sourceFormat"]
         val == "NEWLINE_DELIMITED_JSON"
       end
 
       ##
-      # Checks if the format of the source data is CSV. The default is +true+.
+      # Checks if the format of the source data is CSV. The default is `true`.
       def csv?
         val = config["load"]["sourceFormat"]
         return true if val.nil?
@@ -136,10 +136,10 @@ module Gcloud
 
       ##
       # Checks if the load operation accepts rows that are missing trailing
-      # optional columns. The missing values are treated as nulls. If +false+,
+      # optional columns. The missing values are treated as nulls. If `false`,
       # records with missing trailing columns are treated as bad records, and
       # if there are too many bad records, an error is returned. The default
-      # value is +false+. Only applicable to CSV, ignored for other formats.
+      # value is `false`. Only applicable to CSV, ignored for other formats.
       def allow_jagged_rows?
         val = config["load"]["allowJaggedRows"]
         val = false if val.nil?
@@ -148,10 +148,10 @@ module Gcloud
 
       ##
       # Checks if the load operation allows extra values that are not
-      # represented in the table schema. If +true+, the extra values are
-      # ignored. If +false+, records with extra columns are treated as bad
+      # represented in the table schema. If `true`, the extra values are
+      # ignored. If `false`, records with extra columns are treated as bad
       # records, and if there are too many bad records, an invalid error is
-      # returned. The default is +false+.
+      # returned. The default is `false`.
       def ignore_unknown_values?
         val = config["load"]["ignoreUnknownValues"]
         val = false if val.nil?

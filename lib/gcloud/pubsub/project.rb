@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/gce"
 require "gcloud/pubsub/connection"
 require "gcloud/pubsub/credentials"
@@ -22,7 +22,7 @@ require "gcloud/pubsub/topic"
 module Gcloud
   module Pubsub
     ##
-    # = Project
+    # # Project
     #
     # Represents the project that pubsub messages are pushed to and pulled from.
     # {Topic} is a named resource to which messages are sent by publishers.
@@ -83,23 +83,23 @@ module Gcloud
       # Retrieves topic by name.
       #
       # The topic will be created if the topic does not exist and the
-      # +autocreate+ option is set to true.
+      # `autocreate` option is set to true.
       #
       # @param [String] topic_name Name of a topic.
       # @param [Boolean] autocreate Flag to control whether the requested topic
-      #   will be created if it does not exist. Ignored if +skip_lookup+ is
-      #   +true+. The default value is +false+.
+      #   will be created if it does not exist. Ignored if `skip_lookup` is
+      #   `true`. The default value is `false`.
       # @param [String] project If the topic belongs to a project other than the
       #   one currently connected to, the alternate project ID can be specified
       #   here.
       # @param [Boolean] skip_lookup Optionally create a {Topic} object without
       #   verifying the topic resource exists on the Pub/Sub service. Calls made
       #   on this object will raise errors if the topic resource does not exist.
-      #   Default is +false+.
+      #   Default is `false`.
       #
-      # @return [Gcloud::Pubsub::Topic, nil] Returns +nil+ if topic does not
+      # @return [Gcloud::Pubsub::Topic, nil] Returns `nil` if topic does not
       #   exist. Will return a newly created{ Gcloud::Pubsub::Topic} if the
-      #   topic does not exist and +autocreate+ is set to +true+.
+      #   topic does not exist and `autocreate` is set to `true`.
       #
       # @example
       #   require "gcloud"
@@ -108,28 +108,28 @@ module Gcloud
       #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "existing-topic"
       #
-      # @example By default +nil+ will be returned if the topic does not exist.
+      # @example By default `nil` will be returned if the topic does not exist.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "non-existing-topic" #=> nil
       #
-      # @example With the +autocreate+ option set to +true+.
+      # @example With the `autocreate` option set to `true`.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "non-existing-topic", autocreate: true
       #
-      # @example Create a topic in a different project with the +project+ flag.
+      # @example Create a topic in a different project with the `project` flag.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "another-topic", project: "another-project"
       #
-      # @example Skip the lookup against the service with +skip_lookup+:
+      # @example Skip the lookup against the service with `skip_lookup`:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -179,8 +179,8 @@ module Gcloud
       ##
       # Retrieves a list of topics for the given project.
       #
-      # @param [String] token The +token+ value returned by the last call to
-      #   +topics+; indicates that this is a continuation of a call, and that
+      # @param [String] token The `token` value returned by the last call to
+      #   `topics`; indicates that this is a continuation of a call, and that
       #   the system should return the next page of data.
       # @param [Integer] max Maximum number of topics to return.
       #
@@ -231,7 +231,7 @@ module Gcloud
 
       ##
       # Publishes one or more messages to the given topic. The topic will be
-      # created if the topic does previously not exist and the +autocreate+
+      # created if the topic does previously not exist and the `autocreate`
       # option is provided.
       #
       # A note about auto-creating the topic: Any message published to a topic
@@ -276,7 +276,7 @@ module Gcloud
       #     batch.publish "new-message-3", foo: :bif
       #   end
       #
-      # @example With +autocreate+:
+      # @example With `autocreate`:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -302,7 +302,7 @@ module Gcloud
       ##
       # Creates a new {Subscription} object for the provided topic. The topic
       # will be created if the topic does previously not exist and the
-      # +autocreate+ option is provided.
+      # `autocreate` option is provided.
       #
       # @param [String] topic_name Name of a topic.
       # @param [String] subscription_name Name of the new subscription. Must
@@ -348,7 +348,7 @@ module Gcloud
       #                          deadline: 120,
       #                          endpoint: "https://example.com/push"
       #
-      # @example With +autocreate+:
+      # @example With `autocreate`:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -384,9 +384,9 @@ module Gcloud
       # @param [Boolean] skip_lookup Optionally create a {Subscription} object
       #   without verifying the subscription resource exists on the Pub/Sub
       #   service. Calls made on this object will raise errors if the service
-      #   resource does not exist. Default is +false+.
+      #   resource does not exist. Default is `false`.
       #
-      # @return [Gcloud::Pubsub::Subscription, nil] Returns +nil+ if the
+      # @return [Gcloud::Pubsub::Subscription, nil] Returns `nil` if the
       #   subscription does not exist
       #
       # @example
@@ -398,7 +398,7 @@ module Gcloud
       #   subscription = pubsub.subscription "my-sub"
       #   puts subscription.name
       #
-      # @example Skip the lookup against the service with +skip_lookup+:
+      # @example Skip the lookup against the service with `skip_lookup`:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

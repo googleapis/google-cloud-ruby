@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/storage/file/acl"
 require "gcloud/storage/file/list"
 require "gcloud/storage/file/verifier"
@@ -20,10 +20,10 @@ require "gcloud/storage/file/verifier"
 module Gcloud
   module Storage
     ##
-    # = File
+    # # File
     #
     # Represents a File
-    # ({Object}[https://cloud.google.com/storage/docs/json_api/v1/objects]) that
+    # ([Object](https://cloud.google.com/storage/docs/json_api/v1/objects)) that
     # belongs to a {Bucket}. Files (Objects) are
     # the individual pieces of data that you store in Google Cloud Storage. A
     # file can be up to 5 TB in size. Files have two components:
@@ -143,7 +143,7 @@ module Gcloud
 
       ##
       # The CRC32c checksum of the data, as described in
-      # {RFC 4960, Appendix B}[http://tools.ietf.org/html/rfc4960#appendix-B].
+      # [RFC 4960, Appendix B](http://tools.ietf.org/html/rfc4960#appendix-B).
       # Encoded using base64 in big-endian byte order.
       def crc32c
         @gapi["crc32c"]
@@ -156,7 +156,7 @@ module Gcloud
       end
 
       ##
-      # The {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      # The [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2)
       # directive for the file data.
       def cache_control
         @gapi["cacheControl"]
@@ -164,56 +164,56 @@ module Gcloud
 
       ##
       # Updates the
-      # {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      # [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2)
       # directive for the file data.
       def cache_control= cache_control
         patch_gapi! cache_control: cache_control
       end
 
       ##
-      # The {Content-Disposition}[https://tools.ietf.org/html/rfc6266] of the
+      # The [Content-Disposition](https://tools.ietf.org/html/rfc6266) of the
       # file data.
       def content_disposition
         @gapi["contentDisposition"]
       end
 
       ##
-      # Updates the {Content-Disposition}[https://tools.ietf.org/html/rfc6266]
+      # Updates the [Content-Disposition](https://tools.ietf.org/html/rfc6266)
       # of the file data.
       def content_disposition= content_disposition
         patch_gapi! content_disposition: content_disposition
       end
 
       ##
-      # The {Content-Encoding
-      # }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] of the file data.
+      # The [Content-Encoding
+      # ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) of the file data.
       def content_encoding
         @gapi["contentEncoding"]
       end
 
       ##
-      # Updates the {Content-Encoding
-      # }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] of the file data.
+      # Updates the [Content-Encoding
+      # ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) of the file data.
       def content_encoding= content_encoding
         patch_gapi! content_encoding: content_encoding
       end
 
       ##
-      # The {Content-Language}[http://tools.ietf.org/html/bcp47] of the file
+      # The [Content-Language](http://tools.ietf.org/html/bcp47) of the file
       # data.
       def content_language
         @gapi["contentLanguage"]
       end
 
       ##
-      # Updates the {Content-Language}[http://tools.ietf.org/html/bcp47] of the
+      # Updates the [Content-Language](http://tools.ietf.org/html/bcp47) of the
       # file data.
       def content_language= content_language
         patch_gapi! content_language: content_language
       end
 
       ##
-      # The {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17] of
+      # The [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17) of
       # the file data.
       def content_type
         @gapi["contentType"]
@@ -221,7 +221,7 @@ module Gcloud
 
       ##
       # Updates the
-      # {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17] of the
+      # [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17) of the
       # file data.
       def content_type= content_type
         patch_gapi! content_type: content_type
@@ -286,15 +286,15 @@ module Gcloud
       # @param [String] path The path on the local file system to write the data
       #   to. The path provided must be writable.
       # @param [Symbol] verify The verification algoruthm used to ensure the
-      #   downloaded file contents are correct. Default is +:md5+.
+      #   downloaded file contents are correct. Default is `:md5`.
       #
       #   Acceptable values are:
-      #   * +md5+ - Verify file content match using the MD5 hash.
-      #   * +crc32c+ - Verify file content match using the CRC32c hash.
-      #   * +all+ - Perform all available file content verification.
-      #   * +none+ - Don't perform file content verification.
+      #   * `md5` - Verify file content match using the MD5 hash.
+      #   * `crc32c` - Verify file content match using the CRC32c hash.
+      #   * `all` - Perform all available file content verification.
+      #   * `none` - Don't perform file content verification.
       #
-      # @return [File] Returns a +::File+ object on the local file system
+      # @return [File] Returns a `::File` object on the local file system
       #
       # @example
       #   require "gcloud"
@@ -365,17 +365,17 @@ module Gcloud
       #   file.
       #
       #   Acceptable values are:
-      #   * +auth+, +auth_read+, +authenticated+, +authenticated_read+,
-      #     +authenticatedRead+ - File owner gets OWNER access, and
+      #   * `auth`, `auth_read`, `authenticated`, `authenticated_read`,
+      #     `authenticatedRead` - File owner gets OWNER access, and
       #     allAuthenticatedUsers get READER access.
-      #   * +owner_full+, +bucketOwnerFullControl+ - File owner gets OWNER
+      #   * `owner_full`, `bucketOwnerFullControl` - File owner gets OWNER
       #     access, and project team owners get OWNER access.
-      #   * +owner_read+, +bucketOwnerRead+ - File owner gets OWNER access, and
+      #   * `owner_read`, `bucketOwnerRead` - File owner gets OWNER access, and
       #     project team owners get READER access.
-      #   * +private+ - File owner gets OWNER access.
-      #   * +project_private+, +projectPrivate+ - File owner gets OWNER access,
+      #   * `private` - File owner gets OWNER access.
+      #   * `project_private`, `projectPrivate` - File owner gets OWNER access,
       #     and project team members get access according to their roles.
-      #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
+      #   * `public`, `public_read`, `publicRead` - File owner gets OWNER
       #     access, and allUsers get READER access.
       # @param [Integer] generation Select a specific revision of the file to
       #   copy. The default is the latest version.
@@ -427,7 +427,7 @@ module Gcloud
       ##
       # Permanently deletes the file.
       #
-      # @return [Boolean] Returns +true+ if the file was deleted.
+      # @return [Boolean] Returns `true` if the file was deleted.
       #
       # @example
       #   require "gcloud"
@@ -460,7 +460,7 @@ module Gcloud
       #   Public Data
       #
       # @param [String] protocol The protocol to use for the URL. Default is
-      #   +HTTPS+.
+      #   `HTTPS`.
       #
       # @example
       #   require "gcloud"
@@ -494,26 +494,26 @@ module Gcloud
       #
       # Generating a URL requires service account credentials, either by
       # connecting with a service account when calling {Gcloud.storage}, or by
-      # passing in the service account +issuer+ and +signing_key+ values.
+      # passing in the service account `issuer` and `signing_key` values.
       # Although the private key can be passed as a string for convenience,
-      # creating and storing an instance of +OpenSSL::PKey::RSA+ is more
-      # efficient when making multiple calls to +signed_url+.
+      # creating and storing an instance of `OpenSSL::PKey::RSA` is more
+      # efficient when making multiple calls to `signed_url`.
       #
       # A SignedUrlUnavailable is raised if the service account credentials are
       # missing. Service account credentials are acquired by following the steps
-      # in {Service Account Authentication}[
-      # https://cloud.google.com/storage/docs/authentication#service_accounts].
+      # in [Service Account Authentication](
+      # https://cloud.google.com/storage/docs/authentication#service_accounts).
       #
       # @see https://cloud.google.com/storage/docs/access-control#Signed-URLs
       #   Access Control Signed URLs guide
       #
       # @param [String] method The HTTP verb to be used with the signed URL.
       #   Signed URLs can be used
-      #   with +GET+, +HEAD+, +PUT+, and +DELETE+ requests. Default is +GET+.
+      #   with `GET`, `HEAD`, `PUT`, and `DELETE` requests. Default is `GET`.
       # @param [Integer] expires The number of seconds until the URL expires.
       #   Default is 300/5 minutes.
       # @param [String] content_type When provided, the client (browser) must
-      #   send this value in the HTTP header. e.g. +text/plain+
+      #   send this value in the HTTP header. e.g. `text/plain`
       # @param [String] content_md5 The MD5 digest value in base64. If you
       #   provide this in the string, the client (usually a browser) must
       #   provide this HTTP header with this same value in its request.
@@ -545,7 +545,7 @@ module Gcloud
       #   shared_url = file.signed_url method: "GET",
       #                                expires: 300 # 5 minutes from now
       #
-      # @example Using the +issuer+ and +signing_key+ options:
+      # @example Using the `issuer` and `signing_key` options:
       #   require "gcloud/storage"
       #
       #   storage = Gcloud.storage
@@ -578,7 +578,7 @@ module Gcloud
       # @see https://cloud.google.com/storage/docs/access-control Access Control
       #   guide
       #
-      # @example Grant access to a user by pre-pending +"user-"+ to an email:
+      # @example Grant access to a user by pre-pending `"user-"` to an email:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -590,7 +590,7 @@ module Gcloud
       #   email = "heidi@example.net"
       #   file.acl.add_reader "user-#{email}"
       #
-      # @example Grant access to a group by pre-pending +"group-"+ to an email:
+      # @example Grant access to a group by pre-pending `"group-"` to an email:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

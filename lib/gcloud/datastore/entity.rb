@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/datastore/key"
 require "gcloud/datastore/properties"
 require "gcloud/datastore/proto"
@@ -20,7 +20,7 @@ require "gcloud/datastore/proto"
 module Gcloud
   module Datastore
     ##
-    # = Entity
+    # # Entity
     #
     # Entity represents a Datastore record.
     # Every Entity has a {Key}, and a list of properties.
@@ -48,7 +48,7 @@ module Gcloud
       #
       # @param [String, Symbol] prop_name The name of the property.
       #
-      # @return [Object, nil] Returns +nil+ if the property doesn't exist
+      # @return [Object, nil] Returns `nil` if the property doesn't exist
       #
       # @example Properties can be retrieved with a string name:
       #   require "gcloud"
@@ -110,7 +110,7 @@ module Gcloud
       #     puts "property #{name} has a value of #{value}"
       #   end
       #
-      # @example A property's existence can be determined by calling +exist?+:
+      # @example A property's existence can be determined by calling `exist?`:
       #   entity.properties.exist? :name #=> true
       #   entity.properties.exist? "name" #=> true
       #   entity.properties.exist? :expiration #=> false
@@ -128,7 +128,7 @@ module Gcloud
       # Sets the Key that identifies the entity.
       #
       # Once the entity is saved, the key is frozen and immutable. Trying to set
-      # a key when immutable will raise a +RuntimeError+.
+      # a key when immutable will raise a `RuntimeError`.
       #
       # @example The Key can be set before the entity is saved:
       #   require "gcloud"
