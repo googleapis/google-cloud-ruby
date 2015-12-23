@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,13 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "json"
 require "signet/oauth_2/client"
 require "forwardable"
 require "googleauth"
 
-#--
-# Google Cloud Credentials
 module Gcloud
   ##
   # Represents the OAuth 2.0 signing logic.

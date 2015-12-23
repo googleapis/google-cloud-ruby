@@ -12,11 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud"
 require "gcloud/dns/project"
 
-#--
-# Google Cloud DNS
 module Gcloud
   ##
   # Creates a new `Project` instance connected to the DNS service.

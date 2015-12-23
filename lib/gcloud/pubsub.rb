@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud"
 require "gcloud/pubsub/project"
 
-#--
-# Google Cloud Pub/Sub
 module Gcloud
   ##
   # Creates a new object for connecting to the Pub/Sub service.

@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,14 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud"
 require "gcloud/datastore/errors"
 require "gcloud/datastore/dataset"
 require "gcloud/datastore/transaction"
 require "gcloud/datastore/credentials"
 
-#--
-# Google Cloud Datastore
 module Gcloud
   ##
   # Creates a new object for connecting to the Datastore service.
