@@ -17,7 +17,7 @@ module Gcloud
   module Storage
     class File
       ##
-      # = File Access Control List
+      # # File Access Control List
       #
       # Represents a File's Access Control List.
       #

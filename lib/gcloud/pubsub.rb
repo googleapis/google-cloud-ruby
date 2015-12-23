@@ -23,7 +23,7 @@ module Gcloud
   # Creates a new object for connecting to the Pub/Sub service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +project+::
   #   Project identifier for the Pub/Sub service you are connecting to.
@@ -41,11 +41,11 @@ module Gcloud
   #
   #   * +https://www.googleapis.com/auth/pubsub+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::Pubsub::Project
   #
-  # === Example
+  # ### Example
   #
   #   require "gcloud/pubsub"
   #
@@ -65,7 +65,7 @@ module Gcloud
   end
 
   ##
-  # = Google Cloud Pub/Sub
+  # # Google Cloud Pub/Sub
   #
   # Google Cloud Pub/Sub is designed to provide reliable, many-to-many,
   # asynchronous messaging between applications. Publisher applications can
@@ -91,7 +91,7 @@ module Gcloud
   # To learn more about Pub/Sub, read the {Google Cloud Pub/Sub Overview
   # }[https://cloud.google.com/pubsub/overview].
   #
-  # == Retrieving Topics
+  # ## Retrieving Topics
   #
   # A Topic is a named resource to which messages are sent by publishers.
   # A Topic is found by its name. (See Project#topic)
@@ -102,7 +102,7 @@ module Gcloud
   #   pubsub = gcloud.pubsub
   #   topic = pubsub.topic "my-topic"
   #
-  # == Creating a Topic
+  # ## Creating a Topic
   #
   # A Topic is created from a Project. (See Project#create_topic)
   #
@@ -112,7 +112,7 @@ module Gcloud
   #   pubsub = gcloud.pubsub
   #   topic = pubsub.create_topic "my-topic"
   #
-  # == Retrieving Subscriptions
+  # ## Retrieving Subscriptions
   #
   # A Subscription is a named resource representing the stream of messages from
   # a single, specific Topic, to be delivered to the subscribing application.
@@ -127,7 +127,7 @@ module Gcloud
   #   subscription = topic.subscription "my-topic-subscription"
   #   puts subscription.name
   #
-  # == Creating a Subscription
+  # ## Creating a Subscription
   #
   # A Subscription is created from a Topic. (See Topic#subscribe and
   # Project#subscribe)
@@ -154,7 +154,7 @@ module Gcloud
   #                         deadline: 120,
   #                         endpoint: "https://example.com/push"
   #
-  # == Publishing Messages
+  # ## Publishing Messages
   #
   # Messages are published to a topic. Any message published to a topic without
   # a subscription will be lost. Ensure the topic has a subscription before
@@ -194,7 +194,7 @@ module Gcloud
   #     batch.publish "new-message-3", foo: :bif
   #   end
   #
-  # == Pulling Messages
+  # ## Pulling Messages
   #
   # Messages are pulled from a Subscription. (See Subscription#pull)
   #
@@ -227,7 +227,7 @@ module Gcloud
   #   sub = pubsub.subscription "my-topic-sub"
   #   msgs = sub.wait_for_messages
   #
-  # == Acknowledging a Message
+  # ## Acknowledging a Message
   #
   # Messages that are received can be acknowledged in Pub/Sub, marking the
   # message to be removed so it cannot be pulled again.
@@ -256,7 +256,7 @@ module Gcloud
   #   received_messages = sub.pull
   #   sub.acknowledge received_messages
   #
-  # == Modifying a Deadline
+  # ## Modifying a Deadline
   #
   # A message must be acknowledged after it is pulled, or Pub/Sub will mark the
   # message for redelivery. The message acknowledgement deadline can delayed if
@@ -303,7 +303,7 @@ module Gcloud
   #   received_messages = sub.pull
   #   sub.delay 120, received_messages
   #
-  # == Listening for Messages
+  # ## Listening for Messages
   #
   # Long running workers are easy to create with +listen+, which runs an
   # infinitely blocking loop to process messages as they are received. (See
@@ -346,7 +346,7 @@ module Gcloud
   #     # process msg
   #   end
   #
-  # == Working Across Projects
+  # ## Working Across Projects
   #
   # All calls to the Pub/Sub service use the same project and credentials
   # provided to the Gcloud#pubsub method. However, it is common to reference

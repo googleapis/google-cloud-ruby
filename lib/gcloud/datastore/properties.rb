@@ -16,7 +16,7 @@
 module Gcloud
   module Datastore
     ##
-    # = Properties
+    # # Properties
     #
     # Hash-like data structure for Datastore properties.
     #

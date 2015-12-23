@@ -19,7 +19,7 @@ require "time"
 module Gcloud
   module Dns
     ##
-    # = DNS Change
+    # # DNS Change
     #
     # Represents a request containing additions or deletions or records.
     # Additions and deletions can be done in bulk, in a single atomic

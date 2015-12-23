@@ -17,7 +17,7 @@ module Gcloud
   module Storage
     class Bucket
       ##
-      # = Bucket Access Control List
+      # # Bucket Access Control List
       #
       # Represents a Bucket's Access Control List.
       #
@@ -449,7 +449,7 @@ module Gcloud
       end
 
       ##
-      # = Bucket Default Access Control List
+      # # Bucket Default Access Control List
       #
       # Represents a Bucket's Default Access Control List.
       #

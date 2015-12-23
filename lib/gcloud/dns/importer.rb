@@ -20,7 +20,7 @@ module Gcloud
   module Dns
     ##
     # @private
-    # = DNS Importer
+    # # DNS Importer
     #
     # Reads a {DNS zone
     # file}[https://en.wikipedia.org/wiki/Zone_file] and parses it, creating a

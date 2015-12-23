@@ -20,7 +20,7 @@ require "gcloud/bigquery/errors"
 module Gcloud
   module Bigquery
     ##
-    # = Job
+    # # Job
     #
     # Represents a generic Job that may be performed on a {Table}.
     #

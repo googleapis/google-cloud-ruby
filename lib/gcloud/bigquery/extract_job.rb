@@ -16,7 +16,7 @@
 module Gcloud
   module Bigquery
     ##
-    # = ExtractJob
+    # # ExtractJob
     #
     # A {Job} subclass representing an export operation that may be performed
     # on a {Table}. A ExtractJob instance is created when you call

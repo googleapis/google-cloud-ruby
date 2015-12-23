@@ -17,7 +17,7 @@ module Gcloud
   module Bigquery
     class Table
       ##
-      # = Table Schema
+      # # Table Schema
       #
       # A builder for BigQuery table schemas, passed to block arguments to
       # {Dataset#create_table} and {Table#schema}. Supports nested and

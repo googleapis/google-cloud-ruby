@@ -20,7 +20,7 @@ require "gcloud/search/result"
 module Gcloud
   module Search
     ##
-    # = Index
+    # # Index
     #
     # An index manages {Document} instances for retrieval. Indexes cannot be
     # created, updated, or deleted directly on the server: They are derived from

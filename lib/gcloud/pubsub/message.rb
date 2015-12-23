@@ -18,7 +18,7 @@ require "gcloud/pubsub/errors"
 module Gcloud
   module Pubsub
     ##
-    # = Message
+    # # Message
     #
     # Represents a Pub/Sub Message.
     #

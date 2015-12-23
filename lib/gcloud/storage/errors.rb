@@ -18,14 +18,14 @@ require "gcloud/errors"
 module Gcloud
   module Storage
     ##
-    # = Storage Error
+    # # Storage Error
     #
     # Base Storage exception class.
     class Error < Gcloud::Error
     end
 
     ##
-    # = ApiError
+    # # ApiError
     #
     # Raised when an API call is not successful.
     class ApiError < Error
@@ -52,7 +52,7 @@ module Gcloud
     end
 
     ##
-    # = FileVerificationError
+    # # FileVerificationError
     #
     # Raised when a File download fails the verification.
     class FileVerificationError < Error
@@ -89,7 +89,7 @@ module Gcloud
     end
 
     ##
-    # = SignedUrlUnavailable Error
+    # # SignedUrlUnavailable Error
     #
     # This is raised when File#signed_url is unable to generate a URL due to
     # missing credentials needed to create the URL.

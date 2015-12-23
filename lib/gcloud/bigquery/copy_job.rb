@@ -16,7 +16,7 @@
 module Gcloud
   module Bigquery
     ##
-    # = CopyJob
+    # # CopyJob
     #
     # A {Job} subclass representing a copy operation that may be performed on a
     # {Table}. A CopyJob instance is created when you call {Table#copy}.

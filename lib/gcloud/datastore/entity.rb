@@ -20,7 +20,7 @@ require "gcloud/datastore/proto"
 module Gcloud
   module Datastore
     ##
-    # = Entity
+    # # Entity
     #
     # Entity represents a Datastore record.
     # Every Entity has a {Key}, and a list of properties.

@@ -24,7 +24,7 @@ require "gcloud/bigquery/query_data"
 module Gcloud
   module Bigquery
     ##
-    # = Project
+    # # Project
     #
     # Projects are top-level containers in Google Cloud Platform. They store
     # information about billing and authorized users, and they contain BigQuery

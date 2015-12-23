@@ -22,7 +22,7 @@ require "gcloud/pubsub/topic"
 module Gcloud
   module Pubsub
     ##
-    # = Project
+    # # Project
     #
     # Represents the project that pubsub messages are pushed to and pulled from.
     # {Topic} is a named resource to which messages are sent by publishers.

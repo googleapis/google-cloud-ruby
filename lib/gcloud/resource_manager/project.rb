@@ -21,7 +21,7 @@ require "gcloud/resource_manager/project/updater"
 module Gcloud
   module ResourceManager
     ##
-    # = Project
+    # # Project
     #
     # Project is a high-level Google Cloud Platform entity. It is a container
     # for ACLs, APIs, AppEngine Apps, VMs, and other Google Cloud Platform

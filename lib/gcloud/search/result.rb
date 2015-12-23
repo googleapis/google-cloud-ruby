@@ -19,7 +19,7 @@ require "gcloud/search/fields"
 module Gcloud
   module Search
     ##
-    # = Result
+    # # Result
     #
     # See {Gcloud#search}
     class Result

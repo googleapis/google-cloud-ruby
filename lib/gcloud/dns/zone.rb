@@ -23,7 +23,7 @@ require "time"
 module Gcloud
   module Dns
     ##
-    # = DNS Zone
+    # # DNS Zone
     #
     # The managed zone is the container for DNS records for the same DNS name
     # suffix and has a set of name servers that accept and responds to queries.
