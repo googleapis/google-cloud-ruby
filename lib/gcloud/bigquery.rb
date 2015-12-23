@@ -90,35 +90,39 @@ module Gcloud
   # you have not yet created datasets or tables in your own project, let's
   # connect to Google's `publicdata` project, and see what you find.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new "publicdata"
-  #   bigquery = gcloud.bigquery
+  # gcloud = Gcloud.new "publicdata"
+  # bigquery = gcloud.bigquery
   #
-  #   bigquery.datasets.count #=> 1
-  #   bigquery.datasets.first.dataset_id #=> "samples"
+  # bigquery.datasets.count #=> 1
+  # bigquery.datasets.first.dataset_id #=> "samples"
   #
-  #   dataset = bigquery.datasets.first
-  #   tables = dataset.tables
+  # dataset = bigquery.datasets.first
+  # tables = dataset.tables
   #
-  #   tables.count #=> 7
-  #   tables.map &:table_id #=> [..., "shakespeare", "trigrams", "wikipedia"]
+  # tables.count #=> 7
+  # tables.map &:table_id #=> [..., "shakespeare", "trigrams", "wikipedia"]
+  # ```
   #
   # In addition listing all datasets and tables in the project, you can also
   # retrieve individual datasets and tables by ID. Let's look at the structure
   # of the `shakespeare` table, which contains an entry for every word in every
   # play written by Shakespeare.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new "publicdata"
-  #   bigquery = gcloud.bigquery
+  # gcloud = Gcloud.new "publicdata"
+  # bigquery = gcloud.bigquery
   #
-  #   dataset = bigquery.dataset "samples"
-  #   table = dataset.table "shakespeare"
+  # dataset = bigquery.dataset "samples"
+  # table = dataset.table "shakespeare"
   #
-  #   table.headers #=> ["word", "word_count", "corpus", "corpus_date"]
-  #   table.rows_count #=> 164656
+  # table.headers #=> ["word", "word_count", "corpus", "corpus_date"]
+  # table.rows_count #=> 164656
+  # ```
   #
   # Now that you know the column names for the Shakespeare table, you can write
   # and run a query.
@@ -134,18 +138,20 @@ module Gcloud
   # are connecting using your own default project. This is necessary for running
   # a query, since queries need to be able to create tables to hold results.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   bigquery = gcloud.bigquery
+  # gcloud = Gcloud.new
+  # bigquery = gcloud.bigquery
   #
-  #   sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " +
-  #         "FROM publicdata:samples.shakespeare"
-  #   data = bigquery.query sql
+  # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " +
+  #       "FROM publicdata:samples.shakespeare"
+  # data = bigquery.query sql
   #
-  #   data.count #=> 50
-  #   data.next? #=> false
-  #   data.first #=> {"word"=>"you", "count"=>42}
+  # data.count #=> 50
+  # data.next? #=> false
+  # data.first #=> {"word"=>"you", "count"=>42}
+  # ```
   #
   # The `TOP` function shown above is just one of a variety of functions
   # offered by BigQuery. See the [Query
@@ -160,21 +166,23 @@ module Gcloud
   # approach to running a query, an instance of Gcloud::Bigquery::QueryJob is
   # returned, rather than an instance of Gcloud::Bigquery::QueryData.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   bigquery = gcloud.bigquery
+  # gcloud = Gcloud.new
+  # bigquery = gcloud.bigquery
   #
-  #   sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " +
-  #         "FROM publicdata:samples.shakespeare"
-  #   job = bigquery.query_job sql
+  # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " +
+  #       "FROM publicdata:samples.shakespeare"
+  # job = bigquery.query_job sql
   #
-  #   job.wait_until_done!
-  #   if !job.failed?
-  #     job.query_results.each do |row|
-  #       puts row["word"]
-  #     end
+  # job.wait_until_done!
+  # if !job.failed?
+  #   job.query_results.each do |row|
+  #     puts row["word"]
   #   end
+  # end
+  # ```
   #
   # Once you have determined that the job is done and has not failed, you can
   # obtain an instance of Gcloud::Bigquery::QueryData by calling
@@ -188,11 +196,13 @@ module Gcloud
   # The first thing you need to do in a new BigQuery project is to create a
   # Gcloud::Bigquery::Dataset. Datasets hold tables and control access to them.
   #
-  #   require "gcloud/bigquery"
+  # ```ruby
+  # require "gcloud/bigquery"
   #
-  #   gcloud = Gcloud.new
-  #   bigquery = gcloud.bigquery
-  #   dataset = bigquery.create_dataset "my_dataset"
+  # gcloud = Gcloud.new
+  # bigquery = gcloud.bigquery
+  # dataset = bigquery.create_dataset "my_dataset"
+  # ```
   #
   # Now that you have a dataset, you can use it to create a table. Every table
   # is defined by a schema that may contain nested and repeated fields. The
@@ -201,19 +211,21 @@ module Gcloud
   # [Preparing Data for
   # BigQuery](https://cloud.google.com/bigquery/preparing-data-for-bigquery).)
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   bigquery = gcloud.bigquery
-  #   dataset = bigquery.dataset "my_dataset"
+  # gcloud = Gcloud.new
+  # bigquery = gcloud.bigquery
+  # dataset = bigquery.dataset "my_dataset"
   #
-  #   table = dataset.create_table "people" do |schema|
-  #     schema.string "first_name", mode: :required
-  #     schema.record "cities_lived", mode: :repeated do |nested_schema|
-  #       nested_schema.string "place", mode: :required
-  #       nested_schema.integer "number_of_years", mode: :required
-  #     end
+  # table = dataset.create_table "people" do |schema|
+  #   schema.string "first_name", mode: :required
+  #   schema.record "cities_lived", mode: :repeated do |nested_schema|
+  #     nested_schema.string "place", mode: :required
+  #     nested_schema.integer "number_of_years", mode: :required
   #   end
+  # end
+  # ```
   #
   # Because of the repeated field in this schema, we cannot use the CSV format
   # to load data into the table.
@@ -234,38 +246,40 @@ module Gcloud
   # soon as possible, inserting individual records directly from your Ruby
   # application is a great approach.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   bigquery = gcloud.bigquery
-  #   dataset = bigquery.dataset "my_dataset"
-  #   table = dataset.table "people"
+  # gcloud = Gcloud.new
+  # bigquery = gcloud.bigquery
+  # dataset = bigquery.dataset "my_dataset"
+  # table = dataset.table "people"
   #
-  #   rows = [
-  #       {
-  #           "first_name" => "Anna",
-  #           "cities_lived" => [
-  #               {
-  #                   "place" => "Stockholm",
-  #                   "number_of_years" => 2
-  #               }
-  #           ]
-  #       },
-  #       {
-  #           "first_name" => "Bob",
-  #           "cities_lived" => [
-  #               {
-  #                   "place" => "Seattle",
-  #                   "number_of_years" => 5
-  #               },
-  #               {
-  #                   "place" => "Austin",
-  #                   "number_of_years" => 6
-  #               }
-  #           ]
-  #       }
-  #   ]
-  #   table.insert rows
+  # rows = [
+  #     {
+  #         "first_name" => "Anna",
+  #         "cities_lived" => [
+  #             {
+  #                 "place" => "Stockholm",
+  #                 "number_of_years" => 2
+  #             }
+  #         ]
+  #     },
+  #     {
+  #         "first_name" => "Bob",
+  #         "cities_lived" => [
+  #             {
+  #                 "place" => "Seattle",
+  #                 "number_of_years" => 5
+  #             },
+  #             {
+  #                 "place" => "Austin",
+  #                 "number_of_years" => 6
+  #             }
+  #         ]
+  #     }
+  # ]
+  # table.insert rows
+  # ```
   #
   # There are some trade-offs involved with streaming, so be sure to read the
   # discussion of data consistency in [Streaming Data Into
@@ -279,19 +293,21 @@ module Gcloud
   # 100 files containing baby name records since the year 1880. A PDF file also
   # contained in the archive specifies the schema used below.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   bigquery = gcloud.bigquery
-  #   dataset = bigquery.dataset "my_dataset"
-  #   table = dataset.create_table "baby_names" do |schema|
-  #     schema.string "name", mode: :required
-  #     schema.string "sex", mode: :required
-  #     schema.integer "number", mode: :required
-  #   end
+  # gcloud = Gcloud.new
+  # bigquery = gcloud.bigquery
+  # dataset = bigquery.dataset "my_dataset"
+  # table = dataset.create_table "baby_names" do |schema|
+  #   schema.string "name", mode: :required
+  #   schema.string "sex", mode: :required
+  #   schema.integer "number", mode: :required
+  # end
   #
-  #   file = File.open "names/yob2014.txt"
-  #   load_job = table.load file, format: "csv"
+  # file = File.open "names/yob2014.txt"
+  # load_job = table.load file, format: "csv"
+  # ```
   #
   # Because the names data, although formatted as CSV, is distributed in files
   # with a `.txt` extension, this example explicitly passes the `format` option
@@ -311,18 +327,20 @@ module Gcloud
   # are using a version of Faraday at or above 0.9.2, is a workaround for [this
   # gzip issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367).
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   # Use httpclient to avoid broken pipe errors with large uploads
-  #   Faraday.default_adapter = :httpclient
+  # # Use httpclient to avoid broken pipe errors with large uploads
+  # Faraday.default_adapter = :httpclient
   #
-  #   # Only add the following statement if using Faraday >= 0.9.2
-  #   # Override gzip middleware with no-op for httpclient
-  #   Faraday::Response.register_middleware :gzip =>
-  #                                           Faraday::Response::Middleware
+  # # Only add the following statement if using Faraday >= 0.9.2
+  # # Override gzip middleware with no-op for httpclient
+  # Faraday::Response.register_middleware :gzip =>
+  #                                         Faraday::Response::Middleware
   #
-  #   gcloud = Gcloud.new
-  #   bigquery = gcloud.bigquery
+  # gcloud = Gcloud.new
+  # bigquery = gcloud.bigquery
+  # ```
   #
   # ## Exporting query results to Google Cloud Storage
   #
@@ -332,37 +350,39 @@ module Gcloud
   # will need to enable the Google Cloud Storage API in addition to setting up
   # billing.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   bigquery = gcloud.bigquery
-  #   dataset = bigquery.dataset "my_dataset"
-  #   source_table = dataset.table "baby_names"
-  #   result_table = dataset.create_table "baby_names_results"
+  # gcloud = Gcloud.new
+  # bigquery = gcloud.bigquery
+  # dataset = bigquery.dataset "my_dataset"
+  # source_table = dataset.table "baby_names"
+  # result_table = dataset.create_table "baby_names_results"
   #
-  #   sql = "SELECT name, number as count " +
-  #         "FROM baby_names " +
-  #         "WHERE name CONTAINS 'Sam' " +
-  #         "ORDER BY count DESC"
-  #   query_job = dataset.query_job sql, table: result_table
+  # sql = "SELECT name, number as count " +
+  #       "FROM baby_names " +
+  #       "WHERE name CONTAINS 'Sam' " +
+  #       "ORDER BY count DESC"
+  # query_job = dataset.query_job sql, table: result_table
   #
-  #   query_job.wait_until_done!
+  # query_job.wait_until_done!
   #
-  #   if !query_job.failed?
+  # if !query_job.failed?
   #
-  #     storage = gcloud.storage
-  #     bucket_id = "bigquery-exports-#{SecureRandom.uuid}"
-  #     bucket = storage.create_bucket bucket_id
-  #     extract_url = "gs://#{bucket.id}/baby-names-sam.csv"
+  #   storage = gcloud.storage
+  #   bucket_id = "bigquery-exports-#{SecureRandom.uuid}"
+  #   bucket = storage.create_bucket bucket_id
+  #   extract_url = "gs://#{bucket.id}/baby-names-sam.csv"
   #
-  #     extract_job = result_table.extract extract_url
+  #   extract_job = result_table.extract extract_url
   #
-  #     extract_job.wait_until_done!
+  #   extract_job.wait_until_done!
   #
-  #     # Download to local filesystem
-  #     bucket.files.first.download "baby-names-sam.csv"
+  #   # Download to local filesystem
+  #   bucket.files.first.download "baby-names-sam.csv"
   #
-  #   end
+  # end
+  # ```
   #
   # If a table you wish to export contains a large amount of data, you can pass
   # a wildcard URI to export to multiple files (for sharding), or an array of
