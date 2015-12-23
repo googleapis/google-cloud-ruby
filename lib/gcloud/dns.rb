@@ -78,7 +78,7 @@ module Gcloud
   # the project and credential information to connect to the Cloud DNS service,
   # or if you are running on Google Compute Engine this configuration is taken
   # care of for you. You can read more about the options for connecting in the
-  # [Authentication Guide](link:AUTHENTICATION.md).
+  # [Authentication Guide](../AUTHENTICATION).
   #
   # ## Creating Zones
   #
