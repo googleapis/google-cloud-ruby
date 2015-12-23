@@ -90,12 +90,14 @@ module Gcloud
   # qualified](https://en.wikipedia.org/wiki/Fully_qualified_domain_name)) as
   # you follow along with these examples.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.create_zone "example-com", "example.com."
-  #   puts zone.id # unique identifier defined by the server
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zone = dns.create_zone "example-com", "example.com."
+  # puts zone.id # unique identifier defined by the server
+  # ```
   #
   # For more information, see [Managing
   # Zones](https://cloud.google.com/dns/zones/).
@@ -104,22 +106,26 @@ module Gcloud
   #
   # You can retrieve all the zones in your project.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zones = dns.zones
-  #   zones.each do |zone|
-  #     puts "#{zone.name} - #{zone.dns}"
-  #   end
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zones = dns.zones
+  # zones.each do |zone|
+  #   puts "#{zone.name} - #{zone.dns}"
+  # end
+  # ```
   #
   # You can also retrieve a single zone by either name or id.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zone = dns.zone "example-com"
+  # ```
   #
   # ## Listing Records
   #
@@ -127,16 +133,18 @@ module Gcloud
   # Record instances for it, providing configuration for Cloud DNS nameservers.
   # Let's take a look at these records.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
-  #   records = zone.records
-  #   records.count #=> 2
-  #   records.map &:type #=> ["NS", "SOA"]
-  #   zone.records.first.data.count #=> 4
-  #   zone.records.first.data #=> ["ns-cloud-d1.googledomains.com.", ...]
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zone = dns.zone "example-com"
+  # records = zone.records
+  # records.count #=> 2
+  # records.map &:type #=> ["NS", "SOA"]
+  # zone.records.first.data.count #=> 4
+  # zone.records.first.data #=> ["ns-cloud-d1.googledomains.com.", ...]
+  # ```
   #
   # Note that Record#data returns an array. The Cloud DNS service only allows
   # the zone to have one Record instance for each name and type combination. It
@@ -148,14 +156,16 @@ module Gcloud
   # You can easily add your own records to the zone. Each call to Zone#add
   # results in a new Cloud DNS Change instance.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
-  #   change = zone.add "www", "A", 86400, ["1.2.3.4"]
-  #   change.additions.map &:type #=> ["A", "SOA"]
-  #   change.deletions.map &:type #=> ["SOA"]
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zone = dns.zone "example-com"
+  # change = zone.add "www", "A", 86400, ["1.2.3.4"]
+  # change.additions.map &:type #=> ["A", "SOA"]
+  # change.deletions.map &:type #=> ["SOA"]
+  # ```
   #
   # Whenever you change the set of records belonging to a zone, the zone's start
   # of authority (SOA) record should be updated with a higher serial number. The
@@ -167,89 +177,103 @@ module Gcloud
   # subdomain (e.g., `www`) fragment for convenience, but notice that the
   # retrieved record's domain name is always fully-qualified.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
-  #   records = zone.records "www", "A"
-  #   records.first.name #=> "www.example.com."
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zone = dns.zone "example-com"
+  # records = zone.records "www", "A"
+  # records.first.name #=> "www.example.com."
+  # ```
   #
   # You can use Zone#replace to update the `ttl` and `data` for a record.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
-  #   change = zone.replace "www", "A", 86400, ["5.6.7.8"]
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zone = dns.zone "example-com"
+  # change = zone.replace "www", "A", 86400, ["5.6.7.8"]
+  # ```
   #
   # Or, you can use Zone#modify to update just the `ttl` or `data`, without the
   # risk of inadvertently changing values that you wish to leave unchanged.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
-  #   change = zone.modify "www", "A" do |r|
-  #     r.ttl = 3600 # change only the TTL
-  #   end
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zone = dns.zone "example-com"
+  # change = zone.modify "www", "A" do |r|
+  #   r.ttl = 3600 # change only the TTL
+  # end
+  # ```
   #
   # You can also delete records by name and type.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
-  #   change = zone.remove "www", "A"
-  #   record = change.deletions.first
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zone = dns.zone "example-com"
+  # change = zone.remove "www", "A"
+  # record = change.deletions.first
+  # ```
   #
   # The best way to add, remove, and update multiple records in a single
   # [transaction](https://cloud.google.com/dns/records) is to call Zone#update
   # with a block. See Zone::Transaction.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
-  #   change = zone.update do |tx|
-  #     tx.add     "www", "A",  86400, "1.2.3.4"
-  #     tx.remove  "example.com.", "TXT"
-  #     tx.replace "example.com.", "MX", 86400, ["10 mail1.example.com.",
-  #                                              "20 mail2.example.com."]
-  #     tx.modify "www.example.com.", "CNAME" do |r|
-  #       r.ttl = 86400 # only change the TTL
-  #     end
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zone = dns.zone "example-com"
+  # change = zone.update do |tx|
+  #   tx.add     "www", "A",  86400, "1.2.3.4"
+  #   tx.remove  "example.com.", "TXT"
+  #   tx.replace "example.com.", "MX", 86400, ["10 mail1.example.com.",
+  #                                            "20 mail2.example.com."]
+  #   tx.modify "www.example.com.", "CNAME" do |r|
+  #     r.ttl = 86400 # only change the TTL
   #   end
+  # end
+  # ```
   #
   # Finally, you can add and delete records by reference, using Zone#update.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
-  #   to_add = zone.record "www", "AAAA", 86400, ["2607:f8b0:400a:801::1005"]
-  #   to_delete = zone.records "www", "A"
-  #   change = zone.update to_add, to_delete
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zone = dns.zone "example-com"
+  # to_add = zone.record "www", "AAAA", 86400, ["2607:f8b0:400a:801::1005"]
+  # to_delete = zone.records "www", "A"
+  # change = zone.update to_add, to_delete
+  # ```
   #
   # ## Listing Changes
   #
   # Because the transactions you execute against your zone do not always
   # complete immediately, you can retrieve and inspect changes.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
-  #   changes = zone.changes
-  #   changes.each do |change|
-  #     puts "#{change.id} - #{change.started_at} - #{change.status}"
-  #   end
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zone = dns.zone "example-com"
+  # changes = zone.changes
+  # changes.each do |change|
+  #   puts "#{change.id} - #{change.started_at} - #{change.status}"
+  # end
+  # ```
   #
   # ## Importing and exporting zone files
   #
@@ -257,22 +281,27 @@ module Gcloud
   # the zone to have one Record instance for each name and type combination,
   # lines may be merged as needed into records with multiple `data` values.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
-  #   change = zone.import "path/to/db.example.com"
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zone = dns.zone "example-com"
+  # change = zone.import "path/to/db.example.com"
+  # ```
   #
   # You can also export to a zone file.
   #
-  #   require "gcloud"
+  # ```ruby
+  # require "gcloud"
   #
-  #   gcloud = Gcloud.new
-  #   dns = gcloud.dns
-  #   zone = dns.zone "example-com"
+  # gcloud = Gcloud.new
+  # dns = gcloud.dns
+  # zone = dns.zone "example-com"
   #
-  #   zone.export "path/to/db.example.com"
+  # zone.export "path/to/db.example.com"
+  # ```
+  #
   module Dns
   end
 end
