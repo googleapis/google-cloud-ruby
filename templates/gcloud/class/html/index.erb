@@ -78,21 +78,56 @@
           <%= htmlify options.object.docstring %>
         </div>
 
+        <div class="section-links">
+          <% if CodeObjects::ClassObject === object && object.superclass %>
+            <div>Parent: <%= linkify object.superclass %></div>
+          <% end %>
+
+          <% mix = run_verifier(object.mixins(:class)) + run_verifier(object.mixins(:instance)) %>
+          <% if mix.size > 0 %>
+            <div>
+              Included Modules:
+              <% mix.each do |inc| %>
+                <%= linkify inc %>
+              <% end %>
+            </div>
+          <% end %>
+
+          <% methods_in_groups(object.groups, object.meths) do |group, methods| %>
+            <div>
+              <%= group %>
+
+              <% methods.each do |method| %>
+                <%= linkify method %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
         <% methods_in_groups(object.groups, object.meths) do |group, methods| %>
-          <ul>
-            <li><%= group %>
-              <ul>
-                <% methods.each do |method| %>
-                  <li>
-                    <code><%= (method.scope == :instance) ? "#" : "." %><%= method.name %></code>
-                    <% if method.docstring %>
-                      <br><%= htmlify method.docstring %>
-                    <% end %>
-                  </li>
-                <% end %>
-              </ul>
-            </li>
-          </ul>
+          <div id="<%= group %>-methods" class="section">
+            <h3 class="section-header"><%= group %></h3>
+          </div>
+
+          <div class="methods">
+            <% methods.each do |method| %>
+              <div class="method">
+                <a name="<%= anchor_for method %>"></a>
+
+                <h4>
+                  <code><%= method.name %><%= format_args(method) %></code>
+                  <span>
+                    <a href="#<%= anchor_for method %>">&para;</a>
+                    <a href="#top">&uarr;</a>
+                  </span>
+                </h4>
+
+                <div class="method-description">
+                  <%= htmlify method.docstring %>
+                </div>
+              </div>
+            <% end %>
+          </div>
         <% end %>
       </section>
 
@@ -100,7 +135,7 @@
 
         <div class="side-nav--meta">
           <div id="doc-build-date">
-            Docs built on Dec 11, 2015.
+            Docs built on <%= Date.today.strftime "%b %d, %Y" %>.
           </div>
         </div>
 

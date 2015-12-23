@@ -75,22 +75,20 @@
       <section class="content">
         <h2>All Gcloud Classes and Modules</h2>
         <ul>
-          <% options.objects.each do |object| %>
+          <% options.objects.each do |klass| %>
             <li>
-              <p><a class="reference internal" href="<%= object.path %>">
-                <%= object.name %>
-              </a>
-              <% if object.meths.any? %>
-                <a href="<%= object.path %>" onclick="$('#details-<%= object.path.gsub("::", "_") %>').toggle(); return false;">(methods)</a></p>
-                <div id="details-<%= object.path.gsub("::", "_") %>" style="display: none">
+              <%= linkify klass %>
+              <% if klass.meths.any? %>
+                <a href="<%= klass.path %>" onclick="$('#details-<%= klass.path.gsub("::", "_") %>').toggle(); return false;">(methods)</a></p>
+                <div id="details-<%= klass.path.gsub("::", "_") %>" style="display: none">
                   <ul>
-                    <% methods_in_groups(object.groups, object.meths) do |group, methods| %>
+                    <% methods_in_groups(klass.groups, klass.meths) do |group, methods| %>
                       <li class="toctree-l0">
                         <%= group %>
                         <ul>
                           <% methods.each do |method| %>
                             <li class="toctree-l1">
-                              <code><%= (method.scope == :instance) ? "#" : "." %><%= method.name %></code>
+                              <code><%= linkify method %></code>
                             </li>
                           <% end %>
                         </ul>
@@ -108,7 +106,7 @@
 
         <div class="side-nav--meta">
           <div id="doc-build-date">
-            Docs built on Dec 11, 2015.
+            Docs built on <%= Date.today.strftime "%b %d, %Y" %>.
           </div>
         </div>
 

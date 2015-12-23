@@ -1,3 +1,5 @@
+include Helpers::ModuleHelper
+
 def init
   sections :index
 end

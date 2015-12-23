@@ -1,14 +1,19 @@
-require "yaml"
 include Helpers::ModuleHelper
 
 def init
+  options.objects = objects = run_verifier(options.objects)
+
   # Render each class/module page
   options.objects.each do |object|
     Templates::Engine.with_serializer(object, options.serializer) do
       options.object = object
+      self.object = options.object
       T('class').run(options)
     end
   end
+
+  options.object = options.objects.find { |o| YARD::CodeObjects::RootObject === o }
+  self.object = options.object
 
   # Render api reference page
   Templates::Engine.with_serializer("reference.html", options.serializer) do
