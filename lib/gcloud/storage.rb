@@ -33,8 +33,8 @@ module Gcloud
   #   readable. (+String+ or +Hash+)
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scope is:
@@ -89,11 +89,11 @@ module Gcloud
   #   file = bucket.file "path/to/my-file.ext"
   #
   # You can learn more about various options for connection on the
-  # {Authentication Guide}[link:AUTHENTICATION.md].
+  # [Authentication Guide](link:AUTHENTICATION.md).
   #
   # To learn more about Cloud Storage, read the
-  # {Google Cloud Storage Overview
-  # }[https://cloud.google.com/storage/docs/overview].
+  # [Google Cloud Storage Overview
+  # ](https://cloud.google.com/storage/docs/overview).
   #
   # ## Retrieving Buckets
   #
@@ -229,13 +229,13 @@ module Gcloud
   #
   # You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
   # upload large files. To avoid this problem, add the
-  # {httpclient}[https://rubygems.org/gems/httpclient] gem to your project, and
+  # [httpclient](https://rubygems.org/gems/httpclient) gem to your project, and
   # the line (or lines) of configuration shown below. These lines must execute
   # after you require gcloud but before you make your first gcloud connection.
-  # The first statement configures {Faraday}[https://rubygems.org/gems/faraday]
+  # The first statement configures [Faraday](https://rubygems.org/gems/faraday)
   # to use httpclient. The second statement, which should only be added if you
-  # are using a version of Faraday at or above 0.9.2, is a workaround for {this
-  # gzip issue}[https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367].
+  # are using a version of Faraday at or above 0.9.2, is a workaround for [this
+  # gzip issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367).
   #
   #   require "gcloud"
   #
@@ -285,7 +285,7 @@ module Gcloud
   # writers, and readers. Permissions can be granted to an individual user's
   # email address, a group's email address, as well as many predefined lists.
   # See the
-  # {Access Control guide}[https://cloud.google.com/storage/docs/access-control]
+  # [Access Control guide](https://cloud.google.com/storage/docs/access-control)
   # for more.
   #
   # Access to a bucket can be granted to a user by appending +"user-"+ to the

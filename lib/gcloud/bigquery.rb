@@ -32,8 +32,8 @@ module Gcloud
   #   readable. (+String+ or +Hash+)
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scope is:
@@ -67,19 +67,19 @@ module Gcloud
   #
   # Google Cloud BigQuery enables super-fast, SQL-like queries against massive
   # datasets, using the processing power of Google's infrastructure. To learn
-  # more, read {What is
-  # BigQuery?}[https://cloud.google.com/bigquery/what-is-bigquery].
+  # more, read [What is
+  # BigQuery?](https://cloud.google.com/bigquery/what-is-bigquery).
   #
   # Gcloud's goal is to provide an API that is familiar and comfortable to
   # Rubyists. Authentication is handled by Gcloud#bigquery. You can provide
   # the project and credential information to connect to the BigQuery service,
   # or if you are running on Google Compute Engine this configuration is taken
   # care of for you. You can read more about the options for connecting in the
-  # {Authentication Guide}[link:AUTHENTICATION.md].
+  # [Authentication Guide](link:AUTHENTICATION.md).
   #
   # To help you get started quickly, the first few examples below use a public
-  # dataset provided by Google. As soon as you have {signed
-  # up}[https://cloud.google.com/bigquery/sign-up] to use BigQuery, and provided
+  # dataset provided by Google. As soon as you have [signed
+  # up](https://cloud.google.com/bigquery/sign-up) to use BigQuery, and provided
   # that you stay in the free tier for queries, you should be able to run these
   # first examples without the need to set up billing or to load data (although
   # we'll show you how to do that too.)
@@ -126,7 +126,7 @@ module Gcloud
   # ## Running queries
   #
   # BigQuery offers both synchronous and asynchronous methods, as explained in
-  # {Querying Data}[https://cloud.google.com/bigquery/querying-data].
+  # [Querying Data](https://cloud.google.com/bigquery/querying-data).
   #
   # ### Synchronous queries
   #
@@ -148,8 +148,8 @@ module Gcloud
   #   data.first #=> {"word"=>"you", "count"=>42}
   #
   # The +TOP+ function shown above is just one of a variety of functions
-  # offered by BigQuery. See the {Query
-  # Reference}[https://cloud.google.com/bigquery/query-reference] for a full
+  # offered by BigQuery. See the [Query
+  # Reference](https://cloud.google.com/bigquery/query-reference) for a full
   # listing.
   #
   # ### Asynchronous queries
@@ -198,8 +198,8 @@ module Gcloud
   # is defined by a schema that may contain nested and repeated fields. The
   # example below shows a schema with a repeated record field named
   # +cities_lived+. (For more information about nested and repeated fields, see
-  # {Preparing Data for
-  # BigQuery}[https://cloud.google.com/bigquery/preparing-data-for-bigquery].)
+  # [Preparing Data for
+  # BigQuery](https://cloud.google.com/bigquery/preparing-data-for-bigquery).)
   #
   #   require "gcloud"
   #
@@ -221,12 +221,12 @@ module Gcloud
   # ## Loading records
   #
   # In addition to CSV, data can be imported from files that are formatted as
-  # {Newline-delimited JSON}[http://jsonlines.org/] or
-  # {Avro}[http://avro.apache.org/], or from a Google Cloud Datastore backup. It
+  # [Newline-delimited JSON](http://jsonlines.org/) or
+  # [Avro](http://avro.apache.org/), or from a Google Cloud Datastore backup. It
   # can also be "streamed" into BigQuery.
   #
   # To follow along with these examples, you will need to set up billing on the
-  # {Google Developers Console}[https://console.developers.google.com].
+  # [Google Developers Console](https://console.developers.google.com).
   #
   # ### Streaming records
   #
@@ -268,13 +268,13 @@ module Gcloud
   #   table.insert rows
   #
   # There are some trade-offs involved with streaming, so be sure to read the
-  # discussion of data consistency in {Streaming Data Into
-  # BigQuery}[https://cloud.google.com/bigquery/streaming-data-into-bigquery].
+  # discussion of data consistency in [Streaming Data Into
+  # BigQuery](https://cloud.google.com/bigquery/streaming-data-into-bigquery).
   #
   # ### Uploading a file
   #
   # To follow along with this example, please download the
-  # {names.zip}[http://www.ssa.gov/OACT/babynames/names.zip] archive from the
+  # [names.zip](http://www.ssa.gov/OACT/babynames/names.zip) archive from the
   # U.S. Social Security Administration. Inside the archive you will find over
   # 100 files containing baby name records since the year 1880. A PDF file also
   # contained in the archive specifies the schema used below.
@@ -303,13 +303,13 @@ module Gcloud
   #
   # You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
   # upload large files. To avoid this problem, add the
-  # {httpclient}[https://rubygems.org/gems/httpclient] gem to your project, and
+  # [httpclient](https://rubygems.org/gems/httpclient) gem to your project, and
   # the line (or lines) of configuration shown below. These lines must execute
   # after you require gcloud but before you make your first gcloud connection.
-  # The first statement configures {Faraday}[https://rubygems.org/gems/faraday]
+  # The first statement configures [Faraday](https://rubygems.org/gems/faraday)
   # to use httpclient. The second statement, which should only be added if you
-  # are using a version of Faraday at or above 0.9.2, is a workaround for {this
-  # gzip issue}[https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367].
+  # are using a version of Faraday at or above 0.9.2, is a workaround for [this
+  # gzip issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367).
   #
   #   require "gcloud"
   #
@@ -366,8 +366,8 @@ module Gcloud
   #
   # If a table you wish to export contains a large amount of data, you can pass
   # a wildcard URI to export to multiple files (for sharding), or an array of
-  # URIs (for partitioning), or both. See {Exporting Data From
-  # BigQuery}[https://cloud.google.com/bigquery/exporting-data-from-bigquery]
+  # URIs (for partitioning), or both. See [Exporting Data From
+  # BigQuery](https://cloud.google.com/bigquery/exporting-data-from-bigquery)
   # for details.
   #
   module Bigquery

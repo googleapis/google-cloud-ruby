@@ -28,7 +28,7 @@ require "gcloud/version"
 # is taken care of for you.
 #
 # You can learn more about various options for connection on the
-# {Authentication Guide}[AUTHENTICATION.md].
+# [Authentication Guide](AUTHENTICATION.md).
 #
 module Gcloud
   ##
@@ -74,8 +74,8 @@ module Gcloud
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scopes are:
@@ -123,8 +123,8 @@ module Gcloud
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scope is:
@@ -145,8 +145,8 @@ module Gcloud
   #   file = bucket.file "path/to/my-file.ext"
   #
   # The default scope can be overridden with the +scope+ option. For more
-  # information see {Storage OAuth 2.0
-  # Authentication}[https://cloud.google.com/storage/docs/authentication#oauth].
+  # information see [Storage OAuth 2.0
+  # Authentication](https://cloud.google.com/storage/docs/authentication#oauth).
   #
   #   require "gcloud"
   #
@@ -167,8 +167,8 @@ module Gcloud
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scope is:
@@ -209,8 +209,8 @@ module Gcloud
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scope is:
@@ -254,8 +254,8 @@ module Gcloud
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scope is:
@@ -302,8 +302,8 @@ module Gcloud
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scope is:
@@ -347,8 +347,8 @@ module Gcloud
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scopes are:

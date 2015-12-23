@@ -32,8 +32,8 @@ module Gcloud
   #   readable. (+String+ or +Hash+)
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scope is:
@@ -70,24 +70,24 @@ module Gcloud
   # provides a cost-effective way to make your applications and services
   # available to your users. This programmable, authoritative DNS service can be
   # used to easily publish and manage DNS records using the same infrastructure
-  # relied upon by Google. To learn more, read {What is Google Cloud
-  # DNS?}[https://cloud.google.com/dns/what-is-cloud-dns].
+  # relied upon by Google. To learn more, read [What is Google Cloud
+  # DNS?](https://cloud.google.com/dns/what-is-cloud-dns).
   #
   # Gcloud's goal is to provide an API that is familiar and comfortable to
   # Rubyists. Authentication is handled by Gcloud#dns. You can provide
   # the project and credential information to connect to the Cloud DNS service,
   # or if you are running on Google Compute Engine this configuration is taken
   # care of for you. You can read more about the options for connecting in the
-  # {Authentication Guide}[link:AUTHENTICATION.md].
+  # [Authentication Guide](link:AUTHENTICATION.md).
   #
   # ## Creating Zones
   #
   # To get started with Google Cloud DNS, use your DNS Project to create a new
   # Zone. The second argument to Project#create_zone must be a unique
-  # domain name for which you can {verify
-  # ownership}[https://www.google.com/webmasters/verification/home]. Substitute
-  # a domain name of your own (ending with a dot to signify that it is {fully
-  # qualified}[https://en.wikipedia.org/wiki/Fully_qualified_domain_name]) as
+  # domain name for which you can [verify
+  # ownership](https://www.google.com/webmasters/verification/home). Substitute
+  # a domain name of your own (ending with a dot to signify that it is [fully
+  # qualified](https://en.wikipedia.org/wiki/Fully_qualified_domain_name)) as
   # you follow along with these examples.
   #
   #   require "gcloud"
@@ -97,8 +97,8 @@ module Gcloud
   #   zone = dns.create_zone "example-com", "example.com."
   #   puts zone.id # unique identifier defined by the server
   #
-  # For more information, see {Managing
-  # Zones}[https://cloud.google.com/dns/zones/].
+  # For more information, see [Managing
+  # Zones](https://cloud.google.com/dns/zones/).
   #
   # ## Listing Zones
   #
@@ -207,7 +207,7 @@ module Gcloud
   #   record = change.deletions.first
   #
   # The best way to add, remove, and update multiple records in a single
-  # {transaction}[https://cloud.google.com/dns/records] is to call Zone#update
+  # [transaction](https://cloud.google.com/dns/records) is to call Zone#update
   # with a block. See Zone::Transaction.
   #
   #   require "gcloud"

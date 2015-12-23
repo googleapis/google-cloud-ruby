@@ -183,8 +183,8 @@ module Gcloud
       # conditions. See {Gcloud::Backoff} to control this behavior, or
       # specify the wanted behavior in the call with the +:retries:+ option.
       #
-      # You can pass {website
-      # settings}[https://cloud.google.com/storage/docs/website-configuration]
+      # You can pass [website
+      # settings](https://cloud.google.com/storage/docs/website-configuration)
       # for the bucket, including a block that defines CORS rule. See
       # {Bucket::Cors} for details.
       #
@@ -225,46 +225,46 @@ module Gcloud
       #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
       #     access, and allUsers get READER access.
       # @param [String] cors The CORS rules for the bucket. Accepts an array of
-      #   hashes containing the attributes specified for the {resource
+      #   hashes containing the attributes specified for the [resource
       #   description of
-      #   cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
+      #   cors](https://cloud.google.com/storage/docs/json_api/v1/buckets#cors).
       # @param [String] location The location of the bucket. Object data for
       #   objects in the bucket resides in physical storage within this region.
-      #   Possible values include +ASIA+, +EU+, and +US+.(See the {developer's
-      #   guide}[https://cloud.google.com/storage/docs/bucket-locations] for the
+      #   Possible values include +ASIA+, +EU+, and +US+.(See the [developer's
+      #   guide](https://cloud.google.com/storage/docs/bucket-locations) for the
       #   authoritative list. The default value is +US+.
       # @param [String] logging_bucket The destination bucket for the bucket's
-      #   logs. For more information, see {Access
-      #   Logs}[https://cloud.google.com/storage/docs/access-logs].
+      #   logs. For more information, see [Access
+      #   Logs](https://cloud.google.com/storage/docs/access-logs).
       # @param [String] logging_prefix The prefix used to create log object
       #   names for the bucket. It can be at most 900 characters and must be a
-      #   {valid object
-      #   name}[https://cloud.google.com/storage/docs/bucket-naming#objectnames]
+      #   [valid object
+      #   name](https://cloud.google.com/storage/docs/bucket-naming#objectnames)
       #   . By default, the object prefix is the name of the bucket for which
-      #   the logs are enabled. For more information, see {Access
-      #   Logs}[https://cloud.google.com/storage/docs/access-logs].
+      #   the logs are enabled. For more information, see [Access
+      #   Logs](https://cloud.google.com/storage/docs/access-logs).
       # @param [Integer] retries The number of times the API call should be
       #   retried. Default is {Gcloud::Backoff.retries}.
       # @param [Symbol, String] storage_class Defines how objects in the bucket
       #   are stored and determines the SLA and the cost of storage. Values
       #   include +:standard+, +:nearline+, and +:dra+ (Durable Reduced
       #   Availability), as well as the strings returned by
-      #   Bucket#storage_class. For more information, see {Storage
-      #   Classes}[https://cloud.google.com/storage/docs/storage-classes]. The
+      #   Bucket#storage_class. For more information, see [Storage
+      #   Classes](https://cloud.google.com/storage/docs/storage-classes). The
       #   default value is +:standard+.
-      # @param [Boolean] versioning Whether {Object
-      #   Versioning}[https://cloud.google.com/storage/docs/object-versioning]
+      # @param [Boolean] versioning Whether [Object
+      #   Versioning](https://cloud.google.com/storage/docs/object-versioning)
       #   is to be enabled for the bucket. The default value is +false+.
       # @param [String] website_main The index page returned from a static
       #   website served from the bucket when a site visitor requests the top
-      #   level directory. For more information, see {How to Host a Static
+      #   level directory. For more information, see [How to Host a Static
       #   Website
-      #   }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      #   ](https://cloud.google.com/storage/docs/website-configuration#step4).
       # @param [String] website_404 The page returned from a static website
       #   served from the bucket when a site visitor requests a resource that
-      #   does not exist. For more information, see {How to Host a Static
+      #   does not exist. For more information, see [How to Host a Static
       #   Website
-      #   }[https://cloud.google.com/storage/docs/website-configuration#step4].
+      #   ](https://cloud.google.com/storage/docs/website-configuration#step4).
       #
       # @return [Gcloud::Storage::Bucket]
       #

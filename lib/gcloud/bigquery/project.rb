@@ -84,11 +84,11 @@ module Gcloud
       end
 
       ##
-      # Queries data using the {asynchronous
-      # method}[https://cloud.google.com/bigquery/querying-data].
+      # Queries data using the [asynchronous
+      # method](https://cloud.google.com/bigquery/querying-data).
       #
-      # @param [String] query A query string, following the BigQuery {query
-      #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
+      # @param [String] query A query string, following the BigQuery [query
+      #   syntax](https://cloud.google.com/bigquery/query-reference), of the
       #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]".
       # @param [String] priority Specifies a priority for the query. Possible
@@ -97,8 +97,8 @@ module Gcloud
       # @param [Boolean] cache Whether to look for the result in the query
       #   cache. The query cache is a best-effort cache that will be flushed
       #   whenever tables in the query are modified. The default value is true.
-      #   For more information, see {query
-      #   caching}[https://developers.google.com/bigquery/querying-data].
+      #   For more information, see [query
+      #   caching](https://developers.google.com/bigquery/querying-data).
       # @param [Table] table The destination table where the query results
       #   should be stored. If not present, a new table will be created to store
       #   the results.
@@ -159,11 +159,11 @@ module Gcloud
       end
 
       ##
-      # Queries data using the {synchronous
-      # method}[https://cloud.google.com/bigquery/querying-data].
+      # Queries data using the [synchronous
+      # method](https://cloud.google.com/bigquery/querying-data).
       #
-      # @param [String] query A query string, following the BigQuery {query
-      #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
+      # @param [String] query A query string, following the BigQuery [query
+      #   syntax](https://cloud.google.com/bigquery/query-reference), of the
       #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]".
       # @param [Integer] timeout How long to wait for the query to complete, in
@@ -185,8 +185,8 @@ module Gcloud
       # @param [Boolean] cache Whether to look for the result in the query
       #   cache. The query cache is a best-effort cache that will be flushed
       #   whenever tables in the query are modified. The default value is true.
-      #   For more information, see {query
-      #   caching}[https://developers.google.com/bigquery/querying-data].
+      #   For more information, see [query
+      #   caching](https://developers.google.com/bigquery/querying-data).
       # @param [String] dataset Specifies the default datasetId and projectId to
       #   assume for any unqualified table names in the query. If not set, all
       #   table names in the query string must be qualified in the format
@@ -262,8 +262,8 @@ module Gcloud
       #   (one hour).
       # @param [Array<Hash>] access The access rules for a Dataset using the
       #   Google Cloud Datastore API data structure of an array of hashes. See
-      #   {BigQuery Access
-      #   Control}[https://cloud.google.com/bigquery/access-control] for more
+      #   [BigQuery Access
+      #   Control](https://cloud.google.com/bigquery/access-control) for more
       #   information.
       #
       # @return [Gcloud::Bigquery::Dataset]

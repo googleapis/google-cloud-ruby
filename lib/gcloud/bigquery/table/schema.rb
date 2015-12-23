@@ -69,8 +69,8 @@ module Gcloud
         ##
         # @private
         # Returns the schema as hash containing the keys and values specified by
-        # the Google Cloud BigQuery {Rest API
-        # }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource]
+        # the Google Cloud BigQuery [Rest API
+        # ](https://cloud.google.com/bigquery/docs/reference/v2/tables#resource)
         # .
         def schema
           {
@@ -156,8 +156,8 @@ module Gcloud
         ##
         # Adds a record field to the schema. A block must be passed describing
         # the nested fields of the record. For more information about nested
-        # and repeated records, see {Preparing Data for BigQuery
-        # }[https://cloud.google.com/bigquery/preparing-data-for-bigquery].
+        # and repeated records, see [Preparing Data for BigQuery
+        # ](https://cloud.google.com/bigquery/preparing-data-for-bigquery).
         #
         # @param [String] name The field name. The name must contain only
         #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must

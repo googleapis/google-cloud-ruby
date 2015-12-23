@@ -274,8 +274,8 @@ module Gcloud
       #
       # @param [String] name Return only records with this domain or subdomain
       #   name.
-      # @param [String] type Return only records with this {record
-      #   type}[https://cloud.google.com/dns/what-is-cloud-dns]. If present, the
+      # @param [String] type Return only records with this [record
+      #   type](https://cloud.google.com/dns/what-is-cloud-dns). If present, the
       #   +name+ parameter must also be present.
       # @param [String] token A previously-returned page token representing part
       #   of the larger set of results to view.
@@ -360,8 +360,8 @@ module Gcloud
       alias_method :new_record, :record
 
       ##
-      # Exports the zone to a local {DNS zone
-      # file}[https://en.wikipedia.org/wiki/Zone_file].
+      # Exports the zone to a local [DNS zone
+      # file](https://en.wikipedia.org/wiki/Zone_file).
       #
       # @param [String] path The path on the local file system to write the data
       #   to.The path provided must be writable.
@@ -384,8 +384,8 @@ module Gcloud
       end
 
       ##
-      # Imports resource records from a {DNS zone
-      # file}[https://en.wikipedia.org/wiki/Zone_file], adding the new records
+      # Imports resource records from a [DNS zone
+      # file](https://en.wikipedia.org/wiki/Zone_file), adding the new records
       # to the zone, without removing any existing records from the zone.
       #
       # Because the Google Cloud DNS API only accepts a single resource record
@@ -447,7 +447,7 @@ module Gcloud
       # API request.
       #
       # The best way to add, remove, and update multiple records in a single
-      # {transaction}[https://cloud.google.com/dns/records] is with a block. See
+      # [transaction](https://cloud.google.com/dns/records) is with a block. See
       # {Zone::Transaction}.
       #
       # If the SOA record for the zone is not present in +additions+ or
@@ -543,16 +543,16 @@ module Gcloud
       #
       # @param [String] name The owner of the record. For example:
       #   +example.com.+.
-      # @param [String] type The identifier of a {supported record
-      #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
+      # @param [String] type The identifier of a [supported record
+      #   type](https://cloud.google.com/dns/what-is-cloud-dns).
       #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
       # @param [Integer] ttl The number of seconds that the record can be cached
       #   by resolvers.
       # @param [String, Array<String>] data The resource record data, as
-      #   determined by +type+ and defined in {RFC
-      #   1035 (section 5)}[http://tools.ietf.org/html/rfc1035#section-5] and
-      #   {RFC 1034
-      #   (section 3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1].
+      #   determined by +type+ and defined in [RFC
+      #   1035 (section 5)](http://tools.ietf.org/html/rfc1035#section-5) and
+      #   [RFC 1034
+      #   (section 3.6.1)](http://tools.ietf.org/html/rfc1034#section-3.6.1).
       #   For example: +192.0.2.1+ or +example.com.+.
       # @param [Boolean] skip_soa Do not automatically update the SOA record
       #   serial number. See {#update} for details.
@@ -585,8 +585,8 @@ module Gcloud
       #
       # @param [String] name The owner of the record. For example:
       #   +example.com.+.
-      # @param [String] type The identifier of a {supported record
-      #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
+      # @param [String] type The identifier of a [supported record
+      #   type](https://cloud.google.com/dns/what-is-cloud-dns).
       #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
       # @param [Boolean] skip_soa Do not automatically update the SOA record
       #   serial number. See {#update} for details.
@@ -619,16 +619,16 @@ module Gcloud
       #
       # @param [String] name The owner of the record. For example:
       #   +example.com.+.
-      # @param [String] type The identifier of a {supported record
-      #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
+      # @param [String] type The identifier of a [supported record
+      #   type](https://cloud.google.com/dns/what-is-cloud-dns).
       #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
       # @param [Integer] ttl The number of seconds that the record can be cached
       #   by resolvers.
       # @param [String, Array<String>] data The resource record data, as
       #   determined by +type+ and defined in
-      #   {RFC 1035 (section 5)}[http://tools.ietf.org/html/rfc1035#section-5]
-      #   and {RFC 1034 (section
-      #   3.6.1)}[http://tools.ietf.org/html/rfc1034#section-3.6.1]. For
+      #   [RFC 1035 (section 5)](http://tools.ietf.org/html/rfc1035#section-5)
+      #   and [RFC 1034 (section
+      #   3.6.1)](http://tools.ietf.org/html/rfc1034#section-3.6.1). For
       #   example: +192.0.2.1+ or +example.com.+.
       # @param [Boolean] skip_soa Do not automatically update the SOA record
       #   serial number. See {#update} for details.
@@ -666,8 +666,8 @@ module Gcloud
       #
       # @param [String] name The owner of the record. For example:
       #   +example.com.+.
-      # @param [String] type The identifier of a {supported record
-      #   type}[https://cloud.google.com/dns/what-is-cloud-dns].
+      # @param [String] type The identifier of a [supported record
+      #   type](https://cloud.google.com/dns/what-is-cloud-dns).
       #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
       # @param [Boolean] skip_soa Do not automatically update the SOA record
       #   serial number. See {#update} for details.
@@ -696,8 +696,8 @@ module Gcloud
 
       ##
       # This helper converts the given domain name or subdomain (e.g., +www+)
-      # fragment to a {fully qualified domain name
-      # (FQDN)}[https://en.wikipedia.org/wiki/Fully_qualified_domain_name] for
+      # fragment to a [fully qualified domain name
+      # (FQDN)](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) for
       # the zone's #dns. If the argument is already a FQDN, it is returned
       # unchanged.
       #

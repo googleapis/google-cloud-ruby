@@ -26,8 +26,8 @@ module Gcloud
     # provided it will be determined by looking at the value.
     #
     # String values (text, html, atom) can also specify a lang value, which is
-    # an {ISO 639-1
-    # code}[https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes].
+    # an [ISO 639-1
+    # code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
     #
     # @example
     #   require "gcloud"
@@ -67,14 +67,14 @@ module Gcloud
       #   * +:atom+ - The value is a string with maximum length 500 characters.
       #   * +:geo+ - The value is a point on earth described by latitude and
       #     longitude coordinates, represented in string with any of the listed
-      #     {ways of writing
-      #     coordinates}[http://en.wikipedia.org/wiki/Geographic_coordinate_conversion].
+      #     [ways of writing
+      #     coordinates](http://en.wikipedia.org/wiki/Geographic_coordinate_conversion).
       #   * +:datetime+ - The value is a +DateTime+.
       #   * +:number+ - The value is a +Numeric+ between -2,147,483,647 and
       #     2,147,483,647. The value will be stored as a double precision
       #     floating point value in Cloud Search.
-      # @param [String] lang The language of a string value. Must be a valid {ISO 639-1
-      #   code}[https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes].
+      # @param [String] lang The language of a string value. Must be a valid [ISO 639-1
+      #   code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
       # @param [String] name The name of the field. New values will be configured with this name.
       #
       def initialize value, type: nil, lang: nil, name: nil
