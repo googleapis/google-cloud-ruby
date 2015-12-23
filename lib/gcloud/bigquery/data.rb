@@ -21,7 +21,7 @@ module Gcloud
     # # Data
     #
     # Represents {Table} Data as a list of name/value pairs.
-    # Also contains metadata such as +etag+ and +total+.
+    # Also contains metadata such as `etag` and `total`.
     class Data < DelegateClass(::Array)
       ##
       # @private The {Table} object the data belongs to.

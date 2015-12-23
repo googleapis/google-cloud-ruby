@@ -36,12 +36,12 @@ module Gcloud
   #
   # ### Parameters
   #
-  # +project+::
+  # `project`::
   #   Project identifier for the Pub/Sub service you are connecting to.
-  #   (+String+)
-  # +keyfile+::
+  #   (`String`)
+  # `keyfile`::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
-  #   readable. (+String+ or +Hash+)
+  #   readable. (`String` or `Hash`)
   #
   # ### Returns
   #
@@ -72,16 +72,16 @@ module Gcloud
   #
   # ### Parameters
   #
-  # +scope+::
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scopes are:
   #
-  #   * +https://www.googleapis.com/auth/datastore+
-  #   * +https://www.googleapis.com/auth/userinfo.email+
+  #   * `https://www.googleapis.com/auth/datastore`
+  #   * `https://www.googleapis.com/auth/userinfo.email`
   #
   # ### Returns
   #
@@ -102,7 +102,7 @@ module Gcloud
   #   dataset.save entity
   #
   # You shouldn't need to override the default scope, but it is possible to do
-  # so with the +scope+ option:
+  # so with the `scope` option:
   #
   #   require "gcloud"
   #
@@ -121,15 +121,15 @@ module Gcloud
   #
   # ### Parameters
   #
-  # +scope+::
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scope is:
   #
-  #   * +https://www.googleapis.com/auth/devstorage.full_control+
+  #   * `https://www.googleapis.com/auth/devstorage.full_control`
   #
   # ### Returns
   #
@@ -144,7 +144,7 @@ module Gcloud
   #   bucket = storage.bucket "my-bucket"
   #   file = bucket.file "path/to/my-file.ext"
   #
-  # The default scope can be overridden with the +scope+ option. For more
+  # The default scope can be overridden with the `scope` option. For more
   # information see [Storage OAuth 2.0
   # Authentication](https://cloud.google.com/storage/docs/authentication#oauth).
   #
@@ -165,15 +165,15 @@ module Gcloud
   #
   # ### Parameters
   #
-  # +scope+::
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scope is:
   #
-  #   * +https://www.googleapis.com/auth/pubsub+
+  #   * `https://www.googleapis.com/auth/pubsub`
   #
   # ### Returns
   #
@@ -188,7 +188,7 @@ module Gcloud
   #   topic = pubsub.topic "my-topic"
   #   topic.publish "task completed"
   #
-  # The default scope can be overridden with the +scope+ option:
+  # The default scope can be overridden with the `scope` option:
   #
   #   require "gcloud"
   #
@@ -207,15 +207,15 @@ module Gcloud
   #
   # ### Parameters
   #
-  # +scope+::
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scope is:
   #
-  #   * +https://www.googleapis.com/auth/bigquery+
+  #   * `https://www.googleapis.com/auth/bigquery`
   #
   # ### Returns
   #
@@ -233,7 +233,7 @@ module Gcloud
   #     puts row
   #   end
   #
-  # The default scope can be overridden with the +scope+ option:
+  # The default scope can be overridden with the `scope` option:
   #
   #   require "gcloud"
   #
@@ -252,15 +252,15 @@ module Gcloud
   #
   # ### Parameters
   #
-  # +scope+::
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scope is:
   #
-  #   * +https://www.googleapis.com/auth/ndev.clouddns.readwrite+
+  #   * `https://www.googleapis.com/auth/ndev.clouddns.readwrite`
   #
   # ### Returns
   #
@@ -277,7 +277,7 @@ module Gcloud
   #     puts record.name
   #   end
   #
-  # The default scope can be overridden with the +scope+ option:
+  # The default scope can be overridden with the `scope` option:
   #
   #   require "gcloud"
   #
@@ -300,15 +300,15 @@ module Gcloud
   #
   # ### Parameters
   #
-  # +scope+::
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scope is:
   #
-  #   * +https://www.googleapis.com/auth/cloud-platform+
+  #   * `https://www.googleapis.com/auth/cloud-platform`
   #
   # ### Returns
   #
@@ -324,7 +324,7 @@ module Gcloud
   #     puts projects.project_id
   #   end
   #
-  # The default scope can be overridden with the +scope+ option:
+  # The default scope can be overridden with the `scope` option:
   #
   #   require "gcloud"
   #
@@ -345,16 +345,16 @@ module Gcloud
   #
   # ### Parameters
   #
-  # +scope+::
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scopes are:
   #
-  #   * +https://www.googleapis.com/auth/cloudsearch+
-  #   * +https://www.googleapis.com/auth/userinfo.email+
+  #   * `https://www.googleapis.com/auth/cloudsearch`
+  #   * `https://www.googleapis.com/auth/userinfo.email`
   #
   # ### Returns
   #

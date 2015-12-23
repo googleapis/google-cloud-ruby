@@ -19,26 +19,26 @@ require "gcloud/bigquery/project"
 # Google Cloud BigQuery
 module Gcloud
   ##
-  # Creates a new +Project+ instance connected to the BigQuery service.
+  # Creates a new `Project` instance connected to the BigQuery service.
   # Each call creates a new connection.
   #
   # ### Parameters
   #
-  # +project+::
+  # `project`::
   #   Identifier for a BigQuery project. If not present, the default project for
-  #   the credentials is used. (+String+)
-  # +keyfile+::
+  #   the credentials is used. (`String`)
+  # `keyfile`::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
-  #   readable. (+String+ or +Hash+)
-  # +scope+::
+  #   readable. (`String` or `Hash`)
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scope is:
   #
-  #   * +https://www.googleapis.com/auth/bigquery+
+  #   * `https://www.googleapis.com/auth/bigquery`
   #
   # ### Returns
   #
@@ -88,7 +88,7 @@ module Gcloud
   #
   # A BigQuery project holds datasets, which in turn hold tables. Assuming that
   # you have not yet created datasets or tables in your own project, let's
-  # connect to Google's +publicdata+ project, and see what you find.
+  # connect to Google's `publicdata` project, and see what you find.
   #
   #   require "gcloud"
   #
@@ -106,7 +106,7 @@ module Gcloud
   #
   # In addition listing all datasets and tables in the project, you can also
   # retrieve individual datasets and tables by ID. Let's look at the structure
-  # of the +shakespeare+ table, which contains an entry for every word in every
+  # of the `shakespeare` table, which contains an entry for every word in every
   # play written by Shakespeare.
   #
   #   require "gcloud"
@@ -147,7 +147,7 @@ module Gcloud
   #   data.next? #=> false
   #   data.first #=> {"word"=>"you", "count"=>42}
   #
-  # The +TOP+ function shown above is just one of a variety of functions
+  # The `TOP` function shown above is just one of a variety of functions
   # offered by BigQuery. See the [Query
   # Reference](https://cloud.google.com/bigquery/query-reference) for a full
   # listing.
@@ -197,7 +197,7 @@ module Gcloud
   # Now that you have a dataset, you can use it to create a table. Every table
   # is defined by a schema that may contain nested and repeated fields. The
   # example below shows a schema with a repeated record field named
-  # +cities_lived+. (For more information about nested and repeated fields, see
+  # `cities_lived`. (For more information about nested and repeated fields, see
   # [Preparing Data for
   # BigQuery](https://cloud.google.com/bigquery/preparing-data-for-bigquery).)
   #
@@ -294,10 +294,10 @@ module Gcloud
   #   load_job = table.load file, format: "csv"
   #
   # Because the names data, although formatted as CSV, is distributed in files
-  # with a +.txt+ extension, this example explicitly passes the +format+ option
+  # with a `.txt` extension, this example explicitly passes the `format` option
   # in order to demonstrate how to handle such situations. Because CSV is the
   # default format for load operations, the option is not actually necessary.
-  # For JSON saved with a +.txt+ extension, however, it would be.
+  # For JSON saved with a `.txt` extension, however, it would be.
   #
   # ### A note about large uploads
   #
@@ -326,7 +326,7 @@ module Gcloud
   #
   # ## Exporting query results to Google Cloud Storage
   #
-  # The example below shows how to pass the +table+ option with a query in order
+  # The example below shows how to pass the `table` option with a query in order
   # to store results in a permanent table. It also shows how to export the
   # result data to a Google Cloud Storage file. In order to follow along, you
   # will need to enable the Google Cloud Storage API in addition to setting up

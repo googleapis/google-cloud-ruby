@@ -286,15 +286,15 @@ module Gcloud
       # @param [String] path The path on the local file system to write the data
       #   to. The path provided must be writable.
       # @param [Symbol] verify The verification algoruthm used to ensure the
-      #   downloaded file contents are correct. Default is +:md5+.
+      #   downloaded file contents are correct. Default is `:md5`.
       #
       #   Acceptable values are:
-      #   * +md5+ - Verify file content match using the MD5 hash.
-      #   * +crc32c+ - Verify file content match using the CRC32c hash.
-      #   * +all+ - Perform all available file content verification.
-      #   * +none+ - Don't perform file content verification.
+      #   * `md5` - Verify file content match using the MD5 hash.
+      #   * `crc32c` - Verify file content match using the CRC32c hash.
+      #   * `all` - Perform all available file content verification.
+      #   * `none` - Don't perform file content verification.
       #
-      # @return [File] Returns a +::File+ object on the local file system
+      # @return [File] Returns a `::File` object on the local file system
       #
       # @example
       #   require "gcloud"
@@ -365,17 +365,17 @@ module Gcloud
       #   file.
       #
       #   Acceptable values are:
-      #   * +auth+, +auth_read+, +authenticated+, +authenticated_read+,
-      #     +authenticatedRead+ - File owner gets OWNER access, and
+      #   * `auth`, `auth_read`, `authenticated`, `authenticated_read`,
+      #     `authenticatedRead` - File owner gets OWNER access, and
       #     allAuthenticatedUsers get READER access.
-      #   * +owner_full+, +bucketOwnerFullControl+ - File owner gets OWNER
+      #   * `owner_full`, `bucketOwnerFullControl` - File owner gets OWNER
       #     access, and project team owners get OWNER access.
-      #   * +owner_read+, +bucketOwnerRead+ - File owner gets OWNER access, and
+      #   * `owner_read`, `bucketOwnerRead` - File owner gets OWNER access, and
       #     project team owners get READER access.
-      #   * +private+ - File owner gets OWNER access.
-      #   * +project_private+, +projectPrivate+ - File owner gets OWNER access,
+      #   * `private` - File owner gets OWNER access.
+      #   * `project_private`, `projectPrivate` - File owner gets OWNER access,
       #     and project team members get access according to their roles.
-      #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
+      #   * `public`, `public_read`, `publicRead` - File owner gets OWNER
       #     access, and allUsers get READER access.
       # @param [Integer] generation Select a specific revision of the file to
       #   copy. The default is the latest version.
@@ -427,7 +427,7 @@ module Gcloud
       ##
       # Permanently deletes the file.
       #
-      # @return [Boolean] Returns +true+ if the file was deleted.
+      # @return [Boolean] Returns `true` if the file was deleted.
       #
       # @example
       #   require "gcloud"
@@ -460,7 +460,7 @@ module Gcloud
       #   Public Data
       #
       # @param [String] protocol The protocol to use for the URL. Default is
-      #   +HTTPS+.
+      #   `HTTPS`.
       #
       # @example
       #   require "gcloud"
@@ -494,10 +494,10 @@ module Gcloud
       #
       # Generating a URL requires service account credentials, either by
       # connecting with a service account when calling {Gcloud.storage}, or by
-      # passing in the service account +issuer+ and +signing_key+ values.
+      # passing in the service account `issuer` and `signing_key` values.
       # Although the private key can be passed as a string for convenience,
-      # creating and storing an instance of +OpenSSL::PKey::RSA+ is more
-      # efficient when making multiple calls to +signed_url+.
+      # creating and storing an instance of `OpenSSL::PKey::RSA` is more
+      # efficient when making multiple calls to `signed_url`.
       #
       # A SignedUrlUnavailable is raised if the service account credentials are
       # missing. Service account credentials are acquired by following the steps
@@ -509,11 +509,11 @@ module Gcloud
       #
       # @param [String] method The HTTP verb to be used with the signed URL.
       #   Signed URLs can be used
-      #   with +GET+, +HEAD+, +PUT+, and +DELETE+ requests. Default is +GET+.
+      #   with `GET`, `HEAD`, `PUT`, and `DELETE` requests. Default is `GET`.
       # @param [Integer] expires The number of seconds until the URL expires.
       #   Default is 300/5 minutes.
       # @param [String] content_type When provided, the client (browser) must
-      #   send this value in the HTTP header. e.g. +text/plain+
+      #   send this value in the HTTP header. e.g. `text/plain`
       # @param [String] content_md5 The MD5 digest value in base64. If you
       #   provide this in the string, the client (usually a browser) must
       #   provide this HTTP header with this same value in its request.
@@ -545,7 +545,7 @@ module Gcloud
       #   shared_url = file.signed_url method: "GET",
       #                                expires: 300 # 5 minutes from now
       #
-      # @example Using the +issuer+ and +signing_key+ options:
+      # @example Using the `issuer` and `signing_key` options:
       #   require "gcloud/storage"
       #
       #   storage = Gcloud.storage
@@ -578,7 +578,7 @@ module Gcloud
       # @see https://cloud.google.com/storage/docs/access-control Access Control
       #   guide
       #
-      # @example Grant access to a user by pre-pending +"user-"+ to an email:
+      # @example Grant access to a user by pre-pending `"user-"` to an email:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -590,7 +590,7 @@ module Gcloud
       #   email = "heidi@example.net"
       #   file.acl.add_reader "user-#{email}"
       #
-      # @example Grant access to a group by pre-pending +"group-"+ to an email:
+      # @example Grant access to a group by pre-pending `"group-"` to an email:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

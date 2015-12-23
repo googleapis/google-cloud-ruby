@@ -38,7 +38,7 @@ module Gcloud
       end
 
       # Whether the query has completed or not. When data is present this will
-      # always be +true+. When +false+, +total+ will not be available.
+      # always be `true`. When `false`, `total` will not be available.
       def complete?
         @gapi["jobComplete"]
       end

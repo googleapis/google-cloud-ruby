@@ -119,11 +119,11 @@ module Gcloud
       ##
       # Permanently deletes the zone.
       #
-      # @param [Boolean] force If +true+, ensures the deletion of the zone by
-      #   first deleting all records. If +false+ and the zone contains
-      #   non-essential records, the request will fail. Default is +false+.
+      # @param [Boolean] force If `true`, ensures the deletion of the zone by
+      #   first deleting all records. If `false` and the zone contains
+      #   non-essential records, the request will fail. Default is `false`.
       #
-      # @return [Boolean] Returns +true+ if the zone was deleted.
+      # @return [Boolean] Returns `true` if the zone was deleted.
       #
       # @example
       #   require "gcloud"
@@ -133,7 +133,7 @@ module Gcloud
       #   zone = dns.zone "example-com"
       #   zone.delete
       #
-      # @example The zone can be forcefully deleted with the +force+ option:
+      # @example The zone can be forcefully deleted with the `force` option:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -176,7 +176,7 @@ module Gcloud
       #
       # @param [String] change_id The id of a change.
       #
-      # @return [Gcloud::Dns::Change, nil] Returns +nil+ if the change does not
+      # @return [Gcloud::Dns::Change, nil] Returns `nil` if the change does not
       #   exist.
       #
       # @example
@@ -211,8 +211,8 @@ module Gcloud
       # @param [Symbol, String] order Sort the changes by change sequence.
       #
       #   Acceptable values are:
-      #   * +asc+ - Sort by ascending change sequence
-      #   * +desc+ - Sort by descending change sequence
+      #   * `asc` - Sort by ascending change sequence
+      #   * `desc` - Sort by descending change sequence
       #
       # @return [Array<Gcloud::Dns::Change>] (See {Gcloud::Dns::Change::List})
       #
@@ -269,14 +269,14 @@ module Gcloud
       ##
       # Retrieves the list of records belonging to the zone.
       # Records can be filtered by name and type. The name argument can be a
-      # subdomain (e.g., +www+) fragment for convenience, but notice that the
+      # subdomain (e.g., `www`) fragment for convenience, but notice that the
       # retrieved record's domain name is always fully-qualified.
       #
       # @param [String] name Return only records with this domain or subdomain
       #   name.
       # @param [String] type Return only records with this [record
       #   type](https://cloud.google.com/dns/what-is-cloud-dns). If present, the
-      #   +name+ parameter must also be present.
+      #   `name` parameter must also be present.
       # @param [String] token A previously-returned page token representing part
       #   of the larger set of results to view.
       # @param [Integer] max Maximum number of records to return.
@@ -389,10 +389,10 @@ module Gcloud
       # to the zone, without removing any existing records from the zone.
       #
       # Because the Google Cloud DNS API only accepts a single resource record
-      # for each +name+ and +type+ combination (with multiple +data+ elements),
+      # for each `name` and `type` combination (with multiple `data` elements),
       # the zone file's records are merged as necessary. During this merge, the
-      # lowest +ttl+ of the merged records is used. If none of the merged
-      # records have a +ttl+ value, the zone file's global TTL is used for the
+      # lowest `ttl` of the merged records is used. If none of the merged
+      # records have a `ttl` value, the zone file's global TTL is used for the
       # record.
       #
       # The zone file's SOA and NS records are not imported, because the zone
@@ -400,7 +400,7 @@ module Gcloud
       # records point to Cloud DNS name servers.
       #
       # This operation automatically updates the SOA record serial number unless
-      # prevented with the +skip_soa+ option. See {#update} for details.
+      # prevented with the `skip_soa` option. See {#update} for details.
       #
       # The Google Cloud DNS service requires that record names and data use
       # fully-qualified addresses. The @ symbol is not accepted, nor are
@@ -450,12 +450,12 @@ module Gcloud
       # [transaction](https://cloud.google.com/dns/records) is with a block. See
       # {Zone::Transaction}.
       #
-      # If the SOA record for the zone is not present in +additions+ or
-      # +deletions+ (and if present in one, it should be present in the other),
+      # If the SOA record for the zone is not present in `additions` or
+      # `deletions` (and if present in one, it should be present in the other),
       # it will be added to both, and its serial number will be incremented by
-      # adding +1+. This update to the SOA record can be prevented with the
-      # +skip_soa+ option. To provide your own value or behavior for the new
-      # serial number, use the +soa_serial+ option.
+      # adding `1`. This update to the SOA record can be prevented with the
+      # `skip_soa` option. To provide your own value or behavior for the new
+      # serial number, use the `soa_serial` option.
       #
       # @param [Record, Array<Record>] additions The Record or array of records
       #   to add.
@@ -539,21 +539,21 @@ module Gcloud
       # and delete records in the same transaction, use #update.
       #
       # This operation automatically updates the SOA record serial number unless
-      # prevented with the +skip_soa+ option. See {#update} for details.
+      # prevented with the `skip_soa` option. See {#update} for details.
       #
       # @param [String] name The owner of the record. For example:
-      #   +example.com.+.
+      #   `example.com.`.
       # @param [String] type The identifier of a [supported record
       #   type](https://cloud.google.com/dns/what-is-cloud-dns).
-      #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
+      #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
       # @param [Integer] ttl The number of seconds that the record can be cached
       #   by resolvers.
       # @param [String, Array<String>] data The resource record data, as
-      #   determined by +type+ and defined in [RFC
+      #   determined by `type` and defined in [RFC
       #   1035 (section 5)](http://tools.ietf.org/html/rfc1035#section-5) and
       #   [RFC 1034
       #   (section 3.6.1)](http://tools.ietf.org/html/rfc1034#section-3.6.1).
-      #   For example: +192.0.2.1+ or +example.com.+.
+      #   For example: `192.0.2.1` or `example.com.`.
       # @param [Boolean] skip_soa Do not automatically update the SOA record
       #   serial number. See {#update} for details.
       # @param [Integer+, lambda, Proc] soa_serial A value (or a lambda or Proc
@@ -581,13 +581,13 @@ module Gcloud
       # in the same transaction, use #update.
       #
       # This operation automatically updates the SOA record serial number unless
-      # prevented with the +skip_soa+ option. See {#update} for details.
+      # prevented with the `skip_soa` option. See {#update} for details.
       #
       # @param [String] name The owner of the record. For example:
-      #   +example.com.+.
+      #   `example.com.`.
       # @param [String] type The identifier of a [supported record
       #   type](https://cloud.google.com/dns/what-is-cloud-dns).
-      #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
+      #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
       # @param [Boolean] skip_soa Do not automatically update the SOA record
       #   serial number. See {#update} for details.
       # @param [Integer+, lambda, Proc] soa_serial A value (or a lambda or Proc
@@ -610,26 +610,26 @@ module Gcloud
       end
 
       ##
-      # Replaces existing records on the Zone. Records matching the +name+ and
-      # +type+ are replaced. In order to update existing records, or add and
+      # Replaces existing records on the Zone. Records matching the `name` and
+      # `type` are replaced. In order to update existing records, or add and
       # delete records in the same transaction, use #update.
       #
       # This operation automatically updates the SOA record serial number unless
-      # prevented with the +skip_soa+ option. See {#update} for details.
+      # prevented with the `skip_soa` option. See {#update} for details.
       #
       # @param [String] name The owner of the record. For example:
-      #   +example.com.+.
+      #   `example.com.`.
       # @param [String] type The identifier of a [supported record
       #   type](https://cloud.google.com/dns/what-is-cloud-dns).
-      #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
+      #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
       # @param [Integer] ttl The number of seconds that the record can be cached
       #   by resolvers.
       # @param [String, Array<String>] data The resource record data, as
-      #   determined by +type+ and defined in
+      #   determined by `type` and defined in
       #   [RFC 1035 (section 5)](http://tools.ietf.org/html/rfc1035#section-5)
       #   and [RFC 1034 (section
       #   3.6.1)](http://tools.ietf.org/html/rfc1034#section-3.6.1). For
-      #   example: +192.0.2.1+ or +example.com.+.
+      #   example: `192.0.2.1` or `example.com.`.
       # @param [Boolean] skip_soa Do not automatically update the SOA record
       #   serial number. See {#update} for details.
       # @param [Integer+, lambda, Proc] soa_serial A value (or a lambda or Proc
@@ -658,17 +658,17 @@ module Gcloud
       end
 
       ##
-      # Modifies records on the Zone. Records matching the +name+ and +type+ are
+      # Modifies records on the Zone. Records matching the `name` and `type` are
       # yielded to the block where they can be modified.
       #
       # This operation automatically updates the SOA record serial number unless
-      # prevented with the +skip_soa+ option. See {#update} for details.
+      # prevented with the `skip_soa` option. See {#update} for details.
       #
       # @param [String] name The owner of the record. For example:
-      #   +example.com.+.
+      #   `example.com.`.
       # @param [String] type The identifier of a [supported record
       #   type](https://cloud.google.com/dns/what-is-cloud-dns).
-      #   For example: +A+, +AAAA+, +CNAME+, +MX+, or +TXT+.
+      #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
       # @param [Boolean] skip_soa Do not automatically update the SOA record
       #   serial number. See {#update} for details.
       # @param [Integer+, lambda, Proc] soa_serial A value (or a lambda or Proc
@@ -695,7 +695,7 @@ module Gcloud
       end
 
       ##
-      # This helper converts the given domain name or subdomain (e.g., +www+)
+      # This helper converts the given domain name or subdomain (e.g., `www`)
       # fragment to a [fully qualified domain name
       # (FQDN)](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) for
       # the zone's #dns. If the argument is already a FQDN, it is returned

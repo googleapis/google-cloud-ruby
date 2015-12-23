@@ -25,21 +25,21 @@ module Gcloud
   #
   # ### Parameters
   #
-  # +project+::
+  # `project`::
   #   Project identifier for the Pub/Sub service you are connecting to.
-  #   (+String+)
-  # +keyfile+::
+  #   (`String`)
+  # `keyfile`::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
-  #   readable. (+String+ or +Hash+)
-  # +scope+::
+  #   readable. (`String` or `Hash`)
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scope is:
   #
-  #   * +https://www.googleapis.com/auth/pubsub+
+  #   * `https://www.googleapis.com/auth/pubsub`
   #
   # ### Returns
   #
@@ -305,7 +305,7 @@ module Gcloud
   #
   # ## Listening for Messages
   #
-  # Long running workers are easy to create with +listen+, which runs an
+  # Long running workers are easy to create with `listen`, which runs an
   # infinitely blocking loop to process messages as they are received. (See
   # Subscription#listen)
   #
@@ -320,7 +320,7 @@ module Gcloud
   #   end
   #
   # Messages are retrieved in batches for efficiency. The number of messages
-  # pulled per batch can be limited with the +max+ option:
+  # pulled per batch can be limited with the `max` option:
   #
   #   require "gcloud"
   #
@@ -334,7 +334,7 @@ module Gcloud
   #
   # When processing time and the acknowledgement deadline are a concern,
   # messages can be automatically acknowledged as they are pulled with the
-  # +autoack+ option:
+  # `autoack` option:
   #
   #   require "gcloud"
   #
@@ -351,7 +351,7 @@ module Gcloud
   # All calls to the Pub/Sub service use the same project and credentials
   # provided to the Gcloud#pubsub method. However, it is common to reference
   # topics or subscriptions in other projects, which can be achieved by using
-  # the +project+ option. The main credentials must have permissions to the
+  # the `project` option. The main credentials must have permissions to the
   # topics and subscriptions in other projects.
   #
   #   require "gcloud"

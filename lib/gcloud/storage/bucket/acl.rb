@@ -156,7 +156,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # @example Grant access to a user by pre-pending +"user-"+ to an email:
+        # @example Grant access to a user by pre-pending `"user-"` to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -167,7 +167,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   bucket.acl.add_owner "user-#{email}"
         #
-        # @example Grant access to a group by pre-pending +"group-"+ to an email
+        # @example Grant access to a group by pre-pending `"group-"` to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -203,7 +203,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # @example Grant access to a user by pre-pending +"user-"+ to an email:
+        # @example Grant access to a user by pre-pending `"user-"` to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -214,7 +214,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   bucket.acl.add_writer "user-#{email}"
         #
-        # @example Grant access to a group by pre-pending +"group-"+ to an email
+        # @example Grant access to a group by pre-pending `"group-"` to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -250,7 +250,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # @example Grant access to a user by pre-pending +"user-"+ to an email:
+        # @example Grant access to a user by pre-pending `"user-"` to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -261,7 +261,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   bucket.acl.add_reader "user-#{email}"
         #
-        # @example Grant access to a group by pre-pending +"group-"+ to an email
+        # @example Grant access to a group by pre-pending `"group-"` to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -327,7 +327,7 @@ module Gcloud
         # Predefined ACL helpers
 
         ##
-        # Convenience method to apply the +authenticatedRead+ predefined ACL
+        # Convenience method to apply the `authenticatedRead` predefined ACL
         # rule to the bucket.
         #
         # @example
@@ -349,7 +349,7 @@ module Gcloud
         alias_method :authenticated_read!, :auth!
 
         ##
-        # Convenience method to apply the +private+ predefined ACL
+        # Convenience method to apply the `private` predefined ACL
         # rule to the bucket.
         #
         # @example
@@ -367,7 +367,7 @@ module Gcloud
         end
 
         ##
-        # Convenience method to apply the +projectPrivate+ predefined ACL
+        # Convenience method to apply the `projectPrivate` predefined ACL
         # rule to the bucket.
         #
         # @example
@@ -386,7 +386,7 @@ module Gcloud
         alias_method :projectPrivate!, :project_private!
 
         ##
-        # Convenience method to apply the +publicRead+ predefined ACL
+        # Convenience method to apply the `publicRead` predefined ACL
         # rule to the bucket.
         #
         # @example
@@ -405,7 +405,7 @@ module Gcloud
         alias_method :publicRead!, :public!
         alias_method :public_read!, :public!
 
-        # Convenience method to apply the +publicReadWrite+ predefined ACL
+        # Convenience method to apply the `publicReadWrite` predefined ACL
         # rule to the bucket.
         #
         # @example
@@ -588,7 +588,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # @example Grant access to a user by pre-pending +"user-"+ to an email:
+        # @example Grant access to a user by pre-pending `"user-"` to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -599,7 +599,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   bucket.default_acl.add_owner "user-#{email}"
         #
-        # @example Grant access to a group by pre-pending +"group-"+ to an email
+        # @example Grant access to a group by pre-pending `"group-"` to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -635,7 +635,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # @example Grant access to a user by pre-pending +"user-"+ to an email:
+        # @example Grant access to a user by pre-pending `"user-"` to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -646,7 +646,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   bucket.default_acl.add_writer "user-#{email}"
         #
-        # @example Grant access to a group by pre-pending +"group-"+ to an email
+        # @example Grant access to a group by pre-pending `"group-"` to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -682,7 +682,7 @@ module Gcloud
         #   * allUsers
         #   * allAuthenticatedUsers
         #
-        # @example Grant access to a user by pre-pending +"user-"+ to an email:
+        # @example Grant access to a user by pre-pending `"user-"` to an email:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -693,7 +693,7 @@ module Gcloud
         #   email = "heidi@example.net"
         #   bucket.default_acl.add_reader "user-#{email}"
         #
-        # @example Grant access to a group by pre-pending +"group-"+ to an email
+        # @example Grant access to a group by pre-pending `"group-"` to an email
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -760,7 +760,7 @@ module Gcloud
         # Predefined ACL helpers
 
         ##
-        # Convenience method to apply the default +authenticatedRead+
+        # Convenience method to apply the default `authenticatedRead`
         # predefined ACL rule to files in the bucket.
         #
         # @example
@@ -782,7 +782,7 @@ module Gcloud
         alias_method :authenticated_read!, :auth!
 
         ##
-        # Convenience method to apply the default +bucketOwnerFullControl+
+        # Convenience method to apply the default `bucketOwnerFullControl`
         # predefined ACL rule to files in the bucket.
         #
         # @example
@@ -801,7 +801,7 @@ module Gcloud
         alias_method :bucketOwnerFullControl!, :owner_full!
 
         ##
-        # Convenience method to apply the default +bucketOwnerRead+
+        # Convenience method to apply the default `bucketOwnerRead`
         # predefined ACL rule to files in the bucket.
         #
         # @example
@@ -820,7 +820,7 @@ module Gcloud
         alias_method :bucketOwnerRead!, :owner_read!
 
         ##
-        # Convenience method to apply the default +private+
+        # Convenience method to apply the default `private`
         # predefined ACL rule to files in the bucket.
         #
         # @example
@@ -838,7 +838,7 @@ module Gcloud
         end
 
         ##
-        # Convenience method to apply the default +projectPrivate+
+        # Convenience method to apply the default `projectPrivate`
         # predefined ACL rule to files in the bucket.
         #
         # @example
@@ -857,7 +857,7 @@ module Gcloud
         alias_method :projectPrivate!, :project_private!
 
         ##
-        # Convenience method to apply the default +publicRead+
+        # Convenience method to apply the default `publicRead`
         # predefined ACL rule to files in the bucket.
         #
         # @example
