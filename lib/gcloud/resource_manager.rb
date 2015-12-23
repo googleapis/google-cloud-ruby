@@ -19,23 +19,23 @@ require "gcloud/resource_manager/manager"
 # Google Cloud Resource Manager
 module Gcloud
   ##
-  # Creates a new +Project+ instance connected to the Resource Manager service.
+  # Creates a new `Project` instance connected to the Resource Manager service.
   # Each call creates a new connection.
   #
   # ### Parameters
   #
-  # +keyfile+::
+  # `keyfile`::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
-  #   readable. (+String+ or +Hash+)
-  # +scope+::
+  #   readable. (`String` or `Hash`)
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scope is:
   #
-  #   * +https://www.googleapis.com/auth/cloud-platform+
+  #   * `https://www.googleapis.com/auth/cloud-platform`
   #
   # ### Returns
   #
@@ -102,7 +102,7 @@ module Gcloud
   #
   #   $ gcloud auth login
   #
-  # Also make sure all +GCLOUD+ environment variables are cleared of any service
+  # Also make sure all `GCLOUD` environment variables are cleared of any service
   # accounts. Then gcloud will be able to detect the user authentication and
   # connect with those credentials.
   #

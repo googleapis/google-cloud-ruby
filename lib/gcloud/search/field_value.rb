@@ -60,17 +60,17 @@ module Gcloud
       #   number values.
       #
       #   The following values are supported:
-      #   * +:text+ - The value is a string with maximum length 1024**2
+      #   * `:text` - The value is a string with maximum length 1024**2
       #     characters.
-      #   * +:html+ - The value is an HTML-formatted string with maximum length
+      #   * `:html` - The value is an HTML-formatted string with maximum length
       #     1024**2 characters.
-      #   * +:atom+ - The value is a string with maximum length 500 characters.
-      #   * +:geo+ - The value is a point on earth described by latitude and
+      #   * `:atom` - The value is a string with maximum length 500 characters.
+      #   * `:geo` - The value is a point on earth described by latitude and
       #     longitude coordinates, represented in string with any of the listed
       #     [ways of writing
       #     coordinates](http://en.wikipedia.org/wiki/Geographic_coordinate_conversion).
-      #   * +:datetime+ - The value is a +DateTime+.
-      #   * +:number+ - The value is a +Numeric+ between -2,147,483,647 and
+      #   * `:datetime` - The value is a `DateTime`.
+      #   * `:number` - The value is a `Numeric` between -2,147,483,647 and
       #     2,147,483,647. The value will be stored as a double precision
       #     floating point value in Cloud Search.
       # @param [String] lang The language of a string value. Must be a valid [ISO 639-1

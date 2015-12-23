@@ -87,8 +87,8 @@ module Gcloud
       # never be assigned to more than 10,000 documents. By default (when it is
       # not specified or set to 0), it is set at the time the document is
       # created to the number of seconds since January 1, 2011. The rank can be
-      # used in {Index#search} options +expressions+, +order+, and
-      # +fields+, where it is referenced as +rank+.
+      # used in {Index#search} options `expressions`, `order`, and
+      # `fields`, where it is referenced as `rank`.
       def rank= new_rank
         @raw["rank"] = new_rank
       end
@@ -134,30 +134,30 @@ module Gcloud
       ##
       # Add a new value. If the field name does not exist it will be added. If
       # the field value is a DateTime or Numeric, or the type is set to
-      # +:datetime+ or +:number+, then the added value will replace any existing
+      # `:datetime` or `:number`, then the added value will replace any existing
       # values of the same type (since there can be only one).
       #
       # @param [String] name The name of the field.
       # @param [String, Datetime, Float] value The value to add to the field.
       # @param [Symbol] type The type of the field value. An attempt is made to
       #   set the correct type when this option is missing, although it must be
-      #   provided for +:geo+ values. A field can have multiple values with same
-      #   or different types; however, it cannot have multiple +:datetime+ or
-      #   +:number+ values.
+      #   provided for `:geo` values. A field can have multiple values with same
+      #   or different types; however, it cannot have multiple `:datetime` or
+      #   `:number` values.
       #
       #   The following values are supported:
-      #   * +:default+ - The value is a string. The format will be automatically
+      #   * `:default` - The value is a string. The format will be automatically
       #     detected. This is the default value for strings.
-      #   * +:text+ - The value is a string with maximum length 1024**2
+      #   * `:text` - The value is a string with maximum length 1024**2
       #     characters.
-      #   * +:html+ - The value is an HTML-formatted string with maximum length
+      #   * `:html` - The value is an HTML-formatted string with maximum length
       #     1024**2 characters.
-      #   * +:atom+ - The value is a string with maximum length 500 characters.
-      #   * +:geo+ - The value is a point on earth described by latitude and
+      #   * `:atom` - The value is a string with maximum length 500 characters.
+      #   * `:geo` - The value is a point on earth described by latitude and
       #     longitude coordinates, represented in string with any of the listed
       #     [ways of writing coordinates](http://en.wikipedia.org/wiki/Geographic_coordinate_conversion).
-      #   * +:datetime+ - The value is a +DateTime+.
-      #   * +:number+ - The value is a +Numeric+ between -2,147,483,647 and
+      #   * `:datetime` - The value is a `DateTime`.
+      #   * `:number` - The value is a `Numeric` between -2,147,483,647 and
       #     2,147,483,647. The value will be stored as a double precision
       #     floating point value in Cloud Search.
       # @param [String] lang The language of a string value. Must be a valid

@@ -138,7 +138,7 @@ module Gcloud
       #
       # @param [String, Integer] zone_id The name or id of a zone.
       #
-      # @return [Gcloud::Dns::Zone, nil] Returns +nil+ if the zone does not
+      # @return [Gcloud::Dns::Zone, nil] Returns `nil` if the zone does not
       #   exist.
       #
       # @example

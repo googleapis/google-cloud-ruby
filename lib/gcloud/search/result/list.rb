@@ -28,7 +28,7 @@ module Gcloud
         # The number of documents that match the query. It is greater than or
         # equal to the number of documents actually returned. This is an
         # approximation and not an exact count unless it is less than or equal
-        # to the {Index#search} +matched_count_accuracy+ option.
+        # to the {Index#search} `matched_count_accuracy` option.
         attr_reader :matched_count
 
         ##

@@ -153,7 +153,7 @@ module Gcloud
       #
       # @param [String, Gcloud::Search::Document] doc_id The id of a document or
       #   a Document instance.
-      # @return [Gcloud::Search::Document, nil] Returns +nil+ if the document
+      # @return [Gcloud::Search::Document, nil] Returns `nil` if the document
       #   does not exist
       #
       # @example
@@ -197,9 +197,9 @@ module Gcloud
       #   documents, and the same rank should never be assigned to more than
       #   10,000 documents. By default (when it is not specified or set to 0),
       #   it is set at the time the document is saved to the number of seconds
-      #   since January 1, 2011. The rank can be used in the +expressions+,
-      #   +order+, and +fields+ options in {#search}, where it should referenced
-      #   as +rank+.
+      #   since January 1, 2011. The rank can be used in the `expressions`,
+      #   `order`, and `fields` options in {#search}, where it should referenced
+      #   as `rank`.
       #
       # @return [Gcloud::Search::Document]
       #
@@ -238,7 +238,7 @@ module Gcloud
       # @param [String] token A previously-returned page token representing part
       #   of the larger set of results to view.
       # @param [Integer] max Maximum number of documents to return. The default
-      #   is +100+.
+      #   is `100`.
       # @return [Array<Gcloud::Search::Document>] See
       #   {Gcloud::Search::Document::List})
       #
@@ -321,7 +321,7 @@ module Gcloud
       # Permanently deletes the document from the index.
       #
       # @param [String] doc_id The id of the document.
-      # @return [Boolean] +true+ if successful
+      # @return [Boolean] `true` if successful
       #
       # @example
       #   require "gcloud"
@@ -346,9 +346,9 @@ module Gcloud
       # be created, updated, or deleted directly on the server: They are derived
       # from the documents that reference them.)
       #
-      # @param [Boolean] force If +true+, ensures the deletion of the index by
-      #   first deleting all documents. If +false+ and the index contains
-      #   documents, the request will fail. Default is +false+.
+      # @param [Boolean] force If `true`, ensures the deletion of the index by
+      #   first deleting all documents. If `false` and the index contains
+      #   documents, the request will fail. Default is `false`.
       #
       # @example
       #   require "gcloud"
@@ -358,7 +358,7 @@ module Gcloud
       #   index = search.index "books"
       #   index.delete
       #
-      # @example Deleting an index containing documents with the +force+ option:
+      # @example Deleting an index containing documents with the `force` option:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -403,62 +403,62 @@ module Gcloud
       # By default, Result objects are sorted by document rank. For more information
       # see the [REST API documentation for Document.rank](https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank).
       #
-      # You can specify how to sort results with the +order+ option. In the
-      # example below, the <code>-</code> character before +avg_review+ means
-      # that results will be sorted in ascending order by +published+ and then
-      # in descending order by +avg_review+. You can add computed fields with
-      # the +expressions+ option, and limit the fields that are returned with
-      # the +fields+ option.
+      # You can specify how to sort results with the `order` option. In the
+      # example below, the <code>-</code> character before `avg_review` means
+      # that results will be sorted in ascending order by `published` and then
+      # in descending order by `avg_review`. You can add computed fields with
+      # the `expressions` option, and limit the fields that are returned with
+      # the `fields` option.
       #
       # @see https://cloud.google.com/search/reference/rest/v1/projects/indexes/search
       #   The REST API documentation for indexes.search
       #
       # @param [String] query The query string in search query syntax. If the
-      #   query is +nil+ or empty, all documents are returned. For more
+      #   query is `nil` or empty, all documents are returned. For more
       #   information see [Query
       #   Strings](https://cloud.google.com/search/query).
-      # @param [Hash] expressions Customized expressions used in +order+ or
-      #   +fields+. The expression can contain fields in Document, the built-in
-      #   fields ( +rank+, the document +rank+, and +score+ if scoring is
-      #   enabled) and fields defined in +expressions+. All field expressions
-      #   expressed as a +Hash+ with the keys as the +name+ and the values as
-      #   the +expression+. The expression value can be a combination of
+      # @param [Hash] expressions Customized expressions used in `order` or
+      #   `fields`. The expression can contain fields in Document, the built-in
+      #   fields ( `rank`, the document `rank`, and `score` if scoring is
+      #   enabled) and fields defined in `expressions`. All field expressions
+      #   expressed as a `Hash` with the keys as the `name` and the values as
+      #   the `expression`. The expression value can be a combination of
       #   supported functions encoded in the string. Expressions involving
       #   number fields can use the arithmetical operators (+, -, *, /) and the
-      #   built-in numeric functions (+max+, +min+, +pow+, +count+, +log+,
-      #   +abs+). Expressions involving geopoint fields can use the +geopoint+
-      #   and +distance+ functions. Expressions for text and html fields can use
-      #   the +snippet+ function.
+      #   built-in numeric functions (`max`, `min`, `pow`, `count`, `log`,
+      #   `abs`). Expressions involving geopoint fields can use the `geopoint`
+      #   and `distance` functions. Expressions for text and html fields can use
+      #   the `snippet` function.
       # @param [Integer] matched_count_accuracy Minimum accuracy requirement for
-      #   {Result::List#matched_count}. If specified, +matched_count+ will be
+      #   {Result::List#matched_count}. If specified, `matched_count` will be
       #   accurate to at least that number. For example, when set to 100, any
       #   <code>matched_count <= 100</code> is accurate. This option may add
       #   considerable latency/expense. By default (when it is not specified or
-      #   set to 0), the accuracy is the same as +max+.
+      #   set to 0), the accuracy is the same as `max`.
       # @param [Integer] offset Used to advance pagination to an arbitrary
       #   result, independent of the previous results. Offsets are an
-      #   inefficient alternative to using +token+. (Both cannot be both set.)
+      #   inefficient alternative to using `token`. (Both cannot be both set.)
       #   The default is 0.
       # @param [String] order A comma-separated list of fields for sorting on
       #   the search result, including fields from Document, the built-in fields
-      #   (+rank+ and +score+), and fields defined in expressions. The default
+      #   (`rank` and `score`), and fields defined in expressions. The default
       #   sorting order is ascending. To specify descending order for a field, a
       #   suffix <code>" desc"</code> should be appended to the field name. For
       #   example: <code>orderBy="foo desc,bar"</code>. The default value for
       #   text sort is the empty string, and the default value for numeric sort
       #   is 0. If not specified, the search results are automatically sorted by
-      #   descending +rank+. Sorting by ascending +rank+ is not allowed.
+      #   descending `rank`. Sorting by ascending `rank` is not allowed.
       # @param [String, Array<String>] fields The fields to return in the
       #   {Search::Result} objects. These can be fields from {Document}, the
-      #   built-in fields +rank+ and +score+, and fields defined in expressions.
+      #   built-in fields `rank` and `score`, and fields defined in expressions.
       #   The default is to return all fields.
       # @param [String, Symbol] scorer The scoring function to invoke on a
       #   search result for this query. If scorer is not set, scoring is
-      #   disabled and +score+ is 0 for all documents in the search result. To
-      #   enable document relevancy score based on term frequency, set +scorer+
-      #   to +:generic+.
+      #   disabled and `score` is 0 for all documents in the search result. To
+      #   enable document relevancy score based on term frequency, set `scorer`
+      #   to `:generic`.
       # @param [Integer] scorer_size Maximum number of top retrieved results to
-      #   score. It is valid only when +scorer+ is set. The default is 100.
+      #   score. It is valid only when `scorer` is set. The default is 100.
       # @param [String] token A previously-returned page token representing part
       #   of the larger set
       #   of results to view.
@@ -496,7 +496,7 @@ module Gcloud
       #     results = results.next
       #   end
       #
-      # @example With the +order+ option:
+      # @example With the `order` option:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -506,7 +506,7 @@ module Gcloud
       #   results = index.search "dark stormy", order: "published, avg_review desc"
       #   documents = index.search query # API call
       #
-      # @example With the +fields+ option:
+      # @example With the `fields` option:
       #
       #   require "gcloud"
       #

@@ -81,14 +81,14 @@ module Gcloud
     ##
     # # AlreadyExistsError
     #
-    # Raised when Pub/Sub returns an +ALREADY_EXISTS+ error.
+    # Raised when Pub/Sub returns an `ALREADY_EXISTS` error.
     class AlreadyExistsError < ApiError
     end
 
     ##
     # # NotFoundError
     #
-    # Raised when Pub/Sub returns a +NOT_FOUND+ error.
+    # Raised when Pub/Sub returns a `NOT_FOUND` error.
     class NotFoundError < ApiError
     end
   end

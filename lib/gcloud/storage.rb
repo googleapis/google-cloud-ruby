@@ -25,21 +25,21 @@ module Gcloud
   #
   # ### Parameters
   #
-  # +project+::
+  # `project`::
   #   Project identifier for the Storage service you are connecting to.
-  #   (+String+)
-  # +keyfile+::
+  #   (`String`)
+  # `keyfile`::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
-  #   readable. (+String+ or +Hash+)
-  # +scope+::
+  #   readable. (`String` or `Hash`)
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scope is:
   #
-  #   * +https://www.googleapis.com/auth/devstorage.full_control+
+  #   * `https://www.googleapis.com/auth/devstorage.full_control`
   #
   # ### Returns
   #
@@ -288,7 +288,7 @@ module Gcloud
   # [Access Control guide](https://cloud.google.com/storage/docs/access-control)
   # for more.
   #
-  # Access to a bucket can be granted to a user by appending +"user-"+ to the
+  # Access to a bucket can be granted to a user by appending `"user-"` to the
   # email address:
   #
   #   require "gcloud"
@@ -301,7 +301,7 @@ module Gcloud
   #   email = "heidi@example.net"
   #   bucket.acl.add_reader "user-#{email}"
   #
-  # Access to a bucket can be granted to a group by appending +"group-"+ to the
+  # Access to a bucket can be granted to a group by appending `"group-"` to the
   # email address:
   #
   #   require "gcloud"
@@ -331,7 +331,7 @@ module Gcloud
   # default permissions to all files in a bucket with Bucket#default_acl, or by
   # setting permissions to an individual file with File#acl.
   #
-  # Access to a file can be granted to a user by appending +"user-"+ to the
+  # Access to a file can be granted to a user by appending `"user-"` to the
   # email address:
   #
   #   require "gcloud"
@@ -345,7 +345,7 @@ module Gcloud
   #   email = "heidi@example.net"
   #   file.acl.add_reader "user-#{email}"
   #
-  # Access to a file can be granted to a group by appending +"group-"+ to the
+  # Access to a file can be granted to a group by appending `"group-"` to the
   # email address:
   #
   #   require "gcloud"

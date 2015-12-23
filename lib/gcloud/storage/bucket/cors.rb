@@ -82,7 +82,7 @@ module Gcloud
         # @param [Integer] max_age The value to send in the
         #   Access-Control-Max-Age header in the preflight response. Indicates
         #   how many seconds the results of a preflight request can be cached in
-        #   a preflight result cache. The default value is +1800+ (30 minutes.)
+        #   a preflight result cache. The default value is `1800` (30 minutes.)
         #
         # @example
         #   require "gcloud"

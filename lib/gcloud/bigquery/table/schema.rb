@@ -87,8 +87,8 @@ module Gcloud
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
-        #   +:nullable+, +:required+, and +:repeated+. The default value is
-        #   +:nullable+.
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
         def string name, description: nil, mode: nil
           add_field name, :string, nil, description: description, mode: mode
         end
@@ -102,8 +102,8 @@ module Gcloud
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
-        #   +:nullable+, +:required+, and +:repeated+. The default value is
-        #   +:nullable+.
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
         def integer name, description: nil, mode: nil
           add_field name, :integer, nil, description: description, mode: mode
         end
@@ -117,8 +117,8 @@ module Gcloud
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
-        #   +:nullable+, +:required+, and +:repeated+. The default value is
-        #   +:nullable+.
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
         def float name, description: nil, mode: nil
           add_field name, :float, nil, description: description, mode: mode
         end
@@ -132,8 +132,8 @@ module Gcloud
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
-        #   +:nullable+, +:required+, and +:repeated+. The default value is
-        #   +:nullable+.
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
         def boolean name, description: nil, mode: nil
           add_field name, :boolean, nil, description: description, mode: mode
         end
@@ -147,8 +147,8 @@ module Gcloud
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
-        #   +:nullable+, +:required+, and +:repeated+. The default value is
-        #   +:nullable+.
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
         def timestamp name, description: nil, mode: nil
           add_field name, :timestamp, nil, description: description, mode: mode
         end
@@ -165,8 +165,8 @@ module Gcloud
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
-        #   +:nullable+, +:required+, and +:repeated+. The default value is
-        #   +:nullable+.
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
         #
         # @example
         #   require "gcloud"

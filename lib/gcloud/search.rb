@@ -19,27 +19,27 @@ require "gcloud/search/project"
 # Google Cloud Search
 module Gcloud
   ##
-  # Creates a new +Project+ instance connected to the Search service.
+  # Creates a new `Project` instance connected to the Search service.
   # Each call creates a new connection.
   #
   # ### Parameters
   #
-  # +project+::
+  # `project`::
   #   Identifier for a Search project. If not present, the default project for
-  #   the credentials is used. (+String+)
-  # +keyfile+::
+  #   the credentials is used. (`String`)
+  # `keyfile`::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
-  #   readable. (+String+ or +Hash+)
+  #   readable. (`String` or `Hash`)
   # +scope::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scopes are:
   #
-  #   * +https://www.googleapis.com/auth/cloudsearch+
-  #   * +https://www.googleapis.com/auth/userinfo.email+
+  #   * `https://www.googleapis.com/auth/cloudsearch`
+  #   * `https://www.googleapis.com/auth/userinfo.email`
   #
   # ### Returns
   #
@@ -135,7 +135,7 @@ module Gcloud
   #   #=> nil
   #   document.rank #=> nil
   #
-  # Add one or more fields to the document. (See [Adding document fields](#module-Gcloud::Search-label-Adding+document+fields), below.)
+  # Add one or more fields to the document. (See [Adding document fields](#module-Gcloud::Search-label-Adding`document`fields), below.)
   #
   #   document.add "price", 24.95
   #
@@ -191,25 +191,25 @@ module Gcloud
   # FieldValue objects. Each FieldValue object will be saved as one of the
   # [Cloud Search types](https://cloud.google.com/search/documents_indexes#document_fields_field_names_and_multi-valued_fields).
   # The type will be inferred from the value when possible, or you can
-  # explicitly specify it by passing a symbol with the +type+ option to
+  # explicitly specify it by passing a symbol with the `type` option to
   # Document#add.
   #
-  # - String (+:atom+, +:html+, +:text+, or +:default+)
-  # - Number (+:number+)
-  # - Timestamp (+:datetime+)
-  # - Geovalue (+:geo+)
+  # - String (`:atom`, `:html`, `:text`, or `:default`)
+  # - Number (`:number`)
+  # - Timestamp (`:datetime`)
+  # - Geovalue (`:geo`)
   #
   # String values can be tokenized using one of three different types of
-  # tokenization, which can be passed with the +type+ option when the value is
+  # tokenization, which can be passed with the `type` option when the value is
   # added:
   #
-  # - +:atom+ means "don't tokenize this string", treat it as one
+  # - `:atom` means "don't tokenize this string", treat it as one
   #   thing to compare against
   #
-  # - +:html+ means "treat this string as HTML", not comparing against the
-  #   tags, and treating the rest of the content like +:text+
+  # - `:html` means "treat this string as HTML", not comparing against the
+  #   tags, and treating the rest of the content like `:text`
   #
-  # - +:text+ means "treat this string as normal text" and split words
+  # - `:text` means "treat this string as normal text" and split words
   #   apart to be compared against
   #
   # Again, you can add more than one value to a field, and the values may be of
@@ -245,7 +245,7 @@ module Gcloud
   # By default, Result objects are sorted by document rank. For more information
   # see the [REST API documentation for Document.rank](https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank).
   #
-  # You can specify how to sort results with the +order+ option:
+  # You can specify how to sort results with the `order` option:
   #
   #   require "gcloud"
   #
@@ -256,9 +256,9 @@ module Gcloud
   #   results = index.search "dark stormy", order: "published, avg_review desc"
   #   documents = index.search query # API call
   #
-  # You can add computed fields with the +expressions+ option, and specify the
-  # fields that are returned with the +fields+ option. No document data will be
-  # returned if you omit the +fields+ option, only `doc_id` references to any
+  # You can add computed fields with the `expressions` option, and specify the
+  # fields that are returned with the `fields` option. No document data will be
+  # returned if you omit the `fields` option, only `doc_id` references to any
   # matched documents.
   #
   #   require "gcloud"

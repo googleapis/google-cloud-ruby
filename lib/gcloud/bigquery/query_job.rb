@@ -28,14 +28,14 @@ module Gcloud
     #
     class QueryJob < Job
       ##
-      # Checks if the priority for the query is +BATCH+.
+      # Checks if the priority for the query is `BATCH`.
       def batch?
         val = config["query"]["priority"]
         val == "BATCH"
       end
 
       ##
-      # Checks if the priority for the query is +INTERACTIVE+.
+      # Checks if the priority for the query is `INTERACTIVE`.
       def interactive?
         val = config["query"]["priority"]
         return true if val.nil?
@@ -63,8 +63,8 @@ module Gcloud
 
       ##
       # Checks if the query job flattens nested and repeated fields in the query
-      # results. The default is +true+. If the value is +false+, #large_results?
-      # should return +true+.
+      # results. The default is `true`. If the value is `false`, #large_results?
+      # should return `true`.
       def flatten?
         val = config["query"]["flattenResults"]
         return true if val.nil?

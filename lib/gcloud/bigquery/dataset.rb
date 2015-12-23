@@ -277,13 +277,13 @@ module Gcloud
 
       ##
       # Permanently deletes the dataset. The dataset must be empty before it can
-      # be deleted unless the +force+ option is set to +true+.
+      # be deleted unless the `force` option is set to `true`.
       #
-      # @param [Boolean] force If +true+, delete all the tables in the dataset.
-      #   If +false+ and the dataset contains tables, the request will fail.
-      #   Default is +false+.
+      # @param [Boolean] force If `true`, delete all the tables in the dataset.
+      #   If `false` and the dataset contains tables, the request will fail.
+      #   Default is `false`.
       #
-      # @return [Boolean] Returns +true+ if the dataset was deleted.
+      # @return [Boolean] Returns `true` if the dataset was deleted.
       #
       # @example
       #   require "gcloud"
@@ -453,7 +453,7 @@ module Gcloud
       # @param [String] table_id The ID of a table.
       #
       # @return [Gcloud::Bigquery::Table, Gcloud::Bigquery::View, nil] Returns
-      #   +nil+ if the table does not exist
+      #   `nil` if the table does not exist
       #
       # @example
       #   require "gcloud"
@@ -541,8 +541,8 @@ module Gcloud
       #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]".
       # @param [String] priority Specifies a priority for the query. Possible
-      #   values include +INTERACTIVE+ and +BATCH+. The default value is
-      #   +INTERACTIVE+.
+      #   values include `INTERACTIVE` and `BATCH`. The default value is
+      #   `INTERACTIVE`.
       # @param [Boolean] cache Whether to look for the result in the query
       #   cache. The query cache is a best-effort cache that will be flushed
       #   whenever tables in the query are modified. The default value is true.
@@ -555,23 +555,23 @@ module Gcloud
       #   new tables.
       #
       #   The following values are supported:
-      #   * +needed+ - Create the table if it does not exist.
-      #   * +never+ - The table must already exist. A 'notFound' error is
+      #   * `needed` - Create the table if it does not exist.
+      #   * `never` - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
       # @param [String] write Specifies the action that occurs if the
       #   destination table already exists.
       #
       #   The following values are supported:
-      #   * +truncate+ - BigQuery overwrites the table data.
-      #   * +append+ - BigQuery appends the data to the table.
-      #   * +empty+ - A 'duplicate' error is returned in the job result if the
+      #   * `truncate` - BigQuery overwrites the table data.
+      #   * `append` - BigQuery appends the data to the table.
+      #   * `empty` - A 'duplicate' error is returned in the job result if the
       #     table exists and contains data.
-      # @param [Boolean] large_results If +true+, allows the query to produce
+      # @param [Boolean] large_results If `true`, allows the query to produce
       #   arbitrarily large result tables at a slight cost in performance.
-      #   Requires +table+ parameter to be set.
+      #   Requires `table` parameter to be set.
       # @param [Boolean] flatten Flattens all nested and repeated fields in the
-      #   query results. The default value is +true+. +large_results+ parameter
-      #   must be +true+ if this is set to +false+.
+      #   query results. The default value is `true`. `large_results` parameter
+      #   must be `true` if this is set to `false`.
       #
       # @return [Gcloud::Bigquery::QueryJob]
       #
@@ -630,10 +630,10 @@ module Gcloud
       #   longer to run than the timeout value, the call returns without any
       #   results and with QueryData#complete? set to false. The default value
       #   is 10000 milliseconds (10 seconds).
-      # @param [Boolean] dryrun If set to +true+, BigQuery doesn't run the job.
+      # @param [Boolean] dryrun If set to `true`, BigQuery doesn't run the job.
       #   Instead, if the query is valid, BigQuery returns statistics about the
       #   job such as how many bytes would be processed. If the query is
-      #   invalid, an error returns. The default value is +false+.
+      #   invalid, an error returns. The default value is `false`.
       # @param [Boolean] cache Whether to look for the result in the query
       #   cache. The query cache is a best-effort cache that will be flushed
       #   whenever tables in the query are modified. The default value is true.

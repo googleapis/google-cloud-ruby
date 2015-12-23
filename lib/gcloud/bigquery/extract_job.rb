@@ -48,7 +48,7 @@ module Gcloud
 
       ##
       # Checks if the export operation compresses the data using gzip. The
-      # default is +false+.
+      # default is `false`.
       def compression?
         val = config["extract"]["compression"]
         val == "GZIP"
@@ -56,7 +56,7 @@ module Gcloud
 
       ##
       # Checks if the destination format for the data is [newline-delimited
-      # JSON](http://jsonlines.org/). The default is +false+.
+      # JSON](http://jsonlines.org/). The default is `false`.
       def json?
         val = config["extract"]["destinationFormat"]
         val == "NEWLINE_DELIMITED_JSON"
@@ -64,7 +64,7 @@ module Gcloud
 
       ##
       # Checks if the destination format for the data is CSV. Tables with nested
-      # or repeated fields cannot be exported as CSV. The default is +true+.
+      # or repeated fields cannot be exported as CSV. The default is `true`.
       def csv?
         val = config["extract"]["destinationFormat"]
         return true if val.nil?
@@ -73,7 +73,7 @@ module Gcloud
 
       ##
       # Checks if the destination format for the data is
-      # [Avro](http://avro.apache.org/). The default is +false+.
+      # [Avro](http://avro.apache.org/). The default is `false`.
       def avro?
         val = config["extract"]["destinationFormat"]
         val == "AVRO"
@@ -90,7 +90,7 @@ module Gcloud
 
       ##
       # Checks if the exported data contains a header row. The default is
-      # +true+.
+      # `true`.
       def print_header?
         val = config["extract"]["printHeader"]
         val = true if val.nil?

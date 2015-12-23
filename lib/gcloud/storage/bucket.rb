@@ -53,7 +53,7 @@ module Gcloud
 
       ##
       # The kind of item this is.
-      # For buckets, this is always +storage#bucket+.
+      # For buckets, this is always `storage#bucket`.
       def kind
         @gapi["kind"]
       end
@@ -204,7 +204,7 @@ module Gcloud
       ##
       # The bucket's storage class. This defines how objects in the bucket are
       # stored and determines the SLA and the cost of storage. Values include
-      # +STANDARD+, +NEARLINE+, and +DURABLE_REDUCED_AVAILABILITY+.
+      # `STANDARD`, `NEARLINE`, and `DURABLE_REDUCED_AVAILABILITY`.
       def storage_class
         @gapi["storageClass"]
       end
@@ -322,12 +322,12 @@ module Gcloud
       #
       # The API call to delete the bucket may be retried under certain
       # conditions. See {Gcloud::Backoff} to control this behavior, or
-      # specify the wanted behavior using the +retries+ option.
+      # specify the wanted behavior using the `retries` option.
       #
       # @param [Integer] retries The number of times the API call should be
       #   retried. Default is Gcloud::Backoff.retries.
       #
-      # @return [Boolean] Returns +true+ if the bucket was deleted.
+      # @return [Boolean] Returns `true` if the bucket was deleted.
       #
       # @example
       #   require "gcloud"
@@ -368,8 +368,8 @@ module Gcloud
       # @param [Integer] max Maximum number of items plus prefixes to return. As
       #   duplicate prefixes are omitted, fewer total results may be returned
       #   than requested. The default value of this parameter is 1,000 items.
-      # @param [Boolean] versions If +true+, lists all versions of an object as
-      #   distinct results. The default is +false+. For more information, see
+      # @param [Boolean] versions If `true`, lists all versions of an object as
+      #   distinct results. The default is `false`. For more information, see
       #   [Object Versioning
       #   ](https://cloud.google.com/storage/docs/object-versioning).
       #
@@ -456,7 +456,7 @@ module Gcloud
       # Create a new File object by providing a path to a local file to upload
       # and the path to store it with in the bucket.
       #
-      # A +chunk_size+ value can be provided in the options to be used
+      # A `chunk_size` value can be provided in the options to be used
       # in resumable uploads. This value is the number of bytes per
       # chunk and must be divisible by 256KB. If it is not divisible
       # by 256KB then it will be lowered to the nearest acceptable
@@ -468,17 +468,17 @@ module Gcloud
       #   file.
       #
       #   Acceptable values are:
-      #   * +auth+, +auth_read+, +authenticated+, +authenticated_read+,
-      #     +authenticatedRead+ - File owner gets OWNER access, and
+      #   * `auth`, `auth_read`, `authenticated`, `authenticated_read`,
+      #     `authenticatedRead` - File owner gets OWNER access, and
       #     allAuthenticatedUsers get READER access.
-      #   * +owner_full+, +bucketOwnerFullControl+ - File owner gets OWNER
+      #   * `owner_full`, `bucketOwnerFullControl` - File owner gets OWNER
       #     access, and project team owners get OWNER access.
-      #   * +owner_read+, +bucketOwnerRead+ - File owner gets OWNER access, and
+      #   * `owner_read`, `bucketOwnerRead` - File owner gets OWNER access, and
       #     project team owners get READER access.
-      #   * +private+ - File owner gets OWNER access.
-      #   * +project_private+, +projectPrivate+ - File owner gets OWNER access,
+      #   * `private` - File owner gets OWNER access.
+      #   * `project_private`, `projectPrivate` - File owner gets OWNER access,
       #     and project team members get access according to their roles.
-      #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
+      #   * `public`, `public_read`, `publicRead` - File owner gets OWNER
       #     access, and allUsers get READER access.
       # @param [String] cache_control The
       #   [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2)
@@ -556,13 +556,13 @@ module Gcloud
       #
       # ##### Handling memory errors
       #
-      # If you encounter a memory error such as +NoMemoryError+, try performing
-      # a resumable upload and setting the +chunk_size+ option to a value that
+      # If you encounter a memory error such as `NoMemoryError`, try performing
+      # a resumable upload and setting the `chunk_size` option to a value that
       # works for your environment, as explained in the final example above.
       #
       # ##### Handling broken pipe errors
       #
-      # To avoid broken pipe (+Errno::EPIPE+) errors when uploading, add the
+      # To avoid broken pipe (`Errno::EPIPE`) errors when uploading, add the
       # [httpclient](https://rubygems.org/gems/httpclient) gem to your project,
       # and the configuration shown below. These lines must execute after you
       # require gcloud but before you make your first gcloud connection. The
@@ -615,7 +615,7 @@ module Gcloud
       # @see https://cloud.google.com/storage/docs/access-control Access Control
       #   guide
       #
-      # @example Grant access to a user by pre-pending +"user-"+ to an email:
+      # @example Grant access to a user by pre-pending `"user-"` to an email:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -626,7 +626,7 @@ module Gcloud
       #   email = "heidi@example.net"
       #   bucket.acl.add_reader "user-#{email}"
       #
-      # @example Grant access to a group by pre-pending +"group-"+ to an email:
+      # @example Grant access to a group by pre-pending `"group-"` to an email:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -662,7 +662,7 @@ module Gcloud
       # @see https://cloud.google.com/storage/docs/access-control Access Control
       #   guide
       #
-      # @example Grant access to a user by pre-pending +"user-"+ to an email:
+      # @example Grant access to a user by pre-pending `"user-"` to an email:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -673,7 +673,7 @@ module Gcloud
       #   email = "heidi@example.net"
       #   bucket.default_acl.add_reader "user-#{email}"
       #
-      # @example Grant access to a group by pre-pending +"group-"+ to an email
+      # @example Grant access to a group by pre-pending `"group-"` to an email
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

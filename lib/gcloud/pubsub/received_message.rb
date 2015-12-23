@@ -115,8 +115,8 @@ module Gcloud
       #
       # @param [Integer] new_deadline The new ack deadline in seconds from the
       #   time this request is sent to the Pub/Sub system. Must be >= 0. For
-      #   example, if the value is +10+, the new ack deadline will expire 10
-      #   seconds after the call is made. Specifying +0+ may immediately make
+      #   example, if the value is `10`, the new ack deadline will expire 10
+      #   seconds after the call is made. Specifying `0` may immediately make
       #   the message available for another pull request.
       #
       # @example

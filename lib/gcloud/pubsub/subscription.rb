@@ -164,7 +164,7 @@ module Gcloud
       # Deletes an existing subscription.
       # All pending messages in the subscription are immediately dropped.
       #
-      # @return [Boolean] Returns +true+ if the subscription was deleted.
+      # @return [Boolean] Returns `true` if the subscription was deleted.
       #
       # @example
       #   require "gcloud"
@@ -188,19 +188,19 @@ module Gcloud
       ##
       # Pulls messages from the server. Returns an empty list if there are no
       # messages available in the backlog. Raises an ApiError with status
-      # +UNAVAILABLE+ if there are too many concurrent pull requests pending
+      # `UNAVAILABLE` if there are too many concurrent pull requests pending
       # for the given subscription.
       #
-      # @param [Boolean] immediate When +true+ the system will respond
-      #   immediately even if it is not able to return messages. When +false+
+      # @param [Boolean] immediate When `true` the system will respond
+      #   immediately even if it is not able to return messages. When `false`
       #   the system is allowed to wait until it can return least one message.
       #   No messages are returned when a request times out. The default value
-      #   is +true+.
+      #   is `true`.
       # @param [Integer] max The maximum number of messages to return for this
       #   request. The Pub/Sub system may return fewer than the number
-      #   specified. The default value is +100+, the maximum value is +1000+.
+      #   specified. The default value is `100`, the maximum value is `1000`.
       # @param [Boolean] autoack Automatically acknowledge the message as it is
-      #   pulled. The default value is +false+.
+      #   pulled. The default value is `false`.
       #
       # @return [Array<Gcloud::Pubsub::ReceivedMessage>]
       #
@@ -257,9 +257,9 @@ module Gcloud
       #
       # @param [Integer] max The maximum number of messages to return for this
       #   request. The Pub/Sub system may return fewer than the number
-      #   specified. The default value is +100+, the maximum value is +1000+.
+      #   specified. The default value is `100`, the maximum value is `1000`.
       # @param [Boolean] autoack Automatically acknowledge the message as it is
-      #   pulled. The default value is +false+.
+      #   pulled. The default value is `false`.
       #
       # @return [Array<Gcloud::Pubsub::ReceivedMessage>]
       #
@@ -283,12 +283,12 @@ module Gcloud
       #
       # @param [Integer] max The maximum number of messages to return for this
       #   request. The Pub/Sub system may return fewer than the number
-      #   specified. The default value is +100+, the maximum value is +1000+.
+      #   specified. The default value is `100`, the maximum value is `1000`.
       # @param [Boolean] autoack Automatically acknowledge the message as it is
-      #   pulled. The default value is +false+.
+      #   pulled. The default value is `false`.
       # @param [Number] delay The number of seconds to pause between requests
       #   when the Google Cloud service has no messages to return. The default
-      #   value is +1+.
+      #   value is `1`.
       #
       # @example
       #   require "gcloud"
@@ -301,7 +301,7 @@ module Gcloud
       #     # process msg
       #   end
       #
-      # @example Limit the number of messages pulled per batch with +max+:
+      # @example Limit the number of messages pulled per batch with `max`:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -312,7 +312,7 @@ module Gcloud
       #     # process msg
       #   end
       #
-      # @example Automatically acknowledge messages with +autoack+:
+      # @example Automatically acknowledge messages with `autoack`:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -376,8 +376,8 @@ module Gcloud
       #
       # @param [Integer] new_deadline The new ack deadline in seconds from the
       #   time this request is sent to the Pub/Sub system. Must be >= 0. For
-      #   example, if the value is +10+, the new ack deadline will expire 10
-      #   seconds after the call is made. Specifying +0+ may immediately make
+      #   example, if the value is `10`, the new ack deadline will expire 10
+      #   seconds after the call is made. Specifying `0` may immediately make
       #   the message available for another pull request.
       # @param [ReceivedMessage, String] *messages One or more {ReceivedMessage}
       #   objects or ack_id values.
@@ -412,7 +412,7 @@ module Gcloud
       # @param [Boolean] force Force the latest policy to be retrieved from the
       #   Pub/Sub service when +true. Otherwise the policy will be memoized to
       #   reduce the number of API calls made to the Pub/Sub service. The
-      #   default is +false+.
+      #   default is `false`.
       #
       # @return [Hash] Returns a hash that conforms to the following structure:
       #
@@ -434,7 +434,7 @@ module Gcloud
       #   puts subscription.policy["bindings"]
       #   puts subscription.policy["rules"]
       #
-      # @example Use +force+ to retrieve the latest policy from the service:
+      # @example Use `force` to retrieve the latest policy from the service:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -501,8 +501,8 @@ module Gcloud
       #   Policies
       #
       # @param [String, Array<String>] *permissions The set of permissions to
-      #   check access for. Permissions with wildcards (such as +*+ or
-      #   +storage.*+) are not allowed.
+      #   check access for. Permissions with wildcards (such as `*` or
+      #   `storage.*`) are not allowed.
       #
       # @return [Array<String>] The permissions that have access.
       #
@@ -559,8 +559,8 @@ module Gcloud
       end
 
       ##
-      # Makes sure the values are the +ack_id+.
-      # If given several {ReceivedMessage} objects extract the +ack_id+ values.
+      # Makes sure the values are the `ack_id`.
+      # If given several {ReceivedMessage} objects extract the `ack_id` values.
       def coerce_ack_ids messages
         Array(messages).flatten.map do |msg|
           msg.respond_to?(:ack_id) ? msg.ack_id : msg.to_s

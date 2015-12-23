@@ -85,7 +85,7 @@ module Gcloud
       # @param [Boolean] skip_lookup Optionally create an Index object without
       #   verifying the index resource exists on the Search service. Documents
       #   saved on this object will create the index resource if the resource
-      #   does not yet exist. Default is +false+.
+      #   does not yet exist. Default is `false`.
       #
       # @return [Gcloud::Search::Index, nil] nil if the index does not exist
       #
@@ -98,7 +98,7 @@ module Gcloud
       #   index = search.index "books"
       #   index.index_id #=> "books"
       #
-      # @example A new index can be created with +index_id+ and +skip_lookup+:
+      # @example A new index can be created with `index_id` and `skip_lookup`:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -127,7 +127,7 @@ module Gcloud
       # @param [String] token A previously-returned page token representing part
       #   of the larger set of results to view.
       # @param [Integer] max Maximum number of indexes to return. The default is
-      #   +100+.
+      #   `100`.
       #
       # @return [Array<Gcloud::Search::Index>] (See
       #   {Gcloud::Search::Index::List})

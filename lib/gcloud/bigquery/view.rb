@@ -67,7 +67,7 @@ module Gcloud
       end
 
       ##
-      # The ID of the +Dataset+ containing this table.
+      # The ID of the `Dataset` containing this table.
       #
       # @!group Attributes
       #
@@ -76,7 +76,7 @@ module Gcloud
       end
 
       ##
-      # The ID of the +Project+ containing this table.
+      # The ID of the `Project` containing this table.
       #
       # @!group Attributes
       #
@@ -300,10 +300,10 @@ module Gcloud
       #   whenever tables in the query are modified. The default value is true.
       #   For more information, see [query
       #   caching](https://developers.google.com/bigquery/querying-data).
-      # @param [Boolean] dryrun If set to +true+, BigQuery doesn't run the job.
+      # @param [Boolean] dryrun If set to `true`, BigQuery doesn't run the job.
       #   Instead, if the query is valid, BigQuery returns statistics about the
       #   job such as how many bytes would be processed. If the query is
-      #   invalid, an error returns. The default value is +false+.
+      #   invalid, an error returns. The default value is `false`.
       #
       # @return [Gcloud::Bigquery::QueryData]
       #
@@ -338,7 +338,7 @@ module Gcloud
       ##
       # Permanently deletes the table.
       #
-      # @return [Boolean] Returns +true+ if the table was deleted.
+      # @return [Boolean] Returns `true` if the table was deleted.
       #
       # @example
       #   require "gcloud"
