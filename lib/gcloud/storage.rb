@@ -23,7 +23,7 @@ module Gcloud
   # Creates a new object for connecting to the Storage service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +project+::
   #   Project identifier for the Storage service you are connecting to.
@@ -41,11 +41,11 @@ module Gcloud
   #
   #   * +https://www.googleapis.com/auth/devstorage.full_control+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::Storage::Project
   #
-  # === Example
+  # ### Example
   #
   #   require "gcloud/storage"
   #
@@ -66,7 +66,7 @@ module Gcloud
   end
 
   ##
-  # = Google Cloud Storage
+  # # Google Cloud Storage
   #
   # Google Cloud Storage is an Internet service to store data in Google's cloud.
   # It allows world-wide storage and retrieval of any amount of data and at any
@@ -95,7 +95,7 @@ module Gcloud
   # {Google Cloud Storage Overview
   # }[https://cloud.google.com/storage/docs/overview].
   #
-  # == Retrieving Buckets
+  # ## Retrieving Buckets
   #
   # A Bucket is the container for your data. There is no limit on the number of
   # buckets that you can create in a project. You can use buckets to organize
@@ -138,7 +138,7 @@ module Gcloud
   #     tmp_buckets = storage.buckets token: tmp_buckets.token
   #   end
   #
-  # == Creating a Bucket
+  # ## Creating a Bucket
   #
   # A unique name is all that is needed to create a new bucket:
   # (See Project#create_bucket)
@@ -150,7 +150,7 @@ module Gcloud
   #
   #   bucket = storage.create_bucket "my-todo-app-attachments"
   #
-  # == Retrieving Files
+  # ## Retrieving Files
   #
   # A File is an individual pieces of data that you store in Google Cloud
   # Storage. Files contain the data stored as well as metadata describing the
@@ -210,7 +210,7 @@ module Gcloud
   #     tmp_files = bucket.files token: tmp_files.token
   #   end
   #
-  # == Creating a File
+  # ## Creating a File
   #
   # A new File can be uploaded by specifying the location of a file on the local
   # file system, and the name/path that the file should be stored in the bucket.
@@ -225,7 +225,7 @@ module Gcloud
   #   bucket.create_file "/var/todo-app/avatars/heidi/400x400.png",
   #                      "avatars/heidi/400x400.png"
   #
-  # === A note about large uploads
+  # ### A note about large uploads
   #
   # You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
   # upload large files. To avoid this problem, add the
@@ -250,7 +250,7 @@ module Gcloud
   #   gcloud = Gcloud.new
   #   storage = gcloud.storage
   #
-  # == Downloading a File
+  # ## Downloading a File
   #
   # Files can be downloaded to the local file system. (See File#download)
   #
@@ -263,7 +263,7 @@ module Gcloud
   #   file = bucket.file "avatars/heidi/400x400.png"
   #   file.download "/var/todo-app/avatars/heidi/400x400.png"
   #
-  # == Using Signed URLs
+  # ## Using Signed URLs
   #
   # Access without authentication can be granted to a File for a specified
   # period of time. This URL uses a cryptographic signature
@@ -279,7 +279,7 @@ module Gcloud
   #   shared_url = file.signed_url method: "GET",
   #                                expires: 300 # 5 minutes from now
   #
-  # == Controlling Access to a Bucket
+  # ## Controlling Access to a Bucket
   #
   # Access to a bucket is controlled with Bucket#acl. A bucket has owners,
   # writers, and readers. Permissions can be granted to an individual user's
@@ -325,7 +325,7 @@ module Gcloud
   #
   #   bucket.acl.public!
   #
-  # == Controlling Access to a File
+  # ## Controlling Access to a File
   #
   # Access to a file is controlled in two ways, either by the setting the
   # default permissions to all files in a bucket with Bucket#default_acl, or by

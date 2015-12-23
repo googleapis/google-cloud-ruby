@@ -19,7 +19,7 @@ require "gcloud/search/field_value"
 module Gcloud
   module Search
     ##
-    # = Fields
+    # # Fields
     #
     # Fields is the object that provides access to a document's fields.
     #

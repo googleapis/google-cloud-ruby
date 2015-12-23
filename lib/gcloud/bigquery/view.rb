@@ -20,7 +20,7 @@ require "gcloud/bigquery/errors"
 module Gcloud
   module Bigquery
     ##
-    # = View
+    # # View
     #
     # A view is a virtual table defined by a SQL query. You can query views in
     # the browser tool, or by using a query job.

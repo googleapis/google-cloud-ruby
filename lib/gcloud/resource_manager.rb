@@ -22,7 +22,7 @@ module Gcloud
   # Creates a new +Project+ instance connected to the Resource Manager service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +keyfile+::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
@@ -37,11 +37,11 @@ module Gcloud
   #
   #   * +https://www.googleapis.com/auth/cloud-platform+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::ResourceManager::Manager
   #
-  # === Example
+  # ### Example
   #
   #   require "gcloud/resource_manager"
   #
@@ -64,7 +64,7 @@ module Gcloud
   # Disabled because there are links in the docs that are long.
 
   ##
-  # = Google Cloud Resource Manager
+  # # Google Cloud Resource Manager
   #
   # The Resource Manager API provides methods that you can use to
   # programmatically manage your projects in the Google Cloud Platform. You may
@@ -81,7 +81,7 @@ module Gcloud
   # The Resource Manager API is a Beta release and is not covered by any SLA or
   # deprecation policy and may be subject to backward-incompatible changes.
   #
-  # == Accessing the Service
+  # ## Accessing the Service
   #
   # Currently, the full functionality of the Resource Manager API is available
   # only to whitelisted users. (Contact your account manager or a member of the
@@ -91,7 +91,7 @@ module Gcloud
   # Resource Manager API in the {Developers
   # Console}[https://console.developers.google.com].
   #
-  # == Authentication
+  # ## Authentication
   #
   # The Resource Manager API currently requires authentication of a {User
   # Account}[https://developers.google.com/identity/protocols/OAuth2], and
@@ -111,7 +111,7 @@ module Gcloud
   #   gcloud = Gcloud.new
   #   resource_manager = gcloud.resource_manager
   #
-  # == Listing Projects
+  # ## Listing Projects
   #
   # Project is a collection of settings, credentials, and metadata about the
   # application or applications you're working on. You can retrieve and inspect
@@ -125,7 +125,7 @@ module Gcloud
   #     puts projects.project_id
   #   end
   #
-  # == Managing Projects with Labels
+  # ## Managing Projects with Labels
   #
   # Labels can be added to or removed from projects. (See Project#labels)
   #
@@ -151,7 +151,7 @@ module Gcloud
   #     puts project.project_id
   #   end
   #
-  # == Creating a Project
+  # ## Creating a Project
   #
   # You can also use the API to create new projects. (See
   # Manager#create_project)
@@ -164,7 +164,7 @@ module Gcloud
   #                                             name: "Todos Development",
   #                                             labels: {env: :development}
   #
-  # == Deleting a Project
+  # ## Deleting a Project
   #
   # You can delete projects when they are no longer needed. (See
   # Manager#delete and Project#delete)
@@ -175,7 +175,7 @@ module Gcloud
   #   resource_manager = gcloud.resource_manager
   #   resource_manager.delete "tokyo-rain-123"
   #
-  # == Undeleting a Project
+  # ## Undeleting a Project
   #
   # You can also restore a deleted project within the waiting period that
   # starts when the project was deleted. Restoring a project returns it to the
@@ -188,7 +188,7 @@ module Gcloud
   #   resource_manager = gcloud.resource_manager
   #   resource_manager.undelete "tokyo-rain-123"
   #
-  # == Managing IAM Policies
+  # ## Managing IAM Policies
   #
   # Google Cloud Identity and Access Management ({Cloud
   # IAM}[https://cloud.google.com/iam/]) access control policies can be managed

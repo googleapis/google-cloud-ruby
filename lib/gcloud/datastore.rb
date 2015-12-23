@@ -26,7 +26,7 @@ module Gcloud
   # Creates a new object for connecting to the Datastore service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +project+::
   #   Dataset identifier for the Datastore you are connecting to. (+String+)
@@ -44,11 +44,11 @@ module Gcloud
   #   * +https://www.googleapis.com/auth/datastore+
   #   * +https://www.googleapis.com/auth/userinfo.email+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::Datastore::Dataset
   #
-  # === Example
+  # ### Example
   #
   #   require "gcloud/datastore"
   #
@@ -73,7 +73,7 @@ module Gcloud
   end
 
   ##
-  # = Google Cloud Datastore
+  # # Google Cloud Datastore
   #
   # Google Cloud Datastore is a fully managed, schemaless database for storing
   # non-relational data. You should feel at home if you are familiar with
@@ -102,7 +102,7 @@ module Gcloud
   # {Google Cloud Datastore Concepts Overview
   # }[https://cloud.google.com/datastore/docs/concepts/overview].
   #
-  # == Retrieving Records
+  # ## Retrieving Records
   #
   # Records, called "entities" in Datastore, are retrieved by using a Key.
   # The Key is more than a numeric identifier, it is a complex data structure
@@ -128,7 +128,7 @@ module Gcloud
   #
   # See Gcloud::Datastore::Dataset#find
   #
-  # == Querying Records
+  # ## Querying Records
   #
   # Multiple records can be found that match criteria.
   # (See Gcloud::Datastore::Query#where)
@@ -180,7 +180,7 @@ module Gcloud
   #
   # See Gcloud::Datastore::Query and Gcloud::Datastore::Dataset#run
   #
-  # == Paginating Records
+  # ## Paginating Records
   #
   # All Records may not return at once, requiring multiple calls to Datastore
   # to return them all. The returned records will have a <tt>cursor</tt> if
@@ -211,7 +211,7 @@ module Gcloud
   # See Gcloud::Datastore::Dataset::LookupResults and
   # Gcloud::Datastore::Dataset::QueryResults
   #
-  # == Creating Records
+  # ## Creating Records
   #
   # New entities can be created and persisted buy calling Dataset#save.
   # The entity must have a Key to be saved. If the Key is incomplete then
@@ -228,7 +228,7 @@ module Gcloud
   #   dataset.save entity
   #   entity.key.id #=> 123456789
   #
-  # == Updating Records
+  # ## Updating Records
   #
   # Entities hold properties. A property has a name that is a string or symbol,
   # and a value that is an object. Most value objects are supported, including
@@ -247,7 +247,7 @@ module Gcloud
   #   # Persist the changes
   #   dataset.save entity
   #
-  # == Deleting Records
+  # ## Deleting Records
   #
   # Entities can be removed from Datastore by calling Dataset#delete and passing
   # the Entity object or the entity's Key object.
@@ -259,7 +259,7 @@ module Gcloud
   #   entity = dataset.find "User", "heidi"
   #   dataset.delete entity
   #
-  # == Transactions
+  # ## Transactions
   #
   # Complex logic can be wrapped in a Transaction. All queries and updates
   # within the Dataset#transaction block are run within the transaction scope,

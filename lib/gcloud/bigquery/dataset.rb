@@ -23,7 +23,7 @@ require "gcloud/bigquery/dataset/access"
 module Gcloud
   module Bigquery
     ##
-    # = Dataset
+    # # Dataset
     #
     # Represents a Dataset. A dataset is a grouping mechanism that holds zero or
     # more tables. Datasets are the lowest level unit of access control; you

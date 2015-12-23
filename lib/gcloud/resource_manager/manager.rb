@@ -21,7 +21,7 @@ require "gcloud/resource_manager/project"
 module Gcloud
   module ResourceManager
     ##
-    # = Manager
+    # # Manager
     #
     # Provides methods for creating, retrieving, and updating projects.
     #

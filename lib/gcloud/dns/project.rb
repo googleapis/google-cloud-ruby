@@ -22,7 +22,7 @@ require "gcloud/dns/errors"
 module Gcloud
   module Dns
     ##
-    # = Project
+    # # Project
     #
     # The project is a top level container for resources including Cloud DNS
     # ManagedZones. Projects can be created only in the {Google Developers

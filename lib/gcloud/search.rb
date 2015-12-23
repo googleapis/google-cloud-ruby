@@ -22,7 +22,7 @@ module Gcloud
   # Creates a new +Project+ instance connected to the Search service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +project+::
   #   Identifier for a Search project. If not present, the default project for
@@ -41,7 +41,7 @@ module Gcloud
   #   * +https://www.googleapis.com/auth/cloudsearch+
   #   * +https://www.googleapis.com/auth/userinfo.email+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::Search::Project
   def self.search project = nil, keyfile = nil, scope: nil
@@ -58,7 +58,7 @@ module Gcloud
   # Disabled because there are links in the docs that are long.
 
   ##
-  # = Google Cloud Search
+  # # Google Cloud Search
   #
   # Google Cloud Search allows an application to quickly perform full-text and
   # geo-spatial searches without having to spin up instances and without the
@@ -74,13 +74,13 @@ module Gcloud
   # backward-incompatible ways. It is not currently recommended for production
   # use. It is not subject to any SLA or deprecation policy.
   #
-  # == Accessing the Service
+  # ## Accessing the Service
   #
   # Currently, the Cloud Search API is available only to white-listed users.
   # Contact your account manager or a member of the Google Cloud sales team if
   # you are interested in access.
   #
-  # == Authentication
+  # ## Authentication
   #
   # Authentication is handled by Gcloud#search. You can provide the project and
   # credential information to connect to the Cloud Search service, or if you are
@@ -88,7 +88,7 @@ module Gcloud
   # you. You can read more about the options for connecting in the
   # {Authentication Guide}[link:AUTHENTICATION.md].
   #
-  # == Managing Indexes
+  # ## Managing Indexes
   #
   # An Index is a searchable collection of documents that belongs to a Project.
   #
@@ -118,7 +118,7 @@ module Gcloud
   # documents which are created "within" them. A new index will exist in the
   # service once you save a document that references it.
   #
-  # == Managing Documents
+  # ## Managing Documents
   #
   # Using an index, create a new, unsaved Document instance, providing
   # your own unique document ID, as shown below, or omitting this argument to
@@ -184,7 +184,7 @@ module Gcloud
   #   document.add "price", 9.95 # replace existing number value
   #   index.save document # API call
   #
-  # == Adding document fields
+  # ## Adding document fields
   #
   # Fields belong to documents and are the data that actually gets searched.
   # Each field has a FieldValues collection, which facilitates access to
@@ -226,7 +226,7 @@ module Gcloud
   #   document.add "description", "<p>The best T-shirt ever.</p>", type: :html, lang: "en"
   #   document["description"].size #=> 2
   #
-  # == Searching
+  # ## Searching
   #
   # After populating an index with documents, you can request search results
   # with a query:

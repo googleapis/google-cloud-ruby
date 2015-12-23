@@ -20,7 +20,7 @@ require "gcloud/storage/file/verifier"
 module Gcloud
   module Storage
     ##
-    # = File
+    # # File
     #
     # Represents a File
     # ({Object}[https://cloud.google.com/storage/docs/json_api/v1/objects]) that

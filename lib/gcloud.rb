@@ -16,7 +16,7 @@
 require "gcloud/version"
 
 ##
-# = Google Cloud
+# # Google Cloud
 #
 # Gcloud is the official library for interacting with the Google Cloud Platform.
 # Google Cloud Platform is a set of modular cloud-based services that allow
@@ -34,7 +34,7 @@ module Gcloud
   ##
   # Creates a new object for connecting to Google Cloud.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +project+::
   #   Project identifier for the Pub/Sub service you are connecting to.
@@ -43,11 +43,11 @@ module Gcloud
   #   Keyfile downloaded from Google Cloud. If file path the file must be
   #   readable. (+String+ or +Hash+)
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud
   #
-  # === Example
+  # ### Example
   #
   #   require "gcloud"
   #
@@ -70,7 +70,7 @@ module Gcloud
   # Creates a new object for connecting to the Datastore service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
@@ -83,11 +83,11 @@ module Gcloud
   #   * +https://www.googleapis.com/auth/datastore+
   #   * +https://www.googleapis.com/auth/userinfo.email+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::Datastore::Dataset
   #
-  # === Examples
+  # ### Examples
   #
   #   require "gcloud"
   #
@@ -119,7 +119,7 @@ module Gcloud
   # Creates a new object for connecting to the Storage service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
@@ -131,11 +131,11 @@ module Gcloud
   #
   #   * +https://www.googleapis.com/auth/devstorage.full_control+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::Storage::Project
   #
-  # === Examples
+  # ### Examples
   #
   #   require "gcloud"
   #
@@ -163,7 +163,7 @@ module Gcloud
   # Creates a new object for connecting to the Pub/Sub service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
@@ -175,11 +175,11 @@ module Gcloud
   #
   #   * +https://www.googleapis.com/auth/pubsub+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::Pubsub::Project
   #
-  # === Examples
+  # ### Examples
   #
   #   require "gcloud"
   #
@@ -205,7 +205,7 @@ module Gcloud
   # Creates a new object for connecting to the BigQuery service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
@@ -217,11 +217,11 @@ module Gcloud
   #
   #   * +https://www.googleapis.com/auth/bigquery+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::Bigquery::Project
   #
-  # === Examples
+  # ### Examples
   #
   #   require "gcloud"
   #
@@ -250,7 +250,7 @@ module Gcloud
   # Creates a new object for connecting to the DNS service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
@@ -262,11 +262,11 @@ module Gcloud
   #
   #   * +https://www.googleapis.com/auth/ndev.clouddns.readwrite+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::Dns::Project
   #
-  # === Examples
+  # ### Examples
   #
   #   require "gcloud"
   #
@@ -298,7 +298,7 @@ module Gcloud
   # Creates a new object for connecting to the Resource Manager service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
@@ -310,11 +310,11 @@ module Gcloud
   #
   #   * +https://www.googleapis.com/auth/cloud-platform+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::ResourceManager::Manager
   #
-  # === Examples
+  # ### Examples
   #
   #   require "gcloud"
   #
@@ -343,7 +343,7 @@ module Gcloud
   # Creates a new object for connecting to the Search service.
   # Each call creates a new connection.
   #
-  # === Parameters
+  # ### Parameters
   #
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
@@ -356,11 +356,11 @@ module Gcloud
   #   * +https://www.googleapis.com/auth/cloudsearch+
   #   * +https://www.googleapis.com/auth/userinfo.email+
   #
-  # === Returns
+  # ### Returns
   #
   # Gcloud::Search::Project
   #
-  # === Examples
+  # ### Examples
   #
   #   require "gcloud"
   #

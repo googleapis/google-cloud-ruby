@@ -25,7 +25,7 @@ require "gcloud/datastore/dataset/query_results"
 module Gcloud
   module Datastore
     ##
-    # = Dataset
+    # # Dataset
     #
     # Dataset is the data saved in a project's Datastore.
     # Dataset is analogous to a database in relational database world.

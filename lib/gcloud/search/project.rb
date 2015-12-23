@@ -22,7 +22,7 @@ require "gcloud/search/errors"
 module Gcloud
   module Search
     ##
-    # = Project
+    # # Project
     #
     # Projects are top-level containers in Google Cloud Platform. They store
     # information about billing and authorized users, and they control access to

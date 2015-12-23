@@ -21,7 +21,7 @@ require "gcloud/pubsub/subscription"
 module Gcloud
   module Pubsub
     ##
-    # = Topic
+    # # Topic
     #
     # A named resource to which messages are published.
     #

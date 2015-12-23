@@ -18,7 +18,7 @@ require "gcloud/search/field_value"
 module Gcloud
   module Search
     ##
-    # = FieldValues
+    # # FieldValues
     #
     # The list of values for a field.
     #

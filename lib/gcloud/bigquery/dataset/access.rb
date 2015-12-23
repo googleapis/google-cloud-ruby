@@ -17,7 +17,7 @@ module Gcloud
   module Bigquery
     class Dataset
       ##
-      # = Dataset Access Control
+      # # Dataset Access Control
       #
       # Represents the Access rules for a {Dataset}.
       #
