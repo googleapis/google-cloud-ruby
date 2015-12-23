@@ -20,10 +20,11 @@ require "googleauth"
 
 module Gcloud
   ##
+  # @private
   # Represents the OAuth 2.0 signing logic.
   # This class is intended to be inherited by API-specific classes
   # which overrides the SCOPE constant.
-  class Credentials #:nodoc:
+  class Credentials
     TOKEN_CREDENTIAL_URI = "https://accounts.google.com/o/oauth2/token"
     AUDIENCE = "https://accounts.google.com/o/oauth2/token"
     SCOPE = []
