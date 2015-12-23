@@ -32,8 +32,8 @@ module Gcloud
   #   readable. (+String+ or +Hash+)
   # +scope::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scopes are:
@@ -86,7 +86,7 @@ module Gcloud
   # credential information to connect to the Cloud Search service, or if you are
   # running on Google Compute Engine this configuration is taken care of for
   # you. You can read more about the options for connecting in the
-  # {Authentication Guide}[link:AUTHENTICATION.md].
+  # [Authentication Guide](link:AUTHENTICATION.md).
   #
   # ## Managing Indexes
   #
@@ -135,7 +135,7 @@ module Gcloud
   #   #=> nil
   #   document.rank #=> nil
   #
-  # Add one or more fields to the document. (See {Adding document fields}[#module-Gcloud::Search-label-Adding+document+fields], below.)
+  # Add one or more fields to the document. (See [Adding document fields](#module-Gcloud::Search-label-Adding+document+fields), below.)
   #
   #   document.add "price", 24.95
   #
@@ -189,7 +189,7 @@ module Gcloud
   # Fields belong to documents and are the data that actually gets searched.
   # Each field has a FieldValues collection, which facilitates access to
   # FieldValue objects. Each FieldValue object will be saved as one of the
-  # {Cloud Search types}[https://cloud.google.com/search/documents_indexes#document_fields_field_names_and_multi-valued_fields].
+  # [Cloud Search types](https://cloud.google.com/search/documents_indexes#document_fields_field_names_and_multi-valued_fields).
   # The type will be inferred from the value when possible, or you can
   # explicitly specify it by passing a symbol with the +type+ option to
   # Document#add.
@@ -243,7 +243,7 @@ module Gcloud
   #   end
   #
   # By default, Result objects are sorted by document rank. For more information
-  # see the {REST API documentation for Document.rank}[https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank].
+  # see the [REST API documentation for Document.rank](https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank).
   #
   # You can specify how to sort results with the +order+ option:
   #

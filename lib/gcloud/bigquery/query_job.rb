@@ -53,8 +53,8 @@ module Gcloud
 
       ##
       # Checks if the query job looks for an existing result in the query cache.
-      # For more information, see {Query
-      # Caching}[https://cloud.google.com/bigquery/querying-data#querycaching].
+      # For more information, see [Query
+      # Caching](https://cloud.google.com/bigquery/querying-data#querycaching).
       def cache?
         val = config["query"]["useQueryCache"]
         return false if val.nil?

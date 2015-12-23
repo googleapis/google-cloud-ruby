@@ -55,8 +55,8 @@ module Gcloud
       end
 
       ##
-      # Checks if the destination format for the data is {newline-delimited
-      # JSON}[http://jsonlines.org/]. The default is +false+.
+      # Checks if the destination format for the data is [newline-delimited
+      # JSON](http://jsonlines.org/). The default is +false+.
       def json?
         val = config["extract"]["destinationFormat"]
         val == "NEWLINE_DELIMITED_JSON"
@@ -73,7 +73,7 @@ module Gcloud
 
       ##
       # Checks if the destination format for the data is
-      # {Avro}[http://avro.apache.org/]. The default is +false+.
+      # [Avro](http://avro.apache.org/). The default is +false+.
       def avro?
         val = config["extract"]["destinationFormat"]
         val == "AVRO"

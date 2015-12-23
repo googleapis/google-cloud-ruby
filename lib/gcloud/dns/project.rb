@@ -25,8 +25,8 @@ module Gcloud
     # # Project
     #
     # The project is a top level container for resources including Cloud DNS
-    # ManagedZones. Projects can be created only in the {Google Developers
-    # Console}[https://console.developers.google.com].
+    # ManagedZones. Projects can be created only in the [Google Developers
+    # Console](https://console.developers.google.com).
     #
     # @example
     #   require "gcloud"

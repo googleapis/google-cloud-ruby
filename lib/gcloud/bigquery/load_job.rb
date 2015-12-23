@@ -113,7 +113,7 @@ module Gcloud
 
       ##
       # Checks if the format of the source data is
-      # {newline-delimited JSON}[http://jsonlines.org/]. The default is +false+.
+      # [newline-delimited JSON](http://jsonlines.org/). The default is +false+.
       def json?
         val = config["load"]["sourceFormat"]
         val == "NEWLINE_DELIMITED_JSON"

@@ -88,7 +88,7 @@ module Gcloud
       #
       # The return value is a frozen (unmodifiable) array of hashes containing
       # the attributes specified for the Bucket resource field
-      # {cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
+      # [cors](https://cloud.google.com/storage/docs/json_api/v1/buckets#cors).
       #
       # This method also accepts a block for updating the bucket's CORS rules.
       # See {Bucket::Cors} for details.
@@ -138,8 +138,8 @@ module Gcloud
       # bucket.
       #
       # Accepts an array of hashes containing the attributes specified for the
-      # {resource description of
-      # cors}[https://cloud.google.com/storage/docs/json_api/v1/buckets#cors].
+      # [resource description of
+      # cors](https://cloud.google.com/storage/docs/json_api/v1/buckets#cors).
       #
       # @see https://cloud.google.com/storage/docs/cross-origin Cross-Origin
       #   Resource Sharing (CORS)
@@ -190,8 +190,8 @@ module Gcloud
       ##
       # Updates the logging object prefix. This prefix will be used to create
       # log object names for the bucket. It can be at most 900 characters and
-      # must be a {valid object
-      # name}[https://cloud.google.com/storage/docs/bucket-naming#objectnames].
+      # must be a [valid object
+      # name](https://cloud.google.com/storage/docs/bucket-naming#objectnames).
       # By default, the object prefix is the name
       # of the bucket for which the logs are enabled.
       #
@@ -210,16 +210,16 @@ module Gcloud
       end
 
       ##
-      # Whether {Object
-      # Versioning}[https://cloud.google.com/storage/docs/object-versioning] is
+      # Whether [Object
+      # Versioning](https://cloud.google.com/storage/docs/object-versioning) is
       # enabled for the bucket.
       def versioning?
         !@gapi["versioning"].nil? && @gapi["versioning"]["enabled"]
       end
 
       ##
-      # Updates whether {Object
-      # Versioning}[https://cloud.google.com/storage/docs/object-versioning] is
+      # Updates whether [Object
+      # Versioning](https://cloud.google.com/storage/docs/object-versioning) is
       # enabled for the bucket.
       #
       # @return [Boolean]
@@ -370,8 +370,8 @@ module Gcloud
       #   than requested. The default value of this parameter is 1,000 items.
       # @param [Boolean] versions If +true+, lists all versions of an object as
       #   distinct results. The default is +false+. For more information, see
-      #   {Object Versioning
-      #   }[https://cloud.google.com/storage/docs/object-versioning].
+      #   [Object Versioning
+      #   ](https://cloud.google.com/storage/docs/object-versioning).
       #
       # @return [Array<Gcloud::Storage::File>] (See
       #   {Gcloud::Storage::File::List})
@@ -481,34 +481,34 @@ module Gcloud
       #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
       #     access, and allUsers get READER access.
       # @param [String] cache_control The
-      #   {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      #   [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2)
       #   response header to be returned when the file is downloaded.
       # @param [String] content_disposition The
-      #   {Content-Disposition}[https://tools.ietf.org/html/rfc6266]
+      #   [Content-Disposition](https://tools.ietf.org/html/rfc6266)
       #   response header to be returned when the file is downloaded.
-      # @param [String] content_encoding The {Content-Encoding
-      #   }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] response header
+      # @param [String] content_encoding The [Content-Encoding
+      #   ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) response header
       #   to be returned when the file is downloaded.
       # @param [String] content_language The
-      #   {Content-Language}[http://tools.ietf.org/html/bcp47] response
+      #   [Content-Language](http://tools.ietf.org/html/bcp47) response
       #   header to be returned when the file is downloaded.
       # @param [String] content_type The
-      #   {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17]
+      #   [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17)
       #   response header to be returned when the file is downloaded.
       # @param [Integer] chunk_size The number of bytes per chunk in a resumable
       #   upload. Must be divisible by 256KB. If it is not divisible by 265KB
       #   then it will be lowered to the nearest acceptable value.
       # @param [String] crc32c The CRC32c checksum of the file data, as
-      #   described in {RFC 4960, Appendix
-      #   B}[http://tools.ietf.org/html/rfc4960#appendix-B].
+      #   described in [RFC 4960, Appendix
+      #   B](http://tools.ietf.org/html/rfc4960#appendix-B).
       #   If provided, Cloud Storage will only create the file if the value
       #   matches the value calculated by the service. See
-      #   {Validation}[https://cloud.google.com/storage/docs/hashes-etags]
+      #   [Validation](https://cloud.google.com/storage/docs/hashes-etags)
       #   for more information.
       # @param [String] md5 The MD5 hash of the file data. If provided, Cloud
       #   Storage will only create the file if the value matches the value
       #   calculated by the service. See
-      #   {Validation}[https://cloud.google.com/storage/docs/hashes-etags] for
+      #   [Validation](https://cloud.google.com/storage/docs/hashes-etags) for
       #   more information.
       # @param [Hash] metadata A hash of custom, user-provided web-safe keys and
       #   arbitrary string values that will returned with requests for the file
@@ -563,14 +563,14 @@ module Gcloud
       # ##### Handling broken pipe errors
       #
       # To avoid broken pipe (+Errno::EPIPE+) errors when uploading, add the
-      # {httpclient}[https://rubygems.org/gems/httpclient] gem to your project,
+      # [httpclient](https://rubygems.org/gems/httpclient) gem to your project,
       # and the configuration shown below. These lines must execute after you
       # require gcloud but before you make your first gcloud connection. The
-      # first statement configures {Faraday}[https://rubygems.org/gems/faraday]
+      # first statement configures [Faraday](https://rubygems.org/gems/faraday)
       # to use httpclient. The second statement, which should only be added if
       # you are using a version of Faraday at or above 0.9.2, is a workaround
-      # for {this gzip
-      # issue}[https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367].
+      # for [this gzip
+      # issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367).
       #
       #   require "gcloud"
       #

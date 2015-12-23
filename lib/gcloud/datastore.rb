@@ -35,8 +35,8 @@ module Gcloud
   #   readable. (+String+ or +Hash+)
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scopes are:
@@ -96,11 +96,11 @@ module Gcloud
   #   dataset.save entity
   #
   # You can learn more about various options for connection on the
-  # {Authentication Guide}[link:AUTHENTICATION.md].
+  # [Authentication Guide](link:AUTHENTICATION.md).
   #
   # To learn more about Datastore, read the
-  # {Google Cloud Datastore Concepts Overview
-  # }[https://cloud.google.com/datastore/docs/concepts/overview].
+  # [Google Cloud Datastore Concepts Overview
+  # ](https://cloud.google.com/datastore/docs/concepts/overview).
   #
   # ## Retrieving Records
   #

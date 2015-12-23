@@ -120,8 +120,8 @@ module Gcloud
 
       ##
       # The combined Project ID, Dataset ID, and Table ID for this table, in the
-      # format specified by the {Query
-      # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+      # format specified by the [Query
+      # Reference](https://cloud.google.com/bigquery/query-reference#from):
       # +project_name:datasetId.tableId+. To use this value in queries see
       # {#query_id}.
       #
@@ -133,8 +133,8 @@ module Gcloud
 
       ##
       # The value returned by {#id}, wrapped in square brackets if the Project
-      # ID contains dashes, as specified by the {Query
-      # Reference}[https://cloud.google.com/bigquery/query-reference#from].
+      # ID contains dashes, as specified by the [Query
+      # Reference](https://cloud.google.com/bigquery/query-reference#from).
       # Useful in queries.
       #
       # @example
@@ -294,8 +294,8 @@ module Gcloud
 
       ##
       # Returns the table's schema as hash containing the keys and values
-      # returned by the Google Cloud BigQuery {Rest API
-      # }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource].
+      # returned by the Google Cloud BigQuery [Rest API
+      # ](https://cloud.google.com/bigquery/docs/reference/v2/tables#resource).
       # This method can also be used to set, replace, or add to the schema by
       # passing a block. See {Table::Schema} for available methods. To set the
       # schema by passing a hash instead, use {#schema=}.
@@ -341,8 +341,8 @@ module Gcloud
       # To update the schema using a block instead, use #schema.
       #
       # @param [Hash] new_schema A hash containing keys and values as specified
-      #   by the Google Cloud BigQuery {Rest API
-      #   }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource]
+      #   by the Google Cloud BigQuery [Rest API
+      #   ](https://cloud.google.com/bigquery/docs/reference/v2/tables#resource)
       #   .
       #
       # @example
@@ -437,8 +437,8 @@ module Gcloud
       ##
       # Copies the data from the table to another table.
       # The destination table argument can also be a string identifier as
-      # specified by the {Query
-      # Reference}[https://cloud.google.com/bigquery/query-reference#from]:
+      # specified by the [Query
+      # Reference](https://cloud.google.com/bigquery/query-reference#from):
       # +project_name:datasetId.tableId+. This is useful for referencing tables
       # in other projects and datasets.
       #
@@ -548,8 +548,8 @@ module Gcloud
       #
       #   The following values are supported:
       #   * +csv+ - CSV
-      #   * +json+ - {Newline-delimited JSON}[http://jsonlines.org/]
-      #   * +avro+ - {Avro}[http://avro.apache.org/]
+      #   * +json+ - [Newline-delimited JSON](http://jsonlines.org/)
+      #   * +avro+ - [Avro](http://avro.apache.org/)
       # @param [String] compression The compression type to use for exported
       #   files. Possible values include +GZIP+ and +NONE+. The default value is
       #   +NONE+.
@@ -590,8 +590,8 @@ module Gcloud
       ##
       # Loads data into the table. You can pass a gcloud storage file path or
       # a gcloud storage file instance. Or, you can upload a file directly.
-      # See {Loading Data with a POST Request}[
-      # https://cloud.google.com/bigquery/loading-data-post-request#multipart].
+      # See [Loading Data with a POST Request](
+      # https://cloud.google.com/bigquery/loading-data-post-request#multipart).
       #
       # @param [File, Gcloud::Storage::File, String] file A file or the URI of a
       #   Google Cloud Storage file containing data to load into the table.
@@ -600,8 +600,8 @@ module Gcloud
       #
       #   The following values are supported:
       #   * +csv+ - CSV
-      #   * +json+ - {Newline-delimited JSON}[http://jsonlines.org/]
-      #   * +avro+ - {Avro}[http://avro.apache.org/]
+      #   * +json+ - [Newline-delimited JSON](http://jsonlines.org/)
+      #   * +avro+ - [Avro](http://avro.apache.org/)
       #   * +datastore_backup+ - Cloud Datastore backup
       # @param [String] create Specifies whether the job is allowed to create
       #   new tables.
@@ -711,14 +711,14 @@ module Gcloud
       #
       # You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
       # upload large files. To avoid this problem, add the
-      # {httpclient}[https://rubygems.org/gems/httpclient] gem to your project,
+      # [httpclient](https://rubygems.org/gems/httpclient) gem to your project,
       # and the line (or lines) of configuration shown below. These lines must
       # execute after you require gcloud but before you make your first gcloud
       # connection. The first statement configures
-      # {Faraday}[https://rubygems.org/gems/faraday] to use httpclient. The
+      # [Faraday](https://rubygems.org/gems/faraday) to use httpclient. The
       # second statement, which should only be added if you are using a version
-      # of Faraday at or above 0.9.2, is a workaround for {this gzip
-      # issue}[https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367].
+      # of Faraday at or above 0.9.2, is a workaround for [this gzip
+      # issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367).
       #
       #   require "gcloud"
       #

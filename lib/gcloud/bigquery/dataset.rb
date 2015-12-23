@@ -247,8 +247,8 @@ module Gcloud
 
       ##
       # Sets the access rules for a Dataset using the Google Cloud Datastore API
-      # data structure of an array of hashes. See {BigQuery Access
-      # Control}[https://cloud.google.com/bigquery/access-control] for more
+      # data structure of an array of hashes. See [BigQuery Access
+      # Control](https://cloud.google.com/bigquery/access-control) for more
       # information.
       #
       # This method is provided for advanced usage of managing the access rules.
@@ -308,8 +308,8 @@ module Gcloud
 
       ##
       # Creates a new table. If you are adapting existing code that was written
-      # for the {Rest API
-      # }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource],
+      # for the [Rest API
+      # ](https://cloud.google.com/bigquery/docs/reference/v2/tables#resource),
       # you can pass the table's schema as a hash (see example.)
       #
       # @param [String] table_id The ID of the table. The ID must contain only
@@ -319,8 +319,8 @@ module Gcloud
       # @param [String] description A user-friendly description of the table.
       # @param [Hash] schema A hash specifying fields and data types for the
       #   table. A block may be passed instead (see examples.) For the format of
-      #   this hash, see the {Tables resource
-      #   }[https://cloud.google.com/bigquery/docs/reference/v2/tables#resource]
+      #   this hash, see the [Tables resource
+      #   ](https://cloud.google.com/bigquery/docs/reference/v2/tables#resource)
       #   .
       #
       # @return [Gcloud::Bigquery::Table]
@@ -530,14 +530,14 @@ module Gcloud
       end
 
       ##
-      # Queries data using the {asynchronous
-      # method}[https://cloud.google.com/bigquery/querying-data].
+      # Queries data using the [asynchronous
+      # method](https://cloud.google.com/bigquery/querying-data).
       #
       # Sets the current dataset as the default dataset in the query. Useful for
       # using unqualified table names.
       #
-      # @param [String] query A query string, following the BigQuery {query
-      #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
+      # @param [String] query A query string, following the BigQuery [query
+      #   syntax](https://cloud.google.com/bigquery/query-reference), of the
       #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]".
       # @param [String] priority Specifies a priority for the query. Possible
@@ -546,8 +546,8 @@ module Gcloud
       # @param [Boolean] cache Whether to look for the result in the query
       #   cache. The query cache is a best-effort cache that will be flushed
       #   whenever tables in the query are modified. The default value is true.
-      #   For more information, see {query
-      #   caching}[https://developers.google.com/bigquery/querying-data].
+      #   For more information, see [query
+      #   caching](https://developers.google.com/bigquery/querying-data).
       # @param [Table] table The destination table where the query results
       #   should be stored. If not present, a new table will be created to store
       #   the results.
@@ -608,14 +608,14 @@ module Gcloud
       end
 
       ##
-      # Queries data using the {synchronous
-      # method}[https://cloud.google.com/bigquery/querying-data].
+      # Queries data using the [synchronous
+      # method](https://cloud.google.com/bigquery/querying-data).
       #
       # Sets the current dataset as the default dataset in the query. Useful for
       # using unqualified table names.
       #
-      # @param [String] query A query string, following the BigQuery {query
-      #   syntax}[https://cloud.google.com/bigquery/query-reference], of the
+      # @param [String] query A query string, following the BigQuery [query
+      #   syntax](https://cloud.google.com/bigquery/query-reference), of the
       #   query to execute. Example: "SELECT count(f1) FROM
       #   [myProjectId:myDatasetId.myTableId]".
       # @param [Integer] max The maximum number of rows of data to return per
@@ -637,8 +637,8 @@ module Gcloud
       # @param [Boolean] cache Whether to look for the result in the query
       #   cache. The query cache is a best-effort cache that will be flushed
       #   whenever tables in the query are modified. The default value is true.
-      #   For more information, see {query
-      #   caching}[https://developers.google.com/bigquery/querying-data].
+      #   For more information, see [query
+      #   caching](https://developers.google.com/bigquery/querying-data).
       #
       # @return [Gcloud::Bigquery::QueryData]
       #

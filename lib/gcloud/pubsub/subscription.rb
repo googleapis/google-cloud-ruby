@@ -494,8 +494,8 @@ module Gcloud
       end
 
       ##
-      # Tests the specified permissions against the {Cloud
-      # IAM}[https://cloud.google.com/iam/] access control policy.
+      # Tests the specified permissions against the [Cloud
+      # IAM](https://cloud.google.com/iam/) access control policy.
       #
       # @see https://cloud.google.com/iam/docs/managing-policies Managing
       #   Policies
