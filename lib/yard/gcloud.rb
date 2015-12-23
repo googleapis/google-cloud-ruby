@@ -18,7 +18,8 @@ module YARD
           provider = markup_class(:markdown)
           # Add GFM using Kramdown...
           if provider.to_s == "Kramdown::Document"
-            provider.new(text, input: "GFM", syntax_highlighter: "rouge",
+            provider.new(text, input: "GFM", hard_wrap: false,
+                               syntax_highlighter: "rouge",
                                syntax_highlighter_opts: {css_class: "ruby"}).to_html
           else
             # Call the original method...
