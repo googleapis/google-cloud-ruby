@@ -56,7 +56,7 @@ module Gcloud
 
       ##
       # The number of header rows at the top of a CSV file to skip. The default
-      # value is \`0\`.
+      # value is `0`.
       def skip_leading_rows
         val = config["load"]["skipLeadingRows"]
         val = 0 if val.nil?
