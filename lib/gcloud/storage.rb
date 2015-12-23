@@ -91,7 +91,7 @@ module Gcloud
   # ```
   #
   # You can learn more about various options for connection on the
-  # [Authentication Guide](link:AUTHENTICATION.md).
+  # [Authentication Guide](../AUTHENTICATION).
   #
   # To learn more about Cloud Storage, read the
   # [Google Cloud Storage Overview

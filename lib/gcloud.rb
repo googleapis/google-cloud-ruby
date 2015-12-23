@@ -28,7 +28,7 @@ require "gcloud/version"
 # is taken care of for you.
 #
 # You can learn more about various options for connection on the
-# [Authentication Guide](AUTHENTICATION.md).
+# [Authentication Guide](AUTHENTICATION).
 #
 module Gcloud
   ##
