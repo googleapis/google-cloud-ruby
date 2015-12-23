@@ -110,7 +110,7 @@ module Gcloud
 
         ##
         # Add reader access to a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def add_reader_special group
           add_access_role_scope_value :reader, :special, group
         end
@@ -146,7 +146,7 @@ module Gcloud
 
         ##
         # Add writer access to a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def add_writer_special group
           add_access_role_scope_value :writer, :special, group
         end
@@ -182,7 +182,7 @@ module Gcloud
 
         ##
         # Add owner access to a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def add_owner_special group
           add_access_role_scope_value :owner, :special, group
         end
@@ -218,7 +218,7 @@ module Gcloud
 
         ##
         # Remove reader access from a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def remove_reader_special group
           remove_access_role_scope_value :reader, :special, group
         end
@@ -254,7 +254,7 @@ module Gcloud
 
         ##
         # Remove writer access from a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def remove_writer_special group
           remove_access_role_scope_value :writer, :special, group
         end
@@ -290,7 +290,7 @@ module Gcloud
 
         ##
         # Remove owner access from a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def remove_owner_special group
           remove_access_role_scope_value :owner, :special, group
         end
@@ -326,7 +326,7 @@ module Gcloud
 
         ##
         # Checks reader access for a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def reader_special? group
           lookup_access_role_scope_value :reader, :special, group
         end
@@ -362,7 +362,7 @@ module Gcloud
 
         ##
         # Checks writer access for a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def writer_special? group
           lookup_access_role_scope_value :writer, :special, group
         end
@@ -398,7 +398,7 @@ module Gcloud
 
         ##
         # Checks owner access for a special group.
-        # Accepted values are +owners+, +writers+, +readers+, and +all+.
+        # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def owner_special? group
           lookup_access_role_scope_value :owner, :special, group
         end

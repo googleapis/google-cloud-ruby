@@ -322,7 +322,7 @@ module Gcloud
       end
 
       ##
-      # Extracts at least +tbl+ group, and possibly +dts+ and +prj+ groups,
+      # Extracts at least `tbl` group, and possibly `dts` and `prj` groups,
       # from strings in the formats: "my_table", "my_dataset.my_table", or
       # "my-project:my_dataset.my_table". Then merges project_id and
       # dataset_id from the default table if they are missing.

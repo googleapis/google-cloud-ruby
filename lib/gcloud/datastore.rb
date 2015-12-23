@@ -28,21 +28,21 @@ module Gcloud
   #
   # ### Parameters
   #
-  # +project+::
-  #   Dataset identifier for the Datastore you are connecting to. (+String+)
-  # +keyfile+::
+  # `project`::
+  #   Dataset identifier for the Datastore you are connecting to. (`String`)
+  # `keyfile`::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
-  #   readable. (+String+ or +Hash+)
-  # +scope+::
+  #   readable. (`String` or `Hash`)
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scopes are:
   #
-  #   * +https://www.googleapis.com/auth/datastore+
-  #   * +https://www.googleapis.com/auth/userinfo.email+
+  #   * `https://www.googleapis.com/auth/datastore`
+  #   * `https://www.googleapis.com/auth/userinfo.email`
   #
   # ### Returns
   #

@@ -113,7 +113,7 @@ module Gcloud
       # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
       #
       # No more than 256 labels can be associated with a given resource.
-      # (+Hash+)
+      # (`Hash`)
       #
       # @example Labels are read-only and cannot be changed:
       #   require "gcloud"
@@ -156,7 +156,7 @@ module Gcloud
       # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
       #
       # No more than 256 labels can be associated with a given resource.
-      # (+Hash+)
+      # (`Hash`)
       #
       # @example
       #   require "gcloud"
@@ -190,13 +190,13 @@ module Gcloud
       # The project lifecycle state.
       #
       # Possible values are:
-      # * +ACTIVE+ - The normal and active state.
-      # * +LIFECYCLE_STATE_UNSPECIFIED+ - Unspecified state. This is only
+      # * `ACTIVE` - The normal and active state.
+      # * `LIFECYCLE_STATE_UNSPECIFIED` - Unspecified state. This is only
       #   used/useful for distinguishing unset values.
-      # * +DELETE_REQUESTED+ - The project has been marked for deletion by the
+      # * `DELETE_REQUESTED` - The project has been marked for deletion by the
       #   user (by invoking DeleteProject) or by the system (Google Cloud
       #   Platform). This can generally be reversed by invoking UndeleteProject.
-      # * +DELETE_IN_PROGRESS+ - The process of deleting the project has begun.
+      # * `DELETE_IN_PROGRESS` - The process of deleting the project has begun.
       #   Reversing the deletion is no longer possible.
       #
       def state
@@ -204,28 +204,28 @@ module Gcloud
       end
 
       ##
-      # Checks if the state is +ACTIVE+.
+      # Checks if the state is `ACTIVE`.
       def active?
         return false if state.nil?
         "ACTIVE".casecmp(state).zero?
       end
 
       ##
-      # Checks if the state is +LIFECYCLE_STATE_UNSPECIFIED+.
+      # Checks if the state is `LIFECYCLE_STATE_UNSPECIFIED`.
       def unspecified?
         return false if state.nil?
         "LIFECYCLE_STATE_UNSPECIFIED".casecmp(state).zero?
       end
 
       ##
-      # Checks if the state is +DELETE_REQUESTED+.
+      # Checks if the state is `DELETE_REQUESTED`.
       def delete_requested?
         return false if state.nil?
         "DELETE_REQUESTED".casecmp(state).zero?
       end
 
       ##
-      # Checks if the state is +DELETE_IN_PROGRESS+.
+      # Checks if the state is `DELETE_IN_PROGRESS`.
       def delete_in_progress?
         return false if state.nil?
         "DELETE_IN_PROGRESS".casecmp(state).zero?
@@ -283,10 +283,10 @@ module Gcloud
       # if the following criteria are met:
       #
       # * The project does not have a billing account associated with it.
-      # * The project has a lifecycle state of +ACTIVE+.
-      # * This method changes the project's lifecycle state from +ACTIVE+ to
-      #   +DELETE_REQUESTED+. The deletion starts at an unspecified time, at
-      #   which point the lifecycle state changes to +DELETE_IN_PROGRESS+.
+      # * The project has a lifecycle state of `ACTIVE`.
+      # * This method changes the project's lifecycle state from `ACTIVE` to
+      #   `DELETE_REQUESTED`. The deletion starts at an unspecified time, at
+      #   which point the lifecycle state changes to `DELETE_IN_PROGRESS`.
       #
       # Until the deletion completes, you can check the lifecycle state by
       # calling #reload!, or by retrieving the project with Manager#project. The
@@ -321,8 +321,8 @@ module Gcloud
 
       ##
       # Restores the project. You can only use this method for a project that
-      # has a lifecycle state of +DELETE_REQUESTED+. After deletion starts, as
-      # indicated by a lifecycle state of +DELETE_IN_PROGRESS+, the project
+      # has a lifecycle state of `DELETE_REQUESTED`. After deletion starts, as
+      # indicated by a lifecycle state of `DELETE_IN_PROGRESS`, the project
       # cannot be restored.
       #
       # The caller must have modify permissions for this project.
@@ -364,9 +364,9 @@ module Gcloud
       # @see https://cloud.google.com/iam/docs/managing-policies Managing
       #   Policies
       #
-      # @param [Boolean] force Force load the latest policy when +true+.
+      # @param [Boolean] force Force load the latest policy when `true`.
       #   Otherwise the policy will be memoized to reduce the number of API
-      #   calls made. The default is +false+.
+      #   calls made. The default is `false`.
       #
       # @return [Hash] See description
       #
@@ -382,7 +382,7 @@ module Gcloud
       #   puts policy["version"]
       #   puts policy["etag"]
       #
-      # @example Use the +force+ option to retrieve the latest policy:
+      # @example Use the `force` option to retrieve the latest policy:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -453,8 +453,8 @@ module Gcloud
       #   Policies
       #
       # @param [String, Array<String>] permissions The set of permissions to
-      #   check access for. Permissions with wildcards (such as +*+ or
-      #   +storage.*+) are not allowed.
+      #   check access for. Permissions with wildcards (such as `*` or
+      #   `storage.*`) are not allowed.
       #
       # @return [Array<String>] The permissions that have access
       #

@@ -19,26 +19,26 @@ require "gcloud/dns/project"
 # Google Cloud DNS
 module Gcloud
   ##
-  # Creates a new +Project+ instance connected to the DNS service.
+  # Creates a new `Project` instance connected to the DNS service.
   # Each call creates a new connection.
   #
   # ### Parameters
   #
-  # +project+::
+  # `project`::
   #   Identifier for a DNS project. If not present, the default project for
-  #   the credentials is used. (+String+)
-  # +keyfile+::
+  #   the credentials is used. (`String`)
+  # `keyfile`::
   #   Keyfile downloaded from Google Cloud. If file path the file must be
-  #   readable. (+String+ or +Hash+)
-  # +scope+::
+  #   readable. (`String` or `Hash`)
+  # `scope`::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
   #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
-  #   or +Array+)
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
+  #   or `Array`)
   #
   #   The default scope is:
   #
-  #   * +https://www.googleapis.com/auth/ndev.clouddns.readwrite+
+  #   * `https://www.googleapis.com/auth/ndev.clouddns.readwrite`
   #
   # ### Returns
   #
@@ -141,7 +141,7 @@ module Gcloud
   # Note that Record#data returns an array. The Cloud DNS service only allows
   # the zone to have one Record instance for each name and type combination. It
   # supports multiple "resource records" (in this case, the four nameserver
-  # addresses) via this +data+ collection.
+  # addresses) via this `data` collection.
   #
   # ## Managing Records
   #
@@ -164,7 +164,7 @@ module Gcloud
   # modify this behavior, of course. See Zone#update for details.
   #
   # You can retrieve records by name and type. The name argument can be a
-  # subdomain (e.g., +www+) fragment for convenience, but notice that the
+  # subdomain (e.g., `www`) fragment for convenience, but notice that the
   # retrieved record's domain name is always fully-qualified.
   #
   #   require "gcloud"
@@ -175,7 +175,7 @@ module Gcloud
   #   records = zone.records "www", "A"
   #   records.first.name #=> "www.example.com."
   #
-  # You can use Zone#replace to update the +ttl+ and +data+ for a record.
+  # You can use Zone#replace to update the `ttl` and `data` for a record.
   #
   #   require "gcloud"
   #
@@ -184,7 +184,7 @@ module Gcloud
   #   zone = dns.zone "example-com"
   #   change = zone.replace "www", "A", 86400, ["5.6.7.8"]
   #
-  # Or, you can use Zone#modify to update just the +ttl+ or +data+, without the
+  # Or, you can use Zone#modify to update just the `ttl` or `data`, without the
   # risk of inadvertently changing values that you wish to leave unchanged.
   #
   #   require "gcloud"
@@ -255,7 +255,7 @@ module Gcloud
   #
   # You can import from a zone file. Because the Cloud DNS service only allows
   # the zone to have one Record instance for each name and type combination,
-  # lines may be merged as needed into records with multiple +data+ values.
+  # lines may be merged as needed into records with multiple `data` values.
   #
   #   require "gcloud"
   #

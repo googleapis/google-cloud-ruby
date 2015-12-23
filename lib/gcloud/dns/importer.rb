@@ -29,10 +29,10 @@ module Gcloud
     # file records to a Zone.
     #
     # Because the Google Cloud DNS API only accepts a single resource record for
-    # each +name+ and +type+ combination (with multiple +data+ elements), the
+    # each `name` and `type` combination (with multiple `data` elements), the
     # zone file's records are merged as necessary. During this merge, the lowest
-    # +ttl+ of the merged records is used. If none of the merged records have a
-    # +ttl+ value, the zone file's global TTL is used for the record.
+    # `ttl` of the merged records is used. If none of the merged records have a
+    # `ttl` value, the zone file's global TTL is used for the record.
     #
     # The following record types are supported: A, AAAA, CNAME, MX, NAPTR, NS,
     # PTR, SOA, SPF, SRV, and TXT.
