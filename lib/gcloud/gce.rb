@@ -17,8 +17,9 @@ require "faraday"
 
 module Gcloud
   ##
+  # @private
   # Represents the Google Compute Engine environment.
-  module GCE #:nodoc:
+  module GCE
     CHECK_URI = "http://169.254.169.254"
     PROJECT_URI = "#{CHECK_URI}/computeMetadata/v1/project/project-id"
 

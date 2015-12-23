@@ -44,17 +44,17 @@ module Gcloud
       #
       class Schema
         # @private
-        MODES = %w( NULLABLE REQUIRED REPEATED ) #:nodoc:
+        MODES = %w( NULLABLE REQUIRED REPEATED )
 
         # @private
-        TYPES = %w( STRING INTEGER FLOAT BOOLEAN TIMESTAMP RECORD ) #:nodoc:
+        TYPES = %w( STRING INTEGER FLOAT BOOLEAN TIMESTAMP RECORD )
 
         # @private
-        attr_reader :fields #:nodoc:
+        attr_reader :fields
 
         ##
         # @private  Initializes a new schema object with an existing schema.
-        def initialize schema = nil, nested = false #:nodoc:
+        def initialize schema = nil, nested = false
           fields = (schema && schema["fields"]) || []
           @original_fields = fields.dup
           @fields = fields.dup
