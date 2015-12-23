@@ -410,7 +410,7 @@ module Gcloud
       # calls to the Pub/Sub service.
       #
       # @param [Boolean] force Force the latest policy to be retrieved from the
-      #   Pub/Sub service when +true. Otherwise the policy will be memoized to
+      #   Pub/Sub service when `true`. Otherwise the policy will be memoized to
       #   reduce the number of API calls made to the Pub/Sub service. The
       #   default is `false`.
       #
