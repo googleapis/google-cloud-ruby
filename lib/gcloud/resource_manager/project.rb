@@ -349,7 +349,7 @@ module Gcloud
       end
 
       ##
-      # Gets the {Cloud IAM}[https://cloud.google.com/iam/] access control
+      # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
       # policy. Returns a hash that conforms to the following structure:
       #
       #   {
@@ -403,7 +403,7 @@ module Gcloud
       end
 
       ##
-      # Sets the {Cloud IAM}[https://cloud.google.com/iam/] access control
+      # Sets the [Cloud IAM](https://cloud.google.com/iam/) access control
       # policy.
       #
       # @see https://cloud.google.com/iam/docs/managing-policies Managing
@@ -446,8 +446,8 @@ module Gcloud
       end
 
       ##
-      # Tests the specified permissions against the {Cloud
-      # IAM}[https://cloud.google.com/iam/] access control policy.
+      # Tests the specified permissions against the [Cloud
+      # IAM](https://cloud.google.com/iam/) access control policy.
       #
       # @see https://cloud.google.com/iam/docs/managing-policies Managing
       #   Policies

@@ -23,7 +23,7 @@ module Gcloud
     # # File
     #
     # Represents a File
-    # ({Object}[https://cloud.google.com/storage/docs/json_api/v1/objects]) that
+    # ([Object](https://cloud.google.com/storage/docs/json_api/v1/objects)) that
     # belongs to a {Bucket}. Files (Objects) are
     # the individual pieces of data that you store in Google Cloud Storage. A
     # file can be up to 5 TB in size. Files have two components:
@@ -143,7 +143,7 @@ module Gcloud
 
       ##
       # The CRC32c checksum of the data, as described in
-      # {RFC 4960, Appendix B}[http://tools.ietf.org/html/rfc4960#appendix-B].
+      # [RFC 4960, Appendix B](http://tools.ietf.org/html/rfc4960#appendix-B).
       # Encoded using base64 in big-endian byte order.
       def crc32c
         @gapi["crc32c"]
@@ -156,7 +156,7 @@ module Gcloud
       end
 
       ##
-      # The {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      # The [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2)
       # directive for the file data.
       def cache_control
         @gapi["cacheControl"]
@@ -164,56 +164,56 @@ module Gcloud
 
       ##
       # Updates the
-      # {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      # [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2)
       # directive for the file data.
       def cache_control= cache_control
         patch_gapi! cache_control: cache_control
       end
 
       ##
-      # The {Content-Disposition}[https://tools.ietf.org/html/rfc6266] of the
+      # The [Content-Disposition](https://tools.ietf.org/html/rfc6266) of the
       # file data.
       def content_disposition
         @gapi["contentDisposition"]
       end
 
       ##
-      # Updates the {Content-Disposition}[https://tools.ietf.org/html/rfc6266]
+      # Updates the [Content-Disposition](https://tools.ietf.org/html/rfc6266)
       # of the file data.
       def content_disposition= content_disposition
         patch_gapi! content_disposition: content_disposition
       end
 
       ##
-      # The {Content-Encoding
-      # }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] of the file data.
+      # The [Content-Encoding
+      # ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) of the file data.
       def content_encoding
         @gapi["contentEncoding"]
       end
 
       ##
-      # Updates the {Content-Encoding
-      # }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] of the file data.
+      # Updates the [Content-Encoding
+      # ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) of the file data.
       def content_encoding= content_encoding
         patch_gapi! content_encoding: content_encoding
       end
 
       ##
-      # The {Content-Language}[http://tools.ietf.org/html/bcp47] of the file
+      # The [Content-Language](http://tools.ietf.org/html/bcp47) of the file
       # data.
       def content_language
         @gapi["contentLanguage"]
       end
 
       ##
-      # Updates the {Content-Language}[http://tools.ietf.org/html/bcp47] of the
+      # Updates the [Content-Language](http://tools.ietf.org/html/bcp47) of the
       # file data.
       def content_language= content_language
         patch_gapi! content_language: content_language
       end
 
       ##
-      # The {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17] of
+      # The [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17) of
       # the file data.
       def content_type
         @gapi["contentType"]
@@ -221,7 +221,7 @@ module Gcloud
 
       ##
       # Updates the
-      # {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17] of the
+      # [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17) of the
       # file data.
       def content_type= content_type
         patch_gapi! content_type: content_type
@@ -501,8 +501,8 @@ module Gcloud
       #
       # A SignedUrlUnavailable is raised if the service account credentials are
       # missing. Service account credentials are acquired by following the steps
-      # in {Service Account Authentication}[
-      # https://cloud.google.com/storage/docs/authentication#service_accounts].
+      # in [Service Account Authentication](
+      # https://cloud.google.com/storage/docs/authentication#service_accounts).
       #
       # @see https://cloud.google.com/storage/docs/access-control#Signed-URLs
       #   Access Control Signed URLs guide

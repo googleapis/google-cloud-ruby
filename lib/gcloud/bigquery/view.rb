@@ -298,8 +298,8 @@ module Gcloud
       # @param [Boolean] cache Whether to look for the result in the query
       #   cache. The query cache is a best-effort cache that will be flushed
       #   whenever tables in the query are modified. The default value is true.
-      #   For more information, see {query
-      #   caching}[https://developers.google.com/bigquery/querying-data].
+      #   For more information, see [query
+      #   caching](https://developers.google.com/bigquery/querying-data).
       # @param [Boolean] dryrun If set to +true+, BigQuery doesn't run the job.
       #   Instead, if the query is valid, BigQuery returns statistics about the
       #   job such as how many bytes would be processed. If the query is

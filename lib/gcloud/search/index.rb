@@ -401,7 +401,7 @@ module Gcloud
       # query.
       #
       # By default, Result objects are sorted by document rank. For more information
-      # see the {REST API documentation for Document.rank}[https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank].
+      # see the [REST API documentation for Document.rank](https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank).
       #
       # You can specify how to sort results with the +order+ option. In the
       # example below, the <code>-</code> character before +avg_review+ means
@@ -415,8 +415,8 @@ module Gcloud
       #
       # @param [String] query The query string in search query syntax. If the
       #   query is +nil+ or empty, all documents are returned. For more
-      #   information see {Query
-      #   Strings}[https://cloud.google.com/search/query].
+      #   information see [Query
+      #   Strings](https://cloud.google.com/search/query).
       # @param [Hash] expressions Customized expressions used in +order+ or
       #   +fields+. The expression can contain fields in Document, the built-in
       #   fields ( +rank+, the document +rank+, and +score+ if scoring is

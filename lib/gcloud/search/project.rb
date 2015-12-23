@@ -27,8 +27,8 @@ module Gcloud
     # Projects are top-level containers in Google Cloud Platform. They store
     # information about billing and authorized users, and they control access to
     # Google Cloud Search resources. Each project has a friendly name and a
-    # unique ID. Projects can be created only in the {Google Developers
-    # Console}[https://console.developers.google.com]. See {Gcloud#search}.
+    # unique ID. Projects can be created only in the [Google Developers
+    # Console](https://console.developers.google.com). See {Gcloud#search}.
     #
     # @example
     #   require "gcloud"

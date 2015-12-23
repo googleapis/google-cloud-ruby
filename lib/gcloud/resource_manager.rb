@@ -29,8 +29,8 @@ module Gcloud
   #   readable. (+String+ or +Hash+)
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scope is:
@@ -68,8 +68,8 @@ module Gcloud
   #
   # The Resource Manager API provides methods that you can use to
   # programmatically manage your projects in the Google Cloud Platform. You may
-  # be familiar with managing projects in the {Developers
-  # Console}[https://developers.google.com/console/help/new/]. With this API you
+  # be familiar with managing projects in the [Developers
+  # Console](https://developers.google.com/console/help/new/). With this API you
   # can do the following:
   #
   # * Get a list of all projects associated with an account
@@ -88,17 +88,17 @@ module Gcloud
   # Google Cloud sales team if you are interested in access.) Read-only methods
   # such as ResourceManager::Manager#projects and
   # ResourceManager::Manager#project are accessible to any user who enables the
-  # Resource Manager API in the {Developers
-  # Console}[https://console.developers.google.com].
+  # Resource Manager API in the [Developers
+  # Console](https://console.developers.google.com).
   #
   # ## Authentication
   #
-  # The Resource Manager API currently requires authentication of a {User
-  # Account}[https://developers.google.com/identity/protocols/OAuth2], and
-  # cannot currently be accessed with a {Service
-  # Account}[https://developers.google.com/identity/protocols/OAuth2ServiceAccount].
-  # To use a User Account install the {Google Cloud
-  # SDK}[http://cloud.google.com/sdk] and authenticate with the following:
+  # The Resource Manager API currently requires authentication of a [User
+  # Account](https://developers.google.com/identity/protocols/OAuth2), and
+  # cannot currently be accessed with a [Service
+  # Account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount).
+  # To use a User Account install the [Google Cloud
+  # SDK](http://cloud.google.com/sdk) and authenticate with the following:
   #
   #   $ gcloud auth login
   #
@@ -190,11 +190,11 @@ module Gcloud
   #
   # ## Managing IAM Policies
   #
-  # Google Cloud Identity and Access Management ({Cloud
-  # IAM}[https://cloud.google.com/iam/]) access control policies can be managed
+  # Google Cloud Identity and Access Management ([Cloud
+  # IAM](https://cloud.google.com/iam/)) access control policies can be managed
   # on projects. These policies allow project owners to manage _who_ (identity)
-  # has access to _what_ (role). See {Cloud IAM
-  # Overview}[https://cloud.google.com/iam/docs/overview] for more information.
+  # has access to _what_ (role). See [Cloud IAM
+  # Overview](https://cloud.google.com/iam/docs/overview) for more information.
   #
   # A project's access control policy can be retrieved. (See Project#policy)
   #
@@ -233,8 +233,8 @@ module Gcloud
   #   perms.include? "resourcemanager.projects.get"    #=> true
   #   perms.include? "resourcemanager.projects.delete" #=> false
   #
-  # For more information about using access control policies see {Managing
-  # Policies}[https://cloud.google.com/iam/docs/managing-policies].
+  # For more information about using access control policies see [Managing
+  # Policies](https://cloud.google.com/iam/docs/managing-policies).
   #
   module ResourceManager
   end

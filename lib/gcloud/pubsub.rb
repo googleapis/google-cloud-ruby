@@ -33,8 +33,8 @@ module Gcloud
   #   readable. (+String+ or +Hash+)
   # +scope+::
   #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See {Using OAuth 2.0 to Access Google
-  #   APIs}[https://developers.google.com/identity/protocols/OAuth2]. (+String+
+  #   the connection can access. See [Using OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (+String+
   #   or +Array+)
   #
   #   The default scope is:
@@ -88,8 +88,8 @@ module Gcloud
   #   topic = pubsub.topic "my-topic"
   #   topic.publish "task completed"
   #
-  # To learn more about Pub/Sub, read the {Google Cloud Pub/Sub Overview
-  # }[https://cloud.google.com/pubsub/overview].
+  # To learn more about Pub/Sub, read the [Google Cloud Pub/Sub Overview
+  # ](https://cloud.google.com/pubsub/overview).
   #
   # ## Retrieving Topics
   #

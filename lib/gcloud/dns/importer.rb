@@ -22,8 +22,8 @@ module Gcloud
     # @private
     # # DNS Importer
     #
-    # Reads a {DNS zone
-    # file}[https://en.wikipedia.org/wiki/Zone_file] and parses it, creating a
+    # Reads a [DNS zone
+    # file](https://en.wikipedia.org/wiki/Zone_file) and parses it, creating a
     # collection of Record instances. The returned records are unsaved,
     # as they are not yet associated with a Zone. Use {Zone#import} to add zone
     # file records to a Zone.

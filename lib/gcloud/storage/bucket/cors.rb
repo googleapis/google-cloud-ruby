@@ -63,12 +63,12 @@ module Gcloud
         ##
         # Add a CORS rule to the CORS rules for a bucket. Accepts options for
         # setting preflight response headers. Preflight requests and responses
-        # are required if the request method and headers are not both {simple
-        # methods}[http://www.w3.org/TR/cors/#simple-method] and {simple
-        # headers}[http://www.w3.org/TR/cors/#simple-header].
+        # are required if the request method and headers are not both [simple
+        # methods](http://www.w3.org/TR/cors/#simple-method) and [simple
+        # headers](http://www.w3.org/TR/cors/#simple-header).
         #
         # @param [String, Array<String>] origin The
-        #   {origin}[http://tools.ietf.org/html/rfc6454] or origins permitted
+        #   [origin](http://tools.ietf.org/html/rfc6454) or origins permitted
         #   for cross origin resource sharing with the bucket. Note: "*" is
         #   permitted in the list of origins, and means "any Origin".
         # @param [String, Array<String>] methods The list of HTTP methods

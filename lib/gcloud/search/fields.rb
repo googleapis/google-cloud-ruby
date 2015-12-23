@@ -85,9 +85,6 @@ module Gcloud
         @hash[name] ||= FieldValues.new name
       end
 
-      # rubocop:disable Metrics/LineLength
-      # Disabled because there are links in the docs that are long.
-
       ##
       # Add a new value. If the field name does not exist it will be added. If
       # the field value is a DateTime or Numeric, or the type is set to
@@ -112,13 +109,13 @@ module Gcloud
       #   * +:atom+ - The value is a string with maximum length 500 characters.
       #   * +:geo+ - The value is a point on earth described by latitude and
       #     longitude coordinates, represented in string with any of the listed
-      #     {ways of writing coordinates}[http://en.wikipedia.org/wiki/Geographic_coordinate_conversion].
+      #     [ways of writing coordinates](http://en.wikipedia.org/wiki/Geographic_coordinate_conversion).
       #   * +:datetime+ - The value is a +DateTime+.
       #   * +:number+ - The value is a +Numeric+ between -2,147,483,647 and
       #     2,147,483,647. The value will be stored as a double precision
       #     floating point value in Cloud Search.
       # @param [String] lang The language of a string value. Must be a valid
-      #   {ISO 639-1 code}[https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes].
+      #   [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
       #
       # @example
       #   require "gcloud"
@@ -139,8 +136,6 @@ module Gcloud
         @hash[name] ||= FieldValues.new name
         @hash[name].add value, type: type, lang: lang
       end
-
-      # rubocop:enable Metrics/LineLength
 
       ##
       # Deletes a field and all values.
