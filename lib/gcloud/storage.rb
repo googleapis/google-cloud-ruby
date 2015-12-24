@@ -21,30 +21,22 @@ module Gcloud
   # Creates a new object for connecting to the Storage service.
   # Each call creates a new connection.
   #
-  # ### Parameters
-  #
-  # `project`::
-  #   Project identifier for the Storage service you are connecting to.
-  #   (`String`)
-  # `keyfile`::
-  #   Keyfile downloaded from Google Cloud. If file path the file must be
-  #   readable. (`String` or `Hash`)
-  # `scope`::
-  #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
-  #   or `Array`)
+  # @param [String] project Project identifier for the Storage service you are
+  #   connecting to.
+  # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If file
+  #   path the file must be readable.
+  # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
+  #   set of resources and operations that the connection can access. See [Using
+  #   OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2).
   #
   #   The default scope is:
   #
   #   * `https://www.googleapis.com/auth/devstorage.full_control`
   #
-  # ### Returns
+  # @return [Gcloud::Storage::Project]
   #
-  # Gcloud::Storage::Project
-  #
-  # ### Example
-  #
+  # @example
   #   require "gcloud/storage"
   #
   #   storage = Gcloud.storage "my-todo-project",
