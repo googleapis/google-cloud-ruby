@@ -21,30 +21,22 @@ module Gcloud
   # Creates a new `Project` instance connected to the BigQuery service.
   # Each call creates a new connection.
   #
-  # ### Parameters
-  #
-  # `project`::
-  #   Identifier for a BigQuery project. If not present, the default project for
-  #   the credentials is used. (`String`)
-  # `keyfile`::
-  #   Keyfile downloaded from Google Cloud. If file path the file must be
-  #   readable. (`String` or `Hash`)
-  # `scope`::
-  #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
-  #   or `Array`)
+  # @param [String] project Identifier for a BigQuery project. If not present,
+  #   the default project for the credentials is used.
+  # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If file
+  #   path the file must be readable.
+  # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
+  #   set of resources and operations that the connection can access. See [Using
+  #   OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2).
   #
   #   The default scope is:
   #
   #   * `https://www.googleapis.com/auth/bigquery`
   #
-  # ### Returns
+  # @return [Gcloud::Bigquery::Project]
   #
-  # Gcloud::Bigquery::Project
-  #
-  # ### Example
-  #
+  # @example
   #   require "gcloud/bigquery"
   #
   #   bigquery = Gcloud.bigquery

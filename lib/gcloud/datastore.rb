@@ -24,30 +24,23 @@ module Gcloud
   # Creates a new object for connecting to the Datastore service.
   # Each call creates a new connection.
   #
-  # ### Parameters
-  #
-  # `project`::
-  #   Dataset identifier for the Datastore you are connecting to. (`String`)
-  # `keyfile`::
-  #   Keyfile downloaded from Google Cloud. If file path the file must be
-  #   readable. (`String` or `Hash`)
-  # `scope`::
-  #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
-  #   or `Array`)
+  # @param [String] project Dataset identifier for the Datastore you are
+  #   connecting to.
+  # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If file
+  #   path the file must be readable.
+  # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
+  #   set of resources and operations that the connection can access. See [Using
+  #   OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2).
   #
   #   The default scopes are:
   #
   #   * `https://www.googleapis.com/auth/datastore`
   #   * `https://www.googleapis.com/auth/userinfo.email`
   #
-  # ### Returns
+  # @return [Gcloud::Datastore::Dataset]
   #
-  # Gcloud::Datastore::Dataset
-  #
-  # ### Example
-  #
+  # @example
   #   require "gcloud/datastore"
   #
   #   dataset = Gcloud.datastore "my-todo-project",
