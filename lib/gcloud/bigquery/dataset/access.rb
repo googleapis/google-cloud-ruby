@@ -121,7 +121,7 @@ module Gcloud
         # or a string identifier as specified by the
         # [Query
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # @param [String] project_name:datasetId.tableId+.
+        # +project_name:datasetId.tableId+.
         def add_reader_view view
           add_access_role_scope_value :reader, :view, view
         end
@@ -157,7 +157,7 @@ module Gcloud
         # or a string identifier as specified by the
         # [Query
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # @param [String] project_name:datasetId.tableId+.
+        # +project_name:datasetId.tableId+.
         def add_writer_view view
           add_access_role_scope_value :writer, :view, view
         end
@@ -193,7 +193,7 @@ module Gcloud
         # or a string identifier as specified by the
         # [Query
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # @param [String] project_name:datasetId.tableId+.
+        # +project_name:datasetId.tableId+.
         def add_owner_view view
           add_access_role_scope_value :owner, :view, view
         end
@@ -229,7 +229,7 @@ module Gcloud
         # or a string identifier as specified by the
         # [Query
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # @param [String] project_name:datasetId.tableId+.
+        # +project_name:datasetId.tableId+.
         def remove_reader_view view
           remove_access_role_scope_value :reader, :view, view
         end
@@ -265,7 +265,7 @@ module Gcloud
         # or a string identifier as specified by the
         # [Query
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # @param [String] project_name:datasetId.tableId+.
+        # +project_name:datasetId.tableId+.
         def remove_writer_view view
           remove_access_role_scope_value :writer, :view, view
         end
@@ -301,7 +301,7 @@ module Gcloud
         # or a string identifier as specified by the
         # [Query
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # @param [String] project_name:datasetId.tableId+.
+        # +project_name:datasetId.tableId+.
         def remove_owner_view view
           remove_access_role_scope_value :owner, :view, view
         end
@@ -337,7 +337,7 @@ module Gcloud
         # or a string identifier as specified by the
         # [Query
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # @param [String] project_name:datasetId.tableId+.
+        # +project_name:datasetId.tableId+.
         def reader_view? view
           lookup_access_role_scope_value :reader, :view, view
         end
@@ -373,7 +373,7 @@ module Gcloud
         # or a string identifier as specified by the
         # [Query
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # @param [String] project_name:datasetId.tableId+.
+        # +project_name:datasetId.tableId+.
         def writer_view? view
           lookup_access_role_scope_value :writer, :view, view
         end
@@ -409,7 +409,7 @@ module Gcloud
         # or a string identifier as specified by the
         # [Query
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # @param [String] project_name:datasetId.tableId+.
+        # +project_name:datasetId.tableId+.
         def owner_view? view
           lookup_access_role_scope_value :owner, :view, view
         end
