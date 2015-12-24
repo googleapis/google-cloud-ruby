@@ -21,27 +21,20 @@ module Gcloud
   # Creates a new `Project` instance connected to the Resource Manager service.
   # Each call creates a new connection.
   #
-  # ### Parameters
-  #
-  # `keyfile`::
-  #   Keyfile downloaded from Google Cloud. If file path the file must be
-  #   readable. (`String` or `Hash`)
-  # `scope`::
-  #   The OAuth 2.0 scopes controlling the set of resources and operations that
-  #   the connection can access. See [Using OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2). (`String`
-  #   or `Array`)
+  # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If file
+  #   path the file must be readable.
+  # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
+  #   set of resources and operations that the connection can access. See [Using
+  #   OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2).
   #
   #   The default scope is:
   #
   #   * `https://www.googleapis.com/auth/cloud-platform`
   #
-  # ### Returns
+  # @return [Gcloud::ResourceManager::Manager]
   #
-  # Gcloud::ResourceManager::Manager
-  #
-  # ### Example
-  #
+  # @example
   #   require "gcloud/resource_manager"
   #
   #   resource_manager = Gcloud.resource_manager
