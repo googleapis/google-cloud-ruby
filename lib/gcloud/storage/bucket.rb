@@ -406,9 +406,15 @@ module Gcloud
       #     tmp_files = bucket.files token: tmp_files.token
       #   end
       #
-      def files prefix: nil, token: nil, max: nil, versions: nil
+      def files prefix: nil, delimiter: nil, token: nil, max: nil, versions: nil
         ensure_connection!
-        options = { prefix: prefix, token: token, max: max, versions: versions }
+        options = {
+          prefix: prefix,
+          delimiter: delimiter,
+          token: token,
+          max: max,
+          versions: versions
+        }
         resp = connection.list_files name, options
         if resp.success?
           File::List.from_response resp, connection
