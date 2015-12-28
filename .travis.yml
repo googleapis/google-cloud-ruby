@@ -10,7 +10,7 @@ after_success:
 - bundle exec rake travis:pages
 matrix:
   include:
-  - rvm: 2.3
+  - rvm: 2.3.0
     env: GCLOUD_BUILD_DOCS=true
 deploy:
   provider: rubygems
