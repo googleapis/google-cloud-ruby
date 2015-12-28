@@ -1,5 +1,7 @@
+dist: trusty
 language: ruby
 rvm:
+- 2.2
 - 2.1
 - 2.0
 script:
@@ -8,7 +10,7 @@ after_success:
 - bundle exec rake travis:pages
 matrix:
   include:
-  - rvm: 2.2
+  - rvm: 2.3.0
     env: GCLOUD_BUILD_DOCS=true
 deploy:
   provider: rubygems
