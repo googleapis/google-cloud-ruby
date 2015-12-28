@@ -166,12 +166,12 @@ module Gcloud
       # Retrieves a list of files matching the criteria.
       def list_files bucket_name, options = {}
         params = {
-          bucket:        bucket_name,
-          prefix:          options[:prefix],
-          delimiter:     options[:delimiter],
+          bucket:     bucket_name,
+          prefix:     options[:prefix],
+          delimiter:  options[:delimiter],
           pageToken:  options[:token],
           maxResults: options[:max],
-          versions:      options[:versions]
+          versions:   options[:versions]
         }.delete_if { |_, v| v.nil? }
 
         @client.execute(

@@ -409,11 +409,11 @@ module Gcloud
       def files prefix: nil, delimiter: nil, token: nil, max: nil, versions: nil
         ensure_connection!
         options = {
-          prefix: prefix,
+          prefix:    prefix,
           delimiter: delimiter,
-          token: token,
-          max: max,
-          versions: versions
+          token:     token,
+          max:       max,
+          versions:  versions
         }
         resp = connection.list_files name, options
         if resp.success?
