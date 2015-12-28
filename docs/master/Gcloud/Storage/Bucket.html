@@ -1039,11 +1039,11 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">files</span> <span class="ruby-identifier">prefix</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">delimiter</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">versions</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">options</span> = {
-    <span class="ruby-identifier">prefix</span><span class="ruby-operator">:</span> <span class="ruby-identifier">prefix</span>,
+    <span class="ruby-identifier">prefix</span><span class="ruby-operator">:</span>    <span class="ruby-identifier">prefix</span>,
     <span class="ruby-identifier">delimiter</span><span class="ruby-operator">:</span> <span class="ruby-identifier">delimiter</span>,
-    <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">token</span>,
-    <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-identifier">max</span>,
-    <span class="ruby-identifier">versions</span><span class="ruby-operator">:</span> <span class="ruby-identifier">versions</span>
+    <span class="ruby-identifier">token</span><span class="ruby-operator">:</span>     <span class="ruby-identifier">token</span>,
+    <span class="ruby-identifier">max</span><span class="ruby-operator">:</span>       <span class="ruby-identifier">max</span>,
+    <span class="ruby-identifier">versions</span><span class="ruby-operator">:</span>  <span class="ruby-identifier">versions</span>
   }
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">list_files</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">success?</span>
