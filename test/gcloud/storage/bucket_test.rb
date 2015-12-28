@@ -364,6 +364,22 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     files.prefixes.must_include "/prefix/path2/"
   end
 
+  it "paginates files with delimiter set" do
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "delimiter"
+      env.params["delimiter"].must_equal "/"
+      [200, { "Content-Type" => "application/json" },
+       list_files_json(3, nil, ["/prefix/path1/","/prefix/path2/"])]
+    end
+
+    files = bucket.files delimiter: "/"
+
+    files.count.must_equal 3
+    files.prefixes.count.must_equal 2
+    files.prefixes.wont_be :empty?
+    files.prefixes.must_include "/prefix/path1/"
+  end
+
   it "paginates files with max set" do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.must_include "maxResults"
