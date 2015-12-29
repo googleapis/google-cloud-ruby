@@ -121,7 +121,7 @@ namespace :pages do
         if use_rdoc
           puts `bundle exec rake pages:rdoc`
         else
-          puts `bundle exec rake pages:yard`
+          puts `bundle exec rake pages:jsondoc`
         end
       end
     end
@@ -132,8 +132,10 @@ namespace :pages do
     Dir.chdir pages do
       # make the release dir if needed
       FileUtils.mkdir_p "docs/#{tag}/"
+      FileUtils.mkdir_p "versions"
       # sync the docs
       puts `rsync -r --delete #{repo}/html/ docs/#{tag}/`
+      puts `cp #{repo}/jsondoc/gcloud.json versions/#{tag}.json` unless use_rdoc
       # Update releases yaml
       releases = YAML.load_file "_data/releases.yaml"
       unless releases.select { |r| r["version"] == tag }.any?
