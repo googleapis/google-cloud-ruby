@@ -3,6 +3,8 @@ keyfile.json
 coverage/*
 doc/*
 pkg/*
+html/*
+jsondoc/*
 
 # Ignore vagrant directory
 .vagrant
@@ -12,4 +14,3 @@ pkg/*
 
 # directories left by gh-pages
 _site/*
-html/*
