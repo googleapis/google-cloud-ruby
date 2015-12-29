@@ -353,6 +353,12 @@ module Gcloud
       # +prefix+::
       #   Filter results to files whose names begin with this prefix.
       #   (+String+)
+      # +delimiter+::
+      #   Returns results in a directory-like mode. +items+ will contain only
+      #   objects whose names, aside from the +prefix+, do not contain
+      #   +delimiter+. Objects whose names, aside from the +prefix+, contain
+      #   +delimiter+ will have their name, truncated after the +delimiter+,
+      #   returned in +prefixes+. Duplicate +prefixes+ are omitted.
       # +token+::
       #   A previously-returned page token representing part of the larger set
       #   of results to view. (+String+)
