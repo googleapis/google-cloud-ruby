@@ -279,7 +279,7 @@ email address:</p>
 
     
       <!-- <div class="method-source-code" id="acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 681</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 687</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">acl</span>
   <span class="ruby-ivar">@acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">Acl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -650,7 +650,7 @@ gzip issue</a>.</p>
 
     
       <!-- <div class="method-source-code" id="create_file-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 611</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 617</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_file</span> <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">acl</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">cache_control</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
                 <span class="ruby-identifier">content_disposition</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">content_encoding</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
                 <span class="ruby-identifier">content_language</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">content_type</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">chunk_size</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
@@ -786,7 +786,7 @@ permissions:</p>
 
     
       <!-- <div class="method-source-code" id="default_acl-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 735</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 741</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_acl</span>
   <span class="ruby-ivar">@default_acl</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bucket</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultAcl</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -925,7 +925,7 @@ latest version. (<code>Integer</code>)</p>
 
     
       <!-- <div class="method-source-code" id="file-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 454</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 460</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">file</span> <span class="ruby-identifier">path</span>, <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">generation</span><span class="ruby-operator">:</span> <span class="ruby-identifier">generation</span> }
@@ -972,6 +972,14 @@ latest version. (<code>Integer</code>)</p>
 <dd>
 <p>Filter results to files whose names begin with this prefix.
 (<code>String</code>)</p>
+</dd><dt><code>delimiter</code>
+<dd>
+<p>Returns results in a directory-like mode. <code>items</code> will contain
+only objects whose names, aside from the <code>prefix</code>, do not
+contain <code>delimiter</code>. Objects whose names, aside from the
+<code>prefix</code>, contain <code>delimiter</code> will have their name,
+truncated after the <code>delimiter</code>, returned in
+<code>prefixes</code>. Duplicate <code>prefixes</code> are omitted.</p>
 </dd><dt><code>token</code>
 <dd>
 <p>A previously-returned page token representing part of the larger set of
@@ -1035,7 +1043,7 @@ href="File/List.html#attribute-i-token">Gcloud::Storage::File::List#token</a>)</
 
     
       <!-- <div class="method-source-code" id="files-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 409</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 415</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">files</span> <span class="ruby-identifier">prefix</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">delimiter</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">versions</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">options</span> = {
@@ -1502,7 +1510,7 @@ href="../Storage.html">Storage</a> service.</p>
 
     
       <!-- <div class="method-source-code" id="reload-21-source">
-<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 741</span>
+<pre class="ruby"><span class="ruby-comment"># File lib/gcloud/storage/bucket.rb, line 747</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">ensure_connection!</span>
   <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get_bucket</span> <span class="ruby-identifier">name</span>
@@ -1911,7 +1919,7 @@ to Host a Static Website </a>. (<code>String</code>)</p>
         
 <div class="side-nav--meta">
   <div id="doc-build-date">
-    Docs built on Dec 28, 2015.
+    Docs built on Dec 29, 2015.
   </div>
 </div>
 
