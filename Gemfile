@@ -9,3 +9,6 @@ gem "gcloud-rdoc",
 gem "yard-gcloud",
     git: "https://github.com/GoogleCloudPlatform/gcloud-ruby.git",
     branch: "yard-gcloud"
+gem "gcloud-jsondoc",
+    git: "https://github.com/GoogleCloudPlatform/gcloud-ruby.git",
+    branch: "gcloud-jsondoc"

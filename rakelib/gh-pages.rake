@@ -247,4 +247,14 @@ namespace :pages do
       t.options << "--output-dir" << "html"
     end
   end
+
+  desc "Generates JSON output from gcloud-ruby .yardoc"
+  task :jsondoc => :yard do
+    require "gcloud/jsondoc"
+    registry = YARD::Registry.load! ".yardoc"
+    builder = Gcloud::Jsondoc.new registry
+    json = builder.docs.target!
+    FileUtils.mkdir_p "jsondoc"
+    File.write "jsondoc/gcloud.json", json
+  end
 end
