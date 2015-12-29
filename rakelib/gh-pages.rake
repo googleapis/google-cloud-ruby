@@ -43,14 +43,18 @@ namespace :pages do
     tmp   = Pathname.new(Dir.home) + "tmp"
     docs  = tmp + "master-docs"
     pages = tmp + "master-pages"
+    jsondoc = tmp + "master-jsondoc"
     FileUtils.remove_dir docs if Dir.exists? docs
     FileUtils.remove_dir pages if Dir.exists? pages
+    FileUtils.remove_dir jsondoc if Dir.exists? jsondoc
     FileUtils.mkdir_p docs
     FileUtils.mkdir_p pages
+    FileUtils.mkdir_p jsondoc
 
-    Rake::Task["pages:yard"].invoke
+    Rake::Task["pages:jsondoc"].invoke
 
     puts `cp -R html/* #{docs}`
+    puts `cp jsondoc/gcloud.json #{jsondoc}/gcloud.json`
     # checkout the gh-pages branch
     git_repo = "git@github.com:GoogleCloudPlatform/gcloud-ruby.git"
     if ENV["GH_OAUTH_TOKEN"]
@@ -61,6 +65,8 @@ namespace :pages do
     Dir.chdir pages do
       # sync the docs
       puts `rsync -r --delete #{docs}/ docs/master/`
+      FileUtils.mkdir_p "versions"
+      puts `cp #{jsondoc}/gcloud.json versions/master.json`
       # commit changes
       puts `git add -A .`
       if ENV["GH_OAUTH_TOKEN"]
