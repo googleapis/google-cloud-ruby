@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/search/document"
 require "gcloud/search/index/list"
 require "gcloud/search/result"
@@ -20,17 +20,18 @@ require "gcloud/search/result"
 module Gcloud
   module Search
     ##
-    # = Index
+    # # Index
     #
-    # An index manages Document instances for retrieval. Indexes cannot be
+    # An index manages {Document} instances for retrieval. Indexes cannot be
     # created, updated, or deleted directly on the server: They are derived from
     # the documents that reference them. You can manage groups of documents by
     # putting them into separate indexes.
     #
-    # With an index, you can retrieve documents with #find and #documents;
-    # manage them with #document, #save, and #remove; and perform searches over
-    # their fields with #search.
+    # With an index, you can retrieve documents with {#find} and {#documents};
+    # manage them with {#document}, {#save}, and {#remove}; and perform searches
+    # over their fields with {#search}.
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -42,22 +43,22 @@ module Gcloud
     #     puts result.doc_id
     #   end
     #
-    # For more information, see {Documents and
-    # Indexes}[https://cloud.google.com/search/documents_indexes].
+    # @see https://cloud.google.com/search/documents_indexes Documents and
+    #   Indexes
     #
     class Index
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
       ##
-      # The raw data object.
-      attr_accessor :raw #:nodoc:
+      # @private The raw data object.
+      attr_accessor :raw
 
       ##
-      # Creates a new Index instance.
+      # @private Creates a new Index instance.
       #
-      def initialize #:nodoc:
+      def initialize
         @connection = nil
         @raw = nil
       end
@@ -74,48 +75,54 @@ module Gcloud
       end
 
       ##
-      # The names of fields in which TEXT values are stored. See {Index schemas
-      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
+      # The names of fields in which TEXT values are stored.
+      # @see https://cloud.google.com/search/documents_indexes#index_schemas
+      #   Index schemas
       def text_fields
         return @raw["indexedField"]["textFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which HTML values are stored. See {Index schemas
-      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
+      # The names of fields in which HTML values are stored.
+      # @see https://cloud.google.com/search/documents_indexes#index_schemas
+      #   Index schemas
       def html_fields
         return @raw["indexedField"]["htmlFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which ATOM values are stored. See {Index schemas
-      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
+      # The names of fields in which ATOM values are stored.
+      # @see https://cloud.google.com/search/documents_indexes#index_schemas
+      #   Index schemas
       def atom_fields
         return @raw["indexedField"]["atomFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which DATE values are stored. See {Index schemas
-      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
+      # The names of fields in which DATE values are stored.
+      # @see https://cloud.google.com/search/documents_indexes#index_schemas
+      #   Index schemas
       def datetime_fields
         return @raw["indexedField"]["dateFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which NUMBER values are stored. See {Indexschemas
-      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
+      # The names of fields in which NUMBER values are stored.
+      # @see https://cloud.google.com/search/documents_indexes#index_schemas
+      #   Index schemas
       def number_fields
         return @raw["indexedField"]["numberFields"] if @raw["indexedField"]
         []
       end
 
       ##
-      # The names of fields in which GEO values are stored. See {Index
-      # }[https://cloud.google.com/search/documents_indexes#index_schemas].
+      # The names of fields in which GEO values are stored.
+      # @see https://cloud.google.com/search/documents_indexes#index_schemas
+      #   Index schemas
       def geo_fields
         return @raw["indexedField"]["geoFields"] if @raw["indexedField"]
         []
@@ -144,17 +151,12 @@ module Gcloud
       ##
       # Retrieves an existing document by id.
       #
-      # === Parameters
+      # @param [String, Gcloud::Search::Document] doc_id The id of a document or
+      #   a Document instance.
+      # @return [Gcloud::Search::Document, nil] Returns `nil` if the document
+      #   does not exist
       #
-      # +doc_id+::
-      #   The id of a document or a Document instance. (+String+ or Document)
-      #
-      # === Returns
-      #
-      # Gcloud::Search::Document or +nil+ if the document does not exist
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -179,36 +181,29 @@ module Gcloud
 
       ##
       # Helper for creating a new Document instance. The returned instance is
-      # local: It is either not yet saved to the service (see #save), or if it
+      # local: It is either not yet saved to the service (see {#save}), or if it
       # has been given the id of an existing document, it is not yet populated
-      # with the document's data (see #find).
+      # with the document's data (see {#find}).
       #
-      # === Parameters
+      # @param [String, nil] doc_id An optional unique ID for the new document.
+      #   When the document is saved, this value must contain only visible,
+      #   printable ASCII characters (ASCII codes 33 through 126 inclusive) and
+      #   be no longer than 500 characters. It cannot begin with an exclamation
+      #   point (<code>!</code>), and it cannot begin and end with double
+      #   underscores (<code>__</code>).
+      # @param [Integer, nil] rank An optional rank for the new document. An
+      #   integer which determines the default ordering of documents returned
+      #   from a search. It is a bad idea to assign the same rank to many
+      #   documents, and the same rank should never be assigned to more than
+      #   10,000 documents. By default (when it is not specified or set to 0),
+      #   it is set at the time the document is saved to the number of seconds
+      #   since January 1, 2011. The rank can be used in the `expressions`,
+      #   `order`, and `fields` options in {#search}, where it should referenced
+      #   as `rank`.
       #
-      # +doc_id+::
-      #   The unique identifier of the new document. This is optional. When the
-      #   document is saved, this value must contain only visible, printable
-      #   ASCII characters (ASCII codes 33 through 126 inclusive) and be no
-      #   longer than 500 characters. It cannot begin with an exclamation point
-      #   (<code>!</code>), and it cannot begin and end with double underscores
-      #   (<code>__</code>). (+String+)
-      # +rank+::
-      #   The rank of the new document. This is optional. A positive integer
-      #   which determines the default ordering of documents returned from a
-      #   search. It is a bad idea to assign the same rank to many documents,
-      #   and the same rank should never be assigned to more than 10,000
-      #   documents. By default (when it is not specified or set to 0), it is
-      #   set at the time the document is saved to the number of seconds since
-      #   January 1, 2011. The rank can be used in the +expressions+, +order+,
-      #   and +fields+ options in #search, where it should referenced as
-      #   +rank+. (+Integer+)
+      # @return [Gcloud::Search::Document]
       #
-      # === Returns
-      #
-      # Gcloud::Search::Document
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -219,8 +214,7 @@ module Gcloud
       #   document.doc_id #=> nil
       #   document.rank #=> nil
       #
-      # To check if an index already contains a document with the same id, pass
-      # the instance to #find:
+      # @example To check if an index already contains a document:
       #
       #   require "gcloud"
       #
@@ -241,21 +235,14 @@ module Gcloud
       ##
       # Retrieves the list of documents belonging to the index.
       #
-      # === Parameters
+      # @param [String] token A previously-returned page token representing part
+      #   of the larger set of results to view.
+      # @param [Integer] max Maximum number of documents to return. The default
+      #   is `100`.
+      # @return [Array<Gcloud::Search::Document>] See
+      #   {Gcloud::Search::Document::List})
       #
-      # +token+::
-      #   A previously-returned page token representing part of the larger set
-      #   of results to view. (+String+)
-      # +max+::
-      #   Maximum number of documents to return. The default is +100+.
-      #   (+Integer+)
-      #
-      # === Returns
-      #
-      # Array of Gcloud::Search::Document (See Gcloud::Search::Document::List)
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -267,8 +254,7 @@ module Gcloud
       #     puts index.index_id
       #   end
       #
-      # If you have a significant number of documents, you may need to paginate
-      # through them: (See Gcloud::Search::Document::List)
+      # @example With pagination: (See {Gcloud::Search::Document::List})
       #
       #   require "gcloud"
       #
@@ -295,21 +281,15 @@ module Gcloud
 
       ##
       # Saves a new or existing document to the index. If the document instance
-      # is new and has been given an id (see #document), it will replace an
+      # is new and has been given an id (see {#document}), it will replace an
       # existing document in the index that has the same unique id.
       #
-      # === Parameters
+      # @param [Gcloud::Search::Document] document A Document instance, either
+      #   new (see {#document}) or existing (see {#find}).
       #
-      # +document+::
-      #   A Document instance, either new (see #document) or existing (see
-      #   #find).
+      # @return [Gcloud::Search::Document]
       #
-      # === Returns
-      #
-      # Gcloud::Search::Document
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -340,17 +320,10 @@ module Gcloud
       ##
       # Permanently deletes the document from the index.
       #
-      # === Parameters
+      # @param [String] doc_id The id of the document.
+      # @return [Boolean] `true` if successful
       #
-      # +doc_id+::
-      #   The id of the document. (+String+)
-      #
-      # === Returns
-      #
-      # +true+ if successful
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -373,24 +346,19 @@ module Gcloud
       # be created, updated, or deleted directly on the server: They are derived
       # from the documents that reference them.)
       #
-      # === Parameters
+      # @param [Boolean] force If `true`, ensures the deletion of the index by
+      #   first deleting all documents. If `false` and the index contains
+      #   documents, the request will fail. Default is `false`.
       #
-      # +force+::
-      #   If +true+, ensures the deletion of the index by first deleting all
-      #   documents. If +false+ and the index contains documents, the request
-      #   will fail. Default is +false+. (+Boolean+)
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   search = gcloud.search
       #   index = search.index "books"
+      #   index.delete
       #
-      # An index containing documents can be forcefully deleted with the +force+
-      # option:
-      #
+      # @example Deleting an index containing documents with the `force` option:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -417,8 +385,8 @@ module Gcloud
       end
 
       ##
-      # New Index from a raw data object.
-      def self.from_raw raw, conn #:nodoc:
+      # @private New Index from a raw data object.
+      def self.from_raw raw, conn
         new.tap do |f|
           f.raw = raw
           f.connection = conn
@@ -430,76 +398,76 @@ module Gcloud
 
       ##
       # Runs a search against the documents in the index using the provided
-      # query. For more information see the REST API documentation for
-      # {indexes.search}[https://cloud.google.com/search/reference/rest/v1/projects/indexes/search].
+      # query.
       #
-      # === Parameters
+      # By default, Result objects are sorted by document rank. For more information
+      # see the [REST API documentation for Document.rank](https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank).
       #
-      # +query+::
-      #   The query string in search query syntax. If the query is +nil+ or
-      #   empty, all documents are returned. For more information see {Query
-      #   Strings}[https://cloud.google.com/search/query]. (+String+)
-      # +expressions+::
-      #   Customized expressions used in +order+ or +fields+. The expression can
-      #   contain fields in Document, the built-in fields ( +rank+, the document
-      #   +rank+, and +score+ if scoring is enabled) and fields defined in
-      #   +expressions+. All field expressions expressed as a +Hash+ with the
-      #   keys as the +name+ and the values as the +expression+. The expression
-      #   value can be a combination of supported functions encoded in the
-      #   string. Expressions involving number fields can use the arithmetical
-      #   operators (+, -, *, /) and the built-in numeric functions (+max+,
-      #   +min+, +pow+, +count+, +log+, +abs+). Expressions involving geopoint
-      #   fields can use the +geopoint+ and +distance+ functions. Expressions
-      #   for text and html fields can use the +snippet+ function. (+Hash+)
-      # +matched_count_accuracy+::
-      #   Minimum accuracy requirement for Result::List#matched_count. If
-      #   specified, +matched_count+ will be accurate to at least that number.
-      #   For example, when set to 100, any <code>matched_count <= 100</code> is
-      #   accurate. This option may add considerable latency/expense. By default
-      #   (when it is not specified or set to 0), the accuracy is the same as
-      #   +max+. (+Integer+)
-      # +offset+::
-      #   Used to advance pagination to an arbitrary result, independent of the
-      #   previous results. Offsets are an inefficient alternative to using
-      #   +token+. (Both cannot be both set.) The default is 0.
-      #   (+Integer+)
-      # +order+::
-      #   A comma-separated list of fields for sorting on the search result,
-      #   including fields from Document, the built-in fields (+rank+ and
-      #   +score+), and fields defined in expressions. The default sorting
-      #   order is ascending. To specify descending order for a field, a suffix
-      #   <code>" desc"</code> should be appended to the field name. For
+      # You can specify how to sort results with the `order` option. In the
+      # example below, the <code>-</code> character before `avg_review` means
+      # that results will be sorted in ascending order by `published` and then
+      # in descending order by `avg_review`. You can add computed fields with
+      # the `expressions` option, and limit the fields that are returned with
+      # the `fields` option.
+      #
+      # @see https://cloud.google.com/search/reference/rest/v1/projects/indexes/search
+      #   The REST API documentation for indexes.search
+      #
+      # @param [String] query The query string in search query syntax. If the
+      #   query is `nil` or empty, all documents are returned. For more
+      #   information see [Query
+      #   Strings](https://cloud.google.com/search/query).
+      # @param [Hash] expressions Customized expressions used in `order` or
+      #   `fields`. The expression can contain fields in Document, the built-in
+      #   fields ( `rank`, the document `rank`, and `score` if scoring is
+      #   enabled) and fields defined in `expressions`. All field expressions
+      #   expressed as a `Hash` with the keys as the `name` and the values as
+      #   the `expression`. The expression value can be a combination of
+      #   supported functions encoded in the string. Expressions involving
+      #   number fields can use the arithmetical operators (+, -, *, /) and the
+      #   built-in numeric functions (`max`, `min`, `pow`, `count`, `log`,
+      #   `abs`). Expressions involving geopoint fields can use the `geopoint`
+      #   and `distance` functions. Expressions for text and html fields can use
+      #   the `snippet` function.
+      # @param [Integer] matched_count_accuracy Minimum accuracy requirement for
+      #   {Result::List#matched_count}. If specified, `matched_count` will be
+      #   accurate to at least that number. For example, when set to 100, any
+      #   <code>matched_count <= 100</code> is accurate. This option may add
+      #   considerable latency/expense. By default (when it is not specified or
+      #   set to 0), the accuracy is the same as `max`.
+      # @param [Integer] offset Used to advance pagination to an arbitrary
+      #   result, independent of the previous results. Offsets are an
+      #   inefficient alternative to using `token`. (Both cannot be both set.)
+      #   The default is 0.
+      # @param [String] order A comma-separated list of fields for sorting on
+      #   the search result, including fields from Document, the built-in fields
+      #   (`rank` and `score`), and fields defined in expressions. The default
+      #   sorting order is ascending. To specify descending order for a field, a
+      #   suffix <code>" desc"</code> should be appended to the field name. For
       #   example: <code>orderBy="foo desc,bar"</code>. The default value for
       #   text sort is the empty string, and the default value for numeric sort
       #   is 0. If not specified, the search results are automatically sorted by
-      #   descending +rank+. Sorting by ascending +rank+ is not allowed.
-      #   (+String+)
-      # +fields+::
-      #   The fields to return in the Search::Result objects. These can be
-      #   fields from Document, the built-in fields +rank+ and +score+, and
-      #   fields defined in expressions. The default is to return all fields.
-      #   (+String+ or +Array+ of +String+)
-      # +scorer+::
-      #   The scoring function to invoke on a search result for this query. If
-      #   scorer is not set, scoring is disabled and +score+ is 0 for all
-      #   documents in the search result. To enable document relevancy score
-      #   based on term frequency, set +scorer+ to +:generic+.
-      #   (+String+ or +Symbol+)
-      # +scorer_size+::
-      #   Maximum number of top retrieved results to score. It is valid only
-      #   when +scorer+ is set. The default is 100. (+Integer+)
-      # +token+::
-      #   A previously-returned page token representing part of the larger set
-      #   of results to view. (+String+)
-      # +max+::
-      #   Maximum number of results to return per page. (+Integer+)
+      #   descending `rank`. Sorting by ascending `rank` is not allowed.
+      # @param [String, Array<String>] fields The fields to return in the
+      #   {Search::Result} objects. These can be fields from {Document}, the
+      #   built-in fields `rank` and `score`, and fields defined in expressions.
+      #   The default is to return all fields.
+      # @param [String, Symbol] scorer The scoring function to invoke on a
+      #   search result for this query. If scorer is not set, scoring is
+      #   disabled and `score` is 0 for all documents in the search result. To
+      #   enable document relevancy score based on term frequency, set `scorer`
+      #   to `:generic`.
+      # @param [Integer] scorer_size Maximum number of top retrieved results to
+      #   score. It is valid only when `scorer` is set. The default is 100.
+      # @param [String] token A previously-returned page token representing part
+      #   of the larger set
+      #   of results to view.
+      # @param [Integer] max Maximum number of results to return per page.
       #
-      # === Returns
+      # @return [Array<Gcloud::Search::Result>] (See
+      #   {Gcloud::Search::Result::List})
       #
-      # Array of Gcloud::Search::Result (See Gcloud::Search::Result::List)
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -511,8 +479,7 @@ module Gcloud
       #     puts result.doc_id
       #   end
       #
-      # If you have a significant number of search results, you may need to
-      # paginate through them: (See Gcloud::Search::Result::List)
+      # @example With pagination: (See {Gcloud::Search::Result::List})
       #
       #   require "gcloud"
       #
@@ -529,14 +496,7 @@ module Gcloud
       #     results = results.next
       #   end
       #
-      # By default, Result objects are sorted by document rank. For more information
-      # see the {REST API documentation for Document.rank}[https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents#resource_representation.google.cloudsearch.v1.Document.rank].
-      #
-      # You can specify how to sort results with the +order+ option. In the example
-      # below, the <code>-</code> character before +avg_review+ means that results
-      # will be sorted in ascending order by +published+ and then in descending
-      # order by +avg_review+.
-      #
+      # @example With the `order` option:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -546,8 +506,7 @@ module Gcloud
       #   results = index.search "dark stormy", order: "published, avg_review desc"
       #   documents = index.search query # API call
       #
-      # You can add computed fields with the +expressions+ option, and limit the
-      # fields that are returned with the +fields+ option:
+      # @example With the `fields` option:
       #
       #   require "gcloud"
       #
@@ -559,7 +518,7 @@ module Gcloud
       #                          expressions: { total_price: "(price + tax)" },
       #                          fields: ["name", "total_price", "highlight"]
       #
-      # Just as in documents, Result data is accessible via Fields methods:
+      # @example Just as in documents, data is accessible via {Fields} methods:
       #
       #   require "gcloud"
       #

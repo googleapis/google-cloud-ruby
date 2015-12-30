@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "delegate"
 
 module Gcloud
@@ -24,14 +24,16 @@ module Gcloud
       # contains the entities as well as the Keys that were deferred from
       # the results and the Entities that were missing in the dataset.
       #
+      # Please be cautious when treating the QueryResults as an Array.
+      # Many common Array methods will return a new Array instance.
+      #
+      # @example
       #   entities = dataset.find_all key1, key2, key3
       #   entities.size #=> 3
       #   entities.deferred #=> []
       #   entities.missing #=> []
       #
-      # Please be cautious when treating the LookupResults as an Array. Many
-      # common Array methods will return a new Array instance.
-      #
+      # @example Caution, many Array methods will return a new Array instance:
       #   entities = dataset.find_all key1, key2, key3
       #   entities.size #=> 3
       #   entities.deferred #=> []

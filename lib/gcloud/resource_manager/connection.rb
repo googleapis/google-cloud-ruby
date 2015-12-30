@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,22 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/version"
 require "google/api_client"
 
 module Gcloud
   module ResourceManager
     ##
+    # @private
     # Represents the connection to Resource Manager, as well as expose the API
     # calls.
-    class Connection #:nodoc:
+    class Connection
       API_VERSION = "v1beta1"
 
-      attr_accessor :credentials #:nodoc:
+      attr_accessor :credentials
 
       ##
       # Creates a new Connection instance.
-      def initialize credentials #:nodoc:
+      def initialize credentials
         @credentials = credentials
         @client = Google::APIClient.new application_name:    "gcloud-ruby",
                                         application_version: Gcloud::VERSION
@@ -116,7 +117,7 @@ module Gcloud
         )
       end
 
-      def inspect #:nodoc:
+      def inspect
         "#{self.class}(#{@project})"
       end
     end

@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,13 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/credentials"
 
 module Gcloud
   module Search
     ##
-    # Represents the Oauth2 signing logic for Search.
-    class Credentials < Gcloud::Credentials #:nodoc:
+    # @private Represents the Oauth2 signing logic for Search.
+    class Credentials < Gcloud::Credentials
       SCOPE = ["https://www.googleapis.com/auth/cloudsearch",
                "https://www.googleapis.com/auth/userinfo.email"]
       PATH_ENV_VARS = %w(SEARCH_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)

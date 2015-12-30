@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 
 require "delegate"
 
@@ -35,8 +35,8 @@ module Gcloud
         end
 
         ##
-        # New Bucket::List from a response object.
-        def self.from_response resp, conn #:nodoc:
+        # @private New Bucket::List from a response object.
+        def self.from_response resp, conn
           buckets = Array(resp.data["items"]).map do |gapi_object|
             Bucket.from_gapi gapi_object, conn
           end

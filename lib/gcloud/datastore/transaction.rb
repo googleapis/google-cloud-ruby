@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,21 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Gcloud
   module Datastore
     ##
-    # = Transaction
+    # # Transaction
     #
     # Special Connection instance for running transactions.
     #
-    # See Gcloud::Datastore::Dataset.transaction
+    # See {Gcloud::Datastore::Dataset.transaction}
     class Transaction < Dataset
       attr_reader :id
 
       ##
-      # Creates a new Transaction instance.
+      # @private Creates a new Transaction instance.
       # Takes a Connection instead of project and Credentials.
-      def initialize connection #:nodoc:
+      def initialize connection
         @connection = connection
         reset!
         start
@@ -36,11 +36,13 @@ module Gcloud
       ##
       # Persist entities in a transaction.
       #
+      # @example
       #   dataset.transaction do |tx|
       #     if tx.find(user.key).nil?
       #       tx.save task1, task2
       #     end
       #   end
+      #
       def save *entities
         save_entities_to_mutation entities, shared_mutation
         # Do not save or assign auto_ids yet
@@ -50,11 +52,13 @@ module Gcloud
       ##
       # Remove entities in a transaction.
       #
+      # @example
       #   dataset.transaction do |tx|
       #     if tx.find(user.key).nil?
       #       tx.delete task1, task2
       #     end
       #   end
+      #
       def delete *entities
         shared_mutation.tap do |m|
           m.delete = entities.map { |entity| entity.key.to_proto }
@@ -99,7 +103,7 @@ module Gcloud
 
       ##
       # Reset the transaction.
-      # Transaction#start must be called afterwards.
+      # {Transaction#start} must be called afterwards.
       def reset!
         @shared_mutation = nil
         @id = nil
@@ -109,9 +113,9 @@ module Gcloud
       protected
 
       ##
-      # Mutation to be shared across save, delete, and commit calls.
+      # @private Mutation to be shared across save, delete, and commit calls.
       # This enables updates to happen when commit is called.
-      def shared_mutation #:nodoc:
+      def shared_mutation
         @shared_mutation ||= Proto.new_mutation
       end
     end

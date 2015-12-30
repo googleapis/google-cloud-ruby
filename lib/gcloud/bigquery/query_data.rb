@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,20 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/bigquery/data"
 
 module Gcloud
   module Bigquery
     ##
-    # = QueryData
+    # # QueryData
     #
     # Represents Data returned from a query a a list of name/value pairs.
     class QueryData < Data
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
-      def initialize arr = [] #:nodoc:
+      # @private
+      def initialize arr = []
         @job = nil
         super
       end
@@ -37,7 +38,7 @@ module Gcloud
       end
 
       # Whether the query has completed or not. When data is present this will
-      # always be +true+. When +false+, +total+ will not be available.
+      # always be `true`. When `false`, `total` will not be available.
       def complete?
         @gapi["jobComplete"]
       end
@@ -89,7 +90,7 @@ module Gcloud
       end
 
       ##
-      # The BigQuery Job that was created to run the query.
+      # The BigQuery {Job} that was created to run the query.
       def job
         return @job if @job
         return nil unless job?
@@ -104,8 +105,8 @@ module Gcloud
       end
 
       ##
-      # New Data from a response object.
-      def self.from_gapi gapi, connection #:nodoc:
+      # @private New Data from a response object.
+      def self.from_gapi gapi, connection
         formatted_rows = format_rows gapi["rows"],
                                      gapi["schema"]["fields"]
 

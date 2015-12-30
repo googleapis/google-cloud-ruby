@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,8 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#--
-# Google Cloud Backoff
+
 module Gcloud
   ##
   # Backoff allows users to control how Google API calls are retried.
@@ -64,6 +62,7 @@ module Gcloud
     self.backoff = ->(retries) { sleep retries.to_i }
 
     ##
+    # @private
     # Creates a new Backoff object to catch common errors when calling
     # the Google API and handle the error by retrying the call.
     #
@@ -72,14 +71,15 @@ module Gcloud
     #                    parameters: { thing: @thing },
     #                    body_object: { name: thing_name }
     #   end
-    def initialize options = {} #:nodoc:
+    def initialize options = {}
       @max_retries  = (options[:retries]    || Backoff.retries).to_i
       @http_codes   = (options[:http_codes] || Backoff.http_codes).to_a
       @reasons      = (options[:reasons]    || Backoff.reasons).to_a
       @backoff      =  options[:backoff]    || Backoff.backoff
     end
 
-    def execute #:nodoc:
+    # @private
+    def execute
       current_retries = 0
       loop do
         result = yield # Expecting Google::APIClient::Result
@@ -92,6 +92,7 @@ module Gcloud
 
     protected
 
+    # @private
     def retry? result, current_retries #:nodoc:
       if current_retries < @max_retries
         return true if retry_http_code? result
@@ -100,11 +101,13 @@ module Gcloud
       false
     end
 
+    # @private
     def retry_http_code? result #:nodoc:
       @http_codes.include? result.response.status
     end
 
-    def retry_error_reason? result #:nodoc:
+    # @private
+    def retry_error_reason? result
       if result.data &&
          result.data["error"] &&
          result.data["error"]["errors"]

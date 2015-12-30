@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,19 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "json"
 require "signet/oauth_2/client"
 require "forwardable"
 require "googleauth"
 
-#--
-# Google Cloud Credentials
 module Gcloud
   ##
+  # @private
   # Represents the OAuth 2.0 signing logic.
   # This class is intended to be inherited by API-specific classes
   # which overrides the SCOPE constant.
-  class Credentials #:nodoc:
+  class Credentials
     TOKEN_CREDENTIAL_URI = "https://accounts.google.com/o/oauth2/token"
     AUDIENCE = "https://accounts.google.com/o/oauth2/token"
     SCOPE = []

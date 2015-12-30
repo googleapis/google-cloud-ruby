@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,14 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Gcloud
   module Datastore
     ##
-    # = Properties
+    # # Properties
     #
     # Hash-like data structure for Datastore properties.
     #
-    # See Entity#properties
+    # See {Entity#properties}
     class Properties
       def initialize properties = {}
         @hash = {}

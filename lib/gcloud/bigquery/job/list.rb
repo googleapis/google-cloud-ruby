@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 
 require "delegate"
 
@@ -39,8 +39,8 @@ module Gcloud
         end
 
         ##
-        # New Job::List from a response object.
-        def self.from_response resp, conn #:nodoc:
+        # @private New Job::List from a response object.
+        def self.from_response resp, conn
           jobs = List.new(Array(resp.data["jobs"]).map do |gapi_object|
             Job.from_gapi gapi_object, conn
           end)

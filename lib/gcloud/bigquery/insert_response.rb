@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,12 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Gcloud
   module Bigquery
     ##
     # InsertResponse
     class InsertResponse
-      def initialize rows, gapi #:nodoc:
+      # @private
+      def initialize rows, gapi
         @rows = rows
         @gapi = gapi
       end
@@ -59,7 +60,8 @@ module Gcloud
         []
       end
 
-      def self.from_gapi rows, gapi #:nodoc:
+      # @private
+      def self.from_gapi rows, gapi
         gapi = gapi.to_hash if gapi.respond_to? :to_hash
         new rows, gapi
       end
@@ -70,7 +72,8 @@ module Gcloud
         attr_reader :row
         attr_reader :errors
 
-        def initialize row, errors #:nodoc:
+        # @private
+        def initialize row, errors
           @row = row
           @errors = errors
         end

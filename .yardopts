@@ -1,0 +1,9 @@
+--no-private
+--title=Gcloud
+--exclude lib/gcloud/proto/
+
+./lib/**/*.rb
+-
+README.md
+OVERVIEW.md
+AUTHENTICATION.md

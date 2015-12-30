@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 
 module Gcloud
   module Search
@@ -28,11 +28,11 @@ module Gcloud
         # The number of documents that match the query. It is greater than or
         # equal to the number of documents actually returned. This is an
         # approximation and not an exact count unless it is less than or equal
-        # to the Index#search +matched_count_accuracy+ option.
+        # to the {Index#search} `matched_count_accuracy` option.
         attr_reader :matched_count
 
         ##
-        # Create a new Result::List with an array of Result instances.
+        # Create a new Result::List with an array of {Result} instances.
         def initialize arr = []
           super arr
         end
@@ -52,7 +52,7 @@ module Gcloud
         end
 
         ##
-        # Retrieves all results by repeatedly loading pages until #next?
+        # Retrieves all results by repeatedly loading pages until {#next?}
         # returns false. Returns the list instance for method chaining.
         def all
           while next?
@@ -64,8 +64,8 @@ module Gcloud
         end
 
         ##
-        # New Result::List from a response object.
-        def self.from_response resp, index, query, search_options #:nodoc:
+        # @private New Result::List from a response object.
+        def self.from_response resp, index, query, search_options
           data = JSON.parse resp.body
           results = new(Array(data["results"]).map do |raw|
             Result.from_hash raw

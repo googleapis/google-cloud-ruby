@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,19 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/errors"
 
 module Gcloud
   module Storage
     ##
-    # = Storage Error
+    # # Storage Error
     #
     # Base Storage exception class.
     class Error < Gcloud::Error
     end
 
     ##
-    # = ApiError
+    # # ApiError
     #
     # Raised when an API call is not successful.
     class ApiError < Error
@@ -43,7 +43,8 @@ module Gcloud
         @errors = errors
       end
 
-      def self.from_response resp #:nodoc:
+      # @private
+      def self.from_response resp
         new resp.data["error"]["message"],
             resp.data["error"]["code"],
             resp.data["error"]["errors"]
@@ -51,7 +52,7 @@ module Gcloud
     end
 
     ##
-    # = FileVerificationError
+    # # FileVerificationError
     #
     # Raised when a File download fails the verification.
     class FileVerificationError < Error
@@ -68,7 +69,8 @@ module Gcloud
       # The value of the digest on the downloaded file.
       attr_accessor :local_digest
 
-      def self.for_md5 gcloud_digest, local_digest #:nodoc:
+      # @private
+      def self.for_md5 gcloud_digest, local_digest
         new("The downloaded file failed MD5 verification.").tap do |e|
           e.type = :md5
           e.gcloud_digest = gcloud_digest
@@ -76,7 +78,8 @@ module Gcloud
         end
       end
 
-      def self.for_crc32c gcloud_digest, local_digest #:nodoc:
+      # @private
+      def self.for_crc32c gcloud_digest, local_digest
         new("The downloaded file failed CRC32c verification.").tap do |e|
           e.type = :crc32c
           e.gcloud_digest = gcloud_digest
@@ -86,7 +89,7 @@ module Gcloud
     end
 
     ##
-    # = SignedUrlUnavailable Error
+    # # SignedUrlUnavailable Error
     #
     # This is raised when File#signed_url is unable to generate a URL due to
     # missing credentials needed to create the URL.

@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/gce"
 require "gcloud/dns/connection"
 require "gcloud/dns/credentials"
@@ -22,12 +22,13 @@ require "gcloud/dns/errors"
 module Gcloud
   module Dns
     ##
-    # = Project
+    # # Project
     #
     # The project is a top level container for resources including Cloud DNS
-    # ManagedZones. Projects can be created only in the {Google Developers
-    # Console}[https://console.developers.google.com].
+    # ManagedZones. Projects can be created only in the [Google Developers
+    # Console](https://console.developers.google.com).
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -37,21 +38,21 @@ module Gcloud
     #     puts record.name
     #   end
     #
-    # See Gcloud#dns
+    # See {Gcloud#dns}
     class Project
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
       ##
-      # The Google API Client object.
-      attr_accessor :gapi #:nodoc:
+      # @private The Google API Client object.
+      attr_accessor :gapi
 
       ##
-      # Creates a new Connection instance.
+      # @private Creates a new Connection instance.
       #
-      # See Gcloud.dns
-      def initialize project, credentials #:nodoc:
+      # See {Gcloud.dns}
+      def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
         @connection = Connection.new project, credentials
@@ -61,8 +62,7 @@ module Gcloud
       ##
       # The unique ID string for the current project.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new "my-todo-project", "/path/to/keyfile.json"
@@ -125,8 +125,8 @@ module Gcloud
       end
 
       ##
-      # Default project.
-      def self.default_project #:nodoc:
+      # @private Default project.
+      def self.default_project
         ENV["DNS_PROJECT"] ||
           ENV["GCLOUD_PROJECT"] ||
           ENV["GOOGLE_CLOUD_PROJECT"] ||
@@ -136,17 +136,12 @@ module Gcloud
       ##
       # Retrieves an existing zone by name or id.
       #
-      # === Parameters
+      # @param [String, Integer] zone_id The name or id of a zone.
       #
-      # +zone_id+::
-      #   The name or id of a zone. (+String+ or +Integer+)
+      # @return [Gcloud::Dns::Zone, nil] Returns `nil` if the zone does not
+      #   exist.
       #
-      # === Returns
-      #
-      # Gcloud::Dns::Zone or +nil+ if the zone does not exist
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -169,20 +164,13 @@ module Gcloud
       ##
       # Retrieves the list of zones belonging to the project.
       #
-      # === Parameters
+      # @param [String] token A previously-returned page token representing part
+      #   of the larger set of results to view.
+      # @param [Integer] max Maximum number of zones to return.
       #
-      # +token+::
-      #   A previously-returned page token representing part of the larger set
-      #   of results to view. (+String+)
-      # +max+::
-      #   Maximum number of zones to return. (+Integer+)
+      # @return [Array<Gcloud::Dns::Zone>] (See {Gcloud::Dns::Zone::List})
       #
-      # === Returns
-      #
-      # Array of Gcloud::Dns::Zone (See Gcloud::Dns::Zone::List)
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -192,9 +180,7 @@ module Gcloud
       #     puts zone.name
       #   end
       #
-      # If you have a significant number of zones, you may need to paginate
-      # through them: (See Gcloud::Dns::Zone::List)
-      #
+      # @example With pagination: (See {Gcloud::Dns::Zone::List})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -222,30 +208,22 @@ module Gcloud
       ##
       # Creates a new zone.
       #
-      # === Parameters
+      # @param [String] zone_name User assigned name for this resource. Must be
+      #   unique within the project. The name must be 1-32 characters long, must
+      #   begin with a letter, end with a letter or digit, and only contain
+      #   lowercase letters, digits or dashes.
+      # @param [String] zone_dns The DNS name of this managed zone, for instance
+      #   "example.com.".
+      # @param [String] description A string of at most 1024 characters
+      #   associated with this resource for the user's convenience. Has no
+      #   effect on the managed zone's function.
+      # @param [String] name_server_set A NameServerSet is a set of DNS name
+      #   servers that all host the same ManagedZones. Most users will leave
+      #   this field unset.
       #
-      # +zone_name+::
-      #   User assigned name for this resource. Must be unique within the
-      #   project. The name must be 1-32 characters long, must begin with a
-      #   letter, end with a letter or digit, and only contain lowercase
-      #   letters, digits or dashes. (+String+)
-      # +zone_dns+::
-      #   The DNS name of this managed zone, for instance "example.com.".
-      #   (+String+)
-      # +description+::
-      #   A string of at most 1024 characters associated with this resource for
-      #   the user's convenience. Has no effect on the managed zone's function.
-      #   (+String+)
-      # +name_server_set+::
-      #   A NameServerSet is a set of DNS name servers that all host the same
-      #   ManagedZones. Most users will leave this field unset. (+String+)
+      # @return [Gcloud::Dns::Zone]
       #
-      # === Returns
-      #
-      # Gcloud::Dns::Zone
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

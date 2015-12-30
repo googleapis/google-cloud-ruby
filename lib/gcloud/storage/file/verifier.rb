@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "pathname"
 require "digest/md5"
 require "digest/crc32c"
@@ -22,9 +22,10 @@ module Gcloud
   module Storage
     class File
       ##
+      # @private
       # Verifies downloaded files by creating an MD5 or CRC32c hash digest
       # and comparing the value to the one from the Storage API.
-      module Verifier #:nodoc:
+      module Verifier
         def self.verify_md5! gcloud_file, local_file
           gcloud_digest = gcloud_file.md5
           local_digest = md5_for local_file

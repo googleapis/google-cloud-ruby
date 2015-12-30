@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/version"
 require "google/api_client"
 
 module Gcloud
   module Search
     ##
-    # Temporary substitute for Google::APIClient. Once the Search API is
-    # discoverable, initialization of this class in Connection should be
+    # @private Temporary substitute for Google::APIClient. Once the Search API
+    # is discoverable, initialization of this class in Connection should be
     # replaced with the Google API Client.
-    class APIClient #:nodoc:
+    class APIClient
       attr_accessor :authorization, :connection
 
       ##
@@ -50,7 +50,7 @@ module Gcloud
 
       ##
       # Return type for APIClient#discovered_api
-      class DiscoveredApi #:nodoc:
+      class DiscoveredApi
         def initialize name, version
           @name = name
           @version = version
@@ -70,7 +70,7 @@ module Gcloud
 
       ##
       # Return type for DiscoveredApi http verb methods
-      class ResourcePath #:nodoc:
+      class ResourcePath
         def initialize api_name, api_version, resource_root, resource_id_param
           @root = "https://#{api_name}.googleapis.com/#{api_version}" \
                   "/projects/{projectId}/#{resource_root}"
@@ -100,7 +100,7 @@ module Gcloud
 
       ##
       # Special-case return type for DiscoveredApi http search verb method
-      class IndexResourcePath < ResourcePath #:nodoc:
+      class IndexResourcePath < ResourcePath
         def search
           api_method :get, "/{indexId}/search"
         end

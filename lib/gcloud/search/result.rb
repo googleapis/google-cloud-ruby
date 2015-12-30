@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,31 +12,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/search/result/list"
 require "gcloud/search/fields"
 
 module Gcloud
   module Search
     ##
-    # = Result
+    # # Result
     #
-    # See Gcloud#search
+    # See {Gcloud#search}
     class Result
       ##
-      # Creates a new Result instance.
-      def initialize #:nodoc:
+      # @private Creates a new Result instance.
+      def initialize
         @fields = Fields.new
         @raw = {}
       end
 
       ##
       # The unique identifier of the document referenced in the search result.
+      #
+      # @return [String]
       def doc_id
         @raw["docId"]
       end
 
       ##
       # The token for the next page of results.
+      #
+      # @return [String]
       def token
         @raw["nextPageToken"]
       end
@@ -45,18 +49,12 @@ module Gcloud
       ##
       # Retrieve the field values associated to a field name.
       #
-      # === Parameters
+      # @param [String] name The name of the field. New values will be
+      #   configured with this name.
       #
-      # +name+::
-      #   The name of the field. New values will be configured with this name.
-      #   (+String+)
+      # @return [FieldValue]
       #
-      # === Returns
-      #
-      # FieldValue
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -80,7 +78,7 @@ module Gcloud
 
       ##
       # The fields in the search result. Each field has a name (String) and a
-      # list of values (FieldValues). (See Fields)
+      # list of values ({FieldValues}). (See {Fields})
       def fields
         @fields
       end
@@ -90,10 +88,9 @@ module Gcloud
       ##
       # Calls block once for each field, passing the field name and values pair
       # as parameters. If no block is given an enumerator is returned instead.
-      # (See Fields#each)
+      # (See {Fields#each})
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -116,8 +113,11 @@ module Gcloud
 
       ##
       # Returns a new array populated with all the field names.
-      # (See Fields#names)
+      # (See {Fields#names})
       #
+      # @return [Array<String>]
+      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -136,8 +136,8 @@ module Gcloud
       end
 
       ##
-      # Override to keep working in interactive shells manageable.
-      def inspect #:nodoc:
+      # @private Override to keep working in interactive shells manageable.
+      def inspect
         insp_token = ""
         if token
           trunc_token = "#{token[0, 8]}...#{token[-5..-1]}"
@@ -149,8 +149,8 @@ module Gcloud
       end
 
       ##
-      # New Result from a raw data object.
-      def self.from_hash hash #:nodoc:
+      # @private New Result from a raw data object.
+      def self.from_hash hash
         result = new
         result.instance_variable_set "@raw", hash
         result.instance_variable_set "@fields", Fields.from_raw(hash["fields"])
@@ -158,8 +158,8 @@ module Gcloud
       end
 
       ##
-      # Returns the Result data as a hash
-      def to_hash #:nodoc:
+      # @private Returns the Result data as a hash
+      def to_hash
         hash = @raw.dup
         hash["fields"] = @fields.to_raw
         hash

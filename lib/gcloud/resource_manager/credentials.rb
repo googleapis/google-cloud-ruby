@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,13 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/credentials"
 
 module Gcloud
   module ResourceManager
     ##
-    # Represents the Oauth2 signing logic for Resource Manager.
-    class Credentials < Gcloud::Credentials #:nodoc:
+    # @private Represents the Oauth2 signing logic for Resource Manager.
+    class Credentials < Gcloud::Credentials
       SCOPE = ["https://www.googleapis.com/auth/cloud-platform"]
       PATH_ENV_VARS = %w(RESOURCE_MANAGER_KEYFILE
                          GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)

@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Gcloud
   module Search
     class Document
@@ -25,7 +25,7 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Document::List with an array of Document instances.
+        # Create a new Document::List with an array of {Document} instances.
         def initialize arr = []
           super arr
         end
@@ -45,7 +45,7 @@ module Gcloud
         end
 
         ##
-        # Retrieves all documents by repeatedly loading pages until #next?
+        # Retrieves all documents by repeatedly loading pages until {#next?}
         # returns false. Returns the list instance for method chaining.
         def all
           while next?
@@ -57,8 +57,8 @@ module Gcloud
         end
 
         ##
-        # New Documents::List from a response object.
-        def self.from_response resp, index #:nodoc:
+        # @private New Documents::List from a response object.
+        def self.from_response resp, index
           data = JSON.parse resp.body
           documents = new(Array(data["documents"]).map do |doc_hash|
             Document.from_hash doc_hash

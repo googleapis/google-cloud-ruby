@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/resource_manager/credentials"
 require "gcloud/resource_manager/connection"
 require "gcloud/resource_manager/errors"
@@ -21,7 +21,7 @@ require "gcloud/resource_manager/project"
 module Gcloud
   module ResourceManager
     ##
-    # = Manager
+    # # Manager
     #
     # Provides methods for creating, retrieving, and updating projects.
     #
@@ -33,17 +33,17 @@ module Gcloud
     #     puts projects.project_id
     #   end
     #
-    # See Gcloud#resource_manager
+    # See {Gcloud#resource_manager}
     class Manager
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
       ##
-      # Creates a new Connection instance.
+      # @private Creates a new Connection instance.
       #
-      # See Gcloud.resource_manager
-      def initialize credentials #:nodoc:
+      # See {Gcloud.resource_manager}
+      def initialize credentials
         @connection = Connection.new credentials
       end
 
@@ -52,39 +52,31 @@ module Gcloud
       # specified filter. This method returns projects in an unspecified order.
       # New projects do not necessarily appear at the end of the list.
       #
-      # === Parameters
-      #
-      # +filter+::
-      #   An expression for filtering the results of the request. Filter rules
-      #   are case insensitive. (+String+)
+      # @param [String] filter An expression for filtering the results of the
+      #   request. Filter rules are case insensitive.
       #
       #   The fields eligible for filtering are:
-      #   * +name+
-      #   * +id+
-      #   * +labels.key+ - where +key+ is the name of a label
+      #   * `name`
+      #   * `id`
+      #   * `labels.key` - where `key` is the name of a label
       #
       #   Some examples of using labels as filters:
-      #   * +name:*+ - The project has a name.
-      #   * +name:Howl+ - The project's name is Howl or howl.
-      #   * +name:HOWL+ - Equivalent to above.
-      #   * +NAME:howl+ - Equivalent to above.
-      #   * +labels.color:*+ - The project has the label color.
-      #   * +labels.color:red+ - The project's label color has the value red.
+      #   * `name:*` - The project has a name.
+      #   * `name:Howl` - The project's name is Howl or howl.
+      #   * `name:HOWL` - Equivalent to above.
+      #   * `NAME:howl` - Equivalent to above.
+      #   * `labels.color:*` - The project has the label color.
+      #   * `labels.color:red` - The project's label color has the value red.
       #   * <code>labels.color:red labels.size:big</code> - The project's label
       #     color has the value red and its label size has the value big.
-      # +token+::
-      #   A previously-returned page token representing part of the larger set
-      #   of results to view. (+String+)
-      # +max+::
-      #   Maximum number of projects to return. (+Integer+)
+      # @param [String] token A previously-returned page token representing part
+      #   of the larger set of results to view.
+      # @param [Integer] max Maximum number of projects to return.
       #
-      # === Returns
+      # @return [Array<Gcloud::ResourceManager::Project>] (See
+      #   {Gcloud::ResourceManager::Project::List})
       #
-      # Array of Gcloud::ResourceManager::Project
-      # (See Gcloud::ResourceManager::Project::List)
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -94,8 +86,7 @@ module Gcloud
       #     puts project.project_id
       #   end
       #
-      # Projects can be filtered using the +filter+ option:
-      #
+      # @example Projects can be filtered using the `filter` option:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -105,9 +96,7 @@ module Gcloud
       #     puts project.project_id
       #   end
       #
-      # If you have a significant number of projects, you may need to paginate
-      # through them: (See Gcloud::ResourceManager::Project::List)
-      #
+      # @example With pagination: (See {Gcloud::ResourceManager::Project::List})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -127,19 +116,14 @@ module Gcloud
       end
 
       ##
-      # Retrieves the project identified by the specified +project_id+.
+      # Retrieves the project identified by the specified `project_id`.
       #
-      # === Parameters
+      # @param [String] project_id The ID of the project.
       #
-      # +project_id+::
-      #   The ID of the project. (+String+)
+      # @return [Gcloud::ResourceManager::Project, nil] Returns `nil` if the
+      #   project does not exist
       #
-      # === Returns
-      #
-      # Gcloud::ResourceManager::Project, or +nil+ if the project does not exist
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -166,21 +150,15 @@ module Gcloud
       # Several APIs are activated automatically for the project, including
       # Google Cloud Storage.
       #
-      # === Parameters
-      #
-      # +project_id+::
-      #   The unique, user-assigned ID of the project. It must be 6 to 30
-      #   lowercase letters, digits, or hyphens. It must start with a letter.
-      #   Trailing hyphens are prohibited. (+String+)
-      # +name+::
-      #   The user-assigned name of the project. This field is optional and can
-      #   remain unset.
+      # @param [String] project_id The unique, user-assigned ID of the project.
+      #   It must be 6 to 30 lowercase letters, digits, or hyphens. It must
+      #   start with a letter. Trailing hyphens are prohibited.
+      # @param [String] name The user-assigned name of the project. This field
+      #   is optional and can remain unset.
       #
       #   Allowed characters are: lowercase and uppercase letters, numbers,
       #   hyphen, single-quote, double-quote, space, and exclamation point.
-      #   (+String+)
-      # +labels+::
-      #   The labels associated with this project.
+      # @param [Hash] labels The labels associated with this project.
       #
       #   Label keys must be between 1 and 63 characters long and must conform
       #   to the following regular expression:
@@ -190,22 +168,17 @@ module Gcloud
       #   to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
       #
       #   No more than 256 labels can be associated with a given resource.
-      #   (+Hash+)
       #
-      # === Returns
+      # @return [Gcloud::ResourceManager::Project]
       #
-      # Gcloud::ResourceManager::Project
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
       #   project = resource_manager.create_project "tokyo-rain-123"
       #
-      # A project can also be created with a +name+ and +labels+.
-      #
+      # @example A project can also be created with a `name` and `labels`:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -230,10 +203,10 @@ module Gcloud
       # if the following criteria are met:
       #
       # * The project does not have a billing account associated with it.
-      # * The project has a lifecycle state of +ACTIVE+.
-      # * This method changes the project's lifecycle state from +ACTIVE+ to
-      #   +DELETE_REQUESTED+. The deletion starts at an unspecified time, at
-      #   which point the lifecycle state changes to +DELETE_IN_PROGRESS+.
+      # * The project has a lifecycle state of `ACTIVE`.
+      # * This method changes the project's lifecycle state from `ACTIVE` to
+      #   `DELETE_REQUESTED`. The deletion starts at an unspecified time, at
+      #   which point the lifecycle state changes to `DELETE_IN_PROGRESS`.
       #
       # Until the deletion completes, you can check the lifecycle state by
       # retrieving the project with Manager#project. The project remains visible
@@ -244,13 +217,9 @@ module Gcloud
       #
       # The caller must have modify permissions for this project.
       #
-      # === Parameters
+      # @param [String] project_id The ID of the project.
       #
-      # +project_id+::
-      #   The ID of the project. (+String+)
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -268,19 +237,15 @@ module Gcloud
 
       ##
       # Restores the project. You can only use this method for a project that
-      # has a lifecycle state of +DELETE_REQUESTED+. After deletion starts, as
-      # indicated by a lifecycle state of +DELETE_IN_PROGRESS+, the project
+      # has a lifecycle state of `DELETE_REQUESTED`. After deletion starts, as
+      # indicated by a lifecycle state of `DELETE_IN_PROGRESS`, the project
       # cannot be restored.
       #
       # The caller must have modify permissions for this project.
       #
-      # === Parameters
+      # @param [String] project_id The ID of the project.
       #
-      # +project_id+::
-      #   The ID of the project. (+String+)
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

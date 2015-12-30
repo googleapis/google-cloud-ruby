@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "faraday"
 
-#--
-# Google Cloud Compute Engine
 module Gcloud
   ##
+  # @private
   # Represents the Google Compute Engine environment.
-  module GCE #:nodoc:
+  module GCE
     CHECK_URI = "http://169.254.169.254"
     PROJECT_URI = "#{CHECK_URI}/computeMetadata/v1/project/project-id"
 

@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,12 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/errors"
 
 module Gcloud
   module Pubsub
     ##
-    # = Storage Error
+    # # Storage Error
     #
     # Base Pub/Sub exception class.
     class Error < Gcloud::Error
@@ -26,7 +26,8 @@ module Gcloud
       # The response object of the failed HTTP request.
       attr_reader :response
 
-      def self.from_response resp #:nodoc:
+      # @private
+      def self.from_response resp
         new.tap do |e|
           e.response = resp
         end
@@ -34,7 +35,7 @@ module Gcloud
     end
 
     ##
-    # = ApiError
+    # # ApiError
     #
     # Raised when an API call is not successful.
     class ApiError < Error
@@ -59,7 +60,8 @@ module Gcloud
         @response = response
       end
 
-      def self.from_response resp #:nodoc:
+      # @private
+      def self.from_response resp
         klass = klass_for resp.data["error"]["status"]
         klass.new resp.data["error"]["message"], resp
       rescue
@@ -77,16 +79,16 @@ module Gcloud
     end
 
     ##
-    # = AlreadyExistsError
+    # # AlreadyExistsError
     #
-    # Raised when Pub/Sub returns an +ALREADY_EXISTS+ error.
+    # Raised when Pub/Sub returns an `ALREADY_EXISTS` error.
     class AlreadyExistsError < ApiError
     end
 
     ##
-    # = NotFoundError
+    # # NotFoundError
     #
-    # Raised when Pub/Sub returns a +NOT_FOUND+ error.
+    # Raised when Pub/Sub returns a `NOT_FOUND` error.
     class NotFoundError < ApiError
     end
   end

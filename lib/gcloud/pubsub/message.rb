@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,20 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/pubsub/errors"
 
 module Gcloud
   module Pubsub
     ##
-    # = Message
+    # # Message
     #
     # Represents a Pub/Sub Message.
     #
-    # Message objects are created by Topic#publish.
-    # Subscription#pull returns an array of ReceivedMessage objects, each of
-    # which contains a Message object. Each ReceivedMessage object can be
+    # Message objects are created by {Topic#publish}.
+    # {Subscription#pull} returns an array of {ReceivedMessage} objects, each of
+    # which contains a Message object. Each {ReceivedMessage} object can be
     # acknowledged and/or delayed.
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -44,8 +45,8 @@ module Gcloud
     #
     class Message
       ##
-      # The Google API Client object.
-      attr_accessor :gapi #:nodoc:
+      # @private The Google API Client object.
+      attr_accessor :gapi
 
       ##
       # Create an empty Message object.
@@ -79,8 +80,8 @@ module Gcloud
       alias_method :msg_id, :message_id
 
       ##
-      # New Topic from a Google API Client object.
-      def self.from_gapi gapi #:nodoc:
+      # @private New {Topic} from a Google API Client object.
+      def self.from_gapi gapi
         new.tap do |f|
           f.gapi = gapi
         end

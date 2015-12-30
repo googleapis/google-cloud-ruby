@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "time"
 require "gcloud/resource_manager/errors"
 require "gcloud/resource_manager/project/list"
@@ -21,12 +21,13 @@ require "gcloud/resource_manager/project/updater"
 module Gcloud
   module ResourceManager
     ##
-    # = Project
+    # # Project
     #
     # Project is a high-level Google Cloud Platform entity. It is a container
     # for ACLs, APIs, AppEngine Apps, VMs, and other Google Cloud Platform
     # resources.
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -39,16 +40,16 @@ module Gcloud
     #
     class Project
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
       ##
-      # The Google API Client object.
-      attr_accessor :gapi #:nodoc:
+      # @private The Google API Client object.
+      attr_accessor :gapi
 
       ##
-      # Create an empty Project object.
-      def initialize #:nodoc:
+      # @private Create an empty Project object.
+      def initialize
         @connection = nil
         @gapi = {}
       end
@@ -83,8 +84,7 @@ module Gcloud
       # Allowed characters are: lowercase and uppercase letters, numbers,
       # hyphen, single-quote, double-quote, space, and exclamation point.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -113,12 +113,9 @@ module Gcloud
       # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
       #
       # No more than 256 labels can be associated with a given resource.
-      # (+Hash+)
+      # (`Hash`)
       #
-      # === Examples
-      #
-      # Labels are read-only and cannot be changed by direct assignment.
-      #
+      # @example Labels are read-only and cannot be changed:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -127,9 +124,7 @@ module Gcloud
       #   project.labels["env"] #=> "dev" # read only
       #   project.labels["env"] = "production" # raises error
       #
-      # Labels can be updated by passing a block, or by calling the #labels=
-      # method.
-      #
+      # @example Labels can be updated by passing a block, or with {#labels=}:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -161,10 +156,9 @@ module Gcloud
       # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
       #
       # No more than 256 labels can be associated with a given resource.
-      # (+Hash+)
+      # (`Hash`)
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -196,13 +190,13 @@ module Gcloud
       # The project lifecycle state.
       #
       # Possible values are:
-      # * +ACTIVE+ - The normal and active state.
-      # * +LIFECYCLE_STATE_UNSPECIFIED+ - Unspecified state. This is only
+      # * `ACTIVE` - The normal and active state.
+      # * `LIFECYCLE_STATE_UNSPECIFIED` - Unspecified state. This is only
       #   used/useful for distinguishing unset values.
-      # * +DELETE_REQUESTED+ - The project has been marked for deletion by the
+      # * `DELETE_REQUESTED` - The project has been marked for deletion by the
       #   user (by invoking DeleteProject) or by the system (Google Cloud
       #   Platform). This can generally be reversed by invoking UndeleteProject.
-      # * +DELETE_IN_PROGRESS+ - The process of deleting the project has begun.
+      # * `DELETE_IN_PROGRESS` - The process of deleting the project has begun.
       #   Reversing the deletion is no longer possible.
       #
       def state
@@ -210,38 +204,37 @@ module Gcloud
       end
 
       ##
-      # Checks if the state is +ACTIVE+.
+      # Checks if the state is `ACTIVE`.
       def active?
         return false if state.nil?
         "ACTIVE".casecmp(state).zero?
       end
 
       ##
-      # Checks if the state is +LIFECYCLE_STATE_UNSPECIFIED+.
+      # Checks if the state is `LIFECYCLE_STATE_UNSPECIFIED`.
       def unspecified?
         return false if state.nil?
         "LIFECYCLE_STATE_UNSPECIFIED".casecmp(state).zero?
       end
 
       ##
-      # Checks if the state is +DELETE_REQUESTED+.
+      # Checks if the state is `DELETE_REQUESTED`.
       def delete_requested?
         return false if state.nil?
         "DELETE_REQUESTED".casecmp(state).zero?
       end
 
       ##
-      # Checks if the state is +DELETE_IN_PROGRESS+.
+      # Checks if the state is `DELETE_IN_PROGRESS`.
       def delete_in_progress?
         return false if state.nil?
         "DELETE_IN_PROGRESS".casecmp(state).zero?
       end
 
       ##
-      # Updates the project in a single API call. See Project::Updater
+      # Updates the project in a single API call. See {Project::Updater}
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -267,8 +260,7 @@ module Gcloud
       # Reloads the project (with updated state) from the Google Cloud Resource
       # Manager service.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -291,10 +283,10 @@ module Gcloud
       # if the following criteria are met:
       #
       # * The project does not have a billing account associated with it.
-      # * The project has a lifecycle state of +ACTIVE+.
-      # * This method changes the project's lifecycle state from +ACTIVE+ to
-      #   +DELETE_REQUESTED+. The deletion starts at an unspecified time, at
-      #   which point the lifecycle state changes to +DELETE_IN_PROGRESS+.
+      # * The project has a lifecycle state of `ACTIVE`.
+      # * This method changes the project's lifecycle state from `ACTIVE` to
+      #   `DELETE_REQUESTED`. The deletion starts at an unspecified time, at
+      #   which point the lifecycle state changes to `DELETE_IN_PROGRESS`.
       #
       # Until the deletion completes, you can check the lifecycle state by
       # calling #reload!, or by retrieving the project with Manager#project. The
@@ -306,8 +298,7 @@ module Gcloud
       #
       # The caller must have modify permissions for this project.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -330,14 +321,13 @@ module Gcloud
 
       ##
       # Restores the project. You can only use this method for a project that
-      # has a lifecycle state of +DELETE_REQUESTED+. After deletion starts, as
-      # indicated by a lifecycle state of +DELETE_IN_PROGRESS+, the project
+      # has a lifecycle state of `DELETE_REQUESTED`. After deletion starts, as
+      # indicated by a lifecycle state of `DELETE_IN_PROGRESS`, the project
       # cannot be restored.
       #
       # The caller must have modify permissions for this project.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -359,21 +349,8 @@ module Gcloud
       end
 
       ##
-      # Gets the {Cloud IAM}[https://cloud.google.com/iam/] access control
-      # policy. See {Managing
-      # Policies}[https://cloud.google.com/iam/docs/managing-policies]
-      # for more information.
-      #
-      # === Parameters
-      #
-      # +force+::
-      #   Force load the latest policy when +true+. Otherwise the policy will be
-      #   memoized to reduce the number of API calls made. The default is
-      #   +false+. (+Boolean+)
-      #
-      # === Returns
-      #
-      # A hash that conforms to the following structure:
+      # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
+      # policy. Returns a hash that conforms to the following structure:
       #
       #   {
       #     "bindings" => [{
@@ -384,11 +361,16 @@ module Gcloud
       #     "etag" => "CAE="
       #   }
       #
-      # === Examples
+      # @see https://cloud.google.com/iam/docs/managing-policies Managing
+      #   Policies
       #
-      # By default the policy values are memoized to reduce the number of API
-      # calls made.
+      # @param [Boolean] force Force load the latest policy when `true`.
+      #   Otherwise the policy will be memoized to reduce the number of API
+      #   calls made. The default is `false`.
       #
+      # @return [Hash] See description
+      #
+      # @example Policy values are memoized by default:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -400,8 +382,7 @@ module Gcloud
       #   puts policy["version"]
       #   puts policy["etag"]
       #
-      # Use the +force+ option to retrieve the latest policy from the service.
-      #
+      # @example Use the `force` option to retrieve the latest policy:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -409,7 +390,7 @@ module Gcloud
       #   project = resource_manager.project "tokyo-rain-123"
       #   policy = project.policy force: true
       #
-      def policy force: nil
+      def policy force: false
         @policy = nil if force
         @policy ||= begin
           ensure_connection!
@@ -422,15 +403,14 @@ module Gcloud
       end
 
       ##
-      # Sets the {Cloud IAM}[https://cloud.google.com/iam/] access control
-      # policy. See {Managing
-      # Policies}[https://cloud.google.com/iam/docs/managing-policies]
-      # for more information.
+      # Sets the [Cloud IAM](https://cloud.google.com/iam/) access control
+      # policy.
       #
-      # === Parameters
+      # @see https://cloud.google.com/iam/docs/managing-policies Managing
+      #   Policies
       #
-      # +new_policy+::
-      #   A hash that conforms to the following structure:
+      # @param [String] new_policy A hash that conforms to the following
+      #   structure:
       #
       #     {
       #       "bindings" => [{
@@ -439,8 +419,7 @@ module Gcloud
       #       }]
       #     }
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -467,24 +446,19 @@ module Gcloud
       end
 
       ##
-      # Tests the specified permissions against the {Cloud
-      # IAM}[https://cloud.google.com/iam/] access control policy. See
-      # {Managing Policies}[https://cloud.google.com/iam/docs/managing-policies]
-      # for more information.
+      # Tests the specified permissions against the [Cloud
+      # IAM](https://cloud.google.com/iam/) access control policy.
       #
-      # === Parameters
+      # @see https://cloud.google.com/iam/docs/managing-policies Managing
+      #   Policies
       #
-      # +permissions+::
-      #   The set of permissions to check access for. Permissions with wildcards
-      #   (such as +*+ or +storage.*+) are not allowed.
-      #   (String or Array of Strings)
+      # @param [String, Array<String>] *permissions The set of permissions to
+      #   check access for. Permissions with wildcards (such as `*` or
+      #   `storage.*`) are not allowed.
       #
-      # === Returns
+      # @return [Array<String>] The permissions that have access
       #
-      # The permissions that have access. (Array of Strings)
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -507,8 +481,8 @@ module Gcloud
       end
 
       ##
-      # New Change from a Google API Client object.
-      def self.from_gapi gapi, connection #:nodoc:
+      # @private New Change from a Google API Client object.
+      def self.from_gapi gapi, connection
         new.tap do |p|
           p.gapi = gapi
           p.connection = connection

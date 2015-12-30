@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/bigquery/data"
 require "gcloud/bigquery/table/list"
 require "gcloud/bigquery/errors"
@@ -20,7 +20,7 @@ require "gcloud/bigquery/errors"
 module Gcloud
   module Bigquery
     ##
-    # = View
+    # # View
     #
     # A view is a virtual table defined by a SQL query. You can query views in
     # the browser tool, or by using a query job.
@@ -30,6 +30,7 @@ module Gcloud
     # queried. Queries are billed according to the total amount of data in all
     # table fields referenced directly or indirectly by the top-level query.
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -40,16 +41,16 @@ module Gcloud
     #
     class View
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
       ##
-      # The Google API Client object.
-      attr_accessor :gapi #:nodoc:
+      # @private The Google API Client object.
+      attr_accessor :gapi
 
       ##
-      # Create an empty Table object.
-      def initialize #:nodoc:
+      # @private Create an empty Table object.
+      def initialize
         @connection = nil
         @gapi = {}
       end
@@ -59,34 +60,35 @@ module Gcloud
       # The ID must contain only letters (a-z, A-Z), numbers (0-9),
       # or underscores (_). The maximum length is 1,024 characters.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def table_id
         @gapi["tableReference"]["tableId"]
       end
 
       ##
-      # The ID of the +Dataset+ containing this table.
+      # The ID of the `Dataset` containing this table.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def dataset_id
         @gapi["tableReference"]["datasetId"]
       end
 
       ##
-      # The ID of the +Project+ containing this table.
+      # The ID of the `Project` containing this table.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def project_id
         @gapi["tableReference"]["projectId"]
       end
 
       ##
+      # @private
       # The gapi fragment containing the Project ID, Dataset ID, and Table ID as
       # a camel-cased hash.
-      def table_ref #:nodoc:
+      def table_ref
         table_ref = @gapi["tableReference"]
         table_ref = table_ref.to_hash if table_ref.respond_to? :to_hash
         table_ref
@@ -95,7 +97,7 @@ module Gcloud
       ##
       # The name of the table.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def name
         @gapi["friendlyName"]
@@ -104,7 +106,7 @@ module Gcloud
       ##
       # Updates the name of the table.
       #
-      # :category: Lifecycle
+      # @!group Lifecycle
       #
       def name= new_name
         patch_gapi! name: new_name
@@ -113,7 +115,7 @@ module Gcloud
       ##
       # A string hash of the dataset.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def etag
         ensure_full_data!
@@ -123,7 +125,7 @@ module Gcloud
       ##
       # A URL that can be used to access the dataset using the REST API.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def api_url
         ensure_full_data!
@@ -133,7 +135,7 @@ module Gcloud
       ##
       # The description of the table.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def description
         ensure_full_data!
@@ -143,7 +145,7 @@ module Gcloud
       ##
       # Updates the description of the table.
       #
-      # :category: Lifecycle
+      # @!group Lifecycle
       #
       def description= new_description
         patch_gapi! description: new_description
@@ -152,7 +154,7 @@ module Gcloud
       ##
       # The time when this table was created.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def created_at
         ensure_full_data!
@@ -164,7 +166,7 @@ module Gcloud
       # If not present, the table will persist indefinitely.
       # Expired tables will be deleted and their storage reclaimed.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def expires_at
         ensure_full_data!
@@ -175,7 +177,7 @@ module Gcloud
       ##
       # The date when this table was last modified.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def modified_at
         ensure_full_data!
@@ -185,7 +187,7 @@ module Gcloud
       ##
       # Checks if the table's type is "TABLE".
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def table?
         @gapi["type"] == "TABLE"
@@ -194,7 +196,7 @@ module Gcloud
       ##
       # Checks if the table's type is "VIEW".
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def view?
         @gapi["type"] == "VIEW"
@@ -204,7 +206,7 @@ module Gcloud
       # The geographic location where the table should reside. Possible
       # values include EU and US. The default value is US.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def location
         ensure_full_data!
@@ -214,7 +216,7 @@ module Gcloud
       ##
       # The schema of the table.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def schema
         ensure_full_data!
@@ -227,7 +229,7 @@ module Gcloud
       ##
       # The fields of the table.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def fields
         f = schema["fields"]
@@ -239,7 +241,7 @@ module Gcloud
       ##
       # The names of the columns in the table.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def headers
         fields.map { |f| f["name"] }
@@ -248,7 +250,7 @@ module Gcloud
       ##
       # The query that executes each time the view is loaded.
       #
-      # :category: Attributes
+      # @!group Attributes
       #
       def query
         @gapi["view"]["query"] if @gapi["view"]
@@ -256,16 +258,13 @@ module Gcloud
 
       ##
       # Updates the query that executes each time the view is loaded.
-      # See the BigQuery {Query Reference
-      # }[https://cloud.google.com/bigquery/query-reference].
       #
-      # === Parameters
+      # @see https://cloud.google.com/bigquery/query-reference BigQuery Query
+      #   Reference
       #
-      # +new_query+::
-      #   The query that defines the view. (+String+)
+      # @param [String] new_query The query that defines the view.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -275,7 +274,7 @@ module Gcloud
       #
       #   view.query = "SELECT first_name FROM [my_project:my_dataset.my_table]"
       #
-      # :category: Lifecycle
+      # @!group Lifecycle
       #
       def query= new_query
         patch_gapi! query: new_query
@@ -284,40 +283,31 @@ module Gcloud
       ##
       # Runs a query to retrieve all data from the view.
       #
-      # === Parameters
+      # @param [Integer] max The maximum number of rows of data to return per
+      #   page of results. Setting this flag to a small value such as 1000 and
+      #   then paging through results might improve reliability when the query
+      #   result set is large. In addition to this limit, responses are also
+      #   limited to 10 MB. By default, there is no maximum row count, and only
+      #   the byte limit applies.
+      # @param [Integer] timeout How long to wait for the query to complete, in
+      #   milliseconds, before the request times out and returns. Note that this
+      #   is only a timeout for the request, not the query. If the query takes
+      #   longer to run than the timeout value, the call returns without any
+      #   results and with QueryData#complete? set to false. The default value
+      #   is 10000 milliseconds (10 seconds).
+      # @param [Boolean] cache Whether to look for the result in the query
+      #   cache. The query cache is a best-effort cache that will be flushed
+      #   whenever tables in the query are modified. The default value is true.
+      #   For more information, see [query
+      #   caching](https://developers.google.com/bigquery/querying-data).
+      # @param [Boolean] dryrun If set to `true`, BigQuery doesn't run the job.
+      #   Instead, if the query is valid, BigQuery returns statistics about the
+      #   job such as how many bytes would be processed. If the query is
+      #   invalid, an error returns. The default value is `false`.
       #
-      # +max+::
-      #   The maximum number of rows of data to return per page of results.
-      #   Setting this flag to a small value such as 1000 and then paging
-      #   through results might improve reliability when the query result set is
-      #   large. In addition to this limit, responses are also limited to 10 MB.
-      #   By default, there is no maximum row count, and only the byte limit
-      #   applies. (+Integer+)
-      # +timeout+::
-      #   How long to wait for the query to complete, in milliseconds, before
-      #   the request times out and returns. Note that this is only a timeout
-      #   for the request, not the query. If the query takes longer to run than
-      #   the timeout value, the call returns without any results and with
-      #   QueryData#complete? set to false. The default value is 10000
-      #   milliseconds (10 seconds). (+Integer+)
-      # +cache+::
-      #   Whether to look for the result in the query cache. The query cache is
-      #   a best-effort cache that will be flushed whenever tables in the query
-      #   are modified. The default value is true. For more information, see
-      #   {query caching}[https://developers.google.com/bigquery/querying-data].
-      #   (+Boolean+)
-      # +dryrun+::
-      #   If set to +true+, BigQuery doesn't run the job. Instead, if the query
-      #   is valid, BigQuery returns statistics about the job such as how many
-      #   bytes would be processed. If the query is invalid, an error returns.
-      #   The default value is +false+. (+Boolean+)
+      # @return [Gcloud::Bigquery::QueryData]
       #
-      # === Returns
-      #
-      # Gcloud::Bigquery::QueryData
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -331,7 +321,7 @@ module Gcloud
       #   end
       #   more_data = data.next if data.next?
       #
-      # :category: Data
+      # @!group Data
       #
       def data max: nil, timeout: nil, cache: nil, dryrun: nil
         sql = "SELECT * FROM #{@gapi['id']}"
@@ -348,12 +338,9 @@ module Gcloud
       ##
       # Permanently deletes the table.
       #
-      # === Returns
+      # @return [Boolean] Returns `true` if the table was deleted.
       #
-      # +true+ if the table was deleted.
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -363,7 +350,7 @@ module Gcloud
       #
       #   table.delete
       #
-      # :category: Lifecycle
+      # @!group Lifecycle
       #
       def delete
         ensure_connection!
@@ -378,7 +365,7 @@ module Gcloud
       ##
       # Reloads the table with current data from the BigQuery service.
       #
-      # :category: Lifecycle
+      # @!group Lifecycle
       #
       def reload!
         ensure_connection!
@@ -392,8 +379,8 @@ module Gcloud
       alias_method :refresh!, :reload!
 
       ##
-      # New Table from a Google API Client object.
-      def self.from_gapi gapi, conn #:nodoc:
+      # @private New Table from a Google API Client object.
+      def self.from_gapi gapi, conn
         new.tap do |f|
           f.gapi = gapi
           f.connection = conn

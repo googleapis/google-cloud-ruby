@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,26 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/errors"
 
 module Gcloud
   module Datastore
     ##
-    # = Datastore Error
+    # # Datastore Error
     #
     # Base Datastore exception class.
     class Error < Gcloud::Error
     end
 
     ##
-    # = KeyfileError
+    # # KeyfileError
     #
     # Raised when a keyfile is not correct.
     class KeyfileError < Gcloud::Datastore::Error
     end
 
     ##
-    # = ApiError
+    # # ApiError
     #
     # Raised when an API call is not successful.
     class ApiError < Gcloud::Datastore::Error
@@ -44,7 +44,8 @@ module Gcloud
       # The response object of the failed HTTP request.
       attr_reader :response
 
-      def initialize method, response = nil #:nodoc:
+      # @private
+      def initialize method, response = nil
         super("API call to #{method} was not successful")
         @method = method
         @response = response
@@ -52,14 +53,14 @@ module Gcloud
     end
 
     ##
-    # = PropertyError
+    # # PropertyError
     #
     # Raised when a property is not correct.
     class PropertyError < Gcloud::Datastore::Error
     end
 
     ##
-    # = TransactionError
+    # # TransactionError
     #
     # General error for Transaction problems.
     class TransactionError < Gcloud::Datastore::Error
@@ -67,7 +68,8 @@ module Gcloud
       # An error that occurred within the transaction. (optional)
       attr_reader :inner
 
-      def initialize message, inner = nil #:nodoc:
+      # @private
+      def initialize message, inner = nil
         super(message)
         @inner = inner
       end

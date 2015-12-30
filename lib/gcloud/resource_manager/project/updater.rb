@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "time"
 require "gcloud/resource_manager/errors"
 
@@ -20,7 +20,7 @@ module Gcloud
   module ResourceManager
     class Project
       ##
-      # = Project Updater
+      # # Project Updater
       #
       # This object is used by Project#update when passed a block. These methods
       # are used to update the project data in a single API call.
@@ -37,8 +37,8 @@ module Gcloud
       #
       class Updater < DelegateClass(Project)
         ##
-        # Create an Updater object.
-        def initialize project #:nodoc:
+        # @private Create an Updater object.
+        def initialize project
           super project
         end
 
@@ -49,8 +49,7 @@ module Gcloud
         # Allowed characters are: lowercase and uppercase letters, numbers,
         # hyphen, single-quote, double-quote, space, and exclamation point.
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -75,10 +74,9 @@ module Gcloud
         # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
         #
         # No more than 256 labels can be associated with a given resource.
-        # (+Hash+)
+        # (`Hash`)
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -103,10 +101,9 @@ module Gcloud
         # to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
         #
         # No more than 256 labels can be associated with a given resource.
-        # (+Hash+)
+        # (`Hash`)
         #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -121,8 +118,8 @@ module Gcloud
         end
 
         ##
-        # Create an Updater object.
-        def self.from_project project #:nodoc:
+        # @private Create an Updater object.
+        def self.from_project project
           dupe_gapi = project.gapi.dup
           dupe_gapi = dupe_gapi.to_hash if dupe_gapi.respond_to? :to_hash
           if dupe_gapi["labels"].respond_to? :to_hash

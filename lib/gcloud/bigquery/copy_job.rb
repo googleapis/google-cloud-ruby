@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,24 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Gcloud
   module Bigquery
     ##
-    # = CopyJob
+    # # CopyJob
     #
-    # A Job subclass representing a copy operation that may be performed on a
-    # Table. A CopyJob instance is created when you call Table#copy.
+    # A {Job} subclass representing a copy operation that may be performed on a
+    # {Table}. A CopyJob instance is created when you call {Table#copy}.
     #
-    # See {Copying an Existing
-    # Table}[https://cloud.google.com/bigquery/docs/tables#copyingtable]
-    # and the {Jobs API
-    # reference}[https://cloud.google.com/bigquery/docs/reference/v2/jobs]
-    # for details.
+    # @see https://cloud.google.com/bigquery/docs/tables#copyingtable Copying an
+    #   Existing Table
+    # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
+    #   reference
     #
     class CopyJob < Job
       ##
       # The table from which data is copied. This is the table on
-      # which Table#copy was called. Returns a Table instance.
+      # which {Table#copy} was called. Returns a {Table} instance.
       def source
         table = config["copy"]["sourceTable"]
         return nil unless table
@@ -40,7 +39,7 @@ module Gcloud
       end
 
       ##
-      # The table to which data is copied. Returns a Table instance.
+      # The table to which data is copied. Returns a {Table} instance.
       def destination
         table = config["copy"]["destinationTable"]
         return nil unless table
@@ -50,7 +49,7 @@ module Gcloud
       end
 
       ##
-      # Checks if the create disposition for the job is +CREATE_IF_NEEDED+,
+      # Checks if the create disposition for the job is `CREATE_IF_NEEDED`,
       # which provides the following behavior: If the table does not exist,
       # the copy operation creates the table. This is the default.
       def create_if_needed?
@@ -59,7 +58,7 @@ module Gcloud
       end
 
       ##
-      # Checks if the create disposition for the job is +CREATE_NEVER+, which
+      # Checks if the create disposition for the job is `CREATE_NEVER`, which
       # provides the following behavior: The table must already exist; if it
       # does not, an error is returned in the job result.
       def create_never?
@@ -68,7 +67,7 @@ module Gcloud
       end
 
       ##
-      # Checks if the write disposition for the job is +WRITE_TRUNCATE+, which
+      # Checks if the write disposition for the job is `WRITE_TRUNCATE`, which
       # provides the following behavior: If the table already exists, the copy
       # operation overwrites the table data.
       def write_truncate?
@@ -77,7 +76,7 @@ module Gcloud
       end
 
       ##
-      # Checks if the write disposition for the job is +WRITE_APPEND+, which
+      # Checks if the write disposition for the job is `WRITE_APPEND`, which
       # provides the following behavior: If the table already exists, the copy
       # operation appends the data to the table.
       def write_append?
@@ -86,7 +85,7 @@ module Gcloud
       end
 
       ##
-      # Checks if the write disposition for the job is +WRITE_EMPTY+, which
+      # Checks if the write disposition for the job is `WRITE_EMPTY`, which
       # provides the following behavior: If the table already exists and
       # contains data, the job will have an error. This is the default.
       def write_empty?

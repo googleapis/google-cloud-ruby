@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
 require "gcloud/datastore/proto"
@@ -20,20 +20,24 @@ require "gcloud/datastore/proto"
 module Gcloud
   module Datastore
     ##
-    # = Query
+    # # Query
     #
     # Represents the search criteria against a Datastore.
     #
+    # @example
     #   query = Gcloud::Datastore::Query.new
     #   query.kind("Task").
     #     where("completed", "=", true)
     #
     #   entities = dataset.run query
+    #
     class Query
       ##
       # Returns a new query object.
       #
+      # @example
       #   query = Gcloud::Datastore::Query.new
+      #
       def initialize
         @_query = Proto::Query.new
       end
@@ -41,10 +45,12 @@ module Gcloud
       ##
       # Add the kind of entities to query.
       #
+      # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind "Task"
       #
       #   all_tasks = dataset.run query
+      #
       def kind *kinds
         @_query.kind ||= Proto::KindExpression.new
         @_query.kind.name ||= []
@@ -55,11 +61,13 @@ module Gcloud
       ##
       # Add a property filter to the query.
       #
+      # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
       #     where("completed", "=", true)
       #
       #   completed_tasks = dataset.run query
+      #
       def where name, operator, value
         # Initialize filter
         @_query.filter ||= Proto.new_filter.tap do |f|
@@ -78,11 +86,13 @@ module Gcloud
       ##
       # Add a filter for entities that inherit from a key.
       #
+      # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
       #     ancestor(parent.key)
       #
       #   completed_tasks = dataset.run query
+      #
       def ancestor parent
         # Use key if given an entity
         parent = parent.key if parent.respond_to? :key
@@ -95,11 +105,13 @@ module Gcloud
       # To sort in descending order, provide a second argument
       # of a string or symbol that starts with "d".
       #
+      # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
       #     order("due", :desc)
       #
       #   sorted_tasks = dataset.run query
+      #
       def order name, direction = :asc
         @_query.order ||= []
         po = Proto::PropertyOrder.new
@@ -113,11 +125,13 @@ module Gcloud
       ##
       # Set a limit on the number of results to be returned.
       #
+      # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
       #     limit(10)
       #
       #   paginated_tasks = dataset.run query
+      #
       def limit num
         @_query.limit = num
         self
@@ -126,12 +140,14 @@ module Gcloud
       ##
       # Set an offset for the results to be returned.
       #
+      # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
       #     limit(10).
       #     offset(20)
       #
       #   paginated_tasks = dataset.run query
+      #
       def offset num
         @_query.offset = num
         self
@@ -140,12 +156,14 @@ module Gcloud
       ##
       # Set the cursor to start the results at.
       #
+      # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
       #     limit(10).
       #     cursor(task_cursor)
       #
       #   paginated_tasks = dataset.run query
+      #
       def start cursor
         @_query.start_cursor = Proto.decode_cursor cursor
         self
@@ -155,11 +173,13 @@ module Gcloud
       ##
       # Retrieve only select properties from the matched entities.
       #
+      # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
       #     select("completed", "due")
       #
       #   partial_tasks = dataset.run query
+      #
       def select *names
         @_query.projection ||= []
         @_query.projection += Proto.new_property_expressions(*names)
@@ -170,18 +190,21 @@ module Gcloud
       ##
       # Group results by a list of properties.
       #
+      # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
       #     group_by("completed")
       #
       #   grouped_tasks = dataset.run query
+      #
       def group_by *names
         @_query.group_by ||= []
         @_query.group_by += Proto.new_property_references(*names)
         self
       end
 
-      def to_proto #:nodoc:
+      # @private
+      def to_proto
         @_query
       end
     end

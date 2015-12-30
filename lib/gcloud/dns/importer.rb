@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,38 +12,37 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "zonefile"
 require "gcloud/dns/record"
 
 module Gcloud
   module Dns
     ##
-    # = DNS Importer
+    # @private
+    # # DNS Importer
     #
-    # Reads a {DNS zone
-    # file}[https://en.wikipedia.org/wiki/Zone_file] and parses it, creating a
+    # Reads a [DNS zone
+    # file](https://en.wikipedia.org/wiki/Zone_file) and parses it, creating a
     # collection of Record instances. The returned records are unsaved,
-    # as they are not yet associated with a Zone. Use Zone#import to add zone
+    # as they are not yet associated with a Zone. Use {Zone#import} to add zone
     # file records to a Zone.
     #
     # Because the Google Cloud DNS API only accepts a single resource record for
-    # each +name+ and +type+ combination (with multiple +data+ elements), the
+    # each `name` and `type` combination (with multiple `data` elements), the
     # zone file's records are merged as necessary. During this merge, the lowest
-    # +ttl+ of the merged records is used. If none of the merged records have a
-    # +ttl+ value, the zone file's global TTL is used for the record.
+    # `ttl` of the merged records is used. If none of the merged records have a
+    # `ttl` value, the zone file's global TTL is used for the record.
     #
     # The following record types are supported: A, AAAA, CNAME, MX, NAPTR, NS,
     # PTR, SOA, SPF, SRV, and TXT.
-    class Importer #:nodoc:
+    class Importer
       ##
       # Creates a new Importer that immediately parses the provided zone file
       # data and creates Record instances.
       #
-      # === Parameters
-      #
-      # +path_or_io+::
-      #   The path to a zone file on the filesystem, or an IO instance from
-      #   which zone file data can be read. (+String+ or +IO+)
+      # @param [String, IO] path_or_io The path to a zone file on the
+      #   filesystem, or an IO instance from which zone file data can be read.
       #
       def initialize zone, path_or_io
         @zone = zone
@@ -59,16 +57,12 @@ module Gcloud
       ##
       # Returns the Record instances created from the zone file.
       #
-      # === Parameters
+      # @param [String, Array<String>] only Include only records of this type or
+      #   types.
+      # @param [String, Array<String>] except Exclude records of this type or
+      #   types.
       #
-      # +only+::
-      #   Include only records of this type or types. (+String+ or +Array+)
-      # +except+::
-      #   Exclude records of this type or types. (+String+ or +Array+)
-      #
-      # === Returns
-      #
-      # An array of unsaved Record instances.
+      # @return [Array<Record>] An array of unsaved {Record} instances
       #
       def records only: nil, except: nil
         ret = @records

@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,21 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "delegate"
 
 module Gcloud
   module Storage
     class Bucket
       ##
-      # = Bucket Cors
+      # # Bucket Cors
       #
       # A special-case Array for managing the website CORS rules for a bucket.
-      # Accessed via a block argument to Project#create_bucket, Bucket#cors, or
-      # Bucket#update.
+      # Accessed via a block argument to {Project#create_bucket}, {Bucket#cors},
+      # or {Bucket#update}.
       #
-      # For more information about CORS, see {Cross-Origin Resource
-      # Sharing (CORS)}[https://cloud.google.com/storage/docs/cross-origin].
+      # @see https://cloud.google.com/storage/docs/cross-origin Cross-Origin
+      #   Resource Sharing (CORS)
       #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -47,47 +48,43 @@ module Gcloud
       #
       class Cors < DelegateClass(::Array)
         ##
+        # @private
         # Initialize a new CORS rules builder with existing CORS rules, if any.
-        def initialize cors = [] #:nodoc:
+        def initialize cors = []
           super cors.dup
           @original = cors.dup
         end
 
-        def changed? #:nodoc:
+        # @private
+        def changed?
           @original != self
         end
 
         ##
         # Add a CORS rule to the CORS rules for a bucket. Accepts options for
         # setting preflight response headers. Preflight requests and responses
-        # are required if the request method and headers are not both {simple
-        # methods}[http://www.w3.org/TR/cors/#simple-method] and {simple
-        # headers}[http://www.w3.org/TR/cors/#simple-header].
+        # are required if the request method and headers are not both [simple
+        # methods](http://www.w3.org/TR/cors/#simple-method) and [simple
+        # headers](http://www.w3.org/TR/cors/#simple-header).
         #
-        # === Parameters
+        # @param [String, Array<String>] origin The
+        #   [origin](http://tools.ietf.org/html/rfc6454) or origins permitted
+        #   for cross origin resource sharing with the bucket. Note: "*" is
+        #   permitted in the list of origins, and means "any Origin".
+        # @param [String, Array<String>] methods The list of HTTP methods
+        #   permitted in cross origin resource sharing with the bucket. (GET,
+        #   OPTIONS, POST, etc) Note: "*" is permitted in the list of methods,
+        #   and means "any method".
+        # @param [String, Array<String>] headers The list of header field names
+        #   to send in the Access-Control-Allow-Headers header in the preflight
+        #   response. Indicates the custom request headers that may be used in
+        #   the actual request.
+        # @param [Integer] max_age The value to send in the
+        #   Access-Control-Max-Age header in the preflight response. Indicates
+        #   how many seconds the results of a preflight request can be cached in
+        #   a preflight result cache. The default value is `1800` (30 minutes.)
         #
-        # +origin+::
-        #   The {origin}[http://tools.ietf.org/html/rfc6454] or origins
-        #   permitted for cross origin resource sharing with the bucket. Note:
-        #   "*" is permitted in the list of origins, and means "any Origin".
-        #   (+String+ or +Array+)
-        # +methods+::
-        #   The list of HTTP methods permitted in cross origin resource sharing
-        #   with the bucket. (GET, OPTIONS, POST, etc) Note: "*" is permitted in
-        #   the list of methods, and means "any method". (+String+ or +Array+)
-        # +headers+::
-        #   The list of header field names to send in the
-        #   Access-Control-Allow-Headers header in the preflight response.
-        #   Indicates the custom request headers that may be used in the actual
-        #   request. (+String+ or +Array+)
-        # +max_age+::
-        #   The value to send in the Access-Control-Max-Age header in the
-        #   preflight response. Indicates how many seconds the results of a
-        #   preflight request can be cached in a preflight result cache. The
-        #   default value is +1800+ (30 minutes.) (+Integer+)
-        #
-        # === Example
-        #
+        # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new

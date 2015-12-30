@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,29 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/datastore/proto"
 
 module Gcloud
   module Datastore
     ##
-    # = Key
+    # # Key
     #
     # Every Datastore record has an identifying key, which includes the record's
     # entity kind and a unique identifier. The identifier may be either a key
     # name string, assigned explicitly by the application, or an integer numeric
     # ID, assigned automatically by Datastore.
     #
+    # @example
     #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
+    #
     class Key
       ##
       # The kind of the Key.
       #
-      # === Returns
+      # @return [String]
       #
-      # +String+
-      #
-      # === Example
-      #
+      # @example
       #   key = Gcloud::Datastore::Key.new "User"
       #   key.kind #=> "User"
       #   key.kind = "Task"
@@ -45,12 +44,9 @@ module Gcloud
       ##
       # The dataset_id of the Key.
       #
-      # === Returns
+      # @return [String]
       #
-      # +String+
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new "my-todo-project",
@@ -65,12 +61,9 @@ module Gcloud
       ##
       # The namespace of the Key.
       #
-      # === Returns
+      # @return [String, nil]
       #
-      # +String+ or +nil+
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new "my-todo-project",
@@ -85,19 +78,13 @@ module Gcloud
       ##
       # Create a new Key instance.
       #
-      # === Parameters
+      # @param [String] kind The kind of the Key. This is optional.
+      # @param [Integer, String] id_or_name The id or name of the Key. This is
+      #   optional.
       #
-      # +kind+::
-      #   The kind of the Key. This is optional. (+String+)
-      # +id_or_name+::
-      #   The id or name of the Key. This is optional. (+Integer+ or +String+)
+      # @return [Gcloud::Datastore::Dataset::Key]
       #
-      # === Returns
-      #
-      # Gcloud::Datastore::Dataset::Key
-      #
-      # === Example
-      #
+      # @example
       #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #
       def initialize kind = nil, id_or_name = nil
@@ -110,15 +97,12 @@ module Gcloud
       end
 
       ##
-      # Set the id of the Key.
+      # @private Set the id of the Key.
       # If a name is already present it will be removed.
       #
-      # === Returns
+      # @return [Integer, nil]
       #
-      # +Integer+ or +nil+
-      #
-      # === Example
-      #
+      # @example
       #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #   key.id #=> nil
       #   key.name #=> "heidi@example.com"
@@ -126,7 +110,7 @@ module Gcloud
       #   key.id #=> 654321
       #   key.name #=> nil
       #
-      def id= new_id #:nodoc:
+      def id= new_id
         @name = nil if new_id
         @id = new_id
       end
@@ -134,27 +118,21 @@ module Gcloud
       ##
       # The id of the Key.
       #
-      # === Returns
+      # @return [Integer, nil]
       #
-      # +Integer+ or +nil+
-      #
-      # === Example
-      #
+      # @example
       #   key = Gcloud::Datastore::Key.new "User", 123456
       #   key.id #=> 123456
       #
       attr_reader :id
 
       ##
-      # Set the name of the Key.
+      # @private Set the name of the Key.
       # If an id is already present it will be removed.
       #
-      # === Returns
+      # @return [String, nil]
       #
-      # +String+ or +nil+
-      #
-      # === Example
-      #
+      # @example
       #   key = Gcloud::Datastore::Key.new "User", 123456
       #   key.id #=> 123456
       #   key.name #=> nil
@@ -162,7 +140,7 @@ module Gcloud
       #   key.id #=> nil
       #   key.name #=> "heidi@example.com"
       #
-      def name= new_name #:nodoc:
+      def name= new_name
         @id = nil if new_name
         @name = new_name
       end
@@ -170,30 +148,24 @@ module Gcloud
       ##
       # The name of the Key.
       #
-      # === Returns
+      # @return [String, nil]
       #
-      # +String+ or +nil+
-      #
-      # === Example
-      #
+      # @example
       #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #   key.name #=> "heidi@example.com"
       #
       attr_reader :name
 
       ##
-      # Set the parent of the Key.
+      # @private Set the parent of the Key.
       #
-      # === Returns
+      # @return [Key, nil]
       #
-      # +Key+ or +nil+
-      #
-      # === Example
-      #
+      # @example
       #   key = Gcloud::Datastore::Key.new "List", "todos"
       #   key.parent = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #
-      def parent= new_parent #:nodoc:
+      def parent= new_parent
         # store key if given an entity
         new_parent = new_parent.key if new_parent.respond_to? :key
         @parent = new_parent
@@ -202,12 +174,9 @@ module Gcloud
       ##
       # The parent of the Key.
       #
-      # === Returns
+      # @return [Key, nil]
       #
-      # +Key+ or +nil+
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -226,12 +195,9 @@ module Gcloud
       # Each inner array contains two values, the kind and the id or name.
       # If neither an id or name exist then nil will be returned.
       #
-      # === Returns
+      # @return [Array<Array<(String, String)>>]
       #
-      # Array of arrays
-      #
-      # === Example
-      #
+      # @example
       #   key = Gcloud::Datastore::Key.new "List", "todos"
       #   key.parent = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #   key.path #=> [["User", "heidi@example.com"], ["List", "todos"]]
@@ -245,7 +211,7 @@ module Gcloud
       # Determine if the key is complete.
       # A complete key has either an id or a name.
       #
-      # Inverse of #incomplete?
+      # Inverse of {#incomplete?}
       def complete?
         !incomplete?
       end
@@ -254,15 +220,14 @@ module Gcloud
       # Determine if the key is incomplete.
       # An incomplete key has neither an id nor a name.
       #
-      # Inverse of #complete?
+      # Inverse of {#complete?}
       def incomplete?
         kind.nil? || (id.nil? && (name.nil? || name.empty?))
       end
 
       ##
-      # Convert the Key to a protocol buffer object.
-      # This is not part of the public API.
-      def to_proto #:nodoc:
+      # @private Convert the Key to a protocol buffer object.
+      def to_proto
         Proto::Key.new.tap do |k|
           k.path_element = path.map do |pe_kind, pe_id_or_name|
             Proto.new_path_element pe_kind, pe_id_or_name
@@ -274,9 +239,8 @@ module Gcloud
       # rubocop:disable all
 
       ##
-      # Create a new Key from a protocol buffer object.
-      # This is not part of the public API.
-      def self.from_proto proto #:nodoc:
+      # @private Create a new Key from a protocol buffer object.
+      def self.from_proto proto
         # Disable rules because the complexity here is neccessary.
         key_proto = proto.dup
         key = Key.new

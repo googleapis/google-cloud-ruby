@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,25 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "delegate"
 
 module Gcloud
   module Bigquery
     ##
-    # = Data
+    # # Data
     #
-    # Represents Table Data as a list of name/value pairs.
-    # Also contains metadata such as +etag+ and +total+.
+    # Represents {Table} Data as a list of name/value pairs.
+    # Also contains metadata such as `etag` and `total`.
     class Data < DelegateClass(::Array)
       ##
-      # The Table object the data belongs to.
-      attr_accessor :table #:nodoc:
+      # @private The {Table} object the data belongs to.
+      attr_accessor :table
 
       ##
-      # The Google API Client object.
-      attr_accessor :gapi #:nodoc:
+      # @private The Google API Client object.
+      attr_accessor :gapi
 
-      def initialize arr = [] #:nodoc:
+      # @private
+      def initialize arr = []
         @table = nil
         @gapi = {}
         super arr
@@ -79,8 +80,8 @@ module Gcloud
       end
 
       ##
-      # New Data from a response object.
-      def self.from_response resp, table #:nodoc:
+      # @private New Data from a response object.
+      def self.from_response resp, table
         formatted_rows = format_rows resp.data["rows"], table.fields
 
         data = new formatted_rows

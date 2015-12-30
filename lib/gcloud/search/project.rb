@@ -1,4 +1,3 @@
-#--
 # Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/gce"
 require "gcloud/search/connection"
 require "gcloud/search/credentials"
@@ -22,31 +22,31 @@ require "gcloud/search/errors"
 module Gcloud
   module Search
     ##
-    # = Project
+    # # Project
     #
     # Projects are top-level containers in Google Cloud Platform. They store
     # information about billing and authorized users, and they control access to
     # Google Cloud Search resources. Each project has a friendly name and a
-    # unique ID. Projects can be created only in the {Google Developers
-    # Console}[https://console.developers.google.com].
+    # unique ID. Projects can be created only in the [Google Developers
+    # Console](https://console.developers.google.com). See {Gcloud#search}.
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   search = gcloud.search
     #   index = search.index "books"
     #
-    # See Gcloud#search
     class Project
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
       ##
-      # Creates a new Connection instance.
+      # @private Creates a new Connection instance.
       #
       # See Gcloud.search
-      def initialize project, credentials #:nodoc:
+      def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
         @connection = Connection.new project, credentials
@@ -55,8 +55,9 @@ module Gcloud
       ##
       # The ID of the current project.
       #
-      # === Example
+      # @return [String]
       #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new "my-project", "/path/to/keyfile.json"
@@ -69,8 +70,8 @@ module Gcloud
       end
 
       ##
-      # Default project.
-      def self.default_project #:nodoc:
+      # @private Default project.
+      def self.default_project
         ENV["SEARCH_PROJECT"] ||
           ENV["GCLOUD_PROJECT"] ||
           ENV["GOOGLE_CLOUD_PROJECT"] ||
@@ -80,22 +81,15 @@ module Gcloud
       ##
       # Retrieves an existing index by ID.
       #
-      # === Parameters
+      # @param [String] index_id The ID of an index.
+      # @param [Boolean] skip_lookup Optionally create an Index object without
+      #   verifying the index resource exists on the Search service. Documents
+      #   saved on this object will create the index resource if the resource
+      #   does not yet exist. Default is `false`.
       #
-      # +index_id+::
-      #   The ID of an index. (+String+)
-      # +skip_lookup+::
-      #   Optionally create an Index object without verifying the index resource
-      #   exists on the Search service. Documents saved on this object will
-      #   create the index resource if the resource does not yet exist. Default
-      #   is +false+. (+Boolean+)
+      # @return [Gcloud::Search::Index, nil] nil if the index does not exist
       #
-      # === Returns
-      #
-      # Gcloud::Search::Index or nil if the index does not exist
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -104,9 +98,7 @@ module Gcloud
       #   index = search.index "books"
       #   index.index_id #=> "books"
       #
-      # A new index can be created by providing the desired +index_id+ and the
-      # +skip_lookup+ option:
-      #
+      # @example A new index can be created with `index_id` and `skip_lookup`:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -130,23 +122,17 @@ module Gcloud
       ##
       # Retrieves the list of indexes belonging to the project.
       #
-      # === Parameters
+      # @param [String] prefix The prefix of the index name. It is used to list
+      #   all indexes with names that have this prefix.
+      # @param [String] token A previously-returned page token representing part
+      #   of the larger set of results to view.
+      # @param [Integer] max Maximum number of indexes to return. The default is
+      #   `100`.
       #
-      # +prefix+::
-      #   The prefix of the index name. It is used to list all indexes with
-      #   names that have this prefix. (+String+)
-      # +token+::
-      #   A previously-returned page token representing part of the larger set
-      #   of results to view. (+String+)
-      # +max+::
-      #   Maximum number of indexes to return. The default is +100+. (+Integer+)
+      # @return [Array<Gcloud::Search::Index>] (See
+      #   {Gcloud::Search::Index::List})
       #
-      # === Returns
-      #
-      # Array of Gcloud::Search::Index (See Gcloud::Search::Index::List)
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -157,9 +143,7 @@ module Gcloud
       #     puts index.index_id
       #   end
       #
-      # If you have a significant number of indexes, you may need to paginate
-      # through them: (See Gcloud::Search::Index::List)
-      #
+      # @example Using pagination: (See {Gcloud::Search::Index::List})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

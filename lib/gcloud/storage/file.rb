@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/storage/file/acl"
 require "gcloud/storage/file/list"
 require "gcloud/storage/file/verifier"
@@ -20,19 +20,22 @@ require "gcloud/storage/file/verifier"
 module Gcloud
   module Storage
     ##
-    # = File
+    # # File
     #
     # Represents a File
-    # ({Object}[https://cloud.google.com/storage/docs/json_api/v1/objects]) that
-    # belongs to a Bucket. Files (Objects) are
+    # ([Object](https://cloud.google.com/storage/docs/json_api/v1/objects)) that
+    # belongs to a {Bucket}. Files (Objects) are
     # the individual pieces of data that you store in Google Cloud Storage. A
     # file can be up to 5 TB in size. Files have two components:
     # data and metadata. The data component is the data from an external file or
     # other data source that you want to store in Google Cloud Storage. The
     # metadata component is a collection of name-value pairs that describe
-    # various qualities of the data. For more information, see {Concepts and
-    # Techniques}[https://cloud.google.com/storage/docs/concepts-techniques].
+    # various qualities of the data.
     #
+    # @see https://cloud.google.com/storage/docs/concepts-techniques Concepts
+    #   and Techniques
+    #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -45,16 +48,16 @@ module Gcloud
     #
     class File
       ##
-      # The Connection object.
-      attr_accessor :connection #:nodoc:
+      # @private The Connection object.
+      attr_accessor :connection
 
       ##
-      # The Google API Client object.
-      attr_accessor :gapi #:nodoc:
+      # @private The Google API Client object.
+      attr_accessor :gapi
 
       ##
-      # Create an empty File object.
-      def initialize #:nodoc:
+      # @private Create an empty File object.
+      def initialize
         @connection = nil
         @gapi = {}
       end
@@ -79,7 +82,7 @@ module Gcloud
       end
 
       ##
-      # The name of the bucket containing this file.
+      # The name of the {Bucket} containing this file.
       def bucket
         @gapi["bucket"]
       end
@@ -140,7 +143,7 @@ module Gcloud
 
       ##
       # The CRC32c checksum of the data, as described in
-      # {RFC 4960, Appendix B}[http://tools.ietf.org/html/rfc4960#appendix-B].
+      # [RFC 4960, Appendix B](http://tools.ietf.org/html/rfc4960#appendix-B).
       # Encoded using base64 in big-endian byte order.
       def crc32c
         @gapi["crc32c"]
@@ -153,7 +156,7 @@ module Gcloud
       end
 
       ##
-      # The {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      # The [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2)
       # directive for the file data.
       def cache_control
         @gapi["cacheControl"]
@@ -161,56 +164,56 @@ module Gcloud
 
       ##
       # Updates the
-      # {Cache-Control}[https://tools.ietf.org/html/rfc7234#section-5.2]
+      # [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2)
       # directive for the file data.
       def cache_control= cache_control
         patch_gapi! cache_control: cache_control
       end
 
       ##
-      # The {Content-Disposition}[https://tools.ietf.org/html/rfc6266] of the
+      # The [Content-Disposition](https://tools.ietf.org/html/rfc6266) of the
       # file data.
       def content_disposition
         @gapi["contentDisposition"]
       end
 
       ##
-      # Updates the {Content-Disposition}[https://tools.ietf.org/html/rfc6266]
+      # Updates the [Content-Disposition](https://tools.ietf.org/html/rfc6266)
       # of the file data.
       def content_disposition= content_disposition
         patch_gapi! content_disposition: content_disposition
       end
 
       ##
-      # The {Content-Encoding
-      # }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] of the file data.
+      # The [Content-Encoding
+      # ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) of the file data.
       def content_encoding
         @gapi["contentEncoding"]
       end
 
       ##
-      # Updates the {Content-Encoding
-      # }[https://tools.ietf.org/html/rfc7231#section-3.1.2.2] of the file data.
+      # Updates the [Content-Encoding
+      # ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) of the file data.
       def content_encoding= content_encoding
         patch_gapi! content_encoding: content_encoding
       end
 
       ##
-      # The {Content-Language}[http://tools.ietf.org/html/bcp47] of the file
+      # The [Content-Language](http://tools.ietf.org/html/bcp47) of the file
       # data.
       def content_language
         @gapi["contentLanguage"]
       end
 
       ##
-      # Updates the {Content-Language}[http://tools.ietf.org/html/bcp47] of the
+      # Updates the [Content-Language](http://tools.ietf.org/html/bcp47) of the
       # file data.
       def content_language= content_language
         patch_gapi! content_language: content_language
       end
 
       ##
-      # The {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17] of
+      # The [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17) of
       # the file data.
       def content_type
         @gapi["contentType"]
@@ -218,7 +221,7 @@ module Gcloud
 
       ##
       # Updates the
-      # {Content-Type}[https://tools.ietf.org/html/rfc2616#section-14.17] of the
+      # [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17) of the
       # file data.
       def content_type= content_type
         patch_gapi! content_type: content_type
@@ -244,13 +247,12 @@ module Gcloud
 
       ##
       # Updates the file with changes made in the given block in a single
-      # PATCH request. The following attributes may be set: #cache_control=,
-      # #content_disposition=, #content_encoding=, #content_language=,
-      # #content_type=, and #metadata=. The #metadata hash accessible in the
-      # block is completely mutable and will be included in the request.
+      # PATCH request. The following attributes may be set: {#cache_control=},
+      # {#content_disposition=}, {#content_encoding=}, {#content_language=},
+      # {#content_type=}, and {#metadata=}. The {#metadata} hash accessible in
+      # the block is completely mutable and will be included in the request.
       #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -279,27 +281,22 @@ module Gcloud
       ##
       # Download the file's contents to a local file.
       #
-      # === Parameters
+      # By default, the download is verified by calculating the MD5 digest.
       #
-      # +path+::
-      #   The path on the local file system to write the data to.
-      #   The path provided must be writable. (+String+)
-      # +verify+::
-      #   The verification algoruthm used to ensure the downloaded file contents
-      #   are correct. Default is +:md5+. (+Symbol+)
+      # @param [String] path The path on the local file system to write the data
+      #   to. The path provided must be writable.
+      # @param [Symbol] verify The verification algoruthm used to ensure the
+      #   downloaded file contents are correct. Default is `:md5`.
       #
       #   Acceptable values are:
-      #   * +md5+ - Verify file content match using the MD5 hash.
-      #   * +crc32c+ - Verify file content match using the CRC32c hash.
-      #   * +all+ - Perform all available file content verification.
-      #   * +none+ - Don't perform file content verification.
+      #   * `md5` - Verify file content match using the MD5 hash.
+      #   * `crc32c` - Verify file content match using the CRC32c hash.
+      #   * `all` - Perform all available file content verification.
+      #   * `none` - Don't perform file content verification.
       #
-      # === Returns
+      # @return [File] Returns a `::File` object on the local file system
       #
-      # +::File+ object on the local file system
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -310,9 +307,7 @@ module Gcloud
       #   file = bucket.file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext"
       #
-      # The download is verified by calculating the MD5 digest.
-      # The CRC32c digest can be used by passing :crc32c.
-      #
+      # @example Use the CRC32c digest by passing :crc32c.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -323,8 +318,7 @@ module Gcloud
       #   file = bucket.file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext", verify: :crc32c
       #
-      # Both the MD5 and CRC32c digest can be used by passing :all.
-      #
+      # @example Use the MD5 and CRC32c digests by passing :all.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -335,8 +329,7 @@ module Gcloud
       #   file = bucket.file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext", verify: :all
       #
-      # The download verification can be disabled by passing :none
-      #
+      # @example Disable the download verification by passing :none.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -363,43 +356,33 @@ module Gcloud
       ##
       # Copy the file to a new location.
       #
-      # === Parameters
-      #
-      # +dest_bucket_or_path+::
-      #   Either the bucket to copy the file to, or the path to copy the file to
-      #   in the current bucket. (+String+)
-      # +dest_path+::
-      #   If a bucket was provided in the first parameter, this contains the
-      #   path to copy the file to in the given bucket. (+String+)
-      # +acl+::
-      #   A predefined set of access controls to apply to new file.
-      #   (+String+)
+      # @param [String] dest_bucket_or_path Either the bucket to copy the file
+      #   to, or the path to copy the file to in the current bucket.
+      # @param [String] dest_path If a bucket was provided in the first
+      #   parameter, this contains the path to copy the file to in the given
+      #   bucket.
+      # @param [String] acl A predefined set of access controls to apply to new
+      #   file.
       #
       #   Acceptable values are:
-      #   * +auth+, +auth_read+, +authenticated+, +authenticated_read+,
-      #     +authenticatedRead+ - File owner gets OWNER access, and
+      #   * `auth`, `auth_read`, `authenticated`, `authenticated_read`,
+      #     `authenticatedRead` - File owner gets OWNER access, and
       #     allAuthenticatedUsers get READER access.
-      #   * +owner_full+, +bucketOwnerFullControl+ - File owner gets OWNER
+      #   * `owner_full`, `bucketOwnerFullControl` - File owner gets OWNER
       #     access, and project team owners get OWNER access.
-      #   * +owner_read+, +bucketOwnerRead+ - File owner gets OWNER access, and
+      #   * `owner_read`, `bucketOwnerRead` - File owner gets OWNER access, and
       #     project team owners get READER access.
-      #   * +private+ - File owner gets OWNER access.
-      #   * +project_private+, +projectPrivate+ - File owner gets OWNER access,
+      #   * `private` - File owner gets OWNER access.
+      #   * `project_private`, `projectPrivate` - File owner gets OWNER access,
       #     and project team members get access according to their roles.
-      #   * +public+, +public_read+, +publicRead+ - File owner gets OWNER
+      #   * `public`, `public_read`, `publicRead` - File owner gets OWNER
       #     access, and allUsers get READER access.
-      # +generation+::
-      #   Select a specific revision of the file to copy. The default is the
-      #   latest version. (+Integer+)
+      # @param [Integer] generation Select a specific revision of the file to
+      #   copy. The default is the latest version.
       #
-      # === Returns
+      # @return [Gcloud::Storage::File]
       #
-      # +File+ object
-      #
-      # === Examples
-      #
-      # The file can also be copied to a new path in the current bucket:
-      #
+      # @example The file can be copied to a new path in the current bucket:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -410,8 +393,7 @@ module Gcloud
       #   file = bucket.file "path/to/my-file.ext"
       #   file.copy "path/to/destination/file.ext"
       #
-      # The file can also be copied to a different bucket:
-      #
+      # @example The file can also be copied to a different bucket:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -423,8 +405,7 @@ module Gcloud
       #   file.copy "new-destination-bucket",
       #             "path/to/destination/file.ext"
       #
-      # The file can also be copied by specifying a generation:
-      #
+      # @example The file can also be copied by specifying a generation:
       #   file.copy "copy/of/previous/generation/file.ext",
       #             generation: 123456
       #
@@ -446,12 +427,9 @@ module Gcloud
       ##
       # Permanently deletes the file.
       #
-      # === Returns
+      # @return [Boolean] Returns `true` if the file was deleted.
       #
-      # +true+ if the file was deleted.
-      #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -474,19 +452,17 @@ module Gcloud
 
       ##
       # Public URL to access the file. If the file is not public, requests to
-      # the URL will return an error. (See File::Acl#public! and
-      # Bucket::DefaultAcl#public!) For more information, read [Accessing Public
-      # Data]{https://cloud.google.com/storage/docs/access-public-data}.
+      # the URL will return an error. (See {File::Acl#public!} and
+      # {Bucket::DefaultAcl#public!}) To share a file that is not public see
+      # {#signed_url}.
       #
-      # To share a file that is not public see #signed_url.
+      # @see https://cloud.google.com/storage/docs/access-public-data Accessing
+      #   Public Data
       #
-      # === Parameters
+      # @param [String] protocol The protocol to use for the URL. Default is
+      #   `HTTPS`.
       #
-      # +protocol+::
-      #   The protocol to use for the URL. Default is +HTTPS+. (+String+)
-      #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -496,9 +472,7 @@ module Gcloud
       #   file = bucket.file "avatars/heidi/400x400.png"
       #   public_url = file.public_url
       #
-      # To generate the URL with a protocol other than HTTPS, use the +protocol+
-      # option:
-      #
+      # @example Generate the URL with a protocol other than HTTPS:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -516,46 +490,41 @@ module Gcloud
       ##
       # Access without authentication can be granted to a File for a specified
       # period of time. This URL uses a cryptographic signature
-      # of your credentials to access the file. See the
-      # {Access Control Signed URLs guide
-      # }[https://cloud.google.com/storage/docs/access-control#Signed-URLs]
-      # for more.
+      # of your credentials to access the file.
       #
       # Generating a URL requires service account credentials, either by
-      # connecting with a service account when calling Gcloud.storage, or by
-      # passing in the service account +issuer+ and +signing_key+ values. A
-      # SignedUrlUnavailable is raised if the service account credentials are
+      # connecting with a service account when calling {Gcloud.storage}, or by
+      # passing in the service account `issuer` and `signing_key` values.
+      # Although the private key can be passed as a string for convenience,
+      # creating and storing an instance of `OpenSSL::PKey::RSA` is more
+      # efficient when making multiple calls to `signed_url`.
+      #
+      # A SignedUrlUnavailable is raised if the service account credentials are
       # missing. Service account credentials are acquired by following the steps
-      # in {Service Account Authentication}[
-      # https://cloud.google.com/storage/docs/authentication#service_accounts].
+      # in [Service Account Authentication](
+      # https://cloud.google.com/storage/docs/authentication#service_accounts).
       #
-      # === Parameters
+      # @see https://cloud.google.com/storage/docs/access-control#Signed-URLs
+      #   Access Control Signed URLs guide
       #
-      # +method+::
-      #   The HTTP verb to be used with the signed URL. Signed URLs can be used
-      #   with +GET+, +HEAD+, +PUT+, and +DELETE+ requests. Default is +GET+.
-      #   (+String+)
-      # +expires+::
-      #   The number of seconds until the URL expires. Default is 300/5 minutes.
-      #   (+Integer+)
-      # +content_type+::
-      #   When provided, the client (browser) must send this value in the
-      #   HTTP header. e.g. +text/plain+ (+String+)
-      # +content_md5+::
-      #   The MD5 digest value in base64. If you provide this in the string, the
-      #   client (usually a browser) must provide this HTTP header with this
-      #   same value in its request. (+String+)
-      # +issuer+::
-      #   Service Account's Client Email. (+String+)
-      # +client_email+::
-      #   Service Account's Client Email. (+String+)
-      # +signing_key+::
-      #   Service Account's Private Key. (+OpenSSL::PKey::RSA+ or +String+)
-      # +private_key+::
-      #   Service Account's Private Key. (+OpenSSL::PKey::RSA+ or +String+)
+      # @param [String] method The HTTP verb to be used with the signed URL.
+      #   Signed URLs can be used
+      #   with `GET`, `HEAD`, `PUT`, and `DELETE` requests. Default is `GET`.
+      # @param [Integer] expires The number of seconds until the URL expires.
+      #   Default is 300/5 minutes.
+      # @param [String] content_type When provided, the client (browser) must
+      #   send this value in the HTTP header. e.g. `text/plain`
+      # @param [String] content_md5 The MD5 digest value in base64. If you
+      #   provide this in the string, the client (usually a browser) must
+      #   provide this HTTP header with this same value in its request.
+      # @param [String] issuer Service Account's Client Email.
+      # @param [String] client_email Service Account's Client Email.
+      # @param [OpenSSL::PKey::RSA, String] signing_key Service Account's
+      #   Private Key.
+      # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
+      #   Private Key.
       #
-      # === Examples
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -565,8 +534,7 @@ module Gcloud
       #   file = bucket.file "avatars/heidi/400x400.png"
       #   shared_url = file.signed_url
       #
-      # Any of the option parameters may be specified:
-      #
+      # @example Any of the option parameters may be specified:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -577,13 +545,7 @@ module Gcloud
       #   shared_url = file.signed_url method: "GET",
       #                                expires: 300 # 5 minutes from now
       #
-      # Signed URLs require service account credentials. If you are not
-      # authenticated with a service account, those credentials can be passed in
-      # using the +issuer+ and +signing_key+ options. Although the private key
-      # can be passed as a string for convenience, creating and storing an
-      # instance of +OpenSSL::PKey::RSA+ is more efficient when making multiple
-      # calls to +signed_url+.
-      #
+      # @example Using the `issuer` and `signing_key` options:
       #   require "gcloud/storage"
       #
       #   storage = Gcloud.storage
@@ -607,20 +569,16 @@ module Gcloud
       end
 
       ##
-      # The File::Acl instance used to control access to the file.
+      # The {File::Acl} instance used to control access to the file.
       #
       # A file has owners, writers, and readers. Permissions can be granted to
       # an individual user's email address, a group's email address,  as well as
-      # many predefined lists. See the
-      # {Access Control guide
-      # }[https://cloud.google.com/storage/docs/access-control]
-      # for more.
+      # many predefined lists.
       #
-      # === Examples
+      # @see https://cloud.google.com/storage/docs/access-control Access Control
+      #   guide
       #
-      # Access to a file can be granted to a user by appending +"user-"+ to the
-      # email address:
-      #
+      # @example Grant access to a user by pre-pending `"user-"` to an email:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -632,9 +590,7 @@ module Gcloud
       #   email = "heidi@example.net"
       #   file.acl.add_reader "user-#{email}"
       #
-      # Access to a file can be granted to a group by appending +"group-"+ to
-      # the email address:
-      #
+      # @example Grant access to a group by pre-pending `"group-"` to an email:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -646,9 +602,7 @@ module Gcloud
       #   email = "authors@example.net"
       #   file.acl.add_reader "group-#{email}"
       #
-      # Access to a file can also be granted to a predefined list of
-      # permissions:
-      #
+      # @example Or, grant access via a predefined permissions list:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -677,15 +631,15 @@ module Gcloud
       alias_method :refresh!, :reload!
 
       ##
-      # URI of the location and file name in the format of
+      # @private URI of the location and file name in the format of
       # <code>gs://my-bucket/file-name.json</code>.
-      def to_gs_url #:nodoc:
+      def to_gs_url
         "gs://#{bucket}/#{name}"
       end
 
       ##
-      # New File from a Google API Client object.
-      def self.from_gapi gapi, conn #:nodoc:
+      # @private New File from a Google API Client object.
+      def self.from_gapi gapi, conn
         new.tap do |f|
           f.gapi = gapi
           f.connection = conn
@@ -733,8 +687,8 @@ module Gcloud
       end
 
       ##
-      # Create a signed_url for a file.
-      class Signer #:nodoc:
+      # @private Create a signed_url for a file.
+      class Signer
         def initialize file
           @file = file
         end

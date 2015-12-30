@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/gce"
 require "gcloud/datastore/connection"
 require "gcloud/datastore/credentials"
@@ -25,15 +25,18 @@ require "gcloud/datastore/dataset/query_results"
 module Gcloud
   module Datastore
     ##
-    # = Dataset
+    # # Dataset
     #
     # Dataset is the data saved in a project's Datastore.
     # Dataset is analogous to a database in relational database world.
     #
     # Gcloud::Datastore::Dataset is the main object for interacting with
-    # Google Datastore. Gcloud::Datastore::Entity objects are created,
+    # Google Datastore. {Gcloud::Datastore::Entity} objects are created,
     # read, updated, and deleted by Gcloud::Datastore::Dataset.
     #
+    # See {Gcloud#datastore}
+    #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
@@ -44,15 +47,15 @@ module Gcloud
     #
     #   tasks = dataset.run query
     #
-    # See Gcloud#datastore
     class Dataset
-      attr_accessor :connection #:nodoc:
+      # @private
+      attr_accessor :connection
 
       ##
-      # Creates a new Dataset instance.
+      # @private Creates a new Dataset instance.
       #
-      # See Gcloud#datastore
-      def initialize project, credentials #:nodoc:
+      # See {Gcloud#datastore}
+      def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
         @connection = Connection.new project, credentials
@@ -61,8 +64,7 @@ module Gcloud
       ##
       # The Datastore project connected to.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new "my-todo-project",
@@ -76,8 +78,8 @@ module Gcloud
       end
 
       ##
-      # Default project.
-      def self.default_project #:nodoc:
+      # @private Default project.
+      def self.default_project
         ENV["DATASTORE_DATASET"] ||
           ENV["DATASTORE_PROJECT"] ||
           ENV["GCLOUD_PROJECT"] ||
@@ -88,19 +90,12 @@ module Gcloud
       ##
       # Generate IDs for a Key before creating an entity.
       #
-      # === Parameters
+      # @param [Key] incomplete_key A Key without `id` or `name` set.
+      # @param [String] count The number of new key IDs to create.
       #
-      # +incomplete_key+::
-      #   A Key without +id+ or +name+ set. (+Key+)
-      # +count+::
-      #   The number of new key IDs to create. (+Integer+)
+      # @return [Array<Gcloud::Datastore::Key>]
       #
-      # === Returns
-      #
-      # Array of Gcloud::Datastore::Key
-      #
-      # === Example
-      #
+      # @example
       #   empty_key = dataset.key "Task"
       #   task_keys = dataset.allocate_ids empty_key, 5
       #
@@ -119,18 +114,12 @@ module Gcloud
       ##
       # Persist one or more entities to the Datastore.
       #
-      # === Parameters
+      # @param [Entity] *entities One or more entity objects to be saved without
+      #   `id` or `name` set.
       #
-      # +entities+::
-      #   One or more entity objects to be saved without +id+ or +name+ set.
-      #   (+Entity+)
+      # @return [Array<Gcloud::Datastore::Entity>]
       #
-      # === Returns
-      #
-      # Array of Gcloud::Datastore::Entity
-      #
-      # === Example
-      #
+      # @example
       #   dataset.save task1, task2
       #
       def save *entities
@@ -144,27 +133,17 @@ module Gcloud
       ##
       # Retrieve an entity by providing key information.
       #
-      # === Parameters
+      # @param [Key, String] key_or_kind A Key object or `kind` string value.
+      # @param [Integer, String, nil] id_or_name The Key's `id` or `name` value
+      #   if a `kind` was provided in the first parameter.
       #
-      # +key_or_kind+::
-      #   A Key object or +kind+ string value. (+Key+ or +String+)
-      # +id_or_name+::
-      #   The Key's +id+ or +name+ value if a +kind+ was provided in the first
-      #   parameter. (+Integer+ or +String+ or +nil+)
+      # @return [Gcloud::Datastore::Entity, nil]
       #
-      # === Returns
-      #
-      # Gcloud::Datastore::Entity or +nil+
-      #
-      # === Example
-      #
-      # Finding an entity with a key:
-      #
+      # @example Finding an entity with a key:
       #   key = dataset.key "Task", 123456
       #   task = dataset.find key
       #
-      # Finding an entity with a +kind+ and +id+/+name+:
-      #
+      # @example Finding an entity with a `kind` and `id`/`name`:
       #   task = dataset.find "Task", 123456
       #
       def find key_or_kind, id_or_name = nil
@@ -179,17 +158,11 @@ module Gcloud
       ##
       # Retrieve the entities for the provided keys.
       #
-      # === Parameters
+      # @param [Key] *keys One or more Key objects to find records for.
       #
-      # +keys+::
-      #   One or more Key objects to find records for. (+Key+)
+      # @return [Gcloud::Datastore::Dataset::LookupResults]
       #
-      # === Returns
-      #
-      # Gcloud::Datastore::Dataset::LookupResults
-      #
-      # === Example
-      #
+      # @example
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
       #   key1 = dataset.key "Task", 123456
@@ -208,17 +181,12 @@ module Gcloud
       ##
       # Remove entities from the Datastore.
       #
-      # === Parameters
+      # @param [Entity, Key] *entities_or_keys One or more Entity or Key objects
+      #   to remove.
       #
-      # +entities_or_keys+::
-      #   One or more Entity or Key objects to remove. (+Entity+ or +Key+)
+      # @return [Boolean] Returns `true` if successful
       #
-      # === Returns
-      #
-      # +true+ if successful
-      #
-      # === Example
-      #
+      # @example
       #   gcloud = Gcloud.new
       #   dataset = gcloud.datastore
       #   dataset.delete entity1, entity2
@@ -237,26 +205,17 @@ module Gcloud
       ##
       # Retrieve entities specified by a Query.
       #
-      # === Parameters
+      # @param [Query] query The Query object with the search criteria.
+      # @param [String] namespace The namespace the query is to run within.
       #
-      # +query+::
-      #   The Query object with the search criteria. (+Query+)
-      # +namespace+::
-      #   The namespace the query is to run within. (+String+)
+      # @return [Gcloud::Datastore::Dataset::QueryResults]
       #
-      # === Returns
-      #
-      # Gcloud::Datastore::Dataset::QueryResults
-      #
-      # === Examples
-      #
+      # @example
       #   query = dataset.query("Task").
       #     where("completed", "=", true)
       #   tasks = dataset.run query
       #
-      # The query can optionally run within namespace when the +namespace+
-      # option is provided:
-      #
+      # @example Run the query within a namespace with the `namespace` option:
       #   query = Gcloud::Datastore::Query.new.kind("Task").
       #     where("completed", "=", true)
       #   tasks = dataset.run query, namespace: "ns~todo-project"
@@ -274,10 +233,7 @@ module Gcloud
       ##
       # Creates a Datastore Transaction.
       #
-      # === Example
-      #
-      # Runs the given block in a database transaction:
-      #
+      # @example Runs the given block in a database transaction:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -294,8 +250,7 @@ module Gcloud
       #     end
       #   end
       #
-      # Alternatively, if no block is given a Transaction object is returned:
-      #
+      # @example If no block is given, a Transaction object is returned:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -333,23 +288,16 @@ module Gcloud
       # Create a new Query instance. This is a convenience method to make the
       # creation of Query objects easier.
       #
-      # === Parameters
+      # @param [String] *kinds The kind of entities to query. This is optional.
       #
-      # +kinds+::
-      #   The kind of entities to query. This is optional. (+String+)
+      # @return [Gcloud::Datastore::Query]
       #
-      # === Returns
-      #
-      # Gcloud::Datastore::Query
-      #
-      # === Example
-      #
+      # @example
       #   query = dataset.query("Task").
       #     where("completed", "=", true)
       #   tasks = dataset.run query
       #
-      # This code is equivalent to the following:
-      #
+      # @example The previous example is equivalent to:
       #   query = Gcloud::Datastore::Query.new.
       #     kind("Task").
       #     where("completed", "=", true)
@@ -365,23 +313,16 @@ module Gcloud
       # Create a new Key instance. This is a convenience method to make the
       # creation of Key objects easier.
       #
-      # === Parameters
+      # @param [String] kind The kind of the Key. This is optional.
+      # @param [Integer, String] id_or_name The id or name of the Key. This is
+      #   optional.
       #
-      # +kind+::
-      #   The kind of the Key. This is optional. (+String+)
-      # +id_or_name+::
-      #   The id or name of the Key. This is optional. (+Integer+ or +String+)
+      # @return [Gcloud::Datastore::Key]
       #
-      # === Returns
-      #
-      # Gcloud::Datastore::Key
-      #
-      # === Example
-      #
+      # @example
       #   key = dataset.key "User", "heidi@example.com"
       #
-      # This code is equivalent to the following:
-      #
+      # @example The previous example is equivalent to:
       #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #
       def key kind = nil, id_or_name = nil
@@ -392,50 +333,37 @@ module Gcloud
       # Create a new empty Entity instance. This is a convenience method to make
       # the creation of Entity objects easier.
       #
-      # === Parameters
+      # @param [Key, String, nil] key_or_kind A Key object or `kind` string
+      #   value. This is optional.
+      # @param [Integer, String, nil] id_or_name The Key's `id` or `name` value
+      #   if a `kind` was provided in the first parameter.
       #
-      # +key_or_kind+::
-      #   A Key object or +kind+ string value. This is optional. (+Key+ or
-      #   +String+ or +nil+)
-      # +id_or_name+::
-      #   The Key's +id+ or +name+ value if a +kind+ was provided in the first
-      #   parameter. (+Integer+ or +String+ or +nil+)
+      # @return [Gcloud::Datastore::Entity]
       #
-      # === Returns
-      #
-      # Gcloud::Datastore::Entity
-      #
-      # === Examples
-      #
+      # @example
       #   entity = dataset.entity
       #
-      # This code is equivalent to the following:
-      #
+      # @example The previous example is equivalent to:
       #   entity = Gcloud::Datastore::Entity.new
       #
-      # The key can also be passed in as an object:
-      #
+      # @example The key can also be passed in as an object:
       #   key = dataset.key "User", "heidi@example.com"
       #   entity = dataset.entity key
       #
-      # Or the key values can be passed in as parameters:
-      #
+      # @example Or the key values can be passed in as parameters:
       #   entity = dataset.entity "User", "heidi@example.com"
       #
-      # This code is equivalent to the following:
-      #
+      # @example The previous example is equivalent to:
       #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #   entity = Gcloud::Datastore::Entity.new
       #   entity.key = key
       #
-      # The newly created entity object can also be configured using a block:
-      #
+      # @example The newly created entity can also be configured using a block:
       #   user = dataset.entity "User", "heidi@example.com" do |u|
       #     u["name"] = "Heidi Henderson"
       #  end
       #
-      # This code is equivalent to the following:
-      #
+      # @example The previous example is equivalent to:
       #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
       #   entity = Gcloud::Datastore::Entity.new
       #   entity.key = key
@@ -477,15 +405,15 @@ module Gcloud
       end
 
       ##
-      # Save a key to be given an ID when comitted.
-      def auto_id_register entity #:nodoc:
+      # @private Save a key to be given an ID when comitted.
+      def auto_id_register entity
         @_auto_id_entities ||= []
         @_auto_id_entities << entity
       end
 
       ##
-      # Update saved keys with new IDs post-commit.
-      def auto_id_assign_ids auto_ids #:nodoc:
+      # @private Update saved keys with new IDs post-commit.
+      def auto_id_assign_ids auto_ids
         @_auto_id_entities ||= []
         Array(auto_ids).each_with_index do |key, index|
           entity = @_auto_id_entities[index]
@@ -495,9 +423,9 @@ module Gcloud
       end
 
       ##
-      # Add entities to a Mutation, and register they key to be
+      # @private Add entities to a Mutation, and register they key to be
       # updated with an auto ID if needed.
-      def save_entities_to_mutation entities, mutation #:nodoc:
+      def save_entities_to_mutation entities, mutation
         entities.each do |entity|
           if entity.key.id.nil? && entity.key.name.nil?
             mutation.insert_auto_id << entity.to_proto

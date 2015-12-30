@@ -1,4 +1,3 @@
-#--
 # Copyright 2014 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "gcloud/datastore/key"
 require "gcloud/datastore/properties"
 require "gcloud/datastore/proto"
@@ -20,11 +20,12 @@ require "gcloud/datastore/proto"
 module Gcloud
   module Datastore
     ##
-    # = Entity
+    # # Entity
     #
     # Entity represents a Datastore record.
-    # Every Entity has a Key, and a list of properties.
+    # Every Entity has a {Key}, and a list of properties.
     #
+    # @example
     #   entity = Gcloud::Datastore::Entity.new
     #   entity.key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
     #   entity["name"] = "Heidi Henderson"
@@ -45,19 +46,11 @@ module Gcloud
       ##
       # Retrieve a property value by providing the name.
       #
-      # === Parameters
+      # @param [String, Symbol] prop_name The name of the property.
       #
-      # +prop_name+::
-      #   The name of the property. (+String+ or +Symbol+)
+      # @return [Object, nil] Returns `nil` if the property doesn't exist
       #
-      # === Returns
-      #
-      # Object if the property exists, +nil+ if the property doesn't exist
-      #
-      # === Example
-      #
-      # Properties can be retrieved with a string name:
-      #
+      # @example Properties can be retrieved with a string name:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -65,8 +58,7 @@ module Gcloud
       #   user = dataset.find "User", "heidi@example.com"
       #   user["name"] #=> "Heidi Henderson"
       #
-      # Or with a symbol name:
-      #
+      # @example Or with a symbol name:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -81,17 +73,10 @@ module Gcloud
       ##
       # Set a property value by name.
       #
-      # === Parameters
+      # @param [String, Symbol] prop_name The name of the property.
+      # @param [Object] prop_value The value of the property.
       #
-      # +prop_name+::
-      #   The name of the property. (+String+ or +Symbol+)
-      # +prop_value+::
-      #   The value of the property. (+Object+)
-      #
-      # === Example
-      #
-      # Properties can be set with a string name:
-      #
+      # @example Properties can be set with a string name:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -99,8 +84,7 @@ module Gcloud
       #   user = dataset.find "User", "heidi@example.com"
       #   user["name"] = "Heidi H. Henderson"
       #
-      # Or with a symbol name:
-      #
+      # @example Or with a symbol name:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -116,12 +100,9 @@ module Gcloud
       # Retrieve properties in a hash-like structure.
       # Properties can be accessed or set by string or symbol.
       #
-      # === Returns
+      # @return [Gcloud::Datastore::Properties]
       #
-      # Gcloud::Datastore::Properties
-      #
-      # === Example
-      #
+      # @example
       #   entity.properties[:name] = "Heidi H. Henderson"
       #   entity.properties["name"] #=> "Heidi H. Henderson"
       #
@@ -129,19 +110,16 @@ module Gcloud
       #     puts "property #{name} has a value of #{value}"
       #   end
       #
-      # A property's existance can be determined by calling exist?
-      #
+      # @example A property's existence can be determined by calling `exist?`:
       #   entity.properties.exist? :name #=> true
       #   entity.properties.exist? "name" #=> true
       #   entity.properties.exist? :expiration #=> false
       #
-      # A property can be removed from the entity.
-      #
+      # @example A property can be removed from the entity:
       #   entity.properties.delete :name
       #   entity.save
       #
-      # The properties can be converted to a hash:
-      #
+      # @example The properties can be converted to a hash:
       #   prop_hash = entity.properties.to_h
       #
       attr_reader :properties
@@ -149,10 +127,10 @@ module Gcloud
       ##
       # Sets the Key that identifies the entity.
       #
-      # === Example
+      # Once the entity is saved, the key is frozen and immutable. Trying to set
+      # a key when immutable will raise a `RuntimeError`.
       #
-      # The Key can be set before the entity is saved.
-      #
+      # @example The Key can be set before the entity is saved:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -161,9 +139,7 @@ module Gcloud
       #   entity.key = Gcloud::Datastore::Key.new "User"
       #   dataset.save entity
       #
-      # Once the entity is saved, the key is frozen and immutable.
-      # Trying to set a key when immutable will raise a +RuntimeError+.
-      #
+      # @example Once the entity is saved, the key is frozen and immutable:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -182,8 +158,7 @@ module Gcloud
       ##
       # Indicates if the record is persisted. Default is false.
       #
-      # === Example
-      #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -203,15 +178,14 @@ module Gcloud
       # Indicates if a property is flagged to be excluded from the
       # Datastore indexes. The default value is false.
       #
-      # Single property values will return a single flag setting.
-      #
+      # @example Single property values will return a single flag setting:
       #   entity["age"] = 21
       #   entity.exclude_from_indexes? "age" #=> false
       #
-      # Array property values will return an array of flag settings.
-      #
+      # @example Array property values will return an array of flag settings:
       #   entity["tags"] = ["ruby", "code"]
       #   entity.exclude_from_indexes? "tags" #=> [false, false]
+      #
       def exclude_from_indexes? name
         value = self[name]
         flag = @_exclude_indexes[name.to_s]
@@ -255,9 +229,8 @@ module Gcloud
       end
 
       ##
-      # Convert the Entity to a protocol buffer object.
-      # This is not part of the public API.
-      def to_proto #:nodoc:
+      # @private Convert the Entity to a protocol buffer object.
+      def to_proto
         entity = Proto::Entity.new.tap do |e|
           e.key = @key.to_proto
           e.property = Proto.to_proto_properties @properties.to_h
@@ -267,9 +240,8 @@ module Gcloud
       end
 
       ##
-      # Create a new Entity from a protocol buffer object.
-      # This is not part of the public API.
-      def self.from_proto proto #:nodoc:
+      # @private Create a new Entity from a protocol buffer object.
+      def self.from_proto proto
         entity = Entity.new
         entity.key = Key.from_proto proto.key
         Array(proto.property).each do |p|
@@ -285,11 +257,11 @@ module Gcloud
       # Disabled rubocop because this is intentionally complex.
 
       ##
-      # Map the exclude flag object to value.
+      # @private Map the exclude flag object to value.
       # The flag object can be a boolean, Proc, or Array.
       # Procs will be called and passed in the value.
       # This will return an array of flags for an array value.
-      def map_exclude_flag_to_value flag, value #:nodoc:
+      def map_exclude_flag_to_value flag, value
         if value.is_a? Array
           if flag.is_a? Proc
             value.map { |v| !!flag.call(v) }
@@ -310,8 +282,8 @@ module Gcloud
       end
 
       ##
-      # Update the exclude data after a new object is created.
-      def update_exclude_indexes! entity #:nodoc:
+      # @private Update the exclude data after a new object is created.
+      def update_exclude_indexes! entity
         @_exclude_indexes = {}
         Array(entity.property).each do |property|
           @_exclude_indexes[property.name] = property.value.indexed
@@ -323,8 +295,8 @@ module Gcloud
       end
 
       ##
-      # Update the indexed values before the object is saved.
-      def update_properties_indexed! entity #:nodoc:
+      # @private Update the indexed values before the object is saved.
+      def update_properties_indexed! entity
         Array(entity.property).each do |property|
           excluded = exclude_from_indexes? property.name
           if excluded.is_a? Array
