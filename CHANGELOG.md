@@ -1,5 +1,12 @@
 # Release History
 
+### 0.6.1 / 2015-12-29
+
+#### Changes
+
+* Add delimiter parameter for listing Storage files
+* Add support for Ruby 2.3
+
 ### 0.6.0 / 2015-12-11
 
 #### Changes
