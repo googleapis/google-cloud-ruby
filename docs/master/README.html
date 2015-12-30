@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <title>Gcloud Documentation</title>
+    <title>README &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,29 +69,62 @@
     <article class="main lang-page" role="main">
 
       <header class="docs-header">
-        <h1 class="page-title">Gcloud Overview</h1>
+        <h1 class="page-title">README</h1>
       </header>
 
       <section class="content">
-        <h1 id="getting-started">Getting started</h1>
+        <h1 id="gcloud">gcloud</h1>
 
-<p>The <code class="highlighter-rouge">gcloud</code> library is installable through rubygems:</p>
+<p>Idiomatic Ruby client for <a href="https://cloud.google.com/">Google Cloud Platform</a> services.</p>
+
+<p><a href="https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby/"><img src="https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby.svg" alt="Travis Build Status" /></a>
+<a href="https://coveralls.io/r/GoogleCloudPlatform/gcloud-ruby?branch=master"><img src="https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-ruby.svg" alt="Coverage Status" /></a>
+<a href="http://badge.fury.io/rb/gcloud"><img src="https://badge.fury.io/rb/gcloud.svg" alt="Gem Version" /></a></p>
+
+<ul>
+  <li><a href="http://googlecloudplatform.github.io/gcloud-ruby/">Homepage</a></li>
+  <li><a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/">API Documentation</a></li>
+</ul>
+
+<h2 id="ruby-api-client-library-for-google-cloud">Ruby API Client library for Google Cloud</h2>
+
+<p>This client supports the following Google Cloud Platform services:</p>
+
+<ul>
+  <li><a href="#bigquery">Google Cloud BigQuery</a></li>
+  <li><a href="#datastore">Google Cloud Datastore</a></li>
+  <li><a href="#dns">Google Cloud DNS</a></li>
+  <li><a href="#pubsub">Google Cloud Pub/Sub</a></li>
+  <li><a href="#storage">Google Cloud Storage</a></li>
+</ul>
+
+<p>If you need support for other Google APIs, check out the <a href="https://github.com/google/google-api-ruby-client">Google API Ruby Client library</a>.</p>
+
+<h2 id="quick-start">Quick Start</h2>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="gp">$ </span>gem install gcloud
 </code></pre>
 </div>
 
-<p>Gcloud aims to make authentication as simple as possible. Google Cloud requires a <strong>Project ID</strong> and <strong>Service Account Credentials</strong> to connect to the APIs. You can learn more about various options for connection on the <a href="AUTHENTICATION">Authentication Guide</a>.</p>
+<h3 id="authentication">Authentication</h3>
 
-<h1 id="bigquery">BigQuery</h1>
+<p>Gcloud uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables. Additionally, Cloud SDK credentials can also be discovered automatically, but this is only recommended during development.</p>
 
-<p><a href="https://cloud.google.com/bigquery/">Google Cloud BigQuery</a> (<a href="https://cloud.google.com/bigquery/docs">docs</a>) enables super-fast, SQL-like queries against append-only tables, using the processing power of Google’s infrastructure. Simply move your data into BigQuery and let it handle the hard work. You can control access to both the project and your data based on your business needs, such as giving others the ability to view or query your data.</p>
+<p>Instructions and configuration options are covered in the <a href="AUTHENTICATION.md">Authentication guide</a>. The examples in Quick Start will demonstrate providing the <strong>Project ID</strong> and <strong>Credentials JSON file path</strong> in code.</p>
 
-<p>See the <a href="rdoc-ref:Gcloud::Bigquery">gcloud-ruby BigQuery API documentation</a> to learn how to connect to Cloud BigQuery using this library.</p>
+<h3 id="bigquery">BigQuery</h3>
+
+<ul>
+  <li><a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Bigquery.html">gcloud-ruby BigQuery API Documentation</a></li>
+  <li><a href="https://cloud.google.com/bigquery/docs">Google Cloud BigQuery Documentation</a></li>
+</ul>
+
+<h4 id="preview">Preview</h4>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
-<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span> <span class="s2">"my-todo-project-id"</span><span class="p">,</span>
+                    <span class="s2">"/path/to/keyfile.json"</span>
 <span class="n">bigquery</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">bigquery</span>
 
 <span class="c1"># Create a new table to archive todos</span>
@@ -113,17 +146,21 @@
 </code></pre>
 </div>
 
-<h1 id="datastore">Datastore</h1>
+<h3 id="datastore">Datastore</h3>
 
-<p><a href="https://cloud.google.com/datastore/">Google Cloud Datastore</a> (<a href="https://cloud.google.com/datastore/docs">docs</a>) is a fully managed, schemaless database for storing non-relational data. Cloud Datastore automatically scales with your users and supports ACID transactions, high availability of reads and writes, strong consistency for reads and ancestor queries, and eventual consistency for all other queries.</p>
+<ul>
+  <li><a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Datastore.html">gcloud-ruby Datastore API Documentation</a></li>
+  <li><a href="https://cloud.google.com/datastore/docs">Google Cloud Datastore Documentation</a></li>
+</ul>
 
-<p>Follow the <a href="https://cloud.google.com/datastore/docs/activate">activation instructions</a> to use the Google Cloud Datastore API with your project.</p>
+<p><em>Follow the <a href="https://cloud.google.com/datastore/docs/activate">activation instructions</a> to use the Google Cloud Datastore API with your project.</em></p>
 
-<p>See the <a href="rdoc-ref:Gcloud::Datastore">gcloud-ruby Datastore API documentation</a> to learn how to interact with the Cloud Datastore using this library.</p>
+<h4 id="preview-1">Preview</h4>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
-<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span> <span class="s2">"my-todo-project-id"</span><span class="p">,</span>
+                    <span class="s2">"/path/to/keyfile.json"</span>
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
 
 <span class="c1"># Create a new task to demo datastore</span>
@@ -142,11 +179,14 @@
 </code></pre>
 </div>
 
-<h1 id="dns">DNS</h1>
+<h3 id="dns">DNS</h3>
 
-<p><a href="https://cloud.google.com/dns/">Google Cloud DNS</a> (<a href="https://cloud.google.com/dns/docs">docs</a>) is a high-performance, resilient, global DNS service that provides a cost-effective way to make your applications and services available to your users. This programmable, authoritative DNS service can be used to easily publish and manage DNS records using the same infrastructure relied upon by Google. To learn more, read <a href="https://cloud.google.com/dns/what-is-cloud-dns">What is Google Cloud DNS?</a>.</p>
+<ul>
+  <li><a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Dns.html">gcloud-ruby DNS API documentation</a></li>
+  <li><a href="https://cloud.google.com/dns/docs">Google Cloud DNS Documentation</a></li>
+</ul>
 
-<p>See the <a href="rdoc-ref:Gcloud::Dns">gcloud-ruby DNS API documentation</a> to learn how to connect to Cloud DNS using this library.</p>
+<h4 id="preview-2">Preview</h4>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
@@ -170,15 +210,19 @@
 </code></pre>
 </div>
 
-<h1 id="pubsub">Pub/Sub</h1>
+<h3 id="pubsub">Pub/Sub</h3>
 
-<p><a href="https://cloud.google.com/pubsub/">Google Cloud Pub/Sub</a> (<a href="https://cloud.google.com/pubsub/reference/rest/">docs</a>) is designed to provide reliable, many-to-many, asynchronous messaging between applications. Publisher applications can send messages to a “topic” and other applications can subscribe to that topic to receive the messages. By decoupling senders and receivers, Google Cloud Pub/Sub allows developers to communicate between independently written applications.</p>
+<ul>
+  <li><a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Pubsub.html">gcloud-ruby Pub/Sub API documentation</a></li>
+  <li><a href="https://cloud.google.com/pubsub/docs">Google Cloud Pub/Sub Documentation</a></li>
+</ul>
 
-<p>See the <a href="rdoc-ref:Gcloud::Pubsub">gcloud-ruby Pub/Sub API documentation</a> to learn how to connect to Cloud Pub/Sub using this library.</p>
+<h4 id="preview-3">Preview</h4>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
-<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span> <span class="s2">"my-todo-project-id"</span><span class="p">,</span>
+                    <span class="s2">"/path/to/keyfile.json"</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
 
 <span class="c1"># Retrieve a topic</span>
@@ -195,19 +239,14 @@
 </code></pre>
 </div>
 
-<h1 id="resource-manager">Resource Manager</h1>
-
-<p><a href="https://cloud.google.com/resource-manager/">Google Cloud Resource Manager</a> (<a href="https://cloud.google.com/resource-manager/reference/rest/">docs</a>) provides methods that you can use to programmatically manage your projects in the Google Cloud Platform. You may be familiar with managing projects in the <a href="https://developers.google.com/console/help/new/">Developers Console</a>. With this API you can do the following:</p>
+<h3 id="resource-manager">Resource Manager</h3>
 
 <ul>
-  <li>Get a list of all projects associated with an account</li>
-  <li>Create new projects</li>
-  <li>Update existing projects</li>
-  <li>Delete projects</li>
-  <li>Undelete, or recover, projects that you don’t want to delete</li>
+  <li><a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/ResourceManager.html">gcloud-ruby Resource Manager API documentation</a></li>
+  <li><a href="https://cloud.google.com/resource-manager/">Google Cloud Resource Manager Documentation</a></li>
 </ul>
 
-<p>See the <a href="rdoc-ref:Gcloud::ResourceManager">gcloud-ruby Resource Manager API documentation</a> to learn how to connect to Cloud Resource Manager using this library.</p>
+<h4 id="preview-4">Preview</h4>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
@@ -230,11 +269,14 @@
 </code></pre>
 </div>
 
-<h1 id="search">Search</h1>
+<h3 id="search">Search</h3>
 
-<p><a href="https://cloud.google.com/search/">Google Cloud Search</a> (<a href="https://cloud.google.com/search/reference/rest/index">docs</a>) allows an application to quickly perform full-text and geo-spatial searches without having to spin up instances and without the hassle of managing and maintaining a search service.</p>
+<ul>
+  <li><a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Search.html">gcloud-ruby Search API documentation</a></li>
+  <li><a href="https://cloud.google.com/search/">Google Cloud Storage Documentation</a></li>
+</ul>
 
-<p>See the <a href="rdoc-ref:Gcloud::Search">gcloud-ruby Search API documentation</a> to learn how to connect to Cloud Search using this library.</p>
+<h4 id="preview-5">Preview</h4>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
@@ -248,15 +290,19 @@
 </code></pre>
 </div>
 
-<h1 id="storage">Storage</h1>
+<h3 id="storage">Storage</h3>
 
-<p><a href="https://cloud.google.com/storage/">Google Cloud Storage</a> (<a href="https://cloud.google.com/storage/docs/json_api/">docs</a>) allows you to store data on Google infrastructure with very high reliability, performance and availability, and can be used to distribute large data objects to users via direct download.</p>
+<ul>
+  <li><a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html">gcloud-ruby Storage API documentation</a></li>
+  <li><a href="https://cloud.google.com/storage/docs">Google Cloud Storage Documentation</a></li>
+</ul>
 
-<p>See the <a href="rdoc-ref:Gcloud::Storage">gcloud-ruby Storage API documentation</a> to learn how to connect to Cloud Storage using this library.</p>
+<h4 id="preview-6">Preview</h4>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
-<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span> <span class="s2">"my-todo-project-id"</span><span class="p">,</span>
+                    <span class="s2">"/path/to/keyfile.json"</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
 
 <span class="n">bucket</span> <span class="o">=</span> <span class="n">storage</span><span class="p">.</span><span class="nf">bucket</span> <span class="s2">"task-attachments"</span>
@@ -271,6 +317,34 @@
 <span class="n">file</span><span class="p">.</span><span class="nf">copy</span> <span class="n">backup</span><span class="p">,</span> <span class="n">file</span><span class="p">.</span><span class="nf">name</span>
 </code></pre>
 </div>
+
+<h2 id="supported-ruby-versions">Supported Ruby Versions</h2>
+
+<p>gcloud is supported on Ruby 2.0+.</p>
+
+<h2 id="versioning">Versioning</h2>
+
+<p>This library follows <a href="http://semver.org/">Semantic Versioning</a>.</p>
+
+<p>It is currently in major version zero (0.y.z), which means that anything may change at any time and the public API should not be considered stable.</p>
+
+<h2 id="contributing">Contributing</h2>
+
+<p>Contributions to this library are always welcome and highly encouraged.</p>
+
+<p>See <a href="CONTRIBUTING.md">CONTRIBUTING</a> for more information on how to get started.</p>
+
+<p>Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. See <a href="CODE_OF_CONDUCT.md">Code of Conduct</a> for more information.</p>
+
+<h2 id="license">License</h2>
+
+<p>This library is licensed under Apache 2.0. Full license text is
+available in <a href="LICENSE">LICENSE</a>.</p>
+
+<h2 id="support">Support</h2>
+
+<p>Please <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues">report bugs at the project on Github</a>.
+Don’t hesitate to <a href="http://stackoverflow.com/questions/tagged/gcloud-ruby">ask questions</a> about the client or APIs on <a href="http://stackoverflow.com">StackOverflow</a>.</p>
 
         
       </section>

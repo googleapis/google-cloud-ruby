@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <title>Gcloud::Storage::File::Updater &mdash; Gcloud Documentation</title>
+    <title>AUTHENTICATION &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,99 +69,100 @@
     <article class="main lang-page" role="main">
 
       <header class="docs-header">
-        <h1 class="page-title">Gcloud::Storage::File::Updater</h1>
+        <h1 class="page-title">AUTHENTICATION</h1>
       </header>
 
       <section class="content">
+        <h1 id="authentication">Authentication</h1>
 
-        <div id="description" class="description">
-          <p>Yielded to a block to accumulate changes for a patch request.</p>
+<h2 id="creating-a-service-account">Creating a Service Account</h2>
 
-        </div>
+<p>Gcloud aims to make authentication as simple as possible. Google Cloud requires a <strong>Project ID</strong> and <strong>Service Account Credentials</strong> to connect to the APIs. To create a service account:</p>
 
-        <div class="section-links">
-          
-            <div>Parent: Object</div>
-          
+<ol>
+  <li>Visit the <a href="https://console.developers.google.com/project">Google Developers Console</a>.</li>
+  <li>Create a new project or click on an existing project.</li>
+  <li>Navigate to <strong>APIs &amp; auth</strong> &gt; <strong>APIs section</strong> and turn on the following APIs (you may need to enable billing in order to use these services):
+    <ul>
+      <li>Google Cloud Datastore API</li>
+      <li>Google Cloud Storage</li>
+      <li>Google Cloud Storage JSON API</li>
+    </ul>
+  </li>
+  <li>Navigate to <strong>APIs &amp; auth</strong> &gt; <strong>Credentials</strong> and then:
+    <ul>
+      <li>If you want to use a new service account, click on <strong>Create new Client ID</strong> and select <strong>Service account</strong>. After the account is created, you will be prompted to download the JSON key file that the library uses to authorize your requests.</li>
+      <li>If you want to generate a new key for an existing service account, click on <strong>Generate new JSON key</strong> and download the JSON key file.</li>
+    </ul>
+  </li>
+</ol>
 
-          
-          
+<p>You will use the <strong>Project ID</strong> and <strong>JSON file</strong> to connect to services with gcloud.</p>
 
-          
-            <div>
-              Instance Methods
+<h2 id="project-and-credential-lookup">Project and Credential Lookup</h2>
 
-              
-                <span class='object_link'><a href="#updates-instance_method" title="Gcloud::Storage::File::Updater#updates (method)">#updates</a></span>
-              
-                <span class='object_link'><a href="#initialize-instance_method" title="Gcloud::Storage::File::Updater#initialize (method)">#initialize</a></span>
-              
-                <span class='object_link'><a href="#metadata-instance_method" title="Gcloud::Storage::File::Updater#metadata (method)">#metadata</a></span>
-              
-            </div>
-          
-        </div>
+<p>Gcloud aims to make authentication as simple as possible, and provides several mechanisms to configure your system without providing <strong>Project ID</strong> and <strong>Service Account Credentials</strong> directly in code.</p>
 
-        
-          <div id="Instance Methods-methods" class="section">
-            <h3 class="section-header">Instance Methods</h3>
-          </div>
+<p><strong>Project ID</strong> is discovered in the following order:</p>
 
-          <div class="methods">
-            
-              <div class="method">
-                <a name="updates-instance_method"></a>
+<ol>
+  <li>Specify project ID in code</li>
+  <li>Discover project ID in environment variables</li>
+  <li>Discover GCE project ID</li>
+</ol>
 
-                <h4>
-                  <code>updates</code>
-                  <span>
-                    <a href="#updates-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+<p><strong>Credentials</strong> are discovered in the following order:</p>
 
-                <div class="method-description">
-                  <p>Returns the value of attribute updates</p>
+<ol>
+  <li>Specify credentials in code</li>
+  <li>Discover credentials path in environment variables</li>
+  <li>Discover credentials JSON in environment variables</li>
+  <li>Discover credentials file in the Cloud SDK’s path</li>
+  <li>Discover GCE credentials</li>
+</ol>
 
-                </div>
-              </div>
-            
-              <div class="method">
-                <a name="initialize-instance_method"></a>
+<h3 id="compute-engine">Compute Engine</h3>
 
-                <h4>
-                  <code>initialize(metadata)</code>
-                  <span>
-                    <a href="#initialize-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+<p>While running on Google Compute Engine no extra work is needed. The <strong>Project ID</strong> and <strong>Credentials</strong> and are discovered automatically. Code should be written as if already authenticated.</p>
 
-                <div class="method-description">
-                  <p>Create an Updater object.</p>
+<h3 id="environment-variables">Environment Variables</h3>
 
-                </div>
-              </div>
-            
-              <div class="method">
-                <a name="metadata-instance_method"></a>
+<p>The <strong>Project ID</strong> and <strong>Credentials JSON</strong> can be placed in environment variables instead of declaring them directly in code. Each service has its own environment variable, allowing for different service accounts to be used for different services. The path to the <strong>Credentials JSON</strong> file can be stored in the environment variable, or the <strong>Credentials JSON</strong> itself can be stored for environments such as Docker containers where writing files is difficult or not encouraged.</p>
 
-                <h4>
-                  <code>metadata</code>
-                  <span>
-                    <a href="#metadata-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+<p>Here are the environment variables that Datastore checks for project ID:</p>
 
-                <div class="method-description">
-                  <p>Return metadata for mutation. Also adds metadata to @updates so that
-it is included in the patch request.</p>
+<ol>
+  <li>DATASTORE_PROJECT</li>
+  <li>GCLOUD_PROJECT</li>
+</ol>
 
-                </div>
-              </div>
-            
-          </div>
+<p>Here are the environment variables that Datastore checks for credentials:</p>
+
+<ol>
+  <li>DATASTORE_KEYFILE - Path to JSON file</li>
+  <li>GCLOUD_KEYFILE - Path to JSON file</li>
+  <li>DATASTORE_KEYFILE_JSON - JSON contents</li>
+  <li>GCLOUD_KEYFILE_JSON - JSON contents</li>
+</ol>
+
+<h3 id="cloud-sdk">Cloud SDK</h3>
+
+<p>This option allows for an easy way to authenticate during development. If credentials are not provided in code or in environment variables, then Cloud SDK credentials are discovered.</p>
+
+<p>To configure your system for this, simply:</p>
+
+<ol>
+  <li><a href="https://cloud.google.com/sdk">Download and install the Cloud SDK</a></li>
+  <li>Authenticate using OAuth 2.0 <code class="highlighter-rouge">$ gcloud auth login</code></li>
+  <li>Write code as if already authenticated.</li>
+</ol>
+
+<p><strong>NOTE:</strong> This is <em>not</em> recommended for running in production. The Cloud SDK should only be used during development.</p>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<p>If you’re having trouble authenticating open a <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/new?title=Authentication+question">Github Issue</a> to get help.  Also consider searching or asking <a href="http://stackoverflow.com/questions/tagged/gcloud-ruby">questions</a> on <a href="http://stackoverflow.com">StackOverflow</a>.</p>
+
         
       </section>
 
