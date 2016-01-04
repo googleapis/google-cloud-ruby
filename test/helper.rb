@@ -878,4 +878,19 @@ class MockLogging < Minitest::Spec
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_logging
   end
+
+  def random_resource_hash
+    {
+      "type"        => "cloudsql_database",
+      "displayName" => "Cloud SQL Database",
+      "description" => "This resource is a Cloud SQL Database",
+      "labels"      => [
+        {
+          "key"         => "prod",
+          "valueType"   => "STRING",
+          "description" => "The resources are considered in production",
+        }
+      ]
+    }
+  end
 end
