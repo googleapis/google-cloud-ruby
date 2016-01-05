@@ -39,4 +39,30 @@ describe Gcloud::Logging::Sink, :mock_logging do
     sink.version = "V1"
     sink.must_be :v1?
   end
+
+  it "can save itself" do
+    new_sink_destination = "storage.googleapis.com/new-sink-bucket"
+    new_sink_filter = "logName:syslog AND severity>=WARN"
+
+    mock_connection.put "/v2beta1/projects/#{project}/sinks/#{sink.name}" do |env|
+      sink_json = JSON.parse env.body
+      sink_json["name"].must_equal sink.name
+      sink_json["destination"].must_equal new_sink_destination
+      sink_json["filter"].must_equal new_sink_filter
+      sink_json["outputVersionFormat"].must_equal "V1"
+
+      [200, {"Content-Type"=>"application/json"},
+       sink_json.to_json]
+    end
+
+    sink.destination = new_sink_destination
+    sink.filter = new_sink_filter
+    sink.version = :v1
+    sink.save
+
+    sink.must_be_kind_of Gcloud::Logging::Sink
+    sink.destination.must_equal new_sink_destination
+    sink.filter.must_equal new_sink_filter
+    sink.must_be :v1?
+  end
 end

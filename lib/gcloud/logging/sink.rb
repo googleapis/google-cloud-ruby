@@ -64,6 +64,13 @@ module Gcloud
       end
 
       ##
+      # Updates the export destination. See [Exporting Logs With
+      # Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+      def destination= destination
+        @gapi["destination"] = destination
+      end
+
+      ##
       # An [advanced logs
       # filter](https://cloud.google.com/logging/docs/view/advanced_filters)
       # that defines the log entries to be exported. The filter must be
@@ -72,6 +79,17 @@ module Gcloud
       # written to Cloud Logging.
       def filter
         @gapi["filter"]
+      end
+
+      ##
+      # Updates the [advanced logs
+      # filter](https://cloud.google.com/logging/docs/view/advanced_filters)
+      # that defines the log entries to be exported. The filter must be
+      # consistent with the log entry format designed by the `version`
+      # parameter, regardless of the format of the log entry that was originally
+      # written to Cloud Logging.
+      def filter= filter
+        @gapi["filter"] = filter
       end
 
       ##
@@ -109,6 +127,28 @@ module Gcloud
       # Helper to determine if the sink's version is `V1`.
       def v1?
         version == VERSIONS[:v1]
+      end
+
+      ##
+      # Updates the logs-based sink.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   sink = logging.sink "severe_errors"
+      #   sink.filter = "logName:syslog AND severity>=ERROR"
+      #   sink.save
+      #
+      def save
+        ensure_connection!
+        resp = connection.update_sink name, destination, filter, version
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
       end
 
       ##

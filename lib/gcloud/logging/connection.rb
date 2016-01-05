@@ -48,6 +48,26 @@ module Gcloud
           parameters: params
         )
       end
+
+      def update_sink name, destination, filter, version
+        params = { sinkName: sink_path(name) }
+        updated_sink_object = {
+          name: name, destination: destination,
+          filter: filter, outputVersionFormat: version
+        }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @logging.projects.sinks.update,
+          parameters: params,
+          body_object: updated_sink_object
+        )
+      end
+
+      protected
+
+      def sink_path sink_name
+        "projects/#{@project}/sinks/#{sink_name}"
+      end
     end
   end
 end
