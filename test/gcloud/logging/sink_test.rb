@@ -24,4 +24,19 @@ describe Gcloud::Logging::Sink, :mock_logging do
     sink.filter.must_equal      sink_hash["filter"]
     sink.version.must_equal     sink_hash["outputVersionFormat"]
   end
+
+  it "can set different sink format versions" do
+    sink.must_be :unspecified?
+    sink.version = :v2
+    sink.must_be :v2?
+    sink.version = :v1
+    sink.must_be :v1?
+
+    sink.version = "VERSION_FORMAT_UNSPECIFIED"
+    sink.must_be :unspecified?
+    sink.version = "V2"
+    sink.must_be :v2?
+    sink.version = "V1"
+    sink.must_be :v1?
+  end
 end

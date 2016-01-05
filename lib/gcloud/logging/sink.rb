@@ -29,6 +29,11 @@ module Gcloud
     #
     class Sink
       ##
+      # @private
+      VERSIONS = { unspecified: "VERSION_FORMAT_UNSPECIFIED",
+                   v2: "V2", v1: "V1" }
+
+      ##
       # @private The Connection object.
       attr_accessor :connection
 
@@ -75,6 +80,35 @@ module Gcloud
       # when it was written to Cloud Logging.
       def version
         @gapi["outputVersionFormat"]
+      end
+
+      ##
+      # Updates the log entry version used when exporting log entries from this
+      # sink. This version does not have to correspond to the version of the log
+      # entry when it was written to Cloud Logging. Accepted values are
+      # `:unspecified`, `:v2`, and `:v1`.
+      def version= version
+        version = VERSIONS[version] if VERSIONS[version]
+        @gapi["outputVersionFormat"] = version
+      end
+
+      ##
+      # Helper to determine if the sink's version is
+      # `VERSION_FORMAT_UNSPECIFIED`.
+      def unspecified?
+        version == VERSIONS[:unspecified]
+      end
+
+      ##
+      # Helper to determine if the sink's version is `V2`.
+      def v2?
+        version == VERSIONS[:v2]
+      end
+
+      ##
+      # Helper to determine if the sink's version is `V1`.
+      def v1?
+        version == VERSIONS[:v1]
       end
 
       ##
