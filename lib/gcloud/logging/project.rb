@@ -72,6 +72,52 @@ module Gcloud
           Gcloud::GCE.project_id
       end
 
+      ##
+      # Retrieves the list of monitored resources that are used by Google Cloud
+      # Logging.
+      #
+      # @param [String] token A previously-returned page token representing part
+      #   of the larger set of results to view.
+      # @param [Integer] max Maximum number of resources to return.
+      #
+      # @return [Array<Gcloud::Logging::Resource>] (See
+      #   {Gcloud::Logging::Resource::List})
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   resources = logging.resources
+      #   resources.each do |resource|
+      #     puts resource.name
+      #   end
+      #
+      # @example With pagination: (See {Gcloud::Logging::Resource::List})
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   resources = logging.resources
+      #   loop do
+      #     resources.each do |resource|
+      #       puts resource.name
+      #     end
+      #     break unless resources.next?
+      #     resources = resources.next
+      #   end
+      #
+      def resources token: nil, max: nil
+        ensure_connection!
+        resp = connection.list_resources token: token, max: max
+        if resp.success?
+          Resource::List.from_response resp, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+      alias_method :find_resources, :resources
+
       protected
 
       ##

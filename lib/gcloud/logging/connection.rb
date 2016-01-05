@@ -37,6 +37,17 @@ module Gcloud
         @client.authorization = @credentials.client
         @logging = @client.discovered_api "logging", API_VERSION
       end
+
+      def list_resources token: nil, max: nil
+        params = { pageToken: token,
+                   maxResults: max
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @logging.monitored_resource_descriptors.list,
+          parameters: params
+        )
+      end
     end
   end
 end
