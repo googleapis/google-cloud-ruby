@@ -893,4 +893,13 @@ class MockLogging < Minitest::Spec
       ]
     }
   end
+
+  def random_sink_hash
+    {
+      "name"                => "my-severe-errors-to-pubsub",
+      "destination"         => "storage.googleapis.com/a-bucket",
+      "filter"              => "logName:syslog AND severity>=ERROR",
+      "outputVersionFormat" => "VERSION_FORMAT_UNSPECIFIED"
+    }
+  end
 end

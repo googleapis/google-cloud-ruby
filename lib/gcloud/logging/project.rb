@@ -18,6 +18,7 @@ require "gcloud/logging/connection"
 require "gcloud/logging/credentials"
 require "gcloud/logging/errors"
 require "gcloud/logging/resource"
+require "gcloud/logging/sink"
 
 module Gcloud
   module Logging

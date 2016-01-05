@@ -1,0 +1,98 @@
+# Copyright 2016 Google Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+module Gcloud
+  module Logging
+    ##
+    # # Sink
+    #
+    # Used to export log entries outside Cloud Logging.
+    #
+    # @example
+    #   require "gcloud"
+    #
+    #   gcloud = Gcloud.new
+    #   logging = gcloud.logging
+    #   sink = logging.sink "severe_errors"
+    #
+    class Sink
+      ##
+      # @private The Connection object.
+      attr_accessor :connection
+
+      ##
+      # @private The Google API Client object.
+      attr_accessor :gapi
+
+      ##
+      # @private Create an empty File object.
+      def initialize
+        @connection = nil
+        @gapi = {}
+      end
+
+      ##
+      # The client-assigned sink identifier. Sink identifiers are limited to
+      # 1000 characters and can include only the following characters: `A-Z`,
+      # `a-z`, `0-9`, and the special characters `_-.`.
+      def name
+        @gapi["name"]
+      end
+
+      ##
+      # The export destination. See [Exporting Logs With
+      # Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+      def destination
+        @gapi["destination"]
+      end
+
+      ##
+      # An [advanced logs
+      # filter](https://cloud.google.com/logging/docs/view/advanced_filters)
+      # that defines the log entries to be exported. The filter must be
+      # consistent with the log entry format designed by the `version`
+      # parameter, regardless of the format of the log entry that was originally
+      # written to Cloud Logging.
+      def filter
+        @gapi["filter"]
+      end
+
+      ##
+      # The log entry version used when exporting log entries from this sink.
+      # This version does not have to correspond to the version of the log entry
+      # when it was written to Cloud Logging.
+      def version
+        @gapi["outputVersionFormat"]
+      end
+
+      ##
+      # @private New Metric from a Google API Client object.
+      def self.from_gapi gapi, conn
+        new.tap do |f|
+          f.gapi = gapi
+          f.connection = conn
+        end
+      end
+
+      protected
+
+      ##
+      # Raise an error unless an active connection is available.
+      def ensure_connection!
+        fail "Must have active connection" unless connection
+      end
+    end
+  end
+end
