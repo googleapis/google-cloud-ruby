@@ -152,6 +152,20 @@ module Gcloud
       end
 
       ##
+      # Reloads the logs-based sink with current data from the Logging
+      # service.
+      def reload!
+        ensure_connection!
+        resp = connection.get_sink name
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+      alias_method :refresh!, :reload!
+
+      ##
       # @private New Metric from a Google API Client object.
       def self.from_gapi gapi, conn
         new.tap do |f|

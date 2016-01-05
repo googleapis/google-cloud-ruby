@@ -65,4 +65,12 @@ describe Gcloud::Logging::Sink, :mock_logging do
     sink.filter.must_equal new_sink_filter
     sink.must_be :v1?
   end
+
+  it "can refresh itself" do
+    mock_connection.get "/v2beta1/projects/#{project}/sinks/#{sink.name}" do |env|
+      [200, {"Content-Type"=>"application/json"}, random_sink_hash.to_json]
+    end
+
+    sink.refresh!
+  end
 end

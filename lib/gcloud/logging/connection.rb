@@ -49,6 +49,13 @@ module Gcloud
         )
       end
 
+      def get_sink name
+        @client.execute(
+          api_method: @logging.projects.sinks.get,
+          parameters: { sinkName: sink_path(name) }
+        )
+      end
+
       def update_sink name, destination, filter, version
         params = { sinkName: sink_path(name) }
         updated_sink_object = {
