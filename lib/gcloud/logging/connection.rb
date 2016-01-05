@@ -70,6 +70,13 @@ module Gcloud
         )
       end
 
+      def delete_sink name
+        @client.execute(
+          api_method: @logging.projects.sinks.delete,
+          parameters: { sinkName: sink_path(name) }
+        )
+      end
+
       protected
 
       def sink_path sink_name

@@ -73,4 +73,12 @@ describe Gcloud::Logging::Sink, :mock_logging do
 
     sink.refresh!
   end
+
+  it "can delete itself" do
+    mock_connection.delete "/v2beta1/projects/#{project}/sinks/#{sink.name}" do |env|
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    sink.delete
+  end
 end

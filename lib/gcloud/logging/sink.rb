@@ -166,6 +166,29 @@ module Gcloud
       alias_method :refresh!, :reload!
 
       ##
+      # Permanently deletes the logs-based sink.
+      #
+      # @return [Boolean] Returns `true` if the sink was deleted.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   sink = logging.sink "severe_errors"
+      #   sink.delete
+      #
+      def delete
+        ensure_connection!
+        resp = connection.delete_sink name
+        if resp.success?
+          true
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # @private New Metric from a Google API Client object.
       def self.from_gapi gapi, conn
         new.tap do |f|
