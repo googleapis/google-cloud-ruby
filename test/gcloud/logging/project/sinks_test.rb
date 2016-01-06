@@ -139,6 +139,19 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
     sink.must_be :v2?
   end
 
+  it "gets a sink" do
+    sink_name = "existing-sink-#{Time.now.to_i}"
+
+    mock_connection.get "/v2beta1/projects/#{project}/sinks/#{sink_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_sink_hash.merge("name" => sink_name).to_json]
+    end
+
+    sink = logging.sink sink_name
+    sink.must_be_kind_of Gcloud::Logging::Sink
+    sink.name.must_equal sink_name
+  end
+
   def list_sinks_json count = 2, token = nil
     {
       sinks: count.times.map { random_sink_hash },

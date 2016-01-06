@@ -206,6 +206,38 @@ module Gcloud
       end
       alias_method :new_sink, :create_sink
 
+      ##
+      # Retrieves sink by name.
+      #
+      # @param [String] name Name of a sink.
+      #
+      # @return [Gcloud::Logging::Sink, nil] Returns `nil` if sink does not
+      #   exist.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   sink = logging.sink "existing-sink"
+      #
+      # @example By default `nil` will be returned if the sink does not exist.
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   sink = logging.sink "non-existing-sink" #=> nil
+      #
+      def sink sink_name
+        ensure_connection!
+        resp = connection.get_sink sink_name
+        return Sink.from_gapi(resp.data, connection) if resp.success?
+        return nil if resp.status == 404
+        fail ApiError.from_response(resp)
+      end
+      alias_method :get_sink, :sink
+      alias_method :find_sink, :sink
+
       protected
 
       ##
