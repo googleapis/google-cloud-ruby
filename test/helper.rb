@@ -902,4 +902,12 @@ class MockLogging < Minitest::Spec
       "outputVersionFormat" => "VERSION_FORMAT_UNSPECIFIED"
     }
   end
+
+  def random_metric_hash
+    {
+      "name"        => "severe_errors",
+      "description" => "The servere errors metric",
+      "filter"      => "logName:syslog AND severity>=ERROR"
+    }
+  end
 end
