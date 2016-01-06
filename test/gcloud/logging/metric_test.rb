@@ -23,4 +23,27 @@ describe Gcloud::Logging::Metric, :mock_logging do
     metric.description.must_equal metric_hash["description"]
     metric.filter.must_equal      metric_hash["filter"]
   end
+
+  it "can save itself" do
+    new_metric_description = "New Metric Description"
+    new_metric_filter = "logName:syslog AND severity>=WARN"
+
+    mock_connection.put "/v2beta1/projects/#{project}/metrics/#{metric.name}" do |env|
+      metric_json = JSON.parse env.body
+      metric_json["name"].must_equal metric.name
+      metric_json["description"].must_equal new_metric_description
+      metric_json["filter"].must_equal new_metric_filter
+
+      [200, {"Content-Type"=>"application/json"},
+       metric_json.to_json]
+    end
+
+    metric.description = new_metric_description
+    metric.filter = new_metric_filter
+    metric.save
+
+    metric.must_be_kind_of Gcloud::Logging::Metric
+    metric.description.must_equal new_metric_description
+    metric.filter.must_equal new_metric_filter
+  end
 end

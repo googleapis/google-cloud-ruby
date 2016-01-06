@@ -61,10 +61,45 @@ module Gcloud
       end
 
       ##
+      # Updates the description of this metric, which is used in documentation.
+      def description= description
+        @gapi["description"] = description
+      end
+
+      ##
       # An [advanced logs
       # filter](https://cloud.google.com/logging/docs/view/advanced_filters).
       def filter
         @gapi["filter"]
+      end
+
+      ##
+      # Updates the [advanced logs
+      # filter](https://cloud.google.com/logging/docs/view/advanced_filters).
+      def filter= filter
+        @gapi["filter"] = filter
+      end
+
+      ##
+      # Updates the logs-based metric.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   metric = logging.metric "severe_errors"
+      #   metric.filter = "logName:syslog AND severity>=ERROR"
+      #   metric.save
+      #
+      def save
+        ensure_connection!
+        resp = connection.update_metric name, description, filter
+        if resp.success?
+          @gapi = resp.data
+        else
+          fail ApiError.from_response(resp)
+        end
       end
 
       ##

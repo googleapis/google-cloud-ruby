@@ -103,6 +103,19 @@ module Gcloud
         )
       end
 
+      def update_metric name, description, filter
+        params = { metricName: metric_path(name) }
+        updated_metric_object = {
+          name: name, description: description, filter: filter
+        }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @logging.projects.metrics.update,
+          parameters: params,
+          body_object: updated_metric_object
+        )
+      end
+
       protected
 
       def project_path
@@ -111,6 +124,10 @@ module Gcloud
 
       def sink_path sink_name
         "#{project_path}/sinks/#{sink_name}"
+      end
+
+      def metric_path metric_name
+        "#{project_path}/metrics/#{metric_name}"
       end
     end
   end
