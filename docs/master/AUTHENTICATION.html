@@ -80,21 +80,22 @@
 <p>Gcloud aims to make authentication as simple as possible. Google Cloud requires a <strong>Project ID</strong> and <strong>Service Account Credentials</strong> to connect to the APIs. To create a service account:</p>
 
 <ol>
-  <li>Visit the <a href="https://console.developers.google.com/project">Google Developers Console</a>.</li>
-  <li>Create a new project or click on an existing project.</li>
-  <li>Navigate to <strong>APIs &amp; auth</strong> &gt; <strong>APIs section</strong> and turn on the following APIs (you may need to enable billing in order to use these services):
+  <li>Visit the <a href="https://console.developers.google.com/project">Google Developers Console Projects page</a>.</li>
+  <li>Create a new project or click on an existing project that you wish to use.</li>
+  <li>In the project’s <strong>Dashboard</strong>, under <strong>Explore other services</strong>, click <strong>Enable APIs and get credentials like keys</strong>.</li>
+  <li>Turn on one or more of the following APIs by clicking on each API name and then clicking <strong>Enable API</strong> (click <strong>More</strong> if you do not see an API; also, you may need to enable billing in order to use some services):
     <ul>
-      <li>Google Cloud Datastore API</li>
-      <li>Google Cloud Storage</li>
-      <li>Google Cloud Storage JSON API</li>
+      <li>BigQuery API</li>
+      <li>Cloud Datastore API</li>
+      <li>Cloud DNS API</li>
+      <li>Cloud Pub/Sub API</li>
+      <li>Cloud Storage Service</li>
+      <li>Cloud Storage JSON API</li>
     </ul>
   </li>
-  <li>Navigate to <strong>APIs &amp; auth</strong> &gt; <strong>Credentials</strong> and then:
-    <ul>
-      <li>If you want to use a new service account, click on <strong>Create new Client ID</strong> and select <strong>Service account</strong>. After the account is created, you will be prompted to download the JSON key file that the library uses to authorize your requests.</li>
-      <li>If you want to generate a new key for an existing service account, click on <strong>Generate new JSON key</strong> and download the JSON key file.</li>
-    </ul>
-  </li>
+  <li>In the left nav, click <strong>Credentials</strong>.</li>
+  <li>Under <strong>New credentials</strong>, select <strong>Service account key</strong>.</li>
+  <li>If you want to create a new service account, under <strong>Service account</strong>, select <strong>New service account</strong>. Otherwise, select an existing service account. Submit the form to download a JSON type key. Save the downloaded JSON key file to authorize your requests.</li>
 </ol>
 
 <p>You will use the <strong>Project ID</strong> and <strong>JSON file</strong> to connect to services with gcloud.</p>
@@ -170,7 +171,7 @@
 
         <div class="side-nav--meta">
           <div id="doc-build-date">
-            Docs built on Dec 30, 2015.
+            Docs built on Jan 06, 2016.
           </div>
         </div>
 
