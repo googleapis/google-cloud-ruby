@@ -61,6 +61,20 @@ module Gcloud
         )
       end
 
+      def create_sink name, destination, filter, version
+        params = { projectName: project_path }
+        new_sink_object = {
+          name: name, destination: destination,
+          filter: filter, outputVersionFormat: version
+        }
+
+        @client.execute(
+          api_method: @logging.projects.sinks.create,
+          parameters: params,
+          body_object: new_sink_object
+        )
+      end
+
       def get_sink name
         @client.execute(
           api_method: @logging.projects.sinks.get,

@@ -164,6 +164,48 @@ module Gcloud
       end
       alias_method :find_sinks, :sinks
 
+      ##
+      # Creates a new sink.
+      #
+      # @param [String] name The client-assigned sink identifier. Sink
+      #   identifiers are limited to 1000 characters and can include only the
+      #   following characters: `A-Z`, `a-z`, `0-9`, and the special characters
+      #   `_-.`.
+      # @param [String] destination The export destination. See [Exporting Logs
+      #   With
+      #   Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+      # @param [String] filter An [advanced logs
+      #  filter](https://cloud.google.com/logging/docs/view/advanced_filters)
+      #  that defines the log entries to be exported. The filter must be
+      #  consistent with the log entry format designed by the `version`
+      #  parameter, regardless of the format of the log entry that was
+      #  originally written to Cloud Logging.
+      # @param [Symbol] version The log entry version used when exporting log
+      #   entries from this sink. This version does not have to correspond to
+      #   the version of the log entry when it was written to Cloud Logging.
+      #   Accepted values are `:unspecified`, `:v2`, and `:v1`.
+      #
+      # @return [Gcloud::Logging::Sink]
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   sink = logging.create_sink "my-sink"
+      #
+      def create_sink name, destination: nil, filter: nil, version: :unspecified
+        version = Sink::VERSIONS[version] if Sink::VERSIONS[version]
+        ensure_connection!
+        resp = connection.create_sink name, destination, filter, version
+        if resp.success?
+          Sink.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+      alias_method :new_sink, :create_sink
+
       protected
 
       ##
