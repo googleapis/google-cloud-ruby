@@ -27,11 +27,27 @@ $ rake test
 
 ### Acceptance Tests
 
-To run the acceptance tests, first create and configure a project in the Google Developers Console. Be sure to download the JSON KEY file. Make note of the PROJECT_ID and the KEYFILE location on your system.
+The gcloud-ruby acceptance tests interact with the following live service APIs:
 
-Then Install the [gcloud command-line tool](https://developers.google.com/cloud/sdk/gcloud/) and use it to create the indexes used in the datastore acceptance tests.
+* BigQuery
+* Cloud Datastore
+* Cloud DNS
+* Cloud Pub/Sub
+* Cloud Search
+* Cloud Storage
 
-From the project's root directory:
+Follow the instructions in the [Authentication guide](AUTHENTICATION.md) for enabling APIs. Some of the APIs may not yet be generally available, making it difficult for some contributors to successfully run the entire acceptance test suite. However, please ensure that you do successfully run acceptance tests for any code areas covered by your pull request.
+
+To run the acceptance tests, first create and configure a project in the Google Developers Console, as described in the [Authentication guide](AUTHENTICATION.md). Be sure to download the JSON KEY file. Make note of the PROJECT_ID and the KEYFILE location on your system.
+
+
+#### Datastore acceptance tests
+
+To run the Datastore acceptance tests, you must first create indexes used in the tests.
+
+##### Datastore indexes
+
+Install the [gcloud command-line tool](https://developers.google.com/cloud/sdk/gcloud/) and use it to create the indexes used in the datastore acceptance tests. From the project's root directory:
 
 ``` sh
 # Install the app component
@@ -47,7 +63,21 @@ $ gcloud auth login
 $ gcloud preview datastore create-indexes acceptance/data/
 ```
 
-As soon as the indexes are prepared you can run the acceptance tests:
+##### Local Datastore Devserver
+
+You can run the Datstore acceptance tests against a devserver running locally. To switch to the devserver set the `DATASTORE_HOST` environment variable with the location of the local devserver.
+
+``` sh
+$ DATASTORE_HOST=http://127.0.0.1:8080 rake test:acceptance:datastore
+```
+
+#### DNS Acceptance Tests
+
+To run the DNS acceptance tests you must give your service account permissions to a domain name in [Webmaster Central](https://www.google.com/webmasters/verification) and set the `GCLOUD_TEST_DNS_DOMAIN` environment variable to the fully qualified domain name. (e.g. "example.com.")
+
+#### Running the acceptance tests
+
+To run the acceptance tests:
 
 ``` sh
 $ rake test:acceptance[PROJECT_ID,KEYFILE_PATH]
@@ -61,7 +91,7 @@ $ export GCLOUD_TEST_KEYFILE=/path/to/keyfile.json
 $ rake test:acceptance
 ```
 
-If you want to use different values for Datastore vs. Storage acceptance tests, you can use the `DATASTORE_TEST_` and `STORAGE_TEST_` environment variables:
+If you want to use different values for Datastore vs. Storage acceptance tests, for example, you can use the `DATASTORE_TEST_` and `STORAGE_TEST_` environment variables:
 
 ``` sh
 $ export DATASTORE_TEST_PROJECT=my-project-id
@@ -69,18 +99,6 @@ $ export DATASTORE_TEST_KEYFILE=/path/to/keyfile.json
 $ export STORAGE_TEST_PROJECT=my-other-project-id
 $ export STORAGE_TEST_KEYFILE=/path/to/other/keyfile.json
 $ rake test:acceptance
-```
-
-### DNS Acceptance Tests
-
-To run the DNS acceptance tests you must give your service account permissions to a domain name in [Webmaster Central](https://www.google.com/webmasters/verification) and set the `GCLOUD_TEST_DNS_DOMAIN` environment variable to the fully qualified domain name. (e.g. "example.com.")
-
-### Local Datastore Devserver
-
-You can run the Datstore acceptance tests against a devserver running locally. To switch to the devserver set the `DATASTORE_HOST` environment variable with the location of the local devserver.
-
-``` sh
-$ DATASTORE_HOST=http://127.0.0.1:8080 rake test:acceptance:datastore
 ```
 
 ## Coding Style
