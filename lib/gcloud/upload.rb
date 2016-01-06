@@ -40,10 +40,7 @@ module Gcloud
     ##
     # Sets a new resumable threshold value.
     def self.resumable_threshold= new_resumable_threshold
-      # rubocop:disable Style/ClassVars
-      # Disabled rubocop because this is the best option.
       @@resumable_threshold = new_resumable_threshold.to_i
-      # rubocop:enable Style/ClassVars
     end
 
     # Set the default threshold to 5 MiB.

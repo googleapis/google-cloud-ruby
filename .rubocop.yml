@@ -26,8 +26,14 @@ Style/EmptyLines:
 Style/EmptyElse:
   Enabled: false
 Metrics/AbcSize:
-  Max: 20
+  Max: 25
 Metrics/MethodLength:
   Max: 15
 Metrics/ParameterLists:
+  Enabled: false
+Style/RescueModifier:
+  Enabled: false
+Style/ClassVars:
+  Enabled: false
+Style/TrivialAccessors:
   Enabled: false

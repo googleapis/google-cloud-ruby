@@ -58,9 +58,6 @@ module Gcloud
       @client.fetch_access_token!
     end
 
-    # rubocop:disable all
-    # Disabled rubocop because this is intentionally complex.
-
     ##
     # Returns the default credentials.
     #
@@ -86,8 +83,6 @@ module Gcloud
       client = Google::Auth.get_application_default scope
       new client
     end
-
-    # rubocop:enable all
 
     protected
 

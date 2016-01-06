@@ -118,9 +118,7 @@ module Gcloud
         @fields[name]
       end
 
-      # rubocop:disable Style/TrivialAccessors
-      # Disable rubocop because we want .fields to be listed with the other
-      # methods on the class.
+      # Trivial accessor because we want .fields to be listed with methods.
 
       ##
       # The fields in the document. Each field has a name (String) and a list of
@@ -128,8 +126,6 @@ module Gcloud
       def fields
         @fields
       end
-
-      # rubocop:enable Style/TrivialAccessors
 
       ##
       # Add a new value. If the field name does not exist it will be added. If
