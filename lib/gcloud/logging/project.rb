@@ -119,6 +119,51 @@ module Gcloud
       end
       alias_method :find_resources, :resources
 
+      ##
+      # Retrieves the list of sinks belonging to the project.
+      #
+      # @param [String] token A previously-returned page token representing part
+      #   of the larger set of results to view.
+      # @param [Integer] max Maximum number of sinks to return.
+      #
+      # @return [Array<Gcloud::Logging::Sink>] (See
+      #   {Gcloud::Logging::Sink::List})
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   sinks = logging.sinks
+      #   sinks.each do |sink|
+      #     puts sink.name
+      #   end
+      #
+      # @example With pagination: (See {Gcloud::Logging::Sink::List})
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   sinks = logging.sinks
+      #   loop do
+      #     sinks.each do |sink|
+      #       puts sink.name
+      #     end
+      #     break unless sinks.next?
+      #     sinks = sinks.next
+      #   end
+      #
+      def sinks token: nil, max: nil
+        ensure_connection!
+        resp = connection.list_sinks token: token, max: max
+        if resp.success?
+          Sink::List.from_response resp, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+      alias_method :find_sinks, :sinks
+
       protected
 
       ##

@@ -49,6 +49,18 @@ module Gcloud
         )
       end
 
+      def list_sinks token: nil, max: nil
+        params = { projectName: project_path,
+                   pageToken: token,
+                   maxResults: max
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @logging.projects.sinks.list,
+          parameters: params
+        )
+      end
+
       def get_sink name
         @client.execute(
           api_method: @logging.projects.sinks.get,
@@ -79,8 +91,12 @@ module Gcloud
 
       protected
 
+      def project_path
+        "projects/#{@project}"
+      end
+
       def sink_path sink_name
-        "projects/#{@project}/sinks/#{sink_name}"
+        "#{project_path}/sinks/#{sink_name}"
       end
     end
   end
