@@ -44,7 +44,7 @@ module Gcloud
     #   bucket = storage.bucket "my-bucket"
     #
     #   file = bucket.file "path/to/my-file.ext"
-    #   file.download "/downloads/#{bucket.name}/#{file.name}"
+    #   file.download "path/to/downloaded/file.ext"
     #
     class File
       ##
