@@ -13,6 +13,35 @@ Before we can accept your pull requests you'll need to sign a Contributor Licens
 
 You can sign these electronically (just scroll to the bottom). After that, we'll be able to accept your pull requests.
 
+## Setup
+
+In order to use the gcloud-ruby console and run the project's tests, there is a
+small amount of setup:
+
+1. Install Ruby.
+    gcloud-ruby requires Ruby 2.0+. You may choose to manage your Ruby and gem installations with [RVM](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), or [chruby](https://github.com/postmodern/chruby).
+
+2. Install [Bundler](http://bundler.io/).
+
+    ```sh
+    $ gem install bundler
+    ```
+
+3. Install the project dependencies.
+
+    ```sh
+    $ bundle install
+    ```
+
+## Console
+
+In order to run code interactively, you can automatically load gcloud-ruby and
+its dependencies in IRB with:
+
+```sh
+$ bundle exec rake console
+```
+
 ## Tests
 
 Tests are very important part of gcloud-ruby. All contributions should include tests that ensure the contributed code behaves as expected.
