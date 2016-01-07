@@ -135,6 +135,19 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
     metric.filter.must_equal new_metric_filter
   end
 
+  it "gets a metric" do
+    metric_name = "existing-metric-#{Time.now.to_i}"
+
+    mock_connection.get "/v2beta1/projects/#{project}/metrics/#{metric_name}" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       random_metric_hash.merge("name" => metric_name).to_json]
+    end
+
+    metric = logging.metric metric_name
+    metric.must_be_kind_of Gcloud::Logging::Metric
+    metric.name.must_equal metric_name
+  end
+
   def list_metrics_json count = 2, token = nil
     {
       metrics: count.times.map { random_metric_hash },

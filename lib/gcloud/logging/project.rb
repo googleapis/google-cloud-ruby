@@ -318,6 +318,38 @@ module Gcloud
       end
       alias_method :new_metric, :create_metric
 
+      ##
+      # Retrieves metric by name.
+      #
+      # @param [String] name Name of a metric.
+      #
+      # @return [Gcloud::Logging::Metric, nil] Returns `nil` if metric does not
+      #   exist.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   metric = logging.metric "existing-metric"
+      #
+      # @example By default `nil` will be returned if the metric does not exist.
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   metric = logging.metric "non-existing-metric" #=> nil
+      #
+      def metric name
+        ensure_connection!
+        resp = connection.get_metric name
+        return Metric.from_gapi(resp.data, connection) if resp.success?
+        return nil if resp.status == 404
+        fail ApiError.from_response(resp)
+      end
+      alias_method :get_metric, :metric
+      alias_method :find_metric, :metric
+
       protected
 
       ##
