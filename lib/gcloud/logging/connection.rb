@@ -103,6 +103,13 @@ module Gcloud
         )
       end
 
+      def get_metric name
+        @client.execute(
+          api_method: @logging.projects.metrics.get,
+          parameters: { metricName: metric_path(name) }
+        )
+      end
+
       def update_metric name, description, filter
         params = { metricName: metric_path(name) }
         updated_metric_object = {

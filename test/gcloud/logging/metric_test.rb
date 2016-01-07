@@ -46,4 +46,12 @@ describe Gcloud::Logging::Metric, :mock_logging do
     metric.description.must_equal new_metric_description
     metric.filter.must_equal new_metric_filter
   end
+
+  it "can refresh itself" do
+    mock_connection.get "/v2beta1/projects/#{project}/metrics/#{metric.name}" do |env|
+      [200, {"Content-Type"=>"application/json"}, random_metric_hash.to_json]
+    end
+
+    metric.refresh!
+  end
 end
