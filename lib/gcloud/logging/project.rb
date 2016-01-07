@@ -284,6 +284,40 @@ module Gcloud
       end
       alias_method :find_metrics, :metrics
 
+      ##
+      # Creates a new metric.
+      #
+      # @param [String] name The client-assigned metric identifier. Metric
+      #   identifiers are limited to 1000 characters and can include only the
+      #   following characters: `A-Z`, `a-z`, `0-9`, and the special characters
+      #   `_-.,+!*',()%/\`. The forward-slash character (`/`) denotes a
+      #   hierarchy of name pieces, and it cannot be the first character of the
+      #   name.
+      # @param [String] description A description of this metric, which is used
+      #   in documentation.
+      # @param [String] filter An [advanced logs
+      #   filter](https://cloud.google.com/logging/docs/view/advanced_filters).
+      #
+      # @return [Gcloud::Logging::Metric]
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   metric = logging.create_metric "my-metric"
+      #
+      def create_metric name, description: nil, filter: nil
+        ensure_connection!
+        resp = connection.create_metric name, description, filter
+        if resp.success?
+          Metric.from_gapi resp.data, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+      alias_method :new_metric, :create_metric
+
       protected
 
       ##

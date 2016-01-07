@@ -93,10 +93,60 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
     metrics.token.must_equal "next_page_token"
   end
 
+  it "creates a metric" do
+    new_metric_name = "new-metric-#{Time.now.to_i}"
+
+    mock_connection.post "/v2beta1/projects/#{project}/metrics" do |env|
+      metric_json = JSON.parse env.body
+      metric_json["name"].must_equal new_metric_name
+      metric_json["description"].must_be :nil?
+      metric_json["filter"].must_be :nil?
+      [200, {"Content-Type"=>"application/json"},
+       empty_metric_hash.merge(metric_json.delete_if { |_, v| v.nil? }).to_json]
+    end
+
+    metric = logging.create_metric new_metric_name
+    metric.must_be_kind_of Gcloud::Logging::Metric
+    metric.name.must_equal new_metric_name
+    metric.description.must_be :empty?
+    metric.filter.must_be :empty?
+  end
+
+  it "creates a metric with additional attributes" do
+    new_metric_name = "new-metric-#{Time.now.to_i}"
+    new_metric_description = "New Metric (#{Time.now.to_i})"
+    new_metric_filter = "logName:syslog AND severity>=WARN"
+
+    mock_connection.post "/v2beta1/projects/#{project}/metrics" do |env|
+      metric_json = JSON.parse env.body
+      metric_json["name"].must_equal new_metric_name
+      metric_json["description"].must_equal new_metric_description
+      metric_json["filter"].must_equal new_metric_filter
+
+      [200, {"Content-Type"=>"application/json"},
+       empty_metric_hash.merge(metric_json.delete_if { |_, v| v.nil? }).to_json]
+    end
+
+    metric = logging.create_metric new_metric_name, description: new_metric_description,
+      filter: new_metric_filter
+    metric.must_be_kind_of Gcloud::Logging::Metric
+    metric.name.must_equal new_metric_name
+    metric.description.must_equal new_metric_description
+    metric.filter.must_equal new_metric_filter
+  end
+
   def list_metrics_json count = 2, token = nil
     {
       metrics: count.times.map { random_metric_hash },
       nextPageToken: token
     }.delete_if { |_, v| v.nil? }.to_json
+  end
+
+  def empty_metric_hash
+    {
+      "name"                => "",
+      "description"         => "",
+      "filter"              => ""
+    }
   end
 end

@@ -115,6 +115,19 @@ module Gcloud
         )
       end
 
+      def create_metric name, description, filter
+        params = { projectName: project_path }
+        new_metric_object = {
+          name: name, description: description, filter: filter
+        }
+
+        @client.execute(
+          api_method: @logging.projects.metrics.create,
+          parameters: params,
+          body_object: new_metric_object
+        )
+      end
+
       def get_metric name
         @client.execute(
           api_method: @logging.projects.metrics.get,
