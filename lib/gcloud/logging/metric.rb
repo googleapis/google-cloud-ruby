@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "gcloud/logging/metric/list"
+
 module Gcloud
   module Logging
     ##

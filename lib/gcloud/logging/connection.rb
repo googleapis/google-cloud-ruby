@@ -103,6 +103,18 @@ module Gcloud
         )
       end
 
+      def list_metrics token: nil, max: nil
+        params = { projectName: project_path,
+                   pageToken: token,
+                   maxResults: max
+                 }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @logging.projects.metrics.list,
+          parameters: params
+        )
+      end
+
       def get_metric name
         @client.execute(
           api_method: @logging.projects.metrics.get,

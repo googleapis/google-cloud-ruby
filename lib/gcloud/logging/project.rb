@@ -239,6 +239,51 @@ module Gcloud
       alias_method :get_sink, :sink
       alias_method :find_sink, :sink
 
+      ##
+      # Retrieves the list of metrics belonging to the project.
+      #
+      # @param [String] token A previously-returned page token representing part
+      #   of the larger set of results to view.
+      # @param [Integer] max Maximum number of metrics to return.
+      #
+      # @return [Array<Gcloud::Logging::Metric>] (See
+      #   {Gcloud::Logging::Metric::List})
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   metrics = logging.metrics
+      #   metrics.each do |metric|
+      #     puts metric.name
+      #   end
+      #
+      # @example With pagination: (See {Gcloud::Logging::Metric::List})
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   metrics = logging.metrics
+      #   loop do
+      #     metrics.each do |metric|
+      #       puts metric.name
+      #     end
+      #     break unless metrics.next?
+      #     metrics = metrics.next
+      #   end
+      #
+      def metrics token: nil, max: nil
+        ensure_connection!
+        resp = connection.list_metrics token: token, max: max
+        if resp.success?
+          Metric::List.from_response resp, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+      alias_method :find_metrics, :metrics
+
       protected
 
       ##
