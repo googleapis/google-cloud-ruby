@@ -123,6 +123,13 @@ module Gcloud
         )
       end
 
+      def delete_metric name
+        @client.execute(
+          api_method: @logging.projects.metrics.delete,
+          parameters: { metricName: metric_path(name) }
+        )
+      end
+
       protected
 
       def project_path

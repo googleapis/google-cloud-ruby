@@ -117,6 +117,29 @@ module Gcloud
       alias_method :refresh!, :reload!
 
       ##
+      # Permanently deletes the logs-based metric.
+      #
+      # @return [Boolean] Returns `true` if the metric was deleted.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   metric = logging.metric "severe_errors"
+      #   metric.delete
+      #
+      def delete
+        ensure_connection!
+        resp = connection.delete_metric name
+        if resp.success?
+          true
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # @private New Metric from a Google API Client object.
       def self.from_gapi gapi, conn
         new.tap do |f|

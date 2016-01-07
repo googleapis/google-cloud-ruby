@@ -54,4 +54,12 @@ describe Gcloud::Logging::Metric, :mock_logging do
 
     metric.refresh!
   end
+
+  it "can delete itself" do
+    mock_connection.delete "/v2beta1/projects/#{project}/metrics/#{metric.name}" do |env|
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    metric.delete
+  end
 end
