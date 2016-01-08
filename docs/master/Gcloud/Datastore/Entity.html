@@ -260,7 +260,16 @@ a key when immutable will raise a <code class="highlighter-rouge">RuntimeError</
 
                 <div class="method-description">
                   <p>Indicates if a property is flagged to be excluded from the
-Datastore indexes. The default value is false.</p>
+Datastore indexes. The default value is <code class="highlighter-rouge">false</code>. This is another way of
+saying that values are indexed by default.</p>
+
+<p>If the property is multi-valued, each value in the list can be managed
+separately for exclusion from indexing. Calling this method for a
+multi-valued property will return an array that contains the <code class="highlighter-rouge">excluded</code>
+boolean value for each corresponding value in the property. For example,
+if a multi-valued property contains <code class="highlighter-rouge">["a", "b"]</code>, and only the value
+<code class="highlighter-rouge">"b"</code> is indexed (meaning that <code class="highlighter-rouge">"a"</code>’ is excluded), the return value for
+this method will be <code class="highlighter-rouge">[true, false]</code>.</p>
 
                 </div>
               </div>
@@ -277,31 +286,20 @@ Datastore indexes. The default value is false.</p>
                 </h4>
 
                 <div class="method-description">
-                  <p>Flag a property to be excluded from the Datastore indexes.
-Setting true will exclude the property from the indexes.
-Setting false will include the property on any applicable indexes.
-The default value for the flag is false.</p>
+                  <p>Sets whether a property should be excluded from the Datastore indexes.
+Setting <code class="highlighter-rouge">true</code> will exclude the property from the indexes.
+Setting <code class="highlighter-rouge">false</code> will include the property on any applicable indexes.
+The default value is <code class="highlighter-rouge">false</code>. This is another way of saying that values
+are indexed by default.</p>
 
-<p>entity[“age”] = 21
-  entity.exclude_from_indexes! “age”, true</p>
-
-<p>Properties that are arrays can be given multiple exclude flags.</p>
-
-<p>entity[“tags”] = [“ruby”, “code”]
-  entity.exclude_from_indexes! “tags”, [true, false]</p>
-
-<p>Or, array properties can be given a single flag that will be applied
-to each item in the array.</p>
-
-<p>entity[“tags”] = [“ruby”, “code”]
-  entity.exclude_from_indexes! “tags”, true</p>
-
-<p>Flags can also be set with a block for either single and array values.</p>
-
-<p>entity[“age”] = 21
-  entity.exclude_from_indexes! “age” do |age|
-    age &gt; 18
-  end</p>
+<p>If the property is multi-valued, each value in the list can be managed
+separately for exclusion from indexing. When you call this method for a
+multi-valued property, you can pass either a single boolean argument to
+be applied to all of the values, or an array that contains the boolean
+argument for each corresponding value in the property. For example,
+if a multi-valued property contains <code class="highlighter-rouge">["a", "b"]</code>, and only the value
+<code class="highlighter-rouge">"b"</code> should be indexed (meaning that <code class="highlighter-rouge">"a"</code>’ should be excluded), you
+should pass the array: <code class="highlighter-rouge">[true, false]</code>.</p>
 
                 </div>
               </div>
@@ -314,7 +312,7 @@ to each item in the array.</p>
 
         <div class="side-nav--meta">
           <div id="doc-build-date">
-            Docs built on Jan 07, 2016.
+            Docs built on Jan 08, 2016.
           </div>
         </div>
 
