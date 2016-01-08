@@ -176,15 +176,29 @@ module Gcloud
 
       ##
       # Indicates if a property is flagged to be excluded from the
-      # Datastore indexes. The default value is false.
+      # Datastore indexes. The default value is `false`. This is another way of
+      # saying that values are indexed by default.
+      #
+      # If the property is multi-valued, each value in the list can be managed
+      # separately for exclusion from indexing. Calling this method for a
+      # multi-valued property will return an array that contains the `excluded`
+      # boolean value for each corresponding value in the property. For example,
+      # if a multi-valued property contains `["a", "b"]`, and only the value
+      # `"b"` is indexed (meaning that `"a"`' is excluded), the return value for
+      # this method will be `[true, false]`.
+      #
+      # @see https://cloud.google.com/datastore/docs/concepts/indexes#Datastore_Unindexed_properties
+      #   Unindexed properties
       #
       # @example Single property values will return a single flag setting:
       #   entity["age"] = 21
       #   entity.exclude_from_indexes? "age" #=> false
       #
-      # @example Array property values will return an array of flag settings:
+      # @example A multi-valued property will return an array of flag settings:
       #   entity["tags"] = ["ruby", "code"]
-      #   entity.exclude_from_indexes? "tags" #=> [false, false]
+      #   entity.exclude_from_indexes! "tags", [true, false]
+      #
+      #   entity.exclude_from_indexes? "tags" #=> [true, false]
       #
       def exclude_from_indexes? name
         value = self[name]
@@ -193,31 +207,42 @@ module Gcloud
       end
 
       ##
-      # Flag a property to be excluded from the Datastore indexes.
-      # Setting true will exclude the property from the indexes.
-      # Setting false will include the property on any applicable indexes.
-      # The default value for the flag is false.
+      # Sets whether a property should be excluded from the Datastore indexes.
+      # Setting `true` will exclude the property from the indexes.
+      # Setting `false` will include the property on any applicable indexes.
+      # The default value is `false`. This is another way of saying that values
+      # are indexed by default.
       #
+      # If the property is multi-valued, each value in the list can be managed
+      # separately for exclusion from indexing. When you call this method for a
+      # multi-valued property, you can pass either a single boolean argument to
+      # be applied to all of the values, or an array that contains the boolean
+      # argument for each corresponding value in the property. For example,
+      # if a multi-valued property contains `["a", "b"]`, and only the value
+      # `"b"` should be indexed (meaning that `"a"`' should be excluded), you
+      # should pass the array: `[true, false]`.
+      #
+      # @see https://cloud.google.com/datastore/docs/concepts/indexes#Datastore_Unindexed_properties
+      #   Unindexed properties
+      #
+      # @example
       #   entity["age"] = 21
       #   entity.exclude_from_indexes! "age", true
       #
-      # Properties that are arrays can be given multiple exclude flags.
-      #
+      # @example Multi-valued properties can be given multiple exclude flags:
       #   entity["tags"] = ["ruby", "code"]
       #   entity.exclude_from_indexes! "tags", [true, false]
       #
-      # Or, array properties can be given a single flag that will be applied
-      # to each item in the array.
-      #
+      # @example Or, a single flag can be applied to all values in a property:
       #   entity["tags"] = ["ruby", "code"]
       #   entity.exclude_from_indexes! "tags", true
       #
-      # Flags can also be set with a block for either single and array values.
-      #
+      # @example Flags can also be set with a block:
       #   entity["age"] = 21
       #   entity.exclude_from_indexes! "age" do |age|
       #     age > 18
       #   end
+      #
       def exclude_from_indexes! name, flag = nil, &block
         name = name.to_s
         flag = block if block_given?
