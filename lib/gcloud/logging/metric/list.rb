@@ -27,23 +27,23 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Metric::List with an array of Zone instances.
+        # Create a new Metric::List with an array of Metric instances.
         def initialize arr = []
           super arr
         end
 
         ##
-        # Whether there a next page of zones.
+        # Whether there a next page of metrics.
         def next?
           !token.nil?
         end
 
         ##
-        # Retrieve the next page of zones.
+        # Retrieve the next page of metrics.
         def next
           return nil unless next?
           ensure_connection!
-          resp = @connection.list_zones token: token
+          resp = @connection.list_metrics token: token
           if resp.success?
             self.class.from_response resp, @connection
           else

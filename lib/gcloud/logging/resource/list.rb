@@ -27,19 +27,19 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Zone::List with an array of Zone instances.
+        # Create a new Resource::List with an array of Resource instances.
         def initialize arr = []
           super arr
         end
 
         ##
-        # Whether there a next page of zones.
+        # Whether there a next page of resources.
         def next?
           !token.nil?
         end
 
         ##
-        # Retrieve the next page of zones.
+        # Retrieve the next page of resources.
         def next
           return nil unless next?
           ensure_connection!
