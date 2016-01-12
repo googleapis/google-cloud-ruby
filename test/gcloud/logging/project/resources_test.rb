@@ -64,6 +64,30 @@ describe Gcloud::Logging::Project, :resources, :mock_logging do
     second_resources.token.must_be :nil?
   end
 
+  it "paginates resources with next? and next" do
+    mock_connection.get "/v2beta1/monitoredResourceDescriptors" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_resources_json(3, "next_page_token")]
+    end
+    mock_connection.get "/v2beta1/monitoredResourceDescriptors" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_resources_json(2)]
+    end
+
+    first_resources = logging.resources
+    first_resources.each { |m| m.must_be_kind_of Gcloud::Logging::Resource }
+    first_resources.count.must_equal 3
+    first_resources.next?.must_equal true #must_be :next?
+
+    second_resources = first_resources.next
+    second_resources.each { |m| m.must_be_kind_of Gcloud::Logging::Resource }
+    second_resources.count.must_equal 2
+    second_resources.next?.must_equal false #wont_be :next?
+  end
+
   it "paginates resources with max set" do
     mock_connection.get "/v2beta1/monitoredResourceDescriptors" do |env|
       env.params.must_include "maxResults"

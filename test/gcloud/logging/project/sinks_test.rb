@@ -64,6 +64,30 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
     second_sinks.token.must_be :nil?
   end
 
+  it "paginates sinks with next? and next" do
+    mock_connection.get "/v2beta1/projects/#{project}/sinks" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_sinks_json(3, "next_page_token")]
+    end
+    mock_connection.get "/v2beta1/projects/#{project}/sinks" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_sinks_json(2)]
+    end
+
+    first_sinks = logging.sinks
+    first_sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
+    first_sinks.count.must_equal 3
+    first_sinks.next?.must_equal true #must_be :next?
+
+    second_sinks = first_sinks.next
+    second_sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
+    second_sinks.count.must_equal 2
+    second_sinks.next?.must_equal false #wont_be :next?
+  end
+
   it "paginates sinks with max set" do
     mock_connection.get "/v2beta1/projects/#{project}/sinks" do |env|
       env.params.must_include "maxResults"

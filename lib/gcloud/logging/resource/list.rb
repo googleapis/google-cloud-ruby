@@ -45,7 +45,7 @@ module Gcloud
           ensure_connection!
           resp = @connection.list_resources token: token
           if resp.success?
-            self.class.from_response resp
+            self.class.from_response resp, @connection
           else
             fail ApiError.from_response(resp)
           end

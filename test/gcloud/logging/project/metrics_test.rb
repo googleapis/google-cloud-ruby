@@ -64,6 +64,30 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
     second_metrics.token.must_be :nil?
   end
 
+  it "paginates metrics with next? and next" do
+    mock_connection.get "/v2beta1/projects/#{project}/metrics" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_metrics_json(3, "next_page_token")]
+    end
+    mock_connection.get "/v2beta1/projects/#{project}/metrics" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_metrics_json(2)]
+    end
+
+    first_metrics = logging.metrics
+    first_metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
+    first_metrics.count.must_equal 3
+    first_metrics.next?.must_equal true #must_be :next?
+
+    second_metrics = first_metrics.next
+    second_metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
+    second_metrics.count.must_equal 2
+    second_metrics.next?.must_equal false #wont_be :next?
+  end
+
   it "paginates metrics with max set" do
     mock_connection.get "/v2beta1/projects/#{project}/metrics" do |env|
       env.params.must_include "maxResults"
