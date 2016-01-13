@@ -628,9 +628,13 @@ module Gcloud
       def user_defined_function_resources array_or_str
         return nil if array_or_str.nil?
 
-        Array(array_or_str).map{|udf|
-          udf.to_s.downcase.start_with?("gs://") ? {"resourceUri" => udf } : {"inlineCode" => udf }
-        }
+        Array(array_or_str).map do |udf|
+          if udf.to_s.downcase.start_with?("gs://")
+            {"resourceUri" => udf }
+          else
+            {"inlineCode" => udf }
+          end
+        end
       end
     end
   end
