@@ -630,9 +630,9 @@ module Gcloud
 
         Array(array_or_str).map do |udf|
           if udf.to_s.downcase.start_with?("gs://")
-            {"resourceUri" => udf }
+            { "resourceUri" => udf }
           else
-            {"inlineCode" => udf }
+            { "inlineCode" => udf }
           end
         end
       end
