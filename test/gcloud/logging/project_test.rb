@@ -19,4 +19,26 @@ describe Gcloud::Logging::Project, :mock_logging do
     logging.must_be_kind_of Gcloud::Logging::Project
     logging.project.must_equal project
   end
+
+  it "deletes a log" do
+    log_name = "syslog"
+
+    mock_connection.delete "/v2beta1/projects/#{project}/logs/#{log_name}" do |env|
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    success = logging.delete_log log_name
+    success.must_equal true
+  end
+
+  it "deletes a log with full path name" do
+    log_name = "projects/#{project}/logs/syslog"
+
+    mock_connection.delete "/v2beta1/#{log_name}" do |env|
+      [200, {"Content-Type"=>"application/json"}, ""]
+    end
+
+    success = logging.delete_log log_name
+    success.must_equal true
+  end
 end

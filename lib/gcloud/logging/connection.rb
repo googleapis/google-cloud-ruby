@@ -38,6 +38,13 @@ module Gcloud
         @logging = @client.discovered_api "logging", API_VERSION
       end
 
+      def delete_log name
+        @client.execute(
+          api_method: @logging.projects.logs.delete,
+          parameters: { logName: log_path(name) }
+        )
+      end
+
       def list_resources token: nil, max: nil
         params = { pageToken: token,
                    maxResults: max
@@ -159,6 +166,11 @@ module Gcloud
 
       def project_path
         "projects/#{@project}"
+      end
+
+      def log_path log_name
+        return log_name if log_name.to_s.include? "/"
+        "#{project_path}/logs/#{log_name}"
       end
 
       def sink_path sink_name
