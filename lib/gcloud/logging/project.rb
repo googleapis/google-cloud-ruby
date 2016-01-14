@@ -75,6 +75,36 @@ module Gcloud
       end
 
       ##
+      # Deletes a log and all its log entries. The log will reappear if it
+      # receives new entries.
+      #
+      # @param [String] name The name of the log, which may be the full path
+      #   including the project ID (`projects/<project-id>/logs/<log-id>`), or
+      #   just the short name (`<log-id>`), in which case the beginning of the
+      #   path will be automatically prepended, using the ID of the current
+      #   project.
+      #
+      # @return [Boolean] Returns `true` if the log and all its log entries were
+      #   deleted.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   logging.delete_log "my-log"
+      #
+      def delete_log name
+        ensure_connection!
+        resp = connection.delete_log name
+        if resp.success?
+          true
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
       # Retrieves the list of monitored resources that are used by Google Cloud
       # Logging.
       #
