@@ -31,49 +31,59 @@ module Gcloud
     #
     class Resource
       ##
-      # @private The Google API Client object.
-      attr_accessor :gapi
-
-      ##
-      # @private Create an empty File object.
+      # Create an empty Resource object.
       def initialize
-        @connection = nil
-        @gapi = {}
+        @labels = []
       end
 
       ##
       # The monitored resource type.
-      def type
-        @gapi["type"]
-      end
+      attr_accessor :type
 
       ##
       # A concise name for the monitored resource type, which is displayed in
       # user interfaces.
-      def name
-        @gapi["displayName"]
-      end
+      attr_accessor :name
 
       ##
       # A detailed description of the monitored resource type, which is used in
       # documentation.
-      def description
-        @gapi["description"]
-      end
+      attr_accessor :description
 
       ##
       # A set of labels that can be used to describe instances of this monitored
       # resource type.
-      def labels
-        # TODO: Make a proper Label class to represent this structure...
-        Array @gapi["labels"]
+      attr_accessor :labels
+
+      ##
+      # @private Exports the Resource to a Google API Client object.
+      def to_gapi
+        ret = {
+          "type" => type,
+          "displayName" => name,
+          "description" => description,
+          "labels" => labels
+        }.delete_if { |_, v| v.nil? }
+        ret.delete "labels" if labels.empty?
+        ret
+      end
+
+      ##
+      # @private Determines if the Resource has any data.
+      def empty?
+        to_gapi.empty?
       end
 
       ##
       # @private New Resource from a Google API Client object.
       def self.from_gapi gapi
-        new.tap do |f|
-          f.gapi = gapi
+        gapi ||= {}
+        gapi = gapi.to_hash if gapi.respond_to? :to_hash
+        new.tap do |r|
+          r.type        = gapi["type"]
+          r.name        = gapi["displayName"]
+          r.description = gapi["description"]
+          r.labels      = Array(gapi["labels"])
         end
       end
     end

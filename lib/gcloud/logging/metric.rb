@@ -40,7 +40,7 @@ module Gcloud
       attr_accessor :gapi
 
       ##
-      # @private Create an empty File object.
+      # @private Create an empty Metric object.
       def initialize
         @connection = nil
         @gapi = {}

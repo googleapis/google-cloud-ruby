@@ -44,7 +44,7 @@ module Gcloud
       attr_accessor :gapi
 
       ##
-      # @private Create an empty File object.
+      # @private Create an empty Sink object.
       def initialize
         @connection = nil
         @gapi = {}

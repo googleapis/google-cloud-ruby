@@ -20,6 +20,10 @@ describe Gcloud::Logging::Project, :mock_logging do
     logging.project.must_equal project
   end
 
+  it "creates an empty entry" do
+    logging.entry.must_be_kind_of Gcloud::Logging::Entry
+  end
+
   it "deletes a log" do
     log_name = "syslog"
 
