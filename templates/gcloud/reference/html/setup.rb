@@ -1,4 +1,5 @@
 include Helpers::ModuleHelper
+include YARD::Gcloud::SideNav
 
 def init
   sections :index

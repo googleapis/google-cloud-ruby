@@ -68,16 +68,16 @@ classes:
   - full_name: Gcloud::Storage::File
     name: File
 pages:
-- full_name: OVERVIEW.md
+- full_name: OVERVIEW
   name: Overview
   ignore: true
-- full_name: README.md
+- full_name: README
   name: Readme
   ignore: true
-- full_name: AUTHENTICATION.md
+- full_name: AUTHENTICATION
   name: Authentication Guide
-- full_name: CONTRIBUTING.md
+- full_name: CONTRIBUTING
   name: Contribution Guide
-- full_name: CHANGELOG.md
+- full_name: CHANGELOG
   name: Release History
   ignore: true
