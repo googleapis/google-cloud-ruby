@@ -16,6 +16,7 @@ require "helper"
 
 describe Gcloud::Bigquery::Project, :query_job, :mock_bigquery do
   let(:query) { "SELECT name, age, score, active FROM [some_project:some_dataset.users]" }
+  let(:udfs) { ["var someCode = 'here';", "gs://some-bucket/js/lib.js"] }
   let(:dataset_id) { "my_dataset" }
   let(:dataset_hash) { random_dataset_hash dataset_id }
   let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_hash,
@@ -108,6 +109,19 @@ describe Gcloud::Bigquery::Project, :query_job, :mock_bigquery do
     end
 
     job = bigquery.query_job query, dataset: dataset_id
+    job.must_be_kind_of Gcloud::Bigquery::QueryJob
+  end
+
+  it "queries the data with udf option" do
+    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
+      json = JSON.parse(env.body)
+      json["configuration"]["query"]["query"].must_equal query
+      json["configuration"]["query"]["userDefinedFunctionResources"].must_equal [{"inlineCode" => udfs[0]}, {"resourceUri" => udfs[1]}]
+      [200, {"Content-Type"=>"application/json"},
+       query_job_json(query)]
+    end
+
+    job = bigquery.query_job query, udfs: udfs
     job.must_be_kind_of Gcloud::Bigquery::QueryJob
   end
 
