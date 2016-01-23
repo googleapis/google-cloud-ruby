@@ -121,7 +121,7 @@ describe Gcloud::Bigquery::Project, :query_job, :mock_bigquery do
        query_job_json(query)]
     end
 
-    job = bigquery.query_job query, udfs: udfs
+    job = bigquery.query_job(query, {udfs: udfs})
     job.must_be_kind_of Gcloud::Bigquery::QueryJob
   end
 
