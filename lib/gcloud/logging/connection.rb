@@ -38,6 +38,39 @@ module Gcloud
         @logging = @client.discovered_api "logging", API_VERSION
       end
 
+      def list_entries projects: nil, filter: nil, order: nil, token: nil,
+                       max: nil
+        list_obj = { projectIds: Array(projects || @project),
+                     filter: filter,
+                     orderBy: order,
+                     pageToken: token,
+                     maxResults: max
+                   }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @logging.entries.list,
+          body_object: list_obj
+        )
+      end
+
+      def write_entries entries, log_name: nil, resource: nil, labels: nil
+        # Fix log names so they are the full path
+        entries = Array(entries).each do |entry|
+          entry["log_name"] = log_path(entry["log_name"]) if entry["log_name"]
+        end
+        resource = resource.to_gapi if resource
+
+        write_obj = { entries: entries,
+                      logName: log_path(log_name),
+                      resource: resource, labels: labels
+                    }.delete_if { |_, v| v.nil? }
+
+        @client.execute(
+          api_method: @logging.entries.write,
+          body_object: write_obj
+        )
+      end
+
       def delete_log name
         @client.execute(
           api_method: @logging.projects.logs.delete,
@@ -169,15 +202,18 @@ module Gcloud
       end
 
       def log_path log_name
+        return nil if log_name.nil?
         return log_name if log_name.to_s.include? "/"
         "#{project_path}/logs/#{log_name}"
       end
 
       def sink_path sink_name
+        return sink_name if sink_name.to_s.include? "/"
         "#{project_path}/sinks/#{sink_name}"
       end
 
       def metric_path metric_name
+        return metric_name if metric_name.to_s.include? "/"
         "#{project_path}/metrics/#{metric_name}"
       end
     end

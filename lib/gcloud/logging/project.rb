@@ -17,6 +17,7 @@ require "gcloud/gce"
 require "gcloud/logging/connection"
 require "gcloud/logging/credentials"
 require "gcloud/logging/errors"
+require "gcloud/logging/entry"
 require "gcloud/logging/resource"
 require "gcloud/logging/sink"
 require "gcloud/logging/metric"
@@ -72,6 +73,130 @@ module Gcloud
           ENV["GCLOUD_PROJECT"] ||
           ENV["GOOGLE_CLOUD_PROJECT"] ||
           Gcloud::GCE.project_id
+      end
+
+      ##
+      # Lists log entries. Use this method to retrieve log entries from Cloud
+      # Logging.
+      #
+      # @param [String, Array] projects One or more project IDs or project
+      #   numbers from which to retrieve log entries.
+      # @param [String] filter An [advanced logs
+      #   filter](https://cloud.google.com/logging/docs/view/advanced_filters).
+      #   The filter is compared against all log entries in the projects
+      #   specified by projectIds. Only entries that match the filter are
+      #   retrieved. An empty filter matches all log entries.
+      # @param [String] order How the results should be sorted. Presently, the
+      #   only permitted values are "timestamp" (default) and "timestamp desc".
+      # @param [String] token A previously-returned page token representing part
+      #   of the larger set of results to view.
+      # @param [Integer] max Maximum number of entries to return.
+      #
+      # @return [Array<Gcloud::Logging::Entry>] (See
+      #   {Gcloud::Logging::Entry::List})
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   entries = logging.entries
+      #   entries.each do |entry|
+      #     puts entry.name
+      #   end
+      #
+      # @example With pagination: (See {Gcloud::Logging::Entry::List})
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   entries = logging.entries
+      #   loop do
+      #     entries.each do |entry|
+      #       puts entry.name
+      #     end
+      #     break unless entries.next?
+      #     entries = entries.next
+      #   end
+      #
+      def entries projects: nil, filter: nil, order: nil, token: nil, max: nil
+        ensure_connection!
+        resp = connection.list_entries projects: projects, filter: filter,
+                                       order: order, token: token, max: max
+        if resp.success?
+          Entry::List.from_response resp, connection
+        else
+          fail ApiError.from_response(resp)
+        end
+      end
+      alias_method :find_entries, :entries
+
+      ##
+      # Creates an new Entry object to be populated.
+      #
+      # @return [Gcloud::Logging::Entry]
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   new_entry = logging.entry.tap do |e|
+      #     e.log_name = "syslog"
+      #     e.resource.type = "cloudsql_database"
+      #     e.timestamp = Time.now
+      #     e.severity = "INFO"
+      #     e.payload = "Export completed"
+      #   end
+      #
+      #   logging.write_entries entry
+      #
+      def entry
+        Entry.new
+      end
+      alias_method :new_entry, :entry
+
+      ##
+      # Lists log entries. Use this method to retrieve log entries from Cloud
+      # Logging.
+      #
+      # @param [Gcloud::Logging::Entry, Array] entries One or more entry objects
+      #   to write. The log entries must have values for all required fields.
+      #
+      # @return [Boolean] Returns `true` if the entries were written.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   new_entry = logging.entry.tap do |e|
+      #     e.log_name = "syslog"
+      #     e.resource.type = "cloudsql_database"
+      #     e.timestamp = Time.now
+      #     e.severity = "INFO"
+      #     e.payload = "Export completed"
+      #   end
+      #
+      #   logging.write_entries new_entry
+      #
+      # @example You can provide log name for all entries.
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   logging.write_entries [entry1, entry2], log_name: "syslog"
+      #
+      def write_entries entries, log_name: nil, resource: nil, labels: nil
+        ensure_connection!
+        resp = connection.write_entries Array(entries).map(&:to_gapi),
+                                        log_name: log_name,
+                                        resource: resource, labels: labels
+        return true if resp.success?
+        fail ApiError.from_response(resp)
       end
 
       ##
