@@ -126,9 +126,9 @@
                   <%= htmlify method.docstring %>
 
                   <% if (tags = method.tags(:param)).count > 0 %>
-                    <h3 id="method-i-subscribe-label-Parameters">
+                    <h3 id="method-i-<%= method.name %>-label-Parameters">
                       Parameters
-                      <span><a href="#method-i-subscribe-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      <span><a href="#method-i-<%= method.name %>-label-Parameters">¶</a> <a href="#top">↑</a></span>
                     </h3>
                     <dl class="rdoc-list note-list">
                       <% tags.each do |tag| %>
@@ -148,9 +148,9 @@
                   <% end %>
 
                   <% if (tag = method.tag(:return)) %>
-                    <h3 id="method-i-subscription-label-Returns">
+                    <h3 id="method-i-<%= method.name %>-label-Returns">
                       Returns
-                      <span><a href="#method-i-subscription-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      <span><a href="#method-i-<%= method.name %>-label-Returns">¶</a> <a href="#top">↑</a></span>
                     </h3>
                     <p>
                       <%= format_types(tag.types) %>
@@ -158,6 +158,19 @@
                         <%= htmlify_line(tag.text) %>
                       <% end %>
                     </p>
+                  <% end %>
+
+                  <% if (tags = method.tags(:example)).count > 0 %>
+                    <h3 id="method-i-<%= method.name %>-label-Examples">
+                      Example<%= "s" if tags.count > 1 %>
+                      <span><a href="#method-i-<%= method.name %>-label-Examples">¶</a> <a href="#top">↑</a></span>
+                    </h3>
+                    <% tags.each do |tag| %>
+                      <% unless tag.name.empty? %>
+                        <p class="example_title"><%= htmlify_line(tag.name) %></p>
+                      <% end %>
+                      <pre class="code"><code><%= html_syntax_highlight(tag.text, :ruby) %></code></pre>
+                    <% end %>
                   <% end %>
 
                 </div>
