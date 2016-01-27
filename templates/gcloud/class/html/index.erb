@@ -113,7 +113,6 @@
             <% methods.each do |method| %>
               <div class="method">
                 <a name="<%= anchor_for method %>"></a>
-
                 <h4>
                   <code><%= method.name %><%= format_args(method) %></code>
                   <span>
@@ -123,7 +122,31 @@
                 </h4>
 
                 <div class="method-description">
+
                   <%= htmlify method.docstring %>
+
+                  <% if (tags = method.tags(:param)).count > 0 %>
+                    <h3 id="method-i-subscribe-label-Parameters">
+                      Parameters
+                      <span><a href="#method-i-subscribe-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                    </h3>
+                    <dl class="rdoc-list note-list">
+                      <% tags.each do |tag| %>
+                        <dt>
+                          <code><%= h tag.name %></code>
+                        </dt>
+                        <dd>
+                          <p>
+                            <% if tag.text && !tag.text.empty? %>
+                              <%= htmlify_line(tag.text) %>
+                            <% end %>
+                            <%= format_types(tag.types) %>
+                          </p>
+                        </dd>
+                      <% end %>
+                    </dl>
+                  <% end %>
+
                 </div>
               </div>
             <% end %>
