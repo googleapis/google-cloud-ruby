@@ -143,6 +143,15 @@
 
                     <%= htmlify method.docstring %>
 
+                    <% if method.has_tag?(:see) %>
+                      <p class="tag_title">See Also:</p>
+                      <ul class="see">
+                        <% method.tags(:see).each do |tag| %>
+                          <li><%= linkify(tag.name, tag.text) %></li>
+                        <% end %>
+                      </ul>
+                    <% end %>
+
                     <% if (tags = method.tags(:param)).count > 0 %>
                       <h3 id="method-i-<%= method.name %>-label-Parameters">
                         Parameters
