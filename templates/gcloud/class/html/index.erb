@@ -147,6 +147,19 @@
                     </dl>
                   <% end %>
 
+                  <% if (tag = method.tag(:return)) %>
+                    <h3 id="method-i-subscription-label-Returns">
+                      Returns
+                      <span><a href="#method-i-subscription-label-Returns">¶</a> <a href="#top">↑</a></span>
+                    </h3>
+                    <p>
+                      <%= format_types(tag.types) %>
+                      <% if tag.text && !tag.text.empty? %>
+                        <%= htmlify_line(tag.text) %>
+                      <% end %>
+                    </p>
+                  <% end %>
+
                 </div>
               </div>
             <% end %>
