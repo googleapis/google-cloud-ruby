@@ -111,70 +111,95 @@
 
           <div class="methods">
             <% methods.each do |method| %>
-              <div class="method">
-                <a name="<%= anchor_for method %>"></a>
-                <h4>
-                  <code><%= method.name %><%= format_args(method) %></code>
-                  <span>
-                    <a href="#<%= anchor_for method %>">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-
-                  <%= htmlify method.docstring %>
-
-                  <% if (tags = method.tags(:param)).count > 0 %>
-                    <h3 id="method-i-<%= method.name %>-label-Parameters">
-                      Parameters
-                      <span><a href="#method-i-<%= method.name %>-label-Parameters">¶</a> <a href="#top">↑</a></span>
-                    </h3>
-                    <dl class="rdoc-list note-list">
-                      <% tags.each do |tag| %>
-                        <dt>
-                          <code><%= h tag.name %></code>
-                        </dt>
-                        <dd>
-                          <p>
-                            <% if tag.text && !tag.text.empty? %>
-                              <%= htmlify_line(tag.text) %>
-                            <% end %>
-                            <%= format_types(tag.types) %>
-                          </p>
-                        </dd>
-                      <% end %>
-                    </dl>
+              <% if method.is_alias? %>
+                <div class="method">
+                  <a name="<%= anchor_for method %>"></a>
+                  <h4>
+                    <code><%= method.name %><%= format_args(method) %></code>
+                    <span>
+                      <a href="#<%= anchor_for method %>">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  <% if my_alias_method = alias_for(method) %>
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#<%= anchor_for my_alias_method %>"><%= my_alias_method.name %></a>
+                    </div>
                   <% end %>
-
-                  <% if (tag = method.tag(:return)) %>
-                    <h3 id="method-i-<%= method.name %>-label-Returns">
-                      Returns
-                      <span><a href="#method-i-<%= method.name %>-label-Returns">¶</a> <a href="#top">↑</a></span>
-                    </h3>
-                    <p>
-                      <%= format_types(tag.types) %>
-                      <% if tag.text && !tag.text.empty? %>
-                        <%= htmlify_line(tag.text) %>
-                      <% end %>
-                    </p>
-                  <% end %>
-
-                  <% if (tags = method.tags(:example)).count > 0 %>
-                    <h3 id="method-i-<%= method.name %>-label-Examples">
-                      Example<%= "s" if tags.count > 1 %>
-                      <span><a href="#method-i-<%= method.name %>-label-Examples">¶</a> <a href="#top">↑</a></span>
-                    </h3>
-                    <% tags.each do |tag| %>
-                      <% unless tag.name.empty? %>
-                        <p class="example_title"><%= htmlify_line(tag.name) %></p>
-                      <% end %>
-                      <pre class="code"><code><%= html_syntax_highlight(tag.text, :ruby) %></code></pre>
-                    <% end %>
-                  <% end %>
-
                 </div>
-              </div>
+              <% else %>
+                <div class="method">
+                  <a name="<%= anchor_for method %>"></a>
+                  <h4>
+                    <code><%= method.name %><%= format_args(method) %></code>
+                    <span>
+                      <a href="#<%= anchor_for method %>">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <%= htmlify method.docstring %>
+
+                    <% if (tags = method.tags(:param)).count > 0 %>
+                      <h3 id="method-i-<%= method.name %>-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-<%= method.name %>-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        <% tags.each do |tag| %>
+                          <dt>
+                            <code><%= h tag.name %></code>
+                          </dt>
+                          <dd>
+                            <p>
+                              <% if tag.text && !tag.text.empty? %>
+                                <%= htmlify_line(tag.text) %>
+                              <% end %>
+                              <%= format_types(tag.types) %>
+                            </p>
+                          </dd>
+                        <% end %>
+                      </dl>
+                    <% end %>
+
+                    <% if (tag = method.tag(:return)) %>
+                      <h3 id="method-i-<%= method.name %>-label-Returns">
+                        Returns
+                        <span><a href="#method-i-<%= method.name %>-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        <%= format_types(tag.types) %>
+                        <% if tag.text && !tag.text.empty? %>
+                          <%= htmlify_line(tag.text) %>
+                        <% end %>
+                      </p>
+                    <% end %>
+
+                    <% if (tags = method.tags(:example)).count > 0 %>
+                      <h3 id="method-i-<%= method.name %>-label-Examples">
+                        Example<%= "s" if tags.count > 1 %>
+                        <span><a href="#method-i-<%= method.name %>-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <% tags.each do |tag| %>
+                        <% unless tag.name.empty? %>
+                          <p class="example_title"><%= htmlify_line(tag.name) %></p>
+                        <% end %>
+                        <pre class="code"><code><%= html_syntax_highlight(tag.text, :ruby) %></code></pre>
+                      <% end %>
+                    <% end %>
+
+                  </div>
+                  <% if method.aliases.size > 0 %>
+                    <div class="aliases">
+                      Also aliased as:
+                      <%= method.aliases.map {|o| "<a href='##{anchor_for(o)}'>" + h(o.name.to_s) + "</a>" }.join(", ") %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
             <% end %>
           </div>
         <% end %>
