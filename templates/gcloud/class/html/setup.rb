@@ -34,3 +34,8 @@ def methods_in_groups groups, methods
     yield("#{scope.to_s.capitalize} Methods", items) unless items.empty?
   end
 end
+
+def alias_for method
+  my_alias = method.namespace.aliases[method]
+  method.namespace.meths.find {|m| m.name == my_alias }
+end
