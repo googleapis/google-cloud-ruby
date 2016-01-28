@@ -75,7 +75,7 @@
       <section class="content">
         <h2>All Gcloud Classes and Modules</h2>
         <ul>
-          <% options.objects.each do |klass| %>
+          <% options.objects.sort_by(&:path).each do |klass| %>
             <li>
               <%= linkify klass %>
               <% if klass.meths.any? %>
