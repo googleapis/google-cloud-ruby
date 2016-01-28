@@ -1,0 +1,83 @@
+---
+classes:
+- full_name: Gcloud
+  name: Gcloud
+- full_name: Gcloud::Bigquery
+  name: BigQuery
+  classes:
+  - full_name: Gcloud::Bigquery::Project
+    name: Project
+  - full_name: Gcloud::Bigquery::Dataset
+    name: Dataset
+  - full_name: Gcloud::Bigquery::Job
+    name: Job
+  - full_name: Gcloud::Bigquery::Table
+    name: Table
+- full_name: Gcloud::Datastore
+  name: Datastore
+  classes:
+  - full_name: Gcloud::Datastore::Dataset
+    name: Dataset
+  - full_name: Gcloud::Datastore::Query
+    name: Query
+  - full_name: Gcloud::Datastore::Entity
+    name: Entity
+  - full_name: Gcloud::Datastore::Key
+    name: Key
+- full_name: Gcloud::Dns
+  name: DNS
+  classes:
+  - full_name: Gcloud::Dns::Project
+    name: Project
+  - full_name: Gcloud::Dns::Zone
+    name: Zone
+  - full_name: Gcloud::Dns::Record
+    name: Record
+- full_name: Gcloud::Pubsub
+  name: "Pub/Sub"
+  classes:
+  - full_name: Gcloud::Pubsub::Project
+    name: Project
+  - full_name: Gcloud::Pubsub::Topic
+    name: Topic
+  - full_name: Gcloud::Pubsub::Subscription
+    name: Subscription
+- full_name: Gcloud::ResourceManager
+  name: "Resource Manager"
+  classes:
+  - full_name: Gcloud::ResourceManager::Manager
+    name: Manager
+  - full_name: Gcloud::ResourceManager::Project
+    name: Project
+- full_name: Gcloud::Search
+  name: Search
+  classes:
+  - full_name: Gcloud::Search::Project
+    name: Project
+  - full_name: Gcloud::Search::Index
+    name: Index
+  - full_name: Gcloud::Search::Document
+    name: Document
+- full_name: Gcloud::Storage
+  name: Storage
+  classes:
+  - full_name: Gcloud::Storage::Project
+    name: Project
+  - full_name: Gcloud::Storage::Bucket
+    name: Bucket
+  - full_name: Gcloud::Storage::File
+    name: File
+pages:
+- full_name: OVERVIEW
+  name: Overview
+  ignore: true
+- full_name: README
+  name: Readme
+  ignore: true
+- full_name: AUTHENTICATION
+  name: Authentication Guide
+- full_name: CONTRIBUTING
+  name: Contribution Guide
+- full_name: CHANGELOG
+  name: Release History
+  ignore: true
