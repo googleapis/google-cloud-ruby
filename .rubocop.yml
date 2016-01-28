@@ -25,6 +25,8 @@ Style/EmptyLines:
   Enabled: false
 Style/EmptyElse:
   Enabled: false
+Style/CyclomaticComplexity:
+  Max: 10
 Metrics/AbcSize:
   Max: 25
 Metrics/MethodLength:

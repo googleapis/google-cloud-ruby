@@ -21,6 +21,7 @@ require "gcloud/logging/entry"
 require "gcloud/logging/resource_descriptor"
 require "gcloud/logging/sink"
 require "gcloud/logging/metric"
+require "gcloud/logging/logger"
 
 module Gcloud
   module Logging
