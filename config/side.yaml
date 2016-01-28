@@ -33,6 +33,15 @@ classes:
     name: Zone
   - full_name: Gcloud::Dns::Record
     name: Record
+- full_name: Gcloud::Logging
+  name: Logging
+  classes:
+  - full_name: Gcloud::Logging::Project
+    name: Project
+  - full_name: Gcloud::Logging::Entry
+    name: Entry
+  - full_name: Gcloud::Logging::Resource
+    name: Resource
 - full_name: Gcloud::Pubsub
   name: "Pub/Sub"
   classes:
