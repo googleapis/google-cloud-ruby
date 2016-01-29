@@ -111,4 +111,34 @@ describe Gcloud::Bigquery::QueryData, :mock_bigquery do
     job = query_data.job
     job.must_equal "I AM A STUBBED JOB"
   end
+
+  it "handles missing rows and fields" do
+    nil_query_data = Gcloud::Bigquery::QueryData.from_gapi nil_query_data_hash,
+                                                           bigquery.connection
+
+    nil_query_data.class.must_equal Gcloud::Bigquery::QueryData
+    nil_query_data.count.must_equal 0
+  end
+
+  it "handles empty rows and fields" do
+    empty_query_data = Gcloud::Bigquery::QueryData.from_gapi empty_query_data_hash,
+                                                             bigquery.connection
+
+    empty_query_data.class.must_equal Gcloud::Bigquery::QueryData
+    empty_query_data.count.must_equal 0
+  end
+
+  def nil_query_data_hash
+    h = query_data_hash
+    h.delete "rows"
+    h.delete "schema"
+    h
+  end
+
+  def empty_query_data_hash
+    h = query_data_hash
+    h["rows"] = []
+    h["schema"]["fields"] = []
+    h
+  end
 end
