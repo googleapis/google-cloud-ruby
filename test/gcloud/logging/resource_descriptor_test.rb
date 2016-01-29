@@ -22,8 +22,19 @@ describe Gcloud::Logging::ResourceDescriptor, :mock_logging do
     resource_descriptor.type.must_equal        "cloudsql_database"
     resource_descriptor.name.must_equal        "Cloud SQL Database"
     resource_descriptor.description.must_equal "This resource is a Cloud SQL Database"
-    resource_descriptor.labels.must_equal      [{ "key"         => "prod",
-                                                  "valueType"   => "STRING",
-                                                  "description" => "The resources are considered in production" }]
+  end
+
+  it "has label descriptors" do
+    labels = resource_descriptor.labels
+    labels.must_be_kind_of Array
+    labels.wont_be :empty?
+    labels.count.must_equal 2
+    labels[0].must_be_kind_of Gcloud::Logging::ResourceDescriptor::LabelDescriptor
+    labels[0].key.must_equal "database_id"
+    labels[0].type.must_be :nil?
+    labels[0].description.must_equal "The ID of the database."
+    labels[1].key.must_equal "zone"
+    labels[1].type.must_equal :string
+    labels[1].description.must_equal "The GCP zone in which the database is running."
   end
 end

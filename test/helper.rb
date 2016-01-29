@@ -944,9 +944,13 @@ class MockLogging < Minitest::Spec
       "description" => "This resource is a Cloud SQL Database",
       "labels"      => [
         {
-          "key"         => "prod",
-          "valueType"   => "STRING",
-          "description" => "The resources are considered in production",
+         "key" => "database_id",
+         "description" => "The ID of the database."
+        },
+        {
+         "key" => "zone",
+         "valueType" => "STRING",
+         "description" => "The GCP zone in which the database is running."
         }
       ]
     }
