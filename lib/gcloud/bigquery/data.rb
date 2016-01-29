@@ -94,8 +94,8 @@ module Gcloud
       # Disabled rubocop because this implementation will not last.
 
       def self.format_rows rows, fields
-        headers = fields.map { |f| f["name"] }
-        field_types = fields.map { |f| f["type"] }
+        headers = Array(fields).map { |f| f["name"] }
+        field_types = Array(fields).map { |f| f["type"] }
 
         Array(rows).map do |row|
           values = row["f"].map { |f| f["v"] }

@@ -104,6 +104,17 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data.total.must_equal 3
   end
 
+  it "handles missing rows and fields" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      [200, {"Content-Type"=>"application/json"},
+       nil_table_data_json]
+    end
+
+    nil_data = table.data
+    nil_data.class.must_equal Gcloud::Bigquery::Data
+    nil_data.count.must_equal 0
+  end
+
   it "paginates data" do
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
       env.params.wont_include "pageToken"
@@ -253,5 +264,11 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
       "pageToken" => "token1234567890",
       "totalRows" => 3
     }
+  end
+
+  def nil_table_data_json
+    h = table_data_hash
+    h.delete "rows"
+    h.to_json
   end
 end
