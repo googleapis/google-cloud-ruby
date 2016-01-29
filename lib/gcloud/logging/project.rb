@@ -201,6 +201,38 @@ module Gcloud
       end
 
       ##
+      # Lists log entries. Use this method to retrieve log entries from Cloud
+      # Logging.
+      #
+      # @param [Gcloud::Logging::Entry, Array] entries One or more entry objects
+      #   to write. The log entries must have values for all required fields.
+      # @param [String] log_name A log resource name to be associated with the
+      #   written log entries.
+      # @param [Gcloud::Logging::Resource] resource The monitored resource to be
+      #   associated with written log entries.
+      # @param [Hash] labels A set of user-defined data to be associated with
+      #   written log entries.
+      #
+      # @return [Gcloud::Logging::Logger] Logger object that can be used in
+      #   place of a ruby standard library logger object.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   resource = logging.resource "gae_app",
+      #                               module_id: "1",
+      #                               version_id: "20150925t173233"
+      #
+      #   logger = logging.logger "syslog", resource, env: :production
+      #
+      def logger log_name, resource, labels = {}
+        Logger.new self, log_name, resource, labels
+      end
+
+      ##
       # Deletes a log and all its log entries. The log will reappear if it
       # receives new entries.
       #
