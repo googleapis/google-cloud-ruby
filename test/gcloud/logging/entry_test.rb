@@ -66,8 +66,6 @@ describe Gcloud::Logging::Entry, :mock_logging do
 
   it "has the correct resource attributes" do
     entry.resource.type.must_equal        entry_hash["resource"]["type"]
-    entry.resource.name.must_equal        entry_hash["resource"]["displayName"]
-    entry.resource.description.must_equal entry_hash["resource"]["description"]
     entry.resource.labels.must_equal      entry_hash["resource"]["labels"]
   end
 
@@ -78,9 +76,7 @@ describe Gcloud::Logging::Entry, :mock_logging do
 
     custom_entry.resource.must_be_kind_of Gcloud::Logging::Resource
     custom_entry.resource.type.must_be :nil?
-    custom_entry.resource.name.must_be :nil?
-    custom_entry.resource.description.must_be :nil?
-    custom_entry.resource.labels.must_be_kind_of Array
+    custom_entry.resource.labels.must_be_kind_of Hash
     custom_entry.resource.labels.must_be :empty?
   end
 

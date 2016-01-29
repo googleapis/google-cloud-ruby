@@ -21,11 +21,9 @@ describe Gcloud::Logging::Entry, :to_gapi, :mock_logging do
     entry.log_name = "projects/test/logs/testlog"
 
     entry.resource.type =        "webapp_server"
-    entry.resource.name =        "Web Application Server"
-    entry.resource.description = "This service runs the web app"
-    entry.resource.labels =      [{ "env"         => "test",
-                                    "valueType"   => "STRING",
-                                    "description" => "The server is running in test" }]
+    entry.resource.labels =      { "env"         => "test",
+                                   "valueType"   => "STRING",
+                                   "description" => "The server is running in test" }
 
     entry.severity = "ERROR"
     entry.timestamp = Time.parse("2016-01-02T03:04:05Z")
@@ -55,11 +53,9 @@ describe Gcloud::Logging::Entry, :to_gapi, :mock_logging do
     gapi["logName"].must_equal "projects/test/logs/testlog"
 
     gapi["resource"]["type"].must_equal        "webapp_server"
-    gapi["resource"]["displayName"].must_equal "Web Application Server"
-    gapi["resource"]["description"].must_equal "This service runs the web app"
-    gapi["resource"]["labels"].must_equal      [{ "env"         => "test",
-                                                  "valueType"   => "STRING",
-                                                  "description" => "The server is running in test" }]
+    gapi["resource"]["labels"].must_equal({ "env"         => "test",
+                                                 "valueType"   => "STRING",
+                                                 "description" => "The server is running in test" })
 
     gapi["severity"].must_equal "ERROR"
     gapi["timestamp"].must_equal "2016-01-02T03:04:05Z"

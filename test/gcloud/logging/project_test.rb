@@ -24,6 +24,16 @@ describe Gcloud::Logging::Project, :mock_logging do
     logging.entry.must_be_kind_of Gcloud::Logging::Entry
   end
 
+  it "creates a resource instance" do
+    resource = logging.resource "gae_app",
+                                "module_id" => "1",
+                                "version_id" => "20150925t173233"
+    resource.must_be_kind_of Gcloud::Logging::Resource
+    resource.type.must_equal   "gae_app"
+    resource.labels["module_id"].must_equal "1"
+    resource.labels["version_id"].must_equal "20150925t173233"
+  end
+
   it "deletes a log" do
     log_name = "syslog"
 

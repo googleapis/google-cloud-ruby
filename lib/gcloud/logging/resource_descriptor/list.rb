@@ -17,9 +17,9 @@ require "delegate"
 
 module Gcloud
   module Logging
-    class Resource
+    class ResourceDescriptor
       ##
-      # Resource::List is a special case Array with additional values.
+      # ResourceDescriptor::List is a special case Array with additional values.
       class List < DelegateClass(::Array)
         ##
         # If not empty, indicates that there are more records that match
@@ -27,23 +27,24 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Resource::List with an array of Resource instances.
+        # Create a new ResourceDescriptor::List with an array of
+        # ResourceDescriptor instances.
         def initialize arr = []
           super arr
         end
 
         ##
-        # Whether there a next page of resources.
+        # Whether there a next page of resource descriptors.
         def next?
           !token.nil?
         end
 
         ##
-        # Retrieve the next page of resources.
+        # Retrieve the next page of resource descriptors.
         def next
           return nil unless next?
           ensure_connection!
-          resp = @connection.list_resources token: token
+          resp = @connection.list_resource_descriptors token: token
           if resp.success?
             self.class.from_response resp, @connection
           else
@@ -52,10 +53,10 @@ module Gcloud
         end
 
         ##
-        # @private New Resource::List from a response object.
+        # @private New ResourceDescriptor::List from a response object.
         def self.from_response resp, conn
           sinks = new(Array(resp.data["resourceDescriptors"]).map do |gapi_obj|
-            Resource.from_gapi gapi_obj
+            ResourceDescriptor.from_gapi gapi_obj
           end)
           sinks.instance_eval do
             @token = resp.data["nextPageToken"]

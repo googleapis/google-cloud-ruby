@@ -18,7 +18,7 @@ require "gcloud/logging/connection"
 require "gcloud/logging/credentials"
 require "gcloud/logging/errors"
 require "gcloud/logging/entry"
-require "gcloud/logging/resource"
+require "gcloud/logging/resource_descriptor"
 require "gcloud/logging/sink"
 require "gcloud/logging/metric"
 
@@ -230,50 +230,73 @@ module Gcloud
       end
 
       ##
-      # Retrieves the list of monitored resources that are used by Google Cloud
-      # Logging.
+      # Retrieves the list of monitored resource descriptors that are used by
+      # Google Cloud Logging.
       #
       # @param [String] token A previously-returned page token representing part
       #   of the larger set of results to view.
-      # @param [Integer] max Maximum number of resources to return.
+      # @param [Integer] max Maximum number of resource descriptors to return.
       #
-      # @return [Array<Gcloud::Logging::Resource>] (See
-      #   {Gcloud::Logging::Resource::List})
+      # @return [Array<Gcloud::Logging::ResourceDescriptor>] (See
+      #   {Gcloud::Logging::ResourceDescriptor::List})
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
-      #   resources = logging.resources
-      #   resources.each do |resource|
-      #     puts resource.name
+      #   resource_descriptors = logging.resource_descriptors
+      #   resource_descriptors.each do |resource_descriptor|
+      #     puts resource_descriptor.name
       #   end
       #
-      # @example With pagination: (See {Gcloud::Logging::Resource::List})
+      # @example Pagination: (See {Gcloud::Logging::ResourceDescriptor::List})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
-      #   resources = logging.resources
+      #   resource_descriptors = logging.resource_descriptors
       #   loop do
-      #     resources.each do |resource|
-      #       puts resource.name
+      #     resource_descriptors.each do |resource_descriptor|
+      #       puts resource_descriptor.name
       #     end
-      #     break unless resources.next?
-      #     resources = resources.next
+      #     break unless resource_descriptors.next?
+      #     resource_descriptors = resource_descriptors.next
       #   end
       #
-      def resources token: nil, max: nil
+      def resource_descriptors token: nil, max: nil
         ensure_connection!
-        resp = connection.list_resources token: token, max: max
+        resp = connection.list_resource_descriptors token: token, max: max
         if resp.success?
-          Resource::List.from_response resp, connection
+          ResourceDescriptor::List.from_response resp, connection
         else
           fail ApiError.from_response(resp)
         end
       end
-      alias_method :find_resources, :resources
+      alias_method :find_resource_descriptors, :resource_descriptors
+
+      ##
+      # Creates a new Resource object.
+      #
+      # @return [Gcloud::Logging::Resource]
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   resource = logging.resource "gae_app",
+      #                               "module_id" => "1",
+      #                               "version_id" => "20150925t173233"
+      #
+      def resource type, labels = {}
+        Resource.new.tap do |r|
+          r.type = type
+          r.labels = labels
+        end
+      end
+      alias_method :new_resource, :resource
 
       ##
       # Retrieves the list of sinks belonging to the project.

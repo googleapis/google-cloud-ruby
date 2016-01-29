@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-require "gcloud/logging/resource/list"
-
 module Gcloud
   module Logging
     ##
@@ -27,28 +25,21 @@ module Gcloud
     #
     #   gcloud = Gcloud.new
     #   logging = gcloud.logging
-    #   resource = logging.resources.first
+    #   resource = logging.resource "gae_app",
+    #                               "module_id" => "1",
+    #                               "version_id" => "20150925t173233"
     #
     class Resource
       ##
       # Create an empty Resource object.
       def initialize
-        @labels = []
+        @labels = {}
       end
 
       ##
-      # The monitored resource type.
+      # The type of a {ResourceDescriptor}
+      #
       attr_accessor :type
-
-      ##
-      # A concise name for the monitored resource type, which is displayed in
-      # user interfaces.
-      attr_accessor :name
-
-      ##
-      # A detailed description of the monitored resource type, which is used in
-      # documentation.
-      attr_accessor :description
 
       ##
       # A set of labels that can be used to describe instances of this monitored
@@ -60,8 +51,6 @@ module Gcloud
       def to_gapi
         ret = {
           "type" => type,
-          "displayName" => name,
-          "description" => description,
           "labels" => labels
         }.delete_if { |_, v| v.nil? }
         ret.delete "labels" if labels.empty?
@@ -80,10 +69,10 @@ module Gcloud
         gapi ||= {}
         gapi = gapi.to_hash if gapi.respond_to? :to_hash
         new.tap do |r|
-          r.type        = gapi["type"]
-          r.name        = gapi["displayName"]
-          r.description = gapi["description"]
-          r.labels      = Array(gapi["labels"])
+          r.type = gapi["type"]
+          if gapi["labels"].respond_to? :to_hash
+            r.labels = gapi["labels"].to_hash
+          end
         end
       end
     end

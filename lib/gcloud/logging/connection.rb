@@ -78,7 +78,7 @@ module Gcloud
         )
       end
 
-      def list_resources token: nil, max: nil
+      def list_resource_descriptors token: nil, max: nil
         params = { pageToken: token,
                    maxResults: max
                  }.delete_if { |_, v| v.nil? }

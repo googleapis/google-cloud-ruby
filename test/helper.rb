@@ -922,6 +922,16 @@ class MockLogging < Minitest::Spec
 
   def random_resource_hash
     {
+      "type" => "gae_app",
+      "labels" => {
+        "module_id" => "1",
+        "version_id" => "20150925t173233"
+      }
+    }
+  end
+
+  def random_resource_descriptor_hash
+    {
       "type"        => "cloudsql_database",
       "displayName" => "Cloud SQL Database",
       "description" => "This resource is a Cloud SQL Database",

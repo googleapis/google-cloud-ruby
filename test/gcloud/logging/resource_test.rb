@@ -19,12 +19,8 @@ describe Gcloud::Logging::Resource, :mock_logging do
   let(:resource_hash) { random_resource_hash }
 
   it "knows its attributes" do
-    resource.type.must_equal        "cloudsql_database"
-    resource.name.must_equal        "Cloud SQL Database"
-    resource.description.must_equal "This resource is a Cloud SQL Database"
-    resource.labels.must_equal      [{ "key"         => "prod",
-                                       "valueType"   => "STRING",
-                                       "description" => "The resources are considered in production" }]
+    resource.type.must_equal   "gae_app"
+    resource.labels.must_equal resource_hash["labels"]
   end
 
   it "can export to a gapi object" do
