@@ -201,11 +201,9 @@ module Gcloud
       end
 
       ##
-      # Lists log entries. Use this method to retrieve log entries from Cloud
-      # Logging.
+      # Creates a logger object that is API compatible with ruby's standard
+      # library Logger.
       #
-      # @param [Gcloud::Logging::Entry, Array] entries One or more entry objects
-      #   to write. The log entries must have values for all required fields.
       # @param [String] log_name A log resource name to be associated with the
       #   written log entries.
       # @param [Gcloud::Logging::Resource] resource The monitored resource to be

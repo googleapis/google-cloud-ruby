@@ -37,7 +37,7 @@ module Gcloud
       attr_reader :labels
 
       ##
-      # @private Creates a new Connection instance.
+      # @private Creates a new Logger instance.
       def initialize logging, log_name, resource, labels = nil
         @logging = logging
         @log_name = log_name
