@@ -18,20 +18,10 @@ require "gcloud/errors"
 module Gcloud
   module Logging
     ##
-    # # Storage Error
+    # # Logging Error
     #
     # Base Logging exception class.
     class Error < Gcloud::Error
-      ##
-      # The response object of the failed HTTP request.
-      attr_reader :response
-
-      # @private
-      def self.from_response resp
-        new.tap do |e|
-          e.response = resp
-        end
-      end
     end
 
     ##
@@ -41,31 +31,41 @@ module Gcloud
     class ApiError < Error
       ##
       # The code of the error.
-      def code
-        response.data["error"]["code"]
-      rescue
-        nil
-      end
+      attr_reader :code
 
       ##
       # The errors encountered.
-      def errors
-        response.data["error"]["errors"]
-      rescue
-        []
-      end
+      attr_reader :errors
 
-      def initialize message, response
+      # @private
+      def initialize message, code, errors = []
         super message
-        @response = response
+        @code   = code
+        @errors = errors
       end
 
       # @private
       def self.from_response resp
-        klass = klass_for resp.data["error"]["status"]
-        klass.new resp.data["error"]["message"], resp
-      rescue
-        Gcloud::Logging::Error.from_response resp
+        if resp.data? && resp.data["error"]
+          from_response_data resp.data["error"]
+        else
+          from_response_status resp
+        end
+      end
+
+      # @private
+      def self.from_response_data error
+        new error["message"], error["code"], error["errors"]
+      end
+
+      # @private
+      def self.from_response_status resp
+        if resp.status == 404
+          new "#{resp.error_message}: #{resp.request.uri.request_uri}",
+              resp.status
+        else
+          new resp.error_message, resp.status
+        end
       end
     end
   end

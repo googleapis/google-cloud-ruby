@@ -879,6 +879,13 @@ class MockLogging < Minitest::Spec
     addl.include? :mock_logging
   end
 
+  def entry_gapi severity, payload
+    logging.entry.tap do |e|
+      e.severity = severity
+      e.payload = payload
+    end.to_gapi
+  end
+
   def random_entry_hash
     {
       "logName"   => "projects/my-projectid/logs/syslog",
