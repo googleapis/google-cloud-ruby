@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-require "gcloud/logging/resource/list"
-
 module Gcloud
   module Logging
     class Entry
