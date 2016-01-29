@@ -51,8 +51,11 @@ module Gcloud
       attr_reader :description
 
       ##
-      # A set of labels that can be used to describe instances of this monitored
-      # resource type.
+      # A set of definitions of the labels that can be used to describe
+      # instances of this monitored resource type.
+      #
+      # @return [Array<LabelDescriptor>]
+      #
       attr_reader :labels
 
       ##
@@ -65,9 +68,64 @@ module Gcloud
           @type        = gapi["type"]
           @name        = gapi["displayName"]
           @description = gapi["description"]
-          @labels      = Array(gapi["labels"]) # TODO: Array<LabelDescriptor>
+          @labels      = gapi["labels"].map do |g|
+            LabelDescriptor.from_gapi g
+          end
         end
         r
+      end
+
+      ##
+      # # LabelDescriptor
+      #
+      # A definition of a label that can be used to describe instances of a
+      # monitored resource type. For example, Cloud SQL databases can be labeled
+      # with their "database_id" and their "zone". See
+      # {ResourceDescriptor#labels}.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   resource_descriptor = logging.resource_descriptors.first
+      #   label_descriptor = resource_descriptor.labels.first
+      #   label_descriptor.key #=> "database_id"
+      #   label_descriptor.description #=> "The ID of the database."
+      #
+      class LabelDescriptor
+        ##
+        # The key (name) of the label.
+        attr_reader :key
+
+        ##
+        # The type of data that can be assigned to the label.
+        #
+        # @return [Symbol, nil] Returns `:string`, `:boolean`, `:integer`, or
+        #   `nil` if there is no type.
+        #
+        attr_reader :type
+
+        ##
+        # A human-readable description for the label.
+        attr_reader :description
+
+        ##
+        # @private New LabelDescriptor from a Google API Client object.
+        def self.from_gapi gapi
+          gapi ||= {}
+          gapi = gapi.to_hash if gapi.respond_to? :to_hash
+          type_sym = { "STRING" => :string,
+                       "BOOL" => :boolean,
+                       "INT64" => :integer }[gapi["valueType"].to_s]
+          l = new
+          l.instance_eval do
+            @key         = gapi["key"]
+            @type        = type_sym
+            @description = gapi["description"]
+          end
+          l
+        end
       end
     end
   end
