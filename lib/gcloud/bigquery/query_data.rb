@@ -106,8 +106,12 @@ module Gcloud
       ##
       # New Data from a response object.
       def self.from_gapi gapi, connection #:nodoc:
-        formatted_rows = format_rows gapi["rows"],
-                                     gapi["schema"]["fields"]
+        if gapi["schema"].nil?
+          formatted_rows = []
+        else
+          formatted_rows = format_rows gapi["rows"],
+                                       gapi["schema"]["fields"]
+        end
 
         data = new formatted_rows
         data.gapi = gapi
