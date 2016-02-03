@@ -1,6 +1,7 @@
 --no-private
 --title=Gcloud
 --exclude lib/gcloud/proto/
+--markup markdown
 
 ./lib/**/*.rb
 -
