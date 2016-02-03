@@ -17,6 +17,7 @@ require "gcloud/logging/resource"
 require "gcloud/logging/entry/http_request"
 require "gcloud/logging/entry/operation"
 require "gcloud/logging/entry/list"
+require "gcloud/grpc_utils"
 
 module Gcloud
   module Logging
@@ -248,7 +249,7 @@ module Gcloud
         if payload.is_a? Google::Protobuf::Any
           grpc.proto_payload = payload
         elsif payload.respond_to? :to_hash
-          grpc.json_payload = payload.to_hash
+          grpc.json_payload = GRPCUtils.hash_to_struct payload.to_hash
         else
           grpc.text_payload = payload.to_s
         end
