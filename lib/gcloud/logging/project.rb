@@ -419,7 +419,7 @@ module Gcloud
       ##
       # Retrieves sink by name.
       #
-      # @param [String] name Name of a sink.
+      # @param [String] sink_name Name of a sink.
       #
       # @return [Gcloud::Logging::Sink, nil] Returns `nil` if sink does not
       #   exist.
