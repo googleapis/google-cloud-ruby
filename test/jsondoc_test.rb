@@ -6,30 +6,30 @@ describe Gcloud::Jsondoc, :docs do
   before do
     registry = YARD::Registry.load(["test/fixtures/**/*.rb"], true)
     @builder = Gcloud::Jsondoc.new registry
-    @docs = @builder.docs.attributes!
+    @docs = @builder.docs[0].jbuilder.attributes!
   end
 
-  it "must have services array at root" do
-    @docs.size.must_equal 1
-    @docs.keys[0].must_equal "services"
+  it "must have attributes at root" do
+    @docs.size.must_equal 4
+    @docs.keys[0].must_equal "id"
+    @docs.keys[1].must_equal "metadata"
+    @docs.keys[2].must_equal "methods"
   end
 
   describe "when given a module" do
-    it "must have a service" do
-      services = @docs["services"]
-      services.size.must_equal 1
-      services[0]["id"].must_equal "mymodule"
+    it "must have an id" do
+      @docs["id"].must_equal "mymodule"
     end
 
     it "must have service metadata" do
-      metadata = @docs["services"][0]["metadata"]
+      metadata = @docs["metadata"]
       metadata["name"].must_equal "MyModule"
       metadata["description"].must_equal "<p>The outermost module in the test fixtures.</p>  <p>This is a Ruby <a href=\"http://docs.ruby-lang.org/en/2.2.0/Module.html\">module</a>.</p>"
       metadata["source"].must_equal "test/fixtures/my_module.rb#L8"
     end
 
     it "can have methods" do
-      methods = @docs["services"][0]["methods"]
+      methods = @docs["methods"]
       methods.size.must_equal 1
     end
   end
@@ -37,28 +37,28 @@ describe Gcloud::Jsondoc, :docs do
   describe "when a module has a method" do
 
     it "must have metadata" do
-      metadata = @docs["services"][0]["methods"][0]["metadata"]
+      metadata = @docs["methods"][0]["metadata"]
       metadata["name"].must_equal "example_method"
       metadata["description"].must_equal "<p>Creates a new object for testing this library, as explained in <a href=\"https://en.wikipedia.org/wiki/Software_testing\">this article on testing</a>.</p>  <p>Each call creates a new instance.</p>"
       metadata["source"].must_equal "test/fixtures/my_module.rb#L38"
     end
 
     it "must have metadata examples" do
-      metadata = @docs["services"][0]["methods"][0]["metadata"]
+      metadata = @docs["methods"][0]["metadata"]
       metadata["examples"].size.must_equal 1
       metadata["examples"][0]["caption"].must_equal "You can pass options."
       metadata["examples"][0]["code"].must_equal "return_object = Mymodule.storage \"my name\", opt_in: true do |config|\n  config.more = \"more\"\nend"
     end
 
     it "must have metadata resources" do
-      metadata = @docs["services"][0]["methods"][0]["metadata"]
+      metadata = @docs["methods"][0]["metadata"]
       metadata["resources"].size.must_equal 1
       metadata["resources"][0]["href"].must_equal "http://ntp.org/documentation.html"
       metadata["resources"][0]["title"].must_equal "NTP Documentation"
     end
 
     it "must have params" do
-      params = @docs["services"][0]["methods"][0]["params"]
+      params = @docs["methods"][0]["params"]
       params.size.must_equal 3
       params[0]["name"].must_equal "personal_name"
       params[0]["types"].must_equal ["String"]
@@ -83,14 +83,14 @@ describe Gcloud::Jsondoc, :docs do
     end
 
     it "must have exceptions" do
-      exceptions = @docs["services"][0]["methods"][0]["exceptions"]
+      exceptions = @docs["methods"][0]["exceptions"]
       exceptions.size.must_equal 1
       exceptions[0]["type"].must_equal "ArgumentError"
       exceptions[0]["description"].must_equal "if the name is not a name as defined by <a href=\"https://en.wikipedia.org/wiki/Personal_name\">this article</a>"
     end
 
     it "must have returns" do
-      returns = @docs["services"][0]["methods"][0]["returns"]
+      returns = @docs["methods"][0]["returns"]
       returns.size.must_equal 1
       returns[0]["types"].must_equal ["MyModule::ReturnClass"]
       returns[0]["description"].must_equal "an empty object instance"
@@ -99,7 +99,7 @@ describe Gcloud::Jsondoc, :docs do
 
   describe "when given a module class" do
     it "must have a pages entry" do
-      pages = @docs["services"][0]["pages"]
+      pages = @docs["pages"]
       pages.size.must_equal 3
       pages[0]["id"].must_equal "returnclass"
       pages[1]["id"].must_equal "myclass"
@@ -107,41 +107,41 @@ describe Gcloud::Jsondoc, :docs do
     end
 
     it "must have metadata" do
-      metadata = @docs["services"][0]["pages"][1]["metadata"]
+      metadata = @docs["pages"][1]["metadata"]
       metadata["name"].must_equal "MyClass"
       metadata["description"].must_equal "<p>You can use MyClass for almost anything.</p>"
       metadata["source"].must_equal "test/fixtures/my_module/my_class.rb#L4"
     end
 
     it "can have methods" do
-      methods = @docs["services"][0]["pages"][1]["methods"]
+      methods = @docs["pages"][1]["methods"]
       methods.size.must_equal 1
     end
 
     describe "when a class has a method" do
       it "must have metadata" do
-        metadata = @docs["services"][0]["pages"][1]["methods"][0]["metadata"]
+        metadata = @docs["pages"][1]["methods"][0]["metadata"]
         metadata["name"].must_equal "example_instance_method"
         metadata["description"].must_equal "<p>Accepts many arguments for testing this library. Also accepts a block if a block is given.</p>  <p>Do not call this method until you have read all of its documentation.</p>"
         metadata["source"].must_equal "test/fixtures/my_module/my_class.rb#L50"
       end
 
       it "must have metadata examples" do
-        metadata = @docs["services"][0]["pages"][1]["methods"][0]["metadata"]
+        metadata = @docs["pages"][1]["methods"][0]["metadata"]
         metadata["examples"].size.must_equal 2
         metadata["examples"][0]["caption"].must_equal "You can pass a block."
         metadata["examples"][0]["code"].must_equal "my_class = MyClass.new\nmy_class.example_instance_method times: 5 do |my_config|\n  my_config.limit = 5\n  true\nend"
       end
 
       it "must have metadata resources" do
-        metadata = @docs["services"][0]["pages"][1]["methods"][0]["metadata"]
+        metadata = @docs["pages"][1]["methods"][0]["metadata"]
         metadata["resources"].size.must_equal 1
         metadata["resources"][0]["href"].must_equal "http://ruby-doc.org/core-2.2.0/Proc.html"
         metadata["resources"][0]["title"].must_equal "Proc objects are blocks of code that have been bound to a set of local variables."
       end
 
       it "can have params with options hash and keyword args" do
-        params = @docs["services"][0]["pages"][1]["methods"][0]["params"]
+        params = @docs["pages"][1]["methods"][0]["params"]
         params.size.must_equal 8
 
         params[0]["name"].must_equal "policy"
