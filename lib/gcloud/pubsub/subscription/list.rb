@@ -24,7 +24,7 @@ module Gcloud
         ##
         # If not empty, indicates that there are more subscriptions
         # that match the request and this value should be passed to
-        # the next {Gcloud::PubSub::Topic#subscriptions} to continue.
+        # the next {Gcloud::Pubsub::Topic#subscriptions} to continue.
         attr_accessor :token
 
         ##
