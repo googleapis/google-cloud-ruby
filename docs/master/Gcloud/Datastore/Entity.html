@@ -124,142 +124,465 @@ Every Entity has a <span class='object_link'><a href="Key.html" title="Gcloud::D
 
           <div class="methods">
             
-              <div class="method">
-                <a name="key-instance_method"></a>
+              
+                <div class="method">
+                  <a name="key-instance_method"></a>
+                  <h4>
+                    <code>key</code>
+                    <span>
+                      <a href="#key-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>key</code>
-                  <span>
-                    <a href="#key-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>The Key that identifies the entity.</p>
+                    <p>The Key that identifies the entity.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="initialize-instance_method"></a>
+              
+                <div class="method">
+                  <a name="initialize-instance_method"></a>
+                  <h4>
+                    <code>initialize</code>
+                    <span>
+                      <a href="#initialize-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>initialize</code>
-                  <span>
-                    <a href="#initialize-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Create a new Entity object.</p>
+                    <p>Create a new Entity object.</p>
 
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-initialize-label-Returns">
+                        Returns
+                        <span><a href="#method-i-initialize-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="" title="Gcloud::Datastore::Entity (class)">Entity</a></span></tt>)
+                        
+                          <div class='inline'><p>a new instance of Entity</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="[]-instance_method"></a>
+              
+                <div class="method">
+                  <a name="[]-instance_method"></a>
+                  <h4>
+                    <code>[](prop_name)</code>
+                    <span>
+                      <a href="#[]-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>[](prop_name)</code>
-                  <span>
-                    <a href="#[]-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieve a property value by providing the name.</p>
+                    <p>Retrieve a property value by providing the name.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-[]-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-[]-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>prop_name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The name of the property.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Symbol</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-[]-label-Returns">
+                        Returns
+                        <span><a href="#method-i-[]-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Object</tt>, <tt>nil</tt>)
+                        
+                          <div class='inline'><p>Returns <code class="highlighter-rouge">nil</code> if the property doesn’t exist</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-[]-label-Examples">
+                        Examples
+                        <span><a href="#method-i-[]-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Properties can be retrieved with a string name:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='comment'>#=&gt; &quot;Heidi Henderson&quot;</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Or with a symbol name:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span> <span class='comment'>#=&gt; &quot;Heidi Henderson&quot;</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="[]=-instance_method"></a>
+              
+                <div class="method">
+                  <a name="[]=-instance_method"></a>
+                  <h4>
+                    <code>[]=(prop_name, prop_value)</code>
+                    <span>
+                      <a href="#[]=-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>[]=(prop_name, prop_value)</code>
-                  <span>
-                    <a href="#[]=-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Set a property value by name.</p>
+                    <p>Set a property value by name.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-[]=-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-[]=-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>prop_name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The name of the property.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Symbol</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>prop_value</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The value of the property.</p>
+</div>
+                              
+                              (<tt>Object</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-[]=-label-Examples">
+                        Examples
+                        <span><a href="#method-i-[]=-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Properties can be set with a string name:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Heidi H. Henderson</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Or with a symbol name:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Heidi H. Henderson</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="properties-instance_method"></a>
+              
+                <div class="method">
+                  <a name="properties-instance_method"></a>
+                  <h4>
+                    <code>properties</code>
+                    <span>
+                      <a href="#properties-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>properties</code>
-                  <span>
-                    <a href="#properties-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieve properties in a hash-like structure.
+                    <p>Retrieve properties in a hash-like structure.
 Properties can be accessed or set by string or symbol.</p>
 
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-properties-label-Returns">
+                        Returns
+                        <span><a href="#method-i-properties-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Properties.html" title="Gcloud::Datastore::Properties (class)">Gcloud::Datastore::Properties</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-properties-label-Examples">
+                        Examples
+                        <span><a href="#method-i-properties-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Heidi H. Henderson</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='comment'>#=&gt; &quot;Heidi H. Henderson&quot;
+</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>property </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'> has a value of </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_value'>value</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>A property’s existence can be determined by calling <code class="highlighter-rouge">exist?</code>:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span> <span class='symbol'>:name</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span> <span class='symbol'>:expiration</span> <span class='comment'>#=&gt; false</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>A property can be removed from the entity:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='symbol'>:name</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The properties can be converted to a hash:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_prop_hash'>prop_hash</span> <span class='op'>=</span> <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="key=-instance_method"></a>
+              
+                <div class="method">
+                  <a name="key=-instance_method"></a>
+                  <h4>
+                    <code>key=(new_key)</code>
+                    <span>
+                      <a href="#key=-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>key=(new_key)</code>
-                  <span>
-                    <a href="#key=-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Sets the Key that identifies the entity.</p>
+                    <p>Sets the Key that identifies the entity.</p>
 
 <p>Once the entity is saved, the key is frozen and immutable. Trying to set
 a key when immutable will raise a <code class="highlighter-rouge">RuntimeError</code>.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-key=-label-Examples">
+                        Examples
+                        <span><a href="#method-i-key=-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The Key can be set before the entity is saved:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_entity'>entity</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Once the entity is saved, the key is frozen and immutable:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_persisted?'>persisted?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; RuntimeError
+</span><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_frozen?'>frozen?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='int'>9876543221</span> <span class='comment'>#=&gt; RuntimeError</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="persisted?-instance_method"></a>
+              
+                <div class="method">
+                  <a name="persisted?-instance_method"></a>
+                  <h4>
+                    <code>persisted?</code>
+                    <span>
+                      <a href="#persisted?-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>persisted?</code>
-                  <span>
-                    <a href="#persisted?-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Indicates if the record is persisted. Default is false.</p>
+                    <p>Indicates if the record is persisted. Default is false.</p>
 
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-persisted?-label-Returns">
+                        Returns
+                        <span><a href="#method-i-persisted?-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Boolean</tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-persisted?-label-Examples">
+                        Example
+                        <span><a href="#method-i-persisted?-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+
+<span class='id identifier rubyid_new_entity'>new_entity</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_new_entity'>new_entity</span><span class='period'>.</span><span class='id identifier rubyid_persisted?'>persisted?</span> <span class='comment'>#=&gt; false
+</span>
+<span class='id identifier rubyid_found_entity'>found_entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_found_entity'>found_entity</span><span class='period'>.</span><span class='id identifier rubyid_persisted?'>persisted?</span> <span class='comment'>#=&gt; true</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="exclude_from_indexes?-instance_method"></a>
+              
+                <div class="method">
+                  <a name="exclude_from_indexes?-instance_method"></a>
+                  <h4>
+                    <code>exclude_from_indexes?(name)</code>
+                    <span>
+                      <a href="#exclude_from_indexes?-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>exclude_from_indexes?(name)</code>
-                  <span>
-                    <a href="#exclude_from_indexes?-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Indicates if a property is flagged to be excluded from the
+                    <p>Indicates if a property is flagged to be excluded from the
 Datastore indexes. The default value is <code class="highlighter-rouge">false</code>. This is another way of
 saying that values are indexed by default.</p>
 
@@ -271,22 +594,72 @@ if a multi-valued property contains <code class="highlighter-rouge">["a", "b"]</
 <code class="highlighter-rouge">"b"</code> is indexed (meaning that <code class="highlighter-rouge">"a"</code>’ is excluded), the return value for
 this method will be <code class="highlighter-rouge">[true, false]</code>.</p>
 
+
+                    
+                      <p class="tag_title">See Also:</p>
+                      <ul class="see">
+                        
+                          <li><a href="https://cloud.google.com/datastore/docs/concepts/indexes#Datastore_Unindexed_properties" target="_parent" title="Unindexed properties">Unindexed properties</a></li>
+                        
+                      </ul>
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-exclude_from_indexes?-label-Returns">
+                        Returns
+                        <span><a href="#method-i-exclude_from_indexes?-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Boolean</tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-exclude_from_indexes?-label-Examples">
+                        Examples
+                        <span><a href="#method-i-exclude_from_indexes?-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Single property values will return a single flag setting:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>21</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes?'>exclude_from_indexes?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; false</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>A multi-valued property will return an array of flag settings:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>code</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes!'>exclude_from_indexes!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='kw'>true</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rbracket'>]</span>
+
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes?'>exclude_from_indexes?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; [true, false]</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="exclude_from_indexes!-instance_method"></a>
+              
+                <div class="method">
+                  <a name="exclude_from_indexes!-instance_method"></a>
+                  <h4>
+                    <code>exclude_from_indexes!(name, flag = nil, &amp;block)</code>
+                    <span>
+                      <a href="#exclude_from_indexes!-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>exclude_from_indexes!(name, flag = nil, &amp;block)</code>
-                  <span>
-                    <a href="#exclude_from_indexes!-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Sets whether a property should be excluded from the Datastore indexes.
+                    <p>Sets whether a property should be excluded from the Datastore indexes.
 Setting <code class="highlighter-rouge">true</code> will exclude the property from the indexes.
 Setting <code class="highlighter-rouge">false</code> will include the property on any applicable indexes.
 The default value is <code class="highlighter-rouge">false</code>. This is another way of saying that values
@@ -301,8 +674,59 @@ if a multi-valued property contains <code class="highlighter-rouge">["a", "b"]</
 <code class="highlighter-rouge">"b"</code> should be indexed (meaning that <code class="highlighter-rouge">"a"</code>’ should be excluded), you
 should pass the array: <code class="highlighter-rouge">[true, false]</code>.</p>
 
+
+                    
+                      <p class="tag_title">See Also:</p>
+                      <ul class="see">
+                        
+                          <li><a href="https://cloud.google.com/datastore/docs/concepts/indexes#Datastore_Unindexed_properties" target="_parent" title="Unindexed properties">Unindexed properties</a></li>
+                        
+                      </ul>
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-exclude_from_indexes!-label-Examples">
+                        Examples
+                        <span><a href="#method-i-exclude_from_indexes!-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>21</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes!'>exclude_from_indexes!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Multi-valued properties can be given multiple exclude flags:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>code</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes!'>exclude_from_indexes!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='kw'>true</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rbracket'>]</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Or, a single flag can be applied to all values in a property:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>code</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes!'>exclude_from_indexes!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Flags can also be set with a block:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>21</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes!'>exclude_from_indexes!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_age'>age</span><span class='op'>|</span>
+  <span class='id identifier rubyid_age'>age</span> <span class='op'>&gt;</span> <span class='int'>18</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
           </div>
         
@@ -310,81 +734,7 @@ should pass the array: <code class="highlighter-rouge">[true, false]</code>.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta">
-          <div id="doc-build-date">
-            Docs built on Jan 08, 2016.
-          </div>
-        </div>
-
-        <ul>
-          <h4 class="list-item--heading">Getting Started</h4>
-          <li class="toc-l0"><a class="reference internal current" href="/gcloud-ruby/docs/master/index.html">Overview</a></li>
-
-            <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/AUTHENTICATION.html">Authentication Guide</a></li>
-
-        </ul>
-
-        <ul>
-          <h4 class="list-item--heading">API</h4>
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud.html">
-                  Gcloud
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Bigquery.html">
-                  BigQuery
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Datastore.html">
-                  Datastore
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Dns.html">
-                  DNS
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Pubsub.html">
-                  Pub/Sub
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/ResourceManager.html">
-                  Resource Manager
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Search.html">
-                  Search
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Storage.html">
-                  Storage
-                </a>
-              </li>
-
-
-          <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/reference.html">API Reference</a></li>
-        </ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 05, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal current' href=''>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

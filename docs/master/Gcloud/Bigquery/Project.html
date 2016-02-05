@@ -131,162 +131,1108 @@ accessed, and deleted by Gcloud::Bigquery::Project.</p>
 
           <div class="methods">
             
-              <div class="method">
-                <a name="initialize-instance_method"></a>
+              
+                <div class="method">
+                  <a name="initialize-instance_method"></a>
+                  <h4>
+                    <code>initialize(project, credentials)</code>
+                    <span>
+                      <a href="#initialize-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>initialize(project, credentials)</code>
-                  <span>
-                    <a href="#initialize-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new Connection instance.</p>
+                    <p>Creates a new Connection instance.</p>
 
 <p>See <span class='object_link'><a href="../../Gcloud.html#bigquery-class_method" title="Gcloud.bigquery (method)">Gcloud.bigquery</a></span></p>
 
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-initialize-label-Returns">
+                        Returns
+                        <span><a href="#method-i-initialize-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="" title="Gcloud::Bigquery::Project (class)">Project</a></span></tt>)
+                        
+                          <div class='inline'><p>a new instance of Project</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="project-instance_method"></a>
+              
+                <div class="method">
+                  <a name="project-instance_method"></a>
+                  <h4>
+                    <code>project</code>
+                    <span>
+                      <a href="#project-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>project</code>
-                  <span>
-                    <a href="#project-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>The BigQuery project connected to.</p>
+                    <p>The BigQuery project connected to.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-project-label-Examples">
+                        Example
+                        <span><a href="#method-i-project-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='comment'>#=&gt; &quot;my-todo-project&quot;</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="query_job-instance_method"></a>
+              
+                <div class="method">
+                  <a name="query_job-instance_method"></a>
+                  <h4>
+                    <code>query_job(query, priority: &quot;INTERACTIVE&quot;, cache: true, table: nil, create: nil, write: nil, large_results: nil, flatten: nil, dataset: nil)</code>
+                    <span>
+                      <a href="#query_job-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>query_job(query, priority: &quot;INTERACTIVE&quot;, cache: true, table: nil, create: nil, write: nil, large_results: nil, flatten: nil, dataset: nil)</code>
-                  <span>
-                    <a href="#query_job-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Queries data using the <a href="https://cloud.google.com/bigquery/querying-data">asynchronous
+                    <p>Queries data using the <a href="https://cloud.google.com/bigquery/querying-data">asynchronous
 method</a>.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-query_job-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-query_job-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>query</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A query string, following the BigQuery <a href="https://cloud.google.com/bigquery/query-reference">query
+syntax</a>, of the
+query to execute. Example: “SELECT count(f1) FROM
+[myProjectId:myDatasetId.myTableId]”.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>priority</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Specifies a priority for the query. Possible
+values include <code class="highlighter-rouge">INTERACTIVE</code> and <code class="highlighter-rouge">BATCH</code>. The default value is
+<code class="highlighter-rouge">INTERACTIVE</code>.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>cache</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Whether to look for the result in the query
+cache. The query cache is a best-effort cache that will be flushed
+whenever tables in the query are modified. The default value is true.
+For more information, see <a href="https://developers.google.com/bigquery/querying-data">query
+caching</a>.</p>
+</div>
+                              
+                              (<tt>Boolean</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>table</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The destination table where the query results
+should be stored. If not present, a new table will be created to store
+the results.</p>
+</div>
+                              
+                              (<tt><span class='object_link'><a href="Table.html" title="Gcloud::Bigquery::Table (class)">Table</a></span></tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>create</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Specifies whether the job is allowed to create
+new tables.</p>
+
+<p>The following values are supported:
+* <code class="highlighter-rouge">needed</code> - Create the table if it does not exist.
+* <code class="highlighter-rouge">never</code> - The table must already exist. A ‘notFound’ error is
+  raised if the table does not exist.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>write</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Specifies the action that occurs if the
+destination table already exists.</p>
+
+<p>The following values are supported:
+* <code class="highlighter-rouge">truncate</code> - BigQuery overwrites the table data.
+* <code class="highlighter-rouge">append</code> - BigQuery appends the data to the table.
+* <code class="highlighter-rouge">empty</code> - A ‘duplicate’ error is returned in the job result if the
+  table exists and contains data.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>large_results</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>If <code class="highlighter-rouge">true</code>, allows the query to produce
+arbitrarily large result tables at a slight cost in performance.
+Requires <code class="highlighter-rouge">table</code> parameter to be set.</p>
+</div>
+                              
+                              (<tt>Boolean</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>flatten</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Flattens all nested and repeated fields in the
+query results. The default value is <code class="highlighter-rouge">true</code>. <code class="highlighter-rouge">large_results</code> parameter
+must be <code class="highlighter-rouge">true</code> if this is set to <code class="highlighter-rouge">false</code>.</p>
+</div>
+                              
+                              (<tt>Boolean</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>dataset</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Specifies the default dataset to use
+for unqualified table names in the query.</p>
+</div>
+                              
+                              (<tt><span class='object_link'><a href="Dataset.html" title="Gcloud::Bigquery::Dataset (class)">Dataset</a></span></tt>, <tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-query_job-label-Returns">
+                        Returns
+                        <span><a href="#method-i-query_job-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="QueryJob.html" title="Gcloud::Bigquery::QueryJob (class)">Gcloud::Bigquery::QueryJob</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-query_job-label-Examples">
+                        Example
+                        <span><a href="#method-i-query_job-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_query_job'>query_job</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT name FROM [my_proj:my_data.my_table]</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
+<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_failed?'>failed?</span>
+  <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_query_results'>query_results</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="query-instance_method"></a>
+              
+                <div class="method">
+                  <a name="query-instance_method"></a>
+                  <h4>
+                    <code>query(query, max: nil, timeout: 10000, dryrun: nil, cache: true, dataset: nil, project: nil)</code>
+                    <span>
+                      <a href="#query-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>query(query, max: nil, timeout: 10000, dryrun: nil, cache: true, dataset: nil, project: nil)</code>
-                  <span>
-                    <a href="#query-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Queries data using the <a href="https://cloud.google.com/bigquery/querying-data">synchronous
+                    <p>Queries data using the <a href="https://cloud.google.com/bigquery/querying-data">synchronous
 method</a>.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-query-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-query-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>query</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A query string, following the BigQuery <a href="https://cloud.google.com/bigquery/query-reference">query
+syntax</a>, of the
+query to execute. Example: “SELECT count(f1) FROM
+[myProjectId:myDatasetId.myTableId]”.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>max</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The maximum number of rows of data to return per
+page of results. Setting this flag to a small value such as 1000 and
+then paging through results might improve reliability when the query
+result set is large. In addition to this limit, responses are also
+limited to 10 MB. By default, there is no maximum row count, and only
+the byte limit applies.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>timeout</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>How long to wait for the query to complete, in
+milliseconds, before the request times out and returns. Note that this
+is only a timeout for the request, not the query. If the query takes
+longer to run than the timeout value, the call returns without any
+results and with QueryData#complete? set to false. The default value
+is 10000 milliseconds (10 seconds).</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>dryrun</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>If set to <code class="highlighter-rouge">true</code>, BigQuery doesn’t run the job.
+Instead, if the query is valid, BigQuery returns statistics about the
+job such as how many bytes would be processed. If the query is
+invalid, an error returns. The default value is <code class="highlighter-rouge">false</code>.</p>
+</div>
+                              
+                              (<tt>Boolean</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>cache</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Whether to look for the result in the query
+cache. The query cache is a best-effort cache that will be flushed
+whenever tables in the query are modified. The default value is true.
+For more information, see <a href="https://developers.google.com/bigquery/querying-data">query
+caching</a>.</p>
+</div>
+                              
+                              (<tt>Boolean</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>dataset</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Specifies the default datasetId and projectId to
+assume for any unqualified table names in the query. If not set, all
+table names in the query string must be qualified in the format
+‘datasetId.tableId’.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Specifies the default projectId to assume for
+any unqualified table names in the query. Only used if <code class="highlighter-rouge">dataset</code>
+option is set.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-query-label-Returns">
+                        Returns
+                        <span><a href="#method-i-query-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="QueryData.html" title="Gcloud::Bigquery::QueryData (class)">Gcloud::Bigquery::QueryData</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-query-label-Examples">
+                        Example
+                        <span><a href="#method-i-query-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT name FROM [my_proj:my_data.my_table]</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="dataset-instance_method"></a>
+              
+                <div class="method">
+                  <a name="dataset-instance_method"></a>
+                  <h4>
+                    <code>dataset(dataset_id)</code>
+                    <span>
+                      <a href="#dataset-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>dataset(dataset_id)</code>
-                  <span>
-                    <a href="#dataset-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieves an existing dataset by ID.</p>
+                    <p>Retrieves an existing dataset by ID.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-dataset-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-dataset-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>dataset_id</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The ID of a dataset.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-dataset-label-Returns">
+                        Returns
+                        <span><a href="#method-i-dataset-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Dataset.html" title="Gcloud::Bigquery::Dataset (class)">Gcloud::Bigquery::Dataset</a></span></tt>, <tt>nil</tt>)
+                        
+                          <div class='inline'><p>Returns <code class="highlighter-rouge">nil</code> if the dataset
+does not exist.</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-dataset-label-Examples">
+                        Example
+                        <span><a href="#method-i-dataset-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_dataset'>dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_dataset</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="create_dataset-instance_method"></a>
+              
+                <div class="method">
+                  <a name="create_dataset-instance_method"></a>
+                  <h4>
+                    <code>create_dataset(dataset_id, name: nil, description: nil, expiration: nil, access: nil)</code>
+                    <span>
+                      <a href="#create_dataset-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>create_dataset(dataset_id, name: nil, description: nil, expiration: nil, access: nil)</code>
-                  <span>
-                    <a href="#create_dataset-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new dataset.</p>
+                    <p>Creates a new dataset.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-create_dataset-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-create_dataset-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>dataset_id</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A unique ID for this dataset, without the
+project name. The ID must contain only letters (a-z, A-Z), numbers
+(0-9), or underscores (_). The maximum length is 1,024 characters.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A descriptive name for the dataset.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>description</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A user-friendly description of the dataset.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>expiration</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The default lifetime of all tables in the
+dataset, in milliseconds. The minimum value is 3600000 milliseconds
+(one hour).</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>access</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The access rules for a Dataset using the
+Google Cloud Datastore API data structure of an array of hashes. See
+<a href="https://cloud.google.com/bigquery/access-control">BigQuery Access
+Control</a> for more
+information.</p>
+</div>
+                              
+                              (<tt>Array&lt;Hash&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-create_dataset-label-Returns">
+                        Returns
+                        <span><a href="#method-i-create_dataset-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Dataset.html" title="Gcloud::Bigquery::Dataset (class)">Gcloud::Bigquery::Dataset</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-create_dataset-label-Examples">
+                        Examples
+                        <span><a href="#method-i-create_dataset-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_create_dataset'>create_dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_dataset</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>A name and description can be provided:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_create_dataset'>create_dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_dataset</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                                  <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>My Dataset</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                                  <span class='label'>description:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>This is my Dataset</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Access rules can be provided with the <code class="highlighter-rouge">access</code> option:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_create_dataset'>create_dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_dataset</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>access:</span> <span class='lbracket'>[</span><span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>role</span><span class='tstring_end'>&quot;</span></span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WRITER</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>userByEmail</span><span class='tstring_end'>&quot;</span></span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>writers@example.com</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rbracket'>]</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Or, configure access with a block: (See <span class='object_link'><a href="Dataset/Access.html" title="Gcloud::Bigquery::Dataset::Access (class)">Dataset::Access</a></span>)</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_create_dataset'>create_dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_dataset</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_access'>access</span><span class='op'>|</span>
+  <span class='id identifier rubyid_access'>access</span><span class='period'>.</span><span class='id identifier rubyid_add_writer_user'>add_writer_user</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>writers@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="datasets-instance_method"></a>
+              
+                <div class="method">
+                  <a name="datasets-instance_method"></a>
+                  <h4>
+                    <code>datasets(all: nil, token: nil, max: nil)</code>
+                    <span>
+                      <a href="#datasets-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>datasets(all: nil, token: nil, max: nil)</code>
-                  <span>
-                    <a href="#datasets-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieves the list of datasets belonging to the project.</p>
+                    <p>Retrieves the list of datasets belonging to the project.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-datasets-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-datasets-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>all</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Whether to list all datasets, including hidden
+ones. The default is <code class="highlighter-rouge">false</code>.</p>
+</div>
+                              
+                              (<tt>Boolean</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>token</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A previously-returned page token representing part
+of the larger set of results to view.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>max</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Maximum number of datasets to return.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-datasets-label-Returns">
+                        Returns
+                        <span><a href="#method-i-datasets-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Array&lt;<span class='object_link'><a href="Dataset.html" title="Gcloud::Bigquery::Dataset (class)">Gcloud::Bigquery::Dataset</a></span>&gt;</tt>)
+                        
+                          <div class='inline'><p>(See
+<span class='object_link'><a href="Dataset/List.html" title="Gcloud::Bigquery::Dataset::List (class)">Dataset::List</a></span>)</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-datasets-label-Examples">
+                        Examples
+                        <span><a href="#method-i-datasets-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_datasets'>datasets</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_datasets'>datasets</span>
+<span class='id identifier rubyid_datasets'>datasets</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dataset'>dataset</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Retrieve all datasets, including hidden ones, with <code class="highlighter-rouge">:all</code>:</p>
+</div></p>
+                        
+                        <pre class="code"><code>require &quot;gcloud&quot;
+
+gcloud = Gcloud.new
+bigquery = gcloud.bigquery
+
+all_datasets = bigquery.datasets, all: true</code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>With pagination: (See <span class='object_link'><a href="Dataset/List.html#token-instance_method" title="Gcloud::Bigquery::Dataset::List#token (method)">Dataset::List#token</a></span>)</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_all_datasets'>all_datasets</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_tmp_datasets'>tmp_datasets</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_datasets'>datasets</span>
+<span class='kw'>while</span> <span class='id identifier rubyid_tmp_datasets'>tmp_datasets</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_tmp_datasets'>tmp_datasets</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dataset'>dataset</span><span class='op'>|</span>
+    <span class='id identifier rubyid_all_datasets'>all_datasets</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_dataset'>dataset</span>
+  <span class='kw'>end</span>
+  <span class='comment'># break loop if no more datasets available
+</span>  <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_tmp_datasets'>tmp_datasets</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='comment'># get the next group of datasets
+</span>  <span class='id identifier rubyid_tmp_datasets'>tmp_datasets</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_datasets'>datasets</span> <span class='label'>token:</span> <span class='id identifier rubyid_tmp_datasets'>tmp_datasets</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="job-instance_method"></a>
+              
+                <div class="method">
+                  <a name="job-instance_method"></a>
+                  <h4>
+                    <code>job(job_id)</code>
+                    <span>
+                      <a href="#job-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>job(job_id)</code>
-                  <span>
-                    <a href="#job-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieves an existing job by ID.</p>
+                    <p>Retrieves an existing job by ID.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-job-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-job-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>job_id</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The ID of a job.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-job-label-Returns">
+                        Returns
+                        <span><a href="#method-i-job-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Job.html" title="Gcloud::Bigquery::Job (class)">Gcloud::Bigquery::Job</a></span></tt>, <tt>nil</tt>)
+                        
+                          <div class='inline'><p>Returns <code class="highlighter-rouge">nil</code> if the job does not
+exist.</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-job-label-Examples">
+                        Example
+                        <span><a href="#method-i-job-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_job</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="jobs-instance_method"></a>
+              
+                <div class="method">
+                  <a name="jobs-instance_method"></a>
+                  <h4>
+                    <code>jobs(all: nil, token: nil, max: nil, filter: nil)</code>
+                    <span>
+                      <a href="#jobs-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>jobs(all: nil, token: nil, max: nil, filter: nil)</code>
-                  <span>
-                    <a href="#jobs-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieves the list of jobs belonging to the project.</p>
+                    <p>Retrieves the list of jobs belonging to the project.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-jobs-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-jobs-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>all</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Whether to display jobs owned by all users in the
+project. The default is <code class="highlighter-rouge">false</code>.</p>
+</div>
+                              
+                              (<tt>Boolean</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>token</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A previously-returned page token representing part
+of the larger set of results to view.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>max</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Maximum number of jobs to return.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>filter</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A filter for job state.</p>
+
+<p>Acceptable values are:
+* <code class="highlighter-rouge">done</code> - Finished jobs
+* <code class="highlighter-rouge">pending</code> - Pending jobs
+* <code class="highlighter-rouge">running</code> - Running jobs</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-jobs-label-Returns">
+                        Returns
+                        <span><a href="#method-i-jobs-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Array&lt;<span class='object_link'><a href="Job.html" title="Gcloud::Bigquery::Job (class)">Gcloud::Bigquery::Job</a></span>&gt;</tt>)
+                        
+                          <div class='inline'><p>(See
+<span class='object_link'><a href="Job/List.html" title="Gcloud::Bigquery::Job::List (class)">Job::List</a></span>)</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-jobs-label-Examples">
+                        Examples
+                        <span><a href="#method-i-jobs-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_jobs'>jobs</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_jobs'>jobs</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Retrieve only running jobs using the <code class="highlighter-rouge">:filter</code> option:</p>
+</div></p>
+                        
+                        <pre class="code"><code>
+<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_running_jobs'>running_jobs</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_jobs'>jobs</span> <span class='label'>filter:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>running</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>With pagination: (See <span class='object_link'><a href="Job/List.html#token-instance_method" title="Gcloud::Bigquery::Job::List#token (method)">Job::List#token</a></span>)</p>
+</div></p>
+                        
+                        <pre class="code"><code>
+<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_all_jobs'>all_jobs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_tmp_jobs'>tmp_jobs</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_jobs'>jobs</span>
+<span class='kw'>while</span> <span class='id identifier rubyid_tmp_jobs'>tmp_jobs</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_tmp_jobs'>tmp_jobs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_job'>job</span><span class='op'>|</span>
+    <span class='id identifier rubyid_all_jobs'>all_jobs</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_job'>job</span>
+  <span class='kw'>end</span>
+  <span class='comment'># break loop if no more jobs available
+</span>  <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_tmp_jobs'>tmp_jobs</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='comment'># get the next group of jobs
+</span>  <span class='id identifier rubyid_tmp_jobs'>tmp_jobs</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_jobs'>jobs</span> <span class='label'>token:</span> <span class='id identifier rubyid_tmp_jobs'>tmp_jobs</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
           </div>
         
@@ -294,81 +1240,7 @@ method</a>.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta">
-          <div id="doc-build-date">
-            Docs built on Jan 08, 2016.
-          </div>
-        </div>
-
-        <ul>
-          <h4 class="list-item--heading">Getting Started</h4>
-          <li class="toc-l0"><a class="reference internal current" href="/gcloud-ruby/docs/master/index.html">Overview</a></li>
-
-            <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/AUTHENTICATION.html">Authentication Guide</a></li>
-
-        </ul>
-
-        <ul>
-          <h4 class="list-item--heading">API</h4>
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud.html">
-                  Gcloud
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Bigquery.html">
-                  BigQuery
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Datastore.html">
-                  Datastore
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Dns.html">
-                  DNS
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Pubsub.html">
-                  Pub/Sub
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/ResourceManager.html">
-                  Resource Manager
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Search.html">
-                  Search
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Storage.html">
-                  Storage
-                </a>
-              </li>
-
-
-          <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/reference.html">API Reference</a></li>
-        </ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 05, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l1'><a class='reference internal current' href=''>Project</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Job.html'>Job</a></li><li class='toc-l1'><a class='reference internal' href='Table.html'>Table</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

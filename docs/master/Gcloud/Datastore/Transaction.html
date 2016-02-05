@@ -147,353 +147,1090 @@
 
           <div class="methods">
             
-              <div class="method">
-                <a name="id-instance_method"></a>
+              
+                <div class="method">
+                  <a name="id-instance_method"></a>
+                  <h4>
+                    <code>id</code>
+                    <span>
+                      <a href="#id-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>id</code>
-                  <span>
-                    <a href="#id-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Returns the value of attribute id</p>
+                    <p>Returns the value of attribute id</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="save-instance_method"></a>
+              
+                <div class="method">
+                  <a name="save-instance_method"></a>
+                  <h4>
+                    <code>save(*entities)</code>
+                    <span>
+                      <a href="#save-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>save(*entities)</code>
-                  <span>
-                    <a href="#save-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Persist entities in a transaction.</p>
+                    <p>Persist entities in a transaction.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-save-label-Examples">
+                        Example
+                        <span><a href="#method-i-save-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_task1'>task1</span><span class='comma'>,</span> <span class='id identifier rubyid_task2'>task2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="delete-instance_method"></a>
+              
+                <div class="method">
+                  <a name="delete-instance_method"></a>
+                  <h4>
+                    <code>delete(*entities)</code>
+                    <span>
+                      <a href="#delete-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>delete(*entities)</code>
-                  <span>
-                    <a href="#delete-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Remove entities in a transaction.</p>
+                    <p>Remove entities in a transaction.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-delete-label-Examples">
+                        Example
+                        <span><a href="#method-i-delete-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_task1'>task1</span><span class='comma'>,</span> <span class='id identifier rubyid_task2'>task2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="start-instance_method"></a>
+              
+                <div class="method">
+                  <a name="start-instance_method"></a>
+                  <h4>
+                    <code>start</code>
+                    <span>
+                      <a href="#start-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>start</code>
-                  <span>
-                    <a href="#start-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Begins a transaction.
+                    <p>Begins a transaction.
 This method is run when a new Transaction is created.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#begin_transaction-instance_method'>begin_transaction</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="begin_transaction-instance_method"></a>
-
-                <h4>
-                  <code>begin_transaction</code>
-                  <span>
-                    <a href="#begin_transaction-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Begins a transaction.
-This method is run when a new Transaction is created.</p>
-
+              
+                <div class="method">
+                  <a name="begin_transaction-instance_method"></a>
+                  <h4>
+                    <code>begin_transaction</code>
+                    <span>
+                      <a href="#begin_transaction-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#start-instance_method">start</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="commit-instance_method"></a>
+              
+                <div class="method">
+                  <a name="commit-instance_method"></a>
+                  <h4>
+                    <code>commit</code>
+                    <span>
+                      <a href="#commit-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>commit</code>
-                  <span>
-                    <a href="#commit-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Commits a transaction.</p>
+                    <p>Commits a transaction.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="rollback-instance_method"></a>
+              
+                <div class="method">
+                  <a name="rollback-instance_method"></a>
+                  <h4>
+                    <code>rollback</code>
+                    <span>
+                      <a href="#rollback-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>rollback</code>
-                  <span>
-                    <a href="#rollback-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Rolls a transaction back.</p>
+                    <p>Rolls a transaction back.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="reset!-instance_method"></a>
+              
+                <div class="method">
+                  <a name="reset!-instance_method"></a>
+                  <h4>
+                    <code>reset!</code>
+                    <span>
+                      <a href="#reset!-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>reset!</code>
-                  <span>
-                    <a href="#reset!-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Reset the transaction.
+                    <p>Reset the transaction.
 <span class='object_link'><a href="#start-instance_method" title="Gcloud::Datastore::Transaction#start (method)">#start</a></span> must be called afterwards.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="project-instance_method"></a>
+              
+                <div class="method">
+                  <a name="project-instance_method"></a>
+                  <h4>
+                    <code>project</code>
+                    <span>
+                      <a href="#project-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>project</code>
-                  <span>
-                    <a href="#project-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>The Datastore project connected to.</p>
+                    <p>The Datastore project connected to.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-project-label-Examples">
+                        Example
+                        <span><a href="#method-i-project-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='comment'>#=&gt; &quot;my-todo-project&quot;</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="allocate_ids-instance_method"></a>
+              
+                <div class="method">
+                  <a name="allocate_ids-instance_method"></a>
+                  <h4>
+                    <code>allocate_ids(incomplete_key, count = 1)</code>
+                    <span>
+                      <a href="#allocate_ids-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>allocate_ids(incomplete_key, count = 1)</code>
-                  <span>
-                    <a href="#allocate_ids-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Generate IDs for a Key before creating an entity.</p>
+                    <p>Generate IDs for a Key before creating an entity.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-allocate_ids-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-allocate_ids-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>incomplete_key</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A Key without <code class="highlighter-rouge">id</code> or <code class="highlighter-rouge">name</code> set.</p>
+</div>
+                              
+                              (<tt><span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Key</a></span></tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>count</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The number of new key IDs to create.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-allocate_ids-label-Returns">
+                        Returns
+                        <span><a href="#method-i-allocate_ids-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Array&lt;<span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Gcloud::Datastore::Key</a></span>&gt;</tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-allocate_ids-label-Examples">
+                        Example
+                        <span><a href="#method-i-allocate_ids-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_empty_key'>empty_key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task_keys'>task_keys</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_allocate_ids'>allocate_ids</span> <span class='id identifier rubyid_empty_key'>empty_key</span><span class='comma'>,</span> <span class='int'>5</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="find-instance_method"></a>
+              
+                <div class="method">
+                  <a name="find-instance_method"></a>
+                  <h4>
+                    <code>find(key_or_kind, id_or_name = nil)</code>
+                    <span>
+                      <a href="#find-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>find(key_or_kind, id_or_name = nil)</code>
-                  <span>
-                    <a href="#find-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieve an entity by providing key information.</p>
+                    <p>Retrieve an entity by providing key information.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-find-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-find-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>key_or_kind</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A Key object or <code class="highlighter-rouge">kind</code> string value.</p>
+</div>
+                              
+                              (<tt><span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Key</a></span></tt>, <tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>id_or_name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The Key’s <code class="highlighter-rouge">id</code> or <code class="highlighter-rouge">name</code> value
+if a <code class="highlighter-rouge">kind</code> was provided in the first parameter.</p>
+</div>
+                              
+                              (<tt>Integer</tt>, <tt>String</tt>, <tt>nil</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-find-label-Returns">
+                        Returns
+                        <span><a href="#method-i-find-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Entity.html" title="Gcloud::Datastore::Entity (class)">Gcloud::Datastore::Entity</a></span></tt>, <tt>nil</tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-find-label-Examples">
+                        Examples
+                        <span><a href="#method-i-find-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Finding an entity with a key:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>123456</span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='id identifier rubyid_key'>key</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Finding an entity with a <code class="highlighter-rouge">kind</code> and <code class="highlighter-rouge">id</code>/<code class="highlighter-rouge">name</code>:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>123456</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#get-instance_method'>get</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="get-instance_method"></a>
-
-                <h4>
-                  <code>get</code>
-                  <span>
-                    <a href="#get-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Retrieve an entity by providing key information.</p>
-
+              
+                <div class="method">
+                  <a name="get-instance_method"></a>
+                  <h4>
+                    <code>get</code>
+                    <span>
+                      <a href="#get-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#find-instance_method">find</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="find_all-instance_method"></a>
+              
+                <div class="method">
+                  <a name="find_all-instance_method"></a>
+                  <h4>
+                    <code>find_all(*keys)</code>
+                    <span>
+                      <a href="#find_all-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>find_all(*keys)</code>
-                  <span>
-                    <a href="#find_all-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieve the entities for the provided keys.</p>
+                    <p>Retrieve the entities for the provided keys.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-find_all-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-find_all-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>*keys</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>One or more Key objects to find records for.</p>
+</div>
+                              
+                              (<tt><span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Key</a></span></tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-find_all-label-Returns">
+                        Returns
+                        <span><a href="#method-i-find_all-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Dataset/LookupResults.html" title="Gcloud::Datastore::Dataset::LookupResults (class)">Gcloud::Datastore::Dataset::LookupResults</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-find_all-label-Examples">
+                        Example
+                        <span><a href="#method-i-find_all-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_key1'>key1</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>123456</span>
+<span class='id identifier rubyid_key2'>key2</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>987654</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find_all'>find_all</span> <span class='id identifier rubyid_key1'>key1</span><span class='comma'>,</span> <span class='id identifier rubyid_key2'>key2</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#lookup-instance_method'>lookup</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="lookup-instance_method"></a>
-
-                <h4>
-                  <code>lookup</code>
-                  <span>
-                    <a href="#lookup-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Retrieve the entities for the provided keys.</p>
-
+              
+                <div class="method">
+                  <a name="lookup-instance_method"></a>
+                  <h4>
+                    <code>lookup</code>
+                    <span>
+                      <a href="#lookup-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#find_all-instance_method">find_all</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="run-instance_method"></a>
+              
+                <div class="method">
+                  <a name="run-instance_method"></a>
+                  <h4>
+                    <code>run(query, namespace: nil)</code>
+                    <span>
+                      <a href="#run-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>run(query, namespace: nil)</code>
-                  <span>
-                    <a href="#run-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieve entities specified by a Query.</p>
+                    <p>Retrieve entities specified by a Query.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-run-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-run-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>query</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The Query object with the search criteria.</p>
+</div>
+                              
+                              (<tt><span class='object_link'><a href="Query.html" title="Gcloud::Datastore::Query (class)">Query</a></span></tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>namespace</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The namespace the query is to run within.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-run-label-Returns">
+                        Returns
+                        <span><a href="#method-i-run-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Dataset/QueryResults.html" title="Gcloud::Datastore::Dataset::QueryResults (class)">Gcloud::Datastore::Dataset::QueryResults</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-run-label-Examples">
+                        Examples
+                        <span><a href="#method-i-run-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Run the query within a namespace with the <code class="highlighter-rouge">namespace</code> option:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_kind'>kind</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>namespace:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ns~todo-project</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#run_query-instance_method'>run_query</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="run_query-instance_method"></a>
-
-                <h4>
-                  <code>run_query</code>
-                  <span>
-                    <a href="#run_query-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Retrieve entities specified by a Query.</p>
-
+              
+                <div class="method">
+                  <a name="run_query-instance_method"></a>
+                  <h4>
+                    <code>run_query</code>
+                    <span>
+                      <a href="#run_query-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#run-instance_method">run</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="transaction-instance_method"></a>
+              
+                <div class="method">
+                  <a name="transaction-instance_method"></a>
+                  <h4>
+                    <code>transaction</code>
+                    <span>
+                      <a href="#transaction-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>transaction</code>
-                  <span>
-                    <a href="#transaction-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a Datastore Transaction.</p>
+                    <p>Creates a Datastore Transaction.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-transaction-label-Examples">
+                        Examples
+                        <span><a href="#method-i-transaction-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Runs the given block in a database transaction:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+
+<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_u'>u</span><span class='op'>|</span>
+  <span class='id identifier rubyid_u'>u</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Heidi Henderson</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_u'>u</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>email</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.net</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_user'>user</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>If no block is given, a Transaction object is returned:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+
+<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_u'>u</span><span class='op'>|</span>
+  <span class='id identifier rubyid_u'>u</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Heidi Henderson</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_u'>u</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>email</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.net</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_tx'>tx</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span>
+<span class='kw'>begin</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_user'>user</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span>
+<span class='kw'>rescue</span>
+  <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_rollback'>rollback</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="query-instance_method"></a>
+              
+                <div class="method">
+                  <a name="query-instance_method"></a>
+                  <h4>
+                    <code>query(*kinds)</code>
+                    <span>
+                      <a href="#query-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>query(*kinds)</code>
-                  <span>
-                    <a href="#query-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Create a new Query instance. This is a convenience method to make the
+                    <p>Create a new Query instance. This is a convenience method to make the
 creation of Query objects easier.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-query-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-query-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>*kinds</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The kind of entities to query. This is optional.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-query-label-Returns">
+                        Returns
+                        <span><a href="#method-i-query-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Query.html" title="Gcloud::Datastore::Query (class)">Gcloud::Datastore::Query</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-query-label-Examples">
+                        Examples
+                        <span><a href="#method-i-query-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The previous example is equivalent to:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span>
+  <span class='id identifier rubyid_kind'>kind</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="key-instance_method"></a>
+              
+                <div class="method">
+                  <a name="key-instance_method"></a>
+                  <h4>
+                    <code>key(kind = nil, id_or_name = nil)</code>
+                    <span>
+                      <a href="#key-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>key(kind = nil, id_or_name = nil)</code>
-                  <span>
-                    <a href="#key-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Create a new Key instance. This is a convenience method to make the
+                    <p>Create a new Key instance. This is a convenience method to make the
 creation of Key objects easier.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-key-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-key-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>kind</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The kind of the Key. This is optional.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>id_or_name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The id or name of the Key. This is
+optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>, <tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-key-label-Returns">
+                        Returns
+                        <span><a href="#method-i-key-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Gcloud::Datastore::Key</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-key-label-Examples">
+                        Examples
+                        <span><a href="#method-i-key-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The previous example is equivalent to:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="entity-instance_method"></a>
+              
+                <div class="method">
+                  <a name="entity-instance_method"></a>
+                  <h4>
+                    <code>entity(key_or_kind = nil, id_or_name = nil)</code>
+                    <span>
+                      <a href="#entity-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>entity(key_or_kind = nil, id_or_name = nil)</code>
-                  <span>
-                    <a href="#entity-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Create a new empty Entity instance. This is a convenience method to make
+                    <p>Create a new empty Entity instance. This is a convenience method to make
 the creation of Entity objects easier.</p>
 
 <p>end</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-entity-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-entity-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>key_or_kind</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A Key object or <code class="highlighter-rouge">kind</code> string
+value. This is optional.</p>
+</div>
+                              
+                              (<tt><span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Key</a></span></tt>, <tt>String</tt>, <tt>nil</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>id_or_name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The Key’s <code class="highlighter-rouge">id</code> or <code class="highlighter-rouge">name</code> value
+if a <code class="highlighter-rouge">kind</code> was provided in the first parameter.</p>
+</div>
+                              
+                              (<tt>Integer</tt>, <tt>String</tt>, <tt>nil</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-entity-label-Returns">
+                        Returns
+                        <span><a href="#method-i-entity-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Entity.html" title="Gcloud::Datastore::Entity (class)">Gcloud::Datastore::Entity</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-entity-label-Examples">
+                        Examples
+                        <span><a href="#method-i-entity-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The previous example is equivalent to:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The key can also be passed in as an object:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='id identifier rubyid_key'>key</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Or the key values can be passed in as parameters:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The previous example is equivalent to:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_key'>key</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The newly created entity can also be configured using a block:</p>
+</div></p>
+                        
+                        <pre class="code"><code>user = dataset.entity &quot;User&quot;, &quot;heidi@example.com&quot; do |u|
+  u[&quot;name&quot;] = &quot;Heidi Henderson&quot;</code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The previous example is equivalent to:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_key'>key</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Heidi Henderson</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
           </div>
         
@@ -501,81 +1238,7 @@ the creation of Entity objects easier.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta">
-          <div id="doc-build-date">
-            Docs built on Jan 08, 2016.
-          </div>
-        </div>
-
-        <ul>
-          <h4 class="list-item--heading">Getting Started</h4>
-          <li class="toc-l0"><a class="reference internal current" href="/gcloud-ruby/docs/master/index.html">Overview</a></li>
-
-            <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/AUTHENTICATION.html">Authentication Guide</a></li>
-
-        </ul>
-
-        <ul>
-          <h4 class="list-item--heading">API</h4>
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud.html">
-                  Gcloud
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Bigquery.html">
-                  BigQuery
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Datastore.html">
-                  Datastore
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Dns.html">
-                  DNS
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Pubsub.html">
-                  Pub/Sub
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/ResourceManager.html">
-                  Resource Manager
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Search.html">
-                  Search
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Storage.html">
-                  Storage
-                </a>
-              </li>
-
-
-          <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/reference.html">API Reference</a></li>
-        </ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 05, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal' href='Entity.html'>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

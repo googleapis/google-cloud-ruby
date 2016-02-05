@@ -131,229 +131,509 @@
 
           <div class="methods">
             
-              <div class="method">
-                <a name="initialize-instance_method"></a>
+              
+                <div class="method">
+                  <a name="initialize-instance_method"></a>
+                  <h4>
+                    <code>initialize</code>
+                    <span>
+                      <a href="#initialize-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>initialize</code>
-                  <span>
-                    <a href="#initialize-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Returns a new query object.</p>
+                    <p>Returns a new query object.</p>
 
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-initialize-label-Returns">
+                        Returns
+                        <span><a href="#method-i-initialize-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="" title="Gcloud::Datastore::Query (class)">Query</a></span></tt>)
+                        
+                          <div class='inline'><p>a new instance of Query</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-initialize-label-Examples">
+                        Example
+                        <span><a href="#method-i-initialize-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="kind-instance_method"></a>
+              
+                <div class="method">
+                  <a name="kind-instance_method"></a>
+                  <h4>
+                    <code>kind(*kinds)</code>
+                    <span>
+                      <a href="#kind-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>kind(*kinds)</code>
-                  <span>
-                    <a href="#kind-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Add the kind of entities to query.</p>
+                    <p>Add the kind of entities to query.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-kind-label-Examples">
+                        Example
+                        <span><a href="#method-i-kind-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_kind'>kind</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_all_tasks'>all_tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="where-instance_method"></a>
+              
+                <div class="method">
+                  <a name="where-instance_method"></a>
+                  <h4>
+                    <code>where(name, operator, value)</code>
+                    <span>
+                      <a href="#where-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>where(name, operator, value)</code>
-                  <span>
-                    <a href="#where-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Add a property filter to the query.</p>
+                    <p>Add a property filter to the query.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-where-label-Examples">
+                        Example
+                        <span><a href="#method-i-where-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_kind'>kind</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_completed_tasks'>completed_tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#filter-instance_method'>filter</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="filter-instance_method"></a>
-
-                <h4>
-                  <code>filter</code>
-                  <span>
-                    <a href="#filter-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Add a property filter to the query.</p>
-
+              
+                <div class="method">
+                  <a name="filter-instance_method"></a>
+                  <h4>
+                    <code>filter</code>
+                    <span>
+                      <a href="#filter-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#where-instance_method">where</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="ancestor-instance_method"></a>
+              
+                <div class="method">
+                  <a name="ancestor-instance_method"></a>
+                  <h4>
+                    <code>ancestor(parent)</code>
+                    <span>
+                      <a href="#ancestor-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>ancestor(parent)</code>
-                  <span>
-                    <a href="#ancestor-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Add a filter for entities that inherit from a key.</p>
+                    <p>Add a filter for entities that inherit from a key.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-ancestor-label-Examples">
+                        Example
+                        <span><a href="#method-i-ancestor-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_kind'>kind</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_ancestor'>ancestor</span><span class='lparen'>(</span><span class='id identifier rubyid_parent'>parent</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_completed_tasks'>completed_tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="order-instance_method"></a>
+              
+                <div class="method">
+                  <a name="order-instance_method"></a>
+                  <h4>
+                    <code>order(name, direction = :asc)</code>
+                    <span>
+                      <a href="#order-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>order(name, direction = :asc)</code>
-                  <span>
-                    <a href="#order-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Sort the results by a property name.
+                    <p>Sort the results by a property name.
 By default, an ascending sort order will be used.
 To sort in descending order, provide a second argument
 of a string or symbol that starts with “d”.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-order-label-Examples">
+                        Example
+                        <span><a href="#method-i-order-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_kind'>kind</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>due</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:desc</span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_sorted_tasks'>sorted_tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="limit-instance_method"></a>
+              
+                <div class="method">
+                  <a name="limit-instance_method"></a>
+                  <h4>
+                    <code>limit(num)</code>
+                    <span>
+                      <a href="#limit-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>limit(num)</code>
-                  <span>
-                    <a href="#limit-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Set a limit on the number of results to be returned.</p>
+                    <p>Set a limit on the number of results to be returned.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-limit-label-Examples">
+                        Example
+                        <span><a href="#method-i-limit-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_kind'>kind</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_limit'>limit</span><span class='lparen'>(</span><span class='int'>10</span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_paginated_tasks'>paginated_tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="offset-instance_method"></a>
+              
+                <div class="method">
+                  <a name="offset-instance_method"></a>
+                  <h4>
+                    <code>offset(num)</code>
+                    <span>
+                      <a href="#offset-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>offset(num)</code>
-                  <span>
-                    <a href="#offset-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Set an offset for the results to be returned.</p>
+                    <p>Set an offset for the results to be returned.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-offset-label-Examples">
+                        Example
+                        <span><a href="#method-i-offset-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_kind'>kind</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_limit'>limit</span><span class='lparen'>(</span><span class='int'>10</span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_offset'>offset</span><span class='lparen'>(</span><span class='int'>20</span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_paginated_tasks'>paginated_tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="start-instance_method"></a>
+              
+                <div class="method">
+                  <a name="start-instance_method"></a>
+                  <h4>
+                    <code>start(cursor)</code>
+                    <span>
+                      <a href="#start-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>start(cursor)</code>
-                  <span>
-                    <a href="#start-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Set the cursor to start the results at.</p>
+                    <p>Set the cursor to start the results at.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-start-label-Examples">
+                        Example
+                        <span><a href="#method-i-start-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_kind'>kind</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_limit'>limit</span><span class='lparen'>(</span><span class='int'>10</span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_cursor'>cursor</span><span class='lparen'>(</span><span class='id identifier rubyid_task_cursor'>task_cursor</span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_paginated_tasks'>paginated_tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#cursor-instance_method'>cursor</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="cursor-instance_method"></a>
-
-                <h4>
-                  <code>cursor</code>
-                  <span>
-                    <a href="#cursor-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Set the cursor to start the results at.</p>
-
+              
+                <div class="method">
+                  <a name="cursor-instance_method"></a>
+                  <h4>
+                    <code>cursor</code>
+                    <span>
+                      <a href="#cursor-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#start-instance_method">start</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="select-instance_method"></a>
+              
+                <div class="method">
+                  <a name="select-instance_method"></a>
+                  <h4>
+                    <code>select(*names)</code>
+                    <span>
+                      <a href="#select-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>select(*names)</code>
-                  <span>
-                    <a href="#select-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieve only select properties from the matched entities.</p>
+                    <p>Retrieve only select properties from the matched entities.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-select-label-Examples">
+                        Example
+                        <span><a href="#method-i-select-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_kind'>kind</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>due</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_partial_tasks'>partial_tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#projection-instance_method'>projection</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="projection-instance_method"></a>
-
-                <h4>
-                  <code>projection</code>
-                  <span>
-                    <a href="#projection-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Retrieve only select properties from the matched entities.</p>
-
+              
+                <div class="method">
+                  <a name="projection-instance_method"></a>
+                  <h4>
+                    <code>projection</code>
+                    <span>
+                      <a href="#projection-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#select-instance_method">select</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="group_by-instance_method"></a>
+              
+                <div class="method">
+                  <a name="group_by-instance_method"></a>
+                  <h4>
+                    <code>group_by(*names)</code>
+                    <span>
+                      <a href="#group_by-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>group_by(*names)</code>
-                  <span>
-                    <a href="#group_by-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Group results by a list of properties.</p>
+                    <p>Group results by a list of properties.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-group_by-label-Examples">
+                        Example
+                        <span><a href="#method-i-group_by-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_kind'>kind</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_group_by'>group_by</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_grouped_tasks'>grouped_tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
           </div>
         
@@ -361,81 +641,7 @@ of a string or symbol that starts with “d”.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta">
-          <div id="doc-build-date">
-            Docs built on Jan 08, 2016.
-          </div>
-        </div>
-
-        <ul>
-          <h4 class="list-item--heading">Getting Started</h4>
-          <li class="toc-l0"><a class="reference internal current" href="/gcloud-ruby/docs/master/index.html">Overview</a></li>
-
-            <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/AUTHENTICATION.html">Authentication Guide</a></li>
-
-        </ul>
-
-        <ul>
-          <h4 class="list-item--heading">API</h4>
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud.html">
-                  Gcloud
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Bigquery.html">
-                  BigQuery
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Datastore.html">
-                  Datastore
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Dns.html">
-                  DNS
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Pubsub.html">
-                  Pub/Sub
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/ResourceManager.html">
-                  Resource Manager
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Search.html">
-                  Search
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Storage.html">
-                  Storage
-                </a>
-              </li>
-
-
-          <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/reference.html">API Reference</a></li>
-        </ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 05, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal current' href=''>Query</a></li><li class='toc-l1'><a class='reference internal' href='Entity.html'>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

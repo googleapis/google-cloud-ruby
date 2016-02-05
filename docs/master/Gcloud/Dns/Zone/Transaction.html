@@ -115,76 +115,402 @@ API.</p>
 
           <div class="methods">
             
-              <div class="method">
-                <a name="add-instance_method"></a>
+              
+                <div class="method">
+                  <a name="add-instance_method"></a>
+                  <h4>
+                    <code>add(name, type, ttl, data)</code>
+                    <span>
+                      <a href="#add-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>add(name, type, ttl, data)</code>
-                  <span>
-                    <a href="#add-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Adds a record to the Zone.</p>
+                    <p>Adds a record to the Zone.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-add-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-add-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The owner of the record. For example:
+<code class="highlighter-rouge">example.com.</code>.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>type</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The identifier of a <a href="https://cloud.google.com/dns/what-is-cloud-dns">supported record
+type</a>.
+For example: <code class="highlighter-rouge">A</code>, <code class="highlighter-rouge">AAAA</code>, <code class="highlighter-rouge">CNAME</code>, <code class="highlighter-rouge">MX</code>, or <code class="highlighter-rouge">TXT</code>.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>ttl</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The number of seconds that the record can be
+cached by resolvers.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>data</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The resource record data, as
+determined by <code class="highlighter-rouge">type</code> and defined in
+<a href="http://tools.ietf.org/html/rfc1035#section-5">RFC 1035 (section 5)</a>
+and <a href="http://tools.ietf.org/html/rfc1034#section-3.6.1">RFC 1034 (section
+3.6.1)</a>. For
+example: <code class="highlighter-rouge">192.0.2.1</code> or <code class="highlighter-rouge">example.com.</code>.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-add-label-Examples">
+                        Example
+                        <span><a href="#method-i-add-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dns'>dns</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_dns'>dns</span>
+<span class='id identifier rubyid_zone'>zone</span> <span class='op'>=</span> <span class='id identifier rubyid_dns'>dns</span><span class='period'>.</span><span class='id identifier rubyid_zone'>zone</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example-com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_zone'>zone</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span>     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example.com.</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>A</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>  <span class='int'>86400</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1.2.3.4</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="remove-instance_method"></a>
+              
+                <div class="method">
+                  <a name="remove-instance_method"></a>
+                  <h4>
+                    <code>remove(name, type)</code>
+                    <span>
+                      <a href="#remove-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>remove(name, type)</code>
-                  <span>
-                    <a href="#remove-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Removes records from the Zone. The records are looked up before they
+                    <p>Removes records from the Zone. The records are looked up before they
 are removed.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-remove-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-remove-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The owner of the record. For example:
+<code class="highlighter-rouge">example.com.</code>.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>type</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The identifier of a <a href="https://cloud.google.com/dns/what-is-cloud-dns">supported record
+type</a>.
+For example: <code class="highlighter-rouge">A</code>, <code class="highlighter-rouge">AAAA</code>, <code class="highlighter-rouge">CNAME</code>, <code class="highlighter-rouge">MX</code>, or <code class="highlighter-rouge">TXT</code>.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-remove-label-Examples">
+                        Example
+                        <span><a href="#method-i-remove-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dns'>dns</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_dns'>dns</span>
+<span class='id identifier rubyid_zone'>zone</span> <span class='op'>=</span> <span class='id identifier rubyid_dns'>dns</span><span class='period'>.</span><span class='id identifier rubyid_zone'>zone</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example-com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_zone'>zone</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_remove'>remove</span>  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example.com.</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TXT</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="replace-instance_method"></a>
+              
+                <div class="method">
+                  <a name="replace-instance_method"></a>
+                  <h4>
+                    <code>replace(name, type, ttl, data)</code>
+                    <span>
+                      <a href="#replace-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>replace(name, type, ttl, data)</code>
-                  <span>
-                    <a href="#replace-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Replaces existing records on the Zone. Records matching the <code class="highlighter-rouge">name</code> and
+                    <p>Replaces existing records on the Zone. Records matching the <code class="highlighter-rouge">name</code> and
 <code class="highlighter-rouge">type</code> are replaced.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-replace-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-replace-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The owner of the record. For example:
+<code class="highlighter-rouge">example.com.</code>.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>type</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The identifier of a <a href="https://cloud.google.com/dns/what-is-cloud-dns">supported record
+type</a>.
+For example: <code class="highlighter-rouge">A</code>, <code class="highlighter-rouge">AAAA</code>, <code class="highlighter-rouge">CNAME</code>, <code class="highlighter-rouge">MX</code>, or <code class="highlighter-rouge">TXT</code>.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>ttl</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The number of seconds that the record can be
+cached by resolvers.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>data</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The resource record data, as
+determined by <code class="highlighter-rouge">type</code> and defined in
+<a href="http://tools.ietf.org/html/rfc1035#section-5">RFC 1035 (section 5)</a>
+and <a href="http://tools.ietf.org/html/rfc1034#section-3.6.1">RFC 1034 (section
+3.6.1)</a>. For
+example: <code class="highlighter-rouge">192.0.2.1</code> or <code class="highlighter-rouge">example.com.</code>.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-replace-label-Examples">
+                        Example
+                        <span><a href="#method-i-replace-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dns'>dns</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_dns'>dns</span>
+<span class='id identifier rubyid_zone'>zone</span> <span class='op'>=</span> <span class='id identifier rubyid_dns'>dns</span><span class='period'>.</span><span class='id identifier rubyid_zone'>zone</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example-com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_zone'>zone</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_replace'>replace</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example.com.</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MX</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>86400</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>10 mail1.example.com.</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                                           <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20 mail2.example.com.</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="modify-instance_method"></a>
+              
+                <div class="method">
+                  <a name="modify-instance_method"></a>
+                  <h4>
+                    <code>modify(name, type)</code>
+                    <span>
+                      <a href="#modify-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>modify(name, type)</code>
-                  <span>
-                    <a href="#modify-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Modifies records on the Zone. Records matching the <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">type</code>
+                    <p>Modifies records on the Zone. Records matching the <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">type</code>
 are yielded to the block where they can be modified.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-modify-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-modify-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The owner of the record. For example:
+<code class="highlighter-rouge">example.com.</code>.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>type</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The identifier of a <a href="https://cloud.google.com/dns/what-is-cloud-dns">supported record
+type</a>.
+For example: <code class="highlighter-rouge">A</code>, <code class="highlighter-rouge">AAAA</code>, <code class="highlighter-rouge">CNAME</code>, <code class="highlighter-rouge">MX</code>, or <code class="highlighter-rouge">TXT</code>.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-modify-label-Examples">
+                        Example
+                        <span><a href="#method-i-modify-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dns'>dns</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_dns'>dns</span>
+<span class='id identifier rubyid_zone'>zone</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_modify'>modify</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>www.example.com.</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CNAME</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_cname'>cname</span><span class='op'>|</span>
+    <span class='id identifier rubyid_cname'>cname</span><span class='period'>.</span><span class='id identifier rubyid_ttl'>ttl</span> <span class='op'>=</span> <span class='int'>86400</span> <span class='comment'># only change the TTL
+</span>  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
           </div>
         
@@ -192,81 +518,7 @@ are yielded to the block where they can be modified.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta">
-          <div id="doc-build-date">
-            Docs built on Jan 08, 2016.
-          </div>
-        </div>
-
-        <ul>
-          <h4 class="list-item--heading">Getting Started</h4>
-          <li class="toc-l0"><a class="reference internal current" href="/gcloud-ruby/docs/master/index.html">Overview</a></li>
-
-            <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/AUTHENTICATION.html">Authentication Guide</a></li>
-
-        </ul>
-
-        <ul>
-          <h4 class="list-item--heading">API</h4>
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud.html">
-                  Gcloud
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Bigquery.html">
-                  BigQuery
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Datastore.html">
-                  Datastore
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Dns.html">
-                  DNS
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Pubsub.html">
-                  Pub/Sub
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/ResourceManager.html">
-                  Resource Manager
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Search.html">
-                  Search
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Storage.html">
-                  Storage
-                </a>
-              </li>
-
-
-          <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/reference.html">API Reference</a></li>
-        </ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 05, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../../Dns.html'>DNS</a></li><li class='toc-l1'><a class='reference internal' href='../Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='../Zone.html'>Zone</a></li><li class='toc-l1'><a class='reference internal' href='../Record.html'>Record</a></li><li class='toc-l0'><a class='reference internal' href='../../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

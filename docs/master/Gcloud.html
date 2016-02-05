@@ -110,6 +110,8 @@ is taken care of for you.</p>
               
                 <span class='object_link'><a href="#search-class_method" title="Gcloud.search (method)">Gcloud.search</a></span>
               
+                <span class='object_link'><a href="#logging-class_method" title="Gcloud.logging (method)">Gcloud.logging</a></span>
+              
                 <span class='object_link'><a href="#storage-class_method" title="Gcloud.storage (method)">Gcloud.storage</a></span>
               
                 <span class='object_link'><a href="#bigquery-class_method" title="Gcloud.bigquery (method)">Gcloud.bigquery</a></span>
@@ -138,6 +140,8 @@ is taken care of for you.</p>
               
                 <span class='object_link'><a href="#search-instance_method" title="Gcloud#search (method)">#search</a></span>
               
+                <span class='object_link'><a href="#logging-instance_method" title="Gcloud#logging (method)">#logging</a></span>
+              
             </div>
           
         </div>
@@ -149,148 +153,959 @@ is taken care of for you.</p>
 
           <div class="methods">
             
-              <div class="method">
-                <a name="new-class_method"></a>
+              
+                <div class="method">
+                  <a name="new-class_method"></a>
+                  <h4>
+                    <code>new(project = nil, keyfile = nil)</code>
+                    <span>
+                      <a href="#new-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>new(project = nil, keyfile = nil)</code>
-                  <span>
-                    <a href="#new-class_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new object for connecting to Google Cloud.</p>
+                    <p>Creates a new object for connecting to Google Cloud.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-new-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-new-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Project identifier for the Pub/Sub service you are
+connecting to.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>keyfile</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Keyfile downloaded from Google Cloud. If file
+path the file must be readable.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-new-label-Returns">
+                        Returns
+                        <span><a href="#method-i-new-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="" title="Gcloud (module)">Gcloud</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-new-label-Examples">
+                        Example
+                        <span><a href="#method-i-new-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span>  <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_storage'>storage</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="dns-class_method"></a>
+              
+                <div class="method">
+                  <a name="dns-class_method"></a>
+                  <h4>
+                    <code>dns(project = nil, keyfile = nil, scope: nil)</code>
+                    <span>
+                      <a href="#dns-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>dns(project = nil, keyfile = nil, scope: nil)</code>
-                  <span>
-                    <a href="#dns-class_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new <code class="highlighter-rouge">Project</code> instance connected to the DNS service.
+                    <p>Creates a new <code class="highlighter-rouge">Project</code> instance connected to the DNS service.
 Each call creates a new connection.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-dns-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-dns-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Identifier for a DNS project. If not present, the
+default project for the credentials is used.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>keyfile</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Keyfile downloaded from Google Cloud. If file
+path the file must be readable.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/ndev.clouddns.readwrite</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-dns-label-Returns">
+                        Returns
+                        <span><a href="#method-i-dns-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Dns/Project.html" title="Gcloud::Dns::Project (class)">Gcloud::Dns::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-dns-label-Examples">
+                        Example
+                        <span><a href="#method-i-dns-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_dns'>dns</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_dns'>dns</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-dns-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_zone'>zone</span> <span class='op'>=</span> <span class='id identifier rubyid_dns'>dns</span><span class='period'>.</span><span class='id identifier rubyid_zone'>zone</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example-com</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="pubsub-class_method"></a>
+              
+                <div class="method">
+                  <a name="pubsub-class_method"></a>
+                  <h4>
+                    <code>pubsub(project = nil, keyfile = nil, scope: nil)</code>
+                    <span>
+                      <a href="#pubsub-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>pubsub(project = nil, keyfile = nil, scope: nil)</code>
-                  <span>
-                    <a href="#pubsub-class_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new object for connecting to the Pub/Sub service.
+                    <p>Creates a new object for connecting to the Pub/Sub service.
 Each call creates a new connection.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-pubsub-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-pubsub-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Project identifier for the Pub/Sub service you are
+connecting to.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>keyfile</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Keyfile downloaded from Google Cloud. If file
+path the file must be readable.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/pubsub</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-pubsub-label-Returns">
+                        Returns
+                        <span><a href="#method-i-pubsub-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Pubsub/Project.html" title="Gcloud::Pubsub::Project (class)">Gcloud::Pubsub::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-pubsub-label-Examples">
+                        Example
+                        <span><a href="#method-i-pubsub-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>task completed</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="search-class_method"></a>
+              
+                <div class="method">
+                  <a name="search-class_method"></a>
+                  <h4>
+                    <code>search(project = nil, keyfile = nil, scope: nil)</code>
+                    <span>
+                      <a href="#search-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>search(project = nil, keyfile = nil, scope: nil)</code>
-                  <span>
-                    <a href="#search-class_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new <code class="highlighter-rouge">Project</code> instance connected to the Search service.
+                    <p>Creates a new <code class="highlighter-rouge">Project</code> instance connected to the Search service.
 Each call creates a new connection.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-search-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-search-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Identifier for a Search project. If not present, the
+default project for the credentials is used.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>keyfile</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Keyfile downloaded from Google Cloud. If file
+path the file must be readable.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scopes are:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/cloudsearch</code></li>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/userinfo.email</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-search-label-Returns">
+                        Returns
+                        <span><a href="#method-i-search-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Search/Project.html" title="Gcloud::Search::Project (class)">Gcloud::Search::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="storage-class_method"></a>
+              
+                <div class="method">
+                  <a name="logging-class_method"></a>
+                  <h4>
+                    <code>logging(project = nil, keyfile = nil, scope: nil)</code>
+                    <span>
+                      <a href="#logging-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>storage(project = nil, keyfile = nil, scope: nil)</code>
-                  <span>
-                    <a href="#storage-class_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new object for connecting to the Storage service.
+                    <p>Creates a new object for connecting to the Logging service.
 Each call creates a new connection.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-logging-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-logging-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Project identifier for the Logging service you are
+connecting to.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>keyfile</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Keyfile downloaded from Google Cloud. If file
+path the file must be readable.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/logging.admin</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-logging-label-Returns">
+                        Returns
+                        <span><a href="#method-i-logging-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Logging/Project.html" title="Gcloud::Logging::Project (class)">Gcloud::Logging::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-logging-label-Examples">
+                        Example
+                        <span><a href="#method-i-logging-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+<span class='comment'># ...</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="bigquery-class_method"></a>
+              
+                <div class="method">
+                  <a name="storage-class_method"></a>
+                  <h4>
+                    <code>storage(project = nil, keyfile = nil, scope: nil)</code>
+                    <span>
+                      <a href="#storage-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>bigquery(project = nil, keyfile = nil, scope: nil)</code>
-                  <span>
-                    <a href="#bigquery-class_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new <code class="highlighter-rouge">Project</code> instance connected to the BigQuery service.
+                    <p>Creates a new object for connecting to the Storage service.
 Each call creates a new connection.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-storage-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-storage-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Project identifier for the Storage service you are
+connecting to.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>keyfile</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Keyfile downloaded from Google Cloud. If file
+path the file must be readable.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/devstorage.full_control</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-storage-label-Returns">
+                        Returns
+                        <span><a href="#method-i-storage-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Storage/Project.html" title="Gcloud::Storage::Project (class)">Gcloud::Storage::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-storage-label-Examples">
+                        Example
+                        <span><a href="#method-i-storage-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_storage'>storage</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                         <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/my-file.ext</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="datastore-class_method"></a>
+              
+                <div class="method">
+                  <a name="bigquery-class_method"></a>
+                  <h4>
+                    <code>bigquery(project = nil, keyfile = nil, scope: nil)</code>
+                    <span>
+                      <a href="#bigquery-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>datastore(project = nil, keyfile = nil, scope: nil)</code>
-                  <span>
-                    <a href="#datastore-class_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new object for connecting to the Datastore service.
+                    <p>Creates a new <code class="highlighter-rouge">Project</code> instance connected to the BigQuery service.
 Each call creates a new connection.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-bigquery-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-bigquery-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Identifier for a BigQuery project. If not present,
+the default project for the credentials is used.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>keyfile</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Keyfile downloaded from Google Cloud. If file
+path the file must be readable.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/bigquery</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-bigquery-label-Returns">
+                        Returns
+                        <span><a href="#method-i-bigquery-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Bigquery/Project.html" title="Gcloud::Bigquery::Project (class)">Gcloud::Bigquery::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-bigquery-label-Examples">
+                        Example
+                        <span><a href="#method-i-bigquery-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_dataset'>dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_dataset</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_table</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="resource_manager-class_method"></a>
+              
+                <div class="method">
+                  <a name="datastore-class_method"></a>
+                  <h4>
+                    <code>datastore(project = nil, keyfile = nil, scope: nil)</code>
+                    <span>
+                      <a href="#datastore-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>resource_manager(keyfile = nil, scope: nil)</code>
-                  <span>
-                    <a href="#resource_manager-class_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new <code class="highlighter-rouge">Project</code> instance connected to the Resource Manager service.
+                    <p>Creates a new object for connecting to the Datastore service.
 Each call creates a new connection.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-datastore-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-datastore-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Dataset identifier for the Datastore you are
+connecting to.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>keyfile</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Keyfile downloaded from Google Cloud. If file
+path the file must be readable.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scopes are:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/datastore</code></li>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/userinfo.email</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-datastore-label-Returns">
+                        Returns
+                        <span><a href="#method-i-datastore-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Datastore/Dataset.html" title="Gcloud::Datastore::Dataset (class)">Gcloud::Datastore::Dataset</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-datastore-label-Examples">
+                        Example
+                        <span><a href="#method-i-datastore-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud/datastore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                           <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Get started with Google Cloud</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_entity'>entity</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
+            
+              
+                <div class="method">
+                  <a name="resource_manager-class_method"></a>
+                  <h4>
+                    <code>resource_manager(keyfile = nil, scope: nil)</code>
+                    <span>
+                      <a href="#resource_manager-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Creates a new <code class="highlighter-rouge">Project</code> instance connected to the Resource Manager service.
+Each call creates a new connection.</p>
+
+
+                    
+
+                    
+                      <h3 id="method-i-resource_manager-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-resource_manager-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>keyfile</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Keyfile downloaded from Google Cloud. If file
+path the file must be readable.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/cloud-platform</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-resource_manager-label-Returns">
+                        Returns
+                        <span><a href="#method-i-resource_manager-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/ResourceManager/Manager.html" title="Gcloud::ResourceManager::Manager (class)">Gcloud::ResourceManager::Manager</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-resource_manager-label-Examples">
+                        Example
+                        <span><a href="#method-i-resource_manager-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_resource_manager'>resource_manager</span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_projects'>projects</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_project'>project</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_projects'>projects</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
             
           </div>
         
@@ -300,131 +1115,753 @@ Each call creates a new connection.</p>
 
           <div class="methods">
             
-              <div class="method">
-                <a name="datastore-instance_method"></a>
+              
+                <div class="method">
+                  <a name="datastore-instance_method"></a>
+                  <h4>
+                    <code>datastore(scope: nil)</code>
+                    <span>
+                      <a href="#datastore-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>datastore(scope: nil)</code>
-                  <span>
-                    <a href="#datastore-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new object for connecting to the Datastore service.
+                    <p>Creates a new object for connecting to the Datastore service.
 Each call creates a new connection.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-datastore-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-datastore-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scopes are:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/datastore</code></li>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/userinfo.email</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-datastore-label-Returns">
+                        Returns
+                        <span><a href="#method-i-datastore-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Datastore/Dataset.html" title="Gcloud::Datastore::Dataset (class)">Gcloud::Datastore::Dataset</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-datastore-label-Examples">
+                        Examples
+                        <span><a href="#method-i-datastore-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+
+<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Get started with Google Cloud</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_entity'>entity</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>You shouldn’t need to override the default scope, but you can:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_platform_scope'>platform_scope</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span> <span class='label'>scope:</span> <span class='id identifier rubyid_platform_scope'>platform_scope</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="storage-instance_method"></a>
+              
+                <div class="method">
+                  <a name="storage-instance_method"></a>
+                  <h4>
+                    <code>storage(scope: nil)</code>
+                    <span>
+                      <a href="#storage-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>storage(scope: nil)</code>
-                  <span>
-                    <a href="#storage-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new object for connecting to the Storage service.
+                    <p>Creates a new object for connecting to the Storage service.
 Each call creates a new connection.</p>
 
+
+                    
+                      <p class="tag_title">See Also:</p>
+                      <ul class="see">
+                        
+                          <li><a href="https://cloud.google.com/storage/docs/authentication#oauth" target="_parent" title="Storage OAuth 2.0 Authentication">Storage OAuth 2.0 Authentication</a></li>
+                        
+                      </ul>
+                    
+
+                    
+                      <h3 id="method-i-storage-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-storage-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/devstorage.full_control</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-storage-label-Returns">
+                        Returns
+                        <span><a href="#method-i-storage-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Storage/Project.html" title="Gcloud::Storage::Project (class)">Gcloud::Storage::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-storage-label-Examples">
+                        Examples
+                        <span><a href="#method-i-storage-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_storage'>storage</span>
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/my-file.ext</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The default scope can be overridden with the <code class="highlighter-rouge">scope</code> option:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_readonly_scope'>readonly_scope</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/devstorage.read_only</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_readonly_storage'>readonly_storage</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_storage'>storage</span> <span class='label'>scope:</span> <span class='id identifier rubyid_readonly_scope'>readonly_scope</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="pubsub-instance_method"></a>
+              
+                <div class="method">
+                  <a name="pubsub-instance_method"></a>
+                  <h4>
+                    <code>pubsub(scope: nil)</code>
+                    <span>
+                      <a href="#pubsub-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>pubsub(scope: nil)</code>
-                  <span>
-                    <a href="#pubsub-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new object for connecting to the Pub/Sub service.
+                    <p>Creates a new object for connecting to the Pub/Sub service.
 Each call creates a new connection.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-pubsub-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-pubsub-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/pubsub</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-pubsub-label-Returns">
+                        Returns
+                        <span><a href="#method-i-pubsub-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Pubsub/Project.html" title="Gcloud::Pubsub::Project (class)">Gcloud::Pubsub::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-pubsub-label-Examples">
+                        Examples
+                        <span><a href="#method-i-pubsub-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>task completed</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The default scope can be overridden with the <code class="highlighter-rouge">scope</code> option:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_platform_scope'>platform_scope</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span> <span class='label'>scope:</span> <span class='id identifier rubyid_platform_scope'>platform_scope</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="bigquery-instance_method"></a>
+              
+                <div class="method">
+                  <a name="bigquery-instance_method"></a>
+                  <h4>
+                    <code>bigquery(scope: nil)</code>
+                    <span>
+                      <a href="#bigquery-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>bigquery(scope: nil)</code>
-                  <span>
-                    <a href="#bigquery-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new object for connecting to the BigQuery service.
+                    <p>Creates a new object for connecting to the BigQuery service.
 Each call creates a new connection.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-bigquery-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-bigquery-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/bigquery</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-bigquery-label-Returns">
+                        Returns
+                        <span><a href="#method-i-bigquery-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Bigquery/Project.html" title="Gcloud::Bigquery::Project (class)">Gcloud::Bigquery::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-bigquery-label-Examples">
+                        Examples
+                        <span><a href="#method-i-bigquery-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_dataset'>dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-dataset</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_row'>row</span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The default scope can be overridden with the <code class="highlighter-rouge">scope</code> option:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_platform_scope'>platform_scope</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span> <span class='label'>scope:</span> <span class='id identifier rubyid_platform_scope'>platform_scope</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="dns-instance_method"></a>
+              
+                <div class="method">
+                  <a name="dns-instance_method"></a>
+                  <h4>
+                    <code>dns(scope: nil)</code>
+                    <span>
+                      <a href="#dns-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>dns(scope: nil)</code>
-                  <span>
-                    <a href="#dns-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new object for connecting to the DNS service.
+                    <p>Creates a new object for connecting to the DNS service.
 Each call creates a new connection.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-dns-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-dns-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/ndev.clouddns.readwrite</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-dns-label-Returns">
+                        Returns
+                        <span><a href="#method-i-dns-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Dns/Project.html" title="Gcloud::Dns::Project (class)">Gcloud::Dns::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-dns-label-Examples">
+                        Examples
+                        <span><a href="#method-i-dns-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dns'>dns</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_dns'>dns</span>
+<span class='id identifier rubyid_zone'>zone</span> <span class='op'>=</span> <span class='id identifier rubyid_dns'>dns</span><span class='period'>.</span><span class='id identifier rubyid_zone'>zone</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example-zone</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_zone'>zone</span><span class='period'>.</span><span class='id identifier rubyid_records'>records</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_record'>record</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_record'>record</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The default scope can be overridden with the <code class="highlighter-rouge">scope</code> option:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_readonly_scope'>readonly_scope</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/ndev.clouddns.readonly</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_dns'>dns</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_dns'>dns</span> <span class='label'>scope:</span> <span class='id identifier rubyid_readonly_scope'>readonly_scope</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="resource_manager-instance_method"></a>
+              
+                <div class="method">
+                  <a name="resource_manager-instance_method"></a>
+                  <h4>
+                    <code>resource_manager(scope: nil)</code>
+                    <span>
+                      <a href="#resource_manager-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>resource_manager(scope: nil)</code>
-                  <span>
-                    <a href="#resource_manager-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new object for connecting to the Resource Manager service.
+                    <p>Creates a new object for connecting to the Resource Manager service.
 Each call creates a new connection.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-resource_manager-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-resource_manager-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/cloud-platform</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-resource_manager-label-Returns">
+                        Returns
+                        <span><a href="#method-i-resource_manager-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/ResourceManager/Manager.html" title="Gcloud::ResourceManager::Manager (class)">Gcloud::ResourceManager::Manager</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-resource_manager-label-Examples">
+                        Examples
+                        <span><a href="#method-i-resource_manager-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_resource_manager'>resource_manager</span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_projects'>projects</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_project'>project</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_projects'>projects</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The default scope can be overridden with the <code class="highlighter-rouge">scope</code> option:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_readonly_scope'>readonly_scope</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloudresourcemanager.readonly</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='label'>scope:</span> <span class='id identifier rubyid_readonly_scope'>readonly_scope</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="search-instance_method"></a>
+              
+                <div class="method">
+                  <a name="search-instance_method"></a>
+                  <h4>
+                    <code>search(scope: nil)</code>
+                    <span>
+                      <a href="#search-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>search(scope: nil)</code>
-                  <span>
-                    <a href="#search-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new object for connecting to the Search service.
+                    <p>Creates a new object for connecting to the Search service.
 Each call creates a new connection.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-search-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-search-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scopes are:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/cloudsearch</code></li>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/userinfo.email</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-search-label-Returns">
+                        Returns
+                        <span><a href="#method-i-search-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Search/Project.html" title="Gcloud::Search::Project (class)">Gcloud::Search::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-search-label-Examples">
+                        Example
+                        <span><a href="#method-i-search-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
+            
+              
+                <div class="method">
+                  <a name="logging-instance_method"></a>
+                  <h4>
+                    <code>logging(scope: nil)</code>
+                    <span>
+                      <a href="#logging-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Creates a new object for connecting to the Logging service.
+Each call creates a new connection.</p>
+
+
+                    
+
+                    
+                      <h3 id="method-i-logging-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-logging-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/logging.admin</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-logging-label-Returns">
+                        Returns
+                        <span><a href="#method-i-logging-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Logging/Project.html" title="Gcloud::Logging::Project (class)">Gcloud::Logging::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-logging-label-Examples">
+                        Examples
+                        <span><a href="#method-i-logging-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+<span class='comment'># ...</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The default scope can be overridden with the <code class="highlighter-rouge">scope</code> option:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_platform_scope'>platform_scope</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span> <span class='label'>scope:</span> <span class='id identifier rubyid_platform_scope'>platform_scope</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
             
           </div>
         
@@ -432,81 +1869,7 @@ Each call creates a new connection.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta">
-          <div id="doc-build-date">
-            Docs built on Jan 08, 2016.
-          </div>
-        </div>
-
-        <ul>
-          <h4 class="list-item--heading">Getting Started</h4>
-          <li class="toc-l0"><a class="reference internal current" href="/gcloud-ruby/docs/master/index.html">Overview</a></li>
-
-            <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/AUTHENTICATION.html">Authentication Guide</a></li>
-
-        </ul>
-
-        <ul>
-          <h4 class="list-item--heading">API</h4>
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud.html">
-                  Gcloud
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Bigquery.html">
-                  BigQuery
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Datastore.html">
-                  Datastore
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Dns.html">
-                  DNS
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Pubsub.html">
-                  Pub/Sub
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/ResourceManager.html">
-                  Resource Manager
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Search.html">
-                  Search
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Storage.html">
-                  Storage
-                </a>
-              </li>
-
-
-          <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/reference.html">API Reference</a></li>
-        </ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 05, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal current' href=''>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

@@ -150,348 +150,1213 @@ publisher sends to a topic and is eventually delivered to subscribers.</p>
 
           <div class="methods">
             
-              <div class="method">
-                <a name="project-instance_method"></a>
+              
+                <div class="method">
+                  <a name="project-instance_method"></a>
+                  <h4>
+                    <code>project</code>
+                    <span>
+                      <a href="#project-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>project</code>
-                  <span>
-                    <a href="#project-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>The Pub/Sub project connected to.</p>
+                    <p>The Pub/Sub project connected to.</p>
 
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-project-label-Examples">
+                        Example
+                        <span><a href="#method-i-project-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='comment'>#=&gt; &quot;my-todo-project&quot;</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="topic-instance_method"></a>
+              
+                <div class="method">
+                  <a name="topic-instance_method"></a>
+                  <h4>
+                    <code>topic(topic_name, autocreate: nil, project: nil, skip_lookup: nil)</code>
+                    <span>
+                      <a href="#topic-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>topic(topic_name, autocreate: nil, project: nil, skip_lookup: nil)</code>
-                  <span>
-                    <a href="#topic-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieves topic by name.</p>
+                    <p>Retrieves topic by name.</p>
 
 <p>The topic will be created if the topic does not exist and the
 <code class="highlighter-rouge">autocreate</code> option is set to true.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-topic-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-topic-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>topic_name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Name of a topic.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>autocreate</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Flag to control whether the requested topic
+will be created if it does not exist. Ignored if <code class="highlighter-rouge">skip_lookup</code> is
+<code class="highlighter-rouge">true</code>. The default value is <code class="highlighter-rouge">false</code>.</p>
+</div>
+                              
+                              (<tt>Boolean</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>If the topic belongs to a project other than the
+one currently connected to, the alternate project ID can be specified
+here.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>skip_lookup</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Optionally create a <span class='object_link'><a href="Topic.html" title="Gcloud::Pubsub::Topic (class)">Topic</a></span> object without
+verifying the topic resource exists on the Pub/Sub service. Calls made
+on this object will raise errors if the topic resource does not exist.
+Default is <code class="highlighter-rouge">false</code>.</p>
+</div>
+                              
+                              (<tt>Boolean</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-topic-label-Returns">
+                        Returns
+                        <span><a href="#method-i-topic-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Topic.html" title="Gcloud::Pubsub::Topic (class)">Gcloud::Pubsub::Topic</a></span></tt>, <tt>nil</tt>)
+                        
+                          <div class='inline'><p>Returns <code class="highlighter-rouge">nil</code> if topic does not
+exist. Will return a newly created{ Gcloud::Pubsub::Topic} if the
+topic does not exist and <code class="highlighter-rouge">autocreate</code> is set to <code class="highlighter-rouge">true</code>.</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-topic-label-Examples">
+                        Examples
+                        <span><a href="#method-i-topic-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>existing-topic</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>By default <code class="highlighter-rouge">nil</code> will be returned if the topic does not exist.</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>non-existing-topic</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; nil</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>With the <code class="highlighter-rouge">autocreate</code> option set to <code class="highlighter-rouge">true</code>.</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>non-existing-topic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>autocreate:</span> <span class='kw'>true</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Create a topic in a different project with the <code class="highlighter-rouge">project</code> flag.</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>another-topic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>project:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>another-project</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Skip the lookup against the service with <code class="highlighter-rouge">skip_lookup</code>:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>another-topic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>skip_lookup:</span> <span class='kw'>true</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#get_topic-instance_method'>get_topic</a>, <a href='#find_topic-instance_method'>find_topic</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="get_topic-instance_method"></a>
-
-                <h4>
-                  <code>get_topic</code>
-                  <span>
-                    <a href="#get_topic-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Retrieves topic by name.</p>
-
-<p>The topic will be created if the topic does not exist and the
-<code class="highlighter-rouge">autocreate</code> option is set to true.</p>
-
+              
+                <div class="method">
+                  <a name="get_topic-instance_method"></a>
+                  <h4>
+                    <code>get_topic</code>
+                    <span>
+                      <a href="#get_topic-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#topic-instance_method">topic</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="find_topic-instance_method"></a>
-
-                <h4>
-                  <code>find_topic</code>
-                  <span>
-                    <a href="#find_topic-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Retrieves topic by name.</p>
-
-<p>The topic will be created if the topic does not exist and the
-<code class="highlighter-rouge">autocreate</code> option is set to true.</p>
-
+              
+                <div class="method">
+                  <a name="find_topic-instance_method"></a>
+                  <h4>
+                    <code>find_topic</code>
+                    <span>
+                      <a href="#find_topic-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#topic-instance_method">topic</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="create_topic-instance_method"></a>
+              
+                <div class="method">
+                  <a name="create_topic-instance_method"></a>
+                  <h4>
+                    <code>create_topic(topic_name)</code>
+                    <span>
+                      <a href="#create_topic-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>create_topic(topic_name)</code>
-                  <span>
-                    <a href="#create_topic-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new topic.</p>
+                    <p>Creates a new topic.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-create_topic-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-create_topic-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>topic_name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Name of a topic.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-create_topic-label-Returns">
+                        Returns
+                        <span><a href="#method-i-create_topic-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Topic.html" title="Gcloud::Pubsub::Topic (class)">Gcloud::Pubsub::Topic</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-create_topic-label-Examples">
+                        Example
+                        <span><a href="#method-i-create_topic-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_create_topic'>create_topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#new_topic-instance_method'>new_topic</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="new_topic-instance_method"></a>
-
-                <h4>
-                  <code>new_topic</code>
-                  <span>
-                    <a href="#new_topic-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Creates a new topic.</p>
-
+              
+                <div class="method">
+                  <a name="new_topic-instance_method"></a>
+                  <h4>
+                    <code>new_topic</code>
+                    <span>
+                      <a href="#new_topic-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#create_topic-instance_method">create_topic</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="topics-instance_method"></a>
+              
+                <div class="method">
+                  <a name="topics-instance_method"></a>
+                  <h4>
+                    <code>topics(token: nil, max: nil)</code>
+                    <span>
+                      <a href="#topics-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>topics(token: nil, max: nil)</code>
-                  <span>
-                    <a href="#topics-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieves a list of topics for the given project.</p>
+                    <p>Retrieves a list of topics for the given project.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-topics-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-topics-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>token</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The <code class="highlighter-rouge">token</code> value returned by the last call to
+<code class="highlighter-rouge">topics</code>; indicates that this is a continuation of a call, and that
+the system should return the next page of data.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>max</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Maximum number of topics to return.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-topics-label-Returns">
+                        Returns
+                        <span><a href="#method-i-topics-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Array&lt;<span class='object_link'><a href="Topic.html" title="Gcloud::Pubsub::Topic (class)">Gcloud::Pubsub::Topic</a></span>&gt;</tt>)
+                        
+                          <div class='inline'><p>(See
+<span class='object_link'><a href="Topic/List.html" title="Gcloud::Pubsub::Topic::List (class)">Topic::List</a></span>)</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-topics-label-Examples">
+                        Examples
+                        <span><a href="#method-i-topics-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_topics'>topics</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topics'>topics</span>
+<span class='id identifier rubyid_topics'>topics</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_topic'>topic</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>With pagination: (See <span class='object_link'><a href="Topic/List.html#token-instance_method" title="Gcloud::Pubsub::Topic::List#token (method)">Topic::List#token</a></span>)</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_all_topics'>all_topics</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_tmp_topics'>tmp_topics</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topics'>topics</span>
+<span class='kw'>while</span> <span class='id identifier rubyid_tmp_topics'>tmp_topics</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_tmp_topics'>tmp_topics</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_topic'>topic</span><span class='op'>|</span>
+    <span class='id identifier rubyid_all_topics'>all_topics</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_topic'>topic</span>
+  <span class='kw'>end</span>
+  <span class='comment'># break loop if no more topics available
+</span>  <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_tmp_topics'>tmp_topics</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='comment'># get the next group of topics
+</span>  <span class='id identifier rubyid_tmp_topics'>tmp_topics</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topics'>topics</span> <span class='label'>token:</span> <span class='id identifier rubyid_tmp_topics'>tmp_topics</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#find_topics-instance_method'>find_topics</a>, <a href='#list_topics-instance_method'>list_topics</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="find_topics-instance_method"></a>
-
-                <h4>
-                  <code>find_topics</code>
-                  <span>
-                    <a href="#find_topics-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Retrieves a list of topics for the given project.</p>
-
+              
+                <div class="method">
+                  <a name="find_topics-instance_method"></a>
+                  <h4>
+                    <code>find_topics</code>
+                    <span>
+                      <a href="#find_topics-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#topics-instance_method">topics</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="list_topics-instance_method"></a>
-
-                <h4>
-                  <code>list_topics</code>
-                  <span>
-                    <a href="#list_topics-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Retrieves a list of topics for the given project.</p>
-
+              
+                <div class="method">
+                  <a name="list_topics-instance_method"></a>
+                  <h4>
+                    <code>list_topics</code>
+                    <span>
+                      <a href="#list_topics-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#topics-instance_method">topics</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="publish-instance_method"></a>
+              
+                <div class="method">
+                  <a name="publish-instance_method"></a>
+                  <h4>
+                    <code>publish(topic_name, data = nil, attributes = {})</code>
+                    <span>
+                      <a href="#publish-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>publish(topic_name, data = nil, attributes = {})</code>
-                  <span>
-                    <a href="#publish-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Publishes one or more messages to the given topic. The topic will be
+                    <p>Publishes one or more messages to the given topic. The topic will be
 created if the topic does previously not exist and the <code class="highlighter-rouge">autocreate</code>
 option is provided.</p>
 
 <p>A note about auto-creating the topic: Any message published to a topic
 without a subscription will be lost.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-publish-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-publish-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>topic_name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Name of a topic.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>data</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The message data.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>attributes</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Optional attributes for the message.</p>
+</div>
+                              
+                              (<tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-publish-label-Returns">
+                        Returns
+                        <span><a href="#method-i-publish-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Message.html" title="Gcloud::Pubsub::Message (class)">Message</a></span></tt>, <tt>Array&lt;<span class='object_link'><a href="Message.html" title="Gcloud::Pubsub::Message (class)">Message</a></span>&gt;</tt>)
+                        
+                          <div class='inline'><p>Returns the published message when
+called without a block, or an array of messages when called with a
+block.</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-publish-label-Examples">
+                        Examples
+                        <span><a href="#method-i-publish-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_msg'>msg</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new-message</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Additionally, a message can be published with attributes:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_msg'>msg</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new-message</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>foo:</span> <span class='symbol'>:bar</span><span class='comma'>,</span>
+                                                <span class='label'>this:</span> <span class='symbol'>:that</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Multiple messages can be sent at the same time using a block:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_msgs'>msgs</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_batch'>batch</span><span class='op'>|</span>
+  <span class='id identifier rubyid_batch'>batch</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new-message-1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>foo:</span> <span class='symbol'>:bar</span>
+  <span class='id identifier rubyid_batch'>batch</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new-message-2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>foo:</span> <span class='symbol'>:baz</span>
+  <span class='id identifier rubyid_batch'>batch</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new-message-3</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>foo:</span> <span class='symbol'>:bif</span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>With <code class="highlighter-rouge">autocreate</code>:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_msg'>msg</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new-topic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new-message</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>autocreate:</span> <span class='kw'>true</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="subscribe-instance_method"></a>
+              
+                <div class="method">
+                  <a name="subscribe-instance_method"></a>
+                  <h4>
+                    <code>subscribe(topic_name, subscription_name, deadline: nil, endpoint: nil, autocreate: nil)</code>
+                    <span>
+                      <a href="#subscribe-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>subscribe(topic_name, subscription_name, deadline: nil, endpoint: nil, autocreate: nil)</code>
-                  <span>
-                    <a href="#subscribe-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a new <span class='object_link'><a href="Subscription.html" title="Gcloud::Pubsub::Subscription (class)">Subscription</a></span> object for the provided topic. The topic
+                    <p>Creates a new <span class='object_link'><a href="Subscription.html" title="Gcloud::Pubsub::Subscription (class)">Subscription</a></span> object for the provided topic. The topic
 will be created if the topic does previously not exist and the
 <code class="highlighter-rouge">autocreate</code> option is provided.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-subscribe-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-subscribe-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>topic_name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Name of a topic.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>subscription_name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Name of the new subscription. Must
+start with a letter, and contain only letters ([A-Za-z]), numbers
+([0-9], dashes (-), underscores (_), periods (.), tildes (~), plus (+)
+or percent signs (%). It must be between 3 and 255 characters in
+length, and it must not start with “goog”.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>deadline</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The maximum number of seconds after a
+subscriber receives a message before the subscriber should acknowledge
+the message.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>endpoint</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A URL locating the endpoint to which messages
+should be pushed.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>autocreate</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Flag to control whether the topic will be
+created if it does not exist.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-subscribe-label-Returns">
+                        Returns
+                        <span><a href="#method-i-subscribe-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Subscription.html" title="Gcloud::Pubsub::Subscription (class)">Gcloud::Pubsub::Subscription</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-subscribe-label-Examples">
+                        Examples
+                        <span><a href="#method-i-subscribe-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscribe'>subscribe</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='comment'># =&gt; &quot;my-topic-sub&quot;</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The name is optional, and will be generated if not given.</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscribe'>subscribe</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='comment'># =&gt; &quot;generated-sub-name&quot;</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Wait 2 minutes for acknowledgement and push all to an endpoint:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscribe'>subscribe</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                       <span class='label'>deadline:</span> <span class='int'>120</span><span class='comma'>,</span>
+                       <span class='label'>endpoint:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://example.com/push</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>With <code class="highlighter-rouge">autocreate</code>:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscribe'>subscribe</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new-topic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new-topic-sub</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>autocreate:</span> <span class='kw'>true</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#create_subscription-instance_method'>create_subscription</a>, <a href='#new_subscription-instance_method'>new_subscription</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="create_subscription-instance_method"></a>
-
-                <h4>
-                  <code>create_subscription</code>
-                  <span>
-                    <a href="#create_subscription-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Creates a new <span class='object_link'><a href="Subscription.html" title="Gcloud::Pubsub::Subscription (class)">Subscription</a></span> object for the provided topic. The topic
-will be created if the topic does previously not exist and the
-<code class="highlighter-rouge">autocreate</code> option is provided.</p>
-
+              
+                <div class="method">
+                  <a name="create_subscription-instance_method"></a>
+                  <h4>
+                    <code>create_subscription</code>
+                    <span>
+                      <a href="#create_subscription-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#subscribe-instance_method">subscribe</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="new_subscription-instance_method"></a>
-
-                <h4>
-                  <code>new_subscription</code>
-                  <span>
-                    <a href="#new_subscription-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Creates a new <span class='object_link'><a href="Subscription.html" title="Gcloud::Pubsub::Subscription (class)">Subscription</a></span> object for the provided topic. The topic
-will be created if the topic does previously not exist and the
-<code class="highlighter-rouge">autocreate</code> option is provided.</p>
-
+              
+                <div class="method">
+                  <a name="new_subscription-instance_method"></a>
+                  <h4>
+                    <code>new_subscription</code>
+                    <span>
+                      <a href="#new_subscription-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#subscribe-instance_method">subscribe</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="subscription-instance_method"></a>
+              
+                <div class="method">
+                  <a name="subscription-instance_method"></a>
+                  <h4>
+                    <code>subscription(subscription_name, project: nil, skip_lookup: nil)</code>
+                    <span>
+                      <a href="#subscription-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>subscription(subscription_name, project: nil, skip_lookup: nil)</code>
-                  <span>
-                    <a href="#subscription-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieves subscription by name.</p>
+                    <p>Retrieves subscription by name.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-subscription-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-subscription-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>subscription_name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Name of a subscription.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>If the subscription belongs to a project other
+than the one currently connected to, the alternate project ID can be
+specified here.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>skip_lookup</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Optionally create a <span class='object_link'><a href="Subscription.html" title="Gcloud::Pubsub::Subscription (class)">Subscription</a></span> object
+without verifying the subscription resource exists on the Pub/Sub
+service. Calls made on this object will raise errors if the service
+resource does not exist. Default is <code class="highlighter-rouge">false</code>.</p>
+</div>
+                              
+                              (<tt>Boolean</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-subscription-label-Returns">
+                        Returns
+                        <span><a href="#method-i-subscription-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Subscription.html" title="Gcloud::Pubsub::Subscription (class)">Gcloud::Pubsub::Subscription</a></span></tt>, <tt>nil</tt>)
+                        
+                          <div class='inline'><p>Returns <code class="highlighter-rouge">nil</code> if the
+subscription does not exist</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-subscription-label-Examples">
+                        Examples
+                        <span><a href="#method-i-subscription-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_subscription'>subscription</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-sub</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_subscription'>subscription</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Skip the lookup against the service with <code class="highlighter-rouge">skip_lookup</code>:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='comment'># No API call is made to retrieve the subscription information.
+</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-sub</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>skip_lookup:</span> <span class='kw'>true</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_subscription'>subscription</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#get_subscription-instance_method'>get_subscription</a>, <a href='#find_subscription-instance_method'>find_subscription</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="get_subscription-instance_method"></a>
-
-                <h4>
-                  <code>get_subscription</code>
-                  <span>
-                    <a href="#get_subscription-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Retrieves subscription by name.</p>
-
+              
+                <div class="method">
+                  <a name="get_subscription-instance_method"></a>
+                  <h4>
+                    <code>get_subscription</code>
+                    <span>
+                      <a href="#get_subscription-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#subscription-instance_method">subscription</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="find_subscription-instance_method"></a>
-
-                <h4>
-                  <code>find_subscription</code>
-                  <span>
-                    <a href="#find_subscription-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Retrieves subscription by name.</p>
-
+              
+                <div class="method">
+                  <a name="find_subscription-instance_method"></a>
+                  <h4>
+                    <code>find_subscription</code>
+                    <span>
+                      <a href="#find_subscription-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#subscription-instance_method">subscription</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="subscriptions-instance_method"></a>
+              
+                <div class="method">
+                  <a name="subscriptions-instance_method"></a>
+                  <h4>
+                    <code>subscriptions(prefix: nil, token: nil, max: nil)</code>
+                    <span>
+                      <a href="#subscriptions-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>subscriptions(prefix: nil, token: nil, max: nil)</code>
-                  <span>
-                    <a href="#subscriptions-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieves a list of subscriptions for the given project.</p>
+                    <p>Retrieves a list of subscriptions for the given project.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-subscriptions-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-subscriptions-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>prefix</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Filter results to subscriptions whose names begin
+with this prefix.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>token</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A previously-returned page token representing part
+of the larger set of results to view.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>max</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Maximum number of subscriptions to return.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-subscriptions-label-Returns">
+                        Returns
+                        <span><a href="#method-i-subscriptions-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Array&lt;<span class='object_link'><a href="Subscription.html" title="Gcloud::Pubsub::Subscription (class)">Gcloud::Pubsub::Subscription</a></span>&gt;</tt>)
+                        
+                          <div class='inline'><p>(See
+<span class='object_link'><a href="Subscription/List.html" title="Gcloud::Pubsub::Subscription::List (class)">Subscription::List</a></span>)</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-subscriptions-label-Examples">
+                        Examples
+                        <span><a href="#method-i-subscriptions-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_subscriptions'>subscriptions</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscriptions'>subscriptions</span>
+<span class='id identifier rubyid_subscriptions'>subscriptions</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_subscription'>subscription</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_subscription'>subscription</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>With pagination: (See <span class='object_link'><a href="Subscription/List.html#token-instance_method" title="Gcloud::Pubsub::Subscription::List#token (method)">Subscription::List#token</a></span>)</p>
+</div></p>
+                        
+                        <pre class="code"><code>
+<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+
+<span class='id identifier rubyid_all_subs'>all_subs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_tmp_subs'>tmp_subs</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscriptions'>subscriptions</span>
+<span class='kw'>while</span> <span class='id identifier rubyid_tmp_subs'>tmp_subs</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_tmp_subs'>tmp_subs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_subscription'>subscription</span><span class='op'>|</span>
+    <span class='id identifier rubyid_all_subs'>all_subs</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_subscription'>subscription</span>
+  <span class='kw'>end</span>
+  <span class='comment'># break loop if no more subscriptions available
+</span>  <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_tmp_subs'>tmp_subs</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='comment'># get the next group of subscriptions
+</span>  <span class='id identifier rubyid_tmp_subs'>tmp_subs</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscriptions'>subscriptions</span> <span class='label'>token:</span> <span class='id identifier rubyid_tmp_subs'>tmp_subs</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#find_subscriptions-instance_method'>find_subscriptions</a>, <a href='#list_subscriptions-instance_method'>list_subscriptions</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="find_subscriptions-instance_method"></a>
-
-                <h4>
-                  <code>find_subscriptions</code>
-                  <span>
-                    <a href="#find_subscriptions-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Retrieves a list of subscriptions for the given project.</p>
-
+              
+                <div class="method">
+                  <a name="find_subscriptions-instance_method"></a>
+                  <h4>
+                    <code>find_subscriptions</code>
+                    <span>
+                      <a href="#find_subscriptions-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#subscriptions-instance_method">subscriptions</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="list_subscriptions-instance_method"></a>
-
-                <h4>
-                  <code>list_subscriptions</code>
-                  <span>
-                    <a href="#list_subscriptions-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
-
-                <div class="method-description">
-                  <p>Retrieves a list of subscriptions for the given project.</p>
-
+              
+                <div class="method">
+                  <a name="list_subscriptions-instance_method"></a>
+                  <h4>
+                    <code>list_subscriptions</code>
+                    <span>
+                      <a href="#list_subscriptions-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#subscriptions-instance_method">subscriptions</a>
+                    </div>
+                  
                 </div>
-              </div>
+              
             
           </div>
         
@@ -499,81 +1364,7 @@ will be created if the topic does previously not exist and the
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta">
-          <div id="doc-build-date">
-            Docs built on Jan 08, 2016.
-          </div>
-        </div>
-
-        <ul>
-          <h4 class="list-item--heading">Getting Started</h4>
-          <li class="toc-l0"><a class="reference internal current" href="/gcloud-ruby/docs/master/index.html">Overview</a></li>
-
-            <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/AUTHENTICATION.html">Authentication Guide</a></li>
-
-        </ul>
-
-        <ul>
-          <h4 class="list-item--heading">API</h4>
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud.html">
-                  Gcloud
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Bigquery.html">
-                  BigQuery
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Datastore.html">
-                  Datastore
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Dns.html">
-                  DNS
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Pubsub.html">
-                  Pub/Sub
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/ResourceManager.html">
-                  Resource Manager
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Search.html">
-                  Search
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Storage.html">
-                  Storage
-                </a>
-              </li>
-
-
-          <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/reference.html">API Reference</a></li>
-        </ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 05, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l1'><a class='reference internal current' href=''>Project</a></li><li class='toc-l1'><a class='reference internal' href='Topic.html'>Topic</a></li><li class='toc-l1'><a class='reference internal' href='Subscription.html'>Subscription</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

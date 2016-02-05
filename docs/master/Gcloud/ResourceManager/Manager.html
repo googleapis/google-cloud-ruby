@@ -125,55 +125,247 @@
 
           <div class="methods">
             
-              <div class="method">
-                <a name="projects-instance_method"></a>
+              
+                <div class="method">
+                  <a name="projects-instance_method"></a>
+                  <h4>
+                    <code>projects(filter: nil, token: nil, max: nil)</code>
+                    <span>
+                      <a href="#projects-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>projects(filter: nil, token: nil, max: nil)</code>
-                  <span>
-                    <a href="#projects-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieves the projects that are visible to the user and satisfy the
+                    <p>Retrieves the projects that are visible to the user and satisfy the
 specified filter. This method returns projects in an unspecified order.
 New projects do not necessarily appear at the end of the list.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-projects-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-projects-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>filter</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>An expression for filtering the results of the
+request. Filter rules are case insensitive.</p>
+
+<p>The fields eligible for filtering are:
+* <code class="highlighter-rouge">name</code>
+* <code class="highlighter-rouge">id</code>
+* <code class="highlighter-rouge">labels.key</code> - where <code class="highlighter-rouge">key</code> is the name of a label</p>
+
+<p>Some examples of using labels as filters:
+* <code class="highlighter-rouge">name:*</code> - The project has a name.
+* <code class="highlighter-rouge">name:Howl</code> - The project’s name is Howl or howl.
+* <code class="highlighter-rouge">name:HOWL</code> - Equivalent to above.
+* <code class="highlighter-rouge">NAME:howl</code> - Equivalent to above.
+* <code class="highlighter-rouge">labels.color:*</code> - The project has the label color.
+* <code class="highlighter-rouge">labels.color:red</code> - The project’s label color has the value red.
+* <code>labels.color:red labels.size:big</code> - The project’s label
+  color has the value red and its label size has the value big.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>token</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A previously-returned page token representing part
+of the larger set of results to view.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>max</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Maximum number of projects to return.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-projects-label-Returns">
+                        Returns
+                        <span><a href="#method-i-projects-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Array&lt;<span class='object_link'><a href="Project.html" title="Gcloud::ResourceManager::Project (class)">Gcloud::ResourceManager::Project</a></span>&gt;</tt>)
+                        
+                          <div class='inline'><p>(See
+<span class='object_link'><a href="Project/List.html" title="Gcloud::ResourceManager::Project::List (class)">Project::List</a></span>)</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-projects-label-Examples">
+                        Examples
+                        <span><a href="#method-i-projects-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_resource_manager'>resource_manager</span>
+<span class='id identifier rubyid_projects'>projects</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_projects'>projects</span>
+<span class='id identifier rubyid_projects'>projects</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_project'>project</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Projects can be filtered using the <code class="highlighter-rouge">filter</code> option:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_resource_manager'>resource_manager</span>
+<span class='id identifier rubyid_projects'>projects</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_projects'>projects</span> <span class='label'>filter:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>labels.env:production</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_projects'>projects</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_project'>project</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>With pagination: (See <span class='object_link'><a href="Project/List.html" title="Gcloud::ResourceManager::Project::List (class)">Project::List</a></span>)</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_resource_manager'>resource_manager</span>
+<span class='id identifier rubyid_projects'>projects</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_projects'>projects</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+<span class='id identifier rubyid_projects'>projects</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_project'>project</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="project-instance_method"></a>
+              
+                <div class="method">
+                  <a name="project-instance_method"></a>
+                  <h4>
+                    <code>project(project_id)</code>
+                    <span>
+                      <a href="#project-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>project(project_id)</code>
-                  <span>
-                    <a href="#project-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Retrieves the project identified by the specified <code class="highlighter-rouge">project_id</code>.</p>
+                    <p>Retrieves the project identified by the specified <code class="highlighter-rouge">project_id</code>.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-project-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-project-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project_id</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The ID of the project.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-project-label-Returns">
+                        Returns
+                        <span><a href="#method-i-project-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Project.html" title="Gcloud::ResourceManager::Project (class)">Gcloud::ResourceManager::Project</a></span></tt>, <tt>nil</tt>)
+                        
+                          <div class='inline'><p>Returns <code class="highlighter-rouge">nil</code> if the
+project does not exist</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-project-label-Examples">
+                        Example
+                        <span><a href="#method-i-project-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_resource_manager'>resource_manager</span>
+<span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='comment'>#=&gt; &quot;tokyo-rain-123&quot;</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="create_project-instance_method"></a>
+              
+                <div class="method">
+                  <a name="create_project-instance_method"></a>
+                  <h4>
+                    <code>create_project(project_id, name: nil, labels: nil)</code>
+                    <span>
+                      <a href="#create_project-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>create_project(project_id, name: nil, labels: nil)</code>
-                  <span>
-                    <a href="#create_project-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Creates a project resource.</p>
+                    <p>Creates a project resource.</p>
 
 <p>Initially, the project resource is owned by its creator exclusively. The
 creator can later grant permission to others to read or update the
@@ -182,22 +374,130 @@ project.</p>
 <p>Several APIs are activated automatically for the project, including
 Google Cloud Storage.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-create_project-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-create_project-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project_id</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The unique, user-assigned ID of the project.
+It must be 6 to 30 lowercase letters, digits, or hyphens. It must
+start with a letter. Trailing hyphens are prohibited.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The user-assigned name of the project. This field
+is optional and can remain unset.</p>
+
+<p>Allowed characters are: lowercase and uppercase letters, numbers,
+hyphen, single-quote, double-quote, space, and exclamation point.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>labels</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The labels associated with this project.</p>
+
+<p>Label keys must be between 1 and 63 characters long and must conform
+to the following regular expression:
+<code>[a-z]([-a-z0-9]*[a-z0-9])?</code>.</p>
+
+<p>Label values must be between 0 and 63 characters long and must conform
+to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.</p>
+
+<p>No more than 256 labels can be associated with a given resource.</p>
+</div>
+                              
+                              (<tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-create_project-label-Returns">
+                        Returns
+                        <span><a href="#method-i-create_project-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Project.html" title="Gcloud::ResourceManager::Project (class)">Gcloud::ResourceManager::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-create_project-label-Examples">
+                        Examples
+                        <span><a href="#method-i-create_project-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_resource_manager'>resource_manager</span>
+<span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_create_project'>create_project</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>A project can also be created with a <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">labels</code>:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_resource_manager'>resource_manager</span>
+<span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_create_project'>create_project</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                                          <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Todos Development</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                                          <span class='label'>labels:</span> <span class='lbrace'>{</span><span class='label'>env:</span> <span class='symbol'>:development</span><span class='rbrace'>}</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="delete-instance_method"></a>
+              
+                <div class="method">
+                  <a name="delete-instance_method"></a>
+                  <h4>
+                    <code>delete(project_id)</code>
+                    <span>
+                      <a href="#delete-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>delete(project_id)</code>
-                  <span>
-                    <a href="#delete-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Marks the project for deletion. This method will only affect the project
+                    <p>Marks the project for deletion. This method will only affect the project
 if the following criteria are met:</p>
 
 <ul>
@@ -217,30 +517,121 @@ Manager#project and Manager#projects methods.</p>
 
 <p>The caller must have modify permissions for this project.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-delete-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-delete-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project_id</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The ID of the project.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-delete-label-Examples">
+                        Example
+                        <span><a href="#method-i-delete-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_resource_manager'>resource_manager</span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
-              <div class="method">
-                <a name="undelete-instance_method"></a>
+              
+                <div class="method">
+                  <a name="undelete-instance_method"></a>
+                  <h4>
+                    <code>undelete(project_id)</code>
+                    <span>
+                      <a href="#undelete-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
 
-                <h4>
-                  <code>undelete(project_id)</code>
-                  <span>
-                    <a href="#undelete-instance_method">&para;</a>
-                    <a href="#top">&uarr;</a>
-                  </span>
-                </h4>
+                  <div class="method-description">
 
-                <div class="method-description">
-                  <p>Restores the project. You can only use this method for a project that
+                    <p>Restores the project. You can only use this method for a project that
 has a lifecycle state of <code class="highlighter-rouge">DELETE_REQUESTED</code>. After deletion starts, as
 indicated by a lifecycle state of <code class="highlighter-rouge">DELETE_IN_PROGRESS</code>, the project
 cannot be restored.</p>
 
 <p>The caller must have modify permissions for this project.</p>
 
+
+                    
+
+                    
+                      <h3 id="method-i-undelete-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-undelete-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project_id</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The ID of the project.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-undelete-label-Examples">
+                        Example
+                        <span><a href="#method-i-undelete-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_resource_manager'>resource_manager</span>
+<span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_undelete'>undelete</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
                 </div>
-              </div>
+              
             
           </div>
         
@@ -248,81 +639,7 @@ cannot be restored.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta">
-          <div id="doc-build-date">
-            Docs built on Jan 08, 2016.
-          </div>
-        </div>
-
-        <ul>
-          <h4 class="list-item--heading">Getting Started</h4>
-          <li class="toc-l0"><a class="reference internal current" href="/gcloud-ruby/docs/master/index.html">Overview</a></li>
-
-            <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/AUTHENTICATION.html">Authentication Guide</a></li>
-
-        </ul>
-
-        <ul>
-          <h4 class="list-item--heading">API</h4>
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud.html">
-                  Gcloud
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Bigquery.html">
-                  BigQuery
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Datastore.html">
-                  Datastore
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Dns.html">
-                  DNS
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Pubsub.html">
-                  Pub/Sub
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/ResourceManager.html">
-                  Resource Manager
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Search.html">
-                  Search
-                </a>
-              </li>
-
-
-              <li class="toc-l0">
-                <a class="reference internal" href="/gcloud-ruby/docs/master/Gcloud/Storage.html">
-                  Storage
-                </a>
-              </li>
-
-
-          <li class="toc-l0"><a class="reference internal" href="/gcloud-ruby/docs/master/reference.html">API Reference</a></li>
-        </ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 05, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l1'><a class='reference internal current' href=''>Manager</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
