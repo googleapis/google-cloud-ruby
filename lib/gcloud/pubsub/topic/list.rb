@@ -24,7 +24,7 @@ module Gcloud
         ##
         # If not empty, indicates that there are more topics
         # that match the request and this value should be passed to
-        # the next {Gcloud::PubSub::Project#topics} to continue.
+        # the next {Gcloud::Pubsub::Project#topics} to continue.
         attr_accessor :token
 
         ##
