@@ -22,10 +22,12 @@ module Gcloud
   # Upload allows users to configure how files are uploaded to the Google Cloud
   # Service APIs.
   #
+  # @example
   #   require "gcloud/upload"
   #
   #   # Set the default threshold to 10 MiB.
   #   Gcloud::Upload.resumable_threshold = 10_000_000
+  #
   module Upload
     ##
     # Retrieve resumable threshold.
