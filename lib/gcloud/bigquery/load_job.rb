@@ -50,18 +50,14 @@ module Gcloud
       # The delimiter used between fields in the source data. The default is a
       # comma (,).
       def delimiter
-        val = config["load"]["fieldDelimiter"]
-        val = "," if val.nil?
-        val
+        config["load"]["fieldDelimiter"] || ","
       end
 
       ##
       # The number of header rows at the top of a CSV file to skip. The default
       # value is +0+.
       def skip_leading_rows
-        val = config["load"]["skipLeadingRows"]
-        val = 0 if val.nil?
-        val
+        config["load"]["skipLeadingRows"] || 0
       end
 
       ##
