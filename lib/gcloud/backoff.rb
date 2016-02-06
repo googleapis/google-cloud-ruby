@@ -23,9 +23,11 @@ module Gcloud
   # retry will be delayed one second, the second retry will be delayed
   # two seconds, and so on.
   #
+  # @example
   #   require "gcloud/backoff"
   #
   #   Gcloud::Backoff.retries = 5 # Set a maximum of five retries per call
+  #
   class Backoff
     class << self
       ##
