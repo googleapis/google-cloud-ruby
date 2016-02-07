@@ -426,7 +426,7 @@ module Gcloud
         def validate_special_group value #:nodoc:
           good_value = GROUPS[value.to_s]
           return good_value unless good_value.nil?
-          scope
+          value
         end
 
         def validate_view view #:nodoc:
