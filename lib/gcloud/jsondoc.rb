@@ -70,8 +70,8 @@ module Gcloud
           json.description md(object.docstring.to_s, true)
           json.source object.files.first.join("#L")
           json.resources object.docstring.tags(:see) do |t|
-            json.href t.name
             json.title md(t.text)
+            json.link t.name
           end
           json.examples object.docstring.tags(:example) do |t|
             json.caption md(t.name)
