@@ -436,7 +436,6 @@ module Gcloud
       #   jobs = bigquery.jobs
       #
       # @example Retrieve only running jobs using the `:filter` option:
-      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -445,7 +444,6 @@ module Gcloud
       #   running_jobs = bigquery.jobs filter: "running"
       #
       # @example With pagination: (See {Job::List#token})
-      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

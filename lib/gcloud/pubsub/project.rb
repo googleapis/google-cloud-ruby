@@ -446,7 +446,6 @@ module Gcloud
       #   end
       #
       # @example With pagination: (See {Subscription::List#token})
-      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

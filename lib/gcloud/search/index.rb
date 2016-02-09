@@ -215,7 +215,6 @@ module Gcloud
       #   document.rank #=> nil
       #
       # @example To check if an index already contains a document:
-      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -255,7 +254,6 @@ module Gcloud
       #   end
       #
       # @example With pagination: (See {Gcloud::Search::Document::List})
-      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -480,7 +478,6 @@ module Gcloud
       #   end
       #
       # @example With pagination: (See {Gcloud::Search::Result::List})
-      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -507,7 +504,6 @@ module Gcloud
       #   documents = index.search query # API call
       #
       # @example With the `fields` option:
-      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -519,7 +515,6 @@ module Gcloud
       #                          fields: ["name", "total_price", "highlight"]
       #
       # @example Just as in documents, data is accessible via {Fields} methods:
-      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

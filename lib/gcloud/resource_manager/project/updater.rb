@@ -25,6 +25,7 @@ module Gcloud
       # This object is used by Project#update when passed a block. These methods
       # are used to update the project data in a single API call.
       #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

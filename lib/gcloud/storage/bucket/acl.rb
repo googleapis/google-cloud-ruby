@@ -453,6 +453,7 @@ module Gcloud
       #
       # Represents a Bucket's Default Access Control List.
       #
+      # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
