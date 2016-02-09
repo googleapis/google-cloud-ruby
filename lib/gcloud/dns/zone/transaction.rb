@@ -149,6 +149,8 @@ module Gcloud
         # @param [String] type The identifier of a [supported record
         #   type](https://cloud.google.com/dns/what-is-cloud-dns).
         #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
+        # @yield [record] a block yielding each matching record
+        # @yieldparam [Record] record the record to be modified
         #
         # @example
         #   require "gcloud"

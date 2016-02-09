@@ -96,6 +96,9 @@ module Gcloud
       # @see https://cloud.google.com/storage/docs/cross-origin Cross-Origin
       #   Resource Sharing (CORS)
       #
+      # @yield [cors] a block for setting CORS rules
+      # @yieldparam [Bucket::Cors] cors the object accepting CORS rules
+      #
       # @example Retrieving the bucket's CORS rules.
       #   require "gcloud"
       #
@@ -279,6 +282,8 @@ module Gcloud
       # {#website_main=}, and {#website_404=}. In addition, the #cors
       # configuration accessible in the block is completely mutable and will be
       # included in the request. (See {Bucket::Cors})
+      #
+      # @yield [bucket] a block yielding a delegate object for updating the file
       #
       # @example
       #   require "gcloud"

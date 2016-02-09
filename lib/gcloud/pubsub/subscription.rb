@@ -289,6 +289,8 @@ module Gcloud
       # @param [Number] delay The number of seconds to pause between requests
       #   when the Google Cloud service has no messages to return. The default
       #   value is `1`.
+      # @yield [msg] a block for processing new messages
+      # @yieldparam [ReceivedMessage] msg the newly received message
       #
       # @example
       #   require "gcloud"

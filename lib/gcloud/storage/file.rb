@@ -252,6 +252,8 @@ module Gcloud
       # {#content_type=}, and {#metadata=}. The {#metadata} hash accessible in
       # the block is completely mutable and will be included in the request.
       #
+      # @yield [file] a block yielding a delegate object for updating the file
+      #
       # @example
       #   require "gcloud"
       #
