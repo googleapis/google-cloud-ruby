@@ -584,6 +584,7 @@ module Gcloud
       # for [this gzip
       # issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367).
       #
+      # @example
       #   require "gcloud"
       #
       #   # Use httpclient to avoid broken pipe errors with large uploads

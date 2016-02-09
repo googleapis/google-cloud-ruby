@@ -122,7 +122,6 @@ module Gcloud
       #   puts sub.name # => "my-topic-sub"
       #
       # @example The name is optional, and will be generated if not given:
-      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -133,7 +132,6 @@ module Gcloud
       #   puts sub.name # => "generated-sub-name"
       #
       # @example Wait 2 minutes for acknowledgement and push all to an endpoint:
-      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -225,7 +223,6 @@ module Gcloud
       #   end
       #
       # @example With pagination: (See {Subscription::List#token})
-      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -277,7 +274,6 @@ module Gcloud
       #   msg = topic.publish "new-message"
       #
       # @example Additionally, a message can be published with attributes:
-      #
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

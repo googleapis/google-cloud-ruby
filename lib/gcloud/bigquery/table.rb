@@ -682,7 +682,6 @@ module Gcloud
       #   load_job = table.load "gs://my-bucket/file-name.csv"
       #
       # @example Pass a gcloud storage file instance:
-      #
       #   require "gcloud"
       #   require "gcloud/storage"
       #
@@ -720,6 +719,7 @@ module Gcloud
       # of Faraday at or above 0.9.2, is a workaround for [this gzip
       # issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367).
       #
+      # @example
       #   require "gcloud"
       #
       #   # Use httpclient to avoid broken pipe errors with large uploads

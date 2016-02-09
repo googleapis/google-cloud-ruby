@@ -25,6 +25,7 @@ module Gcloud
     #
     # Provides methods for creating, retrieving, and updating projects.
     #
+    # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
