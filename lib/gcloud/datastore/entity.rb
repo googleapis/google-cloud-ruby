@@ -222,6 +222,14 @@ module Gcloud
       # `"b"` should be indexed (meaning that `"a"`' should be excluded), you
       # should pass the array: `[true, false]`.
       #
+      # @param [String] name the property name
+      # @param [Boolean, Array<Boolean>, nil] flag whether the value or values
+      #   should be excluded from indexing
+      # @yield [value] a block yielding each value of the property
+      # @yieldparam [Object] value a value of the property
+      # @yieldreturn [Boolean] `true` if the value should be excluded from
+      #   indexing
+      #
       # @see https://cloud.google.com/datastore/docs/concepts/indexes#Datastore_Unindexed_properties
       #   Unindexed properties
       #

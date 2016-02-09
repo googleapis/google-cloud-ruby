@@ -305,6 +305,8 @@ module Gcloud
       #   `false`, the fields will be added to the existing schema. When a table
       #   already contains data, schema changes must be additive. Thus, the
       #   default value is `false`.
+      # @yield [schema] a block for setting the schema
+      # @yieldparam [Table::Schema] schema the object accepting the schema
       #
       # @example
       #   require "gcloud"

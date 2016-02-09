@@ -167,6 +167,9 @@ module Gcloud
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        # @yield [nested_schema] a block for setting the nested schema
+        # @yieldparam [Table::Schema] nested_schema the object accepting the
+        #   nested schema
         #
         # @example
         #   require "gcloud"

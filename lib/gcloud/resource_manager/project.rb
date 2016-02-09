@@ -115,6 +115,9 @@ module Gcloud
       # No more than 256 labels can be associated with a given resource.
       # (`Hash`)
       #
+      # @yield [labels] a block for setting labels
+      # @yieldparam [Hash] labels the hash accepting labels
+      #
       # @example Labels are read-only and cannot be changed:
       #   require "gcloud"
       #
@@ -233,6 +236,10 @@ module Gcloud
 
       ##
       # Updates the project in a single API call. See {Project::Updater}
+      #
+      # @yield [project] a block yielding a project delegate
+      # @yieldparam [Project::Updater] project the delegate object for updating
+      #   the project
       #
       # @example
       #   require "gcloud"

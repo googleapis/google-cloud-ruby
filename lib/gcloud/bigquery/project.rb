@@ -265,6 +265,8 @@ module Gcloud
       #   [BigQuery Access
       #   Control](https://cloud.google.com/bigquery/access-control) for more
       #   information.
+      # @yield [access] a block for setting rules
+      # @yieldparam [Dataset::Access] access the object accepting rules
       #
       # @return [Gcloud::Bigquery::Dataset]
       #

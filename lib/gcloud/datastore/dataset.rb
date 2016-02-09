@@ -233,6 +233,9 @@ module Gcloud
       ##
       # Creates a Datastore Transaction.
       #
+      # @yield [tx] a block yielding a new transaction
+      # @yieldparam [Transaction] tx the transaction object
+      #
       # @example Runs the given block in a database transaction:
       #   require "gcloud"
       #
@@ -337,6 +340,8 @@ module Gcloud
       #   value. This is optional.
       # @param [Integer, String, nil] id_or_name The Key's `id` or `name` value
       #   if a `kind` was provided in the first parameter.
+      # @yield [entity] a block yielding a new entity
+      # @yieldparam [Entity] entity the newly created entity object
       #
       # @return [Gcloud::Datastore::Entity]
       #

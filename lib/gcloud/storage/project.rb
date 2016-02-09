@@ -265,6 +265,8 @@ module Gcloud
       #   does not exist. For more information, see [How to Host a Static
       #   Website
       #   ](https://cloud.google.com/storage/docs/website-configuration#step4).
+      # @yield [cors] a block for setting CORS rules
+      # @yieldparam [Bucket::Cors] cors the object accepting CORS rules
       #
       # @return [Gcloud::Storage::Bucket]
       #

@@ -242,6 +242,8 @@ module Gcloud
       # @param [Hash] attributes Optional attributes for the message.
       # @option attributes [Boolean] :autocreate Flag to control whether the
       #   provided topic will be created if it does not exist.
+      # @yield [batch] a block for publishing multiple messages in one request
+      # @yieldparam [Topic::Batch] batch the batch object
       #
       # @return [Message, Array<Message>] Returns the published message when
       #   called without a block, or an array of messages when called with a

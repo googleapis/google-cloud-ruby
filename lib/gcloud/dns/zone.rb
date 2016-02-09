@@ -465,6 +465,8 @@ module Gcloud
       #   serial number.
       # @param [Integer, lambda, Proc] soa_serial A value (or a lambda or Proc
       #   returning a value) for the new SOA record serial number.
+      # @yield [tx] a block yielding a new transaction
+      # @yieldparam [Zone::Transaction] tx the transaction object
       #
       # @return [Gcloud::Dns::Change]
       #
@@ -674,6 +676,8 @@ module Gcloud
       # @param [Integer+, lambda, Proc] soa_serial A value (or a lambda or Proc
       #   returning a value) for the new SOA record serial number. See {#update}
       #   for details.
+      # @yield [record] a block yielding each matching record
+      # @yieldparam [Record] record the record to be modified
       #
       # @return [Gcloud::Dns::Change]
       #

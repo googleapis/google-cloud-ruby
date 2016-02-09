@@ -203,6 +203,9 @@ module Gcloud
       # @see https://cloud.google.com/bigquery/access-control BigQuery Access
       #   Control
       #
+      # @yield [access] a block for setting rules
+      # @yieldparam [Dataset::Access] access the object accepting rules
+      #
       # @example
       #   require "gcloud"
       #
@@ -322,6 +325,8 @@ module Gcloud
       #   this hash, see the [Tables resource
       #   ](https://cloud.google.com/bigquery/docs/reference/v2/tables#resource)
       #   .
+      # @yield [schema] a block for setting the schema
+      # @yieldparam [Table::Schema] schema the object accepting the schema
       #
       # @return [Gcloud::Bigquery::Table]
       #
