@@ -37,12 +37,36 @@ module Gcloud
 
 
     class CodeObject
+
+      include YARD::Templates::Helpers::HtmlHelper
+
       attr_reader :name, :jbuilder, :code
 
       def initialize code
         @code = code
         @name = @code.name.to_s.downcase
         build
+      end
+
+      # API expected by HtmlHelper
+      def object
+        code
+      end
+
+      # API expected by HtmlHelper; overrides BaseHelper#linkify (not included)
+      def linkify(name, title)
+        code_obj = YARD::Registry.resolve code.namespace, name, true
+        path = if code_obj.nil?
+                 name
+               else
+                 parts = code_obj.path.split "::"
+                 parts.shift if parts.first == "Gcloud"
+                 parts.map(&:downcase).join("/")
+               end
+        link = "<a data-custom-type=\"#{path}\">#{title || name}</a>"
+        puts "linkify: #{name}, code_obj: #{code_obj.inspect}"
+        puts link
+        link
       end
 
       def filepath
@@ -155,6 +179,9 @@ module Gcloud
                                        syntax_highlighter: "rouge",
                                        syntax_highlighter_opts: {css_class: "ruby"}).to_html.strip
         html = unwrap_paragraph(html) unless multi_paragraph
+        if html
+          html = resolve_links(html)
+        end
         html
       end
 
