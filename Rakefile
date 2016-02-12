@@ -1,6 +1,7 @@
 require "bundler/gem_tasks"
 require "rake/testtask"
 require "gcloud/jsondoc"
+require "pathname"
 
 Rake::TestTask.new(:test) do |t|
   t.libs << "test"
@@ -14,6 +15,14 @@ desc "Generates JSON output from gcloud-ruby .yardoc"
 task :gcloud do
   registry = YARD::Registry.load! "../gcloud-ruby/.yardoc"
   builder = Gcloud::Jsondoc.new registry
-  json = builder.docs.target!
-  File.open("docs/examples/gcloud-docs.json", 'w'){|f| f.write json}
+  FileUtils.mkdir_p "json"
+  builder.docs.each do |doc|
+    json = doc.jbuilder.target!
+    json_path = "json/master/"
+    json_path += doc.filepath
+    dirname = Pathname.new(json_path).dirname
+    puts json_path
+    FileUtils.mkdir_p(dirname)
+    File.write json_path, json
+  end
 end
