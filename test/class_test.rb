@@ -1,12 +1,11 @@
 require 'test_helper'
 
-describe Gcloud::Jsondoc, :class do
-
+describe Gcloud::Jsondoc, :jsondoc_spec, :class do
 
   before do
     registry = YARD::Registry.load(["test/fixtures/**/*.rb"], true)
-    @builder = Gcloud::Jsondoc.new registry
-    @docs = @builder.docs[2].jbuilder.attributes! # docs[0] in module_test.rb
+    generator = Gcloud::Jsondoc::Generator.new registry
+    @docs = generator.docs[2].jbuilder.attributes! # docs[0] in module_test.rb
   end
 
   it "must have attributes at root" do
@@ -27,21 +26,21 @@ describe Gcloud::Jsondoc, :class do
 
     it "can have methods" do
       methods = @docs["methods"]
-      methods.size.must_equal 1
+      methods.size.must_equal 2
     end
 
     describe "when a class has a method" do
       it "must have metadata" do
         metadata = @docs["methods"][0]["metadata"]
         metadata["name"].must_equal "example_instance_method"
-        metadata["description"].must_equal "<p>Accepts many arguments for testing this library. Also accepts a block if a block is given.</p>  <p>Do not call this method until you have read all of its documentation.</p>"
+        metadata["description"].must_equal "<p>Accepts many arguments for testing this library. Has no relation to <a data-custom-type=\"mymodule/myclass#other_instance_method\">#other_instance_method</a>. Also accepts a block if a block is given.</p>  <p>Do not call this method until you have read all of its documentation.</p>"
         metadata["source"].must_equal "test/fixtures/my_module/my_class.rb#L50"
       end
 
       it "must have metadata examples" do
         metadata = @docs["methods"][0]["metadata"]
         metadata["examples"].size.must_equal 2
-        metadata["examples"][0]["caption"].must_equal "You can pass a block."
+        metadata["examples"][0]["caption"].must_equal "<p>You can pass a block.</p>"
         metadata["examples"][0]["code"].must_equal "my_class = MyClass.new\nmy_class.example_instance_method times: 5 do |my_config|\n  my_config.limit = 5\n  true\nend"
       end
 

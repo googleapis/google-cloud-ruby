@@ -13,10 +13,11 @@ task :default => :test
 
 desc "Generates JSON output from gcloud-ruby .yardoc"
 task :gcloud do
+  puts "If no output follows, verify data at: ../gcloud-ruby/.yardoc"
   registry = YARD::Registry.load! "../gcloud-ruby/.yardoc"
-  builder = Gcloud::Jsondoc.new registry
+  generator = Gcloud::Jsondoc::Generator.new registry
   FileUtils.mkdir_p "json"
-  builder.docs.each do |doc|
+  generator.docs.each do |doc|
     json = doc.jbuilder.target!
     json_path = "json/master/"
     json_path += doc.filepath

@@ -7,8 +7,8 @@ module MyModule
     end
 
     ##
-    # Accepts many arguments for testing this library. Also accepts a block if a
-    # block is given.
+    # Accepts many arguments for testing this library. Has no relation to
+    # {#other_instance_method}. Also accepts a block if a block is given.
     #
     # Do not call this method until you have read all of its documentation.
     #
@@ -55,6 +55,17 @@ module MyModule
       end
     end
     alias_method :alias_instance_method, :example_instance_method
+
+    ##
+    # Returns length of `str.to_s`.
+    #
+    # @param [String, Object] str any value
+    #
+    # @return [Integer] the length of the string from `to_s`
+    #
+    def other_instance_method str
+      str.to_s.length
+    end
   end
 
   class MyConfig

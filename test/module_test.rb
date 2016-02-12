@@ -2,11 +2,10 @@ require 'test_helper'
 
 describe Gcloud::Jsondoc, :module do
 
-
   before do
     registry = YARD::Registry.load(["test/fixtures/**/*.rb"], true)
-    @builder = Gcloud::Jsondoc.new registry
-    @docs = @builder.docs[0].jbuilder.attributes! # docs[2] in class_test.rb
+    generator = Gcloud::Jsondoc::Generator.new registry
+    @docs = generator.docs[0].jbuilder.attributes! # docs[2] in class_test.rb
   end
 
   it "must have attributes at root" do
@@ -46,7 +45,7 @@ describe Gcloud::Jsondoc, :module do
     it "must have metadata examples" do
       metadata = @docs["methods"][0]["metadata"]
       metadata["examples"].size.must_equal 1
-      metadata["examples"][0]["caption"].must_equal "You can pass options."
+      metadata["examples"][0]["caption"].must_equal "<p>You can pass options.</p>"
       metadata["examples"][0]["code"].must_equal "return_object = Mymodule.storage \"my name\", opt_in: true do |config|\n  config.more = \"more\"\nend"
     end
 
