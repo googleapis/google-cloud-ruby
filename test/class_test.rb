@@ -33,7 +33,7 @@ describe Gcloud::Jsondoc, :jsondoc_spec, :class do
       it "must have metadata" do
         metadata = @docs["methods"][0]["metadata"]
         metadata["name"].must_equal "example_instance_method"
-        metadata["description"].must_equal "<p>Accepts many arguments for testing this library. Has no relation to <a data-custom-type=\"mymodule/myclass#other_instance_method\">#other_instance_method</a>. Also accepts a block if a block is given.</p>  <p>Do not call this method until you have read all of its documentation.</p>"
+        metadata["description"].must_equal "<p>Accepts many arguments for testing this library. Has no relation to\n<a data-custom-type=\"mymodule/myclass#other_instance_method\">#other_instance_method</a>. Also accepts a block if a block is given.</p>\n\n<p>Do not call this method until you have read all of its documentation.</p>"
         metadata["source"].must_equal "test/fixtures/my_module/my_class.rb#L50"
       end
 
@@ -48,7 +48,7 @@ describe Gcloud::Jsondoc, :jsondoc_spec, :class do
         metadata = @docs["methods"][0]["metadata"]
         metadata["resources"].size.must_equal 1
         metadata["resources"][0]["link"].must_equal "http://ruby-doc.org/core-2.2.0/Proc.html"
-        metadata["resources"][0]["title"].must_equal "Proc objects are blocks of code that have been bound to a set of local variables."
+        metadata["resources"][0]["title"].must_equal "Proc objects are blocks of\ncode that have been bound to a set of local variables."
       end
 
       it "can have params with options hash and keyword args" do
@@ -57,14 +57,14 @@ describe Gcloud::Jsondoc, :jsondoc_spec, :class do
 
         params[0]["name"].must_equal "policy"
         params[0]["types"].must_equal ["String"]
-        params[0]["description"].must_equal "A <em>policy</em> is a deliberate system of principles to guide decisions and achieve rational outcomes.  As defined in <a href=\"https://en.wikipedia.org/wiki/Policy\">policy</a>."
+        params[0]["description"].must_equal "A <em>policy</em> is a deliberate system of principles to\nguide decisions and achieve rational outcomes.  As defined in\n<a href=\"https://en.wikipedia.org/wiki/Policy\">policy</a>."
         params[0]["optional"].must_equal true
         params[0]["default"].must_equal "\"ALWAYS\""
         params[0]["nullable"].must_equal false
 
         params[1]["name"].must_equal "opts"
         params[1]["types"].must_equal ["Hash"]
-        params[1]["description"].must_equal "Optional parameters hash, not to be confused with keyword arguments."
+        params[1]["description"].must_equal "Optional parameters hash, not to be confused with\nkeyword arguments."
         params[1]["optional"].must_equal true
         params[1]["default"].must_equal "{}"
         params[1]["nullable"].must_equal false
@@ -106,7 +106,7 @@ describe Gcloud::Jsondoc, :jsondoc_spec, :class do
 
         params[7]["name"].must_equal "yield.c"
         params[7]["types"].must_equal ["MyConfig"]
-        params[7]["description"].must_equal "A new instance of MyConfig. See <a href=\"https://en.wikipedia.org/wiki/Configuration_management\">configuration</a> for more info."
+        params[7]["description"].must_equal "A new instance of MyConfig. See\n<a href=\"https://en.wikipedia.org/wiki/Configuration_management\">configuration</a>\nfor more info."
         params[7]["optional"].must_equal false
         params[7]["default"].must_be :nil?
         params[7]["nullable"].must_equal false

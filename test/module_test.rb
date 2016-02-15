@@ -23,8 +23,9 @@ describe Gcloud::Jsondoc, :module do
     it "must have service metadata" do
       metadata = @docs["metadata"]
       metadata["name"].must_equal "MyModule"
-      metadata["description"].must_equal "<p>The outermost module in the test fixtures.</p>  <p>This is a Ruby <a href=\"http://docs.ruby-lang.org/en/2.2.0/Module.html\">module</a>.</p>"
-      metadata["source"].must_equal "test/fixtures/my_module.rb#L8"
+      expected = "<p>The outermost module in the test fixtures.</p>\n\n<p>This is a Ruby <a href=\"http://docs.ruby-lang.org/en/2.2.0/Module.html\">module</a>.</p>\n\n<div class=\"highlighter-rouge\"><pre class=\"ruby\"><code><span class=\"nb\">require</span> <span class=\"s2\">\"gcloud\"</span>\n\n<span class=\"n\">gcloud</span> <span class=\"o\">=</span> <span class=\"no\">Gcloud</span><span class=\"p\">.</span><span class=\"nf\">new</span> <span class=\"s2\">\"publicdata\"</span>\n<span class=\"n\">bigquery</span> <span class=\"o\">=</span> <span class=\"n\">gcloud</span><span class=\"p\">.</span><span class=\"nf\">bigquery</span>\n</code></pre>\n</div>\n\n<p>It lists all datasets in the project.</p>"
+      metadata["description"].must_equal expected
+      metadata["source"].must_equal "test/fixtures/my_module.rb#L15"
     end
 
     it "can have methods" do
@@ -38,8 +39,8 @@ describe Gcloud::Jsondoc, :module do
     it "must have metadata" do
       metadata = @docs["methods"][0]["metadata"]
       metadata["name"].must_equal "example_method"
-      metadata["description"].must_equal "<p>Creates a new object for testing this library, as explained in <a href=\"https://en.wikipedia.org/wiki/Software_testing\">this article on testing</a>.</p>  <p>Each call creates a new instance.</p>"
-      metadata["source"].must_equal "test/fixtures/my_module.rb#L38"
+      metadata["description"].must_equal "<p>Creates a new object for testing this library, as explained in <a href=\"https://en.wikipedia.org/wiki/Software_testing\">this\narticle on testing</a>.</p>\n\n<p>Each call creates a new instance.</p>"
+      metadata["source"].must_equal "test/fixtures/my_module.rb#L45"
     end
 
     it "must have metadata examples" do
@@ -61,7 +62,7 @@ describe Gcloud::Jsondoc, :module do
       params.size.must_equal 3
       params[0]["name"].must_equal "personal_name"
       params[0]["types"].must_equal ["String"]
-      params[0]["description"].must_equal "The name, which can be any name as defined by <a href=\"https://en.wikipedia.org/wiki/Personal_name\">this article on names</a>"
+      params[0]["description"].must_equal "The name, which can be any name as defined by <a href=\"https://en.wikipedia.org/wiki/Personal_name\">this\narticle on names</a>"
       params[0]["optional"].must_equal false
       params[0]["default"].must_be :nil?
       params[0]["nullable"].must_equal false
@@ -85,7 +86,7 @@ describe Gcloud::Jsondoc, :module do
       exceptions = @docs["methods"][0]["exceptions"]
       exceptions.size.must_equal 1
       exceptions[0]["type"].must_equal "ArgumentError"
-      exceptions[0]["description"].must_equal "if the name is not a name as defined by <a href=\"https://en.wikipedia.org/wiki/Personal_name\">this article</a>"
+      exceptions[0]["description"].must_equal "if the name is not a name as defined by <a href=\"https://en.wikipedia.org/wiki/Personal_name\">this\narticle</a>"
     end
 
     it "must have returns" do

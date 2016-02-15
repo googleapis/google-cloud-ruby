@@ -11,7 +11,6 @@ module Gcloud
         html = Kramdown::Document.new(s.to_s, input: "GFM", hard_wrap: false,
                                        syntax_highlighter: "rouge",
                                        syntax_highlighter_opts: {css_class: "ruby"}).to_html.strip
-        html = remove_line_breaks(html)
         html = unwrap_paragraph(html) unless multi_paragraph
         html = resolve_links(html) if html # in YARD's HtmlHelper
         html
