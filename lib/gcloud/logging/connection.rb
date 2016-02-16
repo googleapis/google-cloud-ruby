@@ -34,7 +34,8 @@ module Gcloud
         @credentials = credentials
         @client = Google::APIClient.new application_name:    "gcloud-ruby",
                                         application_version: Gcloud::VERSION
-        @client.authorization = @credentials.client
+        # Not going to use Connection anymore, this can be forced to nil.
+        @client.authorization = nil # @credentials.client
         @logging = @client.discovered_api "logging", API_VERSION
       end
 

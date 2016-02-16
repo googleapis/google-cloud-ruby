@@ -15,6 +15,7 @@
 
 require "gcloud/gce"
 require "gcloud/logging/connection"
+require "gcloud/logging/service"
 require "gcloud/logging/credentials"
 require "gcloud/logging/errors"
 require "gcloud/logging/entry"
@@ -45,11 +46,16 @@ module Gcloud
       attr_accessor :connection
 
       ##
+      # @private The gRPC Service object.
+      attr_accessor :service
+
+      ##
       # @private Creates a new Connection instance.
       def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
         @connection = Connection.new project, credentials
+        @service = Service.new project, credentials
       end
 
       # The Logging project connected to.

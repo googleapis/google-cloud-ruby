@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "grpc"
 gem "minitest"
 require "minitest/autorun"
 require "minitest/focus"
@@ -852,9 +853,9 @@ class MockSearch < Minitest::Spec
 end
 
 class MockLogging < Minitest::Spec
-  let(:project) { logging.connection.project }
-  let(:credentials) { logging.connection.credentials }
-  let(:logging) { $gcloud_logging_global ||= Gcloud::Logging::Project.new("test", OpenStruct.new) }
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
+  let(:logging) { $gcloud_logging_global ||= Gcloud::Logging::Project.new(project, credentials) }
 
   def setup
     @connection = Faraday::Adapter::Test::Stubs.new
