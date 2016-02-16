@@ -3,6 +3,7 @@ AllCops:
     - "gcloud.gemspec"
     - "Rakefile"
     - "lib/gcloud/proto/**/*"
+    - "lib/google/**/*"
     - "rakelib/**/*"
     - "acceptance/**/*"
     - "test/**/*"
