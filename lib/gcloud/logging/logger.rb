@@ -18,7 +18,21 @@ module Gcloud
     ##
     # # Logger
     #
-    # A (mostly) API compatible logger for ruby's Logger.
+    # A (mostly) API-compatible logger for ruby's Logger.
+    #
+    # @example
+    #   require "gcloud"
+    #
+    #   gcloud = Gcloud.new
+    #   logging = gcloud.logging
+    #
+    #   resource = logging.resource "gae_app",
+    #                               module_id: "1",
+    #                               version_id: "20150925t173233"
+    #
+    #   logger = logging.logger "my_app_log", resource, env: :production
+    #   logger.info "Job started."
+    #
     class Logger
       ##
       # @private The logging object.

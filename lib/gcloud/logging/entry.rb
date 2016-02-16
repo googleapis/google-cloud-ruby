@@ -24,18 +24,42 @@ module Gcloud
     ##
     # # Entry
     #
-    # An individual entry in a log.
+    # An individual entry in a log. A log is a named collection of entries, each
+    # entry representing a timestamped event. Logs can be produced by Google
+    # Cloud Platform services, by third-party services, or by your applications.
+    # For example, the log `apache-access` is produced by the Apache Web Server,
+    # but the log `compute.googleapis.com/activity_log` is produced by Google
+    # Compute Engine.
+    #
+    # Each log entry is composed of metadata and a payload. The metadata
+    # includes standard information used by Cloud Logging, such as when the
+    # entry was created and where it came from. The payload is the event record,
+    # and it can be a text string or a structure such as a JSON object. A single
+    # log can have entries with different payload types.
+    #
+    # @see https://cloud.google.com/logging/docs/view/logs_index List of Log
+    #   Types
     #
     # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   logging = gcloud.logging
-    #   entry = logging.entries.first
+    #
+    #   entry = logging.entry
+    #   entry.payload = "Job started."
+    #   entry.log_name = "my_app_log"
+    #   entry.resource.type = "gae_app"
+    #   entry.resource.labels[:module_id] = "1"
+    #   entry.resource.labels[:version_id] = "20150925t173233"
+    #
+    #   logging.write_entries entry
     #
     class Entry
       ##
-      # Create an empty Entry object.
+      # Create a new Entry instance. The {#resource} attribute is
+      # pre-populated with a new {Gcloud::Logging::Resource} instance. See also
+      # {Gcloud::Logging::Project#entry}.
       def initialize
         @labels = {}
         @resource = Resource.new
@@ -47,7 +71,7 @@ module Gcloud
       ##
       # The resource name of the log to which this log entry belongs. The format
       # of the name is `projects/<project-id>/logs/<log-id>`. e.g.
-      # `projects/my-projectid/logs/syslog` and
+      # `projects/my-projectid/logs/my_app_log` and
       # `projects/1234567890/logs/library.googleapis.com%2Fbook_log`
       #
       # The log ID part of resource name must be less than 512 characters long

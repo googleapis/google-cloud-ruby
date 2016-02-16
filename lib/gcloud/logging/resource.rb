@@ -18,7 +18,14 @@ module Gcloud
     ##
     # # Resource
     #
-    # Monitored resource that is used by Cloud Logging.
+    # A monitored resource is an abstraction used to characterize many kinds of
+    # objects in your cloud infrastructure, including Google Cloud SQL
+    # databases, Google App Engine apps, Google Compute Engine virtual machine
+    # instances, and so forth. Each of those kinds of objects is described by an
+    # instance of {ResourceDescriptor}.
+    #
+    # For use with {Gcloud::Logging::Entry#resource=} and
+    # {Gcloud::Logging::Project#write_entries}.
     #
     # @example
     #   require "gcloud"
@@ -37,8 +44,7 @@ module Gcloud
       end
 
       ##
-      # The type of a {ResourceDescriptor}
-      #
+      # The type of resource, as represented by a {ResourceDescriptor}.
       attr_accessor :type
 
       ##

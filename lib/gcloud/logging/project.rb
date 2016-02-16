@@ -28,15 +28,18 @@ module Gcloud
     ##
     # # Project
     #
-    # Google Cloud Logging collects and stores logs from applications and
-    # services on the Google Cloud Platform.
+    # Projects are top-level containers in Google Cloud Platform. They store
+    # information about billing and authorized users, and they control access to
+    # Google Cloud Logging resources. Each project has a friendly name and a
+    # unique ID. Projects can be created only in the [Google Developers
+    # Console](https://console.developers.google.com). See {Gcloud#logging}.
     #
     # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   logging = gcloud.logging
-    #   # ...
+    #   entries = logging.entries
     #
     # See Gcloud#logging
     class Project
@@ -52,16 +55,18 @@ module Gcloud
         @service = Service.new project, credentials
       end
 
-      # The Logging project connected to.
+      ##
+      # The ID of the current project.
+      #
+      # @return [String] the Google Cloud project ID
       #
       # @example
       #   require "gcloud"
       #
-      #   gcloud = Gcloud.new "my-todo-project",
-      #                       "/path/to/keyfile.json"
+      #   gcloud = Gcloud.new "my-project", "/path/to/keyfile.json"
       #   logging = gcloud.logging
       #
-      #   logging.project #=> "my-todo-project"
+      #   logging.project #=> "my-project"
       #
       def project
         service.project
@@ -81,11 +86,12 @@ module Gcloud
       # Logging.
       #
       # @param [String, Array] projects One or more project IDs or project
-      #   numbers from which to retrieve log entries.
+      #   numbers from which to retrieve log entries. If `nil`, the ID of the
+      #   receiving project instance will be used.
       # @param [String] filter An [advanced logs
       #   filter](https://cloud.google.com/logging/docs/view/advanced_filters).
       #   The filter is compared against all log entries in the projects
-      #   specified by projectIds. Only entries that match the filter are
+      #   specified by `projects`. Only entries that match the filter are
       #   retrieved. An empty filter matches all log entries.
       # @param [String] order How the results should be sorted. Presently, the
       #   only permitted values are "timestamp" (default) and "timestamp desc".
@@ -102,8 +108,8 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #   entries = logging.entries
-      #   entries.each do |entry|
-      #     puts entry.name
+      #   entries.each do |e|
+      #     puts "#{e.log_name} [#{e.timestamp}] #{e.payload.inspect}"
       #   end
       #
       # @example With pagination: (See {Gcloud::Logging::Entry::List})
@@ -113,8 +119,8 @@ module Gcloud
       #   logging = gcloud.logging
       #   entries = logging.entries
       #   loop do
-      #     entries.each do |entry|
-      #       puts entry.name
+      #     entries.each do |e|
+      #       puts "#{e.log_name} [#{e.timestamp}] #{e.payload.inspect}"
       #     end
       #     break unless entries.next?
       #     entries = entries.next
@@ -132,9 +138,12 @@ module Gcloud
       alias_method :find_entries, :entries
 
       ##
-      # Creates an new Entry object to be populated.
+      # Creates an new Entry instance that may be populated and written to the
+      # Cloud Logging service. The {Entry#resource} attribute is pre-populated
+      # with a new {Gcloud::Logging::Resource} instance. Equivalent to calling
+      # `Gcloud::Logging::Entry.new`.
       #
-      # @return [Gcloud::Logging::Entry]
+      # @return [Gcloud::Logging::Entry] a new Entry instance
       #
       # @example
       #   require "gcloud"
@@ -142,13 +151,9 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #
-      #   new_entry = logging.entry.tap do |e|
-      #     e.log_name = "syslog"
-      #     e.resource.type = "cloudsql_database"
-      #     e.timestamp = Time.now
-      #     e.severity = "INFO"
-      #     e.payload = "Export completed"
-      #   end
+      #   entry = logging.entry
+      #   entry.severity = :INFO
+      #   entry.payload = "Job started."
       #
       #   logging.write_entries entry
       #
@@ -158,11 +163,21 @@ module Gcloud
       alias_method :new_entry, :entry
 
       ##
-      # Lists log entries. Use this method to retrieve log entries from Cloud
-      # Logging.
+      # Writes log entries to the Cloud Logging service.
       #
-      # @param [Gcloud::Logging::Entry, Array] entries One or more entry objects
-      #   to write. The log entries must have values for all required fields.
+      # @param [Gcloud::Logging::Entry, Array<Gcloud::Logging::Entry>] entries
+      #   One or more entry objects to write. The log entries must have values
+      #   for all required fields.
+      # @param [String] log_name A default log ID for those log entries in
+      #   `entries` that do not specify their own `log_name`. See also
+      #   {Entry#log_name=}.
+      # @param [Resource] resource A default monitored resource for those log
+      #   entries in entries that do not specify their own resource. See also
+      #   {Entry#resource}.
+      # @param [Hash{Symbol,String => String}] labels User-defined `key:value`
+      #   items that are added to the `labels` field of each log entry in
+      #   `entries`, except when a log entry specifies its own `key:value` item
+      #   with the same key. See also {Entry#labels=}.
       #
       # @return [Boolean] Returns `true` if the entries were written.
       #
@@ -172,23 +187,35 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #
-      #   new_entry = logging.entry.tap do |e|
-      #     e.log_name = "syslog"
-      #     e.resource.type = "cloudsql_database"
-      #     e.timestamp = Time.now
-      #     e.severity = "INFO"
-      #     e.payload = "Export completed"
-      #   end
+      #   entry = logging.entry
+      #   entry.payload = "Job started."
+      #   entry.log_name = "my_app_log"
+      #   entry.resource.type = "gae_app"
+      #   entry.resource.labels[:module_id] = "1"
+      #   entry.resource.labels[:version_id] = "20150925t173233"
       #
-      #   logging.write_entries new_entry
+      #   logging.write_entries entry
       #
-      # @example You can provide log name for all entries.
+      # @example Optionally pass log name, resource, and labels for all entries.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #
-      #   logging.write_entries [entry1, entry2], log_name: "syslog"
+      #   entry1 = logging.entry
+      #   entry1.payload = "Job started."
+      #   entry2 = logging.entry
+      #   entry2.payload = "Job completed."
+      #   labels = { job_size: "large", job_code: "red" }
+      #
+      #   resource = logging.resource "gae_app",
+      #                               "module_id" => "1",
+      #                               "version_id" => "20150925t173233"
+      #
+      #   logging.write_entries [entry1, entry2],
+      #                         log_name: "my_app_log",
+      #                         resource: resource,
+      #                         labels: labels
       #
       def write_entries entries, log_name: nil, resource: nil, labels: nil
         ensure_service!
@@ -201,7 +228,7 @@ module Gcloud
       end
 
       ##
-      # Creates a logger object that is API compatible with ruby's standard
+      # Creates a logger instance that is API compatible with ruby's standard
       # library Logger.
       #
       # @param [String] log_name A log resource name to be associated with the
@@ -211,7 +238,7 @@ module Gcloud
       # @param [Hash] labels A set of user-defined data to be associated with
       #   written log entries.
       #
-      # @return [Gcloud::Logging::Logger] Logger object that can be used in
+      # @return [Gcloud::Logging::Logger] a Logger object that can be used in
       #   place of a ruby standard library logger object.
       #
       # @example
@@ -224,7 +251,8 @@ module Gcloud
       #                               module_id: "1",
       #                               version_id: "20150925t173233"
       #
-      #   logger = logging.logger "syslog", resource, env: :production
+      #   logger = logging.logger "my_app_log", resource, env: :production
+      #   logger.info "Job started."
       #
       def logger log_name, resource, labels = {}
         Logger.new self, log_name, resource, labels
@@ -248,7 +276,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
-      #   logging.delete_log "my-log"
+      #   logging.delete_log "my_app_log"
       #
       def delete_log name
         ensure_service!
@@ -261,6 +289,9 @@ module Gcloud
       ##
       # Retrieves the list of monitored resource descriptors that are used by
       # Google Cloud Logging.
+      #
+      # @see https://cloud.google.com/logging/docs/api/introduction_v2#monitored_resources
+      #   Monitored Resources
       #
       # @param [String] token A previously-returned page token representing part
       #   of the larger set of results to view.
@@ -275,8 +306,9 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #   resource_descriptors = logging.resource_descriptors
-      #   resource_descriptors.each do |resource_descriptor|
-      #     puts resource_descriptor.name
+      #   resource_descriptors.each do |rd|
+      #     label_keys = rd.labels.map(&:key).join(", ")
+      #     puts "#{rd.type} (#{label_keys})"
       #   end
       #
       # @example Pagination: (See {Gcloud::Logging::ResourceDescriptor::List})
@@ -286,8 +318,8 @@ module Gcloud
       #   logging = gcloud.logging
       #   resource_descriptors = logging.resource_descriptors
       #   loop do
-      #     resource_descriptors.each do |resource_descriptor|
-      #       puts resource_descriptor.name
+      #     resource_descriptors.each do |rd|
+      #       puts rd.type
       #     end
       #     break unless resource_descriptors.next?
       #     resource_descriptors = resource_descriptors.next
@@ -303,7 +335,7 @@ module Gcloud
       alias_method :find_resource_descriptors, :resource_descriptors
 
       ##
-      # Creates a new Resource object.
+      # Creates a new monitored resource instance.
       #
       # @return [Gcloud::Logging::Resource]
       #
@@ -341,8 +373,8 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #   sinks = logging.sinks
-      #   sinks.each do |sink|
-      #     puts sink.name
+      #   sinks.each do |s|
+      #     puts "#{s.name}: #{s.filter} -> #{s.destination}"
       #   end
       #
       # @example With pagination: (See {Gcloud::Logging::Sink::List})
@@ -352,8 +384,8 @@ module Gcloud
       #   logging = gcloud.logging
       #   sinks = logging.sinks
       #   loop do
-      #     sinks.each do |sink|
-      #       puts sink.name
+      #     sinks.each do |s|
+      #       puts "#{s.name}: #{s.filter} -> #{s.destination}"
       #     end
       #     break unless sinks.next?
       #     sinks = sinks.next
@@ -369,15 +401,26 @@ module Gcloud
       alias_method :find_sinks, :sinks
 
       ##
-      # Creates a new sink.
+      # Creates a new project sink. When you create a sink, new log entries that
+      # match the sink's filter are exported. Cloud Logging does not send
+      # previously-ingested log entries to the sink's destination.
+      #
+      # @see https://cloud.google.com/logging/docs/api/tasks/exporting-logs
+      #   Exporting Logs With Sinks
+      # @see https://cloud.google.com/logging/docs/api/introduction_v2#kinds_of_log_sinks
+      #   Kinds of log sinks (API V2)
+      # @see https://cloud.google.com/logging/docs/api/#sinks Sinks (API V1)
+      # @see https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs
+      #   Permissions for writing exported logs
       #
       # @param [String] name The client-assigned sink identifier. Sink
       #   identifiers are limited to 1000 characters and can include only the
       #   following characters: `A-Z`, `a-z`, `0-9`, and the special characters
       #   `_-.`.
-      # @param [String] destination The export destination. See [Exporting Logs
-      #   With
-      #   Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+      # @param [String] destination The resource name of the export destination.
+      #   See [About
+      #   sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs#about_sinks)
+      #   for examples.
       # @param [String] filter An [advanced logs
       #  filter](https://cloud.google.com/logging/docs/view/advanced_filters)
       #  that defines the log entries to be exported. The filter must be
@@ -389,14 +432,21 @@ module Gcloud
       #   the version of the log entry when it was written to Cloud Logging.
       #   Accepted values are `:unspecified`, `:v2`, and `:v1`.
       #
-      # @return [Gcloud::Logging::Sink]
+      # @return [Gcloud::Logging::Sink] a project sink
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
-      #   sink = logging.create_sink "my-sink"
+      #   storage = gcloud.storage
+      #
+      #   bucket = storage.create_bucket "my-syslog-bucket"
+      #   destination = "storage.googleapis.com/#{bucket.id}"
+      #
+      #   sink = logging.create_sink "my-sink",
+      #                              destination: destination,
+      #                              filter: "log:syslog"
       #
       def create_sink name, destination: nil, filter: nil, version: :unspecified
         version = Sink.resolve_version version
@@ -409,11 +459,11 @@ module Gcloud
       alias_method :new_sink, :create_sink
 
       ##
-      # Retrieves sink by name.
+      # Retrieves a sink by name.
       #
       # @param [String] sink_name Name of a sink.
       #
-      # @return [Gcloud::Logging::Sink, nil] Returns `nil` if sink does not
+      # @return [Gcloud::Logging::Sink, nil] Returns `nil` if the sink does not
       #   exist.
       #
       # @example
@@ -457,8 +507,8 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #   metrics = logging.metrics
-      #   metrics.each do |metric|
-      #     puts metric.name
+      #   metrics.each do |m|
+      #     puts "#{m.name}: #{m.filter}"
       #   end
       #
       # @example With pagination: (See {Gcloud::Logging::Metric::List})
@@ -468,8 +518,8 @@ module Gcloud
       #   logging = gcloud.logging
       #   metrics = logging.metrics
       #   loop do
-      #     metrics.each do |metric|
-      #       puts metric.name
+      #     metrics.each do |m|
+      #       puts "#{m.name}: #{m.filter}"
       #     end
       #     break unless metrics.next?
       #     metrics = metrics.next
@@ -485,7 +535,11 @@ module Gcloud
       alias_method :find_metrics, :metrics
 
       ##
-      # Creates a new metric.
+      # Creates a new logs-based metric for Google Cloud Monitoring.
+      #
+      # @see https://cloud.google.com/logging/docs/view/logs_based_metrics
+      #   Logs-based Metrics
+      # @see https://cloud.google.com/monitoring/docs Google Cloud Monitoring
       #
       # @param [String] name The client-assigned metric identifier. Metric
       #   identifiers are limited to 1000 characters and can include only the
@@ -493,10 +547,10 @@ module Gcloud
       #   `_-.,+!*',()%/\`. The forward-slash character (`/`) denotes a
       #   hierarchy of name pieces, and it cannot be the first character of the
       #   name.
-      # @param [String] description A description of this metric, which is used
-      #   in documentation.
       # @param [String] filter An [advanced logs
       #   filter](https://cloud.google.com/logging/docs/view/advanced_filters).
+      # @param [String] description A description of this metric, which is used
+      #   in documentation.
       #
       # @return [Gcloud::Logging::Metric]
       #
@@ -505,7 +559,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
-      #   metric = logging.create_metric "my-metric"
+      #   metric = logging.create_metric "errors", filter: "severity>=ERROR"
       #
       def create_metric name, description: nil, filter: nil
         ensure_service!
@@ -529,14 +583,14 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
-      #   metric = logging.metric "existing-metric"
+      #   metric = logging.metric "existing_metric"
       #
       # @example By default `nil` will be returned if the metric does not exist.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
-      #   metric = logging.metric "non-existing-metric" #=> nil
+      #   metric = logging.metric "non_existing_metric" #=> nil
       #
       def metric name
         ensure_service!

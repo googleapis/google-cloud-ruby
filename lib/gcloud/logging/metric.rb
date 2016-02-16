@@ -20,15 +20,20 @@ module Gcloud
     ##
     # # Metric
     #
-    # A logs-based metric. The value of the metric is the number of log entries
-    # that match a logs filter.
+    # A logs-based Google Cloud Monitoring metric. A metric is a measured value
+    # that can be used to assess a system. The value of a logs-based metric is
+    # the number of log entries that match a logs filter.
+    #
+    # @see https://cloud.google.com/logging/docs/view/logs_based_metrics
+    #   Logs-based Metrics
+    # @see https://cloud.google.com/monitoring/docs Google Cloud Monitoring
     #
     # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   logging = gcloud.logging
-    #   metric = logging.metric "severe_errors"
+    #   metric = logging.create_metric "errors", filter: "severity>=ERROR"
     #
     class Metric
       ##
@@ -105,6 +110,17 @@ module Gcloud
       ##
       # Reloads the logs-based metric with current data from the Logging
       # service.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   metric = logging.metric "severe_errors"
+      #   metric.filter = "Unwanted value"
+      #   metric.reload!
+      #   metric.filter #=> "logName:syslog"
+      #
       def reload!
         ensure_service!
         @grpc = service.get_metric name

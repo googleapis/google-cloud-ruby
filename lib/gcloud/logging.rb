@@ -56,10 +56,20 @@ module Gcloud
   ##
   # # Google Cloud Logging
   #
-  # Google Cloud Logging collects and stores logs from applications and services
-  # on the Google Cloud Platform.
+  # The Google Cloud Logging service collects and stores logs from applications
+  # and services on the Google Cloud Platform. The Google Cloud Logging API
+  # gives you fine-grained, programmatic control over your projects' logs. You
+  # can use the API to:
   #
-  # ...
+  # * Write log entries
+  # * Read and filter log entries
+  # * Export your logs to Cloud Storage, BigQuery, or Cloud Pub/Sub
+  # * Create logs-based metrics for use in Cloud Monitoring
+  #
+  # Cloud Logging gathers logs from many services, including Google App Engine
+  # and Google Compute Engine. See the [List of Log
+  # Types](https://cloud.google.com/logging/docs/view/logs_index) for a complete
+  # discussion.
   module Logging
   end
 end

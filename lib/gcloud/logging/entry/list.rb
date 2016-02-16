@@ -33,7 +33,7 @@ module Gcloud
         end
 
         ##
-        # Whether there a next page of entries.
+        # Whether there is a next page of entries.
         def next?
           !token.nil?
         end

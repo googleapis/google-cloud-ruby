@@ -34,7 +34,7 @@ module Gcloud
         end
 
         ##
-        # Whether there a next page of resource descriptors.
+        # Whether there a is next page of resource descriptors.
         def next?
           !token.nil?
         end
