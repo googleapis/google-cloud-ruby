@@ -32,18 +32,18 @@ module Gcloud
     #
     class Metric
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The gRPC Service object.
+      attr_accessor :service
 
       ##
-      # @private The Google API Client object.
-      attr_accessor :gapi
+      # @private The gRPC Google::Logging::V2::LogMetric object.
+      attr_accessor :grpc
 
       ##
       # @private Create an empty Metric object.
       def initialize
-        @connection = nil
-        @gapi = {}
+        @service = nil
+        @grpc = Google::Logging::V2::LogMetric.new
       end
 
       ##
@@ -53,33 +53,33 @@ module Gcloud
       # forward-slash character (`/`) denotes a hierarchy of name pieces, and it
       # cannot be the first character of the name.
       def name
-        @gapi["name"]
+        grpc.name
       end
 
       ##
       # The description of this metric, which is used in documentation.
       def description
-        @gapi["description"]
+        grpc.description
       end
 
       ##
       # Updates the description of this metric, which is used in documentation.
       def description= description
-        @gapi["description"] = description
+        grpc.description = description
       end
 
       ##
       # An [advanced logs
       # filter](https://cloud.google.com/logging/docs/view/advanced_filters).
       def filter
-        @gapi["filter"]
+        grpc.filter
       end
 
       ##
       # Updates the [advanced logs
       # filter](https://cloud.google.com/logging/docs/view/advanced_filters).
       def filter= filter
-        @gapi["filter"] = filter
+        grpc.filter = filter
       end
 
       ##
@@ -95,26 +95,22 @@ module Gcloud
       #   metric.save
       #
       def save
-        ensure_connection!
-        resp = connection.update_metric name, description, filter
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        @grpc = service.update_metric name, description, filter
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
       # Reloads the logs-based metric with current data from the Logging
       # service.
       def reload!
-        ensure_connection!
-        resp = connection.get_metric name
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        @grpc = service.get_metric name
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :refresh!, :reload!
 
@@ -132,30 +128,29 @@ module Gcloud
       #   metric.delete
       #
       def delete
-        ensure_connection!
-        resp = connection.delete_metric name
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.delete_metric name
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
-      # @private New Metric from a Google API Client object.
-      def self.from_gapi gapi, conn
-        new.tap do |f|
-          f.gapi = gapi
-          f.connection = conn
+      # @private New Metric from a gRPC object.
+      def self.from_grpc grpc, service
+        new.tap do |m|
+          m.grpc = grpc
+          m.service = service
         end
       end
 
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      # @private Raise an error unless an active connection to the service is
+      # available.
+      def ensure_service!
+        fail "Must have active connection to service" unless service
       end
     end
   end

@@ -22,50 +22,20 @@ module Gcloud
     #
     # Base Logging exception class.
     class Error < Gcloud::Error
-    end
-
-    ##
-    # # ApiError
-    #
-    # Raised when an API call is not successful.
-    class ApiError < Error
       ##
-      # The code of the error.
-      attr_reader :code
+      # The error object of the failed HTTP request.
+      attr_reader :inner
 
       ##
-      # The errors encountered.
-      attr_reader :errors
-
-      # @private
-      def initialize message, code, errors = []
+      # Create a new Logging error object.
+      def initialize message, error = nil
         super message
-        @code   = code
-        @errors = errors
+        @inner = error
       end
 
-      # @private
-      def self.from_response resp
-        if resp.data? && resp.data["error"]
-          from_response_data resp.data["error"]
-        else
-          from_response_status resp
-        end
-      end
-
-      # @private
-      def self.from_response_data error
-        new error["message"], error["code"], error["errors"]
-      end
-
-      # @private
-      def self.from_response_status resp
-        if resp.status == 404
-          new "#{resp.error_message}: #{resp.request.uri.request_uri}",
-              resp.status
-        else
-          new resp.error_message, resp.status
-        end
+      # @private Create a new Logging error object.
+      def self.from_error e
+        new e.message, e
       end
     end
   end

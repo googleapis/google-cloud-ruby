@@ -973,4 +973,8 @@ class MockLogging < Minitest::Spec
       "filter"      => "logName:syslog AND severity>=ERROR"
     }
   end
+
+  def project_path
+    "projects/#{project}"
+  end
 end

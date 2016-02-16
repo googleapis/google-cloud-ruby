@@ -51,6 +51,63 @@ module Gcloud
       end
       attr_writer :metrics
 
+      def list_metrics token: nil, max: nil
+        list_params = { project_name: project_path,
+                        page_token: token,
+                        page_size: max
+                      }.delete_if { |_, v| v.nil? }
+
+        list_req = Google::Logging::V2::ListLogMetricsRequest.new(list_params)
+
+        metrics.list_log_metrics list_req
+      end
+
+      def create_metric name, description, filter
+        metric_params = {
+          name: name,
+          description: description,
+          filter: filter
+        }.delete_if { |_, v| v.nil? }
+
+        create_req = Google::Logging::V2::CreateLogMetricRequest.new(
+          project_name: project_path,
+          metric: Google::Logging::V2::LogMetric.new(metric_params)
+        )
+
+        metrics.create_log_metric create_req
+      end
+
+      def get_metric name
+        get_req = Google::Logging::V2::GetLogMetricRequest.new(
+          metric_name: metric_path(name)
+        )
+
+        metrics.get_log_metric get_req
+      end
+
+      def update_metric name, description, filter
+        metric_params = {
+          name: name,
+          description: description,
+          filter: filter
+        }.delete_if { |_, v| v.nil? }
+
+        update_req = Google::Logging::V2::UpdateLogMetricRequest.new(
+          metric_name: metric_path(name),
+          metric: Google::Logging::V2::LogMetric.new(metric_params)
+        )
+
+        metrics.update_log_metric update_req
+      end
+
+      def delete_metric name
+        delete_req = Google::Logging::V2::DeleteLogMetricRequest.new(
+          metric_name: metric_path(name)
+        )
+
+        metrics.delete_log_metric delete_req
+      end
+
       protected
 
       def project_path

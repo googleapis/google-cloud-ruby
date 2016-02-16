@@ -489,13 +489,11 @@ module Gcloud
       #   end
       #
       def metrics token: nil, max: nil
-        ensure_connection!
-        resp = connection.list_metrics token: token, max: max
-        if resp.success?
-          Metric::List.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        grpc = service.list_metrics token: token, max: max
+        Metric::List.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_metrics, :metrics
 
@@ -523,13 +521,11 @@ module Gcloud
       #   metric = logging.create_metric "my-metric"
       #
       def create_metric name, description: nil, filter: nil
-        ensure_connection!
-        resp = connection.create_metric name, description, filter
-        if resp.success?
-          Metric.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        grpc = service.create_metric name, description, filter
+        Metric.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :new_metric, :create_metric
 
@@ -556,11 +552,12 @@ module Gcloud
       #   metric = logging.metric "non-existing-metric" #=> nil
       #
       def metric name
-        ensure_connection!
-        resp = connection.get_metric name
-        return Metric.from_gapi(resp.data, connection) if resp.success?
-        return nil if resp.status == 404
-        fail ApiError.from_response(resp)
+        ensure_service!
+        grpc = service.get_metric name
+        Metric.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        return nil if e.code == 5
+        raise Error.from_error(e)
       end
       alias_method :get_metric, :metric
       alias_method :find_metric, :metric
@@ -571,6 +568,13 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      ##
+      # @private Raise an error unless an active connection to the service is
+      # available.
+      def ensure_service!
+        fail "Must have active connection to service" unless service
       end
     end
   end
