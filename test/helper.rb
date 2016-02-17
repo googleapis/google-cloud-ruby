@@ -940,18 +940,28 @@ class MockLogging < Minitest::Spec
 
   def random_resource_descriptor_hash
     {
-      "type"        => "cloudsql_database",
-      "displayName" => "Cloud SQL Database",
-      "description" => "This resource is a Cloud SQL Database",
-      "labels"      => [
+      "type"         => "cloudsql_database",
+      "display_name" => "Cloud SQL Database",
+      "description"  => "This resource is a Cloud SQL Database",
+      "labels"       => [
         {
-         "key" => "database_id",
-         "description" => "The ID of the database."
+         "key"          => "database_id",
+         "description"  => "The ID of the database."
         },
         {
-         "key" => "zone",
-         "valueType" => "STRING",
-         "description" => "The GCP zone in which the database is running."
+         "key"          => "zone",
+         "value_type"   => :STRING,
+         "description"  => "The GCP zone in which the database is running."
+        },
+        {
+         "key"          => "active",
+         "value_type"   => :BOOL,
+         "description"  => "Whether the database is active."
+        },
+        {
+         "key"          => "max_connections",
+         "value_type"   => :INT64,
+         "description"  => "The maximum number of connections it supports."
         }
       ]
     }

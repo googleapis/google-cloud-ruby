@@ -51,6 +51,18 @@ module Gcloud
       end
       attr_writer :metrics
 
+      def list_resource_descriptors token: nil, max: nil
+        list_params = { page_token: token,
+                        page_size: max
+                      }.delete_if { |_, v| v.nil? }
+
+        list_req = \
+          Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(
+            list_params)
+
+        logging.list_monitored_resource_descriptors list_req
+      end
+
       def list_sinks token: nil, max: nil
         list_params = { project_name: project_path,
                         page_token: token,

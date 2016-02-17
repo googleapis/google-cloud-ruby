@@ -302,13 +302,11 @@ module Gcloud
       #   end
       #
       def resource_descriptors token: nil, max: nil
-        ensure_connection!
-        resp = connection.list_resource_descriptors token: token, max: max
-        if resp.success?
-          ResourceDescriptor::List.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        list_grpc = service.list_resource_descriptors token: token, max: max
+        ResourceDescriptor::List.from_grpc list_grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_resource_descriptors, :resource_descriptors
 

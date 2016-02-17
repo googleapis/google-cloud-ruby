@@ -59,17 +59,16 @@ module Gcloud
       attr_reader :labels
 
       ##
-      # @private New ResourceDescriptor from a Google API Client object.
-      def self.from_gapi gapi
-        gapi ||= {}
-        gapi = gapi.to_hash if gapi.respond_to? :to_hash
+      # @private New ResourceDescriptor from a
+      # Google::Api::MonitoredResourceDescriptor object.
+      def self.from_grpc grpc
         r = new
         r.instance_eval do
-          @type        = gapi["type"]
-          @name        = gapi["displayName"]
-          @description = gapi["description"]
-          @labels      = gapi["labels"].map do |g|
-            LabelDescriptor.from_gapi g
+          @type        = grpc.type
+          @name        = grpc.display_name
+          @description = grpc.description
+          @labels      = Array(grpc.labels).map do |g|
+            LabelDescriptor.from_grpc g
           end
         end
         r
@@ -111,18 +110,17 @@ module Gcloud
         attr_reader :description
 
         ##
-        # @private New LabelDescriptor from a Google API Client object.
-        def self.from_gapi gapi
-          gapi ||= {}
-          gapi = gapi.to_hash if gapi.respond_to? :to_hash
-          type_sym = { "STRING" => :string,
-                       "BOOL" => :boolean,
-                       "INT64" => :integer }[gapi["valueType"].to_s]
+        # @private New LabelDescriptor from a Google::Api::LabelDescriptor
+        # object.
+        def self.from_grpc grpc
+          type_sym = { STRING: :string,
+                       BOOL:   :boolean,
+                       INT64:  :integer }[grpc.value_type]
           l = new
           l.instance_eval do
-            @key         = gapi["key"]
+            @key         = grpc.key
             @type        = type_sym
-            @description = gapi["description"]
+            @description = grpc.description
           end
           l
         end
