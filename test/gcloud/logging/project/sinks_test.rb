@@ -17,86 +17,106 @@ require "helper"
 describe Gcloud::Logging::Project, :sinks, :mock_logging do
   it "lists sinks" do
     num_sinks = 3
-    mock_connection.get "/v2beta1/projects/#{project}/sinks" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       list_sinks_json(num_sinks)]
-    end
+
+    mock = Minitest::Mock.new
+    mock.expect :list_sinks,
+                Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(num_sinks)),
+                [Google::Logging::V2::ListSinksRequest]
+    logging.service.sinks = mock
 
     sinks = logging.sinks
+
+    mock.verify
+
     sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
     sinks.size.must_equal num_sinks
   end
 
   it "lists sinks with find_sinks alias" do
     num_sinks = 3
-    mock_connection.get "/v2beta1/projects/#{project}/sinks" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       list_sinks_json(num_sinks)]
-    end
+
+    mock = Minitest::Mock.new
+    mock.expect :list_sinks,
+                Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(num_sinks)),
+                [Google::Logging::V2::ListSinksRequest]
+    logging.service.sinks = mock
 
     sinks = logging.find_sinks
+
+    mock.verify
+
     sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
     sinks.size.must_equal num_sinks
   end
 
   it "paginates sinks" do
-    mock_connection.get "/v2beta1/projects/#{project}/sinks" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_sinks_json(3, "next_page_token")]
-    end
-    mock_connection.get "/v2beta1/projects/#{project}/sinks" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_sinks_json(2)]
-    end
+    first_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+    second_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_token: "next_page_token")
+
+    mock = Minitest::Mock.new
+    mock.expect :list_sinks,
+                Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token")),
+                [first_list_req]
+    mock.expect :list_sinks,
+                Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2)),
+                [second_list_req]
+    logging.service.sinks = mock
 
     first_sinks = logging.sinks
+    second_sinks = logging.sinks token: first_sinks.token
+
+    mock.verify
+
     first_sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
     first_sinks.count.must_equal 3
     first_sinks.token.wont_be :nil?
     first_sinks.token.must_equal "next_page_token"
 
-    second_sinks = logging.sinks token: first_sinks.token
     second_sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
     second_sinks.count.must_equal 2
     second_sinks.token.must_be :nil?
   end
 
   it "paginates sinks with next? and next" do
-    mock_connection.get "/v2beta1/projects/#{project}/sinks" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_sinks_json(3, "next_page_token")]
-    end
-    mock_connection.get "/v2beta1/projects/#{project}/sinks" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_sinks_json(2)]
-    end
+    first_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+    second_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_token: "next_page_token")
+
+    mock = Minitest::Mock.new
+    mock.expect :list_sinks,
+                Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token")),
+                [first_list_req]
+    mock.expect :list_sinks,
+                Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2)),
+                [second_list_req]
+    logging.service.sinks = mock
 
     first_sinks = logging.sinks
+    second_sinks = first_sinks.next
+
+    mock.verify
+
     first_sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
     first_sinks.count.must_equal 3
     first_sinks.next?.must_equal true #must_be :next?
 
-    second_sinks = first_sinks.next
     second_sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
     second_sinks.count.must_equal 2
     second_sinks.next?.must_equal false #wont_be :next?
   end
 
   it "paginates sinks with max set" do
-    mock_connection.get "/v2beta1/projects/#{project}/sinks" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      [200, {"Content-Type"=>"application/json"},
-       list_sinks_json(3, "next_page_token")]
-    end
+    list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_size: 3)
+
+    mock = Minitest::Mock.new
+    mock.expect :list_sinks,
+                Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token")),
+                [list_req]
+    logging.service.sinks = mock
 
     sinks = logging.sinks max: 3
+
+    mock.verify
+
     sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
     sinks.count.must_equal 3
     sinks.token.wont_be :nil?
@@ -104,13 +124,18 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
   end
 
   it "paginates sinks without max set" do
-    mock_connection.get "/v2beta1/projects/#{project}/sinks" do |env|
-      env.params.wont_include "maxResults"
-      [200, {"Content-Type"=>"application/json"},
-       list_sinks_json(3, "next_page_token")]
-    end
+    list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+
+    mock = Minitest::Mock.new
+    mock.expect :list_sinks,
+                Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token")),
+                [list_req]
+    logging.service.sinks = mock
 
     sinks = logging.sinks
+
+    mock.verify
+
     sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
     sinks.count.must_equal 3
     sinks.token.wont_be :nil?
@@ -120,17 +145,16 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
   it "creates a sink" do
     new_sink_name = "new-sink-#{Time.now.to_i}"
 
-    mock_connection.post "/v2beta1/projects/#{project}/sinks" do |env|
-      sink_json = JSON.parse env.body
-      sink_json["name"].must_equal new_sink_name
-      sink_json["destination"].must_be :nil?
-      sink_json["filter"].must_be :nil?
-      sink_json["outputVersionFormat"].must_equal "VERSION_FORMAT_UNSPECIFIED"
-      [200, {"Content-Type"=>"application/json"},
-       empty_sink_hash.merge(sink_json.delete_if { |_, v| v.nil? }).to_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :create_sink,
+                Google::Logging::V2::LogSink.decode_json(empty_sink_hash.merge("name" => new_sink_name).to_json),
+                [Google::Logging::V2::CreateSinkRequest]
+    logging.service.sinks = mock
 
     sink = logging.create_sink new_sink_name
+
+    mock.verify
+
     sink.must_be_kind_of Gcloud::Logging::Sink
     sink.name.must_equal new_sink_name
     sink.destination.must_be :empty?
@@ -143,19 +167,21 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
     new_sink_destination = "storage.googleapis.com/new-sinks"
     new_sink_filter = "logName:syslog AND severity>=WARN"
 
-    mock_connection.post "/v2beta1/projects/#{project}/sinks" do |env|
-      sink_json = JSON.parse env.body
-      sink_json["name"].must_equal new_sink_name
-      sink_json["destination"].must_equal new_sink_destination
-      sink_json["filter"].must_equal new_sink_filter
-      sink_json["outputVersionFormat"].must_equal "V2"
-
-      [200, {"Content-Type"=>"application/json"},
-       empty_sink_hash.merge(sink_json.delete_if { |_, v| v.nil? }).to_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :create_sink,
+                Google::Logging::V2::LogSink.decode_json(empty_sink_hash.merge(
+                  "name"                  => new_sink_name,
+                  "destination"           => new_sink_destination,
+                  "filter"                => new_sink_filter,
+                  "output_version_format" => "V2").to_json),
+                [Google::Logging::V2::CreateSinkRequest]
+    logging.service.sinks = mock
 
     sink = logging.create_sink new_sink_name, destination: new_sink_destination,
       filter: new_sink_filter, version: :v2
+
+    mock.verify
+
     sink.must_be_kind_of Gcloud::Logging::Sink
     sink.name.must_equal new_sink_name
     sink.destination.must_equal new_sink_destination
@@ -166,12 +192,17 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
   it "gets a sink" do
     sink_name = "existing-sink-#{Time.now.to_i}"
 
-    mock_connection.get "/v2beta1/projects/#{project}/sinks/#{sink_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_sink_hash.merge("name" => sink_name).to_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_sink,
+                Google::Logging::V2::LogSink.decode_json(random_sink_hash.merge(
+                  "name" => sink_name).to_json),
+                [Google::Logging::V2::GetSinkRequest]
+    logging.service.sinks = mock
 
     sink = logging.sink sink_name
+
+    mock.verify
+
     sink.must_be_kind_of Gcloud::Logging::Sink
     sink.name.must_equal sink_name
   end
@@ -179,16 +210,16 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
   def list_sinks_json count = 2, token = nil
     {
       sinks: count.times.map { random_sink_hash },
-      nextPageToken: token
+      next_page_token: token
     }.delete_if { |_, v| v.nil? }.to_json
   end
 
   def empty_sink_hash
     {
-      "name"                => "",
-      "destination"         => "",
-      "filter"              => "",
-      "outputVersionFormat" => "VERSION_FORMAT_UNSPECIFIED"
+      "name"                  => "",
+      "destination"           => "",
+      "filter"                => "",
+      "output_version_format" => "VERSION_FORMAT_UNSPECIFIED"
     }
   end
 end

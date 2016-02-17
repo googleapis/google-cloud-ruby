@@ -31,23 +31,18 @@ module Gcloud
     #
     class Sink
       ##
-      # @private
-      VERSIONS = { unspecified: "VERSION_FORMAT_UNSPECIFIED",
-                   v2: "V2", v1: "V1" }
-
-      ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The gRPC Service object.
+      attr_accessor :service
 
       ##
       # @private The Google API Client object.
-      attr_accessor :gapi
+      attr_accessor :grpc
 
       ##
       # @private Create an empty Sink object.
       def initialize
-        @connection = nil
-        @gapi = {}
+        @service = nil
+        @grpc = Google::Logging::V2::LogSink.new
       end
 
       ##
@@ -55,21 +50,21 @@ module Gcloud
       # 1000 characters and can include only the following characters: `A-Z`,
       # `a-z`, `0-9`, and the special characters `_-.`.
       def name
-        @gapi["name"]
+        @grpc.name
       end
 
       ##
       # The export destination. See [Exporting Logs With
       # Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
       def destination
-        @gapi["destination"]
+        @grpc.destination
       end
 
       ##
       # Updates the export destination. See [Exporting Logs With
       # Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
       def destination= destination
-        @gapi["destination"] = destination
+        @grpc.destination = destination
       end
 
       ##
@@ -80,7 +75,7 @@ module Gcloud
       # parameter, regardless of the format of the log entry that was originally
       # written to Cloud Logging.
       def filter
-        @gapi["filter"]
+        @grpc.filter
       end
 
       ##
@@ -91,7 +86,7 @@ module Gcloud
       # parameter, regardless of the format of the log entry that was originally
       # written to Cloud Logging.
       def filter= filter
-        @gapi["filter"] = filter
+        @grpc.filter = filter
       end
 
       ##
@@ -99,36 +94,35 @@ module Gcloud
       # This version does not have to correspond to the version of the log entry
       # when it was written to Cloud Logging.
       def version
-        @gapi["outputVersionFormat"]
+        @grpc.output_version_format
       end
 
       ##
       # Updates the log entry version used when exporting log entries from this
       # sink. This version does not have to correspond to the version of the log
       # entry when it was written to Cloud Logging. Accepted values are
-      # `:unspecified`, `:v2`, and `:v1`.
+      # `:VERSION_FORMAT_UNSPECIFIED`, `:V2`, and `:V1`.
       def version= version
-        version = VERSIONS[version] if VERSIONS[version]
-        @gapi["outputVersionFormat"] = version
+        @grpc.output_version_format = self.class.resolve_version(version)
       end
 
       ##
       # Helper to determine if the sink's version is
       # `VERSION_FORMAT_UNSPECIFIED`.
       def unspecified?
-        version == VERSIONS[:unspecified]
+        !(v1? || v2?)
       end
 
       ##
       # Helper to determine if the sink's version is `V2`.
       def v2?
-        version == VERSIONS[:v2]
+        version == :V2
       end
 
       ##
       # Helper to determine if the sink's version is `V1`.
       def v1?
-        version == VERSIONS[:v1]
+        version == :V1
       end
 
       ##
@@ -144,26 +138,20 @@ module Gcloud
       #   sink.save
       #
       def save
-        ensure_connection!
-        resp = connection.update_sink name, destination, filter, version
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        @grpc = service.update_sink name, destination, filter, version
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
       # Reloads the logs-based sink with current data from the Logging
       # service.
       def reload!
-        ensure_connection!
-        resp = connection.get_sink name
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        @grpc = service.get_sink name
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :refresh!, :reload!
 
@@ -181,30 +169,38 @@ module Gcloud
       #   sink.delete
       #
       def delete
-        ensure_connection!
-        resp = connection.delete_sink name
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
+        ensure_service!
+        service.delete_sink name
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
+      end
+
+      ##
+      # @private New Sink from a Google::Logging::V2::LogSink object.
+      def self.from_grpc grpc, service
+        new.tap do |f|
+          f.grpc = grpc
+          f.service = service
         end
       end
 
       ##
-      # @private New Metric from a Google API Client object.
-      def self.from_gapi gapi, conn
-        new.tap do |f|
-          f.gapi = gapi
-          f.connection = conn
-        end
+      # @private Convert a version value to the gRPC enum value.
+      def self.resolve_version version
+        ver = version.to_s.upcase.to_sym
+        ver = Google::Logging::V2::LogSink::VersionFormat.resolve ver
+        return ver if ver
+        Google::Logging::V2::LogSink::VersionFormat::VERSION_FORMAT_UNSPECIFIED
       end
 
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      # @private Raise an error unless an active connection to the service is
+      # available.
+      def ensure_service!
+        fail "Must have active connection to service" unless service
       end
     end
   end

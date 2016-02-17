@@ -370,13 +370,11 @@ module Gcloud
       #   end
       #
       def sinks token: nil, max: nil
-        ensure_connection!
-        resp = connection.list_sinks token: token, max: max
-        if resp.success?
-          Sink::List.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        list_grpc = service.list_sinks token: token, max: max
+        Sink::List.from_grpc list_grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_sinks, :sinks
 
@@ -411,14 +409,12 @@ module Gcloud
       #   sink = logging.create_sink "my-sink"
       #
       def create_sink name, destination: nil, filter: nil, version: :unspecified
-        version = Sink::VERSIONS[version] if Sink::VERSIONS[version]
-        ensure_connection!
-        resp = connection.create_sink name, destination, filter, version
-        if resp.success?
-          Sink.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        version = Sink.resolve_version version
+        ensure_service!
+        grpc = service.create_sink name, destination, filter, version
+        Sink.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :new_sink, :create_sink
 
@@ -445,11 +441,12 @@ module Gcloud
       #   sink = logging.sink "non-existing-sink" #=> nil
       #
       def sink sink_name
-        ensure_connection!
-        resp = connection.get_sink sink_name
-        return Sink.from_gapi(resp.data, connection) if resp.success?
-        return nil if resp.status == 404
-        fail ApiError.from_response(resp)
+        ensure_service!
+        grpc = service.get_sink sink_name
+        Sink.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        return nil if e.code == 5
+        raise Error.from_error(e)
       end
       alias_method :get_sink, :sink
       alias_method :find_sink, :sink

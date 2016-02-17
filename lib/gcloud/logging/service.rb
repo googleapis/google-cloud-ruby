@@ -51,6 +51,61 @@ module Gcloud
       end
       attr_writer :metrics
 
+      def list_sinks token: nil, max: nil
+        list_params = { project_name: project_path,
+                        page_token: token,
+                        page_size: max
+                      }.delete_if { |_, v| v.nil? }
+
+        list_req = Google::Logging::V2::ListSinksRequest.new(list_params)
+
+        sinks.list_sinks list_req
+      end
+
+      def create_sink name, destination, filter, version
+        sink_params = {
+          name: name, destination: destination,
+          filter: filter, output_version_format: version
+        }.delete_if { |_, v| v.nil? }
+
+        create_req = Google::Logging::V2::CreateSinkRequest.new(
+          project_name: project_path,
+          sink: Google::Logging::V2::LogSink.new(sink_params)
+        )
+
+        sinks.create_sink create_req
+      end
+
+      def get_sink name
+        get_req = Google::Logging::V2::GetSinkRequest.new(
+          sink_name: sink_path(name)
+        )
+
+        sinks.get_sink get_req
+      end
+
+      def update_sink name, destination, filter, version
+        sink_params = {
+          name: name, destination: destination,
+          filter: filter, output_version_format: version
+        }.delete_if { |_, v| v.nil? }
+
+        update_req = Google::Logging::V2::UpdateSinkRequest.new(
+          sink_name: sink_path(name),
+          sink: Google::Logging::V2::LogSink.new(sink_params)
+        )
+
+        sinks.update_sink update_req
+      end
+
+      def delete_sink name
+        delete_req = Google::Logging::V2::DeleteSinkRequest.new(
+          sink_name: sink_path(name)
+        )
+
+        sinks.delete_sink delete_req
+      end
+
       def list_metrics token: nil, max: nil
         list_params = { project_name: project_path,
                         page_token: token,
