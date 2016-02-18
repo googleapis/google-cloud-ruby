@@ -4,8 +4,9 @@ module Gcloud
       # object is API defined by YARD's HtmlHelper, so depend on it here too
       def metadata json
         json.metadata do
-          json.name object.name.to_s
-          json.description md(object.docstring.to_s, true)
+          json.name object.name
+          json.title object.title
+          json.description md(object.docstring, true)
           json.source object.files.first.join("#L")
           json.resources object.docstring.tags(:see) do |t|
             json.title md(t.text)

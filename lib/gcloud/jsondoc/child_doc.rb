@@ -19,6 +19,7 @@ module Gcloud
       def metadata json
         json.metadata do
           json.name "#{object.namespace.name}::#{object.name}"
+          json.title object.title
           json.description md(object.docstring.to_s, true)
           json.source object.files.first.join("#L")
           json.resources object.docstring.tags(:see) do |t|
