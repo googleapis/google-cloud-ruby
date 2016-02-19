@@ -257,13 +257,11 @@ module Gcloud
       #   logging.delete_log "my-log"
       #
       def delete_log name
-        ensure_connection!
-        resp = connection.delete_log name
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.delete_log name
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##

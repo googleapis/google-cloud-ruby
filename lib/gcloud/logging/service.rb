@@ -51,6 +51,14 @@ module Gcloud
       end
       attr_writer :metrics
 
+      def delete_log name
+        delete_req = Google::Logging::V2::DeleteLogRequest.new(
+          log_name: log_path(name)
+        )
+
+        logging.delete_log delete_req
+      end
+
       def list_resource_descriptors token: nil, max: nil
         list_params = { page_token: token,
                         page_size: max
