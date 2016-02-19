@@ -47,32 +47,32 @@ module Gcloud
       attr_accessor :labels
 
       ##
-      # @private Exports the Resource to a Google API Client object.
-      def to_gapi
-        ret = {
-          "type" => type,
-          "labels" => labels
-        }.delete_if { |_, v| v.nil? }
-        ret.delete "labels" if labels.empty?
-        ret
-      end
-
-      ##
       # @private Determines if the Resource has any data.
       def empty?
-        to_gapi.empty?
+        type.nil? && (labels.nil? || labels.empty?)
       end
 
       ##
-      # @private New Resource from a Google API Client object.
-      def self.from_gapi gapi
-        gapi ||= {}
-        gapi = gapi.to_hash if gapi.respond_to? :to_hash
+      # @private Exports the Resource to a Google::Api::MonitoredResource
+      # object.
+      def to_grpc
+        return nil if empty?
+        Google::Api::MonitoredResource.new(
+          type: type,
+          labels: labels
+        )
+      end
+
+      ##
+      # @private New Resource from a Google::Api::MonitoredResource object.
+      def self.from_grpc grpc
+        return new if grpc.nil?
         new.tap do |r|
-          r.type = gapi["type"]
-          if gapi["labels"].respond_to? :to_hash
-            r.labels = gapi["labels"].to_hash
-          end
+          r.type = grpc.type
+          r.labels = grpc.labels
+          # hashify the labels hash, just in case...
+          r.labels = r.labels.to_hash if r.labels.respond_to? :to_hash
+          r.labels = r.labels.to_h    if r.labels.respond_to? :to_h
         end
       end
     end

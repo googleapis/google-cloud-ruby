@@ -42,24 +42,24 @@ module Gcloud
         # Retrieve the next page of entries.
         def next
           return nil unless next?
-          ensure_connection!
-          resp = @connection.list_entries token: token
-          if resp.success?
-            self.class.from_response resp, @connection
-          else
-            fail ApiError.from_response(resp)
-          end
+          ensure_service!
+          grpc = @service.list_entries token: token
+          self.class.from_grpc grpc, @service
+        rescue GRPC::BadStatus => e
+          raise Error.from_error(e)
         end
 
         ##
-        # @private New Entry::List from a response object.
-        def self.from_response resp, conn
-          entries = new(Array(resp.data["entries"]).map do |gapi_object|
-            Entry.from_gapi gapi_object
+        # @private New Entry::List from a
+        # Google::Logging::V2::ListLogEntryResponse object.
+        def self.from_grpc grpc_list, service
+          entries = new(Array(grpc_list.entries).map do |grpc_entry|
+            Entry.from_grpc grpc_entry
           end)
           entries.instance_eval do
-            @token = resp.data["nextPageToken"]
-            @connection = conn
+            @token = grpc_list.next_page_token
+            @token = nil if @token == ""
+            @service = service
           end
           entries
         end
@@ -67,9 +67,10 @@ module Gcloud
         protected
 
         ##
-        # Raise an error unless an active connection is available.
-        def ensure_connection!
-          fail "Must have active connection" unless @connection
+        # @private Raise an error unless an active connection to the service is
+        # available.
+        def ensure_service!
+          fail "Must have active connection to service" unless @service
         end
       end
     end

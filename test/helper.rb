@@ -888,34 +888,38 @@ class MockLogging < Minitest::Spec
   end
 
   def random_entry_hash
+    timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
     {
-      "logName"   => "projects/my-projectid/logs/syslog",
+      "log_name"  => "projects/my-projectid/logs/syslog",
       "resource"  => random_resource_hash,
-      "timestamp" => "2014-10-02T15:01:23.045123456Z",
-      "severity"  => "DEFAULT",
-      "insertId"  => "abc123",
+      "timestamp" => {
+        "seconds" => timestamp.to_i,
+        "nanos"   => timestamp.nsec
+      },
+      "severity"  => :DEFAULT,
+      "insert_id" => "abc123",
       "labels" => {
         "env" => "production",
         "foo" => "bar"
       },
-      "textPayload" => "payload",
-      "httpRequest" => random_http_request_hash,
-      "operation" => random_operation_hash
+      "text_payload" => "payload",
+      "http_request" => random_http_request_hash,
+      "operation"    => random_operation_hash
     }
   end
 
   def random_http_request_hash
     {
-      "requestMethod" => "GET",
-      "requestUrl" => "http://test.local/foo?bar=baz",
-      "requestSize" => "123",
+      "request_method" => "GET",
+      "request_url" => "http://test.local/foo?bar=baz",
+      "request_size" => 123,
       "status" => 200,
-      "responseSize" => "456",
-      "userAgent" => "gcloud-ruby/1.0.0",
-      "remoteIp" => "127.0.0.1",
+      "response_size" => 456,
+      "user_agent" => "gcloud-ruby/1.0.0",
+      "remote_ip" => "127.0.0.1",
       "referer" => "http://test.local/referer",
-      "cacheHit" => false,
-      "validatedWithOriginServer" => false
+      "cache_hit" => false,
+      "validated_with_origin_server" => false
     }
   end
 

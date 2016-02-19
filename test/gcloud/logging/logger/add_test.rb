@@ -26,249 +26,119 @@ describe Gcloud::Logging::Logger, :add, :mock_logging do
   end
   let(:labels) { { "env" => "production" } }
   let(:logger) { Gcloud::Logging::Logger.new logging, log_name, resource, labels }
+  let(:severity) { :DEBUG }
+  let(:write_req) do
+    Google::Logging::V2::WriteLogEntriesRequest.new(
+      log_name: "projects/test/logs/web_app_log",
+      resource: resource.to_grpc,
+      labels: labels,
+      entries: [Google::Logging::V2::LogEntry.new(
+        text_payload: "Danger Will Robinson!", severity: severity
+      )]
+    )
+  end
+  let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
+
+  before do
+    @mock = Minitest::Mock.new
+    @mock.expect :write_log_entries, write_res, [write_req]
+    logging.service.logging = @mock
+  end
+
+  after do
+    @mock.verify
+  end
 
   describe :debug do
     it "creates a log entry using :debug" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("DEBUG", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
-
       logger.add :debug, "Danger Will Robinson!"
     end
 
     it "creates a log entry using 'debug'" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("DEBUG", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
-
       logger.add "debug", "Danger Will Robinson!"
     end
 
     it "creates a log entry using Logger::DEBUG" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("DEBUG", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
-
       logger.add ::Logger::DEBUG, "Danger Will Robinson!"
     end
   end
 
   describe :info do
-    it "creates a log entry using :info" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("INFO", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+    let(:severity) { :INFO }
 
+    it "creates a log entry using :info" do
       logger.add :info, "Danger Will Robinson!"
     end
 
     it "creates a log entry using 'info'" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("INFO", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
-
       logger.add "info", "Danger Will Robinson!"
     end
 
     it "creates a log entry using Logger::INFO" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("INFO", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
-
       logger.add ::Logger::INFO, "Danger Will Robinson!"
     end
   end
 
   describe :warn do
-    it "creates a log entry using :warn" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("WARNING", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+    let(:severity) { :WARNING }
 
+    it "creates a log entry using :warn" do
       logger.add :warn, "Danger Will Robinson!"
     end
 
     it "creates a log entry using 'warn'" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("WARNING", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
-
       logger.add "warn", "Danger Will Robinson!"
     end
 
     it "creates a log entry using Logger::WARN" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("WARNING", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
-
       logger.add ::Logger::WARN, "Danger Will Robinson!"
     end
   end
 
   describe :error do
-    it "creates a log entry using :error" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("ERROR", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+    let(:severity) { :ERROR }
 
+    it "creates a log entry using :error" do
       logger.add :error, "Danger Will Robinson!"
     end
 
     it "creates a log entry using 'error'" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("ERROR", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
-
       logger.add "error", "Danger Will Robinson!"
     end
 
     it "creates a log entry using Logger::ERROR" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("ERROR", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
-
       logger.add ::Logger::ERROR, "Danger Will Robinson!"
     end
   end
 
   describe :fatal do
-    it "creates a log entry using :fatal" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("CRITICAL", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+    let(:severity) { :CRITICAL }
 
+    it "creates a log entry using :fatal" do
       logger.add :fatal, "Danger Will Robinson!"
     end
 
     it "creates a log entry using 'fatal'" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("CRITICAL", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
-
       logger.add "fatal", "Danger Will Robinson!"
     end
 
     it "creates a log entry using Logger::FATAL" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("CRITICAL", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
-
       logger.add ::Logger::FATAL, "Danger Will Robinson!"
     end
   end
 
   describe :unknown do
-    it "creates a log entry using :unknown" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("DEFAULT", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+    let(:severity) { :DEFAULT }
 
+    it "creates a log entry using :unknown" do
       logger.add :unknown, "Danger Will Robinson!"
     end
 
     it "creates a log entry using 'unknown'" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("DEFAULT", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
-
       logger.add "unknown", "Danger Will Robinson!"
     end
 
     it "creates a log entry using Logger::UNKNOWN" do
-      mock_connection.post "/v2beta1/entries:write" do |env|
-        entries_json = JSON.parse env.body
-        entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-        entries_json["resource"].must_equal resource.to_gapi
-        entries_json["labels"].must_equal labels
-        entries_json["entries"].must_equal [entry_gapi("DEFAULT", "Danger Will Robinson!")]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
-
       logger.add ::Logger::UNKNOWN, "Danger Will Robinson!"
     end
   end

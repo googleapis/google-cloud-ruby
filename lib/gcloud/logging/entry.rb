@@ -40,6 +40,7 @@ module Gcloud
         @resource = Resource.new
         @http_request = HttpRequest.new
         @operation = Operation.new
+        @severity = :DEFAULT
       end
 
       ##
@@ -74,55 +75,55 @@ module Gcloud
       ##
       # Helper method to determine if the severity is `DEFAULT`
       def default?
-        severity == "DEFAULT"
+        severity == :DEFAULT
       end
 
       ##
       # Helper method to determine if the severity is `DEBUG`
       def debug?
-        severity == "DEBUG"
+        severity == :DEBUG
       end
 
       ##
       # Helper method to determine if the severity is `INFO`
       def info?
-        severity == "INFO"
+        severity == :INFO
       end
 
       ##
       # Helper method to determine if the severity is `NOTICE`
       def notice?
-        severity == "NOTICE"
+        severity == :NOTICE
       end
 
       ##
       # Helper method to determine if the severity is `WARNING`
       def warning?
-        severity == "WARNING"
+        severity == :WARNING
       end
 
       ##
       # Helper method to determine if the severity is `ERROR`
       def error?
-        severity == "ERROR"
+        severity == :ERROR
       end
 
       ##
       # Helper method to determine if the severity is `CRITICAL`
       def critical?
-        severity == "CRITICAL"
+        severity == :CRITICAL
       end
 
       ##
       # Helper method to determine if the severity is `ALERT`
       def alert?
-        severity == "ALERT"
+        severity == :ALERT
       end
 
       ##
       # Helper method to determine if the severity is `EMERGENCY`
       def emergency?
-        severity == "EMERGENCY"
+        severity == :EMERGENCY
       end
 
       ##
@@ -153,79 +154,124 @@ module Gcloud
       attr_reader :operation
 
       ##
-      # @private Exports the Entry to a Google API Client object.
-      def to_gapi
-        ret = {
-          "logName" => log_name,
-          "timestamp" => formatted_timestamp,
-          "severity" => severity,
-          "insertId" => insert_id,
-          "labels" => labels
-        }.delete_if { |_, v| v.nil? }
-        ret.merge! payload_gapi
-        ret.merge!({ "resource" => resource.to_gapi,
-                     "httpRequest" => http_request.to_gapi,
-                     "operation" => operation.to_gapi
-                   }.delete_if { |_, v| v.empty? })
-      end
-
-      ##
-      # @private Formats the timestamp for the API.
-      def formatted_timestamp
-        return timestamp.utc.strftime("%FT%TZ") if timestamp.respond_to? :utc
-        timestamp
-      end
-
-      ##
-      # @private Formats the payload for the API.
-      def payload_gapi
-        if payload.respond_to? :to_proto
-          { "protoPayload" => payload.to_proto }
-        elsif payload.respond_to? :to_hash
-          { "jsonPayload" => payload.to_hash }
-        else
-          { "textPayload" => payload.to_s }
-        end
-      end
-
-      ##
       # @private Determines if the Entry has any data.
       def empty?
-        to_gapi.empty?
+        log_name.nil? &&
+          timestamp.nil? &&
+          insert_id.nil? &&
+          (labels.nil? || labels.empty?) &&
+          payload.nil? &&
+          resource.empty? &&
+          http_request.empty? &&
+          operation.empty?
       end
 
       ##
-      # @private New Entry from a Google API Client object.
-      def self.from_gapi gapi
-        gapi ||= {}
-        entry = new.tap do |e|
-          e.log_name = gapi["logName"]
-          e.timestamp = Time.parse(gapi["timestamp"]) if gapi["timestamp"]
-          e.severity = gapi["severity"]
-          e.insert_id = gapi["insertId"]
-          e.labels = hashify(gapi["labels"])
-          e.payload = extract_payload(gapi)
+      # @private Exports the Entry to a Google::Logging::V2::LogEntry object.
+      def to_grpc
+        grpc = Google::Logging::V2::LogEntry.new(
+          log_name: log_name.to_s,
+          timestamp: timestamp_grpc,
+          # TODO: verify severity is the correct type?
+          severity: severity,
+          insert_id: insert_id.to_s,
+          labels: labels_grpc,
+          resource: resource.to_grpc,
+          http_request: http_request.to_grpc,
+          operation: operation.to_grpc
+        )
+        # Add payload
+        append_payload grpc
+        grpc
+      end
+
+      ##
+      # @private New Entry from a Google::Logging::V2::LogEntry object.
+      def self.from_grpc grpc
+        return new if grpc.nil?
+        new.tap do |e|
+          e.log_name = grpc.log_name
+          e.timestamp = extract_timestamp(grpc)
+          e.severity = grpc.severity
+          e.insert_id = grpc.insert_id
+          e.labels = hashify(grpc.labels)
+          e.payload = extract_payload(grpc)
+          e.instance_eval do
+            @resource = Resource.from_grpc grpc.resource
+            @http_request = HttpRequest.from_grpc grpc.http_request
+            @operation = Operation.from_grpc grpc.operation
+          end
         end
-        entry.instance_eval do
-          @resource = Resource.from_gapi gapi["resource"]
-          @http_request = HttpRequest.from_gapi gapi["httpRequest"]
-          @operation = Operation.from_gapi gapi["operation"]
-        end
-        entry
       end
 
       ##
       # @private Convert to a hash, used for labels.
       def self.hashify h
+        # TODO: Is this really neccessary anymore? Doesn't GRPC do the right
+        # thing?
         h = h.to_hash if h.respond_to? :to_hash
         h = h.to_h    if h.respond_to? :to_h
         h
       end
 
       ##
+      # @private Formats the timestamp as a Google::Protobuf::Timestamp object.
+      def timestamp_grpc
+        return nil if timestamp.nil?
+        # TODO: ArgumentError if timestamp is not a Time object?
+        Google::Protobuf::Timestamp.new(
+          seconds: timestamp.to_i,
+          nanos: timestamp.nsec
+        )
+      end
+
+      ##
+      # @private Formats the labels so they can be saved to a
+      # Google::Logging::V2::LogEntry object.
+      def labels_grpc
+        # Coerce symbols to strings
+        Hash[labels.map do |k, v|
+          v = String(v) if v.is_a? Symbol
+          [String(k), v]
+        end]
+      end
+
+      ##
+      # @private Adds the payload data to a Google::Logging::V2::LogEntry
+      # object.
+      def append_payload grpc
+        # TODO: This is not correct. We need to convert a hash to the
+        # json_payload's Google::Protobuf::Struct object. And however we
+        # identify a proto_payload to a Google::Protobuf::Any object. There is
+        # more work to do.
+        grpc.proto_payload = nil
+        grpc.json_payload  = nil
+        grpc.text_payload  = nil
+
+        if payload.respond_to? :to_proto
+          grpc.proto_payload = payload.to_proto
+        elsif payload.respond_to? :to_hash
+          grpc.json_payload = payload.to_hash
+        else
+          grpc.text_payload = payload.to_s
+        end
+      end
+
+      ##
       # @private Extract payload data from Google API Client object.
-      def self.extract_payload gapi
-        gapi["protoPayload"] || gapi["jsonPayload"] || gapi["textPayload"]
+      def self.extract_payload grpc
+        # TODO: This is not correct. We need to convert the json_payload
+        # Google::Protobuf::Struct object to a hash. And the proto_payload
+        # Google::Protobuf::Any object to something as well. It is more
+        # complicated than this.
+        grpc.proto_payload || grpc.json_payload || grpc.text_payload
+      end
+
+      ##
+      # @private Get a Time object from a Google::Protobuf::Timestamp object.
+      def self.extract_timestamp grpc
+        return nil if grpc.timestamp.nil?
+        Time.at grpc.timestamp.seconds, grpc.timestamp.nanos/1000.0
       end
     end
   end

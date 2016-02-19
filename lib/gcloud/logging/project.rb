@@ -127,14 +127,12 @@ module Gcloud
       #   end
       #
       def entries projects: nil, filter: nil, order: nil, token: nil, max: nil
-        ensure_connection!
-        resp = connection.list_entries projects: projects, filter: filter,
-                                       order: order, token: token, max: max
-        if resp.success?
-          Entry::List.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        list_grpc = service.list_entries projects: projects, filter: filter,
+                                         order: order, token: token, max: max
+        Entry::List.from_grpc list_grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_entries, :entries
 
@@ -198,12 +196,13 @@ module Gcloud
       #   logging.write_entries [entry1, entry2], log_name: "syslog"
       #
       def write_entries entries, log_name: nil, resource: nil, labels: nil
-        ensure_connection!
-        resp = connection.write_entries Array(entries).map(&:to_gapi),
-                                        log_name: log_name,
-                                        resource: resource, labels: labels
-        return true if resp.success?
-        fail ApiError.from_response(resp)
+        ensure_service!
+        service.write_entries Array(entries).map(&:to_grpc),
+                              log_name: log_name, resource: resource,
+                              labels: labels
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##

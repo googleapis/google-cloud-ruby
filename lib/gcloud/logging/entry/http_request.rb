@@ -79,44 +79,55 @@ module Gcloud
         attr_accessor :validated
 
         ##
-        # @private Exports the HttpRequest to a Google API Client object.
-        def to_gapi
-          {
-            "requestMethod" => method,
-            "requestUrl" => url,
-            "requestSize" => size,
-            "status" => status,
-            "responseSize" => response_size,
-            "userAgent" => user_agent,
-            "remoteIp" => remote_ip,
-            "referer" => referer,
-            "cacheHit" => cache_hit,
-            "validatedWithOriginServer" => validated
-          }.delete_if { |_, v| v.nil? }
-        end
-
-        ##
         # @private Determines if the HttpRequest has any data.
         def empty?
-          to_gapi.empty?
+          method.nil? &&
+            url.nil? &&
+            size.nil? &&
+            status.nil? &&
+            response_size.nil? &&
+            user_agent.nil? &&
+            remote_ip.nil? &&
+            referer.nil? &&
+            cache_hit.nil? &&
+            validated.nil?
         end
 
         ##
-        # @private New HttpRequest from a Google API Client object.
-        def self.from_gapi gapi
-          gapi ||= {}
-          gapi = gapi.to_hash if gapi.respond_to? :to_hash
+        # @private Exports the HttpRequest to a
+        # Google::Logging::Type::HttpRequest object.
+        def to_grpc
+          return nil if empty?
+          Google::Logging::Type::HttpRequest.new(
+            request_method:               method.to_s,
+            request_url:                  url.to_s,
+            request_size:                 size.to_i,
+            status:                       status.to_i,
+            response_size:                response_size.to_i,
+            user_agent:                   user_agent.to_s,
+            remote_ip:                    remote_ip.to_s,
+            referer:                      referer.to_s,
+            cache_hit:                    !(!cache_hit),
+            validated_with_origin_server: !(!validated)
+          )
+        end
+
+        ##
+        # @private New HttpRequest from a Google::Logging::Type::HttpRequest
+        # object.
+        def self.from_grpc grpc
+          return new if grpc.nil?
           new.tap do |h|
-            h.method        = gapi["requestMethod"]
-            h.url           = gapi["requestUrl"]
-            h.size          = gapi["requestSize"]
-            h.status        = gapi["status"]
-            h.response_size = gapi["responseSize"]
-            h.user_agent    = gapi["userAgent"]
-            h.remote_ip     = gapi["remoteIp"]
-            h.referer       = gapi["referer"]
-            h.cache_hit     = gapi["cacheHit"]
-            h.validated     = gapi["validatedWithOriginServer"]
+            h.method        = grpc.request_method
+            h.url           = grpc.request_url
+            h.size          = grpc.request_size
+            h.status        = grpc.status
+            h.response_size = grpc.response_size
+            h.user_agent    = grpc.user_agent
+            h.remote_ip     = grpc.remote_ip
+            h.referer       = grpc.referer
+            h.cache_hit     = grpc.cache_hit
+            h.validated     = grpc.validated_with_origin_server
           end
         end
       end

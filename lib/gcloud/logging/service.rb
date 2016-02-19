@@ -51,6 +51,38 @@ module Gcloud
       end
       attr_writer :metrics
 
+      def list_entries projects: nil, filter: nil, order: nil, token: nil,
+                       max: nil
+        list_params = { project_ids: Array(projects || @project),
+                        filter: filter,
+                        order_by: order,
+                        page_token: token,
+                        page_size: max
+                      }.delete_if { |_, v| v.nil? }
+
+        list_req = Google::Logging::V2::ListLogEntriesRequest.new(list_params)
+
+        logging.list_log_entries list_req
+      end
+
+      def write_entries entries, log_name: nil, resource: nil, labels: nil
+        # Fix log names so they are the full path
+        entries = Array(entries).each do |entry|
+          entry.log_name = log_path(entry.log_name)
+        end
+        resource = resource.to_grpc if resource
+        labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+
+        write_params = { entries: entries,
+                         log_name: log_path(log_name),
+                         resource: resource, labels: labels
+                       }.delete_if { |_, v| v.nil? }
+
+        write_req = Google::Logging::V2::WriteLogEntriesRequest.new write_params
+
+        logging.write_log_entries write_req
+      end
+
       def delete_log name
         delete_req = Google::Logging::V2::DeleteLogRequest.new(
           log_name: log_path(name)
@@ -191,6 +223,7 @@ module Gcloud
 
       def log_path log_name
         return nil if log_name.nil?
+        return log_name if log_name.empty?
         return log_name if log_name.to_s.include? "/"
         "#{project_path}/logs/#{log_name}"
       end

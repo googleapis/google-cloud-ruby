@@ -17,120 +17,108 @@ require "helper"
 describe Gcloud::Logging::Project, :list_entries, :mock_logging do
   it "lists entries" do
     num_entries = 3
-    mock_connection.post "/v2beta1/entries:list" do |env|
-      list_json = JSON.parse env.body
-      list_json["projectIds"].must_equal [project]
-      list_json["filter"].must_be :nil?
-      list_json["orderBy"].must_be :nil?
-      list_json["pageToken"].must_be :nil?
-      list_json["maxResults"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       list_entries_json(num_entries)]
-    end
+
+    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
+    list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json list_entries_json(num_entries)
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_entries, list_res, [list_req]
+    logging.service.logging = mock
 
     entries = logging.entries
+
+    mock.verify
+
     entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     entries.size.must_equal num_entries
   end
 
   it "lists entries with find_entries alias" do
     num_entries = 3
-    mock_connection.post "/v2beta1/entries:list" do |env|
-      list_json = JSON.parse env.body
-      list_json["projectIds"].must_equal [project]
-      list_json["filter"].must_be :nil?
-      list_json["orderBy"].must_be :nil?
-      list_json["pageToken"].must_be :nil?
-      list_json["maxResults"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       list_entries_json(num_entries)]
-    end
+
+    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
+    list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json list_entries_json(num_entries)
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_entries, list_res, [list_req]
+    logging.service.logging = mock
 
     entries = logging.find_entries
+
+    mock.verify
+
     entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     entries.size.must_equal num_entries
   end
 
   it "paginates entries" do
-    mock_connection.post "/v2beta1/entries:list" do |env|
-      list_json = JSON.parse env.body
-      list_json["projectIds"].must_equal [project]
-      list_json["filter"].must_be :nil?
-      list_json["orderBy"].must_be :nil?
-      list_json["pageToken"].must_be :nil?
-      list_json["maxResults"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       list_entries_json(3, "next_page_token")]
-    end
-    mock_connection.post "/v2beta1/entries:list" do |env|
-      list_json = JSON.parse env.body
-      list_json["projectIds"].must_equal [project]
-      list_json["filter"].must_be :nil?
-      list_json["orderBy"].must_be :nil?
-      list_json["pageToken"].must_equal "next_page_token"
-      list_json["maxResults"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       list_entries_json(2)]
-    end
+    first_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
+    second_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], page_token: "next_page_token"
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_entries,
+                Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token")),
+                [first_list_req]
+    mock.expect :list_log_entries,
+                Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2)),
+                [second_list_req]
+    logging.service.logging = mock
 
     first_entries = logging.entries
+    second_entries = logging.entries token: first_entries.token
+
+    mock.verify
+
     first_entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     first_entries.count.must_equal 3
     first_entries.token.wont_be :nil?
     first_entries.token.must_equal "next_page_token"
 
-    second_entries = logging.entries token: first_entries.token
     second_entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     second_entries.count.must_equal 2
     second_entries.token.must_be :nil?
   end
 
   it "paginates entries with next? and next" do
-    mock_connection.post "/v2beta1/entries:list" do |env|
-      list_json = JSON.parse env.body
-      list_json["projectIds"].must_equal [project]
-      list_json["filter"].must_be :nil?
-      list_json["orderBy"].must_be :nil?
-      list_json["pageToken"].must_be :nil?
-      list_json["maxResults"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       list_entries_json(3, "next_page_token")]
-    end
-    mock_connection.post "/v2beta1/entries:list" do |env|
-      list_json = JSON.parse env.body
-      list_json["projectIds"].must_equal [project]
-      list_json["filter"].must_be :nil?
-      list_json["orderBy"].must_be :nil?
-      list_json["pageToken"].must_equal "next_page_token"
-      list_json["maxResults"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       list_entries_json(2)]
-    end
+    first_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
+    second_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], page_token: "next_page_token"
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_entries,
+                Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token")),
+                [first_list_req]
+    mock.expect :list_log_entries,
+                Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2)),
+                [second_list_req]
+    logging.service.logging = mock
 
     first_entries = logging.entries
+    second_entries = first_entries.next
+
+    mock.verify
+
     first_entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     first_entries.count.must_equal 3
     first_entries.next?.must_equal true #must_be :next?
 
-    second_entries = first_entries.next
     second_entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     second_entries.count.must_equal 2
     second_entries.next?.must_equal false #wont_be :next?
   end
 
   it "paginates entries with one project" do
-    mock_connection.post "/v2beta1/entries:list" do |env|
-      list_json = JSON.parse env.body
-      list_json["projectIds"].must_equal ["project1"]
-      list_json["filter"].must_be :nil?
-      list_json["orderBy"].must_be :nil?
-      list_json["pageToken"].must_be :nil?
-      list_json["maxResults"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       list_entries_json(3, "next_page_token")]
-    end
+    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: ["project1"]
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_entries,
+                Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token")),
+                [list_req]
+    logging.service.logging = mock
 
     entries = logging.entries projects: "project1"
+
+    mock.verify
+
     entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     entries.count.must_equal 3
     entries.token.wont_be :nil?
@@ -138,18 +126,18 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries with multiple projects" do
-    mock_connection.post "/v2beta1/entries:list" do |env|
-      list_json = JSON.parse env.body
-      list_json["projectIds"].must_equal ["project1", "project2", "project3"]
-      list_json["filter"].must_be :nil?
-      list_json["orderBy"].must_be :nil?
-      list_json["pageToken"].must_be :nil?
-      list_json["maxResults"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       list_entries_json(3, "next_page_token")]
-    end
+    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: ["project1", "project2", "project3"]
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_entries,
+                Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token")),
+                [list_req]
+    logging.service.logging = mock
 
     entries = logging.entries projects: ["project1", "project2", "project3"]
+
+    mock.verify
+
     entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     entries.count.must_equal 3
     entries.token.wont_be :nil?
@@ -158,18 +146,19 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
 
   it "paginates entries with a filter" do
     adv_logs_filter = 'resource.type:"gce_"'
-    mock_connection.post "/v2beta1/entries:list" do |env|
-      list_json = JSON.parse env.body
-      list_json["projectIds"].must_equal [project]
-      list_json["filter"].must_equal adv_logs_filter
-      list_json["orderBy"].must_be :nil?
-      list_json["pageToken"].must_be :nil?
-      list_json["maxResults"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       list_entries_json(3, "next_page_token")]
-    end
+
+    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], filter: adv_logs_filter
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_entries,
+                Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token")),
+                [list_req]
+    logging.service.logging = mock
 
     entries = logging.entries filter: adv_logs_filter
+
+    mock.verify
+
     entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     entries.count.must_equal 3
     entries.token.wont_be :nil?
@@ -177,18 +166,18 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries with order asc" do
-    mock_connection.post "/v2beta1/entries:list" do |env|
-      list_json = JSON.parse env.body
-      list_json["projectIds"].must_equal [project]
-      list_json["filter"].must_be :nil?
-      list_json["orderBy"].must_equal "timestamp"
-      list_json["pageToken"].must_be :nil?
-      list_json["maxResults"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       list_entries_json(3, "next_page_token")]
-    end
+    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], order_by: "timestamp"
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_entries,
+                Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token")),
+                [list_req]
+    logging.service.logging = mock
 
     entries = logging.entries order: "timestamp"
+
+    mock.verify
+
     entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     entries.count.must_equal 3
     entries.token.wont_be :nil?
@@ -196,18 +185,18 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries with order desc" do
-    mock_connection.post "/v2beta1/entries:list" do |env|
-      list_json = JSON.parse env.body
-      list_json["projectIds"].must_equal [project]
-      list_json["filter"].must_be :nil?
-      list_json["orderBy"].must_equal "timestamp desc"
-      list_json["pageToken"].must_be :nil?
-      list_json["maxResults"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       list_entries_json(3, "next_page_token")]
-    end
+    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], order_by: "timestamp desc"
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_entries,
+                Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token")),
+                [list_req]
+    logging.service.logging = mock
 
     entries = logging.entries order: "timestamp desc"
+
+    mock.verify
+
     entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     entries.count.must_equal 3
     entries.token.wont_be :nil?
@@ -215,18 +204,18 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries with max set" do
-    mock_connection.post "/v2beta1/entries:list" do |env|
-      list_json = JSON.parse env.body
-      list_json["projectIds"].must_equal [project]
-      list_json["filter"].must_be :nil?
-      list_json["orderBy"].must_be :nil?
-      list_json["pageToken"].must_be :nil?
-      list_json["maxResults"].must_equal 3
-      [200, {"Content-Type"=>"application/json"},
-       list_entries_json(3, "next_page_token")]
-    end
+    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], page_size: 3
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_entries,
+                Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token")),
+                [list_req]
+    logging.service.logging = mock
 
     entries = logging.entries max: 3
+
+    mock.verify
+
     entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     entries.count.must_equal 3
     entries.token.wont_be :nil?
@@ -234,18 +223,18 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries without max set" do
-    mock_connection.post "/v2beta1/entries:list" do |env|
-      list_json = JSON.parse env.body
-      list_json["projectIds"].must_equal [project]
-      list_json["filter"].must_be :nil?
-      list_json["orderBy"].must_be :nil?
-      list_json["pageToken"].must_be :nil?
-      list_json["maxResults"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       list_entries_json(3, "next_page_token")]
-    end
+    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_entries,
+                Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token")),
+                [list_req]
+    logging.service.logging = mock
 
     entries = logging.entries
+
+    mock.verify
+
     entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     entries.count.must_equal 3
     entries.token.wont_be :nil?
@@ -255,7 +244,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
   def list_entries_json count = 2, token = nil
     {
       entries: count.times.map { random_entry_hash },
-      nextPageToken: token
+      next_page_token: token
     }.delete_if { |_, v| v.nil? }.to_json
   end
 end

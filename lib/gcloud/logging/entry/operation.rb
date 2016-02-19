@@ -49,32 +49,37 @@ module Gcloud
         attr_accessor :last
 
         ##
-        # @private Exports the Operation to a Google API Client object.
-        def to_gapi
-          {
-            "id" => id,
-            "producer" => producer,
-            "first" => first,
-            "last" => last
-          }.delete_if { |_, v| v.nil? }
-        end
-
-        ##
         # @private Determines if the Operation has any data.
         def empty?
-          to_gapi.empty?
+          id.nil? &&
+            producer.nil? &&
+            first.nil? &&
+            last.nil?
         end
 
         ##
-        # @private New Operation from a Google API Client object.
-        def self.from_gapi gapi
-          gapi ||= {}
-          gapi = gapi.to_hash if gapi.respond_to? :to_hash
+        # @private Exports the Operation to a
+        # Google::Logging::V2::LogEntryOperation object.
+        def to_grpc
+          return nil if empty?
+          Google::Logging::V2::LogEntryOperation.new(
+            id:       id.to_s,
+            producer: producer.to_s,
+            first:    !(!first),
+            last:     !(!last)
+          )
+        end
+
+        ##
+        # @private New HttpRequest from a Google::Logging::V2::LogEntryOperation
+        # object.
+        def self.from_grpc grpc
+          return new if grpc.nil?
           new.tap do |o|
-            o.id       = gapi["id"]
-            o.producer = gapi["producer"]
-            o.first    = gapi["first"]
-            o.last     = gapi["last"]
+            o.id       = grpc.id
+            o.producer = grpc.producer
+            o.first    = grpc.first
+            o.last     = grpc.last
           end
         end
       end
