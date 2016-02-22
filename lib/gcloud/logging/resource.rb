@@ -69,10 +69,18 @@ module Gcloud
         return new if grpc.nil?
         new.tap do |r|
           r.type = grpc.type
-          r.labels = grpc.labels
-          # hashify the labels hash, just in case...
-          r.labels = r.labels.to_hash if r.labels.respond_to? :to_hash
-          r.labels = r.labels.to_h    if r.labels.respond_to? :to_h
+          r.labels = map_to_hash(grpc.labels)
+        end
+      end
+
+      ##
+      # @private Convert a Google::Protobuf::Map to a Hash
+      def self.map_to_hash map
+        if map.respond_to? :to_h
+          map.to_h
+        else
+          # Enumerable doesn't have to_h on ruby 2.0...
+          Hash[map.to_a]
         end
       end
     end

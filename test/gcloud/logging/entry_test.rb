@@ -76,8 +76,9 @@ describe Gcloud::Logging::Entry, :mock_logging do
   end
 
   it "has the correct resource attributes" do
-    entry.resource.type.must_equal        entry_hash["resource"]["type"]
-    entry.resource.labels.must_equal      entry_hash["resource"]["labels"]
+    entry.resource.type.must_equal entry_hash["resource"]["type"]
+    entry.resource.labels.keys.sort.must_equal   entry_hash["resource"]["labels"].keys.sort
+    entry.resource.labels.values.sort.must_equal entry_hash["resource"]["labels"].values.sort
   end
 
   it "has a resource even if the Google API object doesn't have it" do

@@ -27,7 +27,7 @@ describe Gcloud::Logging::Entry, :to_grpc, :mock_logging do
     grpc.severity.must_equal :DEFAULT
     grpc.timestamp.must_be :nil?
     grpc.insert_id.must_be :empty?
-    grpc.labels.to_h.must_be :empty?
+    map_to_hash(grpc.labels).must_be :empty?
     grpc.text_payload.must_be :empty?
     grpc.json_payload.must_be :nil?
     grpc.proto_payload.must_be :nil?
@@ -71,14 +71,14 @@ describe Gcloud::Logging::Entry, :to_grpc, :mock_logging do
     grpc.log_name.must_equal "projects/test/logs/testlog"
 
     grpc.resource.type.must_equal        "webapp_server"
-    grpc.resource.labels.to_h.must_equal({ "description" => "The server is running in test",
-                                           "env"         => "test",
-                                           "valueType"   => "STRING" })
+    map_to_hash(grpc.resource.labels).must_equal({ "description" => "The server is running in test",
+                                                   "env"         => "test",
+                                                   "valueType"   => "STRING" })
 
     grpc.severity.must_equal :ERROR
     grpc.timestamp.must_equal Google::Protobuf::Timestamp.new(seconds: Time.parse("2016-01-02T03:04:05Z").to_i)
     grpc.insert_id.must_equal "insert123"
-    grpc.labels.to_h.must_equal("env" => "test", "fizz" => "buzz")
+    map_to_hash(grpc.labels).must_equal("env" => "test", "fizz" => "buzz")
     grpc.text_payload.must_equal "payload"
     grpc.json_payload.must_be :nil?
     grpc.proto_payload.must_be :nil?
@@ -98,5 +98,14 @@ describe Gcloud::Logging::Entry, :to_grpc, :mock_logging do
     grpc.operation.producer.must_equal "NewApp.NewClass#new_method"
     grpc.operation.first.must_equal true
     grpc.operation.last.must_equal false
+  end
+
+  def map_to_hash map
+    if map.respond_to? :to_h
+      map.to_h
+    else
+      # Enumerable doesn't have to_h on ruby 2.0...
+      Hash[map.to_a]
+    end
   end
 end

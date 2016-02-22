@@ -194,7 +194,7 @@ module Gcloud
           e.timestamp = extract_timestamp(grpc)
           e.severity = grpc.severity
           e.insert_id = grpc.insert_id
-          e.labels = hashify(grpc.labels)
+          e.labels = map_to_hash(grpc.labels)
           e.payload = extract_payload(grpc)
           e.instance_eval do
             @resource = Resource.from_grpc grpc.resource
@@ -205,13 +205,14 @@ module Gcloud
       end
 
       ##
-      # @private Convert to a hash, used for labels.
-      def self.hashify h
-        # TODO: Is this really neccessary anymore? Doesn't GRPC do the right
-        # thing?
-        h = h.to_hash if h.respond_to? :to_hash
-        h = h.to_h    if h.respond_to? :to_h
-        h
+      # @private Convert a Google::Protobuf::Map to a Hash
+      def self.map_to_hash map
+        if map.respond_to? :to_h
+          map.to_h
+        else
+          # Enumerable doesn't have to_h on ruby 2.0...
+          Hash[map.to_a]
+        end
       end
 
       ##
