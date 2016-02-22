@@ -857,34 +857,9 @@ class MockLogging < Minitest::Spec
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:logging) { $gcloud_logging_global ||= Gcloud::Logging::Project.new(project, credentials) }
 
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    connection = logging.instance_variable_get "@connection"
-    client = connection.instance_variable_get "@client"
-    client.connection = Faraday.new do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
-  end
-
-  def teardown
-    @connection.verify_stubbed_calls
-  end
-
-  def mock_connection
-    @connection
-  end
-
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_logging
-  end
-
-  def entry_gapi severity, payload
-    logging.entry.tap do |e|
-      e.severity = severity
-      e.payload = payload
-    end.to_gapi
   end
 
   def random_entry_hash

@@ -14,7 +14,6 @@
 
 
 require "gcloud/gce"
-require "gcloud/logging/connection"
 require "gcloud/logging/service"
 require "gcloud/logging/credentials"
 require "gcloud/logging/errors"
@@ -42,10 +41,6 @@ module Gcloud
     # See Gcloud#logging
     class Project
       ##
-      # @private The Connection object.
-      attr_accessor :connection
-
-      ##
       # @private The gRPC Service object.
       attr_accessor :service
 
@@ -54,7 +49,6 @@ module Gcloud
       def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
-        @connection = Connection.new project, credentials
         @service = Service.new project, credentials
       end
 
@@ -70,7 +64,7 @@ module Gcloud
       #   logging.project #=> "my-todo-project"
       #
       def project
-        connection.project
+        service.project
       end
 
       ##
@@ -555,12 +549,6 @@ module Gcloud
       alias_method :find_metric, :metric
 
       protected
-
-      ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
-      end
 
       ##
       # @private Raise an error unless an active connection to the service is
