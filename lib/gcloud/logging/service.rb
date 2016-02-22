@@ -215,6 +215,10 @@ module Gcloud
         metrics.delete_log_metric delete_req
       end
 
+      def inspect
+        "#{self.class}(#{@project})"
+      end
+
       protected
 
       def project_path
