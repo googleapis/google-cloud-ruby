@@ -66,6 +66,16 @@ module MyModule
     def other_instance_method str
       str.to_s.length
     end
+
+    protected
+
+    # A protected method should not appear in the output.
+    class ProtectedClass
+    end
+
+    # A protected method should not appear in the output.
+    def my_protected_method
+    end
   end
 
   class MyConfig

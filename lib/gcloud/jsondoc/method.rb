@@ -36,12 +36,32 @@ module Gcloud
           json.description md(t.text)
         end
         json.returns object.docstring.tags(:return) do |t|
-          json.types t.types
+          json.types format_types(t.types)
           json.description md(t.text)
         end
       end
 
       protected
+
+      # Formats a list of types from a tag.
+      #
+      # @param [Array<String>, FalseClass] typelist
+      #   the list of types to be formatted.
+      #
+      # @param [Boolean] brackets omits the surrounding
+      #   brackets if +brackets+ is set to +false+.
+      #
+      # @return [String] the list of types formatted
+      #   as [Type1, Type2, ...] with the types linked
+      #   to their respective descriptions.
+      #
+      def format_types(typelist, brackets = true)
+        return unless typelist.is_a?(Array)
+        typelist.map do |type|
+          type = type.gsub(/([<>])/) { h($1) }
+          type.gsub(/([\w:]+)/) { $1 == "lt" || $1 == "gt" ? $1 : linkify($1, $1) }
+        end
+      end
 
       def param json, method, param
 

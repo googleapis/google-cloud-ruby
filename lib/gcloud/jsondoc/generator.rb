@@ -21,15 +21,7 @@ module Gcloud
       def build
         modules = @registry.all(:module)
         modules.each do |object|
-          @docs << Doc.new(object)
-          children = object.children.select { |c| c.type == :class && c.namespace.name == object.name }
-          children.each do |child|
-            @docs << Doc.new(child)
-            grandchildren = child.children.select { |c| c.type == :class && c.namespace.name == child.name }
-            grandchildren.each do |child|
-              @docs << ChildDoc.new(child)
-            end
-          end
+          @docs += Doc.new(object).subtree
         end
         @registry.clear
       end

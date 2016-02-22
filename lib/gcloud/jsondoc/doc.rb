@@ -16,12 +16,10 @@ module Gcloud
       end
 
       def filepath
-        downcase_namespace = @object.namespace.name.to_s.downcase
-        if downcase_namespace == "root"
-          "#{@name}.json"
-        else
-          "#{downcase_namespace}/#{@name}.json"
-        end
+        namespaces = @object.title.split("::")
+        namespaces.shift if namespaces.size > 2 # remove "GCloud", since problematic in site app nav
+        title_path = namespaces.map(&:downcase).join("/")
+        "#{title_path}.json"
       end
 
       def build
@@ -32,10 +30,19 @@ module Gcloud
         end
       end
 
+      def subtree
+        docs = [self]
+        children = @object.children.select { |c| c.type == :class && c.visibility == :public && c.namespace.name == @object.name && !c.has_tag?(:private) }
+        children.each do |child|
+          docs += Doc.new(child).subtree
+        end
+        docs
+      end
+
       protected
 
       def methods json, object
-        methods = object.children.select { |c| c.type == :method && !c.is_alias? && !c.has_tag?(:private) } # TODO: handle aliases
+        methods = object.children.select { |c| c.type == :method && c.visibility == :public && !c.is_alias? && !c.has_tag?(:private) } # TODO: handle aliases
         json.methods methods do |method|
           Method.new(json, method).build!
         end
