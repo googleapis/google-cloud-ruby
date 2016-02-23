@@ -241,16 +241,12 @@ module Gcloud
       # @private Adds the payload data to a Google::Logging::V2::LogEntry
       # object.
       def append_payload grpc
-        # TODO: This is not correct. We need to convert a hash to the
-        # json_payload's Google::Protobuf::Struct object. And however we
-        # identify a proto_payload to a Google::Protobuf::Any object. There is
-        # more work to do.
         grpc.proto_payload = nil
         grpc.json_payload  = nil
         grpc.text_payload  = nil
 
-        if payload.respond_to? :to_proto
-          grpc.proto_payload = payload.to_proto
+        if payload.is_a? Google::Protobuf::Any
+          grpc.proto_payload = payload
         elsif payload.respond_to? :to_hash
           grpc.json_payload = payload.to_hash
         else
@@ -261,10 +257,6 @@ module Gcloud
       ##
       # @private Extract payload data from Google API Client object.
       def self.extract_payload grpc
-        # TODO: This is not correct. We need to convert the json_payload
-        # Google::Protobuf::Struct object to a hash. And the proto_payload
-        # Google::Protobuf::Any object to something as well. It is more
-        # complicated than this.
         grpc.proto_payload || grpc.json_payload || grpc.text_payload
       end
 

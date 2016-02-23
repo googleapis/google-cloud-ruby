@@ -66,13 +66,15 @@ describe Gcloud::Logging::Entry, :mock_logging do
   end
 
   it "can have a ProtoBuf payload" do
-    skip
-    proto = OpenStruct.new to_proto: { "id" => 1234, "@type" => "types.example.com/standard/id" }
+    proto = Google::Protobuf::Any.new type_url: "example.com/Greeter/SayHello",
+                                      value: "\n\fHello world!".encode("ASCII-8BIT")
     entry.payload = proto
+    entry.payload.must_be_kind_of Google::Protobuf::Any
     grpc = entry.to_grpc
-    grpc.proto_payload.must_be_kind_of Hash
-    grpc.proto_payload["id"].must_equal 1234
-    grpc.proto_payload["@type"].must_equal "types.example.com/standard/id"
+    grpc.proto_payload.must_be_kind_of Google::Protobuf::Any
+    grpc.proto_payload.must_equal          proto
+    grpc.proto_payload.type_url.must_equal proto.type_url
+    grpc.proto_payload.value.must_equal    proto.value
   end
 
   it "has the correct resource attributes" do
