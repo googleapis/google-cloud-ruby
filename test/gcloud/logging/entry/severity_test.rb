@@ -15,10 +15,12 @@
 require "helper"
 
 describe Gcloud::Logging::Entry, :severity, :mock_logging do
-  let(:entry) { Gcloud::Logging::Entry.from_gapi random_entry_hash }
+  let(:entry_json) { random_entry_hash.to_json }
+  let(:entry_grpc) { Google::Logging::V2::LogEntry.decode_json entry_json }
+  let(:entry) { Gcloud::Logging::Entry.from_grpc entry_grpc }
 
   it "has the correct helpers for DEFAULT" do
-    entry.severity = "DEFAULT"
+    entry.severity = :DEFAULT
     entry.must_be :default?
     entry.wont_be :debug?
     entry.wont_be :info?
@@ -31,7 +33,7 @@ describe Gcloud::Logging::Entry, :severity, :mock_logging do
   end
 
   it "has the correct helpers for DEBUG" do
-    entry.severity = "DEBUG"
+    entry.severity = :DEBUG
     entry.wont_be :default?
     entry.must_be :debug?
     entry.wont_be :info?
@@ -44,7 +46,7 @@ describe Gcloud::Logging::Entry, :severity, :mock_logging do
   end
 
   it "has the correct helpers for INFO" do
-    entry.severity = "INFO"
+    entry.severity = :INFO
     entry.wont_be :default?
     entry.wont_be :debug?
     entry.must_be :info?
@@ -57,7 +59,7 @@ describe Gcloud::Logging::Entry, :severity, :mock_logging do
   end
 
   it "has the correct helpers for NOTICE" do
-    entry.severity = "NOTICE"
+    entry.severity = :NOTICE
     entry.wont_be :default?
     entry.wont_be :debug?
     entry.wont_be :info?
@@ -70,7 +72,7 @@ describe Gcloud::Logging::Entry, :severity, :mock_logging do
   end
 
   it "has the correct helpers for WARNING" do
-    entry.severity = "WARNING"
+    entry.severity = :WARNING
     entry.wont_be :default?
     entry.wont_be :debug?
     entry.wont_be :info?
@@ -83,7 +85,7 @@ describe Gcloud::Logging::Entry, :severity, :mock_logging do
   end
 
   it "has the correct helpers for ERROR" do
-    entry.severity = "ERROR"
+    entry.severity = :ERROR
     entry.wont_be :default?
     entry.wont_be :debug?
     entry.wont_be :info?
@@ -96,7 +98,7 @@ describe Gcloud::Logging::Entry, :severity, :mock_logging do
   end
 
   it "has the correct helpers for CRITICAL" do
-    entry.severity = "CRITICAL"
+    entry.severity = :CRITICAL
     entry.wont_be :default?
     entry.wont_be :debug?
     entry.wont_be :info?
@@ -109,7 +111,7 @@ describe Gcloud::Logging::Entry, :severity, :mock_logging do
   end
 
   it "has the correct helpers for ALERT" do
-    entry.severity = "ALERT"
+    entry.severity = :ALERT
     entry.wont_be :default?
     entry.wont_be :debug?
     entry.wont_be :info?
@@ -122,7 +124,7 @@ describe Gcloud::Logging::Entry, :severity, :mock_logging do
   end
 
   it "has the correct helpers for EMERGENCY" do
-    entry.severity = "EMERGENCY"
+    entry.severity = :EMERGENCY
     entry.wont_be :default?
     entry.wont_be :debug?
     entry.wont_be :info?

@@ -207,9 +207,9 @@ module Gcloud
       ##
       # @private Get Google Cloud deverity from logger level number.
       def gcloud_severity severity_int
-        %w(DEBUG INFO WARNING ERROR CRITICAL DEFAULT)[severity_int]
+        %i(DEBUG INFO WARNING ERROR CRITICAL DEFAULT)[severity_int]
       rescue
-        "DEFAULT"
+        :DEFAULT
       end
     end
   end

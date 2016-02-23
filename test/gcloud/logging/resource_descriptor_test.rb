@@ -16,7 +16,9 @@ require "helper"
 
 describe Gcloud::Logging::ResourceDescriptor, :mock_logging do
   let(:resource_descriptor_hash) { random_resource_descriptor_hash }
-  let(:resource_descriptor) { Gcloud::Logging::ResourceDescriptor.from_gapi resource_descriptor_hash }
+  let(:resource_descriptor_json) { resource_descriptor_hash.to_json }
+  let(:resource_descriptor_grpc) { Google::Api::MonitoredResourceDescriptor.decode_json resource_descriptor_json }
+  let(:resource_descriptor) { Gcloud::Logging::ResourceDescriptor.from_grpc resource_descriptor_grpc }
 
   it "knows its attributes" do
     resource_descriptor.type.must_equal        "cloudsql_database"
@@ -28,13 +30,19 @@ describe Gcloud::Logging::ResourceDescriptor, :mock_logging do
     labels = resource_descriptor.labels
     labels.must_be_kind_of Array
     labels.wont_be :empty?
-    labels.count.must_equal 2
+    labels.count.must_equal 4
     labels[0].must_be_kind_of Gcloud::Logging::ResourceDescriptor::LabelDescriptor
     labels[0].key.must_equal "database_id"
-    labels[0].type.must_be :nil?
+    labels[0].type.must_equal :string # defaults to string...
     labels[0].description.must_equal "The ID of the database."
     labels[1].key.must_equal "zone"
     labels[1].type.must_equal :string
     labels[1].description.must_equal "The GCP zone in which the database is running."
+    labels[2].key.must_equal "active"
+    labels[2].type.must_equal :boolean
+    labels[2].description.must_equal "Whether the database is active."
+    labels[3].key.must_equal "max_connections"
+    labels[3].type.must_equal :integer
+    labels[3].description.must_equal "The maximum number of connections it supports."
   end
 end

@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "grpc"
 gem "minitest"
 require "minitest/autorun"
 require "minitest/focus"
@@ -852,69 +853,48 @@ class MockSearch < Minitest::Spec
 end
 
 class MockLogging < Minitest::Spec
-  let(:project) { logging.connection.project }
-  let(:credentials) { logging.connection.credentials }
-  let(:logging) { $gcloud_logging_global ||= Gcloud::Logging::Project.new("test", OpenStruct.new) }
-
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    connection = logging.instance_variable_get "@connection"
-    client = connection.instance_variable_get "@client"
-    client.connection = Faraday.new do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
-  end
-
-  def teardown
-    @connection.verify_stubbed_calls
-  end
-
-  def mock_connection
-    @connection
-  end
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
+  let(:logging) { $gcloud_logging_global ||= Gcloud::Logging::Project.new(project, credentials) }
 
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_logging
   end
 
-  def entry_gapi severity, payload
-    logging.entry.tap do |e|
-      e.severity = severity
-      e.payload = payload
-    end.to_gapi
-  end
-
   def random_entry_hash
+    timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
     {
-      "logName"   => "projects/my-projectid/logs/syslog",
+      "log_name"  => "projects/my-projectid/logs/syslog",
       "resource"  => random_resource_hash,
-      "timestamp" => "2014-10-02T15:01:23.045123456Z",
-      "severity"  => "DEFAULT",
-      "insertId"  => "abc123",
+      "timestamp" => {
+        "seconds" => timestamp.to_i,
+        "nanos"   => timestamp.nsec
+      },
+      "severity"  => :DEFAULT,
+      "insert_id" => "abc123",
       "labels" => {
         "env" => "production",
         "foo" => "bar"
       },
-      "textPayload" => "payload",
-      "httpRequest" => random_http_request_hash,
-      "operation" => random_operation_hash
+      "text_payload" => "payload",
+      "http_request" => random_http_request_hash,
+      "operation"    => random_operation_hash
     }
   end
 
   def random_http_request_hash
     {
-      "requestMethod" => "GET",
-      "requestUrl" => "http://test.local/foo?bar=baz",
-      "requestSize" => "123",
+      "request_method" => "GET",
+      "request_url" => "http://test.local/foo?bar=baz",
+      "request_size" => 123,
       "status" => 200,
-      "responseSize" => "456",
-      "userAgent" => "gcloud-ruby/1.0.0",
-      "remoteIp" => "127.0.0.1",
+      "response_size" => 456,
+      "user_agent" => "gcloud-ruby/1.0.0",
+      "remote_ip" => "127.0.0.1",
       "referer" => "http://test.local/referer",
-      "cacheHit" => false,
-      "validatedWithOriginServer" => false
+      "cache_hit" => false,
+      "validated_with_origin_server" => false
     }
   end
 
@@ -939,18 +919,28 @@ class MockLogging < Minitest::Spec
 
   def random_resource_descriptor_hash
     {
-      "type"        => "cloudsql_database",
-      "displayName" => "Cloud SQL Database",
-      "description" => "This resource is a Cloud SQL Database",
-      "labels"      => [
+      "type"         => "cloudsql_database",
+      "display_name" => "Cloud SQL Database",
+      "description"  => "This resource is a Cloud SQL Database",
+      "labels"       => [
         {
-         "key" => "database_id",
-         "description" => "The ID of the database."
+         "key"          => "database_id",
+         "description"  => "The ID of the database."
         },
         {
-         "key" => "zone",
-         "valueType" => "STRING",
-         "description" => "The GCP zone in which the database is running."
+         "key"          => "zone",
+         "value_type"   => :STRING,
+         "description"  => "The GCP zone in which the database is running."
+        },
+        {
+         "key"          => "active",
+         "value_type"   => :BOOL,
+         "description"  => "Whether the database is active."
+        },
+        {
+         "key"          => "max_connections",
+         "value_type"   => :INT64,
+         "description"  => "The maximum number of connections it supports."
         }
       ]
     }
@@ -958,10 +948,10 @@ class MockLogging < Minitest::Spec
 
   def random_sink_hash
     {
-      "name"                => "my-severe-errors-to-pubsub",
-      "destination"         => "storage.googleapis.com/a-bucket",
-      "filter"              => "logName:syslog AND severity>=ERROR",
-      "outputVersionFormat" => "VERSION_FORMAT_UNSPECIFIED"
+      "name"                  => "my-severe-errors-to-pubsub",
+      "destination"           => "storage.googleapis.com/a-bucket",
+      "filter"                => "logName:syslog AND severity>=ERROR",
+      "output_version_format" => :VERSION_FORMAT_UNSPECIFIED
     }
   end
 
@@ -971,5 +961,9 @@ class MockLogging < Minitest::Spec
       "description" => "The servere errors metric",
       "filter"      => "logName:syslog AND severity>=ERROR"
     }
+  end
+
+  def project_path
+    "projects/#{project}"
   end
 end

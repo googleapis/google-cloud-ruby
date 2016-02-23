@@ -15,7 +15,9 @@
 require "helper"
 
 describe Gcloud::Logging::Entry::Operation, :mock_logging do
-  let(:operation) { Gcloud::Logging::Entry::Operation.from_gapi random_operation_hash }
+  let(:operation_json) { random_operation_hash.to_json }
+  let(:operation_grpc) { Google::Logging::V2::LogEntryOperation.decode_json operation_json }
+  let(:operation) { Gcloud::Logging::Entry::Operation.from_grpc operation_grpc }
 
   it "has attributes" do
     operation.id.must_equal "xyz789"

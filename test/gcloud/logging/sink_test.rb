@@ -15,14 +15,16 @@
 require "helper"
 
 describe Gcloud::Logging::Sink, :mock_logging do
-  let(:sink) { Gcloud::Logging::Sink.from_gapi sink_hash, logging.connection }
+  let(:sink) { Gcloud::Logging::Sink.from_grpc sink_grpc, logging.service }
   let(:sink_hash) { random_sink_hash }
+  let(:sink_json) { sink_hash.to_json }
+  let(:sink_grpc) { Google::Logging::V2::LogSink.decode_json sink_json }
 
   it "knows its attributes" do
     sink.name.must_equal        sink_hash["name"]
     sink.destination.must_equal sink_hash["destination"]
     sink.filter.must_equal      sink_hash["filter"]
-    sink.version.must_equal     sink_hash["outputVersionFormat"]
+    sink.version.must_equal     :VERSION_FORMAT_UNSPECIFIED
   end
 
   it "can set different sink format versions" do
@@ -44,21 +46,16 @@ describe Gcloud::Logging::Sink, :mock_logging do
     new_sink_destination = "storage.googleapis.com/new-sink-bucket"
     new_sink_filter = "logName:syslog AND severity>=WARN"
 
-    mock_connection.put "/v2beta1/projects/#{project}/sinks/#{sink.name}" do |env|
-      sink_json = JSON.parse env.body
-      sink_json["name"].must_equal sink.name
-      sink_json["destination"].must_equal new_sink_destination
-      sink_json["filter"].must_equal new_sink_filter
-      sink_json["outputVersionFormat"].must_equal "V1"
-
-      [200, {"Content-Type"=>"application/json"},
-       sink_json.to_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :update_sink, sink_grpc, [Google::Logging::V2::UpdateSinkRequest]
+    sink.service.sinks = mock
 
     sink.destination = new_sink_destination
     sink.filter = new_sink_filter
     sink.version = :v1
     sink.save
+
+    mock.verify
 
     sink.must_be_kind_of Gcloud::Logging::Sink
     sink.destination.must_equal new_sink_destination
@@ -67,18 +64,22 @@ describe Gcloud::Logging::Sink, :mock_logging do
   end
 
   it "can refresh itself" do
-    mock_connection.get "/v2beta1/projects/#{project}/sinks/#{sink.name}" do |env|
-      [200, {"Content-Type"=>"application/json"}, random_sink_hash.to_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_sink, sink_grpc, [Google::Logging::V2::GetSinkRequest]
+    sink.service.sinks = mock
 
     sink.refresh!
+
+    mock.verify
   end
 
   it "can delete itself" do
-    mock_connection.delete "/v2beta1/projects/#{project}/sinks/#{sink.name}" do |env|
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :delete_sink, sink_grpc, [Google::Logging::V2::DeleteSinkRequest]
+    sink.service.sinks = mock
 
     sink.delete
+
+    mock.verify
   end
 end

@@ -15,8 +15,10 @@
 require "helper"
 
 describe Gcloud::Logging::Metric, :mock_logging do
-  let(:metric) { Gcloud::Logging::Metric.from_gapi metric_hash, logging.connection }
   let(:metric_hash) { random_metric_hash }
+  let(:metric_json) { metric_hash.to_json }
+  let(:metric_grpc) { Google::Logging::V2::LogMetric.decode_json metric_json }
+  let(:metric) { Gcloud::Logging::Metric.from_grpc metric_grpc, logging.service }
 
   it "knows its attributes" do
     metric.name.must_equal        metric_hash["name"]
@@ -28,19 +30,15 @@ describe Gcloud::Logging::Metric, :mock_logging do
     new_metric_description = "New Metric Description"
     new_metric_filter = "logName:syslog AND severity>=WARN"
 
-    mock_connection.put "/v2beta1/projects/#{project}/metrics/#{metric.name}" do |env|
-      metric_json = JSON.parse env.body
-      metric_json["name"].must_equal metric.name
-      metric_json["description"].must_equal new_metric_description
-      metric_json["filter"].must_equal new_metric_filter
-
-      [200, {"Content-Type"=>"application/json"},
-       metric_json.to_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :update_log_metric, metric_grpc, [Google::Logging::V2::UpdateLogMetricRequest]
+    metric.service.metrics = mock
 
     metric.description = new_metric_description
     metric.filter = new_metric_filter
     metric.save
+
+    mock.verify
 
     metric.must_be_kind_of Gcloud::Logging::Metric
     metric.description.must_equal new_metric_description
@@ -48,18 +46,22 @@ describe Gcloud::Logging::Metric, :mock_logging do
   end
 
   it "can refresh itself" do
-    mock_connection.get "/v2beta1/projects/#{project}/metrics/#{metric.name}" do |env|
-      [200, {"Content-Type"=>"application/json"}, random_metric_hash.to_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_log_metric, metric_grpc, [Google::Logging::V2::GetLogMetricRequest]
+    metric.service.metrics = mock
 
     metric.refresh!
+
+    mock.verify
   end
 
   it "can delete itself" do
-    mock_connection.delete "/v2beta1/projects/#{project}/metrics/#{metric.name}" do |env|
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :delete_log_metric, metric_grpc, [Google::Logging::V2::DeleteLogMetricRequest]
+    metric.service.metrics = mock
 
     metric.delete
+
+    mock.verify
   end
 end

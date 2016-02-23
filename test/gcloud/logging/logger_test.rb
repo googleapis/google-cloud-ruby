@@ -26,82 +26,76 @@ describe Gcloud::Logging::Logger, :mock_logging do
   end
   let(:labels) { { "env" => "production" } }
   let(:logger) { Gcloud::Logging::Logger.new logging, log_name, resource, labels }
+  let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
+
+  def write_req severity
+    Google::Logging::V2::WriteLogEntriesRequest.new(
+      log_name: "projects/test/logs/web_app_log",
+      resource: resource.to_grpc,
+      labels: labels,
+      entries: [Google::Logging::V2::LogEntry.new(
+        text_payload: "Danger Will Robinson!", severity: severity
+      )]
+    )
+  end
 
   it "creates a DEBUG log entry with #debug" do
-    mock_connection.post "/v2beta1/entries:write" do |env|
-      entries_json = JSON.parse env.body
-      entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-      entries_json["resource"].must_equal resource.to_gapi
-      entries_json["labels"].must_equal labels
-      entries_json["entries"].must_equal [entry_gapi("DEBUG", "Danger Will Robinson!")]
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :write_log_entries, write_res, [write_req(:DEBUG)]
+    logging.service.logging = mock
 
     logger.debug "Danger Will Robinson!"
+
+    mock.verify
   end
 
   it "creates an INFO log entry with #info" do
-    mock_connection.post "/v2beta1/entries:write" do |env|
-      entries_json = JSON.parse env.body
-      entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-      entries_json["resource"].must_equal resource.to_gapi
-      entries_json["labels"].must_equal labels
-      entries_json["entries"].must_equal [entry_gapi("INFO", "Danger Will Robinson!")]
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :write_log_entries, write_res, [write_req(:INFO)]
+    logging.service.logging = mock
 
     logger.info "Danger Will Robinson!"
+
+    mock.verify
   end
 
   it "creates a WARNING log entry with #warn" do
-    mock_connection.post "/v2beta1/entries:write" do |env|
-      entries_json = JSON.parse env.body
-      entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-      entries_json["resource"].must_equal resource.to_gapi
-      entries_json["labels"].must_equal labels
-      entries_json["entries"].must_equal [entry_gapi("WARNING", "Danger Will Robinson!")]
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :write_log_entries, write_res, [write_req(:WARNING)]
+    logging.service.logging = mock
 
     logger.warn "Danger Will Robinson!"
+
+    mock.verify
   end
 
   it "creates a ERROR log entry with #error" do
-    mock_connection.post "/v2beta1/entries:write" do |env|
-      entries_json = JSON.parse env.body
-      entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-      entries_json["resource"].must_equal resource.to_gapi
-      entries_json["labels"].must_equal labels
-      entries_json["entries"].must_equal [entry_gapi("ERROR", "Danger Will Robinson!")]
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :write_log_entries, write_res, [write_req(:ERROR)]
+    logging.service.logging = mock
 
     logger.error "Danger Will Robinson!"
+
+    mock.verify
   end
 
   it "creates a CRITICAL log entry with #fatal" do
-    mock_connection.post "/v2beta1/entries:write" do |env|
-      entries_json = JSON.parse env.body
-      entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-      entries_json["resource"].must_equal resource.to_gapi
-      entries_json["labels"].must_equal labels
-      entries_json["entries"].must_equal [entry_gapi("CRITICAL", "Danger Will Robinson!")]
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :write_log_entries, write_res, [write_req(:CRITICAL)]
+    logging.service.logging = mock
 
     logger.fatal "Danger Will Robinson!"
+
+    mock.verify
   end
 
   it "creates a DEFAULT log entry with #unknown" do
-    mock_connection.post "/v2beta1/entries:write" do |env|
-      entries_json = JSON.parse env.body
-      entries_json["logName"].must_equal "projects/#{project}/logs/#{log_name}"
-      entries_json["resource"].must_equal resource.to_gapi
-      entries_json["labels"].must_equal labels
-      entries_json["entries"].must_equal [entry_gapi("DEFAULT", "Danger Will Robinson!")]
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :write_log_entries, write_res, [write_req(:DEFAULT)]
+    logging.service.logging = mock
 
     logger.unknown "Danger Will Robinson!"
+
+    mock.verify
   end
 end

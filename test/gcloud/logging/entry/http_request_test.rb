@@ -15,14 +15,16 @@
 require "helper"
 
 describe Gcloud::Logging::Entry::HttpRequest, :mock_logging do
-  let(:http_request) { Gcloud::Logging::Entry::HttpRequest.from_gapi random_http_request_hash }
+  let(:http_request_json) { random_http_request_hash.to_json }
+  let(:http_request_grpc) { Google::Logging::Type::HttpRequest.decode_json http_request_json }
+  let(:http_request) { Gcloud::Logging::Entry::HttpRequest.from_grpc http_request_grpc }
 
   it "has attributes" do
     http_request.method.must_equal "GET"
     http_request.url.must_equal "http://test.local/foo?bar=baz"
-    http_request.size.must_equal "123"
+    http_request.size.must_equal 123
     http_request.status.must_equal 200
-    http_request.response_size.must_equal "456"
+    http_request.response_size.must_equal 456
     http_request.user_agent.must_equal "gcloud-ruby/1.0.0"
     http_request.remote_ip.must_equal "127.0.0.1"
     http_request.referer.must_equal "http://test.local/referer"

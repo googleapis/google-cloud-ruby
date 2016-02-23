@@ -15,15 +15,21 @@
 require "helper"
 
 describe Gcloud::Logging::Resource, :mock_logging do
-  let(:resource) { Gcloud::Logging::Resource.from_gapi resource_hash }
   let(:resource_hash) { random_resource_hash }
+  let(:resource_json) { resource_hash.to_json }
+  let(:resource_grpc) { Google::Api::MonitoredResource.decode_json resource_json }
+  let(:resource) { Gcloud::Logging::Resource.from_grpc resource_grpc }
 
   it "knows its attributes" do
-    resource.type.must_equal   "gae_app"
-    resource.labels.must_equal resource_hash["labels"]
+    resource.type.must_equal resource_hash["type"]
+    resource.labels.keys.sort.must_equal   resource_hash["labels"].keys.sort
+    resource.labels.values.sort.must_equal resource_hash["labels"].values.sort
   end
 
-  it "can export to a gapi object" do
-    resource.to_gapi.must_equal resource_hash
+  it "can export to a grpc object" do
+    grpc = resource.to_grpc
+    grpc.type.must_equal resource_hash["type"]
+    grpc.labels.keys.sort.must_equal   resource_hash["labels"].keys.sort
+    grpc.labels.values.sort.must_equal resource_hash["labels"].values.sort
   end
 end

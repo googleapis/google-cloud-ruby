@@ -3,6 +3,7 @@ AllCops:
     - "gcloud.gemspec"
     - "Rakefile"
     - "lib/gcloud/proto/**/*"
+    - "lib/google/**/*"
     - "rakelib/**/*"
     - "acceptance/**/*"
     - "test/**/*"
@@ -25,7 +26,9 @@ Style/EmptyLines:
   Enabled: false
 Style/EmptyElse:
   Enabled: false
-Style/CyclomaticComplexity:
+Metrics/CyclomaticComplexity:
+  Max: 10
+Metrics/PerceivedComplexity:
   Max: 10
 Metrics/AbcSize:
   Max: 25

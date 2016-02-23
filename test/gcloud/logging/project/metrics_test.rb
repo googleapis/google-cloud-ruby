@@ -17,86 +17,106 @@ require "helper"
 describe Gcloud::Logging::Project, :metrics, :mock_logging do
   it "lists metrics" do
     num_metrics = 3
-    mock_connection.get "/v2beta1/projects/#{project}/metrics" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       list_metrics_json(num_metrics)]
-    end
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_metrics,
+                Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(num_metrics)),
+                [Google::Logging::V2::ListLogMetricsRequest]
+    logging.service.metrics = mock
 
     metrics = logging.metrics
+
+    mock.verify
+
     metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
     metrics.size.must_equal num_metrics
   end
 
   it "lists metrics with find_metrics alias" do
     num_metrics = 3
-    mock_connection.get "/v2beta1/projects/#{project}/metrics" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       list_metrics_json(num_metrics)]
-    end
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_metrics,
+                Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(num_metrics)),
+                [Google::Logging::V2::ListLogMetricsRequest]
+    logging.service.metrics = mock
 
     metrics = logging.find_metrics
+
+    mock.verify
+
     metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
     metrics.size.must_equal num_metrics
   end
 
   it "paginates metrics" do
-    mock_connection.get "/v2beta1/projects/#{project}/metrics" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_metrics_json(3, "next_page_token")]
-    end
-    mock_connection.get "/v2beta1/projects/#{project}/metrics" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_metrics_json(2)]
-    end
+    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
+    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_token: "next_page_token")
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_metrics,
+                Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token")),
+                [first_list_req]
+    mock.expect :list_log_metrics,
+                Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2)),
+                [second_list_req]
+    logging.service.metrics = mock
 
     first_metrics = logging.metrics
+    second_metrics = logging.metrics token: first_metrics.token
+
+    mock.verify
+
     first_metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
     first_metrics.count.must_equal 3
     first_metrics.token.wont_be :nil?
     first_metrics.token.must_equal "next_page_token"
 
-    second_metrics = logging.metrics token: first_metrics.token
     second_metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
     second_metrics.count.must_equal 2
     second_metrics.token.must_be :nil?
   end
 
   it "paginates metrics with next? and next" do
-    mock_connection.get "/v2beta1/projects/#{project}/metrics" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_metrics_json(3, "next_page_token")]
-    end
-    mock_connection.get "/v2beta1/projects/#{project}/metrics" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_metrics_json(2)]
-    end
+    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
+    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_token: "next_page_token")
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_metrics,
+                Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token")),
+                [first_list_req]
+    mock.expect :list_log_metrics,
+                Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2)),
+                [second_list_req]
+    logging.service.metrics = mock
 
     first_metrics = logging.metrics
+    second_metrics = first_metrics.next
+
+    mock.verify
+
     first_metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
     first_metrics.count.must_equal 3
     first_metrics.next?.must_equal true #must_be :next?
 
-    second_metrics = first_metrics.next
     second_metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
     second_metrics.count.must_equal 2
     second_metrics.next?.must_equal false #wont_be :next?
   end
 
   it "paginates metrics with max set" do
-    mock_connection.get "/v2beta1/projects/#{project}/metrics" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      [200, {"Content-Type"=>"application/json"},
-       list_metrics_json(3, "next_page_token")]
-    end
+    list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_size: 3)
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_metrics,
+                Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token")),
+                [list_req]
+    logging.service.metrics = mock
 
     metrics = logging.metrics max: 3
+
+    mock.verify
+
     metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
     metrics.count.must_equal 3
     metrics.token.wont_be :nil?
@@ -104,13 +124,18 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics without max set" do
-    mock_connection.get "/v2beta1/projects/#{project}/metrics" do |env|
-      env.params.wont_include "maxResults"
-      [200, {"Content-Type"=>"application/json"},
-       list_metrics_json(3, "next_page_token")]
-    end
+    list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_metrics,
+                Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token")),
+                [list_req]
+    logging.service.metrics = mock
 
     metrics = logging.metrics
+
+    mock.verify
+
     metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
     metrics.count.must_equal 3
     metrics.token.wont_be :nil?
@@ -120,16 +145,16 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
   it "creates a metric" do
     new_metric_name = "new-metric-#{Time.now.to_i}"
 
-    mock_connection.post "/v2beta1/projects/#{project}/metrics" do |env|
-      metric_json = JSON.parse env.body
-      metric_json["name"].must_equal new_metric_name
-      metric_json["description"].must_be :nil?
-      metric_json["filter"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       empty_metric_hash.merge(metric_json.delete_if { |_, v| v.nil? }).to_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :create_log_metric,
+                Google::Logging::V2::LogMetric.decode_json(empty_metric_hash.merge("name" => new_metric_name).to_json),
+                [Google::Logging::V2::CreateLogMetricRequest]
+    logging.service.metrics = mock
 
     metric = logging.create_metric new_metric_name
+
+    mock.verify
+
     metric.must_be_kind_of Gcloud::Logging::Metric
     metric.name.must_equal new_metric_name
     metric.description.must_be :empty?
@@ -141,18 +166,18 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
     new_metric_description = "New Metric (#{Time.now.to_i})"
     new_metric_filter = "logName:syslog AND severity>=WARN"
 
-    mock_connection.post "/v2beta1/projects/#{project}/metrics" do |env|
-      metric_json = JSON.parse env.body
-      metric_json["name"].must_equal new_metric_name
-      metric_json["description"].must_equal new_metric_description
-      metric_json["filter"].must_equal new_metric_filter
-
-      [200, {"Content-Type"=>"application/json"},
-       empty_metric_hash.merge(metric_json.delete_if { |_, v| v.nil? }).to_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :create_log_metric,
+                Google::Logging::V2::LogMetric.decode_json(empty_metric_hash.merge("name" => new_metric_name,
+                                                                                   "description" => new_metric_description,
+                                                                                   "filter" => new_metric_filter).to_json),
+                [Google::Logging::V2::CreateLogMetricRequest]
+    logging.service.metrics = mock
 
     metric = logging.create_metric new_metric_name, description: new_metric_description,
       filter: new_metric_filter
+    mock.verify
+
     metric.must_be_kind_of Gcloud::Logging::Metric
     metric.name.must_equal new_metric_name
     metric.description.must_equal new_metric_description
@@ -162,20 +187,37 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
   it "gets a metric" do
     metric_name = "existing-metric-#{Time.now.to_i}"
 
-    mock_connection.get "/v2beta1/projects/#{project}/metrics/#{metric_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_metric_hash.merge("name" => metric_name).to_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_log_metric,
+                Google::Logging::V2::LogMetric.decode_json(random_metric_hash.merge("name" => metric_name).to_json),
+                [Google::Logging::V2::GetLogMetricRequest]
+    logging.service.metrics = mock
 
     metric = logging.metric metric_name
+
+    mock.verify
+
     metric.must_be_kind_of Gcloud::Logging::Metric
     metric.name.must_equal metric_name
+  end
+
+  it "returns nil when getting a metric that is not found" do
+    metric_name = "not-found-metric-#{Time.now.to_i}"
+
+    stub = Object.new
+    def stub.get_log_metric *args
+      raise GRPC::BadStatus.new 5, "not found"
+    end
+    logging.service.metrics = stub
+
+    metric = logging.metric metric_name
+    metric.must_be :nil?
   end
 
   def list_metrics_json count = 2, token = nil
     {
       metrics: count.times.map { random_metric_hash },
-      nextPageToken: token
+      next_page_token: token
     }.delete_if { |_, v| v.nil? }.to_json
   end
 

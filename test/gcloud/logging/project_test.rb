@@ -37,22 +37,32 @@ describe Gcloud::Logging::Project, :mock_logging do
   it "deletes a log" do
     log_name = "syslog"
 
-    mock_connection.delete "/v2beta1/projects/#{project}/logs/#{log_name}" do |env|
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    delete_req = Google::Logging::V2::DeleteLogRequest.decode_json({log_name: "projects/#{project}/logs/#{log_name}"}.to_json)
+
+    mock = Minitest::Mock.new
+    mock.expect :delete_log, Google::Protobuf::Empty.new, [delete_req]
+    logging.service.logging = mock
 
     success = logging.delete_log log_name
+
+    mock.verify
+
     success.must_equal true
   end
 
   it "deletes a log with full path name" do
     log_name = "projects/#{project}/logs/syslog"
 
-    mock_connection.delete "/v2beta1/#{log_name}" do |env|
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    delete_req = Google::Logging::V2::DeleteLogRequest.decode_json({log_name: log_name}.to_json)
+
+    mock = Minitest::Mock.new
+    mock.expect :delete_log, Google::Protobuf::Empty.new, [delete_req]
+    logging.service.logging = mock
 
     success = logging.delete_log log_name
+
+    mock.verify
+
     success.must_equal true
   end
 end

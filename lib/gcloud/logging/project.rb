@@ -14,7 +14,7 @@
 
 
 require "gcloud/gce"
-require "gcloud/logging/connection"
+require "gcloud/logging/service"
 require "gcloud/logging/credentials"
 require "gcloud/logging/errors"
 require "gcloud/logging/entry"
@@ -41,15 +41,15 @@ module Gcloud
     # See Gcloud#logging
     class Project
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The gRPC Service object.
+      attr_accessor :service
 
       ##
       # @private Creates a new Connection instance.
       def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
-        @connection = Connection.new project, credentials
+        @service = Service.new project, credentials
       end
 
       # The Logging project connected to.
@@ -64,7 +64,7 @@ module Gcloud
       #   logging.project #=> "my-todo-project"
       #
       def project
-        connection.project
+        service.project
       end
 
       ##
@@ -121,14 +121,12 @@ module Gcloud
       #   end
       #
       def entries projects: nil, filter: nil, order: nil, token: nil, max: nil
-        ensure_connection!
-        resp = connection.list_entries projects: projects, filter: filter,
-                                       order: order, token: token, max: max
-        if resp.success?
-          Entry::List.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        list_grpc = service.list_entries projects: projects, filter: filter,
+                                         order: order, token: token, max: max
+        Entry::List.from_grpc list_grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_entries, :entries
 
@@ -192,12 +190,13 @@ module Gcloud
       #   logging.write_entries [entry1, entry2], log_name: "syslog"
       #
       def write_entries entries, log_name: nil, resource: nil, labels: nil
-        ensure_connection!
-        resp = connection.write_entries Array(entries).map(&:to_gapi),
-                                        log_name: log_name,
-                                        resource: resource, labels: labels
-        return true if resp.success?
-        fail ApiError.from_response(resp)
+        ensure_service!
+        service.write_entries Array(entries).map(&:to_grpc),
+                              log_name: log_name, resource: resource,
+                              labels: labels
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
@@ -251,13 +250,11 @@ module Gcloud
       #   logging.delete_log "my-log"
       #
       def delete_log name
-        ensure_connection!
-        resp = connection.delete_log name
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.delete_log name
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
@@ -296,13 +293,11 @@ module Gcloud
       #   end
       #
       def resource_descriptors token: nil, max: nil
-        ensure_connection!
-        resp = connection.list_resource_descriptors token: token, max: max
-        if resp.success?
-          ResourceDescriptor::List.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        list_grpc = service.list_resource_descriptors token: token, max: max
+        ResourceDescriptor::List.from_grpc list_grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_resource_descriptors, :resource_descriptors
 
@@ -364,13 +359,11 @@ module Gcloud
       #   end
       #
       def sinks token: nil, max: nil
-        ensure_connection!
-        resp = connection.list_sinks token: token, max: max
-        if resp.success?
-          Sink::List.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        list_grpc = service.list_sinks token: token, max: max
+        Sink::List.from_grpc list_grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_sinks, :sinks
 
@@ -405,14 +398,12 @@ module Gcloud
       #   sink = logging.create_sink "my-sink"
       #
       def create_sink name, destination: nil, filter: nil, version: :unspecified
-        version = Sink::VERSIONS[version] if Sink::VERSIONS[version]
-        ensure_connection!
-        resp = connection.create_sink name, destination, filter, version
-        if resp.success?
-          Sink.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        version = Sink.resolve_version version
+        ensure_service!
+        grpc = service.create_sink name, destination, filter, version
+        Sink.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :new_sink, :create_sink
 
@@ -439,11 +430,12 @@ module Gcloud
       #   sink = logging.sink "non-existing-sink" #=> nil
       #
       def sink sink_name
-        ensure_connection!
-        resp = connection.get_sink sink_name
-        return Sink.from_gapi(resp.data, connection) if resp.success?
-        return nil if resp.status == 404
-        fail ApiError.from_response(resp)
+        ensure_service!
+        grpc = service.get_sink sink_name
+        Sink.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        return nil if e.code == 5
+        raise Error.from_error(e)
       end
       alias_method :get_sink, :sink
       alias_method :find_sink, :sink
@@ -483,13 +475,11 @@ module Gcloud
       #   end
       #
       def metrics token: nil, max: nil
-        ensure_connection!
-        resp = connection.list_metrics token: token, max: max
-        if resp.success?
-          Metric::List.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        grpc = service.list_metrics token: token, max: max
+        Metric::List.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_metrics, :metrics
 
@@ -517,13 +507,11 @@ module Gcloud
       #   metric = logging.create_metric "my-metric"
       #
       def create_metric name, description: nil, filter: nil
-        ensure_connection!
-        resp = connection.create_metric name, description, filter
-        if resp.success?
-          Metric.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        grpc = service.create_metric name, description, filter
+        Metric.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :new_metric, :create_metric
 
@@ -550,11 +538,12 @@ module Gcloud
       #   metric = logging.metric "non-existing-metric" #=> nil
       #
       def metric name
-        ensure_connection!
-        resp = connection.get_metric name
-        return Metric.from_gapi(resp.data, connection) if resp.success?
-        return nil if resp.status == 404
-        fail ApiError.from_response(resp)
+        ensure_service!
+        grpc = service.get_metric name
+        Metric.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        return nil if e.code == 5
+        raise Error.from_error(e)
       end
       alias_method :get_metric, :metric
       alias_method :find_metric, :metric
@@ -562,9 +551,10 @@ module Gcloud
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      # @private Raise an error unless an active connection to the service is
+      # available.
+      def ensure_service!
+        fail "Must have active connection to service" unless service
       end
     end
   end

@@ -43,24 +43,24 @@ module Gcloud
         # Retrieve the next page of resource descriptors.
         def next
           return nil unless next?
-          ensure_connection!
-          resp = @connection.list_resource_descriptors token: token
-          if resp.success?
-            self.class.from_response resp, @connection
-          else
-            fail ApiError.from_response(resp)
-          end
+          ensure_service!
+          list_grpc = @service.list_resource_descriptors token: token
+          self.class.from_grpc list_grpc, @service
+        rescue GRPC::BadStatus => e
+          raise Error.from_error(e)
         end
 
         ##
-        # @private New ResourceDescriptor::List from a response object.
-        def self.from_response resp, conn
-          sinks = new(Array(resp.data["resourceDescriptors"]).map do |gapi_obj|
-            ResourceDescriptor.from_gapi gapi_obj
+        # @private New ResourceDescriptor::List from a
+        # Google::Logging::V2::ListMonitoredResourceDescriptorsResponse object.
+        def self.from_grpc grpc_list, service
+          sinks = new(Array(grpc_list.resource_descriptors).map do |grpc|
+            ResourceDescriptor.from_grpc grpc
           end)
           sinks.instance_eval do
-            @token = resp.data["nextPageToken"]
-            @connection = conn
+            @token = grpc_list.next_page_token
+            @token = nil if @token == ""
+            @service = service
           end
           sinks
         end
@@ -68,9 +68,9 @@ module Gcloud
         protected
 
         ##
-        # Raise an error unless an active connection is available.
-        def ensure_connection!
-          fail "Must have active connection" unless @connection
+        # Raise an error unless an active service is available.
+        def ensure_service!
+          fail "Must have active service" unless @service
         end
       end
     end
