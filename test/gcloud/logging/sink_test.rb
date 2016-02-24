@@ -45,9 +45,18 @@ describe Gcloud::Logging::Sink, :mock_logging do
   it "can save itself" do
     new_sink_destination = "storage.googleapis.com/new-sink-bucket"
     new_sink_filter = "logName:syslog AND severity>=WARN"
-
+    new_sink = Google::Logging::V2::LogSink.new(
+      name: sink.name,
+      destination: new_sink_destination,
+      filter: new_sink_filter,
+      output_version_format: :V1
+    )
+    update_req = Google::Logging::V2::UpdateSinkRequest.new(
+      sink_name: "projects/test/sinks/#{sink.name}",
+      sink: new_sink
+    )
     mock = Minitest::Mock.new
-    mock.expect :update_sink, sink_grpc, [Google::Logging::V2::UpdateSinkRequest]
+    mock.expect :update_sink, sink_grpc, [update_req]
     sink.service.sinks = mock
 
     sink.destination = new_sink_destination
@@ -64,8 +73,9 @@ describe Gcloud::Logging::Sink, :mock_logging do
   end
 
   it "can refresh itself" do
+    get_req = Google::Logging::V2::GetSinkRequest.new sink_name: "projects/test/sinks/#{sink.name}"
     mock = Minitest::Mock.new
-    mock.expect :get_sink, sink_grpc, [Google::Logging::V2::GetSinkRequest]
+    mock.expect :get_sink, sink_grpc, [get_req]
     sink.service.sinks = mock
 
     sink.refresh!
@@ -74,8 +84,9 @@ describe Gcloud::Logging::Sink, :mock_logging do
   end
 
   it "can delete itself" do
+    delete_req = Google::Logging::V2::DeleteSinkRequest.new sink_name: "projects/test/sinks/#{sink.name}"
     mock = Minitest::Mock.new
-    mock.expect :delete_sink, sink_grpc, [Google::Logging::V2::DeleteSinkRequest]
+    mock.expect :delete_sink, sink_grpc, [delete_req]
     sink.service.sinks = mock
 
     sink.delete

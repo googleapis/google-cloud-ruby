@@ -17,11 +17,11 @@ require "helper"
 describe Gcloud::Logging::Project, :metrics, :mock_logging do
   it "lists metrics" do
     num_metrics = 3
-    list_req = [Google::Logging::V2::ListLogMetricsRequest]
+    list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
     list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(num_metrics))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, list_res, list_req
+    mock.expect :list_log_metrics, list_res, [list_req]
     logging.service.metrics = mock
 
     metrics = logging.metrics
@@ -34,11 +34,11 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
 
   it "lists metrics with find_metrics alias" do
     num_metrics = 3
-    list_req = [Google::Logging::V2::ListLogMetricsRequest]
+    list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
     list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(num_metrics))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, list_res, list_req
+    mock.expect :list_log_metrics, list_res, [list_req]
     logging.service.metrics = mock
 
     metrics = logging.find_metrics
@@ -138,11 +138,15 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
 
   it "creates a metric" do
     new_metric_name = "new-metric-#{Time.now.to_i}"
-    create_req = [Google::Logging::V2::CreateLogMetricRequest]
+    new_metric = Google::Logging::V2::LogMetric.new name: new_metric_name
+    create_req = Google::Logging::V2::CreateLogMetricRequest.new(
+      project_name: "projects/test",
+      metric: new_metric
+    )
     create_res = Google::Logging::V2::LogMetric.decode_json(empty_metric_hash.merge("name" => new_metric_name).to_json)
 
     mock = Minitest::Mock.new
-    mock.expect :create_log_metric, create_res, create_req
+    mock.expect :create_log_metric, create_res, [create_req]
     logging.service.metrics = mock
 
     metric = logging.create_metric new_metric_name
@@ -159,13 +163,21 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
     new_metric_name = "new-metric-#{Time.now.to_i}"
     new_metric_description = "New Metric (#{Time.now.to_i})"
     new_metric_filter = "logName:syslog AND severity>=WARN"
-    create_req = [Google::Logging::V2::CreateLogMetricRequest]
+    new_metric = Google::Logging::V2::LogMetric.new(
+      name: new_metric_name,
+      description: new_metric_description,
+      filter: new_metric_filter
+    )
+    create_req = Google::Logging::V2::CreateLogMetricRequest.new(
+      project_name: "projects/test",
+      metric: new_metric
+    )
     create_res = Google::Logging::V2::LogMetric.decode_json(empty_metric_hash.merge("name" => new_metric_name,
                                                                                     "description" => new_metric_description,
                                                                                     "filter" => new_metric_filter).to_json)
 
     mock = Minitest::Mock.new
-    mock.expect :create_log_metric, create_res, create_req
+    mock.expect :create_log_metric, create_res, [create_req]
     logging.service.metrics = mock
 
     metric = logging.create_metric new_metric_name, description: new_metric_description,
@@ -180,11 +192,11 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
 
   it "gets a metric" do
     metric_name = "existing-metric-#{Time.now.to_i}"
-    get_req = [Google::Logging::V2::GetLogMetricRequest]
+    get_req = Google::Logging::V2::GetLogMetricRequest.new metric_name: "projects/test/metrics/#{metric_name}"
     get_res = Google::Logging::V2::LogMetric.decode_json(random_metric_hash.merge("name" => metric_name).to_json)
 
     mock = Minitest::Mock.new
-    mock.expect :get_log_metric, get_res, get_req
+    mock.expect :get_log_metric, get_res, [get_req]
     logging.service.metrics = mock
 
     metric = logging.metric metric_name

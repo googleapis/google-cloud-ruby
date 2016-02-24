@@ -17,11 +17,11 @@ require "helper"
 describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
   it "lists resource descriptors" do
     num_descriptors = 3
-    list_req = [Google::Logging::V2::ListMonitoredResourceDescriptorsRequest]
+    list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new
     list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(num_descriptors))
 
     mock = Minitest::Mock.new
-    mock.expect :list_monitored_resource_descriptors, list_res, list_req
+    mock.expect :list_monitored_resource_descriptors, list_res, [list_req]
     logging.service.logging = mock
 
     resource_descriptors = logging.resource_descriptors
@@ -34,11 +34,11 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
 
   it "lists resource descriptors with find_resource_descriptors alias" do
     num_descriptors = 3
-    list_req = [Google::Logging::V2::ListMonitoredResourceDescriptorsRequest]
+    list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new
     list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(num_descriptors))
 
     mock = Minitest::Mock.new
-    mock.expect :list_monitored_resource_descriptors, list_res, list_req
+    mock.expect :list_monitored_resource_descriptors, list_res, [list_req]
     logging.service.logging = mock
 
     resource_descriptors = logging.find_resource_descriptors
