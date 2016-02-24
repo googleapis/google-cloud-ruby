@@ -17,11 +17,11 @@ require "helper"
 describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
   it "lists resource descriptors" do
     num_descriptors = 3
+    list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new
+    list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(num_descriptors))
 
     mock = Minitest::Mock.new
-    mock.expect :list_monitored_resource_descriptors,
-                Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(num_descriptors)),
-                [Google::Logging::V2::ListMonitoredResourceDescriptorsRequest]
+    mock.expect :list_monitored_resource_descriptors, list_res, [list_req]
     logging.service.logging = mock
 
     resource_descriptors = logging.resource_descriptors
@@ -34,11 +34,11 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
 
   it "lists resource descriptors with find_resource_descriptors alias" do
     num_descriptors = 3
+    list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new
+    list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(num_descriptors))
 
     mock = Minitest::Mock.new
-    mock.expect :list_monitored_resource_descriptors,
-                Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(num_descriptors)),
-                [Google::Logging::V2::ListMonitoredResourceDescriptorsRequest]
+    mock.expect :list_monitored_resource_descriptors, list_res, [list_req]
     logging.service.logging = mock
 
     resource_descriptors = logging.find_resource_descriptors
@@ -51,15 +51,13 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
 
   it "paginates resource descriptors" do
     first_list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new
+    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
     second_list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(page_token: "next_page_token")
+    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(2))
 
     mock = Minitest::Mock.new
-    mock.expect :list_monitored_resource_descriptors,
-                Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token")),
-                [first_list_req]
-    mock.expect :list_monitored_resource_descriptors,
-                Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(2)),
-                [second_list_req]
+    mock.expect :list_monitored_resource_descriptors, first_list_res, [first_list_req]
+    mock.expect :list_monitored_resource_descriptors, second_list_res, [second_list_req]
     logging.service.logging = mock
 
     first_descriptors = logging.resource_descriptors
@@ -79,15 +77,13 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
 
   it "paginates resource descriptors with next? and next" do
     first_list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new
+    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
     second_list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(page_token: "next_page_token")
+    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(2))
 
     mock = Minitest::Mock.new
-    mock.expect :list_monitored_resource_descriptors,
-                Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token")),
-                [first_list_req]
-    mock.expect :list_monitored_resource_descriptors,
-                Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(2)),
-                [second_list_req]
+    mock.expect :list_monitored_resource_descriptors, first_list_res, [first_list_req]
+    mock.expect :list_monitored_resource_descriptors, second_list_res, [second_list_req]
     logging.service.logging = mock
 
     first_descriptors = logging.resource_descriptors
@@ -106,11 +102,10 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
 
   it "paginates resource descriptors with max set" do
     list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(page_size: 3)
+    list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
 
     mock = Minitest::Mock.new
-    mock.expect :list_monitored_resource_descriptors,
-                Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token")),
-                [list_req]
+    mock.expect :list_monitored_resource_descriptors, list_res, [list_req]
     logging.service.logging = mock
 
     resource_descriptors = logging.resource_descriptors max: 3
@@ -125,11 +120,10 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
 
   it "paginates resource descriptors without max set" do
     list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new
+    list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
 
     mock = Minitest::Mock.new
-    mock.expect :list_monitored_resource_descriptors,
-                Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token")),
-                [list_req]
+    mock.expect :list_monitored_resource_descriptors, list_res, [list_req]
     logging.service.logging = mock
 
     resource_descriptors = logging.resource_descriptors

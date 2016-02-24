@@ -29,9 +29,17 @@ describe Gcloud::Logging::Metric, :mock_logging do
   it "can save itself" do
     new_metric_description = "New Metric Description"
     new_metric_filter = "logName:syslog AND severity>=WARN"
-
+    new_metric = Google::Logging::V2::LogMetric.new(
+      name: metric.name,
+      description: new_metric_description,
+      filter: new_metric_filter
+    )
+    update_req = Google::Logging::V2::UpdateLogMetricRequest.new(
+      metric_name: "projects/test/metrics/#{metric.name}",
+      metric: new_metric
+    )
     mock = Minitest::Mock.new
-    mock.expect :update_log_metric, metric_grpc, [Google::Logging::V2::UpdateLogMetricRequest]
+    mock.expect :update_log_metric, metric_grpc, [update_req]
     metric.service.metrics = mock
 
     metric.description = new_metric_description
@@ -46,8 +54,9 @@ describe Gcloud::Logging::Metric, :mock_logging do
   end
 
   it "can refresh itself" do
+    get_req = Google::Logging::V2::GetLogMetricRequest.new metric_name: "projects/test/metrics/#{metric.name}"
     mock = Minitest::Mock.new
-    mock.expect :get_log_metric, metric_grpc, [Google::Logging::V2::GetLogMetricRequest]
+    mock.expect :get_log_metric, metric_grpc, [get_req]
     metric.service.metrics = mock
 
     metric.refresh!
@@ -56,8 +65,9 @@ describe Gcloud::Logging::Metric, :mock_logging do
   end
 
   it "can delete itself" do
+    delete_req = Google::Logging::V2::DeleteLogMetricRequest.new metric_name: "projects/test/metrics/#{metric.name}"
     mock = Minitest::Mock.new
-    mock.expect :delete_log_metric, metric_grpc, [Google::Logging::V2::DeleteLogMetricRequest]
+    mock.expect :delete_log_metric, metric_grpc, [delete_req]
     metric.service.metrics = mock
 
     metric.delete
