@@ -419,7 +419,7 @@ namespace :test do
         require "gcloud/logging"
         puts "Cleaning up LOGGING sinks and metrics"
         begin
-          Gcloud.logging.sinks.each.map &:delete
+          # Gcloud.logging.sinks.each.map &:delete
           Gcloud.logging.metrics.each.map &:delete
         rescue Gcloud::Logging::Error => e
           puts e.message

@@ -113,9 +113,9 @@ describe Gcloud::Logging, :logging do
   describe "Entries" do
     let(:proto_payload) { Google::Protobuf::Any.new type_url: "example.com/Greeter/SayHello",
                                                     value: "\n\fHello world!".encode("ASCII-8BIT") }
-    let(:entry1) { logging.entry.tap { |e| e.log_name = "testlog"; e.payload = "log entry 1" } }
-    let(:entry2) { logging.entry.tap { |e| e.log_name = "otherlog"; e.payload = {env: :production} } }
-    let(:entry3) { logging.entry.tap { |e| e.log_name = "thislog"; e.payload = proto_payload; e.severity = :WARNING } }
+    let(:entry1) { logging.entry.tap { |e| e.log_name = "#{prefix}-testlog"; e.payload = "log entry 1" } }
+    let(:entry2) { logging.entry.tap { |e| e.log_name = "#{prefix}-otherlog"; e.payload = {env: :production} } }
+    let(:entry3) { logging.entry.tap { |e| e.log_name = "#{prefix}-thislog"; e.payload = proto_payload; e.severity = :WARNING } }
 
     let(:resource) { logging.resource "gce_instance", zone: "global", instance_id: "3" }
 
@@ -131,42 +131,101 @@ describe Gcloud::Logging, :logging do
     let(:log_name) { "#{prefix}-logger" }
     let(:resource) { logging.resource "gce_instance", zone: "global", instance_id: "3" }
     let(:labels) { { env: :production } }
-    let(:logger) { logging.logger log_name, resource, labels }
+
+    before do
+      @sleep = 0
+    end
 
     it "writes to a log with add and a symbol" do
-      logger.add :debug,   "Danger Will Robinson!"
-      logger.add :info,    "Danger Will Robinson!"
-      logger.add :warn,    "Danger Will Robinson!"
-      logger.add :error,   "Danger Will Robinson!"
-      logger.add :fatal,   "Danger Will Robinson!"
-      logger.add :unknown, "Danger Will Robinson!"
+      logger = logging.logger "#{log_name}-symbol", resource, labels
+
+      logger.add :debug,   "Danger Will Robinson (:debug)!"
+      logger.add :info,    "Danger Will Robinson (:info)!"
+      logger.add :warn,    "Danger Will Robinson (:warn)!"
+      logger.add :error,   "Danger Will Robinson (:error)!"
+      logger.add :fatal,   "Danger Will Robinson (:fatal)!"
+      logger.add :unknown, "Danger Will Robinson (:unknown)!"
+
+      written_entries = entries_via_backoff("symbol").map &:payload
+
+      written_entries.must_include "Danger Will Robinson (:debug)!"
+      written_entries.must_include "Danger Will Robinson (:info)!"
+      written_entries.must_include "Danger Will Robinson (:warn)!"
+      written_entries.must_include "Danger Will Robinson (:error)!"
+      written_entries.must_include "Danger Will Robinson (:fatal)!"
+      written_entries.must_include "Danger Will Robinson (:unknown)!"
     end
 
     it "writes to a log with add and a string" do
-      logger.add "debug",   "Danger Will Robinson!"
-      logger.add "info",    "Danger Will Robinson!"
-      logger.add "warn",    "Danger Will Robinson!"
-      logger.add "error",   "Danger Will Robinson!"
-      logger.add "fatal",   "Danger Will Robinson!"
-      logger.add "unknown", "Danger Will Robinson!"
+      logger = logging.logger "#{log_name}-string", resource, labels
+
+      logger.add "debug",   "Danger Will Robinson ('debug')!"
+      logger.add "info",    "Danger Will Robinson ('info')!"
+      logger.add "warn",    "Danger Will Robinson ('warn')!"
+      logger.add "error",   "Danger Will Robinson ('error')!"
+      logger.add "fatal",   "Danger Will Robinson ('fatal')!"
+      logger.add "unknown", "Danger Will Robinson ('unknown')!"
+
+      written_entries = entries_via_backoff("string").map &:payload
+
+      written_entries.must_include "Danger Will Robinson ('debug')!"
+      written_entries.must_include "Danger Will Robinson ('info')!"
+      written_entries.must_include "Danger Will Robinson ('warn')!"
+      written_entries.must_include "Danger Will Robinson ('error')!"
+      written_entries.must_include "Danger Will Robinson ('fatal')!"
+      written_entries.must_include "Danger Will Robinson ('unknown')!"
     end
 
     it "writes to a log with add and a constant" do
-      logger.add ::Logger::DEBUG,   "Danger Will Robinson!"
-      logger.add ::Logger::INFO,    "Danger Will Robinson!"
-      logger.add ::Logger::WARN,    "Danger Will Robinson!"
-      logger.add ::Logger::ERROR,   "Danger Will Robinson!"
-      logger.add ::Logger::FATAL,   "Danger Will Robinson!"
-      logger.add ::Logger::UNKNOWN, "Danger Will Robinson!"
+      logger = logging.logger "#{log_name}-constant", resource, labels
+
+      logger.add ::Logger::DEBUG,   "Danger Will Robinson (DEBUG)!"
+      logger.add ::Logger::INFO,    "Danger Will Robinson (INFO)!"
+      logger.add ::Logger::WARN,    "Danger Will Robinson (WARN)!"
+      logger.add ::Logger::ERROR,   "Danger Will Robinson (ERROR)!"
+      logger.add ::Logger::FATAL,   "Danger Will Robinson (FATAL)!"
+      logger.add ::Logger::UNKNOWN, "Danger Will Robinson (UNKNOWN)!"
+
+      written_entries = entries_via_backoff("constant").map &:payload
+
+      written_entries.must_include "Danger Will Robinson (DEBUG)!"
+      written_entries.must_include "Danger Will Robinson (INFO)!"
+      written_entries.must_include "Danger Will Robinson (WARN)!"
+      written_entries.must_include "Danger Will Robinson (ERROR)!"
+      written_entries.must_include "Danger Will Robinson (FATAL)!"
+      written_entries.must_include "Danger Will Robinson (UNKNOWN)!"
     end
 
     it "writes to a log with named functions" do
-      logger.debug   "Danger Will Robinson!"
-      logger.info    "Danger Will Robinson!"
-      logger.warn    "Danger Will Robinson!"
-      logger.error   "Danger Will Robinson!"
-      logger.fatal   "Danger Will Robinson!"
-      logger.unknown "Danger Will Robinson!"
+      logger = logging.logger "#{log_name}-method", resource, labels
+
+      logger.debug   "Danger Will Robinson (debug)!"
+      logger.info    "Danger Will Robinson (info)!"
+      logger.warn    "Danger Will Robinson (warn)!"
+      logger.error   "Danger Will Robinson (error)!"
+      logger.fatal   "Danger Will Robinson (fatal)!"
+      logger.unknown "Danger Will Robinson (unknown)!"
+
+      written_entries = entries_via_backoff("method").map &:payload
+
+      written_entries.must_include "Danger Will Robinson (debug)!"
+      written_entries.must_include "Danger Will Robinson (info)!"
+      written_entries.must_include "Danger Will Robinson (warn)!"
+      written_entries.must_include "Danger Will Robinson (error)!"
+      written_entries.must_include "Danger Will Robinson (fatal)!"
+      written_entries.must_include "Danger Will Robinson (unknown)!"
+    end
+
+    def entries_via_backoff type
+      filter = "log_name = projects/#{logging.project}/logs/#{log_name}-#{type}"
+      entries = logging.entries filter: filter
+      if entries.count < 6 && @sleep < 5
+        @sleep += 1
+        puts "sleeping for #{@sleep} seconds to and retry pulling #{type} log entries"
+        sleep @sleep
+        return entries_via_backoff type
+      end
+      entries
     end
   end
 end
