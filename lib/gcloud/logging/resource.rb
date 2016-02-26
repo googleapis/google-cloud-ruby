@@ -59,7 +59,7 @@ module Gcloud
         return nil if empty?
         Google::Api::MonitoredResource.new(
           type: type,
-          labels: labels
+          labels: Hash[labels.map { |k, v| [String(k), String(v)] }]
         )
       end
 
