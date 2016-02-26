@@ -86,6 +86,8 @@ namespace :test do
     ENV["DNS_KEYFILE"] = keyfile
     ENV["SEARCH_PROJECT"] = project
     ENV["SEARCH_KEYFILE"] = keyfile
+    ENV["LOGGING_PROJECT"] = project
+    ENV["LOGGING_KEYFILE"] = keyfile
 
     require "simplecov"
     SimpleCov.start("test_frameworks") { command_name "Minitest" }
@@ -117,6 +119,8 @@ namespace :test do
     ENV["DNS_KEYFILE"] = keyfile
     ENV["SEARCH_PROJECT"] = project
     ENV["SEARCH_KEYFILE"] = keyfile
+    ENV["LOGGING_PROJECT"] = project
+    ENV["LOGGING_KEYFILE"] = keyfile
 
     require "simplecov"
     require "coveralls"
@@ -149,6 +153,8 @@ namespace :test do
     ENV["DNS_KEYFILE"] = keyfile
     ENV["SEARCH_PROJECT"] = project
     ENV["SEARCH_KEYFILE"] = keyfile
+    ENV["LOGGING_PROJECT"] = project
+    ENV["LOGGING_KEYFILE"] = keyfile
 
     $LOAD_PATH.unshift "lib", "test", "acceptance"
     Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative "../#{file}"}
