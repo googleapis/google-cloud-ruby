@@ -70,8 +70,44 @@ describe Gcloud::Logging, :logging do
     end
   end
 
-  # TODO: Fill in metrics here...
   describe "Metrics" do
+    it "creates, updates, refreshes, gets, lists, and deletes a metric" do
+      metric = logging.create_metric "#{prefix}-metric",
+                                     description: "Metric for acceptance tsets",
+                                     filter: "severity = ALERT"
+
+      metric.name.must_equal "#{prefix}-metric"
+      metric.description.must_equal "Metric for acceptance tsets"
+      metric.filter.must_equal "severity = ALERT"
+
+      metric.description = "Metric for acceptance tests"
+      metric.filter = "severity >= WARNING"
+
+      metric.save
+
+      metric.name.must_equal "#{prefix}-metric"
+      metric.description.must_equal "Metric for acceptance tests"
+      metric.filter.must_equal "severity >= WARNING"
+
+      metric.refresh!
+
+      metric.name.must_equal "#{prefix}-metric"
+      metric.description.must_equal "Metric for acceptance tests"
+      metric.filter.must_equal "severity >= WARNING"
+
+      dup_metric = logging.metric "#{prefix}-metric"
+
+      dup_metric.name.must_equal "#{prefix}-metric"
+      dup_metric.description.must_equal "Metric for acceptance tests"
+      dup_metric.filter.must_equal "severity >= WARNING"
+
+      logging.metrics.wont_be :empty?
+      logging.metrics(max: 1).length.must_equal 1
+
+      metric.delete
+
+      logging.metric("#{prefix}-metric").must_be :nil?
+    end
   end
 
   describe "Entries" do
