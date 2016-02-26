@@ -319,9 +319,9 @@ module Gcloud
       def update_exclude_indexes! entity
         @_exclude_indexes = {}
         Array(entity.property).each do |property|
-          @_exclude_indexes[property.name] = property.value.indexed
+          @_exclude_indexes[property.name] = !property.value.indexed
           unless property.value.list_value.nil?
-            exclude = Array(property.value.list_value).map(&:indexed)
+            exclude = Array(property.value.list_value).map{|v| !v.indexed}
             @_exclude_indexes[property.name] = exclude
           end
         end
