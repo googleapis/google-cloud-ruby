@@ -56,6 +56,11 @@ describe "Datastore", :datastore do
 
     it "should save/find/delete with a key name" do
       post.key = Gcloud::Datastore::Key.new "Post", "post1"
+      post.exclude_from_indexes! "author", true
+      # Verify the index excludes are set properly
+      post.exclude_from_indexes?("title").must_equal false
+      post.exclude_from_indexes?("author").must_equal true
+
       dataset.save post
 
       refresh = dataset.find post.key
@@ -63,6 +68,9 @@ describe "Datastore", :datastore do
       refresh.key.id.must_equal          post.key.id
       refresh.key.name.must_equal        post.key.name
       refresh.properties.to_h.must_equal post.properties.to_h
+      # Verify the index excludes are retrieved properly
+      refresh.exclude_from_indexes?("title").must_equal false
+      refresh.exclude_from_indexes?("author").must_equal true
 
       dataset.delete post
       refresh = dataset.find post.key

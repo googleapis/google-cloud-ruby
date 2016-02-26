@@ -25,6 +25,37 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
     end
   end
 
+  it "converts indexed value to not excluded from a protocol buffer object" do
+    proto = Gcloud::Datastore::Proto::Entity.new
+    proto.key = Gcloud::Datastore::Proto::Key.new
+    proto.key.path_element = [Gcloud::Datastore::Proto::Key::PathElement.new]
+    proto.key.path_element.first.kind = "User"
+    proto.key.path_element.first.id = 123456
+    proto.property = [Gcloud::Datastore::Proto::Property.new]
+    proto.property[0].name = "name"
+    proto.property[0].value = Gcloud::Datastore::Proto.to_proto_value "User McNumber"
+    proto.property[0].value.indexed = true # default
+
+    entity_from_proto = Gcloud::Datastore::Entity.from_proto proto
+    entity_from_proto.exclude_from_indexes?("name").must_equal false
+  end
+
+  it "converts indexed list to not excluded from a protocol buffer object" do
+    proto = Gcloud::Datastore::Proto::Entity.new
+    proto.key = Gcloud::Datastore::Proto::Key.new
+    proto.key.path_element = [Gcloud::Datastore::Proto::Key::PathElement.new]
+    proto.key.path_element.first.kind = "User"
+    proto.key.path_element.first.id = 123456
+    proto.property = [Gcloud::Datastore::Proto::Property.new]
+    proto.property[0].name = "tags"
+    proto.property[0].value = Gcloud::Datastore::Proto.to_proto_value ["ruby", "code"]
+    proto.property[0].value.list_value.first.indexed = true # default
+    proto.property[0].value.list_value.last.indexed = true # default
+
+    entity_from_proto = Gcloud::Datastore::Entity.from_proto proto
+    entity_from_proto.exclude_from_indexes?("tags").must_equal [false, false]
+  end
+
   it "doesn't exclude from indexes by default" do
     refute entity.exclude_from_indexes?("name")
     refute entity.exclude_from_indexes?("email")
