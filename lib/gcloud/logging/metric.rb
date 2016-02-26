@@ -99,7 +99,7 @@ module Gcloud
         @grpc = service.update_metric name, description, filter
         return true
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -110,7 +110,7 @@ module Gcloud
         @grpc = service.get_metric name
         return true
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :refresh!, :reload!
 
@@ -132,7 +132,7 @@ module Gcloud
         service.delete_metric name
         return true
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
 
       ##

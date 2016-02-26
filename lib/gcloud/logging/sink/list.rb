@@ -46,7 +46,7 @@ module Gcloud
           list_grpc = @service.list_sinks token: token
           self.class.from_grpc list_grpc, @service
         rescue GRPC::BadStatus => e
-          raise Error.from_error(e)
+          raise Gcloud::Error.from_error(e)
         end
 
         ##

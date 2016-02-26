@@ -13,10 +13,10 @@
 # limitations under the License.
 
 
+require "gcloud/errors"
 require "gcloud/gce"
 require "gcloud/logging/service"
 require "gcloud/logging/credentials"
-require "gcloud/logging/errors"
 require "gcloud/logging/entry"
 require "gcloud/logging/resource_descriptor"
 require "gcloud/logging/sink"
@@ -126,7 +126,7 @@ module Gcloud
                                          order: order, token: token, max: max
         Entry::List.from_grpc list_grpc, service
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :find_entries, :entries
 
@@ -196,7 +196,7 @@ module Gcloud
                               labels: labels
         return true
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -254,7 +254,7 @@ module Gcloud
         service.delete_log name
         return true
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -297,7 +297,7 @@ module Gcloud
         list_grpc = service.list_resource_descriptors token: token, max: max
         ResourceDescriptor::List.from_grpc list_grpc, service
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :find_resource_descriptors, :resource_descriptors
 
@@ -363,7 +363,7 @@ module Gcloud
         list_grpc = service.list_sinks token: token, max: max
         Sink::List.from_grpc list_grpc, service
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :find_sinks, :sinks
 
@@ -403,7 +403,7 @@ module Gcloud
         grpc = service.create_sink name, destination, filter, version
         Sink.from_grpc grpc, service
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :new_sink, :create_sink
 
@@ -435,7 +435,7 @@ module Gcloud
         Sink.from_grpc grpc, service
       rescue GRPC::BadStatus => e
         return nil if e.code == 5
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :get_sink, :sink
       alias_method :find_sink, :sink
@@ -479,7 +479,7 @@ module Gcloud
         grpc = service.list_metrics token: token, max: max
         Metric::List.from_grpc grpc, service
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :find_metrics, :metrics
 
@@ -511,7 +511,7 @@ module Gcloud
         grpc = service.create_metric name, description, filter
         Metric.from_grpc grpc, service
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :new_metric, :create_metric
 
@@ -543,7 +543,7 @@ module Gcloud
         Metric.from_grpc grpc, service
       rescue GRPC::BadStatus => e
         return nil if e.code == 5
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :get_metric, :metric
       alias_method :find_metric, :metric
