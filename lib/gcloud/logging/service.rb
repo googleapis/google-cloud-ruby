@@ -23,33 +23,38 @@ module Gcloud
     # @private Represents the gRPC Logging service, including all the API
     # methods.
     class Service
-      attr_accessor :project, :host, :creds
+      attr_accessor :project, :credentials, :host
 
       ##
       # Creates a new Service instance.
       def initialize project, credentials
         @project = project
+        @credentials = credentials
         @host = "logging.googleapis.com"
-        updater_proc = credentials.client.updater_proc
-        ssl_creds = GRPC::Core::ChannelCredentials.new
-        call_creds = GRPC::Core::CallCredentials.new updater_proc
-        @creds = ssl_creds.compose call_creds
+      end
+
+      def creds
+        GRPC::Core::ChannelCredentials.new.compose \
+          GRPC::Core::CallCredentials.new credentials.client.updater_proc
       end
 
       def logging
-        @logging ||= Google::Logging::V2::LoggingServiceV2::Stub.new host, creds
+        return mocked_logging if mocked_logging
+        Google::Logging::V2::LoggingServiceV2::Stub.new host, creds
       end
-      attr_writer :logging
+      attr_accessor :mocked_logging
 
       def sinks
-        @sinks ||= Google::Logging::V2::ConfigServiceV2::Stub.new host, creds
+        return mocked_sinks if mocked_sinks
+        Google::Logging::V2::ConfigServiceV2::Stub.new host, creds
       end
-      attr_writer :sinks
+      attr_accessor :mocked_sinks
 
       def metrics
-        @metrics ||= Google::Logging::V2::MetricsServiceV2::Stub.new host, creds
+        return mocked_metrics if mocked_metrics
+        Google::Logging::V2::MetricsServiceV2::Stub.new host, creds
       end
-      attr_writer :metrics
+      attr_accessor :mocked_metrics
 
       def list_entries projects: nil, filter: nil, order: nil, token: nil,
                        max: nil

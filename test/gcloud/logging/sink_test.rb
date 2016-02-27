@@ -57,7 +57,7 @@ describe Gcloud::Logging::Sink, :mock_logging do
     )
     mock = Minitest::Mock.new
     mock.expect :update_sink, sink_grpc, [update_req]
-    sink.service.sinks = mock
+    sink.service.mocked_sinks = mock
 
     sink.destination = new_sink_destination
     sink.filter = new_sink_filter
@@ -76,7 +76,7 @@ describe Gcloud::Logging::Sink, :mock_logging do
     get_req = Google::Logging::V2::GetSinkRequest.new sink_name: "projects/test/sinks/#{sink.name}"
     mock = Minitest::Mock.new
     mock.expect :get_sink, sink_grpc, [get_req]
-    sink.service.sinks = mock
+    sink.service.mocked_sinks = mock
 
     sink.refresh!
 
@@ -87,7 +87,7 @@ describe Gcloud::Logging::Sink, :mock_logging do
     delete_req = Google::Logging::V2::DeleteSinkRequest.new sink_name: "projects/test/sinks/#{sink.name}"
     mock = Minitest::Mock.new
     mock.expect :delete_sink, sink_grpc, [delete_req]
-    sink.service.sinks = mock
+    sink.service.mocked_sinks = mock
 
     sink.delete
 

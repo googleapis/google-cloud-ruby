@@ -41,7 +41,7 @@ describe Gcloud::Logging::Project, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :delete_log, Google::Protobuf::Empty.new, [delete_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     success = logging.delete_log log_name
 
@@ -57,7 +57,7 @@ describe Gcloud::Logging::Project, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :delete_log, Google::Protobuf::Empty.new, [delete_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     success = logging.delete_log log_name
 

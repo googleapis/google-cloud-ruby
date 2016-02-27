@@ -23,7 +23,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_log_entries, list_res, [list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     entries = logging.entries
 
@@ -41,7 +41,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_log_entries, list_res, [list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     entries = logging.find_entries
 
@@ -60,7 +60,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
     mock = Minitest::Mock.new
     mock.expect :list_log_entries, first_list_res, [first_list_req]
     mock.expect :list_log_entries, second_list_res, [second_list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     first_entries = logging.entries
     second_entries = logging.entries token: first_entries.token
@@ -86,7 +86,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
     mock = Minitest::Mock.new
     mock.expect :list_log_entries, first_list_res, [first_list_req]
     mock.expect :list_log_entries, second_list_res, [second_list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     first_entries = logging.entries
     second_entries = first_entries.next
@@ -108,7 +108,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_log_entries, list_res, [list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     entries = logging.entries projects: "project1"
 
@@ -126,7 +126,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_log_entries, list_res, [list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     entries = logging.entries projects: ["project1", "project2", "project3"]
 
@@ -146,7 +146,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_log_entries, list_res, [list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     entries = logging.entries filter: adv_logs_filter
 
@@ -164,7 +164,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_log_entries, list_res, [list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     entries = logging.entries order: "timestamp"
 
@@ -182,7 +182,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_log_entries, list_res, [list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     entries = logging.entries order: "timestamp desc"
 
@@ -200,7 +200,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_log_entries, list_res, [list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     entries = logging.entries max: 3
 
@@ -218,7 +218,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_log_entries, list_res, [list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     entries = logging.entries
 

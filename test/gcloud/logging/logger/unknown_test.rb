@@ -66,7 +66,7 @@ describe Gcloud::Logging::Logger, :unknown, :mock_logging do
   it "creates a log entry with #unknown" do
     mock = Minitest::Mock.new
     mock.expect :write_log_entries, write_res, [write_req(:DEFAULT)]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     logger.unknown "Danger Will Robinson!"
 

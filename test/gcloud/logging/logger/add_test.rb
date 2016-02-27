@@ -42,7 +42,7 @@ describe Gcloud::Logging::Logger, :add, :mock_logging do
   before do
     @mock = Minitest::Mock.new
     @mock.expect :write_log_entries, write_res, [write_req]
-    logging.service.logging = @mock
+    logging.service.mocked_logging = @mock
   end
 
   after do

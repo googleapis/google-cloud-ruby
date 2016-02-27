@@ -54,7 +54,7 @@ describe Gcloud::Logging::Logger, :warn, :mock_logging do
   it "creates a log entry with #warn" do
     mock = Minitest::Mock.new
     mock.expect :write_log_entries, write_res, [write_req(:WARNING)]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     logger.warn "Danger Will Robinson!"
 
@@ -64,7 +64,7 @@ describe Gcloud::Logging::Logger, :warn, :mock_logging do
   it "creates a log entry with #error" do
     mock = Minitest::Mock.new
     mock.expect :write_log_entries, write_res, [write_req(:ERROR)]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     logger.error "Danger Will Robinson!"
 
@@ -74,7 +74,7 @@ describe Gcloud::Logging::Logger, :warn, :mock_logging do
   it "creates a log entry with #fatal" do
     mock = Minitest::Mock.new
     mock.expect :write_log_entries, write_res, [write_req(:CRITICAL)]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     logger.fatal "Danger Will Robinson!"
 
@@ -84,7 +84,7 @@ describe Gcloud::Logging::Logger, :warn, :mock_logging do
   it "creates a log entry with #unknown" do
     mock = Minitest::Mock.new
     mock.expect :write_log_entries, write_res, [write_req(:DEFAULT)]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     logger.unknown "Danger Will Robinson!"
 

@@ -22,7 +22,7 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, list_res, [list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     resource_descriptors = logging.resource_descriptors
 
@@ -39,7 +39,7 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, list_res, [list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     resource_descriptors = logging.find_resource_descriptors
 
@@ -58,7 +58,7 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, first_list_res, [first_list_req]
     mock.expect :list_monitored_resource_descriptors, second_list_res, [second_list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     first_descriptors = logging.resource_descriptors
     second_descriptors = logging.resource_descriptors token: first_descriptors.token
@@ -84,7 +84,7 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, first_list_res, [first_list_req]
     mock.expect :list_monitored_resource_descriptors, second_list_res, [second_list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     first_descriptors = logging.resource_descriptors
     second_descriptors = first_descriptors.next
@@ -106,7 +106,7 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, list_res, [list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     resource_descriptors = logging.resource_descriptors max: 3
 
@@ -124,7 +124,7 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, list_res, [list_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     resource_descriptors = logging.resource_descriptors
 

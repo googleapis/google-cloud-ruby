@@ -22,7 +22,7 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_log_metrics, list_res, [list_req]
-    logging.service.metrics = mock
+    logging.service.mocked_metrics = mock
 
     metrics = logging.metrics
 
@@ -39,7 +39,7 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_log_metrics, list_res, [list_req]
-    logging.service.metrics = mock
+    logging.service.mocked_metrics = mock
 
     metrics = logging.find_metrics
 
@@ -58,7 +58,7 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
     mock = Minitest::Mock.new
     mock.expect :list_log_metrics, first_list_res, [first_list_req]
     mock.expect :list_log_metrics, second_list_res, [second_list_req]
-    logging.service.metrics = mock
+    logging.service.mocked_metrics = mock
 
     first_metrics = logging.metrics
     second_metrics = logging.metrics token: first_metrics.token
@@ -84,7 +84,7 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
     mock = Minitest::Mock.new
     mock.expect :list_log_metrics, first_list_res, [first_list_req]
     mock.expect :list_log_metrics, second_list_res, [second_list_req]
-    logging.service.metrics = mock
+    logging.service.mocked_metrics = mock
 
     first_metrics = logging.metrics
     second_metrics = first_metrics.next
@@ -106,7 +106,7 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_log_metrics, list_res, [list_req]
-    logging.service.metrics = mock
+    logging.service.mocked_metrics = mock
 
     metrics = logging.metrics max: 3
 
@@ -124,7 +124,7 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_log_metrics, list_res, [list_req]
-    logging.service.metrics = mock
+    logging.service.mocked_metrics = mock
 
     metrics = logging.metrics
 
@@ -147,7 +147,7 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :create_log_metric, create_res, [create_req]
-    logging.service.metrics = mock
+    logging.service.mocked_metrics = mock
 
     metric = logging.create_metric new_metric_name
 
@@ -178,7 +178,7 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :create_log_metric, create_res, [create_req]
-    logging.service.metrics = mock
+    logging.service.mocked_metrics = mock
 
     metric = logging.create_metric new_metric_name, description: new_metric_description,
       filter: new_metric_filter
@@ -197,7 +197,7 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :get_log_metric, get_res, [get_req]
-    logging.service.metrics = mock
+    logging.service.mocked_metrics = mock
 
     metric = logging.metric metric_name
 
@@ -214,7 +214,7 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
     def stub.get_log_metric *args
       raise GRPC::BadStatus.new 5, "not found"
     end
-    logging.service.metrics = stub
+    logging.service.mocked_metrics = stub
 
     metric = logging.metric metric_name
     metric.must_be :nil?

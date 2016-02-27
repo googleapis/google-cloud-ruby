@@ -27,7 +27,7 @@ describe Gcloud::Logging::Project, :write_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :write_log_entries, write_res, [write_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     logging.write_entries entry
 
@@ -49,7 +49,7 @@ describe Gcloud::Logging::Project, :write_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :write_log_entries, write_res, [write_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     logging.write_entries [entry1, entry2]
 
@@ -69,7 +69,7 @@ describe Gcloud::Logging::Project, :write_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :write_log_entries, write_res, [write_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     logging.write_entries entry, log_name: "testlog"
 
@@ -92,7 +92,7 @@ describe Gcloud::Logging::Project, :write_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :write_log_entries, write_res, [write_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     logging.write_entries entry, resource: resource
 
@@ -112,7 +112,7 @@ describe Gcloud::Logging::Project, :write_entries, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :write_log_entries, write_res, [write_req]
-    logging.service.logging = mock
+    logging.service.mocked_logging = mock
 
     logging.write_entries entry, labels: {env: :production}
 

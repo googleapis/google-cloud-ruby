@@ -40,7 +40,7 @@ describe Gcloud::Logging::Metric, :mock_logging do
     )
     mock = Minitest::Mock.new
     mock.expect :update_log_metric, metric_grpc, [update_req]
-    metric.service.metrics = mock
+    metric.service.mocked_metrics = mock
 
     metric.description = new_metric_description
     metric.filter = new_metric_filter
@@ -57,7 +57,7 @@ describe Gcloud::Logging::Metric, :mock_logging do
     get_req = Google::Logging::V2::GetLogMetricRequest.new metric_name: "projects/test/metrics/#{metric.name}"
     mock = Minitest::Mock.new
     mock.expect :get_log_metric, metric_grpc, [get_req]
-    metric.service.metrics = mock
+    metric.service.mocked_metrics = mock
 
     metric.refresh!
 
@@ -68,7 +68,7 @@ describe Gcloud::Logging::Metric, :mock_logging do
     delete_req = Google::Logging::V2::DeleteLogMetricRequest.new metric_name: "projects/test/metrics/#{metric.name}"
     mock = Minitest::Mock.new
     mock.expect :delete_log_metric, metric_grpc, [delete_req]
-    metric.service.metrics = mock
+    metric.service.mocked_metrics = mock
 
     metric.delete
 

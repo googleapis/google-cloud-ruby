@@ -22,7 +22,7 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_sinks, list_res, [list_req]
-    logging.service.sinks = mock
+    logging.service.mocked_sinks = mock
 
     sinks = logging.sinks
 
@@ -39,7 +39,7 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_sinks, list_res, [list_req]
-    logging.service.sinks = mock
+    logging.service.mocked_sinks = mock
 
     sinks = logging.find_sinks
 
@@ -58,7 +58,7 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
     mock = Minitest::Mock.new
     mock.expect :list_sinks, first_list_res, [first_list_req]
     mock.expect :list_sinks, second_list_res, [second_list_req]
-    logging.service.sinks = mock
+    logging.service.mocked_sinks = mock
 
     first_sinks = logging.sinks
     second_sinks = logging.sinks token: first_sinks.token
@@ -84,7 +84,7 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
     mock = Minitest::Mock.new
     mock.expect :list_sinks, first_list_res, [first_list_req]
     mock.expect :list_sinks, second_list_res, [second_list_req]
-    logging.service.sinks = mock
+    logging.service.mocked_sinks = mock
 
     first_sinks = logging.sinks
     second_sinks = first_sinks.next
@@ -106,7 +106,7 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_sinks, list_res, [list_req]
-    logging.service.sinks = mock
+    logging.service.mocked_sinks = mock
 
     sinks = logging.sinks max: 3
 
@@ -124,7 +124,7 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :list_sinks, list_res, [list_req]
-    logging.service.sinks = mock
+    logging.service.mocked_sinks = mock
 
     sinks = logging.sinks
 
@@ -147,7 +147,7 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :create_sink, create_res, [create_req]
-    logging.service.sinks = mock
+    logging.service.mocked_sinks = mock
 
     sink = logging.create_sink new_sink_name
 
@@ -182,7 +182,7 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :create_sink, create_res, [create_req]
-    logging.service.sinks = mock
+    logging.service.mocked_sinks = mock
 
     sink = logging.create_sink new_sink_name, destination: new_sink_destination,
       filter: new_sink_filter, version: :v2
@@ -203,7 +203,7 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
 
     mock = Minitest::Mock.new
     mock.expect :get_sink, get_res, [get_req]
-    logging.service.sinks = mock
+    logging.service.mocked_sinks = mock
 
     sink = logging.sink sink_name
 
