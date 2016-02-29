@@ -100,6 +100,26 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
     second_sinks.next?.must_equal false #wont_be :next?
   end
 
+  it "paginates sinks with all" do
+    first_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+    first_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))
+    second_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2))
+
+    mock = Minitest::Mock.new
+    mock.expect :list_sinks, first_list_res, [first_list_req]
+    mock.expect :list_sinks, second_list_res, [second_list_req]
+    logging.service.mocked_sinks = mock
+
+    all_sinks = logging.sinks.all
+
+    mock.verify
+
+    all_sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
+    all_sinks.count.must_equal 5
+    all_sinks.next?.must_equal false #wont_be :next?
+  end
+
   it "paginates sinks with max set" do
     list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_size: 3)
     list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))

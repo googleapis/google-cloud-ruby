@@ -50,6 +50,26 @@ module Gcloud
         end
 
         ##
+        # Retrieves all sinks by repeatedly loading {#next?} until {#next?}
+        # returns false. Returns the list instance for method chaining.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   all_sinks = logging.sinks.all # Load all pages of sinks
+        #
+        def all
+          while next?
+            next_records = self.next
+            push(*next_records)
+            self.token = next_records.token
+          end
+          self
+        end
+
+        ##
         # @private New Sink::List from a Google::Logging::V2::ListSinksResponse
         # object.
         def self.from_grpc grpc_list, service
