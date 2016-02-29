@@ -43,7 +43,8 @@ module Gcloud
         def next
           return nil unless next?
           ensure_service!
-          grpc = @service.list_entries token: token
+          grpc = @service.list_entries token: token, projects: @projects,
+                                       filter: @filter, order: @order, max: @max
           self.class.from_grpc grpc, @service
         rescue GRPC::BadStatus => e
           raise Error.from_error(e)
@@ -52,7 +53,8 @@ module Gcloud
         ##
         # @private New Entry::List from a
         # Google::Logging::V2::ListLogEntryResponse object.
-        def self.from_grpc grpc_list, service
+        def self.from_grpc grpc_list, service, projects: nil, filter: nil,
+                           order: nil, max: nil
           entries = new(Array(grpc_list.entries).map do |grpc_entry|
             Entry.from_grpc grpc_entry
           end)
@@ -60,6 +62,10 @@ module Gcloud
             @token = grpc_list.next_page_token
             @token = nil if @token == ""
             @service = service
+            @projects = projects
+            @filter = filter
+            @order = order
+            @max = max
           end
           entries
         end
