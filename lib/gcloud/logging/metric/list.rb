@@ -50,7 +50,7 @@ module Gcloud
         end
 
         ##
-        # Retrieves all sinks by repeatedly loading {#next?} until {#next?}
+        # Retrieves all metrics by repeatedly loading {#next?} until {#next?}
         # returns false. Returns the list instance for method chaining.
         #
         # @example

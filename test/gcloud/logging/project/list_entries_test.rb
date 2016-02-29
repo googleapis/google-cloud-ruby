@@ -142,6 +142,26 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
     second_entries.next?.must_equal false #wont_be :next?
   end
 
+  it "paginates entries using all" do
+    first_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
+    first_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
+    second_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], page_token: "next_page_token"
+    second_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_entries, first_list_res, [first_list_req]
+    mock.expect :list_log_entries, second_list_res, [second_list_req]
+    logging.service.mocked_logging = mock
+
+    all_entries = logging.entries.all
+
+    mock.verify
+
+    all_entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
+    all_entries.count.must_equal 5
+    all_entries.next?.must_equal false #wont_be :next?
+  end
+
   it "paginates entries with criteria using next? and next" do
     first_list_req = Google::Logging::V2::ListLogEntriesRequest.new(
       project_ids: ["project1", "project2", "project3"],
@@ -171,12 +191,42 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
 
     first_entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     first_entries.count.must_equal 3
-    first_entries.token.wont_be :nil?
-    first_entries.token.must_equal "next_page_token"
+    first_entries.next?.must_equal true #must_be :next?
 
     second_entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
     second_entries.count.must_equal 2
-    second_entries.token.must_be :nil?
+    second_entries.next?.must_equal false #wont_be :next?
+  end
+
+  it "paginates entries with criteria using all" do
+    first_list_req = Google::Logging::V2::ListLogEntriesRequest.new(
+      project_ids: ["project1", "project2", "project3"],
+      filter: 'resource.type:"gce_"',
+      order_by: "timestamp"
+    )
+    first_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
+    second_list_req = Google::Logging::V2::ListLogEntriesRequest.new(
+      project_ids: ["project1", "project2", "project3"],
+      filter: 'resource.type:"gce_"',
+      order_by: "timestamp",
+      page_token: "next_page_token"
+    )
+    second_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_entries, first_list_res, [first_list_req]
+    mock.expect :list_log_entries, second_list_res, [second_list_req]
+    logging.service.mocked_logging = mock
+
+    all_entries = logging.entries(projects: ["project1", "project2", "project3"],
+                                  filter: 'resource.type:"gce_"',
+                                  order: "timestamp").all
+
+    mock.verify
+
+    all_entries.each { |m| m.must_be_kind_of Gcloud::Logging::Entry }
+    all_entries.count.must_equal 5
+    all_entries.next?.must_equal false #wont_be :next?
   end
 
   it "paginates entries with one project" do
