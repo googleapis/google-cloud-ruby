@@ -124,7 +124,8 @@ module Gcloud
         ensure_service!
         list_grpc = service.list_entries projects: projects, filter: filter,
                                          order: order, token: token, max: max
-        Entry::List.from_grpc list_grpc, service
+        Entry::List.from_grpc list_grpc, service, projects: projects, max: max,
+                                                  filter: filter, order: order
       rescue GRPC::BadStatus => e
         raise Error.from_error(e)
       end

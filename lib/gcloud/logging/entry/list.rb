@@ -43,16 +43,44 @@ module Gcloud
         def next
           return nil unless next?
           ensure_service!
-          grpc = @service.list_entries token: token
+          grpc = @service.list_entries token: token, projects: @projects,
+                                       filter: @filter, order: @order, max: @max
           self.class.from_grpc grpc, @service
         rescue GRPC::BadStatus => e
           raise Error.from_error(e)
         end
 
         ##
+        # Retrieves all log entries by repeatedly loading {#next} until
+        # {#next?} returns false. Returns the list instance for method chaining.
+        #
+        # This method may make several API calls until all log entries are
+        # retrieved. Be sure to use as narrow a search criteria as possible.
+        # Please use with caution.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   hour_ago = (Time.now - 60*60).utc.strftime('%FT%TZ')
+        #   recent_errors = "timestamp >= \"#{hour_ago}\" severity >= ERROR"
+        #   entries = logging.entries(filter: recent_errors).all
+        #
+        def all
+          while next?
+            next_records = self.next
+            push(*next_records)
+            self.token = next_records.token
+          end
+          self
+        end
+
+        ##
         # @private New Entry::List from a
         # Google::Logging::V2::ListLogEntryResponse object.
-        def self.from_grpc grpc_list, service
+        def self.from_grpc grpc_list, service, projects: nil, filter: nil,
+                           order: nil, max: nil
           entries = new(Array(grpc_list.entries).map do |grpc_entry|
             Entry.from_grpc grpc_entry
           end)
@@ -60,6 +88,10 @@ module Gcloud
             @token = grpc_list.next_page_token
             @token = nil if @token == ""
             @service = service
+            @projects = projects
+            @filter = filter
+            @order = order
+            @max = max
           end
           entries
         end
