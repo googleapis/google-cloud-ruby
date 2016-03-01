@@ -507,6 +507,15 @@ module Gcloud
       #   check access for. Permissions with wildcards (such as `*` or
       #   `storage.*`) are not allowed.
       #
+      #   The permissions that can be checked on a subscription are:
+      #
+      #   * pubsub.subscriptions.consume
+      #   * pubsub.subscriptions.get
+      #   * pubsub.subscriptions.delete
+      #   * pubsub.subscriptions.update
+      #   * pubsub.subscriptions.getIamPolicy
+      #   * pubsub.subscriptions.setIamPolicy
+      #
       # @return [Array<String>] The permissions that have access.
       #
       # @example
@@ -515,10 +524,10 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #   sub = pubsub.subscription "my-subscription"
-      #   perms = sub.test_permissions "projects.subscriptions.list",
-      #                                "projects.subscriptions.pull"
-      #   perms.include? "projects.subscriptions.list" #=> true
-      #   perms.include? "projects.subscriptions.pull" #=> false
+      #   perms = sub.test_permissions "pubsub.subscriptions.get",
+      #                                "pubsub.subscriptions.consume"
+      #   perms.include? "pubsub.subscriptions.get" #=> true
+      #   perms.include? "pubsub.subscriptions.consume" #=> false
       #
       def test_permissions *permissions
         permissions = Array(permissions).flatten
