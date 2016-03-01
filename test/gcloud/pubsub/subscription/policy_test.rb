@@ -154,14 +154,14 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
     mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:testIamPermissions" do |env|
       json_permissions = JSON.parse env.body
       json_permissions["permissions"].count.must_equal 2
-      json_permissions["permissions"].first.must_equal "projects.subscriptions.list"
-      json_permissions["permissions"].last.must_equal  "projects.subscriptions.pull"
+      json_permissions["permissions"].first.must_equal "pubsub.subscriptions.get"
+      json_permissions["permissions"].last.must_equal  "pubsub.subscriptions.consume"
       [200, {"Content-Type"=>"application/json"},
-       { "permissions" => ["projects.subscriptions.list"] }.to_json]
+       { "permissions" => ["pubsub.subscriptions.get"] }.to_json]
     end
 
-    permissions = subscription.test_permissions "projects.subscriptions.list",
-                                                "projects.subscriptions.pull"
-    permissions.must_equal ["projects.subscriptions.list"]
+    permissions = subscription.test_permissions "pubsub.subscriptions.get",
+                                                "pubsub.subscriptions.consume"
+    permissions.must_equal ["pubsub.subscriptions.get"]
   end
 end

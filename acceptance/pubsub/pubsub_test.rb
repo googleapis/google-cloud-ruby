@@ -223,9 +223,16 @@ describe Gcloud::Pubsub, :pubsub do
     let(:service_account) { pubsub.connection.credentials.client.issuer }
 
     it "allows policy to be set on a topic" do
+      # Check permissions first
+      roles = ["pubsub.topics.getIamPolicy", "pubsub.topics.setIamPolicy"]
+      permissions = topic.test_permissions roles
+      skip "Don't have permissions to get/set topic's policy" unless permissions == roles
+
       topic.policy.must_be_kind_of Hash
 
-      role = {"role"=>"roles/pubsub.subscriber", "members"=>["serviceAccount:#{service_account}"]}
+      # We need a valid service account in order to update the policy
+      service_account.wont_be :nil?
+      role = {"role"=>"roles/pubsub.publisher", "members"=>["serviceAccount:#{service_account}"]}
       tp = topic.policy.dup
       tp["bindings"] ||= []
       tp["bindings"] << role
@@ -235,8 +242,15 @@ describe Gcloud::Pubsub, :pubsub do
     end
 
     it "allows policy to be set on a subscription" do
+      # Check permissions first
+      roles = ["pubsub.subscriptions.getIamPolicy", "pubsub.subscriptions.setIamPolicy"]
+      permissions = subscription.test_permissions roles
+      skip "Don't have permissions to get/set subscription's policy" unless permissions == roles
+
       subscription.policy.must_be_kind_of Hash
 
+      # We need a valid service account in order to update the policy
+      service_account.wont_be :nil?
       role = {"role"=>"roles/pubsub.subscriber", "members"=>["serviceAccount:#{service_account}"]}
       sp = subscription.policy.dup
       sp["bindings"] ||= []
@@ -247,15 +261,13 @@ describe Gcloud::Pubsub, :pubsub do
     end
 
     it "allows permissions to be tested on a topic" do
-      skip
-      roles = ["projects.topic.list", "projects.topic.publish"]
+      roles = ["pubsub.topics.get", "pubsub.topics.publish"]
       permissions = topic.test_permissions roles
       permissions.must_equal roles
     end
 
     it "allows permissions to be tested on a subscription" do
-      skip
-      roles = ["projects.subscriptions.list", "projects.subscriptions.pull"]
+      roles = ["pubsub.subscriptions.consume", "pubsub.subscriptions.get"]
       permissions = subscription.test_permissions roles
       permissions.must_equal roles
     end
