@@ -406,6 +406,16 @@ module Gcloud
       #   check access for. Permissions with wildcards (such as `*` or
       #   `storage.*`) are not allowed.
       #
+      #   The permissions that can be checked on a topic are:
+      #
+      #   * pubsub.topics.publish
+      #   * pubsub.topics.attachSubscription
+      #   * pubsub.topics.get
+      #   * pubsub.topics.delete
+      #   * pubsub.topics.update
+      #   * pubsub.topics.getIamPolicy
+      #   * pubsub.topics.setIamPolicy
+      #
       # @return [Array<Strings>] The permissions that have access.
       #
       # @example
@@ -414,10 +424,10 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #   topic = pubsub.topic "my-topic"
-      #   perms = topic.test_permissions "projects.topic.list",
-      #                                  "projects.topic.publish"
-      #   perms.include? "projects.topic.list" #=> true
-      #   perms.include? "projects.topic.publish" #=> false
+      #   perms = topic.test_permissions "pubsub.topics.get",
+      #                                  "pubsub.topics.publish"
+      #   perms.include? "pubsub.topics.get" #=> true
+      #   perms.include? "pubsub.topics.publish" #=> false
       #
       def test_permissions *permissions
         permissions = Array(permissions).flatten

@@ -150,14 +150,14 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
     mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:testIamPermissions" do |env|
       json_permissions = JSON.parse env.body
       json_permissions["permissions"].count.must_equal 2
-      json_permissions["permissions"].first.must_equal "projects.topic.list"
-      json_permissions["permissions"].last.must_equal  "projects.topic.publish"
+      json_permissions["permissions"].first.must_equal "pubsub.topics.get"
+      json_permissions["permissions"].last.must_equal  "pubsub.topics.publish"
       [200, {"Content-Type"=>"application/json"},
-       { "permissions" => ["projects.topic.list"] }.to_json]
+       { "permissions" => ["pubsub.topics.get"] }.to_json]
     end
 
-    permissions = topic.test_permissions "projects.topic.list",
-                                         "projects.topic.publish"
-    permissions.must_equal ["projects.topic.list"]
+    permissions = topic.test_permissions "pubsub.topics.get",
+                                         "pubsub.topics.publish"
+    permissions.must_equal ["pubsub.topics.get"]
   end
 end
