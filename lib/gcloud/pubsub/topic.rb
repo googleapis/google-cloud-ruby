@@ -349,6 +349,7 @@ module Gcloud
         @policy ||= begin
           ensure_connection!
           resp = connection.get_topic_policy name
+          fail ApiError.from_response(resp) unless resp.success?
           policy = resp.data
           policy = policy.to_hash if policy.respond_to? :to_hash
           policy
