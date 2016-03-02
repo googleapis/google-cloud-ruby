@@ -1,5 +1,19 @@
 # Release History
 
+### 0.6.2 / 2016-03-02
+
+#### Changes
+
+* BigQuery
+  * Fix error accessing a job's data before the job is complete (yhirano55)
+  * Fix undefined local variable in Dataset's access rules (yhirano55)
+  * Optionally specify location when creating a Dataset (gramos74)
+* Datastore
+  * Fix bug in calculating an Entity's `exclude_from_indexes` (bmclean)
+* Pub/Sub
+  * Correctly raise error when accessing a policy without permissions
+  * Update policy permissions documentation
+
 ### 0.6.1 / 2015-12-29
 
 #### Changes
