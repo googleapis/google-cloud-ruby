@@ -1,4 +1,6 @@
 ---
+- version: v0.6.2
+  date: '2016-03-02'
 - version: v0.6.1
   date: '2015-12-30'
 - version: v0.6.0
