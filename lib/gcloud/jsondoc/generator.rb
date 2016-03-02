@@ -15,8 +15,20 @@ module Gcloud
       def initialize registry
         @registry = registry
         @docs = []
-        build
       end
+
+      def write_to base_path
+        build
+        docs.each do |doc|
+          json = doc.jbuilder.target!
+          json_path = Pathname.new(base_path).join doc.filepath
+          puts json_path.to_path
+          FileUtils.mkdir_p(json_path.dirname)
+          File.write json_path.to_path, json
+        end
+      end
+
+      protected
 
       def build
         modules = @registry.all(:module)
