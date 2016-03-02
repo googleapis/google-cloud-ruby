@@ -47,7 +47,7 @@ module Gcloud
                                        filter: @filter, order: @order, max: @max
           self.class.from_grpc grpc, @service
         rescue GRPC::BadStatus => e
-          raise Error.from_error(e)
+          raise Gcloud::Error.from_error(e)
         end
 
         ##

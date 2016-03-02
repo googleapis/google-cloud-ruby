@@ -141,7 +141,7 @@ module Gcloud
         ensure_service!
         @grpc = service.update_sink name, destination, filter, version
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -151,7 +151,7 @@ module Gcloud
         ensure_service!
         @grpc = service.get_sink name
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :refresh!, :reload!
 
@@ -173,7 +173,7 @@ module Gcloud
         service.delete_sink name
         return true
       rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
