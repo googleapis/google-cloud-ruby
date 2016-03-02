@@ -355,7 +355,8 @@ module Gcloud
           "friendlyName" => options[:name],
           "description" => options[:description],
           "defaultTableExpirationMs" => options[:expiration],
-          "access" => options[:access]
+          "access" => options[:access],
+          "location" => options[:location]
         }.delete_if { |_, v| v.nil? }
       end
 
