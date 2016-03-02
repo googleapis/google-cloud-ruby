@@ -3,7 +3,14 @@
 #
 # This is a Ruby [module](http://docs.ruby-lang.org/en/2.2.0/Module.html).
 #
-# @see http://docs.ruby-lang.org/en/2.2.0/Module.html Ruby module docs
+# ```ruby
+# require "gcloud"
+#
+# gcloud = Gcloud.new "publicdata"
+# bigquery = gcloud.bigquery
+# ```
+#
+# It lists all datasets in the project.
 #
 module MyModule
 

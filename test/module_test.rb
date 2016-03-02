@@ -2,34 +2,34 @@ require 'test_helper'
 
 describe Gcloud::Jsondoc, :module do
 
-
   before do
     registry = YARD::Registry.load(["test/fixtures/**/*.rb"], true)
-    @builder = Gcloud::Jsondoc.new registry
-    @docs = @builder.docs[0].jbuilder.attributes! # docs[2] in class_test.rb
+    generator = Gcloud::Jsondoc::Generator.new registry
+    @doc = generator.docs[0].jbuilder.attributes! # docs[2] in class_test.rb
   end
 
   it "must have attributes at root" do
-    @docs.size.must_equal 3
-    @docs.keys[0].must_equal "id"
-    @docs.keys[1].must_equal "metadata"
-    @docs.keys[2].must_equal "methods"
+    @doc.size.must_equal 3
+    @doc.keys[0].must_equal "id"
+    @doc.keys[1].must_equal "metadata"
+    @doc.keys[2].must_equal "methods"
   end
 
   describe "when given a module" do
     it "must have an id" do
-      @docs["id"].must_equal "mymodule"
+      @doc["id"].must_equal "mymodule"
     end
 
     it "must have service metadata" do
-      metadata = @docs["metadata"]
+      metadata = @doc["metadata"]
       metadata["name"].must_equal "MyModule"
-      metadata["description"].must_equal "<p>The outermost module in the test fixtures.</p>  <p>This is a Ruby <a href=\"http://docs.ruby-lang.org/en/2.2.0/Module.html\">module</a>.</p>"
-      metadata["source"].must_equal "test/fixtures/my_module.rb#L8"
+      expected = "<p>The outermost module in the test fixtures.</p>\n\n<p>This is a Ruby <a href=\"http://docs.ruby-lang.org/en/2.2.0/Module.html\">module</a>.</p>\n\n<div class=\"highlighter-rouge\"><pre class=\"ruby\"><code><span class=\"nb\">require</span> <span class=\"s2\">\"gcloud\"</span>\n\n<span class=\"n\">gcloud</span> <span class=\"o\">=</span> <span class=\"no\">Gcloud</span><span class=\"p\">.</span><span class=\"nf\">new</span> <span class=\"s2\">\"publicdata\"</span>\n<span class=\"n\">bigquery</span> <span class=\"o\">=</span> <span class=\"n\">gcloud</span><span class=\"p\">.</span><span class=\"nf\">bigquery</span>\n</code></pre>\n</div>\n\n<p>It lists all datasets in the project.</p>"
+      metadata["description"].must_equal expected
+      metadata["source"].must_equal "test/fixtures/my_module.rb#L15"
     end
 
     it "can have methods" do
-      methods = @docs["methods"]
+      methods = @doc["methods"]
       methods.size.must_equal 1
     end
   end
@@ -37,32 +37,32 @@ describe Gcloud::Jsondoc, :module do
   describe "when a module has a method" do
 
     it "must have metadata" do
-      metadata = @docs["methods"][0]["metadata"]
+      metadata = @doc["methods"][0]["metadata"]
       metadata["name"].must_equal "example_method"
-      metadata["description"].must_equal "<p>Creates a new object for testing this library, as explained in <a href=\"https://en.wikipedia.org/wiki/Software_testing\">this article on testing</a>.</p>  <p>Each call creates a new instance.</p>"
-      metadata["source"].must_equal "test/fixtures/my_module.rb#L38"
+      metadata["description"].must_equal "<p>Creates a new object for testing this library, as explained in <a href=\"https://en.wikipedia.org/wiki/Software_testing\">this\narticle on testing</a>.</p>\n\n<p>Each call creates a new instance.</p>"
+      metadata["source"].must_equal "test/fixtures/my_module.rb#L45"
     end
 
     it "must have metadata examples" do
-      metadata = @docs["methods"][0]["metadata"]
+      metadata = @doc["methods"][0]["metadata"]
       metadata["examples"].size.must_equal 1
-      metadata["examples"][0]["caption"].must_equal "You can pass options."
+      metadata["examples"][0]["caption"].must_equal "<p>You can pass options.</p>"
       metadata["examples"][0]["code"].must_equal "return_object = Mymodule.storage \"my name\", opt_in: true do |config|\n  config.more = \"more\"\nend"
     end
 
     it "must have metadata resources" do
-      metadata = @docs["methods"][0]["metadata"]
+      metadata = @doc["methods"][0]["metadata"]
       metadata["resources"].size.must_equal 1
       metadata["resources"][0]["link"].must_equal "http://ntp.org/documentation.html"
       metadata["resources"][0]["title"].must_equal "NTP Documentation"
     end
 
     it "must have params" do
-      params = @docs["methods"][0]["params"]
+      params = @doc["methods"][0]["params"]
       params.size.must_equal 3
       params[0]["name"].must_equal "personal_name"
       params[0]["types"].must_equal ["String"]
-      params[0]["description"].must_equal "The name, which can be any name as defined by <a href=\"https://en.wikipedia.org/wiki/Personal_name\">this article on names</a>"
+      params[0]["description"].must_equal "The name, which can be any name as defined by <a href=\"https://en.wikipedia.org/wiki/Personal_name\">this\narticle on names</a>"
       params[0]["optional"].must_equal false
       params[0]["default"].must_be :nil?
       params[0]["nullable"].must_equal false
@@ -83,16 +83,16 @@ describe Gcloud::Jsondoc, :module do
     end
 
     it "must have exceptions" do
-      exceptions = @docs["methods"][0]["exceptions"]
+      exceptions = @doc["methods"][0]["exceptions"]
       exceptions.size.must_equal 1
       exceptions[0]["type"].must_equal "ArgumentError"
-      exceptions[0]["description"].must_equal "if the name is not a name as defined by <a href=\"https://en.wikipedia.org/wiki/Personal_name\">this article</a>"
+      exceptions[0]["description"].must_equal "if the name is not a name as defined by <a href=\"https://en.wikipedia.org/wiki/Personal_name\">this\narticle</a>"
     end
 
     it "must have returns" do
-      returns = @docs["methods"][0]["returns"]
+      returns = @doc["methods"][0]["returns"]
       returns.size.must_equal 1
-      returns[0]["types"].must_equal ["MyModule::ReturnClass"]
+      returns[0]["types"].must_equal ["<a data-custom-type=\"mymodule/returnclass\">MyModule::ReturnClass</a>"]
       returns[0]["description"].must_equal "an empty object instance"
     end
   end
