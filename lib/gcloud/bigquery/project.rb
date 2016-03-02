@@ -295,6 +295,9 @@ module Gcloud
       #   data structure of an array of hashes. See {BigQuery Access
       #   Control}[https://cloud.google.com/bigquery/access-control] for more
       #   information. (+Array of Hashes+)
+      # +location+::
+      #   The geographic location where the dataset should reside. Possible
+      #   values include +EU+ and +US+. The default value is +US+.
       #
       # === Returns
       #
@@ -343,7 +346,7 @@ module Gcloud
       #   end
       #
       def create_dataset dataset_id, name: nil, description: nil,
-                         expiration: nil, access: nil
+                         expiration: nil, access: nil, location: nil
         if block_given?
           access_builder = Dataset::Access.new connection.default_access_rules,
                                                "projectId" => project
@@ -353,7 +356,7 @@ module Gcloud
 
         ensure_connection!
         options = { name: name, description: description,
-                    expiration: expiration, access: access }
+                    expiration: expiration, access: access, location: location }
         resp = connection.insert_dataset dataset_id, options
         return Dataset.from_gapi(resp.data, connection) if resp.success?
         fail ApiError.from_response(resp)

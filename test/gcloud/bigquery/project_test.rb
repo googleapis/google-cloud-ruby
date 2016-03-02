@@ -26,27 +26,31 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     dataset.must_be_kind_of Gcloud::Bigquery::Dataset
   end
 
-  it "creates a dataset with a name and description" do
+  it "creates a dataset with options" do
     id = "my_dataset"
     name = "My Dataset"
     description = "This is my dataset"
     default_expiration = 999
+    location = "EU"
 
     mock_connection.post "/bigquery/v2/projects/#{project}/datasets" do |env|
       JSON.parse(env.body)["friendlyName"].must_equal name
       JSON.parse(env.body)["description"].must_equal description
       JSON.parse(env.body)["defaultTableExpirationMs"].must_equal default_expiration
+      JSON.parse(env.body)["location"].must_equal location
       [200, {"Content-Type"=>"application/json"},
-       create_dataset_json(id, name, description, default_expiration)]
+       create_dataset_json(id, name, description, default_expiration, location)]
     end
 
     dataset = bigquery.create_dataset id, name: name,
                                       description: description,
-                                      expiration: default_expiration
+                                      expiration: default_expiration,
+                                      location: location
     dataset.must_be_kind_of Gcloud::Bigquery::Dataset
     dataset.name.must_equal name
     dataset.description.must_equal description
     dataset.default_expiration.must_equal default_expiration
+    dataset.location.must_equal location
   end
 
   it "raises when creating a dataset with a blank id" do
@@ -300,8 +304,8 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     job.job_id.must_equal job_id
   end
 
-  def create_dataset_json id, name = nil, description = nil, default_expiration = nil
-    random_dataset_hash(id, name, description, default_expiration).to_json
+  def create_dataset_json id, name = nil, description = nil, default_expiration = nil, location = "US"
+    random_dataset_hash(id, name, description, default_expiration, location).to_json
   end
 
   def find_dataset_json id, name = nil, description = nil, default_expiration = nil

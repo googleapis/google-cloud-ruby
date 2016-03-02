@@ -290,7 +290,7 @@ class MockBigquery < Minitest::Spec
     @connection
   end
 
-  def random_dataset_hash id = nil, name = nil, description = nil, default_expiration = nil
+  def random_dataset_hash id = nil, name = nil, description = nil, default_expiration = nil, location = "US"
     id ||= "my_dataset"
     name ||= "My Dataset"
     description ||= "This is my dataset"
@@ -311,7 +311,7 @@ class MockBigquery < Minitest::Spec
       "access" => [],
       "creationTime" => Time.now.to_i*1000,
       "lastModifiedTime" => Time.now.to_i*1000,
-      "location" => "US"
+      "location" => location
     }
   end
 
