@@ -54,7 +54,7 @@ namespace :pages do
     Rake::Task["pages:jsondoc"].invoke
 
     puts `cp -R html/* #{docs}`
-    puts `cp jsondoc/gcloud.json #{jsondoc}/gcloud.json`
+    puts `cp -R jsondoc/* #{jsondoc}`
     # checkout the gh-pages branch
     git_repo = "git@github.com:GoogleCloudPlatform/gcloud-ruby.git"
     if ENV["GH_OAUTH_TOKEN"]
@@ -65,8 +65,7 @@ namespace :pages do
     Dir.chdir pages do
       # sync the docs
       puts `rsync -r --delete #{docs}/ docs/master/`
-      FileUtils.mkdir_p "versions"
-      puts `cp #{jsondoc}/gcloud.json versions/master.json`
+      puts `rsync -r --delete #{jsondoc}/ json/master/`
       # commit changes
       puts `git add -A .`
       if ENV["GH_OAUTH_TOKEN"]
@@ -132,10 +131,10 @@ namespace :pages do
     Dir.chdir pages do
       # make the release dir if needed
       FileUtils.mkdir_p "docs/#{tag}/"
-      FileUtils.mkdir_p "versions"
+      FileUtils.mkdir_p "json/#{tag}/" unless use_rdoc
       # sync the docs
       puts `rsync -r --delete #{repo}/html/ docs/#{tag}/`
-      puts `cp #{repo}/jsondoc/gcloud.json versions/#{tag}.json` unless use_rdoc
+      puts `rsync -r --delete #{repo}/jsondoc/ json/#{tag}/` unless use_rdoc
       # Update releases yaml
       releases = YAML.load_file "_data/releases.yaml"
       unless releases.select { |r| r["version"] == tag }.any?
@@ -258,11 +257,13 @@ namespace :pages do
 
   desc "Generates JSON output from gcloud-ruby .yardoc"
   task :jsondoc => :yard do
+
+    require "rubygems"
+    spec = Gem::Specification::load("gcloud.gemspec")
+
     require "gcloud/jsondoc"
     registry = YARD::Registry.load! ".yardoc"
-    builder = Gcloud::Jsondoc.new registry
-    json = builder.docs.target!
-    FileUtils.mkdir_p "jsondoc"
-    File.write "jsondoc/gcloud.json", json
+    generator = Gcloud::Jsondoc::Generator.new registry
+    generator.write_to "jsondoc"
   end
 end
