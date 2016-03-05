@@ -27,7 +27,7 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Entry::List with an array of Entry instances.
+        # @private Create a new Entry::List with an array of Entry instances.
         def initialize arr = []
           super arr
         end
@@ -52,7 +52,8 @@ module Gcloud
 
         ##
         # Retrieves all log entries by repeatedly loading {#next} until
-        # {#next?} returns false. Returns the list instance for method chaining.
+        # {#next?} returns `false`. Returns the list instance for method
+        # chaining.
         #
         # This method may make several API calls until all log entries are
         # retrieved. Be sure to use as narrow a search criteria as possible.

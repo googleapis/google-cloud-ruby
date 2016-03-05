@@ -22,6 +22,8 @@ module Gcloud
       # Additional information about a potentially long-running operation with
       # which a log entry is associated.
       #
+      # See also {Gcloud::Logging::Entry#operation}.
+      #
       class Operation
         ##
         # @private Create an empty Operation object.
@@ -34,8 +36,8 @@ module Gcloud
         attr_accessor :id
 
         ##
-        # An arbitrary producer identifier. The combination of id and producer
-        # must be globally unique. Examples for producer:
+        # An arbitrary producer identifier. The combination of `id` and
+        # `producer` must be globally unique. Examples for `producer`:
         # `"MyDivision.MyBigCompany.com"`,
         # `"github.com/MyProject/MyApplication"`.
         attr_accessor :producer

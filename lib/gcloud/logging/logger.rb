@@ -61,7 +61,15 @@ module Gcloud
       end
 
       ##
-      # Log a DEBUG message.
+      # Log a `DEBUG` entry.
+      #
+      # @param [String, Hash] message The log entry payload, represented as
+      #   either a string, a hash (JSON), or a hash (protocol buffer).
+      # @yield Evaluates to the message to log. This is not evaluated unless the
+      #   logger's level is sufficient to log the message. This allows you to
+      #   create potentially expensive logging messages that are only called
+      #   when the logger is configured to show them.
+      #
       def debug message = nil, &block
         if block_given?
           add 0, nil, message, &block
@@ -71,7 +79,15 @@ module Gcloud
       end
 
       ##
-      # Log an INFO message.
+      # Log an `INFO` entry.
+      #
+      # @param [String, Hash] message The log entry payload, represented as
+      #   either a string, a hash (JSON), or a hash (protocol buffer).
+      # @yield Evaluates to the message to log. This is not evaluated unless the
+      #   logger's level is sufficient to log the message. This allows you to
+      #   create potentially expensive logging messages that are only called
+      #   when the logger is configured to show them.
+      #
       def info message = nil, &block
         if block_given?
           add 1, nil, message, &block
@@ -81,7 +97,15 @@ module Gcloud
       end
 
       ##
-      # Log a WARN message.
+      # Log a `WARN` entry.
+      #
+      # @param [String, Hash] message The log entry payload, represented as
+      #   either a string, a hash (JSON), or a hash (protocol buffer).
+      # @yield Evaluates to the message to log. This is not evaluated unless the
+      #   logger's level is sufficient to log the message. This allows you to
+      #   create potentially expensive logging messages that are only called
+      #   when the logger is configured to show them.
+      #
       def warn message = nil, &block
         if block_given?
           add 2, nil, message, &block
@@ -91,7 +115,15 @@ module Gcloud
       end
 
       ##
-      # Log an ERROR message.
+      # Log an `ERROR` entry.
+      #
+      # @param [String, Hash] message The log entry payload, represented as
+      #   either a string, a hash (JSON), or a hash (protocol buffer).
+      # @yield Evaluates to the message to log. This is not evaluated unless the
+      #   logger's level is sufficient to log the message. This allows you to
+      #   create potentially expensive logging messages that are only called
+      #   when the logger is configured to show them.
+      #
       def error message = nil, &block
         if block_given?
           add 3, nil, message, &block
@@ -101,7 +133,15 @@ module Gcloud
       end
 
       ##
-      # Log a FATAL message.
+      # Log a `FATAL` entry.
+      #
+      # @param [String, Hash] message The log entry payload, represented as
+      #   either a string, a hash (JSON), or a hash (protocol buffer).
+      # @yield Evaluates to the message to log. This is not evaluated unless the
+      #   logger's level is sufficient to log the message. This allows you to
+      #   create potentially expensive logging messages that are only called
+      #   when the logger is configured to show them.
+      #
       def fatal message = nil, &block
         if block_given?
           add 4, nil, message, &block
@@ -111,8 +151,16 @@ module Gcloud
       end
 
       ##
-      # Log an UNKNOWN message. This will be printed no matter what the logger's
-      # level is.
+      # Log an `UNKNOWN` entry. This will be printed no matter what the
+      # logger's current severity level is.
+      #
+      # @param [String, Hash] message The log entry payload, represented as
+      #   either a string, a hash (JSON), or a hash (protocol buffer).
+      # @yield Evaluates to the message to log. This is not evaluated unless the
+      #   logger's level is sufficient to log the message. This allows you to
+      #   create potentially expensive logging messages that are only called
+      #   when the logger is configured to show them.
+      #
       def unknown message = nil, &block
         if block_given?
           add 5, nil, message, &block
@@ -125,6 +173,16 @@ module Gcloud
       # Log a message if the given severity is high enough. This is the generic
       # logging method. Users will be more inclined to use {#debug}, {#info},
       # {#warn}, {#error}, and {#fatal}.
+      #
+      # @param [Integer, String, Symbol] severity the integer code for or the
+      #   name of the severity level
+      # @param [String, Hash] message The log entry payload, represented as
+      #   either a string, a hash (JSON), or a hash (protocol buffer).
+      # @yield Evaluates to the message to log. This is not evaluated unless the
+      #   logger's level is sufficient to log the message. This allows you to
+      #   create potentially expensive logging messages that are only called
+      #   when the logger is configured to show them.
+      #
       def add severity, message = nil, progname = nil
         severity = derive_severity(severity) || 5 # 5 is UNKNOWN/DEFAULT
         return true if severity < @level
@@ -143,42 +201,61 @@ module Gcloud
       alias_method :log, :add
 
       ##
-      # Returns true if the current severity level allows for sending DEBUG
+      # Returns `true` if the current severity level allows for sending `DEBUG`
       # messages.
       def debug?
         @level <= 0
       end
 
       ##
-      # Returns true if the current severity level allows for sending INFO
+      # Returns `true` if the current severity level allows for sending `INFO`
       # messages.
       def info?
         @level <= 1
       end
 
       ##
-      # Returns true if the current severity level allows for sending WARN
+      # Returns `true` if the current severity level allows for sending `WARN`
       # messages.
       def warn?
         @level <= 2
       end
 
       ##
-      # Returns true if the current severity level allows for sending ERROR
+      # Returns `true` if the current severity level allows for sending `ERROR`
       # messages.
       def error?
         @level <= 3
       end
 
       ##
-      # Returns true if the current severity level allows for sending FATAL
+      # Returns `true` if the current severity level allows for sending `FATAL`
       # messages.
       def fatal?
         @level <= 4
       end
 
       ##
-      # Set logging severity threshold.
+      # Sets the logging severity level.
+      #
+      # @param [Integer, String, Symbol] severity the integer code for or the
+      #   name of the severity level
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   resource = logging.resource "gae_app",
+      #                               module_id: "1",
+      #                               version_id: "20150925t173233"
+      #
+      #   logger = logging.logger "my_app_log", resource, env: :production
+      #
+      #   logger.level = "INFO"
+      #   logger.debug "Job started." # No log entry written
+      #
       def level= severity
         new_level = derive_severity severity
         fail ArgumentError, "invalid log level: #{severity}" if new_level.nil?

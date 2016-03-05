@@ -86,6 +86,7 @@ module Gcloud
       # entry that reports a database error would be associated with the
       # monitored resource designating the particular database that reported the
       # error.
+      # @return [Gcloud::Logging::Resource]
       attr_reader :resource
 
       ##
@@ -94,59 +95,59 @@ module Gcloud
       attr_accessor :timestamp
 
       ##
-      # The severity of the log entry. The default value is `DEFAULT`.
+      # The severity level of the log entry. The default value is `DEFAULT`.
       attr_accessor :severity
 
       ##
-      # Helper method to determine if the severity is `DEFAULT`
+      # Returns `true` if the severity level is `DEFAULT`.
       def default?
         severity == :DEFAULT
       end
 
       ##
-      # Helper method to determine if the severity is `DEBUG`
+      # Returns `true` if the severity level is `DEBUG`.
       def debug?
         severity == :DEBUG
       end
 
       ##
-      # Helper method to determine if the severity is `INFO`
+      # Returns `true` if the severity level is `INFO`.
       def info?
         severity == :INFO
       end
 
       ##
-      # Helper method to determine if the severity is `NOTICE`
+      # Returns `true` if the severity level is `NOTICE`.
       def notice?
         severity == :NOTICE
       end
 
       ##
-      # Helper method to determine if the severity is `WARNING`
+      # Returns `true` if the severity level is `WARNING`.
       def warning?
         severity == :WARNING
       end
 
       ##
-      # Helper method to determine if the severity is `ERROR`
+      # Returns `true` if the severity level is `ERROR`.
       def error?
         severity == :ERROR
       end
 
       ##
-      # Helper method to determine if the severity is `CRITICAL`
+      # Returns `true` if the severity level is `CRITICAL`.
       def critical?
         severity == :CRITICAL
       end
 
       ##
-      # Helper method to determine if the severity is `ALERT`
+      # Returns `true` if the severity level is `ALERT`.
       def alert?
         severity == :ALERT
       end
 
       ##
-      # Helper method to determine if the severity is `EMERGENCY`
+      # Returns `true` if the severity level is `EMERGENCY`.
       def emergency?
         severity == :EMERGENCY
       end
@@ -161,21 +162,25 @@ module Gcloud
       ##
       # A set of user-defined data that provides additional information about
       # the log entry.
+      # @return [Hash]
       attr_accessor :labels
 
       ##
       # The log entry payload, represented as either a string, a hash (JSON), or
       # a hash (protocol buffer).
+      # @return [String, Hash]
       attr_accessor :payload
 
       ##
       # Information about the HTTP request associated with this log entry, if
       # applicable.
+      # @return [Gcloud::Logging::Entry::HttpRequest]
       attr_reader :http_request
 
       ##
       # Information about an operation associated with the log entry, if
       # applicable.
+      # @return [Gcloud::Logging::Entry::Operation]
       attr_reader :operation
 
       ##
