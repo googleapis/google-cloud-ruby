@@ -24,18 +24,20 @@ module Gcloud
     ##
     # # Entry
     #
-    # An individual entry in a log. A log is a named collection of entries, each
-    # entry representing a timestamped event. Logs can be produced by Google
-    # Cloud Platform services, by third-party services, or by your applications.
-    # For example, the log `apache-access` is produced by the Apache Web Server,
-    # but the log `compute.googleapis.com/activity_log` is produced by Google
-    # Compute Engine.
+    # An individual entry in a log.
     #
     # Each log entry is composed of metadata and a payload. The metadata
     # includes standard information used by Cloud Logging, such as when the
-    # entry was created and where it came from. The payload is the event record,
-    # and it can be a text string or a structure such as a JSON object. A single
-    # log can have entries with different payload types.
+    # entry was created and where it came from. The payload is the event record.
+    # Traditionally this is a message string, but in Cloud Logging it can also
+    # be a JSON or protocol buffer object. A single log can have entries with
+    # different payload types.
+    #
+    # A log is a named collection of entries. Logs can be produced by Google
+    # Cloud Platform services, by third-party services, or by your applications.
+    # For example, the log `compute.googleapis.com/activity_log` is produced by
+    # Google Compute Engine. Logs are simply referenced by name in Gcloud. There
+    # is no `Log` type in Gcloud or `Log` resource in the Cloud Logging API.
     #
     # @see https://cloud.google.com/logging/docs/view/logs_index List of Log
     #   Types

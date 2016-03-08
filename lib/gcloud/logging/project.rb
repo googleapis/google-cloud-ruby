@@ -109,7 +109,27 @@ module Gcloud
       #   logging = gcloud.logging
       #   entries = logging.entries
       #   entries.each do |e|
-      #     puts "#{e.log_name} [#{e.timestamp}] #{e.payload.inspect}"
+      #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
+      #   end
+      #
+      # @example You can use a filter to narrow results to a single log.
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   entries = logging.entries filter: "log:syslog"
+      #   entries.each do |e|
+      #     puts "[#{e.timestamp}] #{e.payload.inspect}"
+      #   end
+      #
+      # @example You can also order the results by timestamp.
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #   entries = logging.entries order: "timestamp desc"
+      #   entries.each do |e|
+      #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
       #   end
       #
       # @example With pagination: (See {Gcloud::Logging::Entry::List})
@@ -120,7 +140,7 @@ module Gcloud
       #   entries = logging.entries
       #   loop do
       #     entries.each do |e|
-      #       puts "#{e.log_name} [#{e.timestamp}] #{e.payload.inspect}"
+      #       puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
       #     end
       #     break unless entries.next?
       #     entries = entries.next
@@ -164,6 +184,10 @@ module Gcloud
 
       ##
       # Writes log entries to the Cloud Logging service.
+      #
+      # If you write a collection of log entries, you can provide the log name,
+      # resource, and/or labels hash to be used for all of the entries, and omit
+      # these values from the individual entries.
       #
       # @param [Gcloud::Logging::Entry, Array<Gcloud::Logging::Entry>] entries
       #   One or more entry objects to write. The log entries must have values
@@ -228,8 +252,8 @@ module Gcloud
       end
 
       ##
-      # Creates a logger instance that is API compatible with ruby's standard
-      # library Logger.
+      # Creates a logger instance that is API-compatible with Ruby's standard
+      # library [Logger](http://ruby-doc.org/stdlib/libdoc/logger/rdoc).
       #
       # @param [String] log_name A log resource name to be associated with the
       #   written log entries.
@@ -401,8 +425,8 @@ module Gcloud
       alias_method :find_sinks, :sinks
 
       ##
-      # Creates a new project sink. When you create a sink, new log entries that
-      # match the sink's filter are exported. Cloud Logging does not send
+      # Creates a new project sink. When you create a sink, only new log entries
+      # that match the sink's filter are exported. Cloud Logging does not send
       # previously-ingested log entries to the sink's destination.
       #
       # @see https://cloud.google.com/logging/docs/api/tasks/exporting-logs

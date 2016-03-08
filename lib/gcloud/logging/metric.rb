@@ -20,9 +20,11 @@ module Gcloud
     ##
     # # Metric
     #
-    # A logs-based Google Cloud Monitoring metric. A metric is a measured value
-    # that can be used to assess a system. The value of a logs-based metric is
-    # the number of log entries that match a logs filter.
+    # A logs-based [Google Cloud
+    # Monitoring](https://cloud.google.com/monitoring/docs) metric. A metric is
+    # a measured value that can be used to assess a system. The basis of a
+    # logs-based metric is the collection of log entries that match a logs
+    # filter.
     #
     # @see https://cloud.google.com/logging/docs/view/logs_based_metrics
     #   Logs-based Metrics
