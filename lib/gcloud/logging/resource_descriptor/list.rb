@@ -27,14 +27,14 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new ResourceDescriptor::List with an array of
+        # @private Create a new ResourceDescriptor::List with an array of
         # ResourceDescriptor instances.
         def initialize arr = []
           super arr
         end
 
         ##
-        # Whether there a next page of resource descriptors.
+        # Whether there is a next page of resource descriptors.
         def next?
           !token.nil?
         end

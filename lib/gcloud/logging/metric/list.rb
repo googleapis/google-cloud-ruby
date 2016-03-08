@@ -27,13 +27,13 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Metric::List with an array of Metric instances.
+        # @private Create a new Metric::List with an array of Metric instances.
         def initialize arr = []
           super arr
         end
 
         ##
-        # Whether there a next page of metrics.
+        # Whether there is a next page of metrics.
         def next?
           !token.nil?
         end
@@ -51,7 +51,7 @@ module Gcloud
 
         ##
         # Retrieves all metrics by repeatedly loading {#next?} until {#next?}
-        # returns false. Returns the list instance for method chaining.
+        # returns `false`. Returns the list instance for method chaining.
         #
         # @example
         #   require "gcloud"

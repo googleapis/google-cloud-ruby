@@ -20,7 +20,14 @@ module Gcloud
     ##
     # # ResourceDescriptor
     #
-    # A type of monitored resource that is used by Cloud Logging. Read-only.
+    # Describes a type of monitored resource supported by Cloud Logging. Each
+    # ResourceDescriptor has a type name, such as `cloudsql_database`,
+    # `gae_app`, or `gce_instance`. It also specifies a set of labels that must
+    # all be given values in a {Resource} instance to represent an actual
+    # instance of the type.
+    #
+    # ResourceDescriptor instances are read-only. You cannot create your own
+    # instances, but you can list them with {Project#resource_descriptors}.
     #
     # @example
     #   require "gcloud"
@@ -28,6 +35,9 @@ module Gcloud
     #   gcloud = Gcloud.new
     #   logging = gcloud.logging
     #   resource_descriptor = logging.resource_descriptors.first
+    #   resource_descriptor.type #=> "cloudsql_database"
+    #   resource_descriptor.name #=> "Cloud SQL Database"
+    #   resource_descriptor.labels.map &:key #=> ["database_id", "region"]
     #
     class ResourceDescriptor
       ##
@@ -37,12 +47,12 @@ module Gcloud
       end
 
       ##
-      # The monitored resource type.
+      # The monitored resource type. For example, `cloudsql_database`.
       attr_reader :type
 
       ##
-      # A concise name for the monitored resource type, which is displayed in
-      # user interfaces.
+      # A display name for the monitored resource type. For example,
+      # `Cloud SQL Database`.
       attr_reader :name
 
       ##
@@ -52,7 +62,8 @@ module Gcloud
 
       ##
       # A set of definitions of the labels that can be used to describe
-      # instances of this monitored resource type.
+      # instances of this monitored resource type. For example, Cloud SQL
+      # databases must be labeled with their `database_id` and their `region`.
       #
       # @return [Array<LabelDescriptor>]
       #
@@ -78,9 +89,8 @@ module Gcloud
       # # LabelDescriptor
       #
       # A definition of a label that can be used to describe instances of a
-      # monitored resource type. For example, Cloud SQL databases can be labeled
-      # with their "database_id" and their "zone". See
-      # {ResourceDescriptor#labels}.
+      # {Resource}. For example, Cloud SQL databases must be labeled with their
+      # `database_id`. See {ResourceDescriptor#labels}.
       #
       # @example
       #   require "gcloud"

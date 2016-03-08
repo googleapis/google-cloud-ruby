@@ -21,6 +21,8 @@ module Gcloud
       #
       # HTTP request data associated with a log entry.
       #
+      # See also {Gcloud::Logging::Entry#http_request}.
+      #
       class HttpRequest
         ##
         # @private Create an empty HttpRequest object.
@@ -28,54 +30,57 @@ module Gcloud
         end
 
         ##
-        # The request method. Examples: "GET", "HEAD", "PUT", "POST".
+        # The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`.
+        # (String)
         attr_accessor :method
 
         ##
-        # The scheme (http, https), the host name, the path and the query
-        # portion of the URL that was requested. Example:
-        # "http://example.com/some/info?color=red".
+        # The URL. The scheme (http, https), the host name, the path and the
+        # query portion of the URL that was requested. Example:
+        # `"http://example.com/some/info?color=red"`. (String)
         attr_accessor :url
 
         ##
         # The size of the HTTP request message in bytes, including the request
-        # headers and the request body.
+        # headers and the request body. (Integer)
         attr_accessor :size
 
         ##
-        # The response code indicating the status of response. Examples: 200,
-        # 404.
+        # The response code indicating the status of response. Examples: `200`,
+        # `404`. (Integer)
         attr_accessor :status
 
         ##
         # The size of the HTTP response message sent back to the client, in
-        # bytes, including the response headers and the response body.
+        # bytes, including the response headers and the response body. (Integer)
         attr_accessor :response_size
 
         ##
-        # The user agent sent by the client. Example: "Mozilla/4.0 (compatible;
-        # MSIE 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)".
+        # The user agent sent by the client. Example: `"Mozilla/4.0 (compatible;
+        # MSIE 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)"`. (String)
         attr_accessor :user_agent
 
         ##
         # The IP address (IPv4 or IPv6) of the client that issued the HTTP
-        # request. Examples: "192.168.1.1", "FE80::0202:B3FF:FE1E:8329".
+        # request. Examples: `"192.168.1.1"`, `"FE80::0202:B3FF:FE1E:8329"`.
+        # (String)
         attr_accessor :remote_ip
 
         ##
         # The referer URL of the request, as defined in [HTTP/1.1 Header Field
         # Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
+        # (String)
         attr_accessor :referer
 
         ##
-        # Whether or not an entity was served from cache (with or without
-        # validation).
+        # Whether an entity was served from cache (with or without validation).
+        # (Boolean)
         attr_accessor :cache_hit
 
         ##
-        # Whether or not the response was validated with the origin server
-        # before being served from cache. This field is only meaningful if
-        # cache_hit is `true`.
+        # Whether the response was validated with the origin server before being
+        # served from cache. This field is only meaningful if `cache_hit` is
+        # `true`. (Boolean)
         attr_accessor :validated
 
         ##

@@ -27,13 +27,13 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Sink::List with an array of Sink instances.
+        # @private Create a new Sink::List with an array of Sink instances.
         def initialize arr = []
           super arr
         end
 
         ##
-        # Whether there a next page of sinks.
+        # Whether there is a next page of sinks.
         def next?
           !token.nil?
         end
@@ -51,7 +51,7 @@ module Gcloud
 
         ##
         # Retrieves all sinks by repeatedly loading {#next?} until {#next?}
-        # returns false. Returns the list instance for method chaining.
+        # returns `false`. Returns the list instance for method chaining.
         #
         # @example
         #   require "gcloud"

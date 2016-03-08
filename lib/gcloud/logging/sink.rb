@@ -20,14 +20,33 @@ module Gcloud
     ##
     # # Sink
     #
-    # Used to export log entries outside Cloud Logging.
+    # Used to export log entries outside Cloud Logging. When you create a sink,
+    # new log entries are exported. Cloud Logging does not send
+    # previously-ingested log entries to the sink's destination.
+    #
+    # You can retrieve an existing sink with {Project#sink}
+    #
+    # @see https://cloud.google.com/logging/docs/api/tasks/exporting-logs
+    #   Exporting Logs With Sinks
+    # @see https://cloud.google.com/logging/docs/api/introduction_v2#kinds_of_log_sinks
+    #   Kinds of log sinks (API V2)
+    # @see https://cloud.google.com/logging/docs/api/#sinks Sinks (API V1)
+    # @see https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs
+    #   Permissions for writing exported logs
     #
     # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   logging = gcloud.logging
-    #   sink = logging.sink "severe_errors"
+    #   storage = gcloud.storage
+    #
+    #   bucket = storage.create_bucket "my-syslog-bucket"
+    #   destination = "storage.googleapis.com/#{bucket.id}"
+    #
+    #   sink = logging.create_sink "my-sink",
+    #                              destination: destination,
+    #                              filter: "log:syslog"
     #
     class Sink
       ##

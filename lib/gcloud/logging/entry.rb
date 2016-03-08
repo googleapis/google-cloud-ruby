@@ -26,16 +26,42 @@ module Gcloud
     #
     # An individual entry in a log.
     #
+    # Each log entry is composed of metadata and a payload. The metadata
+    # includes standard information used by Cloud Logging, such as when the
+    # entry was created and where it came from. The payload is the event record.
+    # Traditionally this is a message string, but in Cloud Logging it can also
+    # be a JSON or protocol buffer object. A single log can have entries with
+    # different payload types.
+    #
+    # A log is a named collection of entries. Logs can be produced by Google
+    # Cloud Platform services, by third-party services, or by your applications.
+    # For example, the log `compute.googleapis.com/activity_log` is produced by
+    # Google Compute Engine. Logs are simply referenced by name in Gcloud. There
+    # is no `Log` type in Gcloud or `Log` resource in the Cloud Logging API.
+    #
+    # @see https://cloud.google.com/logging/docs/view/logs_index List of Log
+    #   Types
+    #
     # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   logging = gcloud.logging
-    #   entry = logging.entries.first
+    #
+    #   entry = logging.entry
+    #   entry.payload = "Job started."
+    #   entry.log_name = "my_app_log"
+    #   entry.resource.type = "gae_app"
+    #   entry.resource.labels[:module_id] = "1"
+    #   entry.resource.labels[:version_id] = "20150925t173233"
+    #
+    #   logging.write_entries entry
     #
     class Entry
       ##
-      # Create an empty Entry object.
+      # Create a new Entry instance. The {#resource} attribute is
+      # pre-populated with a new {Gcloud::Logging::Resource} instance. See also
+      # {Gcloud::Logging::Project#entry}.
       def initialize
         @labels = {}
         @resource = Resource.new
@@ -47,7 +73,7 @@ module Gcloud
       ##
       # The resource name of the log to which this log entry belongs. The format
       # of the name is `projects/<project-id>/logs/<log-id>`. e.g.
-      # `projects/my-projectid/logs/syslog` and
+      # `projects/my-projectid/logs/my_app_log` and
       # `projects/1234567890/logs/library.googleapis.com%2Fbook_log`
       #
       # The log ID part of resource name must be less than 512 characters long
@@ -62,6 +88,7 @@ module Gcloud
       # entry that reports a database error would be associated with the
       # monitored resource designating the particular database that reported the
       # error.
+      # @return [Gcloud::Logging::Resource]
       attr_reader :resource
 
       ##
@@ -70,59 +97,59 @@ module Gcloud
       attr_accessor :timestamp
 
       ##
-      # The severity of the log entry. The default value is `DEFAULT`.
+      # The severity level of the log entry. The default value is `DEFAULT`.
       attr_accessor :severity
 
       ##
-      # Helper method to determine if the severity is `DEFAULT`
+      # Returns `true` if the severity level is `DEFAULT`.
       def default?
         severity == :DEFAULT
       end
 
       ##
-      # Helper method to determine if the severity is `DEBUG`
+      # Returns `true` if the severity level is `DEBUG`.
       def debug?
         severity == :DEBUG
       end
 
       ##
-      # Helper method to determine if the severity is `INFO`
+      # Returns `true` if the severity level is `INFO`.
       def info?
         severity == :INFO
       end
 
       ##
-      # Helper method to determine if the severity is `NOTICE`
+      # Returns `true` if the severity level is `NOTICE`.
       def notice?
         severity == :NOTICE
       end
 
       ##
-      # Helper method to determine if the severity is `WARNING`
+      # Returns `true` if the severity level is `WARNING`.
       def warning?
         severity == :WARNING
       end
 
       ##
-      # Helper method to determine if the severity is `ERROR`
+      # Returns `true` if the severity level is `ERROR`.
       def error?
         severity == :ERROR
       end
 
       ##
-      # Helper method to determine if the severity is `CRITICAL`
+      # Returns `true` if the severity level is `CRITICAL`.
       def critical?
         severity == :CRITICAL
       end
 
       ##
-      # Helper method to determine if the severity is `ALERT`
+      # Returns `true` if the severity level is `ALERT`.
       def alert?
         severity == :ALERT
       end
 
       ##
-      # Helper method to determine if the severity is `EMERGENCY`
+      # Returns `true` if the severity level is `EMERGENCY`.
       def emergency?
         severity == :EMERGENCY
       end
@@ -137,21 +164,25 @@ module Gcloud
       ##
       # A set of user-defined data that provides additional information about
       # the log entry.
+      # @return [Hash]
       attr_accessor :labels
 
       ##
       # The log entry payload, represented as either a string, a hash (JSON), or
       # a hash (protocol buffer).
+      # @return [String, Hash]
       attr_accessor :payload
 
       ##
       # Information about the HTTP request associated with this log entry, if
       # applicable.
+      # @return [Gcloud::Logging::Entry::HttpRequest]
       attr_reader :http_request
 
       ##
       # Information about an operation associated with the log entry, if
       # applicable.
+      # @return [Gcloud::Logging::Entry::Operation]
       attr_reader :operation
 
       ##
