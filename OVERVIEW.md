@@ -95,6 +95,44 @@ end
 
 ```
 
+# Logging
+
+[Google Cloud Logging](https://cloud.google.com/logging/) collects and stores logs from applications and services on the Google Cloud Platform, giving you fine-grained, programmatic control over your projects' logs. With this API you can do the following:
+
+* Read and filter log entries
+* Export your log entries to Cloud Storage,
+  BigQuery, or Cloud Pub/Sub
+* Create logs-based metrics for use in Cloud
+  Monitoring
+* Write log entries
+
+See the [gcloud-ruby Logging API documentation](rdoc-ref:Gcloud::Logging) to learn how to connect to Cloud Loging using this library.
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new
+logging = gcloud.logging
+
+# List all log entries
+logging.entries.each do |e|
+  puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
+end
+
+# List only entries from a single log
+entries = logging.entries filter: "log:syslog"
+
+# Write a log entry
+entry = logging.entry
+entry.payload = "Job started."
+entry.log_name = "my_app_log"
+entry.resource.type = "gae_app"
+entry.resource.labels[:module_id] = "1"
+entry.resource.labels[:version_id] = "20150925t173233"
+
+logging.write_entries entry
+```
+
 # Pub/Sub
 
 [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) ([docs](https://cloud.google.com/pubsub/reference/rest/)) is designed to provide reliable, many-to-many, asynchronous messaging between applications. Publisher applications can send messages to a “topic” and other applications can subscribe to that topic to receive the messages. By decoupling senders and receivers, Google Cloud Pub/Sub allows developers to communicate between independently written applications.
