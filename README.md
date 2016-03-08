@@ -125,6 +125,38 @@ end
 
 ```
 
+### Logging
+
+- [gcloud-ruby Logging API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Logging.html)
+- [Google Cloud Logging Documentation](https://cloud.google.com/logging/docs/)
+
+#### Preview
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new
+logging = gcloud.logging
+
+# List all log entries
+logging.entries.each do |e|
+  puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
+end
+
+# List only entries from a single log
+entries = logging.entries filter: "log:syslog"
+
+# Write a log entry
+entry = logging.entry
+entry.payload = "Job started."
+entry.log_name = "my_app_log"
+entry.resource.type = "gae_app"
+entry.resource.labels[:module_id] = "1"
+entry.resource.labels[:version_id] = "20150925t173233"
+
+logging.write_entries entry
+```
+
 ### Pub/Sub
 
 - [gcloud-ruby Pub/Sub API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Pubsub.html)
