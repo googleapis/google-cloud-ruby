@@ -73,8 +73,8 @@ describe Gcloud::Logging, :logging do
   describe "Metrics" do
     it "creates, updates, refreshes, gets, lists, and deletes a metric" do
       metric = logging.create_metric "#{prefix}-metric",
-                                     description: "Metric for acceptance tsets",
-                                     filter: "severity = ALERT"
+                                     "severity = ALERT",
+                                     description: "Metric for acceptance tsets"
 
       metric.name.must_equal "#{prefix}-metric"
       metric.description.must_equal "Metric for acceptance tsets"

@@ -201,7 +201,7 @@ module Gcloud
   #
   # gcloud = Gcloud.new
   # logging = gcloud.logging
-  # metric = logging.create_metric "errors", filter: "severity>=ERROR"
+  # metric = logging.create_metric "errors", "severity>=ERROR"
   # ```
   #
   # ### Listing metrics

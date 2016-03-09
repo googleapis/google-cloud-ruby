@@ -573,8 +573,8 @@ module Gcloud
       #   name.
       # @param [String] filter An [advanced logs
       #   filter](https://cloud.google.com/logging/docs/view/advanced_filters).
-      # @param [String] description A description of this metric, which is used
-      #   in documentation.
+      # @param [String, nil] description A description of this metric, which is
+      #   used in documentation.
       #
       # @return [Gcloud::Logging::Metric]
       #
@@ -583,11 +583,11 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
-      #   metric = logging.create_metric "errors", filter: "severity>=ERROR"
+      #   metric = logging.create_metric "errors", "severity>=ERROR"
       #
-      def create_metric name, description: nil, filter: nil
+      def create_metric name, filter, description: nil
         ensure_service!
-        grpc = service.create_metric name, description, filter
+        grpc = service.create_metric name, filter, description
         Metric.from_grpc grpc, service
       rescue GRPC::BadStatus => e
         raise Gcloud::Error.from_error(e)
