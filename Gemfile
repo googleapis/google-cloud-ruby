@@ -2,7 +2,9 @@ source "http://rubygems.org"
 
 gemspec
 
-gem "rake"
+# TODO: unpin rake after YARD (and other tasks) no longer depend on last_comment
+gem "rake", "~> 10.0"
+
 gem "gcloud-rdoc",
     git: "https://github.com/GoogleCloudPlatform/gcloud-ruby.git",
     branch: "gcloud-rdoc"
