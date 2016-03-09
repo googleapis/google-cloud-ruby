@@ -75,8 +75,8 @@ end
 
 def clean_up_logging_sinks_metrics
   puts "Cleaning up logging sinks and metrics after tests."
-  # $logging.sinks.collect { |s| s.name.starts_with? $prefix }.map &:delete
-  $logging.metrics.collect { |m| m.name.starts_with? $prefix }.map &:delete
+  # $logging.sinks.select { |s| s.name.start_with? $prefix }.map &:delete
+  $logging.metrics.select { |m| m.name.start_with? $prefix }.map &:delete
 rescue => e
   puts "Error while cleaning up logging sinks and metrics after tests.\n\n#{e}"
 end
