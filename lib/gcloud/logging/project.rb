@@ -445,7 +445,7 @@ module Gcloud
       #   See [About
       #   sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs#about_sinks)
       #   for examples.
-      # @param [String] filter An [advanced logs
+      # @param [String, nil] filter An [advanced logs
       #  filter](https://cloud.google.com/logging/docs/view/advanced_filters)
       #  that defines the log entries to be exported. The filter must be
       #  consistent with the log entry format designed by the `version`
@@ -466,13 +466,12 @@ module Gcloud
       #   storage = gcloud.storage
       #
       #   bucket = storage.create_bucket "my-syslog-bucket"
-      #   destination = "storage.googleapis.com/#{bucket.id}"
       #
       #   sink = logging.create_sink "my-sink",
-      #                              destination: destination,
+      #                              "storage.googleapis.com/#{bucket.id}",
       #                              filter: "log:syslog"
       #
-      def create_sink name, destination: nil, filter: nil, version: :unspecified
+      def create_sink name, destination, filter: nil, version: :unspecified
         version = Sink.resolve_version version
         ensure_service!
         grpc = service.create_sink name, destination, filter, version
@@ -573,8 +572,8 @@ module Gcloud
       #   name.
       # @param [String] filter An [advanced logs
       #   filter](https://cloud.google.com/logging/docs/view/advanced_filters).
-      # @param [String] description A description of this metric, which is used
-      #   in documentation.
+      # @param [String, nil] description A description of this metric, which is
+      #   used in documentation.
       #
       # @return [Gcloud::Logging::Metric]
       #
@@ -583,11 +582,11 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
-      #   metric = logging.create_metric "errors", filter: "severity>=ERROR"
+      #   metric = logging.create_metric "errors", "severity>=ERROR"
       #
-      def create_metric name, description: nil, filter: nil
+      def create_metric name, filter, description: nil
         ensure_service!
-        grpc = service.create_metric name, description, filter
+        grpc = service.create_metric name, filter, description
         Metric.from_grpc grpc, service
       rescue GRPC::BadStatus => e
         raise Gcloud::Error.from_error(e)

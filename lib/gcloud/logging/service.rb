@@ -174,7 +174,7 @@ module Gcloud
         metrics.list_log_metrics list_req
       end
 
-      def create_metric name, description, filter
+      def create_metric name, filter, description
         metric_params = {
           name: name,
           description: description,

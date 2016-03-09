@@ -22,7 +22,7 @@ describe Gcloud::Logging, :logging do
       skip
       pubsub_dest = "pubsub.googleapis.com/projects/#{logging.project}/topics/#{prefix}-topic"
       sink = logging.create_sink "#{prefix}-sink",
-                                 destination: pubsub_dest,
+                                 pubsub_dest,
                                  filter: "severity = ALERT"
 
       sink.name.must_equal "#{prefix}-sink"
@@ -60,8 +60,7 @@ describe Gcloud::Logging, :logging do
     it "lists sinks" do
       skip
       pubsub_dest = "pubsub.googleapis.com/projects/#{logging.project}/topics/#{prefix}-topic"
-      sink = logging.create_sink "#{prefix}-list-sink",
-                                 destination: pubsub_dest
+      sink = logging.create_sink "#{prefix}-list-sink", pubsub_dest
 
       logging.sinks.wont_be :empty?
       logging.sinks(max: 1).length.must_equal 1
@@ -73,8 +72,8 @@ describe Gcloud::Logging, :logging do
   describe "Metrics" do
     it "creates, updates, refreshes, gets, lists, and deletes a metric" do
       metric = logging.create_metric "#{prefix}-metric",
-                                     description: "Metric for acceptance tsets",
-                                     filter: "severity = ALERT"
+                                     "severity = ALERT",
+                                     description: "Metric for acceptance tsets"
 
       metric.name.must_equal "#{prefix}-metric"
       metric.description.must_equal "Metric for acceptance tsets"

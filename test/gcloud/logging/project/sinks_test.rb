@@ -158,24 +158,27 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
 
   it "creates a sink" do
     new_sink_name = "new-sink-#{Time.now.to_i}"
-    new_sink = Google::Logging::V2::LogSink.new name: new_sink_name
+    new_sink_destination = "storage.googleapis.com/new-sinks"
+    new_sink = Google::Logging::V2::LogSink.new name: new_sink_name, destination: new_sink_destination
+
     create_req = Google::Logging::V2::CreateSinkRequest.new(
       project_name: "projects/test",
       sink: new_sink
     )
-    create_res = Google::Logging::V2::LogSink.decode_json(empty_sink_hash.merge("name" => new_sink_name).to_json)
+    create_res = Google::Logging::V2::LogSink.decode_json(empty_sink_hash.merge("name" => new_sink_name,
+                                                                                "destination" => new_sink_destination).to_json)
 
     mock = Minitest::Mock.new
     mock.expect :create_sink, create_res, [create_req]
     logging.service.mocked_sinks = mock
 
-    sink = logging.create_sink new_sink_name
+    sink = logging.create_sink new_sink_name, new_sink_destination
 
     mock.verify
 
     sink.must_be_kind_of Gcloud::Logging::Sink
     sink.name.must_equal new_sink_name
-    sink.destination.must_be :empty?
+    sink.destination.must_equal new_sink_destination
     sink.filter.must_be :empty?
     sink.must_be :unspecified?
   end
@@ -204,8 +207,10 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
     mock.expect :create_sink, create_res, [create_req]
     logging.service.mocked_sinks = mock
 
-    sink = logging.create_sink new_sink_name, destination: new_sink_destination,
-      filter: new_sink_filter, version: :v2
+    sink = logging.create_sink new_sink_name,
+                               new_sink_destination,
+                               filter: new_sink_filter,
+                               version: :v2
 
     mock.verify
 

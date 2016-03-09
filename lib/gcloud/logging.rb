@@ -156,10 +156,9 @@ module Gcloud
   # storage = gcloud.storage
   #
   # bucket = storage.create_bucket "my-syslog-bucket"
-  # destination = "storage.googleapis.com/#{bucket.id}"
   #
   # sink = logging.create_sink "my-sink",
-  #                            destination: destination,
+  #                            "storage.googleapis.com/#{bucket.id}",
   #                            filter: "log:syslog"
   # ```
   #
@@ -201,7 +200,7 @@ module Gcloud
   #
   # gcloud = Gcloud.new
   # logging = gcloud.logging
-  # metric = logging.create_metric "errors", filter: "severity>=ERROR"
+  # metric = logging.create_metric "errors", "severity>=ERROR"
   # ```
   #
   # ### Listing metrics

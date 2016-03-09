@@ -158,31 +158,37 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
 
   it "creates a metric" do
     new_metric_name = "new-metric-#{Time.now.to_i}"
-    new_metric = Google::Logging::V2::LogMetric.new name: new_metric_name
+    new_metric_filter = "logName:syslog AND severity>=WARN"
+    new_metric = Google::Logging::V2::LogMetric.new(
+        name: new_metric_name,
+        filter: new_metric_filter
+      )
     create_req = Google::Logging::V2::CreateLogMetricRequest.new(
       project_name: "projects/test",
       metric: new_metric
     )
-    create_res = Google::Logging::V2::LogMetric.decode_json(empty_metric_hash.merge("name" => new_metric_name).to_json)
+    create_res = Google::Logging::V2::LogMetric.decode_json(empty_metric_hash.merge("name" => new_metric_name,
+                                                                                    "filter" => new_metric_filter).to_json)
 
     mock = Minitest::Mock.new
     mock.expect :create_log_metric, create_res, [create_req]
     logging.service.mocked_metrics = mock
 
-    metric = logging.create_metric new_metric_name
+    metric = logging.create_metric new_metric_name, new_metric_filter
 
     mock.verify
 
     metric.must_be_kind_of Gcloud::Logging::Metric
     metric.name.must_equal new_metric_name
+    metric.filter.must_equal new_metric_filter
     metric.description.must_be :empty?
-    metric.filter.must_be :empty?
+
   end
 
-  it "creates a metric with additional attributes" do
+  it "creates a metric with description" do
     new_metric_name = "new-metric-#{Time.now.to_i}"
-    new_metric_description = "New Metric (#{Time.now.to_i})"
     new_metric_filter = "logName:syslog AND severity>=WARN"
+    new_metric_description = "New Metric (#{Time.now.to_i})"
     new_metric = Google::Logging::V2::LogMetric.new(
       name: new_metric_name,
       description: new_metric_description,
@@ -200,14 +206,13 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
     mock.expect :create_log_metric, create_res, [create_req]
     logging.service.mocked_metrics = mock
 
-    metric = logging.create_metric new_metric_name, description: new_metric_description,
-      filter: new_metric_filter
+    metric = logging.create_metric new_metric_name, new_metric_filter, description: new_metric_description
     mock.verify
 
     metric.must_be_kind_of Gcloud::Logging::Metric
     metric.name.must_equal new_metric_name
-    metric.description.must_equal new_metric_description
     metric.filter.must_equal new_metric_filter
+    metric.description.must_equal new_metric_description
   end
 
   it "gets a metric" do
