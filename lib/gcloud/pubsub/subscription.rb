@@ -344,7 +344,7 @@ module Gcloud
       # Acknowledging a message more than once will not result in an error.
       # This is only used for messages received via pull.
       #
-      # @param [ReceivedMessage, String] *messages One or more {ReceivedMessage}
+      # @param [ReceivedMessage, String] messages One or more {ReceivedMessage}
       #   objects or ack_id values.
       #
       # @example
@@ -381,7 +381,7 @@ module Gcloud
       #   example, if the value is `10`, the new ack deadline will expire 10
       #   seconds after the call is made. Specifying `0` may immediately make
       #   the message available for another pull request.
-      # @param [ReceivedMessage, String] *messages One or more {ReceivedMessage}
+      # @param [ReceivedMessage, String] messages One or more {ReceivedMessage}
       #   objects or ack_id values.
       #
       # @example
@@ -503,7 +503,7 @@ module Gcloud
       # @see https://cloud.google.com/iam/docs/managing-policies Managing
       #   Policies
       #
-      # @param [String, Array<String>] *permissions The set of permissions to
+      # @param [String, Array<String>] permissions The set of permissions to
       #   check access for. Permissions with wildcards (such as `*` or
       #   `storage.*`) are not allowed.
       #

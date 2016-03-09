@@ -114,7 +114,7 @@ module Gcloud
       ##
       # Persist one or more entities to the Datastore.
       #
-      # @param [Entity] *entities One or more entity objects to be saved without
+      # @param [Entity] entities One or more entity objects to be saved without
       #   `id` or `name` set.
       #
       # @return [Array<Gcloud::Datastore::Entity>]
@@ -158,7 +158,7 @@ module Gcloud
       ##
       # Retrieve the entities for the provided keys.
       #
-      # @param [Key] *keys One or more Key objects to find records for.
+      # @param [Key] keys One or more Key objects to find records for.
       #
       # @return [Gcloud::Datastore::Dataset::LookupResults]
       #
@@ -181,7 +181,7 @@ module Gcloud
       ##
       # Remove entities from the Datastore.
       #
-      # @param [Entity, Key] *entities_or_keys One or more Entity or Key objects
+      # @param [Entity, Key] entities_or_keys One or more Entity or Key objects
       #   to remove.
       #
       # @return [Boolean] Returns `true` if successful
@@ -291,7 +291,7 @@ module Gcloud
       # Create a new Query instance. This is a convenience method to make the
       # creation of Query objects easier.
       #
-      # @param [String] *kinds The kind of entities to query. This is optional.
+      # @param [String] kinds The kind of entities to query. This is optional.
       #
       # @return [Gcloud::Datastore::Query]
       #
