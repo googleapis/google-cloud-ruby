@@ -59,12 +59,12 @@ module MyModule
     ##
     # Returns length of `str.to_s`.
     #
-    # @param [String, Object] str any value
+    # @param [Object] items a variable-length argument list
     #
     # @return [Integer] the length of the string from `to_s`
     #
-    def other_instance_method str
-      str.to_s.length
+    def other_instance_method items
+      items.length
     end
 
     protected

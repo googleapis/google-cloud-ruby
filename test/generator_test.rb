@@ -5,6 +5,7 @@ describe Gcloud::Jsondoc, :generator do
   before do
     registry = YARD::Registry.load(["test/fixtures/**/*.rb"], true)
     generator = Gcloud::Jsondoc::Generator.new registry
+    generator.build!
     @docs = generator.docs
   end
 

@@ -18,7 +18,7 @@ module Gcloud
       end
 
       def write_to base_path
-        build
+        build!
         docs.each do |doc|
           json = doc.jbuilder.target!
           json_path = Pathname.new(base_path).join doc.filepath
@@ -28,9 +28,7 @@ module Gcloud
         end
       end
 
-      protected
-
-      def build
+      def build!
         modules = @registry.all(:module)
         modules.each do |object|
           @docs += Doc.new(object).subtree
