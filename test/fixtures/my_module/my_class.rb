@@ -63,7 +63,7 @@ module MyModule
     #
     # @return [Integer] the length of the string from `to_s`
     #
-    def other_instance_method items
+    def other_instance_method *items
       items.length
     end
 

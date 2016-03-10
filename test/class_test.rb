@@ -30,7 +30,7 @@ describe Gcloud::Jsondoc, :jsondoc_spec, :class do
       methods.size.must_equal 2
     end
 
-    describe "when a class has a method" do
+    describe "when a class has methods" do
       it "must have metadata" do
         metadata = @doc["methods"][0]["metadata"]
         metadata["name"].must_equal "example_instance_method"
@@ -124,6 +124,17 @@ describe Gcloud::Jsondoc, :jsondoc_spec, :class do
         returns[0]["types"][1].must_equal "nil"
       end
 
+      it "can have params with variable length argument lists" do
+        params = @doc["methods"][1]["params"]
+        params.size.must_equal 1
+
+        params[0]["name"].must_equal "items"
+        params[0]["types"].must_equal ["Object"]
+        params[0]["description"].must_equal "a variable-length argument list"
+        params[0]["optional"].must_equal false
+        params[0]["default"].must_be :nil?
+        params[0]["nullable"].must_equal false
+      end
     end
   end
 end
