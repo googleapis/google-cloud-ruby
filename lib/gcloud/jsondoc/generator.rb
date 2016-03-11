@@ -1,6 +1,5 @@
 require "jbuilder"
 require "gcloud/jsondoc/doc"
-require "gcloud/jsondoc/child_doc"
 
 module Gcloud
   module Jsondoc
