@@ -10,19 +10,16 @@ describe Gcloud::Jsondoc, :jsondoc_spec, :class do
   end
 
   it "must have attributes at root" do
-    @doc.size.must_equal 3
+    @doc.keys.size.must_equal 8
     @doc.keys[0].must_equal "id"
-    @doc.keys[1].must_equal "metadata"
-    @doc.keys[2].must_equal "methods"
   end
 
   describe "when given a class" do
 
     it "must have metadata" do
-      metadata = @doc["metadata"]
-      metadata["name"].must_equal "MyClass"
-      metadata["description"].must_equal "<p>You can use MyClass for almost anything.</p>"
-      metadata["source"].must_equal "test/fixtures/my_module/my_class.rb#L4"
+      @doc["name"].must_equal "MyClass"
+      @doc["description"].must_equal "<p>You can use MyClass for almost anything.</p>"
+      @doc["source"].must_equal "test/fixtures/my_module/my_class.rb#L4"
     end
 
     it "should exclude exclude @private and protected methods" do
@@ -32,24 +29,24 @@ describe Gcloud::Jsondoc, :jsondoc_spec, :class do
 
     describe "when a class has methods" do
       it "must have metadata" do
-        metadata = @doc["methods"][0]["metadata"]
-        metadata["name"].must_equal "example_instance_method"
-        metadata["description"].must_equal "<p>Accepts many arguments for testing this library. Has no relation to\n<a data-custom-type=\"mymodule/myclass#other_instance_method\">#other_instance_method</a>. Also accepts a block if a block is given.</p>\n\n<p>Do not call this method until you have read all of its documentation.</p>"
-        metadata["source"].must_equal "test/fixtures/my_module/my_class.rb#L50"
+        method = @doc["methods"][0]
+        method["name"].must_equal "example_instance_method"
+        method["description"].must_equal "<p>Accepts many arguments for testing this library. Has no relation to\n<a data-custom-type=\"mymodule/myclass#other_instance_method\">#other_instance_method</a>. Also accepts a block if a block is given.</p>\n\n<p>Do not call this method until you have read all of its documentation.</p>"
+        method["source"].must_equal "test/fixtures/my_module/my_class.rb#L50"
       end
 
-      it "must have metadata examples" do
-        metadata = @doc["methods"][0]["metadata"]
-        metadata["examples"].size.must_equal 2
-        metadata["examples"][0]["caption"].must_equal "<p>You can pass a block.</p>"
-        metadata["examples"][0]["code"].must_equal "my_class = MyClass.new\nmy_class.example_instance_method times: 5 do |my_config|\n  my_config.limit = 5\n  true\nend"
+      it "must have method examples" do
+        method = @doc["methods"][0]
+        method["examples"].size.must_equal 2
+        method["examples"][0]["caption"].must_equal "<p>You can pass a block.</p>"
+        method["examples"][0]["code"].must_equal "my_class = MyClass.new\nmy_class.example_instance_method times: 5 do |my_config|\n  my_config.limit = 5\n  true\nend"
       end
 
-      it "must have metadata resources" do
-        metadata = @doc["methods"][0]["metadata"]
-        metadata["resources"].size.must_equal 1
-        metadata["resources"][0]["link"].must_equal "http://ruby-doc.org/core-2.2.0/Proc.html"
-        metadata["resources"][0]["title"].must_equal "Proc objects are blocks of\ncode that have been bound to a set of local variables."
+      it "must have method resources" do
+        method = @doc["methods"][0]
+        method["resources"].size.must_equal 1
+        method["resources"][0]["link"].must_equal "http://ruby-doc.org/core-2.2.0/Proc.html"
+        method["resources"][0]["title"].must_equal "Proc objects are blocks of\ncode that have been bound to a set of local variables."
       end
 
       it "can have params with options hash and keyword args" do
