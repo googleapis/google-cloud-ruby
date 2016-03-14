@@ -32,19 +32,21 @@ module Gcloud
         def initialize arr = [], token = nil
           super arr
           @token = token
+          @token = nil if @token == ""
         end
 
         ##
-        # @private New Subscription::List from a response object.
-        def self.from_response resp, conn, service
-          subs = Array(resp.data["subscriptions"]).map do |gapi_object|
-            if gapi_object.is_a? String
-              Subscription.new_lazy gapi_object, conn, service
+        # @private New Subscriptions::List from a
+        # Google::Pubsub::V1::ListSubscriptionsRequest object.
+        def self.from_grpc grpc_list, conn, service
+          subs = Array(grpc_list.subscriptions).map do |grpc|
+            if grpc.is_a? String
+              Subscription.new_lazy grpc, conn, service
             else
-              Subscription.from_gapi gapi_object, conn, service
+              Subscription.from_grpc grpc, conn, service
             end
           end
-          new subs, resp.data["nextPageToken"]
+          new subs, grpc_list.next_page_token
         end
       end
     end

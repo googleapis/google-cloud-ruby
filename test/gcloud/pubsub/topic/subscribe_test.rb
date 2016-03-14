@@ -21,13 +21,19 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
   let(:new_sub_name) { "new-sub-#{Time.now.to_i}" }
 
   it "creates a subscription when calling subscribe" do
-    mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
-      JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
-      [200, {"Content-Type"=>"application/json"},
-       subscription_json(topic_name, new_sub_name)]
-    end
+    create_req = Google::Pubsub::V1::Subscription.new(
+      name: "projects/#{project}/subscriptions/#{new_sub_name}",
+      topic: topic_path(topic_name)
+    )
+    create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    mock = Minitest::Mock.new
+    mock.expect :create_subscription, create_res, [create_req]
+    topic.service.mocked_subscriber = mock
 
     sub = topic.subscribe new_sub_name
+
+    mock.verify
+
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
     sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
   end
@@ -38,13 +44,19 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
                                                  autocreate: false }
 
     it "creates a subscription when calling subscribe" do
-      mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
-        JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
-        [200, {"Content-Type"=>"application/json"},
-         subscription_json(topic_name, new_sub_name)]
-      end
+      create_req = Google::Pubsub::V1::Subscription.new(
+        name: "projects/#{project}/subscriptions/#{new_sub_name}",
+        topic: topic_path(topic_name)
+      )
+      create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+      mock = Minitest::Mock.new
+      mock.expect :create_subscription, create_res, [create_req]
+      topic.service.mocked_subscriber = mock
 
       sub = topic.subscribe new_sub_name
+
+      mock.verify
+
       sub.must_be_kind_of Gcloud::Pubsub::Subscription
       sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
     end
@@ -56,14 +68,15 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
                                                  autocreate: false }
 
     it "raises NotFoundError when calling subscribe" do
-      mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(topic_name)]
+      stub = Object.new
+      def stub.create_subscription *args
+        raise GRPC::BadStatus.new(5, "not found")
       end
+      topic.service.mocked_subscriber = stub
 
       expect do
         topic.subscribe new_sub_name
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
   end
 end

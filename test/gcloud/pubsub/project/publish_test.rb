@@ -114,7 +114,7 @@ describe Gcloud::Pubsub::Project, :publish, :mock_pubsub do
   end
 
   it "publishes a message to a non-existing topic with autocreate" do
-    new_topic_name = "new-topic-using-autotest"
+    new_topic_name = "new-topic-using-autocreate"
 
     # Create a stub, but not verify the arguments passed in.
     # Use this approach because Minitest::Mock can't verify an error is raised.
@@ -128,7 +128,7 @@ describe Gcloud::Pubsub::Project, :publish, :mock_pubsub do
     end
     def stub.create_topic *args
       Google::Pubsub::V1::Topic.decode_json(
-      "{\"name\":\"projects/test/topics/new-topic-using-autotest\"}")
+        "{\"name\":\"projects/test/topics/new-topic-using-autocreate\"}")
     end
     pubsub.service.mocked_publisher = stub
 

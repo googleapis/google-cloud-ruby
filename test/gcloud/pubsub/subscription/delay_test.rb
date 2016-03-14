@@ -19,9 +19,8 @@ describe Gcloud::Pubsub::Subscription, :delay, :mock_pubsub do
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
-  let :subscription do
-    Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection, pubsub.service
-  end
+  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.connection, pubsub.service }
   let(:rec_message1) { Gcloud::Pubsub::ReceivedMessage.from_gapi \
                   JSON.parse(rec_message_json("rec_message1-msg-goes-here")), subscription }
   let(:rec_message2) { Gcloud::Pubsub::ReceivedMessage.from_gapi \

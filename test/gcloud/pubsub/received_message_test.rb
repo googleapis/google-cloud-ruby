@@ -19,10 +19,8 @@ describe Gcloud::Pubsub::ReceivedMessage, :mock_pubsub do
   let(:topic) { Gcloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
                                                 pubsub.connection, pubsub.service }
   let(:subscription_name) { "subscription-name-goes-here" }
-  let :subscription do
-    json = JSON.parse(subscription_json(topic_name, subscription_name))
-    Gcloud::Pubsub::Subscription.from_gapi json, pubsub.connection, pubsub.service
-  end
+  let(:subscription_grpc) { Google::Pubsub::V1::Subscription.decode_json(subscription_json(topic_name, subscription_name)) }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc subscription_grpc, pubsub.connection, pubsub.service }
   let(:rec_message_name) { "rec_message-name-goes-here" }
   let(:rec_message_msg)  { "rec_message-msg-goes-here" }
   let(:rec_message_data)  { JSON.parse(rec_message_json(rec_message_msg)) }

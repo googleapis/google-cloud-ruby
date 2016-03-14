@@ -22,43 +22,56 @@ describe Gcloud::Pubsub::Topic, :subscription, :mock_pubsub do
   let(:not_found_sub_name) { "found-sub-#{Time.now.to_i}" }
 
   it "gets an existing subscription" do
-    mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       subscription_json(topic_name, found_sub_name)]
-    end
+    get_req = Google::Pubsub::V1::GetSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{found_sub_name}"
+    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
+    mock = Minitest::Mock.new
+    mock.expect :get_subscription, get_res, [get_req]
+    topic.service.mocked_subscriber = mock
 
     sub = topic.subscription found_sub_name
+
+    mock.verify
+
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
     sub.wont_be :lazy?
   end
 
   it "gets an existing subscription with get_subscription alias" do
-    mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       subscription_json(topic_name, found_sub_name)]
-    end
+    get_req = Google::Pubsub::V1::GetSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{found_sub_name}"
+    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
+    mock = Minitest::Mock.new
+    mock.expect :get_subscription, get_res, [get_req]
+    topic.service.mocked_subscriber = mock
 
     sub = topic.get_subscription found_sub_name
+
+    mock.verify
+
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
     sub.wont_be :lazy?
   end
 
   it "gets an existing subscription with find_subscription alias" do
-    mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       subscription_json(topic_name, found_sub_name)]
-    end
+    get_req = Google::Pubsub::V1::GetSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{found_sub_name}"
+    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
+    mock = Minitest::Mock.new
+    mock.expect :get_subscription, get_res, [get_req]
+    topic.service.mocked_subscriber = mock
 
     sub = topic.find_subscription found_sub_name
+
+    mock.verify
+
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
     sub.wont_be :lazy?
   end
 
   it "returns nil when getting an non-existant subscription" do
-    mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
-      [404, {"Content-Type"=>"application/json"},
-       not_found_error_json(not_found_sub_name)]
+    stub = Object.new
+    def stub.get_subscription *args
+      raise GRPC::BadStatus.new 5, "not found"
     end
+    topic.service.mocked_subscriber = stub
 
     sub = topic.subscription found_sub_name
     sub.must_be :nil?
@@ -77,21 +90,26 @@ describe Gcloud::Pubsub::Topic, :subscription, :mock_pubsub do
                                                  pubsub.connection, pubsub.service }
 
     it "gets an existing subscription" do
-      mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
-        [200, {"Content-Type"=>"application/json"},
-         subscription_json(topic_name, found_sub_name)]
-      end
+      get_req = Google::Pubsub::V1::GetSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{found_sub_name}"
+      get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
+      mock = Minitest::Mock.new
+      mock.expect :get_subscription, get_res, [get_req]
+      topic.service.mocked_subscriber = mock
 
       sub = topic.subscription found_sub_name
+
+      mock.verify
+
       sub.must_be_kind_of Gcloud::Pubsub::Subscription
       sub.wont_be :lazy?
     end
 
     it "returns nil when getting an non-existant subscription" do
-      mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(not_found_sub_name)]
+      stub = Object.new
+      def stub.get_subscription *args
+        raise GRPC::BadStatus.new 5, "not found"
       end
+      topic.service.mocked_subscriber = stub
 
       sub = topic.subscription found_sub_name
       sub.must_be :nil?
@@ -103,10 +121,11 @@ describe Gcloud::Pubsub::Topic, :subscription, :mock_pubsub do
                                                  pubsub.connection, pubsub.service }
 
     it "returns nil when getting an non-existant subscription" do
-      mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(not_found_sub_name)]
+      stub = Object.new
+      def stub.get_subscription *args
+        raise GRPC::BadStatus.new 5, "not found"
       end
+      topic.service.mocked_subscriber = stub
 
       sub = topic.subscription found_sub_name
       sub.must_be :nil?

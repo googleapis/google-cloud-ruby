@@ -242,12 +242,17 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
 
   it "gets a subscription" do
     sub_name = "found-sub-#{Time.now.to_i}"
-    mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       subscription_json("random-topic", sub_name)]
-    end
+
+    get_req = Google::Pubsub::V1::GetSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{sub_name}"
+    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json("random-topic", sub_name)
+    mock = Minitest::Mock.new
+    mock.expect :get_subscription, get_res, [get_req]
+    pubsub.service.mocked_subscriber = mock
 
     sub = pubsub.subscription sub_name
+
+    mock.verify
+
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
     sub.name.must_equal subscription_path(sub_name)
@@ -256,12 +261,17 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
 
   it "gets a subscription with get_subscription alias" do
     sub_name = "found-sub-#{Time.now.to_i}"
-    mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       subscription_json("random-topic", sub_name)]
-    end
+
+    get_req = Google::Pubsub::V1::GetSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{sub_name}"
+    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json("random-topic", sub_name)
+    mock = Minitest::Mock.new
+    mock.expect :get_subscription, get_res, [get_req]
+    pubsub.service.mocked_subscriber = mock
 
     sub = pubsub.get_subscription sub_name
+
+    mock.verify
+
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
     sub.name.must_equal subscription_path(sub_name)
@@ -270,12 +280,17 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
 
   it "gets a subscription with find_subscription alias" do
     sub_name = "found-sub-#{Time.now.to_i}"
-    mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       subscription_json("random-topic", sub_name)]
-    end
+
+    get_req = Google::Pubsub::V1::GetSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{sub_name}"
+    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json("random-topic", sub_name)
+    mock = Minitest::Mock.new
+    mock.expect :get_subscription, get_res, [get_req]
+    pubsub.service.mocked_subscriber = mock
 
     sub = pubsub.find_subscription sub_name
+
+    mock.verify
+
     sub.wont_be :nil?
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
     sub.name.must_equal subscription_path(sub_name)
@@ -284,10 +299,12 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
 
   it "returns nil when getting an non-existant subscription" do
     not_found_sub_name = "does-not-exist"
-    mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|
-      [404, {"Content-Type"=>"application/json"},
-       not_found_error_json(not_found_sub_name)]
+
+    stub = Object.new
+    def stub.get_subscription *args
+      raise GRPC::BadStatus.new 5, "not found"
     end
+    pubsub.service.mocked_subscriber = stub
 
     sub = pubsub.subscription not_found_sub_name
     sub.must_be :nil?
@@ -316,12 +333,16 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
   end
 
   it "lists subscriptions" do
-    mock_connection.get "/v1/projects/#{project}/subscriptions" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       subscriptions_json("fake-topic", 3)]
-    end
+    get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
+    get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3)
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, get_res, [get_req]
+    pubsub.service.mocked_subscriber = mock
 
     subs = pubsub.subscriptions
+
+    mock.verify
+
     subs.count.must_equal 3
     subs.each do |sub|
       sub.must_be_kind_of Gcloud::Pubsub::Subscription
@@ -329,12 +350,16 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
   end
 
   it "lists subscriptions with find_subscriptions alias" do
-    mock_connection.get "/v1/projects/#{project}/subscriptions" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       subscriptions_json("fake-topic", 3)]
-    end
+    get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
+    get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3)
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, get_res, [get_req]
+    pubsub.service.mocked_subscriber = mock
 
     subs = pubsub.find_subscriptions
+
+    mock.verify
+
     subs.count.must_equal 3
     subs.each do |sub|
       sub.must_be_kind_of Gcloud::Pubsub::Subscription
@@ -342,12 +367,16 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
   end
 
   it "lists subscriptions with list_subscriptions alias" do
-    mock_connection.get "/v1/projects/#{project}/subscriptions" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       subscriptions_json("fake-topic", 3)]
-    end
+    get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
+    get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3)
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, get_res, [get_req]
+    pubsub.service.mocked_subscriber = mock
 
     subs = pubsub.list_subscriptions
+
+    mock.verify
+
     subs.count.must_equal 3
     subs.each do |sub|
       sub.must_be_kind_of Gcloud::Pubsub::Subscription
@@ -355,49 +384,55 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
   end
 
   it "paginates subscriptions" do
-    mock_connection.get "/v1/projects/#{project}/subscriptions" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       subscriptions_json("fake-topic", 3, "next_page_token")]
-    end
-    mock_connection.get "/v1/projects/#{project}/subscriptions" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       subscriptions_json("fake-topic", 2)]
-    end
+    first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 2)
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_subscriptions, second_get_res, [second_get_req]
+    pubsub.service.mocked_subscriber = mock
 
     first_subs = pubsub.subscriptions
+    second_subs = pubsub.subscriptions token: first_subs.token
+
+    mock.verify
+
     first_subs.count.must_equal 3
     first_subs.token.wont_be :nil?
     first_subs.token.must_equal "next_page_token"
 
-    second_subs = pubsub.subscriptions token: first_subs.token
     second_subs.count.must_equal 2
     second_subs.token.must_be :nil?
   end
 
   it "paginates subscriptions with max set" do
-    mock_connection.get "/v1/projects/#{project}/subscriptions" do |env|
-      env.params.must_include "pageSize"
-      env.params["pageSize"].must_equal "3"
-      [200, {"Content-Type"=>"application/json"},
-       subscriptions_json("fake-topic", 3, "next_page_token")]
-    end
+    get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_size: 3
+    get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, get_res, [get_req]
+    pubsub.service.mocked_subscriber = mock
 
     subs = pubsub.subscriptions max: 3
+
+    mock.verify
+
     subs.count.must_equal 3
     subs.token.wont_be :nil?
     subs.token.must_equal "next_page_token"
   end
 
   it "paginates subscriptions without max set" do
-    mock_connection.get "/v1/projects/#{project}/subscriptions" do |env|
-      env.params.wont_include "pageSize"
-      [200, {"Content-Type"=>"application/json"},
-       subscriptions_json("fake-topic", 3, "next_page_token")]
-    end
+    get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
+    get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, get_res, [get_req]
+    pubsub.service.mocked_subscriber = mock
 
     subs = pubsub.subscriptions
+
+    mock.verify
+
     subs.count.must_equal 3
     subs.token.wont_be :nil?
     subs.token.must_equal "next_page_token"

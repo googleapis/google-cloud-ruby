@@ -117,6 +117,67 @@ module Gcloud
         publisher.publish publish_req
       end
 
+      ##
+      # Gets the details of a subscription.
+      def get_subscription subscription_name, options = {}
+        sub_req = Google::Pubsub::V1::GetSubscriptionRequest.new(
+          subscription: subscription_path(subscription_name, options)
+        )
+
+        subscriber.get_subscription sub_req
+      end
+
+      ##
+      # Lists matching subscriptions by project and topic.
+      def list_topics_subscriptions topic, options = {}
+        list_params = { topic:     topic_path(topic, options),
+                        page_token: options[:token],
+                        page_size:  options[:max] }.delete_if { |_, v| v.nil? }
+        list_req = Google::Pubsub::V1::ListTopicSubscriptionsRequest.new \
+          list_params
+
+        publisher.list_topic_subscriptions list_req
+      end
+
+      ##
+      # Lists matching subscriptions by project.
+      def list_subscriptions options = {}
+        list_params = { project:    project_path(options),
+                        page_token: options[:token],
+                        page_size:  options[:max] }.delete_if { |_, v| v.nil? }
+        list_req = Google::Pubsub::V1::ListSubscriptionsRequest.new list_params
+
+        subscriber.list_subscriptions list_req
+      end
+
+      ##
+      # Creates a subscription on a given topic for a given subscriber.
+      def create_subscription topic, subscription_name, options = {}
+        sub_params = { name: subscription_path(subscription_name, options),
+                       topic: topic_path(topic),
+                       ack_deadline_seconds: options[:deadline]
+                     }.delete_if { |_, v| v.nil? }
+        sub_req = Google::Pubsub::V1::Subscription.new sub_params
+        if options[:endpoint]
+          sub_req.push_config = Google::Pubsub::V1::PushConfig.new(
+            push_endpoint: options[:endpoint],
+            attributes: (options[:attributes] || {}).to_h)
+        end
+
+        subscriber.create_subscription sub_req
+      end
+
+      ##
+      # Deletes an existing subscription.
+      # All pending messages in the subscription are immediately dropped.
+      def delete_subscription subscription
+        del_req = Google::Pubsub::V1::DeleteSubscriptionRequest.new(
+          subscription: subscription_path(subscription)
+        )
+
+        subscriber.delete_subscription del_req
+      end
+
       def project_path options = {}
         project_name = options[:project] || project
         "projects/#{project_name}"

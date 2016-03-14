@@ -365,20 +365,19 @@ module Gcloud
       #
       def subscribe topic_name, subscription_name, deadline: nil, endpoint: nil,
                     autocreate: nil
-        ensure_connection!
+        ensure_service!
         options = { deadline: deadline, endpoint: endpoint }
-        resp = connection.create_subscription topic_name,
-                                              subscription_name, options
-        if resp.success?
-          return Subscription.from_gapi resp.data, connection, service
-        end
-        if autocreate && resp.status == 404
+        grpc = service.create_subscription topic_name,
+                                           subscription_name, options
+        Subscription.from_grpc grpc, connection, service
+      rescue GRPC::BadStatus => e
+        if autocreate && e.code == 5
           create_topic topic_name
           return subscribe(topic_name, subscription_name,
                            deadline: deadline, endpoint: endpoint,
                            autocreate: false)
         end
-        fail ApiError.from_response(resp)
+        raise Error.from_error(e)
       end
       alias_method :create_subscription, :subscribe
       alias_method :new_subscription, :subscribe
@@ -418,18 +417,17 @@ module Gcloud
       #   puts subscription.name
       #
       def subscription subscription_name, project: nil, skip_lookup: nil
-        ensure_connection!
+        ensure_service!
         options = { project: project }
         if skip_lookup
           return Subscription.new_lazy subscription_name, connection,
                                        service, options
         end
-        resp = connection.get_subscription subscription_name
-        if resp.success?
-          return Subscription.from_gapi resp.data, connection, service
-        end
-        return nil if resp.status == 404
-        fail ApiError.from_response(resp)
+        grpc = service.get_subscription subscription_name
+        Subscription.from_grpc grpc, connection, service
+      rescue GRPC::BadStatus => e
+        return nil if e.code == 5
+        raise Error.from_error(e)
       end
       alias_method :get_subscription, :subscription
       alias_method :find_subscription, :subscription
@@ -476,14 +474,12 @@ module Gcloud
       #   end
       #
       def subscriptions prefix: nil, token: nil, max: nil
-        ensure_connection!
+        ensure_service!
         options = { prefix: prefix, token: token, max: max }
-        resp = connection.list_subscriptions options
-        if resp.success?
-          Subscription::List.from_response resp, connection, service
-        else
-          fail ApiError.from_response(resp)
-        end
+        grpc = service.list_subscriptions options
+        Subscription::List.from_grpc grpc, connection, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_subscriptions, :subscriptions
       alias_method :list_subscriptions, :subscriptions

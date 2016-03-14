@@ -179,12 +179,21 @@ class MockPubsub < Minitest::Spec
     { "name" => topic_path(topic_name) }.to_json
   end
 
+  def topic_subscriptions_json topic_name, num_subs, token = nil
+    subs = num_subs.times.map do
+      subscription_path("sub-#{rand 1000}")
+    end
+    data = { "subscriptions" => subs }
+    data["next_page_token"] = token unless token.nil?
+    data.to_json
+  end
+
   def subscriptions_json topic_name, num_subs, token = nil
     subs = num_subs.times.map do
       JSON.parse(subscription_json(topic_name, "sub-#{rand 1000}"))
     end
     data = { "subscriptions" => subs }
-    data["nextPageToken"] = token unless token.nil?
+    data["next_page_token"] = token unless token.nil?
     data.to_json
   end
 
@@ -193,8 +202,8 @@ class MockPubsub < Minitest::Spec
                         endpoint = "http://example.com/callback"
     { "name" => subscription_path(sub_name),
       "topic" => topic_path(topic_name),
-      "pushConfig" => { "pushEndpoint" => endpoint },
-      "ackDeadlineSeconds" => deadline,
+      "push_config" => { "push_endpoint" => endpoint },
+      "ack_deadline_seconds" => deadline,
     }.to_json
   end
 

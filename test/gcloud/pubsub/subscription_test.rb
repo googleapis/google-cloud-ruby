@@ -17,10 +17,8 @@ require "helper"
 describe Gcloud::Pubsub::Subscription, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:subscription_name) { "subscription-name-goes-here" }
-  let :subscription do
-    json = JSON.parse(subscription_json(topic_name, subscription_name))
-    Gcloud::Pubsub::Subscription.from_gapi json, pubsub.connection, pubsub.service
-  end
+  let(:subscription_grpc) { Google::Pubsub::V1::Subscription.decode_json(subscription_json(topic_name, subscription_name)) }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc subscription_grpc, pubsub.connection, pubsub.service }
 
   it "knows its name" do
     subscription.name.must_equal subscription_path(subscription_name)
@@ -52,11 +50,15 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can delete itself" do
-    mock_connection.delete "/v1/projects/#{project}/subscriptions/#{subscription_name}" do |env|
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    del_req = Google::Pubsub::V1::DeleteSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{subscription_name}"
+    del_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :delete_subscription, del_res, [del_req]
+    pubsub.service.mocked_subscriber = mock
 
     subscription.delete
+
+    mock.verify
   end
 
   it "can pull a message" do

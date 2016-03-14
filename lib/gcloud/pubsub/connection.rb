@@ -61,65 +61,6 @@ module Gcloud
         )
       end
 
-      ##
-      # Creates a subscription on a given topic for a given subscriber.
-      def create_subscription topic, subscription_name, options = {}
-        data = subscription_data topic, options
-        @client.execute(
-          api_method: @pubsub.projects.subscriptions.create,
-          parameters: { name: subscription_path(subscription_name, options) },
-          body_object: data
-        )
-      end
-
-      ##
-      # Gets the details of a subscription.
-      def get_subscription subscription_name, options = {}
-        @client.execute(
-          api_method: @pubsub.projects.subscriptions.get,
-          parameters: {
-            subscription: subscription_path(subscription_name, options) }
-        )
-      end
-
-      ##
-      # Lists matching subscriptions by project.
-      def list_subscriptions options = {}
-        params = { project: project_path(options),
-                   pageToken: options.delete(:token),
-                   pageSize: options.delete(:max)
-                 }.delete_if { |_, v| v.nil? }
-
-        @client.execute(
-          api_method: @pubsub.projects.subscriptions.list,
-          parameters: params
-        )
-      end
-
-      ##
-      # Lists matching subscriptions by project and topic.
-      def list_topics_subscriptions topic, options = {}
-        params = { topic: topic,
-                   pageToken: options.delete(:token),
-                   pageSize: options.delete(:max)
-                 }.delete_if { |_, v| v.nil? }
-
-        @client.execute(
-          api_method: @pubsub.projects.topics.subscriptions.list,
-          parameters: params
-        )
-      end
-
-      ##
-      # Deletes an existing subscription.
-      # All pending messages in the subscription are immediately dropped.
-      def delete_subscription subscription
-        @client.execute(
-          api_method: @pubsub.projects.subscriptions.delete,
-          parameters: { subscription: subscription }
-        )
-      end
-
       def get_subscription_policy subscription_name, options = {}
         @client.execute(
           api_method: @pubsub.projects.subscriptions.get_iam_policy,

@@ -150,14 +150,12 @@ module Gcloud
       #                         endpoint: "https://example.com/push"
       #
       def subscribe subscription_name, deadline: nil, endpoint: nil
-        ensure_connection!
+        ensure_service!
         options = { deadline: deadline, endpoint: endpoint }
-        resp = connection.create_subscription name, subscription_name, options
-        if resp.success?
-          Subscription.from_gapi resp.data, connection, service
-        else
-          fail ApiError.from_response(resp)
-        end
+        grpc = service.create_subscription name, subscription_name, options
+        Subscription.from_grpc grpc, connection, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :create_subscription, :subscribe
       alias_method :new_subscription, :subscribe
@@ -195,16 +193,15 @@ module Gcloud
       #   puts subscription.name
       #
       def subscription subscription_name, skip_lookup: nil
-        ensure_connection!
+        ensure_service!
         if skip_lookup
           return Subscription.new_lazy subscription_name, connection, service
         end
-        resp = connection.get_subscription subscription_name
-        if resp.success?
-          return Subscription.from_gapi resp.data, connection, service
-        end
-        return nil if resp.status == 404
-        fail ApiError.from_response(resp)
+        grpc = service.get_subscription subscription_name
+        Subscription.from_grpc grpc, connection, service
+      rescue GRPC::BadStatus => e
+        return nil if e.code == 5
+        raise Error.from_error(e)
       end
       alias_method :get_subscription, :subscription
       alias_method :find_subscription, :subscription
@@ -251,14 +248,12 @@ module Gcloud
       #   end
       #
       def subscriptions token: nil, max: nil
-        ensure_connection!
+        ensure_service!
         options = { token: token, max: max }
-        resp = connection.list_topics_subscriptions name, options
-        if resp.success?
-          Subscription::List.from_response resp, connection, service
-        else
-          fail ApiError.from_response(resp)
-        end
+        grpc = service.list_topics_subscriptions name, options
+        Subscription::List.from_grpc grpc, connection, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_subscriptions, :subscriptions
       alias_method :list_subscriptions, :subscriptions

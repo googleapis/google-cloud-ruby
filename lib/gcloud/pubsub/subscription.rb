@@ -81,7 +81,7 @@ module Gcloud
       ##
       # The name of the subscription.
       def name
-        @gapi ? @gapi["name"] : @name
+        @grpc ? @grpc.name : @name
       end
 
       ##
@@ -99,24 +99,24 @@ module Gcloud
       #   sub.topic.name #=> "projects/my-project/topics/my-topic"
       #
       def topic
-        ensure_gapi!
-        Topic.new_lazy @gapi["topic"], connection, service
+        ensure_grpc!
+        Topic.new_lazy @grpc.topic, connection, service
       end
 
       ##
       # This value is the maximum number of seconds after a subscriber receives
       # a message before the subscriber should acknowledge the message.
       def deadline
-        ensure_gapi!
-        @gapi["ackDeadlineSeconds"]
+        ensure_grpc!
+        @grpc.ack_deadline_seconds
       end
 
       ##
       # Returns the URL locating the endpoint to which messages should be
       # pushed.
       def endpoint
-        ensure_gapi!
-        @gapi["pushConfig"]["pushEndpoint"] if @gapi["pushConfig"]
+        ensure_grpc!
+        @grpc.push_config.push_endpoint if @grpc.push_config
       end
 
       ##
@@ -125,7 +125,9 @@ module Gcloud
         ensure_connection!
         resp = connection.modify_push_config name, new_endpoint, {}
         if resp.success?
-          @gapi["pushConfig"]["pushEndpoint"] = new_endpoint if @gapi
+          @gapi ||= {}
+          @gapi["pushConfig"] ||= {}
+          @gapi["pushConfig"]["pushEndpoint"] = new_endpoint
         else
           fail ApiError.from_response(resp)
         end
@@ -145,12 +147,12 @@ module Gcloud
       #
       def exists?
         # Always true if we have a gapi object
-        return true unless @gapi.nil?
+        return true unless @grpc.nil?
         # If we have a value, return it
         return @exists unless @exists.nil?
-        ensure_gapi!
-        @exists = !@gapi.nil?
-      rescue NotFoundError
+        ensure_grpc!
+        @exists = !@grpc.nil?
+      rescue Gcloud::NotFoundError
         @exists = false
       end
 
@@ -169,7 +171,7 @@ module Gcloud
       #   sub.lazy? #=> false
       #
       def lazy?
-        @gapi.nil?
+        @grpc.nil?
       end
 
       ##
@@ -188,13 +190,11 @@ module Gcloud
       #   sub.delete
       #
       def delete
-        ensure_connection!
-        resp = connection.delete_subscription name
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.delete_subscription name
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
@@ -562,12 +562,30 @@ module Gcloud
         end
       end
 
+      ##
+      # @private New Subscription from a Google::Pubsub::V1::Subscription
+      # object.
+      def self.from_grpc grpc, connection, service
+        new.tap do |f|
+          f.grpc = grpc
+          f.connection = connection
+          f.service = service
+        end
+      end
+
       protected
 
       ##
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      ##
+      # @private Raise an error unless an active connection to the service is
+      # available.
+      def ensure_service!
+        fail "Must have active connection to service" unless service
       end
 
       ##
@@ -581,6 +599,16 @@ module Gcloud
         else
           fail ApiError.from_response(resp)
         end
+      end
+
+      ##
+      # Ensures a Google::Pubsub::V1::Subscription object exists.
+      def ensure_grpc!
+        ensure_service!
+        return @grpc if @grpc
+        @grpc = service.get_subscription @name
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##

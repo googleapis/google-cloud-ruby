@@ -29,7 +29,9 @@ module Gcloud
       # @private
       def self.from_response resp
         new.tap do |e|
-          e.response = resp
+          e.instance_eval do
+            @response = resp
+          end
         end
       end
     end
@@ -38,7 +40,7 @@ module Gcloud
     # # ApiError
     #
     # Raised when an API call is not successful.
-    class ApiError < Error
+    class ApiError < Gcloud::Pubsub::Error
       ##
       # The code of the error.
       def code
@@ -82,14 +84,14 @@ module Gcloud
     # # AlreadyExistsError
     #
     # Raised when Pub/Sub returns an `ALREADY_EXISTS` error.
-    class AlreadyExistsError < ApiError
+    class AlreadyExistsError < Gcloud::Pubsub::ApiError
     end
 
     ##
     # # NotFoundError
     #
     # Raised when Pub/Sub returns a `NOT_FOUND` error.
-    class NotFoundError < ApiError
+    class NotFoundError < Gcloud::Pubsub::ApiError
     end
   end
 end

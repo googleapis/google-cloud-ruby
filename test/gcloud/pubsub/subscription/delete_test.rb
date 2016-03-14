@@ -19,16 +19,19 @@ describe Gcloud::Pubsub::Subscription, :delete, :mock_pubsub do
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
-  let :subscription do
-    Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection, pubsub.service
-  end
+  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.connection, pubsub.service }
 
   it "can delete itself" do
-    mock_connection.delete "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    del_req = Google::Pubsub::V1::DeleteSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{sub_name}"
+    del_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :delete_subscription, del_res, [del_req]
+    pubsub.service.mocked_subscriber = mock
 
     subscription.delete
+
+    mock.verify
   end
 
   describe "lazy subscription object of a subscription that does exist" do
@@ -38,11 +41,15 @@ describe Gcloud::Pubsub::Subscription, :delete, :mock_pubsub do
     end
 
     it "can delete itself" do
-      mock_connection.delete "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      del_req = Google::Pubsub::V1::DeleteSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{sub_name}"
+      del_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :delete_subscription, del_res, [del_req]
+      pubsub.service.mocked_subscriber = mock
 
       subscription.delete
+
+      mock.verify
     end
   end
 
@@ -53,14 +60,15 @@ describe Gcloud::Pubsub::Subscription, :delete, :mock_pubsub do
     end
 
     it "raises NotFoundError when deleting itself" do
-      mock_connection.delete "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.delete_subscription *args
+        raise GRPC::BadStatus.new 5, "not found"
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.delete
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
   end
 end
