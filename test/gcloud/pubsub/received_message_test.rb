@@ -92,12 +92,18 @@ describe Gcloud::Pubsub::ReceivedMessage, :mock_pubsub do
   it "can delay" do
     new_deadline = 42
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:modifyAckDeadline" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal             [rec_message.ack_id]
-      JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+      subscription: "projects/#{project}/subscriptions/#{subscription_name}",
+      ack_ids: [rec_message.ack_id],
+      ack_deadline_seconds: new_deadline
+    )
+    mad_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :modify_ack_deadline, mad_res, [mad_req]
+    subscription.service.mocked_subscriber = mock
 
     rec_message.delay! new_deadline
+
+    mock.verify
   end
 end

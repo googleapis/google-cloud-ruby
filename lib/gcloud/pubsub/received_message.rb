@@ -135,14 +135,7 @@ module Gcloud
       #
       def delay! new_deadline
         ensure_subscription!
-        connection = subscription.connection
-        resp = connection.modify_ack_deadline subscription.name,
-                                              ack_id, new_deadline
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        subscription.delay new_deadline, ack_id
       end
 
       ##

@@ -218,6 +218,18 @@ module Gcloud
         subscriber.modify_push_config mpc_req
       end
 
+      ##
+      # Modifies the ack deadline for a specific message.
+      def modify_ack_deadline subscription, ids, deadline
+        mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+          subscription: subscription_path(subscription),
+          ack_ids: Array(ids),
+          ack_deadline_seconds: deadline
+        )
+
+        subscriber.modify_ack_deadline mad_req
+      end
+
       def project_path options = {}
         project_name = options[:project] || project
         "projects/#{project_name}"

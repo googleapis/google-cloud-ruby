@@ -32,77 +32,113 @@ describe Gcloud::Pubsub::Subscription, :delay, :mock_pubsub do
     ack_id = rec_message1.ack_id
     new_deadline = 42
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal             [ack_id]
-      JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+      subscription: "projects/#{project}/subscriptions/#{sub_name}",
+      ack_ids: [ack_id],
+      ack_deadline_seconds: new_deadline
+    )
+    mad_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :modify_ack_deadline, mad_res, [mad_req]
+    subscription.service.mocked_subscriber = mock
 
     subscription.delay new_deadline, ack_id
+
+    mock.verify
   end
 
   it "can delay many ack ids" do
     ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
     new_deadline = 42
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal             ack_ids
-      JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+      subscription: "projects/#{project}/subscriptions/#{sub_name}",
+      ack_ids: ack_ids,
+      ack_deadline_seconds: new_deadline
+    )
+    mad_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :modify_ack_deadline, mad_res, [mad_req]
+    subscription.service.mocked_subscriber = mock
 
     subscription.delay new_deadline, *ack_ids
+
+    mock.verify
   end
 
   it "can delay many ack ids in an array" do
     ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
     new_deadline = 42
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal             ack_ids
-      JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+      subscription: "projects/#{project}/subscriptions/#{sub_name}",
+      ack_ids: ack_ids,
+      ack_deadline_seconds: new_deadline
+    )
+    mad_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :modify_ack_deadline, mad_res, [mad_req]
+    subscription.service.mocked_subscriber = mock
 
     subscription.delay new_deadline, ack_ids
+
+    mock.verify
   end
 
   it "can delay a message" do
     new_deadline = 42
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal             [rec_message1.ack_id]
-      JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+      subscription: "projects/#{project}/subscriptions/#{sub_name}",
+      ack_ids: [rec_message1.ack_id],
+      ack_deadline_seconds: new_deadline
+    )
+    mad_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :modify_ack_deadline, mad_res, [mad_req]
+    subscription.service.mocked_subscriber = mock
 
     subscription.delay new_deadline, rec_message1
+
+    mock.verify
   end
 
   it "can delay many messages" do
     rec_messages = [rec_message1, rec_message3, rec_message3]
     new_deadline = 42
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal             rec_messages.map(&:ack_id)
-      JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+      subscription: "projects/#{project}/subscriptions/#{sub_name}",
+      ack_ids: rec_messages.map(&:ack_id),
+      ack_deadline_seconds: new_deadline
+    )
+    mad_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :modify_ack_deadline, mad_res, [mad_req]
+    subscription.service.mocked_subscriber = mock
 
     subscription.delay new_deadline, *rec_messages
+
+    mock.verify
   end
 
   it "can delay many messages in an array" do
     rec_messages = [rec_message1, rec_message3, rec_message3]
     new_deadline = 42
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal             rec_messages.map(&:ack_id)
-      JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+      subscription: "projects/#{project}/subscriptions/#{sub_name}",
+      ack_ids: rec_messages.map(&:ack_id),
+      ack_deadline_seconds: new_deadline
+    )
+    mad_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :modify_ack_deadline, mad_res, [mad_req]
+    subscription.service.mocked_subscriber = mock
 
     subscription.delay new_deadline, rec_messages
+
+    mock.verify
   end
 
   describe "lazy subscription object of a subscription that does exist" do
@@ -115,77 +151,113 @@ describe Gcloud::Pubsub::Subscription, :delay, :mock_pubsub do
       ack_id = rec_message1.ack_id
       new_deadline = 42
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal             [ack_id]
-        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+        subscription: "projects/#{project}/subscriptions/#{sub_name}",
+        ack_ids: [ack_id],
+        ack_deadline_seconds: new_deadline
+      )
+      mad_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :modify_ack_deadline, mad_res, [mad_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.delay new_deadline, ack_id
+
+      mock.verify
     end
 
     it "can delay many ack ids" do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
       new_deadline = 42
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal             ack_ids
-        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+        subscription: "projects/#{project}/subscriptions/#{sub_name}",
+        ack_ids: ack_ids,
+        ack_deadline_seconds: new_deadline
+      )
+      mad_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :modify_ack_deadline, mad_res, [mad_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.delay new_deadline, *ack_ids
+
+      mock.verify
     end
 
     it "can delay many ack ids in an array" do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
       new_deadline = 42
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal             ack_ids
-        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+        subscription: "projects/#{project}/subscriptions/#{sub_name}",
+        ack_ids: ack_ids,
+        ack_deadline_seconds: new_deadline
+      )
+      mad_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :modify_ack_deadline, mad_res, [mad_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.delay new_deadline, ack_ids
+
+      mock.verify
     end
 
     it "can delay a message" do
       new_deadline = 42
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal             [rec_message1.ack_id]
-        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+        subscription: "projects/#{project}/subscriptions/#{sub_name}",
+        ack_ids: [rec_message1.ack_id],
+        ack_deadline_seconds: new_deadline
+      )
+      mad_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :modify_ack_deadline, mad_res, [mad_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.delay new_deadline, rec_message1
+
+      mock.verify
     end
 
     it "can delay many messages" do
       rec_messages = [rec_message1, rec_message3, rec_message3]
       new_deadline = 42
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal             rec_messages.map(&:ack_id)
-        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+        subscription: "projects/#{project}/subscriptions/#{sub_name}",
+        ack_ids: rec_messages.map(&:ack_id),
+        ack_deadline_seconds: new_deadline
+      )
+      mad_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :modify_ack_deadline, mad_res, [mad_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.delay new_deadline, *rec_messages
+
+      mock.verify
     end
 
     it "can delay many messages in an array" do
       rec_messages = [rec_message1, rec_message3, rec_message3]
       new_deadline = 42
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal             rec_messages.map(&:ack_id)
-        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+        subscription: "projects/#{project}/subscriptions/#{sub_name}",
+        ack_ids: rec_messages.map(&:ack_id),
+        ack_deadline_seconds: new_deadline
+      )
+      mad_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :modify_ack_deadline, mad_res, [mad_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.delay new_deadline, rec_messages
+
+      mock.verify
     end
   end
 
@@ -199,95 +271,89 @@ describe Gcloud::Pubsub::Subscription, :delay, :mock_pubsub do
       ack_id = rec_message1.ack_id
       new_deadline = 42
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal             [ack_id]
-        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.modify_ack_deadline *args
+        raise GRPC::BadStatus.new 5, "not found"
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.delay new_deadline, ack_id
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
 
     it "raises NotFoundError when delaying many ack ids" do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
       new_deadline = 42
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal             ack_ids
-        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.modify_ack_deadline *args
+        raise GRPC::BadStatus.new 5, "not found"
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.delay new_deadline, *ack_ids
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
 
     it "raises NotFoundError when delaying many ack ids in an array" do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
       new_deadline = 42
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal             ack_ids
-        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.modify_ack_deadline *args
+        raise GRPC::BadStatus.new 5, "not found"
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.delay new_deadline, ack_ids
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
 
     it "raises NotFoundError when delaying a message" do
       new_deadline = 42
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal             [rec_message1.ack_id]
-        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.modify_ack_deadline *args
+        raise GRPC::BadStatus.new 5, "not found"
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.delay new_deadline, rec_message1
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
 
     it "raises NotFoundError when delaying many messages" do
       rec_messages = [rec_message1, rec_message3, rec_message3]
       new_deadline = 42
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal             rec_messages.map(&:ack_id)
-        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.modify_ack_deadline *args
+        raise GRPC::BadStatus.new 5, "not found"
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.delay new_deadline, *rec_messages
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
 
     it "raises NotFoundError when delaying many messages in an array" do
       rec_messages = [rec_message1, rec_message3, rec_message3]
       new_deadline = 42
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyAckDeadline" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal             rec_messages.map(&:ack_id)
-        JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.modify_ack_deadline *args
+        raise GRPC::BadStatus.new 5, "not found"
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.delay new_deadline, rec_messages
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
   end
 end

@@ -88,17 +88,6 @@ module Gcloud
         )
       end
 
-      ##
-      # Modifies the ack deadline for a specific message.
-      def modify_ack_deadline subscription, ids, deadline
-        ids = Array ids
-        @client.execute(
-          api_method:  @pubsub.projects.subscriptions.modify_ack_deadline,
-          parameters:  { subscription: subscription },
-          body_object: { ackIds: ids, ackDeadlineSeconds: deadline }
-        )
-      end
-
       def project_path options = {}
         project_name = options[:project] || project
         "projects/#{project_name}"

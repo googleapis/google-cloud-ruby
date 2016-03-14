@@ -403,13 +403,11 @@ module Gcloud
       #
       def delay new_deadline, *messages
         ack_ids = coerce_ack_ids messages
-        ensure_connection!
-        resp = connection.modify_ack_deadline name, ack_ids, new_deadline
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.modify_ack_deadline name, ack_ids, new_deadline
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
