@@ -67,7 +67,7 @@ module Gcloud
 
         list_req = Google::Logging::V2::ListLogEntriesRequest.new(list_params)
 
-        logging.list_log_entries list_req
+        backoff { logging.list_log_entries list_req }
       end
 
       def write_entries entries, log_name: nil, resource: nil, labels: nil
@@ -85,7 +85,7 @@ module Gcloud
 
         write_req = Google::Logging::V2::WriteLogEntriesRequest.new write_params
 
-        logging.write_log_entries write_req
+        backoff { logging.write_log_entries write_req }
       end
 
       def delete_log name
@@ -93,7 +93,7 @@ module Gcloud
           log_name: log_path(name)
         )
 
-        logging.delete_log delete_req
+        backoff { logging.delete_log delete_req }
       end
 
       def list_resource_descriptors token: nil, max: nil
@@ -105,7 +105,7 @@ module Gcloud
           Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(
             list_params)
 
-        logging.list_monitored_resource_descriptors list_req
+        backoff { logging.list_monitored_resource_descriptors list_req }
       end
 
       def list_sinks token: nil, max: nil
@@ -116,7 +116,7 @@ module Gcloud
 
         list_req = Google::Logging::V2::ListSinksRequest.new(list_params)
 
-        sinks.list_sinks list_req
+        backoff { sinks.list_sinks list_req }
       end
 
       def create_sink name, destination, filter, version
@@ -130,7 +130,7 @@ module Gcloud
           sink: Google::Logging::V2::LogSink.new(sink_params)
         )
 
-        sinks.create_sink create_req
+        backoff { sinks.create_sink create_req }
       end
 
       def get_sink name
@@ -138,7 +138,7 @@ module Gcloud
           sink_name: sink_path(name)
         )
 
-        sinks.get_sink get_req
+        backoff { sinks.get_sink get_req }
       end
 
       def update_sink name, destination, filter, version
@@ -152,7 +152,7 @@ module Gcloud
           sink: Google::Logging::V2::LogSink.new(sink_params)
         )
 
-        sinks.update_sink update_req
+        backoff { sinks.update_sink update_req }
       end
 
       def delete_sink name
@@ -171,7 +171,7 @@ module Gcloud
 
         list_req = Google::Logging::V2::ListLogMetricsRequest.new(list_params)
 
-        metrics.list_log_metrics list_req
+        backoff { metrics.list_log_metrics list_req }
       end
 
       def create_metric name, filter, description
@@ -186,7 +186,7 @@ module Gcloud
           metric: Google::Logging::V2::LogMetric.new(metric_params)
         )
 
-        metrics.create_log_metric create_req
+        backoff { metrics.create_log_metric create_req }
       end
 
       def get_metric name
@@ -194,7 +194,7 @@ module Gcloud
           metric_name: metric_path(name)
         )
 
-        metrics.get_log_metric get_req
+        backoff { metrics.get_log_metric get_req }
       end
 
       def update_metric name, description, filter
@@ -209,7 +209,7 @@ module Gcloud
           metric: Google::Logging::V2::LogMetric.new(metric_params)
         )
 
-        metrics.update_log_metric update_req
+        backoff { metrics.update_log_metric update_req }
       end
 
       def delete_metric name
@@ -217,7 +217,7 @@ module Gcloud
           metric_name: metric_path(name)
         )
 
-        metrics.delete_log_metric delete_req
+        backoff { metrics.delete_log_metric delete_req }
       end
 
       def inspect
@@ -245,6 +245,12 @@ module Gcloud
       def metric_path metric_name
         return metric_name if metric_name.to_s.include? "/"
         "#{project_path}/metrics/#{metric_name}"
+      end
+
+      def backoff options = {}
+        Gcloud::Backoff.new(options).execute_grpc do
+          yield
+        end
       end
     end
   end
