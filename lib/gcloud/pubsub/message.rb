@@ -69,7 +69,9 @@ module Gcloud
       ##
       # The received attributes.
       def attributes
-        @grpc.attributes.to_h
+        return @grpc.attributes.to_h if @grpc.attributes.respond_to? :to_h
+        # Enumerable doesn't have to_h on Ruby 2.0, so fallback to this
+        Hash[@grpc.attributes.to_a]
       end
 
       ##
