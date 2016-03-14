@@ -299,7 +299,7 @@ module Gcloud
         end
         # extract autocreate option
         autocreate = attributes.delete :autocreate
-        ensure_connection!
+        ensure_service!
         batch = Topic::Batch.new data, attributes
         yield batch if block_given?
         return nil if batch.messages.count.zero?
@@ -506,14 +506,14 @@ module Gcloud
       ##
       # Call the publish API with arrays of data data and attrs.
       def publish_batch_messages topic_name, batch, autocreate = false
-        resp = connection.publish topic_name, batch.messages
-        if resp.success?
-          batch.to_gcloud_messages resp.data["messageIds"]
-        elsif autocreate && resp.status == 404
+        grpc = service.publish topic_name, batch.messages
+        batch.to_gcloud_messages Array(grpc.message_ids)
+      rescue GRPC::BadStatus => e
+        if autocreate && e.code == 5
           create_topic topic_name
           publish_batch_messages topic_name, batch, false
         else
-          fail ApiError.from_response(resp)
+          raise Error.from_error(e)
         end
       end
     end

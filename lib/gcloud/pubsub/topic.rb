@@ -13,8 +13,8 @@
 # limitations under the License.
 
 
-require "json"
 require "gcloud/pubsub/errors"
+require "gcloud/pubsub/topic/batch"
 require "gcloud/pubsub/topic/list"
 require "gcloud/pubsub/subscription"
 
@@ -309,7 +309,7 @@ module Gcloud
       #   end
       #
       def publish data = nil, attributes = {}
-        ensure_connection!
+        ensure_service!
         batch = Batch.new data, attributes
         yield batch if block_given?
         return nil if batch.messages.count.zero?
@@ -545,65 +545,10 @@ module Gcloud
       ##
       # Call the publish API with arrays of data data and attrs.
       def publish_batch_messages batch
-        resp = connection.publish name, batch.messages
-        if resp.success?
-          batch.to_gcloud_messages resp.data["messageIds"]
-        else
-          fail ApiError.from_response(resp)
-        end
-      end
-
-      ##
-      # Batch object used to publish multiple messages at once.
-      class Batch
-        ##
-        # @private The messages to publish
-        attr_reader :messages
-
-        ##
-        # @private Create a new instance of the object.
-        def initialize data = nil, attributes = {}
-          @messages = []
-          @mode = :batch
-          return if data.nil?
-          @mode = :single
-          publish data, attributes
-        end
-
-        ##
-        # Add multiple messages to the topic.
-        # All messages added will be published at once.
-        # See {Gcloud::Pubsub::Topic#publish}
-        def publish data, attributes = {}
-          @messages << [data, attributes]
-        end
-
-        ##
-        # @private Create Message objects with message ids.
-        def to_gcloud_messages message_ids
-          msgs = @messages.zip(Array(message_ids)).map do |arr, id|
-            Message.from_gapi "data"       => arr[0],
-                              "attributes" => jsonify_hash(arr[1]),
-                              "messageId"  => id
-          end
-          # Return just one Message if a single publish,
-          # otherwise return the array of Messages.
-          if @mode == :single && msgs.count <= 1
-            msgs.first
-          else
-            msgs
-          end
-        end
-
-        protected
-
-        ##
-        # Make the hash look like it was returned from the Cloud API.
-        def jsonify_hash hash
-          hash = (hash || {}).to_h
-          return hash if hash.empty?
-          JSON.parse(JSON.dump(hash))
-        end
+        grpc = service.publish name, batch.messages
+        batch.to_gcloud_messages Array(grpc.message_ids)
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
     end
   end

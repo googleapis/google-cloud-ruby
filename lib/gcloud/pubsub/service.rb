@@ -14,6 +14,7 @@
 
 
 require "google/pubsub/v1/pubsub_services"
+require "gcloud/grpc_utils"
 
 module Gcloud
   module Pubsub
@@ -95,6 +96,25 @@ module Gcloud
         end
 
         publisher.delete_topic topic_req
+      end
+
+      ##
+      # Adds one or more messages to the topic.
+      # Raises GRPC status code 5 if the topic does not exist.
+      # The messages parameter is an array of arrays.
+      # The first element is the data, second is attributes hash.
+      def publish topic, messages
+        publish_req = Google::Pubsub::V1::PublishRequest.new(
+          topic: topic_path(topic),
+          messages: messages.map do |data, attributes|
+            Google::Pubsub::V1::PubsubMessage.new(
+              data: [data].pack("m").encode("ASCII-8BIT"),
+              attributes: attributes
+            )
+          end
+        )
+
+        publisher.publish publish_req
       end
 
       def project_path options = {}

@@ -285,28 +285,46 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "can publish a message" do
     message = "new-message-here"
-    base_64_msg = [message].pack("m")
-    mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
-      JSON.parse(env.body)["messages"].first["data"].must_equal base_64_msg
-      [200, {"Content-Type"=>"application/json"},
-       { messageIds: ["msg1"] }.to_json]
-    end
+    base_64_msg = [message].pack("m").encode("ASCII-8BIT")
+
+    publish_req = Google::Pubsub::V1::PublishRequest.new(
+      topic: topic_path(topic_name),
+      messages: [
+        Google::Pubsub::V1::PubsubMessage.new(data: base_64_msg)
+      ]
+    )
+    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    mock = Minitest::Mock.new
+    mock.expect :publish, publish_res, [publish_req]
+    topic.service.mocked_publisher = mock
 
     msg = topic.publish message
+
+    mock.verify
+
     msg.must_be_kind_of Gcloud::Pubsub::Message
     msg.message_id.must_equal "msg1"
   end
 
   it "can publish a message with attributes" do
     message = "new-message-here"
-    base_64_msg = [message].pack("m")
-    mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
-      JSON.parse(env.body)["messages"].first["data"].must_equal base_64_msg
-      [200, {"Content-Type"=>"application/json"},
-       { messageIds: ["msg1"] }.to_json]
-    end
+    base_64_msg = [message].pack("m").encode("ASCII-8BIT")
+
+    publish_req = Google::Pubsub::V1::PublishRequest.new(
+      topic: topic_path(topic_name),
+      messages: [
+        Google::Pubsub::V1::PubsubMessage.new(data: base_64_msg, attributes: { "format" => "text" })
+      ]
+    )
+    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    mock = Minitest::Mock.new
+    mock.expect :publish, publish_res, [publish_req]
+    topic.service.mocked_publisher = mock
 
     msg = topic.publish message, format: :text
+
+    mock.verify
+
     msg.must_be_kind_of Gcloud::Pubsub::Message
     msg.message_id.must_equal "msg1"
     msg.attributes["format"].must_equal "text"
@@ -315,20 +333,28 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   it "can publish multiple messages with a block" do
     message1 = "first-new-message"
     message2 = "second-new-message"
-    base_64_msg1 = [message1].pack("m")
-    base_64_msg2 = [message2].pack("m")
+    base_64_msg1 = [message1].pack("m").encode("ASCII-8BIT")
+    base_64_msg2 = [message2].pack("m").encode("ASCII-8BIT")
 
-    mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
-      JSON.parse(env.body)["messages"].first["data"].must_equal base_64_msg1
-      JSON.parse(env.body)["messages"].last["data"].must_equal  base_64_msg2
-      [200, {"Content-Type"=>"application/json"},
-       { messageIds: ["msg1", "msg2"] }.to_json]
-    end
+    publish_req = Google::Pubsub::V1::PublishRequest.new(
+      topic: topic_path(topic_name),
+      messages: [
+        Google::Pubsub::V1::PubsubMessage.new(data: base_64_msg1),
+        Google::Pubsub::V1::PubsubMessage.new(data: base_64_msg2, attributes: { "format" => "none" })
+      ]
+    )
+    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2"] }.to_json)
+    mock = Minitest::Mock.new
+    mock.expect :publish, publish_res, [publish_req]
+    topic.service.mocked_publisher = mock
 
     msgs = topic.publish do |batch|
       batch.publish message1
       batch.publish message2, format: :none
     end
+
+    mock.verify
+
     msgs.count.must_equal 2
     msgs.first.must_be_kind_of Gcloud::Pubsub::Message
     msgs.first.message_id.must_equal "msg1"
