@@ -409,7 +409,7 @@ module Gcloud
       end
 
       def incremental_backoff options = {}
-        Gcloud::Backoff.new(options).execute do
+        Gcloud::Backoff.new(options).execute_gapi do
           yield
         end
       end

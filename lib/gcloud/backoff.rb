@@ -37,6 +37,12 @@ module Gcloud
       attr_accessor :retries
 
       ##
+      # The GRPC Status Codes that should be retried.
+      #
+      # The default values are 14.
+      attr_accessor :grpc_codes
+
+      ##
       # The HTTP Status Codes that should be retried.
       #
       # The default values are 500 and 503.
@@ -59,6 +65,7 @@ module Gcloud
     end
     # Set the default values
     self.retries = 3
+    self.grpc_codes = [14]
     self.http_codes = [500, 503]
     self.reasons = %w(rateLimitExceeded userRateLimitExceeded)
     self.backoff = ->(retries) { sleep retries.to_i }
@@ -68,27 +75,43 @@ module Gcloud
     # Creates a new Backoff object to catch common errors when calling
     # the Google API and handle the error by retrying the call.
     #
-    #   Gcloud::Backoff.new(options).execute do
+    #   Gcloud::Backoff.new(options).execute_gapi do
     #     client.execute api_method: service.things.insert,
     #                    parameters: { thing: @thing },
     #                    body_object: { name: thing_name }
     #   end
     def initialize options = {}
-      @max_retries  = (options[:retries]    || Backoff.retries).to_i
-      @http_codes   = (options[:http_codes] || Backoff.http_codes).to_a
-      @reasons      = (options[:reasons]    || Backoff.reasons).to_a
-      @backoff      =  options[:backoff]    || Backoff.backoff
+      @retries    = (options[:retries]    || Backoff.retries).to_i
+      @grpc_codes = (options[:grpc_codes] || Backoff.grpc_codes).to_a
+      @http_codes = (options[:http_codes] || Backoff.http_codes).to_a
+      @reasons    = (options[:reasons]    || Backoff.reasons).to_a
+      @backoff    =  options[:backoff]    || Backoff.backoff
     end
 
     # @private
-    def execute
+    def execute_gapi
       current_retries = 0
       loop do
-        result = yield # Expecting Google::APIClient::Result
-        return result if result.success?
-        break result unless retry? result, current_retries
+        result = yield
+        return result unless result.is_a? Google::APIClient::Result
+        break result if result.success? || !retry?(result, current_retries)
         current_retries += 1
         @backoff.call current_retries
+      end
+    end
+
+    # @private
+    def execute_grpc
+      current_retries = 0
+      loop do
+        begin
+          return yield
+        rescue GRPC::BadStatus => e
+          raise e unless @grpc_codes.include?(e.code) &&
+                         (current_retries < @retries)
+          current_retries += 1
+          @backoff.call current_retries
+        end
       end
     end
 
@@ -96,7 +119,7 @@ module Gcloud
 
     # @private
     def retry? result, current_retries #:nodoc:
-      if current_retries < @max_retries
+      if current_retries < @retries
         return true if retry_http_code? result
         return true if retry_error_reason? result
       end
