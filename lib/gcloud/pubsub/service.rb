@@ -14,6 +14,7 @@
 
 
 require "google/pubsub/v1/pubsub_services"
+require "gcloud/backoff"
 require "gcloud/grpc_utils"
 
 module Gcloud
@@ -60,7 +61,7 @@ module Gcloud
           r.topic = topic_path(topic_name, options)
         end
 
-        publisher.get_topic topic_req
+        backoff { publisher.get_topic topic_req }
       end
 
       ##
@@ -72,7 +73,7 @@ module Gcloud
           r.page_size = options[:max] if options[:max]
         end
 
-        publisher.list_topics topics_req
+        backoff { publisher.list_topics topics_req }
       end
 
       ##
@@ -82,7 +83,7 @@ module Gcloud
           r.name = topic_path(topic_name, options)
         end
 
-        publisher.create_topic topic_req
+        backoff { publisher.create_topic topic_req }
       end
 
       ##
@@ -95,7 +96,7 @@ module Gcloud
           r.topic = topic_path(topic_name)
         end
 
-        publisher.delete_topic topic_req
+        backoff { publisher.delete_topic topic_req }
       end
 
       ##
@@ -114,7 +115,7 @@ module Gcloud
           end
         )
 
-        publisher.publish publish_req
+        backoff { publisher.publish publish_req }
       end
 
       ##
@@ -124,7 +125,7 @@ module Gcloud
           subscription: subscription_path(subscription_name, options)
         )
 
-        subscriber.get_subscription sub_req
+        backoff { subscriber.get_subscription sub_req }
       end
 
       ##
@@ -136,7 +137,7 @@ module Gcloud
         list_req = Google::Pubsub::V1::ListTopicSubscriptionsRequest.new \
           list_params
 
-        publisher.list_topic_subscriptions list_req
+        backoff { publisher.list_topic_subscriptions list_req }
       end
 
       ##
@@ -147,7 +148,7 @@ module Gcloud
                         page_size:  options[:max] }.delete_if { |_, v| v.nil? }
         list_req = Google::Pubsub::V1::ListSubscriptionsRequest.new list_params
 
-        subscriber.list_subscriptions list_req
+        backoff { subscriber.list_subscriptions list_req }
       end
 
       ##
@@ -164,7 +165,7 @@ module Gcloud
             attributes: (options[:attributes] || {}).to_h)
         end
 
-        subscriber.create_subscription sub_req
+        backoff { subscriber.create_subscription sub_req }
       end
 
       ##
@@ -175,7 +176,7 @@ module Gcloud
           subscription: subscription_path(subscription)
         )
 
-        subscriber.delete_subscription del_req
+        backoff { subscriber.delete_subscription del_req }
       end
 
       ##
@@ -187,7 +188,7 @@ module Gcloud
           max_messages: options.fetch(:max, 100).to_i
         )
 
-        subscriber.pull pull_req
+        backoff { subscriber.pull pull_req }
       end
 
       ##
@@ -198,7 +199,7 @@ module Gcloud
           ack_ids: ack_ids
         )
 
-        subscriber.acknowledge ack_req
+        backoff { subscriber.acknowledge ack_req }
       end
 
       ##
@@ -215,7 +216,7 @@ module Gcloud
           )
         )
 
-        subscriber.modify_push_config mpc_req
+        backoff { subscriber.modify_push_config mpc_req }
       end
 
       ##
@@ -227,7 +228,7 @@ module Gcloud
           ack_deadline_seconds: deadline
         )
 
-        subscriber.modify_ack_deadline mad_req
+        backoff { subscriber.modify_ack_deadline mad_req }
       end
 
       def project_path options = {}
@@ -247,6 +248,14 @@ module Gcloud
 
       def inspect
         "#{self.class}(#{@project})"
+      end
+
+      protected
+
+      def backoff options = {}
+        Gcloud::Backoff.new(options).execute_grpc do
+          yield
+        end
       end
     end
   end
