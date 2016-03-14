@@ -201,6 +201,23 @@ module Gcloud
         subscriber.acknowledge ack_req
       end
 
+      ##
+      # Modifies the PushConfig for a specified subscription.
+      def modify_push_config subscription, endpoint, attributes
+        # Convert attributes to strings to match the protobuf definition
+        attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
+
+        mpc_req = Google::Pubsub::V1::ModifyPushConfigRequest.new(
+          subscription: subscription_path(subscription),
+          push_config: Google::Pubsub::V1::PushConfig.new(
+            push_endpoint: endpoint,
+            attributes: attributes
+          )
+        )
+
+        subscriber.modify_push_config mpc_req
+      end
+
       def project_path options = {}
         project_name = options[:project] || project
         "projects/#{project_name}"

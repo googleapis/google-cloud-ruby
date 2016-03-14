@@ -122,15 +122,14 @@ module Gcloud
       ##
       # Sets the URL locating the endpoint to which messages should be pushed.
       def endpoint= new_endpoint
-        ensure_connection!
-        resp = connection.modify_push_config name, new_endpoint, {}
-        if resp.success?
-          @gapi ||= {}
-          @gapi["pushConfig"] ||= {}
-          @gapi["pushConfig"]["pushEndpoint"] = new_endpoint
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.modify_push_config name, new_endpoint, {}
+        @grpc.push_config = Google::Pubsub::V1::PushConfig.new(
+          push_endpoint: new_endpoint,
+          attributes: {}
+        ) if @grpc
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##

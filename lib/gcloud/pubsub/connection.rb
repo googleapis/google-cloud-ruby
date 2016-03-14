@@ -89,17 +89,6 @@ module Gcloud
       end
 
       ##
-      # Modifies the PushConfig for a specified subscription.
-      def modify_push_config subscription, endpoint, attributes
-        @client.execute(
-          api_method:  @pubsub.projects.subscriptions.modify_push_config,
-          parameters:  { subscription: subscription },
-          body_object: { pushConfig: { pushEndpoint: endpoint,
-                                       attributes: attributes } }
-        )
-      end
-
-      ##
       # Modifies the ack deadline for a specific message.
       def modify_ack_deadline subscription, ids, deadline
         ids = Array ids

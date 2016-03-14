@@ -42,12 +42,18 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
   it "can update the endpoint" do
     new_push_endpoint = "https://foo.bar/baz"
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyPushConfig" do |env|
-      JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal new_push_endpoint
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mpc_req = Google::Pubsub::V1::ModifyPushConfigRequest.new(
+                subscription: "projects/#{project}/subscriptions/#{sub_name}",
+                push_config: Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
+              )
+    mpc_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :modify_push_config, mpc_res, [mpc_req]
+    pubsub.service.mocked_subscriber = mock
 
     subscription.endpoint = new_push_endpoint
+
+    mock.verify
   end
 
   describe "lazy subscription object of a subscription that does exist" do
@@ -98,12 +104,18 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to update endpoint" do
       new_push_endpoint = "https://foo.bar/baz"
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyPushConfig" do |env|
-        JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal new_push_endpoint
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      mpc_req = Google::Pubsub::V1::ModifyPushConfigRequest.new(
+                  subscription: "projects/#{project}/subscriptions/#{sub_name}",
+                  push_config: Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
+                )
+      mpc_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :modify_push_config, mpc_res, [mpc_req]
+      pubsub.service.mocked_subscriber = mock
 
       subscription.endpoint = new_push_endpoint
+
+      mock.verify
     end
   end
 
@@ -152,15 +164,15 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     it "raises NotFoundError when updating endpoint" do
       new_push_endpoint = "https://foo.bar/baz"
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyPushConfig" do |env|
-        JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal new_push_endpoint
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.modify_push_config *args
+        raise GRPC::BadStatus.new(5, "not found")
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.endpoint = new_push_endpoint
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
   end
 end

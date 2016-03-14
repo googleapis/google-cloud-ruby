@@ -41,12 +41,18 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
   it "can update the endpoint" do
     new_push_endpoint = "https://foo.bar/baz"
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:modifyPushConfig" do |env|
-      JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal new_push_endpoint
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mpc_req = Google::Pubsub::V1::ModifyPushConfigRequest.new(
+                subscription: "projects/#{project}/subscriptions/#{subscription_name}",
+                push_config: Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
+              )
+    mpc_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :modify_push_config, mpc_res, [mpc_req]
+    pubsub.service.mocked_subscriber = mock
 
     subscription.endpoint = new_push_endpoint
+
+    mock.verify
   end
 
   it "can delete itself" do
