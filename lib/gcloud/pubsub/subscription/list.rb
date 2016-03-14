@@ -36,12 +36,12 @@ module Gcloud
 
         ##
         # @private New Subscription::List from a response object.
-        def self.from_response resp, conn
+        def self.from_response resp, conn, service
           subs = Array(resp.data["subscriptions"]).map do |gapi_object|
             if gapi_object.is_a? String
-              Subscription.new_lazy gapi_object, conn
+              Subscription.new_lazy gapi_object, conn, service
             else
-              Subscription.from_gapi gapi_object, conn
+              Subscription.from_gapi gapi_object, conn, service
             end
           end
           new subs, resp.data["nextPageToken"]

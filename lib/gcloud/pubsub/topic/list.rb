@@ -36,9 +36,9 @@ module Gcloud
 
         ##
         # @private New Topic::List from a response object.
-        def self.from_response resp, conn
+        def self.from_response resp, conn, service
           topics = Array(resp.data["topics"]).map do |gapi_object|
-            Topic.from_gapi gapi_object, conn
+            Topic.from_gapi gapi_object, conn, service
           end
           new topics, resp.data["nextPageToken"]
         end

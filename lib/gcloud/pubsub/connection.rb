@@ -34,7 +34,7 @@ module Gcloud
         @credentials = credentials
         @client = Google::APIClient.new application_name:    "gcloud-ruby",
                                         application_version: Gcloud::VERSION
-        @client.authorization = @credentials.client
+        @client.authorization = nil # @credentials.client
         @pubsub = @client.discovered_api "pubsub", API_VERSION
       end
 

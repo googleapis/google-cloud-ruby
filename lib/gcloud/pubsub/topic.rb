@@ -40,24 +40,36 @@ module Gcloud
       attr_accessor :connection
 
       ##
+      # @private The gRPC Service object.
+      attr_accessor :service
+
+      ##
       # @private The Google API Client object.
       attr_accessor :gapi
+
+      ##
+      # @private The gRPC Google::Pubsub::V1::Topic object.
+      attr_accessor :grpc
 
       ##
       # @private Create an empty {Topic} object.
       def initialize
         @connection = nil
         @gapi = {}
+        @service = nil
+        @grpc = Google::Pubsub::V1::Topic.new
         @name = nil
         @exists = nil
       end
 
       ##
       # @private New lazy {Topic} object without making an HTTP request.
-      def self.new_lazy name, conn, options = {}
+      def self.new_lazy name, conn, service, options = {}
         new.tap do |t|
           t.gapi = nil
+          t.grpc = nil
           t.connection = conn
+          t.service = service
           t.instance_eval do
             @name = conn.topic_path(name, options)
           end
@@ -147,7 +159,7 @@ module Gcloud
         options = { deadline: deadline, endpoint: endpoint }
         resp = connection.create_subscription name, subscription_name, options
         if resp.success?
-          Subscription.from_gapi resp.data, connection
+          Subscription.from_gapi resp.data, connection, service
         else
           fail ApiError.from_response(resp)
         end
@@ -190,10 +202,12 @@ module Gcloud
       def subscription subscription_name, skip_lookup: nil
         ensure_connection!
         if skip_lookup
-          return Subscription.new_lazy(subscription_name, connection)
+          return Subscription.new_lazy subscription_name, connection, service
         end
         resp = connection.get_subscription subscription_name
-        return Subscription.from_gapi(resp.data, connection) if resp.success?
+        if resp.success?
+          return Subscription.from_gapi resp.data, connection, service
+        end
         return nil if resp.status == 404
         fail ApiError.from_response(resp)
       end
@@ -246,7 +260,7 @@ module Gcloud
         options = { token: token, max: max }
         resp = connection.list_topics_subscriptions name, options
         if resp.success?
-          Subscription::List.from_response resp, connection
+          Subscription::List.from_response resp, connection, service
         else
           fail ApiError.from_response(resp)
         end
@@ -480,10 +494,11 @@ module Gcloud
 
       ##
       # @private New {Topic} from a Google API Client object.
-      def self.from_gapi gapi, conn
+      def self.from_gapi gapi, conn, service
         new.tap do |f|
           f.gapi = gapi
           f.connection = conn
+          f.service = service
         end
       end
 

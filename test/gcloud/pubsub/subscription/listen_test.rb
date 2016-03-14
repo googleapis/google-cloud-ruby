@@ -22,7 +22,7 @@ describe Gcloud::Pubsub::Subscription, :listen, :mock_pubsub do
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
   let :subscription do
-    Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection
+    Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection, pubsub.service
   end
   let(:empty_json) { { "receivedMessages" => [] }.to_json }
 

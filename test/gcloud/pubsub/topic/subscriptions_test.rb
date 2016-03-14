@@ -17,7 +17,7 @@ require "helper"
 describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
-                                                pubsub.connection }
+                                                pubsub.connection, pubsub.service }
   it "lists subscriptions" do
     mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}/subscriptions" do |env|
       [200, {"Content-Type"=>"application/json"},
@@ -34,7 +34,7 @@ describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
   describe "lazy topic that exists" do
     describe "created with autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection,
+                                                   pubsub.connection, pubsub.service,
                                                    autocreate: true }
 
       it "lists subscriptions" do
@@ -53,7 +53,7 @@ describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
 
     describe "created without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection,
+                                                   pubsub.connection, pubsub.service,
                                                    autocreate: false }
 
       it "lists subscriptions" do
@@ -74,7 +74,7 @@ describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
   describe "lazy topic that does not exist" do
     describe "created with autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection,
+                                                   pubsub.connection, pubsub.service,
                                                    autocreate: true }
 
       it "lists subscriptions" do
@@ -91,7 +91,7 @@ describe Gcloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
 
     describe "created without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection,
+                                                   pubsub.connection, pubsub.service,
                                                    autocreate: false }
 
       it "lists subscriptions" do

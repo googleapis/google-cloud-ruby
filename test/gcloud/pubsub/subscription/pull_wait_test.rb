@@ -20,7 +20,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :wait, :mock_pubsub do
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
   let :subscription do
-    Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection
+    Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection, pubsub.service
   end
 
   it "can pull messages without returning immediately" do

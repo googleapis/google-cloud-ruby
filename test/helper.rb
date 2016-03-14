@@ -144,9 +144,9 @@ class MockStorage < Minitest::Spec
 end
 
 class MockPubsub < Minitest::Spec
-  let(:project) { pubsub.connection.project }
-  let(:credentials) { pubsub.connection.credentials }
-  let(:pubsub) { $gcloud_pubsub_global ||= Gcloud::Pubsub::Project.new("test", OpenStruct.new) }
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
+  let(:pubsub) { $gcloud_pubsub_global ||= Gcloud::Pubsub::Project.new(project, credentials) }
 
   def setup
     @connection = Faraday::Adapter::Test::Stubs.new

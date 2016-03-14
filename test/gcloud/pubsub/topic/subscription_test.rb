@@ -17,7 +17,7 @@ require "helper"
 describe Gcloud::Pubsub::Topic, :subscription, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
-                                                pubsub.connection }
+                                                pubsub.connection, pubsub.service }
   let(:found_sub_name) { "found-sub-#{Time.now.to_i}" }
   let(:not_found_sub_name) { "found-sub-#{Time.now.to_i}" }
 
@@ -74,7 +74,7 @@ describe Gcloud::Pubsub::Topic, :subscription, :mock_pubsub do
 
   describe "lazy topic that exists" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.connection }
+                                                 pubsub.connection, pubsub.service }
 
     it "gets an existing subscription" do
       mock_connection.get "/v1/projects/#{project}/subscriptions/#{found_sub_name}" do |env|
@@ -100,7 +100,7 @@ describe Gcloud::Pubsub::Topic, :subscription, :mock_pubsub do
 
   describe "lazy topic that does not exist" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.connection }
+                                                 pubsub.connection, pubsub.service }
 
     it "returns nil when getting an non-existant subscription" do
       mock_connection.get "/v1/projects/#{project}/subscriptions/#{not_found_sub_name}" do |env|

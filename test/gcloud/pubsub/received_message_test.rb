@@ -17,11 +17,11 @@ require "helper"
 describe Gcloud::Pubsub::ReceivedMessage, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
-                                                pubsub.connection }
+                                                pubsub.connection, pubsub.service }
   let(:subscription_name) { "subscription-name-goes-here" }
   let :subscription do
     json = JSON.parse(subscription_json(topic_name, subscription_name))
-    Gcloud::Pubsub::Subscription.from_gapi json, pubsub.connection
+    Gcloud::Pubsub::Subscription.from_gapi json, pubsub.connection, pubsub.service
   end
   let(:rec_message_name) { "rec_message-name-goes-here" }
   let(:rec_message_msg)  { "rec_message-msg-goes-here" }

@@ -20,7 +20,7 @@ describe Gcloud::Pubsub::Subscription, :delete, :mock_pubsub do
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
   let :subscription do
-    Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection
+    Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection, pubsub.service
   end
 
   it "can delete itself" do
@@ -34,7 +34,7 @@ describe Gcloud::Pubsub::Subscription, :delete, :mock_pubsub do
   describe "lazy subscription object of a subscription that does exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection
+                                            pubsub.connection, pubsub.service
     end
 
     it "can delete itself" do
@@ -49,7 +49,7 @@ describe Gcloud::Pubsub::Subscription, :delete, :mock_pubsub do
   describe "lazy subscription object of a subscription that does not exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection
+                                            pubsub.connection, pubsub.service
     end
 
     it "raises NotFoundError when deleting itself" do

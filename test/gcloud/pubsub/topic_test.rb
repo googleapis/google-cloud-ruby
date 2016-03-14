@@ -17,7 +17,7 @@ require "helper"
 describe Gcloud::Pubsub::Topic, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
-                                                pubsub.connection }
+                                                pubsub.connection, pubsub.service }
 
   it "knows its name" do
     topic.name.must_equal topic_path(topic_name)

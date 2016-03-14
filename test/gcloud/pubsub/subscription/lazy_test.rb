@@ -21,7 +21,7 @@ describe Gcloud::Pubsub::Subscription, :name, :mock_pubsub do
   let(:sub_json) { subscription_json topic_name, sub_name }
   let :subscription do
     json = JSON.parse(sub_json)
-    Gcloud::Pubsub::Subscription.from_gapi json, pubsub.connection
+    Gcloud::Pubsub::Subscription.from_gapi json, pubsub.connection, pubsub.service
   end
 
   it "is not lazy when created with an HTTP method" do
@@ -31,7 +31,7 @@ describe Gcloud::Pubsub::Subscription, :name, :mock_pubsub do
   describe "lazy subscription" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection
+                                            pubsub.connection, pubsub.service
     end
 
     it "is lazy" do

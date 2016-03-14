@@ -41,24 +41,36 @@ module Gcloud
       attr_accessor :connection
 
       ##
+      # @private The gRPC Service object.
+      attr_accessor :service
+
+      ##
       # @private The Google API Client object.
       attr_accessor :gapi
+
+      ##
+      # @private The gRPC Google::Pubsub::V1::Subscription object.
+      attr_accessor :grpc
 
       ##
       # @private Create an empty {Subscription} object.
       def initialize
         @connection = nil
         @gapi = {}
+        @service = nil
+        @grpc = Google::Pubsub::V1::Subscription.new
         @name = nil
         @exists = nil
       end
 
       ##
       # @private New lazy {Topic} object without making an HTTP request.
-      def self.new_lazy name, conn, options = {}
+      def self.new_lazy name, conn, service, options = {}
         sub = new.tap do |f|
           f.gapi = nil
+          f.grpc = nil
           f.connection = conn
+          f.service = service
         end
         sub.instance_eval do
           @name = conn.subscription_path(name, options)
@@ -88,7 +100,7 @@ module Gcloud
       #
       def topic
         ensure_gapi!
-        Topic.new_lazy @gapi["topic"], connection
+        Topic.new_lazy @gapi["topic"], connection, service
       end
 
       ##
@@ -542,10 +554,11 @@ module Gcloud
 
       ##
       # @private New {Subscription} from a Google API Client object.
-      def self.from_gapi gapi, conn
+      def self.from_gapi gapi, conn, service
         new.tap do |f|
           f.gapi = gapi
           f.connection = conn
+          f.service = service
         end
       end
 

@@ -20,7 +20,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :autoack, :mock_pubsub do
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
   let :subscription do
-    Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection
+    Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection, pubsub.service
   end
   let(:rec_msg1_json) { rec_message_json "rec_msg1-msg-goes-here" }
   let(:rec_msg2_json) { rec_message_json "rec_msg2-msg-goes-here" }

@@ -46,10 +46,15 @@ module Gcloud
       attr_accessor :gapi
 
       ##
+      # @private The gRPC Google::Pubsub::V1::ReceivedMessage object.
+      attr_accessor :grpc
+
+      ##
       # @private Create an empty {Subscription} object.
       def initialize
         @subscription = nil
         @gapi = {}
+        @grpc = Google::Pubsub::V1::ReceivedMessage.new
       end
 
       ##

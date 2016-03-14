@@ -15,6 +15,7 @@
 
 require "gcloud/gce"
 require "gcloud/pubsub/connection"
+require "gcloud/pubsub/service"
 require "gcloud/pubsub/credentials"
 require "gcloud/pubsub/errors"
 require "gcloud/pubsub/topic"
@@ -48,11 +49,16 @@ module Gcloud
       attr_accessor :connection
 
       ##
+      # @private The gRPC Service object.
+      attr_accessor :service
+
+      ##
       # @private Creates a new Connection instance.
       def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
         @connection = Connection.new project, credentials
+        @service = Service.new project, credentials
       end
 
       # The Pub/Sub project connected to.
@@ -139,9 +145,11 @@ module Gcloud
       def topic topic_name, autocreate: nil, project: nil, skip_lookup: nil
         ensure_connection!
         options = { project: project }
-        return Topic.new_lazy(topic_name, connection, options) if skip_lookup
+        if skip_lookup
+          return Topic.new_lazy(topic_name, connection, service, options)
+        end
         resp = connection.get_topic topic_name
-        return Topic.from_gapi(resp.data, connection) if resp.success?
+        return Topic.from_gapi(resp.data, connection, service) if resp.success?
         if resp.status == 404
           return create_topic(topic_name) if autocreate
           return nil
@@ -169,7 +177,7 @@ module Gcloud
         ensure_connection!
         resp = connection.create_topic topic_name
         if resp.success?
-          Topic.from_gapi resp.data, connection
+          Topic.from_gapi resp.data, connection, service
         else
           fail ApiError.from_response(resp)
         end
@@ -221,7 +229,7 @@ module Gcloud
         options = { token: token, max: max }
         resp = connection.list_topics options
         if resp.success?
-          Topic::List.from_response resp, connection
+          Topic::List.from_response resp, connection, service
         else
           fail ApiError.from_response(resp)
         end
@@ -364,7 +372,9 @@ module Gcloud
         options = { deadline: deadline, endpoint: endpoint }
         resp = connection.create_subscription topic_name,
                                               subscription_name, options
-        return Subscription.from_gapi(resp.data, connection) if resp.success?
+        if resp.success?
+          return Subscription.from_gapi resp.data, connection, service
+        end
         if autocreate && resp.status == 404
           create_topic topic_name
           return subscribe(topic_name, subscription_name,
@@ -414,10 +424,13 @@ module Gcloud
         ensure_connection!
         options = { project: project }
         if skip_lookup
-          return Subscription.new_lazy(subscription_name, connection, options)
+          return Subscription.new_lazy subscription_name, connection,
+                                       service, options
         end
         resp = connection.get_subscription subscription_name
-        return Subscription.from_gapi(resp.data, connection) if resp.success?
+        if resp.success?
+          return Subscription.from_gapi resp.data, connection, service
+        end
         return nil if resp.status == 404
         fail ApiError.from_response(resp)
       end
@@ -470,7 +483,7 @@ module Gcloud
         options = { prefix: prefix, token: token, max: max }
         resp = connection.list_subscriptions options
         if resp.success?
-          Subscription::List.from_response resp, connection
+          Subscription::List.from_response resp, connection, service
         else
           fail ApiError.from_response(resp)
         end

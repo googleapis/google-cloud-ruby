@@ -17,7 +17,7 @@ require "helper"
 describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
-                                                pubsub.connection }
+                                                pubsub.connection, pubsub.service }
   let(:message1) { "new-message-here" }
   let(:message2) { "second-new-message" }
   let(:message3) { "third-new-message" }
@@ -72,7 +72,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
 
   describe "lazy topic that exists" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.connection,
+                                                 pubsub.connection, pubsub.service,
                                                  autocreate: false }
 
     it "publishes a message" do
@@ -123,7 +123,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
 
   describe "lazy topic that does not exist" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.connection,
+                                                 pubsub.connection, pubsub.service,
                                                  autocreate: false }
 
     it "publishes a message" do

@@ -65,7 +65,7 @@ describe Gcloud::Pubsub::Project, :subscribe, :mock_pubsub do
 
   describe "lazy topic that exists" do
     let(:topic) { Gcloud::Pubsub::pubsub.new_lazy topic_name,
-                                                 pubsub.connection,
+                                                 pubsub.connection, pubsub.service,
                                                  autocreate: false }
 
     it "creates a subscription when calling subscribe" do
@@ -83,7 +83,7 @@ describe Gcloud::Pubsub::Project, :subscribe, :mock_pubsub do
 
   describe "lazy topic that does not exist" do
     let(:topic) { Gcloud::Pubsub::pubsub.new_lazy topic_name,
-                                                 pubsub.connection,
+                                                 pubsub.connection, pubsub.service,
                                                  autocreate: false }
 
     it "raises NotFoundError when calling subscribe" do

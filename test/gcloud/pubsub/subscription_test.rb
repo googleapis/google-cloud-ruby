@@ -19,7 +19,7 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
   let(:subscription_name) { "subscription-name-goes-here" }
   let :subscription do
     json = JSON.parse(subscription_json(topic_name, subscription_name))
-    Gcloud::Pubsub::Subscription.from_gapi json, pubsub.connection
+    Gcloud::Pubsub::Subscription.from_gapi json, pubsub.connection, pubsub.service
   end
 
   it "knows its name" do

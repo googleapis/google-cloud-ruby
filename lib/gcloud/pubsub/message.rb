@@ -49,12 +49,17 @@ module Gcloud
       attr_accessor :gapi
 
       ##
+      # @private The gRPC Google::Pubsub::V1::PubsubMessage object.
+      attr_accessor :grpc
+
+      ##
       # Create an empty Message object.
       # This can be used to publish several messages in bulk.
       def initialize data = nil, attributes = {}
         @gapi               = {}
         @gapi["data"]       = data
         @gapi["attributes"] = attributes
+        @grpc = Google::Pubsub::V1::PubsubMessage.new
       end
 
       ##

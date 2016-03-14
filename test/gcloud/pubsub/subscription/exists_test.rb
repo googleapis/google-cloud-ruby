@@ -20,7 +20,7 @@ describe Gcloud::Pubsub::Subscription, :exists, :mock_pubsub do
   let(:sub_json) { subscription_json(topic_name, sub_name) }
   let :subscription do
     json = JSON.parse(sub_json)
-    Gcloud::Pubsub::Subscription.from_gapi json, pubsub.connection
+    Gcloud::Pubsub::Subscription.from_gapi json, pubsub.connection, pubsub.service
   end
 
   it "knows if it exists when created with an HTTP method" do
@@ -34,7 +34,7 @@ describe Gcloud::Pubsub::Subscription, :exists, :mock_pubsub do
   describe "lazy subscription object of a subscription that exists" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection
+                                            pubsub.connection, pubsub.service
     end
 
     it "checks if the subscription exists by making an HTTP call" do
@@ -52,7 +52,7 @@ describe Gcloud::Pubsub::Subscription, :exists, :mock_pubsub do
   describe "lazy subscription object of a subscription that does not exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection
+                                            pubsub.connection, pubsub.service
     end
 
     it "checks if the subscription exists by making an HTTP call" do
