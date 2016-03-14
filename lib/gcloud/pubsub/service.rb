@@ -48,6 +48,55 @@ module Gcloud
       end
       attr_accessor :mocked_publisher
 
+      ##
+      # Gets the configuration of a topic.
+      # Since the topic only has the name attribute,
+      # this method is only useful to check the existence of a topic.
+      # If other attributes are added in the future,
+      # they will be returned here.
+      def get_topic topic_name, options = {}
+        topic_req = Google::Pubsub::V1::GetTopicRequest.new.tap do |r|
+          r.topic = topic_path(topic_name, options)
+        end
+
+        publisher.get_topic topic_req
+      end
+
+      ##
+      # Lists matching topics.
+      def list_topics options = {}
+        topics_req = Google::Pubsub::V1::ListTopicsRequest.new.tap do |r|
+          r.project = project_path(options)
+          r.page_token = options[:token] if options[:token]
+          r.page_size = options[:max] if options[:max]
+        end
+
+        publisher.list_topics topics_req
+      end
+
+      ##
+      # Creates the given topic with the given name.
+      def create_topic topic_name, options = {}
+        topic_req = Google::Pubsub::V1::Topic.new.tap do |r|
+          r.name = topic_path(topic_name, options)
+        end
+
+        publisher.create_topic topic_req
+      end
+
+      ##
+      # Deletes the topic with the given name.
+      # All subscriptions to this topic are also deleted.
+      # Raises GRPC status code 5 if the topic does not exist.
+      # After a topic is deleted, a new topic may be created with the same name.
+      def delete_topic topic_name
+        topic_req = Google::Pubsub::V1::DeleteTopicRequest.new.tap do |r|
+          r.topic = topic_path(topic_name)
+        end
+
+        publisher.delete_topic topic_req
+      end
+
       def project_path options = {}
         project_name = options[:project] || project
         "projects/#{project_name}"

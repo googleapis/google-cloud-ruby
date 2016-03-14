@@ -54,8 +54,6 @@ module Gcloud
       ##
       # @private Create an empty {Topic} object.
       def initialize
-        @connection = nil
-        @gapi = {}
         @service = nil
         @grpc = Google::Pubsub::V1::Topic.new
         @name = nil
@@ -66,12 +64,11 @@ module Gcloud
       # @private New lazy {Topic} object without making an HTTP request.
       def self.new_lazy name, conn, service, options = {}
         new.tap do |t|
-          t.gapi = nil
           t.grpc = nil
           t.connection = conn
           t.service = service
           t.instance_eval do
-            @name = conn.topic_path(name, options)
+            @name = service.topic_path(name, options)
           end
         end
       end
@@ -80,7 +77,7 @@ module Gcloud
       # The name of the topic in the form of
       # "/projects/project-identifier/topics/topic-name".
       def name
-        @gapi ? @gapi["name"] : @name
+        @grpc ? @grpc.name : @name
       end
 
       ##
@@ -98,13 +95,11 @@ module Gcloud
       #   topic.delete
       #
       def delete
-        ensure_connection!
-        resp = connection.delete_topic name
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.delete_topic name
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
@@ -467,12 +462,12 @@ module Gcloud
       #   topic.exists? #=> true
       #
       def exists?
-        # Always true if we have a gapi object
-        return true unless @gapi.nil?
+        # Always true if we have a grpc object
+        return true unless @grpc.nil?
         # If we have a value, return it
         return @exists unless @exists.nil?
-        ensure_gapi!
-        @exists = !@gapi.nil?
+        ensure_grpc!
+        @exists = !@grpc.nil?
       end
 
       ##
@@ -489,7 +484,7 @@ module Gcloud
       #   topic.lazy? #=> false
       #
       def lazy?
-        @gapi.nil?
+        @grpc.nil?
       end
 
       ##
@@ -498,6 +493,16 @@ module Gcloud
         new.tap do |f|
           f.gapi = gapi
           f.connection = conn
+          f.service = service
+        end
+      end
+
+      ##
+      # @private New Topic from a Google::Pubsub::V1::Topic object.
+      def self.from_grpc grpc, connection, service
+        new.tap do |f|
+          f.grpc = grpc
+          f.connection = connection
           f.service = service
         end
       end
@@ -511,12 +516,30 @@ module Gcloud
       end
 
       ##
+      # @private Raise an error unless an active connection to the service is
+      # available.
+      def ensure_service!
+        fail "Must have active connection to service" unless service
+      end
+
+      ##
       # Ensures a Google API object exists.
       def ensure_gapi!
         ensure_connection!
         return @gapi if @gapi
         resp = connection.get_topic @name
         @gapi = resp.data if resp.success?
+      end
+
+      ##
+      # Ensures a Google::Pubsub::V1::Topic object exists.
+      def ensure_grpc!
+        ensure_service!
+        return @grpc if @grpc
+        @grpc = service.get_topic @name
+      rescue GRPC::BadStatus => e
+        return nil if e.code == 5
+        raise Error.from_error(e)
       end
 
       ##

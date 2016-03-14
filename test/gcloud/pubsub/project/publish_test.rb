@@ -88,17 +88,24 @@ describe Gcloud::Pubsub::Project, :publish, :mock_pubsub do
       [404, {"Content-Type"=>"application/json"},
        not_found_error_json(new_topic_name)]
     end
-    mock_connection.put "/v1/projects/#{project}/topics/#{new_topic_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       topic_json(new_topic_name)]
-    end
     mock_connection.post "/v1/projects/#{project}/topics/#{new_topic_name}:publish" do |env|
       JSON.parse(env.body)["messages"].first["data"].must_equal msg_packed1
       [200, {"Content-Type"=>"application/json"},
        { messageIds: ["msg1"] }.to_json]
     end
 
+    create_req = Google::Pubsub::V1::Topic.new(
+      name: topic_path(new_topic_name)
+    )
+    create_res = Google::Pubsub::V1::Topic.decode_json topic_json(new_topic_name)
+    mock = Minitest::Mock.new
+    mock.expect :create_topic, create_res, [create_req]
+    pubsub.service.mocked_publisher = mock
+
     msg = pubsub.publish new_topic_name, message1, autocreate: true
+
+    mock.verify
+
     msg.must_be_kind_of Gcloud::Pubsub::Message
     msg.message_id.must_equal "msg1"
   end

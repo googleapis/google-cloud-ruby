@@ -143,18 +143,19 @@ module Gcloud
       #   topic = pubsub.topic "another-topic", skip_lookup: true
       #
       def topic topic_name, autocreate: nil, project: nil, skip_lookup: nil
-        ensure_connection!
+        ensure_service!
         options = { project: project }
         if skip_lookup
           return Topic.new_lazy(topic_name, connection, service, options)
         end
-        resp = connection.get_topic topic_name
-        return Topic.from_gapi(resp.data, connection, service) if resp.success?
-        if resp.status == 404
+        grpc = service.get_topic topic_name
+        Topic.from_grpc grpc, connection, service
+      rescue GRPC::BadStatus => e
+        if e.code == 5
           return create_topic(topic_name) if autocreate
           return nil
         end
-        fail ApiError.from_response(resp)
+        raise Error.from_error(e)
       end
       alias_method :get_topic, :topic
       alias_method :find_topic, :topic
@@ -174,13 +175,11 @@ module Gcloud
       #   topic = pubsub.create_topic "my-topic"
       #
       def create_topic topic_name
-        ensure_connection!
-        resp = connection.create_topic topic_name
-        if resp.success?
-          Topic.from_gapi resp.data, connection, service
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        grpc = service.create_topic topic_name
+        Topic.from_grpc grpc, connection, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :new_topic, :create_topic
 
@@ -225,14 +224,12 @@ module Gcloud
       #   end
       #
       def topics token: nil, max: nil
-        ensure_connection!
+        ensure_service!
         options = { token: token, max: max }
-        resp = connection.list_topics options
-        if resp.success?
-          Topic::List.from_response resp, connection, service
-        else
-          fail ApiError.from_response(resp)
-        end
+        grpc = service.list_topics options
+        Topic::List.from_grpc grpc, connection, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_topics, :topics
       alias_method :list_topics, :topics
@@ -497,6 +494,13 @@ module Gcloud
       # Raise an error unless an active connection is available.
       def ensure_connection!
         fail "Must have active connection" unless connection
+      end
+
+      ##
+      # @private Raise an error unless an active connection to the service is
+      # available.
+      def ensure_service!
+        fail "Must have active connection to service" unless service
       end
 
       ##

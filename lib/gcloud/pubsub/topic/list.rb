@@ -32,15 +32,17 @@ module Gcloud
         def initialize arr = [], token = nil
           super arr
           @token = token
+          @token = nil if @token == ""
         end
 
         ##
-        # @private New Topic::List from a response object.
-        def self.from_response resp, conn, service
-          topics = Array(resp.data["topics"]).map do |gapi_object|
-            Topic.from_gapi gapi_object, conn, service
+        # @private New Sink::List from a Google::Pubsub::V1::ListTopicsResponse
+        # object.
+        def self.from_grpc grpc_list, conn, service
+          topics = Array(grpc_list.topics).map do |grpc|
+            Topic.from_grpc grpc, conn, service
           end
-          new topics, resp.data["nextPageToken"]
+          new topics, grpc_list.next_page_token
         end
       end
     end

@@ -16,7 +16,7 @@ require "helper"
 
 describe Gcloud::Pubsub::Topic, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
+  let(:topic) { Gcloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
                                                 pubsub.connection, pubsub.service }
 
   it "knows its name" do
@@ -24,11 +24,15 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   end
 
   it "can delete itself" do
-    mock_connection.delete "/v1/projects/#{project}/topics/#{topic_name}" do |env|
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    get_req = Google::Pubsub::V1::DeleteTopicRequest.new topic: "projects/#{project}/topics/#{topic_name}"
+    get_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :delete_topic, get_res, [get_req]
+    pubsub.service.mocked_publisher = mock
 
     topic.delete
+
+    mock.verify
   end
 
   it "creates a subscription" do

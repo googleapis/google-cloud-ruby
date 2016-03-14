@@ -171,7 +171,7 @@ class MockPubsub < Minitest::Spec
       JSON.parse(topic_json("topic-#{rand 1000}"))
     end
     data = { "topics" => topics }
-    data["nextPageToken"] = token unless token.nil?
+    data["next_page_token"] = token unless token.nil?
     data.to_json
   end
 

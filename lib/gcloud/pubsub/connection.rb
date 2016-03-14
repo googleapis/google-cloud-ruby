@@ -38,54 +38,6 @@ module Gcloud
         @pubsub = @client.discovered_api "pubsub", API_VERSION
       end
 
-      ##
-      # Gets the configuration of a topic.
-      # Since the topic only has the name attribute,
-      # this method is only useful to check the existence of a topic.
-      # If other attributes are added in the future,
-      # they will be returned here.
-      def get_topic topic_name, options = {}
-        @client.execute(
-          api_method: @pubsub.projects.topics.get,
-          parameters: { topic: topic_path(topic_name, options) }
-        )
-      end
-
-      ##
-      # Creates the given topic with the given name.
-      def create_topic topic_name, options = {}
-        @client.execute(
-          api_method: @pubsub.projects.topics.create,
-          parameters: { name: topic_path(topic_name, options) }
-        )
-      end
-
-      ##
-      # Lists matching topics.
-      def list_topics options = {}
-        params = { project: project_path(options),
-                   pageToken: options.delete(:token),
-                   pageSize: options.delete(:max)
-                 }.delete_if { |_, v| v.nil? }
-
-        @client.execute(
-          api_method: @pubsub.projects.topics.list,
-          parameters: params
-        )
-      end
-
-      ##
-      # Deletes the topic with the given name.
-      # All subscriptions to this topic are also deleted.
-      # Returns NOT_FOUND if the topic does not exist.
-      # After a topic is deleted, a new topic may be created with the same name.
-      def delete_topic topic
-        @client.execute(
-          api_method: @pubsub.projects.topics.delete,
-          parameters: { topic: topic }
-        )
-      end
-
       def get_topic_policy topic_name, options = {}
         @client.execute(
           api_method: @pubsub.projects.topics.get_iam_policy,

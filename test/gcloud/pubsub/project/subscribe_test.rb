@@ -36,17 +36,24 @@ describe Gcloud::Pubsub::Project, :subscribe, :mock_pubsub do
       [404, {"Content-Type"=>"application/json"},
        not_found_error_json(topic_name)]
     end
-    mock_connection.put "/v1/projects/#{project}/topics/#{topic_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       topic_json(topic_name)]
-    end
     mock_connection.put "/v1/projects/#{project}/subscriptions/#{new_sub_name}" do |env|
       JSON.parse(env.body)["topic"].must_equal topic_path(topic_name)
       [200, {"Content-Type"=>"application/json"},
        subscription_json(topic_name, new_sub_name)]
     end
 
+    create_req = Google::Pubsub::V1::Topic.new(
+      name: topic_path(topic_name)
+    )
+    create_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
+    mock = Minitest::Mock.new
+    mock.expect :create_topic, create_res, [create_req]
+    pubsub.service.mocked_publisher = mock
+
     sub = pubsub.subscribe topic_name, new_sub_name, autocreate: true
+
+    mock.verify
+
     sub.must_be_kind_of Gcloud::Pubsub::Subscription
     sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
   end
