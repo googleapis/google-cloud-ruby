@@ -23,22 +23,18 @@ describe Gcloud::Pubsub::Subscription, :listen, :mock_pubsub do
   let(:sub_hash) { JSON.parse sub_json }
   let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
   let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.connection, pubsub.service }
-  let(:empty_json) { { "receivedMessages" => [] }.to_json }
+  let(:empty_json) { { "received_messages" => [] }.to_json }
 
   it "can listen for messages" do
-    rec_message_msg = "pulled-message"
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       rec_messages_json(rec_message_msg)]
+    stub = Object.new
+    def stub.pull *args
+      @count ||= 0
+      @count +=1
+      raise Gcloud::Pubsub::ListenMustStopInTests if @count >= 3
+      Google::Pubsub::V1::PullResponse.decode_json \
+        "{\"received_messages\":[{\"ack_id\":\"ack-id-529967\",\"message\":{\"data\":\"cHVsbGVkLW1lc3NhZ2U=\\n\",\"attributes\":{},\"message_id\":\"msg-id-529967\"}}]}"
     end
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       rec_messages_json(rec_message_msg)]
-    end
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      raise Gcloud::Pubsub::ListenMustStopInTests,
-            "time to break the loop by raising an error"
-    end
+    pubsub.service.mocked_subscriber = stub
 
     expect do
       subscription.listen do |msg|
@@ -48,18 +44,15 @@ describe Gcloud::Pubsub::Subscription, :listen, :mock_pubsub do
   end
 
   it "sleeps when there are no results returned" do
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       empty_json]
+    stub = Object.new
+    def stub.pull *args
+      @count ||= 0
+      @count +=1
+      raise Gcloud::Pubsub::ListenMustStopInTests if @count >= 3
+      Google::Pubsub::V1::PullResponse.decode_json \
+        "{\"received_messages\":[]}"
     end
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      [200, {"Content-Type"=>"application/json"},
-        empty_json]
-    end
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      raise Gcloud::Pubsub::ListenMustStopInTests,
-            "time to break the loop by raising an error"
-    end
+    pubsub.service.mocked_subscriber = stub
 
     $listen_sleep_mock = Minitest::Mock.new
     $listen_sleep_mock.expect :mock_sleep, nil, [1]
@@ -79,18 +72,15 @@ describe Gcloud::Pubsub::Subscription, :listen, :mock_pubsub do
   end
 
   it "sleeps for the value passed in :delay" do
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       empty_json]
+    stub = Object.new
+    def stub.pull *args
+      @count ||= 0
+      @count +=1
+      raise Gcloud::Pubsub::ListenMustStopInTests if @count >= 3
+      Google::Pubsub::V1::PullResponse.decode_json \
+        "{\"received_messages\":[]}"
     end
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      [200, {"Content-Type"=>"application/json"},
-        empty_json]
-    end
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      raise Gcloud::Pubsub::ListenMustStopInTests,
-            "time to break the loop by raising an error"
-    end
+    pubsub.service.mocked_subscriber = stub
 
     $listen_sleep_mock = Minitest::Mock.new
     $listen_sleep_mock.expect :mock_sleep, nil, [999]

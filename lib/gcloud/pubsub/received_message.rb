@@ -42,10 +42,6 @@ module Gcloud
       attr_accessor :subscription
 
       ##
-      # @private The Google API Client object.
-      attr_accessor :gapi
-
-      ##
       # @private The gRPC Google::Pubsub::V1::ReceivedMessage object.
       attr_accessor :grpc
 
@@ -53,20 +49,19 @@ module Gcloud
       # @private Create an empty {Subscription} object.
       def initialize
         @subscription = nil
-        @gapi = {}
         @grpc = Google::Pubsub::V1::ReceivedMessage.new
       end
 
       ##
       # The acknowledgment ID for the message.
       def ack_id
-        @gapi["ackId"]
+        @grpc.ack_id
       end
 
       ##
       # The received message.
       def message
-        Message.from_gapi @gapi["message"]
+        Message.from_grpc @grpc.message
       end
       alias_method :msg, :message
 
@@ -151,11 +146,12 @@ module Gcloud
       end
 
       ##
-      # @private New ReceivedMessage from a Google API Client object.
-      def self.from_gapi gapi, subscription
-        new.tap do |f|
-          f.gapi         = gapi
-          f.subscription = subscription
+      # @private New ReceivedMessage from a Google::Pubsub::V1::ReceivedMessage
+      # object.
+      def self.from_grpc grpc, subscription
+        new.tap do |rm|
+          rm.grpc         = grpc
+          rm.subscription = subscription
         end
       end
 

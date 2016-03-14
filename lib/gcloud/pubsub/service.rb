@@ -178,6 +178,29 @@ module Gcloud
         subscriber.delete_subscription del_req
       end
 
+      ##
+      # Pulls a single message from the server.
+      def pull subscription, options = {}
+        pull_req = Google::Pubsub::V1::PullRequest.new(
+          subscription: subscription_path(subscription, options),
+          return_immediately: !(!options.fetch(:immediate, true)),
+          max_messages: options.fetch(:max, 100).to_i
+        )
+
+        subscriber.pull pull_req
+      end
+
+      ##
+      # Acknowledges receipt of a message.
+      def acknowledge subscription, *ack_ids
+        ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+          subscription: subscription_path(subscription),
+          ack_ids: ack_ids
+        )
+
+        subscriber.acknowledge ack_req
+      end
+
       def project_path options = {}
         project_name = options[:project] || project
         "projects/#{project_name}"

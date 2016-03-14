@@ -209,18 +209,18 @@ class MockPubsub < Minitest::Spec
 
   def rec_message_json message, id = rand(1000000)
     {
-      "ackId" => "ack-id-#{id}",
+      "ack_id" => "ack-id-#{id}",
       "message" => {
         "data" => [message].pack("m"),
         "attributes" => {},
-        "messageId" => "msg-id-#{id}",
+        "message_id" => "msg-id-#{id}",
       }
     }.to_json
   end
 
   def rec_messages_json message
     {
-      "receivedMessages" => [
+      "received_messages" => [
         JSON.parse(rec_message_json(message))
       ]
     }.to_json

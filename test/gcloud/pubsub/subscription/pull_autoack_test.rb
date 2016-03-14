@@ -26,33 +26,43 @@ describe Gcloud::Pubsub::Subscription, :pull, :autoack, :mock_pubsub do
   let(:rec_msg3_json) { rec_message_json "rec_msg3-msg-goes-here" }
   let(:rec_msgs_json) do
     {
-      "receivedMessages" => [
+      "received_messages" => [
         JSON.parse(rec_msg1_json),
         JSON.parse(rec_msg2_json),
         JSON.parse(rec_msg3_json),
       ]
     }.to_json
   end
-  let(:rec_msg1) { Gcloud::Pubsub::ReceivedMessage.from_gapi \
-                  JSON.parse(rec_msg1_json), subscription }
-  let(:rec_msg2) { Gcloud::Pubsub::ReceivedMessage.from_gapi \
-                  JSON.parse(rec_msg2_json), subscription }
-  let(:rec_msg3) { Gcloud::Pubsub::ReceivedMessage.from_gapi \
-                  JSON.parse(rec_msg3_json), subscription }
+  let(:rec_msg1_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json rec_msg1_json }
+  let(:rec_msg2_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json rec_msg2_json }
+  let(:rec_msg3_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json rec_msg3_json }
+  let(:rec_msg1) { Gcloud::Pubsub::ReceivedMessage.from_grpc rec_msg1_grpc, subscription }
+  let(:rec_msg2) { Gcloud::Pubsub::ReceivedMessage.from_grpc rec_msg2_grpc, subscription }
+  let(:rec_msg3) { Gcloud::Pubsub::ReceivedMessage.from_grpc rec_msg3_grpc, subscription }
 
   it "can auto acknowledge when pulling messages" do
     ack_ids = [rec_msg1.ack_id, rec_msg2.ack_id, rec_msg3.ack_id]
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       rec_msgs_json]
-    end
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal ack_ids
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+      subscription: subscription_path(sub_name),
+      ack_ids: ack_ids
+    )
+    ack_res = Google::Protobuf::Empty.new
+    pull_req = Google::Pubsub::V1::PullRequest.new(
+      subscription: subscription_path(sub_name),
+      return_immediately: true,
+      max_messages: 100
+    )
+    pull_res = Google::Pubsub::V1::PullResponse.decode_json rec_msgs_json
+    mock = Minitest::Mock.new
+    mock.expect :acknowledge, ack_res, [ack_req]
+    mock.expect :pull, pull_res, [pull_req]
+    subscription.service.mocked_subscriber = mock
 
     rec_messages = subscription.pull autoack: true
+
+    mock.verify
+
     rec_messages.count.must_equal 3
   end
 end

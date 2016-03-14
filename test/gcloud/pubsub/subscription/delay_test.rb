@@ -21,12 +21,12 @@ describe Gcloud::Pubsub::Subscription, :delay, :mock_pubsub do
   let(:sub_hash) { JSON.parse sub_json }
   let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
   let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.connection, pubsub.service }
-  let(:rec_message1) { Gcloud::Pubsub::ReceivedMessage.from_gapi \
-                  JSON.parse(rec_message_json("rec_message1-msg-goes-here")), subscription }
-  let(:rec_message2) { Gcloud::Pubsub::ReceivedMessage.from_gapi \
-                  JSON.parse(rec_message_json("rec_message2-msg-goes-here")), subscription }
-  let(:rec_message3) { Gcloud::Pubsub::ReceivedMessage.from_gapi \
-                  JSON.parse(rec_message_json("rec_message3-msg-goes-here")), subscription }
+  let(:rec_msg1_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json rec_message_json("rec_message1-msg-goes-here") }
+  let(:rec_msg2_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json rec_message_json("rec_message2-msg-goes-here") }
+  let(:rec_msg3_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json rec_message_json("rec_message3-msg-goes-here") }
+  let(:rec_message1) { Gcloud::Pubsub::ReceivedMessage.from_grpc rec_msg1_grpc, subscription }
+  let(:rec_message2) { Gcloud::Pubsub::ReceivedMessage.from_grpc rec_msg2_grpc, subscription }
+  let(:rec_message3) { Gcloud::Pubsub::ReceivedMessage.from_grpc rec_msg3_grpc, subscription }
 
   it "can delay an ack id" do
     ack_id = rec_message1.ack_id

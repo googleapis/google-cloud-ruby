@@ -89,29 +89,6 @@ module Gcloud
       end
 
       ##
-      # Pulls a single message from the server.
-      def pull subscription, options = {}
-        body = { returnImmediately: !(!options.fetch(:immediate, true)),
-                 maxMessages:          options.fetch(:max, 100).to_i }
-
-        @client.execute(
-          api_method:  @pubsub.projects.subscriptions.pull,
-          parameters:  { subscription: subscription },
-          body_object: body
-        )
-      end
-
-      ##
-      # Acknowledges receipt of a message.
-      def acknowledge subscription, *ack_ids
-        @client.execute(
-          api_method:  @pubsub.projects.subscriptions.acknowledge,
-          parameters:  { subscription: subscription },
-          body_object: { ackIds: ack_ids }
-        )
-      end
-
-      ##
       # Modifies the PushConfig for a specified subscription.
       def modify_push_config subscription, endpoint, attributes
         @client.execute(

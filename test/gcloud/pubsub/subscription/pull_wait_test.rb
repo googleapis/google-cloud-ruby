@@ -24,37 +24,52 @@ describe Gcloud::Pubsub::Subscription, :pull, :wait, :mock_pubsub do
 
   it "can pull messages without returning immediately" do
     rec_message_msg = "pulled-message"
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      # We could sleep here, but, really, why?
-      JSON.parse(env.body)["returnImmediately"].must_equal false
-      [200, {"Content-Type"=>"application/json"},
-       rec_messages_json(rec_message_msg)]
-    end
+
+    pull_req = Google::Pubsub::V1::PullRequest.new(
+      subscription: subscription_path(sub_name),
+      return_immediately: false,
+      max_messages: 100
+    )
+    pull_res = Google::Pubsub::V1::PullResponse.decode_json rec_messages_json(rec_message_msg)
+    mock = Minitest::Mock.new
+    mock.expect :pull, pull_res, [pull_req]
+    subscription.service.mocked_subscriber = mock
 
     rec_messages = subscription.pull immediate: false
+
+    mock.verify
+
     rec_messages.wont_be :empty?
     rec_messages.first.message.data.must_equal rec_message_msg
   end
 
   it "can pull messages by calling wait_for_messages" do
     rec_message_msg = "pulled-message"
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      # We could sleep here, but, really, why?
-      JSON.parse(env.body)["returnImmediately"].must_equal false
-      [200, {"Content-Type"=>"application/json"},
-       rec_messages_json(rec_message_msg)]
-    end
+
+    pull_req = Google::Pubsub::V1::PullRequest.new(
+      subscription: subscription_path(sub_name),
+      return_immediately: false,
+      max_messages: 100
+    )
+    pull_res = Google::Pubsub::V1::PullResponse.decode_json rec_messages_json(rec_message_msg)
+    mock = Minitest::Mock.new
+    mock.expect :pull, pull_res, [pull_req]
+    subscription.service.mocked_subscriber = mock
 
     rec_messages = subscription.wait_for_messages
+
+    mock.verify
+
     rec_messages.wont_be :empty?
     rec_messages.first.message.data.must_equal rec_message_msg
   end
 
   it "will not error when a request times out with Faraday::TimeoutError" do
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      # simulate a timed out HTTP request
+    stub = Object.new
+    def stub.pull *args
       raise Faraday::TimeoutError
     end
+    subscription.service.mocked_subscriber = stub
 
     rec_messages = subscription.pull immediate: false
     rec_messages.must_be :empty?

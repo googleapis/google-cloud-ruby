@@ -245,18 +245,16 @@ module Gcloud
       #   msgs.each { |msg| msg.acknowledge! }
       #
       def pull immediate: true, max: 100, autoack: false
-        ensure_connection!
+        ensure_service!
         options = { immediate: immediate, max: max }
-        resp = connection.pull name, options
-        if resp.success?
-          messages = Array(resp.data["receivedMessages"]).map do |gapi|
-            ReceivedMessage.from_gapi gapi, self
-          end
-          acknowledge messages if autoack
-          messages
-        else
-          fail ApiError.from_response(resp)
+        list_grpc = service.pull name, options
+        messages = Array(list_grpc.received_messages).map do |msg_grpc|
+          ReceivedMessage.from_grpc msg_grpc, self
         end
+        acknowledge messages if autoack
+        messages
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       rescue Faraday::TimeoutError
         []
       end
@@ -371,13 +369,11 @@ module Gcloud
       #
       def acknowledge *messages
         ack_ids = coerce_ack_ids messages
-        ensure_connection!
-        resp = connection.acknowledge name, *ack_ids
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.acknowledge name, *ack_ids
+        true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :ack, :acknowledge
 

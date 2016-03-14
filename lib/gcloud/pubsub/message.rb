@@ -45,10 +45,6 @@ module Gcloud
     #
     class Message
       ##
-      # @private The Google API Client object.
-      attr_accessor :gapi
-
-      ##
       # @private The gRPC Google::Pubsub::V1::PubsubMessage object.
       attr_accessor :grpc
 
@@ -56,39 +52,41 @@ module Gcloud
       # Create an empty Message object.
       # This can be used to publish several messages in bulk.
       def initialize data = nil, attributes = {}
-        @gapi               = {}
-        @gapi["data"]       = data
-        @gapi["attributes"] = attributes
-        @grpc = Google::Pubsub::V1::PubsubMessage.new
+        # Convert attributes to strings to match the protobuf definition
+        attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
+
+        @grpc = Google::Pubsub::V1::PubsubMessage.new(
+          data: String(data).encode("ASCII-8BIT"),
+          attributes: attributes)
       end
 
       ##
       # The received data.
       def data
-        @gapi["data"]
+        @grpc.data
       end
 
       ##
       # The received attributes.
       def attributes
-        attrs = @gapi["attributes"]
-        attrs = attrs.to_hash if attrs.respond_to? :to_hash
-        attrs
+        @grpc.attributes.to_h
       end
 
       ##
       # The ID of this message, assigned by the server at publication time.
       # Guaranteed to be unique within the topic.
       def message_id
-        @gapi["messageId"]
+        @grpc.message_id
       end
       alias_method :msg_id, :message_id
 
       ##
-      # @private New {Topic} from a Google API Client object.
-      def self.from_gapi gapi
-        new.tap do |f|
-          f.gapi = gapi
+      # @private New Message from a Google::Pubsub::V1::PubsubMessage object.
+      def self.from_grpc grpc
+        new.tap do |m|
+          m.instance_eval do
+            @grpc = grpc
+          end
         end
       end
     end

@@ -21,14 +21,9 @@ describe Gcloud::Pubsub::Message, :attributes do
       "attributes" => { "foo" => "FOO", "bar" => "BAR" }
     }
   end
-  let(:message_gapi) do
-    data = message_hash
-    data["attributes"] = AutoParse::Instance.new data["attributes"]
-    AutoParse::Instance.new data
-  end
-  let(:message_obj) do
-    Gcloud::Pubsub::Message.from_gapi message_gapi
-  end
+  let(:message_json)  { message_hash.to_json }
+  let(:message_grpc)  { Google::Pubsub::V1::PubsubMessage.decode_json message_json }
+  let(:message_obj)  { Gcloud::Pubsub::Message.from_grpc message_grpc }
 
   it "has attributes as a Hash even when being a Google API object" do
     message_obj.attributes["foo"].must_equal "FOO"

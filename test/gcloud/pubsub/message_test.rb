@@ -24,7 +24,8 @@ describe Gcloud::Pubsub::Message, :mock_pubsub do
   end
 
   it "knows its attributes" do
-    msg.attributes.must_equal attributes
+    msg.attributes.keys.sort.must_equal   attributes.keys.sort
+    msg.attributes.values.sort.must_equal attributes.values.sort
   end
 
   describe "from gapi" do
@@ -37,19 +38,21 @@ describe Gcloud::Pubsub::Message, :mock_pubsub do
     let(:rec_message_name) { "rec_message-name-goes-here" }
     let(:rec_message_msg)  { "rec_message-msg-goes-here" }
     let(:rec_message_data)  { JSON.parse(rec_message_json(rec_message_msg)) }
-    let(:msg)     { Gcloud::Pubsub::Message.from_gapi rec_message_data["message"] }
+    let(:rec_message_grpc)  { Google::Pubsub::V1::PubsubMessage.decode_json rec_message_data["message"].to_json }
+    let(:msg)     { Gcloud::Pubsub::Message.from_grpc rec_message_grpc }
 
     it "knows its data" do
-      msg.data.must_equal rec_message_data["message"]["data"]
+      msg.data.must_equal rec_message_msg
     end
 
     it "knows its attributes" do
-      msg.attributes.must_equal rec_message_data["message"]["attributes"]
+      msg.attributes.keys.sort.must_equal   rec_message_data["message"]["attributes"].keys.sort
+      msg.attributes.values.sort.must_equal rec_message_data["message"]["attributes"].values.sort
     end
 
     it "knows its message_id" do
-      msg.msg_id.must_equal     rec_message_data["message"]["messageId"]
-      msg.message_id.must_equal rec_message_data["message"]["messageId"]
+      msg.msg_id.must_equal     rec_message_data["message"]["message_id"]
+      msg.message_id.must_equal rec_message_data["message"]["message_id"]
     end
   end
 end
