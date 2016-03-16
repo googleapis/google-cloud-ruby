@@ -7,36 +7,30 @@ module Gcloud
       include Gcloud::Jsondoc::MarkupHelper, JsonHelper
 
       # object is API defined by YARD's HtmlHelper
-      attr_reader :name, :jbuilder, :object
+      attr_reader :name, :full_name, :filepath, :jbuilder, :object, :subtree
 
       def initialize object
         @object = object
-        @name = @object.name.to_s.downcase
-        build
+        @name = object.name.to_s
+        @full_name = get_full_name #JsonHelper
+        @filepath = "#{@full_name}.json"
+        build!
+        build_subtree!
       end
 
-      def filepath
-        namespaces = @object.title.split("::")
-        namespaces.shift if namespaces.size > 2 # remove "GCloud", since problematic in site app nav
-        title_path = namespaces.map(&:downcase).join("/")
-        "#{title_path}.json"
-      end
-
-      def build
+      def build!
         @jbuilder = Jbuilder.new do |json|
-          json.id object.name.to_s.downcase
           metadata json
           methods json, object
         end
       end
 
-      def subtree
-        docs = [self]
+      def build_subtree!
+        @subtree = [self]
         children = @object.children.select { |c| c.type == :class && c.visibility == :public && c.namespace.name == @object.name && !c.has_tag?(:private) }
         children.each do |child|
-          docs += Doc.new(child).subtree
+          @subtree += Doc.new(child).subtree
         end
-        docs
       end
 
       protected

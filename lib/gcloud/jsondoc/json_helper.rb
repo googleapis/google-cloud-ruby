@@ -3,6 +3,7 @@ module Gcloud
     module JsonHelper
       # object is API defined by YARD's HtmlHelper, so depend on it here too
       def metadata json
+        json.id get_full_name
         json.name object.name.to_s
         json.title object.title.split("::") # Array of namespaces + name
         json.description md(object.docstring, true)
@@ -15,6 +16,10 @@ module Gcloud
           json.caption md(t.name, true)
           json.code t.text
         end
+      end
+
+      def get_full_name
+        object.title.split("::").map(&:downcase).join("/")
       end
     end
   end

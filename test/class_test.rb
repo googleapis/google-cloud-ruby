@@ -30,6 +30,7 @@ describe Gcloud::Jsondoc, :jsondoc_spec, :class do
     describe "when a class has methods" do
       it "must have metadata" do
         method = @doc["methods"][0]
+        method["id"].must_equal "mymodule/myclass#example_instance_method"
         method["name"].must_equal "example_instance_method"
         method["description"].must_equal "<p>Accepts many arguments for testing this library. Has no relation to\n<a data-custom-type=\"mymodule/myclass#other_instance_method\">#other_instance_method</a>. Also accepts a block if a block is given.</p>\n\n<p>Do not call this method until you have read all of its documentation.</p>"
         method["source"].must_equal "test/fixtures/my_module/my_class.rb#L50"

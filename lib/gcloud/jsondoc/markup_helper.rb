@@ -32,17 +32,6 @@ module Gcloud
           name
         else
           parts = code_obj.path.split "::"
-
-          # adhere to gcloud-common site's path pattern of top-level
-          # services, e.g. "/bigquery/table"
-          # except for special-case "/gcloud" service,
-          # and for non-service classes in the top-level Gcloud namespace (Backoff, etc)
-          if parts.first == "Gcloud" &&
-            parts.size > 1 &&   # "Gcloud" alone means Gcloud module and is ok
-            (parts.size != 2 || object.type == :class) # non-service types in Gcloud namespace need to retain "gcloud" in path to be found dynamically
-            parts.shift
-          end
-
           path = parts.map(&:downcase).join("/")
           "<a data-custom-type=\"#{path}\">#{title || name}</a>"
         end

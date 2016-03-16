@@ -36,6 +36,7 @@ describe Gcloud::Jsondoc, :module do
 
     it "must have metadata" do
       method = @doc["methods"][0]
+      method["id"].must_equal "mymodule.example_method"
       method["name"].must_equal "example_method"
       method["description"].must_equal "<p>Creates a new object for testing this library, as explained in <a href=\"https://en.wikipedia.org/wiki/Software_testing\">this\narticle on testing</a>.</p>\n\n<p>Each call creates a new instance.</p>"
       method["source"].must_equal "test/fixtures/my_module.rb#L45"

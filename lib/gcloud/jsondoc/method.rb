@@ -108,7 +108,7 @@ module Gcloud
             parameter_name = parameter[0].sub(/:\z/, "").sub(/\A\*/, "")
             parameter_name == param.name.to_s
           end
-          fail "no entry found for @param: '#{param.name}' in MethodObject#parameters: #{method.inspect}" unless method_param_pair
+          fail "no entry found for @param: '#{param.name}' in: #{method.inspect}, parameter: #{method.parameters.join(", ")}" unless method_param_pair
           method_param_pair[1]
       end
     end
