@@ -429,6 +429,11 @@ module Gcloud
       # that match the sink's filter are exported. Cloud Logging does not send
       # previously-ingested log entries to the sink's destination.
       #
+      # Before creating the sink, ensure that you have granted
+      # `cloud-logs@google.com` permission to write logs to the destination. See
+      # [Permissions for writing exported
+      # logs](https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs).
+      #
       # @see https://cloud.google.com/logging/docs/api/tasks/exporting-logs
       #   Exporting Logs With Sinks
       # @see https://cloud.google.com/logging/docs/api/introduction_v2#kinds_of_log_sinks
@@ -454,7 +459,10 @@ module Gcloud
       # @param [Symbol] version The log entry version used when exporting log
       #   entries from this sink. This version does not have to correspond to
       #   the version of the log entry when it was written to Cloud Logging.
-      #   Accepted values are `:unspecified`, `:v2`, and `:v1`.
+      #   Accepted values are `:unspecified`, `:v2`, and `:v1`. Version 2 is
+      #   currently the preferred format. An unspecified version format
+      #   currently defaults to V2 in the service. The default value is
+      #   `:unspecified`.
       #
       # @return [Gcloud::Logging::Sink] a project sink
       #
@@ -465,11 +473,14 @@ module Gcloud
       #   logging = gcloud.logging
       #   storage = gcloud.storage
       #
-      #   bucket = storage.create_bucket "my-syslog-bucket"
+      #   bucket = storage.create_bucket "my-logs-bucket"
+      #
+      #   # Grant owner permission to Cloud Logging service
+      #   email = "cloud-logs@google.com"
+      #   bucket.acl.add_owner "group-#{email}"
       #
       #   sink = logging.create_sink "my-sink",
-      #                              "storage.googleapis.com/#{bucket.id}",
-      #                              filter: "log:syslog"
+      #                              "storage.googleapis.com/#{bucket.id}"
       #
       def create_sink name, destination, filter: nil, version: :unspecified
         version = Sink.resolve_version version

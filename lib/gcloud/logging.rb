@@ -148,6 +148,11 @@ module Gcloud
   # logs filter](https://cloud.google.com/logging/docs/view/advanced_filters) to
   # narrow the collection.
   #
+  # Before creating the sink, ensure that you have granted
+  # `cloud-logs@google.com` permission to write logs to the destination. See
+  # [Permissions for writing exported
+  # logs](https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs).
+  #
   # ```ruby
   # require "gcloud"
   #
@@ -155,11 +160,13 @@ module Gcloud
   # logging = gcloud.logging
   # storage = gcloud.storage
   #
-  # bucket = storage.create_bucket "my-syslog-bucket"
+  # bucket = storage.create_bucket "my-logs-bucket"
   #
-  # sink = logging.create_sink "my-sink",
-  #                            "storage.googleapis.com/#{bucket.id}",
-  #                            filter: "log:syslog"
+  # # Grant owner permission to Cloud Logging service
+  # email = "cloud-logs@google.com"
+  # bucket.acl.add_owner "group-#{email}"
+  #
+  # sink = logging.create_sink "my-sink", "storage.googleapis.com/#{bucket.id}"
   # ```
   #
   # When you create a sink, only new log entries are exported. Cloud Logging
