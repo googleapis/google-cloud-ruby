@@ -14,8 +14,10 @@
 
 
 require "google/pubsub/v1/pubsub_services"
+require "google/iam/v1/iam_policy_services"
 require "gcloud/backoff"
 require "gcloud/grpc_utils"
+require "json"
 
 module Gcloud
   module Pubsub
@@ -49,6 +51,12 @@ module Gcloud
         @publisher ||= Google::Pubsub::V1::Publisher::Stub.new host, creds
       end
       attr_accessor :mocked_publisher
+
+      def iam
+        return mocked_iam if mocked_iam
+        @iam ||= Google::Iam::V1::IAMPolicy::Stub.new host, creds
+      end
+      attr_accessor :mocked_iam
 
       ##
       # Gets the configuration of a topic.
@@ -229,6 +237,59 @@ module Gcloud
         )
 
         backoff { subscriber.modify_ack_deadline mad_req }
+      end
+
+      def get_topic_policy topic_name, options = {}
+        get_req = Google::Iam::V1::GetIamPolicyRequest.new(
+          resource: topic_path(topic_name, options)
+        )
+
+        backoff { iam.get_iam_policy get_req }
+      end
+
+      def set_topic_policy topic_name, new_policy, options = {}
+        set_req = Google::Iam::V1::SetIamPolicyRequest.new(
+          resource: topic_path(topic_name, options),
+          policy: Google::Iam::V1::Policy.decode_json(JSON.dump(new_policy))
+        )
+
+        backoff { iam.set_iam_policy set_req }
+      end
+
+      def test_topic_permissions topic_name, permissions, options = {}
+        test_req = Google::Iam::V1::TestIamPermissionsRequest.new(
+          resource: topic_path(topic_name, options),
+          permissions: permissions
+        )
+
+        backoff { iam.test_iam_permissions test_req }
+      end
+
+      def get_subscription_policy subscription_name, options = {}
+        get_req = Google::Iam::V1::GetIamPolicyRequest.new(
+          resource: subscription_path(subscription_name, options)
+        )
+
+        backoff { iam.get_iam_policy get_req }
+      end
+
+      def set_subscription_policy subscription_name, new_policy, options = {}
+        set_req = Google::Iam::V1::SetIamPolicyRequest.new(
+          resource: subscription_path(subscription_name, options),
+          policy: Google::Iam::V1::Policy.decode_json(JSON.dump(new_policy))
+        )
+
+        backoff { iam.set_iam_policy set_req }
+      end
+
+      def test_subscription_permissions subscription_name,
+                                        permissions, options = {}
+        test_req = Google::Iam::V1::TestIamPermissionsRequest.new(
+          resource: subscription_path(subscription_name, options),
+          permissions: permissions
+        )
+
+        backoff { iam.test_iam_permissions test_req }
       end
 
       def project_path options = {}

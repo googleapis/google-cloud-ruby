@@ -38,56 +38,6 @@ module Gcloud
         @pubsub = @client.discovered_api "pubsub", API_VERSION
       end
 
-      def get_topic_policy topic_name, options = {}
-        @client.execute(
-          api_method: @pubsub.projects.topics.get_iam_policy,
-          parameters: { resource: topic_path(topic_name, options) }
-        )
-      end
-
-      def set_topic_policy topic_name, new_policy, options = {}
-        @client.execute(
-          api_method: @pubsub.projects.topics.set_iam_policy,
-          parameters: { resource: topic_path(topic_name, options) },
-          body_object: { policy: new_policy }
-        )
-      end
-
-      def test_topic_permissions topic_name, permissions, options = {}
-        @client.execute(
-          api_method: @pubsub.projects.topics.test_iam_permissions,
-          parameters: { resource: topic_path(topic_name, options) },
-          body_object: { permissions: permissions }
-        )
-      end
-
-      def get_subscription_policy subscription_name, options = {}
-        @client.execute(
-          api_method: @pubsub.projects.subscriptions.get_iam_policy,
-          parameters: {
-            resource: subscription_path(subscription_name, options) }
-        )
-      end
-
-      def set_subscription_policy subscription_name, new_policy, options = {}
-        @client.execute(
-          api_method: @pubsub.projects.subscriptions.set_iam_policy,
-          parameters: {
-            resource: subscription_path(subscription_name, options) },
-          body_object: { policy: new_policy }
-        )
-      end
-
-      def test_subscription_permissions subscription_name,
-                                        permissions, options = {}
-        @client.execute(
-          api_method: @pubsub.projects.subscriptions.test_iam_permissions,
-          parameters: {
-            resource: subscription_path(subscription_name, options) },
-          body_object: { permissions: permissions }
-        )
-      end
-
       def project_path options = {}
         project_name = options[:project] || project
         "projects/#{project_name}"

@@ -351,12 +351,11 @@ module Gcloud
       def policy force: nil
         @policy = nil if force
         @policy ||= begin
-          ensure_connection!
-          resp = connection.get_topic_policy name
-          fail ApiError.from_response(resp) unless resp.success?
-          policy = resp.data
-          policy = policy.to_hash if policy.respond_to? :to_hash
-          policy
+          ensure_service!
+          grpc = service.get_topic_policy name
+          JSON.parse(Google::Iam::V1::Policy.encode_json(grpc))
+        rescue GRPC::BadStatus => e
+          raise Error.from_error(e)
         end
       end
 
@@ -389,14 +388,11 @@ module Gcloud
       #   topic.policy = viewer_policy
       #
       def policy= new_policy
-        ensure_connection!
-        resp = connection.set_topic_policy name, new_policy
-        if resp.success?
-          @policy = resp.data["policy"]
-          @policy = @policy.to_hash if @policy.respond_to? :to_hash
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        grpc = service.set_topic_policy name, new_policy
+        @policy = JSON.parse(Google::Iam::V1::Policy.encode_json(grpc))
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
@@ -435,13 +431,12 @@ module Gcloud
       #
       def test_permissions *permissions
         permissions = Array(permissions).flatten
-        ensure_connection!
-        resp = connection.test_topic_permissions name, permissions
-        if resp.success?
-          Array(resp.data["permissions"])
-        else
-          fail ApiError.from_response(resp)
-        end
+        permissions = Array(permissions).flatten
+        ensure_service!
+        grpc = service.test_topic_permissions name, permissions
+        grpc.permissions
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##

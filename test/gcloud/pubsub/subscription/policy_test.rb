@@ -34,12 +34,18 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
       }]
     }.to_json
 
-    mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}:getIamPolicy" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       policy_json]
-    end
+    get_req = Google::Iam::V1::GetIamPolicyRequest.new(
+      resource: "projects/#{project}/subscriptions/#{sub_name}"
+    )
+    get_res = Google::Iam::V1::Policy.decode_json policy_json
+    mock = Minitest::Mock.new
+    mock.expect :get_iam_policy, get_res, [get_req]
+    subscription.service.mocked_iam = mock
 
     policy = subscription.policy
+
+    mock.verify
+
     policy.must_be_kind_of Hash
     policy["bindings"].count.must_equal 1
     policy["bindings"].first["role"].must_equal "roles/viewer"
@@ -95,10 +101,13 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
       }]
     }.to_json
 
-    mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}:getIamPolicy" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       policy_json]
-    end
+    get_req = Google::Iam::V1::GetIamPolicyRequest.new(
+      resource: "projects/#{project}/subscriptions/#{sub_name}"
+    )
+    get_res = Google::Iam::V1::Policy.decode_json policy_json
+    mock = Minitest::Mock.new
+    mock.expect :get_iam_policy, get_res, [get_req]
+    subscription.service.mocked_iam = mock
 
     subscription.instance_variable_set "@policy", policy_hash
     returned_policy = subscription.policy
@@ -110,6 +119,9 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
     returned_policy["bindings"].first["members"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
 
     policy = subscription.policy force: true
+
+    mock.verify
+
     policy.must_be_kind_of Hash
     policy["bindings"].count.must_equal 1
     policy["bindings"].first["role"].must_equal "roles/owner"
@@ -129,18 +141,19 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
       }],
     }
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:setIamPolicy" do |env|
-      json_policy = JSON.parse env.body
-      json_policy["policy"]["bindings"].count.must_equal 1
-      json_policy["policy"]["bindings"].first["role"].must_equal "roles/owner"
-      json_policy["policy"]["bindings"].first["members"].count.must_equal 2
-      json_policy["policy"]["bindings"].first["members"].first.must_equal "user:owner@example.com"
-      json_policy["policy"]["bindings"].first["members"].last.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
-      [200, {"Content-Type"=>"application/json"},
-       { "policy" => new_policy }.to_json]
-    end
+    set_req = Google::Iam::V1::SetIamPolicyRequest.new(
+      resource: "projects/#{project}/subscriptions/#{sub_name}",
+      policy: Google::Iam::V1::Policy.decode_json(JSON.dump(new_policy))
+    )
+    set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
+    mock = Minitest::Mock.new
+    mock.expect :set_iam_policy, set_res, [set_req]
+    subscription.service.mocked_iam = mock
 
     subscription.policy = new_policy
+
+    mock.verify
+
     # Setting the policy also memoizes the policy
     subscription.policy["bindings"].count.must_equal 1
     subscription.policy["bindings"].first["role"].must_equal "roles/owner"
@@ -150,17 +163,22 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
   end
 
   it "tests the available permissions" do
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:testIamPermissions" do |env|
-      json_permissions = JSON.parse env.body
-      json_permissions["permissions"].count.must_equal 2
-      json_permissions["permissions"].first.must_equal "pubsub.subscriptions.get"
-      json_permissions["permissions"].last.must_equal  "pubsub.subscriptions.consume"
-      [200, {"Content-Type"=>"application/json"},
-       { "permissions" => ["pubsub.subscriptions.get"] }.to_json]
-    end
+    test_req = Google::Iam::V1::TestIamPermissionsRequest.new(
+      resource: "projects/#{project}/subscriptions/#{sub_name}",
+      permissions: ["pubsub.subscriptions.get", "pubsub.subscriptions.consume"]
+    )
+    test_res = Google::Iam::V1::TestIamPermissionsResponse.new(
+      permissions: ["pubsub.subscriptions.get"]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :test_iam_permissions, test_res, [test_req]
+    subscription.service.mocked_iam = mock
 
     permissions = subscription.test_permissions "pubsub.subscriptions.get",
                                                 "pubsub.subscriptions.consume"
+
+    mock.verify
+
     permissions.must_equal ["pubsub.subscriptions.get"]
   end
 end
