@@ -14,9 +14,9 @@
 
 
 require "gcloud/gce"
+require "gcloud/errors"
 require "gcloud/pubsub/service"
 require "gcloud/pubsub/credentials"
-require "gcloud/pubsub/errors"
 require "gcloud/pubsub/topic"
 
 module Gcloud

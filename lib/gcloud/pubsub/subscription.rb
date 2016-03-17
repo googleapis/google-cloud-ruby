@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "gcloud/pubsub/errors"
+require "gcloud/errors"
 require "gcloud/pubsub/subscription/list"
 require "gcloud/pubsub/received_message"
 
