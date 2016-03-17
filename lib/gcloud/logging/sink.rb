@@ -24,7 +24,12 @@ module Gcloud
     # new log entries are exported. Cloud Logging does not send
     # previously-ingested log entries to the sink's destination.
     #
-    # You can retrieve an existing sink with {Project#sink}
+    # Before creating the sink, ensure that you have granted
+    # `cloud-logs@google.com` permission to write logs to the destination. See
+    # [Permissions for writing exported
+    # logs](https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs).
+    #
+    # You can retrieve an existing sink with {Project#sink}.
     #
     # @see https://cloud.google.com/logging/docs/api/tasks/exporting-logs
     #   Exporting Logs With Sinks
@@ -41,11 +46,14 @@ module Gcloud
     #   logging = gcloud.logging
     #   storage = gcloud.storage
     #
-    #   bucket = storage.create_bucket "my-syslog-bucket"
+    #   bucket = storage.create_bucket "my-logs-bucket"
+    #
+    #   # Grant owner permission to Cloud Logging service
+    #   email = "cloud-logs@google.com"
+    #   bucket.acl.add_owner "group-#{email}"
     #
     #   sink = logging.create_sink "my-sink",
-    #                              "storage.googleapis.com/#{bucket.id}",
-    #                              filter: "log:syslog"
+    #                              "storage.googleapis.com/#{bucket.id}"
     #
     class Sink
       ##
