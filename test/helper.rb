@@ -148,24 +148,6 @@ class MockPubsub < Minitest::Spec
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:pubsub) { $gcloud_pubsub_global ||= Gcloud::Pubsub::Project.new(project, credentials) }
 
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    connection = pubsub.instance_variable_get "@connection"
-    client = connection.instance_variable_get "@client"
-    client.connection = Faraday.new do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
-  end
-
-  def teardown
-    @connection.verify_stubbed_calls
-  end
-
-  def mock_connection
-    @connection
-  end
-
   def topics_json num_topics, token = nil
     topics = num_topics.times.map do
       JSON.parse(topic_json("topic-#{rand 1000}"))

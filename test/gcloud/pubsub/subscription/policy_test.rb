@@ -20,7 +20,7 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
   let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
-  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.connection, pubsub.service }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "gets the IAM Policy" do
     policy_json = {

@@ -17,7 +17,7 @@ require "helper"
 describe Gcloud::Pubsub::Topic, :name, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic) { Gcloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
-                                                pubsub.connection, pubsub.service }
+                                                pubsub.service }
 
   it "gives the name returned from the HTTP method" do
     topic.name.must_equal "projects/#{project}/topics/#{topic_name}"
@@ -25,7 +25,7 @@ describe Gcloud::Pubsub::Topic, :name, :mock_pubsub do
 
   describe "lazy topic with default autocreate" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.connection, pubsub.service }
+                                                 pubsub.service }
 
     it "matches the name returned from the HTTP method" do
       topic.name.must_equal "projects/#{project}/topics/#{topic_name}"
@@ -34,7 +34,7 @@ describe Gcloud::Pubsub::Topic, :name, :mock_pubsub do
 
   describe "lazy topic with explicit autocreate" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.connection, pubsub.service,
+                                                 pubsub.service,
                                                  autocreate: true }
 
     it "matches the name returned from the HTTP method" do
@@ -44,7 +44,7 @@ describe Gcloud::Pubsub::Topic, :name, :mock_pubsub do
 
   describe "lazy topic without autocomplete" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.connection, pubsub.service,
+                                                 pubsub.service,
                                                  autocreate: false }
 
     it "matches the name returned from the HTTP method" do

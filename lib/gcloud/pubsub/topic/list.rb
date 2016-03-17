@@ -38,9 +38,9 @@ module Gcloud
         ##
         # @private New Topic::List from a Google::Pubsub::V1::ListTopicsResponse
         # object.
-        def self.from_grpc grpc_list, conn, service
+        def self.from_grpc grpc_list, service
           topics = Array(grpc_list.topics).map do |grpc|
-            Topic.from_grpc grpc, conn, service
+            Topic.from_grpc grpc, service
           end
           new topics, grpc_list.next_page_token
         end

@@ -20,7 +20,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
   let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
-  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.connection, pubsub.service }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
   let(:rec_msg1_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
                   rec_message_json("rec_message1-msg-goes-here") }
   let(:rec_msg2_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
@@ -136,7 +136,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
   describe "lazy subscription object of a subscription that does exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection, pubsub.service
+                                            pubsub.service
     end
 
     it "can acknowledge an ack id" do
@@ -245,7 +245,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
   describe "lazy subscription object of a subscription that does not exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection, pubsub.service
+                                            pubsub.service
     end
 
     it "raises NotFoundError when acknowledging an ack id" do

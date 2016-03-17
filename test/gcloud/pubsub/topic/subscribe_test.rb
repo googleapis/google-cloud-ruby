@@ -17,7 +17,7 @@ require "helper"
 describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic) { Gcloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
-                                                pubsub.connection, pubsub.service }
+                                                pubsub.service }
   let(:new_sub_name) { "new-sub-#{Time.now.to_i}" }
 
   it "creates a subscription when calling subscribe" do
@@ -40,7 +40,7 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
 
   describe "lazy topic that exists" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.connection, pubsub.service,
+                                                 pubsub.service,
                                                  autocreate: false }
 
     it "creates a subscription when calling subscribe" do
@@ -64,7 +64,7 @@ describe Gcloud::Pubsub::Topic, :subscribe, :mock_pubsub do
 
   describe "lazy topic that does not exist" do
     let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.connection, pubsub.service,
+                                                 pubsub.service,
                                                  autocreate: false }
 
     it "raises NotFoundError when calling subscribe" do

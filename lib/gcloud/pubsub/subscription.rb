@@ -37,16 +37,8 @@ module Gcloud
     #
     class Subscription
       ##
-      # @private The Connection object.
-      attr_accessor :connection
-
-      ##
       # @private The gRPC Service object.
       attr_accessor :service
-
-      ##
-      # @private The Google API Client object.
-      attr_accessor :gapi
 
       ##
       # @private The gRPC Google::Pubsub::V1::Subscription object.
@@ -55,8 +47,6 @@ module Gcloud
       ##
       # @private Create an empty {Subscription} object.
       def initialize
-        @connection = nil
-        @gapi = {}
         @service = nil
         @grpc = Google::Pubsub::V1::Subscription.new
         @name = nil
@@ -65,15 +55,13 @@ module Gcloud
 
       ##
       # @private New lazy {Topic} object without making an HTTP request.
-      def self.new_lazy name, conn, service, options = {}
+      def self.new_lazy name, service, options = {}
         sub = new.tap do |f|
-          f.gapi = nil
           f.grpc = nil
-          f.connection = conn
           f.service = service
         end
         sub.instance_eval do
-          @name = conn.subscription_path(name, options)
+          @name = service.subscription_path(name, options)
         end
         sub
       end
@@ -100,7 +88,7 @@ module Gcloud
       #
       def topic
         ensure_grpc!
-        Topic.new_lazy @grpc.topic, connection, service
+        Topic.new_lazy @grpc.topic, service
       end
 
       ##
@@ -145,7 +133,7 @@ module Gcloud
       #   sub.exists? #=> true
       #
       def exists?
-        # Always true if we have a gapi object
+        # Always true if we have a grpc object
         return true unless @grpc.nil?
         # If we have a value, return it
         return @exists unless @exists.nil?
@@ -540,22 +528,11 @@ module Gcloud
       end
 
       ##
-      # @private New {Subscription} from a Google API Client object.
-      def self.from_gapi gapi, conn, service
-        new.tap do |f|
-          f.gapi = gapi
-          f.connection = conn
-          f.service = service
-        end
-      end
-
-      ##
       # @private New Subscription from a Google::Pubsub::V1::Subscription
       # object.
-      def self.from_grpc grpc, connection, service
+      def self.from_grpc grpc, service
         new.tap do |f|
           f.grpc = grpc
-          f.connection = connection
           f.service = service
         end
       end
@@ -563,29 +540,10 @@ module Gcloud
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
-      end
-
-      ##
       # @private Raise an error unless an active connection to the service is
       # available.
       def ensure_service!
         fail "Must have active connection to service" unless service
-      end
-
-      ##
-      # Ensures a Google API object exists.
-      def ensure_gapi!
-        ensure_connection!
-        return @gapi if @gapi
-        resp = connection.get_subscription @name
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
       end
 
       ##

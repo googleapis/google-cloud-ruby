@@ -20,7 +20,7 @@ describe Gcloud::Pubsub::Subscription, :pull, :autoack, :mock_pubsub do
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
   let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
-  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.connection, pubsub.service }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
   let(:rec_msg1_json) { rec_message_json "rec_msg1-msg-goes-here" }
   let(:rec_msg2_json) { rec_message_json "rec_msg2-msg-goes-here" }
   let(:rec_msg3_json) { rec_message_json "rec_msg3-msg-goes-here" }

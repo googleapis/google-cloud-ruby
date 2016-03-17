@@ -17,7 +17,7 @@ require "helper"
 describe "Gcloud Pub/Sub Backoff", :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic) { Gcloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
-                                                pubsub.connection, pubsub.service }
+                                                pubsub.service }
   let(:sub_name) { "session-timed-out-sub" }
 
   it "retries when the session times out" do

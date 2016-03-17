@@ -19,10 +19,10 @@ describe Gcloud::Pubsub::Subscription, :exists, :mock_pubsub do
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json(topic_name, sub_name) }
   let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
-  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.connection, pubsub.service }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "knows if it exists when created with an HTTP method" do
-    # The absense of a mock_connection config means this test will fail
+    # The absense of a mock means this test will fail
     # if the method exists? makes an HTTP call.
     subscription.must_be :exists?
     # Additional exists? calls do not make HTTP calls either
@@ -32,7 +32,7 @@ describe Gcloud::Pubsub::Subscription, :exists, :mock_pubsub do
   describe "lazy subscription object of a subscription that exists" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection, pubsub.service
+                                            pubsub.service
     end
 
     it "checks if the subscription exists by making an HTTP call" do
@@ -54,7 +54,7 @@ describe Gcloud::Pubsub::Subscription, :exists, :mock_pubsub do
   describe "lazy subscription object of a subscription that does not exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection, pubsub.service
+                                            pubsub.service
     end
 
     it "checks if the subscription exists by making an HTTP call" do

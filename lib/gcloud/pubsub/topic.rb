@@ -36,16 +36,8 @@ module Gcloud
     #
     class Topic
       ##
-      # @private The Connection object.
-      attr_accessor :connection
-
-      ##
       # @private The gRPC Service object.
       attr_accessor :service
-
-      ##
-      # @private The Google API Client object.
-      attr_accessor :gapi
 
       ##
       # @private The gRPC Google::Pubsub::V1::Topic object.
@@ -62,10 +54,9 @@ module Gcloud
 
       ##
       # @private New lazy {Topic} object without making an HTTP request.
-      def self.new_lazy name, conn, service, options = {}
+      def self.new_lazy name, service, options = {}
         new.tap do |t|
           t.grpc = nil
-          t.connection = conn
           t.service = service
           t.instance_eval do
             @name = service.topic_path(name, options)
@@ -153,7 +144,7 @@ module Gcloud
         ensure_service!
         options = { deadline: deadline, endpoint: endpoint }
         grpc = service.create_subscription name, subscription_name, options
-        Subscription.from_grpc grpc, connection, service
+        Subscription.from_grpc grpc, service
       rescue GRPC::BadStatus => e
         raise Error.from_error(e)
       end
@@ -194,11 +185,9 @@ module Gcloud
       #
       def subscription subscription_name, skip_lookup: nil
         ensure_service!
-        if skip_lookup
-          return Subscription.new_lazy subscription_name, connection, service
-        end
+        return Subscription.new_lazy subscription_name, service if skip_lookup
         grpc = service.get_subscription subscription_name
-        Subscription.from_grpc grpc, connection, service
+        Subscription.from_grpc grpc, service
       rescue GRPC::BadStatus => e
         return nil if e.code == 5
         raise Error.from_error(e)
@@ -251,7 +240,7 @@ module Gcloud
         ensure_service!
         options = { token: token, max: max }
         grpc = service.list_topics_subscriptions name, options
-        Subscription::List.from_grpc grpc, connection, service
+        Subscription::List.from_grpc grpc, service
       rescue GRPC::BadStatus => e
         raise Error.from_error(e)
       end
@@ -478,21 +467,10 @@ module Gcloud
       end
 
       ##
-      # @private New {Topic} from a Google API Client object.
-      def self.from_gapi gapi, conn, service
-        new.tap do |f|
-          f.gapi = gapi
-          f.connection = conn
-          f.service = service
-        end
-      end
-
-      ##
       # @private New Topic from a Google::Pubsub::V1::Topic object.
-      def self.from_grpc grpc, connection, service
+      def self.from_grpc grpc, service
         new.tap do |f|
           f.grpc = grpc
-          f.connection = connection
           f.service = service
         end
       end
@@ -500,25 +478,10 @@ module Gcloud
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
-      end
-
-      ##
       # @private Raise an error unless an active connection to the service is
       # available.
       def ensure_service!
         fail "Must have active connection to service" unless service
-      end
-
-      ##
-      # Ensures a Google API object exists.
-      def ensure_gapi!
-        ensure_connection!
-        return @gapi if @gapi
-        resp = connection.get_topic @name
-        @gapi = resp.data if resp.success?
       end
 
       ##

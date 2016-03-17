@@ -14,7 +14,6 @@
 
 
 require "gcloud/gce"
-require "gcloud/pubsub/connection"
 require "gcloud/pubsub/service"
 require "gcloud/pubsub/credentials"
 require "gcloud/pubsub/errors"
@@ -45,10 +44,6 @@ module Gcloud
     #
     class Project
       ##
-      # @private The Connection object.
-      attr_accessor :connection
-
-      ##
       # @private The gRPC Service object.
       attr_accessor :service
 
@@ -57,7 +52,6 @@ module Gcloud
       def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
-        @connection = Connection.new project, credentials
         @service = Service.new project, credentials
       end
 
@@ -73,7 +67,7 @@ module Gcloud
       #   pubsub.project #=> "my-todo-project"
       #
       def project
-        connection.project
+        service.project
       end
 
       ##
@@ -145,11 +139,9 @@ module Gcloud
       def topic topic_name, autocreate: nil, project: nil, skip_lookup: nil
         ensure_service!
         options = { project: project }
-        if skip_lookup
-          return Topic.new_lazy(topic_name, connection, service, options)
-        end
+        return Topic.new_lazy(topic_name, service, options) if skip_lookup
         grpc = service.get_topic topic_name
-        Topic.from_grpc grpc, connection, service
+        Topic.from_grpc grpc, service
       rescue GRPC::BadStatus => e
         if e.code == 5
           return create_topic(topic_name) if autocreate
@@ -177,7 +169,7 @@ module Gcloud
       def create_topic topic_name
         ensure_service!
         grpc = service.create_topic topic_name
-        Topic.from_grpc grpc, connection, service
+        Topic.from_grpc grpc, service
       rescue GRPC::BadStatus => e
         raise Error.from_error(e)
       end
@@ -227,7 +219,7 @@ module Gcloud
         ensure_service!
         options = { token: token, max: max }
         grpc = service.list_topics options
-        Topic::List.from_grpc grpc, connection, service
+        Topic::List.from_grpc grpc, service
       rescue GRPC::BadStatus => e
         raise Error.from_error(e)
       end
@@ -369,7 +361,7 @@ module Gcloud
         options = { deadline: deadline, endpoint: endpoint }
         grpc = service.create_subscription topic_name,
                                            subscription_name, options
-        Subscription.from_grpc grpc, connection, service
+        Subscription.from_grpc grpc, service
       rescue GRPC::BadStatus => e
         if autocreate && e.code == 5
           create_topic topic_name
@@ -420,11 +412,10 @@ module Gcloud
         ensure_service!
         options = { project: project }
         if skip_lookup
-          return Subscription.new_lazy subscription_name, connection,
-                                       service, options
+          return Subscription.new_lazy subscription_name, service, options
         end
         grpc = service.get_subscription subscription_name
-        Subscription.from_grpc grpc, connection, service
+        Subscription.from_grpc grpc, service
       rescue GRPC::BadStatus => e
         return nil if e.code == 5
         raise Error.from_error(e)
@@ -477,7 +468,7 @@ module Gcloud
         ensure_service!
         options = { prefix: prefix, token: token, max: max }
         grpc = service.list_subscriptions options
-        Subscription::List.from_grpc grpc, connection, service
+        Subscription::List.from_grpc grpc, service
       rescue GRPC::BadStatus => e
         raise Error.from_error(e)
       end
@@ -485,12 +476,6 @@ module Gcloud
       alias_method :list_subscriptions, :subscriptions
 
       protected
-
-      ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
-      end
 
       ##
       # @private Raise an error unless an active connection to the service is

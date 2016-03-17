@@ -17,10 +17,10 @@ require "helper"
 describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic) { Gcloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
-                                                pubsub.connection, pubsub.service }
+                                                pubsub.service }
 
   it "knows if it exists when created with an HTTP method" do
-    # The absense of a mock_connection config means this test will fail
+    # The absense of a mock means this test will fail
     # if the method exists? makes an HTTP call.
     topic.must_be :exists?
     # Additional exists? calls do not make HTTP calls either
@@ -30,7 +30,7 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
   describe "lazy topic object of a topic that exists" do
     describe "lazy topic with default autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection, pubsub.service }
+                                                   pubsub.service }
 
       it "checks if the topic exists by making an HTTP call" do
         get_req = Google::Pubsub::V1::GetTopicRequest.new topic: "projects/#{project}/topics/#{topic_name}"
@@ -49,7 +49,7 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
 
     describe "lazy topic with explicit autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection, pubsub.service,
+                                                   pubsub.service,
                                                    autocreate: true }
 
       it "checks if the topic exists by making an HTTP call" do
@@ -69,7 +69,7 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
 
     describe "lazy topic without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection, pubsub.service,
+                                                   pubsub.service,
                                                    autocreate: false }
 
       it "checks if the topic exists by making an HTTP call" do
@@ -91,7 +91,7 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
   describe "lazy topic object of a topic that does not exist" do
     describe "lazy topic with default autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection, pubsub.service }
+                                                   pubsub.service }
 
       it "checks if the topic exists by making an HTTP call" do
         stub = Object.new
@@ -108,7 +108,7 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
 
     describe "lazy topic with explicit autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection, pubsub.service,
+                                                   pubsub.service,
                                                    autocreate: true }
 
       it "checks if the topic exists by making an HTTP call" do
@@ -126,7 +126,7 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
 
     describe "lazy topic without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection, pubsub.service,
+                                                   pubsub.service,
                                                    autocreate: false }
 
       it "checks if the topic exists by making an HTTP call" do

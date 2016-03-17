@@ -18,7 +18,7 @@ describe Gcloud::Pubsub::Subscription, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:subscription_name) { "subscription-name-goes-here" }
   let(:subscription_grpc) { Google::Pubsub::V1::Subscription.decode_json(subscription_json(topic_name, subscription_name)) }
-  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc subscription_grpc, pubsub.connection, pubsub.service }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc subscription_grpc, pubsub.service }
 
   it "knows its name" do
     subscription.name.must_equal subscription_path(subscription_name)

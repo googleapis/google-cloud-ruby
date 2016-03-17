@@ -220,7 +220,7 @@ describe Gcloud::Pubsub, :pubsub do
   describe "IAM Policies and Permissions" do
     let(:topic) { retrieve_topic $topic_names[3] }
     let(:subscription) { retrieve_subscription topic, "#{$topic_prefix}-subIAM" }
-    let(:service_account) { pubsub.connection.credentials.client.issuer }
+    let(:service_account) { pubsub.service.credentials.client.issuer }
 
     it "allows policy to be set on a topic" do
       # Check permissions first

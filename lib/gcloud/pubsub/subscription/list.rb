@@ -38,12 +38,12 @@ module Gcloud
         ##
         # @private New Subscriptions::List from a
         # Google::Pubsub::V1::ListSubscriptionsRequest object.
-        def self.from_grpc grpc_list, conn, service
+        def self.from_grpc grpc_list, service
           subs = Array(grpc_list.subscriptions).map do |grpc|
             if grpc.is_a? String
-              Subscription.new_lazy grpc, conn, service
+              Subscription.new_lazy grpc, service
             else
-              Subscription.from_grpc grpc, conn, service
+              Subscription.from_grpc grpc, service
             end
           end
           new subs, grpc_list.next_page_token

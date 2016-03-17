@@ -22,10 +22,10 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
   let(:sub_deadline) { sub_hash["ack_deadline_seconds"] }
   let(:sub_endpoint) { sub_hash["push_config"]["push_endpoint"] }
   let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
-  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.connection, pubsub.service }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "gets endpoint from the Google API object" do
-    # No mocked connection means no connections are happening.
+    # No mocked service means no API calls are happening.
     subscription.topic.must_be_kind_of Gcloud::Pubsub::Topic
     subscription.topic.must_be :lazy?
     subscription.topic.name.must_equal topic_path(topic_name)
@@ -59,7 +59,7 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
   describe "lazy subscription object of a subscription that does exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection, pubsub.service
+                                            pubsub.service
     end
 
     it "makes an HTTP API call to retrieve topic" do
@@ -122,7 +122,7 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
   describe "lazy subscription object of a subscription that does not exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection, pubsub.service
+                                            pubsub.service
     end
 
     it "raises NotFoundError when retrieving topic" do
