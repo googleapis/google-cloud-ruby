@@ -14,8 +14,9 @@
 
 
 require "gcloud/gce"
-require "gcloud/datastore/connection"
 require "gcloud/datastore/credentials"
+require "gcloud/datastore/connection"
+require "gcloud/datastore/service"
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
 require "gcloud/datastore/query"
@@ -52,6 +53,10 @@ module Gcloud
       attr_accessor :connection
 
       ##
+      # @private The gRPC Service object.
+      attr_accessor :service
+
+      ##
       # @private Creates a new Dataset instance.
       #
       # See {Gcloud#datastore}
@@ -59,6 +64,7 @@ module Gcloud
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
         @connection = Connection.new project, credentials
+        @service = Service.new project, credentials
       end
 
       ##
@@ -275,7 +281,7 @@ module Gcloud
       #   end
       #
       def transaction
-        tx = Transaction.new connection
+        tx = Transaction.new connection, service
         return tx unless block_given?
 
         begin

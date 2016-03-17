@@ -23,7 +23,8 @@ describe Gcloud::Datastore::Transaction do
     mock.expect :begin_transaction, begin_transaction_response
     mock
   end
-  let(:transaction) { Gcloud::Datastore::Transaction.new connection }
+  let(:service) { OpenStruct.new }
+  let(:transaction) { Gcloud::Datastore::Transaction.new connection, service }
   let(:commit_response) do
     Gcloud::Datastore::Proto::CommitResponse.new.tap do |response|
       response.mutation_result = Gcloud::Datastore::Proto::MutationResult.new
