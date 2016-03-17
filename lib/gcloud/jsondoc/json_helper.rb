@@ -8,6 +8,15 @@ module Gcloud
         json.title object.title.split("::") # Array of namespaces + name
         json.description md(object.docstring, true)
         json.source object.files.first.join("#L")
+
+        if object.type == :method
+          if object.constructor?
+            json.type "constructor"
+          else
+            json.type object.scope.to_s
+          end
+        end
+
         json.resources object.docstring.tags(:see) do |t|
           json.title md(t.text)
           json.link t.name
