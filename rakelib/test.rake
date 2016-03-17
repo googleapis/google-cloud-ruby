@@ -439,7 +439,7 @@ namespace :test do
       Rake::Task["test:acceptance:dns:cleanup"].invoke
       Rake::Task["test:acceptance:logging:cleanup"].invoke
       Rake::Task["test:acceptance:pubsub:cleanup"].invoke
-      Rake::Task["test:acceptance:search:cleanup"].invoke
+      # Rake::Task["test:acceptance:search:cleanup"].invoke
       Rake::Task["test:acceptance:storage:cleanup"].invoke
     end
   end
