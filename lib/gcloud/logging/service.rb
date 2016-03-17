@@ -160,7 +160,7 @@ module Gcloud
           sink_name: sink_path(name)
         )
 
-        sinks.delete_sink delete_req
+        backoff { sinks.delete_sink delete_req }
       end
 
       def list_metrics token: nil, max: nil
