@@ -186,4 +186,48 @@ describe Gcloud::Datastore::Key do
     key.namespace.must_equal "custom-ns"
     key.must_be :frozen?
   end
+
+  it "returns a correct GRPC object" do
+    key = Gcloud::Datastore::Key.new "ThisThing", 1234
+    grpc = key.to_grpc
+    grpc.path.count.must_equal 1
+    grpc.path.last.kind.must_equal "ThisThing"
+    grpc.path.last.id.must_equal 1234
+    grpc.path.last.name.must_be :nil?
+    grpc.partition_id.must_be :nil?
+
+    key = Gcloud::Datastore::Key.new "ThisThing", "charlie"
+    key.parent = Gcloud::Datastore::Key.new "ThatThing", "henry"
+    key.dataset_id = "custom-ds"
+    key.namespace = "custom-ns"
+    grpc = key.to_grpc
+    grpc.path.count.must_equal 2
+    grpc.path.first.kind.must_equal "ThatThing"
+    grpc.path.first.id.must_be :nil?
+    grpc.path.first.name.must_equal "henry"
+    grpc.path.last.kind.must_equal "ThisThing"
+    grpc.path.last.id.must_be :nil?
+    grpc.path.last.name.must_equal "charlie"
+    grpc.partition_id.project_id.must_equal "custom-ds"
+    grpc.partition_id.namespace_id.must_equal "custom-ns"
+  end
+
+  it "can be created with a GRPC object" do
+    grpc = Google::Datastore::V1beta3::Key.new
+    grpc.path << Google::Datastore::V1beta3::Key::PathElement.new(
+      kind: "AnotherThing", id: 56789
+    )
+    grpc.partition_id = Google::Datastore::V1beta3::PartitionId.new(
+      project_id: "custom-ds", namespace_id: "custom-ns"
+    )
+    key = Gcloud::Datastore::Key.from_grpc grpc
+
+    key.wont_be :nil?
+    key.kind.must_equal "AnotherThing"
+    key.id.must_equal 56789
+    key.name.must_be :nil?
+    key.dataset_id.must_equal "custom-ds"
+    key.namespace.must_equal "custom-ns"
+    key.must_be :frozen?
+  end
 end

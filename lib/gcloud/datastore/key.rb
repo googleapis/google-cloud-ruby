@@ -261,6 +261,45 @@ module Gcloud
         key
       end
       # rubocop:enable all
+
+      ##
+      # @private Convert the Key to a Google::Datastore::V1beta3::Key object.
+      def to_grpc
+        grpc_path = path.map do |pe_kind, pe_id_or_name|
+          path_args = { kind: pe_kind }
+          if pe_id_or_name.is_a? Integer
+            path_args[:id] = pe_id_or_name
+          else
+            path_args[:name] = pe_id_or_name
+          end
+          Google::Datastore::V1beta3::Key::PathElement.new(path_args)
+        end
+        grpc = Google::Datastore::V1beta3::Key.new(path: grpc_path)
+        if dataset_id || namespace
+          grpc.partition_id = Google::Datastore::V1beta3::PartitionId.new(
+            project_id: dataset_id, namespace_id: namespace)
+        end
+        grpc
+      end
+
+      ##
+      # @private Create a new Key from a Google::Datastore::V1beta3::Key object.
+      def self.from_grpc grpc
+        key_grpc = grpc.dup
+        key = Key.new
+        path_grpc = key_grpc.path.pop
+        if path_grpc
+          key = Key.new path_grpc.kind, (path_grpc.id || path_grpc.name)
+        end
+        if key_grpc.partition_id
+          key.dataset_id = key_grpc.partition_id.project_id
+          key.namespace  = key_grpc.partition_id.namespace_id
+        end
+        key.parent = Key.from_grpc(key_grpc) if key_grpc.path.count > 0
+        # Freeze the key to make it immutable.
+        key.freeze
+        key
+      end
     end
   end
 end
