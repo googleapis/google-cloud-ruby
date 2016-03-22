@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "gcloud/pubsub/errors"
+require "gcloud/errors"
 require "gcloud/pubsub/subscription/list"
 require "gcloud/pubsub/received_message"
 
@@ -37,31 +37,31 @@ module Gcloud
     #
     class Subscription
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The gRPC Service object.
+      attr_accessor :service
 
       ##
-      # @private The Google API Client object.
-      attr_accessor :gapi
+      # @private The gRPC Google::Pubsub::V1::Subscription object.
+      attr_accessor :grpc
 
       ##
       # @private Create an empty {Subscription} object.
       def initialize
-        @connection = nil
-        @gapi = {}
+        @service = nil
+        @grpc = Google::Pubsub::V1::Subscription.new
         @name = nil
         @exists = nil
       end
 
       ##
       # @private New lazy {Topic} object without making an HTTP request.
-      def self.new_lazy name, conn, options = {}
+      def self.new_lazy name, service, options = {}
         sub = new.tap do |f|
-          f.gapi = nil
-          f.connection = conn
+          f.grpc = nil
+          f.service = service
         end
         sub.instance_eval do
-          @name = conn.subscription_path(name, options)
+          @name = service.subscription_path(name, options)
         end
         sub
       end
@@ -69,7 +69,7 @@ module Gcloud
       ##
       # The name of the subscription.
       def name
-        @gapi ? @gapi["name"] : @name
+        @grpc ? @grpc.name : @name
       end
 
       ##
@@ -87,36 +87,37 @@ module Gcloud
       #   sub.topic.name #=> "projects/my-project/topics/my-topic"
       #
       def topic
-        ensure_gapi!
-        Topic.new_lazy @gapi["topic"], connection
+        ensure_grpc!
+        Topic.new_lazy @grpc.topic, service
       end
 
       ##
       # This value is the maximum number of seconds after a subscriber receives
       # a message before the subscriber should acknowledge the message.
       def deadline
-        ensure_gapi!
-        @gapi["ackDeadlineSeconds"]
+        ensure_grpc!
+        @grpc.ack_deadline_seconds
       end
 
       ##
       # Returns the URL locating the endpoint to which messages should be
       # pushed.
       def endpoint
-        ensure_gapi!
-        @gapi["pushConfig"]["pushEndpoint"] if @gapi["pushConfig"]
+        ensure_grpc!
+        @grpc.push_config.push_endpoint if @grpc.push_config
       end
 
       ##
       # Sets the URL locating the endpoint to which messages should be pushed.
       def endpoint= new_endpoint
-        ensure_connection!
-        resp = connection.modify_push_config name, new_endpoint, {}
-        if resp.success?
-          @gapi["pushConfig"]["pushEndpoint"] = new_endpoint if @gapi
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.modify_push_config name, new_endpoint, {}
+        @grpc.push_config = Google::Pubsub::V1::PushConfig.new(
+          push_endpoint: new_endpoint,
+          attributes: {}
+        ) if @grpc
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
@@ -132,13 +133,13 @@ module Gcloud
       #   sub.exists? #=> true
       #
       def exists?
-        # Always true if we have a gapi object
-        return true unless @gapi.nil?
+        # Always true if we have a grpc object
+        return true unless @grpc.nil?
         # If we have a value, return it
         return @exists unless @exists.nil?
-        ensure_gapi!
-        @exists = !@gapi.nil?
-      rescue NotFoundError
+        ensure_grpc!
+        @exists = !@grpc.nil?
+      rescue Gcloud::NotFoundError
         @exists = false
       end
 
@@ -157,7 +158,7 @@ module Gcloud
       #   sub.lazy? #=> false
       #
       def lazy?
-        @gapi.nil?
+        @grpc.nil?
       end
 
       ##
@@ -176,13 +177,11 @@ module Gcloud
       #   sub.delete
       #
       def delete
-        ensure_connection!
-        resp = connection.delete_subscription name
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.delete_subscription name
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
@@ -233,18 +232,16 @@ module Gcloud
       #   msgs.each { |msg| msg.acknowledge! }
       #
       def pull immediate: true, max: 100, autoack: false
-        ensure_connection!
+        ensure_service!
         options = { immediate: immediate, max: max }
-        resp = connection.pull name, options
-        if resp.success?
-          messages = Array(resp.data["receivedMessages"]).map do |gapi|
-            ReceivedMessage.from_gapi gapi, self
-          end
-          acknowledge messages if autoack
-          messages
-        else
-          fail ApiError.from_response(resp)
+        list_grpc = service.pull name, options
+        messages = Array(list_grpc.received_messages).map do |msg_grpc|
+          ReceivedMessage.from_grpc msg_grpc, self
         end
+        acknowledge messages if autoack
+        messages
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       rescue Faraday::TimeoutError
         []
       end
@@ -359,13 +356,11 @@ module Gcloud
       #
       def acknowledge *messages
         ack_ids = coerce_ack_ids messages
-        ensure_connection!
-        resp = connection.acknowledge name, *ack_ids
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.acknowledge name, *ack_ids
+        true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :ack, :acknowledge
 
@@ -396,13 +391,11 @@ module Gcloud
       #
       def delay new_deadline, *messages
         ack_ids = coerce_ack_ids messages
-        ensure_connection!
-        resp = connection.modify_ack_deadline name, ack_ids, new_deadline
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.modify_ack_deadline name, ack_ids, new_deadline
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
@@ -448,12 +441,11 @@ module Gcloud
       def policy force: nil
         @policy = nil if force
         @policy ||= begin
-          ensure_connection!
-          resp = connection.get_subscription_policy name
-          fail ApiError.from_response(resp) unless resp.success?
-          policy = resp.data
-          policy = policy.to_hash if policy.respond_to? :to_hash
-          policy
+          ensure_service!
+          grpc = service.get_subscription_policy name
+          JSON.parse(Google::Iam::V1::Policy.encode_json(grpc))
+        rescue GRPC::BadStatus => e
+          raise Error.from_error(e)
         end
       end
 
@@ -486,14 +478,11 @@ module Gcloud
       #   subscription.policy = viewer_policy
       #
       def policy= new_policy
-        ensure_connection!
-        resp = connection.set_subscription_policy name, new_policy
-        if resp.success?
-          @policy = resp.data["policy"]
-          @policy = @policy.to_hash if @policy.respond_to? :to_hash
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        grpc = service.set_subscription_policy name, new_policy
+        @policy = JSON.parse(Google::Iam::V1::Policy.encode_json(grpc))
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
@@ -531,43 +520,40 @@ module Gcloud
       #
       def test_permissions *permissions
         permissions = Array(permissions).flatten
-        ensure_connection!
-        resp = connection.test_subscription_permissions name, permissions
-        if resp.success?
-          Array(resp.data["permissions"])
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        grpc = service.test_subscription_permissions name, permissions
+        grpc.permissions
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
-      # @private New {Subscription} from a Google API Client object.
-      def self.from_gapi gapi, conn
+      # @private New Subscription from a Google::Pubsub::V1::Subscription
+      # object.
+      def self.from_grpc grpc, service
         new.tap do |f|
-          f.gapi = gapi
-          f.connection = conn
+          f.grpc = grpc
+          f.service = service
         end
       end
 
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      # @private Raise an error unless an active connection to the service is
+      # available.
+      def ensure_service!
+        fail "Must have active connection to service" unless service
       end
 
       ##
-      # Ensures a Google API object exists.
-      def ensure_gapi!
-        ensure_connection!
-        return @gapi if @gapi
-        resp = connection.get_subscription @name
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+      # Ensures a Google::Pubsub::V1::Subscription object exists.
+      def ensure_grpc!
+        ensure_service!
+        return @grpc if @grpc
+        @grpc = service.get_subscription @name
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##

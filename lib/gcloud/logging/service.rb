@@ -16,6 +16,7 @@
 require "google/logging/v2/logging_services"
 require "google/logging/v2/logging_config_services"
 require "google/logging/v2/logging_metrics_services"
+require "gcloud/backoff"
 
 module Gcloud
   module Logging

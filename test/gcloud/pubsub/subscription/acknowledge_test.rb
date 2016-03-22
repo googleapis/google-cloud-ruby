@@ -19,243 +19,317 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
-  let :subscription do
-    Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection
-  end
-  let(:rec_message1) { Gcloud::Pubsub::ReceivedMessage.from_gapi \
-                  JSON.parse(rec_message_json("rec_message1-msg-goes-here")), subscription }
-  let(:rec_message2) { Gcloud::Pubsub::ReceivedMessage.from_gapi \
-                  JSON.parse(rec_message_json("rec_message2-msg-goes-here")), subscription }
-  let(:rec_message3) { Gcloud::Pubsub::ReceivedMessage.from_gapi \
-                  JSON.parse(rec_message_json("rec_message3-msg-goes-here")), subscription }
+  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
+  let(:rec_msg1_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
+                  rec_message_json("rec_message1-msg-goes-here") }
+  let(:rec_msg2_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
+                  rec_message_json("rec_message2-msg-goes-here") }
+  let(:rec_msg3_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
+                  rec_message_json("rec_message3-msg-goes-here") }
+  let(:rec_message1) { Gcloud::Pubsub::ReceivedMessage.from_grpc rec_msg1_grpc, subscription }
+  let(:rec_message2) { Gcloud::Pubsub::ReceivedMessage.from_grpc rec_msg2_grpc, subscription }
+  let(:rec_message3) { Gcloud::Pubsub::ReceivedMessage.from_grpc rec_msg3_grpc, subscription }
 
   it "can acknowledge an ack id" do
     ack_id = rec_message1.ack_id
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal [ack_id]
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+      subscription: subscription_path(sub_name),
+      ack_ids: [ack_id]
+    )
+    ack_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :acknowledge, ack_res, [ack_req]
+    subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge ack_id
+
+    mock.verify
   end
 
   it "can acknowledge many ack ids" do
     ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal ack_ids
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+      subscription: subscription_path(sub_name),
+      ack_ids: ack_ids
+    )
+    ack_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :acknowledge, ack_res, [ack_req]
+    subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge(*ack_ids)
+
+    mock.verify
   end
 
   it "can acknowledge many ack ids in an array" do
     ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal ack_ids
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+      subscription: subscription_path(sub_name),
+      ack_ids: ack_ids
+    )
+    ack_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :acknowledge, ack_res, [ack_req]
+    subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge ack_ids
+
+    mock.verify
   end
 
   it "can acknowledge a message" do
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal [rec_message1.ack_id]
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+      subscription: subscription_path(sub_name),
+      ack_ids: [rec_message1.ack_id]
+    )
+    ack_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :acknowledge, ack_res, [ack_req]
+    subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge rec_message1
+
+    mock.verify
   end
 
   it "can acknowledge many messages" do
     rec_messages  = [rec_message1, rec_message3, rec_message3]
     ack_ids = rec_messages.map(&:ack_id)
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal ack_ids
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+      subscription: subscription_path(sub_name),
+      ack_ids: ack_ids
+    )
+    ack_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :acknowledge, ack_res, [ack_req]
+    subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge(*rec_messages)
+
+    mock.verify
   end
 
   it "can acknowledge many messages in an array" do
     rec_messages  = [rec_message1, rec_message3, rec_message3]
     ack_ids = rec_messages.map(&:ack_id)
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal ack_ids
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+      subscription: subscription_path(sub_name),
+      ack_ids: ack_ids
+    )
+    ack_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :acknowledge, ack_res, [ack_req]
+    subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge rec_messages
+
+    mock.verify
   end
 
   describe "lazy subscription object of a subscription that does exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection
+                                            pubsub.service
     end
 
     it "can acknowledge an ack id" do
       ack_id = rec_message1.ack_id
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal [ack_id]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+        subscription: subscription_path(sub_name),
+        ack_ids: [ack_id]
+      )
+      ack_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :acknowledge, ack_res, [ack_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge ack_id
+
+      mock.verify
     end
 
     it "can acknowledge many ack ids" do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal ack_ids
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+        subscription: subscription_path(sub_name),
+        ack_ids: ack_ids
+      )
+      ack_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :acknowledge, ack_res, [ack_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge(*ack_ids)
+
+      mock.verify
     end
 
     it "can acknowledge many ack ids in an array" do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal ack_ids
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+        subscription: subscription_path(sub_name),
+        ack_ids: ack_ids
+      )
+      ack_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :acknowledge, ack_res, [ack_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge ack_ids
+
+      mock.verify
     end
 
     it "can acknowledge a message" do
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal [rec_message1.ack_id]
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+        subscription: subscription_path(sub_name),
+        ack_ids: [rec_message1.ack_id]
+      )
+      ack_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :acknowledge, ack_res, [ack_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge rec_message1
+
+      mock.verify
     end
 
     it "can acknowledge many messages" do
       rec_messages  = [rec_message1, rec_message3, rec_message3]
       ack_ids = rec_messages.map(&:ack_id)
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal ack_ids
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+        subscription: subscription_path(sub_name),
+        ack_ids: ack_ids
+      )
+      ack_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :acknowledge, ack_res, [ack_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge(*rec_messages)
+
+      mock.verify
     end
 
     it "can acknowledge many messages in an array" do
       rec_messages  = [rec_message1, rec_message3, rec_message3]
       ack_ids = rec_messages.map(&:ack_id)
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal ack_ids
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+        subscription: subscription_path(sub_name),
+        ack_ids: ack_ids
+      )
+      ack_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :acknowledge, ack_res, [ack_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge rec_messages
+
+      mock.verify
     end
   end
 
   describe "lazy subscription object of a subscription that does not exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection
+                                            pubsub.service
     end
 
     it "raises NotFoundError when acknowledging an ack id" do
       ack_id = rec_message1.ack_id
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal [ack_id]
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.acknowledge *args
+        raise GRPC::BadStatus.new(5, "not found")
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.acknowledge ack_id
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
 
     it "raises NotFoundError when acknowledging many ack ids" do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal ack_ids
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.acknowledge *args
+        raise GRPC::BadStatus.new(5, "not found")
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.acknowledge(*ack_ids)
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
 
     it "raises NotFoundError when acknowledging many ack ids in an array" do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal ack_ids
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.acknowledge *args
+        raise GRPC::BadStatus.new(5, "not found")
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.acknowledge ack_ids
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
 
     it "raises NotFoundError when acknowledging a message" do
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal [rec_message1.ack_id]
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.acknowledge *args
+        raise GRPC::BadStatus.new(5, "not found")
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.acknowledge rec_message1
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
 
     it "raises NotFoundError when acknowledging many messages" do
       rec_messages  = [rec_message1, rec_message3, rec_message3]
       ack_ids = rec_messages.map(&:ack_id)
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal ack_ids
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.acknowledge *args
+        raise GRPC::BadStatus.new(5, "not found")
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.acknowledge(*rec_messages)
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
 
     it "raises NotFoundError when acknowledging many messages in an array" do
       rec_messages  = [rec_message1, rec_message3, rec_message3]
       ack_ids = rec_messages.map(&:ack_id)
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:acknowledge" do |env|
-        JSON.parse(env.body)["ackIds"].must_equal ack_ids
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.acknowledge *args
+        raise GRPC::BadStatus.new(5, "not found")
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.acknowledge rec_messages
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
   end
 end

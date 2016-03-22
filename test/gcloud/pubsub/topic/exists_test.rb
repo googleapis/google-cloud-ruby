@@ -16,11 +16,11 @@ require "helper"
 
 describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
-                                                pubsub.connection }
+  let(:topic) { Gcloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
+                                                pubsub.service }
 
   it "knows if it exists when created with an HTTP method" do
-    # The absense of a mock_connection config means this test will fail
+    # The absense of a mock means this test will fail
     # if the method exists? makes an HTTP call.
     topic.must_be :exists?
     # Additional exists? calls do not make HTTP calls either
@@ -30,51 +30,60 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
   describe "lazy topic object of a topic that exists" do
     describe "lazy topic with default autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection }
+                                                   pubsub.service }
 
       it "checks if the topic exists by making an HTTP call" do
-        mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}" do |env|
-          [200, {"Content-Type"=>"application/json"},
-           topic_json(topic_name)]
-        end
+        get_req = Google::Pubsub::V1::GetTopicRequest.new topic: "projects/#{project}/topics/#{topic_name}"
+        get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
+        mock = Minitest::Mock.new
+        mock.expect :get_topic, get_res, [get_req]
+        topic.service.mocked_publisher = mock
 
         topic.must_be :exists?
         # Additional exists? calls do not make HTTP calls
         topic.must_be :exists?
+
+        mock.verify
       end
     end
 
     describe "lazy topic with explicit autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection,
+                                                   pubsub.service,
                                                    autocreate: true }
 
       it "checks if the topic exists by making an HTTP call" do
-        mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}" do |env|
-          [200, {"Content-Type"=>"application/json"},
-           topic_json(topic_name)]
-        end
+        get_req = Google::Pubsub::V1::GetTopicRequest.new topic: "projects/#{project}/topics/#{topic_name}"
+        get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
+        mock = Minitest::Mock.new
+        mock.expect :get_topic, get_res, [get_req]
+        topic.service.mocked_publisher = mock
 
         topic.must_be :exists?
         # Additional exists? calls do not make HTTP calls
         topic.must_be :exists?
+
+        mock.verify
       end
     end
 
     describe "lazy topic without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection,
+                                                   pubsub.service,
                                                    autocreate: false }
 
       it "checks if the topic exists by making an HTTP call" do
-        mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}" do |env|
-          [200, {"Content-Type"=>"application/json"},
-           topic_json(topic_name)]
-        end
+        get_req = Google::Pubsub::V1::GetTopicRequest.new topic: "projects/#{project}/topics/#{topic_name}"
+        get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
+        mock = Minitest::Mock.new
+        mock.expect :get_topic, get_res, [get_req]
+        topic.service.mocked_publisher = mock
 
         topic.must_be :exists?
         # Additional exists? calls do not make HTTP calls
         topic.must_be :exists?
+
+        mock.verify
       end
     end
   end
@@ -82,13 +91,14 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
   describe "lazy topic object of a topic that does not exist" do
     describe "lazy topic with default autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection }
+                                                   pubsub.service }
 
       it "checks if the topic exists by making an HTTP call" do
-        mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}" do |env|
-          [404, {"Content-Type"=>"application/json"},
-           not_found_error_json(topic_name)]
+        stub = Object.new
+        def stub.get_topic *args
+          raise GRPC::BadStatus.new 5, "not found"
         end
+        topic.service.mocked_publisher = stub
 
         topic.wont_be :exists?
         # Additional exists? calls do not make HTTP calls
@@ -98,14 +108,15 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
 
     describe "lazy topic with explicit autocreate" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection,
+                                                   pubsub.service,
                                                    autocreate: true }
 
       it "checks if the topic exists by making an HTTP call" do
-        mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}" do |env|
-          [404, {"Content-Type"=>"application/json"},
-           not_found_error_json(topic_name)]
+        stub = Object.new
+        def stub.get_topic *args
+          raise GRPC::BadStatus.new 5, "not found"
         end
+        topic.service.mocked_publisher = stub
 
         topic.wont_be :exists?
         # Additional exists? calls do not make HTTP calls
@@ -115,14 +126,15 @@ describe Gcloud::Pubsub::Topic, :exists, :mock_pubsub do
 
     describe "lazy topic without autocomplete" do
       let(:topic) { Gcloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.connection,
+                                                   pubsub.service,
                                                    autocreate: false }
 
       it "checks if the topic exists by making an HTTP call" do
-        mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}" do |env|
-          [404, {"Content-Type"=>"application/json"},
-           not_found_error_json(topic_name)]
+        stub = Object.new
+        def stub.get_topic *args
+          raise GRPC::BadStatus.new 5, "not found"
         end
+        topic.service.mocked_publisher = stub
 
         topic.wont_be :exists?
         # Additional exists? calls do not make HTTP calls

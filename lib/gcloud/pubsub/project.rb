@@ -14,9 +14,9 @@
 
 
 require "gcloud/gce"
-require "gcloud/pubsub/connection"
+require "gcloud/errors"
+require "gcloud/pubsub/service"
 require "gcloud/pubsub/credentials"
-require "gcloud/pubsub/errors"
 require "gcloud/pubsub/topic"
 
 module Gcloud
@@ -44,15 +44,15 @@ module Gcloud
     #
     class Project
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The gRPC Service object.
+      attr_accessor :service
 
       ##
       # @private Creates a new Connection instance.
       def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
-        @connection = Connection.new project, credentials
+        @service = Service.new project, credentials
       end
 
       # The Pub/Sub project connected to.
@@ -67,7 +67,7 @@ module Gcloud
       #   pubsub.project #=> "my-todo-project"
       #
       def project
-        connection.project
+        service.project
       end
 
       ##
@@ -137,16 +137,17 @@ module Gcloud
       #   topic = pubsub.topic "another-topic", skip_lookup: true
       #
       def topic topic_name, autocreate: nil, project: nil, skip_lookup: nil
-        ensure_connection!
+        ensure_service!
         options = { project: project }
-        return Topic.new_lazy(topic_name, connection, options) if skip_lookup
-        resp = connection.get_topic topic_name
-        return Topic.from_gapi(resp.data, connection) if resp.success?
-        if resp.status == 404
+        return Topic.new_lazy(topic_name, service, options) if skip_lookup
+        grpc = service.get_topic topic_name
+        Topic.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        if e.code == 5
           return create_topic(topic_name) if autocreate
           return nil
         end
-        fail ApiError.from_response(resp)
+        raise Error.from_error(e)
       end
       alias_method :get_topic, :topic
       alias_method :find_topic, :topic
@@ -166,13 +167,11 @@ module Gcloud
       #   topic = pubsub.create_topic "my-topic"
       #
       def create_topic topic_name
-        ensure_connection!
-        resp = connection.create_topic topic_name
-        if resp.success?
-          Topic.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        grpc = service.create_topic topic_name
+        Topic.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :new_topic, :create_topic
 
@@ -217,14 +216,12 @@ module Gcloud
       #   end
       #
       def topics token: nil, max: nil
-        ensure_connection!
+        ensure_service!
         options = { token: token, max: max }
-        resp = connection.list_topics options
-        if resp.success?
-          Topic::List.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        grpc = service.list_topics options
+        Topic::List.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_topics, :topics
       alias_method :list_topics, :topics
@@ -294,7 +291,7 @@ module Gcloud
         end
         # extract autocreate option
         autocreate = attributes.delete :autocreate
-        ensure_connection!
+        ensure_service!
         batch = Topic::Batch.new data, attributes
         yield batch if block_given?
         return nil if batch.messages.count.zero?
@@ -360,18 +357,19 @@ module Gcloud
       #
       def subscribe topic_name, subscription_name, deadline: nil, endpoint: nil,
                     autocreate: nil
-        ensure_connection!
+        ensure_service!
         options = { deadline: deadline, endpoint: endpoint }
-        resp = connection.create_subscription topic_name,
-                                              subscription_name, options
-        return Subscription.from_gapi(resp.data, connection) if resp.success?
-        if autocreate && resp.status == 404
+        grpc = service.create_subscription topic_name,
+                                           subscription_name, options
+        Subscription.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        if autocreate && e.code == 5
           create_topic topic_name
           return subscribe(topic_name, subscription_name,
                            deadline: deadline, endpoint: endpoint,
                            autocreate: false)
         end
-        fail ApiError.from_response(resp)
+        raise Error.from_error(e)
       end
       alias_method :create_subscription, :subscribe
       alias_method :new_subscription, :subscribe
@@ -411,15 +409,16 @@ module Gcloud
       #   puts subscription.name
       #
       def subscription subscription_name, project: nil, skip_lookup: nil
-        ensure_connection!
+        ensure_service!
         options = { project: project }
         if skip_lookup
-          return Subscription.new_lazy(subscription_name, connection, options)
+          return Subscription.new_lazy subscription_name, service, options
         end
-        resp = connection.get_subscription subscription_name
-        return Subscription.from_gapi(resp.data, connection) if resp.success?
-        return nil if resp.status == 404
-        fail ApiError.from_response(resp)
+        grpc = service.get_subscription subscription_name
+        Subscription.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        return nil if e.code == 5
+        raise Error.from_error(e)
       end
       alias_method :get_subscription, :subscription
       alias_method :find_subscription, :subscription
@@ -466,14 +465,12 @@ module Gcloud
       #   end
       #
       def subscriptions prefix: nil, token: nil, max: nil
-        ensure_connection!
+        ensure_service!
         options = { prefix: prefix, token: token, max: max }
-        resp = connection.list_subscriptions options
-        if resp.success?
-          Subscription::List.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        grpc = service.list_subscriptions options
+        Subscription::List.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_subscriptions, :subscriptions
       alias_method :list_subscriptions, :subscriptions
@@ -481,22 +478,23 @@ module Gcloud
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      # @private Raise an error unless an active connection to the service is
+      # available.
+      def ensure_service!
+        fail "Must have active connection to service" unless service
       end
 
       ##
       # Call the publish API with arrays of data data and attrs.
       def publish_batch_messages topic_name, batch, autocreate = false
-        resp = connection.publish topic_name, batch.messages
-        if resp.success?
-          batch.to_gcloud_messages resp.data["messageIds"]
-        elsif autocreate && resp.status == 404
+        grpc = service.publish topic_name, batch.messages
+        batch.to_gcloud_messages Array(grpc.message_ids)
+      rescue GRPC::BadStatus => e
+        if autocreate && e.code == 5
           create_topic topic_name
           publish_batch_messages topic_name, batch, false
         else
-          fail ApiError.from_response(resp)
+          raise Error.from_error(e)
         end
       end
     end

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "gcloud/pubsub/errors"
+require "gcloud/errors"
 require "gcloud/pubsub/message"
 
 module Gcloud
@@ -42,26 +42,26 @@ module Gcloud
       attr_accessor :subscription
 
       ##
-      # @private The Google API Client object.
-      attr_accessor :gapi
+      # @private The gRPC Google::Pubsub::V1::ReceivedMessage object.
+      attr_accessor :grpc
 
       ##
       # @private Create an empty {Subscription} object.
       def initialize
         @subscription = nil
-        @gapi = {}
+        @grpc = Google::Pubsub::V1::ReceivedMessage.new
       end
 
       ##
       # The acknowledgment ID for the message.
       def ack_id
-        @gapi["ackId"]
+        @grpc.ack_id
       end
 
       ##
       # The received message.
       def message
-        Message.from_gapi @gapi["message"]
+        Message.from_grpc @grpc.message
       end
       alias_method :msg, :message
 
@@ -135,22 +135,16 @@ module Gcloud
       #
       def delay! new_deadline
         ensure_subscription!
-        connection = subscription.connection
-        resp = connection.modify_ack_deadline subscription.name,
-                                              ack_id, new_deadline
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        subscription.delay new_deadline, ack_id
       end
 
       ##
-      # @private New ReceivedMessage from a Google API Client object.
-      def self.from_gapi gapi, subscription
-        new.tap do |f|
-          f.gapi         = gapi
-          f.subscription = subscription
+      # @private New ReceivedMessage from a Google::Pubsub::V1::ReceivedMessage
+      # object.
+      def self.from_grpc grpc, subscription
+        new.tap do |rm|
+          rm.grpc         = grpc
+          rm.subscription = subscription
         end
       end
 

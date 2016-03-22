@@ -16,18 +16,17 @@ require "helper"
 
 describe Gcloud::Pubsub::ReceivedMessage, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
-                                                pubsub.connection }
+  let(:topic) { Gcloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
+                                                pubsub.service }
   let(:subscription_name) { "subscription-name-goes-here" }
-  let :subscription do
-    json = JSON.parse(subscription_json(topic_name, subscription_name))
-    Gcloud::Pubsub::Subscription.from_gapi json, pubsub.connection
-  end
+  let(:subscription_grpc) { Google::Pubsub::V1::Subscription.decode_json(subscription_json(topic_name, subscription_name)) }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc subscription_grpc, pubsub.service }
   let(:rec_message_name) { "rec_message-name-goes-here" }
   let(:rec_message_msg)  { "rec_message-msg-goes-here" }
-  let(:rec_message_data)  { JSON.parse(rec_message_json(rec_message_msg)) }
-  let(:rec_message) { Gcloud::Pubsub::ReceivedMessage.from_gapi rec_message_data,
-                                                subscription }
+  let(:rec_message_json_full)  { rec_message_json(rec_message_msg) }
+  let(:rec_message_data)  { JSON.parse rec_message_json_full }
+  let(:rec_message_grpc)  { Google::Pubsub::V1::ReceivedMessage.decode_json rec_message_json_full }
+  let(:rec_message) { Gcloud::Pubsub::ReceivedMessage.from_grpc rec_message_grpc, subscription }
 
   it "knows its subscription" do
     rec_message.subscription.wont_be :nil?
@@ -35,15 +34,16 @@ describe Gcloud::Pubsub::ReceivedMessage, :mock_pubsub do
   end
 
   it "knows its ack_id" do
-    rec_message.ack_id.must_equal rec_message_data["ackId"]
+    rec_message.ack_id.must_equal rec_message_data["ack_id"]
   end
 
   it "has a message" do
     rec_message.message.wont_be :nil?
-    rec_message.message.data.must_equal rec_message_data["message"]["data"]
-    rec_message.message.attributes.must_equal rec_message_data["message"]["attributes"]
-    rec_message.message.msg_id.must_equal rec_message_data["message"]["messageId"]
-    rec_message.message.message_id.must_equal rec_message_data["message"]["messageId"]
+    rec_message.message.data.must_equal rec_message_msg
+    rec_message.message.attributes.keys.sort.must_equal   rec_message_data["message"]["attributes"].keys.sort
+    rec_message.message.attributes.values.sort.must_equal rec_message_data["message"]["attributes"].values.sort
+    rec_message.message.msg_id.must_equal rec_message_data["message"]["message_id"]
+    rec_message.message.message_id.must_equal rec_message_data["message"]["message_id"]
   end
 
   it "knows the message's data" do
@@ -60,34 +60,50 @@ describe Gcloud::Pubsub::ReceivedMessage, :mock_pubsub do
   end
 
   it "can acknowledge" do
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
-      JSON.parse(env.body)["ackIds"].count.must_equal 1
-      JSON.parse(env.body)["ackIds"].first.must_equal rec_message.ack_id
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+      subscription: subscription_path(subscription_name),
+      ack_ids: [rec_message.ack_id]
+    )
+    ack_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :acknowledge, ack_res, [ack_req]
+    subscription.service.mocked_subscriber = mock
 
     rec_message.acknowledge!
+
+    mock.verify
   end
 
   it "can ack" do
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:acknowledge" do |env|
-      JSON.parse(env.body)["ackIds"].count.must_equal 1
-      JSON.parse(env.body)["ackIds"].first.must_equal rec_message.ack_id
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
+      subscription: subscription_path(subscription_name),
+      ack_ids: [rec_message.ack_id]
+    )
+    ack_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :acknowledge, ack_res, [ack_req]
+    subscription.service.mocked_subscriber = mock
 
     rec_message.ack!
+
+    mock.verify
   end
 
   it "can delay" do
     new_deadline = 42
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{subscription_name}:modifyAckDeadline" do |env|
-      JSON.parse(env.body)["ackIds"].must_equal             [rec_message.ack_id]
-      JSON.parse(env.body)["ackDeadlineSeconds"].must_equal new_deadline
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mad_req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+      subscription: "projects/#{project}/subscriptions/#{subscription_name}",
+      ack_ids: [rec_message.ack_id],
+      ack_deadline_seconds: new_deadline
+    )
+    mad_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :modify_ack_deadline, mad_res, [mad_req]
+    subscription.service.mocked_subscriber = mock
 
     rec_message.delay! new_deadline
+
+    mock.verify
   end
 end

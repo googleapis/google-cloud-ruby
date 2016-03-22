@@ -19,18 +19,26 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
-  let :subscription do
-    Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection
-  end
+  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "can pull messages" do
     rec_message_msg = "pulled-message"
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       rec_messages_json(rec_message_msg)]
-    end
+
+    pull_req = Google::Pubsub::V1::PullRequest.new(
+      subscription: subscription_path(sub_name),
+      return_immediately: true,
+      max_messages: 100
+    )
+    pull_res = Google::Pubsub::V1::PullResponse.decode_json rec_messages_json(rec_message_msg)
+    mock = Minitest::Mock.new
+    mock.expect :pull, pull_res, [pull_req]
+    subscription.service.mocked_subscriber = mock
 
     rec_messages = subscription.pull
+
+    mock.verify
+
     rec_messages.wont_be :empty?
     rec_messages.first.message.data.must_equal rec_message_msg
   end
@@ -38,17 +46,26 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
   describe "lazy subscription object of a subscription that does exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection
+                                            pubsub.service
     end
 
     it "can pull messages" do
       rec_message_msg = "pulled-message"
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-        [200, {"Content-Type"=>"application/json"},
-         rec_messages_json(rec_message_msg)]
-      end
+
+      pull_req = Google::Pubsub::V1::PullRequest.new(
+        subscription: subscription_path(sub_name),
+        return_immediately: true,
+        max_messages: 100
+      )
+      pull_res = Google::Pubsub::V1::PullResponse.decode_json rec_messages_json(rec_message_msg)
+      mock = Minitest::Mock.new
+      mock.expect :pull, pull_res, [pull_req]
+      subscription.service.mocked_subscriber = mock
 
       rec_messages = subscription.pull
+
+      mock.verify
+
       rec_messages.wont_be :empty?
       rec_messages.first.message.data.must_equal rec_message_msg
     end
@@ -57,18 +74,19 @@ describe Gcloud::Pubsub::Subscription, :pull, :mock_pubsub do
   describe "lazy subscription object of a subscription that does not exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection
+                                            pubsub.service
     end
 
     it "raises NotFoundError when pulling messages" do
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:pull" do |env|
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.pull *args
+        raise GRPC::BadStatus.new 5, "not found"
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.pull
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
   end
 end

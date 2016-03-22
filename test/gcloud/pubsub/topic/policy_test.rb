@@ -16,8 +16,8 @@ require "helper"
 
 describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Gcloud::Pubsub::Topic.from_gapi JSON.parse(topic_json(topic_name)),
-                                                pubsub.connection }
+  let(:topic) { Gcloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
+                                                pubsub.service }
 
   it "gets the IAM Policy" do
     policy_json = {
@@ -31,12 +31,18 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
       }]
     }.to_json
 
-    mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}:getIamPolicy" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       policy_json]
-    end
+    get_req = Google::Iam::V1::GetIamPolicyRequest.new(
+      resource: "projects/#{project}/topics/#{topic_name}"
+    )
+    get_res = Google::Iam::V1::Policy.decode_json policy_json
+    mock = Minitest::Mock.new
+    mock.expect :get_iam_policy, get_res, [get_req]
+    topic.service.mocked_iam = mock
 
     policy = topic.policy
+
+    mock.verify
+
     policy.must_be_kind_of Hash
     policy["bindings"].count.must_equal 1
     policy["bindings"].first["role"].must_equal "roles/viewer"
@@ -92,10 +98,13 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
       }]
     }.to_json
 
-    mock_connection.get "/v1/projects/#{project}/topics/#{topic_name}:getIamPolicy" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       policy_json]
-    end
+    get_req = Google::Iam::V1::GetIamPolicyRequest.new(
+      resource: "projects/#{project}/topics/#{topic_name}"
+    )
+    get_res = Google::Iam::V1::Policy.decode_json policy_json
+    mock = Minitest::Mock.new
+    mock.expect :get_iam_policy, get_res, [get_req]
+    topic.service.mocked_iam = mock
 
     topic.instance_variable_set "@policy", policy_hash
     returned_policy = topic.policy
@@ -107,6 +116,9 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
     returned_policy["bindings"].first["members"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
 
     policy = topic.policy force: true
+
+    mock.verify
+
     policy.must_be_kind_of Hash
     policy["bindings"].count.must_equal 1
     policy["bindings"].first["role"].must_equal "roles/owner"
@@ -126,18 +138,19 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
       }],
     }
 
-    mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:setIamPolicy" do |env|
-      json_policy = JSON.parse env.body
-      json_policy["policy"]["bindings"].count.must_equal 1
-      json_policy["policy"]["bindings"].first["role"].must_equal "roles/owner"
-      json_policy["policy"]["bindings"].first["members"].count.must_equal 2
-      json_policy["policy"]["bindings"].first["members"].first.must_equal "user:owner@example.com"
-      json_policy["policy"]["bindings"].first["members"].last.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
-      [200, {"Content-Type"=>"application/json"},
-       { "policy" => new_policy }.to_json]
-    end
+    set_req = Google::Iam::V1::SetIamPolicyRequest.new(
+      resource: "projects/#{project}/topics/#{topic_name}",
+      policy: Google::Iam::V1::Policy.decode_json(JSON.dump(new_policy))
+    )
+    set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
+    mock = Minitest::Mock.new
+    mock.expect :set_iam_policy, set_res, [set_req]
+    topic.service.mocked_iam = mock
 
     topic.policy = new_policy
+
+    mock.verify
+
     # Setting the policy also memoizes the policy
     topic.policy["bindings"].count.must_equal 1
     topic.policy["bindings"].first["role"].must_equal "roles/owner"
@@ -147,17 +160,22 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
   end
 
   it "tests the available permissions" do
-    mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:testIamPermissions" do |env|
-      json_permissions = JSON.parse env.body
-      json_permissions["permissions"].count.must_equal 2
-      json_permissions["permissions"].first.must_equal "pubsub.topics.get"
-      json_permissions["permissions"].last.must_equal  "pubsub.topics.publish"
-      [200, {"Content-Type"=>"application/json"},
-       { "permissions" => ["pubsub.topics.get"] }.to_json]
-    end
+    test_req = Google::Iam::V1::TestIamPermissionsRequest.new(
+      resource: "projects/#{project}/topics/#{topic_name}",
+      permissions: ["pubsub.topics.get", "pubsub.topics.publish"]
+    )
+    test_res = Google::Iam::V1::TestIamPermissionsResponse.new(
+      permissions: ["pubsub.topics.get"]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :test_iam_permissions, test_res, [test_req]
+    topic.service.mocked_iam = mock
 
     permissions = topic.test_permissions "pubsub.topics.get",
                                          "pubsub.topics.publish"
+
+    mock.verify
+
     permissions.must_equal ["pubsub.topics.get"]
   end
 end

@@ -19,10 +19,8 @@ describe Gcloud::Pubsub::Subscription, :name, :mock_pubsub do
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_path) { subscription_path sub_name }
   let(:sub_json) { subscription_json topic_name, sub_name }
-  let :subscription do
-    json = JSON.parse(sub_json)
-    Gcloud::Pubsub::Subscription.from_gapi json, pubsub.connection
-  end
+  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "is not lazy when created with an HTTP method" do
     subscription.wont_be :lazy?
@@ -31,7 +29,7 @@ describe Gcloud::Pubsub::Subscription, :name, :mock_pubsub do
   describe "lazy subscription" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection
+                                            pubsub.service
     end
 
     it "is lazy" do

@@ -13,8 +13,8 @@
 # limitations under the License.
 
 
-require "json"
-require "gcloud/pubsub/errors"
+require "gcloud/errors"
+require "gcloud/pubsub/topic/batch"
 require "gcloud/pubsub/topic/list"
 require "gcloud/pubsub/subscription"
 
@@ -36,30 +36,30 @@ module Gcloud
     #
     class Topic
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The gRPC Service object.
+      attr_accessor :service
 
       ##
-      # @private The Google API Client object.
-      attr_accessor :gapi
+      # @private The gRPC Google::Pubsub::V1::Topic object.
+      attr_accessor :grpc
 
       ##
       # @private Create an empty {Topic} object.
       def initialize
-        @connection = nil
-        @gapi = {}
+        @service = nil
+        @grpc = Google::Pubsub::V1::Topic.new
         @name = nil
         @exists = nil
       end
 
       ##
       # @private New lazy {Topic} object without making an HTTP request.
-      def self.new_lazy name, conn, options = {}
+      def self.new_lazy name, service, options = {}
         new.tap do |t|
-          t.gapi = nil
-          t.connection = conn
+          t.grpc = nil
+          t.service = service
           t.instance_eval do
-            @name = conn.topic_path(name, options)
+            @name = service.topic_path(name, options)
           end
         end
       end
@@ -68,7 +68,7 @@ module Gcloud
       # The name of the topic in the form of
       # "/projects/project-identifier/topics/topic-name".
       def name
-        @gapi ? @gapi["name"] : @name
+        @grpc ? @grpc.name : @name
       end
 
       ##
@@ -86,13 +86,11 @@ module Gcloud
       #   topic.delete
       #
       def delete
-        ensure_connection!
-        resp = connection.delete_topic name
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.delete_topic name
+        return true
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
@@ -143,14 +141,12 @@ module Gcloud
       #                         endpoint: "https://example.com/push"
       #
       def subscribe subscription_name, deadline: nil, endpoint: nil
-        ensure_connection!
+        ensure_service!
         options = { deadline: deadline, endpoint: endpoint }
-        resp = connection.create_subscription name, subscription_name, options
-        if resp.success?
-          Subscription.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        grpc = service.create_subscription name, subscription_name, options
+        Subscription.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :create_subscription, :subscribe
       alias_method :new_subscription, :subscribe
@@ -188,14 +184,13 @@ module Gcloud
       #   puts subscription.name
       #
       def subscription subscription_name, skip_lookup: nil
-        ensure_connection!
-        if skip_lookup
-          return Subscription.new_lazy(subscription_name, connection)
-        end
-        resp = connection.get_subscription subscription_name
-        return Subscription.from_gapi(resp.data, connection) if resp.success?
-        return nil if resp.status == 404
-        fail ApiError.from_response(resp)
+        ensure_service!
+        return Subscription.new_lazy subscription_name, service if skip_lookup
+        grpc = service.get_subscription subscription_name
+        Subscription.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        return nil if e.code == 5
+        raise Error.from_error(e)
       end
       alias_method :get_subscription, :subscription
       alias_method :find_subscription, :subscription
@@ -242,14 +237,12 @@ module Gcloud
       #   end
       #
       def subscriptions token: nil, max: nil
-        ensure_connection!
+        ensure_service!
         options = { token: token, max: max }
-        resp = connection.list_topics_subscriptions name, options
-        if resp.success?
-          Subscription::List.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        grpc = service.list_topics_subscriptions name, options
+        Subscription::List.from_grpc grpc, service
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
       alias_method :find_subscriptions, :subscriptions
       alias_method :list_subscriptions, :subscriptions
@@ -300,7 +293,7 @@ module Gcloud
       #   end
       #
       def publish data = nil, attributes = {}
-        ensure_connection!
+        ensure_service!
         batch = Batch.new data, attributes
         yield batch if block_given?
         return nil if batch.messages.count.zero?
@@ -347,12 +340,11 @@ module Gcloud
       def policy force: nil
         @policy = nil if force
         @policy ||= begin
-          ensure_connection!
-          resp = connection.get_topic_policy name
-          fail ApiError.from_response(resp) unless resp.success?
-          policy = resp.data
-          policy = policy.to_hash if policy.respond_to? :to_hash
-          policy
+          ensure_service!
+          grpc = service.get_topic_policy name
+          JSON.parse(Google::Iam::V1::Policy.encode_json(grpc))
+        rescue GRPC::BadStatus => e
+          raise Error.from_error(e)
         end
       end
 
@@ -385,14 +377,11 @@ module Gcloud
       #   topic.policy = viewer_policy
       #
       def policy= new_policy
-        ensure_connection!
-        resp = connection.set_topic_policy name, new_policy
-        if resp.success?
-          @policy = resp.data["policy"]
-          @policy = @policy.to_hash if @policy.respond_to? :to_hash
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        grpc = service.set_topic_policy name, new_policy
+        @policy = JSON.parse(Google::Iam::V1::Policy.encode_json(grpc))
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
@@ -431,13 +420,12 @@ module Gcloud
       #
       def test_permissions *permissions
         permissions = Array(permissions).flatten
-        ensure_connection!
-        resp = connection.test_topic_permissions name, permissions
-        if resp.success?
-          Array(resp.data["permissions"])
-        else
-          fail ApiError.from_response(resp)
-        end
+        permissions = Array(permissions).flatten
+        ensure_service!
+        grpc = service.test_topic_permissions name, permissions
+        grpc.permissions
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
 
       ##
@@ -453,12 +441,12 @@ module Gcloud
       #   topic.exists? #=> true
       #
       def exists?
-        # Always true if we have a gapi object
-        return true unless @gapi.nil?
+        # Always true if we have a grpc object
+        return true unless @grpc.nil?
         # If we have a value, return it
         return @exists unless @exists.nil?
-        ensure_gapi!
-        @exists = !@gapi.nil?
+        ensure_grpc!
+        @exists = !@grpc.nil?
       end
 
       ##
@@ -475,97 +463,45 @@ module Gcloud
       #   topic.lazy? #=> false
       #
       def lazy?
-        @gapi.nil?
+        @grpc.nil?
       end
 
       ##
-      # @private New {Topic} from a Google API Client object.
-      def self.from_gapi gapi, conn
+      # @private New Topic from a Google::Pubsub::V1::Topic object.
+      def self.from_grpc grpc, service
         new.tap do |f|
-          f.gapi = gapi
-          f.connection = conn
+          f.grpc = grpc
+          f.service = service
         end
       end
 
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      # @private Raise an error unless an active connection to the service is
+      # available.
+      def ensure_service!
+        fail "Must have active connection to service" unless service
       end
 
       ##
-      # Ensures a Google API object exists.
-      def ensure_gapi!
-        ensure_connection!
-        return @gapi if @gapi
-        resp = connection.get_topic @name
-        @gapi = resp.data if resp.success?
+      # Ensures a Google::Pubsub::V1::Topic object exists.
+      def ensure_grpc!
+        ensure_service!
+        return @grpc if @grpc
+        @grpc = service.get_topic @name
+      rescue GRPC::BadStatus => e
+        return nil if e.code == 5
+        raise Error.from_error(e)
       end
 
       ##
       # Call the publish API with arrays of data data and attrs.
       def publish_batch_messages batch
-        resp = connection.publish name, batch.messages
-        if resp.success?
-          batch.to_gcloud_messages resp.data["messageIds"]
-        else
-          fail ApiError.from_response(resp)
-        end
-      end
-
-      ##
-      # Batch object used to publish multiple messages at once.
-      class Batch
-        ##
-        # @private The messages to publish
-        attr_reader :messages
-
-        ##
-        # @private Create a new instance of the object.
-        def initialize data = nil, attributes = {}
-          @messages = []
-          @mode = :batch
-          return if data.nil?
-          @mode = :single
-          publish data, attributes
-        end
-
-        ##
-        # Add multiple messages to the topic.
-        # All messages added will be published at once.
-        # See {Gcloud::Pubsub::Topic#publish}
-        def publish data, attributes = {}
-          @messages << [data, attributes]
-        end
-
-        ##
-        # @private Create Message objects with message ids.
-        def to_gcloud_messages message_ids
-          msgs = @messages.zip(Array(message_ids)).map do |arr, id|
-            Message.from_gapi "data"       => arr[0],
-                              "attributes" => jsonify_hash(arr[1]),
-                              "messageId"  => id
-          end
-          # Return just one Message if a single publish,
-          # otherwise return the array of Messages.
-          if @mode == :single && msgs.count <= 1
-            msgs.first
-          else
-            msgs
-          end
-        end
-
-        protected
-
-        ##
-        # Make the hash look like it was returned from the Cloud API.
-        def jsonify_hash hash
-          hash = (hash || {}).to_h
-          return hash if hash.empty?
-          JSON.parse(JSON.dump(hash))
-        end
+        grpc = service.publish name, batch.messages
+        batch.to_gcloud_messages Array(grpc.message_ids)
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
     end
   end

@@ -19,14 +19,13 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
-  let(:sub_deadline) { sub_hash["ackDeadlineSeconds"] }
-  let(:sub_endpoint) { sub_hash["pushConfig"]["pushEndpoint"] }
-  let :subscription do
-    Gcloud::Pubsub::Subscription.from_gapi sub_hash, pubsub.connection
-  end
+  let(:sub_deadline) { sub_hash["ack_deadline_seconds"] }
+  let(:sub_endpoint) { sub_hash["push_config"]["push_endpoint"] }
+  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Gcloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "gets endpoint from the Google API object" do
-    # No mocked connection means no connections are happening.
+    # No mocked service means no API calls are happening.
     subscription.topic.must_be_kind_of Gcloud::Pubsub::Topic
     subscription.topic.must_be :lazy?
     subscription.topic.name.must_equal topic_path(topic_name)
@@ -43,112 +42,137 @@ describe Gcloud::Pubsub::Subscription, :attributes, :mock_pubsub do
   it "can update the endpoint" do
     new_push_endpoint = "https://foo.bar/baz"
 
-    mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyPushConfig" do |env|
-      JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal new_push_endpoint
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mpc_req = Google::Pubsub::V1::ModifyPushConfigRequest.new(
+                subscription: "projects/#{project}/subscriptions/#{sub_name}",
+                push_config: Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
+              )
+    mpc_res = Google::Protobuf::Empty.new
+    mock = Minitest::Mock.new
+    mock.expect :modify_push_config, mpc_res, [mpc_req]
+    pubsub.service.mocked_subscriber = mock
 
     subscription.endpoint = new_push_endpoint
+
+    mock.verify
   end
 
   describe "lazy subscription object of a subscription that does exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection
+                                            pubsub.service
     end
 
     it "makes an HTTP API call to retrieve topic" do
-      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
-        [200, {"Content-Type"=>"application/json"},
-         sub_json]
-      end
+      get_req = Google::Pubsub::V1::GetSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{sub_name}"
+      get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+      mock = Minitest::Mock.new
+      mock.expect :get_subscription, get_res, [get_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.topic.must_be_kind_of Gcloud::Pubsub::Topic
+
+      mock.verify
+
       subscription.topic.must_be :lazy?
       subscription.topic.name.must_equal topic_path(topic_name)
     end
 
     it "makes an HTTP API call to retrieve deadline" do
-      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
-        [200, {"Content-Type"=>"application/json"},
-         sub_json]
-      end
+      get_req = Google::Pubsub::V1::GetSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{sub_name}"
+      get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+      mock = Minitest::Mock.new
+      mock.expect :get_subscription, get_res, [get_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.deadline.must_equal sub_deadline
+
+      mock.verify
     end
 
     it "makes an HTTP API call to retrieve endpoint" do
-      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
-        [200, {"Content-Type"=>"application/json"},
-         sub_json]
-      end
+      get_req = Google::Pubsub::V1::GetSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{sub_name}"
+      get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+      mock = Minitest::Mock.new
+      mock.expect :get_subscription, get_res, [get_req]
+      subscription.service.mocked_subscriber = mock
 
       subscription.endpoint.must_equal sub_endpoint
+
+      mock.verify
     end
 
     it "makes an HTTP API call to update endpoint" do
       new_push_endpoint = "https://foo.bar/baz"
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyPushConfig" do |env|
-        JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal new_push_endpoint
-        [200, {"Content-Type"=>"application/json"}, ""]
-      end
+      mpc_req = Google::Pubsub::V1::ModifyPushConfigRequest.new(
+                  subscription: "projects/#{project}/subscriptions/#{sub_name}",
+                  push_config: Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
+                )
+      mpc_res = Google::Protobuf::Empty.new
+      mock = Minitest::Mock.new
+      mock.expect :modify_push_config, mpc_res, [mpc_req]
+      pubsub.service.mocked_subscriber = mock
 
       subscription.endpoint = new_push_endpoint
+
+      mock.verify
     end
   end
 
   describe "lazy subscription object of a subscription that does not exist" do
     let :subscription do
       Gcloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.connection
+                                            pubsub.service
     end
 
     it "raises NotFoundError when retrieving topic" do
-      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.get_subscription *args
+        raise GRPC::BadStatus.new(5, "not found")
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.topic
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
 
     it "raises NotFoundError when retrieving deadline" do
-      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.get_subscription *args
+        raise GRPC::BadStatus.new(5, "not found")
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.deadline
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
 
     it "raises NotFoundError when retrieving endpoint" do
-      mock_connection.get "/v1/projects/#{project}/subscriptions/#{sub_name}" do |env|
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.get_subscription *args
+        raise GRPC::BadStatus.new(5, "not found")
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.endpoint
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
 
     it "raises NotFoundError when updating endpoint" do
       new_push_endpoint = "https://foo.bar/baz"
 
-      mock_connection.post "/v1/projects/#{project}/subscriptions/#{sub_name}:modifyPushConfig" do |env|
-        JSON.parse(env.body)["pushConfig"]["pushEndpoint"].must_equal new_push_endpoint
-        [404, {"Content-Type"=>"application/json"},
-         not_found_error_json(sub_name)]
+      stub = Object.new
+      def stub.modify_push_config *args
+        raise GRPC::BadStatus.new(5, "not found")
       end
+      subscription.service.mocked_subscriber = stub
 
       expect do
         subscription.endpoint = new_push_endpoint
-      end.must_raise Gcloud::Pubsub::NotFoundError
+      end.must_raise Gcloud::NotFoundError
     end
   end
 end

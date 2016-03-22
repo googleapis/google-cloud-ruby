@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "gcloud/pubsub/errors"
+require "gcloud/errors"
 
 module Gcloud
   module Pubsub
@@ -45,45 +45,50 @@ module Gcloud
     #
     class Message
       ##
-      # @private The Google API Client object.
-      attr_accessor :gapi
+      # @private The gRPC Google::Pubsub::V1::PubsubMessage object.
+      attr_accessor :grpc
 
       ##
       # Create an empty Message object.
       # This can be used to publish several messages in bulk.
       def initialize data = nil, attributes = {}
-        @gapi               = {}
-        @gapi["data"]       = data
-        @gapi["attributes"] = attributes
+        # Convert attributes to strings to match the protobuf definition
+        attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
+
+        @grpc = Google::Pubsub::V1::PubsubMessage.new(
+          data: String(data).encode("ASCII-8BIT"),
+          attributes: attributes)
       end
 
       ##
       # The received data.
       def data
-        @gapi["data"]
+        @grpc.data
       end
 
       ##
       # The received attributes.
       def attributes
-        attrs = @gapi["attributes"]
-        attrs = attrs.to_hash if attrs.respond_to? :to_hash
-        attrs
+        return @grpc.attributes.to_h if @grpc.attributes.respond_to? :to_h
+        # Enumerable doesn't have to_h on Ruby 2.0, so fallback to this
+        Hash[@grpc.attributes.to_a]
       end
 
       ##
       # The ID of this message, assigned by the server at publication time.
       # Guaranteed to be unique within the topic.
       def message_id
-        @gapi["messageId"]
+        @grpc.message_id
       end
       alias_method :msg_id, :message_id
 
       ##
-      # @private New {Topic} from a Google API Client object.
-      def self.from_gapi gapi
-        new.tap do |f|
-          f.gapi = gapi
+      # @private New Message from a Google::Pubsub::V1::PubsubMessage object.
+      def self.from_grpc grpc
+        new.tap do |m|
+          m.instance_eval do
+            @grpc = grpc
+          end
         end
       end
     end

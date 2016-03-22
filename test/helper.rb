@@ -144,34 +144,16 @@ class MockStorage < Minitest::Spec
 end
 
 class MockPubsub < Minitest::Spec
-  let(:project) { pubsub.connection.project }
-  let(:credentials) { pubsub.connection.credentials }
-  let(:pubsub) { $gcloud_pubsub_global ||= Gcloud::Pubsub::Project.new("test", OpenStruct.new) }
-
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    connection = pubsub.instance_variable_get "@connection"
-    client = connection.instance_variable_get "@client"
-    client.connection = Faraday.new do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
-  end
-
-  def teardown
-    @connection.verify_stubbed_calls
-  end
-
-  def mock_connection
-    @connection
-  end
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
+  let(:pubsub) { $gcloud_pubsub_global ||= Gcloud::Pubsub::Project.new(project, credentials) }
 
   def topics_json num_topics, token = nil
     topics = num_topics.times.map do
       JSON.parse(topic_json("topic-#{rand 1000}"))
     end
     data = { "topics" => topics }
-    data["nextPageToken"] = token unless token.nil?
+    data["next_page_token"] = token unless token.nil?
     data.to_json
   end
 
@@ -179,12 +161,21 @@ class MockPubsub < Minitest::Spec
     { "name" => topic_path(topic_name) }.to_json
   end
 
+  def topic_subscriptions_json topic_name, num_subs, token = nil
+    subs = num_subs.times.map do
+      subscription_path("sub-#{rand 1000}")
+    end
+    data = { "subscriptions" => subs }
+    data["next_page_token"] = token unless token.nil?
+    data.to_json
+  end
+
   def subscriptions_json topic_name, num_subs, token = nil
     subs = num_subs.times.map do
       JSON.parse(subscription_json(topic_name, "sub-#{rand 1000}"))
     end
     data = { "subscriptions" => subs }
-    data["nextPageToken"] = token unless token.nil?
+    data["next_page_token"] = token unless token.nil?
     data.to_json
   end
 
@@ -193,25 +184,25 @@ class MockPubsub < Minitest::Spec
                         endpoint = "http://example.com/callback"
     { "name" => subscription_path(sub_name),
       "topic" => topic_path(topic_name),
-      "pushConfig" => { "pushEndpoint" => endpoint },
-      "ackDeadlineSeconds" => deadline,
+      "push_config" => { "push_endpoint" => endpoint },
+      "ack_deadline_seconds" => deadline,
     }.to_json
   end
 
   def rec_message_json message, id = rand(1000000)
     {
-      "ackId" => "ack-id-#{id}",
+      "ack_id" => "ack-id-#{id}",
       "message" => {
         "data" => [message].pack("m"),
         "attributes" => {},
-        "messageId" => "msg-id-#{id}",
+        "message_id" => "msg-id-#{id}",
       }
     }.to_json
   end
 
   def rec_messages_json message
     {
-      "receivedMessages" => [
+      "received_messages" => [
         JSON.parse(rec_message_json(message))
       ]
     }.to_json
