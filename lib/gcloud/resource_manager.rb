@@ -75,9 +75,9 @@ module Gcloud
   # Currently, the full functionality of the Resource Manager API is available
   # only to whitelisted users. (Contact your account manager or a member of the
   # Google Cloud sales team if you are interested in access.) Read-only methods
-  # such as ResourceManager::Manager#projects and
-  # ResourceManager::Manager#project are accessible to any user who enables the
-  # Resource Manager API in the [Developers
+  # such as {ResourceManager::Manager#projects} and
+  # {ResourceManager::Manager#project} are accessible to any user who enables
+  # the Resource Manager API in the [Developers
   # Console](https://console.developers.google.com).
   #
   # ## Authentication
@@ -108,7 +108,7 @@ module Gcloud
   #
   # Project is a collection of settings, credentials, and metadata about the
   # application or applications you're working on. You can retrieve and inspect
-  # all projects that you have permissions to. (See Manager#projects)
+  # all projects that you have permissions to. (See {Manager#projects})
   #
   # ```ruby
   # require "gcloud"
@@ -122,7 +122,7 @@ module Gcloud
   #
   # ## Managing Projects with Labels
   #
-  # Labels can be added to or removed from projects. (See Project#labels)
+  # Labels can be added to or removed from projects. (See {Project#labels})
   #
   # ```ruby
   # require "gcloud"
@@ -136,7 +136,7 @@ module Gcloud
   # end
   # ```
   #
-  # Projects can then be filtered by labels. (See Manager#projects)
+  # Projects can then be filtered by labels. (See {Manager#projects})
   #
   # ```ruby
   # require "gcloud"
@@ -153,7 +153,7 @@ module Gcloud
   # ## Creating a Project
   #
   # You can also use the API to create new projects. (See
-  # Manager#create_project)
+  # {Manager#create_project})
   #
   # ```ruby
   # require "gcloud"
@@ -168,7 +168,7 @@ module Gcloud
   # ## Deleting a Project
   #
   # You can delete projects when they are no longer needed. (See
-  # Manager#delete and Project#delete)
+  # {Manager#delete} and {Project#delete})
   #
   # ```ruby
   # require "gcloud"
@@ -182,8 +182,8 @@ module Gcloud
   #
   # You can also restore a deleted project within the waiting period that
   # starts when the project was deleted. Restoring a project returns it to the
-  # state it was in prior to being deleted. (See Manager#undelete and
-  # Project#undelete)
+  # state it was in prior to being deleted. (See {Manager#undelete} and
+  # {Project#undelete})
   #
   # ```ruby
   # require "gcloud"
@@ -201,7 +201,7 @@ module Gcloud
   # has access to _what_ (role). See [Cloud IAM
   # Overview](https://cloud.google.com/iam/docs/overview) for more information.
   #
-  # A project's access control policy can be retrieved. (See Project#policy)
+  # A project's access control policy can be retrieved. (See {Project#policy})
   #
   # ```ruby
   # require "gcloud"
@@ -212,7 +212,7 @@ module Gcloud
   # policy = project.policy
   # ```
   #
-  # A project's access control policy can also be set. (See Project#policy=)
+  # A project's access control policy can also be set. (See {Project#policy=})
   #
   # ```ruby
   # require "gcloud"
@@ -230,7 +230,7 @@ module Gcloud
   # project.policy = viewer_policy
   # ```
   #
-  # And permissions can be tested on a project. (See Project#test_permissions)
+  # And permissions can be tested on a project. (See {Project#test_permissions})
   #
   # ```ruby
   # require "gcloud"

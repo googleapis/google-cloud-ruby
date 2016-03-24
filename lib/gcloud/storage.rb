@@ -64,7 +64,7 @@ module Gcloud
   # infrastructure to perform data operations in a cost effective manner.
   #
   # Gcloud's goal is to provide a API that is familiar and comfortable to
-  # Rubyists. Authentication is handled by Gcloud#storage. You can provide the
+  # Rubyists. Authentication is handled by {Gcloud#storage}. You can provide the
   # project and credential information to connect to the Storage service, or if
   # you are running on Google Compute Engine this configuration is taken care
   # of for you.
@@ -92,7 +92,7 @@ module Gcloud
   # A Bucket is the container for your data. There is no limit on the number of
   # buckets that you can create in a project. You can use buckets to organize
   # and control access to your data. Each bucket has a unique name, which is how
-  # they are retrieved: (See Project#bucket)
+  # they are retrieved: (See {Project#bucket})
   #
   # ```ruby
   # require "gcloud"
@@ -103,7 +103,7 @@ module Gcloud
   # bucket = storage.bucket "my-todo-app"
   # ```
   #
-  # You can also retrieve all buckets on a project: (See Project#buckets)
+  # You can also retrieve all buckets on a project: (See {Project#buckets})
   #
   # ```ruby
   # require "gcloud"
@@ -115,7 +115,7 @@ module Gcloud
   # ```
   #
   # If you have a significant number of buckets, you may need to paginate
-  # through them: (See Bucket::List#token)
+  # through them: (See {Bucket::List#token})
   #
   # ```ruby
   # require "gcloud"
@@ -139,7 +139,7 @@ module Gcloud
   # ## Creating a Bucket
   #
   # A unique name is all that is needed to create a new bucket:
-  # (See Project#create_bucket)
+  # (See {Project#create_bucket})
   #
   # ```ruby
   # require "gcloud"
@@ -158,7 +158,7 @@ module Gcloud
   # no limit on the number of objects that you can create in a bucket.
   #
   # Files are retrieved by their name, which is the path of the file in the
-  # bucket: (See Bucket#file)
+  # bucket: (See {Bucket#file})
   #
   # ```ruby
   # require "gcloud"
@@ -195,7 +195,7 @@ module Gcloud
   # ```
   #
   # If you have a significant number of files, you may need to paginate through
-  # them: (See File::List#token)
+  # them: (See {File::List#token})
   #
   # ```ruby
   # require "gcloud"
@@ -222,7 +222,7 @@ module Gcloud
   #
   # A new File can be uploaded by specifying the location of a file on the local
   # file system, and the name/path that the file should be stored in the bucket.
-  # (See Bucket#create_file)
+  # (See {Bucket#create_file})
   #
   # ```ruby
   # require "gcloud"
@@ -264,7 +264,7 @@ module Gcloud
   #
   # ## Downloading a File
   #
-  # Files can be downloaded to the local file system. (See File#download)
+  # Files can be downloaded to the local file system. (See {File#download})
   #
   # ```ruby
   # require "gcloud"
@@ -281,7 +281,7 @@ module Gcloud
   #
   # Access without authentication can be granted to a File for a specified
   # period of time. This URL uses a cryptographic signature
-  # of your credentials to access the file. (See File#signed_url)
+  # of your credentials to access the file. (See {File#signed_url})
   #
   # ```ruby
   # require "gcloud"
@@ -297,7 +297,7 @@ module Gcloud
   #
   # ## Controlling Access to a Bucket
   #
-  # Access to a bucket is controlled with Bucket#acl. A bucket has owners,
+  # Access to a bucket is controlled with {Bucket#acl}. A bucket has owners,
   # writers, and readers. Permissions can be granted to an individual user's
   # email address, a group's email address, as well as many predefined lists.
   # See the
@@ -350,8 +350,8 @@ module Gcloud
   # ## Controlling Access to a File
   #
   # Access to a file is controlled in two ways, either by the setting the
-  # default permissions to all files in a bucket with Bucket#default_acl, or by
-  # setting permissions to an individual file with File#acl.
+  # default permissions to all files in a bucket with {Bucket#default_acl}, or
+  # by setting permissions to an individual file with {File#acl}.
   #
   # Access to a file can be granted to a user by appending `"user-"` to the
   # email address:

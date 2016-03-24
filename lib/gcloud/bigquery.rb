@@ -62,7 +62,7 @@ module Gcloud
   # BigQuery?](https://cloud.google.com/bigquery/what-is-bigquery).
   #
   # Gcloud's goal is to provide an API that is familiar and comfortable to
-  # Rubyists. Authentication is handled by Gcloud#bigquery. You can provide
+  # Rubyists. Authentication is handled by {Gcloud#bigquery}. You can provide
   # the project and credential information to connect to the BigQuery service,
   # or if you are running on Google Compute Engine this configuration is taken
   # care of for you. You can read more about the options for connecting in the
@@ -177,7 +177,7 @@ module Gcloud
   #
   # Once you have determined that the job is done and has not failed, you can
   # obtain an instance of Gcloud::Bigquery::QueryData by calling
-  # Gcloud::Bigquery::QueryJob#query_results. The query results for both of
+  # {Gcloud::Bigquery::QueryJob#query_results}. The query results for both of
   # the above examples are stored in temporary tables with a lifetime of about
   # 24 hours. See the final example below for a demonstration of how to store
   # query results in a permanent table.

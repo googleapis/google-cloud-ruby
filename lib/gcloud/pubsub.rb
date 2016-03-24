@@ -65,7 +65,7 @@ module Gcloud
   # applications.
   #
   # Gcloud's goal is to provide a API that is familiar and comfortable to
-  # Rubyists. Authentication is handled by Gcloud#pubsub. You can provide the
+  # Rubyists. Authentication is handled by {Gcloud#pubsub}. You can provide the
   # project and credential information to connect to the Pub/Sub service, or if
   # you are running on Google Compute Engine this configuration is taken care
   # of for you.
@@ -86,7 +86,7 @@ module Gcloud
   # ## Retrieving Topics
   #
   # A Topic is a named resource to which messages are sent by publishers.
-  # A Topic is found by its name. (See Project#topic)
+  # A Topic is found by its name. (See {Project#topic})
   #
   # ```ruby
   # require "gcloud"
@@ -98,7 +98,7 @@ module Gcloud
   #
   # ## Creating a Topic
   #
-  # A Topic is created from a Project. (See Project#create_topic)
+  # A Topic is created from a Project. (See {Project#create_topic})
   #
   # ```ruby
   # require "gcloud"
@@ -112,7 +112,7 @@ module Gcloud
   #
   # A Subscription is a named resource representing the stream of messages from
   # a single, specific Topic, to be delivered to the subscribing application.
-  # A Subscription is found by its name. (See Topic#subscription)
+  # A Subscription is found by its name. (See {Topic#subscription})
   #
   # ```ruby
   # require "gcloud"
@@ -127,8 +127,8 @@ module Gcloud
   #
   # ## Creating a Subscription
   #
-  # A Subscription is created from a Topic. (See Topic#subscribe and
-  # Project#subscribe)
+  # A Subscription is created from a Topic. (See {Topic#subscribe} and
+  # {Project#subscribe})
   #
   # ```ruby
   # require "gcloud"
@@ -160,7 +160,7 @@ module Gcloud
   #
   # Messages are published to a topic. Any message published to a topic without
   # a subscription will be lost. Ensure the topic has a subscription before
-  # publishing. (See Topic#publish and Project#publish)
+  # publishing. (See {Topic#publish} and {Project#publish})
   #
   # ```ruby
   # require "gcloud"
@@ -204,7 +204,7 @@ module Gcloud
   #
   # ## Pulling Messages
   #
-  # Messages are pulled from a Subscription. (See Subscription#pull)
+  # Messages are pulled from a Subscription. (See {Subscription#pull})
   #
   # ```ruby
   # require "gcloud"
@@ -229,7 +229,7 @@ module Gcloud
   # ```
   #
   # The request for messages can also block until messages are available.
-  # (See Subscription#wait_for_messages)
+  # (See {Subscription#wait_for_messages})
   #
   # ```ruby
   # require "gcloud"
@@ -248,7 +248,7 @@ module Gcloud
   #
   # A Message that can be acknowledged is called a ReceivedMessage.
   # ReceivedMessages can be acknowledged one at a time:
-  # (See ReceivedMessage#acknowledge!)
+  # (See {ReceivedMessage#acknowledge!})
   #
   # ```ruby
   # require "gcloud"
@@ -261,7 +261,7 @@ module Gcloud
   # ```
   #
   # Or, multiple messages can be acknowledged in a single API call:
-  # (See Subscription#acknowledge)
+  # (See {Subscription#acknowledge})
   #
   # ```ruby
   # require "gcloud"
@@ -279,7 +279,7 @@ module Gcloud
   # A message must be acknowledged after it is pulled, or Pub/Sub will mark the
   # message for redelivery. The message acknowledgement deadline can delayed if
   # more time is needed. This will allow more time to process the message before
-  # the message is marked for redelivery. (See ReceivedMessage#delay!)
+  # the message is marked for redelivery. (See {ReceivedMessage#delay!})
   #
   # ```ruby
   # require "gcloud"
@@ -314,7 +314,7 @@ module Gcloud
   # ```
   #
   # Multiple messages can be delayed or made available for immediate redelivery:
-  # (See Subscription#delay)
+  # (See {Subscription#delay})
   #
   # ```ruby
   # require "gcloud"
@@ -331,7 +331,7 @@ module Gcloud
   #
   # Long running workers are easy to create with `listen`, which runs an
   # infinitely blocking loop to process messages as they are received. (See
-  # Subscription#listen)
+  # {Subscription#listen})
   #
   # ```ruby
   # require "gcloud"
@@ -379,7 +379,7 @@ module Gcloud
   # ## Working Across Projects
   #
   # All calls to the Pub/Sub service use the same project and credentials
-  # provided to the Gcloud#pubsub method. However, it is common to reference
+  # provided to the {Gcloud#pubsub} method. However, it is common to reference
   # topics or subscriptions in other projects, which can be achieved by using
   # the `project` option. The main credentials must have permissions to the
   # topics and subscriptions in other projects.

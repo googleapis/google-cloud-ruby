@@ -75,7 +75,7 @@ module Gcloud
   #
   # ## Authentication
   #
-  # Authentication is handled by Gcloud#search. You can provide the project and
+  # Authentication is handled by {Gcloud#search}. You can provide the project and
   # credential information to connect to the Cloud Search service, or if you are
   # running on Google Compute Engine this configuration is taken care of for
   # you. You can read more about the options for connecting in the
@@ -201,7 +201,7 @@ module Gcloud
   # [Cloud Search types](https://cloud.google.com/search/documents_indexes#document_fields_field_names_and_multi-valued_fields).
   # The type will be inferred from the value when possible, or you can
   # explicitly specify it by passing a symbol with the `type` option to
-  # Document#add.
+  # {Document#add}.
   #
   # - String (`:atom`, `:html`, `:text`, or `:default`)
   # - Number (`:number`)
