@@ -211,6 +211,7 @@ module Gcloud
       # @param [Symbol, String] order Sort the changes by change sequence.
       #
       #   Acceptable values are:
+      #
       #   * `asc` - Sort by ascending change sequence
       #   * `desc` - Sort by descending change sequence
       #

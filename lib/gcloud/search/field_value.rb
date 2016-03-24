@@ -60,6 +60,7 @@ module Gcloud
       #   number values.
       #
       #   The following values are supported:
+      #
       #   * `:text` - The value is a string with maximum length 1024**2
       #     characters.
       #   * `:html` - The value is an HTML-formatted string with maximum length

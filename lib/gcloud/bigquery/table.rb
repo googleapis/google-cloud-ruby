@@ -450,6 +450,7 @@ module Gcloud
       #   new tables.
       #
       #   The following values are supported:
+      #
       #   * `needed` - Create the table if it does not exist.
       #   * `never` - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
@@ -457,6 +458,7 @@ module Gcloud
       #   the destination table. The default value is `empty`.
       #
       #   The following values are supported:
+      #
       #   * `truncate` - BigQuery overwrites the table data.
       #   * `append` - BigQuery appends the data to the table.
       #   * `empty` - An error will be returned if the destination table already
@@ -509,6 +511,7 @@ module Gcloud
       #   new tables.
       #
       #   The following values are supported:
+      #
       #   * `needed` - Create the table if it does not exist.
       #   * `never` - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
@@ -516,6 +519,7 @@ module Gcloud
       #   the destination table. The default value is `empty`.
       #
       #   The following values are supported:
+      #
       #   * `truncate` - BigQuery overwrites the table data.
       #   * `append` - BigQuery appends the data to the table.
       #   * `empty` - An error will be returned if the destination table already
@@ -549,6 +553,7 @@ module Gcloud
       #   `csv`.
       #
       #   The following values are supported:
+      #
       #   * `csv` - CSV
       #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
       #   * `avro` - [Avro](http://avro.apache.org/)
@@ -601,6 +606,7 @@ module Gcloud
       #   `csv`.
       #
       #   The following values are supported:
+      #
       #   * `csv` - CSV
       #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
       #   * `avro` - [Avro](http://avro.apache.org/)
@@ -609,6 +615,7 @@ module Gcloud
       #   new tables.
       #
       #   The following values are supported:
+      #
       #   * `needed` - Create the table if it does not exist.
       #   * `never` - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
@@ -616,6 +623,7 @@ module Gcloud
       #   the table. The default value is `empty`.
       #
       #   The following values are supported:
+      #
       #   * `truncate` - BigQuery overwrites the table data.
       #   * `append` - BigQuery appends the data to the table.
       #   * `empty` - An error will be returned if the table already contains

@@ -291,6 +291,7 @@ module Gcloud
       #   downloaded file contents are correct. Default is `:md5`.
       #
       #   Acceptable values are:
+      #
       #   * `md5` - Verify file content match using the MD5 hash.
       #   * `crc32c` - Verify file content match using the CRC32c hash.
       #   * `all` - Perform all available file content verification.
@@ -367,6 +368,7 @@ module Gcloud
       #   file.
       #
       #   Acceptable values are:
+      #
       #   * `auth`, `auth_read`, `authenticated`, `authenticated_read`,
       #     `authenticatedRead` - File owner gets OWNER access, and
       #     allAuthenticatedUsers get READER access.
