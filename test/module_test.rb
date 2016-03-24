@@ -6,7 +6,8 @@ describe Gcloud::Jsondoc, :module do
     registry = YARD::Registry.load(["test/fixtures/**/*.rb"], true)
     generator = Gcloud::Jsondoc::Generator.new registry
     generator.build!
-    @doc = generator.docs[0].jbuilder.attributes! # docs[2] in class_test.rb
+    @doc_object = generator.docs[0]
+    @doc = @doc_object.jbuilder.attributes! # docs[2] in class_test.rb
   end
 
   it "must have attributes at root" do
@@ -30,13 +31,30 @@ describe Gcloud::Jsondoc, :module do
       methods = @doc["methods"]
       methods.size.must_equal 1
     end
+
+    it "must have types for types.json" do
+      types = @doc_object.types
+      types.size.must_equal 2
+    end
+
+    it "must have types_subtree for types.json" do
+      types_subtree = @doc_object.types_subtree
+      types_subtree.size.must_equal 10
+    end
+
+    it "must have type data for types.json" do
+      type_data = @doc_object.types.last
+      type_data.full_name.must_equal "example_method-class"
+      type_data.title.must_equal "MyModule"
+      type_data.filepath.must_equal "mymodule.json"
+    end
   end
 
   describe "when a module has a method" do
 
     it "must have metadata" do
       method = @doc["methods"][0]
-      method["id"].must_equal "mymodule.example_method"
+      method["id"].must_equal "example_method-class"
       method["name"].must_equal "example_method"
       method["description"].must_equal "<p>Creates a new object for testing this library, as explained in <a href=\"https://en.wikipedia.org/wiki/Software_testing\">this\narticle on testing</a>.</p>\n\n<p>Each call creates a new instance.</p>"
       method["source"].must_equal "test/fixtures/my_module.rb#L45"

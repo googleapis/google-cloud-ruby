@@ -30,11 +30,19 @@ module Gcloud
         code_obj = YARD::Registry.resolve object.namespace, name, true
         if code_obj.nil?
           name
+        elsif code_obj.type == :method
+          path = code_obj.namespace.path.gsub("::", "/").downcase
+          method_type = get_method_type code_obj
+          method_id = "#{code_obj.name}-#{method_type}"
+          "<a data-custom-type=\"#{path}\" data-method=\"#{method_id}\">#{title || name}</a>"
         else
-          parts = code_obj.path.split "::"
-          path = parts.map(&:downcase).join("/")
+          path = code_obj.path.gsub("::", "/").downcase
           "<a data-custom-type=\"#{path}\">#{title || name}</a>"
         end
+      end
+
+      def get_method_type code_object
+        code_object.constructor? ? "constructor" : code_object.scope.to_s
       end
     end
   end

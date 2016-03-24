@@ -25,10 +25,11 @@ module Gcloud
           FileUtils.mkdir_p(json_path.dirname)
           File.write json_path.to_path, json
         end
+        set_types
         types_builder = Jbuilder.new do |json|
-          json.array! types do |type|
+          json.array! @types do |type|
             json.id type.full_name
-            json.title type.object.title
+            json.title type.title
             json.contents type.filepath
           end
         end
@@ -47,10 +48,10 @@ module Gcloud
 
       ##
       # Returns a flat list from @docs that can be used to produce `types.json`.
-      def types
-        arr = []
+      def set_types
+        @types = []
         docs.each do |doc|
-          arr += doc.subtree.flatten
+          @types += doc.types_subtree
         end
       end
     end

@@ -6,15 +6,22 @@ module Gcloud
       include MarkupHelper, JsonHelper
 
       # object is API defined by YARD's HtmlHelper
-      attr_reader :json, :object
+      attr_reader :title, :type, :full_name, :filepath, :object, :parent
 
-      def initialize json, object
-        @json = json
+      def initialize object, parent
         @object = object
+        @parent = parent
+        @title = parent.title
+        @type = get_method_type @object # MarkupHelper
+        @full_name = "#{object.name}-#{@type}"
+        @filepath = @parent.filepath
       end
 
-      def build!
+      def build json
+        json.id @full_name
+        json.type @type
         metadata json
+
         options = object.docstring.tags(:option)
         # merge options into parent params
         params = object.docstring.tags(:param).inject([]) do |memo, param_tag|
