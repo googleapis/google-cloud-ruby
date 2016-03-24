@@ -21,8 +21,7 @@ module Gcloud
       end
 
       def unwrap_paragraph html
-        match = Regexp.new(/\A<p>(.*)<\/p>\Z/m).match(html)
-        match[1] if match
+        html.sub(/\A<p>/, "").sub(/<\/p>\z/, "")
       end
 
       # API expected by HtmlHelper; overrides BaseHelper#linkify (not included)
