@@ -154,8 +154,8 @@ module Gcloud
   # Because you probably should not block for most BigQuery operations,
   # including querying as well as importing, exporting, and copying data, the
   # BigQuery API enables you to manage longer-running jobs. In the asynchronous
-  # approach to running a query, an instance of Gcloud::Bigquery::QueryJob is
-  # returned, rather than an instance of Gcloud::Bigquery::QueryData.
+  # approach to running a query, an instance of {Gcloud::Bigquery::QueryJob} is
+  # returned, rather than an instance of {Gcloud::Bigquery::QueryData}.
   #
   # ```ruby
   # require "gcloud"
@@ -176,7 +176,7 @@ module Gcloud
   # ```
   #
   # Once you have determined that the job is done and has not failed, you can
-  # obtain an instance of Gcloud::Bigquery::QueryData by calling
+  # obtain an instance of {Gcloud::Bigquery::QueryData} by calling
   # {Gcloud::Bigquery::QueryJob#query_results}. The query results for both of
   # the above examples are stored in temporary tables with a lifetime of about
   # 24 hours. See the final example below for a demonstration of how to store
@@ -185,7 +185,8 @@ module Gcloud
   # ## Creating Datasets and Tables
   #
   # The first thing you need to do in a new BigQuery project is to create a
-  # Gcloud::Bigquery::Dataset. Datasets hold tables and control access to them.
+  # {Gcloud::Bigquery::Dataset}. Datasets hold tables and control access to
+  # them.
   #
   # ```ruby
   # require "gcloud/bigquery"
@@ -308,7 +309,7 @@ module Gcloud
   #
   # ### A note about large uploads
   #
-  # You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
+  # You may encounter a Broken pipe (`Errno::EPIPE`) error when attempting to
   # upload large files. To avoid this problem, add the
   # [httpclient](https://rubygems.org/gems/httpclient) gem to your project, and
   # the line (or lines) of configuration shown below. These lines must execute

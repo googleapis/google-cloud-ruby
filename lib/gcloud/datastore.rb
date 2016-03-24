@@ -183,7 +183,7 @@ module Gcloud
   # items = dataset.run query
   # ```
   #
-  # See Gcloud::Datastore::Query and {Gcloud::Datastore::Dataset#run}
+  # See {Gcloud::Datastore::Query} and {Gcloud::Datastore::Dataset#run}
   #
   # ## Paginating Records
   #
@@ -215,8 +215,8 @@ module Gcloud
   # end
   # ```
   #
-  # See Gcloud::Datastore::Dataset::LookupResults and
-  # Gcloud::Datastore::Dataset::QueryResults
+  # See {Gcloud::Datastore::Dataset::LookupResults} and
+  # {Gcloud::Datastore::Dataset::QueryResults}
   #
   # ## Creating Records
   #
@@ -325,7 +325,7 @@ module Gcloud
   # end
   # ```
   #
-  # See Gcloud::Datastore::Transaction and
+  # See {Gcloud::Datastore::Transaction} and
   # {Gcloud::Datastore::Dataset#transaction}
   module Datastore
   end
