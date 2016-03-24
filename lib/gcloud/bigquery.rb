@@ -66,7 +66,8 @@ module Gcloud
   # the project and credential information to connect to the BigQuery service,
   # or if you are running on Google Compute Engine this configuration is taken
   # care of for you. You can read more about the options for connecting in the
-  # [Authentication Guide](../AUTHENTICATION).
+  # <a ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="../AUTHENTICATION">Authentication Guide</a>.
   #
   # To help you get started quickly, the first few examples below use a public
   # dataset provided by Google. As soon as you have [signed

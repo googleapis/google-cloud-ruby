@@ -65,11 +65,12 @@ module Gcloud
   # DNS?](https://cloud.google.com/dns/what-is-cloud-dns).
   #
   # Gcloud's goal is to provide an API that is familiar and comfortable to
-  # Rubyists. Authentication is handled by {Gcloud#dns}. You can provide
-  # the project and credential information to connect to the Cloud DNS service,
-  # or if you are running on Google Compute Engine this configuration is taken
-  # care of for you. You can read more about the options for connecting in the
-  # [Authentication Guide](../AUTHENTICATION).
+  # Rubyists. Authentication is handled by {Gcloud#dns}. You can provide the
+  # project and credential information to connect to the Cloud DNS service, or
+  # if you are running on Google Compute Engine this configuration is taken care
+  # of for you. You can read more about the options for connecting in the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="../AUTHENTICATION">Authentication Guide</a>.
   #
   # ## Creating Zones
   #

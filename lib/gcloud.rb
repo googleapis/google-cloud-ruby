@@ -27,8 +27,9 @@ require "gcloud/version"
 # information, or if you are running on Google Compute Engine this configuration
 # is taken care of for you.
 #
-# You can learn more about various options for connection on the
-# [Authentication Guide](AUTHENTICATION).
+# You can learn more about various options for connection on the <a
+# ui-sref="docs.guides({ guideId: 'authentication' })"
+# href="AUTHENTICATION">Authentication Guide</a>.
 #
 module Gcloud
   ##

@@ -88,8 +88,9 @@ module Gcloud
   # dataset.save entity
   # ```
   #
-  # You can learn more about various options for connection on the
-  # [Authentication Guide](../AUTHENTICATION).
+  # You can learn more about various options for connection on the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="../AUTHENTICATION">Authentication Guide</a>.
   #
   # To learn more about Datastore, read the
   # [Google Cloud Datastore Concepts Overview

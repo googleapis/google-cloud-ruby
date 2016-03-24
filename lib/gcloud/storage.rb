@@ -80,8 +80,9 @@ module Gcloud
   # file = bucket.file "path/to/my-file.ext"
   # ```
   #
-  # You can learn more about various options for connection on the
-  # [Authentication Guide](../AUTHENTICATION).
+  # You can learn more about various options for connection on the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="../AUTHENTICATION">Authentication Guide</a>.
   #
   # To learn more about Cloud Storage, read the
   # [Google Cloud Storage Overview

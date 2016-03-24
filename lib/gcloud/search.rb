@@ -79,7 +79,7 @@ module Gcloud
   # credential information to connect to the Cloud Search service, or if you are
   # running on Google Compute Engine this configuration is taken care of for
   # you. You can read more about the options for connecting in the
-  # [Authentication Guide](../AUTHENTICATION).
+  # <a ui-sref="docs.guides({ guideId: 'authentication' })" href="../AUTHENTICATION">Authentication Guide</a>.
   #
   # ## Managing Indexes
   #
