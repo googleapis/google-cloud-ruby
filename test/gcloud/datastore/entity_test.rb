@@ -74,6 +74,42 @@ describe Gcloud::Datastore::Entity do
     entity_from_proto.properties["avatar"].must_equal nil
   end
 
+  it "returns a correct GRPC object" do
+    grpc = entity.to_grpc
+
+    # Key values
+    grpc.key.path.count.must_equal 1
+    grpc.key.path.last.kind.must_equal "User"
+    grpc.key.path.last.id.must_be :nil?
+    grpc.key.path.last.name.must_equal "username"
+
+    # Property values
+    grpc.properties.count.must_equal 2
+    grpc.properties["name"].string_value.must_equal entity["name"]
+    grpc.properties["email"].string_value.must_equal entity["email"]
+  end
+
+  it "can be created with a GRPC object" do
+    grpc = Google::Datastore::V1beta3::Entity.new
+    grpc.key = Google::Datastore::V1beta3::Key.new
+    grpc.key.path << Google::Datastore::V1beta3::Key::PathElement.new
+    grpc.key.path.first.kind = "User"
+    grpc.key.path.first.id = 123456
+    grpc.properties["name"] = Gcloud::GRPCUtils.to_value "User McNumber"
+    grpc.properties["email"] = Gcloud::GRPCUtils.to_value "number@example.net"
+    grpc.properties["avatar"] = nil
+
+    entity_from_grpc = Gcloud::Datastore::Entity.from_grpc grpc
+
+    entity_from_grpc.key.kind.must_equal "User"
+    entity_from_grpc.key.id.must_equal 123456
+    entity_from_grpc.key.name.must_be :nil?
+    entity_from_grpc.properties["name"].must_equal "User McNumber"
+    entity_from_grpc.properties["email"].must_equal "number@example.net"
+    entity_from_grpc.properties.exist?("avatar").must_equal true
+    entity_from_grpc.properties["avatar"].must_equal nil
+  end
+
   it "can store other entities as properties" do
     task1 = Gcloud::Datastore::Entity.new.tap do |t|
       t.key = Gcloud::Datastore::Key.new "Task", 1111

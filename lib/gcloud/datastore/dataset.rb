@@ -14,6 +14,7 @@
 
 
 require "gcloud/gce"
+require "gcloud/datastore/grpc_utils"
 require "gcloud/datastore/credentials"
 require "gcloud/datastore/connection"
 require "gcloud/datastore/service"

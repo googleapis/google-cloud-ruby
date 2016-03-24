@@ -69,6 +69,17 @@ module Gcloud
       end
       alias_method :to_hash, :to_h
 
+      def to_grpc
+        Hash[@hash.map { |(k, v)| [k.to_s, GRPCUtils.to_value(v)] }]
+      end
+
+      def self.from_grpc grpc_map
+        # For some reason Google::Protobuf::Map#map isn't returning the value.
+        # It returns nil every time. COnvert to Hash to get actual objects.
+        grpc_hash = GRPCUtils.map_to_hash grpc_map
+        new Hash[grpc_hash.map { |(k, v)| [k.to_s, GRPCUtils.from_value(v)] }]
+      end
+
       protected
 
       ##
