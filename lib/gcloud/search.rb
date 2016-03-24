@@ -21,6 +21,10 @@ module Gcloud
   # Creates a new `Project` instance connected to the Search service.
   # Each call creates a new connection.
   #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
+  #
   # @param [String] project Identifier for a Search project. If not present, the
   #   default project for the credentials is used.
   # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If file

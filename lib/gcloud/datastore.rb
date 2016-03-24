@@ -24,6 +24,10 @@ module Gcloud
   # Creates a new object for connecting to the Datastore service.
   # Each call creates a new connection.
   #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
+  #
   # @param [String] project Dataset identifier for the Datastore you are
   #   connecting to.
   # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If file
