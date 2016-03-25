@@ -12,7 +12,7 @@ Gcloud aims to make authentication as simple as possible. Google Cloud requires 
 
 [Google Cloud BigQuery](https://cloud.google.com/bigquery/) ([docs](https://cloud.google.com/bigquery/docs)) enables super-fast, SQL-like queries against append-only tables, using the processing power of Google's infrastructure. Simply move your data into BigQuery and let it handle the hard work. You can control access to both the project and your data based on your business needs, such as giving others the ability to view or query your data.
 
-See the [gcloud-ruby BigQuery API documentation](rdoc-ref:Gcloud::Bigquery) to learn how to connect to Cloud BigQuery using this library.
+See the {Gcloud::Bigquery gcloud-ruby BigQuery API documentation} to learn how to connect to Cloud BigQuery using this library.
 
 ```ruby
 require "gcloud"
@@ -44,7 +44,7 @@ end
 
 Follow the [activation instructions](https://cloud.google.com/datastore/docs/activate) to use the Google Cloud Datastore API with your project.
 
-See the [gcloud-ruby Datastore API documentation](rdoc-ref:Gcloud::Datastore) to learn how to interact with the Cloud Datastore using this library.
+See the {Gcloud::Bigquery gcloud-ruby Datastore API documentation} to learn how to interact with the Cloud Datastore using this library.
 
 ```ruby
 require "gcloud"
@@ -71,7 +71,7 @@ completed_tasks = dataset.run query
 
 [Google Cloud DNS](https://cloud.google.com/dns/) ([docs](https://cloud.google.com/dns/docs)) is a high-performance, resilient, global DNS service that provides a cost-effective way to make your applications and services available to your users. This programmable, authoritative DNS service can be used to easily publish and manage DNS records using the same infrastructure relied upon by Google. To learn more, read [What is Google Cloud DNS?](https://cloud.google.com/dns/what-is-cloud-dns).
 
-See the [gcloud-ruby DNS API documentation](rdoc-ref:Gcloud::Dns) to learn how to connect to Cloud DNS using this library.
+See the {Gcloud::Dns gcloud-ruby DNS API documentation} to learn how to connect to Cloud DNS using this library.
 
 ```ruby
 require "gcloud"
@@ -106,7 +106,7 @@ end
   Monitoring
 * Write log entries
 
-See the [gcloud-ruby Logging API documentation](rdoc-ref:Gcloud::Logging) to learn how to connect to Cloud Loging using this library.
+See the {Gcloud::Logging gcloud-ruby Logging API documentation} to learn how to connect to Cloud Loging using this library.
 
 ```ruby
 require "gcloud"
@@ -137,7 +137,7 @@ logging.write_entries entry
 
 [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) ([docs](https://cloud.google.com/pubsub/reference/rest/)) is designed to provide reliable, many-to-many, asynchronous messaging between applications. Publisher applications can send messages to a “topic” and other applications can subscribe to that topic to receive the messages. By decoupling senders and receivers, Google Cloud Pub/Sub allows developers to communicate between independently written applications.
 
-See the [gcloud-ruby Pub/Sub API documentation](rdoc-ref:Gcloud::Pubsub) to learn how to connect to Cloud Pub/Sub using this library.
+See the {Gcloud::Pubsub gcloud-ruby Pub/Sub API documentation} to learn how to connect to Cloud Pub/Sub using this library.
 
 ```ruby
 require "gcloud"
@@ -168,7 +168,7 @@ msgs = sub.pull
 * Delete projects
 * Undelete, or recover, projects that you don't want to delete
 
-See the [gcloud-ruby Resource Manager API documentation](rdoc-ref:Gcloud::ResourceManager) to learn how to connect to Cloud Resource Manager using this library.
+See the {Gcloud::ResourceManager gcloud-ruby Resource Manager API documentation} to learn how to connect to Cloud Resource Manager using this library.
 
 ```ruby
 require "gcloud"
@@ -195,7 +195,7 @@ projects = resource_manager.projects filter: "labels.env:production"
 
 [Google Cloud Search](https://cloud.google.com/search/) ([docs](https://cloud.google.com/search/reference/rest/index)) allows an application to quickly perform full-text and geo-spatial searches without having to spin up instances and without the hassle of managing and maintaining a search service.
 
-See the [gcloud-ruby Search API documentation](rdoc-ref:Gcloud::Search) to learn how to connect to Cloud Search using this library.
+See the {Gcloud::Search gcloud-ruby Search API documentation} to learn how to connect to Cloud Search using this library.
 
 ```ruby
 require "gcloud"
@@ -213,7 +213,7 @@ results = index.search "cotton T-shirt",
 
 [Google Cloud Storage](https://cloud.google.com/storage/) ([docs](https://cloud.google.com/storage/docs/json_api/)) allows you to store data on Google infrastructure with very high reliability, performance and availability, and can be used to distribute large data objects to users via direct download.
 
-See the [gcloud-ruby Storage API documentation](rdoc-ref:Gcloud::Storage) to learn how to connect to Cloud Storage using this library.
+See the {Gcloud::Storage gcloud-ruby Storage API documentation} to learn how to connect to Cloud Storage using this library.
 
 ```ruby
 require "gcloud"
