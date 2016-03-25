@@ -205,7 +205,7 @@ module Gcloud
   # [Cloud Search types](https://cloud.google.com/search/documents_indexes#document_fields_field_names_and_multi-valued_fields).
   # The type will be inferred from the value when possible, or you can
   # explicitly specify it by passing a symbol with the `type` option to
-  # {Document#add}.
+  # {Gcloud::Search::Document#add}.
   #
   # - String (`:atom`, `:html`, `:text`, or `:default`)
   # - Number (`:number`)

@@ -20,7 +20,7 @@ module Gcloud
     #
     # Special Connection instance for running transactions.
     #
-    # See {Gcloud::Datastore::Dataset.transaction}
+    # See {Gcloud::Datastore::Dataset#transaction}
     class Transaction < Dataset
       attr_reader :id
 

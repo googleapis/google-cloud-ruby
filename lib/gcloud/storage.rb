@@ -97,7 +97,7 @@ module Gcloud
   # A Bucket is the container for your data. There is no limit on the number of
   # buckets that you can create in a project. You can use buckets to organize
   # and control access to your data. Each bucket has a unique name, which is how
-  # they are retrieved: (See {Project#bucket})
+  # they are retrieved: (See {Gcloud::Storage::Project#bucket})
   #
   # ```ruby
   # require "gcloud"
@@ -108,7 +108,8 @@ module Gcloud
   # bucket = storage.bucket "my-todo-app"
   # ```
   #
-  # You can also retrieve all buckets on a project: (See {Project#buckets})
+  # You can also retrieve all buckets on a project: (See
+  # {Gcloud::Storage::Project#buckets})
   #
   # ```ruby
   # require "gcloud"
@@ -120,7 +121,7 @@ module Gcloud
   # ```
   #
   # If you have a significant number of buckets, you may need to paginate
-  # through them: (See {Bucket::List#token})
+  # through them: (See {Gcloud::Storage::Bucket::List#token})
   #
   # ```ruby
   # require "gcloud"
@@ -143,8 +144,8 @@ module Gcloud
   #
   # ## Creating a Bucket
   #
-  # A unique name is all that is needed to create a new bucket:
-  # (See {Project#create_bucket})
+  # A unique name is all that is needed to create a new bucket: (See
+  # {Gcloud::Storage::Project#create_bucket})
   #
   # ```ruby
   # require "gcloud"
@@ -163,7 +164,7 @@ module Gcloud
   # no limit on the number of objects that you can create in a bucket.
   #
   # Files are retrieved by their name, which is the path of the file in the
-  # bucket: (See {Bucket#file})
+  # bucket: (See {Gcloud::Storage::Bucket#file})
   #
   # ```ruby
   # require "gcloud"
@@ -200,7 +201,7 @@ module Gcloud
   # ```
   #
   # If you have a significant number of files, you may need to paginate through
-  # them: (See {File::List#token})
+  # them: (See {Gcloud::Storage::File::List#token})
   #
   # ```ruby
   # require "gcloud"
@@ -227,7 +228,7 @@ module Gcloud
   #
   # A new File can be uploaded by specifying the location of a file on the local
   # file system, and the name/path that the file should be stored in the bucket.
-  # (See {Bucket#create_file})
+  # (See {Gcloud::Storage::Bucket#create_file})
   #
   # ```ruby
   # require "gcloud"
@@ -269,7 +270,8 @@ module Gcloud
   #
   # ## Downloading a File
   #
-  # Files can be downloaded to the local file system. (See {File#download})
+  # Files can be downloaded to the local file system. (See
+  # {Gcloud::Storage::File#download})
   #
   # ```ruby
   # require "gcloud"
@@ -285,8 +287,8 @@ module Gcloud
   # ## Using Signed URLs
   #
   # Access without authentication can be granted to a File for a specified
-  # period of time. This URL uses a cryptographic signature
-  # of your credentials to access the file. (See {File#signed_url})
+  # period of time. This URL uses a cryptographic signature of your credentials
+  # to access the file. (See {Gcloud::Storage::File#signed_url})
   #
   # ```ruby
   # require "gcloud"
@@ -302,12 +304,11 @@ module Gcloud
   #
   # ## Controlling Access to a Bucket
   #
-  # Access to a bucket is controlled with {Bucket#acl}. A bucket has owners,
-  # writers, and readers. Permissions can be granted to an individual user's
-  # email address, a group's email address, as well as many predefined lists.
-  # See the
-  # [Access Control guide](https://cloud.google.com/storage/docs/access-control)
-  # for more.
+  # Access to a bucket is controlled with {Gcloud::Storage::Bucket#acl}. A
+  # bucket has owners, writers, and readers. Permissions can be granted to an
+  # individual user's email address, a group's email address, as well as many
+  # predefined lists. See the [Access Control
+  # guide](https://cloud.google.com/storage/docs/access-control) for more.
   #
   # Access to a bucket can be granted to a user by appending `"user-"` to the
   # email address:
@@ -355,8 +356,9 @@ module Gcloud
   # ## Controlling Access to a File
   #
   # Access to a file is controlled in two ways, either by the setting the
-  # default permissions to all files in a bucket with {Bucket#default_acl}, or
-  # by setting permissions to an individual file with {File#acl}.
+  # default permissions to all files in a bucket with
+  # {Gcloud::Storage::Bucket#default_acl}, or by setting permissions to an
+  # individual file with {Gcloud::Storage::File#acl}.
   #
   # Access to a file can be granted to a user by appending `"user-"` to the
   # email address:

@@ -79,8 +79,8 @@ module Gcloud
   # ## Creating Zones
   #
   # To get started with Google Cloud DNS, use your DNS Project to create a new
-  # Zone. The second argument to {Project#create_zone} must be a unique
-  # domain name for which you can [verify
+  # Zone. The second argument to {Gcloud::Dns::Project#create_zone} must be a
+  # unique domain name for which you can [verify
   # ownership](https://www.google.com/webmasters/verification/home). Substitute
   # a domain name of your own (ending with a dot to signify that it is [fully
   # qualified](https://en.wikipedia.org/wiki/Fully_qualified_domain_name)) as
@@ -142,15 +142,15 @@ module Gcloud
   # zone.records.first.data #=> ["ns-cloud-d1.googledomains.com.", ...]
   # ```
   #
-  # Note that {Record#data} returns an array. The Cloud DNS service only allows
-  # the zone to have one Record instance for each name and type combination. It
-  # supports multiple "resource records" (in this case, the four nameserver
-  # addresses) via this `data` collection.
+  # Note that {Gcloud::Dns::Record#data} returns an array. The Cloud DNS service
+  # only allows the zone to have one Record instance for each name and type
+  # combination. It supports multiple "resource records" (in this case, the four
+  # nameserver addresses) via this `data` collection.
   #
   # ## Managing Records
   #
-  # You can easily add your own records to the zone. Each call to {Zone#add}
-  # results in a new Cloud DNS Change instance.
+  # You can easily add your own records to the zone. Each call to
+  # {Gcloud::Dns::Zone#add} results in a new Cloud DNS Change instance.
   #
   # ```ruby
   # require "gcloud"
@@ -167,7 +167,7 @@ module Gcloud
   # of authority (SOA) record should be updated with a higher serial number. The
   # gcloud library automates this update for you, deleting the old SOA record
   # and adding an updated one, as shown in the example above. You can disable or
-  # modify this behavior, of course. See {Zone#update} for details.
+  # modify this behavior, of course. See {Gcloud::Dns::Zone#update} for details.
   #
   # You can retrieve records by name and type. The name argument can be a
   # subdomain (e.g., `www`) fragment for convenience, but notice that the
@@ -183,7 +183,8 @@ module Gcloud
   # records.first.name #=> "www.example.com."
   # ```
   #
-  # You can use {Zone#replace} to update the `ttl` and `data` for a record.
+  # You can use {Gcloud::Dns::Zone#replace} to update the `ttl` and `data` for a
+  # record.
   #
   # ```ruby
   # require "gcloud"
@@ -194,8 +195,9 @@ module Gcloud
   # change = zone.replace "www", "A", 86400, ["5.6.7.8"]
   # ```
   #
-  # Or, you can use {Zone#modify} to update just the `ttl` or `data`, without
-  # the risk of inadvertently changing values that you wish to leave unchanged.
+  # Or, you can use {Gcloud::Dns::Zone#modify} to update just the `ttl` or
+  # `data`, without the risk of inadvertently changing values that you wish to
+  # leave unchanged.
   #
   # ```ruby
   # require "gcloud"
@@ -221,8 +223,9 @@ module Gcloud
   # ```
   #
   # The best way to add, remove, and update multiple records in a single
-  # [transaction](https://cloud.google.com/dns/records) is to call {Zone#update}
-  # with a block. See {Zone::Transaction}.
+  # [transaction](https://cloud.google.com/dns/records) is to call
+  # {Gcloud::Dns::Zone#update} with a block. See
+  # {Gcloud::Dns::Zone::Transaction}.
   #
   # ```ruby
   # require "gcloud"
@@ -241,7 +244,8 @@ module Gcloud
   # end
   # ```
   #
-  # Finally, you can add and delete records by reference, using {Zone#update}.
+  # Finally, you can add and delete records by reference, using
+  # {Gcloud::Dns::Zone#update}.
   #
   # ```ruby
   # require "gcloud"

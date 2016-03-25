@@ -225,9 +225,9 @@ module Gcloud
   #
   # ## Creating Records
   #
-  # New entities can be created and persisted buy calling {Dataset#save}.
-  # The entity must have a Key to be saved. If the Key is incomplete then
-  # it will be completed when saved.
+  # New entities can be created and persisted buy calling
+  # {Gcloud::Datastore::Dataset#save}. The entity must have a Key to be saved.
+  # If the Key is incomplete then it will be completed when saved.
   #
   # ```ruby
   # require "gcloud"
@@ -247,7 +247,8 @@ module Gcloud
   # Entities hold properties. A property has a name that is a string or symbol,
   # and a value that is an object. Most value objects are supported, including
   # String, Integer, Date, Time, and even other Entity or Key objects. Changes
-  # to the Entity's properties are persisted by calling {Dataset#save}.
+  # to the Entity's properties are persisted by calling
+  # {Gcloud::Datastore::Dataset#save}.
   #
   # ```ruby
   # require "gcloud"
@@ -265,8 +266,9 @@ module Gcloud
   #
   # ## Deleting Records
   #
-  # Entities can be removed from Datastore by calling {Dataset#delete} and
-  # passing the Entity object or the entity's Key object.
+  # Entities can be removed from Datastore by calling
+  # {Gcloud::Datastore::Dataset#delete} and passing the Entity object or the
+  # entity's Key object.
   #
   # ```ruby
   # require "gcloud"
@@ -280,8 +282,9 @@ module Gcloud
   # ## Transactions
   #
   # Complex logic can be wrapped in a Transaction. All queries and updates
-  # within the {Dataset#transaction} block are run within the transaction scope,
-  # and will be automatically committed when the block completes.
+  # within the {Gcloud::Datastore::Dataset#transaction} block are run within the
+  # transaction scope, and will be automatically committed when the block
+  # completes.
   #
   # ```ruby
   # require "gcloud"

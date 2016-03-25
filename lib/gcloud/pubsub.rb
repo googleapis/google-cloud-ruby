@@ -90,7 +90,7 @@ module Gcloud
   # ## Retrieving Topics
   #
   # A Topic is a named resource to which messages are sent by publishers.
-  # A Topic is found by its name. (See {Project#topic})
+  # A Topic is found by its name. (See {Gcloud::Pubsub::Project#topic})
   #
   # ```ruby
   # require "gcloud"
@@ -102,7 +102,8 @@ module Gcloud
   #
   # ## Creating a Topic
   #
-  # A Topic is created from a Project. (See {Project#create_topic})
+  # A Topic is created from a Project. (See
+  # {Gcloud::Pubsub::Project#create_topic})
   #
   # ```ruby
   # require "gcloud"
@@ -115,8 +116,9 @@ module Gcloud
   # ## Retrieving Subscriptions
   #
   # A Subscription is a named resource representing the stream of messages from
-  # a single, specific Topic, to be delivered to the subscribing application.
-  # A Subscription is found by its name. (See {Topic#subscription})
+  # a single, specific Topic, to be delivered to the subscribing application. A
+  # Subscription is found by its name. (See
+  # {Gcloud::Pubsub::Topic#subscription})
   #
   # ```ruby
   # require "gcloud"
@@ -131,8 +133,8 @@ module Gcloud
   #
   # ## Creating a Subscription
   #
-  # A Subscription is created from a Topic. (See {Topic#subscribe} and
-  # {Project#subscribe})
+  # A Subscription is created from a Topic. (See
+  # {Gcloud::Pubsub::Topic#subscribe} and {Gcloud::Pubsub::Project#subscribe})
   #
   # ```ruby
   # require "gcloud"
@@ -164,7 +166,8 @@ module Gcloud
   #
   # Messages are published to a topic. Any message published to a topic without
   # a subscription will be lost. Ensure the topic has a subscription before
-  # publishing. (See {Topic#publish} and {Project#publish})
+  # publishing. (See {Gcloud::Pubsub::Topic#publish} and
+  # {Gcloud::Pubsub::Project#publish})
   #
   # ```ruby
   # require "gcloud"
@@ -208,7 +211,8 @@ module Gcloud
   #
   # ## Pulling Messages
   #
-  # Messages are pulled from a Subscription. (See {Subscription#pull})
+  # Messages are pulled from a Subscription. (See
+  # {Gcloud::Pubsub::Subscription#pull})
   #
   # ```ruby
   # require "gcloud"
@@ -233,7 +237,7 @@ module Gcloud
   # ```
   #
   # The request for messages can also block until messages are available.
-  # (See {Subscription#wait_for_messages})
+  # (See {Gcloud::Pubsub::Subscription#wait_for_messages})
   #
   # ```ruby
   # require "gcloud"
@@ -252,7 +256,7 @@ module Gcloud
   #
   # A Message that can be acknowledged is called a ReceivedMessage.
   # ReceivedMessages can be acknowledged one at a time:
-  # (See {ReceivedMessage#acknowledge!})
+  # (See {Gcloud::Pubsub::ReceivedMessage#acknowledge!})
   #
   # ```ruby
   # require "gcloud"
@@ -265,7 +269,7 @@ module Gcloud
   # ```
   #
   # Or, multiple messages can be acknowledged in a single API call:
-  # (See {Subscription#acknowledge})
+  # (See {Gcloud::Pubsub::Subscription#acknowledge})
   #
   # ```ruby
   # require "gcloud"
@@ -283,7 +287,8 @@ module Gcloud
   # A message must be acknowledged after it is pulled, or Pub/Sub will mark the
   # message for redelivery. The message acknowledgement deadline can delayed if
   # more time is needed. This will allow more time to process the message before
-  # the message is marked for redelivery. (See {ReceivedMessage#delay!})
+  # the message is marked for redelivery. (See
+  # {Gcloud::Pubsub::ReceivedMessage#delay!})
   #
   # ```ruby
   # require "gcloud"
@@ -318,7 +323,7 @@ module Gcloud
   # ```
   #
   # Multiple messages can be delayed or made available for immediate redelivery:
-  # (See {Subscription#delay})
+  # (See {Gcloud::Pubsub::Subscription#delay})
   #
   # ```ruby
   # require "gcloud"
@@ -335,7 +340,7 @@ module Gcloud
   #
   # Long running workers are easy to create with `listen`, which runs an
   # infinitely blocking loop to process messages as they are received. (See
-  # {Subscription#listen})
+  # {Gcloud::Pubsub::Subscription#listen})
   #
   # ```ruby
   # require "gcloud"

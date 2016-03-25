@@ -24,7 +24,8 @@ module Gcloud
     # instances, and so forth. Each of those kinds of objects is described by an
     # instance of {ResourceDescriptor}.
     #
-    # For use with {Gcloud::Logging::Entry#resource=} and
+    # For use with {Gcloud::Logging::Entry#resource},
+    # {Gcloud::Logging::Project#resource}, and
     # {Gcloud::Logging::Project#write_entries}.
     #
     # @example
