@@ -21,9 +21,8 @@ module Gcloud
   # Creates a new `Project` instance connected to the DNS service.
   # Each call creates a new connection.
   #
-  # For more information on connecting to Google Cloud see the <a
-  # ui-sref="docs.guides({ guideId: 'authentication' })"
-  # href="AUTHENTICATION">Authentication Guide</a>.
+  # For more information on connecting to Google Cloud see the [Authentication
+  # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
   #
   # @param [String] project Identifier for a DNS project. If not present, the
   #   default project for the credentials is used.
@@ -72,9 +71,9 @@ module Gcloud
   # Rubyists. Authentication is handled by {Gcloud#dns}. You can provide the
   # project and credential information to connect to the Cloud DNS service, or
   # if you are running on Google Compute Engine this configuration is taken care
-  # of for you. You can read more about the options for connecting in the <a
-  # ui-sref="docs.guides({ guideId: 'authentication' })"
-  # href="../AUTHENTICATION">Authentication Guide</a>.
+  # of for you. You can read more about the options for connecting in the
+  # [Authentication
+  # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
   #
   # ## Creating Zones
   #

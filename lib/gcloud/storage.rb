@@ -21,9 +21,8 @@ module Gcloud
   # Creates a new object for connecting to the Storage service.
   # Each call creates a new connection.
   #
-  # For more information on connecting to Google Cloud see the <a
-  # ui-sref="docs.guides({ guideId: 'authentication' })"
-  # href="AUTHENTICATION">Authentication Guide</a>.
+  # For more information on connecting to Google Cloud see the [Authentication
+  # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
   #
   # @param [String] project Project identifier for the Storage service you are
   #   connecting to.
@@ -84,9 +83,9 @@ module Gcloud
   # file = bucket.file "path/to/my-file.ext"
   # ```
   #
-  # You can learn more about various options for connection on the <a
-  # ui-sref="docs.guides({ guideId: 'authentication' })"
-  # href="../AUTHENTICATION">Authentication Guide</a>.
+  # You can learn more about various options for connection on the
+  # [Authentication
+  # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
   #
   # To learn more about Cloud Storage, read the
   # [Google Cloud Storage Overview

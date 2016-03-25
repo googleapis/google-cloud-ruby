@@ -21,9 +21,8 @@ module Gcloud
   # Creates a new `Project` instance connected to the Resource Manager service.
   # Each call creates a new connection.
   #
-  # For more information on connecting to Google Cloud see the <a
-  # ui-sref="docs.guides({ guideId: 'authentication' })"
-  # href="AUTHENTICATION">Authentication Guide</a>.
+  # For more information on connecting to Google Cloud see the [Authentication
+  # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
   #
   # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If file
   #   path the file must be readable.
