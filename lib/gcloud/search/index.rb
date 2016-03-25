@@ -27,9 +27,11 @@ module Gcloud
     # the documents that reference them. You can manage groups of documents by
     # putting them into separate indexes.
     #
-    # With an index, you can retrieve documents with {#find} and {#documents};
-    # manage them with {#document}, {#save}, and {#remove}; and perform searches
-    # over their fields with {#search}.
+    # With an index, you can retrieve documents with
+    # {Gcloud::Search::Index#find} and {Gcloud::Search::Index#documents}; manage
+    # them with {Gcloud::Search::Index#document}, {Gcloud::Search::Index#save},
+    # and {Gcloud::Search::Index#remove}; and perform searches over their fields
+    # with {Gcloud::Search::Index#search}.
     #
     # @example
     #   require "gcloud"
@@ -181,9 +183,10 @@ module Gcloud
 
       ##
       # Helper for creating a new Document instance. The returned instance is
-      # local: It is either not yet saved to the service (see {#save}), or if it
-      # has been given the id of an existing document, it is not yet populated
-      # with the document's data (see {#find}).
+      # local: It is either not yet saved to the service (see
+      # {Gcloud::Search::Index#save}), or if it has been given the id of an
+      # existing document, it is not yet populated with the document's data (see
+      # {Gcloud::Search::Index#find}).
       #
       # @param [String, nil] doc_id An optional unique ID for the new document.
       #   When the document is saved, this value must contain only visible,
@@ -198,8 +201,8 @@ module Gcloud
       #   10,000 documents. By default (when it is not specified or set to 0),
       #   it is set at the time the document is saved to the number of seconds
       #   since January 1, 2011. The rank can be used in the `expressions`,
-      #   `order`, and `fields` options in {#search}, where it should referenced
-      #   as `rank`.
+      #   `order`, and `fields` options in {Gcloud::Search::Index#search}, where
+      #   it should referenced as `rank`.
       #
       # @return [Gcloud::Search::Document]
       #
@@ -279,11 +282,13 @@ module Gcloud
 
       ##
       # Saves a new or existing document to the index. If the document instance
-      # is new and has been given an id (see {#document}), it will replace an
-      # existing document in the index that has the same unique id.
+      # is new and has been given an id (see {Gcloud::Search::Index#document}),
+      # it will replace an existing document in the index that has the same
+      # unique id.
       #
       # @param [Gcloud::Search::Document] document A Document instance, either
-      #   new (see {#document}) or existing (see {#find}).
+      #   new (see {Gcloud::Search::Index#document}) or existing (see
+      #   {Gcloud::Search::Index#find}).
       #
       # @return [Gcloud::Search::Document]
       #

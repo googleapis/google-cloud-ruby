@@ -93,6 +93,7 @@ module Gcloud
       #   `:number` values.
       #
       #   The following values are supported:
+      #
       #   * `:default` - The value is a string. The format will be automatically
       #     detected. This is the default value for strings.
       #   * `:text` - The value is a string with maximum length 1024**2

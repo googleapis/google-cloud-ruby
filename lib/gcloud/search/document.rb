@@ -23,9 +23,11 @@ module Gcloud
     # # Document
     #
     # A document is an object that stores data that can be searched. Each
-    # document has a {#doc_id} that is unique within its index, a {#rank}, and a
-    # list of {#fields} that contain typed data. Its field values can be
-    # accessed through hash-like methods such as {#[]} and {#each}.
+    # document has a {Gcloud::Search::Document#doc_id} that is unique within its
+    # index, a {Gcloud::Search::Document#rank}, and a list of
+    # {Gcloud::Search::Document#fields} that contain typed data. Its field
+    # values can be accessed through hash-like methods such as
+    # {Gcloud::Search::Document#[]} and {Gcloud::Search::Document#each}.
     #
     # @example
     #   require "gcloud"
@@ -54,8 +56,9 @@ module Gcloud
 
       ##
       # The unique identifier for the document. Can be set explicitly when the
-      # document is saved. (See {Index#document} and {#doc_id=}.) If missing, it
-      # is automatically assigned to the document when saved.
+      # document is saved. (See {Gcloud::Search::Index#document} and
+      # {Gcloud::Search::Document#doc_id=}.) If missing, it is automatically
+      # assigned to the document when saved.
       def doc_id
         @raw["docId"]
       end
@@ -74,8 +77,9 @@ module Gcloud
       ##
       # A positive integer which determines the default ordering of documents
       # returned from a search. The rank can be set explicitly when the document
-      # is saved. (See {Index#document} and {#rank=}.)  If missing, it is
-      # automatically assigned to the document when saved.
+      # is saved. (See {Gcloud::Search::Index#document} and
+      # {Gcloud::Search::Document#rank=}.)  If missing, it is automatically
+      # assigned to the document when saved.
       def rank
         @raw["rank"]
       end
@@ -83,11 +87,11 @@ module Gcloud
       ##
       # Sets the rank of the document.
       #
-      # The same rank should not be assigned to many documents, and should
-      # never be assigned to more than 10,000 documents. By default (when it is
-      # not specified or set to 0), it is set at the time the document is
-      # created to the number of seconds since January 1, 2011. The rank can be
-      # used in {Index#search} options `expressions`, `order`, and
+      # The same rank should not be assigned to many documents, and should never
+      # be assigned to more than 10,000 documents. By default (when it is not
+      # specified or set to 0), it is set at the time the document is created to
+      # the number of seconds since January 1, 2011. The rank can be used in
+      # {Gcloud::Search::Index#search} options `expressions`, `order`, and
       # `fields`, where it is referenced as `rank`.
       def rank= new_rank
         @raw["rank"] = new_rank
@@ -142,6 +146,7 @@ module Gcloud
       #   `:number` values.
       #
       #   The following values are supported:
+      #
       #   * `:default` - The value is a string. The format will be automatically
       #     detected. This is the default value for strings.
       #   * `:text` - The value is a string with maximum length 1024**2

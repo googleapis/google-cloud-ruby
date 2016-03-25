@@ -24,6 +24,10 @@ module Gcloud
   # Creates a new object for connecting to the Datastore service.
   # Each call creates a new connection.
   #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
+  #
   # @param [String] project Dataset identifier for the Datastore you are
   #   connecting to.
   # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If file
@@ -72,7 +76,7 @@ module Gcloud
   # make the most of using Datastore.
   #
   # Gcloud's goal is to provide a API that is familiar and comfortable to
-  # Rubyists. Authentication is handled by Gcloud#datastore. You can provide
+  # Rubyists. Authentication is handled by {Gcloud#datastore}. You can provide
   # the project and credential information to connect to the Datastore service,
   # or if you are running on Google Compute Engine this configuration is taken
   # care of for you.
@@ -88,8 +92,9 @@ module Gcloud
   # dataset.save entity
   # ```
   #
-  # You can learn more about various options for connection on the
-  # [Authentication Guide](../AUTHENTICATION).
+  # You can learn more about various options for connection on the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="../AUTHENTICATION">Authentication Guide</a>.
   #
   # To learn more about Datastore, read the
   # [Google Cloud Datastore Concepts Overview
@@ -102,7 +107,7 @@ module Gcloud
   # that can be used to model relationships. The simplest Key has a string
   # <tt>kind</tt> value, and either a numeric <tt>id</tt> value, or a string
   # <tt>name</tt> value. A single record can be retrieved by calling
-  # Gcloud::Datastore::Dataset#find and passing the parts of the key:
+  # {Gcloud::Datastore::Dataset#find} and passing the parts of the key:
   #
   # ```ruby
   # require "gcloud"
@@ -112,7 +117,7 @@ module Gcloud
   # entity = dataset.find "Task", "start"
   # ```
   #
-  # Optionally, Gcloud::Datastore::Dataset#find can be given a Key object:
+  # Optionally, {Gcloud::Datastore::Dataset#find} can be given a Key object:
   #
   # ```ruby
   # require "gcloud"
@@ -123,12 +128,12 @@ module Gcloud
   # entity = dataset.find key
   # ```
   #
-  # See Gcloud::Datastore::Dataset#find
+  # See {Gcloud::Datastore::Dataset#find}
   #
   # ## Querying Records
   #
   # Multiple records can be found that match criteria.
-  # (See Gcloud::Datastore::Query#where)
+  # (See {Gcloud::Datastore::Query#where})
   #
   # ```ruby
   # require "gcloud"
@@ -140,7 +145,7 @@ module Gcloud
   # active_lists = dataset.run query
   # ```
   #
-  # Records can also be ordered. (See Gcloud::Datastore::Query#order)
+  # Records can also be ordered. (See {Gcloud::Datastore::Query#order})
   #
   # ```ruby
   # require "gcloud"
@@ -154,7 +159,7 @@ module Gcloud
   # ```
   #
   # The number of records returned can be specified.
-  # (See Gcloud::Datastore::Query#limit)
+  # (See {Gcloud::Datastore::Query#limit})
   #
   # ```ruby
   # require "gcloud"
@@ -169,7 +174,7 @@ module Gcloud
   # ```
   #
   # Records' Key structures can also be queried.
-  # (See Gcloud::Datastore::Query#ancestor)
+  # (See {Gcloud::Datastore::Query#ancestor})
   #
   # ```ruby
   # require "gcloud"
@@ -183,7 +188,7 @@ module Gcloud
   # items = dataset.run query
   # ```
   #
-  # See Gcloud::Datastore::Query and Gcloud::Datastore::Dataset#run
+  # See {Gcloud::Datastore::Query} and {Gcloud::Datastore::Dataset#run}
   #
   # ## Paginating Records
   #
@@ -215,14 +220,14 @@ module Gcloud
   # end
   # ```
   #
-  # See Gcloud::Datastore::Dataset::LookupResults and
-  # Gcloud::Datastore::Dataset::QueryResults
+  # See {Gcloud::Datastore::Dataset::LookupResults} and
+  # {Gcloud::Datastore::Dataset::QueryResults}
   #
   # ## Creating Records
   #
-  # New entities can be created and persisted buy calling Dataset#save.
-  # The entity must have a Key to be saved. If the Key is incomplete then
-  # it will be completed when saved.
+  # New entities can be created and persisted buy calling
+  # {Gcloud::Datastore::Dataset#save}. The entity must have a Key to be saved.
+  # If the Key is incomplete then it will be completed when saved.
   #
   # ```ruby
   # require "gcloud"
@@ -242,7 +247,8 @@ module Gcloud
   # Entities hold properties. A property has a name that is a string or symbol,
   # and a value that is an object. Most value objects are supported, including
   # String, Integer, Date, Time, and even other Entity or Key objects. Changes
-  # to the Entity's properties are persisted by calling Dataset#save.
+  # to the Entity's properties are persisted by calling
+  # {Gcloud::Datastore::Dataset#save}.
   #
   # ```ruby
   # require "gcloud"
@@ -260,8 +266,9 @@ module Gcloud
   #
   # ## Deleting Records
   #
-  # Entities can be removed from Datastore by calling Dataset#delete and passing
-  # the Entity object or the entity's Key object.
+  # Entities can be removed from Datastore by calling
+  # {Gcloud::Datastore::Dataset#delete} and passing the Entity object or the
+  # entity's Key object.
   #
   # ```ruby
   # require "gcloud"
@@ -275,8 +282,9 @@ module Gcloud
   # ## Transactions
   #
   # Complex logic can be wrapped in a Transaction. All queries and updates
-  # within the Dataset#transaction block are run within the transaction scope,
-  # and will be automatically committed when the block completes.
+  # within the {Gcloud::Datastore::Dataset#transaction} block are run within the
+  # transaction scope, and will be automatically committed when the block
+  # completes.
   #
   # ```ruby
   # require "gcloud"
@@ -325,8 +333,8 @@ module Gcloud
   # end
   # ```
   #
-  # See Gcloud::Datastore::Transaction and
-  # Gcloud::Datastore::Dataset#transaction
+  # See {Gcloud::Datastore::Transaction} and
+  # {Gcloud::Datastore::Dataset#transaction}
   module Datastore
   end
 end

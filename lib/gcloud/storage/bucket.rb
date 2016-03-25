@@ -485,6 +485,7 @@ module Gcloud
       #   file.
       #
       #   Acceptable values are:
+      #
       #   * `auth`, `auth_read`, `authenticated`, `authenticated_read`,
       #     `authenticatedRead` - File owner gets OWNER access, and
       #     allAuthenticatedUsers get READER access.

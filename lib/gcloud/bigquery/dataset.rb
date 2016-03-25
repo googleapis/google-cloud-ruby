@@ -560,6 +560,7 @@ module Gcloud
       #   new tables.
       #
       #   The following values are supported:
+      #
       #   * `needed` - Create the table if it does not exist.
       #   * `never` - The table must already exist. A 'notFound' error is
       #     raised if the table does not exist.
@@ -567,6 +568,7 @@ module Gcloud
       #   destination table already exists.
       #
       #   The following values are supported:
+      #
       #   * `truncate` - BigQuery overwrites the table data.
       #   * `append` - BigQuery appends the data to the table.
       #   * `empty` - A 'duplicate' error is returned in the job result if the

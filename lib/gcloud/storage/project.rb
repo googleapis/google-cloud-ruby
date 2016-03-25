@@ -198,6 +198,7 @@ module Gcloud
       #   bucket.
       #
       #   Acceptable values are:
+      #
       #   * `auth`, `auth_read`, `authenticated`, `authenticated_read`,
       #     `authenticatedRead` - Project team owners get OWNER access, and
       #     allAuthenticatedUsers get READER access.
@@ -212,6 +213,7 @@ module Gcloud
       #   access controls to this bucket.
       #
       #   Acceptable values are:
+      #
       #   * `auth`, `auth_read`, `authenticated`, `authenticated_read`,
       #     `authenticatedRead` - File owner gets OWNER access, and
       #     allAuthenticatedUsers get READER access.

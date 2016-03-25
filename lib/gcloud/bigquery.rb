@@ -21,6 +21,10 @@ module Gcloud
   # Creates a new `Project` instance connected to the BigQuery service.
   # Each call creates a new connection.
   #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
+  #
   # @param [String] project Identifier for a BigQuery project. If not present,
   #   the default project for the credentials is used.
   # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If file
@@ -62,11 +66,12 @@ module Gcloud
   # BigQuery?](https://cloud.google.com/bigquery/what-is-bigquery).
   #
   # Gcloud's goal is to provide an API that is familiar and comfortable to
-  # Rubyists. Authentication is handled by Gcloud#bigquery. You can provide
+  # Rubyists. Authentication is handled by {Gcloud#bigquery}. You can provide
   # the project and credential information to connect to the BigQuery service,
   # or if you are running on Google Compute Engine this configuration is taken
   # care of for you. You can read more about the options for connecting in the
-  # [Authentication Guide](../AUTHENTICATION).
+  # <a ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="../AUTHENTICATION">Authentication Guide</a>.
   #
   # To help you get started quickly, the first few examples below use a public
   # dataset provided by Google. As soon as you have [signed
@@ -154,8 +159,8 @@ module Gcloud
   # Because you probably should not block for most BigQuery operations,
   # including querying as well as importing, exporting, and copying data, the
   # BigQuery API enables you to manage longer-running jobs. In the asynchronous
-  # approach to running a query, an instance of Gcloud::Bigquery::QueryJob is
-  # returned, rather than an instance of Gcloud::Bigquery::QueryData.
+  # approach to running a query, an instance of {Gcloud::Bigquery::QueryJob} is
+  # returned, rather than an instance of {Gcloud::Bigquery::QueryData}.
   #
   # ```ruby
   # require "gcloud"
@@ -176,8 +181,8 @@ module Gcloud
   # ```
   #
   # Once you have determined that the job is done and has not failed, you can
-  # obtain an instance of Gcloud::Bigquery::QueryData by calling
-  # Gcloud::Bigquery::QueryJob#query_results. The query results for both of
+  # obtain an instance of {Gcloud::Bigquery::QueryData} by calling
+  # {Gcloud::Bigquery::QueryJob#query_results}. The query results for both of
   # the above examples are stored in temporary tables with a lifetime of about
   # 24 hours. See the final example below for a demonstration of how to store
   # query results in a permanent table.
@@ -185,7 +190,8 @@ module Gcloud
   # ## Creating Datasets and Tables
   #
   # The first thing you need to do in a new BigQuery project is to create a
-  # Gcloud::Bigquery::Dataset. Datasets hold tables and control access to them.
+  # {Gcloud::Bigquery::Dataset}. Datasets hold tables and control access to
+  # them.
   #
   # ```ruby
   # require "gcloud/bigquery"
@@ -308,7 +314,7 @@ module Gcloud
   #
   # ### A note about large uploads
   #
-  # You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
+  # You may encounter a Broken pipe (`Errno::EPIPE`) error when attempting to
   # upload large files. To avoid this problem, add the
   # [httpclient](https://rubygems.org/gems/httpclient) gem to your project, and
   # the line (or lines) of configuration shown below. These lines must execute

@@ -57,11 +57,13 @@ module Gcloud
       #   request. Filter rules are case insensitive.
       #
       #   The fields eligible for filtering are:
+      #
       #   * `name`
       #   * `id`
       #   * `labels.key` - where `key` is the name of a label
       #
       #   Some examples of using labels as filters:
+      #
       #   * `name:*` - The project has a name.
       #   * `name:Howl` - The project's name is Howl or howl.
       #   * `name:HOWL` - Equivalent to above.

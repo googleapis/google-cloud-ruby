@@ -27,12 +27,17 @@ require "gcloud/version"
 # information, or if you are running on Google Compute Engine this configuration
 # is taken care of for you.
 #
-# You can learn more about various options for connection on the
-# [Authentication Guide](AUTHENTICATION).
+# You can learn more about various options for connection on the <a
+# ui-sref="docs.guides({ guideId: 'authentication' })"
+# href="AUTHENTICATION">Authentication Guide</a>.
 #
 module Gcloud
   ##
   # Creates a new object for connecting to Google Cloud.
+  #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
   #
   # @param [String] project Project identifier for the Pub/Sub service you are
   #   connecting to.
@@ -62,6 +67,10 @@ module Gcloud
   ##
   # Creates a new object for connecting to the Datastore service.
   # Each call creates a new connection.
+  #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
   #
   # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
   #   set of resources and operations that the connection can access. See [Using
@@ -104,6 +113,10 @@ module Gcloud
   # Creates a new object for connecting to the Storage service.
   # Each call creates a new connection.
   #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
+  #
   # @see https://cloud.google.com/storage/docs/authentication#oauth Storage
   #   OAuth 2.0 Authentication
   #
@@ -142,6 +155,10 @@ module Gcloud
   # Creates a new object for connecting to the Pub/Sub service.
   # Each call creates a new connection.
   #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
+  #
   # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
   #   set of resources and operations that the connection can access. See [Using
   #   OAuth 2.0 to Access Google
@@ -176,6 +193,10 @@ module Gcloud
   ##
   # Creates a new object for connecting to the BigQuery service.
   # Each call creates a new connection.
+  #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
   #
   # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
   #   set of resources and operations that the connection can access. See [Using
@@ -214,6 +235,10 @@ module Gcloud
   ##
   # Creates a new object for connecting to the DNS service.
   # Each call creates a new connection.
+  #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
   #
   # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
   #   set of resources and operations that the connection can access. See [Using
@@ -256,6 +281,10 @@ module Gcloud
   # Creates a new object for connecting to the Resource Manager service.
   # Each call creates a new connection.
   #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
+  #
   # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
   #   set of resources and operations that the connection can access. See [Using
   #   OAuth 2.0 to Access Google
@@ -294,6 +323,10 @@ module Gcloud
   # Creates a new object for connecting to the Search service.
   # Each call creates a new connection.
   #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
+  #
   # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
   #   set of resources and operations that the connection can access. See [Using
   #   OAuth 2.0 to Access Google
@@ -317,6 +350,10 @@ module Gcloud
   ##
   # Creates a new object for connecting to the Logging service.
   # Each call creates a new connection.
+  #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
   #
   # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
   #   set of resources and operations that the connection can access. See [Using

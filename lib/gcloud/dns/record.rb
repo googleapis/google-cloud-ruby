@@ -20,11 +20,13 @@ module Gcloud
     ##
     # # DNS Record
     #
-    # Represents a set of DNS resource records (RRs) for a given {#name} and
-    # {#type} in a {Zone}. Since it is a value object, a newly created Record
-    # instance is transient until it is added to a Zone with {Zone#update}. Note
-    # that {Zone#add} and the {Zone#update} block parameter can be used instead
-    # of {Zone#record} or `Record.new` to create new records.
+    # Represents a set of DNS resource records (RRs) for a given
+    # {Gcloud::Dns::Record#name} and {Gcloud::Dns::Record#type} in a
+    # {Gcloud::Dns::Zone}. Since it is a value object, a newly created Record
+    # instance is transient until it is added to a Zone with
+    # {Gcloud::Dns::Zone#update}. Note that {Gcloud::Dns::Zone#add} and the
+    # {Gcloud::Dns::Zone#update} block parameter can be used instead of
+    # {Gcloud::Dns::Zone#record} or `Record.new` to create new records.
     #
     # @example
     #   require "gcloud"
@@ -114,7 +116,7 @@ module Gcloud
       ##
       # Returns a deep copy of the record. Useful for updating records, since
       # the original, unmodified record must be passed for deletion when using
-      # {Zone#update}.
+      # {Gcloud::Dns::Zone#update}.
       #
       def dup
         other = super

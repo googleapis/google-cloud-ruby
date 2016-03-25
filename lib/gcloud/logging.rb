@@ -21,6 +21,10 @@ module Gcloud
   # Creates a new object for connecting to the Logging service.
   # Each call creates a new connection.
   #
+  # For more information on connecting to Google Cloud see the <a
+  # ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="AUTHENTICATION">Authentication Guide</a>.
+  #
   # @param [String] project Project identifier for the Logging service you are
   #   connecting to.
   # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If file
@@ -72,11 +76,12 @@ module Gcloud
   # Logging?](https://cloud.google.com/logging/docs/).
   #
   # Gcloud's goal is to provide an API that is familiar and comfortable to
-  # Rubyists. Authentication is handled by {Gcloud#logging}. You can provide
-  # the project and credential information to connect to the Cloud Logging
-  # service, or if you are running on Google Compute Engine this configuration
-  # is taken care of for you. You can read more about the options for connecting
-  # in the [Authentication Guide](../AUTHENTICATION).
+  # Rubyists. Authentication is handled by {Gcloud#logging}. You can provide the
+  # project and credential information to connect to the Cloud Logging service,
+  # or if you are running on Google Compute Engine this configuration is taken
+  # care of for you. You can read more about the options for connecting in the
+  # <a ui-sref="docs.guides({ guideId: 'authentication' })"
+  # href="../AUTHENTICATION">Authentication Guide</a>.
   #
   # ## Listing log entries
   #
