@@ -21,9 +21,8 @@ module Gcloud
   # Creates a new object for connecting to the Pub/Sub service.
   # Each call creates a new connection.
   #
-  # For more information on connecting to Google Cloud see the <a
-  # ui-sref="docs.guides({ guideId: 'authentication' })"
-  # href="AUTHENTICATION">Authentication Guide</a>.
+  # For more information on connecting to Google Cloud see the [Authentication
+  # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
   #
   # @param [String] project Project identifier for the Pub/Sub service you are
   #   connecting to.
