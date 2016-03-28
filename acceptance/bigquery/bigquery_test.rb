@@ -17,7 +17,7 @@ require "gcloud/storage"
 
 # This test is a ruby version of gcloud-node's bigquery test.
 
-describe Gcloud::Pubsub, :bigquery do
+describe Gcloud::Bigquery, :bigquery do
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
     d = bigquery.dataset dataset_id
