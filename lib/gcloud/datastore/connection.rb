@@ -49,18 +49,6 @@ module Gcloud
         @credentials = credentials
       end
 
-      ##
-      # Allocate IDs for incomplete keys.
-      # (This is useful for referencing an entity before it is inserted.)
-      def allocate_ids *incomplete_keys
-        allocate_ids = Proto::AllocateIdsRequest.new.tap do |ai|
-          ai.key = incomplete_keys
-        end
-
-        rpc_response = rpc("allocateIds", allocate_ids)
-        Proto::AllocateIdsResponse.decode rpc_response
-      end
-
       # Query for entities.
       def run_query query, partition = nil
         run_query = Proto::RunQueryRequest.new.tap do |rq|

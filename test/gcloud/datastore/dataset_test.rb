@@ -19,27 +19,9 @@ describe Gcloud::Datastore::Dataset do
   let(:project)     { "my-todo-project" }
   let(:credentials) { OpenStruct.new }
   let(:dataset)     { Gcloud::Datastore::Dataset.new project, credentials }
-  let(:allocate_ids_response) do
-    Gcloud::Datastore::Proto::AllocateIdsResponse.new.tap do |response|
-      response.key = []
-      response.key << Gcloud::Datastore::Key.new("ds-test", 1234).to_proto
-    end
-  end
   let(:commit_response) do
     Gcloud::Datastore::Proto::CommitResponse.new.tap do |response|
       response.mutation_result = Gcloud::Datastore::Proto::MutationResult.new
-    end
-  end
-  let(:lookup_response) do
-    Gcloud::Datastore::Proto::LookupResponse.new.tap do |response|
-      response.found = 2.times.map do
-        Gcloud::Datastore::Proto::EntityResult.new.tap do |er|
-          er.entity = Gcloud::Datastore::Entity.new.tap do |e|
-            e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
-            e["name"] = "thingamajig"
-          end.to_proto
-        end
-      end
     end
   end
   let(:run_query_response) do
@@ -88,9 +70,14 @@ describe Gcloud::Datastore::Dataset do
   end
 
   it "allocate_ids returns complete keys" do
-    dataset.connection.expect :allocate_ids,
-                              allocate_ids_response,
-                              [Gcloud::Datastore::Proto::Key]
+    allocate_req = Google::Datastore::V1beta3::AllocateIdsRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test").to_grpc]
+    )
+    allocate_res = Google::Datastore::V1beta3::AllocateIdsResponse.new(
+      keys: [Gcloud::Datastore::Key.new("ds-test", 1234).to_grpc]
+    )
+    dataset.service.mocked_datastore.expect :allocate_ids, allocate_res, [allocate_req]
 
     incomplete_key = Gcloud::Datastore::Key.new "ds-test"
     incomplete_key.must_be :incomplete?

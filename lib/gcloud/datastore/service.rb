@@ -59,6 +59,18 @@ module Gcloud
       attr_accessor :mocked_datastore
 
       ##
+      # Allocate IDs for incomplete keys.
+      # (This is useful for referencing an entity before it is inserted.)
+      def allocate_ids *incomplete_keys
+        allocate_req = Google::Datastore::V1beta3::AllocateIdsRequest.new(
+          project_id: project,
+          keys: incomplete_keys
+        )
+
+        backoff { datastore.allocate_ids allocate_req }
+      end
+
+      ##
       # Look up entities by keys.
       def lookup *keys
         lookup_req = Google::Datastore::V1beta3::LookupRequest.new(

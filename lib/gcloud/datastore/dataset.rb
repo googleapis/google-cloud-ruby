@@ -111,11 +111,10 @@ module Gcloud
           fail Gcloud::Datastore::Error, "An incomplete key must be provided."
         end
 
-        incomplete_keys = count.times.map { incomplete_key.to_proto }
-        response = connection.allocate_ids(*incomplete_keys)
-        Array(response.key).map do |key|
-          Key.from_proto key
-        end
+        ensure_service!
+        incomplete_keys = count.times.map { incomplete_key.to_grpc }
+        allocate_res = service.allocate_ids(*incomplete_keys)
+        allocate_res.keys.map { |key| Key.from_grpc key }
       end
 
       ##
