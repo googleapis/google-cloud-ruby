@@ -337,8 +337,7 @@ namespace :test do
         puts "Cleaning up DNS zones and records"
         Gcloud.dns.zones.each do |zone|
           begin
-            zone.update [], zone.records.all
-            zone.delete
+            zone.delete force: true
           rescue Gcloud::Dns::ApiError => e
             puts e.message
           end
@@ -427,7 +426,7 @@ namespace :test do
         begin
           # Gcloud.logging.sinks.each.map &:delete
           Gcloud.logging.metrics.each.map &:delete
-        rescue Gcloud::Logging::Error => e
+        rescue Gcloud::Error => e
           puts e.message
         end
       end
