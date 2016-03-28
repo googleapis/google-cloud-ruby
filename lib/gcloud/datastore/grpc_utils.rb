@@ -20,6 +20,31 @@ module Gcloud
   # @private Conversion to/from Datastore GRPC objects.
   # This file adds Datastore methods to GRPCUtils.
   module GRPCUtils
+    # rubocop:disable all
+
+    PROP_FILTER_OPS = { "<"            => :LESS_THAN,
+                        "lt"           => :LESS_THAN,
+                        "<="           => :LESS_THAN_OR_EQUAL,
+                        "lte"          => :LESS_THAN_OR_EQUAL,
+                        ">"            => :GREATER_THAN,
+                        "gt"           => :GREATER_THAN,
+                        ">="           => :GREATER_THAN_OR_EQUAL,
+                        "gte"          => :GREATER_THAN_OR_EQUAL,
+                        "="            => :EQUAL,
+                        "eq"           => :EQUAL,
+                        "eql"          => :EQUAL,
+                        "~"            => :HAS_ANCESTOR,
+                        "~>"           => :HAS_ANCESTOR,
+                        "ancestor"     => :HAS_ANCESTOR,
+                        "has_ancestor" => :HAS_ANCESTOR,
+                        "has ancestor" => :HAS_ANCESTOR }
+
+    ##
+    # Get a property filter operator from op
+    def self.to_prop_filter_op op
+      PROP_FILTER_OPS[op.to_s.downcase] || :EQUAL
+    end
+
     ##
     # Gets an object from a Google::Datastore::V1beta3::Value.
     def self.from_value grpc_value
@@ -82,5 +107,14 @@ module Gcloud
       end
       v
     end
+
+    def self.encode_bytes bytes
+      Array(bytes.to_s).pack("m").chomp
+    end
+
+    def self.decode_bytes bytes
+      bytes.to_s.unpack("m").first.force_encoding Encoding::ASCII_8BIT
+    end
+    # rubocop:enable all
   end
 end
