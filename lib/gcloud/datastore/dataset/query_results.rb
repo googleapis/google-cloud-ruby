@@ -60,24 +60,21 @@ module Gcloud
         # Convenience method for determining id the more_results value
         # is "NOT_FINISHED"
         def not_finished?
-          more_results == Proto.to_more_results_string(
-            Proto::QueryResultBatch::MoreResultsType::NOT_FINISHED)
+          more_results == :NOT_FINISHED
         end
 
         ##
         # Convenience method for determining id the more_results value
         # is "MORE_RESULTS_AFTER_LIMIT"
         def more_after_limit?
-          more_results == Proto.to_more_results_string(
-            Proto::QueryResultBatch::MoreResultsType::MORE_RESULTS_AFTER_LIMIT)
+          more_results == :MORE_RESULTS_AFTER_LIMIT
         end
 
         ##
         # Convenience method for determining id the more_results value
         # is "NO_MORE_RESULTS"
         def no_more?
-          more_results == Proto.to_more_results_string(
-            Proto::QueryResultBatch::MoreResultsType::NO_MORE_RESULTS)
+          more_results == :NO_MORE_RESULTS
         end
 
         ##

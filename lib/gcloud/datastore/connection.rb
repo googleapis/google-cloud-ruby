@@ -49,17 +49,6 @@ module Gcloud
         @credentials = credentials
       end
 
-      # Query for entities.
-      def run_query query, partition = nil
-        run_query = Proto::RunQueryRequest.new.tap do |rq|
-          rq.query = query
-          rq.partition_id = partition if partition
-          rq
-        end
-
-        Proto::RunQueryResponse.decode rpc("runQuery", run_query)
-      end
-
       ##
       # Begin a new transaction.
       def begin_transaction

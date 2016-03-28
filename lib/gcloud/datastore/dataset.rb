@@ -228,11 +228,11 @@ module Gcloud
       #   tasks = dataset.run query, namespace: "ns~todo-project"
       #
       def run query, namespace: nil
-        partition = optional_partition_id namespace
-        response = connection.run_query query.to_proto, partition
-        entities = to_gcloud_entities_proto response.batch.entity_result
-        cursor = Proto.encode_cursor response.batch.end_cursor
-        more_results = Proto.to_more_results_string response.batch.more_results
+        ensure_service!
+        query_res = service.run_query query.to_grpc, namespace
+        entities = to_gcloud_entities query_res.batch.entity_results
+        cursor = GRPCUtils.encode_bytes query_res.batch.end_cursor
+        more_results = query_res.batch.more_results
         QueryResults.new entities, cursor, more_results
       end
       alias_method :run_query, :run

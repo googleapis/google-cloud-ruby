@@ -24,20 +24,21 @@ describe Gcloud::Datastore::Dataset do
       response.mutation_result = Gcloud::Datastore::Proto::MutationResult.new
     end
   end
-  let(:run_query_response) do
-    Gcloud::Datastore::Proto::RunQueryResponse.new.tap do |response|
-      response.batch = Gcloud::Datastore::Proto::QueryResultBatch.new.tap do |batch|
-        batch.entity_result = 2.times.map do
-          Gcloud::Datastore::Proto::EntityResult.new.tap do |er|
-            er.entity = Gcloud::Datastore::Entity.new.tap do |e|
-              e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
-              e["name"] = "thingamajig"
-            end.to_proto
-          end
-        end
-        batch.end_cursor = Gcloud::Datastore::Proto.decode_cursor query_cursor
-      end
+  let(:run_query_res) do
+    run_query_res_entities = 2.times.map do
+      Google::Datastore::V1beta3::EntityResult.new(
+        entity: Gcloud::Datastore::Entity.new.tap do |e|
+          e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+          e["name"] = "thingamajig"
+        end.to_grpc
+      )
     end
+    Google::Datastore::V1beta3::RunQueryResponse.new(
+      batch: Google::Datastore::V1beta3::QueryResultBatch.new(
+        entity_results: run_query_res_entities,
+        end_cursor: Gcloud::GRPCUtils.decode_bytes(query_cursor)
+      )
+    )
   end
   let(:begin_transaction_response) do
     Gcloud::Datastore::Proto::BeginTransactionResponse.new.tap do |response|
@@ -279,9 +280,11 @@ describe Gcloud::Datastore::Dataset do
   end
 
   it "run will fulfill a query" do
-    dataset.connection.expect :run_query,
-                              run_query_response,
-                              [Gcloud::Datastore::Proto::Query, nil]
+    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      query: Gcloud::Datastore::Query.new.kind("User").to_grpc
+    )
+    dataset.service.mocked_datastore.expect :run_query, run_query_res, [run_query_req]
 
     query = Gcloud::Datastore::Query.new.kind("User")
     entities = dataset.run query
@@ -291,16 +294,18 @@ describe Gcloud::Datastore::Dataset do
     end
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
-    entities.more_results.must_be :nil?
+    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.no_more?
   end
 
   it "run_query will fulfill a query" do
-    dataset.connection.expect :run_query,
-                              run_query_response,
-                              [Gcloud::Datastore::Proto::Query, nil]
+    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      query: Gcloud::Datastore::Query.new.kind("User").to_grpc
+    )
+    dataset.service.mocked_datastore.expect :run_query, run_query_res, [run_query_req]
 
     query = Gcloud::Datastore::Query.new.kind("User")
     entities = dataset.run_query query
@@ -309,27 +314,31 @@ describe Gcloud::Datastore::Dataset do
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
     entities.cursor.must_equal query_cursor
-    entities.more_results.must_be :nil?
+    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.no_more?
   end
 
-
   it "run_query will fulfill a query with a namespace" do
-    dataset.connection.expect :dataset_id, project
-    dataset.connection.expect :run_query,
-                              run_query_response,
-                              [Gcloud::Datastore::Proto::Query, Gcloud::Datastore::Proto::PartitionId]
+    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      partition_id: Google::Datastore::V1beta3::PartitionId.new(
+        project_id: project,
+        namespace_id: "foobar"
+      ),
+      query: Gcloud::Datastore::Query.new.kind("User").to_grpc
+    )
+    dataset.service.mocked_datastore.expect :run_query, run_query_res, [run_query_req]
 
     query = Gcloud::Datastore::Query.new.kind("User")
-    entities = dataset.run_query query, :namespace => 'foobar'
+    entities = dataset.run_query query, namespace: "foobar"
     entities.count.must_equal 2
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
     entities.cursor.must_equal query_cursor
-    entities.more_results.must_be :nil?
+    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.no_more?
@@ -417,29 +426,28 @@ describe Gcloud::Datastore::Dataset do
   end
 
   describe "query result object" do
-    let(:run_query_response_not_finished) do
-      run_query_response.tap do |response|
-        response.batch.more_results =
-          Gcloud::Datastore::Proto::QueryResultBatch::MoreResultsType::NOT_FINISHED
+    let(:run_query_res_not_finished) do
+      run_query_res.tap do |response|
+        response.batch.more_results = :NOT_FINISHED
       end
     end
-    let(:run_query_response_more_after_limit) do
-      run_query_response.tap do |response|
-        response.batch.more_results =
-          Gcloud::Datastore::Proto::QueryResultBatch::MoreResultsType::MORE_RESULTS_AFTER_LIMIT
+    let(:run_query_res_more_after_limit) do
+      run_query_res.tap do |response|
+        response.batch.more_results = :MORE_RESULTS_AFTER_LIMIT
       end
     end
-    let(:run_query_response_no_more) do
-      run_query_response.tap do |response|
-        response.batch.more_results =
-          Gcloud::Datastore::Proto::QueryResultBatch::MoreResultsType::NO_MORE_RESULTS
+    let(:run_query_res_no_more) do
+      run_query_res.tap do |response|
+        response.batch.more_results = :NO_MORE_RESULTS
       end
     end
 
     it "has more_results not_finished" do
-      dataset.connection.expect :run_query,
-                                run_query_response_not_finished,
-                                [Gcloud::Datastore::Proto::Query, nil]
+      run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+        project_id: project,
+        query: Gcloud::Datastore::Query.new.kind("User").to_grpc
+      )
+      dataset.service.mocked_datastore.expect :run_query, run_query_res_not_finished, [run_query_req]
 
       query = Gcloud::Datastore::Query.new.kind("User")
       entities = dataset.run query
@@ -448,16 +456,18 @@ describe Gcloud::Datastore::Dataset do
         entity.must_be_kind_of Gcloud::Datastore::Entity
       end
       entities.cursor.must_equal query_cursor
-      entities.more_results.must_equal "NOT_FINISHED"
+      entities.more_results.must_equal :NOT_FINISHED
       assert entities.not_finished?
       refute entities.more_after_limit?
       refute entities.no_more?
     end
 
     it "has more_results more_after_limit" do
-      dataset.connection.expect :run_query,
-                                run_query_response_more_after_limit,
-                                [Gcloud::Datastore::Proto::Query, nil]
+      run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+        project_id: project,
+        query: Gcloud::Datastore::Query.new.kind("User").to_grpc
+      )
+      dataset.service.mocked_datastore.expect :run_query, run_query_res_more_after_limit, [run_query_req]
 
       query = Gcloud::Datastore::Query.new.kind("User")
       entities = dataset.run query
@@ -466,16 +476,18 @@ describe Gcloud::Datastore::Dataset do
         entity.must_be_kind_of Gcloud::Datastore::Entity
       end
       entities.cursor.must_equal query_cursor
-      entities.more_results.must_equal "MORE_RESULTS_AFTER_LIMIT"
+      entities.more_results.must_equal :MORE_RESULTS_AFTER_LIMIT
       refute entities.not_finished?
       assert entities.more_after_limit?
       refute entities.no_more?
     end
 
     it "has more_results no_more" do
-      dataset.connection.expect :run_query,
-                                run_query_response_no_more,
-                                [Gcloud::Datastore::Proto::Query, nil]
+      run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+        project_id: project,
+        query: Gcloud::Datastore::Query.new.kind("User").to_grpc
+      )
+      dataset.service.mocked_datastore.expect :run_query, run_query_res_no_more, [run_query_req]
 
       query = Gcloud::Datastore::Query.new.kind("User")
       entities = dataset.run query
@@ -484,7 +496,7 @@ describe Gcloud::Datastore::Dataset do
         entity.must_be_kind_of Gcloud::Datastore::Entity
       end
       entities.cursor.must_equal query_cursor
-      entities.more_results.must_equal "NO_MORE_RESULTS"
+      entities.more_results.must_equal :NO_MORE_RESULTS
       refute entities.not_finished?
       refute entities.more_after_limit?
       assert entities.no_more?

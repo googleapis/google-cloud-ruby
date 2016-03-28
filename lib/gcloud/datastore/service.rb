@@ -81,6 +81,20 @@ module Gcloud
         backoff { datastore.lookup lookup_req }
       end
 
+      # Query for entities.
+      def run_query query, partition = nil
+        run_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+          project_id: project,
+          query: query
+        )
+        run_req.partition_id = Google::Datastore::V1beta3::PartitionId.new(
+          project_id: project,
+          namespace_id: partition
+        ) if partition
+
+        backoff { datastore.run_query run_req }
+      end
+
       def inspect
         "#{self.class}(#{@dataset_id})"
       end
