@@ -8,9 +8,7 @@ module Gcloud
       include YARD::Templates::Helpers::HtmlHelper
 
       def md s, multi_paragraph = false
-        html = Kramdown::Document.new(s.to_s, input: "GFM", hard_wrap: false,
-                                       syntax_highlighter: "rouge",
-                                       syntax_highlighter_opts: {css_class: "ruby"}).to_html.strip
+        html = Kramdown::Document.new(s.to_s, input: "GFM", hard_wrap: false).to_html.strip
         html = unwrap_paragraph(html) unless multi_paragraph
         html = resolve_links(html) if html # in YARD's HtmlHelper
         html

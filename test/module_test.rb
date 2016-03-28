@@ -22,7 +22,7 @@ describe Gcloud::Jsondoc, :module do
 
     it "must have service metadata" do
       @doc["name"].must_equal "MyModule"
-      expected = "<p>The outermost module in the test fixtures.</p>\n\n<p>This is a Ruby <a href=\"http://docs.ruby-lang.org/en/2.2.0/Module.html\">module</a>.</p>\n\n<div class=\"highlighter-rouge\"><pre class=\"ruby\"><code><span class=\"nb\">require</span> <span class=\"s2\">\"gcloud\"</span>\n\n<span class=\"n\">gcloud</span> <span class=\"o\">=</span> <span class=\"no\">Gcloud</span><span class=\"p\">.</span><span class=\"nf\">new</span> <span class=\"s2\">\"publicdata\"</span>\n<span class=\"n\">bigquery</span> <span class=\"o\">=</span> <span class=\"n\">gcloud</span><span class=\"p\">.</span><span class=\"nf\">bigquery</span>\n</code></pre>\n</div>\n\n<p>It lists all datasets in the project.</p>"
+      expected = "<p>The outermost module in the test fixtures.</p>\n\n<p>This is a Ruby <a href=\"http://docs.ruby-lang.org/en/2.2.0/Module.html\">module</a>.</p>\n\n<pre><code class=\"language-ruby\">require \"gcloud\"\n\ngcloud = Gcloud.new \"publicdata\"\nbigquery = gcloud.bigquery\n</code></pre>\n\n<p>It lists all datasets in the project.</p>"
       @doc["description"].must_equal expected
       @doc["source"].must_equal "test/fixtures/my_module.rb#L15"
     end
