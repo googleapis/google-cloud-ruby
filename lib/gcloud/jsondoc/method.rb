@@ -6,15 +6,22 @@ module Gcloud
       include MarkupHelper, JsonHelper
 
       # object is API defined by YARD's HtmlHelper
-      attr_reader :json, :object
+      attr_reader :title, :type, :full_name, :filepath, :object, :parent
 
-      def initialize json, object
-        @json = json
+      def initialize object, parent
         @object = object
+        @parent = parent
+        @title = parent.title
+        @type = get_method_type @object # MarkupHelper
+        @full_name = "#{object.name}-#{@type}"
+        @filepath = @parent.filepath
       end
 
-      def build!
+      def build json
+        json.id @full_name
+        json.type @type
         metadata json
+
         options = object.docstring.tags(:option)
         # merge options into parent params
         params = object.docstring.tags(:param).inject([]) do |memo, param_tag|
@@ -89,17 +96,27 @@ module Gcloud
         elsif param.tag_name == "yieldparam"
           json.optional false
         else
-          # extract default value from MethodObject#parameters ⇒ Array<Array(String, String)>
-          # keyword argument parameter names contain trailing ":" in MethodObject#parameters, but not in Tag
-          method_param_pair = method.parameters.find { |p| p[0].sub(/:\z/, "") == param.name.to_s }
-          fail "no entry found for @param: '#{param.name}' in MethodObject#parameters: #{method.inspect}" unless method_param_pair
-          default_value = method_param_pair[1]
+          default_value = default_value_from_method method, param
           json.optional !default_value.nil?
         end
 
         json.default default_value if default_value
         json.nullable(default_value == "nil" || (!param.types.nil? && param.types.include?("nil")))
         # json.defaults param.defaults TODO: add default value to spec and impl
+      end
+
+      ##
+      # Extract default value from:
+      # MethodObject#parameters ⇒ Array<Array(String, String)>
+      def default_value_from_method method, param
+          method_param_pair = method.parameters.find do |parameter|
+            # keyword argument parameter names contain trailing ":", remove it
+            # variable length argument list parameter names contain leading "*", remove it
+            parameter_name = parameter[0].sub(/:\z/, "").sub(/\A\*/, "")
+            parameter_name == param.name.to_s
+          end
+          fail "no entry found for @param: '#{param.name}' in: #{method.inspect}, parameter: #{method.parameters.join(", ")}" unless method_param_pair
+          method_param_pair[1]
       end
     end
   end

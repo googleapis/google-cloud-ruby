@@ -7,44 +7,77 @@ module Gcloud
       include Gcloud::Jsondoc::MarkupHelper, JsonHelper
 
       # object is API defined by YARD's HtmlHelper
-      attr_reader :name, :jbuilder, :object
+      attr_reader :name, :title, :full_name, :filepath, :jbuilder, :object,
+                  :methods, :subtree, :descendants, :types, :types_subtree
 
       def initialize object
         @object = object
-        @name = @object.name.to_s.downcase
-        build
+        @name = object.name.to_s
+        @title = object.title
+        @full_name = get_full_name #JsonHelper
+        @filepath = "#{@full_name}.json"
+        set_methods
+        build!
+        set_children
+        set_descendants
+        set_subtree
+        set_types
+        set_types_subtree
       end
 
-      def filepath
-        namespaces = @object.title.split("::")
-        namespaces.shift if namespaces.size > 2 # remove "GCloud", since problematic in site app nav
-        title_path = namespaces.map(&:downcase).join("/")
-        "#{title_path}.json"
-      end
-
-      def build
+      def build!
         @jbuilder = Jbuilder.new do |json|
-          json.id object.name.to_s.downcase
+          json.id @full_name
           metadata json
-          methods json, object
+          json.methods @methods do |m|
+            m.build json
+          end
         end
-      end
-
-      def subtree
-        docs = [self]
-        children = @object.children.select { |c| c.type == :class && c.visibility == :public && c.namespace.name == @object.name && !c.has_tag?(:private) }
-        children.each do |child|
-          docs += Doc.new(child).subtree
-        end
-        docs
       end
 
       protected
 
-      def methods json, object
-        methods = object.children.select { |c| c.type == :method && c.visibility == :public && !c.is_alias? && !c.has_tag?(:private) } # TODO: handle aliases
-        json.methods methods do |method|
-          Method.new(json, method).build!
+      def set_methods
+        method_objects = @object.children.select do |c|
+          c.type == :method &&
+            c.visibility == :public &&
+            !c.is_alias? &&
+            !c.has_tag?(:private)
+            # TODO: handle aliases
+        end
+        @methods = method_objects.map { |mo| Method.new mo, self }
+      end
+
+      def set_children
+        @children = @object.children.select do |c|
+          c.type == :class &&
+            c.visibility == :public &&
+            c.namespace.name == @object.name &&
+            !c.has_tag?(:private)
+        end
+      end
+
+      def set_descendants
+        @descendants = []
+        @children.each do |child|
+          @descendants += Doc.new(child).subtree
+        end
+      end
+
+      def set_subtree
+        @subtree = [self] + @descendants
+      end
+
+      def set_types
+        @types = [self] + @methods
+      end
+
+      ##
+      # Includes docs and their methods
+      def set_types_subtree
+        @types_subtree = @types
+        @descendants.each do |descendant|
+          @types_subtree += descendant.types
         end
       end
     end
