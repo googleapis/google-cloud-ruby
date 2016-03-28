@@ -15,6 +15,7 @@
 
 require "gcloud/datastore/credentials"
 require "google/datastore/v1beta3/datastore_services"
+require "gcloud/backoff"
 
 module Gcloud
   module Datastore
@@ -22,7 +23,7 @@ module Gcloud
     # @private Represents the gRPC Datastore service, including all the API
     # methods.
     class Service
-      API_URL = "https://www.googleapis.com"
+      DEFAULT_HOST = "www.googleapis.com"
       attr_accessor :project, :credentials
 
       ##
@@ -57,8 +58,25 @@ module Gcloud
       end
       attr_accessor :mocked_datastore
 
+      ##
+      # Look up entities by keys.
+      def lookup *keys
+        lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+          project_id: project,
+          keys: keys
+        )
+
+        backoff { datastore.lookup lookup_req }
+      end
+
       def inspect
         "#{self.class}(#{@dataset_id})"
+      end
+
+      def backoff options = {}
+        Gcloud::Backoff.new(options).execute_grpc do
+          yield
+        end
       end
     end
   end

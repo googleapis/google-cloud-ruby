@@ -177,10 +177,11 @@ module Gcloud
       #   tasks = dataset.find_all key1, key2
       #
       def find_all *keys
-        response = connection.lookup(*keys.map(&:to_proto))
-        entities = to_gcloud_entities response.found
-        deferred = to_gcloud_keys response.deferred
-        missing  = to_gcloud_entities response.missing
+        ensure_service!
+        lookup_res = service.lookup(*keys.map(&:to_grpc))
+        entities = to_gcloud_entities lookup_res.found
+        deferred = to_gcloud_keys lookup_res.deferred
+        missing  = to_gcloud_entities lookup_res.missing
         LookupResults.new entities, deferred, missing
       end
       alias_method :lookup, :find_all
@@ -230,7 +231,7 @@ module Gcloud
       def run query, namespace: nil
         partition = optional_partition_id namespace
         response = connection.run_query query.to_proto, partition
-        entities = to_gcloud_entities response.batch.entity_result
+        entities = to_gcloud_entities_proto response.batch.entity_result
         cursor = Proto.encode_cursor response.batch.end_cursor
         more_results = Proto.to_more_results_string response.batch.more_results
         QueryResults.new entities, cursor, more_results
@@ -399,20 +400,35 @@ module Gcloud
       protected
 
       ##
+      # @private Raise an error unless an active connection to the service is
+      # available.
+      def ensure_service!
+        fail "Must have active connection to service" unless service
+      end
+
+      ##
       # Convenince method to convert proto entities to Gcloud entities.
-      def to_gcloud_entities proto_results
+      def to_gcloud_entities grpc_entity_results
         # Entities are nested in an object.
-        Array(proto_results).map do |result|
-          Entity.from_proto result.entity
+        Array(grpc_entity_results).map do |result|
+          # TODO: Make this return an EntityResult with cursor...
+          Entity.from_grpc result.entity
         end
       end
 
       ##
       # Convenince method to convert proto keys to Gcloud keys.
-      def to_gcloud_keys proto_results
+      def to_gcloud_keys grpc_keys
         # Keys are not nested in an object like entities are.
-        Array(proto_results).map do |key|
-          Key.from_proto key
+        Array(grpc_keys).map { |key| Key.from_grpc key }
+      end
+
+      ##
+      # Convenince method to convert proto entities to Gcloud entities.
+      def to_gcloud_entities_proto grpc_entity_results
+        # Entities are nested in an object.
+        Array(grpc_entity_results).map do |result|
+          Entity.from_proto result.entity
         end
       end
 

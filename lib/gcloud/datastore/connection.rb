@@ -61,15 +61,6 @@ module Gcloud
         Proto::AllocateIdsResponse.decode rpc_response
       end
 
-      ##
-      # Look up entities by keys.
-      def lookup *keys
-        lookup = Proto::LookupRequest.new
-        lookup.key = keys
-
-        Proto::LookupResponse.decode rpc("lookup", lookup)
-      end
-
       # Query for entities.
       def run_query query, partition = nil
         run_query = Proto::RunQueryRequest.new.tap do |rq|

@@ -64,12 +64,27 @@ describe Gcloud::Datastore::Dataset do
   end
   let(:query_cursor) { "c3VwZXJhd2Vzb21lIQ==" }
 
+  let(:lookup_res) do
+    Google::Datastore::V1beta3::LookupResponse.new(
+      found: 2.times.map do
+        Google::Datastore::V1beta3::EntityResult.new(
+          entity: Google::Datastore::V1beta3::Entity.new(
+            key: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc,
+            properties: { "name" => Gcloud::GRPCUtils.to_value("thingamajig") }
+          )
+        )
+      end
+    )
+  end
+
   before do
     dataset.connection = Minitest::Mock.new
+    dataset.service.mocked_datastore = Minitest::Mock.new
   end
 
   after do
     dataset.connection.verify
+    dataset.service.mocked_datastore.verify
   end
 
   it "allocate_ids returns complete keys" do
@@ -106,27 +121,33 @@ describe Gcloud::Datastore::Dataset do
   end
 
   it "find can take a kind and id" do
-    dataset.connection.expect :lookup,
-                              lookup_response,
-                              [Gcloud::Datastore::Proto::Key]
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", 123).to_grpc]
+    )
+    dataset.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
 
     entity = dataset.find "ds-test", 123
     entity.must_be_kind_of Gcloud::Datastore::Entity
   end
 
   it "find can take a kind and name" do
-    dataset.connection.expect :lookup,
-                              lookup_response,
-                              [Gcloud::Datastore::Proto::Key]
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc]
+    )
+    dataset.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
 
     entity = dataset.find "ds-test", "thingie"
     entity.must_be_kind_of Gcloud::Datastore::Entity
   end
 
   it "find can take a key" do
-    dataset.connection.expect :lookup,
-                              lookup_response,
-                              [Gcloud::Datastore::Proto::Key]
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc]
+    )
+    dataset.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
 
     key = Gcloud::Datastore::Key.new "ds-test", "thingie"
     entity = dataset.find key
@@ -134,22 +155,27 @@ describe Gcloud::Datastore::Dataset do
   end
 
   it "find is aliased to get" do
-    dataset.connection.expect :lookup,
-                              lookup_response,
-                              [Gcloud::Datastore::Proto::Key]
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", 123).to_grpc]
+    )
+    dataset.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
 
     entity = dataset.get "ds-test", 123
     entity.must_be_kind_of Gcloud::Datastore::Entity
   end
 
   it "find_all takes several keys" do
-    dataset.connection.expect :lookup,
-                              lookup_response,
-                              [Gcloud::Datastore::Proto::Key,
-                               Gcloud::Datastore::Proto::Key]
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
+             Gcloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
+    )
+    dataset.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
 
-    key = Gcloud::Datastore::Key.new "ds-test", "thingie"
-    entities = dataset.find_all key, key
+    key1 = Gcloud::Datastore::Key.new "ds-test", "thingie1"
+    key2 = Gcloud::Datastore::Key.new "ds-test", "thingie2"
+    entities = dataset.find_all key1, key2
     entities.count.must_equal 2
     entities.deferred.count.must_equal 0
     entities.missing.count.must_equal 0
@@ -159,13 +185,16 @@ describe Gcloud::Datastore::Dataset do
   end
 
   it "find_all is aliased to lookup" do
-    dataset.connection.expect :lookup,
-                              lookup_response,
-                              [Gcloud::Datastore::Proto::Key,
-                               Gcloud::Datastore::Proto::Key]
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
+             Gcloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
+    )
+    dataset.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
 
-    key = Gcloud::Datastore::Key.new "ds-test", "thingie"
-    entities = dataset.lookup key, key
+    key1 = Gcloud::Datastore::Key.new "ds-test", "thingie1"
+    key2 = Gcloud::Datastore::Key.new "ds-test", "thingie2"
+    entities = dataset.lookup key1, key2
     entities.count.must_equal 2
     entities.deferred.count.must_equal 0
     entities.missing.count.must_equal 0
@@ -175,35 +204,38 @@ describe Gcloud::Datastore::Dataset do
   end
 
   describe "find_all result object" do
-    let(:lookup_response_deferred) do
-      lookup_response.tap do |response|
-        response.deferred = 2.times.map do
-          Gcloud::Datastore::Key.new("ds-test", "thingie").to_proto
+    let(:lookup_res_deferred) do
+      lookup_res.tap do |response|
+        2.times.map do
+          response.deferred << Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc
         end
       end
     end
 
-    let(:lookup_response_missing) do
-      lookup_response.tap do |response|
-        response.missing = 2.times.map do
-          Gcloud::Datastore::Proto::EntityResult.new.tap do |er|
-            er.entity = Gcloud::Datastore::Entity.new.tap do |e|
+    let(:lookup_res_missing) do
+      lookup_res.tap do |response|
+        2.times.map do
+          response.missing << Google::Datastore::V1beta3::EntityResult.new(
+            entity:  Gcloud::Datastore::Entity.new.tap do |e|
               e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
               e["name"] = "thingamajig"
-            end.to_proto
-          end
+            end.to_grpc
+          )
         end
       end
     end
 
     it "contains deferred entities" do
-      dataset.connection.expect :lookup,
-                                lookup_response_deferred,
-                                [Gcloud::Datastore::Proto::Key,
-                                 Gcloud::Datastore::Proto::Key]
+      lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+        project_id: project,
+        keys: [Gcloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
+               Gcloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
+      )
+      dataset.service.mocked_datastore.expect :lookup, lookup_res_deferred, [lookup_req]
 
-      key = Gcloud::Datastore::Key.new "ds-test", "thingie"
-      entities = dataset.find_all key, key
+      key1 = Gcloud::Datastore::Key.new "ds-test", "thingie1"
+      key2 = Gcloud::Datastore::Key.new "ds-test", "thingie2"
+      entities = dataset.find_all key1, key2
       entities.count.must_equal 2
       entities.deferred.count.must_equal 2
       entities.missing.count.must_equal 0
@@ -216,13 +248,16 @@ describe Gcloud::Datastore::Dataset do
     end
 
     it "contains missing entities" do
-      dataset.connection.expect :lookup,
-                                lookup_response_missing,
-                                [Gcloud::Datastore::Proto::Key,
-                                 Gcloud::Datastore::Proto::Key]
+      lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+        project_id: project,
+        keys: [Gcloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
+               Gcloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
+      )
+      dataset.service.mocked_datastore.expect :lookup, lookup_res_missing, [lookup_req]
 
-      key = Gcloud::Datastore::Key.new "ds-test", "thingie"
-      entities = dataset.find_all key, key
+      key1 = Gcloud::Datastore::Key.new "ds-test", "thingie1"
+      key2 = Gcloud::Datastore::Key.new "ds-test", "thingie2"
+      entities = dataset.find_all key1, key2
       entities.count.must_equal 2
       entities.deferred.count.must_equal 0
       entities.missing.count.must_equal 2
