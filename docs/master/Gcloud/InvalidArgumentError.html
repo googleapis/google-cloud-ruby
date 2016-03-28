@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <title>Gcloud::Logging::ApiError &mdash; Gcloud Documentation</title>
+    <title>Gcloud::InvalidArgumentError &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,21 +69,22 @@
     <article class="main lang-page" role="main">
 
       <header class="docs-header">
-        <h1 class="page-title">Gcloud::Logging::ApiError</h1>
+        <h1 class="page-title">Gcloud::InvalidArgumentError</h1>
       </header>
 
       <section class="content">
 
         <div id="description" class="description">
-          <h1 id="apierror">ApiError</h1>
-
-<p>Raised when an API call is not successful.</p>
+          <p>InvalidArgument indicates client specified an invalid argument.
+Note that this differs from FailedPrecondition. It indicates arguments
+that are problematic regardless of the state of the system
+(e.g., a malformed file name).</p>
 
         </div>
 
         <div class="section-links">
           
-            <div>Parent: <span class='object_link'><a href="Error.html" title="Gcloud::Logging::Error (class)">Error</a></span></div>
+            <div>Parent: <span class='object_link'><a href="Error.html" title="Gcloud::Error (class)">Error</a></span></div>
           
 
           
@@ -94,9 +95,9 @@
               Instance Methods
 
               
-                <span class='object_link'><a href="#code-instance_method" title="Gcloud::Logging::ApiError#code (method)">#code</a></span>
+                <span class='object_link'><a href="Error.html#inner-instance_method" title="Gcloud::Error#inner (method)">Error#inner</a></span>
               
-                <span class='object_link'><a href="#errors-instance_method" title="Gcloud::Logging::ApiError#errors (method)">#errors</a></span>
+                <span class='object_link'><a href="Error.html#initialize-instance_method" title="Gcloud::Error#initialize (method)">Error#initialize</a></span>
               
             </div>
           
@@ -111,18 +112,18 @@
             
               
                 <div class="method">
-                  <a name="code-instance_method"></a>
+                  <a name="inner-instance_method"></a>
                   <h4>
-                    <code>code</code>
+                    <code>inner</code>
                     <span>
-                      <a href="#code-instance_method">&para;</a>
+                      <a href="#inner-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
                     </span>
                   </h4>
 
                   <div class="method-description">
 
-                    <p>The code of the error.</p>
+                    <p>The inner error object.</p>
 
 
                     
@@ -140,24 +141,36 @@
             
               
                 <div class="method">
-                  <a name="errors-instance_method"></a>
+                  <a name="initialize-instance_method"></a>
                   <h4>
-                    <code>errors</code>
+                    <code>initialize(message = nil, error = nil)</code>
                     <span>
-                      <a href="#errors-instance_method">&para;</a>
+                      <a href="#initialize-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
                     </span>
                   </h4>
 
                   <div class="method-description">
 
-                    <p>The errors encountered.</p>
+                    <p>Create a new error object.</p>
 
 
                     
 
                     
 
+                    
+                      <h3 id="method-i-initialize-label-Returns">
+                        Returns
+                        <span><a href="#method-i-initialize-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Error.html" title="Gcloud::Error (class)">Error</a></span></tt>)
+                        
+                          <div class='inline'><p>a new instance of Error</p>
+</div>
+                        
+                      </p>
                     
 
                     
@@ -173,7 +186,7 @@
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 09, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Entry.html'>Entry</a></li><li class='toc-l1'><a class='reference internal' href='Resource.html'>Resource</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Mar 28, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

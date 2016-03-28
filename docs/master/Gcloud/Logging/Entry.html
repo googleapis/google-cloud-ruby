@@ -79,6 +79,19 @@
 
 <p>An individual entry in a log.</p>
 
+<p>Each log entry is composed of metadata and a payload. The metadata
+includes standard information used by Cloud Logging, such as when the
+entry was created and where it came from. The payload is the event record.
+Traditionally this is a message string, but in Cloud Logging it can also
+be a JSON or protocol buffer object. A single log can have entries with
+different payload types.</p>
+
+<p>A log is a named collection of entries. Logs can be produced by Google
+Cloud Platform services, by third-party services, or by your applications.
+For example, the log <code class="highlighter-rouge">compute.googleapis.com/activity_log</code> is produced by
+Google Compute Engine. Logs are simply referenced by name in Gcloud. There
+is no <code class="highlighter-rouge">Log</code> type in Gcloud or <code class="highlighter-rouge">Log</code> resource in the Cloud Logging API.</p>
+
         </div>
 
         <div class="section-links">
@@ -168,7 +181,9 @@
 
                   <div class="method-description">
 
-                    <p>Create an empty Entry object.</p>
+                    <p>Create a new Entry instance. The <span class='object_link'><a href="#resource-instance_method" title="Gcloud::Logging::Entry#resource (method)">#resource</a></span> attribute is
+pre-populated with a new <span class='object_link'><a href="Resource.html" title="Gcloud::Logging::Resource (class)">Resource</a></span> instance. See also
+<span class='object_link'><a href="Project.html#entry-instance_method" title="Gcloud::Logging::Project#entry (method)">Project#entry</a></span>.</p>
 
 
                     
@@ -211,7 +226,7 @@
 
                     <p>The resource name of the log to which this log entry belongs. The format
 of the name is <code class="highlighter-rouge">projects/&lt;project-id&gt;/logs/&lt;log-id&gt;</code>. e.g.
-<code class="highlighter-rouge">projects/my-projectid/logs/syslog</code> and
+<code class="highlighter-rouge">projects/my-projectid/logs/my_app_log</code> and
 <code class="highlighter-rouge">projects/1234567890/logs/library.googleapis.com%2Fbook_log</code></p>
 
 <p>The log ID part of resource name must be less than 512 characters long
@@ -249,7 +264,7 @@ Forward-slash (<code class="highlighter-rouge">/</code>) characters in the log I
 
                     <p>The resource name of the log to which this log entry belongs. The format
 of the name is <code class="highlighter-rouge">projects/&lt;project-id&gt;/logs/&lt;log-id&gt;</code>. e.g.
-<code class="highlighter-rouge">projects/my-projectid/logs/syslog</code> and
+<code class="highlighter-rouge">projects/my-projectid/logs/my_app_log</code> and
 <code class="highlighter-rouge">projects/1234567890/logs/library.googleapis.com%2Fbook_log</code></p>
 
 <p>The log ID part of resource name must be less than 512 characters long
@@ -295,6 +310,15 @@ error.</p>
 
                     
 
+                    
+                      <h3 id="method-i-resource-label-Returns">
+                        Returns
+                        <span><a href="#method-i-resource-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Resource.html" title="Gcloud::Logging::Resource (class)">Gcloud::Logging::Resource</a></span></tt>)
+                        
+                      </p>
                     
 
                     
@@ -377,7 +401,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>The severity of the log entry. The default value is <code class="highlighter-rouge">DEFAULT</code>.</p>
+                    <p>The severity level of the log entry. The default value is <code class="highlighter-rouge">DEFAULT</code>.</p>
 
 
                     
@@ -406,7 +430,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>The severity of the log entry. The default value is <code class="highlighter-rouge">DEFAULT</code>.</p>
+                    <p>The severity level of the log entry. The default value is <code class="highlighter-rouge">DEFAULT</code>.</p>
 
 
                     
@@ -435,7 +459,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Helper method to determine if the severity is <code class="highlighter-rouge">DEFAULT</code></p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">DEFAULT</code>.</p>
 
 
                     
@@ -473,7 +497,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Helper method to determine if the severity is <code class="highlighter-rouge">DEBUG</code></p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">DEBUG</code>.</p>
 
 
                     
@@ -511,7 +535,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Helper method to determine if the severity is <code class="highlighter-rouge">INFO</code></p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">INFO</code>.</p>
 
 
                     
@@ -549,7 +573,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Helper method to determine if the severity is <code class="highlighter-rouge">NOTICE</code></p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">NOTICE</code>.</p>
 
 
                     
@@ -587,7 +611,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Helper method to determine if the severity is <code class="highlighter-rouge">WARNING</code></p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">WARNING</code>.</p>
 
 
                     
@@ -625,7 +649,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Helper method to determine if the severity is <code class="highlighter-rouge">ERROR</code></p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">ERROR</code>.</p>
 
 
                     
@@ -663,7 +687,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Helper method to determine if the severity is <code class="highlighter-rouge">CRITICAL</code></p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">CRITICAL</code>.</p>
 
 
                     
@@ -701,7 +725,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Helper method to determine if the severity is <code class="highlighter-rouge">ALERT</code></p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">ALERT</code>.</p>
 
 
                     
@@ -739,7 +763,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Helper method to determine if the severity is <code class="highlighter-rouge">EMERGENCY</code></p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">EMERGENCY</code>.</p>
 
 
                     
@@ -850,6 +874,15 @@ the log entry.</p>
                     
 
                     
+                      <h3 id="method-i-labels-label-Returns">
+                        Returns
+                        <span><a href="#method-i-labels-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Hash</tt>)
+                        
+                      </p>
+                    
 
                     
 
@@ -879,6 +912,15 @@ the log entry.</p>
 
                     
 
+                    
+                      <h3 id="method-i-labels=-label-Returns">
+                        Returns
+                        <span><a href="#method-i-labels=-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Hash</tt>)
+                        
+                      </p>
                     
 
                     
@@ -910,6 +952,15 @@ a hash (protocol buffer).</p>
                     
 
                     
+                      <h3 id="method-i-payload-label-Returns">
+                        Returns
+                        <span><a href="#method-i-payload-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>String</tt>, <tt>Hash</tt>)
+                        
+                      </p>
+                    
 
                     
 
@@ -939,6 +990,15 @@ a hash (protocol buffer).</p>
 
                     
 
+                    
+                      <h3 id="method-i-payload=-label-Returns">
+                        Returns
+                        <span><a href="#method-i-payload=-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>String</tt>, <tt>Hash</tt>)
+                        
+                      </p>
                     
 
                     
@@ -970,6 +1030,15 @@ applicable.</p>
                     
 
                     
+                      <h3 id="method-i-http_request-label-Returns">
+                        Returns
+                        <span><a href="#method-i-http_request-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Entry/HttpRequest.html" title="Gcloud::Logging::Entry::HttpRequest (class)">Gcloud::Logging::Entry::HttpRequest</a></span></tt>)
+                        
+                      </p>
+                    
 
                     
 
@@ -1000,6 +1069,15 @@ applicable.</p>
                     
 
                     
+                      <h3 id="method-i-operation-label-Returns">
+                        Returns
+                        <span><a href="#method-i-operation-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Entry/Operation.html" title="Gcloud::Logging::Entry::Operation (class)">Gcloud::Logging::Entry::Operation</a></span></tt>)
+                        
+                      </p>
+                    
 
                     
 
@@ -1014,7 +1092,7 @@ applicable.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 09, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal current' href=''>Entry</a></li><li class='toc-l1'><a class='reference internal' href='Resource.html'>Resource</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Mar 28, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal current' href=''>Entry</a></li><li class='toc-l1'><a class='reference internal' href='Resource.html'>Resource</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

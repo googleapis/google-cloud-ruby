@@ -77,7 +77,16 @@
         <div id="description" class="description">
           <h1 id="sink">Sink</h1>
 
-<p>Used to export log entries outside Cloud Logging.</p>
+<p>Used to export log entries outside Cloud Logging. When you create a sink,
+new log entries are exported. Cloud Logging does not send
+previously-ingested log entries to the sink’s destination.</p>
+
+<p>Before creating the sink, ensure that you have granted
+<code class="highlighter-rouge">cloud-logs@google.com</code> permission to write logs to the destination. See
+<a href="https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs">Permissions for writing exported
+logs</a>.</p>
+
+<p>You can retrieve an existing sink with <span class='object_link'><a href="Project.html#sink-instance_method" title="Gcloud::Logging::Project#sink (method)">Project#sink</a></span>.</p>
 
         </div>
 
@@ -339,7 +348,7 @@ when it was written to Cloud Logging.</p>
                     <p>Updates the log entry version used when exporting log entries from this
 sink. This version does not have to correspond to the version of the log
 entry when it was written to Cloud Logging. Accepted values are
-<code class="highlighter-rouge">:unspecified</code>, <code class="highlighter-rouge">:v2</code>, and <code class="highlighter-rouge">:v1</code>.</p>
+<code class="highlighter-rouge">:VERSION_FORMAT_UNSPECIFIED</code>, <code class="highlighter-rouge">:V2</code>, and <code class="highlighter-rouge">:V1</code>.</p>
 
 
                     
@@ -629,7 +638,7 @@ service.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 09, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Entry.html'>Entry</a></li><li class='toc-l1'><a class='reference internal' href='Resource.html'>Resource</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Mar 28, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Entry.html'>Entry</a></li><li class='toc-l1'><a class='reference internal' href='Resource.html'>Resource</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

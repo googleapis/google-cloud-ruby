@@ -81,13 +81,13 @@
 </code></pre>
 </div>
 
-<p>Gcloud aims to make authentication as simple as possible. Google Cloud requires a <strong>Project ID</strong> and <strong>Service Account Credentials</strong> to connect to the APIs. You can learn more about various options for connection on the <a href="AUTHENTICATION">Authentication Guide</a>.</p>
+<p>Gcloud aims to make authentication as simple as possible. Google Cloud requires a <strong>Project ID</strong> and <strong>Service Account Credentials</strong> to connect to the APIs. You can learn more about various options for connection on the <a href="https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication">Authentication Guide</a>.</p>
 
 <h1 id="bigquery">BigQuery</h1>
 
 <p><a href="https://cloud.google.com/bigquery/">Google Cloud BigQuery</a> (<a href="https://cloud.google.com/bigquery/docs">docs</a>) enables super-fast, SQL-like queries against append-only tables, using the processing power of Google’s infrastructure. Simply move your data into BigQuery and let it handle the hard work. You can control access to both the project and your data based on your business needs, such as giving others the ability to view or query your data.</p>
 
-<p>See the <a href="rdoc-ref:Gcloud::Bigquery">gcloud-ruby BigQuery API documentation</a> to learn how to connect to Cloud BigQuery using this library.</p>
+<p>See the <span class='object_link'><a href="Gcloud/Bigquery.html" title="Gcloud::Bigquery (module)">gcloud-ruby BigQuery API documentation</a></span> to learn how to connect to Cloud BigQuery using this library.</p>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
@@ -119,7 +119,7 @@
 
 <p>Follow the <a href="https://cloud.google.com/datastore/docs/activate">activation instructions</a> to use the Google Cloud Datastore API with your project.</p>
 
-<p>See the <a href="rdoc-ref:Gcloud::Datastore">gcloud-ruby Datastore API documentation</a> to learn how to interact with the Cloud Datastore using this library.</p>
+<p>See the <span class='object_link'><a href="Gcloud/Bigquery.html" title="Gcloud::Bigquery (module)">gcloud-ruby Datastore API documentation</a></span> to learn how to interact with the Cloud Datastore using this library.</p>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
@@ -146,7 +146,7 @@
 
 <p><a href="https://cloud.google.com/dns/">Google Cloud DNS</a> (<a href="https://cloud.google.com/dns/docs">docs</a>) is a high-performance, resilient, global DNS service that provides a cost-effective way to make your applications and services available to your users. This programmable, authoritative DNS service can be used to easily publish and manage DNS records using the same infrastructure relied upon by Google. To learn more, read <a href="https://cloud.google.com/dns/what-is-cloud-dns">What is Google Cloud DNS?</a>.</p>
 
-<p>See the <a href="rdoc-ref:Gcloud::Dns">gcloud-ruby DNS API documentation</a> to learn how to connect to Cloud DNS using this library.</p>
+<p>See the <span class='object_link'><a href="Gcloud/Dns.html" title="Gcloud::Dns (module)">gcloud-ruby DNS API documentation</a></span> to learn how to connect to Cloud DNS using this library.</p>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
@@ -170,11 +170,51 @@
 </code></pre>
 </div>
 
+<h1 id="logging">Logging</h1>
+
+<p><a href="https://cloud.google.com/logging/">Google Cloud Logging</a> collects and stores logs from applications and services on the Google Cloud Platform, giving you fine-grained, programmatic control over your projects’ logs. With this API you can do the following:</p>
+
+<ul>
+  <li>Read and filter log entries</li>
+  <li>Export your log entries to Cloud Storage,
+BigQuery, or Cloud Pub/Sub</li>
+  <li>Create logs-based metrics for use in Cloud
+Monitoring</li>
+  <li>Write log entries</li>
+</ul>
+
+<p>See the <span class='object_link'><a href="Gcloud/Logging.html" title="Gcloud::Logging (module)">gcloud-ruby Logging API documentation</a></span> to learn how to connect to Cloud Loging using this library.</p>
+
+<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">logging</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">logging</span>
+
+<span class="c1"># List all log entries</span>
+<span class="n">logging</span><span class="p">.</span><span class="nf">entries</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+  <span class="nb">puts</span> <span class="s2">"[</span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">timestamp</span><span class="si">}</span><span class="s2">] </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">log_name</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">payload</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+
+<span class="c1"># List only entries from a single log</span>
+<span class="n">entries</span> <span class="o">=</span> <span class="n">logging</span><span class="p">.</span><span class="nf">entries</span> <span class="ss">filter: </span><span class="s2">"log:syslog"</span>
+
+<span class="c1"># Write a log entry</span>
+<span class="n">entry</span> <span class="o">=</span> <span class="n">logging</span><span class="p">.</span><span class="nf">entry</span>
+<span class="n">entry</span><span class="p">.</span><span class="nf">payload</span> <span class="o">=</span> <span class="s2">"Job started."</span>
+<span class="n">entry</span><span class="p">.</span><span class="nf">log_name</span> <span class="o">=</span> <span class="s2">"my_app_log"</span>
+<span class="n">entry</span><span class="p">.</span><span class="nf">resource</span><span class="p">.</span><span class="nf">type</span> <span class="o">=</span> <span class="s2">"gae_app"</span>
+<span class="n">entry</span><span class="p">.</span><span class="nf">resource</span><span class="p">.</span><span class="nf">labels</span><span class="p">[</span><span class="ss">:module_id</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"1"</span>
+<span class="n">entry</span><span class="p">.</span><span class="nf">resource</span><span class="p">.</span><span class="nf">labels</span><span class="p">[</span><span class="ss">:version_id</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"20150925t173233"</span>
+
+<span class="n">logging</span><span class="p">.</span><span class="nf">write_entries</span> <span class="n">entry</span>
+</code></pre>
+</div>
+
 <h1 id="pubsub">Pub/Sub</h1>
 
 <p><a href="https://cloud.google.com/pubsub/">Google Cloud Pub/Sub</a> (<a href="https://cloud.google.com/pubsub/reference/rest/">docs</a>) is designed to provide reliable, many-to-many, asynchronous messaging between applications. Publisher applications can send messages to a “topic” and other applications can subscribe to that topic to receive the messages. By decoupling senders and receivers, Google Cloud Pub/Sub allows developers to communicate between independently written applications.</p>
 
-<p>See the <a href="rdoc-ref:Gcloud::Pubsub">gcloud-ruby Pub/Sub API documentation</a> to learn how to connect to Cloud Pub/Sub using this library.</p>
+<p>See the <span class='object_link'><a href="Gcloud/Pubsub.html" title="Gcloud::Pubsub (module)">gcloud-ruby Pub/Sub API documentation</a></span> to learn how to connect to Cloud Pub/Sub using this library.</p>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
@@ -207,7 +247,7 @@
   <li>Undelete, or recover, projects that you don’t want to delete</li>
 </ul>
 
-<p>See the <a href="rdoc-ref:Gcloud::ResourceManager">gcloud-ruby Resource Manager API documentation</a> to learn how to connect to Cloud Resource Manager using this library.</p>
+<p>See the <span class='object_link'><a href="Gcloud/ResourceManager.html" title="Gcloud::ResourceManager (module)">gcloud-ruby Resource Manager API documentation</a></span> to learn how to connect to Cloud Resource Manager using this library.</p>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
@@ -234,7 +274,7 @@
 
 <p><a href="https://cloud.google.com/search/">Google Cloud Search</a> (<a href="https://cloud.google.com/search/reference/rest/index">docs</a>) allows an application to quickly perform full-text and geo-spatial searches without having to spin up instances and without the hassle of managing and maintaining a search service.</p>
 
-<p>See the <a href="rdoc-ref:Gcloud::Search">gcloud-ruby Search API documentation</a> to learn how to connect to Cloud Search using this library.</p>
+<p>See the <span class='object_link'><a href="Gcloud/Search.html" title="Gcloud::Search (module)">gcloud-ruby Search API documentation</a></span> to learn how to connect to Cloud Search using this library.</p>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
@@ -252,7 +292,7 @@
 
 <p><a href="https://cloud.google.com/storage/">Google Cloud Storage</a> (<a href="https://cloud.google.com/storage/docs/json_api/">docs</a>) allows you to store data on Google infrastructure with very high reliability, performance and availability, and can be used to distribute large data objects to users via direct download.</p>
 
-<p>See the <a href="rdoc-ref:Gcloud::Storage">gcloud-ruby Storage API documentation</a> to learn how to connect to Cloud Storage using this library.</p>
+<p>See the <span class='object_link'><a href="Gcloud/Storage.html" title="Gcloud::Storage (module)">gcloud-ruby Storage API documentation</a></span> to learn how to connect to Cloud Storage using this library.</p>
 
 <div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
@@ -277,7 +317,7 @@
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 09, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal current' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Mar 28, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal current' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

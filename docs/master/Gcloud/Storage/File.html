@@ -1073,11 +1073,14 @@ to. The path provided must be writable.</p>
                                 <div class='inline'><p>The verification algoruthm used to ensure the
 downloaded file contents are correct. Default is <code class="highlighter-rouge">:md5</code>.</p>
 
-<p>Acceptable values are:
-* <code class="highlighter-rouge">md5</code> - Verify file content match using the MD5 hash.
-* <code class="highlighter-rouge">crc32c</code> - Verify file content match using the CRC32c hash.
-* <code class="highlighter-rouge">all</code> - Perform all available file content verification.
-* <code class="highlighter-rouge">none</code> - Don’t perform file content verification.</p>
+<p>Acceptable values are:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">md5</code> - Verify file content match using the MD5 hash.</li>
+  <li><code class="highlighter-rouge">crc32c</code> - Verify file content match using the CRC32c hash.</li>
+  <li><code class="highlighter-rouge">all</code> - Perform all available file content verification.</li>
+  <li><code class="highlighter-rouge">none</code> - Don’t perform file content verification.</li>
+</ul>
 </div>
                               
                               (<tt>Symbol</tt>)
@@ -1230,19 +1233,22 @@ bucket.</p>
                                 <div class='inline'><p>A predefined set of access controls to apply to new
 file.</p>
 
-<p>Acceptable values are:
-* <code class="highlighter-rouge">auth</code>, <code class="highlighter-rouge">auth_read</code>, <code class="highlighter-rouge">authenticated</code>, <code class="highlighter-rouge">authenticated_read</code>,
-  <code class="highlighter-rouge">authenticatedRead</code> - File owner gets OWNER access, and
-  allAuthenticatedUsers get READER access.
-* <code class="highlighter-rouge">owner_full</code>, <code class="highlighter-rouge">bucketOwnerFullControl</code> - File owner gets OWNER
-  access, and project team owners get OWNER access.
-* <code class="highlighter-rouge">owner_read</code>, <code class="highlighter-rouge">bucketOwnerRead</code> - File owner gets OWNER access, and
-  project team owners get READER access.
-* <code class="highlighter-rouge">private</code> - File owner gets OWNER access.
-* <code class="highlighter-rouge">project_private</code>, <code class="highlighter-rouge">projectPrivate</code> - File owner gets OWNER access,
-  and project team members get access according to their roles.
-* <code class="highlighter-rouge">public</code>, <code class="highlighter-rouge">public_read</code>, <code class="highlighter-rouge">publicRead</code> - File owner gets OWNER
-  access, and allUsers get READER access.</p>
+<p>Acceptable values are:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">auth</code>, <code class="highlighter-rouge">auth_read</code>, <code class="highlighter-rouge">authenticated</code>, <code class="highlighter-rouge">authenticated_read</code>,
+<code class="highlighter-rouge">authenticatedRead</code> - File owner gets OWNER access, and
+allAuthenticatedUsers get READER access.</li>
+  <li><code class="highlighter-rouge">owner_full</code>, <code class="highlighter-rouge">bucketOwnerFullControl</code> - File owner gets OWNER
+access, and project team owners get OWNER access.</li>
+  <li><code class="highlighter-rouge">owner_read</code>, <code class="highlighter-rouge">bucketOwnerRead</code> - File owner gets OWNER access, and
+project team owners get READER access.</li>
+  <li><code class="highlighter-rouge">private</code> - File owner gets OWNER access.</li>
+  <li><code class="highlighter-rouge">project_private</code>, <code class="highlighter-rouge">projectPrivate</code> - File owner gets OWNER access,
+and project team members get access according to their roles.</li>
+  <li><code class="highlighter-rouge">public</code>, <code class="highlighter-rouge">public_read</code>, <code class="highlighter-rouge">publicRead</code> - File owner gets OWNER
+access, and allUsers get READER access.</li>
+</ul>
 </div>
                               
                               (<tt>String</tt>)
@@ -1860,7 +1866,7 @@ many predefined lists.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 09, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal current' href=''>File</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Mar 28, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal current' href=''>File</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

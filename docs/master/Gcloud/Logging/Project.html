@@ -77,8 +77,11 @@
         <div id="description" class="description">
           <h1 id="project">Project</h1>
 
-<p>Google Cloud Logging collects and stores logs from applications and
-services on the Google Cloud Platform.</p>
+<p>Projects are top-level containers in Google Cloud Platform. They store
+information about billing and authorized users, and they control access to
+Google Cloud Logging resources. Each project has a friendly name and a
+unique ID. Projects can be created only in the <a href="https://console.developers.google.com">Google Developers
+Console</a>. See <span class='object_link'><a href="../../Gcloud.html#logging-instance_method" title="Gcloud#logging (method)">Gcloud#logging</a></span>.</p>
 
 <p>See Gcloud#logging</p>
 
@@ -173,13 +176,25 @@ services on the Google Cloud Platform.</p>
 
                   <div class="method-description">
 
-                    <p>The Logging project connected to.</p>
+                    <p>The ID of the current project.</p>
 
 
                     
 
                     
 
+                    
+                      <h3 id="method-i-project-label-Returns">
+                        Returns
+                        <span><a href="#method-i-project-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>String</tt>)
+                        
+                          <div class='inline'><p>the Google Cloud project ID</p>
+</div>
+                        
+                      </p>
                     
 
                     
@@ -191,11 +206,10 @@ services on the Google Cloud Platform.</p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-                    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
 
-<span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='comment'>#=&gt; &quot;my-todo-project&quot;</span></code></pre>
+<span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='comment'>#=&gt; &quot;my-project&quot;</span></code></pre>
                       
                     
 
@@ -237,7 +251,8 @@ Logging.</p>
                             <p>
                               
                                 <div class='inline'><p>One or more project IDs or project
-numbers from which to retrieve log entries.</p>
+numbers from which to retrieve log entries. If <code class="highlighter-rouge">nil</code>, the ID of the
+receiving project instance will be used.</p>
 </div>
                               
                               (<tt>String</tt>, <tt>Array</tt>)
@@ -253,7 +268,7 @@ numbers from which to retrieve log entries.</p>
                                 <div class='inline'><p>An <a href="https://cloud.google.com/logging/docs/view/advanced_filters">advanced logs
 filter</a>.
 The filter is compared against all log entries in the projects
-specified by projectIds. Only entries that match the filter are
+specified by <code class="highlighter-rouge">projects</code>. Only entries that match the filter are
 retrieved. An empty filter matches all log entries.</p>
 </div>
                               
@@ -332,8 +347,34 @@ of the larger set of results to view.</p>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
 <span class='id identifier rubyid_entries'>entries</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entries'>entries</span>
-<span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_entry'>entry</span><span class='op'>|</span>
-  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_e'>e</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_timestamp'>timestamp</span><span class='embexpr_end'>}</span><span class='tstring_content'>] </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>You can use a filter to narrow results to a single log.</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+<span class='id identifier rubyid_entries'>entries</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entries'>entries</span> <span class='label'>filter:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>log:syslog</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_e'>e</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_timestamp'>timestamp</span><span class='embexpr_end'>}</span><span class='tstring_content'>] </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>You can also order the results by timestamp.</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+<span class='id identifier rubyid_entries'>entries</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entries'>entries</span> <span class='label'>order:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>timestamp desc</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_e'>e</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_timestamp'>timestamp</span><span class='embexpr_end'>}</span><span class='tstring_content'>] </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></code></pre>
                       
                         
@@ -346,8 +387,8 @@ of the larger set of results to view.</p>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
 <span class='id identifier rubyid_entries'>entries</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entries'>entries</span>
 <span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span>
-  <span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_entry'>entry</span><span class='op'>|</span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_e'>e</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_timestamp'>timestamp</span><span class='embexpr_end'>}</span><span class='tstring_content'>] </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
   <span class='kw'>break</span> <span class='kw'>unless</span> <span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_next?'>next?</span>
   <span class='id identifier rubyid_entries'>entries</span> <span class='op'>=</span> <span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span>
@@ -397,7 +438,10 @@ of the larger set of results to view.</p>
 
                   <div class="method-description">
 
-                    <p>Creates an new Entry object to be populated.</p>
+                    <p>Creates an new Entry instance that may be populated and written to the
+Cloud Logging service. The <span class='object_link'><a href="Entry.html#resource-instance_method" title="Gcloud::Logging::Entry#resource (method)">Entry#resource</a></span> attribute is pre-populated
+with a new <span class='object_link'><a href="Resource.html" title="Gcloud::Logging::Resource (class)">Resource</a></span> instance. Equivalent to calling
+<code class="highlighter-rouge">Gcloud::Logging::Entry.new</code>.</p>
 
 
                     
@@ -411,6 +455,9 @@ of the larger set of results to view.</p>
                       </h3>
                       <p>
                         (<tt><span class='object_link'><a href="Entry.html" title="Gcloud::Logging::Entry (class)">Gcloud::Logging::Entry</a></span></tt>)
+                        
+                          <div class='inline'><p>a new Entry instance</p>
+</div>
                         
                       </p>
                     
@@ -427,13 +474,9 @@ of the larger set of results to view.</p>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
 
-<span class='id identifier rubyid_new_entry'>new_entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_e'>e</span><span class='op'>|</span>
-  <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>syslog</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cloudsql_database</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_timestamp'>timestamp</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span>
-  <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>INFO</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Export completed</span><span class='tstring_end'>&quot;</span></span>
-<span class='kw'>end</span>
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:INFO</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_write_entries'>write_entries</span> <span class='id identifier rubyid_entry'>entry</span></code></pre>
                       
@@ -481,8 +524,11 @@ of the larger set of results to view.</p>
 
                   <div class="method-description">
 
-                    <p>Lists log entries. Use this method to retrieve log entries from Cloud
-Logging.</p>
+                    <p>Writes log entries to the Cloud Logging service.</p>
+
+<p>If you write a collection of log entries, you can provide the log name,
+resource, and/or labels hash to be used for all of the entries, and omit
+these values from the individual entries.</p>
 
 
                     
@@ -500,11 +546,57 @@ Logging.</p>
                           <dd>
                             <p>
                               
-                                <div class='inline'><p>One or more entry objects
-to write. The log entries must have values for all required fields.</p>
+                                <div class='inline'><p>One or more entry objects to write. The log entries must have values
+for all required fields.</p>
 </div>
                               
-                              (<tt><span class='object_link'><a href="Entry.html" title="Gcloud::Logging::Entry (class)">Gcloud::Logging::Entry</a></span></tt>, <tt>Array</tt>)
+                              (<tt><span class='object_link'><a href="Entry.html" title="Gcloud::Logging::Entry (class)">Gcloud::Logging::Entry</a></span></tt>, <tt>Array&lt;<span class='object_link'><a href="Entry.html" title="Gcloud::Logging::Entry (class)">Gcloud::Logging::Entry</a></span>&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>log_name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A default log ID for those log entries in
+<code class="highlighter-rouge">entries</code> that do not specify their own <code class="highlighter-rouge">log_name</code>. See also
+<span class='object_link'><a href="Entry.html#log_name%3D-instance_method" title="Gcloud::Logging::Entry#log_name= (method)">Entry#log_name=</a></span>.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>resource</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A default monitored resource for those log
+entries in entries that do not specify their own resource. See also
+<span class='object_link'><a href="Entry.html#resource-instance_method" title="Gcloud::Logging::Entry#resource (method)">Entry#resource</a></span>.</p>
+</div>
+                              
+                              (<tt><span class='object_link'><a href="Resource.html" title="Gcloud::Logging::Resource (class)">Resource</a></span></tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>labels</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>User-defined <code class="highlighter-rouge">key:value</code>
+items that are added to the <code class="highlighter-rouge">labels</code> field of each log entry in
+<code class="highlighter-rouge">entries</code>, except when a log entry specifies its own <code class="highlighter-rouge">key:value</code> item
+with the same key. See also <span class='object_link'><a href="Entry.html#labels%3D-instance_method" title="Gcloud::Logging::Entry#labels= (method)">Entry#labels=</a></span>.</p>
+</div>
+                              
+                              (<tt>Hash{Symbol,String =&gt; String}</tt>)
                             </p>
                           </dd>
                         
@@ -537,18 +629,17 @@ to write. The log entries must have values for all required fields.</p>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
 
-<span class='id identifier rubyid_new_entry'>new_entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_e'>e</span><span class='op'>|</span>
-  <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>syslog</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cloudsql_database</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_timestamp'>timestamp</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span>
-  <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>INFO</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Export completed</span><span class='tstring_end'>&quot;</span></span>
-<span class='kw'>end</span>
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='lbracket'>[</span><span class='symbol'>:module_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='lbracket'>[</span><span class='symbol'>:version_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_write_entries'>write_entries</span> <span class='id identifier rubyid_new_entry'>new_entry</span></code></pre>
+<span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_write_entries'>write_entries</span> <span class='id identifier rubyid_entry'>entry</span></code></pre>
                       
                         
-                          <p class="example_title"><div class='inline'><p>You can provide log name for all entries.</p>
+                          <p class="example_title"><div class='inline'><p>Optionally pass log name, resource, and labels for all entries.</p>
 </div></p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
@@ -556,7 +647,20 @@ to write. The log entries must have values for all required fields.</p>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
 
-<span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_write_entries'>write_entries</span> <span class='lbracket'>[</span><span class='id identifier rubyid_entry1'>entry1</span><span class='comma'>,</span> <span class='id identifier rubyid_entry2'>entry2</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>log_name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>syslog</span><span class='tstring_end'>&quot;</span></span></code></pre>
+<span class='id identifier rubyid_entry1'>entry1</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry1'>entry1</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry2'>entry2</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry2'>entry2</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job completed.</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>job_size:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>large</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>job_code:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>red</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>module_id</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>version_id</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_write_entries'>write_entries</span> <span class='lbracket'>[</span><span class='id identifier rubyid_entry1'>entry1</span><span class='comma'>,</span> <span class='id identifier rubyid_entry2'>entry2</span><span class='rbracket'>]</span><span class='comma'>,</span>
+                      <span class='label'>log_name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                      <span class='label'>resource:</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
+                      <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span></code></pre>
                       
                     
 
@@ -578,8 +682,8 @@ to write. The log entries must have values for all required fields.</p>
 
                   <div class="method-description">
 
-                    <p>Creates a logger object that is API compatible with ruby’s standard
-library Logger.</p>
+                    <p>Creates a logger instance that is API-compatible with Ruby’s standard
+library <a href="http://ruby-doc.org/stdlib/libdoc/logger/rdoc">Logger</a>.</p>
 
 
                     
@@ -644,7 +748,7 @@ written log entries.</p>
                       <p>
                         (<tt><span class='object_link'><a href="Logger.html" title="Gcloud::Logging::Logger (class)">Gcloud::Logging::Logger</a></span></tt>)
                         
-                          <div class='inline'><p>Logger object that can be used in
+                          <div class='inline'><p>a Logger object that can be used in
 place of a ruby standard library logger object.</p>
 </div>
                         
@@ -667,7 +771,8 @@ place of a ruby standard library logger object.</p>
                             <span class='label'>module_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
                             <span class='label'>version_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>syslog</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='symbol'>:production</span></code></pre>
+<span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='symbol'>:production</span>
+<span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                     
 
@@ -748,7 +853,7 @@ deleted.</p>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
-<span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_delete_log'>delete_log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-log</span><span class='tstring_end'>&quot;</span></span></code></pre>
+<span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_delete_log'>delete_log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                     
 
@@ -774,6 +879,13 @@ deleted.</p>
 Google Cloud Logging.</p>
 
 
+                    
+                      <p class="tag_title">See Also:</p>
+                      <ul class="see">
+                        
+                          <li><a href="https://cloud.google.com/logging/docs/api/introduction_v2#monitored_resources" target="_parent" title="Monitored Resources">Monitored Resources</a></li>
+                        
+                      </ul>
                     
 
                     
@@ -840,8 +952,9 @@ of the larger set of results to view.</p>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
 <span class='id identifier rubyid_resource_descriptors'>resource_descriptors</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource_descriptors'>resource_descriptors</span>
-<span class='id identifier rubyid_resource_descriptors'>resource_descriptors</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_resource_descriptor'>resource_descriptor</span><span class='op'>|</span>
-  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_resource_descriptor'>resource_descriptor</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='id identifier rubyid_resource_descriptors'>resource_descriptors</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_rd'>rd</span><span class='op'>|</span>
+  <span class='id identifier rubyid_label_keys'>label_keys</span> <span class='op'>=</span> <span class='id identifier rubyid_rd'>rd</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:key</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>, </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_rd'>rd</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='embexpr_end'>}</span><span class='tstring_content'> (</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_label_keys'>label_keys</span><span class='embexpr_end'>}</span><span class='tstring_content'>)</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></code></pre>
                       
                         
@@ -854,8 +967,8 @@ of the larger set of results to view.</p>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
 <span class='id identifier rubyid_resource_descriptors'>resource_descriptors</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource_descriptors'>resource_descriptors</span>
 <span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span>
-  <span class='id identifier rubyid_resource_descriptors'>resource_descriptors</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_resource_descriptor'>resource_descriptor</span><span class='op'>|</span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_resource_descriptor'>resource_descriptor</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_resource_descriptors'>resource_descriptors</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_rd'>rd</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_rd'>rd</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>
   <span class='kw'>end</span>
   <span class='kw'>break</span> <span class='kw'>unless</span> <span class='id identifier rubyid_resource_descriptors'>resource_descriptors</span><span class='period'>.</span><span class='id identifier rubyid_next?'>next?</span>
   <span class='id identifier rubyid_resource_descriptors'>resource_descriptors</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_descriptors'>resource_descriptors</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span>
@@ -905,7 +1018,7 @@ of the larger set of results to view.</p>
 
                   <div class="method-description">
 
-                    <p>Creates a new Resource object.</p>
+                    <p>Creates a new monitored resource instance.</p>
 
 
                     
@@ -1052,8 +1165,8 @@ of the larger set of results to view.</p>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
 <span class='id identifier rubyid_sinks'>sinks</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_sinks'>sinks</span>
-<span class='id identifier rubyid_sinks'>sinks</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_sink'>sink</span><span class='op'>|</span>
-  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_sink'>sink</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='id identifier rubyid_sinks'>sinks</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='embexpr_end'>}</span><span class='tstring_content'> -&gt; </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_destination'>destination</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></code></pre>
                       
                         
@@ -1066,8 +1179,8 @@ of the larger set of results to view.</p>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
 <span class='id identifier rubyid_sinks'>sinks</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_sinks'>sinks</span>
 <span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span>
-  <span class='id identifier rubyid_sinks'>sinks</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_sink'>sink</span><span class='op'>|</span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_sink'>sink</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_sinks'>sinks</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='embexpr_end'>}</span><span class='tstring_content'> -&gt; </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_destination'>destination</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
   <span class='kw'>break</span> <span class='kw'>unless</span> <span class='id identifier rubyid_sinks'>sinks</span><span class='period'>.</span><span class='id identifier rubyid_next?'>next?</span>
   <span class='id identifier rubyid_sinks'>sinks</span> <span class='op'>=</span> <span class='id identifier rubyid_sinks'>sinks</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span>
@@ -1108,7 +1221,7 @@ of the larger set of results to view.</p>
                 <div class="method">
                   <a name="create_sink-instance_method"></a>
                   <h4>
-                    <code>create_sink(name, destination: nil, filter: nil, version: :unspecified)</code>
+                    <code>create_sink(name, destination, filter: nil, version: :unspecified)</code>
                     <span>
                       <a href="#create_sink-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1117,9 +1230,29 @@ of the larger set of results to view.</p>
 
                   <div class="method-description">
 
-                    <p>Creates a new sink.</p>
+                    <p>Creates a new project sink. When you create a sink, only new log entries
+that match the sink’s filter are exported. Cloud Logging does not send
+previously-ingested log entries to the sink’s destination.</p>
+
+<p>Before creating the sink, ensure that you have granted
+<code class="highlighter-rouge">cloud-logs@google.com</code> permission to write logs to the destination. See
+<a href="https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs">Permissions for writing exported
+logs</a>.</p>
 
 
+                    
+                      <p class="tag_title">See Also:</p>
+                      <ul class="see">
+                        
+                          <li><a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs" target="_parent" title="Exporting Logs With Sinks">Exporting Logs With Sinks</a></li>
+                        
+                          <li><a href="https://cloud.google.com/logging/docs/api/introduction_v2#kinds_of_log_sinks" target="_parent" title="Kinds of log sinks (API V2)">Kinds of log sinks (API V2)</a></li>
+                        
+                          <li><a href="https://cloud.google.com/logging/docs/api/#sinks" target="_parent" title="Sinks (API V1)">Sinks (API V1)</a></li>
+                        
+                          <li><a href="https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs" target="_parent" title="Permissions for writing exported logs">Permissions for writing exported logs</a></li>
+                        
+                      </ul>
                     
 
                     
@@ -1151,9 +1284,10 @@ following characters: <code class="highlighter-rouge">A-Z</code>, <code class="h
                           <dd>
                             <p>
                               
-                                <div class='inline'><p>The export destination. See <a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs">Exporting Logs
-With
-Sinks</a>.</p>
+                                <div class='inline'><p>The resource name of the export destination.
+See <a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs#about_sinks">About
+sinks</a>
+for examples.</p>
 </div>
                               
                               (<tt>String</tt>)
@@ -1174,7 +1308,7 @@ parameter, regardless of the format of the log entry that was
 originally written to Cloud Logging.</p>
 </div>
                               
-                              (<tt>String</tt>)
+                              (<tt>String</tt>, <tt>nil</tt>)
                             </p>
                           </dd>
                         
@@ -1187,7 +1321,10 @@ originally written to Cloud Logging.</p>
                                 <div class='inline'><p>The log entry version used when exporting log
 entries from this sink. This version does not have to correspond to
 the version of the log entry when it was written to Cloud Logging.
-Accepted values are <code class="highlighter-rouge">:unspecified</code>, <code class="highlighter-rouge">:v2</code>, and <code class="highlighter-rouge">:v1</code>.</p>
+Accepted values are <code class="highlighter-rouge">:unspecified</code>, <code class="highlighter-rouge">:v2</code>, and <code class="highlighter-rouge">:v1</code>. Version 2 is
+currently the preferred format. An unspecified version format
+currently defaults to V2 in the service. The default value is
+<code class="highlighter-rouge">:unspecified</code>.</p>
 </div>
                               
                               (<tt>Symbol</tt>)
@@ -1205,6 +1342,9 @@ Accepted values are <code class="highlighter-rouge">:unspecified</code>, <code c
                       <p>
                         (<tt><span class='object_link'><a href="Sink.html" title="Gcloud::Logging::Sink (class)">Gcloud::Logging::Sink</a></span></tt>)
                         
+                          <div class='inline'><p>a project sink</p>
+</div>
+                        
                       </p>
                     
 
@@ -1219,7 +1359,16 @@ Accepted values are <code class="highlighter-rouge">:unspecified</code>, <code c
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
-<span class='id identifier rubyid_sink'>sink</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_create_sink'>create_sink</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-sink</span><span class='tstring_end'>&quot;</span></span></code></pre>
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_storage'>storage</span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_create_bucket'>create_bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-logs-bucket</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Grant owner permission to Cloud Logging service
+</span><span class='id identifier rubyid_email'>email</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cloud-logs@google.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_acl'>acl</span><span class='period'>.</span><span class='id identifier rubyid_add_owner'>add_owner</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>group-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_email'>email</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_sink'>sink</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_create_sink'>create_sink</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-sink</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                           <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>storage.googleapis.com/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                     
 
@@ -1265,7 +1414,7 @@ Accepted values are <code class="highlighter-rouge">:unspecified</code>, <code c
 
                   <div class="method-description">
 
-                    <p>Retrieves sink by name.</p>
+                    <p>Retrieves a sink by name.</p>
 
 
                     
@@ -1301,7 +1450,7 @@ Accepted values are <code class="highlighter-rouge">:unspecified</code>, <code c
                       <p>
                         (<tt><span class='object_link'><a href="Sink.html" title="Gcloud::Logging::Sink (class)">Gcloud::Logging::Sink</a></span></tt>, <tt>nil</tt>)
                         
-                          <div class='inline'><p>Returns <code class="highlighter-rouge">nil</code> if sink does not
+                          <div class='inline'><p>Returns <code class="highlighter-rouge">nil</code> if the sink does not
 exist.</p>
 </div>
                         
@@ -1463,8 +1612,8 @@ of the larger set of results to view.</p>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
 <span class='id identifier rubyid_metrics'>metrics</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_metrics'>metrics</span>
-<span class='id identifier rubyid_metrics'>metrics</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_metric'>metric</span><span class='op'>|</span>
-  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_metric'>metric</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='id identifier rubyid_metrics'>metrics</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></code></pre>
                       
                         
@@ -1477,8 +1626,8 @@ of the larger set of results to view.</p>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
 <span class='id identifier rubyid_metrics'>metrics</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_metrics'>metrics</span>
 <span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span>
-  <span class='id identifier rubyid_metrics'>metrics</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_metric'>metric</span><span class='op'>|</span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_metric'>metric</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_metrics'>metrics</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
   <span class='kw'>break</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metrics'>metrics</span><span class='period'>.</span><span class='id identifier rubyid_next?'>next?</span>
   <span class='id identifier rubyid_metrics'>metrics</span> <span class='op'>=</span> <span class='id identifier rubyid_metrics'>metrics</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span>
@@ -1519,7 +1668,7 @@ of the larger set of results to view.</p>
                 <div class="method">
                   <a name="create_metric-instance_method"></a>
                   <h4>
-                    <code>create_metric(name, description: nil, filter: nil)</code>
+                    <code>create_metric(name, filter, description: nil)</code>
                     <span>
                       <a href="#create_metric-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1528,9 +1677,18 @@ of the larger set of results to view.</p>
 
                   <div class="method-description">
 
-                    <p>Creates a new metric.</p>
+                    <p>Creates a new logs-based metric for Google Cloud Monitoring.</p>
 
 
+                    
+                      <p class="tag_title">See Also:</p>
+                      <ul class="see">
+                        
+                          <li><a href="https://cloud.google.com/logging/docs/view/logs_based_metrics" target="_parent" title="Logs-based Metrics">Logs-based Metrics</a></li>
+                        
+                          <li><a href="https://cloud.google.com/monitoring/docs" target="_parent" title="Google Cloud Monitoring">Google Cloud Monitoring</a></li>
+                        
+                      </ul>
                     
 
                     
@@ -1559,20 +1717,6 @@ name.</p>
                           </dd>
                         
                           <dt>
-                            <code>description</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>A description of this metric, which is used
-in documentation.</p>
-</div>
-                              
-                              (<tt>String</tt>)
-                            </p>
-                          </dd>
-                        
-                          <dt>
                             <code>filter</code>
                           </dt>
                           <dd>
@@ -1583,6 +1727,20 @@ filter</a>.</p>
 </div>
                               
                               (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>description</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A description of this metric, which is
+used in documentation.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>nil</tt>)
                             </p>
                           </dd>
                         
@@ -1611,7 +1769,7 @@ filter</a>.</p>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
-<span class='id identifier rubyid_metric'>metric</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_create_metric'>create_metric</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-metric</span><span class='tstring_end'>&quot;</span></span></code></pre>
+<span class='id identifier rubyid_metric'>metric</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_create_metric'>create_metric</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>errors</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>severity&gt;=ERROR</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                     
 
@@ -1711,7 +1869,7 @@ exist.</p>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
-<span class='id identifier rubyid_metric'>metric</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_metric'>metric</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>existing-metric</span><span class='tstring_end'>&quot;</span></span></code></pre>
+<span class='id identifier rubyid_metric'>metric</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_metric'>metric</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>existing_metric</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>By default <code class="highlighter-rouge">nil</code> will be returned if the metric does not exist.</p>
@@ -1721,7 +1879,7 @@ exist.</p>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
-<span class='id identifier rubyid_metric'>metric</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_metric'>metric</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>non-existing-metric</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; nil</span></code></pre>
+<span class='id identifier rubyid_metric'>metric</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_metric'>metric</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>non_existing_metric</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; nil</span></code></pre>
                       
                     
 
@@ -1779,7 +1937,7 @@ exist.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Feb 09, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l1'><a class='reference internal current' href=''>Project</a></li><li class='toc-l1'><a class='reference internal' href='Entry.html'>Entry</a></li><li class='toc-l1'><a class='reference internal' href='Resource.html'>Resource</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Mar 28, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l1'><a class='reference internal current' href=''>Project</a></li><li class='toc-l1'><a class='reference internal' href='Entry.html'>Entry</a></li><li class='toc-l1'><a class='reference internal' href='Resource.html'>Resource</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
