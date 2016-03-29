@@ -28,12 +28,12 @@ module Gcloud
       # Many common Array methods will return a new Array instance.
       #
       # @example
-      #   entities = dataset.run query
+      #   entities = datastore.run query
       #   entities.size #=> 3
       #   entities.cursor #=> Gcloud::Datastore::Cursor(c3VwZXJhd2Vzb21lIQ)
       #
       # @example Caution, many Array methods will return a new Array instance:
-      #   entities = dataset.run query
+      #   entities = datastore.run query
       #   entities.size #=> 3
       #   entities.end_cursor #=> Gcloud::Datastore::Cursor(c3VwZXJhd2Vzb21lIQ)
       #   names = entities.map { |e| e.name }

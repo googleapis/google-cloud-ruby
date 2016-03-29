@@ -28,13 +28,13 @@ module Gcloud
       # Many common Array methods will return a new Array instance.
       #
       # @example
-      #   entities = dataset.find_all key1, key2, key3
+      #   entities = datastore.find_all key1, key2, key3
       #   entities.size #=> 3
       #   entities.deferred #=> []
       #   entities.missing #=> []
       #
       # @example Caution, many Array methods will return a new Array instance:
-      #   entities = dataset.find_all key1, key2, key3
+      #   entities = datastore.find_all key1, key2, key3
       #   entities.size #=> 3
       #   entities.deferred #=> []
       #   entities.missing #=> []

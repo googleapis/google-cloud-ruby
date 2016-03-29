@@ -50,8 +50,8 @@ module Gcloud
       #   gcloud = Gcloud.new "my-todo-project",
       #                       "/path/to/keyfile.json"
       #
-      #   dataset = gcloud.datastore
-      #   entity = dataset.find "User", "heidi@example.com"
+      #   datastore = gcloud.datastore
+      #   entity = datastore.find "User", "heidi@example.com"
       #   entity.key.dataset_id #=> "my-todo-project"
       #
       attr_accessor :dataset_id
@@ -67,8 +67,8 @@ module Gcloud
       #   gcloud = Gcloud.new "my-todo-project",
       #                       "/path/to/keyfile.json"
       #
-      #   dataset = gcloud.datastore
-      #   entity = dataset.find "User", "heidi@example.com"
+      #   datastore = gcloud.datastore
+      #   entity = datastore.find "User", "heidi@example.com"
       #   entity.key.namespace #=> "ns~todo-project"
       #
       attr_accessor :namespace
@@ -178,12 +178,12 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
+      #   datastore = gcloud.datastore
       #
-      #   user = dataset.find "User", "heidi@example.com"
-      #   query = dataset.query("List").
+      #   user = datastore.find "User", "heidi@example.com"
+      #   query = datastore.query("List").
       #     ancestor(user.key)
-      #   lists = dataset.run query
+      #   lists = datastore.run query
       #   lists.first.key.parent #=> Key("User", "heidi@example.com")
       #
       attr_reader :parent

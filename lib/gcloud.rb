@@ -48,7 +48,7 @@ module Gcloud
   #   require "gcloud"
   #
   #   gcloud  = Gcloud.new
-  #   dataset = gcloud.datastore
+  #   datastore = gcloud.datastore
   #   pubsub  = gcloud.pubsub
   #   storage = gcloud.storage
   #
@@ -85,21 +85,21 @@ module Gcloud
   #   require "gcloud"
   #
   #   gcloud  = Gcloud.new
-  #   dataset = gcloud.datastore
+  #   datastore = gcloud.datastore
   #
-  #   entity = dataset.entity "Task" do |t|
+  #   entity = datastore.entity "Task" do |t|
   #     t["description"] = "Get started with Google Cloud"
   #     t["completed"] = false
   #   end
   #
-  #   dataset.save entity
+  #   datastore.save entity
   #
   # @example You shouldn't need to override the default scope, but you can:
   #   require "gcloud"
   #
   #   gcloud  = Gcloud.new
   #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
-  #   dataset = gcloud.datastore scope: platform_scope
+  #   datastore = gcloud.datastore scope: platform_scope
   #
   def datastore scope: nil
     require "gcloud/datastore"

@@ -28,7 +28,7 @@ module Gcloud
     #   query.kind("Task").
     #     where("completed", "=", true)
     #
-    #   entities = dataset.run query
+    #   entities = datastore.run query
     #
     class Query
       ##
@@ -48,7 +48,7 @@ module Gcloud
       #   query = Gcloud::Datastore::Query.new
       #   query.kind "Task"
       #
-      #   all_tasks = dataset.run query
+      #   all_tasks = datastore.run query
       #
       def kind *kinds
         kinds.each do |kind|
@@ -67,7 +67,7 @@ module Gcloud
       #   query.kind("Task").
       #     where("completed", "=", true)
       #
-      #   completed_tasks = dataset.run query
+      #   completed_tasks = datastore.run query
       #
       def where name, operator, value
         @grpc.filter ||= Google::Datastore::V1beta3::Filter.new(
@@ -97,7 +97,7 @@ module Gcloud
       #   query.kind("Task").
       #     ancestor(parent.key)
       #
-      #   completed_tasks = dataset.run query
+      #   completed_tasks = datastore.run query
       #
       def ancestor parent
         # Use key if given an entity
@@ -116,7 +116,7 @@ module Gcloud
       #   query.kind("Task").
       #     order("due", :desc)
       #
-      #   sorted_tasks = dataset.run query
+      #   sorted_tasks = datastore.run query
       #
       def order name, direction = :asc
         @grpc.order << Google::Datastore::V1beta3::PropertyOrder.new(
@@ -136,7 +136,7 @@ module Gcloud
       #   query.kind("Task").
       #     limit(10)
       #
-      #   paginated_tasks = dataset.run query
+      #   paginated_tasks = datastore.run query
       #
       def limit num
         @grpc.limit = Google::Protobuf::Int32Value.new(value: num)
@@ -153,7 +153,7 @@ module Gcloud
       #     limit(10).
       #     offset(20)
       #
-      #   paginated_tasks = dataset.run query
+      #   paginated_tasks = datastore.run query
       #
       def offset num
         @grpc.offset = num
@@ -170,7 +170,7 @@ module Gcloud
       #     limit(10).
       #     cursor(task_cursor)
       #
-      #   paginated_tasks = dataset.run query
+      #   paginated_tasks = datastore.run query
       #
       def start cursor
         @grpc.start_cursor = GRPCUtils.decode_bytes cursor
@@ -187,7 +187,7 @@ module Gcloud
       #   query.kind("Task").
       #     select("completed", "due")
       #
-      #   partial_tasks = dataset.run query
+      #   partial_tasks = datastore.run query
       #
       def select *names
         names.each do |name|
@@ -209,7 +209,7 @@ module Gcloud
       #   query.kind("Task").
       #     group_by("completed")
       #
-      #   grouped_tasks = dataset.run query
+      #   grouped_tasks = datastore.run query
       #
       def group_by *names
         names.each do |name|

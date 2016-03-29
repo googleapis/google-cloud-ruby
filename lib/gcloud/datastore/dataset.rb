@@ -43,12 +43,12 @@ module Gcloud
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
-    #   dataset = gcloud.datastore
+    #   datastore = gcloud.datastore
     #
-    #   query = dataset.query("Task").
+    #   query = datastore.query("Task").
     #     where("completed", "=", true)
     #
-    #   tasks = dataset.run query
+    #   tasks = datastore.run query
     #
     class Dataset
       ##
@@ -74,8 +74,8 @@ module Gcloud
       #   gcloud = Gcloud.new "my-todo-project",
       #                       "/path/to/keyfile.json"
       #
-      #   dataset = gcloud.datastore
-      #   dataset.project #=> "my-todo-project"
+      #   datastore = gcloud.datastore
+      #   datastore.project #=> "my-todo-project"
       #
       def project
         service.project
@@ -100,8 +100,8 @@ module Gcloud
       # @return [Array<Gcloud::Datastore::Key>]
       #
       # @example
-      #   empty_key = dataset.key "Task"
-      #   task_keys = dataset.allocate_ids empty_key, 5
+      #   empty_key = datastore.key "Task"
+      #   task_keys = datastore.allocate_ids empty_key, 5
       #
       def allocate_ids incomplete_key, count = 1
         if incomplete_key.complete?
@@ -123,7 +123,7 @@ module Gcloud
       # @return [Array<Gcloud::Datastore::Entity>]
       #
       # @example
-      #   dataset.save task1, task2
+      #   datastore.save task1, task2
       #
       def save *entities
         ensure_service!
@@ -148,11 +148,11 @@ module Gcloud
       # @return [Gcloud::Datastore::Entity, nil]
       #
       # @example Finding an entity with a key:
-      #   key = dataset.key "Task", 123456
-      #   task = dataset.find key
+      #   key = datastore.key "Task", 123456
+      #   task = datastore.find key
       #
       # @example Finding an entity with a `kind` and `id`/`name`:
-      #   task = dataset.find "Task", 123456
+      #   task = datastore.find "Task", 123456
       #
       def find key_or_kind, id_or_name = nil
         key = key_or_kind
@@ -172,10 +172,10 @@ module Gcloud
       #
       # @example
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   key1 = dataset.key "Task", 123456
-      #   key2 = dataset.key "Task", 987654
-      #   tasks = dataset.find_all key1, key2
+      #   datastore = gcloud.datastore
+      #   key1 = datastore.key "Task", 123456
+      #   key2 = datastore.key "Task", 987654
+      #   tasks = datastore.find_all key1, key2
       #
       def find_all *keys
         ensure_service!
@@ -197,8 +197,8 @@ module Gcloud
       #
       # @example
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   dataset.delete entity1, entity2
+      #   datastore = gcloud.datastore
+      #   datastore.delete entity1, entity2
       #
       def delete *entities_or_keys
         just_keys = entities_or_keys.map do |e_or_k|
@@ -222,14 +222,14 @@ module Gcloud
       # @return [Gcloud::Datastore::Dataset::QueryResults]
       #
       # @example
-      #   query = dataset.query("Task").
+      #   query = datastore.query("Task").
       #     where("completed", "=", true)
-      #   tasks = dataset.run query
+      #   tasks = datastore.run query
       #
       # @example Run the query within a namespace with the `namespace` option:
       #   query = Gcloud::Datastore::Query.new.kind("Task").
       #     where("completed", "=", true)
-      #   tasks = dataset.run query, namespace: "ns~todo-project"
+      #   tasks = datastore.run query, namespace: "ns~todo-project"
       #
       # @example Run the query with a GQL string.
       #   gql = dataset.gql "SELECT * FROM Task WHERE completed = @completed",
@@ -264,14 +264,14 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
+      #   datastore = gcloud.datastore
       #
-      #   user = dataset.entity "User", "heidi" do |u|
+      #   user = datastore.entity "User", "heidi" do |u|
       #     u["name"] = "Heidi Henderson"
       #     u["email"] = "heidi@example.net"
       #   end
       #
-      #   dataset.transaction do |tx|
+      #   datastore.transaction do |tx|
       #     if tx.find(user.key).nil?
       #       tx.save user
       #     end
@@ -281,14 +281,14 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
+      #   datastore = gcloud.datastore
       #
-      #   user = dataset.entity "User", "heidi" do |u|
+      #   user = datastore.entity "User", "heidi" do |u|
       #     u["name"] = "Heidi Henderson"
       #     u["email"] = "heidi@example.net"
       #   end
       #
-      #   tx = dataset.transaction
+      #   tx = datastore.transaction
       #   begin
       #     if tx.find(user.key).nil?
       #       tx.save user
@@ -320,15 +320,15 @@ module Gcloud
       # @return [Gcloud::Datastore::Query]
       #
       # @example
-      #   query = dataset.query("Task").
+      #   query = datastore.query("Task").
       #     where("completed", "=", true)
-      #   tasks = dataset.run query
+      #   tasks = datastore.run query
       #
       # @example The previous example is equivalent to:
       #   query = Gcloud::Datastore::Query.new.
       #     kind("Task").
       #     where("completed", "=", true)
-      #   tasks = dataset.run query
+      #   tasks = datastore.run query
       #
       def query *kinds
         query = Query.new
@@ -377,7 +377,7 @@ module Gcloud
       # @return [Gcloud::Datastore::Key]
       #
       # @example
-      #   key = dataset.key "User", "heidi@example.com"
+      #   key = datastore.key "User", "heidi@example.com"
       #
       # @example The previous example is equivalent to:
       #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
@@ -400,17 +400,17 @@ module Gcloud
       # @return [Gcloud::Datastore::Entity]
       #
       # @example
-      #   entity = dataset.entity
+      #   entity = datastore.entity
       #
       # @example The previous example is equivalent to:
       #   entity = Gcloud::Datastore::Entity.new
       #
       # @example The key can also be passed in as an object:
-      #   key = dataset.key "User", "heidi@example.com"
-      #   entity = dataset.entity key
+      #   key = datastore.key "User", "heidi@example.com"
+      #   entity = datastore.entity key
       #
       # @example Or the key values can be passed in as parameters:
-      #   entity = dataset.entity "User", "heidi@example.com"
+      #   entity = datastore.entity "User", "heidi@example.com"
       #
       # @example The previous example is equivalent to:
       #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
@@ -418,7 +418,7 @@ module Gcloud
       #   entity.key = key
       #
       # @example The newly created entity can also be configured using a block:
-      #   user = dataset.entity "User", "heidi@example.com" do |u|
+      #   user = datastore.entity "User", "heidi@example.com" do |u|
       #     u["name"] = "Heidi Henderson"
       #  end
       #

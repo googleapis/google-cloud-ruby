@@ -53,16 +53,16 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi@example.com"
+      #   datastore = gcloud.datastore
+      #   user = datastore.find "User", "heidi@example.com"
       #   user["name"] #=> "Heidi Henderson"
       #
       # @example Or with a symbol name:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi@example.com"
+      #   datastore = gcloud.datastore
+      #   user = datastore.find "User", "heidi@example.com"
       #   user[:name] #=> "Heidi Henderson"
       #
       def [] prop_name
@@ -79,16 +79,16 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi@example.com"
+      #   datastore = gcloud.datastore
+      #   user = datastore.find "User", "heidi@example.com"
       #   user["name"] = "Heidi H. Henderson"
       #
       # @example Or with a symbol name:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi@example.com"
+      #   datastore = gcloud.datastore
+      #   user = datastore.find "User", "heidi@example.com"
       #   user[:name] = "Heidi H. Henderson"
       #
       def []= prop_name, prop_value
@@ -133,17 +133,17 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
+      #   datastore = gcloud.datastore
       #   entity = Gcloud::Datastore::Entity.new
       #   entity.key = Gcloud::Datastore::Key.new "User"
-      #   dataset.save entity
+      #   datastore.save entity
       #
       # @example Once the entity is saved, the key is frozen and immutable:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   entity = dataset.find "User", "heidi@example.com"
+      #   datastore = gcloud.datastore
+      #   entity = datastore.find "User", "heidi@example.com"
       #   entity.persisted? #=> true
       #   entity.key = Gcloud::Datastore::Key.new "User" #=> RuntimeError
       #   entity.key.frozen? #=> true
@@ -161,12 +161,12 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
+      #   datastore = gcloud.datastore
       #
       #   new_entity = Gcloud::Datastore::Entity.new
       #   new_entity.persisted? #=> false
       #
-      #   found_entity = dataset.find "User", "heidi@example.com"
+      #   found_entity = datastore.find "User", "heidi@example.com"
       #   found_entity.persisted? #=> true
       #
       def persisted?

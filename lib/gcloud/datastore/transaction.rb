@@ -37,7 +37,7 @@ module Gcloud
       # Persist entities in a transaction.
       #
       # @example
-      #   dataset.transaction do |tx|
+      #   datastore.transaction do |tx|
       #     if tx.find(user.key).nil?
       #       tx.save task1, task2
       #     end
@@ -53,7 +53,7 @@ module Gcloud
       # Remove entities in a transaction.
       #
       # @example
-      #   dataset.transaction do |tx|
+      #   datastore.transaction do |tx|
       #     if tx.find(user.key).nil?
       #       tx.delete task1, task2
       #     end
