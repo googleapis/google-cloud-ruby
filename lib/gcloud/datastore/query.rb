@@ -71,7 +71,9 @@ module Gcloud
       #
       def where name, operator, value
         @grpc.filter ||= Google::Datastore::V1beta3::Filter.new(
-          composite_filter: Google::Datastore::V1beta3::CompositeFilter.new
+          composite_filter: Google::Datastore::V1beta3::CompositeFilter.new(
+            op: :AND
+          )
         )
         @grpc.filter.composite_filter.filters << \
           Google::Datastore::V1beta3::Filter.new(

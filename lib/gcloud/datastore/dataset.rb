@@ -125,10 +125,14 @@ module Gcloud
       #
       def save *entities
         ensure_service!
-        mutations = create_save_mutations entities
+        mutations = entities.map do |entity|
+          Google::Datastore::V1beta3::Mutation.new upsert: entity.to_grpc
+        end
         commit_res = service.commit(mutations)
         returned_keys = commit_res.mutation_results.map(&:key)
-        update_incomplete_keys_on_saved_entities returned_keys
+        returned_keys.each_with_index do |key, index|
+          entities[index].key = Key.from_grpc(key) unless key.nil?
+        end
         entities
       end
 
@@ -195,7 +199,12 @@ module Gcloud
       #   dataset.delete entity1, entity2
       #
       def delete *entities_or_keys
-        mutations = create_delete_mutations entities_or_keys
+        just_keys = entities_or_keys.map do |e_or_k|
+          e_or_k.respond_to?(:key) ? e_or_k.key : e_or_k
+        end
+        mutations = just_keys.map do |key|
+          Google::Datastore::V1beta3::Mutation.new delete: key.to_grpc
+        end
 
         ensure_service!
         service.commit mutations
@@ -413,46 +422,6 @@ module Gcloud
       def to_gcloud_keys grpc_keys
         # Keys are not nested in an object like entities are.
         Array(grpc_keys).map { |key| Key.from_grpc key }
-      end
-
-      ##
-      # @private Save a key to be given an ID when comitted.
-      def auto_id_register entity
-        @_auto_id_entities ||= []
-        @_auto_id_entities << entity
-      end
-
-      ##
-      # @private Update saved keys with new IDs post-commit.
-      def update_incomplete_keys_on_saved_entities keys
-        @_auto_id_entities ||= []
-        Array(keys).each_with_index do |key, index|
-          entity = @_auto_id_entities[index]
-          entity.key = Key.from_grpc key
-        end
-        @_auto_id_entities = []
-      end
-
-      ##
-      # @private Convert entities to Mutations, and register entity to be
-      # updated with a completed key if needed.
-      def create_save_mutations entities
-        mutations = []
-        entities.each do |entity|
-          auto_id_register entity if entity.key.incomplete?
-          mutations << Google::Datastore::V1beta3::Mutation.new(
-            upsert: entity.to_grpc)
-        end
-        mutations
-      end
-
-      ##
-      # @private Convert entities or keys to Mutations.
-      def create_delete_mutations entities_or_keys
-        entities_or_keys.map do |e_or_k|
-          key = e_or_k.respond_to?(:key) ? e_or_k.key.to_grpc : e_or_k.to_grpc
-          Google::Datastore::V1beta3::Mutation.new(delete: key)
-        end
       end
     end
   end

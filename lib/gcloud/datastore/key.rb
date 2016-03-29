@@ -230,8 +230,8 @@ module Gcloud
           path_args = { kind: pe_kind }
           if pe_id_or_name.is_a? Integer
             path_args[:id] = pe_id_or_name
-          else
-            path_args[:name] = pe_id_or_name
+          elsif pe_id_or_name.is_a? String
+            path_args[:name] = pe_id_or_name unless pe_id_or_name.empty?
           end
           Google::Datastore::V1beta3::Key::PathElement.new(path_args)
         end

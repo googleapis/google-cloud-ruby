@@ -44,8 +44,8 @@ module Gcloud
       #   end
       #
       def save *entities
-        create_save_mutations(entities).each { |m| shared_mutations << m }
-        # Do not save or assign auto_ids yet
+        entities.each { |e| shared_upserts << e }
+        # Do not save yet
         entities
       end
 
@@ -59,8 +59,11 @@ module Gcloud
       #     end
       #   end
       #
-      def delete *entities
-        create_delete_mutations(entities).each { |m| shared_mutations << m }
+      def delete *entities_or_keys
+        just_keys = entities_or_keys.map do |e_or_k|
+          e_or_k.respond_to?(:key) ? e_or_k.key : e_or_k
+        end
+        just_keys.each { |k| shared_deletes << k }
         # Do not delete yet
         true
       end
@@ -85,9 +88,17 @@ module Gcloud
         end
 
         ensure_service!
-        commit_res = service.commit shared_mutations, transaction: @id
+
+        mutations = shared_mutations
+
+        commit_res = service.commit mutations, transaction: @id
         returned_keys = commit_res.mutation_results.map(&:key)
-        update_incomplete_keys_on_saved_entities returned_keys
+        returned_keys.each_with_index do |key, index|
+          entity = shared_upserts[index]
+          next if entity.nil?
+          # assign returned key if entity and key are present
+          entity.key = Key.from_grpc key unless key.nil?
+        end
         true
       end
 
@@ -107,19 +118,39 @@ module Gcloud
       # Reset the transaction.
       # {Transaction#start} must be called afterwards.
       def reset!
-        @shared_mutations = []
+        @shared_upserts = []
+        @shared_deletes = []
         @id = nil
-        @_auto_id_entities = []
       end
 
       protected
 
       ##
-      # @private Mutation to be shared across save, delete, and commit calls.
-      # This enables updates to happen when commit is called.
+      # @private List of Entity objects to be saved.
+      def shared_upserts
+        @shared_upserts
+      end
+
+      ##
+      # @private List of Key objects to be deleted.
+      def shared_deletes
+        @shared_deletes
+      end
+
+      ##
+      # @private List of Mutation objects to be committed.
       def shared_mutations
-        # @shared_mutations = Array(@shared_mutations).flatten
-        @shared_mutations
+        mutations = []
+        # shared upserts always go in first, so the keys can be assigned
+        shared_upserts.each do |e|
+          m = Google::Datastore::V1beta3::Mutation.new upsert: e.to_grpc
+          mutations << m
+        end
+        shared_deletes.each do |k|
+          m = Google::Datastore::V1beta3::Mutation.new delete: k.to_grpc
+          mutations << m
+        end
+        mutations
       end
     end
   end

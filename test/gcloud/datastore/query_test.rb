@@ -41,7 +41,7 @@ describe Gcloud::Datastore::Query do
     refute_nil grpc.filter
     assert_nil grpc.filter.property_filter
     refute_nil grpc.filter.composite_filter
-    assert_equal :OPERATOR_UNSPECIFIED, grpc.filter.composite_filter.op
+    assert_equal :AND, grpc.filter.composite_filter.op
     assert_equal 1, grpc.filter.composite_filter.filters.count
 
     new_filter = grpc.filter.composite_filter.filters.first
