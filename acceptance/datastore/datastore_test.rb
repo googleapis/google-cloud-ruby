@@ -78,7 +78,7 @@ describe "Datastore", :datastore do
     end
 
     it "should save/find with a key name and delete with a key" do
-      post.key = Gcloud::Datastore::Key.new "Post", "post1"
+      post.key = Gcloud::Datastore::Key.new "Post", "post2"
       dataset.save post
 
       refresh = dataset.find post.key
@@ -116,7 +116,7 @@ describe "Datastore", :datastore do
 
       post.key.id.wont_be :nil?
 
-      refresh = dataset.find "Post", post.key.id
+      refresh = dataset.find "Post",     post.key.id
       refresh.key.kind.must_equal        post.key.kind
       refresh.key.id.must_equal          post.key.id
       refresh.key.name.must_equal        post.key.name
@@ -131,13 +131,13 @@ describe "Datastore", :datastore do
       post.key  = Gcloud::Datastore::Key.new "Post"
       post2.key = Gcloud::Datastore::Key.new "Post"
 
-      post.key.id.must_be :nil?
-      post2.key.id.must_be :nil?
+      post.key.must_be :incomplete?
+      post2.key.must_be :incomplete?
 
       dataset.save post, post2
 
-      post.key.id.wont_be :nil?
-      post2.key.id.wont_be :nil?
+      post.key.wont_be :incomplete?
+      post2.key.wont_be :incomplete?
 
       entities = dataset.find_all post.key, post2.key
       entities.count.must_equal 2
@@ -149,7 +149,7 @@ describe "Datastore", :datastore do
     end
 
     it "entities retrieved from datastore have immutable keys" do
-      post.key = Gcloud::Datastore::Key.new "Post", "post1"
+      post.key = Gcloud::Datastore::Key.new "Post", "post3"
       dataset.save post
 
       refresh = dataset.find post.key
