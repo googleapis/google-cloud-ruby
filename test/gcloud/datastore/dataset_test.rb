@@ -19,11 +19,6 @@ describe Gcloud::Datastore::Dataset do
   let(:project)     { "my-todo-project" }
   let(:credentials) { OpenStruct.new }
   let(:dataset)     { Gcloud::Datastore::Dataset.new project, credentials }
-  let(:commit_response) do
-    Gcloud::Datastore::Proto::CommitResponse.new.tap do |response|
-      response.mutation_result = Gcloud::Datastore::Proto::MutationResult.new
-    end
-  end
   let(:run_query_res) do
     run_query_res_entities = 2.times.map do
       Google::Datastore::V1beta3::EntityResult.new(
@@ -57,6 +52,14 @@ describe Gcloud::Datastore::Dataset do
           )
         )
       end
+    )
+  end
+
+  let(:commit_res) do
+    Google::Datastore::V1beta3::CommitResponse.new(
+      mutation_results: [
+        Google::Datastore::V1beta3::MutationResult.new(key: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc)
+      ]
     )
   end
 
@@ -97,12 +100,20 @@ describe Gcloud::Datastore::Dataset do
   end
 
   it "save will persist entities" do
-    dataset.connection.expect :commit,
-                              commit_response,
-                              [Gcloud::Datastore::Proto::Mutation]
+    mutation = Google::Datastore::V1beta3::Mutation.new(
+      upsert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test"
+        e["name"] = "thingamajig"
+      end.to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation]
+    )
+    dataset.service.mocked_datastore.expect :commit, commit_res, [commit_req]
 
     entity = Gcloud::Datastore::Entity.new.tap do |e|
-      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e.key = Gcloud::Datastore::Key.new "ds-test"
       e["name"] = "thingamajig"
     end
     dataset.save entity
@@ -259,9 +270,15 @@ describe Gcloud::Datastore::Dataset do
   end
 
   it "delete with entity will call commit" do
-    dataset.connection.expect :commit,
-                              commit_response,
-                              [Gcloud::Datastore::Proto::Mutation]
+    mutation = Google::Datastore::V1beta3::Mutation.new(
+      delete: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc
+    )
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation]
+    )
+    dataset.service.mocked_datastore.expect :commit, commit_res, [commit_req]
 
     entity = Gcloud::Datastore::Entity.new.tap do |e|
       e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
@@ -271,9 +288,15 @@ describe Gcloud::Datastore::Dataset do
   end
 
   it "delete with key will call commit" do
-    dataset.connection.expect :commit,
-                              commit_response,
-                              [Gcloud::Datastore::Proto::Mutation]
+    mutation = Google::Datastore::V1beta3::Mutation.new(
+      delete: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc
+    )
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation]
+    )
+    dataset.service.mocked_datastore.expect :commit, commit_res, [commit_req]
 
     key = Gcloud::Datastore::Key.new "ds-test", "thingie"
     dataset.delete key
@@ -503,10 +526,10 @@ describe Gcloud::Datastore::Dataset do
     end
   end
 
-
   it "transaction will return a Transaction" do
-    dataset.connection.expect :begin_transaction,
-                              begin_transaction_response
+    tx_id = "giterdone".encode("ASCII-8BIT")
+    begin_tx_res = Google::Datastore::V1beta3::BeginTransactionResponse.new(transaction: tx_id)
+    dataset.service.mocked_datastore.expect :begin_transaction, begin_tx_res, [Google::Datastore::V1beta3::BeginTransactionRequest]
 
     tx = dataset.transaction
     tx.must_be_kind_of Gcloud::Datastore::Transaction
@@ -514,15 +537,18 @@ describe Gcloud::Datastore::Dataset do
   end
 
   it "transaction will commit with a block" do
-    dataset.connection.expect :begin_transaction,
-                              begin_transaction_response
-    dataset.connection.expect :commit,
-                              commit_response,
-                              [Gcloud::Datastore::Proto::Mutation,
-                               String]
+    tx_id = "giterdone".encode("ASCII-8BIT")
+    begin_tx_res = Google::Datastore::V1beta3::BeginTransactionResponse.new(transaction: tx_id)
+    commit_res = Google::Datastore::V1beta3::CommitResponse.new(
+      mutation_results: [Google::Datastore::V1beta3::MutationResult.new(
+        key: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc
+      )]
+    )
+    dataset.service.mocked_datastore.expect :begin_transaction, begin_tx_res, [Google::Datastore::V1beta3::BeginTransactionRequest]
+    dataset.service.mocked_datastore.expect :commit, commit_res, [Google::Datastore::V1beta3::CommitRequest]
 
     entity = Gcloud::Datastore::Entity.new.tap do |e|
-      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e.key = Gcloud::Datastore::Key.new "ds-test"
       e["name"] = "thingamajig"
     end
     dataset.transaction do |tx|
@@ -531,9 +557,11 @@ describe Gcloud::Datastore::Dataset do
   end
 
   it "transaction will wrap errors in TransactionError" do
-    dataset.connection.expect :begin_transaction,
-                              begin_transaction_response
-    dataset.connection.expect :rollback, nil, [String]
+    tx_id = "giterdone".encode("ASCII-8BIT")
+    begin_tx_res = Google::Datastore::V1beta3::BeginTransactionResponse.new(transaction: tx_id)
+    rollback_res = Google::Datastore::V1beta3::RollbackResponse.new
+    dataset.service.mocked_datastore.expect :begin_transaction, begin_tx_res, [Google::Datastore::V1beta3::BeginTransactionRequest]
+    dataset.service.mocked_datastore.expect :rollback, rollback_res, [Google::Datastore::V1beta3::RollbackRequest]
 
     error = assert_raises Gcloud::Datastore::TransactionError do
       dataset.transaction do |tx|

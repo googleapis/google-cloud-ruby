@@ -95,6 +95,44 @@ module Gcloud
         backoff { datastore.run_query run_req }
       end
 
+      ##
+      # Begin a new transaction.
+      def begin_transaction
+        tx_req = Google::Datastore::V1beta3::BeginTransactionRequest.new(
+          project_id: project
+        )
+
+        backoff { datastore.begin_transaction tx_req }
+      end
+
+      ##
+      # Commit a transaction, optionally creating, deleting or modifying
+      # some entities.
+      def commit mutations, transaction: nil
+        commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+          project_id: project,
+          mode: :NON_TRANSACTIONAL,
+          mutations: mutations
+        )
+        if transaction
+          commit_req.mode = :TRANSACTIONAL
+          commit_req.transaction = transaction
+        end
+
+        backoff { datastore.commit commit_req }
+      end
+
+      ##
+      # Roll back a transaction.
+      def rollback transaction
+        rb_req = Google::Datastore::V1beta3::RollbackRequest.new(
+          project_id: project,
+          transaction: transaction
+        )
+
+        backoff { datastore.rollback rb_req }
+      end
+
       def inspect
         "#{self.class}(#{@dataset_id})"
       end

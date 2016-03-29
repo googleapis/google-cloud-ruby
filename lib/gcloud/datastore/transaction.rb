@@ -45,7 +45,7 @@ module Gcloud
       #   end
       #
       def save *entities
-        save_entities_to_mutation entities, shared_mutation
+        create_save_mutations(entities).each { |m| shared_mutations << m }
         # Do not save or assign auto_ids yet
         entities
       end
@@ -61,9 +61,7 @@ module Gcloud
       #   end
       #
       def delete *entities
-        shared_mutation.tap do |m|
-          m.delete = entities.map { |entity| entity.key.to_proto }
-        end
+        create_delete_mutations(entities).each { |m| shared_mutations << m }
         # Do not delete yet
         true
       end
@@ -74,8 +72,9 @@ module Gcloud
       def start
         fail TransactionError, "Transaction already opened." unless @id.nil?
 
-        response = connection.begin_transaction
-        @id = response.transaction
+        ensure_service!
+        tx_res = service.begin_transaction
+        @id = tx_res.transaction
       end
       alias_method :begin_transaction, :start
 
@@ -86,8 +85,10 @@ module Gcloud
           fail TransactionError, "Cannot commit when not in a transaction."
         end
 
-        response = connection.commit shared_mutation, @id
-        auto_id_assign_ids response.mutation_result.insert_auto_id_key
+        ensure_service!
+        commit_res = service.commit shared_mutations, transaction: @id
+        returned_keys = commit_res.mutation_results.map(&:key)
+        update_incomplete_keys_on_saved_entities returned_keys
         true
       end
 
@@ -98,7 +99,8 @@ module Gcloud
           fail TransactionError, "Cannot rollback when not in a transaction."
         end
 
-        connection.rollback @id
+        ensure_service!
+        service.rollback @id
         true
       end
 
@@ -106,7 +108,7 @@ module Gcloud
       # Reset the transaction.
       # {Transaction#start} must be called afterwards.
       def reset!
-        @shared_mutation = nil
+        @shared_mutations = []
         @id = nil
         @_auto_id_entities = []
       end
@@ -116,8 +118,9 @@ module Gcloud
       ##
       # @private Mutation to be shared across save, delete, and commit calls.
       # This enables updates to happen when commit is called.
-      def shared_mutation
-        @shared_mutation ||= Proto.new_mutation
+      def shared_mutations
+        # @shared_mutations = Array(@shared_mutations).flatten
+        @shared_mutations
       end
     end
   end

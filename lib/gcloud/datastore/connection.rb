@@ -50,41 +50,6 @@ module Gcloud
       end
 
       ##
-      # Begin a new transaction.
-      def begin_transaction
-        tx_request = Proto::BeginTransactionRequest.new
-
-        response_rpc = rpc "beginTransaction", tx_request
-        Proto::BeginTransactionResponse.decode response_rpc
-      end
-
-      ##
-      # Commit a transaction, optionally creating, deleting or modifying
-      # some entities.
-      def commit mutation, transaction = nil
-        mode = Proto::CommitRequest::Mode::NON_TRANSACTIONAL
-        mode = Proto::CommitRequest::Mode::TRANSACTIONAL if transaction
-
-        commit = Proto::CommitRequest.new.tap do |c|
-          c.mutation = mutation
-          c.mode = mode
-          c.transaction = transaction
-        end
-
-        Proto::CommitResponse.decode rpc("commit", commit)
-      end
-
-      ##
-      # Roll back a transaction.
-      def rollback transaction
-        rollback = Proto::RollbackRequest.new.tap do |r|
-          r.transaction = transaction
-        end
-
-        Proto::RollbackResponse.decode rpc("rollback", rollback)
-      end
-
-      ##
       # The default HTTP headers to be sent on all API calls.
       def default_http_headers
         @default_http_headers ||= {

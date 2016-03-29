@@ -109,7 +109,7 @@ module Gcloud
     end
 
     def self.encode_bytes bytes
-      Array(bytes.to_s).pack("m").chomp
+      Array(bytes.to_s).pack("m").chomp.encode("ASCII-8BIT")
     end
 
     def self.decode_bytes bytes
