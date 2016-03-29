@@ -23,7 +23,7 @@ module Gcloud
     # @private Represents the gRPC Datastore service, including all the API
     # methods.
     class Service
-      DEFAULT_HOST = "www.googleapis.com"
+      DEFAULT_HOST = "datastore.googleapis.com"
       attr_accessor :project, :credentials
 
       ##
