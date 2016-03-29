@@ -19,14 +19,13 @@ describe Gcloud::Datastore::Transaction do
   let(:project)     { "my-todo-project" }
   let(:credentials) { OpenStruct.new }
   let(:dataset)     { Gcloud::Datastore::Dataset.new project, credentials }
-  let(:connection) { dataset.connection }
   let(:service) do
     s = dataset.service
     s.mocked_datastore = Minitest::Mock.new
     s.mocked_datastore.expect :begin_transaction, begin_tx_res, [Google::Datastore::V1beta3::BeginTransactionRequest]
     s
   end
-  let(:transaction) { Gcloud::Datastore::Transaction.new connection, service }
+  let(:transaction) { Gcloud::Datastore::Transaction.new service }
   let(:commit_res) do
     Google::Datastore::V1beta3::CommitResponse.new(
       mutation_results: [Google::Datastore::V1beta3::MutationResult.new]

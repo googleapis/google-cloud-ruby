@@ -36,7 +36,7 @@ describe Gcloud::Datastore::Dataset do
     )
   end
   let(:begin_transaction_response) do
-    Gcloud::Datastore::Proto::BeginTransactionResponse.new.tap do |response|
+    Google::Datastore::V1beta3::BeginTransactionResponse.new.tap do |response|
       response.transaction = "giterdone"
     end
   end
@@ -64,12 +64,10 @@ describe Gcloud::Datastore::Dataset do
   end
 
   before do
-    dataset.connection = Minitest::Mock.new
     dataset.service.mocked_datastore = Minitest::Mock.new
   end
 
   after do
-    dataset.connection.verify
     dataset.service.mocked_datastore.verify
   end
 
@@ -371,16 +369,16 @@ describe Gcloud::Datastore::Dataset do
     query = dataset.query "Task"
     query.must_be_kind_of Gcloud::Datastore::Query
 
-    proto = query.to_proto
-    proto.kind.name.must_include "Task"
-    proto.kind.name.wont_include "User"
+    grpc = query.to_grpc
+    grpc.kind.map(&:name).must_include "Task"
+    grpc.kind.map(&:name).wont_include "User"
 
     # Add a second kind to the query
     query.kind "User"
 
-    proto = query.to_proto
-    proto.kind.name.must_include "Task"
-    proto.kind.name.must_include "User"
+    grpc = query.to_grpc
+    grpc.kind.map(&:name).must_include "Task"
+    grpc.kind.map(&:name).must_include "User"
   end
 
   it "key returns a Key instance" do

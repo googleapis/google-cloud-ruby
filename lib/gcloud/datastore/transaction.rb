@@ -27,8 +27,7 @@ module Gcloud
       ##
       # @private Creates a new Transaction instance.
       # Takes a Connection and Service instead of project and Credentials.
-      def initialize connection, service
-        @connection = connection
+      def initialize service
         @service = service
         reset!
         start

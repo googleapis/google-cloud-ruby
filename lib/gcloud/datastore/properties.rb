@@ -91,7 +91,7 @@ module Gcloud
       end
 
       # rubocop:disable all
-      # Disabled rubocop because this needs to match Proto.to_proto_value
+      # Disabled rubocop because this needs to match GRPCUtils.to_value
 
       ##
       # Ensures the value is a type that can be persisted,

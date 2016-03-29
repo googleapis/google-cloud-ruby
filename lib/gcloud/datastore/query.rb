@@ -15,7 +15,6 @@
 
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
-require "gcloud/datastore/proto"
 
 module Gcloud
   module Datastore
@@ -39,7 +38,6 @@ module Gcloud
       #   query = Gcloud::Datastore::Query.new
       #
       def initialize
-        @proto = Proto::Query.new
         @grpc = Google::Datastore::V1beta3::Query.new
       end
 
@@ -53,10 +51,6 @@ module Gcloud
       #   all_tasks = dataset.run query
       #
       def kind *kinds
-        @proto.kind ||= Proto::KindExpression.new
-        @proto.kind.name ||= []
-        @proto.kind.name |= kinds
-
         kinds.each do |kind|
           grpc_kind = Google::Datastore::V1beta3::KindExpression.new(name: kind)
           @grpc.kind << grpc_kind
@@ -76,17 +70,6 @@ module Gcloud
       #   completed_tasks = dataset.run query
       #
       def where name, operator, value
-        # Initialize filter
-        @proto.filter ||= Proto.new_filter.tap do |f|
-          f.composite_filter = Proto.new_composite_filter
-        end
-        # Create new property filter
-        filter = Proto.new_filter.tap do |f|
-          f.property_filter = Proto.new_property_filter name, operator, value
-        end
-        # Add new property filter to the list
-        @proto.filter.composite_filter.filter << filter
-
         @grpc.filter ||= Google::Datastore::V1beta3::Filter.new(
           composite_filter: Google::Datastore::V1beta3::CompositeFilter.new
         )
@@ -134,13 +117,6 @@ module Gcloud
       #   sorted_tasks = dataset.run query
       #
       def order name, direction = :asc
-        @proto.order ||= []
-        po = Proto::PropertyOrder.new
-        po.property = Proto::PropertyReference.new
-        po.property.name = name
-        po.direction = Proto.to_prop_order_direction direction
-        @proto.order << po
-
         @grpc.order << Google::Datastore::V1beta3::PropertyOrder.new(
           property: Google::Datastore::V1beta3::PropertyReference.new(
             name: name),
@@ -161,8 +137,6 @@ module Gcloud
       #   paginated_tasks = dataset.run query
       #
       def limit num
-        @proto.limit = num
-
         @grpc.limit = Google::Protobuf::Int32Value.new(value: num)
 
         self
@@ -180,8 +154,6 @@ module Gcloud
       #   paginated_tasks = dataset.run query
       #
       def offset num
-        @proto.offset = num
-
         @grpc.offset = num
 
         self
@@ -199,8 +171,6 @@ module Gcloud
       #   paginated_tasks = dataset.run query
       #
       def start cursor
-        @proto.start_cursor = Proto.decode_cursor cursor
-
         @grpc.start_cursor = GRPCUtils.decode_bytes cursor
 
         self
@@ -218,9 +188,6 @@ module Gcloud
       #   partial_tasks = dataset.run query
       #
       def select *names
-        @proto.projection ||= []
-        @proto.projection += Proto.new_property_expressions(*names)
-
         names.each do |name|
           grpc_projection = Google::Datastore::V1beta3::Projection.new(
             property: Google::Datastore::V1beta3::PropertyReference.new(
@@ -243,9 +210,6 @@ module Gcloud
       #   grouped_tasks = dataset.run query
       #
       def group_by *names
-        @proto.group_by ||= []
-        @proto.group_by += Proto.new_property_references(*names)
-
         names.each do |name|
           grpc_property = Google::Datastore::V1beta3::PropertyReference.new(
             name: name)
@@ -255,11 +219,6 @@ module Gcloud
         self
       end
       alias_method :distinct_on, :group_by
-
-      # @private
-      def to_proto
-        @proto
-      end
 
       # @private
       def to_grpc

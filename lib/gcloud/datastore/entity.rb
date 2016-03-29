@@ -15,7 +15,6 @@
 
 require "gcloud/datastore/key"
 require "gcloud/datastore/properties"
-require "gcloud/datastore/proto"
 
 module Gcloud
   module Datastore
@@ -262,29 +261,6 @@ module Gcloud
       end
 
       ##
-      # @private Convert the Entity to a protocol buffer object.
-      def to_proto
-        proto = Proto::Entity.new.tap do |e|
-          e.key = @key.to_proto
-          e.property = Proto.to_proto_properties @properties.to_h
-        end
-        update_properties_indexed_proto! proto
-        proto
-      end
-
-      ##
-      # @private Create a new Entity from a protocol buffer object.
-      def self.from_proto proto
-        entity = Entity.new
-        entity.key = Key.from_proto proto.key
-        Array(proto.property).each do |p|
-          entity[p.name] = Proto.from_proto_value p.value
-        end
-        entity.send :update_exclude_indexes_proto!, proto
-        entity
-      end
-
-      ##
       # @private Convert the Entity to a Google::Datastore::V1beta3::Entity
       # object.
       def to_grpc
@@ -349,7 +325,7 @@ module Gcloud
           next if value.nil?
           @_exclude_indexes[name] = value.exclude_from_indexes
           unless value.array_value.nil?
-            exclude = value.array_value.map &:exclude_from_indexes
+            exclude = value.array_value.values.map &:exclude_from_indexes
             @_exclude_indexes[name] = exclude
           end
         end
@@ -362,45 +338,11 @@ module Gcloud
           next if value.nil?
           excluded = exclude_from_indexes? name
           if excluded.is_a? Array
-            # Lists must not set indexed, or this error will happen:
-            # "A Value containing a list_value cannot specify indexed."
-            value.exclude_from_indexes = nil
-            value.array_value.each_with_index do |v, i|
+            value.array_value.values.each_with_index do |v, i|
               v.exclude_from_indexes = excluded[i]
             end
           else
             value.exclude_from_indexes = excluded
-          end
-        end
-      end
-
-      ##
-      # @private Update the exclude data after a new object is created.
-      def update_exclude_indexes_proto! proto
-        @_exclude_indexes = {}
-        Array(proto.property).each do |property|
-          @_exclude_indexes[property.name] = !property.value.indexed
-          unless property.value.list_value.nil?
-            exclude = Array(property.value.list_value).map{|v| !v.indexed}
-            @_exclude_indexes[property.name] = exclude
-          end
-        end
-      end
-
-      ##
-      # @private Update the indexed values before the object is saved.
-      def update_properties_indexed_proto! proto
-        Array(proto.property).each do |property|
-          excluded = exclude_from_indexes? property.name
-          if excluded.is_a? Array
-            # Lists must not set indexed, or this error will happen:
-            # "A Value containing a list_value cannot specify indexed."
-            property.value.indexed = nil
-            property.value.list_value.each_with_index do |value, index|
-              value.indexed = !excluded[index]
-            end
-          else
-            property.value.indexed = !excluded
           end
         end
       end

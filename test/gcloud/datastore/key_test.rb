@@ -142,51 +142,6 @@ describe Gcloud::Datastore::Key do
     key.must_be :incomplete?
   end
 
-  it "returns a correct protocol buffer object" do
-    key = Gcloud::Datastore::Key.new "ThisThing", 1234
-    proto = key.to_proto
-    proto.path_element.count.must_equal 1
-    proto.path_element.last.kind.must_equal "ThisThing"
-    proto.path_element.last.id.must_equal 1234
-    proto.path_element.last.name.must_be :nil?
-    proto.partition_id.dataset_id.must_be :nil?
-    proto.partition_id.namespace.must_be :nil?
-
-    key = Gcloud::Datastore::Key.new "ThisThing", "charlie"
-    key.parent = Gcloud::Datastore::Key.new "ThatThing", "henry"
-    key.dataset_id = "custom-ds"
-    key.namespace = "custom-ns"
-    proto = key.to_proto
-    proto.path_element.count.must_equal 2
-    proto.path_element.first.kind.must_equal "ThatThing"
-    proto.path_element.first.id.must_be :nil?
-    proto.path_element.first.name.must_equal "henry"
-    proto.path_element.last.kind.must_equal "ThisThing"
-    proto.path_element.last.id.must_be :nil?
-    proto.path_element.last.name.must_equal "charlie"
-    proto.partition_id.dataset_id.must_equal "custom-ds"
-    proto.partition_id.namespace.must_equal "custom-ns"
-  end
-
-  it "can be created with a protocol buffer object" do
-    proto = Gcloud::Datastore::Proto::Key.new
-    proto.path_element = [Gcloud::Datastore::Proto::Key::PathElement.new]
-    proto.path_element.first.kind = "AnotherThing"
-    proto.path_element.first.id = 56789
-    proto.partition_id = Gcloud::Datastore::Proto::PartitionId.new
-    proto.partition_id.dataset_id = "custom-ds"
-    proto.partition_id.namespace = "custom-ns"
-    key = Gcloud::Datastore::Key.from_proto proto
-
-    key.wont_be :nil?
-    key.kind.must_equal "AnotherThing"
-    key.id.must_equal 56789
-    key.name.must_be :nil?
-    key.dataset_id.must_equal "custom-ds"
-    key.namespace.must_equal "custom-ns"
-    key.must_be :frozen?
-  end
-
   it "returns a correct GRPC object" do
     key = Gcloud::Datastore::Key.new "ThisThing", 1234
     grpc = key.to_grpc

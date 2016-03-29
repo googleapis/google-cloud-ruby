@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-require "gcloud/datastore/proto"
-
 module Gcloud
   module Datastore
     ##
@@ -224,43 +222,6 @@ module Gcloud
       def incomplete?
         kind.nil? || (id.nil? && (name.nil? || name.empty?))
       end
-
-      ##
-      # @private Convert the Key to a protocol buffer object.
-      def to_proto
-        Proto::Key.new.tap do |k|
-          k.path_element = path.map do |pe_kind, pe_id_or_name|
-            Proto.new_path_element pe_kind, pe_id_or_name
-          end
-          k.partition_id = Proto.new_partition_id dataset_id, namespace
-        end
-      end
-
-      # rubocop:disable all
-
-      ##
-      # @private Create a new Key from a protocol buffer object.
-      def self.from_proto proto
-        # Disable rules because the complexity here is neccessary.
-        key_proto = proto.dup
-        key = Key.new
-        proto_path_element = Array(key_proto.path_element).pop
-        if proto_path_element
-          key = Key.new proto_path_element.kind,
-                        proto_path_element.id || proto_path_element.name
-        end
-        if key_proto.partition_id
-          key.dataset_id = key_proto.partition_id.dataset_id
-          key.namespace  = key_proto.partition_id.namespace
-        end
-        if Array(key_proto.path_element).count > 0
-          key.parent = Key.from_proto(key_proto)
-        end
-        # Freeze the key to make it immutable.
-        key.freeze
-        key
-      end
-      # rubocop:enable all
 
       ##
       # @private Convert the Key to a Google::Datastore::V1beta3::Key object.

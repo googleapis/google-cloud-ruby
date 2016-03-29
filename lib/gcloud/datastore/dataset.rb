@@ -16,7 +16,6 @@
 require "gcloud/gce"
 require "gcloud/datastore/grpc_utils"
 require "gcloud/datastore/credentials"
-require "gcloud/datastore/connection"
 require "gcloud/datastore/service"
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
@@ -50,9 +49,6 @@ module Gcloud
     #   tasks = dataset.run query
     #
     class Dataset
-      # @private
-      attr_accessor :connection
-
       ##
       # @private The gRPC Service object.
       attr_accessor :service
@@ -64,7 +60,6 @@ module Gcloud
       def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
-        @connection = Connection.new project, credentials
         @service = Service.new project, credentials
       end
 
@@ -81,7 +76,7 @@ module Gcloud
       #   dataset.project #=> "my-todo-project"
       #
       def project
-        connection.dataset_id
+        service.project
       end
 
       ##
@@ -280,7 +275,7 @@ module Gcloud
       #   end
       #
       def transaction
-        tx = Transaction.new connection, service
+        tx = Transaction.new service
         return tx unless block_given?
 
         begin
@@ -404,7 +399,7 @@ module Gcloud
       end
 
       ##
-      # Convenince method to convert proto entities to Gcloud entities.
+      # Convenince method to convert GRPC entities to Gcloud entities.
       def to_gcloud_entities grpc_entity_results
         # Entities are nested in an object.
         Array(grpc_entity_results).map do |result|
@@ -414,19 +409,10 @@ module Gcloud
       end
 
       ##
-      # Convenince method to convert proto keys to Gcloud keys.
+      # Convenince method to convert GRPC keys to Gcloud keys.
       def to_gcloud_keys grpc_keys
         # Keys are not nested in an object like entities are.
         Array(grpc_keys).map { |key| Key.from_grpc key }
-      end
-
-      ##
-      # Convenince method to convert proto entities to Gcloud entities.
-      def to_gcloud_entities_proto grpc_entity_results
-        # Entities are nested in an object.
-        Array(grpc_entity_results).map do |result|
-          Entity.from_proto result.entity
-        end
       end
 
       ##
@@ -466,14 +452,6 @@ module Gcloud
         entities_or_keys.map do |e_or_k|
           key = e_or_k.respond_to?(:key) ? e_or_k.key.to_grpc : e_or_k.to_grpc
           Google::Datastore::V1beta3::Mutation.new(delete: key)
-        end
-      end
-
-      def optional_partition_id namespace = nil
-        return nil if namespace.nil?
-        Proto::PartitionId.new.tap do |p|
-          p.namespace = namespace
-          p.dataset_id = project
         end
       end
     end
