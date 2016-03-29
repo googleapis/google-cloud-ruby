@@ -51,28 +51,36 @@ module Gcloud
         #
         # Expected values are:
         #
-        # "MORE_RESULTS_AFTER_LIMIT":
-        # "NOT_FINISHED":
-        # "NO_MORE_RESULTS":
+        # * `:NOT_FINISHED`
+        # * `:MORE_RESULTS_AFTER_LIMIT`
+        # * `:MORE_RESULTS_AFTER_CURSOR`
+        # * `:NO_MORE_RESULTS`
         attr_reader :more_results
 
         ##
         # Convenience method for determining id the more_results value
-        # is "NOT_FINISHED"
+        # is `:NOT_FINISHED`
         def not_finished?
           more_results == :NOT_FINISHED
         end
 
         ##
         # Convenience method for determining id the more_results value
-        # is "MORE_RESULTS_AFTER_LIMIT"
+        # is `:MORE_RESULTS_AFTER_LIMIT`
         def more_after_limit?
           more_results == :MORE_RESULTS_AFTER_LIMIT
         end
 
         ##
         # Convenience method for determining id the more_results value
-        # is "NO_MORE_RESULTS"
+        # is `:MORE_RESULTS_AFTER_CURSOR`
+        def more_after_cursor?
+          more_results == :MORE_RESULTS_AFTER_CURSOR
+        end
+
+        ##
+        # Convenience method for determining id the more_results value
+        # is `:NO_MORE_RESULTS`
         def no_more?
           more_results == :NO_MORE_RESULTS
         end

@@ -457,6 +457,11 @@ describe Gcloud::Datastore::Dataset do
         response.batch.more_results = :MORE_RESULTS_AFTER_LIMIT
       end
     end
+    let(:run_query_res_more_after_cursor) do
+      run_query_res.tap do |response|
+        response.batch.more_results = :MORE_RESULTS_AFTER_CURSOR
+      end
+    end
     let(:run_query_res_no_more) do
       run_query_res.tap do |response|
         response.batch.more_results = :NO_MORE_RESULTS
@@ -480,6 +485,7 @@ describe Gcloud::Datastore::Dataset do
       entities.more_results.must_equal :NOT_FINISHED
       assert entities.not_finished?
       refute entities.more_after_limit?
+      refute entities.more_after_cursor?
       refute entities.no_more?
     end
 
@@ -500,6 +506,28 @@ describe Gcloud::Datastore::Dataset do
       entities.more_results.must_equal :MORE_RESULTS_AFTER_LIMIT
       refute entities.not_finished?
       assert entities.more_after_limit?
+      refute entities.more_after_cursor?
+      refute entities.no_more?
+    end
+
+    it "has more_results more_after_cursor" do
+      run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+        project_id: project,
+        query: Gcloud::Datastore::Query.new.kind("User").to_grpc
+      )
+      dataset.service.mocked_datastore.expect :run_query, run_query_res_more_after_cursor, [run_query_req]
+
+      query = Gcloud::Datastore::Query.new.kind("User")
+      entities = dataset.run query
+      entities.count.must_equal 2
+      entities.each do |entity|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+      end
+      entities.cursor.must_equal query_cursor
+      entities.more_results.must_equal :MORE_RESULTS_AFTER_CURSOR
+      refute entities.not_finished?
+      refute entities.more_after_limit?
+      assert entities.more_after_cursor?
       refute entities.no_more?
     end
 
@@ -520,6 +548,7 @@ describe Gcloud::Datastore::Dataset do
       entities.more_results.must_equal :NO_MORE_RESULTS
       refute entities.not_finished?
       refute entities.more_after_limit?
+      refute entities.more_after_cursor?
       assert entities.no_more?
     end
   end
