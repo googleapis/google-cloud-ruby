@@ -46,7 +46,7 @@ module Gcloud
     #   datastore = gcloud.datastore
     #
     #   query = datastore.query("Task").
-    #     where("completed", "=", true)
+    #     where("done", "=", false)
     #
     #   tasks = datastore.run query
     #
@@ -100,8 +100,8 @@ module Gcloud
       # @return [Array<Gcloud::Datastore::Key>]
       #
       # @example
-      #   empty_key = datastore.key "Task"
-      #   task_keys = datastore.allocate_ids empty_key, 5
+      #   task_key = datastore.key "Task"
+      #   task_keys = datastore.allocate_ids task_key, 5
       #
       def allocate_ids incomplete_key, count = 1
         if incomplete_key.complete?
@@ -122,8 +122,38 @@ module Gcloud
       #
       # @return [Array<Gcloud::Datastore::Entity>]
       #
-      # @example
-      #   datastore.save task1, task2
+      # @example Insert a new entity:
+      #   task = datastore.entity "Task" do |task|
+      #     task["type"] = "Personal"
+      #     task["done"] = false
+      #     task["priority"] = 4
+      #     task["description"] = "Learn Cloud Datastore"
+      #   end
+      #   task.key.id #=> nil
+      #   datastore.save task
+      #   task.key.id #=> 123456
+      #
+      # @example Insert multiple new entities in a batch:
+      #   task1 = datastore.entity "Task" do |task|
+      #     task["type"] = "Personal"
+      #     task["done"] = false
+      #     task["priority"] = 4
+      #     task["description"] = "Learn Cloud Datastore"
+      #   end
+      #
+      #   task2 = datastore.entity "Task" do |task|
+      #     task["type"] = "Personal"
+      #     task["done"] = false
+      #     task["priority"] = 5
+      #     task["description"] = "Integrate Cloud Datastore"
+      #   end
+      #
+      #   task_key1, task_key2 = datastore.save(task1, task2).map &:key
+      #
+      # @example Update an existing entity:
+      #   task = datastore.find "Task", "sampleTask"
+      #   task["priority"] = 5
+      #   datastore.save task
       #
       def save *entities
         ensure_service!
@@ -139,7 +169,7 @@ module Gcloud
       end
 
       ##
-      # Retrieve an entity by providing key information.
+      # Retrieve an entity by key.
       #
       # @param [Key, String] key_or_kind A Key object or `kind` string value.
       # @param [Integer, String, nil] id_or_name The Key's `id` or `name` value
@@ -148,11 +178,11 @@ module Gcloud
       # @return [Gcloud::Datastore::Entity, nil]
       #
       # @example Finding an entity with a key:
-      #   key = datastore.key "Task", 123456
-      #   task = datastore.find key
+      #   task_key = datastore.key "Task", "sampleTask"
+      #   task = datastore.find task_key
       #
       # @example Finding an entity with a `kind` and `id`/`name`:
-      #   task = datastore.find "Task", 123456
+      #   task = datastore.find "Task", "sampleTask"
       #
       def find key_or_kind, id_or_name = nil
         key = key_or_kind
@@ -173,9 +203,9 @@ module Gcloud
       # @example
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
-      #   key1 = datastore.key "Task", 123456
-      #   key2 = datastore.key "Task", 987654
-      #   tasks = datastore.find_all key1, key2
+      #   task_key1 = datastore.key "Task", "sampleTask1"
+      #   task_key2 = datastore.key "Task", "sampleTask2"
+      #   tasks = datastore.find_all task_key1, task_key2
       #
       def find_all *keys
         ensure_service!
@@ -198,7 +228,15 @@ module Gcloud
       # @example
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
-      #   datastore.delete entity1, entity2
+      #   task_key = datastore.key "Task", "sampleTask"
+      #   datastore.delete task_key
+      #
+      # @example Delete multiple entities in a batch:
+      #   gcloud = Gcloud.new
+      #   datastore = gcloud.datastore
+      #   task_key1 = datastore.key "Task", "sampleTask1"
+      #   task_key2 = datastore.key "Task", "sampleTask2"
+      #   datastore.delete task_key1, task_key2
       #
       def delete *entities_or_keys
         just_keys = entities_or_keys.map do |e_or_k|
@@ -223,12 +261,12 @@ module Gcloud
       #
       # @example
       #   query = datastore.query("Task").
-      #     where("completed", "=", true)
+      #     where("done", "=", false)
       #   tasks = datastore.run query
       #
       # @example Run the query within a namespace with the `namespace` option:
       #   query = Gcloud::Datastore::Query.new.kind("Task").
-      #     where("completed", "=", true)
+      #     where("done", "=", false)
       #   tasks = datastore.run query, namespace: "ns~todo-project"
       #
       # @example Run the query with a GQL string.
@@ -266,14 +304,16 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
       #
-      #   user = datastore.entity "User", "heidi" do |u|
-      #     u["name"] = "Heidi Henderson"
-      #     u["email"] = "heidi@example.net"
+      #   task = datastore.entity "Task", "sampleTask" do |task|
+      #     task["type"] = "Personal"
+      #     task["done"] = false
+      #     task["priority"] = 4
+      #     task["description"] = "Learn Cloud Datastore"
       #   end
       #
       #   datastore.transaction do |tx|
-      #     if tx.find(user.key).nil?
-      #       tx.save user
+      #     if tx.find(task.key).nil?
+      #       tx.save task
       #     end
       #   end
       #
@@ -283,15 +323,17 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
       #
-      #   user = datastore.entity "User", "heidi" do |u|
-      #     u["name"] = "Heidi Henderson"
-      #     u["email"] = "heidi@example.net"
+      #   task = datastore.entity "Task", "sampleTask" do |task|
+      #     task["type"] = "Personal"
+      #     task["done"] = false
+      #     task["priority"] = 4
+      #     task["description"] = "Learn Cloud Datastore"
       #   end
       #
       #   tx = datastore.transaction
       #   begin
-      #     if tx.find(user.key).nil?
-      #       tx.save user
+      #     if tx.find(task.key).nil?
+      #       tx.save task
       #     end
       #     tx.commit
       #   rescue
@@ -321,13 +363,13 @@ module Gcloud
       #
       # @example
       #   query = datastore.query("Task").
-      #     where("completed", "=", true)
+      #     where("done", "=", false)
       #   tasks = datastore.run query
       #
       # @example The previous example is equivalent to:
       #   query = Gcloud::Datastore::Query.new.
       #     kind("Task").
-      #     where("completed", "=", true)
+      #     where("done", "=", false)
       #   tasks = datastore.run query
       #
       def query *kinds
@@ -377,10 +419,10 @@ module Gcloud
       # @return [Gcloud::Datastore::Key]
       #
       # @example
-      #   key = datastore.key "User", "heidi@example.com"
+      #   task_key = datastore.key "Task", "sampleTask"
       #
       # @example The previous example is equivalent to:
-      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
       #
       def key kind = nil, id_or_name = nil
         Key.new kind, id_or_name
@@ -400,33 +442,39 @@ module Gcloud
       # @return [Gcloud::Datastore::Entity]
       #
       # @example
-      #   entity = datastore.entity
+      #   task = datastore.entity
       #
       # @example The previous example is equivalent to:
-      #   entity = Gcloud::Datastore::Entity.new
+      #   task = Gcloud::Datastore::Entity.new
       #
       # @example The key can also be passed in as an object:
-      #   key = datastore.key "User", "heidi@example.com"
-      #   entity = datastore.entity key
+      #   task_key = datastore.key "Task", "sampleTask"
+      #   task = datastore.entity task_key
       #
       # @example Or the key values can be passed in as parameters:
-      #   entity = datastore.entity "User", "heidi@example.com"
+      #   task = datastore.entity "Task", "sampleTask"
       #
       # @example The previous example is equivalent to:
-      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
-      #   entity = Gcloud::Datastore::Entity.new
-      #   entity.key = key
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task = Gcloud::Datastore::Entity.new
+      #   task.key = task_key
       #
       # @example The newly created entity can also be configured using a block:
-      #   user = datastore.entity "User", "heidi@example.com" do |u|
-      #     u["name"] = "Heidi Henderson"
-      #  end
+      #   task = datastore.entity "Task", "sampleTask" do |task|
+      #     task["type"] = "Personal"
+      #     task["done"] = false
+      #     task["priority"] = 4
+      #     task["description"] = "Learn Cloud Datastore"
+      #   end
       #
       # @example The previous example is equivalent to:
-      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
-      #   entity = Gcloud::Datastore::Entity.new
-      #   entity.key = key
-      #   entity["name"] = "Heidi Henderson"
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task = Gcloud::Datastore::Entity.new
+      #   task.key = task_key
+      #   task["type"] = "Personal"
+      #   task["done"] = false
+      #   task["priority"] = 4
+      #   task["description"] = "Learn Cloud Datastore"
       #
       def entity key_or_kind = nil, id_or_name = nil
         entity = Entity.new
@@ -453,7 +501,7 @@ module Gcloud
       end
 
       ##
-      # Convenince method to convert GRPC entities to Gcloud entities.
+      # Convenience method to convert GRPC entities to Gcloud entities.
       def to_gcloud_entities grpc_entity_results
         # Entities are nested in an object.
         Array(grpc_entity_results).map do |result|
@@ -463,7 +511,7 @@ module Gcloud
       end
 
       ##
-      # Convenince method to convert GRPC keys to Gcloud keys.
+      # Convenience method to convert GRPC keys to Gcloud keys.
       def to_gcloud_keys grpc_keys
         # Keys are not nested in an object like entities are.
         Array(grpc_keys).map { |key| Key.from_grpc key }

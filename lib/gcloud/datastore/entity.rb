@@ -24,10 +24,27 @@ module Gcloud
     # Entity represents a Datastore record.
     # Every Entity has a {Key}, and a list of properties.
     #
-    # @example
-    #   entity = Gcloud::Datastore::Entity.new
-    #   entity.key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
-    #   entity["name"] = "Heidi Henderson"
+    # @example Create a new entity using a block:
+    #   task = datastore.entity "Task", "sampleTask" do |task|
+    #     task["type"] = "Personal"
+    #     task["created"] = Time.now
+    #     task["done"] = false
+    #     task["priority"] = 4
+    #     task["percent_complete"] = 10.0
+    #     task["description"] = "Learn Cloud Datastore"
+    #   end
+    #
+    # @example Create a new entity belonging to an existing parent entity:
+    #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+    #   task_key.parent = Gcloud::Datastore::Key.new "TaskList", "default"
+    #
+    #   task = Gcloud::Datastore::Entity.new
+    #   task.key = task_key
+    #
+    #   task["type"] = "Personal"
+    #   task["done"] = false
+    #   task["priority"] = 4
+    #   task["description"] = "Learn Cloud Datastore"
     #
     class Entity
       ##
@@ -54,16 +71,16 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
-      #   user = datastore.find "User", "heidi@example.com"
-      #   user["name"] #=> "Heidi Henderson"
+      #   task = datastore.find "Task", "sampleTask"
+      #   task["description"] #=> "Learn Cloud Datastore"
       #
       # @example Or with a symbol name:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
-      #   user = datastore.find "User", "heidi@example.com"
-      #   user[:name] #=> "Heidi Henderson"
+      #   task = datastore.find "Task", "sampleTask"
+      #   task[:description] #=> "Learn Cloud Datastore"
       #
       def [] prop_name
         properties[prop_name]
@@ -80,16 +97,29 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
-      #   user = datastore.find "User", "heidi@example.com"
-      #   user["name"] = "Heidi H. Henderson"
+      #   task = datastore.find "Task", "sampleTask"
+      #   task["description"] = "Learn Cloud Datastore"
       #
       # @example Or with a symbol name:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
-      #   user = datastore.find "User", "heidi@example.com"
-      #   user[:name] = "Heidi H. Henderson"
+      #   task = datastore.find "Task", "sampleTask"
+      #   task[:description] = "Learn Cloud Datastore"
+      #
+      # @example Use array properties to store more than one value:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   datastore = gcloud.datastore
+      #
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task = Gcloud::Datastore::Entity.new
+      #   task.key = task_key
+      #
+      #   task["tags"] = ["fun", "programming"]
+      #   task["collaborators"] = ["alice", "bob"]
       #
       def []= prop_name, prop_value
         properties[prop_name] = prop_value
@@ -102,24 +132,24 @@ module Gcloud
       # @return [Gcloud::Datastore::Properties]
       #
       # @example
-      #   entity.properties[:name] = "Heidi H. Henderson"
-      #   entity.properties["name"] #=> "Heidi H. Henderson"
+      #   task.properties[:description] = "Learn Cloud Datastore"
+      #   task.properties["description"] #=> "Learn Cloud Datastore"
       #
-      #   entity.properties.each do |name, value|
+      #   task.properties.each do |name, value|
       #     puts "property #{name} has a value of #{value}"
       #   end
       #
       # @example A property's existence can be determined by calling `exist?`:
-      #   entity.properties.exist? :name #=> true
-      #   entity.properties.exist? "name" #=> true
-      #   entity.properties.exist? :expiration #=> false
+      #   task.properties.exist? :description #=> true
+      #   task.properties.exist? "description" #=> true
+      #   task.properties.exist? :expiration #=> false
       #
       # @example A property can be removed from the entity:
-      #   entity.properties.delete :name
-      #   entity.save
+      #   task.properties.delete :description
+      #   task.save
       #
       # @example The properties can be converted to a hash:
-      #   prop_hash = entity.properties.to_h
+      #   prop_hash = task.properties.to_h
       #
       attr_reader :properties
 
@@ -134,20 +164,20 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
-      #   entity = Gcloud::Datastore::Entity.new
-      #   entity.key = Gcloud::Datastore::Key.new "User"
-      #   datastore.save entity
+      #   task = Gcloud::Datastore::Entity.new
+      #   task.key = Gcloud::Datastore::Key.new "Task"
+      #   datastore.save task
       #
       # @example Once the entity is saved, the key is frozen and immutable:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
-      #   entity = datastore.find "User", "heidi@example.com"
-      #   entity.persisted? #=> true
-      #   entity.key = Gcloud::Datastore::Key.new "User" #=> RuntimeError
-      #   entity.key.frozen? #=> true
-      #   entity.key.id = 9876543221 #=> RuntimeError
+      #   task = datastore.find "Task", "sampleTask"
+      #   task.persisted? #=> true
+      #   task.key = Gcloud::Datastore::Key.new "Task" #=> RuntimeError
+      #   task.key.frozen? #=> true
+      #   task.key.id = 9876543221 #=> RuntimeError
       #
       def key= new_key
         fail "This entity's key is immutable." if persisted?
@@ -163,11 +193,11 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
       #
-      #   new_entity = Gcloud::Datastore::Entity.new
-      #   new_entity.persisted? #=> false
+      #   task = Gcloud::Datastore::Entity.new
+      #   task.persisted? #=> false
       #
-      #   found_entity = datastore.find "User", "heidi@example.com"
-      #   found_entity.persisted? #=> true
+      #   task = datastore.find "Task", "sampleTask"
+      #   task.persisted? #=> true
       #
       def persisted?
         @key && @key.frozen?
@@ -190,14 +220,14 @@ module Gcloud
       #   Unindexed properties
       #
       # @example Single property values will return a single flag setting:
-      #   entity["age"] = 21
-      #   entity.exclude_from_indexes? "age" #=> false
+      #   task["priority"] = 4
+      #   task.exclude_from_indexes? "priority" #=> false
       #
       # @example A multi-valued property will return an array of flag settings:
-      #   entity["tags"] = ["ruby", "code"]
-      #   entity.exclude_from_indexes! "tags", [true, false]
+      #   task["tags"] = ["fun", "programming"]
+      #   task.exclude_from_indexes! "tags", [true, false]
       #
-      #   entity.exclude_from_indexes? "tags" #=> [true, false]
+      #   task.exclude_from_indexes? "tags" #=> [true, false]
       #
       def exclude_from_indexes? name
         value = self[name]
@@ -233,21 +263,21 @@ module Gcloud
       #   Unindexed properties
       #
       # @example
-      #   entity["age"] = 21
-      #   entity.exclude_from_indexes! "age", true
+      #   entity["priority"] = 4
+      #   entity.exclude_from_indexes! "priority", true
       #
       # @example Multi-valued properties can be given multiple exclude flags:
-      #   entity["tags"] = ["ruby", "code"]
+      #   entity["tags"] = ["fun", "programming"]
       #   entity.exclude_from_indexes! "tags", [true, false]
       #
       # @example Or, a single flag can be applied to all values in a property:
-      #   entity["tags"] = ["ruby", "code"]
+      #   entity["tags"] = ["fun", "programming"]
       #   entity.exclude_from_indexes! "tags", true
       #
       # @example Flags can also be set with a block:
-      #   entity["age"] = 21
-      #   entity.exclude_from_indexes! "age" do |age|
-      #     age > 18
+      #   entity["priority"] = 4
+      #   entity.exclude_from_indexes! "priority" do |priority|
+      #     priority > 4
       #   end
       #
       def exclude_from_indexes! name, flag = nil, &block

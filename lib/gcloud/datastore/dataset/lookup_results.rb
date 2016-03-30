@@ -28,20 +28,20 @@ module Gcloud
       # Many common Array methods will return a new Array instance.
       #
       # @example
-      #   entities = datastore.find_all key1, key2, key3
-      #   entities.size #=> 3
-      #   entities.deferred #=> []
-      #   entities.missing #=> []
+      #   tasks = datastore.find_all task_key1, task_key2, task_key3
+      #   tasks.size #=> 3
+      #   tasks.deferred #=> []
+      #   tasks.missing #=> []
       #
       # @example Caution, many Array methods will return a new Array instance:
-      #   entities = datastore.find_all key1, key2, key3
-      #   entities.size #=> 3
-      #   entities.deferred #=> []
-      #   entities.missing #=> []
-      #   names = entities.map { |e| e["name"] }
-      #   names.size #=> 3
-      #   names.deferred #=> NoMethodError
-      #   names.missing #=> NoMethodError
+      #   tasks = datastore.find_all task_key1, task_key2, task_key3
+      #   tasks.size #=> 3
+      #   tasks.deferred #=> []
+      #   tasks.missing #=> []
+      #   descriptions = tasks.map { |task| task["description"] }
+      #   descriptions.size #=> 3
+      #   descriptions.deferred #=> NoMethodError
+      #   descriptions.missing #=> NoMethodError
       #
       class LookupResults < DelegateClass(::Array)
         ##

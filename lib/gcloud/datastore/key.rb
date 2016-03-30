@@ -24,7 +24,7 @@ module Gcloud
     # ID, assigned automatically by Datastore.
     #
     # @example
-    #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
+    #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
     #
     class Key
       ##
@@ -33,8 +33,8 @@ module Gcloud
       # @return [String]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "User"
-      #   key.kind #=> "User"
+      #   key = Gcloud::Datastore::Key.new "TaskList"
+      #   key.kind #=> "TaskList"
       #   key.kind = "Task"
       #
       attr_accessor :kind
@@ -51,8 +51,8 @@ module Gcloud
       #                       "/path/to/keyfile.json"
       #
       #   datastore = gcloud.datastore
-      #   entity = datastore.find "User", "heidi@example.com"
-      #   entity.key.dataset_id #=> "my-todo-project"
+      #   task = datastore.find "Task", "sampleTask"
+      #   task.key.dataset_id #=> "my-todo-project"
       #
       attr_accessor :dataset_id
 
@@ -68,8 +68,8 @@ module Gcloud
       #                       "/path/to/keyfile.json"
       #
       #   datastore = gcloud.datastore
-      #   entity = datastore.find "User", "heidi@example.com"
-      #   entity.key.namespace #=> "ns~todo-project"
+      #   task = datastore.find "Task", "sampleTask"
+      #   task.key.namespace #=> "ns~todo-project"
       #
       attr_accessor :namespace
 
@@ -83,7 +83,7 @@ module Gcloud
       # @return [Gcloud::Datastore::Dataset::Key]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
       #
       def initialize kind = nil, id_or_name = nil
         @kind = kind
@@ -101,12 +101,12 @@ module Gcloud
       # @return [Integer, nil]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
-      #   key.id #=> nil
-      #   key.name #=> "heidi@example.com"
-      #   key.id = 654321
-      #   key.id #=> 654321
-      #   key.name #=> nil
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task_key.id #=> nil
+      #   task_key.name #=> "sampleTask"
+      #   task_key.id = 654321
+      #   task_key.id #=> 654321
+      #   task_key.name #=> nil
       #
       def id= new_id
         @name = nil if new_id
@@ -119,8 +119,8 @@ module Gcloud
       # @return [Integer, nil]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "User", 123456
-      #   key.id #=> 123456
+      #   task_key = Gcloud::Datastore::Key.new "Task", 123456
+      #   task_key.id #=> 123456
       #
       attr_reader :id
 
@@ -131,12 +131,12 @@ module Gcloud
       # @return [String, nil]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "User", 123456
-      #   key.id #=> 123456
-      #   key.name #=> nil
-      #   key.name = "heidi@example.com"
-      #   key.id #=> nil
-      #   key.name #=> "heidi@example.com"
+      #   task_key = Gcloud::Datastore::Key.new "Task", 123456
+      #   task_key.id #=> 123456
+      #   task_key.name #=> nil
+      #   task_key.name = "sampleTask"
+      #   task_key.id #=> nil
+      #   task_key.name #=> "sampleTask"
       #
       def name= new_name
         @id = nil if new_name
@@ -149,8 +149,8 @@ module Gcloud
       # @return [String, nil]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
-      #   key.name #=> "heidi@example.com"
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task_key.name #=> "sampleTask"
       #
       attr_reader :name
 
@@ -160,8 +160,15 @@ module Gcloud
       # @return [Key, nil]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "List", "todos"
-      #   key.parent = Gcloud::Datastore::Key.new "User", "heidi@example.com"
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task_key.parent = Gcloud::Datastore::Key.new "TaskList", "default"
+      #
+      # @example With multiple levels:
+      #   user_key = Gcloud::Datastore::Key.new "User", "alice"
+      #   task_list_key = Gcloud::Datastore::Key.new "TaskList", "default"
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task_list_key.parent = user_key
+      #   task_key.parent = task_list_key
       #
       def parent= new_parent
         # store key if given an entity
@@ -180,11 +187,11 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
       #
-      #   user = datastore.find "User", "heidi@example.com"
-      #   query = datastore.query("List").
-      #     ancestor(user.key)
+      #   task_list = datastore.find "TaskList", "default"
+      #   query = datastore.query("Task").
+      #     ancestor(task_list.key)
       #   lists = datastore.run query
-      #   lists.first.key.parent #=> Key("User", "heidi@example.com")
+      #   lists.first.key.parent #=> Key("TaskList", "default")
       #
       attr_reader :parent
 
@@ -196,9 +203,9 @@ module Gcloud
       # @return [Array<Array<(String, String)>>]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "List", "todos"
-      #   key.parent = Gcloud::Datastore::Key.new "User", "heidi@example.com"
-      #   key.path #=> [["User", "heidi@example.com"], ["List", "todos"]]
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task_key.parent = Gcloud::Datastore::Key.new "TaskList", "default"
+      #   task_key.path #=> [["TaskList", "default"], ["Task", "sampleTask"]]
       #
       def path
         new_path = parent ? parent.path : []

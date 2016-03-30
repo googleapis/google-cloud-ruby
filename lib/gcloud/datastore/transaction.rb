@@ -21,6 +21,18 @@ module Gcloud
     # Special Connection instance for running transactions.
     #
     # See {Gcloud::Datastore::Dataset#transaction}
+    #
+    # @example
+    #   def transfer_funds client, from_key, to_key, amount
+    #     datastore.transaction do |tx|
+    #       from = tx.find from_key
+    #       from["balance"] -= amount
+    #       to = tx.find to_key
+    #       to["balance"] += amount
+    #       tx.save from, to
+    #     end
+    #   end
+    #
     class Transaction < Dataset
       attr_reader :id
 
@@ -36,10 +48,14 @@ module Gcloud
       ##
       # Persist entities in a transaction.
       #
-      # @example
+      # @example x
+      #   task_key = datastore.key "Task", "sampleTask"
       #   datastore.transaction do |tx|
-      #     if tx.find(user.key).nil?
-      #       tx.save task1, task2
+      #     task = tx.find task_key
+      #     if task.nil?
+      #       task = Gcloud::Datastore::Entity.new
+      #       task.key = task_key
+      #       tx.save task
       #     end
       #   end
       #
@@ -54,7 +70,7 @@ module Gcloud
       #
       # @example
       #   datastore.transaction do |tx|
-      #     if tx.find(user.key).nil?
+      #     if tx.find(task_list.key).nil?
       #       tx.delete task1, task2
       #     end
       #   end
