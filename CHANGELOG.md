@@ -1,5 +1,17 @@
 # Release History
 
+### 0.7.0 / 2016-03-31
+
+#### Changes
+
+* Add support for Logging service
+* gRPC
+  * Add dependency on gRPC gem
+  * Pub/Sub transport layer now uses gRPC
+  * New Logging transport layer uses gRPC
+  * Future releases will migrate more services to gRPC
+
+
 ### 0.6.2 / 2016-03-02
 
 #### Changes
