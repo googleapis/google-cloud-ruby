@@ -1,119 +1,20 @@
----
-layout: home
----
-{% assign release = site.data.releases | first %}
-<section class="hero-banner">
-  <div class="container clearfix">
-    <div class="col col-left">
-      <h1>gcloud</h1>
-      <p>Google Cloud Client Library for Ruby - an idiomatic, intuitive, and natural way for Ruby developers to integrate with Google Cloud Platform services, like Cloud Datastore and Cloud Storage.</p>
-    </div><!-- end of .col.col-left -->
+<!doctype html><html><head><meta charset="utf-8"><title>gcloud</title><meta name="description" content="Google Cloud Platform's client library documentation"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="shortcut icon" href="https://cloud.google.com/images/gcp-favicon.ico"><link rel="stylesheet" href="src/vendor-d362a4bbd8.css"><link rel="stylesheet" href="src/app-fceb7d90bc.css"></head><body><!--[if lt IE 10]>
+ <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+ <![endif]--><main ui-view="" autoscroll="true"></main><script src="src/vendor-c68bdfe746.js"></script><script src="src/app-58b52dabdf.js"></script><script>
+      (function() {
+        var $injector = angular.injector(['ng']);
+        var $http = $injector.get('$http');
 
-    <div class="col col-right">
-      <h2>One-line install</h2>
-      <pre>$ gem install gcloud</pre>
-      <h4 class="latest-release">Latest Release
-        <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/releases/tag/{{ release.version }}">{{ release.version }}</a>
-        {{ release.date | date: "%b %d, %Y" }}
-      </h4>
-    </div><!-- end of .col.col-right -->
-  </div><!-- end of .container -->
-</section><!-- end of .hero-banner -->
+        $http.get('manifest.json')
+          .then(function(response) {
+            angular
+              .module('gcloud.manifest', [])
+              .constant('manifest', response.data);
 
-<section class="block featuring">
-  <div class="container">
-    <ul class="featuring-links">
-      <li>
-        <a href="docs/{{ release.version }}" title="Documentation" class="btn btn-docs">
-          <img src="img/icon-lang-ruby-gray.svg" alt="Ruby icon" />
-          Read the Docs
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby" title="Github repository" class="ext-link">
-          <img src="img/icon-link-github.svg" alt="Github icon" />
-          Github
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues" title="Issues on Github" class="ext-link">
-          <img src="img/icon-link-issues.svg" alt="Issues icon" />
-          Issues
-        </a>
-      </li>
-      <li>
-        <a href="http://stackoverflow.com/questions/tagged/gcloud-ruby" title="gcloud on StackOverflow" class="ext-link">
-          <img src="img/icon-link-stackoverflow.svg" alt="StackOverflow icon" />
-          StackOverflow
-        </a>
-      </li>
-      <li>
-        <a href="http://rubygems.org/gems/gcloud" title="RubyGems" class="ext-link">
-           <img src="img/icon-link-rubygems.svg" alt="RubyGems icon" />
-          RubyGems
-        </a>
-      </li>
-    </ul>
-
-    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in lacus ut nunc consectetur dictum. Nam suscipit, justo nec mollis condimentum, mi mi blandit eros, eget ullamcorper tortor magna at augue.</p> -->
-
-    <!-- <ul class="pagination">
-      <li><a href="" class="current">1</a></li>
-      <li><a href="">2</a></li>
-      <li><a href="">3</a></li>
-    </ul> -->
-  </div><!-- end of .container -->
-</section><!-- end of .featuring -->
-
-<section class="block about">
-  <div class="container clearfix">
-    <div class="col col-left">
-      <h3 class="block-title">What is it?</h3>
-
-      <p><code>gcloud</code> is a client library for accessing Google
-      Cloud Platform services that significantly reduces the boilerplate
-      code you have to write. The library provides high-level API
-      abstractions so they're easier to understand. It embraces
-      Ruby idioms, works well with the standard library, and
-      integrates better with your codebase.
-      All this means you spend more time creating code that matters
-      to you.</p>
-
-      <p><code>gcloud</code> is configured to access Google Cloud Platform
-      services and authorize (OAuth 2.0) automatically on your behalf.
-      With a one-line install and a private key, you are up and ready
-      to go. Better yet, if you are running on a Google Compute Engine
-      instance, the one-line install is enough!</p>
-    </div><!-- end of .col.col-left -->
-
-    <div class="col col-right">
-      <h4>Retrieve and entity from Cloud Datastore</h4>
-
-       <div hljs="" language="ruby">
-
-<pre><code class="hljs ruby"><span class="hljs-identifier"><span class="hljs-keyword">require</span></span> <span class="hljs-string">"gcloud/datastore"</span>
-
-<span class="hljs-identifier">datastore</span> = <span class="hljs-constant">Gcloud</span>.<span class="hljs-identifier">datastore</span> <span class="hljs-string">"my-project"</span>,
-                             <span class="hljs-string">"key.json"</span>
-
-<span class="hljs-identifier">product</span> = <span class="hljs-identifier">datastore</span>.<span class="hljs-identifier"><span class="hljs-keymethods">find</span></span> <span class="hljs-string">"Product"</span>, <span class="hljs-number">123</span></code></pre>
-
-      </div>
-
-    </div><!-- end of .col.col-right -->
-  </div><!-- end of .container -->
-</section><!-- end of .featuring -->
-
-<section class="block faq">
-  <div class="container clearfix">
-    <h3 class="block-title">FAQ</h3>
-
-    <h4>What is the relationship between the gcloud package and the gcloud command-line tool?</h4>
-
-    <p>Both the gcloud command-line tool and gcloud package are a part of the Google Cloud SDK: a collection of tools and libraries that enable you to easily create and manage resources on the Google Cloud Platform. The gcloud command-line tool can be used to manage both your development workflow and your Google Cloud Platform resources while the gcloud package is the Google Cloud Client Library for Ruby.</p>
-
-    <h4>What is the relationship between gcloud and the Google APIs Ruby Client?</h4>
-
-    <p>The <a href="https://github.com/google/google-api-ruby-client">Google APIs Ruby Client</a> is a client library for using the broad set of Google APIs. gcloud is built specifically for the Google Cloud Platform and is the recommended way to integrate Google Cloud APIs into your Ruby applications. If your application requires both Google Cloud Platform and other Google APIs, the 2 libraries may be used by your application.</p>
-  </div>
-</section>
+            angular.element(document)
+              .ready(function() {
+                angular.bootstrap(document, ['gcloud']);
+              });
+          });
+      }());
+    </script></body></html>

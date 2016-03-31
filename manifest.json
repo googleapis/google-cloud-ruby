@@ -1,0 +1,25 @@
+{
+  "lang": "ruby",
+  "friendlyLang": "Ruby",
+  "markdown": "ruby",
+  "versions": [
+    "v0.7.0",
+    "master"
+  ],
+  "content": "json",
+  "home": "home.html",
+  "package": {
+    "title": "RubyGems",
+    "href": "http://rubygems.org/gems/gcloud"
+  },
+  "methodTypeSymbols": [
+    {
+      "type": "class",
+      "symbol": "::"
+    },
+    {
+      "type": "instance",
+      "symbol": "#"
+    }
+  ]
+}
