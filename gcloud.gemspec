@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
                           "--exclude", "lib/gcloud/proto/",
                           "--exclude", "lib/google/"]
 
-  gem.add_dependency                  "grpc", "0.13.1.pre1"
+  gem.add_dependency                  "grpc", "~> 0.13.1"
   gem.add_dependency                  "beefcake", "~> 1.0"
   gem.add_dependency                  "google-api-client", "~> 0.8.3"
   gem.add_dependency                  "mime-types", "~> 2.4"
