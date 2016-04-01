@@ -33,6 +33,11 @@ describe Gcloud::Pubsub::Subscription, :pull, :autoack, :mock_pubsub do
       ]
     }.to_json
   end
+  let(:empty_rec_msgs_json) do
+    {
+      "received_messages" => []
+    }.to_json
+  end
   let(:rec_msg1_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json rec_msg1_json }
   let(:rec_msg2_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json rec_msg2_json }
   let(:rec_msg3_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json rec_msg3_json }
@@ -64,5 +69,23 @@ describe Gcloud::Pubsub::Subscription, :pull, :autoack, :mock_pubsub do
     mock.verify
 
     rec_messages.count.must_equal 3
+  end
+
+  it "does not auto acknowledge when pulling messages and getting 0 results" do
+    pull_req = Google::Pubsub::V1::PullRequest.new(
+      subscription: subscription_path(sub_name),
+      return_immediately: true,
+      max_messages: 100
+    )
+    pull_res = Google::Pubsub::V1::PullResponse.decode_json empty_rec_msgs_json
+    mock = Minitest::Mock.new
+    mock.expect :pull, pull_res, [pull_req]
+    subscription.service.mocked_subscriber = mock
+
+    rec_messages = subscription.pull autoack: true
+
+    mock.verify
+
+    rec_messages.count.must_equal 0
   end
 end

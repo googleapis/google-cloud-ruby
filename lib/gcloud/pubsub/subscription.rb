@@ -356,6 +356,7 @@ module Gcloud
       #
       def acknowledge *messages
         ack_ids = coerce_ack_ids messages
+        return true if ack_ids.empty?
         ensure_service!
         service.acknowledge name, *ack_ids
         true
