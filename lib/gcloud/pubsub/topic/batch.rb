@@ -48,7 +48,7 @@ module Gcloud
         def to_gcloud_messages message_ids
           msgs = @messages.zip(Array(message_ids)).map do |arr, id|
             Message.from_grpc(Google::Pubsub::V1::PubsubMessage.new(
-                                data: [arr[0]].pack("m").encode("ASCII-8BIT"),
+                                data: String(arr[0]).encode("ASCII-8BIT"),
                                 attributes: arr[1],
                                 message_id: id))
           end

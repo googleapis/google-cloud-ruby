@@ -21,15 +21,15 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
   let(:message1) { "new-message-here" }
   let(:message2) { "second-new-message" }
   let(:message3) { "third-new-message" }
-  let(:msg_packed1) { [message1].pack("m").encode("ASCII-8BIT") }
-  let(:msg_packed2) { [message2].pack("m").encode("ASCII-8BIT") }
-  let(:msg_packed3) { [message3].pack("m").encode("ASCII-8BIT") }
+  let(:msg_encoded1) { message1.encode("ASCII-8BIT") }
+  let(:msg_encoded2) { message2.encode("ASCII-8BIT") }
+  let(:msg_encoded3) { message3.encode("ASCII-8BIT") }
 
   it "publishes a message" do
     publish_req = Google::Pubsub::V1::PublishRequest.new(
       topic: topic_path(topic_name),
       messages: [
-        Google::Pubsub::V1::PubsubMessage.new(data: msg_packed1)
+        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1)
       ]
     )
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
@@ -49,7 +49,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
     publish_req = Google::Pubsub::V1::PublishRequest.new(
       topic: topic_path(topic_name),
       messages: [
-        Google::Pubsub::V1::PubsubMessage.new(data: msg_packed1, attributes: {"format" => "text"})
+        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1, attributes: {"format" => "text"})
       ]
     )
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
@@ -70,9 +70,9 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
     publish_req = Google::Pubsub::V1::PublishRequest.new(
       topic: topic_path(topic_name),
       messages: [
-        Google::Pubsub::V1::PubsubMessage.new(data: msg_packed1),
-        Google::Pubsub::V1::PubsubMessage.new(data: msg_packed2),
-        Google::Pubsub::V1::PubsubMessage.new(data: msg_packed3, attributes: {"format" => "none"})
+        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1),
+        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded2),
+        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded3, attributes: {"format" => "none"})
       ]
     )
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2", "msg3"] }.to_json)
@@ -104,7 +104,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
       publish_req = Google::Pubsub::V1::PublishRequest.new(
         topic: topic_path(topic_name),
         messages: [
-          Google::Pubsub::V1::PubsubMessage.new(data: msg_packed1)
+          Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1)
         ]
       )
       publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
@@ -124,7 +124,7 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
       publish_req = Google::Pubsub::V1::PublishRequest.new(
         topic: topic_path(topic_name),
         messages: [
-          Google::Pubsub::V1::PubsubMessage.new(data: msg_packed1, attributes: { "format" => "text" })
+          Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1, attributes: { "format" => "text" })
         ]
       )
       publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
@@ -145,9 +145,9 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
       publish_req = Google::Pubsub::V1::PublishRequest.new(
         topic: topic_path(topic_name),
         messages: [
-          Google::Pubsub::V1::PubsubMessage.new(data: msg_packed1),
-          Google::Pubsub::V1::PubsubMessage.new(data: msg_packed2),
-          Google::Pubsub::V1::PubsubMessage.new(data: msg_packed3, attributes: {"format" => "none"})
+          Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1),
+          Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded2),
+          Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded3, attributes: {"format" => "none"})
         ]
       )
       publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2", "msg3"] }.to_json)
