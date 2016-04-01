@@ -369,12 +369,12 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "can publish a message" do
     message = "new-message-here"
-    base_64_msg = [message].pack("m").encode("ASCII-8BIT")
+    encoded_msg = message.encode("ASCII-8BIT")
 
     publish_req = Google::Pubsub::V1::PublishRequest.new(
       topic: topic_path(topic_name),
       messages: [
-        Google::Pubsub::V1::PubsubMessage.new(data: base_64_msg)
+        Google::Pubsub::V1::PubsubMessage.new(data: encoded_msg)
       ]
     )
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
@@ -392,12 +392,12 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "can publish a message with attributes" do
     message = "new-message-here"
-    base_64_msg = [message].pack("m").encode("ASCII-8BIT")
+    encoded_msg = message.encode("ASCII-8BIT")
 
     publish_req = Google::Pubsub::V1::PublishRequest.new(
       topic: topic_path(topic_name),
       messages: [
-        Google::Pubsub::V1::PubsubMessage.new(data: base_64_msg, attributes: { "format" => "text" })
+        Google::Pubsub::V1::PubsubMessage.new(data: encoded_msg, attributes: { "format" => "text" })
       ]
     )
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
@@ -417,14 +417,14 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   it "can publish multiple messages with a block" do
     message1 = "first-new-message"
     message2 = "second-new-message"
-    base_64_msg1 = [message1].pack("m").encode("ASCII-8BIT")
-    base_64_msg2 = [message2].pack("m").encode("ASCII-8BIT")
+    encoded_msg1 = message1.encode("ASCII-8BIT")
+    encoded_msg2 = message2.encode("ASCII-8BIT")
 
     publish_req = Google::Pubsub::V1::PublishRequest.new(
       topic: topic_path(topic_name),
       messages: [
-        Google::Pubsub::V1::PubsubMessage.new(data: base_64_msg1),
-        Google::Pubsub::V1::PubsubMessage.new(data: base_64_msg2, attributes: { "format" => "none" })
+        Google::Pubsub::V1::PubsubMessage.new(data: encoded_msg1),
+        Google::Pubsub::V1::PubsubMessage.new(data: encoded_msg2, attributes: { "format" => "none" })
       ]
     )
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2"] }.to_json)

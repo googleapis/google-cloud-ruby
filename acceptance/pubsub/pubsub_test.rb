@@ -70,9 +70,13 @@ describe Gcloud::Pubsub, :pubsub do
     end
 
     it "should publish a message" do
-      msg = pubsub.topic(topic_names.first).publish "message from me"
+      data = "message from me"
+      msg = pubsub.topic(topic_names.first).publish data, foo: :bar
+
       msg.wont_be :nil?
       msg.must_be_kind_of Gcloud::Pubsub::Message
+      msg.data.must_equal data
+      msg.attributes["foo"].must_equal "bar"
     end
 
     it "should publish multiple messages" do
