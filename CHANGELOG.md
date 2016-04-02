@@ -1,5 +1,12 @@
 # Release History
 
+### 0.7.2 / 2016-04-01
+
+#### Changes
+
+* Pub/Sub
+  * Fixed issue with unnecessary acknowledge requests in autoack (maxstudener)
+
 ### 0.7.1 / 2016-04-01
 
 #### Changes
