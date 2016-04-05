@@ -82,15 +82,21 @@ module Gcloud
       end
 
       # Query for entities.
-      def run_query query, partition = nil
+      def run_query query, namespace = nil
         run_req = Google::Datastore::V1beta3::RunQueryRequest.new(
-          project_id: project,
-          query: query
-        )
+          project_id: project)
+        if query.is_a? Google::Datastore::V1beta3::Query
+          run_req["query"] = query
+        elsif query.is_a? Google::Datastore::V1beta3::GqlQuery
+          run_req["gql_query"] = query
+        else
+          fail ArgumentError, "Unable to query with a #{query.class} object."
+        end
+
         run_req.partition_id = Google::Datastore::V1beta3::PartitionId.new(
           project_id: project,
-          namespace_id: partition
-        ) if partition
+          namespace_id: namespace
+        ) if namespace
 
         backoff { datastore.run_query run_req }
       end

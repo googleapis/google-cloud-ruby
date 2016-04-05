@@ -439,6 +439,41 @@ describe "Datastore", :datastore do
       entities.count.must_equal 2
     end
 
+    it "should filter queries with simple indexes using GQL and named bindings" do
+      gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND appearances >= @appearanceCount",
+                        bookKey: book.key, appearanceCount: 20
+      entities = dataset.run gql
+      entities.count.must_equal 6
+    end
+
+    it "should filter queries with simple indexes using GQL and positional bindings" do
+      gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR @1 AND appearances >= @2"
+      gql.positional_bindings = [book.key, 20]
+      entities = dataset.run gql
+      entities.count.must_equal 6
+    end
+
+    it "should filter queries with defined indexes using GQL and named bindings" do
+      gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND family = @familyName AND appearances >= @appearanceCount",
+                        bookKey: book.key, familyName: "Stark", appearanceCount: 20
+      entities = dataset.run gql
+      entities.count.must_equal 6
+    end
+
+    it "should filter queries with defined indexes using GQL and positional bindings" do
+      gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR @1 AND family = @2 AND appearances >= @3"
+      gql.positional_bindings = [book.key, "Stark", 20]
+      entities = dataset.run gql
+      entities.count.must_equal 6
+    end
+
+    it "should filter queries with defined indexes using GQL and literal values" do
+      gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR Key(Book, 'GoT') AND family = 'Stark' AND appearances >= 20"
+      gql.allow_literals = true
+      entities = dataset.run gql
+      entities.count.must_equal 6
+    end
+
     after do
       dataset.delete *characters
     end

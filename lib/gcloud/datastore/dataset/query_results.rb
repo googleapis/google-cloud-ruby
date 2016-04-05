@@ -30,12 +30,12 @@ module Gcloud
       # @example
       #   entities = dataset.run query
       #   entities.size #=> 3
-      #   entities.cursor #=> "c3VwZXJhd2Vzb21lIQ"
+      #   entities.cursor #=> Gcloud::Datastore::Cursor(c3VwZXJhd2Vzb21lIQ)
       #
       # @example Caution, many Array methods will return a new Array instance:
       #   entities = dataset.run query
       #   entities.size #=> 3
-      #   entities.end_cursor #=> "c3VwZXJhd2Vzb21lIQ"
+      #   entities.end_cursor #=> Gcloud::Datastore::Cursor(c3VwZXJhd2Vzb21lIQ)
       #   names = entities.map { |e| e.name }
       #   names.size #=> 3
       #   names.cursor #=> NoMethodError
@@ -43,6 +43,8 @@ module Gcloud
       class QueryResults < DelegateClass(::Array)
         ##
         # The end_cursor of the QueryResults.
+        #
+        # @return [Gcloud::Datastore::Cursor]
         attr_reader :end_cursor
         alias_method :cursor, :end_cursor
 

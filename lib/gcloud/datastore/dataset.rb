@@ -20,6 +20,8 @@ require "gcloud/datastore/service"
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
 require "gcloud/datastore/query"
+require "gcloud/datastore/gql_query"
+require "gcloud/datastore/cursor"
 require "gcloud/datastore/dataset/lookup_results"
 require "gcloud/datastore/dataset/query_results"
 
@@ -214,7 +216,7 @@ module Gcloud
       ##
       # Retrieve entities specified by a Query.
       #
-      # @param [Query] query The Query object with the search criteria.
+      # @param [Query, GqlQuery] query The object with the search criteria.
       # @param [String] namespace The namespace the query is to run within.
       #
       # @return [Gcloud::Datastore::Dataset::QueryResults]
@@ -229,11 +231,24 @@ module Gcloud
       #     where("completed", "=", true)
       #   tasks = dataset.run query, namespace: "ns~todo-project"
       #
+      # @example Run the query with a GQL string.
+      #   gql = dataset.gql "SELECT * FROM Task WHERE completed = @completed",
+      #                     completed: true
+      #   tasks = dataset.run gql
+      #
+      # @example Run the gql query within a namespace with `namespace` option:
+      #   gql = dataset.gql "SELECT * FROM Task WHERE completed = @completed",
+      #                     completed: true
+      #   tasks = dataset.run gql, namespace: "ns~todo-project"
+      #
       def run query, namespace: nil
         ensure_service!
+        unless query.is_a?(Query) || query.is_a?(GqlQuery)
+          fail ArgumentError, "Cannot run a #{query.class} object."
+        end
         query_res = service.run_query query.to_grpc, namespace
         entities = to_gcloud_entities query_res.batch.entity_results
-        cursor = GRPCUtils.encode_bytes query_res.batch.end_cursor
+        cursor = Cursor.from_grpc query_res.batch.end_cursor
         more_results = query_res.batch.more_results
         QueryResults.new entities, cursor, more_results
       end
@@ -319,6 +334,36 @@ module Gcloud
         query = Query.new
         query.kind(*kinds) unless kinds.empty?
         query
+      end
+
+      ##
+      # Create a new GqlQuery instance. This is a convenience method to make the
+      # creation of GqlQuery objects easier.
+      #
+      # @param [String] query The GQL query string.
+      # @param [Hash] bindings Named bindings for the GQL query string, each
+      #   key must match regex `[A-Za-z_$][A-Za-z_$0-9]*`, must not match regex
+      #   `__.*__`, and must not be `""`. The value must be an `Object` that can
+      #   be stored as an Entity property value, or a `Cursor`.
+      #
+      # @return [Gcloud::Datastore::GqlQuery]
+      #
+      # @example
+      #   gql = dataset.gql "SELECT * FROM Task WHERE completed = @completed",
+      #                     completed: true
+      #   tasks = dataset.run gql
+      #
+      # @example The previous example is equivalent to:
+      #   gql = Gcloud::Datastore::GqlQuery.new
+      #   gql.query_string = "SELECT * FROM Task WHERE completed = @completed"
+      #   gql.named_bindings = {completed: true}
+      #   tasks = dataset.run gql
+      #
+      def gql query, bindings = {}
+        gql = GqlQuery.new
+        gql.query_string = query
+        gql.named_bindings = bindings unless bindings.empty?
+        gql
       end
 
       ##

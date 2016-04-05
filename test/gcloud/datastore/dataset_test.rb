@@ -40,7 +40,7 @@ describe Gcloud::Datastore::Dataset do
       response.transaction = "giterdone"
     end
   end
-  let(:query_cursor) { "c3VwZXJhd2Vzb21lIQ==" }
+  let(:query_cursor) { Gcloud::Datastore::Cursor.new "c3VwZXJhd2Vzb21lIQ==" }
 
   let(:lookup_res) do
     Google::Datastore::V1beta3::LookupResponse.new(
@@ -363,6 +363,108 @@ describe Gcloud::Datastore::Dataset do
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.no_more?
+  end
+
+  it "run will fulfill a gql query" do
+    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      gql_query: Google::Datastore::V1beta3::GqlQuery.new(
+        query_string: "SELECT * FROM Task")
+    )
+    dataset.service.mocked_datastore.expect :run_query, run_query_res, [run_query_req]
+
+    gql = dataset.gql "SELECT * FROM Task"
+    entities = dataset.run gql
+    entities.count.must_equal 2
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.end_cursor.must_equal query_cursor
+    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.no_more?
+  end
+
+  it "run will fulfill a gql query with a namespace" do
+    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      partition_id: Google::Datastore::V1beta3::PartitionId.new(
+        project_id: project,
+        namespace_id: "foobar"
+      ),
+      gql_query: Google::Datastore::V1beta3::GqlQuery.new(
+        query_string: "SELECT * FROM Task")
+    )
+    dataset.service.mocked_datastore.expect :run_query, run_query_res, [run_query_req]
+
+    gql = dataset.gql "SELECT * FROM Task"
+    entities = dataset.run gql, namespace: "foobar"
+    entities.count.must_equal 2
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.end_cursor.must_equal query_cursor
+    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.no_more?
+  end
+
+  it "run_query will fulfill a gql query" do
+    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      gql_query: Google::Datastore::V1beta3::GqlQuery.new(
+        query_string: "SELECT * FROM Task")
+    )
+    dataset.service.mocked_datastore.expect :run_query, run_query_res, [run_query_req]
+
+    gql = dataset.gql "SELECT * FROM Task"
+    entities = dataset.run_query gql
+    entities.count.must_equal 2
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.end_cursor.must_equal query_cursor
+    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.no_more?
+  end
+
+  it "run_query will fulfill a gql query with a namespace" do
+    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      partition_id: Google::Datastore::V1beta3::PartitionId.new(
+        project_id: project,
+        namespace_id: "foobar"
+      ),
+      gql_query: Google::Datastore::V1beta3::GqlQuery.new(
+        query_string: "SELECT * FROM Task")
+    )
+    dataset.service.mocked_datastore.expect :run_query, run_query_res, [run_query_req]
+
+    gql = dataset.gql "SELECT * FROM Task"
+    entities = dataset.run_query gql, namespace: "foobar"
+    entities.count.must_equal 2
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.end_cursor.must_equal query_cursor
+    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.no_more?
+  end
+
+  it "run will raise when given an unknown argument" do
+    expect do
+      entities = dataset.run 123
+    end.must_raise ArgumentError
   end
 
   it "query returns a Query instance" do
