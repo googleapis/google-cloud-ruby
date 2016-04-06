@@ -189,7 +189,7 @@ module Gcloud
       #
       #   task_list = datastore.find "TaskList", "default"
       #   query = datastore.query("Task").
-      #     ancestor(task_list.key)
+      #     ancestor(task_list)
       #   lists = datastore.run query
       #   lists.first.key.parent #=> Key("TaskList", "default")
       #

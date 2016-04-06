@@ -46,11 +46,77 @@ module Gcloud
       ##
       # Add the kind of entities to query.
       #
+      # Special entity kinds such as `__namespace__`, `__kind__`, and
+      # `__property__` can be used for [metadata
+      # queries](https://cloud.google.com/datastore/docs/concepts/metadataqueries).
+      #
       # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind "Task"
       #
       #   tasks = datastore.run query
+      #
+      # @example A metadata query on the special entity kind `__namespace__`:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("__namespace__").
+      #     select("__key__").
+      #     where("__key__", ">=", datastore.key("__namespace__", "g")).
+      #     where("__key__", "<", datastore.key("__namespace__", "h"))
+      #
+      #   namespaces = datastore.run(query).map do |entity|
+      #     entity.key.name
+      #   end
+      #
+      # @example A metadata query on the special entity kind `__kind__`:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("__kind__").
+      #     select("__key__")
+      #
+      #   kinds = datastore.run(query).map do |entity|
+      #     entity.key.name
+      #   end
+      #
+      # @example A metadata query on the special entity kind `__property__`:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("__property__").
+      #     select("__key__")
+      #
+      #   entities = datastore.run(query)
+      #   properties_by_kind = entities.each_with_object({}) do |entity, memo|
+      #     kind = entity.key.parent.name
+      #     prop = entity.key.name
+      #     memo[kind] ||= []
+      #     memo[kind] << prop
+      #   end
+      #
+      # @example A property metadata query restricted to a specific kind:
+      #   ancestor_key = Gcloud::Datastore::Key.new "__kind__", "Task"
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("__property__").
+      #     ancestor(ancestor_key)
+      #
+      #   entities = datastore.run(query)
+      #   representations = entities.each_with_object({}) do |entity, memo|
+      #     property_name = entity.key.name
+      #     property_types = entity["property_representation"]
+      #     memo[property_name] = property_types
+      #   end
+      #
+      # @example A property metadata query filtered on kind:
+      #   start_key = datastore.key "__property__", "priority"
+      #   start_key.parent = datastore.key "__kind__", "Task"
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("__property__").
+      #     select("__key__").
+      #     where("__key__", ">=", start_key)
+      #
+      #   entities = datastore.run(query)
+      #   properties_by_kind = entities.each_with_object({}) do |entity, memo|
+      #     kind = entity.key.parent.name
+      #     prop = entity.key.name
+      #     memo[kind] ||= []
+      #     memo[kind] << prop
+      #   end
       #
       def kind *kinds
         kinds.each do |kind|
@@ -74,8 +140,43 @@ module Gcloud
       # @example Add a composite property filter:
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
-      #     where("done", "=", false)
+      #     where("done", "=", false).
       #     where("priority", ">=", 4)
+      #
+      #   tasks = datastore.run query
+      #
+      # @example Add an inequality filter on a **single** property only:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     where("created", ">=", Date.new(1990,1,1)).
+      #     where("created", "<", Date.new(2000,1,1))
+      #
+      # @example Add a composite filter on an array property:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     where("tag", "=", "fun").
+      #     where("tag", "=", "programming")
+      #
+      #   tasks = datastore.run query
+      #
+      # @example Add an inequality filter on an array property :
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     where("tag", ">", "learn").
+      #     where("tag", "<", "math")
+      #
+      #   tasks = datastore.run query
+      #
+      # @example Add a key filter using the special property `__key__`:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     where("__key__", ">", datastore.key("Task", "someTask"))
+      #
+      #   tasks = datastore.run query
+      #
+      # @example Add a key filter to a *kindless* query:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.where("__key__", ">", last_seen_key)
       #
       #   tasks = datastore.run query
       #
@@ -145,6 +246,15 @@ module Gcloud
       #
       #   tasks = datastore.run query
       #
+      # @example A property used in an inequality filter must be ordered first:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     where("priority", ">", 3).
+      #     order("priority").
+      #     order("created")
+      #
+      #   tasks = datastore.run query
+      #
       def order name, direction = :asc
         @grpc.order << Google::Datastore::V1beta3::PropertyOrder.new(
           property: Google::Datastore::V1beta3::PropertyReference.new(
@@ -195,7 +305,7 @@ module Gcloud
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
       #     limit(page_size).
-      #     cursor(page_cursor)
+      #     start(page_cursor)
       #
       #   tasks = datastore.run query
       #
@@ -214,7 +324,19 @@ module Gcloud
       #   query.kind("Task").
       #     select("priority", "percent_complete")
       #
-      #   tasks = datastore.run query
+      #   priorities = []
+      #   percent_completes = []
+      #   datastore.run(query).each do |task|
+      #     priorities << task["priority"]
+      #     percent_completes << task["percent_complete"]
+      #   end
+      #
+      # @example A keys-only query using the special property `__key__`:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     select("__key__")
+      #
+      #   keys = datastore.run(query).map &:key
       #
       def select *names
         names.each do |name|

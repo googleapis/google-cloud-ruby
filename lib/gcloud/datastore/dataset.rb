@@ -225,15 +225,24 @@ module Gcloud
       #
       # @return [Boolean] Returns `true` if successful
       #
-      # @example
+      # @example Using a key:
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
+      #
       #   task_key = datastore.key "Task", "sampleTask"
       #   datastore.delete task_key
+      #
+      # @example Using an entity object:
+      #   gcloud = Gcloud.new
+      #   datastore = gcloud.datastore
+      #
+      #   task = datastore.find "Task", "sampleTask"
+      #   datastore.delete task
       #
       # @example Delete multiple entities in a batch:
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
+      #
       #   task_key1 = datastore.key "Task", "sampleTask1"
       #   task_key2 = datastore.key "Task", "sampleTask2"
       #   datastore.delete task_key1, task_key2
