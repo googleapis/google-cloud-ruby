@@ -22,6 +22,9 @@ module Gcloud
     #
     # See {Gcloud::Datastore::Dataset#transaction}
     #
+    # @see https://cloud.google.com/datastore/docs/concepts/transactions
+    #   Transactions
+    #
     # @example Transactional update:
     #   def transfer_funds from_key, to_key, amount
     #     datastore.transaction do |tx|

@@ -23,6 +23,11 @@ module Gcloud
     #
     # Represents the search criteria against a Datastore.
     #
+    # @see https://cloud.google.com/datastore/docs/concepts/queries Datastore
+    #   Queries
+    # @see https://cloud.google.com/datastore/docs/concepts/metadataqueries
+    #   Datastore Metadata
+    #
     # @example
     #   query = Gcloud::Datastore::Query.new
     #   query.kind("Task").
@@ -55,68 +60,6 @@ module Gcloud
       #   query.kind "Task"
       #
       #   tasks = datastore.run query
-      #
-      # @example A metadata query on the special entity kind `__namespace__`:
-      #   query = Gcloud::Datastore::Query.new
-      #   query.kind("__namespace__").
-      #     select("__key__").
-      #     where("__key__", ">=", datastore.key("__namespace__", "g")).
-      #     where("__key__", "<", datastore.key("__namespace__", "h"))
-      #
-      #   namespaces = datastore.run(query).map do |entity|
-      #     entity.key.name
-      #   end
-      #
-      # @example A metadata query on the special entity kind `__kind__`:
-      #   query = Gcloud::Datastore::Query.new
-      #   query.kind("__kind__").
-      #     select("__key__")
-      #
-      #   kinds = datastore.run(query).map do |entity|
-      #     entity.key.name
-      #   end
-      #
-      # @example A metadata query on the special entity kind `__property__`:
-      #   query = Gcloud::Datastore::Query.new
-      #   query.kind("__property__").
-      #     select("__key__")
-      #
-      #   entities = datastore.run(query)
-      #   properties_by_kind = entities.each_with_object({}) do |entity, memo|
-      #     kind = entity.key.parent.name
-      #     prop = entity.key.name
-      #     memo[kind] ||= []
-      #     memo[kind] << prop
-      #   end
-      #
-      # @example A property metadata query restricted to a specific kind:
-      #   ancestor_key = Gcloud::Datastore::Key.new "__kind__", "Task"
-      #   query = Gcloud::Datastore::Query.new
-      #   query.kind("__property__").
-      #     ancestor(ancestor_key)
-      #
-      #   entities = datastore.run(query)
-      #   representations = entities.each_with_object({}) do |entity, memo|
-      #     property_name = entity.key.name
-      #     property_types = entity["property_representation"]
-      #     memo[property_name] = property_types
-      #   end
-      #
-      # @example A property metadata query filtered on kind:
-      #   start_key = datastore.key "__property__", "priority"
-      #   start_key.parent = datastore.key "__kind__", "Task"
-      #   query = Gcloud::Datastore::Query.new
-      #   query.kind("__property__").
-      #     select("__key__").
-      #     where("__key__", ">=", start_key)
-      #
-      #   entities = datastore.run(query)
-      #   properties_by_kind = entities.each_with_object({}) do |entity, memo|
-      #     kind = entity.key.parent.name
-      #     prop = entity.key.name
-      #     memo[kind] ||= []
-      #     memo[kind] << prop
-      #   end
       #
       def kind *kinds
         kinds.each do |kind|

@@ -24,6 +24,14 @@ module Gcloud
     # Entity represents a Datastore record.
     # Every Entity has a {Key}, and a list of properties.
     #
+    # Entities in Datastore form a hierarchically structured space similar to
+    # the directory structure of a file system. When you create an entity, you
+    # can optionally designate another entity as its parent; the new entity is a
+    # child of the parent entity.
+    #
+    # @see https://cloud.google.com/datastore/docs/concepts/entities Entities,
+    #   Properties, and Keys
+    #
     # @example Create a new entity using a block:
     #   task = datastore.entity "Task", "sampleTask" do |task|
     #     task["type"] = "Personal"
@@ -99,6 +107,7 @@ module Gcloud
       #   datastore = gcloud.datastore
       #   task = datastore.find "Task", "sampleTask"
       #   task["description"] = "Learn Cloud Datastore"
+      #   task["tags"] = ["fun", "programming"]
       #
       # @example Or with a symbol name:
       #   require "gcloud"
@@ -107,19 +116,7 @@ module Gcloud
       #   datastore = gcloud.datastore
       #   task = datastore.find "Task", "sampleTask"
       #   task[:description] = "Learn Cloud Datastore"
-      #
-      # @example Use array properties to store more than one value:
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   datastore = gcloud.datastore
-      #
-      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
-      #   task = Gcloud::Datastore::Entity.new
-      #   task.key = task_key
-      #
-      #   task["tags"] = ["fun", "programming"]
-      #   task["collaborators"] = ["alice", "bob"]
+      #   task[:tags] = ["fun", "programming"]
       #
       def []= prop_name, prop_value
         properties[prop_name] = prop_value
@@ -154,12 +151,12 @@ module Gcloud
       attr_reader :properties
 
       ##
-      # Sets the Key that identifies the entity.
+      # Sets the {Gcloud::Datastore::Key} that identifies the entity.
       #
       # Once the entity is saved, the key is frozen and immutable. Trying to set
       # a key when immutable will raise a `RuntimeError`.
       #
-      # @example The Key can be set before the entity is saved:
+      # @example The key can be set before the entity is saved:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
