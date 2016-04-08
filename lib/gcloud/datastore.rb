@@ -49,12 +49,14 @@ module Gcloud
   #   datastore = Gcloud.datastore "my-todo-project",
   #                              "/path/to/keyfile.json"
   #
-  #   entity = datastore.entity "Task" do |t|
-  #     t["description"] = "Get started with Google Cloud"
-  #     t["completed"] = false
+  #   task = datastore.entity "Task", "sampleTask" do |task|
+  #     task["type"] = "Personal"
+  #     task["done"] = false
+  #     task["priority"] = 4
+  #     task["description"] = "Learn Cloud Datastore"
   #   end
   #
-  #   datastore.save entity
+  #   datastore.save task
   #
   def self.datastore project = nil, keyfile = nil, scope: nil
     project ||= Gcloud::Datastore::Dataset.default_project
@@ -86,9 +88,10 @@ module Gcloud
   # gcloud = Gcloud.new "my-todo-project",
   #                     "/path/to/keyfile.json"
   # datastore = gcloud.datastore
-  # entity = datastore.find "Task", "start"
-  # entity["completed"] = true
-  # datastore.save entity
+  #
+  # task = datastore.find "Task", "sampleTask"
+  # task["priority"] = 5
+  # datastore.save task
   # ```
   #
   # You can learn more about various options for connection on the
@@ -113,7 +116,8 @@ module Gcloud
   #
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
-  # entity = datastore.find "Task", "start"
+  #
+  # task = datastore.find "Task", "sampleTask"
   # ```
   #
   # Optionally, {Gcloud::Datastore::Dataset#find} can be given a Key object:
@@ -123,8 +127,9 @@ module Gcloud
   #
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
-  # key = datastore.key "Task", 12345
-  # entity = datastore.find key
+  #
+  # task_key = datastore.key "Task", 123456
+  # task = datastore.find task_key
   # ```
   #
   # See {Gcloud::Datastore::Dataset#find}
@@ -139,9 +144,11 @@ module Gcloud
   #
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
-  # query = datastore.query("List").
-  #   where("active", "=", true)
-  # active_lists = datastore.run query
+  #
+  # query = datastore.query("Task").
+        #     where("done", "=", false)
+        #
+        #   tasks = datastore.run query
   # ```
   #
   # Records can also be ordered. (See {Gcloud::Datastore::Query#order})
@@ -151,10 +158,11 @@ module Gcloud
   #
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
-  # query = datastore.query("List").
-  #   where("active", "=", true).
-  #   order("name")
-  # active_lists = datastore.run query
+  #
+  # query = datastore.query("Task").
+        #     order("created")
+        #
+        #   tasks = datastore.run query
   # ```
   #
   # The number of records returned can be specified.
@@ -165,11 +173,11 @@ module Gcloud
   #
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
-  # query = datastore.query("List").
-  #   where("active", "=", true).
-  #   order("name").
-  #   limit(5)
-  # active_lists = datastore.run query
+  #
+  # query = datastore.query("Task").
+        #     limit(5)
+        #
+        #   tasks = datastore.run query
   # ```
   #
   # Records' Key structures can also be queried.
@@ -181,10 +189,12 @@ module Gcloud
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
   #
-  # list = datastore.find "List", "todos"
-  # query = datastore.query("Task").
-  #   ancestor(list.key)
-  # items = datastore.run query
+      #   task_list_key = Gcloud::Datastore::Key.new "TaskList", "default"
+      #
+      #   query = datastore.query("Task").
+      #     ancestor(task_list_key)
+      #
+      #   tasks = datastore.run query
   # ```
   #
   # See {Gcloud::Datastore::Query} and {Gcloud::Datastore::Dataset#run}
@@ -201,9 +211,10 @@ module Gcloud
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
   #
-  # list = datastore.find "List", "todos"
-  # query = datastore.query("Task").
-  #   ancestor(list.key)
+      #   task_list_key = Gcloud::Datastore::Key.new "TaskList", "default"
+      #
+      #   query = datastore.query("Task").
+      #     ancestor(task_list_key)
   # all_tasks = []
   # tmp_tasks = datastore.run query
   # while tmp_tasks.any? do
@@ -233,12 +244,16 @@ module Gcloud
   #
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
-  # entity = datastore.entity "User" do |e|
-  #   e["name"] = "Heidi Henderson"
-  # end
-  # entity.key.id #=> nil
-  # datastore.save entity
-  # entity.key.id #=> 123456789
+  #
+      #   task = datastore.entity "Task" do |task|
+      #     task["type"] = "Personal"
+      #     task["done"] = false
+      #     task["priority"] = 4
+      #     task["description"] = "Learn Cloud Datastore"
+      #   end
+      #   task.key.id #=> nil
+      #   datastore.save task
+      #   task.key.id #=> 123456
   # ```
   #
   # ## Updating Records
@@ -254,13 +269,14 @@ module Gcloud
   #
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
-  # entity = datastore.find "User", "heidi"
-  # # Read the status property
-  # entity["status"] #=> "inactive"
-  # # Write the status property
-  # entity["status"] = "active"
+  #
+  # task = datastore.find "Task", "sampleTask"
+  # # Read the priority property
+  # task["priority"] #=> 4
+  # # Write the priority property
+  # task["priority"] = 5
   # # Persist the changes
-  # datastore.save entity
+  # datastore.save task
   # ```
   #
   # ## Deleting Records
@@ -274,8 +290,9 @@ module Gcloud
   #
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
-  # entity = datastore.find "User", "heidi"
-  # datastore.delete entity
+  #
+  # task = datastore.find "Task", "sampleTask"
+  # datastore.delete task
   # ```
   #
   # ## Transactions
@@ -291,16 +308,17 @@ module Gcloud
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
   #
-  # key = datastore.key "User", "heidi"
-  #
-  # user = datastore.entity key do |u|
-  #   u["name"] = "Heidi Henderson"
-  #   u["email"] = "heidi@example.net"
-  # end
+  # task_key = datastore.key "Task", "sampleTask"
   #
   # datastore.transaction do |tx|
-  #   if tx.find(user.key).nil?
-  #     tx.save user
+  #   if tx.find(task_key).nil?
+  #     task = datastore.entity task_key do |task|
+  #       task["type"] = "Personal"
+  #       task["done"] = false
+  #       task["priority"] = 4
+  #       task["description"] = "Learn Cloud Datastore"
+  #     end
+  #     tx.save task
   #   end
   # end
   # ```
@@ -314,17 +332,18 @@ module Gcloud
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
   #
-  # key = datastore.key "User", "heidi"
-  #
-  # user = datastore.entity key do |u|
-  #   u["name"] = "Heidi Henderson"
-  #   u["email"] = "heidi@example.net"
-  # end
+  # task_key = datastore.key "Task", "sampleTask"
   #
   # tx = datastore.transaction
   # begin
-  #   if tx.find(user.key).nil?
-  #     tx.save user
+  #   if tx.find(task_key).nil?
+  #     task = datastore.entity task_key do |task|
+  #       task["type"] = "Personal"
+  #       task["done"] = false
+  #       task["priority"] = 4
+  #       task["description"] = "Learn Cloud Datastore"
+  #     end
+  #     tx.save task
   #   end
   #   tx.commit
   # rescue

@@ -87,12 +87,14 @@ module Gcloud
   #   gcloud  = Gcloud.new
   #   datastore = gcloud.datastore
   #
-  #   entity = datastore.entity "Task" do |t|
-  #     t["description"] = "Get started with Google Cloud"
-  #     t["completed"] = false
+  #   task = datastore.entity "Task" do |task|
+  #     task["type"] = "Personal"
+  #     task["done"] = false
+  #     task["priority"] = 4
+  #     task["description"] = "Learn Cloud Datastore"
   #   end
   #
-  #   datastore.save entity
+  #   datastore.save task
   #
   # @example You shouldn't need to override the default scope, but you can:
   #   require "gcloud"
