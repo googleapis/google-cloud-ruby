@@ -147,7 +147,7 @@ module Gcloud
       # Add a filter for entities that inherit from a key.
       #
       # @example
-      #   task_list_key = Gcloud::Datastore::Key.new "TaskList", "default"
+      #   task_list_key = datastore.key "TaskList", "default"
       #
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").

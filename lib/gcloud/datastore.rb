@@ -189,7 +189,7 @@ module Gcloud
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
   #
-  # task_list_key = Gcloud::Datastore::Key.new "TaskList", "default"
+  # task_list_key = datastore.key "TaskList", "default"
   #
   # query = datastore.query("Task").
   #   ancestor(task_list_key)
@@ -211,7 +211,7 @@ module Gcloud
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
   #
-  # task_list_key = Gcloud::Datastore::Key.new "TaskList", "default"
+  # task_list_key = datastore.key "TaskList", "default"
   #
   # query = datastore.query("Task").
   #   ancestor(task_list_key)
@@ -329,12 +329,10 @@ module Gcloud
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
   #
-  # task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
-  # task = Gcloud::Datastore::Entity.new
-  # task.key = task_key
-  #
-  # task["tags"] = ["fun", "programming"]
-  # task["collaborators"] = ["alice", "bob"]
+  # task = datastore.entity "Task", "sampleTask" do |task|
+  #   task["tags"] = ["fun", "programming"]
+  #   task["collaborators"] = ["alice", "bob"]
+  # end
   # ```
   #
   # ## Deleting records
@@ -438,8 +436,7 @@ module Gcloud
   # namespaces used in your application entities.
   #
   # ```ruby
-  # query = Gcloud::Datastore::Query.new
-  # query.kind("__namespace__").
+  # query = datastore.query("__namespace__").
   #   select("__key__").
   #   where("__key__", ">=", datastore.key("__namespace__", "g")).
   #   where("__key__", "<", datastore.key("__namespace__", "h"))
@@ -453,8 +450,7 @@ module Gcloud
   # kinds used in your application.
   #
   # ```ruby
-  # query = Gcloud::Datastore::Query.new
-  # query.kind("__kind__").
+  # query = datastore.query("__kind__").
   #   select("__key__")
   #
   # kinds = datastore.run(query).map do |entity|
@@ -467,8 +463,7 @@ module Gcloud
   # included.)
   #
   # ```ruby
-  # query = Gcloud::Datastore::Query.new
-  # query.kind("__property__").
+  # query = datastore.query("__property__").
   #   select("__key__")
   #
   # entities = datastore.run(query)
@@ -487,9 +482,8 @@ module Gcloud
   # any entity of kind `k`.
   #
   # ```ruby
-  # ancestor_key = Gcloud::Datastore::Key.new "__kind__", "Task"
-  # query = Gcloud::Datastore::Query.new
-  # query.kind("__property__").
+  # ancestor_key = datastore.key "__kind__", "Task"
+  # query = datastore.query("__property__").
   #   ancestor(ancestor_key)
   #
   # entities = datastore.run(query)
@@ -507,8 +501,7 @@ module Gcloud
   # ```ruby
   # start_key = datastore.key "__property__", "priority"
   # start_key.parent = datastore.key "__kind__", "Task"
-  # query = Gcloud::Datastore::Query.new
-  # query.kind("__property__").
+  # query = datastore.query("__property__").
   #   select("__key__").
   #   where("__key__", ">=", start_key)
   #

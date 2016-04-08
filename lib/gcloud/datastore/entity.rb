@@ -43,8 +43,8 @@ module Gcloud
     #   end
     #
     # @example Create a new entity belonging to an existing parent entity:
-    #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
-    #   task_key.parent = Gcloud::Datastore::Key.new "TaskList", "default"
+    #   task_key = datastore.key "Task", "sampleTask"
+    #   task_key.parent = datastore.key "TaskList", "default"
     #
     #   task = Gcloud::Datastore::Entity.new
     #   task.key = task_key
@@ -162,7 +162,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
       #   task = Gcloud::Datastore::Entity.new
-      #   task.key = Gcloud::Datastore::Key.new "Task"
+      #   task.key = datastore.key "Task"
       #   datastore.save task
       #
       # @example Once the entity is saved, the key is frozen and immutable:
@@ -172,7 +172,7 @@ module Gcloud
       #   datastore = gcloud.datastore
       #   task = datastore.find "Task", "sampleTask"
       #   task.persisted? #=> true
-      #   task.key = Gcloud::Datastore::Key.new "Task" #=> RuntimeError
+      #   task.key = datastore.key "Task" #=> RuntimeError
       #   task.key.frozen? #=> true
       #   task.key.id = 9876543221 #=> RuntimeError
       #

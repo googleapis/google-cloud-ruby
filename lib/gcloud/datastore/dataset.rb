@@ -203,6 +203,7 @@ module Gcloud
       # @example
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
+      #
       #   task_key1 = datastore.key "Task", "sampleTask1"
       #   task_key2 = datastore.key "Task", "sampleTask2"
       #   tasks = datastore.find_all task_key1, task_key2
@@ -274,7 +275,7 @@ module Gcloud
       #   tasks = datastore.run query
       #
       # @example Run the query within a namespace with the `namespace` option:
-      #   query = Gcloud::Datastore::Query.new.kind("Task").
+      #   query = datastore.query("Task").
       #     where("done", "=", false)
       #   tasks = datastore.run query, namespace: "ns~todo-project"
       #
