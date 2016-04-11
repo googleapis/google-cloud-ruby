@@ -318,6 +318,7 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
   end
 
@@ -338,6 +339,7 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
   end
 
@@ -362,6 +364,7 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
   end
 
@@ -384,6 +387,7 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
   end
 
@@ -410,6 +414,7 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
   end
 
@@ -432,6 +437,7 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
   end
 
@@ -458,7 +464,110 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
+  end
+
+  it "run will fulfill a query and return an object that can paginate" do
+    first_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      partition_id: Google::Datastore::V1beta3::PartitionId.new(
+        project_id: project,
+        namespace_id: "foobar"
+      ),
+      gql_query: Google::Datastore::V1beta3::GqlQuery.new(
+        query_string: "SELECT * FROM Task")
+    )
+    first_run_query_res = run_query_res.dup
+    first_run_query_res.batch = run_query_res.batch.dup
+    first_run_query_res.batch.more_results = :MORE_RESULTS_AFTER_CURSOR
+    first_run_query_res.query = Gcloud::Datastore::Query.new.kind("Task").to_grpc
+    next_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      partition_id: Google::Datastore::V1beta3::PartitionId.new(
+        project_id: project,
+        namespace_id: "foobar"
+      ),
+      query: Gcloud::Datastore::Query.new.kind("Task").start(query_cursor).to_grpc
+    )
+    next_run_query_res = run_query_res.dup
+    next_run_query_res.batch = run_query_res.batch.dup
+    next_run_query_res.batch.more_results = :NO_MORE_RESULTS
+    dataset.service.mocked_datastore.expect :run_query, first_run_query_res, [first_run_query_req]
+    dataset.service.mocked_datastore.expect :run_query, next_run_query_res, [next_run_query_req]
+
+    gql = dataset.gql "SELECT * FROM Task"
+    entities = dataset.run_query gql, namespace: "foobar"
+    entities.count.must_equal 2
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.end_cursor.must_equal query_cursor
+    entities.more_results.must_equal :MORE_RESULTS_AFTER_CURSOR
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    assert entities.more_after_cursor?
+    refute entities.no_more?
+
+    assert entities.next?
+    next_entities = entities.next
+
+    next_entities.cursor.must_equal query_cursor
+    next_entities.end_cursor.must_equal query_cursor
+    next_entities.more_results.must_equal :NO_MORE_RESULTS
+    refute next_entities.not_finished?
+    refute next_entities.more_after_limit?
+    refute next_entities.more_after_cursor?
+    assert next_entities.no_more?
+
+    refute next_entities.next?
+  end
+
+  it "run will fulfill a query and return an object that can paginate with all" do
+    first_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      partition_id: Google::Datastore::V1beta3::PartitionId.new(
+        project_id: project,
+        namespace_id: "foobar"
+      ),
+      gql_query: Google::Datastore::V1beta3::GqlQuery.new(
+        query_string: "SELECT * FROM Task")
+    )
+    first_run_query_res = run_query_res.dup
+    first_run_query_res.batch = run_query_res.batch.dup
+    first_run_query_res.batch.more_results = :MORE_RESULTS_AFTER_CURSOR
+    first_run_query_res.query = Gcloud::Datastore::Query.new.kind("Task").to_grpc
+    next_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      partition_id: Google::Datastore::V1beta3::PartitionId.new(
+        project_id: project,
+        namespace_id: "foobar"
+      ),
+      query: Gcloud::Datastore::Query.new.kind("Task").start(query_cursor).to_grpc
+    )
+    next_run_query_res = run_query_res.dup
+    next_run_query_res.batch = run_query_res.batch.dup
+    next_run_query_res.batch.more_results = :NO_MORE_RESULTS
+    dataset.service.mocked_datastore.expect :run_query, first_run_query_res, [first_run_query_req]
+    dataset.service.mocked_datastore.expect :run_query, next_run_query_res, [next_run_query_req]
+
+    gql = dataset.gql "SELECT * FROM Task"
+    entities = dataset.run_query gql, namespace: "foobar"
+    entities.all
+    entities.count.must_equal 4
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.end_cursor.must_equal query_cursor
+    entities.more_results.must_equal :NO_MORE_RESULTS
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.more_after_cursor?
+    assert entities.no_more?
+
+    refute entities.next?
   end
 
   it "run will raise when given an unknown argument" do

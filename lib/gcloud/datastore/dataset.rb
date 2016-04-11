@@ -295,10 +295,7 @@ module Gcloud
           fail ArgumentError, "Cannot run a #{query.class} object."
         end
         query_res = service.run_query query.to_grpc, namespace
-        entities = to_gcloud_entities query_res.batch.entity_results
-        cursor = Cursor.from_grpc query_res.batch.end_cursor
-        more_results = query_res.batch.more_results
-        QueryResults.new entities, cursor, more_results
+        QueryResults.from_grpc query_res, service, namespace, query.to_grpc.dup
       end
       alias_method :run_query, :run
 
