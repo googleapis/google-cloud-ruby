@@ -80,7 +80,7 @@ describe Gcloud::Datastore::GqlQuery do
   it "can set a Cursor as a named binding" do
     gql = Gcloud::Datastore::GqlQuery.new
     gql.query_string = "SELECT * FROM myKind LIMIT 50 OFFSET @startCursor"
-    gql.named_bindings = {startCursor: Gcloud::Datastore::Cursor.new("c3VwZXJhd2Vzb21lIQ")}
+    gql.named_bindings = {startCursor: Gcloud::Datastore::Cursor.new("c3VwZXJhd2Vzb21lIQ==")}
 
     grpc = gql.to_grpc
     grpc.must_be_kind_of Google::Datastore::V1beta3::GqlQuery
@@ -93,7 +93,7 @@ describe Gcloud::Datastore::GqlQuery do
   it "will break if setting a cursor that is not a Cursor object" do
     gql = Gcloud::Datastore::GqlQuery.new
     gql.query_string = "SELECT * FROM myKind LIMIT 50 OFFSET @startCursor"
-    gql.named_bindings = {startCursor: "c3VwZXJhd2Vzb21lIQ"}
+    gql.named_bindings = {startCursor: "c3VwZXJhd2Vzb21lIQ=="}
 
     grpc = gql.to_grpc
     grpc.must_be_kind_of Google::Datastore::V1beta3::GqlQuery
@@ -101,6 +101,6 @@ describe Gcloud::Datastore::GqlQuery do
     grpc.query_string.must_equal gql.query_string
     grpc.named_bindings.count.must_equal 1
     # This is bad. The cursor value is not set properly. Query will fail.
-    grpc.named_bindings["startCursor"].value.string_value.must_equal "c3VwZXJhd2Vzb21lIQ"
+    grpc.named_bindings["startCursor"].value.string_value.must_equal "c3VwZXJhd2Vzb21lIQ=="
   end
 end
