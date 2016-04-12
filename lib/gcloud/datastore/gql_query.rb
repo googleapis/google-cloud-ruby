@@ -21,14 +21,16 @@ module Gcloud
     ##
     # # Query
     #
-    # Represents the search criteria against a Datastore.
+    # Represents a GQL query against a Datastore.
+    #
+    # @see https://cloud.google.com/datastore/docs/apis/gql/gql_reference GQL
+    #   Reference
     #
     # @example
     #   gql = Gcloud::Datastore::GqlQuery.new
-    #   gql.kind("Task").
-    #     where("completed", "=", true)
-    #
-    #   entities = dataset.run gql
+    #   gql.query_string = "SELECT * FROM Task WHERE done = @done"
+    #   gql.named_bindings = {done: false}
+    #   tasks = dataset.run gql
     #
     class GqlQuery
       ##

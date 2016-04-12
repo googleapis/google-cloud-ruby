@@ -280,13 +280,13 @@ module Gcloud
       #   tasks = datastore.run query, namespace: "ns~todo-project"
       #
       # @example Run the query with a GQL string.
-      #   gql = dataset.gql "SELECT * FROM Task WHERE completed = @completed",
-      #                     completed: true
+      #   gql = dataset.gql "SELECT * FROM Task WHERE done = @done",
+      #                     done: false
       #   tasks = dataset.run gql
       #
       # @example Run the gql query within a namespace with `namespace` option:
-      #   gql = dataset.gql "SELECT * FROM Task WHERE completed = @completed",
-      #                     completed: true
+      #   gql = dataset.gql "SELECT * FROM Task WHERE done = @done",
+      #                     done: false
       #   tasks = dataset.run gql, namespace: "ns~todo-project"
       #
       def run query, namespace: nil
@@ -401,14 +401,14 @@ module Gcloud
       # @return [Gcloud::Datastore::GqlQuery]
       #
       # @example
-      #   gql = dataset.gql "SELECT * FROM Task WHERE completed = @completed",
-      #                     completed: true
+      #   gql = dataset.gql "SELECT * FROM Task WHERE done = @done",
+      #                     done: false
       #   tasks = dataset.run gql
       #
       # @example The previous example is equivalent to:
       #   gql = Gcloud::Datastore::GqlQuery.new
-      #   gql.query_string = "SELECT * FROM Task WHERE completed = @completed"
-      #   gql.named_bindings = {completed: true}
+      #   gql.query_string = "SELECT * FROM Task WHERE done = @done"
+      #   gql.named_bindings = {done: false}
       #   tasks = dataset.run gql
       #
       def gql query, bindings = {}
