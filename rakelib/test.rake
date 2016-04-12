@@ -64,6 +64,12 @@ namespace :test do
     Dir.glob("test/gcloud/logging/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
+  desc "Runs translate tests."
+  task :translate do
+    $LOAD_PATH.unshift "lib", "test"
+    Dir.glob("test/gcloud/translate/**/*_test.rb").each { |file| require_relative "../#{file}"}
+  end
+
   desc "Runs tests with coverage."
   task :coverage, :project, :keyfile do |t, args|
     project = args[:project]
@@ -430,6 +436,12 @@ namespace :test do
           puts e.message
         end
       end
+    end
+
+    desc "Runs the translate acceptance tests."
+    task :translate do |t, args|
+      $LOAD_PATH.unshift "lib", "test", "acceptance"
+      Dir.glob("acceptance/translate/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
     desc "Removes *ALL* acceptance test data. Use with caution."
