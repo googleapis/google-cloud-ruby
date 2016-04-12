@@ -140,7 +140,7 @@ module Gcloud
       end
 
       def inspect
-        "#{self.class}(#{@dataset_id})"
+        "#{self.class}(#{@project})"
       end
 
       def backoff options = {}
