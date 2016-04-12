@@ -105,7 +105,7 @@ describe Gcloud::Datastore::Key do
       key.parent = Gcloud::Datastore::Key.new "User", "username"
       key.path.must_equal [["User", "username"], ["Task", "todos"]]
     end
-    it "returns all parents when present" do
+    it "returns all parents using references" do
       key = Gcloud::Datastore::Key.new "Task", "todos"
       key.parent = Gcloud::Datastore::Key.new "User", "username"
       key.parent.parent = Gcloud::Datastore::Key.new "Org", "company"

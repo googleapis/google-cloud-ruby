@@ -419,9 +419,11 @@ module Gcloud
       # Create a new Key instance. This is a convenience method to make the
       # creation of Key objects easier.
       #
-      # @param [String] kind The kind of the Key. This is optional.
-      # @param [Integer, String] id_or_name The id or name of the Key. This is
-      #   optional.
+      # @param [Array<Array(String,(String|Integer|nil))>] path An optional list
+      #   of pairs for the key's path. Each pair may include the key's kind
+      #   (String) and an id (Integer) or name (String). This is optional.
+      # @param [String] project The project of the Key. This is optional.
+      # @param [String] namespace namespace kind of the Key. This is optional.
       #
       # @return [Gcloud::Datastore::Key]
       #
@@ -431,18 +433,50 @@ module Gcloud
       # @example The previous example is equivalent to:
       #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
       #
-      def key kind = nil, id_or_name = nil
-        Key.new kind, id_or_name
+      # @example Create an empty key:
+      #   key = dataset.key
+      #
+      # @example Create an incomplete key:
+      #   key = dataset.key "User"
+      #
+      # @example Create a key with a parent:
+      #   key = dataset.key [["List", "todos"], ["User", "heidi@example.com"]]
+      #   key.path #=> [["List", "todos"], ["User", "heidi@example.com"]]
+      #
+      # @example Create an incomplete key with a parent:
+      #   key = dataset.key "List", "todos", "User"
+      #   key.path #=> [["List", "todos"], ["User", nil]]
+      #
+      # @example Create a key with a project and namespace:
+      #   key = dataset.key ["List", "todos"], ["User", "heidi@example.com"],
+      #                     project: "my-todo-project",
+      #                     namespace: "ns~todo-project"
+      #   key.path #=> [["List", "todos"], ["User", "heidi@example.com"]]
+      #   key.project #=> "my-todo-project",
+      #   key.namespace #=> "ns~todo-project"
+      #
+      def key *path, project: nil, namespace: nil
+        path = path.flatten.each_slice(2).to_a # group in pairs
+        kind, id_or_name = path.pop
+        Key.new(kind, id_or_name).tap do |k|
+          k.project = project
+          k.namespace = namespace
+          unless path.empty?
+            k.parent = key path, project: project, namespace: namespace
+          end
+        end
       end
 
       ##
       # Create a new empty Entity instance. This is a convenience method to make
       # the creation of Entity objects easier.
       #
-      # @param [Key, String, nil] key_or_kind A Key object or `kind` string
-      #   value. This is optional.
-      # @param [Integer, String, nil] id_or_name The Key's `id` or `name` value
-      #   if a `kind` was provided in the first parameter.
+      # @param [Key, Array<Array(String,(String|Integer|nil))>] key_or_path An
+      #   optional list of pairs for the key's path. Each pair may include the #
+      #   key's kind (String) and an id (Integer) or name (String). This is #
+      #   optional.
+      # @param [String] project The project of the Key. This is optional.
+      # @param [String] namespace namespace kind of the Key. This is optional.
       # @yield [entity] a block yielding a new entity
       # @yieldparam [Entity] entity the newly created entity object
       #
@@ -483,15 +517,15 @@ module Gcloud
       #   task["priority"] = 4
       #   task["description"] = "Learn Cloud Datastore"
       #
-      def entity key_or_kind = nil, id_or_name = nil
+      def entity *key_or_path, project: nil, namespace: nil
         entity = Entity.new
 
         # Set the key
-        key = key_or_kind
-        unless key.is_a? Gcloud::Datastore::Key
-          key = Key.new key_or_kind, id_or_name
+        if key_or_path.flatten.first.is_a? Gcloud::Datastore::Key
+          entity.key = key_or_path.flatten.first
+        else
+          entity.key = key key_or_path, project: project, namespace: namespace
         end
-        entity.key = key
 
         yield entity if block_given?
 

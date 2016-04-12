@@ -606,6 +606,33 @@ describe Gcloud::Datastore::Dataset do
     key.name.must_equal "charlie"
   end
 
+  it "key sets a parent and grandparent in the constructor" do
+    path = [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
+    key = dataset.key path, project: "custom-ds", namespace: "custom-ns"
+    key.kind.must_equal "ThisThing"
+    key.id.must_equal 1234
+    key.name.must_be :nil?
+    key.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
+    key.project.must_equal "custom-ds"
+    key.namespace.must_equal "custom-ns"
+
+    key.parent.wont_be :nil?
+    key.parent.kind.must_equal "ThatThing"
+    key.parent.id.must_equal 6789
+    key.parent.name.must_be :nil?
+    key.parent.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789]]
+    key.parent.project.must_equal "custom-ds"
+    key.parent.namespace.must_equal "custom-ns"
+
+    key.parent.parent.wont_be :nil?
+    key.parent.parent.kind.must_equal "OtherThing"
+    key.parent.parent.id.must_be :nil?
+    key.parent.parent.name.must_equal "root"
+    key.parent.parent.path.must_equal [["OtherThing", "root"]]
+    key.parent.parent.project.must_equal "custom-ds"
+    key.parent.parent.namespace.must_equal "custom-ns"
+  end
+
   it "entity returns an Entity instance" do
     entity = dataset.entity
     entity.must_be_kind_of Gcloud::Datastore::Entity
@@ -643,6 +670,34 @@ describe Gcloud::Datastore::Dataset do
     entity.key.id.must_be :nil?
     entity.key.name.must_equal "username"
   end
+
+  it "entity sets a key's parent and grandparent" do
+    path = [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
+    entity = dataset.entity path, project: "custom-ds", namespace: "custom-ns"
+    entity.key.kind.must_equal "ThisThing"
+    entity.key.id.must_equal 1234
+    entity.key.name.must_be :nil?
+    entity.key.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
+    entity.key.project.must_equal "custom-ds"
+    entity.key.namespace.must_equal "custom-ns"
+
+    entity.key.parent.wont_be :nil?
+    entity.key.parent.kind.must_equal "ThatThing"
+    entity.key.parent.id.must_equal 6789
+    entity.key.parent.name.must_be :nil?
+    entity.key.parent.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789]]
+    entity.key.parent.project.must_equal "custom-ds"
+    entity.key.parent.namespace.must_equal "custom-ns"
+
+    entity.key.parent.parent.wont_be :nil?
+    entity.key.parent.parent.kind.must_equal "OtherThing"
+    entity.key.parent.parent.id.must_be :nil?
+    entity.key.parent.parent.name.must_equal "root"
+    entity.key.parent.parent.path.must_equal [["OtherThing", "root"]]
+    entity.key.parent.parent.project.must_equal "custom-ds"
+    entity.key.parent.parent.namespace.must_equal "custom-ns"
+  end
+
 
   it "entity can configure the new Entity using a block" do
     entity = dataset.entity "User", "username" do |e|

@@ -157,7 +157,7 @@ module Gcloud
       attr_reader :name
 
       ##
-      # @private Set the parent of the Key.
+      # Set the parent of the Key.
       #
       # @return [Key, nil]
       #
@@ -247,7 +247,7 @@ module Gcloud
         grpc = Google::Datastore::V1beta3::Key.new(path: grpc_path)
         if project || namespace
           grpc.partition_id = Google::Datastore::V1beta3::PartitionId.new(
-            project_id: project, namespace_id: namespace)
+            project_id: project.to_s, namespace_id: namespace.to_s)
         end
         grpc
       end
