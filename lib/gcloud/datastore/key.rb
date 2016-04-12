@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-require "gcloud/datastore/proto"
-
 module Gcloud
   module Datastore
     ##
@@ -226,41 +224,43 @@ module Gcloud
       end
 
       ##
-      # @private Convert the Key to a protocol buffer object.
-      def to_proto
-        Proto::Key.new.tap do |k|
-          k.path_element = path.map do |pe_kind, pe_id_or_name|
-            Proto.new_path_element pe_kind, pe_id_or_name
+      # @private Convert the Key to a Google::Datastore::V1beta3::Key object.
+      def to_grpc
+        grpc_path = path.map do |pe_kind, pe_id_or_name|
+          path_args = { kind: pe_kind }
+          if pe_id_or_name.is_a? Integer
+            path_args[:id] = pe_id_or_name
+          elsif pe_id_or_name.is_a? String
+            path_args[:name] = pe_id_or_name unless pe_id_or_name.empty?
           end
-          k.partition_id = Proto.new_partition_id dataset_id, namespace
+          Google::Datastore::V1beta3::Key::PathElement.new(path_args)
         end
+        grpc = Google::Datastore::V1beta3::Key.new(path: grpc_path)
+        if dataset_id || namespace
+          grpc.partition_id = Google::Datastore::V1beta3::PartitionId.new(
+            project_id: dataset_id, namespace_id: namespace)
+        end
+        grpc
       end
 
-      # rubocop:disable all
-
       ##
-      # @private Create a new Key from a protocol buffer object.
-      def self.from_proto proto
-        # Disable rules because the complexity here is neccessary.
-        key_proto = proto.dup
+      # @private Create a new Key from a Google::Datastore::V1beta3::Key object.
+      def self.from_grpc grpc
+        key_grpc = grpc.dup
         key = Key.new
-        proto_path_element = Array(key_proto.path_element).pop
-        if proto_path_element
-          key = Key.new proto_path_element.kind,
-                        proto_path_element.id || proto_path_element.name
+        path_grpc = key_grpc.path.pop
+        if path_grpc
+          key = Key.new path_grpc.kind, (path_grpc.id || path_grpc.name)
         end
-        if key_proto.partition_id
-          key.dataset_id = key_proto.partition_id.dataset_id
-          key.namespace  = key_proto.partition_id.namespace
+        if key_grpc.partition_id
+          key.dataset_id = key_grpc.partition_id.project_id
+          key.namespace  = key_grpc.partition_id.namespace_id
         end
-        if Array(key_proto.path_element).count > 0
-          key.parent = Key.from_proto(key_proto)
-        end
+        key.parent = Key.from_grpc(key_grpc) if key_grpc.path.count > 0
         # Freeze the key to make it immutable.
         key.freeze
         key
       end
-      # rubocop:enable all
     end
   end
 end

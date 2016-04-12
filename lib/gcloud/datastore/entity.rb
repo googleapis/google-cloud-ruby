@@ -15,7 +15,6 @@
 
 require "gcloud/datastore/key"
 require "gcloud/datastore/properties"
-require "gcloud/datastore/proto"
 
 module Gcloud
   module Datastore
@@ -67,7 +66,7 @@ module Gcloud
       #   user[:name] #=> "Heidi Henderson"
       #
       def [] prop_name
-        @properties[prop_name]
+        properties[prop_name]
       end
 
       ##
@@ -93,7 +92,7 @@ module Gcloud
       #   user[:name] = "Heidi H. Henderson"
       #
       def []= prop_name, prop_value
-        @properties[prop_name] = prop_value
+        properties[prop_name] = prop_value
       end
 
       ##
@@ -262,29 +261,33 @@ module Gcloud
       end
 
       ##
-      # @private Convert the Entity to a protocol buffer object.
-      def to_proto
-        entity = Proto::Entity.new.tap do |e|
-          e.key = @key.to_proto
-          e.property = Proto.to_proto_properties @properties.to_h
-        end
-        update_properties_indexed! entity
-        entity
+      # @private Convert the Entity to a Google::Datastore::V1beta3::Entity
+      # object.
+      def to_grpc
+        grpc = Google::Datastore::V1beta3::Entity.new(
+          key: @key.to_grpc,
+          properties: @properties.to_grpc
+        )
+        update_properties_indexed! grpc.properties
+        grpc
       end
 
       ##
-      # @private Create a new Entity from a protocol buffer object.
-      def self.from_proto proto
+      # @private Create a new Entity from a Google::Datastore::V1beta3::Key
+      # object.
+      def self.from_grpc grpc
         entity = Entity.new
-        entity.key = Key.from_proto proto.key
-        Array(proto.property).each do |p|
-          entity[p.name] = Proto.from_proto_value p.value
-        end
-        entity.send :update_exclude_indexes!, proto
+        entity.key = Key.from_grpc grpc.key
+        entity.send :properties=, Properties.from_grpc(grpc.properties)
+        entity.send :update_exclude_indexes!, grpc.properties
         entity
       end
 
       protected
+
+      ##
+      # @private Allow friendly objects to set Properties object.
+      attr_writer :properties
 
       # rubocop:disable all
       # Disabled rubocop because this is intentionally complex.
@@ -316,31 +319,30 @@ module Gcloud
 
       ##
       # @private Update the exclude data after a new object is created.
-      def update_exclude_indexes! entity
+      def update_exclude_indexes! grpc_map
         @_exclude_indexes = {}
-        Array(entity.property).each do |property|
-          @_exclude_indexes[property.name] = !property.value.indexed
-          unless property.value.list_value.nil?
-            exclude = Array(property.value.list_value).map{|v| !v.indexed}
-            @_exclude_indexes[property.name] = exclude
+        grpc_map.each do |name, value|
+          next if value.nil?
+          @_exclude_indexes[name] = value.exclude_from_indexes
+          unless value.array_value.nil?
+            exclude = value.array_value.values.map &:exclude_from_indexes
+            @_exclude_indexes[name] = exclude
           end
         end
       end
 
       ##
       # @private Update the indexed values before the object is saved.
-      def update_properties_indexed! entity
-        Array(entity.property).each do |property|
-          excluded = exclude_from_indexes? property.name
+      def update_properties_indexed! grpc_map
+        grpc_map.each do |name, value|
+          next if value.nil?
+          excluded = exclude_from_indexes? name
           if excluded.is_a? Array
-            # Lists must not set indexed, or this error will happen:
-            # "A Value containing a list_value cannot specify indexed."
-            property.value.indexed = nil
-            property.value.list_value.each_with_index do |value, index|
-              value.indexed = !excluded[index]
+            value.array_value.values.each_with_index do |v, i|
+              v.exclude_from_indexes = excluded[i]
             end
           else
-            property.value.indexed = !excluded
+            value.exclude_from_indexes = excluded
           end
         end
       end

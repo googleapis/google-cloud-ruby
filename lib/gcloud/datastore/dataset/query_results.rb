@@ -30,12 +30,12 @@ module Gcloud
       # @example
       #   entities = dataset.run query
       #   entities.size #=> 3
-      #   entities.cursor #=> "c3VwZXJhd2Vzb21lIQ"
+      #   entities.cursor #=> Gcloud::Datastore::Cursor(c3VwZXJhd2Vzb21lIQ)
       #
       # @example Caution, many Array methods will return a new Array instance:
       #   entities = dataset.run query
       #   entities.size #=> 3
-      #   entities.end_cursor #=> "c3VwZXJhd2Vzb21lIQ"
+      #   entities.end_cursor #=> Gcloud::Datastore::Cursor(c3VwZXJhd2Vzb21lIQ)
       #   names = entities.map { |e| e.name }
       #   names.size #=> 3
       #   names.cursor #=> NoMethodError
@@ -43,6 +43,8 @@ module Gcloud
       class QueryResults < DelegateClass(::Array)
         ##
         # The end_cursor of the QueryResults.
+        #
+        # @return [Gcloud::Datastore::Cursor]
         attr_reader :end_cursor
         alias_method :cursor, :end_cursor
 
@@ -51,33 +53,38 @@ module Gcloud
         #
         # Expected values are:
         #
-        # "MORE_RESULTS_AFTER_LIMIT":
-        # "NOT_FINISHED":
-        # "NO_MORE_RESULTS":
+        # * `:NOT_FINISHED`
+        # * `:MORE_RESULTS_AFTER_LIMIT`
+        # * `:MORE_RESULTS_AFTER_CURSOR`
+        # * `:NO_MORE_RESULTS`
         attr_reader :more_results
 
         ##
         # Convenience method for determining id the more_results value
-        # is "NOT_FINISHED"
+        # is `:NOT_FINISHED`
         def not_finished?
-          more_results == Proto.to_more_results_string(
-            Proto::QueryResultBatch::MoreResultsType::NOT_FINISHED)
+          more_results == :NOT_FINISHED
         end
 
         ##
         # Convenience method for determining id the more_results value
-        # is "MORE_RESULTS_AFTER_LIMIT"
+        # is `:MORE_RESULTS_AFTER_LIMIT`
         def more_after_limit?
-          more_results == Proto.to_more_results_string(
-            Proto::QueryResultBatch::MoreResultsType::MORE_RESULTS_AFTER_LIMIT)
+          more_results == :MORE_RESULTS_AFTER_LIMIT
         end
 
         ##
         # Convenience method for determining id the more_results value
-        # is "NO_MORE_RESULTS"
+        # is `:MORE_RESULTS_AFTER_CURSOR`
+        def more_after_cursor?
+          more_results == :MORE_RESULTS_AFTER_CURSOR
+        end
+
+        ##
+        # Convenience method for determining id the more_results value
+        # is `:NO_MORE_RESULTS`
         def no_more?
-          more_results == Proto.to_more_results_string(
-            Proto::QueryResultBatch::MoreResultsType::NO_MORE_RESULTS)
+          more_results == :NO_MORE_RESULTS
         end
 
         ##

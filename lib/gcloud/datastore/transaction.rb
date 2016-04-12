@@ -26,9 +26,9 @@ module Gcloud
 
       ##
       # @private Creates a new Transaction instance.
-      # Takes a Connection instead of project and Credentials.
-      def initialize connection
-        @connection = connection
+      # Takes a Connection and Service instead of project and Credentials.
+      def initialize service
+        @service = service
         reset!
         start
       end
@@ -44,8 +44,8 @@ module Gcloud
       #   end
       #
       def save *entities
-        save_entities_to_mutation entities, shared_mutation
-        # Do not save or assign auto_ids yet
+        entities.each { |e| shared_upserts << e }
+        # Do not save yet
         entities
       end
 
@@ -59,10 +59,11 @@ module Gcloud
       #     end
       #   end
       #
-      def delete *entities
-        shared_mutation.tap do |m|
-          m.delete = entities.map { |entity| entity.key.to_proto }
+      def delete *entities_or_keys
+        just_keys = entities_or_keys.map do |e_or_k|
+          e_or_k.respond_to?(:key) ? e_or_k.key : e_or_k
         end
+        just_keys.each { |k| shared_deletes << k }
         # Do not delete yet
         true
       end
@@ -73,8 +74,9 @@ module Gcloud
       def start
         fail TransactionError, "Transaction already opened." unless @id.nil?
 
-        response = connection.begin_transaction
-        @id = response.transaction
+        ensure_service!
+        tx_res = service.begin_transaction
+        @id = tx_res.transaction
       end
       alias_method :begin_transaction, :start
 
@@ -85,8 +87,18 @@ module Gcloud
           fail TransactionError, "Cannot commit when not in a transaction."
         end
 
-        response = connection.commit shared_mutation, @id
-        auto_id_assign_ids response.mutation_result.insert_auto_id_key
+        ensure_service!
+
+        mutations = shared_mutations
+
+        commit_res = service.commit mutations, transaction: @id
+        returned_keys = commit_res.mutation_results.map(&:key)
+        returned_keys.each_with_index do |key, index|
+          entity = shared_upserts[index]
+          next if entity.nil?
+          # assign returned key if entity and key are present
+          entity.key = Key.from_grpc key unless key.nil?
+        end
         true
       end
 
@@ -97,7 +109,8 @@ module Gcloud
           fail TransactionError, "Cannot rollback when not in a transaction."
         end
 
-        connection.rollback @id
+        ensure_service!
+        service.rollback @id
         true
       end
 
@@ -105,18 +118,39 @@ module Gcloud
       # Reset the transaction.
       # {Transaction#start} must be called afterwards.
       def reset!
-        @shared_mutation = nil
+        @shared_upserts = []
+        @shared_deletes = []
         @id = nil
-        @_auto_id_entities = []
       end
 
       protected
 
       ##
-      # @private Mutation to be shared across save, delete, and commit calls.
-      # This enables updates to happen when commit is called.
-      def shared_mutation
-        @shared_mutation ||= Proto.new_mutation
+      # @private List of Entity objects to be saved.
+      def shared_upserts
+        @shared_upserts
+      end
+
+      ##
+      # @private List of Key objects to be deleted.
+      def shared_deletes
+        @shared_deletes
+      end
+
+      ##
+      # @private List of Mutation objects to be committed.
+      def shared_mutations
+        mutations = []
+        # shared upserts always go in first, so the keys can be assigned
+        shared_upserts.each do |e|
+          m = Google::Datastore::V1beta3::Mutation.new upsert: e.to_grpc
+          mutations << m
+        end
+        shared_deletes.each do |k|
+          m = Google::Datastore::V1beta3::Mutation.new delete: k.to_grpc
+          mutations << m
+        end
+        mutations
       end
     end
   end

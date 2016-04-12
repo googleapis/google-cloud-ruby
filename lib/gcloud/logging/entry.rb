@@ -226,24 +226,13 @@ module Gcloud
           e.timestamp = extract_timestamp(grpc)
           e.severity = grpc.severity
           e.insert_id = grpc.insert_id
-          e.labels = map_to_hash(grpc.labels)
+          e.labels = GRPCUtils.map_to_hash(grpc.labels)
           e.payload = extract_payload(grpc)
           e.instance_eval do
             @resource = Resource.from_grpc grpc.resource
             @http_request = HttpRequest.from_grpc grpc.http_request
             @operation = Operation.from_grpc grpc.operation
           end
-        end
-      end
-
-      ##
-      # @private Convert a Google::Protobuf::Map to a Hash
-      def self.map_to_hash map
-        if map.respond_to? :to_h
-          map.to_h
-        else
-          # Enumerable doesn't have to_h on ruby 2.0...
-          Hash[map.to_a]
         end
       end
 
