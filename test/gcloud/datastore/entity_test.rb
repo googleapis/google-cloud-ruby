@@ -32,46 +32,40 @@ describe Gcloud::Datastore::Entity do
     entity.properties["email"].must_equal "user@example.net"
   end
 
-  it "returns a correct protocol buffer object" do
-    proto = entity.to_proto
+  it "returns a correct GRPC object" do
+    grpc = entity.to_grpc
 
     # Key values
-    proto.key.path_element.count.must_equal 1
-    proto.key.path_element.last.kind.must_equal "User"
-    proto.key.path_element.last.id.must_be :nil?
-    proto.key.path_element.last.name.must_equal "username"
+    grpc.key.path.count.must_equal 1
+    grpc.key.path.last.kind.must_equal "User"
+    grpc.key.path.last.id.must_be :nil?
+    grpc.key.path.last.name.must_equal "username"
 
     # Property values
-    proto.property.count.must_equal 2
-    proto.property.find { |p| p.name == "name" }.value.string_value.must_equal entity["name"]
-    proto.property.find { |p| p.name == "email" }.value.string_value.must_equal entity["email"]
+    grpc.properties.count.must_equal 2
+    grpc.properties["name"].string_value.must_equal entity["name"]
+    grpc.properties["email"].string_value.must_equal entity["email"]
   end
 
-  it "can be created with a protocol buffer object" do
-    proto = Gcloud::Datastore::Proto::Entity.new
-    proto.key = Gcloud::Datastore::Proto::Key.new
-    proto.key.path_element = [Gcloud::Datastore::Proto::Key::PathElement.new]
-    proto.key.path_element.first.kind = "User"
-    proto.key.path_element.first.id = 123456
-    proto.property = [Gcloud::Datastore::Proto::Property.new,
-                      Gcloud::Datastore::Proto::Property.new,
-                      Gcloud::Datastore::Proto::Property.new]
-    proto.property[0].name = "name"
-    proto.property[0].value = Gcloud::Datastore::Proto.to_proto_value "User McNumber"
-    proto.property[1].name = "email"
-    proto.property[1].value = Gcloud::Datastore::Proto.to_proto_value "number@example.net"
-    proto.property[2].name = "avatar"
-    proto.property[2].value = Gcloud::Datastore::Proto.to_proto_value nil
+  it "can be created with a GRPC object" do
+    grpc = Google::Datastore::V1beta3::Entity.new
+    grpc.key = Google::Datastore::V1beta3::Key.new
+    grpc.key.path << Google::Datastore::V1beta3::Key::PathElement.new
+    grpc.key.path.first.kind = "User"
+    grpc.key.path.first.id = 123456
+    grpc.properties["name"] = Gcloud::GRPCUtils.to_value "User McNumber"
+    grpc.properties["email"] = Gcloud::GRPCUtils.to_value "number@example.net"
+    grpc.properties["avatar"] = nil
 
-    entity_from_proto = Gcloud::Datastore::Entity.from_proto proto
+    entity_from_grpc = Gcloud::Datastore::Entity.from_grpc grpc
 
-    entity_from_proto.key.kind.must_equal "User"
-    entity_from_proto.key.id.must_equal 123456
-    entity_from_proto.key.name.must_be :nil?
-    entity_from_proto.properties["name"].must_equal "User McNumber"
-    entity_from_proto.properties["email"].must_equal "number@example.net"
-    entity_from_proto.properties.exist?("avatar").must_equal true
-    entity_from_proto.properties["avatar"].must_equal nil
+    entity_from_grpc.key.kind.must_equal "User"
+    entity_from_grpc.key.id.must_equal 123456
+    entity_from_grpc.key.name.must_be :nil?
+    entity_from_grpc.properties["name"].must_equal "User McNumber"
+    entity_from_grpc.properties["email"].must_equal "number@example.net"
+    entity_from_grpc.properties.exist?("avatar").must_equal true
+    entity_from_grpc.properties["avatar"].must_equal nil
   end
 
   it "can store other entities as properties" do
@@ -87,20 +81,19 @@ describe Gcloud::Datastore::Entity do
     end
     entity["tasks"] = [task1, task2]
 
-    proto = entity.to_proto
+    grpc = entity.to_grpc
 
-    task_property = proto.property.last
-    task_property.name.must_equal "tasks"
-    task_property.value.list_value.wont_be :nil?
-    task_property.value.list_value.count.must_equal 2
-    proto_task_1 = task_property.value.list_value.first
-    proto_task_2 = task_property.value.list_value.last
-    proto_task_1.wont_be :nil?
-    proto_task_2.wont_be :nil?
-    proto_task_1.entity_value.wont_be :nil?
-    proto_task_2.entity_value.wont_be :nil?
-    proto_task_1.entity_value.property.find { |p| p.name == "description" }.value.string_value.must_equal "can persist entities"
-    proto_task_2.entity_value.property.find { |p| p.name == "description" }.value.string_value.must_equal "can persist lists"
+    task_property = grpc.properties["tasks"]
+    task_property.array_value.values.wont_be :empty?
+    task_property.array_value.values.count.must_equal 2
+    grpc_task_1 = task_property.array_value.values.first
+    grpc_task_2 = task_property.array_value.values.last
+    grpc_task_1.wont_be :nil?
+    grpc_task_2.wont_be :nil?
+    grpc_task_1.entity_value.wont_be :nil?
+    grpc_task_2.entity_value.wont_be :nil?
+    grpc_task_1.entity_value.properties["description"].string_value.must_equal "can persist entities"
+    grpc_task_2.entity_value.properties["description"].string_value.must_equal "can persist lists"
   end
 
   it "can store keys as properties" do
@@ -112,22 +105,21 @@ describe Gcloud::Datastore::Entity do
 
     list["head"] = key1
 
-    # Do this multiple times to make sure the call to Key.from_proto
+    # Do this multiple times to make sure the call to Key.from_grpc
     # isn't modifying the original key stored in the entity's property.
     5.times do
       assert_equal key1.path, list["head"].path
     end
 
-    proto = list.to_proto
+    grpc = list.to_grpc
 
-    key_property = proto.property.last
-    key_property.name.must_equal "head"
+    key_property = grpc.properties["head"]
 
-    key_value = key_property.value.key_value
+    key_value = key_property.key_value
     key_value.wont_be :nil?
-    key_value.path_element.first.kind.must_equal key1.kind
-    key_value.path_element.first.name.must_equal key1.name
-    key_value.path_element.first.id.must_equal   key1.id
+    key_value.path.first.kind.must_equal key1.kind
+    key_value.path.first.name.must_equal key1.name
+    key_value.path.first.id.must_equal   key1.id
   end
 
   it "raises when setting an unsupported property type" do
@@ -138,29 +130,23 @@ describe Gcloud::Datastore::Entity do
   end
 
   it "raises when setting a key when persisted" do
-    proto = Gcloud::Datastore::Proto::Entity.new
-    proto.key = Gcloud::Datastore::Proto::Key.new
-    proto.key.path_element = [Gcloud::Datastore::Proto::Key::PathElement.new]
-    proto.key.path_element.first.kind = "User"
-    proto.key.path_element.first.id = 123456
-    proto.property = [Gcloud::Datastore::Proto::Property.new,
-                      Gcloud::Datastore::Proto::Property.new]
-    proto.property.first.name = "name"
-    proto.property.first.value = Gcloud::Datastore::Proto.to_proto_value "User McNumber"
-    proto.property.last.name = "email"
-    proto.property.last.value = Gcloud::Datastore::Proto.to_proto_value "number@example.net"
+    grpc = Google::Datastore::V1beta3::Entity.new
+    grpc.key = Google::Datastore::V1beta3::Key.new
+    grpc.key.path << Google::Datastore::V1beta3::Key::PathElement.new(kind: "User", id: 123456)
+    grpc.properties["name"] = Gcloud::GRPCUtils.to_value "User McNumber"
+    grpc.properties["email"] = Gcloud::GRPCUtils.to_value "number@example.net"
 
-    entity_from_proto = Gcloud::Datastore::Entity.from_proto proto
+    entity_from_grpc = Gcloud::Datastore::Entity.from_grpc grpc
 
-    entity_from_proto.must_be :persisted?
-    entity_from_proto.key.must_be :frozen?
+    entity_from_grpc.must_be :persisted?
+    entity_from_grpc.key.must_be :frozen?
 
     assert_raises RuntimeError do
-      entity_from_proto.key = Gcloud::Datastore::Key.new "User", 456789
+      entity_from_grpc.key = Gcloud::Datastore::Key.new "User", 456789
     end
 
     assert_raises RuntimeError do
-      entity_from_proto.key.id = 456789
+      entity_from_grpc.key.id = 456789
     end
   end
 end

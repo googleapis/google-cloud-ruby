@@ -78,7 +78,7 @@ describe "Datastore", :datastore do
     end
 
     it "should save/find with a key name and delete with a key" do
-      post.key = Gcloud::Datastore::Key.new "Post", "post1"
+      post.key = Gcloud::Datastore::Key.new "Post", "post2"
       dataset.save post
 
       refresh = dataset.find post.key
@@ -116,7 +116,7 @@ describe "Datastore", :datastore do
 
       post.key.id.wont_be :nil?
 
-      refresh = dataset.find "Post", post.key.id
+      refresh = dataset.find "Post",     post.key.id
       refresh.key.kind.must_equal        post.key.kind
       refresh.key.id.must_equal          post.key.id
       refresh.key.name.must_equal        post.key.name
@@ -131,13 +131,13 @@ describe "Datastore", :datastore do
       post.key  = Gcloud::Datastore::Key.new "Post"
       post2.key = Gcloud::Datastore::Key.new "Post"
 
-      post.key.id.must_be :nil?
-      post2.key.id.must_be :nil?
+      post.key.must_be :incomplete?
+      post2.key.must_be :incomplete?
 
       dataset.save post, post2
 
-      post.key.id.wont_be :nil?
-      post2.key.id.wont_be :nil?
+      post.key.wont_be :incomplete?
+      post2.key.wont_be :incomplete?
 
       entities = dataset.find_all post.key, post2.key
       entities.count.must_equal 2
@@ -149,7 +149,7 @@ describe "Datastore", :datastore do
     end
 
     it "entities retrieved from datastore have immutable keys" do
-      post.key = Gcloud::Datastore::Key.new "Post", "post1"
+      post.key = Gcloud::Datastore::Key.new "Post", "post3"
       dataset.save post
 
       refresh = dataset.find post.key
@@ -437,6 +437,41 @@ describe "Datastore", :datastore do
         group_by("alive")
       entities = dataset.run query
       entities.count.must_equal 2
+    end
+
+    it "should filter queries with simple indexes using GQL and named bindings" do
+      gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND appearances >= @appearanceCount",
+                        bookKey: book.key, appearanceCount: 20
+      entities = dataset.run gql
+      entities.count.must_equal 6
+    end
+
+    it "should filter queries with simple indexes using GQL and positional bindings" do
+      gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR @1 AND appearances >= @2"
+      gql.positional_bindings = [book.key, 20]
+      entities = dataset.run gql
+      entities.count.must_equal 6
+    end
+
+    it "should filter queries with defined indexes using GQL and named bindings" do
+      gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND family = @familyName AND appearances >= @appearanceCount",
+                        bookKey: book.key, familyName: "Stark", appearanceCount: 20
+      entities = dataset.run gql
+      entities.count.must_equal 6
+    end
+
+    it "should filter queries with defined indexes using GQL and positional bindings" do
+      gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR @1 AND family = @2 AND appearances >= @3"
+      gql.positional_bindings = [book.key, "Stark", 20]
+      entities = dataset.run gql
+      entities.count.must_equal 6
+    end
+
+    it "should filter queries with defined indexes using GQL and literal values" do
+      gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR Key(Book, 'GoT') AND family = 'Stark' AND appearances >= 20"
+      gql.allow_literals = true
+      entities = dataset.run gql
+      entities.count.must_equal 6
     end
 
     after do

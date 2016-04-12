@@ -14,11 +14,14 @@
 
 
 require "gcloud/gce"
-require "gcloud/datastore/connection"
+require "gcloud/datastore/grpc_utils"
 require "gcloud/datastore/credentials"
+require "gcloud/datastore/service"
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
 require "gcloud/datastore/query"
+require "gcloud/datastore/gql_query"
+require "gcloud/datastore/cursor"
 require "gcloud/datastore/dataset/lookup_results"
 require "gcloud/datastore/dataset/query_results"
 
@@ -48,8 +51,9 @@ module Gcloud
     #   tasks = dataset.run query
     #
     class Dataset
-      # @private
-      attr_accessor :connection
+      ##
+      # @private The gRPC Service object.
+      attr_accessor :service
 
       ##
       # @private Creates a new Dataset instance.
@@ -58,7 +62,7 @@ module Gcloud
       def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
-        @connection = Connection.new project, credentials
+        @service = Service.new project, credentials
       end
 
       ##
@@ -74,7 +78,7 @@ module Gcloud
       #   dataset.project #=> "my-todo-project"
       #
       def project
-        connection.dataset_id
+        service.project
       end
 
       ##
@@ -104,11 +108,10 @@ module Gcloud
           fail Gcloud::Datastore::Error, "An incomplete key must be provided."
         end
 
-        incomplete_keys = count.times.map { incomplete_key.to_proto }
-        response = connection.allocate_ids(*incomplete_keys)
-        Array(response.key).map do |key|
-          Key.from_proto key
-        end
+        ensure_service!
+        incomplete_keys = count.times.map { incomplete_key.to_grpc }
+        allocate_res = service.allocate_ids(*incomplete_keys)
+        allocate_res.keys.map { |key| Key.from_grpc key }
       end
 
       ##
@@ -123,10 +126,15 @@ module Gcloud
       #   dataset.save task1, task2
       #
       def save *entities
-        mutation = Proto.new_mutation
-        save_entities_to_mutation entities, mutation
-        response = connection.commit mutation
-        auto_id_assign_ids response.mutation_result.insert_auto_id_key
+        ensure_service!
+        mutations = entities.map do |entity|
+          Google::Datastore::V1beta3::Mutation.new upsert: entity.to_grpc
+        end
+        commit_res = service.commit(mutations)
+        returned_keys = commit_res.mutation_results.map(&:key)
+        returned_keys.each_with_index do |key, index|
+          entities[index].key = Key.from_grpc(key) unless key.nil?
+        end
         entities
       end
 
@@ -170,10 +178,11 @@ module Gcloud
       #   tasks = dataset.find_all key1, key2
       #
       def find_all *keys
-        response = connection.lookup(*keys.map(&:to_proto))
-        entities = to_gcloud_entities response.found
-        deferred = to_gcloud_keys response.deferred
-        missing  = to_gcloud_entities response.missing
+        ensure_service!
+        lookup_res = service.lookup(*keys.map(&:to_grpc))
+        entities = to_gcloud_entities lookup_res.found
+        deferred = to_gcloud_keys lookup_res.deferred
+        missing  = to_gcloud_entities lookup_res.missing
         LookupResults.new entities, deferred, missing
       end
       alias_method :lookup, :find_all
@@ -192,20 +201,22 @@ module Gcloud
       #   dataset.delete entity1, entity2
       #
       def delete *entities_or_keys
-        keys = entities_or_keys.map do |e_or_k|
-          e_or_k.respond_to?(:key) ? e_or_k.key.to_proto : e_or_k.to_proto
+        just_keys = entities_or_keys.map do |e_or_k|
+          e_or_k.respond_to?(:key) ? e_or_k.key : e_or_k
         end
-        mutation = Proto.new_mutation.tap do |m|
-          m.delete = keys
+        mutations = just_keys.map do |key|
+          Google::Datastore::V1beta3::Mutation.new delete: key.to_grpc
         end
-        connection.commit mutation
+
+        ensure_service!
+        service.commit mutations
         true
       end
 
       ##
       # Retrieve entities specified by a Query.
       #
-      # @param [Query] query The Query object with the search criteria.
+      # @param [Query, GqlQuery] query The object with the search criteria.
       # @param [String] namespace The namespace the query is to run within.
       #
       # @return [Gcloud::Datastore::Dataset::QueryResults]
@@ -220,12 +231,25 @@ module Gcloud
       #     where("completed", "=", true)
       #   tasks = dataset.run query, namespace: "ns~todo-project"
       #
+      # @example Run the query with a GQL string.
+      #   gql = dataset.gql "SELECT * FROM Task WHERE completed = @completed",
+      #                     completed: true
+      #   tasks = dataset.run gql
+      #
+      # @example Run the gql query within a namespace with `namespace` option:
+      #   gql = dataset.gql "SELECT * FROM Task WHERE completed = @completed",
+      #                     completed: true
+      #   tasks = dataset.run gql, namespace: "ns~todo-project"
+      #
       def run query, namespace: nil
-        partition = optional_partition_id namespace
-        response = connection.run_query query.to_proto, partition
-        entities = to_gcloud_entities response.batch.entity_result
-        cursor = Proto.encode_cursor response.batch.end_cursor
-        more_results = Proto.to_more_results_string response.batch.more_results
+        ensure_service!
+        unless query.is_a?(Query) || query.is_a?(GqlQuery)
+          fail ArgumentError, "Cannot run a #{query.class} object."
+        end
+        query_res = service.run_query query.to_grpc, namespace
+        entities = to_gcloud_entities query_res.batch.entity_results
+        cursor = Cursor.from_grpc query_res.batch.end_cursor
+        more_results = query_res.batch.more_results
         QueryResults.new entities, cursor, more_results
       end
       alias_method :run_query, :run
@@ -275,7 +299,7 @@ module Gcloud
       #   end
       #
       def transaction
-        tx = Transaction.new connection
+        tx = Transaction.new service
         return tx unless block_given?
 
         begin
@@ -310,6 +334,36 @@ module Gcloud
         query = Query.new
         query.kind(*kinds) unless kinds.empty?
         query
+      end
+
+      ##
+      # Create a new GqlQuery instance. This is a convenience method to make the
+      # creation of GqlQuery objects easier.
+      #
+      # @param [String] query The GQL query string.
+      # @param [Hash] bindings Named bindings for the GQL query string, each
+      #   key must match regex `[A-Za-z_$][A-Za-z_$0-9]*`, must not match regex
+      #   `__.*__`, and must not be `""`. The value must be an `Object` that can
+      #   be stored as an Entity property value, or a `Cursor`.
+      #
+      # @return [Gcloud::Datastore::GqlQuery]
+      #
+      # @example
+      #   gql = dataset.gql "SELECT * FROM Task WHERE completed = @completed",
+      #                     completed: true
+      #   tasks = dataset.run gql
+      #
+      # @example The previous example is equivalent to:
+      #   gql = Gcloud::Datastore::GqlQuery.new
+      #   gql.query_string = "SELECT * FROM Task WHERE completed = @completed"
+      #   gql.named_bindings = {completed: true}
+      #   tasks = dataset.run gql
+      #
+      def gql query, bindings = {}
+        gql = GqlQuery.new
+        gql.query_string = query
+        gql.named_bindings = bindings unless bindings.empty?
+        gql
       end
 
       ##
@@ -392,61 +446,27 @@ module Gcloud
       protected
 
       ##
-      # Convenince method to convert proto entities to Gcloud entities.
-      def to_gcloud_entities proto_results
+      # @private Raise an error unless an active connection to the service is
+      # available.
+      def ensure_service!
+        fail "Must have active connection to service" unless service
+      end
+
+      ##
+      # Convenince method to convert GRPC entities to Gcloud entities.
+      def to_gcloud_entities grpc_entity_results
         # Entities are nested in an object.
-        Array(proto_results).map do |result|
-          Entity.from_proto result.entity
+        Array(grpc_entity_results).map do |result|
+          # TODO: Make this return an EntityResult with cursor...
+          Entity.from_grpc result.entity
         end
       end
 
       ##
-      # Convenince method to convert proto keys to Gcloud keys.
-      def to_gcloud_keys proto_results
+      # Convenince method to convert GRPC keys to Gcloud keys.
+      def to_gcloud_keys grpc_keys
         # Keys are not nested in an object like entities are.
-        Array(proto_results).map do |key|
-          Key.from_proto key
-        end
-      end
-
-      ##
-      # @private Save a key to be given an ID when comitted.
-      def auto_id_register entity
-        @_auto_id_entities ||= []
-        @_auto_id_entities << entity
-      end
-
-      ##
-      # @private Update saved keys with new IDs post-commit.
-      def auto_id_assign_ids auto_ids
-        @_auto_id_entities ||= []
-        Array(auto_ids).each_with_index do |key, index|
-          entity = @_auto_id_entities[index]
-          entity.key = Key.from_proto key
-        end
-        @_auto_id_entities = []
-      end
-
-      ##
-      # @private Add entities to a Mutation, and register they key to be
-      # updated with an auto ID if needed.
-      def save_entities_to_mutation entities, mutation
-        entities.each do |entity|
-          if entity.key.id.nil? && entity.key.name.nil?
-            mutation.insert_auto_id << entity.to_proto
-            auto_id_register entity
-          else
-            mutation.upsert << entity.to_proto
-          end
-        end
-      end
-
-      def optional_partition_id namespace = nil
-        return nil if namespace.nil?
-        Proto::PartitionId.new.tap do |p|
-          p.namespace = namespace
-          p.dataset_id = project
-        end
+        Array(grpc_keys).map { |key| Key.from_grpc key }
       end
     end
   end

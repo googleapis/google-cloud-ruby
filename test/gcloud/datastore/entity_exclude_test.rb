@@ -25,45 +25,34 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
     end
   end
 
-  it "converts indexed value to not excluded from a protocol buffer object" do
-    proto = Gcloud::Datastore::Proto::Entity.new
-    proto.key = Gcloud::Datastore::Proto::Key.new
-    proto.key.path_element = [Gcloud::Datastore::Proto::Key::PathElement.new]
-    proto.key.path_element.first.kind = "User"
-    proto.key.path_element.first.id = 123456
-    proto.property = [Gcloud::Datastore::Proto::Property.new]
-    proto.property[0].name = "name"
-    proto.property[0].value = Gcloud::Datastore::Proto.to_proto_value "User McNumber"
-    proto.property[0].value.indexed = true # default
+  it "converts indexed value to not excluded from a GRPC object" do
+    grpc = Google::Datastore::V1beta3::Entity.new
+    grpc.key = Google::Datastore::V1beta3::Key.new
+    grpc.key.path << Google::Datastore::V1beta3::Key::PathElement.new(kind: "User", id: 123456)
+    grpc.properties["name"] = Gcloud::GRPCUtils.to_value "User McNumber"
 
-    entity_from_proto = Gcloud::Datastore::Entity.from_proto proto
-    entity_from_proto.exclude_from_indexes?("name").must_equal false
+    entity_from_grpc = Gcloud::Datastore::Entity.from_grpc grpc
+    entity_from_grpc.exclude_from_indexes?("name").must_equal false
   end
 
-  it "converts indexed list to not excluded from a protocol buffer object" do
-    proto = Gcloud::Datastore::Proto::Entity.new
-    proto.key = Gcloud::Datastore::Proto::Key.new
-    proto.key.path_element = [Gcloud::Datastore::Proto::Key::PathElement.new]
-    proto.key.path_element.first.kind = "User"
-    proto.key.path_element.first.id = 123456
-    proto.property = [Gcloud::Datastore::Proto::Property.new]
-    proto.property[0].name = "tags"
-    proto.property[0].value = Gcloud::Datastore::Proto.to_proto_value ["ruby", "code"]
-    proto.property[0].value.list_value.first.indexed = true # default
-    proto.property[0].value.list_value.last.indexed = true # default
+  it "converts indexed list to not excluded from a GRPC object" do
+    grpc = Google::Datastore::V1beta3::Entity.new
+    grpc.key = Google::Datastore::V1beta3::Key.new
+    grpc.key.path << Google::Datastore::V1beta3::Key::PathElement.new(kind: "User", id: 123456)
+    grpc.properties["tags"] = Gcloud::GRPCUtils.to_value ["ruby", "code"]
 
-    entity_from_proto = Gcloud::Datastore::Entity.from_proto proto
-    entity_from_proto.exclude_from_indexes?("tags").must_equal [false, false]
+    entity_from_grpc = Gcloud::Datastore::Entity.from_grpc grpc
+    entity_from_grpc.exclude_from_indexes?("tags").must_equal [false, false]
   end
 
   it "doesn't exclude from indexes by default" do
     refute entity.exclude_from_indexes?("name")
     refute entity.exclude_from_indexes?("email")
 
-    proto = entity.to_proto
+    grpc = entity.to_grpc
 
-    assert proto.property.find { |p| p.name == "name"  }.value.indexed.must_equal true
-    assert proto.property.find { |p| p.name == "email" }.value.indexed.must_equal true
+    assert grpc.properties["name"].exclude_from_indexes.must_equal false
+    assert grpc.properties["email"].exclude_from_indexes.must_equal false
   end
 
   it "excludes when setting a boolean" do
@@ -72,9 +61,9 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
 
     entity.exclude_from_indexes?("age").must_equal true
 
-    proto = entity.to_proto
+    grpc = entity.to_grpc
 
-    proto.property.find { |p| p.name == "age"  }.value.indexed.must_equal false
+    grpc.properties["age"].exclude_from_indexes.must_equal true
   end
 
   it "excludes when setting a Proc" do
@@ -85,9 +74,9 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
 
     entity.exclude_from_indexes?("age").must_equal true
 
-    proto = entity.to_proto
+    grpc = entity.to_grpc
 
-    proto.property.find { |p| p.name == "age"  }.value.indexed.must_equal false
+    grpc.properties["age"].exclude_from_indexes.must_equal true
 
     # And now the inverse, the Proc evaluates to false
 
@@ -97,9 +86,9 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
 
     entity.exclude_from_indexes?("age").must_equal false
 
-    proto = entity.to_proto
+    grpc = entity.to_grpc
 
-    proto.property.find { |p| p.name == "age"  }.value.indexed.must_equal true
+    grpc.properties["age"].exclude_from_indexes.must_equal false
   end
 
   it "excludes when setting an Array on a non array value" do
@@ -108,9 +97,9 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
 
     entity.exclude_from_indexes?("age").must_equal true
 
-    proto = entity.to_proto
+    grpc = entity.to_grpc
 
-    proto.property.find { |p| p.name == "age"  }.value.indexed.must_equal false
+    grpc.properties["age"].exclude_from_indexes.must_equal true
 
     # And now the inverse, the first value is false
 
@@ -118,9 +107,9 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
 
     entity.exclude_from_indexes?("age").must_equal false
 
-    proto = entity.to_proto
+    grpc = entity.to_grpc
 
-    proto.property.find { |p| p.name == "age"  }.value.indexed.must_equal true
+    grpc.properties["age"].exclude_from_indexes.must_equal false
   end
 
   describe Array do
@@ -129,11 +118,11 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
 
       entity.exclude_from_indexes?("tags").must_equal [false, false]
 
-      proto = entity.to_proto
+      grpc = entity.to_grpc
 
-      tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_be :nil? # list values must always be unset
-      tag_proto.list_value.map { |value| value.indexed }.must_equal [true, true]
+      tag_grpc = grpc.properties["tags"]
+      tag_grpc.exclude_from_indexes.must_equal false
+        tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [false, false]
     end
 
     it "excludes an Array when setting a boolean" do
@@ -142,11 +131,11 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
 
       entity.exclude_from_indexes?("tags").must_equal [true, true]
 
-      proto = entity.to_proto
+      grpc = entity.to_grpc
 
-      tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_be :nil? # list values must always be unset
-      tag_proto.list_value.map { |value| value.indexed }.must_equal [false, false]
+      tag_grpc = grpc.properties["tags"]
+      tag_grpc.exclude_from_indexes.must_equal false
+      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [true, true]
     end
 
     it "excludes an Array when setting a Proc" do
@@ -157,11 +146,11 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
 
       entity.exclude_from_indexes?("tags").must_equal [true, false]
 
-      proto = entity.to_proto
+      grpc = entity.to_grpc
 
-      tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_be :nil? # list values must always be unset
-      tag_proto.list_value.map { |value| value.indexed }.must_equal [false, true]
+      tag_grpc = grpc.properties["tags"]
+      tag_grpc.exclude_from_indexes.must_equal false
+      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [true, false]
 
       # And now the inverse, the Proc evaluates to false
 
@@ -172,11 +161,11 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
 
       entity.exclude_from_indexes?("tags").must_equal [false, true]
 
-      proto = entity.to_proto
+      grpc = entity.to_grpc
 
-      tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_be :nil? # list values must always be unset
-      tag_proto.list_value.map { |value| value.indexed }.must_equal [true, false]
+      tag_grpc = grpc.properties["tags"]
+      tag_grpc.exclude_from_indexes.must_equal false
+      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [false, true]
     end
 
     it "excludes an Array when setting an Array" do
@@ -185,11 +174,11 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
 
       entity.exclude_from_indexes?("tags").must_equal [true, false]
 
-      proto = entity.to_proto
+      grpc = entity.to_grpc
 
-      tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_be :nil? # list values must always be unset
-      tag_proto.list_value.map { |value| value.indexed }.must_equal [false, true]
+      tag_grpc = grpc.properties["tags"]
+      tag_grpc.exclude_from_indexes.must_equal false
+      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [true, false]
     end
 
     it "excludes an Array when setting an Array that is too small" do
@@ -199,11 +188,11 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
       # the default is to not exclude when the array is too small
       entity.exclude_from_indexes?("tags").must_equal [true, false, false, false]
 
-      proto = entity.to_proto
+      grpc = entity.to_grpc
 
-      tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_be :nil? # list values must always be unset
-      tag_proto.list_value.map { |value| value.indexed }.must_equal [false, true, true, true]
+      tag_grpc = grpc.properties["tags"]
+      tag_grpc.exclude_from_indexes.must_equal false
+      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [true, false, false, false]
     end
 
     it "excludes an Array when setting an Array that is too big" do
@@ -212,11 +201,11 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
 
       entity.exclude_from_indexes?("tags").must_equal [true, false]
 
-      proto = entity.to_proto
+      grpc = entity.to_grpc
 
-      tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_be :nil? # list values must always be unset
-      tag_proto.list_value.map { |value| value.indexed }.must_equal [false, true]
+      tag_grpc = grpc.properties["tags"]
+      tag_grpc.exclude_from_indexes.must_equal false
+      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [true, false]
 
       # Now add to the entity and get the previously stored exclude values
 
@@ -224,11 +213,11 @@ describe Gcloud::Datastore::Entity, :exclude_from_indexes do
 
       entity.exclude_from_indexes?("tags").must_equal [true, false, true, false]
 
-      proto = entity.to_proto
+      grpc = entity.to_grpc
 
-      tag_proto = proto.property.find { |p| p.name == "tags"  }.value
-      tag_proto.indexed.must_be :nil? # list values must always be unset
-      tag_proto.list_value.map { |value| value.indexed }.must_equal [false, true, false, true]
+      tag_grpc = grpc.properties["tags"]
+      tag_grpc.exclude_from_indexes.must_equal false
+      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [true, false, true, false]
     end
   end
 

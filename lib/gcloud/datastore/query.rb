@@ -15,7 +15,6 @@
 
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
-require "gcloud/datastore/proto"
 
 module Gcloud
   module Datastore
@@ -39,7 +38,7 @@ module Gcloud
       #   query = Gcloud::Datastore::Query.new
       #
       def initialize
-        @_query = Proto::Query.new
+        @grpc = Google::Datastore::V1beta3::Query.new
       end
 
       ##
@@ -52,9 +51,11 @@ module Gcloud
       #   all_tasks = dataset.run query
       #
       def kind *kinds
-        @_query.kind ||= Proto::KindExpression.new
-        @_query.kind.name ||= []
-        @_query.kind.name |= kinds
+        kinds.each do |kind|
+          grpc_kind = Google::Datastore::V1beta3::KindExpression.new(name: kind)
+          @grpc.kind << grpc_kind
+        end
+
         self
       end
 
@@ -69,16 +70,21 @@ module Gcloud
       #   completed_tasks = dataset.run query
       #
       def where name, operator, value
-        # Initialize filter
-        @_query.filter ||= Proto.new_filter.tap do |f|
-          f.composite_filter = Proto.new_composite_filter
-        end
-        # Create new property filter
-        filter = Proto.new_filter.tap do |f|
-          f.property_filter = Proto.new_property_filter name, operator, value
-        end
-        # Add new property filter to the list
-        @_query.filter.composite_filter.filter << filter
+        @grpc.filter ||= Google::Datastore::V1beta3::Filter.new(
+          composite_filter: Google::Datastore::V1beta3::CompositeFilter.new(
+            op: :AND
+          )
+        )
+        @grpc.filter.composite_filter.filters << \
+          Google::Datastore::V1beta3::Filter.new(
+            property_filter: Google::Datastore::V1beta3::PropertyFilter.new(
+              property: Google::Datastore::V1beta3::PropertyReference.new(
+                name: name),
+              op: GRPCUtils.to_prop_filter_op(operator),
+              value: GRPCUtils.to_value(value)
+            )
+          )
+
         self
       end
       alias_method :filter, :where
@@ -113,12 +119,12 @@ module Gcloud
       #   sorted_tasks = dataset.run query
       #
       def order name, direction = :asc
-        @_query.order ||= []
-        po = Proto::PropertyOrder.new
-        po.property = Proto::PropertyReference.new
-        po.property.name = name
-        po.direction = Proto.to_prop_order_direction direction
-        @_query.order << po
+        @grpc.order << Google::Datastore::V1beta3::PropertyOrder.new(
+          property: Google::Datastore::V1beta3::PropertyReference.new(
+            name: name),
+          direction: prop_order_direction(direction)
+        )
+
         self
       end
 
@@ -133,7 +139,8 @@ module Gcloud
       #   paginated_tasks = dataset.run query
       #
       def limit num
-        @_query.limit = num
+        @grpc.limit = Google::Protobuf::Int32Value.new(value: num)
+
         self
       end
 
@@ -149,7 +156,8 @@ module Gcloud
       #   paginated_tasks = dataset.run query
       #
       def offset num
-        @_query.offset = num
+        @grpc.offset = num
+
         self
       end
 
@@ -165,7 +173,8 @@ module Gcloud
       #   paginated_tasks = dataset.run query
       #
       def start cursor
-        @_query.start_cursor = Proto.decode_cursor cursor
+        @grpc.start_cursor = GRPCUtils.decode_bytes cursor
+
         self
       end
       alias_method :cursor, :start
@@ -181,8 +190,13 @@ module Gcloud
       #   partial_tasks = dataset.run query
       #
       def select *names
-        @_query.projection ||= []
-        @_query.projection += Proto.new_property_expressions(*names)
+        names.each do |name|
+          grpc_projection = Google::Datastore::V1beta3::Projection.new(
+            property: Google::Datastore::V1beta3::PropertyReference.new(
+              name: name))
+          @grpc.projection << grpc_projection
+        end
+
         self
       end
       alias_method :projection, :select
@@ -198,14 +212,33 @@ module Gcloud
       #   grouped_tasks = dataset.run query
       #
       def group_by *names
-        @_query.group_by ||= []
-        @_query.group_by += Proto.new_property_references(*names)
+        names.each do |name|
+          grpc_property = Google::Datastore::V1beta3::PropertyReference.new(
+            name: name)
+          @grpc.distinct_on << grpc_property
+        end
+
         self
       end
+      alias_method :distinct_on, :group_by
 
       # @private
-      def to_proto
-        @_query
+      def to_grpc
+        @grpc
+      end
+
+      protected
+
+      ##
+      # @private Get the property order direction for a string.
+      def prop_order_direction direction
+        if direction.to_s.downcase.start_with? "a"
+          :ASCENDING
+        elsif direction.to_s.downcase.start_with? "d"
+          :DESCENDING
+        else
+          :DIRECTION_UNSPECIFIED
+        end
       end
     end
   end
