@@ -21,6 +21,39 @@ module Gcloud
     # Special Connection instance for running transactions.
     #
     # See {Gcloud::Datastore::Dataset#transaction}
+    #
+    # @see https://cloud.google.com/datastore/docs/concepts/transactions
+    #   Transactions
+    #
+    # @example Transactional update:
+    #   def transfer_funds from_key, to_key, amount
+    #     datastore.transaction do |tx|
+    #       from = tx.find from_key
+    #       from["balance"] -= amount
+    #       to = tx.find to_key
+    #       to["balance"] += amount
+    #       tx.save from, to
+    #     end
+    #   end
+    #
+    # @example Retry logic using the transactional update example above:
+    #   (1..5).each do |i|
+    #     begin
+    #       transfer_funds from_key, to_key, 10
+    #       break
+    #     rescue Gcloud::Error => e
+    #       raise e if i == 5
+    #     end
+    #   end
+    #
+    # @example Transactional read:
+    #   task_list_key = datastore.key "TaskList", "default"
+    #   datastore.transaction do |tx|
+    #     task_list = tx.find task_list_key
+    #     query = tx.query("Task").ancestor(task_list)
+    #     tasks_in_list = tx.run query
+    #   end
+    #
     class Transaction < Dataset
       attr_reader :id
 
@@ -36,10 +69,19 @@ module Gcloud
       ##
       # Persist entities in a transaction.
       #
-      # @example
-      #   dataset.transaction do |tx|
-      #     if tx.find(user.key).nil?
-      #       tx.save task1, task2
+      # @example Transactional get or create:
+      #   task_key = datastore.key "Task", "sampleTask"
+      #
+      #   datastore.transaction do |tx|
+      #     task = tx.find task_key
+      #     if task.nil?
+      #       task = datastore.entity task_key do |task|
+      #         task["type"] = "Personal"
+      #         task["done"] = false
+      #         task["priority"] = 4
+      #         task["description"] = "Learn Cloud Datastore"
+      #       end
+      #       tx.save task
       #     end
       #   end
       #
@@ -53,8 +95,8 @@ module Gcloud
       # Remove entities in a transaction.
       #
       # @example
-      #   dataset.transaction do |tx|
-      #     if tx.find(user.key).nil?
+      #   datastore.transaction do |tx|
+      #     if tx.find(task_list.key).nil?
       #       tx.delete task1, task2
       #     end
       #   end

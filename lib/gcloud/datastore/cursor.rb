@@ -27,7 +27,7 @@ module Gcloud
     #   dataset = gcloud.datastore
     #
     #   query = dataset.query("Task").
-    #     where("completed", "=", true)
+    #     where("done", "=", false)
     #
     #   tasks = dataset.run query
     #   tasks.cursor #=> Cursor

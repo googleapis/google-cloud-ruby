@@ -23,12 +23,19 @@ module Gcloud
     #
     # Represents the search criteria against a Datastore.
     #
+    # @see https://cloud.google.com/datastore/docs/concepts/queries Datastore
+    #   Queries
+    # @see https://cloud.google.com/datastore/docs/concepts/metadataqueries
+    #   Datastore Metadata
+    #
     # @example
     #   query = Gcloud::Datastore::Query.new
     #   query.kind("Task").
-    #     where("completed", "=", true)
+    #     where("done", "=", false).
+    #     where("priority", ">=", 4).
+    #     order("priority", :desc)
     #
-    #   entities = dataset.run query
+    #   tasks = datastore.run query
     #
     class Query
       ##
@@ -44,11 +51,15 @@ module Gcloud
       ##
       # Add the kind of entities to query.
       #
+      # Special entity kinds such as `__namespace__`, `__kind__`, and
+      # `__property__` can be used for [metadata
+      # queries](https://cloud.google.com/datastore/docs/concepts/metadataqueries).
+      #
       # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind "Task"
       #
-      #   all_tasks = dataset.run query
+      #   tasks = datastore.run query
       #
       def kind *kinds
         kinds.each do |kind|
@@ -65,9 +76,52 @@ module Gcloud
       # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
-      #     where("completed", "=", true)
+      #     where("done", "=", false)
       #
-      #   completed_tasks = dataset.run query
+      #   tasks = datastore.run query
+      #
+      # @example Add a composite property filter:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     where("done", "=", false).
+      #     where("priority", ">=", 4)
+      #
+      #   tasks = datastore.run query
+      #
+      # @example Add an inequality filter on a **single** property only:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     where("created", ">=", Date.new(1990,1,1)).
+      #     where("created", "<", Date.new(2000,1,1))
+      #
+      # @example Add a composite filter on an array property:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     where("tag", "=", "fun").
+      #     where("tag", "=", "programming")
+      #
+      #   tasks = datastore.run query
+      #
+      # @example Add an inequality filter on an array property :
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     where("tag", ">", "learn").
+      #     where("tag", "<", "math")
+      #
+      #   tasks = datastore.run query
+      #
+      # @example Add a key filter using the special property `__key__`:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     where("__key__", ">", datastore.key("Task", "someTask"))
+      #
+      #   tasks = datastore.run query
+      #
+      # @example Add a key filter to a *kindless* query:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.where("__key__", ">", last_seen_key)
+      #
+      #   tasks = datastore.run query
       #
       def where name, operator, value
         @grpc.filter ||= Google::Datastore::V1beta3::Filter.new(
@@ -93,11 +147,13 @@ module Gcloud
       # Add a filter for entities that inherit from a key.
       #
       # @example
+      #   task_list_key = datastore.key "TaskList", "default"
+      #
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
-      #     ancestor(parent.key)
+      #     ancestor(task_list_key)
       #
-      #   completed_tasks = dataset.run query
+      #   tasks = datastore.run query
       #
       def ancestor parent
         # Use key if given an entity
@@ -111,12 +167,36 @@ module Gcloud
       # To sort in descending order, provide a second argument
       # of a string or symbol that starts with "d".
       #
-      # @example
+      # @example With ascending sort order:
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
-      #     order("due", :desc)
+      #     order("created")
       #
-      #   sorted_tasks = dataset.run query
+      #   tasks = datastore.run query
+      #
+      # @example With descending sort order:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     order("created", :desc)
+      #
+      #   tasks = datastore.run query
+      #
+      # @example With multiple sort orders:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     order("priority", :desc).
+      #     order("created")
+      #
+      #   tasks = datastore.run query
+      #
+      # @example A property used in an inequality filter must be ordered first:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     where("priority", ">", 3).
+      #     order("priority").
+      #     order("created")
+      #
+      #   tasks = datastore.run query
       #
       def order name, direction = :asc
         @grpc.order << Google::Datastore::V1beta3::PropertyOrder.new(
@@ -134,9 +214,9 @@ module Gcloud
       # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
-      #     limit(10)
+      #     limit(5)
       #
-      #   paginated_tasks = dataset.run query
+      #   tasks = datastore.run query
       #
       def limit num
         @grpc.limit = Google::Protobuf::Int32Value.new(value: num)
@@ -150,10 +230,10 @@ module Gcloud
       # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
-      #     limit(10).
-      #     offset(20)
+      #     limit(5).
+      #     offset(10)
       #
-      #   paginated_tasks = dataset.run query
+      #   tasks = datastore.run query
       #
       def offset num
         @grpc.offset = num
@@ -167,10 +247,10 @@ module Gcloud
       # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
-      #     limit(10).
-      #     cursor(task_cursor)
+      #     limit(page_size).
+      #     start(page_cursor)
       #
-      #   paginated_tasks = dataset.run query
+      #   tasks = datastore.run query
       #
       def start cursor
         @grpc.start_cursor = GRPCUtils.decode_bytes cursor
@@ -185,9 +265,21 @@ module Gcloud
       # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
-      #     select("completed", "due")
+      #     select("priority", "percent_complete")
       #
-      #   partial_tasks = dataset.run query
+      #   priorities = []
+      #   percent_completes = []
+      #   datastore.run(query).each do |task|
+      #     priorities << task["priority"]
+      #     percent_completes << task["percent_complete"]
+      #   end
+      #
+      # @example A keys-only query using the special property `__key__`:
+      #   query = Gcloud::Datastore::Query.new
+      #   query.kind("Task").
+      #     select("__key__")
+      #
+      #   keys = datastore.run(query).map &:key
       #
       def select *names
         names.each do |name|
@@ -207,9 +299,11 @@ module Gcloud
       # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
-      #     group_by("completed")
+      #     group_by("type", "priority").
+      #     order("type").
+      #     order("priority")
       #
-      #   grouped_tasks = dataset.run query
+      #   tasks = datastore.run query
       #
       def group_by *names
         names.each do |name|

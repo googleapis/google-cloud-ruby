@@ -50,21 +50,23 @@ See the {Gcloud::Bigquery gcloud-ruby Datastore API documentation} to learn how 
 require "gcloud"
 
 gcloud = Gcloud.new
-dataset = gcloud.datastore
+datastore = gcloud.datastore
 
 # Create a new task to demo datastore
-demo_task = dataset.entity "Task", "datastore-demo" do |t|
-  t["description"] = "Demonstrate Datastore functionality"
-  t["completed"] = false
+task = datastore.entity "Task", "sampleTask" do |task|
+  task["type"] = "Personal"
+  task["done"] = false
+  task["priority"] = 4
+  task["description"] = "Learn Cloud Datastore"
 end
 
 # Save the new task
-dataset.save demo_task
+datastore.save task
 
 # Run a query for all completed tasks
-query = dataset.query("Task").
-  where("completed", "=", true)
-completed_tasks = dataset.run query
+query = datastore.query("Task").
+  where("done", "=", false)
+tasks = datastore.run query
 ```
 
 # DNS
