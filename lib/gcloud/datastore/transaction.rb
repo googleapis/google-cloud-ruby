@@ -39,8 +39,7 @@ module Gcloud
     # @example Retry logic using the transactional update example above:
     #   (1..5).each do |i|
     #     begin
-    #       transfer_funds from_key, to_key, 10
-    #       break
+    #       return transfer_funds from_key, to_key, amount
     #     rescue Gcloud::Error => e
     #       raise e if i == 5
     #     end
@@ -72,14 +71,15 @@ module Gcloud
       # @example Transactional get or create:
       #   task_key = datastore.key "Task", "sampleTask"
       #
+      #   task = nil
       #   datastore.transaction do |tx|
       #     task = tx.find task_key
       #     if task.nil?
-      #       task = datastore.entity task_key do |task|
-      #         task["type"] = "Personal"
-      #         task["done"] = false
-      #         task["priority"] = 4
-      #         task["description"] = "Learn Cloud Datastore"
+      #       task = datastore.entity task_key do |t|
+      #         t["type"] = "Personal"
+      #         t["done"] = false
+      #         t["priority"] = 4
+      #         t["description"] = "Learn Cloud Datastore"
       #       end
       #       tx.save task
       #     end

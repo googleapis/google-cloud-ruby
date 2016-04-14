@@ -33,13 +33,13 @@ module Gcloud
     #   Properties, and Keys
     #
     # @example Create a new entity using a block:
-    #   task = datastore.entity "Task", "sampleTask" do |task|
-    #     task["type"] = "Personal"
-    #     task["created"] = Time.now
-    #     task["done"] = false
-    #     task["priority"] = 4
-    #     task["percent_complete"] = 10.0
-    #     task["description"] = "Learn Cloud Datastore"
+    #   task = datastore.entity "Task", "sampleTask" do |t|
+    #     t["type"] = "Personal"
+    #     t["created"] = Time.now
+    #     t["done"] = false
+    #     t["priority"] = 4
+    #     t["percent_complete"] = 10.0
+    #     t["description"] = "Learn Cloud Datastore"
     #   end
     #
     # @example Create a new entity belonging to an existing parent entity:

@@ -82,11 +82,11 @@ gcloud = Gcloud.new "my-todo-project-id",
 datastore = gcloud.datastore
 
 # Create a new task to demo datastore
-task = datastore.entity "Task", "sampleTask" do |task|
-  task["type"] = "Personal"
-  task["done"] = false
-  task["priority"] = 4
-  task["description"] = "Learn Cloud Datastore"
+task = datastore.entity "Task", "sampleTask" do |t|
+  t["type"] = "Personal"
+  t["done"] = false
+  t["priority"] = 4
+  t["description"] = "Learn Cloud Datastore"
 end
 
 # Save the new task

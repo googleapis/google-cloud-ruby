@@ -31,7 +31,7 @@ module Gcloud
     # @example
     #   gql_query = Gcloud::Datastore::GqlQuery.new
     #   gql_query.query_string = "SELECT * FROM Task ORDER BY created ASC"
-    #   tasks = dataset.run gql_query
+    #   tasks = datastore.run gql_query
     #
     class GqlQuery
       ##
@@ -71,7 +71,7 @@ module Gcloud
       #
       # @example
       #   gql_query = Gcloud::Datastore::GqlQuery.new
-      #   gql_query.query_string = "SELECT * FROM Task" \
+      #   gql_query.query_string = "SELECT * FROM Task " \
       #                            "WHERE done = @done AND priority = @priority"
       #   gql_query.named_bindings = {done: false, priority: 4}
       #
@@ -100,7 +100,7 @@ module Gcloud
       #
       # @example
       #   gql_query = Gcloud::Datastore::GqlQuery.new
-      #   gql_query.query_string = "SELECT * FROM Task" \
+      #   gql_query.query_string = "SELECT * FROM Task " \
       #                            "WHERE completed = false AND priority = 4"
       #   gql_query.allow_literals = true
       #
@@ -136,7 +136,7 @@ module Gcloud
       #
       # @example
       #   gql_query = Gcloud::Datastore::GqlQuery.new
-      #   gql_query.query_string = "SELECT * FROM Task" \
+      #   gql_query.query_string = "SELECT * FROM Task " \
       #                            "WHERE done = @done AND priority = @priority"
       #   gql_query.named_bindings = {done: false, priority: 4}
       #

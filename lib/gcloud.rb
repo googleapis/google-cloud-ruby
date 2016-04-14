@@ -87,11 +87,11 @@ module Gcloud
   #   gcloud  = Gcloud.new
   #   datastore = gcloud.datastore
   #
-  #   task = datastore.entity "Task" do |task|
-  #     task["type"] = "Personal"
-  #     task["done"] = false
-  #     task["priority"] = 4
-  #     task["description"] = "Learn Cloud Datastore"
+  #   task = datastore.entity "Task" do |t|
+  #     t["type"] = "Personal"
+  #     t["done"] = false
+  #     t["priority"] = 4
+  #     t["description"] = "Learn Cloud Datastore"
   #   end
   #
   #   datastore.save task

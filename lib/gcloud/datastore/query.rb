@@ -91,8 +91,10 @@ module Gcloud
       # @example Add an inequality filter on a **single** property only:
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
-      #     where("created", ">=", Date.new(1990,1,1)).
-      #     where("created", "<", Date.new(2000,1,1))
+      #     where("created", ">=", Time.utc(1990, 1, 1)).
+      #     where("created", "<", Time.utc(2000, 1, 1))
+      #
+      #   tasks = datastore.run query
       #
       # @example Add a composite filter on an array property:
       #   query = Gcloud::Datastore::Query.new
@@ -118,6 +120,7 @@ module Gcloud
       #   tasks = datastore.run query
       #
       # @example Add a key filter to a *kindless* query:
+      #   last_seen_key = datastore.key "Task", "a"
       #   query = Gcloud::Datastore::Query.new
       #   query.where("__key__", ">", last_seen_key)
       #
@@ -279,7 +282,7 @@ module Gcloud
       #   query.kind("Task").
       #     select("__key__")
       #
-      #   keys = datastore.run(query).map &:key
+      #   keys = datastore.run(query).map(&:key)
       #
       def select *names
         names.each do |name|
@@ -299,7 +302,7 @@ module Gcloud
       # @example
       #   query = Gcloud::Datastore::Query.new
       #   query.kind("Task").
-      #     group_by("type", "priority").
+      #     distinct_on("type", "priority").
       #     order("type").
       #     order("priority")
       #

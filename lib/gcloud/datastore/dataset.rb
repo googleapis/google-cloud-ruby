@@ -123,32 +123,32 @@ module Gcloud
       # @return [Array<Gcloud::Datastore::Entity>]
       #
       # @example Insert a new entity:
-      #   task = datastore.entity "Task" do |task|
-      #     task["type"] = "Personal"
-      #     task["done"] = false
-      #     task["priority"] = 4
-      #     task["description"] = "Learn Cloud Datastore"
+      #   task = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
       #   end
       #   task.key.id #=> nil
       #   datastore.save task
       #   task.key.id #=> 123456
       #
       # @example Insert multiple new entities in a batch:
-      #   task1 = datastore.entity "Task" do |task|
-      #     task["type"] = "Personal"
-      #     task["done"] = false
-      #     task["priority"] = 4
-      #     task["description"] = "Learn Cloud Datastore"
+      #   task1 = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
       #   end
       #
-      #   task2 = datastore.entity "Task" do |task|
-      #     task["type"] = "Personal"
-      #     task["done"] = false
-      #     task["priority"] = 5
-      #     task["description"] = "Integrate Cloud Datastore"
+      #   task2 = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 5
+      #     t["description"] = "Integrate Cloud Datastore"
       #   end
       #
-      #   task_key1, task_key2 = datastore.save(task1, task2).map &:key
+      #   task_key1, task_key2 = datastore.save(task1, task2).map(&:key)
       #
       # @example Update an existing entity:
       #   task = datastore.find "Task", "sampleTask"
@@ -194,7 +194,8 @@ module Gcloud
       alias_method :get, :find
 
       ##
-      # Retrieve the entities for the provided keys.
+      # Retrieve the entities for the provided keys. The order of results is
+      # undefined and has no relation to the order of `keys` arguments.
       #
       # @param [Key] keys One or more Key objects to find records for.
       #
@@ -280,14 +281,14 @@ module Gcloud
       #   tasks = datastore.run query, namespace: "ns~todo-project"
       #
       # @example Run the query with a GQL string.
-      #   gql = dataset.gql "SELECT * FROM Task WHERE done = @done",
-      #                     done: false
-      #   tasks = dataset.run gql
+      #   gql_query = datastore.gql "SELECT * FROM Task WHERE done = @done",
+      #                             done: false
+      #   tasks = datastore.run gql_query
       #
-      # @example Run the gql query within a namespace with `namespace` option:
-      #   gql = dataset.gql "SELECT * FROM Task WHERE done = @done",
-      #                     done: false
-      #   tasks = dataset.run gql, namespace: "ns~todo-project"
+      # @example Run the GQL query within a namespace with `namespace` option:
+      #   gql_query = datastore.gql "SELECT * FROM Task WHERE done = @done",
+      #                             done: false
+      #   tasks = datastore.run gql_query, namespace: "ns~todo-project"
       #
       def run query, namespace: nil
         ensure_service!
@@ -314,11 +315,11 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
       #
-      #   task = datastore.entity "Task", "sampleTask" do |task|
-      #     task["type"] = "Personal"
-      #     task["done"] = false
-      #     task["priority"] = 4
-      #     task["description"] = "Learn Cloud Datastore"
+      #   task = datastore.entity "Task", "sampleTask" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
       #   end
       #
       #   datastore.transaction do |tx|
@@ -333,11 +334,11 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   datastore = gcloud.datastore
       #
-      #   task = datastore.entity "Task", "sampleTask" do |task|
-      #     task["type"] = "Personal"
-      #     task["done"] = false
-      #     task["priority"] = 4
-      #     task["description"] = "Learn Cloud Datastore"
+      #   task = datastore.entity "Task", "sampleTask" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
       #   end
       #
       #   tx = datastore.transaction
@@ -401,15 +402,15 @@ module Gcloud
       # @return [Gcloud::Datastore::GqlQuery]
       #
       # @example
-      #   gql = dataset.gql "SELECT * FROM Task WHERE done = @done",
-      #                     done: false
-      #   tasks = dataset.run gql
+      #   gql_query = datastore.gql "SELECT * FROM Task WHERE done = @done",
+      #                             done: false
+      #   tasks = datastore.run gql_query
       #
       # @example The previous example is equivalent to:
-      #   gql = Gcloud::Datastore::GqlQuery.new
-      #   gql.query_string = "SELECT * FROM Task WHERE done = @done"
-      #   gql.named_bindings = {done: false}
-      #   tasks = dataset.run gql
+      #   gql_query = Gcloud::Datastore::GqlQuery.new
+      #   gql_query.query_string = "SELECT * FROM Task WHERE done = @done"
+      #   gql_query.named_bindings = {done: false}
+      #   tasks = datastore.run gql_query
       #
       def gql query, bindings = {}
         gql = GqlQuery.new
@@ -470,11 +471,11 @@ module Gcloud
       #   task.key = task_key
       #
       # @example The newly created entity can also be configured using a block:
-      #   task = datastore.entity "Task", "sampleTask" do |task|
-      #     task["type"] = "Personal"
-      #     task["done"] = false
-      #     task["priority"] = 4
-      #     task["description"] = "Learn Cloud Datastore"
+      #   task = datastore.entity "Task", "sampleTask" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
       #   end
       #
       # @example The previous example is equivalent to:
