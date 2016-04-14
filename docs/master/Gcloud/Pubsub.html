@@ -441,6 +441,35 @@ from a topic in another project:</p>
 </code></pre>
 </div>
 
+<h2 id="using-the-gcloud-sdk-emulator">Using the Gcloud SDK Emulator</h2>
+
+<p>To develop and test your application locally, you can use the <a href="https://cloud.google.com/pubsub/emulator">Google Cloud
+Pub/Sub Emulator</a>, which provides
+<a href="https://cloud.google.com/sdk/gcloud/reference/beta/emulators/">local
+emulation</a> of
+the production Google Cloud Pub/Sub environment. You can start the Google
+Cloud Pub/Sub emulator using the <code class="highlighter-rouge">gcloud</code> command-line tool.</p>
+
+<p>To configure your ruby code to use the emulator, set the
+<code class="highlighter-rouge">PUBSUB_EMULATOR_HOST</code> environment variable to the host and port where the
+emulator is running. The value can be set as an environment variable in the
+shell running the ruby code, or can be set directly in the ruby code as
+shown below.</p>
+
+<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+
+<span class="c1"># Make Pub/Sub use the emulator</span>
+<span class="no">ENV</span><span class="p">[</span><span class="s2">"PUBSUB_EMULATOR_HOST"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"localhost:8918"</span>
+
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span> <span class="s2">"emulator-project-id"</span>
+<span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
+
+<span class="c1"># Get a topic in the current project</span>
+<span class="n">my_topic</span> <span class="o">=</span> <span class="n">pubsub</span><span class="p">.</span><span class="nf">new_topic</span> <span class="s2">"my-topic"</span>
+<span class="n">my_topic</span><span class="p">.</span><span class="nf">name</span> <span class="c1">#=&gt; "projects/emulator-project-id/topics/my-topic"</span>
+</code></pre>
+</div>
+
         </div>
 
         <div class="section-links">
@@ -457,7 +486,7 @@ from a topic in another project:</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Apr 02, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal current' href=''>Pub/Sub</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Topic.html'>Topic</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Subscription.html'>Subscription</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Apr 14, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal current' href=''>Pub/Sub</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Topic.html'>Topic</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Subscription.html'>Subscription</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
