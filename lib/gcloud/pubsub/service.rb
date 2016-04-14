@@ -36,6 +36,7 @@ module Gcloud
       end
 
       def creds
+        return credentials if insecure?
         GRPC::Core::ChannelCredentials.new.compose \
           GRPC::Core::CallCredentials.new credentials.client.updater_proc
       end
@@ -57,6 +58,10 @@ module Gcloud
         @iam ||= Google::Iam::V1::IAMPolicy::Stub.new host, creds
       end
       attr_accessor :mocked_iam
+
+      def insecure?
+        credentials == :this_channel_is_insecure
+      end
 
       ##
       # Gets the configuration of a topic.

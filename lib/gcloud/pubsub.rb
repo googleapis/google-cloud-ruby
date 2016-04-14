@@ -49,6 +49,11 @@ module Gcloud
   #
   def self.pubsub project = nil, keyfile = nil, scope: nil
     project ||= Gcloud::Pubsub::Project.default_project
+    if ENV["PUBSUB_EMULATOR_HOST"]
+      ps = Gcloud::Pubsub::Project.new project, :this_channel_is_insecure
+      ps.service.host = ENV["PUBSUB_EMULATOR_HOST"]
+      return ps
+    end
     if keyfile.nil?
       credentials = Gcloud::Pubsub::Credentials.default scope: scope
     else
@@ -422,6 +427,35 @@ module Gcloud
   # sub = topic.subscribe "my-sub"
   # sub.name #=> "projects/my-project-id/subscriptions/my-sub"
   # sub.topic.name #=> "projects/other-project-id/topics/other-topic"
+  # ```
+  #
+  # ## Using the Gcloud SDK Emulator
+  #
+  # To develop and test your application locally, you can use the [Google Cloud
+  # Pub/Sub Emulator](https://cloud.google.com/pubsub/emulator), which provides
+  # [local
+  # emulation](https://cloud.google.com/sdk/gcloud/reference/beta/emulators/) of
+  # the production Google Cloud Pub/Sub environment. You can start the Google
+  # Cloud Pub/Sub emulator using the `gcloud` command-line tool.
+  #
+  # To configure your ruby code to use the emulator, set the
+  # `PUBSUB_EMULATOR_HOST` environment variable to the host and port where the
+  # emulator is running. The value can be set as an environment variable in the
+  # shell running the ruby code, or can be set directly in the ruby code as
+  # shown below.
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # # Make Pub/Sub use the emulator
+  # ENV["PUBSUB_EMULATOR_HOST"] = "localhost:8918"
+  #
+  # gcloud = Gcloud.new "emulator-project-id"
+  # pubsub = gcloud.pubsub
+  #
+  # # Get a topic in the current project
+  # my_topic = pubsub.new_topic "my-topic"
+  # my_topic.name #=> "projects/emulator-project-id/topics/my-topic"
   # ```
   #
   module Pubsub
