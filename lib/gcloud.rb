@@ -374,4 +374,25 @@ module Gcloud
     require "gcloud/logging"
     Gcloud.logging @project, @keyfile, scope: scope
   end
+
+  ##
+  # Creates a new object for connecting to the Translate service.
+  # Each call creates a new connection.
+  #
+  # For more information on connecting to Google Cloud see the [Authentication
+  # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
+  #
+  # @return [Gcloud::Translate::Api]
+  #
+  # @example
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   translate = gcloud.translate
+  #   # ...
+  #
+  def translate key = nil
+    require "gcloud/translate"
+    Gcloud.translate key
+  end
 end

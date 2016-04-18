@@ -14,7 +14,7 @@
 
 require "logging_helper"
 
-# This test is a ruby version of gcloud-node"s logging test.
+# This test is a ruby version of gcloud-node's logging test.
 
 describe Gcloud::Logging, :logging do
   describe "Sinks" do
