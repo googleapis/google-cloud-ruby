@@ -36,15 +36,12 @@ module Gcloud
         @client.key = key # set key after discovery, helps with tests
       end
 
-      def translate *text, to: nil, from: nil, format: nil, cid: nil,
-                    quota_user: nil, user_ip: nil
+      def translate *text, to: nil, from: nil, format: nil, cid: nil
         params = { q:         text,
                    target:    to,
                    source:    from,
                    format:    format,
-                   cid:       cid,
-                   quotaUser: quota_user,
-                   userIp:    user_ip
+                   cid:       cid
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(
@@ -53,23 +50,15 @@ module Gcloud
         )
       end
 
-      def detect *text, quota_user: nil, user_ip: nil
-        params = { q:         text,
-                   quotaUser: quota_user,
-                   userIp:    user_ip
-                 }.delete_if { |_, v| v.nil? }
-
+      def detect *text
         @client.execute(
           api_method: @translate.detections.list,
-          parameters: params
+          parameters: { q: text }
         )
       end
 
-      def languages language = nil, quota_user: nil, user_ip: nil
-        params = { target:    language,
-                   quotaUser: quota_user,
-                   userIp:    user_ip
-                 }.delete_if { |_, v| v.nil? }
+      def languages language = nil
+        params = { target: language }.delete_if { |_, v| v.nil? }
 
         @client.execute(
           api_method: @translate.languages.list,

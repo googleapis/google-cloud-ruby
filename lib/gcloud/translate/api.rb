@@ -43,36 +43,32 @@ module Gcloud
 
       ##
       # TODO
-      def translate *text, to: nil, from: nil, format: nil, cid: nil,
-                    quota_user: nil, user_ip: nil
+      def translate *text, to: nil, from: nil, format: nil, cid: nil
         return nil if text.empty?
         fail ArgumentError, "to is required" if to.nil?
         to = to.to_s
         from = from.to_s if from
         format = format.to_s if format
         resp = connection.translate(*text, to: to, from: from,
-                                           format: format, cid: cid,
-                                           quota_user: quota_user,
-                                           user_ip: user_ip)
+                                           format: format, cid: cid)
         fail ApiError.from_response(resp) unless resp.success?
         Translation.from_response resp, text, to, from
       end
 
       ##
       # TODO
-      def detect *text, quota_user: nil, user_ip: nil
+      def detect *text
         return nil if text.empty?
-        resp = connection.detect(*text, quota_user: quota_user,
-                                        user_ip: user_ip)
+        resp = connection.detect(*text)
         fail ApiError.from_response(resp) unless resp.success?
         Detection.from_response resp, text
       end
 
       ##
       # TODO
-      def languages language = nil, quota_user: nil, user_ip: nil
-        resp = connection.languages language, quota_user: quota_user,
-                                              user_ip: user_ip
+      def languages language = nil
+        language = language.to_s if language
+        resp = connection.languages language
         fail ApiError.from_response(resp) unless resp.success?
         Array(resp.data["languages"]).map { |gapi| Language.from_gapi gapi }
       end

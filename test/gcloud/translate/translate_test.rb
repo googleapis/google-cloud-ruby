@@ -31,8 +31,6 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
       env.params["source"].must_be :nil?
       env.params["format"].must_be :nil?
       env.params["cid"].must_be :nil?
-      env.params["quotaUser"].must_be :nil?
-      env.params["userIp"].must_be :nil?
       [200, { "Content-Type" => "application/json" },
        translate_json("Hola", "en")]
     end
@@ -56,8 +54,6 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
       env.params["source"].must_equal "en"
       env.params["format"].must_be :nil?
       env.params["cid"].must_be :nil?
-      env.params["quotaUser"].must_be :nil?
-      env.params["userIp"].must_be :nil?
       [200, { "Content-Type" => "application/json" },
        translate_json("Hola", nil)]
     end
@@ -81,8 +77,6 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
       env.params["source"].must_be :nil?
       env.params["format"].must_equal "html"
       env.params["cid"].must_be :nil?
-      env.params["quotaUser"].must_be :nil?
-      env.params["userIp"].must_be :nil?
       [200, { "Content-Type" => "application/json" },
        translate_json("<h1>Hola</h1>", "en")]
     end
@@ -106,63 +100,11 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
       env.params["source"].must_be :nil?
       env.params["format"].must_be :nil?
       env.params["cid"].must_equal "user-1234567899"
-      env.params["quotaUser"].must_be :nil?
-      env.params["userIp"].must_be :nil?
       [200, { "Content-Type" => "application/json" },
        translate_json("Hola", "en")]
     end
 
     translation = translate.translate "Hello", to: "es", cid: "user-1234567899"
-    translation.text.must_equal "Hola"
-    translation.origin.must_equal "Hello"
-    translation.to.must_equal "es"
-    translation.language.must_equal "es"
-    translation.target.must_equal "es"
-    translation.from.must_equal "en"
-    translation.source.must_equal "en"
-    translation.must_be :detected?
-  end
-
-  it "translates a single input with quota_user" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   "Hello"
-      env.params["target"].must_equal "es"
-      env.params["source"].must_be :nil?
-      env.params["format"].must_be :nil?
-      env.params["cid"].must_be :nil?
-      env.params["quotaUser"].must_equal "quota_user-1234567899"
-      env.params["userIp"].must_be :nil?
-      [200, { "Content-Type" => "application/json" },
-       translate_json("Hola", "en")]
-    end
-
-    translation = translate.translate "Hello", to: "es", quota_user: "quota_user-1234567899"
-    translation.text.must_equal "Hola"
-    translation.origin.must_equal "Hello"
-    translation.to.must_equal "es"
-    translation.language.must_equal "es"
-    translation.target.must_equal "es"
-    translation.from.must_equal "en"
-    translation.source.must_equal "en"
-    translation.must_be :detected?
-  end
-
-  it "translates a single input with user_ip" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   "Hello"
-      env.params["target"].must_equal "es"
-      env.params["source"].must_be :nil?
-      env.params["format"].must_be :nil?
-      env.params["cid"].must_be :nil?
-      env.params["quotaUser"].must_be :nil?
-      env.params["userIp"].must_equal "127.0.0.1"
-      [200, { "Content-Type" => "application/json" },
-       translate_json("Hola", "en")]
-    end
-
-    translation = translate.translate "Hello", to: "es", user_ip: "127.0.0.1"
     translation.text.must_equal "Hola"
     translation.origin.must_equal "Hello"
     translation.to.must_equal "es"
@@ -181,8 +123,6 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
       env.params["source"].must_be :nil?
       env.params["format"].must_be :nil?
       env.params["cid"].must_be :nil?
-      env.params["quotaUser"].must_be :nil?
-      env.params["userIp"].must_be :nil?
       [200, { "Content-Type" => "application/json" },
        translate_json("Hola", "en", "Como estas hoy?", "en")]
     end
@@ -217,8 +157,6 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
       env.params["source"].must_equal "en"
       env.params["format"].must_be :nil?
       env.params["cid"].must_be :nil?
-      env.params["quotaUser"].must_be :nil?
-      env.params["userIp"].must_be :nil?
       [200, { "Content-Type" => "application/json" },
        translate_json("Hola", nil, "Como estas hoy?", nil)]
     end
@@ -253,8 +191,6 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
       env.params["source"].must_be :nil?
       env.params["format"].must_equal "html"
       env.params["cid"].must_be :nil?
-      env.params["quotaUser"].must_be :nil?
-      env.params["userIp"].must_be :nil?
       [200, { "Content-Type" => "application/json" },
        translate_json("<h1>Hola</h1>", "en", "Como estas <em>hoy</em>?", "en")]
     end
@@ -289,85 +225,11 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
       env.params["source"].must_be :nil?
       env.params["format"].must_be :nil?
       env.params["cid"].must_equal "user-1234567899"
-      env.params["quotaUser"].must_be :nil?
-      env.params["userIp"].must_be :nil?
       [200, { "Content-Type" => "application/json" },
        translate_json("Hola", "en", "Como estas hoy?", "en")]
     end
 
     translations = translate.translate "Hello", "How are you today?", to: "es", cid: "user-1234567899"
-    translations.count.must_equal 2
-
-    translations.first.text.must_equal "Hola"
-    translations.first.origin.must_equal "Hello"
-    translations.first.to.must_equal "es"
-    translations.first.language.must_equal "es"
-    translations.first.target.must_equal "es"
-    translations.first.from.must_equal "en"
-    translations.first.source.must_equal "en"
-    translations.first.must_be :detected?
-
-    translations.last.text.must_equal "Como estas hoy?"
-    translations.last.origin.must_equal "How are you today?"
-    translations.last.to.must_equal "es"
-    translations.last.language.must_equal "es"
-    translations.last.target.must_equal "es"
-    translations.last.from.must_equal "en"
-    translations.last.source.must_equal "en"
-    translations.last.must_be :detected?
-  end
-
-  it "translates multiple inputs with quota_user" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   ["Hello", "How are you today?"]
-      env.params["target"].must_equal "es"
-      env.params["source"].must_be :nil?
-      env.params["format"].must_be :nil?
-      env.params["cid"].must_be :nil?
-      env.params["quotaUser"].must_equal "quota_user-1234567899"
-      env.params["userIp"].must_be :nil?
-      [200, { "Content-Type" => "application/json" },
-       translate_json("Hola", "en", "Como estas hoy?", "en")]
-    end
-
-    translations = translate.translate "Hello", "How are you today?", to: "es", quota_user: "quota_user-1234567899"
-    translations.count.must_equal 2
-
-    translations.first.text.must_equal "Hola"
-    translations.first.origin.must_equal "Hello"
-    translations.first.to.must_equal "es"
-    translations.first.language.must_equal "es"
-    translations.first.target.must_equal "es"
-    translations.first.from.must_equal "en"
-    translations.first.source.must_equal "en"
-    translations.first.must_be :detected?
-
-    translations.last.text.must_equal "Como estas hoy?"
-    translations.last.origin.must_equal "How are you today?"
-    translations.last.to.must_equal "es"
-    translations.last.language.must_equal "es"
-    translations.last.target.must_equal "es"
-    translations.last.from.must_equal "en"
-    translations.last.source.must_equal "en"
-    translations.last.must_be :detected?
-  end
-
-  it "translates multiple inputs with user_ip" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   ["Hello", "How are you today?"]
-      env.params["target"].must_equal "es"
-      env.params["source"].must_be :nil?
-      env.params["format"].must_be :nil?
-      env.params["cid"].must_be :nil?
-      env.params["quotaUser"].must_be :nil?
-      env.params["userIp"].must_equal "127.0.0.1"
-      [200, { "Content-Type" => "application/json" },
-       translate_json("Hola", "en", "Como estas hoy?", "en")]
-    end
-
-    translations = translate.translate "Hello", "How are you today?", to: "es", user_ip: "127.0.0.1"
     translations.count.must_equal 2
 
     translations.first.text.must_equal "Hola"
