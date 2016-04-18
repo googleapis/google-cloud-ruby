@@ -18,24 +18,48 @@ module Gcloud
     ##
     # TODO
     class Detection
+      ##
+      # The text the language detection was performed on.
+      #
+      # @return [String]
       attr_reader :text
+
+      ##
+      # A list of of languages which were detected for the given text. The most
+      # likely language detection is listed first.
+      #
+      # @return [Array<Detection::Result>]
       attr_reader :results
 
+      ##
+      # @private Create a new object.
       def initialize text, results
         @text = text
         @results = results
       end
 
+      ##
+      # The confidence of the most likely detection result.
+      #
+      # @return [Float]
       def confidence
         return nil if results.empty?
         results.first.confidence
       end
 
+      ##
+      # The most likely language detected. This is an iso639-1 language code.
+      #
+      # @return [String]
       def language
         return nil if results.empty?
         results.first.language
       end
 
+      ##
+      # Whether the most likely language detection result was deemed reliable.
+      #
+      # @return [Booean]
       def reliable?
         return nil if results.empty?
         results.first.reliable?
@@ -54,15 +78,30 @@ module Gcloud
       end
 
       class Result
+        ##
+        # The confidence of the detection result.
+        #
+        # @return [Float]
         attr_reader :confidence
+
+        ##
+        # The language detected. This is an iso639-1 language code.
+        #
+        # @return [String]
         attr_reader :language
 
+        ##
+        # @private Create a new object.
         def initialize confidence, language, reliable
           @confidence = confidence
           @language = language
           @reliable = reliable
         end
 
+        ##
+        # Whether the language detection result was deemed reliable.
+        #
+        # @return [Booean]
         def reliable?
           @reliable
         end

@@ -379,8 +379,11 @@ module Gcloud
   # Creates a new object for connecting to the Translate service.
   # Each call creates a new connection.
   #
-  # For more information on connecting to Google Cloud see the [Authentication
-  # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
+  # TODO: Add info for creatign an API Key here...
+  # TODO: Explain that the API Key is likely temproary and can change in a
+  # future release.
+  #
+  # @param [String] key API Key is blah blah blah...
   #
   # @return [Gcloud::Translate::Api]
   #
@@ -388,8 +391,21 @@ module Gcloud
   #   require "gcloud"
   #
   #   gcloud = Gcloud.new
+  #   translate = gcloud.translate "api-key-abc123XYZ789"
+  #
+  #   translation = translate.translate "Hello world!", to: "la"
+  #   puts translation #=> Salve mundi!
+  #
+  # @example Using API Key from the environment variable.
+  #   require "gcloud"
+  #
+  #   ENV["TRANSLATE_KEY"] = "api-key-abc123XYZ789"
+  #
+  #   gcloud = Gcloud.new
   #   translate = gcloud.translate
-  #   # ...
+  #
+  #   translation = translate.translate "Hello world!", to: "la"
+  #   puts translation #=> Salve mundi!
   #
   def translate key = nil
     require "gcloud/translate"

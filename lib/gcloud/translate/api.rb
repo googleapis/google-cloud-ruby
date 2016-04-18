@@ -42,7 +42,65 @@ module Gcloud
       end
 
       ##
-      # TODO
+      # Returns text translations from one language to another.
+      #
+      # @param [String] text The text to translate.
+      # @param [String] to The target language into which the text should be
+      #   translated. This is an iso639-1 language code.
+      # @param [String] from The source language of the text. This is an
+      #   iso639-1 language code. This is optional.
+      # @param [String] text The format of the text. Possible values include
+      #   `:text` and `:html`. This is optional.
+      # @param [String] cid The customization id for translate. This is
+      #   optional.
+      #
+      # @return [Translation, Array<Translation>] A single {Translation} object
+      #   if just one text was given, or an array of {Translation} objects if
+      #   multiple texts were given.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   translate = gcloud.translate
+      #
+      #   translation = translate.translate "Hello world!", to: "la"
+      #   puts translation #=> Salve mundi!
+      #
+      # @example Setting the `from` language.
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   translate = gcloud.translate
+      #
+      #   translation = translate.translate "Hello world!"
+      #                                     to: :la, from: :en,
+      #   puts translation #=> Salve mundi!
+      #
+      # @example Retrieving multiple translations.
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   translate = gcloud.translate
+      #
+      #   translations = translate.translate "Hello my friend.",
+      #                                      "See you soon.",
+      #                                      to: "la", from: "en"
+      #   puts translations.count #=> 2
+      #   puts translations #=> Salve mi amice.
+      #                     #=> Vide te mox.
+      #
+      # @example Retrieving translation containing HTML tags.
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   translate = gcloud.translate
+      #
+      #   translation = translate.translate "<em>Hello</em> world!",
+      #                                     to: :la, from: :en,
+      #                                     format: :html
+      #   puts translation #=> <em>Salve</em> mundi!
+      #
       def translate *text, to: nil, from: nil, format: nil, cid: nil
         return nil if text.empty?
         fail ArgumentError, "to is required" if to.nil?
@@ -56,7 +114,38 @@ module Gcloud
       end
 
       ##
-      # TODO
+      # Detect the language of text.
+      #
+      # @param [String] text The text to detect.
+      #
+      # @return [Detection, Array<Detection>] A single {Detection} object if
+      #   just one text was given, or an array of {Detection} objects if
+      #   multiple texts were given.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   translate = gcloud.translate
+      #
+      #   detection = translate.detect "Hello world!"
+      #   puts detection.language #=> en
+      #   puts detection.confidence #=> 0.7100697
+      #
+      # @example Detecting multiple texts.
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   translate = gcloud.translate
+      #
+      #   detections = translate.detect "Hello world!",
+      #                                 "Bonjour le monde!"
+      #   puts detections.count #=> 2
+      #   puts detection.first.language #=> en
+      #   puts detection.first.confidence #=> 0.7100697
+      #   puts detection.last.language #=> fr
+      #   puts detection.last.confidence #=> 0.40440267
+      #
       def detect *text
         return nil if text.empty?
         resp = connection.detect(*text)
@@ -65,7 +154,40 @@ module Gcloud
       end
 
       ##
-      # TODO
+      # List the languages supported by the API. These are the languages that
+      # text can be translated to and from.
+      #
+      # @param [String] language The language and collation in which the names
+      #   of the languages are returned. If this is `nil` then no names are
+      #   returned.
+      #
+      # @return [Array<Language>] An array of {Language} objects supported by
+      #   the API.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   translate = gcloud.translate
+      #
+      #   languages = translate.languages
+      #   puts languages.count #=> 104
+      #
+      #   english = languages.detect { |l| l.code == "en" }
+      #   puts english.name #=> nil
+      #
+      # @example Get all languages with their names in French.Anglais
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   translate = gcloud.translate
+      #
+      #   languages = translate.languages "fr"
+      #   puts languages.count #=> 104
+      #
+      #   english = languages.detect { |l| l.code == "en" }
+      #   puts english.name #=> Anglais
+      #
       def languages language = nil
         language = language.to_s if language
         resp = connection.languages language

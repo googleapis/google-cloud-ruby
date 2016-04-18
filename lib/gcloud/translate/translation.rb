@@ -18,14 +18,35 @@ module Gcloud
     ##
     # TODO
     class Translation
+      ##
+      # The translated text.
+      #
+      # @return [String]
       attr_reader :text
+      alias_method :to_s, :text
+      alias_method :to_str, :text
+
+      ##
+      # The that was translated.
+      #
+      # @return [String]
+      attr_reader :origin
+
+      ##
+      # The target language the text was translated to.
+      #
+      # @return [String]
       attr_reader :to
       alias_method :language, :to
       alias_method :target, :to
-      attr_reader :origin
+
+      ##
+      # The source language the text was translated from.
       attr_reader :from
       alias_method :source, :from
 
+      ##
+      # @private Create a new object.
       def initialize text, to, origin, from, detected
         @text = text
         @to = to
@@ -34,12 +55,14 @@ module Gcloud
         @detected = detected
       end
 
+      ##
+      # Determines if the source language the text was translated from was
+      # detected by the Google Cloud Translate API.
+      #
+      # @return [Boolean]
       def detected?
         @detected
       end
-
-      alias_method :to_s, :text
-      alias_method :to_str, :text
 
       ##
       # @private New Translation from a TranslationsListResponse object as

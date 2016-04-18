@@ -18,12 +18,14 @@ require "gcloud/translate/api"
 
 module Gcloud
   ##
-  # Creates a new `Api` instance connected to the Translate service.
+  # Creates a new object for connecting to the Translate service.
   # Each call creates a new connection.
   #
   # TODO: Add info for creatign an API Key here...
+  # TODO: Explain that the API Key is likely temproary and can change in a
+  # future release.
   #
-  # @param [String] key API Key
+  # @param [String] key API Key is blah blah blah...
   #
   # @return [Gcloud::Translate::Api]
   #
@@ -32,7 +34,8 @@ module Gcloud
   #
   #   translate = Gcloud.translate "api-key-abc123XYZ789"
   #
-  #   zone = translate.zone "example-com"
+  #   translation = translate.translate "Hello world!", to: "la"
+  #   puts translation #=> Salve mundi!
   #
   # @example Using API Key from the environment variable.
   #   require "gcloud"
@@ -41,7 +44,8 @@ module Gcloud
   #
   #   translate = Gcloud.translate
   #
-  #   zone = translate.zone "example-com"
+  #   translation = translate.translate "Hello world!", to: "la"
+  #   puts translation #=> Salve mundi!
   #
   def self.translate key = nil
     Gcloud::Translate::Api.new key
@@ -50,7 +54,20 @@ module Gcloud
   ##
   # # Google Cloud Translate
   #
-  # TODO
+  # TODO: Explain how to obtain an API Key, linking to exisitng documents on
+  # Google Cloud.
+  # TODO: Explain that the API Key is likely temproary and can change in a
+  # future release.
+  # TODO: Show how to retrieve a translation.
+  # TODO: Show how to retrieve a translation setting the `from`.
+  # TODO: Show how to retrieve multiple translations, including `to` and `from`.
+  # TODO: Show how to detect a language.
+  # TODO: Show how to detect a language for multiple input strings.
+  # TODO: Show how to get all the languages supported by the Google Cloud
+  # Translate service.
+  # TODO: Show how to get all the languages supported by the Google Cloud
+  # Translate service and specify the language the names should be shown in.
+  # (English vs. Spanish vs. Russian)
   #
   module Translate
   end

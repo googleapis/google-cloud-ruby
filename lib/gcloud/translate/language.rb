@@ -18,9 +18,20 @@ module Gcloud
     ##
     # TODO
     class Language
+      ##
+      # The language code. This is an iso639-1 language code.
+      #
+      # @return [String]
       attr_reader :code
+
+      ##
+      # The localized name of the language, if available.
+      #
+      # @return [String]
       attr_reader :name
 
+      ##
+      # @private Create a new object.
       def initialize code, name
         @code = code
         @name = name
