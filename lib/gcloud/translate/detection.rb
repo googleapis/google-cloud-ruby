@@ -57,15 +57,6 @@ module Gcloud
       end
 
       ##
-      # Whether the most likely language detection result was deemed reliable.
-      #
-      # @return [Booean]
-      def reliable?
-        return nil if results.empty?
-        results.first.reliable?
-      end
-
-      ##
       # @private New Detection from a DetectionsListResponse object as
       # defined by the Google API Client object.
       def self.from_response resp, text
@@ -92,25 +83,16 @@ module Gcloud
 
         ##
         # @private Create a new object.
-        def initialize confidence, language, reliable
+        def initialize confidence, language
           @confidence = confidence
           @language = language
-          @reliable = reliable
-        end
-
-        ##
-        # Whether the language detection result was deemed reliable.
-        #
-        # @return [Booean]
-        def reliable?
-          @reliable
         end
 
         ##
         # @private New Detection::Result from a DetectionsResource object as
         # defined by the Google API Client object.
         def self.from_gapi gapi
-          new gapi["confidence"], gapi["language"], gapi["isReliable"]
+          new gapi["confidence"], gapi["language"]
         end
       end
     end

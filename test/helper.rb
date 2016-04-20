@@ -991,7 +991,7 @@ class MockTranslate < Minitest::Spec
 
   def detect_json *languages
     detections = languages.map do |lang|
-      [{ confidence: 0.123, isReliable: false, language: lang }]
+      [{ confidence: 0.123, language: lang, isReliable: false }] # isReliable is deprecated
     end
     { detections: detections }.to_json
   end
