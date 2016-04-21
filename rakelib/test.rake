@@ -64,6 +64,12 @@ namespace :test do
     Dir.glob("test/gcloud/logging/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
+  desc "Runs vision tests."
+  task :vision do
+    $LOAD_PATH.unshift "lib", "test"
+    Dir.glob("test/gcloud/vision/**/*_test.rb").each { |file| require_relative "../#{file}"}
+  end
+
   desc "Runs tests with coverage."
   task :coverage, :project, :keyfile do |t, args|
     project = args[:project]
