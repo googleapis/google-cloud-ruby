@@ -37,11 +37,12 @@ module Gcloud
       end
 
       def translate *text, to: nil, from: nil, format: nil, cid: nil
-        params = { q:         text,
-                   target:    to,
-                   source:    from,
-                   format:    format,
-                   cid:       cid
+        params = { q:           text,
+                   target:      to,
+                   source:      from,
+                   format:      format,
+                   cid:         cid,
+                   prettyprint: false
                  }.delete_if { |_, v| v.nil? }
 
         @client.execute(
@@ -53,12 +54,13 @@ module Gcloud
       def detect *text
         @client.execute(
           api_method: @translate.detections.list,
-          parameters: { q: text }
+          parameters: { q: text, prettyprint: false }
         )
       end
 
       def languages language = nil
-        params = { target: language }.delete_if { |_, v| v.nil? }
+        params = { target:      language,
+                   prettyprint: false }.delete_if { |_, v| v.nil? }
 
         @client.execute(
           api_method: @translate.languages.list,
