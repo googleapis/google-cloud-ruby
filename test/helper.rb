@@ -26,6 +26,7 @@ require "gcloud/dns"
 require "gcloud/resource_manager"
 require "gcloud/logging"
 require "gcloud/translate"
+require "gcloud/vision"
 
 class MockStorage < Minitest::Spec
   let(:project) { storage.connection.project }
@@ -860,7 +861,6 @@ class MockLogging < Minitest::Spec
   end
 end
 
-
 class MockTranslate < Minitest::Spec
   let(:key) { "test-api-key" }
   let(:translate) { $gcloud_translate_global ||= Gcloud::Translate::Api.new(key) }
@@ -907,5 +907,34 @@ class MockTranslate < Minitest::Spec
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_translate
+  end
+end
+
+class MockVision < Minitest::Spec
+  let(:project) { vision.connection.project }
+  let(:credentials) { vision.connection.credentials }
+  let(:vision) { $gcloud_vision_global ||= Gcloud::Vision::Project.new("test", OpenStruct.new) }
+
+  def setup
+    @connection = Faraday::Adapter::Test::Stubs.new
+    connection = vision.instance_variable_get "@connection"
+    client = connection.instance_variable_get "@client"
+    client.connection = Faraday.new do |builder|
+      # builder.options.params_encoder = Faraday::FlatParamsEncoder
+      builder.adapter :test, @connection
+    end
+  end
+
+  def teardown
+    @connection.verify_stubbed_calls
+  end
+
+  def mock_connection
+    @connection
+  end
+
+  # Register this spec type for when :vision is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_vision
   end
 end
