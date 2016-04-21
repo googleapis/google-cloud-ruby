@@ -374,4 +374,41 @@ module Gcloud
     require "gcloud/logging"
     Gcloud.logging @project, @keyfile, scope: scope
   end
+
+  ##
+  # Creates a new object for connecting to the Translate service.
+  # Each call creates a new connection.
+  #
+  # TODO: Add info for creatign an API Key here...
+  # TODO: Explain that the API Key is likely temproary and can change in a
+  # future release.
+  #
+  # @param [String] key API Key is blah blah blah...
+  #
+  # @return [Gcloud::Translate::Api]
+  #
+  # @example
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   translate = gcloud.translate "api-key-abc123XYZ789"
+  #
+  #   translation = translate.translate "Hello world!", to: "la"
+  #   puts translation #=> Salve mundi!
+  #
+  # @example Using API Key from the environment variable.
+  #   require "gcloud"
+  #
+  #   ENV["TRANSLATE_KEY"] = "api-key-abc123XYZ789"
+  #
+  #   gcloud = Gcloud.new
+  #   translate = gcloud.translate
+  #
+  #   translation = translate.translate "Hello world!", to: "la"
+  #   puts translation #=> Salve mundi!
+  #
+  def translate key = nil
+    require "gcloud/translate"
+    Gcloud.translate key
+  end
 end
