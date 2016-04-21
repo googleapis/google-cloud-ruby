@@ -110,7 +110,6 @@ module Gcloud
         resp = connection.translate(*text, to: to, from: from,
                                            format: format, cid: cid)
         fail ApiError.from_response(resp) unless resp.success?
-        puts resp.body
         Translation.from_response resp, text, to, from
       end
 
