@@ -43,7 +43,7 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translation.target.must_equal "es"
     translation.from.must_equal "en"
     translation.source.must_equal "en"
-    translation.must_be :detected?
+    translation.detected?.must_equal true
   end
 
   it "translates a single input with from" do
@@ -66,7 +66,7 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translation.target.must_equal "es"
     translation.from.must_equal "en"
     translation.source.must_equal "en"
-    translation.wont_be :detected?
+    translation.detected?.must_equal false
   end
 
   it "translates a single input with format" do
@@ -89,7 +89,7 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translation.target.must_equal "es"
     translation.from.must_equal "en"
     translation.source.must_equal "en"
-    translation.must_be :detected?
+    translation.detected?.must_equal true
   end
 
   it "translates a single input with cid" do
@@ -112,7 +112,7 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translation.target.must_equal "es"
     translation.from.must_equal "en"
     translation.source.must_equal "en"
-    translation.must_be :detected?
+    translation.detected?.must_equal true
   end
 
   it "translates multiple inputs" do
@@ -137,7 +137,7 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translations.first.target.must_equal "es"
     translations.first.from.must_equal "en"
     translations.first.source.must_equal "en"
-    translations.first.must_be :detected?
+    translations.first.detected?.must_equal true
 
     translations.last.text.must_equal "Como estas hoy?"
     translations.last.origin.must_equal "How are you today?"
@@ -146,7 +146,7 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translations.last.target.must_equal "es"
     translations.last.from.must_equal "en"
     translations.last.source.must_equal "en"
-    translations.last.must_be :detected?
+    translations.last.detected?.must_equal true
   end
 
   it "translates multiple inputs with from" do
@@ -171,7 +171,7 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translations.first.target.must_equal "es"
     translations.first.from.must_equal "en"
     translations.first.source.must_equal "en"
-    translations.first.wont_be :detected?
+    translations.first.detected?.must_equal false
 
     translations.last.text.must_equal "Como estas hoy?"
     translations.last.origin.must_equal "How are you today?"
@@ -180,7 +180,7 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translations.last.target.must_equal "es"
     translations.last.from.must_equal "en"
     translations.last.source.must_equal "en"
-    translations.last.wont_be :detected?
+    translations.last.detected?.must_equal false
   end
 
   it "translates multiple inputs with format" do
@@ -205,7 +205,7 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translations.first.target.must_equal "es"
     translations.first.from.must_equal "en"
     translations.first.source.must_equal "en"
-    translations.first.must_be :detected?
+    translations.first.detected?.must_equal true
 
     translations.last.text.must_equal "Como estas <em>hoy</em>?"
     translations.last.origin.must_equal "How are <em>you</em> today?"
@@ -214,7 +214,7 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translations.last.target.must_equal "es"
     translations.last.from.must_equal "en"
     translations.last.source.must_equal "en"
-    translations.last.must_be :detected?
+    translations.last.detected?.must_equal true
   end
 
   it "translates multiple inputs with cid" do
@@ -239,7 +239,7 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translations.first.target.must_equal "es"
     translations.first.from.must_equal "en"
     translations.first.source.must_equal "en"
-    translations.first.must_be :detected?
+    translations.first.detected?.must_equal true
 
     translations.last.text.must_equal "Como estas hoy?"
     translations.last.origin.must_equal "How are you today?"
@@ -248,6 +248,6 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translations.last.target.must_equal "es"
     translations.last.from.must_equal "en"
     translations.last.source.must_equal "en"
-    translations.last.must_be :detected?
+    translations.last.detected?.must_equal true
   end
 end
