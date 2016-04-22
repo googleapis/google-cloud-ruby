@@ -13,19 +13,13 @@
 # limitations under the License.
 
 
+require "delegate"
+
 module Gcloud
   module Translate
     ##
     # TODO
-    class Translation
-      ##
-      # The translated text.
-      #
-      # @return [String]
-      attr_reader :text
-      alias_method :to_s, :text
-      alias_method :to_str, :text
-
+    class Translation < DelegateClass(::String)
       ##
       # The that was translated.
       #
@@ -48,11 +42,19 @@ module Gcloud
       ##
       # @private Create a new object.
       def initialize text, to, origin, from, detected
-        @text = text
+        super text
         @to = to
         @origin = origin
         @from = from
         @detected = detected
+      end
+
+      ##
+      # The translated text.
+      #
+      # @return [String]
+      def text
+        __getobj__
       end
 
       ##
