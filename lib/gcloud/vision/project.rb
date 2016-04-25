@@ -16,7 +16,9 @@
 require "gcloud/gce"
 require "gcloud/vision/connection"
 require "gcloud/vision/credentials"
+require "gcloud/vision/analysis"
 require "gcloud/vision/errors"
+require "base64"
 
 module Gcloud
   module Vision
@@ -73,7 +75,31 @@ module Gcloud
           Gcloud::GCE.project_id
       end
 
+      def mark *images, faces: nil
+        requests = annotate_requests(*images, faces: faces)
+
+        resp = connection.annotate requests
+        analyses = Array(resp.data["responses"]).map do |gapi|
+          Analysis.from_gapi gapi
+        end
+        return analyses.first if analyses.count == 1
+        analyses
+      end
+      alias_method :annotate, :mark
+
       protected
+
+      def annotate_requests *images, faces: nil
+        Array(images).flatten.map do |image|
+          features = []
+          features << { type: :FACE_DETECTION, maxResults: faces.to_i } if faces
+          { image: image_request_from_filepath(image), features: features }
+        end
+      end
+
+      def image_request_from_filepath image
+        { content: Base64.encode64(File.read(image, mode: "rb")) }
+      end
 
       ##
       # Raise an error unless an active connection is available.
