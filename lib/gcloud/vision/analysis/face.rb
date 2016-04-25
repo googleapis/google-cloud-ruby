@@ -61,6 +61,15 @@ module Gcloud
           @gapi["detectionConfidence"]
         end
 
+        def to_h
+          to_hash
+        end
+
+        def to_hash
+          { angles: angles.to_h, bounds: bounds.to_h, features: features.to_h,
+            likelihood: likelihood.to_h }
+        end
+
         def to_s
           # Keep console output low by not showing all sub-objects.
           "(angles, bounds, features, likelihood)"
@@ -113,6 +122,22 @@ module Gcloud
             @gapi["tiltAngle"]
           end
           alias_method :tilt, :pitch
+
+          def to_a
+            to_ary
+          end
+
+          def to_ary
+            [roll, yaw, pitch]
+          end
+
+          def to_h
+            to_hash
+          end
+
+          def to_hash
+            { roll: roll, yaw: yaw, pitch: pitch }
+          end
 
           def to_s
             format "(roll: %s, yaw: %s, pitch: %s)", roll.inspect, yaw.inspect,
@@ -171,6 +196,22 @@ module Gcloud
             end
           end
 
+          def to_a
+            to_ary
+          end
+
+          def to_ary
+            [head.map(&:to_a), face.map(&:to_a)]
+          end
+
+          def to_h
+            to_hash
+          end
+
+          def to_hash
+            { head: head.map(&:to_h), face: face.map(&:to_h) }
+          end
+
           def to_s
             "(head: #{head.inspect}, face: #{face.inspect})"
           end
@@ -201,6 +242,14 @@ module Gcloud
 
             def to_ary
               [x, y]
+            end
+
+            def to_h
+              to_hash
+            end
+
+            def to_hash
+              { x: x, y: y }
             end
 
             def to_s
@@ -305,6 +354,16 @@ module Gcloud
                                self["NOSE_BOTTOM_RIGHT"]
           end
 
+          def to_h
+            to_hash
+          end
+
+          def to_hash
+            { confidence: confidence, chin: chin.to_h, ears: ears.to_h,
+              eyebrows: eyebrows.to_h, eyes: eyes.to_h, forehead: forehead.to_h,
+              lips: lips.to_h, mouth: mouth.to_h, nose: nose.to_h }
+          end
+
           def to_s
             # Keep console output low by not showing all sub-objects.
             "(confidence, chin, ears, eyebrows, eyes, " \
@@ -368,6 +427,14 @@ module Gcloud
               [x, y, z]
             end
 
+            def to_h
+              to_hash
+            end
+
+            def to_hash
+              { x: x, y: y, z: z }
+            end
+
             def to_s
               "(x: #{x.inspect}, y: #{y.inspect}, z: #{z.inspect})"
             end
@@ -403,6 +470,14 @@ module Gcloud
               [left, center, right]
             end
 
+            def to_h
+              to_hash
+            end
+
+            def to_hash
+              { left: left.to_h, center: center.to_h, right: right.to_h }
+            end
+
             def to_s
               format "(left: %s, center: %s, right: %s)", left.inspect,
                      center.inspect, right.inspect
@@ -431,6 +506,14 @@ module Gcloud
               [left, right]
             end
 
+            def to_h
+              to_hash
+            end
+
+            def to_hash
+              { left: left.to_h, right: right.to_h }
+            end
+
             def to_s
               "(left: #{left.inspect}, right: #{right.inspect})"
             end
@@ -456,6 +539,14 @@ module Gcloud
 
             def to_ary
               [left, right]
+            end
+
+            def to_h
+              to_hash
+            end
+
+            def to_hash
+              { left: left.to_h, right: right.to_h }
             end
 
             def to_s
@@ -486,6 +577,14 @@ module Gcloud
               [left, top, right]
             end
 
+            def to_h
+              to_hash
+            end
+
+            def to_hash
+              { left: left.to_h, top: top.to_h, right: right.to_h }
+            end
+
             def to_s
               format "(left: %s, top: %s, right: %s)", left.inspect,
                      top.inspect, right.inspect
@@ -512,6 +611,14 @@ module Gcloud
 
             def to_ary
               [left, right]
+            end
+
+            def to_h
+              to_hash
+            end
+
+            def to_hash
+              { left: left.to_h, right: right.to_h }
             end
 
             def to_s
@@ -543,6 +650,15 @@ module Gcloud
 
             def to_ary
               [left, top, right]
+            end
+
+            def to_h
+              to_hash
+            end
+
+            def to_hash
+              { left: left.to_h, bottom: bottom.to_h, center: center.to_h,
+                pupil: pupil.to_h, top: top.to_h, right: right.to_h }
             end
 
             def to_s
@@ -578,6 +694,14 @@ module Gcloud
               [top, bottom]
             end
 
+            def to_h
+              to_hash
+            end
+
+            def to_hash
+              { top: top.to_h, bottom: bottom.to_h }
+            end
+
             def to_s
               "(top: #{top.inspect}, bottom: #{bottom.inspect})"
             end
@@ -604,6 +728,14 @@ module Gcloud
 
             def to_ary
               [left, center, right]
+            end
+
+            def to_h
+              to_hash
+            end
+
+            def to_hash
+              { left: left.to_h, center: center.to_h, right: right.to_h }
             end
 
             def to_s
@@ -635,6 +767,15 @@ module Gcloud
 
             def to_ary
               [left, bottom, tip, top, right]
+            end
+
+            def to_h
+              to_hash
+            end
+
+            def to_hash
+              { left: left.to_h, bottom: bottom.to_h, tip: tip.to_h,
+                top: top.to_h, right: right.to_h }
             end
 
             def to_s
@@ -762,6 +903,16 @@ module Gcloud
           # `LIKELY`, or `VERY_LIKELY`.
           def headwear?
             POSITIVE_RATINGS.include? headwear
+          end
+
+          def to_h
+            to_hash
+          end
+
+          def to_hash
+            { joy: joy?, sorrow: sorrow?, anger: anger?, surprise: surprise?,
+              under_exposed: under_exposed?, blurred: blurred?,
+              headwear: headwear? }
           end
 
           def to_s

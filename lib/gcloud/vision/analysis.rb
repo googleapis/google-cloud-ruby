@@ -85,6 +85,14 @@ module Gcloud
         faces.count > 0
       end
 
+      def to_h
+        to_hash
+      end
+
+      def to_hash
+        { faces: faces.map(&:to_h) }
+      end
+
       def to_s
         "(faces: #{faces.count})"
       end
