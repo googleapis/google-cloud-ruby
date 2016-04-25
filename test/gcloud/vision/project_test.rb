@@ -15,8 +15,84 @@
 require "helper"
 
 describe Gcloud::Vision::Project, :mock_vision do
+  let(:filepath) { "acceptance/data/face.jpg" }
+
   it "knows the project identifier" do
     vision.must_be_kind_of Gcloud::Vision::Project
     vision.project.must_equal project
+  end
+
+  it "detects face detection" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      face = requests.first
+      face["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      face["features"].count.must_equal 1
+      face["features"].first["type"].must_equal "FACE_DETECTION"
+      face["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       image_response_json]
+    end
+
+    analysis = vision.mark filepath, faces: 1
+  end
+
+  it "detects face detection using annotate alias" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      face = requests.first
+      face["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      face["features"].count.must_equal 1
+      face["features"].first["type"].must_equal "FACE_DETECTION"
+      face["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       image_response_json]
+    end
+
+    analysis = vision.annotate filepath, faces: 1
+    analysis.wont_be :nil?
+    analysis.face.wont_be :nil?
+  end
+
+  it "detects face detection on multiple images" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 2
+      requests.first["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.first["features"].count.must_equal 1
+      requests.first["features"].first["type"].must_equal "FACE_DETECTION"
+      requests.first["features"].first["maxResults"].must_equal 1
+      requests.last["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.last["features"].count.must_equal 1
+      requests.last["features"].first["type"].must_equal "FACE_DETECTION"
+      requests.last["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       multiple_response_json]
+    end
+
+    analyses = vision.mark filepath, filepath, faces: 1
+    analyses.count.must_equal 2
+    analyses.first.face.wont_be :nil?
+    analyses.last.face.wont_be :nil?
+  end
+
+  def image_response_json
+    {
+      responses: [{
+        faceAnnotations: [face_annotation_response]
+      }]
+    }.to_json
+  end
+
+  def multiple_response_json
+    {
+      responses: [{
+        faceAnnotations: [face_annotation_response]
+      }, {
+        faceAnnotations: [face_annotation_response]
+      }]
+    }.to_json
   end
 end

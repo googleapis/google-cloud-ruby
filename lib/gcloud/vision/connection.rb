@@ -38,6 +38,13 @@ module Gcloud
         @client.register_discovery_uri "vision", "v1", custom_discovery_url
         @vision = @client.discovered_api "vision", "v1"
       end
+
+      def annotate requests
+        @client.execute(
+          api_method: @vision.images.annotate,
+          body_object: { requests: requests }
+        )
+      end
     end
   end
 end
