@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "vision_helper"
+require "pathname"
 
 # This test is a ruby version of gcloud-node's vision test.
 
@@ -30,7 +31,10 @@ describe "Vision", :vision do
     end
 
     it "detects faces from multiple images" do
-      analyses = vision.mark face_image, logo_image, location_image, faces: 1
+      analyses = vision.mark face_image,
+                             File.open(logo_image, "rb"),
+                             Pathname.new(location_image),
+                             faces: 1
 
       analyses.count.must_equal 3
       analyses[0].faces.count.must_equal 1
