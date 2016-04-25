@@ -16,9 +16,9 @@
 require "gcloud/gce"
 require "gcloud/vision/connection"
 require "gcloud/vision/credentials"
+require "gcloud/vision/image"
 require "gcloud/vision/analysis"
 require "gcloud/vision/errors"
-require "base64"
 
 module Gcloud
   module Vision
@@ -75,6 +75,11 @@ module Gcloud
           Gcloud::GCE.project_id
       end
 
+      def image source
+        return source if source.is_a? Image
+        Image.from_source source
+      end
+
       def mark *images, faces: nil
         requests = annotate_requests(*images, faces: faces)
 
@@ -90,15 +95,11 @@ module Gcloud
       protected
 
       def annotate_requests *images, faces: nil
-        Array(images).flatten.map do |image|
+        Array(images).flatten.map do |img|
           features = []
           features << { type: :FACE_DETECTION, maxResults: faces.to_i } if faces
-          { image: image_request_from_filepath(image), features: features }
+          { image: image(img).to_gapi, features: features }
         end
-      end
-
-      def image_request_from_filepath image
-        { content: Base64.encode64(File.read(image, mode: "rb")) }
       end
 
       ##

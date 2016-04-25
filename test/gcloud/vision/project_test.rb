@@ -22,6 +22,15 @@ describe Gcloud::Vision::Project, :mock_vision do
     vision.project.must_equal project
   end
 
+  it "builds an image from filepath input" do
+    image = vision.image filepath
+
+    image.wont_be :nil?
+    image.must_be_kind_of Gcloud::Vision::Image
+    image.must_be :content?
+    image.wont_be :url?
+  end
+
   it "detects face detection" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
