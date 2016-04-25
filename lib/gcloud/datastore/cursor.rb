@@ -24,12 +24,12 @@ module Gcloud
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
-    #   dataset = gcloud.datastore
+    #   datastore = gcloud.datastore
     #
-    #   query = dataset.query("Task").
+    #   query = datastore.query("Task").
     #     where("done", "=", false)
     #
-    #   tasks = dataset.run query
+    #   tasks = datastore.run query
     #   tasks.cursor #=> Cursor
     #
     class Cursor

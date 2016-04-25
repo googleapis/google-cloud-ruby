@@ -49,11 +49,11 @@ module Gcloud
   #   datastore = Gcloud.datastore "my-todo-project",
   #                              "/path/to/keyfile.json"
   #
-  #   task = datastore.entity "Task", "sampleTask" do |task|
-  #     task["type"] = "Personal"
-  #     task["done"] = false
-  #     task["priority"] = 4
-  #     task["description"] = "Learn Cloud Datastore"
+  #   task = datastore.entity "Task", "sampleTask" do |t|
+  #     t["type"] = "Personal"
+  #     t["done"] = false
+  #     t["priority"] = 4
+  #     t["description"] = "Learn Cloud Datastore"
   #   end
   #
   #   datastore.save task
@@ -245,11 +245,11 @@ module Gcloud
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
   #
-  # task = datastore.entity "Task" do |task|
-  #   task["type"] = "Personal"
-  #   task["done"] = false
-  #   task["priority"] = 4
-  #   task["description"] = "Learn Cloud Datastore"
+  # task = datastore.entity "Task" do |t|
+  #   t["type"] = "Personal"
+  #   t["done"] = false
+  #   t["priority"] = 4
+  #   t["description"] = "Learn Cloud Datastore"
   # end
   # task.key.id #=> nil
   # datastore.save task
@@ -264,21 +264,23 @@ module Gcloud
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
   #
-  # task1 = datastore.entity "Task" do |task|
-  #   task["type"] = "Personal"
-  #   task["done"] = false
-  #   task["priority"] = 4
-  #   task["description"] = "Learn Cloud Datastore"
+  # task1 = datastore.entity "Task" do |t|
+  #   t["type"] = "Personal"
+  #   t["done"] = false
+  #   t["priority"] = 4
+  #   t["description"] = "Learn Cloud Datastore"
   # end
   #
-  # task2 = datastore.entity "Task" do |task|
-  #   task["type"] = "Personal"
-  #   task["done"] = false
-  #   task["priority"] = 5
-  #   task["description"] = "Integrate Cloud Datastore"
+  # task2 = datastore.entity "Task" do |t|
+  #   t["type"] = "Personal"
+  #   t["done"] = false
+  #   t["priority"] = 5
+  #   t["description"] = "Integrate Cloud Datastore"
   # end
   #
-  # task_key1, task_key2 = datastore.save(task1, task2).map &:key
+  # tasks = datastore.save(task1, task2)
+  # task_key1 = tasks[0].key
+  # task_key2 = tasks[1].key
   # ```
   #
   # Entities in Datastore form a hierarchically structured space similar to the
@@ -290,11 +292,11 @@ module Gcloud
   # task_key = datastore.key "Task", "sampleTask"
   # task_key.parent = datastore.key "TaskList", "default"
   #
-  # task = datastore.entity task_key do |task|
-  #   task["type"] = "Personal"
-  #   task["done"] = false
-  #   task["priority"] = 5
-  #   task["description"] = "Integrate Cloud Datastore"
+  # task = datastore.entity task_key do |t|
+  #   t["type"] = "Personal"
+  #   t["done"] = false
+  #   t["priority"] = 5
+  #   t["description"] = "Integrate Cloud Datastore"
   # end
   # ```
   #
@@ -329,9 +331,9 @@ module Gcloud
   # gcloud = Gcloud.new
   # datastore = gcloud.datastore
   #
-  # task = datastore.entity "Task", "sampleTask" do |task|
-  #   task["tags"] = ["fun", "programming"]
-  #   task["collaborators"] = ["alice", "bob"]
+  # task = datastore.entity "Task", "sampleTask" do |t|
+  #   t["tags"] = ["fun", "programming"]
+  #   t["collaborators"] = ["alice", "bob"]
   # end
   # ```
   #
@@ -381,11 +383,11 @@ module Gcloud
   #
   # datastore.transaction do |tx|
   #   if tx.find(task_key).nil?
-  #     task = datastore.entity task_key do |task|
-  #       task["type"] = "Personal"
-  #       task["done"] = false
-  #       task["priority"] = 4
-  #       task["description"] = "Learn Cloud Datastore"
+  #     task = datastore.entity task_key do |t|
+  #       t["type"] = "Personal"
+  #       t["done"] = false
+  #       t["priority"] = 4
+  #       t["description"] = "Learn Cloud Datastore"
   #     end
   #     tx.save task
   #   end
@@ -406,11 +408,11 @@ module Gcloud
   # tx = datastore.transaction
   # begin
   #   if tx.find(task_key).nil?
-  #     task = datastore.entity task_key do |task|
-  #       task["type"] = "Personal"
-  #       task["done"] = false
-  #       task["priority"] = 4
-  #       task["description"] = "Learn Cloud Datastore"
+  #     task = datastore.entity task_key do |t|
+  #       t["type"] = "Personal"
+  #       t["done"] = false
+  #       t["priority"] = 4
+  #       t["description"] = "Learn Cloud Datastore"
   #     end
   #     tx.save task
   #   end
