@@ -191,24 +191,6 @@ end
 projects = resource_manager.projects filter: "labels.env:production"
 ```
 
-# Search
-
-[Google Cloud Search](https://cloud.google.com/search/) ([docs](https://cloud.google.com/search/reference/rest/index)) allows an application to quickly perform full-text and geo-spatial searches without having to spin up instances and without the hassle of managing and maintaining a search service.
-
-See the {Gcloud::Search gcloud-ruby Search API documentation} to learn how to connect to Cloud Search using this library.
-
-```ruby
-require "gcloud"
-
-gcloud = Gcloud.new
-search = gcloud.search
-index = search.index "products"
-
-results = index.search "cotton T-shirt",
-                       expressions: { total_price: "(price + tax)" },
-                       fields: ["name", "total_price", "highlight"]
-```
-
 # Storage
 
 [Google Cloud Storage](https://cloud.google.com/storage/) ([docs](https://cloud.google.com/storage/docs/json_api/)) allows you to store data on Google infrastructure with very high reliability, performance and availability, and can be used to distribute large data objects to users via direct download.

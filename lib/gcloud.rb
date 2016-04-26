@@ -312,33 +312,6 @@ module Gcloud
   # rubocop:enable Metrics/LineLength
 
   ##
-  # Creates a new object for connecting to the Search service.
-  # Each call creates a new connection.
-  #
-  # For more information on connecting to Google Cloud see the [Authentication
-  # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
-  #
-  # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
-  #   set of resources and operations that the connection can access. See [Using
-  #   OAuth 2.0 to Access Google
-  #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-  #
-  #   The default scopes are:
-  #
-  #   * `https://www.googleapis.com/auth/cloudsearch`
-  #   * `https://www.googleapis.com/auth/userinfo.email`
-  #
-  # @return [Gcloud::Search::Project]
-  #
-  # @example
-  #   require "gcloud"
-  #
-  def search scope: nil
-    require "gcloud/search"
-    Gcloud.search @project, @keyfile, scope: scope
-  end
-
-  ##
   # Creates a new object for connecting to the Logging service.
   # Each call creates a new connection.
   #

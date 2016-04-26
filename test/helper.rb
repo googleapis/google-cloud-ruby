@@ -24,7 +24,6 @@ require "gcloud/pubsub"
 require "gcloud/bigquery"
 require "gcloud/dns"
 require "gcloud/resource_manager"
-require "gcloud/search"
 require "gcloud/logging"
 
 class MockStorage < Minitest::Spec
@@ -741,105 +740,6 @@ class MockResourceManager < Minitest::Spec
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_res_man
-  end
-end
-
-class MockSearch < Minitest::Spec
-  let(:project) { "test" }
-  let(:credentials) { OpenStruct.new }
-  let(:search) { Gcloud::Search::Project.new project, credentials }
-
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    search.connection.client.connection = Faraday.new "https://cloudsearch.googleapis.com" do |builder|
-      builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
-  end
-
-  def teardown
-    @connection.verify_stubbed_calls
-  end
-
-  def mock_connection
-    @connection
-  end
-
-  def random_doc_hash doc_id = nil, rank = nil, fields = nil
-    doc_id ||= "rnd_doc_#{rand 999999}"
-    rank ||= rand(99999999)
-    fields ||= random_fields_hash
-    {
-      "docId" => doc_id,
-      "rank" => rank,
-      "fields" => fields
-    }
-  end
-
-  def random_fields_hash
-    {
-      "price" => {
-        "values" => [
-          {
-            "numberValue" => 24.95
-          }
-        ]
-      },
-      "since" => {
-        "values" => [
-          {
-            "timestampValue" => "2015-10-02T15:00:00+00:00"
-          }
-        ]
-      },
-      "location" => {
-        "values" => [
-          {
-            "geoValue" => "-33.857, 151.215"
-          }
-        ]
-      },
-      "body" => {
-        "values" => [
-          {
-            "stringFormat" => "TEXT",
-            "lang" => "en",
-            "stringValue" => "gcloud is a client library"
-          },
-          {
-            "stringFormat" => "HTML",
-            "lang" => "en",
-            "stringValue" => "<code>gcloud</code> is a client library"
-          },
-          {
-            "stringFormat" => "HTML",
-            "lang" => "eo",
-            "stringValue" => "<code>gcloud</code> estas kliento biblioteko"
-          }
-        ]
-      }
-    }
-  end
-
-  def random_index_hash index_id = nil
-    index_id ||= "example-index-#{rand(9999)}"
-    {
-      "projectId" => project,
-      "indexId" => index_id,
-      "indexedField" => {
-        "textFields" => ["title", "body"],
-        "htmlFields" => ["body"],
-        "atomFields" => ["slug"],
-        "dateFields" => ["published"],
-        "numberFields" => ["likes"],
-        "geoFields" => ["location"]
-      }
-    }
-  end
-
-  # Register this spec type for when :storage is used.
-  register_spec_type(self) do |desc, *addl|
-    addl.include? :mock_search
   end
 end
 

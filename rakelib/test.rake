@@ -52,12 +52,6 @@ namespace :test do
     Dir.glob("test/gcloud/resource_manager/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
-  desc "Runs search tests."
-  task :search do
-    $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/search/**/*_test.rb").each { |file| require_relative "../#{file}"}
-  end
-
   desc "Runs logging tests."
   task :logging do
     $LOAD_PATH.unshift "lib", "test"
@@ -84,8 +78,6 @@ namespace :test do
     ENV["BIGQUERY_KEYFILE"] = keyfile
     ENV["DNS_PROJECT"] = project
     ENV["DNS_KEYFILE"] = keyfile
-    ENV["SEARCH_PROJECT"] = project
-    ENV["SEARCH_KEYFILE"] = keyfile
     ENV["LOGGING_PROJECT"] = project
     ENV["LOGGING_KEYFILE"] = keyfile
 
@@ -117,8 +109,6 @@ namespace :test do
     ENV["BIGQUERY_KEYFILE"] = keyfile
     ENV["DNS_PROJECT"] = project
     ENV["DNS_KEYFILE"] = keyfile
-    ENV["SEARCH_PROJECT"] = project
-    ENV["SEARCH_KEYFILE"] = keyfile
     ENV["LOGGING_PROJECT"] = project
     ENV["LOGGING_KEYFILE"] = keyfile
 
@@ -151,8 +141,6 @@ namespace :test do
     ENV["BIGQUERY_KEYFILE"] = keyfile
     ENV["DNS_PROJECT"] = project
     ENV["DNS_KEYFILE"] = keyfile
-    ENV["SEARCH_PROJECT"] = project
-    ENV["SEARCH_KEYFILE"] = keyfile
     ENV["LOGGING_PROJECT"] = project
     ENV["LOGGING_KEYFILE"] = keyfile
 
@@ -345,50 +333,6 @@ namespace :test do
       end
     end
 
-    desc "Runs the search acceptance tests."
-    task :search, :project, :keyfile do |t, args|
-      project = args[:project]
-      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["SEARCH_TEST_PROJECT"]
-      keyfile = args[:keyfile]
-      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["SEARCH_TEST_KEYFILE"]
-      if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:acceptance:search[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:search"
-      end
-      # always overwrite when running tests
-      ENV["SEARCH_PROJECT"] = project
-      ENV["SEARCH_KEYFILE"] = keyfile
-
-      $LOAD_PATH.unshift "lib", "test", "acceptance"
-      Dir.glob("acceptance/search/**/*_test.rb").each { |file| require_relative "../#{file}"}
-    end
-
-    namespace :search do
-      desc "Removes *ALL* SEARCH zones and records. Use with caution."
-      task :cleanup do |t, args|
-        project = args[:project]
-        project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["SEARCH_TEST_PROJECT"]
-        keyfile = args[:keyfile]
-        keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["SEARCH_TEST_KEYFILE"]
-        if project.nil? || keyfile.nil?
-          fail "You must provide a project and keyfile. e.g. rake test:acceptance:search:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:search:cleanup"
-        end
-        # always overwrite when running tests
-        ENV["SEARCH_PROJECT"] = project
-        ENV["SEARCH_KEYFILE"] = keyfile
-
-        $LOAD_PATH.unshift "lib"
-        require "gcloud/search"
-        puts "Cleaning up SEARCH indexes and documents"
-        Gcloud.search.indexes.each do |index|
-          begin
-            index.delete force: true
-          rescue Gcloud::Search::ApiError => e
-            puts e.message
-          end
-        end
-      end
-    end
-
     desc "Runs the logging acceptance tests."
     task :logging, :project, :keyfile do |t, args|
       project = args[:project]
@@ -438,7 +382,6 @@ namespace :test do
       Rake::Task["test:acceptance:dns:cleanup"].invoke
       Rake::Task["test:acceptance:logging:cleanup"].invoke
       Rake::Task["test:acceptance:pubsub:cleanup"].invoke
-      # Rake::Task["test:acceptance:search:cleanup"].invoke
       Rake::Task["test:acceptance:storage:cleanup"].invoke
     end
   end

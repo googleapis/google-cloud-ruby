@@ -62,7 +62,6 @@ The gcloud-ruby acceptance tests interact with the following live service APIs:
 * Cloud Datastore
 * Cloud DNS
 * Cloud Pub/Sub
-* Cloud Search
 * Cloud Storage
 
 Follow the instructions in the [Authentication guide](AUTHENTICATION.md) for enabling APIs. Some of the APIs may not yet be generally available, making it difficult for some contributors to successfully run the entire acceptance test suite. However, please ensure that you do successfully run acceptance tests for any code areas covered by your pull request.
