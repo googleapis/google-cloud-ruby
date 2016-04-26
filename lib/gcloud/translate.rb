@@ -21,11 +21,15 @@ module Gcloud
   # Creates a new object for connecting to the Translate service.
   # Each call creates a new connection.
   #
-  # TODO: Add info for creatign an API Key here...
-  # TODO: Explain that the API Key is likely temproary and can change in a
-  # future release.
+  # Unlike other Cloud Platform services, which authenticate using a project ID
+  # and OAuth 2.0 credentials, Google Translate API requires a public API access
+  # key. (This may change in future releases of Google Translate API.) Follow
+  # the general instructions at [Identifying your application to
+  # Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
+  # specific instructions for [Server
+  # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
   #
-  # @param [String] key API Key is blah blah blah...
+  # @param [String] key a public API access key (not an OAuth 2.0 token)
   #
   # @return [Gcloud::Translate::Api]
   #
@@ -35,7 +39,7 @@ module Gcloud
   #   translate = Gcloud.translate "api-key-abc123XYZ789"
   #
   #   translation = translate.translate "Hello world!", to: "la"
-  #   puts translation #=> Salve mundi!
+  #   translation.text #=> "Salve mundi!"
   #
   # @example Using API Key from the environment variable.
   #   require "gcloud"
@@ -45,29 +49,187 @@ module Gcloud
   #   translate = Gcloud.translate
   #
   #   translation = translate.translate "Hello world!", to: "la"
-  #   puts translation #=> Salve mundi!
+  #   translation.text #=> "Salve mundi!"
   #
   def self.translate key = nil
     Gcloud::Translate::Api.new key
   end
 
   ##
-  # # Google Cloud Translate
+  # # Google Translate API
   #
-  # TODO: Explain how to obtain an API Key, linking to exisitng documents on
-  # Google Cloud.
-  # TODO: Explain that the API Key is likely temproary and can change in a
-  # future release.
-  # TODO: Show how to retrieve a translation.
-  # TODO: Show how to retrieve a translation setting the `from`.
-  # TODO: Show how to retrieve multiple translations, including `to` and `from`.
-  # TODO: Show how to detect a language.
-  # TODO: Show how to detect a language for multiple input strings.
-  # TODO: Show how to get all the languages supported by the Google Cloud
-  # Translate service.
-  # TODO: Show how to get all the languages supported by the Google Cloud
-  # Translate service and specify the language the names should be shown in.
-  # (English vs. Spanish vs. Russian)
+  # [Google Translate API](https://cloud.google.com/translate/) provides a
+  # simple, programmatic interface for translating an arbitrary string into any
+  # supported language. It is highly responsive, so websites and applications
+  # can integrate with Translate API for fast, dynamic translation of source
+  # text. Language detection is also available in cases where the source
+  # language is unknown.
+  #
+  # Translate API supports more than ninety different languages, from Afrikaans
+  # to Zulu. Used in combination, this enables translation between thousands of
+  # language pairs. Also, you can send in HTML and receive HTML with translated
+  # text back. You don't need to extract your source text or reassemble the
+  # translated content.
+  #
+  # ## Authenticating
+  #
+  # Unlike other Cloud Platform services, which authenticate using a project ID
+  # and OAuth 2.0 credentials, Translate API requires a public API access key.
+  # (This may change in future releases of Translate API.) Follow the general
+  # instructions at [Identifying your application to
+  # Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
+  # specific instructions for [Server
+  # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
+  #
+  # ## Translating texts
+  #
+  # Translating text from one language to another is easy (and extremely fast.)
+  # The only required arguments to {Gcloud::Translate::Api#translate} are a
+  # string and the [ISO
+  # 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code of the
+  # language to which you wish to translate.
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # translate = gcloud.translate
+  #
+  # translation = translate.translate "Hello world!", to: "la"
+  #
+  # puts translation #=> Salve mundi!
+  #
+  # translation.from #=> "en"
+  # translation.origin #=> "Hello world!"
+  # translation.to #=> "la"
+  # translation.text #=> "Salve mundi!"
+  # ```
+  #
+  # You may want to use the `from` option to specify the language of the source
+  # text, as the following example illustrates. (Single words do not give
+  # Translate API much to work with.)
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # translate = gcloud.translate
+  #
+  # translation = translate.translate "chat", to: "en"
+  #
+  # translation.detected? #=> true
+  # translation.from #=> "en"
+  # translation.text #=> "chat"
+  #
+  # translation = translate.translate "chat", from: "fr", to: "en"
+  #
+  # translation.detected? #=> false
+  # translation.from #=> "fr"
+  # translation.text #=> "cat"
+  # ```
+  #
+  # You can pass multiple texts to {Gcloud::Translate::Api#translate}.
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # translate = gcloud.translate
+  #
+  # translations = translate.translate "chien", "chat", from: "fr", to: "en"
+  #
+  # translations.size #=> 2
+  # translations[0].origin #=> "chien"
+  # translations[0].text #=> "dog"
+  # translations[1].origin #=> "chat"
+  # translations[1].text #=> "cat"
+  # ```
+  #
+  # By default, any HTML in your source text will be preserved.
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # translate = gcloud.translate
+  #
+  # translation = translate.translate "<strong>Hello</strong> world!",
+  #                                   to: :la
+  # translation.text #=> "<strong>Salve</strong> mundi!"
+  # ```
+  #
+  # ## Detecting languages
+  #
+  # You can use {Gcloud::Translate::Api#detect} to see which language the
+  # Translate API ranks as the most likely source language for a text. The
+  # `confidence` score is a float value between `0` and `1`.
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # translate = gcloud.translate
+  #
+  # detection = translate.detect "chat"
+  #
+  # detection.text #=> "chat"
+  # detection.language #=> "en"
+  # detection.confidence #=> 0.59922177
+  # ```
+  #
+  # You can pass multiple texts to {Gcloud::Translate::Api#detect}.
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # translate = gcloud.translate
+  #
+  # detections = translate.detect "chien", "chat"
+  #
+  # detections.size #=> 2
+  # detections[0].text #=> "chien"
+  # detections[0].language #=> "fr"
+  # detections[0].confidence #=> 0.7109375
+  # detections[1].text #=> "chat"
+  # detections[1].language #=> "en"
+  # detections[1].confidence #=> 0.59922177
+  # ```
+  #
+  # ## Listing supported languages
+  #
+  # Translate API adds new languages frequently. You can use
+  # {Gcloud::Translate::Api#languages} to query the list of supported languages.
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # translate = gcloud.translate
+  #
+  # languages = translate.languages
+  #
+  # languages.size #=> 104
+  # languages[0].code #=> "af"
+  # languages[0].name #=> nil
+  # ```
+  #
+  # To receive the names of the supported languages, as well as their [ISO
+  # 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) codes, provide
+  # the code for the language in which you wish to receive the names.
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # translate = gcloud.translate
+  #
+  # languages = translate.languages "en"
+  #
+  # languages.size #=> 104
+  # languages[0].code #=> "af"
+  # languages[0].name #=> "Afrikaans"
+  # ```
   #
   module Translate
   end

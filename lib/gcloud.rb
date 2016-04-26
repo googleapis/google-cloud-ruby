@@ -379,11 +379,15 @@ module Gcloud
   # Creates a new object for connecting to the Translate service.
   # Each call creates a new connection.
   #
-  # TODO: Add info for creatign an API Key here...
-  # TODO: Explain that the API Key is likely temproary and can change in a
-  # future release.
+  # Unlike other Cloud Platform services, which authenticate using a project ID
+  # and OAuth 2.0 credentials, Google Translate API requires a public API access
+  # key. (This may change in future releases of Google Translate API.) Follow
+  # the general instructions at [Identifying your application to
+  # Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
+  # specific instructions for [Server
+  # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
   #
-  # @param [String] key API Key is blah blah blah...
+  # @param [String] key a public API access key (not an OAuth 2.0 token)
   #
   # @return [Gcloud::Translate::Api]
   #
@@ -394,7 +398,7 @@ module Gcloud
   #   translate = gcloud.translate "api-key-abc123XYZ789"
   #
   #   translation = translate.translate "Hello world!", to: "la"
-  #   puts translation #=> Salve mundi!
+  #   translation.text #=> "Salve mundi!"
   #
   # @example Using API Key from the environment variable.
   #   require "gcloud"
@@ -405,7 +409,7 @@ module Gcloud
   #   translate = gcloud.translate
   #
   #   translation = translate.translate "Hello world!", to: "la"
-  #   puts translation #=> Salve mundi!
+  #   translation.text #=> "Salve mundi!"
   #
   def translate key = nil
     require "gcloud/translate"

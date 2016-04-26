@@ -16,10 +16,31 @@
 module Gcloud
   module Translate
     ##
-    # TODO
+    # # Language
+    #
+    # Represents a supported languages query result. Returned by
+    # {Gcloud::Translate::Api#languages}.
+    #
+    # @see https://cloud.google.com/translate/v2/using_rest#supported-languages
+    #   Discover Supported Languages
+    #
+    # @example
+    #   require "gcloud"
+    #
+    #   gcloud = Gcloud.new
+    #   translate = gcloud.translate
+    #
+    #   languages = translate.languages "en"
+    #
+    #   languages.size #=> 104
+    #   languages[0].code #=> "af"
+    #   languages[0].name #=> "Afrikaans"
+    #
     class Language
       ##
-      # The language code. This is an iso639-1 language code.
+      # The language code. This is an [ISO
+      # 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language
+      # code.
       #
       # @return [String]
       attr_reader :code

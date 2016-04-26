@@ -257,6 +257,29 @@ backup = storage.bucket "task-attachment-backups"
 file.copy backup, file.name
 ```
 
+### Translate
+
+- [gcloud-ruby Translate API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Translate.html)
+- [Google Translate Documentation](https://cloud.google.com/translate/docs)
+
+#### Preview
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new
+translate = gcloud.translate
+
+translation = translate.translate "Hello world!", to: "la"
+
+puts translation #=> Salve mundi!
+
+translation.from #=> "en"
+translation.origin #=> "Hello world!"
+translation.to #=> "la"
+translation.text #=> "Salve mundi!"
+```
+
 ## Supported Ruby Versions
 
 gcloud is supported on Ruby 2.0+.
