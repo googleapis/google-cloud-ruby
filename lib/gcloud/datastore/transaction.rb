@@ -102,10 +102,10 @@ module Gcloud
       #   end
       #
       def delete *entities_or_keys
-        just_keys = entities_or_keys.map do |e_or_k|
+        keys = entities_or_keys.map do |e_or_k|
           e_or_k.respond_to?(:key) ? e_or_k.key : e_or_k
         end
-        just_keys.each { |k| shared_deletes << k }
+        keys.each { |k| shared_deletes << k }
         # Do not delete yet
         true
       end
