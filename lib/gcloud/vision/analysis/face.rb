@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "gcloud/vision/analysis/vertex"
+
 module Gcloud
   module Vision
     class Analysis

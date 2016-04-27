@@ -14,6 +14,7 @@
 
 
 require "gcloud/vision/analysis/face"
+require "gcloud/vision/analysis/entity"
 
 module Gcloud
   module Vision
@@ -40,7 +41,7 @@ module Gcloud
         @gapi = nil
       end
 
-      # The FaceAnnotation results containing the results of face detection.
+      # The Analysis::Face results containing the results of face detection.
       #
       # @example
       #   require "gcloud"
@@ -57,7 +58,7 @@ module Gcloud
         end
       end
 
-      # The first FaceAnnotation results, if there is one.
+      # The first Analysis::Face result, if there is one.
       #
       # @example
       #   require "gcloud"
@@ -71,7 +72,7 @@ module Gcloud
         faces.first
       end
 
-      # Whether there is at least one FaceAnnotation result.
+      # Whether there is at least one Analysis::Face result.
       #
       # @example
       #   require "gcloud"
@@ -85,16 +86,62 @@ module Gcloud
         faces.count > 0
       end
 
+      # The Analysis::Entity results containing the results of landmark
+      # detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, landmarks: 1
+      #   analysis.landmarks.count #=> 1
+      #   landmark = analysis.landmarks.first
+      #
+      def landmarks
+        @landmarks ||= Array(@gapi["landmarkAnnotations"]).map do |lm|
+          Entity.from_gapi lm
+        end
+      end
+
+      # The first Analysis::Entity result, if there is one.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, landmarks: 1
+      #   landmark = analysis.landmark
+      #
+      def landmark
+        landmarks.first
+      end
+
+      # Whether there is at least one Analysis::Entity result.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, landmarks: 1
+      #   analysis.landmark? #=> true
+      #
+      def landmark?
+        landmarks.count > 0
+      end
+
       def to_h
         to_hash
       end
 
       def to_hash
-        { faces: faces.map(&:to_h) }
+        { faces: faces.map(&:to_h), landmarks: landmarks.map(&:to_h) }
       end
 
       def to_s
-        "(faces: #{faces.count})"
+        "(faces: #{faces.count}, landmarks: #{landmarks.count})"
       end
 
       def inspect

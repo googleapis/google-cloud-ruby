@@ -41,7 +41,7 @@ describe Gcloud::Vision::Project, :mock_vision do
       face["features"].first["type"].must_equal "FACE_DETECTION"
       face["features"].first["maxResults"].must_equal 1
       [200, {"Content-Type" => "application/json"},
-       image_response_json]
+       face_response_json]
     end
 
     analysis = vision.mark filepath, faces: 1
@@ -57,7 +57,7 @@ describe Gcloud::Vision::Project, :mock_vision do
       face["features"].first["type"].must_equal "FACE_DETECTION"
       face["features"].first["maxResults"].must_equal 1
       [200, {"Content-Type" => "application/json"},
-       image_response_json]
+       face_response_json]
     end
 
     analysis = vision.annotate filepath, faces: 1
@@ -78,7 +78,7 @@ describe Gcloud::Vision::Project, :mock_vision do
       requests.last["features"].first["type"].must_equal "FACE_DETECTION"
       requests.last["features"].first["maxResults"].must_equal 1
       [200, {"Content-Type" => "application/json"},
-       multiple_response_json]
+       faces_response_json]
     end
 
     analyses = vision.mark filepath, filepath, faces: 1
@@ -87,7 +87,63 @@ describe Gcloud::Vision::Project, :mock_vision do
     analyses.last.face.wont_be :nil?
   end
 
-  def image_response_json
+  it "detects landmark detection" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      landmark = requests.first
+      landmark["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      landmark["features"].count.must_equal 1
+      landmark["features"].first["type"].must_equal "LANDMARK_DETECTION"
+      landmark["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       landmark_response_json]
+    end
+
+    analysis = vision.mark filepath, landmarks: 1
+  end
+
+  it "detects landmark detection using annotate alias" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      landmark = requests.first
+      landmark["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      landmark["features"].count.must_equal 1
+      landmark["features"].first["type"].must_equal "LANDMARK_DETECTION"
+      landmark["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       landmark_response_json]
+    end
+
+    analysis = vision.annotate filepath, landmarks: 1
+    analysis.wont_be :nil?
+    analysis.landmark.wont_be :nil?
+  end
+
+  it "detects landmark detection on multiple images" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 2
+      requests.first["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.first["features"].count.must_equal 1
+      requests.first["features"].first["type"].must_equal "LANDMARK_DETECTION"
+      requests.first["features"].first["maxResults"].must_equal 1
+      requests.last["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.last["features"].count.must_equal 1
+      requests.last["features"].first["type"].must_equal "LANDMARK_DETECTION"
+      requests.last["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       landmarks_response_json]
+    end
+
+    analyses = vision.mark filepath, filepath, landmarks: 1
+    analyses.count.must_equal 2
+    analyses.first.landmark.wont_be :nil?
+    analyses.last.landmark.wont_be :nil?
+  end
+
+  def face_response_json
     {
       responses: [{
         faceAnnotations: [face_annotation_response]
@@ -95,12 +151,30 @@ describe Gcloud::Vision::Project, :mock_vision do
     }.to_json
   end
 
-  def multiple_response_json
+  def faces_response_json
     {
       responses: [{
         faceAnnotations: [face_annotation_response]
       }, {
         faceAnnotations: [face_annotation_response]
+      }]
+    }.to_json
+  end
+
+  def landmark_response_json
+    {
+      responses: [{
+        landmarkAnnotations: [landmark_annotation_response]
+      }]
+    }.to_json
+  end
+
+  def landmarks_response_json
+    {
+      responses: [{
+        landmarkAnnotations: [landmark_annotation_response]
+      }, {
+        landmarkAnnotations: [landmark_annotation_response]
       }]
     }.to_json
   end

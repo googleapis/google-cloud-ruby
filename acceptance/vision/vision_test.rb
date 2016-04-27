@@ -20,7 +20,7 @@ require "pathname"
 describe "Vision", :vision do
   let(:face_image)     { "acceptance/data/face.jpg" }
   let(:logo_image)     { "acceptance/data/logo.jpg" }
-  let(:location_image) { "acceptance/data/location.jpg" }
+  let(:landmark_image) { "acceptance/data/landmark.jpg" }
   let(:text_image)     { "acceptance/data/text.png" }
 
   describe "faces" do
@@ -33,13 +33,31 @@ describe "Vision", :vision do
     it "detects faces from multiple images" do
       analyses = vision.mark face_image,
                              File.open(logo_image, "rb"),
-                             Pathname.new(location_image),
+                             Pathname.new(landmark_image),
                              faces: 1
 
       analyses.count.must_equal 3
       analyses[0].faces.count.must_equal 1
       analyses[1].faces.count.must_equal 0
       analyses[2].faces.count.must_equal 1
+    end
+  end
+
+  describe "landmarks" do
+    it "detects landmarks from an image" do
+      analysis = vision.mark landmark_image, landmarks: 1
+
+      analysis.landmarks.count.must_equal 1
+    end
+
+    it "detects landmarks from multiple images" do
+      analyses = vision.mark landmark_image,
+                             File.open(logo_image, "rb"),
+                             landmarks: 1
+
+      analyses.count.must_equal 2
+      analyses[0].landmarks.count.must_equal 1
+      analyses[1].landmarks.count.must_equal 0
     end
   end
 end

@@ -1006,4 +1006,23 @@ class MockVision < Minitest::Spec
       headwearLikelihood: :VERY_UNLIKELY,
     }
   end
+
+  def landmark_annotation_response
+    {
+      mid: "/m/019dvv",
+      description: "Mount Rushmore",
+      score: 0.91912264,
+      boundingPoly: {
+        vertices: [
+          { x: 9,   y: 35 },
+          { x: 492, y: 35 },
+          { x: 492, y: 325 },
+          { x: 9,   y: 325 }
+        ]
+      },
+     locations: [
+       { latLng: { latitude: 43.878264, longitude: -103.45700740814209 } }
+     ]
+    }
+  end
 end
