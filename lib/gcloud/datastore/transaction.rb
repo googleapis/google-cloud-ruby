@@ -59,9 +59,12 @@ module Gcloud
       #     end
       #   end
       #
-      def delete *entities
+      def delete *entities_or_keys
+        keys = entities_or_keys.map do |e_or_k|
+          e_or_k.respond_to?(:key) ? e_or_k.key.to_proto : e_or_k.to_proto
+        end
         shared_mutation.tap do |m|
-          m.delete = entities.map { |entity| entity.key.to_proto }
+          m.delete = keys
         end
         # Do not delete yet
         true
