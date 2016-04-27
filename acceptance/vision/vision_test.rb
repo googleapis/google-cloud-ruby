@@ -78,4 +78,22 @@ describe "Vision", :vision do
       analyses[1].logos.count.must_equal 0
     end
   end
+
+  describe "labels" do
+    it "detects labels from an image" do
+      analysis = vision.mark landmark_image, labels: 10
+
+      analysis.labels.count.must_equal 6
+    end
+
+    it "detects labels from multiple images" do
+      analyses = vision.mark landmark_image,
+                             face_image,
+                             labels: 10
+
+      analyses.count.must_equal 2
+      analyses[0].labels.count.must_equal 6
+      analyses[1].labels.count.must_equal 4
+    end
+  end
 end

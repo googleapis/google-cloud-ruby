@@ -80,10 +80,10 @@ module Gcloud
         Image.from_source source
       end
 
-      def mark *images, faces: nil, landmarks: nil, logos: nil
+      def mark *images, faces: nil, landmarks: nil, logos: nil, labels: nil
         requests = annotate_requests(*images, faces: faces,
                                               landmarks: landmarks,
-                                              logos: logos)
+                                              logos: logos, labels: labels)
 
         resp = connection.annotate requests
         analyses = Array(resp.data["responses"]).map do |gapi|
@@ -96,7 +96,8 @@ module Gcloud
 
       protected
 
-      def annotate_requests *images, faces: nil, landmarks: nil, logos: nil
+      def annotate_requests *images, faces: nil, landmarks: nil, logos: nil,
+                            labels: nil
         Array(images).flatten.map do |img|
           features = []
           features << { type: :FACE_DETECTION, maxResults: faces.to_i } if faces
@@ -104,6 +105,8 @@ module Gcloud
                         maxResults: landmarks.to_i } if landmarks
           features << { type: :LOGO_DETECTION,
                         maxResults: logos.to_i } if logos
+          features << { type: :LABEL_DETECTION,
+                        maxResults: labels.to_i } if labels
           { image: image(img).to_gapi, features: features }
         end
       end

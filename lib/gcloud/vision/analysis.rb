@@ -179,18 +179,65 @@ module Gcloud
         logos.count > 0
       end
 
+      # The Analysis::Entity results containing the results of label detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, labels: 1
+      #   analysis.labels.count #=> 1
+      #   label = analysis.labels.first
+      #
+      def labels
+        @labels ||= Array(@gapi["labelAnnotations"]).map do |lb|
+          # Entity.from_gapi lb
+          lb
+        end
+      end
+
+      # The first Analysis::Entity result, if there is one.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, labels: 1
+      #   label = analysis.label
+      #
+      def label
+        labels.first
+      end
+
+      # Whether there is at least one Analysis::Entity result for label
+      # detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, labels: 1
+      #   analysis.label? #=> true
+      #
+      def label?
+        labels.count > 0
+      end
+
       def to_h
         to_hash
       end
 
       def to_hash
         { faces: faces.map(&:to_h), landmarks: landmarks.map(&:to_h),
-          logos: logos.map(&:to_h) }
+          logos: logos.map(&:to_h), labels: labels.map(&:to_h) }
       end
 
       def to_s
-        tmplt = "faces: %i, landmarks: %i, logos: %i"
-        format tmplt, faces.count, landmarks.count, logos.count
+        tmplt = "faces: %i, landmarks: %i, logos: %i, labels: %i"
+        format tmplt, faces.count, landmarks.count, logos.count, labels.count
       end
 
       def inspect

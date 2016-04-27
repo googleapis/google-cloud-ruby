@@ -199,6 +199,62 @@ describe Gcloud::Vision::Project, :mock_vision do
     analyses.last.logo.wont_be :nil?
   end
 
+  it "detects label detection" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      label = requests.first
+      label["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      label["features"].count.must_equal 1
+      label["features"].first["type"].must_equal "LABEL_DETECTION"
+      label["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       label_response_json]
+    end
+
+    analysis = vision.mark filepath, labels: 1
+  end
+
+  it "detects label detection using annotate alias" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      label = requests.first
+      label["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      label["features"].count.must_equal 1
+      label["features"].first["type"].must_equal "LABEL_DETECTION"
+      label["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       label_response_json]
+    end
+
+    analysis = vision.annotate filepath, labels: 1
+    analysis.wont_be :nil?
+    analysis.label.wont_be :nil?
+  end
+
+  it "detects label detection on multiple images" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 2
+      requests.first["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.first["features"].count.must_equal 1
+      requests.first["features"].first["type"].must_equal "LABEL_DETECTION"
+      requests.first["features"].first["maxResults"].must_equal 1
+      requests.last["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.last["features"].count.must_equal 1
+      requests.last["features"].first["type"].must_equal "LABEL_DETECTION"
+      requests.last["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       labels_response_json]
+    end
+
+    analyses = vision.mark filepath, filepath, labels: 1
+    analyses.count.must_equal 2
+    analyses.first.label.wont_be :nil?
+    analyses.last.label.wont_be :nil?
+  end
+
   def face_response_json
     {
       responses: [{
@@ -249,6 +305,24 @@ describe Gcloud::Vision::Project, :mock_vision do
         logoAnnotations: [logo_annotation_response]
       }, {
         logoAnnotations: [logo_annotation_response]
+      }]
+    }.to_json
+  end
+
+  def label_response_json
+    {
+      responses: [{
+        labelAnnotations: [label_annotation_response]
+      }]
+    }.to_json
+  end
+
+  def labels_response_json
+    {
+      responses: [{
+        labelAnnotations: [label_annotation_response]
+      }, {
+        labelAnnotations: [label_annotation_response]
       }]
     }.to_json
   end
