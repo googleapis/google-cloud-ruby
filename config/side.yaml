@@ -76,6 +76,15 @@ classes:
     name: Bucket
   - full_name: Gcloud::Storage::File
     name: File
+- full_name: Gcloud::Translate
+  name: Translate
+  classes:
+  - full_name: Gcloud::Translate::Api
+    name: Api
+  - full_name: Gcloud::Translate::Translation
+    name: Translation
+  - full_name: Gcloud::Translate::Detection
+    name: Detection
 pages:
 - full_name: OVERVIEW
   name: Overview
