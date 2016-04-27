@@ -108,8 +108,6 @@ Guide</a>.</p>
               
                 <span class='object_link'><a href="#pubsub-class_method" title="Gcloud.pubsub (method)">Gcloud.pubsub</a></span>
               
-                <span class='object_link'><a href="#search-class_method" title="Gcloud.search (method)">Gcloud.search</a></span>
-              
                 <span class='object_link'><a href="#logging-class_method" title="Gcloud.logging (method)">Gcloud.logging</a></span>
               
                 <span class='object_link'><a href="#storage-class_method" title="Gcloud.storage (method)">Gcloud.storage</a></span>
@@ -137,8 +135,6 @@ Guide</a>.</p>
                 <span class='object_link'><a href="#dns-instance_method" title="Gcloud#dns (method)">#dns</a></span>
               
                 <span class='object_link'><a href="#resource_manager-instance_method" title="Gcloud#resource_manager (method)">#resource_manager</a></span>
-              
-                <span class='object_link'><a href="#search-instance_method" title="Gcloud#search (method)">#search</a></span>
               
                 <span class='object_link'><a href="#logging-instance_method" title="Gcloud#logging (method)">#logging</a></span>
               
@@ -465,107 +461,6 @@ APIs</a>.</p>
 <span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>task completed</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
-                    
-
-                  </div>
-                  
-                </div>
-              
-            
-              
-                <div class="method">
-                  <a name="search-class_method"></a>
-                  <h4>
-                    <code>search(project = nil, keyfile = nil, scope: nil)</code>
-                    <span>
-                      <a href="#search-class_method">&para;</a>
-                      <a href="#top">&uarr;</a>
-                    </span>
-                  </h4>
-
-                  <div class="method-description">
-
-                    <p>Creates a new <code class="highlighter-rouge">Project</code> instance connected to the Search service.
-Each call creates a new connection.</p>
-
-<p>For more information on connecting to Google Cloud see the <a href="https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication">Authentication
-Guide</a>.</p>
-
-
-                    
-
-                    
-                      <h3 id="method-i-search-label-Parameters">
-                        Parameters
-                        <span><a href="#method-i-search-label-Parameters">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      <dl class="rdoc-list note-list">
-                        
-                          <dt>
-                            <code>project</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>Identifier for a Search project. If not present, the
-default project for the credentials is used.</p>
-</div>
-                              
-                              (<tt>String</tt>)
-                            </p>
-                          </dd>
-                        
-                          <dt>
-                            <code>keyfile</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>Keyfile downloaded from Google Cloud. If file
-path the file must be readable.</p>
-</div>
-                              
-                              (<tt>String</tt>, <tt>Hash</tt>)
-                            </p>
-                          </dd>
-                        
-                          <dt>
-                            <code>scope</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
-set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
-OAuth 2.0 to Access Google
-APIs</a>.</p>
-
-<p>The default scopes are:</p>
-
-<ul>
-  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/cloudsearch</code></li>
-  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/userinfo.email</code></li>
-</ul>
-</div>
-                              
-                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
-                            </p>
-                          </dd>
-                        
-                      </dl>
-                    
-
-                    
-                      <h3 id="method-i-search-label-Returns">
-                        Returns
-                        <span><a href="#method-i-search-label-Returns">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      <p>
-                        (<tt><span class='object_link'><a href="Gcloud/Search/Project.html" title="Gcloud::Search::Project (class)">Gcloud::Search::Project</a></span></tt>)
-                        
-                      </p>
-                    
-
                     
 
                   </div>
@@ -1739,88 +1634,6 @@ APIs</a>.</p>
             
               
                 <div class="method">
-                  <a name="search-instance_method"></a>
-                  <h4>
-                    <code>search(scope: nil)</code>
-                    <span>
-                      <a href="#search-instance_method">&para;</a>
-                      <a href="#top">&uarr;</a>
-                    </span>
-                  </h4>
-
-                  <div class="method-description">
-
-                    <p>Creates a new object for connecting to the Search service.
-Each call creates a new connection.</p>
-
-<p>For more information on connecting to Google Cloud see the <a href="https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication">Authentication
-Guide</a>.</p>
-
-
-                    
-
-                    
-                      <h3 id="method-i-search-label-Parameters">
-                        Parameters
-                        <span><a href="#method-i-search-label-Parameters">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      <dl class="rdoc-list note-list">
-                        
-                          <dt>
-                            <code>scope</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
-set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
-OAuth 2.0 to Access Google
-APIs</a>.</p>
-
-<p>The default scopes are:</p>
-
-<ul>
-  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/cloudsearch</code></li>
-  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/userinfo.email</code></li>
-</ul>
-</div>
-                              
-                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
-                            </p>
-                          </dd>
-                        
-                      </dl>
-                    
-
-                    
-                      <h3 id="method-i-search-label-Returns">
-                        Returns
-                        <span><a href="#method-i-search-label-Returns">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      <p>
-                        (<tt><span class='object_link'><a href="Gcloud/Search/Project.html" title="Gcloud::Search::Project (class)">Gcloud::Search::Project</a></span></tt>)
-                        
-                      </p>
-                    
-
-                    
-                      <h3 id="method-i-search-label-Examples">
-                        Example
-                        <span><a href="#method-i-search-label-Examples">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      
-                        
-                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span></code></pre>
-                      
-                    
-
-                  </div>
-                  
-                </div>
-              
-            
-              
-                <div class="method">
                   <a name="logging-instance_method"></a>
                   <h4>
                     <code>logging(scope: nil)</code>
@@ -1920,7 +1733,7 @@ APIs</a>.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Apr 27, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal current' href=''>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Apr 27, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal current' href=''>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

@@ -270,24 +270,6 @@ Monitoring</li>
 </code></pre>
 </div>
 
-<h1 id="search">Search</h1>
-
-<p><a href="https://cloud.google.com/search/">Google Cloud Search</a> (<a href="https://cloud.google.com/search/reference/rest/index">docs</a>) allows an application to quickly perform full-text and geo-spatial searches without having to spin up instances and without the hassle of managing and maintaining a search service.</p>
-
-<p>See the <span class='object_link'><a href="Gcloud/Search.html" title="Gcloud::Search (module)">gcloud-ruby Search API documentation</a></span> to learn how to connect to Cloud Search using this library.</p>
-
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
-
-<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">search</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">search</span>
-<span class="n">index</span> <span class="o">=</span> <span class="n">search</span><span class="p">.</span><span class="nf">index</span> <span class="s2">"products"</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="n">index</span><span class="p">.</span><span class="nf">search</span> <span class="s2">"cotton T-shirt"</span><span class="p">,</span>
-                       <span class="ss">expressions: </span><span class="p">{</span> <span class="ss">total_price: </span><span class="s2">"(price + tax)"</span> <span class="p">},</span>
-                       <span class="ss">fields: </span><span class="p">[</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"total_price"</span><span class="p">,</span> <span class="s2">"highlight"</span><span class="p">]</span>
-</code></pre>
-</div>
-
 <h1 id="storage">Storage</h1>
 
 <p><a href="https://cloud.google.com/storage/">Google Cloud Storage</a> (<a href="https://cloud.google.com/storage/docs/json_api/">docs</a>) allows you to store data on Google infrastructure with very high reliability, performance and availability, and can be used to distribute large data objects to users via direct download.</p>
@@ -317,7 +299,7 @@ Monitoring</li>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Apr 27, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal current' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Search.html'>Search</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Apr 27, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal current' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
