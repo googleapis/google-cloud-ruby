@@ -60,4 +60,22 @@ describe "Vision", :vision do
       analyses[1].landmarks.count.must_equal 0
     end
   end
+
+  describe "logos" do
+    it "detects logos from an image" do
+      analysis = vision.mark logo_image, logos: 1
+
+      analysis.logos.count.must_equal 1
+    end
+
+    it "detects logos from multiple images" do
+      analyses = vision.mark logo_image,
+                             StringIO.new(File.read(face_image, mode: "rb")),
+                             logos: 1
+
+      analyses.count.must_equal 2
+      analyses[0].logos.count.must_equal 1
+      analyses[1].logos.count.must_equal 0
+    end
+  end
 end

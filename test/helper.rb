@@ -1075,4 +1075,20 @@ class MockVision < Minitest::Spec
      ]
     }
   end
+
+  def logo_annotation_response
+    {
+      mid: "/m/045c7b",
+      description: "Google",
+      score: 0.6435439,
+      boundingPoly: {
+        vertices: [
+          { x: 11,  y: 11 },
+          { x: 330, y: 11 },
+          { x: 330, y: 72 },
+          { x: 11,  y: 72 }
+        ]
+      }
+    }
+  end
 end

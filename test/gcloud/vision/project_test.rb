@@ -143,6 +143,62 @@ describe Gcloud::Vision::Project, :mock_vision do
     analyses.last.landmark.wont_be :nil?
   end
 
+  it "detects logo detection" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      logo = requests.first
+      logo["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      logo["features"].count.must_equal 1
+      logo["features"].first["type"].must_equal "LOGO_DETECTION"
+      logo["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       logo_response_json]
+    end
+
+    analysis = vision.mark filepath, logos: 1
+  end
+
+  it "detects logo detection using annotate alias" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      logo = requests.first
+      logo["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      logo["features"].count.must_equal 1
+      logo["features"].first["type"].must_equal "LOGO_DETECTION"
+      logo["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       logo_response_json]
+    end
+
+    analysis = vision.annotate filepath, logos: 1
+    analysis.wont_be :nil?
+    analysis.logo.wont_be :nil?
+  end
+
+  it "detects logo detection on multiple images" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 2
+      requests.first["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.first["features"].count.must_equal 1
+      requests.first["features"].first["type"].must_equal "LOGO_DETECTION"
+      requests.first["features"].first["maxResults"].must_equal 1
+      requests.last["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.last["features"].count.must_equal 1
+      requests.last["features"].first["type"].must_equal "LOGO_DETECTION"
+      requests.last["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       logos_response_json]
+    end
+
+    analyses = vision.mark filepath, filepath, logos: 1
+    analyses.count.must_equal 2
+    analyses.first.logo.wont_be :nil?
+    analyses.last.logo.wont_be :nil?
+  end
+
   def face_response_json
     {
       responses: [{
@@ -175,6 +231,24 @@ describe Gcloud::Vision::Project, :mock_vision do
         landmarkAnnotations: [landmark_annotation_response]
       }, {
         landmarkAnnotations: [landmark_annotation_response]
+      }]
+    }.to_json
+  end
+
+  def logo_response_json
+    {
+      responses: [{
+        logoAnnotations: [logo_annotation_response]
+      }]
+    }.to_json
+  end
+
+  def logos_response_json
+    {
+      responses: [{
+        logoAnnotations: [logo_annotation_response]
+      }, {
+        logoAnnotations: [logo_annotation_response]
       }]
     }.to_json
   end
