@@ -118,7 +118,8 @@ module Gcloud
         landmarks.first
       end
 
-      # Whether there is at least one Analysis::Entity result.
+      # Whether there is at least one Analysis::Entity result for landmark
+      # detection.
       #
       # @example
       #   require "gcloud"
@@ -132,16 +133,64 @@ module Gcloud
         landmarks.count > 0
       end
 
+      # The Analysis::Entity results containing the results of logo detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, logos: 1
+      #   analysis.logos.count #=> 1
+      #   logo = analysis.logos.first
+      #
+      def logos
+        @logos ||= Array(@gapi["logoAnnotations"]).map do |lg|
+          Entity.from_gapi lg
+        end
+      end
+
+      # The first Analysis::Entity result, if there is one.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, logos: 1
+      #   logo = analysis.logo
+      #
+      def logo
+        logos.first
+      end
+
+      # Whether there is at least one Analysis::Entity result for logo
+      # detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, logos: 1
+      #   analysis.logo? #=> true
+      #
+      def logo?
+        logos.count > 0
+      end
+
       def to_h
         to_hash
       end
 
       def to_hash
-        { faces: faces.map(&:to_h), landmarks: landmarks.map(&:to_h) }
+        { faces: faces.map(&:to_h), landmarks: landmarks.map(&:to_h),
+          logos: logos.map(&:to_h) }
       end
 
       def to_s
-        "(faces: #{faces.count}, landmarks: #{landmarks.count})"
+        tmplt = "faces: %i, landmarks: %i, logos: %i"
+        format tmplt, faces.count, landmarks.count, logos.count
       end
 
       def inspect
