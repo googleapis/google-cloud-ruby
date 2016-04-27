@@ -45,6 +45,7 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.save entity
+    transaction.send(:shared_mutation).upsert.must_include entity.to_proto
   end
 
   it "delete does not persist entities" do
@@ -53,6 +54,16 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.delete entity
+    transaction.send(:shared_mutation).delete.must_include entity.key.to_proto
+  end
+
+  it "delete does not persist keys" do
+    entity = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    transaction.delete entity.key
+    transaction.send(:shared_mutation).delete.must_include entity.key.to_proto
   end
 
   it "commit persists entities" do
