@@ -1041,4 +1041,12 @@ class MockVision < Minitest::Spec
       }
     }
   end
+
+  def label_annotation_response
+    {
+      mid: "/m/02wtjj",
+      description: "stone carving",
+      score: 0.9859733
+    }
+  end
 end
