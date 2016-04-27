@@ -1049,4 +1049,19 @@ class MockVision < Minitest::Spec
       score: 0.9859733
     }
   end
+
+  def text_annotation_response
+    {
+      locale: "en",
+      description: "Google Cloud Client Library for Ruby an idiomatic, intuitive, and\nnatural way for Ruby developers to integrate with Google Cloud\nPlatform services, like Cloud Datastore and Cloud Storage.\n",
+      boundingPoly: {
+        vertices: [
+          { x: 13,  y: 8 },
+          { x: 385, y: 8 },
+          { x: 385, y: 74 },
+          { x: 13,  y: 74 }
+        ]
+      }
+    }
+  end
 end

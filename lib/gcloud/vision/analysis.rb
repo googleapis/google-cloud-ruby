@@ -226,6 +226,52 @@ module Gcloud
         labels.count > 0
       end
 
+      # The Analysis::Entity results containing the results of text detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, text: true
+      #   analysis.texts.count #=> 1
+      #   text = analysis.texts.first
+      #
+      def texts
+        @texts ||= Array(@gapi["textAnnotations"]).map do |txt|
+          Entity.from_gapi txt
+        end
+      end
+
+      # The first Analysis::Entity result, if there is one.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, text: true
+      #   text = analysis.text
+      #
+      def text
+        texts.first
+      end
+
+      # Whether there is at least one Analysis::Entity result for text
+      # detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, text: true
+      #   analysis.text? #=> true
+      #
+      def text?
+        texts.count > 0
+      end
+
       def to_h
         to_hash
       end
