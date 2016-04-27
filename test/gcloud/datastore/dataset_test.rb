@@ -102,7 +102,9 @@ describe Gcloud::Datastore::Dataset do
       e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
     end
+    entity.wont_be :persisted?
     dataset.save entity
+    entity.must_be :persisted?
   end
 
   it "find can take a kind and id" do
