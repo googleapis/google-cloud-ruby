@@ -96,4 +96,24 @@ describe "Vision", :vision do
       analyses[1].labels.count.must_equal 4
     end
   end
+
+  describe "text" do
+    it "detects text from an image" do
+      analysis = vision.mark text_image, text: true
+
+      analysis.texts.count.must_equal 29
+    end
+
+    it "detects text from multiple images" do
+      analyses = vision.mark text_image,
+                             face_image,
+                             logo_image,
+                             text: true
+
+      analyses.count.must_equal 3
+      analyses[0].texts.count.must_equal 29
+      analyses[1].texts.count.must_equal 0
+      analyses[2].texts.count.must_equal 2
+    end
+  end
 end
