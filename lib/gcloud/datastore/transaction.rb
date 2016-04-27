@@ -141,6 +141,8 @@ module Gcloud
           # assign returned key if entity and key are present
           entity.key = Key.from_grpc key unless key.nil?
         end
+        # Make sure all entity keys are frozen so all show as persisted
+        shared_upserts.each { |e| e.key.freeze unless e.persisted? }
         true
       end
 

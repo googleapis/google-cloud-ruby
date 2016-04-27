@@ -68,7 +68,35 @@ describe Gcloud::Datastore::Transaction do
     transaction.send(:shared_deletes).must_include entity.key
   end
 
-  it "commit persists entities" do
+  it "commit persists entities with complete keys" do
+    commit_res = Google::Datastore::V1beta3::CommitResponse.new(
+      mutation_results: [Google::Datastore::V1beta3::MutationResult.new]
+    )
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [Google::Datastore::V1beta3::Mutation.new(
+        upsert: Gcloud::Datastore::Entity.new.tap do |e|
+          e.key = Gcloud::Datastore::Key.new "ds-test"
+          e["name"] = "thingamajig"
+        end.to_grpc)]
+    )
+    transaction.service.mocked_datastore.expect :commit, commit_res,
+                                  [Google::Datastore::V1beta3::CommitRequest]
+
+    entity = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity.key.must_be :complete?
+    transaction.save entity
+    entity.wont_be :persisted?
+    transaction.commit
+    entity.key.must_be :complete?
+    entity.must_be :persisted?
+  end
+
+  it "commit persists entities with incomplete keys" do
     commit_res = Google::Datastore::V1beta3::CommitResponse.new(
       mutation_results: [
         Google::Datastore::V1beta3::MutationResult.new(
@@ -93,8 +121,10 @@ describe Gcloud::Datastore::Transaction do
     end
     entity.key.must_be :incomplete?
     transaction.save entity
+    entity.wont_be :persisted?
     transaction.commit
     entity.key.must_be :complete?
+    entity.must_be :persisted?
   end
 
   it "rollback does not persist entities" do
