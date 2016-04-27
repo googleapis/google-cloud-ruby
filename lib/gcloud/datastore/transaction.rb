@@ -45,6 +45,7 @@ module Gcloud
       #
       def save *entities
         save_entities_to_mutation entities, shared_mutation
+        @_saved_entities += entities
         # Do not save or assign auto_ids yet
         entities
       end
@@ -87,6 +88,8 @@ module Gcloud
 
         response = connection.commit shared_mutation, @id
         auto_id_assign_ids response.mutation_result.insert_auto_id_key
+        # Make sure all entity keys are frozen so all show as persisted
+        @_saved_entities.each { |e| e.key.freeze unless e.persisted? }
         true
       end
 
@@ -108,6 +111,7 @@ module Gcloud
         @shared_mutation = nil
         @id = nil
         @_auto_id_entities = []
+        @_saved_entities = []
       end
 
       protected

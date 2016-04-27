@@ -127,6 +127,8 @@ module Gcloud
         save_entities_to_mutation entities, mutation
         response = connection.commit mutation
         auto_id_assign_ids response.mutation_result.insert_auto_id_key
+        # Make sure all entity keys are frozen so all show as persisted
+        entities.each { |e| e.key.freeze unless e.persisted? }
         entities
       end
 

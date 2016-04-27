@@ -66,7 +66,9 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.save entity
+    entity.wont_be :persisted?
     transaction.commit
+    entity.must_be :persisted?
   end
 
   it "rollback does not persist entities" do
