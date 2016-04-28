@@ -25,6 +25,7 @@ require "gcloud/bigquery"
 require "gcloud/dns"
 require "gcloud/resource_manager"
 require "gcloud/logging"
+require "gcloud/vision"
 
 class MockStorage < Minitest::Spec
   let(:project) { storage.connection.project }
@@ -856,5 +857,170 @@ class MockLogging < Minitest::Spec
 
   def project_path
     "projects/#{project}"
+  end
+end
+
+class MockVision < Minitest::Spec
+  let(:project) { vision.connection.project }
+  let(:credentials) { vision.connection.credentials }
+  let(:vision) { $gcloud_vision_global ||= Gcloud::Vision::Project.new("test", OpenStruct.new) }
+
+  def setup
+    @connection = Faraday::Adapter::Test::Stubs.new
+    connection = vision.instance_variable_get "@connection"
+    client = connection.instance_variable_get "@client"
+    client.connection = Faraday.new do |builder|
+      # builder.options.params_encoder = Faraday::FlatParamsEncoder
+      builder.adapter :test, @connection
+    end
+  end
+
+  def teardown
+    @connection.verify_stubbed_calls
+  end
+
+  def mock_connection
+    @connection
+  end
+
+  # Register this spec type for when :vision is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_vision
+  end
+
+  def face_annotation_response
+    {
+      boundingPoly: {
+        vertices: [
+          { x: 1, y: 0 },
+          { x: 295, y: 0 },
+          { x: 295, y: 301 },
+          { x: 1, y: 301 }
+        ]
+      },
+      fdBoundingPoly: {
+        vertices: [
+          { x: 28, y: 40 },
+          { x: 250, y: 40 },
+          { x: 250, y: 262 },
+          { x: 28, y: 262 }
+        ]
+      },
+      landmarks: [
+        { type: :LEFT_EYE, position: { x: 83.707092, y: 128.34, z: -0.00013388535 } },
+        { type: :RIGHT_EYE, position: { x: 181.17694, y: 115.16437, z: -12.82961 } },
+        { type: :LEFT_OF_LEFT_EYEBROW, position: { x: 58.790176, y: 113.28249, z: 17.89735 } },
+        { type: :RIGHT_OF_LEFT_EYEBROW, position: { x: 106.14151, y: 98.593758, z: -13.116687 } },
+        { type: :LEFT_OF_RIGHT_EYEBROW, position: { x: 148.61565, y: 92.294594, z: -18.804882 } },
+        { type: :RIGHT_OF_RIGHT_EYEBROW, position: { x: 204.40808, y: 94.300117, z: -2.0009689 } },
+        { type: :MIDPOINT_BETWEEN_EYES, position: { x: 127.83745, y: 110.17557, z: -22.650913 } },
+        { type: :NOSE_TIP, position: { x: 128.14919, y: 153.68129, z: -63.198204 } },
+        { type: :UPPER_LIP, position: { x: 134.74164, y: 192.50438, z: -53.876408 } },
+        { type: :LOWER_LIP, position: { x: 137.28528, y: 219.23564, z: -56.663128 } },
+        { type: :MOUTH_LEFT, position: { x: 104.53558, y: 214.05037, z: -30.056231 } },
+        { type: :MOUTH_RIGHT, position: { x: 173.79134, y: 204.99333, z: -39.725758 } },
+        { type: :MOUTH_CENTER, position: { x: 136.43481, y: 204.37952, z: -51.620205 } },
+        { type: :NOSE_BOTTOM_RIGHT, position: { x: 161.31354, y: 168.24527, z: -36.1628 } },
+        { type: :NOSE_BOTTOM_LEFT, position: { x: 110.98372, y: 173.61331, z: -29.7784 } },
+        { type: :NOSE_BOTTOM_CENTER, position: { x: 133.81947, y: 173.16437, z: -48.287724 } },
+        { type: :LEFT_EYE_TOP_BOUNDARY, position: { x: 86.706947, y: 119.47144, z: -4.1606765 } },
+        { type: :LEFT_EYE_RIGHT_CORNER, position: { x: 105.28892, y: 125.57655, z: -2.51554 } },
+        { type: :LEFT_EYE_BOTTOM_BOUNDARY, position: { x: 84.883934, y: 134.59479, z: -2.8677137 } },
+        { type: :LEFT_EYE_LEFT_CORNER, position: { x: 72.213913, y: 132.04138, z: 9.6985674 } },
+        { type: :RIGHT_EYE_TOP_BOUNDARY, position: { x: 173.99446, y: 107.94287, z: -16.050705 } },
+        { type: :RIGHT_EYE_RIGHT_CORNER, position: { x: 194.59413, y: 115.91954, z: -6.952745 } },
+        { type: :RIGHT_EYE_BOTTOM_BOUNDARY, position: { x: 179.30353, y: 121.03307, z: -14.843414 } },
+        { type: :RIGHT_EYE_LEFT_CORNER, position: { x: 158.2863, y: 118.491, z: -9.723031 } },
+        { type: :LEFT_EYEBROW_UPPER_MIDPOINT, position: { x: 80.248711, y: 94.04303, z: 0.21131183 } },
+        { type: :RIGHT_EYEBROW_UPPER_MIDPOINT, position: { x: 174.70135, y: 81.580917, z: -12.702137 } },
+        { type: :LEFT_EAR_TRAGION, position: { x: 54.872219, y: 207.23712, z: 97.030685 } },
+        { type: :RIGHT_EAR_TRAGION, position: { x: 252.67567, y: 180.43124, z: 70.15992 } },
+        { type: :LEFT_EYE_PUPIL, position: { x: 86.531624, y: 126.49807, z: -2.2496929 } },
+        { type: :RIGHT_EYE_PUPIL, position: { x: 175.99976, y: 114.64407, z: -14.53744 } },
+        { type: :FOREHEAD_GLABELLA, position: { x: 126.53813, y: 93.812057, z: -18.863352 } },
+        { type: :CHIN_GNATHION, position: { x: 143.34183, y: 262.22998, z: -57.388493 } },
+        { type: :CHIN_LEFT_GONION, position: { x: 63.102425, y: 248.99081, z: 44.207638 } },
+        { type: :CHIN_RIGHT_GONION, position: { x: 241.72728, y: 225.53488, z: 19.758242 } }
+      ],
+      rollAngle: -0.050002542,
+      panAngle: -0.081090336,
+      tiltAngle: 0.18012161,
+      detectionConfidence: 0.56748849,
+      landmarkingConfidence: 34.489909,
+      joyLikelihood: :LIKELY,
+      sorrowLikelihood: :UNLIKELY,
+      angerLikelihood: :VERY_UNLIKELY,
+      surpriseLikelihood: :UNLIKELY,
+      underExposedLikelihood: :VERY_UNLIKELY,
+      blurredLikelihood: :VERY_UNLIKELY,
+      headwearLikelihood: :VERY_UNLIKELY,
+    }
+  end
+
+  def landmark_annotation_response
+    {
+      mid: "/m/019dvv",
+      description: "Mount Rushmore",
+      score: 0.91912264,
+      boundingPoly: {
+        vertices: [
+          { x: 9,   y: 35 },
+          { x: 492, y: 35 },
+          { x: 492, y: 325 },
+          { x: 9,   y: 325 }
+        ]
+      },
+     locations: [
+       { latLng: { latitude: 43.878264, longitude: -103.45700740814209 } }
+     ]
+    }
+  end
+
+  def logo_annotation_response
+    {
+      mid: "/m/045c7b",
+      description: "Google",
+      score: 0.6435439,
+      boundingPoly: {
+        vertices: [
+          { x: 11,  y: 11 },
+          { x: 330, y: 11 },
+          { x: 330, y: 72 },
+          { x: 11,  y: 72 }
+        ]
+      }
+    }
+  end
+
+  def label_annotation_response
+    {
+      mid: "/m/02wtjj",
+      description: "stone carving",
+      score: 0.9859733
+    }
+  end
+
+  def text_annotation_response
+    {
+      locale: "en",
+      description: "Google Cloud Client Library for Ruby an idiomatic, intuitive, and\nnatural way for Ruby developers to integrate with Google Cloud\nPlatform services, like Cloud Datastore and Cloud Storage.\n",
+      boundingPoly: {
+        vertices: [
+          { x: 13,  y: 8 },
+          { x: 385, y: 8 },
+          { x: 385, y: 74 },
+          { x: 13,  y: 74 }
+        ]
+      }
+    }
+  end
+
+  def safe_search_annotation_response
+    {
+      adult:    :VERY_UNLIKELY,
+      spoof:    :UNLIKELY,
+      medical:  :POSSIBLE,
+      violence: :LIKELY
+    }
   end
 end

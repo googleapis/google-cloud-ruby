@@ -347,4 +347,38 @@ module Gcloud
     require "gcloud/logging"
     Gcloud.logging @project, @keyfile, scope: scope
   end
+
+  ##
+  # Creates a new object for connecting to the Vision service.
+  # Each call creates a new connection.
+  #
+  # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
+  #   set of resources and operations that the connection can access. See [Using
+  #   OAuth 2.0 to Access Google
+  #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+  #
+  #   The default scope is:
+  #
+  #   * `https://www.googleapis.com/auth/cloud-platform`
+  #
+  # @return [Gcloud::Vision::Project]
+  #
+  # @example
+  #   require "gcloud"
+  #
+  #   gcloud = Gcloud.new
+  #   vision = gcloud.vision
+  #   # ...
+  #
+  # @example The default scope can be overridden with the `scope` option:
+  #   require "gcloud"
+  #
+  #   gcloud  = Gcloud.new
+  #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
+  #   vision = gcloud.vision scope: platform_scope
+  #
+  def vision scope: nil
+    require "gcloud/vision"
+    Gcloud.vision @project, @keyfile, scope: scope
+  end
 end
