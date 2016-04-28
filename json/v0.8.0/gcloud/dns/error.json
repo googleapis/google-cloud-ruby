@@ -1,0 +1,1 @@
+{"id":"gcloud/dns/error","name":"Error","title":["Gcloud","Dns","Error"],"description":"<p>Base DNS exception class.</p>","source":"lib/gcloud/dns/errors.rb#L22","resources":[],"examples":[],"methods":[]}
