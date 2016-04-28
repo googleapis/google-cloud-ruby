@@ -1064,4 +1064,13 @@ class MockVision < Minitest::Spec
       }
     }
   end
+
+  def safe_search_annotation_response
+    {
+      adult:    :VERY_UNLIKELY,
+      spoof:    :UNLIKELY,
+      medical:  :POSSIBLE,
+      violence: :LIKELY
+    }
+  end
 end
