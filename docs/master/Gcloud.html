@@ -116,6 +116,8 @@ Guide</a>.</p>
               
                 <span class='object_link'><a href="#datastore-class_method" title="Gcloud.datastore (method)">Gcloud.datastore</a></span>
               
+                <span class='object_link'><a href="#translate-class_method" title="Gcloud.translate (method)">Gcloud.translate</a></span>
+              
                 <span class='object_link'><a href="#resource_manager-class_method" title="Gcloud.resource_manager (method)">Gcloud.resource_manager</a></span>
               
             </div>
@@ -137,6 +139,8 @@ Guide</a>.</p>
                 <span class='object_link'><a href="#resource_manager-instance_method" title="Gcloud#resource_manager (method)">#resource_manager</a></span>
               
                 <span class='object_link'><a href="#logging-instance_method" title="Gcloud#logging (method)">#logging</a></span>
+              
+                <span class='object_link'><a href="#translate-instance_method" title="Gcloud#translate (method)">#translate</a></span>
               
             </div>
           
@@ -921,6 +925,101 @@ APIs</a>.</p>
 <span class='kw'>end</span>
 
 <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_entity'>entity</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="translate-class_method"></a>
+                  <h4>
+                    <code>translate(key = nil)</code>
+                    <span>
+                      <a href="#translate-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Creates a new object for connecting to the Translate service.
+Each call creates a new connection.</p>
+
+<p>Unlike other Cloud Platform services, which authenticate using a project ID
+and OAuth 2.0 credentials, Google Translate API requires a public API access
+key. (This may change in future releases of Google Translate API.) Follow
+the general instructions at <a href="https://cloud.google.com/translate/v2/using_rest#auth">Identifying your application to
+Google</a>, and the
+specific instructions for <a href="https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys">Server
+keys</a>.</p>
+
+
+                    
+
+                    
+                      <h3 id="method-i-translate-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-translate-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>key</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>a public API access key (not an OAuth 2.0 token)</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-translate-label-Returns">
+                        Returns
+                        <span><a href="#method-i-translate-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Translate/Api.html" title="Gcloud::Translate::Api (class)">Gcloud::Translate::Api</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-translate-label-Examples">
+                        Examples
+                        <span><a href="#method-i-translate-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_translate'>translate</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_translate'>translate</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>api-key-abc123XYZ789</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_translation'>translation</span> <span class='op'>=</span> <span class='id identifier rubyid_translate'>translate</span><span class='period'>.</span><span class='id identifier rubyid_translate'>translate</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello world!</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>to:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>la</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_translation'>translation</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='comment'>#=&gt; &quot;Salve mundi!&quot;</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Using API Key from the environment variable.</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TRANSLATE_KEY</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>api-key-abc123XYZ789</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_translate'>translate</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_translate'>translate</span>
+
+<span class='id identifier rubyid_translation'>translation</span> <span class='op'>=</span> <span class='id identifier rubyid_translate'>translate</span><span class='period'>.</span><span class='id identifier rubyid_translate'>translate</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello world!</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>to:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>la</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_translation'>translation</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='comment'>#=&gt; &quot;Salve mundi!&quot;</span></code></pre>
                       
                     
 
@@ -1727,13 +1826,110 @@ APIs</a>.</p>
                 </div>
               
             
+              
+                <div class="method">
+                  <a name="translate-instance_method"></a>
+                  <h4>
+                    <code>translate(key = nil)</code>
+                    <span>
+                      <a href="#translate-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Creates a new object for connecting to the Translate service.
+Each call creates a new connection.</p>
+
+<p>Unlike other Cloud Platform services, which authenticate using a project ID
+and OAuth 2.0 credentials, Google Translate API requires a public API access
+key. (This may change in future releases of Google Translate API.) Follow
+the general instructions at <a href="https://cloud.google.com/translate/v2/using_rest#auth">Identifying your application to
+Google</a>, and the
+specific instructions for <a href="https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys">Server
+keys</a>.</p>
+
+
+                    
+
+                    
+                      <h3 id="method-i-translate-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-translate-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>key</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>a public API access key (not an OAuth 2.0 token)</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-translate-label-Returns">
+                        Returns
+                        <span><a href="#method-i-translate-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Translate/Api.html" title="Gcloud::Translate::Api (class)">Gcloud::Translate::Api</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-translate-label-Examples">
+                        Examples
+                        <span><a href="#method-i-translate-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_translate'>translate</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_translate'>translate</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>api-key-abc123XYZ789</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_translation'>translation</span> <span class='op'>=</span> <span class='id identifier rubyid_translate'>translate</span><span class='period'>.</span><span class='id identifier rubyid_translate'>translate</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello world!</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>to:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>la</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_translation'>translation</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='comment'>#=&gt; &quot;Salve mundi!&quot;</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Using API Key from the environment variable.</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TRANSLATE_KEY</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>api-key-abc123XYZ789</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_translate'>translate</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_translate'>translate</span>
+
+<span class='id identifier rubyid_translation'>translation</span> <span class='op'>=</span> <span class='id identifier rubyid_translate'>translate</span><span class='period'>.</span><span class='id identifier rubyid_translate'>translate</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello world!</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>to:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>la</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_translation'>translation</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='comment'>#=&gt; &quot;Salve mundi!&quot;</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
           </div>
         
       </section>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Apr 28, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal current' href=''>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Apr 28, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal current' href=''>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
