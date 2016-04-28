@@ -16,17 +16,41 @@
 module Gcloud
   module Translate
     ##
-    # TODO
+    # # Detection
+    #
+    # Represents a detect language query result. Returned by
+    # {Gcloud::Translate::Api#detect}.
+    #
+    # @see https://cloud.google.com/translate/v2/using_rest#detect-language
+    #   Detect Language
+    #
+    # @example
+    #   require "gcloud"
+    #
+    #   gcloud = Gcloud.new
+    #   translate = gcloud.translate
+    #
+    #   detections = translate.detect "chien", "chat"
+    #
+    #   detections.size #=> 2
+    #   detections[0].text #=> "chien"
+    #   detections[0].language #=> "fr"
+    #   detections[0].confidence #=> 0.7109375
+    #   detections[1].text #=> "chat"
+    #   detections[1].language #=> "en"
+    #   detections[1].confidence #=> 0.59922177
+    #
     class Detection
       ##
-      # The text the language detection was performed on.
+      # The text upon which the language detection was performed.
       #
       # @return [String]
       attr_reader :text
 
       ##
-      # A list of of languages which were detected for the given text. The most
-      # likely language detection is listed first.
+      # The list of detection results for the given text. The most likely
+      # language is listed first, and its attributes can be accessed through
+      # {#language} and {#confidence}.
       #
       # @return [Array<Detection::Result>]
       attr_reader :results
@@ -39,18 +63,21 @@ module Gcloud
       end
 
       ##
-      # The confidence of the most likely detection result.
+      # The confidence that the language detection result is correct. The closer
+      # this value is to 1, the higher the confidence in language detection.
       #
-      # @return [Float]
+      # @return [Float] a value between 0 and 1
       def confidence
         return nil if results.empty?
         results.first.confidence
       end
 
       ##
-      # The most likely language detected. This is an iso639-1 language code.
+      # The most likely language that was detected. This is an [ISO
+      # 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language
+      # code.
       #
-      # @return [String]
+      # @return [String] the language code
       def language
         return nil if results.empty?
         results.first.language
@@ -68,17 +95,27 @@ module Gcloud
         res
       end
 
+      ##
+      # # Result
+      #
+      # Represents an individual result in a {Gcloud::Translate::Detection}
+      # result.
+      #
       class Result
         ##
-        # The confidence of the detection result.
+        # The confidence that the language detection result is correct. The
+        # closer this value is to 1, the higher the confidence in language
+        # detection.
         #
-        # @return [Float]
+        # @return [Float] a value between 0 and 1
         attr_reader :confidence
 
         ##
-        # The language detected. This is an iso639-1 language code.
+        # The language detected. This is an [ISO
+        # 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language
+        # code.
         #
-        # @return [String]
+        # @return [String] the language code
         attr_reader :language
 
         ##

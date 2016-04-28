@@ -16,10 +16,32 @@
 module Gcloud
   module Translate
     ##
-    # TODO
+    # # Translation
+    #
+    # Represents a translation query result. Returned by
+    # {Gcloud::Translate::Api#translate}.
+    #
+    # @see https://cloud.google.com/translate/v2/using_rest#Translate Translate
+    #   Text
+    #
+    # @example
+    #   require "gcloud"
+    #
+    #   gcloud = Gcloud.new
+    #   translate = gcloud.translate
+    #
+    #   translation = translate.translate "Hello world!", to: "la"
+    #
+    #   puts translation #=> Salve mundi!
+    #
+    #   translation.from #=> "en"
+    #   translation.origin #=> "Hello world!"
+    #   translation.to #=> "la"
+    #   translation.text #=> "Salve mundi!"
+    #
     class Translation
       ##
-      # The translated text.
+      # The translated result.
       #
       # @return [String]
       attr_reader :text
@@ -27,13 +49,13 @@ module Gcloud
       alias_method :to_str, :text
 
       ##
-      # The that was translated.
+      # The original query text that was translated.
       #
       # @return [String]
       attr_reader :origin
 
       ##
-      # The target language the text was translated to.
+      # The target language into which the text was translated.
       #
       # @return [String]
       attr_reader :to
@@ -41,7 +63,7 @@ module Gcloud
       alias_method :target, :to
 
       ##
-      # The source language the text was translated from.
+      # The source language from which the text was translated.
       attr_reader :from
       alias_method :source, :from
 
@@ -56,10 +78,12 @@ module Gcloud
       end
 
       ##
-      # Determines if the source language the text was translated from was
-      # detected by the Google Cloud Translate API.
+      # Determines if the source language was detected by the Google Cloud
+      # Translate API.
       #
-      # @return [Boolean]
+      # @return [Boolean] `true` if the source language was detected by the
+      #   Translate service, `false` if the source language was provided in the
+      #   request
       def detected?
         @detected
       end
