@@ -36,7 +36,7 @@ module Gcloud
       # Sign OAuth 2.0 API calls.
       def sign_http_request request
         if @client
-          @client.fetch_access_token! if @client.expired?
+          @client.fetch_access_token! if @client.expires_within? 30
           @client.generate_authenticated_request request: request
         end
         request
