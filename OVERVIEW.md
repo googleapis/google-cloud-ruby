@@ -214,3 +214,26 @@ file.download "/tasks/attachments/#{file.name}"
 backup = storage.bucket "task-attachment-backups"
 file.copy backup, file.name
 ```
+
+# Translate
+
+[Google Translate](https://cloud.google.com/translate/) ([docs](https://cloud.google.com/translate/docs)) provides a simple, programmatic interface for translating an arbitrary string into any supported language. It is highly responsive, so websites and applications can integrate with Translate API for fast, dynamic translation of source text. Language detection is also available in cases where the source language is unknown.
+
+See the {Gcloud::Translate gcloud-ruby Translate API documentation} to learn how to connect to Google Translate using this library.
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new
+translate = gcloud.translate
+
+translation = translate.translate "Hello world!", to: "la"
+
+puts translation #=> Salve mundi!
+
+translation.from #=> "en"
+translation.origin #=> "Hello world!"
+translation.to #=> "la"
+translation.text #=> "Salve mundi!"
+```
+
