@@ -1,5 +1,21 @@
 # Release History
 
+### 0.8.0 / 2016-04-28
+
+#### Major changes
+
+* Add support for Translate API
+* Drop support for Search service
+
+#### Minor changes
+
+* Pub/Sub
+  * Add support for emulator (dlorenc)
+* Datastore
+  * Fix bug where entities were not properly marked persisted after being saved
+  * Fix bug in transaction delete accepting keys (timanovsky)
+  * Update access token logic to avoid expired credentials (timanovsky)
+
 ### 0.7.2 / 2016-04-01
 
 #### Changes
