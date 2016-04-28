@@ -116,4 +116,40 @@ describe "Vision", :vision do
       analyses[2].texts.count.must_equal 2
     end
   end
+
+  describe "safe_search" do
+    it "detects safe_search from an image" do
+      analysis = vision.mark face_image, safe_search: true
+
+      analysis.safe_search.wont_be :nil?
+      analysis.safe_search.wont_be :adult?
+      analysis.safe_search.wont_be :spoof?
+      analysis.safe_search.wont_be :medical?
+      analysis.safe_search.wont_be :violence?
+    end
+
+    it "detects safe_search from multiple images" do
+      analyses = vision.mark text_image,
+                             landmark_image,
+                             text_image,
+                             safe_search: true
+
+      analyses.count.must_equal 3
+      analyses[0].safe_search.wont_be :nil?
+      analyses[0].safe_search.wont_be :adult?
+      analyses[0].safe_search.wont_be :spoof?
+      analyses[0].safe_search.wont_be :medical?
+      analyses[0].safe_search.wont_be :violence?
+      analyses[1].safe_search.wont_be :nil?
+      analyses[1].safe_search.wont_be :adult?
+      analyses[1].safe_search.wont_be :spoof?
+      analyses[1].safe_search.wont_be :medical?
+      analyses[1].safe_search.wont_be :violence?
+      analyses[2].safe_search.wont_be :nil?
+      analyses[2].safe_search.wont_be :adult?
+      analyses[2].safe_search.wont_be :spoof?
+      analyses[2].safe_search.wont_be :medical?
+      analyses[2].safe_search.wont_be :violence?
+    end
+  end
 end

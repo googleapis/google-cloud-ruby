@@ -15,6 +15,7 @@
 
 require "gcloud/vision/analysis/face"
 require "gcloud/vision/analysis/entity"
+require "gcloud/vision/analysis/safe_search"
 
 module Gcloud
   module Vision
@@ -192,8 +193,7 @@ module Gcloud
       #
       def labels
         @labels ||= Array(@gapi["labelAnnotations"]).map do |lb|
-          # Entity.from_gapi lb
-          lb
+          Entity.from_gapi lb
         end
       end
 
@@ -272,18 +272,52 @@ module Gcloud
         texts.count > 0
       end
 
+      # The Analysis::SafeSearch results containing the results of safe_search
+      # detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, safe_search: true
+      #   safe_search = analysis.safe_search
+      #
+      def safe_search
+        return nil unless @gapi["safeSearchAnnotation"]
+        @safe_search ||= SafeSearch.from_gapi(@gapi["safeSearchAnnotation"])
+      end
+
+      # Whether there is at least one Analysis::Entity result for safe_search
+      # detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, safe_search: true
+      #   analysis.safe_search? #=> true
+      #
+      def safe_search?
+        !safe_searchs.nil?
+      end
+
       def to_h
         to_hash
       end
 
       def to_hash
         { faces: faces.map(&:to_h), landmarks: landmarks.map(&:to_h),
-          logos: logos.map(&:to_h), labels: labels.map(&:to_h) }
+          logos: logos.map(&:to_h), labels: labels.map(&:to_h),
+          texts: text.map(&:to_h), safe_search: safe_search.to_h }
       end
 
       def to_s
-        tmplt = "faces: %i, landmarks: %i, logos: %i, labels: %i"
-        format tmplt, faces.count, landmarks.count, logos.count, labels.count
+        tmplt = "(faces: %i, landmarks: %i, logos: %i, labels: %i, texts: %i" \
+                " safe_search: %s)"
+        format tmplt, faces.count, landmarks.count, logos.count, labels.count,
+               texts.count, safe_search?
       end
 
       def inspect

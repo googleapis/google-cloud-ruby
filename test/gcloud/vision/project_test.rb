@@ -45,6 +45,8 @@ describe Gcloud::Vision::Project, :mock_vision do
     end
 
     analysis = vision.mark filepath, faces: 1
+    analysis.wont_be :nil?
+    analysis.face.wont_be :nil?
   end
 
   it "detects face detection using annotate alias" do
@@ -101,6 +103,8 @@ describe Gcloud::Vision::Project, :mock_vision do
     end
 
     analysis = vision.mark filepath, landmarks: 1
+    analysis.wont_be :nil?
+    analysis.landmark.wont_be :nil?
   end
 
   it "detects landmark detection using annotate alias" do
@@ -157,6 +161,8 @@ describe Gcloud::Vision::Project, :mock_vision do
     end
 
     analysis = vision.mark filepath, logos: 1
+    analysis.wont_be :nil?
+    analysis.logo.wont_be :nil?
   end
 
   it "detects logo detection using annotate alias" do
@@ -213,6 +219,8 @@ describe Gcloud::Vision::Project, :mock_vision do
     end
 
     analysis = vision.mark filepath, labels: 1
+    analysis.wont_be :nil?
+    analysis.label.wont_be :nil?
   end
 
   it "detects label detection using annotate alias" do
@@ -269,6 +277,8 @@ describe Gcloud::Vision::Project, :mock_vision do
     end
 
     analysis = vision.mark filepath, text: true
+    analysis.wont_be :nil?
+    analysis.text.wont_be :nil?
   end
 
   it "detects text detection using annotate alias" do
@@ -309,6 +319,84 @@ describe Gcloud::Vision::Project, :mock_vision do
     analyses.count.must_equal 2
     analyses.first.text.wont_be :nil?
     analyses.last.text.wont_be :nil?
+  end
+
+  it "detects safe_search detection" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      safe_search = requests.first
+      safe_search["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      safe_search["features"].count.must_equal 1
+      safe_search["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
+      safe_search["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       safe_search_response_json]
+    end
+
+    analysis = vision.mark filepath, safe_search: true
+    analysis.wont_be :nil?
+
+    analysis.safe_search.wont_be :nil?
+    analysis.safe_search.wont_be :adult?
+    analysis.safe_search.wont_be :spoof?
+    analysis.safe_search.must_be :medical?
+    analysis.safe_search.must_be :violence?
+  end
+
+  it "detects safe_search detection using annotate alias" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      safe_search = requests.first
+      safe_search["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      safe_search["features"].count.must_equal 1
+      safe_search["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
+      safe_search["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       safe_search_response_json]
+    end
+
+    analysis = vision.annotate filepath, safe_search: true
+    analysis.wont_be :nil?
+
+    analysis.safe_search.wont_be :nil?
+    analysis.safe_search.wont_be :adult?
+    analysis.safe_search.wont_be :spoof?
+    analysis.safe_search.must_be :medical?
+    analysis.safe_search.must_be :violence?
+  end
+
+  it "detects safe_search detection on multiple images" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 2
+      requests.first["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.first["features"].count.must_equal 1
+      requests.first["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
+      requests.first["features"].first["maxResults"].must_equal 1
+      requests.last["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.last["features"].count.must_equal 1
+      requests.last["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
+      requests.last["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       safe_searchs_response_json]
+    end
+
+    analyses = vision.mark filepath, filepath, safe_search: true
+    analyses.count.must_equal 2
+
+    analyses.first.safe_search.wont_be :nil?
+    analyses.first.safe_search.wont_be :adult?
+    analyses.first.safe_search.wont_be :spoof?
+    analyses.first.safe_search.must_be :medical?
+    analyses.first.safe_search.must_be :violence?
+
+    analyses.last.safe_search.wont_be :nil?
+    analyses.last.safe_search.wont_be :adult?
+    analyses.last.safe_search.wont_be :spoof?
+    analyses.last.safe_search.must_be :medical?
+    analyses.last.safe_search.must_be :violence?
   end
 
   def face_response_json
@@ -432,5 +520,23 @@ describe Gcloud::Vision::Project, :mock_vision do
       {"description"=>"Cloud", "boundingPoly"=>{"vertices"=>[{"x"=>267, "y"=>59}, {"x"=>298, "y"=>59}, {"x"=>298, "y"=>74}, {"x"=>267, "y"=>74}]}},
       {"description"=>"Storage.", "boundingPoly"=>{"vertices"=>[{"x"=>304, "y"=>59}, {"x"=>351, "y"=>59}, {"x"=>351, "y"=>74}, {"x"=>304, "y"=>74}]}}
     ]
+  end
+
+  def safe_search_response_json
+    {
+      responses: [{
+        safeSearchAnnotation: safe_search_annotation_response
+      }]
+    }.to_json
+  end
+
+  def safe_searchs_response_json
+    {
+      responses: [{
+        safeSearchAnnotation: safe_search_annotation_response
+      }, {
+        safeSearchAnnotation: safe_search_annotation_response
+      }]
+    }.to_json
   end
 end
