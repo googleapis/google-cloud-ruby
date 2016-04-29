@@ -64,6 +64,12 @@ namespace :test do
     Dir.glob("test/gcloud/translate/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
+    desc "Runs vision tests."
+    task :vision do
+      $LOAD_PATH.unshift "lib", "test"
+      Dir.glob("test/gcloud/vision/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    end
+
   desc "Runs tests with coverage."
   task :coverage, :project, :keyfile do |t, args|
     project = args[:project]
@@ -86,6 +92,8 @@ namespace :test do
     ENV["DNS_KEYFILE"] = keyfile
     ENV["LOGGING_PROJECT"] = project
     ENV["LOGGING_KEYFILE"] = keyfile
+    ENV["VISION_PROJECT"] = project
+    ENV["VISION_KEYFILE"] = keyfile
 
     require "simplecov"
     SimpleCov.start("test_frameworks") { command_name "Minitest" }
@@ -117,6 +125,8 @@ namespace :test do
     ENV["DNS_KEYFILE"] = keyfile
     ENV["LOGGING_PROJECT"] = project
     ENV["LOGGING_KEYFILE"] = keyfile
+    ENV["VISION_PROJECT"] = project
+    ENV["VISION_KEYFILE"] = keyfile
 
     require "simplecov"
     require "coveralls"
@@ -149,6 +159,8 @@ namespace :test do
     ENV["DNS_KEYFILE"] = keyfile
     ENV["LOGGING_PROJECT"] = project
     ENV["LOGGING_KEYFILE"] = keyfile
+    ENV["VISION_PROJECT"] = project
+    ENV["VISION_KEYFILE"] = keyfile
 
     $LOAD_PATH.unshift "lib", "test", "acceptance"
     Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative "../#{file}"}
@@ -386,6 +398,23 @@ namespace :test do
     task :translate do |t, args|
       $LOAD_PATH.unshift "lib", "test", "acceptance"
       Dir.glob("acceptance/translate/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    end
+
+    desc "Runs the vision acceptance tests."
+    task :vision, :project, :keyfile do |t, args|
+      project = args[:project]
+      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["VISION_TEST_PROJECT"]
+      keyfile = args[:keyfile]
+      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["VISION_TEST_KEYFILE"]
+      if project.nil? || keyfile.nil?
+        fail "You must provide a project and keyfile. e.g. rake test:acceptance:vision[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:vision"
+      end
+      # always overwrite when running tests
+      ENV["VISION_PROJECT"] = project
+      ENV["VISION_KEYFILE"] = keyfile
+
+      $LOAD_PATH.unshift "lib", "test", "acceptance"
+      Dir.glob("acceptance/vision/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
     desc "Removes *ALL* acceptance test data. Use with caution."
