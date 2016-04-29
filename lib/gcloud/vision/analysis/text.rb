@@ -78,7 +78,7 @@ module Gcloud
 
         def inspect
           format "#<Text text: %s, locale: %s, bounds: %i, words: %i>",
-                 description.inspect, locale.inspect, bounds.count, words.count
+                 text.inspect, locale.inspect, bounds.count, words.count
         end
 
         ##
@@ -138,8 +138,7 @@ module Gcloud
           end
 
           def inspect
-            format "#<Word text: %s, bounds: %i>", description.inspect,
-                   bounds.count
+            format "#<Word text: %s, bounds: %i>", text.inspect, bounds.count
           end
 
           ##

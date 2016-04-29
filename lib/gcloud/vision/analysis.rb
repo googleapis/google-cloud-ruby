@@ -284,7 +284,7 @@ module Gcloud
       #   analysis.safe_search? #=> true
       #
       def safe_search?
-        !safe_searchs.nil?
+        !safe_search.nil?
       end
 
       # The Analysis::Properties results containing the results of properties
@@ -324,14 +324,15 @@ module Gcloud
       def to_hash
         { faces: faces.map(&:to_h), landmarks: landmarks.map(&:to_h),
           logos: logos.map(&:to_h), labels: labels.map(&:to_h),
-          texts: text.map(&:to_h), safe_search: safe_search.to_h }
+          text: text.map(&:to_h), safe_search: safe_search.to_h,
+          properties: properties.to_h }
       end
 
       def to_s
-        tmplt = "(faces: %i, landmarks: %i, logos: %i, labels: %i, texts: %i" \
-                " safe_search: %s)"
+        tmplt = "(faces: %i, landmarks: %i, logos: %i, labels: %i, text: %s," \
+                " safe_search: %s, properties: %s)"
         format tmplt, faces.count, landmarks.count, logos.count, labels.count,
-               texts.count, safe_search?
+               text?, safe_search?, properties?
       end
 
       def inspect
