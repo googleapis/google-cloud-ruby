@@ -45,6 +45,10 @@ module Gcloud
           body_object: { requests: requests }
         )
       end
+
+      def inspect
+        "#{self.class}(#{@project})"
+      end
     end
   end
 end
