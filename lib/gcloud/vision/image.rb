@@ -76,6 +76,16 @@ module Gcloud
         faces(1).first
       end
 
+      def landmarks count
+        ensure_vision!
+        analysis = @vision.mark self, landmarks: count
+        analysis.landmarks
+      end
+
+      def landmark
+        landmarks(1).first
+      end
+
       def to_s
         return "(io)" if content?
         "(url: #{url})"
