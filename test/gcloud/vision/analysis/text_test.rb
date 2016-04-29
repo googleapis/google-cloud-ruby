@@ -14,23 +14,18 @@
 
 require "helper"
 
-describe Gcloud::Vision::Analysis::Entity, :text, :mock_vision do
+describe Gcloud::Vision::Analysis::Text, :mock_vision do
   # Run through JSON to turn all keys to strings...
-  let(:gapi) { JSON.parse(text_annotation_response.to_json) }
-  let(:text) { Gcloud::Vision::Analysis::Entity.from_gapi gapi }
+  let(:gapi_list) { JSON.parse(text_annotation_responses.to_json) }
+  let(:text) { Gcloud::Vision::Analysis::Text.from_gapi gapi_list }
 
   it "knows the given attributes" do
-    text.mid.must_be :nil?
+    text.text.must_include "Google Cloud Client Library for Ruby"
     text.locale.must_equal "en"
-    text.description.must_equal "Google Cloud Client Library for Ruby an idiomatic, intuitive, and\nnatural way for Ruby developers to integrate with Google Cloud\nPlatform services, like Cloud Datastore and Cloud Storage.\n"
-    text.score.must_be :nil?
-    text.confidence.must_be :nil?
-    text.topicality.must_be :nil?
-    text.bounds[0].to_a.must_equal [13,  8]
-    text.bounds[1].to_a.must_equal [385, 8]
-    text.bounds[2].to_a.must_equal [385, 74]
-    text.bounds[3].to_a.must_equal [13,  74]
-    text.locations.must_be :empty?
-    text.properties.must_be :empty?
+    text.words.count.must_equal 28
+    text.words[0].text.must_equal "Google"
+    text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
+    text.words[27].text.must_equal "Storage."
+    text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
   end
 end

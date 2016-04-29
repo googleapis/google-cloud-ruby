@@ -79,9 +79,7 @@ module Gcloud
 
         ##
         # Image region to which this entity belongs. Not filled currently for
-        # `labels` detection. For `text` detection bounds are
-        # produced for the entire text detected in an image region, followed by
-        # bounds for each word within the detected text.
+        # `labels` detection.
         def bounds
           return [] unless @gapi["boundingPoly"]
           @bounds ||= Array(@gapi["boundingPoly"]["vertices"]).map do |v|

@@ -1065,6 +1065,39 @@ class MockVision < Minitest::Spec
     }
   end
 
+  def text_annotation_responses
+    [ text_annotation_response,
+      {"description"=>"Google", "boundingPoly"=>{"vertices"=>[{"x"=>13, "y"=>8}, {"x"=>53, "y"=>8}, {"x"=>53, "y"=>23}, {"x"=>13, "y"=>23}]}},
+      {"description"=>"Cloud", "boundingPoly"=>{"vertices"=>[{"x"=>59, "y"=>8}, {"x"=>89, "y"=>8}, {"x"=>89, "y"=>23}, {"x"=>59, "y"=>23}]}},
+      {"description"=>"Client", "boundingPoly"=>{"vertices"=>[{"x"=>96, "y"=>8}, {"x"=>128, "y"=>8}, {"x"=>128, "y"=>23}, {"x"=>96, "y"=>23}]}},
+      {"description"=>"Library", "boundingPoly"=>{"vertices"=>[{"x"=>132, "y"=>8}, {"x"=>170, "y"=>8}, {"x"=>170, "y"=>23}, {"x"=>132, "y"=>23}]}},
+      {"description"=>"for", "boundingPoly"=>{"vertices"=>[{"x"=>175, "y"=>8}, {"x"=>191, "y"=>8}, {"x"=>191, "y"=>23}, {"x"=>175, "y"=>23}]}},
+      {"description"=>"Ruby", "boundingPoly"=>{"vertices"=>[{"x"=>195, "y"=>8}, {"x"=>221, "y"=>8}, {"x"=>221, "y"=>23}, {"x"=>195, "y"=>23}]}},
+      {"description"=>"an", "boundingPoly"=>{"vertices"=>[{"x"=>236, "y"=>8}, {"x"=>245, "y"=>8}, {"x"=>245, "y"=>23}, {"x"=>236, "y"=>23}]}},
+      {"description"=>"idiomatic,", "boundingPoly"=>{"vertices"=>[{"x"=>250, "y"=>8}, {"x"=>307, "y"=>8}, {"x"=>307, "y"=>23}, {"x"=>250, "y"=>23}]}},
+      {"description"=>"intuitive,", "boundingPoly"=>{"vertices"=>[{"x"=>311, "y"=>8}, {"x"=>360, "y"=>8}, {"x"=>360, "y"=>23}, {"x"=>311, "y"=>23}]}},
+      {"description"=>"and", "boundingPoly"=>{"vertices"=>[{"x"=>363, "y"=>8}, {"x"=>385, "y"=>8}, {"x"=>385, "y"=>23}, {"x"=>363, "y"=>23}]}},
+      {"description"=>"natural", "boundingPoly"=>{"vertices"=>[{"x"=>13, "y"=>33}, {"x"=>52, "y"=>33}, {"x"=>52, "y"=>49}, {"x"=>13, "y"=>49}]}},
+      {"description"=>"way", "boundingPoly"=>{"vertices"=>[{"x"=>56, "y"=>33}, {"x"=>77, "y"=>33}, {"x"=>77, "y"=>49}, {"x"=>56, "y"=>49}]}},
+      {"description"=>"for", "boundingPoly"=>{"vertices"=>[{"x"=>82, "y"=>33}, {"x"=>98, "y"=>33}, {"x"=>98, "y"=>49}, {"x"=>82, "y"=>49}]}},
+      {"description"=>"Ruby", "boundingPoly"=>{"vertices"=>[{"x"=>102, "y"=>33}, {"x"=>130, "y"=>33}, {"x"=>130, "y"=>49}, {"x"=>102, "y"=>49}]}},
+      {"description"=>"developers", "boundingPoly"=>{"vertices"=>[{"x"=>135, "y"=>33}, {"x"=>196, "y"=>33}, {"x"=>196, "y"=>49}, {"x"=>135, "y"=>49}]}},
+      {"description"=>"to", "boundingPoly"=>{"vertices"=>[{"x"=>201, "y"=>33}, {"x"=>212, "y"=>33}, {"x"=>212, "y"=>49}, {"x"=>201, "y"=>49}]}},
+      {"description"=>"integrate", "boundingPoly"=>{"vertices"=>[{"x"=>215, "y"=>33}, {"x"=>265, "y"=>33}, {"x"=>265, "y"=>49}, {"x"=>215, "y"=>49}]}},
+      {"description"=>"with", "boundingPoly"=>{"vertices"=>[{"x"=>270, "y"=>33}, {"x"=>293, "y"=>33}, {"x"=>293, "y"=>49}, {"x"=>270, "y"=>49}]}},
+      {"description"=>"Google", "boundingPoly"=>{"vertices"=>[{"x"=>299, "y"=>33}, {"x"=>339, "y"=>33}, {"x"=>339, "y"=>49}, {"x"=>299, "y"=>49}]}},
+      {"description"=>"Cloud", "boundingPoly"=>{"vertices"=>[{"x"=>345, "y"=>33}, {"x"=>376, "y"=>33}, {"x"=>376, "y"=>49}, {"x"=>345, "y"=>49}]}},
+      {"description"=>"Platform", "boundingPoly"=>{"vertices"=>[{"x"=>13, "y"=>59}, {"x"=>59, "y"=>59}, {"x"=>59, "y"=>74}, {"x"=>13, "y"=>74}]}},
+      {"description"=>"services,", "boundingPoly"=>{"vertices"=>[{"x"=>67, "y"=>59}, {"x"=>117, "y"=>59}, {"x"=>117, "y"=>74}, {"x"=>67, "y"=>74}]}},
+      {"description"=>"like", "boundingPoly"=>{"vertices"=>[{"x"=>121, "y"=>59}, {"x"=>138, "y"=>59}, {"x"=>138, "y"=>74}, {"x"=>121, "y"=>74}]}},
+      {"description"=>"Cloud", "boundingPoly"=>{"vertices"=>[{"x"=>145, "y"=>59}, {"x"=>177, "y"=>59}, {"x"=>177, "y"=>74}, {"x"=>145, "y"=>74}]}},
+      {"description"=>"Datastore", "boundingPoly"=>{"vertices"=>[{"x"=>181, "y"=>59}, {"x"=>236, "y"=>59}, {"x"=>236, "y"=>74}, {"x"=>181, "y"=>74}]}},
+      {"description"=>"and", "boundingPoly"=>{"vertices"=>[{"x"=>242, "y"=>59}, {"x"=>260, "y"=>59}, {"x"=>260, "y"=>74}, {"x"=>242, "y"=>74}]}},
+      {"description"=>"Cloud", "boundingPoly"=>{"vertices"=>[{"x"=>267, "y"=>59}, {"x"=>298, "y"=>59}, {"x"=>298, "y"=>74}, {"x"=>267, "y"=>74}]}},
+      {"description"=>"Storage.", "boundingPoly"=>{"vertices"=>[{"x"=>304, "y"=>59}, {"x"=>351, "y"=>59}, {"x"=>351, "y"=>74}, {"x"=>304, "y"=>74}]}}
+    ]
+  end
+
   def safe_search_annotation_response
     {
       adult:    :VERY_UNLIKELY,

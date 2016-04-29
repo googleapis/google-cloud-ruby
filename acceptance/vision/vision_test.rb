@@ -101,7 +101,13 @@ describe "Vision", :vision do
     it "detects text from an image" do
       analysis = vision.mark text_image, text: true
 
-      analysis.texts.count.must_equal 29
+      analysis.text.text.must_include "Google Cloud Client Library for Ruby"
+      analysis.text.locale.must_equal "en"
+      analysis.text.words.count.must_equal 28
+      analysis.text.words[0].text.must_equal "Google"
+      analysis.text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
+      analysis.text.words[27].text.must_equal "Storage."
+      analysis.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
     end
 
     it "detects text from multiple images" do
@@ -111,9 +117,9 @@ describe "Vision", :vision do
                              text: true
 
       analyses.count.must_equal 3
-      analyses[0].texts.count.must_equal 29
-      analyses[1].texts.count.must_equal 0
-      analyses[2].texts.count.must_equal 2
+      analyses[0].text.wont_be :nil?
+      analyses[1].text.must_be :nil?
+      analyses[2].text.wont_be :nil?
     end
   end
 

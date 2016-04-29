@@ -15,6 +15,7 @@
 
 require "gcloud/vision/analysis/face"
 require "gcloud/vision/analysis/entity"
+require "gcloud/vision/analysis/text"
 require "gcloud/vision/analysis/safe_search"
 require "gcloud/vision/analysis/properties"
 
@@ -227,24 +228,7 @@ module Gcloud
         labels.count > 0
       end
 
-      # The Analysis::Entity results containing the results of text detection.
-      #
-      # @example
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   vision = gcloud.vision
-      #   analysis = vision.detect image, text: true
-      #   analysis.texts.count #=> 1
-      #   text = analysis.texts.first
-      #
-      def texts
-        @texts ||= Array(@gapi["textAnnotations"]).map do |txt|
-          Entity.from_gapi txt
-        end
-      end
-
-      # The first Analysis::Entity result, if there is one.
+      # The Analysis::Text result containing the results of text detection.
       #
       # @example
       #   require "gcloud"
@@ -255,11 +239,10 @@ module Gcloud
       #   text = analysis.text
       #
       def text
-        texts.first
+        @text ||= Text.from_gapi(@gapi["textAnnotations"])
       end
 
-      # Whether there is at least one Analysis::Entity result for text
-      # detection.
+      # Whether there is a Analysis::Text result for text detection.
       #
       # @example
       #   require "gcloud"
@@ -270,7 +253,7 @@ module Gcloud
       #   analysis.text? #=> true
       #
       def text?
-        texts.count > 0
+        !text.nil?
       end
 
       # The Analysis::SafeSearch results containing the results of safe_search
