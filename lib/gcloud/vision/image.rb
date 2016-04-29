@@ -106,6 +106,12 @@ module Gcloud
         labels(1).first
       end
 
+      def text
+        ensure_vision!
+        analysis = @vision.mark self, text: true
+        analysis.text
+      end
+
       def to_s
         return "(io)" if content?
         "(url: #{url})"
