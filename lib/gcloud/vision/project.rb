@@ -81,12 +81,13 @@ module Gcloud
       end
 
       def mark *images, faces: nil, landmarks: nil, logos: nil, labels: nil,
-               text: nil, safe_search: nil
+               text: nil, safe_search: nil, properties: nil
         requests = annotate_requests(*images, faces: faces,
                                               landmarks: landmarks,
                                               logos: logos, labels: labels,
                                               text: text,
-                                              safe_search: safe_search)
+                                              safe_search: safe_search,
+                                              properties: properties)
 
         resp = connection.annotate requests
         analyses = Array(resp.data["responses"]).map do |gapi|
@@ -100,29 +101,30 @@ module Gcloud
       protected
 
       def annotate_requests *images, faces: nil, landmarks: nil, logos: nil,
-                            labels: nil, text: nil, safe_search: nil
+                            labels: nil, text: nil, safe_search: nil,
+                            properties: nil
         features = annotate_features faces: faces, landmarks: landmarks,
                                      logos: logos, labels: labels, text: text,
-                                     safe_search: safe_search
+                                     safe_search: safe_search,
+                                     properties: properties
         Array(images).flatten.map do |img|
           { image: image(img).to_gapi, features: features }
         end
       end
 
       def annotate_features faces: nil, landmarks: nil, logos: nil, labels: nil,
-                            text: nil, safe_search: nil
+                            text: nil, safe_search: nil, properties: nil
         features = []
         features << { type: :FACE_DETECTION, maxResults: faces.to_i } if faces
         features << { type: :LANDMARK_DETECTION,
                       maxResults: landmarks.to_i } if landmarks
-        features << { type: :LOGO_DETECTION,
-                      maxResults: logos.to_i } if logos
+        features << { type: :LOGO_DETECTION, maxResults: logos.to_i } if logos
         features << { type: :LABEL_DETECTION,
                       maxResults: labels.to_i } if labels
-        features << { type: :TEXT_DETECTION,
-                      maxResults: 1 } if text
+        features << { type: :TEXT_DETECTION, maxResults: 1 } if text
         features << { type: :SAFE_SEARCH_DETECTION,
                       maxResults: 1 } if safe_search
+        features << { type: :IMAGE_PROPERTIES, maxResults: 1 } if properties
         features
       end
 

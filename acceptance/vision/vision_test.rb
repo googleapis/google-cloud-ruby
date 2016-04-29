@@ -152,4 +152,41 @@ describe "Vision", :vision do
       analyses[2].safe_search.wont_be :violence?
     end
   end
+
+  describe "properties" do
+    it "detects properties from an image" do
+      analysis = vision.mark text_image, properties: true
+
+      analysis.properties.wont_be :nil?
+      analysis.properties.colors.count.must_equal 10
+
+      analysis.properties.colors[0].red.must_equal 145
+      analysis.properties.colors[0].green.must_equal 193
+      analysis.properties.colors[0].blue.must_equal 254
+      analysis.properties.colors[0].alpha.must_equal 1.0
+      analysis.properties.colors[0].rgb.must_equal "91c1fe"
+      analysis.properties.colors[0].score.must_equal 0.65757853
+      analysis.properties.colors[0].pixel_fraction.must_equal 0.16903226
+
+      analysis.properties.colors[9].red.must_equal 156
+      analysis.properties.colors[9].green.must_equal 214
+      analysis.properties.colors[9].blue.must_equal 255
+      analysis.properties.colors[9].alpha.must_equal 1.0
+      analysis.properties.colors[9].rgb.must_equal "9cd6ff"
+      analysis.properties.colors[9].score.must_equal 0.00096750073
+      analysis.properties.colors[9].pixel_fraction.must_equal 0.00064516132
+    end
+
+    it "detects properties from multiple images" do
+      analyses = vision.mark text_image,
+                             face_image,
+                             logo_image,
+                             properties: true
+
+      analyses.count.must_equal 3
+      analyses[0].properties.wont_be :nil?
+      analyses[1].properties.wont_be :nil?
+      analyses[2].properties.wont_be :nil?
+    end
+  end
 end

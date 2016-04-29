@@ -16,6 +16,7 @@
 require "gcloud/vision/analysis/face"
 require "gcloud/vision/analysis/entity"
 require "gcloud/vision/analysis/safe_search"
+require "gcloud/vision/analysis/properties"
 
 module Gcloud
   module Vision
@@ -288,7 +289,7 @@ module Gcloud
         @safe_search ||= SafeSearch.from_gapi(@gapi["safeSearchAnnotation"])
       end
 
-      # Whether there is at least one Analysis::Entity result for safe_search
+      # Whether there is a Analysis::SafeSearch result for safe_search
       # detection.
       #
       # @example
@@ -301,6 +302,36 @@ module Gcloud
       #
       def safe_search?
         !safe_searchs.nil?
+      end
+
+      # The Analysis::Properties results containing the results of properties
+      # detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, properties: true
+      #   properties = analysis.properties
+      #
+      def properties
+        return nil unless @gapi["imagePropertiesAnnotation"]
+        @properties ||= Properties.from_gapi(@gapi["imagePropertiesAnnotation"])
+      end
+
+      # Whether there is a Analysis::Properties result for properties detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   analysis = vision.detect image, properties: true
+      #   analysis.properties? #=> true
+      #
+      def properties?
+        !properties.nil?
       end
 
       def to_h

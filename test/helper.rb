@@ -1073,4 +1073,43 @@ class MockVision < Minitest::Spec
       violence: :LIKELY
     }
   end
+
+  def properties_annotation_response
+    {
+      dominantColors: {
+        colors: [
+          { color: { red: 145, green: 193, blue: 254 },
+            score: 0.65757853,
+            pixelFraction: 0.16903226 },
+          { color: { red: 112, green: 160, blue: 255 },
+            score: 0.09256918,
+            pixelFraction: 0.19258064 },
+          { color: { red: 123, green: 171, blue: 241 },
+            score: 0.1002003,
+            pixelFraction: 0.022258064 },
+          { color: { red: 117, green: 170, blue: 252},
+            score: 0.089072376,
+            pixelFraction: 0.054516129 },
+          { color: { red: 168, green: 215, blue: 255 },
+            score: 0.019252902,
+            pixelFraction: 0.0070967744 },
+          { color: { red: 127, green: 177, blue: 255 },
+            score: 0.017626688,
+            pixelFraction: 0.0045161289 },
+          { color: { red: 178, green: 223, blue: 255 },
+            score: 0.015010362,
+            pixelFraction: 0.0022580645 },
+          { color: { red: 172, green: 224, blue: 255 },
+            score: 0.0049617039,
+            pixelFraction: 0.0012903226 },
+          { color: { red: 160, green: 218, blue: 255 },
+            score: 0.0027604031,
+            pixelFraction: 0.0022580645 },
+          { color: { red: 156, green: 214, blue: 255 },
+            score: 0.00096750073,
+            pixelFraction: 0.00064516132 }
+        ]
+      }
+    }
+  end
 end
