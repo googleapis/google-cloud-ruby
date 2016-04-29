@@ -35,6 +35,7 @@ module Gcloud
       def initialize
         @io = nil
         @url = nil
+        @vision = nil
       end
 
       # Determines if the Image has content.
@@ -65,6 +66,16 @@ module Gcloud
         @url
       end
 
+      def faces count
+        ensure_vision!
+        analysis = @vision.mark self, faces: count
+        analysis.faces
+      end
+
+      def face
+        faces(1).first
+      end
+
       def to_s
         return "(io)" if content?
         "(url: #{url})"
@@ -88,42 +99,58 @@ module Gcloud
 
       ##
       # @private New Image from a source object.
-      def self.from_source source
-        return from_io(source) if source.is_a?(IO) || source.is_a?(StringIO)
+      def self.from_source source, vision = nil
+        if source.is_a?(IO) || source.is_a?(StringIO)
+          return from_io(source, vision)
+        end
         # Convert Storage::File objects to the URL
         source = source.to_gs_url if source.respond_to? :to_gs_url
         # Everything should be a string from now on
         source = String source
         # Create an Image from the Google Storage URL
-        return from_url(source) if source.start_with? "gs://"
+        return from_url(source, vision) if source.start_with? "gs://"
         # Create an image from a file on the filesystem
         if File.file? source
           unless File.readable? source
             fail ArgumentError, "Cannot read #{source}"
           end
-          return from_io(File.open(source, "rb"))
+          return from_io(File.open(source, "rb"), vision)
         end
         fail ArgumentError, "Unable to convert #{source} to an Image"
       end
 
       ##
       # @private New Image from an IO object.
-      def self.from_io io
+      def self.from_io io, vision
         if !io.is_a?(IO) && !io.is_a?(StringIO)
           puts io.inspect
           fail ArgumentError, "Cannot create an Image without an IO object"
         end
-        new.tap { |i| i.instance_variable_set :@io, io }
+        new.tap do |i|
+          i.instance_variable_set :@io, io
+          i.instance_variable_set :@vision, vision
+        end
       end
 
       ##
       # @private New Image from an IO object.
-      def self.from_url url
+      def self.from_url url, vision
         url = String url
         unless url.start_with? "gs://"
           fail ArgumentError, "Cannot create an Image without a Storage URL"
         end
-        new.tap { |i| i.instance_variable_set :@url, url }
+        new.tap do |i|
+          i.instance_variable_set :@url, url
+          i.instance_variable_set :@vision, vision
+        end
+      end
+
+      protected
+
+      ##
+      # Raise an error unless an active vision project object is available.
+      def ensure_vision!
+        fail "Must have active connection" unless @vision
       end
     end
   end

@@ -77,7 +77,7 @@ module Gcloud
 
       def image source
         return source if source.is_a? Image
-        Image.from_source source
+        Image.from_source source, self
       end
 
       def mark *images, faces: nil, landmarks: nil, logos: nil, labels: nil,
