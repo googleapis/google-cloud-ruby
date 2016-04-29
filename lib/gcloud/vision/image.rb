@@ -96,6 +96,16 @@ module Gcloud
         logos(1).first
       end
 
+      def labels count
+        ensure_vision!
+        analysis = @vision.mark self, labels: count
+        analysis.labels
+      end
+
+      def label
+        labels(1).first
+      end
+
       def to_s
         return "(io)" if content?
         "(url: #{url})"
