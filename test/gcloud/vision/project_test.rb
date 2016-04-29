@@ -406,6 +406,132 @@ describe Gcloud::Vision::Project, :mock_vision do
     analyses.last.safe_search.must_be :violence?
   end
 
+  it "detects properties detection" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      properties = requests.first
+      properties["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      properties["features"].count.must_equal 1
+      properties["features"].first["type"].must_equal "IMAGE_PROPERTIES"
+      properties["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       properties_response_json]
+    end
+
+    analysis = vision.mark filepath, properties: true
+    analysis.wont_be :nil?
+
+    analysis.properties.colors.count.must_equal 10
+
+    analysis.properties.colors[0].red.must_equal 145
+    analysis.properties.colors[0].green.must_equal 193
+    analysis.properties.colors[0].blue.must_equal 254
+    analysis.properties.colors[0].alpha.must_equal 1.0
+    analysis.properties.colors[0].rgb.must_equal "91c1fe"
+    analysis.properties.colors[0].score.must_equal 0.65757853
+    analysis.properties.colors[0].pixel_fraction.must_equal 0.16903226
+
+    analysis.properties.colors[9].red.must_equal 156
+    analysis.properties.colors[9].green.must_equal 214
+    analysis.properties.colors[9].blue.must_equal 255
+    analysis.properties.colors[9].alpha.must_equal 1.0
+    analysis.properties.colors[9].rgb.must_equal "9cd6ff"
+    analysis.properties.colors[9].score.must_equal 0.00096750073
+    analysis.properties.colors[9].pixel_fraction.must_equal 0.00064516132
+  end
+
+  it "detects properties detection using annotate alias" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      properties = requests.first
+      properties["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      properties["features"].count.must_equal 1
+      properties["features"].first["type"].must_equal "IMAGE_PROPERTIES"
+      properties["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       properties_response_json]
+    end
+
+    analysis = vision.annotate filepath, properties: true
+    analysis.wont_be :nil?
+
+    analysis.properties.colors.count.must_equal 10
+
+    analysis.properties.colors[0].red.must_equal 145
+    analysis.properties.colors[0].green.must_equal 193
+    analysis.properties.colors[0].blue.must_equal 254
+    analysis.properties.colors[0].alpha.must_equal 1.0
+    analysis.properties.colors[0].rgb.must_equal "91c1fe"
+    analysis.properties.colors[0].score.must_equal 0.65757853
+    analysis.properties.colors[0].pixel_fraction.must_equal 0.16903226
+
+    analysis.properties.colors[9].red.must_equal 156
+    analysis.properties.colors[9].green.must_equal 214
+    analysis.properties.colors[9].blue.must_equal 255
+    analysis.properties.colors[9].alpha.must_equal 1.0
+    analysis.properties.colors[9].rgb.must_equal "9cd6ff"
+    analysis.properties.colors[9].score.must_equal 0.00096750073
+    analysis.properties.colors[9].pixel_fraction.must_equal 0.00064516132
+  end
+
+  it "detects properties detection on multiple images" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 2
+      requests.first["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.first["features"].count.must_equal 1
+      requests.first["features"].first["type"].must_equal "IMAGE_PROPERTIES"
+      requests.first["features"].first["maxResults"].must_equal 1
+      requests.last["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.last["features"].count.must_equal 1
+      requests.last["features"].first["type"].must_equal "IMAGE_PROPERTIES"
+      requests.last["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       propertiess_response_json]
+    end
+
+    analyses = vision.mark filepath, filepath, properties: true
+    analyses.count.must_equal 2
+
+    analyses[0].properties.colors.count.must_equal 10
+
+    analyses[0].properties.colors[0].red.must_equal 145
+    analyses[0].properties.colors[0].green.must_equal 193
+    analyses[0].properties.colors[0].blue.must_equal 254
+    analyses[0].properties.colors[0].alpha.must_equal 1.0
+    analyses[0].properties.colors[0].rgb.must_equal "91c1fe"
+    analyses[0].properties.colors[0].score.must_equal 0.65757853
+    analyses[0].properties.colors[0].pixel_fraction.must_equal 0.16903226
+
+    analyses[0].properties.colors[9].red.must_equal 156
+    analyses[0].properties.colors[9].green.must_equal 214
+    analyses[0].properties.colors[9].blue.must_equal 255
+    analyses[0].properties.colors[9].alpha.must_equal 1.0
+    analyses[0].properties.colors[9].rgb.must_equal "9cd6ff"
+    analyses[0].properties.colors[9].score.must_equal 0.00096750073
+    analyses[0].properties.colors[9].pixel_fraction.must_equal 0.00064516132
+
+    analyses[1].properties.colors.count.must_equal 10
+
+    analyses[1].properties.colors[0].red.must_equal 145
+    analyses[1].properties.colors[0].green.must_equal 193
+    analyses[1].properties.colors[0].blue.must_equal 254
+    analyses[1].properties.colors[0].alpha.must_equal 1.0
+    analyses[1].properties.colors[0].rgb.must_equal "91c1fe"
+    analyses[1].properties.colors[0].score.must_equal 0.65757853
+    analyses[1].properties.colors[0].pixel_fraction.must_equal 0.16903226
+
+    analyses[1].properties.colors[9].red.must_equal 156
+    analyses[1].properties.colors[9].green.must_equal 214
+    analyses[1].properties.colors[9].blue.must_equal 255
+    analyses[1].properties.colors[9].alpha.must_equal 1.0
+    analyses[1].properties.colors[9].rgb.must_equal "9cd6ff"
+    analyses[1].properties.colors[9].score.must_equal 0.00096750073
+    analyses[1].properties.colors[9].pixel_fraction.must_equal 0.00064516132
+  end
+
   def face_response_json
     {
       responses: [{
@@ -510,6 +636,24 @@ describe Gcloud::Vision::Project, :mock_vision do
         safeSearchAnnotation: safe_search_annotation_response
       }, {
         safeSearchAnnotation: safe_search_annotation_response
+      }]
+    }.to_json
+  end
+
+  def properties_response_json
+    {
+      responses: [{
+        imagePropertiesAnnotation: properties_annotation_response
+      }]
+    }.to_json
+  end
+
+  def propertiess_response_json
+    {
+      responses: [{
+        imagePropertiesAnnotation: properties_annotation_response
+      }, {
+        imagePropertiesAnnotation: properties_annotation_response
       }]
     }.to_json
   end

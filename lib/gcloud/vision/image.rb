@@ -118,6 +118,12 @@ module Gcloud
         analysis.safe_search
       end
 
+      def properties
+        ensure_vision!
+        analysis = @vision.mark self, properties: true
+        analysis.properties
+      end
+
       def to_s
         return "(io)" if content?
         "(url: #{url})"
