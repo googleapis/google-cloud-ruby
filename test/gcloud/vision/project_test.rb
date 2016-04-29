@@ -44,12 +44,12 @@ describe Gcloud::Vision::Project, :mock_vision do
        face_response_json]
     end
 
-    analysis = vision.mark filepath, faces: 1
+    analysis = vision.annotate filepath, faces: 1
     analysis.wont_be :nil?
     analysis.face.wont_be :nil?
   end
 
-  it "detects face detection using annotate alias" do
+  it "detects face detection using mark alias" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
@@ -62,7 +62,25 @@ describe Gcloud::Vision::Project, :mock_vision do
        face_response_json]
     end
 
-    analysis = vision.annotate filepath, faces: 1
+    analysis = vision.mark filepath, faces: 1
+    analysis.wont_be :nil?
+    analysis.face.wont_be :nil?
+  end
+
+  it "detects face detection using detect alias" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      face = requests.first
+      face["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      face["features"].count.must_equal 1
+      face["features"].first["type"].must_equal "FACE_DETECTION"
+      face["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       face_response_json]
+    end
+
+    analysis = vision.detect filepath, faces: 1
     analysis.wont_be :nil?
     analysis.face.wont_be :nil?
   end
@@ -83,7 +101,7 @@ describe Gcloud::Vision::Project, :mock_vision do
        faces_response_json]
     end
 
-    analyses = vision.mark filepath, filepath, faces: 1
+    analyses = vision.annotate filepath, filepath, faces: 1
     analyses.count.must_equal 2
     analyses.first.face.wont_be :nil?
     analyses.last.face.wont_be :nil?
@@ -102,12 +120,12 @@ describe Gcloud::Vision::Project, :mock_vision do
        landmark_response_json]
     end
 
-    analysis = vision.mark filepath, landmarks: 1
+    analysis = vision.annotate filepath, landmarks: 1
     analysis.wont_be :nil?
     analysis.landmark.wont_be :nil?
   end
 
-  it "detects landmark detection using annotate alias" do
+  it "detects landmark detection using mark alias" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
@@ -120,7 +138,25 @@ describe Gcloud::Vision::Project, :mock_vision do
        landmark_response_json]
     end
 
-    analysis = vision.annotate filepath, landmarks: 1
+    analysis = vision.mark filepath, landmarks: 1
+    analysis.wont_be :nil?
+    analysis.landmark.wont_be :nil?
+  end
+
+  it "detects landmark detection using detect alias" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      landmark = requests.first
+      landmark["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      landmark["features"].count.must_equal 1
+      landmark["features"].first["type"].must_equal "LANDMARK_DETECTION"
+      landmark["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       landmark_response_json]
+    end
+
+    analysis = vision.detect filepath, landmarks: 1
     analysis.wont_be :nil?
     analysis.landmark.wont_be :nil?
   end
@@ -141,7 +177,7 @@ describe Gcloud::Vision::Project, :mock_vision do
        landmarks_response_json]
     end
 
-    analyses = vision.mark filepath, filepath, landmarks: 1
+    analyses = vision.annotate filepath, filepath, landmarks: 1
     analyses.count.must_equal 2
     analyses.first.landmark.wont_be :nil?
     analyses.last.landmark.wont_be :nil?
@@ -160,12 +196,12 @@ describe Gcloud::Vision::Project, :mock_vision do
        logo_response_json]
     end
 
-    analysis = vision.mark filepath, logos: 1
+    analysis = vision.annotate filepath, logos: 1
     analysis.wont_be :nil?
     analysis.logo.wont_be :nil?
   end
 
-  it "detects logo detection using annotate alias" do
+  it "detects logo detection using mark alias" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
@@ -178,7 +214,25 @@ describe Gcloud::Vision::Project, :mock_vision do
        logo_response_json]
     end
 
-    analysis = vision.annotate filepath, logos: 1
+    analysis = vision.mark filepath, logos: 1
+    analysis.wont_be :nil?
+    analysis.logo.wont_be :nil?
+  end
+
+  it "detects logo detection using detect alias" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      logo = requests.first
+      logo["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      logo["features"].count.must_equal 1
+      logo["features"].first["type"].must_equal "LOGO_DETECTION"
+      logo["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       logo_response_json]
+    end
+
+    analysis = vision.detect filepath, logos: 1
     analysis.wont_be :nil?
     analysis.logo.wont_be :nil?
   end
@@ -199,7 +253,7 @@ describe Gcloud::Vision::Project, :mock_vision do
        logos_response_json]
     end
 
-    analyses = vision.mark filepath, filepath, logos: 1
+    analyses = vision.annotate filepath, filepath, logos: 1
     analyses.count.must_equal 2
     analyses.first.logo.wont_be :nil?
     analyses.last.logo.wont_be :nil?
@@ -218,12 +272,12 @@ describe Gcloud::Vision::Project, :mock_vision do
        label_response_json]
     end
 
-    analysis = vision.mark filepath, labels: 1
+    analysis = vision.annotate filepath, labels: 1
     analysis.wont_be :nil?
     analysis.label.wont_be :nil?
   end
 
-  it "detects label detection using annotate alias" do
+  it "detects label detection using mark alias" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
@@ -236,7 +290,25 @@ describe Gcloud::Vision::Project, :mock_vision do
        label_response_json]
     end
 
-    analysis = vision.annotate filepath, labels: 1
+    analysis = vision.mark filepath, labels: 1
+    analysis.wont_be :nil?
+    analysis.label.wont_be :nil?
+  end
+
+  it "detects label detection using detect alias" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      label = requests.first
+      label["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      label["features"].count.must_equal 1
+      label["features"].first["type"].must_equal "LABEL_DETECTION"
+      label["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       label_response_json]
+    end
+
+    analysis = vision.detect filepath, labels: 1
     analysis.wont_be :nil?
     analysis.label.wont_be :nil?
   end
@@ -257,7 +329,7 @@ describe Gcloud::Vision::Project, :mock_vision do
        labels_response_json]
     end
 
-    analyses = vision.mark filepath, filepath, labels: 1
+    analyses = vision.annotate filepath, filepath, labels: 1
     analyses.count.must_equal 2
     analyses.first.label.wont_be :nil?
     analyses.last.label.wont_be :nil?
@@ -276,7 +348,7 @@ describe Gcloud::Vision::Project, :mock_vision do
        text_response_json]
     end
 
-    analysis = vision.mark filepath, text: true
+    analysis = vision.annotate filepath, text: true
     analysis.wont_be :nil?
     analysis.text.wont_be :nil?
     analysis.text.text.must_include "Google Cloud Client Library for Ruby"
@@ -288,7 +360,7 @@ describe Gcloud::Vision::Project, :mock_vision do
     analysis.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
   end
 
-  it "detects text detection using annotate alias" do
+  it "detects text detection using mark alias" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
@@ -301,7 +373,25 @@ describe Gcloud::Vision::Project, :mock_vision do
        text_response_json]
     end
 
-    analysis = vision.annotate filepath, text: true
+    analysis = vision.mark filepath, text: true
+    analysis.wont_be :nil?
+    analysis.text.wont_be :nil?
+  end
+
+  it "detects text detection using detect alias" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      text = requests.first
+      text["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      text["features"].count.must_equal 1
+      text["features"].first["type"].must_equal "TEXT_DETECTION"
+      text["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       text_response_json]
+    end
+
+    analysis = vision.detect filepath, text: true
     analysis.wont_be :nil?
     analysis.text.wont_be :nil?
   end
@@ -322,13 +412,36 @@ describe Gcloud::Vision::Project, :mock_vision do
        texts_response_json]
     end
 
-    analyses = vision.mark filepath, filepath, text: true
+    analyses = vision.annotate filepath, filepath, text: true
     analyses.count.must_equal 2
     analyses.first.text.wont_be :nil?
     analyses.last.text.wont_be :nil?
   end
 
   it "detects safe_search detection" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      safe_search = requests.first
+      safe_search["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      safe_search["features"].count.must_equal 1
+      safe_search["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
+      safe_search["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       safe_search_response_json]
+    end
+
+    analysis = vision.annotate filepath, safe_search: true
+    analysis.wont_be :nil?
+
+    analysis.safe_search.wont_be :nil?
+    analysis.safe_search.wont_be :adult?
+    analysis.safe_search.wont_be :spoof?
+    analysis.safe_search.must_be :medical?
+    analysis.safe_search.must_be :violence?
+  end
+
+  it "detects safe_search detection using mark alias" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
@@ -351,7 +464,7 @@ describe Gcloud::Vision::Project, :mock_vision do
     analysis.safe_search.must_be :violence?
   end
 
-  it "detects safe_search detection using annotate alias" do
+  it "detects safe_search detection using detect alias" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
@@ -364,7 +477,7 @@ describe Gcloud::Vision::Project, :mock_vision do
        safe_search_response_json]
     end
 
-    analysis = vision.annotate filepath, safe_search: true
+    analysis = vision.detect filepath, safe_search: true
     analysis.wont_be :nil?
 
     analysis.safe_search.wont_be :nil?
@@ -390,7 +503,7 @@ describe Gcloud::Vision::Project, :mock_vision do
        safe_searchs_response_json]
     end
 
-    analyses = vision.mark filepath, filepath, safe_search: true
+    analyses = vision.annotate filepath, filepath, safe_search: true
     analyses.count.must_equal 2
 
     analyses.first.safe_search.wont_be :nil?
@@ -407,6 +520,41 @@ describe Gcloud::Vision::Project, :mock_vision do
   end
 
   it "detects properties detection" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      properties = requests.first
+      properties["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      properties["features"].count.must_equal 1
+      properties["features"].first["type"].must_equal "IMAGE_PROPERTIES"
+      properties["features"].first["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       properties_response_json]
+    end
+
+    analysis = vision.annotate filepath, properties: true
+    analysis.wont_be :nil?
+
+    analysis.properties.colors.count.must_equal 10
+
+    analysis.properties.colors[0].red.must_equal 145
+    analysis.properties.colors[0].green.must_equal 193
+    analysis.properties.colors[0].blue.must_equal 254
+    analysis.properties.colors[0].alpha.must_equal 1.0
+    analysis.properties.colors[0].rgb.must_equal "91c1fe"
+    analysis.properties.colors[0].score.must_equal 0.65757853
+    analysis.properties.colors[0].pixel_fraction.must_equal 0.16903226
+
+    analysis.properties.colors[9].red.must_equal 156
+    analysis.properties.colors[9].green.must_equal 214
+    analysis.properties.colors[9].blue.must_equal 255
+    analysis.properties.colors[9].alpha.must_equal 1.0
+    analysis.properties.colors[9].rgb.must_equal "9cd6ff"
+    analysis.properties.colors[9].score.must_equal 0.00096750073
+    analysis.properties.colors[9].pixel_fraction.must_equal 0.00064516132
+  end
+
+  it "detects properties detection using mark alias" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
@@ -441,7 +589,7 @@ describe Gcloud::Vision::Project, :mock_vision do
     analysis.properties.colors[9].pixel_fraction.must_equal 0.00064516132
   end
 
-  it "detects properties detection using annotate alias" do
+  it "detects properties detection using detect alias" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
@@ -454,7 +602,7 @@ describe Gcloud::Vision::Project, :mock_vision do
        properties_response_json]
     end
 
-    analysis = vision.annotate filepath, properties: true
+    analysis = vision.detect filepath, properties: true
     analysis.wont_be :nil?
 
     analysis.properties.colors.count.must_equal 10
@@ -492,7 +640,7 @@ describe Gcloud::Vision::Project, :mock_vision do
        propertiess_response_json]
     end
 
-    analyses = vision.mark filepath, filepath, properties: true
+    analyses = vision.annotate filepath, filepath, properties: true
     analyses.count.must_equal 2
 
     analyses[0].properties.colors.count.must_equal 10

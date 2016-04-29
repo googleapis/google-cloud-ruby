@@ -80,8 +80,8 @@ module Gcloud
         Image.from_source source, self
       end
 
-      def mark *images, faces: nil, landmarks: nil, logos: nil, labels: nil,
-               text: nil, safe_search: nil, properties: nil
+      def annotate *images, faces: nil, landmarks: nil, logos: nil, labels: nil,
+                   text: nil, safe_search: nil, properties: nil
         requests = annotate_requests(*images, faces: faces,
                                               landmarks: landmarks,
                                               logos: logos, labels: labels,
@@ -96,7 +96,8 @@ module Gcloud
         return analyses.first if analyses.count == 1
         analyses
       end
-      alias_method :annotate, :mark
+      alias_method :mark, :annotate
+      alias_method :detect, :annotate
 
       protected
 

@@ -25,13 +25,13 @@ describe "Vision", :vision do
 
   describe "faces" do
     it "detects faces from an image" do
-      analysis = vision.mark face_image, faces: 1
+      analysis = vision.annotate face_image, faces: 1
 
       analysis.faces.count.must_equal 1
     end
 
     it "detects faces from multiple images" do
-      analyses = vision.mark face_image,
+      analyses = vision.annotate face_image,
                              File.open(logo_image, "rb"),
                              Pathname.new(landmark_image),
                              faces: 1
@@ -45,13 +45,13 @@ describe "Vision", :vision do
 
   describe "landmarks" do
     it "detects landmarks from an image" do
-      analysis = vision.mark landmark_image, landmarks: 1
+      analysis = vision.annotate landmark_image, landmarks: 1
 
       analysis.landmarks.count.must_equal 1
     end
 
     it "detects landmarks from multiple images" do
-      analyses = vision.mark landmark_image,
+      analyses = vision.annotate landmark_image,
                              File.open(logo_image, "rb"),
                              landmarks: 1
 
@@ -63,13 +63,13 @@ describe "Vision", :vision do
 
   describe "logos" do
     it "detects logos from an image" do
-      analysis = vision.mark logo_image, logos: 1
+      analysis = vision.annotate logo_image, logos: 1
 
       analysis.logos.count.must_equal 1
     end
 
     it "detects logos from multiple images" do
-      analyses = vision.mark logo_image,
+      analyses = vision.annotate logo_image,
                              StringIO.new(File.read(face_image, mode: "rb")),
                              logos: 1
 
@@ -81,13 +81,13 @@ describe "Vision", :vision do
 
   describe "labels" do
     it "detects labels from an image" do
-      analysis = vision.mark landmark_image, labels: 10
+      analysis = vision.annotate landmark_image, labels: 10
 
       analysis.labels.count.must_equal 6
     end
 
     it "detects labels from multiple images" do
-      analyses = vision.mark landmark_image,
+      analyses = vision.annotate landmark_image,
                              face_image,
                              labels: 10
 
@@ -99,7 +99,7 @@ describe "Vision", :vision do
 
   describe "text" do
     it "detects text from an image" do
-      analysis = vision.mark text_image, text: true
+      analysis = vision.annotate text_image, text: true
 
       analysis.text.text.must_include "Google Cloud Client Library for Ruby"
       analysis.text.locale.must_equal "en"
@@ -111,7 +111,7 @@ describe "Vision", :vision do
     end
 
     it "detects text from multiple images" do
-      analyses = vision.mark text_image,
+      analyses = vision.annotate text_image,
                              face_image,
                              logo_image,
                              text: true
@@ -125,7 +125,7 @@ describe "Vision", :vision do
 
   describe "safe_search" do
     it "detects safe_search from an image" do
-      analysis = vision.mark face_image, safe_search: true
+      analysis = vision.annotate face_image, safe_search: true
 
       analysis.safe_search.wont_be :nil?
       analysis.safe_search.wont_be :adult?
@@ -135,7 +135,7 @@ describe "Vision", :vision do
     end
 
     it "detects safe_search from multiple images" do
-      analyses = vision.mark text_image,
+      analyses = vision.annotate text_image,
                              landmark_image,
                              text_image,
                              safe_search: true
@@ -161,7 +161,7 @@ describe "Vision", :vision do
 
   describe "properties" do
     it "detects properties from an image" do
-      analysis = vision.mark text_image, properties: true
+      analysis = vision.annotate text_image, properties: true
 
       analysis.properties.wont_be :nil?
       analysis.properties.colors.count.must_equal 10
@@ -184,7 +184,7 @@ describe "Vision", :vision do
     end
 
     it "detects properties from multiple images" do
-      analyses = vision.mark text_image,
+      analyses = vision.annotate text_image,
                              face_image,
                              logo_image,
                              properties: true
