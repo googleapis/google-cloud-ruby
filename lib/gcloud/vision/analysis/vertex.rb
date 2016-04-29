@@ -47,7 +47,7 @@ module Gcloud
         end
 
         def inspect
-          "#<#{self.class.class_name} #{self}>"
+          "#<Vertex #{self}>"
         end
 
         ##

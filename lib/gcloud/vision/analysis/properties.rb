@@ -59,7 +59,7 @@ module Gcloud
         end
 
         def inspect
-          "#<#{self.class.class_name} #{self}>"
+          "#<Properties #{self}>"
         end
 
         ##
@@ -139,7 +139,7 @@ module Gcloud
           end
 
           def inspect
-            "#<#{self.class.class_name} #{self}>"
+            "#<Color #{self}>"
           end
 
           ##

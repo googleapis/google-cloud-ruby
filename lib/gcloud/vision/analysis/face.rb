@@ -147,7 +147,7 @@ module Gcloud
           end
 
           def inspect
-            "#<#{self.class.class_name} #{self}>"
+            "#<Angles #{self}>"
           end
 
           ##
@@ -219,55 +219,13 @@ module Gcloud
           end
 
           def inspect
-            "#<#{self.class.class_name} #{self}>"
+            "#<Bounds #{self}>"
           end
 
           ##
           # @private New Analysis::Face::Angles from a Google API Client object.
           def self.from_gapi gapi
             new.tap { |f| f.instance_variable_set :@gapi, gapi }
-          end
-
-          ##
-          # # Vertex
-          class Vertex
-            attr_accessor :x, :y
-
-            def initialize x, y
-              @x = x
-              @y = y
-            end
-
-            def to_a
-              to_ary
-            end
-
-            def to_ary
-              [x, y]
-            end
-
-            def to_h
-              to_hash
-            end
-
-            def to_hash
-              { x: x, y: y }
-            end
-
-            def to_s
-              "(x: #{x.inspect}, y: #{y.inspect})"
-            end
-
-            def inspect
-              "#<#{self.class.class_name} #{self}>"
-            end
-
-            ##
-            # @private New Analysis::Face::Bounds::Vertex from a Google API
-            # Client object.
-            def self.from_gapi gapi
-              new gapi["x"], gapi["y"]
-            end
           end
         end
 
@@ -373,7 +331,7 @@ module Gcloud
           end
 
           def inspect
-            "#<#{self.class.class_name} #{self}>"
+            "#<Features #{self}>"
           end
 
           ##
@@ -442,7 +400,7 @@ module Gcloud
             end
 
             def inspect
-              "#<#{self.class.class_name} #{self}>"
+              "#<Landmark #{self}>"
             end
 
             ##
@@ -486,7 +444,7 @@ module Gcloud
             end
 
             def inspect
-              "#<#{self.class.class_name} #{self}>"
+              "#<Chin #{self}>"
             end
           end
 
@@ -521,7 +479,7 @@ module Gcloud
             end
 
             def inspect
-              "#<#{self.class.class_name} #{self}>"
+              "#<Ears #{self}>"
             end
           end
 
@@ -556,7 +514,7 @@ module Gcloud
             end
 
             def inspect
-              "#<#{self.class.class_name} #{self}>"
+              "#<Eyebrows #{self}>"
             end
           end
 
@@ -593,7 +551,7 @@ module Gcloud
             end
 
             def inspect
-              "#<#{self.class.class_name} #{self}>"
+              "#<Eyebrow #{self}>"
             end
           end
 
@@ -628,7 +586,7 @@ module Gcloud
             end
 
             def inspect
-              "#<#{self.class.class_name} #{self}>"
+              "#<Eyes #{self}>"
             end
           end
 
@@ -671,7 +629,7 @@ module Gcloud
             end
 
             def inspect
-              "#<#{self.class.class_name} #{self}>"
+              "#<Eye #{self}>"
             end
           end
 
@@ -709,7 +667,7 @@ module Gcloud
             end
 
             def inspect
-              "#<#{self.class.class_name} #{self}>"
+              "#<Lips #{self}>"
             end
           end
 
@@ -746,7 +704,7 @@ module Gcloud
             end
 
             def inspect
-              "#<#{self.class.class_name} #{self}>"
+              "#<Mouth #{self}>"
             end
           end
 
@@ -788,7 +746,7 @@ module Gcloud
             end
 
             def inspect
-              "#<#{self.class.class_name} #{self}>"
+              "#<Nose #{self}>"
             end
           end
         end
@@ -927,7 +885,7 @@ module Gcloud
           end
 
           def inspect
-            "#<#{self.class.class_name} #{self}>"
+            "#<Likelihood #{self}>"
           end
 
           ##

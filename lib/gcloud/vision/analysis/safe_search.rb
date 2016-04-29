@@ -106,7 +106,7 @@ module Gcloud
         end
 
         def inspect
-          "#<#{self.class.class_name} #{self}>"
+          "#<SafeSearch #{self}>"
         end
 
         ##
