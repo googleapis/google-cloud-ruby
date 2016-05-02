@@ -447,7 +447,6 @@ module Gcloud
         return nil if namespace.nil?
         Proto::PartitionId.new.tap do |p|
           p.namespace = namespace
-          p.dataset_id = project
         end
       end
     end
