@@ -90,6 +90,7 @@ module Gcloud
                                               properties: properties)
 
         resp = connection.annotate requests
+        fail ApiError.from_response(resp) unless resp.success?
         analyses = Array(resp.data["responses"]).map do |gapi|
           Analysis.from_gapi gapi
         end

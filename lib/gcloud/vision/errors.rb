@@ -29,7 +29,7 @@ module Gcloud
       # @private
       def self.from_response resp
         new.tap do |e|
-          e.response = resp
+          e.instance_variable_set "@response", resp
         end
       end
     end
@@ -40,32 +40,29 @@ module Gcloud
     # Raised when an API call is not successful.
     class ApiError < Error
       ##
-      # The code of the error.
-      def code
-        response.data["error"]["code"]
-      rescue
-        nil
-      end
+      # The HTTP code of the error.
+      attr_reader :code
+
+      ##
+      # The Google API error status.
+      attr_reader :status
 
       ##
       # The errors encountered.
-      def errors
-        response.data["error"]["errors"]
-      rescue
-        []
-      end
-
-      def initialize message, response
-        super message
-        @response = response
-      end
+      attr_reader :errors
 
       # @private
       def self.from_response resp
-        klass = klass_for resp.data["error"]["status"]
-        klass.new resp.data["error"]["message"], resp
-      rescue
-        Gcloud::Vision::Error.from_response resp
+        if resp.data? && resp.data["error"]
+          new(resp.data["error"]["message"]).tap do |e|
+            e.instance_variable_set "@code", resp.data["error"]["code"]
+            e.instance_variable_set "@status", resp.data["error"]["status"]
+            e.instance_variable_set "@errors", resp.data["error"]["errors"]
+            e.instance_variable_set "@response", resp
+          end
+        else
+          Error.from_response_status resp
+        end
       end
     end
   end
