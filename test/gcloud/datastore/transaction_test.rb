@@ -47,7 +47,7 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.save entity
-    transaction.send(:shared_upserts).must_include entity
+    transaction.instance_variable_get("@commit").send(:shared_upserts).must_include entity
   end
 
   it "delete does not persist entities" do
@@ -56,7 +56,7 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.delete entity
-    transaction.send(:shared_deletes).must_include entity.key
+    transaction.instance_variable_get("@commit").send(:shared_deletes).must_include entity.key
   end
 
   it "delete does not persist keys" do
@@ -65,7 +65,43 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.delete entity.key
-    transaction.send(:shared_deletes).must_include entity.key
+    transaction.instance_variable_get("@commit").send(:shared_deletes).must_include entity.key
+  end
+
+  it "commit will save and delete entities" do
+    commit_res = Google::Datastore::V1beta3::CommitResponse.new(
+      mutation_results: [
+        Google::Datastore::V1beta3::MutationResult.new,
+        Google::Datastore::V1beta3::MutationResult.new]
+    )
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :TRANSACTIONAL,
+      transaction: tx_id,
+      mutations: [Google::Datastore::V1beta3::Mutation.new(
+        upsert: Gcloud::Datastore::Entity.new.tap do |e|
+          e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
+          e["name"] = "Gonna be saved"
+        end.to_grpc), Google::Datastore::V1beta3::Mutation.new(
+          delete: Gcloud::Datastore::Key.new("ds-test", "to-be-deleted").to_grpc)]
+    )
+    transaction.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+
+    entity_to_be_saved = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
+      e["name"] = "Gonna be saved"
+    end
+    entity_to_be_deleted = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-deleted"
+      e["name"] = "Gonna be deleted"
+    end
+
+    entity_to_be_saved.wont_be :persisted?
+    transaction.commit do |c|
+      c.save entity_to_be_saved
+      c.delete entity_to_be_deleted
+    end
+    entity_to_be_saved.must_be :persisted?
   end
 
   it "commit persists entities with complete keys" do
@@ -74,15 +110,15 @@ describe Gcloud::Datastore::Transaction do
     )
     commit_req = Google::Datastore::V1beta3::CommitRequest.new(
       project_id: project,
-      mode: :NON_TRANSACTIONAL,
+      mode: :TRANSACTIONAL,
+      transaction: tx_id,
       mutations: [Google::Datastore::V1beta3::Mutation.new(
         upsert: Gcloud::Datastore::Entity.new.tap do |e|
-          e.key = Gcloud::Datastore::Key.new "ds-test"
+          e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
           e["name"] = "thingamajig"
         end.to_grpc)]
     )
-    transaction.service.mocked_datastore.expect :commit, commit_res,
-                                  [Google::Datastore::V1beta3::CommitRequest]
+    transaction.service.mocked_datastore.expect :commit, commit_res, [commit_req]
 
     entity = Gcloud::Datastore::Entity.new.tap do |e|
       e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
@@ -105,15 +141,15 @@ describe Gcloud::Datastore::Transaction do
     )
     commit_req = Google::Datastore::V1beta3::CommitRequest.new(
       project_id: project,
-      mode: :NON_TRANSACTIONAL,
+      mode: :TRANSACTIONAL,
+      transaction: tx_id,
       mutations: [Google::Datastore::V1beta3::Mutation.new(
         upsert: Gcloud::Datastore::Entity.new.tap do |e|
           e.key = Gcloud::Datastore::Key.new "ds-test"
           e["name"] = "thingamajig"
         end.to_grpc)]
     )
-    transaction.service.mocked_datastore.expect :commit, commit_res,
-                                  [Google::Datastore::V1beta3::CommitRequest]
+    transaction.service.mocked_datastore.expect :commit, commit_res, [commit_req]
 
     entity = Gcloud::Datastore::Entity.new.tap do |e|
       e.key = Gcloud::Datastore::Key.new "ds-test"

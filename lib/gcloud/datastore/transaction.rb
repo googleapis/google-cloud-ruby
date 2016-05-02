@@ -86,7 +86,7 @@ module Gcloud
       #   end
       #
       def save *entities
-        entities.each { |e| shared_upserts << e }
+        @commit.save(*entities)
         # Do not save yet
         entities
       end
@@ -102,10 +102,7 @@ module Gcloud
       #   end
       #
       def delete *entities_or_keys
-        keys = entities_or_keys.map do |e_or_k|
-          e_or_k.respond_to?(:key) ? e_or_k.key : e_or_k
-        end
-        keys.each { |k| shared_deletes << k }
+        @commit.delete(*entities_or_keys)
         # Do not delete yet
         true
       end
@@ -124,30 +121,92 @@ module Gcloud
 
       ##
       # Commits a transaction.
+      #
+      # @yield [commit] an optional block for making changes
+      # @yieldparam [Commit] commit The object that changes are made on
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #
+      #   user = dataset.entity "User", "heidi" do |u|
+      #     u["name"] = "Heidi Henderson"
+      #     u["email"] = "heidi@example.net"
+      #   end
+      #
+      #   tx = dataset.transaction
+      #   begin
+      #     if tx.find(user.key).nil?
+      #       tx.save user
+      #     end
+      #     tx.commit
+      #   rescue
+      #     tx.rollback
+      #   end
+      #
+      # @example Commit can be passed a block, same as {Dataset#commit}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #
+      #   tx = dataset.transaction
+      #   begin
+      #     tx.commit do |c|
+      #       c.save task1, task2
+      #       c.delete entity1, entity2
+      #     end
+      #   rescue
+      #     tx.rollback
+      #   end
+      #
       def commit
         if @id.nil?
           fail TransactionError, "Cannot commit when not in a transaction."
         end
 
+        yield @commit if block_given?
+
         ensure_service!
 
-        mutations = shared_mutations
-
-        commit_res = service.commit mutations, transaction: @id
+        commit_res = service.commit @commit.mutations, transaction: @id
+        entities = @commit.entities
         returned_keys = commit_res.mutation_results.map(&:key)
         returned_keys.each_with_index do |key, index|
-          entity = shared_upserts[index]
+          entity = entities[index]
           next if entity.nil?
-          # assign returned key if entity and key are present
-          entity.key = Key.from_grpc key unless key.nil?
+          entity.key = Key.from_grpc(key) unless key.nil?
         end
         # Make sure all entity keys are frozen so all show as persisted
-        shared_upserts.each { |e| e.key.freeze unless e.persisted? }
+        entities.each { |e| e.key.freeze unless e.persisted? }
         true
       end
 
       ##
       # Rolls a transaction back.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #
+      #   user = dataset.entity "User", "heidi" do |u|
+      #     u["name"] = "Heidi Henderson"
+      #     u["email"] = "heidi@example.net"
+      #   end
+      #
+      #   tx = dataset.transaction
+      #   begin
+      #     if tx.find(user.key).nil?
+      #       tx.save user
+      #     end
+      #     tx.commit
+      #   rescue
+      #     tx.rollback
+      #   end
       def rollback
         if @id.nil?
           fail TransactionError, "Cannot rollback when not in a transaction."
@@ -162,39 +221,8 @@ module Gcloud
       # Reset the transaction.
       # {Transaction#start} must be called afterwards.
       def reset!
-        @shared_upserts = []
-        @shared_deletes = []
         @id = nil
-      end
-
-      protected
-
-      ##
-      # @private List of Entity objects to be saved.
-      def shared_upserts
-        @shared_upserts
-      end
-
-      ##
-      # @private List of Key objects to be deleted.
-      def shared_deletes
-        @shared_deletes
-      end
-
-      ##
-      # @private List of Mutation objects to be committed.
-      def shared_mutations
-        mutations = []
-        # shared upserts always go in first, so the keys can be assigned
-        shared_upserts.each do |e|
-          m = Google::Datastore::V1beta3::Mutation.new upsert: e.to_grpc
-          mutations << m
-        end
-        shared_deletes.each do |k|
-          m = Google::Datastore::V1beta3::Mutation.new delete: k.to_grpc
-          mutations << m
-        end
-        mutations
+        @commit = Commit.new
       end
     end
   end

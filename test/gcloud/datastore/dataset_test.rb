@@ -352,6 +352,38 @@ describe Gcloud::Datastore::Dataset do
     refute entities.no_more?
   end
 
+  it "commit will save and delete entities" do
+    mutations = [Google::Datastore::V1beta3::Mutation.new(
+      upsert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
+        e["name"] = "Gonna be saved"
+      end.to_grpc), Google::Datastore::V1beta3::Mutation.new(
+        delete: Gcloud::Datastore::Key.new("ds-test", "to-be-deleted").to_grpc)
+    ]
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: mutations
+    )
+    dataset.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+
+    entity_to_be_saved = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
+      e["name"] = "Gonna be saved"
+    end
+    entity_to_be_deleted = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-deleted"
+      e["name"] = "Gonna be deleted"
+    end
+
+    entity_to_be_saved.wont_be :persisted?
+    dataset.commit do |c|
+      c.save entity_to_be_saved
+      c.delete entity_to_be_deleted
+    end
+    entity_to_be_saved.must_be :persisted?
+  end
+
   it "run_query will fulfill a query" do
     run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
       project_id: project,

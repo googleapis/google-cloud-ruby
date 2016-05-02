@@ -17,6 +17,7 @@ require "gcloud/gce"
 require "gcloud/datastore/grpc_utils"
 require "gcloud/datastore/credentials"
 require "gcloud/datastore/service"
+require "gcloud/datastore/commit"
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
 require "gcloud/datastore/query"
@@ -117,8 +118,7 @@ module Gcloud
       ##
       # Persist one or more entities to the Datastore.
       #
-      # @param [Entity] entities One or more entity objects to be saved without
-      #   `id` or `name` set.
+      # @param [Entity] entities One or more entity objects to be saved.
       #
       # @return [Array<Gcloud::Datastore::Entity>]
       #
@@ -156,16 +156,56 @@ module Gcloud
       #   datastore.save task
       #
       def save *entities
+        commit { |c| c.save(*entities) }
+      end
+
+      ##
+      # Remove entities from the Datastore.
+      #
+      # @param [Entity, Key] entities_or_keys One or more Entity or Key objects
+      #   to remove.
+      #
+      # @return [Boolean] Returns `true` if successful
+      #
+      # @example
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #   dataset.delete entity1, entity2
+      #
+      def delete *entities_or_keys
+        commit { |c| c.delete(*entities_or_keys) }
+        true
+      end
+
+      ##
+      # Make multiple changes in a single commit.
+      #
+      # @yield [commit] a block for making changes
+      # @yieldparam [Commit] commit The object that changes are made on
+      #
+      # @return [Array<Gcloud::Datastore::Entity>] The entities that were
+      #   persisted.
+      #
+      # @example
+      #   dataset.commit do |c|
+      #     c.save task1, task2
+      #     c.delete entity1, entity2
+      #   end
+      #
+      def commit
+        return unless block_given?
+        c = Commit.new
+        yield c
+
         ensure_service!
-        mutations = entities.map do |entity|
-          Google::Datastore::V1beta3::Mutation.new upsert: entity.to_grpc
-        end
-        commit_res = service.commit(mutations)
+        commit_res = service.commit c.mutations
+        entities = c.entities
         returned_keys = commit_res.mutation_results.map(&:key)
         returned_keys.each_with_index do |key, index|
+          entity = entities[index]
+          next if entity.nil?
           entities[index].key = Key.from_grpc(key) unless key.nil?
         end
-        # Make sure all entity keys are frozen so all show as persisted
         entities.each { |e| e.key.freeze unless e.persisted? }
         entities
       end
@@ -219,49 +259,6 @@ module Gcloud
         LookupResults.new entities, deferred, missing
       end
       alias_method :lookup, :find_all
-
-      ##
-      # Remove entities from the Datastore.
-      #
-      # @param [Entity, Key] entities_or_keys One or more Entity or Key objects
-      #   to remove.
-      #
-      # @return [Boolean] Returns `true` if successful
-      #
-      # @example Using a key:
-      #   gcloud = Gcloud.new
-      #   datastore = gcloud.datastore
-      #
-      #   task_key = datastore.key "Task", "sampleTask"
-      #   datastore.delete task_key
-      #
-      # @example Using an entity object:
-      #   gcloud = Gcloud.new
-      #   datastore = gcloud.datastore
-      #
-      #   task = datastore.find "Task", "sampleTask"
-      #   datastore.delete task
-      #
-      # @example Delete multiple entities in a batch:
-      #   gcloud = Gcloud.new
-      #   datastore = gcloud.datastore
-      #
-      #   task_key1 = datastore.key "Task", "sampleTask1"
-      #   task_key2 = datastore.key "Task", "sampleTask2"
-      #   datastore.delete task_key1, task_key2
-      #
-      def delete *entities_or_keys
-        just_keys = entities_or_keys.map do |e_or_k|
-          e_or_k.respond_to?(:key) ? e_or_k.key : e_or_k
-        end
-        mutations = just_keys.map do |key|
-          Google::Datastore::V1beta3::Mutation.new delete: key.to_grpc
-        end
-
-        ensure_service!
-        service.commit mutations
-        true
-      end
 
       ##
       # Retrieve entities specified by a Query.
