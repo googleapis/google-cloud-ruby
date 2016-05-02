@@ -897,4 +897,48 @@ describe Gcloud::Datastore::Dataset do
     error.inner.wont_be :nil?
     error.inner.message.must_equal "This error should be wrapped by TransactionError."
   end
+
+  it "transaction will wrap errors for both commit and rollback" do
+    # Save mocked service so we can restore it later.
+    mocked_service = dataset.service
+    begin
+      tx_id = "giterdone".encode("ASCII-8BIT")
+      begin_tx_res = Google::Datastore::V1beta3::BeginTransactionResponse.new(transaction: tx_id)
+
+      stub = Object.new
+      stub.instance_variable_set "@response", begin_tx_res
+      def stub.begin_transaction
+        @response
+      end
+      def stub.commit *args
+        raise "commit error"
+      end
+      def stub.rollback *args
+        raise "rollback error"
+      end
+      # Replace mocked connection with this one off object.
+      dataset.service = stub
+
+      entity = Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+        e["name"] = "thingamajig"
+      end
+
+      error = assert_raises Gcloud::Datastore::TransactionError do
+        dataset.transaction do |tx|
+          tx.save entity
+        end
+      end
+
+      error.wont_be :nil?
+      error.message.must_equal "Transaction failed to commit and rollback."
+      error.commit_error.wont_be :nil?
+      error.commit_error.message.must_equal "commit error"
+      error.rollback_error.wont_be :nil?
+      error.rollback_error.message.must_equal "rollback error"
+    ensure
+      # Reset mocked service so the call to verify works.
+      dataset.service = mocked_service
+    end
+  end
 end
