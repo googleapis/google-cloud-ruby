@@ -514,4 +514,45 @@ describe Gcloud::Datastore::Dataset do
     error.inner.wont_be :nil?
     error.inner.message.must_equal "This error should be wrapped by TransactionError."
   end
+
+  it "transaction will wrap errors for both commit and rollback" do
+    # Save mocked connection so we can restore it later.
+    mocked_connection = dataset.connection
+    begin
+      stub = Object.new
+      stub.instance_variable_set "@response", begin_transaction_response
+      def stub.begin_transaction
+        @response
+      end
+      def stub.commit *args
+        raise "commit error"
+      end
+      def stub.rollback *args
+        raise "rollback error"
+      end
+      # Replace mocked connection with this one off object.
+      dataset.connection = stub
+
+      entity = Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+        e["name"] = "thingamajig"
+      end
+
+      error = assert_raises Gcloud::Datastore::TransactionError do
+        dataset.transaction do |tx|
+          tx.save entity
+        end
+      end
+
+      error.wont_be :nil?
+      error.message.must_equal "Transaction failed to commit and rollback."
+      error.commit_error.wont_be :nil?
+      error.commit_error.message.must_equal "commit error"
+      error.rollback_error.wont_be :nil?
+      error.rollback_error.message.must_equal "rollback error"
+    ensure
+      # Reset mocked connection so the call to verify works.
+      dataset.connection = mocked_connection
+    end
+  end
 end

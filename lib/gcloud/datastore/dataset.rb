@@ -284,8 +284,14 @@ module Gcloud
           yield tx
           tx.commit
         rescue => e
-          tx.rollback
-          raise TransactionError.new("Transaction failed to commit.", e)
+          begin
+            tx.rollback
+          rescue => re
+            msg = "Transaction failed to commit and rollback."
+            raise TransactionError.new(msg, commit_error: e, rollback_error: re)
+          end
+          raise TransactionError.new("Transaction failed to commit.",
+                                     commit_error: e)
         end
       end
 
