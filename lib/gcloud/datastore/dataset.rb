@@ -216,6 +216,14 @@ module Gcloud
       # @param [Key, String] key_or_kind A Key object or `kind` string value.
       # @param [Integer, String, nil] id_or_name The Key's `id` or `name` value
       #   if a `kind` was provided in the first parameter.
+      # @param [Symbol] consistency The non-transactional read consistency to
+      #   use. Cannot be set to `:strong` for global queries. Accepted values
+      #   are `:eventual` and `:strong`.
+      #
+      #   The default consistency depends on the type of lookup used. See
+      #   [Eventual Consistency in Google Cloud
+      #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
+      #   for more information.
       #
       # @return [Gcloud::Datastore::Entity, nil]
       #
@@ -226,12 +234,12 @@ module Gcloud
       # @example Finding an entity with a `kind` and `id`/`name`:
       #   task = datastore.find "Task", "sampleTask"
       #
-      def find key_or_kind, id_or_name = nil
+      def find key_or_kind, id_or_name = nil, consistency: nil
         key = key_or_kind
         unless key.is_a? Gcloud::Datastore::Key
           key = Key.new key_or_kind, id_or_name
         end
-        find_all(key).first
+        find_all(key, consistency: consistency).first
       end
       alias_method :get, :find
 
@@ -239,6 +247,14 @@ module Gcloud
       # Retrieve the entities for the provided keys.
       #
       # @param [Key] keys One or more Key objects to find records for.
+      # @param [Symbol] consistency The non-transactional read consistency to
+      #   use. Cannot be set to `:strong` for global queries. Accepted values
+      #   are `:eventual` and `:strong`.
+      #
+      #   The default consistency depends on the type of lookup used. See
+      #   [Eventual Consistency in Google Cloud
+      #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
+      #   for more information.
       #
       # @return [Gcloud::Datastore::Dataset::LookupResults]
       #
@@ -250,9 +266,11 @@ module Gcloud
       #   task_key2 = datastore.key "Task", "sampleTask2"
       #   tasks = datastore.find_all task_key1, task_key2
       #
-      def find_all *keys
+      def find_all *keys, consistency: nil
         ensure_service!
-        lookup_res = service.lookup(*keys.map(&:to_grpc))
+        check_consistency! consistency
+        lookup_res = service.lookup(*keys.map(&:to_grpc),
+                                    consistency: consistency)
         entities = to_gcloud_entities lookup_res.found
         deferred = to_gcloud_keys lookup_res.deferred
         missing  = to_gcloud_entities lookup_res.missing
@@ -265,6 +283,14 @@ module Gcloud
       #
       # @param [Query, GqlQuery] query The object with the search criteria.
       # @param [String] namespace The namespace the query is to run within.
+      # @param [Symbol] consistency The non-transactional read consistency to
+      #   use. Cannot be set to `:strong` for global queries. Accepted values
+      #   are `:eventual` and `:strong`.
+      #
+      #   The default consistency depends on the type of query used. See
+      #   [Eventual Consistency in Google Cloud
+      #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
+      #   for more information.
       #
       # @return [Gcloud::Datastore::Dataset::QueryResults]
       #
@@ -288,12 +314,14 @@ module Gcloud
       #                     done: false
       #   tasks = dataset.run gql, namespace: "ns~todo-project"
       #
-      def run query, namespace: nil
+      def run query, namespace: nil, consistency: nil
         ensure_service!
         unless query.is_a?(Query) || query.is_a?(GqlQuery)
           fail ArgumentError, "Cannot run a #{query.class} object."
         end
-        query_res = service.run_query query.to_grpc, namespace
+        check_consistency! consistency
+        query_res = service.run_query query.to_grpc, namespace,
+                                      consistency: consistency
         QueryResults.from_grpc query_res, service, namespace, query.to_grpc.dup
       end
       alias_method :run_query, :run
@@ -561,6 +589,13 @@ module Gcloud
       def to_gcloud_keys grpc_keys
         # Keys are not nested in an object like entities are.
         Array(grpc_keys).map { |key| Key.from_grpc key }
+      end
+
+      def check_consistency! consistency
+        fail(ArgumentError,
+             format("Consistency must be :eventual or :strong, not %s.",
+                    consistency.inspect)
+            ) unless [:eventual, :strong, nil].include? consistency
       end
     end
   end

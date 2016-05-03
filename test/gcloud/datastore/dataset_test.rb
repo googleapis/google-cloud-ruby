@@ -192,6 +192,25 @@ describe Gcloud::Datastore::Dataset do
     entity.must_be_kind_of Gcloud::Datastore::Entity
   end
 
+  it "find can specify consistency" do
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", 123).to_grpc],
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(read_consistency: :EVENTUAL)
+    )
+    dataset.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
+
+    entity = dataset.find "ds-test", 123, consistency: :eventual
+    entity.must_be_kind_of Gcloud::Datastore::Entity
+  end
+
+  it "find raises if consistency is a bad value" do
+    error = expect do
+      dataset.find "ds-test", 123, consistency: "foobar"
+    end.must_raise ArgumentError
+    error.message.must_equal "Consistency must be :eventual or :strong, not \"foobar\"."
+  end
+
   it "find_all takes several keys" do
     lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
       project_id: project,
@@ -228,6 +247,34 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+  end
+
+  it "find_all can specify consistency" do
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
+             Gcloud::Datastore::Key.new("ds-test", "thingie2").to_grpc],
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(read_consistency: :EVENTUAL)
+    )
+    dataset.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
+
+    key1 = Gcloud::Datastore::Key.new "ds-test", "thingie1"
+    key2 = Gcloud::Datastore::Key.new "ds-test", "thingie2"
+    entities = dataset.lookup key1, key2, consistency: :eventual
+    entities.count.must_equal 2
+    entities.deferred.count.must_equal 0
+    entities.missing.count.must_equal 0
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+  end
+
+  it "find_all raises if consistency is a bad value" do
+    error = expect do
+      key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      entities = dataset.lookup key, key, consistency: "foobar"
+    end.must_raise ArgumentError
+    error.message.must_equal "Consistency must be :eventual or :strong, not \"foobar\"."
   end
 
   describe "find_all result object" do
@@ -404,6 +451,7 @@ describe Gcloud::Datastore::Dataset do
     refute entities.more_after_cursor?
     refute entities.no_more?
   end
+
   it "run_query will fulfill a query with a namespace" do
     run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
       project_id: project,

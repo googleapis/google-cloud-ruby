@@ -222,6 +222,21 @@ describe "Datastore", :datastore do
 
       dataset.delete post
     end
+
+    it "should find with specifying consistency" do
+      post.key = Gcloud::Datastore::Key.new "Post", "post1"
+      dataset.save post
+
+      refresh = dataset.find post.key, consistency: :eventual
+      refresh.key.kind.must_equal        post.key.kind
+      refresh.key.id.must_equal          post.key.id
+      refresh.key.name.must_equal        post.key.name
+      refresh.properties.to_h.must_equal post.properties.to_h
+
+      dataset.delete post.key
+      refresh = dataset.find post.key
+      refresh.must_be :nil?
+    end
   end
 
   it "should be able to save keys as a part of entity and query by key" do
@@ -529,6 +544,15 @@ describe "Datastore", :datastore do
       entities.count.must_equal 6
     end
 
+    it "should specify consistency" do
+      query = Gcloud::Datastore::Query.new.
+        kind("Character").ancestor(book).
+        where("family", "=", "Stark").
+        where("appearances", ">=", 20)
+      entities = dataset.run query, consistency: :strong
+      entities.count.must_equal 6
+    end
+
     after do
       dataset.delete *characters
     end
@@ -578,6 +602,18 @@ describe "Datastore", :datastore do
       entity.key.name.must_equal        obj.key.name
       entity.properties.to_h.must_equal obj.properties.to_h
       dataset.delete entity
+    end
+
+    it "should find within the transaction" do
+      dataset.save dataset.entity("Post", "post1")
+
+      tx = dataset.transaction do |tx|
+        in_tx_refresh = tx.find tx.key("Post", "post1")
+        tx.delete in_tx_refresh if in_tx_refresh
+      end
+
+      refresh = dataset.find "Post", "post1"
+      refresh.must_be :nil?
     end
   end
 end

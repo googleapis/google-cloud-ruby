@@ -31,6 +31,35 @@ describe Gcloud::Datastore::Transaction do
       mutation_results: [Google::Datastore::V1beta3::MutationResult.new]
     )
   end
+  let(:lookup_res) do
+    Google::Datastore::V1beta3::LookupResponse.new(
+      found: 2.times.map do
+        Google::Datastore::V1beta3::EntityResult.new(
+          entity: Google::Datastore::V1beta3::Entity.new(
+            key: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc,
+            properties: { "name" => Gcloud::GRPCUtils.to_value("thingamajig") }
+          )
+        )
+      end
+    )
+  end
+  let(:run_query_res) do
+    run_query_res_entities = 2.times.map do
+      Google::Datastore::V1beta3::EntityResult.new(
+        entity: Gcloud::Datastore::Entity.new.tap do |e|
+          e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+          e["name"] = "thingamajig"
+        end.to_grpc
+      )
+    end
+    Google::Datastore::V1beta3::RunQueryResponse.new(
+      batch: Google::Datastore::V1beta3::QueryResultBatch.new(
+        entity_results: run_query_res_entities,
+        end_cursor: Gcloud::GRPCUtils.decode_bytes(query_cursor)
+      )
+    )
+  end
+  let(:query_cursor) { Gcloud::Datastore::Cursor.new "c3VwZXJhd2Vzb21lIQ==" }
   let(:begin_tx_res) do
     Google::Datastore::V1beta3::BeginTransactionResponse.new(transaction: tx_id)
   end
@@ -102,6 +131,62 @@ describe Gcloud::Datastore::Transaction do
       c.delete entity_to_be_deleted
     end
     entity_to_be_saved.must_be :persisted?
+  end
+
+  it "find can take a key" do
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc],
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(transaction: tx_id)
+    )
+    transaction.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
+
+    key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+    entity = transaction.find key
+    entity.must_be_kind_of Gcloud::Datastore::Entity
+  end
+
+  it "find_all takes several keys" do
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
+             Gcloud::Datastore::Key.new("ds-test", "thingie2").to_grpc],
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(transaction: tx_id)
+    )
+    transaction.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
+
+    key1 = Gcloud::Datastore::Key.new "ds-test", "thingie1"
+    key2 = Gcloud::Datastore::Key.new "ds-test", "thingie2"
+    entities = transaction.find_all key1, key2
+    entities.count.must_equal 2
+    entities.deferred.count.must_equal 0
+    entities.missing.count.must_equal 0
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+  end
+
+  it "run will fulfill a query" do
+    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      query: Gcloud::Datastore::Query.new.kind("User").to_grpc,
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(transaction: tx_id)
+    )
+    transaction.service.mocked_datastore.expect :run_query, run_query_res, [run_query_req]
+
+    query = Gcloud::Datastore::Query.new.kind("User")
+    entities = transaction.run query
+    entities.count.must_equal 2
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.end_cursor.must_equal query_cursor
+    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.more_after_cursor?
+    refute entities.no_more?
   end
 
   it "commit persists entities with complete keys" do
