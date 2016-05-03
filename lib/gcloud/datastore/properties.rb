@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "stringio"
+
 module Gcloud
   module Datastore
     ##
@@ -97,6 +99,12 @@ module Gcloud
            String                    === value ||
            Array                     === value
           return value
+        elsif value.respond_to?(:read) && value.respond_to?(:rewind)
+          # shortcut creating a StringIO if it already is one.
+          return value if value.is_a? StringIO
+          # Always convert an IO object to a StringIO when storing.
+          value.rewind
+          return StringIO.new(value.read)
         elsif defined?(BigDecimal) && BigDecimal === value
           return value
         end
