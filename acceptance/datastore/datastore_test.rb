@@ -167,6 +167,37 @@ describe "Datastore", :datastore do
       dataset.delete post
     end
 
+    it "should save and read blob values" do
+      avatar = File.open("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb")
+      post.key  = Gcloud::Datastore::Key.new "Post", "blob_support"
+      post["avatar"] = avatar
+      post.exclude_from_indexes! "avatar", true
+
+      dataset.save post
+      avatar.rewind
+
+      entity = dataset.find post.key
+
+      entity["avatar"].read.must_equal post["avatar"].read
+      entity["avatar"].rewind
+      post["avatar"].rewind
+
+      entity["avatar"].read.must_equal avatar.read
+      entity["avatar"].rewind
+      avatar.rewind
+
+      Tempfile.open ["avatar", "png"] do |tmpfile|
+        tmpfile.write entity["avatar"].read
+
+        tmpfile.rewind
+        entity["avatar"].rewind
+        avatar.rewind
+
+        tmpfile.size.must_equal avatar.size
+      end
+
+      dataset.delete post
+    end
   end
 
   it "should be able to save keys as a part of entity and query by key" do

@@ -97,6 +97,8 @@ module Gcloud
            String                    === value ||
            Array                     === value
           return value
+        elsif value.respond_to?(:read)
+          return value
         elsif defined?(BigDecimal) && BigDecimal === value
           return value
         end
