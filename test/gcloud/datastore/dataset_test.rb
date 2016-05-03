@@ -110,7 +110,8 @@ describe Gcloud::Datastore::Dataset do
   it "find can take a kind and id" do
     dataset.connection.expect :lookup,
                               lookup_response,
-                              [Gcloud::Datastore::Proto::Key]
+                              [Gcloud::Datastore::Proto::Key,
+                               consistency: nil]
 
     entity = dataset.find "ds-test", 123
     entity.must_be_kind_of Gcloud::Datastore::Entity
@@ -119,7 +120,8 @@ describe Gcloud::Datastore::Dataset do
   it "find can take a kind and name" do
     dataset.connection.expect :lookup,
                               lookup_response,
-                              [Gcloud::Datastore::Proto::Key]
+                              [Gcloud::Datastore::Proto::Key,
+                               consistency: nil]
 
     entity = dataset.find "ds-test", "thingie"
     entity.must_be_kind_of Gcloud::Datastore::Entity
@@ -128,7 +130,8 @@ describe Gcloud::Datastore::Dataset do
   it "find can take a key" do
     dataset.connection.expect :lookup,
                               lookup_response,
-                              [Gcloud::Datastore::Proto::Key]
+                              [Gcloud::Datastore::Proto::Key,
+                               consistency: nil]
 
     key = Gcloud::Datastore::Key.new "ds-test", "thingie"
     entity = dataset.find key
@@ -138,17 +141,36 @@ describe Gcloud::Datastore::Dataset do
   it "find is aliased to get" do
     dataset.connection.expect :lookup,
                               lookup_response,
-                              [Gcloud::Datastore::Proto::Key]
+                              [Gcloud::Datastore::Proto::Key,
+                               consistency: nil]
 
     entity = dataset.get "ds-test", 123
     entity.must_be_kind_of Gcloud::Datastore::Entity
+  end
+
+  it "find can specify consistency" do
+    dataset.connection.expect :lookup,
+                              lookup_response,
+                              [Gcloud::Datastore::Proto::Key,
+                               consistency: :eventual]
+
+    entity = dataset.find "ds-test", 123, consistency: :eventual
+    entity.must_be_kind_of Gcloud::Datastore::Entity
+  end
+
+  it "find raises if consistency is a bad value" do
+    error = expect do
+      dataset.find "ds-test", 123, consistency: "foobar"
+    end.must_raise ArgumentError
+    error.message.must_equal "Consistency must be :eventual or :strong, not \"foobar\"."
   end
 
   it "find_all takes several keys" do
     dataset.connection.expect :lookup,
                               lookup_response,
                               [Gcloud::Datastore::Proto::Key,
-                               Gcloud::Datastore::Proto::Key]
+                               Gcloud::Datastore::Proto::Key,
+                               consistency: nil]
 
     key = Gcloud::Datastore::Key.new "ds-test", "thingie"
     entities = dataset.find_all key, key
@@ -164,7 +186,8 @@ describe Gcloud::Datastore::Dataset do
     dataset.connection.expect :lookup,
                               lookup_response,
                               [Gcloud::Datastore::Proto::Key,
-                               Gcloud::Datastore::Proto::Key]
+                               Gcloud::Datastore::Proto::Key,
+                               consistency: nil]
 
     key = Gcloud::Datastore::Key.new "ds-test", "thingie"
     entities = dataset.lookup key, key
@@ -174,6 +197,31 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+  end
+
+  it "find_all can specify consistency" do
+    dataset.connection.expect :lookup,
+                              lookup_response,
+                              [Gcloud::Datastore::Proto::Key,
+                               Gcloud::Datastore::Proto::Key,
+                               consistency: :eventual]
+
+    key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+    entities = dataset.lookup key, key, consistency: :eventual
+    entities.count.must_equal 2
+    entities.deferred.count.must_equal 0
+    entities.missing.count.must_equal 0
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+  end
+
+  it "find_all raises if consistency is a bad value" do
+    error = expect do
+      key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      entities = dataset.lookup key, key, consistency: "foobar"
+    end.must_raise ArgumentError
+    error.message.must_equal "Consistency must be :eventual or :strong, not \"foobar\"."
   end
 
   describe "find_all result object" do
@@ -202,7 +250,8 @@ describe Gcloud::Datastore::Dataset do
       dataset.connection.expect :lookup,
                                 lookup_response_deferred,
                                 [Gcloud::Datastore::Proto::Key,
-                                 Gcloud::Datastore::Proto::Key]
+                                 Gcloud::Datastore::Proto::Key,
+                                 consistency: nil]
 
       key = Gcloud::Datastore::Key.new "ds-test", "thingie"
       entities = dataset.find_all key, key
@@ -221,7 +270,8 @@ describe Gcloud::Datastore::Dataset do
       dataset.connection.expect :lookup,
                                 lookup_response_missing,
                                 [Gcloud::Datastore::Proto::Key,
-                                 Gcloud::Datastore::Proto::Key]
+                                 Gcloud::Datastore::Proto::Key,
+                                 consistency: nil]
 
       key = Gcloud::Datastore::Key.new "ds-test", "thingie"
       entities = dataset.find_all key, key
@@ -261,7 +311,7 @@ describe Gcloud::Datastore::Dataset do
   it "run will fulfill a query" do
     dataset.connection.expect :run_query,
                               run_query_response,
-                              [Gcloud::Datastore::Proto::Query, nil]
+                              [Gcloud::Datastore::Proto::Query, nil, consistency: nil]
 
     query = Gcloud::Datastore::Query.new.kind("User")
     entities = dataset.run query
@@ -302,7 +352,7 @@ describe Gcloud::Datastore::Dataset do
   it "run_query will fulfill a query" do
     dataset.connection.expect :run_query,
                               run_query_response,
-                              [Gcloud::Datastore::Proto::Query, nil]
+                              [Gcloud::Datastore::Proto::Query, nil, consistency: nil]
 
     query = Gcloud::Datastore::Query.new.kind("User")
     entities = dataset.run_query query
@@ -317,14 +367,35 @@ describe Gcloud::Datastore::Dataset do
     refute entities.no_more?
   end
 
-
   it "run_query will fulfill a query with a namespace" do
     dataset.connection.expect :run_query,
                               run_query_response,
-                              [Gcloud::Datastore::Proto::Query, Gcloud::Datastore::Proto::PartitionId]
+                              [Gcloud::Datastore::Proto::Query,
+                               Gcloud::Datastore::Proto::PartitionId,
+                               consistency: nil]
 
     query = Gcloud::Datastore::Query.new.kind("User")
-    entities = dataset.run_query query, :namespace => 'foobar'
+    entities = dataset.run_query query, namespace: 'foobar'
+    entities.count.must_equal 2
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.more_results.must_be :nil?
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.no_more?
+  end
+
+  it "run_query can specify consistency" do
+    dataset.connection.expect :run_query,
+                              run_query_response,
+                              [Gcloud::Datastore::Proto::Query,
+                               nil,
+                               consistency: :eventual]
+
+    query = Gcloud::Datastore::Query.new.kind("User")
+    entities = dataset.run_query query, consistency: :eventual
     entities.count.must_equal 2
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
@@ -440,7 +511,7 @@ describe Gcloud::Datastore::Dataset do
     it "has more_results not_finished" do
       dataset.connection.expect :run_query,
                                 run_query_response_not_finished,
-                                [Gcloud::Datastore::Proto::Query, nil]
+                                [Gcloud::Datastore::Proto::Query, nil, consistency: nil]
 
       query = Gcloud::Datastore::Query.new.kind("User")
       entities = dataset.run query
@@ -458,7 +529,7 @@ describe Gcloud::Datastore::Dataset do
     it "has more_results more_after_limit" do
       dataset.connection.expect :run_query,
                                 run_query_response_more_after_limit,
-                                [Gcloud::Datastore::Proto::Query, nil]
+                                [Gcloud::Datastore::Proto::Query, nil, consistency: nil]
 
       query = Gcloud::Datastore::Query.new.kind("User")
       entities = dataset.run query
@@ -476,7 +547,7 @@ describe Gcloud::Datastore::Dataset do
     it "has more_results no_more" do
       dataset.connection.expect :run_query,
                                 run_query_response_no_more,
-                                [Gcloud::Datastore::Proto::Query, nil]
+                                [Gcloud::Datastore::Proto::Query, nil, consistency: nil]
 
       query = Gcloud::Datastore::Query.new.kind("User")
       entities = dataset.run query
