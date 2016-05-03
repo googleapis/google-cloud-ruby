@@ -104,25 +104,6 @@ describe Gcloud::Datastore::Properties do
     raw.must_equal false
   end
 
-  it "encodes Time" do
-    value = Gcloud::GRPCUtils.to_value time_obj
-    value.timestamp_value.must_equal time_grpc
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
-    value.array_value.must_be :nil?
-  end
-
-  it "decodes timestamp" do
-    value = Google::Datastore::V1beta3::Value.new
-    value.timestamp_value = time_grpc
-    raw = Gcloud::GRPCUtils.from_value value
-    raw.must_equal time_obj
-  end
-
   it "encodes integer" do
     raw = 1234
     value = Gcloud::GRPCUtils.to_value raw
@@ -243,5 +224,50 @@ describe Gcloud::Datastore::Properties do
     raw[0].must_equal "string"
     raw[1].must_equal 123
     raw[2].must_equal true
+  end
+
+  it "encodes Time" do
+    value = Gcloud::GRPCUtils.to_value time_obj
+    value.timestamp_value.must_equal time_grpc
+    value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
+    value.boolean_value.must_be :nil?
+    value.double_value.must_be :nil?
+    value.integer_value.must_be :nil?
+    value.string_value.must_be :nil?
+    value.array_value.must_be :nil?
+  end
+
+  it "encodes Date" do
+    date_obj = time_obj.to_date
+    value = Gcloud::GRPCUtils.to_value date_obj
+    value.timestamp_value.must_equal Google::Protobuf::Timestamp.new(seconds: date_obj.to_time.to_i)
+    value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
+    value.boolean_value.must_be :nil?
+    value.double_value.must_be :nil?
+    value.integer_value.must_be :nil?
+    value.string_value.must_be :nil?
+    value.array_value.must_be :nil?
+  end
+
+  it "encodes DateTime" do
+    datetime_obj = time_obj.to_datetime
+    value = Gcloud::GRPCUtils.to_value datetime_obj
+    value.timestamp_value.must_equal time_grpc
+    value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
+    value.boolean_value.must_be :nil?
+    value.double_value.must_be :nil?
+    value.integer_value.must_be :nil?
+    value.string_value.must_be :nil?
+    value.array_value.must_be :nil?
+  end
+
+  it "decodes timestamp" do
+    value = Google::Datastore::V1beta3::Value.new
+    value.timestamp_value = time_grpc
+    raw = Gcloud::GRPCUtils.from_value value
+    raw.must_equal time_obj
   end
 end

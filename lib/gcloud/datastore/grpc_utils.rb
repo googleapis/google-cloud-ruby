@@ -49,10 +49,7 @@ module Gcloud
     # Gets an object from a Google::Datastore::V1beta3::Value.
     def self.from_value grpc_value
       return nil if grpc_value.nil?
-      if !grpc_value.timestamp_value.nil?
-        Time.at grpc_value.timestamp_value.seconds,
-                grpc_value.timestamp_value.nanos/1000.0
-      elsif !grpc_value.key_value.nil?
+      if !grpc_value.key_value.nil?
         Gcloud::Datastore::Key.from_grpc(grpc_value.key_value)
       elsif !grpc_value.entity_value.nil?
         Gcloud::Datastore::Entity.from_grpc(grpc_value.entity_value)
@@ -66,6 +63,9 @@ module Gcloud
         return grpc_value.string_value
       elsif !grpc_value.array_value.nil?
         return Array(grpc_value.array_value.values).map { |v| from_value v }
+      elsif !grpc_value.timestamp_value.nil?
+        Time.at grpc_value.timestamp_value.seconds,
+                grpc_value.timestamp_value.nanos/1000.0
       else
         nil
       end
@@ -89,9 +89,6 @@ module Gcloud
         v.double_value = value
       elsif defined?(BigDecimal) && BigDecimal === value
         v.double_value = value
-      elsif Time === value
-        v.timestamp_value = Google::Protobuf::Timestamp.new(
-          seconds: value.to_i, nanos: value.nsec)
       elsif Gcloud::Datastore::Key === value
         v.key_value = value.to_grpc
       elsif Gcloud::Datastore::Entity === value
@@ -102,6 +99,9 @@ module Gcloud
         v.array_value = Google::Datastore::V1beta3::ArrayValue.new(
           values: value.map { |v| to_value v }
         )
+      elsif value.respond_to? :to_time
+        v.timestamp_value = Google::Protobuf::Timestamp.new(
+          seconds: value.to_time.to_i, nanos: value.to_time.nsec)
       else
         fail PropertyError, "A property of type #{value.class} is not supported."
       end

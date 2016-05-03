@@ -97,8 +97,7 @@ module Gcloud
       # Ensures the value is a type that can be persisted,
       # otherwise a PropertyError is raised.
       def ensure_value_type value
-        if Time                      === value ||
-           Gcloud::Datastore::Key    === value ||
+        if Gcloud::Datastore::Key    === value ||
            Gcloud::Datastore::Entity === value ||
            NilClass                  === value ||
            TrueClass                 === value ||
@@ -107,6 +106,8 @@ module Gcloud
            Integer                   === value ||
            String                    === value ||
            Array                     === value
+          return value
+        elsif value.respond_to?(:to_time)
           return value
         elsif defined?(BigDecimal) && BigDecimal === value
           return value
