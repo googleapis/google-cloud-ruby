@@ -481,7 +481,7 @@ module Gcloud
         fail(ArgumentError,
              format("Consistency must be :eventual or :strong, not %s.",
                     consistency.inspect)
-            ) unless [:eventual, :string, nil].include? consistency
+            ) unless [:eventual, :strong, nil].include? consistency
       end
     end
   end
