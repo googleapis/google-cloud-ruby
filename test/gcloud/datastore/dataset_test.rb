@@ -404,12 +404,10 @@ describe Gcloud::Datastore::Dataset do
     refute entities.more_after_cursor?
     refute entities.no_more?
   end
-
   it "run_query will fulfill a query with a namespace" do
     run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
       project_id: project,
       partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        project_id: project,
         namespace_id: "foobar"
       ),
       query: Gcloud::Datastore::Query.new.kind("User").to_grpc
@@ -457,7 +455,6 @@ describe Gcloud::Datastore::Dataset do
     run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
       project_id: project,
       partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        project_id: project,
         namespace_id: "foobar"
       ),
       gql_query: Google::Datastore::V1beta3::GqlQuery.new(
@@ -507,7 +504,6 @@ describe Gcloud::Datastore::Dataset do
     run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
       project_id: project,
       partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        project_id: project,
         namespace_id: "foobar"
       ),
       gql_query: Google::Datastore::V1beta3::GqlQuery.new(
@@ -534,7 +530,6 @@ describe Gcloud::Datastore::Dataset do
     first_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
       project_id: project,
       partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        project_id: project,
         namespace_id: "foobar"
       ),
       gql_query: Google::Datastore::V1beta3::GqlQuery.new(
@@ -547,7 +542,6 @@ describe Gcloud::Datastore::Dataset do
     next_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
       project_id: project,
       partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        project_id: project,
         namespace_id: "foobar"
       ),
       query: Gcloud::Datastore::Query.new.kind("Task").start(query_cursor).to_grpc
@@ -590,7 +584,6 @@ describe Gcloud::Datastore::Dataset do
     first_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
       project_id: project,
       partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        project_id: project,
         namespace_id: "foobar"
       ),
       gql_query: Google::Datastore::V1beta3::GqlQuery.new(
@@ -603,7 +596,6 @@ describe Gcloud::Datastore::Dataset do
     next_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
       project_id: project,
       partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        project_id: project,
         namespace_id: "foobar"
       ),
       query: Gcloud::Datastore::Query.new.kind("Task").start(query_cursor).to_grpc

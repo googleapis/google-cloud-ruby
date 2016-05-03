@@ -94,9 +94,7 @@ module Gcloud
         end
 
         run_req.partition_id = Google::Datastore::V1beta3::PartitionId.new(
-          project_id: project,
-          namespace_id: namespace
-        ) if namespace
+          namespace_id: namespace) if namespace
 
         backoff { datastore.run_query run_req }
       end
