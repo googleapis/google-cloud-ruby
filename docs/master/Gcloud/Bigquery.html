@@ -103,7 +103,7 @@ we’ll show you how to do that too.)</p>
 you have not yet created datasets or tables in your own project, let’s
 connect to Google’s <code class="highlighter-rouge">publicdata</code> project, and see what you find.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span> <span class="s2">"publicdata"</span>
 <span class="n">bigquery</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">bigquery</span>
@@ -124,7 +124,7 @@ retrieve individual datasets and tables by ID. Let’s look at the structure
 of the <code class="highlighter-rouge">shakespeare</code> table, which contains an entry for every word in every
 play written by Shakespeare.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span> <span class="s2">"publicdata"</span>
 <span class="n">bigquery</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">bigquery</span>
@@ -151,7 +151,7 @@ and run a query.</p>
 are connecting using your own default project. This is necessary for running
 a query, since queries need to be able to create tables to hold results.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">bigquery</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">bigquery</span>
@@ -179,7 +179,7 @@ BigQuery API enables you to manage longer-running jobs. In the asynchronous
 approach to running a query, an instance of <span class='object_link'><a href="Bigquery/QueryJob.html" title="Gcloud::Bigquery::QueryJob (class)">QueryJob</a></span> is
 returned, rather than an instance of <span class='object_link'><a href="Bigquery/QueryData.html" title="Gcloud::Bigquery::QueryData (class)">QueryData</a></span>.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">bigquery</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">bigquery</span>
@@ -210,7 +210,7 @@ query results in a permanent table.</p>
 <span class='object_link'><a href="Bigquery/Dataset.html" title="Gcloud::Bigquery::Dataset (class)">Dataset</a></span>. Datasets hold tables and control access to
 them.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud/bigquery"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud/bigquery"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">bigquery</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">bigquery</span>
@@ -225,7 +225,7 @@ example below shows a schema with a repeated record field named
 <a href="https://cloud.google.com/bigquery/preparing-data-for-bigquery">Preparing Data for
 BigQuery</a>.)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">bigquery</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">bigquery</span>
@@ -260,7 +260,7 @@ can also be “streamed” into BigQuery.</p>
 soon as possible, inserting individual records directly from your Ruby
 application is a great approach.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">bigquery</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">bigquery</span>
@@ -307,7 +307,7 @@ U.S. Social Security Administration. Inside the archive you will find over
 100 files containing baby name records since the year 1880. A PDF file also
 contained in the archive specifies the schema used below.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">bigquery</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">bigquery</span>
@@ -341,7 +341,7 @@ to use httpclient. The second statement, which should only be added if you
 are using a version of Faraday at or above 0.9.2, is a workaround for <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367">this
 gzip issue</a>.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="c1"># Use httpclient to avoid broken pipe errors with large uploads</span>
 <span class="no">Faraday</span><span class="p">.</span><span class="nf">default_adapter</span> <span class="o">=</span> <span class="ss">:httpclient</span>
@@ -364,7 +364,7 @@ result data to a Google Cloud Storage file. In order to follow along, you
 will need to enable the Google Cloud Storage API in addition to setting up
 billing.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">bigquery</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">bigquery</span>
@@ -420,7 +420,7 @@ for details.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Apr 28, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal current' href=''>BigQuery</a></li><li class='toc-l1'><a class='reference internal' href='Bigquery/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Bigquery/Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Bigquery/Job.html'>Job</a></li><li class='toc-l1'><a class='reference internal' href='Bigquery/Table.html'>Table</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 03, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal current' href=''>BigQuery</a></li><li class='toc-l1'><a class='reference internal' href='Bigquery/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Bigquery/Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Bigquery/Job.html'>Job</a></li><li class='toc-l1'><a class='reference internal' href='Bigquery/Table.html'>Table</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

@@ -108,7 +108,7 @@ string and the <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">I
 639-1</a> code of the
 language to which you wish to translate.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">translate</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">translate</span>
@@ -128,7 +128,7 @@ language to which you wish to translate.</p>
 text, as the following example illustrates. (Single words do not give
 Translate API much to work with.)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">translate</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">translate</span>
@@ -149,7 +149,7 @@ Translate API much to work with.)</p>
 
 <p>You can pass multiple texts to <span class='object_link'><a href="Translate/Api.html#translate-instance_method" title="Gcloud::Translate::Api#translate (method)">Api#translate</a></span>.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">translate</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">translate</span>
@@ -166,7 +166,7 @@ Translate API much to work with.)</p>
 
 <p>By default, any HTML in your source text will be preserved.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">translate</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">translate</span>
@@ -183,7 +183,7 @@ Translate API much to work with.)</p>
 Translate API ranks as the most likely source language for a text. The
 <code class="highlighter-rouge">confidence</code> score is a float value between <code class="highlighter-rouge">0</code> and <code class="highlighter-rouge">1</code>.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">translate</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">translate</span>
@@ -198,7 +198,7 @@ Translate API ranks as the most likely source language for a text. The
 
 <p>You can pass multiple texts to <span class='object_link'><a href="Translate/Api.html#detect-instance_method" title="Gcloud::Translate::Api#detect (method)">Api#detect</a></span>.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">translate</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">translate</span>
@@ -220,7 +220,7 @@ Translate API ranks as the most likely source language for a text. The
 <p>Translate API adds new languages frequently. You can use
 <span class='object_link'><a href="Translate/Api.html#languages-instance_method" title="Gcloud::Translate::Api#languages (method)">Api#languages</a></span> to query the list of supported languages.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">translate</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">translate</span>
@@ -237,7 +237,7 @@ Translate API ranks as the most likely source language for a text. The
 639-1</a> codes, provide
 the code for the language in which you wish to receive the names.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">translate</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">translate</span>
@@ -266,7 +266,7 @@ the code for the language in which you wish to receive the names.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Apr 28, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal current' href=''>Translate</a></li><li class='toc-l1'><a class='reference internal' href='Translate/Api.html'>Api</a></li><li class='toc-l1'><a class='reference internal' href='Translate/Translation.html'>Translation</a></li><li class='toc-l1'><a class='reference internal' href='Translate/Detection.html'>Detection</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 03, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal current' href=''>Translate</a></li><li class='toc-l1'><a class='reference internal' href='Translate/Api.html'>Api</a></li><li class='toc-l1'><a class='reference internal' href='Translate/Translation.html'>Translation</a></li><li class='toc-l1'><a class='reference internal' href='Translate/Detection.html'>Detection</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

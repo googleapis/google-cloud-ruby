@@ -88,7 +88,7 @@ project and credential information to connect to the Storage service, or if
 you are running on Google Compute Engine this configuration is taken care
 of for you.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span> <span class="s2">"my-todo-project"</span><span class="p">,</span>
                     <span class="s2">"/path/to/keyfile.json"</span>
@@ -114,7 +114,7 @@ buckets that you can create in a project. You can use buckets to organize
 and control access to your data. Each bucket has a unique name, which is how
 they are retrieved: (See <span class='object_link'><a href="Storage/Project.html#bucket-instance_method" title="Gcloud::Storage::Project#bucket (method)">Project#bucket</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -126,7 +126,7 @@ they are retrieved: (See <span class='object_link'><a href="Storage/Project.html
 <p>You can also retrieve all buckets on a project: (See
 <span class='object_link'><a href="Storage/Project.html#buckets-instance_method" title="Gcloud::Storage::Project#buckets (method)">Project#buckets</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -138,7 +138,7 @@ they are retrieved: (See <span class='object_link'><a href="Storage/Project.html
 <p>If you have a significant number of buckets, you may need to paginate
 through them: (See <span class='object_link'><a href="Storage/Bucket/List.html#token-instance_method" title="Gcloud::Storage::Bucket::List#token (method)">Bucket::List#token</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -162,7 +162,7 @@ through them: (See <span class='object_link'><a href="Storage/Bucket/List.html#t
 <p>A unique name is all that is needed to create a new bucket: (See
 <span class='object_link'><a href="Storage/Project.html#create_bucket-instance_method" title="Gcloud::Storage::Project#create_bucket (method)">Project#create_bucket</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -181,7 +181,7 @@ no limit on the number of objects that you can create in a bucket.</p>
 <p>Files are retrieved by their name, which is the path of the file in the
 bucket: (See <span class='object_link'><a href="Storage/Bucket.html#file-instance_method" title="Gcloud::Storage::Bucket#file (method)">Bucket#file</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -193,7 +193,7 @@ bucket: (See <span class='object_link'><a href="Storage/Bucket.html#file-instanc
 
 <p>You can also retrieve all files in a bucket: (See Bucket#files)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -205,7 +205,7 @@ bucket: (See <span class='object_link'><a href="Storage/Bucket.html#file-instanc
 
 <p>Or you can retrieve all files in a specified path:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -218,7 +218,7 @@ bucket: (See <span class='object_link'><a href="Storage/Bucket.html#file-instanc
 <p>If you have a significant number of files, you may need to paginate through
 them: (See <span class='object_link'><a href="Storage/File/List.html#token-instance_method" title="Gcloud::Storage::File::List#token (method)">File::List#token</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -245,7 +245,7 @@ them: (See <span class='object_link'><a href="Storage/File/List.html#token-insta
 file system, and the name/path that the file should be stored in the bucket.
 (See <span class='object_link'><a href="Storage/Bucket.html#create_file-instance_method" title="Gcloud::Storage::Bucket#create_file (method)">Bucket#create_file</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -268,7 +268,7 @@ to use httpclient. The second statement, which should only be added if you
 are using a version of Faraday at or above 0.9.2, is a workaround for <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367">this
 gzip issue</a>.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="c1"># Use httpclient to avoid broken pipe errors with large uploads</span>
 <span class="no">Faraday</span><span class="p">.</span><span class="nf">default_adapter</span> <span class="o">=</span> <span class="ss">:httpclient</span>
@@ -288,7 +288,7 @@ gzip issue</a>.</p>
 <p>Files can be downloaded to the local file system. (See
 <span class='object_link'><a href="Storage/File.html#download-instance_method" title="Gcloud::Storage::File#download (method)">File#download</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -305,7 +305,7 @@ gzip issue</a>.</p>
 period of time. This URL uses a cryptographic signature of your credentials
 to access the file. (See <span class='object_link'><a href="Storage/File.html#signed_url-instance_method" title="Gcloud::Storage::File#signed_url (method)">File#signed_url</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -328,7 +328,7 @@ guide</a> for more.</p>
 <p>Access to a bucket can be granted to a user by appending <code class="highlighter-rouge">"user-"</code> to the
 email address:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -343,7 +343,7 @@ email address:</p>
 <p>Access to a bucket can be granted to a group by appending <code class="highlighter-rouge">"group-"</code> to the
 email address:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -357,7 +357,7 @@ email address:</p>
 
 <p>Access to a bucket can also be granted to a predefined list of permissions:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -378,7 +378,7 @@ individual file with <span class='object_link'><a href="Storage/File.html#acl-in
 <p>Access to a file can be granted to a user by appending <code class="highlighter-rouge">"user-"</code> to the
 email address:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -394,7 +394,7 @@ email address:</p>
 <p>Access to a file can be granted to a group by appending <code class="highlighter-rouge">"group-"</code> to the
 email address:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -409,7 +409,7 @@ email address:</p>
 
 <p>Access to a file can also be granted to a predefined list of permissions:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
@@ -437,7 +437,7 @@ email address:</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Apr 28, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal current' href=''>Storage</a></li><li class='toc-l1'><a class='reference internal' href='Storage/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Storage/Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='Storage/File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 03, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal current' href=''>Storage</a></li><li class='toc-l1'><a class='reference internal' href='Storage/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Storage/Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='Storage/File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

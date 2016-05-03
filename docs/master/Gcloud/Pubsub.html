@@ -90,7 +90,7 @@ project and credential information to connect to the Pub/Sub service, or if
 you are running on Google Compute Engine this configuration is taken care
 of for you.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -108,7 +108,7 @@ of for you.</p>
 <p>A Topic is a named resource to which messages are sent by publishers.
 A Topic is found by its name. (See <span class='object_link'><a href="Pubsub/Project.html#topic-instance_method" title="Gcloud::Pubsub::Project#topic (method)">Project#topic</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -121,7 +121,7 @@ A Topic is found by its name. (See <span class='object_link'><a href="Pubsub/Pro
 <p>A Topic is created from a Project. (See
 <span class='object_link'><a href="Pubsub/Project.html#create_topic-instance_method" title="Gcloud::Pubsub::Project#create_topic (method)">Project#create_topic</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -136,7 +136,7 @@ a single, specific Topic, to be delivered to the subscribing application. A
 Subscription is found by its name. (See
 <span class='object_link'><a href="Pubsub/Topic.html#subscription-instance_method" title="Gcloud::Pubsub::Topic#subscription (method)">Topic#subscription</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -152,7 +152,7 @@ Subscription is found by its name. (See
 <p>A Subscription is created from a Topic. (See
 <span class='object_link'><a href="Pubsub/Topic.html#subscribe-instance_method" title="Gcloud::Pubsub::Topic#subscribe (method)">Topic#subscribe</a></span> and <span class='object_link'><a href="Pubsub/Project.html#subscribe-instance_method" title="Gcloud::Pubsub::Project#subscribe (method)">Project#subscribe</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -166,7 +166,7 @@ Subscription is found by its name. (See
 <p>The subscription can be created that specifies the number of seconds to
 wait to be acknowledged as well as an endpoint URL to push the messages to:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -185,7 +185,7 @@ a subscription will be lost. Ensure the topic has a subscription before
 publishing. (See <span class='object_link'><a href="Pubsub/Topic.html#publish-instance_method" title="Gcloud::Pubsub::Topic#publish (method)">Topic#publish</a></span> and
 <span class='object_link'><a href="Pubsub/Project.html#publish-instance_method" title="Gcloud::Pubsub::Project#publish (method)">Project#publish</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -197,7 +197,7 @@ publishing. (See <span class='object_link'><a href="Pubsub/Topic.html#publish-in
 
 <p>Messages can also be published with attributes:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -211,7 +211,7 @@ publishing. (See <span class='object_link'><a href="Pubsub/Topic.html#publish-in
 
 <p>Multiple messages can be published at the same time by passing a block:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -230,7 +230,7 @@ publishing. (See <span class='object_link'><a href="Pubsub/Topic.html#publish-in
 <p>Messages are pulled from a Subscription. (See
 <span class='object_link'><a href="Pubsub/Subscription.html#pull-instance_method" title="Gcloud::Pubsub::Subscription#pull (method)">Subscription#pull</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -242,7 +242,7 @@ publishing. (See <span class='object_link'><a href="Pubsub/Topic.html#publish-in
 
 <p>A maximum number of messages returned can also be specified:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -255,7 +255,7 @@ publishing. (See <span class='object_link'><a href="Pubsub/Topic.html#publish-in
 <p>The request for messages can also block until messages are available.
 (See <span class='object_link'><a href="Pubsub/Subscription.html#wait_for_messages-instance_method" title="Gcloud::Pubsub::Subscription#wait_for_messages (method)">Subscription#wait_for_messages</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -274,7 +274,7 @@ message to be removed so it cannot be pulled again.</p>
 ReceivedMessages can be acknowledged one at a time:
 (See <span class='object_link'><a href="Pubsub/ReceivedMessage.html#acknowledge%21-instance_method" title="Gcloud::Pubsub::ReceivedMessage#acknowledge! (method)">ReceivedMessage#acknowledge!</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -287,7 +287,7 @@ ReceivedMessages can be acknowledged one at a time:
 <p>Or, multiple messages can be acknowledged in a single API call:
 (See <span class='object_link'><a href="Pubsub/Subscription.html#acknowledge-instance_method" title="Gcloud::Pubsub::Subscription#acknowledge (method)">Subscription#acknowledge</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -306,7 +306,7 @@ more time is needed. This will allow more time to process the message before
 the message is marked for redelivery. (See
 <span class='object_link'><a href="Pubsub/ReceivedMessage.html#delay%21-instance_method" title="Gcloud::Pubsub::ReceivedMessage#delay! (method)">ReceivedMessage#delay!</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -323,7 +323,7 @@ the message is marked for redelivery. (See
 
 <p>The message can also be made available for immediate redelivery:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -341,7 +341,7 @@ the message is marked for redelivery. (See
 <p>Multiple messages can be delayed or made available for immediate redelivery:
 (See <span class='object_link'><a href="Pubsub/Subscription.html#delay-instance_method" title="Gcloud::Pubsub::Subscription#delay (method)">Subscription#delay</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -358,7 +358,7 @@ the message is marked for redelivery. (See
 infinitely blocking loop to process messages as they are received. (See
 <span class='object_link'><a href="Pubsub/Subscription.html#listen-instance_method" title="Gcloud::Pubsub::Subscription#listen (method)">Subscription#listen</a></span>)</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -373,7 +373,7 @@ infinitely blocking loop to process messages as they are received. (See
 <p>Messages are retrieved in batches for efficiency. The number of messages
 pulled per batch can be limited with the <code class="highlighter-rouge">max</code> option:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -389,7 +389,7 @@ pulled per batch can be limited with the <code class="highlighter-rouge">max</co
 messages can be automatically acknowledged as they are pulled with the
 <code class="highlighter-rouge">autoack</code> option:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -409,7 +409,7 @@ topics or subscriptions in other projects, which can be achieved by using
 the <code class="highlighter-rouge">project</code> option. The main credentials must have permissions to the
 topics and subscriptions in other projects.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span> <span class="c1"># my-project-id</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -426,7 +426,7 @@ topics and subscriptions in other projects.</p>
 <p>It is possible to create a subscription in the current project that pulls
 from a topic in another project:</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span> <span class="c1"># my-project-id</span>
 <span class="n">pubsub</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">pubsub</span>
@@ -456,7 +456,7 @@ emulator is running. The value can be set as an environment variable in the
 shell running the ruby code, or can be set directly in the ruby code as
 shown below.</p>
 
-<div class="highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="c1"># Make Pub/Sub use the emulator</span>
 <span class="no">ENV</span><span class="p">[</span><span class="s2">"PUBSUB_EMULATOR_HOST"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"localhost:8918"</span>
@@ -486,7 +486,7 @@ shown below.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Apr 28, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal current' href=''>Pub/Sub</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Topic.html'>Topic</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Subscription.html'>Subscription</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 03, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal current' href=''>Pub/Sub</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Topic.html'>Topic</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Subscription.html'>Subscription</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
