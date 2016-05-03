@@ -118,6 +118,32 @@ describe "Proto Value methods" do
     value.list_value.must_be :nil?
   end
 
+  it "encodes Date" do
+    date_obj = time_obj.to_date
+    value = Gcloud::Datastore::Proto.to_proto_value time_obj
+    value.timestamp_microseconds_value.must_equal time_num
+    value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
+    value.boolean_value.must_be :nil?
+    value.double_value.must_be :nil?
+    value.integer_value.must_be :nil?
+    value.string_value.must_be :nil?
+    value.list_value.must_be :nil?
+  end
+
+  it "encodes DateTime" do
+    datetime_obj = time_obj.to_datetime
+    value = Gcloud::Datastore::Proto.to_proto_value datetime_obj
+    value.timestamp_microseconds_value.must_equal time_num
+    value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
+    value.boolean_value.must_be :nil?
+    value.double_value.must_be :nil?
+    value.integer_value.must_be :nil?
+    value.string_value.must_be :nil?
+    value.list_value.must_be :nil?
+  end
+
   it "decodes timestamp" do
     value = Gcloud::Datastore::Proto::Value.new
     value.timestamp_microseconds_value = time_num

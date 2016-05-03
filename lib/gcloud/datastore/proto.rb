@@ -64,8 +64,8 @@ module Gcloud
 
       def self.to_proto_value value
         v = Gcloud::Datastore::Proto::Value.new
-        if Time === value
-          v.timestamp_microseconds_value = self.microseconds_from_time value
+        if value.respond_to?(:to_time)
+          v.timestamp_microseconds_value = self.microseconds_from_time value.to_time
         elsif Gcloud::Datastore::Key === value
           v.key_value = value.to_proto
         elsif Gcloud::Datastore::Entity === value

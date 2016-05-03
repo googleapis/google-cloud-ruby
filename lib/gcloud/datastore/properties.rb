@@ -88,7 +88,7 @@ module Gcloud
       # Ensures the value is a type that can be persisted,
       # otherwise a PropertyError is raised.
       def ensure_value_type value
-        if Time                      === value ||
+        if value.respond_to?(:to_time)         ||
            Gcloud::Datastore::Key    === value ||
            Gcloud::Datastore::Entity === value ||
            NilClass                  === value ||
