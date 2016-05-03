@@ -38,7 +38,7 @@ describe Gcloud::Datastore::Connection do
     http_mock.expect :post, new_response_mock, [rpc_path("lookup")]
     key1 = Gcloud::Datastore::Key.new "User", "silvolu"
     key2 = Gcloud::Datastore::Key.new "User", "blowmage"
-    response = connection.lookup key1.to_proto, key2.to_proto
+    response = connection.lookup key1.to_proto, key2.to_proto, consistency: nil
     response.must_be_kind_of Gcloud::Datastore::Proto::LookupResponse
   end
 

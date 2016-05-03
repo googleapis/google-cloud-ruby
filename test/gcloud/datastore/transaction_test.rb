@@ -24,6 +24,33 @@ describe Gcloud::Datastore::Transaction do
     mock
   end
   let(:transaction) { Gcloud::Datastore::Transaction.new connection }
+  let(:lookup_response) do
+    Gcloud::Datastore::Proto::LookupResponse.new.tap do |response|
+      response.found = 2.times.map do
+        Gcloud::Datastore::Proto::EntityResult.new.tap do |er|
+          er.entity = Gcloud::Datastore::Entity.new.tap do |e|
+            e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+            e["name"] = "thingamajig"
+          end.to_proto
+        end
+      end
+    end
+  end
+  let(:run_query_response) do
+    Gcloud::Datastore::Proto::RunQueryResponse.new.tap do |response|
+      response.batch = Gcloud::Datastore::Proto::QueryResultBatch.new.tap do |batch|
+        batch.entity_result = 2.times.map do
+          Gcloud::Datastore::Proto::EntityResult.new.tap do |er|
+            er.entity = Gcloud::Datastore::Entity.new.tap do |e|
+              e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+              e["name"] = "thingamajig"
+            end.to_proto
+          end
+        end
+        batch.end_cursor = Gcloud::Datastore::Proto.decode_cursor query_cursor
+      end
+    end
+  end
   let(:commit_response) do
     Gcloud::Datastore::Proto::CommitResponse.new.tap do |response|
       response.mutation_result = Gcloud::Datastore::Proto::MutationResult.new
@@ -34,6 +61,7 @@ describe Gcloud::Datastore::Transaction do
       response.transaction = "giterdone"
     end
   end
+  let(:query_cursor) { "c3VwZXJhd2Vzb21lIQ==" }
 
   after do
     transaction.connection.verify
@@ -86,6 +114,54 @@ describe Gcloud::Datastore::Transaction do
       c.delete entity_to_be_deleted
     end
     entity_to_be_saved.must_be :persisted?
+  end
+
+  it "find can take a key" do
+    transaction.connection.expect :lookup,
+                                  lookup_response,
+                                  [Gcloud::Datastore::Proto::Key,
+                                   transaction: transaction.id]
+
+    key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+    entity = transaction.find key
+    entity.must_be_kind_of Gcloud::Datastore::Entity
+  end
+
+  it "find_all takes several keys" do
+    transaction.connection.expect :lookup,
+                                  lookup_response,
+                                  [Gcloud::Datastore::Proto::Key,
+                                   Gcloud::Datastore::Proto::Key,
+                                   transaction: transaction.id]
+
+    key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+    entities = transaction.find_all key, key
+    entities.count.must_equal 2
+    entities.deferred.count.must_equal 0
+    entities.missing.count.must_equal 0
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+  end
+
+  it "run will fulfill a query" do
+    transaction.connection.expect :run_query,
+                                  run_query_response,
+                                  [Gcloud::Datastore::Proto::Query, nil,
+                                   transaction: transaction.id]
+
+    query = Gcloud::Datastore::Query.new.kind("User")
+    entities = transaction.run query
+    entities.count.must_equal 2
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.end_cursor.must_equal query_cursor
+    entities.more_results.must_be :nil?
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.no_more?
   end
 
   it "commit persists entities" do

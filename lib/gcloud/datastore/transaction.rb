@@ -66,6 +66,89 @@ module Gcloud
       end
 
       ##
+      # Retrieve an entity by providing key information. The lookup is run
+      # within the transaction.
+      #
+      # @param [Key, String] key_or_kind A Key object or `kind` string value.
+      #
+      # @return [Gcloud::Datastore::Entity, nil]
+      #
+      # @example Finding an entity with a key:
+      #   key = dataset.key "Task", 123456
+      #   task = dataset.find key
+      #
+      # @example Finding an entity with a `kind` and `id`/`name`:
+      #   task = dataset.find "Task", 123456
+      #
+      def find key_or_kind, id_or_name = nil
+        key = key_or_kind
+        unless key.is_a? Gcloud::Datastore::Key
+          key = Key.new key_or_kind, id_or_name
+        end
+        find_all(key).first
+      end
+      alias_method :get, :find
+
+      ##
+      # Retrieve the entities for the provided keys. The lookup is run within
+      # the transaction.
+      #
+      # @param [Key] keys One or more Key objects to find records for.
+      #
+      # @return [Gcloud::Datastore::Dataset::LookupResults]
+      #
+      # @example
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #   key1 = dataset.key "Task", 123456
+      #   key2 = dataset.key "Task", 987654
+      #   tasks = dataset.find_all key1, key2
+      #
+      def find_all *keys
+        response = connection.lookup(*keys.map(&:to_proto),
+                                     transaction: @id)
+        entities = to_gcloud_entities response.found
+        deferred = to_gcloud_keys response.deferred
+        missing  = to_gcloud_entities response.missing
+        LookupResults.new entities, deferred, missing
+      end
+      alias_method :lookup, :find_all
+
+      ##
+      # Retrieve entities specified by a Query. The query is run within the
+      # transaction.
+      #
+      # @param [Query] query The Query object with the search criteria.
+      # @param [String] namespace The namespace the query is to run within.
+      #
+      # @return [Gcloud::Datastore::Dataset::QueryResults]
+      #
+      # @example
+      #   query = dataset.query("Task").
+      #     where("completed", "=", true)
+      #   dataset.transaction do |tx|
+      #     tasks = tx.run query
+      #   end
+      #
+      # @example Run the query within a namespace with the `namespace` option:
+      #   query = Gcloud::Datastore::Query.new.kind("Task").
+      #     where("completed", "=", true)
+      #   dataset.transaction do |tx|
+      #     tasks = tx.run query, namespace: "ns~todo-project"
+      #   end
+      #
+      def run query, namespace: nil
+        partition = optional_partition_id namespace
+        response = connection.run_query query.to_proto, partition,
+                                        transaction: @id
+        entities = to_gcloud_entities response.batch.entity_result
+        cursor = Proto.encode_cursor response.batch.end_cursor
+        more_results = Proto.to_more_results_string response.batch.more_results
+        QueryResults.new entities, cursor, more_results
+      end
+      alias_method :run_query, :run
+
+      ##
       # Begins a transaction.
       # This method is run when a new Transaction is created.
       def start

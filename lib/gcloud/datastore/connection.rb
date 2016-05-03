@@ -63,19 +63,33 @@ module Gcloud
 
       ##
       # Look up entities by keys.
-      def lookup *keys
-        lookup = Proto::LookupRequest.new
-        lookup.key = keys
+      def lookup *keys, consistency: nil, transaction: nil
+        lookup = Proto::LookupRequest.new key: keys
+        if consistency == :eventual
+          lookup.read_options = Proto::ReadOptions.new(read_consistency: 2)
+        elsif consistency == :strong
+          lookup.read_options = Proto::ReadOptions.new(read_consistency: 1)
+        elsif transaction
+          lookup.read_options = Proto::ReadOptions.new(
+            transaction: transaction)
+        end
 
         Proto::LookupResponse.decode rpc("lookup", lookup)
       end
 
       # Query for entities.
-      def run_query query, partition = nil
+      def run_query query, partition = nil, consistency: nil, transaction: nil
         run_query = Proto::RunQueryRequest.new.tap do |rq|
           rq.query = query
           rq.partition_id = partition if partition
-          rq
+        end
+        if consistency == :eventual
+          run_query.read_options = Proto::ReadOptions.new(read_consistency: 2)
+        elsif consistency == :strong
+          run_query.read_options = Proto::ReadOptions.new(read_consistency: 1)
+        elsif transaction
+          run_query.read_options = Proto::ReadOptions.new(
+            transaction: transaction)
         end
 
         Proto::RunQueryResponse.decode rpc("runQuery", run_query)

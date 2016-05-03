@@ -178,6 +178,14 @@ module Gcloud
       # @param [Key, String] key_or_kind A Key object or `kind` string value.
       # @param [Integer, String, nil] id_or_name The Key's `id` or `name` value
       #   if a `kind` was provided in the first parameter.
+      # @param [Symbol] consistency The non-transactional read consistency to
+      #   use. Cannot be set to `:strong` for global queries. Accepted values
+      #   are `:eventual` and `:strong`.
+      #
+      #   The default consistency depends on the type of lookup used. See
+      #   [Eventual Consistency in Google Cloud
+      #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
+      #   for more information.
       #
       # @return [Gcloud::Datastore::Entity, nil]
       #
@@ -188,12 +196,12 @@ module Gcloud
       # @example Finding an entity with a `kind` and `id`/`name`:
       #   task = dataset.find "Task", 123456
       #
-      def find key_or_kind, id_or_name = nil
+      def find key_or_kind, id_or_name = nil, consistency: nil
         key = key_or_kind
         unless key.is_a? Gcloud::Datastore::Key
           key = Key.new key_or_kind, id_or_name
         end
-        find_all(key).first
+        find_all(key, consistency: consistency).first
       end
       alias_method :get, :find
 
@@ -201,6 +209,14 @@ module Gcloud
       # Retrieve the entities for the provided keys.
       #
       # @param [Key] keys One or more Key objects to find records for.
+      # @param [Symbol] consistency The non-transactional read consistency to
+      #   use. Cannot be set to `:strong` for global queries. Accepted values
+      #   are `:eventual` and `:strong`.
+      #
+      #   The default consistency depends on the type of lookup used. See
+      #   [Eventual Consistency in Google Cloud
+      #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
+      #   for more information.
       #
       # @return [Gcloud::Datastore::Dataset::LookupResults]
       #
@@ -211,8 +227,10 @@ module Gcloud
       #   key2 = dataset.key "Task", 987654
       #   tasks = dataset.find_all key1, key2
       #
-      def find_all *keys
-        response = connection.lookup(*keys.map(&:to_proto))
+      def find_all *keys, consistency: nil
+        check_consistency! consistency
+        response = connection.lookup(*keys.map(&:to_proto),
+                                     consistency: consistency)
         entities = to_gcloud_entities response.found
         deferred = to_gcloud_keys response.deferred
         missing  = to_gcloud_entities response.missing
@@ -225,6 +243,14 @@ module Gcloud
       #
       # @param [Query] query The Query object with the search criteria.
       # @param [String] namespace The namespace the query is to run within.
+      # @param [Symbol] consistency The non-transactional read consistency to
+      #   use. Cannot be set to `:strong` for global queries. Accepted values
+      #   are `:eventual` and `:strong`.
+      #
+      #   The default consistency depends on the type of query used. See
+      #   [Eventual Consistency in Google Cloud
+      #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
+      #   for more information.
       #
       # @return [Gcloud::Datastore::Dataset::QueryResults]
       #
@@ -238,9 +264,11 @@ module Gcloud
       #     where("completed", "=", true)
       #   tasks = dataset.run query, namespace: "ns~todo-project"
       #
-      def run query, namespace: nil
+      def run query, namespace: nil, consistency: nil
         partition = optional_partition_id namespace
-        response = connection.run_query query.to_proto, partition
+        check_consistency! consistency
+        response = connection.run_query query.to_proto, partition,
+                                        consistency: consistency
         entities = to_gcloud_entities response.batch.entity_result
         cursor = Proto.encode_cursor response.batch.end_cursor
         more_results = Proto.to_more_results_string response.batch.more_results
@@ -447,6 +475,13 @@ module Gcloud
         Proto::PartitionId.new.tap do |p|
           p.namespace = namespace
         end
+      end
+
+      def check_consistency! consistency
+        fail(ArgumentError,
+             format("Consistency must be :eventual or :strong, not %s.",
+                    consistency.inspect)
+            ) unless [:eventual, :string, nil].include? consistency
       end
     end
   end
