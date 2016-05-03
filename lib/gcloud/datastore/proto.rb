@@ -64,9 +64,7 @@ module Gcloud
 
       def self.to_proto_value value
         v = Gcloud::Datastore::Proto::Value.new
-        if Time === value
-          v.timestamp_microseconds_value = self.microseconds_from_time value
-        elsif Gcloud::Datastore::Key === value
+        if Gcloud::Datastore::Key === value
           v.key_value = value.to_proto
         elsif Gcloud::Datastore::Entity === value
           v.entity_value = value.to_proto
@@ -86,6 +84,8 @@ module Gcloud
           v.string_value = value
         elsif Array === value
           v.list_value = value.map { |item| to_proto_value item }
+        elsif value.respond_to?(:to_time)
+          v.timestamp_microseconds_value = self.microseconds_from_time value.to_time
         elsif value.respond_to?(:read) && value.respond_to?(:rewind)
           value.rewind
           v.blob_value = Base64.strict_encode64(value.read)
