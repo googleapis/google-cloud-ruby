@@ -45,7 +45,7 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.save entity
-    transaction.send(:shared_mutation).upsert.must_include entity.to_proto
+    transaction.instance_variable_get("@commit").send(:shared_upserts).must_include entity
   end
 
   it "delete does not persist entities" do
@@ -54,7 +54,7 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.delete entity
-    transaction.send(:shared_mutation).delete.must_include entity.key.to_proto
+    transaction.instance_variable_get("@commit").send(:shared_deletes).must_include entity.key
   end
 
   it "delete does not persist keys" do
@@ -63,7 +63,29 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.delete entity.key
-    transaction.send(:shared_mutation).delete.must_include entity.key.to_proto
+    transaction.instance_variable_get("@commit").send(:shared_deletes).must_include entity.key
+  end
+
+  it "commit will save and delete entities" do
+    transaction.connection.expect :commit,
+                                  commit_response,
+                                  [Gcloud::Datastore::Proto::Mutation, String]
+
+    entity_to_be_saved = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
+      e["name"] = "Gonna be saved"
+    end
+    entity_to_be_deleted = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
+      e["name"] = "Gonna be deleted"
+    end
+
+    entity_to_be_saved.wont_be :persisted?
+    transaction.commit do |c|
+      c.save entity_to_be_saved
+      c.delete entity_to_be_deleted
+    end
+    entity_to_be_saved.must_be :persisted?
   end
 
   it "commit persists entities" do

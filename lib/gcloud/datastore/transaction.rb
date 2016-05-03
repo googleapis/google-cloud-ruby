@@ -44,8 +44,7 @@ module Gcloud
       #   end
       #
       def save *entities
-        save_entities_to_mutation entities, shared_mutation
-        @_saved_entities += entities
+        @commit.save(*entities)
         # Do not save or assign auto_ids yet
         entities
       end
@@ -61,12 +60,7 @@ module Gcloud
       #   end
       #
       def delete *entities_or_keys
-        keys = entities_or_keys.map do |e_or_k|
-          e_or_k.respond_to?(:key) ? e_or_k.key.to_proto : e_or_k.to_proto
-        end
-        shared_mutation.tap do |m|
-          m.delete = keys
-        end
+        @commit.delete(*entities_or_keys)
         # Do not delete yet
         true
       end
@@ -84,20 +78,84 @@ module Gcloud
 
       ##
       # Commits a transaction.
+      #
+      # @yield [commit] an optional block for making changes
+      # @yieldparam [Commit] commit The object that changes are made on
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #
+      #   user = dataset.entity "User", "heidi" do |u|
+      #     u["name"] = "Heidi Henderson"
+      #     u["email"] = "heidi@example.net"
+      #   end
+      #
+      #   tx = dataset.transaction
+      #   begin
+      #     if tx.find(user.key).nil?
+      #       tx.save user
+      #     end
+      #     tx.commit
+      #   rescue
+      #     tx.rollback
+      #   end
+      #
+      # @example Commit can be passed a block, same as {Dataset#commit}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #
+      #   tx = dataset.transaction
+      #   begin
+      #     tx.commit do |c|
+      #       c.save task1, task2
+      #       c.delete entity1, entity2
+      #     end
+      #   rescue
+      #     tx.rollback
+      #   end
+      #
       def commit
         if @id.nil?
           fail TransactionError, "Cannot commit when not in a transaction."
         end
 
-        response = connection.commit shared_mutation, @id
-        auto_id_assign_ids response.mutation_result.insert_auto_id_key
+        yield @commit if block_given?
+        response = connection.commit @commit.mutation, @id
+        auto_id_assign_ids @commit.auto_id_entities,
+                           response.mutation_result.insert_auto_id_key
         # Make sure all entity keys are frozen so all show as persisted
-        @_saved_entities.each { |e| e.key.freeze unless e.persisted? }
+        @commit.entities.each { |e| e.key.freeze unless e.persisted? }
         true
       end
 
       ##
       # Rolls a transaction back.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #
+      #   user = dataset.entity "User", "heidi" do |u|
+      #     u["name"] = "Heidi Henderson"
+      #     u["email"] = "heidi@example.net"
+      #   end
+      #
+      #   tx = dataset.transaction
+      #   begin
+      #     if tx.find(user.key).nil?
+      #       tx.save user
+      #     end
+      #     tx.commit
+      #   rescue
+      #     tx.rollback
+      #   end
       def rollback
         if @id.nil?
           fail TransactionError, "Cannot rollback when not in a transaction."
@@ -111,19 +169,8 @@ module Gcloud
       # Reset the transaction.
       # {Transaction#start} must be called afterwards.
       def reset!
-        @shared_mutation = nil
         @id = nil
-        @_auto_id_entities = []
-        @_saved_entities = []
-      end
-
-      protected
-
-      ##
-      # @private Mutation to be shared across save, delete, and commit calls.
-      # This enables updates to happen when commit is called.
-      def shared_mutation
-        @shared_mutation ||= Proto.new_mutation
+        @commit = Commit.new
       end
     end
   end

@@ -148,6 +148,32 @@ describe "Datastore", :datastore do
       entities.count.must_equal 0
     end
 
+    it "should save/find/delete multiple entities with commit" do
+      post.key  = Gcloud::Datastore::Key.new "Post"
+      post2.key = Gcloud::Datastore::Key.new "Post"
+
+      post.key.must_be :incomplete?
+      post2.key.must_be :incomplete?
+
+      dataset.save post
+
+      post.key.must_be :complete?
+      post2.key.must_be :incomplete?
+
+      dataset.commit do |c|
+        c.delete post
+        c.save post2
+      end
+
+      post.key.must_be :complete?
+      post2.key.must_be :complete?
+
+      dataset.delete post2
+
+      entities = dataset.find_all post.key, post2.key
+      entities.count.must_equal 0
+    end
+
     it "entities retrieved from datastore have immutable keys" do
       post.key = Gcloud::Datastore::Key.new "Post", "post1"
       dataset.save post

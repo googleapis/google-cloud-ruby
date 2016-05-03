@@ -277,6 +277,28 @@ describe Gcloud::Datastore::Dataset do
     refute entities.no_more?
   end
 
+  it "commit will save and delete entities" do
+    dataset.connection.expect :commit,
+                              commit_response,
+                              [Gcloud::Datastore::Proto::Mutation]
+
+    entity_to_be_saved = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
+      e["name"] = "Gonna be saved"
+    end
+    entity_to_be_deleted = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
+      e["name"] = "Gonna be deleted"
+    end
+
+    entity_to_be_saved.wont_be :persisted?
+    dataset.commit do |c|
+      c.save entity_to_be_saved
+      c.delete entity_to_be_deleted
+    end
+    entity_to_be_saved.must_be :persisted?
+  end
+
   it "run_query will fulfill a query" do
     dataset.connection.expect :run_query,
                               run_query_response,

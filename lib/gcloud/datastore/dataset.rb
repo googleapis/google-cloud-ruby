@@ -16,6 +16,7 @@
 require "gcloud/gce"
 require "gcloud/datastore/connection"
 require "gcloud/datastore/credentials"
+require "gcloud/datastore/commit"
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
 require "gcloud/datastore/query"
@@ -114,8 +115,7 @@ module Gcloud
       ##
       # Persist one or more entities to the Datastore.
       #
-      # @param [Entity] entities One or more entity objects to be saved without
-      #   `id` or `name` set.
+      # @param [Entity] entities One or more entity objects to be saved.
       #
       # @return [Array<Gcloud::Datastore::Entity>]
       #
@@ -123,11 +123,51 @@ module Gcloud
       #   dataset.save task1, task2
       #
       def save *entities
-        mutation = Proto.new_mutation
-        save_entities_to_mutation entities, mutation
-        response = connection.commit mutation
-        auto_id_assign_ids response.mutation_result.insert_auto_id_key
+        commit { |c| c.save(*entities) }
+      end
+
+      ##
+      # Remove entities from the Datastore.
+      #
+      # @param [Entity, Key] entities_or_keys One or more Entity or Key objects
+      #   to remove.
+      #
+      # @return [Boolean] Returns `true` if successful
+      #
+      # @example
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #   dataset.delete entity1, entity2
+      #
+      def delete *entities_or_keys
+        commit { |c| c.delete(*entities_or_keys) }
+        true
+      end
+
+      ##
+      # Make multiple changes in a single commit.
+      #
+      # @yield [commit] a block for making changes
+      # @yieldparam [Commit] commit The object that changes are made on
+      #
+      # @return [Array<Gcloud::Datastore::Entity>] The entities that were
+      #   persisted.
+      #
+      # @example
+      #   dataset.commit do |c|
+      #     c.save task1, task2
+      #     c.delete entity1, entity2
+      #   end
+      #
+      def commit
+        return unless block_given?
+        c = Commit.new
+        yield c
+        response = connection.commit c.mutation
+        auto_id_assign_ids c.auto_id_entities,
+                           response.mutation_result.insert_auto_id_key
         # Make sure all entity keys are frozen so all show as persisted
+        entities = c.entities
         entities.each { |e| e.key.freeze unless e.persisted? }
         entities
       end
@@ -179,30 +219,6 @@ module Gcloud
         LookupResults.new entities, deferred, missing
       end
       alias_method :lookup, :find_all
-
-      ##
-      # Remove entities from the Datastore.
-      #
-      # @param [Entity, Key] entities_or_keys One or more Entity or Key objects
-      #   to remove.
-      #
-      # @return [Boolean] Returns `true` if successful
-      #
-      # @example
-      #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   dataset.delete entity1, entity2
-      #
-      def delete *entities_or_keys
-        keys = entities_or_keys.map do |e_or_k|
-          e_or_k.respond_to?(:key) ? e_or_k.key.to_proto : e_or_k.to_proto
-        end
-        mutation = Proto.new_mutation.tap do |m|
-          m.delete = keys
-        end
-        connection.commit mutation
-        true
-      end
 
       ##
       # Retrieve entities specified by a Query.
@@ -418,34 +434,11 @@ module Gcloud
       end
 
       ##
-      # @private Save a key to be given an ID when comitted.
-      def auto_id_register entity
-        @_auto_id_entities ||= []
-        @_auto_id_entities << entity
-      end
-
-      ##
       # @private Update saved keys with new IDs post-commit.
-      def auto_id_assign_ids auto_ids
-        @_auto_id_entities ||= []
+      def auto_id_assign_ids entities, auto_ids
         Array(auto_ids).each_with_index do |key, index|
-          entity = @_auto_id_entities[index]
+          entity = entities[index]
           entity.key = Key.from_proto key
-        end
-        @_auto_id_entities = []
-      end
-
-      ##
-      # @private Add entities to a Mutation, and register they key to be
-      # updated with an auto ID if needed.
-      def save_entities_to_mutation entities, mutation
-        entities.each do |entity|
-          if entity.key.id.nil? && entity.key.name.nil?
-            mutation.insert_auto_id << entity.to_proto
-            auto_id_register entity
-          else
-            mutation.upsert << entity.to_proto
-          end
         end
       end
 
