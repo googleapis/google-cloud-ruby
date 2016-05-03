@@ -15,6 +15,8 @@
 
 require "gcloud/proto/datastore_v1.pb"
 require "gcloud/datastore/errors"
+require "stringio"
+require "base64"
 
 module Gcloud
   module Datastore
@@ -53,6 +55,8 @@ module Gcloud
           return Array(proto_value.list_value).map do |item|
             from_proto_value item
           end
+        elsif !proto_value.blob_value.nil?
+          return StringIO.new(Base64.decode64(proto_value.blob_value))
         else
           nil
         end
@@ -82,6 +86,8 @@ module Gcloud
           v.string_value = value
         elsif Array === value
           v.list_value = value.map { |item| to_proto_value item }
+        elsif value.respond_to?(:read)
+          v.blob_value = Base64.encode64(value.read)
         else
           fail PropertyError, "A property of type #{value.class} is not supported."
         end
