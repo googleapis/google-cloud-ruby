@@ -513,7 +513,7 @@ describe "Datastore", :datastore do
       query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         where("appearances", ">=", 20)
-      entities = dataset.run query, consistency: :eventual
+      entities = dataset.run query, consistency: :strong
       entities.count.must_equal 6
     end
 
