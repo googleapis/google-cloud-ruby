@@ -319,7 +319,6 @@ describe Gcloud::Datastore::Dataset do
 
 
   it "run_query will fulfill a query with a namespace" do
-    dataset.connection.expect :dataset_id, project
     dataset.connection.expect :run_query,
                               run_query_response,
                               [Gcloud::Datastore::Proto::Query, Gcloud::Datastore::Proto::PartitionId]
