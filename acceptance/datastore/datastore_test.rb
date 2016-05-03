@@ -174,26 +174,23 @@ describe "Datastore", :datastore do
       post.exclude_from_indexes! "avatar", true
 
       dataset.save post
-      avatar.rewind
 
       entity = dataset.find post.key
 
-      entity["avatar"].read.must_equal post["avatar"].read
       entity["avatar"].rewind
       post["avatar"].rewind
-
-      entity["avatar"].read.must_equal avatar.read
-      entity["avatar"].rewind
-      avatar.rewind
+      entity["avatar"].size.must_equal post["avatar"].size
+      entity["avatar"].read.must_equal post["avatar"].read
 
       Tempfile.open ["avatar", "png"] do |tmpfile|
+        tmpfile.binmode
+        entity["avatar"].rewind
         tmpfile.write entity["avatar"].read
 
         tmpfile.rewind
-        entity["avatar"].rewind
         avatar.rewind
-
         tmpfile.size.must_equal avatar.size
+        tmpfile.read.must_equal avatar.read
       end
 
       dataset.delete post
