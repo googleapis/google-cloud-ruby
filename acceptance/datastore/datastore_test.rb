@@ -177,7 +177,8 @@ describe "Datastore", :datastore do
 
       entity = dataset.find post.key
 
-      entity["avatar"].rewind
+      # Rewind not needed because the StringIO poistion is always at the beginning whe retrieved from Datastore.
+      # entity["avatar"].rewind
       post["avatar"].rewind
       entity["avatar"].size.must_equal post["avatar"].size
       entity["avatar"].read.must_equal post["avatar"].read
