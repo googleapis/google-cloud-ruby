@@ -46,6 +46,9 @@ module Gcloud
       ##
       # Retrieve a property value by providing the name.
       #
+      # Property values are converted from the Datastore value type
+      # automatically. Blob properties are returned as StringIO objects.
+      #
       # @param [String, Symbol] prop_name The name of the property.
       #
       # @return [Object, nil] Returns `nil` if the property doesn't exist
@@ -66,12 +69,26 @@ module Gcloud
       #   user = dataset.find "User", "heidi@example.com"
       #   user[:name] #=> "Heidi Henderson"
       #
+      # @example Getting a blob value returns a StringIO object:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #   user = dataset.find "User", "heidi@example.com"
+      #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
+      #
       def [] prop_name
         @properties[prop_name]
       end
 
       ##
       # Set a property value by name.
+      #
+      # Property values are converted to use the proper Datastore value type
+      # automatically. Use an IO-compatible object (File, StringIO, Tempfile) to
+      # indicate the property value should be stored as a Datastore `blob`.
+      # IO-compatible objects are converted to StringIO objects when they are
+      # set.
       #
       # @param [String, Symbol] prop_name The name of the property.
       # @param [Object] prop_value The value of the property.
@@ -91,6 +108,15 @@ module Gcloud
       #   dataset = gcloud.datastore
       #   user = dataset.find "User", "heidi@example.com"
       #   user[:name] = "Heidi H. Henderson"
+      #
+      # @example Setting a blob value using an IO:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #   user = dataset.find "User", "heidi@example.com"
+      #   user["avatar"] = File.open "/avatars/heidi.png"
+      #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
       #
       def []= prop_name, prop_value
         @properties[prop_name] = prop_value
