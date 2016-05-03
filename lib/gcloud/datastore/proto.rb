@@ -88,7 +88,7 @@ module Gcloud
           v.list_value = value.map { |item| to_proto_value item }
         elsif value.respond_to?(:read) && value.respond_to?(:rewind)
           value.rewind
-          v.blob_value = Base64.encode64(value.read)
+          v.blob_value = Base64.strict_encode64(value.read)
         else
           fail PropertyError, "A property of type #{value.class} is not supported."
         end

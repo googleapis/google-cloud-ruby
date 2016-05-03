@@ -253,7 +253,7 @@ describe "Proto Value methods" do
   it "encodes IO as blob" do
     raw = File.open "acceptance/data/CloudPlatform_128px_Retina.png"
     value = Gcloud::Datastore::Proto.to_proto_value raw
-    value.blob_value.must_equal Base64.encode64(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    value.blob_value.must_equal Base64.strict_encode64(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
     value.timestamp_microseconds_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
@@ -267,7 +267,7 @@ describe "Proto Value methods" do
   it "encodes StringIO as blob" do
     raw = StringIO.new(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
     value = Gcloud::Datastore::Proto.to_proto_value raw
-    value.blob_value.must_equal Base64.encode64(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    value.blob_value.must_equal Base64.strict_encode64(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
     value.timestamp_microseconds_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
@@ -283,7 +283,7 @@ describe "Proto Value methods" do
     raw.write(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
     raw.rewind
     value = Gcloud::Datastore::Proto.to_proto_value raw
-    value.blob_value.must_equal Base64.encode64(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    value.blob_value.must_equal Base64.strict_encode64(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
     value.timestamp_microseconds_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
@@ -296,7 +296,7 @@ describe "Proto Value methods" do
 
   it "decodes blob to StringIO" do
     value = Gcloud::Datastore::Proto::Value.new
-    value.blob_value = Base64.encode64(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    value.blob_value = Base64.strict_encode64(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
     raw = Gcloud::Datastore::Proto.from_proto_value value
     raw.must_be_kind_of StringIO
     raw.read.must_equal StringIO.new(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb")).read
