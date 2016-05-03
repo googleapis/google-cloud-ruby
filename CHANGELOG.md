@@ -1,5 +1,17 @@
 # Release History
 
+### 0.8.1 / 2016-05-03
+
+#### Changes
+
+* Datastore
+  * Add support for blob values (bmclean)
+  * Add support for Date and DateTime values
+  * Add support for setting read consistency
+  * Add support for batch operations outside of a transaction (timanovsky)
+  * Fix handling of rollback errors (timanovsky)
+  * Remove setting of project/dataset_id in query partition (toots)
+
 ### 0.8.0 / 2016-04-28
 
 #### Major changes
