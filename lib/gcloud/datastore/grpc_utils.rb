@@ -14,6 +14,7 @@
 
 
 require "gcloud/grpc_utils"
+require "stringio"
 
 module Gcloud
   ##
@@ -66,6 +67,8 @@ module Gcloud
       elsif !grpc_value.timestamp_value.nil?
         Time.at grpc_value.timestamp_value.seconds,
                 grpc_value.timestamp_value.nanos/1000.0
+      elsif !grpc_value.blob_value.nil?
+        return StringIO.new(decode_bytes(grpc_value.blob_value))
       else
         nil
       end
@@ -102,6 +105,9 @@ module Gcloud
       elsif value.respond_to? :to_time
         v.timestamp_value = Google::Protobuf::Timestamp.new(
           seconds: value.to_time.to_i, nanos: value.to_time.nsec)
+      elsif value.respond_to?(:read) && value.respond_to?(:rewind)
+        value.rewind
+        v.blob_value = encode_bytes(value.read)
       else
         fail PropertyError, "A property of type #{value.class} is not supported."
       end
