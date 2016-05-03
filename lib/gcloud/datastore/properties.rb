@@ -111,6 +111,8 @@ module Gcloud
           return value
         elsif value.respond_to?(:to_time)
           return value
+        elsif value.respond_to?(:to_hash) && value.keys.sort == [:latitude, :longitude]
+          return value
         elsif value.respond_to?(:read) && value.respond_to?(:rewind)
           # shortcut creating a StringIO if it already is one.
           return value if value.is_a? StringIO

@@ -39,6 +39,7 @@ describe Gcloud::Datastore::Properties do
     value.integer_value.must_be :nil?
     value.array_value.must_be :nil?
     value.blob_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
   end
 
   it "decodes a string" do
@@ -62,6 +63,7 @@ describe Gcloud::Datastore::Properties do
     # value.string_value.must_be :nil?
     # value.array_value.must_be :nil?
     # value.blob_value.must_be :nil?
+    # value.geo_point_value.must_be :nil?
   end
 
   it "decodes NULL" do
@@ -81,6 +83,7 @@ describe Gcloud::Datastore::Properties do
     value.string_value.must_be :nil?
     value.array_value.must_be :nil?
     value.blob_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
   end
 
   it "decodes true" do
@@ -101,6 +104,7 @@ describe Gcloud::Datastore::Properties do
     value.string_value.must_be :nil?
     value.array_value.must_be :nil?
     value.blob_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
   end
 
   it "decodes false" do
@@ -122,6 +126,7 @@ describe Gcloud::Datastore::Properties do
     value.string_value.must_be :nil?
     value.array_value.must_be :nil?
     value.blob_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
   end
 
   it "decodes integer" do
@@ -144,6 +149,7 @@ describe Gcloud::Datastore::Properties do
     value.string_value.must_be :nil?
     value.array_value.must_be :nil?
     value.blob_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
   end
 
   it "decodes float" do
@@ -166,6 +172,7 @@ describe Gcloud::Datastore::Properties do
     value.string_value.must_be :nil?
     value.array_value.must_be :nil?
     value.blob_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
   end
 
   it "decodes Key" do
@@ -192,6 +199,7 @@ describe Gcloud::Datastore::Properties do
     value.string_value.must_be :nil?
     value.array_value.must_be :nil?
     value.blob_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
   end
 
   it "decodes Entity" do
@@ -220,6 +228,7 @@ describe Gcloud::Datastore::Properties do
     value.integer_value.must_be :nil?
     value.string_value.must_be :nil?
     value.blob_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
   end
 
   it "decodes Array" do
@@ -248,6 +257,7 @@ describe Gcloud::Datastore::Properties do
     value.string_value.must_be :nil?
     value.array_value.must_be :nil?
     value.blob_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
   end
 
   it "encodes Date" do
@@ -262,6 +272,7 @@ describe Gcloud::Datastore::Properties do
     value.string_value.must_be :nil?
     value.array_value.must_be :nil?
     value.blob_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
   end
 
   it "encodes DateTime" do
@@ -276,6 +287,7 @@ describe Gcloud::Datastore::Properties do
     value.string_value.must_be :nil?
     value.array_value.must_be :nil?
     value.blob_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
   end
 
   it "decodes timestamp" do
@@ -285,55 +297,80 @@ describe Gcloud::Datastore::Properties do
     raw.must_equal time_obj
   end
 
-    it "encodes IO as blob" do
-      raw = File.open "acceptance/data/CloudPlatform_128px_Retina.png"
-      value = Gcloud::GRPCUtils.to_value raw
-      value.blob_value.must_equal Gcloud::GRPCUtils.encode_bytes(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
-      value.timestamp_value.must_be :nil?
-      value.key_value.must_be :nil?
-      value.entity_value.must_be :nil?
-      value.boolean_value.must_be :nil?
-      value.double_value.must_be :nil?
-      value.integer_value.must_be :nil?
-      value.string_value.must_be :nil?
-      value.array_value.must_be :nil?
-    end
+  it "encodes IO as blob" do
+    raw = File.open "acceptance/data/CloudPlatform_128px_Retina.png"
+    value = Gcloud::GRPCUtils.to_value raw
+    value.blob_value.must_equal Gcloud::GRPCUtils.encode_bytes(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    value.timestamp_value.must_be :nil?
+    value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
+    value.boolean_value.must_be :nil?
+    value.double_value.must_be :nil?
+    value.integer_value.must_be :nil?
+    value.string_value.must_be :nil?
+    value.array_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
+  end
 
-    it "encodes StringIO as blob" do
-      raw = StringIO.new(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
-      value = Gcloud::GRPCUtils.to_value raw
-      value.blob_value.must_equal Gcloud::GRPCUtils.encode_bytes(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
-      value.timestamp_value.must_be :nil?
-      value.key_value.must_be :nil?
-      value.entity_value.must_be :nil?
-      value.boolean_value.must_be :nil?
-      value.double_value.must_be :nil?
-      value.integer_value.must_be :nil?
-      value.string_value.must_be :nil?
-      value.array_value.must_be :nil?
-    end
+  it "encodes StringIO as blob" do
+    raw = StringIO.new(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    value = Gcloud::GRPCUtils.to_value raw
+    value.blob_value.must_equal Gcloud::GRPCUtils.encode_bytes(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    value.timestamp_value.must_be :nil?
+    value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
+    value.boolean_value.must_be :nil?
+    value.double_value.must_be :nil?
+    value.integer_value.must_be :nil?
+    value.string_value.must_be :nil?
+    value.array_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
+  end
 
-    it "encodes Temfile as blob" do
-      raw = Tempfile.new "raw"
-      raw.write(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
-      raw.rewind
-      value = Gcloud::GRPCUtils.to_value raw
-      value.blob_value.must_equal Gcloud::GRPCUtils.encode_bytes(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
-      value.timestamp_value.must_be :nil?
-      value.key_value.must_be :nil?
-      value.entity_value.must_be :nil?
-      value.boolean_value.must_be :nil?
-      value.double_value.must_be :nil?
-      value.integer_value.must_be :nil?
-      value.string_value.must_be :nil?
-      value.array_value.must_be :nil?
-    end
+  it "encodes Temfile as blob" do
+    raw = Tempfile.new "raw"
+    raw.write(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    raw.rewind
+    value = Gcloud::GRPCUtils.to_value raw
+    value.blob_value.must_equal Gcloud::GRPCUtils.encode_bytes(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    value.timestamp_value.must_be :nil?
+    value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
+    value.boolean_value.must_be :nil?
+    value.double_value.must_be :nil?
+    value.integer_value.must_be :nil?
+    value.string_value.must_be :nil?
+    value.array_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
+  end
 
-    it "decodes blob to StringIO" do
-      value = Google::Datastore::V1beta3::Value.new
-      value.blob_value = Gcloud::GRPCUtils.encode_bytes(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
-      raw = Gcloud::GRPCUtils.from_value value
-      raw.must_be_kind_of StringIO
-      raw.read.must_equal StringIO.new(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb")).read
-    end
+  it "decodes blob to StringIO" do
+    value = Google::Datastore::V1beta3::Value.new
+    value.blob_value = Gcloud::GRPCUtils.encode_bytes(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    raw = Gcloud::GRPCUtils.from_value value
+    raw.must_be_kind_of StringIO
+    raw.read.must_equal StringIO.new(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb")).read
+  end
+
+  it "encodes location hash" do
+    latlng_obj = {latitude: 37.4220041, longitude: -122.0862462}
+    value = Gcloud::GRPCUtils.to_value latlng_obj
+    value.geo_point_value.must_equal Google::Type::LatLng.new(latitude: 37.4220041, longitude: -122.0862462)
+    value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
+    value.timestamp_value.must_be :nil?
+    value.boolean_value.must_be :nil?
+    value.double_value.must_be :nil?
+    value.integer_value.must_be :nil?
+    value.string_value.must_be :nil?
+    value.array_value.must_be :nil?
+    value.blob_value.must_be :nil?
+  end
+
+  it "decodes geo_point" do
+    value = Google::Datastore::V1beta3::Value.new
+    value.geo_point_value = Google::Type::LatLng.new(latitude: 37.4220041, longitude: -122.0862462)
+    raw = Gcloud::GRPCUtils.from_value value
+    raw.must_equal({latitude: 37.4220041, longitude: -122.0862462})
+  end
 end

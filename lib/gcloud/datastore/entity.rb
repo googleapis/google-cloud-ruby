@@ -72,6 +72,8 @@ module Gcloud
       #
       # Property values are converted from the Datastore value type
       # automatically. Blob properties are returned as StringIO objects.
+      # Location properties are returned as a Hash with `:longitude` and
+      # `:latitude` keys.
       #
       # @param [String, Symbol] prop_name The name of the property.
       #
@@ -101,6 +103,15 @@ module Gcloud
       #   user = dataset.find "User", "heidi@example.com"
       #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
       #
+      # @example Getting a geo point value returns a Hash:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #   user = dataset.find "User", "heidi@example.com"
+      #   user["location"] #=> { longitude: -122.0862462,
+      #                    #     latitude: 37.4220041 }
+      #
       def [] prop_name
         properties[prop_name]
       end
@@ -112,7 +123,8 @@ module Gcloud
       # automatically. Use an IO-compatible object (File, StringIO, Tempfile) to
       # indicate the property value should be stored as a Datastore `blob`.
       # IO-compatible objects are converted to StringIO objects when they are
-      # set.
+      # set. Use a Hash with `:longitude` and `:latitude` keys to indicate the
+      # property value should be stored as a Geo Point/LatLng.
       #
       # @param [String, Symbol] prop_name The name of the property.
       # @param [Object] prop_value The value of the property.
@@ -143,6 +155,14 @@ module Gcloud
       #   user = dataset.find "User", "heidi@example.com"
       #   user["avatar"] = File.open "/avatars/heidi.png"
       #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
+      #
+      # @example Setting a geo point value using a Hash:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #   user = dataset.find "User", "heidi@example.com"
+      #   user["location"] = { longitude: -122.0862462, latitude: 37.4220041 }
       #
       def []= prop_name, prop_value
         properties[prop_name] = prop_value
