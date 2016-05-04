@@ -71,7 +71,7 @@ module Gcloud
       elsif !grpc_value.geo_point_value.nil?
         return grpc_value.geo_point_value.to_hash
       elsif !grpc_value.blob_value.nil?
-        return StringIO.new(decode_bytes(grpc_value.blob_value))
+        return StringIO.new(grpc_value.blob_value.force_encoding("ASCII-8BIT"))
       else
         nil
       end
@@ -112,7 +112,7 @@ module Gcloud
         v.geo_point_value = Google::Type::LatLng.new(value)
       elsif value.respond_to?(:read) && value.respond_to?(:rewind)
         value.rewind
-        v.blob_value = encode_bytes(value.read)
+        v.blob_value = value.read.force_encoding("ASCII-8BIT")
       else
         fail Gcloud::Datastore::PropertyError,
              "A property of type #{value.class} is not supported."

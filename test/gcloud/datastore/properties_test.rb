@@ -300,7 +300,7 @@ describe Gcloud::Datastore::Properties do
   it "encodes IO as blob" do
     raw = File.open "acceptance/data/CloudPlatform_128px_Retina.png"
     value = Gcloud::GRPCUtils.to_value raw
-    value.blob_value.must_equal Gcloud::GRPCUtils.encode_bytes(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    value.blob_value.must_equal File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
@@ -315,7 +315,7 @@ describe Gcloud::Datastore::Properties do
   it "encodes StringIO as blob" do
     raw = StringIO.new(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
     value = Gcloud::GRPCUtils.to_value raw
-    value.blob_value.must_equal Gcloud::GRPCUtils.encode_bytes(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    value.blob_value.must_equal File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
@@ -332,7 +332,7 @@ describe Gcloud::Datastore::Properties do
     raw.write(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
     raw.rewind
     value = Gcloud::GRPCUtils.to_value raw
-    value.blob_value.must_equal Gcloud::GRPCUtils.encode_bytes(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    value.blob_value.must_equal File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
@@ -346,7 +346,7 @@ describe Gcloud::Datastore::Properties do
 
   it "decodes blob to StringIO" do
     value = Google::Datastore::V1beta3::Value.new
-    value.blob_value = Gcloud::GRPCUtils.encode_bytes(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    value.blob_value = File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
     raw = Gcloud::GRPCUtils.from_value value
     raw.must_be_kind_of StringIO
     raw.read.must_equal StringIO.new(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb")).read
