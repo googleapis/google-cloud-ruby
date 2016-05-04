@@ -1,5 +1,12 @@
 # Release History
 
+### 0.8.2 / 2016-05-04
+
+#### Changes
+
+* Datastore
+  * Fix issue with blob values being stored in base64 (bmclean)
+
 ### 0.8.1 / 2016-05-03
 
 #### Changes
