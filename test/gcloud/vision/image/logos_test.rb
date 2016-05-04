@@ -36,6 +36,23 @@ describe Gcloud::Vision::Image, :logos, :mock_vision do
     logos.count.must_equal 5
   end
 
+  it "detects multiple logos without specifying a count" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      logo = requests.first
+      logo["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      logo["features"].count.must_equal 1
+      logo["features"].first["type"].must_equal "LOGO_DETECTION"
+      logo["features"].first["maxResults"].must_equal 10
+      [200, {"Content-Type" => "application/json"},
+       logos_response_json]
+    end
+
+    logos = image.logos
+    logos.count.must_equal 5
+  end
+
   it "detects a logo" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]

@@ -36,6 +36,23 @@ describe Gcloud::Vision::Image, :landmarks, :mock_vision do
     landmarks.count.must_equal 5
   end
 
+  it "detects multiple landmarks without specifying a count" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      landmark = requests.first
+      landmark["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      landmark["features"].count.must_equal 1
+      landmark["features"].first["type"].must_equal "LANDMARK_DETECTION"
+      landmark["features"].first["maxResults"].must_equal 10
+      [200, {"Content-Type" => "application/json"},
+       landmarks_response_json]
+    end
+
+    landmarks = image.landmarks
+    landmarks.count.must_equal 5
+  end
+
   it "detects a landmark" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]

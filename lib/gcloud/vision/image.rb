@@ -66,7 +66,7 @@ module Gcloud
         @url
       end
 
-      def faces count
+      def faces count = 10
         ensure_vision!
         analysis = @vision.mark self, faces: count
         analysis.faces
@@ -76,7 +76,7 @@ module Gcloud
         faces(1).first
       end
 
-      def landmarks count
+      def landmarks count = 10
         ensure_vision!
         analysis = @vision.mark self, landmarks: count
         analysis.landmarks
@@ -86,7 +86,7 @@ module Gcloud
         landmarks(1).first
       end
 
-      def logos count
+      def logos count = 10
         ensure_vision!
         analysis = @vision.mark self, logos: count
         analysis.logos
@@ -96,7 +96,7 @@ module Gcloud
         logos(1).first
       end
 
-      def labels count
+      def labels count = 10
         ensure_vision!
         analysis = @vision.mark self, labels: count
         analysis.labels
