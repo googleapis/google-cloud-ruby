@@ -1,0 +1,1 @@
+{"id":"gcloud/bigquery/error","name":"Error","title":["Gcloud","Bigquery","Error"],"description":"<p>Base BigQuery exception class.</p>","source":"lib/gcloud/bigquery/errors.rb#L22","resources":[],"examples":[],"methods":[]}
