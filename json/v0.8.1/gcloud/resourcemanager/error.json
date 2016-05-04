@@ -1,0 +1,1 @@
+{"id":"gcloud/resourcemanager/error","name":"Error","title":["Gcloud","ResourceManager","Error"],"description":"<p>Base Resource Manager exception class.</p>","source":"lib/gcloud/resource_manager/errors.rb#L22","resources":[],"examples":[],"methods":[]}
