@@ -680,6 +680,35 @@ describe Gcloud::Vision::Project, :mock_vision do
     analyses[1].properties.colors[9].pixel_fraction.must_equal 0.00064516132
   end
 
+  it "allows different annotation options for different images" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 2
+      requests.first["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.first["features"].count.must_equal 2
+      requests.first["features"].first["type"].must_equal "FACE_DETECTION"
+      requests.first["features"].first["maxResults"].must_equal 10
+      requests.first["features"].last["type"].must_equal "TEXT_DETECTION"
+      requests.first["features"].last["maxResults"].must_equal 1
+      requests.last["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.last["features"].count.must_equal 2
+      requests.last["features"].first["type"].must_equal "LANDMARK_DETECTION"
+      requests.last["features"].first["maxResults"].must_equal 20
+      requests.last["features"].last["type"].must_equal "SAFE_SEARCH_DETECTION"
+      requests.last["features"].last["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       faces_response_json]
+    end
+
+    analyses = vision.annotate do |a|
+      a.annotate filepath, faces: 10, text: true
+      a.annotate filepath, landmarks: 20, safe_search: true
+    end
+    analyses.count.must_equal 2
+    analyses.first.face.wont_be :nil?
+    analyses.last.face.wont_be :nil?
+  end
+
   def face_response_json
     {
       responses: [{
