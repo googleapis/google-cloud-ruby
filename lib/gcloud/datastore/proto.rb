@@ -16,7 +16,6 @@
 require "gcloud/proto/datastore_v1.pb"
 require "gcloud/datastore/errors"
 require "stringio"
-require "base64"
 
 module Gcloud
   module Datastore
@@ -56,7 +55,7 @@ module Gcloud
             from_proto_value item
           end
         elsif !proto_value.blob_value.nil?
-          return StringIO.new(Base64.decode64(proto_value.blob_value))
+          return StringIO.new(proto_value.blob_value.force_encoding("ASCII-8BIT"))
         else
           nil
         end
@@ -88,7 +87,7 @@ module Gcloud
           v.timestamp_microseconds_value = self.microseconds_from_time value.to_time
         elsif value.respond_to?(:read) && value.respond_to?(:rewind)
           value.rewind
-          v.blob_value = Base64.strict_encode64(value.read)
+          v.blob_value = value.read.force_encoding("ASCII-8BIT")
         else
           fail PropertyError, "A property of type #{value.class} is not supported."
         end
