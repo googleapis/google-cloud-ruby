@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "gcloud/vision/location"
 require "stringio"
 require "base64"
 
@@ -30,12 +31,15 @@ module Gcloud
     #   vision = gcloud.vision
     #   image = vision.image filepath
     class Image
+      attr_reader :context
+
       ##
       # @private Creates a new Image instance.
       def initialize
         @io = nil
         @url = nil
         @vision = nil
+        @context = Context.new
       end
 
       # Determines if the Image has content.
@@ -199,6 +203,54 @@ module Gcloud
       # Raise an error unless an active vision project object is available.
       def ensure_vision!
         fail "Must have active connection" unless @vision
+      end
+    end
+
+    class Image
+      ##
+      # # Image::Context
+      #
+      # Represents an image context for the Vision service.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image filepath
+      #   image.context.location = { longitude: -122.0862462,
+      #                              latitude: 37.4220041 }
+      class Context
+        attr_reader :location
+        attr_accessor :languages
+
+        def initialize
+          @location = Location.new nil, nil
+          @languages = []
+        end
+
+        def location= location
+          if location.respond_to?(:to_hash) &&
+             location.to_hash.keys.sort == [:latitude, :longitude]
+            return @location = Location.new(location.to_hash[:latitude],
+                                            location.to_hash[:longitude])
+          end
+          fail ArgumentError, "Must pass a proper location value."
+        end
+
+        def empty?
+          location.to_hash.values.reject(&:nil?).empty? && languages.empty?
+        end
+
+        def to_gapi
+          return nil if empty?
+          gapi = {}
+          unless location.to_hash.values.reject(&:nil?).empty?
+            gapi["latLongRect"] = location.to_hash
+          end
+          gapi["languageHints"] = languages unless languages.empty?
+          gapi
+        end
       end
     end
   end

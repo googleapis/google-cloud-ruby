@@ -44,7 +44,9 @@ module Gcloud
                                      safe_search, properties)
 
         Array(images).flatten.each do |img|
-          @requests << { image: image(img).to_gapi, features: features }
+          i = image(img)
+          @requests << { image: i.to_gapi, features: features,
+                         imageContext: i.context.to_gapi }
         end
       end
 

@@ -777,6 +777,159 @@ describe Gcloud::Vision::Project, :mock_vision do
     analysis.properties.colors[9].pixel_fraction.must_equal 0.00064516132
   end
 
+  describe "ImageContext" do
+    it "does not send when annotating file path" do
+      mock_connection.post "/v1/images:annotate" do |env|
+        requests = JSON.parse(env.body)["requests"]
+        requests.count.must_equal 1
+        request = requests.first
+        request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+        request["features"].count.must_equal 2
+        request["features"].first["type"].must_equal "FACE_DETECTION"
+        request["features"].first["maxResults"].must_equal 10
+        request["features"].last["type"].must_equal "TEXT_DETECTION"
+        request["features"].last["maxResults"].must_equal 1
+        request["imageContext"].must_be :nil?
+        [200, {"Content-Type" => "application/json"},
+         context_response_json]
+      end
+
+      analysis = vision.annotate filepath, faces: 10, text: true
+      analysis.wont_be :nil?
+      analysis.face.wont_be :nil?
+      analysis.text.wont_be :nil?
+    end
+
+    it "does not send when annotating an image without context" do
+      mock_connection.post "/v1/images:annotate" do |env|
+        requests = JSON.parse(env.body)["requests"]
+        requests.count.must_equal 1
+        request = requests.first
+        request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+        request["features"].count.must_equal 2
+        request["features"].first["type"].must_equal "FACE_DETECTION"
+        request["features"].first["maxResults"].must_equal 10
+        request["features"].last["type"].must_equal "TEXT_DETECTION"
+        request["features"].last["maxResults"].must_equal 1
+        request["imageContext"].must_be :nil?
+        [200, {"Content-Type" => "application/json"},
+         context_response_json]
+      end
+
+      image = vision.image filepath
+      analysis = vision.annotate image, faces: 10, text: true
+      analysis.wont_be :nil?
+      analysis.face.wont_be :nil?
+      analysis.text.wont_be :nil?
+    end
+
+    it "sends when annotating an image with location in context" do
+      mock_connection.post "/v1/images:annotate" do |env|
+        requests = JSON.parse(env.body)["requests"]
+        requests.count.must_equal 1
+        request = requests.first
+        request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+        request["features"].count.must_equal 2
+        request["features"].first["type"].must_equal "FACE_DETECTION"
+        request["features"].first["maxResults"].must_equal 10
+        request["features"].last["type"].must_equal "TEXT_DETECTION"
+        request["features"].last["maxResults"].must_equal 1
+        request["imageContext"].wont_be :nil?
+        request["imageContext"]["latLongRect"].must_equal({ "longitude" => -122.0862462, "latitude" => 37.4220041 })
+        request["imageContext"]["languageHints"].must_be :nil?
+        [200, {"Content-Type" => "application/json"},
+         context_response_json]
+      end
+
+      image = vision.image filepath
+      image.context.location.longitude = -122.0862462
+      image.context.location.latitude = 37.4220041
+      analysis = vision.annotate image, faces: 10, text: true
+      analysis.wont_be :nil?
+      analysis.face.wont_be :nil?
+      analysis.text.wont_be :nil?
+    end
+
+    it "sends when annotating an image with location hash in context" do
+      mock_connection.post "/v1/images:annotate" do |env|
+        requests = JSON.parse(env.body)["requests"]
+        requests.count.must_equal 1
+        request = requests.first
+        request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+        request["features"].count.must_equal 2
+        request["features"].first["type"].must_equal "FACE_DETECTION"
+        request["features"].first["maxResults"].must_equal 10
+        request["features"].last["type"].must_equal "TEXT_DETECTION"
+        request["features"].last["maxResults"].must_equal 1
+        request["imageContext"].wont_be :nil?
+        request["imageContext"]["latLongRect"].must_equal({ "longitude" => -122.0862462, "latitude" => 37.4220041 })
+        request["imageContext"]["languageHints"].must_be :nil?
+        [200, {"Content-Type" => "application/json"},
+         context_response_json]
+      end
+
+      image = vision.image filepath
+      image.context.location = { longitude: -122.0862462, latitude: 37.4220041 }
+      analysis = vision.annotate image, faces: 10, text: true
+      analysis.wont_be :nil?
+      analysis.face.wont_be :nil?
+      analysis.text.wont_be :nil?
+    end
+
+    it "sends when annotating an image with language hints in context" do
+      mock_connection.post "/v1/images:annotate" do |env|
+        requests = JSON.parse(env.body)["requests"]
+        requests.count.must_equal 1
+        request = requests.first
+        request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+        request["features"].count.must_equal 2
+        request["features"].first["type"].must_equal "FACE_DETECTION"
+        request["features"].first["maxResults"].must_equal 10
+        request["features"].last["type"].must_equal "TEXT_DETECTION"
+        request["features"].last["maxResults"].must_equal 1
+        request["imageContext"].wont_be :nil?
+        request["imageContext"]["latLongRect"].must_be :nil?
+        request["imageContext"]["languageHints"].must_equal ["en", "es"]
+        [200, {"Content-Type" => "application/json"},
+         context_response_json]
+      end
+
+      image = vision.image filepath
+      image.context.languages = ["en", "es"]
+      analysis = vision.annotate image, faces: 10, text: true
+      analysis.wont_be :nil?
+      analysis.face.wont_be :nil?
+      analysis.text.wont_be :nil?
+    end
+
+    it "sends when annotating an image with location and language hints in context" do
+      mock_connection.post "/v1/images:annotate" do |env|
+        requests = JSON.parse(env.body)["requests"]
+        requests.count.must_equal 1
+        request = requests.first
+        request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+        request["features"].count.must_equal 2
+        request["features"].first["type"].must_equal "FACE_DETECTION"
+        request["features"].first["maxResults"].must_equal 10
+        request["features"].last["type"].must_equal "TEXT_DETECTION"
+        request["features"].last["maxResults"].must_equal 1
+        request["imageContext"].wont_be :nil?
+        request["imageContext"]["latLongRect"].must_equal({ "longitude" => -122.0862462, "latitude" => 37.4220041 })
+        request["imageContext"]["languageHints"].must_equal ["en", "es"]
+        [200, {"Content-Type" => "application/json"},
+         context_response_json]
+      end
+
+      image = vision.image filepath
+      image.context.location = { longitude: -122.0862462, latitude: 37.4220041 }
+      image.context.languages = ["en", "es"]
+      analysis = vision.annotate image, faces: 10, text: true
+      analysis.wont_be :nil?
+      analysis.face.wont_be :nil?
+      analysis.text.wont_be :nil?
+    end
+  end
+
   def face_response_json
     {
       responses: [{
@@ -913,6 +1066,15 @@ describe Gcloud::Vision::Project, :mock_vision do
         textAnnotations: text_annotation_responses,
         safeSearchAnnotation: safe_search_annotation_response,
         imagePropertiesAnnotation: properties_annotation_response
+      }]
+    }.to_json
+  end
+
+  def context_response_json
+    {
+      responses: [{
+        faceAnnotations: [face_annotation_response],
+        textAnnotations: text_annotation_responses
       }]
     }.to_json
   end
