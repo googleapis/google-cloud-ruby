@@ -25,8 +25,8 @@ module Gcloud
         @requests = []
       end
 
-      def annotate *images, faces: nil, landmarks: nil, logos: nil, labels: nil,
-                   text: nil, safe_search: nil, properties: nil
+      def annotate *images, faces: 0, landmarks: 0, logos: 0, labels: 0,
+                   text: false, safe_search: false, properties: false
         add_requests(images, faces, landmarks, logos, labels, text,
                      safe_search, properties)
       end
@@ -40,8 +40,9 @@ module Gcloud
 
       def add_requests images, faces, landmarks, logos, labels, text,
                        safe_search, properties
-        features = annotate_features faces, landmarks, logos, labels, text,
-                                     safe_search, properties
+        features = annotate_features(faces, landmarks, logos, labels, text,
+                                     safe_search, properties)
+
         Array(images).flatten.each do |img|
           @requests << { image: image(img).to_gapi, features: features }
         end
@@ -49,18 +50,38 @@ module Gcloud
 
       def annotate_features faces, landmarks, logos, labels, text,
                             safe_search, properties
-        features = []
-        features << { type: :FACE_DETECTION, maxResults: faces.to_i } if faces
-        features << { type: :LANDMARK_DETECTION,
-                      maxResults: landmarks.to_i } if landmarks
-        features << { type: :LOGO_DETECTION, maxResults: logos.to_i } if logos
-        features << { type: :LABEL_DETECTION,
-                      maxResults: labels.to_i } if labels
-        features << { type: :TEXT_DETECTION, maxResults: 1 } if text
-        features << { type: :SAFE_SEARCH_DETECTION,
-                      maxResults: 1 } if safe_search
-        features << { type: :IMAGE_PROPERTIES, maxResults: 1 } if properties
-        features
+        return default_features if default_features?(faces, landmarks, logos,
+                                                     labels, text, safe_search,
+                                                     properties)
+
+        f = []
+        f << { type: :FACE_DETECTION, maxResults: faces } unless faces.zero?
+        f << { type: :LANDMARK_DETECTION,
+               maxResults: landmarks } unless landmarks.zero?
+        f << { type: :LOGO_DETECTION, maxResults: logos } unless logos.zero?
+        f << { type: :LABEL_DETECTION, maxResults: labels } unless labels.zero?
+        f << { type: :TEXT_DETECTION, maxResults: 1 } if text
+        f << { type: :SAFE_SEARCH_DETECTION, maxResults: 1 } if safe_search
+        f << { type: :IMAGE_PROPERTIES, maxResults: 1 } if properties
+        f
+      end
+
+      def default_features? faces, landmarks, logos, labels, text,
+                            safe_search, properties
+        faces == 0 && landmarks == 0 && logos == 0 && labels == 0 &&
+          text == false && safe_search == false && properties == false
+      end
+
+      def default_features
+        [
+          { type: :FACE_DETECTION, maxResults: 10 },
+          { type: :LANDMARK_DETECTION, maxResults: 10 },
+          { type: :LOGO_DETECTION, maxResults: 10 },
+          { type: :LABEL_DETECTION, maxResults: 10 },
+          { type: :TEXT_DETECTION, maxResults: 1 },
+          { type: :SAFE_SEARCH_DETECTION, maxResults: 1 },
+          { type: :IMAGE_PROPERTIES, maxResults: 1 }
+        ]
       end
     end
   end

@@ -709,6 +709,74 @@ describe Gcloud::Vision::Project, :mock_vision do
     analyses.last.face.wont_be :nil?
   end
 
+  it "runs full analysis with empty options" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      request = requests.first
+      request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      request["features"].count.must_equal 7
+      request["features"][0]["type"].must_equal "FACE_DETECTION"
+      request["features"][0]["maxResults"].must_equal 10
+      request["features"][1]["type"].must_equal "LANDMARK_DETECTION"
+      request["features"][1]["maxResults"].must_equal 10
+      request["features"][2]["type"].must_equal "LOGO_DETECTION"
+      request["features"][2]["maxResults"].must_equal 10
+      request["features"][3]["type"].must_equal "LABEL_DETECTION"
+      request["features"][3]["maxResults"].must_equal 10
+      request["features"][4]["type"].must_equal "TEXT_DETECTION"
+      request["features"][4]["maxResults"].must_equal 1
+      request["features"][5]["type"].must_equal "SAFE_SEARCH_DETECTION"
+      request["features"][5]["maxResults"].must_equal 1
+      request["features"][6]["type"].must_equal "IMAGE_PROPERTIES"
+      request["features"][6]["maxResults"].must_equal 1
+      [200, {"Content-Type" => "application/json"},
+       full_response_json]
+    end
+
+    analysis = vision.annotate filepath
+    analysis.wont_be :nil?
+    analysis.face.wont_be :nil?
+    analysis.landmark.wont_be :nil?
+    analysis.logo.wont_be :nil?
+    analysis.labels.wont_be :nil?
+
+    analysis.wont_be :nil?
+    analysis.text.wont_be :nil?
+    analysis.text.text.must_include "Google Cloud Client Library for Ruby"
+    analysis.text.locale.must_equal "en"
+    analysis.text.words.count.must_equal 28
+    analysis.text.words[0].text.must_equal "Google"
+    analysis.text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
+    analysis.text.words[27].text.must_equal "Storage."
+    analysis.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
+
+    analysis.safe_search.wont_be :nil?
+    analysis.safe_search.wont_be :adult?
+    analysis.safe_search.wont_be :spoof?
+    analysis.safe_search.must_be :medical?
+    analysis.safe_search.must_be :violence?
+
+    analysis.properties.wont_be :nil?
+    analysis.properties.colors.count.must_equal 10
+
+    analysis.properties.colors[0].red.must_equal 145
+    analysis.properties.colors[0].green.must_equal 193
+    analysis.properties.colors[0].blue.must_equal 254
+    analysis.properties.colors[0].alpha.must_equal 1.0
+    analysis.properties.colors[0].rgb.must_equal "91c1fe"
+    analysis.properties.colors[0].score.must_equal 0.65757853
+    analysis.properties.colors[0].pixel_fraction.must_equal 0.16903226
+
+    analysis.properties.colors[9].red.must_equal 156
+    analysis.properties.colors[9].green.must_equal 214
+    analysis.properties.colors[9].blue.must_equal 255
+    analysis.properties.colors[9].alpha.must_equal 1.0
+    analysis.properties.colors[9].rgb.must_equal "9cd6ff"
+    analysis.properties.colors[9].score.must_equal 0.00096750073
+    analysis.properties.colors[9].pixel_fraction.must_equal 0.00064516132
+  end
+
   def face_response_json
     {
       responses: [{
@@ -830,6 +898,20 @@ describe Gcloud::Vision::Project, :mock_vision do
       responses: [{
         imagePropertiesAnnotation: properties_annotation_response
       }, {
+        imagePropertiesAnnotation: properties_annotation_response
+      }]
+    }.to_json
+  end
+
+  def full_response_json
+    {
+      responses: [{
+        faceAnnotations: [face_annotation_response],
+        landmarkAnnotations: [landmark_annotation_response],
+        logoAnnotations: [logo_annotation_response],
+        labelAnnotations: [label_annotation_response],
+        textAnnotations: text_annotation_responses,
+        safeSearchAnnotation: safe_search_annotation_response,
         imagePropertiesAnnotation: properties_annotation_response
       }]
     }.to_json

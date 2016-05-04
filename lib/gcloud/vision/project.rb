@@ -81,8 +81,8 @@ module Gcloud
         Image.from_source source, self
       end
 
-      def annotate *images, faces: nil, landmarks: nil, logos: nil, labels: nil,
-                   text: nil, safe_search: nil, properties: nil
+      def annotate *images, faces: 0, landmarks: 0, logos: 0, labels: 0,
+                   text: false, safe_search: false, properties: false
         a = Annotate.new self
         a.annotate(*images, faces: faces, landmarks: landmarks, logos: logos,
                             labels: labels, text: text,
