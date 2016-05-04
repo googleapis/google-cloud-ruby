@@ -72,17 +72,18 @@ module Gcloud
 
       ##
       # Look up entities by keys.
-      def lookup *keys
+      def lookup *keys, consistency: nil, transaction: nil
         lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
           project_id: project,
           keys: keys
         )
+        lookup_req.read_options = generate_read_options consistency, transaction
 
         backoff { datastore.lookup lookup_req }
       end
 
       # Query for entities.
-      def run_query query, namespace = nil
+      def run_query query, namespace = nil, consistency: nil, transaction: nil
         run_req = Google::Datastore::V1beta3::RunQueryRequest.new(
           project_id: project)
         if query.is_a? Google::Datastore::V1beta3::Query
@@ -92,11 +93,10 @@ module Gcloud
         else
           fail ArgumentError, "Unable to query with a #{query.class} object."
         end
+        run_req.read_options = generate_read_options consistency, transaction
 
         run_req.partition_id = Google::Datastore::V1beta3::PartitionId.new(
-          project_id: project,
-          namespace_id: namespace
-        ) if namespace
+          namespace_id: namespace) if namespace
 
         backoff { datastore.run_query run_req }
       end
@@ -140,13 +140,29 @@ module Gcloud
       end
 
       def inspect
-        "#{self.class}(#{@dataset_id})"
+        "#{self.class}(#{@project})"
       end
 
       def backoff options = {}
         Gcloud::Backoff.new(options).execute_grpc do
           yield
         end
+      end
+
+      protected
+
+      def generate_read_options consistency, transaction
+        if consistency == :eventual
+          return Google::Datastore::V1beta3::ReadOptions.new(
+            read_consistency: :EVENTUAL)
+        elsif consistency == :strong
+          return  Google::Datastore::V1beta3::ReadOptions.new(
+            read_consistency: :STRONG)
+        elsif transaction
+          return  Google::Datastore::V1beta3::ReadOptions.new(
+            transaction: transaction)
+        end
+        nil
       end
     end
   end

@@ -256,7 +256,13 @@ module Gcloud
       #   tasks = datastore.run query
       #
       def start cursor
-        @grpc.start_cursor = GRPCUtils.decode_bytes cursor
+        if cursor.is_a? Cursor
+          @grpc.start_cursor = cursor.to_grpc
+        elsif cursor.is_a? String
+          @grpc.start_cursor = GRPCUtils.decode_bytes cursor
+        else
+          fail ArgumentError, "Can't set a cursor using a #{cursor.class}."
+        end
 
         self
       end

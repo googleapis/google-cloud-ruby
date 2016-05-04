@@ -40,7 +40,7 @@ module Gcloud
       attr_accessor :kind
 
       ##
-      # The dataset_id of the Key.
+      # The project of the Key.
       #
       # @return [String]
       #
@@ -50,11 +50,13 @@ module Gcloud
       #   gcloud = Gcloud.new "my-todo-project",
       #                       "/path/to/keyfile.json"
       #
-      #   datastore = gcloud.datastore
-      #   task = datastore.find "Task", "sampleTask"
-      #   task.key.dataset_id #=> "my-todo-project"
+      #   dataset = gcloud.datastore
+      #   entity = dataset.find "User", "heidi@example.com"
+      #   entity.key.project #=> "my-todo-project"
       #
-      attr_accessor :dataset_id
+      attr_accessor :project
+      alias_method :dataset_id,  :project
+      alias_method :dataset_id=, :project=
 
       ##
       # The namespace of the Key.
@@ -155,7 +157,7 @@ module Gcloud
       attr_reader :name
 
       ##
-      # @private Set the parent of the Key.
+      # Set the parent of the Key.
       #
       # @return [Key, nil]
       #
@@ -243,9 +245,9 @@ module Gcloud
           Google::Datastore::V1beta3::Key::PathElement.new(path_args)
         end
         grpc = Google::Datastore::V1beta3::Key.new(path: grpc_path)
-        if dataset_id || namespace
+        if project || namespace
           grpc.partition_id = Google::Datastore::V1beta3::PartitionId.new(
-            project_id: dataset_id, namespace_id: namespace)
+            project_id: project.to_s, namespace_id: namespace.to_s)
         end
         grpc
       end
@@ -260,8 +262,8 @@ module Gcloud
           key = Key.new path_grpc.kind, (path_grpc.id || path_grpc.name)
         end
         if key_grpc.partition_id
-          key.dataset_id = key_grpc.partition_id.project_id
-          key.namespace  = key_grpc.partition_id.namespace_id
+          key.project = key_grpc.partition_id.project_id
+          key.namespace = key_grpc.partition_id.namespace_id
         end
         key.parent = Key.from_grpc(key_grpc) if key_grpc.path.count > 0
         # Freeze the key to make it immutable.

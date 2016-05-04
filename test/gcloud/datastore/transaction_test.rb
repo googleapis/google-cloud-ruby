@@ -31,6 +31,35 @@ describe Gcloud::Datastore::Transaction do
       mutation_results: [Google::Datastore::V1beta3::MutationResult.new]
     )
   end
+  let(:lookup_res) do
+    Google::Datastore::V1beta3::LookupResponse.new(
+      found: 2.times.map do
+        Google::Datastore::V1beta3::EntityResult.new(
+          entity: Google::Datastore::V1beta3::Entity.new(
+            key: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc,
+            properties: { "name" => Gcloud::GRPCUtils.to_value("thingamajig") }
+          )
+        )
+      end
+    )
+  end
+  let(:run_query_res) do
+    run_query_res_entities = 2.times.map do
+      Google::Datastore::V1beta3::EntityResult.new(
+        entity: Gcloud::Datastore::Entity.new.tap do |e|
+          e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+          e["name"] = "thingamajig"
+        end.to_grpc
+      )
+    end
+    Google::Datastore::V1beta3::RunQueryResponse.new(
+      batch: Google::Datastore::V1beta3::QueryResultBatch.new(
+        entity_results: run_query_res_entities,
+        end_cursor: Gcloud::GRPCUtils.decode_bytes(query_cursor)
+      )
+    )
+  end
+  let(:query_cursor) { Gcloud::Datastore::Cursor.new "c3VwZXJhd2Vzb21lIQ==" }
   let(:begin_tx_res) do
     Google::Datastore::V1beta3::BeginTransactionResponse.new(transaction: tx_id)
   end
@@ -47,6 +76,7 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.save entity
+    transaction.instance_variable_get("@commit").send(:shared_upserts).must_include entity
   end
 
   it "delete does not persist entities" do
@@ -55,9 +85,139 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.delete entity
+    transaction.instance_variable_get("@commit").send(:shared_deletes).must_include entity.key
   end
 
-  it "commit persists entities" do
+  it "delete does not persist keys" do
+    entity = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    transaction.delete entity.key
+    transaction.instance_variable_get("@commit").send(:shared_deletes).must_include entity.key
+  end
+
+  it "commit will save and delete entities" do
+    commit_res = Google::Datastore::V1beta3::CommitResponse.new(
+      mutation_results: [
+        Google::Datastore::V1beta3::MutationResult.new,
+        Google::Datastore::V1beta3::MutationResult.new]
+    )
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :TRANSACTIONAL,
+      transaction: tx_id,
+      mutations: [Google::Datastore::V1beta3::Mutation.new(
+        upsert: Gcloud::Datastore::Entity.new.tap do |e|
+          e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
+          e["name"] = "Gonna be saved"
+        end.to_grpc), Google::Datastore::V1beta3::Mutation.new(
+          delete: Gcloud::Datastore::Key.new("ds-test", "to-be-deleted").to_grpc)]
+    )
+    transaction.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+
+    entity_to_be_saved = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
+      e["name"] = "Gonna be saved"
+    end
+    entity_to_be_deleted = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-deleted"
+      e["name"] = "Gonna be deleted"
+    end
+
+    entity_to_be_saved.wont_be :persisted?
+    transaction.commit do |c|
+      c.save entity_to_be_saved
+      c.delete entity_to_be_deleted
+    end
+    entity_to_be_saved.must_be :persisted?
+  end
+
+  it "find can take a key" do
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc],
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(transaction: tx_id)
+    )
+    transaction.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
+
+    key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+    entity = transaction.find key
+    entity.must_be_kind_of Gcloud::Datastore::Entity
+  end
+
+  it "find_all takes several keys" do
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
+             Gcloud::Datastore::Key.new("ds-test", "thingie2").to_grpc],
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(transaction: tx_id)
+    )
+    transaction.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
+
+    key1 = Gcloud::Datastore::Key.new "ds-test", "thingie1"
+    key2 = Gcloud::Datastore::Key.new "ds-test", "thingie2"
+    entities = transaction.find_all key1, key2
+    entities.count.must_equal 2
+    entities.deferred.count.must_equal 0
+    entities.missing.count.must_equal 0
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+  end
+
+  it "run will fulfill a query" do
+    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      query: Gcloud::Datastore::Query.new.kind("User").to_grpc,
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(transaction: tx_id)
+    )
+    transaction.service.mocked_datastore.expect :run_query, run_query_res, [run_query_req]
+
+    query = Gcloud::Datastore::Query.new.kind("User")
+    entities = transaction.run query
+    entities.count.must_equal 2
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.end_cursor.must_equal query_cursor
+    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.more_after_cursor?
+    refute entities.no_more?
+  end
+
+  it "commit persists entities with complete keys" do
+    commit_res = Google::Datastore::V1beta3::CommitResponse.new(
+      mutation_results: [Google::Datastore::V1beta3::MutationResult.new]
+    )
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :TRANSACTIONAL,
+      transaction: tx_id,
+      mutations: [Google::Datastore::V1beta3::Mutation.new(
+        upsert: Gcloud::Datastore::Entity.new.tap do |e|
+          e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+          e["name"] = "thingamajig"
+        end.to_grpc)]
+    )
+    transaction.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+
+    entity = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity.key.must_be :complete?
+    transaction.save entity
+    entity.wont_be :persisted?
+    transaction.commit
+    entity.key.must_be :complete?
+    entity.must_be :persisted?
+  end
+
+  it "commit persists entities with incomplete keys" do
     commit_res = Google::Datastore::V1beta3::CommitResponse.new(
       mutation_results: [
         Google::Datastore::V1beta3::MutationResult.new(
@@ -66,15 +226,15 @@ describe Gcloud::Datastore::Transaction do
     )
     commit_req = Google::Datastore::V1beta3::CommitRequest.new(
       project_id: project,
-      mode: :NON_TRANSACTIONAL,
+      mode: :TRANSACTIONAL,
+      transaction: tx_id,
       mutations: [Google::Datastore::V1beta3::Mutation.new(
         upsert: Gcloud::Datastore::Entity.new.tap do |e|
           e.key = Gcloud::Datastore::Key.new "ds-test"
           e["name"] = "thingamajig"
         end.to_grpc)]
     )
-    transaction.service.mocked_datastore.expect :commit, commit_res,
-                                  [Google::Datastore::V1beta3::CommitRequest]
+    transaction.service.mocked_datastore.expect :commit, commit_res, [commit_req]
 
     entity = Gcloud::Datastore::Entity.new.tap do |e|
       e.key = Gcloud::Datastore::Key.new "ds-test"
@@ -82,8 +242,10 @@ describe Gcloud::Datastore::Transaction do
     end
     entity.key.must_be :incomplete?
     transaction.save entity
+    entity.wont_be :persisted?
     transaction.commit
     entity.key.must_be :complete?
+    entity.must_be :persisted?
   end
 
   it "rollback does not persist entities" do

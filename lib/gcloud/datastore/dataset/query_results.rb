@@ -60,28 +60,36 @@ module Gcloud
         attr_reader :more_results
 
         ##
-        # Convenience method for determining id the more_results value
+        # @private
+        attr_accessor :service, :namespace, :query
+
+        ##
+        # @private
+        attr_writer :end_cursor, :more_results
+
+        ##
+        # Convenience method for determining if the `more_results` value
         # is `:NOT_FINISHED`
         def not_finished?
           more_results == :NOT_FINISHED
         end
 
         ##
-        # Convenience method for determining id the more_results value
+        # Convenience method for determining if the `more_results` value
         # is `:MORE_RESULTS_AFTER_LIMIT`
         def more_after_limit?
           more_results == :MORE_RESULTS_AFTER_LIMIT
         end
 
         ##
-        # Convenience method for determining id the more_results value
+        # Convenience method for determining if the `more_results` value
         # is `:MORE_RESULTS_AFTER_CURSOR`
         def more_after_cursor?
           more_results == :MORE_RESULTS_AFTER_CURSOR
         end
 
         ##
-        # Convenience method for determining id the more_results value
+        # Convenience method for determining if the `more_results` value
         # is `:NO_MORE_RESULTS`
         def no_more?
           more_results == :NO_MORE_RESULTS
@@ -89,10 +97,85 @@ module Gcloud
 
         ##
         # Create a new QueryResults with an array of values.
-        def initialize arr = [], end_cursor = nil, more_results = nil
+        def initialize arr = []
           super arr
-          @end_cursor = end_cursor
-          @more_results = more_results
+        end
+
+        ##
+        # Whether there are more results available.
+        def next?
+          !no_more?
+        end
+
+        ##
+        # Retrieve the next page of results.
+        def next
+          return nil unless next?
+          return nil if end_cursor.nil?
+          ensure_service!
+          query.start_cursor = cursor.to_grpc # should always be a Cursor...
+          query_res = service.run_query query, namespace
+          self.class.from_grpc query_res, service, namespace, query
+        rescue GRPC::BadStatus => e
+          raise Gcloud::Error.from_error(e)
+        end
+
+        ##
+        # Retrieves all log entries by repeatedly loading {#next} until
+        # {#next?} returns `false`. Returns the list instance for method
+        # chaining.
+        #
+        # This method may make several API calls until all log entries are
+        # retrieved. Be sure to use as narrow a search criteria as possible.
+        # Please use with caution.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   hour_ago = (Time.now - 60*60).utc.strftime('%FT%TZ')
+        #   recent_errors = "timestamp >= \"#{hour_ago}\" severity >= ERROR"
+        #   entries = logging.entries(filter: recent_errors).all
+        #
+        def all
+          while next?
+            next_records = self.next
+            push(*next_records)
+            self.end_cursor = next_records.end_cursor
+            self.more_results = next_records.more_results
+            self.service = next_records.service
+            self.namespace = next_records.namespace
+            self.query = next_records.query
+          end
+          self
+        end
+
+        ##
+        # @private New Dataset::QueryResults from a
+        # Google::Dataset::V1beta3::RunQueryResponse object.
+        def self.from_grpc query_res, service, namespace, query
+          entities = Array(query_res.batch.entity_results).map do |result|
+            # TODO: Make this return an EntityResult with cursor...
+            Entity.from_grpc result.entity
+          end
+          new(entities).tap do |qr|
+            qr.end_cursor = Cursor.from_grpc query_res.batch.end_cursor
+            qr.more_results = query_res.batch.more_results
+            qr.service = service
+            qr.namespace = namespace
+            qr.query = query_res.query || query
+          end
+        end
+
+        protected
+
+        ##
+        # @private Raise an error unless an active connection to the service is
+        # available.
+        def ensure_service!
+          msg = "Must have active connection to datastore service to get next"
+          fail msg if @service.nil? || @query.nil?
         end
       end
     end

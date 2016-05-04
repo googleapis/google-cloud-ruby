@@ -32,27 +32,6 @@ module Gcloud
     end
 
     ##
-    # # ApiError
-    #
-    # Raised when an API call is not successful.
-    class ApiError < Gcloud::Datastore::Error
-      ##
-      # The API method of the failed HTTP request.
-      attr_reader :method
-
-      ##
-      # The response object of the failed HTTP request.
-      attr_reader :response
-
-      # @private
-      def initialize method, response = nil
-        super("API call to #{method} was not successful")
-        @method = method
-        @response = response
-      end
-    end
-
-    ##
     # # PropertyError
     #
     # Raised when a property is not correct.
@@ -66,12 +45,18 @@ module Gcloud
     class TransactionError < Gcloud::Datastore::Error
       ##
       # An error that occurred within the transaction. (optional)
-      attr_reader :inner
+      attr_reader :commit_error
+      alias_method :inner, :commit_error # backwards compatibility
+
+      ##
+      # An error that occurred within the transaction. (optional)
+      attr_reader :rollback_error
 
       # @private
-      def initialize message, inner = nil
+      def initialize message, commit_error: nil, rollback_error: nil
         super(message)
-        @inner = inner
+        @commit_error   = commit_error
+        @rollback_error = rollback_error
       end
     end
   end

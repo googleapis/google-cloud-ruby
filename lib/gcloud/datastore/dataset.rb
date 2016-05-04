@@ -17,6 +17,7 @@ require "gcloud/gce"
 require "gcloud/datastore/grpc_utils"
 require "gcloud/datastore/credentials"
 require "gcloud/datastore/service"
+require "gcloud/datastore/commit"
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
 require "gcloud/datastore/query"
@@ -117,8 +118,7 @@ module Gcloud
       ##
       # Persist one or more entities to the Datastore.
       #
-      # @param [Entity] entities One or more entity objects to be saved without
-      #   `id` or `name` set.
+      # @param [Entity] entities One or more entity objects to be saved.
       #
       # @return [Array<Gcloud::Datastore::Entity>]
       #
@@ -156,15 +156,57 @@ module Gcloud
       #   datastore.save task
       #
       def save *entities
+        commit { |c| c.save(*entities) }
+      end
+
+      ##
+      # Remove entities from the Datastore.
+      #
+      # @param [Entity, Key] entities_or_keys One or more Entity or Key objects
+      #   to remove.
+      #
+      # @return [Boolean] Returns `true` if successful
+      #
+      # @example
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #   dataset.delete entity1, entity2
+      #
+      def delete *entities_or_keys
+        commit { |c| c.delete(*entities_or_keys) }
+        true
+      end
+
+      ##
+      # Make multiple changes in a single commit.
+      #
+      # @yield [commit] a block for making changes
+      # @yieldparam [Commit] commit The object that changes are made on
+      #
+      # @return [Array<Gcloud::Datastore::Entity>] The entities that were
+      #   persisted.
+      #
+      # @example
+      #   dataset.commit do |c|
+      #     c.save task1, task2
+      #     c.delete entity1, entity2
+      #   end
+      #
+      def commit
+        return unless block_given?
+        c = Commit.new
+        yield c
+
         ensure_service!
-        mutations = entities.map do |entity|
-          Google::Datastore::V1beta3::Mutation.new upsert: entity.to_grpc
-        end
-        commit_res = service.commit(mutations)
+        commit_res = service.commit c.mutations
+        entities = c.entities
         returned_keys = commit_res.mutation_results.map(&:key)
         returned_keys.each_with_index do |key, index|
+          entity = entities[index]
+          next if entity.nil?
           entities[index].key = Key.from_grpc(key) unless key.nil?
         end
+        entities.each { |e| e.key.freeze unless e.persisted? }
         entities
       end
 
@@ -174,6 +216,14 @@ module Gcloud
       # @param [Key, String] key_or_kind A Key object or `kind` string value.
       # @param [Integer, String, nil] id_or_name The Key's `id` or `name` value
       #   if a `kind` was provided in the first parameter.
+      # @param [Symbol] consistency The non-transactional read consistency to
+      #   use. Cannot be set to `:strong` for global queries. Accepted values
+      #   are `:eventual` and `:strong`.
+      #
+      #   The default consistency depends on the type of lookup used. See
+      #   [Eventual Consistency in Google Cloud
+      #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
+      #   for more information.
       #
       # @return [Gcloud::Datastore::Entity, nil]
       #
@@ -184,12 +234,12 @@ module Gcloud
       # @example Finding an entity with a `kind` and `id`/`name`:
       #   task = datastore.find "Task", "sampleTask"
       #
-      def find key_or_kind, id_or_name = nil
+      def find key_or_kind, id_or_name = nil, consistency: nil
         key = key_or_kind
         unless key.is_a? Gcloud::Datastore::Key
           key = Key.new key_or_kind, id_or_name
         end
-        find_all(key).first
+        find_all(key, consistency: consistency).first
       end
       alias_method :get, :find
 
@@ -198,6 +248,14 @@ module Gcloud
       # undefined and has no relation to the order of `keys` arguments.
       #
       # @param [Key] keys One or more Key objects to find records for.
+      # @param [Symbol] consistency The non-transactional read consistency to
+      #   use. Cannot be set to `:strong` for global queries. Accepted values
+      #   are `:eventual` and `:strong`.
+      #
+      #   The default consistency depends on the type of lookup used. See
+      #   [Eventual Consistency in Google Cloud
+      #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
+      #   for more information.
       #
       # @return [Gcloud::Datastore::Dataset::LookupResults]
       #
@@ -209,9 +267,11 @@ module Gcloud
       #   task_key2 = datastore.key "Task", "sampleTask2"
       #   tasks = datastore.find_all task_key1, task_key2
       #
-      def find_all *keys
+      def find_all *keys, consistency: nil
         ensure_service!
-        lookup_res = service.lookup(*keys.map(&:to_grpc))
+        check_consistency! consistency
+        lookup_res = service.lookup(*keys.map(&:to_grpc),
+                                    consistency: consistency)
         entities = to_gcloud_entities lookup_res.found
         deferred = to_gcloud_keys lookup_res.deferred
         missing  = to_gcloud_entities lookup_res.missing
@@ -220,53 +280,18 @@ module Gcloud
       alias_method :lookup, :find_all
 
       ##
-      # Remove entities from the Datastore.
-      #
-      # @param [Entity, Key] entities_or_keys One or more Entity or Key objects
-      #   to remove.
-      #
-      # @return [Boolean] Returns `true` if successful
-      #
-      # @example Using a key:
-      #   gcloud = Gcloud.new
-      #   datastore = gcloud.datastore
-      #
-      #   task_key = datastore.key "Task", "sampleTask"
-      #   datastore.delete task_key
-      #
-      # @example Using an entity object:
-      #   gcloud = Gcloud.new
-      #   datastore = gcloud.datastore
-      #
-      #   task = datastore.find "Task", "sampleTask"
-      #   datastore.delete task
-      #
-      # @example Delete multiple entities in a batch:
-      #   gcloud = Gcloud.new
-      #   datastore = gcloud.datastore
-      #
-      #   task_key1 = datastore.key "Task", "sampleTask1"
-      #   task_key2 = datastore.key "Task", "sampleTask2"
-      #   datastore.delete task_key1, task_key2
-      #
-      def delete *entities_or_keys
-        just_keys = entities_or_keys.map do |e_or_k|
-          e_or_k.respond_to?(:key) ? e_or_k.key : e_or_k
-        end
-        mutations = just_keys.map do |key|
-          Google::Datastore::V1beta3::Mutation.new delete: key.to_grpc
-        end
-
-        ensure_service!
-        service.commit mutations
-        true
-      end
-
-      ##
       # Retrieve entities specified by a Query.
       #
       # @param [Query, GqlQuery] query The object with the search criteria.
       # @param [String] namespace The namespace the query is to run within.
+      # @param [Symbol] consistency The non-transactional read consistency to
+      #   use. Cannot be set to `:strong` for global queries. Accepted values
+      #   are `:eventual` and `:strong`.
+      #
+      #   The default consistency depends on the type of query used. See
+      #   [Eventual Consistency in Google Cloud
+      #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
+      #   for more information.
       #
       # @return [Gcloud::Datastore::Dataset::QueryResults]
       #
@@ -290,16 +315,15 @@ module Gcloud
       #                             done: false
       #   tasks = datastore.run gql_query, namespace: "ns~todo-project"
       #
-      def run query, namespace: nil
+      def run query, namespace: nil, consistency: nil
         ensure_service!
         unless query.is_a?(Query) || query.is_a?(GqlQuery)
           fail ArgumentError, "Cannot run a #{query.class} object."
         end
-        query_res = service.run_query query.to_grpc, namespace
-        entities = to_gcloud_entities query_res.batch.entity_results
-        cursor = Cursor.from_grpc query_res.batch.end_cursor
-        more_results = query_res.batch.more_results
-        QueryResults.new entities, cursor, more_results
+        check_consistency! consistency
+        query_res = service.run_query query.to_grpc, namespace,
+                                      consistency: consistency
+        QueryResults.from_grpc query_res, service, namespace, query.to_grpc.dup
       end
       alias_method :run_query, :run
 
@@ -359,8 +383,14 @@ module Gcloud
           yield tx
           tx.commit
         rescue => e
-          tx.rollback
-          raise TransactionError.new("Transaction failed to commit.", e)
+          begin
+            tx.rollback
+          rescue => re
+            msg = "Transaction failed to commit and rollback."
+            raise TransactionError.new(msg, commit_error: e, rollback_error: re)
+          end
+          raise TransactionError.new("Transaction failed to commit.",
+                                     commit_error: e)
         end
       end
 
@@ -423,9 +453,11 @@ module Gcloud
       # Create a new Key instance. This is a convenience method to make the
       # creation of Key objects easier.
       #
-      # @param [String] kind The kind of the Key. This is optional.
-      # @param [Integer, String] id_or_name The id or name of the Key. This is
-      #   optional.
+      # @param [Array<Array(String,(String|Integer|nil))>] path An optional list
+      #   of pairs for the key's path. Each pair may include the key's kind
+      #   (String) and an id (Integer) or name (String). This is optional.
+      # @param [String] project The project of the Key. This is optional.
+      # @param [String] namespace namespace kind of the Key. This is optional.
       #
       # @return [Gcloud::Datastore::Key]
       #
@@ -435,18 +467,50 @@ module Gcloud
       # @example The previous example is equivalent to:
       #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
       #
-      def key kind = nil, id_or_name = nil
-        Key.new kind, id_or_name
+      # @example Create an empty key:
+      #   key = dataset.key
+      #
+      # @example Create an incomplete key:
+      #   key = dataset.key "User"
+      #
+      # @example Create a key with a parent:
+      #   key = dataset.key [["List", "todos"], ["User", "heidi@example.com"]]
+      #   key.path #=> [["List", "todos"], ["User", "heidi@example.com"]]
+      #
+      # @example Create an incomplete key with a parent:
+      #   key = dataset.key "List", "todos", "User"
+      #   key.path #=> [["List", "todos"], ["User", nil]]
+      #
+      # @example Create a key with a project and namespace:
+      #   key = dataset.key ["List", "todos"], ["User", "heidi@example.com"],
+      #                     project: "my-todo-project",
+      #                     namespace: "ns~todo-project"
+      #   key.path #=> [["List", "todos"], ["User", "heidi@example.com"]]
+      #   key.project #=> "my-todo-project",
+      #   key.namespace #=> "ns~todo-project"
+      #
+      def key *path, project: nil, namespace: nil
+        path = path.flatten.each_slice(2).to_a # group in pairs
+        kind, id_or_name = path.pop
+        Key.new(kind, id_or_name).tap do |k|
+          k.project = project
+          k.namespace = namespace
+          unless path.empty?
+            k.parent = key path, project: project, namespace: namespace
+          end
+        end
       end
 
       ##
       # Create a new empty Entity instance. This is a convenience method to make
       # the creation of Entity objects easier.
       #
-      # @param [Key, String, nil] key_or_kind A Key object or `kind` string
-      #   value. This is optional.
-      # @param [Integer, String, nil] id_or_name The Key's `id` or `name` value
-      #   if a `kind` was provided in the first parameter.
+      # @param [Key, Array<Array(String,(String|Integer|nil))>] key_or_path An
+      #   optional list of pairs for the key's path. Each pair may include the #
+      #   key's kind (String) and an id (Integer) or name (String). This is #
+      #   optional.
+      # @param [String] project The project of the Key. This is optional.
+      # @param [String] namespace namespace kind of the Key. This is optional.
       # @yield [entity] a block yielding a new entity
       # @yieldparam [Entity] entity the newly created entity object
       #
@@ -487,15 +551,15 @@ module Gcloud
       #   task["priority"] = 4
       #   task["description"] = "Learn Cloud Datastore"
       #
-      def entity key_or_kind = nil, id_or_name = nil
+      def entity *key_or_path, project: nil, namespace: nil
         entity = Entity.new
 
         # Set the key
-        key = key_or_kind
-        unless key.is_a? Gcloud::Datastore::Key
-          key = Key.new key_or_kind, id_or_name
+        if key_or_path.flatten.first.is_a? Gcloud::Datastore::Key
+          entity.key = key_or_path.flatten.first
+        else
+          entity.key = key key_or_path, project: project, namespace: namespace
         end
-        entity.key = key
 
         yield entity if block_given?
 
@@ -526,6 +590,13 @@ module Gcloud
       def to_gcloud_keys grpc_keys
         # Keys are not nested in an object like entities are.
         Array(grpc_keys).map { |key| Key.from_grpc key }
+      end
+
+      def check_consistency! consistency
+        fail(ArgumentError,
+             format("Consistency must be :eventual or :strong, not %s.",
+                    consistency.inspect)
+            ) unless [:eventual, :strong, nil].include? consistency
       end
     end
   end

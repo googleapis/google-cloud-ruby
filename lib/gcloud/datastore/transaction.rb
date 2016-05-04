@@ -86,7 +86,7 @@ module Gcloud
       #   end
       #
       def save *entities
-        entities.each { |e| shared_upserts << e }
+        @commit.save(*entities)
         # Do not save yet
         entities
       end
@@ -102,13 +102,94 @@ module Gcloud
       #   end
       #
       def delete *entities_or_keys
-        just_keys = entities_or_keys.map do |e_or_k|
-          e_or_k.respond_to?(:key) ? e_or_k.key : e_or_k
-        end
-        just_keys.each { |k| shared_deletes << k }
+        @commit.delete(*entities_or_keys)
         # Do not delete yet
         true
       end
+
+      ##
+      # Retrieve an entity by providing key information. The lookup is run
+      # within the transaction.
+      #
+      # @param [Key, String] key_or_kind A Key object or `kind` string value.
+      #
+      # @return [Gcloud::Datastore::Entity, nil]
+      #
+      # @example Finding an entity with a key:
+      #   key = dataset.key "Task", 123456
+      #   task = dataset.find key
+      #
+      # @example Finding an entity with a `kind` and `id`/`name`:
+      #   task = dataset.find "Task", 123456
+      #
+      def find key_or_kind, id_or_name = nil
+        key = key_or_kind
+        unless key.is_a? Gcloud::Datastore::Key
+          key = Key.new key_or_kind, id_or_name
+        end
+        find_all(key).first
+      end
+      alias_method :get, :find
+
+      ##
+      # Retrieve the entities for the provided keys. The lookup is run within
+      # the transaction.
+      #
+      # @param [Key] keys One or more Key objects to find records for.
+      #
+      # @return [Gcloud::Datastore::Dataset::LookupResults]
+      #
+      # @example
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #   key1 = dataset.key "Task", 123456
+      #   key2 = dataset.key "Task", 987654
+      #   tasks = dataset.find_all key1, key2
+      #
+      def find_all *keys
+        ensure_service!
+        lookup_res = service.lookup(*keys.map(&:to_grpc),
+                                    transaction: @id)
+        entities = to_gcloud_entities lookup_res.found
+        deferred = to_gcloud_keys lookup_res.deferred
+        missing  = to_gcloud_entities lookup_res.missing
+        LookupResults.new entities, deferred, missing
+      end
+      alias_method :lookup, :find_all
+
+      ##
+      # Retrieve entities specified by a Query. The query is run within the
+      # transaction.
+      #
+      # @param [Query] query The Query object with the search criteria.
+      # @param [String] namespace The namespace the query is to run within.
+      #
+      # @return [Gcloud::Datastore::Dataset::QueryResults]
+      #
+      # @example
+      #   query = dataset.query("Task").
+      #     where("completed", "=", true)
+      #   dataset.transaction do |tx|
+      #     tasks = tx.run query
+      #   end
+      #
+      # @example Run the query within a namespace with the `namespace` option:
+      #   query = Gcloud::Datastore::Query.new.kind("Task").
+      #     where("completed", "=", true)
+      #   dataset.transaction do |tx|
+      #     tasks = tx.run query, namespace: "ns~todo-project"
+      #   end
+      #
+      def run query, namespace: nil
+        ensure_service!
+        unless query.is_a?(Query) || query.is_a?(GqlQuery)
+          fail ArgumentError, "Cannot run a #{query.class} object."
+        end
+        query_res = service.run_query query.to_grpc, namespace,
+                                      transaction: @id
+        QueryResults.from_grpc query_res, service, namespace, query.to_grpc.dup
+      end
+      alias_method :run_query, :run
 
       ##
       # Begins a transaction.
@@ -124,28 +205,92 @@ module Gcloud
 
       ##
       # Commits a transaction.
+      #
+      # @yield [commit] an optional block for making changes
+      # @yieldparam [Commit] commit The object that changes are made on
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #
+      #   user = dataset.entity "User", "heidi" do |u|
+      #     u["name"] = "Heidi Henderson"
+      #     u["email"] = "heidi@example.net"
+      #   end
+      #
+      #   tx = dataset.transaction
+      #   begin
+      #     if tx.find(user.key).nil?
+      #       tx.save user
+      #     end
+      #     tx.commit
+      #   rescue
+      #     tx.rollback
+      #   end
+      #
+      # @example Commit can be passed a block, same as {Dataset#commit}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #
+      #   tx = dataset.transaction
+      #   begin
+      #     tx.commit do |c|
+      #       c.save task1, task2
+      #       c.delete entity1, entity2
+      #     end
+      #   rescue
+      #     tx.rollback
+      #   end
+      #
       def commit
         if @id.nil?
           fail TransactionError, "Cannot commit when not in a transaction."
         end
 
+        yield @commit if block_given?
+
         ensure_service!
 
-        mutations = shared_mutations
-
-        commit_res = service.commit mutations, transaction: @id
+        commit_res = service.commit @commit.mutations, transaction: @id
+        entities = @commit.entities
         returned_keys = commit_res.mutation_results.map(&:key)
         returned_keys.each_with_index do |key, index|
-          entity = shared_upserts[index]
+          entity = entities[index]
           next if entity.nil?
-          # assign returned key if entity and key are present
-          entity.key = Key.from_grpc key unless key.nil?
+          entity.key = Key.from_grpc(key) unless key.nil?
         end
+        # Make sure all entity keys are frozen so all show as persisted
+        entities.each { |e| e.key.freeze unless e.persisted? }
         true
       end
 
       ##
       # Rolls a transaction back.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #
+      #   user = dataset.entity "User", "heidi" do |u|
+      #     u["name"] = "Heidi Henderson"
+      #     u["email"] = "heidi@example.net"
+      #   end
+      #
+      #   tx = dataset.transaction
+      #   begin
+      #     if tx.find(user.key).nil?
+      #       tx.save user
+      #     end
+      #     tx.commit
+      #   rescue
+      #     tx.rollback
+      #   end
       def rollback
         if @id.nil?
           fail TransactionError, "Cannot rollback when not in a transaction."
@@ -160,39 +305,8 @@ module Gcloud
       # Reset the transaction.
       # {Transaction#start} must be called afterwards.
       def reset!
-        @shared_upserts = []
-        @shared_deletes = []
         @id = nil
-      end
-
-      protected
-
-      ##
-      # @private List of Entity objects to be saved.
-      def shared_upserts
-        @shared_upserts
-      end
-
-      ##
-      # @private List of Key objects to be deleted.
-      def shared_deletes
-        @shared_deletes
-      end
-
-      ##
-      # @private List of Mutation objects to be committed.
-      def shared_mutations
-        mutations = []
-        # shared upserts always go in first, so the keys can be assigned
-        shared_upserts.each do |e|
-          m = Google::Datastore::V1beta3::Mutation.new upsert: e.to_grpc
-          mutations << m
-        end
-        shared_deletes.each do |k|
-          m = Google::Datastore::V1beta3::Mutation.new delete: k.to_grpc
-          mutations << m
-        end
-        mutations
+        @commit = Commit.new
       end
     end
   end

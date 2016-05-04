@@ -22,7 +22,7 @@ describe Gcloud::Datastore::Key do
     key.kind.must_be :nil?
     key.id.must_be :nil?
     key.name.must_be :nil?
-    key.dataset_id.must_be :nil?
+    key.project.must_be :nil?
     key.namespace.must_be :nil?
   end
 
@@ -52,16 +52,31 @@ describe Gcloud::Datastore::Key do
     key.parent.name.must_be :nil?
   end
 
-  it "can set a dataset_id" do
+  it "can set a project" do
     key = Gcloud::Datastore::Key.new "ThisThing", 1234
     key.kind.must_equal "ThisThing"
     key.id.must_equal 1234
     key.name.must_be :nil?
 
+    key.project.must_be :nil?
+    key.project = "custom-ds"
+    key.project.wont_be :nil?
+    key.project.must_equal "custom-ds"
+  end
+
+  it "can set a dataset_id as an alias of project" do
+    key = Gcloud::Datastore::Key.new "ThisThing", 1234
+    key.kind.must_equal "ThisThing"
+    key.id.must_equal 1234
+    key.name.must_be :nil?
+
+    key.project.must_be :nil?
     key.dataset_id.must_be :nil?
     key.dataset_id = "custom-ds"
     key.dataset_id.wont_be :nil?
+    key.project.wont_be :nil?
     key.dataset_id.must_equal "custom-ds"
+    key.project.must_equal "custom-ds"
   end
 
   it "can set a namespace" do
@@ -90,7 +105,7 @@ describe Gcloud::Datastore::Key do
       key.parent = Gcloud::Datastore::Key.new "User", "username"
       key.path.must_equal [["User", "username"], ["Task", "todos"]]
     end
-    it "returns all parents when present" do
+    it "returns all parents using references" do
       key = Gcloud::Datastore::Key.new "Task", "todos"
       key.parent = Gcloud::Datastore::Key.new "User", "username"
       key.parent.parent = Gcloud::Datastore::Key.new "Org", "company"
@@ -153,7 +168,7 @@ describe Gcloud::Datastore::Key do
 
     key = Gcloud::Datastore::Key.new "ThisThing", "charlie"
     key.parent = Gcloud::Datastore::Key.new "ThatThing", "henry"
-    key.dataset_id = "custom-ds"
+    key.project = "custom-ds"
     key.namespace = "custom-ns"
     grpc = key.to_grpc
     grpc.path.count.must_equal 2
@@ -181,7 +196,7 @@ describe Gcloud::Datastore::Key do
     key.kind.must_equal "AnotherThing"
     key.id.must_equal 56789
     key.name.must_be :nil?
-    key.dataset_id.must_equal "custom-ds"
+    key.project.must_equal "custom-ds"
     key.namespace.must_equal "custom-ns"
     key.must_be :frozen?
   end

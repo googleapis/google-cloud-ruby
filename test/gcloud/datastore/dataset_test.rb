@@ -97,7 +97,33 @@ describe Gcloud::Datastore::Dataset do
     end
   end
 
-  it "save will persist entities" do
+  it "save will persist complete entities" do
+    # Remove key from response
+    commit_res.mutation_results.first.key = nil
+    mutation = Google::Datastore::V1beta3::Mutation.new(
+      upsert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+        e["name"] = "thingamajig"
+      end.to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation]
+    )
+    dataset.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+
+    entity = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity.key.must_be :complete?
+    entity.wont_be :persisted?
+    dataset.save entity
+    entity.key.must_be :complete?
+    entity.must_be :persisted?
+  end
+
+  it "save will persist incomplete entities" do
     mutation = Google::Datastore::V1beta3::Mutation.new(
       upsert: Gcloud::Datastore::Entity.new.tap do |e|
         e.key = Gcloud::Datastore::Key.new "ds-test"
@@ -114,7 +140,11 @@ describe Gcloud::Datastore::Dataset do
       e.key = Gcloud::Datastore::Key.new "ds-test"
       e["name"] = "thingamajig"
     end
+    entity.key.wont_be :complete?
+    entity.wont_be :persisted?
     dataset.save entity
+    entity.key.must_be :complete?
+    entity.must_be :persisted?
   end
 
   it "find can take a kind and id" do
@@ -162,6 +192,25 @@ describe Gcloud::Datastore::Dataset do
     entity.must_be_kind_of Gcloud::Datastore::Entity
   end
 
+  it "find can specify consistency" do
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", 123).to_grpc],
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(read_consistency: :EVENTUAL)
+    )
+    dataset.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
+
+    entity = dataset.find "ds-test", 123, consistency: :eventual
+    entity.must_be_kind_of Gcloud::Datastore::Entity
+  end
+
+  it "find raises if consistency is a bad value" do
+    error = expect do
+      dataset.find "ds-test", 123, consistency: "foobar"
+    end.must_raise ArgumentError
+    error.message.must_equal "Consistency must be :eventual or :strong, not \"foobar\"."
+  end
+
   it "find_all takes several keys" do
     lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
       project_id: project,
@@ -198,6 +247,34 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+  end
+
+  it "find_all can specify consistency" do
+    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [Gcloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
+             Gcloud::Datastore::Key.new("ds-test", "thingie2").to_grpc],
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(read_consistency: :EVENTUAL)
+    )
+    dataset.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
+
+    key1 = Gcloud::Datastore::Key.new "ds-test", "thingie1"
+    key2 = Gcloud::Datastore::Key.new "ds-test", "thingie2"
+    entities = dataset.lookup key1, key2, consistency: :eventual
+    entities.count.must_equal 2
+    entities.deferred.count.must_equal 0
+    entities.missing.count.must_equal 0
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+  end
+
+  it "find_all raises if consistency is a bad value" do
+    error = expect do
+      key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      entities = dataset.lookup key, key, consistency: "foobar"
+    end.must_raise ArgumentError
+    error.message.must_equal "Consistency must be :eventual or :strong, not \"foobar\"."
   end
 
   describe "find_all result object" do
@@ -318,7 +395,40 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
+  end
+
+  it "commit will save and delete entities" do
+    mutations = [Google::Datastore::V1beta3::Mutation.new(
+      upsert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
+        e["name"] = "Gonna be saved"
+      end.to_grpc), Google::Datastore::V1beta3::Mutation.new(
+        delete: Gcloud::Datastore::Key.new("ds-test", "to-be-deleted").to_grpc)
+    ]
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: mutations
+    )
+    dataset.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+
+    entity_to_be_saved = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
+      e["name"] = "Gonna be saved"
+    end
+    entity_to_be_deleted = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-deleted"
+      e["name"] = "Gonna be deleted"
+    end
+
+    entity_to_be_saved.wont_be :persisted?
+    dataset.commit do |c|
+      c.save entity_to_be_saved
+      c.delete entity_to_be_deleted
+    end
+    entity_to_be_saved.must_be :persisted?
   end
 
   it "run_query will fulfill a query" do
@@ -338,6 +448,7 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
   end
 
@@ -345,7 +456,6 @@ describe Gcloud::Datastore::Dataset do
     run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
       project_id: project,
       partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        project_id: project,
         namespace_id: "foobar"
       ),
       query: Gcloud::Datastore::Query.new.kind("User").to_grpc
@@ -362,6 +472,7 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
   end
 
@@ -384,6 +495,7 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
   end
 
@@ -391,7 +503,6 @@ describe Gcloud::Datastore::Dataset do
     run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
       project_id: project,
       partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        project_id: project,
         namespace_id: "foobar"
       ),
       gql_query: Google::Datastore::V1beta3::GqlQuery.new(
@@ -410,6 +521,7 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
   end
 
@@ -432,6 +544,7 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
   end
 
@@ -439,7 +552,6 @@ describe Gcloud::Datastore::Dataset do
     run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
       project_id: project,
       partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        project_id: project,
         namespace_id: "foobar"
       ),
       gql_query: Google::Datastore::V1beta3::GqlQuery.new(
@@ -458,7 +570,106 @@ describe Gcloud::Datastore::Dataset do
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
+    refute entities.more_after_cursor?
     refute entities.no_more?
+  end
+
+  it "run will fulfill a query and return an object that can paginate" do
+    first_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      partition_id: Google::Datastore::V1beta3::PartitionId.new(
+        namespace_id: "foobar"
+      ),
+      gql_query: Google::Datastore::V1beta3::GqlQuery.new(
+        query_string: "SELECT * FROM Task")
+    )
+    first_run_query_res = run_query_res.dup
+    first_run_query_res.batch = run_query_res.batch.dup
+    first_run_query_res.batch.more_results = :MORE_RESULTS_AFTER_CURSOR
+    first_run_query_res.query = Gcloud::Datastore::Query.new.kind("Task").to_grpc
+    next_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      partition_id: Google::Datastore::V1beta3::PartitionId.new(
+        namespace_id: "foobar"
+      ),
+      query: Gcloud::Datastore::Query.new.kind("Task").start(query_cursor).to_grpc
+    )
+    next_run_query_res = run_query_res.dup
+    next_run_query_res.batch = run_query_res.batch.dup
+    next_run_query_res.batch.more_results = :NO_MORE_RESULTS
+    dataset.service.mocked_datastore.expect :run_query, first_run_query_res, [first_run_query_req]
+    dataset.service.mocked_datastore.expect :run_query, next_run_query_res, [next_run_query_req]
+
+    gql = dataset.gql "SELECT * FROM Task"
+    entities = dataset.run_query gql, namespace: "foobar"
+    entities.count.must_equal 2
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.end_cursor.must_equal query_cursor
+    entities.more_results.must_equal :MORE_RESULTS_AFTER_CURSOR
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    assert entities.more_after_cursor?
+    refute entities.no_more?
+
+    assert entities.next?
+    next_entities = entities.next
+
+    next_entities.cursor.must_equal query_cursor
+    next_entities.end_cursor.must_equal query_cursor
+    next_entities.more_results.must_equal :NO_MORE_RESULTS
+    refute next_entities.not_finished?
+    refute next_entities.more_after_limit?
+    refute next_entities.more_after_cursor?
+    assert next_entities.no_more?
+
+    refute next_entities.next?
+  end
+
+  it "run will fulfill a query and return an object that can paginate with all" do
+    first_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      partition_id: Google::Datastore::V1beta3::PartitionId.new(
+        namespace_id: "foobar"
+      ),
+      gql_query: Google::Datastore::V1beta3::GqlQuery.new(
+        query_string: "SELECT * FROM Task")
+    )
+    first_run_query_res = run_query_res.dup
+    first_run_query_res.batch = run_query_res.batch.dup
+    first_run_query_res.batch.more_results = :MORE_RESULTS_AFTER_CURSOR
+    first_run_query_res.query = Gcloud::Datastore::Query.new.kind("Task").to_grpc
+    next_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+      project_id: project,
+      partition_id: Google::Datastore::V1beta3::PartitionId.new(
+        namespace_id: "foobar"
+      ),
+      query: Gcloud::Datastore::Query.new.kind("Task").start(query_cursor).to_grpc
+    )
+    next_run_query_res = run_query_res.dup
+    next_run_query_res.batch = run_query_res.batch.dup
+    next_run_query_res.batch.more_results = :NO_MORE_RESULTS
+    dataset.service.mocked_datastore.expect :run_query, first_run_query_res, [first_run_query_req]
+    dataset.service.mocked_datastore.expect :run_query, next_run_query_res, [next_run_query_req]
+
+    gql = dataset.gql "SELECT * FROM Task"
+    entities = dataset.run_query gql, namespace: "foobar"
+    entities.all
+    entities.count.must_equal 4
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.end_cursor.must_equal query_cursor
+    entities.more_results.must_equal :NO_MORE_RESULTS
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.more_after_cursor?
+    assert entities.no_more?
+
+    refute entities.next?
   end
 
   it "run will raise when given an unknown argument" do
@@ -495,6 +706,33 @@ describe Gcloud::Datastore::Dataset do
     key.kind.must_equal "ThisThing"
     key.id.must_be :nil?
     key.name.must_equal "charlie"
+  end
+
+  it "key sets a parent and grandparent in the constructor" do
+    path = [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
+    key = dataset.key path, project: "custom-ds", namespace: "custom-ns"
+    key.kind.must_equal "ThisThing"
+    key.id.must_equal 1234
+    key.name.must_be :nil?
+    key.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
+    key.project.must_equal "custom-ds"
+    key.namespace.must_equal "custom-ns"
+
+    key.parent.wont_be :nil?
+    key.parent.kind.must_equal "ThatThing"
+    key.parent.id.must_equal 6789
+    key.parent.name.must_be :nil?
+    key.parent.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789]]
+    key.parent.project.must_equal "custom-ds"
+    key.parent.namespace.must_equal "custom-ns"
+
+    key.parent.parent.wont_be :nil?
+    key.parent.parent.kind.must_equal "OtherThing"
+    key.parent.parent.id.must_be :nil?
+    key.parent.parent.name.must_equal "root"
+    key.parent.parent.path.must_equal [["OtherThing", "root"]]
+    key.parent.parent.project.must_equal "custom-ds"
+    key.parent.parent.namespace.must_equal "custom-ns"
   end
 
   it "entity returns an Entity instance" do
@@ -534,6 +772,34 @@ describe Gcloud::Datastore::Dataset do
     entity.key.id.must_be :nil?
     entity.key.name.must_equal "username"
   end
+
+  it "entity sets a key's parent and grandparent" do
+    path = [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
+    entity = dataset.entity path, project: "custom-ds", namespace: "custom-ns"
+    entity.key.kind.must_equal "ThisThing"
+    entity.key.id.must_equal 1234
+    entity.key.name.must_be :nil?
+    entity.key.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
+    entity.key.project.must_equal "custom-ds"
+    entity.key.namespace.must_equal "custom-ns"
+
+    entity.key.parent.wont_be :nil?
+    entity.key.parent.kind.must_equal "ThatThing"
+    entity.key.parent.id.must_equal 6789
+    entity.key.parent.name.must_be :nil?
+    entity.key.parent.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789]]
+    entity.key.parent.project.must_equal "custom-ds"
+    entity.key.parent.namespace.must_equal "custom-ns"
+
+    entity.key.parent.parent.wont_be :nil?
+    entity.key.parent.parent.kind.must_equal "OtherThing"
+    entity.key.parent.parent.id.must_be :nil?
+    entity.key.parent.parent.name.must_equal "root"
+    entity.key.parent.parent.path.must_equal [["OtherThing", "root"]]
+    entity.key.parent.parent.project.must_equal "custom-ds"
+    entity.key.parent.parent.namespace.must_equal "custom-ns"
+  end
+
 
   it "entity can configure the new Entity using a block" do
     entity = dataset.entity "User", "username" do |e|
@@ -702,5 +968,49 @@ describe Gcloud::Datastore::Dataset do
     error.message.must_equal "Transaction failed to commit."
     error.inner.wont_be :nil?
     error.inner.message.must_equal "This error should be wrapped by TransactionError."
+  end
+
+  it "transaction will wrap errors for both commit and rollback" do
+    # Save mocked service so we can restore it later.
+    mocked_service = dataset.service
+    begin
+      tx_id = "giterdone".encode("ASCII-8BIT")
+      begin_tx_res = Google::Datastore::V1beta3::BeginTransactionResponse.new(transaction: tx_id)
+
+      stub = Object.new
+      stub.instance_variable_set "@response", begin_tx_res
+      def stub.begin_transaction
+        @response
+      end
+      def stub.commit *args
+        raise "commit error"
+      end
+      def stub.rollback *args
+        raise "rollback error"
+      end
+      # Replace mocked connection with this one off object.
+      dataset.service = stub
+
+      entity = Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+        e["name"] = "thingamajig"
+      end
+
+      error = assert_raises Gcloud::Datastore::TransactionError do
+        dataset.transaction do |tx|
+          tx.save entity
+        end
+      end
+
+      error.wont_be :nil?
+      error.message.must_equal "Transaction failed to commit and rollback."
+      error.commit_error.wont_be :nil?
+      error.commit_error.message.must_equal "commit error"
+      error.rollback_error.wont_be :nil?
+      error.rollback_error.message.must_equal "rollback error"
+    ensure
+      # Reset mocked service so the call to verify works.
+      dataset.service = mocked_service
+    end
   end
 end
