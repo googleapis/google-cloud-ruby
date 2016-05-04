@@ -209,6 +209,9 @@ Every Entity has a <span class='object_link'><a href="Key.html" title="Gcloud::D
 
                     <p>Retrieve a property value by providing the name.</p>
 
+<p>Property values are converted from the Datastore value type
+automatically. Blob properties are returned as StringIO objects.</p>
+
 
                     
 
@@ -277,6 +280,17 @@ Every Entity has a <span class='object_link'><a href="Key.html" title="Gcloud::D
 <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span> <span class='comment'>#=&gt; &quot;Heidi Henderson&quot;</span></code></pre>
                       
+                        
+                          <p class="example_title"><div class='inline'><p>Getting a blob value returns a StringIO object:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatar</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='comment'>#=&gt; StringIO(&quot;\x89PNG\r\n\x1A...&quot;)</span></code></pre>
+                      
                     
 
                   </div>
@@ -298,6 +312,12 @@ Every Entity has a <span class='object_link'><a href="Key.html" title="Gcloud::D
                   <div class="method-description">
 
                     <p>Set a property value by name.</p>
+
+<p>Property values are converted to use the proper Datastore value type
+automatically. Use an IO-compatible object (File, StringIO, Tempfile) to
+indicate the property value should be stored as a Datastore <code class="highlighter-rouge">blob</code>.
+IO-compatible objects are converted to StringIO objects when they are
+set.</p>
 
 
                     
@@ -367,6 +387,18 @@ Every Entity has a <span class='object_link'><a href="Key.html" title="Gcloud::D
 <span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
 <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Heidi H. Henderson</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Setting a blob value using an IO:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatar</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/avatars/heidi.png</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatar</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='comment'>#=&gt; StringIO(&quot;\x89PNG\r\n\x1A...&quot;)</span></code></pre>
                       
                     
 
@@ -769,7 +801,7 @@ should be excluded from indexing</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 03, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal current' href=''>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 04, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal current' href=''>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

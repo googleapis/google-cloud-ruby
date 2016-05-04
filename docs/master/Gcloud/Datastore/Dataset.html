@@ -107,6 +107,10 @@ read, updated, and deleted by Gcloud::Datastore::Dataset.</p>
               
                 <span class='object_link'><a href="#save-instance_method" title="Gcloud::Datastore::Dataset#save (method)">#save</a></span>
               
+                <span class='object_link'><a href="#delete-instance_method" title="Gcloud::Datastore::Dataset#delete (method)">#delete</a></span>
+              
+                <span class='object_link'><a href="#commit-instance_method" title="Gcloud::Datastore::Dataset#commit (method)">#commit</a></span>
+              
                 <span class='object_link'><a href="#find-instance_method" title="Gcloud::Datastore::Dataset#find (method)">#find</a></span>
               
                 <span class='object_link'><a href="#get-instance_method" title="Gcloud::Datastore::Dataset#get (method)">#get</a></span>
@@ -114,8 +118,6 @@ read, updated, and deleted by Gcloud::Datastore::Dataset.</p>
                 <span class='object_link'><a href="#find_all-instance_method" title="Gcloud::Datastore::Dataset#find_all (method)">#find_all</a></span>
               
                 <span class='object_link'><a href="#lookup-instance_method" title="Gcloud::Datastore::Dataset#lookup (method)">#lookup</a></span>
-              
-                <span class='object_link'><a href="#delete-instance_method" title="Gcloud::Datastore::Dataset#delete (method)">#delete</a></span>
               
                 <span class='object_link'><a href="#run-instance_method" title="Gcloud::Datastore::Dataset#run (method)">#run</a></span>
               
@@ -297,8 +299,7 @@ read, updated, and deleted by Gcloud::Datastore::Dataset.</p>
                           <dd>
                             <p>
                               
-                                <div class='inline'><p>One or more entity objects to be saved without
-<code class="highlighter-rouge">id</code> or <code class="highlighter-rouge">name</code> set.</p>
+                                <div class='inline'><p>One or more entity objects to be saved.</p>
 </div>
                               
                               (<tt><span class='object_link'><a href="Entity.html" title="Gcloud::Datastore::Entity (class)">Entity</a></span></tt>)
@@ -331,218 +332,6 @@ read, updated, and deleted by Gcloud::Datastore::Dataset.</p>
                     
 
                   </div>
-                  
-                </div>
-              
-            
-              
-                <div class="method">
-                  <a name="find-instance_method"></a>
-                  <h4>
-                    <code>find(key_or_kind, id_or_name = nil)</code>
-                    <span>
-                      <a href="#find-instance_method">&para;</a>
-                      <a href="#top">&uarr;</a>
-                    </span>
-                  </h4>
-
-                  <div class="method-description">
-
-                    <p>Retrieve an entity by providing key information.</p>
-
-
-                    
-
-                    
-                      <h3 id="method-i-find-label-Parameters">
-                        Parameters
-                        <span><a href="#method-i-find-label-Parameters">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      <dl class="rdoc-list note-list">
-                        
-                          <dt>
-                            <code>key_or_kind</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>A Key object or <code class="highlighter-rouge">kind</code> string value.</p>
-</div>
-                              
-                              (<tt><span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Key</a></span></tt>, <tt>String</tt>)
-                            </p>
-                          </dd>
-                        
-                          <dt>
-                            <code>id_or_name</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>The Key’s <code class="highlighter-rouge">id</code> or <code class="highlighter-rouge">name</code> value
-if a <code class="highlighter-rouge">kind</code> was provided in the first parameter.</p>
-</div>
-                              
-                              (<tt>Integer</tt>, <tt>String</tt>, <tt>nil</tt>)
-                            </p>
-                          </dd>
-                        
-                      </dl>
-                    
-
-                    
-                      <h3 id="method-i-find-label-Returns">
-                        Returns
-                        <span><a href="#method-i-find-label-Returns">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      <p>
-                        (<tt><span class='object_link'><a href="Entity.html" title="Gcloud::Datastore::Entity (class)">Gcloud::Datastore::Entity</a></span></tt>, <tt>nil</tt>)
-                        
-                      </p>
-                    
-
-                    
-                      <h3 id="method-i-find-label-Examples">
-                        Examples
-                        <span><a href="#method-i-find-label-Examples">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      
-                        
-                          <p class="example_title"><div class='inline'><p>Finding an entity with a key:</p>
-</div></p>
-                        
-                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>123456</span>
-<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='id identifier rubyid_key'>key</span></code></pre>
-                      
-                        
-                          <p class="example_title"><div class='inline'><p>Finding an entity with a <code class="highlighter-rouge">kind</code> and <code class="highlighter-rouge">id</code>/<code class="highlighter-rouge">name</code>:</p>
-</div></p>
-                        
-                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>123456</span></code></pre>
-                      
-                    
-
-                  </div>
-                  
-                    <div class="aliases">
-                      Also aliased as:
-                      <a href='#get-instance_method'>get</a>
-                    </div>
-                  
-                </div>
-              
-            
-              
-                <div class="method">
-                  <a name="get-instance_method"></a>
-                  <h4>
-                    <code>get</code>
-                    <span>
-                      <a href="#get-instance_method">&para;</a>
-                      <a href="#top">&uarr;</a>
-                    </span>
-                  </h4>
-                  
-                    <div class="aliases">
-                      Alias for:
-                      <a href="#find-instance_method">find</a>
-                    </div>
-                  
-                </div>
-              
-            
-              
-                <div class="method">
-                  <a name="find_all-instance_method"></a>
-                  <h4>
-                    <code>find_all(*keys)</code>
-                    <span>
-                      <a href="#find_all-instance_method">&para;</a>
-                      <a href="#top">&uarr;</a>
-                    </span>
-                  </h4>
-
-                  <div class="method-description">
-
-                    <p>Retrieve the entities for the provided keys.</p>
-
-
-                    
-
-                    
-                      <h3 id="method-i-find_all-label-Parameters">
-                        Parameters
-                        <span><a href="#method-i-find_all-label-Parameters">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      <dl class="rdoc-list note-list">
-                        
-                          <dt>
-                            <code>keys</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>One or more Key objects to find records for.</p>
-</div>
-                              
-                              (<tt><span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Key</a></span></tt>)
-                            </p>
-                          </dd>
-                        
-                      </dl>
-                    
-
-                    
-                      <h3 id="method-i-find_all-label-Returns">
-                        Returns
-                        <span><a href="#method-i-find_all-label-Returns">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      <p>
-                        (<tt><span class='object_link'><a href="Dataset/LookupResults.html" title="Gcloud::Datastore::Dataset::LookupResults (class)">Gcloud::Datastore::Dataset::LookupResults</a></span></tt>)
-                        
-                      </p>
-                    
-
-                    
-                      <h3 id="method-i-find_all-label-Examples">
-                        Example
-                        <span><a href="#method-i-find_all-label-Examples">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      
-                        
-                        <pre class="code"><code><span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
-<span class='id identifier rubyid_key1'>key1</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>123456</span>
-<span class='id identifier rubyid_key2'>key2</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>987654</span>
-<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find_all'>find_all</span> <span class='id identifier rubyid_key1'>key1</span><span class='comma'>,</span> <span class='id identifier rubyid_key2'>key2</span></code></pre>
-                      
-                    
-
-                  </div>
-                  
-                    <div class="aliases">
-                      Also aliased as:
-                      <a href='#lookup-instance_method'>lookup</a>
-                    </div>
-                  
-                </div>
-              
-            
-              
-                <div class="method">
-                  <a name="lookup-instance_method"></a>
-                  <h4>
-                    <code>lookup</code>
-                    <span>
-                      <a href="#lookup-instance_method">&para;</a>
-                      <a href="#top">&uarr;</a>
-                    </span>
-                  </h4>
-                  
-                    <div class="aliases">
-                      Alias for:
-                      <a href="#find_all-instance_method">find_all</a>
-                    </div>
                   
                 </div>
               
@@ -623,9 +412,315 @@ to remove.</p>
             
               
                 <div class="method">
+                  <a name="commit-instance_method"></a>
+                  <h4>
+                    <code>commit</code>
+                    <span>
+                      <a href="#commit-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Make multiple changes in a single commit.</p>
+
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-commit-label-Returns">
+                        Returns
+                        <span><a href="#method-i-commit-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Array&lt;<span class='object_link'><a href="Entity.html" title="Gcloud::Datastore::Entity (class)">Gcloud::Datastore::Entity</a></span>&gt;</tt>)
+                        
+                          <div class='inline'><p>The entities that were
+persisted.</p>
+</div>
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-commit-label-Examples">
+                        Example
+                        <span><a href="#method-i-commit-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_c'>c</span><span class='op'>|</span>
+  <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_task1'>task1</span><span class='comma'>,</span> <span class='id identifier rubyid_task2'>task2</span>
+  <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_entity1'>entity1</span><span class='comma'>,</span> <span class='id identifier rubyid_entity2'>entity2</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="find-instance_method"></a>
+                  <h4>
+                    <code>find(key_or_kind, id_or_name = nil, consistency: nil)</code>
+                    <span>
+                      <a href="#find-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Retrieve an entity by providing key information.</p>
+
+
+                    
+
+                    
+                      <h3 id="method-i-find-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-find-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>key_or_kind</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>A Key object or <code class="highlighter-rouge">kind</code> string value.</p>
+</div>
+                              
+                              (<tt><span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Key</a></span></tt>, <tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>id_or_name</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The Key’s <code class="highlighter-rouge">id</code> or <code class="highlighter-rouge">name</code> value
+if a <code class="highlighter-rouge">kind</code> was provided in the first parameter.</p>
+</div>
+                              
+                              (<tt>Integer</tt>, <tt>String</tt>, <tt>nil</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>consistency</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The non-transactional read consistency to
+use. Cannot be set to <code class="highlighter-rouge">:strong</code> for global queries. Accepted values
+are <code class="highlighter-rouge">:eventual</code> and <code class="highlighter-rouge">:strong</code>.</p>
+
+<p>The default consistency depends on the type of lookup used. See
+<a href="https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8">Eventual Consistency in Google Cloud
+Datastore</a>
+for more information.</p>
+</div>
+                              
+                              (<tt>Symbol</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-find-label-Returns">
+                        Returns
+                        <span><a href="#method-i-find-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Entity.html" title="Gcloud::Datastore::Entity (class)">Gcloud::Datastore::Entity</a></span></tt>, <tt>nil</tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-find-label-Examples">
+                        Examples
+                        <span><a href="#method-i-find-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Finding an entity with a key:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>123456</span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='id identifier rubyid_key'>key</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Finding an entity with a <code class="highlighter-rouge">kind</code> and <code class="highlighter-rouge">id</code>/<code class="highlighter-rouge">name</code>:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>123456</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#get-instance_method'>get</a>
+                    </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="get-instance_method"></a>
+                  <h4>
+                    <code>get</code>
+                    <span>
+                      <a href="#get-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#find-instance_method">find</a>
+                    </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="find_all-instance_method"></a>
+                  <h4>
+                    <code>find_all(*keys, consistency: nil)</code>
+                    <span>
+                      <a href="#find_all-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Retrieve the entities for the provided keys.</p>
+
+
+                    
+
+                    
+                      <h3 id="method-i-find_all-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-find_all-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>keys</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>One or more Key objects to find records for.</p>
+</div>
+                              
+                              (<tt><span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Key</a></span></tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>consistency</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The non-transactional read consistency to
+use. Cannot be set to <code class="highlighter-rouge">:strong</code> for global queries. Accepted values
+are <code class="highlighter-rouge">:eventual</code> and <code class="highlighter-rouge">:strong</code>.</p>
+
+<p>The default consistency depends on the type of lookup used. See
+<a href="https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8">Eventual Consistency in Google Cloud
+Datastore</a>
+for more information.</p>
+</div>
+                              
+                              (<tt>Symbol</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-find_all-label-Returns">
+                        Returns
+                        <span><a href="#method-i-find_all-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Dataset/LookupResults.html" title="Gcloud::Datastore::Dataset::LookupResults (class)">Gcloud::Datastore::Dataset::LookupResults</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-find_all-label-Examples">
+                        Example
+                        <span><a href="#method-i-find_all-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_key1'>key1</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>123456</span>
+<span class='id identifier rubyid_key2'>key2</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>987654</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find_all'>find_all</span> <span class='id identifier rubyid_key1'>key1</span><span class='comma'>,</span> <span class='id identifier rubyid_key2'>key2</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#lookup-instance_method'>lookup</a>
+                    </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="lookup-instance_method"></a>
+                  <h4>
+                    <code>lookup</code>
+                    <span>
+                      <a href="#lookup-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#find_all-instance_method">find_all</a>
+                    </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
                   <a name="run-instance_method"></a>
                   <h4>
-                    <code>run(query, namespace: nil)</code>
+                    <code>run(query, namespace: nil, consistency: nil)</code>
                     <span>
                       <a href="#run-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -669,6 +764,26 @@ to remove.</p>
 </div>
                               
                               (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>consistency</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The non-transactional read consistency to
+use. Cannot be set to <code class="highlighter-rouge">:strong</code> for global queries. Accepted values
+are <code class="highlighter-rouge">:eventual</code> and <code class="highlighter-rouge">:strong</code>.</p>
+
+<p>The default consistency depends on the type of query used. See
+<a href="https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8">Eventual Consistency in Google Cloud
+Datastore</a>
+for more information.</p>
+</div>
+                              
+                              (<tt>Symbol</tt>)
                             </p>
                           </dd>
                         
@@ -1119,7 +1234,7 @@ if a <code class="highlighter-rouge">kind</code> was provided in the first param
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 03, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l1'><a class='reference internal current' href=''>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal' href='Entity.html'>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 04, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l1'><a class='reference internal current' href=''>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal' href='Entity.html'>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <title>Gcloud::Datastore::KeyfileError &mdash; Gcloud Documentation</title>
+    <title>Gcloud::Datastore::Commit &mdash; Gcloud Documentation</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,21 +69,25 @@
     <article class="main lang-page" role="main">
 
       <header class="docs-header">
-        <h1 class="page-title">Gcloud::Datastore::KeyfileError</h1>
+        <h1 class="page-title">Gcloud::Datastore::Commit</h1>
       </header>
 
       <section class="content">
 
         <div id="description" class="description">
-          <h1 id="keyfileerror">KeyfileError</h1>
+          <h1 id="commit">Commit</h1>
 
-<p>Raised when a keyfile is not correct.</p>
+<p>Object yielded from <code class="highlighter-rouge">commit</code> methods to allow multiple changes to be made
+in a single commit.</p>
+
+<p>See <span class='object_link'><a href="Dataset.html#commit-instance_method" title="Gcloud::Datastore::Dataset#commit (method)">Dataset#commit</a></span> and
+<span class='object_link'><a href="Transaction.html#commit-instance_method" title="Gcloud::Datastore::Transaction#commit (method)">Transaction#commit</a></span>.</p>
 
         </div>
 
         <div class="section-links">
           
-            <div>Parent: <span class='object_link'><a href="Error.html" title="Gcloud::Datastore::Error (class)">Error</a></span></div>
+            <div>Parent: Object</div>
           
 
           
@@ -94,9 +98,9 @@
               Instance Methods
 
               
-                <span class='object_link'><a href="../Error.html#inner-instance_method" title="Gcloud::Error#inner (method)">Error#inner</a></span>
+                <span class='object_link'><a href="#save-instance_method" title="Gcloud::Datastore::Commit#save (method)">#save</a></span>
               
-                <span class='object_link'><a href="../Error.html#initialize-instance_method" title="Gcloud::Error#initialize (method)">Error#initialize</a></span>
+                <span class='object_link'><a href="#delete-instance_method" title="Gcloud::Datastore::Commit#delete (method)">#delete</a></span>
               
             </div>
           
@@ -111,26 +115,60 @@
             
               
                 <div class="method">
-                  <a name="inner-instance_method"></a>
+                  <a name="save-instance_method"></a>
                   <h4>
-                    <code>inner</code>
+                    <code>save(*entities)</code>
                     <span>
-                      <a href="#inner-instance_method">&para;</a>
+                      <a href="#save-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
                     </span>
                   </h4>
 
                   <div class="method-description">
 
-                    <p>The inner error object.</p>
+                    <p>Saves entities to the Datastore.</p>
 
 
                     
 
                     
+                      <h3 id="method-i-save-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-save-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>entities</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>One or more Entity objects to save.</p>
+</div>
+                              
+                              (<tt><span class='object_link'><a href="Entity.html" title="Gcloud::Datastore::Entity (class)">Entity</a></span></tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
 
                     
 
+                    
+                      <h3 id="method-i-save-label-Examples">
+                        Example
+                        <span><a href="#method-i-save-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_c'>c</span><span class='op'>|</span>
+  <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_task1'>task1</span><span class='comma'>,</span> <span class='id identifier rubyid_task2'>task2</span>
+<span class='kw'>end</span></code></pre>
+                      
                     
 
                   </div>
@@ -140,38 +178,61 @@
             
               
                 <div class="method">
-                  <a name="initialize-instance_method"></a>
+                  <a name="delete-instance_method"></a>
                   <h4>
-                    <code>initialize(message = nil, error = nil)</code>
+                    <code>delete(*entities_or_keys)</code>
                     <span>
-                      <a href="#initialize-instance_method">&para;</a>
+                      <a href="#delete-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
                     </span>
                   </h4>
 
                   <div class="method-description">
 
-                    <p>Create a new error object.</p>
+                    <p>Remove entities from the Datastore.</p>
 
 
                     
 
                     
-
-                    
-                      <h3 id="method-i-initialize-label-Returns">
-                        Returns
-                        <span><a href="#method-i-initialize-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      <h3 id="method-i-delete-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-delete-label-Parameters">¶</a> <a href="#top">↑</a></span>
                       </h3>
-                      <p>
-                        (<tt><span class='object_link'><a href="Error.html" title="Gcloud::Datastore::Error (class)">Error</a></span></tt>)
+                      <dl class="rdoc-list note-list">
                         
-                          <div class='inline'><p>a new instance of Error</p>
+                          <dt>
+                            <code>entities_or_keys</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>One or more Entity or Key
+objects to remove.</p>
 </div>
+                              
+                              (<tt><span class='object_link'><a href="Entity.html" title="Gcloud::Datastore::Entity (class)">Entity</a></span></tt>, <tt><span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Key</a></span></tt>)
+                            </p>
+                          </dd>
                         
-                      </p>
+                      </dl>
                     
 
+                    
+
+                    
+                      <h3 id="method-i-delete-label-Examples">
+                        Example
+                        <span><a href="#method-i-delete-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_c'>c</span><span class='op'>|</span>
+  <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_entity1'>entity1</span><span class='comma'>,</span> <span class='id identifier rubyid_entity2'>entity2</span>
+<span class='kw'>end</span></code></pre>
+                      
                     
 
                   </div>
