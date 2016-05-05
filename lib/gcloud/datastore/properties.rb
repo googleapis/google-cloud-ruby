@@ -114,11 +114,9 @@ module Gcloud
         elsif value.respond_to?(:to_hash) && value.keys.sort == [:latitude, :longitude]
           return value
         elsif value.respond_to?(:read) && value.respond_to?(:rewind)
-          # shortcut creating a StringIO if it already is one.
-          return value if value.is_a? StringIO
           # Always convert an IO object to a StringIO when storing.
           value.rewind
-          return StringIO.new(value.read)
+          return StringIO.new(value.read.force_encoding("ASCII-8BIT"))
         elsif defined?(BigDecimal) && BigDecimal === value
           return value
         end
