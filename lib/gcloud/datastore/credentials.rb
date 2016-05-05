@@ -30,16 +30,6 @@ module Gcloud
       PATH_ENV_VARS = %w(DATASTORE_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
       JSON_ENV_VARS = %w(DATASTORE_KEYFILE_JSON GCLOUD_KEYFILE_JSON
                          GOOGLE_CLOUD_KEYFILE_JSON)
-
-      ##
-      # Sign OAuth 2.0 API calls.
-      def sign_http_request request
-        if @client
-          @client.fetch_access_token! if @client.expired?
-          @client.generate_authenticated_request request: request
-        end
-        request
-      end
     end
   end
 end
