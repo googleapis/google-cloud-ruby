@@ -74,10 +74,9 @@ module Gcloud
   #   OAuth 2.0 to Access Google
   #   APIs](https://developers.google.com/identity/protocols/OAuth2).
   #
-  #   The default scopes are:
+  #   The default scope is:
   #
   #   * `https://www.googleapis.com/auth/datastore`
-  #   * `https://www.googleapis.com/auth/userinfo.email`
   #
   # @return [Gcloud::Datastore::Dataset]
   #

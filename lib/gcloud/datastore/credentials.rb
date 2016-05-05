@@ -26,8 +26,7 @@ module Gcloud
     #
     # @see https://developers.google.com/accounts/docs/application-default-credentials
     class Credentials < Gcloud::Credentials
-      SCOPE = ["https://www.googleapis.com/auth/datastore",
-               "https://www.googleapis.com/auth/userinfo.email"]
+      SCOPE = ["https://www.googleapis.com/auth/datastore"]
       PATH_ENV_VARS = %w(DATASTORE_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
       JSON_ENV_VARS = %w(DATASTORE_KEYFILE_JSON GCLOUD_KEYFILE_JSON
                          GOOGLE_CLOUD_KEYFILE_JSON)
