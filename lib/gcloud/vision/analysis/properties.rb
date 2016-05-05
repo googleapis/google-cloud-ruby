@@ -109,7 +109,9 @@ module Gcloud
           end
 
           def rgb
-            "#{red.to_i.to_s 16}#{green.to_i.to_s 16}#{blue.to_i.to_s 16}"
+            red.to_i.to_s(16).rjust(2, "0") +
+              green.to_i.to_s(16).rjust(2, "0") +
+              blue.to_i.to_s(16).rjust(2, "0")
           end
 
           ##

@@ -36,6 +36,23 @@ describe Gcloud::Vision::Image, :labels, :mock_vision do
     labels.count.must_equal 5
   end
 
+  it "detects multiple labels without specifying a count" do
+    mock_connection.post "/v1/images:annotate" do |env|
+      requests = JSON.parse(env.body)["requests"]
+      requests.count.must_equal 1
+      label = requests.first
+      label["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      label["features"].count.must_equal 1
+      label["features"].first["type"].must_equal "LABEL_DETECTION"
+      label["features"].first["maxResults"].must_equal 10
+      [200, {"Content-Type" => "application/json"},
+       labels_response_json]
+    end
+
+    labels = image.labels
+    labels.count.must_equal 5
+  end
+
   it "detects a label" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
