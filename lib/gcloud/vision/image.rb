@@ -218,38 +218,90 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #   image = vision.image filepath
-      #   image.context.location = { longitude: -122.0862462,
+      #   image.context.area.min = { longitude: -122.0862462,
       #                              latitude: 37.4220041 }
+      #   image.context.area.max = { longitude: -122.0762462,
+      #                              latitude: 37.4320041 }
       class Context
-        attr_reader :location
+        attr_reader :area
         attr_accessor :languages
 
         def initialize
-          @location = Location.new nil, nil
+          @area = Area.new
           @languages = []
         end
 
-        def location= location
-          if location.respond_to?(:to_hash) &&
-             location.to_hash.keys.sort == [:latitude, :longitude]
-            return @location = Location.new(location.to_hash[:latitude],
-                                            location.to_hash[:longitude])
-          end
-          fail ArgumentError, "Must pass a proper location value."
-        end
-
         def empty?
-          location.to_hash.values.reject(&:nil?).empty? && languages.empty?
+          area.empty? && languages.empty?
         end
 
         def to_gapi
           return nil if empty?
           gapi = {}
-          unless location.to_hash.values.reject(&:nil?).empty?
-            gapi["latLongRect"] = location.to_hash
-          end
-          gapi["languageHints"] = languages unless languages.empty?
+          gapi[:latLongRect] = area.to_hash unless area.empty?
+          gapi[:languageHints] = languages unless languages.empty?
           gapi
+        end
+
+        ##
+        # # Image::Context::Area
+        #
+        # Represents an image context for the Vision service.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   vision = gcloud.vision
+        #   image = vision.image filepath
+        #   image.context.area.min = { longitude: -122.0862462,
+        #                              latitude: 37.4220041 }
+        #   image.context.area.max = { longitude: -122.0762462,
+        #                              latitude: 37.4320041 }
+        class Area
+          attr_reader :min
+          attr_reader :max
+
+          def initialize
+            @min = Location.new nil, nil
+            @max = Location.new nil, nil
+          end
+
+          def min= location
+            if location.respond_to?(:to_hash) &&
+               location.to_hash.keys.sort == [:latitude, :longitude]
+              return @min = Location.new(location.to_hash[:latitude],
+                                         location.to_hash[:longitude])
+            end
+            fail ArgumentError, "Must pass a proper location value."
+          end
+
+          def max= location
+            if location.respond_to?(:to_hash) &&
+               location.to_hash.keys.sort == [:latitude, :longitude]
+              return @max = Location.new(location.to_hash[:latitude],
+                                         location.to_hash[:longitude])
+            end
+            fail ArgumentError, "Must pass a proper location value."
+          end
+
+          def empty?
+            min.to_hash.values.reject(&:nil?).empty? ||
+              max.to_hash.values.reject(&:nil?).empty?
+          end
+
+          def to_h
+            to_hash
+          end
+
+          def to_hash
+            { minLatLng: min.to_hash, maxLatLng: max.to_hash }
+          end
+
+          def to_gapi
+            return nil if empty?
+            to_hash
+          end
         end
       end
     end

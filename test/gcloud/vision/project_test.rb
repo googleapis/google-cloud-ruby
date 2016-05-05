@@ -16,6 +16,8 @@ require "helper"
 
 describe Gcloud::Vision::Project, :mock_vision do
   let(:filepath) { "acceptance/data/face.jpg" }
+  let(:area_json) { {"minLatLng"=>{"latitude"=>37.4220041, "longitude"=>-122.0862462},
+                     "maxLatLng"=>{"latitude"=>37.4320041, "longitude"=>-122.0762462}} }
 
   it "knows the project identifier" do
     vision.must_be_kind_of Gcloud::Vision::Project
@@ -835,15 +837,17 @@ describe Gcloud::Vision::Project, :mock_vision do
         request["features"].last["type"].must_equal "TEXT_DETECTION"
         request["features"].last["maxResults"].must_equal 1
         request["imageContext"].wont_be :nil?
-        request["imageContext"]["latLongRect"].must_equal({ "longitude" => -122.0862462, "latitude" => 37.4220041 })
+        request["imageContext"]["latLongRect"].must_equal area_json
         request["imageContext"]["languageHints"].must_be :nil?
         [200, {"Content-Type" => "application/json"},
          context_response_json]
       end
 
       image = vision.image filepath
-      image.context.location.longitude = -122.0862462
-      image.context.location.latitude = 37.4220041
+      image.context.area.min.longitude = -122.0862462
+      image.context.area.min.latitude = 37.4220041
+      image.context.area.max.longitude = -122.0762462
+      image.context.area.max.latitude = 37.4320041
       analysis = vision.annotate image, faces: 10, text: true
       analysis.wont_be :nil?
       analysis.face.wont_be :nil?
@@ -862,14 +866,15 @@ describe Gcloud::Vision::Project, :mock_vision do
         request["features"].last["type"].must_equal "TEXT_DETECTION"
         request["features"].last["maxResults"].must_equal 1
         request["imageContext"].wont_be :nil?
-        request["imageContext"]["latLongRect"].must_equal({ "longitude" => -122.0862462, "latitude" => 37.4220041 })
+        request["imageContext"]["latLongRect"].must_equal area_json
         request["imageContext"]["languageHints"].must_be :nil?
         [200, {"Content-Type" => "application/json"},
          context_response_json]
       end
 
       image = vision.image filepath
-      image.context.location = { longitude: -122.0862462, latitude: 37.4220041 }
+      image.context.area.min = { longitude: -122.0862462, latitude: 37.4220041 }
+      image.context.area.max = { longitude: -122.0762462, latitude: 37.4320041 }
       analysis = vision.annotate image, faces: 10, text: true
       analysis.wont_be :nil?
       analysis.face.wont_be :nil?
@@ -914,14 +919,15 @@ describe Gcloud::Vision::Project, :mock_vision do
         request["features"].last["type"].must_equal "TEXT_DETECTION"
         request["features"].last["maxResults"].must_equal 1
         request["imageContext"].wont_be :nil?
-        request["imageContext"]["latLongRect"].must_equal({ "longitude" => -122.0862462, "latitude" => 37.4220041 })
+        request["imageContext"]["latLongRect"].must_equal area_json
         request["imageContext"]["languageHints"].must_equal ["en", "es"]
         [200, {"Content-Type" => "application/json"},
          context_response_json]
       end
 
       image = vision.image filepath
-      image.context.location = { longitude: -122.0862462, latitude: 37.4220041 }
+      image.context.area.min = { longitude: -122.0862462, latitude: 37.4220041 }
+      image.context.area.max = { longitude: -122.0762462, latitude: 37.4320041 }
       image.context.languages = ["en", "es"]
       analysis = vision.annotate image, faces: 10, text: true
       analysis.wont_be :nil?

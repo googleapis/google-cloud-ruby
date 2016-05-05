@@ -17,6 +17,8 @@ require "helper"
 describe Gcloud::Vision::Image::Context, :mock_vision do
   let(:filepath) { "acceptance/data/face.jpg" }
   let(:image)    { vision.image filepath }
+  let(:area_gapi) { {minLatLng: { latitude: 37.4220041, longitude: -122.0862462},
+                     maxLatLng: { latitude: 37.4320041, longitude: -122.0762462}} }
 
   it "is empty by default" do
     image.context.must_be :empty?
@@ -25,28 +27,32 @@ describe Gcloud::Vision::Image::Context, :mock_vision do
   end
 
   it "is can populate the location" do
-    image.context.location.latitude = 37.4220041
-    image.context.location.longitude = -122.0862462
+    image.context.area.min.longitude = -122.0862462
+    image.context.area.min.latitude = 37.4220041
+    image.context.area.max.longitude = -122.0762462
+    image.context.area.max.latitude = 37.4320041
     image.context.wont_be :empty?
 
     image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_equal({"latLongRect"=>{:latitude=>37.4220041, :longitude=>-122.0862462}})
+    image.context.to_gapi.must_equal({latLongRect: area_gapi})
   end
 
   it "is can set the location object" do
-    image.context.location = Gcloud::Vision::Location.new 37.4220041, -122.0862462
+    image.context.area.min = Gcloud::Vision::Location.new 37.4220041, -122.0862462
+    image.context.area.max = Gcloud::Vision::Location.new 37.4320041, -122.0762462
     image.context.wont_be :empty?
 
     image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_equal({"latLongRect"=>{:latitude=>37.4220041, :longitude=>-122.0862462}})
+    image.context.to_gapi.must_equal({latLongRect: area_gapi})
   end
 
   it "is can set a location with a hash" do
-    image.context.location = { longitude: -122.0862462, latitude: 37.4220041 }
+    image.context.area.min = { longitude: -122.0862462, latitude: 37.4220041 }
+    image.context.area.max = { longitude: -122.0762462, latitude: 37.4320041 }
     image.context.wont_be :empty?
 
     image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_equal({"latLongRect"=>{:latitude=>37.4220041, :longitude=>-122.0862462}})
+    image.context.to_gapi.must_equal({latLongRect: area_gapi})
   end
 
   it "is can populate language hints" do
@@ -55,7 +61,7 @@ describe Gcloud::Vision::Image::Context, :mock_vision do
     image.context.wont_be :empty?
 
     image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_equal({"languageHints"=>["en", "es"]})
+    image.context.to_gapi.must_equal({languageHints: ["en", "es"]})
   end
 
   it "is can set a language hints" do
@@ -63,15 +69,16 @@ describe Gcloud::Vision::Image::Context, :mock_vision do
     image.context.wont_be :empty?
 
     image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_equal({"languageHints"=>["en", "es"]})
+    image.context.to_gapi.must_equal({languageHints: ["en", "es"]})
   end
 
   it "is can set all the things" do
-    image.context.location = { longitude: -122.0862462, latitude: 37.4220041 }
+    image.context.area.min = { longitude: -122.0862462, latitude: 37.4220041 }
+    image.context.area.max = { longitude: -122.0762462, latitude: 37.4320041 }
     image.context.languages = ["en", "es"]
     image.context.wont_be :empty?
 
     image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_equal({"latLongRect"=>{:latitude=>37.4220041, :longitude=>-122.0862462}, "languageHints"=>["en", "es"]})
+    image.context.to_gapi.must_equal({latLongRect: area_gapi, languageHints: ["en", "es"]})
   end
 end
