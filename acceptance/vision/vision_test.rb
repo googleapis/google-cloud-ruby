@@ -30,6 +30,17 @@ describe "Vision", :vision do
       analysis.faces.count.must_equal 1
     end
 
+    it "detects faces from an image with location context" do
+      image = vision.image face_image
+      image.context.area.min.latitude = 37.4220041
+      image.context.area.min.longitude = -122.0862462
+      image.context.area.max.latitude = 37.4320041
+      image.context.area.max.longitude = -122.0762462
+      analysis = vision.annotate image, faces: 1
+
+      analysis.faces.count.must_equal 1
+    end
+
     it "detects faces from multiple images" do
       analyses = vision.annotate face_image,
                              File.open(logo_image, "rb"),
@@ -121,6 +132,20 @@ describe "Vision", :vision do
       analyses[1].text.must_be :nil?
       analyses[2].text.wont_be :nil?
     end
+
+    it "detects text from an image with context properties" do
+      image = vision.image text_image
+      image.context.languages = ["en"]
+      analysis = vision.annotate image, text: true
+
+      analysis.text.text.must_include "Google Cloud Client Library for Ruby"
+      analysis.text.locale.must_equal "en"
+      analysis.text.words.count.must_equal 28
+      analysis.text.words[0].text.must_equal "Google"
+      analysis.text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
+      analysis.text.words[27].text.must_equal "Storage."
+      analysis.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
+    end
   end
 
   describe "safe_search" do
@@ -209,6 +234,17 @@ describe "Vision", :vision do
 
         face.wont_be :nil?
       end
+
+      it "detects a single face with location context" do
+        image = vision.image face_image
+        image.context.area.min.latitude = 37.4220041
+        image.context.area.min.longitude = -122.0862462
+        image.context.area.max.latitude = 37.4320041
+        image.context.area.max.longitude = -122.0762462
+        face = image.face
+
+        face.wont_be :nil?
+      end
     end
 
     describe "landmarks" do
@@ -218,7 +254,7 @@ describe "Vision", :vision do
         landmarks.count.must_equal 1
       end
 
-      it "detects a single landmarks" do
+      it "detects a single landmark" do
         landmark = vision.image(landmark_image).landmark
 
         landmark.wont_be :nil?
@@ -246,7 +282,7 @@ describe "Vision", :vision do
         labels.count.must_equal 6
       end
 
-      it "detects a single labels" do
+      it "detects a single label" do
         label = vision.image(landmark_image).label
 
         label.wont_be :nil?
@@ -256,6 +292,20 @@ describe "Vision", :vision do
     describe "text" do
       it "detects text" do
         text = vision.image(text_image).text
+
+        text.text.must_include "Google Cloud Client Library for Ruby"
+        text.locale.must_equal "en"
+        text.words.count.must_equal 28
+        text.words[0].text.must_equal "Google"
+        text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
+        text.words[27].text.must_equal "Storage."
+        text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
+      end
+
+      it "detects text with language hints properties" do
+        image = vision.image text_image
+        image.context.languages = ["en"]
+        text = image.text
 
         text.text.must_include "Google Cloud Client Library for Ruby"
         text.locale.must_equal "en"
