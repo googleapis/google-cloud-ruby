@@ -85,15 +85,14 @@ module Gcloud
           entries = new(Array(grpc_list.entries).map do |grpc_entry|
             Entry.from_grpc grpc_entry
           end)
-          entries.instance_eval do
-            @token = grpc_list.next_page_token
-            @token = nil if @token == ""
-            @service = service
-            @projects = projects
-            @filter = filter
-            @order = order
-            @max = max
-          end
+          token = grpc_list.next_page_token
+          token = nil if token == ""
+          entries.instance_variable_set "@token", token
+          entries.instance_variable_set "@service", service
+          entries.instance_variable_set "@projects", projects
+          entries.instance_variable_set "@filter", filter
+          entries.instance_variable_set "@order", order
+          entries.instance_variable_set "@max", max
           entries
         end
 

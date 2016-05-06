@@ -104,9 +104,7 @@ describe Gcloud::Bigquery::QueryData, :mock_bigquery do
   end
 
   it "can hold a job object and not make HTTP API calls to return it" do
-    query_data.instance_eval do
-      @job = "I AM A STUBBED JOB"
-    end
+    query_data.instance_variable_set "@job", "I AM A STUBBED JOB"
 
     job = query_data.job
     job.must_equal "I AM A STUBBED JOB"

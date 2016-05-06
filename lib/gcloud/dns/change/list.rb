@@ -52,10 +52,8 @@ module Gcloud
           changes = new(Array(resp.data["changes"]).map do |gapi_object|
             Change.from_gapi gapi_object, zone
           end)
-          changes.instance_eval do
-            @token = resp.data["nextPageToken"]
-            @zone = zone
-          end
+          changes.instance_variable_set "@token", resp.data["nextPageToken"]
+          changes.instance_variable_set "@zone",  zone
           changes
         end
 

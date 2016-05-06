@@ -56,14 +56,12 @@ module Gcloud
       ##
       # @private New lazy {Topic} object without making an HTTP request.
       def self.new_lazy name, service, options = {}
-        sub = new.tap do |f|
-          f.grpc = nil
-          f.service = service
+        new.tap do |s|
+          s.grpc = nil
+          s.service = service
+          s.instance_variable_set "@name",
+                                  service.subscription_path(name, options)
         end
-        sub.instance_eval do
-          @name = service.subscription_path(name, options)
-        end
-        sub
       end
 
       ##

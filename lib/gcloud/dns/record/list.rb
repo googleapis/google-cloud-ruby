@@ -73,10 +73,8 @@ module Gcloud
           records = new(Array(resp.data["rrsets"]).map do |gapi_object|
             Record.from_gapi gapi_object
           end)
-          records.instance_eval do
-            @token = resp.data["nextPageToken"]
-            @zone = zone
-          end
+          records.instance_variable_set "@token", resp.data["nextPageToken"]
+          records.instance_variable_set "@zone",  zone
           records
         end
 

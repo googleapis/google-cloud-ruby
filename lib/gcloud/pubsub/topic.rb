@@ -58,9 +58,7 @@ module Gcloud
         new.tap do |t|
           t.grpc = nil
           t.service = service
-          t.instance_eval do
-            @name = service.topic_path(name, options)
-          end
+          t.instance_variable_set "@name", service.topic_path(name, options)
         end
       end
 

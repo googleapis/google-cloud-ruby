@@ -76,11 +76,10 @@ module Gcloud
           sinks = new(Array(grpc_list.sinks).map do |grpc|
             Sink.from_grpc grpc, service
           end)
-          sinks.instance_eval do
-            @token = grpc_list.next_page_token
-            @token = nil if @token == ""
-            @service = service
-          end
+          token = grpc_list.next_page_token
+          token = nil if token == ""
+          sinks.instance_variable_set "@token", token
+          sinks.instance_variable_set "@service", service
           sinks
         end
 

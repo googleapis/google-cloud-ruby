@@ -41,10 +41,8 @@ module Gcloud
           datasets = List.new(Array(resp.data["datasets"]).map do |gapi_object|
             Dataset.from_gapi gapi_object, conn
           end)
-          datasets.instance_eval do
-            @token = resp.data["nextPageToken"]
-            @etag = resp.data["etag"]
-          end
+          datasets.instance_variable_set "@token", resp.data["nextPageToken"]
+          datasets.instance_variable_set "@etag",  resp.data["etag"]
           datasets
         end
       end

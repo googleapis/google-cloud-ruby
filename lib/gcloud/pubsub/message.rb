@@ -86,9 +86,7 @@ module Gcloud
       # @private New Message from a Google::Pubsub::V1::PubsubMessage object.
       def self.from_grpc grpc
         new.tap do |m|
-          m.instance_eval do
-            @grpc = grpc
-          end
+          m.instance_variable_set "@grpc", grpc
         end
       end
     end
