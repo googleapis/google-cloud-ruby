@@ -44,14 +44,19 @@ module Gcloud
         @gapi = nil
       end
 
-      # The Analysis::Face results containing the results of face detection.
+      ##
+      # The results of face detection.
+      #
+      # @return [Face]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, faces: 1
+      #
+      #   image = vision.image "./acceptance/data/face.jpg"
+      #   analysis = vision.detect image, faces: 10
       #   analysis.faces.count #=> 1
       #   face = analysis.faces.first
       #
@@ -68,7 +73,8 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, faces: 1
+      #   image = vision.image "./acceptance/data/face.jpg"
+      #   analysis = vision.annotate image, faces: 1
       #   face = analysis.face
       #
       def face

@@ -20,6 +20,22 @@ module Gcloud
     class Analysis
       ##
       # # Face
+      #
+      # The results of face detection.
+      #
+      # See {Analysis#faces} and {Analysis#face}.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   image = vision.image "./acceptance/data/face.jpg"
+      #
+      #   face = image.face
+      #   face.confidence #=> 0.86162376
+      #
       class Face
         ##
         # @private The FaceAnnotation Google API Client object.
@@ -33,50 +49,77 @@ module Gcloud
 
         ##
         # The angles of the face, including roll, yaw, and pitch.
+        #
+        # @return [Angles]
+        #
         def angles
           @angles ||= Angles.from_gapi @gapi
         end
 
         ##
-        # The Bounds of the face, including the polygons for the head and face.
+        # The bounds of the face, including the polygons for the head and face.
+        #
+        # @return [Bounds]
+        #
         def bounds
           @bounds ||= Bounds.from_gapi @gapi
         end
 
         ##
-        # The Features of the face, including the points for the eyes, ears,
+        # The landmarks of the face, including the points for the eyes, ears,
         # nose and mouth.
+        #
+        # @return [Features]
+        #
         def features
           @features ||= Features.from_gapi @gapi
         end
 
         ##
-        # The Likelihood of the facial detection, including joy, sorrow, anger,
+        # The likelihood of the facial detection, including joy, sorrow, anger,
         # surprise, under_exposed, blurred, and headwear.
+        #
+        # @return [Likelihood]
+        #
         def likelihood
           @likelihood ||= Likelihood.from_gapi @gapi
         end
 
         ##
         # The confidence of the facial detection. Range [0, 1].
+        #
+        # @return [Float]
+        #
         def confidence
           @gapi["detectionConfidence"]
         end
 
+        ##
+        # Deeply converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_h
           to_hash
         end
 
+        ##
+        # Deeply converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_hash
           { angles: angles.to_h, bounds: bounds.to_h, features: features.to_h,
             likelihood: likelihood.to_h }
         end
 
+        # @private
         def to_s
           # Keep console output low by not showing all sub-objects.
           "(angles, bounds, features, likelihood)"
         end
 
+        # @private
         def inspect
           "#<#{self.class.name} #{self}>"
         end
@@ -89,6 +132,24 @@ module Gcloud
 
         ##
         # # Angles
+        #
+        # The orientation of the face relative to the image.
+        #
+        # See {Face}.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   vision = gcloud.vision
+        #
+        #   image = vision.image "./acceptance/data/face.jpg"
+        #   face = image.face
+        #
+        #   face.angles.roll #=> -5.1492119
+        #   face.angles.yaw #=> -4.0695682
+        #   face.angles.pitch #=> -13.083284
+        #
         class Angles
           ##
           # @private The FaceAnnotation Google API Client object.
@@ -103,49 +164,80 @@ module Gcloud
           ##
           # Roll angle. Indicates the amount of clockwise/anti-clockwise
           # rotation of the face relative to the image vertical, about the axis
-          # perpendicular to the face. Range [-180,180].
+          # perpendicular to the face.
+          #
+          # @return [Float] in the range [-180,180]
+          #
           def roll
             @gapi["rollAngle"]
           end
 
           ##
-          # Yaw angle. Indicates the leftward/rightward angle that the face is
-          # pointing, relative to the vertical plane perpendicular to the image.
-          # Range [-180,180].
+          # Yaw (pan) angle. Indicates the leftward/rightward angle that the
+          # face is pointing, relative to the vertical plane perpendicular to
+          # the image.
+          #
+          # @return [Float] in the range [-180,180]
+          #
           def yaw
             @gapi["panAngle"]
           end
           alias_method :pan, :yaw
 
           ##
-          # Pitch angle. Indicates the upwards/downwards angle that the face is
-          # pointing relative to the image's horizontal plane. Range [-180,180].
+          # Pitch (tilt) angle. Indicates the upwards/downwards angle that the
+          # face is pointing relative to the image's horizontal plane.
+          #
+          # @return [Float] in the range [-180,180]
+          #
           def pitch
             @gapi["tiltAngle"]
           end
           alias_method :tilt, :pitch
 
+          ##
+          # Returns the object's property values as an array.
+          #
+          # @return [Array]
+          #
           def to_a
             to_ary
           end
 
+          ##
+          # Returns the object's property values as an array.
+          #
+          # @return [Array]
+          #
           def to_ary
             [roll, yaw, pitch]
           end
 
+          ##
+          # Converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_h
             to_hash
           end
 
+          ##
+          # Converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_hash
             { roll: roll, yaw: yaw, pitch: pitch }
           end
 
+          # @private
           def to_s
             format "(roll: %s, yaw: %s, pitch: %s)", roll.inspect, yaw.inspect,
                    pitch.inspect
           end
 
+          # @private
           def inspect
             "#<Angles #{self}>"
           end
@@ -159,6 +251,23 @@ module Gcloud
 
         ##
         # # Bounds
+        #
+        # Bounding polygons around the face.
+        #
+        # See {Face}.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   vision = gcloud.vision
+        #
+        #   image = vision.image "./acceptance/data/face.jpg"
+        #   face = image.face
+        #
+        #   face.bounds.face.count #=> 4
+        #   face.bounds.face.first #=> #<Vertex (x: 153, y: 34)>
+        #
         class Bounds
           ##
           # @private The FaceAnnotation Google API Client object.
@@ -198,26 +307,48 @@ module Gcloud
             end
           end
 
+          ##
+          # Returns the object's property values as an array.
+          #
+          # @return [Array]
+          #
           def to_a
             to_ary
           end
 
+          ##
+          # Returns the object's property values as an array.
+          #
+          # @return [Array]
+          #
           def to_ary
             [head.map(&:to_a), face.map(&:to_a)]
           end
 
+          ##
+          # Deeply converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_h
             to_hash
           end
 
+          ##
+          # Deeply converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_hash
             { head: head.map(&:to_h), face: face.map(&:to_h) }
           end
 
+          # @private
           def to_s
             "(head: #{head.inspect}, face: #{face.inspect})"
           end
 
+          # @private
           def inspect
             "#<Bounds #{self}>"
           end
@@ -231,23 +362,76 @@ module Gcloud
 
         ##
         # # Features
+        #
+        # Represents facial landmarks or features. Left and right are defined
+        # from the vantage of the viewer of the image, without considering
+        # mirror projections typical of photos. So `face.features.eyes.left`
+        # typically is the person's right eye.
+        #
+        # See {Face}.
+        #
+        # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
+        #   images.annotate Type
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   vision = gcloud.vision
+        #
+        #   image = vision.image "./acceptance/data/face.jpg"
+        #   face = image.face
+        #
+        #   face.features.to_h.count #=> 9
+        #   face.features.eyes.left.pupil
+        #   #=> #<Landmark (x: 190.41544, y: 84.4557, z: -1.3682901)>
+        #   face.features.chin.center
+        #   #=> #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
+        #
         class Features
           ##
           # @private The FaceAnnotation Google API Client object.
           attr_accessor :gapi
 
           ##
-          # @private Creates a new Angles instance.
+          # @private Creates a new Features instance.
           def initialize
             @gapi = {}
           end
 
           ##
-          # The confidence of the facial features detection. Range [0, 1].
+          # The confidence of the facial landmarks detection.
+          #
+          # @return [Float] in the range [0,1]
+          #
           def confidence
             @gapi["landmarkingConfidence"]
           end
 
+          ##
+          # Returns the facial landmark for the provided type code.
+          #
+          # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
+          #   images.annotate Type
+          #
+          # @param [String, Symbol] landmark_type an `images.annotate` type code
+          #    from the [Vision
+          #   API](https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1)
+          #
+          # @return [Landmark]
+          #
+          # @example
+          #   require "gcloud"
+          #
+          #   gcloud = Gcloud.new
+          #   vision = gcloud.vision
+          #
+          #   image = vision.image "./acceptance/data/face.jpg"
+          #   face = image.face
+          #
+          #   face.features["RIGHT_EAR_TRAGION"]
+          #   #=> #<Landmark (x: 303.81198, y: 88.5782, z: 77.719193)>
+          #
           def [] landmark_type
             landmark = Array(@gapi["landmarks"]).detect do |l|
               l["type"] == landmark_type
@@ -256,16 +440,31 @@ module Gcloud
             Landmark.from_gapi landmark
           end
 
+          ##
+          # The landmarks of the chin.
+          #
+          # @return [Chin]
+          #
           def chin
             @chin ||= Chin.new self["CHIN_LEFT_GONION"], self["CHIN_GNATHION"],
                                self["CHIN_RIGHT_GONION"]
           end
 
+          ##
+          # The landmarks of the ears.
+          #
+          # @return [Ears]
+          #
           def ears
             @ears ||= Ears.new self["LEFT_EAR_TRAGION"],
                                self["RIGHT_EAR_TRAGION"]
           end
 
+          ##
+          # The landmarks of the eyebrows.
+          #
+          # @return [Eyebrows]
+          #
           def eyebrows
             @eyebrows ||= begin
               left = Eyebrow.new self["LEFT_OF_LEFT_EYEBROW"],
@@ -278,6 +477,11 @@ module Gcloud
             end
           end
 
+          ##
+          # The landmarks of the eyes.
+          #
+          # @return [Eyes]
+          #
           def eyes
             @eyes ||= begin
               left = Eye.new self["LEFT_EYE_LEFT_CORNER"],
@@ -294,19 +498,39 @@ module Gcloud
             end
           end
 
+          ##
+          # The landmark for the forehead glabella.
+          #
+          # @return [Landmark]
+          #
           def forehead
             @forehead ||= self["FOREHEAD_GLABELLA"]
           end
 
+          ##
+          # The landmarks of the lips.
+          #
+          # @return [Lips]
+          #
           def lips
             @lips ||= Lips.new self["UPPER_LIP"], self["LOWER_LIP"]
           end
 
+          ##
+          # The landmarks of the mouth.
+          #
+          # @return [Mouth]
+          #
           def mouth
             @mouth ||= Mouth.new self["MOUTH_LEFT"], self["MOUTH_CENTER"],
                                  self["MOUTH_RIGHT"]
           end
 
+          ##
+          # The landmarks of the nose.
+          #
+          # @return [Nose]
+          #
           def nose
             @nose ||= Nose.new self["NOSE_BOTTOM_LEFT"],
                                self["NOSE_BOTTOM_CENTER"], self["NOSE_TIP"],
@@ -314,22 +538,34 @@ module Gcloud
                                self["NOSE_BOTTOM_RIGHT"]
           end
 
+          ##
+          # Deeply converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_h
             to_hash
           end
 
+          ##
+          # Deeply converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_hash
             { confidence: confidence, chin: chin.to_h, ears: ears.to_h,
               eyebrows: eyebrows.to_h, eyes: eyes.to_h, forehead: forehead.to_h,
               lips: lips.to_h, mouth: mouth.to_h, nose: nose.to_h }
           end
 
+          # @private
           def to_s
             # Keep console output low by not showing all sub-objects.
             "(confidence, chin, ears, eyebrows, eyes, " \
               "forehead, lips, mouth, nose)"
           end
 
+          # @private
           def inspect
             "#<Features #{self}>"
           end
@@ -341,64 +577,137 @@ module Gcloud
             new.tap { |f| f.instance_variable_set :@gapi, gapi }
           end
 
+          ##
+          # # Landmark
+          #
+          # A face-specific landmark (for example, a face feature). Landmark
+          # positions may fall outside the bounds of the image when the face is
+          # near one or more edges of the image. Therefore it is NOT guaranteed
+          # that `0 <= x < width` or `0 <= y < height`.
+          #
+          # See {Features} and {Face}.
+          #
+          # @example
+          #   require "gcloud"
+          #
+          #   gcloud = Gcloud.new
+          #   vision = gcloud.vision
+          #
+          #   image = vision.image "./acceptance/data/face.jpg"
+          #   face = image.face
+          #
+          #   face.features.to_h.count #=> 9
+          #   face.features.eyes.left.pupil
+          #   #=> #<Landmark (x: 190.41544, y: 84.4557, z: -1.3682901)>
+          #   face.features.chin.center
+          #   #=> #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
+          #
           class Landmark
             ##
             # @private The Landmark Google API Client object.
             attr_accessor :gapi
 
             ##
-            # @private Creates a new Angles instance.
+            # @private Creates a new Landmark instance.
             def initialize
               @gapi = {}
             end
 
             ##
-            # Face landmark type.
+            # The landmark type code.
+            #
+            # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
+            #   images.annotate Type
+            #
+            # @return [String]
+            #
+            # @example
+            #   require "gcloud"
+            #
+            #   gcloud = Gcloud.new
+            #   vision = gcloud.vision
+            #
+            #   image = vision.image "./acceptance/data/face.jpg"
+            #   face = image.face
+            #
+            #   face.features.forehead.type #=> "FOREHEAD_GLABELLA"
+            #
             def type
               @gapi["type"]
             end
 
             ##
-            # X coordinate.
+            # The X (horizontal) coordinate.
+            #
+            # @return [Float]
+            #
             def x
               return nil unless @gapi["position"]
               @gapi["position"]["x"]
             end
 
             ##
-            # Y coordinate.
+            # The Y (vertical) coordinate.
+            #
+            # @return [Float]
+            #
             def y
               return nil unless @gapi["position"]
               @gapi["position"]["y"]
             end
 
             ##
-            # Z coordinate (or depth).
+            # The Z (depth) coordinate.
+            #
+            # @return [Float]
+            #
             def z
               return nil unless @gapi["position"]
               @gapi["position"]["z"]
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_a
               to_ary
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_ary
               [x, y, z]
             end
 
+            ##
+            # Converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_h
               to_hash
             end
 
+            ##
+            # Converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_hash
               { x: x, y: y, z: z }
             end
 
+            # @private
             def to_s
               "(x: #{x.inspect}, y: #{y.inspect}, z: #{z.inspect})"
             end
 
+            # @private
             def inspect
               "#<Landmark #{self}>"
             end
@@ -413,7 +722,36 @@ module Gcloud
 
           ##
           # # Chin
+          #
+          # The landmarks of the chin in the features of a face.
+          #
+          # Left and right are defined from the vantage of the viewer of the
+          # image, without considering mirror projections typical of photos. So
+          # `face.features.eyes.left` typically is the person's right eye.
+          #
+          # See {Features} and {Face}.
+          #
+          # @example
+          #   require "gcloud"
+          #
+          #   gcloud = Gcloud.new
+          #   vision = gcloud.vision
+          #
+          #   image = vision.image "./acceptance/data/face.jpg"
+          #   face = image.face
+          #
+          #   chin = face.features.chin
+          #
+          #   chin.center
+          #   #=> #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
+          #
           class Chin
+            # @!attribute left
+            #   @return [Landmark] chin left gonion
+            # @!attribute center
+            #   @return [Landmark] chin gnathion
+            # @!attribute right
+            #   @return [Landmark] chin right gonion
             attr_accessor :left, :center, :right
 
             def initialize left, center, right
@@ -422,27 +760,49 @@ module Gcloud
               @right  = right
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_a
               to_ary
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_ary
               [left, center, right]
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_h
               to_hash
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_hash
               { left: left.to_h, center: center.to_h, right: right.to_h }
             end
 
+            # @private
             def to_s
               format "(left: %s, center: %s, right: %s)", left.inspect,
                      center.inspect, right.inspect
             end
 
+            # @private
             def inspect
               "#<Chin #{self}>"
             end
@@ -450,7 +810,36 @@ module Gcloud
 
           ##
           # # Ears
+          #
+          # The landmarks for the ear tragions.
+          #
+          # Left and right are defined from the vantage of the viewer of the
+          # image, without considering mirror projections typical of photos. So
+          # `face.features.eyes.left` typically is the person's right eye.
+          #
+          # See {Features} and {Face}.
+          #
+          # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
+          #   images.annotate Type
+          #
+          # @example
+          #   require "gcloud"
+          #
+          #   gcloud = Gcloud.new
+          #   vision = gcloud.vision
+          #
+          #   image = vision.image "./acceptance/data/face.jpg"
+          #   face = image.face
+          #
+          #   ears = face.features.ears
+          #   ears.right
+          #   #=> #<Landmark (x: 303.81198, y: 88.5782, z: 77.719193)>
+          #
           class Ears
+            # @!attribute left
+            #   @return [Landmark] left ear tragion
+            # @!attribute right
+            #   @return [Landmark] right ear tragion
             attr_accessor :left, :right
 
             def initialize left, right
@@ -458,26 +847,48 @@ module Gcloud
               @right = right
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_a
               to_ary
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_ary
               [left, right]
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_h
               to_hash
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_hash
               { left: left.to_h, right: right.to_h }
             end
 
+            # @private
             def to_s
               "(left: #{left.inspect}, right: #{right.inspect})"
             end
 
+            # @private
             def inspect
               "#<Ears #{self}>"
             end
@@ -485,7 +896,38 @@ module Gcloud
 
           ##
           # # Eyebrows
+          #
+          # The landmarks of the eyebrows in the features of a face.
+          #
+          # Left and right are defined from the vantage of the viewer of the
+          # image, without considering mirror projections typical of photos. So
+          # `face.features.eyes.left` typically is the person's right eye.
+          #
+          # See {Features} and {Face}.
+          #
+          # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
+          #   images.annotate Type
+          #
+          # @example
+          #   require "gcloud"
+          #
+          #   gcloud = Gcloud.new
+          #   vision = gcloud.vision
+          #
+          #   image = vision.image "./acceptance/data/face.jpg"
+          #   face = image.face
+          #
+          #   eyebrows = face.features.eyebrows
+          #
+          #   right_eyebrow = eyebrows.right
+          #   right_eyebrow.top
+          #   #=> #<Landmark (x: 256.3194, y: 58.222664, z: -17.299419)>
+          #
           class Eyebrows
+            # @!attribute left
+            #   @return [Eyebrow] the left eyebrow
+            # @!attribute right
+            #   @return [Eyebrow] the right eyebrow
             attr_accessor :left, :right
 
             def initialize left, right
@@ -493,26 +935,48 @@ module Gcloud
               @right = right
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_a
               to_ary
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_ary
               [left, right]
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_h
               to_hash
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_hash
               { left: left.to_h, right: right.to_h }
             end
 
+            # @private
             def to_s
               "(left: #{left.inspect}, right: #{right.inspect})"
             end
 
+            # @private
             def inspect
               "#<Eyebrows #{self}>"
             end
@@ -520,7 +984,40 @@ module Gcloud
 
           ##
           # # Eyebrow
+          #
+          # The landmarks of an eyebrow in the features of a face.
+          #
+          # Left and right are defined from the vantage of the viewer of the
+          # image, without considering mirror projections typical of photos. So
+          # `face.features.eyes.left` typically is the person's right eye.
+          #
+          # See {Eyebrows}, {Features} and {Face}.
+          #
+          # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
+          #   images.annotate Type
+          #
+          # @example
+          #   require "gcloud"
+          #
+          #   gcloud = Gcloud.new
+          #   vision = gcloud.vision
+          #
+          #   image = vision.image "./acceptance/data/face.jpg"
+          #   face = image.face
+          #
+          #   eyebrows = face.features.eyebrows
+          #
+          #   right_eyebrow = eyebrows.right
+          #   right_eyebrow.top
+          #   #=> #<Landmark (x: 256.3194, y: 58.222664, z: -17.299419)>
+          #
           class Eyebrow
+            # @!attribute left
+            #   @return [Landmark] eyebrow left
+            # @!attribute top
+            #   @return [Landmark] eyebrow, upper midpoint
+            # @!attribute right
+            #   @return [Landmark] eyebrow right
             attr_accessor :left, :top, :right
 
             def initialize left, top, right
@@ -529,27 +1026,49 @@ module Gcloud
               @right = right
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_a
               to_ary
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_ary
               [left, top, right]
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_h
               to_hash
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_hash
               { left: left.to_h, top: top.to_h, right: right.to_h }
             end
 
+            # @private
             def to_s
               format "(left: %s, top: %s, right: %s)", left.inspect,
                      top.inspect, right.inspect
             end
 
+            # @private
             def inspect
               "#<Eyebrow #{self}>"
             end
@@ -557,7 +1076,38 @@ module Gcloud
 
           ##
           # # Eyes
+          #
+          # The landmarks of the eyes in the features of a face.
+          #
+          # Left and right are defined from the vantage of the viewer of the
+          # image, without considering mirror projections typical of photos. So
+          # `face.features.eyes.left` typically is the person's right eye.
+          #
+          # See {Features} and {Face}.
+          #
+          # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
+          #   images.annotate Type
+          #
+          # @example
+          #   require "gcloud"
+          #
+          #   gcloud = Gcloud.new
+          #   vision = gcloud.vision
+          #
+          #   image = vision.image "./acceptance/data/face.jpg"
+          #   face = image.face
+          #
+          #   eyes = face.features.eyes
+          #
+          #   right_eye = eyes.right
+          #   right_eye.pupil
+          #   #=> #<Landmark (x: 256.63464, y: 79.641411, z: -6.0731235)>
+          #
           class Eyes
+            # @!attribute left
+            #   @return [Eye] the left eye
+            # @!attribute right
+            #   @return [Eye] the right eye
             attr_accessor :left, :right
 
             def initialize left, right
@@ -565,26 +1115,48 @@ module Gcloud
               @right = right
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_a
               to_ary
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_ary
               [left, right]
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_h
               to_hash
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_hash
               { left: left.to_h, right: right.to_h }
             end
 
+            # @private
             def to_s
               "(left: #{left.inspect}, right: #{right.inspect})"
             end
 
+            # @private
             def inspect
               "#<Eyes #{self}>"
             end
@@ -592,7 +1164,45 @@ module Gcloud
 
           ##
           # # Eye
+          #
+          # The landmarks of an eye in the features of a face.
+          #
+          # Left and right are defined from the vantage of the viewer of the
+          # image, without considering mirror projections typical of photos. So
+          # `face.features.eyes.left` typically is the person's right eye.
+          #
+          # See {Eyes}, {Features} and {Face}.
+          #
+          # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
+          #   images.annotate Type
+          #
+          # @example
+          #   require "gcloud"
+          #
+          #   gcloud = Gcloud.new
+          #   vision = gcloud.vision
+          #
+          #   image = vision.image "./acceptance/data/face.jpg"
+          #   face = image.face
+          #
+          #   right_eye = face.features.eyes.right
+          #
+          #   right_eye.pupil
+          #   #=> #<Landmark (x: 256.63464, y: 79.641411, z: -6.0731235)>
+          #
           class Eye
+            # @!attribute left
+            #   @return [Landmark] eye, left corner
+            # @!attribute bottom
+            #   @return [Landmark] eye, bottom boundary
+            # @!attribute center
+            #   @return [Landmark] eye center
+            # @!attribute pupil
+            #   @return [Landmark] eye pupil
+            # @!attribute top
+            #   @return [Landmark] eye, top boundary
+            # @!attribute right
+            #   @return [Landmark] eye, right corner
             attr_accessor :left, :bottom, :center, :pupil, :top, :right
 
             def initialize left, bottom, center, pupil, top, right
@@ -604,23 +1214,44 @@ module Gcloud
               @right  = right
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_a
               to_ary
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_ary
               [left, top, right]
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_h
               to_hash
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_hash
               { left: left.to_h, bottom: bottom.to_h, center: center.to_h,
                 pupil: pupil.to_h, top: top.to_h, right: right.to_h }
             end
 
+            # @private
             def to_s
               tmplt = "(left: %s, bottom: %s, center: %s, " \
                         "pupil: %s, top: %s, right: %s)"
@@ -628,6 +1259,7 @@ module Gcloud
                      pupil.inspect, top.inspect, right.inspect
             end
 
+            # @private
             def inspect
               "#<Eye #{self}>"
             end
@@ -635,7 +1267,33 @@ module Gcloud
 
           ##
           # # Lips
+          #
+          # The landmarks of the lips in the features of a face.
+          #
+          # See {Features} and {Face}.
+          #
+          # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
+          #   images.annotate Type
+          #
+          # @example
+          #   require "gcloud"
+          #
+          #   gcloud = Gcloud.new
+          #   vision = gcloud.vision
+          #
+          #   image = vision.image "./acceptance/data/face.jpg"
+          #   face = image.face
+          #
+          #   lips = face.features.lips
+          #
+          #   lips.top
+          #   #=> #<Landmark (x: 228.54768, y: 143.2952, z: -5.6550336)>
+          #
           class Lips
+            # @!attribute top
+            #   @return [Landmark] upper lip
+            # @!attribute bottom
+            #   @return [Landmark] lower lip
             attr_accessor :top, :bottom
 
             alias_method :upper, :top
@@ -646,26 +1304,48 @@ module Gcloud
               @bottom = bottom
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_a
               to_ary
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_ary
               [top, bottom]
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_h
               to_hash
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_hash
               { top: top.to_h, bottom: bottom.to_h }
             end
 
+            # @private
             def to_s
               "(top: #{top.inspect}, bottom: #{bottom.inspect})"
             end
 
+            # @private
             def inspect
               "#<Lips #{self}>"
             end
@@ -673,7 +1353,39 @@ module Gcloud
 
           ##
           # # Mouth
+          #
+          # The landmarks of the mouth in the features of a face.
+          #
+          # Left and right are defined from the vantage of the viewer of the
+          # image, without considering mirror projections typical of photos. So
+          # `face.features.eyes.left` typically is the person's right eye.
+          #
+          # See {Features} and {Face}.
+          #
+          # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
+          #   images.annotate Type
+          #
+          # @example
+          #   require "gcloud"
+          #
+          #   gcloud = Gcloud.new
+          #   vision = gcloud.vision
+          #
+          #   image = vision.image "./acceptance/data/face.jpg"
+          #   face = image.face
+          #
+          #   mouth = face.features.mouth
+          #
+          #   mouth.center
+          #   #=> #<Landmark (x: 228.53499, y: 150.29066, z: 1.1069832)>
+          #
           class Mouth
+            # @!attribute left
+            #   @return [Landmark] mouth left
+            # @!attribute center
+            #   @return [Landmark] mouth center
+            # @!attribute right
+            #   @return [Landmark] mouth right
             attr_accessor :left, :center, :right
 
             def initialize left, center, right
@@ -682,27 +1394,49 @@ module Gcloud
               @right  = right
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_a
               to_ary
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_ary
               [left, center, right]
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_h
               to_hash
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_hash
               { left: left.to_h, center: center.to_h, right: right.to_h }
             end
 
+            # @private
             def to_s
               format "(left: %s, center: %s, right: %s)", left.inspect,
                      center.inspect, right.inspect
             end
 
+            # @private
             def inspect
               "#<Mouth #{self}>"
             end
@@ -710,7 +1444,43 @@ module Gcloud
 
           ##
           # # Nose
+          #
+          # The landmarks of the nose in the features of a face.
+          #
+          # Left and right are defined from the vantage of the viewer of the
+          # image, without considering mirror projections typical of photos. So
+          # `face.features.eyes.left` typically is the person's right eye.
+          #
+          # See {Features} and {Face}.
+          #
+          # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
+          #   images.annotate Type
+          #
+          # @example
+          #   require "gcloud"
+          #
+          #   gcloud = Gcloud.new
+          #   vision = gcloud.vision
+          #
+          #   image = vision.image "./acceptance/data/face.jpg"
+          #   face = image.face
+          #
+          #   nose = face.features.nose
+          #
+          #   nose.tip
+          #   #=> #<Landmark (x: 225.23511, y: 122.47372, z: -25.817825)>
+          #
           class Nose
+            # @!attribute left
+            #   @return [Landmark] nose, bottom left
+            # @!attribute bottom
+            #   @return [Landmark] nose, bottom center
+            # @!attribute tip
+            #   @return [Landmark] nose tip
+            # @!attribute top
+            #   @return [Landmark] midpoint between eyes
+            # @!attribute right
+            #   @return [Landmark] nose, bottom right
             attr_accessor :left, :bottom, :tip, :top, :right
 
             def initialize left, bottom, tip, top, right
@@ -721,23 +1491,44 @@ module Gcloud
               @right  = right
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_a
               to_ary
             end
 
+            ##
+            # Returns the object's property values as an array.
+            #
+            # @return [Array]
+            #
             def to_ary
               [left, bottom, tip, top, right]
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_h
               to_hash
             end
 
+            ##
+            # Deeply converts object to a hash. All keys will be symbolized.
+            #
+            # @return [Hash]
+            #
             def to_hash
               { left: left.to_h, bottom: bottom.to_h, tip: tip.to_h,
                 top: top.to_h, right: right.to_h }
             end
 
+            # @private
             def to_s
               tmplt = "(left: %s, bottom: %s, tip: %s, " \
                         "top: %s, right: %s)"
@@ -745,6 +1536,7 @@ module Gcloud
                      top.inspect, right.inspect
             end
 
+            # @private
             def inspect
               "#<Nose #{self}>"
             end
@@ -753,6 +1545,29 @@ module Gcloud
 
         ##
         # # Likelihood
+        #
+        # A bucketized representation of likelihood of various separate facial
+        # characteristics, meant to give highly stable results across model
+        # upgrades.
+        #
+        # See {Face}.
+        #
+        # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Likelihood
+        #   images.annotate Likelihood
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   vision = gcloud.vision
+        #
+        #   image = vision.image "./acceptance/data/face.jpg"
+        #   face = image.face
+        #
+        #   face.likelihood.to_h.count #=> 7
+        #   face.likelihood.sorrow? #=> false
+        #   face.likelihood.sorrow #=> "VERY_UNLIKELY"
+        #
         class Likelihood
           POSITIVE_RATINGS = %w(POSSIBLE LIKELY VERY_LIKELY)
 
@@ -777,7 +1592,7 @@ module Gcloud
           # Joy likelihood. Returns `true` if {#joy} is `POSSIBLE`, `LIKELY`, or
           # `VERY_LIKELY`.
           def joy?
-            POSITIVE_RATINGS.include? @gapi["joyLikelihood"]
+            POSITIVE_RATINGS.include? joy
           end
 
           ##
@@ -788,8 +1603,8 @@ module Gcloud
           end
 
           ##
-          # Sorrow likelihood. Returns `true` if {#joy} is `POSSIBLE`, `LIKELY`,
-          # or `VERY_LIKELY`.
+          # Sorrow likelihood. Returns `true` if {#sorrow} is `POSSIBLE`,
+          # `LIKELY`, or `VERY_LIKELY`.
           def sorrow?
             POSITIVE_RATINGS.include? sorrow
           end
@@ -802,8 +1617,8 @@ module Gcloud
           end
 
           ##
-          # Anger likelihood. Returns `true` if {#joy} is `POSSIBLE`, `LIKELY`,
-          # or `VERY_LIKELY`.
+          # Anger likelihood. Returns `true` if {#anger} is `POSSIBLE`,
+          # `LIKELY`, or `VERY_LIKELY`.
           def anger?
             POSITIVE_RATINGS.include? anger
           end
@@ -816,7 +1631,7 @@ module Gcloud
           end
 
           ##
-          # Surprise likelihood. Returns `true` if {#joy} is `POSSIBLE`,
+          # Surprise likelihood. Returns `true` if {#surprise} is `POSSIBLE`,
           # `LIKELY`, or `VERY_LIKELY`.
           def surprise?
             POSITIVE_RATINGS.include? surprise
@@ -831,8 +1646,8 @@ module Gcloud
           end
 
           ##
-          # Under Exposed likelihood. Returns `true` if {#joy} is `POSSIBLE`,
-          # `LIKELY`, or `VERY_LIKELY`.
+          # Under Exposed likelihood. Returns `true` if {#under_exposed} is
+          # `POSSIBLE`, `LIKELY`, or `VERY_LIKELY`.
           def under_exposed?
             POSITIVE_RATINGS.include? under_exposed
           end
@@ -845,7 +1660,7 @@ module Gcloud
           end
 
           ##
-          # Blurred likelihood. Returns `true` if {#joy} is `POSSIBLE`,
+          # Blurred likelihood. Returns `true` if {#blurred} is `POSSIBLE`,
           # `LIKELY`, or `VERY_LIKELY`.
           def blurred?
             POSITIVE_RATINGS.include? blurred
@@ -859,22 +1674,33 @@ module Gcloud
           end
 
           ##
-          # Headwear likelihood. Returns `true` if {#joy} is `POSSIBLE`,
+          # Headwear likelihood. Returns `true` if {#headwear} is `POSSIBLE`,
           # `LIKELY`, or `VERY_LIKELY`.
           def headwear?
             POSITIVE_RATINGS.include? headwear
           end
 
+          ##
+          # Converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_h
             to_hash
           end
 
+          ##
+          # Converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_hash
             { joy: joy?, sorrow: sorrow?, anger: anger?, surprise: surprise?,
               under_exposed: under_exposed?, blurred: blurred?,
               headwear: headwear? }
           end
 
+          # @private
           def to_s
             tmplt = "(joy?: %s, sorrow?: %s, anger?: %s, " \
                       "surprise?: %s, under_exposed?: %s, blurred?: %s, " \
@@ -884,6 +1710,7 @@ module Gcloud
                    headwear?.inspect
           end
 
+          # @private
           def inspect
             "#<Likelihood #{self}>"
           end
