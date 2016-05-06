@@ -228,11 +228,11 @@ module Gcloud
           e.insert_id = grpc.insert_id
           e.labels = map_to_hash(grpc.labels)
           e.payload = extract_payload(grpc)
-          e.instance_eval do
-            @resource = Resource.from_grpc grpc.resource
-            @http_request = HttpRequest.from_grpc grpc.http_request
-            @operation = Operation.from_grpc grpc.operation
-          end
+          e.instance_variable_set "@resource", Resource.from_grpc(grpc.resource)
+          e.instance_variable_set "@http_request",
+                                  HttpRequest.from_grpc(grpc.http_request)
+          e.instance_variable_set "@operation",
+                                  Operation.from_grpc(grpc.operation)
         end
       end
 

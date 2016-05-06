@@ -44,11 +44,9 @@ module Gcloud
           tables = List.new(Array(resp.data["tables"]).map do |gapi_object|
             Table.from_gapi gapi_object, conn
           end)
-          tables.instance_eval do
-            @token = resp.data["nextPageToken"]
-            @etag = resp.data["etag"]
-            @total = resp.data["totalItems"]
-          end
+          tables.instance_variable_set "@token", resp.data["nextPageToken"]
+          tables.instance_variable_set "@etag",  resp.data["etag"]
+          tables.instance_variable_set "@total", resp.data["totalItems"]
           tables
         end
       end

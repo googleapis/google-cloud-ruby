@@ -44,11 +44,9 @@ module Gcloud
           jobs = List.new(Array(resp.data["jobs"]).map do |gapi_object|
             Job.from_gapi gapi_object, conn
           end)
-          jobs.instance_eval do
-            @token = resp.data["nextPageToken"]
-            @etag = resp.data["etag"]
-            @total = resp.data["totalItems"]
-          end
+          jobs.instance_variable_set "@token", resp.data["nextPageToken"]
+          jobs.instance_variable_set "@etag",  resp.data["etag"]
+          jobs.instance_variable_set "@total", resp.data["totalItems"]
           jobs
         end
       end

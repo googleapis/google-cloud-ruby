@@ -76,11 +76,10 @@ module Gcloud
           metrics = new(Array(grpc_list.metrics).map do |grpc_metric|
             Metric.from_grpc grpc_metric, service
           end)
-          metrics.instance_eval do
-            @token = grpc_list.next_page_token
-            @token = nil if @token == ""
-            @service = service
-          end
+          token = grpc_list.next_page_token
+          token = nil if token == ""
+          metrics.instance_variable_set "@token", token
+          metrics.instance_variable_set "@service", service
           metrics
         end
 

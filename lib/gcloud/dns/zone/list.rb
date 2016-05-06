@@ -57,10 +57,8 @@ module Gcloud
           zones = new(Array(resp.data["managedZones"]).map do |gapi_object|
             Zone.from_gapi gapi_object, conn
           end)
-          zones.instance_eval do
-            @token = resp.data["nextPageToken"]
-            @connection = conn
-          end
+          zones.instance_variable_set "@token",      resp.data["nextPageToken"]
+          zones.instance_variable_set "@connection", conn
           zones
         end
 

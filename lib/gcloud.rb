@@ -54,10 +54,8 @@ module Gcloud
   #
   def self.new project = nil, keyfile = nil
     gcloud = Object.new
-    gcloud.instance_eval do
-      @project = project
-      @keyfile = keyfile
-    end
+    gcloud.instance_variable_set "@project", project
+    gcloud.instance_variable_set "@keyfile", keyfile
     gcloud.extend Gcloud
     gcloud
   end

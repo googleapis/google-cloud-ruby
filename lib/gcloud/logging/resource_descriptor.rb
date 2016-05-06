@@ -74,14 +74,13 @@ module Gcloud
       # Google::Api::MonitoredResourceDescriptor object.
       def self.from_grpc grpc
         r = new
-        r.instance_eval do
-          @type        = grpc.type
-          @name        = grpc.display_name
-          @description = grpc.description
-          @labels      = Array(grpc.labels).map do |g|
-            LabelDescriptor.from_grpc g
-          end
+        r.instance_variable_set "@type", grpc.type
+        r.instance_variable_set "@name", grpc.display_name
+        r.instance_variable_set "@description", grpc.description
+        labels = Array(grpc.labels).map do |g|
+          LabelDescriptor.from_grpc g
         end
+        r.instance_variable_set "@labels", labels
         r
       end
 
@@ -127,11 +126,9 @@ module Gcloud
                        BOOL:   :boolean,
                        INT64:  :integer }[grpc.value_type]
           l = new
-          l.instance_eval do
-            @key         = grpc.key
-            @type        = type_sym
-            @description = grpc.description
-          end
+          l.instance_variable_set "@key", grpc.key
+          l.instance_variable_set "@type", type_sym
+          l.instance_variable_set "@description", grpc.description
           l
         end
       end

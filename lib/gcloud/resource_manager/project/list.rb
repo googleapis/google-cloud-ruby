@@ -70,10 +70,8 @@ module Gcloud
           projects = new(Array(resp.data["projects"]).map do |gapi_object|
             Project.from_gapi gapi_object, manager.connection
           end)
-          projects.instance_eval do
-            @token = resp.data["nextPageToken"]
-            @manager = manager
-          end
+          projects.instance_variable_set "@token",   resp.data["nextPageToken"]
+          projects.instance_variable_set "@manager", manager
           projects
         end
 
