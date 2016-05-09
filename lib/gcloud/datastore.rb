@@ -59,6 +59,11 @@ module Gcloud
   #
   def self.datastore project = nil, keyfile = nil, scope: nil
     project ||= Gcloud::Datastore::Dataset.default_project
+    if ENV["DATASTORE_EMULATOR_HOST"]
+      ds = Gcloud::Datastore::Dataset.new project, :this_channel_is_insecure
+      ds.service.host = ENV["DATASTORE_EMULATOR_HOST"]
+      return ds
+    end
     if keyfile.nil?
       credentials = Gcloud::Datastore::Credentials.default scope: scope
     else
@@ -513,6 +518,49 @@ module Gcloud
   #   memo[kind] ||= []
   #   memo[kind] << prop
   # end
+  # ```
+  #
+  # ## The Datastore Emulator
+  #
+  # As of this release, the Datastore emulator that is part of the gcloud SDK is
+  # no longer compatible with gcloud-ruby. This is because the gcloud SDK's
+  # Datastore emulator does not yet support gRPC as a transport layer.
+  #
+  # A gRPC-compatible emulator is available until the gcloud SDK Datastore
+  # emulator supports gRPC. To use it you must [download the gRPC
+  # emulator](https://storage.googleapis.com/gcd/tools/gcd-grpc-1.0.0.zip) and
+  # use the `gcd.sh` script.
+  #
+  # When you run the gRPC emulator you will see a message similar to the
+  # following printed:
+  #
+  # ```
+  # If you are using a library that supports the DATASTORE_EMULATOR_HOST
+  # environment variable, run:
+  #
+  # export DATASTORE_EMULATOR_HOST=localhost:8978
+  # ```
+  #
+  # Now you can connect to the emulator using the `DATASTORE_EMULATOR_HOST`
+  # environment variable:
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # # Make Datastore use the emulator
+  # ENV["DATASTORE_EMULATOR_HOST"] = "localhost:8978"
+  #
+  # gcloud = Gcloud.new "emulator-project-id"
+  # datastore = gcloud.datastore
+  #
+  # task = datastore.entity "Task", "emulatorTask" do |t|
+  #   t["type"] = "Testing"
+  #   t["done"] = false
+  #   t["priority"] = 5
+  #   t["description"] = "Use Datastore Emulator"
+  # end
+  #
+  # datastore.save task
   # ```
   #
   module Datastore
