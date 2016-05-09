@@ -92,14 +92,6 @@ $ gcloud auth login
 $ gcloud preview datastore create-indexes acceptance/data/
 ```
 
-##### Local Datastore Devserver
-
-You can run the Datstore acceptance tests against a devserver running locally. To switch to the devserver set the `DATASTORE_HOST` environment variable with the location of the local devserver.
-
-``` sh
-$ DATASTORE_HOST=http://127.0.0.1:8080 rake test:acceptance:datastore
-```
-
 #### DNS Acceptance Tests
 
 To run the DNS acceptance tests you must give your service account permissions to a domain name in [Webmaster Central](https://www.google.com/webmasters/verification) and set the `GCLOUD_TEST_DNS_DOMAIN` environment variable to the fully qualified domain name. (e.g. "example.com.")
