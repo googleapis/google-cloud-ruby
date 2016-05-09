@@ -59,6 +59,11 @@ module Gcloud
   #
   def self.datastore project = nil, keyfile = nil, scope: nil
     project ||= Gcloud::Datastore::Dataset.default_project
+    if ENV["DATASTORE_EMULATOR_HOST"]
+      ds = Gcloud::Datastore::Dataset.new project, :this_channel_is_insecure
+      ds.service.host = ENV["DATASTORE_EMULATOR_HOST"]
+      return ds
+    end
     if keyfile.nil?
       credentials = Gcloud::Datastore::Credentials.default scope: scope
     else

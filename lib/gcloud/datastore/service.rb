@@ -23,32 +23,20 @@ module Gcloud
     # @private Represents the gRPC Datastore service, including all the API
     # methods.
     class Service
-      DEFAULT_HOST = "datastore.googleapis.com"
-      attr_accessor :project, :credentials
+      attr_accessor :project, :credentials, :host
 
       ##
       # Creates a new Service instance.
       def initialize project, credentials
         @project = project
         @credentials = credentials
+        @host = "datastore.googleapis.com"
       end
 
       def creds
+        return credentials if insecure?
         GRPC::Core::ChannelCredentials.new.compose \
           GRPC::Core::CallCredentials.new credentials.client.updater_proc
-      end
-
-      ##
-      # The Datastore API URL.
-      def host
-        @host || ENV["DATASTORE_HOST"] || DEFAULT_HOST
-      end
-
-      ##
-      # Update the Datastore API URL.
-      def host= new_host
-        @datastore = nil # Reset the GRPC object when host is set
-        @host = new_host
       end
 
       def datastore
@@ -57,6 +45,10 @@ module Gcloud
           host, creds)
       end
       attr_accessor :mocked_datastore
+
+      def insecure?
+        credentials == :this_channel_is_insecure
+      end
 
       ##
       # Allocate IDs for incomplete keys.
