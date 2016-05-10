@@ -36,8 +36,8 @@ module Gcloud
         @client.key = key # set key after discovery, helps with tests
       end
 
-      def translate *text, to: nil, from: nil, format: nil, cid: nil
-        params = { q:           text,
+      def translate text, to: nil, from: nil, format: nil, cid: nil
+        params = { q:           Array(text),
                    target:      to,
                    source:      from,
                    format:      format,
@@ -51,10 +51,10 @@ module Gcloud
         )
       end
 
-      def detect *text
+      def detect text
         @client.execute(
           api_method: @translate.detections.list,
-          parameters: { q: text, prettyprint: false }
+          parameters: { q: Array(text), prettyprint: false }
         )
       end
 
