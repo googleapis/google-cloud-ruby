@@ -52,7 +52,8 @@ module Gcloud
       #   end
       #
       def save *entities
-        entities.each { |entity| @shared_upserts << entity }
+        entities = Array(entities).flatten
+        @shared_upserts += entities unless entities.empty?
         # Do not save yet
         entities
       end
@@ -71,7 +72,8 @@ module Gcloud
       #   end
       #
       def insert *entities
-        entities.each { |entity| @shared_inserts << entity }
+        entities = Array(entities).flatten
+        @shared_inserts += entities unless entities.empty?
         # Do not insert yet
         entities
       end
@@ -89,7 +91,8 @@ module Gcloud
       #   end
       #
       def update *entities
-        entities.each { |entity| @shared_updates << entity }
+        entities = Array(entities).flatten
+        @shared_updates += entities unless entities.empty?
         # Do not update yet
         entities
       end
@@ -108,10 +111,10 @@ module Gcloud
       #   end
       #
       def delete *entities_or_keys
-        keys = entities_or_keys.map do |e_or_k|
+        keys = Array(entities_or_keys).flatten.map do |e_or_k|
           e_or_k.respond_to?(:key) ? e_or_k.key : e_or_k
         end
-        keys.each { |k| @shared_deletes << k }
+        @shared_deletes += keys unless keys.empty?
         # Do not delete yet
         true
       end

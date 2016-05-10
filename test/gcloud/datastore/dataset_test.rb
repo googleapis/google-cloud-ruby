@@ -54,11 +54,19 @@ describe Gcloud::Datastore::Dataset do
       end
     )
   end
-
   let(:commit_res) do
     Google::Datastore::V1beta3::CommitResponse.new(
       mutation_results: [
         Google::Datastore::V1beta3::MutationResult.new(key: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc)
+      ]
+    )
+  end
+
+  let(:multiple_commit_res) do
+    Google::Datastore::V1beta3::CommitResponse.new(
+      mutation_results: [
+        Google::Datastore::V1beta3::MutationResult.new(key: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc),
+        Google::Datastore::V1beta3::MutationResult.new(key: Gcloud::Datastore::Key.new("ds-test", "thangie").to_grpc)
       ]
     )
   end
@@ -197,6 +205,74 @@ describe Gcloud::Datastore::Dataset do
     entity.must_be :persisted?
   end
 
+  it "save will persist multiple entities" do
+    mutation1 = Google::Datastore::V1beta3::Mutation.new(
+      upsert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+        e["name"] = "thingamajig"
+      end.to_grpc)
+    mutation2 = Google::Datastore::V1beta3::Mutation.new(
+      upsert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+        e["name"] = "thungamajig"
+      end.to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation1, mutation2]
+    )
+
+    dataset.service.mocked_datastore.expect :commit, multiple_commit_res, [commit_req]
+
+    entity1 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity2 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+      e["name"] = "thungamajig"
+    end
+    entity1.wont_be :persisted?
+    entity2.wont_be :persisted?
+    dataset.save entity1, entity2
+    entity1.must_be :persisted?
+    entity2.must_be :persisted?
+  end
+
+  it "save will persist multiple entities in an array" do
+    mutation1 = Google::Datastore::V1beta3::Mutation.new(
+      upsert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+        e["name"] = "thingamajig"
+      end.to_grpc)
+    mutation2 = Google::Datastore::V1beta3::Mutation.new(
+      upsert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+        e["name"] = "thungamajig"
+      end.to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation1, mutation2]
+    )
+
+    dataset.service.mocked_datastore.expect :commit, multiple_commit_res, [commit_req]
+
+    entity1 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity2 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+      e["name"] = "thungamajig"
+    end
+    entity1.wont_be :persisted?
+    entity2.wont_be :persisted?
+    dataset.save [entity1, entity2]
+    entity1.must_be :persisted?
+    entity2.must_be :persisted?
+  end
+
   it "insert will persist complete entities" do
     # Remove key from response
     commit_res.mutation_results.first.key = nil
@@ -247,6 +323,74 @@ describe Gcloud::Datastore::Dataset do
     entity.must_be :persisted?
   end
 
+  it "insert will persist multiple entities" do
+    mutation1 = Google::Datastore::V1beta3::Mutation.new(
+      insert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+        e["name"] = "thingamajig"
+      end.to_grpc)
+    mutation2 = Google::Datastore::V1beta3::Mutation.new(
+      insert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+        e["name"] = "thungamajig"
+      end.to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation1, mutation2]
+    )
+
+    dataset.service.mocked_datastore.expect :commit, multiple_commit_res, [commit_req]
+
+    entity1 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity2 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+      e["name"] = "thungamajig"
+    end
+    entity1.wont_be :persisted?
+    entity2.wont_be :persisted?
+    dataset.insert entity1, entity2
+    entity1.must_be :persisted?
+    entity2.must_be :persisted?
+  end
+
+  it "insert will persist multiple entities in an array" do
+    mutation1 = Google::Datastore::V1beta3::Mutation.new(
+      insert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+        e["name"] = "thingamajig"
+      end.to_grpc)
+    mutation2 = Google::Datastore::V1beta3::Mutation.new(
+      insert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+        e["name"] = "thungamajig"
+      end.to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation1, mutation2]
+    )
+
+    dataset.service.mocked_datastore.expect :commit, multiple_commit_res, [commit_req]
+
+    entity1 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity2 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+      e["name"] = "thungamajig"
+    end
+    entity1.wont_be :persisted?
+    entity2.wont_be :persisted?
+    dataset.insert [entity1, entity2]
+    entity1.must_be :persisted?
+    entity2.must_be :persisted?
+  end
+
   it "update will persist entities" do
     # Remove key from response
     commit_res.mutation_results.first.key = nil
@@ -271,6 +415,78 @@ describe Gcloud::Datastore::Dataset do
     dataset.update entity
     entity.key.must_be :complete?
     entity.must_be :persisted?
+  end
+
+  it "update will persist multiple entities" do
+    # Remove keys from response
+    multiple_commit_res.mutation_results.each { |m| m.key = nil }
+    mutation1 = Google::Datastore::V1beta3::Mutation.new(
+      update: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+        e["name"] = "thingamajig"
+      end.to_grpc)
+    mutation2 = Google::Datastore::V1beta3::Mutation.new(
+      update: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+        e["name"] = "thungamajig"
+      end.to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation1, mutation2]
+    )
+
+    dataset.service.mocked_datastore.expect :commit, multiple_commit_res, [commit_req]
+
+    entity1 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity2 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+      e["name"] = "thungamajig"
+    end
+    entity1.wont_be :persisted?
+    entity2.wont_be :persisted?
+    dataset.update entity1, entity2
+    entity1.must_be :persisted?
+    entity2.must_be :persisted?
+  end
+
+  it "update will persist multiple entities in an array" do
+    # Remove keys from response
+    multiple_commit_res.mutation_results.each { |m| m.key = nil }
+    mutation1 = Google::Datastore::V1beta3::Mutation.new(
+      update: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+        e["name"] = "thingamajig"
+      end.to_grpc)
+    mutation2 = Google::Datastore::V1beta3::Mutation.new(
+      update: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+        e["name"] = "thungamajig"
+      end.to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation1, mutation2]
+    )
+
+    dataset.service.mocked_datastore.expect :commit, multiple_commit_res, [commit_req]
+
+    entity1 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity2 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+      e["name"] = "thungamajig"
+    end
+    entity1.wont_be :persisted?
+    entity2.wont_be :persisted?
+    dataset.update [entity1, entity2]
+    entity1.must_be :persisted?
+    entity2.must_be :persisted?
   end
 
   it "find can take a kind and id" do
@@ -488,6 +704,54 @@ describe Gcloud::Datastore::Dataset do
     dataset.delete entity
   end
 
+  it "delete with multiple entity will call commit" do
+    mutation1 = Google::Datastore::V1beta3::Mutation.new(
+      delete: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc)
+    mutation2 = Google::Datastore::V1beta3::Mutation.new(
+      delete: Gcloud::Datastore::Key.new("ds-test", "thangie").to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation1, mutation2]
+    )
+
+    dataset.service.mocked_datastore.expect :commit, multiple_commit_res, [commit_req]
+
+    entity1 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity2 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+      e["name"] = "thungamajig"
+    end
+    dataset.delete entity1, entity2
+  end
+
+  it "delete with multiple entity in an array will call commit" do
+    mutation1 = Google::Datastore::V1beta3::Mutation.new(
+      delete: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc)
+    mutation2 = Google::Datastore::V1beta3::Mutation.new(
+      delete: Gcloud::Datastore::Key.new("ds-test", "thangie").to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation1, mutation2]
+    )
+
+    dataset.service.mocked_datastore.expect :commit, multiple_commit_res, [commit_req]
+
+    entity1 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity2 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+      e["name"] = "thungamajig"
+    end
+    dataset.delete [entity1, entity2]
+  end
+
   it "delete with key will call commit" do
     mutation = Google::Datastore::V1beta3::Mutation.new(
       delete: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc
@@ -501,6 +765,54 @@ describe Gcloud::Datastore::Dataset do
 
     key = Gcloud::Datastore::Key.new "ds-test", "thingie"
     dataset.delete key
+  end
+
+  it "delete with multiple keys will call commit" do
+    mutation1 = Google::Datastore::V1beta3::Mutation.new(
+      delete: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc)
+    mutation2 = Google::Datastore::V1beta3::Mutation.new(
+      delete: Gcloud::Datastore::Key.new("ds-test", "thangie").to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation1, mutation2]
+    )
+
+    dataset.service.mocked_datastore.expect :commit, multiple_commit_res, [commit_req]
+
+    entity1 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity2 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+      e["name"] = "thungamajig"
+    end
+    dataset.delete entity1.key, entity2.key
+  end
+
+  it "delete with multiple keys in an array will call commit" do
+    mutation1 = Google::Datastore::V1beta3::Mutation.new(
+      delete: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc)
+    mutation2 = Google::Datastore::V1beta3::Mutation.new(
+      delete: Gcloud::Datastore::Key.new("ds-test", "thangie").to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation1, mutation2]
+    )
+
+    dataset.service.mocked_datastore.expect :commit, multiple_commit_res, [commit_req]
+
+    entity1 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity2 = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thangie"
+      e["name"] = "thungamajig"
+    end
+    dataset.delete [entity1.key, entity2.key]
   end
 
   it "run will fulfill a query" do
