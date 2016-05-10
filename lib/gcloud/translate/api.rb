@@ -148,8 +148,9 @@ module Gcloud
         to = to.to_s
         from = from.to_s if from
         format = format.to_s if format
-        resp = connection.translate(*text, to: to, from: from,
-                                           format: format, cid: cid)
+        text = Array(text).flatten
+        resp = connection.translate(text, to: to, from: from,
+                                          format: format, cid: cid)
         fail ApiError.from_response(resp) unless resp.success?
         Translation.from_response resp, text, to, from
       end
@@ -194,7 +195,8 @@ module Gcloud
       #
       def detect *text
         return nil if text.empty?
-        resp = connection.detect(*text)
+        text = Array(text).flatten
+        resp = connection.detect(text)
         fail ApiError.from_response(resp) unless resp.success?
         Detection.from_response resp, text
       end

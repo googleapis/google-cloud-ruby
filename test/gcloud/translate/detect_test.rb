@@ -53,4 +53,24 @@ describe Gcloud::Translate::Api, :detect, :mock_translate do
     detections.last.results.count.must_equal 1
     detections.last.results.first.language.must_equal "es"
   end
+
+  it "detects multiple langauges in an array" do
+    mock_connection.get "/language/translate/v2/detect" do |env|
+      env.params["key"].must_equal key
+      env.params["q"].must_equal   ["Hello", "Hola"]
+      [200, { "Content-Type" => "application/json" },
+       detect_json("en", "es")]
+    end
+
+    detections = translate.detect ["Hello", "Hola"]
+    detections.count.must_equal 2
+
+    detections.first.language.must_equal "en"
+    detections.first.results.count.must_equal 1
+    detections.first.results.first.language.must_equal "en"
+
+    detections.last.language.must_equal "es"
+    detections.last.results.count.must_equal 1
+    detections.last.results.first.language.must_equal "es"
+  end
 end

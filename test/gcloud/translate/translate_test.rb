@@ -149,6 +149,40 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translations.last.must_be :detected?
   end
 
+  it "translates multiple inputs in an array" do
+    mock_connection.get "/language/translate/v2" do |env|
+      env.params["key"].must_equal key
+      env.params["q"].must_equal   ["Hello", "How are you today?"]
+      env.params["target"].must_equal "es"
+      env.params["source"].must_be :nil?
+      env.params["format"].must_be :nil?
+      env.params["cid"].must_be :nil?
+      [200, { "Content-Type" => "application/json" },
+       translate_json("Hola", "en", "Como estas hoy?", "en")]
+    end
+
+    translations = translate.translate ["Hello", "How are you today?"], to: "es"
+    translations.count.must_equal 2
+
+    translations.first.text.must_equal "Hola"
+    translations.first.origin.must_equal "Hello"
+    translations.first.to.must_equal "es"
+    translations.first.language.must_equal "es"
+    translations.first.target.must_equal "es"
+    translations.first.from.must_equal "en"
+    translations.first.source.must_equal "en"
+    translations.first.must_be :detected?
+
+    translations.last.text.must_equal "Como estas hoy?"
+    translations.last.origin.must_equal "How are you today?"
+    translations.last.to.must_equal "es"
+    translations.last.language.must_equal "es"
+    translations.last.target.must_equal "es"
+    translations.last.from.must_equal "en"
+    translations.last.source.must_equal "en"
+    translations.last.must_be :detected?
+  end
+
   it "translates multiple inputs with from" do
     mock_connection.get "/language/translate/v2" do |env|
       env.params["key"].must_equal key
@@ -162,6 +196,40 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     end
 
     translations = translate.translate "Hello", "How are you today?", to: :es, from: :en
+    translations.count.must_equal 2
+
+    translations.first.text.must_equal "Hola"
+    translations.first.origin.must_equal "Hello"
+    translations.first.to.must_equal "es"
+    translations.first.language.must_equal "es"
+    translations.first.target.must_equal "es"
+    translations.first.from.must_equal "en"
+    translations.first.source.must_equal "en"
+    translations.first.wont_be :detected?
+
+    translations.last.text.must_equal "Como estas hoy?"
+    translations.last.origin.must_equal "How are you today?"
+    translations.last.to.must_equal "es"
+    translations.last.language.must_equal "es"
+    translations.last.target.must_equal "es"
+    translations.last.from.must_equal "en"
+    translations.last.source.must_equal "en"
+    translations.last.wont_be :detected?
+  end
+
+  it "translates multiple inputs in an array with from" do
+    mock_connection.get "/language/translate/v2" do |env|
+      env.params["key"].must_equal key
+      env.params["q"].must_equal   ["Hello", "How are you today?"]
+      env.params["target"].must_equal "es"
+      env.params["source"].must_equal "en"
+      env.params["format"].must_be :nil?
+      env.params["cid"].must_be :nil?
+      [200, { "Content-Type" => "application/json" },
+       translate_json("Hola", nil, "Como estas hoy?", nil)]
+    end
+
+    translations = translate.translate ["Hello", "How are you today?"], to: :es, from: :en
     translations.count.must_equal 2
 
     translations.first.text.must_equal "Hola"
@@ -217,6 +285,40 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     translations.last.must_be :detected?
   end
 
+  it "translates multiple inputs in an array with format" do
+    mock_connection.get "/language/translate/v2" do |env|
+      env.params["key"].must_equal key
+      env.params["q"].must_equal   ["<h1>Hello</h1>", "How are <em>you</em> today?"]
+      env.params["target"].must_equal "es"
+      env.params["source"].must_be :nil?
+      env.params["format"].must_equal "html"
+      env.params["cid"].must_be :nil?
+      [200, { "Content-Type" => "application/json" },
+       translate_json("<h1>Hola</h1>", "en", "Como estas <em>hoy</em>?", "en")]
+    end
+
+    translations = translate.translate ["<h1>Hello</h1>", "How are <em>you</em> today?"], to: "es", format: :html
+    translations.count.must_equal 2
+
+    translations.first.text.must_equal "<h1>Hola</h1>"
+    translations.first.origin.must_equal "<h1>Hello</h1>"
+    translations.first.to.must_equal "es"
+    translations.first.language.must_equal "es"
+    translations.first.target.must_equal "es"
+    translations.first.from.must_equal "en"
+    translations.first.source.must_equal "en"
+    translations.first.must_be :detected?
+
+    translations.last.text.must_equal "Como estas <em>hoy</em>?"
+    translations.last.origin.must_equal "How are <em>you</em> today?"
+    translations.last.to.must_equal "es"
+    translations.last.language.must_equal "es"
+    translations.last.target.must_equal "es"
+    translations.last.from.must_equal "en"
+    translations.last.source.must_equal "en"
+    translations.last.must_be :detected?
+  end
+
   it "translates multiple inputs with cid" do
     mock_connection.get "/language/translate/v2" do |env|
       env.params["key"].must_equal key
@@ -230,6 +332,40 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
     end
 
     translations = translate.translate "Hello", "How are you today?", to: "es", cid: "user-1234567899"
+    translations.count.must_equal 2
+
+    translations.first.text.must_equal "Hola"
+    translations.first.origin.must_equal "Hello"
+    translations.first.to.must_equal "es"
+    translations.first.language.must_equal "es"
+    translations.first.target.must_equal "es"
+    translations.first.from.must_equal "en"
+    translations.first.source.must_equal "en"
+    translations.first.must_be :detected?
+
+    translations.last.text.must_equal "Como estas hoy?"
+    translations.last.origin.must_equal "How are you today?"
+    translations.last.to.must_equal "es"
+    translations.last.language.must_equal "es"
+    translations.last.target.must_equal "es"
+    translations.last.from.must_equal "en"
+    translations.last.source.must_equal "en"
+    translations.last.must_be :detected?
+  end
+
+  it "translates multiple inputs in an array with cid" do
+    mock_connection.get "/language/translate/v2" do |env|
+      env.params["key"].must_equal key
+      env.params["q"].must_equal   ["Hello", "How are you today?"]
+      env.params["target"].must_equal "es"
+      env.params["source"].must_be :nil?
+      env.params["format"].must_be :nil?
+      env.params["cid"].must_equal "user-1234567899"
+      [200, { "Content-Type" => "application/json" },
+       translate_json("Hola", "en", "Como estas hoy?", "en")]
+    end
+
+    translations = translate.translate ["Hello", "How are you today?"], to: "es", cid: "user-1234567899"
     translations.count.must_equal 2
 
     translations.first.text.must_equal "Hola"
