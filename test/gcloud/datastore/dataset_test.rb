@@ -147,6 +147,132 @@ describe Gcloud::Datastore::Dataset do
     entity.must_be :persisted?
   end
 
+  it "save will persist complete entities with upsert alias" do
+    # Remove key from response
+    commit_res.mutation_results.first.key = nil
+    mutation = Google::Datastore::V1beta3::Mutation.new(
+      upsert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+        e["name"] = "thingamajig"
+      end.to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation]
+    )
+    dataset.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+
+    entity = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity.key.must_be :complete?
+    entity.wont_be :persisted?
+    dataset.upsert entity
+    entity.key.must_be :complete?
+    entity.must_be :persisted?
+  end
+
+  it "save will persist incomplete entities with upsert alias" do
+    mutation = Google::Datastore::V1beta3::Mutation.new(
+      upsert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test"
+        e["name"] = "thingamajig"
+      end.to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation]
+    )
+    dataset.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+
+    entity = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test"
+      e["name"] = "thingamajig"
+    end
+    entity.key.wont_be :complete?
+    entity.wont_be :persisted?
+    dataset.upsert entity
+    entity.key.must_be :complete?
+    entity.must_be :persisted?
+  end
+
+  it "insert will persist complete entities" do
+    # Remove key from response
+    commit_res.mutation_results.first.key = nil
+    mutation = Google::Datastore::V1beta3::Mutation.new(
+      insert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+        e["name"] = "thingamajig"
+      end.to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation]
+    )
+    dataset.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+
+    entity = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity.key.must_be :complete?
+    entity.wont_be :persisted?
+    dataset.insert entity
+    entity.key.must_be :complete?
+    entity.must_be :persisted?
+  end
+
+  it "insert will persist incomplete entities" do
+    mutation = Google::Datastore::V1beta3::Mutation.new(
+      insert: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test"
+        e["name"] = "thingamajig"
+      end.to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation]
+    )
+    dataset.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+
+    entity = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test"
+      e["name"] = "thingamajig"
+    end
+    entity.key.wont_be :complete?
+    entity.wont_be :persisted?
+    dataset.insert entity
+    entity.key.must_be :complete?
+    entity.must_be :persisted?
+  end
+
+  it "update will persist entities" do
+    # Remove key from response
+    commit_res.mutation_results.first.key = nil
+    mutation = Google::Datastore::V1beta3::Mutation.new(
+      update: Gcloud::Datastore::Entity.new.tap do |e|
+        e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+        e["name"] = "thingamajig"
+      end.to_grpc)
+    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+      project_id: project,
+      mode: :NON_TRANSACTIONAL,
+      mutations: [mutation]
+    )
+    dataset.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+
+    entity = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    entity.key.must_be :complete?
+    entity.wont_be :persisted?
+    dataset.update entity
+    entity.key.must_be :complete?
+    entity.must_be :persisted?
+  end
+
   it "find can take a kind and id" do
     lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
       project_id: project,

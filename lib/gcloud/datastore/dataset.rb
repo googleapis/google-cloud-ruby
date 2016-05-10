@@ -158,6 +158,70 @@ module Gcloud
       def save *entities
         commit { |c| c.save(*entities) }
       end
+      alias_method :upsert, :save
+
+      ##
+      # Insert one or more entities to the Datastore. An InvalidArgumentError
+      # will raised if the entities cannot be inserted.
+      #
+      # @param [Entity] entities One or more entity objects to be inserted.
+      #
+      # @return [Array<Gcloud::Datastore::Entity>]
+      #
+      # @example Insert a new entity:
+      #   task = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
+      #   end
+      #   task.key.id #=> nil
+      #   datastore.insert task
+      #   task.key.id #=> 123456
+      #
+      # @example Insert multiple new entities in a batch:
+      #   task1 = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
+      #   end
+      #
+      #   task2 = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 5
+      #     t["description"] = "Integrate Cloud Datastore"
+      #   end
+      #
+      #   task_key1, task_key2 = datastore.insert(task1, task2).map(&:key)
+      #
+      def insert *entities
+        commit { |c| c.insert(*entities) }
+      end
+
+      ##
+      # Update one or more entities to the Datastore. An InvalidArgumentError
+      # will raised if the entities cannot be updated.
+      #
+      # @param [Entity] entities One or more entity objects to be updated.
+      #
+      # @return [Array<Gcloud::Datastore::Entity>]
+      #
+      # @example Update an existing entity:
+      #   task = datastore.find "Task", "sampleTask"
+      #   task["done"] = true
+      #   datastore.save task
+      #
+      # @example update multiple new entities in a batch:
+      #   query = datastore.query("Task").where("done", "=", false)
+      #   tasks = datastore.run query
+      #   tasks.each { |t| t["done"] = true }
+      #   datastore.update tasks
+      #
+      def update *entities
+        commit { |c| c.update(*entities) }
+      end
 
       ##
       # Remove entities from the Datastore.

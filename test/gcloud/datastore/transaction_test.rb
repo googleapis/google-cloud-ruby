@@ -76,7 +76,41 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.save entity
-    transaction.instance_variable_get("@commit").send(:shared_upserts).must_include entity
+    # Testing implementation like we are writing Java!
+    transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts").must_include entity
+  end
+
+  it "save does not persist entities with upsert alias" do
+    begin_tx_res.wont_equal "poop"
+    entity = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    transaction.upsert entity
+    # Testing implementation like we are writing Java!
+    transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts").must_include entity
+  end
+
+  it "insert does not persist entities" do
+    begin_tx_res.wont_equal "poop"
+    entity = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    transaction.insert entity
+    # Testing implementation like we are writing Java!
+    transaction.instance_variable_get("@commit").instance_variable_get("@shared_inserts").must_include entity
+  end
+
+  it "update does not persist entities" do
+    begin_tx_res.wont_equal "poop"
+    entity = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
+      e["name"] = "thingamajig"
+    end
+    transaction.update entity
+    # Testing implementation like we are writing Java!
+    transaction.instance_variable_get("@commit").instance_variable_get("@shared_updates").must_include entity
   end
 
   it "delete does not persist entities" do
@@ -85,7 +119,8 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.delete entity
-    transaction.instance_variable_get("@commit").send(:shared_deletes).must_include entity.key
+    # Testing implementation is bad, mkay?
+    transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes").must_include entity.key
   end
 
   it "delete does not persist keys" do
@@ -94,7 +129,8 @@ describe Gcloud::Datastore::Transaction do
       e["name"] = "thingamajig"
     end
     transaction.delete entity.key
-    transaction.instance_variable_get("@commit").send(:shared_deletes).must_include entity.key
+    # Testing implementation like a BOSS!
+    transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes").must_include entity.key
   end
 
   it "commit will save and delete entities" do
@@ -112,6 +148,14 @@ describe Gcloud::Datastore::Transaction do
           e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
           e["name"] = "Gonna be saved"
         end.to_grpc), Google::Datastore::V1beta3::Mutation.new(
+        insert: Gcloud::Datastore::Entity.new.tap do |e|
+          e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-inserted"
+          e["name"] = "Gonna be inserted"
+        end.to_grpc), Google::Datastore::V1beta3::Mutation.new(
+        update: Gcloud::Datastore::Entity.new.tap do |e|
+          e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-updated"
+          e["name"] = "Gonna be updated"
+        end.to_grpc), Google::Datastore::V1beta3::Mutation.new(
           delete: Gcloud::Datastore::Key.new("ds-test", "to-be-deleted").to_grpc)]
     )
     transaction.service.mocked_datastore.expect :commit, commit_res, [commit_req]
@@ -119,6 +163,14 @@ describe Gcloud::Datastore::Transaction do
     entity_to_be_saved = Gcloud::Datastore::Entity.new.tap do |e|
       e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-saved"
       e["name"] = "Gonna be saved"
+    end
+    entity_to_be_inserted = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-inserted"
+      e["name"] = "Gonna be inserted"
+    end
+    entity_to_be_updated = Gcloud::Datastore::Entity.new.tap do |e|
+      e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-updated"
+      e["name"] = "Gonna be updated"
     end
     entity_to_be_deleted = Gcloud::Datastore::Entity.new.tap do |e|
       e.key = Gcloud::Datastore::Key.new "ds-test", "to-be-deleted"
@@ -128,6 +180,8 @@ describe Gcloud::Datastore::Transaction do
     entity_to_be_saved.wont_be :persisted?
     transaction.commit do |c|
       c.save entity_to_be_saved
+      c.insert entity_to_be_inserted
+      c.update entity_to_be_updated
       c.delete entity_to_be_deleted
     end
     entity_to_be_saved.must_be :persisted?
