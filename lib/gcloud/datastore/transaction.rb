@@ -204,6 +204,8 @@ module Gcloud
         deferred = to_gcloud_keys lookup_res.deferred
         missing  = to_gcloud_entities lookup_res.missing
         LookupResults.new entities, deferred, missing
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :lookup, :find_all
 
@@ -238,6 +240,8 @@ module Gcloud
         query_res = service.run_query query.to_grpc, namespace,
                                       transaction: @id
         QueryResults.from_grpc query_res, service, namespace, query.to_grpc.dup
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :run_query, :run
 
@@ -250,6 +254,8 @@ module Gcloud
         ensure_service!
         tx_res = service.begin_transaction
         @id = tx_res.transaction
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :begin_transaction, :start
 
@@ -297,9 +303,8 @@ module Gcloud
       #   end
       #
       def commit
-        if @id.nil?
-          fail TransactionError, "Cannot commit when not in a transaction."
-        end
+        fail TransactionError,
+             "Cannot commit when not in a transaction." if @id.nil?
 
         yield @commit if block_given?
 
@@ -309,13 +314,14 @@ module Gcloud
         entities = @commit.entities
         returned_keys = commit_res.mutation_results.map(&:key)
         returned_keys.each_with_index do |key, index|
-          entity = entities[index]
-          next if entity.nil?
-          entity.key = Key.from_grpc(key) unless key.nil?
+          next if entities[index].nil?
+          entities[index].key = Key.from_grpc(key) unless key.nil?
         end
         # Make sure all entity keys are frozen so all show as persisted
         entities.each { |e| e.key.freeze unless e.persisted? }
         true
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -349,6 +355,8 @@ module Gcloud
         ensure_service!
         service.rollback @id
         true
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
