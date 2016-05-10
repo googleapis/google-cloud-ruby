@@ -113,6 +113,8 @@ module Gcloud
         incomplete_keys = count.times.map { incomplete_key.to_grpc }
         allocate_res = service.allocate_ids(*incomplete_keys)
         allocate_res.keys.map { |key| Key.from_grpc key }
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -202,12 +204,13 @@ module Gcloud
         entities = c.entities
         returned_keys = commit_res.mutation_results.map(&:key)
         returned_keys.each_with_index do |key, index|
-          entity = entities[index]
-          next if entity.nil?
+          next if entities[index].nil?
           entities[index].key = Key.from_grpc(key) unless key.nil?
         end
         entities.each { |e| e.key.freeze unless e.persisted? }
         entities
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -276,6 +279,8 @@ module Gcloud
         deferred = to_gcloud_keys lookup_res.deferred
         missing  = to_gcloud_entities lookup_res.missing
         LookupResults.new entities, deferred, missing
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :lookup, :find_all
 
@@ -324,6 +329,8 @@ module Gcloud
         query_res = service.run_query query.to_grpc, namespace,
                                       consistency: consistency
         QueryResults.from_grpc query_res, service, namespace, query.to_grpc.dup
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :run_query, :run
 
