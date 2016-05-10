@@ -86,9 +86,9 @@ module Gcloud
         end
 
         ##
-        # The confidence of the facial detection. Range [0, 1].
+        # The confidence of the facial detection.
         #
-        # @return [Float]
+        # @return [Float] in the range [0, 1]
         #
         def confidence
           @gapi["detectionConfidence"]
@@ -1591,6 +1591,9 @@ module Gcloud
           ##
           # Joy likelihood. Returns `true` if {#joy} is `POSSIBLE`, `LIKELY`, or
           # `VERY_LIKELY`.
+          #
+          # @return [Boolean]
+          #
           def joy?
             POSITIVE_RATINGS.include? joy
           end
@@ -1605,6 +1608,9 @@ module Gcloud
           ##
           # Sorrow likelihood. Returns `true` if {#sorrow} is `POSSIBLE`,
           # `LIKELY`, or `VERY_LIKELY`.
+          #
+          # @return [Boolean]
+          #
           def sorrow?
             POSITIVE_RATINGS.include? sorrow
           end
@@ -1619,6 +1625,9 @@ module Gcloud
           ##
           # Anger likelihood. Returns `true` if {#anger} is `POSSIBLE`,
           # `LIKELY`, or `VERY_LIKELY`.
+          #
+          # @return [Boolean]
+          #
           def anger?
             POSITIVE_RATINGS.include? anger
           end
@@ -1633,6 +1642,9 @@ module Gcloud
           ##
           # Surprise likelihood. Returns `true` if {#surprise} is `POSSIBLE`,
           # `LIKELY`, or `VERY_LIKELY`.
+          #
+          # @return [Boolean]
+          #
           def surprise?
             POSITIVE_RATINGS.include? surprise
           end
@@ -1648,6 +1660,9 @@ module Gcloud
           ##
           # Under Exposed likelihood. Returns `true` if {#under_exposed} is
           # `POSSIBLE`, `LIKELY`, or `VERY_LIKELY`.
+          #
+          # @return [Boolean]
+          #
           def under_exposed?
             POSITIVE_RATINGS.include? under_exposed
           end
@@ -1662,6 +1677,9 @@ module Gcloud
           ##
           # Blurred likelihood. Returns `true` if {#blurred} is `POSSIBLE`,
           # `LIKELY`, or `VERY_LIKELY`.
+          #
+          # @return [Boolean]
+          #
           def blurred?
             POSITIVE_RATINGS.include? blurred
           end
@@ -1676,6 +1694,9 @@ module Gcloud
           ##
           # Headwear likelihood. Returns `true` if {#headwear} is `POSSIBLE`,
           # `LIKELY`, or `VERY_LIKELY`.
+          #
+          # @return [Boolean]
+          #
           def headwear?
             POSITIVE_RATINGS.include? headwear
           end

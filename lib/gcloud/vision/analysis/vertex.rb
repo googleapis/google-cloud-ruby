@@ -18,9 +18,34 @@ module Gcloud
     class Analysis
       ##
       # # Vertex
+      #
+      # A vertex in a set of bounding polygon vertices.
+      #
+      # See {Face::Bounds} and {Text}.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   image = vision.image "./acceptance/data/text.png"
+      #   text = image.text
+      #
+      #   text.bounds.count #=> 4
+      #   vertex = text.bounds.first
+      #   vertex.x #=> 13
+      #   vertex.y #=> 8
+      #
       class Vertex
+        # @!attribute x
+        #   @return [Integer] the X coordinate
+        # @!attribute y
+        #   @return [Integer] the Y coordinate
         attr_accessor :x, :y
 
+        ##
+        # @private Creates a new Vertex instance.
         def initialize x, y
           @x = x
           @y = y

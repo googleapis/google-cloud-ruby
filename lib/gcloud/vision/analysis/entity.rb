@@ -21,6 +21,55 @@ module Gcloud
     class Analysis
       ##
       # # Entity
+      #
+      # Represents characteristics of an entity detected in an image. May
+      # describe a real-world entity such as a person, place, or thing. May be
+      # identified with an entity ID as an entity in the Knowledge Graph (KG).
+      #
+      # @see https://developers.google.com/knowledge-graph/ Knowledge Graph
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   image = vision.image "./acceptance/data/landmark.jpg"
+      #
+      #   landmark = image.landmark
+      #   landmark.score #=> 0.91912264
+      #   landmark.description #=> "Mount Rushmore"
+      #   landmark.mid #=> "/m/019dvv"
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   image = vision.image "./acceptance/data/logo.jpg"
+      #
+      #   logo = image.logo
+      #   logo.score #=> 0.70057315
+      #   logo.description #=> "Google"
+      #   logo.mid #=> "/m/0b34hf"
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   image = vision.image "./acceptance/data/face.jpg"
+      #
+      #   labels = image.labels
+      #   labels.count #=> 4
+      #
+      #   label = labels.first
+      #   label.score #=> 0.9481349
+      #   label.description #=> "person"
+      #   label.mid #=> "/m/01g317"
+      #
       class Entity
         ##
         # @private The EntityAnnotation Google API Client object.
@@ -33,9 +82,12 @@ module Gcloud
         end
 
         ##
-        # Opaque entity ID. Some IDs might be available in Knowledge Graph(KG).
+        # Opaque entity ID. Some IDs might be available in Knowledge Graph (KG).
         #
-        # @see https://developers.google.com/knowledge-graph/
+        # @see https://developers.google.com/knowledge-graph/ Knowledge Graph
+        #
+        # @return [String] the opaque entity ID
+        #
         def mid
           @gapi["mid"]
         end
@@ -43,18 +95,27 @@ module Gcloud
         ##
         # The language code for the locale in which the `description` is
         # expressed.
+        #
+        # @return [String] the language code
+        #
         def locale
           @gapi["locale"]
         end
 
         ##
-        # Entity textual description, expressed in the `locale` language.
+        # Entity textual description, expressed in the {#locale} language.
+        #
+        # @return [String] a description of the entity
+        #
         def description
           @gapi["description"]
         end
 
         ##
-        # Overall score of the result. Range [0, 1].
+        # Overall score of the result.
+        #
+        # @return [Float] in the range [0, 1]
+        #
         def score
           @gapi["score"]
         end
@@ -62,7 +123,10 @@ module Gcloud
         ##
         # The accuracy of the entity detection in an image. For example, for an
         # image containing 'Eiffel Tower,' this field represents the confidence
-        # that there is a tower in the query image. Range [0, 1].
+        # that there is a tower in the query image.
+        #
+        # @return [Float] in the range [0, 1]
+        #
         def confidence
           @gapi["confidence"]
         end
@@ -72,7 +136,10 @@ module Gcloud
         # image. For example, the relevancy of 'tower' to an image containing
         # 'Eiffel Tower' is likely higher than an image containing a distant
         # towering building, though the confidence that there is a tower may be
-        # the same. Range [0, 1].
+        # the same.
+        #
+        # @return [Float] in the range [0, 1]
+        #
         def topicality
           @gapi["topicality"]
         end
@@ -80,6 +147,9 @@ module Gcloud
         ##
         # Image region to which this entity belongs. Not filled currently for
         # `labels` detection.
+        #
+        # @return [Array<Vertex>] array of vertices
+        #
         def bounds
           return [] unless @gapi["boundingPoly"]
           @bounds ||= Array(@gapi["boundingPoly"]["vertices"]).map do |v|
@@ -93,6 +163,10 @@ module Gcloud
         # of the scene in the query image, and another the location of the place
         # where the query image was taken. Location information is usually
         # present for landmarks.
+        #
+        # @return [Array<Location>] array of locations containing latitude and
+        #   longitude
+        #
         def locations
           @locations ||= Array(@gapi["locations"]).map do |l|
             Location.from_gapi l["latLng"]
@@ -102,6 +176,10 @@ module Gcloud
         ##
         # Some entities can have additional optional Property fields. For
         # example a different kind of score or string that qualifies the entity.
+        # present for landmarks.
+        #
+        # @return [Hash] hash containing property names and values
+        #
         def properties
           @properties ||=
             Hash[Array(@gapi["properties"]).map { |p| [p["name"], p["value"]] }]

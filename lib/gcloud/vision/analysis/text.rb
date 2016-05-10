@@ -20,6 +20,23 @@ module Gcloud
     class Analysis
       ##
       # # Text
+      #
+      # The result of text, or optical character recognition (OCR), detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   image = vision.image "./acceptance/data/text.png"
+      #
+      #   text = image.text
+      #   text.locale #=> "en"
+      #   text.words.count #=> 28
+      #   text.text
+      #   #=> "Google Cloud Client Library for Ruby an idiomatic, intuitive... "
+      #
       class Text
         ##
         # @private The EntityAnnotation Google API Client object.
@@ -34,18 +51,27 @@ module Gcloud
 
         ##
         # The text detected in an image.
+        #
+        # @return [String] the entire text including newline characters
+        #
         def text
           @gapi["description"]
         end
 
         ##
         # The language code detected for `text`.
+        #
+        # @return [String] the language code
+        #
         def locale
           @gapi["locale"]
         end
 
         ##
         # The bounds for the detected text in the image.
+        #
+        # @return [Array<Vertex>]
+        #
         def bounds
           return [] unless @gapi["boundingPoly"]
           @bounds ||= Array(@gapi["boundingPoly"]["vertices"]).map do |v|
@@ -55,6 +81,9 @@ module Gcloud
 
         ##
         # Each word in the detected text, with the bounds for each word.
+        #
+        # @return [Array<Word>]
+        #
         def words
           @words
         end
@@ -108,6 +137,26 @@ module Gcloud
 
         ##
         # # Word
+        #
+        # A word within a detected text (OCR). See {Text}.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   vision = gcloud.vision
+        #
+        #   image = vision.image "./acceptance/data/text.png"
+        #   text = image.text
+        #
+        #   words = text.words
+        #   words.count #=> 28
+        #
+        #   word = words.first
+        #   word.text #=> "Google"
+        #   word.bounds.count #=> 4
+        #   word.bounds.first #=> #<Vertex (x: 13, y: 8)>
+        #
         class Word
           ##
           # @private The EntityAnnotation Google API Client object.
@@ -121,12 +170,18 @@ module Gcloud
 
           ##
           # The text of the word.
+          #
+          # @return [String]
+          #
           def text
             @gapi["description"]
           end
 
           ##
-          # The text of the word.
+          # The bounds of the word within the detected text.
+          #
+          # @return [Array<Vertex>]
+          #
           def bounds
             return [] unless @gapi["boundingPoly"]
             @bounds ||= Array(@gapi["boundingPoly"]["vertices"]).map do |v|

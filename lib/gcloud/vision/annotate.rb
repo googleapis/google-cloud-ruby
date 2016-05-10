@@ -17,6 +17,11 @@ require "gcloud/vision/image"
 
 module Gcloud
   module Vision
+    ##
+    # # Annotate
+    #
+    #
+    #
     class Annotate
       attr_accessor :requests
 

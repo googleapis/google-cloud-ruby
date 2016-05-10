@@ -18,6 +18,22 @@ module Gcloud
     class Analysis
       ##
       # # Properties
+      #
+      # A set of properties about an image, such as the image's dominant colors.
+      #
+      # See {Gcloud::Vision::Image#properties}.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   image = vision.image "./acceptance/data/logo.jpg"
+      #
+      #   properties = image.properties
+      #   properties.colors.count #=> 10
+      #
       class Properties
         ##
         # @private The ImageProperties Google API Client object.
@@ -30,7 +46,10 @@ module Gcloud
         end
 
         ##
-        # Set of dominant colors and their corresponding scores.
+        # The image's dominant colors, including their corresponding scores.
+        #
+        # @return [Array<Color>] an array of the image's dominant colors
+        #
         def colors
           return [] unless @gapi["dominantColors"]
           @colors ||= Array(@gapi["dominantColors"]["colors"]).map do |c|
@@ -92,6 +111,28 @@ module Gcloud
 
         ##
         # # Color
+        #
+        # Color information consisting of RGB channels, score, and fraction of
+        # image the color occupies in the image.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   vision = gcloud.vision
+        #
+        #   image = vision.image "./acceptance/data/logo.jpg"
+        #   properties = image.properties
+        #
+        #   color = properties.colors.first
+        #   color.red #=> 247.0
+        #   color.green #=> 236.0
+        #   color.blue #=> 20.0
+        #   color.rgb #=> "f7ec14"
+        #   color.alpha #=> 1.0
+        #   color.score #=> 0.20301804
+        #   color.pixel_fraction #=> 0.0072649573
+        #
         class Color
           ##
           # @private The ColorInfo Google API Client object.
@@ -104,20 +145,28 @@ module Gcloud
           end
 
           ##
-          # The amount of red in the color as a value in the interval [0, 255].
+          # The amount of red in the color.
+          #
+          # @return [Float] a value in the interval [0, 255]
+          #
           def red
             @gapi["color"]["red"]
           end
 
           ##
-          # The amount of green in the color as a value in the interval [0,
-          # 255].
+          # The amount of green in the color.
+          #
+          # @return [Float] a value in the interval [0, 255]
+          #
           def green
             @gapi["color"]["green"]
           end
 
           ##
-          # The amount of blue in the color as a value in the interval [0, 255].
+          # The amount of blue in the color.
+          #
+          # @return [Float] a value in the interval [0, 255]
+          #
           def blue
             @gapi["color"]["blue"]
           end
@@ -126,6 +175,9 @@ module Gcloud
           # The amount this color that should be applied to the pixel. A value
           # of 1.0 corresponds to a solid color, whereas a value of 0.0
           # corresponds to a completely transparent color.
+          #
+          # @return [Float] in the range [0, 1]
+          #
           def alpha
             @gapi["color"]["alpha"] || 1.0
           end
@@ -137,14 +189,19 @@ module Gcloud
           end
 
           ##
-          # Image-specific score for this color. Value in range [0, 1].
+          # Image-specific score for this color.
+          #
+          # @return [Float] in the range [0, 1]
+          #
           def score
             @gapi["score"]
           end
 
           ##
-          # Stores the fraction of pixels the color occupies in the image. Value
-          # in range [0, 1].
+          # Stores the fraction of pixels the color occupies in the image.
+          #
+          # @return [Float] in the range [0, 1]
+          #
           def pixel_fraction
             @gapi["pixelFraction"]
           end

@@ -20,6 +20,23 @@ module Gcloud
     class Analysis
       ##
       # # SafeSearch
+      #
+      # A set of features pertaining to the image, computed by various computer
+      # vision methods over safe-search verticals (for example, adult, spoof,
+      # medical, violence).
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   image = vision.image "./acceptance/data/face.jpg"
+      #
+      #   safe_search = image.safe_search
+      #   safe_search.spoof? #=> false
+      #   safe_search.spoof #=> "VERY_UNLIKELY"
+      #
       class SafeSearch
         POSITIVE_RATINGS = %w(POSSIBLE LIKELY VERY_LIKELY)
 
@@ -43,6 +60,9 @@ module Gcloud
         ##
         # Adult likelihood. Returns `true` if {#adult} is `POSSIBLE`, `LIKELY`,
         # or `VERY_LIKELY`.
+        #
+        # @return [Boolean]
+        #
         def adult?
           POSITIVE_RATINGS.include? adult
         end
@@ -57,6 +77,9 @@ module Gcloud
         ##
         # Spoof likelihood. Returns `true` if {#spoof} is `POSSIBLE`, `LIKELY`,
         # or `VERY_LIKELY`.
+        #
+        # @return [Boolean]
+        #
         def spoof?
           POSITIVE_RATINGS.include? spoof
         end
@@ -71,6 +94,9 @@ module Gcloud
         ##
         # Medical likelihood. Returns `true` if {#medical} is `POSSIBLE`,
         # `LIKELY`, or `VERY_LIKELY`.
+        #
+        # @return [Boolean]
+        #
         def medical?
           POSITIVE_RATINGS.include? medical
         end
@@ -85,6 +111,9 @@ module Gcloud
         ##
         # Violence likelihood. Returns `true` if {#violence} is `POSSIBLE`,
         # `LIKELY`, or `VERY_LIKELY`.
+        #
+        # @return [Boolean]
+        #
         def violence?
           POSITIVE_RATINGS.include? violence
         end
