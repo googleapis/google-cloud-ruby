@@ -90,6 +90,56 @@ module Gcloud
         # Do not save yet
         entities
       end
+      alias_method :upsert, :save
+
+      ##
+      # Insert entities in a transaction. An InvalidArgumentError will raised if
+      # the entities cannot be inserted.
+      #
+      # @example Transactional insert:
+      #   task_key = datastore.key "Task", "sampleTask"
+      #
+      #   task = nil
+      #   datastore.transaction do |tx|
+      #     task = tx.find task_key
+      #     if task.nil?
+      #       task = datastore.entity task_key do |t|
+      #         t["type"] = "Personal"
+      #         t["done"] = false
+      #         t["priority"] = 4
+      #         t["description"] = "Learn Cloud Datastore"
+      #       end
+      #       tx.insert task
+      #     end
+      #   end
+      #
+      def insert *entities
+        @commit.insert(*entities)
+        # Do not insert yet
+        entities
+      end
+
+      ##
+      # Update entities in a transaction. An InvalidArgumentError will raised if
+      # the entities cannot be updated.
+      #
+      # @example Transactional update:
+      #   task_key = datastore.key "Task", "sampleTask"
+      #
+      #   task = nil
+      #   datastore.transaction do |tx|
+      #     task = tx.find task_key
+      #     if task
+      #       task["done"] = true
+      #       tx.update task
+      #     end
+      #   end
+      #
+      def update *entities
+        @commit.update(*entities)
+        # Do not update yet
+        entities
+      end
 
       ##
       # Remove entities in a transaction.

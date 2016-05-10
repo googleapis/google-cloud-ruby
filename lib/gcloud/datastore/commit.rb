@@ -34,14 +34,15 @@ module Gcloud
       # @private Create a new Commit object.
       def initialize
         @shared_upserts = []
+        @shared_inserts = []
+        @shared_updates = []
         @shared_deletes = []
       end
 
       ##
       # Saves entities to the Datastore.
       #
-      # @param [Entity, Key] entities_or_keys One or more Entity or Key
-      #   objects to remove.
+      # @param [Entity] entities One or more Entity objects to save.
       #
       # @example
       #   gcloud = Gcloud.new
@@ -51,8 +52,48 @@ module Gcloud
       #   end
       #
       def save *entities
-        entities.each { |entity| shared_upserts << entity }
+        entities = Array(entities).flatten
+        @shared_upserts += entities unless entities.empty?
         # Do not save yet
+        entities
+      end
+      alias_method :upsert, :save
+
+      ##
+      # Inserts entities to the Datastore.
+      #
+      # @param [Entity] entities One or more Entity objects to insert.
+      #
+      # @example
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #   dataset.commit do |c|
+      #     c.insert task1, task2
+      #   end
+      #
+      def insert *entities
+        entities = Array(entities).flatten
+        @shared_inserts += entities unless entities.empty?
+        # Do not insert yet
+        entities
+      end
+
+      ##
+      # Updates entities to the Datastore.
+      #
+      # @param [Entity] entities One or more Entity objects to update.
+      #
+      # @example
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #   dataset.commit do |c|
+      #     c.update task1, task2
+      #   end
+      #
+      def update *entities
+        entities = Array(entities).flatten
+        @shared_updates += entities unless entities.empty?
+        # Do not update yet
         entities
       end
 
@@ -70,10 +111,10 @@ module Gcloud
       #   end
       #
       def delete *entities_or_keys
-        keys = entities_or_keys.map do |e_or_k|
+        keys = Array(entities_or_keys).flatten.map do |e_or_k|
           e_or_k.respond_to?(:key) ? e_or_k.key : e_or_k
         end
-        keys.each { |k| shared_deletes << k }
+        @shared_deletes += keys unless keys.empty?
         # Do not delete yet
         true
       end
@@ -81,10 +122,16 @@ module Gcloud
       # @private Mutations object to be committed.
       def mutations
         mutations = []
-        mutations += shared_upserts.map do |entity|
+        mutations += @shared_upserts.map do |entity|
           Google::Datastore::V1beta3::Mutation.new upsert: entity.to_grpc
         end
-        mutations += shared_deletes.map do |key|
+        mutations += @shared_inserts.map do |entity|
+          Google::Datastore::V1beta3::Mutation.new insert: entity.to_grpc
+        end
+        mutations += @shared_updates.map do |entity|
+          Google::Datastore::V1beta3::Mutation.new update: entity.to_grpc
+        end
+        mutations += @shared_deletes.map do |key|
           Google::Datastore::V1beta3::Mutation.new delete: key.to_grpc
         end
         mutations
@@ -92,21 +139,7 @@ module Gcloud
 
       # @private All entities saved in the commit.
       def entities
-        shared_upserts
-      end
-
-      protected
-
-      ##
-      # @private List of Entity objects to be saved.
-      def shared_upserts
-        @shared_upserts
-      end
-
-      ##
-      # @private List of Key objects to be deleted.
-      def shared_deletes
-        @shared_deletes
+        @shared_upserts + @shared_inserts + @shared_updates
       end
     end
   end
