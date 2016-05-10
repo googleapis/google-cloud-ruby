@@ -128,11 +128,13 @@ module Gcloud
         analysis.properties
       end
 
+      # @private
       def to_s
         return "(io)" if content?
         "(url: #{url})"
       end
 
+      # @private
       def inspect
         "#<#{self.class.name} #{self}>"
       end
@@ -290,10 +292,20 @@ module Gcloud
               max.to_hash.values.reject(&:nil?).empty?
           end
 
+          ##
+          # Deeply converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_h
             to_hash
           end
 
+          ##
+          # Deeply converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_hash
             { minLatLng: min.to_hash, maxLatLng: max.to_hash }
           end

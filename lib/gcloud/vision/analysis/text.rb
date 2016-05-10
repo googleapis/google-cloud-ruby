@@ -59,23 +59,36 @@ module Gcloud
           @words
         end
 
+        ##
+        # Deeply converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_h
           to_hash
         end
 
+        ##
+        # Deeply converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_hash
           { text: text, locale: locale, bounds: bounds.map(&:to_h),
             words: words.map(&:to_h) }
         end
 
+        # @private
         def to_s
           to_str
         end
 
+        # @private
         def to_str
           text
         end
 
+        # @private
         def inspect
           format "#<Text text: %s, locale: %s, bounds: %i, words: %i>",
                  text.inspect, locale.inspect, bounds.count, words.count
@@ -121,22 +134,35 @@ module Gcloud
             end
           end
 
+          ##
+          # Deeply converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_h
             to_hash
           end
 
+          ##
+          # Deeply converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_hash
             { text: text, bounds: bounds.map(&:to_h) }
           end
 
+          # @private
           def to_s
             to_str
           end
 
+          # @private
           def to_str
             text
           end
 
+          # @private
           def inspect
             format "#<Word text: %s, bounds: %i>", text.inspect, bounds.count
           end

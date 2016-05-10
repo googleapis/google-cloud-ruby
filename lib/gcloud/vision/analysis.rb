@@ -344,6 +344,7 @@ module Gcloud
           properties: properties.to_h }
       end
 
+      # @private
       def to_s
         tmplt = "(faces: %i, landmarks: %i, logos: %i, labels: %i, text: %s," \
                 " safe_search: %s, properties: %s)"
@@ -351,6 +352,7 @@ module Gcloud
                text?, safe_search?, properties?
       end
 
+      # @private
       def inspect
         "#<#{self.class.name} #{self}>"
       end

@@ -107,10 +107,20 @@ module Gcloud
             Hash[Array(@gapi["properties"]).map { |p| [p["name"], p["value"]] }]
         end
 
+        ##
+        # Deeply converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_h
           to_hash
         end
 
+        ##
+        # Deeply converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_hash
           { mid: mid, locale: locale, description: description,
             score: score, confidence: confidence, topicality: topicality,
@@ -118,6 +128,7 @@ module Gcloud
             properties: properties }
         end
 
+        # @private
         def to_s
           tmplt = "mid: %s, locale: %s, description: %s, score: %s, " \
                   "confidence: %s, topicality: %s, bounds: %i, " \
@@ -127,6 +138,7 @@ module Gcloud
                  bounds.count, locations.count, properties.inspect
         end
 
+        # @private
         def inspect
           "#<#{self.class.name} #{self}>"
         end

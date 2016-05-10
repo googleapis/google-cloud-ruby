@@ -38,26 +38,48 @@ module Gcloud
           end
         end
 
+        ##
+        # Returns the object's property values as an array.
+        #
+        # @return [Array]
+        #
         def to_a
           to_ary
         end
 
+        ##
+        # Returns the object's property values as an array.
+        #
+        # @return [Array]
+        #
         def to_ary
           colors.map(&:rgb)
         end
 
+        ##
+        # Deeply converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_h
           to_hash
         end
 
+        ##
+        # Deeply converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_hash
           { colors: colors.map(&:to_h) }
         end
 
+        # @private
         def to_s
           "(colors: #{colors.count})"
         end
 
+        # @private
         def inspect
           "#<Properties #{self}>"
         end
@@ -127,10 +149,20 @@ module Gcloud
             @gapi["pixelFraction"]
           end
 
+          ##
+          # Converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_h
             to_hash
           end
 
+          ##
+          # Converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_hash
             { red: red, green: green, blue: blue, alpha: alpha, rgb: rgb,
               score: score, pixel_fraction: pixel_fraction }

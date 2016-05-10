@@ -42,26 +42,48 @@ module Gcloud
         @longitude = longitude
       end
 
+      ##
+      # Returns the object's property values as an array.
+      #
+      # @return [Array]
+      #
       def to_a
         to_ary
       end
 
+      ##
+      # Returns the object's property values as an array.
+      #
+      # @return [Array]
+      #
       def to_ary
         [latitude, longitude]
       end
 
+      ##
+      # Converts object to a hash. All keys will be symbolized.
+      #
+      # @return [Hash]
+      #
       def to_h
         to_hash
       end
 
+      ##
+      # Converts object to a hash. All keys will be symbolized.
+      #
+      # @return [Hash]
+      #
       def to_hash
         { latitude: latitude, longitude: longitude }
       end
 
+      # @private
       def to_s
         "(latitude: #{latitude.inspect}, longitude: #{longitude.inspect})"
       end
 
+      # @private
       def inspect
         "#<#{self.class.name} #{self}>"
       end
