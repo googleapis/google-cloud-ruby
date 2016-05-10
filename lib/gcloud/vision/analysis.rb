@@ -31,7 +31,7 @@ module Gcloud
     #
     #   gcloud = Gcloud.new
     #   vision = gcloud.vision
-    #   analysis = vision.detect image, faces: 1
+    #   analysis = vision.annotate image, faces: 1
     #   analysis.face? #=> true
     class Analysis
       ##
@@ -56,7 +56,7 @@ module Gcloud
       #   vision = gcloud.vision
       #
       #   image = vision.image "./acceptance/data/face.jpg"
-      #   analysis = vision.detect image, faces: 10
+      #   analysis = vision.annotate image, faces: 10
       #   analysis.faces.count #=> 1
       #   face = analysis.faces.first
       #
@@ -88,7 +88,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, faces: 1
+      #   analysis = vision.annotate image, faces: 1
       #   analysis.face? #=> true
       #
       def face?
@@ -103,7 +103,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, landmarks: 1
+      #   analysis = vision.annotate image, landmarks: 1
       #   analysis.landmarks.count #=> 1
       #   landmark = analysis.landmarks.first
       #
@@ -120,7 +120,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, landmarks: 1
+      #   analysis = vision.annotate image, landmarks: 1
       #   landmark = analysis.landmark
       #
       def landmark
@@ -135,7 +135,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, landmarks: 1
+      #   analysis = vision.annotate image, landmarks: 1
       #   analysis.landmark? #=> true
       #
       def landmark?
@@ -149,7 +149,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, logos: 1
+      #   analysis = vision.annotate image, logos: 1
       #   analysis.logos.count #=> 1
       #   logo = analysis.logos.first
       #
@@ -166,7 +166,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, logos: 1
+      #   analysis = vision.annotate image, logos: 1
       #   logo = analysis.logo
       #
       def logo
@@ -181,7 +181,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, logos: 1
+      #   analysis = vision.annotate image, logos: 1
       #   analysis.logo? #=> true
       #
       def logo?
@@ -195,7 +195,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, labels: 1
+      #   analysis = vision.annotate image, labels: 1
       #   analysis.labels.count #=> 1
       #   label = analysis.labels.first
       #
@@ -212,7 +212,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, labels: 1
+      #   analysis = vision.annotate image, labels: 1
       #   label = analysis.label
       #
       def label
@@ -227,7 +227,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, labels: 1
+      #   analysis = vision.annotate image, labels: 1
       #   analysis.label? #=> true
       #
       def label?
@@ -241,7 +241,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, text: true
+      #   analysis = vision.annotate image, text: true
       #   text = analysis.text
       #
       def text
@@ -255,7 +255,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, text: true
+      #   analysis = vision.annotate image, text: true
       #   analysis.text? #=> true
       #
       def text?
@@ -270,7 +270,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, safe_search: true
+      #   analysis = vision.annotate image, safe_search: true
       #   safe_search = analysis.safe_search
       #
       def safe_search
@@ -286,7 +286,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, safe_search: true
+      #   analysis = vision.annotate image, safe_search: true
       #   analysis.safe_search? #=> true
       #
       def safe_search?
@@ -301,7 +301,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, properties: true
+      #   analysis = vision.annotate image, properties: true
       #   properties = analysis.properties
       #
       def properties
@@ -316,17 +316,27 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, properties: true
+      #   analysis = vision.annotate image, properties: true
       #   analysis.properties? #=> true
       #
       def properties?
         !properties.nil?
       end
 
+      ##
+      # Deeply converts object to a hash. All keys will be symbolized.
+      #
+      # @return [Hash]
+      #
       def to_h
         to_hash
       end
 
+      ##
+      # Deeply converts object to a hash. All keys will be symbolized.
+      #
+      # @return [Hash]
+      #
       def to_hash
         { faces: faces.map(&:to_h), landmarks: landmarks.map(&:to_h),
           logos: logos.map(&:to_h), labels: labels.map(&:to_h),
