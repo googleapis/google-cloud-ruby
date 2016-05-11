@@ -233,7 +233,7 @@ path the file must be readable.</p>
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
 <span class='id identifier rubyid_pubsub'>pubsub</span>  <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
 <span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_storage'>storage</span></code></pre>
                       
@@ -881,11 +881,10 @@ set of resources and operations that the connection can access. See <a href="htt
 OAuth 2.0 to Access Google
 APIs</a>.</p>
 
-<p>The default scopes are:</p>
+<p>The default scope is:</p>
 
 <ul>
   <li><code class="highlighter-rouge">https://www.googleapis.com/auth/datastore</code></li>
-  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/userinfo.email</code></li>
 </ul>
 </div>
                               
@@ -916,15 +915,17 @@ APIs</a>.</p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud/datastore</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
                            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
-  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Get started with Google Cloud</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Personal</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Learn Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span>
 
-<span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_entity'>entity</span></code></pre>
+<span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_task'>task</span></code></pre>
                       
                     
 
@@ -1176,11 +1177,10 @@ set of resources and operations that the connection can access. See <a href="htt
 OAuth 2.0 to Access Google
 APIs</a>.</p>
 
-<p>The default scopes are:</p>
+<p>The default scope is:</p>
 
 <ul>
   <li><code class="highlighter-rouge">https://www.googleapis.com/auth/datastore</code></li>
-  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/userinfo.email</code></li>
 </ul>
 </div>
                               
@@ -1212,14 +1212,16 @@ APIs</a>.</p>
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
 
-<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
-  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Get started with Google Cloud</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Personal</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Learn Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span>
 
-<span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_entity'>entity</span></code></pre>
+<span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_task'>task</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>You shouldn’t need to override the default scope, but you can:</p>
@@ -1229,7 +1231,7 @@ APIs</a>.</p>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_platform_scope'>platform_scope</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span> <span class='label'>scope:</span> <span class='id identifier rubyid_platform_scope'>platform_scope</span></code></pre>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span> <span class='label'>scope:</span> <span class='id identifier rubyid_platform_scope'>platform_scope</span></code></pre>
                       
                     
 
@@ -1929,7 +1931,7 @@ keys</a>.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 10, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal current' href=''>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 11, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal current' href=''>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

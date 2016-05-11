@@ -161,21 +161,23 @@
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span> <span class="s2">"my-todo-project-id"</span><span class="p">,</span>
                     <span class="s2">"/path/to/keyfile.json"</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
 
 <span class="c1"># Create a new task to demo datastore</span>
-<span class="n">demo_task</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">entity</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"datastore-demo"</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
-  <span class="n">t</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Demonstrate Datastore functionality"</span>
-  <span class="n">t</span><span class="p">[</span><span class="s2">"completed"</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">entity</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"sampleTask"</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Personal"</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"done"</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"priority"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Learn Cloud Datastore"</span>
 <span class="k">end</span>
 
 <span class="c1"># Save the new task</span>
-<span class="n">dataset</span><span class="p">.</span><span class="nf">save</span> <span class="n">demo_task</span>
+<span class="n">datastore</span><span class="p">.</span><span class="nf">save</span> <span class="n">task</span>
 
 <span class="c1"># Run a query for all completed tasks</span>
-<span class="n">query</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"Task"</span><span class="p">).</span>
-  <span class="nf">where</span><span class="p">(</span><span class="s2">"completed"</span><span class="p">,</span> <span class="s2">"="</span><span class="p">,</span> <span class="kp">true</span><span class="p">)</span>
-<span class="n">completed_tasks</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"Task"</span><span class="p">).</span>
+  <span class="nf">where</span><span class="p">(</span><span class="s2">"done"</span><span class="p">,</span> <span class="s2">"="</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
 </code></pre>
 </div>
 
@@ -389,7 +391,7 @@ Don’t hesitate to <a href="http://stackoverflow.com/questions/tagged/gcloud-ru
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 10, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 11, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

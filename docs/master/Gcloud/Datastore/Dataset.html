@@ -107,6 +107,12 @@ read, updated, and deleted by Gcloud::Datastore::Dataset.</p>
               
                 <span class='object_link'><a href="#save-instance_method" title="Gcloud::Datastore::Dataset#save (method)">#save</a></span>
               
+                <span class='object_link'><a href="#upsert-instance_method" title="Gcloud::Datastore::Dataset#upsert (method)">#upsert</a></span>
+              
+                <span class='object_link'><a href="#insert-instance_method" title="Gcloud::Datastore::Dataset#insert (method)">#insert</a></span>
+              
+                <span class='object_link'><a href="#update-instance_method" title="Gcloud::Datastore::Dataset#update (method)">#update</a></span>
+              
                 <span class='object_link'><a href="#delete-instance_method" title="Gcloud::Datastore::Dataset#delete (method)">#delete</a></span>
               
                 <span class='object_link'><a href="#commit-instance_method" title="Gcloud::Datastore::Dataset#commit (method)">#commit</a></span>
@@ -126,6 +132,8 @@ read, updated, and deleted by Gcloud::Datastore::Dataset.</p>
                 <span class='object_link'><a href="#transaction-instance_method" title="Gcloud::Datastore::Dataset#transaction (method)">#transaction</a></span>
               
                 <span class='object_link'><a href="#query-instance_method" title="Gcloud::Datastore::Dataset#query (method)">#query</a></span>
+              
+                <span class='object_link'><a href="#gql-instance_method" title="Gcloud::Datastore::Dataset#gql (method)">#gql</a></span>
               
                 <span class='object_link'><a href="#key-instance_method" title="Gcloud::Datastore::Dataset#key (method)">#key</a></span>
               
@@ -176,8 +184,8 @@ read, updated, and deleted by Gcloud::Datastore::Dataset.</p>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
                     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
-<span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='comment'>#=&gt; &quot;my-todo-project&quot;</span></code></pre>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='comment'>#=&gt; &quot;my-todo-project&quot;</span></code></pre>
                       
                     
 
@@ -258,8 +266,8 @@ read, updated, and deleted by Gcloud::Datastore::Dataset.</p>
                       </h3>
                       
                         
-                        <pre class="code"><code><span class='id identifier rubyid_empty_key'>empty_key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_task_keys'>task_keys</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_allocate_ids'>allocate_ids</span> <span class='id identifier rubyid_empty_key'>empty_key</span><span class='comma'>,</span> <span class='int'>5</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task_key'>task_key</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task_keys'>task_keys</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_allocate_ids'>allocate_ids</span> <span class='id identifier rubyid_task_key'>task_key</span><span class='comma'>,</span> <span class='int'>5</span></code></pre>
                       
                     
 
@@ -322,12 +330,258 @@ read, updated, and deleted by Gcloud::Datastore::Dataset.</p>
 
                     
                       <h3 id="method-i-save-label-Examples">
-                        Example
+                        Examples
                         <span><a href="#method-i-save-label-Examples">¶</a> <a href="#top">↑</a></span>
                       </h3>
                       
                         
-                        <pre class="code"><code><span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_task1'>task1</span><span class='comma'>,</span> <span class='id identifier rubyid_task2'>task2</span></code></pre>
+                          <p class="example_title"><div class='inline'><p>Insert a new entity:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Personal</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Learn Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='comment'>#=&gt; nil
+</span><span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_task'>task</span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='comment'>#=&gt; 123456</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Insert multiple new entities in a batch:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_task1'>task1</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Personal</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Learn Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_task2'>task2</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Personal</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Integrate Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_task_key1'>task_key1</span><span class='comma'>,</span> <span class='id identifier rubyid_task_key2'>task_key2</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span><span class='lparen'>(</span><span class='id identifier rubyid_task1'>task1</span><span class='comma'>,</span> <span class='id identifier rubyid_task2'>task2</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:key</span><span class='rparen'>)</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Update an existing entity:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>5</span>
+<span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_task'>task</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                    <div class="aliases">
+                      Also aliased as:
+                      <a href='#upsert-instance_method'>upsert</a>
+                    </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="upsert-instance_method"></a>
+                  <h4>
+                    <code>upsert</code>
+                    <span>
+                      <a href="#upsert-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+                  
+                    <div class="aliases">
+                      Alias for:
+                      <a href="#save-instance_method">save</a>
+                    </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="insert-instance_method"></a>
+                  <h4>
+                    <code>insert(*entities)</code>
+                    <span>
+                      <a href="#insert-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Insert one or more entities to the Datastore. An InvalidArgumentError
+will raised if the entities cannot be inserted.</p>
+
+
+                    
+
+                    
+                      <h3 id="method-i-insert-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-insert-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>entities</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>One or more entity objects to be inserted.</p>
+</div>
+                              
+                              (<tt><span class='object_link'><a href="Entity.html" title="Gcloud::Datastore::Entity (class)">Entity</a></span></tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-insert-label-Returns">
+                        Returns
+                        <span><a href="#method-i-insert-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Array&lt;<span class='object_link'><a href="Entity.html" title="Gcloud::Datastore::Entity (class)">Gcloud::Datastore::Entity</a></span>&gt;</tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-insert-label-Examples">
+                        Examples
+                        <span><a href="#method-i-insert-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Insert a new entity:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Personal</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Learn Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='comment'>#=&gt; nil
+</span><span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_insert'>insert</span> <span class='id identifier rubyid_task'>task</span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='comment'>#=&gt; 123456</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Insert multiple new entities in a batch:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_task1'>task1</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Personal</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Learn Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_task2'>task2</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Personal</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Integrate Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_task_key1'>task_key1</span><span class='comma'>,</span> <span class='id identifier rubyid_task_key2'>task_key2</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_insert'>insert</span><span class='lparen'>(</span><span class='id identifier rubyid_task1'>task1</span><span class='comma'>,</span> <span class='id identifier rubyid_task2'>task2</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:key</span><span class='rparen'>)</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="update-instance_method"></a>
+                  <h4>
+                    <code>update(*entities)</code>
+                    <span>
+                      <a href="#update-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Update one or more entities to the Datastore. An InvalidArgumentError
+will raised if the entities cannot be updated.</p>
+
+
+                    
+
+                    
+                      <h3 id="method-i-update-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-update-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>entities</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>One or more entity objects to be updated.</p>
+</div>
+                              
+                              (<tt><span class='object_link'><a href="Entity.html" title="Gcloud::Datastore::Entity (class)">Entity</a></span></tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-update-label-Returns">
+                        Returns
+                        <span><a href="#method-i-update-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Array&lt;<span class='object_link'><a href="Entity.html" title="Gcloud::Datastore::Entity (class)">Gcloud::Datastore::Entity</a></span>&gt;</tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-update-label-Examples">
+                        Examples
+                        <span><a href="#method-i-update-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Update an existing entity:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_task'>task</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>update multiple new entities in a batch:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span>
+<span class='id identifier rubyid_tasks'>tasks</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span> <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+<span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span> <span class='id identifier rubyid_tasks'>tasks</span></code></pre>
                       
                     
 
@@ -477,7 +731,7 @@ persisted.</p>
 
                   <div class="method-description">
 
-                    <p>Retrieve an entity by providing key information.</p>
+                    <p>Retrieve an entity by key.</p>
 
 
                     
@@ -560,14 +814,14 @@ for more information.</p>
                           <p class="example_title"><div class='inline'><p>Finding an entity with a key:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>123456</span>
-<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='id identifier rubyid_key'>key</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task_key'>task_key</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='id identifier rubyid_task_key'>task_key</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>Finding an entity with a <code class="highlighter-rouge">kind</code> and <code class="highlighter-rouge">id</code>/<code class="highlighter-rouge">name</code>:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>123456</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                     
 
@@ -613,7 +867,8 @@ for more information.</p>
 
                   <div class="method-description">
 
-                    <p>Retrieve the entities for the provided keys.</p>
+                    <p>Retrieve the entities for the provided keys. The order of results is
+undefined and has no relation to the order of <code class="highlighter-rouge">keys</code> arguments.</p>
 
 
                     
@@ -680,10 +935,11 @@ for more information.</p>
                       
                         
                         <pre class="code"><code><span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
-<span class='id identifier rubyid_key1'>key1</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>123456</span>
-<span class='id identifier rubyid_key2'>key2</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>987654</span>
-<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find_all'>find_all</span> <span class='id identifier rubyid_key1'>key1</span><span class='comma'>,</span> <span class='id identifier rubyid_key2'>key2</span></code></pre>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+
+<span class='id identifier rubyid_task_key1'>task_key1</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask1</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task_key2'>task_key2</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask2</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_find_all'>find_all</span> <span class='id identifier rubyid_task_key1'>task_key1</span><span class='comma'>,</span> <span class='id identifier rubyid_task_key2'>task_key2</span></code></pre>
                       
                     
 
@@ -747,10 +1003,10 @@ for more information.</p>
                           <dd>
                             <p>
                               
-                                <div class='inline'><p>The Query object with the search criteria.</p>
+                                <div class='inline'><p>The object with the search criteria.</p>
 </div>
                               
-                              (<tt><span class='object_link'><a href="Query.html" title="Gcloud::Datastore::Query (class)">Query</a></span></tt>)
+                              (<tt><span class='object_link'><a href="Query.html" title="Gcloud::Datastore::Query (class)">Query</a></span></tt>, <tt><span class='object_link'><a href="GqlQuery.html" title="Gcloud::Datastore::GqlQuery (class)">GqlQuery</a></span></tt>)
                             </p>
                           </dd>
                         
@@ -808,17 +1064,33 @@ for more information.</p>
                       </h3>
                       
                         
-                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
-  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>Run the query within a namespace with the <code class="highlighter-rouge">namespace</code> option:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_kind'>kind</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
-  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>namespace:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ns~todo-project</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>namespace:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ns~todo-project</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Run the query with a GQL string.</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_gql_query'>gql_query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_gql'>gql</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM Task WHERE done = @done</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                          <span class='label'>done:</span> <span class='kw'>false</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_gql_query'>gql_query</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Run the GQL query within a namespace with <code class="highlighter-rouge">namespace</code> option:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_gql_query'>gql_query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_gql'>gql</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM Task WHERE done = @done</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                          <span class='label'>done:</span> <span class='kw'>false</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_gql_query'>gql_query</span><span class='comma'>,</span> <span class='label'>namespace:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ns~todo-project</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                     
 
@@ -886,16 +1158,18 @@ for more information.</p>
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
 
-<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_u'>u</span><span class='op'>|</span>
-  <span class='id identifier rubyid_u'>u</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Heidi Henderson</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_u'>u</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>email</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.net</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Personal</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Learn Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span>
 
-<span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-    <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_user'>user</span>
+<span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_task'>task</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></code></pre>
                       
@@ -906,17 +1180,19 @@ for more information.</p>
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
 
-<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_u'>u</span><span class='op'>|</span>
-  <span class='id identifier rubyid_u'>u</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Heidi Henderson</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_u'>u</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>email</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.net</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Personal</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Learn Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span>
 
-<span class='id identifier rubyid_tx'>tx</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span>
+<span class='id identifier rubyid_tx'>tx</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span>
 <span class='kw'>begin</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-    <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_user'>user</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_task'>task</span>
   <span class='kw'>end</span>
   <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span>
 <span class='kw'>rescue</span>
@@ -990,9 +1266,9 @@ creation of Query objects easier.</p>
                       </h3>
                       
                         
-                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
-  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>The previous example is equivalent to:</p>
@@ -1000,8 +1276,104 @@ creation of Query objects easier.</p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span>
   <span class='id identifier rubyid_kind'>kind</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
-  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="gql-instance_method"></a>
+                  <h4>
+                    <code>gql(query, bindings = {})</code>
+                    <span>
+                      <a href="#gql-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Create a new GqlQuery instance. This is a convenience method to make the
+creation of GqlQuery objects easier.</p>
+
+
+                    
+
+                    
+                      <h3 id="method-i-gql-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-gql-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>query</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The GQL query string.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>bindings</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Named bindings for the GQL query string, each
+key must match regex <code class="highlighter-rouge">[A-Za-z_$][A-Za-z_$0-9]*</code>, must not match regex
+<code class="highlighter-rouge">__.*__</code>, and must not be <code class="highlighter-rouge">""</code>. The value must be an <code class="highlighter-rouge">Object</code> that can
+be stored as an Entity property value, or a <code class="highlighter-rouge">Cursor</code>.</p>
+</div>
+                              
+                              (<tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-gql-label-Returns">
+                        Returns
+                        <span><a href="#method-i-gql-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="GqlQuery.html" title="Gcloud::Datastore::GqlQuery (class)">Gcloud::Datastore::GqlQuery</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-gql-label-Examples">
+                        Examples
+                        <span><a href="#method-i-gql-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_gql_query'>gql_query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_gql'>gql</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM Task WHERE done = @done</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                          <span class='label'>done:</span> <span class='kw'>false</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_gql_query'>gql_query</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The previous example is equivalent to:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_gql_query'>gql_query</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>GqlQuery</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_gql_query'>gql_query</span><span class='period'>.</span><span class='id identifier rubyid_query_string'>query_string</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM Task WHERE done = @done</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_gql_query'>gql_query</span><span class='period'>.</span><span class='id identifier rubyid_named_bindings'>named_bindings</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>done:</span> <span class='kw'>false</span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_gql_query'>gql_query</span></code></pre>
                       
                     
 
@@ -1014,7 +1386,7 @@ creation of Query objects easier.</p>
                 <div class="method">
                   <a name="key-instance_method"></a>
                   <h4>
-                    <code>key(kind = nil, id_or_name = nil)</code>
+                    <code>key(*path, project: nil, namespace: nil)</code>
                     <span>
                       <a href="#key-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1037,12 +1409,27 @@ creation of Key objects easier.</p>
                       <dl class="rdoc-list note-list">
                         
                           <dt>
-                            <code>kind</code>
+                            <code>path</code>
                           </dt>
                           <dd>
                             <p>
                               
-                                <div class='inline'><p>The kind of the Key. This is optional.</p>
+                                <div class='inline'><p>An optional list
+of pairs for the key’s path. Each pair may include the key’s kind
+(String) and an id (Integer) or name (String). This is optional.</p>
+</div>
+                              
+                              (<tt>Array&lt;Array(String,(String|Integer|nil))&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The project of the Key. This is optional.</p>
 </div>
                               
                               (<tt>String</tt>)
@@ -1050,16 +1437,15 @@ creation of Key objects easier.</p>
                           </dd>
                         
                           <dt>
-                            <code>id_or_name</code>
+                            <code>namespace</code>
                           </dt>
                           <dd>
                             <p>
                               
-                                <div class='inline'><p>The id or name of the Key. This is
-optional.</p>
+                                <div class='inline'><p>namespace kind of the Key. This is optional.</p>
 </div>
                               
-                              (<tt>Integer</tt>, <tt>String</tt>)
+                              (<tt>String</tt>)
                             </p>
                           </dd>
                         
@@ -1084,13 +1470,50 @@ optional.</p>
                       </h3>
                       
                         
-                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task_key'>task_key</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>The previous example is equivalent to:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task_key'>task_key</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Create an empty key:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Create an incomplete key:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Create a key with a parent:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='lbracket'>[</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>List</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>todos</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='comment'>#=&gt; [[&quot;List&quot;, &quot;todos&quot;], [&quot;User&quot;, &quot;heidi@example.com&quot;]]</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Create an incomplete key with a parent:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>List</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>todos</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='comment'>#=&gt; [[&quot;List&quot;, &quot;todos&quot;], [&quot;User&quot;, nil]]</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Create a key with a project and namespace:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>List</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>todos</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                  <span class='label'>project:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                  <span class='label'>namespace:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ns~todo-project</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='comment'>#=&gt; [[&quot;List&quot;, &quot;todos&quot;], [&quot;User&quot;, &quot;heidi@example.com&quot;]]
+</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='comment'>#=&gt; &quot;my-todo-project&quot;,
+</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_namespace'>namespace</span> <span class='comment'>#=&gt; &quot;ns~todo-project&quot;</span></code></pre>
                       
                     
 
@@ -1103,7 +1526,7 @@ optional.</p>
                 <div class="method">
                   <a name="entity-instance_method"></a>
                   <h4>
-                    <code>entity(key_or_kind = nil, id_or_name = nil)</code>
+                    <code>entity(*key_or_path, project: nil, namespace: nil)</code>
                     <span>
                       <a href="#entity-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1114,8 +1537,6 @@ optional.</p>
 
                     <p>Create a new empty Entity instance. This is a convenience method to make
 the creation of Entity objects easier.</p>
-
-<p>end</p>
 
 
                     
@@ -1128,30 +1549,44 @@ the creation of Entity objects easier.</p>
                       <dl class="rdoc-list note-list">
                         
                           <dt>
-                            <code>key_or_kind</code>
+                            <code>key_or_path</code>
                           </dt>
                           <dd>
                             <p>
                               
-                                <div class='inline'><p>A Key object or <code class="highlighter-rouge">kind</code> string
-value. This is optional.</p>
+                                <div class='inline'><p>An
+optional list of pairs for the key’s path. Each pair may include the #
+key’s kind (String) and an id (Integer) or name (String). This is #
+optional.</p>
 </div>
                               
-                              (<tt><span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Key</a></span></tt>, <tt>String</tt>, <tt>nil</tt>)
+                              (<tt><span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Key</a></span></tt>, <tt>Array&lt;Array(String,(String|Integer|nil))&gt;</tt>)
                             </p>
                           </dd>
                         
                           <dt>
-                            <code>id_or_name</code>
+                            <code>project</code>
                           </dt>
                           <dd>
                             <p>
                               
-                                <div class='inline'><p>The Key’s <code class="highlighter-rouge">id</code> or <code class="highlighter-rouge">name</code> value
-if a <code class="highlighter-rouge">kind</code> was provided in the first parameter.</p>
+                                <div class='inline'><p>The project of the Key. This is optional.</p>
 </div>
                               
-                              (<tt>Integer</tt>, <tt>String</tt>, <tt>nil</tt>)
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>namespace</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>namespace kind of the Key. This is optional.</p>
+</div>
+                              
+                              (<tt>String</tt>)
                             </p>
                           </dd>
                         
@@ -1176,50 +1611,57 @@ if a <code class="highlighter-rouge">kind</code> was provided in the first param
                       </h3>
                       
                         
-                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>The previous example is equivalent to:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>The key can also be passed in as an object:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='id identifier rubyid_key'>key</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task_key'>task_key</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='id identifier rubyid_task_key'>task_key</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>Or the key values can be passed in as parameters:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>The previous example is equivalent to:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_key'>key</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task_key'>task_key</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_task_key'>task_key</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>The newly created entity can also be configured using a block:</p>
 </div></p>
                         
-                        <pre class="code"><code>user = dataset.entity &quot;User&quot;, &quot;heidi@example.com&quot; do |u|
-  u[&quot;name&quot;] = &quot;Heidi Henderson&quot;</code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Personal</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Learn Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>The previous example is equivalent to:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_key'>key</span>
-<span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Heidi Henderson</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task_key'>task_key</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_task_key'>task_key</span>
+<span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Personal</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>4</span>
+<span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Learn Cloud Datastore</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                     
 
@@ -1234,7 +1676,7 @@ if a <code class="highlighter-rouge">kind</code> was provided in the first param
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 10, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l1'><a class='reference internal current' href=''>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal' href='Entity.html'>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 11, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l1'><a class='reference internal current' href=''>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal' href='Entity.html'>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

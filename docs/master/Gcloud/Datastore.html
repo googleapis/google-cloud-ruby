@@ -92,10 +92,11 @@ care of for you.</p>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span> <span class="s2">"my-todo-project"</span><span class="p">,</span>
                     <span class="s2">"/path/to/keyfile.json"</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
-<span class="n">entity</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">find</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"start"</span>
-<span class="n">entity</span><span class="p">[</span><span class="s2">"completed"</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
-<span class="n">dataset</span><span class="p">.</span><span class="nf">save</span> <span class="n">entity</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">find</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"sampleTask"</span>
+<span class="n">task</span><span class="p">[</span><span class="s2">"priority"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">datastore</span><span class="p">.</span><span class="nf">save</span> <span class="n">task</span>
 </code></pre>
 </div>
 
@@ -107,11 +108,11 @@ Guide</a>.</p>
 <a href="https://cloud.google.com/datastore/docs/concepts/overview">Google Cloud Datastore Concepts Overview
 </a>.</p>
 
-<h2 id="retrieving-records">Retrieving Records</h2>
+<h2 id="retrieving-records">Retrieving records</h2>
 
-<p>Records, called “entities” in Datastore, are retrieved by using a Key.
-The Key is more than a numeric identifier, it is a complex data structure
-that can be used to model relationships. The simplest Key has a string
+<p>Records, called “entities” in Datastore, are retrieved by using a key.
+The key is more than a numeric identifier, it is a complex data structure
+that can be used to model relationships. The simplest key has a string
 <tt>kind</tt> value, and either a numeric <tt>id</tt> value, or a string
 <tt>name</tt> value. A single record can be retrieved by calling
 <span class='object_link'><a href="Datastore/Dataset.html#find-instance_method" title="Gcloud::Datastore::Dataset#find (method)">Dataset#find</a></span> and passing the parts of the key:</p>
@@ -119,25 +120,27 @@ that can be used to model relationships. The simplest Key has a string
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
-<span class="n">entity</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">find</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"start"</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">find</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"sampleTask"</span>
 </code></pre>
 </div>
 
-<p>Optionally, <span class='object_link'><a href="Datastore/Dataset.html#find-instance_method" title="Gcloud::Datastore::Dataset#find (method)">Dataset#find</a></span> can be given a Key object:</p>
+<p>Optionally, <span class='object_link'><a href="Datastore/Dataset.html#find-instance_method" title="Gcloud::Datastore::Dataset#find (method)">Dataset#find</a></span> can be given a key object:</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
-<span class="n">key</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="mi">12345</span>
-<span class="n">entity</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">find</span> <span class="n">key</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+
+<span class="n">task_key</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="mi">123456</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">find</span> <span class="n">task_key</span>
 </code></pre>
 </div>
 
 <p>See <span class='object_link'><a href="Datastore/Dataset.html#find-instance_method" title="Gcloud::Datastore::Dataset#find (method)">Dataset#find</a></span></p>
 
-<h2 id="querying-records">Querying Records</h2>
+<h2 id="querying-records">Querying records</h2>
 
 <p>Multiple records can be found that match criteria.
 (See <span class='object_link'><a href="Datastore/Query.html#where-instance_method" title="Gcloud::Datastore::Query#where (method)">Query#where</a></span>)</p>
@@ -145,10 +148,12 @@ that can be used to model relationships. The simplest Key has a string
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
-<span class="n">query</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"List"</span><span class="p">).</span>
-  <span class="nf">where</span><span class="p">(</span><span class="s2">"active"</span><span class="p">,</span> <span class="s2">"="</span><span class="p">,</span> <span class="kp">true</span><span class="p">)</span>
-<span class="n">active_lists</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"Task"</span><span class="p">).</span>
+  <span class="nf">where</span><span class="p">(</span><span class="s2">"done"</span><span class="p">,</span> <span class="s2">"="</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span>
+
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
 </code></pre>
 </div>
 
@@ -157,11 +162,12 @@ that can be used to model relationships. The simplest Key has a string
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
-<span class="n">query</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"List"</span><span class="p">).</span>
-  <span class="nf">where</span><span class="p">(</span><span class="s2">"active"</span><span class="p">,</span> <span class="s2">"="</span><span class="p">,</span> <span class="kp">true</span><span class="p">).</span>
-  <span class="nf">order</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span>
-<span class="n">active_lists</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"Task"</span><span class="p">).</span>
+  <span class="nf">order</span><span class="p">(</span><span class="s2">"created"</span><span class="p">)</span>
+
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
 </code></pre>
 </div>
 
@@ -171,48 +177,51 @@ that can be used to model relationships. The simplest Key has a string
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
-<span class="n">query</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"List"</span><span class="p">).</span>
-  <span class="nf">where</span><span class="p">(</span><span class="s2">"active"</span><span class="p">,</span> <span class="s2">"="</span><span class="p">,</span> <span class="kp">true</span><span class="p">).</span>
-  <span class="nf">order</span><span class="p">(</span><span class="s2">"name"</span><span class="p">).</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"Task"</span><span class="p">).</span>
   <span class="nf">limit</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">active_lists</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
+
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
 </code></pre>
 </div>
 
-<p>Records’ Key structures can also be queried.
+<p>Records’ key structures can also be queried.
 (See <span class='object_link'><a href="Datastore/Query.html#ancestor-instance_method" title="Gcloud::Datastore::Query#ancestor (method)">Query#ancestor</a></span>)</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
 
-<span class="n">list</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">find</span> <span class="s2">"List"</span><span class="p">,</span> <span class="s2">"todos"</span>
-<span class="n">query</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"Task"</span><span class="p">).</span>
-  <span class="nf">ancestor</span><span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="nf">key</span><span class="p">)</span>
-<span class="n">items</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
+<span class="n">task_list_key</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"TaskList"</span><span class="p">,</span> <span class="s2">"default"</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"Task"</span><span class="p">).</span>
+  <span class="nf">ancestor</span><span class="p">(</span><span class="n">task_list_key</span><span class="p">)</span>
+
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
 </code></pre>
 </div>
 
 <p>See <span class='object_link'><a href="Datastore/Query.html" title="Gcloud::Datastore::Query (class)">Query</a></span> and <span class='object_link'><a href="Datastore/Dataset.html#run-instance_method" title="Gcloud::Datastore::Dataset#run (method)">Dataset#run</a></span></p>
 
-<h2 id="paginating-records">Paginating Records</h2>
+<h3 id="paginating-records">Paginating records</h3>
 
-<p>All Records may not return at once, requiring multiple calls to Datastore
+<p>All records may not return at once, requiring multiple calls to Datastore
 to return them all. The returned records will have a <tt>cursor</tt> if
 there are more available.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
 
-<span class="n">list</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">find</span> <span class="s2">"List"</span><span class="p">,</span> <span class="s2">"todos"</span>
-<span class="n">query</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"Task"</span><span class="p">).</span>
-  <span class="nf">ancestor</span><span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="nf">key</span><span class="p">)</span>
+<span class="n">task_list_key</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"TaskList"</span><span class="p">,</span> <span class="s2">"default"</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"Task"</span><span class="p">).</span>
+  <span class="nf">ancestor</span><span class="p">(</span><span class="n">task_list_key</span><span class="p">)</span>
 <span class="n">all_tasks</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">tmp_tasks</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
+<span class="n">tmp_tasks</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
 <span class="k">while</span> <span class="n">tmp_tasks</span><span class="p">.</span><span class="nf">any?</span> <span class="k">do</span>
   <span class="n">tmp_tasks</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">task</span><span class="o">|</span>
     <span class="n">all_tasks</span> <span class="o">&lt;&lt;</span> <span class="n">task</span>
@@ -222,7 +231,7 @@ there are more available.</p>
   <span class="c1"># set cursor on the query</span>
   <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="p">.</span><span class="nf">cursor</span> <span class="n">tmp_tasks</span><span class="p">.</span><span class="nf">cursor</span>
   <span class="c1"># query for more records</span>
-  <span class="n">tmp_tasks</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
+  <span class="n">tmp_tasks</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
 <span class="k">end</span>
 </code></pre>
 </div>
@@ -230,59 +239,136 @@ there are more available.</p>
 <p>See <span class='object_link'><a href="Datastore/Dataset/LookupResults.html" title="Gcloud::Datastore::Dataset::LookupResults (class)">Dataset::LookupResults</a></span> and
 <span class='object_link'><a href="Datastore/Dataset/QueryResults.html" title="Gcloud::Datastore::Dataset::QueryResults (class)">Dataset::QueryResults</a></span></p>
 
-<h2 id="creating-records">Creating Records</h2>
+<h2 id="creating-records">Creating records</h2>
 
 <p>New entities can be created and persisted buy calling
-<span class='object_link'><a href="Datastore/Dataset.html#save-instance_method" title="Gcloud::Datastore::Dataset#save (method)">Dataset#save</a></span>. The entity must have a Key to be saved.
-If the Key is incomplete then it will be completed when saved.</p>
+<span class='object_link'><a href="Datastore/Dataset.html#save-instance_method" title="Gcloud::Datastore::Dataset#save (method)">Dataset#save</a></span>. The entity must have a key to be saved.
+If the key is incomplete then it will be completed when saved.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
-<span class="n">entity</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">entity</span> <span class="s2">"User"</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
-  <span class="n">e</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Heidi Henderson"</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">entity</span> <span class="s2">"Task"</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Personal"</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"done"</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"priority"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Learn Cloud Datastore"</span>
 <span class="k">end</span>
-<span class="n">entity</span><span class="p">.</span><span class="nf">key</span><span class="p">.</span><span class="nf">id</span> <span class="c1">#=&gt; nil</span>
-<span class="n">dataset</span><span class="p">.</span><span class="nf">save</span> <span class="n">entity</span>
-<span class="n">entity</span><span class="p">.</span><span class="nf">key</span><span class="p">.</span><span class="nf">id</span> <span class="c1">#=&gt; 123456789</span>
+<span class="n">task</span><span class="p">.</span><span class="nf">key</span><span class="p">.</span><span class="nf">id</span> <span class="c1">#=&gt; nil</span>
+<span class="n">datastore</span><span class="p">.</span><span class="nf">save</span> <span class="n">task</span>
+<span class="n">task</span><span class="p">.</span><span class="nf">key</span><span class="p">.</span><span class="nf">id</span> <span class="c1">#=&gt; 123456</span>
 </code></pre>
 </div>
 
-<h2 id="updating-records">Updating Records</h2>
+<p>Multiple new entities may be created in a batch.</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+
+<span class="n">task1</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">entity</span> <span class="s2">"Task"</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Personal"</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"done"</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"priority"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Learn Cloud Datastore"</span>
+<span class="k">end</span>
+
+<span class="n">task2</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">entity</span> <span class="s2">"Task"</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Personal"</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"done"</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"priority"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Integrate Cloud Datastore"</span>
+<span class="k">end</span>
+
+<span class="n">tasks</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">save</span><span class="p">(</span><span class="n">task1</span><span class="p">,</span> <span class="n">task2</span><span class="p">)</span>
+<span class="n">task_key1</span> <span class="o">=</span> <span class="n">tasks</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">key</span>
+<span class="n">task_key2</span> <span class="o">=</span> <span class="n">tasks</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">key</span>
+</code></pre>
+</div>
+
+<p>Entities in Datastore form a hierarchically structured space similar to the
+directory structure of a file system. When you create an entity, you can
+optionally designate another entity as its parent; the new entity is a child
+of the parent entity.</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="n">task_key</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"sampleTask"</span>
+<span class="n">task_key</span><span class="p">.</span><span class="nf">parent</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"TaskList"</span><span class="p">,</span> <span class="s2">"default"</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">entity</span> <span class="n">task_key</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Personal"</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"done"</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"priority"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Integrate Cloud Datastore"</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<h2 id="setting-properties">Setting properties</h2>
 
 <p>Entities hold properties. A property has a name that is a string or symbol,
 and a value that is an object. Most value objects are supported, including
-String, Integer, Date, Time, and even other Entity or Key objects. Changes
-to the Entity’s properties are persisted by calling
+String, Integer, Date, Time, and even other entity or key objects. Changes
+to the entity’s properties are persisted by calling
 <span class='object_link'><a href="Datastore/Dataset.html#save-instance_method" title="Gcloud::Datastore::Dataset#save (method)">Dataset#save</a></span>.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
-<span class="n">entity</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">find</span> <span class="s2">"User"</span><span class="p">,</span> <span class="s2">"heidi"</span>
-<span class="c1"># Read the status property</span>
-<span class="n">entity</span><span class="p">[</span><span class="s2">"status"</span><span class="p">]</span> <span class="c1">#=&gt; "inactive"</span>
-<span class="c1"># Write the status property</span>
-<span class="n">entity</span><span class="p">[</span><span class="s2">"status"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"active"</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">find</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"sampleTask"</span>
+<span class="c1"># Read the priority property</span>
+<span class="n">task</span><span class="p">[</span><span class="s2">"priority"</span><span class="p">]</span> <span class="c1">#=&gt; 4</span>
+<span class="c1"># Write the priority property</span>
+<span class="n">task</span><span class="p">[</span><span class="s2">"priority"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="c1"># Persist the changes</span>
-<span class="n">dataset</span><span class="p">.</span><span class="nf">save</span> <span class="n">entity</span>
+<span class="n">datastore</span><span class="p">.</span><span class="nf">save</span> <span class="n">task</span>
 </code></pre>
 </div>
 
-<h2 id="deleting-records">Deleting Records</h2>
-
-<p>Entities can be removed from Datastore by calling
-<span class='object_link'><a href="Datastore/Dataset.html#delete-instance_method" title="Gcloud::Datastore::Dataset#delete (method)">Dataset#delete</a></span> and passing the Entity object or the
-entity’s Key object.</p>
+<p>Array properties can be used to store more than one value.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
-<span class="n">entity</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">find</span> <span class="s2">"User"</span><span class="p">,</span> <span class="s2">"heidi"</span>
-<span class="n">dataset</span><span class="p">.</span><span class="nf">delete</span> <span class="n">entity</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">entity</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"sampleTask"</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"tags"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"fun"</span><span class="p">,</span> <span class="s2">"programming"</span><span class="p">]</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"collaborators"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"alice"</span><span class="p">,</span> <span class="s2">"bob"</span><span class="p">]</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<h2 id="deleting-records">Deleting records</h2>
+
+<p>Entities can be removed from Datastore by calling
+<span class='object_link'><a href="Datastore/Dataset.html#delete-instance_method" title="Gcloud::Datastore::Dataset#delete (method)">Dataset#delete</a></span> and passing the entity object or the
+entity’s key object.</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">find</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"sampleTask"</span>
+<span class="n">datastore</span><span class="p">.</span><span class="nf">delete</span> <span class="n">task</span>
+</code></pre>
+</div>
+
+<p>Multiple entities may be deleted in a batch.</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+
+<span class="n">task_key1</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"sampleTask1"</span>
+<span class="n">task_key2</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"sampleTask2"</span>
+<span class="n">datastore</span><span class="p">.</span><span class="nf">delete</span> <span class="n">task_key1</span><span class="p">,</span> <span class="n">task_key2</span>
 </code></pre>
 </div>
 
@@ -296,18 +382,19 @@ completes.</p>
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
 
-<span class="n">key</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"User"</span><span class="p">,</span> <span class="s2">"heidi"</span>
+<span class="n">task_key</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"sampleTask"</span>
 
-<span class="n">user</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">entity</span> <span class="n">key</span> <span class="k">do</span> <span class="o">|</span><span class="n">u</span><span class="o">|</span>
-  <span class="n">u</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Heidi Henderson"</span>
-  <span class="n">u</span><span class="p">[</span><span class="s2">"email"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"heidi@example.net"</span>
-<span class="k">end</span>
-
-<span class="n">dataset</span><span class="p">.</span><span class="nf">transaction</span> <span class="k">do</span> <span class="o">|</span><span class="n">tx</span><span class="o">|</span>
-  <span class="k">if</span> <span class="n">tx</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">key</span><span class="p">).</span><span class="nf">nil?</span>
-    <span class="n">tx</span><span class="p">.</span><span class="nf">save</span> <span class="n">user</span>
+<span class="n">datastore</span><span class="p">.</span><span class="nf">transaction</span> <span class="k">do</span> <span class="o">|</span><span class="n">tx</span><span class="o">|</span>
+  <span class="k">if</span> <span class="n">tx</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">task_key</span><span class="p">).</span><span class="nf">nil?</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">entity</span> <span class="n">task_key</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+      <span class="n">t</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Personal"</span>
+      <span class="n">t</span><span class="p">[</span><span class="s2">"done"</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
+      <span class="n">t</span><span class="p">[</span><span class="s2">"priority"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+      <span class="n">t</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Learn Cloud Datastore"</span>
+    <span class="k">end</span>
+    <span class="n">tx</span><span class="p">.</span><span class="nf">save</span> <span class="n">task</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
@@ -319,19 +406,20 @@ allowing you to commit or rollback manually.</p>
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
 <span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
 
-<span class="n">key</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"User"</span><span class="p">,</span> <span class="s2">"heidi"</span>
+<span class="n">task_key</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"sampleTask"</span>
 
-<span class="n">user</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">entity</span> <span class="n">key</span> <span class="k">do</span> <span class="o">|</span><span class="n">u</span><span class="o">|</span>
-  <span class="n">u</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Heidi Henderson"</span>
-  <span class="n">u</span><span class="p">[</span><span class="s2">"email"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"heidi@example.net"</span>
-<span class="k">end</span>
-
-<span class="n">tx</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">.</span><span class="nf">transaction</span>
+<span class="n">tx</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">transaction</span>
 <span class="k">begin</span>
-  <span class="k">if</span> <span class="n">tx</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">key</span><span class="p">).</span><span class="nf">nil?</span>
-    <span class="n">tx</span><span class="p">.</span><span class="nf">save</span> <span class="n">user</span>
+  <span class="k">if</span> <span class="n">tx</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">task_key</span><span class="p">).</span><span class="nf">nil?</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">entity</span> <span class="n">task_key</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+      <span class="n">t</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Personal"</span>
+      <span class="n">t</span><span class="p">[</span><span class="s2">"done"</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
+      <span class="n">t</span><span class="p">[</span><span class="s2">"priority"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+      <span class="n">t</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Learn Cloud Datastore"</span>
+    <span class="k">end</span>
+    <span class="n">tx</span><span class="p">.</span><span class="nf">save</span> <span class="n">task</span>
   <span class="k">end</span>
   <span class="n">tx</span><span class="p">.</span><span class="nf">commit</span>
 <span class="k">rescue</span>
@@ -342,6 +430,140 @@ allowing you to commit or rollback manually.</p>
 
 <p>See <span class='object_link'><a href="Datastore/Transaction.html" title="Gcloud::Datastore::Transaction (class)">Transaction</a></span> and
 <span class='object_link'><a href="Datastore/Dataset.html#transaction-instance_method" title="Gcloud::Datastore::Dataset#transaction (method)">Dataset#transaction</a></span></p>
+
+<h2 id="querying-metadata">Querying metadata</h2>
+
+<p>Datastore provides programmatic access to some of its metadata to support
+meta-programming, implementing backend administrative functions, simplify
+consistent caching, and similar purposes. The metadata available includes
+information about the entity groups, namespaces, entity kinds, and
+properties your application uses, as well as the property representations
+for each property.</p>
+
+<p>The special entity kind <code class="highlighter-rouge">__namespace__</code> can be used to find all the
+namespaces used in your application entities.</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="n">query</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"__namespace__"</span><span class="p">).</span>
+  <span class="nf">select</span><span class="p">(</span><span class="s2">"__key__"</span><span class="p">).</span>
+  <span class="nf">where</span><span class="p">(</span><span class="s2">"__key__"</span><span class="p">,</span> <span class="s2">"&gt;="</span><span class="p">,</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span><span class="p">(</span><span class="s2">"__namespace__"</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">)).</span>
+  <span class="nf">where</span><span class="p">(</span><span class="s2">"__key__"</span><span class="p">,</span> <span class="s2">"&lt;"</span><span class="p">,</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span><span class="p">(</span><span class="s2">"__namespace__"</span><span class="p">,</span> <span class="s2">"h"</span><span class="p">))</span>
+
+<span class="n">namespaces</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">entity</span><span class="o">|</span>
+  <span class="n">entity</span><span class="p">.</span><span class="nf">key</span><span class="p">.</span><span class="nf">name</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>The special entity kind <code class="highlighter-rouge">__kind__</code> can be used to return all the
+kinds used in your application.</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="n">query</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"__kind__"</span><span class="p">).</span>
+  <span class="nf">select</span><span class="p">(</span><span class="s2">"__key__"</span><span class="p">)</span>
+
+<span class="n">kinds</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">entity</span><span class="o">|</span>
+  <span class="n">entity</span><span class="p">.</span><span class="nf">key</span><span class="p">.</span><span class="nf">name</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>Property queries return entities of kind <code class="highlighter-rouge">__property__</code> denoting the indexed
+properties associated with an entity kind. (Unindexed properties are not
+included.)</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="n">query</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"__property__"</span><span class="p">).</span>
+  <span class="nf">select</span><span class="p">(</span><span class="s2">"__key__"</span><span class="p">)</span>
+
+<span class="n">entities</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="n">properties_by_kind</span> <span class="o">=</span> <span class="n">entities</span><span class="p">.</span><span class="nf">each_with_object</span><span class="p">({})</span> <span class="k">do</span> <span class="o">|</span><span class="n">entity</span><span class="p">,</span> <span class="n">memo</span><span class="o">|</span>
+  <span class="n">kind</span> <span class="o">=</span> <span class="n">entity</span><span class="p">.</span><span class="nf">key</span><span class="p">.</span><span class="nf">parent</span><span class="p">.</span><span class="nf">name</span>
+  <span class="n">prop</span> <span class="o">=</span> <span class="n">entity</span><span class="p">.</span><span class="nf">key</span><span class="p">.</span><span class="nf">name</span>
+  <span class="n">memo</span><span class="p">[</span><span class="n">kind</span><span class="p">]</span> <span class="o">||=</span> <span class="p">[]</span>
+  <span class="n">memo</span><span class="p">[</span><span class="n">kind</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">prop</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>Property queries support ancestor filtering on a <code class="highlighter-rouge">__kind__</code> or
+<code class="highlighter-rouge">__property__</code> key, to limit the query results to a single kind or property.
+The <code class="highlighter-rouge">property_representation</code> property in the entity representing property
+<code class="highlighter-rouge">p</code> of kind <code class="highlighter-rouge">k</code> is an array containing all representations of <code class="highlighter-rouge">p</code>’s value in
+any entity of kind <code class="highlighter-rouge">k</code>.</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="n">ancestor_key</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"__kind__"</span><span class="p">,</span> <span class="s2">"Task"</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"__property__"</span><span class="p">).</span>
+  <span class="nf">ancestor</span><span class="p">(</span><span class="n">ancestor_key</span><span class="p">)</span>
+
+<span class="n">entities</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="n">representations</span> <span class="o">=</span> <span class="n">entities</span><span class="p">.</span><span class="nf">each_with_object</span><span class="p">({})</span> <span class="k">do</span> <span class="o">|</span><span class="n">entity</span><span class="p">,</span> <span class="n">memo</span><span class="o">|</span>
+  <span class="n">property_name</span> <span class="o">=</span> <span class="n">entity</span><span class="p">.</span><span class="nf">key</span><span class="p">.</span><span class="nf">name</span>
+  <span class="n">property_types</span> <span class="o">=</span> <span class="n">entity</span><span class="p">[</span><span class="s2">"property_representation"</span><span class="p">]</span>
+  <span class="n">memo</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">property_types</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>Property queries can also be filtered with a range over the pseudo-property
+<code class="highlighter-rouge">__key__</code>, where the keys denote either <code class="highlighter-rouge">__kind__</code> or <code class="highlighter-rouge">__property__</code>
+entities.</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="n">start_key</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"__property__"</span><span class="p">,</span> <span class="s2">"priority"</span>
+<span class="n">start_key</span><span class="p">.</span><span class="nf">parent</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">key</span> <span class="s2">"__kind__"</span><span class="p">,</span> <span class="s2">"Task"</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"__property__"</span><span class="p">).</span>
+  <span class="nf">select</span><span class="p">(</span><span class="s2">"__key__"</span><span class="p">).</span>
+  <span class="nf">where</span><span class="p">(</span><span class="s2">"__key__"</span><span class="p">,</span> <span class="s2">"&gt;="</span><span class="p">,</span> <span class="n">start_key</span><span class="p">)</span>
+
+<span class="n">entities</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="n">properties_by_kind</span> <span class="o">=</span> <span class="n">entities</span><span class="p">.</span><span class="nf">each_with_object</span><span class="p">({})</span> <span class="k">do</span> <span class="o">|</span><span class="n">entity</span><span class="p">,</span> <span class="n">memo</span><span class="o">|</span>
+  <span class="n">kind</span> <span class="o">=</span> <span class="n">entity</span><span class="p">.</span><span class="nf">key</span><span class="p">.</span><span class="nf">parent</span><span class="p">.</span><span class="nf">name</span>
+  <span class="n">prop</span> <span class="o">=</span> <span class="n">entity</span><span class="p">.</span><span class="nf">key</span><span class="p">.</span><span class="nf">name</span>
+  <span class="n">memo</span><span class="p">[</span><span class="n">kind</span><span class="p">]</span> <span class="o">||=</span> <span class="p">[]</span>
+  <span class="n">memo</span><span class="p">[</span><span class="n">kind</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">prop</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<h2 id="the-datastore-emulator">The Datastore Emulator</h2>
+
+<p>As of this release, the Datastore emulator that is part of the gcloud SDK is
+no longer compatible with gcloud-ruby. This is because the gcloud SDK’s
+Datastore emulator does not yet support gRPC as a transport layer.</p>
+
+<p>A gRPC-compatible emulator is available until the gcloud SDK Datastore
+emulator supports gRPC. To use it you must <a href="https://storage.googleapis.com/gcd/tools/gcd-grpc-1.0.0.zip">download the gRPC
+emulator</a> and
+use the <code class="highlighter-rouge">gcd.sh</code> script.</p>
+
+<p>When you run the gRPC emulator you will see a message similar to the
+following printed:</p>
+
+<div class="highlighter-rouge"><pre class="ruby"><code>If you are using a library that supports the DATASTORE_EMULATOR_HOST
+environment variable, run:
+
+export DATASTORE_EMULATOR_HOST=localhost:8978
+</code></pre>
+</div>
+
+<p>Now you can connect to the emulator using the <code class="highlighter-rouge">DATASTORE_EMULATOR_HOST</code>
+environment variable:</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+
+<span class="c1"># Make Datastore use the emulator</span>
+<span class="no">ENV</span><span class="p">[</span><span class="s2">"DATASTORE_EMULATOR_HOST"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"localhost:8978"</span>
+
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span> <span class="s2">"emulator-project-id"</span>
+<span class="n">datastore</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">datastore</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">entity</span> <span class="s2">"Task"</span><span class="p">,</span> <span class="s2">"emulatorTask"</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Testing"</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"done"</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"priority"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+  <span class="n">t</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Use Datastore Emulator"</span>
+<span class="k">end</span>
+
+<span class="n">datastore</span><span class="p">.</span><span class="nf">save</span> <span class="n">task</span>
+</code></pre>
+</div>
 
         </div>
 
@@ -359,7 +581,7 @@ allowing you to commit or rollback manually.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 10, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal current' href=''>Datastore</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Entity.html'>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 11, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal current' href=''>Datastore</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Entity.html'>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

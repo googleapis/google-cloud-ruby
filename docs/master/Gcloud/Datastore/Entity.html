@@ -80,6 +80,11 @@
 <p>Entity represents a Datastore record.
 Every Entity has a <span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Key</a></span>, and a list of properties.</p>
 
+<p>Entities in Datastore form a hierarchically structured space similar to
+the directory structure of a file system. When you create an entity, you
+can optionally designate another entity as its parent; the new entity is a
+child of the parent entity.</p>
+
         </div>
 
         <div class="section-links">
@@ -210,7 +215,9 @@ Every Entity has a <span class='object_link'><a href="Key.html" title="Gcloud::D
                     <p>Retrieve a property value by providing the name.</p>
 
 <p>Property values are converted from the Datastore value type
-automatically. Blob properties are returned as StringIO objects.</p>
+automatically. Blob properties are returned as StringIO objects.
+Location properties are returned as a Hash with <code class="highlighter-rouge">:longitude</code> and
+<code class="highlighter-rouge">:latitude</code> keys.</p>
 
 
                     
@@ -265,9 +272,9 @@ automatically. Blob properties are returned as StringIO objects.</p>
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
-<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='comment'>#=&gt; &quot;Heidi Henderson&quot;</span></code></pre>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='comment'>#=&gt; &quot;Learn Cloud Datastore&quot;</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>Or with a symbol name:</p>
@@ -276,9 +283,32 @@ automatically. Blob properties are returned as StringIO objects.</p>
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='symbol'>:description</span><span class='rbracket'>]</span> <span class='comment'>#=&gt; &quot;Learn Cloud Datastore&quot;</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Getting a blob value returns a StringIO object:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
 <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span> <span class='comment'>#=&gt; &quot;Heidi Henderson&quot;</span></code></pre>
+<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatar</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='comment'>#=&gt; StringIO(&quot;\x89PNG\r\n\x1A...&quot;)</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Getting a geo point value returns a Hash:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>location</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='comment'>#=&gt; { longitude: -122.0862462,
+</span>                 <span class='comment'>#     latitude: 37.4220041 }</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>Getting a blob value returns a StringIO object:</p>
@@ -317,7 +347,8 @@ automatically. Blob properties are returned as StringIO objects.</p>
 automatically. Use an IO-compatible object (File, StringIO, Tempfile) to
 indicate the property value should be stored as a Datastore <code class="highlighter-rouge">blob</code>.
 IO-compatible objects are converted to StringIO objects when they are
-set.</p>
+set. Use a Hash with <code class="highlighter-rouge">:longitude</code> and <code class="highlighter-rouge">:latitude</code> keys to indicate the
+property value should be stored as a Geo Point/LatLng.</p>
 
 
                     
@@ -373,9 +404,10 @@ set.</p>
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
-<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Heidi H. Henderson</span><span class='tstring_end'>&quot;</span></span></code></pre>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Learn Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>fun</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>programming</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>Or with a symbol name:</p>
@@ -384,9 +416,33 @@ set.</p>
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='symbol'>:description</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Learn Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='symbol'>:tags</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>fun</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>programming</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Setting a blob value using an IO:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
 <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Heidi H. Henderson</span><span class='tstring_end'>&quot;</span></span></code></pre>
+<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatar</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/avatars/heidi.png</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatar</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='comment'>#=&gt; StringIO(&quot;\x89PNG\r\n\x1A...&quot;)</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Setting a geo point value using a Hash:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_user'>user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>location</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>longitude:</span> <span class='op'>-</span><span class='float'>122.0862462</span><span class='comma'>,</span> <span class='label'>latitude:</span> <span class='float'>37.4220041</span> <span class='rbrace'>}</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>Setting a blob value using an IO:</p>
@@ -446,10 +502,10 @@ Properties can be accessed or set by string or symbol.</p>
                       </h3>
                       
                         
-                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Heidi H. Henderson</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='comment'>#=&gt; &quot;Heidi H. Henderson&quot;
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='lbracket'>[</span><span class='symbol'>:description</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Learn Cloud Datastore</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='comment'>#=&gt; &quot;Learn Cloud Datastore&quot;
 </span>
-<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>property </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'> has a value of </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_value'>value</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></code></pre>
                       
@@ -457,22 +513,22 @@ Properties can be accessed or set by string or symbol.</p>
                           <p class="example_title"><div class='inline'><p>A property’s existence can be determined by calling <code class="highlighter-rouge">exist?</code>:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span> <span class='symbol'>:name</span> <span class='comment'>#=&gt; true
-</span><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; true
-</span><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span> <span class='symbol'>:expiration</span> <span class='comment'>#=&gt; false</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span> <span class='symbol'>:description</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span> <span class='symbol'>:expiration</span> <span class='comment'>#=&gt; false</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>A property can be removed from the entity:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='symbol'>:name</span>
-<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='symbol'>:description</span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>The properties can be converted to a hash:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_prop_hash'>prop_hash</span> <span class='op'>=</span> <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_prop_hash'>prop_hash</span> <span class='op'>=</span> <span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span></code></pre>
                       
                     
 
@@ -494,7 +550,7 @@ Properties can be accessed or set by string or symbol.</p>
 
                   <div class="method-description">
 
-                    <p>Sets the Key that identifies the entity.</p>
+                    <p>Sets the <span class='object_link'><a href="Key.html" title="Gcloud::Datastore::Key (class)">Key</a></span> that identifies the entity.</p>
 
 <p>Once the entity is saved, the key is frozen and immutable. Trying to set
 a key when immutable will raise a <code class="highlighter-rouge">RuntimeError</code>.</p>
@@ -513,16 +569,16 @@ a key when immutable will raise a <code class="highlighter-rouge">RuntimeError</
                       </h3>
                       
                         
-                          <p class="example_title"><div class='inline'><p>The Key can be set before the entity is saved:</p>
+                          <p class="example_title"><div class='inline'><p>The key can be set before the entity is saved:</p>
 </div></p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
-<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_entity'>entity</span></code></pre>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='id identifier rubyid_task'>task</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>Once the entity is saved, the key is frozen and immutable:</p>
@@ -531,12 +587,12 @@ a key when immutable will raise a <code class="highlighter-rouge">RuntimeError</
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
-<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_persisted?'>persisted?</span> <span class='comment'>#=&gt; true
-</span><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Key</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; RuntimeError
-</span><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_frozen?'>frozen?</span> <span class='comment'>#=&gt; true
-</span><span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='int'>9876543221</span> <span class='comment'>#=&gt; RuntimeError</span></code></pre>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_persisted?'>persisted?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; RuntimeError
+</span><span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_frozen?'>frozen?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='int'>9876543221</span> <span class='comment'>#=&gt; RuntimeError</span></code></pre>
                       
                     
 
@@ -586,13 +642,13 @@ a key when immutable will raise a <code class="highlighter-rouge">RuntimeError</
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
 
-<span class='id identifier rubyid_new_entity'>new_entity</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_new_entity'>new_entity</span><span class='period'>.</span><span class='id identifier rubyid_persisted?'>persisted?</span> <span class='comment'>#=&gt; false
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Entity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_persisted?'>persisted?</span> <span class='comment'>#=&gt; false
 </span>
-<span class='id identifier rubyid_found_entity'>found_entity</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.com</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_found_entity'>found_entity</span><span class='period'>.</span><span class='id identifier rubyid_persisted?'>persisted?</span> <span class='comment'>#=&gt; true</span></code></pre>
+<span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sampleTask</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_persisted?'>persisted?</span> <span class='comment'>#=&gt; true</span></code></pre>
                       
                     
 
@@ -659,17 +715,17 @@ this method will be <code class="highlighter-rouge">[true, false]</code>.</p>
                           <p class="example_title"><div class='inline'><p>Single property values will return a single flag setting:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>21</span>
-<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes?'>exclude_from_indexes?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; false</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>4</span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes?'>exclude_from_indexes?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; false</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>A multi-valued property will return an array of flag settings:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>code</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
-<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes!'>exclude_from_indexes!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='kw'>true</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rbracket'>]</span>
+                        <pre class="code"><code><span class='id identifier rubyid_task'>task</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>fun</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>programming</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes!'>exclude_from_indexes!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='kw'>true</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rbracket'>]</span>
 
-<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes?'>exclude_from_indexes?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; [true, false]</span></code></pre>
+<span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes?'>exclude_from_indexes?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; [true, false]</span></code></pre>
                       
                     
 
@@ -762,30 +818,30 @@ should be excluded from indexing</p>
                       </h3>
                       
                         
-                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>21</span>
-<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes!'>exclude_from_indexes!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span></code></pre>
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>4</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes!'>exclude_from_indexes!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>Multi-valued properties can be given multiple exclude flags:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>code</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>fun</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>programming</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes!'>exclude_from_indexes!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='kw'>true</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rbracket'>]</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>Or, a single flag can be applied to all values in a property:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>code</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>fun</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>programming</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes!'>exclude_from_indexes!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>Flags can also be set with a block:</p>
 </div></p>
                         
-                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>21</span>
-<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes!'>exclude_from_indexes!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_age'>age</span><span class='op'>|</span>
-  <span class='id identifier rubyid_age'>age</span> <span class='op'>&gt;</span> <span class='int'>18</span>
+                        <pre class="code"><code><span class='id identifier rubyid_entity'>entity</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>4</span>
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_exclude_from_indexes!'>exclude_from_indexes!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>priority</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_priority'>priority</span><span class='op'>|</span>
+  <span class='id identifier rubyid_priority'>priority</span> <span class='op'>&gt;</span> <span class='int'>4</span>
 <span class='kw'>end</span></code></pre>
                       
                     
@@ -801,7 +857,7 @@ should be excluded from indexing</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 10, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal current' href=''>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 11, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal current' href=''>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
