@@ -235,8 +235,8 @@ module Gcloud
       #
       # @example
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   dataset.delete entity1, entity2
+      #   datastore = gcloud.datastore
+      #   datastore.delete task1, task2
       #
       def delete *entities_or_keys
         commit { |c| c.delete(*entities_or_keys) }
@@ -253,9 +253,11 @@ module Gcloud
       #   persisted.
       #
       # @example
-      #   dataset.commit do |c|
-      #     c.save task1, task2
-      #     c.delete entity1, entity2
+      #   gcloud = Gcloud.new
+      #   datastore = gcloud.datastore
+      #   datastore.commit do |c|
+      #     c.save task3, task4
+      #     c.delete task1, task2
       #   end
       #
       def commit
@@ -539,24 +541,32 @@ module Gcloud
       #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
       #
       # @example Create an empty key:
-      #   key = dataset.key
+      #   key = datastore.key
       #
       # @example Create an incomplete key:
-      #   key = dataset.key "User"
+      #   key = datastore.key "User"
       #
       # @example Create a key with a parent:
-      #   key = dataset.key [["List", "todos"], ["User", "heidi@example.com"]]
-      #   key.path #=> [["List", "todos"], ["User", "heidi@example.com"]]
+      #   key = datastore.key [["TaskList", "default"], ["Task", "sampleTask"]]
+      #   key.path #=> [["TaskList", "default"], ["Task", "sampleTask"]]
+      #
+      # @example Create a key with multi-level ancestry:
+      #   key = datastore.key([
+      #     ["User", "alice"],
+      #     ["TaskList", "default"],
+      #     ["Task", "sampleTask"]
+      #   ])
+      #   key.path #=> [["User", "alice"], ["TaskList", "default"], [ ... ]]
       #
       # @example Create an incomplete key with a parent:
-      #   key = dataset.key "List", "todos", "User"
-      #   key.path #=> [["List", "todos"], ["User", nil]]
+      #   key = datastore.key "TaskList", "default", "Task"
+      #   key.path #=> [["TaskList", "default"], ["Task", nil]]
       #
       # @example Create a key with a project and namespace:
-      #   key = dataset.key ["List", "todos"], ["User", "heidi@example.com"],
-      #                     project: "my-todo-project",
-      #                     namespace: "ns~todo-project"
-      #   key.path #=> [["List", "todos"], ["User", "heidi@example.com"]]
+      #   key = datastore.key ["TaskList", "default"], ["Task", "sampleTask"],
+      #                       project: "my-todo-project",
+      #                       namespace: "ns~todo-project"
+      #   key.path #=> [["TaskList", "default"], ["Task", "sampleTask"]]
       #   key.project #=> "my-todo-project",
       #   key.namespace #=> "ns~todo-project"
       #

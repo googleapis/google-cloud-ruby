@@ -50,9 +50,9 @@ module Gcloud
       #   gcloud = Gcloud.new "my-todo-project",
       #                       "/path/to/keyfile.json"
       #
-      #   dataset = gcloud.datastore
-      #   entity = dataset.find "User", "heidi@example.com"
-      #   entity.key.project #=> "my-todo-project"
+      #   datastore = gcloud.datastore
+      #   task = datastore.find "Task", "sampleTask"
+      #   task.key.project #=> "my-todo-project"
       #
       attr_accessor :project
       alias_method :dataset_id,  :project

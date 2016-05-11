@@ -166,11 +166,11 @@ module Gcloud
       # @return [Gcloud::Datastore::Entity, nil]
       #
       # @example Finding an entity with a key:
-      #   key = dataset.key "Task", 123456
-      #   task = dataset.find key
+      #   task_key = datastore.key "Task", "sampleTask"
+      #   task = datastore.find task_key
       #
       # @example Finding an entity with a `kind` and `id`/`name`:
-      #   task = dataset.find "Task", 123456
+      #   task = datastore.find "Task", "sampleTask"
       #
       def find key_or_kind, id_or_name = nil
         key = key_or_kind
@@ -191,10 +191,10 @@ module Gcloud
       #
       # @example
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   key1 = dataset.key "Task", 123456
-      #   key2 = dataset.key "Task", 987654
-      #   tasks = dataset.find_all key1, key2
+      #   datastore = gcloud.datastore
+      #   task_key1 = datastore.key "Task", 123456
+      #   task_key2 = datastore.key "Task", 987654
+      #   tasks = datastore.find_all task_key1, task_key2
       #
       def find_all *keys
         ensure_service!
@@ -219,16 +219,16 @@ module Gcloud
       # @return [Gcloud::Datastore::Dataset::QueryResults]
       #
       # @example
-      #   query = dataset.query("Task").
-      #     where("completed", "=", true)
-      #   dataset.transaction do |tx|
+      #   query = datastore.query("Task").
+      #     where("done", "=", false)
+      #   datastore.transaction do |tx|
       #     tasks = tx.run query
       #   end
       #
       # @example Run the query within a namespace with the `namespace` option:
       #   query = Gcloud::Datastore::Query.new.kind("Task").
-      #     where("completed", "=", true)
-      #   dataset.transaction do |tx|
+      #     where("done", "=", false)
+      #   datastore.transaction do |tx|
       #     tasks = tx.run query, namespace: "ns~todo-project"
       #   end
       #
@@ -269,17 +269,19 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
+      #   datastore = gcloud.datastore
       #
-      #   user = dataset.entity "User", "heidi" do |u|
-      #     u["name"] = "Heidi Henderson"
-      #     u["email"] = "heidi@example.net"
+      #   task = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
       #   end
       #
-      #   tx = dataset.transaction
+      #   tx = datastore.transaction
       #   begin
-      #     if tx.find(user.key).nil?
-      #       tx.save user
+      #     if tx.find(task.key).nil?
+      #       tx.save task
       #     end
       #     tx.commit
       #   rescue
@@ -290,9 +292,9 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
+      #   datastore = gcloud.datastore
       #
-      #   tx = dataset.transaction
+      #   tx = datastore.transaction
       #   begin
       #     tx.commit do |c|
       #       c.save task1, task2
@@ -331,17 +333,19 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
+      #   datastore = gcloud.datastore
       #
-      #   user = dataset.entity "User", "heidi" do |u|
-      #     u["name"] = "Heidi Henderson"
-      #     u["email"] = "heidi@example.net"
+      #   task = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
       #   end
       #
-      #   tx = dataset.transaction
+      #   tx = datastore.transaction
       #   begin
-      #     if tx.find(user.key).nil?
-      #       tx.save user
+      #     if tx.find(task.key).nil?
+      #       tx.save task
       #     end
       #     tx.commit
       #   rescue

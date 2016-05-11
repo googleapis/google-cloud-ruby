@@ -99,16 +99,16 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi@example.com"
+      #   datastore = gcloud.datastore
+      #   user = datastore.find "User", "alice"
       #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
       #
       # @example Getting a geo point value returns a Hash:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi@example.com"
+      #   datastore = gcloud.datastore
+      #   user = datastore.find "User", "alice"
       #   user["location"] #=> { longitude: -122.0862462,
       #                    #     latitude: 37.4220041 }
       #
@@ -116,8 +116,8 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi@example.com"
+      #   datastore = gcloud.datastore
+      #   user = datastore.find "User", "alice"
       #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
       #
       def [] prop_name
@@ -159,26 +159,26 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi@example.com"
-      #   user["avatar"] = File.open "/avatars/heidi.png"
+      #   datastore = gcloud.datastore
+      #   user = datastore.find "User", "alice"
+      #   user["avatar"] = File.open "/avatars/alice.png"
       #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
       #
       # @example Setting a geo point value using a Hash:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi@example.com"
+      #   datastore = gcloud.datastore
+      #   user = datastore.find "User", "alice"
       #   user["location"] = { longitude: -122.0862462, latitude: 37.4220041 }
       #
       # @example Setting a blob value using an IO:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   user = dataset.find "User", "heidi@example.com"
-      #   user["avatar"] = File.open "/avatars/heidi.png"
+      #   datastore = gcloud.datastore
+      #   user = datastore.find "User", "alice"
+      #   user["avatar"] = File.open "/avatars/alice.png"
       #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
       #
       def []= prop_name, prop_value

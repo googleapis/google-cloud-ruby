@@ -22,7 +22,9 @@ module Gcloud
     # in a single commit.
     #
     # @example
-    #   dataset.commit do |c|
+    #   gcloud = Gcloud.new
+    #   datastore = gcloud.datastore
+    #   datastore.commit do |c|
     #     c.save task1, task2
     #     c.delete entity1, entity2
     #   end
@@ -46,8 +48,8 @@ module Gcloud
       #
       # @example
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   dataset.commit do |c|
+      #   datastore = gcloud.datastore
+      #   datastore.commit do |c|
       #     c.save task1, task2
       #   end
       #
@@ -66,8 +68,8 @@ module Gcloud
       #
       # @example
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   dataset.commit do |c|
+      #   datastore = gcloud.datastore
+      #   datastore.commit do |c|
       #     c.insert task1, task2
       #   end
       #
@@ -85,8 +87,8 @@ module Gcloud
       #
       # @example
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   dataset.commit do |c|
+      #   datastore = gcloud.datastore
+      #   datastore.commit do |c|
       #     c.update task1, task2
       #   end
       #
@@ -105,9 +107,9 @@ module Gcloud
       #
       # @example
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   dataset.commit do |c|
-      #     c.delete entity1, entity2
+      #   datastore = gcloud.datastore
+      #   datastore.commit do |c|
+      #     c.delete task1, task2
       #   end
       #
       def delete *entities_or_keys
