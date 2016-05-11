@@ -50,27 +50,28 @@ module Gcloud
     ##
     # Gets an object from a Google::Datastore::V1beta3::Value.
     def self.from_value grpc_value
-      return nil if grpc_value.nil?
-      if !grpc_value.key_value.nil?
-        Gcloud::Datastore::Key.from_grpc(grpc_value.key_value)
-      elsif !grpc_value.entity_value.nil?
-        Gcloud::Datastore::Entity.from_grpc(grpc_value.entity_value)
-      elsif !grpc_value.boolean_value.nil?
-        grpc_value.boolean_value
-      elsif !grpc_value.double_value.nil?
-        grpc_value.double_value
-      elsif !grpc_value.integer_value.nil?
-        grpc_value.integer_value
-      elsif !grpc_value.string_value.nil?
+      if grpc_value.value_type == :null_value
+        return nil
+      elsif grpc_value.value_type == :key_value
+        return Gcloud::Datastore::Key.from_grpc(grpc_value.key_value)
+      elsif grpc_value.value_type == :entity_value
+        return Gcloud::Datastore::Entity.from_grpc(grpc_value.entity_value)
+      elsif grpc_value.value_type == :boolean_value
+        return grpc_value.boolean_value
+      elsif grpc_value.value_type == :double_value
+        return grpc_value.double_value
+      elsif grpc_value.value_type == :integer_value
+        return grpc_value.integer_value
+      elsif grpc_value.value_type == :string_value
         return grpc_value.string_value
-      elsif !grpc_value.array_value.nil?
+      elsif grpc_value.value_type == :array_value
         return Array(grpc_value.array_value.values).map { |v| from_value v }
-      elsif !grpc_value.timestamp_value.nil?
+      elsif grpc_value.value_type == :timestamp_value
         return Time.at grpc_value.timestamp_value.seconds,
                        grpc_value.timestamp_value.nanos/1000.0
-      elsif !grpc_value.geo_point_value.nil?
+      elsif grpc_value.value_type == :geo_point_value
         return grpc_value.geo_point_value.to_hash
-      elsif !grpc_value.blob_value.nil?
+      elsif grpc_value.value_type == :blob_value
         return StringIO.new(grpc_value.blob_value.force_encoding("ASCII-8BIT"))
       else
         nil
@@ -82,9 +83,7 @@ module Gcloud
     def self.to_value value
       v = Google::Datastore::V1beta3::Value.new
       if NilClass === value
-        v = nil
-        # v.null_value = Google::Protobuf::NullValue
-        # The correct behavior is to not set a value property
+        v.null_value = :NULL_VALUE
       elsif TrueClass === value
         v.boolean_value = true
       elsif FalseClass === value

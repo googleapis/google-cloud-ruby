@@ -27,9 +27,16 @@ describe Gcloud::Datastore::Properties do
   # This is not part of the public API.
   # Testing implementation, not behavior.
 
+  it "decodes empty value" do
+    value = Google::Datastore::V1beta3::Value.new
+    raw = Gcloud::GRPCUtils.from_value value
+    raw.must_equal nil
+  end
+
   it "encodes a string" do
     raw = "hello, i am a string"
     value = Gcloud::GRPCUtils.to_value raw
+    value.value_type.must_equal :string_value
     value.string_value.must_equal raw
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
@@ -52,28 +59,30 @@ describe Gcloud::Datastore::Properties do
 
   it "encodes nil" do
     value = Gcloud::GRPCUtils.to_value nil
-    value.must_be :nil?
-
-    # value.boolean_value.must_be :nil?
-    # value.timestamp_value.must_be :nil?
-    # value.key_value.must_be :nil?
-    # value.entity_value.must_be :nil?
-    # value.double_value.must_be :nil?
-    # value.integer_value.must_be :nil?
-    # value.string_value.must_be :nil?
-    # value.array_value.must_be :nil?
-    # value.blob_value.must_be :nil?
-    # value.geo_point_value.must_be :nil?
+    value.value_type.must_equal :null_value
+    value.null_value.must_equal :NULL_VALUE
+    value.boolean_value.must_be :nil?
+    value.timestamp_value.must_be :nil?
+    value.key_value.must_be :nil?
+    value.entity_value.must_be :nil?
+    value.double_value.must_be :nil?
+    value.integer_value.must_be :nil?
+    value.string_value.must_be :nil?
+    value.array_value.must_be :nil?
+    value.blob_value.must_be :nil?
+    value.geo_point_value.must_be :nil?
   end
 
   it "decodes NULL" do
     value = Google::Datastore::V1beta3::Value.new
+    value.null_value = :NULL_VALUE
     raw = Gcloud::GRPCUtils.from_value value
     raw.must_equal nil
   end
 
   it "encodes true" do
     value = Gcloud::GRPCUtils.to_value true
+    value.value_type.must_equal :boolean_value
     value.boolean_value.must_equal true
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
@@ -95,6 +104,7 @@ describe Gcloud::Datastore::Properties do
 
   it "encodes false" do
     value = Gcloud::GRPCUtils.to_value false
+    value.value_type.must_equal :boolean_value
     value.boolean_value.must_equal false
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
@@ -117,6 +127,7 @@ describe Gcloud::Datastore::Properties do
   it "encodes integer" do
     raw = 1234
     value = Gcloud::GRPCUtils.to_value raw
+    value.value_type.must_equal :integer_value
     value.integer_value.must_equal raw
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
@@ -140,6 +151,7 @@ describe Gcloud::Datastore::Properties do
   it "encodes float" do
     raw = 12.34
     value = Gcloud::GRPCUtils.to_value raw
+    value.value_type.must_equal :double_value
     value.double_value.must_equal raw
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
@@ -163,6 +175,7 @@ describe Gcloud::Datastore::Properties do
   it "encodes Key" do
     key = Gcloud::Datastore::Key.new "Thing", 123
     value = Gcloud::GRPCUtils.to_value key
+    value.value_type.must_equal :key_value
     value.key_value.must_equal key.to_grpc
     value.timestamp_value.must_be :nil?
     value.entity_value.must_be :nil?
@@ -190,8 +203,9 @@ describe Gcloud::Datastore::Properties do
     entity.key = Gcloud::Datastore::Key.new "Thing", 123
     entity["name"] = "Thing 1"
     value = Gcloud::GRPCUtils.to_value entity
-    value.key_value.must_be :nil?
+    value.value_type.must_equal :entity_value
     value.entity_value.must_equal entity.to_grpc
+    value.key_value.must_be :nil?
     value.timestamp_value.must_be :nil?
     value.boolean_value.must_be :nil?
     value.double_value.must_be :nil?
@@ -219,6 +233,7 @@ describe Gcloud::Datastore::Properties do
   it "encodes Array" do
     array = ["string", 123, true]
     value = Gcloud::GRPCUtils.to_value array
+    value.value_type.must_equal :array_value
     value.array_value.wont_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
@@ -248,6 +263,7 @@ describe Gcloud::Datastore::Properties do
 
   it "encodes Time" do
     value = Gcloud::GRPCUtils.to_value time_obj
+    value.value_type.must_equal :timestamp_value
     value.timestamp_value.must_equal time_grpc
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
@@ -278,6 +294,7 @@ describe Gcloud::Datastore::Properties do
   it "encodes DateTime" do
     datetime_obj = time_obj.to_datetime
     value = Gcloud::GRPCUtils.to_value datetime_obj
+    value.value_type.must_equal :timestamp_value
     value.timestamp_value.must_equal time_grpc
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
@@ -300,6 +317,7 @@ describe Gcloud::Datastore::Properties do
   it "encodes IO as blob" do
     raw = File.open "acceptance/data/CloudPlatform_128px_Retina.png"
     value = Gcloud::GRPCUtils.to_value raw
+    value.value_type.must_equal :blob_value
     value.blob_value.must_equal File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
@@ -315,6 +333,7 @@ describe Gcloud::Datastore::Properties do
   it "encodes StringIO as blob" do
     raw = StringIO.new(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
     value = Gcloud::GRPCUtils.to_value raw
+    value.value_type.must_equal :blob_value
     value.blob_value.must_equal File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
@@ -332,6 +351,7 @@ describe Gcloud::Datastore::Properties do
     raw.write(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
     raw.rewind
     value = Gcloud::GRPCUtils.to_value raw
+    value.value_type.must_equal :blob_value
     value.blob_value.must_equal File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
@@ -355,6 +375,7 @@ describe Gcloud::Datastore::Properties do
   it "encodes location hash" do
     latlng_obj = {latitude: 37.4220041, longitude: -122.0862462}
     value = Gcloud::GRPCUtils.to_value latlng_obj
+    value.value_type.must_equal :geo_point_value
     value.geo_point_value.must_equal Google::Type::LatLng.new(latitude: 37.4220041, longitude: -122.0862462)
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
