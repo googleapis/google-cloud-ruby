@@ -19,7 +19,7 @@ require "gcloud/datastore/key"
 module Gcloud
   module Datastore
     ##
-    # # Query
+    # # GqlQuery
     #
     # Represents a GQL query.
     #
