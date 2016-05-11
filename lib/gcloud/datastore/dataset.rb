@@ -371,6 +371,13 @@ module Gcloud
       #     where("done", "=", false)
       #   tasks = datastore.run query
       #
+      # @example Run an ancestor query with eventual consistency:
+      #   task_list_key = datastore.key "TaskList", "default"
+      #   query.kind("Task").
+      #     ancestor(task_list_key)
+      #
+      #   tasks = datastore.run query, consistency: :eventual
+      #
       # @example Run the query within a namespace with the `namespace` option:
       #   query = datastore.query("Task").
       #     where("done", "=", false)
