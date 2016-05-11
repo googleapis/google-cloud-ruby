@@ -1,5 +1,31 @@
 # Release History
 
+### 0.9.0 / 2016-05-11
+
+#### Major Changes
+
+* Datastore
+  * Upgrade Datastore to v1beta3 using gRPC
+  * Add GQL query support
+  * Breaking Changes:
+    * `QueryResults#more_results` is now a symbol, was a string
+    * `ApiError` is removed, top-level Gcloud errors returned now
+    * `DATASTORE_HOST` environment variable removed, use
+      `DATASTORE_EMULATOR_HOST` now
+
+#### Minor Changes
+
+* Datastore
+  * Add insert and update methods to specify persistence behavior
+  * Allow different updates (upsert/insert/update/delete) in a
+    single commit outside of a transaction
+  * Entity can now have Location property values
+  * `QueryResults#more_after_cursor?` was added
+  * `QueryResults#next?`, `#next`, `#all` were added
+  * Allow array of objects as well as splat arguments
+* Translate
+  * Allow array of strings as well as splat arguments
+
 ### 0.8.2 / 2016-05-04
 
 #### Changes
