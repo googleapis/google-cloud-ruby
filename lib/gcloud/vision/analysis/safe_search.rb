@@ -45,7 +45,7 @@ module Gcloud
         attr_accessor :gapi
 
         ##
-        # @private Creates a new Likelihood instance.
+        # @private Creates a new SafeSearch instance.
         def initialize
           @gapi = {}
         end

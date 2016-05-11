@@ -25,18 +25,34 @@ module Gcloud
     ##
     # # Location
     #
-    # TODO: info here...
+    # A latitude/longitude pair with values conforming to the [WGS84
+    # standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
     #
     # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   vision = gcloud.vision
-    #   # TODO: example here...
+    #
+    #   image = vision.image "./acceptance/data/landmark.jpg"
+    #   entity = image.landmark
+    #
+    #   location = entity.locations.first
+    #
+    #   location.latitude #=> 43.878264
+    #   location.longitude #=> -103.45700740814209
     #
     class Location
+      # @!attribute latitude
+      #   @return [Float] degrees latitude conforming to the [WGS84
+      #     standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf)
+      # @!attribute longitude
+      #   @return [Float] degrees longitude conforming to the [WGS84
+      #     standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf)
       attr_accessor :latitude, :longitude
 
+      ##
+      # @private Creates a new Location instance.
       def initialize latitude, longitude
         @latitude  = latitude
         @longitude = longitude

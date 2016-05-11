@@ -20,16 +20,109 @@ module Gcloud
     ##
     # # Annotate
     #
+    # Accumulates configuration for an image annotation request. Users describe
+    # the type of Google Cloud Vision API tasks to perform over images by
+    # configuring features such as `faces`, `landmarks`, `text`, etc. This
+    # configuration captures the Cloud Vision API vertical to operate on and the
+    # number of top-scoring results to return.
     #
+    # See {Project#annotate}.
+    #
+    # @example
+    #   require "gcloud"
+    #
+    #   gcloud = Gcloud.new
+    #   vision = gcloud.vision
+    #
+    #   face_image = vision.image "./acceptance/data/face.jpg"
+    #   landmark_image = vision.image "./acceptance/data/landmark.jpg"
+    #
+    #   analysis = vision.annotate do |annotate|
+    #      annotate.annotate face_image, faces: 10, labels: 10
+    #      annotate.annotate landmark_image, landmarks: 10
+    #   end
+    #
+    #   analysis.faces.count #=> 1
+    #   analysis.labels.count #=> 4
+    #   analysis.landmarks.count #=> 1
     #
     class Annotate
+      # @private
       attr_accessor :requests
 
+      ##
+      # @private Creates a new Annotate instance.
       def initialize project
         @project = project
         @requests = []
       end
 
+      ##
+      # Performs detection of Cloud Vision [features](https://cloud.google.com/vision/reference/rest/v1/images/annotate#Feature)
+      # on the given images. If no options for features are provided, **all**
+      # image detection features will be performed, with a default of `10`
+      # results for faces, landmarks, logos, and labels. If any feature option
+      # is provided, only the specified feature detections will be performed.
+      # Please review [Pricing](https://cloud.google.com/vision/docs/pricing)
+      # before use, as a separate charge is incurred for each feature performed
+      # on an image.
+      #
+      # Image files sent to the Google Cloud Vision API should not exceed 4 MB.
+      # For multiple images in a request, the Vision API currently imposes an 8
+      # MB per request limit.
+      #
+      # See {Project#annotate} for requests that do not involve multiple feature
+      # configurations.
+      #
+      # @see https://cloud.google.com/vision/docs/requests-and-responses Cloud
+      #   Vision API Requests and Responses
+      # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#AnnotateImageRequest
+      #   AnnotateImageRequest
+      # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+      #
+      # @param [Image] images The image or images to annotate. Required.
+      # @param [Integer] faces The maximum number of results for the
+      #   `FACE_DETECTION` feature. Optional.
+      # @param [Integer] landmarks the maximum number of results for the
+      #   `LANDMARK_DETECTION` feature. Optional.
+      # @param [Integer] logos the maximum number of results for the
+      #   `LOGO_DETECTION` feature. Optional.
+      # @param [Integer] labels the maximum number of results for the
+      #   `LABEL_DETECTION` feature. Optional.
+      # @param [Boolean] text whether to perform the `TEXT_DETECTION` feature
+      #   (OCR). Optional.
+      # @param [Boolean] safe_search whether to perform the
+      #   `SAFE_SEARCH_DETECTION` feature. Optional.
+      # @param [Boolean] properties whether to perform the
+      #   `IMAGE_PROPERTIES` feature (currently, the image's dominant colors.)
+      #   Optional.
+      #
+      # @return [Analysis, Array<Analysis>] the results for all image
+      #   detections, returned as a single {Analysis} instance for one image, or
+      #   as an array of {Analysis} instances, one per image, for multiple
+      #   images
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   face_image = vision.image "./acceptance/data/face.jpg"
+      #   landmark_image = vision.image "./acceptance/data/landmark.jpg"
+      #   text_image = vision.image "./acceptance/data/text.png"
+      #
+      #   analyses = vision.annotate do |annotate|
+      #      annotate.annotate face_image, faces: 10, labels: 10
+      #      annotate.annotate landmark_image, landmarks: 10
+      #      annotate.annotate text_image, text: true
+      #   end
+      #
+      #   analyses[0].faces.count #=> 1
+      #   analyses[0].labels.count #=> 4
+      #   analyses[1].landmarks.count #=> 1
+      #   analyses[2].text.words.count #=> 28
+      #
       def annotate *images, faces: 0, landmarks: 0, logos: 0, labels: 0,
                    text: false, safe_search: false, properties: false
         add_requests(images, faces, landmarks, logos, labels, text,

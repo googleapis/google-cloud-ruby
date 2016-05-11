@@ -96,7 +96,9 @@ module Gcloud
         # The language code for the locale in which the `description` is
         # expressed.
         #
-        # @return [String] the language code
+        # @return [String] the [ISO
+        #   639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+        #   language code
         #
         def locale
           @gapi["locale"]

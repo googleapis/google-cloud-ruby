@@ -61,7 +61,9 @@ module Gcloud
         ##
         # The language code detected for `text`.
         #
-        # @return [String] the language code
+        # @return [String] the [ISO
+        #   639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+        #   language code
         #
         def locale
           @gapi["locale"]
@@ -163,7 +165,7 @@ module Gcloud
           attr_accessor :gapi
 
           ##
-          # @private Creates a new Text instance.
+          # @private Creates a new Word instance.
           def initialize
             @gapi = {}
           end
