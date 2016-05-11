@@ -55,7 +55,7 @@ describe Gcloud::Datastore::Entity do
     grpc.key.path.first.id = 123456
     grpc.properties["name"] = Gcloud::GRPCUtils.to_value "User McNumber"
     grpc.properties["email"] = Gcloud::GRPCUtils.to_value "number@example.net"
-    grpc.properties["avatar"] = nil
+    grpc.properties["avatar"] = Gcloud::GRPCUtils.to_value nil
 
     entity_from_grpc = Gcloud::Datastore::Entity.from_grpc grpc
 
