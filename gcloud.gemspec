@@ -20,11 +20,10 @@ Gem::Specification.new do |gem|
 
   gem.extra_rdoc_files = ["OVERVIEW.md", "AUTHENTICATION.md", "CHANGELOG.md"]
   gem.rdoc_options     = ["--main", "OVERVIEW.md",
-                          "--exclude", "lib/gcloud/proto/",
                           "--exclude", "lib/google/"]
 
   gem.add_dependency                  "grpc", "~> 0.13.1"
-  gem.add_dependency                  "beefcake", "~> 1.0"
+  gem.add_dependency                  "google-protobuf", "~> 3.0.0.alpha.5.0.5"
   gem.add_dependency                  "google-api-client", "~> 0.8.3"
   gem.add_dependency                  "mime-types", "~> 2.4"
   gem.add_dependency                  "digest-crc", "~> 0.4"

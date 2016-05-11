@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-require "gcloud/datastore/proto"
-
 module Gcloud
   module Datastore
     ##
@@ -26,7 +24,7 @@ module Gcloud
     # ID, assigned automatically by Datastore.
     #
     # @example
-    #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
+    #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
     #
     class Key
       ##
@@ -35,14 +33,14 @@ module Gcloud
       # @return [String]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "User"
-      #   key.kind #=> "User"
+      #   key = Gcloud::Datastore::Key.new "TaskList"
+      #   key.kind #=> "TaskList"
       #   key.kind = "Task"
       #
       attr_accessor :kind
 
       ##
-      # The dataset_id of the Key.
+      # The project of the Key.
       #
       # @return [String]
       #
@@ -54,9 +52,11 @@ module Gcloud
       #
       #   dataset = gcloud.datastore
       #   entity = dataset.find "User", "heidi@example.com"
-      #   entity.key.dataset_id #=> "my-todo-project"
+      #   entity.key.project #=> "my-todo-project"
       #
-      attr_accessor :dataset_id
+      attr_accessor :project
+      alias_method :dataset_id,  :project
+      alias_method :dataset_id=, :project=
 
       ##
       # The namespace of the Key.
@@ -69,9 +69,9 @@ module Gcloud
       #   gcloud = Gcloud.new "my-todo-project",
       #                       "/path/to/keyfile.json"
       #
-      #   dataset = gcloud.datastore
-      #   entity = dataset.find "User", "heidi@example.com"
-      #   entity.key.namespace #=> "ns~todo-project"
+      #   datastore = gcloud.datastore
+      #   task = datastore.find "Task", "sampleTask"
+      #   task.key.namespace #=> "ns~todo-project"
       #
       attr_accessor :namespace
 
@@ -85,7 +85,7 @@ module Gcloud
       # @return [Gcloud::Datastore::Dataset::Key]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
       #
       def initialize kind = nil, id_or_name = nil
         @kind = kind
@@ -103,12 +103,12 @@ module Gcloud
       # @return [Integer, nil]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
-      #   key.id #=> nil
-      #   key.name #=> "heidi@example.com"
-      #   key.id = 654321
-      #   key.id #=> 654321
-      #   key.name #=> nil
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task_key.id #=> nil
+      #   task_key.name #=> "sampleTask"
+      #   task_key.id = 654321
+      #   task_key.id #=> 654321
+      #   task_key.name #=> nil
       #
       def id= new_id
         @name = nil if new_id
@@ -121,8 +121,8 @@ module Gcloud
       # @return [Integer, nil]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "User", 123456
-      #   key.id #=> 123456
+      #   task_key = Gcloud::Datastore::Key.new "Task", 123456
+      #   task_key.id #=> 123456
       #
       attr_reader :id
 
@@ -133,12 +133,12 @@ module Gcloud
       # @return [String, nil]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "User", 123456
-      #   key.id #=> 123456
-      #   key.name #=> nil
-      #   key.name = "heidi@example.com"
-      #   key.id #=> nil
-      #   key.name #=> "heidi@example.com"
+      #   task_key = Gcloud::Datastore::Key.new "Task", 123456
+      #   task_key.id #=> 123456
+      #   task_key.name #=> nil
+      #   task_key.name = "sampleTask"
+      #   task_key.id #=> nil
+      #   task_key.name #=> "sampleTask"
       #
       def name= new_name
         @id = nil if new_name
@@ -151,19 +151,26 @@ module Gcloud
       # @return [String, nil]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
-      #   key.name #=> "heidi@example.com"
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task_key.name #=> "sampleTask"
       #
       attr_reader :name
 
       ##
-      # @private Set the parent of the Key.
+      # Set the parent of the Key.
       #
       # @return [Key, nil]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "List", "todos"
-      #   key.parent = Gcloud::Datastore::Key.new "User", "heidi@example.com"
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task_key.parent = Gcloud::Datastore::Key.new "TaskList", "default"
+      #
+      # @example With multiple levels:
+      #   user_key = Gcloud::Datastore::Key.new "User", "alice"
+      #   task_list_key = Gcloud::Datastore::Key.new "TaskList", "default"
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task_list_key.parent = user_key
+      #   task_key.parent = task_list_key
       #
       def parent= new_parent
         # store key if given an entity
@@ -180,13 +187,13 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
+      #   datastore = gcloud.datastore
       #
-      #   user = dataset.find "User", "heidi@example.com"
-      #   query = dataset.query("List").
-      #     ancestor(user.key)
-      #   lists = dataset.run query
-      #   lists.first.key.parent #=> Key("User", "heidi@example.com")
+      #   task_list = datastore.find "TaskList", "default"
+      #   query = datastore.query("Task").
+      #     ancestor(task_list)
+      #   lists = datastore.run query
+      #   lists.first.key.parent #=> Key("TaskList", "default")
       #
       attr_reader :parent
 
@@ -198,9 +205,9 @@ module Gcloud
       # @return [Array<Array<(String, String)>>]
       #
       # @example
-      #   key = Gcloud::Datastore::Key.new "List", "todos"
-      #   key.parent = Gcloud::Datastore::Key.new "User", "heidi@example.com"
-      #   key.path #=> [["User", "heidi@example.com"], ["List", "todos"]]
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task_key.parent = Gcloud::Datastore::Key.new "TaskList", "default"
+      #   task_key.path #=> [["TaskList", "default"], ["Task", "sampleTask"]]
       #
       def path
         new_path = parent ? parent.path : []
@@ -226,41 +233,43 @@ module Gcloud
       end
 
       ##
-      # @private Convert the Key to a protocol buffer object.
-      def to_proto
-        Proto::Key.new.tap do |k|
-          k.path_element = path.map do |pe_kind, pe_id_or_name|
-            Proto.new_path_element pe_kind, pe_id_or_name
+      # @private Convert the Key to a Google::Datastore::V1beta3::Key object.
+      def to_grpc
+        grpc_path = path.map do |pe_kind, pe_id_or_name|
+          path_args = { kind: pe_kind }
+          if pe_id_or_name.is_a? Integer
+            path_args[:id] = pe_id_or_name
+          elsif pe_id_or_name.is_a? String
+            path_args[:name] = pe_id_or_name unless pe_id_or_name.empty?
           end
-          k.partition_id = Proto.new_partition_id dataset_id, namespace
+          Google::Datastore::V1beta3::Key::PathElement.new(path_args)
         end
+        grpc = Google::Datastore::V1beta3::Key.new(path: grpc_path)
+        if project || namespace
+          grpc.partition_id = Google::Datastore::V1beta3::PartitionId.new(
+            project_id: project.to_s, namespace_id: namespace.to_s)
+        end
+        grpc
       end
 
-      # rubocop:disable all
-
       ##
-      # @private Create a new Key from a protocol buffer object.
-      def self.from_proto proto
-        # Disable rules because the complexity here is neccessary.
-        key_proto = proto.dup
+      # @private Create a new Key from a Google::Datastore::V1beta3::Key object.
+      def self.from_grpc grpc
+        key_grpc = grpc.dup
         key = Key.new
-        proto_path_element = Array(key_proto.path_element).pop
-        if proto_path_element
-          key = Key.new proto_path_element.kind,
-                        proto_path_element.id || proto_path_element.name
+        path_grpc = key_grpc.path.pop
+        if path_grpc
+          key = Key.new path_grpc.kind, (path_grpc.id || path_grpc.name)
         end
-        if key_proto.partition_id
-          key.dataset_id = key_proto.partition_id.dataset_id
-          key.namespace  = key_proto.partition_id.namespace
+        if key_grpc.partition_id
+          key.project = key_grpc.partition_id.project_id
+          key.namespace = key_grpc.partition_id.namespace_id
         end
-        if Array(key_proto.path_element).count > 0
-          key.parent = Key.from_proto(key_proto)
-        end
+        key.parent = Key.from_grpc(key_grpc) if key_grpc.path.count > 0
         # Freeze the key to make it immutable.
         key.freeze
         key
       end
-      # rubocop:enable all
     end
   end
 end

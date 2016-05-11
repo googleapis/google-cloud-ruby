@@ -79,21 +79,23 @@ require "gcloud"
 
 gcloud = Gcloud.new "my-todo-project-id",
                     "/path/to/keyfile.json"
-dataset = gcloud.datastore
+datastore = gcloud.datastore
 
 # Create a new task to demo datastore
-demo_task = dataset.entity "Task", "datastore-demo" do |t|
-  t["description"] = "Demonstrate Datastore functionality"
-  t["completed"] = false
+task = datastore.entity "Task", "sampleTask" do |t|
+  t["type"] = "Personal"
+  t["done"] = false
+  t["priority"] = 4
+  t["description"] = "Learn Cloud Datastore"
 end
 
 # Save the new task
-dataset.save demo_task
+datastore.save task
 
 # Run a query for all completed tasks
-query = dataset.query("Task").
-  where("completed", "=", true)
-completed_tasks = dataset.run query
+query = datastore.query("Task").
+  where("done", "=", false)
+tasks = datastore.run query
 ```
 
 ### DNS

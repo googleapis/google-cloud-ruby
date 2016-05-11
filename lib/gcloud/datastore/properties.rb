@@ -71,6 +71,17 @@ module Gcloud
       end
       alias_method :to_hash, :to_h
 
+      def to_grpc
+        Hash[@hash.map { |(k, v)| [k.to_s, GRPCUtils.to_value(v)] }]
+      end
+
+      def self.from_grpc grpc_map
+        # For some reason Google::Protobuf::Map#map isn't returning the value.
+        # It returns nil every time. COnvert to Hash to get actual objects.
+        grpc_hash = GRPCUtils.map_to_hash grpc_map
+        new Hash[grpc_hash.map { |(k, v)| [k.to_s, GRPCUtils.from_value(v)] }]
+      end
+
       protected
 
       ##
@@ -82,7 +93,7 @@ module Gcloud
       end
 
       # rubocop:disable all
-      # Disabled rubocop because this needs to match Proto.to_proto_value
+      # Disabled rubocop because this needs to match GRPCUtils.to_value
 
       ##
       # Ensures the value is a type that can be persisted,
@@ -99,6 +110,8 @@ module Gcloud
            Array                     === value
           return value
         elsif value.respond_to?(:to_time)
+          return value
+        elsif value.respond_to?(:to_hash) && value.keys.sort == [:latitude, :longitude]
           return value
         elsif value.respond_to?(:read) && value.respond_to?(:rewind)
           # Always convert an IO object to a StringIO when storing.
