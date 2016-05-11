@@ -14,12 +14,15 @@
 
 
 require "gcloud/gce"
-require "gcloud/datastore/connection"
+require "gcloud/datastore/grpc_utils"
 require "gcloud/datastore/credentials"
+require "gcloud/datastore/service"
 require "gcloud/datastore/commit"
 require "gcloud/datastore/entity"
 require "gcloud/datastore/key"
 require "gcloud/datastore/query"
+require "gcloud/datastore/gql_query"
+require "gcloud/datastore/cursor"
 require "gcloud/datastore/dataset/lookup_results"
 require "gcloud/datastore/dataset/query_results"
 
@@ -41,16 +44,17 @@ module Gcloud
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
-    #   dataset = gcloud.datastore
+    #   datastore = gcloud.datastore
     #
-    #   query = dataset.query("Task").
-    #     where("completed", "=", true)
+    #   query = datastore.query("Task").
+    #     where("done", "=", false)
     #
-    #   tasks = dataset.run query
+    #   tasks = datastore.run query
     #
     class Dataset
-      # @private
-      attr_accessor :connection
+      ##
+      # @private The gRPC Service object.
+      attr_accessor :service
 
       ##
       # @private Creates a new Dataset instance.
@@ -59,7 +63,7 @@ module Gcloud
       def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
-        @connection = Connection.new project, credentials
+        @service = Service.new project, credentials
       end
 
       ##
@@ -71,11 +75,11 @@ module Gcloud
       #   gcloud = Gcloud.new "my-todo-project",
       #                       "/path/to/keyfile.json"
       #
-      #   dataset = gcloud.datastore
-      #   dataset.project #=> "my-todo-project"
+      #   datastore = gcloud.datastore
+      #   datastore.project #=> "my-todo-project"
       #
       def project
-        connection.dataset_id
+        service.project
       end
 
       ##
@@ -97,19 +101,20 @@ module Gcloud
       # @return [Array<Gcloud::Datastore::Key>]
       #
       # @example
-      #   empty_key = dataset.key "Task"
-      #   task_keys = dataset.allocate_ids empty_key, 5
+      #   task_key = datastore.key "Task"
+      #   task_keys = datastore.allocate_ids task_key, 5
       #
       def allocate_ids incomplete_key, count = 1
         if incomplete_key.complete?
           fail Gcloud::Datastore::Error, "An incomplete key must be provided."
         end
 
-        incomplete_keys = count.times.map { incomplete_key.to_proto }
-        response = connection.allocate_ids(*incomplete_keys)
-        Array(response.key).map do |key|
-          Key.from_proto key
-        end
+        ensure_service!
+        incomplete_keys = count.times.map { incomplete_key.to_grpc }
+        allocate_res = service.allocate_ids(*incomplete_keys)
+        allocate_res.keys.map { |key| Key.from_grpc key }
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -119,11 +124,105 @@ module Gcloud
       #
       # @return [Array<Gcloud::Datastore::Entity>]
       #
-      # @example
-      #   dataset.save task1, task2
+      # @example Insert a new entity:
+      #   task = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
+      #   end
+      #   task.key.id #=> nil
+      #   datastore.save task
+      #   task.key.id #=> 123456
+      #
+      # @example Insert multiple new entities in a batch:
+      #   task1 = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
+      #   end
+      #
+      #   task2 = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 5
+      #     t["description"] = "Integrate Cloud Datastore"
+      #   end
+      #
+      #   task_key1, task_key2 = datastore.save(task1, task2).map(&:key)
+      #
+      # @example Update an existing entity:
+      #   task = datastore.find "Task", "sampleTask"
+      #   task["priority"] = 5
+      #   datastore.save task
       #
       def save *entities
         commit { |c| c.save(*entities) }
+      end
+      alias_method :upsert, :save
+
+      ##
+      # Insert one or more entities to the Datastore. An InvalidArgumentError
+      # will raised if the entities cannot be inserted.
+      #
+      # @param [Entity] entities One or more entity objects to be inserted.
+      #
+      # @return [Array<Gcloud::Datastore::Entity>]
+      #
+      # @example Insert a new entity:
+      #   task = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
+      #   end
+      #   task.key.id #=> nil
+      #   datastore.insert task
+      #   task.key.id #=> 123456
+      #
+      # @example Insert multiple new entities in a batch:
+      #   task1 = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
+      #   end
+      #
+      #   task2 = datastore.entity "Task" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 5
+      #     t["description"] = "Integrate Cloud Datastore"
+      #   end
+      #
+      #   task_key1, task_key2 = datastore.insert(task1, task2).map(&:key)
+      #
+      def insert *entities
+        commit { |c| c.insert(*entities) }
+      end
+
+      ##
+      # Update one or more entities to the Datastore. An InvalidArgumentError
+      # will raised if the entities cannot be updated.
+      #
+      # @param [Entity] entities One or more entity objects to be updated.
+      #
+      # @return [Array<Gcloud::Datastore::Entity>]
+      #
+      # @example Update an existing entity:
+      #   task = datastore.find "Task", "sampleTask"
+      #   task["done"] = true
+      #   datastore.save task
+      #
+      # @example update multiple new entities in a batch:
+      #   query = datastore.query("Task").where("done", "=", false)
+      #   tasks = datastore.run query
+      #   tasks.each { |t| t["done"] = true }
+      #   datastore.update tasks
+      #
+      def update *entities
+        commit { |c| c.update(*entities) }
       end
 
       ##
@@ -163,17 +262,23 @@ module Gcloud
         return unless block_given?
         c = Commit.new
         yield c
-        response = connection.commit c.mutation
-        auto_id_assign_ids c.auto_id_entities,
-                           response.mutation_result.insert_auto_id_key
-        # Make sure all entity keys are frozen so all show as persisted
+
+        ensure_service!
+        commit_res = service.commit c.mutations
         entities = c.entities
+        returned_keys = commit_res.mutation_results.map(&:key)
+        returned_keys.each_with_index do |key, index|
+          next if entities[index].nil?
+          entities[index].key = Key.from_grpc(key) unless key.nil?
+        end
         entities.each { |e| e.key.freeze unless e.persisted? }
         entities
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
-      # Retrieve an entity by providing key information.
+      # Retrieve an entity by key.
       #
       # @param [Key, String] key_or_kind A Key object or `kind` string value.
       # @param [Integer, String, nil] id_or_name The Key's `id` or `name` value
@@ -190,11 +295,11 @@ module Gcloud
       # @return [Gcloud::Datastore::Entity, nil]
       #
       # @example Finding an entity with a key:
-      #   key = dataset.key "Task", 123456
-      #   task = dataset.find key
+      #   task_key = datastore.key "Task", "sampleTask"
+      #   task = datastore.find task_key
       #
       # @example Finding an entity with a `kind` and `id`/`name`:
-      #   task = dataset.find "Task", 123456
+      #   task = datastore.find "Task", "sampleTask"
       #
       def find key_or_kind, id_or_name = nil, consistency: nil
         key = key_or_kind
@@ -206,7 +311,8 @@ module Gcloud
       alias_method :get, :find
 
       ##
-      # Retrieve the entities for the provided keys.
+      # Retrieve the entities for the provided keys. The order of results is
+      # undefined and has no relation to the order of `keys` arguments.
       #
       # @param [Key] keys One or more Key objects to find records for.
       # @param [Symbol] consistency The non-transactional read consistency to
@@ -222,26 +328,30 @@ module Gcloud
       #
       # @example
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
-      #   key1 = dataset.key "Task", 123456
-      #   key2 = dataset.key "Task", 987654
-      #   tasks = dataset.find_all key1, key2
+      #   datastore = gcloud.datastore
+      #
+      #   task_key1 = datastore.key "Task", "sampleTask1"
+      #   task_key2 = datastore.key "Task", "sampleTask2"
+      #   tasks = datastore.find_all task_key1, task_key2
       #
       def find_all *keys, consistency: nil
+        ensure_service!
         check_consistency! consistency
-        response = connection.lookup(*keys.map(&:to_proto),
-                                     consistency: consistency)
-        entities = to_gcloud_entities response.found
-        deferred = to_gcloud_keys response.deferred
-        missing  = to_gcloud_entities response.missing
+        lookup_res = service.lookup(*keys.map(&:to_grpc),
+                                    consistency: consistency)
+        entities = to_gcloud_entities lookup_res.found
+        deferred = to_gcloud_keys lookup_res.deferred
+        missing  = to_gcloud_entities lookup_res.missing
         LookupResults.new entities, deferred, missing
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :lookup, :find_all
 
       ##
       # Retrieve entities specified by a Query.
       #
-      # @param [Query] query The Query object with the search criteria.
+      # @param [Query, GqlQuery] query The object with the search criteria.
       # @param [String] namespace The namespace the query is to run within.
       # @param [Symbol] consistency The non-transactional read consistency to
       #   use. Cannot be set to `:strong` for global queries. Accepted values
@@ -255,24 +365,36 @@ module Gcloud
       # @return [Gcloud::Datastore::Dataset::QueryResults]
       #
       # @example
-      #   query = dataset.query("Task").
-      #     where("completed", "=", true)
-      #   tasks = dataset.run query
+      #   query = datastore.query("Task").
+      #     where("done", "=", false)
+      #   tasks = datastore.run query
       #
       # @example Run the query within a namespace with the `namespace` option:
-      #   query = Gcloud::Datastore::Query.new.kind("Task").
-      #     where("completed", "=", true)
-      #   tasks = dataset.run query, namespace: "ns~todo-project"
+      #   query = datastore.query("Task").
+      #     where("done", "=", false)
+      #   tasks = datastore.run query, namespace: "ns~todo-project"
+      #
+      # @example Run the query with a GQL string.
+      #   gql_query = datastore.gql "SELECT * FROM Task WHERE done = @done",
+      #                             done: false
+      #   tasks = datastore.run gql_query
+      #
+      # @example Run the GQL query within a namespace with `namespace` option:
+      #   gql_query = datastore.gql "SELECT * FROM Task WHERE done = @done",
+      #                             done: false
+      #   tasks = datastore.run gql_query, namespace: "ns~todo-project"
       #
       def run query, namespace: nil, consistency: nil
-        partition = optional_partition_id namespace
+        ensure_service!
+        unless query.is_a?(Query) || query.is_a?(GqlQuery)
+          fail ArgumentError, "Cannot run a #{query.class} object."
+        end
         check_consistency! consistency
-        response = connection.run_query query.to_proto, partition,
-                                        consistency: consistency
-        entities = to_gcloud_entities response.batch.entity_result
-        cursor = Proto.encode_cursor response.batch.end_cursor
-        more_results = Proto.to_more_results_string response.batch.more_results
-        QueryResults.new entities, cursor, more_results
+        query_res = service.run_query query.to_grpc, namespace,
+                                      consistency: consistency
+        QueryResults.from_grpc query_res, service, namespace, query.to_grpc.dup
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :run_query, :run
 
@@ -286,16 +408,18 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
+      #   datastore = gcloud.datastore
       #
-      #   user = dataset.entity "User", "heidi" do |u|
-      #     u["name"] = "Heidi Henderson"
-      #     u["email"] = "heidi@example.net"
+      #   task = datastore.entity "Task", "sampleTask" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
       #   end
       #
-      #   dataset.transaction do |tx|
-      #     if tx.find(user.key).nil?
-      #       tx.save user
+      #   datastore.transaction do |tx|
+      #     if tx.find(task.key).nil?
+      #       tx.save task
       #     end
       #   end
       #
@@ -303,17 +427,19 @@ module Gcloud
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
-      #   dataset = gcloud.datastore
+      #   datastore = gcloud.datastore
       #
-      #   user = dataset.entity "User", "heidi" do |u|
-      #     u["name"] = "Heidi Henderson"
-      #     u["email"] = "heidi@example.net"
+      #   task = datastore.entity "Task", "sampleTask" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
       #   end
       #
-      #   tx = dataset.transaction
+      #   tx = datastore.transaction
       #   begin
-      #     if tx.find(user.key).nil?
-      #       tx.save user
+      #     if tx.find(task.key).nil?
+      #       tx.save task
       #     end
       #     tx.commit
       #   rescue
@@ -321,7 +447,7 @@ module Gcloud
       #   end
       #
       def transaction
-        tx = Transaction.new connection
+        tx = Transaction.new service
         return tx unless block_given?
 
         begin
@@ -348,15 +474,15 @@ module Gcloud
       # @return [Gcloud::Datastore::Query]
       #
       # @example
-      #   query = dataset.query("Task").
-      #     where("completed", "=", true)
-      #   tasks = dataset.run query
+      #   query = datastore.query("Task").
+      #     where("done", "=", false)
+      #   tasks = datastore.run query
       #
       # @example The previous example is equivalent to:
       #   query = Gcloud::Datastore::Query.new.
       #     kind("Task").
-      #     where("completed", "=", true)
-      #   tasks = dataset.run query
+      #     where("done", "=", false)
+      #   tasks = datastore.run query
       #
       def query *kinds
         query = Query.new
@@ -365,76 +491,146 @@ module Gcloud
       end
 
       ##
+      # Create a new GqlQuery instance. This is a convenience method to make the
+      # creation of GqlQuery objects easier.
+      #
+      # @param [String] query The GQL query string.
+      # @param [Hash] bindings Named bindings for the GQL query string, each
+      #   key must match regex `[A-Za-z_$][A-Za-z_$0-9]*`, must not match regex
+      #   `__.*__`, and must not be `""`. The value must be an `Object` that can
+      #   be stored as an Entity property value, or a `Cursor`.
+      #
+      # @return [Gcloud::Datastore::GqlQuery]
+      #
+      # @example
+      #   gql_query = datastore.gql "SELECT * FROM Task WHERE done = @done",
+      #                             done: false
+      #   tasks = datastore.run gql_query
+      #
+      # @example The previous example is equivalent to:
+      #   gql_query = Gcloud::Datastore::GqlQuery.new
+      #   gql_query.query_string = "SELECT * FROM Task WHERE done = @done"
+      #   gql_query.named_bindings = {done: false}
+      #   tasks = datastore.run gql_query
+      #
+      def gql query, bindings = {}
+        gql = GqlQuery.new
+        gql.query_string = query
+        gql.named_bindings = bindings unless bindings.empty?
+        gql
+      end
+
+      ##
       # Create a new Key instance. This is a convenience method to make the
       # creation of Key objects easier.
       #
-      # @param [String] kind The kind of the Key. This is optional.
-      # @param [Integer, String] id_or_name The id or name of the Key. This is
-      #   optional.
+      # @param [Array<Array(String,(String|Integer|nil))>] path An optional list
+      #   of pairs for the key's path. Each pair may include the key's kind
+      #   (String) and an id (Integer) or name (String). This is optional.
+      # @param [String] project The project of the Key. This is optional.
+      # @param [String] namespace namespace kind of the Key. This is optional.
       #
       # @return [Gcloud::Datastore::Key]
       #
       # @example
-      #   key = dataset.key "User", "heidi@example.com"
+      #   task_key = datastore.key "Task", "sampleTask"
       #
       # @example The previous example is equivalent to:
-      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
       #
-      def key kind = nil, id_or_name = nil
-        Key.new kind, id_or_name
+      # @example Create an empty key:
+      #   key = dataset.key
+      #
+      # @example Create an incomplete key:
+      #   key = dataset.key "User"
+      #
+      # @example Create a key with a parent:
+      #   key = dataset.key [["List", "todos"], ["User", "heidi@example.com"]]
+      #   key.path #=> [["List", "todos"], ["User", "heidi@example.com"]]
+      #
+      # @example Create an incomplete key with a parent:
+      #   key = dataset.key "List", "todos", "User"
+      #   key.path #=> [["List", "todos"], ["User", nil]]
+      #
+      # @example Create a key with a project and namespace:
+      #   key = dataset.key ["List", "todos"], ["User", "heidi@example.com"],
+      #                     project: "my-todo-project",
+      #                     namespace: "ns~todo-project"
+      #   key.path #=> [["List", "todos"], ["User", "heidi@example.com"]]
+      #   key.project #=> "my-todo-project",
+      #   key.namespace #=> "ns~todo-project"
+      #
+      def key *path, project: nil, namespace: nil
+        path = path.flatten.each_slice(2).to_a # group in pairs
+        kind, id_or_name = path.pop
+        Key.new(kind, id_or_name).tap do |k|
+          k.project = project
+          k.namespace = namespace
+          unless path.empty?
+            k.parent = key path, project: project, namespace: namespace
+          end
+        end
       end
 
       ##
       # Create a new empty Entity instance. This is a convenience method to make
       # the creation of Entity objects easier.
       #
-      # @param [Key, String, nil] key_or_kind A Key object or `kind` string
-      #   value. This is optional.
-      # @param [Integer, String, nil] id_or_name The Key's `id` or `name` value
-      #   if a `kind` was provided in the first parameter.
+      # @param [Key, Array<Array(String,(String|Integer|nil))>] key_or_path An
+      #   optional list of pairs for the key's path. Each pair may include the #
+      #   key's kind (String) and an id (Integer) or name (String). This is #
+      #   optional.
+      # @param [String] project The project of the Key. This is optional.
+      # @param [String] namespace namespace kind of the Key. This is optional.
       # @yield [entity] a block yielding a new entity
       # @yieldparam [Entity] entity the newly created entity object
       #
       # @return [Gcloud::Datastore::Entity]
       #
       # @example
-      #   entity = dataset.entity
+      #   task = datastore.entity
       #
       # @example The previous example is equivalent to:
-      #   entity = Gcloud::Datastore::Entity.new
+      #   task = Gcloud::Datastore::Entity.new
       #
       # @example The key can also be passed in as an object:
-      #   key = dataset.key "User", "heidi@example.com"
-      #   entity = dataset.entity key
+      #   task_key = datastore.key "Task", "sampleTask"
+      #   task = datastore.entity task_key
       #
       # @example Or the key values can be passed in as parameters:
-      #   entity = dataset.entity "User", "heidi@example.com"
+      #   task = datastore.entity "Task", "sampleTask"
       #
       # @example The previous example is equivalent to:
-      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
-      #   entity = Gcloud::Datastore::Entity.new
-      #   entity.key = key
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task = Gcloud::Datastore::Entity.new
+      #   task.key = task_key
       #
       # @example The newly created entity can also be configured using a block:
-      #   user = dataset.entity "User", "heidi@example.com" do |u|
-      #     u["name"] = "Heidi Henderson"
-      #  end
+      #   task = datastore.entity "Task", "sampleTask" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
+      #   end
       #
       # @example The previous example is equivalent to:
-      #   key = Gcloud::Datastore::Key.new "User", "heidi@example.com"
-      #   entity = Gcloud::Datastore::Entity.new
-      #   entity.key = key
-      #   entity["name"] = "Heidi Henderson"
+      #   task_key = Gcloud::Datastore::Key.new "Task", "sampleTask"
+      #   task = Gcloud::Datastore::Entity.new
+      #   task.key = task_key
+      #   task["type"] = "Personal"
+      #   task["done"] = false
+      #   task["priority"] = 4
+      #   task["description"] = "Learn Cloud Datastore"
       #
-      def entity key_or_kind = nil, id_or_name = nil
+      def entity *key_or_path, project: nil, namespace: nil
         entity = Entity.new
 
         # Set the key
-        key = key_or_kind
-        unless key.is_a? Gcloud::Datastore::Key
-          key = Key.new key_or_kind, id_or_name
+        if key_or_path.flatten.first.is_a? Gcloud::Datastore::Key
+          entity.key = key_or_path.flatten.first
+        else
+          entity.key = key key_or_path, project: project, namespace: namespace
         end
-        entity.key = key
 
         yield entity if block_given?
 
@@ -444,37 +640,27 @@ module Gcloud
       protected
 
       ##
-      # Convenince method to convert proto entities to Gcloud entities.
-      def to_gcloud_entities proto_results
+      # @private Raise an error unless an active connection to the service is
+      # available.
+      def ensure_service!
+        fail "Must have active connection to service" unless service
+      end
+
+      ##
+      # Convenience method to convert GRPC entities to Gcloud entities.
+      def to_gcloud_entities grpc_entity_results
         # Entities are nested in an object.
-        Array(proto_results).map do |result|
-          Entity.from_proto result.entity
+        Array(grpc_entity_results).map do |result|
+          # TODO: Make this return an EntityResult with cursor...
+          Entity.from_grpc result.entity
         end
       end
 
       ##
-      # Convenince method to convert proto keys to Gcloud keys.
-      def to_gcloud_keys proto_results
+      # Convenience method to convert GRPC keys to Gcloud keys.
+      def to_gcloud_keys grpc_keys
         # Keys are not nested in an object like entities are.
-        Array(proto_results).map do |key|
-          Key.from_proto key
-        end
-      end
-
-      ##
-      # @private Update saved keys with new IDs post-commit.
-      def auto_id_assign_ids entities, auto_ids
-        Array(auto_ids).each_with_index do |key, index|
-          entity = entities[index]
-          entity.key = Key.from_proto key
-        end
-      end
-
-      def optional_partition_id namespace = nil
-        return nil if namespace.nil?
-        Proto::PartitionId.new.tap do |p|
-          p.namespace = namespace
-        end
+        Array(grpc_keys).map { |key| Key.from_grpc key }
       end
 
       def check_consistency! consistency

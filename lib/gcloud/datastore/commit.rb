@@ -27,16 +27,16 @@ module Gcloud
     #     c.delete entity1, entity2
     #   end
     #
-    # See {Gcloud::Datastore::Dataset#commit} and
-    # {Gcloud::Datastore::Transaction#commit}.
-    #
+    # @see {Gcloud::Datastore::Dataset#commit}
+    # @see {Gcloud::Datastore::Transaction#commit}
     class Commit
       ##
       # @private Create a new Commit object.
       def initialize
-        @shared_entities = []
-        @shared_auto_ids = []
-        @shared_deletes  = []
+        @shared_upserts = []
+        @shared_inserts = []
+        @shared_updates = []
+        @shared_deletes = []
       end
 
       ##
@@ -52,11 +52,48 @@ module Gcloud
       #   end
       #
       def save *entities
-        entities.each do |entity|
-          shared_auto_ids << entity if entity.key.incomplete?
-          shared_entities << entity
-        end
+        entities = Array(entities).flatten
+        @shared_upserts += entities unless entities.empty?
         # Do not save yet
+        entities
+      end
+      alias_method :upsert, :save
+
+      ##
+      # Inserts entities to the Datastore.
+      #
+      # @param [Entity] entities One or more Entity objects to insert.
+      #
+      # @example
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #   dataset.commit do |c|
+      #     c.insert task1, task2
+      #   end
+      #
+      def insert *entities
+        entities = Array(entities).flatten
+        @shared_inserts += entities unless entities.empty?
+        # Do not insert yet
+        entities
+      end
+
+      ##
+      # Updates entities to the Datastore.
+      #
+      # @param [Entity] entities One or more Entity objects to update.
+      #
+      # @example
+      #   gcloud = Gcloud.new
+      #   dataset = gcloud.datastore
+      #   dataset.commit do |c|
+      #     c.update task1, task2
+      #   end
+      #
+      def update *entities
+        entities = Array(entities).flatten
+        @shared_updates += entities unless entities.empty?
+        # Do not update yet
         entities
       end
 
@@ -74,57 +111,35 @@ module Gcloud
       #   end
       #
       def delete *entities_or_keys
-        keys = entities_or_keys.map do |e_or_k|
+        keys = Array(entities_or_keys).flatten.map do |e_or_k|
           e_or_k.respond_to?(:key) ? e_or_k.key : e_or_k
         end
-        keys.each { |k| shared_deletes << k }
+        @shared_deletes += keys unless keys.empty?
         # Do not delete yet
         true
       end
 
-      # @private Mutation object to be committed.
-      def mutation
-        Proto.new_mutation.tap do |m|
-          m.insert_auto_id = shared_auto_ids.map(&:to_proto)
-          m.upsert = shared_upserts.map(&:to_proto)
-          m.delete = shared_deletes.map(&:to_proto)
+      # @private Mutations object to be committed.
+      def mutations
+        mutations = []
+        mutations += @shared_upserts.map do |entity|
+          Google::Datastore::V1beta3::Mutation.new upsert: entity.to_grpc
         end
-      end
-
-      # @private Entities that need key ids assigned.
-      def auto_id_entities
-        shared_auto_ids
+        mutations += @shared_inserts.map do |entity|
+          Google::Datastore::V1beta3::Mutation.new insert: entity.to_grpc
+        end
+        mutations += @shared_updates.map do |entity|
+          Google::Datastore::V1beta3::Mutation.new update: entity.to_grpc
+        end
+        mutations += @shared_deletes.map do |key|
+          Google::Datastore::V1beta3::Mutation.new delete: key.to_grpc
+        end
+        mutations
       end
 
       # @private All entities saved in the commit.
       def entities
-        shared_entities
-      end
-
-      protected
-
-      ##
-      # @private List of Entity objects to be saved.
-      def shared_entities
-        @shared_entities
-      end
-
-      ##
-      # @private List of Entity objects that need auto_ids
-      def shared_auto_ids
-        @shared_auto_ids
-      end
-
-      ##
-      # @private List of Entity objects to be saved.
-      def shared_upserts
-        shared_entities - shared_auto_ids
-      end
-
-      ##
-      # @private List of Key objects to be deleted.
-      def shared_deletes
-        @shared_deletes
+        @shared_upserts + @shared_inserts + @shared_updates
       end
     end
   end

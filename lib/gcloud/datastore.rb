@@ -36,28 +36,34 @@ module Gcloud
   #   OAuth 2.0 to Access Google
   #   APIs](https://developers.google.com/identity/protocols/OAuth2).
   #
-  #   The default scopes are:
+  #   The default scope is:
   #
   #   * `https://www.googleapis.com/auth/datastore`
-  #   * `https://www.googleapis.com/auth/userinfo.email`
   #
   # @return [Gcloud::Datastore::Dataset]
   #
   # @example
   #   require "gcloud/datastore"
   #
-  #   dataset = Gcloud.datastore "my-todo-project",
+  #   datastore = Gcloud.datastore "my-todo-project",
   #                              "/path/to/keyfile.json"
   #
-  #   entity = dataset.entity "Task" do |t|
-  #     t["description"] = "Get started with Google Cloud"
-  #     t["completed"] = false
+  #   task = datastore.entity "Task", "sampleTask" do |t|
+  #     t["type"] = "Personal"
+  #     t["done"] = false
+  #     t["priority"] = 4
+  #     t["description"] = "Learn Cloud Datastore"
   #   end
   #
-  #   dataset.save entity
+  #   datastore.save task
   #
   def self.datastore project = nil, keyfile = nil, scope: nil
     project ||= Gcloud::Datastore::Dataset.default_project
+    if ENV["DATASTORE_EMULATOR_HOST"]
+      ds = Gcloud::Datastore::Dataset.new project, :this_channel_is_insecure
+      ds.service.host = ENV["DATASTORE_EMULATOR_HOST"]
+      return ds
+    end
     if keyfile.nil?
       credentials = Gcloud::Datastore::Credentials.default scope: scope
     else
@@ -85,10 +91,11 @@ module Gcloud
   #
   # gcloud = Gcloud.new "my-todo-project",
   #                     "/path/to/keyfile.json"
-  # dataset = gcloud.datastore
-  # entity = dataset.find "Task", "start"
-  # entity["completed"] = true
-  # dataset.save entity
+  # datastore = gcloud.datastore
+  #
+  # task = datastore.find "Task", "sampleTask"
+  # task["priority"] = 5
+  # datastore.save task
   # ```
   #
   # You can learn more about various options for connection on the
@@ -99,11 +106,11 @@ module Gcloud
   # [Google Cloud Datastore Concepts Overview
   # ](https://cloud.google.com/datastore/docs/concepts/overview).
   #
-  # ## Retrieving Records
+  # ## Retrieving records
   #
-  # Records, called "entities" in Datastore, are retrieved by using a Key.
-  # The Key is more than a numeric identifier, it is a complex data structure
-  # that can be used to model relationships. The simplest Key has a string
+  # Records, called "entities" in Datastore, are retrieved by using a key.
+  # The key is more than a numeric identifier, it is a complex data structure
+  # that can be used to model relationships. The simplest key has a string
   # <tt>kind</tt> value, and either a numeric <tt>id</tt> value, or a string
   # <tt>name</tt> value. A single record can be retrieved by calling
   # {Gcloud::Datastore::Dataset#find} and passing the parts of the key:
@@ -112,24 +119,26 @@ module Gcloud
   # require "gcloud"
   #
   # gcloud = Gcloud.new
-  # dataset = gcloud.datastore
-  # entity = dataset.find "Task", "start"
+  # datastore = gcloud.datastore
+  #
+  # task = datastore.find "Task", "sampleTask"
   # ```
   #
-  # Optionally, {Gcloud::Datastore::Dataset#find} can be given a Key object:
+  # Optionally, {Gcloud::Datastore::Dataset#find} can be given a key object:
   #
   # ```ruby
   # require "gcloud"
   #
   # gcloud = Gcloud.new
-  # dataset = gcloud.datastore
-  # key = dataset.key "Task", 12345
-  # entity = dataset.find key
+  # datastore = gcloud.datastore
+  #
+  # task_key = datastore.key "Task", 123456
+  # task = datastore.find task_key
   # ```
   #
   # See {Gcloud::Datastore::Dataset#find}
   #
-  # ## Querying Records
+  # ## Querying records
   #
   # Multiple records can be found that match criteria.
   # (See {Gcloud::Datastore::Query#where})
@@ -138,10 +147,12 @@ module Gcloud
   # require "gcloud"
   #
   # gcloud = Gcloud.new
-  # dataset = gcloud.datastore
-  # query = dataset.query("List").
-  #   where("active", "=", true)
-  # active_lists = dataset.run query
+  # datastore = gcloud.datastore
+  #
+  # query = datastore.query("Task").
+  #   where("done", "=", false)
+  #
+  # tasks = datastore.run query
   # ```
   #
   # Records can also be ordered. (See {Gcloud::Datastore::Query#order})
@@ -150,11 +161,12 @@ module Gcloud
   # require "gcloud"
   #
   # gcloud = Gcloud.new
-  # dataset = gcloud.datastore
-  # query = dataset.query("List").
-  #   where("active", "=", true).
-  #   order("name")
-  # active_lists = dataset.run query
+  # datastore = gcloud.datastore
+  #
+  # query = datastore.query("Task").
+  #   order("created")
+  #
+  # tasks = datastore.run query
   # ```
   #
   # The number of records returned can be specified.
@@ -164,34 +176,36 @@ module Gcloud
   # require "gcloud"
   #
   # gcloud = Gcloud.new
-  # dataset = gcloud.datastore
-  # query = dataset.query("List").
-  #   where("active", "=", true).
-  #   order("name").
+  # datastore = gcloud.datastore
+  #
+  # query = datastore.query("Task").
   #   limit(5)
-  # active_lists = dataset.run query
+  #
+  # tasks = datastore.run query
   # ```
   #
-  # Records' Key structures can also be queried.
+  # Records' key structures can also be queried.
   # (See {Gcloud::Datastore::Query#ancestor})
   #
   # ```ruby
   # require "gcloud"
   #
   # gcloud = Gcloud.new
-  # dataset = gcloud.datastore
+  # datastore = gcloud.datastore
   #
-  # list = dataset.find "List", "todos"
-  # query = dataset.query("Task").
-  #   ancestor(list.key)
-  # items = dataset.run query
+  # task_list_key = datastore.key "TaskList", "default"
+  #
+  # query = datastore.query("Task").
+  #   ancestor(task_list_key)
+  #
+  # tasks = datastore.run query
   # ```
   #
   # See {Gcloud::Datastore::Query} and {Gcloud::Datastore::Dataset#run}
   #
-  # ## Paginating Records
+  # ### Paginating records
   #
-  # All Records may not return at once, requiring multiple calls to Datastore
+  # All records may not return at once, requiring multiple calls to Datastore
   # to return them all. The returned records will have a <tt>cursor</tt> if
   # there are more available.
   #
@@ -199,13 +213,14 @@ module Gcloud
   # require "gcloud"
   #
   # gcloud = Gcloud.new
-  # dataset = gcloud.datastore
+  # datastore = gcloud.datastore
   #
-  # list = dataset.find "List", "todos"
-  # query = dataset.query("Task").
-  #   ancestor(list.key)
+  # task_list_key = datastore.key "TaskList", "default"
+  #
+  # query = datastore.query("Task").
+  #   ancestor(task_list_key)
   # all_tasks = []
-  # tmp_tasks = dataset.run query
+  # tmp_tasks = datastore.run query
   # while tmp_tasks.any? do
   #   tmp_tasks.each do |task|
   #     all_tasks << task
@@ -215,67 +230,144 @@ module Gcloud
   #   # set cursor on the query
   #   query = query.cursor tmp_tasks.cursor
   #   # query for more records
-  #   tmp_tasks = dataset.run query
+  #   tmp_tasks = datastore.run query
   # end
   # ```
   #
   # See {Gcloud::Datastore::Dataset::LookupResults} and
   # {Gcloud::Datastore::Dataset::QueryResults}
   #
-  # ## Creating Records
+  # ## Creating records
   #
   # New entities can be created and persisted buy calling
-  # {Gcloud::Datastore::Dataset#save}. The entity must have a Key to be saved.
-  # If the Key is incomplete then it will be completed when saved.
+  # {Gcloud::Datastore::Dataset#save}. The entity must have a key to be saved.
+  # If the key is incomplete then it will be completed when saved.
   #
   # ```ruby
   # require "gcloud"
   #
   # gcloud = Gcloud.new
-  # dataset = gcloud.datastore
-  # entity = dataset.entity "User" do |e|
-  #   e["name"] = "Heidi Henderson"
+  # datastore = gcloud.datastore
+  #
+  # task = datastore.entity "Task" do |t|
+  #   t["type"] = "Personal"
+  #   t["done"] = false
+  #   t["priority"] = 4
+  #   t["description"] = "Learn Cloud Datastore"
   # end
-  # entity.key.id #=> nil
-  # dataset.save entity
-  # entity.key.id #=> 123456789
+  # task.key.id #=> nil
+  # datastore.save task
+  # task.key.id #=> 123456
   # ```
   #
-  # ## Updating Records
+  # Multiple new entities may be created in a batch.
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # datastore = gcloud.datastore
+  #
+  # task1 = datastore.entity "Task" do |t|
+  #   t["type"] = "Personal"
+  #   t["done"] = false
+  #   t["priority"] = 4
+  #   t["description"] = "Learn Cloud Datastore"
+  # end
+  #
+  # task2 = datastore.entity "Task" do |t|
+  #   t["type"] = "Personal"
+  #   t["done"] = false
+  #   t["priority"] = 5
+  #   t["description"] = "Integrate Cloud Datastore"
+  # end
+  #
+  # tasks = datastore.save(task1, task2)
+  # task_key1 = tasks[0].key
+  # task_key2 = tasks[1].key
+  # ```
+  #
+  # Entities in Datastore form a hierarchically structured space similar to the
+  # directory structure of a file system. When you create an entity, you can
+  # optionally designate another entity as its parent; the new entity is a child
+  # of the parent entity.
+  #
+  # ```ruby
+  # task_key = datastore.key "Task", "sampleTask"
+  # task_key.parent = datastore.key "TaskList", "default"
+  #
+  # task = datastore.entity task_key do |t|
+  #   t["type"] = "Personal"
+  #   t["done"] = false
+  #   t["priority"] = 5
+  #   t["description"] = "Integrate Cloud Datastore"
+  # end
+  # ```
+  #
+  # ## Setting properties
   #
   # Entities hold properties. A property has a name that is a string or symbol,
   # and a value that is an object. Most value objects are supported, including
-  # String, Integer, Date, Time, and even other Entity or Key objects. Changes
-  # to the Entity's properties are persisted by calling
+  # String, Integer, Date, Time, and even other entity or key objects. Changes
+  # to the entity's properties are persisted by calling
   # {Gcloud::Datastore::Dataset#save}.
   #
   # ```ruby
   # require "gcloud"
   #
   # gcloud = Gcloud.new
-  # dataset = gcloud.datastore
-  # entity = dataset.find "User", "heidi"
-  # # Read the status property
-  # entity["status"] #=> "inactive"
-  # # Write the status property
-  # entity["status"] = "active"
+  # datastore = gcloud.datastore
+  #
+  # task = datastore.find "Task", "sampleTask"
+  # # Read the priority property
+  # task["priority"] #=> 4
+  # # Write the priority property
+  # task["priority"] = 5
   # # Persist the changes
-  # dataset.save entity
+  # datastore.save task
   # ```
   #
-  # ## Deleting Records
-  #
-  # Entities can be removed from Datastore by calling
-  # {Gcloud::Datastore::Dataset#delete} and passing the Entity object or the
-  # entity's Key object.
+  # Array properties can be used to store more than one value.
   #
   # ```ruby
   # require "gcloud"
   #
   # gcloud = Gcloud.new
-  # dataset = gcloud.datastore
-  # entity = dataset.find "User", "heidi"
-  # dataset.delete entity
+  # datastore = gcloud.datastore
+  #
+  # task = datastore.entity "Task", "sampleTask" do |t|
+  #   t["tags"] = ["fun", "programming"]
+  #   t["collaborators"] = ["alice", "bob"]
+  # end
+  # ```
+  #
+  # ## Deleting records
+  #
+  # Entities can be removed from Datastore by calling
+  # {Gcloud::Datastore::Dataset#delete} and passing the entity object or the
+  # entity's key object.
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # datastore = gcloud.datastore
+  #
+  # task = datastore.find "Task", "sampleTask"
+  # datastore.delete task
+  # ```
+  #
+  # Multiple entities may be deleted in a batch.
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # datastore = gcloud.datastore
+  #
+  # task_key1 = datastore.key "Task", "sampleTask1"
+  # task_key2 = datastore.key "Task", "sampleTask2"
+  # datastore.delete task_key1, task_key2
   # ```
   #
   # ## Transactions
@@ -289,18 +381,19 @@ module Gcloud
   # require "gcloud"
   #
   # gcloud = Gcloud.new
-  # dataset = gcloud.datastore
+  # datastore = gcloud.datastore
   #
-  # key = dataset.key "User", "heidi"
+  # task_key = datastore.key "Task", "sampleTask"
   #
-  # user = dataset.entity key do |u|
-  #   u["name"] = "Heidi Henderson"
-  #   u["email"] = "heidi@example.net"
-  # end
-  #
-  # dataset.transaction do |tx|
-  #   if tx.find(user.key).nil?
-  #     tx.save user
+  # datastore.transaction do |tx|
+  #   if tx.find(task_key).nil?
+  #     task = datastore.entity task_key do |t|
+  #       t["type"] = "Personal"
+  #       t["done"] = false
+  #       t["priority"] = 4
+  #       t["description"] = "Learn Cloud Datastore"
+  #     end
+  #     tx.save task
   #   end
   # end
   # ```
@@ -312,19 +405,20 @@ module Gcloud
   # require "gcloud"
   #
   # gcloud = Gcloud.new
-  # dataset = gcloud.datastore
+  # datastore = gcloud.datastore
   #
-  # key = dataset.key "User", "heidi"
+  # task_key = datastore.key "Task", "sampleTask"
   #
-  # user = dataset.entity key do |u|
-  #   u["name"] = "Heidi Henderson"
-  #   u["email"] = "heidi@example.net"
-  # end
-  #
-  # tx = dataset.transaction
+  # tx = datastore.transaction
   # begin
-  #   if tx.find(user.key).nil?
-  #     tx.save user
+  #   if tx.find(task_key).nil?
+  #     task = datastore.entity task_key do |t|
+  #       t["type"] = "Personal"
+  #       t["done"] = false
+  #       t["priority"] = 4
+  #       t["description"] = "Learn Cloud Datastore"
+  #     end
+  #     tx.save task
   #   end
   #   tx.commit
   # rescue
@@ -334,6 +428,141 @@ module Gcloud
   #
   # See {Gcloud::Datastore::Transaction} and
   # {Gcloud::Datastore::Dataset#transaction}
+  #
+  # ## Querying metadata
+  #
+  # Datastore provides programmatic access to some of its metadata to support
+  # meta-programming, implementing backend administrative functions, simplify
+  # consistent caching, and similar purposes. The metadata available includes
+  # information about the entity groups, namespaces, entity kinds, and
+  # properties your application uses, as well as the property representations
+  # for each property.
+  #
+  # The special entity kind `__namespace__` can be used to find all the
+  # namespaces used in your application entities.
+  #
+  # ```ruby
+  # query = datastore.query("__namespace__").
+  #   select("__key__").
+  #   where("__key__", ">=", datastore.key("__namespace__", "g")).
+  #   where("__key__", "<", datastore.key("__namespace__", "h"))
+  #
+  # namespaces = datastore.run(query).map do |entity|
+  #   entity.key.name
+  # end
+  # ```
+  #
+  # The special entity kind `__kind__` can be used to return all the
+  # kinds used in your application.
+  #
+  # ```ruby
+  # query = datastore.query("__kind__").
+  #   select("__key__")
+  #
+  # kinds = datastore.run(query).map do |entity|
+  #   entity.key.name
+  # end
+  # ```
+  #
+  # Property queries return entities of kind `__property__` denoting the indexed
+  # properties associated with an entity kind. (Unindexed properties are not
+  # included.)
+  #
+  # ```ruby
+  # query = datastore.query("__property__").
+  #   select("__key__")
+  #
+  # entities = datastore.run(query)
+  # properties_by_kind = entities.each_with_object({}) do |entity, memo|
+  #   kind = entity.key.parent.name
+  #   prop = entity.key.name
+  #   memo[kind] ||= []
+  #   memo[kind] << prop
+  # end
+  # ```
+  #
+  # Property queries support ancestor filtering on a `__kind__` or
+  # `__property__` key, to limit the query results to a single kind or property.
+  # The `property_representation` property in the entity representing property
+  # `p` of kind `k` is an array containing all representations of `p`'s value in
+  # any entity of kind `k`.
+  #
+  # ```ruby
+  # ancestor_key = datastore.key "__kind__", "Task"
+  # query = datastore.query("__property__").
+  #   ancestor(ancestor_key)
+  #
+  # entities = datastore.run(query)
+  # representations = entities.each_with_object({}) do |entity, memo|
+  #   property_name = entity.key.name
+  #   property_types = entity["property_representation"]
+  #   memo[property_name] = property_types
+  # end
+  # ```
+  #
+  # Property queries can also be filtered with a range over the pseudo-property
+  # `__key__`, where the keys denote either `__kind__` or `__property__`
+  # entities.
+  #
+  # ```ruby
+  # start_key = datastore.key "__property__", "priority"
+  # start_key.parent = datastore.key "__kind__", "Task"
+  # query = datastore.query("__property__").
+  #   select("__key__").
+  #   where("__key__", ">=", start_key)
+  #
+  # entities = datastore.run(query)
+  # properties_by_kind = entities.each_with_object({}) do |entity, memo|
+  #   kind = entity.key.parent.name
+  #   prop = entity.key.name
+  #   memo[kind] ||= []
+  #   memo[kind] << prop
+  # end
+  # ```
+  #
+  # ## The Datastore Emulator
+  #
+  # As of this release, the Datastore emulator that is part of the gcloud SDK is
+  # no longer compatible with gcloud-ruby. This is because the gcloud SDK's
+  # Datastore emulator does not yet support gRPC as a transport layer.
+  #
+  # A gRPC-compatible emulator is available until the gcloud SDK Datastore
+  # emulator supports gRPC. To use it you must [download the gRPC
+  # emulator](https://storage.googleapis.com/gcd/tools/gcd-grpc-1.0.0.zip) and
+  # use the `gcd.sh` script.
+  #
+  # When you run the gRPC emulator you will see a message similar to the
+  # following printed:
+  #
+  # ```
+  # If you are using a library that supports the DATASTORE_EMULATOR_HOST
+  # environment variable, run:
+  #
+  # export DATASTORE_EMULATOR_HOST=localhost:8978
+  # ```
+  #
+  # Now you can connect to the emulator using the `DATASTORE_EMULATOR_HOST`
+  # environment variable:
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # # Make Datastore use the emulator
+  # ENV["DATASTORE_EMULATOR_HOST"] = "localhost:8978"
+  #
+  # gcloud = Gcloud.new "emulator-project-id"
+  # datastore = gcloud.datastore
+  #
+  # task = datastore.entity "Task", "emulatorTask" do |t|
+  #   t["type"] = "Testing"
+  #   t["done"] = false
+  #   t["priority"] = 5
+  #   t["description"] = "Use Datastore Emulator"
+  # end
+  #
+  # datastore.save task
+  # ```
+  #
   module Datastore
   end
 end

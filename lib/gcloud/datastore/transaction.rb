@@ -21,14 +21,46 @@ module Gcloud
     # Special Connection instance for running transactions.
     #
     # See {Gcloud::Datastore::Dataset#transaction}
+    #
+    # @see https://cloud.google.com/datastore/docs/concepts/transactions
+    #   Transactions
+    #
+    # @example Transactional update:
+    #   def transfer_funds from_key, to_key, amount
+    #     datastore.transaction do |tx|
+    #       from = tx.find from_key
+    #       from["balance"] -= amount
+    #       to = tx.find to_key
+    #       to["balance"] += amount
+    #       tx.save from, to
+    #     end
+    #   end
+    #
+    # @example Retry logic using the transactional update example above:
+    #   (1..5).each do |i|
+    #     begin
+    #       return transfer_funds from_key, to_key, amount
+    #     rescue Gcloud::Error => e
+    #       raise e if i == 5
+    #     end
+    #   end
+    #
+    # @example Transactional read:
+    #   task_list_key = datastore.key "TaskList", "default"
+    #   datastore.transaction do |tx|
+    #     task_list = tx.find task_list_key
+    #     query = tx.query("Task").ancestor(task_list)
+    #     tasks_in_list = tx.run query
+    #   end
+    #
     class Transaction < Dataset
       attr_reader :id
 
       ##
       # @private Creates a new Transaction instance.
-      # Takes a Connection instead of project and Credentials.
-      def initialize connection
-        @connection = connection
+      # Takes a Connection and Service instead of project and Credentials.
+      def initialize service
+        @service = service
         reset!
         start
       end
@@ -36,16 +68,76 @@ module Gcloud
       ##
       # Persist entities in a transaction.
       #
-      # @example
-      #   dataset.transaction do |tx|
-      #     if tx.find(user.key).nil?
-      #       tx.save task1, task2
+      # @example Transactional get or create:
+      #   task_key = datastore.key "Task", "sampleTask"
+      #
+      #   task = nil
+      #   datastore.transaction do |tx|
+      #     task = tx.find task_key
+      #     if task.nil?
+      #       task = datastore.entity task_key do |t|
+      #         t["type"] = "Personal"
+      #         t["done"] = false
+      #         t["priority"] = 4
+      #         t["description"] = "Learn Cloud Datastore"
+      #       end
+      #       tx.save task
       #     end
       #   end
       #
       def save *entities
         @commit.save(*entities)
-        # Do not save or assign auto_ids yet
+        # Do not save yet
+        entities
+      end
+      alias_method :upsert, :save
+
+      ##
+      # Insert entities in a transaction. An InvalidArgumentError will raised if
+      # the entities cannot be inserted.
+      #
+      # @example Transactional insert:
+      #   task_key = datastore.key "Task", "sampleTask"
+      #
+      #   task = nil
+      #   datastore.transaction do |tx|
+      #     task = tx.find task_key
+      #     if task.nil?
+      #       task = datastore.entity task_key do |t|
+      #         t["type"] = "Personal"
+      #         t["done"] = false
+      #         t["priority"] = 4
+      #         t["description"] = "Learn Cloud Datastore"
+      #       end
+      #       tx.insert task
+      #     end
+      #   end
+      #
+      def insert *entities
+        @commit.insert(*entities)
+        # Do not insert yet
+        entities
+      end
+
+      ##
+      # Update entities in a transaction. An InvalidArgumentError will raised if
+      # the entities cannot be updated.
+      #
+      # @example Transactional update:
+      #   task_key = datastore.key "Task", "sampleTask"
+      #
+      #   task = nil
+      #   datastore.transaction do |tx|
+      #     task = tx.find task_key
+      #     if task
+      #       task["done"] = true
+      #       tx.update task
+      #     end
+      #   end
+      #
+      def update *entities
+        @commit.update(*entities)
+        # Do not update yet
         entities
       end
 
@@ -53,8 +145,8 @@ module Gcloud
       # Remove entities in a transaction.
       #
       # @example
-      #   dataset.transaction do |tx|
-      #     if tx.find(user.key).nil?
+      #   datastore.transaction do |tx|
+      #     if tx.find(task_list.key).nil?
       #       tx.delete task1, task2
       #     end
       #   end
@@ -105,12 +197,15 @@ module Gcloud
       #   tasks = dataset.find_all key1, key2
       #
       def find_all *keys
-        response = connection.lookup(*keys.map(&:to_proto),
-                                     transaction: @id)
-        entities = to_gcloud_entities response.found
-        deferred = to_gcloud_keys response.deferred
-        missing  = to_gcloud_entities response.missing
+        ensure_service!
+        lookup_res = service.lookup(*keys.map(&:to_grpc),
+                                    transaction: @id)
+        entities = to_gcloud_entities lookup_res.found
+        deferred = to_gcloud_keys lookup_res.deferred
+        missing  = to_gcloud_entities lookup_res.missing
         LookupResults.new entities, deferred, missing
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :lookup, :find_all
 
@@ -138,13 +233,15 @@ module Gcloud
       #   end
       #
       def run query, namespace: nil
-        partition = optional_partition_id namespace
-        response = connection.run_query query.to_proto, partition,
-                                        transaction: @id
-        entities = to_gcloud_entities response.batch.entity_result
-        cursor = Proto.encode_cursor response.batch.end_cursor
-        more_results = Proto.to_more_results_string response.batch.more_results
-        QueryResults.new entities, cursor, more_results
+        ensure_service!
+        unless query.is_a?(Query) || query.is_a?(GqlQuery)
+          fail ArgumentError, "Cannot run a #{query.class} object."
+        end
+        query_res = service.run_query query.to_grpc, namespace,
+                                      transaction: @id
+        QueryResults.from_grpc query_res, service, namespace, query.to_grpc.dup
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :run_query, :run
 
@@ -154,8 +251,11 @@ module Gcloud
       def start
         fail TransactionError, "Transaction already opened." unless @id.nil?
 
-        response = connection.begin_transaction
-        @id = response.transaction
+        ensure_service!
+        tx_res = service.begin_transaction
+        @id = tx_res.transaction
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
       alias_method :begin_transaction, :start
 
@@ -203,17 +303,25 @@ module Gcloud
       #   end
       #
       def commit
-        if @id.nil?
-          fail TransactionError, "Cannot commit when not in a transaction."
-        end
+        fail TransactionError,
+             "Cannot commit when not in a transaction." if @id.nil?
 
         yield @commit if block_given?
-        response = connection.commit @commit.mutation, @id
-        auto_id_assign_ids @commit.auto_id_entities,
-                           response.mutation_result.insert_auto_id_key
+
+        ensure_service!
+
+        commit_res = service.commit @commit.mutations, transaction: @id
+        entities = @commit.entities
+        returned_keys = commit_res.mutation_results.map(&:key)
+        returned_keys.each_with_index do |key, index|
+          next if entities[index].nil?
+          entities[index].key = Key.from_grpc(key) unless key.nil?
+        end
         # Make sure all entity keys are frozen so all show as persisted
-        @commit.entities.each { |e| e.key.freeze unless e.persisted? }
+        entities.each { |e| e.key.freeze unless e.persisted? }
         true
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -244,8 +352,11 @@ module Gcloud
           fail TransactionError, "Cannot rollback when not in a transaction."
         end
 
-        connection.rollback @id
+        ensure_service!
+        service.rollback @id
         true
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##

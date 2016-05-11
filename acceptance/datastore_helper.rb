@@ -5,7 +5,7 @@ module Acceptance
   ##
   # Test class for running against a Datastore instance.
   # Ensures that there is an active connection for the tests to use.
-  # Can be used to run tests against a hosted datastore or local devserver.
+  # Can be used to run tests against a hosted datastore or emulator.
   #
   # This class can be used with the spec DSL.
   # To do so, add :datastore to describe:
