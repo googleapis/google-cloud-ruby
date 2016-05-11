@@ -1,14 +1,18 @@
+---
+layout: nil
+---
 {
   "lang": "ruby",
   "friendlyLang": "Ruby",
   "markdown": "ruby",
   "versions": [
-    "v0.8.2",
-    "v0.8.0",
-    "v0.7.2",
-    "v0.7.1",
-    "v0.7.0",
-    "master"
+  {% for release in site.data.releases limit:1 %}
+    "{{ release.version }}"
+  {% endfor %}
+    , "master"
+  {% for release in site.data.releases offset:1 %}
+    , "{{ release.version }}"
+  {% endfor %}
   ],
   "content": "json",
   "home": "home.html",
