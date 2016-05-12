@@ -121,11 +121,11 @@ module Gcloud
         end
 
         ##
-        # Retrieves all datastore entries by repeatedly loading {#next} until
+        # Retrieves all query results by repeatedly loading {#next} until
         # {#next?} returns `false`. Returns the list instance for method
         # chaining.
         #
-        # This method may make several API calls until all datastore entries are
+        # This method may make several API calls until all query results are
         # retrieved. Be sure to use as narrow a search criteria as possible.
         # Please use with caution.
         #
@@ -134,9 +134,8 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   hour_ago = (Time.now - 60*60).utc.strftime('%FT%TZ')
-        #   recent_errors = "timestamp >= \"#{hour_ago}\" severity >= ERROR"
-        #   entries = datastore.entries(filter: recent_errors).all
+        #   query = datastore.query("Tasks")
+        #   all_tasks = datastore.run(query).all
         #
         def all
           while next?
