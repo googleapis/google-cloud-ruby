@@ -261,6 +261,25 @@ translation.to #=> "la"
 translation.text #=> "Salve mundi!"
 ```
 
+### Vision
+
+- [gcloud-ruby Vision API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Vision.html)
+- [Google Cloud Vision Documentation](https://cloud.google.com/vision/docs)
+
+#### Preview
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new
+vision = gcloud.vision
+
+image = vision.image "./acceptance/data/landmark.jpg"
+
+landmark = image.landmark
+landmark.description #=> "Mount Rushmore"
+```
+
 ## Supported Ruby Versions
 
 gcloud is supported on Ruby 2.0+.
