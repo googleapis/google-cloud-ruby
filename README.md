@@ -274,7 +274,7 @@ require "gcloud"
 gcloud = Gcloud.new
 vision = gcloud.vision
 
-image = vision.image "./acceptance/data/landmark.jpg"
+image = vision.image "path/to/landmark.jpg"
 
 landmark = image.landmark
 landmark.description #=> "Mount Rushmore"

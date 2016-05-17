@@ -29,7 +29,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #
-      #   image = vision.image "./acceptance/data/logo.jpg"
+      #   image = vision.image "path/to/logo.jpg"
       #
       #   properties = image.properties
       #   properties.colors.count #=> 10
@@ -121,7 +121,7 @@ module Gcloud
         #   gcloud = Gcloud.new
         #   vision = gcloud.vision
         #
-        #   image = vision.image "./acceptance/data/logo.jpg"
+        #   image = vision.image "path/to/logo.jpg"
         #   properties = image.properties
         #
         #   color = properties.colors.first

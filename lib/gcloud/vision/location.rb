@@ -34,7 +34,7 @@ module Gcloud
     #   gcloud = Gcloud.new
     #   vision = gcloud.vision
     #
-    #   image = vision.image "./acceptance/data/landmark.jpg"
+    #   image = vision.image "path/to/landmark.jpg"
     #   entity = image.landmark
     #
     #   location = entity.locations.first

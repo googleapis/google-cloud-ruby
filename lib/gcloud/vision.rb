@@ -42,7 +42,7 @@ module Gcloud
   #   gcloud = Gcloud.new
   #   vision = gcloud.vision
   #
-  #   image = vision.image "./acceptance/data/landmark.jpg"
+  #   image = vision.image "path/to/landmark.jpg"
   #
   #   landmark = image.landmark
   #   landmark.description #=> "Mount Rushmore"
@@ -96,7 +96,7 @@ module Gcloud
   # gcloud = Gcloud.new
   # vision = gcloud.vision
   #
-  # image = vision.image "./acceptance/data/landmark.jpg"
+  # image = vision.image "path/to/landmark.jpg"
   # ```
   #
   # Once you have an image, you can set metadata on its context:
@@ -107,7 +107,7 @@ module Gcloud
   # gcloud = Gcloud.new
   # vision = gcloud.vision
   #
-  # image = vision.image "./acceptance/data/landmark.jpg"
+  # image = vision.image "path/to/landmark.jpg"
   #
   # image.context.area.min = { longitude: -122.0862462,
   #                            latitude: 37.4220041 }
@@ -129,7 +129,7 @@ module Gcloud
   # gcloud = Gcloud.new
   # vision = gcloud.vision
   #
-  # image = vision.image "./acceptance/data/face.jpg"
+  # image = vision.image "path/to/face.jpg"
   #
   # face = image.face
   #
@@ -150,7 +150,7 @@ module Gcloud
   # gcloud = Gcloud.new
   # vision = gcloud.vision
   #
-  # image = vision.image "./acceptance/data/face.jpg"
+  # image = vision.image "path/to/face.jpg"
   #
   # analysis = vision.annotate image, faces: 10, labels: 10
   # analysis.faces.count #=> 1
@@ -165,8 +165,8 @@ module Gcloud
   # gcloud = Gcloud.new
   # vision = gcloud.vision
   #
-  # face_image = vision.image "./acceptance/data/face.jpg"
-  # landmark_image = vision.image "./acceptance/data/landmark.jpg"
+  # face_image = vision.image "path/to/face.jpg"
+  # landmark_image = vision.image "path/to/landmark.jpg"
   #
   # analyses = vision.annotate face_image, landmark_image, labels: 10
   #
@@ -184,9 +184,9 @@ module Gcloud
   # gcloud = Gcloud.new
   # vision = gcloud.vision
   #
-  # face_image = vision.image "./acceptance/data/face.jpg"
-  # landmark_image = vision.image "./acceptance/data/landmark.jpg"
-  # text_image = vision.image "./acceptance/data/text.png"
+  # face_image = vision.image "path/to/face.jpg"
+  # landmark_image = vision.image "path/to/landmark.jpg"
+  # text_image = vision.image "path/to/text.png"
   #
   # analyses = vision.annotate do |annotate|
   #    annotate.annotate face_image, faces: 10, labels: 10

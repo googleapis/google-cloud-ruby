@@ -37,7 +37,7 @@ module Gcloud
     #   gcloud = Gcloud.new
     #   vision = gcloud.vision
     #
-    #   image = vision.image "./acceptance/data/landmark.jpg"
+    #   image = vision.image "path/to/landmark.jpg"
     #
     #   analysis = vision.annotate image, labels: 10
     #
@@ -122,7 +122,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #
-      #   image = vision.image "./acceptance/data/landmark.jpg"
+      #   image = vision.image "path/to/landmark.jpg"
       #
       def image source
         return source if source.is_a? Image
@@ -186,7 +186,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #
-      #   image = vision.image "./acceptance/data/landmark.jpg"
+      #   image = vision.image "path/to/landmark.jpg"
       #
       #   analysis = vision.annotate image, labels: 10
       #
@@ -200,8 +200,8 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #
-      #   face_image = vision.image "./acceptance/data/face.jpg"
-      #   landmark_image = vision.image "./acceptance/data/landmark.jpg"
+      #   face_image = vision.image "path/to/face.jpg"
+      #   landmark_image = vision.image "path/to/landmark.jpg"
       #
       #   analyses = vision.annotate face_image, landmark_image, labels: 10
       #
@@ -214,9 +214,9 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #
-      #   face_image = vision.image "./acceptance/data/face.jpg"
-      #   landmark_image = vision.image "./acceptance/data/landmark.jpg"
-      #   text_image = vision.image "./acceptance/data/text.png"
+      #   face_image = vision.image "path/to/face.jpg"
+      #   landmark_image = vision.image "path/to/landmark.jpg"
+      #   text_image = vision.image "path/to/text.png"
       #
       #   analyses = vision.annotate do |annotate|
       #      annotate.annotate face_image, faces: 10, labels: 10

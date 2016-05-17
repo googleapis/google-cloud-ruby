@@ -29,7 +29,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #
-      #   image = vision.image "./acceptance/data/text.png"
+      #   image = vision.image "path/to/text.png"
       #
       #   text = image.text
       #   text.locale #=> "en"
@@ -148,7 +148,7 @@ module Gcloud
         #   gcloud = Gcloud.new
         #   vision = gcloud.vision
         #
-        #   image = vision.image "./acceptance/data/text.png"
+        #   image = vision.image "path/to/text.png"
         #   text = image.text
         #
         #   words = text.words

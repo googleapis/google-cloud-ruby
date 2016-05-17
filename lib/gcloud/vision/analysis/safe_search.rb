@@ -31,7 +31,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #
-      #   image = vision.image "./acceptance/data/face.jpg"
+      #   image = vision.image "path/to/face.jpg"
       #
       #   safe_search = image.safe_search
       #   safe_search.spoof? #=> false

@@ -29,7 +29,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #
-      #   image = vision.image "./acceptance/data/text.png"
+      #   image = vision.image "path/to/text.png"
       #   text = image.text
       #
       #   text.bounds.count #=> 4

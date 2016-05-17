@@ -34,7 +34,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #
-      #   image = vision.image "./acceptance/data/landmark.jpg"
+      #   image = vision.image "path/to/landmark.jpg"
       #
       #   landmark = image.landmark
       #   landmark.score #=> 0.91912264
@@ -47,7 +47,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #
-      #   image = vision.image "./acceptance/data/logo.jpg"
+      #   image = vision.image "path/to/logo.jpg"
       #
       #   logo = image.logo
       #   logo.score #=> 0.70057315
@@ -60,7 +60,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #
-      #   image = vision.image "./acceptance/data/face.jpg"
+      #   image = vision.image "path/to/face.jpg"
       #
       #   labels = image.labels
       #   labels.count #=> 4

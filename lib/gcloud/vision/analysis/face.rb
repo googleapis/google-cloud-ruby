@@ -31,7 +31,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #
-      #   image = vision.image "./acceptance/data/face.jpg"
+      #   image = vision.image "path/to/face.jpg"
       #
       #   face = image.face
       #   face.confidence #=> 0.86162376
@@ -143,7 +143,7 @@ module Gcloud
         #   gcloud = Gcloud.new
         #   vision = gcloud.vision
         #
-        #   image = vision.image "./acceptance/data/face.jpg"
+        #   image = vision.image "path/to/face.jpg"
         #   face = image.face
         #
         #   face.angles.roll #=> -5.1492119
@@ -262,7 +262,7 @@ module Gcloud
         #   gcloud = Gcloud.new
         #   vision = gcloud.vision
         #
-        #   image = vision.image "./acceptance/data/face.jpg"
+        #   image = vision.image "path/to/face.jpg"
         #   face = image.face
         #
         #   face.bounds.face.count #=> 4
@@ -379,7 +379,7 @@ module Gcloud
         #   gcloud = Gcloud.new
         #   vision = gcloud.vision
         #
-        #   image = vision.image "./acceptance/data/face.jpg"
+        #   image = vision.image "path/to/face.jpg"
         #   face = image.face
         #
         #   face.features.to_h.count #=> 9
@@ -426,7 +426,7 @@ module Gcloud
           #   gcloud = Gcloud.new
           #   vision = gcloud.vision
           #
-          #   image = vision.image "./acceptance/data/face.jpg"
+          #   image = vision.image "path/to/face.jpg"
           #   face = image.face
           #
           #   face.features["RIGHT_EAR_TRAGION"]
@@ -593,7 +593,7 @@ module Gcloud
           #   gcloud = Gcloud.new
           #   vision = gcloud.vision
           #
-          #   image = vision.image "./acceptance/data/face.jpg"
+          #   image = vision.image "path/to/face.jpg"
           #   face = image.face
           #
           #   face.features.to_h.count #=> 9
@@ -627,7 +627,7 @@ module Gcloud
             #   gcloud = Gcloud.new
             #   vision = gcloud.vision
             #
-            #   image = vision.image "./acceptance/data/face.jpg"
+            #   image = vision.image "path/to/face.jpg"
             #   face = image.face
             #
             #   face.features.forehead.type #=> "FOREHEAD_GLABELLA"
@@ -737,7 +737,7 @@ module Gcloud
           #   gcloud = Gcloud.new
           #   vision = gcloud.vision
           #
-          #   image = vision.image "./acceptance/data/face.jpg"
+          #   image = vision.image "path/to/face.jpg"
           #   face = image.face
           #
           #   chin = face.features.chin
@@ -828,7 +828,7 @@ module Gcloud
           #   gcloud = Gcloud.new
           #   vision = gcloud.vision
           #
-          #   image = vision.image "./acceptance/data/face.jpg"
+          #   image = vision.image "path/to/face.jpg"
           #   face = image.face
           #
           #   ears = face.features.ears
@@ -914,7 +914,7 @@ module Gcloud
           #   gcloud = Gcloud.new
           #   vision = gcloud.vision
           #
-          #   image = vision.image "./acceptance/data/face.jpg"
+          #   image = vision.image "path/to/face.jpg"
           #   face = image.face
           #
           #   eyebrows = face.features.eyebrows
@@ -1002,7 +1002,7 @@ module Gcloud
           #   gcloud = Gcloud.new
           #   vision = gcloud.vision
           #
-          #   image = vision.image "./acceptance/data/face.jpg"
+          #   image = vision.image "path/to/face.jpg"
           #   face = image.face
           #
           #   eyebrows = face.features.eyebrows
@@ -1094,7 +1094,7 @@ module Gcloud
           #   gcloud = Gcloud.new
           #   vision = gcloud.vision
           #
-          #   image = vision.image "./acceptance/data/face.jpg"
+          #   image = vision.image "path/to/face.jpg"
           #   face = image.face
           #
           #   eyes = face.features.eyes
@@ -1182,7 +1182,7 @@ module Gcloud
           #   gcloud = Gcloud.new
           #   vision = gcloud.vision
           #
-          #   image = vision.image "./acceptance/data/face.jpg"
+          #   image = vision.image "path/to/face.jpg"
           #   face = image.face
           #
           #   right_eye = face.features.eyes.right
@@ -1281,7 +1281,7 @@ module Gcloud
           #   gcloud = Gcloud.new
           #   vision = gcloud.vision
           #
-          #   image = vision.image "./acceptance/data/face.jpg"
+          #   image = vision.image "path/to/face.jpg"
           #   face = image.face
           #
           #   lips = face.features.lips
@@ -1371,7 +1371,7 @@ module Gcloud
           #   gcloud = Gcloud.new
           #   vision = gcloud.vision
           #
-          #   image = vision.image "./acceptance/data/face.jpg"
+          #   image = vision.image "path/to/face.jpg"
           #   face = image.face
           #
           #   mouth = face.features.mouth
@@ -1462,7 +1462,7 @@ module Gcloud
           #   gcloud = Gcloud.new
           #   vision = gcloud.vision
           #
-          #   image = vision.image "./acceptance/data/face.jpg"
+          #   image = vision.image "path/to/face.jpg"
           #   face = image.face
           #
           #   nose = face.features.nose
@@ -1561,7 +1561,7 @@ module Gcloud
         #   gcloud = Gcloud.new
         #   vision = gcloud.vision
         #
-        #   image = vision.image "./acceptance/data/face.jpg"
+        #   image = vision.image "path/to/face.jpg"
         #   face = image.face
         #
         #   face.likelihood.to_h.count #=> 7

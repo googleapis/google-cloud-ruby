@@ -45,7 +45,7 @@ module Gcloud
     #   gcloud = Gcloud.new
     #   vision = gcloud.vision
     #
-    #   image = vision.image "./acceptance/data/text.png"
+    #   image = vision.image "path/to/text.png"
     #
     #   image.context.languages = ["en"]
     #
@@ -334,7 +334,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
       #
-      #   image = vision.image "./acceptance/data/landmark.jpg"
+      #   image = vision.image "path/to/landmark.jpg"
       #   image.context.area.min = { longitude: -122.0862462,
       #                              latitude: 37.4220041 }
       #   image.context.area.max = { longitude: -122.0762462,
@@ -388,7 +388,7 @@ module Gcloud
         #   gcloud = Gcloud.new
         #   vision = gcloud.vision
         #
-        #   image = vision.image "./acceptance/data/landmark.jpg"
+        #   image = vision.image "path/to/landmark.jpg"
         #
         #   image.context.area.min = { longitude: -122.0862462,
         #                              latitude: 37.4220041 }

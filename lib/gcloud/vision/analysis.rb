@@ -33,7 +33,7 @@ module Gcloud
     #
     #   gcloud = Gcloud.new
     #   vision = gcloud.vision
-    #   image = vision.image "./acceptance/data/face.jpg"
+    #   image = vision.image "path/to/face.jpg"
     #
     #   analysis = vision.annotate image, faces: 10, labels: 10
     #   analysis.faces.count #=> 1
@@ -61,7 +61,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/face.jpg"
+      #   image = vision.image "path/to/face.jpg"
       #
       #   analysis = vision.annotate image, faces: 10
       #   analysis.faces.count #=> 1
@@ -83,7 +83,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/face.jpg"
+      #   image = vision.image "path/to/face.jpg"
       #
       #   analysis = vision.annotate image, faces: 1
       #   face = analysis.face
@@ -102,7 +102,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/face.jpg"
+      #   image = vision.image "path/to/face.jpg"
       #
       #   analysis = vision.annotate image, faces: 1
       #   analysis.face? #=> true
@@ -121,7 +121,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/landmark.jpg"
+      #   image = vision.image "path/to/landmark.jpg"
       #
       #   analysis = vision.annotate image, landmarks: 1
       #   analysis.landmarks.count #=> 1
@@ -143,7 +143,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/landmark.jpg"
+      #   image = vision.image "path/to/landmark.jpg"
       #
       #   analysis = vision.annotate image, landmarks: 1
       #   landmark = analysis.landmark
@@ -163,7 +163,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/landmark.jpg"
+      #   image = vision.image "path/to/landmark.jpg"
       #
       #   analysis = vision.annotate image, landmarks: 1
       #   analysis.landmark? #=> true
@@ -182,7 +182,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/logo.jpg"
+      #   image = vision.image "path/to/logo.jpg"
       #
       #   analysis = vision.annotate image, logos: 1
       #   analysis.logos.count #=> 1
@@ -204,7 +204,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/logo.jpg"
+      #   image = vision.image "path/to/logo.jpg"
       #
       #   analysis = vision.annotate image, logos: 1
       #   logo = analysis.logo
@@ -224,7 +224,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/logo.jpg"
+      #   image = vision.image "path/to/logo.jpg"
       #
       #   analysis = vision.annotate image, logos: 1
       #   analysis.logo? #=> true
@@ -243,7 +243,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/face.jpg"
+      #   image = vision.image "path/to/face.jpg"
       #
       #   analysis = vision.annotate image, labels: 1
       #   analysis.labels.count #=> 1
@@ -265,7 +265,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/face.jpg"
+      #   image = vision.image "path/to/face.jpg"
       #
       #   analysis = vision.annotate image, labels: 1
       #   label = analysis.label
@@ -285,7 +285,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/face.jpg"
+      #   image = vision.image "path/to/face.jpg"
       #
       #   analysis = vision.annotate image, labels: 1
       #   analysis.label? #=> true
@@ -304,7 +304,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/text.png"
+      #   image = vision.image "path/to/text.png"
       #
       #   analysis = vision.annotate image, text: true
       #   text = analysis.text
@@ -323,7 +323,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/text.png"
+      #   image = vision.image "path/to/text.png"
       #
       #   analysis = vision.annotate image, text: true
       #   analysis.text? #=> true
@@ -342,7 +342,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/face.jpg"
+      #   image = vision.image "path/to/face.jpg"
       #
       #   analysis = vision.annotate image, safe_search: true
       #   safe_search = analysis.safe_search
@@ -363,7 +363,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/face.jpg"
+      #   image = vision.image "path/to/face.jpg"
       #
       #   analysis = vision.annotate image, safe_search: true
       #   analysis.safe_search? #=> true
@@ -382,7 +382,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/face.jpg"
+      #   image = vision.image "path/to/face.jpg"
       #
       #   analysis = vision.annotate image, properties: true
       #   properties = analysis.properties
@@ -402,7 +402,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image "./acceptance/data/face.jpg"
+      #   image = vision.image "path/to/face.jpg"
       #
       #   analysis = vision.annotate image, properties: true
       #   analysis.properties? #=> true
