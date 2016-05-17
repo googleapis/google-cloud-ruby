@@ -14,10 +14,10 @@
 
 require "helper"
 
-describe Gcloud::Vision::Analysis::Text, :mock_vision do
+describe Gcloud::Vision::Annotation::Text, :mock_vision do
   # Run through JSON to turn all keys to strings...
   let(:gapi_list) { JSON.parse(text_annotation_responses.to_json) }
-  let(:text) { Gcloud::Vision::Analysis::Text.from_gapi gapi_list }
+  let(:text) { Gcloud::Vision::Annotation::Text.from_gapi gapi_list }
 
   it "knows the given attributes" do
     text.text.must_include "Google Cloud Client Library for Ruby"

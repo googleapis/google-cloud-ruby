@@ -13,11 +13,11 @@
 # limitations under the License.
 
 
-require "gcloud/vision/analysis/vertex"
+require "gcloud/vision/annotation/vertex"
 
 module Gcloud
   module Vision
-    class Analysis
+    class Annotation
       ##
       # # SafeSearch
       #
@@ -151,7 +151,7 @@ module Gcloud
         end
 
         ##
-        # @private New Analysis::SafeSearch from a Google API Client object.
+        # @private New Annotation::SafeSearch from a Google API Client object.
         def self.from_gapi gapi
           new.tap { |f| f.instance_variable_set :@gapi, gapi }
         end

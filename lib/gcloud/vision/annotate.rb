@@ -37,14 +37,14 @@ module Gcloud
     #   face_image = vision.image "path/to/face.jpg"
     #   landmark_image = vision.image "path/to/landmark.jpg"
     #
-    #   analysis = vision.annotate do |annotate|
+    #   annotation = vision.annotate do |annotate|
     #      annotate.annotate face_image, faces: 10, labels: 10
     #      annotate.annotate landmark_image, landmarks: 10
     #   end
     #
-    #   analysis.faces.count #=> 1
-    #   analysis.labels.count #=> 4
-    #   analysis.landmarks.count #=> 1
+    #   annotation.faces.count #=> 1
+    #   annotation.labels.count #=> 4
+    #   annotation.landmarks.count #=> 1
     #
     class Annotate
       # @private
@@ -100,9 +100,9 @@ module Gcloud
       #   `IMAGE_PROPERTIES` feature (currently, the image's dominant colors.)
       #   Optional.
       #
-      # @return [Analysis, Array<Analysis>] The results for all image
-      #   detections, returned as a single {Analysis} instance for one image, or
-      #   as an array of {Analysis} instances, one per image, for multiple
+      # @return [Annotation, Array<Annotation>] The results for all image
+      #   detections, returned as a single {Annotation} instance for one image,
+      #   or as an array of {Annotation} instances, one per image, for multiple
       #   images.
       #
       # @example
@@ -115,16 +115,16 @@ module Gcloud
       #   landmark_image = vision.image "path/to/landmark.jpg"
       #   text_image = vision.image "path/to/text.png"
       #
-      #   analyses = vision.annotate do |annotate|
+      #   annotations = vision.annotate do |annotate|
       #      annotate.annotate face_image, faces: 10, labels: 10
       #      annotate.annotate landmark_image, landmarks: 10
       #      annotate.annotate text_image, text: true
       #   end
       #
-      #   analyses[0].faces.count #=> 1
-      #   analyses[0].labels.count #=> 4
-      #   analyses[1].landmarks.count #=> 1
-      #   analyses[2].text.words.count #=> 28
+      #   annotations[0].faces.count #=> 1
+      #   annotations[0].labels.count #=> 4
+      #   annotations[1].landmarks.count #=> 1
+      #   annotations[2].text.words.count #=> 28
       #
       def annotate *images, faces: 0, landmarks: 0, logos: 0, labels: 0,
                    text: false, safe_search: false, properties: false

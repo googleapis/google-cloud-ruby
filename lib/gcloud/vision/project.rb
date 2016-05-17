@@ -18,7 +18,7 @@ require "gcloud/vision/connection"
 require "gcloud/vision/credentials"
 require "gcloud/vision/annotate"
 require "gcloud/vision/image"
-require "gcloud/vision/analysis"
+require "gcloud/vision/annotation"
 require "gcloud/vision/errors"
 
 module Gcloud
@@ -39,9 +39,9 @@ module Gcloud
     #
     #   image = vision.image "path/to/landmark.jpg"
     #
-    #   analysis = vision.annotate image, labels: 10
+    #   annotation = vision.annotate image, labels: 10
     #
-    #   analysis.labels.map &:description
+    #   annotation.labels.map &:description
     #   #=> ["stone carving", "ancient history", "statue", "sculpture",
     #   #=>  "monument", "landmark"]
     #
@@ -175,9 +175,9 @@ module Gcloud
       #   configurations. See {Annotate#annotate}.
       # @yieldparam [Annotate] annotate the Annotate object
       #
-      # @return [Analysis, Array<Analysis>] The results for all image
-      #   detections, returned as a single {Analysis} instance for one image, or
-      #   as an array of {Analysis} instances, one per image, for multiple
+      # @return [Annotation, Array<Annotation>] The results for all image
+      #   detections, returned as a single {Annotation} instance for one image,
+      #   or as an array of {Annotation} instances, one per image, for multiple
       #   images.
       #
       # @example With a single image:
@@ -188,9 +188,9 @@ module Gcloud
       #
       #   image = vision.image "path/to/landmark.jpg"
       #
-      #   analysis = vision.annotate image, labels: 10
+      #   annotation = vision.annotate image, labels: 10
       #
-      #   analysis.labels.map &:description
+      #   annotation.labels.map &:description
       #   #=> ["stone carving", "ancient history", "statue", "sculpture",
       #   #=>  "monument", "landmark"]
       #
@@ -203,10 +203,10 @@ module Gcloud
       #   face_image = vision.image "path/to/face.jpg"
       #   landmark_image = vision.image "path/to/landmark.jpg"
       #
-      #   analyses = vision.annotate face_image, landmark_image, labels: 10
+      #   annotations = vision.annotate face_image, landmark_image, labels: 10
       #
-      #   analyses[0].labels.count #=> 4
-      #   analyses[1].labels.count #=> 6
+      #   annotations[0].labels.count #=> 4
+      #   annotations[1].labels.count #=> 6
       #
       # @example With multiple images and configurations passed in a block:
       #   require "gcloud"
@@ -218,16 +218,16 @@ module Gcloud
       #   landmark_image = vision.image "path/to/landmark.jpg"
       #   text_image = vision.image "path/to/text.png"
       #
-      #   analyses = vision.annotate do |annotate|
+      #   annotations = vision.annotate do |annotate|
       #      annotate.annotate face_image, faces: 10, labels: 10
       #      annotate.annotate landmark_image, landmarks: 10
       #      annotate.annotate text_image, text: true
       #   end
       #
-      #   analyses[0].faces.count #=> 1
-      #   analyses[0].labels.count #=> 4
-      #   analyses[1].landmarks.count #=> 1
-      #   analyses[2].text.words.count #=> 28
+      #   annotations[0].faces.count #=> 1
+      #   annotations[0].labels.count #=> 4
+      #   annotations[1].landmarks.count #=> 1
+      #   annotations[2].text.words.count #=> 28
       #
       def annotate *images, faces: 0, landmarks: 0, logos: 0, labels: 0,
                    text: false, safe_search: false, properties: false
@@ -240,11 +240,11 @@ module Gcloud
 
         resp = connection.annotate a.requests
         fail ApiError.from_response(resp) unless resp.success?
-        analyses = Array(resp.data["responses"]).map do |gapi|
-          Analysis.from_gapi gapi
+        annotations = Array(resp.data["responses"]).map do |gapi|
+          Annotation.from_gapi gapi
         end
-        return analyses.first if analyses.count == 1
-        analyses
+        return annotations.first if annotations.count == 1
+        annotations
       end
       alias_method :mark, :annotate
       alias_method :detect, :annotate

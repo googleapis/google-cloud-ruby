@@ -14,11 +14,11 @@
 
 
 require "gcloud/vision/location"
-require "gcloud/vision/analysis/vertex"
+require "gcloud/vision/annotation/vertex"
 
 module Gcloud
   module Vision
-    class Analysis
+    class Annotation
       ##
       # # Entity
       #
@@ -224,7 +224,7 @@ module Gcloud
         end
 
         ##
-        # @private New Analysis::Entity from a Google API Client object.
+        # @private New Annotation::Entity from a Google API Client object.
         def self.from_gapi gapi
           new.tap { |f| f.instance_variable_set :@gapi, gapi }
         end

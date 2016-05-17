@@ -46,9 +46,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        face_response_json]
     end
 
-    analysis = vision.annotate filepath, faces: 1
-    analysis.wont_be :nil?
-    analysis.face.wont_be :nil?
+    annotation = vision.annotate filepath, faces: 1
+    annotation.wont_be :nil?
+    annotation.face.wont_be :nil?
   end
 
   it "detects face detection using mark alias" do
@@ -64,9 +64,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        face_response_json]
     end
 
-    analysis = vision.mark filepath, faces: 1
-    analysis.wont_be :nil?
-    analysis.face.wont_be :nil?
+    annotation = vision.mark filepath, faces: 1
+    annotation.wont_be :nil?
+    annotation.face.wont_be :nil?
   end
 
   it "detects face detection using detect alias" do
@@ -82,9 +82,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        face_response_json]
     end
 
-    analysis = vision.detect filepath, faces: 1
-    analysis.wont_be :nil?
-    analysis.face.wont_be :nil?
+    annotation = vision.detect filepath, faces: 1
+    annotation.wont_be :nil?
+    annotation.face.wont_be :nil?
   end
 
   it "detects face detection on multiple images" do
@@ -103,10 +103,10 @@ describe Gcloud::Vision::Project, :mock_vision do
        faces_response_json]
     end
 
-    analyses = vision.annotate filepath, filepath, faces: 1
-    analyses.count.must_equal 2
-    analyses.first.face.wont_be :nil?
-    analyses.last.face.wont_be :nil?
+    annotations = vision.annotate filepath, filepath, faces: 1
+    annotations.count.must_equal 2
+    annotations.first.face.wont_be :nil?
+    annotations.last.face.wont_be :nil?
   end
 
   it "detects landmark detection" do
@@ -122,9 +122,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        landmark_response_json]
     end
 
-    analysis = vision.annotate filepath, landmarks: 1
-    analysis.wont_be :nil?
-    analysis.landmark.wont_be :nil?
+    annotation = vision.annotate filepath, landmarks: 1
+    annotation.wont_be :nil?
+    annotation.landmark.wont_be :nil?
   end
 
   it "detects landmark detection using mark alias" do
@@ -140,9 +140,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        landmark_response_json]
     end
 
-    analysis = vision.mark filepath, landmarks: 1
-    analysis.wont_be :nil?
-    analysis.landmark.wont_be :nil?
+    annotation = vision.mark filepath, landmarks: 1
+    annotation.wont_be :nil?
+    annotation.landmark.wont_be :nil?
   end
 
   it "detects landmark detection using detect alias" do
@@ -158,9 +158,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        landmark_response_json]
     end
 
-    analysis = vision.detect filepath, landmarks: 1
-    analysis.wont_be :nil?
-    analysis.landmark.wont_be :nil?
+    annotation = vision.detect filepath, landmarks: 1
+    annotation.wont_be :nil?
+    annotation.landmark.wont_be :nil?
   end
 
   it "detects landmark detection on multiple images" do
@@ -179,10 +179,10 @@ describe Gcloud::Vision::Project, :mock_vision do
        landmarks_response_json]
     end
 
-    analyses = vision.annotate filepath, filepath, landmarks: 1
-    analyses.count.must_equal 2
-    analyses.first.landmark.wont_be :nil?
-    analyses.last.landmark.wont_be :nil?
+    annotations = vision.annotate filepath, filepath, landmarks: 1
+    annotations.count.must_equal 2
+    annotations.first.landmark.wont_be :nil?
+    annotations.last.landmark.wont_be :nil?
   end
 
   it "detects logo detection" do
@@ -198,9 +198,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        logo_response_json]
     end
 
-    analysis = vision.annotate filepath, logos: 1
-    analysis.wont_be :nil?
-    analysis.logo.wont_be :nil?
+    annotation = vision.annotate filepath, logos: 1
+    annotation.wont_be :nil?
+    annotation.logo.wont_be :nil?
   end
 
   it "detects logo detection using mark alias" do
@@ -216,9 +216,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        logo_response_json]
     end
 
-    analysis = vision.mark filepath, logos: 1
-    analysis.wont_be :nil?
-    analysis.logo.wont_be :nil?
+    annotation = vision.mark filepath, logos: 1
+    annotation.wont_be :nil?
+    annotation.logo.wont_be :nil?
   end
 
   it "detects logo detection using detect alias" do
@@ -234,9 +234,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        logo_response_json]
     end
 
-    analysis = vision.detect filepath, logos: 1
-    analysis.wont_be :nil?
-    analysis.logo.wont_be :nil?
+    annotation = vision.detect filepath, logos: 1
+    annotation.wont_be :nil?
+    annotation.logo.wont_be :nil?
   end
 
   it "detects logo detection on multiple images" do
@@ -255,10 +255,10 @@ describe Gcloud::Vision::Project, :mock_vision do
        logos_response_json]
     end
 
-    analyses = vision.annotate filepath, filepath, logos: 1
-    analyses.count.must_equal 2
-    analyses.first.logo.wont_be :nil?
-    analyses.last.logo.wont_be :nil?
+    annotations = vision.annotate filepath, filepath, logos: 1
+    annotations.count.must_equal 2
+    annotations.first.logo.wont_be :nil?
+    annotations.last.logo.wont_be :nil?
   end
 
   it "detects label detection" do
@@ -274,9 +274,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        label_response_json]
     end
 
-    analysis = vision.annotate filepath, labels: 1
-    analysis.wont_be :nil?
-    analysis.label.wont_be :nil?
+    annotation = vision.annotate filepath, labels: 1
+    annotation.wont_be :nil?
+    annotation.label.wont_be :nil?
   end
 
   it "detects label detection using mark alias" do
@@ -292,9 +292,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        label_response_json]
     end
 
-    analysis = vision.mark filepath, labels: 1
-    analysis.wont_be :nil?
-    analysis.label.wont_be :nil?
+    annotation = vision.mark filepath, labels: 1
+    annotation.wont_be :nil?
+    annotation.label.wont_be :nil?
   end
 
   it "detects label detection using detect alias" do
@@ -310,9 +310,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        label_response_json]
     end
 
-    analysis = vision.detect filepath, labels: 1
-    analysis.wont_be :nil?
-    analysis.label.wont_be :nil?
+    annotation = vision.detect filepath, labels: 1
+    annotation.wont_be :nil?
+    annotation.label.wont_be :nil?
   end
 
   it "detects label detection on multiple images" do
@@ -331,10 +331,10 @@ describe Gcloud::Vision::Project, :mock_vision do
        labels_response_json]
     end
 
-    analyses = vision.annotate filepath, filepath, labels: 1
-    analyses.count.must_equal 2
-    analyses.first.label.wont_be :nil?
-    analyses.last.label.wont_be :nil?
+    annotations = vision.annotate filepath, filepath, labels: 1
+    annotations.count.must_equal 2
+    annotations.first.label.wont_be :nil?
+    annotations.last.label.wont_be :nil?
   end
 
   it "detects text detection" do
@@ -350,16 +350,16 @@ describe Gcloud::Vision::Project, :mock_vision do
        text_response_json]
     end
 
-    analysis = vision.annotate filepath, text: true
-    analysis.wont_be :nil?
-    analysis.text.wont_be :nil?
-    analysis.text.text.must_include "Google Cloud Client Library for Ruby"
-    analysis.text.locale.must_equal "en"
-    analysis.text.words.count.must_equal 28
-    analysis.text.words[0].text.must_equal "Google"
-    analysis.text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
-    analysis.text.words[27].text.must_equal "Storage."
-    analysis.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
+    annotation = vision.annotate filepath, text: true
+    annotation.wont_be :nil?
+    annotation.text.wont_be :nil?
+    annotation.text.text.must_include "Google Cloud Client Library for Ruby"
+    annotation.text.locale.must_equal "en"
+    annotation.text.words.count.must_equal 28
+    annotation.text.words[0].text.must_equal "Google"
+    annotation.text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
+    annotation.text.words[27].text.must_equal "Storage."
+    annotation.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
   end
 
   it "detects text detection using mark alias" do
@@ -375,9 +375,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        text_response_json]
     end
 
-    analysis = vision.mark filepath, text: true
-    analysis.wont_be :nil?
-    analysis.text.wont_be :nil?
+    annotation = vision.mark filepath, text: true
+    annotation.wont_be :nil?
+    annotation.text.wont_be :nil?
   end
 
   it "detects text detection using detect alias" do
@@ -393,9 +393,9 @@ describe Gcloud::Vision::Project, :mock_vision do
        text_response_json]
     end
 
-    analysis = vision.detect filepath, text: true
-    analysis.wont_be :nil?
-    analysis.text.wont_be :nil?
+    annotation = vision.detect filepath, text: true
+    annotation.wont_be :nil?
+    annotation.text.wont_be :nil?
   end
 
   it "detects text detection on multiple images" do
@@ -414,10 +414,10 @@ describe Gcloud::Vision::Project, :mock_vision do
        texts_response_json]
     end
 
-    analyses = vision.annotate filepath, filepath, text: true
-    analyses.count.must_equal 2
-    analyses.first.text.wont_be :nil?
-    analyses.last.text.wont_be :nil?
+    annotations = vision.annotate filepath, filepath, text: true
+    annotations.count.must_equal 2
+    annotations.first.text.wont_be :nil?
+    annotations.last.text.wont_be :nil?
   end
 
   it "detects safe_search detection" do
@@ -433,14 +433,14 @@ describe Gcloud::Vision::Project, :mock_vision do
        safe_search_response_json]
     end
 
-    analysis = vision.annotate filepath, safe_search: true
-    analysis.wont_be :nil?
+    annotation = vision.annotate filepath, safe_search: true
+    annotation.wont_be :nil?
 
-    analysis.safe_search.wont_be :nil?
-    analysis.safe_search.wont_be :adult?
-    analysis.safe_search.wont_be :spoof?
-    analysis.safe_search.must_be :medical?
-    analysis.safe_search.must_be :violence?
+    annotation.safe_search.wont_be :nil?
+    annotation.safe_search.wont_be :adult?
+    annotation.safe_search.wont_be :spoof?
+    annotation.safe_search.must_be :medical?
+    annotation.safe_search.must_be :violence?
   end
 
   it "detects safe_search detection using mark alias" do
@@ -456,14 +456,14 @@ describe Gcloud::Vision::Project, :mock_vision do
        safe_search_response_json]
     end
 
-    analysis = vision.mark filepath, safe_search: true
-    analysis.wont_be :nil?
+    annotation = vision.mark filepath, safe_search: true
+    annotation.wont_be :nil?
 
-    analysis.safe_search.wont_be :nil?
-    analysis.safe_search.wont_be :adult?
-    analysis.safe_search.wont_be :spoof?
-    analysis.safe_search.must_be :medical?
-    analysis.safe_search.must_be :violence?
+    annotation.safe_search.wont_be :nil?
+    annotation.safe_search.wont_be :adult?
+    annotation.safe_search.wont_be :spoof?
+    annotation.safe_search.must_be :medical?
+    annotation.safe_search.must_be :violence?
   end
 
   it "detects safe_search detection using detect alias" do
@@ -479,14 +479,14 @@ describe Gcloud::Vision::Project, :mock_vision do
        safe_search_response_json]
     end
 
-    analysis = vision.detect filepath, safe_search: true
-    analysis.wont_be :nil?
+    annotation = vision.detect filepath, safe_search: true
+    annotation.wont_be :nil?
 
-    analysis.safe_search.wont_be :nil?
-    analysis.safe_search.wont_be :adult?
-    analysis.safe_search.wont_be :spoof?
-    analysis.safe_search.must_be :medical?
-    analysis.safe_search.must_be :violence?
+    annotation.safe_search.wont_be :nil?
+    annotation.safe_search.wont_be :adult?
+    annotation.safe_search.wont_be :spoof?
+    annotation.safe_search.must_be :medical?
+    annotation.safe_search.must_be :violence?
   end
 
   it "detects safe_search detection on multiple images" do
@@ -505,20 +505,20 @@ describe Gcloud::Vision::Project, :mock_vision do
        safe_searchs_response_json]
     end
 
-    analyses = vision.annotate filepath, filepath, safe_search: true
-    analyses.count.must_equal 2
+    annotations = vision.annotate filepath, filepath, safe_search: true
+    annotations.count.must_equal 2
 
-    analyses.first.safe_search.wont_be :nil?
-    analyses.first.safe_search.wont_be :adult?
-    analyses.first.safe_search.wont_be :spoof?
-    analyses.first.safe_search.must_be :medical?
-    analyses.first.safe_search.must_be :violence?
+    annotations.first.safe_search.wont_be :nil?
+    annotations.first.safe_search.wont_be :adult?
+    annotations.first.safe_search.wont_be :spoof?
+    annotations.first.safe_search.must_be :medical?
+    annotations.first.safe_search.must_be :violence?
 
-    analyses.last.safe_search.wont_be :nil?
-    analyses.last.safe_search.wont_be :adult?
-    analyses.last.safe_search.wont_be :spoof?
-    analyses.last.safe_search.must_be :medical?
-    analyses.last.safe_search.must_be :violence?
+    annotations.last.safe_search.wont_be :nil?
+    annotations.last.safe_search.wont_be :adult?
+    annotations.last.safe_search.wont_be :spoof?
+    annotations.last.safe_search.must_be :medical?
+    annotations.last.safe_search.must_be :violence?
   end
 
   it "detects properties detection" do
@@ -534,26 +534,26 @@ describe Gcloud::Vision::Project, :mock_vision do
        properties_response_json]
     end
 
-    analysis = vision.annotate filepath, properties: true
-    analysis.wont_be :nil?
+    annotation = vision.annotate filepath, properties: true
+    annotation.wont_be :nil?
 
-    analysis.properties.colors.count.must_equal 10
+    annotation.properties.colors.count.must_equal 10
 
-    analysis.properties.colors[0].red.must_equal 145
-    analysis.properties.colors[0].green.must_equal 193
-    analysis.properties.colors[0].blue.must_equal 254
-    analysis.properties.colors[0].alpha.must_equal 1.0
-    analysis.properties.colors[0].rgb.must_equal "91c1fe"
-    analysis.properties.colors[0].score.must_equal 0.65757853
-    analysis.properties.colors[0].pixel_fraction.must_equal 0.16903226
+    annotation.properties.colors[0].red.must_equal 145
+    annotation.properties.colors[0].green.must_equal 193
+    annotation.properties.colors[0].blue.must_equal 254
+    annotation.properties.colors[0].alpha.must_equal 1.0
+    annotation.properties.colors[0].rgb.must_equal "91c1fe"
+    annotation.properties.colors[0].score.must_equal 0.65757853
+    annotation.properties.colors[0].pixel_fraction.must_equal 0.16903226
 
-    analysis.properties.colors[9].red.must_equal 156
-    analysis.properties.colors[9].green.must_equal 214
-    analysis.properties.colors[9].blue.must_equal 255
-    analysis.properties.colors[9].alpha.must_equal 1.0
-    analysis.properties.colors[9].rgb.must_equal "9cd6ff"
-    analysis.properties.colors[9].score.must_equal 0.00096750073
-    analysis.properties.colors[9].pixel_fraction.must_equal 0.00064516132
+    annotation.properties.colors[9].red.must_equal 156
+    annotation.properties.colors[9].green.must_equal 214
+    annotation.properties.colors[9].blue.must_equal 255
+    annotation.properties.colors[9].alpha.must_equal 1.0
+    annotation.properties.colors[9].rgb.must_equal "9cd6ff"
+    annotation.properties.colors[9].score.must_equal 0.00096750073
+    annotation.properties.colors[9].pixel_fraction.must_equal 0.00064516132
   end
 
   it "detects properties detection using mark alias" do
@@ -569,26 +569,26 @@ describe Gcloud::Vision::Project, :mock_vision do
        properties_response_json]
     end
 
-    analysis = vision.mark filepath, properties: true
-    analysis.wont_be :nil?
+    annotation = vision.mark filepath, properties: true
+    annotation.wont_be :nil?
 
-    analysis.properties.colors.count.must_equal 10
+    annotation.properties.colors.count.must_equal 10
 
-    analysis.properties.colors[0].red.must_equal 145
-    analysis.properties.colors[0].green.must_equal 193
-    analysis.properties.colors[0].blue.must_equal 254
-    analysis.properties.colors[0].alpha.must_equal 1.0
-    analysis.properties.colors[0].rgb.must_equal "91c1fe"
-    analysis.properties.colors[0].score.must_equal 0.65757853
-    analysis.properties.colors[0].pixel_fraction.must_equal 0.16903226
+    annotation.properties.colors[0].red.must_equal 145
+    annotation.properties.colors[0].green.must_equal 193
+    annotation.properties.colors[0].blue.must_equal 254
+    annotation.properties.colors[0].alpha.must_equal 1.0
+    annotation.properties.colors[0].rgb.must_equal "91c1fe"
+    annotation.properties.colors[0].score.must_equal 0.65757853
+    annotation.properties.colors[0].pixel_fraction.must_equal 0.16903226
 
-    analysis.properties.colors[9].red.must_equal 156
-    analysis.properties.colors[9].green.must_equal 214
-    analysis.properties.colors[9].blue.must_equal 255
-    analysis.properties.colors[9].alpha.must_equal 1.0
-    analysis.properties.colors[9].rgb.must_equal "9cd6ff"
-    analysis.properties.colors[9].score.must_equal 0.00096750073
-    analysis.properties.colors[9].pixel_fraction.must_equal 0.00064516132
+    annotation.properties.colors[9].red.must_equal 156
+    annotation.properties.colors[9].green.must_equal 214
+    annotation.properties.colors[9].blue.must_equal 255
+    annotation.properties.colors[9].alpha.must_equal 1.0
+    annotation.properties.colors[9].rgb.must_equal "9cd6ff"
+    annotation.properties.colors[9].score.must_equal 0.00096750073
+    annotation.properties.colors[9].pixel_fraction.must_equal 0.00064516132
   end
 
   it "detects properties detection using detect alias" do
@@ -604,26 +604,26 @@ describe Gcloud::Vision::Project, :mock_vision do
        properties_response_json]
     end
 
-    analysis = vision.detect filepath, properties: true
-    analysis.wont_be :nil?
+    annotation = vision.detect filepath, properties: true
+    annotation.wont_be :nil?
 
-    analysis.properties.colors.count.must_equal 10
+    annotation.properties.colors.count.must_equal 10
 
-    analysis.properties.colors[0].red.must_equal 145
-    analysis.properties.colors[0].green.must_equal 193
-    analysis.properties.colors[0].blue.must_equal 254
-    analysis.properties.colors[0].alpha.must_equal 1.0
-    analysis.properties.colors[0].rgb.must_equal "91c1fe"
-    analysis.properties.colors[0].score.must_equal 0.65757853
-    analysis.properties.colors[0].pixel_fraction.must_equal 0.16903226
+    annotation.properties.colors[0].red.must_equal 145
+    annotation.properties.colors[0].green.must_equal 193
+    annotation.properties.colors[0].blue.must_equal 254
+    annotation.properties.colors[0].alpha.must_equal 1.0
+    annotation.properties.colors[0].rgb.must_equal "91c1fe"
+    annotation.properties.colors[0].score.must_equal 0.65757853
+    annotation.properties.colors[0].pixel_fraction.must_equal 0.16903226
 
-    analysis.properties.colors[9].red.must_equal 156
-    analysis.properties.colors[9].green.must_equal 214
-    analysis.properties.colors[9].blue.must_equal 255
-    analysis.properties.colors[9].alpha.must_equal 1.0
-    analysis.properties.colors[9].rgb.must_equal "9cd6ff"
-    analysis.properties.colors[9].score.must_equal 0.00096750073
-    analysis.properties.colors[9].pixel_fraction.must_equal 0.00064516132
+    annotation.properties.colors[9].red.must_equal 156
+    annotation.properties.colors[9].green.must_equal 214
+    annotation.properties.colors[9].blue.must_equal 255
+    annotation.properties.colors[9].alpha.must_equal 1.0
+    annotation.properties.colors[9].rgb.must_equal "9cd6ff"
+    annotation.properties.colors[9].score.must_equal 0.00096750073
+    annotation.properties.colors[9].pixel_fraction.must_equal 0.00064516132
   end
 
   it "detects properties detection on multiple images" do
@@ -642,44 +642,44 @@ describe Gcloud::Vision::Project, :mock_vision do
        propertiess_response_json]
     end
 
-    analyses = vision.annotate filepath, filepath, properties: true
-    analyses.count.must_equal 2
+    annotations = vision.annotate filepath, filepath, properties: true
+    annotations.count.must_equal 2
 
-    analyses[0].properties.colors.count.must_equal 10
+    annotations[0].properties.colors.count.must_equal 10
 
-    analyses[0].properties.colors[0].red.must_equal 145
-    analyses[0].properties.colors[0].green.must_equal 193
-    analyses[0].properties.colors[0].blue.must_equal 254
-    analyses[0].properties.colors[0].alpha.must_equal 1.0
-    analyses[0].properties.colors[0].rgb.must_equal "91c1fe"
-    analyses[0].properties.colors[0].score.must_equal 0.65757853
-    analyses[0].properties.colors[0].pixel_fraction.must_equal 0.16903226
+    annotations[0].properties.colors[0].red.must_equal 145
+    annotations[0].properties.colors[0].green.must_equal 193
+    annotations[0].properties.colors[0].blue.must_equal 254
+    annotations[0].properties.colors[0].alpha.must_equal 1.0
+    annotations[0].properties.colors[0].rgb.must_equal "91c1fe"
+    annotations[0].properties.colors[0].score.must_equal 0.65757853
+    annotations[0].properties.colors[0].pixel_fraction.must_equal 0.16903226
 
-    analyses[0].properties.colors[9].red.must_equal 156
-    analyses[0].properties.colors[9].green.must_equal 214
-    analyses[0].properties.colors[9].blue.must_equal 255
-    analyses[0].properties.colors[9].alpha.must_equal 1.0
-    analyses[0].properties.colors[9].rgb.must_equal "9cd6ff"
-    analyses[0].properties.colors[9].score.must_equal 0.00096750073
-    analyses[0].properties.colors[9].pixel_fraction.must_equal 0.00064516132
+    annotations[0].properties.colors[9].red.must_equal 156
+    annotations[0].properties.colors[9].green.must_equal 214
+    annotations[0].properties.colors[9].blue.must_equal 255
+    annotations[0].properties.colors[9].alpha.must_equal 1.0
+    annotations[0].properties.colors[9].rgb.must_equal "9cd6ff"
+    annotations[0].properties.colors[9].score.must_equal 0.00096750073
+    annotations[0].properties.colors[9].pixel_fraction.must_equal 0.00064516132
 
-    analyses[1].properties.colors.count.must_equal 10
+    annotations[1].properties.colors.count.must_equal 10
 
-    analyses[1].properties.colors[0].red.must_equal 145
-    analyses[1].properties.colors[0].green.must_equal 193
-    analyses[1].properties.colors[0].blue.must_equal 254
-    analyses[1].properties.colors[0].alpha.must_equal 1.0
-    analyses[1].properties.colors[0].rgb.must_equal "91c1fe"
-    analyses[1].properties.colors[0].score.must_equal 0.65757853
-    analyses[1].properties.colors[0].pixel_fraction.must_equal 0.16903226
+    annotations[1].properties.colors[0].red.must_equal 145
+    annotations[1].properties.colors[0].green.must_equal 193
+    annotations[1].properties.colors[0].blue.must_equal 254
+    annotations[1].properties.colors[0].alpha.must_equal 1.0
+    annotations[1].properties.colors[0].rgb.must_equal "91c1fe"
+    annotations[1].properties.colors[0].score.must_equal 0.65757853
+    annotations[1].properties.colors[0].pixel_fraction.must_equal 0.16903226
 
-    analyses[1].properties.colors[9].red.must_equal 156
-    analyses[1].properties.colors[9].green.must_equal 214
-    analyses[1].properties.colors[9].blue.must_equal 255
-    analyses[1].properties.colors[9].alpha.must_equal 1.0
-    analyses[1].properties.colors[9].rgb.must_equal "9cd6ff"
-    analyses[1].properties.colors[9].score.must_equal 0.00096750073
-    analyses[1].properties.colors[9].pixel_fraction.must_equal 0.00064516132
+    annotations[1].properties.colors[9].red.must_equal 156
+    annotations[1].properties.colors[9].green.must_equal 214
+    annotations[1].properties.colors[9].blue.must_equal 255
+    annotations[1].properties.colors[9].alpha.must_equal 1.0
+    annotations[1].properties.colors[9].rgb.must_equal "9cd6ff"
+    annotations[1].properties.colors[9].score.must_equal 0.00096750073
+    annotations[1].properties.colors[9].pixel_fraction.must_equal 0.00064516132
   end
 
   it "allows different annotation options for different images" do
@@ -702,16 +702,16 @@ describe Gcloud::Vision::Project, :mock_vision do
        faces_response_json]
     end
 
-    analyses = vision.annotate do |a|
+    annotations = vision.annotate do |a|
       a.annotate filepath, faces: 10, text: true
       a.annotate filepath, landmarks: 20, safe_search: true
     end
-    analyses.count.must_equal 2
-    analyses.first.face.wont_be :nil?
-    analyses.last.face.wont_be :nil?
+    annotations.count.must_equal 2
+    annotations.first.face.wont_be :nil?
+    annotations.last.face.wont_be :nil?
   end
 
-  it "runs full analysis with empty options" do
+  it "runs full annotation with empty options" do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
@@ -736,47 +736,47 @@ describe Gcloud::Vision::Project, :mock_vision do
        full_response_json]
     end
 
-    analysis = vision.annotate filepath
-    analysis.wont_be :nil?
-    analysis.face.wont_be :nil?
-    analysis.landmark.wont_be :nil?
-    analysis.logo.wont_be :nil?
-    analysis.labels.wont_be :nil?
+    annotation = vision.annotate filepath
+    annotation.wont_be :nil?
+    annotation.face.wont_be :nil?
+    annotation.landmark.wont_be :nil?
+    annotation.logo.wont_be :nil?
+    annotation.labels.wont_be :nil?
 
-    analysis.wont_be :nil?
-    analysis.text.wont_be :nil?
-    analysis.text.text.must_include "Google Cloud Client Library for Ruby"
-    analysis.text.locale.must_equal "en"
-    analysis.text.words.count.must_equal 28
-    analysis.text.words[0].text.must_equal "Google"
-    analysis.text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
-    analysis.text.words[27].text.must_equal "Storage."
-    analysis.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
+    annotation.wont_be :nil?
+    annotation.text.wont_be :nil?
+    annotation.text.text.must_include "Google Cloud Client Library for Ruby"
+    annotation.text.locale.must_equal "en"
+    annotation.text.words.count.must_equal 28
+    annotation.text.words[0].text.must_equal "Google"
+    annotation.text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
+    annotation.text.words[27].text.must_equal "Storage."
+    annotation.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
 
-    analysis.safe_search.wont_be :nil?
-    analysis.safe_search.wont_be :adult?
-    analysis.safe_search.wont_be :spoof?
-    analysis.safe_search.must_be :medical?
-    analysis.safe_search.must_be :violence?
+    annotation.safe_search.wont_be :nil?
+    annotation.safe_search.wont_be :adult?
+    annotation.safe_search.wont_be :spoof?
+    annotation.safe_search.must_be :medical?
+    annotation.safe_search.must_be :violence?
 
-    analysis.properties.wont_be :nil?
-    analysis.properties.colors.count.must_equal 10
+    annotation.properties.wont_be :nil?
+    annotation.properties.colors.count.must_equal 10
 
-    analysis.properties.colors[0].red.must_equal 145
-    analysis.properties.colors[0].green.must_equal 193
-    analysis.properties.colors[0].blue.must_equal 254
-    analysis.properties.colors[0].alpha.must_equal 1.0
-    analysis.properties.colors[0].rgb.must_equal "91c1fe"
-    analysis.properties.colors[0].score.must_equal 0.65757853
-    analysis.properties.colors[0].pixel_fraction.must_equal 0.16903226
+    annotation.properties.colors[0].red.must_equal 145
+    annotation.properties.colors[0].green.must_equal 193
+    annotation.properties.colors[0].blue.must_equal 254
+    annotation.properties.colors[0].alpha.must_equal 1.0
+    annotation.properties.colors[0].rgb.must_equal "91c1fe"
+    annotation.properties.colors[0].score.must_equal 0.65757853
+    annotation.properties.colors[0].pixel_fraction.must_equal 0.16903226
 
-    analysis.properties.colors[9].red.must_equal 156
-    analysis.properties.colors[9].green.must_equal 214
-    analysis.properties.colors[9].blue.must_equal 255
-    analysis.properties.colors[9].alpha.must_equal 1.0
-    analysis.properties.colors[9].rgb.must_equal "9cd6ff"
-    analysis.properties.colors[9].score.must_equal 0.00096750073
-    analysis.properties.colors[9].pixel_fraction.must_equal 0.00064516132
+    annotation.properties.colors[9].red.must_equal 156
+    annotation.properties.colors[9].green.must_equal 214
+    annotation.properties.colors[9].blue.must_equal 255
+    annotation.properties.colors[9].alpha.must_equal 1.0
+    annotation.properties.colors[9].rgb.must_equal "9cd6ff"
+    annotation.properties.colors[9].score.must_equal 0.00096750073
+    annotation.properties.colors[9].pixel_fraction.must_equal 0.00064516132
   end
 
   describe "ImageContext" do
@@ -796,10 +796,10 @@ describe Gcloud::Vision::Project, :mock_vision do
          context_response_json]
       end
 
-      analysis = vision.annotate filepath, faces: 10, text: true
-      analysis.wont_be :nil?
-      analysis.face.wont_be :nil?
-      analysis.text.wont_be :nil?
+      annotation = vision.annotate filepath, faces: 10, text: true
+      annotation.wont_be :nil?
+      annotation.face.wont_be :nil?
+      annotation.text.wont_be :nil?
     end
 
     it "does not send when annotating an image without context" do
@@ -819,10 +819,10 @@ describe Gcloud::Vision::Project, :mock_vision do
       end
 
       image = vision.image filepath
-      analysis = vision.annotate image, faces: 10, text: true
-      analysis.wont_be :nil?
-      analysis.face.wont_be :nil?
-      analysis.text.wont_be :nil?
+      annotation = vision.annotate image, faces: 10, text: true
+      annotation.wont_be :nil?
+      annotation.face.wont_be :nil?
+      annotation.text.wont_be :nil?
     end
 
     it "sends when annotating an image with location in context" do
@@ -848,10 +848,10 @@ describe Gcloud::Vision::Project, :mock_vision do
       image.context.area.min.latitude = 37.4220041
       image.context.area.max.longitude = -122.0762462
       image.context.area.max.latitude = 37.4320041
-      analysis = vision.annotate image, faces: 10, text: true
-      analysis.wont_be :nil?
-      analysis.face.wont_be :nil?
-      analysis.text.wont_be :nil?
+      annotation = vision.annotate image, faces: 10, text: true
+      annotation.wont_be :nil?
+      annotation.face.wont_be :nil?
+      annotation.text.wont_be :nil?
     end
 
     it "sends when annotating an image with location hash in context" do
@@ -875,10 +875,10 @@ describe Gcloud::Vision::Project, :mock_vision do
       image = vision.image filepath
       image.context.area.min = { longitude: -122.0862462, latitude: 37.4220041 }
       image.context.area.max = { longitude: -122.0762462, latitude: 37.4320041 }
-      analysis = vision.annotate image, faces: 10, text: true
-      analysis.wont_be :nil?
-      analysis.face.wont_be :nil?
-      analysis.text.wont_be :nil?
+      annotation = vision.annotate image, faces: 10, text: true
+      annotation.wont_be :nil?
+      annotation.face.wont_be :nil?
+      annotation.text.wont_be :nil?
     end
 
     it "sends when annotating an image with language hints in context" do
@@ -901,10 +901,10 @@ describe Gcloud::Vision::Project, :mock_vision do
 
       image = vision.image filepath
       image.context.languages = ["en", "es"]
-      analysis = vision.annotate image, faces: 10, text: true
-      analysis.wont_be :nil?
-      analysis.face.wont_be :nil?
-      analysis.text.wont_be :nil?
+      annotation = vision.annotate image, faces: 10, text: true
+      annotation.wont_be :nil?
+      annotation.face.wont_be :nil?
+      annotation.text.wont_be :nil?
     end
 
     it "sends when annotating an image with location and language hints in context" do
@@ -929,10 +929,10 @@ describe Gcloud::Vision::Project, :mock_vision do
       image.context.area.min = { longitude: -122.0862462, latitude: 37.4220041 }
       image.context.area.max = { longitude: -122.0762462, latitude: 37.4320041 }
       image.context.languages = ["en", "es"]
-      analysis = vision.annotate image, faces: 10, text: true
-      analysis.wont_be :nil?
-      analysis.face.wont_be :nil?
-      analysis.text.wont_be :nil?
+      annotation = vision.annotate image, faces: 10, text: true
+      annotation.wont_be :nil?
+      annotation.face.wont_be :nil?
+      annotation.text.wont_be :nil?
     end
   end
 

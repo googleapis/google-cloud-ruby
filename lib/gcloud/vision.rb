@@ -152,9 +152,9 @@ module Gcloud
   #
   # image = vision.image "path/to/face.jpg"
   #
-  # analysis = vision.annotate image, faces: 10, labels: 10
-  # analysis.faces.count #=> 1
-  # analysis.labels.count #=> 4
+  # annotation = vision.annotate image, faces: 10, labels: 10
+  # annotation.faces.count #=> 1
+  # annotation.labels.count #=> 4
   # ```
   #
   # You can also perform detection tasks on multiple images in a single request:
@@ -168,10 +168,10 @@ module Gcloud
   # face_image = vision.image "path/to/face.jpg"
   # landmark_image = vision.image "path/to/landmark.jpg"
   #
-  # analyses = vision.annotate face_image, landmark_image, labels: 10
+  # annotations = vision.annotate face_image, landmark_image, labels: 10
   #
-  # analyses[0].labels.count #=> 4
-  # analyses[1].labels.count #=> 6
+  # annotations[0].labels.count #=> 4
+  # annotations[1].labels.count #=> 6
   # ```
   #
   # It is even possible to configure different features for multiple images in
@@ -188,16 +188,16 @@ module Gcloud
   # landmark_image = vision.image "path/to/landmark.jpg"
   # text_image = vision.image "path/to/text.png"
   #
-  # analyses = vision.annotate do |annotate|
+  # annotations = vision.annotate do |annotate|
   #    annotate.annotate face_image, faces: 10, labels: 10
   #    annotate.annotate landmark_image, landmarks: 10
   #    annotate.annotate text_image, text: true
   # end
   #
-  # analyses[0].faces.count #=> 1
-  # analyses[0].labels.count #=> 4
-  # analyses[1].landmarks.count #=> 1
-  # analyses[2].text.words.count #=> 28
+  # annotations[0].faces.count #=> 1
+  # annotations[0].labels.count #=> 4
+  # annotations[1].landmarks.count #=> 1
+  # annotations[2].text.words.count #=> 28
   # ```
   #
   module Vision

@@ -15,7 +15,7 @@
 
 module Gcloud
   module Vision
-    class Analysis
+    class Annotation
       ##
       # # Properties
       #
@@ -104,7 +104,7 @@ module Gcloud
         end
 
         ##
-        # @private New Analysis::Properties from a Google API Client object.
+        # @private New Annotation::Properties from a Google API Client object.
         def self.from_gapi gapi
           new.tap { |f| f.instance_variable_set :@gapi, gapi }
         end
@@ -234,7 +234,7 @@ module Gcloud
           end
 
           ##
-          # @private New Analysis::Properties from a Google API Client object.
+          # @private New Annotation::Properties from a Google API Client object.
           def self.from_gapi gapi
             new.tap { |f| f.instance_variable_set :@gapi, gapi }
           end

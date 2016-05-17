@@ -14,10 +14,10 @@
 
 require "helper"
 
-describe Gcloud::Vision::Analysis::Entity, :landmark, :mock_vision do
+describe Gcloud::Vision::Annotation::Entity, :landmark, :mock_vision do
   # Run through JSON to turn all keys to strings...
   let(:gapi) { JSON.parse(landmark_annotation_response.to_json) }
-  let(:landmark) { Gcloud::Vision::Analysis::Entity.from_gapi gapi }
+  let(:landmark) { Gcloud::Vision::Annotation::Entity.from_gapi gapi }
 
   it "knows the given attributes" do
     landmark.mid.must_equal "/m/019dvv"
