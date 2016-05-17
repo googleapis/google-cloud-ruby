@@ -53,8 +53,9 @@ module Gcloud
     #   text.words.count #=> 28
     #
     class Image
-      # Returns the image context for the image
-      # @return [Context]
+      # Returns the image context for the image, which accepts metadata values
+      # such as location and language hints.
+      # @return [Context] The context instance for the image.
       attr_reader :context
 
       ##
@@ -67,7 +68,7 @@ module Gcloud
       end
 
       ##
-      # Whether the Image has content.
+      # @private Whether the Image has content.
       #
       # @see {#url?}
       #
@@ -76,7 +77,7 @@ module Gcloud
       end
 
       ##
-      # Whether the Image is a URL.
+      # @private Whether the Image is a URL.
       #
       # @see {#content?}
       #
@@ -85,7 +86,7 @@ module Gcloud
       end
 
       ##
-      # The contents of the image, encoded via Base64.
+      # @private The contents of the image, encoded via Base64.
       #
       # @return [String]
       #
@@ -94,7 +95,7 @@ module Gcloud
       end
 
       ##
-      # The URL of the image.
+      # @private The URL of the image.
       #
       # @return [String]
       #
@@ -110,6 +111,19 @@ module Gcloud
       # @param [Integer] count The maximum number of results.
       #
       # @return [Array<Analysis::Face>] The results of face detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   faces = image.faces
+      #
+      #   face = faces.first
+      #   face.bounds.face.count #=> 4
+      #   face.bounds.face.first #=> #<Vertex (x: 153, y: 34)>
       #
       def faces count = 10
         ensure_vision!
@@ -136,6 +150,20 @@ module Gcloud
       #
       # @return [Array<Analysis::Entity>] The results of landmark detection.
       #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/landmark.jpg"
+      #
+      #   landmarks = image.landmarks
+      #
+      #   landmark = landmarks.first
+      #   landmark.score #=> 0.91912264
+      #   landmark.description #=> "Mount Rushmore"
+      #   landmark.mid #=> "/m/019dvv"
+      #
       def landmarks count = 10
         ensure_vision!
         analysis = @vision.mark self, landmarks: count
@@ -160,6 +188,20 @@ module Gcloud
       # @param [Integer] count The maximum number of results.
       #
       # @return [Array<Analysis::Entity>] The results of logo detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/logo.jpg"
+      #
+      #   logos = image.logos
+      #
+      #   logo = logos.first
+      #   logo.score #=> 0.70057315
+      #   logo.description #=> "Google"
+      #   logo.mid #=> "/m/0b34hf"
       #
       def logos count = 10
         ensure_vision!
@@ -186,6 +228,21 @@ module Gcloud
       #
       # @return [Array<Analysis::Entity>] The results of label detection.
       #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   labels = image.labels
+      #
+      #   labels.count #=> 4
+      #   label = labels.first
+      #   label.score #=> 0.9481349
+      #   label.description #=> "person"
+      #   label.mid #=> "/m/01g317"
+      #
       def labels count = 10
         ensure_vision!
         analysis = @vision.mark self, labels: count
@@ -209,6 +266,21 @@ module Gcloud
       #
       # @return [Analysis::Text] The results of text (OCR) detection.
       #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/text.png"
+      #
+      #   text = image.text
+      #
+      #   text = image.text
+      #   text.locale #=> "en"
+      #   text.words.count #=> 28
+      #   text.text
+      #   #=> "Google Cloud Client Library for Ruby an idiomatic, intuitive... "
+      #
       def text
         ensure_vision!
         analysis = @vision.mark self, text: true
@@ -221,6 +293,18 @@ module Gcloud
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
       # @return [Analysis::SafeSearch] The results of safe search detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   safe_search = image.safe_search
+      #
+      #   safe_search.spoof? #=> false
+      #   safe_search.spoof #=> "VERY_UNLIKELY"
       #
       def safe_search
         ensure_vision!
@@ -235,6 +319,21 @@ module Gcloud
       #
       # @return [Analysis::Properties] The results of image properties
       #   detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/logo.jpg"
+      #
+      #   properties = image.properties
+      #
+      #   properties.colors.count #=> 10
+      #   color = properties.colors.first
+      #   color.red #=> 247.0
+      #   color.green #=> 236.0
+      #   color.blue #=> 20.0
       #
       def properties
         ensure_vision!
