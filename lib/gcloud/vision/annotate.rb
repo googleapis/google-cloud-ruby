@@ -153,9 +153,11 @@ module Gcloud
 
       def annotate_features faces, landmarks, logos, labels, text,
                             safe_search, properties
-        return default_features if default_features?(faces, landmarks, logos,
-                                                     labels, text, safe_search,
-                                                     properties)
+        return default_features if default_features?(
+          faces, landmarks, logos, labels, text, safe_search, properties)
+
+        faces, landmarks, logos, labels = validate_max_values(
+          faces, landmarks, logos, labels)
 
         f = []
         f << { type: :FACE_DETECTION, maxResults: faces } unless faces.zero?
@@ -177,14 +179,33 @@ module Gcloud
 
       def default_features
         [
-          { type: :FACE_DETECTION, maxResults: 10 },
-          { type: :LANDMARK_DETECTION, maxResults: 10 },
-          { type: :LOGO_DETECTION, maxResults: 10 },
-          { type: :LABEL_DETECTION, maxResults: 10 },
+          { type: :FACE_DETECTION,
+            maxResults: Gcloud::Vision.default_max_faces },
+          { type: :LANDMARK_DETECTION,
+            maxResults: Gcloud::Vision.default_max_landmarks },
+          { type: :LOGO_DETECTION,
+            maxResults: Gcloud::Vision.default_max_logos },
+          { type: :LABEL_DETECTION,
+            maxResults: Gcloud::Vision.default_max_labels },
           { type: :TEXT_DETECTION, maxResults: 1 },
           { type: :SAFE_SEARCH_DETECTION, maxResults: 1 },
           { type: :IMAGE_PROPERTIES, maxResults: 1 }
         ]
+      end
+
+      def validate_max_values faces, landmarks, logos, labels
+        faces     = validate_max_value faces, Gcloud::Vision.default_max_faces
+        landmarks = validate_max_value landmarks,
+                                       Gcloud::Vision.default_max_landmarks
+        logos     = validate_max_value logos, Gcloud::Vision.default_max_logos
+        labels    = validate_max_value labels, Gcloud::Vision.default_max_labels
+        [faces, landmarks, logos, labels]
+      end
+
+      def validate_max_value value, default_value
+        return value.to_int if value.respond_to? :to_int
+        return default_value if value
+        0 # not a number, not a truthy value
       end
     end
   end

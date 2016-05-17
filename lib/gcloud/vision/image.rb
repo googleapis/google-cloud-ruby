@@ -108,7 +108,8 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] count The maximum number of results.
+      # @param [Integer] max_results The maximum number of results. See
+      #   {Gcloud::Vision.default_max_faces}.
       #
       # @return [Array<Annotation::Face>] The results of face detection.
       #
@@ -125,9 +126,9 @@ module Gcloud
       #   face.bounds.face.count #=> 4
       #   face.bounds.face.first #=> #<Vertex (x: 153, y: 34)>
       #
-      def faces count = 10
+      def faces max_results = Gcloud::Vision.default_max_faces
         ensure_vision!
-        annotation = @vision.mark self, faces: count
+        annotation = @vision.mark self, faces: max_results
         annotation.faces
       end
 
@@ -146,7 +147,8 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] count The maximum number of results.
+      # @param [Integer] max_results The maximum number of results. See
+      #   {Gcloud::Vision.default_max_landmarks}.
       #
       # @return [Array<Annotation::Entity>] The results of landmark detection.
       #
@@ -164,9 +166,9 @@ module Gcloud
       #   landmark.description #=> "Mount Rushmore"
       #   landmark.mid #=> "/m/019dvv"
       #
-      def landmarks count = 10
+      def landmarks max_results = Gcloud::Vision.default_max_landmarks
         ensure_vision!
-        annotation = @vision.mark self, landmarks: count
+        annotation = @vision.mark self, landmarks: max_results
         annotation.landmarks
       end
 
@@ -185,7 +187,8 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] count The maximum number of results.
+      # @param [Integer] max_results The maximum number of results. See
+      #   {Gcloud::Vision.default_max_logos}.
       #
       # @return [Array<Annotation::Entity>] The results of logo detection.
       #
@@ -203,9 +206,9 @@ module Gcloud
       #   logo.description #=> "Google"
       #   logo.mid #=> "/m/0b34hf"
       #
-      def logos count = 10
+      def logos max_results = Gcloud::Vision.default_max_logos
         ensure_vision!
-        annotation = @vision.mark self, logos: count
+        annotation = @vision.mark self, logos: max_results
         annotation.logos
       end
 
@@ -224,7 +227,8 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] count The maximum number of results.
+      # @param [Integer] max_results The maximum number of results. See
+      #   {Gcloud::Vision.default_max_labels}.
       #
       # @return [Array<Annotation::Entity>] The results of label detection.
       #
@@ -243,9 +247,9 @@ module Gcloud
       #   label.description #=> "person"
       #   label.mid #=> "/m/01g317"
       #
-      def labels count = 10
+      def labels max_results = Gcloud::Vision.default_max_labels
         ensure_vision!
-        annotation = @vision.mark self, labels: count
+        annotation = @vision.mark self, labels: max_results
         annotation.labels
       end
 
