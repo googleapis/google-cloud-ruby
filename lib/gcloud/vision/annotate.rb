@@ -67,9 +67,12 @@ module Gcloud
       # before use, as a separate charge is incurred for each feature performed
       # on an image.
       #
-      # Image files sent to the Google Cloud Vision API should not exceed 4 MB.
-      # For multiple images in a request, the Vision API currently imposes an 8
-      # MB per request limit.
+      # Cloud Vision sets upper limits on file size as well as on the total
+      # combined size of all images in a request. Reducing your file size can
+      # significantly improve throughput; however, be careful not to reduce
+      # image quality in the process. See [Best Practices - Image
+      # Sizing](https://cloud.google.com/vision/docs/image-best-practices#image_sizing)
+      # for current file size limits.
       #
       # See {Project#annotate} for requests that do not involve multiple feature
       # configurations.
@@ -83,24 +86,24 @@ module Gcloud
       # @param [Image] images The image or images to annotate. Required.
       # @param [Integer] faces The maximum number of results for the
       #   `FACE_DETECTION` feature. Optional.
-      # @param [Integer] landmarks the maximum number of results for the
+      # @param [Integer] landmarks The maximum number of results for the
       #   `LANDMARK_DETECTION` feature. Optional.
-      # @param [Integer] logos the maximum number of results for the
+      # @param [Integer] logos The maximum number of results for the
       #   `LOGO_DETECTION` feature. Optional.
-      # @param [Integer] labels the maximum number of results for the
+      # @param [Integer] labels The maximum number of results for the
       #   `LABEL_DETECTION` feature. Optional.
-      # @param [Boolean] text whether to perform the `TEXT_DETECTION` feature
+      # @param [Boolean] text Whether to perform the `TEXT_DETECTION` feature
       #   (OCR). Optional.
-      # @param [Boolean] safe_search whether to perform the
+      # @param [Boolean] safe_search Whether to perform the
       #   `SAFE_SEARCH_DETECTION` feature. Optional.
-      # @param [Boolean] properties whether to perform the
+      # @param [Boolean] properties Whether to perform the
       #   `IMAGE_PROPERTIES` feature (currently, the image's dominant colors.)
       #   Optional.
       #
-      # @return [Analysis, Array<Analysis>] the results for all image
+      # @return [Analysis, Array<Analysis>] The results for all image
       #   detections, returned as a single {Analysis} instance for one image, or
       #   as an array of {Analysis} instances, one per image, for multiple
-      #   images
+      #   images.
       #
       # @example
       #   require "gcloud"

@@ -78,25 +78,15 @@ module Gcloud
   #
   # ## Creating images
   #
-  # Currently, the Google Cloud Vision API supports the following image types:
-  #
-  # * JPEG
-  # * PNG8
-  # * PNG24
-  # * GIF
-  # * Animated GIF (first frame only)
-  # * BMP
-  # * WEBP
-  # * RAW
-  # * ICO
-  #
-  # Image files sent to the Google Cloud Vision API should not exceed 4 MB.
+  # The Cloud Vision API supports a variety of image file formats, including
+  # JPEG, PNG8, PNG24, Animated GIF (first frame only), and RAW. See [Best
+  # Practices - Image Types](https://cloud.google.com/vision/docs/image-best-practices#image_types)
+  # for the list of formats. Be aware that Cloud Vision sets upper limits on
+  # file size as well as on the total combined size of all images in a request.
   # Reducing your file size can significantly improve throughput; however, be
-  # careful not to reduce image quality in the process. If you are batching
-  # images and sending them in one request, also note that the Vision API
-  # imposes an 8 MB per request limit. (These limits may change, see [Best
-  # Practices](https://cloud.google.com/vision/docs/image-best-practices) for
-  # the most current information.)
+  # careful not to reduce image quality in the process. See [Best Practices -
+  # Image Sizing](https://cloud.google.com/vision/docs/image-best-practices#image_sizing)
+  # for current file size limits.
   #
   # Use {Vision::Project#image} to create images for the Cloud Vision service:
   #
@@ -185,7 +175,8 @@ module Gcloud
   # ```
   #
   # It is even possible to configure different features for multiple images in
-  # the same request:
+  # a single call using a block. The following example results in a single
+  # request to the Cloud Vision API:
   #
   # ```ruby
   # require "gcloud"

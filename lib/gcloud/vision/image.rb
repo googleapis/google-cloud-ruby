@@ -26,23 +26,15 @@ module Gcloud
     #
     # See {Project#image}.
     #
-    # Currently, the Google Cloud Vision API supports the following image types:
-    #
-    # * JPEG
-    # * PNG8
-    # * PNG24
-    # * GIF
-    # * Animated GIF (first frame only)
-    # * BMP
-    # * WEBP
-    # * RAW
-    # * ICO
-    #
-    # Image files sent to the Google Cloud Vision API should not exceed 4 MB.
+    # The Cloud Vision API supports a variety of image file formats, including
+    # JPEG, PNG8, PNG24, Animated GIF (first frame only), and RAW. See [Best
+    # Practices - Image Types](https://cloud.google.com/vision/docs/image-best-practices#image_types)
+    # for the list of formats. Be aware that Cloud Vision sets upper limits on
+    # file size as well as the total combined size of all images in a request.
     # Reducing your file size can significantly improve throughput; however, be
-    # careful not to reduce image quality in the process. If you are batching
-    # images and sending them in one request, also note that the Vision API
-    # imposes an 8 MB per request limit.
+    # careful not to reduce image quality in the process. See [Best Practices -
+    # Image Sizing](https://cloud.google.com/vision/docs/image-best-practices#image_sizing)
+    # for current file size limits.
     #
     # @see https://cloud.google.com/vision/docs/image-best-practices Best
     #   Practices
@@ -115,9 +107,9 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] count the maximum number of results
+      # @param [Integer] count The maximum number of results.
       #
-      # @return [Array<Analysis::Face>] the results of face detection
+      # @return [Array<Analysis::Face>] The results of face detection.
       #
       def faces count = 10
         ensure_vision!
@@ -129,7 +121,7 @@ module Gcloud
       # Performs the `FACE_DETECTION` feature on the image and returns only the
       # first result.
       #
-      # @return [Analysis::Face] the first result of face detection
+      # @return [Analysis::Face] The first result of face detection.
       #
       def face
         faces(1).first
@@ -140,9 +132,9 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] count the maximum number of results
+      # @param [Integer] count The maximum number of results.
       #
-      # @return [Array<Analysis::Entity>] the results of landmark detection
+      # @return [Array<Analysis::Entity>] The results of landmark detection.
       #
       def landmarks count = 10
         ensure_vision!
@@ -154,7 +146,7 @@ module Gcloud
       # Performs the `LANDMARK_DETECTION` feature on the image and returns only
       # the first result.
       #
-      # @return [Analysis::Entity] the first result of landmark detection
+      # @return [Analysis::Entity] The first result of landmark detection.
       #
       def landmark
         landmarks(1).first
@@ -165,9 +157,9 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] count the maximum number of results
+      # @param [Integer] count The maximum number of results.
       #
-      # @return [Array<Analysis::Entity>] the results of logo detection
+      # @return [Array<Analysis::Entity>] The results of logo detection.
       #
       def logos count = 10
         ensure_vision!
@@ -179,7 +171,7 @@ module Gcloud
       # Performs the `LOGO_DETECTION` feature on the image and returns only the
       # first result.
       #
-      # @return [Analysis::Entity] the first result of logo detection
+      # @return [Analysis::Entity] The first result of logo detection.
       #
       def logo
         logos(1).first
@@ -190,9 +182,9 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] count the maximum number of results
+      # @param [Integer] count The maximum number of results.
       #
-      # @return [Array<Analysis::Entity>] the results of label detection
+      # @return [Array<Analysis::Entity>] The results of label detection.
       #
       def labels count = 10
         ensure_vision!
@@ -204,7 +196,7 @@ module Gcloud
       # Performs the `LABEL_DETECTION` feature on the image and returns only the
       # first result.
       #
-      # @return [Analysis::Entity] the first result of label detection
+      # @return [Analysis::Entity] The first result of label detection.
       #
       def label
         labels(1).first
@@ -215,7 +207,7 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @return [Analysis::Text] the results of text (OCR) detection
+      # @return [Analysis::Text] The results of text (OCR) detection.
       #
       def text
         ensure_vision!
@@ -228,7 +220,7 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @return [Analysis::SafeSearch] the results of safe search detection
+      # @return [Analysis::SafeSearch] The results of safe search detection.
       #
       def safe_search
         ensure_vision!
@@ -241,7 +233,8 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @return [Analysis::Properties] the results of image properties detection
+      # @return [Analysis::Properties] The results of image properties
+      #   detection.
       #
       def properties
         ensure_vision!
@@ -340,6 +333,7 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
+      #
       #   image = vision.image "./acceptance/data/landmark.jpg"
       #   image.context.area.min = { longitude: -122.0862462,
       #                              latitude: 37.4220041 }
@@ -348,13 +342,13 @@ module Gcloud
       #
       class Context
         # Returns a lat/long rectangle that specifies the location of the image.
-        # @return [Area] the lat/long pairs for `latLongRect`
+        # @return [Area] The lat/long pairs for `latLongRect`.
         attr_reader :area
 
         # @!attribute languages
-        #   @return [Array<String>] the [ISO
+        #   @return [Array<String>] The [ISO
         #     639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-        #     language codes for `languageHints`
+        #     language codes for `languageHints`.
         attr_accessor :languages
 
         ##
@@ -422,10 +416,10 @@ module Gcloud
           ##
           # Sets the min lat/long pair for the area.
           #
-          # @param [Hash(Symbol => Float)] location a Hash containing the keys
+          # @param [Hash(Symbol => Float)] location A Hash containing the keys
           #   `:latitude` and `:longitude` with corresponding values conforming
           #   to the [WGS84
-          #   standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf)
+          #   standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
           def min= location
             if location.respond_to?(:to_hash) &&
                location.to_hash.keys.sort == [:latitude, :longitude]
@@ -438,10 +432,10 @@ module Gcloud
           ##
           # Sets the max lat/long pair for the area.
           #
-          # @param [Hash(Symbol => Float)] location a Hash containing the keys
+          # @param [Hash(Symbol => Float)] location A Hash containing the keys
           #   `:latitude` and `:longitude` with corresponding values conforming
           #   to the [WGS84
-          #   standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf)
+          #   standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
           def max= location
             if location.respond_to?(:to_hash) &&
                location.to_hash.keys.sort == [:latitude, :longitude]

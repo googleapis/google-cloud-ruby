@@ -48,7 +48,7 @@ module Gcloud
         ##
         # The image's dominant colors, including their corresponding scores.
         #
-        # @return [Array<Color>] an array of the image's dominant colors
+        # @return [Array<Color>] An array of the image's dominant colors.
         #
         def colors
           return [] unless @gapi["dominantColors"]
@@ -147,7 +147,7 @@ module Gcloud
           ##
           # The amount of red in the color.
           #
-          # @return [Float] a value in the interval [0, 255]
+          # @return [Float] A value in the interval [0, 255].
           #
           def red
             @gapi["color"]["red"]
@@ -156,7 +156,7 @@ module Gcloud
           ##
           # The amount of green in the color.
           #
-          # @return [Float] a value in the interval [0, 255]
+          # @return [Float] A value in the interval [0, 255].
           #
           def green
             @gapi["color"]["green"]
@@ -165,7 +165,7 @@ module Gcloud
           ##
           # The amount of blue in the color.
           #
-          # @return [Float] a value in the interval [0, 255]
+          # @return [Float] A value in the interval [0, 255].
           #
           def blue
             @gapi["color"]["blue"]
@@ -176,7 +176,7 @@ module Gcloud
           # of 1.0 corresponds to a solid color, whereas a value of 0.0
           # corresponds to a completely transparent color.
           #
-          # @return [Float] in the range [0, 1]
+          # @return [Float] A value in the range [0, 1].
           #
           def alpha
             @gapi["color"]["alpha"] || 1.0
@@ -191,7 +191,7 @@ module Gcloud
           ##
           # Image-specific score for this color.
           #
-          # @return [Float] in the range [0, 1]
+          # @return [Float] A value in the range [0, 1].
           #
           def score
             @gapi["score"]
@@ -200,7 +200,7 @@ module Gcloud
           ##
           # Stores the fraction of pixels the color occupies in the image.
           #
-          # @return [Float] in the range [0, 1]
+          # @return [Float] A value in the range [0, 1].
           #
           def pixel_fraction
             @gapi["pixelFraction"]

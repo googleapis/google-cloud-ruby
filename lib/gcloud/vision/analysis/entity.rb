@@ -86,7 +86,7 @@ module Gcloud
         #
         # @see https://developers.google.com/knowledge-graph/ Knowledge Graph
         #
-        # @return [String] the opaque entity ID
+        # @return [String] The opaque entity ID.
         #
         def mid
           @gapi["mid"]
@@ -96,9 +96,9 @@ module Gcloud
         # The language code for the locale in which the `description` is
         # expressed.
         #
-        # @return [String] the [ISO
+        # @return [String] The [ISO
         #   639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-        #   language code
+        #   language code.
         #
         def locale
           @gapi["locale"]
@@ -107,7 +107,7 @@ module Gcloud
         ##
         # Entity textual description, expressed in the {#locale} language.
         #
-        # @return [String] a description of the entity
+        # @return [String] A description of the entity.
         #
         def description
           @gapi["description"]
@@ -116,7 +116,7 @@ module Gcloud
         ##
         # Overall score of the result.
         #
-        # @return [Float] in the range [0, 1]
+        # @return [Float] A value in the range [0, 1].
         #
         def score
           @gapi["score"]
@@ -127,7 +127,7 @@ module Gcloud
         # image containing 'Eiffel Tower,' this field represents the confidence
         # that there is a tower in the query image.
         #
-        # @return [Float] in the range [0, 1]
+        # @return [Float] A value in the range [0, 1].
         #
         def confidence
           @gapi["confidence"]
@@ -140,7 +140,7 @@ module Gcloud
         # towering building, though the confidence that there is a tower may be
         # the same.
         #
-        # @return [Float] in the range [0, 1]
+        # @return [Float] A value in the range [0, 1].
         #
         def topicality
           @gapi["topicality"]
@@ -150,7 +150,7 @@ module Gcloud
         # Image region to which this entity belongs. Not filled currently for
         # `labels` detection.
         #
-        # @return [Array<Vertex>] array of vertices
+        # @return [Array<Vertex>] An array of vertices.
         #
         def bounds
           return [] unless @gapi["boundingPoly"]
@@ -166,8 +166,8 @@ module Gcloud
         # where the query image was taken. Location information is usually
         # present for landmarks.
         #
-        # @return [Array<Location>] array of locations containing latitude and
-        #   longitude
+        # @return [Array<Location>] An array of locations containing latitude
+        #   and longitude.
         #
         def locations
           @locations ||= Array(@gapi["locations"]).map do |l|
@@ -180,7 +180,7 @@ module Gcloud
         # example a different kind of score or string that qualifies the entity.
         # present for landmarks.
         #
-        # @return [Hash] hash containing property names and values
+        # @return [Hash] A hash containing property names and values.
         #
         def properties
           @properties ||=

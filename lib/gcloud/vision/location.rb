@@ -44,11 +44,11 @@ module Gcloud
     #
     class Location
       # @!attribute latitude
-      #   @return [Float] degrees latitude conforming to the [WGS84
-      #     standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf)
+      #   @return [Float] The degrees latitude conforming to the [WGS84
+      #     standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
       # @!attribute longitude
-      #   @return [Float] degrees longitude conforming to the [WGS84
-      #     standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf)
+      #   @return [Float] The degrees longitude conforming to the [WGS84
+      #     standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
       attr_accessor :latitude, :longitude
 
       ##

@@ -37,9 +37,9 @@ module Gcloud
     #   gcloud = Gcloud.new
     #   vision = gcloud.vision
     #
-    #   landmark_image = vision.image "./acceptance/data/landmark.jpg"
+    #   image = vision.image "./acceptance/data/landmark.jpg"
     #
-    #   analysis = vision.annotate landmark_image, labels: 10
+    #   analysis = vision.annotate image, labels: 10
     #
     #   analysis.labels.map &:description
     #   #=> ["stone carving", "ancient history", "statue", "sculpture",
@@ -86,9 +86,12 @@ module Gcloud
       ##
       # Returns a new image from the given source.
       #
-      # Image files sent to the Google Cloud Vision API should not exceed 4 MB.
-      # For multiple images in a request, the Vision API currently imposes an 8
-      # MB per request limit.
+      # Cloud Vision sets upper limits on file size as well as on the total
+      # combined size of all images in a request. Reducing your file size can
+      # significantly improve throughput; however, be careful not to reduce
+      # image quality in the process. See [Best Practices - Image
+      # Sizing](https://cloud.google.com/vision/docs/image-best-practices#image_sizing)
+      # for current file size limits.
       #
       # Note that an object in Google Cloud Storage is a single entity;
       # permissions affect only that object. "Directory permissions" do not
@@ -98,12 +101,12 @@ module Gcloud
       # @see https://cloud.google.com/vision/docs/image-best-practices Best
       #   Practices
       #
-      # @param [Gcloud::Storage::File, IO, StringIO, String] source a Google
-      #   Cloud Storage URI of the form `gs://bucketname/path/to/image_filename`
-      #   or an instance of Gcloud::Storage::File; or, a string path (file
-      #   descriptor); or a File, IO, or StringIO instance
+      # @param [String, IO, StringIO, Tempfile, Gcloud::Storage::File] source A
+      #   string file path or Cloud Storage URI of the form
+      #   `"gs://bucketname/path/to/image_filename"`; or a File, IO, StringIO,
+      #   or Tempfile instance; or an instance of Gcloud::Storage::File.
       #
-      # @return [Image] an image for the Vision service
+      # @return [Image] An image for the Vision service.
       #
       # @example With a Google Cloud Storage URI:
       #   require "gcloud"
@@ -136,9 +139,12 @@ module Gcloud
       # before use, as a separate charge is incurred for each feature performed
       # on an image.
       #
-      # Image files sent to the Google Cloud Vision API should not exceed 4 MB.
-      # For multiple images in a request, the Vision API currently imposes an 8
-      # MB per request limit.
+      # Cloud Vision sets upper limits on file size as well as on the total
+      # combined size of all images in a request. Reducing your file size can
+      # significantly improve throughput; however, be careful not to reduce
+      # image quality in the process. See [Best Practices - Image
+      # Sizing](https://cloud.google.com/vision/docs/image-best-practices#image_sizing)
+      # for current file size limits.
       #
       # @see https://cloud.google.com/vision/docs/requests-and-responses Cloud
       #   Vision API Requests and Responses
@@ -151,17 +157,17 @@ module Gcloud
       #   See {#image} for details.
       # @param [Integer] faces The maximum number of results for the
       #   `FACE_DETECTION` feature. Optional.
-      # @param [Integer] landmarks the maximum number of results for the
+      # @param [Integer] landmarks The maximum number of results for the
       #   `LANDMARK_DETECTION` feature. Optional.
-      # @param [Integer] logos the maximum number of results for the
+      # @param [Integer] logos The maximum number of results for the
       #   `LOGO_DETECTION` feature. Optional.
-      # @param [Integer] labels the maximum number of results for the
+      # @param [Integer] labels The maximum number of results for the
       #   `LABEL_DETECTION` feature. Optional.
-      # @param [Boolean] text whether to perform the `TEXT_DETECTION` feature
+      # @param [Boolean] text Whether to perform the `TEXT_DETECTION` feature
       #   (OCR). Optional.
-      # @param [Boolean] safe_search whether to perform the
+      # @param [Boolean] safe_search Whether to perform the
       #   `SAFE_SEARCH_DETECTION` feature. Optional.
-      # @param [Boolean] properties whether to perform the
+      # @param [Boolean] properties Whether to perform the
       #   `IMAGE_PROPERTIES` feature (currently, the image's dominant colors.)
       #   Optional.
       #
@@ -169,10 +175,10 @@ module Gcloud
       #   configurations. See {Annotate#annotate}.
       # @yieldparam [Annotate] annotate the Annotate object
       #
-      # @return [Analysis, Array<Analysis>] the results for all image
+      # @return [Analysis, Array<Analysis>] The results for all image
       #   detections, returned as a single {Analysis} instance for one image, or
       #   as an array of {Analysis} instances, one per image, for multiple
-      #   images
+      #   images.
       #
       # @example With a single image:
       #   require "gcloud"

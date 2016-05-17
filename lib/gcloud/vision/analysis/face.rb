@@ -88,7 +88,7 @@ module Gcloud
         ##
         # The confidence of the facial detection.
         #
-        # @return [Float] in the range [0, 1]
+        # @return [Float] A value in the range [0, 1].
         #
         def confidence
           @gapi["detectionConfidence"]
@@ -166,7 +166,7 @@ module Gcloud
           # rotation of the face relative to the image vertical, about the axis
           # perpendicular to the face.
           #
-          # @return [Float] in the range [-180,180]
+          # @return [Float] A value in the range [-180,180].
           #
           def roll
             @gapi["rollAngle"]
@@ -177,7 +177,7 @@ module Gcloud
           # face is pointing, relative to the vertical plane perpendicular to
           # the image.
           #
-          # @return [Float] in the range [-180,180]
+          # @return [Float] A value in the range [-180,180].
           #
           def yaw
             @gapi["panAngle"]
@@ -188,7 +188,7 @@ module Gcloud
           # Pitch (tilt) angle. Indicates the upwards/downwards angle that the
           # face is pointing relative to the image's horizontal plane.
           #
-          # @return [Float] in the range [-180,180]
+          # @return [Float] A value in the range [-180,180].
           #
           def pitch
             @gapi["tiltAngle"]
@@ -402,7 +402,7 @@ module Gcloud
           ##
           # The confidence of the facial landmarks detection.
           #
-          # @return [Float] in the range [0,1]
+          # @return [Float] A value in the range [0,1].
           #
           def confidence
             @gapi["landmarkingConfidence"]
@@ -414,9 +414,9 @@ module Gcloud
           # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
           #   images.annotate Type
           #
-          # @param [String, Symbol] landmark_type an `images.annotate` type code
+          # @param [String, Symbol] landmark_type An `images.annotate` type code
           #    from the [Vision
-          #   API](https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1)
+          #   API](https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1).
           #
           # @return [Landmark]
           #
@@ -747,11 +747,11 @@ module Gcloud
           #
           class Chin
             # @!attribute left
-            #   @return [Landmark] chin left gonion
+            #   @return [Landmark] The chin, left gonion.
             # @!attribute center
-            #   @return [Landmark] chin gnathion
+            #   @return [Landmark] The chin, gnathion.
             # @!attribute right
-            #   @return [Landmark] chin right gonion
+            #   @return [Landmark] The chin, right gonion.
             attr_accessor :left, :center, :right
 
             def initialize left, center, right
@@ -837,9 +837,9 @@ module Gcloud
           #
           class Ears
             # @!attribute left
-            #   @return [Landmark] left ear tragion
+            #   @return [Landmark] The left ear tragion.
             # @!attribute right
-            #   @return [Landmark] right ear tragion
+            #   @return [Landmark] The right ear tragion.
             attr_accessor :left, :right
 
             def initialize left, right
@@ -925,9 +925,9 @@ module Gcloud
           #
           class Eyebrows
             # @!attribute left
-            #   @return [Eyebrow] the left eyebrow
+            #   @return [Eyebrow] The left eyebrow.
             # @!attribute right
-            #   @return [Eyebrow] the right eyebrow
+            #   @return [Eyebrow] The right eyebrow.
             attr_accessor :left, :right
 
             def initialize left, right
@@ -1013,11 +1013,11 @@ module Gcloud
           #
           class Eyebrow
             # @!attribute left
-            #   @return [Landmark] eyebrow left
+            #   @return [Landmark] The eyebrow, left.
             # @!attribute top
-            #   @return [Landmark] eyebrow, upper midpoint
+            #   @return [Landmark] The eyebrow, upper midpoint.
             # @!attribute right
-            #   @return [Landmark] eyebrow right
+            #   @return [Landmark] The eyebrow, right.
             attr_accessor :left, :top, :right
 
             def initialize left, top, right
@@ -1192,17 +1192,17 @@ module Gcloud
           #
           class Eye
             # @!attribute left
-            #   @return [Landmark] eye, left corner
+            #   @return [Landmark] The eye, left corner.
             # @!attribute bottom
-            #   @return [Landmark] eye, bottom boundary
+            #   @return [Landmark] The eye, bottom boundary.
             # @!attribute center
-            #   @return [Landmark] eye center
+            #   @return [Landmark] The eye, center.
             # @!attribute pupil
-            #   @return [Landmark] eye pupil
+            #   @return [Landmark] The eye pupil.
             # @!attribute top
-            #   @return [Landmark] eye, top boundary
+            #   @return [Landmark] The eye, top boundary.
             # @!attribute right
-            #   @return [Landmark] eye, right corner
+            #   @return [Landmark] The eye, right corner.
             attr_accessor :left, :bottom, :center, :pupil, :top, :right
 
             def initialize left, bottom, center, pupil, top, right
@@ -1291,9 +1291,9 @@ module Gcloud
           #
           class Lips
             # @!attribute top
-            #   @return [Landmark] upper lip
+            #   @return [Landmark] The upper lip.
             # @!attribute bottom
-            #   @return [Landmark] lower lip
+            #   @return [Landmark] The lower lip.
             attr_accessor :top, :bottom
 
             alias_method :upper, :top
@@ -1381,11 +1381,11 @@ module Gcloud
           #
           class Mouth
             # @!attribute left
-            #   @return [Landmark] mouth left
+            #   @return [Landmark] The mouth, left.
             # @!attribute center
-            #   @return [Landmark] mouth center
+            #   @return [Landmark] The mouth, center.
             # @!attribute right
-            #   @return [Landmark] mouth right
+            #   @return [Landmark] The mouth, right.
             attr_accessor :left, :center, :right
 
             def initialize left, center, right
@@ -1472,15 +1472,15 @@ module Gcloud
           #
           class Nose
             # @!attribute left
-            #   @return [Landmark] nose, bottom left
+            #   @return [Landmark] The nose, bottom left.
             # @!attribute bottom
-            #   @return [Landmark] nose, bottom center
+            #   @return [Landmark] The nose, bottom center.
             # @!attribute tip
-            #   @return [Landmark] nose tip
+            #   @return [Landmark] The nose tip.
             # @!attribute top
-            #   @return [Landmark] midpoint between eyes
+            #   @return [Landmark] The midpoint between the eyes.
             # @!attribute right
-            #   @return [Landmark] nose, bottom right
+            #   @return [Landmark] The nose, bottom right.
             attr_accessor :left, :bottom, :tip, :top, :right
 
             def initialize left, bottom, tip, top, right

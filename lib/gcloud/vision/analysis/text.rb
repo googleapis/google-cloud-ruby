@@ -52,7 +52,7 @@ module Gcloud
         ##
         # The text detected in an image.
         #
-        # @return [String] the entire text including newline characters
+        # @return [String] The entire text including newline characters.
         #
         def text
           @gapi["description"]
@@ -61,9 +61,9 @@ module Gcloud
         ##
         # The language code detected for `text`.
         #
-        # @return [String] the [ISO
+        # @return [String] The [ISO
         #   639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-        #   language code
+        #   language code.
         #
         def locale
           @gapi["locale"]

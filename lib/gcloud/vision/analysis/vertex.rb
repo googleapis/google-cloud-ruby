@@ -39,9 +39,9 @@ module Gcloud
       #
       class Vertex
         # @!attribute x
-        #   @return [Integer] the X coordinate
+        #   @return [Integer] The X coordinate.
         # @!attribute y
-        #   @return [Integer] the Y coordinate
+        #   @return [Integer] The Y coordinate.
         attr_accessor :x, :y
 
         ##
