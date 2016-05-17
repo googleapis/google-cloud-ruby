@@ -25,43 +25,81 @@ module Gcloud
     ##
     # # Location
     #
-    # TODO: info here...
+    # A latitude/longitude pair with values conforming to the [WGS84
+    # standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
     #
     # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   vision = gcloud.vision
-    #   # TODO: example here...
+    #
+    #   image = vision.image "path/to/landmark.jpg"
+    #   entity = image.landmark
+    #
+    #   location = entity.locations.first
+    #
+    #   location.latitude #=> 43.878264
+    #   location.longitude #=> -103.45700740814209
     #
     class Location
+      # @!attribute latitude
+      #   @return [Float] The degrees latitude conforming to the [WGS84
+      #     standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
+      # @!attribute longitude
+      #   @return [Float] The degrees longitude conforming to the [WGS84
+      #     standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
       attr_accessor :latitude, :longitude
 
+      ##
+      # @private Creates a new Location instance.
       def initialize latitude, longitude
         @latitude  = latitude
         @longitude = longitude
       end
 
+      ##
+      # Returns the object's property values as an array.
+      #
+      # @return [Array]
+      #
       def to_a
         to_ary
       end
 
+      ##
+      # Returns the object's property values as an array.
+      #
+      # @return [Array]
+      #
       def to_ary
         [latitude, longitude]
       end
 
+      ##
+      # Converts object to a hash. All keys will be symbolized.
+      #
+      # @return [Hash]
+      #
       def to_h
         to_hash
       end
 
+      ##
+      # Converts object to a hash. All keys will be symbolized.
+      #
+      # @return [Hash]
+      #
       def to_hash
         { latitude: latitude, longitude: longitude }
       end
 
+      # @private
       def to_s
         "(latitude: #{latitude.inspect}, longitude: #{longitude.inspect})"
       end
 
+      # @private
       def inspect
         "#<#{self.class.name} #{self}>"
       end

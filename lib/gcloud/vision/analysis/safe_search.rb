@@ -20,6 +20,23 @@ module Gcloud
     class Analysis
       ##
       # # SafeSearch
+      #
+      # A set of features pertaining to the image, computed by various computer
+      # vision methods over safe-search verticals (for example, adult, spoof,
+      # medical, violence).
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   safe_search = image.safe_search
+      #   safe_search.spoof? #=> false
+      #   safe_search.spoof #=> "VERY_UNLIKELY"
+      #
       class SafeSearch
         POSITIVE_RATINGS = %w(POSSIBLE LIKELY VERY_LIKELY)
 
@@ -28,7 +45,7 @@ module Gcloud
         attr_accessor :gapi
 
         ##
-        # @private Creates a new Likelihood instance.
+        # @private Creates a new SafeSearch instance.
         def initialize
           @gapi = {}
         end
@@ -43,6 +60,9 @@ module Gcloud
         ##
         # Adult likelihood. Returns `true` if {#adult} is `POSSIBLE`, `LIKELY`,
         # or `VERY_LIKELY`.
+        #
+        # @return [Boolean]
+        #
         def adult?
           POSITIVE_RATINGS.include? adult
         end
@@ -57,6 +77,9 @@ module Gcloud
         ##
         # Spoof likelihood. Returns `true` if {#spoof} is `POSSIBLE`, `LIKELY`,
         # or `VERY_LIKELY`.
+        #
+        # @return [Boolean]
+        #
         def spoof?
           POSITIVE_RATINGS.include? spoof
         end
@@ -71,6 +94,9 @@ module Gcloud
         ##
         # Medical likelihood. Returns `true` if {#medical} is `POSSIBLE`,
         # `LIKELY`, or `VERY_LIKELY`.
+        #
+        # @return [Boolean]
+        #
         def medical?
           POSITIVE_RATINGS.include? medical
         end
@@ -85,19 +111,33 @@ module Gcloud
         ##
         # Violence likelihood. Returns `true` if {#violence} is `POSSIBLE`,
         # `LIKELY`, or `VERY_LIKELY`.
+        #
+        # @return [Boolean]
+        #
         def violence?
           POSITIVE_RATINGS.include? violence
         end
 
+        ##
+        # Converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_h
           to_hash
         end
 
+        ##
+        # Converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_hash
           { adult: adult?, spoof: spoof?, medical: medical?,
             violence: violence? }
         end
 
+        # @private
         def to_s
           tmplt = "(adult?: %s, spoof?: %s, medical?: %s, " \
                     "violence?: %s)"
@@ -105,6 +145,7 @@ module Gcloud
                  violence?.inspect
         end
 
+        # @private
         def inspect
           "#<SafeSearch #{self}>"
         end

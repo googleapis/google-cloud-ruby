@@ -20,6 +20,23 @@ module Gcloud
     class Analysis
       ##
       # # Text
+      #
+      # The result of text, or optical character recognition (OCR), detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   image = vision.image "path/to/text.png"
+      #
+      #   text = image.text
+      #   text.locale #=> "en"
+      #   text.words.count #=> 28
+      #   text.text
+      #   #=> "Google Cloud Client Library for Ruby an idiomatic, intuitive... "
+      #
       class Text
         ##
         # @private The EntityAnnotation Google API Client object.
@@ -34,18 +51,29 @@ module Gcloud
 
         ##
         # The text detected in an image.
+        #
+        # @return [String] The entire text including newline characters.
+        #
         def text
           @gapi["description"]
         end
 
         ##
         # The language code detected for `text`.
+        #
+        # @return [String] The [ISO
+        #   639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+        #   language code.
+        #
         def locale
           @gapi["locale"]
         end
 
         ##
         # The bounds for the detected text in the image.
+        #
+        # @return [Array<Vertex>]
+        #
         def bounds
           return [] unless @gapi["boundingPoly"]
           @bounds ||= Array(@gapi["boundingPoly"]["vertices"]).map do |v|
@@ -55,27 +83,43 @@ module Gcloud
 
         ##
         # Each word in the detected text, with the bounds for each word.
+        #
+        # @return [Array<Word>]
+        #
         def words
           @words
         end
 
+        ##
+        # Deeply converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_h
           to_hash
         end
 
+        ##
+        # Deeply converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_hash
           { text: text, locale: locale, bounds: bounds.map(&:to_h),
             words: words.map(&:to_h) }
         end
 
+        # @private
         def to_s
           to_str
         end
 
+        # @private
         def to_str
           text
         end
 
+        # @private
         def inspect
           format "#<Text text: %s, locale: %s, bounds: %i, words: %i>",
                  text.inspect, locale.inspect, bounds.count, words.count
@@ -95,25 +139,51 @@ module Gcloud
 
         ##
         # # Word
+        #
+        # A word within a detected text (OCR). See {Text}.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   vision = gcloud.vision
+        #
+        #   image = vision.image "path/to/text.png"
+        #   text = image.text
+        #
+        #   words = text.words
+        #   words.count #=> 28
+        #
+        #   word = words.first
+        #   word.text #=> "Google"
+        #   word.bounds.count #=> 4
+        #   word.bounds.first #=> #<Vertex (x: 13, y: 8)>
+        #
         class Word
           ##
           # @private The EntityAnnotation Google API Client object.
           attr_accessor :gapi
 
           ##
-          # @private Creates a new Text instance.
+          # @private Creates a new Word instance.
           def initialize
             @gapi = {}
           end
 
           ##
           # The text of the word.
+          #
+          # @return [String]
+          #
           def text
             @gapi["description"]
           end
 
           ##
-          # The text of the word.
+          # The bounds of the word within the detected text.
+          #
+          # @return [Array<Vertex>]
+          #
           def bounds
             return [] unless @gapi["boundingPoly"]
             @bounds ||= Array(@gapi["boundingPoly"]["vertices"]).map do |v|
@@ -121,22 +191,35 @@ module Gcloud
             end
           end
 
+          ##
+          # Deeply converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_h
             to_hash
           end
 
+          ##
+          # Deeply converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_hash
             { text: text, bounds: bounds.map(&:to_h) }
           end
 
+          # @private
           def to_s
             to_str
           end
 
+          # @private
           def to_str
             text
           end
 
+          # @private
           def inspect
             format "#<Word text: %s, bounds: %i>", text.inspect, bounds.count
           end

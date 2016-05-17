@@ -24,15 +24,22 @@ module Gcloud
     ##
     # # Analysis
     #
-    # Reports the results of the Image request.
+    # The results of all requested image annotations.
+    #
+    # See {Project#annotate} and {Image}.
     #
     # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   vision = gcloud.vision
-    #   analysis = vision.detect image, faces: 1
-    #   analysis.face? #=> true
+    #   image = vision.image "path/to/face.jpg"
+    #
+    #   analysis = vision.annotate image, faces: 10, labels: 10
+    #   analysis.faces.count #=> 1
+    #   analysis.labels.count #=> 4
+    #   analysis.text #=> nil
+    #
     class Analysis
       ##
       # @private The AnnotateImageResponse Google API Client object.
@@ -44,14 +51,19 @@ module Gcloud
         @gapi = nil
       end
 
-      # The Analysis::Face results containing the results of face detection.
+      ##
+      # The results of face detection.
+      #
+      # @return [Array<Face>]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, faces: 1
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   analysis = vision.annotate image, faces: 10
       #   analysis.faces.count #=> 1
       #   face = analysis.faces.first
       #
@@ -61,43 +73,57 @@ module Gcloud
         end
       end
 
-      # The first Analysis::Face result, if there is one.
+      ##
+      # The first face result, if there is one.
+      #
+      # @return [Face]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, faces: 1
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   analysis = vision.annotate image, faces: 1
       #   face = analysis.face
       #
       def face
         faces.first
       end
 
-      # Whether there is at least one Analysis::Face result.
+      ##
+      # Whether there is at least one result from face detection.
+      #
+      # @return [Boolean]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, faces: 1
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   analysis = vision.annotate image, faces: 1
       #   analysis.face? #=> true
       #
       def face?
         faces.count > 0
       end
 
-      # The Analysis::Entity results containing the results of landmark
-      # detection.
+      ##
+      # The results of landmark detection.
+      #
+      # @return [Array<Entity>]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, landmarks: 1
+      #   image = vision.image "path/to/landmark.jpg"
+      #
+      #   analysis = vision.annotate image, landmarks: 1
       #   analysis.landmarks.count #=> 1
       #   landmark = analysis.landmarks.first
       #
@@ -107,43 +133,58 @@ module Gcloud
         end
       end
 
-      # The first Analysis::Entity result, if there is one.
+      ##
+      # The first landmark result, if there is one.
+      #
+      # @return [Entity]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, landmarks: 1
+      #   image = vision.image "path/to/landmark.jpg"
+      #
+      #   analysis = vision.annotate image, landmarks: 1
       #   landmark = analysis.landmark
       #
       def landmark
         landmarks.first
       end
 
-      # Whether there is at least one Analysis::Entity result for landmark
+      ##
+      # Whether there is at least one result from landmark detection.
       # detection.
+      #
+      # @return [Boolean]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, landmarks: 1
+      #   image = vision.image "path/to/landmark.jpg"
+      #
+      #   analysis = vision.annotate image, landmarks: 1
       #   analysis.landmark? #=> true
       #
       def landmark?
         landmarks.count > 0
       end
 
-      # The Analysis::Entity results containing the results of logo detection.
+      ##
+      # The results of logo detection.
+      #
+      # @return [Array<Entity>]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, logos: 1
+      #   image = vision.image "path/to/logo.jpg"
+      #
+      #   analysis = vision.annotate image, logos: 1
       #   analysis.logos.count #=> 1
       #   logo = analysis.logos.first
       #
@@ -153,43 +194,58 @@ module Gcloud
         end
       end
 
-      # The first Analysis::Entity result, if there is one.
+      ##
+      # The first logo result, if there is one.
+      #
+      # @return [Entity]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, logos: 1
+      #   image = vision.image "path/to/logo.jpg"
+      #
+      #   analysis = vision.annotate image, logos: 1
       #   logo = analysis.logo
       #
       def logo
         logos.first
       end
 
-      # Whether there is at least one Analysis::Entity result for logo
+      ##
+      # Whether there is at least one result from logo detection.
       # detection.
+      #
+      # @return [Boolean]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, logos: 1
+      #   image = vision.image "path/to/logo.jpg"
+      #
+      #   analysis = vision.annotate image, logos: 1
       #   analysis.logo? #=> true
       #
       def logo?
         logos.count > 0
       end
 
-      # The Analysis::Entity results containing the results of label detection.
+      ##
+      # The results of label detection.
+      #
+      # @return [Array<Entity>]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, labels: 1
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   analysis = vision.annotate image, labels: 1
       #   analysis.labels.count #=> 1
       #   label = analysis.labels.first
       #
@@ -199,72 +255,96 @@ module Gcloud
         end
       end
 
-      # The first Analysis::Entity result, if there is one.
+      ##
+      # The first label result, if there is one.
+      #
+      # @return [Entity]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, labels: 1
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   analysis = vision.annotate image, labels: 1
       #   label = analysis.label
       #
       def label
         labels.first
       end
 
-      # Whether there is at least one Analysis::Entity result for label
+      ##
+      # Whether there is at least one result from label detection.
       # detection.
+      #
+      # @return [Boolean]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, labels: 1
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   analysis = vision.annotate image, labels: 1
       #   analysis.label? #=> true
       #
       def label?
         labels.count > 0
       end
 
-      # The Analysis::Text result containing the results of text detection.
+      ##
+      # The results of text (OCR) detection.
+      #
+      # @return [Text]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, text: true
+      #   image = vision.image "path/to/text.png"
+      #
+      #   analysis = vision.annotate image, text: true
       #   text = analysis.text
       #
       def text
         @text ||= Text.from_gapi(@gapi["textAnnotations"])
       end
 
-      # Whether there is a Analysis::Text result for text detection.
+      ##
+      # Whether there is a result from text (OCR) detection.
+      #
+      # @return [Boolean]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, text: true
+      #   image = vision.image "path/to/text.png"
+      #
+      #   analysis = vision.annotate image, text: true
       #   analysis.text? #=> true
       #
       def text?
         !text.nil?
       end
 
-      # The Analysis::SafeSearch results containing the results of safe_search
-      # detection.
+      ##
+      # The results of safe_search detection.
+      #
+      # @return [SafeSearch]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, safe_search: true
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   analysis = vision.annotate image, safe_search: true
       #   safe_search = analysis.safe_search
       #
       def safe_search
@@ -272,30 +352,39 @@ module Gcloud
         @safe_search ||= SafeSearch.from_gapi(@gapi["safeSearchAnnotation"])
       end
 
-      # Whether there is a Analysis::SafeSearch result for safe_search
+      ##
+      # Whether there is a result for safe_search detection.
       # detection.
+      #
+      # @return [Boolean]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, safe_search: true
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   analysis = vision.annotate image, safe_search: true
       #   analysis.safe_search? #=> true
       #
       def safe_search?
         !safe_search.nil?
       end
 
-      # The Analysis::Properties results containing the results of properties
-      # detection.
+      ##
+      # The results of properties detection.
+      #
+      # @return [Properties]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, properties: true
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   analysis = vision.annotate image, properties: true
       #   properties = analysis.properties
       #
       def properties
@@ -303,24 +392,39 @@ module Gcloud
         @properties ||= Properties.from_gapi(@gapi["imagePropertiesAnnotation"])
       end
 
-      # Whether there is a Analysis::Properties result for properties detection.
+      ##
+      # Whether there is a result for properties detection.
+      #
+      # @return [Boolean]
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   analysis = vision.detect image, properties: true
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   analysis = vision.annotate image, properties: true
       #   analysis.properties? #=> true
       #
       def properties?
         !properties.nil?
       end
 
+      ##
+      # Deeply converts object to a hash. All keys will be symbolized.
+      #
+      # @return [Hash]
+      #
       def to_h
         to_hash
       end
 
+      ##
+      # Deeply converts object to a hash. All keys will be symbolized.
+      #
+      # @return [Hash]
+      #
       def to_hash
         { faces: faces.map(&:to_h), landmarks: landmarks.map(&:to_h),
           logos: logos.map(&:to_h), labels: labels.map(&:to_h),
@@ -328,6 +432,7 @@ module Gcloud
           properties: properties.to_h }
       end
 
+      # @private
       def to_s
         tmplt = "(faces: %i, landmarks: %i, logos: %i, labels: %i, text: %s," \
                 " safe_search: %s, properties: %s)"
@@ -335,6 +440,7 @@ module Gcloud
                text?, safe_search?, properties?
       end
 
+      # @private
       def inspect
         "#<#{self.class.name} #{self}>"
       end

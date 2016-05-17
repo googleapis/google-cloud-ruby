@@ -18,7 +18,7 @@ require "gcloud/errors"
 module Gcloud
   module Vision
     ##
-    # # Storage Error
+    # # Vision Error
     #
     # Base Vision exception class.
     class Error < Gcloud::Error

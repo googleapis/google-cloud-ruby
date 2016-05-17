@@ -18,34 +18,81 @@ module Gcloud
     class Analysis
       ##
       # # Vertex
+      #
+      # A vertex in a set of bounding polygon vertices.
+      #
+      # See {Face::Bounds} and {Text}.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   image = vision.image "path/to/text.png"
+      #   text = image.text
+      #
+      #   text.bounds.count #=> 4
+      #   vertex = text.bounds.first
+      #   vertex.x #=> 13
+      #   vertex.y #=> 8
+      #
       class Vertex
+        # @!attribute x
+        #   @return [Integer] The X coordinate.
+        # @!attribute y
+        #   @return [Integer] The Y coordinate.
         attr_accessor :x, :y
 
+        ##
+        # @private Creates a new Vertex instance.
         def initialize x, y
           @x = x
           @y = y
         end
 
+        ##
+        # Returns the object's property values as an array.
+        #
+        # @return [Array]
+        #
         def to_a
           to_ary
         end
 
+        ##
+        # Returns the object's property values as an array.
+        #
+        # @return [Array]
+        #
         def to_ary
           [x, y]
         end
 
+        ##
+        # Converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_h
           to_hash
         end
 
+        ##
+        # Converts object to a hash. All keys will be symbolized.
+        #
+        # @return [Hash]
+        #
         def to_hash
           { x: x, y: y }
         end
 
+        # @private
         def to_s
           "(x: #{x.inspect}, y: #{y.inspect})"
         end
 
+        # @private
         def inspect
           "#<Vertex #{self}>"
         end

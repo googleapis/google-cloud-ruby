@@ -409,7 +409,11 @@ module Gcloud
   #
   #   gcloud = Gcloud.new
   #   vision = gcloud.vision
-  #   # ...
+  #
+  #   image = vision.image "path/to/landmark.jpg"
+  #
+  #   landmark = image.landmark
+  #   landmark.description #=> "Mount Rushmore"
   #
   # @example The default scope can be overridden with the `scope` option:
   #   require "gcloud"

@@ -24,13 +24,38 @@ module Gcloud
     #
     # Represents an image for the Vision service.
     #
+    # See {Project#image}.
+    #
+    # The Cloud Vision API supports a variety of image file formats, including
+    # JPEG, PNG8, PNG24, Animated GIF (first frame only), and RAW. See [Best
+    # Practices - Image Types](https://cloud.google.com/vision/docs/image-best-practices#image_types)
+    # for the list of formats. Be aware that Cloud Vision sets upper limits on
+    # file size as well as the total combined size of all images in a request.
+    # Reducing your file size can significantly improve throughput; however, be
+    # careful not to reduce image quality in the process. See [Best Practices -
+    # Image Sizing](https://cloud.google.com/vision/docs/image-best-practices#image_sizing)
+    # for current file size limits.
+    #
+    # @see https://cloud.google.com/vision/docs/image-best-practices Best
+    #   Practices
+    #
     # @example
     #   require "gcloud"
     #
     #   gcloud = Gcloud.new
     #   vision = gcloud.vision
-    #   image = vision.image filepath
+    #
+    #   image = vision.image "path/to/text.png"
+    #
+    #   image.context.languages = ["en"]
+    #
+    #   text = image.text
+    #   text.words.count #=> 28
+    #
     class Image
+      # Returns the image context for the image, which accepts metadata values
+      # such as location and language hints.
+      # @return [Context] The context instance for the image.
       attr_reader :context
 
       ##
@@ -42,7 +67,8 @@ module Gcloud
         @context = Context.new
       end
 
-      # Determines if the Image has content.
+      ##
+      # @private Whether the Image has content.
       #
       # @see {#url?}
       #
@@ -50,7 +76,8 @@ module Gcloud
         !@io.nil?
       end
 
-      # Determines if the Image is a URL.
+      ##
+      # @private Whether the Image is a URL.
       #
       # @see {#content?}
       #
@@ -59,80 +86,268 @@ module Gcloud
       end
 
       ##
-      # The contents of the image, encoded via Base64.
+      # @private The contents of the image, encoded via Base64.
+      #
+      # @return [String]
+      #
       def content
         @content ||= Base64.encode64 @io.read
       end
 
       ##
-      # The URL of the image
+      # @private The URL of the image.
+      #
+      # @return [String]
+      #
       def url
         @url
       end
 
+      ##
+      # Performs the `FACE_DETECTION` feature on the image.
+      #
+      # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+      #
+      # @param [Integer] count The maximum number of results.
+      #
+      # @return [Array<Analysis::Face>] The results of face detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   faces = image.faces
+      #
+      #   face = faces.first
+      #   face.bounds.face.count #=> 4
+      #   face.bounds.face.first #=> #<Vertex (x: 153, y: 34)>
+      #
       def faces count = 10
         ensure_vision!
         analysis = @vision.mark self, faces: count
         analysis.faces
       end
 
+      ##
+      # Performs the `FACE_DETECTION` feature on the image and returns only the
+      # first result.
+      #
+      # @return [Analysis::Face] The first result of face detection.
+      #
       def face
         faces(1).first
       end
 
+      ##
+      # Performs the `LANDMARK_DETECTION` feature on the image.
+      #
+      # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+      #
+      # @param [Integer] count The maximum number of results.
+      #
+      # @return [Array<Analysis::Entity>] The results of landmark detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/landmark.jpg"
+      #
+      #   landmarks = image.landmarks
+      #
+      #   landmark = landmarks.first
+      #   landmark.score #=> 0.91912264
+      #   landmark.description #=> "Mount Rushmore"
+      #   landmark.mid #=> "/m/019dvv"
+      #
       def landmarks count = 10
         ensure_vision!
         analysis = @vision.mark self, landmarks: count
         analysis.landmarks
       end
 
+      ##
+      # Performs the `LANDMARK_DETECTION` feature on the image and returns only
+      # the first result.
+      #
+      # @return [Analysis::Entity] The first result of landmark detection.
+      #
       def landmark
         landmarks(1).first
       end
 
+      ##
+      # Performs the `LOGO_DETECTION` feature on the image.
+      #
+      # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+      #
+      # @param [Integer] count The maximum number of results.
+      #
+      # @return [Array<Analysis::Entity>] The results of logo detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/logo.jpg"
+      #
+      #   logos = image.logos
+      #
+      #   logo = logos.first
+      #   logo.score #=> 0.70057315
+      #   logo.description #=> "Google"
+      #   logo.mid #=> "/m/0b34hf"
+      #
       def logos count = 10
         ensure_vision!
         analysis = @vision.mark self, logos: count
         analysis.logos
       end
 
+      ##
+      # Performs the `LOGO_DETECTION` feature on the image and returns only the
+      # first result.
+      #
+      # @return [Analysis::Entity] The first result of logo detection.
+      #
       def logo
         logos(1).first
       end
 
+      ##
+      # Performs the `LABEL_DETECTION` feature on the image.
+      #
+      # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+      #
+      # @param [Integer] count The maximum number of results.
+      #
+      # @return [Array<Analysis::Entity>] The results of label detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   labels = image.labels
+      #
+      #   labels.count #=> 4
+      #   label = labels.first
+      #   label.score #=> 0.9481349
+      #   label.description #=> "person"
+      #   label.mid #=> "/m/01g317"
+      #
       def labels count = 10
         ensure_vision!
         analysis = @vision.mark self, labels: count
         analysis.labels
       end
 
+      ##
+      # Performs the `LABEL_DETECTION` feature on the image and returns only the
+      # first result.
+      #
+      # @return [Analysis::Entity] The first result of label detection.
+      #
       def label
         labels(1).first
       end
 
+      ##
+      # Performs the `TEXT_DETECTION` (OCR) feature on the image.
+      #
+      # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+      #
+      # @return [Analysis::Text] The results of text (OCR) detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/text.png"
+      #
+      #   text = image.text
+      #
+      #   text = image.text
+      #   text.locale #=> "en"
+      #   text.words.count #=> 28
+      #   text.text
+      #   #=> "Google Cloud Client Library for Ruby an idiomatic, intuitive... "
+      #
       def text
         ensure_vision!
         analysis = @vision.mark self, text: true
         analysis.text
       end
 
+      ##
+      # Performs the `SAFE_SEARCH_DETECTION` feature on the image.
+      #
+      # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+      #
+      # @return [Analysis::SafeSearch] The results of safe search detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/face.jpg"
+      #
+      #   safe_search = image.safe_search
+      #
+      #   safe_search.spoof? #=> false
+      #   safe_search.spoof #=> "VERY_UNLIKELY"
+      #
       def safe_search
         ensure_vision!
         analysis = @vision.mark self, safe_search: true
         analysis.safe_search
       end
 
+      ##
+      # Performs the `IMAGE_PROPERTIES` feature on the image.
+      #
+      # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+      #
+      # @return [Analysis::Properties] The results of image properties
+      #   detection.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #   image = vision.image "path/to/logo.jpg"
+      #
+      #   properties = image.properties
+      #
+      #   properties.colors.count #=> 10
+      #   color = properties.colors.first
+      #   color.red #=> 247.0
+      #   color.green #=> 236.0
+      #   color.blue #=> 20.0
+      #
       def properties
         ensure_vision!
         analysis = @vision.mark self, properties: true
         analysis.properties
       end
 
+      # @private
       def to_s
         return "(io)" if content?
         "(url: #{url})"
       end
 
+      # @private
       def inspect
         "#<#{self.class.name} #{self}>"
       end
@@ -210,31 +425,49 @@ module Gcloud
       ##
       # # Image::Context
       #
-      # Represents an image context for the Vision service.
+      # Represents an image context.
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   vision = gcloud.vision
-      #   image = vision.image filepath
+      #
+      #   image = vision.image "path/to/landmark.jpg"
       #   image.context.area.min = { longitude: -122.0862462,
       #                              latitude: 37.4220041 }
       #   image.context.area.max = { longitude: -122.0762462,
       #                              latitude: 37.4320041 }
+      #
       class Context
+        # Returns a lat/long rectangle that specifies the location of the image.
+        # @return [Area] The lat/long pairs for `latLongRect`.
         attr_reader :area
+
+        # @!attribute languages
+        #   @return [Array<String>] The [ISO
+        #     639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+        #     language codes for `languageHints`.
         attr_accessor :languages
 
+        ##
+        # @private Creates a new Context instance.
         def initialize
           @area = Area.new
           @languages = []
         end
 
+        ##
+        # Returns `true` if either `min` or `max` are not populated.
+        #
+        # @return [Boolean]
+        #
         def empty?
           area.empty? && languages.empty?
         end
 
+        ##
+        # @private
         def to_gapi
           return nil if empty?
           gapi = {}
@@ -246,27 +479,46 @@ module Gcloud
         ##
         # # Image::Context::Area
         #
-        # Represents an image context for the Vision service.
+        # A Lat/long rectangle that specifies the location of the image.
         #
         # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
         #   vision = gcloud.vision
-        #   image = vision.image filepath
+        #
+        #   image = vision.image "path/to/landmark.jpg"
+        #
         #   image.context.area.min = { longitude: -122.0862462,
         #                              latitude: 37.4220041 }
         #   image.context.area.max = { longitude: -122.0762462,
         #                              latitude: 37.4320041 }
+        #
+        #   entity = image.landmark
+        #
         class Area
+          # Returns the min lat/long pair.
+          # @return [Location]
           attr_reader :min
+
+          # Returns the max lat/long pair.
+          # @return [Location]
           attr_reader :max
 
+          ##
+          # @private Creates a new Area instance.
           def initialize
             @min = Location.new nil, nil
             @max = Location.new nil, nil
           end
 
+          ##
+          # Sets the min lat/long pair for the area.
+          #
+          # @param [Hash(Symbol => Float)] location A Hash containing the keys
+          #   `:latitude` and `:longitude` with corresponding values conforming
+          #   to the [WGS84
+          #   standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
           def min= location
             if location.respond_to?(:to_hash) &&
                location.to_hash.keys.sort == [:latitude, :longitude]
@@ -276,6 +528,13 @@ module Gcloud
             fail ArgumentError, "Must pass a proper location value."
           end
 
+          ##
+          # Sets the max lat/long pair for the area.
+          #
+          # @param [Hash(Symbol => Float)] location A Hash containing the keys
+          #   `:latitude` and `:longitude` with corresponding values conforming
+          #   to the [WGS84
+          #   standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
           def max= location
             if location.respond_to?(:to_hash) &&
                location.to_hash.keys.sort == [:latitude, :longitude]
@@ -285,15 +544,30 @@ module Gcloud
             fail ArgumentError, "Must pass a proper location value."
           end
 
+          ##
+          # Returns `true` if either `min` or `max` are not populated.
+          #
+          # @return [Boolean]
+          #
           def empty?
             min.to_hash.values.reject(&:nil?).empty? ||
               max.to_hash.values.reject(&:nil?).empty?
           end
 
+          ##
+          # Deeply converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_h
             to_hash
           end
 
+          ##
+          # Deeply converts object to a hash. All keys will be symbolized.
+          #
+          # @return [Hash]
+          #
           def to_hash
             { minLatLng: min.to_hash, maxLatLng: max.to_hash }
           end

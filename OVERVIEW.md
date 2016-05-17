@@ -237,3 +237,21 @@ translation.to #=> "la"
 translation.text #=> "Salve mundi!"
 ```
 
+# Vision
+
+[Google Cloud Vision](https://cloud.google.com/vision/) ([docs](https://cloud.google.com/vision/docs)) allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content.
+
+See the {Gcloud::Vision gcloud-ruby Cloud Vision API documentation} to learn how to connect to Google Cloud Vision using this library.
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new
+vision = gcloud.vision
+
+image = vision.image "path/to/landmark.jpg"
+
+landmark = image.landmark
+landmark.description #=> "Mount Rushmore"
+```
+
