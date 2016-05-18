@@ -81,14 +81,15 @@ module Gcloud
   # The Cloud Vision API supports a variety of image file formats, including
   # JPEG, PNG8, PNG24, Animated GIF (first frame only), and RAW. See [Best
   # Practices - Image Types](https://cloud.google.com/vision/docs/image-best-practices#image_types)
-  # for the list of formats. Be aware that Cloud Vision sets upper limits on
-  # file size as well as on the total combined size of all images in a request.
-  # Reducing your file size can significantly improve throughput; however, be
-  # careful not to reduce image quality in the process. See [Best Practices -
-  # Image Sizing](https://cloud.google.com/vision/docs/image-best-practices#image_sizing)
+  # for the complete list of formats. Be aware that Cloud Vision sets upper
+  # limits on file size as well as on the total combined size of all images in a
+  # request. Reducing your file size can significantly improve throughput;
+  # however, be careful not to reduce image quality in the process. See [Best
+  # Practices - Image Sizing](https://cloud.google.com/vision/docs/image-best-practices#image_sizing)
   # for current file size limits.
   #
-  # Use {Vision::Project#image} to create images for the Cloud Vision service:
+  # Use {Vision::Project#image} to create images for the Cloud Vision service.
+  # You can provide a file path:
   #
   # ```ruby
   # require "gcloud"
@@ -99,7 +100,7 @@ module Gcloud
   # image = vision.image "path/to/landmark.jpg"
   # ```
   #
-  # Once you have an image, you can set metadata on its context:
+  # Or, you can initialize the image with a Google Cloud Storage URI:
   #
   # ```ruby
   # require "gcloud"
@@ -107,20 +108,16 @@ module Gcloud
   # gcloud = Gcloud.new
   # vision = gcloud.vision
   #
-  # image = vision.image "path/to/landmark.jpg"
-  #
-  # image.context.area.min = { longitude: -122.0862462,
-  #                            latitude: 37.4220041 }
-  # image.context.area.max = { longitude: -122.0762462,
-  #                            latitude: 37.4320041 }
-  #
+  # image = vision.image "gs://bucket-name/path_to_image_object"
   # ```
+  #
+  # Creating an Image instance does not perform an API request.
   #
   # ## Annotating images
   #
-  # You can use the instance methods on {Vision::Image} to invoke Cloud Vision's
-  # detection features individually. Each method call makes an API request. (If
-  # you want to run multiple features in a single request, see the examples for
+  # The instance methods on {Vision::Image} invoke Cloud Vision's detection
+  # features individually. Each method call makes an API request. (If you want
+  # to run multiple features in a single request, see the examples for
   # {Vision::Project#annotate}, below.)
   #
   # ```ruby
@@ -140,9 +137,8 @@ module Gcloud
   # #=> #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
   # ```
   #
-  # You can also use the {Vision::Project#annotate} method to perform image
-  # detection. This method allows you to configure multiple detection features
-  # in a single request.
+  # To run multiple features on an image in a single request, pass the image (or
+  # a string file path or Storage URI) to {Vision::Project#annotate}:
   #
   # ```ruby
   # require "gcloud"
@@ -168,9 +164,17 @@ module Gcloud
   # face_image = vision.image "path/to/face.jpg"
   # landmark_image = vision.image "path/to/landmark.jpg"
   #
-  # annotations = vision.annotate face_image, landmark_image, labels: true
+  # annotations = vision.annotate face_image,
+  #                               landmark_image,
+  #                               faces: true,
+  #                               landmarks: true,
+  #                               labels: true
   #
+  # annotations[0].faces.count #=> 1
+  # annotations[0].landmarks.count #=> 0
   # annotations[0].labels.count #=> 4
+  # annotations[1].faces.count #=> 1
+  # annotations[1].landmarks.count #=> 1
   # annotations[1].labels.count #=> 6
   # ```
   #
@@ -201,11 +205,25 @@ module Gcloud
   # ```
   #
   # The maximum number of results returned when performing face, landmark, logo,
-  # and label detection are configured with {Vision.default_max_faces},
-  # {Vision.default_max_landmarks}, {Vision.default_max_logos}, and
-  # {Vision.default_max_labels}, respectfully. To change the default behavior
-  # you can update the configuration, or provide a different value in the method
-  # call.
+  # and label detection are defined by {Gcloud::Vision.default_max_faces},
+  # {Gcloud::Vision.default_max_landmarks}, {Gcloud::Vision.default_max_logos},
+  # and {Gcloud::Vision.default_max_labels}, respectively. To change the global
+  # defaults, you can update the configuration:
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # vision = gcloud.vision
+  #
+  # Gcloud::Vision.default_max_labels = 1
+  #
+  # annotation = vision.annotate "path/to/face.jpg", labels: true
+  # annotation.labels.count #=> 1
+  # ```
+  #
+  # Or, to override a default for a single method call, simply pass an
+  # integer instead of a flag:
   #
   # ```ruby
   # require "gcloud"
