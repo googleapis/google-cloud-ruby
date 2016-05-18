@@ -13,16 +13,16 @@
 # limitations under the License.
 
 
-require "gcloud/vision/analysis/face"
-require "gcloud/vision/analysis/entity"
-require "gcloud/vision/analysis/text"
-require "gcloud/vision/analysis/safe_search"
-require "gcloud/vision/analysis/properties"
+require "gcloud/vision/annotation/face"
+require "gcloud/vision/annotation/entity"
+require "gcloud/vision/annotation/text"
+require "gcloud/vision/annotation/safe_search"
+require "gcloud/vision/annotation/properties"
 
 module Gcloud
   module Vision
     ##
-    # # Analysis
+    # # Annotation
     #
     # The results of all requested image annotations.
     #
@@ -35,18 +35,18 @@ module Gcloud
     #   vision = gcloud.vision
     #   image = vision.image "path/to/face.jpg"
     #
-    #   analysis = vision.annotate image, faces: 10, labels: 10
-    #   analysis.faces.count #=> 1
-    #   analysis.labels.count #=> 4
-    #   analysis.text #=> nil
+    #   annotation = vision.annotate image, faces: true, labels: true
+    #   annotation.faces.count #=> 1
+    #   annotation.labels.count #=> 4
+    #   annotation.text #=> nil
     #
-    class Analysis
+    class Annotation
       ##
       # @private The AnnotateImageResponse Google API Client object.
       attr_accessor :gapi
 
       ##
-      # @private Creates a new Analysis instance.
+      # @private Creates a new Annotation instance.
       def initialize
         @gapi = nil
       end
@@ -63,9 +63,9 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/face.jpg"
       #
-      #   analysis = vision.annotate image, faces: 10
-      #   analysis.faces.count #=> 1
-      #   face = analysis.faces.first
+      #   annotation = vision.annotate image, faces: true
+      #   annotation.faces.count #=> 1
+      #   face = annotation.faces.first
       #
       def faces
         @faces ||= Array(@gapi["faceAnnotations"]).map do |fa|
@@ -85,8 +85,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/face.jpg"
       #
-      #   analysis = vision.annotate image, faces: 1
-      #   face = analysis.face
+      #   annotation = vision.annotate image, faces: 1
+      #   face = annotation.face
       #
       def face
         faces.first
@@ -104,8 +104,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/face.jpg"
       #
-      #   analysis = vision.annotate image, faces: 1
-      #   analysis.face? #=> true
+      #   annotation = vision.annotate image, faces: 1
+      #   annotation.face? #=> true
       #
       def face?
         faces.count > 0
@@ -123,9 +123,9 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/landmark.jpg"
       #
-      #   analysis = vision.annotate image, landmarks: 1
-      #   analysis.landmarks.count #=> 1
-      #   landmark = analysis.landmarks.first
+      #   annotation = vision.annotate image, landmarks: 1
+      #   annotation.landmarks.count #=> 1
+      #   landmark = annotation.landmarks.first
       #
       def landmarks
         @landmarks ||= Array(@gapi["landmarkAnnotations"]).map do |lm|
@@ -145,8 +145,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/landmark.jpg"
       #
-      #   analysis = vision.annotate image, landmarks: 1
-      #   landmark = analysis.landmark
+      #   annotation = vision.annotate image, landmarks: 1
+      #   landmark = annotation.landmark
       #
       def landmark
         landmarks.first
@@ -165,8 +165,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/landmark.jpg"
       #
-      #   analysis = vision.annotate image, landmarks: 1
-      #   analysis.landmark? #=> true
+      #   annotation = vision.annotate image, landmarks: 1
+      #   annotation.landmark? #=> true
       #
       def landmark?
         landmarks.count > 0
@@ -184,9 +184,9 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/logo.jpg"
       #
-      #   analysis = vision.annotate image, logos: 1
-      #   analysis.logos.count #=> 1
-      #   logo = analysis.logos.first
+      #   annotation = vision.annotate image, logos: 1
+      #   annotation.logos.count #=> 1
+      #   logo = annotation.logos.first
       #
       def logos
         @logos ||= Array(@gapi["logoAnnotations"]).map do |lg|
@@ -206,8 +206,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/logo.jpg"
       #
-      #   analysis = vision.annotate image, logos: 1
-      #   logo = analysis.logo
+      #   annotation = vision.annotate image, logos: 1
+      #   logo = annotation.logo
       #
       def logo
         logos.first
@@ -226,8 +226,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/logo.jpg"
       #
-      #   analysis = vision.annotate image, logos: 1
-      #   analysis.logo? #=> true
+      #   annotation = vision.annotate image, logos: 1
+      #   annotation.logo? #=> true
       #
       def logo?
         logos.count > 0
@@ -245,9 +245,9 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/face.jpg"
       #
-      #   analysis = vision.annotate image, labels: 1
-      #   analysis.labels.count #=> 1
-      #   label = analysis.labels.first
+      #   annotation = vision.annotate image, labels: 1
+      #   annotation.labels.count #=> 1
+      #   label = annotation.labels.first
       #
       def labels
         @labels ||= Array(@gapi["labelAnnotations"]).map do |lb|
@@ -267,8 +267,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/face.jpg"
       #
-      #   analysis = vision.annotate image, labels: 1
-      #   label = analysis.label
+      #   annotation = vision.annotate image, labels: 1
+      #   label = annotation.label
       #
       def label
         labels.first
@@ -287,8 +287,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/face.jpg"
       #
-      #   analysis = vision.annotate image, labels: 1
-      #   analysis.label? #=> true
+      #   annotation = vision.annotate image, labels: 1
+      #   annotation.label? #=> true
       #
       def label?
         labels.count > 0
@@ -306,8 +306,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/text.png"
       #
-      #   analysis = vision.annotate image, text: true
-      #   text = analysis.text
+      #   annotation = vision.annotate image, text: true
+      #   text = annotation.text
       #
       def text
         @text ||= Text.from_gapi(@gapi["textAnnotations"])
@@ -325,8 +325,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/text.png"
       #
-      #   analysis = vision.annotate image, text: true
-      #   analysis.text? #=> true
+      #   annotation = vision.annotate image, text: true
+      #   annotation.text? #=> true
       #
       def text?
         !text.nil?
@@ -344,8 +344,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/face.jpg"
       #
-      #   analysis = vision.annotate image, safe_search: true
-      #   safe_search = analysis.safe_search
+      #   annotation = vision.annotate image, safe_search: true
+      #   safe_search = annotation.safe_search
       #
       def safe_search
         return nil unless @gapi["safeSearchAnnotation"]
@@ -365,8 +365,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/face.jpg"
       #
-      #   analysis = vision.annotate image, safe_search: true
-      #   analysis.safe_search? #=> true
+      #   annotation = vision.annotate image, safe_search: true
+      #   annotation.safe_search? #=> true
       #
       def safe_search?
         !safe_search.nil?
@@ -384,8 +384,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/face.jpg"
       #
-      #   analysis = vision.annotate image, properties: true
-      #   properties = analysis.properties
+      #   annotation = vision.annotate image, properties: true
+      #   properties = annotation.properties
       #
       def properties
         return nil unless @gapi["imagePropertiesAnnotation"]
@@ -404,8 +404,8 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/face.jpg"
       #
-      #   analysis = vision.annotate image, properties: true
-      #   analysis.properties? #=> true
+      #   annotation = vision.annotate image, properties: true
+      #   annotation.properties? #=> true
       #
       def properties?
         !properties.nil?
@@ -446,7 +446,7 @@ module Gcloud
       end
 
       ##
-      # @private New Analysis from a Google API Client object.
+      # @private New Annotation from a Google API Client object.
       def self.from_gapi gapi
         new.tap { |a| a.instance_variable_set :@gapi, gapi }
       end

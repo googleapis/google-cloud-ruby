@@ -14,10 +14,10 @@
 
 require "helper"
 
-describe Gcloud::Vision::Analysis::Properties, :mock_vision do
+describe Gcloud::Vision::Annotation::Properties, :mock_vision do
   # Run through JSON to turn all keys to strings...
   let(:gapi) { JSON.parse(properties_annotation_response.to_json) }
-  let(:properties) { Gcloud::Vision::Analysis::Properties.from_gapi gapi }
+  let(:properties) { Gcloud::Vision::Annotation::Properties.from_gapi gapi }
 
   it "knows the given attributes" do
     properties.wont_be :nil?

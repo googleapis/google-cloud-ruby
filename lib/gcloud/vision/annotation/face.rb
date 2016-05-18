@@ -13,17 +13,17 @@
 # limitations under the License.
 
 
-require "gcloud/vision/analysis/vertex"
+require "gcloud/vision/annotation/vertex"
 
 module Gcloud
   module Vision
-    class Analysis
+    class Annotation
       ##
       # # Face
       #
       # The results of face detection.
       #
-      # See {Analysis#faces} and {Analysis#face}.
+      # See {Annotation#faces} and {Annotation#face}.
       #
       # @example
       #   require "gcloud"
@@ -125,7 +125,7 @@ module Gcloud
         end
 
         ##
-        # @private New Analysis::Face from a Google API Client object.
+        # @private New Annotation::Face from a Google API Client object.
         def self.from_gapi gapi
           new.tap { |f| f.instance_variable_set :@gapi, gapi }
         end
@@ -243,7 +243,8 @@ module Gcloud
           end
 
           ##
-          # @private New Analysis::Face::Angles from a Google API Client object.
+          # @private New Annotation::Face::Angles from a Google API Client
+          # object.
           def self.from_gapi gapi
             new.tap { |f| f.instance_variable_set :@gapi, gapi }
           end
@@ -297,7 +298,7 @@ module Gcloud
           ##
           # This bounding polygon is tighter than the {#head}, and encloses only
           # the skin part of the face. Typically, it is used to eliminate the
-          # face from any image analysis that detects the "amount of skin"
+          # face from any image annotation that detects the "amount of skin"
           # visible in an image. It is not based on the landmarks, only on the
           # initial face detection.
           def face
@@ -354,7 +355,8 @@ module Gcloud
           end
 
           ##
-          # @private New Analysis::Face::Angles from a Google API Client object.
+          # @private New Annotation::Face::Angles from a Google API Client
+          # object.
           def self.from_gapi gapi
             new.tap { |f| f.instance_variable_set :@gapi, gapi }
           end
@@ -571,7 +573,7 @@ module Gcloud
           end
 
           ##
-          # @private New Analysis::Face::Features from a Google API Client
+          # @private New Annotation::Face::Features from a Google API Client
           # object.
           def self.from_gapi gapi
             new.tap { |f| f.instance_variable_set :@gapi, gapi }
@@ -713,7 +715,7 @@ module Gcloud
             end
 
             ##
-            # @private New Analysis::Face::Features from a Google API Client
+            # @private New Annotation::Face::Features from a Google API Client
             # object.
             def self.from_gapi gapi
               new.tap { |f| f.instance_variable_set :@gapi, gapi }
@@ -1737,7 +1739,7 @@ module Gcloud
           end
 
           ##
-          # @private New Analysis::Face::Likelihood from a Google API Client
+          # @private New Annotation::Face::Likelihood from a Google API Client
           # object.
           def self.from_gapi gapi
             new.tap { |f| f.instance_variable_set :@gapi, gapi }

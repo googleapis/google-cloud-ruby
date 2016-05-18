@@ -152,9 +152,9 @@ module Gcloud
   #
   # image = vision.image "path/to/face.jpg"
   #
-  # analysis = vision.annotate image, faces: 10, labels: 10
-  # analysis.faces.count #=> 1
-  # analysis.labels.count #=> 4
+  # annotation = vision.annotate image, faces: true, labels: true
+  # annotation.faces.count #=> 1
+  # annotation.labels.count #=> 4
   # ```
   #
   # You can also perform detection tasks on multiple images in a single request:
@@ -168,10 +168,10 @@ module Gcloud
   # face_image = vision.image "path/to/face.jpg"
   # landmark_image = vision.image "path/to/landmark.jpg"
   #
-  # analyses = vision.annotate face_image, landmark_image, labels: 10
+  # annotations = vision.annotate face_image, landmark_image, labels: true
   #
-  # analyses[0].labels.count #=> 4
-  # analyses[1].labels.count #=> 6
+  # annotations[0].labels.count #=> 4
+  # annotations[1].labels.count #=> 6
   # ```
   #
   # It is even possible to configure different features for multiple images in
@@ -188,18 +188,283 @@ module Gcloud
   # landmark_image = vision.image "path/to/landmark.jpg"
   # text_image = vision.image "path/to/text.png"
   #
-  # analyses = vision.annotate do |annotate|
-  #    annotate.annotate face_image, faces: 10, labels: 10
-  #    annotate.annotate landmark_image, landmarks: 10
+  # annotations = vision.annotate do |annotate|
+  #    annotate.annotate face_image, faces: true, labels: true
+  #    annotate.annotate landmark_image, landmarks: true
   #    annotate.annotate text_image, text: true
   # end
   #
-  # analyses[0].faces.count #=> 1
-  # analyses[0].labels.count #=> 4
-  # analyses[1].landmarks.count #=> 1
-  # analyses[2].text.words.count #=> 28
+  # annotations[0].faces.count #=> 1
+  # annotations[0].labels.count #=> 4
+  # annotations[1].landmarks.count #=> 1
+  # annotations[2].text.words.count #=> 28
+  # ```
+  #
+  # The maximum number of results returned when performing face, landmark, logo,
+  # and label detection are configured with {Vision.default_max_faces},
+  # {Vision.default_max_landmarks}, {Vision.default_max_logos}, and
+  # {Vision.default_max_labels}, respectfully. To change the default behavior
+  # you can update the configuration, or provide a different value in the method
+  # call.
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # vision = gcloud.vision
+  #
+  # image = vision.image "path/to/face.jpg"
+  #
+  # # Return just one face.
+  # annotation = vision.annotate image, faces: 1
+  # # Return up to 100 faces.
+  # annotation = vision.annotate image, faces: 100
   # ```
   #
   module Vision
+    class << self
+      ##
+      # The default max results to return for facial detection requests. This is
+      # used on {Project#annotate} as well as {Image#faces}.
+      #
+      # The default value is 10.
+      #
+      # @example Using the default setting on {Project#annotate}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   Gcloud::Vision.default_max_faces #=> 10
+      #
+      #   annotation = vision.annotate "path/to/faces.jpg", faces: true
+      #   # This is the same as calling
+      #   # annotation = vision.annotate "path/to/faces.jpg", faces: 10
+      #
+      # @example Updating the default setting on {Project#annotate}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   # Set a new default
+      #   Gcloud::Vision.default_max_faces = 25
+      #
+      #   annotation = vision.annotate "path/to/faces.jpg", faces: true
+      #   # This is the same as calling
+      #   # annotation = vision.annotate "path/to/faces.jpg", faces: 25
+      #
+      #
+      # @example Using the default setting on {Image#faces}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   Gcloud::Vision.default_max_faces #=> 10
+      #
+      #   faces = vision.image("path/to/faces.jpg").faces
+      #   # This is the same as calling
+      #   # faces = vision.image("path/to/faces.jpg").faces 10
+      #
+      # @example Updating the default setting on {Image#faces}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   # Set a new default
+      #   Gcloud::Vision.default_max_faces = 25
+      #
+      #   faces = vision.image("path/to/faces.jpg").faces
+      #   # This is the same as calling
+      #   # faces = vision.image("path/to/faces.jpg").faces 25
+      #
+      attr_accessor :default_max_faces
+
+      ##
+      # The default max results to return for landmark detection requests. This
+      # is used on {Project#annotate} as well as {Image#landmarks}.
+      #
+      # The default value is 10.
+      #
+      # @example Using the default setting on {Project#annotate}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   Gcloud::Vision.default_max_landmarks #=> 10
+      #
+      #   annotation = vision.annotate "path/to/landmarks.jpg", landmarks: true
+      #   # This is the same as calling
+      #   # annotation = vision.annotate "path/to/landmarks.jpg", landmarks: 10
+      #
+      # @example Updating the default setting on {Project#annotate}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   # Set a new default
+      #   Gcloud::Vision.default_max_landmarks = 25
+      #
+      #   annotation = vision.annotate "path/to/landmarks.jpg", landmarks: true
+      #   # This is the same as calling
+      #   # annotation = vision.annotate "path/to/landmarks.jpg", landmarks: 25
+      #
+      #
+      # @example Using the default setting on {Image#landmarks}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   Gcloud::Vision.default_max_landmarks #=> 10
+      #
+      #   landmarks = vision.image("path/to/landmarks.jpg").landmarks
+      #   # This is the same as calling
+      #   # landmarks = vision.image("path/to/landmarks.jpg").landmarks 10
+      #
+      # @example Updating the default setting on {Image#landmarks}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   # Set a new default
+      #   Gcloud::Vision.default_max_landmarks = 25
+      #
+      #   landmarks = vision.image("path/to/landmarks.jpg").landmarks
+      #   # This is the same as calling
+      #   # landmarks = vision.image("path/to/landmarks.jpg").landmarks 25
+      #
+      attr_accessor :default_max_landmarks
+
+      ##
+      # The default max results to return for logo detection requests. This is
+      # used on {Project#annotate} as well as {Image#logos}.
+      #
+      # The default value is 10.
+      #
+      # @example Using the default setting on {Project#annotate}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   Gcloud::Vision.default_max_logos #=> 10
+      #
+      #   annotation = vision.annotate "path/to/logos.jpg", logos: true
+      #   # This is the same as calling
+      #   # annotation = vision.annotate "path/to/logos.jpg", logos: 10
+      #
+      # @example Updating the default setting on {Project#annotate}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   # Set a new default
+      #   Gcloud::Vision.default_max_logos = 25
+      #
+      #   annotation = vision.annotate "path/to/logos.jpg", logos: true
+      #   # This is the same as calling
+      #   # annotation = vision.annotate "path/to/logos.jpg", logos: 25
+      #
+      #
+      # @example Using the default setting on {Image#logos}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   Gcloud::Vision.default_max_logos #=> 10
+      #
+      #   logos = vision.image("path/to/logos.jpg").logos
+      #   # This is the same as calling
+      #   # logos = vision.image("path/to/logos.jpg").logos 10
+      #
+      # @example Updating the default setting on {Image#logos}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   # Set a new default
+      #   Gcloud::Vision.default_max_logos = 25
+      #
+      #   logos = vision.image("path/to/logos.jpg").logos
+      #   # This is the same as calling
+      #   # logos = vision.image("path/to/logos.jpg").logos 25
+      #
+      attr_accessor :default_max_logos
+
+      ##
+      # The default max results to return for label detection requests. This is
+      # used on {Project#annotate} as well as {Image#labels}.
+      #
+      # The default value is 10.
+      #
+      # @example Using the default setting on {Project#annotate}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   Gcloud::Vision.default_max_labels #=> 10
+      #
+      #   annotation = vision.annotate "path/to/labels.jpg", labels: true
+      #   # This is the same as calling
+      #   # annotation = vision.annotate "path/to/labels.jpg", labels: 10
+      #
+      # @example Updating the default setting on {Project#annotate}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   # Set a new default
+      #   Gcloud::Vision.default_max_labels = 25
+      #
+      #   annotation = vision.annotate "path/to/labels.jpg", labels: true
+      #   # This is the same as calling
+      #   # annotation = vision.annotate "path/to/labels.jpg", labels: 25
+      #
+      #
+      # @example Using the default setting on {Image#labels}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   Gcloud::Vision.default_max_labels #=> 10
+      #
+      #   labels = vision.image("path/to/labels.jpg").labels
+      #   # This is the same as calling
+      #   # labels = vision.image("path/to/labels.jpg").labels 10
+      #
+      # @example Updating the default setting on {Image#labels}:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   vision = gcloud.vision
+      #
+      #   # Set a new default
+      #   Gcloud::Vision.default_max_labels = 25
+      #
+      #   labels = vision.image("path/to/labels.jpg").labels
+      #   # This is the same as calling
+      #   # labels = vision.image("path/to/labels.jpg").labels 25
+      #
+      attr_accessor :default_max_labels
+    end
+
+    # Set the default values.
+    # Update the comments documentaion when these change.
+    self.default_max_faces     = 10
+    self.default_max_landmarks = 10
+    self.default_max_logos     = 10
+    self.default_max_labels    = 10
   end
 end

@@ -13,11 +13,11 @@
 # limitations under the License.
 
 
-require "gcloud/vision/analysis/vertex"
+require "gcloud/vision/annotation/vertex"
 
 module Gcloud
   module Vision
-    class Analysis
+    class Annotation
       ##
       # # Text
       #
@@ -126,7 +126,7 @@ module Gcloud
         end
 
         ##
-        # @private New Analysis::Text from an array of Google API Client
+        # @private New Annotation::Text from an array of Google API Client
         # objects.
         def self.from_gapi gapi_list
           text, *words = Array gapi_list
@@ -225,7 +225,7 @@ module Gcloud
           end
 
           ##
-          # @private New Analysis::Text::Word from a Google API Client object.
+          # @private New Annotation::Text::Word from a Google API Client object.
           def self.from_gapi gapi
             new.tap { |w| w.instance_variable_set :@gapi, gapi }
           end

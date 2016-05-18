@@ -14,10 +14,10 @@
 
 require "helper"
 
-describe Gcloud::Vision::Analysis::SafeSearch, :mock_vision do
+describe Gcloud::Vision::Annotation::SafeSearch, :mock_vision do
   # Run through JSON to turn all keys to strings...
   let(:gapi) { JSON.parse(safe_search_annotation_response.to_json) }
-  let(:safe_search) { Gcloud::Vision::Analysis::SafeSearch.from_gapi gapi }
+  let(:safe_search) { Gcloud::Vision::Annotation::SafeSearch.from_gapi gapi }
 
   it "knows the given attributes" do
     safe_search.wont_be :nil?

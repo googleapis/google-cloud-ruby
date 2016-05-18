@@ -14,20 +14,23 @@
 
 require "helper"
 
-describe Gcloud::Vision::Analysis::Entity, :label, :mock_vision do
+describe Gcloud::Vision::Annotation::Entity, :logo, :mock_vision do
   # Run through JSON to turn all keys to strings...
-  let(:gapi) { JSON.parse(label_annotation_response.to_json) }
-  let(:label) { Gcloud::Vision::Analysis::Entity.from_gapi gapi }
+  let(:gapi) { JSON.parse(logo_annotation_response.to_json) }
+  let(:logo) { Gcloud::Vision::Annotation::Entity.from_gapi gapi }
 
   it "knows the given attributes" do
-    label.mid.must_equal "/m/02wtjj"
-    label.locale.must_be :nil?
-    label.description.must_equal "stone carving"
-    label.score.must_equal 0.9859733
-    label.confidence.must_be :nil?
-    label.topicality.must_be :nil?
-    label.bounds.must_be :empty?
-    label.locations.must_be :empty?
-    label.properties.must_be :empty?
+    logo.mid.must_equal "/m/045c7b"
+    logo.locale.must_be :nil?
+    logo.description.must_equal "Google"
+    logo.score.must_equal 0.6435439
+    logo.confidence.must_be :nil?
+    logo.topicality.must_be :nil?
+    logo.bounds[0].to_a.must_equal [11,  11]
+    logo.bounds[1].to_a.must_equal [330, 11]
+    logo.bounds[2].to_a.must_equal [330, 72]
+    logo.bounds[3].to_a.must_equal [11,  72]
+    logo.locations.must_be :empty?
+    logo.properties.must_be :empty?
   end
 end

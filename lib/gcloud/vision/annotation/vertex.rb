@@ -15,7 +15,7 @@
 
 module Gcloud
   module Vision
-    class Analysis
+    class Annotation
       ##
       # # Vertex
       #
@@ -98,7 +98,7 @@ module Gcloud
         end
 
         ##
-        # @private New Analysis::Entity::Bounds::Vertex from a Google API
+        # @private New Annotation::Entity::Bounds::Vertex from a Google API
         # Client object.
         def self.from_gapi gapi
           new gapi["x"], gapi["y"]

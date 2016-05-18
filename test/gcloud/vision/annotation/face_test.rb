@@ -14,10 +14,10 @@
 
 require "helper"
 
-describe Gcloud::Vision::Analysis::Face, :mock_vision do
+describe Gcloud::Vision::Annotation::Face, :mock_vision do
   # Run through JSON to turn all keys to strings...
   let(:gapi) { JSON.parse(face_annotation_response.to_json) }
-  let(:face) { Gcloud::Vision::Analysis::Face.from_gapi gapi }
+  let(:face) { Gcloud::Vision::Annotation::Face.from_gapi gapi }
 
   it "knows the angles" do
     face.angles.wont_be :nil?

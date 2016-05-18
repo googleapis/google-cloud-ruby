@@ -13,13 +13,6 @@
 # limitations under the License.
 
 
-require "gcloud/gce"
-require "gcloud/vision/connection"
-require "gcloud/vision/credentials"
-require "gcloud/vision/image"
-require "gcloud/vision/analysis"
-require "gcloud/vision/errors"
-
 module Gcloud
   module Vision
     ##

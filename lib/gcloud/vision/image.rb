@@ -108,9 +108,10 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] count The maximum number of results.
+      # @param [Integer] max_results The maximum number of results. The default
+      #   is {Gcloud::Vision.default_max_faces}. Optional.
       #
-      # @return [Array<Analysis::Face>] The results of face detection.
+      # @return [Array<Annotation::Face>] The results of face detection.
       #
       # @example
       #   require "gcloud"
@@ -125,17 +126,17 @@ module Gcloud
       #   face.bounds.face.count #=> 4
       #   face.bounds.face.first #=> #<Vertex (x: 153, y: 34)>
       #
-      def faces count = 10
+      def faces max_results = Gcloud::Vision.default_max_faces
         ensure_vision!
-        analysis = @vision.mark self, faces: count
-        analysis.faces
+        annotation = @vision.mark self, faces: max_results
+        annotation.faces
       end
 
       ##
       # Performs the `FACE_DETECTION` feature on the image and returns only the
       # first result.
       #
-      # @return [Analysis::Face] The first result of face detection.
+      # @return [Annotation::Face] The first result of face detection.
       #
       def face
         faces(1).first
@@ -146,9 +147,10 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] count The maximum number of results.
+      # @param [Integer] max_results The maximum number of results. The default
+      #   is {Gcloud::Vision.default_max_landmarks}. Optional.
       #
-      # @return [Array<Analysis::Entity>] The results of landmark detection.
+      # @return [Array<Annotation::Entity>] The results of landmark detection.
       #
       # @example
       #   require "gcloud"
@@ -164,17 +166,17 @@ module Gcloud
       #   landmark.description #=> "Mount Rushmore"
       #   landmark.mid #=> "/m/019dvv"
       #
-      def landmarks count = 10
+      def landmarks max_results = Gcloud::Vision.default_max_landmarks
         ensure_vision!
-        analysis = @vision.mark self, landmarks: count
-        analysis.landmarks
+        annotation = @vision.mark self, landmarks: max_results
+        annotation.landmarks
       end
 
       ##
       # Performs the `LANDMARK_DETECTION` feature on the image and returns only
       # the first result.
       #
-      # @return [Analysis::Entity] The first result of landmark detection.
+      # @return [Annotation::Entity] The first result of landmark detection.
       #
       def landmark
         landmarks(1).first
@@ -185,9 +187,10 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] count The maximum number of results.
+      # @param [Integer] max_results The maximum number of results. The default
+      #   is {Gcloud::Vision.default_max_logos}. Optional.
       #
-      # @return [Array<Analysis::Entity>] The results of logo detection.
+      # @return [Array<Annotation::Entity>] The results of logo detection.
       #
       # @example
       #   require "gcloud"
@@ -203,17 +206,17 @@ module Gcloud
       #   logo.description #=> "Google"
       #   logo.mid #=> "/m/0b34hf"
       #
-      def logos count = 10
+      def logos max_results = Gcloud::Vision.default_max_logos
         ensure_vision!
-        analysis = @vision.mark self, logos: count
-        analysis.logos
+        annotation = @vision.mark self, logos: max_results
+        annotation.logos
       end
 
       ##
       # Performs the `LOGO_DETECTION` feature on the image and returns only the
       # first result.
       #
-      # @return [Analysis::Entity] The first result of logo detection.
+      # @return [Annotation::Entity] The first result of logo detection.
       #
       def logo
         logos(1).first
@@ -224,9 +227,10 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] count The maximum number of results.
+      # @param [Integer] max_results The maximum number of results. The default
+      #   is {Gcloud::Vision.default_max_labels}. Optional.
       #
-      # @return [Array<Analysis::Entity>] The results of label detection.
+      # @return [Array<Annotation::Entity>] The results of label detection.
       #
       # @example
       #   require "gcloud"
@@ -243,17 +247,17 @@ module Gcloud
       #   label.description #=> "person"
       #   label.mid #=> "/m/01g317"
       #
-      def labels count = 10
+      def labels max_results = Gcloud::Vision.default_max_labels
         ensure_vision!
-        analysis = @vision.mark self, labels: count
-        analysis.labels
+        annotation = @vision.mark self, labels: max_results
+        annotation.labels
       end
 
       ##
       # Performs the `LABEL_DETECTION` feature on the image and returns only the
       # first result.
       #
-      # @return [Analysis::Entity] The first result of label detection.
+      # @return [Annotation::Entity] The first result of label detection.
       #
       def label
         labels(1).first
@@ -264,7 +268,7 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @return [Analysis::Text] The results of text (OCR) detection.
+      # @return [Annotation::Text] The results of text (OCR) detection.
       #
       # @example
       #   require "gcloud"
@@ -283,8 +287,8 @@ module Gcloud
       #
       def text
         ensure_vision!
-        analysis = @vision.mark self, text: true
-        analysis.text
+        annotation = @vision.mark self, text: true
+        annotation.text
       end
 
       ##
@@ -292,7 +296,7 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @return [Analysis::SafeSearch] The results of safe search detection.
+      # @return [Annotation::SafeSearch] The results of safe search detection.
       #
       # @example
       #   require "gcloud"
@@ -308,8 +312,8 @@ module Gcloud
       #
       def safe_search
         ensure_vision!
-        analysis = @vision.mark self, safe_search: true
-        analysis.safe_search
+        annotation = @vision.mark self, safe_search: true
+        annotation.safe_search
       end
 
       ##
@@ -317,7 +321,7 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @return [Analysis::Properties] The results of image properties
+      # @return [Annotation::Properties] The results of image properties
       #   detection.
       #
       # @example
@@ -337,8 +341,8 @@ module Gcloud
       #
       def properties
         ensure_vision!
-        analysis = @vision.mark self, properties: true
-        analysis.properties
+        annotation = @vision.mark self, properties: true
+        annotation.properties
       end
 
       # @private
