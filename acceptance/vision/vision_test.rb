@@ -25,6 +25,12 @@ describe "Vision", :vision do
 
   describe "faces" do
     it "detects faces from an image" do
+      annotation = vision.annotate face_image, faces: true
+
+      annotation.faces.count.must_equal 1
+    end
+
+    it "detects faces from an image with custom max value" do
       annotation = vision.annotate face_image, faces: 1
 
       annotation.faces.count.must_equal 1
@@ -56,6 +62,12 @@ describe "Vision", :vision do
 
   describe "landmarks" do
     it "detects landmarks from an image" do
+      annotation = vision.annotate landmark_image, landmarks: true
+
+      annotation.landmarks.count.must_equal 1
+    end
+
+    it "detects landmarks from an image with custom max value" do
       annotation = vision.annotate landmark_image, landmarks: 1
 
       annotation.landmarks.count.must_equal 1
@@ -74,6 +86,12 @@ describe "Vision", :vision do
 
   describe "logos" do
     it "detects logos from an image" do
+      annotation = vision.annotate logo_image, logos: true
+
+      annotation.logos.count.must_equal 1
+    end
+
+    it "detects logos from an image with custom max value" do
       annotation = vision.annotate logo_image, logos: 1
 
       annotation.logos.count.must_equal 1
@@ -92,6 +110,12 @@ describe "Vision", :vision do
 
   describe "labels" do
     it "detects labels from an image" do
+      annotation = vision.annotate landmark_image, labels: true
+
+      annotation.labels.count.must_equal 6
+    end
+
+    it "detects labels from an image with custom max value" do
       annotation = vision.annotate landmark_image, labels: 10
 
       annotation.labels.count.must_equal 6
