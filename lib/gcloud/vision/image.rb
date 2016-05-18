@@ -449,9 +449,15 @@ module Gcloud
         attr_reader :area
 
         # @!attribute languages
-        #   @return [Array<String>] The [ISO
-        #     639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-        #     language codes for `languageHints`.
+        #   @return [Array<String>] A list of [ISO 639-1 language
+        #     codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+        #     to use for text (OCR) detection. In most cases, an empty value
+        #     will yield the best results as it will allow text detection to
+        #     automatically detect the text language. For languages based on the
+        #     latin alphabet a hint is not needed. In rare cases, when the
+        #     language of the text in the image is known in advance, setting
+        #     this hint will help get better results (although it will hurt a
+        #     great deal if the hint is wrong).
         attr_accessor :languages
 
         ##
