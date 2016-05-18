@@ -35,7 +35,7 @@ module Gcloud
     #   vision = gcloud.vision
     #   image = vision.image "path/to/face.jpg"
     #
-    #   annotation = vision.annotate image, faces: 10, labels: 10
+    #   annotation = vision.annotate image, faces: true, labels: true
     #   annotation.faces.count #=> 1
     #   annotation.labels.count #=> 4
     #   annotation.text #=> nil
@@ -63,7 +63,7 @@ module Gcloud
       #   vision = gcloud.vision
       #   image = vision.image "path/to/face.jpg"
       #
-      #   annotation = vision.annotate image, faces: 10
+      #   annotation = vision.annotate image, faces: true
       #   annotation.faces.count #=> 1
       #   face = annotation.faces.first
       #

@@ -152,7 +152,7 @@ module Gcloud
   #
   # image = vision.image "path/to/face.jpg"
   #
-  # annotation = vision.annotate image, faces: 10, labels: 10
+  # annotation = vision.annotate image, faces: true, labels: true
   # annotation.faces.count #=> 1
   # annotation.labels.count #=> 4
   # ```
@@ -168,7 +168,7 @@ module Gcloud
   # face_image = vision.image "path/to/face.jpg"
   # landmark_image = vision.image "path/to/landmark.jpg"
   #
-  # annotations = vision.annotate face_image, landmark_image, labels: 10
+  # annotations = vision.annotate face_image, landmark_image, labels: true
   #
   # annotations[0].labels.count #=> 4
   # annotations[1].labels.count #=> 6
@@ -189,8 +189,8 @@ module Gcloud
   # text_image = vision.image "path/to/text.png"
   #
   # annotations = vision.annotate do |annotate|
-  #    annotate.annotate face_image, faces: 10, labels: 10
-  #    annotate.annotate landmark_image, landmarks: 10
+  #    annotate.annotate face_image, faces: true, labels: true
+  #    annotate.annotate landmark_image, landmarks: true
   #    annotate.annotate text_image, text: true
   # end
   #
@@ -198,6 +198,27 @@ module Gcloud
   # annotations[0].labels.count #=> 4
   # annotations[1].landmarks.count #=> 1
   # annotations[2].text.words.count #=> 28
+  # ```
+  #
+  # The maximum number of results returned when performing face, landmark, logo,
+  # and label detection are configured with {Vision.default_max_faces},
+  # {Vision.default_max_landmarks}, {Vision.default_max_logos}, and
+  # {Vision.default_max_labels}, respectfully. To change the default behavior
+  # you can update the configuration, or provide a different value in the method
+  # call.
+  #
+  # ```ruby
+  # require "gcloud"
+  #
+  # gcloud = Gcloud.new
+  # vision = gcloud.vision
+  #
+  # image = vision.image "path/to/face.jpg"
+  #
+  # # Return just one face.
+  # annotation = vision.annotate image, faces: 1
+  # # Return up to 100 faces.
+  # annotation = vision.annotate image, faces: 100
   # ```
   #
   module Vision

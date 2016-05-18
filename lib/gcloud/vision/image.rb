@@ -108,8 +108,8 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] max_results The maximum number of results. See
-      #   {Gcloud::Vision.default_max_faces}.
+      # @param [Integer] max_results The maximum number of results. The default
+      #   is {Gcloud::Vision.default_max_faces}. Optional.
       #
       # @return [Array<Annotation::Face>] The results of face detection.
       #
@@ -147,8 +147,8 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] max_results The maximum number of results. See
-      #   {Gcloud::Vision.default_max_landmarks}.
+      # @param [Integer] max_results The maximum number of results. The default
+      #   is {Gcloud::Vision.default_max_landmarks}. Optional.
       #
       # @return [Array<Annotation::Entity>] The results of landmark detection.
       #
@@ -187,8 +187,8 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] max_results The maximum number of results. See
-      #   {Gcloud::Vision.default_max_logos}.
+      # @param [Integer] max_results The maximum number of results. The default
+      #   is {Gcloud::Vision.default_max_logos}. Optional.
       #
       # @return [Array<Annotation::Entity>] The results of logo detection.
       #
@@ -227,8 +227,8 @@ module Gcloud
       #
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Integer] max_results The maximum number of results. See
-      #   {Gcloud::Vision.default_max_labels}.
+      # @param [Integer] max_results The maximum number of results. The default
+      #   is {Gcloud::Vision.default_max_labels}. Optional.
       #
       # @return [Array<Annotation::Entity>] The results of label detection.
       #

@@ -38,8 +38,8 @@ module Gcloud
     #   landmark_image = vision.image "path/to/landmark.jpg"
     #
     #   annotation = vision.annotate do |annotate|
-    #      annotate.annotate face_image, faces: 10, labels: 10
-    #      annotate.annotate landmark_image, landmarks: 10
+    #      annotate.annotate face_image, faces: true, labels: true
+    #      annotate.annotate landmark_image, landmarks: true
     #   end
     #
     #   annotation.faces.count #=> 1
@@ -83,22 +83,29 @@ module Gcloud
       #   AnnotateImageRequest
       # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
       #
-      # @param [Image] images The image or images to annotate. Required.
-      # @param [Integer] faces The maximum number of results for the
-      #   `FACE_DETECTION` feature. Optional.
-      # @param [Integer] landmarks The maximum number of results for the
-      #   `LANDMARK_DETECTION` feature. Optional.
-      # @param [Integer] logos The maximum number of results for the
-      #   `LOGO_DETECTION` feature. Optional.
-      # @param [Integer] labels The maximum number of results for the
-      #   `LABEL_DETECTION` feature. Optional.
-      # @param [Boolean] text Whether to perform the `TEXT_DETECTION` feature
-      #   (OCR). Optional.
-      # @param [Boolean] safe_search Whether to perform the
-      #   `SAFE_SEARCH_DETECTION` feature. Optional.
-      # @param [Boolean] properties Whether to perform the
-      #   `IMAGE_PROPERTIES` feature (currently, the image's dominant colors.)
+      # @param [Image, Object] images The image or images to annotate. This can
+      #   be an {Image} instance, or any other type that converts to an {Image}.
+      #   See {#image} for details.
+      # @param [Boolean, Integer] faces Whether to perform the facial detection
+      #   feature. The maximum number of results is configured in
+      #   {Gcloud::Vision.default_max_faces}, or may be provided here. Optional.
+      # @param [Boolean, Integer] landmarks Whether to perform the landmark
+      #   detection feature. The maximum number of results is configured in
+      #   {Gcloud::Vision.default_max_landmarks}, or may be provided here.
       #   Optional.
+      # @param [Boolean, Integer] logos Whether to perform the logo detection
+      #   feature. The maximum number of results is configured in
+      #   {Gcloud::Vision.default_max_logos}, or may be provided here. Optional.
+      # @param [Boolean, Integer] labels Whether to perform the label detection
+      #   feature. The maximum number of results is configured in
+      #   {Gcloud::Vision.default_max_labels}, or may be provided here.
+      #   Optional.
+      # @param [Boolean] text Whether to perform the text (OCR) feature.
+      #   Optional.
+      # @param [Boolean] safe_search Whether to perform the safe search feature.
+      #   Optional.
+      # @param [Boolean] properties Whether to perform the image properties
+      #   feature (currently, the image's dominant colors.) Optional.
       #
       # @return [Annotation, Array<Annotation>] The results for all image
       #   detections, returned as a single {Annotation} instance for one image,
@@ -116,8 +123,8 @@ module Gcloud
       #   text_image = vision.image "path/to/text.png"
       #
       #   annotations = vision.annotate do |annotate|
-      #      annotate.annotate face_image, faces: 10, labels: 10
-      #      annotate.annotate landmark_image, landmarks: 10
+      #      annotate.annotate face_image, faces: true, labels: true
+      #      annotate.annotate landmark_image, landmarks: true
       #      annotate.annotate text_image, text: true
       #   end
       #
@@ -126,8 +133,9 @@ module Gcloud
       #   annotations[1].landmarks.count #=> 1
       #   annotations[2].text.words.count #=> 28
       #
-      def annotate *images, faces: 0, landmarks: 0, logos: 0, labels: 0,
-                   text: false, safe_search: false, properties: false
+      def annotate *images, faces: false, landmarks: false, logos: false,
+                   labels: false, text: false, safe_search: false,
+                   properties: false
         add_requests(images, faces, landmarks, logos, labels, text,
                      safe_search, properties)
       end
@@ -173,8 +181,9 @@ module Gcloud
 
       def default_features? faces, landmarks, logos, labels, text,
                             safe_search, properties
-        faces == 0 && landmarks == 0 && logos == 0 && labels == 0 &&
-          text == false && safe_search == false && properties == false
+        faces == false && landmarks == false && logos == false &&
+          labels == false && text == false && safe_search == false &&
+          properties == false
       end
 
       def default_features
