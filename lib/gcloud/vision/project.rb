@@ -242,11 +242,10 @@ module Gcloud
       #
       #   image = vision.image "path/to/landmark.jpg"
       #
-      #   annotation = vision.annotate image, labels: 25
+      #   annotation = vision.annotate image, labels: 3
       #
       #   annotation.labels.map &:description
-      #   #=> ["stone carving", "ancient history", "statue", "sculpture",
-      #   #=>  "monument", "landmark"]
+      #   #=> ["stone carving", "ancient history", "statue"]
       #
       def annotate *images, faces: false, landmarks: false, logos: false,
                    labels: false, text: false, safe_search: false,
