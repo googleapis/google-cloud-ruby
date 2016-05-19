@@ -88,6 +88,52 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
     end
   end
 
+
+  it "can upload a csv file specifying a invalid chunk_size" do
+
+    upload_request = false
+    valid_chunk_size = 256 * 1024
+    invalid_chunk_size = valid_chunk_size + 1
+
+    mock_connection.post "/upload/bigquery/v2/projects/#{project}/jobs" do |env|
+      if upload_request
+        env.request_headers["Content-length"].to_i.must_equal valid_chunk_size
+      end
+      upload_request = true
+      [200, {"Content-Type"=>"application/json", Location: "/resumable/upload/bigquery/v2/projects/#{project}/jobs"},
+       load_job_json(table, "some/file/path.csv")]
+    end
+
+    temp_resumable_csv do |file|
+      assert ::File.size?(file).to_i > Gcloud::Upload.resumable_threshold, "file is not resumable"
+      job = table.load file, format: :csv, chunk_size: invalid_chunk_size
+      job.must_be_kind_of Gcloud::Bigquery::LoadJob
+    end
+  end
+
+
+  it "can upload a csv file specifying a valid chunk_size" do
+
+    upload_request = false
+    valid_chunk_size = 256 * 1024
+
+    mock_connection.post "/upload/bigquery/v2/projects/#{project}/jobs" do |env|
+      if upload_request
+        env.request_headers["Content-length"].to_i.must_equal valid_chunk_size
+      end
+      upload_request = true
+      [200, {"Content-Type"=>"application/json", Location: "/resumable/upload/bigquery/v2/projects/#{project}/jobs"},
+       load_job_json(table, "some/file/path.csv")]
+    end
+
+    temp_resumable_csv do |file|
+      assert ::File.size?(file).to_i > Gcloud::Upload.resumable_threshold, "file is not resumable"
+      job = table.load file, format: :csv, chunk_size: valid_chunk_size
+      job.must_be_kind_of Gcloud::Bigquery::LoadJob
+    end
+  end
+
+
   it "can upload a json file" do
     mock_connection.post "/upload/bigquery/v2/projects/#{project}/jobs" do |env|
       json = JSON.parse(get_json_from_multipart_body(env))
@@ -164,6 +210,16 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
     Tempfile.open "import.csv" do |tmpfile|
       tmpfile.puts "id,name"
       1000.times do |x| # write enough to be larger than the chunk_size
+        tmpfile.puts "#{x},#{SecureRandom.urlsafe_base64(rand(8..16))}"
+      end
+      yield tmpfile
+    end
+  end
+
+  def temp_resumable_csv
+    Tempfile.open "import.csv" do |tmpfile|
+      tmpfile.puts "id,name"
+      300000.times do |x| # write enough to be larger than Upload.resumable_threshold
         tmpfile.puts "#{x},#{SecureRandom.urlsafe_base64(rand(8..16))}"
       end
       yield tmpfile
