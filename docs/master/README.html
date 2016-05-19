@@ -358,6 +358,27 @@
 </code></pre>
 </div>
 
+<h3 id="vision">Vision</h3>
+
+<ul>
+  <li><a href="http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Vision.html">gcloud-ruby Vision API documentation</a></li>
+  <li><a href="https://cloud.google.com/vision/docs">Google Cloud Vision Documentation</a></li>
+</ul>
+
+<h4 id="preview-8">Preview</h4>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">vision</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">vision</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">vision</span><span class="p">.</span><span class="nf">image</span> <span class="s2">"path/to/landmark.jpg"</span>
+
+<span class="n">landmark</span> <span class="o">=</span> <span class="n">image</span><span class="p">.</span><span class="nf">landmark</span>
+<span class="n">landmark</span><span class="p">.</span><span class="nf">description</span> <span class="c1">#=&gt; "Mount Rushmore"</span>
+</code></pre>
+</div>
+
 <h2 id="supported-ruby-versions">Supported Ruby Versions</h2>
 
 <p>gcloud is supported on Ruby 2.0+.</p>

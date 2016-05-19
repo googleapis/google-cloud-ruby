@@ -318,6 +318,24 @@ Monitoring</li>
 </code></pre>
 </div>
 
+<h1 id="vision">Vision</h1>
+
+<p><a href="https://cloud.google.com/vision/">Google Cloud Vision</a> (<a href="https://cloud.google.com/vision/docs">docs</a>) allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content.</p>
+
+<p>See the <span class='object_link'><a href="Gcloud/Vision.html" title="Gcloud::Vision (module)">gcloud-ruby Cloud Vision API documentation</a></span> to learn how to connect to Google Cloud Vision using this library.</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">vision</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">vision</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">vision</span><span class="p">.</span><span class="nf">image</span> <span class="s2">"path/to/landmark.jpg"</span>
+
+<span class="n">landmark</span> <span class="o">=</span> <span class="n">image</span><span class="p">.</span><span class="nf">landmark</span>
+<span class="n">landmark</span><span class="p">.</span><span class="nf">description</span> <span class="c1">#=&gt; "Mount Rushmore"</span>
+</code></pre>
+</div>
+
         
       </section>
 

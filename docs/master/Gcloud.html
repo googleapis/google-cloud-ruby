@@ -108,6 +108,8 @@ Guide</a>.</p>
               
                 <span class='object_link'><a href="#pubsub-class_method" title="Gcloud.pubsub (method)">Gcloud.pubsub</a></span>
               
+                <span class='object_link'><a href="#vision-class_method" title="Gcloud.vision (method)">Gcloud.vision</a></span>
+              
                 <span class='object_link'><a href="#logging-class_method" title="Gcloud.logging (method)">Gcloud.logging</a></span>
               
                 <span class='object_link'><a href="#storage-class_method" title="Gcloud.storage (method)">Gcloud.storage</a></span>
@@ -141,6 +143,8 @@ Guide</a>.</p>
                 <span class='object_link'><a href="#logging-instance_method" title="Gcloud#logging (method)">#logging</a></span>
               
                 <span class='object_link'><a href="#translate-instance_method" title="Gcloud#translate (method)">#translate</a></span>
+              
+                <span class='object_link'><a href="#vision-instance_method" title="Gcloud#vision (method)">#vision</a></span>
               
             </div>
           
@@ -464,6 +468,120 @@ APIs</a>.</p>
 
 <span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>task completed</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="vision-class_method"></a>
+                  <h4>
+                    <code>vision(project = nil, keyfile = nil, scope: nil)</code>
+                    <span>
+                      <a href="#vision-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Creates a new object for connecting to the Vision service.
+Each call creates a new connection.</p>
+
+
+                    
+
+                    
+                      <h3 id="method-i-vision-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-vision-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Project identifier for the Vision service you are
+connecting to.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>keyfile</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Keyfile downloaded from Google Cloud. If file
+path the file must be readable.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/cloud-platform</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-vision-label-Returns">
+                        Returns
+                        <span><a href="#method-i-vision-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Vision/Project.html" title="Gcloud::Vision::Project (class)">Gcloud::Vision::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-vision-label-Examples">
+                        Example
+                        <span><a href="#method-i-vision-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_vision'>vision</span>
+
+<span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/landmark.jpg</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_landmark'>landmark</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_landmark'>landmark</span>
+<span class='id identifier rubyid_landmark'>landmark</span><span class='period'>.</span><span class='id identifier rubyid_description'>description</span> <span class='comment'>#=&gt; &quot;Mount Rushmore&quot;</span></code></pre>
                       
                     
 
@@ -1917,6 +2035,102 @@ keys</a>.</p>
 
 <span class='id identifier rubyid_translation'>translation</span> <span class='op'>=</span> <span class='id identifier rubyid_translate'>translate</span><span class='period'>.</span><span class='id identifier rubyid_translate'>translate</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello world!</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>to:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>la</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_translation'>translation</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='comment'>#=&gt; &quot;Salve mundi!&quot;</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="vision-instance_method"></a>
+                  <h4>
+                    <code>vision(scope: nil)</code>
+                    <span>
+                      <a href="#vision-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Creates a new object for connecting to the Vision service.
+Each call creates a new connection.</p>
+
+
+                    
+
+                    
+                      <h3 id="method-i-vision-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-vision-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/cloud-platform</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-vision-label-Returns">
+                        Returns
+                        <span><a href="#method-i-vision-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Vision/Project.html" title="Gcloud::Vision::Project (class)">Gcloud::Vision::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-vision-label-Examples">
+                        Examples
+                        <span><a href="#method-i-vision-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_vision'>vision</span>
+
+<span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/landmark.jpg</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_landmark'>landmark</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_landmark'>landmark</span>
+<span class='id identifier rubyid_landmark'>landmark</span><span class='period'>.</span><span class='id identifier rubyid_description'>description</span> <span class='comment'>#=&gt; &quot;Mount Rushmore&quot;</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>The default scope can be overridden with the <code class="highlighter-rouge">scope</code> option:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_platform_scope'>platform_scope</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_vision'>vision</span> <span class='label'>scope:</span> <span class='id identifier rubyid_platform_scope'>platform_scope</span></code></pre>
                       
                     
 
