@@ -23,6 +23,9 @@ module Gcloud
       #
       # See {Face::Bounds} and {Text}.
       #
+      # @attr_reader [Integer] x The X coordinate.
+      # @attr_reader [Integer] y The Y coordinate.
+      #
       # @example
       #   require "gcloud"
       #
@@ -38,11 +41,7 @@ module Gcloud
       #   vertex.y #=> 8
       #
       class Vertex
-        # @!attribute x
-        #   @return [Integer] The X coordinate.
-        # @!attribute y
-        #   @return [Integer] The Y coordinate.
-        attr_accessor :x, :y
+        attr_reader :x, :y
 
         ##
         # @private Creates a new Vertex instance.

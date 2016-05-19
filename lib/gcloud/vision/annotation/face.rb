@@ -733,6 +733,10 @@ module Gcloud
           #
           # See {Features} and {Face}.
           #
+          # @attr_reader [Landmark] left The chin, left gonion.
+          # @attr_reader [Landmark] center The chin, gnathion.
+          # @attr_reader [Landmark] right The chin, right gonion.
+          #
           # @example
           #   require "gcloud"
           #
@@ -748,14 +752,10 @@ module Gcloud
           #   #=> #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
           #
           class Chin
-            # @!attribute left
-            #   @return [Landmark] The chin, left gonion.
-            # @!attribute center
-            #   @return [Landmark] The chin, gnathion.
-            # @!attribute right
-            #   @return [Landmark] The chin, right gonion.
-            attr_accessor :left, :center, :right
+            attr_reader :left, :center, :right
 
+            ##
+            # @private Creates a new Chin instance.
             def initialize left, center, right
               @left   = left
               @center = center
@@ -821,6 +821,9 @@ module Gcloud
           #
           # See {Features} and {Face}.
           #
+          # @attr_reader [Landmark] left The left ear tragion.
+          # @attr_reader [Landmark] right The right ear tragion.
+          #
           # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
           #   images.annotate Type
           #
@@ -838,12 +841,10 @@ module Gcloud
           #   #=> #<Landmark (x: 303.81198, y: 88.5782, z: 77.719193)>
           #
           class Ears
-            # @!attribute left
-            #   @return [Landmark] The left ear tragion.
-            # @!attribute right
-            #   @return [Landmark] The right ear tragion.
-            attr_accessor :left, :right
+            attr_reader :left, :right
 
+            ##
+            # @private Creates a new Ears instance.
             def initialize left, right
               @left  = left
               @right = right
@@ -907,6 +908,9 @@ module Gcloud
           #
           # See {Features} and {Face}.
           #
+          # @attr_reader [Eyebrow] left The left eyebrow.
+          # @attr_reader [Eyebrow] right The right eyebrow.
+          #
           # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
           #   images.annotate Type
           #
@@ -926,12 +930,10 @@ module Gcloud
           #   #=> #<Landmark (x: 256.3194, y: 58.222664, z: -17.299419)>
           #
           class Eyebrows
-            # @!attribute left
-            #   @return [Eyebrow] The left eyebrow.
-            # @!attribute right
-            #   @return [Eyebrow] The right eyebrow.
-            attr_accessor :left, :right
+            attr_reader :left, :right
 
+            ##
+            # @private Creates a new Eyebrows instance.
             def initialize left, right
               @left  = left
               @right = right
@@ -998,6 +1000,10 @@ module Gcloud
           # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
           #   images.annotate Type
           #
+          # @attr_reader [Landmark] left The eyebrow, left.
+          # @attr_reader [Landmark] top The eyebrow, upper midpoint.
+          # @attr_reader [Landmark] right The eyebrow, right.
+          #
           # @example
           #   require "gcloud"
           #
@@ -1014,14 +1020,10 @@ module Gcloud
           #   #=> #<Landmark (x: 256.3194, y: 58.222664, z: -17.299419)>
           #
           class Eyebrow
-            # @!attribute left
-            #   @return [Landmark] The eyebrow, left.
-            # @!attribute top
-            #   @return [Landmark] The eyebrow, upper midpoint.
-            # @!attribute right
-            #   @return [Landmark] The eyebrow, right.
-            attr_accessor :left, :top, :right
+            attr_reader :left, :top, :right
 
+            ##
+            # @private Creates a new Eyebrow instance.
             def initialize left, top, right
               @left  = left
               @top   = top
@@ -1090,6 +1092,9 @@ module Gcloud
           # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
           #   images.annotate Type
           #
+          # @attr_reader [Eye] left The left eye.
+          # @attr_reader [Eye] right The right eye.
+          #
           # @example
           #   require "gcloud"
           #
@@ -1106,12 +1111,10 @@ module Gcloud
           #   #=> #<Landmark (x: 256.63464, y: 79.641411, z: -6.0731235)>
           #
           class Eyes
-            # @!attribute left
-            #   @return [Eye] the left eye
-            # @!attribute right
-            #   @return [Eye] the right eye
-            attr_accessor :left, :right
+            attr_reader :left, :right
 
+            ##
+            # @private Creates a new Eyes instance.
             def initialize left, right
               @left  = left
               @right = right
@@ -1178,6 +1181,13 @@ module Gcloud
           # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
           #   images.annotate Type
           #
+          # @attr_reader [Landmark] left The eye, left corner.
+          # @attr_reader [Landmark] bottom The eye, bottom boundary.
+          # @attr_reader [Landmark] center The eye, center.
+          # @attr_reader [Landmark] pupil The eye pupil.
+          # @attr_reader [Landmark] top The eye, top boundary.
+          # @attr_reader [Landmark] right The eye, right corner.
+          #
           # @example
           #   require "gcloud"
           #
@@ -1193,20 +1203,10 @@ module Gcloud
           #   #=> #<Landmark (x: 256.63464, y: 79.641411, z: -6.0731235)>
           #
           class Eye
-            # @!attribute left
-            #   @return [Landmark] The eye, left corner.
-            # @!attribute bottom
-            #   @return [Landmark] The eye, bottom boundary.
-            # @!attribute center
-            #   @return [Landmark] The eye, center.
-            # @!attribute pupil
-            #   @return [Landmark] The eye pupil.
-            # @!attribute top
-            #   @return [Landmark] The eye, top boundary.
-            # @!attribute right
-            #   @return [Landmark] The eye, right corner.
-            attr_accessor :left, :bottom, :center, :pupil, :top, :right
+            attr_reader :left, :bottom, :center, :pupil, :top, :right
 
+            ##
+            # @private Creates a new Eye instance.
             def initialize left, bottom, center, pupil, top, right
               @left   = left
               @bottom = bottom
@@ -1277,6 +1277,9 @@ module Gcloud
           # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
           #   images.annotate Type
           #
+          # @attr_reader [Landmark] top The upper lip.
+          # @attr_reader [Landmark] bottom The lower lip.
+          #
           # @example
           #   require "gcloud"
           #
@@ -1292,15 +1295,13 @@ module Gcloud
           #   #=> #<Landmark (x: 228.54768, y: 143.2952, z: -5.6550336)>
           #
           class Lips
-            # @!attribute top
-            #   @return [Landmark] The upper lip.
-            # @!attribute bottom
-            #   @return [Landmark] The lower lip.
-            attr_accessor :top, :bottom
+            attr_reader :top, :bottom
 
             alias_method :upper, :top
             alias_method :lower, :bottom
 
+            ##
+            # @private Creates a new Lips instance.
             def initialize top, bottom
               @top = top
               @bottom = bottom
@@ -1367,6 +1368,10 @@ module Gcloud
           # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
           #   images.annotate Type
           #
+          # @attr_reader [Landmark] left The mouth, left.
+          # @attr_reader [Landmark] center The mouth, center.
+          # @attr_reader [Landmark] right TThe mouth, right.
+          #
           # @example
           #   require "gcloud"
           #
@@ -1382,14 +1387,10 @@ module Gcloud
           #   #=> #<Landmark (x: 228.53499, y: 150.29066, z: 1.1069832)>
           #
           class Mouth
-            # @!attribute left
-            #   @return [Landmark] The mouth, left.
-            # @!attribute center
-            #   @return [Landmark] The mouth, center.
-            # @!attribute right
-            #   @return [Landmark] The mouth, right.
-            attr_accessor :left, :center, :right
+            attr_reader :left, :center, :right
 
+            ##
+            # @private Creates a new Mouth instance.
             def initialize left, center, right
               @left   = left
               @center = center
@@ -1458,6 +1459,12 @@ module Gcloud
           # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#Type_1
           #   images.annotate Type
           #
+          # @attr_reader [Landmark] left The nose, bottom left.
+          # @attr_reader [Landmark] bottom The nose, bottom center.
+          # @attr_reader [Landmark] tip The nose tip.
+          # @attr_reader [Landmark] top The midpoint between the eyes.
+          # @attr_reader [Landmark] right The nose, bottom right.
+          #
           # @example
           #   require "gcloud"
           #
@@ -1473,18 +1480,10 @@ module Gcloud
           #   #=> #<Landmark (x: 225.23511, y: 122.47372, z: -25.817825)>
           #
           class Nose
-            # @!attribute left
-            #   @return [Landmark] The nose, bottom left.
-            # @!attribute bottom
-            #   @return [Landmark] The nose, bottom center.
-            # @!attribute tip
-            #   @return [Landmark] The nose tip.
-            # @!attribute top
-            #   @return [Landmark] The midpoint between the eyes.
-            # @!attribute right
-            #   @return [Landmark] The nose, bottom right.
-            attr_accessor :left, :bottom, :tip, :top, :right
+            attr_reader :left, :bottom, :tip, :top, :right
 
+            ##
+            # @private Creates a new Nose instance.
             def initialize left, bottom, tip, top, right
               @left   = left
               @bottom = bottom
