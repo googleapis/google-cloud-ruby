@@ -1,5 +1,22 @@
 # Release History
 
+### 0.10.0 / 2016-05-19
+
+#### Major Changes
+
+* Add Vision service implementation
+
+#### Minor Changes
+
+* BigQuery
+  * Restore chunk_size argument on Gcloud::Bigquery::Table#load (gramos74)
+* Storage
+  * Gcloud::Storage::Bucket#create_file now uses default chunk_size
+* Datastore
+  * Fixed documentation (bmclean)
+* Add Gcloud::Upload.default_chunk_size
+* Pegged dependency to google-protobuf version 3.0.0.alpha.5.0.5.1
+
 ### 0.9.0 / 2016-05-11
 
 #### Major Changes
