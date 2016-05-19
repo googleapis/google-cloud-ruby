@@ -452,7 +452,8 @@ module Gcloud
               "writeDisposition" => write_disposition(options[:write]),
               "allowLargeResults" => options[:large_results],
               "flattenResults" => options[:flatten],
-              "defaultDataset" => default_dataset
+              "defaultDataset" => default_dataset,
+              "userDefinedFunctionResources" => user_defined_function_resources(options[:udfs])
             }.delete_if { |_, v| v.nil? }
           }.delete_if { |_, v| v.nil? }
         }
@@ -611,6 +612,18 @@ module Gcloud
         media = Google::APIClient::UploadIO.new local_path, mime_type
         media.chunk_size = chunk_size unless chunk_size.nil?
         media
+      end
+
+      def user_defined_function_resources array_or_str
+        return nil if array_or_str.nil?
+
+        Array(array_or_str).map do |udf|
+          if udf.to_s.downcase.start_with?("gs://")
+            { "resourceUri" => udf }
+          else
+            { "inlineCode" => udf }
+          end
+        end
       end
     end
   end
