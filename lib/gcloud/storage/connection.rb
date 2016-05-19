@@ -16,6 +16,7 @@
 require "pathname"
 require "gcloud/version"
 require "gcloud/backoff"
+require "gcloud/upload"
 require "google/api_client"
 require "mime/types"
 
@@ -382,8 +383,9 @@ module Gcloud
       def file_media local_path, options, resumable
         media = Google::APIClient::UploadIO.new local_path,
                                                 options[:content_type]
-        return media unless resumable && options[:chunk_size]
-        media.chunk_size = verify_chunk_size!(options.delete(:chunk_size))
+        return media unless resumable
+        media.chunk_size = Gcloud::Upload.verify_chunk_size(
+          options.delete(:chunk_size), media.length)
         media
       end
 
@@ -412,18 +414,6 @@ module Gcloud
         Gcloud::Backoff.new(options).execute_gapi do
           yield
         end
-      end
-
-      ##
-      # Determines if a chunk_size is valid.
-      def verify_chunk_size! chunk_size
-        chunk_size = chunk_size.to_i
-        chunk_mod = 256 * 1024 # 256KB
-        if (chunk_size.to_i % chunk_mod) != 0
-          chunk_size = (chunk_size / chunk_mod) * chunk_mod
-        end
-        return if chunk_size.zero?
-        chunk_size
       end
     end
   end

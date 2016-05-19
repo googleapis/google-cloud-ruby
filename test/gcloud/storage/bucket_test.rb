@@ -255,6 +255,55 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     end
   end
 
+  it "uses the default chunk_size" do
+    # Mock the upload
+    Gcloud::Upload.stub :default_chunk_size, 256*1024 do
+      upload_request = false
+      mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+        if upload_request
+          # The content length is sent on the second request
+          env.request_headers["Content-length"].to_i.must_equal Gcloud::Upload.default_chunk_size
+        end
+        upload_request = true
+        [200, { "Content-Type" => "application/json", Location: "/upload/resumable-uri" },
+         create_file_json(bucket.name, "resumable.ext")]
+      end
+      Tempfile.open "gcloud-ruby" do |tmpfile|
+        10000.times do # write enough to be larger than the chunk_size
+          tmpfile.write "The quick brown fox jumps over the lazy dog."
+        end
+        Gcloud::Upload.stub :resumable_threshold, tmpfile.size/2 do
+          bucket.create_file tmpfile, "resumable.ext"
+        end
+      end
+    end
+  end
+
+  it "uses a valid chunk_size" do
+    # Mock the upload
+    valid_chunk_size = 256 * 1024 # 256KB
+    Gcloud::Upload.stub :default_chunk_size, 256*1024 do
+      upload_request = false
+      mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+        if upload_request
+          # The content length is sent on the second request
+          env.request_headers["Content-length"].to_i.must_equal valid_chunk_size
+        end
+        upload_request = true
+        [200, { "Content-Type" => "application/json", Location: "/upload/resumable-uri" },
+         create_file_json(bucket.name, "resumable.ext")]
+      end
+      Tempfile.open "gcloud-ruby" do |tmpfile|
+        10000.times do # write enough to be larger than the chunk_size
+          tmpfile.write "The quick brown fox jumps over the lazy dog."
+        end
+        Gcloud::Upload.stub :resumable_threshold, tmpfile.size/2 do
+          bucket.create_file tmpfile, "resumable.ext", chunk_size: valid_chunk_size
+        end
+      end
+    end
+  end
+
   it "does not error on an invalid chunk_size" do
     # Mock the upload
     valid_chunk_size = 256 * 1024 # 256KB
