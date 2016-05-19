@@ -97,6 +97,10 @@ Service APIs.</p>
               
                 <span class='object_link'><a href="#resumable_threshold%3D-class_method" title="Gcloud::Upload.resumable_threshold= (method)">Upload.resumable_threshold=</a></span>
               
+                <span class='object_link'><a href="#default_chunk_size-class_method" title="Gcloud::Upload.default_chunk_size (method)">Upload.default_chunk_size</a></span>
+              
+                <span class='object_link'><a href="#default_chunk_size%3D-class_method" title="Gcloud::Upload.default_chunk_size= (method)">Upload.default_chunk_size=</a></span>
+              
             </div>
           
         </div>
@@ -154,7 +158,68 @@ resumable uploads are used.</p>
 
                   <div class="method-description">
 
-                    <p>Sets a new resumable threshold value.</p>
+                    <p>Sets a new resumable threshold value in number of bytes.</p>
+
+
+                    
+
+                    
+
+                    
+
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="default_chunk_size-class_method"></a>
+                  <h4>
+                    <code>default_chunk_size</code>
+                    <span>
+                      <a href="#default_chunk_size-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Default chunk size used on resumable uploads.</p>
+
+<p>The default value is 10 MB (10,485,760 bytes).</p>
+
+
+                    
+
+                    
+
+                    
+
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="default_chunk_size=-class_method"></a>
+                  <h4>
+                    <code>default_chunk_size=(new_chunk_size)</code>
+                    <span>
+                      <a href="#default_chunk_size=-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Sets a new default chunk_size value in number of bytes. Must be a multiple
+of 256KB (262,144).</p>
 
 
                     

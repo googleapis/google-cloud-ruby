@@ -1409,7 +1409,7 @@ results. Default is <code class="highlighter-rouge">true</code>.</p>
                 <div class="method">
                   <a name="load-instance_method"></a>
                   <h4>
-                    <code>load(file, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil, chunk_size: DEFAULT_CHUNK_SIZE)</code>
+                    <code>load(file, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil, chunk_size: nil)</code>
                     <span>
                       <a href="#load-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1421,6 +1421,11 @@ results. Default is <code class="highlighter-rouge">true</code>.</p>
                     <p>Loads data into the table. You can pass a gcloud storage file path or
 a gcloud storage file instance. Or, you can upload a file directly.
 See <a href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">Loading Data with a POST Request</a>.</p>
+
+<p>A <code class="highlighter-rouge">chunk_size</code> value can be provided in the options to be used in
+resumable uploads. This value is the number of bytes per chunk and must
+be divisible by 256KB. If it is not divisible by 256KB then it will be
+lowered to the nearest acceptable value.</p>
 
 <h3 id="a-note-about-large-direct-uploads">A note about large direct uploads</h3>
 
@@ -1695,8 +1700,8 @@ that should be skipped.</p>
                               
                                 <div class='inline'><p>The number of bytes per chunk in a resumable
 upload. Must be divisible by 256KB. If it is not divisible by 265KB
-then it will be lowered to the nearest acceptable value. If not set,
-the default value is 10Mb.</p>
+then it will be lowered to the nearest acceptable value. If no value
+is provided it will use <span class='object_link'><a href="../Upload.html#default_chunk_size-class_method" title="Gcloud::Upload.default_chunk_size (method)">Upload.default_chunk_size</a></span>. Optional.</p>
 </div>
                               
                               (<tt>Integer</tt>)
