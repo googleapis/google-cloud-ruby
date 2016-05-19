@@ -70,13 +70,13 @@ describe Gcloud::Vision::Project, :mock_vision do
       request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
       request["features"].count.must_equal 7
       request["features"][0]["type"].must_equal "FACE_DETECTION"
-      request["features"][0]["maxResults"].must_equal 10
+      request["features"][0]["maxResults"].must_equal 100
       request["features"][1]["type"].must_equal "LANDMARK_DETECTION"
-      request["features"][1]["maxResults"].must_equal 10
+      request["features"][1]["maxResults"].must_equal 100
       request["features"][2]["type"].must_equal "LOGO_DETECTION"
-      request["features"][2]["maxResults"].must_equal 10
+      request["features"][2]["maxResults"].must_equal 100
       request["features"][3]["type"].must_equal "LABEL_DETECTION"
-      request["features"][3]["maxResults"].must_equal 10
+      request["features"][3]["maxResults"].must_equal 100
       request["features"][4]["type"].must_equal "TEXT_DETECTION"
       request["features"][4]["maxResults"].must_equal 1
       request["features"][5]["type"].must_equal "SAFE_SEARCH_DETECTION"
