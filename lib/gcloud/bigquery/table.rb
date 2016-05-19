@@ -64,8 +64,6 @@ module Gcloud
     #   table.insert row
     #
     class Table
-      DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024 # 10Mb
-
       ##
       # @private The Connection object.
       attr_accessor :connection
@@ -602,6 +600,11 @@ module Gcloud
       # See [Loading Data with a POST Request](
       # https://cloud.google.com/bigquery/loading-data-post-request#multipart).
       #
+      # A `chunk_size` value can be provided in the options to be used in
+      # resumable uploads. This value is the number of bytes per chunk and must
+      # be divisible by 256KB. If it is not divisible by 256KB then it will be
+      # lowered to the nearest acceptable value.
+      #
       # @param [File, Gcloud::Storage::File, String] file A file or the URI of a
       #   Google Cloud Storage file containing data to load into the table.
       # @param [String] format The exported file format. The default value is
@@ -682,8 +685,8 @@ module Gcloud
       #   that should be skipped.
       # @param [Integer] chunk_size The number of bytes per chunk in a resumable
       #   upload. Must be divisible by 256KB. If it is not divisible by 265KB
-      #   then it will be lowered to the nearest acceptable value. If not set,
-      #   the default value is 10Mb.
+      #   then it will be lowered to the nearest acceptable value. If no value
+      #   is provided it will use {Gcloud::Upload.default_chunk_size}. Optional.
       #
       # @return [Gcloud::Bigquery::LoadJob]
       #
@@ -755,7 +758,7 @@ module Gcloud
                projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                encoding: nil, delimiter: nil, ignore_unknown: nil,
                max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil,
-               chunk_size: DEFAULT_CHUNK_SIZE
+               chunk_size: nil
         ensure_connection!
         options = { format: format, create: create, write: write,
                     projection_fields: projection_fields,
@@ -913,7 +916,8 @@ module Gcloud
       end
 
       def load_resumable file, options = {}
-        chunk_size = verify_chunk_size! options[:chunk_size]
+        chunk_size = Gcloud::Upload.verify_chunk_size options[:chunk_size],
+                                                      file.length
         resp = connection.load_resumable table_ref, file, chunk_size, options
         if resp.success?
           Job.from_gapi resp.data, connection
@@ -947,18 +951,6 @@ module Gcloud
         ::File.file? file
       rescue
         false
-      end
-
-      ##
-      # Determines if a chunk_size is valid.
-      def verify_chunk_size! chunk_size
-        chunk_size = chunk_size.to_i
-        chunk_mod = 256 * 1024 # 256KB
-        if (chunk_size.to_i % chunk_mod) != 0
-          chunk_size = (chunk_size / chunk_mod) * chunk_mod
-        end
-        return if chunk_size.zero?
-        chunk_size
       end
 
       ##

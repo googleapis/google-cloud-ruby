@@ -515,7 +515,8 @@ module Gcloud
       #   response header to be returned when the file is downloaded.
       # @param [Integer] chunk_size The number of bytes per chunk in a resumable
       #   upload. Must be divisible by 256KB. If it is not divisible by 265KB
-      #   then it will be lowered to the nearest acceptable value.
+      #   then it will be lowered to the nearest acceptable value. If no value
+      #   is provided it will use {Gcloud::Upload.default_chunk_size}. Optional.
       # @param [String] crc32c The CRC32c checksum of the file data, as
       #   described in [RFC 4960, Appendix
       #   B](http://tools.ietf.org/html/rfc4960#appendix-B).
