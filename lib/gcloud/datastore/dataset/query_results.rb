@@ -28,12 +28,26 @@ module Gcloud
       # Many common Array methods will return a new Array instance.
       #
       # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   datastore = gcloud.datastore
+      #
+      #   query = datastore.query("Task")
       #   tasks = datastore.run query
+      #
       #   tasks.size #=> 3
       #   tasks.cursor #=> Gcloud::Datastore::Cursor(c3VwZXJhd2Vzb21lIQ)
       #
       # @example Caution, many Array methods will return a new Array instance:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   datastore = gcloud.datastore
+      #
+      #   query = datastore.query("Task")
       #   tasks = datastore.run query
+      #
       #   tasks.size #=> 3
       #   tasks.end_cursor #=> Gcloud::Datastore::Cursor(c3VwZXJhd2Vzb21lIQ)
       #   descriptions = tasks.map { |task| task["description"] }
@@ -102,13 +116,34 @@ module Gcloud
         end
 
         ##
-        # Whether there are more results available.
+        # Whether there are more results available for subsequent API calls.
+        # Tests the value of {#more_results}.
+        #
         def next?
           !no_more?
         end
 
         ##
-        # Retrieve the next page of results.
+        # Retrieves the next page of results by making an API call with the
+        # value stored in {#cursor} if there are more results available.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #
+        #   query = datastore.query("Task")
+        #   tasks = datastore.run query
+        #
+        #   loop do
+        #     tasks.each do |t|
+        #       puts t["description"]
+        #     end
+        #     break unless tasks.next?
+        #     tasks = tasks.next
+        #   end
+        #
         def next
           return nil unless next?
           return nil if end_cursor.nil?
@@ -134,7 +169,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   query = datastore.query("Tasks")
+        #   query = datastore.query("Task")
         #   all_tasks = datastore.run(query).all
         #
         def all
