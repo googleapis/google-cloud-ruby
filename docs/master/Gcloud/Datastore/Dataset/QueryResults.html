@@ -441,7 +441,8 @@ is <code class="highlighter-rouge">:NO_MORE_RESULTS</code></p>
 
                   <div class="method-description">
 
-                    <p>Whether there are more results available.</p>
+                    <p>Whether there are more results available for subsequent API calls.
+Tests the value of <span class='object_link'><a href="#more_results-instance_method" title="Gcloud::Datastore::Dataset::QueryResults#more_results (method)">#more_results</a></span>.</p>
 
 
                     
@@ -479,7 +480,8 @@ is <code class="highlighter-rouge">:NO_MORE_RESULTS</code></p>
 
                   <div class="method-description">
 
-                    <p>Retrieve the next page of results.</p>
+                    <p>Retrieves the next page of results by making an API call with the
+value stored in <span class='object_link'><a href="#cursor-instance_method" title="Gcloud::Datastore::Dataset::QueryResults#cursor (method)">#cursor</a></span> if there are more results available.</p>
 
 
                     
@@ -488,6 +490,29 @@ is <code class="highlighter-rouge">:NO_MORE_RESULTS</code></p>
 
                     
 
+                    
+                      <h3 id="method-i-next-label-Examples">
+                        Example
+                        <span><a href="#method-i-next-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
+
+<span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span>
+
+<span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_tasks'>tasks</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+  <span class='kw'>break</span> <span class='kw'>unless</span> <span class='id identifier rubyid_tasks'>tasks</span><span class='period'>.</span><span class='id identifier rubyid_next?'>next?</span>
+  <span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_tasks'>tasks</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span>
+<span class='kw'>end</span></code></pre>
+                      
                     
 
                   </div>
@@ -534,7 +559,7 @@ Please use with caution.</p>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span>
-<span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Tasks</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='id identifier rubyid_all_tasks'>all_tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span></code></pre>
                       
                     
@@ -550,7 +575,7 @@ Please use with caution.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 19, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../../Datastore.html'>Datastore</a></li><li class='toc-l1'><a class='reference internal' href='../Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='../Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal' href='../Entity.html'>Entity</a></li><li class='toc-l1'><a class='reference internal' href='../Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='../../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on May 20, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../../Datastore.html'>Datastore</a></li><li class='toc-l1'><a class='reference internal' href='../Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='../Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal' href='../Entity.html'>Entity</a></li><li class='toc-l1'><a class='reference internal' href='../Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='../../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
