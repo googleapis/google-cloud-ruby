@@ -1,5 +1,12 @@
 # Release History
 
+### 0.6.3 / 2016-05-25
+
+#### Changes
+
+* Pub/Sub
+  * Fix issue with base64 encoding and the REST API (arparker)
+
 ### 0.6.2 / 2016-03-02
 
 #### Changes
