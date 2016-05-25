@@ -200,7 +200,7 @@ class MockPubsub < Minitest::Spec
     {
       "ackId" => "ack-id-#{id}",
       "message" => {
-        "data" => [message].pack("m"),
+        "data" => [message].pack("m0"),
         "attributes" => {},
         "messageId" => "msg-id-#{id}",
       }

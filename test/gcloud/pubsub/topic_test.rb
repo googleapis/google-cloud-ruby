@@ -281,7 +281,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "can publish a message" do
     message = "new-message-here"
-    base_64_msg = [message].pack("m")
+    base_64_msg = [message].pack("m0")
     mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
       JSON.parse(env.body)["messages"].first["data"].must_equal base_64_msg
       [200, {"Content-Type"=>"application/json"},
@@ -295,7 +295,7 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
 
   it "can publish a message with attributes" do
     message = "new-message-here"
-    base_64_msg = [message].pack("m")
+    base_64_msg = [message].pack("m0")
     mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
       JSON.parse(env.body)["messages"].first["data"].must_equal base_64_msg
       [200, {"Content-Type"=>"application/json"},
@@ -311,8 +311,8 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
   it "can publish multiple messages with a block" do
     message1 = "first-new-message"
     message2 = "second-new-message"
-    base_64_msg1 = [message1].pack("m")
-    base_64_msg2 = [message2].pack("m")
+    base_64_msg1 = [message1].pack("m0")
+    base_64_msg2 = [message2].pack("m0")
 
     mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
       JSON.parse(env.body)["messages"].first["data"].must_equal base_64_msg1

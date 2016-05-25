@@ -17,7 +17,7 @@ require "helper"
 describe Gcloud::Pubsub::Message, :attributes do
   let(:message_hash) do
     {
-      "data" => ["hello world"].pack("m"),
+      "data" => ["hello world"].pack("m0"),
       "attributes" => { "foo" => "FOO", "bar" => "BAR" }
     }
   end

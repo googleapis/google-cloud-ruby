@@ -21,9 +21,9 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
   let(:message1) { "new-message-here" }
   let(:message2) { "second-new-message" }
   let(:message3) { "third-new-message" }
-  let(:msg_packed1) { [message1].pack("m") }
-  let(:msg_packed2) { [message2].pack("m") }
-  let(:msg_packed3) { [message3].pack("m") }
+  let(:msg_packed1) { [message1].pack("m0") }
+  let(:msg_packed2) { [message2].pack("m0") }
+  let(:msg_packed3) { [message3].pack("m0") }
 
   it "publishes a message" do
     mock_connection.post "/v1/projects/#{project}/topics/#{topic_name}:publish" do |env|
