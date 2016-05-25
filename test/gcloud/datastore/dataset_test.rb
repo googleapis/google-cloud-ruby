@@ -20,12 +20,13 @@ describe Gcloud::Datastore::Dataset do
   let(:credentials) { OpenStruct.new }
   let(:dataset)     { Gcloud::Datastore::Dataset.new project, credentials }
   let(:run_query_res) do
-    run_query_res_entities = 2.times.map do
+    run_query_res_entities = 2.times.map do |i|
       Google::Datastore::V1beta3::EntityResult.new(
         entity: Gcloud::Datastore::Entity.new.tap do |e|
           e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
           e["name"] = "thingamajig"
-        end.to_grpc
+        end.to_grpc,
+        cursor: "result-cursor-#{i}".force_encoding("ASCII-8BIT")
       )
     end
     Google::Datastore::V1beta3::RunQueryResponse.new(
@@ -829,6 +830,8 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
@@ -883,6 +886,8 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
@@ -907,6 +912,8 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
@@ -929,6 +936,8 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
@@ -955,6 +964,8 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
@@ -978,6 +989,8 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
@@ -1004,6 +1017,8 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
@@ -1045,6 +1060,8 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_AFTER_CURSOR
@@ -1056,6 +1073,11 @@ describe Gcloud::Datastore::Dataset do
     assert entities.next?
     next_entities = entities.next
 
+    next_entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    next_entities.cursor_for(next_entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    next_entities.cursor_for(next_entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
     next_entities.cursor.must_equal query_cursor
     next_entities.end_cursor.must_equal query_cursor
     next_entities.more_results.must_equal :NO_MORE_RESULTS

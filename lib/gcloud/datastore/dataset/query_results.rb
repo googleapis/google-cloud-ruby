@@ -75,7 +75,7 @@ module Gcloud
 
         ##
         # @private
-        attr_accessor :service, :namespace, :query
+        attr_accessor :service, :namespace, :cursors, :query
 
         ##
         # @private
@@ -156,6 +156,14 @@ module Gcloud
         end
 
         ##
+        # Retrieve the {Cursor} for the provided result.
+        def cursor_for result
+          cursor_index = index result
+          return nil if cursor_index.nil?
+          cursors[cursor_index]
+        end
+
+        ##
         # Retrieves all query results by repeatedly loading {#next} until
         # {#next?} returns `false`. Returns the list instance for method
         # chaining.
@@ -189,11 +197,11 @@ module Gcloud
         # @private New Dataset::QueryResults from a
         # Google::Dataset::V1beta3::RunQueryResponse object.
         def self.from_grpc query_res, service, namespace, query
-          entities = Array(query_res.batch.entity_results).map do |result|
-            # TODO: Make this return an EntityResult with cursor...
-            Entity.from_grpc result.entity
-          end
-          new(entities).tap do |qr|
+          r, c = Array(query_res.batch.entity_results).map do |result|
+            [Entity.from_grpc(result.entity), Cursor.from_grpc(result.cursor)]
+          end.transpose
+          new(r).tap do |qr|
+            qr.cursors = c
             qr.end_cursor = Cursor.from_grpc query_res.batch.end_cursor
             qr.more_results = query_res.batch.more_results
             qr.service = service
