@@ -164,6 +164,28 @@ module Gcloud
         end
 
         ##
+        # Calls the given block once for each result and cursor combination,
+        # which are passed as parameters.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.each_with_cursor do |task, cursor|
+        #     puts "Task #{task.key.id} (#cursor)"
+        #   end
+        #
+        def each_with_cursor
+          return enum_for(:each_with_cursor) unless block_given?
+          zip(cursors).each { |r, c| yield [r, c] }
+        end
+
+        ##
         # Retrieves all query results by repeatedly loading {#next} until
         # {#next?} returns `false`. Returns the list instance for method
         # chaining.

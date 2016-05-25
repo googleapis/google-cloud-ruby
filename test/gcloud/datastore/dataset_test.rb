@@ -832,6 +832,17 @@ describe Gcloud::Datastore::Dataset do
     end
     entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
     entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
@@ -888,6 +899,17 @@ describe Gcloud::Datastore::Dataset do
     end
     entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
     entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     entities.cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
@@ -914,6 +936,17 @@ describe Gcloud::Datastore::Dataset do
     end
     entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
     entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     entities.cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
@@ -938,6 +971,17 @@ describe Gcloud::Datastore::Dataset do
     end
     entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
     entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
@@ -966,6 +1010,17 @@ describe Gcloud::Datastore::Dataset do
     end
     entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
     entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
@@ -991,6 +1046,17 @@ describe Gcloud::Datastore::Dataset do
     end
     entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
     entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
@@ -1019,6 +1085,17 @@ describe Gcloud::Datastore::Dataset do
     end
     entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
     entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
@@ -1062,6 +1139,17 @@ describe Gcloud::Datastore::Dataset do
     end
     entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
     entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_AFTER_CURSOR
@@ -1078,6 +1166,17 @@ describe Gcloud::Datastore::Dataset do
     end
     next_entities.cursor_for(next_entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
     next_entities.cursor_for(next_entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    next_entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    next_entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     next_entities.cursor.must_equal query_cursor
     next_entities.end_cursor.must_equal query_cursor
     next_entities.more_results.must_equal :NO_MORE_RESULTS
