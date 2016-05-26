@@ -194,25 +194,38 @@ module Gcloud
         # retrieved. Be sure to use as narrow a search criteria as possible.
         # Please use with caution.
         #
-        # @example
+        # An Enumerator is returned if no block is given.
+        #
+        # @example Iterating each result by passing a block:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   query = datastore.query("Task")
-        #   all_tasks = datastore.run(query).all
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.all do |task|
+        #     puts "Task #{task.key.id} (#cursor)"
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.all.map(&:key).each do |key|
+        #     puts "Key #{key.id}"
+        #   end
         #
         def all
-          while next?
-            next_records = self.next
-            push(*next_records)
-            self.end_cursor = next_records.end_cursor
-            self.more_results = next_records.more_results
-            self.service = next_records.service
-            self.namespace = next_records.namespace
-            self.query = next_records.query
+          return enum_for(:all) unless block_given?
+          results = self
+          loop do
+            results.each { |r| yield r }
+            break unless results.next?
+            results = results.next
           end
-          self
         end
 
         ##

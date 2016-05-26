@@ -1188,48 +1188,55 @@ describe Gcloud::Datastore::Dataset do
     refute next_entities.next?
   end
 
-  it "run will fulfill a query and return an object that can paginate with all" do
-    first_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
-      project_id: project,
-      partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        namespace_id: "foobar"
-      ),
-      gql_query: Google::Datastore::V1beta3::GqlQuery.new(
-        query_string: "SELECT * FROM Task")
-    )
-    first_run_query_res = run_query_res.dup
-    first_run_query_res.batch = run_query_res.batch.dup
-    first_run_query_res.batch.more_results = :MORE_RESULTS_AFTER_CURSOR
-    first_run_query_res.query = Gcloud::Datastore::Query.new.kind("Task").to_grpc
-    next_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
-      project_id: project,
-      partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        namespace_id: "foobar"
-      ),
-      query: Gcloud::Datastore::Query.new.kind("Task").start(query_cursor).to_grpc
-    )
-    next_run_query_res = run_query_res.dup
-    next_run_query_res.batch = run_query_res.batch.dup
-    next_run_query_res.batch.more_results = :NO_MORE_RESULTS
-    dataset.service.mocked_datastore.expect :run_query, first_run_query_res, [first_run_query_req]
-    dataset.service.mocked_datastore.expect :run_query, next_run_query_res, [next_run_query_req]
-
-    gql = dataset.gql "SELECT * FROM Task"
-    entities = dataset.run_query gql, namespace: "foobar"
-    entities.all
-    entities.count.must_equal 4
-    entities.each do |entity|
-      entity.must_be_kind_of Gcloud::Datastore::Entity
+  describe :all do
+    before do
+      first_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+        project_id: project,
+        partition_id: Google::Datastore::V1beta3::PartitionId.new(
+          namespace_id: "foobar"
+        ),
+        gql_query: Google::Datastore::V1beta3::GqlQuery.new(
+          query_string: "SELECT * FROM Task")
+      )
+      first_run_query_res = run_query_res.dup
+      first_run_query_res.batch = run_query_res.batch.dup
+      first_run_query_res.batch.more_results = :MORE_RESULTS_AFTER_CURSOR
+      first_run_query_res.query = Gcloud::Datastore::Query.new.kind("Task").to_grpc
+      next_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+        project_id: project,
+        partition_id: Google::Datastore::V1beta3::PartitionId.new(
+          namespace_id: "foobar"
+        ),
+        query: Gcloud::Datastore::Query.new.kind("Task").start(query_cursor).to_grpc
+      )
+      next_run_query_res = run_query_res.dup
+      next_run_query_res.batch = run_query_res.batch.dup
+      next_run_query_res.batch.more_results = :NO_MORE_RESULTS
+      dataset.service.mocked_datastore.expect :run_query, first_run_query_res, [first_run_query_req]
+      dataset.service.mocked_datastore.expect :run_query, next_run_query_res, [next_run_query_req]
     end
-    entities.cursor.must_equal query_cursor
-    entities.end_cursor.must_equal query_cursor
-    entities.more_results.must_equal :NO_MORE_RESULTS
-    refute entities.not_finished?
-    refute entities.more_after_limit?
-    refute entities.more_after_cursor?
-    assert entities.no_more?
 
-    refute entities.next?
+    it "run will fulfill a query and return an object that can paginate with all" do
+      gql = dataset.gql "SELECT * FROM Task"
+      entities = dataset.run_query gql, namespace: "foobar"
+      entities.all.each do |entity|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+      end
+    end
+
+    it "run will fulfill a query and can use the all enumerator to get count" do
+      gql = dataset.gql "SELECT * FROM Task"
+      entities = dataset.run_query gql, namespace: "foobar"
+      entities.all.count.must_equal 4
+    end
+
+    it "run will fulfill a query and can use the all enumerator to map results" do
+      gql = dataset.gql "SELECT * FROM Task"
+      entities = dataset.run_query gql, namespace: "foobar"
+      entities.all.map(&:key).each do |result|
+        result.must_be_kind_of Gcloud::Datastore::Key
+      end
+    end
   end
 
   it "run will raise when given an unknown argument" do
