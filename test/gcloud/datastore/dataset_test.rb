@@ -1239,6 +1239,51 @@ describe Gcloud::Datastore::Dataset do
     end
   end
 
+  describe "all with more results" do
+    before do
+      first_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+        project_id: project,
+        partition_id: Google::Datastore::V1beta3::PartitionId.new(
+          namespace_id: "foobar"
+        ),
+        gql_query: Google::Datastore::V1beta3::GqlQuery.new(
+          query_string: "SELECT * FROM Task")
+      )
+      first_run_query_res = run_query_res.dup
+      first_run_query_res.batch = run_query_res.batch.dup
+      first_run_query_res.batch.more_results = :MORE_RESULTS_AFTER_CURSOR
+      first_run_query_res.batch.end_cursor = "second-page-cursor".force_encoding("ASCII-8BIT")
+      first_run_query_res.query = Gcloud::Datastore::Query.new.kind("Task").to_grpc
+      next_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+        project_id: project,
+        partition_id: Google::Datastore::V1beta3::PartitionId.new(
+          namespace_id: "foobar"
+        ),
+        query: Gcloud::Datastore::Query.new.kind("Task").start(Gcloud::Datastore::Cursor.from_grpc("second-page-cursor")).to_grpc
+      )
+      next_run_query_res = run_query_res.dup
+      next_run_query_res.batch = run_query_res.batch.dup
+      next_run_query_res.batch.more_results = :MORE_RESULTS_AFTER_CURSOR
+      next_run_query_res.batch.end_cursor = "third-page-cursor".force_encoding("ASCII-8BIT")
+      dataset.service.mocked_datastore.expect :run_query, first_run_query_res, [first_run_query_req]
+      dataset.service.mocked_datastore.expect :run_query, next_run_query_res, [next_run_query_req]
+    end
+
+    it "run will fulfill a query and can use the all and limit api calls" do
+      gql = dataset.gql "SELECT * FROM Task"
+      entities = dataset.run_query gql, namespace: "foobar"
+      # change max_api_calls to 2 to see more requests attempted
+      entities.all(max_api_calls: 1).count.must_equal 4
+    end
+
+    it "run will fulfill a query and can use the all as a lazy enumerator" do
+      gql = dataset.gql "SELECT * FROM Task"
+      entities = dataset.run_query gql, namespace: "foobar"
+      # change max_api_calls to 2 to see more requests attempted
+      entities.all.lazy.take(3).count.must_equal 3
+    end
+  end
+
   it "run will raise when given an unknown argument" do
     expect do
       entities = dataset.run 123

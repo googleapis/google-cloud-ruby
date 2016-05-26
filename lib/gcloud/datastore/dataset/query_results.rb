@@ -218,11 +218,29 @@ module Gcloud
         #     puts "Key #{key.id}"
         #   end
         #
-        def all
-          return enum_for(:all) unless block_given?
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.all(max_api_calls: 10) do |task|
+        #     puts "Task #{task.key.id} (#cursor)"
+        #   end
+        #
+        def all max_api_calls: nil
+          max_api_calls = max_api_calls.to_i if max_api_calls
+          unless block_given?
+            return enum_for(:all, max_api_calls: max_api_calls)
+          end
           results = self
           loop do
             results.each { |r| yield r }
+            if max_api_calls
+              max_api_calls -= 1
+              break if max_api_calls < 0
+            end
             break unless results.next?
             results = results.next
           end
