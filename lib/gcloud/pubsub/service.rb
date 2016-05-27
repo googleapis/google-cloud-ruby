@@ -255,7 +255,7 @@ module Gcloud
       def set_topic_policy topic_name, new_policy, options = {}
         set_req = Google::Iam::V1::SetIamPolicyRequest.new(
           resource: topic_path(topic_name, options),
-          policy: Google::Iam::V1::Policy.decode_json(JSON.dump(new_policy))
+          policy: new_policy
         )
 
         backoff { iam.set_iam_policy set_req }
