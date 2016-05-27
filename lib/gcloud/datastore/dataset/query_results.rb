@@ -187,14 +187,14 @@ module Gcloud
 
         ##
         # Retrieves all query results by repeatedly loading {#next} until
-        # {#next?} returns `false`. Returns the list instance for method
-        # chaining.
+        # {#next?} returns `false`.Calls the given block once for each result
+        # and cursor combination, which are passed as parameters.
+        #
+        # An Enumerator is returned if no block is given.
         #
         # This method may make several API calls until all query results are
         # retrieved. Be sure to use as narrow a search criteria as possible.
         # Please use with caution.
-        #
-        # An Enumerator is returned if no block is given.
         #
         # @example Iterating each result by passing a block:
         #   require "gcloud"
@@ -237,6 +237,66 @@ module Gcloud
           results = self
           loop do
             results.each { |r| yield r }
+            if max_api_calls
+              max_api_calls -= 1
+              break if max_api_calls < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
+        end
+
+        ##
+        # Retrieves all query results and cursors by repeatedly loading {#next}
+        # until {#next?} returns `false`. Calls the given block once for each
+        # result and cursor combination, which are passed as parameters.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all query results are
+        # retrieved. Be sure to use as narrow a search criteria as possible.
+        # Please use with caution.
+        #
+        # @example Iterating all results and cursors by passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.all_with_cursor do |task, cursor|
+        #     puts "Task #{task.key.id} (#cursor)"
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.all_with_cursor.count #=> number of result/cursor pairs
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.all_with_cursor(max_api_calls: 10) do |task, cursor|
+        #     puts "Task #{task.key.id} (#cursor)"
+        #   end
+        #
+        def all_with_cursor max_api_calls: nil
+          max_api_calls = max_api_calls.to_i if max_api_calls
+          unless block_given?
+            return enum_for(:all_with_cursor, max_api_calls: max_api_calls)
+          end
+          results = self
+
+          loop do
+            results.zip(results.cursors).each { |r, c| yield r, c }
             if max_api_calls
               max_api_calls -= 1
               break if max_api_calls < 0

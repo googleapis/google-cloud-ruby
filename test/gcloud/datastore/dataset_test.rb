@@ -1237,6 +1237,32 @@ describe Gcloud::Datastore::Dataset do
         result.must_be_kind_of Gcloud::Datastore::Key
       end
     end
+
+    it "run will fulfill a query and return an object that can paginate with all_with_cursor" do
+      gql = dataset.gql "SELECT * FROM Task"
+      entities = dataset.run_query gql, namespace: "foobar"
+      entities.all_with_cursor.each do |entity, cursor|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+        cursor.must_be_kind_of Gcloud::Datastore::Cursor
+      end
+    end
+
+    it "run will fulfill a query and can use the all_with_cursor enumerator to get count" do
+      gql = dataset.gql "SELECT * FROM Task"
+      entities = dataset.run_query gql, namespace: "foobar"
+      entities.all_with_cursor.count.must_equal 4
+    end
+
+    it "run will fulfill a query and can use the all_with_cursor enumerator to map results" do
+      gql = dataset.gql "SELECT * FROM Task"
+      entities = dataset.run_query gql, namespace: "foobar"
+      entities.all_with_cursor.map do |entity, cursor|
+        [entity.key, cursor]
+      end.each do |result, cursor|
+        result.must_be_kind_of Gcloud::Datastore::Key
+        cursor.must_be_kind_of Gcloud::Datastore::Cursor
+      end
+    end
   end
 
   describe "all with more results" do
@@ -1273,7 +1299,9 @@ describe Gcloud::Datastore::Dataset do
       gql = dataset.gql "SELECT * FROM Task"
       entities = dataset.run_query gql, namespace: "foobar"
       # change max_api_calls to 2 to see more requests attempted
-      entities.all(max_api_calls: 1).count.must_equal 4
+      entities.all(max_api_calls: 1) do |entity|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+      end
     end
 
     it "run will fulfill a query and can use the all as a lazy enumerator" do
@@ -1281,6 +1309,23 @@ describe Gcloud::Datastore::Dataset do
       entities = dataset.run_query gql, namespace: "foobar"
       # change max_api_calls to 2 to see more requests attempted
       entities.all.lazy.take(3).count.must_equal 3
+    end
+
+    it "run will fulfill a query and can use the all_with_cursor and limit api calls" do
+      gql = dataset.gql "SELECT * FROM Task"
+      entities = dataset.run_query gql, namespace: "foobar"
+      # change max_api_calls to 2 to see more requests attempted
+      entities.all_with_cursor(max_api_calls: 1) do |entity, cursor|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+        cursor.must_be_kind_of Gcloud::Datastore::Cursor
+      end
+    end
+
+    it "run will fulfill a query and can use the all_with_cursor as a lazy enumerator" do
+      gql = dataset.gql "SELECT * FROM Task"
+      entities = dataset.run_query gql, namespace: "foobar"
+      # change max_api_calls to 2 to see more requests attempted
+      entities.all_with_cursor.lazy.take(3).count.must_equal 3
     end
   end
 
