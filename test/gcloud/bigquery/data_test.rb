@@ -146,7 +146,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
       env.params.must_include "pageToken"
       env.params["pageToken"].must_equal "token1234567890"
       [200, {"Content-Type"=>"application/json"},
-       table_data_json]
+       table_data_json(token: nil)]
     end
 
     data1 = table.data
@@ -154,7 +154,80 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data1.token.wont_be :nil?
     data1.next?.must_equal true # can't use must_be :next?
     data2 = data1.next
+    data2.token.must_be :nil?
+    data2.next?.must_equal false
     data2.class.must_equal Gcloud::Bigquery::Data
+  end
+
+  it "paginates data using all" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "token1234567890"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json(token: nil)]
+    end
+
+    data = table.data.all.to_a
+    data.count.must_equal 6
+    data.each { |d| d.class.must_equal Hash }
+  end
+
+  it "iterates data using all" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "token1234567890"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json(token: nil)]
+    end
+
+    data = table.data
+    data.all { |d| d.class.must_equal Hash }
+  end
+
+  it "iterates data using all using Enumerator" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "token1234567890"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+
+    data = table.data.all.take(5)
+    data.count.must_equal 5
+    data.each { |d| d.class.must_equal Hash }
+  end
+
+  it "iterates data using all with max_api_calls set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "token1234567890"
+      [200, {"Content-Type"=>"application/json"},
+       table_data_json]
+    end
+
+    data = table.data.all(max_api_calls: 1).to_a
+    data.count.must_equal 6
+    data.each { |d| d.class.must_equal Hash }
   end
 
   it "paginates data with max set" do
@@ -203,11 +276,11 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data.class.must_equal Gcloud::Bigquery::Data
   end
 
-  def table_data_json
-    table_data_hash.to_json
+  def table_data_json token: "token1234567890"
+    table_data_hash(token: token).to_json
   end
 
-  def table_data_hash
+  def table_data_hash token: "token1234567890"
     {
       "kind" => "bigquery#tableDataList",
       "etag" => "etag1234567890",
@@ -261,7 +334,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
           ]
         }
       ],
-      "pageToken" => "token1234567890",
+      "pageToken" => token,
       "totalRows" => 3
     }
   end
