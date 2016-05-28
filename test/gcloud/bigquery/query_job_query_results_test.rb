@@ -76,7 +76,7 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
       env.params.must_include "pageToken"
       env.params["pageToken"].must_equal "token1234567890"
       [200, {"Content-Type"=>"application/json"},
-       query_data_json]
+       query_data_json(token: nil)]
     end
 
     data1 = job.query_results
@@ -84,7 +84,63 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     data1.token.wont_be :nil?
     data1.next?.must_equal true
     data2 = data1.next
+    data2.token.must_be :nil?
+    data2.next?.must_equal false
     data2.class.must_equal Gcloud::Bigquery::QueryData
+  end
+
+  it "paginates data using all" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       query_data_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "token1234567890"
+      [200, {"Content-Type"=>"application/json"},
+       query_data_json(token: nil)]
+    end
+
+    data = job.query_results.all.to_a
+    data.count.must_equal 6
+    data.each { |d| d.class.must_equal Hash }
+  end
+
+  it "paginates data using all using Enumerator" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       query_data_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "token1234567890"
+      [200, {"Content-Type"=>"application/json"},
+       query_data_json]
+    end
+
+    data = job.query_results.all.take(5)
+    data.count.must_equal 5
+    data.each { |d| d.class.must_equal Hash }
+  end
+
+  it "iterates data using all with max_api_calls set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       query_data_json]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "token1234567890"
+      [200, {"Content-Type"=>"application/json"},
+       query_data_json]
+    end
+
+    data = job.query_results.all(max_api_calls: 1).to_a
+    data.count.must_equal 6
+    data.each { |d| d.class.must_equal Hash }
   end
 
   it "paginates data with max set" do
@@ -180,11 +236,11 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     hash
   end
 
-  def query_data_json
-    query_data_hash.to_json
+  def query_data_json token: "token1234567890"
+    query_data_hash(token: token).to_json
   end
 
-  def query_data_hash
+  def query_data_hash token: "token1234567890"
     {
       "kind" => "bigquery#getQueryResultsResponse",
       "etag" => "etag1234567890",
@@ -266,7 +322,7 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
           ]
         }
       ],
-      "pageToken" => "token1234567890",
+      "pageToken" => token,
       "totalRows" => 3,
       "totalBytesProcessed" => 456789,
       "jobComplete" => true,
