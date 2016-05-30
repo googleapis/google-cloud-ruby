@@ -443,7 +443,7 @@ module Gcloud
       #
       #   jobs = bigquery.jobs
       #
-      # @example Retrieve only running jobs using the `:filter` option:
+      # @example Retrieve only running jobs using the `filter` optional arg:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -474,7 +474,7 @@ module Gcloud
         options = { all: all, token: token, max: max, filter: filter }
         resp = connection.list_jobs options
         if resp.success?
-          Job::List.from_response resp, connection
+          Job::List.from_response resp, connection, all, max, filter
         else
           fail ApiError.from_response(resp)
         end

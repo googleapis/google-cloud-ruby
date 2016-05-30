@@ -39,15 +39,105 @@ module Gcloud
         end
 
         ##
+        # Whether there is a next page of jobs.
+        def next?
+          !token.nil?
+        end
+
+        ##
+        # Retrieve the next page of jobs.
+        def next
+          return nil unless next?
+          ensure_connection!
+          options = { all: @hidden, token: token, max: @max, filter: @filter }
+          resp = @connection.list_jobs options
+          if resp.success?
+            self.class.from_response resp, @connection, @hidden, @max, @filter
+          else
+            fail ApiError.from_response(resp)
+          end
+        end
+
+        ##
+        # Retrieves all jobs by repeatedly loading {#next} until {#next?}
+        # returns `false`. Calls the given block once for each result and cursor
+        # combination, which are passed as parameters.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all log entries are
+        # retrieved. Be sure to use as narrow a search criteria as possible.
+        # Please use with caution.
+        #
+        # @example Iterating each result by passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #
+        #   bigquery.jobs.all do |job|
+        #     puts job.state
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #
+        #   all_names = bigquery.jobs.all.map do |job|
+        #     job.state
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #
+        #   bigquery.jobs.all(max_api_calls: 10) do |job|
+        #     puts job.state
+        #   end
+        #
+        def all max_api_calls: nil
+          max_api_calls = max_api_calls.to_i if max_api_calls
+          unless block_given?
+            return enum_for(:all, max_api_calls: max_api_calls)
+          end
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if max_api_calls
+              max_api_calls -= 1
+              break if max_api_calls < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
+        end
+
+        ##
         # @private New Job::List from a response object.
-        def self.from_response resp, conn
+        def self.from_response resp, conn, hidden = nil, max = nil, filter = nil
           jobs = List.new(Array(resp.data["jobs"]).map do |gapi_object|
             Job.from_gapi gapi_object, conn
           end)
           jobs.instance_variable_set "@token", resp.data["nextPageToken"]
           jobs.instance_variable_set "@etag",  resp.data["etag"]
           jobs.instance_variable_set "@total", resp.data["totalItems"]
+          jobs.instance_variable_set "@connection", conn
+          jobs.instance_variable_set "@hidden",     hidden
+          jobs.instance_variable_set "@max",        max
+          jobs.instance_variable_set "@filter",     filter
           jobs
+        end
+
+        protected
+
+        ##
+        # Raise an error unless an active connection is available.
+        def ensure_connection!
+          fail "Must have active connection" unless @connection
         end
       end
     end
