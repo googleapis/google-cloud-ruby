@@ -255,6 +255,139 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     tables.token.must_equal "next_page_token"
   end
 
+  it "paginates tables with next? and next" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_tables_json(3, "next_page_token", 5)]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_tables_json(2, nil, 5)]
+    end
+
+    first_tables = dataset.tables
+    first_tables.count.must_equal 3
+    first_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+    first_tables.token.wont_be :nil?
+    first_tables.token.must_equal "next_page_token"
+    first_tables.total.must_equal 5
+
+    second_tables = dataset.tables token: first_tables.token
+    second_tables.count.must_equal 2
+    second_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+    second_tables.token.must_be :nil?
+    second_tables.total.must_equal 5
+  end
+
+  it "paginates tables with next? and next and max" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_tables_json(3, "next_page_token", 5)]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_tables_json(2, nil, 5)]
+    end
+
+    first_tables = dataset.tables max: 3
+    first_tables.count.must_equal 3
+    first_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+    first_tables.next?.must_equal true
+    first_tables.total.must_equal 5
+
+    second_tables = first_tables.next
+    second_tables.count.must_equal 2
+    second_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+    second_tables.next?.must_equal false
+    second_tables.total.must_equal 5
+  end
+
+  it "paginates tables with all" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_tables_json(3, "next_page_token", 5)]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_tables_json(2, nil, 5)]
+    end
+
+    tables = dataset.tables.all.to_a
+    tables.count.must_equal 5
+    tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+  end
+
+  it "paginates tables with all and max" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_tables_json(3, "next_page_token", 5)]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_tables_json(2, nil, 5)]
+    end
+
+    tables = dataset.tables(max: 3).all.to_a
+    tables.count.must_equal 5
+    tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+  end
+
+  it "iterates tables with all using Enumerator" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_tables_json(3, "next_page_token", 25)]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_tables_json(3, "second_page_token", 25)]
+    end
+
+    tables = dataset.tables.all.take(5)
+    tables.count.must_equal 5
+    tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+  end
+
+  it "iterates tables with all with max_api_calls set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_tables_json(3, "next_page_token", 25)]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_tables_json(3, "second_page_token", 25)]
+    end
+
+    tables = dataset.tables.all(max_api_calls: 1).to_a
+    tables.count.must_equal 6
+    tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+  end
+
   it "finds a table" do
     found_table_id = "found_table"
 
