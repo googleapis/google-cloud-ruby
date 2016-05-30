@@ -383,7 +383,7 @@ module Gcloud
         options = { all: all, token: token, max: max }
         resp = connection.list_datasets options
         if resp.success?
-          Dataset::List.from_response resp, connection
+          Dataset::List.from_response resp, connection, all, max
         else
           fail ApiError.from_response(resp)
         end
