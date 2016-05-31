@@ -319,13 +319,17 @@ module Gcloud
       #     records = records.next
       #   end
       #
-      # @example Retrieve all pages: (See {Gcloud::Dns::Record::List#all})
+      # @example Retrieve all records: (See {Gcloud::Dns::Record::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
       #   zone = dns.zone "example-com"
-      #   records = zone.records.all
+      #   records = zone.records "example.com."
+      #
+      #   records.all do |record|
+      #     puts record.name
+      #   end
       #
       def records name = nil, type = nil, token: nil, max: nil
         ensure_connection!
@@ -334,7 +338,7 @@ module Gcloud
 
         resp = connection.list_records id, name, type, token: token, max: max
         if resp.success?
-          Record::List.from_response resp, self
+          Record::List.from_response resp, self, name, type, max
         else
           fail ApiError.from_response(resp)
         end

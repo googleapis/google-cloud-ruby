@@ -43,38 +43,84 @@ module Gcloud
         def next
           return nil unless next?
           ensure_zone!
-          @zone.records token: token
+          @zone.records @name, @type, token: token, max: @max
         end
 
         ##
-        # Retrieves all records by repeatedly loading pages until {#next?}
-        # returns false. Returns the list instance for method chaining.
+        # Retrieves all records by repeatedly loading {#next} until {#next?}
+        # returns `false`. Calls the given block once for each result and cursor
+        # combination, which are passed as parameters.
         #
-        # @example
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all log entries are
+        # retrieved. Be sure to use as narrow a search criteria as possible.
+        # Please use with caution.
+        #
+        # @example Iterating each record by passing a block:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
         #   dns = gcloud.dns
         #   zone = dns.zone "example-com"
-        #   records = zone.records.all # Load all pages of records
+        #   records = zone.records "example.com."
         #
-        def all
-          while next?
-            next_records = self.next
-            push(*next_records)
-            self.token = next_records.token
+        #   records.all do |record|
+        #     puts record.name
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   dns = gcloud.dns
+        #   zone = dns.zone "example-com"
+        #   records = zone.records "example.com."
+        #
+        #   all_names = records.all.map do |record|
+        #     record.name
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   dns = gcloud.dns
+        #   zone = dns.zone "example-com"
+        #   records = zone.records "example.com."
+        #
+        #   records.all(max_api_calls: 10) do |record|
+        #     puts record.name
+        #   end
+        #
+        def all max_api_calls: nil
+          max_api_calls = max_api_calls.to_i if max_api_calls
+          unless block_given?
+            return enum_for(:all, max_api_calls: max_api_calls)
           end
-          self
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if max_api_calls
+              max_api_calls -= 1
+              break if max_api_calls < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
         end
 
         ##
         # @private New Records::List from a response object.
-        def self.from_response resp, zone
+        def self.from_response resp, zone, name = nil, type = nil, max = nil
           records = new(Array(resp.data["rrsets"]).map do |gapi_object|
             Record.from_gapi gapi_object
           end)
           records.instance_variable_set "@token", resp.data["nextPageToken"]
           records.instance_variable_set "@zone",  zone
+          records.instance_variable_set "@name",  name
+          records.instance_variable_set "@type",  type
+          records.instance_variable_set "@max",   max
           records
         end
 
