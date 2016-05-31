@@ -260,7 +260,7 @@ module Gcloud
         resp = connection.list_changes id, token: token, max: max,
                                            order: order, sort: sort
         if resp.success?
-          Change::List.from_response resp, self
+          Change::List.from_response resp, self, max, order
         else
           fail ApiError.from_response(resp)
         end

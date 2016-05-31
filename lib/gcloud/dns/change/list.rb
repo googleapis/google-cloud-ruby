@@ -43,17 +43,19 @@ module Gcloud
         def next
           return nil unless next?
           ensure_zone!
-          @zone.changes token: token
+          @zone.changes token: token, max: @max, order: @order
         end
 
         ##
         # @private New Changes::List from a response object.
-        def self.from_response resp, zone
+        def self.from_response resp, zone, max = nil, order = nil
           changes = new(Array(resp.data["changes"]).map do |gapi_object|
             Change.from_gapi gapi_object, zone
           end)
           changes.instance_variable_set "@token", resp.data["nextPageToken"]
           changes.instance_variable_set "@zone",  zone
+          changes.instance_variable_set "@max",   max
+          changes.instance_variable_set "@order", order
           changes
         end
 
