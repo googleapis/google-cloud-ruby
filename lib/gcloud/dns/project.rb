@@ -198,7 +198,7 @@ module Gcloud
         ensure_connection!
         resp = connection.list_zones token: token, max: max
         if resp.success?
-          Zone::List.from_response resp, connection
+          Zone::List.from_response resp, connection, max
         else
           fail ApiError.from_response(resp)
         end

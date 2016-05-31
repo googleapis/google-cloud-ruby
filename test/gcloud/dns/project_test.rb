@@ -98,30 +98,6 @@ describe Gcloud::Dns::Project, :mock_dns do
     second_zones.token.must_be :nil?
   end
 
-  it "paginates zones with next? and next" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_zones_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_zones_json(2)]
-    end
-
-    first_zones = dns.zones
-    first_zones.count.must_equal 3
-    first_zones.each { |z| z.must_be_kind_of Gcloud::Dns::Zone }
-    first_zones.next?.must_equal true
-
-    second_zones = first_zones.next
-    second_zones.count.must_equal 2
-    second_zones.each { |z| z.must_be_kind_of Gcloud::Dns::Zone }
-    second_zones.next?.must_equal false
-  end
-
   it "paginates zones with max set" do
     mock_connection.get "/dns/v1/projects/#{project}/managedZones" do |env|
       env.params.must_include "maxResults"
@@ -149,6 +125,58 @@ describe Gcloud::Dns::Project, :mock_dns do
     zones.each { |z| z.must_be_kind_of Gcloud::Dns::Zone }
     zones.token.wont_be :nil?
     zones.token.must_equal "next_page_token"
+  end
+
+  it "paginates zones with next? and next" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_zones_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_zones_json(2)]
+    end
+
+    first_zones = dns.zones
+    first_zones.count.must_equal 3
+    first_zones.each { |z| z.must_be_kind_of Gcloud::Dns::Zone }
+    first_zones.next?.must_equal true
+
+    second_zones = first_zones.next
+    second_zones.count.must_equal 2
+    second_zones.each { |z| z.must_be_kind_of Gcloud::Dns::Zone }
+    second_zones.next?.must_equal false
+  end
+
+  it "paginates zones with next? and next and max set" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_zones_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_zones_json(2)]
+    end
+
+    first_zones = dns.zones max: 3
+    first_zones.count.must_equal 3
+    first_zones.each { |z| z.must_be_kind_of Gcloud::Dns::Zone }
+    first_zones.next?.must_equal true
+
+    second_zones = first_zones.next
+    second_zones.count.must_equal 2
+    second_zones.each { |z| z.must_be_kind_of Gcloud::Dns::Zone }
+    second_zones.next?.must_equal false
   end
 
   it "creates a zone" do

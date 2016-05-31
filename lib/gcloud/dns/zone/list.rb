@@ -43,9 +43,9 @@ module Gcloud
         def next
           return nil unless next?
           ensure_connection!
-          resp = @connection.list_zones token: token
+          resp = @connection.list_zones token: token, max: @max
           if resp.success?
-            Zone::List.from_response resp, @connection
+            Zone::List.from_response resp, @connection, @max
           else
             fail ApiError.from_response(resp)
           end
@@ -53,12 +53,13 @@ module Gcloud
 
         ##
         # @private New Zones::List from a response object.
-        def self.from_response resp, conn
+        def self.from_response resp, conn, max = nil
           zones = new(Array(resp.data["managedZones"]).map do |gapi_object|
             Zone.from_gapi gapi_object, conn
           end)
           zones.instance_variable_set "@token",      resp.data["nextPageToken"]
           zones.instance_variable_set "@connection", conn
+          zones.instance_variable_set "@max",        max
           zones
         end
 
