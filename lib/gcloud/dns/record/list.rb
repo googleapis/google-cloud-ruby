@@ -48,12 +48,12 @@ module Gcloud
 
         ##
         # Retrieves all records by repeatedly loading {#next} until {#next?}
-        # returns `false`. Calls the given block once for each result and cursor
-        # combination, which are passed as parameters.
+        # returns `false`. Calls the given block once for each record, which is
+        # passed as the parameter.
         #
         # An Enumerator is returned if no block is given.
         #
-        # This method may make several API calls until all log entries are
+        # This method may make several API calls until all records are
         # retrieved. Be sure to use as narrow a search criteria as possible.
         # Please use with caution.
         #
