@@ -52,13 +52,13 @@ module Gcloud
 
         def self.md5_for local_file
           ::File.open(Pathname(local_file).to_path, "rb") do |f|
-            ::Digest::MD5.base64digest f.read
+            ::Digest::MD5.file(f).base64digest
           end
         end
 
         def self.crc32c_for local_file
           ::File.open(Pathname(local_file).to_path, "rb") do |f|
-            ::Digest::CRC32c.base64digest f.read
+            ::Digest::CRC32c.file(f).base64digest
           end
         end
       end
