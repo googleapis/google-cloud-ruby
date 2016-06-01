@@ -38,7 +38,7 @@ module Gcloud
           gcloud_digest = gcloud_file.crc32c
           local_digest = crc32c_for local_file
           if gcloud_digest != local_digest
-            fail FileVerificationError.for_md5(gcloud_digest, local_digest)
+            fail FileVerificationError.for_crc32c(gcloud_digest, local_digest)
           end
         end
 
@@ -52,13 +52,13 @@ module Gcloud
 
         def self.md5_for local_file
           ::File.open(Pathname(local_file).to_path, "rb") do |f|
-            ::Digest::MD5.base64digest f.read
+            ::Digest::MD5.file(f).base64digest
           end
         end
 
         def self.crc32c_for local_file
           ::File.open(Pathname(local_file).to_path, "rb") do |f|
-            ::Digest::CRC32c.base64digest f.read
+            ::Digest::CRC32c.file(f).base64digest
           end
         end
       end
