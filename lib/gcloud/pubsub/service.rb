@@ -281,7 +281,7 @@ module Gcloud
       def set_subscription_policy subscription_name, new_policy, options = {}
         set_req = Google::Iam::V1::SetIamPolicyRequest.new(
           resource: subscription_path(subscription_name, options),
-          policy: Google::Iam::V1::Policy.decode_json(JSON.dump(new_policy))
+          policy: new_policy
         )
 
         backoff { iam.set_iam_policy set_req }

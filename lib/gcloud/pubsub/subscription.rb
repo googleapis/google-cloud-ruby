@@ -398,88 +398,79 @@ module Gcloud
       end
 
       ##
-      # Gets the access control policy.
+      # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
+      # policy for this subscription.
       #
-      # By default, the policy values are memoized to reduce the number of API
-      # calls to the Pub/Sub service.
+      # @see https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#iampolicy
+      #   google.iam.v1.IAMPolicy
       #
       # @param [Boolean] force Force the latest policy to be retrieved from the
       #   Pub/Sub service when `true`. Otherwise the policy will be memoized to
       #   reduce the number of API calls made to the Pub/Sub service. The
       #   default is `false`.
       #
-      # @return [Hash] Returns a hash that conforms to the following structure:
-      #
-      #   {
-      #     "etag"=>"CAE=",
-      #     "bindings" => [{
-      #       "role" => "roles/viewer",
-      #       "members" => ["serviceAccount:your-service-account"]
-      #     }]
-      #   }
+      # @return [Policy] the current Cloud IAM Policy for this subscription
       #
       # @example Policy values are memoized to reduce the number of API calls:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
+      #   sub = pubsub.subscription "my-subscription"
       #
-      #   subscription = pubsub.subscription "my-subscription"
-      #   puts subscription.policy["bindings"]
-      #   puts subscription.policy["rules"]
+      #   policy = sub.policy # API call
+      #   policy_2 = sub.policy # No API call
       #
       # @example Use `force` to retrieve the latest policy from the service:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
+      #   sub = pubsub.subscription "my-subscription"
       #
-      #   subscription = pubsub.subscription "my-subscription"
-      #   policy = subscription.policy force: true
+      #   policy = sub.policy force: true # API call
+      #   policy_2 = sub.policy force: true # API call
       #
       def policy force: nil
         @policy = nil if force
         @policy ||= begin
           ensure_service!
           grpc = service.get_subscription_policy name
-          JSON.parse(Google::Iam::V1::Policy.encode_json(grpc))
+          Policy.from_grpc grpc
         rescue GRPC::BadStatus => e
           raise Error.from_error(e)
         end
       end
 
       ##
-      # Sets the access control policy.
+      # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
+      # policy for this subscription. The policy should be read from {#policy}.
+      # See {Gcloud::Pubsub::Policy} for an explanation of the policy `etag`
+      # property and how to modify policies.
       #
-      # @param [String] new_policy A hash that conforms to the following
-      #   structure:
+      # @see https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#iampolicy
+      #   google.iam.v1.IAMPolicy
       #
-      #     {
-      #       "bindings" => [{
-      #         "role" => "roles/viewer",
-      #         "members" => ["serviceAccount:your-service-account"]
-      #       }]
-      #     }
+      # @param [Policy] new_policy a new or modified Cloud IAM Policy for this
+      #   subscription
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
+      #   sub = pubsub.subscription "my-subscription"
       #
-      #   viewer_policy = {
-      #     "bindings" => [{
-      #       "role" => "roles/viewer",
-      #       "members" => ["serviceAccount:your-service-account"]
-      #     }]
-      #   }
-      #   subscription = pubsub.subscription "my-subscription"
-      #   subscription.policy = viewer_policy
+      #   policy = sub.policy # API call
+      #
+      #   policy.roles["roles/owner"] << "user:owner@example.com"
+      #
+      #   sub.policy = policy # API call
       #
       def policy= new_policy
         ensure_service!
-        grpc = service.set_subscription_policy name, new_policy
-        @policy = JSON.parse(Google::Iam::V1::Policy.encode_json(grpc))
+        grpc = service.set_subscription_policy name, new_policy.to_grpc
+        @policy = Policy.from_grpc grpc
       rescue GRPC::BadStatus => e
         raise Error.from_error(e)
       end
