@@ -463,7 +463,7 @@ module Gcloud
       #
       #   policy = sub.policy # API call
       #
-      #   policy.roles["roles/owner"] << "user:owner@example.com"
+      #   policy.add "roles/owner", "user:owner@example.com"
       #
       #   sub.policy = policy # API call
       #

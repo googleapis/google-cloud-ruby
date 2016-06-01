@@ -140,7 +140,13 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
   it "sets the IAM Policy" do
     policy_json = {
       "etag"=>"CAE=",
-      "bindings"=>[]
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => [
+          "user:owner@example.com",
+          "serviceAccount:0987654321@developer.gserviceaccount.com"
+        ]
+      }]
     }.to_json
 
     get_req = Google::Iam::V1::GetIamPolicyRequest.new(
@@ -155,8 +161,8 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
       "bindings" => [{
         "role" => "roles/owner",
         "members" => [
-          "user:owner@example.com",
-          "serviceAccount:0987654321@developer.gserviceaccount.com"
+          "serviceAccount:0987654321@developer.gserviceaccount.com",
+          "user:newowner@example.com"
         ]
       }]
     }
@@ -171,7 +177,9 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
 
     policy = subscription.policy
 
-    policy.roles["roles/owner"] = ["user:owner@example.com", "serviceAccount:0987654321@developer.gserviceaccount.com"]
+    policy.add "roles/owner", "user:newowner@example.com"
+    policy.remove "roles/owner", "user:owner@example.com"
+
     subscription.policy = policy
 
     mock.verify
@@ -184,8 +192,8 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
     policy.roles["roles/viewer"].must_be :nil?
     policy.roles["roles/owner"].must_be_kind_of Array
     policy.roles["roles/owner"].count.must_equal 2
-    policy.roles["roles/owner"].first.must_equal "user:owner@example.com"
-    policy.roles["roles/owner"].last.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
+    policy.roles["roles/owner"].first.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
+    policy.roles["roles/owner"].last.must_equal "user:newowner@example.com"
   end
 
   it "tests the available permissions" do
