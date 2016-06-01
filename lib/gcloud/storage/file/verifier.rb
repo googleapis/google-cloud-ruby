@@ -38,7 +38,7 @@ module Gcloud
           gcloud_digest = gcloud_file.crc32c
           local_digest = crc32c_for local_file
           if gcloud_digest != local_digest
-            fail FileVerificationError.for_md5(gcloud_digest, local_digest)
+            fail FileVerificationError.for_crc32c(gcloud_digest, local_digest)
           end
         end
 
