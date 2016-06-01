@@ -367,7 +367,7 @@ module Gcloud
       #
       #   policy = topic.policy # API call
       #
-      #   policy.roles["roles/owner"] << "user:owner@example.com"
+      #   policy.add "roles/owner", "user:owner@example.com"
       #
       #   topic.policy = policy # API call
       #

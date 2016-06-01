@@ -154,8 +154,8 @@ describe Gcloud::Pubsub::Topic, :policy, :mock_pubsub do
         "members" => [
           "user:owner@example.com",
           "serviceAccount:0987654321@developer.gserviceaccount.com"
-        ],
-      }],
+        ]
+      }]
     }
 
     set_req = Google::Iam::V1::SetIamPolicyRequest.new(

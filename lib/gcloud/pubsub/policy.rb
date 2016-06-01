@@ -1,4 +1,4 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2016 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,8 +45,10 @@ module Gcloud
     #   the last request. The policy will be written only if the `etag` values
     #   match.
     # @attr [Hash{String => Array<String>}] roles The bindings that associate
-    #   roles with an array of members. See
-    #   [Binding](https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#binding)
+    #   roles with an array of members. See [Understanding
+    #   Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
+    #   listing of primitive and curated roles.
+    #   See [Binding](https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#binding)
     #   for a listing of values and patterns for members.
     #
     # @example
@@ -58,8 +60,9 @@ module Gcloud
     #
     #   policy = topic.policy # API call
     #
-    #   policy.roles["roles/owner"] << "user:owner@example.com" # Local mod
-    #   policy.roles["roles/viewer"] = ["allUsers"] # Local mod
+    #   policy.remove "roles/owner", "user:owner@example.com" # Local call
+    #   policy.add "roles/owner", "user:newowner@example.com" # Local call
+    #   policy.roles["roles/viewer"] = ["allUsers"] # Local call
     #
     #   topic.policy = policy # API call
     #
@@ -71,6 +74,64 @@ module Gcloud
       def initialize etag, roles
         @etag = etag
         @roles = roles
+      end
+
+      ##
+      # Convenience method for adding a member to a binding on this policy.
+      # See [Understanding
+      # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
+      # listing of primitive and curated roles.
+      # See [Binding](https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#binding)
+      # for a listing of values and patterns for members.
+      #
+      # @param [String] role A Cloud IAM role, such as `"roles/pubsub.admin"`.
+      # @param [String] member A Cloud IAM identity, such as
+      #   `"user:owner@example.com"`.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #   topic = pubsub.topic "my-topic"
+      #
+      #   policy = topic.policy # API call
+      #
+      #   policy.add "roles/owner", "user:newowner@example.com" # Local call
+      #
+      #   topic.policy = policy # API call
+      #
+      def add role, member
+        roles[role] << member
+      end
+
+      ##
+      # Convenience method for removing a member from a binding on this policy.
+      # See [Understanding
+      # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
+      # listing of primitive and curated roles.
+      # See [Binding](https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#binding)
+      # for a listing of values and patterns for members.
+      #
+      # @param [String] role A Cloud IAM role, such as `"roles/pubsub.admin"`.
+      # @param [String] member A Cloud IAM identity, such as
+      #   `"user:owner@example.com"`.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #   topic = pubsub.topic "my-topic"
+      #
+      #   policy = topic.policy # API call
+      #
+      #   policy.remove "roles/owner", "user:owner@example.com" # Local call
+      #
+      #   topic.policy = policy # API call
+      #
+      def remove role, member
+        roles[role].delete member
       end
 
       ##
