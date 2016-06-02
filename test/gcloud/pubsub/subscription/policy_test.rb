@@ -196,6 +196,61 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
     policy.roles["roles/owner"].last.must_equal "user:newowner@example.com"
   end
 
+  it "sets the IAM Policy in a block" do
+    policy_json = {
+      "etag"=>"CAE=",
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => [
+          "user:owner@example.com",
+          "serviceAccount:0987654321@developer.gserviceaccount.com"
+        ]
+      }]
+    }.to_json
+
+    get_req = Google::Iam::V1::GetIamPolicyRequest.new(
+      resource: "projects/#{project}/subscriptions/#{sub_name}"
+    )
+    get_res = Google::Iam::V1::Policy.decode_json policy_json
+    mock = Minitest::Mock.new
+    mock.expect :get_iam_policy, get_res, [get_req]
+
+    new_policy = {
+      "etag"=>"CAE=",
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => [
+          "serviceAccount:0987654321@developer.gserviceaccount.com",
+          "user:newowner@example.com"
+        ]
+      }]
+    }
+
+    set_req = Google::Iam::V1::SetIamPolicyRequest.new(
+      resource: "projects/#{project}/subscriptions/#{sub_name}",
+      policy: Google::Iam::V1::Policy.decode_json(JSON.dump(new_policy))
+    )
+    set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
+    mock.expect :set_iam_policy, set_res, [set_req]
+    subscription.service.mocked_iam = mock
+
+    policy = subscription.policy do |p|
+      p.add "roles/owner", "user:newowner@example.com"
+      p.remove "roles/owner", "user:owner@example.com"
+    end
+
+    mock.verify
+
+    policy.must_be_kind_of Gcloud::Pubsub::Policy
+    policy.roles.must_be_kind_of Hash
+    policy.roles.size.must_equal 1
+    policy.roles["roles/viewer"].must_be :nil?
+    policy.roles["roles/owner"].must_be_kind_of Array
+    policy.roles["roles/owner"].count.must_equal 2
+    policy.roles["roles/owner"].first.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
+    policy.roles["roles/owner"].last.must_equal "user:newowner@example.com"
+  end
+
   it "tests the available permissions" do
     test_req = Google::Iam::V1::TestIamPermissionsRequest.new(
       resource: "projects/#{project}/subscriptions/#{sub_name}",
