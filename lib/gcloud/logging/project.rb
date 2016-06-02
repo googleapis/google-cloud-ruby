@@ -415,7 +415,7 @@ module Gcloud
       def sinks token: nil, max: nil
         ensure_service!
         list_grpc = service.list_sinks token: token, max: max
-        Sink::List.from_grpc list_grpc, service
+        Sink::List.from_grpc list_grpc, service, max
       rescue GRPC::BadStatus => e
         raise Gcloud::Error.from_error(e)
       end
