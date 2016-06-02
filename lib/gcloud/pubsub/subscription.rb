@@ -409,6 +409,12 @@ module Gcloud
       #   reduce the number of API calls made to the Pub/Sub service. The
       #   default is `false`.
       #
+      # @yield [policy] A block for updating the policy. The latest policy will
+      #   be read from the Pub/Sub service and passed to the block. After the
+      #   block completes, the modified policy will be written to the service.
+      # @yieldparam [Policy] policy the current Cloud IAM Policy for this
+      #   subscription
+      #
       # @return [Policy] the current Cloud IAM Policy for this subscription
       #
       # @example Policy values are memoized to reduce the number of API calls:
@@ -431,8 +437,19 @@ module Gcloud
       #   policy = sub.policy force: true # API call
       #   policy_2 = sub.policy force: true # API call
       #
+      # @example Update the policy by passing a block:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #   sub = pubsub.subscription "my-subscription"
+      #
+      #   policy = sub.policy do |p|
+      #     p.add "roles/owner", "user:owner@example.com"
+      #   end # 2 API calls
+      #
       def policy force: nil
-        @policy = nil if force
+        @policy = nil if force || block_given?
         @policy ||= begin
           ensure_service!
           grpc = service.get_subscription_policy name
@@ -440,6 +457,10 @@ module Gcloud
         rescue GRPC::BadStatus => e
           raise Error.from_error(e)
         end
+        return @policy unless block_given?
+        p = @policy.deep_dup
+        yield p
+        self.policy = p
       end
 
       ##
@@ -447,6 +468,9 @@ module Gcloud
       # policy for this subscription. The policy should be read from {#policy}.
       # See {Gcloud::Pubsub::Policy} for an explanation of the policy `etag`
       # property and how to modify policies.
+      #
+      # You can also update the policy by passing a block to {#policy}, which
+      # will call this method internally after the block completes.
       #
       # @see https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#iampolicy
       #   google.iam.v1.IAMPolicy
