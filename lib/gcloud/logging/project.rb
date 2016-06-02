@@ -349,7 +349,7 @@ module Gcloud
       def resource_descriptors token: nil, max: nil
         ensure_service!
         list_grpc = service.list_resource_descriptors token: token, max: max
-        ResourceDescriptor::List.from_grpc list_grpc, service
+        ResourceDescriptor::List.from_grpc list_grpc, service, max
       rescue GRPC::BadStatus => e
         raise Gcloud::Error.from_error(e)
       end

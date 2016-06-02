@@ -100,6 +100,31 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
     second_descriptors.next?.must_equal false #wont_be :next?
   end
 
+  it "paginates resource descriptors with next? and next and max set" do
+    first_list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new page_size: 3
+    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
+    second_list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(page_token: "next_page_token", page_size: 3)
+    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(2))
+
+    mock = Minitest::Mock.new
+    mock.expect :list_monitored_resource_descriptors, first_list_res, [first_list_req]
+    mock.expect :list_monitored_resource_descriptors, second_list_res, [second_list_req]
+    logging.service.mocked_logging = mock
+
+    first_descriptors = logging.resource_descriptors max: 3
+    second_descriptors = first_descriptors.next
+
+    mock.verify
+
+    first_descriptors.each { |m| m.must_be_kind_of Gcloud::Logging::ResourceDescriptor }
+    first_descriptors.count.must_equal 3
+    first_descriptors.next?.must_equal true #must_be :next?
+
+    second_descriptors.each { |m| m.must_be_kind_of Gcloud::Logging::ResourceDescriptor }
+    second_descriptors.count.must_equal 2
+    second_descriptors.next?.must_equal false #wont_be :next?
+  end
+
   it "paginates resource descriptors with max set" do
     list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(page_size: 3)
     list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
