@@ -84,7 +84,8 @@ module Gcloud
       # See [Binding](https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#binding)
       # for a listing of values and patterns for members.
       #
-      # @param [String] role A Cloud IAM role, such as `"roles/pubsub.admin"`.
+      # @param [String] role_name A Cloud IAM role, such as
+      #   `"roles/pubsub.admin"`.
       # @param [String] member A Cloud IAM identity, such as
       #   `"user:owner@example.com"`.
       #
@@ -101,8 +102,8 @@ module Gcloud
       #
       #   topic.policy = policy # API call
       #
-      def add role, member
-        roles[role] << member
+      def add role_name, member
+        role(role_name) << member
       end
 
       ##
@@ -113,7 +114,8 @@ module Gcloud
       # See [Binding](https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#binding)
       # for a listing of values and patterns for members.
       #
-      # @param [String] role A Cloud IAM role, such as `"roles/pubsub.admin"`.
+      # @param [String] role_name A Cloud IAM role, such as
+      #   `"roles/pubsub.admin"`.
       # @param [String] member A Cloud IAM identity, such as
       #   `"user:owner@example.com"`.
       #
@@ -130,8 +132,34 @@ module Gcloud
       #
       #   topic.policy = policy # API call
       #
-      def remove role, member
-        roles[role].delete member
+      def remove role_name, member
+        role(role_name).delete member
+      end
+
+      ##
+      # Convenience method returning the array of members bound to a role in
+      # this policy, or an empty array if no value is present for the role in
+      # {#roles}. See [Understanding
+      # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
+      # listing of primitive and curated roles. See
+      # [Binding](https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#binding)
+      # for a listing of values and patterns for members.
+      #
+      # @return [Array<String>] The members strings, or an empty array.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #   topic = pubsub.topic "my-topic"
+      #
+      #   policy = topic.policy
+      #
+      #   policy.role("roles/viewer") << "user:viewer@example.com"
+      #
+      def role role_name
+        roles[role_name] ||= []
       end
 
       ##
@@ -139,11 +167,11 @@ module Gcloud
       def to_grpc
         Google::Iam::V1::Policy.new(
           etag: etag,
-          bindings: roles.keys.map do |role|
-            next if roles[role].empty?
+          bindings: roles.keys.map do |role_name|
+            next if roles[role_name].empty?
             Google::Iam::V1::Binding.new(
-              role: role,
-              members: roles[role]
+              role: role_name,
+              members: roles[role_name]
             )
           end
         )
