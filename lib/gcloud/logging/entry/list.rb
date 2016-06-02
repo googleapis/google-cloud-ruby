@@ -52,8 +52,8 @@ module Gcloud
 
         ##
         # Retrieves all entries by repeatedly loading {#next} until {#next?}
-        # returns `false`. Calls the given block once for each result and cursor
-        # combination, which are passed as parameters.
+        # returns `false`. Calls the given block once for each log entry, which
+        # is passed as the parameter.
         #
         # An Enumerator is returned if no block is given.
         #
@@ -61,7 +61,7 @@ module Gcloud
         # retrieved. Be sure to use as narrow a search criteria as possible.
         # Please use with caution.
         #
-        # @example Iterating each entry by passing a block:
+        # @example Iterating each log entry by passing a block:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new

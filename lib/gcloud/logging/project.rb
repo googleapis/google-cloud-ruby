@@ -548,12 +548,9 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #   metrics = logging.metrics
-      #   loop do
-      #     metrics.each do |m|
-      #       puts "#{m.name}: #{m.filter}"
-      #     end
-      #     break unless metrics.next?
-      #     metrics = metrics.next
+      #
+      #   metrics.all do |m|
+      #     puts "#{m.name}: #{m.filter}"
       #   end
       #
       def metrics token: nil, max: nil

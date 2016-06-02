@@ -136,13 +136,12 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
     mock.expect :list_log_metrics, second_list_res, [second_list_req]
     logging.service.mocked_metrics = mock
 
-    all_metrics = logging.metrics.all
+    all_metrics = logging.metrics.all.to_a
 
     mock.verify
 
     all_metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
     all_metrics.count.must_equal 5
-    all_metrics.next?.must_equal false #wont_be :next?
   end
 
   it "paginates metrics with all and max set" do
@@ -156,13 +155,50 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
     mock.expect :list_log_metrics, second_list_res, [second_list_req]
     logging.service.mocked_metrics = mock
 
-    all_metrics = logging.metrics(max: 3).all
+    all_metrics = logging.metrics(max: 3).all.to_a
 
     mock.verify
 
     all_metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
     all_metrics.count.must_equal 5
-    all_metrics.next?.must_equal false #wont_be :next?
+  end
+
+  it "iterates metrics with all using Enumerator" do
+    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
+    first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
+    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "second_page_token"))
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_metrics, first_list_res, [first_list_req]
+    mock.expect :list_log_metrics, second_list_res, [second_list_req]
+    logging.service.mocked_metrics = mock
+
+    all_metrics = logging.metrics.all.take(5)
+
+    mock.verify
+
+    all_metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
+    all_metrics.count.must_equal 5
+  end
+
+  it "iterates metrics with all max_api_calls set" do
+    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
+    first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
+    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "second_page_token"))
+
+    mock = Minitest::Mock.new
+    mock.expect :list_log_metrics, first_list_res, [first_list_req]
+    mock.expect :list_log_metrics, second_list_res, [second_list_req]
+    logging.service.mocked_metrics = mock
+
+    all_metrics = logging.metrics.all(max_api_calls: 1).to_a
+
+    mock.verify
+
+    all_metrics.each { |m| m.must_be_kind_of Gcloud::Logging::Metric }
+    all_metrics.count.must_equal 6
   end
 
   it "paginates metrics with max set" do
