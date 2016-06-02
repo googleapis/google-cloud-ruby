@@ -138,12 +138,9 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #   entries = logging.entries
-      #   loop do
-      #     entries.each do |e|
-      #       puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
-      #     end
-      #     break unless entries.next?
-      #     entries = entries.next
+      #
+      #   entries.all do |e|
+      #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
       #   end
       #
       def entries projects: nil, filter: nil, order: nil, token: nil, max: nil

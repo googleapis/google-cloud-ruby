@@ -51,30 +51,64 @@ module Gcloud
         end
 
         ##
-        # Retrieves all log entries by repeatedly loading {#next} until
-        # {#next?} returns `false`. Returns the list instance for method
-        # chaining.
+        # Retrieves all entries by repeatedly loading {#next} until {#next?}
+        # returns `false`. Calls the given block once for each result and cursor
+        # combination, which are passed as parameters.
+        #
+        # An Enumerator is returned if no block is given.
         #
         # This method may make several API calls until all log entries are
         # retrieved. Be sure to use as narrow a search criteria as possible.
         # Please use with caution.
         #
-        # @example
+        # @example Iterating each entry by passing a block:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
         #   logging = gcloud.logging
-        #   hour_ago = (Time.now - 60*60).utc.strftime('%FT%TZ')
-        #   recent_errors = "timestamp >= \"#{hour_ago}\" severity >= ERROR"
-        #   entries = logging.entries(filter: recent_errors).all
+        #   entries = logging.entries order: "timestamp desc"
         #
-        def all
-          while next?
-            next_records = self.next
-            push(*next_records)
-            self.token = next_records.token
+        #   entries.all do |entry|
+        #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   entries = logging.entries order: "timestamp desc"
+        #
+        #   all_payloads = entries.all.map do |entry|
+        #     entry.payload
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   entries = logging.entries order: "timestamp desc"
+        #
+        #   entries.all(max_api_calls: 10) do |entry|
+        #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
+        #   end
+        #
+        def all max_api_calls: nil
+          max_api_calls = max_api_calls.to_i if max_api_calls
+          unless block_given?
+            return enum_for(:all, max_api_calls: max_api_calls)
           end
-          self
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if max_api_calls
+              max_api_calls -= 1
+              break if max_api_calls < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
         end
 
         ##
