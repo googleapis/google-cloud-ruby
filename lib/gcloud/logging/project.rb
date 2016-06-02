@@ -559,7 +559,7 @@ module Gcloud
       def metrics token: nil, max: nil
         ensure_service!
         grpc = service.list_metrics token: token, max: max
-        Metric::List.from_grpc grpc, service
+        Metric::List.from_grpc grpc, service, max
       rescue GRPC::BadStatus => e
         raise Gcloud::Error.from_error(e)
       end

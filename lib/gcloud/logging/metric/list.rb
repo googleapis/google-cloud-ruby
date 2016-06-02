@@ -43,7 +43,7 @@ module Gcloud
         def next
           return nil unless next?
           ensure_service!
-          grpc = @service.list_metrics token: token
+          grpc = @service.list_metrics token: token, max: @max
           self.class.from_grpc grpc, @service
         rescue GRPC::BadStatus => e
           raise Gcloud::Error.from_error(e)
@@ -72,7 +72,7 @@ module Gcloud
         ##
         # @private New Metric::List from a
         # Google::Logging::V2::ListLogMetricsResponse object.
-        def self.from_grpc grpc_list, service
+        def self.from_grpc grpc_list, service, max = nil
           metrics = new(Array(grpc_list.metrics).map do |grpc_metric|
             Metric.from_grpc grpc_metric, service
           end)
@@ -80,6 +80,7 @@ module Gcloud
           token = nil if token == ""
           metrics.instance_variable_set "@token", token
           metrics.instance_variable_set "@service", service
+          metrics.instance_variable_set "@max", max
           metrics
         end
 
