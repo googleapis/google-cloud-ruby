@@ -404,12 +404,9 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #   sinks = logging.sinks
-      #   loop do
-      #     sinks.each do |s|
-      #       puts "#{s.name}: #{s.filter} -> #{s.destination}"
-      #     end
-      #     break unless sinks.next?
-      #     sinks = sinks.next
+      #
+      #   sinks.all do |s|
+      #     puts "#{s.name}: #{s.filter} -> #{s.destination}"
       #   end
       #
       def sinks token: nil, max: nil

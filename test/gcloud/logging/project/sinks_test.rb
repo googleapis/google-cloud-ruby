@@ -136,13 +136,12 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
     mock.expect :list_sinks, second_list_res, [second_list_req]
     logging.service.mocked_sinks = mock
 
-    all_sinks = logging.sinks.all
+    all_sinks = logging.sinks.all.to_a
 
     mock.verify
 
     all_sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
     all_sinks.count.must_equal 5
-    all_sinks.next?.must_equal false #wont_be :next?
   end
 
   it "paginates sinks with all and max set" do
@@ -156,13 +155,50 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
     mock.expect :list_sinks, second_list_res, [second_list_req]
     logging.service.mocked_sinks = mock
 
-    all_sinks = logging.sinks(max: 3).all
+    all_sinks = logging.sinks(max: 3).all.to_a
 
     mock.verify
 
     all_sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
     all_sinks.count.must_equal 5
-    all_sinks.next?.must_equal false #wont_be :next?
+  end
+
+  it "paginates sinks with all using Enumerator" do
+    first_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+    first_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))
+    second_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "second_page_token"))
+
+    mock = Minitest::Mock.new
+    mock.expect :list_sinks, first_list_res, [first_list_req]
+    mock.expect :list_sinks, second_list_res, [second_list_req]
+    logging.service.mocked_sinks = mock
+
+    all_sinks = logging.sinks.all.take(5)
+
+    mock.verify
+
+    all_sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
+    all_sinks.count.must_equal 5
+  end
+
+  it "paginates sinks with all and max_api_calls set" do
+    first_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+    first_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))
+    second_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "second_page_token"))
+
+    mock = Minitest::Mock.new
+    mock.expect :list_sinks, first_list_res, [first_list_req]
+    mock.expect :list_sinks, second_list_res, [second_list_req]
+    logging.service.mocked_sinks = mock
+
+    all_sinks = logging.sinks.all(max_api_calls: 1).to_a
+
+    mock.verify
+
+    all_sinks.each { |s| s.must_be_kind_of Gcloud::Logging::Sink }
+    all_sinks.count.must_equal 6
   end
 
   it "paginates sinks with max set" do
