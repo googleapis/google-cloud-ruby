@@ -74,7 +74,7 @@ module Gcloud
                    predefinedDefaultObjectAcl: options[:default_acl]
                  }.delete_if { |_, v| v.nil? }
 
-        incremental_backoff options do
+        incremental_backoff do
           @client.execute(
             api_method: @storage.buckets.insert,
             parameters: params,
@@ -100,8 +100,8 @@ module Gcloud
 
       ##
       # Permanently deletes an empty bucket.
-      def delete_bucket bucket_name, opts = {}
-        incremental_backoff opts do
+      def delete_bucket bucket_name
+        incremental_backoff do
           @client.execute(
             api_method: @storage.buckets.delete,
             parameters: { bucket: bucket_name }
@@ -410,8 +410,8 @@ module Gcloud
         }.delete_if { |_, v| v.nil? }
       end
 
-      def incremental_backoff options = {}
-        Gcloud::Backoff.new(options).execute_gapi do
+      def incremental_backoff
+        Gcloud::Backoff.new.execute_gapi do
           yield
         end
       end
