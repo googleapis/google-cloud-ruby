@@ -218,6 +218,108 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
     second_projects.next?.must_equal false
   end
 
+  it "paginates projects with all" do
+    mock_connection.get "/v1beta1/projects" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_projects_json(3, "next_page_token")]
+    end
+    mock_connection.get "/v1beta1/projects" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_projects_json(2)]
+    end
+
+    projects = resource_manager.projects.all.to_a
+    projects.count.must_equal 5
+    projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
+  end
+
+  it "paginates projects with all and max set" do
+    mock_connection.get "/v1beta1/projects" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.wont_include "filter"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_projects_json(3, "next_page_token")]
+    end
+    mock_connection.get "/v1beta1/projects" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.wont_include "filter"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_projects_json(2)]
+    end
+
+    projects = resource_manager.projects(max: 3).all.to_a
+    projects.count.must_equal 5
+    projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
+  end
+
+  it "paginates projects with all and filter set" do
+    mock_connection.get "/v1beta1/projects" do |env|
+      env.params.must_include "filter"
+      env.params["filter"].must_equal "labels.env:production"
+      env.params.wont_include "maxResults"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_projects_json(3, "next_page_token")]
+    end
+    mock_connection.get "/v1beta1/projects" do |env|
+      env.params.must_include "filter"
+      env.params["filter"].must_equal "labels.env:production"
+      env.params.wont_include "maxResults"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_projects_json(2)]
+    end
+
+    projects = resource_manager.projects(filter: "labels.env:production").all.to_a
+    projects.count.must_equal 5
+    projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
+  end
+
+  it "paginates projects with all using Enumerator" do
+    mock_connection.get "/v1beta1/projects" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_projects_json(3, "next_page_token")]
+    end
+    mock_connection.get "/v1beta1/projects" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_projects_json(3, "second_page_token")]
+    end
+
+    projects = resource_manager.projects.all.take(5)
+    projects.count.must_equal 5
+    projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
+  end
+
+  it "paginates projects with all and max_api_calls set" do
+    mock_connection.get "/v1beta1/projects" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_projects_json(3, "next_page_token")]
+    end
+    mock_connection.get "/v1beta1/projects" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_projects_json(3, "second_page_token")]
+    end
+
+    projects = resource_manager.projects.all(max_api_calls: 1).to_a
+    projects.count.must_equal 6
+    projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
+  end
+
   it "deletes a project" do
     mock_connection.delete "/v1beta1/projects/existing-project-123" do |env|
       [200, {}, ""]

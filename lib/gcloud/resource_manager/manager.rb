@@ -85,6 +85,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
       #   projects = resource_manager.projects
+      #
       #   projects.each do |project|
       #     puts project.project_id
       #   end
@@ -95,6 +96,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
       #   projects = resource_manager.projects filter: "labels.env:production"
+      #
       #   projects.each do |project|
       #     puts project.project_id
       #   end
@@ -104,8 +106,9 @@ module Gcloud
       #
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
-      #   projects = resource_manager.projects.all
-      #   projects.each do |project|
+      #   projects = resource_manager.projects
+      #
+      #   projects.all do |project|
       #     puts project.project_id
       #   end
       #

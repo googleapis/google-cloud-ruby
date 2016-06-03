@@ -45,23 +45,64 @@ module Gcloud
         end
 
         ##
-        # Retrieves all projects by repeatedly loading pages until #next?
-        # returns false. Returns the list instance for method chaining.
+        # Retrieves all project by repeatedly loading {#next} until {#next?}
+        # returns `false`. Calls the given block once for each project, which is
+        # passed as the parameter.
         #
-        # @example
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all projects are
+        # retrieved. Be sure to use as narrow a search criteria as possible.
+        # Please use with caution.
+        #
+        # @example Iterating each project by passing a block:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
         #   resource_manager = gcloud.resource_manager
-        #   projects = resource_manager.projects.all # Load all projects
+        #   projects = resource_manager.projects
         #
-        def all
-          while next?
-            next_projects = self.next
-            push(*next_projects)
-            self.token = next_projects.token
+        #   projects.all do |project|
+        #     puts project.project_id
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   resource_manager = gcloud.resource_manager
+        #   projects = resource_manager.projects
+        #
+        #   all_project_ids = projects.all.map do |project|
+        #     project.project_id
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   resource_manager = gcloud.resource_manager
+        #   projects = resource_manager.projects
+        #
+        #   projects.all(max_api_calls: 10) do |project|
+        #     puts project.project_id
+        #   end
+        #
+        def all max_api_calls: nil
+          max_api_calls = max_api_calls.to_i if max_api_calls
+          unless block_given?
+            return enum_for(:all, max_api_calls: max_api_calls)
           end
-          self
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if max_api_calls
+              max_api_calls -= 1
+              break if max_api_calls < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
         end
 
         ##
