@@ -41,7 +41,7 @@ module Gcloud
         def next
           return nil unless next?
           ensure_manager!
-          @manager.projects token: token
+          @manager.projects token: token, filter: @filter, max: @max
         end
 
         ##
@@ -66,12 +66,14 @@ module Gcloud
 
         ##
         # @private New Projects::List from a response object.
-        def self.from_response resp, manager
+        def self.from_response resp, manager, filter = nil, max = nil
           projects = new(Array(resp.data["projects"]).map do |gapi_object|
             Project.from_gapi gapi_object, manager.connection
           end)
           projects.instance_variable_set "@token",   resp.data["nextPageToken"]
           projects.instance_variable_set "@manager", manager
+          projects.instance_variable_set "@filter",  filter
+          projects.instance_variable_set "@max",     max
           projects
         end
 

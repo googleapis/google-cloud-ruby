@@ -112,7 +112,7 @@ module Gcloud
       def projects filter: nil, token: nil, max: nil
         resp = connection.list_project filter: filter, token: token, max: max
         if resp.success?
-          Project::List.from_response resp, self
+          Project::List.from_response resp, self, filter, max
         else
           fail ApiError.from_response(resp)
         end
