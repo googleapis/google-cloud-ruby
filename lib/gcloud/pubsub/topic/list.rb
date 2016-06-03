@@ -28,21 +28,48 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Topic::List with an array of values.
-        def initialize arr = [], token = nil
+        # @private Create a new Topic::List with an array of values.
+        def initialize arr = []
           super arr
-          @token = token
-          @token = nil if @token == ""
+        end
+
+        ##
+        # Whether there a next page of topics.
+        def next?
+          !token.nil?
+        end
+
+        ##
+        # Retrieve the next page of topics.
+        def next
+          return nil unless next?
+          ensure_service!
+          options = { token: token, max: @max }
+          grpc = @service.list_topics options
+          self.class.from_grpc grpc, @service, @max
+        rescue GRPC::BadStatus => e
+          raise Error.from_error(e)
         end
 
         ##
         # @private New Topic::List from a Google::Pubsub::V1::ListTopicsResponse
         # object.
-        def self.from_grpc grpc_list, service
-          topics = Array(grpc_list.topics).map do |grpc|
+        def self.from_grpc grpc_list, service, max = nil
+          topics = new(Array(grpc_list.topics).map do |grpc|
             Topic.from_grpc grpc, service
-          end
-          new topics, grpc_list.next_page_token
+          end, grpc_list.next_page_token)
+          topics.instance_variable_set "@service", service
+          topics.instance_variable_set "@max",     max
+          topics
+        end
+
+        protected
+
+        ##
+        # @private Raise an error unless an active connection to the service is
+        # available.
+        def ensure_service!
+          fail "Must have active connection to service" unless @service
         end
       end
     end

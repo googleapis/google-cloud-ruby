@@ -224,6 +224,50 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topics.token.must_equal "next_page_token"
   end
 
+  it "paginates topics with next? and next" do
+    first_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(2)
+    mock = Minitest::Mock.new
+    mock.expect :list_topics, first_get_res, [first_get_req]
+    mock.expect :list_topics, second_get_res, [second_get_req]
+    pubsub.service.mocked_publisher = mock
+
+    first_topics = pubsub.topics
+    second_topics = first_topics.next
+
+    mock.verify
+
+    first_topics.size.must_equal 3
+    first_topics.next?.must_equal true
+
+    second_topics.size.must_equal 2
+    second_topics.next?.must_equal false
+  end
+
+  it "paginates topics with next? and next and max set" do
+    first_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_size: 3
+    first_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_size: 3, page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(2)
+    mock = Minitest::Mock.new
+    mock.expect :list_topics, first_get_res, [first_get_req]
+    mock.expect :list_topics, second_get_res, [second_get_req]
+    pubsub.service.mocked_publisher = mock
+
+    first_topics = pubsub.topics max: 3
+    second_topics = first_topics.next
+
+    mock.verify
+
+    first_topics.size.must_equal 3
+    first_topics.next?.must_equal true
+
+    second_topics.size.must_equal 2
+    second_topics.next?.must_equal false
+  end
+
   it "paginates topics without max set" do
     get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}"
     get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
