@@ -609,4 +609,88 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
       sub.wont_be :lazy?
     end
   end
+
+  it "paginates subscriptions with all" do
+    first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 2)
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_subscriptions, second_get_res, [second_get_req]
+    pubsub.service.mocked_subscriber = mock
+
+    subs = pubsub.subscriptions.all.to_a
+
+    mock.verify
+
+    subs.count.must_equal 5
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+  end
+
+  it "paginates subscriptions with all and max set" do
+    first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_size: 3
+    first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_size: 3, page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 2)
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_subscriptions, second_get_res, [second_get_req]
+    pubsub.service.mocked_subscriber = mock
+
+    subs = pubsub.subscriptions(max: 3).all.to_a
+
+    mock.verify
+
+    subs.count.must_equal 5
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+  end
+
+  it "iterates subscriptions with all using Enumerator" do
+    first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "second_page_token")
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_subscriptions, second_get_res, [second_get_req]
+    pubsub.service.mocked_subscriber = mock
+
+    subs = pubsub.subscriptions.all.take(5)
+
+    mock.verify
+
+    subs.count.must_equal 5
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+  end
+
+  it "iterates subscriptions with all and max_api_calls set" do
+    first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "second_page_token")
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_subscriptions, second_get_res, [second_get_req]
+    pubsub.service.mocked_subscriber = mock
+
+    subs = pubsub.subscriptions.all(max_api_calls: 1).to_a
+
+    mock.verify
+
+    subs.count.must_equal 6
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+  end
 end

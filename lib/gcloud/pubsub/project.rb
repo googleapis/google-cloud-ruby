@@ -443,16 +443,9 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #
-      #   all_subs = []
-      #   tmp_subs = pubsub.subscriptions
-      #   while tmp_subs.any? do
-      #     tmp_subs.each do |subscription|
-      #       all_subs << subscription
-      #     end
-      #     # break loop if no more subscriptions available
-      #     break if tmp_subs.token.nil?
-      #     # get the next group of subscriptions
-      #     tmp_subs = pubsub.subscriptions token: tmp_subs.token
+      #   subscriptions = pubsub.subscriptions
+      #   subscriptions.all do |subscription|
+      #     puts subscription.name
       #   end
       #
       def subscriptions token: nil, max: nil
