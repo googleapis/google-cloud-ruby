@@ -238,7 +238,7 @@ module Gcloud
         ensure_service!
         options = { token: token, max: max }
         grpc = service.list_topics_subscriptions name, options
-        Subscription::List.from_grpc grpc, service
+        Subscription::List.from_topic_grpc grpc, service, name, max
       rescue GRPC::BadStatus => e
         raise Error.from_error(e)
       end

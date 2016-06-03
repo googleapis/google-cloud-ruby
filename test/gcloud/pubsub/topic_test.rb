@@ -367,6 +367,66 @@ describe Gcloud::Pubsub::Topic, :mock_pubsub do
     end
   end
 
+  it "paginates subscriptions with next? and next" do
+    first_get_req = Google::Pubsub::V1::ListTopicSubscriptionsRequest.new topic: "projects/#{project}/topics/#{topic_name}"
+    first_get_res = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicSubscriptionsRequest.new topic: "projects/#{project}/topics/#{topic_name}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json("fake-topic", 2)
+    mock = Minitest::Mock.new
+    mock.expect :list_topic_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_topic_subscriptions, second_get_res, [second_get_req]
+    topic.service.mocked_publisher = mock
+
+    first_subs = topic.subscriptions
+    second_subs = first_subs.next
+
+    mock.verify
+
+    first_subs.count.must_equal 3
+    first_subs.next?.must_equal true
+    first_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.must_be :lazy?
+    end
+
+    second_subs.count.must_equal 2
+    second_subs.next?.must_equal false
+    second_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.must_be :lazy?
+    end
+  end
+
+  it "paginates subscriptions with with next? and next and max set" do
+    first_get_req = Google::Pubsub::V1::ListTopicSubscriptionsRequest.new topic: "projects/#{project}/topics/#{topic_name}", page_size: 3
+    first_get_res = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicSubscriptionsRequest.new topic: "projects/#{project}/topics/#{topic_name}", page_size: 3, page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json("fake-topic", 2)
+    mock = Minitest::Mock.new
+    mock.expect :list_topic_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_topic_subscriptions, second_get_res, [second_get_req]
+    topic.service.mocked_publisher = mock
+
+    first_subs = topic.subscriptions max: 3
+    second_subs = first_subs.next
+
+    mock.verify
+
+    first_subs.count.must_equal 3
+    first_subs.next?.must_equal true
+    first_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.must_be :lazy?
+    end
+
+    second_subs.count.must_equal 2
+    second_subs.next?.must_equal false
+    second_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.must_be :lazy?
+    end
+  end
+
   it "can publish a message" do
     message = "new-message-here"
     encoded_msg = message.encode("ASCII-8BIT")

@@ -550,4 +550,63 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     subs.token.must_equal "next_page_token"
   end
 
+  it "paginates subscriptions with next? and next" do
+    first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 2)
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_subscriptions, second_get_res, [second_get_req]
+    pubsub.service.mocked_subscriber = mock
+
+    first_subs = pubsub.subscriptions
+    second_subs = first_subs.next
+
+    mock.verify
+
+    first_subs.count.must_equal 3
+    first_subs.next?.must_equal true
+    first_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+
+    second_subs.count.must_equal 2
+    second_subs.next?.must_equal false
+    second_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+  end
+
+  it "paginates subscriptions with next? and next and max set" do
+    first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_size: 3
+    first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_size: 3, page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 2)
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_subscriptions, second_get_res, [second_get_req]
+    pubsub.service.mocked_subscriber = mock
+
+    first_subs = pubsub.subscriptions max: 3
+    second_subs = first_subs.next
+
+    mock.verify
+
+    first_subs.count.must_equal 3
+    first_subs.next?.must_equal true
+    first_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+
+    second_subs.count.must_equal 2
+    second_subs.next?.must_equal false
+    second_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+  end
 end

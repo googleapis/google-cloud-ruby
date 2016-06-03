@@ -29,24 +29,82 @@ module Gcloud
 
         ##
         # Create a new Subscription::List with an array of values.
-        def initialize arr = [], token = nil
+        def initialize arr = []
           super arr
-          @token = token
-          @token = nil if @token == ""
+        end
+
+        ##
+        # Whether there a next page of subscriptions.
+        def next?
+          !token.nil?
+        end
+
+        ##
+        # Retrieve the next page of subscriptions.
+        def next
+          return nil unless next?
+          ensure_service!
+          if @topic
+            next_topic_subscriptions
+          else
+            next_subscriptions
+          end
         end
 
         ##
         # @private New Subscriptions::List from a
         # Google::Pubsub::V1::ListSubscriptionsRequest object.
-        def self.from_grpc grpc_list, service
-          subs = Array(grpc_list.subscriptions).map do |grpc|
-            if grpc.is_a? String
-              Subscription.new_lazy grpc, service
-            else
-              Subscription.from_grpc grpc, service
-            end
-          end
-          new subs, grpc_list.next_page_token
+        def self.from_grpc grpc_list, service, max = nil
+          subs = new(Array(grpc_list.subscriptions).map do |grpc|
+            Subscription.from_grpc grpc, service
+          end)
+          token = grpc_list.next_page_token
+          token = nil if token == ""
+          subs.instance_variable_set "@token",   token
+          subs.instance_variable_set "@service", service
+          subs.instance_variable_set "@max",     max
+          subs
+        end
+
+        ##
+        # @private New Subscriptions::List from a
+        # Google::Pubsub::V1::ListTopicSubscriptionsResponse object.
+        def self.from_topic_grpc grpc_list, service, topic, max = nil
+          subs = new(Array(grpc_list.subscriptions).map do |grpc|
+            Subscription.new_lazy grpc, service
+          end)
+          token = grpc_list.next_page_token
+          token = nil if token == ""
+          subs.instance_variable_set "@token",   token
+          subs.instance_variable_set "@service", service
+          subs.instance_variable_set "@topic",   topic
+          subs.instance_variable_set "@max",     max
+          subs
+        end
+
+        protected
+
+        ##
+        # @private Raise an error unless an active connection to the service is
+        # available.
+        def ensure_service!
+          fail "Must have active connection to service" unless @service
+        end
+
+        def next_subscriptions
+          options = { prefix: @prefix, token: @token, max: @max }
+          grpc = @service.list_subscriptions options
+          self.class.from_grpc grpc, @service, @max
+        rescue GRPC::BadStatus => e
+          raise Error.from_error(e)
+        end
+
+        def next_topic_subscriptions
+          options = { token: @token, max: @max }
+          grpc = @service.list_topics_subscriptions @topic, options
+          self.class.from_topic_grpc grpc, @service, @topic, @max
+        rescue GRPC::BadStatus => e
+          raise Error.from_error(e)
         end
       end
     end
