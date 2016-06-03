@@ -338,12 +338,9 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #   resource_descriptors = logging.resource_descriptors
-      #   loop do
-      #     resource_descriptors.each do |rd|
-      #       puts rd.type
-      #     end
-      #     break unless resource_descriptors.next?
-      #     resource_descriptors = resource_descriptors.next
+      #
+      #   resource_descriptors.all do |rd|
+      #     puts rd.type
       #   end
       #
       def resource_descriptors token: nil, max: nil

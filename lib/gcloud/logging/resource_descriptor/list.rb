@@ -51,18 +51,79 @@ module Gcloud
         end
 
         ##
+        # Retrieves all resource descriptors by repeatedly loading {#next} until
+        # {#next?} returns `false`. Calls the given block once for each resource
+        # descriptor, which is passed as the parameter.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all resource descriptors
+        # are retrieved. Be sure to use as narrow a search criteria as possible.
+        # Please use with caution.
+        #
+        # @example Iterating each resource descriptor by passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   resource_descriptors = logging.resource_descriptors
+        #
+        #   resource_descriptors.all do |rd|
+        #     puts rd.type
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   resource_descriptors = logging.resource_descriptors
+        #
+        #   all_types = resource_descriptors.all.map do |rd|
+        #     rd.type
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   resource_descriptors = logging.resource_descriptors
+        #
+        #   resource_descriptors.all(max_api_calls: 10) do |rd|
+        #     puts rd.type
+        #   end
+        #
+        def all max_api_calls: nil
+          max_api_calls = max_api_calls.to_i if max_api_calls
+          unless block_given?
+            return enum_for(:all, max_api_calls: max_api_calls)
+          end
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if max_api_calls
+              max_api_calls -= 1
+              break if max_api_calls < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
+        end
+
+        ##
         # @private New ResourceDescriptor::List from a
         # Google::Logging::V2::ListMonitoredResourceDescriptorsResponse object.
         def self.from_grpc grpc_list, service, max = nil
-          sinks = new(Array(grpc_list.resource_descriptors).map do |grpc|
+          rds = new(Array(grpc_list.resource_descriptors).map do |grpc|
             ResourceDescriptor.from_grpc grpc
           end)
           token = grpc_list.next_page_token
           token = nil if token == ""
-          sinks.instance_variable_set "@token", token
-          sinks.instance_variable_set "@service", service
-          sinks.instance_variable_set "@max", max
-          sinks
+          rds.instance_variable_set "@token", token
+          rds.instance_variable_set "@service", service
+          rds.instance_variable_set "@max", max
+          rds
         end
 
         protected
