@@ -52,7 +52,7 @@ module Gcloud
         params["pageToken"]  = options[:token]  if options[:token]
         params["maxResults"] = options[:max]    if options[:max]
 
-        @client.execute(
+        execute(
           api_method: @storage.buckets.list,
           parameters: params
         )
@@ -61,7 +61,7 @@ module Gcloud
       ##
       # Retrieves bucket by name.
       def get_bucket bucket_name
-        @client.execute(
+        execute(
           api_method: @storage.buckets.get,
           parameters: { bucket: bucket_name }
         )
@@ -74,13 +74,11 @@ module Gcloud
                    predefinedDefaultObjectAcl: options[:default_acl]
                  }.delete_if { |_, v| v.nil? }
 
-        incremental_backoff do
-          @client.execute(
-            api_method: @storage.buckets.insert,
-            parameters: params,
-            body_object: insert_bucket_request(bucket_name, options)
-          )
-        end
+        execute(
+          api_method: @storage.buckets.insert,
+          parameters: params,
+          body_object: insert_bucket_request(bucket_name, options)
+        )
       end
 
       ##
@@ -91,7 +89,7 @@ module Gcloud
                    predefinedDefaultObjectAcl: options[:predefined_default_acl]
                  }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @storage.buckets.patch,
           parameters: params,
           body_object: patch_bucket_request(options)
@@ -101,18 +99,16 @@ module Gcloud
       ##
       # Permanently deletes an empty bucket.
       def delete_bucket bucket_name
-        incremental_backoff do
-          @client.execute(
-            api_method: @storage.buckets.delete,
-            parameters: { bucket: bucket_name }
-          )
-        end
+        execute(
+          api_method: @storage.buckets.delete,
+          parameters: { bucket: bucket_name }
+        )
       end
 
       ##
       # Retrieves a list of ACLs for the given bucket.
       def list_bucket_acls bucket_name
-        @client.execute(
+        execute(
           api_method: @storage.bucket_access_controls.list,
           parameters: { bucket: bucket_name }
         )
@@ -121,7 +117,7 @@ module Gcloud
       ##
       # Creates a new bucket ACL.
       def insert_bucket_acl bucket_name, entity, role
-        @client.execute(
+        execute(
           api_method: @storage.bucket_access_controls.insert,
           parameters: { bucket: bucket_name },
           body_object: { entity: entity, role: role }
@@ -131,7 +127,7 @@ module Gcloud
       ##
       # Permanently deletes a bucket ACL.
       def delete_bucket_acl bucket_name, entity
-        @client.execute(
+        execute(
           api_method: @storage.bucket_access_controls.delete,
           parameters: { bucket: bucket_name, entity: entity }
         )
@@ -140,7 +136,7 @@ module Gcloud
       ##
       # Retrieves a list of default ACLs for the given bucket.
       def list_default_acls bucket_name
-        @client.execute(
+        execute(
           api_method: @storage.default_object_access_controls.list,
           parameters: { bucket: bucket_name }
         )
@@ -149,7 +145,7 @@ module Gcloud
       ##
       # Creates a new default ACL.
       def insert_default_acl bucket_name, entity, role
-        @client.execute(
+        execute(
           api_method: @storage.default_object_access_controls.insert,
           parameters: { bucket: bucket_name },
           body_object: { entity: entity, role: role }
@@ -159,7 +155,7 @@ module Gcloud
       ##
       # Permanently deletes a default ACL.
       def delete_default_acl bucket_name, entity
-        @client.execute(
+        execute(
           api_method: @storage.default_object_access_controls.delete,
           parameters: { bucket: bucket_name, entity: entity }
         )
@@ -177,7 +173,7 @@ module Gcloud
           versions:   options[:versions]
         }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @storage.objects.list,
           parameters: params
         )
@@ -198,7 +194,7 @@ module Gcloud
         result = insert_file resumable, bucket_name, upload_path, media, options
         return result unless resumable
         upload = result.resumable_upload
-        result = @client.execute upload while upload.resumable?
+        result = execute upload while upload.resumable?
         result
       end
 
@@ -208,7 +204,7 @@ module Gcloud
         query = { bucket: bucket_name, object: file_path }
         query[:generation] = options[:generation] if options[:generation]
 
-        @client.execute(
+        execute(
           api_method: @storage.objects.get,
           parameters: query
         )
@@ -218,7 +214,7 @@ module Gcloud
       # destination bucket/object.
       def copy_file source_bucket_name, source_file_path,
                     destination_bucket_name, destination_file_path, options = {}
-        @client.execute(
+        execute(
           api_method: @storage.objects.copy,
           parameters: { sourceBucket: source_bucket_name,
                         sourceObject: source_file_path,
@@ -232,7 +228,7 @@ module Gcloud
       ##
       # Download contents of a file.
       def download_file bucket_name, file_path
-        @client.execute(
+        execute(
           api_method: @storage.objects.get,
           parameters: { bucket: bucket_name,
                         object: file_path,
@@ -248,7 +244,7 @@ module Gcloud
                    predefinedAcl: options[:predefined_acl]
                  }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @storage.objects.patch,
           parameters: params,
           body_object: patch_file_request(options)
@@ -258,7 +254,7 @@ module Gcloud
       ##
       # Permanently deletes a file.
       def delete_file bucket_name, file_path
-        @client.execute(
+        execute(
           api_method: @storage.objects.delete,
           parameters: { bucket: bucket_name,
                         object: file_path }
@@ -268,7 +264,7 @@ module Gcloud
       ##
       # Retrieves a list of ACLs for the given file.
       def list_file_acls bucket_name, file_name
-        @client.execute(
+        execute(
           api_method: @storage.object_access_controls.list,
           parameters: { bucket: bucket_name, object: file_name }
         )
@@ -280,7 +276,7 @@ module Gcloud
         query = { bucket: bucket_name, object: file_name }
         query[:generation] = options[:generation] if options[:generation]
 
-        @client.execute(
+        execute(
           api_method: @storage.object_access_controls.insert,
           parameters: query,
           body_object: { entity: entity, role: role }
@@ -293,7 +289,7 @@ module Gcloud
         query = { bucket: bucket_name, object: file_name, entity: entity }
         query[:generation] = options[:generation] if options[:generation]
 
-        @client.execute(
+        execute(
           api_method: @storage.object_access_controls.delete,
           parameters: query
         )
@@ -374,10 +370,12 @@ module Gcloud
                    predefinedAcl: options[:acl]
         }.delete_if { |_, v| v.nil? }
 
-        @client.execute api_method: @storage.objects.insert,
-                        media: media,
-                        parameters: params,
-                        body_object: insert_file_request(options)
+        execute(
+          api_method: @storage.objects.insert,
+          media: media,
+          parameters: params,
+          body_object: insert_file_request(options)
+        )
       end
 
       def file_media local_path, options, resumable
@@ -410,9 +408,9 @@ module Gcloud
         }.delete_if { |_, v| v.nil? }
       end
 
-      def incremental_backoff
+      def execute options
         Gcloud::Backoff.new.execute_gapi do
-          yield
+          @client.execute options
         end
       end
     end
