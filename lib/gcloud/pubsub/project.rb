@@ -203,16 +203,9 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #
-      #   all_topics = []
-      #   tmp_topics = pubsub.topics
-      #   while tmp_topics.any? do
-      #     tmp_topics.each do |topic|
-      #       all_topics << topic
-      #     end
-      #     # break loop if no more topics available
-      #     break if tmp_topics.token.nil?
-      #     # get the next group of topics
-      #     tmp_topics = pubsub.topics token: tmp_topics.token
+      #   topics = pubsub.topics
+      #   topics.all do |topic|
+      #     puts topic.name
       #   end
       #
       def topics token: nil, max: nil

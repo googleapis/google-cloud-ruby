@@ -52,12 +52,76 @@ module Gcloud
         end
 
         ##
+        # Retrieves all topic by repeatedly loading {#next} until {#next?}
+        # returns `false`. Calls the given block once for each topic, which is
+        # passed as the parameter.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all topics are retrieved.
+        # Be sure to use as narrow a search criteria as possible. Please use
+        # with caution.
+        #
+        # @example Iterating each topic by passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   pubsub = gcloud.pubsub
+        #
+        #   topics = pubsub.topics
+        #   topics.all do |topic|
+        #     puts topic.name
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   pubsub = gcloud.pubsub
+        #
+        #   topics = pubsub.topics
+        #   all_names = topics.all.map do |topic|
+        #     topic.name
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   pubsub = gcloud.pubsub
+        #
+        #   topics = pubsub.topics
+        #   topics.all(max_api_calls: 10) do |topic|
+        #     puts topic.name
+        #   end
+        #
+        def all max_api_calls: nil
+          max_api_calls = max_api_calls.to_i if max_api_calls
+          unless block_given?
+            return enum_for(:all, max_api_calls: max_api_calls)
+          end
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if max_api_calls
+              max_api_calls -= 1
+              break if max_api_calls < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
+        end
+
+        ##
         # @private New Topic::List from a Google::Pubsub::V1::ListTopicsResponse
         # object.
         def self.from_grpc grpc_list, service, max = nil
           topics = new(Array(grpc_list.topics).map do |grpc|
             Topic.from_grpc grpc, service
-          end, grpc_list.next_page_token)
+          end)
+          token = grpc_list.next_page_token
+          token = nil if token == ""
+          topics.instance_variable_set "@token",   token
           topics.instance_variable_set "@service", service
           topics.instance_variable_set "@max",     max
           topics

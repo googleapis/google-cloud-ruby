@@ -268,6 +268,74 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     second_topics.next?.must_equal false
   end
 
+  it "paginates topics with all" do
+    first_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(2)
+    mock = Minitest::Mock.new
+    mock.expect :list_topics, first_get_res, [first_get_req]
+    mock.expect :list_topics, second_get_res, [second_get_req]
+    pubsub.service.mocked_publisher = mock
+
+    topics = pubsub.topics.all.to_a
+
+    mock.verify
+
+    topics.size.must_equal 5
+  end
+
+  it "paginates topics with all and max set" do
+    first_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_size: 3
+    first_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_size: 3, page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(2)
+    mock = Minitest::Mock.new
+    mock.expect :list_topics, first_get_res, [first_get_req]
+    mock.expect :list_topics, second_get_res, [second_get_req]
+    pubsub.service.mocked_publisher = mock
+
+    topics = pubsub.topics(max: 3).all.to_a
+
+    mock.verify
+
+    topics.size.must_equal 5
+  end
+
+  it "iterates topics with all using Enumerator" do
+    first_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "second_page_token")
+    mock = Minitest::Mock.new
+    mock.expect :list_topics, first_get_res, [first_get_req]
+    mock.expect :list_topics, second_get_res, [second_get_req]
+    pubsub.service.mocked_publisher = mock
+
+    topics = pubsub.topics.all.take(5)
+
+    mock.verify
+
+    topics.size.must_equal 5
+  end
+
+  it "iterates topics with all and max_api_calls set" do
+    first_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "second_page_token")
+    mock = Minitest::Mock.new
+    mock.expect :list_topics, first_get_res, [first_get_req]
+    mock.expect :list_topics, second_get_res, [second_get_req]
+    pubsub.service.mocked_publisher = mock
+
+    topics = pubsub.topics.all(max_api_calls: 1).to_a
+
+    mock.verify
+
+    topics.size.must_equal 6
+  end
+
   it "paginates topics without max set" do
     get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}"
     get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
