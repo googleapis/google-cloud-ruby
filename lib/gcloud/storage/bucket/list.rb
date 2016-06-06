@@ -24,23 +24,51 @@ module Gcloud
         ##
         # If not empty, indicates that there are more buckets
         # that match the request and this value should be passed to
-        # the next Gcloud::Storage::Project#buckets to continue.
+        # the next {Gcloud::Storage::Project#buckets} to continue.
         attr_accessor :token
 
         ##
-        # Create a new Bucket::List with an array of values.
-        def initialize arr = [], token = nil
+        # @private Create a new Bucket::List with an array of values.
+        def initialize arr = []
           super arr
-          @token = token
+        end
+
+        ##
+        # Whether there a next page of buckets.
+        def next?
+          !token.nil?
+        end
+
+        ##
+        # Retrieve the next page of buckets.
+        def next
+          return nil unless next?
+          ensure_connection!
+          options = { prefix: @prefix, token: @token, max: @max }
+          resp = @connection.list_buckets options
+          fail ApiError.from_response(resp) unless resp.success?
+          Bucket::List.from_response resp, @connection, @prefix, @max
         end
 
         ##
         # @private New Bucket::List from a response object.
-        def self.from_response resp, conn
-          buckets = Array(resp.data["items"]).map do |gapi_object|
+        def self.from_response resp, conn, prefix = nil, max = nil
+          buckets = new(Array(resp.data["items"]).map do |gapi_object|
             Bucket.from_gapi gapi_object, conn
-          end
-          new buckets, resp.data["nextPageToken"]
+          end)
+          buckets.instance_variable_set "@token", resp.data["nextPageToken"]
+          buckets.instance_variable_set "@connection", conn
+          buckets.instance_variable_set "@prefix", prefix
+          buckets.instance_variable_set "@max", max
+          buckets
+        end
+
+        protected
+
+        ##
+        # Raise an error unless an active connection is available.
+        def ensure_connection!
+          fail "Must have active connection" unless @connection
         end
       end
     end

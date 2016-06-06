@@ -139,7 +139,7 @@ module Gcloud
         options = { prefix: prefix, token: token, max: max }
         resp = connection.list_buckets options
         if resp.success?
-          Bucket::List.from_response resp, connection
+          Bucket::List.from_response resp, connection, prefix, max
         else
           fail ApiError.from_response(resp)
         end

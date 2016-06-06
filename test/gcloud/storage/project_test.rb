@@ -292,6 +292,54 @@ describe Gcloud::Storage::Project, :mock_storage do
     subs.token.must_equal "next_page_token"
   end
 
+  it "paginates buckets with next? and next" do
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(2)]
+    end
+
+    first_buckets = storage.buckets
+    first_buckets.count.must_equal 3
+    first_buckets.next?.must_equal true
+
+    second_buckets = first_buckets.next
+    second_buckets.count.must_equal 2
+    second_buckets.next?.must_equal false
+  end
+
+  it "paginates buckets with next? and next and max set" do
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(2)]
+    end
+
+    first_buckets = storage.buckets max: 3
+    first_buckets.count.must_equal 3
+    first_buckets.next?.must_equal true
+
+    second_buckets = first_buckets.next
+    second_buckets.count.must_equal 2
+    second_buckets.next?.must_equal false
+  end
+
   it "finds a bucket" do
     bucket_name = "found-bucket"
 
