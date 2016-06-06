@@ -340,6 +340,78 @@ describe Gcloud::Storage::Project, :mock_storage do
     second_buckets.next?.must_equal false
   end
 
+  it "paginates buckets with all" do
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(2)]
+    end
+
+    buckets = storage.buckets.all.to_a
+    buckets.count.must_equal 5
+  end
+
+  it "paginates buckets with all and max set" do
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(2)]
+    end
+
+    buckets = storage.buckets(max: 3).all.to_a
+    buckets.count.must_equal 5
+  end
+
+  it "iterates buckets with all using Enumerator" do
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "second_page_token")]
+    end
+
+    buckets = storage.buckets.all.take(5)
+    buckets.count.must_equal 5
+  end
+
+  it "iterates buckets with all and max_api_calls set" do
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b?project=#{project}" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_buckets_json(3, "second_page_token")]
+    end
+
+    buckets = storage.buckets.all(max_api_calls: 1).to_a
+    buckets.count.must_equal 6
+  end
+
   it "finds a bucket" do
     bucket_name = "found-bucket"
 

@@ -117,22 +117,15 @@ module Gcloud
       #
       #   user_buckets = storage.buckets prefix: "user-"
       #
-      # @example With pagination: (See {Bucket::List#token})
+      # @example With pagination: (See {Bucket::List})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   storage = gcloud.storage
       #
-      #   all_buckets = []
-      #   tmp_buckets = storage.buckets
-      #   while tmp_buckets.any? do
-      #     tmp_buckets.each do |bucket|
-      #       all_buckets << bucket
-      #     end
-      #     # break loop if no more buckets available
-      #     break if tmp_buckets.token.nil?
-      #     # get the next group of buckets
-      #     tmp_buckets = storage.buckets token: tmp_buckets.token
+      #   buckets = storage.buckets
+      #   buckets.all do |bucket|
+      #     puts bucket.name
       #   end
       #
       def buckets prefix: nil, token: nil, max: nil
