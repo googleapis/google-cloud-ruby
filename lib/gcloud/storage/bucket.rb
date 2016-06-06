@@ -429,11 +429,9 @@ module Gcloud
           versions:  versions
         }
         resp = connection.list_files name, options
-        if resp.success?
-          File::List.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        fail ApiError.from_response(resp) unless resp.success?
+        File::List.from_response resp, connection, name, prefix, delimiter, max,
+                                 versions
       end
       alias_method :find_files, :files
 

@@ -479,6 +479,132 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     files.count.must_equal 3
   end
 
+  it "paginates files with next? and next" do
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.wont_include "pageToken"
+      [200, { "Content-Type" => "application/json" },
+       list_files_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, { "Content-Type" => "application/json" },
+       list_files_json(2)]
+    end
+
+    first_files = bucket.files
+    first_files.count.must_equal 3
+    first_files.next?.must_equal true
+
+    second_files = first_files.next
+    second_files.count.must_equal 2
+    second_files.next?.must_equal false
+  end
+
+  it "paginates files with next? and next and prefix set" do
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "prefix"
+      env.params["prefix"].must_equal "/prefix/"
+      env.params.wont_include "pageToken"
+      [200, { "Content-Type" => "application/json" },
+       list_files_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "prefix"
+      env.params["prefix"].must_equal "/prefix/"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, { "Content-Type" => "application/json" },
+       list_files_json(2)]
+    end
+
+    first_files = bucket.files prefix: "/prefix/"
+    first_files.count.must_equal 3
+    first_files.next?.must_equal true
+
+    second_files = first_files.next
+    second_files.count.must_equal 2
+    second_files.next?.must_equal false
+  end
+
+  it "paginates files with next? and next and delimiter set" do
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "delimiter"
+      env.params["delimiter"].must_equal "/"
+      env.params.wont_include "pageToken"
+      [200, { "Content-Type" => "application/json" },
+       list_files_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "delimiter"
+      env.params["delimiter"].must_equal "/"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, { "Content-Type" => "application/json" },
+       list_files_json(2)]
+    end
+
+    first_files = bucket.files delimiter: "/"
+    first_files.count.must_equal 3
+    first_files.next?.must_equal true
+
+    second_files = first_files.next
+    second_files.count.must_equal 2
+    second_files.next?.must_equal false
+  end
+
+  it "paginates files with next? and next and max set" do
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.wont_include "pageToken"
+      [200, { "Content-Type" => "application/json" },
+       list_files_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, { "Content-Type" => "application/json" },
+       list_files_json(2)]
+    end
+
+    first_files = bucket.files max: 3
+    first_files.count.must_equal 3
+    first_files.next?.must_equal true
+
+    second_files = first_files.next
+    second_files.count.must_equal 2
+    second_files.next?.must_equal false
+  end
+
+  it "paginates files with next? and next and versions set" do
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "versions"
+      env.params["versions"].must_equal "true"
+      env.params.wont_include "pageToken"
+      [200, { "Content-Type" => "application/json" },
+       list_files_json(3, "next_page_token")]
+    end
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
+      env.params.must_include "versions"
+      env.params["versions"].must_equal "true"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, { "Content-Type" => "application/json" },
+       list_files_json(2)]
+    end
+
+    first_files = bucket.files versions: true
+    first_files.count.must_equal 3
+    first_files.next?.must_equal true
+
+    second_files = first_files.next
+    second_files.count.must_equal 2
+    second_files.next?.must_equal false
+  end
+
   it "finds a file without generation" do
     file_name = "file.ext"
 
