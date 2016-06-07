@@ -319,7 +319,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topics.size.must_equal 5
   end
 
-  it "iterates topics with all and max_api_calls set" do
+  it "iterates topics with all and request_limit set" do
     first_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}"
     first_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
     second_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_token: "next_page_token"
@@ -329,7 +329,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     mock.expect :list_topics, second_get_res, [second_get_req]
     pubsub.service.mocked_publisher = mock
 
-    topics = pubsub.topics.all(max_api_calls: 1).to_a
+    topics = pubsub.topics.all(request_limit: 1).to_a
 
     mock.verify
 
@@ -673,7 +673,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     end
   end
 
-  it "iterates subscriptions with all and max_api_calls set" do
+  it "iterates subscriptions with all and request_limit set" do
     first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
     first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
     second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_token: "next_page_token"
@@ -683,7 +683,7 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     mock.expect :list_subscriptions, second_get_res, [second_get_req]
     pubsub.service.mocked_subscriber = mock
 
-    subs = pubsub.subscriptions.all(max_api_calls: 1).to_a
+    subs = pubsub.subscriptions.all(request_limit: 1).to_a
 
     mock.verify
 
