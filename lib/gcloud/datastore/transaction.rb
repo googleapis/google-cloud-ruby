@@ -198,12 +198,9 @@ module Gcloud
       #
       def find_all *keys
         ensure_service!
-        lookup_res = service.lookup(*keys.map(&:to_grpc),
+        lookup_res = service.lookup(*Array(keys).flatten.map(&:to_grpc),
                                     transaction: @id)
-        entities = to_gcloud_entities lookup_res.found
-        deferred = to_gcloud_keys lookup_res.deferred
-        missing  = to_gcloud_entities lookup_res.missing
-        LookupResults.new entities, deferred, missing
+        LookupResults.from_grpc lookup_res, service, nil, @id
       rescue GRPC::BadStatus => e
         raise Gcloud::Error.from_error(e)
       end
