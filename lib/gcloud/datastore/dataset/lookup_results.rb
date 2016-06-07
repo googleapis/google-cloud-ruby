@@ -60,12 +60,34 @@ module Gcloud
 
         ##
         # Whether there are more results available.
+        #
+        # @example
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #
+        #   task_key1 = datastore.key "Task", "sampleTask1"
+        #   task_key2 = datastore.key "Task", "sampleTask2"
+        #   tasks = datastore.find_all task_key1, task_key2
+        #   if tasks.next?
+        #     next_tasks = tasks.next
+        #   end
         def next?
           Array(@deferred).any?
         end
 
         ##
         # Retrieve the next page of results.
+        #
+        # @example
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #
+        #   task_key1 = datastore.key "Task", "sampleTask1"
+        #   task_key2 = datastore.key "Task", "sampleTask2"
+        #   tasks = datastore.find_all task_key1, task_key2
+        #   if tasks.next?
+        #     next_tasks = tasks.next
+        #   end
         def next
           return nil unless next?
           ensure_service!

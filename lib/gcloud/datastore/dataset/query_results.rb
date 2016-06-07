@@ -110,38 +110,43 @@ module Gcloud
         end
 
         ##
-        # Create a new QueryResults with an array of values.
+        # @private Create a new QueryResults with an array of values.
         def initialize arr = []
           super arr
         end
 
         ##
-        # Whether there are more results available for subsequent API calls.
-        # Tests the value of {#more_results}.
-        #
-        def next?
-          !no_more?
-        end
-
-        ##
-        # Retrieves the next page of results by making an API call with the
-        # value stored in {#cursor} if there are more results available.
+        # Whether there are more results available.
         #
         # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #
-        #   query = datastore.query("Task")
+        #   query = datastore.query "Tasks"
         #   tasks = datastore.run query
         #
-        #   loop do
-        #     tasks.each do |t|
-        #       puts t["description"]
-        #     end
-        #     break unless tasks.next?
-        #     tasks = tasks.next
+        #   if tasks.next?
+        #     next_tasks = tasks.next
+        #   end
+        #
+        def next?
+          !no_more?
+        end
+
+        ##
+        # Retrieve the next page of results.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #
+        #   if tasks.next?
+        #     next_tasks = tasks.next
         #   end
         #
         def next
@@ -157,6 +162,18 @@ module Gcloud
 
         ##
         # Retrieve the {Cursor} for the provided result.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #
+        #   first_task = tasks.first
+        #   first_cursor = tasks.cursor_for first_task
+        #
         def cursor_for result
           cursor_index = index result
           return nil if cursor_index.nil?
