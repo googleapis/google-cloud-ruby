@@ -182,7 +182,7 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
     all_sinks.count.must_equal 5
   end
 
-  it "paginates sinks with all and max_api_calls set" do
+  it "paginates sinks with all and request_limit set" do
     first_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
     first_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))
     second_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_token: "next_page_token")
@@ -193,7 +193,7 @@ describe Gcloud::Logging::Project, :sinks, :mock_logging do
     mock.expect :list_sinks, second_list_res, [second_list_req]
     logging.service.mocked_sinks = mock
 
-    all_sinks = logging.sinks.all(max_api_calls: 1).to_a
+    all_sinks = logging.sinks.all(request_limit: 1).to_a
 
     mock.verify
 

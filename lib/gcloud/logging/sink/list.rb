@@ -34,12 +34,40 @@ module Gcloud
 
         ##
         # Whether there is a next page of sinks.
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #
+        #   sinks = logging.sinks
+        #   if sinks.next?
+        #     next_sinks = sinks.next
+        #   end
+        #
         def next?
           !token.nil?
         end
 
         ##
         # Retrieve the next page of sinks.
+        #
+        # @return [Sink::List]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #
+        #   sinks = dataset.sinks
+        #   if sinks.next?
+        #     next_sinks = sinks.next
+        #   end
+        #
         def next
           return nil unless next?
           ensure_service!
@@ -59,6 +87,13 @@ module Gcloud
         # This method may make several API calls until all sinks are retrieved.
         # Be sure to use as narrow a search criteria as possible. Please use
         # with caution.
+        #
+        # @param [Integer] request_limit The upper limit of API requests to make
+        #   to load all sinks. Default is no limit.
+        # @yield [sink] The block for accessing each sink.
+        # @yieldparam [Sink] sink The sink object.
+        #
+        # @return [Enumerator]
         #
         # @example Iterating each sink by passing a block:
         #   require "gcloud"
@@ -89,21 +124,21 @@ module Gcloud
         #   logging = gcloud.logging
         #   sinks = logging.sinks
         #
-        #   sinks.all(max_api_calls: 10) do |sink|
+        #   sinks.all(request_limit: 10) do |sink|
         #     puts "#{sink.name}: #{sink.filter} -> #{sink.destination}"
         #   end
         #
-        def all max_api_calls: nil
-          max_api_calls = max_api_calls.to_i if max_api_calls
+        def all request_limit: nil
+          request_limit = request_limit.to_i if request_limit
           unless block_given?
-            return enum_for(:all, max_api_calls: max_api_calls)
+            return enum_for(:all, request_limit: request_limit)
           end
           results = self
           loop do
             results.each { |r| yield r }
-            if max_api_calls
-              max_api_calls -= 1
-              break if max_api_calls < 0
+            if request_limit
+              request_limit -= 1
+              break if request_limit < 0
             end
             break unless results.next?
             results = results.next

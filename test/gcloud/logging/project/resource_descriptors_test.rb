@@ -182,7 +182,7 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
     descriptors.count.must_equal 5
   end
 
-  it "paginates resource descriptors with all and max_api_calls set" do
+  it "paginates resource descriptors with all and request_limit set" do
     first_list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new
     first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
     second_list_req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(page_token: "next_page_token")
@@ -193,7 +193,7 @@ describe Gcloud::Logging::Project, :resource_descriptors, :mock_logging do
     mock.expect :list_monitored_resource_descriptors, second_list_res, [second_list_req]
     logging.service.mocked_logging = mock
 
-    descriptors = logging.resource_descriptors.all(max_api_calls: 1).to_a
+    descriptors = logging.resource_descriptors.all(request_limit: 1).to_a
 
     mock.verify
 

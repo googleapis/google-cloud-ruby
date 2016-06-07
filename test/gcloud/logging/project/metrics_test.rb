@@ -182,7 +182,7 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
     all_metrics.count.must_equal 5
   end
 
-  it "iterates metrics with all max_api_calls set" do
+  it "iterates metrics with all request_limit set" do
     first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
     first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
     second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_token: "next_page_token")
@@ -193,7 +193,7 @@ describe Gcloud::Logging::Project, :metrics, :mock_logging do
     mock.expect :list_log_metrics, second_list_res, [second_list_req]
     logging.service.mocked_metrics = mock
 
-    all_metrics = logging.metrics.all(max_api_calls: 1).to_a
+    all_metrics = logging.metrics.all(request_limit: 1).to_a
 
     mock.verify
 

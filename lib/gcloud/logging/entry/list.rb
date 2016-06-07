@@ -34,12 +34,40 @@ module Gcloud
 
         ##
         # Whether there is a next page of entries.
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #
+        #   entries = logging.entries
+        #   if entries.next?
+        #     next_entries = entries.next
+        #   end
+        #
         def next?
           !token.nil?
         end
 
         ##
         # Retrieve the next page of entries.
+        #
+        # @return [Sink::List]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #
+        #   entries = dataset.entries
+        #   if entries.next?
+        #     next_entries = entries.next
+        #   end
+        #
         def next
           return nil unless next?
           ensure_service!
@@ -51,7 +79,7 @@ module Gcloud
         end
 
         ##
-        # Retrieves all entries by repeatedly loading {#next} until {#next?}
+        # Retrieves all log entries by repeatedly loading {#next} until {#next?}
         # returns `false`. Calls the given block once for each log entry, which
         # is passed as the parameter.
         #
@@ -60,6 +88,13 @@ module Gcloud
         # This method may make several API calls until all log entries are
         # retrieved. Be sure to use as narrow a search criteria as possible.
         # Please use with caution.
+        #
+        # @param [Integer] request_limit The upper limit of API requests to make
+        #   to load all log entries. Default is no limit.
+        # @yield [entry] The block for accessing each log entry.
+        # @yieldparam [Entry] entry The log entry object.
+        #
+        # @return [Enumerator]
         #
         # @example Iterating each log entry by passing a block:
         #   require "gcloud"
@@ -90,21 +125,21 @@ module Gcloud
         #   logging = gcloud.logging
         #   entries = logging.entries order: "timestamp desc"
         #
-        #   entries.all(max_api_calls: 10) do |entry|
+        #   entries.all(request_limit: 10) do |entry|
         #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
         #   end
         #
-        def all max_api_calls: nil
-          max_api_calls = max_api_calls.to_i if max_api_calls
+        def all request_limit: nil
+          request_limit = request_limit.to_i if request_limit
           unless block_given?
-            return enum_for(:all, max_api_calls: max_api_calls)
+            return enum_for(:all, request_limit: request_limit)
           end
           results = self
           loop do
             results.each { |r| yield r }
-            if max_api_calls
-              max_api_calls -= 1
-              break if max_api_calls < 0
+            if request_limit
+              request_limit -= 1
+              break if request_limit < 0
             end
             break unless results.next?
             results = results.next

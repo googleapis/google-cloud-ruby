@@ -246,7 +246,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
     all_entries.count.must_equal 5
   end
 
-  it "paginates entries using all with max_api_calls set" do
+  it "paginates entries using all with request_limit set" do
     first_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
     first_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
     second_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], page_token: "next_page_token"
@@ -257,7 +257,7 @@ describe Gcloud::Logging::Project, :list_entries, :mock_logging do
     mock.expect :list_log_entries, second_list_res, [second_list_req]
     logging.service.mocked_logging = mock
 
-    all_entries = logging.entries.all(max_api_calls: 1).to_a
+    all_entries = logging.entries.all(request_limit: 1).to_a
 
     mock.verify
 
