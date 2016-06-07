@@ -197,7 +197,7 @@ module Gcloud
       #     puts topic.name
       #   end
       #
-      # @example With pagination: (See {Topic::List#token})
+      # @example Retrieve all topics: (See {Topic::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -437,7 +437,7 @@ module Gcloud
       #     puts subscription.name
       #   end
       #
-      # @example With pagination: (See {Subscription::List#token})
+      # @example Retrieve all subscriptions: (See {Subscription::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

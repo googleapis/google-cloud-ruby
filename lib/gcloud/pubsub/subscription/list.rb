@@ -28,7 +28,7 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Subscription::List with an array of values.
+        # @private Create a new Subscription::List with an array of values.
         def initialize arr = []
           super arr
         end
