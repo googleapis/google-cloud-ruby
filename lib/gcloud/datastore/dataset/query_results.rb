@@ -313,6 +313,8 @@ module Gcloud
           r, c = Array(query_res.batch.entity_results).map do |result|
             [Entity.from_grpc(result.entity), Cursor.from_grpc(result.cursor)]
           end.transpose
+          r ||= []
+          c ||= []
           new(r).tap do |qr|
             qr.cursors = c
             qr.end_cursor = Cursor.from_grpc query_res.batch.end_cursor
