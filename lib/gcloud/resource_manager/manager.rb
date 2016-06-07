@@ -101,7 +101,7 @@ module Gcloud
       #     puts project.project_id
       #   end
       #
-      # @example With pagination: (See {Gcloud::ResourceManager::Project::List})
+      # @example Retrieve all projects: (See {Project::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

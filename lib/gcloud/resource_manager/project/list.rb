@@ -25,7 +25,8 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Project::List with an array of Project instances.
+        # @private Create a new Project::List with an array of Project
+        # instances.
         def initialize arr = []
           super arr
         end
