@@ -59,6 +59,71 @@ module Gcloud
         end
 
         ##
+        # Retrieves all files by repeatedly loading {#next} until {#next?}
+        # returns `false`. Calls the given block once for each file, which is
+        # passed as the parameter.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all files are retrieved.
+        # Be sure to use as narrow a search criteria as possible. Please use
+        # with caution.
+        #
+        # @example Iterating each file by passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   files = bucket.files
+        #   files.all do |file|
+        #     puts file.name
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   files = bucket.files
+        #
+        #   all_names = files.all.map do |file|
+        #     file.name
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   storage = gcloud.storage
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   files = bucket.files
+        #   files.all(max_api_calls: 10) do |file|
+        #     puts file.name
+        #   end
+        #
+        def all max_api_calls: nil
+          max_api_calls = max_api_calls.to_i if max_api_calls
+          unless block_given?
+            return enum_for(:all, max_api_calls: max_api_calls)
+          end
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if max_api_calls
+              max_api_calls -= 1
+              break if max_api_calls < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
+        end
+
+        ##
         # @private New File::List from a response object.
         def self.from_response resp, conn, bucket = nil, prefix = nil,
                                delimiter = nil, max = nil, versions = nil
