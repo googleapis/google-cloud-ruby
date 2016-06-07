@@ -302,7 +302,7 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
     projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
   end
 
-  it "paginates projects with all and max_api_calls set" do
+  it "paginates projects with all and request_limit set" do
     mock_connection.get "/v1beta1/projects" do |env|
       env.params.wont_include "pageToken"
       [200, {"Content-Type" => "application/json"},
@@ -315,7 +315,7 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
        list_projects_json(3, "second_page_token")]
     end
 
-    projects = resource_manager.projects.all(max_api_calls: 1).to_a
+    projects = resource_manager.projects.all(request_limit: 1).to_a
     projects.count.must_equal 6
     projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
   end
