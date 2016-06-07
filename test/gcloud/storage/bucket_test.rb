@@ -723,7 +723,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     files.count.must_equal 5
   end
 
-  it "paginates files with all and max_api_calls set" do
+  it "paginates files with all and request_limit set" do
     mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
       env.params.wont_include "pageToken"
       [200, { "Content-Type" => "application/json" },
@@ -736,7 +736,7 @@ describe Gcloud::Storage::Bucket, :mock_storage do
        list_files_json(3, "second_page_token")]
     end
 
-    files = bucket.files.all(max_api_calls: 1).to_a
+    files = bucket.files.all(request_limit: 1).to_a
     files.count.must_equal 6
   end
 

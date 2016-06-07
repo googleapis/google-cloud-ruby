@@ -395,7 +395,7 @@ describe Gcloud::Storage::Project, :mock_storage do
     buckets.count.must_equal 5
   end
 
-  it "iterates buckets with all and max_api_calls set" do
+  it "iterates buckets with all and request_limit set" do
     mock_connection.get "/storage/v1/b?project=#{project}" do |env|
       env.params.wont_include "pageToken"
       [200, {"Content-Type"=>"application/json"},
@@ -408,7 +408,7 @@ describe Gcloud::Storage::Project, :mock_storage do
        list_buckets_json(3, "second_page_token")]
     end
 
-    buckets = storage.buckets.all(max_api_calls: 1).to_a
+    buckets = storage.buckets.all(request_limit: 1).to_a
     buckets.count.must_equal 6
   end
 
