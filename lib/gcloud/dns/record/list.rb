@@ -27,7 +27,7 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Record::List with an array of Record instances.
+        # @private Create a new Record::List with an array of Record instances.
         def initialize arr = []
           super arr
         end

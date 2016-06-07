@@ -27,7 +27,7 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Zone::List with an array of Zone instances.
+        # @private Create a new Zone::List with an array of Zone instances.
         def initialize arr = []
           super arr
         end

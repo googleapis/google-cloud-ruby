@@ -27,7 +27,7 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Change::List with an array of Change instances.
+        # @private Create a new Change::List with an array of Change instances.
         def initialize arr = []
           super arr
         end
