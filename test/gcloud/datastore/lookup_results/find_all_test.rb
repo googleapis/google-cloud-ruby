@@ -393,4 +393,44 @@ describe Gcloud::Datastore::Dataset, :find_all do
       end
     end
   end
+
+  it "iterates with all using Enumerator" do
+    first_lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: keys.map(&:to_grpc)
+    )
+    second_lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [key3, key4].map(&:to_grpc)
+    )
+    dataset.service.mocked_datastore.expect :lookup, first_lookup_res,  [first_lookup_req]
+    dataset.service.mocked_datastore.expect :lookup, second_lookup_res, [second_lookup_req]
+
+    entities = dataset.find_all(keys).all.take(3)
+    entities.count.must_equal 3
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+  end
+
+  it "iterates with all and request_limit set" do
+    first_lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: keys.map(&:to_grpc)
+    )
+    second_lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [key3, key4].map(&:to_grpc)
+    )
+    dataset.service.mocked_datastore.expect :lookup, first_lookup_res,  [first_lookup_req]
+    dataset.service.mocked_datastore.expect :lookup, second_lookup_res, [second_lookup_req]
+
+    # This test is a bit handwavy, as there aren't more results to lookup.
+    # But if you reduce the limit it will not make additional call.
+    entities = dataset.find_all(keys).all(request_limit: 1).to_a
+    entities.count.must_equal 4
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+  end
 end

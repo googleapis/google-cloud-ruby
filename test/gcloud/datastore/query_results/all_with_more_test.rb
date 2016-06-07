@@ -82,22 +82,22 @@ describe Gcloud::Datastore::Dataset, :all_with_more do
 
   it "run will fulfill a query and can use the all and limit api calls" do
     entities = dataset.run dataset.query("Task")
-    # change max_api_calls to 2 to see more requests attempted
-    entities.all(max_api_calls: 1) do |entity|
+    # change request_limit to 2 to see more requests attempted
+    entities.all(request_limit: 1) do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
   end
 
   it "run will fulfill a query and can use the all as a lazy enumerator" do
     entities = dataset.run dataset.query("Task")
-    # change max_api_calls to 2 to see more requests attempted
+    # change request_limit to 2 to see more requests attempted
     entities.all.lazy.take(30).count.must_equal 30
   end
 
   it "run will fulfill a query and can use the all_with_cursor and limit api calls" do
     entities = dataset.run dataset.query("Task")
-    # change max_api_calls to 2 to see more requests attempted
-    entities.all_with_cursor(max_api_calls: 1) do |entity, cursor|
+    # change request_limit to 2 to see more requests attempted
+    entities.all_with_cursor(request_limit: 1) do |entity, cursor|
       entity.must_be_kind_of Gcloud::Datastore::Entity
       cursor.must_be_kind_of Gcloud::Datastore::Cursor
     end
@@ -105,7 +105,7 @@ describe Gcloud::Datastore::Dataset, :all_with_more do
 
   it "run will fulfill a query and can use the all_with_cursor as a lazy enumerator" do
     entities = dataset.run dataset.query("Task")
-    # change max_api_calls to 2 to see more requests attempted
+    # change request_limit to 2 to see more requests attempted
     entities.all_with_cursor.lazy.take(30).count.must_equal 30
   end
 end

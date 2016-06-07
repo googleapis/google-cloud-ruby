@@ -118,6 +118,8 @@ module Gcloud
         ##
         # Whether there are more results available.
         #
+        # @return [Boolean]
+        #
         # @example
         #   require "gcloud"
         #
@@ -136,6 +138,8 @@ module Gcloud
 
         ##
         # Retrieve the next page of results.
+        #
+        # @return [QueryResults]
         #
         # @example
         #   require "gcloud"
@@ -163,6 +167,10 @@ module Gcloud
         ##
         # Retrieve the {Cursor} for the provided result.
         #
+        # @param [Entity] result The entity object to get a cursor for.
+        #
+        # @return [Cursor]
+        #
         # @example
         #   require "gcloud"
         #
@@ -186,6 +194,13 @@ module Gcloud
         #
         # An Enumerator is returned if no block is given.
         #
+        # @yield [result, cursor] The block for accessing each query result and
+        #   cursor.
+        # @yieldparam [Entity] result The query result object.
+        # @yieldparam [Cursor] cursor The cursor object.
+        #
+        # @return [Enumerator]
+        #
         # @example
         #   require "gcloud"
         #
@@ -204,8 +219,8 @@ module Gcloud
 
         ##
         # Retrieves all query results by repeatedly loading {#next} until
-        # {#next?} returns `false`.Calls the given block once for each result
-        # and cursor combination, which are passed as parameters.
+        # {#next?} returns `false`. Calls the given block once for each query
+        # result, which is passed as the parameter.
         #
         # An Enumerator is returned if no block is given.
         #
@@ -213,7 +228,14 @@ module Gcloud
         # retrieved. Be sure to use as narrow a search criteria as possible.
         # Please use with caution.
         #
-        # @example Iterating each result by passing a block:
+        # @param [Integer] request_limit The upper limit of API requests to make
+        #   to load all query results. Default is no limit.
+        # @yield [result] The block for accessing each query result.
+        # @yieldparam [Entity] result The query result object.
+        #
+        # @return [Enumerator]
+        #
+        # @example Iterating each query result by passing a block:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
@@ -242,21 +264,21 @@ module Gcloud
         #   datastore = gcloud.datastore
         #   query = datastore.query "Tasks"
         #   tasks = datastore.run query
-        #   tasks.all(max_api_calls: 10) do |task|
+        #   tasks.all(request_limit: 10) do |task|
         #     puts "Task #{task.key.id} (#cursor)"
         #   end
         #
-        def all max_api_calls: nil
-          max_api_calls = max_api_calls.to_i if max_api_calls
+        def all request_limit: nil
+          request_limit = request_limit.to_i if request_limit
           unless block_given?
-            return enum_for(:all, max_api_calls: max_api_calls)
+            return enum_for(:all, request_limit: request_limit)
           end
           results = self
           loop do
             results.each { |r| yield r }
-            if max_api_calls
-              max_api_calls -= 1
-              break if max_api_calls < 0
+            if request_limit
+              request_limit -= 1
+              break if request_limit < 0
             end
             break unless results.next?
             results = results.next
@@ -273,6 +295,15 @@ module Gcloud
         # This method may make several API calls until all query results are
         # retrieved. Be sure to use as narrow a search criteria as possible.
         # Please use with caution.
+        #
+        # @param [Integer] request_limit The upper limit of API requests to make
+        #   to load all tables. Default is no limit.
+        # @yield [result, cursor] The block for accessing each query result and
+        #   cursor.
+        # @yieldparam [Entity] result The query result object.
+        # @yieldparam [Cursor] cursor The cursor object.
+        #
+        # @return [Enumerator]
         #
         # @example Iterating all results and cursors by passing a block:
         #   require "gcloud"
@@ -301,22 +332,22 @@ module Gcloud
         #   datastore = gcloud.datastore
         #   query = datastore.query "Tasks"
         #   tasks = datastore.run query
-        #   tasks.all_with_cursor(max_api_calls: 10) do |task, cursor|
+        #   tasks.all_with_cursor(request_limit: 10) do |task, cursor|
         #     puts "Task #{task.key.id} (#cursor)"
         #   end
         #
-        def all_with_cursor max_api_calls: nil
-          max_api_calls = max_api_calls.to_i if max_api_calls
+        def all_with_cursor request_limit: nil
+          request_limit = request_limit.to_i if request_limit
           unless block_given?
-            return enum_for(:all_with_cursor, max_api_calls: max_api_calls)
+            return enum_for(:all_with_cursor, request_limit: request_limit)
           end
           results = self
 
           loop do
             results.zip(results.cursors).each { |r, c| yield r, c }
-            if max_api_calls
-              max_api_calls -= 1
-              break if max_api_calls < 0
+            if request_limit
+              request_limit -= 1
+              break if request_limit < 0
             end
             break unless results.next?
             results = results.next
