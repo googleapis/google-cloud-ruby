@@ -109,15 +109,18 @@ module Gcloud
       #     puts bucket.name
       #   end
       #
-      # @example Retrieve all buckets with names that begin with a given prefix:
+      # @example Retrieve buckets with names that begin with a given prefix:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   storage = gcloud.storage
       #
       #   user_buckets = storage.buckets prefix: "user-"
+      #   user_buckets.each do |bucket|
+      #     puts bucket.name
+      #   end
       #
-      # @example With pagination: (See {Bucket::List})
+      # @example Retrieve all buckets: (See {Bucket::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new

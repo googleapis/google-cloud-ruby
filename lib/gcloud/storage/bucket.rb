@@ -399,7 +399,7 @@ module Gcloud
       #     puts file.name
       #   end
       #
-      # @example With pagination: (See {File::List})
+      # @example Retrieve all files: (See {File::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
