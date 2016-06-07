@@ -320,4 +320,77 @@ describe Gcloud::Datastore::Dataset, :find_all do
       end
     end
   end
+
+  it "paginates with all" do
+    first_lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: keys.map(&:to_grpc)
+    )
+    second_lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [key3, key4].map(&:to_grpc)
+    )
+    dataset.service.mocked_datastore.expect :lookup, first_lookup_res,  [first_lookup_req]
+    dataset.service.mocked_datastore.expect :lookup, second_lookup_res, [second_lookup_req]
+
+    entities = dataset.find_all(keys).all.to_a
+    entities.count.must_equal 4
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+  end
+
+  it "paginates with all and consistency" do
+    first_lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: keys.map(&:to_grpc),
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(read_consistency: :EVENTUAL)
+    )
+    second_lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [key3, key4].map(&:to_grpc),
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(read_consistency: :EVENTUAL)
+    )
+    dataset.service.mocked_datastore.expect :lookup, first_lookup_res,  [first_lookup_req]
+    dataset.service.mocked_datastore.expect :lookup, second_lookup_res, [second_lookup_req]
+
+    entities = dataset.find_all(keys, consistency: :eventual).all.to_a
+    entities.count.must_equal 4
+    entities.each do |entity|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+  end
+
+  it "paginates with all and transaction" do
+    tx_id = "giterdone".encode("ASCII-8BIT")
+    begin_tx_res = Google::Datastore::V1beta3::BeginTransactionResponse.new(transaction: tx_id)
+    commit_res = Google::Datastore::V1beta3::CommitResponse.new(
+      # mutation_results: [Google::Datastore::V1beta3::MutationResult.new(
+      #   key: Gcloud::Datastore::Key.new("ds-test", "thingie").to_grpc
+      # )]
+    )
+    dataset.service.mocked_datastore.expect :begin_transaction, begin_tx_res, [Google::Datastore::V1beta3::BeginTransactionRequest]
+    dataset.service.mocked_datastore.expect :commit, commit_res, [Google::Datastore::V1beta3::CommitRequest]
+
+    first_lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: keys.map(&:to_grpc),
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(transaction: tx_id)
+    )
+    second_lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+      project_id: project,
+      keys: [key3, key4].map(&:to_grpc),
+      read_options: Google::Datastore::V1beta3::ReadOptions.new(transaction: tx_id)
+    )
+    dataset.service.mocked_datastore.expect :lookup, first_lookup_res,  [first_lookup_req]
+    dataset.service.mocked_datastore.expect :lookup, second_lookup_res, [second_lookup_req]
+
+    dataset.transaction do |tx|
+      entities = tx.find_all(keys).all.to_a
+      entities.count.must_equal 4
+      entities.each do |entity|
+        entity.must_be_kind_of Gcloud::Datastore::Entity
+      end
+    end
+  end
 end

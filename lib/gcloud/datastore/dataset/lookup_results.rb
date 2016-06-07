@@ -78,6 +78,67 @@ module Gcloud
         end
 
         ##
+        # Retrieves all lookup results by repeatedly loading {#next} until
+        # {#next?} returns `false`. Calls the given block once for each result,
+        # which is passed as the parameter.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all lookup results are
+        # retrieved. Be sure to use as narrow a search criteria as possible.
+        # Please use with caution.
+        #
+        # @example Iterating each result by passing a block:
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #
+        #   task_key1 = datastore.key "Task", "sampleTask1"
+        #   task_key2 = datastore.key "Task", "sampleTask2"
+        #   tasks = datastore.find_all task_key1, task_key2
+        #   tasks.all do |task|
+        #     puts "Task #{task.key.id} (#cursor)"
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #
+        #   task_key1 = datastore.key "Task", "sampleTask1"
+        #   task_key2 = datastore.key "Task", "sampleTask2"
+        #   tasks = datastore.find_all task_key1, task_key2
+        #   all_keys = tasks.all.map(&:key).each do |task|
+        #     task.key
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #
+        #   task_key1 = datastore.key "Task", "sampleTask1"
+        #   task_key2 = datastore.key "Task", "sampleTask2"
+        #   tasks = datastore.find_all task_key1, task_key2
+        #   tasks.all(max_api_calls: 10) do |task|
+        #     puts "Task #{task.key.id} (#cursor)"
+        #   end
+        #
+        def all max_api_calls: nil
+          max_api_calls = max_api_calls.to_i if max_api_calls
+          unless block_given?
+            return enum_for(:all, max_api_calls: max_api_calls)
+          end
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if max_api_calls
+              max_api_calls -= 1
+              break if max_api_calls < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
+        end
+
+        ##
         # @private New Dataset::LookupResults from a
         # Google::Dataset::V1beta3::LookupResponse object.
         def self.from_grpc lookup_res, service, consistency = nil, tx = nil
