@@ -419,8 +419,6 @@ module Gcloud
       ##
       # Retrieves a list of subscriptions for the given project.
       #
-      # @param [String] prefix Filter results to subscriptions whose names begin
-      #   with this prefix.
       # @param [String] token A previously-returned page token representing part
       #   of the larger set of results to view.
       # @param [Integer] max Maximum number of subscriptions to return.
@@ -457,9 +455,9 @@ module Gcloud
       #     tmp_subs = pubsub.subscriptions token: tmp_subs.token
       #   end
       #
-      def subscriptions prefix: nil, token: nil, max: nil
+      def subscriptions token: nil, max: nil
         ensure_service!
-        options = { prefix: prefix, token: token, max: max }
+        options = { token: token, max: max }
         grpc = service.list_subscriptions options
         Subscription::List.from_grpc grpc, service
       rescue GRPC::BadStatus => e
