@@ -125,7 +125,7 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     data.each { |d| d.class.must_equal Hash }
   end
 
-  it "iterates data using all with max_api_calls set" do
+  it "iterates data using all with request_limit set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
       env.params.wont_include "pageToken"
       [200, {"Content-Type"=>"application/json"},
@@ -138,7 +138,7 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
        query_data_json]
     end
 
-    data = job.query_results.all(max_api_calls: 1).to_a
+    data = job.query_results.all(request_limit: 1).to_a
     data.count.must_equal 6
     data.each { |d| d.class.must_equal Hash }
   end

@@ -297,7 +297,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
   end
 
-  it "iterates datasets with all with max_api_calls set" do
+  it "iterates datasets with all with request_limit set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
       env.params.wont_include "pageToken"
       [200, {"Content-Type"=>"application/json"},
@@ -310,7 +310,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
        list_datasets_json(3, "second_page_token")]
     end
 
-    datasets = bigquery.datasets.all(max_api_calls: 1).to_a
+    datasets = bigquery.datasets.all(request_limit: 1).to_a
     datasets.count.must_equal 6
     datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
   end
@@ -535,7 +535,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
   end
 
-  it "iterates jobs with all with max_api_calls set" do
+  it "iterates jobs with all with request_limit set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
       env.params.wont_include "pageToken"
       [200, {"Content-Type"=>"application/json"},
@@ -548,7 +548,7 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
        list_jobs_json(3, "second_page_token", 25)]
     end
 
-    jobs = bigquery.jobs.all(max_api_calls: 1).to_a
+    jobs = bigquery.jobs.all(request_limit: 1).to_a
     jobs.count.must_equal 6
     jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
   end

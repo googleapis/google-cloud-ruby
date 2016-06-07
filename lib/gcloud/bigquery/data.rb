@@ -61,11 +61,43 @@ module Gcloud
       end
 
       ##
-      # Is there a next page of data?
+      # Whether there is a next page of data.
+      #
+      # @return [Boolean]
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   table = dataset.table "my_table"
+      #
+      #   data = table.data
+      #   if data.next?
+      #     next_data = data.next
+      #   end
+      #
       def next?
         !token.nil?
       end
 
+      ##
+      # Retrieve the next page of data.
+      #
+      # @return [Data]
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   table = dataset.table "my_table"
+      #
+      #   data = table.data
+      #   if data.next?
+      #     next_data = data.next
+      #   end
+      #
       def next
         return nil unless next?
         ensure_table!
@@ -79,9 +111,16 @@ module Gcloud
       #
       # An Enumerator is returned if no block is given.
       #
-      # This method may make several API calls until all rows are
-      # retrieved. Be sure to use as narrow a search criteria as possible.
-      # Please use with caution.
+      # This method may make several API calls until all rows are retrieved. Be
+      # sure to use as narrow a search criteria as possible. Please use with
+      # caution.
+      #
+      # @param [Integer] request_limit The upper limit of API requests to make
+      #   to load all data. Default is no limit.
+      # @yield [row] The block for accessing each row of data.
+      # @yieldparam [Hash] row The row object.
+      #
+      # @return [Enumerator]
       #
       # @example Iterating each rows by passing a block:
       #   require "gcloud"
@@ -112,19 +151,19 @@ module Gcloud
       #   bigquery = gcloud.bigquery
       #   table = dataset.table "my_table"
       #
-      #   table.data.all(max_api_calls: 10) do |row|
+      #   table.data.all(request_limit: 10) do |row|
       #     puts row["word"]
       #   end
       #
-      def all max_api_calls: nil
-        max_api_calls = max_api_calls.to_i if max_api_calls
-        return enum_for(:all, max_api_calls: max_api_calls) unless block_given?
+      def all request_limit: nil
+        request_limit = request_limit.to_i if request_limit
+        return enum_for(:all, request_limit: request_limit) unless block_given?
         results = self
         loop do
           results.each { |r| yield r }
-          if max_api_calls
-            max_api_calls -= 1
-            break if max_api_calls < 0
+          if request_limit
+            request_limit -= 1
+            break if request_limit < 0
           end
           break unless results.next?
           results = results.next

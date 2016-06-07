@@ -370,7 +370,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
   end
 
-  it "iterates tables with all with max_api_calls set" do
+  it "iterates tables with all with request_limit set" do
     mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
       env.params.wont_include "pageToken"
       [200, {"Content-Type" => "application/json"},
@@ -383,7 +383,7 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
        list_tables_json(3, "second_page_token", 25)]
     end
 
-    tables = dataset.tables.all(max_api_calls: 1).to_a
+    tables = dataset.tables.all(request_limit: 1).to_a
     tables.count.must_equal 6
     tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
   end
