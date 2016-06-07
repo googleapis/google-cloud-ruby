@@ -19,6 +19,7 @@ require "gcloud/backoff"
 require "gcloud/upload"
 require "google/api_client"
 require "mime/types"
+require "digest/sha2"
 
 module Gcloud
   module Storage
@@ -204,17 +205,20 @@ module Gcloud
         query = { bucket: bucket_name, object: file_path }
         query[:generation] = options[:generation] if options[:generation]
 
-        execute(
+        request_options = {
           api_method: @storage.objects.get,
           parameters: query
-        )
+        }
+
+        request_options = add_headers request_options, options
+        execute request_options
       end
 
       ## Copy a file from source bucket/object to a
       # destination bucket/object.
       def copy_file source_bucket_name, source_file_path,
                     destination_bucket_name, destination_file_path, options = {}
-        execute(
+        request_options = {
           api_method: @storage.objects.copy,
           parameters: { sourceBucket: source_bucket_name,
                         sourceObject: source_file_path,
@@ -222,18 +226,24 @@ module Gcloud
                         destinationBucket: destination_bucket_name,
                         destinationObject: destination_file_path,
                         predefinedAcl: options[:acl]
-                      }.delete_if { |_, v| v.nil? })
+                      }.delete_if { |_, v| v.nil? }
+        }
+        request_options = add_headers request_options, options
+        execute request_options
       end
 
       ##
       # Download contents of a file.
-      def download_file bucket_name, file_path
-        execute(
+
+      def download_file bucket_name, file_path, options = {}
+        request_options = {
           api_method: @storage.objects.get,
           parameters: { bucket: bucket_name,
                         object: file_path,
                         alt: :media }
-        )
+        }
+        request_options = add_headers request_options, options
+        execute request_options
       end
 
       ##
@@ -370,12 +380,14 @@ module Gcloud
                    predefinedAcl: options[:acl]
         }.delete_if { |_, v| v.nil? }
 
-        execute(
+        request_options = {
           api_method: @storage.objects.insert,
           media: media,
           parameters: params,
           body_object: insert_file_request(options)
-        )
+        }
+        request_options = add_headers request_options, options
+        execute request_options
       end
 
       def file_media local_path, options, resumable
@@ -406,6 +418,20 @@ module Gcloud
           "metadata" => options[:metadata],
           "acl" => options[:acl]
         }.delete_if { |_, v| v.nil? }
+      end
+
+      def add_headers request_options, options
+        headers = (request_options[:headers] ||= {})
+        if options[:encryption_key] || options[:encryption_key_sha256]
+          headers["x-goog-encryption-algorithm"] = "AES256"
+        end
+        if (key = options.delete(:encryption_key))
+          headers["x-goog-encryption-key"] = Base64.encode64 key
+        end
+        if (key_sha256 = options.delete(:encryption_key_sha256))
+          headers["x-goog-encryption-key-sha256"] = Base64.encode64 key_sha256
+        end
+        request_options
       end
 
       def execute options

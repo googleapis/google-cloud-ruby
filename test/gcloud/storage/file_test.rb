@@ -25,6 +25,9 @@ describe Gcloud::Storage::File, :mock_storage do
   let(:file_hash) { random_file_hash bucket.name, "file.ext" }
   let(:file) { Gcloud::Storage::File.from_gapi file_hash, storage.connection }
 
+  let(:encryption_key) { "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI\xF8ftA|[z\x1A\xFBE\xDE\x97&\xBC\xC7" }
+  let(:encryption_key_sha256) { "5\x04_\xDF\x1D\x8A_d\xFEK\e6p[XZz\x13s]E\xF6\xBB\x10aQH\xF6o\x14f\xF9" }
+
   it "knows its attributes" do
     file.id.must_equal file_hash["id"]
     file.name.must_equal file_hash["name"]
@@ -72,6 +75,25 @@ describe Gcloud::Storage::File, :mock_storage do
 
     Tempfile.open "gcloud-ruby" do |tmpfile|
       file.download tmpfile
+      File.read(tmpfile).must_equal "yay!"
+    end
+  end
+
+  it "can download itself with customer-supplied encryption key" do
+    # Stub the md5 to match.
+    def file.md5
+      "X7A8HRvZUCT5gbq0KNDL8Q=="
+    end
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file.name}?alt=media" do |env|
+      env.request_headers["x-goog-encryption-algorithm"].must_equal "AES256"
+      env.request_headers["x-goog-encryption-key"].must_equal Base64.encode64(encryption_key)
+      env.request_headers["x-goog-encryption-key-sha256"].must_equal Base64.encode64(encryption_key_sha256)
+      [200, {"Content-Type"=>"text/plain"},
+       "yay!"]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      file.download tmpfile, encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
       File.read(tmpfile).must_equal "yay!"
     end
   end
@@ -268,6 +290,18 @@ describe Gcloud::Storage::File, :mock_storage do
     end
 
     file.copy "new-bucket", "new-file.ext", acl: :public
+  end
+
+  it "can copy itself with customer-supplied encryption key" do
+    mock_connection.post "/storage/v1/b/#{bucket.name}/o/#{file.name}/copyTo/b/new-bucket/o/new-file.ext" do |env|
+      env.request_headers["x-goog-encryption-algorithm"].must_equal "AES256"
+      env.request_headers["x-goog-encryption-key"].must_equal Base64.encode64(encryption_key)
+      env.request_headers["x-goog-encryption-key-sha256"].must_equal Base64.encode64(encryption_key_sha256)
+      [200, {"Content-Type"=>"application/json"},
+       file.gapi.to_json]
+    end
+
+    file.copy "new-bucket", "new-file.ext", encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
   end
 
   it "can reload itself" do

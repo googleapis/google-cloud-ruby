@@ -416,9 +416,23 @@ module Gcloud
       ##
       # Retrieves a file matching the path.
       #
+      # If a [customer-supplied encryption
+      # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
+      # was used with {#create_file}, the `encryption_key` and
+      # `encryption_key_sha256` options must be provided or else the file's
+      # CRC32C checksum and MD5 hash will not be returned.
+      #
       # @param [String] path Name (path) of the file.
       # @param [Integer] generation When present, selects a specific revision of
       #   this object. Default is the latest version.
+      # @param [String] encryption_key Optional. The customer-supplied, AES-256
+      #   encryption key used to encrypt the file, if one was provided to
+      #   {#create_file}. Must be provided if `encryption_key_sha256` is
+      #   provided.
+      # @param [String] encryption_key_sha256 Optional. The SHA256 hash of the
+      #   customer-supplied, AES-256 encryption key used to encrypt the file, if
+      #   one was provided to {#create_file}. Must be provided if
+      #   `encryption_key` is provided.
       #
       # @return [Gcloud::Storage::File, nil] Returns nil if file does not exist
       #
@@ -433,9 +447,11 @@ module Gcloud
       #   file = bucket.file "path/to/my-file.ext"
       #   puts file.name
       #
-      def file path, generation: nil
+      def file path, generation: nil, encryption_key: nil,
+               encryption_key_sha256: nil
         ensure_connection!
-        options = { generation: generation }
+        options = { generation: generation, encryption_key: encryption_key,
+                    encryption_key_sha256: encryption_key_sha256 }
         resp = connection.get_file name, path, options
         if resp.success?
           File.from_gapi resp.data, connection
@@ -446,14 +462,51 @@ module Gcloud
       alias_method :find_file, :file
 
       ##
-      # Create a new File object by providing a path to a local file to upload
-      # and the path to store it with in the bucket.
+      # Creates a new {File} object by providing a path to a local file to
+      # upload and the path to store it with in the bucket.
       #
       # A `chunk_size` value can be provided in the options to be used
       # in resumable uploads. This value is the number of bytes per
       # chunk and must be divisible by 256KB. If it is not divisible
       # by 256KB then it will be lowered to the nearest acceptable
       # value.
+      #
+      # #### Customer-supplied encryption keys
+      #
+      # By default, Google Cloud Storage manages server-side encryption keys on
+      # your behalf. However, a [customer-supplied encryption
+      # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
+      # can be provided with the `encryption_key` and `encryption_key_sha256`
+      # options. If given, the same key and SHA256 hash also must be provided to
+      # subsequently download or copy the file. If you use customer-supplied
+      # encryption keys, you must securely manage your keys and ensure that they
+      # are not lost. Also, please note that file metadata is not encrypted,
+      # with the exception of the CRC32C checksum and MD5 hash. The names of
+      # files and buckets are also not encrypted, and you can read or update the
+      # metadata of an encrypted file without providing the encryption key.
+      #
+      # #### Troubleshooting large uploads
+      #
+      # You may encounter errors while attempting to upload large files. Below
+      # are a couple of common cases and their solutions.
+      #
+      # ##### Handling memory errors
+      #
+      # If you encounter a memory error such as `NoMemoryError`, try performing
+      # a resumable upload and setting the `chunk_size` option to a value that
+      # works for your environment, as explained in the final example above.
+      #
+      # ##### Handling broken pipe errors
+      #
+      # To avoid broken pipe (`Errno::EPIPE`) errors when uploading, add the
+      # [httpclient](https://rubygems.org/gems/httpclient) gem to your project,
+      # and the configuration shown below. These lines must execute after you
+      # require gcloud but before you make your first gcloud connection. The
+      # first statement configures [Faraday](https://rubygems.org/gems/faraday)
+      # to use httpclient. The second statement, which should only be added if
+      # you are using a version of Faraday at or above 0.9.2, is a workaround
+      # for [this gzip
+      # issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367).
       #
       # @param [String] file Path of the file on the filesystem to upload.
       # @param [String] path Path to store the file in Google Cloud Storage.
@@ -508,6 +561,12 @@ module Gcloud
       # @param [Hash] metadata A hash of custom, user-provided web-safe keys and
       #   arbitrary string values that will returned with requests for the file
       #   as "x-goog-meta-" response headers.
+      # @param [String] encryption_key Optional. A customer-supplied, AES-256
+      #   encryption key that will be used to encrypt the file. Must be provided
+      #   if `encryption_key_sha256` is provided.
+      # @param [String] encryption_key_sha256 Optional. The SHA256 hash of the
+      #   customer-supplied, AES-256 encryption key that will be used to encrypt
+      #   the file. Must be provided if `encryption_key` is provided.
       #
       # @return [Gcloud::Storage::File]
       #
@@ -521,7 +580,7 @@ module Gcloud
       #
       #   bucket.create_file "path/to/local.file.ext"
       #
-      # @example Additionally, a destination path can be specified.
+      # @example Specifying a destination path:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -532,7 +591,7 @@ module Gcloud
       #   bucket.create_file "path/to/local.file.ext",
       #                      "destination/path/file.ext"
       #
-      # @example Specify the chunk size as a number of bytes:
+      # @example Specifying the chunk size as a number of bytes:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -544,30 +603,31 @@ module Gcloud
       #                      "destination/path/file.ext",
       #                      chunk_size: 1024*1024 # 1 MB chunk
       #
-      # #### Troubleshooting large uploads
+      # @example Providing a customer-supplied encryption key:
+      #   require "gcloud"
+      #   require "digest/sha2"
       #
-      # You may encounter errors while attempting to upload large files. Below
-      # are a couple of common cases and their solutions.
+      #   gcloud = Gcloud.new
+      #   storage = gcloud.storage
+      #   bucket = storage.bucket "my-bucket"
       #
-      # ##### Handling memory errors
+      #   # Key generation shown for example purposes only. Write your own.
+      #   cipher = OpenSSL::Cipher.new "aes-256-cfb"
+      #   cipher.encrypt
+      #   key = cipher.random_key
+      #   key_hash = Digest::SHA256.digest key
       #
-      # If you encounter a memory error such as `NoMemoryError`, try performing
-      # a resumable upload and setting the `chunk_size` option to a value that
-      # works for your environment, as explained in the final example above.
+      #   bucket.create_file "path/to/local.file.ext",
+      #                      "destination/path/file.ext",
+      #                      encryption_key: key,
+      #                      encryption_key_sha256: key_hash
       #
-      # ##### Handling broken pipe errors
+      #   # Store your key and hash securely for later use.
+      #   file = bucket.file "destination/path/file.ext",
+      #                      encryption_key: key,
+      #                      encryption_key_sha256: key_hash
       #
-      # To avoid broken pipe (`Errno::EPIPE`) errors when uploading, add the
-      # [httpclient](https://rubygems.org/gems/httpclient) gem to your project,
-      # and the configuration shown below. These lines must execute after you
-      # require gcloud but before you make your first gcloud connection. The
-      # first statement configures [Faraday](https://rubygems.org/gems/faraday)
-      # to use httpclient. The second statement, which should only be added if
-      # you are using a version of Faraday at or above 0.9.2, is a workaround
-      # for [this gzip
-      # issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367).
-      #
-      # @example
+      # @example Avoiding broken pipe errors with large uploads:
       #   require "gcloud"
       #
       #   # Use httpclient to avoid broken pipe errors with large uploads
@@ -584,13 +644,16 @@ module Gcloud
       def create_file file, path = nil, acl: nil, cache_control: nil,
                       content_disposition: nil, content_encoding: nil,
                       content_language: nil, content_type: nil, chunk_size: nil,
-                      crc32c: nil, md5: nil, metadata: nil
+                      crc32c: nil, md5: nil, metadata: nil, encryption_key: nil,
+                      encryption_key_sha256: nil
         ensure_connection!
         options = { acl: File::Acl.predefined_rule_for(acl), md5: md5,
                     cache_control: cache_control, content_type: content_type,
                     content_disposition: content_disposition, crc32c: crc32c,
                     content_encoding: content_encoding, chunk_size: chunk_size,
-                    content_language: content_language, metadata: metadata }
+                    content_language: content_language, metadata: metadata,
+                    encryption_key: encryption_key,
+                    encryption_key_sha256: encryption_key_sha256 }
         ensure_file_exists! file
         resumable = resumable_upload?(file)
         resp = @connection.upload_file resumable, name, file, path, options

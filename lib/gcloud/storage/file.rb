@@ -246,6 +246,17 @@ module Gcloud
       end
 
       ##
+      # An [RFC 4648](https://tools.ietf.org/html/rfc4648#section-4)
+      # Base64-encoded string of the SHA256 hash of the [customer-supplied
+      # encryption key](https://cloud.google.com/storage/docs/encryption#customer-supplied).
+      # You can use this SHA256 hash to uniquely identify the AES-256 encryption
+      # key required to decrypt this file.
+      def encryption_key_sha256
+        return nil unless @gapi["customerEncryption"]
+        Base64.decode64 @gapi["customerEncryption"]["keySha256"]
+      end
+
+      ##
       # Updates the file with changes made in the given block in a single
       # PATCH request. The following attributes may be set: {#cache_control=},
       # {#content_disposition=}, {#content_encoding=}, {#content_language=},
@@ -285,6 +296,11 @@ module Gcloud
       #
       # By default, the download is verified by calculating the MD5 digest.
       #
+      # If a [customer-supplied encryption
+      # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
+      # was used with {#create_file}, the `encryption_key` and
+      # `encryption_key_sha256` options must be provided.
+      #
       # @param [String] path The path on the local file system to write the data
       #   to. The path provided must be writable.
       # @param [Symbol] verify The verification algoruthm used to ensure the
@@ -296,6 +312,15 @@ module Gcloud
       #   * `crc32c` - Verify file content match using the CRC32c hash.
       #   * `all` - Perform all available file content verification.
       #   * `none` - Don't perform file content verification.
+      #
+      # @param [String] encryption_key Optional. The customer-supplied, AES-256
+      #   encryption key used to encrypt the file, if one was provided to
+      #   {#create_file}. Must be provided if `encryption_key_sha256` is
+      #   provided.
+      # @param [String] encryption_key_sha256 Optional. The SHA256 hash of the
+      #   customer-supplied, AES-256 encryption key used to encrypt the file, if
+      #   one was provided to {#create_file}. Must be provided if
+      #   `encryption_key` is provided.
       #
       # @return [File] Returns a `::File` object on the local file system
       #
@@ -343,9 +368,12 @@ module Gcloud
       #   file = bucket.file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext", verify: :none
       #
-      def download path, verify: :md5
+      def download path, verify: :md5, encryption_key: nil,
+                   encryption_key_sha256: nil
         ensure_connection!
-        resp = connection.download_file bucket, name
+        options = { encryption_key: encryption_key,
+                    encryption_key_sha256: encryption_key_sha256 }
+        resp = connection.download_file bucket, name, options
         if resp.success?
           ::File.open path, "wb+" do |f|
             f.write resp.body
@@ -358,6 +386,11 @@ module Gcloud
 
       ##
       # Copy the file to a new location.
+      #
+      # If a [customer-supplied encryption
+      # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
+      # was used with {#create_file}, the `encryption_key` and
+      # `encryption_key_sha256` options must be provided.
       #
       # @param [String] dest_bucket_or_path Either the bucket to copy the file
       #   to, or the path to copy the file to in the current bucket.
@@ -383,6 +416,14 @@ module Gcloud
       #     access, and allUsers get READER access.
       # @param [Integer] generation Select a specific revision of the file to
       #   copy. The default is the latest version.
+      # @param [String] encryption_key Optional. The customer-supplied, AES-256
+      #   encryption key used to encrypt the file, if one was provided to
+      #   {#create_file}. Must be provided if `encryption_key_sha256` is
+      #   provided.
+      # @param [String] encryption_key_sha256 Optional. The SHA256 hash of the
+      #   customer-supplied, AES-256 encryption key used to encrypt the file, if
+      #   one was provided to {#create_file}. Must be provided if
+      #   `encryption_key` is provided.
       #
       # @return [Gcloud::Storage::File]
       #
@@ -413,9 +454,12 @@ module Gcloud
       #   file.copy "copy/of/previous/generation/file.ext",
       #             generation: 123456
       #
-      def copy dest_bucket_or_path, dest_path = nil, acl: nil, generation: nil
+      def copy dest_bucket_or_path, dest_path = nil, acl: nil, generation: nil,
+               encryption_key: nil, encryption_key_sha256: nil
         ensure_connection!
-        options = { acl: acl, generation: generation }
+        options = { acl: acl, generation: generation,
+                    encryption_key: encryption_key,
+                    encryption_key_sha256: encryption_key_sha256 }
         dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
                                                         dest_path, options
 

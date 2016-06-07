@@ -36,6 +36,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency      "autotest-suffix", "~> 1.1"
   gem.add_development_dependency      "rdoc", "~> 4.0"
   gem.add_development_dependency      "rubocop", "<= 0.35.1"
+  gem.add_development_dependency      "parser", "<= 2.3.0.2" # rubocop dependency
   gem.add_development_dependency      "httpclient", "~> 2.5"
   gem.add_development_dependency      "simplecov", "~> 0.9"
   gem.add_development_dependency      "coveralls", "~> 0.7"
