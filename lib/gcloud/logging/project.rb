@@ -132,7 +132,7 @@ module Gcloud
       #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
       #   end
       #
-      # @example With pagination: (See {Gcloud::Logging::Entry::List})
+      # @example Retrieve all log entries: (See {Entry::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -395,7 +395,7 @@ module Gcloud
       #     puts "#{s.name}: #{s.filter} -> #{s.destination}"
       #   end
       #
-      # @example With pagination: (See {Gcloud::Logging::Sink::List})
+      # @example Retrieve all sinks: (See {Sink::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -536,7 +536,7 @@ module Gcloud
       #     puts "#{m.name}: #{m.filter}"
       #   end
       #
-      # @example With pagination: (See {Gcloud::Logging::Metric::List})
+      # @example Retrieve all metrics: (See {Metric::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
