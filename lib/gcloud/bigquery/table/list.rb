@@ -33,7 +33,7 @@ module Gcloud
         attr_accessor :total
 
         ##
-        # Create a new Table::List with an array of tables.
+        # @private Create a new Table::List with an array of tables.
         def initialize arr = []
           super arr
         end

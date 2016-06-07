@@ -502,20 +502,15 @@ module Gcloud
       #     puts table.name
       #   end
       #
-      # @example With pagination: (See {Table::List})
+      # @example Retrieve all tables: (See {Table::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
-      #
       #   tables = dataset.tables
-      #   loop do
-      #     tables.each do |table|
-      #       puts table.name
-      #     end
-      #     break unless tables.next?
-      #     tables = tables.next
+      #   tables.all do |table|
+      #     puts table.name
       #   end
       #
       # @!group Table

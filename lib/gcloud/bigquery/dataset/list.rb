@@ -30,7 +30,7 @@ module Gcloud
         attr_accessor :etag
 
         ##
-        # Create a new Dataset::List with an array of datasets.
+        # @private Create a new Dataset::List with an array of datasets.
         def initialize arr = []
           super arr
         end

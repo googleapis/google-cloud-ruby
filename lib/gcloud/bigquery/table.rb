@@ -409,7 +409,7 @@ module Gcloud
       #
       # @return [Gcloud::Bigquery::Data]
       #
-      # @example
+      # @example Paginate rows of data: (See {Data#next})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
@@ -421,7 +421,22 @@ module Gcloud
       #   data.each do |row|
       #     puts row["first_name"]
       #   end
-      #   more_data = table.data token: data.token
+      #   if data.next?
+      #     more_data = data.next if data.next?
+      #   end
+      #
+      # @example Retrieve all rows of data: (See {Data#all})
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   data = table.data
+      #   data.all do |row|
+      #     puts row["first_name"]
+      #   end
       #
       # @!group Data
       #

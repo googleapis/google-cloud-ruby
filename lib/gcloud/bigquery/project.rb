@@ -210,6 +210,17 @@ module Gcloud
       #     puts row["name"]
       #   end
       #
+      # @example Retrieve all rows: (See {QueryData#all})
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #
+      #   data = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]"
+      #   data.all do |row|
+      #     puts row["name"]
+      #   end
+      #
       def query query, max: nil, timeout: 10000, dryrun: nil, cache: true,
                 dataset: nil, project: nil
         ensure_connection!
@@ -352,30 +363,23 @@ module Gcloud
       #     puts dataset.name
       #   end
       #
-      # @example Retrieve all datasets, including hidden ones, with `:all`:
+      # @example Retrieve hidden datasets with the `all` optional arg:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #
-      #   all_datasets = bigquery.datasets, all: true
+      #   all_datasets = bigquery.datasets all: true
       #
-      # @example With pagination: (See {Dataset::List#token})
+      # @example Retrieve all datasets: (See {Dataset::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #
-      #   all_datasets = []
-      #   tmp_datasets = bigquery.datasets
-      #   while tmp_datasets.any? do
-      #     tmp_datasets.each do |dataset|
-      #       all_datasets << dataset
-      #     end
-      #     # break loop if no more datasets available
-      #     break if tmp_datasets.token.nil?
-      #     # get the next group of datasets
-      #     tmp_datasets = bigquery.datasets token: tmp_datasets.token
+      #   datasets = bigquery.datasets
+      #   datasets.all do |dataset|
+      #     puts dataset.name
       #   end
       #
       def datasets all: nil, token: nil, max: nil
@@ -442,6 +446,9 @@ module Gcloud
       #   bigquery = gcloud.bigquery
       #
       #   jobs = bigquery.jobs
+      #   jobs.each do |job|
+      #     # process job
+      #   end
       #
       # @example Retrieve only running jobs using the `filter` optional arg:
       #   require "gcloud"
@@ -450,23 +457,19 @@ module Gcloud
       #   bigquery = gcloud.bigquery
       #
       #   running_jobs = bigquery.jobs filter: "running"
+      #   running_jobs.each do |job|
+      #     # process job
+      #   end
       #
-      # @example With pagination: (See {Job::List#token})
+      # @example Retrieve all jobs: (See {Job::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #
-      #   all_jobs = []
-      #   tmp_jobs = bigquery.jobs
-      #   while tmp_jobs.any? do
-      #     tmp_jobs.each do |job|
-      #       all_jobs << job
-      #     end
-      #     # break loop if no more jobs available
-      #     break if tmp_jobs.token.nil?
-      #     # get the next group of jobs
-      #     tmp_jobs = bigquery.jobs token: tmp_jobs.token
+      #   jobs = bigquery.jobs
+      #   jobs.all do |job|
+      #     # process job
       #   end
       #
       def jobs all: nil, token: nil, max: nil, filter: nil

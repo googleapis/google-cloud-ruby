@@ -33,19 +33,41 @@ module Gcloud
         attr_accessor :total
 
         ##
-        # Create a new Job::List with an array of jobs.
+        # @private Create a new Job::List with an array of jobs.
         def initialize arr = []
           super arr
         end
 
         ##
         # Whether there is a next page of jobs.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #
+        #   jobs = bigquery.jobs
+        #   if jobs.next?
+        #     next_jobs = jobs.next
+        #   end
         def next?
           !token.nil?
         end
 
         ##
         # Retrieve the next page of jobs.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #
+        #   jobs = bigquery.jobs
+        #   if jobs.next?
+        #     next_jobs = jobs.next
+        #   end
         def next
           return nil unless next?
           ensure_connection!
