@@ -34,12 +34,42 @@ module Gcloud
 
         ##
         # Whether there a next page of records.
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   dns = gcloud.dns
+        #   zone = dns.zone "example-com"
+        #
+        #   records = zone.records "example.com."
+        #   if records.next?
+        #     next_records = records.next
+        #   end
+        #
         def next?
           !token.nil?
         end
 
         ##
         # Retrieve the next page of records.
+        #
+        # @return [Record::List]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   dns = gcloud.dns
+        #   zone = dns.zone "example-com"
+        #
+        #   records = zone.records "example.com."
+        #   if records.next?
+        #     next_records = records.next
+        #   end
+        #
         def next
           return nil unless next?
           ensure_zone!
@@ -56,6 +86,13 @@ module Gcloud
         # This method may make several API calls until all records are
         # retrieved. Be sure to use as narrow a search criteria as possible.
         # Please use with caution.
+        #
+        # @param [Integer] request_limit The upper limit of API requests to make
+        #   to load all records. Default is no limit.
+        # @yield [record] The block for accessing each record.
+        # @yieldparam [Record] record The record object.
+        #
+        # @return [Enumerator]
         #
         # @example Iterating each record by passing a block:
         #   require "gcloud"
@@ -89,21 +126,21 @@ module Gcloud
         #   zone = dns.zone "example-com"
         #   records = zone.records "example.com."
         #
-        #   records.all(max_api_calls: 10) do |record|
+        #   records.all(request_limit: 10) do |record|
         #     puts record.name
         #   end
         #
-        def all max_api_calls: nil
-          max_api_calls = max_api_calls.to_i if max_api_calls
+        def all request_limit: nil
+          request_limit = request_limit.to_i if request_limit
           unless block_given?
-            return enum_for(:all, max_api_calls: max_api_calls)
+            return enum_for(:all, request_limit: request_limit)
           end
           results = self
           loop do
             results.each { |r| yield r }
-            if max_api_calls
-              max_api_calls -= 1
-              break if max_api_calls < 0
+            if request_limit
+              request_limit -= 1
+              break if request_limit < 0
             end
             break unless results.next?
             results = results.next

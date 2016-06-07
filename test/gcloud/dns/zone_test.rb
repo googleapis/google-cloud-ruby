@@ -457,7 +457,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
     changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
   end
 
-  it "paginates changes with all with max_api_calls set" do
+  it "paginates changes with all with request_limit set" do
     mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
       env.params.wont_include "pageToken"
       [200, {"Content-Type" => "application/json"},
@@ -470,7 +470,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
        list_changes_json(3, "second_page_token")]
     end
 
-    changes = zone.changes.all(max_api_calls: 1).to_a
+    changes = zone.changes.all(request_limit: 1).to_a
     changes.count.must_equal 6
     changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
   end
@@ -663,7 +663,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
     all_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
 
-  it "loads all records with all with max_api_calls set" do
+  it "loads all records with all with request_limit set" do
     mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
       env.params.wont_include "pageToken"
       [200, {"Content-Type" => "application/json"},
@@ -676,7 +676,7 @@ describe Gcloud::Dns::Zone, :mock_dns do
        list_records_json(3, "second_page_token")]
     end
 
-    all_records = zone.records.all(max_api_calls: 1).to_a
+    all_records = zone.records.all(request_limit: 1).to_a
     all_records.count.must_equal 6
     all_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end

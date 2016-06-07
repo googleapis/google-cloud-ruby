@@ -237,7 +237,7 @@ describe Gcloud::Dns::Project, :mock_dns do
     zones.each { |z| z.must_be_kind_of Gcloud::Dns::Zone }
   end
 
-  it "iterates all zones with all with max_api_calls set" do
+  it "iterates all zones with all with request_limit set" do
     mock_connection.get "/dns/v1/projects/#{project}/managedZones" do |env|
       env.params.wont_include "pageToken"
       [200, {"Content-Type" => "application/json"},
@@ -250,7 +250,7 @@ describe Gcloud::Dns::Project, :mock_dns do
        list_zones_json(3, "second_page_token")]
     end
 
-    zones = dns.zones.all(max_api_calls: 1).to_a
+    zones = dns.zones.all(request_limit: 1).to_a
     zones.count.must_equal 6
     zones.each { |z| z.must_be_kind_of Gcloud::Dns::Zone }
   end
