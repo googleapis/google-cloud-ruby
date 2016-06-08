@@ -122,9 +122,7 @@ module Gcloud
           topic: topic_path(topic),
           messages: messages.map do |data, attributes|
             Google::Pubsub::V1::PubsubMessage.new(
-              data: String(data).encode("ASCII-8BIT"),
-              attributes: attributes
-            )
+              data: data, attributes: attributes)
           end
         )
 
