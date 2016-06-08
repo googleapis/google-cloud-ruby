@@ -14,6 +14,7 @@
 
 
 require "gcloud/version"
+require "gcloud/backoff"
 require "google/api_client"
 
 module Gcloud
@@ -40,7 +41,7 @@ module Gcloud
       end
 
       def annotate requests
-        @client.execute(
+        execute(
           api_method: @vision.images.annotate,
           body_object: { requests: requests }
         )
@@ -48,6 +49,14 @@ module Gcloud
 
       def inspect
         "#{self.class}(#{@project})"
+      end
+
+      protected
+
+      def execute options
+        Gcloud::Backoff.new.execute_gapi do
+          @client.execute options
+        end
       end
     end
   end
