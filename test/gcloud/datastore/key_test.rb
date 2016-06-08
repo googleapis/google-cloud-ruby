@@ -200,4 +200,10 @@ describe Gcloud::Datastore::Key do
     key.namespace.must_equal "custom-ns"
     key.must_be :frozen?
   end
+
+  it "knows its serialized side" do
+    # Don't care about the exact value, just want a number and no error
+    key = Gcloud::Datastore::Key.new "ThisThing", 1234
+    key.serialized_size.must_be_kind_of Integer
+  end
 end

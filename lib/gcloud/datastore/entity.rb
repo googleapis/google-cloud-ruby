@@ -351,6 +351,12 @@ module Gcloud
       end
 
       ##
+      # The number of bytes the Entity will take to serialize during API calls.
+      def serialized_size
+        to_grpc.to_proto.length
+      end
+
+      ##
       # @private Convert the Entity to a Google::Datastore::V1beta3::Entity
       # object.
       def to_grpc

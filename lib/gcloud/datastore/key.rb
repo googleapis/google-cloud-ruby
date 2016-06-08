@@ -233,6 +233,12 @@ module Gcloud
       end
 
       ##
+      # The number of bytes the Key will take to serialize during API calls.
+      def serialized_size
+        to_grpc.to_proto.length
+      end
+
+      ##
       # @private Convert the Key to a Google::Datastore::V1beta3::Key object.
       def to_grpc
         grpc_path = path.map do |pe_kind, pe_id_or_name|
