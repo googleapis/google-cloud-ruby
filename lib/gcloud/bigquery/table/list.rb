@@ -52,7 +52,7 @@ module Gcloud
         #
         #   tables = dataset.tables
         #   if tables.next?
-        #     next_tables = table.next
+        #     next_tables = tables.next
         #   end
         #
         def next?
@@ -73,7 +73,7 @@ module Gcloud
         #
         #   tables = dataset.tables
         #   if tables.next?
-        #     next_tables = table.next
+        #     next_tables = tables.next
         #   end
         #
         def next
