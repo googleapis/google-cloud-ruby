@@ -205,10 +205,8 @@ module Gcloud
   #
   # ### Paginating records
   #
-  # All records may not return at once, requiring multiple calls to Datastore
-  # to return them all. The {Gcloud::Datastore::Dataset::QueryResults#next}
-  # method retrieves the next page of results by making an API call using a
-  # returned cursor if there are more results available.
+  # All records may not return at once, but multiple calls can be made to
+  # Datastore to return them all.
   #
   # ```ruby
   # require "gcloud"
@@ -218,13 +216,8 @@ module Gcloud
   #
   # query = datastore.query("Task")
   # tasks = datastore.run query
-  #
-  # loop do
-  #   tasks.each do |t|
-  #     puts t["description"]
-  #   end
-  #   break unless tasks.next?
-  #   tasks = tasks.next
+  # tasks.all do |task|
+  #   puts t["description"]
   # end
   # ```
   #

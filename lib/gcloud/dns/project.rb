@@ -180,25 +180,21 @@ module Gcloud
       #     puts zone.name
       #   end
       #
-      # @example With pagination: (See {Gcloud::Dns::Zone::List})
+      # @example Retrieve all zones: (See {Zone::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
       #   zones = dns.zones
-      #   loop do
-      #     zones.each do |zone|
-      #       puts zone.name
-      #     end
-      #     break unless zones.next?
-      #     zones = zones.next
+      #   zones.all do |zone|
+      #     puts zone.name
       #   end
       #
       def zones token: nil, max: nil
         ensure_connection!
         resp = connection.list_zones token: token, max: max
         if resp.success?
-          Zone::List.from_response resp, connection
+          Zone::List.from_response resp, connection, max
         else
           fail ApiError.from_response(resp)
         end

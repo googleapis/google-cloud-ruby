@@ -35,33 +35,132 @@ module Gcloud
 
         ##
         # Whether there is a next page of resource descriptors.
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #
+        #   resource_descriptors = logging.resource_descriptors
+        #   if resource_descriptors.next?
+        #     next_resource_descriptors = resource_descriptors.next
+        #   end
+        #
         def next?
           !token.nil?
         end
 
         ##
         # Retrieve the next page of resource descriptors.
+        #
+        # @return [Sink::List]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #
+        #   resource_descriptors = logging.resource_descriptors
+        #   if resource_descriptors.next?
+        #     next_resource_descriptors = resource_descriptors.next
+        #   end
+        #
         def next
           return nil unless next?
           ensure_service!
-          list_grpc = @service.list_resource_descriptors token: token
+          list_grpc = @service.list_resource_descriptors token: token, max: @max
           self.class.from_grpc list_grpc, @service
         rescue GRPC::BadStatus => e
           raise Gcloud::Error.from_error(e)
         end
 
         ##
+        # Retrieves all resource descriptors by repeatedly loading {#next} until
+        # {#next?} returns `false`. Calls the given block once for each resource
+        # descriptor, which is passed as the parameter.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all resource descriptors
+        # are retrieved. Be sure to use as narrow a search criteria as possible.
+        # Please use with caution.
+        #
+        # @param [Integer] request_limit The upper limit of API requests to make
+        #   to load all resource descriptors. Default is no limit.
+        # @yield [resource_descriptor] The block for accessing each resource
+        #   descriptor.
+        # @yieldparam [ResourceDescriptor] resource_descriptor The resource
+        #   descriptor object.
+        #
+        # @return [Enumerator]
+        #
+        # @example Iterating each resource descriptor by passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   resource_descriptors = logging.resource_descriptors
+        #
+        #   resource_descriptors.all do |rd|
+        #     puts rd.type
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   resource_descriptors = logging.resource_descriptors
+        #
+        #   all_types = resource_descriptors.all.map do |rd|
+        #     rd.type
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   resource_descriptors = logging.resource_descriptors
+        #
+        #   resource_descriptors.all(request_limit: 10) do |rd|
+        #     puts rd.type
+        #   end
+        #
+        def all request_limit: nil
+          request_limit = request_limit.to_i if request_limit
+          unless block_given?
+            return enum_for(:all, request_limit: request_limit)
+          end
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if request_limit
+              request_limit -= 1
+              break if request_limit < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
+        end
+
+        ##
         # @private New ResourceDescriptor::List from a
         # Google::Logging::V2::ListMonitoredResourceDescriptorsResponse object.
-        def self.from_grpc grpc_list, service
-          sinks = new(Array(grpc_list.resource_descriptors).map do |grpc|
+        def self.from_grpc grpc_list, service, max = nil
+          rds = new(Array(grpc_list.resource_descriptors).map do |grpc|
             ResourceDescriptor.from_grpc grpc
           end)
           token = grpc_list.next_page_token
           token = nil if token == ""
-          sinks.instance_variable_set "@token", token
-          sinks.instance_variable_set "@service", service
-          sinks
+          rds.instance_variable_set "@token", token
+          rds.instance_variable_set "@service", service
+          rds.instance_variable_set "@max", max
+          rds
         end
 
         protected

@@ -20,12 +20,13 @@ describe Gcloud::Datastore::Dataset do
   let(:credentials) { OpenStruct.new }
   let(:dataset)     { Gcloud::Datastore::Dataset.new project, credentials }
   let(:run_query_res) do
-    run_query_res_entities = 2.times.map do
+    run_query_res_entities = 2.times.map do |i|
       Google::Datastore::V1beta3::EntityResult.new(
         entity: Gcloud::Datastore::Entity.new.tap do |e|
           e.key = Gcloud::Datastore::Key.new "ds-test", "thingie"
           e["name"] = "thingamajig"
-        end.to_grpc
+        end.to_grpc,
+        cursor: "result-cursor-#{i}".force_encoding("ASCII-8BIT")
       )
     end
     Google::Datastore::V1beta3::RunQueryResponse.new(
@@ -829,6 +830,19 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
@@ -883,6 +897,19 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     entities.cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
@@ -907,6 +934,19 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     entities.cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
@@ -928,6 +968,19 @@ describe Gcloud::Datastore::Dataset do
     entities.count.must_equal 2
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
     end
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
@@ -955,6 +1008,19 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
@@ -977,6 +1043,19 @@ describe Gcloud::Datastore::Dataset do
     entities.count.must_equal 2
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
+    end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
     end
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
@@ -1004,6 +1083,19 @@ describe Gcloud::Datastore::Dataset do
     entities.each do |entity|
       entity.must_be_kind_of Gcloud::Datastore::Entity
     end
+    entities.cursor_for(entities.first).must_equal Gcloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal  Gcloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Gcloud::Datastore::Entity
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Gcloud::Datastore::Key
+      cursor.must_be_kind_of Gcloud::Datastore::Cursor
+    end
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
     entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
@@ -1011,104 +1103,6 @@ describe Gcloud::Datastore::Dataset do
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
     refute entities.no_more?
-  end
-
-  it "run will fulfill a query and return an object that can paginate" do
-    first_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
-      project_id: project,
-      partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        namespace_id: "foobar"
-      ),
-      gql_query: Google::Datastore::V1beta3::GqlQuery.new(
-        query_string: "SELECT * FROM Task")
-    )
-    first_run_query_res = run_query_res.dup
-    first_run_query_res.batch = run_query_res.batch.dup
-    first_run_query_res.batch.more_results = :MORE_RESULTS_AFTER_CURSOR
-    first_run_query_res.query = Gcloud::Datastore::Query.new.kind("Task").to_grpc
-    next_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
-      project_id: project,
-      partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        namespace_id: "foobar"
-      ),
-      query: Gcloud::Datastore::Query.new.kind("Task").start(query_cursor).to_grpc
-    )
-    next_run_query_res = run_query_res.dup
-    next_run_query_res.batch = run_query_res.batch.dup
-    next_run_query_res.batch.more_results = :NO_MORE_RESULTS
-    dataset.service.mocked_datastore.expect :run_query, first_run_query_res, [first_run_query_req]
-    dataset.service.mocked_datastore.expect :run_query, next_run_query_res, [next_run_query_req]
-
-    gql = dataset.gql "SELECT * FROM Task"
-    entities = dataset.run_query gql, namespace: "foobar"
-    entities.count.must_equal 2
-    entities.each do |entity|
-      entity.must_be_kind_of Gcloud::Datastore::Entity
-    end
-    entities.cursor.must_equal query_cursor
-    entities.end_cursor.must_equal query_cursor
-    entities.more_results.must_equal :MORE_RESULTS_AFTER_CURSOR
-    refute entities.not_finished?
-    refute entities.more_after_limit?
-    assert entities.more_after_cursor?
-    refute entities.no_more?
-
-    assert entities.next?
-    next_entities = entities.next
-
-    next_entities.cursor.must_equal query_cursor
-    next_entities.end_cursor.must_equal query_cursor
-    next_entities.more_results.must_equal :NO_MORE_RESULTS
-    refute next_entities.not_finished?
-    refute next_entities.more_after_limit?
-    refute next_entities.more_after_cursor?
-    assert next_entities.no_more?
-
-    refute next_entities.next?
-  end
-
-  it "run will fulfill a query and return an object that can paginate with all" do
-    first_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
-      project_id: project,
-      partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        namespace_id: "foobar"
-      ),
-      gql_query: Google::Datastore::V1beta3::GqlQuery.new(
-        query_string: "SELECT * FROM Task")
-    )
-    first_run_query_res = run_query_res.dup
-    first_run_query_res.batch = run_query_res.batch.dup
-    first_run_query_res.batch.more_results = :MORE_RESULTS_AFTER_CURSOR
-    first_run_query_res.query = Gcloud::Datastore::Query.new.kind("Task").to_grpc
-    next_run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
-      project_id: project,
-      partition_id: Google::Datastore::V1beta3::PartitionId.new(
-        namespace_id: "foobar"
-      ),
-      query: Gcloud::Datastore::Query.new.kind("Task").start(query_cursor).to_grpc
-    )
-    next_run_query_res = run_query_res.dup
-    next_run_query_res.batch = run_query_res.batch.dup
-    next_run_query_res.batch.more_results = :NO_MORE_RESULTS
-    dataset.service.mocked_datastore.expect :run_query, first_run_query_res, [first_run_query_req]
-    dataset.service.mocked_datastore.expect :run_query, next_run_query_res, [next_run_query_req]
-
-    gql = dataset.gql "SELECT * FROM Task"
-    entities = dataset.run_query gql, namespace: "foobar"
-    entities.all
-    entities.count.must_equal 4
-    entities.each do |entity|
-      entity.must_be_kind_of Gcloud::Datastore::Entity
-    end
-    entities.cursor.must_equal query_cursor
-    entities.end_cursor.must_equal query_cursor
-    entities.more_results.must_equal :NO_MORE_RESULTS
-    refute entities.not_finished?
-    refute entities.more_after_limit?
-    refute entities.more_after_cursor?
-    assert entities.no_more?
-
-    refute entities.next?
   end
 
   it "run will raise when given an unknown argument" do
@@ -1239,7 +1233,6 @@ describe Gcloud::Datastore::Dataset do
     entity.key.parent.parent.namespace.must_equal "custom-ns"
   end
 
-
   it "entity can configure the new Entity using a block" do
     entity = dataset.entity "User", "username" do |e|
       e["name"] = "User McUser"
@@ -1251,113 +1244,6 @@ describe Gcloud::Datastore::Dataset do
     entity.key.name.must_equal "username"
     entity.properties["name"].must_equal "User McUser"
     entity.properties["email"].must_equal "user@example.net"
-  end
-
-  describe "query result object" do
-    let(:run_query_res_not_finished) do
-      run_query_res.tap do |response|
-        response.batch.more_results = :NOT_FINISHED
-      end
-    end
-    let(:run_query_res_more_after_limit) do
-      run_query_res.tap do |response|
-        response.batch.more_results = :MORE_RESULTS_AFTER_LIMIT
-      end
-    end
-    let(:run_query_res_more_after_cursor) do
-      run_query_res.tap do |response|
-        response.batch.more_results = :MORE_RESULTS_AFTER_CURSOR
-      end
-    end
-    let(:run_query_res_no_more) do
-      run_query_res.tap do |response|
-        response.batch.more_results = :NO_MORE_RESULTS
-      end
-    end
-
-    it "has more_results not_finished" do
-      run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
-        project_id: project,
-        query: Gcloud::Datastore::Query.new.kind("User").to_grpc
-      )
-      dataset.service.mocked_datastore.expect :run_query, run_query_res_not_finished, [run_query_req]
-
-      query = Gcloud::Datastore::Query.new.kind("User")
-      entities = dataset.run query
-      entities.count.must_equal 2
-      entities.each do |entity|
-        entity.must_be_kind_of Gcloud::Datastore::Entity
-      end
-      entities.cursor.must_equal query_cursor
-      entities.more_results.must_equal :NOT_FINISHED
-      assert entities.not_finished?
-      refute entities.more_after_limit?
-      refute entities.more_after_cursor?
-      refute entities.no_more?
-    end
-
-    it "has more_results more_after_limit" do
-      run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
-        project_id: project,
-        query: Gcloud::Datastore::Query.new.kind("User").to_grpc
-      )
-      dataset.service.mocked_datastore.expect :run_query, run_query_res_more_after_limit, [run_query_req]
-
-      query = Gcloud::Datastore::Query.new.kind("User")
-      entities = dataset.run query
-      entities.count.must_equal 2
-      entities.each do |entity|
-        entity.must_be_kind_of Gcloud::Datastore::Entity
-      end
-      entities.cursor.must_equal query_cursor
-      entities.more_results.must_equal :MORE_RESULTS_AFTER_LIMIT
-      refute entities.not_finished?
-      assert entities.more_after_limit?
-      refute entities.more_after_cursor?
-      refute entities.no_more?
-    end
-
-    it "has more_results more_after_cursor" do
-      run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
-        project_id: project,
-        query: Gcloud::Datastore::Query.new.kind("User").to_grpc
-      )
-      dataset.service.mocked_datastore.expect :run_query, run_query_res_more_after_cursor, [run_query_req]
-
-      query = Gcloud::Datastore::Query.new.kind("User")
-      entities = dataset.run query
-      entities.count.must_equal 2
-      entities.each do |entity|
-        entity.must_be_kind_of Gcloud::Datastore::Entity
-      end
-      entities.cursor.must_equal query_cursor
-      entities.more_results.must_equal :MORE_RESULTS_AFTER_CURSOR
-      refute entities.not_finished?
-      refute entities.more_after_limit?
-      assert entities.more_after_cursor?
-      refute entities.no_more?
-    end
-
-    it "has more_results no_more" do
-      run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
-        project_id: project,
-        query: Gcloud::Datastore::Query.new.kind("User").to_grpc
-      )
-      dataset.service.mocked_datastore.expect :run_query, run_query_res_no_more, [run_query_req]
-
-      query = Gcloud::Datastore::Query.new.kind("User")
-      entities = dataset.run query
-      entities.count.must_equal 2
-      entities.each do |entity|
-        entity.must_be_kind_of Gcloud::Datastore::Entity
-      end
-      entities.cursor.must_equal query_cursor
-      entities.more_results.must_equal :NO_MORE_RESULTS
-      refute entities.not_finished?
-      refute entities.more_after_limit?
-      refute entities.more_after_cursor?
-      assert entities.no_more?
-    end
   end
 
   it "transaction will return a Transaction" do

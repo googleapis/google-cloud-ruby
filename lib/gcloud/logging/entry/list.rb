@@ -34,12 +34,40 @@ module Gcloud
 
         ##
         # Whether there is a next page of entries.
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #
+        #   entries = logging.entries
+        #   if entries.next?
+        #     next_entries = entries.next
+        #   end
+        #
         def next?
           !token.nil?
         end
 
         ##
         # Retrieve the next page of entries.
+        #
+        # @return [Sink::List]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #
+        #   entries = dataset.entries
+        #   if entries.next?
+        #     next_entries = entries.next
+        #   end
+        #
         def next
           return nil unless next?
           ensure_service!
@@ -51,30 +79,71 @@ module Gcloud
         end
 
         ##
-        # Retrieves all log entries by repeatedly loading {#next} until
-        # {#next?} returns `false`. Returns the list instance for method
-        # chaining.
+        # Retrieves all log entries by repeatedly loading {#next} until {#next?}
+        # returns `false`. Calls the given block once for each log entry, which
+        # is passed as the parameter.
+        #
+        # An Enumerator is returned if no block is given.
         #
         # This method may make several API calls until all log entries are
         # retrieved. Be sure to use as narrow a search criteria as possible.
         # Please use with caution.
         #
-        # @example
+        # @param [Integer] request_limit The upper limit of API requests to make
+        #   to load all log entries. Default is no limit.
+        # @yield [entry] The block for accessing each log entry.
+        # @yieldparam [Entry] entry The log entry object.
+        #
+        # @return [Enumerator]
+        #
+        # @example Iterating each log entry by passing a block:
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
         #   logging = gcloud.logging
-        #   hour_ago = (Time.now - 60*60).utc.strftime('%FT%TZ')
-        #   recent_errors = "timestamp >= \"#{hour_ago}\" severity >= ERROR"
-        #   entries = logging.entries(filter: recent_errors).all
+        #   entries = logging.entries order: "timestamp desc"
         #
-        def all
-          while next?
-            next_records = self.next
-            push(*next_records)
-            self.token = next_records.token
+        #   entries.all do |entry|
+        #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   entries = logging.entries order: "timestamp desc"
+        #
+        #   all_payloads = entries.all.map do |entry|
+        #     entry.payload
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   entries = logging.entries order: "timestamp desc"
+        #
+        #   entries.all(request_limit: 10) do |entry|
+        #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
+        #   end
+        #
+        def all request_limit: nil
+          request_limit = request_limit.to_i if request_limit
+          unless block_given?
+            return enum_for(:all, request_limit: request_limit)
           end
-          self
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if request_limit
+              request_limit -= 1
+              break if request_limit < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
         end
 
         ##

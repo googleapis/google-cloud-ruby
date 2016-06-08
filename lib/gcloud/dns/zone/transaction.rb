@@ -103,7 +103,7 @@ module Gcloud
         #   end
         #
         def remove name, type
-          @deletions += @zone.records(name, type).all
+          @deletions += @zone.records(name, type).all.to_a
         end
 
         ##

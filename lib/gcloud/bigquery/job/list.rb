@@ -33,21 +33,144 @@ module Gcloud
         attr_accessor :total
 
         ##
-        # Create a new Job::List with an array of jobs.
+        # @private Create a new Job::List with an array of jobs.
         def initialize arr = []
           super arr
         end
 
         ##
+        # Whether there is a next page of jobs.
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #
+        #   jobs = bigquery.jobs
+        #   if jobs.next?
+        #     next_jobs = jobs.next
+        #   end
+        def next?
+          !token.nil?
+        end
+
+        ##
+        # Retrieve the next page of jobs.
+        #
+        # @return [Job::List]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #
+        #   jobs = bigquery.jobs
+        #   if jobs.next?
+        #     next_jobs = jobs.next
+        #   end
+        def next
+          return nil unless next?
+          ensure_connection!
+          options = { all: @hidden, token: token, max: @max, filter: @filter }
+          resp = @connection.list_jobs options
+          if resp.success?
+            self.class.from_response resp, @connection, @hidden, @max, @filter
+          else
+            fail ApiError.from_response(resp)
+          end
+        end
+
+        ##
+        # Retrieves all jobs by repeatedly loading {#next} until {#next?}
+        # returns `false`. Calls the given block once for each job, which is
+        # passed as the parameter.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all jobs are retrieved.
+        # Be sure to use as narrow a search criteria as possible. Please use
+        # with caution.
+        #
+        # @param [Integer] request_limit The upper limit of API requests to make
+        #   to load all jobs. Default is no limit.
+        # @yield [job] The block for accessing each job.
+        # @yieldparam [Job] job The job object.
+        #
+        # @return [Enumerator]
+        #
+        # @example Iterating each job by passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #
+        #   bigquery.jobs.all do |job|
+        #     puts job.state
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #
+        #   all_states = bigquery.jobs.all.map do |job|
+        #     job.state
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #
+        #   bigquery.jobs.all(request_limit: 10) do |job|
+        #     puts job.state
+        #   end
+        #
+        def all request_limit: nil
+          request_limit = request_limit.to_i if request_limit
+          unless block_given?
+            return enum_for(:all, request_limit: request_limit)
+          end
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if request_limit
+              request_limit -= 1
+              break if request_limit < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
+        end
+
+        ##
         # @private New Job::List from a response object.
-        def self.from_response resp, conn
+        def self.from_response resp, conn, hidden = nil, max = nil, filter = nil
           jobs = List.new(Array(resp.data["jobs"]).map do |gapi_object|
             Job.from_gapi gapi_object, conn
           end)
           jobs.instance_variable_set "@token", resp.data["nextPageToken"]
           jobs.instance_variable_set "@etag",  resp.data["etag"]
           jobs.instance_variable_set "@total", resp.data["totalItems"]
+          jobs.instance_variable_set "@connection", conn
+          jobs.instance_variable_set "@hidden",     hidden
+          jobs.instance_variable_set "@max",        max
+          jobs.instance_variable_set "@filter",     filter
           jobs
+        end
+
+        protected
+
+        ##
+        # Raise an error unless an active connection is available.
+        def ensure_connection!
+          fail "Must have active connection" unless @connection
         end
       end
     end

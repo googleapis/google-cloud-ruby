@@ -339,12 +339,9 @@ module Gcloud
       def find_all *keys, consistency: nil
         ensure_service!
         check_consistency! consistency
-        lookup_res = service.lookup(*keys.map(&:to_grpc),
+        lookup_res = service.lookup(*Array(keys).flatten.map(&:to_grpc),
                                     consistency: consistency)
-        entities = to_gcloud_entities lookup_res.found
-        deferred = to_gcloud_keys lookup_res.deferred
-        missing  = to_gcloud_entities lookup_res.missing
-        LookupResults.new entities, deferred, missing
+        LookupResults.from_grpc lookup_res, service, consistency
       rescue GRPC::BadStatus => e
         raise Gcloud::Error.from_error(e)
       end
@@ -661,23 +658,6 @@ module Gcloud
       # available.
       def ensure_service!
         fail "Must have active connection to service" unless service
-      end
-
-      ##
-      # Convenience method to convert GRPC entities to Gcloud entities.
-      def to_gcloud_entities grpc_entity_results
-        # Entities are nested in an object.
-        Array(grpc_entity_results).map do |result|
-          # TODO: Make this return an EntityResult with cursor...
-          Entity.from_grpc result.entity
-        end
-      end
-
-      ##
-      # Convenience method to convert GRPC keys to Gcloud keys.
-      def to_gcloud_keys grpc_keys
-        # Keys are not nested in an object like entities are.
-        Array(grpc_keys).map { |key| Key.from_grpc key }
       end
 
       def check_consistency! consistency

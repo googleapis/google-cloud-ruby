@@ -197,29 +197,22 @@ module Gcloud
       #     puts topic.name
       #   end
       #
-      # @example With pagination: (See {Topic::List#token})
+      # @example Retrieve all topics: (See {Topic::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #
-      #   all_topics = []
-      #   tmp_topics = pubsub.topics
-      #   while tmp_topics.any? do
-      #     tmp_topics.each do |topic|
-      #       all_topics << topic
-      #     end
-      #     # break loop if no more topics available
-      #     break if tmp_topics.token.nil?
-      #     # get the next group of topics
-      #     tmp_topics = pubsub.topics token: tmp_topics.token
+      #   topics = pubsub.topics
+      #   topics.all do |topic|
+      #     puts topic.name
       #   end
       #
       def topics token: nil, max: nil
         ensure_service!
         options = { token: token, max: max }
         grpc = service.list_topics options
-        Topic::List.from_grpc grpc, service
+        Topic::List.from_grpc grpc, service, max
       rescue GRPC::BadStatus => e
         raise Error.from_error(e)
       end
@@ -426,8 +419,6 @@ module Gcloud
       ##
       # Retrieves a list of subscriptions for the given project.
       #
-      # @param [String] prefix Filter results to subscriptions whose names begin
-      #   with this prefix.
       # @param [String] token A previously-returned page token representing part
       #   of the larger set of results to view.
       # @param [Integer] max Maximum number of subscriptions to return.
@@ -446,29 +437,22 @@ module Gcloud
       #     puts subscription.name
       #   end
       #
-      # @example With pagination: (See {Subscription::List#token})
+      # @example Retrieve all subscriptions: (See {Subscription::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #
-      #   all_subs = []
-      #   tmp_subs = pubsub.subscriptions
-      #   while tmp_subs.any? do
-      #     tmp_subs.each do |subscription|
-      #       all_subs << subscription
-      #     end
-      #     # break loop if no more subscriptions available
-      #     break if tmp_subs.token.nil?
-      #     # get the next group of subscriptions
-      #     tmp_subs = pubsub.subscriptions token: tmp_subs.token
+      #   subscriptions = pubsub.subscriptions
+      #   subscriptions.all do |subscription|
+      #     puts subscription.name
       #   end
       #
-      def subscriptions prefix: nil, token: nil, max: nil
+      def subscriptions token: nil, max: nil
         ensure_service!
-        options = { prefix: prefix, token: token, max: max }
+        options = { token: token, max: max }
         grpc = service.list_subscriptions options
-        Subscription::List.from_grpc grpc, service
+        Subscription::List.from_grpc grpc, service, max
       rescue GRPC::BadStatus => e
         raise Error.from_error(e)
       end

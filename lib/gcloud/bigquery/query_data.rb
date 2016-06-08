@@ -73,11 +73,43 @@ module Gcloud
       end
 
       ##
-      # Is there a next page of data?
+      # Whether there is a next page of query data.
+      #
+      # @return [Boolean]
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   job = bigquery.job "my_job"
+      #
+      #   data = job.query_results
+      #   if data.next?
+      #     next_data = data.next
+      #   end
+      #
       def next?
         !token.nil?
       end
 
+      ##
+      # Retrieve the next page of query data.
+      #
+      # @return [QueryData]
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   job = bigquery.job "my_job"
+      #
+      #   data = job.query_results
+      #   if data.next?
+      #     next_data = data.next
+      #   end
+      #
       def next
         return nil unless next?
         ensure_connection!
@@ -86,6 +118,75 @@ module Gcloud
           QueryData.from_gapi resp.data, connection
         else
           fail ApiError.from_response(resp)
+        end
+      end
+
+      ##
+      # Retrieves all rows by repeatedly loading {#next} until {#next?} returns
+      # `false`. Calls the given block once for each row, which is passed as the
+      # parameter.
+      #
+      # An Enumerator is returned if no block is given.
+      #
+      # This method may make several API calls until all rows are retrieved. Be
+      # sure to use as narrow a search criteria as possible. Please use with
+      # caution.
+      #
+      # @param [Integer] request_limit The upper limit of API requests to make
+      #   to load all data. Default is no limit.
+      # @yield [row] The block for accessing each row of data.
+      # @yieldparam [Hash] row The row object.
+      #
+      # @return [Enumerator]
+      #
+      # @example Iterating each row by passing a block:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   job = bigquery.job "my_job"
+      #
+      #   data = job.query_results
+      #   data.all do |row|
+      #     puts row["word"]
+      #   end
+      #
+      # @example Using the enumerator by not passing a block:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   job = bigquery.job "my_job"
+      #
+      #   data = job.query_results
+      #   words = data.all.map do |row|
+      #     row["word"]
+      #   end
+      #
+      # @example Limit the number of API calls made:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   job = bigquery.job "my_job"
+      #
+      #   data = job.query_results
+      #   data.all(request_limit: 10) do |row|
+      #     puts row["word"]
+      #   end
+      #
+      def all request_limit: nil
+        request_limit = request_limit.to_i if request_limit
+        return enum_for(:all, request_limit: request_limit) unless block_given?
+        results = self
+        loop do
+          results.each { |r| yield r }
+          if request_limit
+            request_limit -= 1
+            break if request_limit < 0
+          end
+          break unless results.next?
+          results = results.next
         end
       end
 

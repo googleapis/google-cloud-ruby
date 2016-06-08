@@ -239,6 +239,242 @@ describe Gcloud::Dns::Zone, :mock_dns do
     second_changes.next?.must_equal false
   end
 
+  it "paginates changes with next? and next and max set" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.wont_include "sortBy"
+      env.params.wont_include "sortOrder"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.wont_include "sortBy"
+      env.params.wont_include "sortOrder"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(2)]
+    end
+
+    first_changes = zone.changes max: 3
+    first_changes.count.must_equal 3
+    first_changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
+    first_changes.next?.must_equal true
+
+    second_changes = first_changes.next
+    second_changes.count.must_equal 2
+    second_changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
+    second_changes.next?.must_equal false
+  end
+
+  it "paginates changes with next? and next and order set to asc" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "sortBy"
+      env.params["sortBy"].must_equal "changeSequence"
+      env.params.must_include "sortOrder"
+      env.params["sortOrder"].must_equal "ascending"
+      env.params.wont_include "maxResults"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "sortBy"
+      env.params["sortBy"].must_equal "changeSequence"
+      env.params.must_include "sortOrder"
+      env.params["sortOrder"].must_equal "ascending"
+      env.params.wont_include "maxResults"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(2)]
+    end
+
+    first_changes = zone.changes order: :asc
+    first_changes.count.must_equal 3
+    first_changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
+    first_changes.next?.must_equal true
+
+    second_changes = first_changes.next
+    second_changes.count.must_equal 2
+    second_changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
+    second_changes.next?.must_equal false
+  end
+
+  it "paginates changes with next? and next and order set to desc" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "sortBy"
+      env.params["sortBy"].must_equal "changeSequence"
+      env.params.must_include "sortOrder"
+      env.params["sortOrder"].must_equal "descending"
+      env.params.wont_include "maxResults"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "sortBy"
+      env.params["sortBy"].must_equal "changeSequence"
+      env.params.must_include "sortOrder"
+      env.params["sortOrder"].must_equal "descending"
+      env.params.wont_include "maxResults"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(2)]
+    end
+
+    first_changes = zone.changes order: :desc
+    first_changes.count.must_equal 3
+    first_changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
+    first_changes.next?.must_equal true
+
+    second_changes = first_changes.next
+    second_changes.count.must_equal 2
+    second_changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
+    second_changes.next?.must_equal false
+  end
+
+  it "paginates changes with all" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(2)]
+    end
+
+    changes = zone.changes.all.to_a
+    changes.count.must_equal 5
+    changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
+  end
+
+  it "paginates changes with all and max set" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.wont_include "sortBy"
+      env.params.wont_include "sortOrder"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.wont_include "sortBy"
+      env.params.wont_include "sortOrder"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(2)]
+    end
+
+    changes = zone.changes(max: 3).all.to_a
+    changes.count.must_equal 5
+    changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
+  end
+
+  it "paginates changes with all and order set to asc" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "sortBy"
+      env.params["sortBy"].must_equal "changeSequence"
+      env.params.must_include "sortOrder"
+      env.params["sortOrder"].must_equal "ascending"
+      env.params.wont_include "maxResults"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "sortBy"
+      env.params["sortBy"].must_equal "changeSequence"
+      env.params.must_include "sortOrder"
+      env.params["sortOrder"].must_equal "ascending"
+      env.params.wont_include "maxResults"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(2)]
+    end
+
+    changes = zone.changes(order: :asc).all.to_a
+    changes.count.must_equal 5
+    changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
+  end
+
+  it "paginates changes with all and order set to desc" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "sortBy"
+      env.params["sortBy"].must_equal "changeSequence"
+      env.params.must_include "sortOrder"
+      env.params["sortOrder"].must_equal "descending"
+      env.params.wont_include "maxResults"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "sortBy"
+      env.params["sortBy"].must_equal "changeSequence"
+      env.params.must_include "sortOrder"
+      env.params["sortOrder"].must_equal "descending"
+      env.params.wont_include "maxResults"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(2)]
+    end
+
+    changes = zone.changes(order: :desc).all.to_a
+    changes.count.must_equal 5
+    changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
+  end
+
+  it "paginates changes with all using Enumerator" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(3, "second_page_token")]
+    end
+
+    changes = zone.changes.all.take(5)
+    changes.count.must_equal 5
+    changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
+  end
+
+  it "paginates changes with all with request_limit set" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_changes_json(3, "second_page_token")]
+    end
+
+    changes = zone.changes.all(request_limit: 1).to_a
+    changes.count.must_equal 6
+    changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
+  end
+
   it "lists records" do
     num_records = 3
     mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
@@ -341,6 +577,34 @@ describe Gcloud::Dns::Zone, :mock_dns do
     second_records.next?.must_equal false
   end
 
+  it "paginates records with next? and next and max set" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(2)]
+    end
+
+    first_records = zone.records max: 3
+    first_records.count.must_equal 3
+    first_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+    first_records.next?.must_equal true
+
+    second_records = first_records.next
+    second_records.count.must_equal 2
+    second_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+    second_records.next?.must_equal false
+  end
+
   it "loads all records with all" do
     mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
       env.params.wont_include "pageToken"
@@ -354,47 +618,67 @@ describe Gcloud::Dns::Zone, :mock_dns do
        list_records_json(2)]
     end
 
-    all_records = zone.records
-    all_records.count.must_equal 3
-    all_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
-    all_records.next?.must_equal true
-
-    all_records.all
+    all_records = zone.records.all.to_a
     all_records.count.must_equal 5
     all_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
-    all_records.next?.must_equal false
-
-    # Calling all again does nothing, returns self
-    all_records.must_equal all_records.all
   end
 
-  it "paginates records with max set" do
+  it "paginates records with all and max set" do
     mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
       env.params.must_include "maxResults"
       env.params["maxResults"].must_equal "3"
+      env.params.wont_include "pageToken"
       [200, {"Content-Type" => "application/json"},
        list_records_json(3, "next_page_token")]
     end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.must_include "maxResults"
+      env.params["maxResults"].must_equal "3"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(2)]
+    end
 
-    records = zone.records max: 3
-    records.count.must_equal 3
-    records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
-    records.token.wont_be :nil?
-    records.token.must_equal "next_page_token"
+    all_records = zone.records(max: 3).all.to_a
+    all_records.count.must_equal 5
+    all_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
 
-  it "paginates records without max set" do
+  it "loads all records with all using Enumerator" do
     mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.wont_include "maxResults"
+      env.params.wont_include "pageToken"
       [200, {"Content-Type" => "application/json"},
        list_records_json(3, "next_page_token")]
     end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(3, "second_page_token")]
+    end
 
-    records = zone.records
-    records.count.must_equal 3
-    records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
-    records.token.wont_be :nil?
-    records.token.must_equal "next_page_token"
+    all_records = zone.records.all.take(5)
+    all_records.count.must_equal 5
+    all_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
+  end
+
+  it "loads all records with all with request_limit set" do
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(3, "next_page_token")]
+    end
+    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type" => "application/json"},
+       list_records_json(3, "second_page_token")]
+    end
+
+    all_records = zone.records.all(request_limit: 1).to_a
+    all_records.count.must_equal 6
+    all_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
 
   it "can create a record" do

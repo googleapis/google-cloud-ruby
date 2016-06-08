@@ -109,37 +109,33 @@ module Gcloud
       #     puts bucket.name
       #   end
       #
-      # @example Retrieve all buckets with names that begin with a given prefix:
+      # @example Retrieve buckets with names that begin with a given prefix:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   storage = gcloud.storage
       #
       #   user_buckets = storage.buckets prefix: "user-"
+      #   user_buckets.each do |bucket|
+      #     puts bucket.name
+      #   end
       #
-      # @example With pagination: (See {Bucket::List#token})
+      # @example Retrieve all buckets: (See {Bucket::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   storage = gcloud.storage
       #
-      #   all_buckets = []
-      #   tmp_buckets = storage.buckets
-      #   while tmp_buckets.any? do
-      #     tmp_buckets.each do |bucket|
-      #       all_buckets << bucket
-      #     end
-      #     # break loop if no more buckets available
-      #     break if tmp_buckets.token.nil?
-      #     # get the next group of buckets
-      #     tmp_buckets = storage.buckets token: tmp_buckets.token
+      #   buckets = storage.buckets
+      #   buckets.all do |bucket|
+      #     puts bucket.name
       #   end
       #
       def buckets prefix: nil, token: nil, max: nil
         options = { prefix: prefix, token: token, max: max }
         resp = connection.list_buckets options
         if resp.success?
-          Bucket::List.from_response resp, connection
+          Bucket::List.from_response resp, connection, prefix, max
         else
           fail ApiError.from_response(resp)
         end

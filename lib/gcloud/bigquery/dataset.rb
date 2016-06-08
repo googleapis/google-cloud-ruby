@@ -502,23 +502,15 @@ module Gcloud
       #     puts table.name
       #   end
       #
-      # @example With pagination: (See {Dataset::List#token})
+      # @example Retrieve all tables: (See {Table::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
-      #
-      #   all_tables = []
-      #   tmp_tables = dataset.tables
-      #   while tmp_tables.any? do
-      #     tmp_tables.each do |table|
-      #       all_tables << table
-      #     end
-      #     # break loop if no more tables available
-      #     break if tmp_tables.token.nil?
-      #     # get the next group of tables
-      #     tmp_tables = dataset.tables token: tmp_tables.token
+      #   tables = dataset.tables
+      #   tables.all do |table|
+      #     puts table.name
       #   end
       #
       # @!group Table
@@ -528,7 +520,7 @@ module Gcloud
         options = { token: token, max: max }
         resp = connection.list_tables dataset_id, options
         if resp.success?
-          Table::List.from_response resp, connection
+          Table::List.from_response resp, connection, dataset_id, max
         else
           fail ApiError.from_response(resp)
         end

@@ -224,6 +224,118 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     topics.token.must_equal "next_page_token"
   end
 
+  it "paginates topics with next? and next" do
+    first_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(2)
+    mock = Minitest::Mock.new
+    mock.expect :list_topics, first_get_res, [first_get_req]
+    mock.expect :list_topics, second_get_res, [second_get_req]
+    pubsub.service.mocked_publisher = mock
+
+    first_topics = pubsub.topics
+    second_topics = first_topics.next
+
+    mock.verify
+
+    first_topics.size.must_equal 3
+    first_topics.next?.must_equal true
+
+    second_topics.size.must_equal 2
+    second_topics.next?.must_equal false
+  end
+
+  it "paginates topics with next? and next and max set" do
+    first_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_size: 3
+    first_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_size: 3, page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(2)
+    mock = Minitest::Mock.new
+    mock.expect :list_topics, first_get_res, [first_get_req]
+    mock.expect :list_topics, second_get_res, [second_get_req]
+    pubsub.service.mocked_publisher = mock
+
+    first_topics = pubsub.topics max: 3
+    second_topics = first_topics.next
+
+    mock.verify
+
+    first_topics.size.must_equal 3
+    first_topics.next?.must_equal true
+
+    second_topics.size.must_equal 2
+    second_topics.next?.must_equal false
+  end
+
+  it "paginates topics with all" do
+    first_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(2)
+    mock = Minitest::Mock.new
+    mock.expect :list_topics, first_get_res, [first_get_req]
+    mock.expect :list_topics, second_get_res, [second_get_req]
+    pubsub.service.mocked_publisher = mock
+
+    topics = pubsub.topics.all.to_a
+
+    mock.verify
+
+    topics.size.must_equal 5
+  end
+
+  it "paginates topics with all and max set" do
+    first_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_size: 3
+    first_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_size: 3, page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(2)
+    mock = Minitest::Mock.new
+    mock.expect :list_topics, first_get_res, [first_get_req]
+    mock.expect :list_topics, second_get_res, [second_get_req]
+    pubsub.service.mocked_publisher = mock
+
+    topics = pubsub.topics(max: 3).all.to_a
+
+    mock.verify
+
+    topics.size.must_equal 5
+  end
+
+  it "iterates topics with all using Enumerator" do
+    first_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "second_page_token")
+    mock = Minitest::Mock.new
+    mock.expect :list_topics, first_get_res, [first_get_req]
+    mock.expect :list_topics, second_get_res, [second_get_req]
+    pubsub.service.mocked_publisher = mock
+
+    topics = pubsub.topics.all.take(5)
+
+    mock.verify
+
+    topics.size.must_equal 5
+  end
+
+  it "iterates topics with all and request_limit set" do
+    first_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "second_page_token")
+    mock = Minitest::Mock.new
+    mock.expect :list_topics, first_get_res, [first_get_req]
+    mock.expect :list_topics, second_get_res, [second_get_req]
+    pubsub.service.mocked_publisher = mock
+
+    topics = pubsub.topics.all(request_limit: 1).to_a
+
+    mock.verify
+
+    topics.size.must_equal 6
+  end
+
   it "paginates topics without max set" do
     get_req = Google::Pubsub::V1::ListTopicsRequest.new project: "projects/#{project}"
     get_res = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
@@ -438,4 +550,147 @@ describe Gcloud::Pubsub::Project, :mock_pubsub do
     subs.token.must_equal "next_page_token"
   end
 
+  it "paginates subscriptions with next? and next" do
+    first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 2)
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_subscriptions, second_get_res, [second_get_req]
+    pubsub.service.mocked_subscriber = mock
+
+    first_subs = pubsub.subscriptions
+    second_subs = first_subs.next
+
+    mock.verify
+
+    first_subs.count.must_equal 3
+    first_subs.next?.must_equal true
+    first_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+
+    second_subs.count.must_equal 2
+    second_subs.next?.must_equal false
+    second_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+  end
+
+  it "paginates subscriptions with next? and next and max set" do
+    first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_size: 3
+    first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_size: 3, page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 2)
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_subscriptions, second_get_res, [second_get_req]
+    pubsub.service.mocked_subscriber = mock
+
+    first_subs = pubsub.subscriptions max: 3
+    second_subs = first_subs.next
+
+    mock.verify
+
+    first_subs.count.must_equal 3
+    first_subs.next?.must_equal true
+    first_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+
+    second_subs.count.must_equal 2
+    second_subs.next?.must_equal false
+    second_subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+  end
+
+  it "paginates subscriptions with all" do
+    first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 2)
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_subscriptions, second_get_res, [second_get_req]
+    pubsub.service.mocked_subscriber = mock
+
+    subs = pubsub.subscriptions.all.to_a
+
+    mock.verify
+
+    subs.count.must_equal 5
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+  end
+
+  it "paginates subscriptions with all and max set" do
+    first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_size: 3
+    first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_size: 3, page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 2)
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_subscriptions, second_get_res, [second_get_req]
+    pubsub.service.mocked_subscriber = mock
+
+    subs = pubsub.subscriptions(max: 3).all.to_a
+
+    mock.verify
+
+    subs.count.must_equal 5
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+  end
+
+  it "iterates subscriptions with all using Enumerator" do
+    first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "second_page_token")
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_subscriptions, second_get_res, [second_get_req]
+    pubsub.service.mocked_subscriber = mock
+
+    subs = pubsub.subscriptions.all.take(5)
+
+    mock.verify
+
+    subs.count.must_equal 5
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+  end
+
+  it "iterates subscriptions with all and request_limit set" do
+    first_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}"
+    first_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    second_get_req = Google::Pubsub::V1::ListSubscriptionsRequest.new project: "projects/#{project}", page_token: "next_page_token"
+    second_get_res = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "second_page_token")
+    mock = Minitest::Mock.new
+    mock.expect :list_subscriptions, first_get_res, [first_get_req]
+    mock.expect :list_subscriptions, second_get_res, [second_get_req]
+    pubsub.service.mocked_subscriber = mock
+
+    subs = pubsub.subscriptions.all(request_limit: 1).to_a
+
+    mock.verify
+
+    subs.count.must_equal 6
+    subs.each do |sub|
+      sub.must_be_kind_of Gcloud::Pubsub::Subscription
+      sub.wont_be :lazy?
+    end
+  end
 end

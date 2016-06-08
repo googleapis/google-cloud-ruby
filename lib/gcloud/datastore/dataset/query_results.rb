@@ -75,7 +75,7 @@ module Gcloud
 
         ##
         # @private
-        attr_accessor :service, :namespace, :query
+        attr_accessor :service, :namespace, :cursors, :query
 
         ##
         # @private
@@ -110,38 +110,47 @@ module Gcloud
         end
 
         ##
-        # Create a new QueryResults with an array of values.
+        # @private Create a new QueryResults with an array of values.
         def initialize arr = []
           super arr
         end
 
         ##
-        # Whether there are more results available for subsequent API calls.
-        # Tests the value of {#more_results}.
+        # Whether there are more results available.
         #
-        def next?
-          !no_more?
-        end
-
-        ##
-        # Retrieves the next page of results by making an API call with the
-        # value stored in {#cursor} if there are more results available.
+        # @return [Boolean]
         #
         # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #
-        #   query = datastore.query("Task")
+        #   query = datastore.query "Task"
         #   tasks = datastore.run query
         #
-        #   loop do
-        #     tasks.each do |t|
-        #       puts t["description"]
-        #     end
-        #     break unless tasks.next?
-        #     tasks = tasks.next
+        #   if tasks.next?
+        #     next_tasks = tasks.next
+        #   end
+        #
+        def next?
+          !no_more?
+        end
+
+        ##
+        # Retrieve the next page of results.
+        #
+        # @return [QueryResults]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #
+        #   if tasks.next?
+        #     next_tasks = tasks.next
         #   end
         #
         def next
@@ -156,44 +165,206 @@ module Gcloud
         end
 
         ##
-        # Retrieves all query results by repeatedly loading {#next} until
-        # {#next?} returns `false`. Returns the list instance for method
-        # chaining.
+        # Retrieve the {Cursor} for the provided result.
         #
-        # This method may make several API calls until all query results are
-        # retrieved. Be sure to use as narrow a search criteria as possible.
-        # Please use with caution.
+        # @param [Entity] result The entity object to get a cursor for.
+        #
+        # @return [Cursor]
         #
         # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   query = datastore.query("Task")
-        #   all_tasks = datastore.run(query).all
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
         #
-        def all
-          while next?
-            next_records = self.next
-            push(*next_records)
-            self.end_cursor = next_records.end_cursor
-            self.more_results = next_records.more_results
-            self.service = next_records.service
-            self.namespace = next_records.namespace
-            self.query = next_records.query
+        #   first_task = tasks.first
+        #   first_cursor = tasks.cursor_for first_task
+        #
+        def cursor_for result
+          cursor_index = index result
+          return nil if cursor_index.nil?
+          cursors[cursor_index]
+        end
+
+        ##
+        # Calls the given block once for each result and cursor combination,
+        # which are passed as parameters.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # @yield [result, cursor] The block for accessing each query result and
+        #   cursor.
+        # @yieldparam [Entity] result The query result object.
+        # @yieldparam [Cursor] cursor The cursor object.
+        #
+        # @return [Enumerator]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.each_with_cursor do |task, cursor|
+        #     puts "Task #{task.key.id} (#cursor)"
+        #   end
+        #
+        def each_with_cursor
+          return enum_for(:each_with_cursor) unless block_given?
+          zip(cursors).each { |r, c| yield [r, c] }
+        end
+
+        ##
+        # Retrieves all query results by repeatedly loading {#next} until
+        # {#next?} returns `false`. Calls the given block once for each query
+        # result, which is passed as the parameter.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all query results are
+        # retrieved. Be sure to use as narrow a search criteria as possible.
+        # Please use with caution.
+        #
+        # @param [Integer] request_limit The upper limit of API requests to make
+        #   to load all query results. Default is no limit.
+        # @yield [result] The block for accessing each query result.
+        # @yieldparam [Entity] result The query result object.
+        #
+        # @return [Enumerator]
+        #
+        # @example Iterating each query result by passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.all do |task|
+        #     puts "Task #{task.key.id} (#cursor)"
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.all.map(&:key).each do |key|
+        #     puts "Key #{key.id}"
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.all(request_limit: 10) do |task|
+        #     puts "Task #{task.key.id} (#cursor)"
+        #   end
+        #
+        def all request_limit: nil
+          request_limit = request_limit.to_i if request_limit
+          unless block_given?
+            return enum_for(:all, request_limit: request_limit)
           end
-          self
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if request_limit
+              request_limit -= 1
+              break if request_limit < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
+        end
+
+        ##
+        # Retrieves all query results and cursors by repeatedly loading {#next}
+        # until {#next?} returns `false`. Calls the given block once for each
+        # result and cursor combination, which are passed as parameters.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all query results are
+        # retrieved. Be sure to use as narrow a search criteria as possible.
+        # Please use with caution.
+        #
+        # @param [Integer] request_limit The upper limit of API requests to make
+        #   to load all tables. Default is no limit.
+        # @yield [result, cursor] The block for accessing each query result and
+        #   cursor.
+        # @yieldparam [Entity] result The query result object.
+        # @yieldparam [Cursor] cursor The cursor object.
+        #
+        # @return [Enumerator]
+        #
+        # @example Iterating all results and cursors by passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.all_with_cursor do |task, cursor|
+        #     puts "Task #{task.key.id} (#cursor)"
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.all_with_cursor.count #=> number of result/cursor pairs
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   datastore = gcloud.datastore
+        #   query = datastore.query "Tasks"
+        #   tasks = datastore.run query
+        #   tasks.all_with_cursor(request_limit: 10) do |task, cursor|
+        #     puts "Task #{task.key.id} (#cursor)"
+        #   end
+        #
+        def all_with_cursor request_limit: nil
+          request_limit = request_limit.to_i if request_limit
+          unless block_given?
+            return enum_for(:all_with_cursor, request_limit: request_limit)
+          end
+          results = self
+
+          loop do
+            results.zip(results.cursors).each { |r, c| yield r, c }
+            if request_limit
+              request_limit -= 1
+              break if request_limit < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
         end
 
         ##
         # @private New Dataset::QueryResults from a
         # Google::Dataset::V1beta3::RunQueryResponse object.
         def self.from_grpc query_res, service, namespace, query
-          entities = Array(query_res.batch.entity_results).map do |result|
-            # TODO: Make this return an EntityResult with cursor...
-            Entity.from_grpc result.entity
-          end
-          new(entities).tap do |qr|
+          r, c = Array(query_res.batch.entity_results).map do |result|
+            [Entity.from_grpc(result.entity), Cursor.from_grpc(result.cursor)]
+          end.transpose
+          r ||= []
+          c ||= []
+          new(r).tap do |qr|
+            qr.cursors = c
             qr.end_cursor = Cursor.from_grpc query_res.batch.end_cursor
             qr.more_results = query_res.batch.more_results
             qr.service = service

@@ -132,18 +132,15 @@ module Gcloud
       #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
       #   end
       #
-      # @example With pagination: (See {Gcloud::Logging::Entry::List})
+      # @example Retrieve all log entries: (See {Entry::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #   entries = logging.entries
-      #   loop do
-      #     entries.each do |e|
-      #       puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
-      #     end
-      #     break unless entries.next?
-      #     entries = entries.next
+      #
+      #   entries.all do |e|
+      #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
       #   end
       #
       def entries projects: nil, filter: nil, order: nil, token: nil, max: nil
@@ -341,18 +338,15 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #   resource_descriptors = logging.resource_descriptors
-      #   loop do
-      #     resource_descriptors.each do |rd|
-      #       puts rd.type
-      #     end
-      #     break unless resource_descriptors.next?
-      #     resource_descriptors = resource_descriptors.next
+      #
+      #   resource_descriptors.all do |rd|
+      #     puts rd.type
       #   end
       #
       def resource_descriptors token: nil, max: nil
         ensure_service!
         list_grpc = service.list_resource_descriptors token: token, max: max
-        ResourceDescriptor::List.from_grpc list_grpc, service
+        ResourceDescriptor::List.from_grpc list_grpc, service, max
       rescue GRPC::BadStatus => e
         raise Gcloud::Error.from_error(e)
       end
@@ -401,24 +395,21 @@ module Gcloud
       #     puts "#{s.name}: #{s.filter} -> #{s.destination}"
       #   end
       #
-      # @example With pagination: (See {Gcloud::Logging::Sink::List})
+      # @example Retrieve all sinks: (See {Sink::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #   sinks = logging.sinks
-      #   loop do
-      #     sinks.each do |s|
-      #       puts "#{s.name}: #{s.filter} -> #{s.destination}"
-      #     end
-      #     break unless sinks.next?
-      #     sinks = sinks.next
+      #
+      #   sinks.all do |s|
+      #     puts "#{s.name}: #{s.filter} -> #{s.destination}"
       #   end
       #
       def sinks token: nil, max: nil
         ensure_service!
         list_grpc = service.list_sinks token: token, max: max
-        Sink::List.from_grpc list_grpc, service
+        Sink::List.from_grpc list_grpc, service, max
       rescue GRPC::BadStatus => e
         raise Gcloud::Error.from_error(e)
       end
@@ -545,24 +536,21 @@ module Gcloud
       #     puts "#{m.name}: #{m.filter}"
       #   end
       #
-      # @example With pagination: (See {Gcloud::Logging::Metric::List})
+      # @example Retrieve all metrics: (See {Metric::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #   metrics = logging.metrics
-      #   loop do
-      #     metrics.each do |m|
-      #       puts "#{m.name}: #{m.filter}"
-      #     end
-      #     break unless metrics.next?
-      #     metrics = metrics.next
+      #
+      #   metrics.all do |m|
+      #     puts "#{m.name}: #{m.filter}"
       #   end
       #
       def metrics token: nil, max: nil
         ensure_service!
         grpc = service.list_metrics token: token, max: max
-        Metric::List.from_grpc grpc, service
+        Metric::List.from_grpc grpc, service, max
       rescue GRPC::BadStatus => e
         raise Gcloud::Error.from_error(e)
       end

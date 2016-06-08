@@ -187,6 +187,134 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     datasets.token.must_equal "next_page_token"
   end
 
+  it "paginates datasets with next? and next" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_datasets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_datasets_json(2)]
+    end
+
+    first_datasets = bigquery.datasets
+    first_datasets.count.must_equal 3
+    first_datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+    first_datasets.next?.must_equal true
+
+    second_datasets = first_datasets.next
+    second_datasets.count.must_equal 2
+    second_datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+    second_datasets.next?.must_equal false
+  end
+
+  it "paginates datasets with next? and next with all/hidden set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
+      env.params.must_include "all"
+      env.params["all"].must_equal "true"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_datasets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
+      env.params.must_include "all"
+      env.params["all"].must_equal "true"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_datasets_json(2)]
+    end
+
+    first_datasets = bigquery.datasets all: true
+    first_datasets.count.must_equal 3
+    first_datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+    first_datasets.next?.must_equal true
+
+    second_datasets = first_datasets.next
+    second_datasets.count.must_equal 2
+    second_datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+    second_datasets.next?.must_equal false
+  end
+
+  it "paginates datasets with all" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_datasets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_datasets_json(2)]
+    end
+
+    datasets = bigquery.datasets.all.to_a
+    datasets.count.must_equal 5
+    datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+  end
+
+  it "paginates datasets with all with all/hidden set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
+      env.params.must_include "all"
+      env.params["all"].must_equal "true"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_datasets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
+      env.params.must_include "all"
+      env.params["all"].must_equal "true"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_datasets_json(2)]
+    end
+
+    datasets = bigquery.datasets(all: true).all.to_a
+    datasets.count.must_equal 5
+    datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+  end
+
+  it "iterates datasets with all using Enumerator" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_datasets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_datasets_json(3, "second_page_token")]
+    end
+
+    datasets = bigquery.datasets.all.take(5)
+    datasets.count.must_equal 5
+    datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+  end
+
+  it "iterates datasets with all with request_limit set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_datasets_json(3, "next_page_token")]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_datasets_json(3, "second_page_token")]
+    end
+
+    datasets = bigquery.datasets.all(request_limit: 1).to_a
+    datasets.count.must_equal 6
+    datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+  end
+
   it "finds a dataset" do
     dataset_id = "found_dataset"
     dataset_name = "Found Dataset"
@@ -289,6 +417,140 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
     jobs.token.wont_be :nil?
     jobs.token.must_equal "next_page_token"
+  end
+
+  it "paginates jobs using next? and next" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(3, "next_page_token", 5)]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(2, nil, 5)]
+    end
+
+    first_jobs = bigquery.jobs
+    first_jobs.count.must_equal 3
+    first_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+    first_jobs.next?.must_equal true
+
+    second_jobs = first_jobs.next
+    second_jobs.count.must_equal 2
+    second_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+    second_jobs.next?.must_equal false
+  end
+
+  it "paginates jobs with next? and next and filter set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.must_include "stateFilter"
+      env.params.wont_include "maxResults"
+      env.params["stateFilter"].must_equal "running"
+      env.params["projection"].must_equal "full"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(3, "next_page_token", 5)]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.must_include "stateFilter"
+      env.params.wont_include "maxResults"
+      env.params["stateFilter"].must_equal "running"
+      env.params["projection"].must_equal "full"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(2, nil, 5)]
+    end
+
+    first_jobs = bigquery.jobs filter: "running"
+    first_jobs.count.must_equal 3
+    first_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+    first_jobs.next?.must_equal true
+
+    second_jobs = first_jobs.next
+    second_jobs.count.must_equal 2
+    second_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+    second_jobs.next?.must_equal false
+  end
+
+  it "paginates jobs with all" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(3, "next_page_token", 5)]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(2, nil, 5)]
+    end
+
+    jobs = bigquery.jobs.all.to_a
+    jobs.count.must_equal 5
+  end
+
+  it "paginates jobs with all and filter set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.must_include "stateFilter"
+      env.params.wont_include "maxResults"
+      env.params["stateFilter"].must_equal "running"
+      env.params["projection"].must_equal "full"
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(3, "next_page_token", 5)]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.must_include "stateFilter"
+      env.params.wont_include "maxResults"
+      env.params["stateFilter"].must_equal "running"
+      env.params["projection"].must_equal "full"
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(2, nil, 5)]
+    end
+
+    jobs = bigquery.jobs(filter: "running").all.to_a
+    jobs.count.must_equal 5
+  end
+
+  it "iterates jobs with all using Enumerator" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(3, "next_page_token", 25)]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(3, "second_page_token", 25)]
+    end
+
+    jobs = bigquery.jobs.all.take(5)
+    jobs.count.must_equal 5
+    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+  end
+
+  it "iterates jobs with all with request_limit set" do
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.wont_include "pageToken"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(3, "next_page_token", 25)]
+    end
+    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
+      env.params.must_include "pageToken"
+      env.params["pageToken"].must_equal "next_page_token"
+      [200, {"Content-Type"=>"application/json"},
+       list_jobs_json(3, "second_page_token", 25)]
+    end
+
+    jobs = bigquery.jobs.all(request_limit: 1).to_a
+    jobs.count.must_equal 6
+    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
   end
 
   it "finds a job" do

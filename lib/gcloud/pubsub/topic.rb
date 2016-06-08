@@ -215,30 +215,23 @@ module Gcloud
       #     puts subscription.name
       #   end
       #
-      # @example With pagination: (See {Subscription::List#token})
+      # @example Retrieve all subscriptions: (See {Subscription::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
-      #   all_subs = []
-      #   tmp_subs = topic.subscriptions
-      #   while tmp_subs.any? do
-      #     tmp_subs.each do |subscription|
-      #       all_subs << subscription
-      #     end
-      #     # break loop if no more subscriptions available
-      #     break if tmp_subs.token.nil?
-      #     # get the next group of subscriptions
-      #     tmp_subs = topic.subscriptions token: tmp_subs.token
+      #   subscription = topic.subscriptions
+      #   subscriptions.all do |subscription|
+      #     puts subscription.name
       #   end
       #
       def subscriptions token: nil, max: nil
         ensure_service!
         options = { token: token, max: max }
         grpc = service.list_topics_subscriptions name, options
-        Subscription::List.from_grpc grpc, service
+        Subscription::List.from_topic_grpc grpc, service, name, max
       rescue GRPC::BadStatus => e
         raise Error.from_error(e)
       end

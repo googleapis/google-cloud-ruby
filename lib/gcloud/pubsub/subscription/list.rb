@@ -28,25 +28,179 @@ module Gcloud
         attr_accessor :token
 
         ##
-        # Create a new Subscription::List with an array of values.
-        def initialize arr = [], token = nil
+        # @private Create a new Subscription::List with an array of values.
+        def initialize arr = []
           super arr
-          @token = token
-          @token = nil if @token == ""
+        end
+
+        ##
+        # Whether there a next page of subscriptions.
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   pubsub = gcloud.pubsub
+        #
+        #   subscriptions = pubsub.subscriptions
+        #   if subscriptions.next?
+        #     next_subscriptions = subscriptions.next
+        #   end
+        #
+        def next?
+          !token.nil?
+        end
+
+        ##
+        # Retrieve the next page of subscriptions.
+        #
+        # @return [Subscription::List]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   pubsub = gcloud.pubsub
+        #
+        #   subscriptions = pubsub.subscriptions
+        #   if subscriptions.next?
+        #     next_subscriptions = subscriptions.next
+        #   end
+        #
+        def next
+          return nil unless next?
+          ensure_service!
+          if @topic
+            next_topic_subscriptions
+          else
+            next_subscriptions
+          end
+        end
+
+        ##
+        # Retrieves all subscriptions by repeatedly loading {#next} until
+        # {#next?} returns `false`. Calls the given block once for each
+        # subscription, which is passed as the parameter.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all subscriptions are
+        # retrieved. Be sure to use as narrow a search criteria as possible.
+        # Please use with caution.
+        #
+        # @param [Integer] request_limit The upper limit of API requests to make
+        #   to load all subscriptions. Default is no limit.
+        # @yield [subscription] The block for accessing each subscription.
+        # @yieldparam [Subscription] subscription The subscription object.
+        #
+        # @return [Enumerator]
+        #
+        # @example Iterating each subscription by passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   pubsub = gcloud.pubsub
+        #
+        #   subscriptions = pubsub.subscriptions
+        #   subscriptions.all do |subscription|
+        #     puts subscription.name
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   pubsub = gcloud.pubsub
+        #
+        #   subscriptions = pubsub.subscriptions
+        #   all_names = subscriptions.all.map do |subscription|
+        #     subscription.name
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   pubsub = gcloud.pubsub
+        #
+        #   subscriptions = pubsub.subscriptions
+        #   subscriptions.all(request_limit: 10) do |subscription|
+        #     puts subscription.name
+        #   end
+        #
+        def all request_limit: nil
+          request_limit = request_limit.to_i if request_limit
+          unless block_given?
+            return enum_for(:all, request_limit: request_limit)
+          end
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if request_limit
+              request_limit -= 1
+              break if request_limit < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
         end
 
         ##
         # @private New Subscriptions::List from a
         # Google::Pubsub::V1::ListSubscriptionsRequest object.
-        def self.from_grpc grpc_list, service
-          subs = Array(grpc_list.subscriptions).map do |grpc|
-            if grpc.is_a? String
-              Subscription.new_lazy grpc, service
-            else
-              Subscription.from_grpc grpc, service
-            end
-          end
-          new subs, grpc_list.next_page_token
+        def self.from_grpc grpc_list, service, max = nil
+          subs = new(Array(grpc_list.subscriptions).map do |grpc|
+            Subscription.from_grpc grpc, service
+          end)
+          token = grpc_list.next_page_token
+          token = nil if token == ""
+          subs.instance_variable_set "@token",   token
+          subs.instance_variable_set "@service", service
+          subs.instance_variable_set "@max",     max
+          subs
+        end
+
+        ##
+        # @private New Subscriptions::List from a
+        # Google::Pubsub::V1::ListTopicSubscriptionsResponse object.
+        def self.from_topic_grpc grpc_list, service, topic, max = nil
+          subs = new(Array(grpc_list.subscriptions).map do |grpc|
+            Subscription.new_lazy grpc, service
+          end)
+          token = grpc_list.next_page_token
+          token = nil if token == ""
+          subs.instance_variable_set "@token",   token
+          subs.instance_variable_set "@service", service
+          subs.instance_variable_set "@topic",   topic
+          subs.instance_variable_set "@max",     max
+          subs
+        end
+
+        protected
+
+        ##
+        # @private Raise an error unless an active connection to the service is
+        # available.
+        def ensure_service!
+          fail "Must have active connection to service" unless @service
+        end
+
+        def next_subscriptions
+          options = { prefix: @prefix, token: @token, max: @max }
+          grpc = @service.list_subscriptions options
+          self.class.from_grpc grpc, @service, @max
+        rescue GRPC::BadStatus => e
+          raise Error.from_error(e)
+        end
+
+        def next_topic_subscriptions
+          options = { token: @token, max: @max }
+          grpc = @service.list_topics_subscriptions @topic, options
+          self.class.from_topic_grpc grpc, @service, @topic, @max
+        rescue GRPC::BadStatus => e
+          raise Error.from_error(e)
         end
       end
     end

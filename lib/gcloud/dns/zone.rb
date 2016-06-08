@@ -236,19 +236,15 @@ module Gcloud
       #   zone = dns.zone "example-com"
       #   changes = zone.changes order: :desc
       #
-      # @example With pagination: (See {Gcloud::Dns::Change::List})
+      # @example Retrieve all changes: (See {Change::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
       #   zone = dns.zone "example-com"
       #   changes = zone.changes
-      #   loop do
-      #     changes.each do |change|
-      #       puts "#{change.name} - #{change.status}"
-      #     end
-      #     break unless changes.next?
-      #     changes = changes.next
+      #   changes.all do |change|
+      #     puts "#{change.name} - #{change.status}"
       #   end
       #
       def changes token: nil, max: nil, order: nil
@@ -260,7 +256,7 @@ module Gcloud
         resp = connection.list_changes id, token: token, max: max,
                                            order: order, sort: sort
         if resp.success?
-          Change::List.from_response resp, self
+          Change::List.from_response resp, self, max, order
         else
           fail ApiError.from_response(resp)
         end
@@ -304,28 +300,17 @@ module Gcloud
       #   records = zone.records "www", "A"
       #   records.first.name #=> "www.example.com."
       #
-      # @example With pagination: (See {Gcloud::Dns::Record::List})
+      # @example Retrieve all records: (See {Gcloud::Dns::Record::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   dns = gcloud.dns
       #   zone = dns.zone "example-com"
       #   records = zone.records "example.com."
-      #   loop do
-      #     records.each do |record|
-      #       puts record.name
-      #     end
-      #     break unless records.next?
-      #     records = records.next
+      #
+      #   records.all do |record|
+      #     puts record.name
       #   end
-      #
-      # @example Retrieve all pages: (See {Gcloud::Dns::Record::List#all})
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   dns = gcloud.dns
-      #   zone = dns.zone "example-com"
-      #   records = zone.records.all
       #
       def records name = nil, type = nil, token: nil, max: nil
         ensure_connection!
@@ -334,7 +319,7 @@ module Gcloud
 
         resp = connection.list_records id, name, type, token: token, max: max
         if resp.success?
-          Record::List.from_response resp, self
+          Record::List.from_response resp, self, name, type, max
         else
           fail ApiError.from_response(resp)
         end

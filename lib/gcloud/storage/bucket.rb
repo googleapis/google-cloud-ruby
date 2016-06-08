@@ -399,24 +399,16 @@ module Gcloud
       #     puts file.name
       #   end
       #
-      # @example With pagination: (See {File::List#token})
+      # @example Retrieve all files: (See {File::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   storage = gcloud.storage
       #
       #   bucket = storage.bucket "my-bucket"
-      #
-      #   all_files = []
-      #   tmp_files = bucket.files
-      #   while tmp_files.any? do
-      #     tmp_files.each do |file|
-      #       all_files << file
-      #     end
-      #     # break loop if no more buckets available
-      #     break if tmp_files.token.nil?
-      #     # get the next group of files
-      #     tmp_files = bucket.files token: tmp_files.token
+      #   files = bucket.files
+      #   files.all do |file|
+      #     puts file.name
       #   end
       #
       def files prefix: nil, delimiter: nil, token: nil, max: nil, versions: nil
@@ -429,11 +421,9 @@ module Gcloud
           versions:  versions
         }
         resp = connection.list_files name, options
-        if resp.success?
-          File::List.from_response resp, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        fail ApiError.from_response(resp) unless resp.success?
+        File::List.from_response resp, connection, name, prefix, delimiter, max,
+                                 versions
       end
       alias_method :find_files, :files
 

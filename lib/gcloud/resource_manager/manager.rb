@@ -85,6 +85,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
       #   projects = resource_manager.projects
+      #
       #   projects.each do |project|
       #     puts project.project_id
       #   end
@@ -95,24 +96,26 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
       #   projects = resource_manager.projects filter: "labels.env:production"
+      #
       #   projects.each do |project|
       #     puts project.project_id
       #   end
       #
-      # @example With pagination: (See {Gcloud::ResourceManager::Project::List})
+      # @example Retrieve all projects: (See {Project::List#all})
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
-      #   projects = resource_manager.projects.all
-      #   projects.each do |project|
+      #   projects = resource_manager.projects
+      #
+      #   projects.all do |project|
       #     puts project.project_id
       #   end
       #
       def projects filter: nil, token: nil, max: nil
         resp = connection.list_project filter: filter, token: token, max: max
         if resp.success?
-          Project::List.from_response resp, self
+          Project::List.from_response resp, self, filter, max
         else
           fail ApiError.from_response(resp)
         end

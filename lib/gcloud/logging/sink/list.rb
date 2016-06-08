@@ -34,45 +34,121 @@ module Gcloud
 
         ##
         # Whether there is a next page of sinks.
-        def next?
-          !token.nil?
-        end
-
-        ##
-        # Retrieve the next page of sinks.
-        def next
-          return nil unless next?
-          ensure_service!
-          list_grpc = @service.list_sinks token: token
-          self.class.from_grpc list_grpc, @service
-        rescue GRPC::BadStatus => e
-          raise Gcloud::Error.from_error(e)
-        end
-
-        ##
-        # Retrieves all sinks by repeatedly loading {#next?} until {#next?}
-        # returns `false`. Returns the list instance for method chaining.
+        #
+        # @return [Boolean]
         #
         # @example
         #   require "gcloud"
         #
         #   gcloud = Gcloud.new
         #   logging = gcloud.logging
-        #   all_sinks = logging.sinks.all # Load all pages of sinks
         #
-        def all
-          while next?
-            next_records = self.next
-            push(*next_records)
-            self.token = next_records.token
+        #   sinks = logging.sinks
+        #   if sinks.next?
+        #     next_sinks = sinks.next
+        #   end
+        #
+        def next?
+          !token.nil?
+        end
+
+        ##
+        # Retrieve the next page of sinks.
+        #
+        # @return [Sink::List]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #
+        #   sinks = dataset.sinks
+        #   if sinks.next?
+        #     next_sinks = sinks.next
+        #   end
+        #
+        def next
+          return nil unless next?
+          ensure_service!
+          list_grpc = @service.list_sinks token: token, max: @max
+          self.class.from_grpc list_grpc, @service
+        rescue GRPC::BadStatus => e
+          raise Gcloud::Error.from_error(e)
+        end
+
+        ##
+        # Retrieves all sinks by repeatedly loading {#next} until {#next?}
+        # returns `false`. Calls the given block once for each sink, which is
+        # passed as the parameter.
+        #
+        # An Enumerator is returned if no block is given.
+        #
+        # This method may make several API calls until all sinks are retrieved.
+        # Be sure to use as narrow a search criteria as possible. Please use
+        # with caution.
+        #
+        # @param [Integer] request_limit The upper limit of API requests to make
+        #   to load all sinks. Default is no limit.
+        # @yield [sink] The block for accessing each sink.
+        # @yieldparam [Sink] sink The sink object.
+        #
+        # @return [Enumerator]
+        #
+        # @example Iterating each sink by passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   sinks = logging.sinks
+        #
+        #   sinks.all do |sink|
+        #     puts "#{sink.name}: #{sink.filter} -> #{sink.destination}"
+        #   end
+        #
+        # @example Using the enumerator by not passing a block:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   sinks = logging.sinks
+        #
+        #   all_names = sinks.all.map do |sink|
+        #     sink.name
+        #   end
+        #
+        # @example Limit the number of API calls made:
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   logging = gcloud.logging
+        #   sinks = logging.sinks
+        #
+        #   sinks.all(request_limit: 10) do |sink|
+        #     puts "#{sink.name}: #{sink.filter} -> #{sink.destination}"
+        #   end
+        #
+        def all request_limit: nil
+          request_limit = request_limit.to_i if request_limit
+          unless block_given?
+            return enum_for(:all, request_limit: request_limit)
           end
-          self
+          results = self
+          loop do
+            results.each { |r| yield r }
+            if request_limit
+              request_limit -= 1
+              break if request_limit < 0
+            end
+            break unless results.next?
+            results = results.next
+          end
         end
 
         ##
         # @private New Sink::List from a Google::Logging::V2::ListSinksResponse
         # object.
-        def self.from_grpc grpc_list, service
+        def self.from_grpc grpc_list, service, max = nil
           sinks = new(Array(grpc_list.sinks).map do |grpc|
             Sink.from_grpc grpc, service
           end)
@@ -80,6 +156,7 @@ module Gcloud
           token = nil if token == ""
           sinks.instance_variable_set "@token", token
           sinks.instance_variable_set "@service", service
+          sinks.instance_variable_set "@max", max
           sinks
         end
 
