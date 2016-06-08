@@ -72,26 +72,17 @@ module Gcloud
       #
       # @see {#url?}
       #
-      def content?
+      def io?
         !@io.nil?
       end
 
       ##
       # @private Whether the Image is a URL.
       #
-      # @see {#content?}
+      # @see {#io?}
       #
       def url?
         !@url.nil?
-      end
-
-      ##
-      # @private The contents of the image, encoded via Base64.
-      #
-      # @return [String]
-      #
-      def content
-        @content ||= Base64.encode64 @io.read
       end
 
       ##
@@ -347,8 +338,14 @@ module Gcloud
 
       # @private
       def to_s
-        return "(io)" if content?
-        "(url: #{url})"
+        @to_s ||= begin
+          if io?
+            @io.rewind
+            "(#{@io.read(16)}...)"
+          else
+            "(#{url})"
+          end
+        end
       end
 
       # @private
@@ -359,8 +356,9 @@ module Gcloud
       ##
       # @private The Google API Client object for the Image.
       def to_gapi
-        if content?
-          { content: content }
+        if io?
+          @io.rewind
+          { content: Base64.strict_encode64(@io.read) }
         elsif url?
           { source: { gcsImageUri: @url } }
         else

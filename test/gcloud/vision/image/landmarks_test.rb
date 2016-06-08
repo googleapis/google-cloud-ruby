@@ -24,7 +24,7 @@ describe Gcloud::Vision::Image, :landmarks, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       landmark = requests.first
-      landmark["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      landmark["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       landmark["features"].count.must_equal 1
       landmark["features"].first["type"].must_equal "LANDMARK_DETECTION"
       landmark["features"].first["maxResults"].must_equal 10
@@ -41,7 +41,7 @@ describe Gcloud::Vision::Image, :landmarks, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       landmark = requests.first
-      landmark["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      landmark["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       landmark["features"].count.must_equal 1
       landmark["features"].first["type"].must_equal "LANDMARK_DETECTION"
       landmark["features"].first["maxResults"].must_equal 100
@@ -58,7 +58,7 @@ describe Gcloud::Vision::Image, :landmarks, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       landmark = requests.first
-      landmark["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      landmark["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       landmark["features"].count.must_equal 1
       landmark["features"].first["type"].must_equal "LANDMARK_DETECTION"
       landmark["features"].first["maxResults"].must_equal 1

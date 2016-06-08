@@ -24,7 +24,7 @@ describe Gcloud::Vision::Image, :logos, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       logo = requests.first
-      logo["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      logo["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       logo["features"].count.must_equal 1
       logo["features"].first["type"].must_equal "LOGO_DETECTION"
       logo["features"].first["maxResults"].must_equal 10
@@ -41,7 +41,7 @@ describe Gcloud::Vision::Image, :logos, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       logo = requests.first
-      logo["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      logo["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       logo["features"].count.must_equal 1
       logo["features"].first["type"].must_equal "LOGO_DETECTION"
       logo["features"].first["maxResults"].must_equal 100
@@ -58,7 +58,7 @@ describe Gcloud::Vision::Image, :logos, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       logo = requests.first
-      logo["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      logo["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       logo["features"].count.must_equal 1
       logo["features"].first["type"].must_equal "LOGO_DETECTION"
       logo["features"].first["maxResults"].must_equal 1

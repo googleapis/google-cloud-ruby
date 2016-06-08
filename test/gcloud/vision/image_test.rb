@@ -22,7 +22,7 @@ describe Gcloud::Vision::Image, :mock_vision do
     image = vision.image filepath
 
     image.must_be_kind_of Gcloud::Vision::Image
-    image.must_be :content?
+    image.must_be :io?
     image.wont_be :url?
   end
 
@@ -30,7 +30,7 @@ describe Gcloud::Vision::Image, :mock_vision do
     image = vision.image Pathname.new(filepath)
 
     image.must_be_kind_of Gcloud::Vision::Image
-    image.must_be :content?
+    image.must_be :io?
     image.wont_be :url?
   end
 
@@ -38,7 +38,7 @@ describe Gcloud::Vision::Image, :mock_vision do
     image = vision.image File.open(filepath, "rb")
 
     image.must_be_kind_of Gcloud::Vision::Image
-    image.must_be :content?
+    image.must_be :io?
     image.wont_be :url?
   end
 
@@ -46,7 +46,7 @@ describe Gcloud::Vision::Image, :mock_vision do
     image = vision.image StringIO.new(File.read(filepath, mode: "rb"))
 
     image.must_be_kind_of Gcloud::Vision::Image
-    image.must_be :content?
+    image.must_be :io?
     image.wont_be :url?
   end
 
@@ -60,7 +60,7 @@ describe Gcloud::Vision::Image, :mock_vision do
     end
 
     image.must_be_kind_of Gcloud::Vision::Image
-    image.must_be :content?
+    image.must_be :io?
     image.wont_be :url?
   end
 
@@ -68,7 +68,7 @@ describe Gcloud::Vision::Image, :mock_vision do
     image = vision.image "gs://test/file.ext"
 
     image.must_be_kind_of Gcloud::Vision::Image
-    image.wont_be :content?
+    image.wont_be :io?
     image.must_be :url?
   end
 
@@ -77,7 +77,7 @@ describe Gcloud::Vision::Image, :mock_vision do
     image = vision.image gs_img
 
     image.must_be_kind_of Gcloud::Vision::Image
-    image.wont_be :content?
+    image.wont_be :io?
     image.must_be :url?
   end
 
