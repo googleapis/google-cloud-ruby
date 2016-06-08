@@ -38,6 +38,13 @@ module Gcloud
         # All messages added will be published at once.
         # See {Gcloud::Pubsub::Topic#publish}
         def publish data, attributes = {}
+          # Convert IO-ish objects to strings
+          if data.respond_to?(:read) && data.respond_to?(:rewind)
+            data.rewind
+            data = data.read
+          end
+          # Convert data to encoded byte array to match the protobuf definition
+          data = String(data).force_encoding("ASCII-8BIT")
           # Convert attributes to strings to match the protobuf definition
           attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
           @messages << [data, attributes]
@@ -47,10 +54,9 @@ module Gcloud
         # @private Create Message objects with message ids.
         def to_gcloud_messages message_ids
           msgs = @messages.zip(Array(message_ids)).map do |arr, id|
-            Message.from_grpc(Google::Pubsub::V1::PubsubMessage.new(
-                                data: String(arr[0]).encode("ASCII-8BIT"),
-                                attributes: arr[1],
-                                message_id: id))
+            Message.from_grpc(
+              Google::Pubsub::V1::PubsubMessage.new(
+                data: arr[0], attributes: arr[1], message_id: id))
           end
           # Return just one Message if a single publish,
           # otherwise return the array of Messages.

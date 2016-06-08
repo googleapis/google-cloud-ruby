@@ -228,7 +228,7 @@ module Gcloud
       # without a subscription will be lost.
       #
       # @param [String] topic_name Name of a topic.
-      # @param [String] data The message data.
+      # @param [String, File] data The message data.
       # @param [Hash] attributes Optional attributes for the message.
       # @option attributes [Boolean] :autocreate Flag to control whether the
       #   provided topic will be created if it does not exist.
@@ -246,6 +246,14 @@ module Gcloud
       #   pubsub = gcloud.pubsub
       #
       #   msg = pubsub.publish "my-topic", "new-message"
+      #
+      # @example A message can be published using a File object:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #
+      #   msg = pubsub.publish "my-topic", File.open("message.txt")
       #
       # @example Additionally, a message can be published with attributes:
       #   require "gcloud"
