@@ -29,7 +29,7 @@ describe Gcloud::Vision::Project, :mock_vision do
 
     image.wont_be :nil?
     image.must_be_kind_of Gcloud::Vision::Image
-    image.must_be :content?
+    image.must_be :io?
     image.wont_be :url?
   end
 
@@ -37,13 +37,13 @@ describe Gcloud::Vision::Project, :mock_vision do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 2
-      requests.first["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.first["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       requests.first["features"].count.must_equal 2
       requests.first["features"].first["type"].must_equal "FACE_DETECTION"
       requests.first["features"].first["maxResults"].must_equal 10
       requests.first["features"].last["type"].must_equal "TEXT_DETECTION"
       requests.first["features"].last["maxResults"].must_equal 1
-      requests.last["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.last["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       requests.last["features"].count.must_equal 2
       requests.last["features"].first["type"].must_equal "LANDMARK_DETECTION"
       requests.last["features"].first["maxResults"].must_equal 20
@@ -67,7 +67,7 @@ describe Gcloud::Vision::Project, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       request = requests.first
-      request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      request["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       request["features"].count.must_equal 7
       request["features"][0]["type"].must_equal "FACE_DETECTION"
       request["features"][0]["maxResults"].must_equal 100
@@ -136,7 +136,7 @@ describe Gcloud::Vision::Project, :mock_vision do
         requests = JSON.parse(env.body)["requests"]
         requests.count.must_equal 1
         request = requests.first
-        request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+        request["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
         request["features"].count.must_equal 2
         request["features"].first["type"].must_equal "FACE_DETECTION"
         request["features"].first["maxResults"].must_equal 10
@@ -158,7 +158,7 @@ describe Gcloud::Vision::Project, :mock_vision do
         requests = JSON.parse(env.body)["requests"]
         requests.count.must_equal 1
         request = requests.first
-        request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+        request["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
         request["features"].count.must_equal 2
         request["features"].first["type"].must_equal "FACE_DETECTION"
         request["features"].first["maxResults"].must_equal 10
@@ -181,7 +181,7 @@ describe Gcloud::Vision::Project, :mock_vision do
         requests = JSON.parse(env.body)["requests"]
         requests.count.must_equal 1
         request = requests.first
-        request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+        request["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
         request["features"].count.must_equal 2
         request["features"].first["type"].must_equal "FACE_DETECTION"
         request["features"].first["maxResults"].must_equal 10
@@ -210,7 +210,7 @@ describe Gcloud::Vision::Project, :mock_vision do
         requests = JSON.parse(env.body)["requests"]
         requests.count.must_equal 1
         request = requests.first
-        request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+        request["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
         request["features"].count.must_equal 2
         request["features"].first["type"].must_equal "FACE_DETECTION"
         request["features"].first["maxResults"].must_equal 10
@@ -237,7 +237,7 @@ describe Gcloud::Vision::Project, :mock_vision do
         requests = JSON.parse(env.body)["requests"]
         requests.count.must_equal 1
         request = requests.first
-        request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+        request["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
         request["features"].count.must_equal 2
         request["features"].first["type"].must_equal "FACE_DETECTION"
         request["features"].first["maxResults"].must_equal 10
@@ -263,7 +263,7 @@ describe Gcloud::Vision::Project, :mock_vision do
         requests = JSON.parse(env.body)["requests"]
         requests.count.must_equal 1
         request = requests.first
-        request["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+        request["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
         request["features"].count.must_equal 2
         request["features"].first["type"].must_equal "FACE_DETECTION"
         request["features"].first["maxResults"].must_equal 10

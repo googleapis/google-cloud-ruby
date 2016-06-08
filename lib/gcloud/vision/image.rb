@@ -72,26 +72,17 @@ module Gcloud
       #
       # @see {#url?}
       #
-      def content?
+      def io?
         !@io.nil?
       end
 
       ##
       # @private Whether the Image is a URL.
       #
-      # @see {#content?}
+      # @see {#io?}
       #
       def url?
         !@url.nil?
-      end
-
-      ##
-      # @private The contents of the image, encoded via Base64.
-      #
-      # @return [String]
-      #
-      def content
-        @content ||= Base64.encode64 @io.read
       end
 
       ##
@@ -347,8 +338,14 @@ module Gcloud
 
       # @private
       def to_s
-        return "(io)" if content?
-        "(url: #{url})"
+        @to_s ||= begin
+          if io?
+            @io.rewind
+            "(#{@io.read(16)}...)"
+          else
+            "(#{url})"
+          end
+        end
       end
 
       # @private
@@ -359,8 +356,9 @@ module Gcloud
       ##
       # @private The Google API Client object for the Image.
       def to_gapi
-        if content?
-          { content: content }
+        if io?
+          @io.rewind
+          { content: Base64.strict_encode64(@io.read) }
         elsif url?
           { source: { gcsImageUri: @url } }
         else
@@ -371,7 +369,7 @@ module Gcloud
       ##
       # @private New Image from a source object.
       def self.from_source source, vision = nil
-        if source.is_a?(IO) || source.is_a?(StringIO)
+        if source.respond_to?(:read) && source.respond_to?(:rewind)
           return from_io(source, vision)
         end
         # Convert Storage::File objects to the URL
@@ -393,8 +391,7 @@ module Gcloud
       ##
       # @private New Image from an IO object.
       def self.from_io io, vision
-        if !io.is_a?(IO) && !io.is_a?(StringIO)
-          puts io.inspect
+        if !io.respond_to?(:read) && !io.respond_to?(:rewind)
           fail ArgumentError, "Cannot create an Image without an IO object"
         end
         new.tap do |i|

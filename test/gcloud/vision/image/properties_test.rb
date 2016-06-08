@@ -24,7 +24,7 @@ describe Gcloud::Vision::Image, :properties, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       properties = requests.first
-      properties["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      properties["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       properties["features"].count.must_equal 1
       properties["features"].first["type"].must_equal "IMAGE_PROPERTIES"
       properties["features"].first["maxResults"].must_equal 1

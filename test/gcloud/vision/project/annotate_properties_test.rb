@@ -22,7 +22,7 @@ describe Gcloud::Vision::Project, :annotate, :properties, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       properties = requests.first
-      properties["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      properties["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       properties["features"].count.must_equal 1
       properties["features"].first["type"].must_equal "IMAGE_PROPERTIES"
       properties["features"].first["maxResults"].must_equal 1
@@ -57,7 +57,7 @@ describe Gcloud::Vision::Project, :annotate, :properties, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       properties = requests.first
-      properties["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      properties["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       properties["features"].count.must_equal 1
       properties["features"].first["type"].must_equal "IMAGE_PROPERTIES"
       properties["features"].first["maxResults"].must_equal 1
@@ -92,7 +92,7 @@ describe Gcloud::Vision::Project, :annotate, :properties, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       properties = requests.first
-      properties["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      properties["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       properties["features"].count.must_equal 1
       properties["features"].first["type"].must_equal "IMAGE_PROPERTIES"
       properties["features"].first["maxResults"].must_equal 1
@@ -126,11 +126,11 @@ describe Gcloud::Vision::Project, :annotate, :properties, :mock_vision do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 2
-      requests.first["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.first["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       requests.first["features"].count.must_equal 1
       requests.first["features"].first["type"].must_equal "IMAGE_PROPERTIES"
       requests.first["features"].first["maxResults"].must_equal 1
-      requests.last["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.last["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       requests.last["features"].count.must_equal 1
       requests.last["features"].first["type"].must_equal "IMAGE_PROPERTIES"
       requests.last["features"].first["maxResults"].must_equal 1
@@ -183,7 +183,7 @@ describe Gcloud::Vision::Project, :annotate, :properties, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       properties = requests.first
-      properties["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      properties["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       properties["features"].count.must_equal 1
       properties["features"].first["type"].must_equal "IMAGE_PROPERTIES"
       properties["features"].first["maxResults"].must_equal 1

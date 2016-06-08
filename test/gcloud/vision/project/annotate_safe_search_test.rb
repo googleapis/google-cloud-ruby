@@ -22,7 +22,7 @@ describe Gcloud::Vision::Project, :annotate, :safe_search, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       safe_search = requests.first
-      safe_search["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      safe_search["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       safe_search["features"].count.must_equal 1
       safe_search["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
       safe_search["features"].first["maxResults"].must_equal 1
@@ -45,7 +45,7 @@ describe Gcloud::Vision::Project, :annotate, :safe_search, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       safe_search = requests.first
-      safe_search["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      safe_search["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       safe_search["features"].count.must_equal 1
       safe_search["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
       safe_search["features"].first["maxResults"].must_equal 1
@@ -68,7 +68,7 @@ describe Gcloud::Vision::Project, :annotate, :safe_search, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       safe_search = requests.first
-      safe_search["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      safe_search["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       safe_search["features"].count.must_equal 1
       safe_search["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
       safe_search["features"].first["maxResults"].must_equal 1
@@ -90,11 +90,11 @@ describe Gcloud::Vision::Project, :annotate, :safe_search, :mock_vision do
     mock_connection.post "/v1/images:annotate" do |env|
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 2
-      requests.first["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.first["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       requests.first["features"].count.must_equal 1
       requests.first["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
       requests.first["features"].first["maxResults"].must_equal 1
-      requests.last["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      requests.last["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       requests.last["features"].count.must_equal 1
       requests.last["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
       requests.last["features"].first["maxResults"].must_equal 1
@@ -123,7 +123,7 @@ describe Gcloud::Vision::Project, :annotate, :safe_search, :mock_vision do
       requests = JSON.parse(env.body)["requests"]
       requests.count.must_equal 1
       safe_search = requests.first
-      safe_search["image"]["content"].must_equal Base64.encode64(File.read(filepath, mode: "rb"))
+      safe_search["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
       safe_search["features"].count.must_equal 1
       safe_search["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
       safe_search["features"].first["maxResults"].must_equal 1
