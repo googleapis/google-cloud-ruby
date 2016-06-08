@@ -15,6 +15,7 @@
 
 require "pathname"
 require "gcloud/version"
+require "gcloud/backoff"
 require "google/api_client"
 require "digest/md5"
 

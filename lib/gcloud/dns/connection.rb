@@ -14,6 +14,7 @@
 
 
 require "gcloud/version"
+require "gcloud/backoff"
 require "google/api_client"
 
 module Gcloud
@@ -38,14 +39,14 @@ module Gcloud
       end
 
       def get_project project_id = @project
-        @client.execute(
+        execute(
           api_method: @dns.projects.get,
           parameters: { project: project_id }
         )
       end
 
       def get_zone zone_id
-        @client.execute(
+        execute(
           api_method: @dns.managed_zones.get,
           parameters: { project: @project, managedZone: zone_id }
         )
@@ -57,7 +58,7 @@ module Gcloud
                    maxResults: max
                  }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @dns.managed_zones.list,
           parameters: params
         )
@@ -71,7 +72,7 @@ module Gcloud
                  nameServerSet: name_server_set
                }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @dns.managed_zones.create,
           parameters: { project: @project },
           body_object: body
@@ -79,14 +80,14 @@ module Gcloud
       end
 
       def delete_zone zone_id
-        @client.execute(
+        execute(
           api_method: @dns.managed_zones.delete,
           parameters: { project: @project, managedZone: zone_id }
         )
       end
 
       def get_change zone_id, change_id
-        @client.execute(
+        execute(
           api_method: @dns.changes.get,
           parameters: { project: @project, managedZone: zone_id,
                         changeId: change_id }
@@ -101,7 +102,7 @@ module Gcloud
                    sortOrder: order
                  }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @dns.changes.list,
           parameters: params
         )
@@ -112,7 +113,7 @@ module Gcloud
                    "additions" => Array(additions),
                    "deletions" => Array(deletions) }
 
-        @client.execute(
+        execute(
           api_method: @dns.changes.create,
           parameters: { project: @project, managedZone: zone_id },
           body_object: change
@@ -127,7 +128,7 @@ module Gcloud
                    type: type
                  }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @dns.resource_record_sets.list,
           parameters: params
         )
@@ -158,6 +159,14 @@ module Gcloud
 
       def inspect
         "#{self.class}(#{@project})"
+      end
+
+      protected
+
+      def execute options
+        Gcloud::Backoff.new.execute_gapi do
+          @client.execute options
+        end
       end
     end
   end
