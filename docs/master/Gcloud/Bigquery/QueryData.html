@@ -120,6 +120,8 @@
               
                 <span class='object_link'><a href="#next-instance_method" title="Gcloud::Bigquery::QueryData#next (method)">#next</a></span>
               
+                <span class='object_link'><a href="#all-instance_method" title="Gcloud::Bigquery::QueryData#all (method)">#all</a></span>
+              
                 <span class='object_link'><a href="#job-instance_method" title="Gcloud::Bigquery::QueryData#job (method)">#job</a></span>
               
                 <span class='object_link'><a href="Data.html#kind-instance_method" title="Gcloud::Bigquery::Data#kind (method)">Data#kind</a></span>
@@ -416,7 +418,7 @@ always be <code class="highlighter-rouge">true</code>. When <code class="highlig
 
                   <div class="method-description">
 
-                    <p>Is there a next page of data?</p>
+                    <p>Whether there is a next page of query data.</p>
 
 
                     
@@ -434,6 +436,24 @@ always be <code class="highlighter-rouge">true</code>. When <code class="highlig
                       </p>
                     
 
+                    
+                      <h3 id="method-i-next?-label-Examples">
+                        Example
+                        <span><a href="#method-i-next?-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_job</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_query_results'>query_results</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_next?'>next?</span>
+  <span class='id identifier rubyid_next_data'>next_data</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span>
+<span class='kw'>end</span></code></pre>
+                      
                     
 
                   </div>
@@ -454,7 +474,7 @@ always be <code class="highlighter-rouge">true</code>. When <code class="highlig
 
                   <div class="method-description">
 
-                    
+                    <p>Retrieve the next page of query data.</p>
 
 
                     
@@ -462,7 +482,153 @@ always be <code class="highlighter-rouge">true</code>. When <code class="highlig
                     
 
                     
+                      <h3 id="method-i-next-label-Returns">
+                        Returns
+                        <span><a href="#method-i-next-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="" title="Gcloud::Bigquery::QueryData (class)">QueryData</a></span></tt>)
+                        
+                      </p>
+                    
 
+                    
+                      <h3 id="method-i-next-label-Examples">
+                        Example
+                        <span><a href="#method-i-next-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_job</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_query_results'>query_results</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_next?'>next?</span>
+  <span class='id identifier rubyid_next_data'>next_data</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span>
+<span class='kw'>end</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="all-instance_method"></a>
+                  <h4>
+                    <code>all(request_limit: nil)</code>
+                    <span>
+                      <a href="#all-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Retrieves all rows by repeatedly loading <span class='object_link'><a href="#next-instance_method" title="Gcloud::Bigquery::QueryData#next (method)">#next</a></span> until <span class='object_link'><a href="#next%3F-instance_method" title="Gcloud::Bigquery::QueryData#next? (method)">#next?</a></span> returns
+<code class="highlighter-rouge">false</code>. Calls the given block once for each row, which is passed as the
+parameter.</p>
+
+<p>An Enumerator is returned if no block is given.</p>
+
+<p>This method may make several API calls until all rows are retrieved. Be
+sure to use as narrow a search criteria as possible. Please use with
+caution.</p>
+
+
+                    
+
+                    
+                      <h3 id="method-i-all-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-all-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>request_limit</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The upper limit of API requests to make
+to load all data. Default is no limit.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-all-label-Returns">
+                        Returns
+                        <span><a href="#method-i-all-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Enumerator</tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-all-label-Examples">
+                        Examples
+                        <span><a href="#method-i-all-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Iterating each row by passing a block:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_job</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_query_results'>query_results</span>
+<span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>word</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Using the enumerator by not passing a block:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_job</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_query_results'>query_results</span>
+<span class='id identifier rubyid_words'>words</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+  <span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>word</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Limit the number of API calls made:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_job</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_query_results'>query_results</span>
+<span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='lparen'>(</span><span class='label'>request_limit:</span> <span class='int'>10</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>word</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='kw'>end</span></code></pre>
+                      
                     
 
                   </div>
@@ -651,7 +817,7 @@ No type conversion is made, e.g. numbers are formatted as strings.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 01, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Job.html'>Job</a></li><li class='toc-l1'><a class='reference internal' href='Table.html'>Table</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 08, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Job.html'>Job</a></li><li class='toc-l1'><a class='reference internal' href='Table.html'>Table</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

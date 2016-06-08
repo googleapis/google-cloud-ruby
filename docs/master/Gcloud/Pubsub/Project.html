@@ -588,7 +588,7 @@ the system should return the next page of data.</p>
 <span class='kw'>end</span></code></pre>
                       
                         
-                          <p class="example_title"><div class='inline'><p>With pagination: (See <span class='object_link'><a href="Topic/List.html#token-instance_method" title="Gcloud::Pubsub::Topic::List#token (method)">Topic::List#token</a></span>)</p>
+                          <p class="example_title"><div class='inline'><p>Retrieve all topics: (See <span class='object_link'><a href="Topic/List.html#all-instance_method" title="Gcloud::Pubsub::Topic::List#all (method)">Topic::List#all</a></span>)</p>
 </div></p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
@@ -596,16 +596,9 @@ the system should return the next page of data.</p>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
 
-<span class='id identifier rubyid_all_topics'>all_topics</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-<span class='id identifier rubyid_tmp_topics'>tmp_topics</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topics'>topics</span>
-<span class='kw'>while</span> <span class='id identifier rubyid_tmp_topics'>tmp_topics</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='kw'>do</span>
-  <span class='id identifier rubyid_tmp_topics'>tmp_topics</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_topic'>topic</span><span class='op'>|</span>
-    <span class='id identifier rubyid_all_topics'>all_topics</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_topic'>topic</span>
-  <span class='kw'>end</span>
-  <span class='comment'># break loop if no more topics available
-</span>  <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_tmp_topics'>tmp_topics</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='comment'># get the next group of topics
-</span>  <span class='id identifier rubyid_tmp_topics'>tmp_topics</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topics'>topics</span> <span class='label'>token:</span> <span class='id identifier rubyid_tmp_topics'>tmp_topics</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span>
+<span class='id identifier rubyid_topics'>topics</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topics'>topics</span>
+<span class='id identifier rubyid_topics'>topics</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_topic'>topic</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
 <span class='kw'>end</span></code></pre>
                       
                     
@@ -1189,7 +1182,7 @@ subscription does not exist</p>
                 <div class="method">
                   <a name="subscriptions-instance_method"></a>
                   <h4>
-                    <code>subscriptions(prefix: nil, token: nil, max: nil)</code>
+                    <code>subscriptions(token: nil, max: nil)</code>
                     <span>
                       <a href="#subscriptions-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1209,20 +1202,6 @@ subscription does not exist</p>
                         <span><a href="#method-i-subscriptions-label-Parameters">¶</a> <a href="#top">↑</a></span>
                       </h3>
                       <dl class="rdoc-list note-list">
-                        
-                          <dt>
-                            <code>prefix</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>Filter results to subscriptions whose names begin
-with this prefix.</p>
-</div>
-                              
-                              (<tt>String</tt>)
-                            </p>
-                          </dd>
                         
                           <dt>
                             <code>token</code>
@@ -1287,7 +1266,7 @@ of the larger set of results to view.</p>
 <span class='kw'>end</span></code></pre>
                       
                         
-                          <p class="example_title"><div class='inline'><p>With pagination: (See <span class='object_link'><a href="Subscription/List.html#token-instance_method" title="Gcloud::Pubsub::Subscription::List#token (method)">Subscription::List#token</a></span>)</p>
+                          <p class="example_title"><div class='inline'><p>Retrieve all subscriptions: (See <span class='object_link'><a href="Subscription/List.html#all-instance_method" title="Gcloud::Pubsub::Subscription::List#all (method)">Subscription::List#all</a></span>)</p>
 </div></p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
@@ -1295,16 +1274,9 @@ of the larger set of results to view.</p>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
 
-<span class='id identifier rubyid_all_subs'>all_subs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-<span class='id identifier rubyid_tmp_subs'>tmp_subs</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscriptions'>subscriptions</span>
-<span class='kw'>while</span> <span class='id identifier rubyid_tmp_subs'>tmp_subs</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='kw'>do</span>
-  <span class='id identifier rubyid_tmp_subs'>tmp_subs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_subscription'>subscription</span><span class='op'>|</span>
-    <span class='id identifier rubyid_all_subs'>all_subs</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_subscription'>subscription</span>
-  <span class='kw'>end</span>
-  <span class='comment'># break loop if no more subscriptions available
-</span>  <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_tmp_subs'>tmp_subs</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='comment'># get the next group of subscriptions
-</span>  <span class='id identifier rubyid_tmp_subs'>tmp_subs</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscriptions'>subscriptions</span> <span class='label'>token:</span> <span class='id identifier rubyid_tmp_subs'>tmp_subs</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span>
+<span class='id identifier rubyid_subscriptions'>subscriptions</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscriptions'>subscriptions</span>
+<span class='id identifier rubyid_subscriptions'>subscriptions</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_subscription'>subscription</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_subscription'>subscription</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
 <span class='kw'>end</span></code></pre>
                       
                     
@@ -1363,7 +1335,7 @@ of the larger set of results to view.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 01, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l1'><a class='reference internal current' href=''>Project</a></li><li class='toc-l1'><a class='reference internal' href='Topic.html'>Topic</a></li><li class='toc-l1'><a class='reference internal' href='Subscription.html'>Subscription</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 08, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l1'><a class='reference internal current' href=''>Project</a></li><li class='toc-l1'><a class='reference internal' href='Topic.html'>Topic</a></li><li class='toc-l1'><a class='reference internal' href='Subscription.html'>Subscription</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

@@ -207,10 +207,8 @@ that can be used to model relationships. The simplest key has a string
 
 <h3 id="paginating-records">Paginating records</h3>
 
-<p>All records may not return at once, requiring multiple calls to Datastore
-to return them all. The <span class='object_link'><a href="Datastore/Dataset/QueryResults.html#next-instance_method" title="Gcloud::Datastore::Dataset::QueryResults#next (method)">Dataset::QueryResults#next</a></span>
-method retrieves the next page of results by making an API call using a
-returned cursor if there are more results available.</p>
+<p>All records may not return at once, but multiple calls can be made to
+Datastore to return them all.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
@@ -219,13 +217,8 @@ returned cursor if there are more results available.</p>
 
 <span class="n">query</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="s2">"Task"</span><span class="p">)</span>
 <span class="n">tasks</span> <span class="o">=</span> <span class="n">datastore</span><span class="p">.</span><span class="nf">run</span> <span class="n">query</span>
-
-<span class="kp">loop</span> <span class="k">do</span>
-  <span class="n">tasks</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
-    <span class="nb">puts</span> <span class="n">t</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span>
-  <span class="k">end</span>
-  <span class="k">break</span> <span class="k">unless</span> <span class="n">tasks</span><span class="p">.</span><span class="nf">next?</span>
-  <span class="n">tasks</span> <span class="o">=</span> <span class="n">tasks</span><span class="p">.</span><span class="nf">next</span>
+<span class="n">tasks</span><span class="p">.</span><span class="nf">all</span> <span class="k">do</span> <span class="o">|</span><span class="n">task</span><span class="o">|</span>
+  <span class="nb">puts</span> <span class="n">t</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span>
 <span class="k">end</span>
 </code></pre>
 </div>
@@ -575,7 +568,7 @@ environment variable:</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 01, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal current' href=''>Datastore</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Entity.html'>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 08, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal current' href=''>Datastore</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Query.html'>Query</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Entity.html'>Entity</a></li><li class='toc-l1'><a class='reference internal' href='Datastore/Key.html'>Key</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

@@ -595,7 +595,7 @@ option is set.</p>
 
                     
                       <h3 id="method-i-query-label-Examples">
-                        Example
+                        Examples
                         <span><a href="#method-i-query-label-Examples">¶</a> <a href="#top">↑</a></span>
                       </h3>
                       
@@ -607,6 +607,20 @@ option is set.</p>
 
 <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT name FROM [my_proj:my_data.my_table]</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='kw'>end</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Retrieve all rows: (See <span class='object_link'><a href="QueryData.html#all-instance_method" title="Gcloud::Bigquery::QueryData#all (method)">QueryData#all</a></span>)</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT name FROM [my_proj:my_data.my_table]</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
 <span class='kw'>end</span></code></pre>
                       
@@ -983,18 +997,7 @@ of the larger set of results to view.</p>
 <span class='kw'>end</span></code></pre>
                       
                         
-                          <p class="example_title"><div class='inline'><p>Retrieve all datasets, including hidden ones, with <code class="highlighter-rouge">:all</code>:</p>
-</div></p>
-                        
-                        <pre class="code"><code>require &quot;gcloud&quot;
-
-gcloud = Gcloud.new
-bigquery = gcloud.bigquery
-
-all_datasets = bigquery.datasets, all: true</code></pre>
-                      
-                        
-                          <p class="example_title"><div class='inline'><p>With pagination: (See <span class='object_link'><a href="Dataset/List.html#token-instance_method" title="Gcloud::Bigquery::Dataset::List#token (method)">Dataset::List#token</a></span>)</p>
+                          <p class="example_title"><div class='inline'><p>Retrieve hidden datasets with the <code class="highlighter-rouge">all</code> optional arg:</p>
 </div></p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
@@ -1002,16 +1005,20 @@ all_datasets = bigquery.datasets, all: true</code></pre>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
 
-<span class='id identifier rubyid_all_datasets'>all_datasets</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-<span class='id identifier rubyid_tmp_datasets'>tmp_datasets</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_datasets'>datasets</span>
-<span class='kw'>while</span> <span class='id identifier rubyid_tmp_datasets'>tmp_datasets</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='kw'>do</span>
-  <span class='id identifier rubyid_tmp_datasets'>tmp_datasets</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dataset'>dataset</span><span class='op'>|</span>
-    <span class='id identifier rubyid_all_datasets'>all_datasets</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_dataset'>dataset</span>
-  <span class='kw'>end</span>
-  <span class='comment'># break loop if no more datasets available
-</span>  <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_tmp_datasets'>tmp_datasets</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='comment'># get the next group of datasets
-</span>  <span class='id identifier rubyid_tmp_datasets'>tmp_datasets</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_datasets'>datasets</span> <span class='label'>token:</span> <span class='id identifier rubyid_tmp_datasets'>tmp_datasets</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span>
+<span class='id identifier rubyid_all_datasets'>all_datasets</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_datasets'>datasets</span> <span class='label'>all:</span> <span class='kw'>true</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Retrieve all datasets: (See <span class='object_link'><a href="Dataset/List.html#all-instance_method" title="Gcloud::Bigquery::Dataset::List#all (method)">Dataset::List#all</a></span>)</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='id identifier rubyid_datasets'>datasets</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_datasets'>datasets</span>
+<span class='id identifier rubyid_datasets'>datasets</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dataset'>dataset</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
 <span class='kw'>end</span></code></pre>
                       
                     
@@ -1215,10 +1222,13 @@ of the larger set of results to view.</p>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
 
-<span class='id identifier rubyid_jobs'>jobs</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_jobs'>jobs</span></code></pre>
+<span class='id identifier rubyid_jobs'>jobs</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_jobs'>jobs</span>
+<span class='id identifier rubyid_jobs'>jobs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_job'>job</span><span class='op'>|</span>
+  <span class='comment'># process job
+</span><span class='kw'>end</span></code></pre>
                       
                         
-                          <p class="example_title"><div class='inline'><p>Retrieve only running jobs using the <code class="highlighter-rouge">:filter</code> option:</p>
+                          <p class="example_title"><div class='inline'><p>Retrieve only running jobs using the <code class="highlighter-rouge">filter</code> optional arg:</p>
 </div></p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
@@ -1226,10 +1236,13 @@ of the larger set of results to view.</p>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
 
-<span class='id identifier rubyid_running_jobs'>running_jobs</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_jobs'>jobs</span> <span class='label'>filter:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>running</span><span class='tstring_end'>&quot;</span></span></code></pre>
+<span class='id identifier rubyid_running_jobs'>running_jobs</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_jobs'>jobs</span> <span class='label'>filter:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>running</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_running_jobs'>running_jobs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_job'>job</span><span class='op'>|</span>
+  <span class='comment'># process job
+</span><span class='kw'>end</span></code></pre>
                       
                         
-                          <p class="example_title"><div class='inline'><p>With pagination: (See <span class='object_link'><a href="Job/List.html#token-instance_method" title="Gcloud::Bigquery::Job::List#token (method)">Job::List#token</a></span>)</p>
+                          <p class="example_title"><div class='inline'><p>Retrieve all jobs: (See <span class='object_link'><a href="Job/List.html#all-instance_method" title="Gcloud::Bigquery::Job::List#all (method)">Job::List#all</a></span>)</p>
 </div></p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
@@ -1237,17 +1250,10 @@ of the larger set of results to view.</p>
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
 
-<span class='id identifier rubyid_all_jobs'>all_jobs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-<span class='id identifier rubyid_tmp_jobs'>tmp_jobs</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_jobs'>jobs</span>
-<span class='kw'>while</span> <span class='id identifier rubyid_tmp_jobs'>tmp_jobs</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='kw'>do</span>
-  <span class='id identifier rubyid_tmp_jobs'>tmp_jobs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_job'>job</span><span class='op'>|</span>
-    <span class='id identifier rubyid_all_jobs'>all_jobs</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_job'>job</span>
-  <span class='kw'>end</span>
-  <span class='comment'># break loop if no more jobs available
-</span>  <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_tmp_jobs'>tmp_jobs</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='comment'># get the next group of jobs
-</span>  <span class='id identifier rubyid_tmp_jobs'>tmp_jobs</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_jobs'>jobs</span> <span class='label'>token:</span> <span class='id identifier rubyid_tmp_jobs'>tmp_jobs</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span>
-<span class='kw'>end</span></code></pre>
+<span class='id identifier rubyid_jobs'>jobs</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_jobs'>jobs</span>
+<span class='id identifier rubyid_jobs'>jobs</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_job'>job</span><span class='op'>|</span>
+  <span class='comment'># process job
+</span><span class='kw'>end</span></code></pre>
                       
                     
 
@@ -1262,7 +1268,7 @@ of the larger set of results to view.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 01, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l1'><a class='reference internal current' href=''>Project</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Job.html'>Job</a></li><li class='toc-l1'><a class='reference internal' href='Table.html'>Table</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 08, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l1'><a class='reference internal current' href=''>Project</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Job.html'>Job</a></li><li class='toc-l1'><a class='reference internal' href='Table.html'>Table</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
