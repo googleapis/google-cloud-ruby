@@ -50,6 +50,20 @@ describe Gcloud::Vision::Image, :mock_vision do
     image.wont_be :url?
   end
 
+  it "can create from a Tempfile object" do
+    image = nil
+    Tempfile.open ["image", "png"] do |tmpfile|
+      tmpfile.binmode
+      tmpfile.write File.read(filepath, mode: "rb")
+
+      image = vision.image tmpfile
+    end
+
+    image.must_be_kind_of Gcloud::Vision::Image
+    image.must_be :content?
+    image.wont_be :url?
+  end
+
   it "can create from a Google Storage URL" do
     image = vision.image "gs://test/file.ext"
 

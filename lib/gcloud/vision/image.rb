@@ -371,7 +371,7 @@ module Gcloud
       ##
       # @private New Image from a source object.
       def self.from_source source, vision = nil
-        if source.is_a?(IO) || source.is_a?(StringIO)
+        if source.respond_to?(:read) && source.respond_to?(:rewind)
           return from_io(source, vision)
         end
         # Convert Storage::File objects to the URL
@@ -393,8 +393,7 @@ module Gcloud
       ##
       # @private New Image from an IO object.
       def self.from_io io, vision
-        if !io.is_a?(IO) && !io.is_a?(StringIO)
-          puts io.inspect
+        if !io.respond_to?(:read) && !io.respond_to?(:rewind)
           fail ArgumentError, "Cannot create an Image without an IO object"
         end
         new.tap do |i|
