@@ -146,7 +146,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   query = datastore.query "Tasks"
+        #   query = datastore.query "Task"
         #   tasks = datastore.run query
         #
         #   if tasks.next?
@@ -176,7 +176,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   query = datastore.query "Tasks"
+        #   query = datastore.query "Task"
         #   tasks = datastore.run query
         #
         #   first_task = tasks.first
@@ -206,7 +206,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   query = datastore.query "Tasks"
+        #   query = datastore.query "Task"
         #   tasks = datastore.run query
         #   tasks.each_with_cursor do |task, cursor|
         #     puts "Task #{task.key.id} (#cursor)"
@@ -240,7 +240,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   query = datastore.query "Tasks"
+        #   query = datastore.query "Task"
         #   tasks = datastore.run query
         #   tasks.all do |task|
         #     puts "Task #{task.key.id} (#cursor)"
@@ -251,7 +251,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   query = datastore.query "Tasks"
+        #   query = datastore.query "Task"
         #   tasks = datastore.run query
         #   tasks.all.map(&:key).each do |key|
         #     puts "Key #{key.id}"
@@ -262,7 +262,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   query = datastore.query "Tasks"
+        #   query = datastore.query "Task"
         #   tasks = datastore.run query
         #   tasks.all(request_limit: 10) do |task|
         #     puts "Task #{task.key.id} (#cursor)"
@@ -310,7 +310,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   query = datastore.query "Tasks"
+        #   query = datastore.query "Task"
         #   tasks = datastore.run query
         #   tasks.all_with_cursor do |task, cursor|
         #     puts "Task #{task.key.id} (#cursor)"
@@ -321,7 +321,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   query = datastore.query "Tasks"
+        #   query = datastore.query "Task"
         #   tasks = datastore.run query
         #   tasks.all_with_cursor.count #=> number of result/cursor pairs
         #
@@ -330,7 +330,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   query = datastore.query "Tasks"
+        #   query = datastore.query "Task"
         #   tasks = datastore.run query
         #   tasks.all_with_cursor(request_limit: 10) do |task, cursor|
         #     puts "Task #{task.key.id} (#cursor)"
