@@ -66,6 +66,33 @@ describe Gcloud::Pubsub::Topic, :publish, :mock_pubsub do
     msg.message_id.must_equal "msg1"
   end
 
+  it "publishes a message using an IO-ish object" do
+    publish_req = Google::Pubsub::V1::PublishRequest.new(
+      topic: topic_path(topic_name),
+      messages: [
+        Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding("ASCII-8BIT"))
+      ]
+    )
+    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    mock = Minitest::Mock.new
+    mock.expect :publish, publish_res, [publish_req]
+    topic.service.mocked_publisher = mock
+
+    msg = nil
+    Tempfile.open ["message", "txt"] do |tmpfile|
+      tmpfile.binmode
+      tmpfile.write "あ"
+      tmpfile.rewind
+
+      msg = topic.publish tmpfile
+    end
+    mock.verify
+
+    msg.must_be_kind_of Gcloud::Pubsub::Message
+    msg.data.must_equal "\xE3\x81\x82".force_encoding("ASCII-8BIT")
+    msg.message_id.must_equal "msg1"
+  end
+
   it "publishes a message with attributes" do
     publish_req = Google::Pubsub::V1::PublishRequest.new(
       topic: topic_path(topic_name),

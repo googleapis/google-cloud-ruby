@@ -38,6 +38,11 @@ module Gcloud
         # All messages added will be published at once.
         # See {Gcloud::Pubsub::Topic#publish}
         def publish data, attributes = {}
+          # Convert IO-ish objects to strings
+          if data.respond_to?(:read) && data.respond_to?(:rewind)
+            data.rewind
+            data = data.read
+          end
           # Convert data to encoded byte array to match the protobuf definition
           data = String(data).force_encoding("ASCII-8BIT")
           # Convert attributes to strings to match the protobuf definition

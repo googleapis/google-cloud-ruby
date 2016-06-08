@@ -248,7 +248,7 @@ module Gcloud
       ##
       # Publishes one or more messages to the topic.
       #
-      # @param [String] data The message data.
+      # @param [String, File] data The message data.
       # @param [Hash] attributes Optional attributes for the message.
       # @yield [batch] a block for publishing multiple messages in one request
       # @yieldparam [Topic::Batch] batch the batch object
@@ -265,6 +265,15 @@ module Gcloud
       #
       #   topic = pubsub.topic "my-topic"
       #   msg = topic.publish "new-message"
+      #
+      # @example A message can be published using a File object:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   msg = topic.publish File.open("message.txt")
       #
       # @example Additionally, a message can be published with attributes:
       #   require "gcloud"
