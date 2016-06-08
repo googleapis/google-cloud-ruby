@@ -125,7 +125,7 @@ module Gcloud
         #
         #   gcloud = Gcloud.new
         #   datastore = gcloud.datastore
-        #   query = datastore.query "Tasks"
+        #   query = datastore.query "Task"
         #   tasks = datastore.run query
         #
         #   if tasks.next?
