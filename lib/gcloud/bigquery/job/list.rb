@@ -118,7 +118,7 @@ module Gcloud
         #   gcloud = Gcloud.new
         #   bigquery = gcloud.bigquery
         #
-        #   all_names = bigquery.jobs.all.map do |job|
+        #   all_states = bigquery.jobs.all.map do |job|
         #     job.state
         #   end
         #
