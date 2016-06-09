@@ -33,26 +33,26 @@ module Gcloud
       ##
       # The number of times a retriable API call should be retried.
       #
-      # The default value is 3.
+      # The default value is `3`.
       attr_accessor :retries
 
       ##
       # The GRPC Status Codes that should be retried.
       #
-      # The default values are 14.
+      # The default values are `14`.
       attr_accessor :grpc_codes
 
       ##
       # The HTTP Status Codes that should be retried.
       #
-      # The default values are 500 and 503.
+      # The default values are `500` and `503`.
       attr_accessor :http_codes
 
       ##
       # The Google API error reasons that should be retried.
       #
-      # The default values are rateLimitExceeded and
-      # userRateLimitExceeded.
+      # The default values are `rateLimitExceeded` and
+      # `userRateLimitExceeded`.
       attr_accessor :reasons
 
       ##
