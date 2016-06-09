@@ -405,6 +405,30 @@ module Gcloud
   # file.acl.public!
   # ```
   #
+  # ## Configuring Backoff
+  #
+  # The {Gcloud::Backoff} class allows users to globally configure how Cloud API
+  # requests are automatically retried in the case of some errors, such as a
+  # `500` or `503` status code, or a specific internal error code such as
+  # `rateLimitExceeded`.
+  #
+  # If an API call fails, the response will be inspected to see if the call
+  # should be retried. If the response matches the criteria, then the request
+  # will be retried after a delay. If another error occurs, the delay will be
+  # increased incrementally before a subsequent attempt. The first retry will be
+  # delayed one second, the second retry two seconds, and so on.
+  #
+  # ```ruby
+  # require "gcloud"
+  # require "gcloud/backoff"
+  #
+  # Gcloud::Backoff.retries = 5 # Raise the maximum number of retries from 3
+  # ```
+  #
+  # See the [Storage status and error
+  # codes](https://cloud.google.com/storage/docs/json_api/v1/status-codes)
+  # for a list of error conditions.
+  #
   module Storage
   end
 end

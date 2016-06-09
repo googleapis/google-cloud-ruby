@@ -14,6 +14,7 @@
 
 
 require "gcloud/version"
+require "gcloud/backoff"
 require "google/api_client"
 
 module Gcloud
@@ -45,14 +46,14 @@ module Gcloud
                    prettyprint: false
                  }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @translate.translations.list,
           parameters: params
         )
       end
 
       def detect text
-        @client.execute(
+        execute(
           api_method: @translate.detections.list,
           parameters: { q: Array(text), prettyprint: false }
         )
@@ -62,7 +63,7 @@ module Gcloud
         params = { target:      language,
                    prettyprint: false }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @translate.languages.list,
           parameters: params
         )
@@ -70,6 +71,14 @@ module Gcloud
 
       def inspect
         "#{self.class}(#{@project})"
+      end
+
+      protected
+
+      def execute options
+        Gcloud::Backoff.new.execute_gapi do
+          @client.execute options
+        end
       end
     end
   end

@@ -15,6 +15,7 @@
 
 require "pathname"
 require "gcloud/version"
+require "gcloud/backoff"
 require "google/api_client"
 require "digest/md5"
 
@@ -50,7 +51,7 @@ module Gcloud
                    maxResults: options.delete(:max)
                  }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @bigquery.datasets.list,
           parameters: params
         )
@@ -59,7 +60,7 @@ module Gcloud
       ##
       # Returns the dataset specified by datasetID.
       def get_dataset dataset_id
-        @client.execute(
+        execute(
           api_method: @bigquery.datasets.get,
           parameters: { projectId: @project, datasetId: dataset_id }
         )
@@ -68,7 +69,7 @@ module Gcloud
       ##
       # Creates a new empty dataset.
       def insert_dataset dataset_id, options = {}
-        @client.execute(
+        execute(
           api_method: @bigquery.datasets.insert,
           parameters: { projectId: @project },
           body_object: insert_dataset_request(dataset_id, options)
@@ -81,7 +82,7 @@ module Gcloud
       def patch_dataset dataset_id, options = {}
         project_id = options[:project_id] || @project
 
-        @client.execute(
+        execute(
           api_method: @bigquery.datasets.patch,
           parameters: { projectId: project_id, datasetId: dataset_id },
           body_object: patch_dataset_request(options)
@@ -95,7 +96,7 @@ module Gcloud
       # Immediately after deletion, you can create another dataset with
       # the same name.
       def delete_dataset dataset_id, force = nil
-        @client.execute(
+        execute(
           api_method: @bigquery.datasets.delete,
           parameters: { projectId: @project, datasetId: dataset_id,
                         deleteContents: force
@@ -113,14 +114,14 @@ module Gcloud
                    maxResults: options.delete(:max)
                  }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @bigquery.tables.list,
           parameters: params
         )
       end
 
       def get_project_table project_id, dataset_id, table_id
-        @client.execute(
+        execute(
           api_method: @bigquery.tables.get,
           parameters: { projectId: project_id, datasetId: dataset_id,
                         tableId: table_id }
@@ -139,7 +140,7 @@ module Gcloud
       ##
       # Creates a new, empty table in the dataset.
       def insert_table dataset_id, table_id, options = {}
-        @client.execute(
+        execute(
           api_method: @bigquery.tables.insert,
           parameters: { projectId: @project, datasetId: dataset_id },
           body_object: insert_table_request(dataset_id, table_id, options)
@@ -150,7 +151,7 @@ module Gcloud
       # Updates information in an existing table, replacing fields that
       # are provided in the submitted table resource.
       def patch_table dataset_id, table_id, options = {}
-        @client.execute(
+        execute(
           api_method: @bigquery.tables.patch,
           parameters: { projectId: @project, datasetId: dataset_id,
                         tableId: table_id },
@@ -162,7 +163,7 @@ module Gcloud
       # Deletes the table specified by tableId from the dataset.
       # If the table contains data, all the data will be deleted.
       def delete_table dataset_id, table_id
-        @client.execute(
+        execute(
           api_method: @bigquery.tables.delete,
           parameters: { projectId: @project, datasetId: dataset_id,
                         tableId: table_id }
@@ -179,14 +180,14 @@ module Gcloud
                    startIndex: options.delete(:start)
                  }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @bigquery.tabledata.list,
           parameters: params
         )
       end
 
       def insert_tabledata dataset_id, table_id, rows, options = {}
-        @client.execute(
+        execute(
           api_method: @bigquery.tabledata.insert_all,
           parameters: { projectId: @project,
                         datasetId: dataset_id,
@@ -199,7 +200,7 @@ module Gcloud
       # Lists all jobs in the specified project to which you have
       # been granted the READER job role.
       def list_jobs options = {}
-        @client.execute(
+        execute(
           api_method: @bigquery.jobs.list,
           parameters: list_jobs_params(options)
         )
@@ -208,14 +209,14 @@ module Gcloud
       ##
       # Returns the job specified by jobID.
       def get_job job_id
-        @client.execute(
+        execute(
           api_method: @bigquery.jobs.get,
           parameters: { projectId: @project, jobId: job_id }
         )
       end
 
       def insert_job config
-        @client.execute(
+        execute(
           api_method: @bigquery.jobs.insert,
           parameters: { projectId: @project },
           body_object: { "configuration" => config }
@@ -223,7 +224,7 @@ module Gcloud
       end
 
       def query_job query, options = {}
-        @client.execute(
+        execute(
           api_method: @bigquery.jobs.insert,
           parameters: { projectId: @project },
           body_object: query_table_config(query, options)
@@ -231,7 +232,7 @@ module Gcloud
       end
 
       def query query, options = {}
-        @client.execute(
+        execute(
           api_method: @bigquery.jobs.query,
           parameters: { projectId: @project },
           body_object: query_config(query, options)
@@ -248,14 +249,14 @@ module Gcloud
                    timeoutMs: options.delete(:timeout)
                  }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @bigquery.jobs.get_query_results,
           parameters: params
         )
       end
 
       def copy_table source, target, options = {}
-        @client.execute(
+        execute(
           api_method: @bigquery.jobs.insert,
           parameters: { projectId: @project },
           body_object: copy_table_config(source, target, options)
@@ -263,7 +264,7 @@ module Gcloud
       end
 
       def link_table table, urls, options = {}
-        @client.execute(
+        execute(
           api_method: @bigquery.jobs.insert,
           parameters: { projectId: @project },
           body_object: link_table_config(table, urls, options)
@@ -271,7 +272,7 @@ module Gcloud
       end
 
       def extract_table table, storage_files, options = {}
-        @client.execute(
+        execute(
           api_method: @bigquery.jobs.insert,
           parameters: { projectId: @project },
           body_object: extract_table_config(table, storage_files, options)
@@ -279,7 +280,7 @@ module Gcloud
       end
 
       def load_table table, storage_url, options = {}
-        @client.execute(
+        execute(
           api_method: @bigquery.jobs.insert,
           parameters: { projectId: @project },
           body_object: load_table_config(table, storage_url,
@@ -290,7 +291,7 @@ module Gcloud
       def load_multipart table, file, options = {}
         media = load_media file
 
-        @client.execute(
+        execute(
           api_method: @bigquery.jobs.insert,
           media: media,
           parameters: { projectId: @project, uploadType: "multipart" },
@@ -301,14 +302,14 @@ module Gcloud
       def load_resumable table, file, chunk_size = nil, options = {}
         media = load_media file, chunk_size
 
-        result = @client.execute(
+        result = execute(
           api_method: @bigquery.jobs.insert,
           media: media,
           parameters: { projectId: @project, uploadType: "resumable" },
           body_object: load_table_config(table, nil, file, options)
         )
         upload = result.resumable_upload
-        result = @client.execute upload while upload.resumable?
+        result = execute upload while upload.resumable?
         result
       end
 
@@ -611,6 +612,12 @@ module Gcloud
         media = Google::APIClient::UploadIO.new local_path, mime_type
         media.chunk_size = chunk_size unless chunk_size.nil?
         media
+      end
+
+      def execute options
+        Gcloud::Backoff.new.execute_gapi do
+          @client.execute options
+        end
       end
     end
   end

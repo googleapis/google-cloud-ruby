@@ -14,6 +14,7 @@
 
 
 require "gcloud/version"
+require "gcloud/backoff"
 require "google/api_client"
 
 module Gcloud
@@ -43,14 +44,14 @@ module Gcloud
                    maxResults: max
                  }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @res_man.projects.list,
           parameters: params
         )
       end
 
       def get_project project_id
-        @client.execute(
+        execute(
           api_method: @res_man.projects.get,
           parameters: { projectId: project_id }
         )
@@ -60,7 +61,7 @@ module Gcloud
         project_gapi = { projectId: project_id, name: name,
                          labels: labels }.delete_if { |_, v| v.nil? }
 
-        @client.execute(
+        execute(
           api_method: @res_man.projects.create,
           body_object: project_gapi
         )
@@ -73,7 +74,7 @@ module Gcloud
       def update_project project_gapi
         project_id = project_gapi["projectId"]
 
-        @client.execute(
+        execute(
           api_method: @res_man.projects.update,
           parameters: { projectId: project_id },
           body_object: project_gapi
@@ -81,28 +82,28 @@ module Gcloud
       end
 
       def delete_project project_id
-        @client.execute(
+        execute(
           api_method: @res_man.projects.delete,
           parameters: { projectId: project_id }
         )
       end
 
       def undelete_project project_id
-        @client.execute(
+        execute(
           api_method: @res_man.projects.undelete,
           parameters: { projectId: project_id }
         )
       end
 
       def get_policy project_id
-        @client.execute(
+        execute(
           api_method: @res_man.projects.get_iam_policy,
           parameters: { resource: project_id }
         )
       end
 
       def set_policy project_id, new_policy
-        @client.execute(
+        execute(
           api_method: @res_man.projects.set_iam_policy,
           parameters: { resource: project_id },
           body_object: { policy: new_policy }
@@ -110,7 +111,7 @@ module Gcloud
       end
 
       def test_permissions project_id, permissions
-        @client.execute(
+        execute(
           api_method: @res_man.projects.test_iam_permissions,
           parameters: { resource: project_id },
           body_object: { permissions: permissions }
@@ -119,6 +120,14 @@ module Gcloud
 
       def inspect
         "#{self.class}(#{@project})"
+      end
+
+      protected
+
+      def execute options
+        Gcloud::Backoff.new.execute_gapi do
+          @client.execute options
+        end
       end
     end
   end

@@ -176,8 +176,7 @@ module Gcloud
       # bucket. See {Bucket::Cors} for details.
       #
       # The API call to create the bucket may be retried under certain
-      # conditions. See {Gcloud::Backoff} to control this behavior, or
-      # specify the wanted behavior in the call with the `:retries:` option.
+      # conditions. See {Gcloud::Backoff} to control this behavior.
       #
       # You can pass [website
       # settings](https://cloud.google.com/storage/docs/website-configuration)
@@ -241,8 +240,6 @@ module Gcloud
       #   . By default, the object prefix is the name of the bucket for which
       #   the logs are enabled. For more information, see [Access
       #   Logs](https://cloud.google.com/storage/docs/access-logs).
-      # @param [Integer] retries The number of times the API call should be
-      #   retried. Default is {Gcloud::Backoff.retries}.
       # @param [Symbol, String] storage_class Defines how objects in the bucket
       #   are stored and determines the SLA and the cost of storage. Values
       #   include `:standard`, `:nearline`, and `:dra` (Durable Reduced
@@ -276,14 +273,6 @@ module Gcloud
       #
       #   bucket = storage.create_bucket "my-bucket"
       #
-      # @example Specify the number of retries to attempt:
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   storage = gcloud.storage
-      #
-      #   bucket = storage.create_bucket "my-bucket", retries: 5
-      #
       # @example Add CORS rules in a block:
       #   require "gcloud"
       #
@@ -303,13 +292,13 @@ module Gcloud
       #
       def create_bucket bucket_name, acl: nil, default_acl: nil, cors: nil,
                         location: nil, logging_bucket: nil, logging_prefix: nil,
-                        retries: nil, storage_class: nil, versioning: nil,
-                        website_main: nil, website_404: nil
+                        storage_class: nil, versioning: nil, website_main: nil,
+                        website_404: nil
         opts = { acl: acl_rule(acl), default_acl: acl_rule(default_acl),
                  cors: cors, location: location, logging_bucket: logging_bucket,
-                 logging_prefix: logging_prefix, retries: retries,
-                 storage_class: storage_class, versioning: versioning,
-                 website_main: website_main, website_404: website_404 }
+                 logging_prefix: logging_prefix, storage_class: storage_class,
+                 versioning: versioning, website_main: website_main,
+                 website_404: website_404 }
         if block_given?
           cors_builder = Bucket::Cors.new
           yield cors_builder

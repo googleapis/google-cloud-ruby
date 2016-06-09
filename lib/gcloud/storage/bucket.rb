@@ -326,11 +326,7 @@ module Gcloud
       # The bucket must be empty before it can be deleted.
       #
       # The API call to delete the bucket may be retried under certain
-      # conditions. See {Gcloud::Backoff} to control this behavior, or
-      # specify the wanted behavior using the `retries` option.
-      #
-      # @param [Integer] retries The number of times the API call should be
-      #   retried. Default is Gcloud::Backoff.retries.
+      # conditions. See {Gcloud::Backoff} to control this behavior.
       #
       # @return [Boolean] Returns `true` if the bucket was deleted.
       #
@@ -343,19 +339,9 @@ module Gcloud
       #   bucket = storage.bucket "my-bucket"
       #   bucket.delete
       #
-      # @example Specify the number of retries to attempt:
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   storage = gcloud.storage
-      #
-      #   bucket = storage.bucket "my-bucket"
-      #   bucket.delete retries: 5
-      #
-      def delete retries: nil
+      def delete
         ensure_connection!
-        options = { retries: retries }
-        resp = connection.delete_bucket name, options
+        resp = connection.delete_bucket name
         if resp.success?
           true
         else
