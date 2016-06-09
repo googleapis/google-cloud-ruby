@@ -401,6 +401,29 @@ messages can be automatically acknowledged as they are pulled with the
 </code></pre>
 </div>
 
+<h2 id="configuring-backoff">Configuring Backoff</h2>
+
+<p>The <span class='object_link'><a href="Backoff.html" title="Gcloud::Backoff (class)">Backoff</a></span> class allows users to globally configure how Cloud API
+requests are automatically retried in the case of some errors, such as a
+<code class="highlighter-rouge">500</code> or <code class="highlighter-rouge">503</code> status code, or a specific internal error code such as
+<code class="highlighter-rouge">rateLimitExceeded</code>.</p>
+
+<p>If an API call fails, the response will be inspected to see if the call
+should be retried. If the response matches the criteria, then the request
+will be retried after a delay. If another error occurs, the delay will be
+increased incrementally before a subsequent attempt. The first retry will be
+delayed one second, the second retry two seconds, and so on.</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<span class="nb">require</span> <span class="s2">"gcloud/backoff"</span>
+
+<span class="no">Gcloud</span><span class="o">::</span><span class="no">Backoff</span><span class="p">.</span><span class="nf">retries</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># Raise the maximum number of retries from 3</span>
+</code></pre>
+</div>
+
+<p>See the <a href="https://cloud.google.com/pubsub/error-codes">Pub/Sub error codes</a>
+for a list of error conditions.</p>
+
 <h2 id="working-across-projects">Working Across Projects</h2>
 
 <p>All calls to the Pub/Sub service use the same project and credentials
@@ -486,7 +509,7 @@ shown below.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 08, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal current' href=''>Pub/Sub</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Topic.html'>Topic</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Subscription.html'>Subscription</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 09, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal current' href=''>Pub/Sub</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Topic.html'>Topic</a></li><li class='toc-l1'><a class='reference internal' href='Pubsub/Subscription.html'>Subscription</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

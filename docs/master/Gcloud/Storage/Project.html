@@ -436,7 +436,7 @@ exist</p>
                 <div class="method">
                   <a name="create_bucket-instance_method"></a>
                   <h4>
-                    <code>create_bucket(bucket_name, acl: nil, default_acl: nil, cors: nil, location: nil, logging_bucket: nil, logging_prefix: nil, retries: nil, storage_class: nil, versioning: nil, website_main: nil, website_404: nil)</code>
+                    <code>create_bucket(bucket_name, acl: nil, default_acl: nil, cors: nil, location: nil, logging_bucket: nil, logging_prefix: nil, storage_class: nil, versioning: nil, website_main: nil, website_404: nil)</code>
                     <span>
                       <a href="#create_bucket-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -450,8 +450,7 @@ defining the CORS configuration for a static website served from the
 bucket. See <span class='object_link'><a href="Bucket/Cors.html" title="Gcloud::Storage::Bucket::Cors (class)">Bucket::Cors</a></span> for details.</p>
 
 <p>The API call to create the bucket may be retried under certain
-conditions. See <span class='object_link'><a href="../Backoff.html" title="Gcloud::Backoff (class)">Backoff</a></span> to control this behavior, or
-specify the wanted behavior in the call with the <code class="highlighter-rouge">:retries:</code> option.</p>
+conditions. See <span class='object_link'><a href="../Backoff.html" title="Gcloud::Backoff (class)">Backoff</a></span> to control this behavior.</p>
 
 <p>You can pass <a href="https://cloud.google.com/storage/docs/website-configuration">website
 settings</a>
@@ -618,20 +617,6 @@ Logs</a>.</p>
                           </dd>
                         
                           <dt>
-                            <code>retries</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>The number of times the API call should be
-retried. Default is <span class='object_link'><a href="../Backoff.html#retries-class_method" title="Gcloud::Backoff.retries (method)">Backoff.retries</a></span>.</p>
-</div>
-                              
-                              (<tt>Integer</tt>)
-                            </p>
-                          </dd>
-                        
-                          <dt>
                             <code>storage_class</code>
                           </dt>
                           <dd>
@@ -728,17 +713,6 @@ Website
 <span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_create_bucket'>create_bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                         
-                          <p class="example_title"><div class='inline'><p>Specify the number of retries to attempt:</p>
-</div></p>
-                        
-                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_storage'>storage</span>
-
-<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_create_bucket'>create_bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>retries:</span> <span class='int'>5</span></code></pre>
-                      
-                        
                           <p class="example_title"><div class='inline'><p>Add CORS rules in a block:</p>
 </div></p>
                         
@@ -771,7 +745,7 @@ end</code></pre>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 08, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l1'><a class='reference internal current' href=''>Project</a></li><li class='toc-l1'><a class='reference internal' href='Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 09, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l1'><a class='reference internal current' href=''>Project</a></li><li class='toc-l1'><a class='reference internal' href='Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
