@@ -28,6 +28,20 @@ require "gcloud/logging"
 require "gcloud/translate"
 require "gcloud/vision"
 
+##
+# Monkey-Patch Google API Client to support Mocks
+module Google::Apis::Core::Hashable
+  ##
+  # Minitest Mock depends on === to match same-value objects.
+  # By default, the Google API Client objects do not match with ===.
+  # Therefore, we must add this capability.
+  # This module seems like as good a place as any...
+  def === other
+    return(to_h === other.to_h) if other.respond_to? :to_h
+    super
+  end
+end
+
 class MockStorage < Minitest::Spec
   let(:project) { storage.connection.project }
   let(:credentials) { storage.connection.credentials }
