@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "google/apis/options"
+
 module Gcloud
   ##
   # Backoff allows users to control how Google API calls are retried.
@@ -34,7 +36,12 @@ module Gcloud
       # The number of times a retriable API call should be retried.
       #
       # The default value is `3`.
-      attr_accessor :retries
+      attr_reader :retries
+      def retries= new_retries
+        # Set Google API Client
+        Google::Apis::RequestOptions.default.retries = new_retries
+        @retries = new_retries
+      end
 
       ##
       # The GRPC Status Codes that should be retried.

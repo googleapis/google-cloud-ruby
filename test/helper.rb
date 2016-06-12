@@ -718,44 +718,24 @@ class MockDns < Minitest::Spec
 end
 
 class MockResourceManager < Minitest::Spec
-  let(:credentials) { OpenStruct.new }
-  let(:resource_manager) { $gcloud_resource_manager_global ||= Gcloud::ResourceManager::Manager.new(OpenStruct.new) }
+  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
+  let(:resource_manager) { $gcloud_resource_manager_global ||= Gcloud::ResourceManager::Manager.new(credentials) }
 
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    connection = resource_manager.instance_variable_get "@connection"
-    client = connection.instance_variable_get "@client"
-    client.connection = Faraday.new do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
-  end
-
-  def teardown
-    @connection.verify_stubbed_calls
-  end
-
-  def mock_connection
-    @connection
+  # Register this spec type for when :mock_res_man is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_res_man
   end
 
   def random_project_hash seed = nil, name = nil, labels = nil
     seed ||= rand(9999)
     name ||= "Example Project #{seed}"
     labels = { "env" => "production" } if labels.nil?
-    {
-      "projectNumber" => "123456789#{seed}",
-      "projectId" => "example-project-#{seed}",
-      "name" => name,
-      "createTime" => "2015-09-01T12:00:00.00Z",
-      "labels" => labels,
-      "lifecycleState" => "ACTIVE"
-    }
-  end
-
-  # Register this spec type for when :storage is used.
-  register_spec_type(self) do |desc, *addl|
-    addl.include? :mock_res_man
+    { project_number: "123456789#{seed}",
+      project_id:     "example-project-#{seed}",
+      name:           name,
+      labels:         labels,
+      create_time:    "2015-09-01T12:00:00.00Z",
+      lifecycle_state: "ACTIVE" }
   end
 end
 

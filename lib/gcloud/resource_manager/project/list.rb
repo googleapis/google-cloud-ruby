@@ -143,14 +143,14 @@ module Gcloud
 
         ##
         # @private New Projects::List from a response object.
-        def self.from_response resp, manager, filter = nil, max = nil
-          projects = new(Array(resp.data["projects"]).map do |gapi_object|
-            Project.from_gapi gapi_object, manager.connection
+        def self.from_gapi gapi_list, manager, filter = nil, max = nil
+          projects = new(Array(gapi_list.projects).map do |gapi_object|
+            Project.from_gapi gapi_object, manager.service
           end)
-          projects.instance_variable_set "@token",   resp.data["nextPageToken"]
-          projects.instance_variable_set "@manager", manager
-          projects.instance_variable_set "@filter",  filter
-          projects.instance_variable_set "@max",     max
+          projects.instance_variable_set :@token,   gapi_list.next_page_token
+          projects.instance_variable_set :@manager, manager
+          projects.instance_variable_set :@filter,  filter
+          projects.instance_variable_set :@max,     max
           projects
         end
 

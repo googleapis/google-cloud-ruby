@@ -16,28 +16,27 @@ require "helper"
 
 describe Gcloud::ResourceManager::Manager, :mock_res_man do
   it "gets a project given a project_id" do
-    mock_connection.get "/v1beta1/projects/example-project-123" do |env|
-      [200, {"Content-Type" => "application/json"},
-       random_project_hash(123).to_json]
-    end
+    mock = Minitest::Mock.new
+    random_project = Gcloud::ResourceManager::Service::API::Project.new random_project_hash(123)
+    mock.expect :get_project, random_project, ["example-project-123"]
 
+    resource_manager.service.mocked_service = mock
     project = resource_manager.project "example-project-123"
+    mock.verify
 
     project.must_be_kind_of Gcloud::ResourceManager::Project
     project.project_id.must_equal "example-project-123"
   end
 
   it "creates a project" do
-    mock_connection.post "/v1beta1/projects" do |env|
-      json = JSON.parse(env.body)
-      json["projectId"].must_equal "new-project-456"
-      json["name"].must_be :nil?
-      json["labels"].must_be :nil?
-      [200, {"Content-Type"=>"application/json"},
-       create_project_json("new-project-456")]
-    end
+    mock = Minitest::Mock.new
+    created_project = Gcloud::ResourceManager::Service::API::Project.new create_project_hash("new-project-456")
+    mock.expect :create_project, created_project, [Gcloud::ResourceManager::Service::API::Project.new(projectId: "new-project-456")]
 
+    resource_manager.service.mocked_service = mock
     project = resource_manager.create_project "new-project-456"
+    mock.verify
+
     project.must_be_kind_of Gcloud::ResourceManager::Project
     project.project_id.must_equal "new-project-456"
     project.name.must_equal nil
@@ -45,18 +44,16 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
   end
 
   it "creates a project with a name and labels" do
-    mock_connection.post "/v1beta1/projects" do |env|
-      json = JSON.parse(env.body)
-      json["projectId"].must_equal "new-project-789"
-      json["name"].must_equal "My New Project"
-      json["labels"].must_equal "env" => "development"
-      [200, {"Content-Type"=>"application/json"},
-       create_project_json("new-project-789", "My New Project", env: :development)]
-    end
+    mock = Minitest::Mock.new
+    created_project = Gcloud::ResourceManager::Service::API::Project.new create_project_hash("new-project-789", "My New Project", {"env" => "development"})
+    mock.expect :create_project, created_project, [Gcloud::ResourceManager::Service::API::Project.new(projectId: "new-project-789", name: "My New Project", labels: {:env => :development})]
 
+    resource_manager.service.mocked_service = mock
     project = resource_manager.create_project "new-project-789",
                                               name: "My New Project",
                                               labels: {env: :development}
+    mock.verify
+
     project.must_be_kind_of Gcloud::ResourceManager::Project
     project.project_id.must_equal "new-project-789"
     project.name.must_equal "My New Project"
@@ -64,29 +61,25 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
   end
 
   it "lists projects" do
-    num_projects = 3
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.wont_include "maxResults"
-      env.params.wont_include "filter"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(num_projects)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_response(3), [{ page_token: nil, page_size: nil, filter: nil }]
 
+    resource_manager.service.mocked_service = mock
     projects = resource_manager.projects
-    projects.size.must_equal num_projects
+    mock.verify
+
+    projects.size.must_equal 3
     projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
   end
 
   it "lists projects with max set" do
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "filter"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "next_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: 3, filter: nil }]
 
+    resource_manager.service.mocked_service = mock
     projects = resource_manager.projects max: 3
+    mock.verify
+
     projects.count.must_equal 3
     projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
     projects.token.wont_be :nil?
@@ -94,15 +87,13 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
   end
 
   it "lists projects with filter set" do
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "filter"
-      env.params["filter"].must_equal "labels.env:production"
-      env.params.wont_include "maxResults"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "next_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: nil, filter: "labels.env:production" }]
 
+    resource_manager.service.mocked_service = mock
     projects = resource_manager.projects filter: "labels.env:production"
+    mock.verify
+
     projects.count.must_equal 3
     projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
     projects.token.wont_be :nil?
@@ -110,244 +101,179 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
   end
 
   it "paginates projects" do
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "next_page_token")]
-    end
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: nil, filter: nil }]
+    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: nil, filter: nil }]
 
+    resource_manager.service.mocked_service = mock
     first_projects = resource_manager.projects
+    second_projects = resource_manager.projects token: first_projects.token
+    mock.verify
+
     first_projects.count.must_equal 3
     first_projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
     first_projects.token.wont_be :nil?
     first_projects.token.must_equal "next_page_token"
 
-    second_projects = resource_manager.projects token: first_projects.token
     second_projects.count.must_equal 2
     second_projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
     second_projects.token.must_be :nil?
   end
 
   it "paginates projects with next? and next" do
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "next_page_token")]
-    end
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: nil, filter: nil }]
+    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: nil, filter: nil }]
 
+    resource_manager.service.mocked_service = mock
     first_projects = resource_manager.projects
+    second_projects = first_projects.next
+    mock.verify
+
     first_projects.count.must_equal 3
     first_projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
     first_projects.next?.must_equal true
 
-    second_projects = first_projects.next
     second_projects.count.must_equal 2
     second_projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
     second_projects.next?.must_equal false
   end
 
   it "paginates projects with next? and next and max set" do
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "filter"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "next_page_token")]
-    end
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "filter"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: 3, filter: nil }]
+    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: 3, filter: nil }]
 
+    resource_manager.service.mocked_service = mock
     first_projects = resource_manager.projects max: 3
+    second_projects = first_projects.next
+    mock.verify
+
     first_projects.count.must_equal 3
     first_projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
     first_projects.next?.must_equal true
 
-    second_projects = first_projects.next
     second_projects.count.must_equal 2
     second_projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
     second_projects.next?.must_equal false
   end
 
   it "paginates projects with next? and next and filter set" do
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "filter"
-      env.params["filter"].must_equal "labels.env:production"
-      env.params.wont_include "maxResults"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "next_page_token")]
-    end
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "filter"
-      env.params["filter"].must_equal "labels.env:production"
-      env.params.wont_include "maxResults"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: nil, filter: "labels.env:production" }]
+    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: nil, filter: "labels.env:production" }]
 
+    resource_manager.service.mocked_service = mock
     first_projects = resource_manager.projects filter: "labels.env:production"
+    second_projects = first_projects.next
+    mock.verify
+
     first_projects.count.must_equal 3
     first_projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
     first_projects.next?.must_equal true
 
-    second_projects = first_projects.next
     second_projects.count.must_equal 2
     second_projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
     second_projects.next?.must_equal false
   end
 
   it "paginates projects with all" do
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "next_page_token")]
-    end
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: nil, filter: nil }]
+    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: nil, filter: nil }]
 
+    resource_manager.service.mocked_service = mock
     projects = resource_manager.projects.all.to_a
+    mock.verify
+
     projects.count.must_equal 5
     projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
   end
 
   it "paginates projects with all and max set" do
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "filter"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "next_page_token")]
-    end
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "filter"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: 3, filter: nil }]
+    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: 3, filter: nil }]
 
+    resource_manager.service.mocked_service = mock
     projects = resource_manager.projects(max: 3).all.to_a
+    mock.verify
+
     projects.count.must_equal 5
     projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
   end
 
   it "paginates projects with all and filter set" do
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "filter"
-      env.params["filter"].must_equal "labels.env:production"
-      env.params.wont_include "maxResults"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "next_page_token")]
-    end
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "filter"
-      env.params["filter"].must_equal "labels.env:production"
-      env.params.wont_include "maxResults"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: nil, filter: "labels.env:production" }]
+    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: nil, filter: "labels.env:production" }]
 
+    resource_manager.service.mocked_service = mock
     projects = resource_manager.projects(filter: "labels.env:production").all.to_a
+    mock.verify
+
     projects.count.must_equal 5
     projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
   end
 
   it "paginates projects with all using Enumerator" do
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "next_page_token")]
-    end
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "second_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"),   [{ page_token: nil, page_size: nil, filter: nil }]
+    mock.expect :list_projects, list_projects_response(3, "second_page_token"), [{ page_token: "next_page_token", page_size: nil, filter: nil }]
 
+    resource_manager.service.mocked_service = mock
     projects = resource_manager.projects.all.take(5)
+    mock.verify
+
     projects.count.must_equal 5
     projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
   end
 
   it "paginates projects with all and request_limit set" do
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "next_page_token")]
-    end
-    mock_connection.get "/v1beta1/projects" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_projects_json(3, "second_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"),   [{ page_token: nil, page_size: nil, filter: nil }]
+    mock.expect :list_projects, list_projects_response(3, "second_page_token"), [{ page_token: "next_page_token", page_size: nil, filter: nil }]
 
+    resource_manager.service.mocked_service = mock
     projects = resource_manager.projects.all(request_limit: 1).to_a
+    mock.verify
+
     projects.count.must_equal 6
     projects.each { |z| z.must_be_kind_of Gcloud::ResourceManager::Project }
   end
 
   it "deletes a project" do
-    mock_connection.delete "/v1beta1/projects/existing-project-123" do |env|
-      [200, {}, ""]
-    end
+    mock = Minitest::Mock.new
+    empty_response = Gcloud::ResourceManager::Service::API::Empty.new
+    mock.expect :delete_project, empty_response, ["existing-project-123"]
 
+    resource_manager.service.mocked_service = mock
     resource_manager.delete "existing-project-123"
+    mock.verify
   end
 
   it "undeletes a project" do
-    mock_connection.post "/v1beta1/projects/deleted-project-456:undelete" do |env|
-      [200, {}, ""]
-    end
+    mock = Minitest::Mock.new
+    empty_response = Gcloud::ResourceManager::Service::API::Empty.new
+    mock.expect :undelete_project, empty_response, ["deleted-project-456"]
 
+    resource_manager.service.mocked_service = mock
     resource_manager.undelete "deleted-project-456"
+    mock.verify
   end
 
-  def create_project_json project_id = nil, name = nil, labels = {}
+  def create_project_hash project_id = nil, name = nil, labels = {}
     hash = random_project_hash
-    hash["projectId"] = project_id if project_id
-    hash["name"]      = name
-    hash["labels"]    = labels
-    hash.to_json
+    hash[:project_id] = project_id if project_id
+    hash[:name]       = name
+    hash[:labels]     = labels
+    hash
   end
 
-  def list_projects_json count = 2, token = nil
+  def list_projects_response count = 2, token = nil
     projects = count.times.map { random_project_hash }
-    hash = { "projects" => projects }
-    hash["nextPageToken"] = token unless token.nil?
-    hash.to_json
+    hash = { projects: projects }
+    hash[:next_page_token] = token unless token.nil?
+    Gcloud::ResourceManager::Service::API::ListProjectsResponse.new hash
   end
 end
