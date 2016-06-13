@@ -1229,7 +1229,7 @@ distinct results. The default is <code class="highlighter-rouge">false</code>. F
                 <div class="method">
                   <a name="file-instance_method"></a>
                   <h4>
-                    <code>file(path, generation: nil)</code>
+                    <code>file(path, generation: nil, encryption_key: nil, encryption_key_sha256: nil)</code>
                     <span>
                       <a href="#file-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1239,6 +1239,12 @@ distinct results. The default is <code class="highlighter-rouge">false</code>. F
                   <div class="method-description">
 
                     <p>Retrieves a file matching the path.</p>
+
+<p>If a <a href="https://cloud.google.com/storage/docs/encryption#customer-supplied">customer-supplied encryption
+key</a>
+was used with <span class='object_link'><a href="#create_file-instance_method" title="Gcloud::Storage::Bucket#create_file (method)">#create_file</a></span>, the <code class="highlighter-rouge">encryption_key</code> and
+<code class="highlighter-rouge">encryption_key_sha256</code> options must be provided or else the file’s
+CRC32C checksum and MD5 hash will not be returned.</p>
 
 
                     
@@ -1274,6 +1280,38 @@ this object. Default is the latest version.</p>
 </div>
                               
                               (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>encryption_key</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Optional. The customer-supplied, AES-256
+encryption key used to encrypt the file, if one was provided to
+<span class='object_link'><a href="#create_file-instance_method" title="Gcloud::Storage::Bucket#create_file (method)">#create_file</a></span>. Must be provided if <code class="highlighter-rouge">encryption_key_sha256</code> is
+provided.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>encryption_key_sha256</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Optional. The SHA256 hash of the
+customer-supplied, AES-256 encryption key used to encrypt the file, if
+one was provided to <span class='object_link'><a href="#create_file-instance_method" title="Gcloud::Storage::Bucket#create_file (method)">#create_file</a></span>. Must be provided if
+<code class="highlighter-rouge">encryption_key</code> is provided.</p>
+</div>
+                              
+                              (<tt>String</tt>)
                             </p>
                           </dd>
                         
@@ -1346,7 +1384,7 @@ this object. Default is the latest version.</p>
                 <div class="method">
                   <a name="create_file-instance_method"></a>
                   <h4>
-                    <code>create_file(file, path = nil, acl: nil, cache_control: nil, content_disposition: nil, content_encoding: nil, content_language: nil, content_type: nil, chunk_size: nil, crc32c: nil, md5: nil, metadata: nil)</code>
+                    <code>create_file(file, path = nil, acl: nil, cache_control: nil, content_disposition: nil, content_encoding: nil, content_language: nil, content_type: nil, chunk_size: nil, crc32c: nil, md5: nil, metadata: nil, encryption_key: nil, encryption_key_sha256: nil)</code>
                     <span>
                       <a href="#create_file-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1355,14 +1393,28 @@ this object. Default is the latest version.</p>
 
                   <div class="method-description">
 
-                    <p>Create a new File object by providing a path to a local file to upload
-and the path to store it with in the bucket.</p>
+                    <p>Creates a new <span class='object_link'><a href="File.html" title="Gcloud::Storage::File (class)">File</a></span> object by providing a path to a local file to
+upload and the path to store it with in the bucket.</p>
 
 <p>A <code class="highlighter-rouge">chunk_size</code> value can be provided in the options to be used
 in resumable uploads. This value is the number of bytes per
 chunk and must be divisible by 256KB. If it is not divisible
 by 256KB then it will be lowered to the nearest acceptable
 value.</p>
+
+<h4 id="customer-supplied-encryption-keys">Customer-supplied encryption keys</h4>
+
+<p>By default, Google Cloud Storage manages server-side encryption keys on
+your behalf. However, a <a href="https://cloud.google.com/storage/docs/encryption#customer-supplied">customer-supplied encryption
+key</a>
+can be provided with the <code class="highlighter-rouge">encryption_key</code> and <code class="highlighter-rouge">encryption_key_sha256</code>
+options. If given, the same key and SHA256 hash also must be provided to
+subsequently download or copy the file. If you use customer-supplied
+encryption keys, you must securely manage your keys and ensure that they
+are not lost. Also, please note that file metadata is not encrypted,
+with the exception of the CRC32C checksum and MD5 hash. The names of
+files and buckets are also not encrypted, and you can read or update the
+metadata of an encrypted file without providing the encryption key.</p>
 
 <h4 id="troubleshooting-large-uploads">Troubleshooting large uploads</h4>
 
@@ -1596,6 +1648,36 @@ as “x-goog-meta-“ response headers.</p>
                             </p>
                           </dd>
                         
+                          <dt>
+                            <code>encryption_key</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Optional. A customer-supplied, AES-256
+encryption key that will be used to encrypt the file. Must be provided
+if <code class="highlighter-rouge">encryption_key_sha256</code> is provided.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>encryption_key_sha256</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Optional. The SHA256 hash of the
+customer-supplied, AES-256 encryption key that will be used to encrypt
+the file. Must be provided if <code class="highlighter-rouge">encryption_key</code> is provided.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
                       </dl>
                     
 
@@ -1627,7 +1709,7 @@ as “x-goog-meta-“ response headers.</p>
 <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_create_file'>create_file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/local.file.ext</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                         
-                          <p class="example_title"><div class='inline'><p>Additionally, a destination path can be specified.</p>
+                          <p class="example_title"><div class='inline'><p>Specifying a destination path:</p>
 </div></p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
@@ -1641,7 +1723,7 @@ as “x-goog-meta-“ response headers.</p>
                    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>destination/path/file.ext</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                         
-                          <p class="example_title"><div class='inline'><p>Specify the chunk size as a number of bytes:</p>
+                          <p class="example_title"><div class='inline'><p>Specifying the chunk size as a number of bytes:</p>
 </div></p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
@@ -1655,6 +1737,36 @@ as “x-goog-meta-“ response headers.</p>
                    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>destination/path/file.ext</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
                    <span class='label'>chunk_size:</span> <span class='int'>1024</span><span class='op'>*</span><span class='int'>1024</span> <span class='comment'># 1 MB chunk</span></code></pre>
                       
+                        
+                          <p class="example_title"><div class='inline'><p>Providing a customer-supplied encryption key:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>digest/sha2</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_storage'>storage</span>
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Key generation shown for example purposes only. Write your own.
+</span><span class='id identifier rubyid_cipher'>cipher</span> <span class='op'>=</span> <span class='const'>OpenSSL</span><span class='op'>::</span><span class='const'>Cipher</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>aes-256-cfb</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_cipher'>cipher</span><span class='period'>.</span><span class='id identifier rubyid_encrypt'>encrypt</span>
+<span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_cipher'>cipher</span><span class='period'>.</span><span class='id identifier rubyid_random_key'>random_key</span>
+<span class='id identifier rubyid_key_hash'>key_hash</span> <span class='op'>=</span> <span class='const'>Digest</span><span class='op'>::</span><span class='const'>SHA256</span><span class='period'>.</span><span class='id identifier rubyid_digest'>digest</span> <span class='id identifier rubyid_key'>key</span>
+
+<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_create_file'>create_file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/local.file.ext</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>destination/path/file.ext</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                   <span class='label'>encryption_key:</span> <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span>
+                   <span class='label'>encryption_key_sha256:</span> <span class='id identifier rubyid_key_hash'>key_hash</span>
+
+<span class='comment'># Store your key and hash securely for later use.
+</span><span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>destination/path/file.ext</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                   <span class='label'>encryption_key:</span> <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span>
+                   <span class='label'>encryption_key_sha256:</span> <span class='id identifier rubyid_key_hash'>key_hash</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Avoiding broken pipe errors with large uploads:</p>
+</div></p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
@@ -1953,7 +2065,7 @@ as well as many predefined lists.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 09, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal current' href=''>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 13, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal current' href=''>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

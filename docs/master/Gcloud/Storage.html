@@ -256,6 +256,45 @@ file system, and the name/path that the file should be stored in the bucket.
 </code></pre>
 </div>
 
+<h3 id="customer-supplied-encryption-keys">Customer-supplied encryption keys</h3>
+
+<p>By default, Google Cloud Storage manages server-side encryption keys on
+your behalf. However, a <a href="https://cloud.google.com/storage/docs/encryption#customer-supplied">customer-supplied encryption
+key</a>
+can be provided with the <code class="highlighter-rouge">encryption_key</code> and <code class="highlighter-rouge">encryption_key_sha256</code>
+options. If given, the same key and SHA256 hash also must be provided to
+subsequently download or copy the file. If you use customer-supplied
+encryption keys, you must securely manage your keys and ensure that they are
+not lost. Also, please note that file metadata is not encrypted, with the
+exception of the CRC32C checksum and MD5 hash. The names of files and
+buckets are also not encrypted, and you can read or update the metadata of
+an encrypted file without providing the encryption key.</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
+<span class="nb">require</span> <span class="s2">"digest/sha2"</span>
+
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span>
+<span class="n">bucket</span> <span class="o">=</span> <span class="n">storage</span><span class="p">.</span><span class="nf">bucket</span> <span class="s2">"my-todo-app"</span>
+
+<span class="c1"># Key generation shown for example purposes only. Write your own.</span>
+<span class="n">cipher</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">Cipher</span><span class="p">.</span><span class="nf">new</span> <span class="s2">"aes-256-cfb"</span>
+<span class="n">cipher</span><span class="p">.</span><span class="nf">encrypt</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">cipher</span><span class="p">.</span><span class="nf">random_key</span>
+<span class="n">key_hash</span> <span class="o">=</span> <span class="no">Digest</span><span class="o">::</span><span class="no">SHA256</span><span class="p">.</span><span class="nf">digest</span> <span class="n">key</span>
+
+<span class="n">bucket</span><span class="p">.</span><span class="nf">create_file</span> <span class="s2">"/var/todo-app/avatars/heidi/400x400.png"</span><span class="p">,</span>
+                   <span class="s2">"avatars/heidi/400x400.png"</span><span class="p">,</span>
+                   <span class="ss">encryption_key: </span><span class="n">key</span><span class="p">,</span>
+                   <span class="ss">encryption_key_sha256: </span><span class="n">key_hash</span>
+
+<span class="c1"># Store your key and hash securely for later use.</span>
+<span class="n">file</span> <span class="o">=</span> <span class="n">bucket</span><span class="p">.</span><span class="nf">file</span> <span class="s2">"avatars/heidi/400x400.png"</span><span class="p">,</span>
+                   <span class="ss">encryption_key: </span><span class="n">key</span><span class="p">,</span>
+                   <span class="ss">encryption_key_sha256: </span><span class="n">key_hash</span>
+</code></pre>
+</div>
+
 <h3 id="a-note-about-large-uploads">A note about large uploads</h3>
 
 <p>You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
@@ -461,7 +500,7 @@ for a list of error conditions.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 09, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal current' href=''>Storage</a></li><li class='toc-l1'><a class='reference internal' href='Storage/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Storage/Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='Storage/File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 13, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal current' href=''>Storage</a></li><li class='toc-l1'><a class='reference internal' href='Storage/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Storage/Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='Storage/File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
