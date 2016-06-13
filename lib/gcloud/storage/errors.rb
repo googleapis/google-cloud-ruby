@@ -45,9 +45,15 @@ module Gcloud
 
       # @private
       def self.from_response resp
-        new resp.data["error"]["message"],
-            resp.data["error"]["code"],
-            resp.data["error"]["errors"]
+        if resp.data && resp.data["error"]
+          new resp.data["error"]["message"],
+              resp.data["error"]["code"],
+              resp.data["error"]["errors"]
+        else
+          new resp.error_message,
+              resp.status,
+              nil
+        end
       end
     end
 

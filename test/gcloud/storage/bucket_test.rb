@@ -41,6 +41,9 @@ describe Gcloud::Storage::Bucket, :mock_storage do
                                                   bucket_website_404, bucket_cors }
   let(:bucket_complete) { Gcloud::Storage::Bucket.from_gapi bucket_hash_complete, storage.connection }
 
+  let(:encryption_key) { "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI\xF8ftA|[z\x1A\xFBE\xDE\x97&\xBC\xC7" }
+  let(:encryption_key_sha256) { "5\x04_\xDF\x1D\x8A_d\xFEK\e6p[XZz\x13s]E\xF6\xBB\x10aQH\xF6o\x14f\xF9" }
+
   it "knows its attributes" do
     bucket_complete.id.must_equal bucket_hash_complete["id"]
     bucket_complete.name.must_equal bucket_name
@@ -252,6 +255,22 @@ describe Gcloud::Storage::Bucket, :mock_storage do
 
     Tempfile.open "gcloud-ruby" do |tmpfile|
       bucket.create_file tmpfile, new_file_name, metadata: metadata
+    end
+  end
+
+  it "creates a file with customer-supplied encryption key" do
+    new_file_name = random_file_path
+
+    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
+      env.request_headers["x-goog-encryption-algorithm"].must_equal "AES256"
+      env.request_headers["x-goog-encryption-key"].must_equal Base64.encode64(encryption_key)
+      env.request_headers["x-goog-encryption-key-sha256"].must_equal Base64.encode64(encryption_key_sha256)
+      [200, { "Content-Type" => "application/json" },
+       create_file_json(bucket.name, new_file_name)]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      bucket.create_file tmpfile, new_file_name, encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
     end
   end
 
@@ -777,6 +796,21 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     end
 
     file = bucket.file file_name, generation: generation
+    file.name.must_equal file_name
+  end
+
+  it "finds a file with customer-supplied encryption key" do
+    file_name = "file.ext"
+
+    mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
+      env.request_headers["x-goog-encryption-algorithm"].must_equal "AES256"
+      env.request_headers["x-goog-encryption-key"].must_equal Base64.encode64(encryption_key)
+      env.request_headers["x-goog-encryption-key-sha256"].must_equal Base64.encode64(encryption_key_sha256)
+      [200, { "Content-Type" => "application/json" },
+       find_file_json(bucket.name, file_name)]
+    end
+
+    file = bucket.file file_name, encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
     file.name.must_equal file_name
   end
 
