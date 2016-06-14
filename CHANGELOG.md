@@ -1,5 +1,41 @@
 # Release History
 
+### 0.11.0 / 2016-06-13
+
+#### Changes
+
+* Add backoff to all requests (dolzenko)
+* BigQuery
+  * Add `#all` to `Data`
+  * Add `#all`, `#next` and `#next?` to `Dataset::List`, `Job::List`,
+    `QueryData`, `Table::List` and `Dataset::LookupResults`
+  * `#all` methods now return lazy enumerator with `request_limit`
+* Datastore
+  * Add `#cursor_for`, `#each_with_cursor` and `#all_with_cursor` to
+    `Dataset::QueryResults`
+  * `#all` and `#all_with_cursor` methods now return lazy enumerator with
+    `request_limit`
+* DNS
+  * Add `#all` to `Change::List` and  `Zone::List`
+  * `#all` methods now return lazy enumerator with `request_limit`
+* Logging
+  * `#all` methods now return lazy enumerator with `request_limit`
+* Pub/Sub
+  * Fix bug when publishing multi-byte strings
+  * Add support for IO-ish objects
+  * Add `#all`, `#next` and `#next?` to `Subscription::List` and `Topic::List`
+  * `#all` methods now return lazy enumerator with `request_limit`
+* Resource Manager
+  * `#all` methods now return lazy enumerator with `request_limit`
+* Storage
+  * Breaking Change: Remove `retries` option from `Bucket#delete` and
+    `Project#create_bucket` (configure in `Backoff` instead)
+  * Add support for customer-supplied encryption keys
+  * Fix issue verifying large files (Aguasvivas22)
+  * `#all` methods now return lazy enumerator with `request_limit`
+* Vision
+  * Add support for IO-ish objects
+
 ### 0.10.0 / 2016-05-19
 
 #### Major Changes
