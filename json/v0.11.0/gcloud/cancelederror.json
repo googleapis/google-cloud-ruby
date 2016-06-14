@@ -1,0 +1,1 @@
+{"id":"gcloud/cancelederror","name":"CanceledError","title":["Gcloud","CanceledError"],"description":"<p>Canceled indicates the operation was cancelled (typically by the caller).</p>","source":"lib/gcloud/errors.rb#L52","resources":[],"examples":[],"methods":[]}

@@ -1,0 +1,1 @@
+{"id":"gcloud/storage/error","name":"Error","title":["Gcloud","Storage","Error"],"description":"<h1 id=\"storage-error\">Storage Error</h1>\n\n<p>Base Storage exception class.</p>","source":"lib/gcloud/storage/errors.rb#L24","resources":[],"examples":[],"methods":[]}
