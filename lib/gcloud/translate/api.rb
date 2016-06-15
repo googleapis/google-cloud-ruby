@@ -13,11 +13,10 @@
 # limitations under the License.
 
 
-require "gcloud/translate/connection"
+require "gcloud/translate/service"
 require "gcloud/translate/translation"
 require "gcloud/translate/detection"
 require "gcloud/translate/language"
-require "gcloud/translate/errors"
 
 module Gcloud
   module Translate
@@ -52,8 +51,8 @@ module Gcloud
     #
     class Api
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The Service object.
+      attr_accessor :service
 
       ##
       # @private Creates a new Translate Api instance.
@@ -62,10 +61,10 @@ module Gcloud
       def initialize key
         key ||= ENV["TRANSLATE_KEY"]
         if key.nil?
-          key_mising_msg = "An API key is required to use the Translate API."
-          fail ArgumentError, key_mising_msg
+          key_missing_msg = "An API key is required to use the Translate API."
+          fail ArgumentError, key_missing_msg
         end
-        @connection = Connection.new key
+        @service = Service.new key
       end
 
       ##
@@ -149,10 +148,9 @@ module Gcloud
         from = from.to_s if from
         format = format.to_s if format
         text = Array(text).flatten
-        resp = connection.translate(text, to: to, from: from,
-                                          format: format, cid: cid)
-        fail ApiError.from_response(resp) unless resp.success?
-        Translation.from_response resp, text, to, from
+        resp = service.translate text, to: to, from: from,
+                                       format: format, cid: cid
+        Translation.from_gapi_list resp, text, to, from
       end
 
       ##
@@ -196,9 +194,8 @@ module Gcloud
       def detect *text
         return nil if text.empty?
         text = Array(text).flatten
-        resp = connection.detect(text)
-        fail ApiError.from_response(resp) unless resp.success?
-        Detection.from_response resp, text
+        resp = service.detect(text)
+        Detection.from_gapi resp, text
       end
 
       ##
@@ -241,9 +238,8 @@ module Gcloud
       #
       def languages language = nil
         language = language.to_s if language
-        resp = connection.languages language
-        fail ApiError.from_response(resp) unless resp.success?
-        Array(resp.data["languages"]).map { |gapi| Language.from_gapi gapi }
+        resp = service.languages language
+        Array(resp.languages).map { |gapi| Language.from_gapi gapi }
       end
     end
   end

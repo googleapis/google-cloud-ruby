@@ -84,10 +84,10 @@ module Gcloud
       end
 
       ##
-      # @private New Detection from a DetectionsListResponse object as
+      # @private New Detection from a ListDetectionsResponse object as
       # defined by the Google API Client object.
-      def self.from_response resp, text
-        res = text.zip(Array(resp.data.detections)).map do |txt, gapi_list|
+      def self.from_gapi resp, text
+        res = text.zip(Array(resp.detections)).map do |txt, gapi_list|
           results = gapi_list.map { |gapi| Result.from_gapi gapi }
           new txt, results
         end
@@ -129,7 +129,7 @@ module Gcloud
         # @private New Detection::Result from a DetectionsResource object as
         # defined by the Google API Client object.
         def self.from_gapi gapi
-          new gapi["confidence"], gapi["language"]
+          new gapi.confidence, gapi.language
         end
       end
     end

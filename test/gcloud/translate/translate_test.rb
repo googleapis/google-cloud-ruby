@@ -24,18 +24,15 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
   end
 
   it "translates a single input" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   "Hello"
-      env.params["target"].must_equal "es"
-      env.params["source"].must_be :nil?
-      env.params["format"].must_be :nil?
-      env.params["cid"].must_be :nil?
-      [200, { "Content-Type" => "application/json" },
-       translate_json("Hola", "en")]
-    end
+    mock = Minitest::Mock.new
+    translations_resource = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Hola"
+    list_translations_resource = Gcloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource]
+    mock.expect :list_translations, list_translations_resource, [["Hello"], "es", {cid: nil, format: nil, source: nil}]
 
+    translate.service.mocked_service = mock
     translation = translate.translate "Hello", to: "es"
+    mock.verify
+
     translation.text.must_equal "Hola"
     translation.origin.must_equal "Hello"
     translation.to.must_equal "es"
@@ -47,18 +44,15 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
   end
 
   it "translates a single input with from" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   "Hello"
-      env.params["target"].must_equal "es"
-      env.params["source"].must_equal "en"
-      env.params["format"].must_be :nil?
-      env.params["cid"].must_be :nil?
-      [200, { "Content-Type" => "application/json" },
-       translate_json("Hola", nil)]
-    end
+    mock = Minitest::Mock.new
+    translations_resource = Gcloud::Translate::Service::API::TranslationsResource.new translated_text: "Hola"
+    list_translations_resource = Gcloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource]
+    mock.expect :list_translations, list_translations_resource, [["Hello"], "es", {cid: nil, format: nil, source: "en"}]
 
+    translate.service.mocked_service = mock
     translation = translate.translate "Hello", to: "es", from: :en
+    mock.verify
+
     translation.text.must_equal "Hola"
     translation.origin.must_equal "Hello"
     translation.to.must_equal "es"
@@ -70,18 +64,15 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
   end
 
   it "translates a single input with format" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   "<h1>Hello</h1>"
-      env.params["target"].must_equal "es"
-      env.params["source"].must_be :nil?
-      env.params["format"].must_equal "html"
-      env.params["cid"].must_be :nil?
-      [200, { "Content-Type" => "application/json" },
-       translate_json("<h1>Hola</h1>", "en")]
-    end
+    mock = Minitest::Mock.new
+    translations_resource = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "<h1>Hola</h1>"
+    list_translations_resource = Gcloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource]
+    mock.expect :list_translations, list_translations_resource, [["<h1>Hello</h1>"], "es", {cid: nil, format: "html", source: nil}]
 
+    translate.service.mocked_service = mock
     translation = translate.translate "<h1>Hello</h1>", to: "es", format: :html
+    mock.verify
+
     translation.text.must_equal "<h1>Hola</h1>"
     translation.origin.must_equal "<h1>Hello</h1>"
     translation.to.must_equal "es"
@@ -93,18 +84,15 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
   end
 
   it "translates a single input with cid" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   "Hello"
-      env.params["target"].must_equal "es"
-      env.params["source"].must_be :nil?
-      env.params["format"].must_be :nil?
-      env.params["cid"].must_equal "user-1234567899"
-      [200, { "Content-Type" => "application/json" },
-       translate_json("Hola", "en")]
-    end
+    mock = Minitest::Mock.new
+    translations_resource = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Hola"
+    list_translations_resource = Gcloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource]
+    mock.expect :list_translations, list_translations_resource, [["Hello"], "es", {cid: "user-1234567899", format: nil, source: nil}]
 
+    translate.service.mocked_service = mock
     translation = translate.translate "Hello", to: "es", cid: "user-1234567899"
+    mock.verify
+
     translation.text.must_equal "Hola"
     translation.origin.must_equal "Hello"
     translation.to.must_equal "es"
@@ -116,18 +104,16 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
   end
 
   it "translates multiple inputs" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   ["Hello", "How are you today?"]
-      env.params["target"].must_equal "es"
-      env.params["source"].must_be :nil?
-      env.params["format"].must_be :nil?
-      env.params["cid"].must_be :nil?
-      [200, { "Content-Type" => "application/json" },
-       translate_json("Hola", "en", "Como estas hoy?", "en")]
-    end
+    mock = Minitest::Mock.new
+    translations_resource = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Hola"
+    translations_resource_2 = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Como estas hoy?"
+    list_translations_resource = Gcloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
+    mock.expect :list_translations, list_translations_resource, [["Hello", "How are you today?"], "es", {cid: nil, format: nil, source: nil}]
 
+    translate.service.mocked_service = mock
     translations = translate.translate "Hello", "How are you today?", to: "es"
+    mock.verify
+
     translations.count.must_equal 2
 
     translations.first.text.must_equal "Hola"
@@ -150,18 +136,16 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
   end
 
   it "translates multiple inputs in an array" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   ["Hello", "How are you today?"]
-      env.params["target"].must_equal "es"
-      env.params["source"].must_be :nil?
-      env.params["format"].must_be :nil?
-      env.params["cid"].must_be :nil?
-      [200, { "Content-Type" => "application/json" },
-       translate_json("Hola", "en", "Como estas hoy?", "en")]
-    end
+    mock = Minitest::Mock.new
+    translations_resource = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Hola"
+    translations_resource_2 = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Como estas hoy?"
+    list_translations_resource = Gcloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
+    mock.expect :list_translations, list_translations_resource, [["Hello", "How are you today?"], "es", {cid: nil, format: nil, source: nil}]
 
+    translate.service.mocked_service = mock
     translations = translate.translate ["Hello", "How are you today?"], to: "es"
+    mock.verify
+
     translations.count.must_equal 2
 
     translations.first.text.must_equal "Hola"
@@ -184,18 +168,16 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
   end
 
   it "translates multiple inputs with from" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   ["Hello", "How are you today?"]
-      env.params["target"].must_equal "es"
-      env.params["source"].must_equal "en"
-      env.params["format"].must_be :nil?
-      env.params["cid"].must_be :nil?
-      [200, { "Content-Type" => "application/json" },
-       translate_json("Hola", nil, "Como estas hoy?", nil)]
-    end
+    mock = Minitest::Mock.new
+    translations_resource = Gcloud::Translate::Service::API::TranslationsResource.new translated_text: "Hola"
+    translations_resource_2 = Gcloud::Translate::Service::API::TranslationsResource.new translated_text: "Como estas hoy?"
+    list_translations_resource = Gcloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
+    mock.expect :list_translations, list_translations_resource, [["Hello", "How are you today?"], "es", {cid: nil, format: nil, source: "en"}]
 
+    translate.service.mocked_service = mock
     translations = translate.translate "Hello", "How are you today?", to: :es, from: :en
+    mock.verify
+
     translations.count.must_equal 2
 
     translations.first.text.must_equal "Hola"
@@ -218,18 +200,16 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
   end
 
   it "translates multiple inputs in an array with from" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   ["Hello", "How are you today?"]
-      env.params["target"].must_equal "es"
-      env.params["source"].must_equal "en"
-      env.params["format"].must_be :nil?
-      env.params["cid"].must_be :nil?
-      [200, { "Content-Type" => "application/json" },
-       translate_json("Hola", nil, "Como estas hoy?", nil)]
-    end
+    mock = Minitest::Mock.new
+    translations_resource = Gcloud::Translate::Service::API::TranslationsResource.new translated_text: "Hola"
+    translations_resource_2 = Gcloud::Translate::Service::API::TranslationsResource.new translated_text: "Como estas hoy?"
+    list_translations_resource = Gcloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
+    mock.expect :list_translations, list_translations_resource, [["Hello", "How are you today?"], "es", {cid: nil, format: nil, source: "en"}]
 
+    translate.service.mocked_service = mock
     translations = translate.translate ["Hello", "How are you today?"], to: :es, from: :en
+    mock.verify
+
     translations.count.must_equal 2
 
     translations.first.text.must_equal "Hola"
@@ -252,18 +232,16 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
   end
 
   it "translates multiple inputs with format" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   ["<h1>Hello</h1>", "How are <em>you</em> today?"]
-      env.params["target"].must_equal "es"
-      env.params["source"].must_be :nil?
-      env.params["format"].must_equal "html"
-      env.params["cid"].must_be :nil?
-      [200, { "Content-Type" => "application/json" },
-       translate_json("<h1>Hola</h1>", "en", "Como estas <em>hoy</em>?", "en")]
-    end
+    mock = Minitest::Mock.new
+    translations_resource = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "<h1>Hola</h1>"
+    translations_resource_2 = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Como estas <em>hoy</em>?"
+    list_translations_resource = Gcloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
+    mock.expect :list_translations, list_translations_resource, [["<h1>Hello</h1>", "How are <em>you</em> today?"], "es", {cid: nil, format: "html", source: nil}]
 
+    translate.service.mocked_service = mock
     translations = translate.translate "<h1>Hello</h1>", "How are <em>you</em> today?", to: "es", format: :html
+    mock.verify
+
     translations.count.must_equal 2
 
     translations.first.text.must_equal "<h1>Hola</h1>"
@@ -286,18 +264,16 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
   end
 
   it "translates multiple inputs in an array with format" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   ["<h1>Hello</h1>", "How are <em>you</em> today?"]
-      env.params["target"].must_equal "es"
-      env.params["source"].must_be :nil?
-      env.params["format"].must_equal "html"
-      env.params["cid"].must_be :nil?
-      [200, { "Content-Type" => "application/json" },
-       translate_json("<h1>Hola</h1>", "en", "Como estas <em>hoy</em>?", "en")]
-    end
+    mock = Minitest::Mock.new
+    translations_resource = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "<h1>Hola</h1>"
+    translations_resource_2 = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Como estas <em>hoy</em>?"
+    list_translations_resource = Gcloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
+    mock.expect :list_translations, list_translations_resource, [["<h1>Hello</h1>", "How are <em>you</em> today?"], "es", {cid: nil, format: "html", source: nil}]
 
+    translate.service.mocked_service = mock
     translations = translate.translate ["<h1>Hello</h1>", "How are <em>you</em> today?"], to: "es", format: :html
+    mock.verify
+
     translations.count.must_equal 2
 
     translations.first.text.must_equal "<h1>Hola</h1>"
@@ -320,18 +296,16 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
   end
 
   it "translates multiple inputs with cid" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   ["Hello", "How are you today?"]
-      env.params["target"].must_equal "es"
-      env.params["source"].must_be :nil?
-      env.params["format"].must_be :nil?
-      env.params["cid"].must_equal "user-1234567899"
-      [200, { "Content-Type" => "application/json" },
-       translate_json("Hola", "en", "Como estas hoy?", "en")]
-    end
+    mock = Minitest::Mock.new
+    translations_resource = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Hola"
+    translations_resource_2 = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Como estas hoy?"
+    list_translations_resource = Gcloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
+    mock.expect :list_translations, list_translations_resource, [["Hello", "How are you today?"], "es", {cid: "user-1234567899", format: nil, source: nil}]
 
+    translate.service.mocked_service = mock
     translations = translate.translate "Hello", "How are you today?", to: "es", cid: "user-1234567899"
+    mock.verify
+
     translations.count.must_equal 2
 
     translations.first.text.must_equal "Hola"
@@ -354,18 +328,16 @@ describe Gcloud::Translate::Api, :translate, :mock_translate do
   end
 
   it "translates multiple inputs in an array with cid" do
-    mock_connection.get "/language/translate/v2" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   ["Hello", "How are you today?"]
-      env.params["target"].must_equal "es"
-      env.params["source"].must_be :nil?
-      env.params["format"].must_be :nil?
-      env.params["cid"].must_equal "user-1234567899"
-      [200, { "Content-Type" => "application/json" },
-       translate_json("Hola", "en", "Como estas hoy?", "en")]
-    end
+    mock = Minitest::Mock.new
+    translations_resource = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Hola"
+    translations_resource_2 = Gcloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Como estas hoy?"
+    list_translations_resource = Gcloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
+    mock.expect :list_translations, list_translations_resource, [["Hello", "How are you today?"], "es", {cid: "user-1234567899", format: nil, source: nil}]
 
+    translate.service.mocked_service = mock
     translations = translate.translate ["Hello", "How are you today?"], to: "es", cid: "user-1234567899"
+    mock.verify
+
     translations.count.must_equal 2
 
     translations.first.text.must_equal "Hola"

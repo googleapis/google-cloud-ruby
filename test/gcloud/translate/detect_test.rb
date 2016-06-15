@@ -20,29 +20,32 @@ describe Gcloud::Translate::Api, :detect, :mock_translate do
     detection.must_be :nil?
   end
 
-  it "detects a single langauge" do
-    mock_connection.get "/language/translate/v2/detect" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   "Hello"
-      [200, { "Content-Type" => "application/json" },
-       detect_json("en")]
-    end
+  it "detects a single language" do
+    mock = Minitest::Mock.new
+    detections_resource = Gcloud::Translate::Service::API::DetectionsResource.new confidence: 0.123, language: "en", is_reliable: false
+    list_detections_resource = Gcloud::Translate::Service::API::ListDetectionsResponse.new detections: [[detections_resource]]
+    mock.expect :list_detections, list_detections_resource, [["Hello"]]
 
+    translate.service.mocked_service = mock
     detection = translate.detect "Hello"
+    mock.verify
+
     detection.language.must_equal "en"
     detection.results.count.must_equal 1
     detection.results.first.language.must_equal "en"
   end
 
-  it "detects multiple langauges" do
-    mock_connection.get "/language/translate/v2/detect" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   ["Hello", "Hola"]
-      [200, { "Content-Type" => "application/json" },
-       detect_json("en", "es")]
-    end
+  it "detects multiple languages" do
+    mock = Minitest::Mock.new
+    detections_resource = Gcloud::Translate::Service::API::DetectionsResource.new confidence: 0.123, language: "en", is_reliable: false
+    detections_resource_2 = Gcloud::Translate::Service::API::DetectionsResource.new confidence: 0.123, language: "es", is_reliable: false
+    list_detections_resource = Gcloud::Translate::Service::API::ListDetectionsResponse.new detections: [[detections_resource], [detections_resource_2]]
+    mock.expect :list_detections, list_detections_resource, [["Hello", "Hola"]]
 
+    translate.service.mocked_service = mock
     detections = translate.detect "Hello", "Hola"
+    mock.verify
+
     detections.count.must_equal 2
 
     detections.first.language.must_equal "en"
@@ -54,15 +57,17 @@ describe Gcloud::Translate::Api, :detect, :mock_translate do
     detections.last.results.first.language.must_equal "es"
   end
 
-  it "detects multiple langauges in an array" do
-    mock_connection.get "/language/translate/v2/detect" do |env|
-      env.params["key"].must_equal key
-      env.params["q"].must_equal   ["Hello", "Hola"]
-      [200, { "Content-Type" => "application/json" },
-       detect_json("en", "es")]
-    end
+  it "detects multiple languages in an array" do
+    mock = Minitest::Mock.new
+    detections_resource = Gcloud::Translate::Service::API::DetectionsResource.new confidence: 0.123, language: "en", is_reliable: false
+    detections_resource_2 = Gcloud::Translate::Service::API::DetectionsResource.new confidence: 0.123, language: "es", is_reliable: false
+    list_detections_resource = Gcloud::Translate::Service::API::ListDetectionsResponse.new detections: [[detections_resource], [detections_resource_2]]
+    mock.expect :list_detections, list_detections_resource, [["Hello", "Hola"]]
 
+    translate.service.mocked_service = mock
     detections = translate.detect ["Hello", "Hola"]
+    mock.verify
+
     detections.count.must_equal 2
 
     detections.first.language.must_equal "en"
