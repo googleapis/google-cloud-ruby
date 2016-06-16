@@ -148,9 +148,9 @@ module Gcloud
         from = from.to_s if from
         format = format.to_s if format
         text = Array(text).flatten
-        resp = service.translate text, to: to, from: from,
+        gapi = service.translate text, to: to, from: from,
                                        format: format, cid: cid
-        Translation.from_gapi_list resp, text, to, from
+        Translation.from_gapi_list gapi, text, to, from
       end
 
       ##
@@ -194,8 +194,8 @@ module Gcloud
       def detect *text
         return nil if text.empty?
         text = Array(text).flatten
-        resp = service.detect(text)
-        Detection.from_gapi resp, text
+        gapi = service.detect(text)
+        Detection.from_gapi gapi, text
       end
 
       ##
@@ -238,8 +238,8 @@ module Gcloud
       #
       def languages language = nil
         language = language.to_s if language
-        resp = service.languages language
-        Array(resp.languages).map { |gapi| Language.from_gapi gapi }
+        gapi = service.languages language
+        Array(gapi.languages).map { |g| Language.from_gapi g }
       end
     end
   end
