@@ -14,6 +14,7 @@
 
 
 require "gcloud/vision/location"
+require "google/apis/vision_v1"
 require "stringio"
 require "base64"
 
@@ -358,9 +359,9 @@ module Gcloud
       def to_gapi
         if io?
           @io.rewind
-          { content: Base64.strict_encode64(@io.read) }
+          Google::Apis::VisionV1::Image.new content: @io.read
         elsif url?
-          { source: { gcsImageUri: @url } }
+          Google::Apis::VisionV1::Image.new source: { gcsImageUri: @url }
         else
           fail ArgumentError, "Unable to use Image with Vision service."
         end
@@ -477,9 +478,9 @@ module Gcloud
         # @private
         def to_gapi
           return nil if empty?
-          gapi = {}
-          gapi[:latLongRect] = area.to_hash unless area.empty?
-          gapi[:languageHints] = languages unless languages.empty?
+          gapi = Google::Apis::VisionV1::ImageContext.new
+          gapi.lat_long_rect = area.to_gapi unless area.empty?
+          gapi.language_hints = languages unless languages.empty?
           gapi
         end
 
@@ -576,12 +577,15 @@ module Gcloud
           # @return [Hash]
           #
           def to_hash
-            { minLatLng: min.to_hash, maxLatLng: max.to_hash }
+            { min_lat_lng: min.to_hash, max_lat_lng: max.to_hash }
           end
 
           def to_gapi
             return nil if empty?
-            to_hash
+            Google::Apis::VisionV1::LatLongRect.new(
+              min_lat_lng: min.to_gapi,
+              max_lat_lng: max.to_gapi
+            )
           end
         end
       end

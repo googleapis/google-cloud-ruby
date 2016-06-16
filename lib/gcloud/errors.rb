@@ -28,14 +28,23 @@ module Gcloud
       @inner = error
     end
 
-    # @private Create a new error object.
+    # @private Create a new error object from a `Status` object (See
+    # https://cloud.google.com/vision/reference/rest/v1/images/annotate#status
+    # for a definition and an example.)
+    def self.from_status status
+      klass_for(error).new status.message
+    end
+
+    # @private Create a new error object from what should be a GRPC::BadStatus.
     def self.from_error error
+      if defined? GRPC::BadStatus
+        return new(error.message, error) unless error.is_a? GRPC::BadStatus
+      end
       klass_for(error).new error.message, error
     end
 
     # @private Identify the subclass for an error
     def self.klass_for error
-      return self.class unless error.is_a? GRPC::BadStatus
       # The gRPC status code 0 is for a successful response.
       # So there is no error subclass for a 0 status code, use current class.
       [self.class, CanceledError, UnknownError, InvalidArgumentError,

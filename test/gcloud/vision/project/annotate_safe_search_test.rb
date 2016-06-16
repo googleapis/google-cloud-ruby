@@ -18,19 +18,22 @@ describe Gcloud::Vision::Project, :annotate, :safe_search, :mock_vision do
   let(:filepath) { "acceptance/data/face.jpg" }
 
   it "detects safe_search detection" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      safe_search = requests.first
-      safe_search["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      safe_search["features"].count.must_equal 1
-      safe_search["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
-      safe_search["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       safe_search_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "SAFE_SEARCH_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, safe_search_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.annotate filepath, safe_search: true
+    mock.verify
+
     annotation.wont_be :nil?
 
     annotation.safe_search.wont_be :nil?
@@ -41,19 +44,22 @@ describe Gcloud::Vision::Project, :annotate, :safe_search, :mock_vision do
   end
 
   it "detects safe_search detection using mark alias" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      safe_search = requests.first
-      safe_search["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      safe_search["features"].count.must_equal 1
-      safe_search["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
-      safe_search["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       safe_search_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "SAFE_SEARCH_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, safe_search_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.mark filepath, safe_search: true
+    mock.verify
+
     annotation.wont_be :nil?
 
     annotation.safe_search.wont_be :nil?
@@ -64,19 +70,22 @@ describe Gcloud::Vision::Project, :annotate, :safe_search, :mock_vision do
   end
 
   it "detects safe_search detection using detect alias" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      safe_search = requests.first
-      safe_search["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      safe_search["features"].count.must_equal 1
-      safe_search["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
-      safe_search["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       safe_search_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "SAFE_SEARCH_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, safe_search_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.detect filepath, safe_search: true
+    mock.verify
+
     annotation.wont_be :nil?
 
     annotation.safe_search.wont_be :nil?
@@ -87,22 +96,26 @@ describe Gcloud::Vision::Project, :annotate, :safe_search, :mock_vision do
   end
 
   it "detects safe_search detection on multiple images" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 2
-      requests.first["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      requests.first["features"].count.must_equal 1
-      requests.first["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
-      requests.first["features"].first["maxResults"].must_equal 1
-      requests.last["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      requests.last["features"].count.must_equal 1
-      requests.last["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
-      requests.last["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       safe_searchs_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "SAFE_SEARCH_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        ),
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, safe_searches_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotations = vision.annotate filepath, filepath, safe_search: true
+    mock.verify
+
     annotations.count.must_equal 2
 
     annotations.first.safe_search.wont_be :nil?
@@ -119,19 +132,22 @@ describe Gcloud::Vision::Project, :annotate, :safe_search, :mock_vision do
   end
 
   it "uses the default configuration when given a truthy value" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      safe_search = requests.first
-      safe_search["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      safe_search["features"].count.must_equal 1
-      safe_search["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
-      safe_search["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       safe_search_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "SAFE_SEARCH_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, safe_search_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.annotate filepath, safe_search: "yep"
+    mock.verify
+
     annotation.wont_be :nil?
 
     annotation.safe_search.wont_be :nil?
@@ -141,21 +157,26 @@ describe Gcloud::Vision::Project, :annotate, :safe_search, :mock_vision do
     annotation.safe_search.must_be :violence?
   end
 
-  def safe_search_response_json
-    {
-      responses: [{
-        safeSearchAnnotation: safe_search_annotation_response
-      }]
-    }.to_json
+  def safe_search_response_gapi
+    MockVision::API::BatchAnnotateImagesResponse.new(
+      responses: [
+        MockVision::API::AnnotateImageResponse.new(
+          safe_search_annotation: safe_search_annotation_response
+        )
+      ]
+    )
   end
 
-  def safe_searchs_response_json
-    {
-      responses: [{
-        safeSearchAnnotation: safe_search_annotation_response
-      }, {
-        safeSearchAnnotation: safe_search_annotation_response
-      }]
-    }.to_json
+  def safe_searches_response_gapi
+    MockVision::API::BatchAnnotateImagesResponse.new(
+      responses: [
+        MockVision::API::AnnotateImageResponse.new(
+          safe_search_annotation: safe_search_annotation_response
+        ),
+        MockVision::API::AnnotateImageResponse.new(
+          safe_search_annotation: safe_search_annotation_response
+        )
+      ]
+    )
   end
 end

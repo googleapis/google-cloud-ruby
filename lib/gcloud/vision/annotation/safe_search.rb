@@ -54,7 +54,7 @@ module Gcloud
         # Adult likelihood rating. Possible values are `VERY_UNLIKELY`,
         # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
         def adult
-          @gapi["adult"]
+          @gapi.adult
         end
 
         ##
@@ -71,7 +71,7 @@ module Gcloud
         # Spoof likelihood rating. Possible values are `VERY_UNLIKELY`,
         # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
         def spoof
-          @gapi["spoof"]
+          @gapi.spoof
         end
 
         ##
@@ -88,7 +88,7 @@ module Gcloud
         # Medical likelihood rating. Possible values are `VERY_UNLIKELY`,
         # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
         def medical
-          @gapi["medical"]
+          @gapi.medical
         end
 
         ##
@@ -105,7 +105,7 @@ module Gcloud
         # Violence likelihood rating. Possible values are `VERY_UNLIKELY`,
         # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
         def violence
-          @gapi["violence"]
+          @gapi.violence
         end
 
         ##

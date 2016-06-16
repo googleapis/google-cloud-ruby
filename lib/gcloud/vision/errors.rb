@@ -53,11 +53,9 @@ module Gcloud
 
       # @private
       def self.from_response resp
-        if resp.data? && resp.data["error"]
-          new(resp.data["error"]["message"]).tap do |e|
-            e.instance_variable_set "@code", resp.data["error"]["code"]
-            e.instance_variable_set "@status", resp.data["error"]["status"]
-            e.instance_variable_set "@errors", resp.data["error"]["errors"]
+        if resp.error
+          new(resp.error.message).tap do |e|
+            e.instance_variable_set "@code", resp.error.code
             e.instance_variable_set "@response", resp
           end
         else

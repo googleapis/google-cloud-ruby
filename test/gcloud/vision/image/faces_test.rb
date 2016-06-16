@@ -14,79 +14,95 @@
 
 require "helper"
 require "pathname"
-
 describe Gcloud::Vision::Image, :faces, :mock_vision do
   let(:filepath) { "acceptance/data/face.jpg" }
   let(:image)    { vision.image filepath }
 
   it "detects multiple faces" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      face = requests.first
-      face["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      face["features"].count.must_equal 1
-      face["features"].first["type"].must_equal "FACE_DETECTION"
-      face["features"].first["maxResults"].must_equal 10
-      [200, {"Content-Type" => "application/json"},
-       faces_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "FACE_DETECTION", max_results: 10)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, faces_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     faces = image.faces 10
+    mock.verify
+
     faces.count.must_equal 5
   end
 
   it "detects multiple faces without specifying a count" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      face = requests.first
-      face["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      face["features"].count.must_equal 1
-      face["features"].first["type"].must_equal "FACE_DETECTION"
-      face["features"].first["maxResults"].must_equal 100
-      [200, {"Content-Type" => "application/json"},
-       faces_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "FACE_DETECTION", max_results: 100)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, faces_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     faces = image.faces
+    mock.verify
+
     faces.count.must_equal 5
   end
 
   it "detects a face" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      face = requests.first
-      face["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      face["features"].count.must_equal 1
-      face["features"].first["type"].must_equal "FACE_DETECTION"
-      face["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       face_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "FACE_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, face_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     face = image.face
+    mock.verify
+
     face.wont_be :nil?
   end
 
-  def face_response_json
-    {
-      responses: [{
-        faceAnnotations: [face_annotation_response]
-      }]
-    }.to_json
+  def face_response_gapi
+    Google::Apis::VisionV1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Apis::VisionV1::AnnotateImageResponse.new(
+          face_annotations: [
+            face_annotation_response
+          ]
+        )
+      ]
+    )
   end
 
-  def faces_response_json
-    {
-      responses: [{
-        faceAnnotations: [face_annotation_response,
-                          face_annotation_response,
-                          face_annotation_response,
-                          face_annotation_response,
-                          face_annotation_response]
-      }]
-    }.to_json
+  def faces_response_gapi
+    Google::Apis::VisionV1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Apis::VisionV1::AnnotateImageResponse.new(
+          face_annotations: [
+            face_annotation_response,
+            face_annotation_response,
+            face_annotation_response,
+            face_annotation_response,
+            face_annotation_response
+          ]
+        )
+      ]
+    )
   end
 end

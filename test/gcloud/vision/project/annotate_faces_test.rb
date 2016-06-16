@@ -17,147 +17,161 @@ require "helper"
 describe Gcloud::Vision::Project, :annotate, :faces, :mock_vision do
   let(:filepath) { "acceptance/data/face.jpg" }
 
-  it "detects face detection" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      face = requests.first
-      face["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      face["features"].count.must_equal 1
-      face["features"].first["type"].must_equal "FACE_DETECTION"
-      face["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       face_response_json]
-    end
-
-    annotation = vision.annotate filepath, faces: 1
-    annotation.wont_be :nil?
-    annotation.face.wont_be :nil?
-  end
-
   it "detects face detection using mark alias" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      face = requests.first
-      face["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      face["features"].count.must_equal 1
-      face["features"].first["type"].must_equal "FACE_DETECTION"
-      face["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       face_response_json]
-    end
+    feature = MockVision::API::Feature.new(type: "FACE_DETECTION", max_results: 1)
+    req = MockVision::API::BatchAnnotateImagesRequest.new(
+      requests: [
+        MockVision::API::AnnotateImageRequest.new(
+          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, face_response_gapi, [req]
 
-    annotation = vision.mark filepath, faces: 1
+    vision.service.mocked_service = mock
+    annotation = vision.annotate filepath, faces: 1
+    mock.verify
+
     annotation.wont_be :nil?
     annotation.face.wont_be :nil?
   end
 
   it "detects face detection using detect alias" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      face = requests.first
-      face["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      face["features"].count.must_equal 1
-      face["features"].first["type"].must_equal "FACE_DETECTION"
-      face["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       face_response_json]
-    end
+    feature = MockVision::API::Feature.new(type: "FACE_DETECTION", max_results: 1)
+    req = MockVision::API::BatchAnnotateImagesRequest.new(
+      requests: [
+        MockVision::API::AnnotateImageRequest.new(
+          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, face_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.detect filepath, faces: 1
+    mock.verify
+
     annotation.wont_be :nil?
     annotation.face.wont_be :nil?
   end
 
   it "detects face detection on multiple images" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 2
-      requests.first["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      requests.first["features"].count.must_equal 1
-      requests.first["features"].first["type"].must_equal "FACE_DETECTION"
-      requests.first["features"].first["maxResults"].must_equal 1
-      requests.last["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      requests.last["features"].count.must_equal 1
-      requests.last["features"].first["type"].must_equal "FACE_DETECTION"
-      requests.last["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       faces_response_json]
-    end
+    feature = MockVision::API::Feature.new(type: "FACE_DETECTION", max_results: 1)
+    req = MockVision::API::BatchAnnotateImagesRequest.new(
+      requests: [
+        MockVision::API::AnnotateImageRequest.new(
+          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        ),
+        MockVision::API::AnnotateImageRequest.new(
+          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, faces_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotations = vision.annotate filepath, filepath, faces: 1
+    mock.verify
+
     annotations.count.must_equal 2
     annotations.first.face.wont_be :nil?
     annotations.last.face.wont_be :nil?
   end
 
   it "uses the default configuration" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      requests.last["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      requests.last["features"].count.must_equal 1
-      requests.last["features"].first["type"].must_equal "FACE_DETECTION"
-      requests.last["features"].first["maxResults"].must_equal Gcloud::Vision.default_max_faces
-      [200, {"Content-Type" => "application/json"},
-       face_response_json]
-    end
+    feature = MockVision::API::Feature.new(type: "FACE_DETECTION", max_results: Gcloud::Vision.default_max_faces)
+    req = MockVision::API::BatchAnnotateImagesRequest.new(
+      requests: [
+        MockVision::API::AnnotateImageRequest.new(
+          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, face_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.annotate filepath, faces: true
+    mock.verify
+
     annotation.face.wont_be :nil?
   end
 
   it "uses the default configuration when given a truthy value" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      requests.last["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      requests.last["features"].count.must_equal 1
-      requests.last["features"].first["type"].must_equal "FACE_DETECTION"
-      requests.last["features"].first["maxResults"].must_equal Gcloud::Vision.default_max_faces
-      [200, {"Content-Type" => "application/json"},
-       face_response_json]
-    end
+    feature = MockVision::API::Feature.new(type: "FACE_DETECTION", max_results: Gcloud::Vision.default_max_faces)
+    req = MockVision::API::BatchAnnotateImagesRequest.new(
+      requests: [
+        MockVision::API::AnnotateImageRequest.new(
+          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, face_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.annotate filepath, faces: "9999"
+    mock.verify
+
     annotation.face.wont_be :nil?
   end
 
   it "uses the updated configuration" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      requests.last["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      requests.last["features"].count.must_equal 1
-      requests.last["features"].first["type"].must_equal "FACE_DETECTION"
-      requests.last["features"].first["maxResults"].must_equal 25
-      [200, {"Content-Type" => "application/json"},
-       face_response_json]
-    end
+    feature = MockVision::API::Feature.new(type: "FACE_DETECTION", max_results: 25)
+    req = MockVision::API::BatchAnnotateImagesRequest.new(
+      requests: [
+        MockVision::API::AnnotateImageRequest.new(
+          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, face_response_gapi, [req]
+    vision.service.mocked_service = mock
 
     Gcloud::Vision.stub :default_max_faces, 25 do
       annotation = vision.annotate filepath, faces: true
       annotation.face.wont_be :nil?
     end
+    mock.verify
   end
 
-  def face_response_json
-    {
-      responses: [{
-        faceAnnotations: [face_annotation_response]
-      }]
-    }.to_json
+  def face_response_gapi
+    MockVision::API::BatchAnnotateImagesResponse.new(
+      responses: [
+        MockVision::API::AnnotateImageResponse.new(
+          face_annotations: [
+            face_annotation_response
+          ]
+        )
+      ]
+    )
   end
 
-  def faces_response_json
-    {
-      responses: [{
-        faceAnnotations: [face_annotation_response]
-      }, {
-        faceAnnotations: [face_annotation_response]
-      }]
-    }.to_json
+  def faces_response_gapi
+    MockVision::API::BatchAnnotateImagesResponse.new(
+      responses: [
+        MockVision::API::AnnotateImageResponse.new(
+          face_annotations: [
+            face_annotation_response
+          ]
+        ),
+        MockVision::API::AnnotateImageResponse.new(
+          face_annotations: [
+            face_annotation_response
+          ]
+        )
+      ]
+    )
   end
 end

@@ -20,19 +20,23 @@ describe Gcloud::Vision::Image, :text, :mock_vision do
   let(:image)    { vision.image filepath }
 
   it "detects text" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      text = requests.first
-      text["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      text["features"].count.must_equal 1
-      text["features"].first["type"].must_equal "TEXT_DETECTION"
-      text["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       text_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, text_response_gapi, [req]
+
+    vision.service.mocked_service = mock
 
     text = image.text
+    mock.verify
+
     text.wont_be :nil?
     text.text.must_include "Google Cloud Client Library for Ruby"
     text.locale.must_equal "en"
@@ -43,11 +47,13 @@ describe Gcloud::Vision::Image, :text, :mock_vision do
     text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
   end
 
-  def text_response_json
-    {
-      responses: [{
-        textAnnotations: text_annotation_responses
-      }]
-    }.to_json
+  def text_response_gapi
+    MockVision::API::BatchAnnotateImagesResponse.new(
+      responses: [
+        MockVision::API::AnnotateImageResponse.new(
+          text_annotations: text_annotation_responses
+        )
+      ]
+    )
   end
 end

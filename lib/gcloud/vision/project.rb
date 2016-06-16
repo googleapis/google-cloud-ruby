@@ -14,12 +14,12 @@
 
 
 require "gcloud/gce"
-require "gcloud/vision/connection"
+require "gcloud/vision/service"
 require "gcloud/vision/credentials"
 require "gcloud/vision/annotate"
 require "gcloud/vision/image"
 require "gcloud/vision/annotation"
-require "gcloud/vision/errors"
+require "gcloud/errors"
 
 module Gcloud
   module Vision
@@ -48,15 +48,15 @@ module Gcloud
     # See Gcloud#vision
     class Project
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The Service object.
+      attr_accessor :service
 
       ##
       # @private Creates a new Project instance.
       def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
-        @connection = Connection.new project, credentials
+        @service = Service.new project, credentials
       end
 
       # The Vision project connected to.
@@ -71,7 +71,7 @@ module Gcloud
       #   vision.project #=> "my-todo-project"
       #
       def project
-        connection.project
+        service.project
       end
 
       ##
@@ -257,10 +257,10 @@ module Gcloud
 
         yield a if block_given?
 
-        resp = connection.annotate a.requests
-        fail ApiError.from_response(resp) unless resp.success?
-        annotations = Array(resp.data["responses"]).map do |gapi|
-          Annotation.from_gapi gapi
+        gapi = service.annotate a.requests
+        annotations = Array(gapi.responses).map do |g|
+          fail Error.from_error(g.error) if g.error
+          Annotation.from_gapi g
         end
         return annotations.first if annotations.count == 1
         annotations
@@ -272,8 +272,8 @@ module Gcloud
 
       ##
       # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      def ensure_service!
+        fail "Must have active connection" unless service
       end
     end
   end

@@ -89,7 +89,7 @@ module Gcloud
         # @return [String] The opaque entity ID.
         #
         def mid
-          @gapi["mid"]
+          @gapi.mid
         end
 
         ##
@@ -101,7 +101,7 @@ module Gcloud
         #   language code.
         #
         def locale
-          @gapi["locale"]
+          @gapi.locale
         end
 
         ##
@@ -110,7 +110,7 @@ module Gcloud
         # @return [String] A description of the entity.
         #
         def description
-          @gapi["description"]
+          @gapi.description
         end
 
         ##
@@ -119,7 +119,7 @@ module Gcloud
         # @return [Float] A value in the range [0, 1].
         #
         def score
-          @gapi["score"]
+          @gapi.score
         end
 
         ##
@@ -130,7 +130,7 @@ module Gcloud
         # @return [Float] A value in the range [0, 1].
         #
         def confidence
-          @gapi["confidence"]
+          @gapi.confidence
         end
 
         ##
@@ -143,7 +143,7 @@ module Gcloud
         # @return [Float] A value in the range [0, 1].
         #
         def topicality
-          @gapi["topicality"]
+          @gapi.topicality
         end
 
         ##
@@ -153,8 +153,8 @@ module Gcloud
         # @return [Array<Vertex>] An array of vertices.
         #
         def bounds
-          return [] unless @gapi["boundingPoly"]
-          @bounds ||= Array(@gapi["boundingPoly"]["vertices"]).map do |v|
+          return [] unless @gapi.bounding_poly
+          @bounds ||= Array(@gapi.bounding_poly.vertices).map do |v|
             Vertex.from_gapi v
           end
         end
@@ -170,8 +170,8 @@ module Gcloud
         #   and longitude.
         #
         def locations
-          @locations ||= Array(@gapi["locations"]).map do |l|
-            Location.from_gapi l["latLng"]
+          @locations ||= Array(@gapi.locations).map do |l|
+            Location.from_gapi l.lat_lng
           end
         end
 
@@ -184,7 +184,7 @@ module Gcloud
         #
         def properties
           @properties ||=
-            Hash[Array(@gapi["properties"]).map { |p| [p["name"], p["value"]] }]
+            Hash[Array(@gapi.properties).map { |p| [p.name, p.value] }]
         end
 
         ##

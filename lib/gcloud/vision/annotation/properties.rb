@@ -51,8 +51,8 @@ module Gcloud
         # @return [Array<Color>] An array of the image's dominant colors.
         #
         def colors
-          return [] unless @gapi["dominantColors"]
-          @colors ||= Array(@gapi["dominantColors"]["colors"]).map do |c|
+          return [] unless @gapi.dominant_colors
+          @colors ||= Array(@gapi.dominant_colors.colors).map do |c|
             Color.from_gapi c
           end
         end
@@ -150,7 +150,7 @@ module Gcloud
           # @return [Float] A value in the interval [0, 255].
           #
           def red
-            @gapi["color"]["red"]
+            @gapi.color.red
           end
 
           ##
@@ -159,7 +159,7 @@ module Gcloud
           # @return [Float] A value in the interval [0, 255].
           #
           def green
-            @gapi["color"]["green"]
+            @gapi.color.green
           end
 
           ##
@@ -168,7 +168,7 @@ module Gcloud
           # @return [Float] A value in the interval [0, 255].
           #
           def blue
-            @gapi["color"]["blue"]
+            @gapi.color.blue
           end
 
           ##
@@ -179,7 +179,7 @@ module Gcloud
           # @return [Float] A value in the range [0, 1].
           #
           def alpha
-            @gapi["color"]["alpha"] || 1.0
+            @gapi.color.alpha || 1.0
           end
 
           def rgb
@@ -194,7 +194,7 @@ module Gcloud
           # @return [Float] A value in the range [0, 1].
           #
           def score
-            @gapi["score"]
+            @gapi.score
           end
 
           ##
@@ -203,7 +203,7 @@ module Gcloud
           # @return [Float] A value in the range [0, 1].
           #
           def pixel_fraction
-            @gapi["pixelFraction"]
+            @gapi.pixel_fraction
           end
 
           ##

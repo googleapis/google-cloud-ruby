@@ -20,19 +20,21 @@ describe Gcloud::Vision::Image, :properties, :mock_vision do
   let(:image)    { vision.image filepath }
 
   it "detects properties" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      properties = requests.first
-      properties["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      properties["features"].count.must_equal 1
-      properties["features"].first["type"].must_equal "IMAGE_PROPERTIES"
-      properties["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       properties_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "IMAGE_PROPERTIES", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, properties_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     properties = image.properties
+    mock.verify
 
     properties.colors.count.must_equal 10
 
@@ -53,11 +55,13 @@ describe Gcloud::Vision::Image, :properties, :mock_vision do
     properties.colors[9].pixel_fraction.must_equal 0.00064516132
   end
 
-  def properties_response_json
-    {
-      responses: [{
-        imagePropertiesAnnotation: properties_annotation_response
-      }]
-    }.to_json
+  def properties_response_gapi
+    Google::Apis::VisionV1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Apis::VisionV1::AnnotateImageResponse.new(
+          image_properties_annotation: properties_annotation_response
+        )
+      ]
+    )
   end
 end
