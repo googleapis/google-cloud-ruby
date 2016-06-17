@@ -531,19 +531,20 @@ module Gcloud
   # codes](https://cloud.google.com/datastore/docs/concepts/errors#error_codes)
   # for a list of error conditions.
   #
-  # ## The Datastore Emulator
+  # ## The Cloud Datastore Emulator
   #
-  # As of this release, the Datastore emulator that is part of the gcloud SDK is
-  # no longer compatible with gcloud-ruby. This is because the gcloud SDK's
-  # Datastore emulator does not yet support gRPC as a transport layer.
+  # As of this release, the Cloud Datastore emulator that is part of the gcloud
+  # SDK is no longer compatible with gcloud-ruby. This is because the gcloud
+  # SDK's Cloud Datastore emulator does not yet support gRPC as a transport
+  # layer.
   #
-  # A gRPC-compatible emulator is available until the gcloud SDK Datastore
+  # A gRPC-compatible emulator is available until the gcloud SDK Cloud Datastore
   # emulator supports gRPC. To use it you must [download the gRPC
-  # emulator](https://storage.googleapis.com/gcd/tools/gcd-grpc-1.0.0.zip) and
-  # use the `gcd.sh` script.
+  # emulator](https://storage.googleapis.com/gcd/tools/cloud-datastore-emulator-1.1.1.zip)
+  # and use the `cloud_datastore_emulator` script.
   #
-  # When you run the gRPC emulator you will see a message similar to the
-  # following printed:
+  # When you run the Cloud Datastore emulator you will see a message similar to
+  # the following printed:
   #
   # ```
   # If you are using a library that supports the DATASTORE_EMULATOR_HOST
