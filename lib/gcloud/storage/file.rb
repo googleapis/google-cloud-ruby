@@ -49,7 +49,7 @@ module Gcloud
     class File
       ##
       # @private The Connection object.
-      attr_accessor :connection
+      attr_accessor :service
 
       ##
       # @private The Google API Client object.
@@ -58,40 +58,40 @@ module Gcloud
       ##
       # @private Create an empty File object.
       def initialize
-        @connection = nil
-        @gapi = {}
+        @service = nil
+        @gapi = Google::Apis::StorageV1::Object.new
       end
 
       ##
       # The kind of item this is.
       # For files, this is always storage#object.
       def kind
-        @gapi["kind"]
+        @gapi.kind
       end
 
       ##
       # The ID of the file.
       def id
-        @gapi["id"]
+        @gapi.id
       end
 
       ##
       # The name of this file.
       def name
-        @gapi["name"]
+        @gapi.name
       end
 
       ##
       # The name of the {Bucket} containing this file.
       def bucket
-        @gapi["bucket"]
+        @gapi.bucket
       end
 
       ##
       # The content generation of this file.
       # Used for object versioning.
       def generation
-        @gapi["generation"]
+        @gapi.generation
       end
 
       ##
@@ -100,31 +100,31 @@ module Gcloud
       # A metageneration number is only meaningful in the context of a
       # particular generation of a particular file.
       def metageneration
-        @gapi["metageneration"]
+        @gapi.metageneration
       end
 
       ##
       # A URL that can be used to access the file using the REST API.
       def api_url
-        @gapi["selfLink"]
+        @gapi.self_link
       end
 
       ##
       # A URL that can be used to download the file using the REST API.
       def media_url
-        @gapi["mediaLink"]
+        @gapi.media_link
       end
 
       ##
       # Content-Length of the data in bytes.
       def size
-        @gapi["size"]
+        @gapi.size.to_i if @gapi.size
       end
 
       ##
       # Creation time of the file.
       def created_at
-        @gapi["timeCreated"]
+        @gapi.time_created
       end
 
       ##
@@ -132,13 +132,13 @@ module Gcloud
       # For buckets with versioning enabled, changing an object's
       # metadata does not change this property.
       def updated_at
-        @gapi["updated"]
+        @gapi.updated
       end
 
       ##
       # MD5 hash of the data; encoded using base64.
       def md5
-        @gapi["md5Hash"]
+        @gapi.md5_hash
       end
 
       ##
@@ -146,20 +146,20 @@ module Gcloud
       # [RFC 4960, Appendix B](http://tools.ietf.org/html/rfc4960#appendix-B).
       # Encoded using base64 in big-endian byte order.
       def crc32c
-        @gapi["crc32c"]
+        @gapi.crc32c
       end
 
       ##
       # HTTP 1.1 Entity tag for the file.
       def etag
-        @gapi["etag"]
+        @gapi.etag
       end
 
       ##
       # The [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2)
       # directive for the file data.
       def cache_control
-        @gapi["cacheControl"]
+        @gapi.cache_control
       end
 
       ##
@@ -174,7 +174,7 @@ module Gcloud
       # The [Content-Disposition](https://tools.ietf.org/html/rfc6266) of the
       # file data.
       def content_disposition
-        @gapi["contentDisposition"]
+        @gapi.content_disposition
       end
 
       ##
@@ -188,7 +188,7 @@ module Gcloud
       # The [Content-Encoding
       # ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) of the file data.
       def content_encoding
-        @gapi["contentEncoding"]
+        @gapi.content_encoding
       end
 
       ##
@@ -202,7 +202,7 @@ module Gcloud
       # The [Content-Language](http://tools.ietf.org/html/bcp47) of the file
       # data.
       def content_language
-        @gapi["contentLanguage"]
+        @gapi.content_language
       end
 
       ##
@@ -216,7 +216,7 @@ module Gcloud
       # The [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17) of
       # the file data.
       def content_type
-        @gapi["contentType"]
+        @gapi.content_type
       end
 
       ##
@@ -232,9 +232,9 @@ module Gcloud
       # values that will returned with requests for the file as "x-goog-meta-"
       # response headers.
       def metadata
-        m = @gapi["metadata"]
-        m = m.to_hash if m.respond_to? :to_hash
-        m.freeze
+        m = @gapi.metadata
+        m = m.to_h if m.respond_to? :to_h
+        m.dup.freeze
       end
 
       ##
@@ -252,8 +252,8 @@ module Gcloud
       # You can use this SHA256 hash to uniquely identify the AES-256 encryption
       # key required to decrypt this file.
       def encryption_key_sha256
-        return nil unless @gapi["customerEncryption"]
-        Base64.decode64 @gapi["customerEncryption"]["keySha256"]
+        return nil unless @gapi.customer_encryption
+        Base64.decode64 @gapi.customer_encryption.key_sha256
       end
 
       ##
@@ -370,18 +370,11 @@ module Gcloud
       #
       def download path, verify: :md5, encryption_key: nil,
                    encryption_key_sha256: nil
-        ensure_connection!
-        options = { encryption_key: encryption_key,
-                    encryption_key_sha256: encryption_key_sha256 }
-        resp = connection.download_file bucket, name, options
-        if resp.success?
-          ::File.open path, "wb+" do |f|
-            f.write resp.body
-          end
-          verify_file! ::File.new(path), verify
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.download_file \
+          bucket, name, path,
+          key: encryption_key, key_sha256: encryption_key_sha256
+        verify_file! ::File.new(path), verify
       end
 
       ##
@@ -456,20 +449,15 @@ module Gcloud
       #
       def copy dest_bucket_or_path, dest_path = nil, acl: nil, generation: nil,
                encryption_key: nil, encryption_key_sha256: nil
-        ensure_connection!
+        ensure_service!
         options = { acl: acl, generation: generation,
-                    encryption_key: encryption_key,
-                    encryption_key_sha256: encryption_key_sha256 }
+                    key: encryption_key, key_sha256: encryption_key_sha256 }
         dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
                                                         dest_path, options
 
-        resp = connection.copy_file bucket, name,
-                                    dest_bucket, dest_path, options
-        if resp.success?
-          File.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.copy_file bucket, name,
+                                 dest_bucket, dest_path, options
+        File.from_gapi gapi, service
       end
 
       ##
@@ -489,13 +477,9 @@ module Gcloud
       #   file.delete
       #
       def delete
-        ensure_connection!
-        resp = connection.delete_file bucket, name
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.delete_file bucket, name
+        true
       end
 
       ##
@@ -607,7 +591,7 @@ module Gcloud
       def signed_url method: nil, expires: nil, content_type: nil,
                      content_md5: nil, issuer: nil, client_email: nil,
                      signing_key: nil, private_key: nil
-        ensure_connection!
+        ensure_service!
         options = { method: method, expires: expires,
                     content_type: content_type, content_md5: content_md5,
                     issuer: issuer, client_email: client_email,
@@ -668,13 +652,8 @@ module Gcloud
       ##
       # Reloads the file with current data from the Storage service.
       def reload!
-        ensure_connection!
-        resp = connection.get_file bucket, name
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        @gapi = service.get_file bucket, name
       end
       alias_method :refresh!, :reload!
 
@@ -687,29 +666,24 @@ module Gcloud
 
       ##
       # @private New File from a Google API Client object.
-      def self.from_gapi gapi, conn
+      def self.from_gapi gapi, service
         new.tap do |f|
           f.gapi = gapi
-          f.connection = conn
+          f.service = service
         end
       end
 
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      # Raise an error unless an active service is available.
+      def ensure_service!
+        fail "Must have active connection" unless service
       end
 
       def patch_gapi! options = {}
-        ensure_connection!
-        resp = connection.patch_file bucket, name, options
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        @gapi = service.patch_file bucket, name, options
       end
 
       def fix_copy_args dest_bucket, dest_path, options = {}
@@ -768,12 +742,12 @@ module Gcloud
 
         def determine_signing_key options = {}
           options[:signing_key] || options[:private_key] ||
-            @file.connection.credentials.signing_key
+            @file.service.credentials.signing_key
         end
 
         def determine_issuer options = {}
           options[:issuer] || options[:client_email] ||
-            @file.connection.credentials.issuer
+            @file.service.credentials.issuer
         end
 
         def signed_url options

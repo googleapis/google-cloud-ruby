@@ -43,26 +43,13 @@ module Google::Apis::Core::Hashable
 end
 
 class MockStorage < Minitest::Spec
-  let(:project) { storage.connection.project }
-  let(:credentials) { storage.connection.credentials }
-  let(:storage) { $gcloud_storage_global ||= Gcloud::Storage::Project.new("test", OpenStruct.new) }
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
+  let(:storage) { Gcloud::Storage::Project.new(project, credentials) }
 
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    connection = storage.instance_variable_get "@connection"
-    client = connection.instance_variable_get "@client"
-    client.connection = Faraday.new do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
-  end
-
-  def teardown
-    @connection.verify_stubbed_calls
-  end
-
-  def mock_connection
-    @connection
+  # Register this spec type for when :mock_storage is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_storage
   end
 
   def random_bucket_hash(name=random_bucket_name,
@@ -88,17 +75,15 @@ class MockStorage < Minitest::Spec
   end
 
   def logging_hash(bucket, prefix)
-    {
-      "logBucket" => bucket,
+    { "logBucket"       => bucket,
       "logObjectPrefix" => prefix,
-    }.delete_if { |_, v| v.nil? }  if bucket || prefix
+    }.delete_if { |_, v| v.nil? } if bucket || prefix
   end
 
   def website_hash(website_main, website_404)
-    {
-      "mainPageSuffix" => website_main,
-      "notFoundPage" => website_404,
-    }.delete_if { |_, v| v.nil? }  if website_main || website_404
+    { "mainPageSuffix" => website_main,
+      "notFoundPage"   => website_404,
+    }.delete_if { |_, v| v.nil? } if website_main || website_404
   end
 
   def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890"
@@ -134,27 +119,6 @@ class MockStorage < Minitest::Spec
     [(0...10).map { ("a".."z").to_a[rand(26)] }.join,
      (0...10).map { ("a".."z").to_a[rand(26)] }.join,
      (0...10).map { ("a".."z").to_a[rand(26)] }.join + ".txt"].join "/"
-  end
-
-  def invalid_bucket_name_error_json bucket_name
-    {
-      "error" => {
-        "code" => 400,
-        "message" => "Invalid bucket name: '#{bucket_name}'.",
-        "errors" => [
-          {
-            "message" => "Invalid bucket name: '#{bucket_name}'.",
-            "domain" => "global",
-            "reason" => "invalidParameter"
-          }
-        ]
-      }
-    }.to_json
-  end
-
-  # Register this spec type for when :storage is used.
-  register_spec_type(self) do |desc, *addl|
-    addl.include? :mock_storage
   end
 end
 
@@ -609,7 +573,7 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  # Register this spec type for when :storage is used.
+  # Register this spec type for when :bigquery is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_bigquery
   end
@@ -697,7 +661,7 @@ class MockDns < Minitest::Spec
     Google::Apis::DnsV1::ListResourceRecordSetsResponse.new rrsets: [record.to_gapi]
   end
 
-  # Register this spec type for when :storage is used.
+  # Register this spec type for when :dns is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_dns
   end
@@ -730,7 +694,7 @@ class MockLogging < Minitest::Spec
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:logging) { $gcloud_logging_global ||= Gcloud::Logging::Project.new(project, credentials) }
 
-  # Register this spec type for when :storage is used.
+  # Register this spec type for when :mock_logging is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_logging
   end
@@ -845,7 +809,7 @@ class MockTranslate < Minitest::Spec
   let(:key) { "test-api-key" }
   let(:translate) { $gcloud_translate_global ||= Gcloud::Translate::Api.new(key) }
 
-  # Register this spec type for when :storage is used.
+  # Register this spec type for when :mock_translate is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_translate
   end
@@ -857,7 +821,7 @@ class MockVision < Minitest::Spec
   let(:credentials) { vision.service.credentials }
   let(:vision) { $gcloud_vision_global ||= Gcloud::Vision::Project.new("test", OpenStruct.new) }
 
-  # Register this spec type for when :vision is used.
+  # Register this spec type for when :mock_vision is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_vision
   end

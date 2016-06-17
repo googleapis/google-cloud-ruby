@@ -66,6 +66,22 @@ describe "Storage", :storage do
   end
 
   describe "write, read, and remove files" do
+    it "should upload and download a file without specifying path" do
+      original = File.new files[:logo][:path]
+      uploaded = bucket.create_file original
+      uploaded.name.must_equal original.path
+
+      Tempfile.open "gcloud-ruby" do |tmpfile|
+        downloaded = uploaded.download tmpfile
+
+        downloaded.size.must_equal original.size
+        downloaded.size.must_equal uploaded.size
+        downloaded.size.must_equal tmpfile.size # Same file
+      end
+
+      uploaded.delete
+    end
+
     it "should upload and download a file" do
       original = File.new files[:logo][:path]
       uploaded = bucket.create_file original, "CloudLogo"
@@ -81,47 +97,28 @@ describe "Storage", :storage do
       uploaded.delete
     end
 
-    it "should upload resumable and download a file" do
+    it "should upload and download a larger file" do
       original = File.new files[:big][:path]
-      Gcloud::Upload.stub :resumable_threshold, original.size-1 do
-        uploaded = bucket.create_file original, "BigLogo"
-        Tempfile.open "gcloud-ruby" do |tmpfile|
-          downloaded = uploaded.download tmpfile
+      uploaded = bucket.create_file original, "BigLogo"
+      Tempfile.open "gcloud-ruby" do |tmpfile|
+        downloaded = uploaded.download tmpfile
 
-          downloaded.size.must_equal original.size
-          downloaded.size.must_equal uploaded.size
-          downloaded.size.must_equal tmpfile.size # Same file
-        end
-        uploaded.delete
+        downloaded.size.must_equal original.size
+        downloaded.size.must_equal uploaded.size
+        downloaded.size.must_equal tmpfile.size # Same file
       end
-    end
-
-    it "should upload resumable with chunk_size" do
-      original = File.new files[:big][:path]
-      Gcloud::Upload.stub :resumable_threshold, original.size-1 do
-        uploaded = bucket.create_file original, "BigLogo", chunk_size: 1024*1024*2 # 2MB
-        Tempfile.open "gcloud-ruby" do |tmpfile|
-          downloaded = uploaded.download tmpfile
-
-          downloaded.size.must_equal original.size
-          downloaded.size.must_equal uploaded.size
-          downloaded.size.must_equal tmpfile.size # Same file
-        end
-        uploaded.delete
-      end
+      uploaded.delete
     end
 
     it "should write metadata" do
-      skip
-
       meta = { content_type: "x-image/x-png",
-               title: "Logo Image" }
+               metadata: { title: "Logo Image" } }
       uploaded = bucket.create_file files[:logo][:path],
                                     "CloudLogo",
                                     meta
 
       uploaded.content_type.must_equal meta[:content_type]
-      uploaded.meta["title"].must_equal meta[:title]
+      uploaded.metadata["title"].must_equal meta[:metadata][:title]
     end
 
     it "should copy an existing file" do
@@ -155,14 +152,8 @@ describe "Storage", :storage do
     end
 
     it "should paginate the list" do
-      skip
-
-      limit = filenames.size - 1
-      files = bucket.files limit: limit
-      files.size.must_equal limit
-
-      files = bucket.files limit: limit, offset: limit
-      files.size.must_equal 1
+      files = bucket.files.all.to_a
+      files.size.must_be :>=, filenames.size
     end
   end
 

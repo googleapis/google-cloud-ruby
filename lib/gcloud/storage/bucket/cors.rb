@@ -22,8 +22,7 @@ module Gcloud
       # # Bucket Cors
       #
       # A special-case Array for managing the website CORS rules for a bucket.
-      # Accessed via a block argument to {Project#create_bucket}, {Bucket#cors},
-      # or {Bucket#update}.
+      # Accessed via {Bucket#cors}.
       #
       # @see https://cloud.google.com/storage/docs/cross-origin Cross-Origin
       #   Resource Sharing (CORS)
@@ -35,11 +34,12 @@ module Gcloud
       #   storage = gcloud.storage
       #   bucket = storage.bucket "my-todo-app"
       #
+      #   bucket = storage.bucket "my-bucket"
       #   bucket.cors do |c|
       #     # Remove the last CORS rule from the array
       #     c.pop
       #     # Remove all existing rules with the https protocol
-      #     c.delete_if { |r| r["origin"].include? "http://example.com" }
+      #     c.delete_if { |r| r.origin.include? "http://example.com" }
       #     c.add_rule ["http://example.org", "https://example.org"],
       #                ["GET", "POST", "DELETE"],
       #                response_headers: ["X-My-Custom-Header"],
@@ -50,14 +50,14 @@ module Gcloud
         ##
         # @private
         # Initialize a new CORS rules builder with existing CORS rules, if any.
-        def initialize cors = []
-          super cors.dup
-          @original = cors.dup
+        def initialize rules = []
+          super rules
+          @original = rules.dup
         end
 
         # @private
         def changed?
-          @original != self
+          @original.to_json != to_json
         end
 
         ##
@@ -98,10 +98,76 @@ module Gcloud
         #   end
         #
         def add_rule origin, methods, headers: nil, max_age: nil
-          rule = { "origin" => Array(origin), "method" => Array(methods) }
-          rule["responseHeader"] = Array(headers) || []
-          rule["maxAgeSeconds"]  = max_age || 1800
-          push rule
+          push Rule.new(origin, methods, headers: headers, max_age: max_age)
+        end
+
+        def to_gapi
+          map(&:to_gapi)
+        end
+
+        def self.from_gapi gapi_list
+          rules = Array(gapi_list).map { |gapi| Rule.from_gapi gapi }
+          new rules
+        end
+
+        def freeze
+          each(&:freeze)
+          super
+        end
+
+        class Rule
+          def initialize origin, methods, headers: nil, max_age: nil
+            @gapi = Google::Apis::StorageV1::Bucket::CorsConfiguration.new(
+              origin: Array(origin), http_method: Array(methods),
+              response_header: Array(headers), max_age_seconds: (max_age||1800)
+            )
+          end
+
+          def origin
+            @gapi.origin
+          end
+
+          def origin= new_origin
+            @gapi.origin = Array(new_origin)
+          end
+
+          def methods
+            @gapi.http_method
+          end
+
+          def methods= new_methods
+            @gapi.http_method = Array(new_methods)
+          end
+
+          def headers
+            @gapi.response_header
+          end
+
+          def headers= new_headers
+            @gapi.response_header = Array(new_headers)
+          end
+
+          def max_age
+            @gapi.max_age_seconds
+          end
+
+          def max_age= new_max_age
+            @gapi.max_age_seconds = (new_max_age || 1800)
+          end
+
+          def to_gapi
+            @gapi
+          end
+
+          def self.from_gapi gapi
+            new gapi.origin, gapi.http_method, \
+                headers: gapi.response_header, max_age: gapi.max_age_seconds
+          end
+
+          def freeze
+            @gapi.freeze
+            super
+          end
         end
       end
     end

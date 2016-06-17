@@ -18,10 +18,8 @@ describe Gcloud::Storage::File::Verifier, :mock_storage do
   let(:file_contents) { "The quick brown fox jumps over the lazy dog." }
   let(:md5_digest) { "1B2M2Y8AsgTpgAmY7PhCfg==" }
   let(:crc32c_digest) { "AAAAAA==" }
-  let :file do
-    Gcloud::Storage::File.from_gapi corrected_file_hash,
-                                    OpenStruct.new
-  end
+  let(:file_gapi) { Google::Apis::StorageV1::Object.from_json corrected_file_hash.to_json }
+  let(:file) { Gcloud::Storage::File.from_gapi file_gapi, OpenStruct.new }
 
   it "verifies md5 digest" do
     Tempfile.open "gcloud-ruby" do |tmpfile|

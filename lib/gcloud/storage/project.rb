@@ -15,7 +15,7 @@
 
 require "gcloud/gce"
 require "gcloud/storage/errors"
-require "gcloud/storage/connection"
+require "gcloud/storage/service"
 require "gcloud/storage/credentials"
 require "gcloud/storage/bucket"
 require "gcloud/storage/bucket/cors"
@@ -48,8 +48,8 @@ module Gcloud
     #
     class Project
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The Service object.
+      attr_accessor :service
 
       ##
       # @private Creates a new Project instance.
@@ -58,7 +58,7 @@ module Gcloud
       def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
-        @connection = Connection.new project, credentials
+        @service = Service.new project, credentials
       end
 
       ##
@@ -74,7 +74,7 @@ module Gcloud
       #   storage.project #=> "my-todo-project"
       #
       def project
-        connection.project
+        service.project
       end
 
       ##
@@ -133,12 +133,8 @@ module Gcloud
       #
       def buckets prefix: nil, token: nil, max: nil
         options = { prefix: prefix, token: token, max: max }
-        resp = connection.list_buckets options
-        if resp.success?
-          Bucket::List.from_response resp, connection, prefix, max
-        else
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.list_buckets options
+        Bucket::List.from_gapi gapi, service, prefix, max
       end
       alias_method :find_buckets, :buckets
 
@@ -160,13 +156,11 @@ module Gcloud
       #   puts bucket.name
       #
       def bucket bucket_name
-        resp = connection.get_bucket bucket_name
-        if resp.success?
-          Bucket.from_gapi resp.data, connection
-        else
-          return nil if resp.data["error"]["code"] == 404
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.get_bucket bucket_name
+        Bucket.from_gapi gapi, service
+      rescue Google::Apis::ClientError => e
+        return nil if e.status_code == 404
+        raise e
       end
       alias_method :find_bucket, :bucket
 
@@ -221,10 +215,6 @@ module Gcloud
       #     and project team members get access according to their roles.
       #   * `public`, `public_read`, `publicRead` - File owner gets OWNER
       #     access, and allUsers get READER access.
-      # @param [String] cors The CORS rules for the bucket. Accepts an array of
-      #   hashes containing the attributes specified for the [resource
-      #   description of
-      #   cors](https://cloud.google.com/storage/docs/json_api/v1/buckets#cors).
       # @param [String] location The location of the bucket. Object data for
       #   objects in the bucket resides in physical storage within this region.
       #   Possible values include `ASIA`, `EU`, and `US`. (See the [developer's
@@ -260,8 +250,8 @@ module Gcloud
       #   does not exist. For more information, see [How to Host a Static
       #   Website
       #   ](https://cloud.google.com/storage/docs/website-configuration#step4).
-      # @yield [cors] a block for setting CORS rules
-      # @yieldparam [Bucket::Cors] cors the object accepting CORS rules
+      # @yield [bucket] a block for configuring the bucket before it is created
+      # @yieldparam [Bucket] cors the bucket object to be configured
       #
       # @return [Gcloud::Storage::Bucket]
       #
@@ -273,38 +263,41 @@ module Gcloud
       #
       #   bucket = storage.create_bucket "my-bucket"
       #
-      # @example Add CORS rules in a block:
+      # @example Configure the bucket in a block:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   storage = gcloud.storage
       #
-      #   options = {
-      #     website_main: "index.html"
-      #     website_404: "not_found.html"
-      #   }
-      #   bucket = storage.create_bucket "my-bucket", options do |c|
-      #     c.add_rule ["http://example.org", "https://example.org"],
-      #                "*",
-      #                response_headers: ["X-My-Custom-Header"],
-      #                max_age: 300
+      #   bucket = storage.create_bucket "my-bucket" do |b|
+      #     b.website_main = "index.html"
+      #     b.website_404 = "not_found.html"
+      #     b.cors.add_rule ["http://example.org", "https://example.org"],
+      #                      "*",
+      #                      response_headers: ["X-My-Custom-Header"],
+      #                      max_age: 300
       #   end
       #
-      def create_bucket bucket_name, acl: nil, default_acl: nil, cors: nil,
-                        location: nil, logging_bucket: nil, logging_prefix: nil,
-                        storage_class: nil, versioning: nil, website_main: nil,
-                        website_404: nil
-        opts = { acl: acl_rule(acl), default_acl: acl_rule(default_acl),
-                 cors: cors, location: location, logging_bucket: logging_bucket,
-                 logging_prefix: logging_prefix, storage_class: storage_class,
-                 versioning: versioning, website_main: website_main,
-                 website_404: website_404 }
-        if block_given?
-          cors_builder = Bucket::Cors.new
-          yield cors_builder
-          opts[:cors] = cors_builder if cors_builder.changed?
+      def create_bucket bucket_name, acl: nil, default_acl: nil,
+                        location: nil, storage_class: nil, logging_bucket: nil,
+                        logging_prefix: nil, website_main: nil,
+                        website_404: nil, versioning: nil
+        opts = { acl: acl_rule(acl), default_acl: acl_rule(default_acl) }
+        new_bucket = Google::Apis::StorageV1::Bucket.new({
+          name: bucket_name,
+          location: location,
+          storage_class: storage_class_for(storage_class)
+        }.delete_if { |_, v| v.nil? })
+        updater = Bucket::Updater.new(new_bucket).tap do |b|
+          b.logging_bucket = logging_bucket unless logging_bucket.nil?
+          b.logging_prefix = logging_prefix unless logging_prefix.nil?
+          b.website_main = website_main unless website_main.nil?
+          b.website_404 = website_404 unless website_404.nil?
+          b.versioning = versioning unless versioning.nil?
         end
-        insert_bucket bucket_name, opts
+        yield updater if block_given?
+        gapi = service.insert_bucket updater.to_gapi, opts
+        Bucket.from_gapi gapi, service
       end
 
       protected
@@ -313,13 +306,12 @@ module Gcloud
         Bucket::Acl.predefined_rule_for option_name
       end
 
-      def insert_bucket bucket_name, options
-        resp = connection.insert_bucket bucket_name, options
-        if resp.success?
-          Bucket.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+      def storage_class_for str
+        { "durable_reduced_availability" => "DURABLE_REDUCED_AVAILABILITY",
+          "dra" => "DURABLE_REDUCED_AVAILABILITY",
+          "durable" => "DURABLE_REDUCED_AVAILABILITY",
+          "nearline" => "NEARLINE",
+          "standard" => "STANDARD" }[str.to_s.downcase]
       end
     end
   end

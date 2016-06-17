@@ -17,15 +17,13 @@ require "json"
 require "uri"
 
 describe Gcloud::Storage::File, :signed_url, :mock_storage do
-  # Create a bucket object with the project's mocked connection object
   let(:bucket_name) { "bucket" }
-  let(:bucket) { Gcloud::Storage::Bucket.from_gapi random_bucket_hash(bucket_name),
-                                                   storage.connection }
+  let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(bucket_name).to_json }
+  let(:bucket) { Gcloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
 
-  # Create a file object with the project's mocked connection object
   let(:file_name) { "file.ext" }
-  let(:file) { Gcloud::Storage::File.from_gapi random_file_hash(bucket_name, file_name),
-                                               storage.connection }
+  let(:file_gapi) { Google::Apis::StorageV1::Object.from_json random_file_hash(bucket.name, file_name).to_json }
+  let(:file) { Gcloud::Storage::File.from_gapi file_gapi, storage.service }
 
   it "uses the credentials' issuer and signing_key to generate signed_url" do
     signing_key_mock = Minitest::Mock.new
