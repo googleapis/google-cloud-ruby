@@ -44,8 +44,8 @@ module Gcloud
     #
     class Zone
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The Service object.
+      attr_accessor :service
 
       ##
       # @private The Google API Client object.
@@ -54,7 +54,7 @@ module Gcloud
       ##
       # @private Create an empty Zone object.
       def initialize
-        @connection = nil
+        @service = nil
         @gapi = {}
       end
 
@@ -62,7 +62,7 @@ module Gcloud
       # Unique identifier for the resource; defined by the server.
       #
       def id
-        @gapi["id"]
+        @gapi.id
       end
 
       ##
@@ -72,14 +72,14 @@ module Gcloud
       # dashes.
       #
       def name
-        @gapi["name"]
+        @gapi.name
       end
 
       ##
       # The DNS name of this managed zone, for instance "example.com.".
       #
       def dns
-        @gapi["dnsName"]
+        @gapi.dns_name
       end
 
       ##
@@ -87,7 +87,7 @@ module Gcloud
       # the user's convenience. Has no effect on the managed zone's function.
       #
       def description
-        @gapi["description"]
+        @gapi.description
       end
 
       ##
@@ -95,7 +95,7 @@ module Gcloud
       # server.
       #
       def name_servers
-        Array(@gapi["nameServers"])
+        Array(@gapi.name_servers)
       end
 
       ##
@@ -104,14 +104,14 @@ module Gcloud
       # ManagedZones. Most users will leave this field unset.
       #
       def name_server_set
-        @gapi["nameServerSet"]
+        @gapi.name_server_set
       end
 
       ##
       # The time that this resource was created on the server.
       #
       def created_at
-        Time.parse @gapi["creationTime"]
+        Time.parse @gapi.creation_time
       rescue
         nil
       end
@@ -144,13 +144,9 @@ module Gcloud
       def delete force: false
         clear! if force
 
-        ensure_connection!
-        resp = connection.delete_zone id
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.delete_zone id
+        true
       end
 
       ##
@@ -191,13 +187,12 @@ module Gcloud
       #   end
       #
       def change change_id
-        ensure_connection!
-        resp = connection.get_change id, change_id
-        if resp.success?
-          Change.from_gapi resp.data, self
-        else
-          nil
-        end
+        ensure_service!
+        gapi = service.get_change id, change_id
+        Change.from_gapi gapi, self
+      rescue Google::Apis::ClientError => e
+        raise e unless e.status_code == 404 # TODO: convert e to Gcloud::Error
+        nil
       end
       alias_method :find_change, :change
       alias_method :get_change, :change
@@ -248,18 +243,14 @@ module Gcloud
       #   end
       #
       def changes token: nil, max: nil, order: nil
-        ensure_connection!
+        ensure_service!
         # Fix the sort options
         order = adjust_change_sort_order order
         sort  = "changeSequence" if order
         # Continue with the API call
-        resp = connection.list_changes id, token: token, max: max,
-                                           order: order, sort: sort
-        if resp.success?
-          Change::List.from_response resp, self, max, order
-        else
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.list_changes id, token: token, max: max,
+                                        order: order, sort: sort
+        Change::List.from_gapi gapi, self, max, order
       end
       alias_method :find_changes, :changes
 
@@ -313,16 +304,12 @@ module Gcloud
       #   end
       #
       def records name = nil, type = nil, token: nil, max: nil
-        ensure_connection!
+        ensure_service!
 
         name = fqdn(name) if name
 
-        resp = connection.list_records id, name, type, token: token, max: max
-        if resp.success?
-          Record::List.from_response resp, self, name, type, max
-        else
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.list_records id, name, type, token: token, max: max
+        Record::List.from_gapi gapi, self, name, type, max
       end
       alias_method :find_records, :records
 
@@ -707,7 +694,7 @@ module Gcloud
       #   zone.fqdn "mail.example.com." #=> "mail.example.com."
       #
       def fqdn domain_name
-        Connection.fqdn domain_name, dns
+        Service.fqdn domain_name, dns
       end
 
       ##
@@ -715,7 +702,7 @@ module Gcloud
       def self.from_gapi gapi, conn
         new.tap do |f|
           f.gapi = gapi
-          f.connection = conn
+          f.service = conn
         end
       end
 
@@ -723,20 +710,15 @@ module Gcloud
 
       ##
       # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      def ensure_service!
+        fail "Must have active connection" unless service
       end
 
       def create_change additions, deletions
-        ensure_connection!
-        resp = connection.create_change id,
-                                        additions.map(&:to_gapi),
-                                        deletions.map(&:to_gapi)
-        if resp.success?
-          Change.from_gapi resp.data, self
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.create_change id, additions.map(&:to_gapi),
+                                     deletions.map(&:to_gapi)
+        Change.from_gapi gapi, self
       end
 
       def increment_soa to_add, to_remove, soa_serial

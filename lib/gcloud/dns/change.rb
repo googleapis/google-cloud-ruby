@@ -57,28 +57,28 @@ module Gcloud
       # Unique identifier for the resource; defined by the server.
       #
       def id
-        @gapi["id"]
+        @gapi.id
       end
 
       ##
       # The records added in this change request.
       #
       def additions
-        Array(@gapi["additions"]).map { |gapi| Record.from_gapi gapi }
+        Array(@gapi.additions).map { |gapi| Record.from_gapi gapi }
       end
 
       ##
       # The records removed in this change request.
       #
       def deletions
-        Array(@gapi["deletions"]).map { |gapi| Record.from_gapi gapi }
+        Array(@gapi.deletions).map { |gapi| Record.from_gapi gapi }
       end
 
       ##
       # Status of the operation. Values are `"done"` and `"pending"`.
       #
       def status
-        @gapi["status"]
+        @gapi.status
       end
 
       ##
@@ -99,7 +99,7 @@ module Gcloud
       # The time that this operation was started by the server.
       #
       def started_at
-        Time.parse @gapi["startTime"]
+        Time.parse @gapi.start_time
       rescue
         nil
       end
@@ -107,13 +107,8 @@ module Gcloud
       ##
       # Reloads the change with updated status from the DNS service.
       def reload!
-        ensure_connection!
-        resp = zone.connection.get_change @zone.id, id
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        @gapi = zone.service.get_change @zone.id, id
       end
       alias_method :refresh!, :reload!
 
@@ -154,9 +149,9 @@ module Gcloud
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless zone && zone.connection
+      # Raise an error unless an active service is available.
+      def ensure_service!
+        fail "Must have active connection" unless zone && zone.service
       end
     end
   end

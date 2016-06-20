@@ -149,11 +149,11 @@ module Gcloud
 
         ##
         # @private New Records::List from a response object.
-        def self.from_response resp, zone, name = nil, type = nil, max = nil
-          records = new(Array(resp.data["rrsets"]).map do |gapi_object|
-            Record.from_gapi gapi_object
+        def self.from_gapi gapi, zone, name = nil, type = nil, max = nil
+          records = new(Array(gapi.rrsets).map do |g|
+            Record.from_gapi g
           end)
-          records.instance_variable_set "@token", resp.data["nextPageToken"]
+          records.instance_variable_set "@token", gapi.next_page_token
           records.instance_variable_set "@zone",  zone
           records.instance_variable_set "@name",  name
           records.instance_variable_set "@type",  type

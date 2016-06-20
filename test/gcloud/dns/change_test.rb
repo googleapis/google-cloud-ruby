@@ -17,9 +17,9 @@ require "helper"
 describe Gcloud::Dns::Change, :mock_dns do
   let(:zone_name) { "example-zone" }
   let(:zone_dns) { "example.com." }
-  let(:zone_hash) { random_zone_hash zone_name, zone_dns }
-  let(:zone) { Gcloud::Dns::Zone.from_gapi zone_hash, dns.connection }
-  let(:change) { Gcloud::Dns::Change.from_gapi done_change_hash, zone }
+  let(:zone_gapi) { random_zone_gapi zone_name, zone_dns }
+  let(:zone) { Gcloud::Dns::Zone.from_gapi zone_gapi, dns.service }
+  let(:change) { Gcloud::Dns::Change.from_gapi done_change_gapi, zone }
 
   it "knows its attributes" do
     change.id.must_equal "dns-change-1234567890"
@@ -36,7 +36,7 @@ describe Gcloud::Dns::Change, :mock_dns do
   end
 
   it "can represent a pending change" do
-    pending_change = Gcloud::Dns::Change.from_gapi pending_change_hash, zone
+    pending_change = Gcloud::Dns::Change.from_gapi pending_change_gapi, zone
 
     pending_change.id.must_equal "dns-change-1234567890"
     pending_change.additions.count.must_equal 1
@@ -52,69 +52,55 @@ describe Gcloud::Dns::Change, :mock_dns do
   end
 
   it "can reload itself" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       pending_change_json(change.id)]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       done_change_json(change.id)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_change, pending_change_gapi(change.id), [project, zone.id, change.id]
+    mock.expect :get_change, done_change_gapi(change.id), [project, zone.id, change.id]
 
+    dns.service.mocked_service = mock
     change.must_be :done?
     change.reload!
     change.must_be :pending?
     change.reload!
+    mock.verify
+
     change.must_be :done?
   end
 
   it "can reload itself with refresh alias" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       pending_change_json(change.id)]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       done_change_json(change.id)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_change, pending_change_gapi(change.id), [project, zone.id, change.id]
+    mock.expect :get_change, done_change_gapi(change.id), [project, zone.id, change.id]
 
+    dns.service.mocked_service = mock
     change.must_be :done?
     change.refresh!
     change.must_be :pending?
     change.refresh!
+    mock.verify
+
     change.must_be :done?
   end
 
   it "can wait until done" do
-    pending_change = Gcloud::Dns::Change.from_gapi pending_change_hash, zone
+    pending_change = Gcloud::Dns::Change.from_gapi pending_change_gapi, zone
+    mock = Minitest::Mock.new
+    mock.expect :get_change, pending_change_gapi(pending_change.id), [project, zone.id, change.id]
+    mock.expect :get_change, pending_change_gapi(pending_change.id), [project, zone.id, change.id]
+    mock.expect :get_change, pending_change_gapi(pending_change.id), [project, zone.id, change.id]
+    mock.expect :get_change, pending_change_gapi(pending_change.id), [project, zone.id, change.id]
+    mock.expect :get_change, pending_change_gapi(pending_change.id), [project, zone.id, change.id]
+    mock.expect :get_change, done_change_gapi(pending_change.id), [project, zone.id, change.id]
 
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       pending_change_json(pending_change.id)]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       pending_change_json(pending_change.id)]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       pending_change_json(pending_change.id)]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       pending_change_json(pending_change.id)]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{change.id}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       done_change_json(pending_change.id)]
-    end
-
+    dns.service.mocked_service = mock
     # mock out the sleep method so the test doesn't actually block
     def pending_change.sleep *args
     end
 
+    dns.service.mocked_service = mock
     pending_change.must_be :pending?
     pending_change.wait_until_done!
+    mock.verify
+
     pending_change.must_be :done?
   end
 end

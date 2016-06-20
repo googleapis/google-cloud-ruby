@@ -18,8 +18,8 @@ describe Gcloud::Dns::Zone, :mock_dns do
   # Create a zone object with the project's mocked connection object
   let(:zone_name) { "example-zone" }
   let(:zone_dns) { "example.com." }
-  let(:zone_hash) { random_zone_hash zone_name, zone_dns }
-  let(:zone) { Gcloud::Dns::Zone.from_gapi zone_hash, dns.connection }
+  let(:zone_gapi) { random_zone_gapi zone_name, zone_dns }
+  let(:zone) { Gcloud::Dns::Zone.from_gapi zone_gapi, dns.service }
   let(:record_name) { "example.com." }
   let(:record_type) { "A" }
   let(:record_ttl)  { 86400 }
@@ -41,113 +41,102 @@ describe Gcloud::Dns::Zone, :mock_dns do
   end
 
   it "can delete itself" do
-    mock_connection.delete "/dns/v1/projects/#{project}/managedZones/#{zone.id}" do |env|
-      [200, {"Content-Type" => "application/json"}, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :delete_managed_zone, nil, [project, zone.id]
 
+    dns.service.mocked_service = mock
     zone.delete
+    mock.verify
   end
 
   it "can forcefuly delete itself" do
+    mock = Minitest::Mock.new
     # get all records
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(5)]
-    end
+    existing_records = list_records_gapi(5)
+    mock.expect :list_resource_record_sets, existing_records, [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
 
     # delete non-essential records and update SOA
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 0
-      json["deletions"].count.must_equal 5
-      [200, {"Content-Type" => "application/json"},
-       done_change_json]
-    end
+    mock.expect :list_resource_record_sets, existing_records, [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: [],
+      deletions: existing_records.rrsets
+    )
+    mock.expect :create_change, done_change_gapi, [project, zone.id, new_change]
 
     # delete zone call
-    mock_connection.delete "/dns/v1/projects/#{project}/managedZones/#{zone.id}" do |env|
-      [200, {"Content-Type" => "application/json"}, ""]
-    end
+    mock.expect :delete_managed_zone, nil, [project, zone.id]
 
+    dns.service.mocked_service = mock
     zone.delete force: true
+    mock.verify
   end
 
   it "can clear all non-essential records" do
+    mock = Minitest::Mock.new
     # get all records
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(5)]
-    end
+    existing_records = list_records_gapi(5)
+    mock.expect :list_resource_record_sets, existing_records, [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
 
     # delete non-essential records and update SOA
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 0
-      json["deletions"].count.must_equal 5
-      [200, {"Content-Type" => "application/json"},
-       done_change_json]
-    end
+    mock.expect :list_resource_record_sets, existing_records, [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: [],
+      deletions: existing_records.rrsets
+    )
+    mock.expect :create_change, done_change_gapi, [project, zone.id, new_change]
 
+    dns.service.mocked_service = mock
     zone.clear!
+    mock.verify
   end
 
   it "finds a change" do
     found_change = "dns-change-1234567890"
+    mock = Minitest::Mock.new
+    mock.expect :get_change, find_change_gapi(found_change), [project, zone.id, found_change]
 
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{found_change}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       find_change_json(found_change)]
-    end
-
+    dns.service.mocked_service = mock
     change = zone.change found_change
+    mock.verify
+
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal found_change
   end
 
   it "returns nil when it cannot find a change" do
-    unfound_change = "dns-change-0987654321"
-
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes/#{unfound_change}" do |env|
-      [404, {"Content-Type" => "application/json"},
-       ""]
+    stub = Object.new
+    def stub.get_change *args
+      raise Google::Apis::ClientError.new nil, status_code: 404
     end
 
-    change = zone.change unfound_change
+    dns.service.mocked_service = stub
+    change = zone.change "dns-change-0987654321"
     change.must_be :nil?
-  end
-
-  def find_change_json change_id
-    hash = random_change_hash
-    hash["id"] = change_id
-    hash.to_json
   end
 
   it "lists changes" do
     num_changes = 3
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.wont_include "maxResults"
-      env.params.wont_include "sortBy"
-      env.params.wont_include "sortOrder"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(num_changes)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(num_changes), [project, zone.id, {max_results: nil, page_token: nil, sort_by: nil, sort_order: nil}]
 
+    dns.service.mocked_service = mock
     changes = zone.changes
+    mock.verify
+
     changes.size.must_equal num_changes
     changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
   end
 
   it "lists changes with max set" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "sortBy"
-      env.params.wont_include "sortOrder"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: 3, page_token: nil, sort_by: nil, sort_order: nil}]
 
+    dns.service.mocked_service = mock
     changes = zone.changes max: 3
+    mock.verify
+
     changes.count.must_equal 3
     changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
     changes.token.wont_be :nil?
@@ -155,17 +144,13 @@ describe Gcloud::Dns::Zone, :mock_dns do
   end
 
   it "lists changes with order set to asc" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "sortBy"
-      env.params["sortBy"].must_equal "changeSequence"
-      env.params.must_include "sortOrder"
-      env.params["sortOrder"].must_equal "ascending"
-      env.params.wont_include "maxResults"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "ascending"}]
 
+    dns.service.mocked_service = mock
     changes = zone.changes order: :asc
+    mock.verify
+
     changes.count.must_equal 3
     changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
     changes.token.wont_be :nil?
@@ -173,17 +158,13 @@ describe Gcloud::Dns::Zone, :mock_dns do
   end
 
   it "lists changes with order set to desc" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "sortBy"
-      env.params["sortBy"].must_equal "changeSequence"
-      env.params.must_include "sortOrder"
-      env.params["sortOrder"].must_equal "descending"
-      env.params.wont_include "maxResults"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "descending"}]
 
+    dns.service.mocked_service = mock
     changes = zone.changes order: :desc
+    mock.verify
+
     changes.count.must_equal 3
     changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
     changes.token.wont_be :nil?
@@ -191,17 +172,11 @@ describe Gcloud::Dns::Zone, :mock_dns do
   end
 
   it "paginates changes" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
+
+    dns.service.mocked_service = mock
 
     first_changes = zone.changes
     first_changes.count.must_equal 3
@@ -210,23 +185,19 @@ describe Gcloud::Dns::Zone, :mock_dns do
     first_changes.token.must_equal "next_page_token"
 
     second_changes = zone.changes token: first_changes.token
+    mock.verify
+
     second_changes.count.must_equal 2
     second_changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
     second_changes.token.must_be :nil?
   end
 
   it "paginates changes with next? and next" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
+
+    dns.service.mocked_service = mock
 
     first_changes = zone.changes
     first_changes.count.must_equal 3
@@ -234,31 +205,19 @@ describe Gcloud::Dns::Zone, :mock_dns do
     first_changes.next?.must_equal true
 
     second_changes = first_changes.next
+    mock.verify
+
     second_changes.count.must_equal 2
     second_changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
     second_changes.next?.must_equal false
   end
 
   it "paginates changes with next? and next and max set" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "sortBy"
-      env.params.wont_include "sortOrder"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "sortBy"
-      env.params.wont_include "sortOrder"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: 3, page_token: nil, sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: 3, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
+
+    dns.service.mocked_service = mock
 
     first_changes = zone.changes max: 3
     first_changes.count.must_equal 3
@@ -266,33 +225,19 @@ describe Gcloud::Dns::Zone, :mock_dns do
     first_changes.next?.must_equal true
 
     second_changes = first_changes.next
+    mock.verify
+
     second_changes.count.must_equal 2
     second_changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
     second_changes.next?.must_equal false
   end
 
   it "paginates changes with next? and next and order set to asc" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "sortBy"
-      env.params["sortBy"].must_equal "changeSequence"
-      env.params.must_include "sortOrder"
-      env.params["sortOrder"].must_equal "ascending"
-      env.params.wont_include "maxResults"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "sortBy"
-      env.params["sortBy"].must_equal "changeSequence"
-      env.params.must_include "sortOrder"
-      env.params["sortOrder"].must_equal "ascending"
-      env.params.wont_include "maxResults"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "ascending"}]
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: "changeSequence", sort_order: "ascending"}]
+
+    dns.service.mocked_service = mock
 
     first_changes = zone.changes order: :asc
     first_changes.count.must_equal 3
@@ -300,33 +245,19 @@ describe Gcloud::Dns::Zone, :mock_dns do
     first_changes.next?.must_equal true
 
     second_changes = first_changes.next
+    mock.verify
+
     second_changes.count.must_equal 2
     second_changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
     second_changes.next?.must_equal false
   end
 
   it "paginates changes with next? and next and order set to desc" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "sortBy"
-      env.params["sortBy"].must_equal "changeSequence"
-      env.params.must_include "sortOrder"
-      env.params["sortOrder"].must_equal "descending"
-      env.params.wont_include "maxResults"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "sortBy"
-      env.params["sortBy"].must_equal "changeSequence"
-      env.params.must_include "sortOrder"
-      env.params["sortOrder"].must_equal "descending"
-      env.params.wont_include "maxResults"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "descending"}]
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: "changeSequence", sort_order: "descending"}]
+
+    dns.service.mocked_service = mock
 
     first_changes = zone.changes order: :desc
     first_changes.count.must_equal 3
@@ -334,212 +265,153 @@ describe Gcloud::Dns::Zone, :mock_dns do
     first_changes.next?.must_equal true
 
     second_changes = first_changes.next
+    mock.verify
+
     second_changes.count.must_equal 2
     second_changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
     second_changes.next?.must_equal false
   end
 
   it "paginates changes with all" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
+
+    dns.service.mocked_service = mock
 
     changes = zone.changes.all.to_a
+    mock.verify
+
     changes.count.must_equal 5
     changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
   end
 
   it "paginates changes with all and max set" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "sortBy"
-      env.params.wont_include "sortOrder"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "sortBy"
-      env.params.wont_include "sortOrder"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: 3, page_token: nil, sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: 3, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
 
+    dns.service.mocked_service = mock
     changes = zone.changes(max: 3).all.to_a
+    mock.verify
+
     changes.count.must_equal 5
     changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
   end
 
   it "paginates changes with all and order set to asc" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "sortBy"
-      env.params["sortBy"].must_equal "changeSequence"
-      env.params.must_include "sortOrder"
-      env.params["sortOrder"].must_equal "ascending"
-      env.params.wont_include "maxResults"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "sortBy"
-      env.params["sortBy"].must_equal "changeSequence"
-      env.params.must_include "sortOrder"
-      env.params["sortOrder"].must_equal "ascending"
-      env.params.wont_include "maxResults"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "ascending"}]
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: "changeSequence", sort_order: "ascending"}]
+
+    dns.service.mocked_service = mock
 
     changes = zone.changes(order: :asc).all.to_a
+    mock.verify
+
     changes.count.must_equal 5
     changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
   end
 
   it "paginates changes with all and order set to desc" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "sortBy"
-      env.params["sortBy"].must_equal "changeSequence"
-      env.params.must_include "sortOrder"
-      env.params["sortOrder"].must_equal "descending"
-      env.params.wont_include "maxResults"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "sortBy"
-      env.params["sortBy"].must_equal "changeSequence"
-      env.params.must_include "sortOrder"
-      env.params["sortOrder"].must_equal "descending"
-      env.params.wont_include "maxResults"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "descending"}]
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: "changeSequence", sort_order: "descending"}]
 
+    dns.service.mocked_service = mock
     changes = zone.changes(order: :desc).all.to_a
+    mock.verify
+
     changes.count.must_equal 5
     changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
   end
 
   it "paginates changes with all using Enumerator" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "second_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(3, "second_page_token"), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
+
+    dns.service.mocked_service = mock
 
     changes = zone.changes.all.take(5)
+    mock.verify
+
     changes.count.must_equal 5
     changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
   end
 
   it "paginates changes with all with request_limit set" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_changes_json(3, "second_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(3, "second_page_token"), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
+
+    dns.service.mocked_service = mock
 
     changes = zone.changes.all(request_limit: 1).to_a
+    mock.verify
+
     changes.count.must_equal 6
     changes.each { |z| z.must_be_kind_of Gcloud::Dns::Change }
   end
 
   it "lists records" do
     num_records = 3
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(num_records)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, list_records_gapi(num_records), [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
 
+    dns.service.mocked_service = mock
     records = zone.records
+    mock.verify
+
     records.size.must_equal num_records
     records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
 
   it "lists records with name param" do
     num_records = 3
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal record_name
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(num_records)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, list_records_gapi(num_records), [project, zone.id, {max_results: nil, name: record_name, page_token: nil, type: nil}]
 
+    dns.service.mocked_service = mock
     records = zone.records record_name
+    mock.verify
+
     records.size.must_equal num_records
     records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
 
   it "lists records with name and type params" do
     num_records = 3
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal record_name
-      env.params["type"].must_equal record_type
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(num_records)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, list_records_gapi(num_records), [project, zone.id, {max_results: nil, name: record_name, page_token: nil, type: record_type}]
 
+    dns.service.mocked_service = mock
     records = zone.records record_name, record_type
+    mock.verify
+
     records.size.must_equal num_records
     records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
 
   it "lists records with subdomain and type params" do
     num_records = 3
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "www.example.com."
-      env.params["type"].must_equal "A"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(num_records)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, list_records_gapi(num_records), [project, zone.id, {max_results: nil, name: "www.example.com.", page_token: nil, type: "A"}]
 
+    dns.service.mocked_service = mock
     records = zone.records "www", "A"
+    mock.verify
+
     records.size.must_equal num_records
     records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
 
   it "paginates records" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id, {max_results: nil, name: nil, page_token: "next_page_token", type: nil}]
+
+    dns.service.mocked_service = mock
 
     first_records = zone.records
     first_records.count.must_equal 3
@@ -548,23 +420,19 @@ describe Gcloud::Dns::Zone, :mock_dns do
     first_records.token.must_equal "next_page_token"
 
     second_records = zone.records token: first_records.token
+    mock.verify
+
     second_records.count.must_equal 2
     second_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
     second_records.token.must_be :nil?
   end
 
   it "paginates records with next? and next" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id, {max_results: nil, name: nil, page_token: "next_page_token", type: nil}]
+
+    dns.service.mocked_service = mock
 
     first_records = zone.records
     first_records.count.must_equal 3
@@ -572,27 +440,19 @@ describe Gcloud::Dns::Zone, :mock_dns do
     first_records.next?.must_equal true
 
     second_records = first_records.next
+    mock.verify
+
     second_records.count.must_equal 2
     second_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
     second_records.next?.must_equal false
   end
 
   it "paginates records with next? and next and max set" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: 3, name: nil, page_token: nil, type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id, {max_results: 3, name: nil, page_token: "next_page_token", type: nil}]
+
+    dns.service.mocked_service = mock
 
     first_records = zone.records max: 3
     first_records.count.must_equal 3
@@ -600,83 +460,65 @@ describe Gcloud::Dns::Zone, :mock_dns do
     first_records.next?.must_equal true
 
     second_records = first_records.next
+    mock.verify
+
     second_records.count.must_equal 2
     second_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
     second_records.next?.must_equal false
   end
 
   it "loads all records with all" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id, {max_results: nil, name: nil, page_token: "next_page_token", type: nil}]
+
+    dns.service.mocked_service = mock
 
     all_records = zone.records.all.to_a
+    mock.verify
+
     all_records.count.must_equal 5
     all_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
 
   it "paginates records with all and max set" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: 3, name: nil, page_token: nil, type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id, {max_results: 3, name: nil, page_token: "next_page_token", type: nil}]
+
+    dns.service.mocked_service = mock
 
     all_records = zone.records(max: 3).all.to_a
+    mock.verify
+
     all_records.count.must_equal 5
     all_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
 
   it "loads all records with all using Enumerator" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(3, "second_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id, {max_results: nil, name: nil, page_token: "next_page_token", type: nil}]
+
+    dns.service.mocked_service = mock
 
     all_records = zone.records.all.take(5)
+    mock.verify
+
     all_records.count.must_equal 5
     all_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
 
   it "loads all records with all with request_limit set" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(3, "next_page_token")]
-    end
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_records_json(3, "second_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "second_page_token"), [project, zone.id, {max_results: nil, name: nil, page_token: "next_page_token", type: nil}]
+
+    dns.service.mocked_service = mock
 
     all_records = zone.records.all(request_limit: 1).to_a
+    mock.verify
+
     all_records.count.must_equal 6
     all_records.each { |z| z.must_be_kind_of Gcloud::Dns::Record }
   end
@@ -748,27 +590,19 @@ describe Gcloud::Dns::Zone, :mock_dns do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
     to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
-    # The request for the SOA record, to update its serial number.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "SOA"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(soa)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: (Array(to_add.to_gapi) << updated_soa.to_gapi),
+      deletions: (Array(to_remove.to_gapi) << soa.to_gapi)
+    )
+    mock.expect :create_change, create_change_gapi(to_add, to_remove), [project, zone.id, new_change]
 
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 2
-      json["deletions"].count.must_equal 2
-      json["additions"].first.must_equal to_add.to_gapi
-      json["additions"].last.must_equal updated_soa.to_gapi
-      json["deletions"].first.must_equal to_remove.to_gapi
-      json["deletions"].last.must_equal soa.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json(to_add, to_remove)]
-    end
-
+    dns.service.mocked_service = mock
     change = zone.update to_add, to_remove
+    mock.verify
+
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.name
@@ -801,28 +635,20 @@ describe Gcloud::Dns::Zone, :mock_dns do
     to_remove = to_add.map(&:dup)
     to_remove.first.data = ["example.org."]
 
+    mock = Minitest::Mock.new
     # The request for the SOA record, to update its serial number.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "SOA"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(soa)]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: (Array(to_add.first.to_gapi) << updated_soa.to_gapi),
+      deletions: (Array(to_remove.first.to_gapi) << soa.to_gapi)
+    )
+    mock.expect :create_change, create_change_gapi([to_add.first], [to_remove.first]), [project, zone.id, new_change]
 
-    # The request to add and remove the records.
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 2
-      json["deletions"].count.must_equal 2
-      json["additions"].first.must_equal to_add.first.to_gapi
-      json["additions"].last.must_equal updated_soa.to_gapi
-      json["deletions"].first.must_equal to_remove.first.to_gapi
-      json["deletions"].last.must_equal soa.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json([to_add.first], [to_remove.first])]
-    end
-
+    dns.service.mocked_service = mock
     change = zone.update to_add, to_remove
+    mock.verify
+
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.first.name
@@ -838,26 +664,20 @@ describe Gcloud::Dns::Zone, :mock_dns do
   it "adds a record" do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
 
+    mock = Minitest::Mock.new
     # The request for the SOA record, to update its serial number.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "SOA"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(soa)]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: (Array(to_add.to_gapi) << updated_soa.to_gapi),
+      deletions: Array(soa.to_gapi)
+    )
+    mock.expect :create_change, create_change_gapi([to_add, updated_soa], soa), [project, zone.id, new_change]
 
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 2
-      json["deletions"].count.must_equal 1
-      json["additions"].first.must_equal to_add.to_gapi
-      json["additions"][1].must_equal updated_soa.to_gapi
-      json["deletions"].first.must_equal soa.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json([to_add, updated_soa], soa)]
-    end
-
+    dns.service.mocked_service = mock
     change = zone.add "example.net.", "A", 18600, "example.com."
+    mock.verify
+
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.name
@@ -871,26 +691,20 @@ describe Gcloud::Dns::Zone, :mock_dns do
   it "adds a record with a subdomain" do
     to_add = zone.record "www.example.com.", "A", 18600, "example.net."
 
+    mock = Minitest::Mock.new
     # The request for the SOA record, to update its serial number.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "SOA"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(soa)]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: (Array(to_add.to_gapi) << updated_soa.to_gapi),
+      deletions: Array(soa.to_gapi)
+    )
+    mock.expect :create_change, create_change_gapi([to_add, updated_soa], soa), [project, zone.id, new_change]
 
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 2
-      json["deletions"].count.must_equal 1
-      json["additions"].first.must_equal to_add.to_gapi
-      json["additions"][1].must_equal updated_soa.to_gapi
-      json["deletions"].first.must_equal soa.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json([to_add, updated_soa], soa)]
-    end
-
+    dns.service.mocked_service = mock
     change = zone.add "www", "A", 18600, "example.net."
+    mock.verify
+
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.name
@@ -904,17 +718,18 @@ describe Gcloud::Dns::Zone, :mock_dns do
   it "updates without updating soa" do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
 
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 1
-      json["deletions"].count.must_equal 0
-      json["additions"].first.must_equal to_add.to_gapi
-      json["deletions"].must_be :empty?
-      [200, {"Content-Type" => "application/json"},
-       create_change_json(to_add, [])]
-    end
+    mock = Minitest::Mock.new
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: Array(to_add.to_gapi),
+      deletions: []
+    )
+    mock.expect :create_change, create_change_gapi(to_add, []), [project, zone.id, new_change]
 
+    dns.service.mocked_service = mock
     change = zone.update to_add, skip_soa: true
+    mock.verify
+
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.name
@@ -929,26 +744,20 @@ describe Gcloud::Dns::Zone, :mock_dns do
     expected_soa = updated_soa
     expected_soa.data = ["ns-cloud-b1.googledomains.com. dns-admin.google.com. 10 21600 3600 1209600 300"]
 
+    mock = Minitest::Mock.new
     # The request for the SOA record, to update its serial number.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "SOA"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(soa)]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: (Array(to_add.to_gapi) << expected_soa.to_gapi),
+      deletions: Array(soa.to_gapi)
+    )
+    mock.expect :create_change, create_change_gapi([to_add, expected_soa], soa), [project, zone.id, new_change]
 
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 2
-      json["deletions"].count.must_equal 1
-      json["additions"].first.must_equal to_add.to_gapi
-      json["additions"].last.must_equal expected_soa.to_gapi
-      json["deletions"].first.must_equal soa.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json([to_add, expected_soa], soa)]
-    end
-
+    dns.service.mocked_service = mock
     change = zone.update to_add, [], soa_serial: 10
+    mock.verify
+
     change.additions[1].data.must_equal expected_soa.data
   end
 
@@ -957,61 +766,44 @@ describe Gcloud::Dns::Zone, :mock_dns do
     expected_soa = updated_soa
     expected_soa.data = ["ns-cloud-b1.googledomains.com. dns-admin.google.com. 10 21600 3600 1209600 300"]
 
+    mock = Minitest::Mock.new
     # The request for the SOA record, to update its serial number.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "SOA"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(soa)]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: (Array(to_add.to_gapi) << expected_soa.to_gapi),
+      deletions: Array(soa.to_gapi)
+    )
+    mock.expect :create_change, create_change_gapi([to_add, expected_soa], soa), [project, zone.id, new_change]
 
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 2
-      json["deletions"].count.must_equal 1
-      json["additions"].first.must_equal to_add.to_gapi
-      json["additions"].last.must_equal expected_soa.to_gapi
-      json["deletions"].first.must_equal soa.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json([to_add, expected_soa], soa)]
-    end
-
+    dns.service.mocked_service = mock
     change = zone.update to_add, [], soa_serial: lambda { |sn| sn + 10 }
+    mock.verify
+
     change.additions[1].data.must_equal expected_soa.data
   end
 
   it "removes records by name and type" do
     to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
+    mock = Minitest::Mock.new
     # The request for the records to remove.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.net."
-      env.params["type"].must_equal "A"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(to_remove)]
-    end
-
+    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id, {max_results: nil, name: "example.net.", page_token: nil, type: "A"}]
     # The request for the SOA record, to update its serial number.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "SOA"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(soa)]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
 
     # The request to remove the records.
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 1
-      json["deletions"].count.must_equal 2
-      json["additions"].first.must_equal updated_soa.to_gapi
-      json["deletions"].first.must_equal to_remove.to_gapi
-      json["deletions"].last.must_equal soa.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json([], to_remove)]
-    end
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: Array(updated_soa.to_gapi),
+      deletions: (Array(to_remove.to_gapi) << soa.to_gapi)
+    )
+    mock.expect :create_change, create_change_gapi([], to_remove), [project, zone.id, new_change]
 
+    dns.service.mocked_service = mock
     change = zone.remove "example.net.", "A"
+    mock.verify
+
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.must_be :empty?
@@ -1024,35 +816,24 @@ describe Gcloud::Dns::Zone, :mock_dns do
   it "removes records by subdomain name and type" do
     to_remove = zone.record "www.example.com.", "A", 18600, "example.org."
 
+    mock = Minitest::Mock.new
     # The request for the records to remove.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "www.example.com."
-      env.params["type"].must_equal "A"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(to_remove)]
-    end
-
+    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id, {max_results: nil, name: "www.example.com.", page_token: nil, type: "A"}]
     # The request for the SOA record, to update its serial number.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "SOA"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(soa)]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
 
     # The request to remove the records.
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 1
-      json["deletions"].count.must_equal 2
-      json["additions"].first.must_equal updated_soa.to_gapi
-      json["deletions"].first.must_equal to_remove.to_gapi
-      json["deletions"].last.must_equal soa.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json([], to_remove)]
-    end
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: Array(updated_soa.to_gapi),
+      deletions: (Array(to_remove.to_gapi) << soa.to_gapi)
+    )
+    mock.expect :create_change, create_change_gapi([], to_remove), [project, zone.id, new_change]
 
+    dns.service.mocked_service = mock
     change = zone.remove "www", "A"
+    mock.verify
+
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.must_be :empty?
@@ -1066,36 +847,24 @@ describe Gcloud::Dns::Zone, :mock_dns do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
     to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
+    mock = Minitest::Mock.new
     # The request for the records to remove.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.net."
-      env.params["type"].must_equal "A"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(to_remove)]
-    end
-
+    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id, {max_results: nil, name: "example.net.", page_token: nil, type: "A"}]
     # The request for the SOA record, to update its serial number.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "SOA"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(soa)]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
 
-    # The request to add and remove the records.
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 2
-      json["deletions"].count.must_equal 2
-      json["additions"].first.must_equal to_add.to_gapi
-      json["additions"].last.must_equal updated_soa.to_gapi
-      json["deletions"].first.must_equal to_remove.to_gapi
-      json["deletions"].last.must_equal soa.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json(to_add, to_remove)]
-    end
+    # The request to remove the records.
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: (Array(to_add.to_gapi) << updated_soa.to_gapi),
+      deletions: (Array(to_remove.to_gapi) << soa.to_gapi)
+    )
+    mock.expect :create_change, create_change_gapi(to_add, to_remove), [project, zone.id, new_change]
 
+    dns.service.mocked_service = mock
     change = zone.replace "example.net.", "A", 18600, "example.com."
+    mock.verify
+
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.name
@@ -1112,36 +881,24 @@ describe Gcloud::Dns::Zone, :mock_dns do
     to_add = zone.record "www.example.com.", "A", 18600, "example.net."
     to_remove = zone.record "www.example.com.", "A", 18600, "example.org."
 
+    mock = Minitest::Mock.new
     # The request for the records to remove.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "www.example.com."
-      env.params["type"].must_equal "A"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(to_remove)]
-    end
-
+    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id, {max_results: nil, name: "www.example.com.", page_token: nil, type: "A"}]
     # The request for the SOA record, to update its serial number.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "SOA"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(soa)]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
 
-    # The request to add and remove the records.
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 2
-      json["deletions"].count.must_equal 2
-      json["additions"].first.must_equal to_add.to_gapi
-      json["additions"].last.must_equal updated_soa.to_gapi
-      json["deletions"].first.must_equal to_remove.to_gapi
-      json["deletions"].last.must_equal soa.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json(to_add, to_remove)]
-    end
+    # The request to remove the records.
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: (Array(to_add.to_gapi) << updated_soa.to_gapi),
+      deletions: (Array(to_remove.to_gapi) << soa.to_gapi)
+    )
+    mock.expect :create_change, create_change_gapi(to_add, to_remove), [project, zone.id, new_change]
 
+    dns.service.mocked_service = mock
     change = zone.replace "www", "A", 18600, "example.net."
+    mock.verify
+
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.name
@@ -1158,38 +915,26 @@ describe Gcloud::Dns::Zone, :mock_dns do
     to_add = zone.record "example.net.", "A", 18600, "example.com."
     to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
+    mock = Minitest::Mock.new
     # The request for the records to remove.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.net."
-      env.params["type"].must_equal "A"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(to_remove)]
-    end
-
+    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id, {max_results: nil, name: "example.net.", page_token: nil, type: "A"}]
     # The request for the SOA record, to update its serial number.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "SOA"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(soa)]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
 
-    # The request to add and remove the records.
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 2
-      json["deletions"].count.must_equal 2
-      json["additions"].first.must_equal to_add.to_gapi
-      json["additions"].last.must_equal updated_soa.to_gapi
-      json["deletions"].first.must_equal to_remove.to_gapi
-      json["deletions"].last.must_equal soa.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json(to_add, to_remove)]
-    end
+    # The request to remove the records.
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: (Array(to_add.to_gapi) << updated_soa.to_gapi),
+      deletions: (Array(to_remove.to_gapi) << soa.to_gapi)
+    )
+    mock.expect :create_change, create_change_gapi(to_add, to_remove), [project, zone.id, new_change]
 
+    dns.service.mocked_service = mock
     change = zone.modify "example.net.", "A" do |a|
       a.data = ["example.com."]
     end
+    mock.verify
+
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.name
@@ -1206,38 +951,26 @@ describe Gcloud::Dns::Zone, :mock_dns do
     to_add = zone.record "www.example.com.", "A", 18600, "example.net."
     to_remove = zone.record "www.example.com.", "A", 18600, "example.org."
 
+    mock = Minitest::Mock.new
     # The request for the records to remove.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "www.example.com."
-      env.params["type"].must_equal "A"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(to_remove)]
-    end
-
+    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id, {max_results: nil, name: "www.example.com.", page_token: nil, type: "A"}]
     # The request for the SOA record, to update its serial number.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "SOA"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(soa)]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
 
-    # The request to add and remove the records.
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 2
-      json["deletions"].count.must_equal 2
-      json["additions"].first.must_equal to_add.to_gapi
-      json["additions"].last.must_equal updated_soa.to_gapi
-      json["deletions"].first.must_equal to_remove.to_gapi
-      json["deletions"].last.must_equal soa.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json(to_add, to_remove)]
-    end
+    # The request to remove the records.
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: (Array(to_add.to_gapi) << updated_soa.to_gapi),
+      deletions: (Array(to_remove.to_gapi) << soa.to_gapi)
+    )
+    mock.expect :create_change, create_change_gapi(to_add, to_remove), [project, zone.id, new_change]
 
+    dns.service.mocked_service = mock
     change = zone.modify "www", "A" do |a|
       a.data = ["example.net."]
     end
+    mock.verify
+
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     change.additions.first.name.must_equal to_add.name
@@ -1258,42 +991,23 @@ describe Gcloud::Dns::Zone, :mock_dns do
     cname_to_add = zone.record "www.example.com.", "CNAME", 18600, "example.com."
     cname_to_remove = zone.record "www.example.com.", "CNAME", 360, "example.com."
 
+    mock = Minitest::Mock.new
     # mock the lookup for TXT
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "TXT"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(txt_to_remove)]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(txt_to_remove), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "TXT"}]
     # mock the lookup for MX
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "MX"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(mx_to_remove)]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(mx_to_remove), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "MX"}]
     # mock the lookup for CNAME
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "www.example.com."
-      env.params["type"].must_equal "CNAME"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(cname_to_remove)]
-    end
-    # mock the update call, test that additions and deletions are correct
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 3
-      json["deletions"].count.must_equal 3
-      json["additions"].must_include a_to_add.to_gapi
-      json["additions"].must_include mx_to_add.to_gapi
-      json["additions"].must_include cname_to_add.to_gapi
-      json["deletions"].must_include txt_to_remove.to_gapi
-      json["deletions"].must_include mx_to_remove.to_gapi
-      json["deletions"].must_include cname_to_remove.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json([a_to_add, mx_to_add], [txt_to_remove, mx_to_remove])]
-    end
+    mock.expect :list_resource_record_sets, lookup_records_gapi(cname_to_remove), [project, zone.id, {max_results: nil, name: "www.example.com.", page_token: nil, type: "CNAME"}]
 
+    # The request to remove the records.
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: [a_to_add.to_gapi, mx_to_add.to_gapi, cname_to_add.to_gapi],
+      deletions: [txt_to_remove.to_gapi, mx_to_remove.to_gapi, cname_to_remove.to_gapi]
+    )
+    mock.expect :create_change, create_change_gapi([a_to_add, mx_to_add], [txt_to_remove, mx_to_remove]), [project, zone.id, new_change]
+
+    dns.service.mocked_service = mock
     zone.update skip_soa: true do |tx|
       tx.add "example.com.", "A", 18600, "127.0.0.1"
       tx.remove "example.com.", "TXT"
@@ -1302,40 +1016,34 @@ describe Gcloud::Dns::Zone, :mock_dns do
         cname.ttl = 18600
       end
     end
+    mock.verify
   end
 
-  def lookup_records_json record
-    hash = { "kind" => "dns#resourceRecordSet", "rrsets" => [record.to_gapi] }
-    hash.to_json
+  def find_change_gapi change_id
+    change = random_change_gapi
+    change.id = change_id
+    change
   end
 
-  def create_change_json to_add, to_remove
-    hash = random_change_hash
-    hash["id"] = "dns-change-created"
-    hash["additions"] = Array(to_add).map(&:to_gapi)
-    hash["deletions"] = Array(to_remove).map(&:to_gapi)
-    hash.to_json
-  end
-
-  def list_changes_json count = 2, token = nil
+  def list_changes_gapi count = 2, token = nil
     changes = count.times.map do
-      ch = random_change_hash
-      ch["id"] = "dns-change-#{rand 9999999}"
+      ch = random_change_gapi
+      ch.id = "dns-change-#{rand 9999999}"
       ch
     end
-    hash = { "kind" => "dns#changesListResponse", "changes" => changes }
-    hash["nextPageToken"] = token unless token.nil?
-    hash.to_json
+    resp = Google::Apis::DnsV1::ListChangesResponse.new changes: changes
+    resp.next_page_token = token unless token.nil?
+    resp
   end
 
-  def list_records_json count = 2, token = nil
+  def list_records_gapi count = 2, token = nil
     seed = rand 99999
     name = "example-#{seed}.com."
     records = count.times.map do
-      random_record_hash name, "A", seed, ["1.2.3.4"]
+      random_record_gapi name, "A", seed, ["1.2.3.4"]
     end
-    hash = { "kind" => "dns#resourceRecordSet", "rrsets" => records }
-    hash["nextPageToken"] = token unless token.nil?
-    hash.to_json
+    resp = Google::Apis::DnsV1::ListResourceRecordSetsResponse.new rrsets: records
+    resp.next_page_token = token unless token.nil?
+    resp
   end
 end

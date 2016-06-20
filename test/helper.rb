@@ -616,99 +616,85 @@ class MockBigquery < Minitest::Spec
 end
 
 class MockDns < Minitest::Spec
-  let(:project) { dns.connection.project }
-  let(:credentials) { dns.connection.credentials }
+  let(:project) { dns.service.project }
+  let(:credentials) { dns.service.credentials }
   let(:dns) { $gcloud_dns_global ||= Gcloud::Dns::Project.new("test", OpenStruct.new) }
 
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    connection = dns.instance_variable_get "@connection"
-    client = connection.instance_variable_get "@client"
-    client.connection = Faraday.new do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
+  def random_project_gapi
+    Google::Apis::DnsV1::Project.new(
+      kind: "dns#project",
+      number: 123456789,
+      id: project,
+      quota: Google::Apis::DnsV1::Quota.new(
+        kind: "dns#quota",
+        managed_zones: 101,
+        rrsets_per_managed_zone: 1002,
+        rrset_additions_per_change: 103,
+        rrset_deletions_per_change: 104,
+        total_rrdata_size_per_change: 8000,
+        resource_records_per_rrset: 105
+      )
+    )
   end
 
-  def teardown
-    @connection.verify_stubbed_calls
+  def random_zone_gapi zone_name, zone_dns
+    Google::Apis::DnsV1::ManagedZone.new(
+      kind: "dns#managedZone",
+      name: zone_name,
+      dns_name: zone_dns,
+      description: "",
+      id: 123456789,
+      name_servers: [ "virtual-dns-1.google.example",
+                     "virtual-dns-2.google.example" ],
+      creation_time: "2015-01-01T00:00:00-00:00"
+    )
   end
 
-  def mock_connection
-    @connection
+  def random_change_gapi
+    Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      id: "dns-change-1234567890",
+      additions: [],
+      deletions: [],
+      start_time: "2015-01-01T00:00:00-00:00",
+      status: "done"
+    )
   end
 
-  def random_project_hash
-    {
-      "kind" => "dns#project",
-      "number" => 123456789,
-      "id" => project,
-      "quota" => {
-        "kind" => "dns#quota",
-        "managedZones" => 101,
-        "rrsetsPerManagedZone" => 1002,
-        "rrsetAdditionsPerChange" => 103,
-        "rrsetDeletionsPerChange" => 104,
-        "totalRrdataSizePerChange" => 8000,
-        "resourceRecordsPerRrset" => 105
-      }
-    }
+  def random_record_gapi name, type, ttl, data
+    Google::Apis::DnsV1::ResourceRecordSet.new(
+      kind: "dns#resourceRecordSet",
+      name: name,
+      rrdatas: data,
+      ttl: ttl,
+      type: type
+    )
   end
 
-  def random_zone_hash zone_name, zone_dns
-    {
-      "kind" => "dns#managedZone",
-      "name" => zone_name,
-      "dnsName" => zone_dns,
-      "description" => "",
-      "id" => 123456789,
-      "nameServers" => [ "virtual-dns-1.google.example",
-                         "virtual-dns-2.google.example" ],
-      "creationTime" => "2015-01-01T00:00:00-00:00"
-    }
+  def done_change_gapi change_id = nil
+    change = random_change_gapi
+    change.id = change_id if change_id
+    change.additions = [ random_record_gapi("example.net.", "A", 18600, ["example.com."]) ]
+    change.deletions = [ random_record_gapi("example.net.", "A", 18600, ["example.org."]) ]
+    change
   end
 
-  def random_change_hash
-    {
-      "kind" => "dns#change",
-      "id" => "dns-change-1234567890",
-      "additions" => [],
-      "deletions" => [],
-      "startTime" => "2015-01-01T00:00:00-00:00",
-      "status" => "done"
-    }
+  def pending_change_gapi change_id = nil
+    change = done_change_gapi change_id
+    change.status = "pending"
+    change
   end
 
-  def random_record_hash name, type, ttl, data
-    {
-      "kind" => "dns#resourceRecordSet",
-      "name" => name,
-      "rrdatas" => data,
-      "ttl" => ttl,
-      "type" => type
-    }
+  def create_change_gapi to_add, to_remove
+    change = random_change_gapi
+    change.id = "dns-change-created"
+    change.additions = Array(to_add).map(&:to_gapi)
+    change.deletions = Array(to_remove).map(&:to_gapi)
+    change
   end
 
-  def done_change_hash change_id = nil
-    hash = random_change_hash
-    hash["id"] = change_id if change_id
-    hash["additions"] = [{ "name" => "example.net.", "ttl" => 18600, "type" => "A", "rrdatas" => ["example.com."] }]
-    hash["deletions"] = [{ "name" => "example.net.", "ttl" => 18600, "type" => "A", "rrdatas" => ["example.org."] }]
-    hash
-  end
-
-  def pending_change_hash change_id = nil
-    hash = done_change_hash change_id
-    hash["status"] = "pending"
-    hash
-  end
-
-  def done_change_json change_id = nil
-    done_change_hash(change_id).to_json
-  end
-
-  def pending_change_json change_id = nil
-    pending_change_hash(change_id).to_json
+  def lookup_records_gapi record
+    Google::Apis::DnsV1::ListResourceRecordSetsResponse.new rrsets: [record.to_gapi]
   end
 
   # Register this spec type for when :storage is used.
@@ -726,7 +712,7 @@ class MockResourceManager < Minitest::Spec
     addl.include? :mock_res_man
   end
 
-  def random_project_hash seed = nil, name = nil, labels = nil
+  def random_project_gapi seed = nil, name = nil, labels = nil
     seed ||= rand(9999)
     name ||= "Example Project #{seed}"
     labels = { "env" => "production" } if labels.nil?

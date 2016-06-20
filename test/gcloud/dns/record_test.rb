@@ -20,8 +20,8 @@ describe Gcloud::Dns::Record, :mock_dns do
   let(:record_type) { "NS" }
   let(:record_ttl)  { 86400 }
   let(:record_data) { ["ns-cloud-b1.googledomains.com.","ns-cloud-b2.googledomains.com."] }
-  let(:record_hash) { random_record_hash record_name, record_type, record_ttl, record_data }
-  let(:record) { Gcloud::Dns::Record.from_gapi record_hash }
+  let(:record_gapi) { random_record_gapi record_name, record_type, record_ttl, record_data }
+  let(:record) { Gcloud::Dns::Record.from_gapi record_gapi }
 
   it "knows its attributes" do
     record.name.must_equal record_name

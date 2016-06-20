@@ -18,8 +18,8 @@ describe Gcloud::Dns::Zone, :mock_dns do
   # Create a zone object with the project's mocked connection object
   let(:zone_name) { "example-zone" }
   let(:zone_dns) { "example.com." }
-  let(:zone_hash) { random_zone_hash zone_name, zone_dns }
-  let(:zone) { Gcloud::Dns::Zone.from_gapi zone_hash, dns.connection }
+  let(:zone_gapi) { random_zone_gapi zone_name, zone_dns }
+  let(:zone) { Gcloud::Dns::Zone.from_gapi zone_gapi, dns.service }
   let(:soa) { Gcloud::Dns::Record.new "example.com.", "SOA", 18600, "ns-cloud-b1.googledomains.com. dns-admin.google.com. 0 21600 3600 1209600 300" }
   let(:updated_soa) { Gcloud::Dns::Record.new "example.com.", "SOA", 18600, "ns-cloud-b1.googledomains.com. dns-admin.google.com. 1 21600 3600 1209600 300" }
 
@@ -60,23 +60,25 @@ EOS
   }
 
   it "exports records to a zonefile string" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      [200, {"Content-Type" => "application/json"},
-       list_records_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, list_records_gapi, [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
 
+    dns.service.mocked_service = mock
     zonefile = zone.to_zonefile
+    mock.verify
+
     zonefile.must_equal zone_export_expected.strip
   end
 
   it "exports records to a zonefile file" do
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      [200, {"Content-Type" => "application/json"},
-       list_records_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, list_records_gapi, [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
 
+    dns.service.mocked_service = mock
     Tempfile.open "gcloud-ruby" do |tmpfile|
       zone.export tmpfile
+      mock.verify
+
       File.read(tmpfile).must_equal zone_export_expected.strip
     end
   end
@@ -87,27 +89,19 @@ EOS
       zone.record("www", "A", 3600, ["192.168.0.2"])
     ]
 
-    # The request for the SOA record, to update its serial number.
-    mock_connection.get "/dns/v1/projects/#{project}/managedZones/#{zone.id}/rrsets" do |env|
-      env.params["name"].must_equal "example.com."
-      env.params["type"].must_equal "SOA"
-      [200, {"Content-Type" => "application/json"},
-       lookup_records_json(soa)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    new_change = Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      additions: (to_add.map(&:to_gapi) << updated_soa.to_gapi),
+      deletions: Array(soa.to_gapi)
+    )
+    mock.expect :create_change, create_change_gapi(to_add, []), [project, zone.id, new_change]
 
-    mock_connection.post "/dns/v1/projects/#{project}/managedZones/#{zone.id}/changes" do |env|
-      json = JSON.parse env.body
-      json["additions"].count.must_equal 3
-      json["deletions"].count.must_equal 1
-      json["additions"][0].must_equal to_add[0].to_gapi
-      json["additions"][1].must_equal to_add[1].to_gapi
-      json["additions"][2].must_equal updated_soa.to_gapi
-      json["deletions"].first.must_equal soa.to_gapi
-      [200, {"Content-Type" => "application/json"},
-       create_change_json(to_add, [])]
-    end
-
+    dns.service.mocked_service = mock
     change = zone.import zonefile_io
+    mock.verify
+
     change.must_be_kind_of Gcloud::Dns::Change
     change.id.must_equal "dns-change-created"
     record_must_be change.additions[0], to_add[0]
@@ -115,23 +109,16 @@ EOS
     change.deletions.must_be :empty?
   end
 
-  def list_records_json
+  def list_records_gapi
     records = []
     ns_data = (1..4).map { |i| "ns-cloud-b#{i}.googledomains.com." }
-    records << random_record_hash("example.net.", "NS", 21600, ns_data)
-    records << random_record_hash("example.net.", "SOA", 21600, ["ns-cloud-b1.googledomains.com. dns-admin.google.com. 0 21600 3600 1209600 300"])
-    records << random_record_hash("www.example.net.", "A", 18600, ["127.0.0.1"])
+    records << random_record_gapi("example.net.", "NS", 21600, ns_data)
+    records << random_record_gapi("example.net.", "SOA", 21600, ["ns-cloud-b1.googledomains.com. dns-admin.google.com. 0 21600 3600 1209600 300"])
+    records << random_record_gapi("www.example.net.", "A", 18600, ["127.0.0.1"])
 
-    hash = { "kind" => "dns#resourceRecordSet", "rrsets" => records }
-    hash.to_json
-  end
-
-  def create_change_json to_add, to_remove
-    hash = random_change_hash
-    hash["id"] = "dns-change-created"
-    hash["additions"] = Array(to_add).map(&:to_gapi)
-    hash["deletions"] = Array(to_remove).map(&:to_gapi)
-    hash.to_json
+    Google::Apis::DnsV1::ListResourceRecordSetsResponse.new(
+      rrsets: records
+    )
   end
 
   def record_must_be actual, expected
@@ -139,10 +126,5 @@ EOS
     actual.type.must_equal expected.type
     actual.ttl.must_equal expected.ttl
     actual.data.must_equal expected.data
-  end
-
-  def lookup_records_json record
-    hash = { "kind" => "dns#resourceRecordSet", "rrsets" => [record.to_gapi] }
-    hash.to_json
   end
 end

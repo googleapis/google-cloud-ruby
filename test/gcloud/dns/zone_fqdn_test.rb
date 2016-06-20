@@ -17,7 +17,7 @@ require "helper"
 describe Gcloud::Dns::Zone, :fqdn, :mock_dns do
   let(:zone_name) { "example-zone" }
   let(:zone_dns) { "example.com." }
-  let(:zone) { Gcloud::Dns::Zone.from_gapi random_zone_hash(zone_name, zone_dns), dns.connection }
+  let(:zone) { Gcloud::Dns::Zone.from_gapi random_zone_gapi(zone_name, zone_dns), dns.service }
 
   it "knows a fully qualified domain name when given one" do
     zone.fqdn("example.org.").must_equal "example.org."
