@@ -1439,9 +1439,9 @@ results. Default is <code class="highlighter-rouge">true</code>.</p>
 
                   <div class="method-description">
 
-                    <p>Loads data into the table. You can pass a gcloud storage file path or
-a gcloud storage file instance. Or, you can upload a file directly.
-See <a href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">Loading Data with a POST Request</a>.</p>
+                    <p>Loads data into the table. You can pass a gcloud-ruby storage file path
+or a gcloud-ruby storage file instance. Or, you can upload a file
+directly. See <a href="https://cloud.google.com/bigquery/loading-data-post-request#multipart">Loading Data with a POST Request</a>.</p>
 
 <p>A <code class="highlighter-rouge">chunk_size</code> value can be provided in the options to be used in
 resumable uploads. This value is the number of bytes per chunk and must
@@ -1454,7 +1454,7 @@ lowered to the nearest acceptable value.</p>
 upload large files. To avoid this problem, add the
 <a href="https://rubygems.org/gems/httpclient">httpclient</a> gem to your project,
 and the line (or lines) of configuration shown below. These lines must
-execute after you require gcloud but before you make your first gcloud
+execute after <code class="highlighter-rouge">require "gcloud"</code> but before you make your first
 connection. The first statement configures
 <a href="https://rubygems.org/gems/faraday">Faraday</a> to use httpclient. The
 second statement, which should only be added if you are using a version
@@ -1760,7 +1760,7 @@ is provided it will use <span class='object_link'><a href="../Upload.html#defaul
 <span class='id identifier rubyid_load_job'>load_job</span> <span class='op'>=</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://my-bucket/file-name.csv</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                         
-                          <p class="example_title"><div class='inline'><p>Pass a gcloud storage file instance:</p>
+                          <p class="example_title"><div class='inline'><p>Pass a gcloud-ruby storage file instance:</p>
 </div></p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
@@ -2054,7 +2054,7 @@ false, which treats unknown values as errors.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 17, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Job.html'>Job</a></li><li class='toc-l1'><a class='reference internal current' href=''>Table</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 27, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Dataset.html'>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Job.html'>Job</a></li><li class='toc-l1'><a class='reference internal current' href=''>Table</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
