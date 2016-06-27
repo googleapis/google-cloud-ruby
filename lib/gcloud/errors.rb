@@ -15,7 +15,7 @@
 
 module Gcloud
   ##
-  # Base Gcloud exception class.
+  # Base gcloud-ruby exception class.
   class Error < StandardError
     ##
     # The inner error object.

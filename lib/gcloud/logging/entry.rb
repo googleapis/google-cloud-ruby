@@ -36,8 +36,9 @@ module Gcloud
     # A log is a named collection of entries. Logs can be produced by Google
     # Cloud Platform services, by third-party services, or by your applications.
     # For example, the log `compute.googleapis.com/activity_log` is produced by
-    # Google Compute Engine. Logs are simply referenced by name in Gcloud. There
-    # is no `Log` type in Gcloud or `Log` resource in the Cloud Logging API.
+    # Google Compute Engine. Logs are simply referenced by name in gcloud-ruby.
+    # There is no `Log` type in gcloud-ruby or `Log` resource in the Cloud
+    # Logging API.
     #
     # @see https://cloud.google.com/logging/docs/view/logs_index List of Log
     #   Types

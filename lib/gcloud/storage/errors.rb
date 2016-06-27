@@ -68,7 +68,7 @@ module Gcloud
       attr_accessor :type
 
       ##
-      # The value of the digest on the Gcloud file.
+      # The value of the digest on the gcloud-ruby file.
       attr_accessor :gcloud_digest
 
       ##

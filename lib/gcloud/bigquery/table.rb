@@ -610,9 +610,9 @@ module Gcloud
       end
 
       ##
-      # Loads data into the table. You can pass a gcloud storage file path or
-      # a gcloud storage file instance. Or, you can upload a file directly.
-      # See [Loading Data with a POST Request](
+      # Loads data into the table. You can pass a gcloud-ruby storage file path
+      # or a gcloud-ruby storage file instance. Or, you can upload a file
+      # directly. See [Loading Data with a POST Request](
       # https://cloud.google.com/bigquery/loading-data-post-request#multipart).
       #
       # A `chunk_size` value can be provided in the options to be used in
@@ -715,7 +715,7 @@ module Gcloud
       #
       #   load_job = table.load "gs://my-bucket/file-name.csv"
       #
-      # @example Pass a gcloud storage file instance:
+      # @example Pass a gcloud-ruby storage file instance:
       #   require "gcloud"
       #   require "gcloud/storage"
       #
@@ -746,7 +746,7 @@ module Gcloud
       # upload large files. To avoid this problem, add the
       # [httpclient](https://rubygems.org/gems/httpclient) gem to your project,
       # and the line (or lines) of configuration shown below. These lines must
-      # execute after you require gcloud but before you make your first gcloud
+      # execute after `require "gcloud"` but before you make your first
       # connection. The first statement configures
       # [Faraday](https://rubygems.org/gems/faraday) to use httpclient. The
       # second statement, which should only be added if you are using a version

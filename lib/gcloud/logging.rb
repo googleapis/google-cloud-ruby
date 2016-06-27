@@ -74,7 +74,7 @@ module Gcloud
   # For general information about Cloud Logging, read [What is Google Cloud
   # Logging?](https://cloud.google.com/logging/docs/).
   #
-  # Gcloud's goal is to provide an API that is familiar and comfortable to
+  # The goal of gcloud-ruby is to provide an API that is comfortable to
   # Rubyists. Authentication is handled by {Gcloud#logging}. You can provide the
   # project and credential information to connect to the Cloud Logging service,
   # or if you are running on Google Compute Engine this configuration is taken
@@ -108,8 +108,8 @@ module Gcloud
   # log is a named collection of entries. Logs can be produced by Google Cloud
   # Platform services, by third-party services, or by your applications. For
   # example, the log `compute.googleapis.com/activity_log` is produced by Google
-  # Compute Engine. Logs are simply referenced by name in Gcloud. There is no
-  # `Log` type in Gcloud or `Log` resource in the Cloud Logging API.
+  # Compute Engine. Logs are simply referenced by name in gcloud-ruby. There is
+  # no `Log` type in gcloud-ruby or `Log` resource in the Cloud Logging API.
   #
   # ```ruby
   # require "gcloud"

@@ -1,4 +1,4 @@
-# gcloud
+# gcloud-ruby
 
 Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) services.
 
@@ -29,7 +29,7 @@ $ gem install gcloud
 
 ### Authentication
 
-Gcloud uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables. Additionally, Cloud SDK credentials can also be discovered automatically, but this is only recommended during development.
+The gcloud-ruby library uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables. Additionally, Cloud SDK credentials can also be discovered automatically, but this is only recommended during development.
 
 Instructions and configuration options are covered in the [Authentication guide](AUTHENTICATION.md). The examples in Quick Start will demonstrate providing the **Project ID** and **Credentials JSON file path** in code.
 
@@ -284,7 +284,7 @@ landmark.description #=> "Mount Rushmore"
 
 ## Supported Ruby Versions
 
-gcloud is supported on Ruby 2.0+.
+gcloud-ruby is supported on Ruby 2.0+.
 
 ## Versioning
 

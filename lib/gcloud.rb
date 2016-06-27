@@ -18,12 +18,13 @@ require "gcloud/version"
 ##
 # # Google Cloud
 #
-# Gcloud is the official library for interacting with the Google Cloud Platform.
-# Google Cloud Platform is a set of modular cloud-based services that allow
-# you to create anything from simple websites to complex applications.
+# The gcloud-ruby library is the official library for interacting with Google
+# Cloud Platform. Google Cloud Platform is a set of modular cloud-based services
+# that allow you to create anything from simple websites to complex
+# applications.
 #
-# Gcloud's goal is to provide a API that is familiar and comfortable to
-# Rubyists. Authentication is handled by providing project and credential
+# The goal of gcloud-ruby is to provide a API that is familiar and comfortable
+# to Rubyists. Authentication is handled by providing project and credential
 # information, or if you are running on Google Compute Engine this configuration
 # is taken care of for you.
 #

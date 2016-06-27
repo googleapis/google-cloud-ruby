@@ -68,7 +68,7 @@ module Gcloud
   # For more information about Cloud Vision, read the [Google Cloud Vision API
   # Documentation](https://cloud.google.com/vision/docs/).
   #
-  # Gcloud's goal is to provide an API that is familiar and comfortable to
+  # The goal of gcloud-ruby is to provide an API that is comfortable to
   # Rubyists. Authentication is handled by {Gcloud#vision}. You can provide the
   # project and credential information to connect to the Cloud Vision service,
   # or if you are running on Google Compute Engine this configuration is taken

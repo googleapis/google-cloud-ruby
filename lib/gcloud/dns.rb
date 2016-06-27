@@ -67,8 +67,8 @@ module Gcloud
   # relied upon by Google. To learn more, read [What is Google Cloud
   # DNS?](https://cloud.google.com/dns/what-is-cloud-dns).
   #
-  # Gcloud's goal is to provide an API that is familiar and comfortable to
-  # Rubyists. Authentication is handled by {Gcloud#dns}. You can provide the
+  # The goal of gcloud-ruby is to provide an API that is comfortable
+  # to Rubyists. Authentication is handled by {Gcloud#dns}. You can provide the
   # project and credential information to connect to the Cloud DNS service, or
   # if you are running on Google Compute Engine this configuration is taken care
   # of for you. You can read more about the options for connecting in the
@@ -164,9 +164,10 @@ module Gcloud
   #
   # Whenever you change the set of records belonging to a zone, the zone's start
   # of authority (SOA) record should be updated with a higher serial number. The
-  # gcloud library automates this update for you, deleting the old SOA record
-  # and adding an updated one, as shown in the example above. You can disable or
-  # modify this behavior, of course. See {Gcloud::Dns::Zone#update} for details.
+  # gcloud-ruby library automates this update for you, deleting the old SOA
+  # record and adding an updated one, as shown in the example above. You can
+  # disable or modify this behavior, of course. See {Gcloud::Dns::Zone#update}
+  # for details.
   #
   # You can retrieve records by name and type. The name argument can be a
   # subdomain (e.g., `www`) fragment for convenience, but notice that the

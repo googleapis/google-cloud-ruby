@@ -97,8 +97,8 @@ module Gcloud
   # ```
   #
   # Also make sure all `GCLOUD` environment variables are cleared of any service
-  # accounts. Then gcloud will be able to detect the user authentication and
-  # connect with those credentials.
+  # accounts. Then gcloud-ruby will be able to detect the user authentication
+  # and connect with those credentials.
   #
   # ```ruby
   # require "gcloud"

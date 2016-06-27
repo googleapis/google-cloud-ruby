@@ -80,7 +80,7 @@ module Gcloud
   # relational databases, but there are some key differences to be aware of to
   # make the most of using Datastore.
   #
-  # Gcloud's goal is to provide a API that is familiar and comfortable to
+  # The goal of gcloud-ruby is to provide a API that is comfortable to
   # Rubyists. Authentication is handled by {Gcloud#datastore}. You can provide
   # the project and credential information to connect to the Datastore service,
   # or if you are running on Google Compute Engine this configuration is taken

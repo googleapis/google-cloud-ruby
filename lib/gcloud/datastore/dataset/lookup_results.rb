@@ -200,7 +200,7 @@ module Gcloud
         end
 
         ##
-        # Convenience method to convert GRPC entities to Gcloud entities.
+        # Convenience method to convert GRPC entities to gcloud-ruby entities.
         def self.to_gcloud_entities grpc_entity_results
           # Entities are nested in an object.
           Array(grpc_entity_results).map do |result|
@@ -210,7 +210,7 @@ module Gcloud
         end
 
         ##
-        # Convenience method to convert GRPC keys to Gcloud keys.
+        # Convenience method to convert GRPC keys to gcloud-ruby keys.
         def self.to_gcloud_keys grpc_keys
           # Keys are not nested in an object like entities are.
           Array(grpc_keys).map { |key| Key.from_grpc key }
