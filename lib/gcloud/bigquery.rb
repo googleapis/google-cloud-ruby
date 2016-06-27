@@ -64,8 +64,8 @@ module Gcloud
   # more, read [What is
   # BigQuery?](https://cloud.google.com/bigquery/what-is-bigquery).
   #
-  # Gcloud's goal is to provide an API that is familiar and comfortable to
-  # Rubyists. Authentication is handled by {Gcloud#bigquery}. You can provide
+  # The goal of gcloud-ruby is to provide an API that is comfortable
+  # to Rubyists. Authentication is handled by {Gcloud#bigquery}. You can provide
   # the project and credential information to connect to the BigQuery service,
   # or if you are running on Google Compute Engine this configuration is taken
   # care of for you. You can read more about the options for connecting in the
@@ -317,7 +317,7 @@ module Gcloud
   # upload large files. To avoid this problem, add the
   # [httpclient](https://rubygems.org/gems/httpclient) gem to your project, and
   # the line (or lines) of configuration shown below. These lines must execute
-  # after you require gcloud but before you make your first gcloud connection.
+  # after `require "gcloud"` but before you make your first connection.
   # The first statement configures [Faraday](https://rubygems.org/gems/faraday)
   # to use httpclient. The second statement, which should only be added if you
   # are using a version of Faraday at or above 0.9.2, is a workaround for [this

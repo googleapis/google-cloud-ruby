@@ -1,16 +1,16 @@
-# Releasing Gcloud
+# Releasing gcloud-ruby
 
-Gcloud uses [semantic versioning](http://semver.org). Replace the `<prev_version>` and `<version>` placeholders shown in the examples below with the appropriate numbers, e.g. `0.1.0` and `0.2.0`.
+The gcloud-ruby library uses [semantic versioning](http://semver.org). Replace the `<prev_version>` and `<version>` placeholders shown in the examples below with the appropriate numbers, e.g. `0.1.0` and `0.2.0`.
 
 After all [pull requests](https://github.com/GoogleCloudPlatform/gcloud-ruby/pulls) for a release have been merged and all [Travis CI builds](https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby) are green, you may create a release as follows:
 
-1. Build the Gcloud gem locally.
+1. Build the gcloud-ruby gem locally.
 
   ```sh
   $ rake build
   ```
 
-1. Install the Gcloud gem locally.
+1. Install the gcloud-ruby gem locally.
 
   ```sh
   $ rake install
@@ -76,6 +76,6 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/gcloud-ruby/pul
 
 1. Confirm that the gem for the new version is available on [RubyGems.org](https://rubygems.org/gems/gcloud).
 
-1. Confirm that the new version is displayed after "Latest release" on the [Gcloud gh-pages site](http://googlecloudplatform.github.io/gcloud-ruby/).
+1. Confirm that the new version is displayed after "Latest release" on the [gcloud-ruby gh-pages site](http://googlecloudplatform.github.io/gcloud-ruby/).
 
 High fives all around!

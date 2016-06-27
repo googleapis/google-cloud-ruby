@@ -500,8 +500,8 @@ module Gcloud
       #
       # To avoid broken pipe (`Errno::EPIPE`) errors when uploading, add the
       # [httpclient](https://rubygems.org/gems/httpclient) gem to your project,
-      # and the configuration shown below. These lines must execute after you
-      # require gcloud but before you make your first gcloud connection. The
+      # and the configuration shown below. These lines must execute after
+      # `require "gcloud"` but before you make your first connection. The
       # first statement configures [Faraday](https://rubygems.org/gems/faraday)
       # to use httpclient. The second statement, which should only be added if
       # you are using a version of Faraday at or above 0.9.2, is a workaround

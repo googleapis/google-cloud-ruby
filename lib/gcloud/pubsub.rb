@@ -72,7 +72,7 @@ module Gcloud
   # Cloud Pub/Sub allows developers to communicate between independently written
   # applications.
   #
-  # Gcloud's goal is to provide a API that is familiar and comfortable to
+  # The goal of gcloud-ruby is to provide a API that is comfortable to
   # Rubyists. Authentication is handled by {Gcloud#pubsub}. You can provide the
   # project and credential information to connect to the Pub/Sub service, or if
   # you are running on Google Compute Engine this configuration is taken care
@@ -452,7 +452,7 @@ module Gcloud
   # sub.topic.name #=> "projects/other-project-id/topics/other-topic"
   # ```
   #
-  # ## Using the Gcloud SDK Emulator
+  # ## Using the Google Cloud Pub/Sub Emulator
   #
   # To develop and test your application locally, you can use the [Google Cloud
   # Pub/Sub Emulator](https://cloud.google.com/pubsub/emulator), which provides

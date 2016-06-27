@@ -2,7 +2,7 @@
 
 ## Creating a Service Account
 
-Gcloud aims to make authentication as simple as possible. Google Cloud requires a **Project ID** and **Service Account Credentials** to connect to the APIs. To create a service account:
+The gcloud-ruby library aims to make authentication as simple as possible. Google Cloud requires a **Project ID** and **Service Account Credentials** to connect to the APIs. To create a service account:
 
 1. Visit the [Google Developers Console Projects page](https://console.developers.google.com/project).
 1. Create a new project or click on an existing project that you wish to use.
@@ -18,11 +18,11 @@ Gcloud aims to make authentication as simple as possible. Google Cloud requires 
 1. Under **New credentials**, select **Service account key**.
 1. If you want to create a new service account, under **Service account**, select **New service account**. Otherwise, select an existing service account. Submit the form to download a JSON type key. Save the downloaded JSON key file to authorize your requests.
 
-You will use the **Project ID** and **JSON file** to connect to services with gcloud.
+You will use the **Project ID** and **JSON file** to connect to services with gcloud-ruby.
 
 ## Project and Credential Lookup
 
-Gcloud aims to make authentication as simple as possible, and provides several mechanisms to configure your system without providing **Project ID** and **Service Account Credentials** directly in code.
+The gcloud-ruby library aims to make authentication as simple as possible, and provides several mechanisms to configure your system without providing **Project ID** and **Service Account Credentials** directly in code.
 
 **Project ID** is discovered in the following order:
 

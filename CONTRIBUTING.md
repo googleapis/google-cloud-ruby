@@ -1,4 +1,4 @@
-# Contributing to Gcloud
+# Contributing to gcloud-ruby
 
 1. **Sign one of the contributor license agreements below.**
 2. Fork the repo, develop and test your code changes.
