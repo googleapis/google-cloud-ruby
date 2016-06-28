@@ -16,8 +16,7 @@ require "helper"
 
 describe Gcloud::ResourceManager::Project, :mock_res_man do
   let(:seed) { 123 }
-  let(:project_hash) { random_project_hash(seed) }
-  let(:project_gapi) { Gcloud::ResourceManager::Service::API::Project.new project_hash }
+  let(:project_gapi) { random_project_gapi seed }
   let(:project) { Gcloud::ResourceManager::Project.from_gapi project_gapi,
                                                              resource_manager.service }
 
@@ -31,7 +30,7 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
 
   it "updates the name" do
     mock = Minitest::Mock.new
-    updated_project = Gcloud::ResourceManager::Service::API::Project.new project_hash.merge(name: "Updated Project 123")
+    updated_project = random_project_gapi seed, "Updated Project 123"
     mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
     project.name.must_equal "Example Project 123"
@@ -51,7 +50,7 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
 
   it "can update labels by setting a new hash" do
     mock = Minitest::Mock.new
-    updated_project = Gcloud::ResourceManager::Service::API::Project.new project_hash.merge(labels: { "env" => "testing" })
+    updated_project = random_project_gapi seed, nil, { "env" => "testing" }
     mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
     project.labels["env"].must_equal "production"
@@ -65,7 +64,7 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
 
   it "can update labels by using a block" do
     mock = Minitest::Mock.new
-    updated_project = Gcloud::ResourceManager::Service::API::Project.new project_hash.merge(labels: { "env" => "testing" })
+    updated_project = random_project_gapi seed, nil, { "env" => "testing" }
     mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
     project.labels["env"].must_equal "production"
@@ -81,7 +80,7 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
 
   it "does not update labels if they are not changed" do
     mock = Minitest::Mock.new
-    updated_project = Gcloud::ResourceManager::Service::API::Project.new project_hash.merge(labels: { "env" => "testing" })
+    updated_project = random_project_gapi seed, nil, { "env" => "testing" }
     # No expect, will fail if a call is actually made.
 
     project.labels["env"].must_equal "production"
@@ -97,7 +96,7 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
 
   it "can update name and labels in a single API call" do
     mock = Minitest::Mock.new
-    updated_project = Gcloud::ResourceManager::Service::API::Project.new project_hash.merge(name: "Updated Project 123", labels: { "env" => "testing" })
+    updated_project = random_project_gapi seed, "Updated Project 123", { "env" => "testing" }
     mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
     project.name.must_equal "Example Project 123"
@@ -116,7 +115,7 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
 
   it "can update name and override labels in a single API call" do
     mock = Minitest::Mock.new
-    updated_project = Gcloud::ResourceManager::Service::API::Project.new project_hash.merge(name: "Updated Project 123", labels: { "env" => "testing" })
+    updated_project = random_project_gapi seed, "Updated Project 123", { "env" => "testing" }
     mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
     project.name.must_equal "Example Project 123"
@@ -135,7 +134,7 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
 
   it "does not update name and labels if they are not changed" do
     mock = Minitest::Mock.new
-    updated_project = Gcloud::ResourceManager::Service::API::Project.new project_hash.merge(name: "Updated Project 123", labels: { "env" => "testing" })
+    updated_project = random_project_gapi seed, "Updated Project 123", { "env" => "testing" }
     # No expect, will fail if a call is actually made.
 
     project.name.must_equal "Example Project 123"
@@ -154,7 +153,8 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
 
   it "reloads itself" do
     mock = Minitest::Mock.new
-    unspecified_project = Gcloud::ResourceManager::Service::API::Project.new project_hash.merge(lifecycle_state: "LIFECYCLE_STATE_UNSPECIFIED")
+    unspecified_project = random_project_gapi seed
+    unspecified_project.lifecycle_state = "LIFECYCLE_STATE_UNSPECIFIED"
     mock.expect :get_project, unspecified_project, [project.project_id]
 
     project.must_be :active?
@@ -168,8 +168,9 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
 
   it "deletes itself" do
     mock = Minitest::Mock.new
-    empty_response      = Gcloud::ResourceManager::Service::API::Empty.new
-    deleted_project = Gcloud::ResourceManager::Service::API::Project.new project_hash.merge(lifecycle_state: "DELETE_REQUESTED")
+    empty_response      = Google::Apis::CloudresourcemanagerV1beta1::Empty.new
+    deleted_project = random_project_gapi seed
+    deleted_project.lifecycle_state = "DELETE_REQUESTED"
     # The delete request
     mock.expect :delete_project, empty_response,  [project.project_id]
     # The reload request
@@ -190,8 +191,9 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     project.gapi.lifecycle_state = "DELETE_REQUESTED"
 
     mock = Minitest::Mock.new
-    empty_response      = Gcloud::ResourceManager::Service::API::Empty.new
-    unspecified_project = Gcloud::ResourceManager::Service::API::Project.new project_hash.merge(lifecycle_state: "LIFECYCLE_STATE_UNSPECIFIED")
+    empty_response      = Google::Apis::CloudresourcemanagerV1beta1::Empty.new
+    unspecified_project = random_project_gapi seed
+    unspecified_project.lifecycle_state = "LIFECYCLE_STATE_UNSPECIFIED"
     # The delete request
     mock.expect :undelete_project, empty_response, [project.project_id]
     # The reload request
@@ -216,7 +218,11 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     end
 
     describe :unspecified do
-      let(:project_hash) { random_project_hash(seed).merge(lifecycle_state: "LIFECYCLE_STATE_UNSPECIFIED") }
+      let(:project_gapi) do
+        gapi = random_project_gapi seed
+        gapi.lifecycle_state = "LIFECYCLE_STATE_UNSPECIFIED"
+        gapi
+      end
 
       it "can be unspecified" do
         project.state.must_equal "LIFECYCLE_STATE_UNSPECIFIED"
@@ -228,7 +234,11 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     end
 
     describe :delete_requested do
-      let(:project_hash) { random_project_hash(seed).merge(lifecycle_state: "DELETE_REQUESTED") }
+      let(:project_gapi) do
+        gapi = random_project_gapi seed
+        gapi.lifecycle_state = "DELETE_REQUESTED"
+        gapi
+      end
 
       it "can be delete_requested" do
         project.state.must_equal "DELETE_REQUESTED"
@@ -240,7 +250,11 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     end
 
     describe :delete_in_progress do
-      let(:project_hash) { random_project_hash(seed).merge(lifecycle_state: "DELETE_IN_PROGRESS") }
+      let(:project_gapi) do
+        gapi = random_project_gapi seed
+        gapi.lifecycle_state = "DELETE_IN_PROGRESS"
+        gapi
+      end
 
       it "can be DELETE_IN_PROGRESS" do
         project.state.must_equal "DELETE_IN_PROGRESS"

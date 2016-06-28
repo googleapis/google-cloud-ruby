@@ -17,7 +17,7 @@ require "helper"
 describe Gcloud::ResourceManager::Manager, :mock_res_man do
   it "gets a project given a project_id" do
     mock = Minitest::Mock.new
-    random_project = Gcloud::ResourceManager::Service::API::Project.new random_project_hash(123)
+    random_project = random_project_gapi(123)
     mock.expect :get_project, random_project, ["example-project-123"]
 
     resource_manager.service.mocked_service = mock
@@ -30,8 +30,8 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
 
   it "creates a project" do
     mock = Minitest::Mock.new
-    created_project = Gcloud::ResourceManager::Service::API::Project.new create_project_hash("new-project-456")
-    mock.expect :create_project, created_project, [Gcloud::ResourceManager::Service::API::Project.new(projectId: "new-project-456")]
+    created_project = create_project_gapi("new-project-456")
+    mock.expect :create_project, created_project, [Google::Apis::CloudresourcemanagerV1beta1::Project.new(projectId: "new-project-456")]
 
     resource_manager.service.mocked_service = mock
     project = resource_manager.create_project "new-project-456"
@@ -45,8 +45,8 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
 
   it "creates a project with a name and labels" do
     mock = Minitest::Mock.new
-    created_project = Gcloud::ResourceManager::Service::API::Project.new create_project_hash("new-project-789", "My New Project", {"env" => "development"})
-    mock.expect :create_project, created_project, [Gcloud::ResourceManager::Service::API::Project.new(projectId: "new-project-789", name: "My New Project", labels: {:env => :development})]
+    created_project = create_project_gapi("new-project-789", "My New Project", {"env" => "development"})
+    mock.expect :create_project, created_project, [Google::Apis::CloudresourcemanagerV1beta1::Project.new(projectId: "new-project-789", name: "My New Project", labels: {:env => :development})]
 
     resource_manager.service.mocked_service = mock
     project = resource_manager.create_project "new-project-789",
@@ -244,7 +244,7 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
 
   it "deletes a project" do
     mock = Minitest::Mock.new
-    empty_response = Gcloud::ResourceManager::Service::API::Empty.new
+    empty_response = Google::Apis::CloudresourcemanagerV1beta1::Empty.new
     mock.expect :delete_project, empty_response, ["existing-project-123"]
 
     resource_manager.service.mocked_service = mock
@@ -254,7 +254,7 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
 
   it "undeletes a project" do
     mock = Minitest::Mock.new
-    empty_response = Gcloud::ResourceManager::Service::API::Empty.new
+    empty_response = Google::Apis::CloudresourcemanagerV1beta1::Empty.new
     mock.expect :undelete_project, empty_response, ["deleted-project-456"]
 
     resource_manager.service.mocked_service = mock
@@ -262,18 +262,18 @@ describe Gcloud::ResourceManager::Manager, :mock_res_man do
     mock.verify
   end
 
-  def create_project_hash project_id = nil, name = nil, labels = {}
-    hash = random_project_hash
-    hash[:project_id] = project_id if project_id
-    hash[:name]       = name
-    hash[:labels]     = labels
-    hash
+  def create_project_gapi project_id = nil, name = nil, labels = {}
+    gapi = random_project_gapi
+    gapi.project_id = project_id if project_id
+    gapi.name       = name
+    gapi.labels     = labels
+    gapi
   end
 
   def list_projects_response count = 2, token = nil
-    projects = count.times.map { random_project_hash }
+    projects = count.times.map { random_project_gapi }
     hash = { projects: projects }
     hash[:next_page_token] = token unless token.nil?
-    Gcloud::ResourceManager::Service::API::ListProjectsResponse.new hash
+    Google::Apis::CloudresourcemanagerV1beta1::ListProjectsResponse.new hash
   end
 end

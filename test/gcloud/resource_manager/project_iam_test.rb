@@ -16,8 +16,7 @@ require "helper"
 
 describe Gcloud::ResourceManager::Project, :iam, :mock_res_man do
   let(:seed) { 123 }
-  let(:project_hash) { random_project_hash(seed) }
-  let(:project_gapi) { Gcloud::ResourceManager::Service::API::Project.new project_hash }
+  let(:project_gapi) { random_project_gapi seed }
   let(:project) { Gcloud::ResourceManager::Project.from_gapi project_gapi,
                                                              resource_manager.service }
   let(:old_policy_hash) do
@@ -37,12 +36,12 @@ describe Gcloud::ResourceManager::Project, :iam, :mock_res_man do
           "serviceAccount:1234567890@developer.gserviceaccount.com"
         ], }], }
   end
-  let(:old_policy) { Gcloud::ResourceManager::Service::API::Policy.new old_policy_hash }
-  let(:new_policy) { Gcloud::ResourceManager::Service::API::Policy.new new_policy_hash }
+  let(:old_policy) { Google::Apis::CloudresourcemanagerV1beta1::Policy.new old_policy_hash }
+  let(:new_policy) { Google::Apis::CloudresourcemanagerV1beta1::Policy.new new_policy_hash }
 
   it "gets the policy" do
     mock = Minitest::Mock.new
-    random_project = Gcloud::ResourceManager::Service::API::Project.new random_project_hash(123)
+    random_project = random_project_gapi 123
     mock.expect :get_project_iam_policy, old_policy, ["projects/example-project-123"]
 
     resource_manager.service.mocked_service = mock
@@ -70,7 +69,7 @@ describe Gcloud::ResourceManager::Project, :iam, :mock_res_man do
 
   it "can force load the policy" do
     mock = Minitest::Mock.new
-    random_project = Gcloud::ResourceManager::Service::API::Project.new random_project_hash(123)
+    random_project = random_project_gapi 123
     mock.expect :get_project_iam_policy, new_policy, ["projects/example-project-123"]
 
     resource_manager.service.mocked_service = mock
@@ -97,7 +96,7 @@ describe Gcloud::ResourceManager::Project, :iam, :mock_res_man do
     returned_policy["bindings"].first["members"].first.must_equal "user:viewer@example.com"
 
     mock = Minitest::Mock.new
-    random_project = Gcloud::ResourceManager::Service::API::Project.new random_project_hash(123)
+    random_project = random_project_gapi 123
     mock.expect :get_project_iam_policy, new_policy, ["projects/example-project-123"]
 
     resource_manager.service.mocked_service = mock
@@ -114,7 +113,7 @@ describe Gcloud::ResourceManager::Project, :iam, :mock_res_man do
 
   it "sets the policy" do
     mock = Minitest::Mock.new
-    update_policy_request = Gcloud::ResourceManager::Service::API::SetIamPolicyRequest.new policy: new_policy
+    update_policy_request = Google::Apis::CloudresourcemanagerV1beta1::SetIamPolicyRequest.new policy: new_policy
     mock.expect :set_project_iam_policy, new_policy, ["projects/example-project-123", update_policy_request]
 
     resource_manager.service.mocked_service = mock
@@ -131,8 +130,8 @@ describe Gcloud::ResourceManager::Project, :iam, :mock_res_man do
 
   it "tests the permissions available" do
     mock = Minitest::Mock.new
-    update_policy_request  = Gcloud::ResourceManager::Service::API::TestIamPermissionsRequest.new  permissions: ["resourcemanager.projects.get", "resourcemanager.projects.delete"]
-    update_policy_response = Gcloud::ResourceManager::Service::API::TestIamPermissionsResponse.new permissions: ["resourcemanager.projects.get"]
+    update_policy_request  = Google::Apis::CloudresourcemanagerV1beta1::TestIamPermissionsRequest.new  permissions: ["resourcemanager.projects.get", "resourcemanager.projects.delete"]
+    update_policy_response = Google::Apis::CloudresourcemanagerV1beta1::TestIamPermissionsResponse.new permissions: ["resourcemanager.projects.get"]
     mock.expect :test_project_iam_permissions, update_policy_response, ["projects/example-project-123", update_policy_request]
 
     resource_manager.service.mocked_service = mock
