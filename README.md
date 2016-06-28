@@ -13,11 +13,15 @@ Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) ser
 
 This client supports the following Google Cloud Platform services:
 
-* [Google Cloud BigQuery](#bigquery)
-* [Google Cloud Datastore](#datastore)
-* [Google Cloud DNS](#dns)
-* [Google Cloud Pub/Sub](#pubsub)
-* [Google Cloud Storage](#storage)
+* [BigQuery](#bigquery)
+* [Cloud Datastore](#datastore)
+* [Cloud DNS](#dns)
+* [Stackdriver Logging](#logging)
+* [Cloud Pub/Sub](#pubsub)
+* [Cloud Resource Manager](#resource-manager)
+* [Cloud Storage](#storage)
+* [Google Translate API](#translate)
+* [Cloud Vision API](#vision)
 
 If you need support for other Google APIs, check out the [Google API Ruby Client library](https://github.com/google/google-api-ruby-client).
 
