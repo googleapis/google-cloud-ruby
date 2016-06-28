@@ -298,7 +298,7 @@ module Gcloud
       #     # process msg
       #   end
       #
-      # @example Limit the number of messages pulled per batch with `max`:
+      # @example Limit the number of messages pulled per API request with `max`:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
