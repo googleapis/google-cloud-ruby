@@ -149,4 +149,9 @@ describe Gcloud::Datastore::Entity do
       entity_from_grpc.key.id = 456789
     end
   end
+
+  it "knows its serialized side" do
+    # Don't care about the exact value, just want a number and no error
+    entity.serialized_size.must_be_kind_of Integer
+  end
 end
