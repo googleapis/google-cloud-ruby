@@ -132,7 +132,7 @@ module Gcloud
       ##
       # Performs detection of Cloud Vision [features](https://cloud.google.com/vision/reference/rest/v1/images/annotate#Feature)
       # on the given image(s). If no options for features are provided, **all**
-      # image detection features will be performed, with a default of `10`
+      # image detection features will be performed, with a default of `100`
       # results for faces, landmarks, logos, and labels. If any feature option
       # is provided, only the specified feature detections will be performed.
       # Please review [Pricing](https://cloud.google.com/vision/docs/pricing)
