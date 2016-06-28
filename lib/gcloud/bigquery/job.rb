@@ -13,9 +13,9 @@
 # limitations under the License.
 
 
+require "gcloud/errors"
 require "gcloud/bigquery/query_data"
 require "gcloud/bigquery/job/list"
-require "gcloud/bigquery/errors"
 require "json"
 
 module Gcloud
@@ -284,8 +284,7 @@ module Gcloud
         ensure_service!
         gapi = service.get_project_table project_id, dataset_id, table_id
         Table.from_gapi gapi, service
-      rescue Google::Apis::ClientError => e
-        raise e unless e.status_code == 404 # TODO: convert e to Gcloud::Error
+      rescue Gcloud::NotFoundError
         nil
       end
     end

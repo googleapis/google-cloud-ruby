@@ -101,7 +101,7 @@ describe Gcloud::Datastore::Dataset do
   it "allocate_ids raises when not given an incomplete key" do
     complete_key = Gcloud::Datastore::Key.new "ds-test", 789
     complete_key.must_be :complete?
-    assert_raises Gcloud::Datastore::Error do
+    assert_raises Gcloud::Datastore::KeyError do
       dataset.allocate_ids complete_key
     end
   end
@@ -1291,8 +1291,8 @@ describe Gcloud::Datastore::Dataset do
 
     error.wont_be :nil?
     error.message.must_equal "Transaction failed to commit."
-    error.inner.wont_be :nil?
-    error.inner.message.must_equal "This error should be wrapped by TransactionError."
+    error.cause.wont_be :nil?
+    error.cause.message.must_equal "This error should be wrapped by TransactionError."
   end
 
   it "transaction will wrap errors for both commit and rollback" do
@@ -1329,10 +1329,10 @@ describe Gcloud::Datastore::Dataset do
 
       error.wont_be :nil?
       error.message.must_equal "Transaction failed to commit and rollback."
-      error.commit_error.wont_be :nil?
-      error.commit_error.message.must_equal "commit error"
-      error.rollback_error.wont_be :nil?
-      error.rollback_error.message.must_equal "rollback error"
+      error.cause.wont_be :nil?
+      error.cause.message.must_equal "rollback error"
+      error.cause.cause.wont_be :nil?
+      error.cause.cause.message.must_equal "commit error"
     ensure
       # Reset mocked service so the call to verify works.
       dataset.service = mocked_service

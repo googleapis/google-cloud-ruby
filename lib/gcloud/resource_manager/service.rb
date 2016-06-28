@@ -14,6 +14,7 @@
 
 
 require "gcloud/version"
+require "gcloud/errors"
 require "google/apis/cloudresourcemanager_v1beta1"
 
 module Gcloud
@@ -55,6 +56,8 @@ module Gcloud
       # Returns API::Project
       def get_project project_id
         service.get_project project_id
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -63,6 +66,8 @@ module Gcloud
         project_attrs = { projectId: project_id, name: name,
                           labels: labels }.delete_if { |_, v| v.nil? }
         service.create_project API::Project.new(project_attrs)
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -70,20 +75,28 @@ module Gcloud
       # Returns API::Project
       def update_project project_gapi
         service.update_project project_gapi.project_id, project_gapi
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def delete_project project_id
         service.delete_project project_id
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def undelete_project project_id
         service.undelete_project project_id
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Returns API::Policy
       def get_policy project_id
         service.get_project_iam_policy "projects/#{project_id}"
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -91,6 +104,8 @@ module Gcloud
       def set_policy project_id, new_policy
         req = API::SetIamPolicyRequest.new policy: new_policy
         service.set_project_iam_policy "projects/#{project_id}", req
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -98,6 +113,8 @@ module Gcloud
       def test_permissions project_id, permissions
         req = API::TestIamPermissionsRequest.new permissions: permissions
         service.test_project_iam_permissions "projects/#{project_id}", req
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def inspect

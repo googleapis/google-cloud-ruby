@@ -13,11 +13,11 @@
 # limitations under the License.
 
 
+require "gcloud/errors"
 require "gcloud/gce"
 require "gcloud/dns/service"
 require "gcloud/dns/credentials"
 require "gcloud/dns/zone"
-require "gcloud/dns/errors"
 
 module Gcloud
   module Dns
@@ -153,8 +153,7 @@ module Gcloud
         ensure_service!
         gapi = service.get_zone zone_id
         Zone.from_gapi gapi, service
-      rescue Google::Apis::ClientError => e
-        raise e unless e.status_code == 404 # TODO: convert e to Gcloud::Error
+      rescue Gcloud::NotFoundError
         nil
       end
       alias_method :find_zone, :zone

@@ -60,18 +60,24 @@ module Gcloud
         service.list_datasets \
         @project, all: options[:all], max_results: options[:max],
                   page_token: options[:token]
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Returns the dataset specified by datasetID.
       def get_dataset dataset_id
         service.get_dataset @project, dataset_id
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Creates a new empty dataset.
       def insert_dataset dataset_id, new_dataset_gapi
         service.insert_dataset @project, new_dataset_gapi
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -79,6 +85,8 @@ module Gcloud
       # fields that are provided in the submitted dataset resource.
       def patch_dataset dataset_id, patched_dataset_gapi
         service.patch_dataset @project, dataset_id, patched_dataset_gapi
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -89,6 +97,8 @@ module Gcloud
       # the same name.
       def delete_dataset dataset_id, force = nil
         service.delete_dataset @project, dataset_id, delete_contents: force
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -96,10 +106,14 @@ module Gcloud
       # Requires the READER dataset role.
       def list_tables dataset_id, options = {}
         service.list_tables @project, dataset_id, max_results: options[:max], page_token: options[:token]
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def get_project_table project_id, dataset_id, table_id
         service.get_table project_id, dataset_id, table_id
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -109,12 +123,16 @@ module Gcloud
       # which describes the structure of this table.
       def get_table dataset_id, table_id
         get_project_table @project, dataset_id, table_id
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Creates a new, empty table in the dataset.
       def insert_table dataset_id, new_table_gapi
         service.insert_table @project, dataset_id, new_table_gapi
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -122,6 +140,8 @@ module Gcloud
       # are provided in the submitted table resource.
       def patch_table dataset_id, table_id, patched_table_gapi
         service.patch_table @project, dataset_id, table_id, patched_table_gapi
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -129,6 +149,8 @@ module Gcloud
       # If the table contains data, all the data will be deleted.
       def delete_table dataset_id, table_id
         service.delete_table @project, dataset_id, table_id
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -138,6 +160,8 @@ module Gcloud
                                 max_results: options.delete(:max),
                                 page_token: options.delete(:token),
                                 start_index: options.delete(:start)
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def insert_tabledata dataset_id, table_id, rows, options = {}
@@ -154,6 +178,8 @@ module Gcloud
         )
 
         service.insert_all_table_data @project, dataset_id, table_id, insert_req
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -164,12 +190,16 @@ module Gcloud
           @project, all_users: options[:all], max_results: options[:max],
                     page_token: options[:token], projection: "full",
                     state_filter: options[:filter]
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Returns the job specified by jobID.
       def get_job job_id
         service.get_job @project, job_id
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def insert_job config
@@ -177,15 +207,21 @@ module Gcloud
           configuration: config
         )
         service.insert_job @project, job_object
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def query_job query, options = {}
         config = query_table_config(query, options)
         service.insert_job @project, config
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def query query, options = {}
         service.query_job @project, query_config(query, options)
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -197,14 +233,20 @@ module Gcloud
                                       page_token: options.delete(:token),
                                       start_index: options.delete(:start),
                                       timeout_ms: options.delete(:timeout)
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def copy_table source, target, options = {}
         service.insert_job @project, copy_table_config(source, target, options)
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def extract_table table, storage_files, options = {}
         service.insert_job @project, extract_table_config(table, storage_files, options)
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def load_table_gs_url dataset_id, table_id, storage_url, options = {}
@@ -235,6 +277,8 @@ module Gcloud
         )
 
         service.insert_job @project, insert_job
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def load_table_file dataset_id, table_id, file, options = {}
@@ -268,6 +312,8 @@ module Gcloud
         service.insert_job \
           @project, insert_job, upload_source: file,
                                 content_type: mime_type_for(file)
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##

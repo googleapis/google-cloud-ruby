@@ -101,8 +101,6 @@ module Gcloud
                                        consistency: @consistency,
                                        transaction: @transaction)
           self.class.from_grpc lookup_res, @service, @consistency
-        rescue GRPC::BadStatus => e
-          raise Gcloud::Error.from_error(e)
         end
 
         ##

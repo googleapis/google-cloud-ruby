@@ -14,6 +14,7 @@
 
 
 require "gcloud/version"
+require "gcloud/errors"
 require "google/apis/vision_v1"
 
 module Gcloud
@@ -51,6 +52,8 @@ module Gcloud
       def annotate requests
         request = API::BatchAnnotateImagesRequest.new(requests: requests)
         service.annotate_image request
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def inspect

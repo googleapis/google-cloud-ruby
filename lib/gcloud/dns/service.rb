@@ -14,6 +14,7 @@
 
 
 require "gcloud/version"
+require "gcloud/errors"
 require "google/apis/dns_v1"
 
 module Gcloud
@@ -50,18 +51,24 @@ module Gcloud
       # Returns Google::Apis::DnsV1::Project
       def get_project project_id = @project
         service.get_project project_id
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Returns Google::Apis::DnsV1::ManagedZone
       def get_zone zone_id
         service.get_managed_zone @project, zone_id
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Returns Google::Apis::DnsV1::ListManagedZonesResponse
       def list_zones token: nil, max: nil
         service.list_managed_zones @project, max_results: max, page_token: token
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -76,16 +83,22 @@ module Gcloud
           name_server_set: name_server_set
         )
         service.create_managed_zone @project, managed_zone
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def delete_zone zone_id
         service.delete_managed_zone @project, zone_id
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Returns Google::Apis::DnsV1::Change
       def get_change zone_id, change_id
         service.get_change @project, zone_id, change_id
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -95,6 +108,8 @@ module Gcloud
                                                 page_token: token,
                                                 sort_by: sort,
                                                 sort_order: order
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -106,6 +121,8 @@ module Gcloud
           deletions: Array(deletions)
         )
         service.create_change @project, zone_id, change
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -115,6 +132,8 @@ module Gcloud
                                                              name: name,
                                                              page_token: token,
                                                              type: type
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -130,8 +149,6 @@ module Gcloud
       end
 
       require "ipaddr"
-      # Fix to make ip_addr? work on ruby 1.9
-      IPAddr::Error = ArgumentError unless defined? IPAddr::Error
 
       def self.ip_addr? name
         IPAddr.new name

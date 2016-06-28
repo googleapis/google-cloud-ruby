@@ -13,9 +13,10 @@
 # limitations under the License.
 
 
+require "gcloud/backoff"
+require "gcloud/errors"
 require "google/pubsub/v1/pubsub_services"
 require "google/iam/v1/iam_policy_services"
-require "gcloud/backoff"
 require "gcloud/grpc_utils"
 require "json"
 
@@ -74,7 +75,7 @@ module Gcloud
           r.topic = topic_path(topic_name, options)
         end
 
-        backoff { publisher.get_topic topic_req }
+        execute { publisher.get_topic topic_req }
       end
 
       ##
@@ -86,7 +87,7 @@ module Gcloud
           r.page_size = options[:max] if options[:max]
         end
 
-        backoff { publisher.list_topics topics_req }
+        execute { publisher.list_topics topics_req }
       end
 
       ##
@@ -96,7 +97,7 @@ module Gcloud
           r.name = topic_path(topic_name, options)
         end
 
-        backoff { publisher.create_topic topic_req }
+        execute { publisher.create_topic topic_req }
       end
 
       ##
@@ -109,7 +110,7 @@ module Gcloud
           r.topic = topic_path(topic_name)
         end
 
-        backoff { publisher.delete_topic topic_req }
+        execute { publisher.delete_topic topic_req }
       end
 
       ##
@@ -126,7 +127,7 @@ module Gcloud
           end
         )
 
-        backoff { publisher.publish publish_req }
+        execute { publisher.publish publish_req }
       end
 
       ##
@@ -136,7 +137,7 @@ module Gcloud
           subscription: subscription_path(subscription_name, options)
         )
 
-        backoff { subscriber.get_subscription sub_req }
+        execute { subscriber.get_subscription sub_req }
       end
 
       ##
@@ -148,7 +149,7 @@ module Gcloud
         list_req = Google::Pubsub::V1::ListTopicSubscriptionsRequest.new \
           list_params
 
-        backoff { publisher.list_topic_subscriptions list_req }
+        execute { publisher.list_topic_subscriptions list_req }
       end
 
       ##
@@ -159,7 +160,7 @@ module Gcloud
                         page_size:  options[:max] }.delete_if { |_, v| v.nil? }
         list_req = Google::Pubsub::V1::ListSubscriptionsRequest.new list_params
 
-        backoff { subscriber.list_subscriptions list_req }
+        execute { subscriber.list_subscriptions list_req }
       end
 
       ##
@@ -176,7 +177,7 @@ module Gcloud
             attributes: (options[:attributes] || {}).to_h)
         end
 
-        backoff { subscriber.create_subscription sub_req }
+        execute { subscriber.create_subscription sub_req }
       end
 
       ##
@@ -187,7 +188,7 @@ module Gcloud
           subscription: subscription_path(subscription)
         )
 
-        backoff { subscriber.delete_subscription del_req }
+        execute { subscriber.delete_subscription del_req }
       end
 
       ##
@@ -199,7 +200,7 @@ module Gcloud
           max_messages: options.fetch(:max, 100).to_i
         )
 
-        backoff { subscriber.pull pull_req }
+        execute { subscriber.pull pull_req }
       end
 
       ##
@@ -210,7 +211,7 @@ module Gcloud
           ack_ids: ack_ids
         )
 
-        backoff { subscriber.acknowledge ack_req }
+        execute { subscriber.acknowledge ack_req }
       end
 
       ##
@@ -227,7 +228,7 @@ module Gcloud
           )
         )
 
-        backoff { subscriber.modify_push_config mpc_req }
+        execute { subscriber.modify_push_config mpc_req }
       end
 
       ##
@@ -239,7 +240,7 @@ module Gcloud
           ack_deadline_seconds: deadline
         )
 
-        backoff { subscriber.modify_ack_deadline mad_req }
+        execute { subscriber.modify_ack_deadline mad_req }
       end
 
       def get_topic_policy topic_name, options = {}
@@ -247,7 +248,7 @@ module Gcloud
           resource: topic_path(topic_name, options)
         )
 
-        backoff { iam.get_iam_policy get_req }
+        execute { iam.get_iam_policy get_req }
       end
 
       def set_topic_policy topic_name, new_policy, options = {}
@@ -256,7 +257,7 @@ module Gcloud
           policy: new_policy
         )
 
-        backoff { iam.set_iam_policy set_req }
+        execute { iam.set_iam_policy set_req }
       end
 
       def test_topic_permissions topic_name, permissions, options = {}
@@ -265,7 +266,7 @@ module Gcloud
           permissions: permissions
         )
 
-        backoff { iam.test_iam_permissions test_req }
+        execute { iam.test_iam_permissions test_req }
       end
 
       def get_subscription_policy subscription_name, options = {}
@@ -273,7 +274,7 @@ module Gcloud
           resource: subscription_path(subscription_name, options)
         )
 
-        backoff { iam.get_iam_policy get_req }
+        execute { iam.get_iam_policy get_req }
       end
 
       def set_subscription_policy subscription_name, new_policy, options = {}
@@ -282,7 +283,7 @@ module Gcloud
           policy: new_policy
         )
 
-        backoff { iam.set_iam_policy set_req }
+        execute { iam.set_iam_policy set_req }
       end
 
       def test_subscription_permissions subscription_name,
@@ -292,7 +293,7 @@ module Gcloud
           permissions: permissions
         )
 
-        backoff { iam.test_iam_permissions test_req }
+        execute { iam.test_iam_permissions test_req }
       end
 
       def project_path options = {}
@@ -316,10 +317,12 @@ module Gcloud
 
       protected
 
-      def backoff options = {}
-        Gcloud::Backoff.new(options).execute_grpc do
+      def execute
+        Gcloud::Backoff.new.execute_grpc do
           yield
         end
+      rescue GRPC::BadStatus => e
+        raise Error.from_error(e)
       end
     end
   end

@@ -14,7 +14,6 @@
 
 
 require "time"
-require "gcloud/resource_manager/errors"
 
 module Gcloud
   module ResourceManager

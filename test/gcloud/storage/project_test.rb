@@ -200,15 +200,15 @@ describe Gcloud::Storage::Project, :mock_storage do
   end
 
   it "raises when creating a bucket with a blank name" do
-    skip "Need to update this when we decide on an apporach for error handling"
     bucket_name = ""
 
-    mock_connection.post "/storage/v1/b?project=#{project}" do |env|
-      [400, { "Content-Type" => "application/json" },
-       invalid_bucket_name_error_json(bucket_name)]
+    stub = Object.new
+    def stub.insert_bucket *args
+      raise Google::Apis::ClientError.new("invalid argument", status_code: 400)
     end
+    storage.service.mocked_service = stub
 
-    assert_raises Gcloud::Storage::ApiError do
+    assert_raises Gcloud::InvalidArgumentError do
       storage.create_bucket bucket_name
     end
   end

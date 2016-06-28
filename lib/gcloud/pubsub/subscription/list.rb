@@ -191,16 +191,12 @@ module Gcloud
           options = { prefix: @prefix, token: @token, max: @max }
           grpc = @service.list_subscriptions options
           self.class.from_grpc grpc, @service, @max
-        rescue GRPC::BadStatus => e
-          raise Error.from_error(e)
         end
 
         def next_topic_subscriptions
           options = { token: @token, max: @max }
           grpc = @service.list_topics_subscriptions @topic, options
           self.class.from_topic_grpc grpc, @service, @topic, @max
-        rescue GRPC::BadStatus => e
-          raise Error.from_error(e)
         end
       end
     end

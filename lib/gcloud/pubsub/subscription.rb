@@ -114,8 +114,6 @@ module Gcloud
           push_endpoint: new_endpoint,
           attributes: {}
         ) if @grpc
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
 
       ##
@@ -178,8 +176,6 @@ module Gcloud
         ensure_service!
         service.delete_subscription name
         return true
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
 
       ##
@@ -238,9 +234,7 @@ module Gcloud
         end
         acknowledge messages if autoack
         messages
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
-      rescue Faraday::TimeoutError
+      rescue Hurley::Timeout
         []
       end
 
@@ -358,8 +352,6 @@ module Gcloud
         ensure_service!
         service.acknowledge name, *ack_ids
         true
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
       alias_method :ack, :acknowledge
 
@@ -393,8 +385,6 @@ module Gcloud
         ensure_service!
         service.modify_ack_deadline name, ack_ids, new_deadline
         return true
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
 
       ##
@@ -454,8 +444,6 @@ module Gcloud
           ensure_service!
           grpc = service.get_subscription_policy name
           Policy.from_grpc grpc
-        rescue GRPC::BadStatus => e
-          raise Error.from_error(e)
         end
         return @policy unless block_given?
         p = @policy.deep_dup
@@ -495,8 +483,6 @@ module Gcloud
         ensure_service!
         grpc = service.set_subscription_policy name, new_policy.to_grpc
         @policy = Policy.from_grpc grpc
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
 
       ##
@@ -537,8 +523,6 @@ module Gcloud
         ensure_service!
         grpc = service.test_subscription_permissions name, permissions
         grpc.permissions
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
 
       ##
@@ -566,8 +550,6 @@ module Gcloud
         ensure_service!
         return @grpc if @grpc
         @grpc = service.get_subscription @name
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
 
       ##

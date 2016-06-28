@@ -13,13 +13,12 @@
 # limitations under the License.
 
 
+require "gcloud/errors"
 require "gcloud/bigquery/view"
 require "gcloud/bigquery/data"
 require "gcloud/bigquery/table/list"
 require "gcloud/bigquery/schema"
-require "gcloud/bigquery/errors"
 require "gcloud/bigquery/insert_response"
-require "gcloud/upload"
 
 module Gcloud
   module Bigquery

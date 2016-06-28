@@ -302,15 +302,13 @@ describe Gcloud::Storage::Bucket, :default_acl, :mock_storage do
   end
 
   def predefined_default_acl_update_with_error acl_role
-    skip "We need error handling to implement these"
-
     stub = Object.new
     def stub.patch_bucket *args
-      raise Google::Apis::ClientError.new("...", code: 409)
+      raise Google::Apis::ClientError.new("already exists", status_code: 409)
     end
     storage.service.mocked_service = stub
 
-    expect { yield bucket.default_acl }.must_raise Gcloud::Storage::ApiError
+    expect { yield bucket.default_acl }.must_raise Gcloud::AlreadyExistsError
   end
 
   def random_default_acl_hash bucket_name

@@ -14,9 +14,9 @@
 
 
 require "gcloud/gce"
+require "gcloud/errors"
 require "gcloud/bigquery/service"
 require "gcloud/bigquery/credentials"
-require "gcloud/bigquery/errors"
 require "gcloud/bigquery/dataset"
 require "gcloud/bigquery/job"
 require "gcloud/bigquery/query_data"
@@ -247,7 +247,8 @@ module Gcloud
         ensure_service!
         gapi = service.get_dataset dataset_id
         Dataset.from_gapi gapi, service
-        # return nil if resp.status == 404
+      rescue Gcloud::NotFoundError
+        nil
       end
 
       ##
@@ -401,7 +402,8 @@ module Gcloud
         ensure_service!
         gapi = service.get_job job_id
         Job.from_gapi gapi, service
-        # return nil if resp.status == 404
+      rescue Gcloud::NotFoundError
+        nil
       end
 
       ##

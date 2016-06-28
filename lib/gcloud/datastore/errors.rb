@@ -18,46 +18,24 @@ require "gcloud/errors"
 module Gcloud
   module Datastore
     ##
-    # # Datastore Error
+    # # KeyError
     #
-    # Base Datastore exception class.
-    class Error < Gcloud::Error
-    end
-
-    ##
-    # # KeyfileError
-    #
-    # Raised when a keyfile is not correct.
-    class KeyfileError < Gcloud::Datastore::Error
+    # Raised when a key is not correct.
+    class KeyError < Gcloud::Error
     end
 
     ##
     # # PropertyError
     #
     # Raised when a property is not correct.
-    class PropertyError < Gcloud::Datastore::Error
+    class PropertyError < Gcloud::Error
     end
 
     ##
     # # TransactionError
     #
     # General error for Transaction problems.
-    class TransactionError < Gcloud::Datastore::Error
-      ##
-      # An error that occurred within the transaction. (optional)
-      attr_reader :commit_error
-      alias_method :inner, :commit_error # backwards compatibility
-
-      ##
-      # An error that occurred within the transaction. (optional)
-      attr_reader :rollback_error
-
-      # @private
-      def initialize message, commit_error: nil, rollback_error: nil
-        super(message)
-        @commit_error   = commit_error
-        @rollback_error = rollback_error
-      end
+    class TransactionError < Gcloud::Error
     end
   end
 end

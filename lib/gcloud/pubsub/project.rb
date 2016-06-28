@@ -142,12 +142,9 @@ module Gcloud
         return Topic.new_lazy(topic_name, service, options) if skip_lookup
         grpc = service.get_topic topic_name
         Topic.from_grpc grpc, service
-      rescue GRPC::BadStatus => e
-        if e.code == 5
-          return create_topic(topic_name) if autocreate
-          return nil
-        end
-        raise Error.from_error(e)
+      rescue Gcloud::NotFoundError
+        return create_topic(topic_name) if autocreate
+        nil
       end
       alias_method :get_topic, :topic
       alias_method :find_topic, :topic
@@ -170,8 +167,6 @@ module Gcloud
         ensure_service!
         grpc = service.create_topic topic_name
         Topic.from_grpc grpc, service
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
       alias_method :new_topic, :create_topic
 
@@ -213,8 +208,6 @@ module Gcloud
         options = { token: token, max: max }
         grpc = service.list_topics options
         Topic::List.from_grpc grpc, service, max
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
       alias_method :find_topics, :topics
       alias_method :list_topics, :topics
@@ -363,14 +356,14 @@ module Gcloud
         grpc = service.create_subscription topic_name,
                                            subscription_name, options
         Subscription.from_grpc grpc, service
-      rescue GRPC::BadStatus => e
-        if autocreate && e.code == 5
+      rescue Gcloud::NotFoundError => e
+        if autocreate
           create_topic topic_name
           return subscribe(topic_name, subscription_name,
                            deadline: deadline, endpoint: endpoint,
                            autocreate: false)
         end
-        raise Error.from_error(e)
+        raise e
       end
       alias_method :create_subscription, :subscribe
       alias_method :new_subscription, :subscribe
@@ -417,9 +410,8 @@ module Gcloud
         end
         grpc = service.get_subscription subscription_name
         Subscription.from_grpc grpc, service
-      rescue GRPC::BadStatus => e
-        return nil if e.code == 5
-        raise Error.from_error(e)
+      rescue Gcloud::NotFoundError
+        nil
       end
       alias_method :get_subscription, :subscription
       alias_method :find_subscription, :subscription
@@ -461,8 +453,6 @@ module Gcloud
         options = { token: token, max: max }
         grpc = service.list_subscriptions options
         Subscription::List.from_grpc grpc, service, max
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
       alias_method :find_subscriptions, :subscriptions
       alias_method :list_subscriptions, :subscriptions
@@ -481,13 +471,12 @@ module Gcloud
       def publish_batch_messages topic_name, batch, autocreate = false
         grpc = service.publish topic_name, batch.messages
         batch.to_gcloud_messages Array(grpc.message_ids)
-      rescue GRPC::BadStatus => e
-        if autocreate && e.code == 5
+      rescue Gcloud::NotFoundError => e
+        if autocreate
           create_topic topic_name
-          publish_batch_messages topic_name, batch, false
-        else
-          raise Error.from_error(e)
+          return publish_batch_messages topic_name, batch, false
         end
+        raise e
       end
     end
   end

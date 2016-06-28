@@ -14,7 +14,7 @@
 
 
 require "json"
-require "gcloud/bigquery/errors"
+require "gcloud/errors"
 require "gcloud/bigquery/table"
 require "gcloud/bigquery/dataset/list"
 require "gcloud/bigquery/dataset/access"
@@ -457,6 +457,8 @@ module Gcloud
         ensure_service!
         gapi = service.get_table dataset_id, table_id
         Table.from_gapi gapi, service
+      rescue Gcloud::NotFoundError
+        nil
       end
 
       ##

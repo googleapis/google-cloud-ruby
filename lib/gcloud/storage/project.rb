@@ -158,9 +158,8 @@ module Gcloud
       def bucket bucket_name
         gapi = service.get_bucket bucket_name
         Bucket.from_gapi gapi, service
-      rescue Google::Apis::ClientError => e
-        return nil if e.status_code == 404
-        raise e
+      rescue Gcloud::NotFoundError
+        nil
       end
       alias_method :find_bucket, :bucket
 

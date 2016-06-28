@@ -14,6 +14,7 @@
 
 
 require "gcloud/version"
+require "gcloud/errors"
 require "google/apis/translate_v2"
 
 module Gcloud
@@ -49,18 +50,24 @@ module Gcloud
       def translate text, to: nil, from: nil, format: nil, cid: nil
         service.list_translations Array(text), to, cid: cid, format: format,
                                                    source: from
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Returns API::ListDetectionsResponse
       def detect text
         service.list_detections Array(text)
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Returns API::ListLanguagesResponse
       def languages language = nil
         service.list_languages target: language
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def inspect

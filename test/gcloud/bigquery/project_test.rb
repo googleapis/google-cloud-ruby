@@ -183,15 +183,15 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
   end
 
   it "raises when creating a dataset with a blank id" do
-    skip "wait until we have more unified error handling"
-
     stub = Object.new
     def stub.insert_dataset *args
       raise Google::Apis::ClientError.new("invalid", status_code: 409)
     end
     bigquery.service.mocked_service = stub
 
-    expect { bigquery.create_dataset "" }.must_raise Gcloud::InvalidArgumentError
+    # it would be really great if the error handling would differentiate
+    # between AlreadyExistsError and InvalidArgumentError
+    expect { bigquery.create_dataset "" }.must_raise Gcloud::AlreadyExistsError
   end
 
   it "lists datasets" do

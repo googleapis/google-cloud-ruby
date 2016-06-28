@@ -60,6 +60,8 @@ module Gcloud
       def list_buckets prefix: nil, token: nil, max: nil
         service.list_buckets @project, prefix: prefix, page_token: token,
                                        max_results: max
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -67,6 +69,8 @@ module Gcloud
       # Returns Google::Apis::StorageV1::Bucket.
       def get_bucket bucket_name
         service.get_bucket bucket_name
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -77,6 +81,8 @@ module Gcloud
           @project, bucket_gapi,
           predefined_acl: options[:acl],
           predefined_default_object_acl: options[:default_acl]
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -90,18 +96,24 @@ module Gcloud
           bucket_name, patched_bucket,
           predefined_acl: predefined_acl,
           predefined_default_object_acl: predefined_default_acl
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Permanently deletes an empty bucket.
       def delete_bucket bucket_name
         service.delete_bucket bucket_name
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Retrieves a list of ACLs for the given bucket.
       def list_bucket_acls bucket_name
         service.list_bucket_access_controls bucket_name
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -110,18 +122,24 @@ module Gcloud
         new_acl = Google::Apis::StorageV1::BucketAccessControl.new \
           entity: entity, role: role
         service.insert_bucket_access_control bucket_name, new_acl
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Permanently deletes a bucket ACL.
       def delete_bucket_acl bucket_name, entity
         service.delete_bucket_access_control bucket_name, entity
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Retrieves a list of default ACLs for the given bucket.
       def list_default_acls bucket_name
         service.list_default_object_access_controls bucket_name
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -130,12 +148,16 @@ module Gcloud
         new_acl = Google::Apis::StorageV1::ObjectAccessControl.new \
           entity: entity, role: role
         service.insert_default_object_access_control bucket_name, new_acl
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Permanently deletes a default ACL.
       def delete_default_acl bucket_name, entity
         service.delete_default_object_access_control bucket_name, entity
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -145,6 +167,8 @@ module Gcloud
           bucket_name, delimiter: options[:delimiter],
                        max_results: options[:max], page_token: options[:token],
                        prefix: options[:prefix], versions: options[:versions]
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -165,6 +189,8 @@ module Gcloud
           name: path, predefined_acl: acl, upload_source: source,
           content_encoding: content_encoding, content_type: content_type,
           options: key_options(key: key, key_sha256: key_sha256)
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -175,6 +201,8 @@ module Gcloud
           bucket_name, file_path,
           generation: generation,
           options: key_options(key: key, key_sha256: key_sha256)
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ## Copy a file from source bucket/object to a
@@ -188,6 +216,8 @@ module Gcloud
           source_generation: options[:generation],
           options: key_options(key: options[:key],
                                key_sha256: options[:key_sha256])
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -198,6 +228,8 @@ module Gcloud
           bucket_name, file_path,
           download_dest: target_path, generation: generation,
           options: key_options(key: key, key_sha256: key_sha256)
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -208,18 +240,24 @@ module Gcloud
         service.patch_object \
           bucket_name, file_path, patched_file,
           predefined_acl: predefined_acl
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Permanently deletes a file.
       def delete_file bucket_name, file_path
         service.delete_object bucket_name, file_path
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
       # Retrieves a list of ACLs for the given file.
       def list_file_acls bucket_name, file_name
         service.list_object_access_controls bucket_name, file_name
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -229,6 +267,8 @@ module Gcloud
           entity: entity, role: role
         service.insert_object_access_control \
           bucket_name, file_name, new_acl, generation: options[:generation]
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -236,6 +276,8 @@ module Gcloud
       def delete_file_acl bucket_name, file_name, entity, options = {}
         service.delete_object_access_control \
           bucket_name, file_name, entity, generation: options[:generation]
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -296,12 +338,6 @@ module Gcloud
           main_page_suffix: website_main,
           not_found_page: website_404
         }.delete_if { |_, v| v.nil? } if website_main || website_404
-      end
-
-      def execute options
-        Gcloud::Backoff.new.execute_gapi do
-          @client.execute options
-        end
       end
     end
   end

@@ -166,8 +166,6 @@ module Gcloud
       def save
         ensure_service!
         @grpc = service.update_sink name, destination, filter, version
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -176,8 +174,6 @@ module Gcloud
       def reload!
         ensure_service!
         @grpc = service.get_sink name
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
       alias_method :refresh!, :reload!
 
@@ -198,8 +194,6 @@ module Gcloud
         ensure_service!
         service.delete_sink name
         return true
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
 
       ##

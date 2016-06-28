@@ -190,8 +190,7 @@ module Gcloud
         ensure_service!
         gapi = service.get_change id, change_id
         Change.from_gapi gapi, self
-      rescue Google::Apis::ClientError => e
-        raise e unless e.status_code == 404 # TODO: convert e to Gcloud::Error
+      rescue Gcloud::NotFoundError
         nil
       end
       alias_method :find_change, :change

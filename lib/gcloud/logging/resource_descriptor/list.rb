@@ -74,8 +74,6 @@ module Gcloud
           ensure_service!
           list_grpc = @service.list_resource_descriptors token: token, max: @max
           self.class.from_grpc list_grpc, @service
-        rescue GRPC::BadStatus => e
-          raise Gcloud::Error.from_error(e)
         end
 
         ##

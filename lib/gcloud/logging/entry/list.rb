@@ -74,8 +74,6 @@ module Gcloud
           grpc = @service.list_entries token: token, projects: @projects,
                                        filter: @filter, order: @order, max: @max
           self.class.from_grpc grpc, @service
-        rescue GRPC::BadStatus => e
-          raise Gcloud::Error.from_error(e)
         end
 
         ##

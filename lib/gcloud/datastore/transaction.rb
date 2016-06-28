@@ -201,8 +201,6 @@ module Gcloud
         lookup_res = service.lookup(*Array(keys).flatten.map(&:to_grpc),
                                     transaction: @id)
         LookupResults.from_grpc lookup_res, service, nil, @id
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
       alias_method :lookup, :find_all
 
@@ -237,8 +235,6 @@ module Gcloud
         query_res = service.run_query query.to_grpc, namespace,
                                       transaction: @id
         QueryResults.from_grpc query_res, service, namespace, query.to_grpc.dup
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
       alias_method :run_query, :run
 
@@ -251,8 +247,6 @@ module Gcloud
         ensure_service!
         tx_res = service.begin_transaction
         @id = tx_res.transaction
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
       alias_method :begin_transaction, :start
 
@@ -319,8 +313,6 @@ module Gcloud
         # Make sure all entity keys are frozen so all show as persisted
         entities.each { |e| e.key.freeze unless e.persisted? }
         true
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -356,8 +348,6 @@ module Gcloud
         ensure_service!
         service.rollback @id
         true
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
 
       ##

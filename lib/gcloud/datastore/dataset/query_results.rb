@@ -160,8 +160,6 @@ module Gcloud
           query.start_cursor = cursor.to_grpc # should always be a Cursor...
           query_res = service.run_query query, namespace
           self.class.from_grpc query_res, service, namespace, query
-        rescue GRPC::BadStatus => e
-          raise Gcloud::Error.from_error(e)
         end
 
         ##

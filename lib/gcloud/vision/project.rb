@@ -14,12 +14,12 @@
 
 
 require "gcloud/gce"
+require "gcloud/errors"
 require "gcloud/vision/service"
 require "gcloud/vision/credentials"
 require "gcloud/vision/annotate"
 require "gcloud/vision/image"
 require "gcloud/vision/annotation"
-require "gcloud/errors"
 
 module Gcloud
   module Vision

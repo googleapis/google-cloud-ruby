@@ -13,9 +13,9 @@
 # limitations under the License.
 
 
+require "gcloud/errors"
 require "gcloud/resource_manager/credentials"
 require "gcloud/resource_manager/service"
-require "gcloud/resource_manager/errors"
 require "gcloud/resource_manager/project"
 
 module Gcloud

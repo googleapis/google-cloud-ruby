@@ -13,9 +13,9 @@
 # limitations under the License.
 
 
+require "gcloud/errors"
 require "gcloud/bigquery/data"
 require "gcloud/bigquery/table/list"
-require "gcloud/bigquery/errors"
 
 module Gcloud
   module Bigquery

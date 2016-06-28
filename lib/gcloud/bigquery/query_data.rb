@@ -191,8 +191,7 @@ module Gcloud
         ensure_service!
         gapi = service.get_job job_id
         @job = Job.from_gapi gapi, service
-      rescue Google::Apis::ClientError => e
-        raise e unless e.status_code == 404 # TODO: convert e to Gcloud::Error
+      rescue Gcloud::NotFoundError
         nil
       end
 
