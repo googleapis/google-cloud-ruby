@@ -226,42 +226,42 @@ describe Gcloud::Pubsub, :pubsub do
     let(:subscription) { retrieve_subscription topic, "#{$topic_prefix}-subIAM" }
     let(:service_account) { pubsub.service.credentials.client.issuer }
 
-    it "allows policy to be set on a topic" do
+    it "allows policy to be updated on a topic" do
       # Check permissions first
       roles = ["pubsub.topics.getIamPolicy", "pubsub.topics.setIamPolicy"]
       permissions = topic.test_permissions roles
       skip "Don't have permissions to get/set topic's policy" unless permissions == roles
 
-      topic.policy.must_be_kind_of Hash
+      topic.policy.must_be_kind_of Gcloud::Pubsub::Policy
 
       # We need a valid service account in order to update the policy
       service_account.wont_be :nil?
-      role = {"role"=>"roles/pubsub.publisher", "members"=>["serviceAccount:#{service_account}"]}
-      tp = topic.policy.dup
-      tp["bindings"] ||= []
-      tp["bindings"] << role
-      topic.policy = tp
+      role = "roles/pubsub.publisher"
+      member = "serviceAccount:#{service_account}"
+      topic.policy do |p|
+        p.add role, member
+      end
 
-      topic.policy(force: true)["bindings"].must_include role
+      topic.policy(force: true).role(role).must_include member
     end
 
-    it "allows policy to be set on a subscription" do
+    it "allows policy to be updated on a subscription" do
       # Check permissions first
       roles = ["pubsub.subscriptions.getIamPolicy", "pubsub.subscriptions.setIamPolicy"]
       permissions = subscription.test_permissions roles
       skip "Don't have permissions to get/set subscription's policy" unless permissions == roles
 
-      subscription.policy.must_be_kind_of Hash
+      subscription.policy.must_be_kind_of Gcloud::Pubsub::Policy
 
       # We need a valid service account in order to update the policy
       service_account.wont_be :nil?
-      role = {"role"=>"roles/pubsub.subscriber", "members"=>["serviceAccount:#{service_account}"]}
-      sp = subscription.policy.dup
-      sp["bindings"] ||= []
-      sp["bindings"] << role
-      subscription.policy = sp
+      role = "roles/pubsub.subscriber"
+      member = "serviceAccount:#{service_account}"
+      subscription.policy do |p|
+        p.add role, member
+      end
 
-      subscription.policy(force: true)["bindings"].must_include role
+      subscription.policy(force: true).role(role).must_include member
     end
 
     it "allows permissions to be tested on a topic" do
