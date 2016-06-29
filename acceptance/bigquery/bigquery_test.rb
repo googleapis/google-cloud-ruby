@@ -38,11 +38,11 @@ describe Gcloud::Bigquery, :bigquery do
   let(:table) do
     t = dataset.table table_id
     if t.nil?
-      t = dataset.create_table table_id do |schema|
-        schema.integer "id"
-        schema.string "breed"
-        schema.string "name"
-        schema.timestamp "dob"
+      t = dataset.create_table table_id do |tbl|
+        tbl.schema.integer "id"
+        tbl.schema.string "breed"
+        tbl.schema.string "name"
+        tbl.schema.timestamp "dob"
       end
     end
     t
@@ -96,7 +96,7 @@ describe Gcloud::Bigquery, :bigquery do
     let(:local_file) { "acceptance/data/kitten-test-data.json" }
 
     it "has the correct schema" do
-      table.schema.must_equal schema
+      table.schema.fields.map(&:name).must_equal ["id", "breed", "name", "dob"]
     end
 
     it "gets and sets metadata" do

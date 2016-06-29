@@ -17,8 +17,8 @@ require "helper"
 describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   let(:credentials) { OpenStruct.new }
   let(:storage) { Gcloud::Storage::Project.new project, credentials }
-  let(:load_bucket) { Gcloud::Storage::Bucket.from_gapi random_bucket_hash,
-                                                           storage.connection }
+  let(:load_bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash.to_json }
+  let(:load_bucket) { Gcloud::Storage::Bucket.from_gapi load_bucket_gapi, storage.service }
   let(:load_file) { storage_file }
   let(:load_url) { load_file.to_gs_url }
 
@@ -26,370 +26,301 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   let(:table_id) { "table_id" }
   let(:table_name) { "Target Table" }
   let(:description) { "This is the target table" }
-  let(:table_hash) { random_table_hash dataset,
-                                       table_id,
-                                       table_name,
-                                       description }
-  let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash,
-                                                  bigquery.connection }
+  let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
+  let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
+  let(:table) { Gcloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
   def storage_file path = nil
-    Gcloud::Storage::File.from_gapi random_file_hash(load_bucket.name, path),
-                                    storage.connection
+    gapi = Google::Apis::StorageV1::Object.from_json random_file_hash(load_bucket.name, path).to_json
+    Gcloud::Storage::File.from_gapi gapi, storage.service
   end
 
-
   it "can specify a storage file" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
-      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["load"].wont_include "createDisposition"
-      json["configuration"]["load"].wont_include "writeDisposition"
-      json["configuration"]["load"].wont_include "projectionFields"
-      json["configuration"]["load"].wont_include "sourceFormat"
-      json["configuration"]["load"].wont_include "allowJaggedRows"
-      json["configuration"]["load"].wont_include "allowQuotedNewlines"
-      json["configuration"]["load"].wont_include "encoding"
-      json["configuration"]["load"].wont_include "fieldDelimiter"
-      json["configuration"]["load"].wont_include "ignoreUnknownValues"
-      json["configuration"]["load"].wont_include "maxBadRecords"
-      json["configuration"]["load"].wont_include "quote"
-      json["configuration"]["load"].wont_include "schema"
-      json["configuration"]["load"].wont_include "skipLeadingRows"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       load_job_json(table, load_url)]
-    end
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [load_url]),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
 
     job = table.load load_file
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
   it "can specify a storage file with format" do
     special_file = storage_file "data.json"
     special_url = special_file.to_gs_url
 
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUris"].must_equal [special_url]
-      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["load"].wont_include "createDisposition"
-      json["configuration"]["load"].wont_include "writeDisposition"
-      json["configuration"]["load"]["sourceFormat"].must_equal "CSV"
-      json["configuration"]["load"].wont_include "allowJaggedRows"
-      json["configuration"]["load"].wont_include "allowQuotedNewlines"
-      json["configuration"]["load"].wont_include "encoding"
-      json["configuration"]["load"].wont_include "fieldDelimiter"
-      json["configuration"]["load"].wont_include "ignoreUnknownValues"
-      json["configuration"]["load"].wont_include "maxBadRecords"
-      json["configuration"]["load"].wont_include "quote"
-      json["configuration"]["load"].wont_include "schema"
-      json["configuration"]["load"].wont_include "skipLeadingRows"
-
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       load_job_json(table, load_url)]
-    end
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [special_url],
+          source_format: "CSV"),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
 
     job = table.load special_file, format: :csv
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
   it "can specify a storage file and derive CSV format" do
     special_file = storage_file "data.csv"
     special_url = special_file.to_gs_url
 
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUris"].must_equal [special_url]
-      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["load"].wont_include "createDisposition"
-      json["configuration"]["load"].wont_include "writeDisposition"
-      json["configuration"]["load"]["sourceFormat"].must_equal "CSV"
-      json["configuration"]["load"].wont_include "allowJaggedRows"
-      json["configuration"]["load"].wont_include "allowQuotedNewlines"
-      json["configuration"]["load"].wont_include "encoding"
-      json["configuration"]["load"].wont_include "fieldDelimiter"
-      json["configuration"]["load"].wont_include "ignoreUnknownValues"
-      json["configuration"]["load"].wont_include "maxBadRecords"
-      json["configuration"]["load"].wont_include "quote"
-      json["configuration"]["load"].wont_include "schema"
-      json["configuration"]["load"].wont_include "skipLeadingRows"
-
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       load_job_json(table, load_url)]
-    end
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [special_url],
+          source_format: "CSV"),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
 
     job = table.load special_file
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
   it "can specify a storage file and derive CSV format with CSV options" do
     special_file = storage_file "data.csv"
     special_url = special_file.to_gs_url
 
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUris"].must_equal [special_url]
-      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["load"].wont_include "createDisposition"
-      json["configuration"]["load"].wont_include "writeDisposition"
-      json["configuration"]["load"]["sourceFormat"].must_equal "CSV"
-      json["configuration"]["load"]["allowJaggedRows"].must_equal true
-      json["configuration"]["load"]["allowQuotedNewlines"].must_equal true
-      json["configuration"]["load"]["encoding"].must_equal "ISO-8859-1"
-      json["configuration"]["load"]["fieldDelimiter"].must_equal "\t"
-      json["configuration"]["load"]["ignoreUnknownValues"].must_equal true
-      json["configuration"]["load"]["maxBadRecords"].must_equal 42
-      json["configuration"]["load"]["quote"].must_equal "'"
-      json["configuration"]["load"].wont_include "schema"
-      json["configuration"]["load"]["skipLeadingRows"].must_equal 1
-
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       load_job_json(table, load_url)]
-    end
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [special_url],
+          source_format: "CSV",
+          encoding: "ISO-8859-1",
+          max_bad_records: 42,
+          quote: "'",
+          source_format: "CSV",
+          allow_jagged_rows: true,
+          allow_quoted_newlines: true,
+          field_delimiter: "\t",
+          ignore_unknown_values: true,
+          skip_leading_rows: 1),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
 
     job = table.load special_file, jagged_rows: true, quoted_newlines: true,
       encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42,
       quote: "'", skip_leading: 1
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
   it "can specify a storage file and derive Avro format" do
     special_file = storage_file "data.avro"
+    special_url = special_file.to_gs_url
 
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceFormat"].must_equal "AVRO"
-      [200, {"Content-Type"=>"application/json"},
-       load_job_json(table, load_url)]
-    end
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [special_url],
+          source_format: "AVRO"),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
 
-    table.load special_file
+    job = table.load special_file
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
   it "can specify a storage file and derive Datastore backup format" do
     special_file = storage_file "data.backup_info"
+    special_url = special_file.to_gs_url
 
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceFormat"].must_equal "DATASTORE_BACKUP"
-      [200, {"Content-Type"=>"application/json"},
-       load_job_json(table, load_url)]
-    end
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [special_url],
+          source_format: "DATASTORE_BACKUP"),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
 
-    table.load special_file
+    job = table.load special_file
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
   it "can load a Datastore backup file and specify projection fields" do
     special_file = storage_file "data.backup_info"
-
+    special_url = special_file.to_gs_url
     projection_fields = ["first_name"]
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["load"]["projectionFields"].must_equal projection_fields
-      [200, {"Content-Type"=>"application/json"},
-       load_job_json(table, load_url)]
-    end
 
-    table.load special_file, projection_fields: projection_fields
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [special_url],
+          source_format: "DATASTORE_BACKUP",
+          projection_fields: projection_fields),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
+
+    job = table.load special_file, projection_fields: projection_fields
+    job.must_be_kind_of Gcloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
   it "can specify a storage url" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
-      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["load"].wont_include "createDisposition"
-      json["configuration"]["load"].wont_include "writeDisposition"
-      json["configuration"]["load"].wont_include "sourceFormat"
-      json["configuration"]["load"].wont_include "allowJaggedRows"
-      json["configuration"]["load"].wont_include "allowQuotedNewlines"
-      json["configuration"]["load"].wont_include "encoding"
-      json["configuration"]["load"].wont_include "fieldDelimiter"
-      json["configuration"]["load"].wont_include "ignoreUnknownValues"
-      json["configuration"]["load"].wont_include "maxBadRecords"
-      json["configuration"]["load"].wont_include "quote"
-      json["configuration"]["load"].wont_include "schema"
-      json["configuration"]["load"].wont_include "skipLeadingRows"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       load_job_json(table, load_url)]
-    end
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [load_url]),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
 
     job = table.load load_url
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
   it "can load itself as a dryrun" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
-      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["load"].wont_include "createDisposition"
-      json["configuration"]["load"].wont_include "writeDisposition"
-      json["configuration"]["load"].wont_include "sourceFormat"
-      json["configuration"]["load"].wont_include "allowJaggedRows"
-      json["configuration"]["load"].wont_include "allowQuotedNewlines"
-      json["configuration"]["load"].wont_include "encoding"
-      json["configuration"]["load"].wont_include "fieldDelimiter"
-      json["configuration"]["load"].wont_include "ignoreUnknownValues"
-      json["configuration"]["load"].wont_include "maxBadRecords"
-      json["configuration"]["load"].wont_include "quote"
-      json["configuration"]["load"].wont_include "schema"
-      json["configuration"]["load"].wont_include "skipLeadingRows"
-      json["configuration"].must_include "dryRun"
-      json["configuration"]["dryRun"].must_equal true
-      [200, {"Content-Type"=>"application/json"},
-       load_job_json(table, load_url)]
-    end
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [load_url]),
+        dry_run: true))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
 
     job = table.load load_url, dryrun: true
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
   it "can load itself with create disposition" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
-      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["load"].must_include "createDisposition"
-      json["configuration"]["load"]["createDisposition"].must_equal "CREATE_NEVER"
-      json["configuration"]["load"].wont_include "writeDisposition"
-      json["configuration"]["load"].wont_include "sourceFormat"
-      json["configuration"]["load"].wont_include "allowJaggedRows"
-      json["configuration"]["load"].wont_include "allowQuotedNewlines"
-      json["configuration"]["load"].wont_include "encoding"
-      json["configuration"]["load"].wont_include "fieldDelimiter"
-      json["configuration"]["load"].wont_include "ignoreUnknownValues"
-      json["configuration"]["load"].wont_include "maxBadRecords"
-      json["configuration"]["load"].wont_include "quote"
-      json["configuration"]["load"].wont_include "schema"
-      json["configuration"]["load"].wont_include "skipLeadingRows"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       load_job_json(table, load_url)]
-    end
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [load_url],
+          create_disposition: "CREATE_NEVER"),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
 
     job = table.load load_url, create: "CREATE_NEVER"
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
   it "can load itself with create disposition symbol" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
-      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["load"].must_include "createDisposition"
-      json["configuration"]["load"]["createDisposition"].must_equal "CREATE_NEVER"
-      json["configuration"]["load"].wont_include "writeDisposition"
-      json["configuration"]["load"].wont_include "sourceFormat"
-      json["configuration"]["load"].wont_include "allowJaggedRows"
-      json["configuration"]["load"].wont_include "allowQuotedNewlines"
-      json["configuration"]["load"].wont_include "encoding"
-      json["configuration"]["load"].wont_include "fieldDelimiter"
-      json["configuration"]["load"].wont_include "ignoreUnknownValues"
-      json["configuration"]["load"].wont_include "maxBadRecords"
-      json["configuration"]["load"].wont_include "quote"
-      json["configuration"]["load"].wont_include "schema"
-      json["configuration"]["load"].wont_include "skipLeadingRows"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       load_job_json(table, load_url)]
-    end
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [load_url],
+          create_disposition: "CREATE_NEVER"),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
 
     job = table.load load_url, create: :never
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
   it "can load itself with write disposition" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
-      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["load"].wont_include "createDisposition"
-      json["configuration"]["load"].must_include "writeDisposition"
-      json["configuration"]["load"]["writeDisposition"].must_equal "WRITE_TRUNCATE"
-      json["configuration"]["load"].wont_include "sourceFormat"
-      json["configuration"]["load"].wont_include "allowJaggedRows"
-      json["configuration"]["load"].wont_include "allowQuotedNewlines"
-      json["configuration"]["load"].wont_include "encoding"
-      json["configuration"]["load"].wont_include "fieldDelimiter"
-      json["configuration"]["load"].wont_include "ignoreUnknownValues"
-      json["configuration"]["load"].wont_include "maxBadRecords"
-      json["configuration"]["load"].wont_include "quote"
-      json["configuration"]["load"].wont_include "schema"
-      json["configuration"]["load"].wont_include "skipLeadingRows"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       load_job_json(table, load_url)]
-    end
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [load_url],
+          write_disposition: "WRITE_TRUNCATE"),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
 
     job = table.load load_url, write: "WRITE_TRUNCATE"
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
   it "can load itself with write disposition symbol" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["load"]["sourceUris"].must_equal [load_url]
-      json["configuration"]["load"]["destinationTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["load"]["destinationTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["load"]["destinationTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["load"].wont_include "createDisposition"
-      json["configuration"]["load"].must_include "writeDisposition"
-      json["configuration"]["load"]["writeDisposition"].must_equal "WRITE_TRUNCATE"
-      json["configuration"]["load"].wont_include "sourceFormat"
-      json["configuration"]["load"].wont_include "allowJaggedRows"
-      json["configuration"]["load"].wont_include "allowQuotedNewlines"
-      json["configuration"]["load"].wont_include "encoding"
-      json["configuration"]["load"].wont_include "fieldDelimiter"
-      json["configuration"]["load"].wont_include "ignoreUnknownValues"
-      json["configuration"]["load"].wont_include "maxBadRecords"
-      json["configuration"]["load"].wont_include "quote"
-      json["configuration"]["load"].wont_include "schema"
-      json["configuration"]["load"].wont_include "skipLeadingRows"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       load_job_json(table, load_url)]
-    end
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [load_url],
+          write_disposition: "WRITE_TRUNCATE"),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
 
     job = table.load load_url, write: :truncate
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
-  def load_job_json table, load_url
+  def load_job_gapi table, load_url
     hash = random_job_hash
     hash["configuration"]["load"] = {
-      "sourceUriss" => [load_url],
+      "sourceUris" => [load_url],
       "destinationTable" => {
         "projectId" => table.project_id,
         "datasetId" => table.dataset_id,
         "tableId" => table.table_id
       },
     }
-    hash.to_json
+    Google::Apis::BigqueryV2::Job.from_json hash.to_json
   end
 
   # Borrowed from MockStorage, load to a common module?

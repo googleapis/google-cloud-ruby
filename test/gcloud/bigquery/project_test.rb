@@ -17,12 +17,20 @@ require "json"
 
 describe Gcloud::Bigquery::Project, :mock_bigquery do
   it "creates an empty dataset" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/datasets" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       create_dataset_json("my_dataset")]
-    end
+    mock = Minitest::Mock.new
+    created_dataset = create_dataset_gapi "my_dataset"
+    inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
+      dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
+        project_id: project, dataset_id: "my_dataset")
+    )
+    mock.expect :insert_dataset, created_dataset,
+      [project, inserted_dataset]
+    bigquery.service.mocked_service = mock
 
     dataset = bigquery.create_dataset "my_dataset"
+
+    mock.verify
+
     dataset.must_be_kind_of Gcloud::Bigquery::Dataset
   end
 
@@ -33,19 +41,26 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     default_expiration = 999
     location = "EU"
 
-    mock_connection.post "/bigquery/v2/projects/#{project}/datasets" do |env|
-      JSON.parse(env.body)["friendlyName"].must_equal name
-      JSON.parse(env.body)["description"].must_equal description
-      JSON.parse(env.body)["defaultTableExpirationMs"].must_equal default_expiration
-      JSON.parse(env.body)["location"].must_equal location
-      [200, {"Content-Type"=>"application/json"},
-       create_dataset_json(id, name, description, default_expiration, location)]
-    end
+    mock = Minitest::Mock.new
+    created_dataset = create_dataset_gapi id, name, description, default_expiration, location
+    inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
+      dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
+        project_id: project, dataset_id: "my_dataset"),
+      friendly_name: name,
+      description: description,
+      default_table_expiration_ms: default_expiration,
+      location: location)
+    mock.expect :insert_dataset, created_dataset,
+      [project, inserted_dataset]
+    bigquery.service.mocked_service = mock
 
     dataset = bigquery.create_dataset id, name: name,
                                       description: description,
                                       expiration: default_expiration,
                                       location: location
+
+    mock.verify
+
     dataset.must_be_kind_of Gcloud::Bigquery::Dataset
     dataset.name.must_equal name
     dataset.description.must_equal description
@@ -53,264 +68,343 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     dataset.location.must_equal location
   end
 
+  it "creates a dataset and access rules using a block" do
+    mock = Minitest::Mock.new
+    filled_access = [Google::Apis::BigqueryV2::Dataset::Access.new(
+      role: "WRITER", user_by_email: "writers@example.com")]
+    created_dataset = create_dataset_gapi "my_dataset"
+    created_dataset.access = filled_access
+    inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
+      dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
+        project_id: project, dataset_id: "my_dataset"),
+      access: filled_access)
+    mock.expect :insert_dataset, created_dataset,
+      [project, inserted_dataset]
+    bigquery.service.mocked_service = mock
+
+    dataset = bigquery.create_dataset "my_dataset" do |ds|
+      ds.access do |acl|
+        refute acl.writer_user? "writers@example.com"
+        acl.add_writer_user "writers@example.com"
+        assert acl.writer_user? "writers@example.com"
+      end
+    end
+
+    mock.verify
+
+    dataset.must_be_kind_of Gcloud::Bigquery::Dataset
+    dataset.access.wont_be :empty?
+  end
+
+  it "creates a dataset with options and access rules using a block" do
+    id = "my_dataset"
+    name = "My Dataset"
+    description = "This is my dataset"
+    default_expiration = 999
+    location = "EU"
+
+    mock = Minitest::Mock.new
+    filled_access = [Google::Apis::BigqueryV2::Dataset::Access.new(
+      role: "WRITER", user_by_email: "writers@example.com")]
+    created_dataset = create_dataset_gapi id, name, description, default_expiration, location
+    created_dataset.access = filled_access
+    inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
+      dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
+        project_id: project, dataset_id: "my_dataset"),
+      friendly_name: name,
+      description: description,
+      default_table_expiration_ms: default_expiration,
+      location: location,
+      access: filled_access)
+    mock.expect :insert_dataset, created_dataset,
+      [project, inserted_dataset]
+    bigquery.service.mocked_service = mock
+
+    dataset = bigquery.create_dataset "my_dataset", location: location do |ds|
+      ds.name = name
+      ds.description = description
+      ds.default_expiration = default_expiration
+      ds.access do |acl|
+        refute acl.writer_user? "writers@example.com"
+        acl.add_writer_user "writers@example.com"
+        assert acl.writer_user? "writers@example.com"
+      end
+    end
+
+    mock.verify
+
+    dataset.must_be_kind_of Gcloud::Bigquery::Dataset
+    dataset.name.must_equal name
+    dataset.description.must_equal description
+    dataset.default_expiration.must_equal default_expiration
+    dataset.location.must_equal location
+    dataset.access.wont_be :empty?
+  end
+
+  it "creates a dataset with block options and access rules not using a block" do
+    id = "my_dataset"
+    name = "My Dataset"
+    description = "This is my dataset"
+    default_expiration = 999
+    location = "EU"
+
+    mock = Minitest::Mock.new
+    filled_access = [Google::Apis::BigqueryV2::Dataset::Access.new(
+      role: "WRITER", user_by_email: "writers@example.com")]
+    created_dataset = create_dataset_gapi id, name, description, default_expiration, location
+    created_dataset.access = filled_access
+    inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
+      dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
+        project_id: project, dataset_id: "my_dataset"),
+      friendly_name: name,
+      description: description,
+      default_table_expiration_ms: default_expiration,
+      location: location,
+      access: filled_access)
+    mock.expect :insert_dataset, created_dataset,
+      [project, inserted_dataset]
+    bigquery.service.mocked_service = mock
+
+    dataset = bigquery.create_dataset "my_dataset", location: location do |ds|
+      ds.name = name
+      ds.description = description
+      ds.default_expiration = default_expiration
+      ds.access.add_writer_user "writers@example.com"
+    end
+
+    mock.verify
+
+    dataset.must_be_kind_of Gcloud::Bigquery::Dataset
+    dataset.name.must_equal name
+    dataset.description.must_equal description
+    dataset.default_expiration.must_equal default_expiration
+    dataset.location.must_equal location
+    dataset.access.wont_be :empty?
+  end
+
   it "raises when creating a dataset with a blank id" do
-    id = ""
+    skip "wait until we have more unified error handling"
 
-    mock_connection.post "/bigquery/v2/projects/#{project}/datasets" do |env|
-      [400, { "Content-Type" => "application/json" },
-       invalid_dataset_id_error_json(id)]
+    stub = Object.new
+    def stub.insert_dataset *args
+      raise Google::Apis::ClientError.new("invalid", status_code: 409)
     end
+    bigquery.service.mocked_service = stub
 
-    assert_raises Gcloud::Bigquery::ApiError do
-      bigquery.create_dataset id
-    end
-  end
-
-  it "creates a dataset with optional access" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/datasets" do |env|
-      json = JSON.parse env.body
-      access = json["access"]
-      access.wont_be :nil?
-      access.must_be_kind_of Array
-      access.wont_be :empty?
-      access.count.must_equal 1
-      rule = access.first
-      rule.wont_be :nil?
-      rule.must_be_kind_of Hash
-      rule["role"].must_equal "WRITER"
-      rule["userByEmail"].must_equal "writers@example.com"
-
-      ret_dataset = random_dataset_hash("my_dataset")
-      ret_dataset["access"] = access
-      [200, {"Content-Type"=>"application/json"},
-       ret_dataset.to_json]
-    end
-
-    dataset = bigquery.create_dataset "my_dataset",
-      access: [{"role"=>"WRITER", "userByEmail"=>"writers@example.com"}]
-    dataset.must_be_kind_of Gcloud::Bigquery::Dataset
-    dataset.access.wont_be :empty?
-  end
-
-  it "creates a dataset with access block" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/datasets" do |env|
-      json = JSON.parse env.body
-      access = json["access"]
-      access.wont_be :nil?
-      access.must_be_kind_of Array
-      access.wont_be :empty?
-      access.count.must_equal 5
-      rule = access.last
-      rule.wont_be :nil?
-      rule.must_be_kind_of Hash
-      rule["role"].must_equal "WRITER"
-      rule["userByEmail"].must_equal "writers@example.com"
-
-      ret_dataset = random_dataset_hash("my_dataset")
-      ret_dataset["access"] = access
-      [200, {"Content-Type"=>"application/json"},
-       ret_dataset.to_json]
-    end
-
-    dataset = bigquery.create_dataset "my_dataset" do |acl|
-      refute acl.writer_user? "writers@example.com"
-      acl.add_writer_user "writers@example.com"
-      assert acl.writer_user? "writers@example.com"
-    end
-    dataset.must_be_kind_of Gcloud::Bigquery::Dataset
-    dataset.access.wont_be :empty?
+    expect { bigquery.create_dataset "" }.must_raise Gcloud::InvalidArgumentError
   end
 
   it "lists datasets" do
-    num_datasets = 3
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(num_datasets)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3),
+      [project, all: nil, max_results: nil, page_token: nil]
+    bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets
-    datasets.size.must_equal num_datasets
+
+    mock.verify
+
+    datasets.size.must_equal 3
     datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
   end
 
+  it "paginates datasets with all set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: true, max_results: nil, page_token: nil]
+    bigquery.service.mocked_service = mock
+
+    datasets = bigquery.datasets all: true
+
+    mock.verify
+
+    datasets.count.must_equal 3
+    datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+    datasets.token.wont_be :nil?
+    datasets.token.must_equal "next_page_token"
+  end
+
+  it "paginates datasets with max set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: nil, max_results: 3, page_token: nil]
+    bigquery.service.mocked_service = mock
+
+    datasets = bigquery.datasets max: 3
+
+    mock.verify
+
+    datasets.count.must_equal 3
+    datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+    datasets.token.wont_be :nil?
+    datasets.token.must_equal "next_page_token"
+  end
+
   it "paginates datasets" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(3, "next_page_token")]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: nil, max_results: nil, page_token: nil]
+    mock.expect :list_datasets, list_datasets_gapi(2),
+      [project, all: nil, max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
 
     first_datasets = bigquery.datasets
+    second_datasets = bigquery.datasets token: first_datasets.token
+
+    mock.verify
+
     first_datasets.count.must_equal 3
     first_datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
     first_datasets.token.wont_be :nil?
     first_datasets.token.must_equal "next_page_token"
 
-    second_datasets = bigquery.datasets token: first_datasets.token
     second_datasets.count.must_equal 2
     second_datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
     second_datasets.token.must_be :nil?
   end
 
-  it "paginates datasets with max set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(3, "next_page_token")]
-    end
-
-    datasets = bigquery.datasets max: 3
-    datasets.count.must_equal 3
-    datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
-    datasets.token.wont_be :nil?
-    datasets.token.must_equal "next_page_token"
-  end
-
-  it "paginates datasets without max set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.wont_include "maxResults"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(3, "next_page_token")]
-    end
-
-    datasets = bigquery.datasets
-    datasets.count.must_equal 3
-    datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
-    datasets.token.wont_be :nil?
-    datasets.token.must_equal "next_page_token"
-  end
-
   it "paginates datasets with next? and next" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(3, "next_page_token")]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: nil, max_results: nil, page_token: nil]
+    mock.expect :list_datasets, list_datasets_gapi(2),
+      [project, all: nil, max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
 
     first_datasets = bigquery.datasets
+    second_datasets = first_datasets.next
+
+    mock.verify
+
     first_datasets.count.must_equal 3
     first_datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
     first_datasets.next?.must_equal true
 
-    second_datasets = first_datasets.next
     second_datasets.count.must_equal 2
     second_datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
     second_datasets.next?.must_equal false
   end
 
   it "paginates datasets with next? and next with all/hidden set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.must_include "all"
-      env.params["all"].must_equal "true"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(3, "next_page_token")]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.must_include "all"
-      env.params["all"].must_equal "true"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: true, max_results: nil, page_token: nil]
+    mock.expect :list_datasets, list_datasets_gapi(2),
+      [project, all: true, max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
 
     first_datasets = bigquery.datasets all: true
+    second_datasets = first_datasets.next
+
+    mock.verify
+
     first_datasets.count.must_equal 3
     first_datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
     first_datasets.next?.must_equal true
 
+    second_datasets.count.must_equal 2
+    second_datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+    second_datasets.next?.must_equal false
+  end
+
+  it "paginates datasets with next? and next with max set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: nil, max_results: 3, page_token: nil]
+    mock.expect :list_datasets, list_datasets_gapi(2),
+      [project, all: nil, max_results: 3, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
+
+    first_datasets = bigquery.datasets max: 3
     second_datasets = first_datasets.next
+
+    mock.verify
+
+    first_datasets.count.must_equal 3
+    first_datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+    first_datasets.next?.must_equal true
+
     second_datasets.count.must_equal 2
     second_datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
     second_datasets.next?.must_equal false
   end
 
   it "paginates datasets with all" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(3, "next_page_token")]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: nil, max_results: nil, page_token: nil]
+    mock.expect :list_datasets, list_datasets_gapi(2),
+      [project, all: nil, max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets.all.to_a
+
+    mock.verify
+
     datasets.count.must_equal 5
     datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
   end
 
   it "paginates datasets with all with all/hidden set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.must_include "all"
-      env.params["all"].must_equal "true"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(3, "next_page_token")]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.must_include "all"
-      env.params["all"].must_equal "true"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: true, max_results: nil, page_token: nil]
+    mock.expect :list_datasets, list_datasets_gapi(2),
+      [project, all: true, max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets(all: true).all.to_a
+
+    mock.verify
+
+    datasets.count.must_equal 5
+    datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+  end
+
+  it "paginates datasets with all with max set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: nil, max_results: 3, page_token: nil]
+    mock.expect :list_datasets, list_datasets_gapi(2),
+      [project, all: nil, max_results: 3, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
+
+    datasets = bigquery.datasets(max: 3).all.to_a
+
+    mock.verify
+
     datasets.count.must_equal 5
     datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
   end
 
   it "iterates datasets with all using Enumerator" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(3, "next_page_token")]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(3, "second_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: nil, max_results: nil, page_token: nil]
+    mock.expect :list_datasets, list_datasets_gapi(3, "second_page_token"),
+      [project, all: nil, max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets.all.take(5)
+
+    mock.verify
+
     datasets.count.must_equal 5
     datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
   end
 
   it "iterates datasets with all with request_limit set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(3, "next_page_token")]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_datasets_json(3, "second_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: nil, max_results: nil, page_token: nil]
+    mock.expect :list_datasets, list_datasets_gapi(3, "second_page_token"),
+      [project, all: nil, max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets.all(request_limit: 1).to_a
+
+    mock.verify
+
     datasets.count.must_equal 6
     datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
   end
@@ -319,236 +413,193 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
     dataset_id = "found_dataset"
     dataset_name = "Found Dataset"
 
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       find_dataset_json(dataset_id, dataset_name)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_dataset, find_dataset_gapi(dataset_id, dataset_name),
+      [project, dataset_id]
+    bigquery.service.mocked_service = mock
 
     dataset = bigquery.dataset dataset_id
+
+    mock.verify
+
     dataset.must_be_kind_of Gcloud::Bigquery::Dataset
     dataset.dataset_id.must_equal dataset_id
     dataset.name.must_equal dataset_name
   end
 
   it "lists jobs" do
-    num_jobs = 3
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(num_jobs)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3),
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil]
+    bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs
-    jobs.size.must_equal num_jobs
+
+    mock.verify
+
+    jobs.size.must_equal 3
     jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
   end
 
+  it "lists jobs with max set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
+      [project, all_users: nil, max_results: 3, page_token: nil, projection: "full", state_filter: nil]
+    bigquery.service.mocked_service = mock
+
+    jobs = bigquery.jobs max: 3
+
+    mock.verify
+
+    jobs.count.must_equal 3
+    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+    jobs.token.wont_be :nil?
+    jobs.token.must_equal "next_page_token"
+  end
+
+  it "lists jobs with filter set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running"]
+    bigquery.service.mocked_service = mock
+
+    jobs = bigquery.jobs filter: "running"
+
+    mock.verify
+
+    jobs.count.must_equal 3
+    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
+    jobs.token.wont_be :nil?
+    jobs.token.must_equal "next_page_token"
+  end
+
   it "paginates jobs" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "next_page_token", 5)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(2, nil, 5)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil]
+    mock.expect :list_jobs, list_jobs_gapi(2),
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil]
+    bigquery.service.mocked_service = mock
 
     first_jobs = bigquery.jobs
+    second_jobs = bigquery.jobs token: first_jobs.token
+
+    mock.verify
+
     first_jobs.count.must_equal 3
     first_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
     first_jobs.token.wont_be :nil?
     first_jobs.token.must_equal "next_page_token"
-    first_jobs.total.must_equal 5
 
-    second_jobs = bigquery.jobs token: first_jobs.token
     second_jobs.count.must_equal 2
     second_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
     second_jobs.token.must_be :nil?
-    second_jobs.total.must_equal 5
-  end
-
-  it "paginates jobs without options" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.wont_include "maxResults"
-      env.params.wont_include "stateFilter"
-      env.params["projection"].must_equal "full"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "next_page_token")]
-    end
-
-    jobs = bigquery.jobs
-    jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
-    jobs.token.wont_be :nil?
-    jobs.token.must_equal "next_page_token"
-  end
-
-  it "paginates jobs with max set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.must_include "maxResults"
-      env.params.wont_include "stateFilter"
-      env.params["maxResults"].must_equal "3"
-      env.params["projection"].must_equal "full"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "next_page_token")]
-    end
-
-    jobs = bigquery.jobs max: 3
-    jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
-    jobs.token.wont_be :nil?
-    jobs.token.must_equal "next_page_token"
-  end
-
-  it "paginates jobs with filter set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.must_include "stateFilter"
-      env.params.wont_include "maxResults"
-      env.params["stateFilter"].must_equal "running"
-      env.params["projection"].must_equal "full"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "next_page_token")]
-    end
-
-    jobs = bigquery.jobs filter: "running"
-    jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
-    jobs.token.wont_be :nil?
-    jobs.token.must_equal "next_page_token"
   end
 
   it "paginates jobs using next? and next" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "next_page_token", 5)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(2, nil, 5)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil]
+    mock.expect :list_jobs, list_jobs_gapi(2),
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil]
+    bigquery.service.mocked_service = mock
 
     first_jobs = bigquery.jobs
+    second_jobs = first_jobs.next
+
+    mock.verify
+
     first_jobs.count.must_equal 3
     first_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
     first_jobs.next?.must_equal true
 
-    second_jobs = first_jobs.next
     second_jobs.count.must_equal 2
     second_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
     second_jobs.next?.must_equal false
   end
 
   it "paginates jobs with next? and next and filter set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.must_include "stateFilter"
-      env.params.wont_include "maxResults"
-      env.params["stateFilter"].must_equal "running"
-      env.params["projection"].must_equal "full"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "next_page_token", 5)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.must_include "stateFilter"
-      env.params.wont_include "maxResults"
-      env.params["stateFilter"].must_equal "running"
-      env.params["projection"].must_equal "full"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(2, nil, 5)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running"]
+    mock.expect :list_jobs, list_jobs_gapi(2),
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: "running"]
+    bigquery.service.mocked_service = mock
 
     first_jobs = bigquery.jobs filter: "running"
+    second_jobs = first_jobs.next
+
+    mock.verify
+
     first_jobs.count.must_equal 3
     first_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
     first_jobs.next?.must_equal true
 
-    second_jobs = first_jobs.next
     second_jobs.count.must_equal 2
     second_jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
     second_jobs.next?.must_equal false
   end
 
   it "paginates jobs with all" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "next_page_token", 5)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(2, nil, 5)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil]
+    mock.expect :list_jobs, list_jobs_gapi(2),
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil]
+    bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs.all.to_a
+
+    mock.verify
+
     jobs.count.must_equal 5
+    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
   end
 
   it "paginates jobs with all and filter set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.must_include "stateFilter"
-      env.params.wont_include "maxResults"
-      env.params["stateFilter"].must_equal "running"
-      env.params["projection"].must_equal "full"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "next_page_token", 5)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.must_include "stateFilter"
-      env.params.wont_include "maxResults"
-      env.params["stateFilter"].must_equal "running"
-      env.params["projection"].must_equal "full"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(2, nil, 5)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running"]
+    mock.expect :list_jobs, list_jobs_gapi(2),
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: "running"]
+    bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs(filter: "running").all.to_a
+
+    mock.verify
+
     jobs.count.must_equal 5
+    jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
   end
 
   it "iterates jobs with all using Enumerator" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "next_page_token", 25)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "second_page_token", 25)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil]
+    mock.expect :list_jobs, list_jobs_gapi(3, "second_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil]
+    bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs.all.take(5)
+
+    mock.verify
+
     jobs.count.must_equal 5
     jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
   end
 
   it "iterates jobs with all with request_limit set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "next_page_token", 25)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type"=>"application/json"},
-       list_jobs_json(3, "second_page_token", 25)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil]
+    mock.expect :list_jobs, list_jobs_gapi(3, "second_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil]
+    bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs.all(request_limit: 1).to_a
+
+    mock.verify
+
     jobs.count.must_equal 6
     jobs.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Job }
   end
@@ -556,43 +607,48 @@ describe Gcloud::Bigquery::Project, :mock_bigquery do
   it "finds a job" do
     job_id = "9876543210"
 
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       find_job_json(job_id)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_job, find_job_gapi(job_id),
+      [project, job_id]
+    bigquery.service.mocked_service = mock
 
     job = bigquery.job job_id
+
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::Job
     job.job_id.must_equal job_id
   end
 
-  def create_dataset_json id, name = nil, description = nil, default_expiration = nil, location = "US"
-    random_dataset_hash(id, name, description, default_expiration, location).to_json
+  def create_dataset_gapi id, name = nil, description = nil, default_expiration = nil, location = "US"
+    Google::Apis::BigqueryV2::Dataset.from_json \
+      random_dataset_hash(id, name, description, default_expiration, location).to_json
   end
 
-  def find_dataset_json id, name = nil, description = nil, default_expiration = nil
-    random_dataset_hash(id, name, description, default_expiration).to_json
+  def find_dataset_gapi id, name = nil, description = nil, default_expiration = nil
+    Google::Apis::BigqueryV2::Dataset.from_json \
+      random_dataset_hash(id, name, description, default_expiration).to_json
   end
 
-  def list_datasets_json count = 2, token = nil
+  def list_datasets_gapi count = 2, token = nil
     datasets = count.times.map { random_dataset_small_hash }
     hash = {"kind"=>"bigquery#datasetList", "datasets"=>datasets}
     hash["nextPageToken"] = token unless token.nil?
-    hash.to_json
+    Google::Apis::BigqueryV2::DatasetList.from_json hash.to_json
   end
 
-  def find_job_json job_id
-    random_job_hash(job_id).to_json
+  def find_job_gapi job_id
+    Google::Apis::BigqueryV2::Job.from_json random_job_hash(job_id).to_json
   end
 
-  def list_jobs_json count = 2, token = nil, total = nil
+  def list_jobs_gapi count = 2, token = nil
     hash = {
       "kind" => "bigquery#jobList",
       "etag" => "etag",
-      "jobs" => count.times.map { random_job_hash },
-      "totalItems" => (total || count)
+      "jobs" => count.times.map { random_job_hash }
     }
     hash["nextPageToken"] = token unless token.nil?
-    hash.to_json
+
+    Google::Apis::BigqueryV2::JobList.from_json hash.to_json
   end
 end

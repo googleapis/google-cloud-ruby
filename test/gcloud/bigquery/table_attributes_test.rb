@@ -22,56 +22,66 @@ describe Gcloud::Bigquery::Table, :attributes, :mock_bigquery do
   let(:table_name) { "My Table" }
   let(:description) { "This is my table" }
   let(:table_hash) { random_table_small_hash "my_table", table_id, table_name }
-  let(:table_full_json) { random_table_hash("my_table", table_id, table_name, description).to_json }
-  let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash,
-                                                  bigquery.connection }
+  let(:table_full_hash) { random_table_hash "my_table", table_id, table_name, description }
+  let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
+  let(:table_full_gapi) { Google::Apis::BigqueryV2::Table.from_json table_full_hash.to_json }
+  let(:table) { Gcloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
   it "gets full data for created_at" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{table.dataset_id}/tables/#{table.table_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       table_full_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_table, table_full_gapi,
+      [table.project_id, table.dataset_id, table.table_id]
+    table.service.mocked_service = mock
 
     table.created_at.must_be_close_to Time.now, 10
+
+    mock.verify
 
     # A second call to attribute does not make a second HTTP API call
     table.created_at
   end
 
   it "gets full data for expires_at" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{table.dataset_id}/tables/#{table.table_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       table_full_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_table, table_full_gapi,
+      [table.project_id, table.dataset_id, table.table_id]
+    table.service.mocked_service = mock
 
     table.expires_at.must_be_close_to Time.now, 10
+
+    mock.verify
 
     # A second call to attribute does not make a second HTTP API call
     table.expires_at
   end
 
   it "gets full data for modified_at" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{table.dataset_id}/tables/#{table.table_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       table_full_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_table, table_full_gapi,
+      [table.project_id, table.dataset_id, table.table_id]
+    table.service.mocked_service = mock
 
     table.modified_at.must_be_close_to Time.now, 10
+
+    mock.verify
 
     # A second call to attribute does not make a second HTTP API call
     table.modified_at
   end
 
   it "gets full data for schema" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{table.dataset_id}/tables/#{table.table_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       table_full_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_table, table_full_gapi,
+      [table.project_id, table.dataset_id, table.table_id]
+    table.service.mocked_service = mock
 
-    table.schema.must_be_kind_of Hash
-    table.schema.keys.must_include "fields"
-    table.fields.must_equal table.schema["fields"]
+    table.schema.must_be_kind_of Gcloud::Bigquery::Schema
+    table.schema.must_be :frozen?
+    table.schema.fields.wont_be :empty?
+    table.fields.wont_be :empty?
     table.headers.must_equal ["name", "age", "score", "active"]
+
+    mock.verify
 
     # A second call to attribute does not make a second HTTP API call
     table.schema
@@ -79,12 +89,14 @@ describe Gcloud::Bigquery::Table, :attributes, :mock_bigquery do
 
   def self.attr_test attr, val
     define_method "test_#{attr}" do
-      mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{table.dataset_id}/tables/#{table.table_id}" do |env|
-        [200, {"Content-Type"=>"application/json"},
-         table_full_json]
-      end
+      mock = Minitest::Mock.new
+      mock.expect :get_table, table_full_gapi,
+        [table.project_id, table.dataset_id, table.table_id]
+      table.service.mocked_service = mock
 
       table.send(attr).must_equal val
+
+      mock.verify
 
       # A second call to attribute does not make a second HTTP API call
       table.send(attr)

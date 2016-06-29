@@ -15,6 +15,12 @@
 require "helper"
 
 describe Gcloud::Bigquery::View, :data, :mock_bigquery do
+  let(:query_request) {
+    qrg = query_request_gapi
+    qrg.default_dataset = nil
+    qrg.query = "SELECT * FROM test-project:my_dataset.my_view"
+    qrg
+  }
   let(:dataset_id) { "my_dataset" }
   let(:table_id) { "my_view" }
   let(:table_name) { "My View" }
@@ -22,17 +28,18 @@ describe Gcloud::Bigquery::View, :data, :mock_bigquery do
   let(:etag) { "etag123456789" }
   let(:location_code) { "US" }
   let(:url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}" }
-  let(:view_hash) { random_view_hash dataset_id, table_id, table_name, description }
-  let(:view) { Gcloud::Bigquery::View.from_gapi view_hash,
-                                                bigquery.connection }
+  let(:view_gapi) { random_view_gapi dataset_id, table_id, table_name, description }
+  let(:view) { Gcloud::Bigquery::View.from_gapi view_gapi,
+                                                bigquery.service }
 
   it "returns data as a list of hashes" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :query_job, query_data_gapi, [project, query_request]
 
     data = view.data
+    mock.verify
+
     data.class.must_equal Gcloud::Bigquery::QueryData
     data.count.must_equal 3
     data[0].must_be_kind_of Hash
@@ -53,26 +60,27 @@ describe Gcloud::Bigquery::View, :data, :mock_bigquery do
   end
 
   it "knows the data metadata" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :query_job, query_data_gapi, [project, query_request]
 
     data = view.data
+    mock.verify
+
     data.class.must_equal Gcloud::Bigquery::QueryData
     data.kind.must_equal "bigquery#getQueryResultsResponse"
-    data.etag.must_equal "etag1234567890"
     data.token.must_equal "token1234567890"
     data.total.must_equal 3
   end
 
   it "knows the raw, unformatted data" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :query_job, query_data_gapi, [project, query_request]
 
     data = view.data
+    mock.verify
+
     data.class.must_equal Gcloud::Bigquery::QueryData
 
     data.raw.wont_be :nil?
@@ -93,31 +101,13 @@ describe Gcloud::Bigquery::View, :data, :mock_bigquery do
     data.raw[2][3].must_equal nil
   end
 
-  it "knows the data metadata" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
-
-    data = view.data
-    data.class.must_equal Gcloud::Bigquery::QueryData
-    data.kind.must_equal "bigquery#getQueryResultsResponse"
-    data.etag.must_equal "etag1234567890"
-    data.token.must_equal "token1234567890"
-    data.total.must_equal 3
-  end
-
   it "paginates data using next? and next" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/job9876543210" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "token1234567890"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :query_job, query_data_gapi, [project, query_request]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, "job9876543210", {max_results: nil, page_token: "token1234567890", start_index: nil, timeout_ms: nil}]
 
     data1 = view.data
     data1.class.must_equal Gcloud::Bigquery::QueryData
@@ -125,5 +115,6 @@ describe Gcloud::Bigquery::View, :data, :mock_bigquery do
     data1.next?.must_equal true # can't use must_be :next?
     data2 = data1.next
     data2.class.must_equal Gcloud::Bigquery::QueryData
+    mock.verify
   end
 end

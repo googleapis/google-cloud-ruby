@@ -26,28 +26,21 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   let(:table_description) { "This is my table" }
   let(:table_schema) {
     {
-      "fields" => [
-        {
-          "name" => "name",
-          "type" => "STRING",
-          "mode" => "REQUIRED"
-        },
-        {
-          "name" => "age",
-          "type" => "INTEGER"
-        },
-        {
-          "name" => "score",
-          "type" => "FLOAT",
-          "description" => "A score from 0.0 to 10.0"
-        },
-        {
-          "name" => "active",
-          "type" => "BOOLEAN"
-        }
+      fields: [
+        { mode: "REQUIRED", name: "name", type: "STRING"},
+        { mode: "NULLABLE", name: "age", type: "INTEGER"},
+        { mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0"},
+        { mode: "NULLABLE", name: "active", type: "BOOLEAN"}
       ]
     }
   }
+  let(:table_schema_gapi) do
+    gapi = Google::Apis::BigqueryV2::TableSchema.from_json table_schema.to_json
+    gapi.fields.each do |f|
+      f.update! fields: nil
+    end
+    gapi
+  end
   let(:view_id) { "my_view" }
   let(:view_name) { "My View" }
   let(:view_description) { "This is my view" }
@@ -57,8 +50,8 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   let(:location_code) { "US" }
   let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" }
   let(:dataset_hash) { random_dataset_hash dataset_id, dataset_name, dataset_description, default_expiration }
-  let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_hash,
-                                                      bigquery.connection }
+  let(:dataset_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_hash.to_json }
+  let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
 
   it "knows its attributes" do
     dataset.name.must_equal dataset_name
@@ -72,94 +65,238 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   it "knows its creation and modification times" do
     now = Time.now
 
-    dataset.gapi["creationTime"] = (now.to_f * 1000).floor
+    dataset.gapi.creation_time = (now.to_f * 1000).floor
     dataset.created_at.must_be_close_to now
 
-    dataset.gapi["lastModifiedTime"] = (now.to_f * 1000).floor
+    dataset.gapi.last_modified_time = (now.to_f * 1000).floor
     dataset.modified_at.must_be_close_to now
   end
 
   it "can delete itself" do
-    mock_connection.delete "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}" do |env|
-      env.params.wont_include "deleteContents"
-      [200, {"Content-Type" => "application/json"}, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :delete_dataset, nil,
+      [project, dataset.dataset_id, delete_contents: nil]
+    dataset.service.mocked_service = mock
 
     dataset.delete
+
+    mock.verify
   end
 
   it "can delete itself and all table data" do
-    mock_connection.delete "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}" do |env|
-      env.params.must_include "deleteContents"
-      env.params["deleteContents"].must_equal "true"
-      [200, {"Content-Type" => "application/json"}, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :delete_dataset, nil,
+      [project, dataset.dataset_id, delete_contents: true]
+    dataset.service.mocked_service = mock
 
     dataset.delete force: true
+
+    mock.verify
   end
 
   it "creates an empty table" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      [200, {"Content-Type" => "application/json"},
-       create_table_json(table_id)]
-    end
+    mock = Minitest::Mock.new
+    insert_table = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: table_id))
+    return_table = create_table_gapi table_id
+    mock.expect :insert_table, return_table,
+      [project, dataset_id, insert_table]
+    dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id
+
+    mock.verify
+
     table.must_be_kind_of Gcloud::Bigquery::Table
     table.table_id.must_equal table_id
     table.must_be :table?
     table.wont_be :view?
   end
 
-  it "creates a table with a name, description, and schema option" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      JSON.parse(env.body)["friendlyName"].must_equal table_name
-      JSON.parse(env.body)["description"].must_equal table_description
-      JSON.parse(env.body)["schema"].must_equal table_schema
-      [200, {"Content-Type" => "application/json"},
-       create_table_json(table_id, table_name, table_description)]
-    end
+  it "creates a table with a name, description options" do
+    mock = Minitest::Mock.new
+    insert_table = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: table_id),
+      friendly_name: table_name,
+      description: table_description)
+    return_table = create_table_gapi table_id, table_name, table_description
+    # Make sure the returning table has no schema
+    return_table.update! schema: nil
+    mock.expect :insert_table, return_table,
+      [project, dataset_id, insert_table]
+    dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id,
                                  name: table_name,
-                                 description: table_description,
-                                 schema: table_schema
+                                 description: table_description
+
+    mock.verify
+
     table.must_be_kind_of Gcloud::Bigquery::Table
     table.table_id.must_equal table_id
     table.name.must_equal table_name
     table.description.must_equal table_description
-    table.schema.must_equal table_schema
+    table.schema.must_be :empty?
     table.must_be :table?
     table.wont_be :view?
   end
 
-  it "creates a table with a schema block" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      JSON.parse(env.body)["schema"].must_equal table_schema
-      [200, {"Content-Type" => "application/json"},
-       create_table_json(table_id, table_name, table_description)]
+  it "creates a table with a name, description in a block" do
+    mock = Minitest::Mock.new
+    insert_table = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: table_id),
+      friendly_name: table_name,
+      description: table_description)
+    return_table = create_table_gapi table_id, table_name, table_description
+    # Make sure the returning table has no schema
+    return_table.update! schema: nil
+    mock.expect :insert_table, return_table,
+      [project, dataset_id, insert_table]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_table table_id do |t|
+      t.name = table_name
+      t.description = table_description
     end
 
-    table = dataset.create_table table_id do |schema|
-      schema.string "name", mode: :required
-      schema.integer "age"
-      schema.float "score", description: "A score from 0.0 to 10.0"
-      schema.boolean "active"
-    end
+    mock.verify
+
     table.must_be_kind_of Gcloud::Bigquery::Table
     table.table_id.must_equal table_id
-    table.schema.must_equal table_schema
+    table.name.must_equal table_name
+    table.description.must_equal table_description
+    table.schema.must_be :empty?
+    table.must_be :table?
+    table.wont_be :view?
+  end
+
+  it "creates a table with a fields option" do
+    mock = Minitest::Mock.new
+    insert_table = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: table_id),
+      friendly_name: table_name,
+      description: table_description,
+      schema: table_schema_gapi)
+    return_table = create_table_gapi table_id, table_name, table_description
+    return_table.schema = table_schema_gapi
+    mock.expect :insert_table, return_table,
+      [project, dataset_id, insert_table]
+    dataset.service.mocked_service = mock
+
+    schema_fields = [
+      Gcloud::Bigquery::Schema::Field.new("name", "STRING", mode: :required),
+      Gcloud::Bigquery::Schema::Field.new("age", :INTEGER),
+      Gcloud::Bigquery::Schema::Field.new("score", "float", description: "A score from 0.0 to 10.0"),
+      Gcloud::Bigquery::Schema::Field.new("active", :boolean)
+    ]
+    table = dataset.create_table table_id,
+                                 name: table_name,
+                                 description: table_description,
+                                 fields: schema_fields
+
+    mock.verify
+
+    table.must_be_kind_of Gcloud::Bigquery::Table
+    table.table_id.must_equal table_id
+    table.name.must_equal table_name
+    table.description.must_equal table_description
+    table.schema.wont_be :empty?
+    table.schema.must_be :frozen?
+    table.must_be :table?
+    table.wont_be :view?
+  end
+
+  it "creates a table with a schema inline" do
+    mock = Minitest::Mock.new
+    insert_table = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: table_id),
+      friendly_name: table_name,
+      description: table_description,
+      schema: table_schema_gapi)
+    return_table = create_table_gapi table_id, table_name, table_description
+    return_table.schema = table_schema_gapi
+    mock.expect :insert_table, return_table,
+      [project, dataset_id, insert_table]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_table table_id do |t|
+      t.name = table_name
+      t.description = table_description
+      t.schema.string "name", mode: :required
+      t.schema.integer "age"
+      t.schema.float "score", description: "A score from 0.0 to 10.0"
+      t.schema.boolean "active"
+    end
+
+    mock.verify
+
+    table.must_be_kind_of Gcloud::Bigquery::Table
+    table.table_id.must_equal table_id
+    table.name.must_equal table_name
+    table.description.must_equal table_description
+    table.schema.wont_be :empty?
+    table.schema.must_be :frozen?
+    table.must_be :table?
+    table.wont_be :view?
+  end
+
+  it "creates a table with a schema in a block" do
+    mock = Minitest::Mock.new
+    insert_table = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: table_id),
+      friendly_name: table_name,
+      description: table_description,
+      schema: table_schema_gapi)
+    return_table = create_table_gapi table_id, table_name, table_description
+    return_table.schema = table_schema_gapi
+    mock.expect :insert_table, return_table,
+      [project, dataset_id, insert_table]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_table table_id do |t|
+      t.name = table_name
+      t.description = table_description
+      t.schema do |s|
+        s.string "name", mode: :required
+        s.integer "age"
+        s.float "score", description: "A score from 0.0 to 10.0"
+        s.boolean "active"
+      end
+    end
+
+    mock.verify
+
+    table.must_be_kind_of Gcloud::Bigquery::Table
+    table.table_id.must_equal table_id
+    table.name.must_equal table_name
+    table.description.must_equal table_description
+    table.schema.wont_be :empty?
+    table.schema.must_be :frozen?
     table.must_be :table?
     table.wont_be :view?
   end
 
   it "can create a empty view" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      [200, {"Content-Type" => "application/json"},
-       create_view_json(view_id, query)]
-    end
+    mock = Minitest::Mock.new
+    insert_view = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: view_id),
+      query: query)
+    return_view = create_view_gapi view_id, query
+    mock.expect :insert_table, return_view,
+      [project, dataset_id, insert_view]
+    dataset.service.mocked_service = mock
 
     table = dataset.create_view view_id, query
+
+    mock.verify
+
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.must_be_kind_of Gcloud::Bigquery::View
@@ -168,16 +305,25 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   end
 
   it "can create a view with a name and description" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      JSON.parse(env.body)["friendlyName"].must_equal view_name
-      JSON.parse(env.body)["description"].must_equal view_description
-      [200, {"Content-Type" => "application/json"},
-       create_view_json(view_id, query, view_name, view_description)]
-    end
+    mock = Minitest::Mock.new
+    insert_view = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: view_id),
+      friendly_name: view_name,
+      description: view_description,
+      query: query)
+    return_view = create_view_gapi view_id, query, view_name, view_description
+    mock.expect :insert_table, return_view,
+      [project, dataset_id, insert_view]
+    dataset.service.mocked_service = mock
 
     table = dataset.create_view view_id, query,
                                 name: view_name,
                                 description: view_description
+
+    mock.verify
+
+
     table.must_be_kind_of Gcloud::Bigquery::View
     table.table_id.must_equal view_id
     table.query.must_equal query
@@ -188,94 +334,79 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   end
 
   it "lists tables" do
-    num_tables = 3
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(num_tables)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_tables, list_tables_gapi(3),
+      [project, dataset_id, max_results: nil, page_token: nil]
+    dataset.service.mocked_service = mock
 
     tables = dataset.tables
-    tables.size.must_equal num_tables
+
+    mock.verify
+
+    tables.size.must_equal 3
     tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
   end
 
+  it "lists tables with max set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_tables, list_tables_gapi(3, "next_page_token"),
+      [project, dataset_id, max_results: 3, page_token: nil]
+    dataset.service.mocked_service = mock
+
+    tables = dataset.tables max: 3
+
+    mock.verify
+
+    tables.count.must_equal 3
+    tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
+    tables.token.wont_be :nil?
+    tables.token.must_equal "next_page_token"
+  end
+
   it "paginates tables" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(3, "next_page_token", 5)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(2, nil, 5)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
+      [project, dataset_id, max_results: nil, page_token: nil]
+    mock.expect :list_tables, list_tables_gapi(2, nil, 5),
+      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+    dataset.service.mocked_service = mock
 
     first_tables = dataset.tables
+    second_tables = dataset.tables token: first_tables.token
+
+    mock.verify
+
     first_tables.count.must_equal 3
     first_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
     first_tables.token.wont_be :nil?
     first_tables.token.must_equal "next_page_token"
     first_tables.total.must_equal 5
 
-    second_tables = dataset.tables token: first_tables.token
     second_tables.count.must_equal 2
     second_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
     second_tables.token.must_be :nil?
     second_tables.total.must_equal 5
   end
 
-  it "paginates tables with max set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(3, "next_page_token")]
-    end
-
-    tables = dataset.tables max: 3
-    tables.count.must_equal 3
-    tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
-    tables.token.wont_be :nil?
-    tables.token.must_equal "next_page_token"
-  end
-
-  it "paginates tables without max set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.wont_include "maxResults"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(3, "next_page_token")]
-    end
-
-    tables = dataset.tables
-    tables.count.must_equal 3
-    tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
-    tables.token.wont_be :nil?
-    tables.token.must_equal "next_page_token"
-  end
-
   it "paginates tables with next? and next" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(3, "next_page_token", 5)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(2, nil, 5)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
+      [project, dataset_id, max_results: nil, page_token: nil]
+    mock.expect :list_tables, list_tables_gapi(2, nil, 5),
+      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+    dataset.service.mocked_service = mock
 
     first_tables = dataset.tables
+    second_tables = first_tables.next
+
+    mock.verify
+
     first_tables.count.must_equal 3
     first_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
     first_tables.token.wont_be :nil?
     first_tables.token.must_equal "next_page_token"
     first_tables.total.must_equal 5
 
-    second_tables = dataset.tables token: first_tables.token
     second_tables.count.must_equal 2
     second_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
     second_tables.token.must_be :nil?
@@ -283,29 +414,23 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   end
 
   it "paginates tables with next? and next and max" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(3, "next_page_token", 5)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(2, nil, 5)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
+      [project, dataset_id, max_results: 3, page_token: nil]
+    mock.expect :list_tables, list_tables_gapi(2, nil, 5),
+      [project, dataset_id, max_results: 3, page_token: "next_page_token"]
+    dataset.service.mocked_service = mock
 
     first_tables = dataset.tables max: 3
+    second_tables = first_tables.next
+
+    mock.verify
+
     first_tables.count.must_equal 3
     first_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
     first_tables.next?.must_equal true
     first_tables.total.must_equal 5
 
-    second_tables = first_tables.next
     second_tables.count.must_equal 2
     second_tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
     second_tables.next?.must_equal false
@@ -313,77 +438,65 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   end
 
   it "paginates tables with all" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(3, "next_page_token", 5)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(2, nil, 5)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
+      [project, dataset_id, max_results: nil, page_token: nil]
+    mock.expect :list_tables, list_tables_gapi(2, nil, 5),
+      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+    dataset.service.mocked_service = mock
 
     tables = dataset.tables.all.to_a
+
+    mock.verify
+
     tables.count.must_equal 5
     tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
   end
 
   it "paginates tables with all and max" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(3, "next_page_token", 5)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(2, nil, 5)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
+      [project, dataset_id, max_results: 3, page_token: nil]
+    mock.expect :list_tables, list_tables_gapi(2, nil, 5),
+      [project, dataset_id, max_results: 3, page_token: "next_page_token"]
+    dataset.service.mocked_service = mock
 
     tables = dataset.tables(max: 3).all.to_a
+
+    mock.verify
+
     tables.count.must_equal 5
     tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
   end
 
   it "iterates tables with all using Enumerator" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(3, "next_page_token", 25)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(3, "second_page_token", 25)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 25),
+      [project, dataset_id, max_results: nil, page_token: nil]
+    mock.expect :list_tables, list_tables_gapi(3, "second_page_token", 25),
+      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+    dataset.service.mocked_service = mock
 
     tables = dataset.tables.all.take(5)
+
+    mock.verify
+
     tables.count.must_equal 5
     tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
   end
 
   it "iterates tables with all with request_limit set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(3, "next_page_token", 25)]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, {"Content-Type" => "application/json"},
-       list_tables_json(3, "second_page_token", 25)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 25),
+      [project, dataset_id, max_results: nil, page_token: nil]
+    mock.expect :list_tables, list_tables_gapi(3, "second_page_token", 25),
+      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+    dataset.service.mocked_service = mock
 
     tables = dataset.tables.all(request_limit: 1).to_a
+
+    mock.verify
+
     tables.count.must_equal 6
     tables.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Table }
   end
@@ -391,36 +504,40 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   it "finds a table" do
     found_table_id = "found_table"
 
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset.dataset_id}/tables/#{found_table_id}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       find_table_json(found_table_id)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_table, find_table_gapi(found_table_id),
+      [project, dataset_id, found_table_id]
+    dataset.service.mocked_service = mock
 
     table = dataset.table found_table_id
+
+    mock.verify
+
     table.must_be_kind_of Gcloud::Bigquery::Table
     table.table_id.must_equal found_table_id
   end
 
-  def create_table_json id, name = nil, description = nil
-    random_table_hash(dataset_id, id, name, description).to_json
+  def create_table_gapi id, name = nil, description = nil
+    Google::Apis::BigqueryV2::Table.from_json random_table_hash(dataset_id, id, name, description).to_json
   end
 
-  def create_view_json id, query, name = nil, description = nil
+  def create_view_gapi id, query, name = nil, description = nil
     hash = random_table_hash dataset_id, id, name, description
     hash["view"] = {"query" => query}
     hash["type"] = "VIEW"
-    hash.to_json
+
+    Google::Apis::BigqueryV2::Table.from_json hash.to_json
   end
 
-  def find_table_json id, name = nil, description = nil
-    random_table_hash(dataset_id, id, name, description).to_json
+  def find_table_gapi id, name = nil, description = nil
+    Google::Apis::BigqueryV2::Table.from_json random_table_hash(dataset_id, id, name, description).to_json
   end
 
-  def list_tables_json count = 2, token = nil, total = nil
+  def list_tables_gapi count = 2, token = nil, total = nil
     tables = count.times.map { random_table_small_hash(dataset_id) }
     hash = {"kind" => "bigquery#tableList", "tables" => tables,
             "totalItems" => (total || count)}
     hash["nextPageToken"] = token unless token.nil?
-    hash.to_json
+    Google::Apis::BigqueryV2::TableList.from_json hash.to_json
   end
 end

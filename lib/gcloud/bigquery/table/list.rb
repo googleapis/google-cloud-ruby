@@ -78,14 +78,10 @@ module Gcloud
         #
         def next
           return nil unless next?
-          ensure_connection!
+          ensure_service!
           options = { token: token, max: @max }
-          resp = @connection.list_tables @dataset_id, options
-          if resp.success?
-            self.class.from_response resp, @connection, @dataset_id, @max
-          else
-            fail ApiError.from_response(resp)
-          end
+          gapi = @service.list_tables @dataset_id, options
+          self.class.from_gapi gapi, @service, @dataset_id, @max
         end
 
         ##
@@ -158,25 +154,25 @@ module Gcloud
 
         ##
         # @private New Table::List from a response object.
-        def self.from_response resp, conn, dataset_id = nil, max = nil
-          tables = List.new(Array(resp.data["tables"]).map do |gapi_object|
-            Table.from_gapi gapi_object, conn
+        def self.from_gapi gapi_list, service, dataset_id = nil, max = nil
+          tables = List.new(Array(gapi_list.tables).map do |gapi_object|
+            Table.from_gapi gapi_object, service
           end)
-          tables.instance_variable_set "@token", resp.data["nextPageToken"]
-          tables.instance_variable_set "@etag",  resp.data["etag"]
-          tables.instance_variable_set "@total", resp.data["totalItems"]
-          tables.instance_variable_set "@connection", conn
-          tables.instance_variable_set "@dataset_id", dataset_id
-          tables.instance_variable_set "@max",        max
+          tables.instance_variable_set :@token,      gapi_list.next_page_token
+          tables.instance_variable_set :@etag,       gapi_list.etag
+          tables.instance_variable_set :@total,      gapi_list.total_items
+          tables.instance_variable_set :@service,    service
+          tables.instance_variable_set :@dataset_id, dataset_id
+          tables.instance_variable_set :@max,        max
           tables
         end
 
         protected
 
         ##
-        # Raise an error unless an active connection is available.
-        def ensure_connection!
-          fail "Must have active connection" unless @connection
+        # Raise an error unless an active service is available.
+        def ensure_service!
+          fail "Must have active connection" unless @service
         end
       end
     end

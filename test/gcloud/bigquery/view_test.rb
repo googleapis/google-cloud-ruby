@@ -26,8 +26,9 @@ describe Gcloud::Bigquery::View, :mock_bigquery do
   let(:location_code) { "US" }
   let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
   let(:view_hash) { random_view_hash dataset, table_id, table_name, description }
-  let(:view) { Gcloud::Bigquery::View.from_gapi view_hash,
-                                                bigquery.connection }
+  let(:view_gapi) { Google::Apis::BigqueryV2::Table.from_json view_hash.to_json }
+  let(:view) { Gcloud::Bigquery::View.from_gapi view_gapi,
+                                                bigquery.service }
 
   it "knows its attributes" do
     view.name.must_equal table_name
@@ -41,44 +42,48 @@ describe Gcloud::Bigquery::View, :mock_bigquery do
 
   it "knows its creation and modification and expiration times" do
     now = Time.now
+    view_hash["creationTime"] = (now.to_f * 1000).floor
+    view_hash["lastModifiedTime"] = (now.to_f * 1000).floor
+    view_hash["expirationTime"] = (now.to_f * 1000).floor
 
-    view.gapi["creationTime"] = (now.to_f * 1000).floor
+
     view.created_at.must_be_close_to now
-
-    view.gapi["lastModifiedTime"] = (now.to_f * 1000).floor
     view.modified_at.must_be_close_to now
-
-    view.gapi["expirationTime"] = nil
-    view.expires_at.must_be :nil?
-
-    view.gapi["expirationTime"] = (now.to_f * 1000).floor
     view.expires_at.must_be_close_to now
   end
 
   it "knows schema, fields, and headers" do
-    view.schema.must_be_kind_of Hash
-    view.schema.keys.must_include "fields"
-    view.fields.must_equal view.schema["fields"]
+    view.schema.must_be_kind_of Gcloud::Bigquery::Schema
+    view.schema.must_be :frozen?
+    view.fields.map(&:name).must_equal view.schema.fields.map(&:name)
     view.headers.must_equal ["name", "age", "score", "active"]
   end
 
   it "can delete itself" do
-    mock_connection.delete "/bigquery/v2/projects/#{project}/datasets/#{view.dataset_id}/tables/#{view.table_id}" do |env|
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :delete_table, nil,
+      [project, dataset, table_id]
+    view.service.mocked_service = mock
 
     view.delete
+
+    mock.verify
   end
 
   it "can reload itself" do
     new_description = "New description of the view."
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{view.dataset_id}/tables/#{view.table_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_view_hash(dataset, table_id, table_name, new_description).to_json]
-    end
+
+    mock = Minitest::Mock.new
+    view_hash = random_view_hash dataset, table_id, table_name, new_description
+    mock.expect :get_table, Google::Apis::BigqueryV2::Table.from_json(view_hash.to_json),
+      [project, dataset, table_id]
+    view.service.mocked_service = mock
 
     view.description.must_equal description
     view.reload!
+
+    mock.verify
+
     view.description.must_equal new_description
   end
 end

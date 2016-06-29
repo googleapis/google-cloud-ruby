@@ -17,27 +17,18 @@ require "helper"
 describe Gcloud::Bigquery::Dataset, :query, :mock_bigquery do
   let(:query) { "SELECT name, age, score, active FROM [some_project:some_dataset.users]" }
   let(:dataset_id) { "my_dataset" }
-  let(:dataset_hash) { random_dataset_hash dataset_id }
-  let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_hash,
-                                                      bigquery.connection }
+  let(:dataset_gapi) { random_dataset_gapi dataset_id }
+  let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_gapi,
+                                                      bigquery.service }
 
   it "queries the data with default dataset option set" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      json = JSON.parse(env.body)
-      json["query"].must_equal query
-      json["maxResults"].must_be :nil?
-      json["defaultDataset"].wont_be :nil?
-      json["defaultDataset"]["datasetId"].must_equal dataset.dataset_id
-      json["defaultDataset"]["projectId"].must_equal dataset.project_id
-      json["timeoutMs"].must_equal 10000
-      json["dryRun"].must_be :nil?
-      json["useQueryCache"].must_equal true
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
 
     data = dataset.query query
     data.class.must_equal Gcloud::Bigquery::QueryData
     data.count.must_equal 3
+    mock.verify
   end
 end

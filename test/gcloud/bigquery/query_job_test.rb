@@ -17,8 +17,8 @@ require "json"
 require "uri"
 
 describe Gcloud::Bigquery::QueryJob, :mock_bigquery do
-  let(:job) { Gcloud::Bigquery::Job.from_gapi query_job_hash,
-                                              bigquery.connection }
+  let(:job) { Gcloud::Bigquery::Job.from_gapi query_job_gapi,
+                                              bigquery.service }
   let(:job_id) { job.job_id }
 
   it "knows it is query job" do
@@ -26,15 +26,17 @@ describe Gcloud::Bigquery::QueryJob, :mock_bigquery do
   end
 
   it "knows its destination table" do
-    mock_connection.get "/bigquery/v2/projects/target_project_id/datasets/target_dataset_id/tables/target_table_id" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       destination_table_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
 
-    job.destination.must_be_kind_of Gcloud::Bigquery::Table
-    job.destination.project_id.must_equal "target_project_id"
-    job.destination.dataset_id.must_equal "target_dataset_id"
-    job.destination.table_id.must_equal   "target_table_id"
+    mock.expect :get_table, destination_table_gapi, ["target_project_id", "target_dataset_id", "target_table_id"]
+
+    destination = job.destination
+    destination.must_be_kind_of Gcloud::Bigquery::Table
+    destination.project_id.must_equal "target_project_id"
+    destination.dataset_id.must_equal "target_dataset_id"
+    destination.table_id.must_equal   "target_table_id"
+    mock.verify
   end
 
   it "knows its attributes" do
@@ -55,6 +57,10 @@ describe Gcloud::Bigquery::QueryJob, :mock_bigquery do
     job.config["query"]["destinationTable"]["tableId"].must_equal "target_table_id"
     job.config["query"]["createDisposition"].must_equal "CREATE_IF_NEEDED"
     job.config["query"]["priority"].must_equal "BATCH"
+  end
+
+  def query_job_gapi
+    Google::Apis::BigqueryV2::Job.from_json query_job_hash.to_json
   end
 
   def query_job_hash

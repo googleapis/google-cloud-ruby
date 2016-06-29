@@ -17,8 +17,8 @@ require "json"
 require "uri"
 
 describe Gcloud::Bigquery::LoadJob, :mock_bigquery do
-  let(:job) { Gcloud::Bigquery::Job.from_gapi load_job_hash,
-                                              bigquery.connection }
+  let(:job_gapi) { Google::Apis::BigqueryV2::Job.from_json load_job_hash.to_json }
+  let(:job) { Gcloud::Bigquery::Job.from_gapi job_gapi, bigquery.service }
   let(:job_id) { job.job_id }
 
   it "knows it is load job" do
@@ -32,15 +32,20 @@ describe Gcloud::Bigquery::LoadJob, :mock_bigquery do
   end
 
   it "knows its destination table" do
-    mock_connection.get "/bigquery/v2/projects/target_project_id/datasets/target_dataset_id/tables/target_table_id" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       destination_table_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_table, destination_table_gapi,
+      ["target_project_id", "target_dataset_id", "target_table_id"]
 
-    job.destination.must_be_kind_of Gcloud::Bigquery::Table
-    job.destination.project_id.must_equal "target_project_id"
-    job.destination.dataset_id.must_equal "target_dataset_id"
-    job.destination.table_id.must_equal   "target_table_id"
+    job.service.mocked_service = mock
+
+    table = job.destination
+    table.must_be_kind_of Gcloud::Bigquery::Table
+
+    mock.verify
+
+    table.project_id.must_equal "target_project_id"
+    table.dataset_id.must_equal "target_dataset_id"
+    table.table_id.must_equal   "target_table_id"
   end
 
   it "knows its attributes" do
@@ -66,10 +71,10 @@ describe Gcloud::Bigquery::LoadJob, :mock_bigquery do
   end
 
   it "knows its schema" do
-    job.schema.must_be_kind_of Hash
-    job.schema["fields"][0]["name"].must_equal "name"
-    job.schema["fields"][1]["type"].must_equal "INTEGER"
-    job.schema["fields"][2]["mode"].must_equal "NULLABLE"
+    job.schema.must_be_kind_of Gcloud::Bigquery::Schema
+    job.schema.must_be :frozen?
+    job.schema.fields.wont_be :empty?
+    job.schema.fields.map(&:name).must_equal ["name", "age", "score", "active"]
   end
 
   it "knows its load config" do
@@ -123,13 +128,13 @@ describe Gcloud::Bigquery::LoadJob, :mock_bigquery do
     hash
   end
 
-  def destination_table_json
+  def destination_table_gapi
     hash = random_table_hash "getting_replaced_dataset_id"
     hash["tableReference"] = {
       "projectId" => "target_project_id",
       "datasetId" => "target_dataset_id",
       "tableId"   => "target_table_id"
     }
-    hash.to_json
+    Google::Apis::BigqueryV2::Table.from_json hash.to_json
   end
 end

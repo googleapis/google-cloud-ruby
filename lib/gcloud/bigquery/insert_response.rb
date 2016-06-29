@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "json"
+
 module Gcloud
   module Bigquery
     ##
@@ -29,28 +31,24 @@ module Gcloud
       end
 
       def insert_count
-        @insert_count ||= @rows.count - error_count
+        @rows.count - error_count
       end
 
       def error_count
-        @error_count ||= Array(@gapi["insertErrors"]).count
+        Array(@gapi.insert_errors).count
       end
 
       def insert_errors
-        @insert_errors ||= begin
-          Array(@gapi["insertErrors"]).map do |ie|
-            row = @rows[ie["index"]]
-            errors = ie["errors"]
-            InsertError.new row, errors
-          end
+        Array(@gapi.insert_errors).map do |ie|
+          row = @rows[ie.index]
+          errors = ie.errors.map { |e| JSON.parse e.to_json }
+          InsertError.new row, errors
         end
       end
 
       def error_rows
-        @error_rows ||= begin
-          Array(@gapi["insertErrors"]).map do |ie|
-            @rows[ie["index"]]
-          end
+        Array(@gapi.insert_errors).map do |ie|
+          @rows[ie.index]
         end
       end
 
@@ -60,9 +58,9 @@ module Gcloud
         []
       end
 
-      # @private
+      # @private New InsertResponse from the inserted rows and a
+      # Google::Apis::BigqueryV2::InsertAllTableDataResponse object.
       def self.from_gapi rows, gapi
-        gapi = gapi.to_hash if gapi.respond_to? :to_hash
         new rows, gapi
       end
 

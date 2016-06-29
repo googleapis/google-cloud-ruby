@@ -16,7 +16,7 @@
 require "gcloud/bigquery/view"
 require "gcloud/bigquery/data"
 require "gcloud/bigquery/table/list"
-require "gcloud/bigquery/table/schema"
+require "gcloud/bigquery/schema"
 require "gcloud/bigquery/errors"
 require "gcloud/bigquery/insert_response"
 require "gcloud/upload"
@@ -65,8 +65,8 @@ module Gcloud
     #
     class Table
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The Service object.
+      attr_accessor :service
 
       ##
       # @private The Google API Client object.
@@ -75,8 +75,8 @@ module Gcloud
       ##
       # @private Create an empty Table object.
       def initialize
-        @connection = nil
-        @gapi = {}
+        @service = nil
+        @gapi = Google::Apis::BigqueryV2::Table.new
       end
 
       ##
@@ -87,7 +87,7 @@ module Gcloud
       # @!group Attributes
       #
       def table_id
-        @gapi["tableReference"]["tableId"]
+        @gapi.table_reference.table_id
       end
 
       ##
@@ -96,7 +96,7 @@ module Gcloud
       # @!group Attributes
       #
       def dataset_id
-        @gapi["tableReference"]["datasetId"]
+        @gapi.table_reference.dataset_id
       end
 
       ##
@@ -105,7 +105,7 @@ module Gcloud
       # @!group Attributes
       #
       def project_id
-        @gapi["tableReference"]["projectId"]
+        @gapi.table_reference.project_id
       end
 
       ##
@@ -113,7 +113,7 @@ module Gcloud
       # The gapi fragment containing the Project ID, Dataset ID, and Table ID as
       # a camel-cased hash.
       def table_ref
-        table_ref = @gapi["tableReference"]
+        table_ref = @gapi.table_reference
         table_ref = table_ref.to_hash if table_ref.respond_to? :to_hash
         table_ref
       end
@@ -128,7 +128,7 @@ module Gcloud
       # @!group Attributes
       #
       def id
-        @gapi["id"]
+        @gapi.id
       end
 
       ##
@@ -159,7 +159,7 @@ module Gcloud
       # @!group Attributes
       #
       def name
-        @gapi["friendlyName"]
+        @gapi.friendly_name
       end
 
       ##
@@ -168,7 +168,8 @@ module Gcloud
       # @!group Attributes
       #
       def name= new_name
-        patch_gapi! name: new_name
+        @gapi.update! friendly_name: new_name
+        patch_gapi! :friendly_name
       end
 
       ##
@@ -178,7 +179,7 @@ module Gcloud
       #
       def etag
         ensure_full_data!
-        @gapi["etag"]
+        @gapi.etag
       end
 
       ##
@@ -188,7 +189,7 @@ module Gcloud
       #
       def api_url
         ensure_full_data!
-        @gapi["selfLink"]
+        @gapi.self_link
       end
 
       ##
@@ -198,7 +199,7 @@ module Gcloud
       #
       def description
         ensure_full_data!
-        @gapi["description"]
+        @gapi.description
       end
 
       ##
@@ -207,7 +208,8 @@ module Gcloud
       # @!group Attributes
       #
       def description= new_description
-        patch_gapi! description: new_description
+        @gapi.update! description: new_description
+        patch_gapi! :description
       end
 
       ##
@@ -217,7 +219,7 @@ module Gcloud
       #
       def bytes_count
         ensure_full_data!
-        @gapi["numBytes"]
+        @gapi.num_bytes
       end
 
       ##
@@ -227,7 +229,7 @@ module Gcloud
       #
       def rows_count
         ensure_full_data!
-        @gapi["numRows"]
+        @gapi.num_rows
       end
 
       ##
@@ -237,7 +239,7 @@ module Gcloud
       #
       def created_at
         ensure_full_data!
-        Time.at(@gapi["creationTime"] / 1000.0)
+        Time.at(@gapi.creation_time / 1000.0)
       end
 
       ##
@@ -249,8 +251,8 @@ module Gcloud
       #
       def expires_at
         ensure_full_data!
-        return nil if @gapi["expirationTime"].nil?
-        Time.at(@gapi["expirationTime"] / 1000.0)
+        return nil if @gapi.expiration_time.nil?
+        Time.at(@gapi.expiration_time / 1000.0)
       end
 
       ##
@@ -260,7 +262,7 @@ module Gcloud
       #
       def modified_at
         ensure_full_data!
-        Time.at(@gapi["lastModifiedTime"] / 1000.0)
+        Time.at(@gapi.last_modified_time / 1000.0)
       end
 
       ##
@@ -269,7 +271,7 @@ module Gcloud
       # @!group Attributes
       #
       def table?
-        @gapi["type"] == "TABLE"
+        @gapi.type == "TABLE"
       end
 
       ##
@@ -278,7 +280,7 @@ module Gcloud
       # @!group Attributes
       #
       def view?
-        @gapi["type"] == "VIEW"
+        @gapi.type == "VIEW"
       end
 
       ##
@@ -289,7 +291,7 @@ module Gcloud
       #
       def location
         ensure_full_data!
-        @gapi["location"]
+        @gapi.location
       end
 
       ##
@@ -328,53 +330,20 @@ module Gcloud
       #
       def schema replace: false
         ensure_full_data!
-        g = @gapi
-        g = g.to_hash if g.respond_to? :to_hash
-        s = g["schema"] ||= {}
-        return s unless block_given?
-        s = nil if replace
-        schema_builder = Schema.new s
-        yield schema_builder
-        self.schema = schema_builder.schema if schema_builder.changed?
-      end
-
-      ##
-      # Updates the schema of the table.
-      # To update the schema using a block instead, use #schema.
-      #
-      # @param [Hash] new_schema A hash containing keys and values as specified
-      #   by the Google Cloud BigQuery [Rest API
-      #   ](https://cloud.google.com/bigquery/docs/reference/v2/tables#resource)
-      #   .
-      #
-      # @example
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   bigquery = gcloud.bigquery
-      #   dataset = bigquery.dataset "my_dataset"
-      #   table = dataset.create_table "my_table"
-      #
-      #   schema = {
-      #     "fields" => [
-      #       {
-      #         "name" => "first_name",
-      #         "type" => "STRING",
-      #         "mode" => "REQUIRED"
-      #       },
-      #       {
-      #         "name" => "age",
-      #         "type" => "INTEGER",
-      #         "mode" => "REQUIRED"
-      #       }
-      #     ]
-      #   }
-      #   table.schema = schema
-      #
-      # @!group Attributes
-      #
-      def schema= new_schema
-        patch_gapi! schema: new_schema
+        schema_builder = Schema.from_gapi @gapi.schema
+        if block_given?
+          if replace
+            empty_schema = Google::Apis::BigqueryV2::TableSchema.new fields: []
+            schema_builder = Schema.from_gapi empty_schema
+          end
+          yield schema_builder
+          schema_builder.check_for_mutated_schema!
+          if schema_builder.changed?
+            @gapi.schema = schema_builder.to_gapi
+            patch_gapi! :schema
+          end
+        end
+        schema_builder.freeze
       end
 
       ##
@@ -383,10 +352,7 @@ module Gcloud
       # @!group Attributes
       #
       def fields
-        f = schema["fields"]
-        f = f.to_hash if f.respond_to? :to_hash
-        f = [] if f.nil?
-        f
+        schema.fields
       end
 
       ##
@@ -395,7 +361,7 @@ module Gcloud
       # @!group Attributes
       #
       def headers
-        fields.map { |f| f["name"] }
+        fields.map(&:name)
       end
 
       ##
@@ -441,14 +407,10 @@ module Gcloud
       # @!group Data
       #
       def data token: nil, max: nil, start: nil
-        ensure_connection!
+        ensure_service!
         options = { token: token, max: max, start: start }
-        resp = connection.list_tabledata dataset_id, table_id, options
-        if resp.success?
-          Data.from_response resp, self
-        else
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.list_tabledata dataset_id, table_id, options
+        Data.from_gapi gapi, self
       end
 
       ##
@@ -505,54 +467,12 @@ module Gcloud
       # @!group Data
       #
       def copy destination_table, create: nil, write: nil, dryrun: nil
-        ensure_connection!
+        ensure_service!
         options = { create: create, write: write, dryrun: dryrun }
-        resp = connection.copy_table table_ref,
-                                     get_table_ref(destination_table),
-                                     options
-        if resp.success?
-          Job.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
-      end
-
-      ##
-      # @private
-      # Links the table to a source table identified by a URI.
-      #
-      # @param [String] source_url The URI of source table to link.
-      # @param [String] create Specifies whether the job is allowed to create
-      #   new tables.
-      #
-      #   The following values are supported:
-      #
-      #   * `needed` - Create the table if it does not exist.
-      #   * `never` - The table must already exist. A 'notFound' error is
-      #     raised if the table does not exist.
-      # @param [String] write Specifies how to handle data already present in
-      #   the destination table. The default value is `empty`.
-      #
-      #   The following values are supported:
-      #
-      #   * `truncate` - BigQuery overwrites the table data.
-      #   * `append` - BigQuery appends the data to the table.
-      #   * `empty` - An error will be returned if the destination table already
-      #     contains data.
-      #
-      # @return [Gcloud::Bigquery::Job]
-      #
-      # @!group Data
-      #
-      def link source_url, create: nil, write: nil, dryrun: nil
-        ensure_connection!
-        options = { create: create, write: write, dryrun: dryrun }
-        resp = connection.link_table table_ref, source_url, options
-        if resp.success?
-          Job.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.copy_table table_ref,
+                                  get_table_ref(destination_table),
+                                  options
+        Job.from_gapi gapi, service
       end
 
       ##
@@ -598,15 +518,11 @@ module Gcloud
       #
       def extract extract_url, format: nil, compression: nil, delimiter: nil,
                   header: nil, dryrun: nil
-        ensure_connection!
+        ensure_service!
         options = { format: format, compression: compression,
                     delimiter: delimiter, header: header, dryrun: dryrun }
-        resp = connection.extract_table table_ref, extract_url, options
-        if resp.success?
-          Job.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.extract_table table_ref, extract_url, options
+        Job.from_gapi gapi, service
       end
 
       ##
@@ -774,7 +690,7 @@ module Gcloud
                encoding: nil, delimiter: nil, ignore_unknown: nil,
                max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil,
                chunk_size: nil
-        ensure_connection!
+        ensure_service!
         options = { format: format, create: create, write: write,
                     projection_fields: projection_fields,
                     jagged_rows: jagged_rows, quoted_newlines: quoted_newlines,
@@ -824,14 +740,10 @@ module Gcloud
       #
       def insert rows, skip_invalid: nil, ignore_unknown: nil
         rows = [rows] if rows.is_a? Hash
-        ensure_connection!
+        ensure_service!
         options = { skip_invalid: skip_invalid, ignore_unknown: ignore_unknown }
-        resp = connection.insert_tabledata dataset_id, table_id, rows, options
-        if resp.success?
-          InsertResponse.from_gapi rows, resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.insert_tabledata dataset_id, table_id, rows, options
+        InsertResponse.from_gapi rows, gapi
       end
 
       ##
@@ -852,13 +764,9 @@ module Gcloud
       # @!group Lifecycle
       #
       def delete
-        ensure_connection!
-        resp = connection.delete_table dataset_id, table_id
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.delete_table dataset_id, table_id
+        true
       end
 
       ##
@@ -867,13 +775,9 @@ module Gcloud
       # @!group Lifecycle
       #
       def reload!
-        ensure_connection!
-        resp = connection.get_table dataset_id, table_id
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.get_table dataset_id, table_id
+        @gapi = gapi
       end
       alias_method :refresh!, :reload!
 
@@ -883,77 +787,47 @@ module Gcloud
         klass = class_for gapi
         klass.new.tap do |f|
           f.gapi = gapi
-          f.connection = conn
+          f.service = conn
         end
       end
 
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      # Raise an error unless an active service is available.
+      def ensure_service!
+        fail "Must have active connection" unless service
       end
 
-      def patch_gapi! options = {}
-        ensure_connection!
-        resp = connection.patch_table dataset_id, table_id, options
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+      def patch_gapi! *attributes
+        return if attributes.empty?
+        ensure_service!
+        patch_args = Hash[attributes.map do |attr|
+          [attr, @gapi.send(attr)]
+        end]
+        patch_gapi = Google::Apis::BigqueryV2::Table.new patch_args
+        @gapi = service.patch_table dataset_id, table_id, patch_gapi
       end
 
       def self.class_for gapi
-        return View if gapi["type"] == "VIEW"
+        return View if gapi.type == "VIEW"
         self
       end
 
-      def load_storage file, options = {}
+      def load_storage url, options = {}
         # Convert to storage URL
-        file = file.to_gs_url if file.respond_to? :to_gs_url
+        url = url.to_gs_url if url.respond_to? :to_gs_url
 
-        resp = connection.load_table table_ref, file, options
-        if resp.success?
-          Job.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.load_table_gs_url dataset_id, table_id, url, options
+        Job.from_gapi gapi, service
       end
 
       def load_local file, options = {}
-        if resumable_upload? file
-          load_resumable file, options
-        else
-          load_multipart file, options
-        end
-      end
+        # Convert to storage URL
+        file = file.to_gs_url if file.respond_to? :to_gs_url
 
-      def load_resumable file, options = {}
-        chunk_size = Gcloud::Upload.verify_chunk_size options[:chunk_size],
-                                                      file.length
-        resp = connection.load_resumable table_ref, file, chunk_size, options
-        if resp.success?
-          Job.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
-      end
-
-      def load_multipart file, options = {}
-        resp = connection.load_multipart table_ref, file, options
-        if resp.success?
-          Job.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
-      end
-
-      ##
-      # @private Determines if a resumable upload should be used.
-      def resumable_upload? file
-        ::File.size?(file).to_i > Upload.resumable_threshold
+        gapi = service.load_table_file dataset_id, table_id, file, options
+        Job.from_gapi gapi, service
       end
 
       def storage_url? file
@@ -976,17 +850,13 @@ module Gcloud
       end
 
       def reload_gapi!
-        ensure_connection!
-        resp = connection.get_table dataset_id, table_id
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.get_table dataset_id, table_id
+        @gapi = gapi
       end
 
       def data_complete?
-        !@gapi["creationTime"].nil?
+        !@gapi.creation_time.nil?
       end
 
       private
@@ -995,7 +865,69 @@ module Gcloud
         if table.respond_to? :table_ref
           table.table_ref
         else
-          Connection.table_ref_from_s table, table_ref
+          Service.table_ref_from_s table, table_ref
+        end
+      end
+
+      ##
+      # Yielded to a block to accumulate changes for a patch request.
+      class Updater < Table
+        ##
+        # A list of attributes that were updated.
+        attr_reader :updates
+
+        ##
+        # Create an Updater object.
+        def initialize gapi
+          @updates = []
+          @gapi = gapi
+        end
+
+        def schema replace: false
+          # Same as Table#schema, but not frozen
+          # TODO: make sure to call ensure_full_data! on Dataset#update
+          @schema ||= Schema.from_gapi @gapi.schema
+          if block_given?
+            if replace
+              empty_schema = Google::Apis::BigqueryV2::TableSchema.new fields: []
+              @schema = Schema.from_gapi empty_schema
+            end
+            yield @schema
+            check_for_mutated_schema!
+          end
+          # Do not freeze on updater, allow modifications
+          @schema
+        end
+
+        ##
+        # Make sure any access changes are saved
+        def check_for_mutated_schema!
+          return if @schema.nil?
+          @schema.check_for_mutated_schema!
+          if @schema.changed?
+            @gapi.schema = @schema.to_gapi
+            patch_gapi! :schema
+          end
+        end
+
+        def to_gapi
+          check_for_mutated_schema!
+          @gapi
+        end
+
+        protected
+
+        ##
+        # Change to a NOOP
+        def ensure_full_data!
+          # Do nothing because we trust the gapi is full before we get here.
+        end
+
+        ##
+        # Queue up all the updates instead of making them.
+        def patch_gapi! attribute
+          @updates << attribute
+          @updates.uniq!
         end
       end
     end

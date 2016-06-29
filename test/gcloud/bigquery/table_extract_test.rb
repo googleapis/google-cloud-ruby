@@ -17,235 +17,191 @@ require "helper"
 describe Gcloud::Bigquery::Table, :extract, :mock_bigquery do
   let(:credentials) { OpenStruct.new }
   let(:storage) { Gcloud::Storage::Project.new project, credentials }
-  let(:extract_bucket) { Gcloud::Storage::Bucket.from_gapi random_bucket_hash,
-                                                           storage.connection }
-  let(:extract_file) { Gcloud::Storage::File.from_gapi random_file_hash(extract_bucket.name),
-                                                       storage.connection }
+  let(:extract_bucket_gapi) {  Google::Apis::StorageV1::Bucket.from_json random_bucket_hash.to_json }
+  let(:extract_bucket) { Gcloud::Storage::Bucket.from_gapi extract_bucket_gapi,
+                                                           storage.service }
+  let(:extract_file_gapi) { Google::Apis::StorageV1::Object.from_json random_file_hash(extract_bucket.name).to_json }
+  let(:extract_file) { Gcloud::Storage::File.from_gapi extract_file_gapi,
+                                                       storage.service }
   let(:extract_url) { extract_file.to_gs_url }
 
   let(:dataset) { "dataset" }
   let(:table_id) { "table_id" }
   let(:table_name) { "Target Table" }
   let(:description) { "This is the target table" }
-  let(:table_hash) { random_table_hash dataset,
+  let(:table_gapi) { random_table_gapi dataset,
                                        table_id,
                                        table_name,
                                        description }
-  let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash,
-                                                  bigquery.connection }
+  let(:table) { Gcloud::Bigquery::Table.from_gapi table_gapi,
+                                                  bigquery.service }
 
   it "can extract itself to a storage file" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["extract"]["destinationUris"].must_equal [extract_url]
-      json["configuration"]["extract"]["sourceTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["extract"].wont_include "destinationFormat"
-      json["configuration"]["extract"].wont_include "compression"
-      json["configuration"]["extract"].wont_include "fieldDelimiter"
-      json["configuration"]["extract"].wont_include "printHeader"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       extract_job_json(table, extract_file)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = table.extract extract_file
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself to a storage url" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["extract"]["destinationUris"].must_equal [extract_url]
-      json["configuration"]["extract"]["sourceTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["extract"].wont_include "destinationFormat"
-      json["configuration"]["extract"].wont_include "compression"
-      json["configuration"]["extract"].wont_include "fieldDelimiter"
-      json["configuration"]["extract"].wont_include "printHeader"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       extract_job_json(table, extract_file)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = table.extract extract_url
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself as a dryrun" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["extract"]["destinationUris"].must_equal [extract_url]
-      json["configuration"]["extract"]["sourceTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["extract"].wont_include "destinationFormat"
-      json["configuration"]["extract"].wont_include "compression"
-      json["configuration"]["extract"].wont_include "fieldDelimiter"
-      json["configuration"]["extract"].wont_include "printHeader"
-      json["configuration"].must_include "dryRun"
-      json["configuration"]["dryRun"].must_equal true
-      [200, {"Content-Type"=>"application/json"},
-       extract_job_json(table, extract_file)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi.configuration.dry_run = true
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = table.extract extract_url, dryrun: true
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and determine the csv format" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["extract"]["destinationUris"].must_equal ["#{extract_url}.csv"]
-      json["configuration"]["extract"]["sourceTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["extract"]["destinationFormat"].must_equal "CSV"
-      json["configuration"]["extract"].wont_include "compression"
-      json["configuration"]["extract"].wont_include "fieldDelimiter"
-      json["configuration"]["extract"].wont_include "printHeader"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       extract_job_json(table, extract_file)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi.configuration.extract.destination_format = "CSV"
+    job_gapi.configuration.extract.destination_uris = [job_gapi.configuration.extract.destination_uris.first + ".csv"]
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = table.extract "#{extract_url}.csv"
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the csv format" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["extract"]["destinationUris"].must_equal [extract_url]
-      json["configuration"]["extract"]["sourceTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["extract"]["destinationFormat"].must_equal "CSV"
-      json["configuration"]["extract"].wont_include "compression"
-      json["configuration"]["extract"].wont_include "fieldDelimiter"
-      json["configuration"]["extract"].wont_include "printHeader"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       extract_job_json(table, extract_file)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi.configuration.extract.destination_format = "CSV"
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = table.extract extract_url, format: :csv
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the csv format and options" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["extract"]["destinationUris"].must_equal [extract_url]
-      json["configuration"]["extract"]["sourceTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["extract"]["destinationFormat"].must_equal "CSV"
-      json["configuration"]["extract"]["compression"].must_equal "GZIP"
-      json["configuration"]["extract"]["fieldDelimiter"].must_equal "\t"
-      json["configuration"]["extract"]["printHeader"].must_equal false
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       extract_job_json(table, extract_file)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi.configuration.extract.destination_format = "CSV"
+    job_gapi.configuration.extract.compression = "GZIP"
+    job_gapi.configuration.extract.field_delimiter = "\t"
+    job_gapi.configuration.extract.print_header = false
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = table.extract extract_url, format: :csv, compression: "GZIP", delimiter: "\t", header: false
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and determine the json format" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["extract"]["destinationUris"].must_equal ["#{extract_url}.json"]
-      json["configuration"]["extract"]["sourceTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["extract"]["destinationFormat"].must_equal "NEWLINE_DELIMITED_JSON"
-      json["configuration"]["extract"].wont_include "compression"
-      json["configuration"]["extract"].wont_include "fieldDelimiter"
-      json["configuration"]["extract"].wont_include "printHeader"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       extract_job_json(table, extract_file)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi.configuration.extract.destination_format = "NEWLINE_DELIMITED_JSON"
+    job_gapi.configuration.extract.destination_uris = [job_gapi.configuration.extract.destination_uris.first + ".json"]
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = table.extract "#{extract_url}.json"
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the json format" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["extract"]["destinationUris"].must_equal [extract_url]
-      json["configuration"]["extract"]["sourceTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["extract"]["destinationFormat"].must_equal "NEWLINE_DELIMITED_JSON"
-      json["configuration"]["extract"].wont_include "compression"
-      json["configuration"]["extract"].wont_include "fieldDelimiter"
-      json["configuration"]["extract"].wont_include "printHeader"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       extract_job_json(table, extract_file)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi.configuration.extract.destination_format = "NEWLINE_DELIMITED_JSON"
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = table.extract extract_url, format: :json
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and determine the avro format" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["extract"]["destinationUris"].must_equal ["#{extract_url}.avro"]
-      json["configuration"]["extract"]["sourceTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["extract"]["destinationFormat"].must_equal "AVRO"
-      json["configuration"]["extract"].wont_include "compression"
-      json["configuration"]["extract"].wont_include "fieldDelimiter"
-      json["configuration"]["extract"].wont_include "printHeader"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       extract_job_json(table, extract_file)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi.configuration.extract.destination_format = "AVRO"
+    job_gapi.configuration.extract.destination_uris = [job_gapi.configuration.extract.destination_uris.first + ".avro"]
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = table.extract "#{extract_url}.avro"
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the avro format" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["extract"]["destinationUris"].must_equal [extract_url]
-      json["configuration"]["extract"]["sourceTable"]["projectId"].must_equal table.project_id
-      json["configuration"]["extract"]["sourceTable"]["datasetId"].must_equal table.dataset_id
-      json["configuration"]["extract"]["sourceTable"]["tableId"].must_equal table.table_id
-      json["configuration"]["extract"]["destinationFormat"].must_equal "AVRO"
-      json["configuration"]["extract"].wont_include "compression"
-      json["configuration"]["extract"].wont_include "fieldDelimiter"
-      json["configuration"]["extract"].wont_include "printHeader"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       extract_job_json(table, extract_file)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi.configuration.extract.destination_format = "AVRO"
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = table.extract extract_url, format: :avro
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::ExtractJob
   end
 
+  def extract_job_gapi table, extract_file
+    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file)
+  end
+
   def extract_job_json table, extract_file
-    hash = random_job_hash
-    hash["configuration"]["extract"] = {
-      "destinationUris" => [extract_file.api_url],
-      "sourceTable" => {
-        "projectId" => table.project_id,
-        "datasetId" => table.dataset_id,
-        "tableId" => table.table_id
-      },
-    }
-    hash.to_json
+    {
+      "configuration" => {
+        "extract" => {
+          "destinationUris" => [extract_file.to_gs_url],
+          "sourceTable" => {
+            "projectId" => table.project_id,
+            "datasetId" => table.dataset_id,
+            "tableId" => table.table_id
+          },
+          "printHeader" => nil,
+          "compression" => nil,
+          "fieldDelimiter" => nil,
+          "destinationFormat" => nil
+        },
+        "dryRun" => nil
+      }
+    }.to_json
   end
 
   # Borrowed from MockStorage, extract to a common module?

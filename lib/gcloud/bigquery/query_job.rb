@@ -30,14 +30,14 @@ module Gcloud
       ##
       # Checks if the priority for the query is `BATCH`.
       def batch?
-        val = config["query"]["priority"]
+        val = @gapi.configuration.query.priority
         val == "BATCH"
       end
 
       ##
       # Checks if the priority for the query is `INTERACTIVE`.
       def interactive?
-        val = config["query"]["priority"]
+        val = @gapi.configuration.query.priority
         return true if val.nil?
         val == "INTERACTIVE"
       end
@@ -46,7 +46,7 @@ module Gcloud
       # Checks if the the query job allows arbitrarily large results at a slight
       # cost to performance.
       def large_results?
-        val = config["query"]["allowLargeResults"]
+        val = @gapi.configuration.query.allow_large_results
         return false if val.nil?
         val
       end
@@ -56,7 +56,7 @@ module Gcloud
       # For more information, see [Query
       # Caching](https://cloud.google.com/bigquery/querying-data#querycaching).
       def cache?
-        val = config["query"]["useQueryCache"]
+        val = @gapi.configuration.query.use_query_cache
         return false if val.nil?
         val
       end
@@ -66,7 +66,7 @@ module Gcloud
       # results. The default is `true`. If the value is `false`, #large_results?
       # should return `true`.
       def flatten?
-        val = config["query"]["flattenResults"]
+        val = @gapi.configuration.query.flatten_results
         return true if val.nil?
         val
       end
@@ -74,23 +74,23 @@ module Gcloud
       ##
       # Checks if the query results are from the query cache.
       def cache_hit?
-        stats["query"]["cacheHit"]
+        @gapi.statistics.query.cache_hit
       end
 
       ##
       # The number of bytes processed by the query.
       def bytes_processed
-        stats["query"]["totalBytesProcessed"]
+        @gapi.statistics.query.total_bytes_processed
       end
 
       ##
       # The table in which the query results are stored.
       def destination
-        table = config["query"]["destinationTable"]
+        table = @gapi.configuration.query.destination_table
         return nil unless table
-        retrieve_table table["projectId"],
-                       table["datasetId"],
-                       table["tableId"]
+        retrieve_table table.project_id,
+                       table.dataset_id,
+                       table.table_id
       end
 
       ##
@@ -123,14 +123,10 @@ module Gcloud
       #   data = data.next if data.next?
       #
       def query_results token: nil, max: nil, start: nil, timeout: nil
-        ensure_connection!
+        ensure_service!
         options = { token: token, max: max, start: start, timeout: timeout }
-        resp = connection.job_query_results job_id, options
-        if resp.success?
-          QueryData.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.job_query_results job_id, options
+        QueryData.from_gapi gapi, service
       end
     end
   end

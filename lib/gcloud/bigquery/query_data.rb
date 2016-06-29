@@ -23,8 +23,8 @@ module Gcloud
     # Represents Data returned from a query a a list of name/value pairs.
     class QueryData < Data
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The Service object.
+      attr_accessor :service
 
       # @private
       def initialize arr = []
@@ -34,33 +34,30 @@ module Gcloud
 
       # The total number of bytes processed for this query.
       def total_bytes
-        @gapi["totalBytesProcessed"]
+        @gapi.total_bytes_processed
       end
 
       # Whether the query has completed or not. When data is present this will
       # always be `true`. When `false`, `total` will not be available.
       def complete?
-        @gapi["jobComplete"]
+        @gapi.job_complete
       end
 
       # Whether the query result was fetched from the query cache.
       def cache_hit?
-        @gapi["cacheHit"]
+        @gapi.cache_hit
       end
 
       ##
       # The schema of the data.
       def schema
-        s = @gapi["schema"]
-        s = s.to_hash if s.respond_to? :to_hash
-        s = {} if s.nil?
-        s
+        Schema.from_gapi(@gapi.schema).freeze
       end
 
       ##
       # The fields of the data.
       def fields
-        f = schema["fields"]
+        f = schema.fields
         f = f.to_hash if f.respond_to? :to_hash
         f = [] if f.nil?
         f
@@ -69,7 +66,7 @@ module Gcloud
       ##
       # The name of the columns in the data.
       def headers
-        fields.map { |f| f["name"] }
+        fields.map { |f| f.name }
       end
 
       ##
@@ -112,13 +109,9 @@ module Gcloud
       #
       def next
         return nil unless next?
-        ensure_connection!
-        resp = connection.job_query_results job_id, token: token
-        if resp.success?
-          QueryData.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.job_query_results job_id, token: token
+        QueryData.from_gapi gapi, service
       end
 
       ##
@@ -195,29 +188,27 @@ module Gcloud
       def job
         return @job if @job
         return nil unless job?
-        ensure_connection!
-        resp = connection.get_job job_id
-        if resp.success?
-          @job = Job.from_gapi resp.data, connection
-        else
-          return nil if resp.status == 404
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.get_job job_id
+        @job = Job.from_gapi gapi, service
+      rescue Google::Apis::ClientError => e
+        raise e unless e.status_code == 404 # TODO: convert e to Gcloud::Error
+        nil
       end
 
       ##
       # @private New Data from a response object.
-      def self.from_gapi gapi, connection
-        if gapi["schema"].nil?
+      def self.from_gapi gapi, service
+        if gapi.schema.nil?
           formatted_rows = []
         else
-          formatted_rows = format_rows gapi["rows"],
-                                       gapi["schema"]["fields"]
+          formatted_rows = format_rows gapi.rows,
+                                       gapi.schema.fields
         end
 
         data = new formatted_rows
         data.gapi = gapi
-        data.connection = connection
+        data.service = service
         data
       end
 
@@ -225,16 +216,16 @@ module Gcloud
 
       ##
       # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      def ensure_service!
+        fail "Must have active connection" unless service
       end
 
       def job?
-        @gapi["jobReference"] && @gapi["jobReference"]["jobId"]
+        @gapi.job_reference && @gapi.job_reference.job_id
       end
 
       def job_id
-        @gapi["jobReference"]["jobId"]
+        @gapi.job_reference.job_id
       end
     end
   end

@@ -187,40 +187,6 @@ class MockPubsub < Minitest::Spec
     }.to_json
   end
 
-  def already_exists_error_json resource_name
-    {
-      "error" => {
-        "code" => 409,
-        "message" => "Resource already exists in the project (resource=#{resource_name}).",
-        "errors" => [
-          {
-            "message" => "Resource already exists in the project (resource=#{resource_name}).",
-            "domain" => "global",
-            "reason" => "alreadyExists"
-          }
-        ],
-        "status" => "ALREADY_EXISTS"
-      }
-    }.to_json
-  end
-
-  def not_found_error_json resource_name
-    {
-      "error" => {
-        "code" => 404,
-        "message" => "Resource not found (resource=#{resource_name}).",
-        "errors" => [
-          {
-            "message" => "Resource not found (resource=#{resource_name}).",
-            "domain" => "global",
-            "reason" => "notFound"
-          }
-        ],
-        "status" => "NOT_FOUND"
-      }
-    }.to_json
-  end
-
   def project_path
     "projects/#{project}"
   end
@@ -240,26 +206,18 @@ class MockPubsub < Minitest::Spec
 end
 
 class MockBigquery < Minitest::Spec
-  let(:project) { bigquery.connection.project }
-  let(:credentials) { bigquery.connection.credentials }
+  let(:project) { bigquery.service.project }
+  let(:credentials) { bigquery.service.credentials }
   let(:bigquery) { $gcloud_bigquery_global ||= Gcloud::Bigquery::Project.new("test-project", OpenStruct.new) }
 
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    connection = bigquery.instance_variable_get "@connection"
-    client = connection.instance_variable_get "@client"
-    client.connection = Faraday.new do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
+  # Register this spec type for when :mock_bigquery is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_bigquery
   end
 
-  def teardown
-    @connection.verify_stubbed_calls
-  end
-
-  def mock_connection
-    @connection
+  def random_dataset_gapi id = nil, name = nil, description = nil, default_expiration = nil, location = "US"
+    json = random_dataset_hash(id, name, description, default_expiration, location).to_json
+    Google::Apis::BigqueryV2::Dataset.from_json json
   end
 
   def random_dataset_hash id = nil, name = nil, description = nil, default_expiration = nil, location = "US"
@@ -302,20 +260,9 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def invalid_dataset_id_error_json id
-    {
-      "error" => {
-        "code" => 400,
-        "message" => "Invalid dataset ID \"#{id}\". Dataset IDs must be alphanumeric (plus underscores, dashes, and colons) and must be at most 1024 characters long.",
-        "errors" => [
-          {
-            "message" => "Invalid dataset ID \"#{id}\". Dataset IDs must be alphanumeric (plus underscores, dashes, and colons) and must be at most 1024 characters long.",
-            "domain" => "global",
-            "reason" => "invalid"
-          }
-        ]
-      }
-    }.to_json
+  def random_table_gapi dataset, id = nil, name = nil, description = nil, project_id = nil
+    json = random_table_hash(dataset, id, name, description, project_id).to_json
+    Google::Apis::BigqueryV2::Table.from_json json
   end
 
   def random_table_hash dataset, id = nil, name = nil, description = nil, project_id = nil
@@ -381,6 +328,39 @@ class MockBigquery < Minitest::Spec
       "friendlyName" => name,
       "type" => "TABLE"
     }
+  end
+
+  def source_table_gapi
+    Google::Apis::BigqueryV2::Table.from_json source_table_json
+  end
+
+  def source_table_json
+    hash = random_table_hash "getting_replaced_dataset_id"
+    hash["tableReference"] = {
+      "projectId" => "source_project_id",
+      "datasetId" => "source_dataset_id",
+      "tableId"   => "source_table_id"
+    }
+    hash.to_json
+  end
+
+  def destination_table_gapi
+    Google::Apis::BigqueryV2::Table.from_json destination_table_json
+  end
+
+  def destination_table_json
+    hash = random_table_hash "getting_replaced_dataset_id"
+    hash["tableReference"] = {
+      "projectId" => "target_project_id",
+      "datasetId" => "target_dataset_id",
+      "tableId"   => "target_table_id"
+    }
+    hash.to_json
+  end
+
+  def random_view_gapi dataset, id = nil, name = nil, description = nil
+    json = random_view_hash(dataset, id, name, description).to_json
+    Google::Apis::BigqueryV2::Table.from_json json
   end
 
   def random_view_hash dataset, id = nil, name = nil, description = nil
@@ -466,9 +446,7 @@ class MockBigquery < Minitest::Spec
         "dryRun" => false
       },
       "status" => {
-        "state" => state,
-        "errorResult" => nil,
-        "errors" => nil
+        "state" => state
       },
       "statistics" => {
         "creationTime" => (Time.now.to_f * 1000).floor,
@@ -479,11 +457,46 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def query_data_json
-    query_data_hash.to_json
+  def query_job_gapi query
+    Google::Apis::BigqueryV2::Job.from_json query_job_json(query)
   end
 
-  def query_data_hash
+  def query_job_json query
+    {
+      "configuration" => {
+        "query" => {
+          "query" => query,
+          "defaultDataset" => nil,
+          "destinationTable" => nil,
+          "createDisposition" => nil,
+          "writeDisposition" => nil,
+          "priority" => "INTERACTIVE",
+          "allowLargeResults" => nil,
+          "useQueryCache" => true,
+          "flattenResults" => nil
+        }
+      }
+    }.to_json
+  end
+
+  def query_request_gapi
+    Google::Apis::BigqueryV2::QueryRequest.new(
+      default_dataset: Google::Apis::BigqueryV2::DatasetReference.new(
+        dataset_id: "my_dataset", project_id: "test-project"
+      ),
+      dry_run: nil,
+      max_results: nil,
+      query: "SELECT name, age, score, active FROM [some_project:some_dataset.users]",
+      timeout_ms: 10000,
+      use_query_cache: true
+    )
+  end
+
+  def query_data_gapi token: "token1234567890"
+    Google::Apis::BigqueryV2::QueryResponse.from_json query_data_hash(token: token).to_json
+  end
+
+  def query_data_hash token: "token1234567890"
     {
       "kind" => "bigquery#getQueryResultsResponse",
       "etag" => "etag1234567890",
@@ -565,17 +578,12 @@ class MockBigquery < Minitest::Spec
           ]
         }
       ],
-      "pageToken" => "token1234567890",
+      "pageToken" => token,
       "totalRows" => 3,
       "totalBytesProcessed" => 456789,
       "jobComplete" => true,
       "cacheHit" => false
     }
-  end
-
-  # Register this spec type for when :bigquery is used.
-  register_spec_type(self) do |desc, *addl|
-    addl.include? :mock_bigquery
   end
 end
 

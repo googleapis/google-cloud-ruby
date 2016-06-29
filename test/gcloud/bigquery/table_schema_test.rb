@@ -27,48 +27,72 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
   let(:location_code) { "US" }
   let(:url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
-  let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash, bigquery.connection }
+  let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
+  let(:table) { Gcloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
-  let(:schema) { table.schema.dup }
+  let(:schema_hash) { table_gapi.schema.to_h }
+
+  let(:new_table_hash) { random_table_hash dataset, table_id, table_name, description }
+
+  let(:field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", fields: nil }
+  let(:field_integer_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", mode: "NULLABLE", fields: nil }
+  let(:field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE", fields: nil }
+  let(:field_boolean_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "approved", type: "BOOLEAN", mode: "NULLABLE", fields: nil }
+  let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "start_date", type: "TIMESTAMP", mode: "NULLABLE", fields: nil }
+  let(:field_record_repeated_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "cities_lived", type: "RECORD", mode: "REPEATED", fields: [ field_integer_gapi, field_timestamp_gapi ] }
+
+  let(:field_string_required) { Gcloud::Bigquery::Schema::Field.from_gapi field_string_required_gapi }
+  let(:field_integer) { Gcloud::Bigquery::Schema::Field.from_gapi field_integer_gapi }
+  let(:field_float) { Gcloud::Bigquery::Schema::Field.from_gapi field_float_gapi }
+  let(:field_boolean) { Gcloud::Bigquery::Schema::Field.from_gapi field_boolean_gapi }
+  let(:field_timestamp) { Gcloud::Bigquery::Schema::Field.from_gapi field_timestamp_gapi }
+  let(:field_record_repeated) { Gcloud::Bigquery::Schema::Field.from_gapi field_record_repeated_gapi }
 
   it "gets the schema, fields, and headers" do
-    table.schema.must_be_kind_of Hash
-    table.schema.keys.must_include "fields"
-    table.fields.must_equal table.schema["fields"]
+    table.schema.must_be_kind_of Gcloud::Bigquery::Schema
+    table.schema.must_be :frozen?
+    table.schema.fields.count.must_equal 4
+
+    table.schema.fields[0].name.must_equal "name"
+    table.schema.fields[0].type.must_equal "STRING"
+    table.schema.fields[0].description.must_equal nil
+    table.schema.fields[0].mode.must_equal "REQUIRED"
+
+    table.schema.fields[1].name.must_equal "age"
+    table.schema.fields[1].type.must_equal "INTEGER"
+    table.schema.fields[1].description.must_equal nil
+    table.schema.fields[1].mode.must_equal nil
+
+    table.schema.fields[2].name.must_equal "score"
+    table.schema.fields[2].type.must_equal "FLOAT"
+    table.schema.fields[2].description.must_equal "A score from 0.0 to 10.0"
+    table.schema.fields[2].mode.must_equal nil
+
+    table.schema.fields[3].name.must_equal "active"
+    table.schema.fields[3].type.must_equal "BOOLEAN"
+    table.schema.fields[3].description.must_equal nil
+    table.schema.fields[3].mode.must_equal nil
+
+    table.fields.count.must_equal 4
+    table.fields.map(&:name).must_equal table.schema.fields.map(&:name)
     table.headers.must_equal ["name", "age", "score", "active"]
   end
 
-  it "sets its schema if assigned a hash" do
-    new_table_data = new_table_hash
-    new_table_data["schema"]["fields"].first["name"] = "moniker"
-    new_schema = new_table_data["schema"]
-    mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" do |env|
-      json = JSON.parse env.body
-      json["schema"].must_equal new_schema
-      [200, { "Content-Type" => "application/json" },
-       new_table_data.to_json]
-    end
-
-    table.schema = new_schema
-
-    table.schema.must_equal new_schema
-    table.schema["fields"].first["name"].must_equal "moniker"
-  end
-
   it "sets a flat schema via a block with replace option true" do
-    new_table_data = new_table_hash
-    new_table_data["schema"]["fields"] = [
-      field_string_required,
-      field_integer,
-      field_float,
-      field_boolean,
-      field_timestamp
-    ]
-    mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" do |env|
-      json = JSON.parse env.body
-      json["schema"].must_equal new_table_data["schema"]
-      [200, { "Content-Type" => "application/json" }, new_table_data.to_json]
-    end
+    new_schema = Google::Apis::BigqueryV2::TableSchema.new(
+      fields: [field_string_required_gapi,
+               field_integer_gapi,
+               field_float_gapi,
+               field_boolean_gapi,
+               field_timestamp_gapi])
+
+    mock = Minitest::Mock.new
+    returned_table_gapi = table_gapi.dup
+    returned_table_gapi.schema = new_schema
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: new_schema)
+    mock.expect :patch_table, returned_table_gapi,
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi]
+    table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
       schema.string "first_name", mode: :required
@@ -78,36 +102,61 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
       schema.timestamp "start_date"
     end
 
-    table.schema.must_equal new_table_data["schema"]
+    mock.verify
   end
 
-  it "adds to its existing schema with replace option default" do
-    new_table_data = new_table_hash
-    new_table_data["schema"]["fields"] << field_timestamp
-    mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" do |env|
-      json = JSON.parse env.body
-      json["schema"].must_equal new_table_data["schema"]
-      [200, { "Content-Type" => "application/json" }, new_table_data.to_json]
-    end
+  it "adds to its existing schema" do
+    mock = Minitest::Mock.new
+    end_date_timestamp_gapi = field_timestamp_gapi.dup
+    end_date_timestamp_gapi.name = "end_date"
+    new_schema_gapi = table_gapi.schema.dup
+    new_schema_gapi.fields << end_date_timestamp_gapi
+    returned_table_gapi = table_gapi.dup
+    returned_table_gapi.schema = new_schema_gapi
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: new_schema_gapi)
+    mock.expect :patch_table, returned_table_gapi,
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi]
+    table.service.mocked_service = mock
 
     table.schema do |schema|
+      schema.timestamp "end_date"
+    end
+
+    mock.verify
+
+    table.headers.must_include "end_date"
+  end
+
+  it "replaces existing schema with replace option" do
+    mock = Minitest::Mock.new
+    new_schema_gapi = Google::Apis::BigqueryV2::TableSchema.new(
+      fields: [field_timestamp_gapi])
+    returned_table_gapi = table_gapi.dup
+    returned_table_gapi.schema = new_schema_gapi
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: new_schema_gapi)
+    mock.expect :patch_table, returned_table_gapi,
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi]
+    table.service.mocked_service = mock
+
+    table.schema replace: true do |schema|
       schema.timestamp "start_date"
     end
 
-    table.schema.must_equal new_table_data["schema"]
+    mock.verify
+
+    table.schema.fields.must_include field_timestamp
   end
 
   it "sets a nested repeated schema field via a nested block" do
-    new_table_data = new_table_hash
-    new_table_data["schema"]["fields"] = [
-      field_string_required,
-      field_record_repeated
-    ]
-    mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" do |env|
-      json = JSON.parse env.body
-      json["schema"].must_equal new_table_data["schema"]
-      [200, { "Content-Type" => "application/json" }, new_table_data.to_json]
-    end
+    mock = Minitest::Mock.new
+    new_schema_gapi = Google::Apis::BigqueryV2::TableSchema.new(
+      fields: [field_string_required_gapi, field_record_repeated_gapi])
+    returned_table_gapi = table_gapi.dup
+    returned_table_gapi.schema = new_schema_gapi
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: new_schema_gapi)
+    mock.expect :patch_table, returned_table_gapi,
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi]
+    table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
       schema.string "first_name", mode: :required
@@ -117,7 +166,11 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
       end
     end
 
-    table.schema.must_equal new_table_data["schema"]
+    mock.verify
+
+    table.schema.fields.must_include field_string_required
+    table.schema.fields.must_include field_record_repeated
+    # table.schema.fields.must_equal [field_string_required, field_record_repeated]
   end
 
   it "raises when nesting fields more than one level deep" do
@@ -135,57 +188,5 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     end
 
     table.schema.must_equal original_schema
-  end
-
-  protected
-
-  def new_table_hash
-    random_table_hash dataset, table_id, table_name, description
-  end
-
-  def field_string_required
-    {
-      "name" => "first_name",
-      "type" => "STRING",
-      "mode" => "REQUIRED"
-    }
-  end
-
-  def field_integer
-    {
-      "name" => "rank",
-      "type" => "INTEGER",
-      "description" => "An integer value from 1 to 100"
-    }
-  end
-
-  def field_float
-    {
-      "name" => "accuracy",
-      "type" => "FLOAT"
-    }
-  end
-
-  def field_boolean
-    {
-      "name" => "approved",
-      "type" => "BOOLEAN"
-    }
-  end
-
-  def field_timestamp
-    {
-      "name" => "start_date",
-      "type" => "TIMESTAMP"
-    }
-  end
-
-  def field_record_repeated
-    {
-      "name" => "cities_lived",
-      "type" => "RECORD",
-      "mode" => "REPEATED",
-      "fields" => [ field_integer, field_timestamp ]
-    }
   end
 end

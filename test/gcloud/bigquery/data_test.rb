@@ -19,17 +19,20 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
   let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
   let(:description) { "This is my table" }
-  let(:table_hash) { random_table_hash dataset_id, table_id, table_name, description }
-  let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash,
-                                                  bigquery.connection }
+  let(:table_gapi) { random_table_gapi dataset_id, table_id, table_name, description }
+  let(:table) { Gcloud::Bigquery::Table.from_gapi table_gapi,
+                                                  bigquery.service }
 
   it "returns data as a list of hashes" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = table.data
+    mock.verify
+
     data.class.must_equal Gcloud::Bigquery::Data
     data.count.must_equal 3
     data[0].must_be_kind_of Hash
@@ -50,12 +53,15 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
   end
 
   it "knows the data metadata" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = table.data
+    mock.verify
+
     data.class.must_equal Gcloud::Bigquery::Data
     data.kind.must_equal "bigquery#tableDataList"
     data.etag.must_equal "etag1234567890"
@@ -64,12 +70,15 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
   end
 
   it "knows the raw, unformatted data" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = table.data
+    mock.verify
+
     data.class.must_equal Gcloud::Bigquery::Data
 
     data.raw.wont_be :nil?
@@ -91,12 +100,15 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
   end
 
   it "knows the data metadata" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = table.data
+    mock.verify
+
     data.class.must_equal Gcloud::Bigquery::Data
     data.kind.must_equal "bigquery#tableDataList"
     data.etag.must_equal "etag1234567890"
@@ -105,51 +117,51 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
   end
 
   it "handles missing rows and fields" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       nil_table_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                nil_table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
 
     nil_data = table.data
+    mock.verify
+
     nil_data.class.must_equal Gcloud::Bigquery::Data
     nil_data.count.must_equal 0
   end
 
   it "paginates data" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "token1234567890"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil }]
 
     data1 = table.data
+
     data1.class.must_equal Gcloud::Bigquery::Data
     data1.token.wont_be :nil?
     data1.token.must_equal "token1234567890"
     data2 = table.data token: data1.token
     data2.class.must_equal Gcloud::Bigquery::Data
+    mock.verify
   end
 
   it "paginates data using next? and next" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "token1234567890"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json(token: nil)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+    mock.expect :list_table_data,
+                table_data_gapi(token: nil),
+                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil }]
 
     data1 = table.data
+
     data1.class.must_equal Gcloud::Bigquery::Data
     data1.token.wont_be :nil?
     data1.next?.must_equal true # can't use must_be :next?
@@ -157,127 +169,102 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
     data2.token.must_be :nil?
     data2.next?.must_equal false
     data2.class.must_equal Gcloud::Bigquery::Data
+    mock.verify
   end
 
   it "paginates data using all" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "token1234567890"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json(token: nil)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+    mock.expect :list_table_data,
+                table_data_gapi(token: nil),
+                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil }]
 
     data = table.data.all.to_a
+
     data.count.must_equal 6
     data.each { |d| d.class.must_equal Hash }
+    mock.verify
   end
 
   it "iterates data using all" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "token1234567890"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json(token: nil)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+    mock.expect :list_table_data,
+                table_data_gapi(token: nil),
+                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil }]
 
     data = table.data
+
     data.all { |d| d.class.must_equal Hash }
+    mock.verify
   end
 
   it "iterates data using all using Enumerator" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "token1234567890"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil }]
 
     data = table.data.all.take(5)
+
     data.count.must_equal 5
     data.each { |d| d.class.must_equal Hash }
+    mock.verify
   end
 
   it "iterates data using all with request_limit set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "token1234567890"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil }]
 
     data = table.data.all(request_limit: 1).to_a
+
     data.count.must_equal 6
     data.each { |d| d.class.must_equal Hash }
+    mock.verify
   end
 
   it "paginates data with max set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: 3, page_token: nil, start_index: nil }]
 
     data = table.data max: 3
     data.class.must_equal Gcloud::Bigquery::Data
   end
 
-  it "paginates data without max set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.wont_include "maxResults"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
-
-    data = table.data
-    data.class.must_equal Gcloud::Bigquery::Data
-  end
-
   it "paginates data with start set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.must_include "startIndex"
-      env.params["startIndex"].must_equal "25"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: 25 }]
 
     data = table.data start: 25
+    mock.verify
+
     data.class.must_equal Gcloud::Bigquery::Data
   end
 
-  it "paginates data without start set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}/data" do |env|
-      env.params.wont_include "startIndex"
-      [200, {"Content-Type"=>"application/json"},
-       table_data_json]
-    end
-
-    data = table.data
-    data.class.must_equal Gcloud::Bigquery::Data
-  end
-
-  def table_data_json token: "token1234567890"
-    table_data_hash(token: token).to_json
+  def table_data_gapi token: "token1234567890"
+    Google::Apis::BigqueryV2::TableDataList.from_json table_data_hash(token: token).to_json
   end
 
   def table_data_hash token: "token1234567890"
@@ -337,6 +324,10 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
       "pageToken" => token,
       "totalRows" => 3
     }
+  end
+
+  def nil_table_data_gapi
+    Google::Apis::BigqueryV2::TableDataList.from_json nil_table_data_json
   end
 
   def nil_table_data_json

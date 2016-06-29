@@ -15,30 +15,28 @@
 require "helper"
 
 describe Gcloud::Bigquery::Project, :query, :mock_bigquery do
-  let(:query) { "SELECT name, age, score, active FROM [some_project:some_dataset.users]" }
+  let(:query_request) {
+    qrg = query_request_gapi
+    qrg.default_dataset = nil
+    qrg
+  }
+  let(:query) { query_request.query }
   let(:dataset_id) { "my_dataset" }
-  let(:dataset_hash) { random_dataset_hash dataset_id }
-  let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_hash,
-                                                      bigquery.connection }
+  let(:dataset_gapi) { random_dataset_gapi dataset_id }
+  let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_gapi,
+                                                      bigquery.service }
   let(:table_id) { "my_table" }
-  let(:table_hash) { random_table_hash dataset_id, table_id }
-  let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash,
-                                                  bigquery.connection }
+  let(:table_gapi) { random_table_gapi dataset_id, table_id }
+  let(:table) { Gcloud::Bigquery::Table.from_gapi table_gapi,
+                                                  bigquery.service }
 
   it "queries the data" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      json = JSON.parse(env.body)
-      json["query"].must_equal query
-      json["maxResults"].must_be :nil?
-      json["defaultDataset"].must_be :nil?
-      json["timeoutMs"].must_equal 10000
-      json["dryRun"].must_be :nil?
-      json["useQueryCache"].must_equal true
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :query_job, query_data_gapi, [project, query_request]
 
     data = bigquery.query query
+    mock.verify
     # data.must_be_kind_of Gcloud::Bigquery::QueryData
     data.class.must_equal Gcloud::Bigquery::QueryData
     data.count.must_equal 3
@@ -60,18 +58,12 @@ describe Gcloud::Bigquery::Project, :query, :mock_bigquery do
   end
 
   it "paginates the data" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      json = JSON.parse(env.body)
-      json["query"].must_equal query
-      [200, {"Content-Type"=>"application/json"},
-      query_data_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/job9876543210" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "token1234567890"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :query_job, query_data_gapi, [project, query_request]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, "job9876543210", {max_results: nil, page_token: "token1234567890", start_index: nil, timeout_ms: nil}]
 
     data = bigquery.query query
     # data.must_be_kind_of Gcloud::Bigquery::QueryData
@@ -83,118 +75,82 @@ describe Gcloud::Bigquery::Project, :query, :mock_bigquery do
     data2 = data.next
     data2.class.must_equal Gcloud::Bigquery::QueryData
     data2.count.must_equal 3
+    mock.verify
   end
 
   it "queries the data with max option" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      json = JSON.parse(env.body)
-      json["query"].must_equal query
-      json["maxResults"].must_equal 42
-      json["defaultDataset"].must_be :nil?
-      json["timeoutMs"].must_equal 10000
-      json["dryRun"].must_be :nil?
-      json["useQueryCache"].must_equal true
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    query_request.max_results = 42
+    mock.expect :query_job, query_data_gapi, [project, query_request]
 
     data = bigquery.query query, max: 42
     data.class.must_equal Gcloud::Bigquery::QueryData
     data.count.must_equal 3
+    mock.verify
   end
 
   it "queries the data with dataset option" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      json = JSON.parse(env.body)
-      json["query"].must_equal query
-      json["maxResults"].must_be :nil?
-      json["defaultDataset"].wont_be :nil?
-      json["defaultDataset"]["datasetId"].must_equal "some_random_dataset"
-      json["defaultDataset"]["projectId"].must_equal project
-      json["timeoutMs"].must_equal 10000
-      json["dryRun"].must_be :nil?
-      json["useQueryCache"].must_equal true
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    query_request.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+      dataset_id: "some_random_dataset", project_id: project
+    )
+    mock.expect :query_job, query_data_gapi, [project, query_request]
 
     data = bigquery.query query, dataset: "some_random_dataset"
     data.class.must_equal Gcloud::Bigquery::QueryData
     data.count.must_equal 3
+    mock.verify
   end
 
   it "queries the data with dataset and project options" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      json = JSON.parse(env.body)
-      json["query"].must_equal query
-      json["maxResults"].must_be :nil?
-      json["defaultDataset"].wont_be :nil?
-      json["defaultDataset"]["datasetId"].must_equal "some_random_dataset"
-      json["defaultDataset"]["projectId"].must_equal "some_random_project"
-      json["timeoutMs"].must_equal 10000
-      json["dryRun"].must_be :nil?
-      json["useQueryCache"].must_equal true
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    query_request.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+      dataset_id: "some_random_dataset", project_id: "some_random_project"
+    )
+    mock.expect :query_job, query_data_gapi, [project, query_request]
 
     data = bigquery.query query, dataset: "some_random_dataset",
                                  project: "some_random_project"
     data.class.must_equal Gcloud::Bigquery::QueryData
     data.count.must_equal 3
+    mock.verify
   end
 
   it "queries the data with timeout option" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      json = JSON.parse(env.body)
-      json["query"].must_equal query
-      json["maxResults"].must_be :nil?
-      json["defaultDataset"].must_be :nil?
-      json["timeoutMs"].must_equal 15000
-      json["dryRun"].must_be :nil?
-      json["useQueryCache"].must_equal true
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    query_request.timeout_ms = 15000
+    mock.expect :query_job, query_data_gapi, [project, query_request]
 
     data = bigquery.query query, timeout: 15000
     data.class.must_equal Gcloud::Bigquery::QueryData
     data.count.must_equal 3
+    mock.verify
   end
 
   it "queries the data with dryrun option" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      json = JSON.parse(env.body)
-      json["query"].must_equal query
-      json["maxResults"].must_be :nil?
-      json["defaultDataset"].must_be :nil?
-      json["timeoutMs"].must_equal 10000
-      json["dryRun"].must_equal true
-      json["useQueryCache"].must_equal true
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    query_request.dry_run = true
+    mock.expect :query_job, query_data_gapi, [project, query_request]
 
     data = bigquery.query query, dryrun: true
     data.class.must_equal Gcloud::Bigquery::QueryData
     data.count.must_equal 3
+    mock.verify
   end
 
   it "queries the data with cache option" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/queries" do |env|
-      json = JSON.parse(env.body)
-      json["query"].must_equal query
-      json["maxResults"].must_be :nil?
-      json["defaultDataset"].must_be :nil?
-      json["timeoutMs"].must_equal 10000
-      json["dryRun"].must_be :nil?
-      json["useQueryCache"].must_equal true
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :query_job, query_data_gapi, [project, query_request]
 
     data = bigquery.query query, cache: true
     data.class.must_equal Gcloud::Bigquery::QueryData
     data.count.must_equal 3
+    mock.verify
   end
 end
