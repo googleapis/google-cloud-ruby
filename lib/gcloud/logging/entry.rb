@@ -97,62 +97,233 @@ module Gcloud
       attr_accessor :timestamp
 
       ##
-      # The severity level of the log entry. The default value is `DEFAULT`.
+      # The severity level of the log entry. The default value is `:DEFAULT`.
       # @return [Symbol]
       attr_accessor :severity
 
       ##
-      # Returns `true` if the severity level is `DEFAULT`.
+      # Returns `true` if the severity level is `:DEFAULT`.
       def default?
         severity == :DEFAULT
       end
 
       ##
-      # Returns `true` if the severity level is `DEBUG`.
+      # Sets the severity level to `:DEFAULT`.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   entry = logging.entry
+      #   entry.severity = :DEBUG
+      #   entry.default!
+      #   entry.default? #=> true
+      #   entry.severity #=> :DEFAULT
+      #
+      def default!
+        self.severity = :DEFAULT
+      end
+
+      ##
+      # Returns `true` if the severity level is `:DEBUG`.
       def debug?
         severity == :DEBUG
       end
 
       ##
-      # Returns `true` if the severity level is `INFO`.
+      # Sets the severity level to `:DEBUG`.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   entry = logging.entry
+      #   entry.severity #=> :DEFAULT
+      #   entry.debug!
+      #   entry.debug? #=> true
+      #   entry.severity #=> :DEBUG
+      #
+      def debug!
+        self.severity = :DEBUG
+      end
+
+      ##
+      # Returns `true` if the severity level is `:INFO`.
       def info?
         severity == :INFO
       end
 
       ##
-      # Returns `true` if the severity level is `NOTICE`.
+      # Sets the severity level to `:INFO`.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   entry = logging.entry
+      #   entry.severity #=> :DEFAULT
+      #   entry.info!
+      #   entry.info? #=> true
+      #   entry.severity #=> :INFO
+      #
+      def info!
+        self.severity = :INFO
+      end
+
+      ##
+      # Returns `true` if the severity level is `:NOTICE`.
       def notice?
         severity == :NOTICE
       end
 
       ##
-      # Returns `true` if the severity level is `WARNING`.
+      # Sets the severity level to `:NOTICE`.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   entry = logging.entry
+      #   entry.severity #=> :DEFAULT
+      #   entry.notice!
+      #   entry.notice? #=> true
+      #   entry.severity #=> :NOTICE
+      #
+      def notice!
+        self.severity = :NOTICE
+      end
+
+      ##
+      # Returns `true` if the severity level is `:WARNING`.
       def warning?
         severity == :WARNING
       end
 
       ##
-      # Returns `true` if the severity level is `ERROR`.
+      # Sets the severity level to `:WARNING`.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   entry = logging.entry
+      #   entry.severity #=> :DEFAULT
+      #   entry.warning!
+      #   entry.warning? #=> true
+      #   entry.severity #=> :WARNING
+      #
+      def warning!
+        self.severity = :WARNING
+      end
+
+      ##
+      # Returns `true` if the severity level is `:ERROR`.
       def error?
         severity == :ERROR
       end
 
       ##
-      # Returns `true` if the severity level is `CRITICAL`.
+      # Sets the severity level to `:ERROR`.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   entry = logging.entry
+      #   entry.severity #=> :DEFAULT
+      #   entry.error!
+      #   entry.error? #=> true
+      #   entry.severity #=> :ERROR
+      #
+      def error!
+        self.severity = :ERROR
+      end
+
+      ##
+      # Returns `true` if the severity level is `:CRITICAL`.
       def critical?
         severity == :CRITICAL
       end
 
       ##
-      # Returns `true` if the severity level is `ALERT`.
+      # Sets the severity level to `:CRITICAL`.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   entry = logging.entry
+      #   entry.severity #=> :DEFAULT
+      #   entry.critical!
+      #   entry.critical? #=> true
+      #   entry.severity #=> :CRITICAL
+      #
+      def critical!
+        self.severity = :CRITICAL
+      end
+
+      ##
+      # Returns `true` if the severity level is `:ALERT`.
       def alert?
         severity == :ALERT
       end
 
       ##
-      # Returns `true` if the severity level is `EMERGENCY`.
+      # Sets the severity level to `:ALERT`.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   entry = logging.entry
+      #   entry.severity #=> :DEFAULT
+      #   entry.alert!
+      #   entry.alert? #=> true
+      #   entry.severity #=> :ALERT
+      #
+      def alert!
+        self.severity = :ALERT
+      end
+
+      ##
+      # Returns `true` if the severity level is `:EMERGENCY`.
       def emergency?
         severity == :EMERGENCY
+      end
+
+      ##
+      # Sets the severity level to `:EMERGENCY`.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   logging = gcloud.logging
+      #
+      #   entry = logging.entry
+      #   entry.severity #=> :DEFAULT
+      #   entry.emergency!
+      #   entry.emergency? #=> true
+      #   entry.severity #=> :EMERGENCY
+      #
+      def emergency!
+        self.severity = :EMERGENCY
       end
 
       ##
