@@ -116,6 +116,8 @@ Logging API.</p>
               
                 <span class='object_link'><a href="#resource-instance_method" title="Gcloud::Logging::Entry#resource (method)">#resource</a></span>
               
+                <span class='object_link'><a href="#resource%3D-instance_method" title="Gcloud::Logging::Entry#resource= (method)">#resource=</a></span>
+              
                 <span class='object_link'><a href="#timestamp-instance_method" title="Gcloud::Logging::Entry#timestamp (method)">#timestamp</a></span>
               
                 <span class='object_link'><a href="#timestamp%3D-instance_method" title="Gcloud::Logging::Entry#timestamp= (method)">#timestamp=</a></span>
@@ -126,21 +128,39 @@ Logging API.</p>
               
                 <span class='object_link'><a href="#default%3F-instance_method" title="Gcloud::Logging::Entry#default? (method)">#default?</a></span>
               
+                <span class='object_link'><a href="#default%21-instance_method" title="Gcloud::Logging::Entry#default! (method)">#default!</a></span>
+              
                 <span class='object_link'><a href="#debug%3F-instance_method" title="Gcloud::Logging::Entry#debug? (method)">#debug?</a></span>
+              
+                <span class='object_link'><a href="#debug%21-instance_method" title="Gcloud::Logging::Entry#debug! (method)">#debug!</a></span>
               
                 <span class='object_link'><a href="#info%3F-instance_method" title="Gcloud::Logging::Entry#info? (method)">#info?</a></span>
               
+                <span class='object_link'><a href="#info%21-instance_method" title="Gcloud::Logging::Entry#info! (method)">#info!</a></span>
+              
                 <span class='object_link'><a href="#notice%3F-instance_method" title="Gcloud::Logging::Entry#notice? (method)">#notice?</a></span>
+              
+                <span class='object_link'><a href="#notice%21-instance_method" title="Gcloud::Logging::Entry#notice! (method)">#notice!</a></span>
               
                 <span class='object_link'><a href="#warning%3F-instance_method" title="Gcloud::Logging::Entry#warning? (method)">#warning?</a></span>
               
+                <span class='object_link'><a href="#warning%21-instance_method" title="Gcloud::Logging::Entry#warning! (method)">#warning!</a></span>
+              
                 <span class='object_link'><a href="#error%3F-instance_method" title="Gcloud::Logging::Entry#error? (method)">#error?</a></span>
+              
+                <span class='object_link'><a href="#error%21-instance_method" title="Gcloud::Logging::Entry#error! (method)">#error!</a></span>
               
                 <span class='object_link'><a href="#critical%3F-instance_method" title="Gcloud::Logging::Entry#critical? (method)">#critical?</a></span>
               
+                <span class='object_link'><a href="#critical%21-instance_method" title="Gcloud::Logging::Entry#critical! (method)">#critical!</a></span>
+              
                 <span class='object_link'><a href="#alert%3F-instance_method" title="Gcloud::Logging::Entry#alert? (method)">#alert?</a></span>
               
+                <span class='object_link'><a href="#alert%21-instance_method" title="Gcloud::Logging::Entry#alert! (method)">#alert!</a></span>
+              
                 <span class='object_link'><a href="#emergency%3F-instance_method" title="Gcloud::Logging::Entry#emergency? (method)">#emergency?</a></span>
+              
+                <span class='object_link'><a href="#emergency%21-instance_method" title="Gcloud::Logging::Entry#emergency! (method)">#emergency!</a></span>
               
                 <span class='object_link'><a href="#insert_id-instance_method" title="Gcloud::Logging::Entry#insert_id (method)">#insert_id</a></span>
               
@@ -331,6 +351,47 @@ error.</p>
             
               
                 <div class="method">
+                  <a name="resource=-instance_method"></a>
+                  <h4>
+                    <code>resource=(value)</code>
+                    <span>
+                      <a href="#resource=-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>The monitored resource associated with this log entry. Example: a log
+entry that reports a database error would be associated with the
+monitored resource designating the particular database that reported the
+error.</p>
+
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-resource=-label-Returns">
+                        Returns
+                        <span><a href="#method-i-resource=-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Resource.html" title="Gcloud::Logging::Resource (class)">Gcloud::Logging::Resource</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
                   <a name="timestamp-instance_method"></a>
                   <h4>
                     <code>timestamp</code>
@@ -350,6 +411,15 @@ Cloud Logging will use the time the log entry is written.</p>
 
                     
 
+                    
+                      <h3 id="method-i-timestamp-label-Returns">
+                        Returns
+                        <span><a href="#method-i-timestamp-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Time</tt>)
+                        
+                      </p>
                     
 
                     
@@ -381,6 +451,15 @@ Cloud Logging will use the time the log entry is written.</p>
                     
 
                     
+                      <h3 id="method-i-timestamp=-label-Returns">
+                        Returns
+                        <span><a href="#method-i-timestamp=-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Time</tt>)
+                        
+                      </p>
+                    
 
                     
 
@@ -402,13 +481,22 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>The severity level of the log entry. The default value is <code class="highlighter-rouge">DEFAULT</code>.</p>
+                    <p>The severity level of the log entry. The default value is <code class="highlighter-rouge">:DEFAULT</code>.</p>
 
 
                     
 
                     
 
+                    
+                      <h3 id="method-i-severity-label-Returns">
+                        Returns
+                        <span><a href="#method-i-severity-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Symbol</tt>)
+                        
+                      </p>
                     
 
                     
@@ -431,13 +519,22 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>The severity level of the log entry. The default value is <code class="highlighter-rouge">DEFAULT</code>.</p>
+                    <p>The severity level of the log entry. The default value is <code class="highlighter-rouge">:DEFAULT</code>.</p>
 
 
                     
 
                     
 
+                    
+                      <h3 id="method-i-severity=-label-Returns">
+                        Returns
+                        <span><a href="#method-i-severity=-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>Symbol</tt>)
+                        
+                      </p>
                     
 
                     
@@ -460,7 +557,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">DEFAULT</code>.</p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">:DEFAULT</code>.</p>
 
 
                     
@@ -487,6 +584,53 @@ Cloud Logging will use the time the log entry is written.</p>
             
               
                 <div class="method">
+                  <a name="default!-instance_method"></a>
+                  <h4>
+                    <code>default!</code>
+                    <span>
+                      <a href="#default!-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Sets the severity level to <code class="highlighter-rouge">:DEFAULT</code>.</p>
+
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-default!-label-Examples">
+                        Example
+                        <span><a href="#method-i-default!-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:DEBUG</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_default!'>default!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_default?'>default?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
                   <a name="debug?-instance_method"></a>
                   <h4>
                     <code>debug?</code>
@@ -498,7 +642,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">DEBUG</code>.</p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">:DEBUG</code>.</p>
 
 
                     
@@ -525,6 +669,53 @@ Cloud Logging will use the time the log entry is written.</p>
             
               
                 <div class="method">
+                  <a name="debug!-instance_method"></a>
+                  <h4>
+                    <code>debug!</code>
+                    <span>
+                      <a href="#debug!-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Sets the severity level to <code class="highlighter-rouge">:DEBUG</code>.</p>
+
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-debug!-label-Examples">
+                        Example
+                        <span><a href="#method-i-debug!-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_debug!'>debug!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_debug?'>debug?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEBUG</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
                   <a name="info?-instance_method"></a>
                   <h4>
                     <code>info?</code>
@@ -536,7 +727,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">INFO</code>.</p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">:INFO</code>.</p>
 
 
                     
@@ -563,6 +754,53 @@ Cloud Logging will use the time the log entry is written.</p>
             
               
                 <div class="method">
+                  <a name="info!-instance_method"></a>
+                  <h4>
+                    <code>info!</code>
+                    <span>
+                      <a href="#info!-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Sets the severity level to <code class="highlighter-rouge">:INFO</code>.</p>
+
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-info!-label-Examples">
+                        Example
+                        <span><a href="#method-i-info!-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_info!'>info!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_info?'>info?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :INFO</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
                   <a name="notice?-instance_method"></a>
                   <h4>
                     <code>notice?</code>
@@ -574,7 +812,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">NOTICE</code>.</p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">:NOTICE</code>.</p>
 
 
                     
@@ -601,6 +839,53 @@ Cloud Logging will use the time the log entry is written.</p>
             
               
                 <div class="method">
+                  <a name="notice!-instance_method"></a>
+                  <h4>
+                    <code>notice!</code>
+                    <span>
+                      <a href="#notice!-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Sets the severity level to <code class="highlighter-rouge">:NOTICE</code>.</p>
+
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-notice!-label-Examples">
+                        Example
+                        <span><a href="#method-i-notice!-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_notice!'>notice!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_notice?'>notice?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :NOTICE</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
                   <a name="warning?-instance_method"></a>
                   <h4>
                     <code>warning?</code>
@@ -612,7 +897,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">WARNING</code>.</p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">:WARNING</code>.</p>
 
 
                     
@@ -639,6 +924,53 @@ Cloud Logging will use the time the log entry is written.</p>
             
               
                 <div class="method">
+                  <a name="warning!-instance_method"></a>
+                  <h4>
+                    <code>warning!</code>
+                    <span>
+                      <a href="#warning!-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Sets the severity level to <code class="highlighter-rouge">:WARNING</code>.</p>
+
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-warning!-label-Examples">
+                        Example
+                        <span><a href="#method-i-warning!-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_warning!'>warning!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_warning?'>warning?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :WARNING</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
                   <a name="error?-instance_method"></a>
                   <h4>
                     <code>error?</code>
@@ -650,7 +982,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">ERROR</code>.</p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">:ERROR</code>.</p>
 
 
                     
@@ -677,6 +1009,53 @@ Cloud Logging will use the time the log entry is written.</p>
             
               
                 <div class="method">
+                  <a name="error!-instance_method"></a>
+                  <h4>
+                    <code>error!</code>
+                    <span>
+                      <a href="#error!-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Sets the severity level to <code class="highlighter-rouge">:ERROR</code>.</p>
+
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-error!-label-Examples">
+                        Example
+                        <span><a href="#method-i-error!-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_error!'>error!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :ERROR</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
                   <a name="critical?-instance_method"></a>
                   <h4>
                     <code>critical?</code>
@@ -688,7 +1067,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">CRITICAL</code>.</p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">:CRITICAL</code>.</p>
 
 
                     
@@ -715,6 +1094,53 @@ Cloud Logging will use the time the log entry is written.</p>
             
               
                 <div class="method">
+                  <a name="critical!-instance_method"></a>
+                  <h4>
+                    <code>critical!</code>
+                    <span>
+                      <a href="#critical!-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Sets the severity level to <code class="highlighter-rouge">:CRITICAL</code>.</p>
+
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-critical!-label-Examples">
+                        Example
+                        <span><a href="#method-i-critical!-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_critical!'>critical!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_critical?'>critical?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :CRITICAL</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
                   <a name="alert?-instance_method"></a>
                   <h4>
                     <code>alert?</code>
@@ -726,7 +1152,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">ALERT</code>.</p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">:ALERT</code>.</p>
 
 
                     
@@ -753,6 +1179,53 @@ Cloud Logging will use the time the log entry is written.</p>
             
               
                 <div class="method">
+                  <a name="alert!-instance_method"></a>
+                  <h4>
+                    <code>alert!</code>
+                    <span>
+                      <a href="#alert!-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Sets the severity level to <code class="highlighter-rouge">:ALERT</code>.</p>
+
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-alert!-label-Examples">
+                        Example
+                        <span><a href="#method-i-alert!-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_alert!'>alert!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_alert?'>alert?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :ALERT</span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
                   <a name="emergency?-instance_method"></a>
                   <h4>
                     <code>emergency?</code>
@@ -764,7 +1237,7 @@ Cloud Logging will use the time the log entry is written.</p>
 
                   <div class="method-description">
 
-                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">EMERGENCY</code>.</p>
+                    <p>Returns <code class="highlighter-rouge">true</code> if the severity level is <code class="highlighter-rouge">:EMERGENCY</code>.</p>
 
 
                     
@@ -782,6 +1255,53 @@ Cloud Logging will use the time the log entry is written.</p>
                       </p>
                     
 
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="emergency!-instance_method"></a>
+                  <h4>
+                    <code>emergency!</code>
+                    <span>
+                      <a href="#emergency!-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Sets the severity level to <code class="highlighter-rouge">:EMERGENCY</code>.</p>
+
+
+                    
+
+                    
+
+                    
+
+                    
+                      <h3 id="method-i-emergency!-label-Examples">
+                        Example
+                        <span><a href="#method-i-emergency!-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_emergency!'>emergency!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_emergency?'>emergency?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :EMERGENCY</span></code></pre>
+                      
                     
 
                   </div>
@@ -812,6 +1332,15 @@ a unique ID for this log entry.</p>
 
                     
 
+                    
+                      <h3 id="method-i-insert_id-label-Returns">
+                        Returns
+                        <span><a href="#method-i-insert_id-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>String</tt>)
+                        
+                      </p>
                     
 
                     
@@ -844,6 +1373,15 @@ a unique ID for this log entry.</p>
 
                     
 
+                    
+                      <h3 id="method-i-insert_id=-label-Returns">
+                        Returns
+                        <span><a href="#method-i-insert_id=-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt>String</tt>)
+                        
+                      </p>
                     
 
                     
@@ -1093,7 +1631,7 @@ applicable.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 28, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal current' href=''>Entry</a></li><li class='toc-l1'><a class='reference internal' href='Resource.html'>Resource</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 29, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal current' href=''>Entry</a></li><li class='toc-l1'><a class='reference internal' href='Resource.html'>Resource</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
