@@ -17,6 +17,7 @@ require "gcloud/errors"
 require "gcloud/pubsub/topic/batch"
 require "gcloud/pubsub/topic/list"
 require "gcloud/pubsub/subscription"
+require "gcloud/pubsub/policy"
 
 module Gcloud
   module Pubsub
@@ -301,85 +302,102 @@ module Gcloud
       end
 
       ##
-      # Gets the access control policy.
+      # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
+      # policy for this topic.
+      #
+      # @see https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#iampolicy
+      #   google.iam.v1.IAMPolicy
       #
       # @param [Boolean] force Force the latest policy to be retrieved from the
       #   Pub/Sub service when `true`. Otherwise the policy will be memoized to
       #   reduce the number of API calls made to the Pub/Sub service. The
       #   default is `false`.
       #
-      # @return [Hash] Returns a hash that conforms to the following structure:
+      # @yield [policy] A block for updating the policy. The latest policy will
+      #   be read from the Pub/Sub service and passed to the block. After the
+      #   block completes, the modified policy will be written to the service.
+      # @yieldparam [Policy] policy the current Cloud IAM Policy for this topic
       #
-      #   {
-      #     "etag"=>"CAE=",
-      #     "bindings" => [{
-      #       "role" => "roles/viewer",
-      #       "members" => ["serviceAccount:your-service-account"]
-      #     }]
-      #   }
+      # @return [Policy] the current Cloud IAM Policy for this topic
       #
       # @example Policy values are memoized to reduce the number of API calls:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
-      #
       #   topic = pubsub.topic "my-topic"
-      #   puts topic.policy["bindings"]
-      #   puts topic.policy["rules"]
+      #
+      #   policy = topic.policy # API call
+      #   policy_2 = topic.policy # No API call
       #
       # @example Use `force` to retrieve the latest policy from the service:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
-      #
       #   topic = pubsub.topic "my-topic"
-      #   policy = topic.policy force: true
+      #
+      #   policy = topic.policy force: true # API call
+      #   policy_2 = topic.policy force: true # API call
+      #
+      # @example Update the policy by passing a block:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #   topic = pubsub.topic "my-topic"
+      #
+      #   policy = topic.policy do |p|
+      #     p.add "roles/owner", "user:owner@example.com"
+      #   end # 2 API calls
       #
       def policy force: nil
-        @policy = nil if force
+        @policy = nil if force || block_given?
         @policy ||= begin
           ensure_service!
           grpc = service.get_topic_policy name
-          JSON.parse(Google::Iam::V1::Policy.encode_json(grpc))
+          Policy.from_grpc grpc
         rescue GRPC::BadStatus => e
           raise Error.from_error(e)
         end
+        return @policy unless block_given?
+        p = @policy.deep_dup
+        yield p
+        self.policy = p
       end
 
       ##
-      # Sets the access control policy.
+      # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
+      # policy for this topic. The policy should be read from {#policy}. See
+      # {Gcloud::Pubsub::Policy} for an explanation of the policy `etag`
+      # property and how to modify policies.
       #
-      # @param [String] new_policy A hash that conforms to the following
-      #   structure:
+      # You can also update the policy by passing a block to {#policy}, which
+      # will call this method internally after the block completes.
       #
-      #     {
-      #       "bindings" => [{
-      #         "role" => "roles/viewer",
-      #         "members" => ["serviceAccount:your-service-account"]
-      #       }]
-      #     }
+      # @see https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#iampolicy
+      #   google.iam.v1.IAMPolicy
+      #
+      # @param [Policy] new_policy a new or modified Cloud IAM Policy for this
+      #   topic
       #
       # @example
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
-      #
-      #   viewer_policy = {
-      #     "bindings" => [{
-      #       "role" => "roles/viewer",
-      #       "members" => ["serviceAccount:your-service-account"]
-      #     }]
-      #   }
       #   topic = pubsub.topic "my-topic"
-      #   topic.policy = viewer_policy
+      #
+      #   policy = topic.policy # API call
+      #
+      #   policy.add "roles/owner", "user:owner@example.com"
+      #
+      #   topic.policy = policy # API call
       #
       def policy= new_policy
         ensure_service!
-        grpc = service.set_topic_policy name, new_policy
-        @policy = JSON.parse(Google::Iam::V1::Policy.encode_json(grpc))
+        grpc = service.set_topic_policy name, new_policy.to_grpc
+        @policy = Policy.from_grpc grpc
       rescue GRPC::BadStatus => e
         raise Error.from_error(e)
       end

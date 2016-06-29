@@ -30,7 +30,7 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
         "members" => [
           "user:viewer@example.com",
           "serviceAccount:1234567890@developer.gserviceaccount.com"
-        ],
+        ]
       }]
     }.to_json
 
@@ -46,16 +46,17 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
 
     mock.verify
 
-    policy.must_be_kind_of Hash
-    policy["bindings"].count.must_equal 1
-    policy["bindings"].first["role"].must_equal "roles/viewer"
-    policy["bindings"].first["members"].count.must_equal 2
-    policy["bindings"].first["members"].first.must_equal "user:viewer@example.com"
-    policy["bindings"].first["members"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
+    policy.must_be_kind_of Gcloud::Pubsub::Policy
+    policy.roles.must_be_kind_of Hash
+    policy.roles.size.must_equal 1
+    policy.roles["roles/viewer"].must_be_kind_of Array
+    policy.roles["roles/viewer"].count.must_equal 2
+    policy.roles["roles/viewer"].first.must_equal "user:viewer@example.com"
+    policy.roles["roles/viewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
 
   it "memoizes policy" do
-    policy_hash = {
+    existing_policy_json = {
       "etag"=>"CAE=",
       "bindings" => [{
         "role" => "roles/viewer",
@@ -64,22 +65,24 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
           "serviceAccount:1234567890@developer.gserviceaccount.com"
         ],
       }]
-    }
+    }.to_json
 
-    subscription.instance_variable_set "@policy", policy_hash
+    existing_policy = Gcloud::Pubsub::Policy.from_grpc Google::Iam::V1::Policy.decode_json(existing_policy_json)
+    subscription.instance_variable_set "@policy", existing_policy
 
     # No mocks, no errors, no HTTP calls are made
     policy = subscription.policy
-    policy.must_be_kind_of Hash
-    policy["bindings"].count.must_equal 1
-    policy["bindings"].first["role"].must_equal "roles/viewer"
-    policy["bindings"].first["members"].count.must_equal 2
-    policy["bindings"].first["members"].first.must_equal "user:viewer@example.com"
-    policy["bindings"].first["members"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
+    policy.must_be_kind_of Gcloud::Pubsub::Policy
+    policy.roles.must_be_kind_of Hash
+    policy.roles.size.must_equal 1
+    policy.roles["roles/viewer"].must_be_kind_of Array
+    policy.roles["roles/viewer"].count.must_equal 2
+    policy.roles["roles/viewer"].first.must_equal "user:viewer@example.com"
+    policy.roles["roles/viewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
 
   it "makes API calls when forced, even if already memoized" do
-    policy_hash = {
+    existing_policy_json = {
       "etag"=>"CAE=",
       "bindings" => [{
         "role" => "roles/viewer",
@@ -88,7 +91,7 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
           "serviceAccount:1234567890@developer.gserviceaccount.com"
         ],
       }]
-    }
+    }.to_json
 
     policy_json = {
       "etag"=>"CAE=",
@@ -97,7 +100,7 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
         "members" => [
           "user:owner@example.com",
           "serviceAccount:0987654321@developer.gserviceaccount.com"
-        ],
+         ]
       }]
     }.to_json
 
@@ -109,36 +112,59 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
     mock.expect :get_iam_policy, get_res, [get_req]
     subscription.service.mocked_iam = mock
 
-    subscription.instance_variable_set "@policy", policy_hash
+    existing_policy = Gcloud::Pubsub::Policy.from_grpc Google::Iam::V1::Policy.decode_json(existing_policy_json)
+    subscription.instance_variable_set "@policy", existing_policy
     returned_policy = subscription.policy
-    returned_policy.must_be_kind_of Hash
-    returned_policy["bindings"].count.must_equal 1
-    returned_policy["bindings"].first["role"].must_equal "roles/viewer"
-    returned_policy["bindings"].first["members"].count.must_equal 2
-    returned_policy["bindings"].first["members"].first.must_equal "user:viewer@example.com"
-    returned_policy["bindings"].first["members"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
+    returned_policy.must_be_kind_of Gcloud::Pubsub::Policy
+    returned_policy.roles.must_be_kind_of Hash
+    returned_policy.roles.size.must_equal 1
+    returned_policy.roles["roles/viewer"].must_be_kind_of Array
+    returned_policy.roles["roles/viewer"].count.must_equal 2
+    returned_policy.roles["roles/viewer"].first.must_equal "user:viewer@example.com"
+    returned_policy.roles["roles/viewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
 
     policy = subscription.policy force: true
 
     mock.verify
 
-    policy.must_be_kind_of Hash
-    policy["bindings"].count.must_equal 1
-    policy["bindings"].first["role"].must_equal "roles/owner"
-    policy["bindings"].first["members"].count.must_equal 2
-    policy["bindings"].first["members"].first.must_equal "user:owner@example.com"
-    policy["bindings"].first["members"].last.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
+    policy.must_be_kind_of Gcloud::Pubsub::Policy
+    policy.roles.must_be_kind_of Hash
+    policy.roles.size.must_equal 1
+    policy.roles["roles/viewer"].must_be :nil?
+    policy.roles["roles/owner"].must_be_kind_of Array
+    policy.roles["roles/owner"].count.must_equal 2
+    policy.roles["roles/owner"].first.must_equal "user:owner@example.com"
+    policy.roles["roles/owner"].last.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
   end
 
   it "sets the IAM Policy" do
-    new_policy = {
+    policy_json = {
+      "etag"=>"CAE=",
       "bindings" => [{
         "role" => "roles/owner",
         "members" => [
           "user:owner@example.com",
           "serviceAccount:0987654321@developer.gserviceaccount.com"
-        ],
-      }],
+        ]
+      }]
+    }.to_json
+
+    get_req = Google::Iam::V1::GetIamPolicyRequest.new(
+      resource: "projects/#{project}/subscriptions/#{sub_name}"
+    )
+    get_res = Google::Iam::V1::Policy.decode_json policy_json
+    mock = Minitest::Mock.new
+    mock.expect :get_iam_policy, get_res, [get_req]
+
+    new_policy = {
+      "etag"=>"CAE=",
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => [
+          "serviceAccount:0987654321@developer.gserviceaccount.com",
+          "user:newowner@example.com"
+        ]
+      }]
     }
 
     set_req = Google::Iam::V1::SetIamPolicyRequest.new(
@@ -146,20 +172,83 @@ describe Gcloud::Pubsub::Subscription, :policy, :mock_pubsub do
       policy: Google::Iam::V1::Policy.decode_json(JSON.dump(new_policy))
     )
     set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
-    mock = Minitest::Mock.new
     mock.expect :set_iam_policy, set_res, [set_req]
     subscription.service.mocked_iam = mock
 
-    subscription.policy = new_policy
+    policy = subscription.policy
+
+    policy.add "roles/owner", "user:newowner@example.com"
+    policy.remove "roles/owner", "user:owner@example.com"
+
+    subscription.policy = policy
 
     mock.verify
 
     # Setting the policy also memoizes the policy
-    subscription.policy["bindings"].count.must_equal 1
-    subscription.policy["bindings"].first["role"].must_equal "roles/owner"
-    subscription.policy["bindings"].first["members"].count.must_equal 2
-    subscription.policy["bindings"].first["members"].first.must_equal "user:owner@example.com"
-    subscription.policy["bindings"].first["members"].last.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
+    policy = subscription.policy
+    policy.must_be_kind_of Gcloud::Pubsub::Policy
+    policy.roles.must_be_kind_of Hash
+    policy.roles.size.must_equal 1
+    policy.roles["roles/viewer"].must_be :nil?
+    policy.roles["roles/owner"].must_be_kind_of Array
+    policy.roles["roles/owner"].count.must_equal 2
+    policy.roles["roles/owner"].first.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
+    policy.roles["roles/owner"].last.must_equal "user:newowner@example.com"
+  end
+
+  it "sets the IAM Policy in a block" do
+    policy_json = {
+      "etag"=>"CAE=",
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => [
+          "user:owner@example.com",
+          "serviceAccount:0987654321@developer.gserviceaccount.com"
+        ]
+      }]
+    }.to_json
+
+    get_req = Google::Iam::V1::GetIamPolicyRequest.new(
+      resource: "projects/#{project}/subscriptions/#{sub_name}"
+    )
+    get_res = Google::Iam::V1::Policy.decode_json policy_json
+    mock = Minitest::Mock.new
+    mock.expect :get_iam_policy, get_res, [get_req]
+
+    new_policy = {
+      "etag"=>"CAE=",
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => [
+          "serviceAccount:0987654321@developer.gserviceaccount.com",
+          "user:newowner@example.com"
+        ]
+      }]
+    }
+
+    set_req = Google::Iam::V1::SetIamPolicyRequest.new(
+      resource: "projects/#{project}/subscriptions/#{sub_name}",
+      policy: Google::Iam::V1::Policy.decode_json(JSON.dump(new_policy))
+    )
+    set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
+    mock.expect :set_iam_policy, set_res, [set_req]
+    subscription.service.mocked_iam = mock
+
+    policy = subscription.policy do |p|
+      p.add "roles/owner", "user:newowner@example.com"
+      p.remove "roles/owner", "user:owner@example.com"
+    end
+
+    mock.verify
+
+    policy.must_be_kind_of Gcloud::Pubsub::Policy
+    policy.roles.must_be_kind_of Hash
+    policy.roles.size.must_equal 1
+    policy.roles["roles/viewer"].must_be :nil?
+    policy.roles["roles/owner"].must_be_kind_of Array
+    policy.roles["roles/owner"].count.must_equal 2
+    policy.roles["roles/owner"].first.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
+    policy.roles["roles/owner"].last.must_equal "user:newowner@example.com"
   end
 
   it "tests the available permissions" do
