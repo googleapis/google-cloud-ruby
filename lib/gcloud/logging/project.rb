@@ -160,6 +160,27 @@ module Gcloud
       # with a new {Gcloud::Logging::Resource} instance. Equivalent to calling
       # `Gcloud::Logging::Entry.new`.
       #
+      # @param [String] log_name The resource name of the log to which this log
+      #   entry belongs. See also {Entry#log_name=}.
+      # @param [Resource] resource The monitored resource associated with this
+      #   log entry. See also {Entry#resource}.
+      # @param [Time] timestamp The time the event described by the log entry
+      #   occurred. If omitted, Cloud Logging will use the time the log entry is
+      #   written. See also {Entry#timestamp}.
+      # @param [Symbol] severity The severity level of the log entry. The
+      #   default value is `DEFAULT`. See also {Entry#severity}.
+      # @param [String] insert_id A unique ID for the log entry. If you provide
+      #   this field, the logging service considers other log entries in the
+      #   same log with the same ID as duplicates which can be removed. If
+      #   omitted, Cloud Logging will generate a unique ID for this log entry.
+      #   See also {Entry#insert_id}.
+      # @param [Hash{Symbol,String => String}] labels A hash of user-defined
+      #   `key:value` pairs that provide additional information about the log
+      #   entry. See also {Entry#labels=}.
+      # @param [String, Hash] payload The log entry payload, represented as
+      #   either a string, a hash (JSON), or a hash (protocol buffer). See also
+      #   {Entry#payload}.
+      #
       # @return [Gcloud::Logging::Entry] a new Entry instance
       #
       # @example
@@ -168,14 +189,21 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #
-      #   entry = logging.entry
-      #   entry.severity = :INFO
-      #   entry.payload = "Job started."
+      #   entry = logging.entry severity: :INFO, payload: "Job started."
       #
       #   logging.write_entries entry
       #
-      def entry
-        Entry.new
+      def entry log_name: nil, resource: nil, timestamp: nil, severity: nil,
+                insert_id: nil, labels: nil, payload: nil
+        e = Entry.new
+        e.log_name = log_name if log_name
+        e.resource = resource if resource
+        e.timestamp = timestamp if timestamp
+        e.severity = severity if severity
+        e.insert_id = insert_id if insert_id
+        e.labels = labels if labels
+        e.payload = payload if payload
+        e
       end
       alias_method :new_entry, :entry
 
@@ -208,9 +236,7 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #
-      #   entry = logging.entry
-      #   entry.payload = "Job started."
-      #   entry.log_name = "my_app_log"
+      #   entry = logging.entry payload: "Job started.", log_name: "my_app_log"
       #   entry.resource.type = "gae_app"
       #   entry.resource.labels[:module_id] = "1"
       #   entry.resource.labels[:version_id] = "20150925t173233"
@@ -223,12 +249,10 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   logging = gcloud.logging
       #
-      #   entry1 = logging.entry
-      #   entry1.payload = "Job started."
-      #   entry2 = logging.entry
-      #   entry2.payload = "Job completed."
-      #   labels = { job_size: "large", job_code: "red" }
+      #   entry1 = logging.entry payload: "Job started."
+      #   entry2 = logging.entry payload: "Job completed."
       #
+      #   labels = { job_size: "large", job_code: "red" }
       #   resource = logging.resource "gae_app",
       #                               "module_id" => "1",
       #                               "version_id" => "20150925t173233"
