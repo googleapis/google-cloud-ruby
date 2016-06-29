@@ -17,6 +17,7 @@ require "time"
 require "gcloud/resource_manager/errors"
 require "gcloud/resource_manager/project/list"
 require "gcloud/resource_manager/project/updater"
+require "gcloud/resource_manager/policy"
 
 module Gcloud
   module ResourceManager
@@ -330,74 +331,86 @@ module Gcloud
       end
 
       ##
-      # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
-      # policy. Returns a hash that conforms to the following structure:
-      #
-      #   {
-      #     "bindings" => [{
-      #       "role" => "roles/viewer",
-      #       "members" => ["serviceAccount:your-service-account"]
-      #     }],
-      #     "version" => 0,
-      #     "etag" => "CAE="
-      #   }
+      # Gets and updates the [Cloud IAM](https://cloud.google.com/iam/) access
+      # control policy for this project.
       #
       # @see https://cloud.google.com/iam/docs/managing-policies Managing
       #   Policies
+      # @see https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/setIamPolicy
+      #   projects.setIamPolicy
       #
       # @param [Boolean] force Force load the latest policy when `true`.
       #   Otherwise the policy will be memoized to reduce the number of API
       #   calls made. The default is `false`.
       #
-      # @return [Hash] See description
+      # @yield [policy] A block for updating the policy. The latest policy will
+      #   be read from the service and passed to the block. After the block
+      #   completes, the modified policy will be written to the service.
+      # @yieldparam [Policy] policy the current Cloud IAM Policy for this
+      #   project
       #
-      # @example Policy values are memoized by default:
+      # @return [Policy] the current Cloud IAM Policy for this project
+      #
+      # @example Policy values are memoized to reduce the number of API calls:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
       #   project = resource_manager.project "tokyo-rain-123"
-      #   policy = project.policy
       #
-      #   puts policy["bindings"]
-      #   puts policy["version"]
-      #   puts policy["etag"]
+      #   policy = project.policy # API call
+      #   policy_2 = project.policy # No API call
       #
-      # @example Use the `force` option to retrieve the latest policy:
+      # @example Use `force` to retrieve the latest policy from the service:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
       #   project = resource_manager.project "tokyo-rain-123"
-      #   policy = project.policy force: true
+      #
+      #   policy = project.policy force: true # API call
+      #   policy_2 = project.policy force: true # API call
+      #
+      # @example Update the policy by passing a block:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   project = resource_manager.project "tokyo-rain-123"
+      #
+      #   policy = project.policy do |p|
+      #     p.add "roles/owner", "user:owner@example.com"
+      #   end # 2 API calls
       #
       def policy force: false
-        @policy = nil if force
+        @policy = nil if force || block_given?
         @policy ||= begin
           ensure_service!
           gapi = service.get_policy project_id
-          # Convert symbols to strings for backwards compatibility.
-          # This will go away when we add a ResourceManager::Policy class.
-          JSON.parse(gapi.to_json)
+          Policy.from_gapi gapi
         end
+        return @policy unless block_given?
+        p = @policy.deep_dup
+        yield p
+        self.policy = p
       end
 
       ##
-      # Sets the [Cloud IAM](https://cloud.google.com/iam/) access control
-      # policy.
+      # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
+      # policy for this project. The policy should be read from {#policy}.
+      # See {Gcloud::ResourceManager::Policy} for an explanation of the policy
+      # `etag` property and how to modify policies.
+      #
+      # You can also update the policy by passing a block to {#policy}, which
+      # will call this method internally after the block completes.
       #
       # @see https://cloud.google.com/iam/docs/managing-policies Managing
       #   Policies
+      # @see https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/setIamPolicy
+      #   projects.setIamPolicy
       #
-      # @param [String] new_policy A hash that conforms to the following
-      #   structure:
-      #
-      #     {
-      #       "bindings" => [{
-      #         "role" => "roles/viewer",
-      #         "members" => ["serviceAccount:your-service-account"]
-      #       }]
-      #     }
+      # @param [Policy] new_policy a new or modified Cloud IAM Policy for this
+      #   project
       #
       # @example
       #   require "gcloud"
@@ -406,20 +419,18 @@ module Gcloud
       #   resource_manager = gcloud.resource_manager
       #   project = resource_manager.project "tokyo-rain-123"
       #
-      #   viewer_policy = {
-      #     "bindings" => [{
-      #       "role" => "roles/viewer",
-      #       "members" => ["serviceAccount:your-service-account"]
-      #     }]
-      #   }
-      #   project.policy = viewer_policy
+      #   policy = project.policy # API call
+      #
+      #   policy.add "roles/owner", "user:owner@example.com"
+      #
+      #   project.policy = policy # API call
       #
       def policy= new_policy
         ensure_service!
-        gapi = service.set_policy project_id, new_policy
+        gapi = service.set_policy project_id, new_policy.to_gapi
         # Convert symbols to strings for backwards compatibility.
         # This will go away when we add a ResourceManager::Policy class.
-        @policy = JSON.parse(gapi.to_json)
+        @policy = Policy.from_gapi gapi
       end
 
       ##

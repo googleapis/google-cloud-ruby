@@ -234,7 +234,8 @@ module Gcloud
   # Overview](https://cloud.google.com/iam/docs/overview) for more information.
   #
   # A project's access control policy can be retrieved. (See
-  # {Gcloud::ResourceManager::Project#policy})
+  # {Gcloud::ResourceManager::Project#policy} and
+  # {Gcloud::ResourceManager::Policy}.)
   #
   # ```ruby
   # require "gcloud"
@@ -245,8 +246,7 @@ module Gcloud
   # policy = project.policy
   # ```
   #
-  # A project's access control policy can also be set. (See
-  # {Gcloud::ResourceManager::Project#policy=})
+  # A project's access control policy can also be updated:
   #
   # ```ruby
   # require "gcloud"
@@ -255,13 +255,9 @@ module Gcloud
   # resource_manager = gcloud.resource_manager
   # project = resource_manager.project "tokyo-rain-123"
   #
-  # viewer_policy = {
-  #   "bindings" => [{
-  #     "role" => "roles/viewer",
-  #     "members" => ["serviceAccount:your-service-account"]
-  #   }]
-  # }
-  # project.policy = viewer_policy
+  # policy = project.policy do |p|
+  #   p.add "roles/viewer", "serviceAccount:your-service-account"
+  # end
   # ```
   #
   # And permissions can be tested on a project. (See
