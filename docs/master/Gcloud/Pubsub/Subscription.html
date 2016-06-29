@@ -972,12 +972,17 @@ objects or ack_id values.</p>
 
                   <div class="method-description">
 
-                    <p>Gets the access control policy.</p>
-
-<p>By default, the policy values are memoized to reduce the number of API
-calls to the Pub/Sub service.</p>
+                    <p>Gets the <a href="https://cloud.google.com/iam/">Cloud IAM</a> access control
+policy for this subscription.</p>
 
 
+                    
+                      <p class="tag_title">See Also:</p>
+                      <ul class="see">
+                        
+                          <li><a href="https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#iampolicy" target="_parent" title="google.iam.v1.IAMPolicy">google.iam.v1.IAMPolicy</a></li>
+                        
+                      </ul>
                     
 
                     
@@ -1012,17 +1017,9 @@ default is <code class="highlighter-rouge">false</code>.</p>
                         <span><a href="#method-i-policy-label-Returns">¶</a> <a href="#top">↑</a></span>
                       </h3>
                       <p>
-                        (<tt>Hash</tt>)
+                        (<tt><span class='object_link'><a href="Policy.html" title="Gcloud::Pubsub::Policy (class)">Policy</a></span></tt>)
                         
-                          <div class='inline'><p>Returns a hash that conforms to the following structure:</p>
-
-<p>{
-  “etag”=&gt;”CAE=”,
-  “bindings” =&gt; [{
-    “role” =&gt; “roles/viewer”,
-    “members” =&gt; [“serviceAccount:your-service-account”]
-  }]
-}</p>
+                          <div class='inline'><p>the current Cloud IAM Policy for this subscription</p>
 </div>
                         
                       </p>
@@ -1042,10 +1039,10 @@ default is <code class="highlighter-rouge">false</code>.</p>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-subscription</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_subscription'>subscription</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-subscription</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_subscription'>subscription</span><span class='period'>.</span><span class='id identifier rubyid_policy'>policy</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bindings</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
-<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_subscription'>subscription</span><span class='period'>.</span><span class='id identifier rubyid_policy'>policy</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rules</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span></code></pre>
+<span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_policy'>policy</span> <span class='comment'># API call
+</span><span class='id identifier rubyid_policy_2'>policy_2</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_policy'>policy</span> <span class='comment'># No API call</span></code></pre>
                       
                         
                           <p class="example_title"><div class='inline'><p>Use <code class="highlighter-rouge">force</code> to retrieve the latest policy from the service:</p>
@@ -1055,9 +1052,24 @@ default is <code class="highlighter-rouge">false</code>.</p>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-subscription</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_subscription'>subscription</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-subscription</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='id identifier rubyid_subscription'>subscription</span><span class='period'>.</span><span class='id identifier rubyid_policy'>policy</span> <span class='label'>force:</span> <span class='kw'>true</span></code></pre>
+<span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_policy'>policy</span> <span class='label'>force:</span> <span class='kw'>true</span> <span class='comment'># API call
+</span><span class='id identifier rubyid_policy_2'>policy_2</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_policy'>policy</span> <span class='label'>force:</span> <span class='kw'>true</span> <span class='comment'># API call</span></code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Update the policy by passing a block:</p>
+</div></p>
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-subscription</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_policy'>policy</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_p'>p</span><span class='op'>|</span>
+  <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>roles/owner</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user:owner@example.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span> <span class='comment'># 2 API calls</span></code></pre>
                       
                     
 
@@ -1079,9 +1091,22 @@ default is <code class="highlighter-rouge">false</code>.</p>
 
                   <div class="method-description">
 
-                    <p>Sets the access control policy.</p>
+                    <p>Updates the <a href="https://cloud.google.com/iam/">Cloud IAM</a> access control
+policy for this subscription. The policy should be read from <span class='object_link'><a href="#policy-instance_method" title="Gcloud::Pubsub::Subscription#policy (method)">#policy</a></span>.
+See <span class='object_link'><a href="Policy.html" title="Gcloud::Pubsub::Policy (class)">Policy</a></span> for an explanation of the policy <code class="highlighter-rouge">etag</code>
+property and how to modify policies.</p>
+
+<p>You can also update the policy by passing a block to <span class='object_link'><a href="#policy-instance_method" title="Gcloud::Pubsub::Subscription#policy (method)">#policy</a></span>, which
+will call this method internally after the block completes.</p>
 
 
+                    
+                      <p class="tag_title">See Also:</p>
+                      <ul class="see">
+                        
+                          <li><a href="https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#iampolicy" target="_parent" title="google.iam.v1.IAMPolicy">google.iam.v1.IAMPolicy</a></li>
+                        
+                      </ul>
                     
 
                     
@@ -1097,18 +1122,11 @@ default is <code class="highlighter-rouge">false</code>.</p>
                           <dd>
                             <p>
                               
-                                <div class='inline'><p>A hash that conforms to the following
-structure:</p>
-
-<p>{
-    “bindings” =&gt; [{
-      “role” =&gt; “roles/viewer”,
-      “members” =&gt; [“serviceAccount:your-service-account”]
-    }]
-  }</p>
+                                <div class='inline'><p>a new or modified Cloud IAM Policy for this
+subscription</p>
 </div>
                               
-                              (<tt>String</tt>)
+                              (<tt><span class='object_link'><a href="Policy.html" title="Gcloud::Pubsub::Policy (class)">Policy</a></span></tt>)
                             </p>
                           </dd>
                         
@@ -1128,15 +1146,13 @@ structure:</p>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span>
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-subscription</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_viewer_policy'>viewer_policy</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bindings</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='lbrace'>{</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>role</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>roles/viewer</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>members</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>serviceAccount:your-service-account</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
-  <span class='rbrace'>}</span><span class='rbracket'>]</span>
-<span class='rbrace'>}</span>
-<span class='id identifier rubyid_subscription'>subscription</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-subscription</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_subscription'>subscription</span><span class='period'>.</span><span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='id identifier rubyid_viewer_policy'>viewer_policy</span></code></pre>
+<span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_policy'>policy</span> <span class='comment'># API call
+</span>
+<span class='id identifier rubyid_policy'>policy</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>roles/owner</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user:owner@example.com</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='id identifier rubyid_policy'>policy</span> <span class='comment'># API call</span></code></pre>
                       
                     
 
