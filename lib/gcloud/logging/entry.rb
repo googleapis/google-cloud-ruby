@@ -49,9 +49,7 @@ module Gcloud
     #   gcloud = Gcloud.new
     #   logging = gcloud.logging
     #
-    #   entry = logging.entry
-    #   entry.payload = "Job started."
-    #   entry.log_name = "my_app_log"
+    #   entry = logging.entry payload: "Job started.", log_name: "my_app_log"
     #   entry.resource.type = "gae_app"
     #   entry.resource.labels[:module_id] = "1"
     #   entry.resource.labels[:version_id] = "20150925t173233"
@@ -90,15 +88,17 @@ module Gcloud
       # monitored resource designating the particular database that reported the
       # error.
       # @return [Gcloud::Logging::Resource]
-      attr_reader :resource
+      attr_accessor :resource
 
       ##
       # The time the event described by the log entry occurred. If omitted,
       # Cloud Logging will use the time the log entry is written.
+      # @return [Time]
       attr_accessor :timestamp
 
       ##
       # The severity level of the log entry. The default value is `DEFAULT`.
+      # @return [Symbol]
       attr_accessor :severity
 
       ##
@@ -160,6 +160,7 @@ module Gcloud
       # service considers other log entries in the same log with the same ID as
       # duplicates which can be removed. If omitted, Cloud Logging will generate
       # a unique ID for this log entry.
+      # @return [String]
       attr_accessor :insert_id
 
       ##

@@ -21,7 +21,38 @@ describe Gcloud::Logging::Project, :mock_logging do
   end
 
   it "creates an empty entry" do
-    logging.entry.must_be_kind_of Gcloud::Logging::Entry
+    entry = logging.entry
+    entry.must_be_kind_of Gcloud::Logging::Entry
+    entry.resource.must_be_kind_of Gcloud::Logging::Resource
+  end
+
+  it "creates an entry with all attributes" do
+    log_name = "log_name"
+    resource = logging.resource "gae_app",
+                                "module_id" => "1",
+                                "version_id" => "20150925t173233"
+    timestamp = Time.now
+    severity = "DEBUG"
+    insert_id = "123456"
+    labels = { "env" => "production" }
+    payload = { "pay" => "load" }
+
+    entry = logging.entry log_name: log_name,
+                          resource: resource,
+                          timestamp: timestamp,
+                          severity: severity,
+                          insert_id: insert_id,
+                          labels: labels,
+                          payload: payload
+
+    entry.must_be_kind_of Gcloud::Logging::Entry
+    entry.log_name.must_equal log_name
+    entry.resource.must_equal resource
+    entry.timestamp.must_equal timestamp
+    entry.severity.must_equal severity
+    entry.insert_id.must_equal insert_id
+    entry.labels.must_equal labels
+    entry.payload.must_equal payload
   end
 
   it "creates a resource instance" do
