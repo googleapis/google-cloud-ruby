@@ -147,6 +147,33 @@ describe Gcloud::Bigquery::Table, :load, :local, :mock_bigquery do
     job.must_be_kind_of Gcloud::Bigquery::LoadJob
   end
 
+  it "can upload a json file with the correct chunk_size" do
+    valid_chunk_size = 256 * 1024 # 256KB
+    invalid_chunk_size = valid_chunk_size + 1
+    upload_request = false
+
+    mock_connection.post "/upload/bigquery/v2/projects/#{project}/jobs" do |env|
+      if upload_request
+        env.request_headers["Content-length"].to_i.must_equal valid_chunk_size
+      end
+      upload_request = true
+      [200, {"Content-Type"=>"application/json", Location: "/resumable/upload/bigquery/v2/projects/#{project}/jobs"},
+       load_job_json(table, "some/file/path.csv")]
+    end
+
+    Tempfile.open "gcloud-ruby" do |tmpfile|
+      200000.times do # write enough to be larger than the chunk_size
+        tmpfile.write "The quick brown fox jumps over the lazy dog."
+      end
+      assert ::File.size(tmpfile).to_i > Gcloud::Upload.resumable_threshold, "file is not resumable"
+      job = table.load tmpfile, format: :csv, chunk_size: invalid_chunk_size
+      job.must_be_kind_of Gcloud::Bigquery::LoadJob
+    end
+
+
+  end
+
+
   def load_job_json table, load_url
     hash = random_job_hash
     hash["configuration"]["load"] = {

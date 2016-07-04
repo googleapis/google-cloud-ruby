@@ -748,7 +748,8 @@ module Gcloud
       def load file, format: nil, create: nil, write: nil,
                projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                encoding: nil, delimiter: nil, ignore_unknown: nil,
-               max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil
+               max_bad_records: nil, quote: nil, skip_leading: nil,
+               dryrun: nil, chunk_size: nil
         ensure_connection!
         options = { format: format, create: create, write: write,
                     projection_fields: projection_fields,
@@ -756,7 +757,8 @@ module Gcloud
                     encoding: encoding, delimiter: delimiter,
                     ignore_unknown: ignore_unknown,
                     max_bad_records: max_bad_records, quote: quote,
-                    skip_leading: skip_leading, dryrun: dryrun }
+                    skip_leading: skip_leading, dryrun: dryrun,
+                    chunk_size: chunk_size }
         return load_storage(file, options) if storage_url? file
         return load_local(file, options) if local_file? file
         fail Gcloud::Bigquery::Error, "Don't know how to load #{file}"
